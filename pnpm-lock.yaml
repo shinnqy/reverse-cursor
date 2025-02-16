@@ -1,0 +1,41 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      jsnice:
+        specifier: ^0.2.0
+        version: 0.2.0
+      prettier:
+        specifier: ^3.5.1
+        version: 3.5.1
+
+packages:
+
+  docopt@0.4.1:
+    resolution: {integrity: sha512-0N9gEXD/Q/YhEQoCxks478dhz5dchVozPC7qr9vIvzZP0aF/08msLLKm/ufQEmPrrlNaHAZF+konw6wS2UNUlg==}
+    engines: {node: '>=0.8.0'}
+
+  jsnice@0.2.0:
+    resolution: {integrity: sha512-oLZUuRrnapKC1I3yxwpYxid87LPcA6tViuAHJD5CtUwU/1Y9QZIhRNYcsT082FvtwUS+730h9x2QHVr5aPuApw==}
+    hasBin: true
+
+  prettier@3.5.1:
+    resolution: {integrity: sha512-hPpFQvHwL3Qv5AdRvBFMhnKo4tYxp0ReXiPn2bxkiohEX6mBeBwEpBSQTkD458RaaDKQMYSp4hX4UtfUTA5wDw==}
+    engines: {node: '>=14'}
+    hasBin: true
+
+snapshots:
+
+  docopt@0.4.1: {}
+
+  jsnice@0.2.0:
+    dependencies:
+      docopt: 0.4.1
+
+  prettier@3.5.1: {}
