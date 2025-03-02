@@ -169,7 +169,15 @@ export function createFDIClass(params) {
                 }
               }
               if (!this.shouldTabInsteadOfAccepting()) {
-                const he = this.Pb().cppState?.suggestion
+                const he = this.Pb().cppState?.suggestion;
+                fetch('http://localhost:3000', {
+                  method: 'POST',
+                  body: JSON.stringify({
+                    action: 'press Tab to accept suggestion',
+                    suggestion: he,
+                    generationUUID: he.requestId,
+                  }),
+                });
                 if (
                   he !== void 0 &&
                   !this.Bb.tabToLineBeforeAcceptingCpp(he.source)
@@ -181,6 +189,15 @@ export function createFDIClass(params) {
                     this.acceptFullSuggestion(
                       this.holdDownAbortController,
                     ).then(() => {
+                      fetch('http://localhost:3000', {
+                        method: 'POST',
+                        body: JSON.stringify({
+                          action: 'press Tab to acceptFullSuggestion and succeed',
+                          condition: 'tabToLineBeforeAcceptingCpp == false',
+                          suggestion: he,
+                          generationUUID: he.requestId,
+                        }),
+                      });
                       const ae = this.getFocusedCodeEditor()
                       ae !== null && this.cleanupAfterAcceptSuggestion(ae, he)
                     }),
@@ -218,6 +235,15 @@ export function createFDIClass(params) {
                     const Ae = ke[0]
                     this.acceptFullSuggestion(this.holdDownAbortController, Ae)
                       .then(() => {
+                        fetch('http://localhost:3000', {
+                          method: 'POST',
+                          body: JSON.stringify({
+                            action: 'press Tab to acceptFullSuggestion and succeed',
+                            condition: 'tabToLineBeforeAcceptingCpp == true && additionalSuggestions.length > 0',
+                            suggestion: he,
+                            generationUUID: he.requestId,
+                          }),
+                        });
                         const Pe = this.getFocusedCodeEditor()
                         Pe !== null &&
                           (this.cleanupAfterAcceptSuggestion(Pe, Ae),
@@ -457,7 +483,10 @@ export function createFDIClass(params) {
         method: 'POST',
         body: JSON.stringify({
           setIntoDB: 'predictionId',
+          invokeReason: 'fusedCursorPrediction resolved & isValidCase is true',
+          invokePlace: 'right after fusedCursorPrediction resolved',
           predictionId,
+          fusedCursorPrediction
         }),
       });
       if (
@@ -473,6 +502,7 @@ export function createFDIClass(params) {
           editor,
           model: n,
           fusedCursorPrediction,
+          _predictionId_for_log: predictionId,
           oldText: this.eb.oldText,
           newText: this.eb.newText,
         })
@@ -1791,7 +1821,10 @@ export function createFDIClass(params) {
       }
       fetch('http://localhost:3000', {
         method: 'POST',
-        body: JSON.stringify({ intent: o })
+        body: JSON.stringify({
+          intent: o,
+          generationUUID: n,
+        })
       });
       const d = performance.now(),
         { success: g } = await this.immediatelyFireCppWithSpecifiedPosition({
@@ -2591,26 +2624,26 @@ export function createFDIClass(params) {
         }),
       });
 
-      // fullText && fullText.then((text) => {
-      //   fetch('http://localhost:3000', {
-      //     method: 'POST',
-      //     body: JSON.stringify({
-      //       fullText: text,
-      //       generationUUID: generationUUID,
-      //     }),
-      //   });
-      // })
+      fullText && fullText.then((text) => {
+        fetch('http://localhost:3000', {
+          method: 'POST',
+          body: JSON.stringify({
+            fullText: text,
+            generationUUID: generationUUID,
+          }),
+        });
+      })
 
-      // fusedCursorPrediction && fusedCursorPrediction.then((text) => {
-      //   fetch('http://localhost:3000', {
-      //     method: 'POST',
-      //     body: JSON.stringify({
-      //       fusedCursorPrediction: text,
-      //       predictionId,
-      //       generationUUID: generationUUID,
-      //     }),
-      //   });
-      // })
+      fusedCursorPrediction && fusedCursorPrediction.then((text) => {
+        fetch('http://localhost:3000', {
+          method: 'POST',
+          body: JSON.stringify({
+            fusedCursorPrediction: text,
+            predictionId,
+            generationUUID: generationUUID,
+          }),
+        });
+      })
 
       if (abortController.signal.aborted) return { success: !1 }
       if (
@@ -2650,6 +2683,13 @@ export function createFDIClass(params) {
               }),
             )
         }
+      fetch('http://localhost:3000', {
+        method: 'POST',
+        body: JSON.stringify({
+          isValidCase4firstChunkValue: isValidCase,
+          generationUUID: generationUUID,
+        }),
+      });
       if (!isValidCase.valid) {
         const cursorPredictionResult = await fusedCursorPrediction
         return predictionId !== this.cb
@@ -2673,13 +2713,24 @@ export function createFDIClass(params) {
                         "[Cpp] Showing cursor prediction immediately because the edit suggestion was suppressed",
                       ),
                       source !== ll.CursorPrediction
-                        ? await this.displayFusedCursorPrediction({
-                            editor: editor,
-                            model: model,
-                            oldText: "",
-                            newText: "",
+                        ? ((fetch('http://localhost:3000', {
+                          method: 'POST',
+                          body: JSON.stringify({
+                            invokeReason: 'fusedCursorPrediction resolved & isValidCase is false',
+                            invokePlace: 'before this.displayFusedCursorPrediction, about to show prediction icon',
+                            isValidCase4firstChunkValue: isValidCase,
                             fusedCursorPrediction: cursorPredictionResult,
-                          })
+                            predictionId,
+                            generationUUID: generationUUID,
+                          }),
+                        })), (await this.displayFusedCursorPrediction({
+                          editor: editor,
+                          model: model,
+                          oldText: "",
+                          newText: "",
+                          fusedCursorPrediction: cursorPredictionResult,
+                          _predictionId_for_log: predictionId,
+                        })))
                         : oa(
                             "[Cpp] Not displaying fused NCP because the source was cursor prediction",
                           ))),
@@ -2690,6 +2741,9 @@ export function createFDIClass(params) {
           fetch('http://localhost:3000', {
             method: 'POST',
             body: JSON.stringify({
+              invokeReason: 'fusedCursorPrediction resolved & isValidCase is true',
+              invokePlace: 'before this.uponFusedCursorPredictionReady',
+              isValidCase4firstChunkValue: isValidCase,
               fusedCursorPrediction: prediction,
               predictionId,
               generationUUID: generationUUID,
@@ -2729,6 +2783,9 @@ export function createFDIClass(params) {
                 fetch('http://localhost:3000', {
                   method: 'POST',
                   body: JSON.stringify({
+                    invokeReason: 'fullText resolved & isValidCase is true',
+                    invokePlace: 'before this.generateFollowupSuggestion',
+                    isValidCase4firstChunkValue: isValidCase,
                     fullText: fullTextResult,
                     generationUUID: generationUUID,
                   }),
@@ -2794,6 +2851,15 @@ export function createFDIClass(params) {
           suggestionTriggerTime: suggestion.suggestionTriggerTime,
           fusedCursorPredictionId: predictionId,
         })
+        fetch('http://localhost:3000', {
+          method: 'POST',
+          body: JSON.stringify({
+            invokeReason: 'fullText resolved & isValidCase is true && currentSuggestion is undefined && need to create newSuggestion according fullText',
+            invokePlace: 'this.generateFollowupSuggestion',
+            newSuggestion,
+            generationUUID: suggestion.requestId,
+          }),
+        });
         if (newSuggestion === void 0) return
         this.displayCppSuggestion(editor, model, newSuggestion)
       } else if (currentSuggestion?.uniqueId !== suggestion.uniqueId)
@@ -2809,7 +2875,16 @@ export function createFDIClass(params) {
             modelVersionWhenInvoked: suggestion.modelVersionWhenInvoked,
             suggestionTriggerTime: suggestion.suggestionTriggerTime,
             fusedCursorPredictionId: predictionId,
-          })
+          });
+          fetch('http://localhost:3000', {
+            method: 'POST',
+            body: JSON.stringify({
+              invokeReason: 'fullText resolved & isValidCase is true && currentSuggestion uniqueId is different && need to create newSuggestion according fullText',
+              invokePlace: 'this.generateFollowupSuggestion',
+              newSuggestion,
+              generationUUID: suggestion.requestId,
+            }),
+          });
           if (newSuggestion === void 0) {
             predictionId !== void 0 &&
               this.db.has(predictionId) &&
@@ -2837,7 +2912,16 @@ export function createFDIClass(params) {
           modelVersionWhenInvoked: suggestion.modelVersionWhenInvoked,
           suggestionTriggerTime: suggestion.suggestionTriggerTime,
           fusedCursorPredictionId: predictionId,
-        })
+        });
+        fetch('http://localhost:3000', {
+          method: 'POST',
+          body: JSON.stringify({
+            invokeReason: 'fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined',
+            invokePlace: 'this.generateFollowupSuggestion',
+            newSuggestion,
+            generationUUID: suggestion.requestId,
+          }),
+        });
         if (newSuggestion === void 0) {
           this.createOrUpdateSuggestionState({ fusedCursorPredictionId: predictionId })
           return
@@ -3277,6 +3361,12 @@ export function createFDIClass(params) {
           })
     }
     async acceptFullSuggestion(e, t) {
+      // fetch('http://localhost:3000', {
+      //   method: 'POST',
+      //   body: JSON.stringify({
+      //     action: 'press Tab to acceptFullSuggestion',
+      //   }),
+      // });
       return await this.acceptSuggestion(!1, e, t)
     }
     async acceptNextWordSuggestion(e, t) {
@@ -3318,7 +3408,18 @@ export function createFDIClass(params) {
       fusedCursorPrediction: fusedCursorPrediction,
       oldText: n,
       newText: r,
+      _predictionId_for_log,
     }) {
+      fetch('http://localhost:3000', {
+        method: 'POST',
+        body: JSON.stringify({
+          action: 'displayFusedCursorPrediction',
+          predictionId: _predictionId_for_log,
+          fusedCursorPrediction,
+          oldText: n,
+          newText: r,
+        }),
+      });
       const o = this.mb.resolveRelativePath(fusedCursorPrediction.relativePath)
       if (!o) {
         oa("[fusedCursorPrediction] Could not resolve predicted file path")
@@ -3444,11 +3545,23 @@ export function createFDIClass(params) {
     }
     displayFusedCursorPredictionIfAvailable(e, t, fusedCursorPredictionId, n, r) {
       const fusedCursorPrediction = this.db.get(fusedCursorPredictionId)
+      fetch('http://localhost:3000', {
+        method: 'POST',
+        body: JSON.stringify({
+          getFromDB: 'predictionId',
+          possibleInvokeReason: 'no suggestion but has predictionId',
+          predictionId: fusedCursorPredictionId,
+          fusedCursorPrediction: fusedCursorPrediction ?? null,
+          oldText: n,
+          newText: r,
+        }),
+      });
       fusedCursorPrediction
         ? this.displayFusedCursorPrediction({
             editor: e,
             model: t,
             fusedCursorPrediction: fusedCursorPrediction,
+            _predictionId_for_log: fusedCursorPredictionId,
             oldText: n,
             newText: r,
           })
