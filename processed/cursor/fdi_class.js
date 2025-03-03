@@ -175,7 +175,7 @@ export function createFDIClass(params) {
                   body: JSON.stringify({
                     action: 'press Tab to accept suggestion',
                     suggestion: he,
-                    generationUUID: he.requestId,
+                    generationUUID: he?.requestId,
                   }),
                 });
                 if (
@@ -195,7 +195,7 @@ export function createFDIClass(params) {
                           action: 'press Tab to acceptFullSuggestion and succeed',
                           condition: 'tabToLineBeforeAcceptingCpp == false',
                           suggestion: he,
-                          generationUUID: he.requestId,
+                          generationUUID: he?.requestId,
                         }),
                       });
                       const ae = this.getFocusedCodeEditor()
@@ -241,7 +241,7 @@ export function createFDIClass(params) {
                             action: 'press Tab to acceptFullSuggestion and succeed',
                             condition: 'tabToLineBeforeAcceptingCpp == true && additionalSuggestions.length > 0',
                             suggestion: he,
-                            generationUUID: he.requestId,
+                            generationUUID: he?.requestId,
                           }),
                         });
                         const Pe = this.getFocusedCodeEditor()
@@ -3474,73 +3474,73 @@ export function createFDIClass(params) {
       const r = this.getHiddenSuggestion(s, n)
       r !== null && this.qb.recordPartialAcceptSuggestionEvent(s, r, t)
     }
-    cleanupAfterAcceptSuggestion(e, t) {
-      this.abortAllCppRequests(t?.requestId)
-      const s = this.getEditorCurrentPositionRange(e),
-        n = e.getModel()
-      if (!n || s === null) return
-      const r = t ?? this.getVisibleSuggestion()
-      if (r !== null) {
+    cleanupAfterAcceptSuggestion(editor, suggestion) {
+      this.abortAllCppRequests(suggestion?.requestId)
+      const positionRange = this.getEditorCurrentPositionRange(editor),
+        model = editor.getModel()
+      if (!model || positionRange === null) return
+      const visibleSuggestion = suggestion ?? this.getVisibleSuggestion()
+      if (visibleSuggestion !== null) {
         if (
           ((this.u = {
-            requestId: r.requestId,
-            modelVersion: n.getVersionId(),
-            modelId: n.id,
+            requestId: visibleSuggestion.requestId,
+            modelVersion: model.getVersionId(),
+            modelId: model.id,
           }),
           (this.numberOfClearedSuggestionsSinceLastAccept = 0),
           this.clearSuggestions(
             this.Ob().cppConfig?.isGhostText &&
               !this.Pb().cppState?.suggestion?.immediatelySeen,
           ),
-          this.qb.recordAcceptSuggestionEvent(n, r),
+          this.qb.recordAcceptSuggestionEvent(model, visibleSuggestion),
           this.hb.applicationUserPersistentStorage.checklistState
-            ?.doneAutoComplete !== !0)
+            ?.doneAutoComplete !== true)
         ) {
-          const o = this.hb.applicationUserPersistentStorage.checklistState
+          const checklistState = this.hb.applicationUserPersistentStorage.checklistState
           this.hb.setApplicationUserPersistentStorage(
             "checklistState",
-            (a) => ({ ...(a ?? {}), doneAutoComplete: !0 }),
+            (state) => ({ ...(state ?? {}), doneAutoComplete: true }),
           )
         }
-        if (r.onAcceptDisplayId !== void 0) {
-          const o = this.M.getAndEvictMatchingSuggestion(r.onAcceptDisplayId)
-          if (o) {
-            this.displayCppSuggestion(e, n, o)
+        if (visibleSuggestion.onAcceptDisplayId !== undefined) {
+          const matchingSuggestion = this.M.getAndEvictMatchingSuggestion(visibleSuggestion.onAcceptDisplayId)
+          if (matchingSuggestion) {
+            this.displayCppSuggestion(editor, model, matchingSuggestion)
             return
           }
         }
         if (this.Bb.isCursorPredictionEnabled()) {
-          r.fusedCursorPredictionId &&
+          visibleSuggestion.fusedCursorPredictionId &&
             this.displayFusedCursorPredictionIfAvailable(
-              e,
-              n,
-              r.fusedCursorPredictionId,
-              r.originalText,
-              r.replaceText,
+              editor,
+              model,
+              visibleSuggestion.fusedCursorPredictionId,
+              visibleSuggestion.originalText,
+              visibleSuggestion.replaceText,
             )
-          const o = n.getDecorationRange(r.decorationId) ?? void 0
-          let a = o
+          const decorationRange = model.getDecorationRange(visibleSuggestion.decorationId) ?? undefined
+          let suggestionRange = decorationRange
             ? {
-                startLineNumber: o.startLineNumber,
-                startColumn: o.startColumn,
+                startLineNumber: decorationRange.startLineNumber,
+                startColumn: decorationRange.startColumn,
                 endLineNumberInclusive:
-                  o.endColumn === 1 ? o.endLineNumber - 1 : o.endLineNumber,
-                endColumn: o.endColumn,
+                  decorationRange.endColumn === 1 ? decorationRange.endLineNumber - 1 : decorationRange.endLineNumber,
+                endColumn: decorationRange.endColumn,
               }
-            : void 0
-          this.U?.modelVersion === n.getVersionId() && this.U?.modelId === n.id
-            ? ((this.Y = { fire: !1, acceptedRange: void 0 }),
+            : undefined
+          this.U?.modelVersion === model.getVersionId() && this.U?.modelId === model.id
+            ? ((this.Y = { fire: false, acceptedRange: undefined }),
               this.Bb.getAndShowNextPrediction({
-                editor: e,
+                editor,
                 triggerCppCallback:
                   this.fireCppSuggestionFromTrigger.bind(this),
                 getLinterErrors:
                   this.getRecentAndNearLocationLinterErrors.bind(this),
                 source: QN.ACCEPT,
-                cppSuggestionRange: a,
+                cppSuggestionRange: suggestionRange,
               }))
-            : (this.Y = { fire: !0, acceptedRange: a })
-        } else this.Bb.periodicallyReloadCursorPredictionConfig(!1)
+            : (this.Y = { fire: true, acceptedRange: suggestionRange })
+        } else this.Bb.periodicallyReloadCursorPredictionConfig(false)
       }
     }
     displayFusedCursorPredictionIfAvailable(e, t, fusedCursorPredictionId, n, r) {
