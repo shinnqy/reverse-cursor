@@ -1,0 +1,231 @@
+[
+  {
+    "intent": "lint_errors",
+    "generationUUID": "eb5c8525-dc5f-4cb5-b4cf-36b2fd412ed4",
+    "timestamp": "2025-03-02T14:51:07.677Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "src/components/test.ts",
+          "diffHistory": [
+            "6-|    case light.GREEN:\n7-|      console.log('GREEN');\n8-|      break;\n9-|    case light.YELLOW:\n10-|      console.log('YELLOW');\n11-|      break;\n12-|    default:\n13-|      console.log('Invalid light');\n",
+            "6+|    case light.GREEN:\n7+|      console.log('GREEN');\n8+|      break;\n9+|    case light.YELLOW:\n10+|      console.log('YELLOW');\n11+|      break;\n",
+            "11-|      break;  \n12-|\n11+|      break;\n12+|    default:\n13+|      console.log('Invalid light');\n",
+            "6-|    case light.GREEN:\n7-|      console.log('GREEN');\n8-|      break;\n9-|    case light.YELLOW:\n10-|      console.log('YELLOW');\n11-|      break;\n12-|    default:\n13-|      console.log('Invalid light');\n",
+            "6+|    case light.GREEN:\n7+|      console.log('GREEN');\n8+|      break;\n9+|    case light.YELLOW:\n10+|      console.log('YELLOW');\n11+|      break;\n",
+            "12+|    default:\n13+|      console.log('Invalid light');\n",
+            "6-|    case light.GREEN:\n7-|      console.log('GREEN');\n8-|      break;\n9-|    case light.YELLOW:\n10-|      console.log('YELLOW');\n11-|      break;\n12-|    default:\n13-|      console.log('Invalid light');\n",
+            "6+|    case light.YELLOW:\n7+|      console.log('YELLOW');\n8+|      break;\n9+|    default:\n10+|      console.log('Invalid light');\n",
+            "6-|    case light.YELLOW:\n7-|      console.log('YELLOW');\n8-|      break;\n9-|    default:\n10-|      console.log('Invalid light');\n12-|}\n7+|} \n",
+            "6+|    case light.YELLOW:\n7+|      console.log('YELLOW');\n8+|      break;\n9+|    default:\n10+|      console.log('Invalid light');\n",
+            "11+|      break;\n",
+            "1+|shared/types/traffic-light.ts\n2+|\n",
+            "1-|shared/types/traffic-light.ts\n1+|import { TrafficLight } from '@shared/types/traffic-light';\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "linterErrors": {
+        "relativeWorkspacePath": "src/components/test.ts",
+        "errors": [
+          {
+            "message": "'changeLight' is defined but never used.",
+            "range": {
+              "startPosition": {
+                "line": 3,
+                "column": 10
+              },
+              "endPosition": {
+                "line": 3,
+                "column": 21
+              }
+            },
+            "source": "eslint",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          },
+          {
+            "message": "Cannot find name 'shared'.",
+            "range": {
+              "startPosition": {
+                "line": 1,
+                "column": 1
+              },
+              "endPosition": {
+                "line": 1,
+                "column": 7
+              }
+            },
+            "source": "ts",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          },
+          {
+            "message": "Cannot find name 'types'.",
+            "range": {
+              "startPosition": {
+                "line": 1,
+                "column": 8
+              },
+              "endPosition": {
+                "line": 1,
+                "column": 13
+              }
+            },
+            "source": "ts",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          },
+          {
+            "message": "Cannot find name 'traffic'.",
+            "range": {
+              "startPosition": {
+                "line": 1,
+                "column": 14
+              },
+              "endPosition": {
+                "line": 1,
+                "column": 21
+              }
+            },
+            "source": "ts",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          },
+          {
+            "message": "Cannot find name 'light'.",
+            "range": {
+              "startPosition": {
+                "line": 1,
+                "column": 22
+              },
+              "endPosition": {
+                "line": 1,
+                "column": 27
+              }
+            },
+            "source": "ts",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          },
+          {
+            "message": "Cannot find name 'TrafficLight'.",
+            "range": {
+              "startPosition": {
+                "line": 3,
+                "column": 29
+              },
+              "endPosition": {
+                "line": 3,
+                "column": 41
+              }
+            },
+            "source": "ts",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          },
+          {
+            "message": "'changeLight' is defined but never used.",
+            "range": {
+              "startPosition": {
+                "line": 1,
+                "column": 10
+              },
+              "endPosition": {
+                "line": 1,
+                "column": 21
+              }
+            },
+            "source": "",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          },
+          {
+            "message": "Cannot find name 'TrafficLight'.",
+            "range": {
+              "startPosition": {
+                "line": 1,
+                "column": 29
+              },
+              "endPosition": {
+                "line": 1,
+                "column": 41
+              }
+            },
+            "source": "",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          }
+        ],
+        "fileContents": ""
+      },
+      "currentFile": {
+        "relativeWorkspacePath": "src/components/test.ts",
+        "contents": "import { TrafficLight } from '@shared/types/traffic-light';\n\nfunction changeLight(light: TrafficLight) {\n  switch (light) {\n    case light.RED:\n      console.log('RED');\n      break;\n    case light.YELLOW:\n      console.log('YELLOW');\n      break;\n    default:\n      console.log('Invalid light');\n      break;\n  }\n}",
+        "cursorPosition": {
+          "line": 0,
+          "column": 31
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 73,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/Documents/personal/vite-react-demo2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "lint_errors"
+      },
+      "clientTime": 1740927067677,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "8u65ni1hw3pqzyyqn4vyf",
+      "timeSinceRequestStart": 1.300048828125,
+      "timeAtRequestSend": 1740927067677
+    },
+    "generateUuid": "eb5c8525-dc5f-4cb5-b4cf-36b2fd412ed4",
+    "timestamp": "2025-03-02T14:51:07.679Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "eb5c8525-dc5f-4cb5-b4cf-36b2fd412ed4",
+    "timestamp": "2025-03-02T14:51:08.055Z"
+  },
+  {
+    "firstChunkValue": "import { TrafficLight } from '@shared/types/traffic-light';\n\nfunction changeLight(light: TrafficLight) {\n  switch (light) {",
+    "generationUUID": "eb5c8525-dc5f-4cb5-b4cf-36b2fd412ed4",
+    "timestamp": "2025-03-02T14:51:08.056Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": false
+    },
+    "generationUUID": "eb5c8525-dc5f-4cb5-b4cf-36b2fd412ed4",
+    "timestamp": "2025-03-02T14:51:08.057Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "01843b8c-fdee-440a-beb1-fc1ceee80df2",
+    "generationUUID": "eb5c8525-dc5f-4cb5-b4cf-36b2fd412ed4",
+    "timestamp": "2025-03-02T14:51:08.666Z"
+  }
+]

@@ -5,30 +5,32 @@ const path = require('path');
 const { modifyCode } = require('./modifyCode');
 const { replaceStringFromPosition, replaceStringBasedOnSuggestion } = require('./replaceCode');
 
+const logContainerFolder = path.resolve(__dirname, '../logV2');
 // const logFileName = 'arkui_log3';
 const logFileName = 'trafficLight3';
 
 main(logFileName);
 
 function main(logFileName) {
-  const logPath = path.resolve(__dirname, `./${logFileName}.txt`);
-  ensureFolder(`./${logFileName}`);
-  const processedFilePath = path.resolve(__dirname, `./${logFileName}/${logFileName}_formatted.json`);
+  const specificLogFolderPath = path.join(logContainerFolder, logFileName);
+  const logPath = path.join(specificLogFolderPath, `${logFileName}.txt`);
+  ensureFolder(specificLogFolderPath);
 
-  formatLogIntoJSON(logPath, processedFilePath);
+  const formattedJSONPath = path.join(specificLogFolderPath, `${logFileName}_formatted.json`);
 
-  formatByGeneratedUUID(processedFilePath);
+  formatLogIntoJSON(logPath, formattedJSONPath);
+
+  formatByGeneratedUUID(formattedJSONPath);
 }
 
-function ensureFolder(folderName) {
-  const subItemFolderPath = path.resolve(__dirname, `./${folderName}`);
-  if (!fs.existsSync(subItemFolderPath)) {
-    fs.mkdirSync(subItemFolderPath, {recursive: true });
+function ensureFolder(folderPath) {
+  if (!fs.existsSync(folderPath)) {
+    fs.mkdirSync(folderPath, {recursive: true });
   }
 }
 
-function formatLogIntoJSON(logPath, processedFilePath) {
-  if (fs.existsSync(processedFilePath)) {
+function formatLogIntoJSON(logPath, formattedJSONPath) {
+  if (fs.existsSync(formattedJSONPath)) {
     console.log('Already processed: ' + logPath);
     return;
   }
@@ -38,8 +40,7 @@ function formatLogIntoJSON(logPath, processedFilePath) {
   const logValue = fs.readFileSync(logPath, { encoding: 'utf-8' });
   const logValueList = logValue.split('\n');
 
-  fs.writeFileSync(processedFilePath, '', { encoding: 'utf-8' });
-  fs.appendFileSync(processedFilePath, '[');
+  const formattedJSONLis = [];
   (logValueList || []).forEach((item, index) => {
     if (!item) {
       console.log('This log item is empty.');
@@ -52,24 +53,23 @@ function formatLogIntoJSON(logPath, processedFilePath) {
 
       const json = JSON.parse(jsonStr);
       json.timestamp = timestamp;
-      const needTrailingComma = index !== logValueList.length - 1;
-      fs.appendFileSync(processedFilePath, `${JSON.stringify(json)}${needTrailingComma ? ',\n' : ''}`);
+      formattedJSONLis.push(json);
     } else {
       console.log({item})
       throw new Error('Invalid log')
     }
   });
-  fs.appendFileSync(processedFilePath, ']');
+  fs.writeFileSync(formattedJSONPath, JSON.stringify(formattedJSONLis, null, 2), { encoding: 'utf-8' });
 }
 
-function formatByGeneratedUUID(processedJSONFileJSONPath) {
-  const jsonListStr = fs.readFileSync(processedJSONFileJSONPath, { encoding: 'utf-8'});
+function formatByGeneratedUUID(formattedJSONPath) {
+  const jsonListStr = fs.readFileSync(formattedJSONPath, { encoding: 'utf-8'});
   const jsonList = JSON.parse(jsonListStr);
   const originDataLength = jsonList.length;
   let countProcessedData = 0;
 
-  const byUUIDFolderName = `${logFileName}/byUUID`;
-  ensureFolder(byUUIDFolderName);
+  const byUUIDFolder = path.join(path.dirname(formattedJSONPath), 'byUUID');
+  ensureFolder(byUUIDFolder);
 
   const map = {};
   const predictionIdMapGenerationUUID = {};
@@ -107,9 +107,9 @@ function formatByGeneratedUUID(processedJSONFileJSONPath) {
     }
   }
 
-  const completeDatasetJSONLFilePath = path.resolve(__dirname, `./${logFileName}/${logFileName}_dataset_complete.jsonl`);
-  const editDatasetJSONLFilePath = path.resolve(__dirname, `./${logFileName}/${logFileName}_dataset_edit.jsonl`);
-  const predictionDatasetJSONLFilePath = path.resolve(__dirname, `./${logFileName}/${logFileName}_dataset_prediction.jsonl`);
+  const completeDatasetJSONLFilePath = path.join(path.dirname(formattedJSONPath), `${logFileName}_dataset_complete.jsonl`);
+  const editDatasetJSONLFilePath = path.join(path.dirname(formattedJSONPath), `${logFileName}_dataset_edit.jsonl`);
+  const predictionDatasetJSONLFilePath = path.join(path.dirname(formattedJSONPath), `${logFileName}_dataset_prediction.jsonl`);
   fs.writeFileSync(completeDatasetJSONLFilePath, '', { encoding: 'utf-8' });
   fs.writeFileSync(predictionDatasetJSONLFilePath, '', { encoding: 'utf-8' });
 
@@ -122,11 +122,11 @@ function formatByGeneratedUUID(processedJSONFileJSONPath) {
     const uuid = data[0].generateUuid || data[0].generationUUID;
     const timestamp = data[0].timestamp.replace(/\:/g, '_');
     const key = `${timestamp}____${uuid}`;
-    const subItemPath = path.resolve(__dirname, `./${byUUIDFolderName}/${key}.json`);
+    const subItemPath = path.join(byUUIDFolder, `${key}.json`);
     fs.writeFileSync(subItemPath, JSON.stringify(item[1], null, 2), { encoding: "utf-8" });
 
-    const previewFilePath = path.resolve(__dirname, `./${byUUIDFolderName}/${key}.preview`);
-    const promptFilePath = path.resolve(__dirname, `./${byUUIDFolderName}/${key}.prompt`);
+    const previewFilePath = path.join(byUUIDFolder, `${key}.preview`);
+    const promptFilePath = path.join(byUUIDFolder, `${key}.prompt`);
     generateDataset({data, previewFilePath, promptFilePath, completeDatasetJSONLFilePath, predictionDatasetJSONLFilePath});
   });
 
@@ -134,7 +134,7 @@ function formatByGeneratedUUID(processedJSONFileJSONPath) {
   console.log('Total data: ' + originDataLength);
   console.log('Processed data: ' + countProcessedData);
 
-  const dirPath = path.dirname(processedJSONFileJSONPath);
+  const dirPath = path.dirname(formattedJSONPath);
   const unProcessedDataPath = path.resolve(dirPath, `./${logFileName}_unprocessed.json`);
   fs.writeFileSync(unProcessedDataPath, JSON.stringify(unProcessedData, null, 2), { encoding: 'utf-8' });
 

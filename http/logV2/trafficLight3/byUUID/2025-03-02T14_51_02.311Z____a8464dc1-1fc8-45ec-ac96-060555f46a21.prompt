@@ -1,0 +1,102 @@
+You're a code assistant. Your task is to help the user update the code around current cursor position.
+
+## Recent Actions
+Here is what the user has been doing:
+
+File: src/components/test.ts
+6-|    case light.GREEN:
+7-|      console.log('GREEN');
+8-|      break;
+9-|    case light.YELLOW:
+10-|      console.log('YELLOW');
+11-|      break;
+12-|    default:
+13-|      console.log('Invalid light');
+
+6+|    case light.GREEN:
+7+|      console.log('GREEN');
+8+|      break;
+9+|    case light.YELLOW:
+10+|      console.log('YELLOW');
+11+|      break;
+
+11-|      break;  
+12-|
+11+|      break;
+12+|    default:
+13+|      console.log('Invalid light');
+
+6-|    case light.GREEN:
+7-|      console.log('GREEN');
+8-|      break;
+9-|    case light.YELLOW:
+10-|      console.log('YELLOW');
+11-|      break;
+12-|    default:
+13-|      console.log('Invalid light');
+
+6+|    case light.GREEN:
+7+|      console.log('GREEN');
+8+|      break;
+9+|    case light.YELLOW:
+10+|      console.log('YELLOW');
+11+|      break;
+
+12+|    default:
+13+|      console.log('Invalid light');
+
+6-|    case light.GREEN:
+7-|      console.log('GREEN');
+8-|      break;
+9-|    case light.YELLOW:
+10-|      console.log('YELLOW');
+11-|      break;
+12-|    default:
+13-|      console.log('Invalid light');
+
+6+|    case light.YELLOW:
+7+|      console.log('YELLOW');
+8+|      break;
+9+|    default:
+10+|      console.log('Invalid light');
+
+6-|    case light.YELLOW:
+7-|      console.log('YELLOW');
+8-|      break;
+9-|    default:
+10-|      console.log('Invalid light');
+12-|}
+7+|} 
+
+6+|    case light.YELLOW:
+7+|      console.log('YELLOW');
+8+|      break;
+9+|    default:
+10+|      console.log('Invalid light');
+
+11+|      break;
+
+
+## Current Code
+Here is the current code file path:
+src/components/test.ts
+
+Here is the current code around the cursor position:
+
+```
+<|current_cursor_position|>function changeLight(light: TrafficLight) {
+  switch (light) {
+    case light.RED:
+      console.log('RED');
+      break;
+    case light.YELLOW:
+      console.log('YELLOW');
+      break;
+    default:
+      console.log('Invalid light');
+      break;
+  }
+}
+```
+
+As an intelligent code assistant, your role is to analyze what the user has been doing and then to output the code from the first column of the line of <|current_cursor_position|> with the updated changes without any other words:

@@ -1,0 +1,144 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "daeceb76-739f-49d7-afa0-6a7d3bdcf50d",
+    "timestamp": "2025-03-02T14:51:33.834Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "src/components/test.ts",
+          "diffHistory": [
+            "6-|    case light.GREEN:\n7-|      console.log('GREEN');\n8-|      break;\n9-|    case light.YELLOW:\n10-|      console.log('YELLOW');\n11-|      break;\n12-|    default:\n13-|      console.log('Invalid light');\n",
+            "6+|    case light.GREEN:\n7+|      console.log('GREEN');\n8+|      break;\n9+|    case light.YELLOW:\n10+|      console.log('YELLOW');\n11+|      break;\n",
+            "11-|      break;  \n12-|\n11+|      break;\n12+|    default:\n13+|      console.log('Invalid light');\n",
+            "6-|    case light.GREEN:\n7-|      console.log('GREEN');\n8-|      break;\n9-|    case light.YELLOW:\n10-|      console.log('YELLOW');\n11-|      break;\n12-|    default:\n13-|      console.log('Invalid light');\n",
+            "6+|    case light.GREEN:\n7+|      console.log('GREEN');\n8+|      break;\n9+|    case light.YELLOW:\n10+|      console.log('YELLOW');\n11+|      break;\n",
+            "12+|    default:\n13+|      console.log('Invalid light');\n",
+            "6-|    case light.GREEN:\n7-|      console.log('GREEN');\n8-|      break;\n9-|    case light.YELLOW:\n10-|      console.log('YELLOW');\n11-|      break;\n12-|    default:\n13-|      console.log('Invalid light');\n",
+            "6+|    case light.YELLOW:\n7+|      console.log('YELLOW');\n8+|      break;\n9+|    default:\n10+|      console.log('Invalid light');\n",
+            "6-|    case light.YELLOW:\n7-|      console.log('YELLOW');\n8-|      break;\n9-|    default:\n10-|      console.log('Invalid light');\n12-|}\n7+|} \n",
+            "6+|    case light.YELLOW:\n7+|      console.log('YELLOW');\n8+|      break;\n9+|    default:\n10+|      console.log('Invalid light');\n",
+            "11+|      break;\n",
+            "1+|shared/types/traffic-light.ts\n2+|\n",
+            "1-|shared/types/traffic-light.ts\n1+|import { TrafficLight } from '@shared/types/traffic-light';\n",
+            "5-|    case light.RED:\n5+|    case light.Red:\n",
+            "8-|    case light.YELLOW:\n8+|    case light.Yellow:\n",
+            "1-|import { TrafficLight } from '@shared/types/traffic-light';\n",
+            "1-|\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "linterErrors": {
+        "relativeWorkspacePath": "src/components/test.ts",
+        "errors": [
+          {
+            "message": "'changeLight' is defined but never used.",
+            "range": {
+              "startPosition": {
+                "line": 1,
+                "column": 10
+              },
+              "endPosition": {
+                "line": 1,
+                "column": 21
+              }
+            },
+            "source": "eslint",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          },
+          {
+            "message": "Cannot find name 'TrafficLight'.",
+            "range": {
+              "startPosition": {
+                "line": 1,
+                "column": 29
+              },
+              "endPosition": {
+                "line": 1,
+                "column": 41
+              }
+            },
+            "source": "ts",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          }
+        ],
+        "fileContents": ""
+      },
+      "currentFile": {
+        "relativeWorkspacePath": "src/components/test.ts",
+        "contents": "function changeLight(light: TrafficLight) {\n  switch (light) {\n    case light.Red:\n      console.log('RED');\n      break;\n    case light.Yellow:\n      console.log('YELLOW');\n      break;\n    default:\n      console.log('Invalid light');\n      break;\n  }\n}",
+        "cursorPosition": {
+          "line": 3,
+          "column": 0
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 84,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/Documents/personal/vite-react-demo2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1740927093883,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "8u65ni1hw3pqzyyqn4vyf",
+      "timeSinceRequestStart": 54,
+      "timeAtRequestSend": 1740927093883
+    },
+    "generateUuid": "daeceb76-739f-49d7-afa0-6a7d3bdcf50d",
+    "timestamp": "2025-03-02T14:51:33.884Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "daeceb76-739f-49d7-afa0-6a7d3bdcf50d",
+    "timestamp": "2025-03-02T14:51:34.269Z"
+  },
+  {
+    "firstChunkValue": "    case light.Red:\n      console.log('RED');\n      break;\n    case light.Yellow:\n      console.log('YELLOW');",
+    "generationUUID": "daeceb76-739f-49d7-afa0-6a7d3bdcf50d",
+    "timestamp": "2025-03-02T14:51:34.270Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": false
+    },
+    "generationUUID": "daeceb76-739f-49d7-afa0-6a7d3bdcf50d",
+    "timestamp": "2025-03-02T14:51:34.272Z"
+  },
+  {
+    "fusedCursorPrediction": {
+      "relativePath": "src/components/test.ts",
+      "lineNumberOneIndexed": 1,
+      "text": "function changeLight(light: TrafficLight) {\nswitch (light) {\ncase light.Red:\nconsole.log('RED');\nbreak;",
+      "shouldRetriggerCpp": false
+    },
+    "predictionId": "c370b680-2ab7-49cf-8723-4fe5b6f931ba",
+    "generationUUID": "daeceb76-739f-49d7-afa0-6a7d3bdcf50d",
+    "timestamp": "2025-03-02T14:51:34.456Z"
+  }
+]
