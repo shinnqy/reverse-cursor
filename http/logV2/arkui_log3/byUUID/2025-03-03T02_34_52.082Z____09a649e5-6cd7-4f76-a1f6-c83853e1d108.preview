@@ -1,0 +1,44 @@
+{"line":17,"column":15}
+
+======== fileDiffHistories ========
+
+File: entry/src/main/ets/pages/Index.ets
+17-|\n17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Hello World';\n22+|      })\n18-|        Text('Click me')\n18+|        Text('A')\n
+17-|\n17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Hello World';\n22+|      })\n18-|        Text('Click me')\n18+|        Text('A')\n
+17-|\n17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Hello World';\n22+|      })\n18-|        Text('Click me')\n18+|        Text('A')\n
+
+======== processedCurrentFileContents ========
+@Entry
+@Component
+struct Index {
+  @State message: string = 'Hello World';
+
+  build() {
+    RelativeContainer() {
+      Text(this.message)
+        .id('HelloWorld')
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+        .alignRules({
+          center: { anchor: '__container__', align: VerticalAlign.Center },
+          middle: { anchor: '__container__', align: HorizontalAlign.Center }
+        })
+
+      Button() {
+        Text('A[ToFill]')
+      }
+      .onClick(() => {
+        this.message = 'Hello World';
+      })
+    }
+    .height('100%')
+    .width('100%')
+  }
+}
+======== firstChunkValue ========
+      Button() {
+        Text('A')
+      }
+      .onClick(() => {
+        this.message = 'Hello World';
+      })

@@ -1,0 +1,64 @@
+{"line":14,"column":7}
+
+======== fileDiffHistories ========
+
+File: entry/src/main/ets/pages/Index.ets
+17-|\n17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Hello World';\n22+|      })\n18-|        Text('Click me')\n18+|        Text('Abount')\n18-|        Text('Abount')\n18+|        Text('About Me')\n
+17-|\n17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Hello World';\n22+|      })\n18-|        Text('Click me')\n18+|        Text('Abount')\n18-|        Text('Abount')\n18+|        Text('About Me')\n
+17-|\n17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Hello World';\n22+|      })\n18-|        Text('Click me')\n18+|        Text('Abount')\n18-|        Text('Abount')\n18+|        Text('About Me')\n
+17-|\n17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Hello World';\n22+|      })\n18-|        Text('Click me')\n18+|        Text('Abount')\n18-|        Text('Abount')\n18+|        Text('About Me')\n
+
+======== processedCurrentFileContents ========
+@Entry
+@Component
+struct Index {
+  @State message: string = 'Hello World';
+
+  build() {
+    RelativeContainer() {
+      Text(this.message)
+        .id('HelloWorld')
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+        .alignRules({
+          center: { anchor: '__container__', align: VerticalAlign.Center },
+          middle: { anchor: '__container__', align: HorizontalAlign.Center }
+       [ToFill] })
+
+      Button() {
+        Text('About Me')
+      }
+      .onClick(() => {
+        this.message = 'Hello World';
+      })
+    }
+    .height('100%')
+    .width('100%')
+  }
+}
+======== firstChunkValue ========
+          middle: { anchor: '__container__', align: HorizontalAlign.Center }
+        })
+
+======== fusedCursorPrediction ========
+lineNumberOneIndexed: 21
+
+text: 
+this.message = 'Hello World';
+})
+}
+.height('100%')
+.width('100%')
+
+shouldRetriggerCpp: true
+======== displayedFusedCursorPrediction ========
+lineNumberOneIndexed: 21
+
+text: 
+this.message = 'Hello World';
+})
+}
+.height('100%')
+.width('100%')
+
+shouldRetriggerCpp: true

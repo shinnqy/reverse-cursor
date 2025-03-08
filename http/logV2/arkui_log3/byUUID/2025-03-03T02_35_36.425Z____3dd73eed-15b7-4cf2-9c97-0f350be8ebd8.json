@@ -1,0 +1,93 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "3dd73eed-15b7-4cf2-9c97-0f350be8ebd8",
+    "timestamp": "2025-03-03T02:35:36.425Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/pages/Index.ets",
+          "diffHistory": [
+            "17-|\n17+|      Button() {\n",
+            "18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Hello World';\n22+|      })\n",
+            "18-|        Text('Click me')\n18+|        Text('Abount')\n",
+            "18-|        Text('Abount')\n18+|        Text('About Me')\n",
+            "21-|        this.message = 'Hello World';\n",
+            "21-|        \n21+|        router.push({\n",
+            "22+|          uri: 'pages/About'\n23+|        })\n",
+            "21-|        router.push({\n21+|        router.pushU({\n",
+            "21-|        router.pushU({\n22-|          uri: 'pages/About'\n21+|        router.pushUrl({\n22+|          url: 'pages/About'\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/pages/Index.ets",
+        "contents": "@Entry\n@Component\nstruct Index {\n  @State message: string = 'Hello World';\n\n  build() {\n    RelativeContainer() {\n      Text(this.message)\n        .id('HelloWorld')\n        .fontSize(50)\n        .fontWeight(FontWeight.Bold)\n        .alignRules({\n          center: { anchor: '__container__', align: VerticalAlign.Center },\n          middle: { anchor: '__container__', align: HorizontalAlign.Center }\n        })\n\n      Button() {\n        Text('About Me')\n      }\n      .onClick(() => {\n        router.pushUrl({\n          url: 'pages/About'\n        })\n      })\n    }\n    .height('100%')\n    .width('100%')\n  }\n}",
+        "cursorPosition": {
+          "line": 21,
+          "column": 27
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 48,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1740969336467,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 52.800048828125,
+      "timeAtRequestSend": 1740969336467
+    },
+    "generateUuid": "3dd73eed-15b7-4cf2-9c97-0f350be8ebd8",
+    "timestamp": "2025-03-03T02:35:36.470Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "3dd73eed-15b7-4cf2-9c97-0f350be8ebd8",
+    "timestamp": "2025-03-03T02:35:36.839Z"
+  },
+  {
+    "firstChunkValue": "      .onClick(() => {\n        router.pushUrl({\n          url: 'pages/About'\n        })\n      })",
+    "generationUUID": "3dd73eed-15b7-4cf2-9c97-0f350be8ebd8",
+    "timestamp": "2025-03-03T02:35:36.893Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": false
+    },
+    "generationUUID": "3dd73eed-15b7-4cf2-9c97-0f350be8ebd8",
+    "timestamp": "2025-03-03T02:35:36.894Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "58d8ba5d-e8db-4d65-95eb-51d924e4755e",
+    "generationUUID": "3dd73eed-15b7-4cf2-9c97-0f350be8ebd8",
+    "timestamp": "2025-03-03T02:35:36.988Z"
+  }
+]

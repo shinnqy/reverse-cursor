@@ -1,0 +1,175 @@
+[
+  {
+    "intent": "editor_change",
+    "generationUUID": "4b803ad5-2e32-4159-b9b7-5324b1844c8e",
+    "timestamp": "2025-03-03T02:36:38.060Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/pages/Index.ets",
+          "diffHistory": [
+            "17-|\n17+|      Button() {\n",
+            "18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Hello World';\n22+|      })\n",
+            "18-|        Text('Click me')\n18+|        Text('Abount')\n",
+            "18-|        Text('Abount')\n18+|        Text('About Me')\n",
+            "21-|        this.message = 'Hello World';\n",
+            "21-|        \n21+|        router.push({\n",
+            "22+|          uri: 'pages/About'\n23+|        })\n",
+            "21-|        router.push({\n21+|        router.pushU({\n",
+            "21-|        router.pushU({\n22-|          uri: 'pages/About'\n21+|        router.pushUrl({\n22+|          url: 'pages/About'\n",
+            "22-|          url: 'pages/About'\n22+|          url: 'pages/AboutMe'\n",
+            "1+|import router from '@ohos.router';\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/pages/AboutMe.ets",
+          "diffHistory": [
+            "1+|@Preview\n",
+            "2+|@Entry\n3+|@Component\n4+|struct AboutMe {\n5+|  @State message: string = 'About Me';\n6+|  \n7+|}\n",
+            "2-|@Entry\n",
+            "5-|\n6-|}\n5+|  \n6+|  build() {\n7+|    Column() {\n8+|      Text(this.message)\n9+|        .fontSize(50)\n10+|        .fontWeight(FontWeight.Bold)\n11+|    }\n12+|  }\n13+|}\n",
+            "5-|  \n5+|\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/resources/base/profile/main_pages.json",
+        "contents": "{\n  \"src\": [\n    \"pages/Index\"\n  ]\n}\n",
+        "cursorPosition": {
+          "line": 5,
+          "column": 0
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 1,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/pages/Index.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 31
+            }
+          ],
+          "lastViewedAt": 1740969350213
+        },
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/pages/AboutMe.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 13
+            }
+          ],
+          "lastViewedAt": 1740969387570
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "editor_change"
+      },
+      "clientTime": 1740969398139,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 82.199951171875,
+      "timeAtRequestSend": 1740969398140
+    },
+    "generateUuid": "4b803ad5-2e32-4159-b9b7-5324b1844c8e",
+    "timestamp": "2025-03-03T02:36:38.141Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "4b803ad5-2e32-4159-b9b7-5324b1844c8e",
+    "timestamp": "2025-03-03T02:36:38.530Z"
+  },
+  {
+    "firstChunkValue": "}\n",
+    "generationUUID": "4b803ad5-2e32-4159-b9b7-5324b1844c8e",
+    "timestamp": "2025-03-03T02:36:38.584Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": false
+    },
+    "generationUUID": "4b803ad5-2e32-4159-b9b7-5324b1844c8e",
+    "timestamp": "2025-03-03T02:36:38.585Z"
+  },
+  {
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/resources/base/profile/main_pages.json",
+      "lineNumberOneIndexed": 3,
+      "text": "\"pages/Index\"\n]\n}\n",
+      "shouldRetriggerCpp": true
+    },
+    "predictionId": "e3b6d2f7-d30e-452c-b134-402d8d36b112",
+    "generationUUID": "4b803ad5-2e32-4159-b9b7-5324b1844c8e",
+    "timestamp": "2025-03-03T02:36:38.615Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is false",
+    "invokePlace": "before this.displayFusedCursorPrediction, about to show prediction icon",
+    "isValidCase4firstChunkValue": {
+      "valid": false
+    },
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/resources/base/profile/main_pages.json",
+      "lineNumberOneIndexed": 3,
+      "text": "\"pages/Index\"\n]\n}\n",
+      "shouldRetriggerCpp": true
+    },
+    "predictionId": "e3b6d2f7-d30e-452c-b134-402d8d36b112",
+    "generationUUID": "4b803ad5-2e32-4159-b9b7-5324b1844c8e",
+    "timestamp": "2025-03-03T02:36:38.617Z"
+  },
+  {
+    "action": "displayFusedCursorPrediction",
+    "predictionId": "e3b6d2f7-d30e-452c-b134-402d8d36b112",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/resources/base/profile/main_pages.json",
+      "lineNumberOneIndexed": 3,
+      "text": "\"pages/Index\"\n]\n}\n",
+      "shouldRetriggerCpp": true
+    },
+    "oldText": "",
+    "newText": "",
+    "timestamp": "2025-03-03T02:36:38.617Z"
+  }
+]

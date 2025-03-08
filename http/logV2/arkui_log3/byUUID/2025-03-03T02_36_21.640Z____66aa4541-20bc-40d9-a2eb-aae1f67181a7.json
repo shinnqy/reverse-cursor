@@ -1,0 +1,143 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "66aa4541-20bc-40d9-a2eb-aae1f67181a7",
+    "timestamp": "2025-03-03T02:36:21.640Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/pages/Index.ets",
+          "diffHistory": [
+            "17-|\n17+|      Button() {\n",
+            "18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Hello World';\n22+|      })\n",
+            "18-|        Text('Click me')\n18+|        Text('Abount')\n",
+            "18-|        Text('Abount')\n18+|        Text('About Me')\n",
+            "21-|        this.message = 'Hello World';\n",
+            "21-|        \n21+|        router.push({\n",
+            "22+|          uri: 'pages/About'\n23+|        })\n",
+            "21-|        router.push({\n21+|        router.pushU({\n",
+            "21-|        router.pushU({\n22-|          uri: 'pages/About'\n21+|        router.pushUrl({\n22+|          url: 'pages/About'\n",
+            "22-|          url: 'pages/About'\n22+|          url: 'pages/AboutMe'\n",
+            "1+|import router from '@ohos.router';\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/pages/AboutMe.ets",
+          "diffHistory": [
+            "1+|@Preview\n",
+            "2+|@Entry\n3+|@Component\n4+|struct AboutMe {\n5+|  @State message: string = 'About Me';\n6+|  \n7+|}\n",
+            "6-|  \n6+|\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/pages/AboutMe.ets",
+        "contents": "@Preview\n@Entry\n@Component\nstruct AboutMe {\n  @State message: string = 'About Me';\n\n}\n",
+        "cursorPosition": {
+          "line": 6,
+          "column": 0
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 13,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/pages/Index.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 31
+            }
+          ],
+          "lastViewedAt": 1740969350213
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1740969381675,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.400146484375,
+      "timeAtRequestSend": 1740969381675
+    },
+    "generateUuid": "66aa4541-20bc-40d9-a2eb-aae1f67181a7",
+    "timestamp": "2025-03-03T02:36:21.678Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "66aa4541-20bc-40d9-a2eb-aae1f67181a7",
+    "timestamp": "2025-03-03T02:36:22.066Z"
+  },
+  {
+    "firstChunkValue": "\n  build() {\n    RelativeContainer() {\n      Text(this.message)\n        .id('AboutMe')\n    }\n  }\n}\n",
+    "generationUUID": "66aa4541-20bc-40d9-a2eb-aae1f67181a7",
+    "timestamp": "2025-03-03T02:36:22.338Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "22eb81bf-cc5d-4259-84a4-b5e833400d7b",
+    "generationUUID": "66aa4541-20bc-40d9-a2eb-aae1f67181a7",
+    "timestamp": "2025-03-03T02:36:22.339Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\n  build() {\n    RelativeContainer() {\n      Text(this.message)\n        .id('AboutMe')\n    }\n  }\n}\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "22eb81bf-cc5d-4259-84a4-b5e833400d7b",
+    "generationUUID": "66aa4541-20bc-40d9-a2eb-aae1f67181a7",
+    "timestamp": "2025-03-03T02:36:22.340Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "22eb81bf-cc5d-4259-84a4-b5e833400d7b",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-03T02:36:22.340Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\n  build() {\n    RelativeContainer() {\n      Text(this.message)\n        .id('AboutMe')\n    }\n  }\n}\n"
+    },
+    "generationUUID": "66aa4541-20bc-40d9-a2eb-aae1f67181a7",
+    "timestamp": "2025-03-03T02:36:22.340Z"
+  }
+]

@@ -1,0 +1,128 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "063d9bd1-39f6-4e55-8cdb-0514900d7251",
+    "timestamp": "2025-03-03T02:35:41.064Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/pages/Index.ets",
+          "diffHistory": [
+            "17-|\n17+|      Button() {\n",
+            "18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Hello World';\n22+|      })\n",
+            "18-|        Text('Click me')\n18+|        Text('Abount')\n",
+            "18-|        Text('Abount')\n18+|        Text('About Me')\n",
+            "21-|        this.message = 'Hello World';\n",
+            "21-|        \n21+|        router.push({\n",
+            "22+|          uri: 'pages/About'\n23+|        })\n",
+            "21-|        router.push({\n21+|        router.pushU({\n",
+            "21-|        router.pushU({\n22-|          uri: 'pages/About'\n21+|        router.pushUrl({\n22+|          url: 'pages/About'\n",
+            "22-|          url: 'pages/About'\n22+|          url: 'pages/AboutMe'\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/pages/Index.ets",
+        "contents": "@Entry\n@Component\nstruct Index {\n  @State message: string = 'Hello World';\n\n  build() {\n    RelativeContainer() {\n      Text(this.message)\n        .id('HelloWorld')\n        .fontSize(50)\n        .fontWeight(FontWeight.Bold)\n        .alignRules({\n          center: { anchor: '__container__', align: VerticalAlign.Center },\n          middle: { anchor: '__container__', align: HorizontalAlign.Center }\n        })\n\n      Button() {\n        Text('About Me')\n      }\n      .onClick(() => {\n        router.pushUrl({\n          url: 'pages/AboutMe'\n        })\n      })\n    }\n    .height('100%')\n    .width('100%')\n  }\n}",
+        "cursorPosition": {
+          "line": 15,
+          "column": 0
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 51,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1740969341105,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.39990234375,
+      "timeAtRequestSend": 1740969341105
+    },
+    "generateUuid": "063d9bd1-39f6-4e55-8cdb-0514900d7251",
+    "timestamp": "2025-03-03T02:35:41.107Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "063d9bd1-39f6-4e55-8cdb-0514900d7251",
+    "timestamp": "2025-03-03T02:35:41.479Z"
+  },
+  {
+    "firstChunkValue": "        .alignRules({\n          center: { anchor: '__container__', align: VerticalAlign.Center },\n          middle: { anchor: '__container__', align: HorizontalAlign.Center }\n        })\n\n      Button() {\n        Text('About Me')\n      }",
+    "generationUUID": "063d9bd1-39f6-4e55-8cdb-0514900d7251",
+    "timestamp": "2025-03-03T02:35:41.545Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": false
+    },
+    "generationUUID": "063d9bd1-39f6-4e55-8cdb-0514900d7251",
+    "timestamp": "2025-03-03T02:35:41.549Z"
+  },
+  {
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/pages/Index.ets",
+      "lineNumberOneIndexed": 22,
+      "text": "url: 'pages/AboutMe'\n})\n})\n}\n.height('100%')",
+      "shouldRetriggerCpp": true
+    },
+    "predictionId": "cf84c659-8b37-415c-b1f2-1d8a6c0018d9",
+    "generationUUID": "063d9bd1-39f6-4e55-8cdb-0514900d7251",
+    "timestamp": "2025-03-03T02:35:41.627Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is false",
+    "invokePlace": "before this.displayFusedCursorPrediction, about to show prediction icon",
+    "isValidCase4firstChunkValue": {
+      "valid": false
+    },
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/pages/Index.ets",
+      "lineNumberOneIndexed": 22,
+      "text": "url: 'pages/AboutMe'\n})\n})\n}\n.height('100%')",
+      "shouldRetriggerCpp": true
+    },
+    "predictionId": "cf84c659-8b37-415c-b1f2-1d8a6c0018d9",
+    "generationUUID": "063d9bd1-39f6-4e55-8cdb-0514900d7251",
+    "timestamp": "2025-03-03T02:35:41.628Z"
+  },
+  {
+    "action": "displayFusedCursorPrediction",
+    "predictionId": "cf84c659-8b37-415c-b1f2-1d8a6c0018d9",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/pages/Index.ets",
+      "lineNumberOneIndexed": 22,
+      "text": "url: 'pages/AboutMe'\n})\n})\n}\n.height('100%')",
+      "shouldRetriggerCpp": true
+    },
+    "oldText": "",
+    "newText": "",
+    "timestamp": "2025-03-03T02:35:41.630Z"
+  }
+]

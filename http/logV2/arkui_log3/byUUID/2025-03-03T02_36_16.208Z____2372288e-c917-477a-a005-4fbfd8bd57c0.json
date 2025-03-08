@@ -1,0 +1,433 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "2372288e-c917-477a-a005-4fbfd8bd57c0",
+    "timestamp": "2025-03-03T02:36:16.208Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/pages/Index.ets",
+          "diffHistory": [
+            "17-|\n17+|      Button() {\n",
+            "18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Hello World';\n22+|      })\n",
+            "18-|        Text('Click me')\n18+|        Text('Abount')\n",
+            "18-|        Text('Abount')\n18+|        Text('About Me')\n",
+            "21-|        this.message = 'Hello World';\n",
+            "21-|        \n21+|        router.push({\n",
+            "22+|          uri: 'pages/About'\n23+|        })\n",
+            "21-|        router.push({\n21+|        router.pushU({\n",
+            "21-|        router.pushU({\n22-|          uri: 'pages/About'\n21+|        router.pushUrl({\n22+|          url: 'pages/About'\n",
+            "22-|          url: 'pages/About'\n22+|          url: 'pages/AboutMe'\n",
+            "1+|import router from '@ohos.router';\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/pages/AboutMe.ets",
+          "diffHistory": [
+            "1+|@Preview\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/pages/AboutMe.ets",
+        "contents": "@Preview\n",
+        "cursorPosition": {
+          "line": 1,
+          "column": 0
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 10,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/pages/Index.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 31
+            }
+          ],
+          "lastViewedAt": 1740969350213
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1740969376248,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.2998046875,
+      "timeAtRequestSend": 1740969376248
+    },
+    "generateUuid": "2372288e-c917-477a-a005-4fbfd8bd57c0",
+    "timestamp": "2025-03-03T02:36:16.250Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "2372288e-c917-477a-a005-4fbfd8bd57c0",
+    "timestamp": "2025-03-03T02:36:17.105Z"
+  },
+  {
+    "firstChunkValue": "@Preview\n@Entry",
+    "generationUUID": "2372288e-c917-477a-a005-4fbfd8bd57c0",
+    "timestamp": "2025-03-03T02:36:17.161Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "@Preview\n@Entry"
+    },
+    "generationUUID": "2372288e-c917-477a-a005-4fbfd8bd57c0",
+    "timestamp": "2025-03-03T02:36:17.163Z"
+  },
+  {
+    "fullText": "@Preview\n@Entry\n@Component\nstruct AboutMe {\n  @State message: string = 'About Me';\n  \n}\n",
+    "generationUUID": "2372288e-c917-477a-a005-4fbfd8bd57c0",
+    "timestamp": "2025-03-03T02:36:17.286Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "@Preview\n@Entry"
+    },
+    "fullText": "@Preview\n@Entry\n@Component\nstruct AboutMe {\n  @State message: string = 'About Me';\n  \n}\n",
+    "generationUUID": "2372288e-c917-477a-a005-4fbfd8bd57c0",
+    "timestamp": "2025-03-03T02:36:17.287Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "b9ea5965-0e2b-4077-93dc-be6d7d4b4fe4",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 10,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 11,
+      "monotonicallyIncreasingSuggestionId": 30,
+      "range": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 2,
+        "endColumn": 6
+      },
+      "replaceText": "@Preview\n@Entry\n@Component\nstruct AboutMe {\n  @State message: string = 'About Me';\n  \n}\n",
+      "originalText": "@Preview\n@Entr",
+      "startingSuggestionRange": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 2,
+        "endColumn": 6
+      },
+      "diffText": "@Preview\n@Entry\n@Component\nstruct AboutMe {\n  @State message: string = 'About Me';\n  \n}\n",
+      "fullOriginalText": "@Preview\n@Entr",
+      "suggestionTriggerTime": 1740969376197.9001,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "2372288e-c917-477a-a005-4fbfd8bd57c0",
+      "selection": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 2,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "b44ffc5b-79b8-47f3-bb07-285a6e0a7d5e",
+      "undoRedoGroup": {
+        "id": 31,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "2372288e-c917-477a-a005-4fbfd8bd57c0",
+    "timestamp": "2025-03-03T02:36:17.288Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "b44ffc5b-79b8-47f3-bb07-285a6e0a7d5e",
+    "generationUUID": "2372288e-c917-477a-a005-4fbfd8bd57c0",
+    "timestamp": "2025-03-03T02:36:17.289Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "@Preview\n@Entry"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "b44ffc5b-79b8-47f3-bb07-285a6e0a7d5e",
+    "generationUUID": "2372288e-c917-477a-a005-4fbfd8bd57c0",
+    "timestamp": "2025-03-03T02:36:17.289Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "b44ffc5b-79b8-47f3-bb07-285a6e0a7d5e",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-03T02:36:17.291Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "68447a07-1508-4daa-9115-29527e44a7eb",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 10,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 10,
+      "monotonicallyIncreasingSuggestionId": 29,
+      "range": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 2,
+        "endColumn": 1
+      },
+      "replaceText": "@Preview\n@Entry",
+      "originalText": "@Preview\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 2,
+        "endColumn": 1
+      },
+      "diffText": "@Preview\n@Entry",
+      "fullOriginalText": "@Preview\n",
+      "suggestionTriggerTime": 1740969376197.9001,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "2372288e-c917-477a-a005-4fbfd8bd57c0",
+      "selection": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 2,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 30,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "d;40",
+      "onAcceptDisplayId": "b9ea5965-0e2b-4077-93dc-be6d7d4b4fe4"
+    },
+    "generationUUID": "2372288e-c917-477a-a005-4fbfd8bd57c0",
+    "timestamp": "2025-03-03T02:36:17.919Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "68447a07-1508-4daa-9115-29527e44a7eb",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 10,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 10,
+      "monotonicallyIncreasingSuggestionId": 29,
+      "range": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 2,
+        "endColumn": 1
+      },
+      "replaceText": "@Preview\n@Entry",
+      "originalText": "@Preview\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 2,
+        "endColumn": 1
+      },
+      "diffText": "@Preview\n@Entry",
+      "fullOriginalText": "@Preview\n",
+      "suggestionTriggerTime": 1740969376197.9001,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "2372288e-c917-477a-a005-4fbfd8bd57c0",
+      "selection": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 2,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 30,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "d;40",
+      "onAcceptDisplayId": "b9ea5965-0e2b-4077-93dc-be6d7d4b4fe4"
+    },
+    "generationUUID": "2372288e-c917-477a-a005-4fbfd8bd57c0",
+    "timestamp": "2025-03-03T02:36:17.924Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "b9ea5965-0e2b-4077-93dc-be6d7d4b4fe4",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 10,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 11,
+      "monotonicallyIncreasingSuggestionId": 30,
+      "range": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 2,
+        "endColumn": 6
+      },
+      "replaceText": "@Preview\n@Entry\n@Component\nstruct AboutMe {\n  @State message: string = 'About Me';\n  \n}\n",
+      "originalText": "@Preview\n@Entr",
+      "startingSuggestionRange": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 2,
+        "endColumn": 6
+      },
+      "diffText": "@Preview\n@Entry\n@Component\nstruct AboutMe {\n  @State message: string = 'About Me';\n  \n}\n",
+      "fullOriginalText": "@Preview\n@Entr",
+      "suggestionTriggerTime": 1740969376197.9001,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "2372288e-c917-477a-a005-4fbfd8bd57c0",
+      "selection": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 2,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "b44ffc5b-79b8-47f3-bb07-285a6e0a7d5e",
+      "undoRedoGroup": {
+        "id": 31,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "d;46"
+    },
+    "generationUUID": "2372288e-c917-477a-a005-4fbfd8bd57c0",
+    "timestamp": "2025-03-03T02:36:18.957Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "b9ea5965-0e2b-4077-93dc-be6d7d4b4fe4",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 10,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 11,
+      "monotonicallyIncreasingSuggestionId": 30,
+      "range": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 2,
+        "endColumn": 6
+      },
+      "replaceText": "@Preview\n@Entry\n@Component\nstruct AboutMe {\n  @State message: string = 'About Me';\n  \n}\n",
+      "originalText": "@Preview\n@Entr",
+      "startingSuggestionRange": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 2,
+        "endColumn": 6
+      },
+      "diffText": "@Preview\n@Entry\n@Component\nstruct AboutMe {\n  @State message: string = 'About Me';\n  \n}\n",
+      "fullOriginalText": "@Preview\n@Entr",
+      "suggestionTriggerTime": 1740969376197.9001,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "2372288e-c917-477a-a005-4fbfd8bd57c0",
+      "selection": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 2,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "b44ffc5b-79b8-47f3-bb07-285a6e0a7d5e",
+      "undoRedoGroup": {
+        "id": 31,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "d;46"
+    },
+    "generationUUID": "2372288e-c917-477a-a005-4fbfd8bd57c0",
+    "timestamp": "2025-03-03T02:36:18.962Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "b44ffc5b-79b8-47f3-bb07-285a6e0a7d5e",
+    "fusedCursorPrediction": null,
+    "oldText": "@Preview\n@Entr",
+    "newText": "@Preview\n@Entry\n@Component\nstruct AboutMe {\n  @State message: string = 'About Me';\n  \n}\n",
+    "timestamp": "2025-03-03T02:36:18.962Z"
+  }
+]

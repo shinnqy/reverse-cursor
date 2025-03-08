@@ -1,0 +1,210 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "7440512e-fd02-42d0-88a3-32faaec2b14c",
+    "timestamp": "2025-03-03T02:36:12.511Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/pages/Index.ets",
+          "diffHistory": [
+            "17-|\n17+|      Button() {\n",
+            "18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Hello World';\n22+|      })\n",
+            "18-|        Text('Click me')\n18+|        Text('Abount')\n",
+            "18-|        Text('Abount')\n18+|        Text('About Me')\n",
+            "21-|        this.message = 'Hello World';\n",
+            "21-|        \n21+|        router.push({\n",
+            "22+|          uri: 'pages/About'\n23+|        })\n",
+            "21-|        router.push({\n21+|        router.pushU({\n",
+            "21-|        router.pushU({\n22-|          uri: 'pages/About'\n21+|        router.pushUrl({\n22+|          url: 'pages/About'\n",
+            "22-|          url: 'pages/About'\n22+|          url: 'pages/AboutMe'\n",
+            "1+|import router from '@ohos.router';\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/pages/AboutMe.ets",
+          "diffHistory": [
+            "1+|@Pre\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/pages/AboutMe.ets",
+        "contents": "@Pre",
+        "cursorPosition": {
+          "line": 0,
+          "column": 4
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 5,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/pages/Index.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 31
+            }
+          ],
+          "lastViewedAt": 1740969350213
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1740969372549,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.39990234375,
+      "timeAtRequestSend": 1740969372550
+    },
+    "generateUuid": "7440512e-fd02-42d0-88a3-32faaec2b14c",
+    "timestamp": "2025-03-03T02:36:12.552Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "7440512e-fd02-42d0-88a3-32faaec2b14c",
+    "timestamp": "2025-03-03T02:36:12.950Z"
+  },
+  {
+    "firstChunkValue": "@Previewer",
+    "generationUUID": "7440512e-fd02-42d0-88a3-32faaec2b14c",
+    "timestamp": "2025-03-03T02:36:12.997Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "@Previewer"
+    },
+    "generationUUID": "7440512e-fd02-42d0-88a3-32faaec2b14c",
+    "timestamp": "2025-03-03T02:36:13.002Z"
+  },
+  {
+    "fullText": "@Previewer\n@Entry\n@Component\nstruct AboutMe {\n  @State message: string = 'About Me';\n}\n",
+    "generationUUID": "7440512e-fd02-42d0-88a3-32faaec2b14c",
+    "timestamp": "2025-03-03T02:36:13.127Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "@Previewer"
+    },
+    "fullText": "@Previewer\n@Entry\n@Component\nstruct AboutMe {\n  @State message: string = 'About Me';\n}\n",
+    "generationUUID": "7440512e-fd02-42d0-88a3-32faaec2b14c",
+    "timestamp": "2025-03-03T02:36:13.129Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "56b8fb78-63cd-4c7b-b488-9a34faafae8c",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 5,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 6,
+      "monotonicallyIncreasingSuggestionId": 28,
+      "range": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 1,
+        "endColumn": 10
+      },
+      "replaceText": "@Previewer\n@Entry\n@Component\nstruct AboutMe {\n  @State message: string = 'About Me';\n}\n",
+      "originalText": "@Previewe",
+      "startingSuggestionRange": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 1,
+        "endColumn": 10
+      },
+      "diffText": "@Previewer\n@Entry\n@Component\nstruct AboutMe {\n  @State message: string = 'About Me';\n}\n",
+      "fullOriginalText": "@Previewe",
+      "suggestionTriggerTime": 1740969372498.9001,
+      "greens": [],
+      "source": "typing",
+      "requestId": "7440512e-fd02-42d0-88a3-32faaec2b14c",
+      "selection": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 1,
+        "endColumn": 5
+      },
+      "fusedCursorPredictionId": "b23f4318-3dd3-44b2-8aa5-288142f96854",
+      "undoRedoGroup": {
+        "id": 29,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "7440512e-fd02-42d0-88a3-32faaec2b14c",
+    "timestamp": "2025-03-03T02:36:13.130Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "b23f4318-3dd3-44b2-8aa5-288142f96854",
+    "generationUUID": "7440512e-fd02-42d0-88a3-32faaec2b14c",
+    "timestamp": "2025-03-03T02:36:13.131Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "@Previewer"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "b23f4318-3dd3-44b2-8aa5-288142f96854",
+    "generationUUID": "7440512e-fd02-42d0-88a3-32faaec2b14c",
+    "timestamp": "2025-03-03T02:36:13.131Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "b23f4318-3dd3-44b2-8aa5-288142f96854",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-03T02:36:13.132Z"
+  }
+]
