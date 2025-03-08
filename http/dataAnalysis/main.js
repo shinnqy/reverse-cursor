@@ -107,8 +107,8 @@ function formatByGeneratedUUID(formattedJSONPath) {
     }
   }
 
-  const completeDatasetJSONLFilePath = path.join(path.dirname(formattedJSONPath), `${logFileName}_dataset_complete.jsonl`);
-  const editDatasetJSONLFilePath = path.join(path.dirname(formattedJSONPath), `${logFileName}_dataset_edit.jsonl`);
+  const completeDatasetJSONLFilePath = path.join(path.dirname(formattedJSONPath), `${logFileName}_dataset_deprecated_complete.jsonl`);
+  const editDatasetJSONLFilePath = path.join(path.dirname(formattedJSONPath), `${logFileName}_dataset_deprecated_edit.jsonl`);
   const predictionDatasetJSONLFilePath = path.join(path.dirname(formattedJSONPath), `${logFileName}_dataset_prediction.jsonl`);
   fs.writeFileSync(completeDatasetJSONLFilePath, '', { encoding: 'utf-8' });
   fs.writeFileSync(predictionDatasetJSONLFilePath, '', { encoding: 'utf-8' });
