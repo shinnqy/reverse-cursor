@@ -32,7 +32,7 @@ function generateDataset(params) {
 
   if (!firstChunkValue) {
     console.log('No response for this request');
-    return;
+    return { promptFilePath: '' };
   }
 
   //
@@ -117,6 +117,10 @@ function generateDataset(params) {
     replacedContentsWithCursorPosition,
     fullText,
   });
+
+  return {
+    promptFilePath: fs.existsSync(promptFilePath) ? promptFilePath : '',
+  }
 }
 
 

@@ -15,8 +15,11 @@ const completionUrl = envObject['AZURE_OPENAI_COMPLETION_URL'];
 
 const useDeepSeek = true;
 async function completion(code = "hi") {
+  const startTime = performance.now();
+
+  let fetchRes;
   if (useDeepSeek) {
-    const fetchRes = await fetch(dsUrl, {
+    fetchRes = await fetch(dsUrl, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': envObject['DEEPSEEK_KEY']
@@ -37,41 +40,44 @@ async function completion(code = "hi") {
         ],
       })
     });
-
-    const res = await fetchRes.json();
-
-    const data = res.choices[0].message.content;
-    return data
+  } else {
+    fetchRes = await fetch(completionUrl, {
+      headers: {
+        'Content-Type': 'application/json',
+        'api-key': envObject['AZURE_OPENAI_KEY']
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        temperature: 1,
+        messages: [
+          // {
+          //   role: 'system',
+          //   content: 'You are an expert of coding. Please help me to generate the next code.'
+          // },
+          {
+            role: 'user',
+            content: code
+          }
+        ],
+      })
+    });
   }
-  const fetchRes = await fetch(completionUrl, {
-    headers: {
-      'Content-Type': 'application/json',
-      'api-key': envObject['AZURE_OPENAI_KEY']
-    },
-    method: 'POST',
-    body: JSON.stringify({
-      temperature: 1,
-      messages: [
-        // {
-        //   role: 'system',
-        //   content: 'You are an expert of coding. Please help me to generate the next code.'
-        // },
-        {
-          role: 'user',
-          content: code
-        }
-      ],
-    })
-  });
 
   const res = await fetchRes.json();
+
+  const endTime = performance.now();
+  console.log('Duration LLM call: ', endTime - startTime);
 
   const data = res.choices[0].message.content;
   return data
 }
 
-const editSample = path.resolve(__dirname, '../logV2/trafficLight3/byUUID/2025-03-02T14_51_26.791Z____605959bf-9dfd-4480-b204-8d2fa0b0117d.prompt')
-const input = fs.readFileSync(editSample, { encoding: 'utf-8' });
-completion(input).then(output => {
-  console.log({output})
-});
+module.exports = {
+  completion,
+};
+
+// const editSample = path.resolve(__dirname, '../logV2/trafficLight3/byUUID/2025-03-02T14_51_26.791Z____605959bf-9dfd-4480-b204-8d2fa0b0117d.prompt')
+// const input = fs.readFileSync(editSample, { encoding: 'utf-8' });
+// completion(input).then(output => {
+//   console.log({output})
+// });
