@@ -1,101 +1,101 @@
-You're a code assistant. Your task is to help the user update the code around current cursor position.
+You're an expert in TypeScript. Your task is to help the user update the code around current cursor position.
 
 ## Recent Actions
-Here is what the user has been doing:
+Here is what the user has been doing from the earliest to the latest:
 
 File: src/components/test.ts
-6-|    case light.GREEN:
-7-|      console.log('GREEN');
-8-|      break;
-9-|    case light.YELLOW:
-10-|      console.log('YELLOW');
-11-|      break;
-12-|    default:
-13-|      console.log('Invalid light');
+deleted the code `    case light.GREEN:` in line 6
+deleted the code `      console.log('GREEN');` in line 7
+deleted the code `      break;` in line 8
+deleted the code `    case light.YELLOW:` in line 9
+deleted the code `      console.log('YELLOW');` in line 10
+deleted the code `      break;` in line 11
+deleted the code `    default:` in line 12
+deleted the code `      console.log('Invalid light');` in line 13
 
-6+|    case light.GREEN:
-7+|      console.log('GREEN');
-8+|      break;
-9+|    case light.YELLOW:
-10+|      console.log('YELLOW');
-11+|      break;
+added the code `    case light.GREEN:` in line 6
+added the code `      console.log('GREEN');` in line 7
+added the code `      break;` in line 8
+added the code `    case light.YELLOW:` in line 9
+added the code `      console.log('YELLOW');` in line 10
+added the code `      break;` in line 11
 
-11-|      break;  
-12-|
-11+|      break;
-12+|    default:
-13+|      console.log('Invalid light');
+deleted the code `      break;  ` in line 11
+deleted the code `` in line 12
+added the code `      break;` in line 11
+added the code `    default:` in line 12
+added the code `      console.log('Invalid light');` in line 13
 
-6-|    case light.GREEN:
-7-|      console.log('GREEN');
-8-|      break;
-9-|    case light.YELLOW:
-10-|      console.log('YELLOW');
-11-|      break;
-12-|    default:
-13-|      console.log('Invalid light');
+deleted the code `    case light.GREEN:` in line 6
+deleted the code `      console.log('GREEN');` in line 7
+deleted the code `      break;` in line 8
+deleted the code `    case light.YELLOW:` in line 9
+deleted the code `      console.log('YELLOW');` in line 10
+deleted the code `      break;` in line 11
+deleted the code `    default:` in line 12
+deleted the code `      console.log('Invalid light');` in line 13
 
-6+|    case light.GREEN:
-7+|      console.log('GREEN');
-8+|      break;
-9+|    case light.YELLOW:
-10+|      console.log('YELLOW');
-11+|      break;
+added the code `    case light.GREEN:` in line 6
+added the code `      console.log('GREEN');` in line 7
+added the code `      break;` in line 8
+added the code `    case light.YELLOW:` in line 9
+added the code `      console.log('YELLOW');` in line 10
+added the code `      break;` in line 11
 
-12+|    default:
-13+|      console.log('Invalid light');
+added the code `    default:` in line 12
+added the code `      console.log('Invalid light');` in line 13
 
-6-|    case light.GREEN:
-7-|      console.log('GREEN');
-8-|      break;
-9-|    case light.YELLOW:
-10-|      console.log('YELLOW');
-11-|      break;
-12-|    default:
-13-|      console.log('Invalid light');
+deleted the code `    case light.GREEN:` in line 6
+deleted the code `      console.log('GREEN');` in line 7
+deleted the code `      break;` in line 8
+deleted the code `    case light.YELLOW:` in line 9
+deleted the code `      console.log('YELLOW');` in line 10
+deleted the code `      break;` in line 11
+deleted the code `    default:` in line 12
+deleted the code `      console.log('Invalid light');` in line 13
 
-6+|    case light.YELLOW:
-7+|      console.log('YELLOW');
-8+|      break;
-9+|    default:
-10+|      console.log('Invalid light');
+added the code `    case light.YELLOW:` in line 6
+added the code `      console.log('YELLOW');` in line 7
+added the code `      break;` in line 8
+added the code `    default:` in line 9
+added the code `      console.log('Invalid light');` in line 10
 
-6-|    case light.YELLOW:
-7-|      console.log('YELLOW');
-8-|      break;
-9-|    default:
-10-|      console.log('Invalid light');
-12-|}
-7+|} 
+deleted the code `    case light.YELLOW:` in line 6
+deleted the code `      console.log('YELLOW');` in line 7
+deleted the code `      break;` in line 8
+deleted the code `    default:` in line 9
+deleted the code `      console.log('Invalid light');` in line 10
+deleted the code `}` in line 12
+added the code `} ` in line 7
 
-6+|    case light.YELLOW:
-7+|      console.log('YELLOW');
-8+|      break;
-9+|    default:
-10+|      console.log('Invalid light');
+added the code `    case light.YELLOW:` in line 6
+added the code `      console.log('YELLOW');` in line 7
+added the code `      break;` in line 8
+added the code `    default:` in line 9
+added the code `      console.log('Invalid light');` in line 10
 
-11+|      break;
+added the code `      break;` in line 11
 
-1+|shared/types/traffic-light.ts
-2+|
+added the code `shared/types/traffic-light.ts` in line 1
+added the code `` in line 2
 
-1-|shared/types/traffic-light.ts
-1+|import { TrafficLight } from '@shared/types/traffic-light';
+deleted the code `shared/types/traffic-light.ts` in line 1
+added the code `import { TrafficLight } from '@shared/types/traffic-light';` in line 1
 
-5-|    case light.RED:
-5+|    case light.Red:
+deleted the code `    case light.RED:` in line 5
+added the code `    case light.Red:` in line 5
 
-8-|    case light.YELLOW:
-8+|    case light.Yellow:
+deleted the code `    case light.YELLOW:` in line 8
+added the code `    case light.Yellow:` in line 8
 
-1-|import { TrafficLight } from '@shared/types/traffic-light';
+deleted the code `import { TrafficLight } from '@shared/types/traffic-light';` in line 1
 
-9+|    case light.Green:
-10+|      console.log('GREEN');
-11+|      break;
+added the code `    case light.Green:` in line 9
+added the code `      console.log('GREEN');` in line 10
+added the code `      break;` in line 11
 
-4-|      console.log('RED');
-4+|      console.log('');
+deleted the code `      console.log('RED');` in line 4
+added the code `      console.log('');` in line 4
 
 
 ## Current Code
@@ -123,4 +123,14 @@ function changeLight(light: TrafficLight) {
 }
 ```
 
-As an intelligent code assistant, your role is to analyze what the user has been doing and then to output the code from the first column of the line of <|current_cursor_position|> with the updated changes without any other words:
+## Task
+Rewrite the code from the first column of the line of <|current_cursor_position|> according to the following requirements:
+1. Enforce PascalCase naming for all enum members
+2. Propagate naming convention changes to all related cases
+3. Preserve original functionality
+4. Apply changes to entire code regardless of cursor position
+5. Focus on code after cursor position
+
+# Output Format
+Return ONLY the rewritten code from the first column of the line of cursor position without any other words.
+Do NOT include unchanged code before cursor.
