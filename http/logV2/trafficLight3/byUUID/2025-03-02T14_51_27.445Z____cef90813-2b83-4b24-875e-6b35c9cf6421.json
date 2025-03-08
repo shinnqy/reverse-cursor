@@ -1,0 +1,137 @@
+[
+  {
+    "intent": "cursor_prediction",
+    "generationUUID": "cef90813-2b83-4b24-875e-6b35c9cf6421",
+    "timestamp": "2025-03-02T14:51:27.445Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "src/components/test.ts",
+          "diffHistory": [
+            "6-|    case light.GREEN:\n7-|      console.log('GREEN');\n8-|      break;\n9-|    case light.YELLOW:\n10-|      console.log('YELLOW');\n11-|      break;\n12-|    default:\n13-|      console.log('Invalid light');\n",
+            "6+|    case light.GREEN:\n7+|      console.log('GREEN');\n8+|      break;\n9+|    case light.YELLOW:\n10+|      console.log('YELLOW');\n11+|      break;\n",
+            "11-|      break;  \n12-|\n11+|      break;\n12+|    default:\n13+|      console.log('Invalid light');\n",
+            "6-|    case light.GREEN:\n7-|      console.log('GREEN');\n8-|      break;\n9-|    case light.YELLOW:\n10-|      console.log('YELLOW');\n11-|      break;\n12-|    default:\n13-|      console.log('Invalid light');\n",
+            "6+|    case light.GREEN:\n7+|      console.log('GREEN');\n8+|      break;\n9+|    case light.YELLOW:\n10+|      console.log('YELLOW');\n11+|      break;\n",
+            "12+|    default:\n13+|      console.log('Invalid light');\n",
+            "6-|    case light.GREEN:\n7-|      console.log('GREEN');\n8-|      break;\n9-|    case light.YELLOW:\n10-|      console.log('YELLOW');\n11-|      break;\n12-|    default:\n13-|      console.log('Invalid light');\n",
+            "6+|    case light.YELLOW:\n7+|      console.log('YELLOW');\n8+|      break;\n9+|    default:\n10+|      console.log('Invalid light');\n",
+            "6-|    case light.YELLOW:\n7-|      console.log('YELLOW');\n8-|      break;\n9-|    default:\n10-|      console.log('Invalid light');\n12-|}\n7+|} \n",
+            "6+|    case light.YELLOW:\n7+|      console.log('YELLOW');\n8+|      break;\n9+|    default:\n10+|      console.log('Invalid light');\n",
+            "11+|      break;\n",
+            "1+|shared/types/traffic-light.ts\n2+|\n",
+            "1-|shared/types/traffic-light.ts\n1+|import { TrafficLight } from '@shared/types/traffic-light';\n",
+            "5-|    case light.RED:\n5+|    case light.Red:\n",
+            "8-|    case light.YELLOW:\n8+|    case light.Yellow:\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "linterErrors": {
+        "relativeWorkspacePath": "src/components/test.ts",
+        "errors": [
+          {
+            "message": "'changeLight' is defined but never used.",
+            "range": {
+              "startPosition": {
+                "line": 3,
+                "column": 10
+              },
+              "endPosition": {
+                "line": 3,
+                "column": 21
+              }
+            },
+            "source": "eslint",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          },
+          {
+            "message": "Cannot find module '@shared/types/traffic-light' or its corresponding type declarations.",
+            "range": {
+              "startPosition": {
+                "line": 1,
+                "column": 30
+              },
+              "endPosition": {
+                "line": 1,
+                "column": 59
+              }
+            },
+            "source": "ts",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          }
+        ],
+        "fileContents": ""
+      },
+      "currentFile": {
+        "relativeWorkspacePath": "src/components/test.ts",
+        "contents": "import { TrafficLight } from '@shared/types/traffic-light';\n\nfunction changeLight(light: TrafficLight) {\n  switch (light) {\n    case light.Red:\n      console.log('RED');\n      break;\n    case light.Yellow:\n      console.log('YELLOW');\n      break;\n    default:\n      console.log('Invalid light');\n      break;\n  }\n}",
+        "cursorPosition": {
+          "line": 0,
+          "column": 0
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 82,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/Documents/personal/vite-react-demo2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "cursor_prediction"
+      },
+      "clientTime": 1740927087452,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "8u65ni1hw3pqzyyqn4vyf",
+      "timeSinceRequestStart": 7.699951171875,
+      "timeAtRequestSend": 1740927087452
+    },
+    "generateUuid": "cef90813-2b83-4b24-875e-6b35c9cf6421",
+    "timestamp": "2025-03-02T14:51:27.453Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "cef90813-2b83-4b24-875e-6b35c9cf6421",
+    "timestamp": "2025-03-02T14:51:27.826Z"
+  },
+  {
+    "firstChunkValue": "import { TrafficLight } from '@shared/types/traffic-light';\n\nfunction changeLight(light: TrafficLight) {\n  switch (light) {",
+    "generationUUID": "cef90813-2b83-4b24-875e-6b35c9cf6421",
+    "timestamp": "2025-03-02T14:51:27.827Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": false
+    },
+    "generationUUID": "cef90813-2b83-4b24-875e-6b35c9cf6421",
+    "timestamp": "2025-03-02T14:51:27.828Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "df84884a-6182-4a0a-af4e-3452dfa9971a",
+    "generationUUID": "cef90813-2b83-4b24-875e-6b35c9cf6421",
+    "timestamp": "2025-03-02T14:51:27.992Z"
+  }
+]

@@ -1,0 +1,325 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "3937e3d6-b15e-4348-a97c-771abd6fb461",
+    "timestamp": "2025-03-02T14:51:00.401Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "src/components/test.ts",
+          "diffHistory": [
+            "6-|    case light.GREEN:\n7-|      console.log('GREEN');\n8-|      break;\n9-|    case light.YELLOW:\n10-|      console.log('YELLOW');\n11-|      break;\n12-|    default:\n13-|      console.log('Invalid light');\n",
+            "6+|    case light.GREEN:\n7+|      console.log('GREEN');\n8+|      break;\n9+|    case light.YELLOW:\n10+|      console.log('YELLOW');\n11+|      break;\n",
+            "11-|      break;  \n12-|\n11+|      break;\n12+|    default:\n13+|      console.log('Invalid light');\n",
+            "6-|    case light.GREEN:\n7-|      console.log('GREEN');\n8-|      break;\n9-|    case light.YELLOW:\n10-|      console.log('YELLOW');\n11-|      break;\n12-|    default:\n13-|      console.log('Invalid light');\n",
+            "6+|    case light.GREEN:\n7+|      console.log('GREEN');\n8+|      break;\n9+|    case light.YELLOW:\n10+|      console.log('YELLOW');\n11+|      break;\n",
+            "12+|    default:\n13+|      console.log('Invalid light');\n",
+            "6-|    case light.GREEN:\n7-|      console.log('GREEN');\n8-|      break;\n9-|    case light.YELLOW:\n10-|      console.log('YELLOW');\n11-|      break;\n12-|    default:\n13-|      console.log('Invalid light');\n",
+            "6+|    case light.YELLOW:\n7+|      console.log('YELLOW');\n8+|      break;\n9+|    default:\n10+|      console.log('Invalid light');\n",
+            "6-|    case light.YELLOW:\n7-|      console.log('YELLOW');\n8-|      break;\n9-|    default:\n10-|      console.log('Invalid light');\n12-|}\n7+|} \n",
+            "6+|    case light.YELLOW:\n7+|      console.log('YELLOW');\n8+|      break;\n9+|    default:\n10+|      console.log('Invalid light');\n",
+            "11+|      \n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "linterErrors": {
+        "relativeWorkspacePath": "src/components/test.ts",
+        "errors": [
+          {
+            "message": "'changeLight' is defined but never used.",
+            "range": {
+              "startPosition": {
+                "line": 1,
+                "column": 10
+              },
+              "endPosition": {
+                "line": 1,
+                "column": 21
+              }
+            },
+            "source": "eslint",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          },
+          {
+            "message": "Cannot find name 'TrafficLight'.",
+            "range": {
+              "startPosition": {
+                "line": 1,
+                "column": 29
+              },
+              "endPosition": {
+                "line": 1,
+                "column": 41
+              }
+            },
+            "source": "ts",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          }
+        ],
+        "fileContents": ""
+      },
+      "currentFile": {
+        "relativeWorkspacePath": "src/components/test.ts",
+        "contents": "function changeLight(light: TrafficLight) {\n  switch (light) {\n    case light.RED:\n      console.log('RED');\n      break;\n    case light.YELLOW:\n      console.log('YELLOW');\n      break;\n    default:\n      console.log('Invalid light');\n      \n  }\n}",
+        "cursorPosition": {
+          "line": 10,
+          "column": 6
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 70,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/Documents/personal/vite-react-demo2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1740927060446,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "8u65ni1hw3pqzyyqn4vyf",
+      "timeSinceRequestStart": 51.199951171875,
+      "timeAtRequestSend": 1740927060446
+    },
+    "generateUuid": "3937e3d6-b15e-4348-a97c-771abd6fb461",
+    "timestamp": "2025-03-02T14:51:00.449Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "3937e3d6-b15e-4348-a97c-771abd6fb461",
+    "timestamp": "2025-03-02T14:51:00.995Z"
+  },
+  {
+    "firstChunkValue": "      break;\n    default:\n      console.log('Invalid light');\n      break;\n  }\n}",
+    "generationUUID": "3937e3d6-b15e-4348-a97c-771abd6fb461",
+    "timestamp": "2025-03-02T14:51:00.997Z"
+  },
+  {
+    "fullText": "      break;\n    default:\n      console.log('Invalid light');\n      break;\n  }\n}",
+    "generationUUID": "3937e3d6-b15e-4348-a97c-771abd6fb461",
+    "timestamp": "2025-03-02T14:51:00.997Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "      break;\n    default:\n      console.log('Invalid light');\n      break;\n  }\n}"
+    },
+    "generationUUID": "3937e3d6-b15e-4348-a97c-771abd6fb461",
+    "timestamp": "2025-03-02T14:51:00.998Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "      break;\n    default:\n      console.log('Invalid light');\n      break;\n  }\n}"
+    },
+    "fullText": "      break;\n    default:\n      console.log('Invalid light');\n      break;\n  }\n}",
+    "generationUUID": "3937e3d6-b15e-4348-a97c-771abd6fb461",
+    "timestamp": "2025-03-02T14:51:01.001Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "generationUUID": "3937e3d6-b15e-4348-a97c-771abd6fb461",
+    "timestamp": "2025-03-02T14:51:01.002Z"
+  },
+  {
+    "fusedCursorPrediction": {
+      "relativePath": "src/components/test.ts",
+      "lineNumberOneIndexed": 1,
+      "text": "function changeLight(light: TrafficLight) {\nswitch (light) {\ncase light.RED:\nconsole.log('RED');\nbreak;",
+      "shouldRetriggerCpp": true
+    },
+    "predictionId": "066244d1-e417-4e33-bf6e-d5a9612afffc",
+    "generationUUID": "3937e3d6-b15e-4348-a97c-771abd6fb461",
+    "timestamp": "2025-03-02T14:51:01.076Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "      break;\n    default:\n      console.log('Invalid light');\n      break;\n  }\n}"
+    },
+    "fusedCursorPrediction": {
+      "relativePath": "src/components/test.ts",
+      "lineNumberOneIndexed": 1,
+      "text": "function changeLight(light: TrafficLight) {\nswitch (light) {\ncase light.RED:\nconsole.log('RED');\nbreak;",
+      "shouldRetriggerCpp": true
+    },
+    "predictionId": "066244d1-e417-4e33-bf6e-d5a9612afffc",
+    "generationUUID": "3937e3d6-b15e-4348-a97c-771abd6fb461",
+    "timestamp": "2025-03-02T14:51:01.077Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "066244d1-e417-4e33-bf6e-d5a9612afffc",
+    "fusedCursorPrediction": {
+      "relativePath": "src/components/test.ts",
+      "lineNumberOneIndexed": 1,
+      "text": "function changeLight(light: TrafficLight) {\nswitch (light) {\ncase light.RED:\nconsole.log('RED');\nbreak;",
+      "shouldRetriggerCpp": true
+    },
+    "timestamp": "2025-03-02T14:51:01.077Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "1b602924-3340-44fd-bac6-7f71044669ac",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/Documents/personal/vite-react-demo2/src/components/test.ts",
+        "external": "file:///Users/shinn/Documents/personal/vite-react-demo2/src/components/test.ts",
+        "path": "/Users/shinn/Documents/personal/vite-react-demo2/src/components/test.ts",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 70,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 70,
+      "monotonicallyIncreasingSuggestionId": 36,
+      "range": {
+        "startLineNumber": 8,
+        "startColumn": 1,
+        "endLineNumberInclusive": 13,
+        "endColumn": 2
+      },
+      "replaceText": "      break;\n    default:\n      console.log('Invalid light');\n      break;\n  }\n}",
+      "originalText": "      break;\n    default:\n      console.log('Invalid light');\n      \n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 8,
+        "startColumn": 1,
+        "endLineNumberInclusive": 13,
+        "endColumn": 2
+      },
+      "diffText": "      break;\n    default:\n      console.log('Invalid light');\n      break;\n  }\n}",
+      "fullOriginalText": "      break;\n    default:\n      console.log('Invalid light');\n      \n  }\n}",
+      "suggestionTriggerTime": 1740927060394.2,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "3937e3d6-b15e-4348-a97c-771abd6fb461",
+      "selection": {
+        "startLineNumber": 8,
+        "startColumn": 1,
+        "endLineNumberInclusive": 13,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "066244d1-e417-4e33-bf6e-d5a9612afffc",
+      "undoRedoGroup": {
+        "id": 36,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;259"
+    },
+    "generationUUID": "3937e3d6-b15e-4348-a97c-771abd6fb461",
+    "timestamp": "2025-03-02T14:51:01.353Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "1b602924-3340-44fd-bac6-7f71044669ac",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/Documents/personal/vite-react-demo2/src/components/test.ts",
+        "external": "file:///Users/shinn/Documents/personal/vite-react-demo2/src/components/test.ts",
+        "path": "/Users/shinn/Documents/personal/vite-react-demo2/src/components/test.ts",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 70,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 70,
+      "monotonicallyIncreasingSuggestionId": 36,
+      "range": {
+        "startLineNumber": 8,
+        "startColumn": 1,
+        "endLineNumberInclusive": 13,
+        "endColumn": 2
+      },
+      "replaceText": "      break;\n    default:\n      console.log('Invalid light');\n      break;\n  }\n}",
+      "originalText": "      break;\n    default:\n      console.log('Invalid light');\n      \n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 8,
+        "startColumn": 1,
+        "endLineNumberInclusive": 13,
+        "endColumn": 2
+      },
+      "diffText": "      break;\n    default:\n      console.log('Invalid light');\n      break;\n  }\n}",
+      "fullOriginalText": "      break;\n    default:\n      console.log('Invalid light');\n      \n  }\n}",
+      "suggestionTriggerTime": 1740927060394.2,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "3937e3d6-b15e-4348-a97c-771abd6fb461",
+      "selection": {
+        "startLineNumber": 8,
+        "startColumn": 1,
+        "endLineNumberInclusive": 13,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "066244d1-e417-4e33-bf6e-d5a9612afffc",
+      "undoRedoGroup": {
+        "id": 36,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;259"
+    },
+    "generationUUID": "3937e3d6-b15e-4348-a97c-771abd6fb461",
+    "timestamp": "2025-03-02T14:51:01.366Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "066244d1-e417-4e33-bf6e-d5a9612afffc",
+    "fusedCursorPrediction": {
+      "relativePath": "src/components/test.ts",
+      "lineNumberOneIndexed": 1,
+      "text": "function changeLight(light: TrafficLight) {\nswitch (light) {\ncase light.RED:\nconsole.log('RED');\nbreak;",
+      "shouldRetriggerCpp": true
+    },
+    "oldText": "      break;\n    default:\n      console.log('Invalid light');\n      \n  }\n}",
+    "newText": "      break;\n    default:\n      console.log('Invalid light');\n      break;\n  }\n}",
+    "timestamp": "2025-03-02T14:51:01.368Z"
+  },
+  {
+    "action": "displayFusedCursorPrediction",
+    "predictionId": "066244d1-e417-4e33-bf6e-d5a9612afffc",
+    "fusedCursorPrediction": {
+      "relativePath": "src/components/test.ts",
+      "lineNumberOneIndexed": 1,
+      "text": "function changeLight(light: TrafficLight) {\nswitch (light) {\ncase light.RED:\nconsole.log('RED');\nbreak;",
+      "shouldRetriggerCpp": true
+    },
+    "oldText": "      break;\n    default:\n      console.log('Invalid light');\n      \n  }\n}",
+    "newText": "      break;\n    default:\n      console.log('Invalid light');\n      break;\n  }\n}",
+    "timestamp": "2025-03-02T14:51:01.369Z"
+  }
+]
