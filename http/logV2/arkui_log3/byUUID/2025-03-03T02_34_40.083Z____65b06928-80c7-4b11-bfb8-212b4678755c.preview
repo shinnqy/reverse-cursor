@@ -1,0 +1,44 @@
+{"line":16,"column":4}
+
+======== fileDiffHistories ========
+
+File: entry/src/main/ets/pages/Index.ets
+17-|\n17+|    \n
+
+======== processedCurrentFileContents ========
+@Entry
+@Component
+struct Index {
+  @State message: string = 'Hello World';
+
+  build() {
+    RelativeContainer() {
+      Text(this.message)
+        .id('HelloWorld')
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+        .alignRules({
+          center: { anchor: '__container__', align: VerticalAlign.Center },
+          middle: { anchor: '__container__', align: HorizontalAlign.Center }
+        })
+
+    [ToFill]
+    }
+    .height('100%')
+    .width('100%')
+  }
+}
+======== firstChunkValue ========
+
+      Button('Click me') {
+    }
+    .height('100%')
+    .width('100%')
+======== fullText ========
+
+      Button('Click me') {
+        this.message = 'Button clicked';
+      }
+    }
+    .height('100%')
+    .width('10

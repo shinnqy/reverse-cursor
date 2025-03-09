@@ -1,0 +1,318 @@
+[
+  {
+    "intent": "lint_errors",
+    "generationUUID": "b9a606aa-e1d0-4155-a1cf-86660e352938",
+    "timestamp": "2025-03-09T13:12:54.536Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "src/components/test2.ts",
+          "diffHistory": [
+            "1+|function changeLight(light: TrafficLight) {\n2+|  light = 'green';\n3+|}\n4+|\n",
+            "2-|  light = 'green';\n",
+            "2-|  \n2+|  switch (light) {\n3+|    case 'red':\n4+|      return 'green';\n5+|    case 'green':\n6+|      return 'yellow';\n7+|      \n8+|  }\n",
+            "7-|\n7+|    case 'yellow':\n8+|      return 'red';\n9+|    default:\n10+|      return 'red';\n",
+            "3-|    case 'red':\n3+|    case light.RED:\n",
+            "5-|    case 'green':\n6-|      return 'yellow';\n5+|    case 'green'ht.GREEN:\n6+|      return light.YELLOW;\n",
+            "4-|      return 'green';\n5-|    case 'green'ht.GREEN:\n4+|      return 'green'ht.GREEN;\n5+|    case light.GREEN:\n",
+            "4-|      return 'green'ht.GREEN;\n4+|      return light.GREEN;\n",
+            "10-|      return 'red';\n10+|      return light.RED;\n",
+            "7-|    case 'yellow':\n8-|      return 'red';\n7+|    case 'yellow'ight.YELLOW:\n8+|      return light.RED;\n",
+            "7-|    case 'yellow'ight.YELLOW:\n7+|    case light.YELLOW:\n",
+            "14+|enum TrafficLight {\n15+|  RED = 'red',\n16+|  GREEN = 'green',\n17+|  YELLOW = 'yellow',\n18+|}\n19+|\n20+|const light = TrafficLight.RED;\n21+|const newLight = changeLight(light);\n22+|console.log(newLight);\n",
+            "3-|    case light.RED:\n4-|      return light.GREEN;\n3+|    case lTrafficLight.RED:\n4+|      return TrafficLight.GREEN;\n",
+            "3-|    case lTrafficLight.RED:\n3+|    case TrafficLight.RED:\n",
+            "7-|    case light.YELLOW:\n8-|      return light.RED;\n7+|    case lTrafficLight.YELLOW:\n8+|      return TrafficLight.RED;\n",
+            "6-|      return light.YELLOW;\n7-|    case lTrafficLight.YELLOW:\n6+|      return lTrafficLight.YELLOW;\n7+|    case TrafficLight.YELLOW:\n",
+            "5-|    case light.GREEN:\n6-|      return lTrafficLight.YELLOW;\n5+|    case lTrafficLight.GREEN:\n6+|      return TrafficLight.YELLOW;\n",
+            "5-|    case lTrafficLight.GREEN:\n5+|    case TrafficLight.GREEN:\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "linterErrors": {
+        "relativeWorkspacePath": "src/components/test2.ts",
+        "errors": [
+          {
+            "message": "Property 'GREEN' does not exist on type 'TrafficLight'.",
+            "range": {
+              "startPosition": {
+                "line": 5,
+                "column": 16
+              },
+              "endPosition": {
+                "line": 5,
+                "column": 21
+              }
+            },
+            "source": "ts",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          },
+          {
+            "message": "Property 'YELLOW' does not exist on type 'TrafficLight'.",
+            "range": {
+              "startPosition": {
+                "line": 6,
+                "column": 20
+              },
+              "endPosition": {
+                "line": 6,
+                "column": 26
+              }
+            },
+            "source": "ts",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          },
+          {
+            "message": "Property 'YELLOW' does not exist on type 'TrafficLight'.",
+            "range": {
+              "startPosition": {
+                "line": 7,
+                "column": 16
+              },
+              "endPosition": {
+                "line": 7,
+                "column": 22
+              }
+            },
+            "source": "ts",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          },
+          {
+            "message": "Property 'RED' does not exist on type 'TrafficLight'.",
+            "range": {
+              "startPosition": {
+                "line": 8,
+                "column": 20
+              },
+              "endPosition": {
+                "line": 8,
+                "column": 23
+              }
+            },
+            "source": "ts",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          },
+          {
+            "message": "Property 'RED' does not exist on type 'TrafficLight.GREEN | TrafficLight.YELLOW'.\n  Property 'RED' does not exist on type 'TrafficLight.GREEN'.",
+            "range": {
+              "startPosition": {
+                "line": 10,
+                "column": 20
+              },
+              "endPosition": {
+                "line": 10,
+                "column": 23
+              }
+            },
+            "source": "ts",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          },
+          {
+            "message": "Property 'RED' does not exist on type 'TrafficLight'.",
+            "range": {
+              "startPosition": {
+                "line": 3,
+                "column": 16
+              },
+              "endPosition": {
+                "line": 3,
+                "column": 19
+              }
+            },
+            "source": "",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          },
+          {
+            "message": "Property 'GREEN' does not exist on type 'TrafficLight'.",
+            "range": {
+              "startPosition": {
+                "line": 4,
+                "column": 20
+              },
+              "endPosition": {
+                "line": 4,
+                "column": 25
+              }
+            },
+            "source": "",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          },
+          {
+            "message": "Property 'RED' does not exist on type 'TrafficLight'.",
+            "range": {
+              "startPosition": {
+                "line": 10,
+                "column": 20
+              },
+              "endPosition": {
+                "line": 10,
+                "column": 23
+              }
+            },
+            "source": "",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          },
+          {
+            "message": "'changeLight' is defined but never used.",
+            "range": {
+              "startPosition": {
+                "line": 1,
+                "column": 10
+              },
+              "endPosition": {
+                "line": 1,
+                "column": 21
+              }
+            },
+            "source": "",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          }
+        ],
+        "fileContents": ""
+      },
+      "currentFile": {
+        "relativeWorkspacePath": "src/components/test2.ts",
+        "contents": "function changeLight(light: TrafficLight) {\n  switch (light) {\n    case TrafficLight.RED:\n      return TrafficLight.GREEN;\n    case TrafficLight.GREEN:\n      return TrafficLight.YELLOW;\n    case TrafficLight.YELLOW:\n      return TrafficLight.RED;\n    default:\n      return light.RED;\n  }\n}\n\nenum TrafficLight {\n  RED = 'red',\n  GREEN = 'green',\n  YELLOW = 'yellow',\n}\n\nconst light = TrafficLight.RED;\nconst newLight = changeLight(light);\nconsole.log(newLight);\n",
+        "cursorPosition": {
+          "line": 4,
+          "column": 4
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 60,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/Documents/personal/vite-react-demo2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "src/components/test.ts",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            4
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 4,
+              "endLineNumberInclusive": 24
+            }
+          ],
+          "lastViewedAt": 1741525907939
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "lint_errors"
+      },
+      "clientTime": 1741525974535,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "8u65ni1hw3pqzyyqn4vyf",
+      "timeSinceRequestStart": 1,
+      "timeAtRequestSend": 1741525974535
+    },
+    "generateUuid": "b9a606aa-e1d0-4155-a1cf-86660e352938",
+    "timestamp": "2025-03-09T13:12:54.537Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "      return TrafficLight.GREEN;\n    case TrafficLight.GREEN:\n      return TrafficLight.YELLOW;\n    case TrafficLight.YELLOW:\n      return TrafficLight.RED;"
+    },
+    "generationUUID": "b9a606aa-e1d0-4155-a1cf-86660e352938",
+    "timestamp": "2025-03-09T13:12:54.930Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "rangeToReplace": {
+        "startLineNumber": 4,
+        "endLineNumberInclusive": 8
+      },
+      "doneEdit": true,
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "b9a606aa-e1d0-4155-a1cf-86660e352938",
+    "timestamp": "2025-03-09T13:12:54.931Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "b9a606aa-e1d0-4155-a1cf-86660e352938",
+    "timestamp": "2025-03-09T13:12:54.935Z"
+  },
+  {
+    "firstChunkValue": "      return TrafficLight.GREEN;\n    case TrafficLight.GREEN:\n      return TrafficLight.YELLOW;\n    case TrafficLight.YELLOW:\n      return TrafficLight.RED;",
+    "generationUUID": "b9a606aa-e1d0-4155-a1cf-86660e352938",
+    "timestamp": "2025-03-09T13:12:54.936Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": false
+    },
+    "generationUUID": "b9a606aa-e1d0-4155-a1cf-86660e352938",
+    "timestamp": "2025-03-09T13:12:54.937Z"
+  },
+  {
+    "fusedCursorPrediction": {
+      "relativePath": "src/components/test2.ts",
+      "lineNumberOneIndexed": 10,
+      "text": "return light.RED;\n}\n}\n\nenum TrafficLight {",
+      "shouldRetriggerCpp": true
+    },
+    "predictionId": "e36ab308-2fb5-4660-ad18-9b99cf63b4e5",
+    "generationUUID": "b9a606aa-e1d0-4155-a1cf-86660e352938",
+    "timestamp": "2025-03-09T13:12:55.012Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "b9a606aa-e1d0-4155-a1cf-86660e352938",
+    "timestamp": "2025-03-09T13:12:55.014Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "cursorPredictionTarget": {
+        "relativePath": "src/components/test2.ts",
+        "lineNumberOneIndexed": 10,
+        "expectedContent": "return light.RED;\n}\n}\n\nenum TrafficLight {",
+        "shouldRetriggerCpp": true
+      }
+    },
+    "generationUUID": "b9a606aa-e1d0-4155-a1cf-86660e352938",
+    "timestamp": "2025-03-09T13:12:55.014Z"
+  }
+]

@@ -1,0 +1,333 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "4aca6abb-c38a-4cea-b12e-9b49643c54f2",
+    "timestamp": "2025-03-09T13:12:31.845Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "src/components/test2.ts",
+          "diffHistory": [
+            "1+|function changeLight(light: TrafficLight) {\n2+|  light = 'green';\n3+|}\n4+|\n",
+            "2-|  light = 'green';\n",
+            "2-|  \n2+|  switch (light) {\n3+|    case 'red':\n4+|      return 'green';\n5+|    case 'green':\n6+|      return 'yellow';\n7+|      \n8+|  }\n",
+            "7-|\n7+|    case 'yellow':\n8+|      return 'red';\n9+|    default:\n10+|      return 'red';\n",
+            "3-|    case 'red':\n3+|    case :\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "linterErrors": {
+        "relativeWorkspacePath": "src/components/test2.ts",
+        "errors": [
+          {
+            "message": "Unterminated string literal.",
+            "range": {
+              "startPosition": {
+                "line": 3,
+                "column": 12
+              },
+              "endPosition": {
+                "line": 3,
+                "column": 12
+              }
+            },
+            "source": "ts",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          },
+          {
+            "message": "':' expected.",
+            "range": {
+              "startPosition": {
+                "line": 4,
+                "column": 7
+              },
+              "endPosition": {
+                "line": 4,
+                "column": 13
+              }
+            },
+            "source": "ts",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          },
+          {
+            "message": "Cannot find name 'TrafficLight'.",
+            "range": {
+              "startPosition": {
+                "line": 1,
+                "column": 29
+              },
+              "endPosition": {
+                "line": 1,
+                "column": 41
+              }
+            },
+            "source": "ts",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          },
+          {
+            "message": "Parsing error: Expression expected.",
+            "range": {
+              "startPosition": {
+                "line": 3,
+                "column": 9
+              },
+              "endPosition": {
+                "line": 3,
+                "column": 9
+              }
+            },
+            "source": "eslint",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          },
+          {
+            "message": "Parsing error: Unterminated string literal.",
+            "range": {
+              "startPosition": {
+                "line": 3,
+                "column": 11
+              },
+              "endPosition": {
+                "line": 3,
+                "column": 11
+              }
+            },
+            "source": "",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          }
+        ],
+        "fileContents": ""
+      },
+      "currentFile": {
+        "relativeWorkspacePath": "src/components/test2.ts",
+        "contents": "function changeLight(light: TrafficLight) {\n  switch (light) {\n    case :\n      return 'green';\n    case 'green':\n      return 'yellow';\n    case 'yellow':\n      return 'red';\n    default:\n      return 'red';\n  }\n}\n\n",
+        "cursorPosition": {
+          "line": 2,
+          "column": 9
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 48,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/Documents/personal/vite-react-demo2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "src/components/test.ts",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            4
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 4,
+              "endLineNumberInclusive": 24
+            }
+          ],
+          "lastViewedAt": 1741525907939
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1741525951887,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "8u65ni1hw3pqzyyqn4vyf",
+      "timeSinceRequestStart": 50.699951171875,
+      "timeAtRequestSend": 1741525951887
+    },
+    "generateUuid": "4aca6abb-c38a-4cea-b12e-9b49643c54f2",
+    "timestamp": "2025-03-09T13:12:31.888Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "4aca6abb-c38a-4cea-b12e-9b49643c54f2",
+    "timestamp": "2025-03-09T13:12:32.335Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "  switch (light) {\n    case '",
+      "rangeToReplace": {
+        "startLineNumber": 2,
+        "endLineNumberInclusive": 6
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "4aca6abb-c38a-4cea-b12e-9b49643c54f2",
+    "timestamp": "2025-03-09T13:12:32.336Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "red"
+    },
+    "generationUUID": "4aca6abb-c38a-4cea-b12e-9b49643c54f2",
+    "timestamp": "2025-03-09T13:12:32.337Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "':"
+    },
+    "generationUUID": "4aca6abb-c38a-4cea-b12e-9b49643c54f2",
+    "timestamp": "2025-03-09T13:12:32.337Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n     "
+    },
+    "generationUUID": "4aca6abb-c38a-4cea-b12e-9b49643c54f2",
+    "timestamp": "2025-03-09T13:12:32.338Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "';"
+    },
+    "generationUUID": "4aca6abb-c38a-4cea-b12e-9b49643c54f2",
+    "timestamp": "2025-03-09T13:12:32.338Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " return 'green"
+    },
+    "generationUUID": "4aca6abb-c38a-4cea-b12e-9b49643c54f2",
+    "timestamp": "2025-03-09T13:12:32.339Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n    case 'green':\n     "
+    },
+    "generationUUID": "4aca6abb-c38a-4cea-b12e-9b49643c54f2",
+    "timestamp": "2025-03-09T13:12:32.339Z"
+  },
+  {
+    "firstChunkValue": "  switch (light) {\n    case 'red':\n      return 'green';\n    case 'green':\n      return 'yellow';",
+    "generationUUID": "4aca6abb-c38a-4cea-b12e-9b49643c54f2",
+    "timestamp": "2025-03-09T13:12:32.821Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " return"
+    },
+    "generationUUID": "4aca6abb-c38a-4cea-b12e-9b49643c54f2",
+    "timestamp": "2025-03-09T13:12:32.828Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": false
+    },
+    "generationUUID": "4aca6abb-c38a-4cea-b12e-9b49643c54f2",
+    "timestamp": "2025-03-09T13:12:32.829Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " 'yellow"
+    },
+    "generationUUID": "4aca6abb-c38a-4cea-b12e-9b49643c54f2",
+    "timestamp": "2025-03-09T13:12:32.829Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "';"
+    },
+    "generationUUID": "4aca6abb-c38a-4cea-b12e-9b49643c54f2",
+    "timestamp": "2025-03-09T13:12:32.830Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "4aca6abb-c38a-4cea-b12e-9b49643c54f2",
+    "timestamp": "2025-03-09T13:12:32.831Z"
+  },
+  {
+    "fusedCursorPrediction": {
+      "relativePath": "src/components/test2.ts",
+      "lineNumberOneIndexed": 1,
+      "text": "function changeLight(light: TrafficLight) {\nswitch (light) {\ncase 'red':\nreturn 'green';\ncase 'green':",
+      "shouldRetriggerCpp": true
+    },
+    "predictionId": "1099830c-586f-4eec-b7fe-6143e1576bd4",
+    "generationUUID": "4aca6abb-c38a-4cea-b12e-9b49643c54f2",
+    "timestamp": "2025-03-09T13:12:32.917Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is false",
+    "invokePlace": "before this.displayFusedCursorPrediction, about to show prediction icon",
+    "isValidCase4firstChunkValue": {
+      "valid": false
+    },
+    "fusedCursorPrediction": {
+      "relativePath": "src/components/test2.ts",
+      "lineNumberOneIndexed": 1,
+      "text": "function changeLight(light: TrafficLight) {\nswitch (light) {\ncase 'red':\nreturn 'green';\ncase 'green':",
+      "shouldRetriggerCpp": true
+    },
+    "predictionId": "1099830c-586f-4eec-b7fe-6143e1576bd4",
+    "generationUUID": "4aca6abb-c38a-4cea-b12e-9b49643c54f2",
+    "timestamp": "2025-03-09T13:12:32.918Z"
+  },
+  {
+    "action": "displayFusedCursorPrediction",
+    "predictionId": "1099830c-586f-4eec-b7fe-6143e1576bd4",
+    "fusedCursorPrediction": {
+      "relativePath": "src/components/test2.ts",
+      "lineNumberOneIndexed": 1,
+      "text": "function changeLight(light: TrafficLight) {\nswitch (light) {\ncase 'red':\nreturn 'green';\ncase 'green':",
+      "shouldRetriggerCpp": true
+    },
+    "oldText": "",
+    "newText": "",
+    "timestamp": "2025-03-09T13:12:32.919Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "cursorPredictionTarget": {
+        "relativePath": "src/components/test2.ts",
+        "lineNumberOneIndexed": 1,
+        "expectedContent": "function changeLight(light: TrafficLight) {\nswitch (light) {\ncase 'red':\nreturn 'green';\ncase 'green':",
+        "shouldRetriggerCpp": true
+      }
+    },
+    "generationUUID": "4aca6abb-c38a-4cea-b12e-9b49643c54f2",
+    "timestamp": "2025-03-09T13:12:32.947Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "4aca6abb-c38a-4cea-b12e-9b49643c54f2",
+    "timestamp": "2025-03-09T13:12:32.948Z"
+  }
+]

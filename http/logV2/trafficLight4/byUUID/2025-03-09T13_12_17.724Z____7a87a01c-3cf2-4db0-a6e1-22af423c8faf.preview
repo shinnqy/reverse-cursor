@@ -1,0 +1,35 @@
+{"line":3,"column":0}
+
+======== fileDiffHistories ========
+
+File: src/components/test2.ts
+1+|function changeLight(light: TrafficLight) {\n2+|  light = 'green';\n3+|}\n4+|\n
+
+======== processedCurrentFileContents ========
+function changeLight(light: TrafficLight) {
+  light = 'green';
+}
+[ToFill]
+
+======== firstChunkValue ========
+function changeLight(light: TrafficLight) {
+  light = 'green';
+}
+
+const light = 'red';
+======== fullText ========
+function changeLight(light: TrafficLight) {
+  light = 'green';
+}
+
+const light = 'red';
+changeLight(light);
+console.log(light);
+
+======== fusedCursorPrediction ========
+lineNumberOneIndexed: 5
+
+text: 
+
+
+shouldRetriggerCpp: true

@@ -1,0 +1,125 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "22b3cb7f-0fbe-45b3-b05a-f91ba9c109e6",
+    "timestamp": "2025-03-03T02:35:14.581Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/pages/Index.ets",
+          "diffHistory": [
+            "17-|\n17+|      Button() {\n",
+            "18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Hello World';\n22+|      })\n",
+            "18-|        Text('Click me')\n18+|        Text('Abount')\n",
+            "18-|        Text('Abount')\n18+|        Text('About Me')\n",
+            "21-|        this.message = 'Hello World';\n",
+            "21-|        \n21+|        router.push({\n",
+            "22+|          uri: 'pages/About'\n23+|        })\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/pages/Index.ets",
+        "contents": "@Entry\n@Component\nstruct Index {\n  @State message: string = 'Hello World';\n\n  build() {\n    RelativeContainer() {\n      Text(this.message)\n        .id('HelloWorld')\n        .fontSize(50)\n        .fontWeight(FontWeight.Bold)\n        .alignRules({\n          center: { anchor: '__container__', align: VerticalAlign.Center },\n          middle: { anchor: '__container__', align: HorizontalAlign.Center }\n        })\n\n      Button() {\n        Text('About Me')\n      }\n      .onClick(() => {\n        router.push({\n          uri: 'pages/About'\n        })\n      })\n    }\n    .height('100%')\n    .width('100%')\n  }\n}",
+        "cursorPosition": {
+          "line": 21,
+          "column": 9
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 40,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1740969314615,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.300048828125,
+      "timeAtRequestSend": 1740969314615
+    },
+    "generateUuid": "22b3cb7f-0fbe-45b3-b05a-f91ba9c109e6",
+    "timestamp": "2025-03-03T02:35:14.618Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "22b3cb7f-0fbe-45b3-b05a-f91ba9c109e6",
+    "timestamp": "2025-03-03T02:35:15.010Z"
+  },
+  {
+    "firstChunkValue": "      .onClick(() => {\n        router.push({\n          uri: 'pages/About'\n        })\n      })",
+    "generationUUID": "22b3cb7f-0fbe-45b3-b05a-f91ba9c109e6",
+    "timestamp": "2025-03-03T02:35:15.062Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": false
+    },
+    "generationUUID": "22b3cb7f-0fbe-45b3-b05a-f91ba9c109e6",
+    "timestamp": "2025-03-03T02:35:15.063Z"
+  },
+  {
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/pages/Index.ets",
+      "lineNumberOneIndexed": 18,
+      "text": "Text('About Me')\n}\n.onClick(() => {\nrouter.push({\nuri: 'pages/About'",
+      "shouldRetriggerCpp": false
+    },
+    "predictionId": "6e65acd1-00a7-46a7-9451-64ae33602f12",
+    "generationUUID": "22b3cb7f-0fbe-45b3-b05a-f91ba9c109e6",
+    "timestamp": "2025-03-03T02:35:15.121Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is false",
+    "invokePlace": "before this.displayFusedCursorPrediction, about to show prediction icon",
+    "isValidCase4firstChunkValue": {
+      "valid": false
+    },
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/pages/Index.ets",
+      "lineNumberOneIndexed": 18,
+      "text": "Text('About Me')\n}\n.onClick(() => {\nrouter.push({\nuri: 'pages/About'",
+      "shouldRetriggerCpp": false
+    },
+    "predictionId": "6e65acd1-00a7-46a7-9451-64ae33602f12",
+    "generationUUID": "22b3cb7f-0fbe-45b3-b05a-f91ba9c109e6",
+    "timestamp": "2025-03-03T02:35:15.123Z"
+  },
+  {
+    "action": "displayFusedCursorPrediction",
+    "predictionId": "6e65acd1-00a7-46a7-9451-64ae33602f12",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/pages/Index.ets",
+      "lineNumberOneIndexed": 18,
+      "text": "Text('About Me')\n}\n.onClick(() => {\nrouter.push({\nuri: 'pages/About'",
+      "shouldRetriggerCpp": false
+    },
+    "oldText": "",
+    "newText": "",
+    "timestamp": "2025-03-03T02:35:15.124Z"
+  }
+]

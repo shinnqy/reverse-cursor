@@ -1,0 +1,107 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "90a39751-419c-4aee-9a75-e3e6eb1a94a6",
+    "timestamp": "2025-03-03T02:34:45.079Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/pages/Index.ets",
+          "diffHistory": [
+            "17-|\n17+|      Button() {\n",
+            "18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Hello World';\n22+|      })\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/pages/Index.ets",
+        "contents": "@Entry\n@Component\nstruct Index {\n  @State message: string = 'Hello World';\n\n  build() {\n    RelativeContainer() {\n      Text(this.message)\n        .id('HelloWorld')\n        .fontSize(50)\n        .fontWeight(FontWeight.Bold)\n        .alignRules({\n          center: { anchor: '__container__', align: VerticalAlign.Center },\n          middle: { anchor: '__container__', align: HorizontalAlign.Center }\n        })\n\n      Button() {\n        Text('Click me')\n      }\n      .onClick(() => {\n        this.message = 'Hello World';\n      })\n    }\n    .height('100%')\n    .width('100%')\n  }\n}",
+        "cursorPosition": {
+          "line": 17,
+          "column": 7
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 9,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1740969285128,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 53.800048828125,
+      "timeAtRequestSend": 1740969285129
+    },
+    "generateUuid": "90a39751-419c-4aee-9a75-e3e6eb1a94a6",
+    "timestamp": "2025-03-03T02:34:45.130Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "90a39751-419c-4aee-9a75-e3e6eb1a94a6",
+    "timestamp": "2025-03-03T02:34:45.501Z"
+  },
+  {
+    "firstChunkValue": "      Button() {\n        Text('Click me')\n          .fontSize(20)\n          .fontWeight(FontWeight.Bold)\n          .color(Color.White)\n          .backgroundColor(Color.Blue)\n          .onClick(() => {\n            this.message = 'Hello World';\n          })\n      }\n      .onClick(() => {\n        this.message = 'Hello World';\n      })",
+    "generationUUID": "90a39751-419c-4aee-9a75-e3e6eb1a94a6",
+    "timestamp": "2025-03-03T02:34:45.826Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "babea559-5885-47a3-b2c9-1d515d09db18",
+    "generationUUID": "90a39751-419c-4aee-9a75-e3e6eb1a94a6",
+    "timestamp": "2025-03-03T02:34:45.827Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "      Button() {\n        Text('Click me')\n          .fontSize(20)\n          .fontWeight(FontWeight.Bold)\n          .color(Color.White)\n          .backgroundColor(Color.Blue)\n          .onClick(() => {\n            this.message = 'Hello World';\n          })\n      }\n      .onClick(() => {\n        this.message = 'Hello World';\n      })"
+    },
+    "generationUUID": "90a39751-419c-4aee-9a75-e3e6eb1a94a6",
+    "timestamp": "2025-03-03T02:34:45.828Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "      Button() {\n        Text('Click me')\n          .fontSize(20)\n          .fontWeight(FontWeight.Bold)\n          .color(Color.White)\n          .backgroundColor(Color.Blue)\n          .onClick(() => {\n            this.message = 'Hello World';\n          })\n      }\n      .onClick(() => {\n        this.message = 'Hello World';\n      })"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "babea559-5885-47a3-b2c9-1d515d09db18",
+    "generationUUID": "90a39751-419c-4aee-9a75-e3e6eb1a94a6",
+    "timestamp": "2025-03-03T02:34:45.831Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "babea559-5885-47a3-b2c9-1d515d09db18",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-03T02:34:45.832Z"
+  }
+]

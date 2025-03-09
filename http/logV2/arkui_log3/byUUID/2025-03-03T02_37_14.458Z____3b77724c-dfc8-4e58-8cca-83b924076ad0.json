@@ -1,0 +1,541 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "3b77724c-dfc8-4e58-8cca-83b924076ad0",
+    "timestamp": "2025-03-03T02:37:14.458Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/pages/Index.ets",
+          "diffHistory": [
+            "17-|\n17+|      Button() {\n",
+            "18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Hello World';\n22+|      })\n",
+            "18-|        Text('Click me')\n18+|        Text('Abount')\n",
+            "18-|        Text('Abount')\n18+|        Text('About Me')\n",
+            "21-|        this.message = 'Hello World';\n",
+            "21-|        \n21+|        router.push({\n",
+            "22+|          uri: 'pages/About'\n23+|        })\n",
+            "21-|        router.push({\n21+|        router.pushU({\n",
+            "21-|        router.pushU({\n22-|          uri: 'pages/About'\n21+|        router.pushUrl({\n22+|          url: 'pages/About'\n",
+            "22-|          url: 'pages/About'\n22+|          url: 'pages/AboutMe'\n",
+            "1+|import router from '@ohos.router';\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/pages/AboutMe.ets",
+          "diffHistory": [
+            "1+|@Preview\n",
+            "2+|@Entry\n3+|@Component\n4+|struct AboutMe {\n5+|  @State message: string = 'About Me';\n6+|  \n7+|}\n",
+            "2-|@Entry\n",
+            "5-|\n6-|}\n5+|  \n6+|  build() {\n7+|    Column() {\n8+|      Text(this.message)\n9+|        .fontSize(50)\n10+|        .fontWeight(FontWeight.Bold)\n11+|    }\n12+|  }\n13+|}\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/resources/base/profile/main_pages.json",
+          "diffHistory": [
+            "3-|    \"pages/Index\"\n3+|    \"pages/Index\",\n4+|    \"pages/AboutMe\"\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/pages/AboutMe.ets",
+          "diffHistory": [
+            "12-|        \n12+|      Banner()\n",
+            "1+|import Banner from '../components/Banner.ets';\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/components/Banner.ets",
+          "diffHistory": [
+            "4-|  \n4+|  @P\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/components/Banner.ets",
+        "contents": "@Preview\n@Component\nexport default struct Banner {\n  @P\n\n  build() {\n    Text(\"Banner\")\n  }\n}",
+        "cursorPosition": {
+          "line": 3,
+          "column": 4
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 6,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/pages/Index.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 31
+            }
+          ],
+          "lastViewedAt": 1740969350213
+        },
+        {
+          "relativeWorkspacePath": "entry/src/main/resources/base/profile/main_pages.json",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 7
+            }
+          ],
+          "lastViewedAt": 1740969401037
+        },
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/pages/AboutMe.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 17
+            }
+          ],
+          "lastViewedAt": 1740969415869
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1740969434502,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.199951171875,
+      "timeAtRequestSend": 1740969434502
+    },
+    "generateUuid": "3b77724c-dfc8-4e58-8cca-83b924076ad0",
+    "timestamp": "2025-03-03T02:37:14.504Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "3b77724c-dfc8-4e58-8cca-83b924076ad0",
+    "timestamp": "2025-03-03T02:37:14.933Z"
+  },
+  {
+    "firstChunkValue": "export default struct Banner {\n  @Prop title: string = 'Banner';\n\n  build() {\n    Text(\"Banner\")\n  }\n}",
+    "generationUUID": "3b77724c-dfc8-4e58-8cca-83b924076ad0",
+    "timestamp": "2025-03-03T02:37:15.043Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "export default struct Banner {\n  @Prop title: string = 'Banner';\n\n  build() {\n    Text(\"Banner\")\n  }\n}"
+    },
+    "generationUUID": "3b77724c-dfc8-4e58-8cca-83b924076ad0",
+    "timestamp": "2025-03-03T02:37:15.045Z"
+  },
+  {
+    "fullText": "export default struct Banner {\n  @Prop title: string = 'Banner';\n\n  build() {\n    Text(this.title)\n  }\n}",
+    "generationUUID": "3b77724c-dfc8-4e58-8cca-83b924076ad0",
+    "timestamp": "2025-03-03T02:37:15.219Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "export default struct Banner {\n  @Prop title: string = 'Banner';\n\n  build() {\n    Text(\"Banner\")\n  }\n}"
+    },
+    "fullText": "export default struct Banner {\n  @Prop title: string = 'Banner';\n\n  build() {\n    Text(this.title)\n  }\n}",
+    "generationUUID": "3b77724c-dfc8-4e58-8cca-83b924076ad0",
+    "timestamp": "2025-03-03T02:37:15.221Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "a61b664a-4469-4f28-a4f7-d114d30636f0",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/components/Banner.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/components/Banner.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/components/Banner.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 6,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 10,
+      "monotonicallyIncreasingSuggestionId": 66,
+      "range": {
+        "startLineNumber": 3,
+        "startColumn": 1,
+        "endLineNumberInclusive": 9,
+        "endColumn": 2
+      },
+      "replaceText": "export default struct Banner {\n  @Prop title: string = 'Banner';\n\n  build() {\n    Text(this.title)\n  }\n}",
+      "originalText": "export default struct Banner {\n  @Prop title: string = 'Banner';\n\n  build() {\n    Text(\"Banner\")\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 3,
+        "startColumn": 1,
+        "endLineNumberInclusive": 9,
+        "endColumn": 2
+      },
+      "diffText": "export default struct Banner {\n  @Prop title: string = 'Banner';\n\n  build() {\n    Text(this.title)\n  }\n}",
+      "fullOriginalText": "export default struct Banner {\n  @Prop title: string = 'Banner';\n\n  build() {\n    Text(\"Banner\")\n  }\n}",
+      "suggestionTriggerTime": 1740969434450.6,
+      "greens": [],
+      "source": "typing",
+      "requestId": "3b77724c-dfc8-4e58-8cca-83b924076ad0",
+      "selection": {
+        "startLineNumber": 3,
+        "startColumn": 1,
+        "endLineNumberInclusive": 9,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "44ab32af-caa1-4aad-b3f9-1adb831c3956",
+      "undoRedoGroup": {
+        "id": 67,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "3b77724c-dfc8-4e58-8cca-83b924076ad0",
+    "timestamp": "2025-03-03T02:37:15.222Z"
+  },
+  {
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/pages/AboutMe.ets",
+      "lineNumberOneIndexed": 14,
+      "text": "Banner()\n}\n}\n}",
+      "shouldRetriggerCpp": true
+    },
+    "predictionId": "44ab32af-caa1-4aad-b3f9-1adb831c3956",
+    "generationUUID": "3b77724c-dfc8-4e58-8cca-83b924076ad0",
+    "timestamp": "2025-03-03T02:37:15.284Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "export default struct Banner {\n  @Prop title: string = 'Banner';\n\n  build() {\n    Text(\"Banner\")\n  }\n}"
+    },
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/pages/AboutMe.ets",
+      "lineNumberOneIndexed": 14,
+      "text": "Banner()\n}\n}\n}",
+      "shouldRetriggerCpp": true
+    },
+    "predictionId": "44ab32af-caa1-4aad-b3f9-1adb831c3956",
+    "generationUUID": "3b77724c-dfc8-4e58-8cca-83b924076ad0",
+    "timestamp": "2025-03-03T02:37:15.284Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "44ab32af-caa1-4aad-b3f9-1adb831c3956",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/pages/AboutMe.ets",
+      "lineNumberOneIndexed": 14,
+      "text": "Banner()\n}\n}\n}",
+      "shouldRetriggerCpp": true
+    },
+    "timestamp": "2025-03-03T02:37:15.285Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "69e9cdfe-3d5d-4d16-a38c-e08727118987",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/components/Banner.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/components/Banner.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/components/Banner.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 6,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 6,
+      "monotonicallyIncreasingSuggestionId": 65,
+      "range": {
+        "startLineNumber": 3,
+        "startColumn": 1,
+        "endLineNumberInclusive": 9,
+        "endColumn": 2
+      },
+      "replaceText": "export default struct Banner {\n  @Prop title: string = 'Banner';\n\n  build() {\n    Text(\"Banner\")\n  }\n}",
+      "originalText": "export default struct Banner {\n  @P\n\n  build() {\n    Text(\"Banner\")\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 3,
+        "startColumn": 1,
+        "endLineNumberInclusive": 9,
+        "endColumn": 2
+      },
+      "diffText": "export default struct Banner {\n  @Prop title: string = 'Banner';\n\n  build() {\n    Text(\"Banner\")\n  }\n}",
+      "fullOriginalText": "export default struct Banner {\n  @P\n\n  build() {\n    Text(\"Banner\")\n  }\n}",
+      "suggestionTriggerTime": 1740969434450.6,
+      "greens": [],
+      "source": "typing",
+      "requestId": "3b77724c-dfc8-4e58-8cca-83b924076ad0",
+      "selection": {
+        "startLineNumber": 3,
+        "startColumn": 1,
+        "endLineNumberInclusive": 9,
+        "endColumn": 2
+      },
+      "undoRedoGroup": {
+        "id": 66,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 3,
+        "startColumn": 1,
+        "endLineNumber": 9,
+        "endColumn": 2
+      },
+      "trackedText": "export default struct Banner {\n  @Prop\n\n  build() {\n    Text(\"Banner\")\n  }\n}",
+      "decorationId": "f;22",
+      "onAcceptDisplayId": "a61b664a-4469-4f28-a4f7-d114d30636f0"
+    },
+    "generationUUID": "3b77724c-dfc8-4e58-8cca-83b924076ad0",
+    "timestamp": "2025-03-03T02:37:16.640Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "69e9cdfe-3d5d-4d16-a38c-e08727118987",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/components/Banner.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/components/Banner.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/components/Banner.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 6,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 6,
+      "monotonicallyIncreasingSuggestionId": 65,
+      "range": {
+        "startLineNumber": 3,
+        "startColumn": 1,
+        "endLineNumberInclusive": 9,
+        "endColumn": 2
+      },
+      "replaceText": "export default struct Banner {\n  @Prop title: string = 'Banner';\n\n  build() {\n    Text(\"Banner\")\n  }\n}",
+      "originalText": "export default struct Banner {\n  @P\n\n  build() {\n    Text(\"Banner\")\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 3,
+        "startColumn": 1,
+        "endLineNumberInclusive": 9,
+        "endColumn": 2
+      },
+      "diffText": "export default struct Banner {\n  @Prop title: string = 'Banner';\n\n  build() {\n    Text(\"Banner\")\n  }\n}",
+      "fullOriginalText": "export default struct Banner {\n  @P\n\n  build() {\n    Text(\"Banner\")\n  }\n}",
+      "suggestionTriggerTime": 1740969434450.6,
+      "greens": [],
+      "source": "typing",
+      "requestId": "3b77724c-dfc8-4e58-8cca-83b924076ad0",
+      "selection": {
+        "startLineNumber": 3,
+        "startColumn": 1,
+        "endLineNumberInclusive": 9,
+        "endColumn": 2
+      },
+      "undoRedoGroup": {
+        "id": 66,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 3,
+        "startColumn": 1,
+        "endLineNumber": 9,
+        "endColumn": 2
+      },
+      "trackedText": "export default struct Banner {\n  @Prop\n\n  build() {\n    Text(\"Banner\")\n  }\n}",
+      "decorationId": "f;22",
+      "onAcceptDisplayId": "a61b664a-4469-4f28-a4f7-d114d30636f0"
+    },
+    "generationUUID": "3b77724c-dfc8-4e58-8cca-83b924076ad0",
+    "timestamp": "2025-03-03T02:37:16.652Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "a61b664a-4469-4f28-a4f7-d114d30636f0",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/components/Banner.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/components/Banner.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/components/Banner.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 6,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 10,
+      "monotonicallyIncreasingSuggestionId": 66,
+      "range": {
+        "startLineNumber": 3,
+        "startColumn": 1,
+        "endLineNumberInclusive": 9,
+        "endColumn": 2
+      },
+      "replaceText": "export default struct Banner {\n  @Prop title: string = 'Banner';\n\n  build() {\n    Text(this.title)\n  }\n}",
+      "originalText": "export default struct Banner {\n  @Prop title: string = 'Banner';\n\n  build() {\n    Text(\"Banner\")\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 3,
+        "startColumn": 1,
+        "endLineNumberInclusive": 9,
+        "endColumn": 2
+      },
+      "diffText": "export default struct Banner {\n  @Prop title: string = 'Banner';\n\n  build() {\n    Text(this.title)\n  }\n}",
+      "fullOriginalText": "export default struct Banner {\n  @Prop title: string = 'Banner';\n\n  build() {\n    Text(\"Banner\")\n  }\n}",
+      "suggestionTriggerTime": 1740969434450.6,
+      "greens": [],
+      "source": "typing",
+      "requestId": "3b77724c-dfc8-4e58-8cca-83b924076ad0",
+      "selection": {
+        "startLineNumber": 3,
+        "startColumn": 1,
+        "endLineNumberInclusive": 9,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "44ab32af-caa1-4aad-b3f9-1adb831c3956",
+      "undoRedoGroup": {
+        "id": 67,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "f;30"
+    },
+    "generationUUID": "3b77724c-dfc8-4e58-8cca-83b924076ad0",
+    "timestamp": "2025-03-03T02:37:17.380Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "a61b664a-4469-4f28-a4f7-d114d30636f0",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/components/Banner.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/components/Banner.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/components/Banner.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 6,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 10,
+      "monotonicallyIncreasingSuggestionId": 66,
+      "range": {
+        "startLineNumber": 3,
+        "startColumn": 1,
+        "endLineNumberInclusive": 9,
+        "endColumn": 2
+      },
+      "replaceText": "export default struct Banner {\n  @Prop title: string = 'Banner';\n\n  build() {\n    Text(this.title)\n  }\n}",
+      "originalText": "export default struct Banner {\n  @Prop title: string = 'Banner';\n\n  build() {\n    Text(\"Banner\")\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 3,
+        "startColumn": 1,
+        "endLineNumberInclusive": 9,
+        "endColumn": 2
+      },
+      "diffText": "export default struct Banner {\n  @Prop title: string = 'Banner';\n\n  build() {\n    Text(this.title)\n  }\n}",
+      "fullOriginalText": "export default struct Banner {\n  @Prop title: string = 'Banner';\n\n  build() {\n    Text(\"Banner\")\n  }\n}",
+      "suggestionTriggerTime": 1740969434450.6,
+      "greens": [],
+      "source": "typing",
+      "requestId": "3b77724c-dfc8-4e58-8cca-83b924076ad0",
+      "selection": {
+        "startLineNumber": 3,
+        "startColumn": 1,
+        "endLineNumberInclusive": 9,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "44ab32af-caa1-4aad-b3f9-1adb831c3956",
+      "undoRedoGroup": {
+        "id": 67,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "f;30"
+    },
+    "generationUUID": "3b77724c-dfc8-4e58-8cca-83b924076ad0",
+    "timestamp": "2025-03-03T02:37:17.392Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "44ab32af-caa1-4aad-b3f9-1adb831c3956",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/pages/AboutMe.ets",
+      "lineNumberOneIndexed": 14,
+      "text": "Banner()\n}\n}\n}",
+      "shouldRetriggerCpp": true
+    },
+    "oldText": "export default struct Banner {\n  @Prop title: string = 'Banner';\n\n  build() {\n    Text(\"Banner\")\n  }\n}",
+    "newText": "export default struct Banner {\n  @Prop title: string = 'Banner';\n\n  build() {\n    Text(this.title)\n  }\n}",
+    "timestamp": "2025-03-03T02:37:17.393Z"
+  },
+  {
+    "action": "displayFusedCursorPrediction",
+    "predictionId": "44ab32af-caa1-4aad-b3f9-1adb831c3956",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/pages/AboutMe.ets",
+      "lineNumberOneIndexed": 14,
+      "text": "Banner()\n}\n}\n}",
+      "shouldRetriggerCpp": true
+    },
+    "oldText": "export default struct Banner {\n  @Prop title: string = 'Banner';\n\n  build() {\n    Text(\"Banner\")\n  }\n}",
+    "newText": "export default struct Banner {\n  @Prop title: string = 'Banner';\n\n  build() {\n    Text(this.title)\n  }\n}",
+    "timestamp": "2025-03-03T02:37:17.395Z"
+  }
+]

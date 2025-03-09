@@ -1,0 +1,108 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "0f9a3b17-2588-4beb-99b8-1743a6701af9",
+    "timestamp": "2025-03-03T02:34:52.662Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/pages/Index.ets",
+          "diffHistory": [
+            "17-|\n17+|      Button() {\n",
+            "18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Hello World';\n22+|      })\n",
+            "18-|        Text('Click me')\n18+|        Text('Ab')\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/pages/Index.ets",
+        "contents": "@Entry\n@Component\nstruct Index {\n  @State message: string = 'Hello World';\n\n  build() {\n    RelativeContainer() {\n      Text(this.message)\n        .id('HelloWorld')\n        .fontSize(50)\n        .fontWeight(FontWeight.Bold)\n        .alignRules({\n          center: { anchor: '__container__', align: VerticalAlign.Center },\n          middle: { anchor: '__container__', align: HorizontalAlign.Center }\n        })\n\n      Button() {\n        Text('Ab')\n      }\n      .onClick(() => {\n        this.message = 'Hello World';\n      })\n    }\n    .height('100%')\n    .width('100%')\n  }\n}",
+        "cursorPosition": {
+          "line": 17,
+          "column": 16
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 19,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1740969292700,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.10009765625,
+      "timeAtRequestSend": 1740969292700
+    },
+    "generateUuid": "0f9a3b17-2588-4beb-99b8-1743a6701af9",
+    "timestamp": "2025-03-03T02:34:52.702Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "0f9a3b17-2588-4beb-99b8-1743a6701af9",
+    "timestamp": "2025-03-03T02:34:53.151Z"
+  },
+  {
+    "firstChunkValue": "      Button() {\n        Text('About')\n      }\n      .onClick(() => {\n        this.message = 'Hello World';\n      })",
+    "generationUUID": "0f9a3b17-2588-4beb-99b8-1743a6701af9",
+    "timestamp": "2025-03-03T02:34:53.316Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "      Button() {\n        Text('About')\n      }\n      .onClick(() => {\n        this.message = 'Hello World';\n      })"
+    },
+    "generationUUID": "0f9a3b17-2588-4beb-99b8-1743a6701af9",
+    "timestamp": "2025-03-03T02:34:53.317Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "b69765a3-cc1b-4aef-b85e-81ff1aabc383",
+    "generationUUID": "0f9a3b17-2588-4beb-99b8-1743a6701af9",
+    "timestamp": "2025-03-03T02:34:53.320Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "      Button() {\n        Text('About')\n      }\n      .onClick(() => {\n        this.message = 'Hello World';\n      })"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "b69765a3-cc1b-4aef-b85e-81ff1aabc383",
+    "generationUUID": "0f9a3b17-2588-4beb-99b8-1743a6701af9",
+    "timestamp": "2025-03-03T02:34:53.321Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "b69765a3-cc1b-4aef-b85e-81ff1aabc383",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-03T02:34:53.321Z"
+  }
+]

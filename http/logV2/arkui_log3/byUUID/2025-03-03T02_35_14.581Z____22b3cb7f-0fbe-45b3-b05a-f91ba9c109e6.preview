@@ -1,0 +1,71 @@
+{"line":21,"column":9}
+
+======== fileDiffHistories ========
+
+File: entry/src/main/ets/pages/Index.ets
+17-|\n17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Hello World';\n22+|      })\n18-|        Text('Click me')\n18+|        Text('Abount')\n18-|        Text('Abount')\n18+|        Text('About Me')\n21-|        this.message = 'Hello World';\n21-|        \n21+|        router.push({\n22+|          uri: 'pages/About'\n23+|        })\n
+17-|\n17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Hello World';\n22+|      })\n18-|        Text('Click me')\n18+|        Text('Abount')\n18-|        Text('Abount')\n18+|        Text('About Me')\n21-|        this.message = 'Hello World';\n21-|        \n21+|        router.push({\n22+|          uri: 'pages/About'\n23+|        })\n
+17-|\n17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Hello World';\n22+|      })\n18-|        Text('Click me')\n18+|        Text('Abount')\n18-|        Text('Abount')\n18+|        Text('About Me')\n21-|        this.message = 'Hello World';\n21-|        \n21+|        router.push({\n22+|          uri: 'pages/About'\n23+|        })\n
+17-|\n17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Hello World';\n22+|      })\n18-|        Text('Click me')\n18+|        Text('Abount')\n18-|        Text('Abount')\n18+|        Text('About Me')\n21-|        this.message = 'Hello World';\n21-|        \n21+|        router.push({\n22+|          uri: 'pages/About'\n23+|        })\n
+17-|\n17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Hello World';\n22+|      })\n18-|        Text('Click me')\n18+|        Text('Abount')\n18-|        Text('Abount')\n18+|        Text('About Me')\n21-|        this.message = 'Hello World';\n21-|        \n21+|        router.push({\n22+|          uri: 'pages/About'\n23+|        })\n
+17-|\n17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Hello World';\n22+|      })\n18-|        Text('Click me')\n18+|        Text('Abount')\n18-|        Text('Abount')\n18+|        Text('About Me')\n21-|        this.message = 'Hello World';\n21-|        \n21+|        router.push({\n22+|          uri: 'pages/About'\n23+|        })\n
+17-|\n17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Hello World';\n22+|      })\n18-|        Text('Click me')\n18+|        Text('Abount')\n18-|        Text('Abount')\n18+|        Text('About Me')\n21-|        this.message = 'Hello World';\n21-|        \n21+|        router.push({\n22+|          uri: 'pages/About'\n23+|        })\n
+
+======== processedCurrentFileContents ========
+@Entry
+@Component
+struct Index {
+  @State message: string = 'Hello World';
+
+  build() {
+    RelativeContainer() {
+      Text(this.message)
+        .id('HelloWorld')
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+        .alignRules({
+          center: { anchor: '__container__', align: VerticalAlign.Center },
+          middle: { anchor: '__container__', align: HorizontalAlign.Center }
+        })
+
+      Button() {
+        Text('About Me')
+      }
+      .onClick(() => {
+        router.push({
+         [ToFill] uri: 'pages/About'
+        })
+      })
+    }
+    .height('100%')
+    .width('100%')
+  }
+}
+======== firstChunkValue ========
+      .onClick(() => {
+        router.push({
+          uri: 'pages/About'
+        })
+      })
+======== fusedCursorPrediction ========
+lineNumberOneIndexed: 18
+
+text: 
+Text('About Me')
+}
+.onClick(() => {
+router.push({
+uri: 'pages/About'
+
+shouldRetriggerCpp: false
+======== displayedFusedCursorPrediction ========
+lineNumberOneIndexed: 18
+
+text: 
+Text('About Me')
+}
+.onClick(() => {
+router.push({
+uri: 'pages/About'
+
+shouldRetriggerCpp: false

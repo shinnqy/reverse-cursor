@@ -1,0 +1,41 @@
+{"line":1,"column":2}
+
+======== fileDiffHistories ========
+
+File: src/components/test2.ts
+1+|function changeLight(light: TrafficLight) {\n2+|  light = 'green';\n3+|}\n4+|\n2-|  light = 'green';\n
+1+|function changeLight(light: TrafficLight) {\n2+|  light = 'green';\n3+|}\n4+|\n2-|  light = 'green';\n
+
+======== processedCurrentFileContents ========
+function changeLight(light: TrafficLight) {
+  [ToFill]
+}
+
+
+======== firstChunkValue ========
+function changeLight(light: TrafficLight) {
+  switch (light) {
+}
+
+======== replace firstChunkValue ========
+function changeLight(light: TrafficLight) {
+  switch (light) {
+}
+
+
+======== replacedContentsWithCursorPosition ========
+function changeLight(light: TrafficLight) {<|current_cursor_position|>
+  switch (light) {
+}
+
+
+======== fullText ========
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case 'red':
+      return 'green';
+    case 'green':
+      return 'yellow';
+      
+  }
+}

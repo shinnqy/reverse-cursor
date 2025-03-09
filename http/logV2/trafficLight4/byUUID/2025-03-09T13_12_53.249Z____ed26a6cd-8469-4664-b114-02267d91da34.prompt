@@ -1,0 +1,118 @@
+You're an expert in TypeScript. Your task is to help the user update the code around current cursor position.
+
+## Recent Actions
+Here is what the user has been doing from the earliest to the latest:
+
+File: src/components/test2.ts
+added the code `function changeLight(light: TrafficLight) {` in line 1
+added the code `  light = 'green';` in line 2
+added the code `}` in line 3
+added the code `` in line 4
+
+deleted the code `  light = 'green';` in line 2
+
+deleted the code `  ` in line 2
+added the code `  switch (light) {` in line 2
+added the code `    case 'red':` in line 3
+added the code `      return 'green';` in line 4
+added the code `    case 'green':` in line 5
+added the code `      return 'yellow';` in line 6
+added the code `      ` in line 7
+added the code `  }` in line 8
+
+deleted the code `` in line 7
+added the code `    case 'yellow':` in line 7
+added the code `      return 'red';` in line 8
+added the code `    default:` in line 9
+added the code `      return 'red';` in line 10
+
+deleted the code `    case 'red':` in line 3
+added the code `    case light.RED:` in line 3
+
+deleted the code `    case 'green':` in line 5
+deleted the code `      return 'yellow';` in line 6
+added the code `    case 'green'ht.GREEN:` in line 5
+added the code `      return light.YELLOW;` in line 6
+
+deleted the code `      return 'green';` in line 4
+deleted the code `    case 'green'ht.GREEN:` in line 5
+added the code `      return 'green'ht.GREEN;` in line 4
+added the code `    case light.GREEN:` in line 5
+
+deleted the code `      return 'green'ht.GREEN;` in line 4
+added the code `      return light.GREEN;` in line 4
+
+deleted the code `      return 'red';` in line 10
+added the code `      return light.RED;` in line 10
+
+deleted the code `    case 'yellow':` in line 7
+deleted the code `      return 'red';` in line 8
+added the code `    case 'yellow'ight.YELLOW:` in line 7
+added the code `      return light.RED;` in line 8
+
+deleted the code `    case 'yellow'ight.YELLOW:` in line 7
+added the code `    case light.YELLOW:` in line 7
+
+added the code `enum TrafficLight {` in line 14
+added the code `  RED = 'red',` in line 15
+added the code `  GREEN = 'green',` in line 16
+added the code `  YELLOW = 'yellow',` in line 17
+added the code `}` in line 18
+added the code `` in line 19
+added the code `const light = TrafficLight.RED;` in line 20
+added the code `const newLight = changeLight(light);` in line 21
+added the code `console.log(newLight);` in line 22
+
+deleted the code `    case light.RED:` in line 3
+deleted the code `      return light.GREEN;` in line 4
+added the code `    case lTrafficLight.RED:` in line 3
+added the code `      return TrafficLight.GREEN;` in line 4
+
+deleted the code `    case lTrafficLight.RED:` in line 3
+added the code `    case TrafficLight.RED:` in line 3
+
+
+## Current Code
+Here is the current code file path:
+src/components/test2.ts
+
+Here is the current code around the cursor position:
+
+```
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case TrafficLight.RED:
+      return TrafficLight.GREEN;
+    <|current_cursor_position|>case light.GREEN:
+      return light.YELLOW;
+    case light.YELLOW:
+      return light.RED;
+    default:
+      return light.RED;
+  }
+}
+
+enum TrafficLight {
+  RED = 'red',
+  GREEN = 'green',
+  YELLOW = 'yellow',
+}
+
+const light = TrafficLight.RED;
+const newLight = changeLight(light);
+console.log(newLight);
+
+```
+
+## Task
+Rewrite the code from the first column of the line of <|current_cursor_position|> according to the following requirements:
+1. Enforce code format strictly matching existing code style.
+2. Propagate naming convention changes to all related cases
+3. Preserve original functionality
+4. Apply changes to entire code regardless of cursor position
+5. Focus on code after cursor position
+
+# Output Format
+Return ONLY the rewritten code from the first column of the line of cursor position without any other words.
+Do NOT include unchanged code before cursor.
+Never use markdown formatting like ```. Return raw text only.

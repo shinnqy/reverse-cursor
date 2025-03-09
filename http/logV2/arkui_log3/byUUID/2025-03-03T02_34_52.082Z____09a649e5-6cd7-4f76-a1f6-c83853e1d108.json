@@ -1,0 +1,87 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "09a649e5-6cd7-4f76-a1f6-c83853e1d108",
+    "timestamp": "2025-03-03T02:34:52.082Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/pages/Index.ets",
+          "diffHistory": [
+            "17-|\n17+|      Button() {\n",
+            "18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Hello World';\n22+|      })\n",
+            "18-|        Text('Click me')\n18+|        Text('A')\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/pages/Index.ets",
+        "contents": "@Entry\n@Component\nstruct Index {\n  @State message: string = 'Hello World';\n\n  build() {\n    RelativeContainer() {\n      Text(this.message)\n        .id('HelloWorld')\n        .fontSize(50)\n        .fontWeight(FontWeight.Bold)\n        .alignRules({\n          center: { anchor: '__container__', align: VerticalAlign.Center },\n          middle: { anchor: '__container__', align: HorizontalAlign.Center }\n        })\n\n      Button() {\n        Text('A')\n      }\n      .onClick(() => {\n        this.message = 'Hello World';\n      })\n    }\n    .height('100%')\n    .width('100%')\n  }\n}",
+        "cursorPosition": {
+          "line": 17,
+          "column": 15
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 18,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1740969292130,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 55,
+      "timeAtRequestSend": 1740969292131
+    },
+    "generateUuid": "09a649e5-6cd7-4f76-a1f6-c83853e1d108",
+    "timestamp": "2025-03-03T02:34:52.132Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "09a649e5-6cd7-4f76-a1f6-c83853e1d108",
+    "timestamp": "2025-03-03T02:34:52.593Z"
+  },
+  {
+    "firstChunkValue": "      Button() {\n        Text('A')\n      }\n      .onClick(() => {\n        this.message = 'Hello World';\n      })",
+    "generationUUID": "09a649e5-6cd7-4f76-a1f6-c83853e1d108",
+    "timestamp": "2025-03-03T02:34:52.660Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": false
+    },
+    "generationUUID": "09a649e5-6cd7-4f76-a1f6-c83853e1d108",
+    "timestamp": "2025-03-03T02:34:52.661Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "7e8f2349-7a26-4655-a222-bf3ef55d5e9d",
+    "generationUUID": "09a649e5-6cd7-4f76-a1f6-c83853e1d108",
+    "timestamp": "2025-03-03T02:34:52.691Z"
+  }
+]
