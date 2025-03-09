@@ -43,6 +43,7 @@ function generateDataset(params) {
   const currentFileContents = partialData.currentFile.contents;
   const currentFilePath = partialData.currentFile.relativeWorkspacePath;
   const currentCursorPosition = partialData.currentFile.cursorPosition;
+  const cppIntent = partialData.cppIntentInfo.source;
   const additionalFilesWhichHasContents = additionalFiles.filter(
     (i) => i.visibleRangeContent.length && i.visibleRangeContent[0].length
   );
@@ -74,11 +75,10 @@ function generateDataset(params) {
     };
     // fs.writeFileSync(deprecatedCompleteDatasetJSONLFilePath, '', { encoding: 'utf-8' });
 
-    console.log({ deprecatedCompleteDatasetJSONLFilePath });
     fs.appendFileSync(deprecatedCompleteDatasetJSONLFilePath, JSON.stringify(datasetV1JSONL) + '\n');
 
     // prompt
-    const prompt = generatePrompt(fileDiffHistories, currentFileContents, currentCursorPosition, currentFilePath);
+    const prompt = generatePrompt(fileDiffHistories, currentFileContents, currentCursorPosition, currentFilePath, cppIntent);
     fs.writeFileSync(promptFilePath, prompt, { encoding: 'utf-8' });
   }
 
@@ -95,7 +95,6 @@ function generateDataset(params) {
       ground_truth: displayedFusedCursorPrediction,
     };
 
-    console.log({ predictionDatasetJSONLFilePath });
     fs.appendFileSync(predictionDatasetJSONLFilePath, JSON.stringify(datasetPredictionJSONL) + '\n');
 
     // prompt

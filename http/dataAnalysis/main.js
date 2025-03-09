@@ -4,10 +4,12 @@ const fs = require('fs');
 const path = require('path');
 const { modifyCode } = require('./modifyCode');
 const { generateDataset } = require('./generateDataset');
+const { batchInvokeLLM } = require('./evaluateDataset');
 
 const logContainerFolder = path.resolve(__dirname, '../logV2');
 // const logFileName = 'arkui_log3';
 const logFileName = 'trafficLight3';
+// const logFileName = 'mutliLine';
 
 main(logFileName);
 
@@ -20,7 +22,9 @@ function main(logFileName) {
 
   formatLogIntoJSON(logPath, formattedJSONPath);
 
-  formatByGeneratedUUID(formattedJSONPath);
+  const promptFilePathList = formatByGeneratedUUID(formattedJSONPath);
+
+  batchInvokeLLM(promptFilePathList, specificLogFolderPath);
 }
 
 function ensureFolder(folderPath) {
@@ -113,6 +117,8 @@ function formatByGeneratedUUID(formattedJSONPath) {
   fs.writeFileSync(deprecatedCompleteDatasetJSONLFilePath, '', { encoding: 'utf-8' });
   fs.writeFileSync(predictionDatasetJSONLFilePath, '', { encoding: 'utf-8' });
 
+  const promptFilePathList = [];
+
   const mapList = Object.entries(map);
   mapList.forEach(item => {
     /**
@@ -125,7 +131,10 @@ function formatByGeneratedUUID(formattedJSONPath) {
     const subItemPath = path.join(byUUIDFolder, `${key}.json`);
     fs.writeFileSync(subItemPath, JSON.stringify(item[1], null, 2), { encoding: "utf-8" });
 
-    generateDataset({data, byUUIDFolder, key, deprecatedCompleteDatasetJSONLFilePath, predictionDatasetJSONLFilePath});
+    const { promptFilePath } = generateDataset({data, byUUIDFolder, key, deprecatedCompleteDatasetJSONLFilePath, predictionDatasetJSONLFilePath});
+    if (promptFilePath) {
+      promptFilePathList.push(promptFilePath);
+    }
   });
 
   console.log('======= Summary =======');
@@ -135,4 +144,6 @@ function formatByGeneratedUUID(formattedJSONPath) {
   const dirPath = path.dirname(formattedJSONPath);
   const unProcessedDataPath = path.resolve(dirPath, `./${logFileName}_unprocessed.json`);
   fs.writeFileSync(unProcessedDataPath, JSON.stringify(unProcessedData, null, 2), { encoding: 'utf-8' });
+
+  return promptFilePathList;
 }
