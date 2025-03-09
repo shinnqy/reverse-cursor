@@ -1,0 +1,55 @@
+{"line":6,"column":0}
+
+======== fileDiffHistories ========
+
+File: src/components/test2.ts
+1+|function changeLight(light: TrafficLight) {\n2+|  light = 'green';\n3+|}\n4+|\n2-|  light = 'green';\n2-|  \n2+|  switch (light) {\n3+|    case 'red':\n4+|      return 'green';\n5+|    case 'green':\n6+|      return 'yellow';\n7+|      \n8+|  }\n7-|      \n7+|\n
+1+|function changeLight(light: TrafficLight) {\n2+|  light = 'green';\n3+|}\n4+|\n2-|  light = 'green';\n2-|  \n2+|  switch (light) {\n3+|    case 'red':\n4+|      return 'green';\n5+|    case 'green':\n6+|      return 'yellow';\n7+|      \n8+|  }\n7-|      \n7+|\n
+1+|function changeLight(light: TrafficLight) {\n2+|  light = 'green';\n3+|}\n4+|\n2-|  light = 'green';\n2-|  \n2+|  switch (light) {\n3+|    case 'red':\n4+|      return 'green';\n5+|    case 'green':\n6+|      return 'yellow';\n7+|      \n8+|  }\n7-|      \n7+|\n
+1+|function changeLight(light: TrafficLight) {\n2+|  light = 'green';\n3+|}\n4+|\n2-|  light = 'green';\n2-|  \n2+|  switch (light) {\n3+|    case 'red':\n4+|      return 'green';\n5+|    case 'green':\n6+|      return 'yellow';\n7+|      \n8+|  }\n7-|      \n7+|\n
+
+======== processedCurrentFileContents ========
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case 'red':
+      return 'green';
+    case 'green':
+      return 'yellow';
+[ToFill]
+  }
+}
+
+
+======== firstChunkValue ========
+      return 'green';
+    case 'green':
+      return 'yellow';
+    case 'yellow':
+  }
+}
+
+
+======== fullText ========
+      return 'green';
+    case 'green':
+      return 'yellow';
+    case 'yellow':
+      return 'red';
+  }
+}
+
+const light = 'red';
+const newLight = changeLight(light);
+console.log(newLight);
+
+======== fusedCursorPrediction ========
+lineNumberOneIndexed: 1
+
+text: 
+function changeLight(light: TrafficLight) {
+switch (light) {
+case 'red':
+return 'green';
+case 'green':
+
+shouldRetriggerCpp: true

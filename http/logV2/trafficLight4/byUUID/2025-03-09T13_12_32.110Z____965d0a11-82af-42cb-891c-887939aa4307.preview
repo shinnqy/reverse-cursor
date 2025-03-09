@@ -1,0 +1,90 @@
+{"line":2,"column":11}
+
+======== fileDiffHistories ========
+
+File: src/components/test2.ts
+1+|function changeLight(light: TrafficLight) {\n2+|  light = 'green';\n3+|}\n4+|\n2-|  light = 'green';\n2-|  \n2+|  switch (light) {\n3+|    case 'red':\n4+|      return 'green';\n5+|    case 'green':\n6+|      return 'yellow';\n7+|      \n8+|  }\n7-|\n7+|    case 'yellow':\n8+|      return 'red';\n9+|    default:\n10+|      return 'red';\n3-|    case 'red':\n3+|    case li:\n
+1+|function changeLight(light: TrafficLight) {\n2+|  light = 'green';\n3+|}\n4+|\n2-|  light = 'green';\n2-|  \n2+|  switch (light) {\n3+|    case 'red':\n4+|      return 'green';\n5+|    case 'green':\n6+|      return 'yellow';\n7+|      \n8+|  }\n7-|\n7+|    case 'yellow':\n8+|      return 'red';\n9+|    default:\n10+|      return 'red';\n3-|    case 'red':\n3+|    case li:\n
+1+|function changeLight(light: TrafficLight) {\n2+|  light = 'green';\n3+|}\n4+|\n2-|  light = 'green';\n2-|  \n2+|  switch (light) {\n3+|    case 'red':\n4+|      return 'green';\n5+|    case 'green':\n6+|      return 'yellow';\n7+|      \n8+|  }\n7-|\n7+|    case 'yellow':\n8+|      return 'red';\n9+|    default:\n10+|      return 'red';\n3-|    case 'red':\n3+|    case li:\n
+1+|function changeLight(light: TrafficLight) {\n2+|  light = 'green';\n3+|}\n4+|\n2-|  light = 'green';\n2-|  \n2+|  switch (light) {\n3+|    case 'red':\n4+|      return 'green';\n5+|    case 'green':\n6+|      return 'yellow';\n7+|      \n8+|  }\n7-|\n7+|    case 'yellow':\n8+|      return 'red';\n9+|    default:\n10+|      return 'red';\n3-|    case 'red':\n3+|    case li:\n
+1+|function changeLight(light: TrafficLight) {\n2+|  light = 'green';\n3+|}\n4+|\n2-|  light = 'green';\n2-|  \n2+|  switch (light) {\n3+|    case 'red':\n4+|      return 'green';\n5+|    case 'green':\n6+|      return 'yellow';\n7+|      \n8+|  }\n7-|\n7+|    case 'yellow':\n8+|      return 'red';\n9+|    default:\n10+|      return 'red';\n3-|    case 'red':\n3+|    case li:\n
+
+======== processedCurrentFileContents ========
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case li[ToFill]:
+      return 'green';
+    case 'green':
+      return 'yellow';
+    case 'yellow':
+      return 'red';
+    default:
+      return 'red';
+  }
+}
+
+
+======== firstChunkValue ========
+  switch (light) {
+    case light.RED:
+      return 'green';
+    case 'green':
+      return 'yellow';
+======== replace firstChunkValue ========
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case light.RED:
+      return 'green';
+    case 'green':
+      return 'yellow';
+    case 'yellow':
+      return 'red';
+    default:
+      return 'red';
+  }
+}
+
+
+======== replacedContentsWithCursorPosition ========
+function changeLight(light: TrafficLight) {
+  switch (light) {<|current_cursor_position|>
+    case light.RED:
+      return 'green';
+    case 'green':
+      return 'yellow';
+    case 'yellow':
+      return 'red';
+    default:
+      return 'red';
+  }
+}
+
+
+======== fullText ========
+  switch (light) {
+    case light.RED:
+      return light.GREEN;
+    case light.GREEN:
+      return light.YELLOW;
+======== fusedCursorPrediction ========
+lineNumberOneIndexed: 7
+
+text: 
+case 'yellow':
+return 'red';
+default:
+return 'red';
+}
+
+shouldRetriggerCpp: true
+======== displayedFusedCursorPrediction ========
+lineNumberOneIndexed: 7
+
+text: 
+case 'yellow':
+return 'red';
+default:
+return 'red';
+}
+
+shouldRetriggerCpp: true

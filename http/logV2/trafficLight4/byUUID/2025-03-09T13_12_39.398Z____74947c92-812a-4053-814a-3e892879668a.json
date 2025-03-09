@@ -1,0 +1,658 @@
+[
+  {
+    "intent": "cursor_prediction",
+    "generationUUID": "74947c92-812a-4053-814a-3e892879668a",
+    "timestamp": "2025-03-09T13:12:39.398Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "src/components/test2.ts",
+          "diffHistory": [
+            "1+|function changeLight(light: TrafficLight) {\n2+|  light = 'green';\n3+|}\n4+|\n",
+            "2-|  light = 'green';\n",
+            "2-|  \n2+|  switch (light) {\n3+|    case 'red':\n4+|      return 'green';\n5+|    case 'green':\n6+|      return 'yellow';\n7+|      \n8+|  }\n",
+            "7-|\n7+|    case 'yellow':\n8+|      return 'red';\n9+|    default:\n10+|      return 'red';\n",
+            "3-|    case 'red':\n3+|    case light.RED:\n",
+            "5-|    case 'green':\n6-|      return 'yellow';\n5+|    case 'green'ht.GREEN:\n6+|      return light.YELLOW;\n",
+            "4-|      return 'green';\n5-|    case 'green'ht.GREEN:\n4+|      return 'green'ht.GREEN;\n5+|    case light.GREEN:\n",
+            "4-|      return 'green'ht.GREEN;\n4+|      return light.GREEN;\n",
+            "10-|      return 'red';\n10+|      return light.RED;\n",
+            "7-|    case 'yellow':\n8-|      return 'red';\n7+|    case 'yellow'ight.YELLOW:\n8+|      return light.RED;\n",
+            "7-|    case 'yellow'ight.YELLOW:\n7+|    case light.YELLOW:\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "linterErrors": {
+        "relativeWorkspacePath": "src/components/test2.ts",
+        "errors": [
+          {
+            "message": "Cannot find name 'TrafficLight'.",
+            "range": {
+              "startPosition": {
+                "line": 1,
+                "column": 29
+              },
+              "endPosition": {
+                "line": 1,
+                "column": 41
+              }
+            },
+            "source": "ts",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          },
+          {
+            "message": "'changeLight' is defined but never used.",
+            "range": {
+              "startPosition": {
+                "line": 1,
+                "column": 10
+              },
+              "endPosition": {
+                "line": 1,
+                "column": 21
+              }
+            },
+            "source": "eslint",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          },
+          {
+            "message": "Unterminated string literal.",
+            "range": {
+              "startPosition": {
+                "line": 3,
+                "column": 12
+              },
+              "endPosition": {
+                "line": 3,
+                "column": 12
+              }
+            },
+            "source": "",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          },
+          {
+            "message": "':' expected.",
+            "range": {
+              "startPosition": {
+                "line": 4,
+                "column": 7
+              },
+              "endPosition": {
+                "line": 4,
+                "column": 13
+              }
+            },
+            "source": "",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          }
+        ],
+        "fileContents": ""
+      },
+      "currentFile": {
+        "relativeWorkspacePath": "src/components/test2.ts",
+        "contents": "function changeLight(light: TrafficLight) {\n  switch (light) {\n    case light.RED:\n      return light.GREEN;\n    case light.GREEN:\n      return light.YELLOW;\n    case light.YELLOW:\n      return light.RED;\n    default:\n      return light.RED;\n  }\n}\n\n",
+        "cursorPosition": {
+          "line": 12,
+          "column": 0
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 53,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/Documents/personal/vite-react-demo2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "src/components/test.ts",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            4
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 4,
+              "endLineNumberInclusive": 24
+            }
+          ],
+          "lastViewedAt": 1741525907939
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "cursor_prediction"
+      },
+      "clientTime": 1741525959408,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "8u65ni1hw3pqzyyqn4vyf",
+      "timeSinceRequestStart": 12.5,
+      "timeAtRequestSend": 1741525959408
+    },
+    "generateUuid": "74947c92-812a-4053-814a-3e892879668a",
+    "timestamp": "2025-03-09T13:12:39.410Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "74947c92-812a-4053-814a-3e892879668a",
+    "timestamp": "2025-03-09T13:12:39.806Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}\n\nenum",
+      "rangeToReplace": {
+        "startLineNumber": 12,
+        "endLineNumberInclusive": 14
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "74947c92-812a-4053-814a-3e892879668a",
+    "timestamp": "2025-03-09T13:12:39.807Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Traffic"
+    },
+    "generationUUID": "74947c92-812a-4053-814a-3e892879668a",
+    "timestamp": "2025-03-09T13:12:39.823Z"
+  },
+  {
+    "firstChunkValue": "}\n\nenum TrafficLight {",
+    "generationUUID": "74947c92-812a-4053-814a-3e892879668a",
+    "timestamp": "2025-03-09T13:12:39.890Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Light {"
+    },
+    "generationUUID": "74947c92-812a-4053-814a-3e892879668a",
+    "timestamp": "2025-03-09T13:12:39.895Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n "
+    },
+    "generationUUID": "74947c92-812a-4053-814a-3e892879668a",
+    "timestamp": "2025-03-09T13:12:39.897Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " RED"
+    },
+    "generationUUID": "74947c92-812a-4053-814a-3e892879668a",
+    "timestamp": "2025-03-09T13:12:39.897Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "74947c92-812a-4053-814a-3e892879668a",
+    "timestamp": "2025-03-09T13:12:39.898Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " 'red"
+    },
+    "generationUUID": "74947c92-812a-4053-814a-3e892879668a",
+    "timestamp": "2025-03-09T13:12:39.899Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "',"
+    },
+    "generationUUID": "74947c92-812a-4053-814a-3e892879668a",
+    "timestamp": "2025-03-09T13:12:39.899Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n  GREEN"
+    },
+    "generationUUID": "74947c92-812a-4053-814a-3e892879668a",
+    "timestamp": "2025-03-09T13:12:39.900Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "74947c92-812a-4053-814a-3e892879668a",
+    "timestamp": "2025-03-09T13:12:39.901Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "}\n\nenum TrafficLight {"
+    },
+    "generationUUID": "74947c92-812a-4053-814a-3e892879668a",
+    "timestamp": "2025-03-09T13:12:39.902Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "green',"
+    },
+    "generationUUID": "74947c92-812a-4053-814a-3e892879668a",
+    "timestamp": "2025-03-09T13:12:39.903Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " '"
+    },
+    "generationUUID": "74947c92-812a-4053-814a-3e892879668a",
+    "timestamp": "2025-03-09T13:12:39.904Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "74947c92-812a-4053-814a-3e892879668a",
+    "timestamp": "2025-03-09T13:12:39.964Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "74947c92-812a-4053-814a-3e892879668a",
+    "timestamp": "2025-03-09T13:12:39.964Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Y"
+    },
+    "generationUUID": "74947c92-812a-4053-814a-3e892879668a",
+    "timestamp": "2025-03-09T13:12:39.964Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "ELL"
+    },
+    "generationUUID": "74947c92-812a-4053-814a-3e892879668a",
+    "timestamp": "2025-03-09T13:12:39.965Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " 'yellow"
+    },
+    "generationUUID": "74947c92-812a-4053-814a-3e892879668a",
+    "timestamp": "2025-03-09T13:12:39.965Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "OW ="
+    },
+    "generationUUID": "74947c92-812a-4053-814a-3e892879668a",
+    "timestamp": "2025-03-09T13:12:39.965Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n}"
+    },
+    "generationUUID": "74947c92-812a-4053-814a-3e892879668a",
+    "timestamp": "2025-03-09T13:12:39.965Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "',"
+    },
+    "generationUUID": "74947c92-812a-4053-814a-3e892879668a",
+    "timestamp": "2025-03-09T13:12:39.965Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "74947c92-812a-4053-814a-3e892879668a",
+    "timestamp": "2025-03-09T13:12:40.036Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "74947c92-812a-4053-814a-3e892879668a",
+    "timestamp": "2025-03-09T13:12:40.036Z"
+  },
+  {
+    "fullText": "}\n\nenum TrafficLight {\n  RED = 'red',\n  GREEN = 'green',\n  YELLOW = 'yellow',\n}\n\n",
+    "generationUUID": "74947c92-812a-4053-814a-3e892879668a",
+    "timestamp": "2025-03-09T13:12:40.044Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "}\n\nenum TrafficLight {"
+    },
+    "fullText": "}\n\nenum TrafficLight {\n  RED = 'red',\n  GREEN = 'green',\n  YELLOW = 'yellow',\n}\n\n",
+    "generationUUID": "74947c92-812a-4053-814a-3e892879668a",
+    "timestamp": "2025-03-09T13:12:40.045Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "391e7532-ef1d-4893-a14e-67e25f2e3c52",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/Documents/personal/vite-react-demo2/src/components/test2.ts",
+        "external": "file:///Users/shinn/Documents/personal/vite-react-demo2/src/components/test2.ts",
+        "path": "/Users/shinn/Documents/personal/vite-react-demo2/src/components/test2.ts",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 53,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 54,
+      "monotonicallyIncreasingSuggestionId": 35,
+      "range": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 14,
+        "endColumn": 1
+      },
+      "replaceText": "}\n\nenum TrafficLight {\n  RED = 'red',\n  GREEN = 'green',\n  YELLOW = 'yellow',\n}\n\n",
+      "originalText": "}\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 14,
+        "endColumn": 1
+      },
+      "diffText": "}\n\nenum TrafficLight {\n  RED = 'red',\n  GREEN = 'green',\n  YELLOW = 'yellow',\n}\n\n",
+      "fullOriginalText": "}\n\n",
+      "suggestionTriggerTime": 1741525959395.2,
+      "greens": [],
+      "source": "cursor_prediction",
+      "requestId": "74947c92-812a-4053-814a-3e892879668a",
+      "selection": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 14,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "8587fda8-c1eb-42d3-8ed6-fd598c6cb4d6",
+      "undoRedoGroup": {
+        "id": 36,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "74947c92-812a-4053-814a-3e892879668a",
+    "timestamp": "2025-03-09T13:12:40.045Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "8587fda8-c1eb-42d3-8ed6-fd598c6cb4d6",
+    "generationUUID": "74947c92-812a-4053-814a-3e892879668a",
+    "timestamp": "2025-03-09T13:12:40.047Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "}\n\nenum TrafficLight {"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "8587fda8-c1eb-42d3-8ed6-fd598c6cb4d6",
+    "generationUUID": "74947c92-812a-4053-814a-3e892879668a",
+    "timestamp": "2025-03-09T13:12:40.047Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "8587fda8-c1eb-42d3-8ed6-fd598c6cb4d6",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-09T13:12:40.047Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "64335477-2074-44f2-8e5f-10d4197a4083",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/Documents/personal/vite-react-demo2/src/components/test2.ts",
+        "external": "file:///Users/shinn/Documents/personal/vite-react-demo2/src/components/test2.ts",
+        "path": "/Users/shinn/Documents/personal/vite-react-demo2/src/components/test2.ts",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 53,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 53,
+      "monotonicallyIncreasingSuggestionId": 34,
+      "range": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 14,
+        "endColumn": 1
+      },
+      "replaceText": "}\n\nenum TrafficLight {",
+      "originalText": "}\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 14,
+        "endColumn": 1
+      },
+      "diffText": "}\n\nenum TrafficLight {",
+      "fullOriginalText": "}\n\n",
+      "suggestionTriggerTime": 1741525959395.2,
+      "greens": [],
+      "source": "cursor_prediction",
+      "requestId": "74947c92-812a-4053-814a-3e892879668a",
+      "selection": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 14,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 35,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "f;222",
+      "onAcceptDisplayId": "391e7532-ef1d-4893-a14e-67e25f2e3c52"
+    },
+    "generationUUID": "74947c92-812a-4053-814a-3e892879668a",
+    "timestamp": "2025-03-09T13:12:40.828Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "64335477-2074-44f2-8e5f-10d4197a4083",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/Documents/personal/vite-react-demo2/src/components/test2.ts",
+        "external": "file:///Users/shinn/Documents/personal/vite-react-demo2/src/components/test2.ts",
+        "path": "/Users/shinn/Documents/personal/vite-react-demo2/src/components/test2.ts",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 53,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 53,
+      "monotonicallyIncreasingSuggestionId": 34,
+      "range": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 14,
+        "endColumn": 1
+      },
+      "replaceText": "}\n\nenum TrafficLight {",
+      "originalText": "}\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 14,
+        "endColumn": 1
+      },
+      "diffText": "}\n\nenum TrafficLight {",
+      "fullOriginalText": "}\n\n",
+      "suggestionTriggerTime": 1741525959395.2,
+      "greens": [],
+      "source": "cursor_prediction",
+      "requestId": "74947c92-812a-4053-814a-3e892879668a",
+      "selection": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 14,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 35,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "f;222",
+      "onAcceptDisplayId": "391e7532-ef1d-4893-a14e-67e25f2e3c52"
+    },
+    "generationUUID": "74947c92-812a-4053-814a-3e892879668a",
+    "timestamp": "2025-03-09T13:12:40.840Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "391e7532-ef1d-4893-a14e-67e25f2e3c52",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/Documents/personal/vite-react-demo2/src/components/test2.ts",
+        "external": "file:///Users/shinn/Documents/personal/vite-react-demo2/src/components/test2.ts",
+        "path": "/Users/shinn/Documents/personal/vite-react-demo2/src/components/test2.ts",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 53,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 54,
+      "monotonicallyIncreasingSuggestionId": 35,
+      "range": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 14,
+        "endColumn": 1
+      },
+      "replaceText": "}\n\nenum TrafficLight {\n  RED = 'red',\n  GREEN = 'green',\n  YELLOW = 'yellow',\n}\n\n",
+      "originalText": "}\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 14,
+        "endColumn": 1
+      },
+      "diffText": "}\n\nenum TrafficLight {\n  RED = 'red',\n  GREEN = 'green',\n  YELLOW = 'yellow',\n}\n\n",
+      "fullOriginalText": "}\n\n",
+      "suggestionTriggerTime": 1741525959395.2,
+      "greens": [],
+      "source": "cursor_prediction",
+      "requestId": "74947c92-812a-4053-814a-3e892879668a",
+      "selection": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 14,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "8587fda8-c1eb-42d3-8ed6-fd598c6cb4d6",
+      "undoRedoGroup": {
+        "id": 36,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "f;227"
+    },
+    "generationUUID": "74947c92-812a-4053-814a-3e892879668a",
+    "timestamp": "2025-03-09T13:12:41.887Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "391e7532-ef1d-4893-a14e-67e25f2e3c52",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/Documents/personal/vite-react-demo2/src/components/test2.ts",
+        "external": "file:///Users/shinn/Documents/personal/vite-react-demo2/src/components/test2.ts",
+        "path": "/Users/shinn/Documents/personal/vite-react-demo2/src/components/test2.ts",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 53,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 54,
+      "monotonicallyIncreasingSuggestionId": 35,
+      "range": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 14,
+        "endColumn": 1
+      },
+      "replaceText": "}\n\nenum TrafficLight {\n  RED = 'red',\n  GREEN = 'green',\n  YELLOW = 'yellow',\n}\n\n",
+      "originalText": "}\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 14,
+        "endColumn": 1
+      },
+      "diffText": "}\n\nenum TrafficLight {\n  RED = 'red',\n  GREEN = 'green',\n  YELLOW = 'yellow',\n}\n\n",
+      "fullOriginalText": "}\n\n",
+      "suggestionTriggerTime": 1741525959395.2,
+      "greens": [],
+      "source": "cursor_prediction",
+      "requestId": "74947c92-812a-4053-814a-3e892879668a",
+      "selection": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 14,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "8587fda8-c1eb-42d3-8ed6-fd598c6cb4d6",
+      "undoRedoGroup": {
+        "id": 36,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "f;227"
+    },
+    "generationUUID": "74947c92-812a-4053-814a-3e892879668a",
+    "timestamp": "2025-03-09T13:12:41.906Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "8587fda8-c1eb-42d3-8ed6-fd598c6cb4d6",
+    "fusedCursorPrediction": null,
+    "oldText": "}\n\n",
+    "newText": "}\n\nenum TrafficLight {\n  RED = 'red',\n  GREEN = 'green',\n  YELLOW = 'yellow',\n}\n\n",
+    "timestamp": "2025-03-09T13:12:41.907Z"
+  }
+]
