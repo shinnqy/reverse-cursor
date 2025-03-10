@@ -26,11 +26,12 @@ const urlMap = {
   [EndPoint.DeepSeek]: 'https://api.deepseek.com/chat/completions',
   [EndPoint.GPT35]: envObject['AZURE_OPENAI_COMPLETION_URL'],
   [EndPoint.Qwen25Coder7BInstructGPTQInt4]: 'http://7.216.58.118:8087/v1/chat/completions',
-  [EndPoint.aliQwen7BQuant]: 'https://dashscope.aliyuncs.com/compatible-mode/v1'
+  [EndPoint.aliQwen7BQuant]: 'https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions'
 };
 
-const apiKeyMap = {
-  [EndPoint.aliQwen7BQuant]: 'sk-e46b06ee8bae41d1842f2b2830581942',
+const AuthorizationMap = {
+  [EndPoint.DeepSeek]: envObject['DEEPSEEK_KEY'],
+  [EndPoint.aliQwen7BQuant]: 'Bearer sk-e46b06ee8bae41d1842f2b2830581942',
 };
 
 const modelMap = {
@@ -51,8 +52,7 @@ async function completion(code = "hi") {
     fetchRes = await fetch(urlMap[endpoint], {
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': envObject['DEEPSEEK_KEY'],
-        'api-key': apiKeyMap[endpoint],
+        'Authorization': AuthorizationMap[endpoint],
       },
       method: 'POST',
       body: JSON.stringify({
