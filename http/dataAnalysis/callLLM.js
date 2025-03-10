@@ -2,6 +2,7 @@
 
 const path = require('path');
 const fs = require('fs');
+const { EndPoint, config } = require('./config');
 
 const envContent = fs.readFileSync(path.resolve(__dirname, './.env'), { encoding: 'utf-8' });
 const envObject = {};
@@ -14,13 +15,6 @@ envContent.split('\n').forEach(line => {
 });
 
 const completionUrl = envObject['AZURE_OPENAI_COMPLETION_URL'];
-
-const EndPoint = {
-  DeepSeek: 'DeepSeek',
-  GPT35: 'GPT35',
-  Qwen25Coder7BInstructGPTQInt4: 'Qwen25Coder7BInstructGPTQInt4',
-  aliQwen7BQuant: 'aliQwen7BQuant'
-};
 
 const urlMap = {
   [EndPoint.DeepSeek]: 'https://api.deepseek.com/chat/completions',
@@ -40,7 +34,7 @@ const modelMap = {
   [EndPoint.aliQwen7BQuant]: 'qwen2.5-coder-7b-instruct',
 };
 
-const endpoint = EndPoint.aliQwen7BQuant;
+const endpoint = config.endpointType;
 
 const useOpenAICompatible = true;
 const stream = false;
@@ -167,9 +161,9 @@ module.exports = {
   completion,
 };
 
-const editSample = path.resolve(__dirname, '../logV2/trafficLight3/byUUID/2025-03-02T14_51_26.791Z____605959bf-9dfd-4480-b204-8d2fa0b0117d.prompt')
-// const editSample = path.resolve(__dirname, '../logV2/trafficLight3/byUUID/2025-03-02T14_50_45.219Z____5982eb3e-e9cf-47e1-9d58-3c8cea05460c.prompt')
-const input = fs.readFileSync(editSample, { encoding: 'utf-8' });
-completion(input).then(output => {
-  console.log({output})
-});
+// const editSample = path.resolve(__dirname, '../logV2/trafficLight3/byUUID/2025-03-02T14_51_26.791Z____605959bf-9dfd-4480-b204-8d2fa0b0117d.prompt')
+// // const editSample = path.resolve(__dirname, '../logV2/trafficLight3/byUUID/2025-03-02T14_50_45.219Z____5982eb3e-e9cf-47e1-9d58-3c8cea05460c.prompt')
+// const input = fs.readFileSync(editSample, { encoding: 'utf-8' });
+// completion(input).then(output => {
+//   console.log({output})
+// });

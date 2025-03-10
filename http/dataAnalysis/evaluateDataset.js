@@ -3,12 +3,16 @@
 const fs = require('fs');
 const path = require('path');
 const { completion } = require('./callLLM');
+const { config } = require('./config');
+
+const endpoint = config.endpointType;
+const id = Date.now();
 
 /**
  * @param {string[]} promptFilePathList
  */
 function batchInvokeLLM(promptFilePathList, specificLogFolderPath) {
-  const outputFolderPath = path.join(specificLogFolderPath, 'output.log');
+  const outputFolderPath = path.join(specificLogFolderPath, `${endpoint}_${id}_output.log`);
   fs.writeFileSync(outputFolderPath, '', { encoding: 'utf-8' });
 
 
