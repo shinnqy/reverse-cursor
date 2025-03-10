@@ -5,11 +5,10 @@ const path = require('path');
 const { modifyCode } = require('./modifyCode');
 const { generateDataset } = require('./generateDataset');
 const { batchInvokeLLM } = require('./evaluateDataset');
+const { config } = require('./config');
 
-const logContainerFolder = path.resolve(__dirname, '../logV2');
-// const logFileName = 'arkui_log3';
-const logFileName = 'trafficLight3';
-// const logFileName = 'mutliLine';
+const logContainerFolder = config.logContainerFolder;
+const logFileName = config.logFileName;
 
 main(logFileName);
 
