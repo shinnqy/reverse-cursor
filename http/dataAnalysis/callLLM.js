@@ -7,27 +7,56 @@ const envContent = fs.readFileSync(path.resolve(__dirname, './.env'), { encoding
 const envObject = {};
 envContent.split('\n').forEach(line => {
   const [key, value] = line.split(': ');
-  envObject[key] = value;
+  if (!key.trim()) {
+    return;
+  }
+  envObject[key] = value.trim();
 });
 
-const dsUrl = 'https://api.deepseek.com/chat/completions'
 const completionUrl = envObject['AZURE_OPENAI_COMPLETION_URL'];
 
-const useDeepSeek = false;
-const stream = true;
+const EndPoint = {
+  DeepSeek: 'DeepSeek',
+  GPT35: 'GPT35',
+  Qwen25Coder7BInstructGPTQInt4: 'Qwen25Coder7BInstructGPTQInt4',
+  aliQwen7BQuant: 'aliQwen7BQuant'
+};
+
+const urlMap = {
+  [EndPoint.DeepSeek]: 'https://api.deepseek.com/chat/completions',
+  [EndPoint.GPT35]: envObject['AZURE_OPENAI_COMPLETION_URL'],
+  [EndPoint.Qwen25Coder7BInstructGPTQInt4]: 'http://7.216.58.118:8087/v1/chat/completions',
+  [EndPoint.aliQwen7BQuant]: 'https://dashscope.aliyuncs.com/compatible-mode/v1'
+};
+
+const apiKeyMap = {
+  [EndPoint.aliQwen7BQuant]: 'sk-e46b06ee8bae41d1842f2b2830581942',
+};
+
+const modelMap = {
+  [EndPoint.DeepSeek]: 'deepseek-chat',
+  [EndPoint.Qwen25Coder7BInstructGPTQInt4]: 'Qwen2.5-Coder-7B-Instruct-GPTQ-Int4',
+  [EndPoint.aliQwen7BQuant]: 'qwen2.5-coder-7b-instruct',
+};
+
+const endpoint = EndPoint.aliQwen7BQuant;
+
+const useOpenAICompatible = true;
+const stream = false;
 async function completion(code = "hi") {
   const startTime = performance.now();
 
   let fetchRes;
-  if (useDeepSeek) {
-    fetchRes = await fetch(dsUrl, {
+  if (useOpenAICompatible) {
+    fetchRes = await fetch(urlMap[endpoint], {
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': envObject['DEEPSEEK_KEY']
+        'Authorization': envObject['DEEPSEEK_KEY'],
+        'api-key': apiKeyMap[endpoint],
       },
       method: 'POST',
       body: JSON.stringify({
-        model: 'deepseek-chat',
+        model: modelMap[endpoint],
         stream,
         temperature: 1,
         messages: [
