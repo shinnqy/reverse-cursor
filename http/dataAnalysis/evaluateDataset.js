@@ -49,6 +49,8 @@ ${firstChunkValue}
 ${fullText}
 `;
       fs.appendFileSync(outputFolderPath, data, { encoding: 'utf-8' });
+      const dependentLogPath = path.join(path.dirname(promptFilePath), `${fileName}.result_${endpoint}.log`);
+      fs.writeFileSync(dependentLogPath, data, { encoding: 'utf-8' });
     });
   });
 }
