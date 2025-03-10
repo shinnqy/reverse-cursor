@@ -2,31 +2,56 @@
 
 const path = require('path');
 const fs = require('fs');
+const { EndPoint, config } = require('./config');
 
 const envContent = fs.readFileSync(path.resolve(__dirname, './.env'), { encoding: 'utf-8' });
 const envObject = {};
 envContent.split('\n').forEach(line => {
   const [key, value] = line.split(': ');
-  envObject[key] = value;
+  if (!key.trim()) {
+    return;
+  }
+  envObject[key] = value.trim();
 });
 
-const dsUrl = 'https://api.deepseek.com/chat/completions'
 const completionUrl = envObject['AZURE_OPENAI_COMPLETION_URL'];
 
-const useDeepSeek = true;
+const urlMap = {
+  [EndPoint.DeepSeek]: 'https://api.deepseek.com/chat/completions',
+  [EndPoint.GPT35]: envObject['AZURE_OPENAI_COMPLETION_URL'],
+  [EndPoint.Qwen25Coder7BInstructGPTQInt4]: 'http://7.216.58.118:8087/v1/chat/completions',
+  [EndPoint.aliQwen7BQuant]: 'https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions'
+};
+
+const AuthorizationMap = {
+  [EndPoint.DeepSeek]: envObject['DEEPSEEK_KEY'],
+  [EndPoint.aliQwen7BQuant]: 'Bearer sk-e46b06ee8bae41d1842f2b2830581942',
+};
+
+const modelMap = {
+  [EndPoint.DeepSeek]: 'deepseek-chat',
+  [EndPoint.Qwen25Coder7BInstructGPTQInt4]: 'Qwen2.5-Coder-7B-Instruct-GPTQ-Int4',
+  [EndPoint.aliQwen7BQuant]: 'qwen2.5-coder-7b-instruct',
+};
+
+const endpoint = config.endpointType;
+
+const useOpenAICompatible = true;
+const stream = false;
 async function completion(code = "hi") {
   const startTime = performance.now();
 
   let fetchRes;
-  if (useDeepSeek) {
-    fetchRes = await fetch(dsUrl, {
+  if (useOpenAICompatible) {
+    fetchRes = await fetch(urlMap[endpoint], {
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': envObject['DEEPSEEK_KEY']
+        'Authorization': AuthorizationMap[endpoint],
       },
       method: 'POST',
       body: JSON.stringify({
-        model: 'deepseek-chat',
+        model: modelMap[endpoint],
+        stream,
         temperature: 1,
         messages: [
           // {
@@ -49,6 +74,7 @@ async function completion(code = "hi") {
       method: 'POST',
       body: JSON.stringify({
         temperature: 1,
+        stream,
         messages: [
           // {
           //   role: 'system',
@@ -63,13 +89,72 @@ async function completion(code = "hi") {
     });
   }
 
-  const res = await fetchRes.json();
+  if (stream) {
+    if (!fetchRes.body) {
+      throw new Error('Stream response is not supported');
+    }
 
-  const endTime = performance.now();
-  console.log('Duration LLM call: ', endTime - startTime);
+    const decoder = new TextDecoder();
+    let fullText = '';
 
-  const data = res.choices[0].message.content;
-  return data
+    let lastDataOfPreviousChunk = null;
+    for await (const chunk of fetchRes.body) {
+      const rawData = decoder.decode(chunk, { stream: true });
+      const dataList = rawData.split('\n').filter(i => !!i);
+
+      for (let i = 0; i < dataList.length; i++) {
+        const dataItem = dataList[i];
+        const dataStr = dataItem.split('data: ')[1];
+        if (dataStr === '[DONE]') {
+          continue;
+        }
+        try {
+          processDataStr(dataStr);
+        } catch (e) {
+          if (lastDataOfPreviousChunk != null) {
+            const combinedData = lastDataOfPreviousChunk + dataItem;
+            lastDataOfPreviousChunk = null;
+            const dataStr = combinedData.split('data: ')[1];
+            try {
+              processDataStr(dataStr);
+            } catch (e) {
+              console.log({error: e})
+            }
+          } else {
+            lastDataOfPreviousChunk = dataItem
+          }
+        }
+      }
+    }
+
+    /**
+     * @param {string} dataStr
+     */
+    function processDataStr(dataStr) {
+      const dataObj= JSON.parse(dataStr);
+      if (Array.isArray(dataObj.choices) && dataObj.choices.length > 0) {
+        /**
+         * @type {{ delta: { content: string; role: 'assistant' | 'user' | 'system' } }}
+         */
+        const data = dataObj.choices[0];
+        const text = data.delta.content;
+        if (typeof text === 'string') {
+          fullText += text;
+        }
+        console.log({text})
+      }
+    }
+
+    return fullText;
+  } else {
+    const res = await fetchRes.json();
+
+    const endTime = performance.now();
+    console.log('Duration LLM call: ', endTime - startTime);
+
+    const data = res.choices[0].message.content;
+    return data
+  }
 }
 
 module.exports = {
@@ -77,7 +162,7 @@ module.exports = {
 };
 
 // const editSample = path.resolve(__dirname, '../logV2/trafficLight3/byUUID/2025-03-02T14_51_26.791Z____605959bf-9dfd-4480-b204-8d2fa0b0117d.prompt')
-// const editSample = path.resolve(__dirname, '../logV2/trafficLight3/byUUID/2025-03-02T14_50_45.219Z____5982eb3e-e9cf-47e1-9d58-3c8cea05460c.prompt')
+// // const editSample = path.resolve(__dirname, '../logV2/trafficLight3/byUUID/2025-03-02T14_50_45.219Z____5982eb3e-e9cf-47e1-9d58-3c8cea05460c.prompt')
 // const input = fs.readFileSync(editSample, { encoding: 'utf-8' });
 // completion(input).then(output => {
 //   console.log({output})
