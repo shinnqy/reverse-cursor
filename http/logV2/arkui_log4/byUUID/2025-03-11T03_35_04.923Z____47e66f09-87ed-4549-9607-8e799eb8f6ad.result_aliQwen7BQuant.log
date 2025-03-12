@@ -1,0 +1,48 @@
+============================
+----promptFilePath----:
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/arkui_log4/byUUID/2025-03-11T03_35_04.923Z____47e66f09-87ed-4549-9607-8e799eb8f6ad.prompt
+
+----output----:
+```typescript
+props: {}
+```
+
+-----replacedOutput-----
+@Preview
+@Component
+export default struct Banner {
+```typescript
+props: {}
+```
+    Text("Banner")
+  }
+}
+
+----firstChunkValue----:
+export default struct Banner {
+  @Prop title: string = 'Banner'
+
+  build() {
+    Text("Banner")
+  }
+}
+
+----replacedContents(firstChunkValue)----
+@Preview
+@Component
+export default struct Banner {
+  @Prop title: string = 'Banner'
+
+  build() {
+    Text("Banner")
+  }
+}
+
+----fullText----:
+export default struct Banner {
+  @Prop title: string = 'Banner'
+
+  build() {
+    Text(this.title)
+  }
+}

@@ -1,0 +1,376 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "6fa972a4-9d20-4e57-be61-f24bf8a2a7f4",
+    "timestamp": "2025-03-11T03:33:51.701Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/pages/Index.ets",
+          "diffHistory": [
+            "17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Button clicked';\n22+|      })\n",
+            "18-|        Text('Click me')\n18+|        Text('Abou')\n",
+            "18-|        Text('Abou')\n18+|        Text('About Me')\n",
+            "21-|        this.message = 'Button clicked';\n",
+            "21-|        \n21+|        router.push({\n22+|          uri: 'pages/About'\n23+|        })\n",
+            "22-|          uri: 'pages/About'\n22+|          uri: 'pages/AboutM'\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/pages/Index.ets",
+        "contents": "@Entry\n@Component\nstruct Index {\n  @State message: string = 'Hello World';\n\n  build() {\n    RelativeContainer() {\n      Text(this.message)\n        .id('HelloWorld')\n        .fontSize(50)\n        .fontWeight(FontWeight.Bold)\n        .alignRules({\n          center: { anchor: '__container__', align: VerticalAlign.Center },\n          middle: { anchor: '__container__', align: HorizontalAlign.Center }\n        })\n\n      Button() {\n        Text('About Me')\n      }\n      .onClick(() => {\n        router.push({\n          uri: 'pages/AboutM'\n        })\n      })\n    }\n    .height('100%')\n    .width('100%')\n  }\n}",
+        "cursorPosition": {
+          "line": 21,
+          "column": 28
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 35,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1741664031745,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.7998046875,
+      "timeAtRequestSend": 1741664031745
+    },
+    "generateUuid": "6fa972a4-9d20-4e57-be61-f24bf8a2a7f4",
+    "timestamp": "2025-03-11T03:33:51.746Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "6fa972a4-9d20-4e57-be61-f24bf8a2a7f4",
+    "timestamp": "2025-03-11T03:33:52.116Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "      .onClick(() => {\n        router.push({\n          uri: 'pages/AboutMe",
+      "rangeToReplace": {
+        "startLineNumber": 20,
+        "endLineNumberInclusive": 24
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "6fa972a4-9d20-4e57-be61-f24bf8a2a7f4",
+    "timestamp": "2025-03-11T03:33:52.118Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "'"
+    },
+    "generationUUID": "6fa972a4-9d20-4e57-be61-f24bf8a2a7f4",
+    "timestamp": "2025-03-11T03:33:52.144Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n       "
+    },
+    "generationUUID": "6fa972a4-9d20-4e57-be61-f24bf8a2a7f4",
+    "timestamp": "2025-03-11T03:33:52.152Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " })\n      })"
+    },
+    "generationUUID": "6fa972a4-9d20-4e57-be61-f24bf8a2a7f4",
+    "timestamp": "2025-03-11T03:33:52.160Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "6fa972a4-9d20-4e57-be61-f24bf8a2a7f4",
+    "timestamp": "2025-03-11T03:33:52.168Z"
+  },
+  {
+    "firstChunkValue": "      .onClick(() => {\n        router.push({\n          uri: 'pages/AboutMe'\n        })\n      })",
+    "generationUUID": "6fa972a4-9d20-4e57-be61-f24bf8a2a7f4",
+    "timestamp": "2025-03-11T03:33:52.170Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "      .onClick(() => {\n        router.push({\n          uri: 'pages/AboutMe'\n        })\n      })"
+    },
+    "generationUUID": "6fa972a4-9d20-4e57-be61-f24bf8a2a7f4",
+    "timestamp": "2025-03-11T03:33:52.172Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "bf9f259d-b4e3-4243-bbdf-cc19f4f7aa66",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/Index.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/Index.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/Index.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 35,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 35,
+      "monotonicallyIncreasingSuggestionId": 15,
+      "range": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 9
+      },
+      "replaceText": "      .onClick(() => {\n        router.push({\n          uri: 'pages/AboutMe'\n        })\n      })",
+      "originalText": "      .onClick(() => {\n        router.push({\n          uri: 'pages/AboutM'\n        })\n      })",
+      "startingSuggestionRange": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 9
+      },
+      "diffText": "      .onClick(() => {\n        router.push({\n          uri: 'pages/AboutMe'\n        })\n      })",
+      "fullOriginalText": "      .onClick(() => {\n        router.push({\n          uri: 'pages/AboutM'\n        })\n      })",
+      "suggestionTriggerTime": 1741664031694.5,
+      "greens": [],
+      "source": "typing",
+      "requestId": "6fa972a4-9d20-4e57-be61-f24bf8a2a7f4",
+      "selection": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 9
+      },
+      "fusedCursorPredictionId": "4bad3af9-559e-4f2e-9b35-5b595a3553d6",
+      "undoRedoGroup": {
+        "id": 15,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "6fa972a4-9d20-4e57-be61-f24bf8a2a7f4",
+    "timestamp": "2025-03-11T03:33:52.173Z"
+  },
+  {
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/pages/Index.ets",
+      "lineNumberOneIndexed": 16,
+      "text": "",
+      "shouldRetriggerCpp": true
+    },
+    "predictionId": "4bad3af9-559e-4f2e-9b35-5b595a3553d6",
+    "generationUUID": "6fa972a4-9d20-4e57-be61-f24bf8a2a7f4",
+    "timestamp": "2025-03-11T03:33:52.199Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "      .onClick(() => {\n        router.push({\n          uri: 'pages/AboutMe'\n        })\n      })"
+    },
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/pages/Index.ets",
+      "lineNumberOneIndexed": 16,
+      "text": "",
+      "shouldRetriggerCpp": true
+    },
+    "predictionId": "4bad3af9-559e-4f2e-9b35-5b595a3553d6",
+    "generationUUID": "6fa972a4-9d20-4e57-be61-f24bf8a2a7f4",
+    "timestamp": "2025-03-11T03:33:52.200Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "4bad3af9-559e-4f2e-9b35-5b595a3553d6",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/pages/Index.ets",
+      "lineNumberOneIndexed": 16,
+      "text": "",
+      "shouldRetriggerCpp": true
+    },
+    "timestamp": "2025-03-11T03:33:52.201Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "cursorPredictionTarget": {
+        "relativePath": "entry/src/main/ets/pages/Index.ets",
+        "lineNumberOneIndexed": 16,
+        "expectedContent": "",
+        "shouldRetriggerCpp": true
+      }
+    },
+    "generationUUID": "6fa972a4-9d20-4e57-be61-f24bf8a2a7f4",
+    "timestamp": "2025-03-11T03:33:52.202Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "6fa972a4-9d20-4e57-be61-f24bf8a2a7f4",
+    "timestamp": "2025-03-11T03:33:52.202Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "bf9f259d-b4e3-4243-bbdf-cc19f4f7aa66",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/Index.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/Index.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/Index.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 35,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 35,
+      "monotonicallyIncreasingSuggestionId": 15,
+      "range": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 9
+      },
+      "replaceText": "      .onClick(() => {\n        router.push({\n          uri: 'pages/AboutMe'\n        })\n      })",
+      "originalText": "      .onClick(() => {\n        router.push({\n          uri: 'pages/AboutM'\n        })\n      })",
+      "startingSuggestionRange": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 9
+      },
+      "diffText": "      .onClick(() => {\n        router.push({\n          uri: 'pages/AboutMe'\n        })\n      })",
+      "fullOriginalText": "      .onClick(() => {\n        router.push({\n          uri: 'pages/AboutM'\n        })\n      })",
+      "suggestionTriggerTime": 1741664031694.5,
+      "greens": [],
+      "source": "typing",
+      "requestId": "6fa972a4-9d20-4e57-be61-f24bf8a2a7f4",
+      "selection": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 9
+      },
+      "fusedCursorPredictionId": "4bad3af9-559e-4f2e-9b35-5b595a3553d6",
+      "undoRedoGroup": {
+        "id": 15,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;138"
+    },
+    "generationUUID": "6fa972a4-9d20-4e57-be61-f24bf8a2a7f4",
+    "timestamp": "2025-03-11T03:33:52.471Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "bf9f259d-b4e3-4243-bbdf-cc19f4f7aa66",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/Index.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/Index.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/Index.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 35,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 35,
+      "monotonicallyIncreasingSuggestionId": 15,
+      "range": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 9
+      },
+      "replaceText": "      .onClick(() => {\n        router.push({\n          uri: 'pages/AboutMe'\n        })\n      })",
+      "originalText": "      .onClick(() => {\n        router.push({\n          uri: 'pages/AboutM'\n        })\n      })",
+      "startingSuggestionRange": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 9
+      },
+      "diffText": "      .onClick(() => {\n        router.push({\n          uri: 'pages/AboutMe'\n        })\n      })",
+      "fullOriginalText": "      .onClick(() => {\n        router.push({\n          uri: 'pages/AboutM'\n        })\n      })",
+      "suggestionTriggerTime": 1741664031694.5,
+      "greens": [],
+      "source": "typing",
+      "requestId": "6fa972a4-9d20-4e57-be61-f24bf8a2a7f4",
+      "selection": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 9
+      },
+      "fusedCursorPredictionId": "4bad3af9-559e-4f2e-9b35-5b595a3553d6",
+      "undoRedoGroup": {
+        "id": 15,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;138"
+    },
+    "generationUUID": "6fa972a4-9d20-4e57-be61-f24bf8a2a7f4",
+    "timestamp": "2025-03-11T03:33:52.480Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "4bad3af9-559e-4f2e-9b35-5b595a3553d6",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/pages/Index.ets",
+      "lineNumberOneIndexed": 16,
+      "text": "",
+      "shouldRetriggerCpp": true
+    },
+    "oldText": "      .onClick(() => {\n        router.push({\n          uri: 'pages/AboutM'\n        })\n      })",
+    "newText": "      .onClick(() => {\n        router.push({\n          uri: 'pages/AboutMe'\n        })\n      })",
+    "timestamp": "2025-03-11T03:33:52.481Z"
+  },
+  {
+    "action": "displayFusedCursorPrediction",
+    "predictionId": "4bad3af9-559e-4f2e-9b35-5b595a3553d6",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/pages/Index.ets",
+      "lineNumberOneIndexed": 16,
+      "text": "",
+      "shouldRetriggerCpp": true
+    },
+    "oldText": "      .onClick(() => {\n        router.push({\n          uri: 'pages/AboutM'\n        })\n      })",
+    "newText": "      .onClick(() => {\n        router.push({\n          uri: 'pages/AboutMe'\n        })\n      })",
+    "timestamp": "2025-03-11T03:33:52.481Z"
+  }
+]

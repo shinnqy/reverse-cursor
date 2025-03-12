@@ -1,0 +1,447 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "6b870d3f-f7f3-44a8-b548-9efe2c99dd03",
+    "timestamp": "2025-03-11T03:33:59.676Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/pages/Index.ets",
+          "diffHistory": [
+            "17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Button clicked';\n22+|      })\n",
+            "18-|        Text('Click me')\n18+|        Text('Abou')\n",
+            "18-|        Text('Abou')\n18+|        Text('About Me')\n",
+            "21-|        this.message = 'Button clicked';\n",
+            "21-|        \n21+|        router.push({\n22+|          uri: 'pages/About'\n23+|        })\n",
+            "21-|        router.push({\n22-|          uri: 'pages/About'\n21+|        router.pushU({\n22+|          url: 'pages/AboutMe'\n",
+            "21-|        router.pushU({\n21+|        router.pushUrl({\n",
+            "2+|\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/pages/Index.ets",
+        "contents": "\n\n@Entry\n@Component\nstruct Index {\n  @State message: string = 'Hello World';\n\n  build() {\n    RelativeContainer() {\n      Text(this.message)\n        .id('HelloWorld')\n        .fontSize(50)\n        .fontWeight(FontWeight.Bold)\n        .alignRules({\n          center: { anchor: '__container__', align: VerticalAlign.Center },\n          middle: { anchor: '__container__', align: HorizontalAlign.Center }\n        })\n\n      Button() {\n        Text('About Me')\n      }\n      .onClick(() => {\n        router.pushUrl({\n          url: 'pages/AboutMe'\n        })\n      })\n    }\n    .height('100%')\n    .width('100%')\n  }\n}",
+        "cursorPosition": {
+          "line": 1,
+          "column": 0
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 40,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1741664039725,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.400146484375,
+      "timeAtRequestSend": 1741664039725
+    },
+    "generateUuid": "6b870d3f-f7f3-44a8-b548-9efe2c99dd03",
+    "timestamp": "2025-03-11T03:33:59.726Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "6b870d3f-f7f3-44a8-b548-9efe2c99dd03",
+    "timestamp": "2025-03-11T03:34:00.096Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "import",
+      "rangeToReplace": {
+        "startLineNumber": 1,
+        "endLineNumberInclusive": 6
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "6b870d3f-f7f3-44a8-b548-9efe2c99dd03",
+    "timestamp": "2025-03-11T03:34:00.097Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " router"
+    },
+    "generationUUID": "6b870d3f-f7f3-44a8-b548-9efe2c99dd03",
+    "timestamp": "2025-03-11T03:34:00.109Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " from"
+    },
+    "generationUUID": "6b870d3f-f7f3-44a8-b548-9efe2c99dd03",
+    "timestamp": "2025-03-11T03:34:00.116Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " '@"
+    },
+    "generationUUID": "6b870d3f-f7f3-44a8-b548-9efe2c99dd03",
+    "timestamp": "2025-03-11T03:34:00.123Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "oh"
+    },
+    "generationUUID": "6b870d3f-f7f3-44a8-b548-9efe2c99dd03",
+    "timestamp": "2025-03-11T03:34:00.133Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "os"
+    },
+    "generationUUID": "6b870d3f-f7f3-44a8-b548-9efe2c99dd03",
+    "timestamp": "2025-03-11T03:34:00.140Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "6b870d3f-f7f3-44a8-b548-9efe2c99dd03",
+    "timestamp": "2025-03-11T03:34:00.149Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "router"
+    },
+    "generationUUID": "6b870d3f-f7f3-44a8-b548-9efe2c99dd03",
+    "timestamp": "2025-03-11T03:34:00.157Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "';"
+    },
+    "generationUUID": "6b870d3f-f7f3-44a8-b548-9efe2c99dd03",
+    "timestamp": "2025-03-11T03:34:00.166Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "6b870d3f-f7f3-44a8-b548-9efe2c99dd03",
+    "timestamp": "2025-03-11T03:34:00.178Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "@"
+    },
+    "generationUUID": "6b870d3f-f7f3-44a8-b548-9efe2c99dd03",
+    "timestamp": "2025-03-11T03:34:00.188Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Entry"
+    },
+    "generationUUID": "6b870d3f-f7f3-44a8-b548-9efe2c99dd03",
+    "timestamp": "2025-03-11T03:34:00.193Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n@Component\nstruct Index {\n"
+    },
+    "generationUUID": "6b870d3f-f7f3-44a8-b548-9efe2c99dd03",
+    "timestamp": "2025-03-11T03:34:00.205Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "6b870d3f-f7f3-44a8-b548-9efe2c99dd03",
+    "timestamp": "2025-03-11T03:34:00.212Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " @"
+    },
+    "generationUUID": "6b870d3f-f7f3-44a8-b548-9efe2c99dd03",
+    "timestamp": "2025-03-11T03:34:00.221Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "State message: string = 'Hello World"
+    },
+    "generationUUID": "6b870d3f-f7f3-44a8-b548-9efe2c99dd03",
+    "timestamp": "2025-03-11T03:34:00.231Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "';"
+    },
+    "generationUUID": "6b870d3f-f7f3-44a8-b548-9efe2c99dd03",
+    "timestamp": "2025-03-11T03:34:00.240Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "6b870d3f-f7f3-44a8-b548-9efe2c99dd03",
+    "timestamp": "2025-03-11T03:34:00.249Z"
+  },
+  {
+    "firstChunkValue": "import router from '@ohos.router';\n\n@Entry\n@Component\nstruct Index {\n  @State message: string = 'Hello World';",
+    "generationUUID": "6b870d3f-f7f3-44a8-b548-9efe2c99dd03",
+    "timestamp": "2025-03-11T03:34:00.250Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "import router from '@ohos.router';\n\n@Entry\n@Component\nstruct Index {\n  @State message: string = 'Hello World';"
+    },
+    "generationUUID": "6b870d3f-f7f3-44a8-b548-9efe2c99dd03",
+    "timestamp": "2025-03-11T03:34:00.251Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "4a15f1e6-9b7c-4b75-a4f2-28f7bb48a77c",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/Index.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/Index.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/Index.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 40,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 40,
+      "monotonicallyIncreasingSuggestionId": 17,
+      "range": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 6,
+        "endColumn": 42
+      },
+      "replaceText": "import router from '@ohos.router';\n\n@Entry\n@Component\nstruct Index {\n  @State message: string = 'Hello World';",
+      "originalText": "\n\n@Entry\n@Component\nstruct Index {\n  @State message: string = 'Hello World';",
+      "startingSuggestionRange": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 6,
+        "endColumn": 42
+      },
+      "diffText": "import router from '@ohos.router';\n\n@Entry\n@Component\nstruct Index {\n  @State message: string = 'Hello World';",
+      "fullOriginalText": "\n\n@Entry\n@Component\nstruct Index {\n  @State message: string = 'Hello World';",
+      "suggestionTriggerTime": 1741664039674.7998,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "6b870d3f-f7f3-44a8-b548-9efe2c99dd03",
+      "selection": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 6,
+        "endColumn": 42
+      },
+      "fusedCursorPredictionId": "232570fc-9ac0-4427-9deb-fd59c253f095",
+      "undoRedoGroup": {
+        "id": 17,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumber": 6,
+        "endColumn": 42
+      },
+      "trackedText": "\n\n@Entry\n@Component\nstruct Index {\n  @State message: string = 'Hello World';"
+    },
+    "generationUUID": "6b870d3f-f7f3-44a8-b548-9efe2c99dd03",
+    "timestamp": "2025-03-11T03:34:00.251Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "6b870d3f-f7f3-44a8-b548-9efe2c99dd03",
+    "timestamp": "2025-03-11T03:34:00.283Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "232570fc-9ac0-4427-9deb-fd59c253f095",
+    "generationUUID": "6b870d3f-f7f3-44a8-b548-9efe2c99dd03",
+    "timestamp": "2025-03-11T03:34:00.289Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "import router from '@ohos.router';\n\n@Entry\n@Component\nstruct Index {\n  @State message: string = 'Hello World';"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "232570fc-9ac0-4427-9deb-fd59c253f095",
+    "generationUUID": "6b870d3f-f7f3-44a8-b548-9efe2c99dd03",
+    "timestamp": "2025-03-11T03:34:00.290Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "232570fc-9ac0-4427-9deb-fd59c253f095",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-11T03:34:00.290Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "4a15f1e6-9b7c-4b75-a4f2-28f7bb48a77c",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/Index.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/Index.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/Index.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 40,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 40,
+      "monotonicallyIncreasingSuggestionId": 17,
+      "range": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 6,
+        "endColumn": 42
+      },
+      "replaceText": "import router from '@ohos.router';\n\n@Entry\n@Component\nstruct Index {\n  @State message: string = 'Hello World';",
+      "originalText": "\n\n@Entry\n@Component\nstruct Index {\n  @State message: string = 'Hello World';",
+      "startingSuggestionRange": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 6,
+        "endColumn": 42
+      },
+      "diffText": "import router from '@ohos.router';\n\n@Entry\n@Component\nstruct Index {\n  @State message: string = 'Hello World';",
+      "fullOriginalText": "\n\n@Entry\n@Component\nstruct Index {\n  @State message: string = 'Hello World';",
+      "suggestionTriggerTime": 1741664039674.7998,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "6b870d3f-f7f3-44a8-b548-9efe2c99dd03",
+      "selection": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 6,
+        "endColumn": 42
+      },
+      "fusedCursorPredictionId": "232570fc-9ac0-4427-9deb-fd59c253f095",
+      "undoRedoGroup": {
+        "id": 17,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumber": 6,
+        "endColumn": 42
+      },
+      "trackedText": "\n\n@Entry\n@Component\nstruct Index {\n  @State message: string = 'Hello World';",
+      "decorationId": "b;165"
+    },
+    "generationUUID": "6b870d3f-f7f3-44a8-b548-9efe2c99dd03",
+    "timestamp": "2025-03-11T03:34:01.291Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "4a15f1e6-9b7c-4b75-a4f2-28f7bb48a77c",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/Index.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/Index.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/Index.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 40,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 40,
+      "monotonicallyIncreasingSuggestionId": 17,
+      "range": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 6,
+        "endColumn": 42
+      },
+      "replaceText": "import router from '@ohos.router';\n\n@Entry\n@Component\nstruct Index {\n  @State message: string = 'Hello World';",
+      "originalText": "\n\n@Entry\n@Component\nstruct Index {\n  @State message: string = 'Hello World';",
+      "startingSuggestionRange": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 6,
+        "endColumn": 42
+      },
+      "diffText": "import router from '@ohos.router';\n\n@Entry\n@Component\nstruct Index {\n  @State message: string = 'Hello World';",
+      "fullOriginalText": "\n\n@Entry\n@Component\nstruct Index {\n  @State message: string = 'Hello World';",
+      "suggestionTriggerTime": 1741664039674.7998,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "6b870d3f-f7f3-44a8-b548-9efe2c99dd03",
+      "selection": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 6,
+        "endColumn": 42
+      },
+      "fusedCursorPredictionId": "232570fc-9ac0-4427-9deb-fd59c253f095",
+      "undoRedoGroup": {
+        "id": 17,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumber": 6,
+        "endColumn": 42
+      },
+      "trackedText": "\n\n@Entry\n@Component\nstruct Index {\n  @State message: string = 'Hello World';",
+      "decorationId": "b;165"
+    },
+    "generationUUID": "6b870d3f-f7f3-44a8-b548-9efe2c99dd03",
+    "timestamp": "2025-03-11T03:34:01.300Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "232570fc-9ac0-4427-9deb-fd59c253f095",
+    "fusedCursorPrediction": null,
+    "oldText": "\n\n@Entry\n@Component\nstruct Index {\n  @State message: string = 'Hello World';",
+    "newText": "import router from '@ohos.router';\n\n@Entry\n@Component\nstruct Index {\n  @State message: string = 'Hello World';",
+    "timestamp": "2025-03-11T03:34:01.301Z"
+  }
+]

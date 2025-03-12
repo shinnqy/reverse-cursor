@@ -1,0 +1,50 @@
+============================
+----promptFilePath----:
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/arkui_log4/byUUID/2025-03-11T03_34_51.095Z____0d0344d3-1e99-4095-bc0e-04d4bb27a8e6.prompt
+
+----output----:
+```
+import Banner from '../components/Banner'
+```
+
+-----replacedOutput-----
+```
+import Banner from '../components/Banner'
+```
+@Component
+struct AboutMe {
+  build() {
+    Text('About Me')
+
+    Banner()
+  }
+}
+
+----firstChunkValue----:
+import Banner from '../components/Banner.ets'
+
+@Preview
+@Component
+struct AboutMe {
+  build() {
+
+----replacedContents(firstChunkValue)----
+import Banner from '../components/Banner.ets'
+
+@Preview
+@Component
+struct AboutMe {
+  build() {
+    Text('About Me')
+
+    Banner()
+  }
+}
+
+----fullText----:
+import Banner from '../components/Banner.ets'
+
+@Preview
+@Component
+struct AboutMe {
+  build() {

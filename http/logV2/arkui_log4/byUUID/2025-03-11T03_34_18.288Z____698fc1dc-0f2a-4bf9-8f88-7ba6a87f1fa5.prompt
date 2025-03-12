@@ -1,0 +1,65 @@
+You're an expert in ArkTS. Your task is to help the user update the code around current cursor position.
+
+## Recent Actions
+Here is what the user has been doing from the earliest to the latest:
+
+File: entry/src/main/ets/pages/Index.ets
+added the code `      Button() {` in line 17
+added the code `        Text('Click me')` in line 18
+added the code `      }` in line 19
+added the code `      .onClick(() => {` in line 20
+added the code `        this.message = 'Button clicked';` in line 21
+added the code `      })` in line 22
+
+deleted the code `        Text('Click me')` in line 18
+added the code `        Text('Abou')` in line 18
+
+deleted the code `        Text('Abou')` in line 18
+added the code `        Text('About Me')` in line 18
+
+deleted the code `        this.message = 'Button clicked';` in line 21
+
+deleted the code `        ` in line 21
+added the code `        router.push({` in line 21
+added the code `          uri: 'pages/About'` in line 22
+added the code `        })` in line 23
+
+deleted the code `        router.push({` in line 21
+deleted the code `          uri: 'pages/About'` in line 22
+added the code `        router.pushU({` in line 21
+added the code `          url: 'pages/AboutMe'` in line 22
+
+deleted the code `        router.pushU({` in line 21
+added the code `        router.pushUrl({` in line 21
+
+added the code `import router from '@ohos.router';` in line 1
+-----------------------------------------------
+
+File: entry/src/main/ets/pages/AboutMe.ets
+deleted the code `` in line 1
+added the code `@Pr` in line 1
+
+
+## Current Code
+Here is the current code file path:
+entry/src/main/ets/pages/AboutMe.ets
+
+Here is the current code around the cursor position:
+
+```
+@Pr<|current_cursor_position|>
+
+```
+
+## Task
+Rewrite the code from the first column of the line of <|current_cursor_position|> according to the following requirements:
+1. Enforce code format strictly matching existing code style.
+2. Propagate naming convention changes to all related cases
+3. Preserve original functionality
+4. Apply changes to entire code regardless of cursor position
+5. Focus on code after cursor position
+
+# Output Format
+Return ONLY the rewritten code from the first column of the line of cursor position without any other words.
+Do NOT include unchanged code before cursor.
+Never use markdown formatting like ```. Return raw text only.

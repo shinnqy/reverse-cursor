@@ -1,0 +1,38 @@
+============================
+----promptFilePath----:
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/trafficLight6/byUUID/2025-03-11T03_20_19.881Z____079986b6-c184-4913-869e-53cc1b3a4d56.prompt
+
+----output----:
+```typescript
+function changeLight(light: string): string {
+  if (light === 'red') {
+    return 'green';
+  }
+  console.log('light', light);
+}
+```
+
+-----replacedOutput-----
+```typescript
+function changeLight(light: string): string {
+  if (light === 'red') {
+    return 'green';
+  }
+  console.log('light', light);
+}
+```
+
+----firstChunkValue----:
+function test() {
+
+----replacedContents(firstChunkValue)----
+function test() {
+
+----fullText----:
+function test() {
+  console.log('test');
+}
+
+test();
+
+

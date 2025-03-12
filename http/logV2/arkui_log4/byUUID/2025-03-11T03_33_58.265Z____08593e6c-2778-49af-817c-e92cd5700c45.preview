@@ -1,0 +1,51 @@
+{"line":6,"column":0}
+
+======== fileDiffHistories ========
+
+File: entry/src/main/ets/pages/Index.ets
+17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Button clicked';\n22+|      })\n18-|        Text('Click me')\n18+|        Text('Abou')\n18-|        Text('Abou')\n18+|        Text('About Me')\n21-|        this.message = 'Button clicked';\n21-|        \n21+|        router.push({\n22+|          uri: 'pages/About'\n23+|        })\n21-|        router.push({\n22-|          uri: 'pages/About'\n21+|        router.pushU({\n22+|          url: 'pages/AboutMe'\n21-|        router.pushU({\n21+|        router.pushUrl({\n
+17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Button clicked';\n22+|      })\n18-|        Text('Click me')\n18+|        Text('Abou')\n18-|        Text('Abou')\n18+|        Text('About Me')\n21-|        this.message = 'Button clicked';\n21-|        \n21+|        router.push({\n22+|          uri: 'pages/About'\n23+|        })\n21-|        router.push({\n22-|          uri: 'pages/About'\n21+|        router.pushU({\n22+|          url: 'pages/AboutMe'\n21-|        router.pushU({\n21+|        router.pushUrl({\n
+17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Button clicked';\n22+|      })\n18-|        Text('Click me')\n18+|        Text('Abou')\n18-|        Text('Abou')\n18+|        Text('About Me')\n21-|        this.message = 'Button clicked';\n21-|        \n21+|        router.push({\n22+|          uri: 'pages/About'\n23+|        })\n21-|        router.push({\n22-|          uri: 'pages/About'\n21+|        router.pushU({\n22+|          url: 'pages/AboutMe'\n21-|        router.pushU({\n21+|        router.pushUrl({\n
+17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Button clicked';\n22+|      })\n18-|        Text('Click me')\n18+|        Text('Abou')\n18-|        Text('Abou')\n18+|        Text('About Me')\n21-|        this.message = 'Button clicked';\n21-|        \n21+|        router.push({\n22+|          uri: 'pages/About'\n23+|        })\n21-|        router.push({\n22-|          uri: 'pages/About'\n21+|        router.pushU({\n22+|          url: 'pages/AboutMe'\n21-|        router.pushU({\n21+|        router.pushUrl({\n
+17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Button clicked';\n22+|      })\n18-|        Text('Click me')\n18+|        Text('Abou')\n18-|        Text('Abou')\n18+|        Text('About Me')\n21-|        this.message = 'Button clicked';\n21-|        \n21+|        router.push({\n22+|          uri: 'pages/About'\n23+|        })\n21-|        router.push({\n22-|          uri: 'pages/About'\n21+|        router.pushU({\n22+|          url: 'pages/AboutMe'\n21-|        router.pushU({\n21+|        router.pushUrl({\n
+17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Button clicked';\n22+|      })\n18-|        Text('Click me')\n18+|        Text('Abou')\n18-|        Text('Abou')\n18+|        Text('About Me')\n21-|        this.message = 'Button clicked';\n21-|        \n21+|        router.push({\n22+|          uri: 'pages/About'\n23+|        })\n21-|        router.push({\n22-|          uri: 'pages/About'\n21+|        router.pushU({\n22+|          url: 'pages/AboutMe'\n21-|        router.pushU({\n21+|        router.pushUrl({\n
+17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Button clicked';\n22+|      })\n18-|        Text('Click me')\n18+|        Text('Abou')\n18-|        Text('Abou')\n18+|        Text('About Me')\n21-|        this.message = 'Button clicked';\n21-|        \n21+|        router.push({\n22+|          uri: 'pages/About'\n23+|        })\n21-|        router.push({\n22-|          uri: 'pages/About'\n21+|        router.pushU({\n22+|          url: 'pages/AboutMe'\n21-|        router.pushU({\n21+|        router.pushUrl({\n
+
+======== processedCurrentFileContents ========
+@Entry
+@Component
+struct Index {
+  @State message: string = 'Hello World';
+
+  build() {
+[ToFill]    RelativeContainer() {
+      Text(this.message)
+        .id('HelloWorld')
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+        .alignRules({
+          center: { anchor: '__container__', align: VerticalAlign.Center },
+          middle: { anchor: '__container__', align: HorizontalAlign.Center }
+        })
+
+      Button() {
+        Text('About Me')
+      }
+      .onClick(() => {
+        router.pushUrl({
+          url: 'pages/AboutMe'
+        })
+      })
+    }
+    .height('100%')
+    .width('100%')
+  }
+}
+======== firstChunkValue ========
+  build() {
+    RelativeContainer() {
+      Text(this.message)
+        .id('HelloWorld')
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+        .alignRules({

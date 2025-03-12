@@ -1,0 +1,122 @@
+{"line":21,"column":28}
+
+======== fileDiffHistories ========
+
+File: entry/src/main/ets/pages/Index.ets
+17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Button clicked';\n22+|      })\n18-|        Text('Click me')\n18+|        Text('Abou')\n18-|        Text('Abou')\n18+|        Text('About Me')\n21-|        this.message = 'Button clicked';\n21-|        \n21+|        router.push({\n22+|          uri: 'pages/About'\n23+|        })\n22-|          uri: 'pages/About'\n22+|          uri: 'pages/AboutM'\n
+17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Button clicked';\n22+|      })\n18-|        Text('Click me')\n18+|        Text('Abou')\n18-|        Text('Abou')\n18+|        Text('About Me')\n21-|        this.message = 'Button clicked';\n21-|        \n21+|        router.push({\n22+|          uri: 'pages/About'\n23+|        })\n22-|          uri: 'pages/About'\n22+|          uri: 'pages/AboutM'\n
+17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Button clicked';\n22+|      })\n18-|        Text('Click me')\n18+|        Text('Abou')\n18-|        Text('Abou')\n18+|        Text('About Me')\n21-|        this.message = 'Button clicked';\n21-|        \n21+|        router.push({\n22+|          uri: 'pages/About'\n23+|        })\n22-|          uri: 'pages/About'\n22+|          uri: 'pages/AboutM'\n
+17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Button clicked';\n22+|      })\n18-|        Text('Click me')\n18+|        Text('Abou')\n18-|        Text('Abou')\n18+|        Text('About Me')\n21-|        this.message = 'Button clicked';\n21-|        \n21+|        router.push({\n22+|          uri: 'pages/About'\n23+|        })\n22-|          uri: 'pages/About'\n22+|          uri: 'pages/AboutM'\n
+17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Button clicked';\n22+|      })\n18-|        Text('Click me')\n18+|        Text('Abou')\n18-|        Text('Abou')\n18+|        Text('About Me')\n21-|        this.message = 'Button clicked';\n21-|        \n21+|        router.push({\n22+|          uri: 'pages/About'\n23+|        })\n22-|          uri: 'pages/About'\n22+|          uri: 'pages/AboutM'\n
+17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Button clicked';\n22+|      })\n18-|        Text('Click me')\n18+|        Text('Abou')\n18-|        Text('Abou')\n18+|        Text('About Me')\n21-|        this.message = 'Button clicked';\n21-|        \n21+|        router.push({\n22+|          uri: 'pages/About'\n23+|        })\n22-|          uri: 'pages/About'\n22+|          uri: 'pages/AboutM'\n
+
+======== processedCurrentFileContents ========
+@Entry
+@Component
+struct Index {
+  @State message: string = 'Hello World';
+
+  build() {
+    RelativeContainer() {
+      Text(this.message)
+        .id('HelloWorld')
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+        .alignRules({
+          center: { anchor: '__container__', align: VerticalAlign.Center },
+          middle: { anchor: '__container__', align: HorizontalAlign.Center }
+        })
+
+      Button() {
+        Text('About Me')
+      }
+      .onClick(() => {
+        router.push({
+          uri: 'pages/AboutM[ToFill]'
+        })
+      })
+    }
+    .height('100%')
+    .width('100%')
+  }
+}
+======== firstChunkValue ========
+      .onClick(() => {
+        router.push({
+          uri: 'pages/AboutMe'
+        })
+      })
+======== replace firstChunkValue ========
+@Entry
+@Component
+struct Index {
+  @State message: string = 'Hello World';
+
+  build() {
+    RelativeContainer() {
+      Text(this.message)
+        .id('HelloWorld')
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+        .alignRules({
+          center: { anchor: '__container__', align: VerticalAlign.Center },
+          middle: { anchor: '__container__', align: HorizontalAlign.Center }
+        })
+
+      Button() {
+        Text('About Me')
+      }
+      .onClick(() => {
+        router.push({
+          uri: 'pages/AboutMe'
+        })
+      })
+    }
+    .height('100%')
+    .width('100%')
+  }
+}
+======== replacedContentsWithCursorPosition ========
+@Entry
+@Component
+struct Index {
+  @State message: string = 'Hello World';
+
+  build() {
+    RelativeContainer() {
+      Text(this.message)
+        .id('HelloWorld')
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+        .alignRules({
+          center: { anchor: '__container__', align: VerticalAlign.Center },
+          middle: { anchor: '__container__', align: HorizontalAlign.Center }
+        })
+
+      Button() {
+        Text('About Me')
+      }
+      .onClick(() => {<|current_cursor_position|>
+        router.push({
+          uri: 'pages/AboutMe'
+        })
+      })
+    }
+    .height('100%')
+    .width('100%')
+  }
+}
+======== fusedCursorPrediction ========
+lineNumberOneIndexed: 16
+
+text: 
+
+
+shouldRetriggerCpp: true
+======== displayedFusedCursorPrediction ========
+lineNumberOneIndexed: 16
+
+text: 
+
+
+shouldRetriggerCpp: true
