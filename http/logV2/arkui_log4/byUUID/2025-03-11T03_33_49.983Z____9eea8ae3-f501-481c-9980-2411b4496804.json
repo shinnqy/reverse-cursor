@@ -1,0 +1,119 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "9eea8ae3-f501-481c-9980-2411b4496804",
+    "timestamp": "2025-03-11T03:33:49.983Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/pages/Index.ets",
+          "diffHistory": [
+            "17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Button clicked';\n22+|      })\n",
+            "18-|        Text('Click me')\n18+|        Text('Abou')\n",
+            "18-|        Text('Abou')\n18+|        Text('About Me')\n",
+            "21-|        this.message = 'Button clicked';\n",
+            "21-|        \n21+|        router.push({\n22+|          uri: 'pages/About'\n23+|        })\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/pages/Index.ets",
+        "contents": "@Entry\n@Component\nstruct Index {\n  @State message: string = 'Hello World';\n\n  build() {\n    RelativeContainer() {\n      Text(this.message)\n        .id('HelloWorld')\n        .fontSize(50)\n        .fontWeight(FontWeight.Bold)\n        .alignRules({\n          center: { anchor: '__container__', align: VerticalAlign.Center },\n          middle: { anchor: '__container__', align: HorizontalAlign.Center }\n        })\n\n      Button() {\n        Text('About Me')\n      }\n      .onClick(() => {\n        router.push({\n          uri: 'pages/About'\n        })\n      })\n    }\n    .height('100%')\n    .width('100%')\n  }\n}",
+        "cursorPosition": {
+          "line": 21,
+          "column": 11
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 34,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1741664030027,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 52.099853515625,
+      "timeAtRequestSend": 1741664030027
+    },
+    "generateUuid": "9eea8ae3-f501-481c-9980-2411b4496804",
+    "timestamp": "2025-03-11T03:33:50.030Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "9eea8ae3-f501-481c-9980-2411b4496804",
+    "timestamp": "2025-03-11T03:33:50.397Z"
+  },
+  {
+    "firstChunkValue": "      .onClick(() => {\n        router.push({\n          uri: 'pages/About'\n        })\n      })",
+    "generationUUID": "9eea8ae3-f501-481c-9980-2411b4496804",
+    "timestamp": "2025-03-11T03:33:50.398Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": false
+    },
+    "generationUUID": "9eea8ae3-f501-481c-9980-2411b4496804",
+    "timestamp": "2025-03-11T03:33:50.398Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "      .onClick(() => {\n        router.push({\n          uri: 'pages/About'\n        })\n      })"
+    },
+    "generationUUID": "9eea8ae3-f501-481c-9980-2411b4496804",
+    "timestamp": "2025-03-11T03:33:50.399Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "rangeToReplace": {
+        "startLineNumber": 20,
+        "endLineNumberInclusive": 24
+      },
+      "doneEdit": true,
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "9eea8ae3-f501-481c-9980-2411b4496804",
+    "timestamp": "2025-03-11T03:33:50.399Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "9eea8ae3-f501-481c-9980-2411b4496804",
+    "timestamp": "2025-03-11T03:33:50.482Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "c5f19267-8f74-43e8-8ffa-30a834b95177",
+    "generationUUID": "9eea8ae3-f501-481c-9980-2411b4496804",
+    "timestamp": "2025-03-11T03:33:50.488Z"
+  }
+]

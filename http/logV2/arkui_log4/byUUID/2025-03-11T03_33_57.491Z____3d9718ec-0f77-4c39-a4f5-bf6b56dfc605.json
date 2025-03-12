@@ -1,0 +1,139 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "3d9718ec-0f77-4c39-a4f5-bf6b56dfc605",
+    "timestamp": "2025-03-11T03:33:57.491Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/pages/Index.ets",
+          "diffHistory": [
+            "17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Button clicked';\n22+|      })\n",
+            "18-|        Text('Click me')\n18+|        Text('Abou')\n",
+            "18-|        Text('Abou')\n18+|        Text('About Me')\n",
+            "21-|        this.message = 'Button clicked';\n",
+            "21-|        \n21+|        router.push({\n22+|          uri: 'pages/About'\n23+|        })\n",
+            "21-|        router.push({\n22-|          uri: 'pages/About'\n21+|        router.pushU({\n22+|          url: 'pages/AboutMe'\n",
+            "21-|        router.pushU({\n21+|        router.pushUrl({\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/pages/Index.ets",
+        "contents": "@Entry\n@Component\nstruct Index {\n  @State message: string = 'Hello World';\n\n  build() {\n    RelativeContainer() {\n      Text(this.message)\n        .id('HelloWorld')\n        .fontSize(50)\n        .fontWeight(FontWeight.Bold)\n        .alignRules({\n          center: { anchor: '__container__', align: VerticalAlign.Center },\n          middle: { anchor: '__container__', align: HorizontalAlign.Center }\n        })\n\n      Button() {\n        Text('About Me')\n      }\n      .onClick(() => {\n        router.pushUrl({\n          url: 'pages/AboutMe'\n        })\n      })\n    }\n    .height('100%')\n    .width('100%')\n  }\n}",
+        "cursorPosition": {
+          "line": 13,
+          "column": 0
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 38,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1741664037533,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 55.300048828125,
+      "timeAtRequestSend": 1741664037533
+    },
+    "generateUuid": "3d9718ec-0f77-4c39-a4f5-bf6b56dfc605",
+    "timestamp": "2025-03-11T03:33:57.535Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "rangeToReplace": {
+        "startLineNumber": 12,
+        "endLineNumberInclusive": 16
+      },
+      "doneEdit": true,
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "3d9718ec-0f77-4c39-a4f5-bf6b56dfc605",
+    "timestamp": "2025-03-11T03:33:57.890Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "        .alignRules({\n          center: { anchor: '__container__', align: VerticalAlign.Center },\n          middle: { anchor: '__container__', align: HorizontalAlign.Center }\n        })\n"
+    },
+    "generationUUID": "3d9718ec-0f77-4c39-a4f5-bf6b56dfc605",
+    "timestamp": "2025-03-11T03:33:57.891Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "3d9718ec-0f77-4c39-a4f5-bf6b56dfc605",
+    "timestamp": "2025-03-11T03:33:57.892Z"
+  },
+  {
+    "firstChunkValue": "        .alignRules({\n          center: { anchor: '__container__', align: VerticalAlign.Center },\n          middle: { anchor: '__container__', align: HorizontalAlign.Center }\n        })\n",
+    "generationUUID": "3d9718ec-0f77-4c39-a4f5-bf6b56dfc605",
+    "timestamp": "2025-03-11T03:33:57.893Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": false
+    },
+    "generationUUID": "3d9718ec-0f77-4c39-a4f5-bf6b56dfc605",
+    "timestamp": "2025-03-11T03:33:57.893Z"
+  },
+  {
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/pages/Index.ets",
+      "lineNumberOneIndexed": 22,
+      "text": "url: 'pages/AboutMe'\n})\n})\n}\n.height('100%')",
+      "shouldRetriggerCpp": false
+    },
+    "predictionId": "1a9999bd-e6b9-4aa6-b42d-d5d08c610f9a",
+    "generationUUID": "3d9718ec-0f77-4c39-a4f5-bf6b56dfc605",
+    "timestamp": "2025-03-11T03:33:57.981Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "cursorPredictionTarget": {
+        "relativePath": "entry/src/main/ets/pages/Index.ets",
+        "lineNumberOneIndexed": 22,
+        "expectedContent": "url: 'pages/AboutMe'\n})\n})\n}\n.height('100%')",
+        "shouldRetriggerCpp": false
+      }
+    },
+    "generationUUID": "3d9718ec-0f77-4c39-a4f5-bf6b56dfc605",
+    "timestamp": "2025-03-11T03:33:57.982Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "3d9718ec-0f77-4c39-a4f5-bf6b56dfc605",
+    "timestamp": "2025-03-11T03:33:57.982Z"
+  }
+]

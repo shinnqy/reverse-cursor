@@ -1,0 +1,366 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "57097a7e-fa7e-4689-a8d0-243e1c0e427e",
+    "timestamp": "2025-03-11T03:20:50.563Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "src/components/test2.ts",
+          "diffHistory": [
+            "1-|enum TrafficLight {\n2-|  Red = 'red',\n3-|  Yellow = 'yellow',\n4-|  Green = 'green',\n5-|}\n6-|\n10-|  } \n4+|  }\n",
+            "2-|  if (light === TrafficLight.Red) {\n3-|    return TrafficLight.Green;\n4-|  }\n5-|  console.log('light', light);\n",
+            "2-|  \n2+|  switch (light) {\n3+|    case TrafficLight.Red:\n4+|      return TrafficLight.Green;\n5+|    case TrafficLight.Green:\n6+|      return TrafficLight.Yellow;\n7+|      \n8+|  }\n",
+            "7-|      \n8-|  } \n7+|    case TrafficLight.Yellow:\n8+|  } throw new Error('Invalid traffic light');\n9+|  }\n",
+            "8-|  } throw new Error('Invalid traffic light');\n8+|  }    return TrafficLight.Red;\n9+|    default:\n10+|      throw new Error('Invalid traffic light');\n",
+            "8-|  }    return TrafficLight.Red;\n8+|      return TrafficLight.Red;\n",
+            "3-|    case TrafficLight.Red:\n3+|    case TrafficLight.R:\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "linterErrors": {
+        "relativeWorkspacePath": "src/components/test2.ts",
+        "errors": [
+          {
+            "message": "Cannot find name 'TrafficLight'.",
+            "range": {
+              "startPosition": {
+                "line": 1,
+                "column": 29
+              },
+              "endPosition": {
+                "line": 1,
+                "column": 41
+              }
+            },
+            "source": "ts",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          },
+          {
+            "message": "Cannot find name 'TrafficLight'.",
+            "range": {
+              "startPosition": {
+                "line": 3,
+                "column": 10
+              },
+              "endPosition": {
+                "line": 3,
+                "column": 22
+              }
+            },
+            "source": "ts",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          },
+          {
+            "message": "Cannot find name 'TrafficLight'.",
+            "range": {
+              "startPosition": {
+                "line": 4,
+                "column": 14
+              },
+              "endPosition": {
+                "line": 4,
+                "column": 26
+              }
+            },
+            "source": "ts",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          },
+          {
+            "message": "Cannot find name 'TrafficLight'.",
+            "range": {
+              "startPosition": {
+                "line": 5,
+                "column": 10
+              },
+              "endPosition": {
+                "line": 5,
+                "column": 22
+              }
+            },
+            "source": "ts",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          },
+          {
+            "message": "Cannot find name 'TrafficLight'.",
+            "range": {
+              "startPosition": {
+                "line": 6,
+                "column": 14
+              },
+              "endPosition": {
+                "line": 6,
+                "column": 26
+              }
+            },
+            "source": "ts",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          },
+          {
+            "message": "Cannot find name 'TrafficLight'.",
+            "range": {
+              "startPosition": {
+                "line": 7,
+                "column": 10
+              },
+              "endPosition": {
+                "line": 7,
+                "column": 22
+              }
+            },
+            "source": "ts",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          },
+          {
+            "message": "Cannot find name 'TrafficLight'.",
+            "range": {
+              "startPosition": {
+                "line": 8,
+                "column": 14
+              },
+              "endPosition": {
+                "line": 8,
+                "column": 26
+              }
+            },
+            "source": "ts",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          },
+          {
+            "message": "'changeLight' is defined but never used.",
+            "range": {
+              "startPosition": {
+                "line": 1,
+                "column": 10
+              },
+              "endPosition": {
+                "line": 1,
+                "column": 21
+              }
+            },
+            "source": "eslint",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          }
+        ],
+        "fileContents": ""
+      },
+      "currentFile": {
+        "relativeWorkspacePath": "src/components/test2.ts",
+        "contents": "function changeLight(light: TrafficLight) {\n  switch (light) {\n    case TrafficLight.R:\n      return TrafficLight.Green;\n    case TrafficLight.Green:\n      return TrafficLight.Yellow;\n    case TrafficLight.Yellow:\n      return TrafficLight.Red;\n    default:\n      throw new Error('Invalid traffic light');\n  }\n}\n",
+        "cursorPosition": {
+          "line": 2,
+          "column": 23
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 39,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/Documents/personal/vite-react-demo2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1741663250605,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "8u65ni1hw3pqzyyqn4vyf",
+      "timeSinceRequestStart": 51.10009765625,
+      "timeAtRequestSend": 1741663250605
+    },
+    "generateUuid": "57097a7e-fa7e-4689-a8d0-243e1c0e427e",
+    "timestamp": "2025-03-11T03:20:50.607Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "57097a7e-fa7e-4689-a8d0-243e1c0e427e",
+    "timestamp": "2025-03-11T03:20:50.998Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "red"
+    },
+    "generationUUID": "57097a7e-fa7e-4689-a8d0-243e1c0e427e",
+    "timestamp": "2025-03-11T03:20:51.001Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "  switch (light) {\n    case '",
+      "rangeToReplace": {
+        "startLineNumber": 2,
+        "endLineNumberInclusive": 6
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "57097a7e-fa7e-4689-a8d0-243e1c0e427e",
+    "timestamp": "2025-03-11T03:20:51.002Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "':"
+    },
+    "generationUUID": "57097a7e-fa7e-4689-a8d0-243e1c0e427e",
+    "timestamp": "2025-03-11T03:20:51.002Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "57097a7e-fa7e-4689-a8d0-243e1c0e427e",
+    "timestamp": "2025-03-11T03:20:51.005Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "     "
+    },
+    "generationUUID": "57097a7e-fa7e-4689-a8d0-243e1c0e427e",
+    "timestamp": "2025-03-11T03:20:51.015Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " return"
+    },
+    "generationUUID": "57097a7e-fa7e-4689-a8d0-243e1c0e427e",
+    "timestamp": "2025-03-11T03:20:51.023Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " '"
+    },
+    "generationUUID": "57097a7e-fa7e-4689-a8d0-243e1c0e427e",
+    "timestamp": "2025-03-11T03:20:51.031Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "green"
+    },
+    "generationUUID": "57097a7e-fa7e-4689-a8d0-243e1c0e427e",
+    "timestamp": "2025-03-11T03:20:51.040Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "';"
+    },
+    "generationUUID": "57097a7e-fa7e-4689-a8d0-243e1c0e427e",
+    "timestamp": "2025-03-11T03:20:51.051Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "57097a7e-fa7e-4689-a8d0-243e1c0e427e",
+    "timestamp": "2025-03-11T03:20:51.059Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "   "
+    },
+    "generationUUID": "57097a7e-fa7e-4689-a8d0-243e1c0e427e",
+    "timestamp": "2025-03-11T03:20:51.069Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " case '"
+    },
+    "generationUUID": "57097a7e-fa7e-4689-a8d0-243e1c0e427e",
+    "timestamp": "2025-03-11T03:20:51.075Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "green':"
+    },
+    "generationUUID": "57097a7e-fa7e-4689-a8d0-243e1c0e427e",
+    "timestamp": "2025-03-11T03:20:51.087Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n      return 'yellow"
+    },
+    "generationUUID": "57097a7e-fa7e-4689-a8d0-243e1c0e427e",
+    "timestamp": "2025-03-11T03:20:51.095Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "';"
+    },
+    "generationUUID": "57097a7e-fa7e-4689-a8d0-243e1c0e427e",
+    "timestamp": "2025-03-11T03:20:51.101Z"
+  },
+  {
+    "firstChunkValue": "  switch (light) {\n    case 'red':\n      return 'green';\n    case 'green':\n      return 'yellow';",
+    "generationUUID": "57097a7e-fa7e-4689-a8d0-243e1c0e427e",
+    "timestamp": "2025-03-11T03:20:51.122Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "57097a7e-fa7e-4689-a8d0-243e1c0e427e",
+    "timestamp": "2025-03-11T03:20:51.123Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "  switch (light) {\n    case 'red':\n      return 'green';\n    case 'green':\n      return 'yellow';"
+    },
+    "generationUUID": "57097a7e-fa7e-4689-a8d0-243e1c0e427e",
+    "timestamp": "2025-03-11T03:20:51.124Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "51ef1d92-f69d-453a-94cf-9d64cfe1eba6",
+    "generationUUID": "57097a7e-fa7e-4689-a8d0-243e1c0e427e",
+    "timestamp": "2025-03-11T03:20:51.126Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "  switch (light) {\n    case 'red':\n      return 'green';\n    case 'green':\n      return 'yellow';"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "51ef1d92-f69d-453a-94cf-9d64cfe1eba6",
+    "generationUUID": "57097a7e-fa7e-4689-a8d0-243e1c0e427e",
+    "timestamp": "2025-03-11T03:20:51.130Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "51ef1d92-f69d-453a-94cf-9d64cfe1eba6",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-11T03:20:51.131Z"
+  }
+]

@@ -1,0 +1,781 @@
+============================
+----promptFilePath----:
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/arkui_log4/byUUID/2025-03-11T03_33_39.194Z____1bb71466-a174-4ec1-b21f-26c99107cef9.prompt
+
+----output----:
+```
+Text('About Me')
+```
+
+-----replacedOutput-----
+@Entry
+@Component
+struct Index {
+  @State message: string = 'Hello World';
+
+  build() {
+    RelativeContainer() {
+      Text(this.message)
+        .id('HelloWorld')
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+        .alignRules({
+          center: { anchor: '__container__', align: VerticalAlign.Center },
+          middle: { anchor: '__container__', align: HorizontalAlign.Center }
+        })
+
+      Button() {
+```
+Text('About Me')
+```
+        this.message = 'Button clicked';
+      })
+    }
+    .height('100%')
+    .width('100%')
+  }
+}
+
+----firstChunkValue----:
+      Button() {
+        Text('About Me')
+      }
+      .onClick(() => {
+        this.message = 'Button clicked';
+      })
+
+----replacedContents(firstChunkValue)----
+@Entry
+@Component
+struct Index {
+  @State message: string = 'Hello World';
+
+  build() {
+    RelativeContainer() {
+      Text(this.message)
+        .id('HelloWorld')
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+        .alignRules({
+          center: { anchor: '__container__', align: VerticalAlign.Center },
+          middle: { anchor: '__container__', align: HorizontalAlign.Center }
+        })
+
+      Button() {
+        Text('About Me')
+      }
+      .onClick(() => {
+        this.message = 'Button clicked';
+      })
+    }
+    .height('100%')
+    .width('100%')
+  }
+}
+
+----fullText----:
+undefined
+============================
+----promptFilePath----:
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/arkui_log4/byUUID/2025-03-11T03_35_13.903Z____478b29da-6ddb-4eb5-98b4-00556d88475a.prompt
+
+----output----:
+```
+    Banner()
+```
+
+-----replacedOutput-----
+import Banner from '../components/Banner.ets'
+
+@Preview
+@Component
+struct AboutMe {
+  build() {
+    Text('About Me')
+
+```
+    Banner()
+```
+
+----firstChunkValue----:
+  build() {
+    Text('About Me')
+
+    Banner({
+      title: 'About Me'
+    })
+  }
+
+----replacedContents(firstChunkValue)----
+import Banner from '../components/Banner.ets'
+
+@Preview
+@Component
+struct AboutMe {
+  build() {
+    Text('About Me')
+
+    Banner({
+      title: 'About Me'
+    })
+  }
+
+----fullText----:
+undefined
+============================
+----promptFilePath----:
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/arkui_log4/byUUID/2025-03-11T03_33_59.676Z____6b870d3f-f7f3-44a8-b548-9efe2c99dd03.prompt
+
+----output----:
+```typescript
+Text('About Me')
+```
+
+-----replacedOutput-----
+
+```typescript
+Text('About Me')
+```
+struct Index {
+  @State message: string = 'Hello World';
+
+  build() {
+    RelativeContainer() {
+      Text(this.message)
+        .id('HelloWorld')
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+        .alignRules({
+          center: { anchor: '__container__', align: VerticalAlign.Center },
+          middle: { anchor: '__container__', align: HorizontalAlign.Center }
+        })
+
+      Button() {
+        Text('About Me')
+      }
+      .onClick(() => {
+        router.pushUrl({
+          url: 'pages/AboutMe'
+        })
+      })
+    }
+    .height('100%')
+    .width('100%')
+  }
+}
+
+----firstChunkValue----:
+import router from '@ohos.router';
+
+@Entry
+@Component
+struct Index {
+  @State message: string = 'Hello World';
+
+----replacedContents(firstChunkValue)----
+import router from '@ohos.router';
+
+@Entry
+@Component
+struct Index {
+  @State message: string = 'Hello World';
+
+  build() {
+    RelativeContainer() {
+      Text(this.message)
+        .id('HelloWorld')
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+        .alignRules({
+          center: { anchor: '__container__', align: VerticalAlign.Center },
+          middle: { anchor: '__container__', align: HorizontalAlign.Center }
+        })
+
+      Button() {
+        Text('About Me')
+      }
+      .onClick(() => {
+        router.pushUrl({
+          url: 'pages/AboutMe'
+        })
+      })
+    }
+    .height('100%')
+    .width('100%')
+  }
+}
+
+----fullText----:
+undefined
+============================
+----promptFilePath----:
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/arkui_log4/byUUID/2025-03-11T03_33_51.701Z____6fa972a4-9d20-4e57-be61-f24bf8a2a7f4.prompt
+
+----output----:
+```typescript
+uri: 'pages/AboutM'
+```
+
+-----replacedOutput-----
+@Entry
+@Component
+struct Index {
+  @State message: string = 'Hello World';
+
+  build() {
+    RelativeContainer() {
+      Text(this.message)
+        .id('HelloWorld')
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+        .alignRules({
+          center: { anchor: '__container__', align: VerticalAlign.Center },
+          middle: { anchor: '__container__', align: HorizontalAlign.Center }
+        })
+
+      Button() {
+        Text('About Me')
+      }
+      .onClick(() => {
+        router.push({
+```typescript
+uri: 'pages/AboutM'
+```
+    }
+    .height('100%')
+    .width('100%')
+  }
+}
+
+----firstChunkValue----:
+      .onClick(() => {
+        router.push({
+          uri: 'pages/AboutMe'
+        })
+      })
+
+----replacedContents(firstChunkValue)----
+@Entry
+@Component
+struct Index {
+  @State message: string = 'Hello World';
+
+  build() {
+    RelativeContainer() {
+      Text(this.message)
+        .id('HelloWorld')
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+        .alignRules({
+          center: { anchor: '__container__', align: VerticalAlign.Center },
+          middle: { anchor: '__container__', align: HorizontalAlign.Center }
+        })
+
+      Button() {
+        Text('About Me')
+      }
+      .onClick(() => {
+        router.push({
+          uri: 'pages/AboutMe'
+        })
+      })
+    }
+    .height('100%')
+    .width('100%')
+  }
+}
+
+----fullText----:
+undefined
+============================
+----promptFilePath----:
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/arkui_log4/byUUID/2025-03-11T03_33_54.096Z____6734fc65-ffb4-4d14-87aa-bf5c955d5295.prompt
+
+----output----:
+```
+uri: 'pages/AboutMe'
+```
+
+-----replacedOutput-----
+@Entry
+@Component
+struct Index {
+  @State message: string = 'Hello World';
+
+  build() {
+    RelativeContainer() {
+      Text(this.message)
+        .id('HelloWorld')
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+        .alignRules({
+          center: { anchor: '__container__', align: VerticalAlign.Center },
+          middle: { anchor: '__container__', align: HorizontalAlign.Center }
+        })
+
+      Button() {
+        Text('About Me')
+      }
+      .onClick(() => {
+```
+uri: 'pages/AboutMe'
+```
+      })
+    }
+    .height('100%')
+    .width('100%')
+  }
+}
+
+----firstChunkValue----:
+      .onClick(() => {
+        router.pushUrl({
+          url: 'pages/AboutMe'
+        })
+      })
+
+----replacedContents(firstChunkValue)----
+@Entry
+@Component
+struct Index {
+  @State message: string = 'Hello World';
+
+  build() {
+    RelativeContainer() {
+      Text(this.message)
+        .id('HelloWorld')
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+        .alignRules({
+          center: { anchor: '__container__', align: VerticalAlign.Center },
+          middle: { anchor: '__container__', align: HorizontalAlign.Center }
+        })
+
+      Button() {
+        Text('About Me')
+      }
+      .onClick(() => {
+        router.pushUrl({
+          url: 'pages/AboutMe'
+        })
+      })
+    }
+    .height('100%')
+    .width('100%')
+  }
+}
+
+----fullText----:
+undefined
+============================
+----promptFilePath----:
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/arkui_log4/byUUID/2025-03-11T03_33_44.288Z____0d7a30c1-fda9-42b4-9229-a87695c56fa8.prompt
+
+----output----:
+```
+this.message = 'Button clicked';
+```
+
+-----replacedOutput-----
+@Entry
+@Component
+struct Index {
+  @State message: string = 'Hello World';
+
+  build() {
+    RelativeContainer() {
+      Text(this.message)
+        .id('HelloWorld')
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+        .alignRules({
+          center: { anchor: '__container__', align: VerticalAlign.Center },
+          middle: { anchor: '__container__', align: HorizontalAlign.Center }
+        })
+
+      Button() {
+        Text('About Me')
+      }
+      .onClick(() => {
+```
+this.message = 'Button clicked';
+```
+    .height('100%')
+    .width('100%')
+  }
+}
+
+----firstChunkValue----:
+      .onClick(() => {
+        router.push({
+      })
+    }
+    .height('100%')
+    .width('100%')
+
+----replacedContents(firstChunkValue)----
+@Entry
+@Component
+struct Index {
+  @State message: string = 'Hello World';
+
+  build() {
+    RelativeContainer() {
+      Text(this.message)
+        .id('HelloWorld')
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+        .alignRules({
+          center: { anchor: '__container__', align: VerticalAlign.Center },
+          middle: { anchor: '__container__', align: HorizontalAlign.Center }
+        })
+
+      Button() {
+        Text('About Me')
+      }
+      .onClick(() => {
+        router.push({
+      })
+    }
+    .height('100%')
+    .width('100%')
+  }
+}
+
+----fullText----:
+      .onClick(() => {
+        router.push({
+          uri: 'pages/About'
+        })
+      })
+    }
+    .height('100%')
+    .width('100%')
+============================
+----promptFilePath----:
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/arkui_log4/byUUID/2025-03-11T03_35_04.923Z____47e66f09-87ed-4549-9607-8e799eb8f6ad.prompt
+
+----output----:
+```typescript
+props: {}
+```
+
+-----replacedOutput-----
+@Preview
+@Component
+export default struct Banner {
+```typescript
+props: {}
+```
+    Text("Banner")
+  }
+}
+
+----firstChunkValue----:
+export default struct Banner {
+  @Prop title: string = 'Banner'
+
+  build() {
+    Text("Banner")
+  }
+}
+
+----replacedContents(firstChunkValue)----
+@Preview
+@Component
+export default struct Banner {
+  @Prop title: string = 'Banner'
+
+  build() {
+    Text("Banner")
+  }
+}
+
+----fullText----:
+export default struct Banner {
+  @Prop title: string = 'Banner'
+
+  build() {
+    Text(this.title)
+  }
+}
+============================
+----promptFilePath----:
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/arkui_log4/byUUID/2025-03-11T03_34_51.095Z____0d0344d3-1e99-4095-bc0e-04d4bb27a8e6.prompt
+
+----output----:
+```
+import Banner from '../components/Banner'
+```
+
+-----replacedOutput-----
+```
+import Banner from '../components/Banner'
+```
+@Component
+struct AboutMe {
+  build() {
+    Text('About Me')
+
+    Banner()
+  }
+}
+
+----firstChunkValue----:
+import Banner from '../components/Banner.ets'
+
+@Preview
+@Component
+struct AboutMe {
+  build() {
+
+----replacedContents(firstChunkValue)----
+import Banner from '../components/Banner.ets'
+
+@Preview
+@Component
+struct AboutMe {
+  build() {
+    Text('About Me')
+
+    Banner()
+  }
+}
+
+----fullText----:
+import Banner from '../components/Banner.ets'
+
+@Preview
+@Component
+struct AboutMe {
+  build() {
+============================
+----promptFilePath----:
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/arkui_log4/byUUID/2025-03-11T03_33_27.471Z____9ef54e1f-6120-427d-84f7-1c21c472b8c5.prompt
+
+----output----:
+```typescript
+Button('Click Me')
+  .onClick(() => {
+    this.message = 'Button Clicked';
+  })
+```
+
+-----replacedOutput-----
+@Entry
+@Component
+struct Index {
+  @State message: string = 'Hello World';
+
+  build() {
+    RelativeContainer() {
+      Text(this.message)
+        .id('HelloWorld')
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+        .alignRules({
+          center: { anchor: '__container__', align: VerticalAlign.Center },
+          middle: { anchor: '__container__', align: HorizontalAlign.Center }
+        })
+
+```typescript
+Button('Click Me')
+  .onClick(() => {
+    this.message = 'Button Clicked';
+  })
+```
+
+----firstChunkValue----:
+
+      Button() {
+    }
+    .height('100%')
+    .width('100%')
+
+----replacedContents(firstChunkValue)----
+@Entry
+@Component
+struct Index {
+  @State message: string = 'Hello World';
+
+  build() {
+    RelativeContainer() {
+      Text(this.message)
+        .id('HelloWorld')
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+        .alignRules({
+          center: { anchor: '__container__', align: VerticalAlign.Center },
+          middle: { anchor: '__container__', align: HorizontalAlign.Center }
+        })
+
+      Button() {
+    }
+    .height('100%')
+    .width('100%')
+  }
+}
+
+----fullText----:
+
+      Button() {
+        Text('Click me')
+      }
+      .onClick(() => {
+        this.message = 'Button clicked';
+      })
+    }
+    .height('100%')
+    .width('100%')
+============================
+----promptFilePath----:
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/arkui_log4/byUUID/2025-03-11T03_34_18.288Z____698fc1dc-0f2a-4bf9-8f88-7ba6a87f1fa5.prompt
+
+----output----:
+```
+@Entry
+@Component
+struct AboutMe {
+  build() {
+    Column() {
+      Text('About Me')
+    }
+  }
+}
+```
+
+-----replacedOutput-----
+```
+@Entry
+@Component
+struct AboutMe {
+  build() {
+    Column() {
+      Text('About Me')
+    }
+  }
+}
+```
+
+----firstChunkValue----:
+@Preview
+@Entry
+@Component
+struct AboutMe {
+  build() {
+    Text('About Me')
+  }
+}
+
+----replacedContents(firstChunkValue)----
+@Preview
+@Entry
+@Component
+struct AboutMe {
+  build() {
+    Text('About Me')
+  }
+}
+
+----fullText----:
+undefined
+============================
+----promptFilePath----:
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/arkui_log4/byUUID/2025-03-11T03_35_09.045Z____bbb4bd5d-24ee-4eaa-af13-3ec3e5c63f63.prompt
+
+----output----:
+```json
+{
+  "src": [
+    "pages/Index"
+  ],
+  "pages": {
+    "Index": {
+      "component": "pages/Index.ets",
+      "style": {
+        "background-color": "#ffffff",
+        "padding": "20px"
+      },
+      "children": [
+        {
+          "type": "button",
+          "text": "About Me",
+          "onClick": "router.pushUrl({ url: 'pages/AboutMe' });"
+        }
+      ]
+    },
+    "AboutMe": {
+      "component": "pages/AboutMe.ets",
+      "style": {
+        "background-color": "#f0f0f0",
+        "padding": "20px"
+      },
+      "children": [
+        {
+          "type": "banner",
+          "title": "Welcome to About Me Page"
+        }
+      ]
+    }
+  }
+}
+```
+
+-----replacedOutput-----
+{
+  "src": [
+```json
+{
+  "src": [
+    "pages/Index"
+  ],
+  "pages": {
+    "Index": {
+      "component": "pages/Index.ets",
+      "style": {
+        "background-color": "#ffffff",
+        "padding": "20px"
+      },
+      "children": [
+        {
+          "type": "button",
+          "text": "About Me",
+          "onClick": "router.pushUrl({ url: 'pages/AboutMe' });"
+        }
+      ]
+    },
+    "AboutMe": {
+      "component": "pages/AboutMe.ets",
+      "style": {
+        "background-color": "#f0f0f0",
+        "padding": "20px"
+      },
+      "children": [
+        {
+          "type": "banner",
+          "title": "Welcome to About Me Page"
+        }
+      ]
+    }
+  }
+}
+```
+
+----firstChunkValue----:
+{
+  "src": [
+    "pages/Index",
+    "pages/AboutMe"
+  ]
+}
+
+----replacedContents(firstChunkValue)----
+{
+  "src": [
+    "pages/Index",
+    "pages/AboutMe"
+  ]
+}
+
+----fullText----:
+undefined

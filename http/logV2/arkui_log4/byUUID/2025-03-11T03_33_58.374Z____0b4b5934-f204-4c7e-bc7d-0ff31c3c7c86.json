@@ -1,0 +1,121 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "0b4b5934-f204-4c7e-bc7d-0ff31c3c7c86",
+    "timestamp": "2025-03-11T03:33:58.374Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/pages/Index.ets",
+          "diffHistory": [
+            "17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Button clicked';\n22+|      })\n",
+            "18-|        Text('Click me')\n18+|        Text('Abou')\n",
+            "18-|        Text('Abou')\n18+|        Text('About Me')\n",
+            "21-|        this.message = 'Button clicked';\n",
+            "21-|        \n21+|        router.push({\n22+|          uri: 'pages/About'\n23+|        })\n",
+            "21-|        router.push({\n22-|          uri: 'pages/About'\n21+|        router.pushU({\n22+|          url: 'pages/AboutMe'\n",
+            "21-|        router.pushU({\n21+|        router.pushUrl({\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/pages/Index.ets",
+        "contents": "@Entry\n@Component\nstruct Index {\n  @State message: string = 'Hello World';\n\n  build() {\n    RelativeContainer() {\n      Text(this.message)\n        .id('HelloWorld')\n        .fontSize(50)\n        .fontWeight(FontWeight.Bold)\n        .alignRules({\n          center: { anchor: '__container__', align: VerticalAlign.Center },\n          middle: { anchor: '__container__', align: HorizontalAlign.Center }\n        })\n\n      Button() {\n        Text('About Me')\n      }\n      .onClick(() => {\n        router.pushUrl({\n          url: 'pages/AboutMe'\n        })\n      })\n    }\n    .height('100%')\n    .width('100%')\n  }\n}",
+        "cursorPosition": {
+          "line": 5,
+          "column": 0
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 38,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1741664038419,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.89990234375,
+      "timeAtRequestSend": 1741664038419
+    },
+    "generateUuid": "0b4b5934-f204-4c7e-bc7d-0ff31c3c7c86",
+    "timestamp": "2025-03-11T03:33:58.421Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "0b4b5934-f204-4c7e-bc7d-0ff31c3c7c86",
+    "timestamp": "2025-03-11T03:33:58.783Z"
+  },
+  {
+    "firstChunkValue": "\n  build() {\n    RelativeContainer() {\n      Text(this.message)\n        .id('HelloWorld')\n        .fontSize(50)\n        .fontWeight(FontWeight.Bold)\n        .alignRules({",
+    "generationUUID": "0b4b5934-f204-4c7e-bc7d-0ff31c3c7c86",
+    "timestamp": "2025-03-11T03:33:58.784Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": false
+    },
+    "generationUUID": "0b4b5934-f204-4c7e-bc7d-0ff31c3c7c86",
+    "timestamp": "2025-03-11T03:33:58.785Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "rangeToReplace": {
+        "startLineNumber": 5,
+        "endLineNumberInclusive": 12
+      },
+      "doneEdit": true,
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "0b4b5934-f204-4c7e-bc7d-0ff31c3c7c86",
+    "timestamp": "2025-03-11T03:33:58.786Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n  build() {\n    RelativeContainer() {\n      Text(this.message)\n        .id('HelloWorld')\n        .fontSize(50)\n        .fontWeight(FontWeight.Bold)\n        .alignRules({"
+    },
+    "generationUUID": "0b4b5934-f204-4c7e-bc7d-0ff31c3c7c86",
+    "timestamp": "2025-03-11T03:33:58.787Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "0b4b5934-f204-4c7e-bc7d-0ff31c3c7c86",
+    "timestamp": "2025-03-11T03:33:58.887Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "d8336d22-e8fb-4f41-ba7b-a937716aa78f",
+    "generationUUID": "0b4b5934-f204-4c7e-bc7d-0ff31c3c7c86",
+    "timestamp": "2025-03-11T03:33:58.896Z"
+  }
+]

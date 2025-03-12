@@ -1,0 +1,196 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "8950dc29-6138-4e50-a3af-edbc78a07b28",
+    "timestamp": "2025-03-11T03:20:25.822Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "src/components/test2.ts",
+          "diffHistory": [
+            "1-|enum TrafficLight {\n2-|  Red = 'red',\n3-|  Yellow = 'yellow',\n4-|  Green = 'green',\n5-|}\n6-|\n10-|  } \n4+|  }\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "linterErrors": {
+        "relativeWorkspacePath": "src/components/test2.ts",
+        "errors": [
+          {
+            "message": "'changeLight' is defined but never used.",
+            "range": {
+              "startPosition": {
+                "line": 1,
+                "column": 10
+              },
+              "endPosition": {
+                "line": 1,
+                "column": 21
+              }
+            },
+            "source": "eslint",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          },
+          {
+            "message": "Cannot find name 'TrafficLight'.",
+            "range": {
+              "startPosition": {
+                "line": 1,
+                "column": 29
+              },
+              "endPosition": {
+                "line": 1,
+                "column": 41
+              }
+            },
+            "source": "ts",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          },
+          {
+            "message": "Cannot find name 'TrafficLight'.",
+            "range": {
+              "startPosition": {
+                "line": 2,
+                "column": 17
+              },
+              "endPosition": {
+                "line": 2,
+                "column": 29
+              }
+            },
+            "source": "ts",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          },
+          {
+            "message": "Cannot find name 'TrafficLight'.",
+            "range": {
+              "startPosition": {
+                "line": 3,
+                "column": 12
+              },
+              "endPosition": {
+                "line": 3,
+                "column": 24
+              }
+            },
+            "source": "ts",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          }
+        ],
+        "fileContents": ""
+      },
+      "currentFile": {
+        "relativeWorkspacePath": "src/components/test2.ts",
+        "contents": "function changeLight(light: TrafficLight) {\n  if (light === TrafficLight.Red) {\n    return TrafficLight.Green;\n  }\n  console.log('light', light);\n}\n",
+        "cursorPosition": {
+          "line": 5,
+          "column": 0
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 22,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/Documents/personal/vite-react-demo2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1741663225863,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "8u65ni1hw3pqzyyqn4vyf",
+      "timeSinceRequestStart": 51.800048828125,
+      "timeAtRequestSend": 1741663225864
+    },
+    "generateUuid": "8950dc29-6138-4e50-a3af-edbc78a07b28",
+    "timestamp": "2025-03-11T03:20:25.867Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "8950dc29-6138-4e50-a3af-edbc78a07b28",
+    "timestamp": "2025-03-11T03:20:26.259Z"
+  },
+  {
+    "firstChunkValue": "",
+    "generationUUID": "8950dc29-6138-4e50-a3af-edbc78a07b28",
+    "timestamp": "2025-03-11T03:20:26.260Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": false
+    },
+    "generationUUID": "8950dc29-6138-4e50-a3af-edbc78a07b28",
+    "timestamp": "2025-03-11T03:20:26.260Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "rangeToReplace": {
+        "startLineNumber": 3,
+        "endLineNumberInclusive": 7
+      },
+      "doneEdit": true,
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "8950dc29-6138-4e50-a3af-edbc78a07b28",
+    "timestamp": "2025-03-11T03:20:26.261Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "8950dc29-6138-4e50-a3af-edbc78a07b28",
+    "timestamp": "2025-03-11T03:20:26.338Z"
+  },
+  {
+    "fusedCursorPrediction": {
+      "relativePath": "src/components/test2.ts",
+      "lineNumberOneIndexed": 1,
+      "text": "function changeLight(light: TrafficLight) {\nif (light === TrafficLight.Red) {",
+      "shouldRetriggerCpp": true
+    },
+    "predictionId": "e1411db7-5e6b-4120-9cc7-3867e0a1f109",
+    "generationUUID": "8950dc29-6138-4e50-a3af-edbc78a07b28",
+    "timestamp": "2025-03-11T03:20:26.339Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "cursorPredictionTarget": {
+        "relativePath": "src/components/test2.ts",
+        "lineNumberOneIndexed": 1,
+        "expectedContent": "function changeLight(light: TrafficLight) {\nif (light === TrafficLight.Red) {",
+        "shouldRetriggerCpp": true
+      }
+    },
+    "generationUUID": "8950dc29-6138-4e50-a3af-edbc78a07b28",
+    "timestamp": "2025-03-11T03:20:26.341Z"
+  }
+]

@@ -1,0 +1,54 @@
+============================
+----promptFilePath----:
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/trafficLight6/byUUID/2025-03-11T03_20_56.914Z____194b0a08-99a2-4252-83d2-c084c7f47608.prompt
+
+----output----:
+```typescript
+      return TrafficLight.GREEN;
+```
+
+-----replacedOutput-----
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case TrafficLight.RED:
+```typescript
+      return TrafficLight.GREEN;
+```
+    case TrafficLight.YELLOW:
+      return TrafficLight.RED;
+    default:
+      throw new Error('Invalid traffic light');
+  }
+}
+
+
+----firstChunkValue----:
+    case TrafficLight.RED:
+      console.log('Red');
+    case TrafficLight.GREEN:
+      return TrafficLight.YELLOW;
+    case TrafficLight.YELLOW:
+
+----replacedContents(firstChunkValue)----
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case TrafficLight.RED:
+      console.log('Red');
+    case TrafficLight.GREEN:
+      return TrafficLight.YELLOW;
+    case TrafficLight.YELLOW:
+      return TrafficLight.RED;
+    default:
+      throw new Error('Invalid traffic light');
+  }
+}
+
+
+----fullText----:
+    case TrafficLight.RED:
+      console.log('Red');
+      break;
+    case TrafficLight.GREEN:
+      console.log('Green');
+      break;
+    case TrafficLight.YELLOW:

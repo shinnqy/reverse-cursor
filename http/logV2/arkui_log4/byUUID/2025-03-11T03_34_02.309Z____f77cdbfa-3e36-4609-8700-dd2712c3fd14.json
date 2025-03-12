@@ -1,0 +1,169 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "f77cdbfa-3e36-4609-8700-dd2712c3fd14",
+    "timestamp": "2025-03-11T03:34:02.309Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/pages/Index.ets",
+          "diffHistory": [
+            "17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Button clicked';\n22+|      })\n",
+            "18-|        Text('Click me')\n18+|        Text('Abou')\n",
+            "18-|        Text('Abou')\n18+|        Text('About Me')\n",
+            "21-|        this.message = 'Button clicked';\n",
+            "21-|        \n21+|        router.push({\n22+|          uri: 'pages/About'\n23+|        })\n",
+            "21-|        router.push({\n22-|          uri: 'pages/About'\n21+|        router.pushU({\n22+|          url: 'pages/AboutMe'\n",
+            "21-|        router.pushU({\n21+|        router.pushUrl({\n",
+            "1+|import router from '@ohos.router';\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/pages/Index.ets",
+        "contents": "import router from '@ohos.router';\n\n@Entry\n@Component\nstruct Index {\n  @State message: string = 'Hello World';\n\n  build() {\n    RelativeContainer() {\n      Text(this.message)\n        .id('HelloWorld')\n        .fontSize(50)\n        .fontWeight(FontWeight.Bold)\n        .alignRules({\n          center: { anchor: '__container__', align: VerticalAlign.Center },\n          middle: { anchor: '__container__', align: HorizontalAlign.Center }\n        })\n\n      Button() {\n        Text('About Me')\n      }\n      .onClick(() => {\n        router.pushUrl({\n          url: 'pages/AboutMe'\n        })\n      })\n    }\n    .height('100%')\n    .width('100%')\n  }\n}",
+        "cursorPosition": {
+          "line": 0,
+          "column": 34
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 43,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1741664042358,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.599853515625,
+      "timeAtRequestSend": 1741664042358
+    },
+    "generateUuid": "f77cdbfa-3e36-4609-8700-dd2712c3fd14",
+    "timestamp": "2025-03-11T03:34:02.360Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "f77cdbfa-3e36-4609-8700-dd2712c3fd14",
+    "timestamp": "2025-03-11T03:34:02.734Z"
+  },
+  {
+    "firstChunkValue": "import router from '@ohos.router';\n\n@Entry\n@Component\nstruct Index {",
+    "generationUUID": "f77cdbfa-3e36-4609-8700-dd2712c3fd14",
+    "timestamp": "2025-03-11T03:34:02.735Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": false
+    },
+    "generationUUID": "f77cdbfa-3e36-4609-8700-dd2712c3fd14",
+    "timestamp": "2025-03-11T03:34:02.735Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "rangeToReplace": {
+        "startLineNumber": 1,
+        "endLineNumberInclusive": 5
+      },
+      "doneEdit": true,
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "f77cdbfa-3e36-4609-8700-dd2712c3fd14",
+    "timestamp": "2025-03-11T03:34:02.736Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "import router from '@ohos.router';\n\n@Entry\n@Component\nstruct Index {"
+    },
+    "generationUUID": "f77cdbfa-3e36-4609-8700-dd2712c3fd14",
+    "timestamp": "2025-03-11T03:34:02.736Z"
+  },
+  {
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/pages/Index.ets",
+      "lineNumberOneIndexed": 24,
+      "text": "url: 'pages/AboutMe'\n})\n})\n}\n.height('100%')",
+      "shouldRetriggerCpp": true
+    },
+    "predictionId": "3957b52f-38a4-49a2-8fae-07b58ff8a9d2",
+    "generationUUID": "f77cdbfa-3e36-4609-8700-dd2712c3fd14",
+    "timestamp": "2025-03-11T03:34:02.832Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is false",
+    "invokePlace": "before this.displayFusedCursorPrediction, about to show prediction icon",
+    "isValidCase4firstChunkValue": {
+      "valid": false
+    },
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/pages/Index.ets",
+      "lineNumberOneIndexed": 24,
+      "text": "url: 'pages/AboutMe'\n})\n})\n}\n.height('100%')",
+      "shouldRetriggerCpp": true
+    },
+    "predictionId": "3957b52f-38a4-49a2-8fae-07b58ff8a9d2",
+    "generationUUID": "f77cdbfa-3e36-4609-8700-dd2712c3fd14",
+    "timestamp": "2025-03-11T03:34:02.832Z"
+  },
+  {
+    "action": "displayFusedCursorPrediction",
+    "predictionId": "3957b52f-38a4-49a2-8fae-07b58ff8a9d2",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/pages/Index.ets",
+      "lineNumberOneIndexed": 24,
+      "text": "url: 'pages/AboutMe'\n})\n})\n}\n.height('100%')",
+      "shouldRetriggerCpp": true
+    },
+    "oldText": "",
+    "newText": "",
+    "timestamp": "2025-03-11T03:34:02.833Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "cursorPredictionTarget": {
+        "relativePath": "entry/src/main/ets/pages/Index.ets",
+        "lineNumberOneIndexed": 24,
+        "expectedContent": "url: 'pages/AboutMe'\n})\n})\n}\n.height('100%')",
+        "shouldRetriggerCpp": true
+      }
+    },
+    "generationUUID": "f77cdbfa-3e36-4609-8700-dd2712c3fd14",
+    "timestamp": "2025-03-11T03:34:02.839Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "f77cdbfa-3e36-4609-8700-dd2712c3fd14",
+    "timestamp": "2025-03-11T03:34:02.839Z"
+  }
+]
