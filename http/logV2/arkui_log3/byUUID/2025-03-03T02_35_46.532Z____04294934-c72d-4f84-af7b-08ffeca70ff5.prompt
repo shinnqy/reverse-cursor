@@ -48,10 +48,12 @@ entry/src/main/ets/pages/Index.ets
 Here is the current code around the cursor position:
 
 ```
+<|editable_region_start|>
 
 <|current_cursor_position|>@Entry
 @Component
 struct Index {
+<|editable_region_end|>
   @State message: string = 'Hello World';
 
   build() {
@@ -81,13 +83,13 @@ struct Index {
 ```
 
 ## Task
-Rewrite the code from the first column of the line of <|current_cursor_position|> according to the following requirements:
-1. Enforce PascalCase naming for all enum members
+Rewrite the code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> according to the following requirements:
+1. Enforce code format strictly matching existing code style.
 2. Propagate naming convention changes to all related cases
 3. Preserve original functionality
 4. Apply changes to entire code regardless of cursor position
-5. Focus on code after cursor position
+5. Focus on code after cursor position at <|current_cursor_position|>
 
 # Output Format
-Return ONLY the rewritten code from the first column of the line of cursor position without any other words.
-Do NOT include unchanged code before cursor.
+Return ONLY the rewritten code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> without any other words.
+Never use markdown formatting like ```. Return raw text only.

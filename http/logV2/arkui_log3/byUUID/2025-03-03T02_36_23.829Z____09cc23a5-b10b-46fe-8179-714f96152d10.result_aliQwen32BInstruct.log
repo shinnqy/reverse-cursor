@@ -1,0 +1,29 @@
+------------------------------------------[        output        ]-------------------------------------------
+@Preview
+@Component
+struct AboutMe {
+  @State message: string = 'About Me';
+
+  build() {
+    Column() {
+      Text(this.message)
+        .fontSize(20)
+        .margin({ top: 20 })
+    }
+  }
+}
+------------------------------------------[    replacedOutput    ]-------------------------------------------
+@Preview
+@Preview
+@Component
+struct AboutMe {
+  @State message: string = 'About Me';
+
+  build() {
+    Column() {
+      Text(this.message)
+        .fontSize(20)
+        .margin({ top: 20 })
+    }
+  }
+}

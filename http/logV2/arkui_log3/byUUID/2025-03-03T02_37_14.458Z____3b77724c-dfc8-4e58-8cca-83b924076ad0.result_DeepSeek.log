@@ -1,0 +1,16 @@
+------------------------------------------[        output        ]-------------------------------------------
+@Component
+export default struct Banner {
+  @Prop message: string = 'Banner';
+
+  build() {
+------------------------------------------[    replacedOutput    ]-------------------------------------------
+@Preview
+@Component
+export default struct Banner {
+  @Prop message: string = 'Banner';
+
+  build() {
+    Text("Banner")
+  }
+}
