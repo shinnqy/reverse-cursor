@@ -20,18 +20,18 @@ const urlMap = {
   [EndPoint.DeepSeek]: 'https://api.deepseek.com/chat/completions',
   [EndPoint.GPT35]: envObject['AZURE_OPENAI_COMPLETION_URL'],
   [EndPoint.Qwen25Coder7BInstructGPTQInt4]: 'http://7.216.58.118:8087/v1/chat/completions',
-  [EndPoint.aliQwen7BQuant]: 'https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions'
+  [EndPoint.aliQwen7BInstruct]: 'https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions'
 };
 
 const AuthorizationMap = {
   [EndPoint.DeepSeek]: envObject['DEEPSEEK_KEY'],
-  [EndPoint.aliQwen7BQuant]: 'Bearer sk-e46b06ee8bae41d1842f2b2830581942',
+  [EndPoint.aliQwen7BInstruct]: 'Bearer sk-e46b06ee8bae41d1842f2b2830581942',
 };
 
 const modelMap = {
   [EndPoint.DeepSeek]: 'deepseek-chat',
   [EndPoint.Qwen25Coder7BInstructGPTQInt4]: 'Qwen2.5-Coder-7B-Instruct-GPTQ-Int4',
-  [EndPoint.aliQwen7BQuant]: 'qwen2.5-coder-7b-instruct',
+  [EndPoint.aliQwen7BInstruct]: 'qwen2.5-coder-7b-instruct',
 };
 
 const endpoint = config.endpointType;
