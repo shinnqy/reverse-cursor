@@ -1,19 +1,20 @@
 {"line":0,"column":29}
 
-======== fileDiffHistories ========
-
-File: src/components/test2.ts
-1+|function changeLight(light: T)\n
-
-======== processedCurrentFileContents ========
+======== currentFileContentsWithToFill ========
 function changeLight(light: T[ToFill])
 ======== firstChunkValue ========
 function changeLight(light: TrafficLight) {
-======== replace firstChunkValue ========
+======== replace replacedContentsWithFirstChunk ========
 function changeLight(light: TrafficLight) {
-======== replacedContentsWithCursorPosition ========
-function changeLight(light: TrafficLight) {<|current_cursor_position|>
 ======== fullText ========
+function changeLight(light: TrafficLight) {
+  light = 'green';
+}
+
+const light = 'red';
+changeLight(light);
+
+======== replace replacedContentsWithFullText ========
 function changeLight(light: TrafficLight) {
   light = 'green';
 }

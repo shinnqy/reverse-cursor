@@ -143,11 +143,13 @@ function changeLight(light: TrafficLight) {
       break;
     case TrafficLight.GREEN:
       console.log('Go');
+<|editable_region_start|>
       break;
     case TrafficLight.YELLOW:
 <|current_cursor_position|>      console.log('yellow');
       break;
     default:
+<|editable_region_end|>
       console.log('red');
   }
 }
@@ -164,14 +166,13 @@ changeLight(light);
 ```
 
 ## Task
-Rewrite the code from the first column of the line of <|current_cursor_position|> according to the following requirements:
+Rewrite the code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> according to the following requirements:
 1. Enforce code format strictly matching existing code style.
 2. Propagate naming convention changes to all related cases
 3. Preserve original functionality
 4. Apply changes to entire code regardless of cursor position
-5. Focus on code after cursor position
+5. Focus on code after cursor position at <|current_cursor_position|>
 
 # Output Format
-Return ONLY the rewritten code from the first column of the line of cursor position without any other words.
-Do NOT include unchanged code before cursor.
+Return ONLY the rewritten code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> without any other words.
 Never use markdown formatting like ```. Return raw text only.

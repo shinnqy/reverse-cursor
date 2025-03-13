@@ -1,14 +1,6 @@
 {"line":7,"column":3}
 
-======== fileDiffHistories ========
-
-File: src/components/test2.ts
-1+|function changeLight(light: TrafficLight) {\n2+|  light = 'green';\n3+|}\n4+|\n2-|  light = 'green';\n2-|  \n2+|  switch (light) {\n3+|    case 'red':\n4+|      return 'green';\n5+|    case 'green':\n6+|      return 'yellow';\n7+|      \n8+|  }\n7-|      \n7+|\n
-1+|function changeLight(light: TrafficLight) {\n2+|  light = 'green';\n3+|}\n4+|\n2-|  light = 'green';\n2-|  \n2+|  switch (light) {\n3+|    case 'red':\n4+|      return 'green';\n5+|    case 'green':\n6+|      return 'yellow';\n7+|      \n8+|  }\n7-|      \n7+|\n
-1+|function changeLight(light: TrafficLight) {\n2+|  light = 'green';\n3+|}\n4+|\n2-|  light = 'green';\n2-|  \n2+|  switch (light) {\n3+|    case 'red':\n4+|      return 'green';\n5+|    case 'green':\n6+|      return 'yellow';\n7+|      \n8+|  }\n7-|      \n7+|\n
-1+|function changeLight(light: TrafficLight) {\n2+|  light = 'green';\n3+|}\n4+|\n2-|  light = 'green';\n2-|  \n2+|  switch (light) {\n3+|    case 'red':\n4+|      return 'green';\n5+|    case 'green':\n6+|      return 'yellow';\n7+|      \n8+|  }\n7-|      \n7+|\n
-
-======== processedCurrentFileContents ========
+======== currentFileContentsWithToFill ========
 function changeLight(light: TrafficLight) {
   switch (light) {
     case 'red':
@@ -28,7 +20,7 @@ function changeLight(light: TrafficLight) {
   }
 }
 
-======== replace firstChunkValue ========
+======== replace replacedContentsWithFirstChunk ========
 function changeLight(light: TrafficLight) {
   switch (light) {
     case 'red':
@@ -36,20 +28,6 @@ function changeLight(light: TrafficLight) {
     case 'green':
       return 'yellow';
     case 'yellow':
-      return 'red';
-    default:
-      return 'red';
-  }
-}
-
-======== replacedContentsWithCursorPosition ========
-function changeLight(light: TrafficLight) {
-  switch (light) {
-    case 'red':
-      return 'green';
-    case 'green':
-      return 'yellow';
-    case 'yellow':<|current_cursor_position|>
       return 'red';
     default:
       return 'red';

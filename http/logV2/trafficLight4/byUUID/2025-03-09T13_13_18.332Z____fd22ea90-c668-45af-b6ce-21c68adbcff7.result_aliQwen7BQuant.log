@@ -1,0 +1,28 @@
+------------------------------------------[        output        ]-------------------------------------------
+      return 'red';
+------------------------------------------[    replacedOutput    ]-------------------------------------------
+function changeLight(light: TrafficLight) {
+      return 'red';
+    case TrafficLight.RED:
+      console.log('');
+      break;
+    case TrafficLight.GREEN:
+      console.log('green');
+      break;
+    case TrafficLight.YELLOW:
+      console.log('yellow');
+      break;
+    default:
+      console.log('red');
+  }
+}
+
+enum TrafficLight {
+  RED = 'red',
+  GREEN = 'green',
+  YELLOW = 'yellow',
+}
+
+const light = TrafficLight.RED;
+changeLight(light);
+
