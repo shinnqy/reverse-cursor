@@ -1,0 +1,34 @@
+------------------------------------------[        output        ]-------------------------------------------
+@Preview
+@Component
+struct AboutMe {
+  build() {
+    Column() {
+      Text('About Me')
+        .fontSize(20)
+        .fontWeight(FontWeight.Bold)
+        .margin({ top: 20 })
+    }
+    .width('100%')
+    .height('100%')
+    .alignItems(HorizontalAlign.Center)
+    .justifyContent(FlexAlign.Center)
+  }
+}
+------------------------------------------[    replacedOutput    ]-------------------------------------------
+@Preview
+@Component
+struct AboutMe {
+  build() {
+    Column() {
+      Text('About Me')
+        .fontSize(20)
+        .fontWeight(FontWeight.Bold)
+        .margin({ top: 20 })
+    }
+    .width('100%')
+    .height('100%')
+    .alignItems(HorizontalAlign.Center)
+    .justifyContent(FlexAlign.Center)
+  }
+}

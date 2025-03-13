@@ -1,0 +1,22 @@
+------------------------------------------[        output        ]-------------------------------------------
+      Banner({
+        title: this.message
+      })
+------------------------------------------[    replacedOutput    ]-------------------------------------------
+import Banner from '../components/Banner.ets';
+
+@Preview
+@Component
+struct AboutMe {
+  @State message: string = 'About Me';
+
+  build() {
+    Column() {
+      Text(this.message)
+        .fontSize(50)
+      Banner({
+        title: this.message
+      })
+    }
+  }
+}
