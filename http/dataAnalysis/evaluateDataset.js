@@ -6,6 +6,7 @@ const { completion } = require('./callLLM');
 const { config } = require('./config');
 const { replaceStringBasedOnSuggestion } = require('./replaceCode');
 const { getCode } = require('./getCode');
+const { normalizeOutput } = require('./string.utils')
 
 const endpoint = config.endpointType;
 const id = new Date().toISOString().replace(/:/g, '_');
@@ -36,7 +37,9 @@ function batchInvokeLLMAndEvaluate(promptFilePathList, specificLogFolderPath) {
     const cursorPosition = partialData.currentFile.cursorPosition;
 
     const input = fs.readFileSync(promptFilePath, { encoding: 'utf-8' });
-    completion(input).then(output => {
+    completion(input).then(rawOutput => {
+      const output = normalizeOutput(rawOutput);
+
       const lineCountOfOutput = output.split('\n');
       const startLineNumber = cursorPosition.line + 1; // zero indexed => one indexed
       const endLineNumberInclusive = cursorPosition.line + lineCountOfOutput.length + 1;  // zero indexed => one indexed
@@ -61,10 +64,9 @@ function batchInvokeLLMAndEvaluate(promptFilePathList, specificLogFolderPath) {
       console.log({output});
 
       const data =
-`----output----:
+`------------------------------------------[        output        ]-------------------------------------------
 ${output}
-
------replacedOutput-----
+------------------------------------------[    replacedOutput    ]-------------------------------------------
 ${replacedOutput}
 `;
       const dependentLogPath = path.join(path.dirname(promptFilePath), `${fileName}.result_${endpoint}.log`);

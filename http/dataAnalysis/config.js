@@ -5,7 +5,7 @@ const EndPoint = {
   DeepSeek: 'DeepSeek',
   GPT35: 'GPT35',
   Qwen25Coder7BInstructGPTQInt4: 'Qwen25Coder7BInstructGPTQInt4',
-  aliQwen7BQuant: 'aliQwen7BQuant'
+  aliQwen7BInstruct: 'aliQwen7BInstruct'
 };
 
 const config = {
