@@ -1,6 +1,6 @@
 {"line":7,"column":3}
 
-======== currentFileContentsWithToFill ========
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
 function changeLight(light: TrafficLight) {
   switch (light) {
     case 'red':
@@ -12,7 +12,7 @@ function changeLight(light: TrafficLight) {
 }
 
 
-======== firstChunkValue ========
+-------------------------------[               firstChunkValue               ]--------------------------------
     case 'yellow':
       return 'red';
     default:
@@ -20,7 +20,7 @@ function changeLight(light: TrafficLight) {
   }
 }
 
-======== replace replacedContentsWithFirstChunk ========
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
 function changeLight(light: TrafficLight) {
   switch (light) {
     case 'red':
@@ -34,25 +34,7 @@ function changeLight(light: TrafficLight) {
   }
 }
 
-======== fusedCursorPrediction ========
-lineNumberOneIndexed: 1
-
-text: 
-function changeLight(light: TrafficLight) {
-switch (light) {
-case 'red':
-return 'green';
-case 'green':
-
-shouldRetriggerCpp: true
-======== displayedFusedCursorPrediction ========
-lineNumberOneIndexed: 1
-
-text: 
-function changeLight(light: TrafficLight) {
-switch (light) {
-case 'red':
-return 'green';
-case 'green':
-
-shouldRetriggerCpp: true
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+[object Object]
+--------------------------------[        displayedFusedCursorPrediction       ]---------------------------------
+[object Object]

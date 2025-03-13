@@ -1,6 +1,6 @@
 {"line":2,"column":11}
 
-======== currentFileContentsWithToFill ========
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
 function changeLight(light: TrafficLight) {
   switch (light) {
     case li[ToFill]:
@@ -15,13 +15,13 @@ function changeLight(light: TrafficLight) {
 }
 
 
-======== firstChunkValue ========
+-------------------------------[               firstChunkValue               ]--------------------------------
   switch (light) {
     case light.RED:
       return 'green';
     case 'green':
       return 'yellow';
-======== replace replacedContentsWithFirstChunk ========
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
 function changeLight(light: TrafficLight) {
   switch (light) {
     case light.RED:
@@ -36,13 +36,13 @@ function changeLight(light: TrafficLight) {
 }
 
 
-======== fullText ========
+-------------------------------[                   fullText                  ]--------------------------------
   switch (light) {
     case light.RED:
       return light.GREEN;
     case light.GREEN:
       return light.YELLOW;
-======== replace replacedContentsWithFullText ========
+-------------------------------[         replacedContentsWithFullText         ]--------------------------------
 function changeLight(light: TrafficLight) {
   switch (light) {
     case light.RED:
@@ -57,25 +57,7 @@ function changeLight(light: TrafficLight) {
 }
 
 
-======== fusedCursorPrediction ========
-lineNumberOneIndexed: 7
-
-text: 
-case 'yellow':
-return 'red';
-default:
-return 'red';
-}
-
-shouldRetriggerCpp: true
-======== displayedFusedCursorPrediction ========
-lineNumberOneIndexed: 7
-
-text: 
-case 'yellow':
-return 'red';
-default:
-return 'red';
-}
-
-shouldRetriggerCpp: true
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+[object Object]
+--------------------------------[        displayedFusedCursorPrediction       ]---------------------------------
+[object Object]
