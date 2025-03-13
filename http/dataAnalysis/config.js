@@ -9,11 +9,14 @@ const EndPoint = {
 };
 
 const config = {
-  endpointType: EndPoint.aliQwen7BQuant,
+  useEditableRange: true,
+  editableRangeFromCursorLine: 2,
+  endpointType: EndPoint.DeepSeek,
   logContainerFolder: path.resolve(__dirname, '../logV2'),
   // logFileName: 'arkui_log3',
   // logFileName: 'mutliLine',
-  logFileName: 'trafficLight5',
+  logFileName: 'trafficLight4',
+  // logFileName: 'test_insert_in_middle_1',
 };
 
 module.exports = {

@@ -2,6 +2,7 @@
 
 const path = require('path');
 const { modifyCode } = require('./modifyCode');
+const { config } = require('./config');
 
 const Language2SystemPromptPrefix = {
   '.ts': 'an expert in TypeScript',
@@ -39,8 +40,21 @@ function generatePrompt(fileDiffHistories, currentFileContents, currentCursorPos
     });
     return `File: ${fileName}\n${explainedDiffHistory.join('\n')}`;
   }).join('-----------------------------------------------\n\n');
+
   // const fimCode = '<|fim_prefix|>' + modifyCode(currentFileContents, currentCursorPosition.line, currentCursorPosition.column, '<|fim_suffix|>') + '<|fim_middle|>';
-  const fimCode = modifyCode(currentFileContents, currentCursorPosition.line, currentCursorPosition.column, '<|current_cursor_position|>');
+  const fimCode = modifyCode({
+    code: currentFileContents,
+    lineNumberZeroIndexed: currentCursorPosition.line,
+    columnNumberZeroIndexed: currentCursorPosition.column,
+    insertString: '<|current_cursor_position|>',
+    shouldSetEditableRange: config.useEditableRange,
+  });
+
+  const TASK_DETAIL_BY_CONFIG = {
+    OUTPUT_RANGE: config.useEditableRange
+      ? 'from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|>'
+      : 'from the first column of the line of <|current_cursor_position|>',
+  };
 
 // ================ prompt template ================
   const prompt =
@@ -62,67 +76,22 @@ ${fimCode}
 \`\`\`
 
 ## Task
-Rewrite the code from the first column of the line of <|current_cursor_position|> according to the following requirements:
+Rewrite the code ${TASK_DETAIL_BY_CONFIG.OUTPUT_RANGE} according to the following requirements:
 1. Enforce code format strictly matching existing code style.
 2. Propagate naming convention changes to all related cases
 3. Preserve original functionality
 4. Apply changes to entire code regardless of cursor position
-5. Focus on code after cursor position
+5. Focus on code after cursor position at <|current_cursor_position|>
 
 # Output Format
-Return ONLY the rewritten code from the first column of the line of cursor position without any other words.
-Do NOT include unchanged code before cursor.
+Return ONLY the rewritten code ${TASK_DETAIL_BY_CONFIG.OUTPUT_RANGE} without any other words.
 Never use markdown formatting like \`\`\`. Return raw text only.`;
-// As ${systemPromptPrefix}, your role is to analyze what the user has been doing and then to output the code from the first column of the line of <|current_cursor_position|> with the updated changes without any other words:`;
+// As ${systemPromptPrefix}, your role is to analyze what the user has been doing and then to output the code ${TASK_DETAIL_BY_CONFIG.OUTPUT_RANGE} with the updated changes without any other words:`;
 // ================ prompt template ================
 
   return prompt;
 }
 // TODO: Focus priority: ##Task > ##Current Code > ##Recent Actions
-
-/**
- * @typedef {Object} StreamResponse
- * @property {string} text
- * @property {{ startLineNumber: number; endLineNumberInclusive: number }} rangeToReplace
- * @property {{ isFusedCursorPredictionModel: boolean }} modelInfo
- * @property {{ relativePath: string; lineNumberOneIndexed: number; expectedContent: string; shouldRetriggerCpp: boolean }} cursorPredictionTarget
- * @property {boolean} doneEdit
- * @property {boolean} doneStream
- */
-
-const streamExample = `
-// 第一个stream chunk
-{"cursorRetrieval":{"text":"function","rangeToReplace":{"startLineNumber":1,"endLineNumberInclusive":1},"modelInfo":{"isFusedCursorPredictionModel":true}}}
-// 后续的chunk
-{"cursorRetrieval":{"text":" change"}}
-{"cursorRetrieval":{"text":"Light"}}
-{"cursorRetrieval":{"text":"("}}
-{"cursorRetrieval":{"text":"light"}}
-{"cursorRetrieval":{"text":":"}}
-{"cursorRetrieval":{"text":" Traffic"}}
-{"cursorRetrieval":{"text":"Light"}}
-......
-// 结束stream，满了第一行会截断返回为firstChunk，如果还有后续text就会返回fullText
-......
-//
-{"cursorRetrieval":{"text":"","doneEdit":true}}
-{"cursorRetrieval":{"text":"","cursorPredictionTarget":{"relativePath":"src/components/test2.ts","lineNumberOneIndexed":6,"expectedContent":"","shouldRetriggerCpp":false}}}
-{"cursorRetrieval":{"text":"","doneStream":true}}
-`;
-
-const a = `
-We represent user's recent actions in the following format:
-<line number><add action of delete action>|<content in this line>
-
-For example:
-1-|import { foo } from 'foo';
-1+|import { bar } from 'bar';
-
-This means the user has deleted the code "import { foo } from 'foo';" in line 1 and added then add code "import { bar } from 'bar';" in line 1.
-`
-const a1 = `
-1. Enforce code format strictly matching existing code style.
-`; // 新增了这个 
 
 function generatePredictionPrompt(fileDiffHistories, currentFileContents, currentCursorPosition, currentFilePath) {
   const formattedDiffHistoryByFiles = fileDiffHistories.map(fileDiff => {
