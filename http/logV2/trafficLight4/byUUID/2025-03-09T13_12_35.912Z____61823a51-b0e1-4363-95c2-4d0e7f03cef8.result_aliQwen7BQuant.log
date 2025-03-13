@@ -1,0 +1,18 @@
+------------------------------------------[        output        ]-------------------------------------------
+    case light.YELLOW:
+      return light.RED;
+------------------------------------------[    replacedOutput    ]-------------------------------------------
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case light.RED:
+      return light.GREEN;
+    case light.YELLOW:
+      return light.RED;
+    case 'yellow':
+      return 'red';
+    default:
+      return 'red';
+  }
+}
+
+
