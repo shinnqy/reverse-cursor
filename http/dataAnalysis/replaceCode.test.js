@@ -1,6 +1,6 @@
 // @ts-check
 
-const { replaceStringBasedOnSuggestion } = require('./replaceCode');
+const { replaceStringBasedOnSuggestion, replaceStringFromPosition } = require('./replaceCode');
 
 const processedCurrentFileContents =
 `@Entry
@@ -150,23 +150,100 @@ const suggestion2 = {
 // const ground_truth = replaceStringBasedOnSuggestion(currentFileContents, suggestion);
 // console.log(ground_truth);
 
-// {
-//   const currentFileContents =
-// `enum TrafficLight {
-//   Red = 'red',
-//   Yellow = 'yellow',
-//   Green = 'green',
-// }
+{
+  const currentFileContents =
+`enum TrafficLight {
+  Red = 'red',
+  Yellow = 'yellow',
+  Green = 'green',
+}
 
-// function changeLight(light: TrafficLight) {
-//   if (light === TrafficLight.Red) {
-//     return TrafficLight.Green;
-//   }
-//   console.log('light', light);
-// }
+function changeLight(light: TrafficLight) {
+  if (light === TrafficLight.Red) {
+    return TrafficLight.Green;
+  }
+  console.log('light', light);
+}
 
-// `;
-//   const trustedResponse = "  } else if (light === TrafficLight.Green) {\n    return TrafficLight.Yellow;\n  } else if (light === TrafficLight.Yellow) {\n    return TrafficLight.Red;\n  }\n  console.log('light', light);";
-//   const groundTruth = replaceStringFromPosition(currentFileContents, 10, 5, trustedResponse);
-//   console.log(groundTruth);
-// }
+`;
+  const trustedResponse = "  } else if (light === TrafficLight.Green) {\n    return TrafficLight.Yellow;\n  } else if (light === TrafficLight.Yellow) {\n    return TrafficLight.Red;\n  }\n  console.log('light', light);";
+  const groundTruth = replaceStringFromPosition(currentFileContents, 10, 5, trustedResponse);
+  console.log({groundTruth});
+}
+
+const currentText = 'function changeLight(light: TrafficLight) {\n  if (light === TrafficLight.Red) {\n    return TrafficLight.Green;\n  } else if (light === TrafficLight.Green) {\n';
+const expectedText = "function changeLight(light: TrafficLight) {\n  if (light === TrafficLight.Red) {\n    return TrafficLight.Green;\n  } \n  console.log('light', light);\n}\n\n";
+
+const MIN_DIFF_LENGTH = 6;
+const SIMILARITY_THRESHOLD = 0.2;
+
+const { state, diffText } = getDiffText(currentText, expectedText);
+console.log({state, diffText})
+
+/**
+ * @param {string} currentText
+ * @param {string} expectedText
+ */
+function getDiffText(currentText, expectedText) {
+
+  const lines = currentText.split(`
+`);
+  const expectedLines = expectedText.split(`
+`);
+
+  const lastLineIndex = lines.length - 2;
+  const currentLine = lines[lastLineIndex].trim();
+  const expectedLine = expectedLines[lastLineIndex].trim();
+  const nextExpectedLine = expectedLines
+    .slice(lastLineIndex + 1)
+    .map((d) => d.trim())
+    .filter((d) => d !== "")[0];
+
+  if (nextExpectedLine !== void 0 && nextExpectedLine === currentLine) return { state: 'MAYBE_LINE_MATCH' }
+  if (!isPrefixMatch(expectedLine, currentLine)) return { state: 'NON_STREAMING' }
+  if (isSimilarWithSuffix(expectedLine, currentLine, nextExpectedLine)) return { state: 'NON_STREAMING' }
+  if (currentLine.length - expectedLine.length < MIN_DIFF_LENGTH) return { state: 'NON_STREAMING' }
+  const commonPrefixLength = longestCommonPrefix(expectedLine, currentLine);
+  return expectedLine.length <= 2 || commonPrefixLength / Math.min(expectedLine.length, currentLine.length) > SIMILARITY_THRESHOLD
+    ? {
+        state: 'DONE',
+        diffText: [...lines.slice(0, lastLineIndex + 1), ...expectedLines.slice(lastLineIndex + 1)].join(`
+`),
+      }
+    : { state: 'NON_STREAMING' }
+}
+
+/**
+ * @param {string} prefix
+ * @param {string} text
+ * @returns
+ */
+function isPrefixMatch(prefix, text) {
+  let prefixIndex = 0,
+    textIndex = 0
+  for (; prefixIndex < prefix.length && textIndex < text.length; ) prefix[prefixIndex] === text[textIndex] && prefixIndex++, textIndex++
+  return prefixIndex === prefix.length
+}
+
+/**
+ * @param {string} prefix
+ * @param {string} text
+ * @param {string} suffix
+ * @returns
+ */
+function isSimilarWithSuffix(prefix, text, suffix) {
+  if (!text.startsWith(prefix)) return !1
+  const remainingText = text.slice(prefix.length)
+  return remainingText.length > MIN_DIFF_LENGTH && remainingText === suffix
+}
+
+/**
+ * @param {string} str1
+ * @param {string} str2
+ * @returns
+ */
+function longestCommonPrefix(str1, str2) {
+  let index = 0
+  for (; index < str1.length && index < str2.length && str1[index] === str2[index]; ) index++
+  return index
+}

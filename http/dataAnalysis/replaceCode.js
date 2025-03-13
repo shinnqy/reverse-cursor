@@ -1,5 +1,8 @@
 // @ts-check
-const { modifyCode } = require('./modifyCode');
+
+const { config } = require('./config');
+
+const EDITABLE_RANGE_FROM_CURSOR_LINE = config.editableRangeFromCursorLine;
 
 function replaceStringFromPosition(originalStr, lineNumber, columnNumber, replacementStr) {
   const lines = originalStr.split('\n');
@@ -46,9 +49,10 @@ function replaceStringFromPosition(originalStr, lineNumber, columnNumber, replac
  *
  * @param {string} originalStr
  * @param {{ replaceText: string; originalText: string; range: { startLineNumber: number; startColumn: number; endLineNumberInclusive: number; endColumn: number } }} acceptedSuggestion
+ * @param {boolean=} shouldSetEditableRange
  */
-function replaceStringBasedOnSuggestion(originalStr, acceptedSuggestion) {
-  if (!acceptedSuggestion) {
+function replaceStringBasedOnSuggestion(originalStr, acceptedSuggestion, shouldSetEditableRange = false) {
+  if (!originalStr || !acceptedSuggestion) {
     return {};
   }
 
@@ -56,12 +60,18 @@ function replaceStringBasedOnSuggestion(originalStr, acceptedSuggestion) {
   const { range, replaceText, originalText } = acceptedSuggestion;
   const { startLineNumber, startColumn, endLineNumberInclusive, endColumn } = range;
 
-  const realLStartLineNumber = startLineNumber > 0 ? startLineNumber - 1 : 0;
+  let realLStartLineNumber = startLineNumber > 0 ? startLineNumber - 1 : 0;
+  let realEndLineNumberInclusive = endLineNumberInclusive;
+
+  if (shouldSetEditableRange) {
+    realLStartLineNumber = Math.max(realLStartLineNumber - EDITABLE_RANGE_FROM_CURSOR_LINE, 0);
+    realEndLineNumberInclusive = realEndLineNumberInclusive + EDITABLE_RANGE_FROM_CURSOR_LINE;
+  }
 
   const replaceTextLines = replaceText.split('\n');
   const originalTextLines = originalText.split('\n');
 
-  for (let i = realLStartLineNumber; i <= endLineNumberInclusive; i++) {
+  for (let i = realLStartLineNumber; i <= realEndLineNumberInclusive; i++) {
     const replaceTextLine = replaceTextLines.shift();
     if (replaceTextLine == undefined) {
       // throw new Error('replaceTextLine is undefined')
@@ -80,7 +90,7 @@ function replaceStringBasedOnSuggestion(originalStr, acceptedSuggestion) {
   }
 
   const lastAcceptLine = startLineNumber - 1; // -1 ? // currently for preview
-  const lastAcceptColumn = lines[lastAcceptLine].length; // currently for preview
+  const lastAcceptColumn = lines[lastAcceptLine]?.length; // currently for preview
   return {
     replacedContents: lines.join('\n'),
     lastAcceptLine,

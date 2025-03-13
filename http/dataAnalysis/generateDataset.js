@@ -61,16 +61,6 @@ function generateDataset(params) {
   );
 
   if (replacedContentsWithFirstChunk) {
-    // ======== completion dataset jsonl ========
-    // const datasetV1JSONL = {
-    //   diffHistory: fileDiffHistories,
-    //   new_window_content: currentFileContentsWithToFill,
-    //   ground_truth: replacedContentsWithFirstChunk,
-    // };
-    // fs.writeFileSync(deprecatedCompleteDatasetJSONLFilePath, '', { encoding: 'utf-8' });
-
-    // fs.appendFileSync(deprecatedCompleteDatasetJSONLFilePath, JSON.stringify(datasetV1JSONL) + '\n');
-
     // prompt
     const prompt = generatePrompt(fileDiffHistories, currentFileContents, currentCursorPosition, currentFilePath, cppIntent);
     fs.writeFileSync(promptFilePath, prompt, { encoding: 'utf-8' });
@@ -78,12 +68,12 @@ function generateDataset(params) {
 
   if (displayedFusedCursorPrediction) {
     // ======== prediction dataset jsonl ========
-    const processedCurrentFileContents = modifyCode(
-      currentFileContents,
-      currentCursorPosition.line,
-      currentCursorPosition.column,
-      '<|current_cursor_position|>'
-    );
+    const processedCurrentFileContents = modifyCode({
+      code: currentFileContents,
+      lineNumberZeroIndexed: currentCursorPosition.line,
+      columnNumberZeroIndexed: currentCursorPosition.column,
+      insertString: '<|current_cursor_position|>'
+    });
     const datasetPredictionJSONL = {
       latestAcceptedContentWithCurrentCursorPosition: replacedContentsWithFirstChunk || processedCurrentFileContents,
       ground_truth: displayedFusedCursorPrediction,
@@ -98,18 +88,18 @@ function generateDataset(params) {
   // ======== log content ========
   const diffHistory = partialData.diffHistory;
 
-  const currentFileContentsWithToFill = modifyCode(
-    currentFileContents,
-    currentCursorPosition.line,
-    currentCursorPosition.column,
-    '[ToFill]'
-  );
-  const replacedContentsWithFirstChunkWithCursorPosition = modifyCode(
-    replacedContentsWithFirstChunk,
-    lastAcceptLineWithFirstChunk,
-    lastAcceptColumnWithFirstChunk,
-    '<|current_cursor_position|>'
-  );
+  const currentFileContentsWithToFill = modifyCode({
+    code: currentFileContents,
+    lineNumberZeroIndexed: currentCursorPosition.line,
+    columnNumberZeroIndexed: currentCursorPosition.column,
+    insertString: '[ToFill]'
+  });
+  // const replacedContentsWithFirstChunkWithCursorPosition = modifyCode({
+  //   code: replacedContentsWithFirstChunk,
+  //   lineNumberZeroIndexed: lastAcceptLineWithFirstChunk,
+  //   columnNumberZeroIndexed: lastAcceptColumnWithFirstChunk,
+  //   insertString: '<|current_cursor_position|>'
+  // });
 
   outputPreview({
     previewFilePath,
@@ -120,7 +110,7 @@ function generateDataset(params) {
     displayedFusedCursorPrediction,
     firstChunkValue,
     replacedContentsWithFirstChunk,
-    replacedContentsWithFirstChunkWithCursorPosition,
+    // replacedContentsWithFirstChunkWithCursorPosition,
     replacedContentsWithFullText,
     fullText,
   });
@@ -141,14 +131,14 @@ function outputPreview(params) {
     displayedFusedCursorPrediction,
     firstChunkValue,
     replacedContentsWithFirstChunk,
-    replacedContentsWithFirstChunkWithCursorPosition,
+    // replacedContentsWithFirstChunkWithCursorPosition,
     replacedContentsWithFullText,
     fullText,
   } = params;
 
     fs.writeFileSync(previewFilePath, '', { encoding: 'utf-8' });
     fs.appendFileSync(previewFilePath, JSON.stringify(currentCursorPosition), { encoding: 'utf-8' });
-    fs.appendFileSync(previewFilePath, '\n\n' + '======== fileDiffHistories ========', { encoding: 'utf-8' });
+    // fs.appendFileSync(previewFilePath, '\n\n' + '======== fileDiffHistories ========', { encoding: 'utf-8' });
     // outputFileDiffHistories(previewFilePath, fileDiffHistories);
     fs.appendFileSync(previewFilePath, '\n\n' + '======== currentFileContentsWithToFill ========', { encoding: 'utf-8' });
     fs.appendFileSync(previewFilePath, '\n' + currentFileContentsWithToFill, { encoding: 'utf-8' });
@@ -157,8 +147,8 @@ function outputPreview(params) {
     if (replacedContentsWithFirstChunk) {
       fs.appendFileSync(previewFilePath, '\n' + '======== replace replacedContentsWithFirstChunk ========', { encoding: 'utf-8' });
       fs.appendFileSync(previewFilePath, '\n' + replacedContentsWithFirstChunk, { encoding: 'utf-8' });
-      fs.appendFileSync(previewFilePath, '\n' + '======== replacedContentsWithFirstChunkWithCursorPosition ========', { encoding: 'utf-8' });
-      fs.appendFileSync(previewFilePath, '\n' + replacedContentsWithFirstChunkWithCursorPosition, { encoding: 'utf-8' });
+      // fs.appendFileSync(previewFilePath, '\n' + '======== replacedContentsWithFirstChunkWithCursorPosition ========', { encoding: 'utf-8' });
+      // fs.appendFileSync(previewFilePath, '\n' + replacedContentsWithFirstChunkWithCursorPosition, { encoding: 'utf-8' });
     }
     if (fullText) {
       fs.appendFileSync(previewFilePath, '\n' + '======== fullText ========', { encoding: 'utf-8' });

@@ -2,9 +2,8 @@
 
 const fs = require('fs');
 const path = require('path');
-const { modifyCode } = require('./modifyCode');
 const { generateDataset } = require('./generateDataset');
-const { batchInvokeLLM } = require('./evaluateDataset');
+const { batchInvokeLLMAndEvaluate } = require('./evaluateDataset');
 const { config } = require('./config');
 
 const logContainerFolder = config.logContainerFolder;
@@ -23,7 +22,7 @@ function main(logFileName) {
 
   const promptFilePathList = formatByGeneratedUUID(formattedJSONPath);
 
-  batchInvokeLLM(promptFilePathList, specificLogFolderPath);
+  batchInvokeLLMAndEvaluate(promptFilePathList, specificLogFolderPath);
 }
 
 function ensureFolder(folderPath) {
