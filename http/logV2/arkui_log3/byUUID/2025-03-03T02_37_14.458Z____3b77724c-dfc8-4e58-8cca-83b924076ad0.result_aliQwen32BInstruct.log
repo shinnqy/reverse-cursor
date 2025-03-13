@@ -1,17 +1,27 @@
 ------------------------------------------[        output        ]-------------------------------------------
 @Component
 export default struct Banner {
+  @State message: string = 'Welcome to Banner';
+
   build() {
-    Text("Banner")
+    Column() {
+      Text(this.message)
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+    }
   }
 }
 ------------------------------------------[    replacedOutput    ]-------------------------------------------
 @Preview
 @Component
 export default struct Banner {
+  @State message: string = 'Welcome to Banner';
+
   build() {
-    Text("Banner")
-  }
-}
+    Column() {
+      Text(this.message)
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+    }
   }
 }
