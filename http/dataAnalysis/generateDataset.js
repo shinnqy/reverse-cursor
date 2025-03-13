@@ -28,7 +28,9 @@ function generateDataset(params) {
     (i) => i.action === 'displayFusedCursorPrediction'
   )?.fusedCursorPrediction;
   const fusedCursorPredictionPredictionId = data.find((i) => !!i.predictionId)?.predictionId;
-  const acceptedSuggestion = data.find((i) => i.action === 'press Tab to acceptFullSuggestion and succeed')?.suggestion;
+  const acceptedSuggestionList = data.filter((i) => i.action === 'press Tab to acceptFullSuggestion and succeed');
+  const firstChunkAcceptSuggestion = acceptedSuggestionList[0]?.suggestion;
+  const fullTextAcceptSuggestion = acceptedSuggestionList[1]?.suggestion;
 
   if (!firstChunkValue) {
     console.log('No response for this request');
@@ -48,34 +50,26 @@ function generateDataset(params) {
     (i) => i.visibleRangeContent.length && i.visibleRangeContent[0].length
   );
 
-  const processedCurrentFileContents = modifyCode(
-    currentFileContents,
-    currentCursorPosition.line,
-    currentCursorPosition.column,
-    '[ToFill]'
-  );
   // const replacedContents = replaceStringFromPosition(currentFileContents, currentCursorPosition.line, currentCursorPosition.column, firstChunkValue);
-  const { replacedContents, lastAcceptLine, lastAcceptColumn } = replaceStringBasedOnSuggestion(
+  const { replacedContents: replacedContentsWithFirstChunk, lastAcceptLine: lastAcceptLineWithFirstChunk, lastAcceptColumn: lastAcceptColumnWithFirstChunk } = replaceStringBasedOnSuggestion(
     currentFileContents,
-    acceptedSuggestion
+    firstChunkAcceptSuggestion
   );
-  const replacedContentsWithCursorPosition = modifyCode(
-    replacedContents,
-    lastAcceptLine,
-    lastAcceptColumn,
-    '<|current_cursor_position|>'
+  const { replacedContents: replacedContentsWithFullText } = replaceStringBasedOnSuggestion(
+    replacedContentsWithFirstChunk || '',
+    fullTextAcceptSuggestion
   );
 
-  if (replacedContents) {
+  if (replacedContentsWithFirstChunk) {
     // ======== completion dataset jsonl ========
-    const datasetV1JSONL = {
-      diffHistory: fileDiffHistories,
-      new_window_content: processedCurrentFileContents,
-      ground_truth: replacedContents,
-    };
+    // const datasetV1JSONL = {
+    //   diffHistory: fileDiffHistories,
+    //   new_window_content: currentFileContentsWithToFill,
+    //   ground_truth: replacedContentsWithFirstChunk,
+    // };
     // fs.writeFileSync(deprecatedCompleteDatasetJSONLFilePath, '', { encoding: 'utf-8' });
 
-    fs.appendFileSync(deprecatedCompleteDatasetJSONLFilePath, JSON.stringify(datasetV1JSONL) + '\n');
+    // fs.appendFileSync(deprecatedCompleteDatasetJSONLFilePath, JSON.stringify(datasetV1JSONL) + '\n');
 
     // prompt
     const prompt = generatePrompt(fileDiffHistories, currentFileContents, currentCursorPosition, currentFilePath, cppIntent);
@@ -91,7 +85,7 @@ function generateDataset(params) {
       '<|current_cursor_position|>'
     );
     const datasetPredictionJSONL = {
-      latestAcceptedContentWithCurrentCursorPosition: replacedContents || processedCurrentFileContents,
+      latestAcceptedContentWithCurrentCursorPosition: replacedContentsWithFirstChunk || processedCurrentFileContents,
       ground_truth: displayedFusedCursorPrediction,
     };
 
@@ -104,16 +98,30 @@ function generateDataset(params) {
   // ======== log content ========
   const diffHistory = partialData.diffHistory;
 
+  const currentFileContentsWithToFill = modifyCode(
+    currentFileContents,
+    currentCursorPosition.line,
+    currentCursorPosition.column,
+    '[ToFill]'
+  );
+  const replacedContentsWithFirstChunkWithCursorPosition = modifyCode(
+    replacedContentsWithFirstChunk,
+    lastAcceptLineWithFirstChunk,
+    lastAcceptColumnWithFirstChunk,
+    '<|current_cursor_position|>'
+  );
+
   outputPreview({
     previewFilePath,
-    processedCurrentFileContents,
+    currentFileContentsWithToFill,
     currentCursorPosition,
     fileDiffHistories,
     fusedCursorPrediction,
     displayedFusedCursorPrediction,
     firstChunkValue,
-    replacedContents,
-    replacedContentsWithCursorPosition,
+    replacedContentsWithFirstChunk,
+    replacedContentsWithFirstChunkWithCursorPosition,
+    replacedContentsWithFullText,
     fullText,
   });
 
@@ -126,34 +134,39 @@ function generateDataset(params) {
 function outputPreview(params) {
   const {
     previewFilePath,
-    processedCurrentFileContents,
+    currentFileContentsWithToFill,
     currentCursorPosition,
     fileDiffHistories,
     fusedCursorPrediction,
     displayedFusedCursorPrediction,
     firstChunkValue,
-    replacedContents,
-    replacedContentsWithCursorPosition,
+    replacedContentsWithFirstChunk,
+    replacedContentsWithFirstChunkWithCursorPosition,
+    replacedContentsWithFullText,
     fullText,
   } = params;
 
     fs.writeFileSync(previewFilePath, '', { encoding: 'utf-8' });
     fs.appendFileSync(previewFilePath, JSON.stringify(currentCursorPosition), { encoding: 'utf-8' });
     fs.appendFileSync(previewFilePath, '\n\n' + '======== fileDiffHistories ========', { encoding: 'utf-8' });
-    outputFileDiffHistories(previewFilePath, fileDiffHistories);
-    fs.appendFileSync(previewFilePath, '\n\n' + '======== processedCurrentFileContents ========', { encoding: 'utf-8' });
-    fs.appendFileSync(previewFilePath, '\n' + processedCurrentFileContents, { encoding: 'utf-8' });
+    // outputFileDiffHistories(previewFilePath, fileDiffHistories);
+    fs.appendFileSync(previewFilePath, '\n\n' + '======== currentFileContentsWithToFill ========', { encoding: 'utf-8' });
+    fs.appendFileSync(previewFilePath, '\n' + currentFileContentsWithToFill, { encoding: 'utf-8' });
     fs.appendFileSync(previewFilePath, '\n' + '======== firstChunkValue ========', { encoding: 'utf-8' });
     fs.appendFileSync(previewFilePath, '\n' + firstChunkValue, { encoding: 'utf-8' });
-    if (replacedContents) {
-      fs.appendFileSync(previewFilePath, '\n' + '======== replace firstChunkValue ========', { encoding: 'utf-8' });
-      fs.appendFileSync(previewFilePath, '\n' + replacedContents, { encoding: 'utf-8' });
-      fs.appendFileSync(previewFilePath, '\n' + '======== replacedContentsWithCursorPosition ========', { encoding: 'utf-8' });
-      fs.appendFileSync(previewFilePath, '\n' + replacedContentsWithCursorPosition, { encoding: 'utf-8' });
+    if (replacedContentsWithFirstChunk) {
+      fs.appendFileSync(previewFilePath, '\n' + '======== replace replacedContentsWithFirstChunk ========', { encoding: 'utf-8' });
+      fs.appendFileSync(previewFilePath, '\n' + replacedContentsWithFirstChunk, { encoding: 'utf-8' });
+      fs.appendFileSync(previewFilePath, '\n' + '======== replacedContentsWithFirstChunkWithCursorPosition ========', { encoding: 'utf-8' });
+      fs.appendFileSync(previewFilePath, '\n' + replacedContentsWithFirstChunkWithCursorPosition, { encoding: 'utf-8' });
     }
     if (fullText) {
       fs.appendFileSync(previewFilePath, '\n' + '======== fullText ========', { encoding: 'utf-8' });
       fs.appendFileSync(previewFilePath, '\n' + fullText, { encoding: 'utf-8' });
+    }
+    if (replacedContentsWithFullText) {
+      fs.appendFileSync(previewFilePath, '\n' + '======== replace replacedContentsWithFullText ========', { encoding: 'utf-8' });
+      fs.appendFileSync(previewFilePath, '\n' + replacedContentsWithFullText, { encoding: 'utf-8' });
     }
     if (fusedCursorPrediction) {
       fs.appendFileSync(previewFilePath, '\n' + '======== fusedCursorPrediction ========', { encoding: 'utf-8' });
