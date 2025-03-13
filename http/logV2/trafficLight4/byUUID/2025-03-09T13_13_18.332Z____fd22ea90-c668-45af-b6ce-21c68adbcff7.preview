@@ -1,6 +1,6 @@
 {"line":3,"column":19}
 
-======== currentFileContentsWithToFill ========
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
 function changeLight(light: TrafficLight) {
   switch (light) {
     case TrafficLight.RED:
@@ -26,13 +26,13 @@ enum TrafficLight {
 const light = TrafficLight.RED;
 changeLight(light);
 
-======== firstChunkValue ========
+-------------------------------[               firstChunkValue               ]--------------------------------
     case TrafficLight.RED:
       console.log('Stop');
       break;
     case TrafficLight.GREEN:
       console.log('Go');
-======== replace replacedContentsWithFirstChunk ========
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
 function changeLight(light: TrafficLight) {
   switch (light) {
     case TrafficLight.RED:
@@ -58,25 +58,7 @@ enum TrafficLight {
 const light = TrafficLight.RED;
 changeLight(light);
 
-======== fusedCursorPrediction ========
-lineNumberOneIndexed: 10
-
-text: 
-console.log('yellow');
-break;
-default:
-console.log('red');
-}
-
-shouldRetriggerCpp: true
-======== displayedFusedCursorPrediction ========
-lineNumberOneIndexed: 10
-
-text: 
-console.log('yellow');
-break;
-default:
-console.log('red');
-}
-
-shouldRetriggerCpp: true
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+[object Object]
+--------------------------------[        displayedFusedCursorPrediction       ]---------------------------------
+[object Object]

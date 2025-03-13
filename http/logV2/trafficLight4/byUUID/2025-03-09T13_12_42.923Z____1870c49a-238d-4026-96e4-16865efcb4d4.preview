@@ -1,6 +1,6 @@
 {"line":19,"column":2}
 
-======== currentFileContentsWithToFill ========
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
 function changeLight(light: TrafficLight) {
   switch (light) {
     case light.RED:
@@ -21,10 +21,10 @@ enum TrafficLight {
 }
 
   [ToFill]
-======== firstChunkValue ========
+-------------------------------[               firstChunkValue               ]--------------------------------
 
 const light = TrafficLight.RED;
-======== replace replacedContentsWithFirstChunk ========
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
 function changeLight(light: TrafficLight) {
   switch (light) {
     case light.RED:
@@ -45,13 +45,13 @@ enum TrafficLight {
 }
 
 const light = TrafficLight.RED;
-======== fullText ========
+-------------------------------[                   fullText                  ]--------------------------------
 
 const light = TrafficLight.RED;
 const newLight = changeLight(light);
 console.log(newLight);
 
-======== replace replacedContentsWithFullText ========
+-------------------------------[         replacedContentsWithFullText         ]--------------------------------
 function changeLight(light: TrafficLight) {
   switch (light) {
     case light.RED:
@@ -75,25 +75,7 @@ const light = TrafficLight.RED;
 const newLight = changeLight(light);
 console.log(newLight);
 
-======== fusedCursorPrediction ========
-lineNumberOneIndexed: 1
-
-text: 
-function changeLight(light: TrafficLight) {
-switch (light) {
-case light.RED:
-return light.GREEN;
-case light.GREEN:
-
-shouldRetriggerCpp: false
-======== displayedFusedCursorPrediction ========
-lineNumberOneIndexed: 1
-
-text: 
-function changeLight(light: TrafficLight) {
-switch (light) {
-case light.RED:
-return light.GREEN;
-case light.GREEN:
-
-shouldRetriggerCpp: false
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+[object Object]
+--------------------------------[        displayedFusedCursorPrediction       ]---------------------------------
+[object Object]
