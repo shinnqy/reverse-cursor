@@ -1,13 +1,28 @@
 ------------------------------------------[        output        ]-------------------------------------------
+@Preview
 @Component
 struct AboutMe {
   @State message: string = 'About Me';
 }
 ------------------------------------------[    replacedOutput    ]-------------------------------------------
 @Preview
+@Preview
 @Component
 struct AboutMe {
   @State message: string = 'About Me';
 }
-}
 
+-------------------------------[ groundTruth (replacedContentsWithFirstChunk) ]--------------------------------
+@Preview
+@Component
+struct AboutMe {
+  @State message: string = 'About Me';
+
+  build() {
+    Column() {
+      Text(this.message)
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+    }
+  }
+}
