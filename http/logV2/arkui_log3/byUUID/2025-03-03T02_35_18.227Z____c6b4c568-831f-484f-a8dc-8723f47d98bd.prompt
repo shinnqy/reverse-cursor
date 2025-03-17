@@ -48,6 +48,7 @@ struct Index {
       Text(this.message)
         .id('HelloWorld')
         .fontSize(50)
+<|editable_region_start|>
         .fontWeight(FontWeight.Bold)
         .alignRules({
           center: { anchor: '__container__', align: VerticalAlign.Center },
@@ -56,19 +57,18 @@ struct Index {
 
       Button() {
         Text('About Me')
-<|editable_region_start|>
       }
       .onClick(() => {
         router.pushU<|current_cursor_position|>({
           uri: 'pages/About'
         })
-<|editable_region_end|>
       })
     }
     .height('100%')
     .width('100%')
   }
 }
+<|editable_region_end|>
 ```
 
 ## Task

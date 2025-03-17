@@ -8,12 +8,11 @@ struct AboutMe {
     Column() {
       Text(this.message)
         .fontSize(20)
-        .margin({ top: 20 })
+        .margin(10)
     }
   }
 }
 ------------------------------------------[    replacedOutput    ]-------------------------------------------
-@Preview
 @Preview
 @Component
 struct AboutMe {
@@ -23,7 +22,21 @@ struct AboutMe {
     Column() {
       Text(this.message)
         .fontSize(20)
-        .margin({ top: 20 })
+        .margin(10)
+    }
+  }
+}
+-------------------------------[ groundTruth (replacedContentsWithFirstChunk) ]--------------------------------
+@Preview
+@Component
+struct AboutMe {
+  @State message: string = 'About Me';
+
+  build() {
+    Column() {
+      Text(this.message)
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
     }
   }
 }
