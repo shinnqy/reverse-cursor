@@ -16,7 +16,7 @@ const id = new Date().toISOString().replace(/:/g, '_');
  */
 function batchInvokeLLMAndEvaluate(promptFilePathList, specificLogFolderPath) {
   const summaryFolderPath = path.join(specificLogFolderPath, `${endpoint}_${id}_output.log`);
-  fs.writeFileSync(summaryFolderPath, '', { encoding: 'utf-8' });
+  // fs.writeFileSync(summaryFolderPath, '', { encoding: 'utf-8' });
 
   const promiseList = promptFilePathList.map(promptFilePath => {
     if (!fs.existsSync(promptFilePath)) {
@@ -63,15 +63,30 @@ function batchInvokeLLMAndEvaluate(promptFilePathList, specificLogFolderPath) {
 
       console.log({output});
 
+      const previewFilePath = path.join(path.dirname(promptFilePath), `${fileName}.preview`);
+      const previewContent = fs.readFileSync(previewFilePath, { encoding: 'utf-8' });
+      const tmp = previewContent.split('-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------\n')[1];
+      const replacedContentsWithFirstChunk = tmp.split('\n---')[0];
+      const tmp2 = tmp.split('-------------------------------[         replacedContentsWithFullText         ]--------------------------------\n')[1];
+      const replacedContentsWithFullText = (tmp2 || '').split('\n---')[0];
+
+      // ====================== DATA ======================
       const data =
 `------------------------------------------[        output        ]-------------------------------------------
 ${output}
 ------------------------------------------[    replacedOutput    ]-------------------------------------------
 ${replacedOutput}
-`;
+-------------------------------[ groundTruth (replacedContentsWithFirstChunk) ]--------------------------------
+${replacedContentsWithFirstChunk}
+` + (replacedContentsWithFullText ?
+`-------------------------------[  groundTruth (replacedContentsWithFullText)  ]--------------------------------
+${replacedContentsWithFullText}`
+: '');
+      // ====================== DATA ======================
+
       const dependentLogPath = path.join(path.dirname(promptFilePath), `${fileName}.result_${endpoint}.log`);
       fs.writeFileSync(dependentLogPath, data, { encoding: 'utf-8' });
-      fs.appendFileSync(summaryFolderPath, data, { encoding: 'utf-8' });
+      // fs.appendFileSync(summaryFolderPath, data, { encoding: 'utf-8' });
     });
   });
 }
