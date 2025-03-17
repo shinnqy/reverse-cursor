@@ -136,50 +136,40 @@ function outputPreview(params) {
     fullText,
   } = params;
 
-    fs.writeFileSync(previewFilePath, '', { encoding: 'utf-8' });
-    fs.appendFileSync(previewFilePath, JSON.stringify(currentCursorPosition), { encoding: 'utf-8' });
-    // fs.appendFileSync(previewFilePath, '\n\n' + '======== fileDiffHistories ========', { encoding: 'utf-8' });
-    // outputFileDiffHistories(previewFilePath, fileDiffHistories);
-    fs.appendFileSync(previewFilePath, '\n\n' + '======== currentFileContentsWithToFill ========', { encoding: 'utf-8' });
-    fs.appendFileSync(previewFilePath, '\n' + currentFileContentsWithToFill, { encoding: 'utf-8' });
-    fs.appendFileSync(previewFilePath, '\n' + '======== firstChunkValue ========', { encoding: 'utf-8' });
-    fs.appendFileSync(previewFilePath, '\n' + firstChunkValue, { encoding: 'utf-8' });
-    if (replacedContentsWithFirstChunk) {
-      fs.appendFileSync(previewFilePath, '\n' + '======== replace replacedContentsWithFirstChunk ========', { encoding: 'utf-8' });
-      fs.appendFileSync(previewFilePath, '\n' + replacedContentsWithFirstChunk, { encoding: 'utf-8' });
-      // fs.appendFileSync(previewFilePath, '\n' + '======== replacedContentsWithFirstChunkWithCursorPosition ========', { encoding: 'utf-8' });
-      // fs.appendFileSync(previewFilePath, '\n' + replacedContentsWithFirstChunkWithCursorPosition, { encoding: 'utf-8' });
-    }
-    if (fullText) {
-      fs.appendFileSync(previewFilePath, '\n' + '======== fullText ========', { encoding: 'utf-8' });
-      fs.appendFileSync(previewFilePath, '\n' + fullText, { encoding: 'utf-8' });
-    }
-    if (replacedContentsWithFullText) {
-      fs.appendFileSync(previewFilePath, '\n' + '======== replace replacedContentsWithFullText ========', { encoding: 'utf-8' });
-      fs.appendFileSync(previewFilePath, '\n' + replacedContentsWithFullText, { encoding: 'utf-8' });
-    }
-    if (fusedCursorPrediction) {
-      fs.appendFileSync(previewFilePath, '\n' + '======== fusedCursorPrediction ========', { encoding: 'utf-8' });
-      // fs.appendFileSync(previewFilePath, '\n\n' + JSON.stringify(fusedCursorPrediction), { encoding: 'utf-8' });
-      fs.appendFileSync(previewFilePath, '\nlineNumberOneIndexed: ' + fusedCursorPrediction?.lineNumberOneIndexed + '\n\ntext: \n' + fusedCursorPrediction?.text + '\n\nshouldRetriggerCpp: ' + fusedCursorPrediction?.shouldRetriggerCpp, { encoding: 'utf-8' });
-    }
-    if (displayedFusedCursorPrediction) {
-      fs.appendFileSync(previewFilePath, '\n' + '======== displayedFusedCursorPrediction ========', { encoding: 'utf-8' });
-      fs.appendFileSync(previewFilePath, '\nlineNumberOneIndexed: ' + displayedFusedCursorPrediction?.lineNumberOneIndexed + '\n\ntext: \n' + fusedCursorPrediction?.text + '\n\nshouldRetriggerCpp: ' + fusedCursorPrediction?.shouldRetriggerCpp, { encoding: 'utf-8' });
-    }
-}
+const data =
+(`${JSON.stringify(currentCursorPosition)}
 
-function outputFileDiffHistories(previewFilePath, fileDiffHistories) {
-  fileDiffHistories.forEach(fileDiff => {
-    const { fileName, diffHistory } = fileDiff;
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+${currentFileContentsWithToFill}
+-------------------------------[               firstChunkValue               ]--------------------------------
+${firstChunkValue}`)
++ (replacedContentsWithFirstChunk ?
+`
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+${replacedContentsWithFirstChunk}`
+: '')
++ (fullText ?
+`
+-------------------------------[                   fullText                  ]--------------------------------
+${fullText}`
+: '')
++ (replacedContentsWithFullText ?
+`
+-------------------------------[         replacedContentsWithFullText         ]--------------------------------
+${replacedContentsWithFullText}`
+: '')
++ (fusedCursorPrediction ?
+`
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+${JSON.stringify(fusedCursorPrediction, null, 2)}`
+: '')
++ (displayedFusedCursorPrediction ?
+`
+--------------------------------[        displayedFusedCursorPrediction       ]---------------------------------
+${JSON.stringify(displayedFusedCursorPrediction, null, 2)}`
+: '');
 
-    fs.appendFileSync(previewFilePath, '\n\n' + `File: ${fileName}`, { encoding: 'utf-8' });
-
-    diffHistory.forEach(diff => {
-      const combinedDiffHistory = diffHistory.map(diff => diff.replace(/\n/g, '\\n')).join('');
-      fs.appendFileSync(previewFilePath, '\n' + combinedDiffHistory, { encoding: 'utf-8' });
-    });
-  });
+    fs.writeFileSync(previewFilePath, data, { encoding: 'utf-8' });
 }
 
 module.exports = {

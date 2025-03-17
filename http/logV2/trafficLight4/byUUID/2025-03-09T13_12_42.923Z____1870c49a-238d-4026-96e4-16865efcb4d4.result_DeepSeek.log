@@ -22,3 +22,24 @@ enum TrafficLight {
 }
 
   
+-------------------------------[ groundTruth (replacedContentsWithFirstChunk) ]--------------------------------
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case light.RED:
+      return light.GREEN;
+    case light.GREEN:
+      return light.YELLOW;
+    case light.YELLOW:
+      return light.RED;
+    default:
+      return light.RED;
+  }
+}
+
+enum TrafficLight {
+  RED = 'red',
+  GREEN = 'green',
+  YELLOW = 'yellow',
+}
+
+const light = TrafficLight.RED;

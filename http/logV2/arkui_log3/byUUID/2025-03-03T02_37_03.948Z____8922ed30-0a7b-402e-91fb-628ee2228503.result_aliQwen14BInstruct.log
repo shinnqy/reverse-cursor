@@ -1,5 +1,5 @@
 ------------------------------------------[        output        ]-------------------------------------------
-import Banner from '../components/Banner'
+import Banner from '../Banner'
 
 @Preview
 @Component
@@ -17,7 +17,25 @@ struct AboutMe {
   }
 }
 ------------------------------------------[    replacedOutput    ]-------------------------------------------
-import Banner from '../components/Banner'
+import Banner from '../Banner'
+
+@Preview
+@Component
+struct AboutMe {
+  @State message: string = 'About Me';
+
+  build() {
+    Column() {
+      Text(this.message)
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+
+      Banner()
+    }
+  }
+}
+-------------------------------[ groundTruth (replacedContentsWithFirstChunk) ]--------------------------------
+import Banner from '../components/Banner.ets';
 
 @Preview
 @Component

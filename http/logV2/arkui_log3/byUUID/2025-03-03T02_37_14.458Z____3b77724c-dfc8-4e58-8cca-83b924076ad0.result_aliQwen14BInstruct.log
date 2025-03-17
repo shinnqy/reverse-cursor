@@ -1,23 +1,35 @@
 ------------------------------------------[        output        ]-------------------------------------------
+@Preview
 @Component
 export default struct Banner {
-  @Prop message: string = 'Welcome to the Banner';
+  @Prop title: string = 'Default Title';
 
   build() {
-    Text(this.message)
-      .fontSize(50)
+    Text(this.title)
+      .fontSize(30)
       .fontWeight(FontWeight.Bold);
   }
 }
 ------------------------------------------[    replacedOutput    ]-------------------------------------------
 @Preview
+@Preview
 @Component
 export default struct Banner {
-  @Prop message: string = 'Welcome to the Banner';
+  @Prop title: string = 'Default Title';
 
   build() {
-    Text(this.message)
-      .fontSize(50)
+    Text(this.title)
+      .fontSize(30)
       .fontWeight(FontWeight.Bold);
+  }
+}
+-------------------------------[ groundTruth (replacedContentsWithFirstChunk) ]--------------------------------
+@Preview
+@Component
+export default struct Banner {
+  @Prop title: string = 'Banner';
+
+  build() {
+    Text("Banner")
   }
 }

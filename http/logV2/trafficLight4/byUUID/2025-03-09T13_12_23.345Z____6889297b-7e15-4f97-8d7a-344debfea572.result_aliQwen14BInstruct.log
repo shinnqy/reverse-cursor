@@ -15,3 +15,17 @@ function changeLight(light: TrafficLight) {
 }
 
 
+-------------------------------[ groundTruth (replacedContentsWithFirstChunk) ]--------------------------------
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case 'red':
+      return 'green';
+    case 'green':
+      return 'yellow';
+    case 'yellow':
+      return 'red';
+    default:
+      return 'red';
+  }
+}
+
