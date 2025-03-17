@@ -1,22 +1,37 @@
 ------------------------------------------[        output        ]-------------------------------------------
 @Preview
-struct AboutMe {
+struct AboutMePage {
   build() {
     Column() {
       Text('About Me')
         .fontSize(20)
         .margin({ top: 20 })
     }
+    .width('100%')
+    .height('100%')
   }
 }
 ------------------------------------------[    replacedOutput    ]-------------------------------------------
 @Preview
-struct AboutMe {
+struct AboutMePage {
   build() {
     Column() {
       Text('About Me')
         .fontSize(20)
         .margin({ top: 20 })
     }
+    .width('100%')
+    .height('100%')
   }
+}
+-------------------------------[ groundTruth (replacedContentsWithFirstChunk) ]--------------------------------
+@Preview
+@Entry
+-------------------------------[  groundTruth (replacedContentsWithFullText)  ]--------------------------------
+@Preview
+@Entry
+@Component
+struct AboutMe {
+  @State message: string = 'About Me';
+  
 }

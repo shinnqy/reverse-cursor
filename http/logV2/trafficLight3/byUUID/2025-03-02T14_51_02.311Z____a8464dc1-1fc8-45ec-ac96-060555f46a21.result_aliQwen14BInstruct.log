@@ -1,0 +1,39 @@
+------------------------------------------[        output        ]-------------------------------------------
+    case light.RED:
+      console.log('RED');
+      break;
+    case light.YELLOW:
+      console.log('YELLOW');
+      break;
+    default:
+      console.log('Invalid light');
+      break;
+------------------------------------------[    replacedOutput    ]-------------------------------------------
+    case light.RED:
+      console.log('RED');
+      break;
+    case light.YELLOW:
+      console.log('YELLOW');
+      break;
+    default:
+      console.log('Invalid light');
+      break;
+      console.log('Invalid light');
+      break;
+  }
+}
+-------------------------------[ groundTruth (replacedContentsWithFirstChunk) ]--------------------------------
+shared/types/traffic-light.ts
+
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case light.RED:
+    case light.YELLOW:
+      console.log('YELLOW');
+      break;
+    default:
+      console.log('Invalid light');
+      break;
+  }
+}
+      console.log('RED');

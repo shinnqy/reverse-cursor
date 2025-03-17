@@ -1,0 +1,36 @@
+------------------------------------------[        output        ]-------------------------------------------
+      console.log('YELLOW');
+      break;
+    default:
+      console.log('Invalid light');
+      break;
+------------------------------------------[    replacedOutput    ]-------------------------------------------
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case light.Red:
+      console.log('RED');
+      break;
+    case light.Yellow:
+      console.log('YELLOW');
+      break;
+    default:
+      console.log('Invalid light');
+      break;
+      break;
+  }
+}
+-------------------------------[ groundTruth (replacedContentsWithFirstChunk) ]--------------------------------
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case light.Red:
+      console.log('RED');
+      break;
+    case light.Yellow:
+      console.log('YELLOW');
+      break;
+    case light.Green:
+    default:
+      console.log('Invalid light');
+      break;
+  }
+}

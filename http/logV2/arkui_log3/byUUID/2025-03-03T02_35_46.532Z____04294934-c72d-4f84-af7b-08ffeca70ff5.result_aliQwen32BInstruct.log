@@ -2,13 +2,56 @@
 @Entry
 @Component
 struct Index {
+  @State message: string = 'Hello World';
+
+  build() {
+    RelativeContainer() {
+      Text(this.message)
+        .id('HelloWorld')
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+        .alignRules({
+          center: { anchor: '__container__', align: VerticalAlign.Center },
+          middle: { anchor: '__container__', align: HorizontalAlign.Center }
+        })
 ------------------------------------------[    replacedOutput    ]-------------------------------------------
 @Entry
 @Component
 struct Index {
-struct Index {
   @State message: string = 'Hello World';
 
+  build() {
+    RelativeContainer() {
+      Text(this.message)
+        .id('HelloWorld')
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+        .alignRules({
+          center: { anchor: '__container__', align: VerticalAlign.Center },
+          middle: { anchor: '__container__', align: HorizontalAlign.Center }
+        })
+        })
+
+      Button() {
+        Text('About Me')
+      }
+      .onClick(() => {
+        router.pushUrl({
+          url: 'pages/AboutMe'
+        })
+      })
+    }
+    .height('100%')
+    .width('100%')
+  }
+}
+-------------------------------[ groundTruth (replacedContentsWithFirstChunk) ]--------------------------------
+import router from '@ohos.router';
+
+@Entry
+@Component
+struct Index {
+  @State message: string = 'Hello World';
   build() {
     RelativeContainer() {
       Text(this.message)

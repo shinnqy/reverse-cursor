@@ -53,7 +53,6 @@ Here is the current code around the cursor position:
 <|current_cursor_position|>@Entry
 @Component
 struct Index {
-<|editable_region_end|>
   @State message: string = 'Hello World';
 
   build() {
@@ -62,6 +61,7 @@ struct Index {
         .id('HelloWorld')
         .fontSize(50)
         .fontWeight(FontWeight.Bold)
+<|editable_region_end|>
         .alignRules({
           center: { anchor: '__container__', align: VerticalAlign.Center },
           middle: { anchor: '__container__', align: HorizontalAlign.Center }

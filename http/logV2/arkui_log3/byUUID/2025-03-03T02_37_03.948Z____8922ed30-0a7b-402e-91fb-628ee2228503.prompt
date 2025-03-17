@@ -90,7 +90,6 @@ Here is the current code around the cursor position:
 import Banner from '../<|current_cursor_position|>'
 
 @Preview
-<|editable_region_end|>
 @Component
 struct AboutMe {
   @State message: string = 'About Me';
@@ -99,6 +98,7 @@ struct AboutMe {
     Column() {
       Text(this.message)
         .fontSize(50)
+<|editable_region_end|>
         .fontWeight(FontWeight.Bold)
 
       Banner()
