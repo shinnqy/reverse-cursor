@@ -4,13 +4,17 @@ const fs = require('fs');
 const path = require('path');
 const http = require('http');
 
-const fileName = 'smartRewrite2';
+const fileName = 'test_insert_in_middle_1';
 const folderName = `logV2/${fileName}`;
 
-ensureFolder(folderName);
+const doLog = false;
+
 const jsonlFilePath = path.join(__dirname, `${folderName}/${fileName}.jsonl`);
 const textFilePath = path.resolve(__dirname, `${folderName}/${fileName}.txt`);// timestamp
-emptyFileContent(jsonlFilePath);
+if (doLog) {
+  ensureFolder(folderName);
+  emptyFileContent(jsonlFilePath);
+}
 
 http.createServer((req, res) => {
   if (req.method === 'POST') {
@@ -20,8 +24,10 @@ http.createServer((req, res) => {
       const formattedJSON = JSON.stringify(JSON.parse(data), null, 2);
       // console.log('Received:\n', formattedJSON + '\n');
       console.log('Received:\n', data + '\n');
-      fs.appendFileSync(textFilePath, `${new Date().toISOString()}: ${data}\n`);
-      fs.appendFileSync(jsonlFilePath, formattedJSON + '\n', { encoding: 'utf-8' });
+      if (doLog) {
+        fs.appendFileSync(textFilePath, `${new Date().toISOString()}: ${data}\n`);
+        fs.appendFileSync(jsonlFilePath, formattedJSON + '\n', { encoding: 'utf-8' });
+      }
       res.writeHead(200, { 'Access-Control-Allow-Origin': '*' });
       res.end();
     });
