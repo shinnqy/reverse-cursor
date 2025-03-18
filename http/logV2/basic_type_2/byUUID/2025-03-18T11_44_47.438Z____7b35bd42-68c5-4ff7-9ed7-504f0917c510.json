@@ -1,0 +1,478 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "7b35bd42-68c5-4ff7-9ed7-504f0917c510",
+    "timestamp": "2025-03-18T11:44:47.438Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/basicType.ets",
+          "diffHistory": [
+            "1+|let a: number = 1;\n2+|let b: string = '1';\n3+|let c: boolean = true;\n4+|let d: any = '1';\n5+|let e: void = undefined;\n6+|let f: null = null;\n7+|let g: undefined = undefined;\n",
+            "1-|let a: number = 1;\n2-|let b: string = '1';\n3-|let c: boolean = true;\n4-|let d: any = '1';\n5-|let e: void = undefined;\n6-|let f: null = null;\n7-|let g: undefined = undefined;\n1+|let str: string = '123';\n2+|str.split('');\n",
+            "1-|let str: string = '123';\n2-|str.split('');\n1+|let str1: string = '123';\n2+|str1.sptr2;\n3+|\n4+|let num1: number = 123;\n5+|let num2: number = 456;\n6+|let num3: number = num1 + num2;\n",
+            "2-|str1.sptr2;\n2+|let str2: string = '456';\n3+|let str3: string = str1 + str2;\n",
+            "2-|let str2: string = '456';\n3-|let str3: string = str1 + str2;\n2+|str1.split('');\n6-|let num2: number = 456;\n7-|let num3: number = num1 + num2;\n5+|num1.toString();\n6+|\n7+|let bool1: boolean = true;\n8+|bool1.toString();\n",
+            "4+|let str2: string = `Template string ${str1}`;\n5+|str2.split('');\n6+|\n7+|const str3 = \"Constant string\";\n8+|str3.toLocaleUpperCase();\n9+|\n5-|num1.toString();\n11+|num1.toFixed(2);\n",
+            "13+|let num2: number = 123.456;\n14+|num2.toExponential(2);\n15+|\n",
+            "17-|bool1.toString();\n17+|bool1.toString();\n18+|\n19+|let arr1: Array<number> = [1, 2, 3];\n20+|arr1.push(4);\n21+|\n22+|let arr2: number[] = [1, 2, 3];\n23+|arr2.push(4);\n24+|\n",
+            "21+|arr2.m\n",
+            "25+|arr2.map((item: number) => item * 2);\n27+|let obj1: { name: string; age: number } = { name: 'John', age: 20 };\n28+|obj1.name;\n29+|obj1.age;\n30+|\n31+|\n",
+            "21-|arr2.m\n21+|arr1.map((item: number) => item * 2);\n",
+            "25-|arr2.map((item: number) => item * 2);\n27-|let obj1: { name: string; age: number } = { name: 'John', age: 20 };\n28-|obj1.name;\n29-|obj1.age;\n30-|\n31-|\n",
+            "21-|arr1.map((item: number) => item * 2);\n",
+            "26+|let obj1: { name: string; age: number } = { name: 'John', age: 20 };\n27+|obj1.name;\n28+|obj1.age;\n29+|\n30+|let obj2: { name: string; age: number } = { name: 'John', age: 20 };\n31+|obj2.name;\n32+|obj2.age;\n",
+            "25-|let obj1: { name: string; age: number } = { name: 'John', age: 20 };\n26-|obj1.name;\n27-|obj1.age;\n28-|\n29-|let obj2: { name: string; age: number } = { name: 'John', age: 20 };\n30-|obj2.name;\n31-|obj2.age;\n",
+            "21+|arr1.map((item: number) => item * 2);\n",
+            "25-|\n25+|arr2.map((item: number) => item * 2);\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/utils/arktsType.ets",
+          "diffHistory": [
+            "1+|let image1: Resource = $r('app.media.image1');\n2+|let image2: Resource = $r('app.media.image2');\n3+|let image3: Resource = $r('app.media.image3');\n4+|let image4: Resource = $r('app.media.image4');\n5+|let image5: Resource = $r('app.media.image5');\n6+|let image6: Resource = $r('app.media.image6');\n",
+            "7+|\n8+|const image7: Resource = $r('app.media.image7');\n9+|const image8: Resource = $r('app.media.image8');\n10+|const image9: Resource = $r('app.media.image9');\n11+|const image10: Resource = $r('app.media.image10');\n12+|\n13+|let image11: Resource = $r('app.media.image11');\n14+|\n",
+            "15+|let image12: Resource = $r('app.media.image12');\n16+|let image13: Resource = $r('app.media.image13');\n17+|let image14: Resource = $r('app.media.image14');\n18+|let image15: Resource = $r('app.media.image15');\n19+|\n20+|\n",
+            "15-|let image12: Resource = $r('app.media.image12');\n16-|let image13: Resource = $r('app.media.image13');\n17-|let image14: Resource = $r('app.media.image14');\n18-|let image15: Resource = $r('app.media.image15');\n19-|\n20-|\n",
+            "9-|const image8: Resource = $r('app.media.image8');\n10-|const image9: Resource = $r('app.media.image9');\n11-|const image10: Resource = $r('app.media.image10');\n13-|let image11: Resource = $r('app.media.image11');\n10+|let pixelMap: PixelMap = new PixelMap();\n12+|let i18n: I18n = new I18n();\n",
+            "10-|let pixelMap: PixelMap = new PixelMap();\n11-|\n12-|let i18n: I18n = new I18n();\n10+|// let pixelMap: PixelMap = new PixelMap();\n",
+            "10-|// let pixelMap: PixelMap = new PixelMap();\n10+|let pixelMap: PixelMap = new PixelMap();\n11+|\n12+|pixelMap.getPixelBytesNumber();\n13+|\n14+|let i18n: I18n = new I18n();\n15+|\n16+|i18n.getString();\n17+|\n",
+            "12-|pixelMap.getPixelBytesNumber();\n13-|\n14-|let i18n: I18n = new I18n();\n15-|\n16-|i18n.getString();\n17-|\n12+|pixelMap.getPixelBytesNumber();\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/utils/basicType2.ets",
+          "diffHistory": [
+            "1+|let user1 = {\n2+|    name: 'John',\n3+|    age: 20,\n4+|    gender: 'male',\n5+|    email: 'john@example.com',\n6+|    phone: '1234567890',\n7+|}\n8+|\n9+|user1.name;\n10+|user1.age;\n11+|user1.gender;\n12+|user1.email;\n13+|user1.phone;\n14+|\n",
+            "15+|let company1 = {\n16+|    name: 'Google',\n17+|    address: '123 Main St, Anytown, USA',\n18+|    employees: [user1],\n19+|}\n20+|\n21+|company1.employees[0].name;\n",
+            "22+|\n23+|let dynamicKey\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/basicType2.ets",
+        "contents": "let user1 = {\n    name: 'John',\n    age: 20,\n    gender: 'male',\n    email: 'john@example.com',\n    phone: '1234567890',\n}\n\nuser1.name;\nuser1.age;\nuser1.gender;\nuser1.email;\nuser1.phone;\n\nlet company1 = {\n    name: 'Google',\n    address: '123 Main St, Anytown, USA',\n    employees: [user1],\n}\n\ncompany1.employees[0].name;\n\nlet dynamicKey\n",
+        "cursorPosition": {
+          "line": 22,
+          "column": 14
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 56,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/utils/arktsType.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 12
+            }
+          ],
+          "lastViewedAt": 1742298205212
+        },
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/utils/basicType.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 26
+            }
+          ],
+          "lastViewedAt": 1742298241160
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742298287484,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 52.699951171875,
+      "timeAtRequestSend": 1742298287484
+    },
+    "generateUuid": "7b35bd42-68c5-4ff7-9ed7-504f0917c510",
+    "timestamp": "2025-03-18T11:44:47.486Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "7b35bd42-68c5-4ff7-9ed7-504f0917c510",
+    "timestamp": "2025-03-18T11:44:47.839Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nlet dynamicKey =",
+      "rangeToReplace": {
+        "startLineNumber": 22,
+        "endLineNumberInclusive": 24
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "7b35bd42-68c5-4ff7-9ed7-504f0917c510",
+    "timestamp": "2025-03-18T11:44:47.840Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " '"
+    },
+    "generationUUID": "7b35bd42-68c5-4ff7-9ed7-504f0917c510",
+    "timestamp": "2025-03-18T11:44:47.867Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "name"
+    },
+    "generationUUID": "7b35bd42-68c5-4ff7-9ed7-504f0917c510",
+    "timestamp": "2025-03-18T11:44:47.878Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "';"
+    },
+    "generationUUID": "7b35bd42-68c5-4ff7-9ed7-504f0917c510",
+    "timestamp": "2025-03-18T11:44:47.888Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nuser"
+    },
+    "generationUUID": "7b35bd42-68c5-4ff7-9ed7-504f0917c510",
+    "timestamp": "2025-03-18T11:44:47.900Z"
+  },
+  {
+    "firstChunkValue": "\nlet dynamicKey = 'name';\n",
+    "generationUUID": "7b35bd42-68c5-4ff7-9ed7-504f0917c510",
+    "timestamp": "2025-03-18T11:44:47.903Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nlet dynamicKey = 'name';\n"
+    },
+    "generationUUID": "7b35bd42-68c5-4ff7-9ed7-504f0917c510",
+    "timestamp": "2025-03-18T11:44:47.904Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "1["
+    },
+    "generationUUID": "7b35bd42-68c5-4ff7-9ed7-504f0917c510",
+    "timestamp": "2025-03-18T11:44:47.915Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "dynamic"
+    },
+    "generationUUID": "7b35bd42-68c5-4ff7-9ed7-504f0917c510",
+    "timestamp": "2025-03-18T11:44:47.928Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Key"
+    },
+    "generationUUID": "7b35bd42-68c5-4ff7-9ed7-504f0917c510",
+    "timestamp": "2025-03-18T11:44:47.942Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "];"
+    },
+    "generationUUID": "7b35bd42-68c5-4ff7-9ed7-504f0917c510",
+    "timestamp": "2025-03-18T11:44:47.954Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "7b35bd42-68c5-4ff7-9ed7-504f0917c510",
+    "timestamp": "2025-03-18T11:44:47.971Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "let"
+    },
+    "generationUUID": "7b35bd42-68c5-4ff7-9ed7-504f0917c510",
+    "timestamp": "2025-03-18T11:44:47.992Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " dynamicKey2"
+    },
+    "generationUUID": "7b35bd42-68c5-4ff7-9ed7-504f0917c510",
+    "timestamp": "2025-03-18T11:44:48.000Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "7b35bd42-68c5-4ff7-9ed7-504f0917c510",
+    "timestamp": "2025-03-18T11:44:48.009Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " 'age"
+    },
+    "generationUUID": "7b35bd42-68c5-4ff7-9ed7-504f0917c510",
+    "timestamp": "2025-03-18T11:44:48.021Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "';"
+    },
+    "generationUUID": "7b35bd42-68c5-4ff7-9ed7-504f0917c510",
+    "timestamp": "2025-03-18T11:44:48.036Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "7b35bd42-68c5-4ff7-9ed7-504f0917c510",
+    "timestamp": "2025-03-18T11:44:48.049Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "user"
+    },
+    "generationUUID": "7b35bd42-68c5-4ff7-9ed7-504f0917c510",
+    "timestamp": "2025-03-18T11:44:48.069Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "1["
+    },
+    "generationUUID": "7b35bd42-68c5-4ff7-9ed7-504f0917c510",
+    "timestamp": "2025-03-18T11:44:48.072Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "dynamicKey2"
+    },
+    "generationUUID": "7b35bd42-68c5-4ff7-9ed7-504f0917c510",
+    "timestamp": "2025-03-18T11:44:48.086Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "];"
+    },
+    "generationUUID": "7b35bd42-68c5-4ff7-9ed7-504f0917c510",
+    "timestamp": "2025-03-18T11:44:48.097Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "7b35bd42-68c5-4ff7-9ed7-504f0917c510",
+    "timestamp": "2025-03-18T11:44:48.110Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "7b35bd42-68c5-4ff7-9ed7-504f0917c510",
+    "timestamp": "2025-03-18T11:44:48.123Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "7b35bd42-68c5-4ff7-9ed7-504f0917c510",
+    "timestamp": "2025-03-18T11:44:48.141Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "7b35bd42-68c5-4ff7-9ed7-504f0917c510",
+    "timestamp": "2025-03-18T11:44:48.142Z"
+  },
+  {
+    "fullText": "\nlet dynamicKey = 'name';\nuser1[dynamicKey];\n\nlet dynamicKey2 = 'age';\nuser1[dynamicKey2];\n\n\n",
+    "generationUUID": "7b35bd42-68c5-4ff7-9ed7-504f0917c510",
+    "timestamp": "2025-03-18T11:44:48.142Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nlet dynamicKey = 'name';\n"
+    },
+    "fullText": "\nlet dynamicKey = 'name';\nuser1[dynamicKey];\n\nlet dynamicKey2 = 'age';\nuser1[dynamicKey2];\n\n\n",
+    "generationUUID": "7b35bd42-68c5-4ff7-9ed7-504f0917c510",
+    "timestamp": "2025-03-18T11:44:48.142Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && currentSuggestion uniqueId is different && need to create newSuggestion according fullText",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "86bf0baa-1bcd-4feb-9d2f-602a493ff09c",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType2.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType2.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType2.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 56,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 56,
+      "monotonicallyIncreasingSuggestionId": 299,
+      "range": {
+        "startLineNumber": 22,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "replaceText": "\nlet dynamicKey = 'name';\nuser1[dynamicKey];\n\nlet dynamicKey2 = 'age';\nuser1[dynamicKey2];\n\n\n",
+      "originalText": "\nlet dynamicKey\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 22,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "diffText": "\nlet dynamicKey = 'name';\nuser1[dynamicKey];\n\nlet dynamicKey2 = 'age';\nuser1[dynamicKey2];\n\n\n",
+      "fullOriginalText": "\nlet dynamicKey\n",
+      "suggestionTriggerTime": 1742298287435.9001,
+      "greens": [],
+      "source": "typing",
+      "requestId": "7b35bd42-68c5-4ff7-9ed7-504f0917c510",
+      "selection": {
+        "startLineNumber": 22,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "9e627429-46b3-4d77-adcc-2b7631027d91",
+      "undoRedoGroup": {
+        "id": 303,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "7b35bd42-68c5-4ff7-9ed7-504f0917c510",
+    "timestamp": "2025-03-18T11:44:48.142Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "9e627429-46b3-4d77-adcc-2b7631027d91",
+    "generationUUID": "7b35bd42-68c5-4ff7-9ed7-504f0917c510",
+    "timestamp": "2025-03-18T11:44:48.146Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nlet dynamicKey = 'name';\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "9e627429-46b3-4d77-adcc-2b7631027d91",
+    "generationUUID": "7b35bd42-68c5-4ff7-9ed7-504f0917c510",
+    "timestamp": "2025-03-18T11:44:48.146Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "9e627429-46b3-4d77-adcc-2b7631027d91",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-18T11:44:48.146Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "d7f3aa37-95c9-40d2-81da-ce66c19fde2f",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType2.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType2.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType2.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 54,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 57,
+      "monotonicallyIncreasingSuggestionId": 296,
+      "range": {
+        "startLineNumber": 22,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "replaceText": "\nlet dynamicKey = 'name';\nuser1[dynamicKey];\n\nlet dynamicKey2 = 'age';\nuser1[dynamicKey2];\n\n\n",
+      "originalText": "\nlet dynamicKey = 'name';\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 22,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "diffText": "\nlet dynamicKey = 'name';\nuser1[dynamicKey];\n\nlet dynamicKey2 = 'age';\nuser1[dynamicKey2];\n\n\n",
+      "fullOriginalText": "\nlet dynamicKey = 'name';\n",
+      "suggestionTriggerTime": 1742298287015.6,
+      "greens": [],
+      "source": "typing",
+      "requestId": "88cbe3c9-e10d-4b99-ad96-25a0907bf4aa",
+      "selection": {
+        "startLineNumber": 22,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "80a70551-a702-4a74-9693-7aba5e93d083",
+      "undoRedoGroup": {
+        "id": 300,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "7b35bd42-68c5-4ff7-9ed7-504f0917c510",
+    "timestamp": "2025-03-18T11:44:49.099Z"
+  }
+]

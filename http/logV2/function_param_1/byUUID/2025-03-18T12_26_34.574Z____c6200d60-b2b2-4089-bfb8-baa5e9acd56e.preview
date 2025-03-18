@@ -1,0 +1,48 @@
+{"line":25,"column":15}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+function greet(name: string) {
+    return `Hello, ${name}!`;
+}
+
+greet('John');
+greet('Jane');
+
+interface Person {
+    name: string;
+    age: number;
+}
+
+function printPerson(person: Person) {
+    console.log(person);
+}
+
+printPerson({ name: 'John', age: 20 });
+printPerson({ name: 'Jane', age: 21 });
+
+
+function printValue(value: string | number) {
+    console.log(value);
+}
+
+printValue('Hello');
+printValue(123)[ToFill];
+
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+printValue('Hello');
+printValue(123);
+
+function printValue2(value: string | number) {
+-------------------------------[                   fullText                  ]--------------------------------
+printValue('Hello');
+printValue(123);
+
+function printValue2(value: string | number) {
+    if (typeof value === 'string') {
+        console.log(value.toUpperCase());
+    } else {
+        console.log(value);
+    }
+}

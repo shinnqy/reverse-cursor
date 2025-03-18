@@ -1,0 +1,297 @@
+You're an expert in ArkTS. Your task is to help the user update the code around current cursor position.
+
+## Recent Actions
+Here is what the user has been doing from the earliest to the latest:
+
+File: entry/src/main/ets/utils/basicType.ets
+added the code `let a: number = 1;` in line 1
+added the code `let b: string = '1';` in line 2
+added the code `let c: boolean = true;` in line 3
+added the code `let d: any = '1';` in line 4
+added the code `let e: void = undefined;` in line 5
+added the code `let f: null = null;` in line 6
+added the code `let g: undefined = undefined;` in line 7
+
+deleted the code `let a: number = 1;` in line 1
+deleted the code `let b: string = '1';` in line 2
+deleted the code `let c: boolean = true;` in line 3
+deleted the code `let d: any = '1';` in line 4
+deleted the code `let e: void = undefined;` in line 5
+deleted the code `let f: null = null;` in line 6
+deleted the code `let g: undefined = undefined;` in line 7
+added the code `let str: string = '123';` in line 1
+added the code `str.split('');` in line 2
+
+deleted the code `let str: string = '123';` in line 1
+deleted the code `str.split('');` in line 2
+added the code `let str1: string = '123';` in line 1
+added the code `str1.sptr2;` in line 2
+added the code `` in line 3
+added the code `let num1: number = 123;` in line 4
+added the code `let num2: number = 456;` in line 5
+added the code `let num3: number = num1 + num2;` in line 6
+
+deleted the code `str1.sptr2;` in line 2
+added the code `let str2: string = '456';` in line 2
+added the code `let str3: string = str1 + str2;` in line 3
+
+deleted the code `let str2: string = '456';` in line 2
+deleted the code `let str3: string = str1 + str2;` in line 3
+added the code `str1.split('');` in line 2
+deleted the code `let num2: number = 456;` in line 6
+deleted the code `let num3: number = num1 + num2;` in line 7
+added the code `num1.toString();` in line 5
+added the code `` in line 6
+added the code `let bool1: boolean = true;` in line 7
+added the code `bool1.toString();` in line 8
+
+added the code `let str2: string = `Template string ${str1}`;` in line 4
+added the code `str2.split('');` in line 5
+added the code `` in line 6
+added the code `const str3 = "Constant string";` in line 7
+added the code `str3.toLocaleUpperCase();` in line 8
+added the code `` in line 9
+deleted the code `num1.toString();` in line 5
+added the code `num1.toFixed(2);` in line 11
+
+added the code `let num2: number = 123.456;` in line 13
+added the code `num2.toExponential(2);` in line 14
+added the code `` in line 15
+
+deleted the code `bool1.toString();` in line 17
+added the code `bool1.toString();` in line 17
+added the code `` in line 18
+added the code `let arr1: Array<number> = [1, 2, 3];` in line 19
+added the code `arr1.push(4);` in line 20
+added the code `` in line 21
+added the code `let arr2: number[] = [1, 2, 3];` in line 22
+added the code `arr2.push(4);` in line 23
+added the code `` in line 24
+
+added the code `arr2.m` in line 21
+
+added the code `arr2.map((item: number) => item * 2);` in line 25
+added the code `let obj1: { name: string; age: number } = { name: 'John', age: 20 };` in line 27
+added the code `obj1.name;` in line 28
+added the code `obj1.age;` in line 29
+added the code `` in line 30
+added the code `` in line 31
+
+deleted the code `arr2.m` in line 21
+added the code `arr1.map((item: number) => item * 2);` in line 21
+
+deleted the code `arr2.map((item: number) => item * 2);` in line 25
+deleted the code `let obj1: { name: string; age: number } = { name: 'John', age: 20 };` in line 27
+deleted the code `obj1.name;` in line 28
+deleted the code `obj1.age;` in line 29
+deleted the code `` in line 30
+deleted the code `` in line 31
+
+deleted the code `arr1.map((item: number) => item * 2);` in line 21
+
+added the code `let obj1: { name: string; age: number } = { name: 'John', age: 20 };` in line 26
+added the code `obj1.name;` in line 27
+added the code `obj1.age;` in line 28
+added the code `` in line 29
+added the code `let obj2: { name: string; age: number } = { name: 'John', age: 20 };` in line 30
+added the code `obj2.name;` in line 31
+added the code `obj2.age;` in line 32
+
+deleted the code `let obj1: { name: string; age: number } = { name: 'John', age: 20 };` in line 25
+deleted the code `obj1.name;` in line 26
+deleted the code `obj1.age;` in line 27
+deleted the code `` in line 28
+deleted the code `let obj2: { name: string; age: number } = { name: 'John', age: 20 };` in line 29
+deleted the code `obj2.name;` in line 30
+deleted the code `obj2.age;` in line 31
+
+added the code `arr1.map((item: number) => item * 2);` in line 21
+
+deleted the code `` in line 25
+added the code `arr2.map((item: number) => item * 2);` in line 25
+-----------------------------------------------
+
+File: entry/src/main/ets/utils/arktsType.ets
+added the code `let image1: Resource = $r('app.media.image1');` in line 1
+added the code `let image2: Resource = $r('app.media.image2');` in line 2
+added the code `let image3: Resource = $r('app.media.image3');` in line 3
+added the code `let image4: Resource = $r('app.media.image4');` in line 4
+added the code `let image5: Resource = $r('app.media.image5');` in line 5
+added the code `let image6: Resource = $r('app.media.image6');` in line 6
+
+added the code `` in line 7
+added the code `const image7: Resource = $r('app.media.image7');` in line 8
+added the code `const image8: Resource = $r('app.media.image8');` in line 9
+added the code `const image9: Resource = $r('app.media.image9');` in line 10
+added the code `const image10: Resource = $r('app.media.image10');` in line 11
+added the code `` in line 12
+added the code `let image11: Resource = $r('app.media.image11');` in line 13
+added the code `` in line 14
+
+added the code `let image12: Resource = $r('app.media.image12');` in line 15
+added the code `let image13: Resource = $r('app.media.image13');` in line 16
+added the code `let image14: Resource = $r('app.media.image14');` in line 17
+added the code `let image15: Resource = $r('app.media.image15');` in line 18
+added the code `` in line 19
+added the code `` in line 20
+
+deleted the code `let image12: Resource = $r('app.media.image12');` in line 15
+deleted the code `let image13: Resource = $r('app.media.image13');` in line 16
+deleted the code `let image14: Resource = $r('app.media.image14');` in line 17
+deleted the code `let image15: Resource = $r('app.media.image15');` in line 18
+deleted the code `` in line 19
+deleted the code `` in line 20
+
+deleted the code `const image8: Resource = $r('app.media.image8');` in line 9
+deleted the code `const image9: Resource = $r('app.media.image9');` in line 10
+deleted the code `const image10: Resource = $r('app.media.image10');` in line 11
+deleted the code `let image11: Resource = $r('app.media.image11');` in line 13
+added the code `let pixelMap: PixelMap = new PixelMap();` in line 10
+added the code `let i18n: I18n = new I18n();` in line 12
+
+deleted the code `let pixelMap: PixelMap = new PixelMap();` in line 10
+deleted the code `` in line 11
+deleted the code `let i18n: I18n = new I18n();` in line 12
+added the code `// let pixelMap: PixelMap = new PixelMap();` in line 10
+
+deleted the code `// let pixelMap: PixelMap = new PixelMap();` in line 10
+added the code `let pixelMap: PixelMap = new PixelMap();` in line 10
+added the code `` in line 11
+added the code `pixelMap.getPixelBytesNumber();` in line 12
+added the code `` in line 13
+added the code `let i18n: I18n = new I18n();` in line 14
+added the code `` in line 15
+added the code `i18n.getString();` in line 16
+added the code `` in line 17
+
+deleted the code `pixelMap.getPixelBytesNumber();` in line 12
+deleted the code `` in line 13
+deleted the code `let i18n: I18n = new I18n();` in line 14
+deleted the code `` in line 15
+deleted the code `i18n.getString();` in line 16
+deleted the code `` in line 17
+added the code `pixelMap.getPixelBytesNumber();` in line 12
+-----------------------------------------------
+
+File: entry/src/main/ets/utils/basicType2.ets
+added the code `let user1 = {` in line 1
+added the code `    name: 'John',` in line 2
+added the code `    age: 20,` in line 3
+added the code `    gender: 'male',` in line 4
+added the code `    email: 'john@example.com',` in line 5
+added the code `    phone: '1234567890',` in line 6
+added the code `}` in line 7
+added the code `` in line 8
+added the code `user1.name;` in line 9
+added the code `user1.age;` in line 10
+added the code `user1.gender;` in line 11
+added the code `user1.email;` in line 12
+added the code `user1.phone;` in line 13
+added the code `` in line 14
+
+added the code `let company1 = {` in line 15
+added the code `    name: 'Google',` in line 16
+added the code `    address: '123 Main St, Anytown, USA',` in line 17
+added the code `    employees: [user1],` in line 18
+added the code `}` in line 19
+added the code `` in line 20
+added the code `company1.employees[0].name;` in line 21
+
+added the code `` in line 22
+added the code `let dynamicKey = 'name';` in line 23
+added the code `let user2 = {` in line 24
+added the code `    [dynamicKey]: 'John',` in line 25
+added the code `}` in line 26
+added the code `` in line 27
+added the code `user2.name;` in line 28
+added the code `` in line 29
+added the code `` in line 30
+
+added the code `type Point = ` in line 30
+
+deleted the code `` in line 32
+added the code `let point1: Point = {` in line 32
+added the code `    x: 10,` in line 33
+added the code `    y: 20,` in line 34
+added the code `}` in line 35
+
+deleted the code `type Point = ` in line 30
+added the code `type Point = {` in line 30
+added the code `    x: number;` in line 31
+added the code `    y: number;` in line 32
+added the code `}` in line 33
+
+added the code `` in line 39
+added the code `point1.x;` in line 40
+added the code `point1.y;` in line 41
+
+added the code `` in line 42
+added the code `interface A` in line 43
+
+
+## Current Code
+Here is the current code file path:
+entry/src/main/ets/utils/basicType2.ets
+
+Here is the current code around the cursor position:
+
+```
+let user1 = {
+    name: 'John',
+    age: 20,
+    gender: 'male',
+    email: 'john@example.com',
+    phone: '1234567890',
+}
+
+user1.name;
+user1.age;
+user1.gender;
+user1.email;
+user1.phone;
+
+let company1 = {
+    name: 'Google',
+    address: '123 Main St, Anytown, USA',
+    employees: [user1],
+}
+
+company1.employees[0].name;
+
+let dynamicKey = 'name';
+let user2 = {
+    [dynamicKey]: 'John',
+}
+
+user2.name;
+
+type Point = {
+    x: number;
+    y: number;
+<|editable_region_start|>
+}
+
+let point1: Point = {
+    x: 10,
+    y: 20,
+}
+
+point1.x;
+point1.y;
+
+interface A<|current_cursor_position|>
+
+<|editable_region_end|>
+```
+
+## Task
+Rewrite the code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> according to the following requirements:
+1. Enforce code format strictly matching existing code style.
+2. Propagate naming convention changes to all related cases
+3. Preserve original functionality
+4. Apply changes to entire code regardless of cursor position
+5. Focus on code after cursor position at <|current_cursor_position|>
+
+# Output Format
+Return ONLY the rewritten code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> without any other words.
+Never use markdown formatting like ```. Return raw text only.

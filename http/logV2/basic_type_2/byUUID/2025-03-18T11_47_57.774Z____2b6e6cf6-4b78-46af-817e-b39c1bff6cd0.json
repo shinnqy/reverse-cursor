@@ -1,0 +1,423 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "2b6e6cf6-4b78-46af-817e-b39c1bff6cd0",
+    "timestamp": "2025-03-18T11:47:57.774Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/basicType.ets",
+          "diffHistory": [
+            "1+|let a: number = 1;\n2+|let b: string = '1';\n3+|let c: boolean = true;\n4+|let d: any = '1';\n5+|let e: void = undefined;\n6+|let f: null = null;\n7+|let g: undefined = undefined;\n",
+            "1-|let a: number = 1;\n2-|let b: string = '1';\n3-|let c: boolean = true;\n4-|let d: any = '1';\n5-|let e: void = undefined;\n6-|let f: null = null;\n7-|let g: undefined = undefined;\n1+|let str: string = '123';\n2+|str.split('');\n",
+            "1-|let str: string = '123';\n2-|str.split('');\n1+|let str1: string = '123';\n2+|str1.sptr2;\n3+|\n4+|let num1: number = 123;\n5+|let num2: number = 456;\n6+|let num3: number = num1 + num2;\n",
+            "2-|str1.sptr2;\n2+|let str2: string = '456';\n3+|let str3: string = str1 + str2;\n",
+            "2-|let str2: string = '456';\n3-|let str3: string = str1 + str2;\n2+|str1.split('');\n6-|let num2: number = 456;\n7-|let num3: number = num1 + num2;\n5+|num1.toString();\n6+|\n7+|let bool1: boolean = true;\n8+|bool1.toString();\n",
+            "4+|let str2: string = `Template string ${str1}`;\n5+|str2.split('');\n6+|\n7+|const str3 = \"Constant string\";\n8+|str3.toLocaleUpperCase();\n9+|\n5-|num1.toString();\n11+|num1.toFixed(2);\n",
+            "13+|let num2: number = 123.456;\n14+|num2.toExponential(2);\n15+|\n",
+            "17-|bool1.toString();\n17+|bool1.toString();\n18+|\n19+|let arr1: Array<number> = [1, 2, 3];\n20+|arr1.push(4);\n21+|\n22+|let arr2: number[] = [1, 2, 3];\n23+|arr2.push(4);\n24+|\n",
+            "21+|arr2.m\n",
+            "25+|arr2.map((item: number) => item * 2);\n27+|let obj1: { name: string; age: number } = { name: 'John', age: 20 };\n28+|obj1.name;\n29+|obj1.age;\n30+|\n31+|\n",
+            "21-|arr2.m\n21+|arr1.map((item: number) => item * 2);\n",
+            "25-|arr2.map((item: number) => item * 2);\n27-|let obj1: { name: string; age: number } = { name: 'John', age: 20 };\n28-|obj1.name;\n29-|obj1.age;\n30-|\n31-|\n",
+            "21-|arr1.map((item: number) => item * 2);\n",
+            "26+|let obj1: { name: string; age: number } = { name: 'John', age: 20 };\n27+|obj1.name;\n28+|obj1.age;\n29+|\n30+|let obj2: { name: string; age: number } = { name: 'John', age: 20 };\n31+|obj2.name;\n32+|obj2.age;\n",
+            "25-|let obj1: { name: string; age: number } = { name: 'John', age: 20 };\n26-|obj1.name;\n27-|obj1.age;\n28-|\n29-|let obj2: { name: string; age: number } = { name: 'John', age: 20 };\n30-|obj2.name;\n31-|obj2.age;\n",
+            "21+|arr1.map((item: number) => item * 2);\n",
+            "25-|\n25+|arr2.map((item: number) => item * 2);\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/utils/arktsType.ets",
+          "diffHistory": [
+            "1+|let image1: Resource = $r('app.media.image1');\n2+|let image2: Resource = $r('app.media.image2');\n3+|let image3: Resource = $r('app.media.image3');\n4+|let image4: Resource = $r('app.media.image4');\n5+|let image5: Resource = $r('app.media.image5');\n6+|let image6: Resource = $r('app.media.image6');\n",
+            "7+|\n8+|const image7: Resource = $r('app.media.image7');\n9+|const image8: Resource = $r('app.media.image8');\n10+|const image9: Resource = $r('app.media.image9');\n11+|const image10: Resource = $r('app.media.image10');\n12+|\n13+|let image11: Resource = $r('app.media.image11');\n14+|\n",
+            "15+|let image12: Resource = $r('app.media.image12');\n16+|let image13: Resource = $r('app.media.image13');\n17+|let image14: Resource = $r('app.media.image14');\n18+|let image15: Resource = $r('app.media.image15');\n19+|\n20+|\n",
+            "15-|let image12: Resource = $r('app.media.image12');\n16-|let image13: Resource = $r('app.media.image13');\n17-|let image14: Resource = $r('app.media.image14');\n18-|let image15: Resource = $r('app.media.image15');\n19-|\n20-|\n",
+            "9-|const image8: Resource = $r('app.media.image8');\n10-|const image9: Resource = $r('app.media.image9');\n11-|const image10: Resource = $r('app.media.image10');\n13-|let image11: Resource = $r('app.media.image11');\n10+|let pixelMap: PixelMap = new PixelMap();\n12+|let i18n: I18n = new I18n();\n",
+            "10-|let pixelMap: PixelMap = new PixelMap();\n11-|\n12-|let i18n: I18n = new I18n();\n10+|// let pixelMap: PixelMap = new PixelMap();\n",
+            "10-|// let pixelMap: PixelMap = new PixelMap();\n10+|let pixelMap: PixelMap = new PixelMap();\n11+|\n12+|pixelMap.getPixelBytesNumber();\n13+|\n14+|let i18n: I18n = new I18n();\n15+|\n16+|i18n.getString();\n17+|\n",
+            "12-|pixelMap.getPixelBytesNumber();\n13-|\n14-|let i18n: I18n = new I18n();\n15-|\n16-|i18n.getString();\n17-|\n12+|pixelMap.getPixelBytesNumber();\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/utils/basicType2.ets",
+          "diffHistory": [
+            "1+|let user1 = {\n2+|    name: 'John',\n3+|    age: 20,\n4+|    gender: 'male',\n5+|    email: 'john@example.com',\n6+|    phone: '1234567890',\n7+|}\n8+|\n9+|user1.name;\n10+|user1.age;\n11+|user1.gender;\n12+|user1.email;\n13+|user1.phone;\n14+|\n",
+            "15+|let company1 = {\n16+|    name: 'Google',\n17+|    address: '123 Main St, Anytown, USA',\n18+|    employees: [user1],\n19+|}\n20+|\n21+|company1.employees[0].name;\n",
+            "22+|\n23+|let dynamicKey = 'name';\n24+|let user2 = {\n25+|    [dynamicKey]: 'John',\n26+|}\n27+|\n28+|user2.name;\n29+|\n30+|\n",
+            "30+|type Point = \n",
+            "32-|\n32+|let point1: Point = {\n33+|    x: 10,\n34+|    y: 20,\n35+|}\n",
+            "30-|type Point = \n30+|type Point = {\n31+|    x: number;\n32+|    y: number;\n33+|}\n",
+            "39+|\n40+|point1.x;\n41+|point1.y;\n",
+            "42+|\n43+|interface Ani\n44+|    name: string;\n45+|    age: number;\n46+|}\n47+|\n48+|let dog: Animal = {\n49+|    name: 'Dog',\n50+|    age: 10,\n",
+            "43-|interface Ani\n43+|interface Animal {\n",
+            "50-|    age: 10,\n50+|    age: 10,\n51+|}\n52+|\n53+|dog.name;\n54+|dog.age;\n55+|\n",
+            "48+|interface Dog extends Animal {\n49+|\n",
+            "53+|    breed: 'Labrador',\n",
+            "48-|interface Dog extends Animal {\n48+|interface Dog extends Animal {  \n49+|    breed: string;\n50+|}\n50-|let dog: Animal = {\n52+|let dog: Dog = {\n",
+            "55-|    breed: 'Labrador',\n",
+            "52-|let dog: Dog = {\n52+|let dog: Animal = {\n",
+            "49-|    breed: string;\n50-|}\n",
+            "53+|    breed: 'Labrador',\n",
+            "49+|    breed: string;\n50+|}\n50-|let dog: Animal = {\n52+|let dog: Dog = {\n",
+            "55-|    breed: 'Labrador',\n",
+            "52-|let dog: Dog = {\n52+|let dog: Animal = {\n",
+            "49-|    breed: string;\n50-|}\n",
+            "53+|    breed: 'Labrador',\n",
+            "49+|    breed: string;\n50+|}\n50-|let dog: Animal = {\n52+|let dog: Dog = {\n",
+            "61+|interface Config {\n62+|    url: string;\n63+|    method: string;\n64+|    data: any;\n65+|}\n66+|\n67+|let config: Config = {\n68+|\n",
+            "65+|    height?: number;\n",
+            "69-|\n69+|    url: 'https://example.com',\n70+|    method: 'GET',\n71+|    data: {\n72+|        name: 'John',\n73+|        age: 20,\n74+|    },\n75+|}\n",
+            "76+|config.height;\n77+|\n78+|let unionType: string | number = 'Hello';\n79+|unionType = 123;\n80+|\n81+|let tupleType: [string, number] = ['Hello', 123];\n82+|tupleType[0];\n83+|tupleType[1];\n84+|\n",
+            "81+|\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/basicType2.ets",
+        "contents": "let user1 = {\n    name: 'John',\n    age: 20,\n    gender: 'male',\n    email: 'john@example.com',\n    phone: '1234567890',\n}\n\nuser1.name;\nuser1.age;\nuser1.gender;\nuser1.email;\nuser1.phone;\n\nlet company1 = {\n    name: 'Google',\n    address: '123 Main St, Anytown, USA',\n    employees: [user1],\n}\n\ncompany1.employees[0].name;\n\nlet dynamicKey = 'name';\nlet user2 = {\n    [dynamicKey]: 'John',\n}\n\nuser2.name;\n\ntype Point = {\n    x: number;\n    y: number;\n}\n\nlet point1: Point = {\n    x: 10,\n    y: 20,\n}\n\npoint1.x;\npoint1.y;\n\ninterface Animal {\n    name: string;\n    age: number;\n}\n\ninterface Dog extends Animal {\n    breed: string;\n}\n\nlet dog: Dog = {\n    name: 'Dog',\n    age: 10,\n    breed: 'Labrador',\n}\n\ndog.name;\ndog.age;\n\ninterface Config {\n    url: string;\n    method: string;\n    data: any;\n    height?: number;\n}\n\nlet config: Config = {\n    url: 'https://example.com',\n    method: 'GET',\n    data: {\n        name: 'John',\n        age: 20,\n    },\n}\nconfig.height;\n\nlet unionType: string | number = 'Hello';\nunionType = 123;\n\n\nlet tupleType: [string, number] = ['Hello', 123];\ntupleType[0];\ntupleType[1];\n\n",
+        "cursorPosition": {
+          "line": 79,
+          "column": 0
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 182,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/utils/arktsType.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 12
+            }
+          ],
+          "lastViewedAt": 1742298205212
+        },
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/utils/basicType.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 26
+            }
+          ],
+          "lastViewedAt": 1742298241160
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1742298477816,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50,
+      "timeAtRequestSend": 1742298477816
+    },
+    "generateUuid": "2b6e6cf6-4b78-46af-817e-b39c1bff6cd0",
+    "timestamp": "2025-03-18T11:47:57.819Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "config.height;\n\nlet unionType: string | number = 'Hello';\nunionType = 123;\n\nlet",
+      "rangeToReplace": {
+        "startLineNumber": 76,
+        "endLineNumberInclusive": 86
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "2b6e6cf6-4b78-46af-817e-b39c1bff6cd0",
+    "timestamp": "2025-03-18T11:47:58.202Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "2b6e6cf6-4b78-46af-817e-b39c1bff6cd0",
+    "timestamp": "2025-03-18T11:47:58.208Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " tupleType: [string, number]"
+    },
+    "generationUUID": "2b6e6cf6-4b78-46af-817e-b39c1bff6cd0",
+    "timestamp": "2025-03-18T11:47:58.231Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " = ['Hello', 123"
+    },
+    "generationUUID": "2b6e6cf6-4b78-46af-817e-b39c1bff6cd0",
+    "timestamp": "2025-03-18T11:47:58.243Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "];\ntupleType[0];\n"
+    },
+    "generationUUID": "2b6e6cf6-4b78-46af-817e-b39c1bff6cd0",
+    "timestamp": "2025-03-18T11:47:58.252Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "tuple"
+    },
+    "generationUUID": "2b6e6cf6-4b78-46af-817e-b39c1bff6cd0",
+    "timestamp": "2025-03-18T11:47:58.264Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Type[1];\n\nlet"
+    },
+    "generationUUID": "2b6e6cf6-4b78-46af-817e-b39c1bff6cd0",
+    "timestamp": "2025-03-18T11:47:58.276Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " enum"
+    },
+    "generationUUID": "2b6e6cf6-4b78-46af-817e-b39c1bff6cd0",
+    "timestamp": "2025-03-18T11:47:58.286Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Type"
+    },
+    "generationUUID": "2b6e6cf6-4b78-46af-817e-b39c1bff6cd0",
+    "timestamp": "2025-03-18T11:47:58.297Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "2b6e6cf6-4b78-46af-817e-b39c1bff6cd0",
+    "timestamp": "2025-03-18T11:47:58.308Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Enum"
+    },
+    "generationUUID": "2b6e6cf6-4b78-46af-817e-b39c1bff6cd0",
+    "timestamp": "2025-03-18T11:47:58.320Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "2b6e6cf6-4b78-46af-817e-b39c1bff6cd0",
+    "timestamp": "2025-03-18T11:47:58.332Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Enum"
+    },
+    "generationUUID": "2b6e6cf6-4b78-46af-817e-b39c1bff6cd0",
+    "timestamp": "2025-03-18T11:47:58.344Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "2b6e6cf6-4b78-46af-817e-b39c1bff6cd0",
+    "timestamp": "2025-03-18T11:47:58.356Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "RED"
+    },
+    "generationUUID": "2b6e6cf6-4b78-46af-817e-b39c1bff6cd0",
+    "timestamp": "2025-03-18T11:47:58.366Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";"
+    },
+    "generationUUID": "2b6e6cf6-4b78-46af-817e-b39c1bff6cd0",
+    "timestamp": "2025-03-18T11:47:58.377Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nenum"
+    },
+    "generationUUID": "2b6e6cf6-4b78-46af-817e-b39c1bff6cd0",
+    "timestamp": "2025-03-18T11:47:58.388Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Type"
+    },
+    "generationUUID": "2b6e6cf6-4b78-46af-817e-b39c1bff6cd0",
+    "timestamp": "2025-03-18T11:47:58.397Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "2b6e6cf6-4b78-46af-817e-b39c1bff6cd0",
+    "timestamp": "2025-03-18T11:47:58.406Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Enum"
+    },
+    "generationUUID": "2b6e6cf6-4b78-46af-817e-b39c1bff6cd0",
+    "timestamp": "2025-03-18T11:47:58.416Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ".GRE"
+    },
+    "generationUUID": "2b6e6cf6-4b78-46af-817e-b39c1bff6cd0",
+    "timestamp": "2025-03-18T11:47:58.427Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "EN"
+    },
+    "generationUUID": "2b6e6cf6-4b78-46af-817e-b39c1bff6cd0",
+    "timestamp": "2025-03-18T11:47:58.437Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";"
+    },
+    "generationUUID": "2b6e6cf6-4b78-46af-817e-b39c1bff6cd0",
+    "timestamp": "2025-03-18T11:47:58.447Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "2b6e6cf6-4b78-46af-817e-b39c1bff6cd0",
+    "timestamp": "2025-03-18T11:47:58.459Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "enum"
+    },
+    "generationUUID": "2b6e6cf6-4b78-46af-817e-b39c1bff6cd0",
+    "timestamp": "2025-03-18T11:47:58.468Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Type = Enum."
+    },
+    "generationUUID": "2b6e6cf6-4b78-46af-817e-b39c1bff6cd0",
+    "timestamp": "2025-03-18T11:47:58.483Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "BL"
+    },
+    "generationUUID": "2b6e6cf6-4b78-46af-817e-b39c1bff6cd0",
+    "timestamp": "2025-03-18T11:47:58.490Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "UE"
+    },
+    "generationUUID": "2b6e6cf6-4b78-46af-817e-b39c1bff6cd0",
+    "timestamp": "2025-03-18T11:47:58.501Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";"
+    },
+    "generationUUID": "2b6e6cf6-4b78-46af-817e-b39c1bff6cd0",
+    "timestamp": "2025-03-18T11:47:58.511Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "2b6e6cf6-4b78-46af-817e-b39c1bff6cd0",
+    "timestamp": "2025-03-18T11:47:58.521Z"
+  },
+  {
+    "firstChunkValue": "config.height;\n\nlet unionType: string | number = 'Hello';\nunionType = 123;\n\nlet tupleType: [string, number] = ['Hello', 123];\ntupleType[0];\ntupleType[1];\n\nlet enumType: Enum = Enum.RED;\nenumType = Enum.GREEN;\nenumType = Enum.BLUE;\n\n",
+    "generationUUID": "2b6e6cf6-4b78-46af-817e-b39c1bff6cd0",
+    "timestamp": "2025-03-18T11:47:58.556Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "config.height;\n\nlet unionType: string | number = 'Hello';\nunionType = 123;\n\nlet tupleType: [string, number] = ['Hello', 123];\ntupleType[0];\ntupleType[1];\n\nlet enumType: Enum = Enum.RED;\nenumType = Enum.GREEN;\nenumType = Enum.BLUE;\n\n"
+    },
+    "generationUUID": "2b6e6cf6-4b78-46af-817e-b39c1bff6cd0",
+    "timestamp": "2025-03-18T11:47:58.557Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "2b6e6cf6-4b78-46af-817e-b39c1bff6cd0",
+    "timestamp": "2025-03-18T11:47:58.557Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "6f7af8bf-136f-4c78-8c05-5179622e68cb",
+    "generationUUID": "2b6e6cf6-4b78-46af-817e-b39c1bff6cd0",
+    "timestamp": "2025-03-18T11:47:58.558Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "config.height;\n\nlet unionType: string | number = 'Hello';\nunionType = 123;\n\nlet tupleType: [string, number] = ['Hello', 123];\ntupleType[0];\ntupleType[1];\n\nlet enumType: Enum = Enum.RED;\nenumType = Enum.GREEN;\nenumType = Enum.BLUE;\n\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "6f7af8bf-136f-4c78-8c05-5179622e68cb",
+    "generationUUID": "2b6e6cf6-4b78-46af-817e-b39c1bff6cd0",
+    "timestamp": "2025-03-18T11:47:58.559Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "6f7af8bf-136f-4c78-8c05-5179622e68cb",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-18T11:47:58.563Z"
+  }
+]

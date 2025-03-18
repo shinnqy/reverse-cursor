@@ -1,0 +1,50 @@
+{"line":15,"column":2}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+function greet(name: string) {
+    return `Hello, ${name}!`;
+}
+
+greet('John');
+greet('Jane');
+
+interface Person {
+    name: string;
+    age: number;
+}
+
+function printPerson(person: Person) {
+    console.log(person);
+}
+  [ToFill]
+printPerson({ name: 'John', age: 20 });
+printPerson({ name: 'Jane', age: 21 });
+
+
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+function printPerson(person: Person) {
+    console.log(person);
+}
+
+printPerson({ name: 'John', age: 20 });
+printPerson({ name: 'Jane', age: 21 });
+
+
+
+
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/function.ets",
+  "lineNumberOneIndexed": 1,
+  "text": "function greet(name: string) {\nreturn `Hello, ${name}!`;\n}\n\ngreet('John');",
+  "shouldRetriggerCpp": false
+}
+--------------------------------[        displayedFusedCursorPrediction       ]---------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/function.ets",
+  "lineNumberOneIndexed": 1,
+  "text": "function greet(name: string) {\nreturn `Hello, ${name}!`;\n}\n\ngreet('John');",
+  "shouldRetriggerCpp": false
+}

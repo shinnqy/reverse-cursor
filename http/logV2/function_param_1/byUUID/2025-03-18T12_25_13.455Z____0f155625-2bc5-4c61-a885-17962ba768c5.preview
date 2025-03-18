@@ -1,0 +1,34 @@
+{"line":4,"column":0}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+function greet(name: string) {
+    return `Hello, ${name}!`;
+}
+
+[ToFill]greet('John');
+greet('Jane');
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+function greet(name: string) {
+    return `Hello, ${name}!`;
+}
+
+greet('John');
+greet('Jane');
+
+function add(a: number, b: number) {
+-------------------------------[                   fullText                  ]--------------------------------
+function greet(name: string) {
+    return `Hello, ${name}!`;
+}
+
+greet('John');
+greet('Jane');
+
+function add(a: number, b: number) {
+    return a + b;
+}
+
+add(1, 2);
+add(1, 2, 3);

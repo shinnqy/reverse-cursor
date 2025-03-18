@@ -1,0 +1,214 @@
+{"line":47,"column":0}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+let user1 = {
+    name: 'John',
+    age: 20,
+    gender: 'male',
+    email: 'john@example.com',
+    phone: '1234567890',
+}
+
+user1.name;
+user1.age;
+user1.gender;
+user1.email;
+user1.phone;
+
+let company1 = {
+    name: 'Google',
+    address: '123 Main St, Anytown, USA',
+    employees: [user1],
+}
+
+company1.employees[0].name;
+
+let dynamicKey = 'name';
+let user2 = {
+    [dynamicKey]: 'John',
+}
+
+user2.name;
+
+type Point = {
+    x: number;
+    y: number;
+}
+
+let point1: Point = {
+    x: 10,
+    y: 20,
+}
+
+point1.x;
+point1.y;
+
+interface Animal {
+    name: string;
+    age: number;
+}
+
+[ToFill]
+
+let dog: Animal = {
+    name: 'Dog',
+    age: 10,
+}
+
+dog.name;
+dog.age;
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+interface Dog extends Animal {
+
+let dog: Animal = {
+    name: 'Dog',
+    age: 10,
+}
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+let user1 = {
+    name: 'John',
+    age: 20,
+    gender: 'male',
+    email: 'john@example.com',
+    phone: '1234567890',
+}
+
+user1.name;
+user1.age;
+user1.gender;
+user1.email;
+user1.phone;
+
+let company1 = {
+    name: 'Google',
+    address: '123 Main St, Anytown, USA',
+    employees: [user1],
+}
+
+company1.employees[0].name;
+
+let dynamicKey = 'name';
+let user2 = {
+    [dynamicKey]: 'John',
+}
+
+user2.name;
+
+type Point = {
+    x: number;
+    y: number;
+}
+
+let point1: Point = {
+    x: 10,
+    y: 20,
+}
+
+point1.x;
+point1.y;
+
+interface Animal {
+    name: string;
+    age: number;
+}
+
+interface Dog extends Animal {
+
+let dog: Animal = {
+    name: 'Dog',
+    age: 10,
+}
+
+dog.name;
+dog.age;
+
+
+-------------------------------[                   fullText                  ]--------------------------------
+
+interface Dog extends Animal {
+    breed: string;
+}
+
+let dog: Dog = {
+    name: 'Dog',
+    age: 10,
+    breed: 'Labrador',
+}
+-------------------------------[         replacedContentsWithFullText         ]--------------------------------
+let user1 = {
+    name: 'John',
+    age: 20,
+    gender: 'male',
+    email: 'john@example.com',
+    phone: '1234567890',
+}
+
+user1.name;
+user1.age;
+user1.gender;
+user1.email;
+user1.phone;
+
+let company1 = {
+    name: 'Google',
+    address: '123 Main St, Anytown, USA',
+    employees: [user1],
+}
+
+company1.employees[0].name;
+
+let dynamicKey = 'name';
+let user2 = {
+    [dynamicKey]: 'John',
+}
+
+user2.name;
+
+type Point = {
+    x: number;
+    y: number;
+}
+
+let point1: Point = {
+    x: 10,
+    y: 20,
+}
+
+point1.x;
+point1.y;
+
+interface Animal {
+    name: string;
+    age: number;
+}
+
+interface Dog extends Animal {
+    breed: string;
+}
+
+let dog: Dog = {
+    name: 'Dog',
+    age: 10,
+dog.name;
+dog.age;
+
+
+    breed: 'Labrador',
+}
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/basicType2.ets",
+  "lineNumberOneIndexed": 48,
+  "text": "\n",
+  "shouldRetriggerCpp": false
+}
+--------------------------------[        displayedFusedCursorPrediction       ]---------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/basicType2.ets",
+  "lineNumberOneIndexed": 48,
+  "text": "\n",
+  "shouldRetriggerCpp": false
+}

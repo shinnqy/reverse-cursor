@@ -1,0 +1,726 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:39.919Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/basicType.ets",
+          "diffHistory": [
+            "1+|let a: number = 1;\n2+|let b: string = '1';\n3+|let c: boolean = true;\n4+|let d: any = '1';\n5+|let e: void = undefined;\n6+|let f: null = null;\n7+|let g: undefined = undefined;\n",
+            "1-|let a: number = 1;\n2-|let b: string = '1';\n3-|let c: boolean = true;\n4-|let d: any = '1';\n5-|let e: void = undefined;\n6-|let f: null = null;\n7-|let g: undefined = undefined;\n1+|let str: string = '123';\n2+|str.split('');\n",
+            "1-|let str: string = '123';\n2-|str.split('');\n1+|let str1: string = '123';\n2+|str1.sptr2;\n3+|\n4+|let num1: number = 123;\n5+|let num2: number = 456;\n6+|let num3: number = num1 + num2;\n",
+            "2-|str1.sptr2;\n2+|let str2: string = '456';\n3+|let str3: string = str1 + str2;\n",
+            "2-|let str2: string = '456';\n3-|let str3: string = str1 + str2;\n2+|str1.split('');\n6-|let num2: number = 456;\n7-|let num3: number = num1 + num2;\n5+|num1.toString();\n6+|\n7+|let bool1: boolean = true;\n8+|bool1.toString();\n",
+            "4+|let str2: string = `Template string ${str1}`;\n5+|str2.split('');\n6+|\n7+|const str3 = \"Constant string\";\n8+|str3.toLocaleUpperCase();\n9+|\n5-|num1.toString();\n11+|num1.toFixed(2);\n",
+            "13+|let num2: number = 123.456;\n14+|num2.toExponential(2);\n15+|\n",
+            "17-|bool1.toString();\n17+|bool1.toString();\n18+|\n19+|let arr1: Array<number> = [1, 2, 3];\n20+|arr1.push(4);\n21+|\n22+|let arr2: number[] = [1, 2, 3];\n23+|arr2.push(4);\n24+|\n",
+            "21+|arr2.m\n",
+            "25+|arr2.map((item: number) => item * 2);\n27+|let obj1: { name: string; age: number } = { name: 'John', age: 20 };\n28+|obj1.name;\n29+|obj1.age;\n30+|\n31+|\n",
+            "21-|arr2.m\n21+|arr1.map((item: number) => item * 2);\n",
+            "25-|arr2.map((item: number) => item * 2);\n27-|let obj1: { name: string; age: number } = { name: 'John', age: 20 };\n28-|obj1.name;\n29-|obj1.age;\n30-|\n31-|\n",
+            "21-|arr1.map((item: number) => item * 2);\n",
+            "26+|let obj1: { name: string; age: number } = { name: 'John', age: 20 };\n27+|obj1.name;\n28+|obj1.age;\n29+|\n30+|let obj2: { name: string; age: number } = { name: 'John', age: 20 };\n31+|obj2.name;\n32+|obj2.age;\n",
+            "25-|let obj1: { name: string; age: number } = { name: 'John', age: 20 };\n26-|obj1.name;\n27-|obj1.age;\n28-|\n29-|let obj2: { name: string; age: number } = { name: 'John', age: 20 };\n30-|obj2.name;\n31-|obj2.age;\n",
+            "21+|arr1.map((item: number) => item * 2);\n",
+            "25-|\n25+|arr2.map((item: number) => item * 2);\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/utils/arktsType.ets",
+          "diffHistory": [
+            "1+|let image1: Resource = $r('app.media.image1');\n2+|let image2: Resource = $r('app.media.image2');\n3+|let image3: Resource = $r('app.media.image3');\n4+|let image4: Resource = $r('app.media.image4');\n5+|let image5: Resource = $r('app.media.image5');\n6+|let image6: Resource = $r('app.media.image6');\n",
+            "7+|\n8+|const image7: Resource = $r('app.media.image7');\n9+|const image8: Resource = $r('app.media.image8');\n10+|const image9: Resource = $r('app.media.image9');\n11+|const image10: Resource = $r('app.media.image10');\n12+|\n13+|let image11: Resource = $r('app.media.image11');\n14+|\n",
+            "15+|let image12: Resource = $r('app.media.image12');\n16+|let image13: Resource = $r('app.media.image13');\n17+|let image14: Resource = $r('app.media.image14');\n18+|let image15: Resource = $r('app.media.image15');\n19+|\n20+|\n",
+            "15-|let image12: Resource = $r('app.media.image12');\n16-|let image13: Resource = $r('app.media.image13');\n17-|let image14: Resource = $r('app.media.image14');\n18-|let image15: Resource = $r('app.media.image15');\n19-|\n20-|\n",
+            "9-|const image8: Resource = $r('app.media.image8');\n10-|const image9: Resource = $r('app.media.image9');\n11-|const image10: Resource = $r('app.media.image10');\n13-|let image11: Resource = $r('app.media.image11');\n14-|\n10+|let p\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/arktsType.ets",
+        "contents": "let image1: Resource = $r('app.media.image1');\nlet image2: Resource = $r('app.media.image2');\nlet image3: Resource = $r('app.media.image3');\nlet image4: Resource = $r('app.media.image4');\nlet image5: Resource = $r('app.media.image5');\nlet image6: Resource = $r('app.media.image6');\n\nconst image7: Resource = $r('app.media.image7');\n\nlet p",
+        "cursorPosition": {
+          "line": 9,
+          "column": 5
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 51,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/pages/AboutMe.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 13
+            }
+          ],
+          "lastViewedAt": 1742296854734
+        },
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/utils/basicType.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            8
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 8,
+              "endLineNumberInclusive": 26
+            }
+          ],
+          "lastViewedAt": 1742297476629
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742297559961,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.900146484375,
+      "timeAtRequestSend": 1742297559961
+    },
+    "generateUuid": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:39.963Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.536Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nlet person",
+      "rangeToReplace": {
+        "startLineNumber": 9,
+        "endLineNumberInclusive": 10
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.536Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "1"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.555Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.563Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.574Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " name: string; age: number }"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.584Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " = { name: 'John', age"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.596Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": 20 };\nlet"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.605Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " person"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.618Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "2"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.625Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.636Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.645Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " name: string; age: number }"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.656Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.667Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " { name: 'Jane"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.677Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "',"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.687Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " age: 21"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.699Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " };"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.708Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nlet"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.733Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " person3"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.734Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.742Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.751Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " name"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.758Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": string; age: number } ="
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.782Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.783Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " name: 'Jim"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.788Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "',"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.799Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " age"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.810Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": 22"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.827Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " };"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.829Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.836Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.844Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "let"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.854Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " person"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.862Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "4"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.871Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.890Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.893Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " name:"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.896Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " string"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.906Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "; age: number } = { name"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.913Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.921Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " 'John', age: 20"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.930Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " };"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.941Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nlet"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.950Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " person"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.967Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "5"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.971Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.976Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.986Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " name"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:40.996Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:41.018Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " string; age: number } = {"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:41.020Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " name: '"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:41.027Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Jane"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:41.036Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "', age"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:41.056Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:41.058Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " 21"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:41.067Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " };\n"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:41.089Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "let person6"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:41.090Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:41.140Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:41.140Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " name"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:41.140Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": string"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:41.141Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:41.141Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " age: number } = { name:"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:41.145Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " '"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:41.152Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Jim"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:41.164Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "', age:"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:41.172Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:41.189Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "22"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:41.193Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " };"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:41.203Z"
+  },
+  {
+    "firstChunkValue": "\nlet person1: { name: string; age: number } = { name: 'John', age: 20 };\nlet person2: { name: string; age: number } = { name: 'Jane', age: 21 };\nlet person3: { name: string; age: number } = { name: 'Jim', age: 22 };\n\nlet person4: { name: string; age: number } = { name: 'John', age: 20 };\nlet person5: { name: string; age: number } = { name: 'Jane', age: 21 };\nlet person6: { name: string; age: number } = { name: 'Jim', age: 22 };",
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:41.217Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nlet person1: { name: string; age: number } = { name: 'John', age: 20 };\nlet person2: { name: string; age: number } = { name: 'Jane', age: 21 };\nlet person3: { name: string; age: number } = { name: 'Jim', age: 22 };\n\nlet person4: { name: string; age: number } = { name: 'John', age: 20 };\nlet person5: { name: string; age: number } = { name: 'Jane', age: 21 };\nlet person6: { name: string; age: number } = { name: 'Jim', age: 22 };"
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:41.217Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:41.218Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:41.218Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "96b4692d-59e3-44fa-ace2-2ebea4cc5657",
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:41.220Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nlet person1: { name: string; age: number } = { name: 'John', age: 20 };\nlet person2: { name: string; age: number } = { name: 'Jane', age: 21 };\nlet person3: { name: string; age: number } = { name: 'Jim', age: 22 };\n\nlet person4: { name: string; age: number } = { name: 'John', age: 20 };\nlet person5: { name: string; age: number } = { name: 'Jane', age: 21 };\nlet person6: { name: string; age: number } = { name: 'Jim', age: 22 };"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "96b4692d-59e3-44fa-ace2-2ebea4cc5657",
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:41.220Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "96b4692d-59e3-44fa-ace2-2ebea4cc5657",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-18T11:32:41.220Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "b3f9ac6e-0388-4598-ab15-7db5cf8d8b7c",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/arktsType.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/arktsType.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/arktsType.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 53,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 54,
+      "monotonicallyIncreasingSuggestionId": 197,
+      "range": {
+        "startLineNumber": 9,
+        "startColumn": 1,
+        "endLineNumberInclusive": 10,
+        "endColumn": 40
+      },
+      "replaceText": "\nlet pixelMap: PixelMap = new PixelMap();\n\nlet image8: Image = new Image(image1);\n\nlet image9: Image = new Image(image2);\n\n",
+      "originalText": "\nlet pixelMap: PixelMap = new PixelMap()",
+      "startingSuggestionRange": {
+        "startLineNumber": 9,
+        "startColumn": 1,
+        "endLineNumberInclusive": 10,
+        "endColumn": 40
+      },
+      "diffText": "\nlet pixelMap: PixelMap = new PixelMap();\n\nlet image8: Image = new Image(image1);\n\nlet image9: Image = new Image(image2);\n\n",
+      "fullOriginalText": "\nlet pixelMap: PixelMap = new PixelMap()",
+      "suggestionTriggerTime": 1742297560392.7002,
+      "greens": [],
+      "source": "typing",
+      "requestId": "f3c943d4-c27f-42ea-bfa5-d3655e0d248c",
+      "selection": {
+        "startLineNumber": 9,
+        "startColumn": 1,
+        "endLineNumberInclusive": 10,
+        "endColumn": 8
+      },
+      "fusedCursorPredictionId": "e86296cf-38ea-47ba-b511-21e04db7386b",
+      "undoRedoGroup": {
+        "id": 200,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "1bf9e963-d181-455b-a25f-cd5ef823a193",
+    "timestamp": "2025-03-18T11:32:42.136Z"
+  }
+]
