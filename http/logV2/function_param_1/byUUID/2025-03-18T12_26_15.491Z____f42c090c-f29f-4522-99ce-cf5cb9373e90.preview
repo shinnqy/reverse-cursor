@@ -1,0 +1,67 @@
+{"line":20,"column":1}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+function greet(name: string) {
+    return `Hello, ${name}!`;
+}
+
+greet('John');
+greet('Jane');
+
+interface Person {
+    name: string;
+    age: number;
+}
+
+function printPerson(person: Person) {
+    console.log(person);
+}
+
+printPerson({ name: 'John', age: 20 });
+printPerson({ name: 'Jane', age: 21 });
+
+
+f[ToFill]
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+printPerson({ name: 'Jane', age: 21 });
+
+
+function add(a: number, b: number) {
+
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+function greet(name: string) {
+    return `Hello, ${name}!`;
+}
+
+greet('John');
+greet('Jane');
+
+interface Person {
+    name: string;
+    age: number;
+}
+
+function printPerson(person: Person) {
+    console.log(person);
+}
+
+printPerson({ name: 'John', age: 20 });
+printPerson({ name: 'Jane', age: 21 });
+
+
+function add(a: number, b: number) {
+
+
+-------------------------------[                   fullText                  ]--------------------------------
+printPerson({ name: 'Jane', age: 21 });
+
+
+function add(a: number, b: number) {
+    return a + b;
+}
+
+add(1, 2);
+add(1, '2');
+

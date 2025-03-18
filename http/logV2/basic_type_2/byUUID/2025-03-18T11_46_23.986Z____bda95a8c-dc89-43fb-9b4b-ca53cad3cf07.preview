@@ -1,0 +1,66 @@
+{"line":46,"column":0}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+let user1 = {
+    name: 'John',
+    age: 20,
+    gender: 'male',
+    email: 'john@example.com',
+    phone: '1234567890',
+}
+
+user1.name;
+user1.age;
+user1.gender;
+user1.email;
+user1.phone;
+
+let company1 = {
+    name: 'Google',
+    address: '123 Main St, Anytown, USA',
+    employees: [user1],
+}
+
+company1.employees[0].name;
+
+let dynamicKey = 'name';
+let user2 = {
+    [dynamicKey]: 'John',
+}
+
+user2.name;
+
+type Point = {
+    x: number;
+    y: number;
+}
+
+let point1: Point = {
+    x: 10,
+    y: 20,
+}
+
+point1.x;
+point1.y;
+
+interface Animal {
+    name: string;
+    age: number;
+}
+[ToFill]
+let dog: Animal = {
+    name: 'Dog',
+    age: 10,
+}
+
+dog.name;
+dog.age;
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+}
+
+let dog: Animal = {
+    name: 'Dog',
+    age: 10,
+}

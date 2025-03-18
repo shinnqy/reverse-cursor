@@ -1,0 +1,81 @@
+You're an expert in ArkTS. Your task is to help the user update the code around current cursor position.
+
+## Recent Actions
+Here is what the user has been doing from the earliest to the latest:
+
+File: entry/src/main/ets/utils/basicType.ets
+added the code `let a: number = 1;` in line 1
+added the code `let b: string = '1';` in line 2
+added the code `let c: boolean = true;` in line 3
+added the code `let d: any = '1';` in line 4
+added the code `let e: void = undefined;` in line 5
+added the code `let f: null = null;` in line 6
+added the code `let g: undefined = undefined;` in line 7
+
+deleted the code `let a: number = 1;` in line 1
+deleted the code `let b: string = '1';` in line 2
+deleted the code `let c: boolean = true;` in line 3
+deleted the code `let d: any = '1';` in line 4
+deleted the code `let e: void = undefined;` in line 5
+deleted the code `let f: null = null;` in line 6
+deleted the code `let g: undefined = undefined;` in line 7
+added the code `let str: string = '123';` in line 1
+added the code `str.split('');` in line 2
+
+deleted the code `let str: string = '123';` in line 1
+deleted the code `str.split('');` in line 2
+added the code `let str1: string = '123';` in line 1
+added the code `str1.sptr2;` in line 2
+added the code `` in line 3
+added the code `let num1: number = 123;` in line 4
+added the code `let num2: number = 456;` in line 5
+added the code `let num3: number = num1 + num2;` in line 6
+
+deleted the code `str1.sptr2;` in line 2
+added the code `let str2: string = '456';` in line 2
+added the code `let str3: string = str1 + str2;` in line 3
+
+deleted the code `let str2: string = '456';` in line 2
+deleted the code `let str3: string = str1 + str2;` in line 3
+added the code `str1.split('');` in line 2
+deleted the code `let num2: number = 456;` in line 6
+deleted the code `let num3: number = num1 + num2;` in line 7
+added the code `num1.toString();` in line 5
+added the code `` in line 6
+added the code `let bool1: boolean = true;` in line 7
+added the code `bool1.toString();` in line 8
+
+deleted the code `let num1: number = 123;` in line 4
+deleted the code `num1.toString();` in line 5
+deleted the code `` in line 6
+deleted the code `let bool1: boolean = true;` in line 7
+deleted the code `bool1.toString();` in line 8
+added the code `let str2: string = `Tem`` in line 4
+
+
+## Current Code
+Here is the current code file path:
+entry/src/main/ets/utils/basicType.ets
+
+Here is the current code around the cursor position:
+
+```
+<|editable_region_start|>
+let str1: string = '123';
+str1.split('');
+
+let str2: string = `Tem<|current_cursor_position|>`
+<|editable_region_end|>
+```
+
+## Task
+Rewrite the code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> according to the following requirements:
+1. Enforce code format strictly matching existing code style.
+2. Propagate naming convention changes to all related cases
+3. Preserve original functionality
+4. Apply changes to entire code regardless of cursor position
+5. Focus on code after cursor position at <|current_cursor_position|>
+
+# Output Format
+Return ONLY the rewritten code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> without any other words.
+Never use markdown formatting like ```. Return raw text only.

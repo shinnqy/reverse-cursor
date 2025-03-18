@@ -1,0 +1,396 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "56707393-6389-4fbe-b782-0af21164ceb9",
+    "timestamp": "2025-03-18T11:32:31.697Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/basicType.ets",
+          "diffHistory": [
+            "1+|let a: number = 1;\n2+|let b: string = '1';\n3+|let c: boolean = true;\n4+|let d: any = '1';\n5+|let e: void = undefined;\n6+|let f: null = null;\n7+|let g: undefined = undefined;\n",
+            "1-|let a: number = 1;\n2-|let b: string = '1';\n3-|let c: boolean = true;\n4-|let d: any = '1';\n5-|let e: void = undefined;\n6-|let f: null = null;\n7-|let g: undefined = undefined;\n1+|let str: string = '123';\n2+|str.split('');\n",
+            "1-|let str: string = '123';\n2-|str.split('');\n1+|let str1: string = '123';\n2+|str1.sptr2;\n3+|\n4+|let num1: number = 123;\n5+|let num2: number = 456;\n6+|let num3: number = num1 + num2;\n",
+            "2-|str1.sptr2;\n2+|let str2: string = '456';\n3+|let str3: string = str1 + str2;\n",
+            "2-|let str2: string = '456';\n3-|let str3: string = str1 + str2;\n2+|str1.split('');\n6-|let num2: number = 456;\n7-|let num3: number = num1 + num2;\n5+|num1.toString();\n6+|\n7+|let bool1: boolean = true;\n8+|bool1.toString();\n",
+            "4+|let str2: string = `Template string ${str1}`;\n5+|str2.split('');\n6+|\n7+|const str3 = \"Constant string\";\n8+|str3.toLocaleUpperCase();\n9+|\n5-|num1.toString();\n11+|num1.toFixed(2);\n",
+            "13+|let num2: number = 123.456;\n14+|num2.toExponential(2);\n15+|\n",
+            "17-|bool1.toString();\n17+|bool1.toString();\n18+|\n19+|let arr1: Array<number> = [1, 2, 3];\n20+|arr1.push(4);\n21+|\n22+|let arr2: number[] = [1, 2, 3];\n23+|arr2.push(4);\n24+|\n",
+            "21+|arr2.m\n",
+            "25+|arr2.map((item: number) => item * 2);\n27+|let obj1: { name: string; age: number } = { name: 'John', age: 20 };\n28+|obj1.name;\n29+|obj1.age;\n30+|\n31+|\n",
+            "21-|arr2.m\n21+|arr1.map((item: number) => item * 2);\n",
+            "25-|arr2.map((item: number) => item * 2);\n27-|let obj1: { name: string; age: number } = { name: 'John', age: 20 };\n28-|obj1.name;\n29-|obj1.age;\n30-|\n31-|\n",
+            "21-|arr1.map((item: number) => item * 2);\n",
+            "26+|let obj1: { name: string; age: number } = { name: 'John', age: 20 };\n27+|obj1.name;\n28+|obj1.age;\n29+|\n30+|let obj2: { name: string; age: number } = { name: 'John', age: 20 };\n31+|obj2.name;\n32+|obj2.age;\n",
+            "25-|let obj1: { name: string; age: number } = { name: 'John', age: 20 };\n26-|obj1.name;\n27-|obj1.age;\n28-|\n29-|let obj2: { name: string; age: number } = { name: 'John', age: 20 };\n30-|obj2.name;\n31-|obj2.age;\n",
+            "21+|arr1.map((item: number) => item * 2);\n",
+            "25-|\n25+|arr2.map((item: number) => item * 2);\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/utils/arktsType.ets",
+          "diffHistory": [
+            "1+|let image1: Resource = $r('app.media.image1');\n2+|let image2: Resource = $r('app.media.image2');\n3+|let image3: Resource = $r('app.media.image3');\n4+|let image4: Resource = $r('app.media.image4');\n5+|let image5: Resource = $r('app.media.image5');\n6+|let image6: Resource = $r('app.media.image6');\n",
+            "7+|\n8+|const image7: Resource = $r('app.media.image7');\n9+|const image8: Resource = $r('app.media.image8');\n10+|const image9: Resource = $r('app.media.image9');\n11+|const image10: Resource = $r('app.media.image10');\n12+|\n13+|let image11: Resource = $r('app.media.image11');\n14+|\n",
+            "15+|let image12: Resource = $r('app.media.image12');\n16+|let image13: Resource = $r('app.media.image13');\n17+|let image14: Resource = $r('app.media.image14');\n18+|let image15: Resource = $r('app.media.image15');\n19+|\n20+|\n",
+            "15-|let image12: Resource = $r('app.media.image12');\n16-|let image13: Resource = $r('app.media.image13');\n17-|let image14: Resource = $r('app.media.image14');\n18-|let image15: Resource = $r('app.media.image15');\n19-|\n20-|\n15+|let image12: Resource = $r('app.media.image12');\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/arktsType.ets",
+        "contents": "let image1: Resource = $r('app.media.image1');\nlet image2: Resource = $r('app.media.image2');\nlet image3: Resource = $r('app.media.image3');\nlet image4: Resource = $r('app.media.image4');\nlet image5: Resource = $r('app.media.image5');\nlet image6: Resource = $r('app.media.image6');\n\nconst image7: Resource = $r('app.media.image7');\nconst image8: Resource = $r('app.media.image8');\nconst image9: Resource = $r('app.media.image9');\nconst image10: Resource = $r('app.media.image10');\n\nlet image11: Resource = $r('app.media.image11');\n\nlet image12: Resource = $r('app.media.image12');",
+        "cursorPosition": {
+          "line": 14,
+          "column": 48
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 43,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/pages/AboutMe.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 13
+            }
+          ],
+          "lastViewedAt": 1742296854734
+        },
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/utils/basicType.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            8
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 8,
+              "endLineNumberInclusive": 26
+            }
+          ],
+          "lastViewedAt": 1742297476629
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742297551735,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.2998046875,
+      "timeAtRequestSend": 1742297551735
+    },
+    "generateUuid": "56707393-6389-4fbe-b782-0af21164ceb9",
+    "timestamp": "2025-03-18T11:32:31.738Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "56707393-6389-4fbe-b782-0af21164ceb9",
+    "timestamp": "2025-03-18T11:32:32.158Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nlet image11: Resource = $r('app.media.image11');\n\nlet image12: Resource = $r('app.media.image12');\n",
+      "rangeToReplace": {
+        "startLineNumber": 12,
+        "endLineNumberInclusive": 15
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "56707393-6389-4fbe-b782-0af21164ceb9",
+    "timestamp": "2025-03-18T11:32:32.160Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "let image13"
+    },
+    "generationUUID": "56707393-6389-4fbe-b782-0af21164ceb9",
+    "timestamp": "2025-03-18T11:32:32.179Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "56707393-6389-4fbe-b782-0af21164ceb9",
+    "timestamp": "2025-03-18T11:32:32.190Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Resource = $r('app.media"
+    },
+    "generationUUID": "56707393-6389-4fbe-b782-0af21164ceb9",
+    "timestamp": "2025-03-18T11:32:32.204Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ".image13"
+    },
+    "generationUUID": "56707393-6389-4fbe-b782-0af21164ceb9",
+    "timestamp": "2025-03-18T11:32:32.213Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "');"
+    },
+    "generationUUID": "56707393-6389-4fbe-b782-0af21164ceb9",
+    "timestamp": "2025-03-18T11:32:32.228Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nlet"
+    },
+    "generationUUID": "56707393-6389-4fbe-b782-0af21164ceb9",
+    "timestamp": "2025-03-18T11:32:32.238Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " image14"
+    },
+    "generationUUID": "56707393-6389-4fbe-b782-0af21164ceb9",
+    "timestamp": "2025-03-18T11:32:32.251Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "56707393-6389-4fbe-b782-0af21164ceb9",
+    "timestamp": "2025-03-18T11:32:32.265Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Resource = $r('app.media"
+    },
+    "generationUUID": "56707393-6389-4fbe-b782-0af21164ceb9",
+    "timestamp": "2025-03-18T11:32:32.277Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "56707393-6389-4fbe-b782-0af21164ceb9",
+    "timestamp": "2025-03-18T11:32:32.291Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "image14"
+    },
+    "generationUUID": "56707393-6389-4fbe-b782-0af21164ceb9",
+    "timestamp": "2025-03-18T11:32:32.327Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "');"
+    },
+    "generationUUID": "56707393-6389-4fbe-b782-0af21164ceb9",
+    "timestamp": "2025-03-18T11:32:32.353Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nlet"
+    },
+    "generationUUID": "56707393-6389-4fbe-b782-0af21164ceb9",
+    "timestamp": "2025-03-18T11:32:32.357Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " image"
+    },
+    "generationUUID": "56707393-6389-4fbe-b782-0af21164ceb9",
+    "timestamp": "2025-03-18T11:32:32.358Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "15"
+    },
+    "generationUUID": "56707393-6389-4fbe-b782-0af21164ceb9",
+    "timestamp": "2025-03-18T11:32:32.361Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": Resource = $r('app."
+    },
+    "generationUUID": "56707393-6389-4fbe-b782-0af21164ceb9",
+    "timestamp": "2025-03-18T11:32:32.361Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "media"
+    },
+    "generationUUID": "56707393-6389-4fbe-b782-0af21164ceb9",
+    "timestamp": "2025-03-18T11:32:32.376Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ".image15"
+    },
+    "generationUUID": "56707393-6389-4fbe-b782-0af21164ceb9",
+    "timestamp": "2025-03-18T11:32:32.384Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "');"
+    },
+    "generationUUID": "56707393-6389-4fbe-b782-0af21164ceb9",
+    "timestamp": "2025-03-18T11:32:32.397Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "56707393-6389-4fbe-b782-0af21164ceb9",
+    "timestamp": "2025-03-18T11:32:32.422Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "56707393-6389-4fbe-b782-0af21164ceb9",
+    "timestamp": "2025-03-18T11:32:32.422Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "56707393-6389-4fbe-b782-0af21164ceb9",
+    "timestamp": "2025-03-18T11:32:32.472Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "56707393-6389-4fbe-b782-0af21164ceb9",
+    "timestamp": "2025-03-18T11:32:32.472Z"
+  },
+  {
+    "firstChunkValue": "\nlet image11: Resource = $r('app.media.image11');\n\nlet image12: Resource = $r('app.media.image12');\nlet image13: Resource = $r('app.media.image13');\nlet image14: Resource = $r('app.media.image14');\nlet image15: Resource = $r('app.media.image15');\n\n\n",
+    "generationUUID": "56707393-6389-4fbe-b782-0af21164ceb9",
+    "timestamp": "2025-03-18T11:32:32.473Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nlet image11: Resource = $r('app.media.image11');\n\nlet image12: Resource = $r('app.media.image12');\nlet image13: Resource = $r('app.media.image13');\nlet image14: Resource = $r('app.media.image14');\nlet image15: Resource = $r('app.media.image15');\n\n\n"
+    },
+    "generationUUID": "56707393-6389-4fbe-b782-0af21164ceb9",
+    "timestamp": "2025-03-18T11:32:32.485Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "fa5bb3fb-c550-46ec-a5cc-13b2bb4224c8",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/arktsType.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/arktsType.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/arktsType.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 43,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 43,
+      "monotonicallyIncreasingSuggestionId": 192,
+      "range": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 15,
+        "endColumn": 49
+      },
+      "replaceText": "\nlet image11: Resource = $r('app.media.image11');\n\nlet image12: Resource = $r('app.media.image12');\nlet image13: Resource = $r('app.media.image13');\nlet image14: Resource = $r('app.media.image14');\nlet image15: Resource = $r('app.media.image15');\n\n\n",
+      "originalText": "\nlet image11: Resource = $r('app.media.image11');\n\nlet image12: Resource = $r('app.media.image12');",
+      "startingSuggestionRange": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 15,
+        "endColumn": 49
+      },
+      "diffText": "\nlet image11: Resource = $r('app.media.image11');\n\nlet image12: Resource = $r('app.media.image12');\nlet image13: Resource = $r('app.media.image13');\nlet image14: Resource = $r('app.media.image14');\nlet image15: Resource = $r('app.media.image15');\n\n\n",
+      "fullOriginalText": "\nlet image11: Resource = $r('app.media.image11');\n\nlet image12: Resource = $r('app.media.image12');",
+      "suggestionTriggerTime": 1742297551688.2002,
+      "greens": [],
+      "source": "typing",
+      "requestId": "56707393-6389-4fbe-b782-0af21164ceb9",
+      "selection": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 15,
+        "endColumn": 49
+      },
+      "fusedCursorPredictionId": "2e2bf270-3bd1-4b98-a862-6d998b68a9c0",
+      "undoRedoGroup": {
+        "id": 195,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "56707393-6389-4fbe-b782-0af21164ceb9",
+    "timestamp": "2025-03-18T11:32:32.485Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "2e2bf270-3bd1-4b98-a862-6d998b68a9c0",
+    "generationUUID": "56707393-6389-4fbe-b782-0af21164ceb9",
+    "timestamp": "2025-03-18T11:32:32.498Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nlet image11: Resource = $r('app.media.image11');\n\nlet image12: Resource = $r('app.media.image12');\nlet image13: Resource = $r('app.media.image13');\nlet image14: Resource = $r('app.media.image14');\nlet image15: Resource = $r('app.media.image15');\n\n\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "2e2bf270-3bd1-4b98-a862-6d998b68a9c0",
+    "generationUUID": "56707393-6389-4fbe-b782-0af21164ceb9",
+    "timestamp": "2025-03-18T11:32:32.498Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "2e2bf270-3bd1-4b98-a862-6d998b68a9c0",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-18T11:32:32.498Z"
+  }
+]

@@ -1,0 +1,44 @@
+{"line":5,"column":1}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+function greet(name: string) {
+    return `Hello, ${name}!`;
+}
+
+greet('John');
+g[ToFill]
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+greet('John');
+greet('Jane');
+
+
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+function greet(name: string) {
+    return `Hello, ${name}!`;
+}
+
+greet('John');
+greet('Jane');
+
+
+-------------------------------[                   fullText                  ]--------------------------------
+greet('John');
+greet('Jane');
+
+
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/function.ets",
+  "lineNumberOneIndexed": 1,
+  "text": "function greet(name: string) {\nreturn `Hello, ${name}!`;\n}\n\ngreet('John');",
+  "shouldRetriggerCpp": true
+}
+--------------------------------[        displayedFusedCursorPrediction       ]---------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/function.ets",
+  "lineNumberOneIndexed": 1,
+  "text": "function greet(name: string) {\nreturn `Hello, ${name}!`;\n}\n\ngreet('John');",
+  "shouldRetriggerCpp": true
+}
