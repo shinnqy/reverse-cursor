@@ -1,0 +1,32 @@
+{"line":2,"column":1}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+l[ToFill]
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+let color: Color = "red";
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+-------------------------------[                   fullText                  ]--------------------------------
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+}
+-------------------------------[         replacedContentsWithFullText         ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+}

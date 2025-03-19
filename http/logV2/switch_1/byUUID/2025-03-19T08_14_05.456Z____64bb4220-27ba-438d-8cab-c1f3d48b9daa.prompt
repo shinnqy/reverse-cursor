@@ -1,0 +1,173 @@
+You're an expert in ArkTS. Your task is to help the user update the code around current cursor position.
+
+## Recent Actions
+Here is what the user has been doing from the earliest to the latest:
+
+File: entry/src/main/ets/utils/switch1.ets
+added the code `type Color = "red" ` in line 1
+added the code `` in line 2
+added the code `let color: Color = "red";` in line 3
+added the code `` in line 4
+added the code `switch (color) {` in line 5
+added the code `    case "red":` in line 6
+added the code `        console.log("red");` in line 7
+added the code `        break;` in line 8
+added the code `}` in line 9
+
+deleted the code `        ` in line 9
+deleted the code `}` in line 10
+added the code `    case "blue":` in line 9
+added the code `}` in line 10
+
+added the code `        console.log("blue");` in line 10
+added the code `        break;` in line 11
+added the code `    case "green":` in line 12
+added the code `        console.log("green");` in line 13
+added the code `        break;` in line 14
+added the code `` in line 16
+added the code `enum Direction {}` in line 17
+added the code `` in line 18
+
+deleted the code `enum Direction {}` in line 17
+added the code `enum Direction {` in line 17
+added the code `    Up,` in line 18
+added the code `    Down,` in line 19
+added the code `    Left,` in line 20
+added the code `    Right,` in line 21
+added the code `}` in line 22
+added the code `let dir: Direction = Direction.Up;` in line 23
+
+added the code `switch (dir) {` in line 25
+added the code `    case Direction.Up:` in line 26
+added the code `        console.log("up");` in line 27
+added the code `        break;` in line 28
+added the code `}` in line 29
+added the code `` in line 30
+
+added the code `    case Direction.Down:` in line 29
+added the code `        console.log("down");` in line 30
+added the code `        break;` in line 31
+added the code `    case Direction.Left:` in line 32
+added the code `        console.log("left");` in line 33
+added the code `        break;` in line 34
+added the code `        ` in line 35
+
+added the code `interface Square {` in line 38
+added the code `    kind: "square";` in line 39
+added the code `    size: number;` in line 40
+added the code `}` in line 41
+added the code `` in line 42
+added the code `interface Rectangle {` in line 43
+added the code `    ` in line 44
+added the code `}` in line 45
+
+added the code `interface Circle {` in line 42
+added the code `    kind: "circle";` in line 43
+added the code `    radius: number;` in line 44
+added the code `}` in line 45
+deleted the code `interface Rectangle {` in line 43
+deleted the code `    ` in line 44
+deleted the code `}` in line 45
+
+deleted the code `` in line 47
+added the code `function getArea()` in line 47
+
+added the code `type Shape = Square ` in line 47
+added the code `` in line 48
+
+deleted the code `function getArea()` in line 49
+added the code `function getArea(shape: Shape) {` in line 49
+added the code `    switch (shape.kind) {` in line 50
+added the code `        case "square":` in line 51
+added the code `            return shape.size * shape.size;` in line 52
+added the code `        case "circle":` in line 53
+added the code `            return Math.PI * shape.radius ** 2;` in line 54
+added the code `    }` in line 55
+added the code `}` in line 56
+added the code `` in line 57
+added the code `let category = "A";` in line 58
+added the code `let subCategory = 1;` in line 59
+
+
+## Current Code
+Here is the current code file path:
+entry/src/main/ets/utils/switch1.ets
+
+Here is the current code around the cursor position:
+
+```
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type Shape = Square | Circle;
+
+function getArea(shape: Shape) {
+<|editable_region_start|>
+    switch (shape.kind) {
+        case "square":
+            return shape.size * shape.size;
+        case "circle":
+            return Math.PI * shape.radius ** 2;
+    }
+}
+
+let category = "A";
+let subCategory = 1;
+<|current_cursor_position|>
+<|editable_region_end|>
+```
+
+## Task
+Rewrite the code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> according to the following requirements:
+1. Enforce code format strictly matching existing code style.
+2. Propagate naming convention changes to all related cases
+3. Preserve original functionality
+4. Apply changes to entire code regardless of cursor position
+5. Focus on code after cursor position at <|current_cursor_position|>
+
+# Output Format
+Return ONLY the rewritten code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> without any other words.
+Never use markdown formatting like ```. Return raw text only.

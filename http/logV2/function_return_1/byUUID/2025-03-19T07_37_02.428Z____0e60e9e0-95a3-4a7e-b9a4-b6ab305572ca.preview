@@ -1,0 +1,39 @@
+{"line":21,"column":11}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+function add(a: number, b: number): number {
+    return a + b;
+}
+
+function subtract(a: number, b: number): number {
+    return a - b;
+}
+
+let sum = add(1, 2);
+
+interface User {
+    name: string;
+    age: number;
+}
+
+function getUser(name: string, age: number): User {
+    return { name, age };
+}
+
+let user = getUser("John", 30);
+
+function wr[ToFill]
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+function wrap(func: (...args: any[]) => any) {
+
+-------------------------------[                   fullText                  ]--------------------------------
+
+function wrap(func: (...args: any[]) => any) {
+    return function(...args: any[]) {
+        console.log("Calling function:", func.name);
+        return func(...args);
+    };
+}
+

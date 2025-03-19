@@ -1,0 +1,271 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "aa0f4bf3-5a60-4eba-bf30-0067a93e23b5",
+    "timestamp": "2025-03-19T08:13:48.895Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/switch1.ets",
+          "diffHistory": [
+            "1+|type Color = \"red\" | \"blue\" | \"green\";\n2+|\n3+|let color: Color = \"red\";\n4+|\n5+|switch (color) {\n6+|    case \"red\":\n7+|        console.log(\"red\");\n8+|        break;\n9+|}\n",
+            "9-|        \n10-|}\n9+|    case \"blue\":\n10+|}\n",
+            "10+|        console.log(\"blue\");\n11+|        break;\n12+|    case \"green\":\n13+|        console.log(\"green\");\n14+|        break;\n16+|\n17+|enum Direction {}\n18+|\n",
+            "17-|enum Direction {}\n17+|enum Direction {\n18+|    Up,\n19+|    Down,\n20+|    Left,\n21+|    Right,\n22+|}\n23+|let dir: Direction = Direction.Up;\n",
+            "25+|switch (dir) {\n26+|    case Direction.Up:\n27+|        console.log(\"up\");\n28+|        break;\n29+|}\n30+|\n",
+            "29+|    case Direction.Down:\n30+|        console.log(\"down\");\n31+|        break;\n32+|    case Direction.Left:\n33+|        console.log(\"left\");\n34+|        break;\n35+|        \n",
+            "38+|interface Square {\n39+|    kind: \"square\";\n40+|    size: number;\n41+|}\n42+|\n43+|interface Rectangle {\n44+|    \n45+|}\n",
+            "42+|interface Circle {\n43+|    kind: \"circle\";\n44+|    radius: number;\n45+|}\n43-|interface Rectangle {\n44-|    \n45-|}\n",
+            "47-|\n47+|function getArea()\n",
+            "47+|type Shape = Square | Circle;\n48+|\n",
+            "49-|function getArea()\n49+|function getArea(shape: Shape) {\n50+|    switch (shape.kind) {\n51+|        case \"square\":\n52+|            return shape.size * shape.size;\n53+|        case \"circle\":\n54+|            return Math.PI * shape.radius ** 2;\n55+|    }\n56+|}\n57+|\n58+|let ca\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/switch1.ets",
+        "contents": "type Color = \"red\" | \"blue\" | \"green\";\n\nlet color: Color = \"red\";\n\nswitch (color) {\n    case \"red\":\n        console.log(\"red\");\n        break;\n    case \"blue\":\n        console.log(\"blue\");\n        break;\n    case \"green\":\n        console.log(\"green\");\n        break;\n}\n\nenum Direction {\n    Up,\n    Down,\n    Left,\n    Right,\n}\nlet dir: Direction = Direction.Up;\n\nswitch (dir) {\n    case Direction.Up:\n        console.log(\"up\");\n        break;\n    case Direction.Down:\n        console.log(\"down\");\n        break;\n    case Direction.Left:\n        console.log(\"left\");\n        break;\n\n}\n\ninterface Square {\n    kind: \"square\";\n    size: number;\n}\ninterface Circle {\n    kind: \"circle\";\n    radius: number;\n}\n\ntype Shape = Square | Circle;\n\nfunction getArea(shape: Shape) {\n    switch (shape.kind) {\n        case \"square\":\n            return shape.size * shape.size;\n        case \"circle\":\n            return Math.PI * shape.radius ** 2;\n    }\n}\n\nlet ca",
+        "cursorPosition": {
+          "line": 57,
+          "column": 6
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 144,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742372028935,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 54.89990234375,
+      "timeAtRequestSend": 1742372028935
+    },
+    "generateUuid": "aa0f4bf3-5a60-4eba-bf30-0067a93e23b5",
+    "timestamp": "2025-03-19T08:13:48.939Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "aa0f4bf3-5a60-4eba-bf30-0067a93e23b5",
+    "timestamp": "2025-03-19T08:13:49.305Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nlet circle",
+      "rangeToReplace": {
+        "startLineNumber": 57,
+        "endLineNumberInclusive": 58
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "aa0f4bf3-5a60-4eba-bf30-0067a93e23b5",
+    "timestamp": "2025-03-19T08:13:49.306Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "aa0f4bf3-5a60-4eba-bf30-0067a93e23b5",
+    "timestamp": "2025-03-19T08:13:49.335Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "aa0f4bf3-5a60-4eba-bf30-0067a93e23b5",
+    "timestamp": "2025-03-19T08:13:49.344Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " kind"
+    },
+    "generationUUID": "aa0f4bf3-5a60-4eba-bf30-0067a93e23b5",
+    "timestamp": "2025-03-19T08:13:49.354Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": \"circle\","
+    },
+    "generationUUID": "aa0f4bf3-5a60-4eba-bf30-0067a93e23b5",
+    "timestamp": "2025-03-19T08:13:49.367Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " radius"
+    },
+    "generationUUID": "aa0f4bf3-5a60-4eba-bf30-0067a93e23b5",
+    "timestamp": "2025-03-19T08:13:49.378Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": "
+    },
+    "generationUUID": "aa0f4bf3-5a60-4eba-bf30-0067a93e23b5",
+    "timestamp": "2025-03-19T08:13:49.388Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "1"
+    },
+    "generationUUID": "aa0f4bf3-5a60-4eba-bf30-0067a93e23b5",
+    "timestamp": "2025-03-19T08:13:49.399Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "0"
+    },
+    "generationUUID": "aa0f4bf3-5a60-4eba-bf30-0067a93e23b5",
+    "timestamp": "2025-03-19T08:13:49.410Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " };"
+    },
+    "generationUUID": "aa0f4bf3-5a60-4eba-bf30-0067a93e23b5",
+    "timestamp": "2025-03-19T08:13:49.425Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "aa0f4bf3-5a60-4eba-bf30-0067a93e23b5",
+    "timestamp": "2025-03-19T08:13:49.428Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "console"
+    },
+    "generationUUID": "aa0f4bf3-5a60-4eba-bf30-0067a93e23b5",
+    "timestamp": "2025-03-19T08:13:49.440Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "aa0f4bf3-5a60-4eba-bf30-0067a93e23b5",
+    "timestamp": "2025-03-19T08:13:49.451Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "log"
+    },
+    "generationUUID": "aa0f4bf3-5a60-4eba-bf30-0067a93e23b5",
+    "timestamp": "2025-03-19T08:13:49.464Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "("
+    },
+    "generationUUID": "aa0f4bf3-5a60-4eba-bf30-0067a93e23b5",
+    "timestamp": "2025-03-19T08:13:49.473Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "get"
+    },
+    "generationUUID": "aa0f4bf3-5a60-4eba-bf30-0067a93e23b5",
+    "timestamp": "2025-03-19T08:13:49.485Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Area"
+    },
+    "generationUUID": "aa0f4bf3-5a60-4eba-bf30-0067a93e23b5",
+    "timestamp": "2025-03-19T08:13:49.501Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "(circle"
+    },
+    "generationUUID": "aa0f4bf3-5a60-4eba-bf30-0067a93e23b5",
+    "timestamp": "2025-03-19T08:13:49.506Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "));"
+    },
+    "generationUUID": "aa0f4bf3-5a60-4eba-bf30-0067a93e23b5",
+    "timestamp": "2025-03-19T08:13:49.528Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "aa0f4bf3-5a60-4eba-bf30-0067a93e23b5",
+    "timestamp": "2025-03-19T08:13:49.528Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "aa0f4bf3-5a60-4eba-bf30-0067a93e23b5",
+    "timestamp": "2025-03-19T08:13:49.558Z"
+  },
+  {
+    "firstChunkValue": "\nlet circle = { kind: \"circle\", radius: 10 };\nconsole.log(getArea(circle));\n",
+    "generationUUID": "aa0f4bf3-5a60-4eba-bf30-0067a93e23b5",
+    "timestamp": "2025-03-19T08:13:49.562Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nlet circle = { kind: \"circle\", radius: 10 };\nconsole.log(getArea(circle));\n"
+    },
+    "generationUUID": "aa0f4bf3-5a60-4eba-bf30-0067a93e23b5",
+    "timestamp": "2025-03-19T08:13:49.563Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "293ea8e2-c7e7-436f-8647-4e3da2c9cfaa",
+    "generationUUID": "aa0f4bf3-5a60-4eba-bf30-0067a93e23b5",
+    "timestamp": "2025-03-19T08:13:49.567Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nlet circle = { kind: \"circle\", radius: 10 };\nconsole.log(getArea(circle));\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "293ea8e2-c7e7-436f-8647-4e3da2c9cfaa",
+    "generationUUID": "aa0f4bf3-5a60-4eba-bf30-0067a93e23b5",
+    "timestamp": "2025-03-19T08:13:49.568Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "293ea8e2-c7e7-436f-8647-4e3da2c9cfaa",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T08:13:49.568Z"
+  }
+]

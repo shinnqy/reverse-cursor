@@ -1,0 +1,635 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "6646d6ee-0841-4456-82ff-54ccce792f97",
+    "timestamp": "2025-03-19T07:39:05.496Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/functionReturn.ets",
+          "diffHistory": [
+            "1+|function add(a: number, b: number): number {\n2+|    return a + b;\n3+|}\n4+|\n5+|function subtract(a: number, b: number): number {\n6+|    return a - b;\n7+|}\n8+|\n9+|let sum = add(1, 2);\n10+|\n11+|function getUser(name: string, age: number): { name: string, age: number } {\n12+|    return { name, age };\n13+|}\n14+|\n15+|let user = getUser(\"John\", 30);\n16+|\n17+|  \n",
+            "11-|function getUser(name: string, age: number): { name: string, age: number } {\n11+|interface User {\n12+|    name: string;\n13+|    age: number;\n14+|}\n15+|\n16+|function getUser(name: string, age: number): User {\n",
+            "22+|function wrapValue<T>(value: T): {data {\n23+|    return { data: value };\n24+|}\n25+|\n26+|let wrappedValue = wrapValue(10);\n27+|\n28+|\n",
+            "22-|function wrapValue<T>(value: T): {data {\n22+|function wrapValue<T>(value: T): {data: T}   {\n",
+            "28+|let wrappedString = wrapValue(\"Hello\");\n30+|let wrappedBoolean = wrapValue(true);\n31+|\n32+|let wrappedArray = wrapValue([1, 2, 3]);\n33+|\n34+|\n",
+            "22-|function wrapValue<T>(value: T): {data: T}   {\n22+|interface Wrapper<T> {\n23+|    data: T;\n24+|}\n25+|\n26+|function wrapValue<T>(value: T): Wrapper<T> {\n",
+            "38-|\n38+|async function fetchData(): Promise<{ item}>\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/functionReturn.ets",
+        "contents": "function add(a: number, b: number): number {\n    return a + b;\n}\n\nfunction subtract(a: number, b: number): number {\n    return a - b;\n}\n\nlet sum = add(1, 2);\n\ninterface User {\n    name: string;\n    age: number;\n}\n\nfunction getUser(name: string, age: number): User {\n    return { name, age };\n}\n\nlet user = getUser(\"John\", 30);\n\ninterface Wrapper<T> {\n    data: T;\n}\n\nfunction wrapValue<T>(value: T): Wrapper<T> {\n    return { data: value };\n}\n\nlet wrappedValue = wrapValue(10);\n\nlet wrappedString = wrapValue(\"Hello\");\n\nlet wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ item}>\n",
+        "cursorPosition": {
+          "line": 37,
+          "column": 42
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 163,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742369945544,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.699951171875,
+      "timeAtRequestSend": 1742369945544
+    },
+    "generateUuid": "6646d6ee-0841-4456-82ff-54ccce792f97",
+    "timestamp": "2025-03-19T07:39:05.545Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ item:",
+      "rangeToReplace": {
+        "startLineNumber": 34,
+        "endLineNumberInclusive": 39
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "6646d6ee-0841-4456-82ff-54ccce792f97",
+    "timestamp": "2025-03-19T07:39:06.026Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "6646d6ee-0841-4456-82ff-54ccce792f97",
+    "timestamp": "2025-03-19T07:39:06.026Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " string"
+    },
+    "generationUUID": "6646d6ee-0841-4456-82ff-54ccce792f97",
+    "timestamp": "2025-03-19T07:39:06.209Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " }"
+    },
+    "generationUUID": "6646d6ee-0841-4456-82ff-54ccce792f97",
+    "timestamp": "2025-03-19T07:39:06.216Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ">"
+    },
+    "generationUUID": "6646d6ee-0841-4456-82ff-54ccce792f97",
+    "timestamp": "2025-03-19T07:39:06.231Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "6646d6ee-0841-4456-82ff-54ccce792f97",
+    "timestamp": "2025-03-19T07:39:06.247Z"
+  },
+  {
+    "firstChunkValue": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ item: string }> {\n",
+    "generationUUID": "6646d6ee-0841-4456-82ff-54ccce792f97",
+    "timestamp": "2025-03-19T07:39:06.265Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ item: string }> {\n"
+    },
+    "generationUUID": "6646d6ee-0841-4456-82ff-54ccce792f97",
+    "timestamp": "2025-03-19T07:39:06.267Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "1b4cea2c-4b75-41a2-a1a7-be65b9858b98",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 163,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 163,
+      "monotonicallyIncreasingSuggestionId": 136,
+      "range": {
+        "startLineNumber": 34,
+        "startColumn": 1,
+        "endLineNumberInclusive": 39,
+        "endColumn": 1
+      },
+      "replaceText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ item: string }> {\n",
+      "originalText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ item}>\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 34,
+        "startColumn": 1,
+        "endLineNumberInclusive": 39,
+        "endColumn": 1
+      },
+      "diffText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ item: string }> {\n",
+      "fullOriginalText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ item}>\n",
+      "suggestionTriggerTime": 1742369945497.5999,
+      "greens": [],
+      "source": "typing",
+      "requestId": "6646d6ee-0841-4456-82ff-54ccce792f97",
+      "selection": {
+        "startLineNumber": 34,
+        "startColumn": 1,
+        "endLineNumberInclusive": 39,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 136,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 34,
+        "startColumn": 1,
+        "endLineNumber": 39,
+        "endColumn": 1
+      },
+      "trackedText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ item:}>\n"
+    },
+    "generationUUID": "6646d6ee-0841-4456-82ff-54ccce792f97",
+    "timestamp": "2025-03-19T07:39:06.270Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n    return { item"
+    },
+    "generationUUID": "6646d6ee-0841-4456-82ff-54ccce792f97",
+    "timestamp": "2025-03-19T07:39:06.270Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "6646d6ee-0841-4456-82ff-54ccce792f97",
+    "timestamp": "2025-03-19T07:39:06.287Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \""
+    },
+    "generationUUID": "6646d6ee-0841-4456-82ff-54ccce792f97",
+    "timestamp": "2025-03-19T07:39:06.288Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Hello"
+    },
+    "generationUUID": "6646d6ee-0841-4456-82ff-54ccce792f97",
+    "timestamp": "2025-03-19T07:39:06.300Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\""
+    },
+    "generationUUID": "6646d6ee-0841-4456-82ff-54ccce792f97",
+    "timestamp": "2025-03-19T07:39:06.312Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " };"
+    },
+    "generationUUID": "6646d6ee-0841-4456-82ff-54ccce792f97",
+    "timestamp": "2025-03-19T07:39:06.325Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n}\n\nlet data"
+    },
+    "generationUUID": "6646d6ee-0841-4456-82ff-54ccce792f97",
+    "timestamp": "2025-03-19T07:39:06.338Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "6646d6ee-0841-4456-82ff-54ccce792f97",
+    "timestamp": "2025-03-19T07:39:06.352Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " await"
+    },
+    "generationUUID": "6646d6ee-0841-4456-82ff-54ccce792f97",
+    "timestamp": "2025-03-19T07:39:06.366Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " fetch"
+    },
+    "generationUUID": "6646d6ee-0841-4456-82ff-54ccce792f97",
+    "timestamp": "2025-03-19T07:39:06.381Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Data();"
+    },
+    "generationUUID": "6646d6ee-0841-4456-82ff-54ccce792f97",
+    "timestamp": "2025-03-19T07:39:06.399Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "6646d6ee-0841-4456-82ff-54ccce792f97",
+    "timestamp": "2025-03-19T07:39:06.413Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "6646d6ee-0841-4456-82ff-54ccce792f97",
+    "timestamp": "2025-03-19T07:39:06.429Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "6646d6ee-0841-4456-82ff-54ccce792f97",
+    "timestamp": "2025-03-19T07:39:06.443Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "6646d6ee-0841-4456-82ff-54ccce792f97",
+    "timestamp": "2025-03-19T07:39:06.465Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "6646d6ee-0841-4456-82ff-54ccce792f97",
+    "timestamp": "2025-03-19T07:39:06.466Z"
+  },
+  {
+    "fullText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ item: string }> {\n    return { item: \"Hello\" };\n}\n\nlet data = await fetchData();\n\n\n",
+    "generationUUID": "6646d6ee-0841-4456-82ff-54ccce792f97",
+    "timestamp": "2025-03-19T07:39:06.485Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ item: string }> {\n"
+    },
+    "fullText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ item: string }> {\n    return { item: \"Hello\" };\n}\n\nlet data = await fetchData();\n\n\n",
+    "generationUUID": "6646d6ee-0841-4456-82ff-54ccce792f97",
+    "timestamp": "2025-03-19T07:39:06.485Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "366a5afc-433a-46a4-bc71-d39256e5b750",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 163,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 165,
+      "monotonicallyIncreasingSuggestionId": 137,
+      "range": {
+        "startLineNumber": 34,
+        "startColumn": 1,
+        "endLineNumberInclusive": 39,
+        "endColumn": 1
+      },
+      "replaceText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ item: string }> {\n    return { item: \"Hello\" };\n}\n\nlet data = await fetchData();\n\n\n",
+      "originalText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ item: string }> {\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 34,
+        "startColumn": 1,
+        "endLineNumberInclusive": 39,
+        "endColumn": 1
+      },
+      "diffText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ item: string }> {\n    return { item: \"Hello\" };\n}\n\nlet data = await fetchData();\n\n\n",
+      "fullOriginalText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ item: string }> {\n",
+      "suggestionTriggerTime": 1742369945497.5999,
+      "greens": [],
+      "source": "typing",
+      "requestId": "6646d6ee-0841-4456-82ff-54ccce792f97",
+      "selection": {
+        "startLineNumber": 34,
+        "startColumn": 1,
+        "endLineNumberInclusive": 39,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "2a2815e8-fa83-44cc-9536-f82328311d33",
+      "undoRedoGroup": {
+        "id": 137,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "6646d6ee-0841-4456-82ff-54ccce792f97",
+    "timestamp": "2025-03-19T07:39:06.487Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "2a2815e8-fa83-44cc-9536-f82328311d33",
+    "generationUUID": "6646d6ee-0841-4456-82ff-54ccce792f97",
+    "timestamp": "2025-03-19T07:39:06.488Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ item: string }> {\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "2a2815e8-fa83-44cc-9536-f82328311d33",
+    "generationUUID": "6646d6ee-0841-4456-82ff-54ccce792f97",
+    "timestamp": "2025-03-19T07:39:06.492Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "2a2815e8-fa83-44cc-9536-f82328311d33",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T07:39:06.492Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "1b4cea2c-4b75-41a2-a1a7-be65b9858b98",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 163,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 163,
+      "monotonicallyIncreasingSuggestionId": 136,
+      "range": {
+        "startLineNumber": 34,
+        "startColumn": 1,
+        "endLineNumberInclusive": 39,
+        "endColumn": 1
+      },
+      "replaceText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ item: string }> {\n",
+      "originalText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ item}>\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 34,
+        "startColumn": 1,
+        "endLineNumberInclusive": 39,
+        "endColumn": 1
+      },
+      "diffText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ item: string }> {\n",
+      "fullOriginalText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ item}>\n",
+      "suggestionTriggerTime": 1742369945497.5999,
+      "greens": [],
+      "source": "typing",
+      "requestId": "6646d6ee-0841-4456-82ff-54ccce792f97",
+      "selection": {
+        "startLineNumber": 34,
+        "startColumn": 1,
+        "endLineNumberInclusive": 39,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 136,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 34,
+        "startColumn": 1,
+        "endLineNumber": 39,
+        "endColumn": 1
+      },
+      "trackedText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ item:}>\n",
+      "decorationId": "b;627",
+      "onAcceptDisplayId": "366a5afc-433a-46a4-bc71-d39256e5b750"
+    },
+    "generationUUID": "6646d6ee-0841-4456-82ff-54ccce792f97",
+    "timestamp": "2025-03-19T07:39:06.788Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "1b4cea2c-4b75-41a2-a1a7-be65b9858b98",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 163,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 163,
+      "monotonicallyIncreasingSuggestionId": 136,
+      "range": {
+        "startLineNumber": 34,
+        "startColumn": 1,
+        "endLineNumberInclusive": 39,
+        "endColumn": 1
+      },
+      "replaceText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ item: string }> {\n",
+      "originalText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ item}>\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 34,
+        "startColumn": 1,
+        "endLineNumberInclusive": 39,
+        "endColumn": 1
+      },
+      "diffText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ item: string }> {\n",
+      "fullOriginalText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ item}>\n",
+      "suggestionTriggerTime": 1742369945497.5999,
+      "greens": [],
+      "source": "typing",
+      "requestId": "6646d6ee-0841-4456-82ff-54ccce792f97",
+      "selection": {
+        "startLineNumber": 34,
+        "startColumn": 1,
+        "endLineNumberInclusive": 39,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 136,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 34,
+        "startColumn": 1,
+        "endLineNumber": 39,
+        "endColumn": 1
+      },
+      "trackedText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ item:}>\n",
+      "decorationId": "b;627",
+      "onAcceptDisplayId": "366a5afc-433a-46a4-bc71-d39256e5b750"
+    },
+    "generationUUID": "6646d6ee-0841-4456-82ff-54ccce792f97",
+    "timestamp": "2025-03-19T07:39:06.796Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "366a5afc-433a-46a4-bc71-d39256e5b750",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 163,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 165,
+      "monotonicallyIncreasingSuggestionId": 137,
+      "range": {
+        "startLineNumber": 34,
+        "startColumn": 1,
+        "endLineNumberInclusive": 39,
+        "endColumn": 1
+      },
+      "replaceText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ item: string }> {\n    return { item: \"Hello\" };\n}\n\nlet data = await fetchData();\n\n\n",
+      "originalText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ item: string }> {\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 34,
+        "startColumn": 1,
+        "endLineNumberInclusive": 39,
+        "endColumn": 1
+      },
+      "diffText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ item: string }> {\n    return { item: \"Hello\" };\n}\n\nlet data = await fetchData();\n\n\n",
+      "fullOriginalText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ item: string }> {\n",
+      "suggestionTriggerTime": 1742369945497.5999,
+      "greens": [],
+      "source": "typing",
+      "requestId": "6646d6ee-0841-4456-82ff-54ccce792f97",
+      "selection": {
+        "startLineNumber": 34,
+        "startColumn": 1,
+        "endLineNumberInclusive": 39,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "2a2815e8-fa83-44cc-9536-f82328311d33",
+      "undoRedoGroup": {
+        "id": 137,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;638"
+    },
+    "generationUUID": "6646d6ee-0841-4456-82ff-54ccce792f97",
+    "timestamp": "2025-03-19T07:39:09.399Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "366a5afc-433a-46a4-bc71-d39256e5b750",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 163,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 165,
+      "monotonicallyIncreasingSuggestionId": 137,
+      "range": {
+        "startLineNumber": 34,
+        "startColumn": 1,
+        "endLineNumberInclusive": 39,
+        "endColumn": 1
+      },
+      "replaceText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ item: string }> {\n    return { item: \"Hello\" };\n}\n\nlet data = await fetchData();\n\n\n",
+      "originalText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ item: string }> {\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 34,
+        "startColumn": 1,
+        "endLineNumberInclusive": 39,
+        "endColumn": 1
+      },
+      "diffText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ item: string }> {\n    return { item: \"Hello\" };\n}\n\nlet data = await fetchData();\n\n\n",
+      "fullOriginalText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ item: string }> {\n",
+      "suggestionTriggerTime": 1742369945497.5999,
+      "greens": [],
+      "source": "typing",
+      "requestId": "6646d6ee-0841-4456-82ff-54ccce792f97",
+      "selection": {
+        "startLineNumber": 34,
+        "startColumn": 1,
+        "endLineNumberInclusive": 39,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "2a2815e8-fa83-44cc-9536-f82328311d33",
+      "undoRedoGroup": {
+        "id": 137,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;638"
+    },
+    "generationUUID": "6646d6ee-0841-4456-82ff-54ccce792f97",
+    "timestamp": "2025-03-19T07:39:09.420Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "2a2815e8-fa83-44cc-9536-f82328311d33",
+    "fusedCursorPrediction": null,
+    "oldText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ item: string }> {\n",
+    "newText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ item: string }> {\n    return { item: \"Hello\" };\n}\n\nlet data = await fetchData();\n\n\n",
+    "timestamp": "2025-03-19T07:39:09.421Z"
+  }
+]

@@ -1,0 +1,454 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "64bb4220-27ba-438d-8cab-c1f3d48b9daa",
+    "timestamp": "2025-03-19T08:14:05.456Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/switch1.ets",
+          "diffHistory": [
+            "1+|type Color = \"red\" | \"blue\" | \"green\";\n2+|\n3+|let color: Color = \"red\";\n4+|\n5+|switch (color) {\n6+|    case \"red\":\n7+|        console.log(\"red\");\n8+|        break;\n9+|}\n",
+            "9-|        \n10-|}\n9+|    case \"blue\":\n10+|}\n",
+            "10+|        console.log(\"blue\");\n11+|        break;\n12+|    case \"green\":\n13+|        console.log(\"green\");\n14+|        break;\n16+|\n17+|enum Direction {}\n18+|\n",
+            "17-|enum Direction {}\n17+|enum Direction {\n18+|    Up,\n19+|    Down,\n20+|    Left,\n21+|    Right,\n22+|}\n23+|let dir: Direction = Direction.Up;\n",
+            "25+|switch (dir) {\n26+|    case Direction.Up:\n27+|        console.log(\"up\");\n28+|        break;\n29+|}\n30+|\n",
+            "29+|    case Direction.Down:\n30+|        console.log(\"down\");\n31+|        break;\n32+|    case Direction.Left:\n33+|        console.log(\"left\");\n34+|        break;\n35+|        \n",
+            "38+|interface Square {\n39+|    kind: \"square\";\n40+|    size: number;\n41+|}\n42+|\n43+|interface Rectangle {\n44+|    \n45+|}\n",
+            "42+|interface Circle {\n43+|    kind: \"circle\";\n44+|    radius: number;\n45+|}\n43-|interface Rectangle {\n44-|    \n45-|}\n",
+            "47-|\n47+|function getArea()\n",
+            "47+|type Shape = Square | Circle;\n48+|\n",
+            "49-|function getArea()\n49+|function getArea(shape: Shape) {\n50+|    switch (shape.kind) {\n51+|        case \"square\":\n52+|            return shape.size * shape.size;\n53+|        case \"circle\":\n54+|            return Math.PI * shape.radius ** 2;\n55+|    }\n56+|}\n57+|\n58+|let category = \"A\";\n59+|let subCategory = 1;\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/switch1.ets",
+        "contents": "type Color = \"red\" | \"blue\" | \"green\";\n\nlet color: Color = \"red\";\n\nswitch (color) {\n    case \"red\":\n        console.log(\"red\");\n        break;\n    case \"blue\":\n        console.log(\"blue\");\n        break;\n    case \"green\":\n        console.log(\"green\");\n        break;\n}\n\nenum Direction {\n    Up,\n    Down,\n    Left,\n    Right,\n}\nlet dir: Direction = Direction.Up;\n\nswitch (dir) {\n    case Direction.Up:\n        console.log(\"up\");\n        break;\n    case Direction.Down:\n        console.log(\"down\");\n        break;\n    case Direction.Left:\n        console.log(\"left\");\n        break;\n\n}\n\ninterface Square {\n    kind: \"square\";\n    size: number;\n}\ninterface Circle {\n    kind: \"circle\";\n    radius: number;\n}\n\ntype Shape = Square | Circle;\n\nfunction getArea(shape: Shape) {\n    switch (shape.kind) {\n        case \"square\":\n            return shape.size * shape.size;\n        case \"circle\":\n            return Math.PI * shape.radius ** 2;\n    }\n}\n\nlet category = \"A\";\nlet subCategory = 1;\n",
+        "cursorPosition": {
+          "line": 59,
+          "column": 0
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 180,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1742372045503,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.10009765625,
+      "timeAtRequestSend": 1742372045503
+    },
+    "generateUuid": "64bb4220-27ba-438d-8cab-c1f3d48b9daa",
+    "timestamp": "2025-03-19T08:14:05.505Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "64bb4220-27ba-438d-8cab-c1f3d48b9daa",
+    "timestamp": "2025-03-19T08:14:05.881Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "let subCategory = 1;\n\n",
+      "rangeToReplace": {
+        "startLineNumber": 59,
+        "endLineNumberInclusive": 60
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "64bb4220-27ba-438d-8cab-c1f3d48b9daa",
+    "timestamp": "2025-03-19T08:14:05.881Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "switch"
+    },
+    "generationUUID": "64bb4220-27ba-438d-8cab-c1f3d48b9daa",
+    "timestamp": "2025-03-19T08:14:05.907Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " (category"
+    },
+    "generationUUID": "64bb4220-27ba-438d-8cab-c1f3d48b9daa",
+    "timestamp": "2025-03-19T08:14:05.916Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ")"
+    },
+    "generationUUID": "64bb4220-27ba-438d-8cab-c1f3d48b9daa",
+    "timestamp": "2025-03-19T08:14:05.930Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "64bb4220-27ba-438d-8cab-c1f3d48b9daa",
+    "timestamp": "2025-03-19T08:14:05.940Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n   "
+    },
+    "generationUUID": "64bb4220-27ba-438d-8cab-c1f3d48b9daa",
+    "timestamp": "2025-03-19T08:14:05.954Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " case"
+    },
+    "generationUUID": "64bb4220-27ba-438d-8cab-c1f3d48b9daa",
+    "timestamp": "2025-03-19T08:14:05.962Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \""
+    },
+    "generationUUID": "64bb4220-27ba-438d-8cab-c1f3d48b9daa",
+    "timestamp": "2025-03-19T08:14:05.975Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "A"
+    },
+    "generationUUID": "64bb4220-27ba-438d-8cab-c1f3d48b9daa",
+    "timestamp": "2025-03-19T08:14:05.984Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\":"
+    },
+    "generationUUID": "64bb4220-27ba-438d-8cab-c1f3d48b9daa",
+    "timestamp": "2025-03-19T08:14:05.997Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n       "
+    },
+    "generationUUID": "64bb4220-27ba-438d-8cab-c1f3d48b9daa",
+    "timestamp": "2025-03-19T08:14:06.010Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " switch"
+    },
+    "generationUUID": "64bb4220-27ba-438d-8cab-c1f3d48b9daa",
+    "timestamp": "2025-03-19T08:14:06.018Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " (sub"
+    },
+    "generationUUID": "64bb4220-27ba-438d-8cab-c1f3d48b9daa",
+    "timestamp": "2025-03-19T08:14:06.028Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Category"
+    },
+    "generationUUID": "64bb4220-27ba-438d-8cab-c1f3d48b9daa",
+    "timestamp": "2025-03-19T08:14:06.042Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ")"
+    },
+    "generationUUID": "64bb4220-27ba-438d-8cab-c1f3d48b9daa",
+    "timestamp": "2025-03-19T08:14:06.050Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {\n"
+    },
+    "generationUUID": "64bb4220-27ba-438d-8cab-c1f3d48b9daa",
+    "timestamp": "2025-03-19T08:14:06.064Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "            "
+    },
+    "generationUUID": "64bb4220-27ba-438d-8cab-c1f3d48b9daa",
+    "timestamp": "2025-03-19T08:14:06.072Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "64bb4220-27ba-438d-8cab-c1f3d48b9daa",
+    "timestamp": "2025-03-19T08:14:06.086Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "       "
+    },
+    "generationUUID": "64bb4220-27ba-438d-8cab-c1f3d48b9daa",
+    "timestamp": "2025-03-19T08:14:06.096Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " }"
+    },
+    "generationUUID": "64bb4220-27ba-438d-8cab-c1f3d48b9daa",
+    "timestamp": "2025-03-19T08:14:06.111Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n}"
+    },
+    "generationUUID": "64bb4220-27ba-438d-8cab-c1f3d48b9daa",
+    "timestamp": "2025-03-19T08:14:06.117Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "64bb4220-27ba-438d-8cab-c1f3d48b9daa",
+    "timestamp": "2025-03-19T08:14:06.135Z"
+  },
+  {
+    "firstChunkValue": "let subCategory = 1;\n\nswitch (category) {\n    case \"A\":\n        switch (subCategory) {\n            \n        }\n}",
+    "generationUUID": "64bb4220-27ba-438d-8cab-c1f3d48b9daa",
+    "timestamp": "2025-03-19T08:14:06.136Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "64bb4220-27ba-438d-8cab-c1f3d48b9daa",
+    "timestamp": "2025-03-19T08:14:06.136Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "let subCategory = 1;\n\nswitch (category) {\n    case \"A\":\n        switch (subCategory) {\n            \n        }\n}"
+    },
+    "generationUUID": "64bb4220-27ba-438d-8cab-c1f3d48b9daa",
+    "timestamp": "2025-03-19T08:14:06.143Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "0811f343-7323-499a-9d0d-6df33f541277",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 180,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 180,
+      "monotonicallyIncreasingSuggestionId": 137,
+      "range": {
+        "startLineNumber": 59,
+        "startColumn": 1,
+        "endLineNumberInclusive": 60,
+        "endColumn": 1
+      },
+      "replaceText": "let subCategory = 1;\n\nswitch (category) {\n    case \"A\":\n        switch (subCategory) {\n            \n        }\n}",
+      "originalText": "let subCategory = 1;\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 59,
+        "startColumn": 1,
+        "endLineNumberInclusive": 60,
+        "endColumn": 1
+      },
+      "diffText": "let subCategory = 1;\n\nswitch (category) {\n    case \"A\":\n        switch (subCategory) {\n            \n        }\n}",
+      "fullOriginalText": "let subCategory = 1;\n",
+      "suggestionTriggerTime": 1742372045453.5,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "64bb4220-27ba-438d-8cab-c1f3d48b9daa",
+      "selection": {
+        "startLineNumber": 59,
+        "startColumn": 1,
+        "endLineNumberInclusive": 60,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "f91a8c33-cdb6-45d2-afc1-22c488653716",
+      "undoRedoGroup": {
+        "id": 137,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "64bb4220-27ba-438d-8cab-c1f3d48b9daa",
+    "timestamp": "2025-03-19T08:14:06.144Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "f91a8c33-cdb6-45d2-afc1-22c488653716",
+    "generationUUID": "64bb4220-27ba-438d-8cab-c1f3d48b9daa",
+    "timestamp": "2025-03-19T08:14:06.147Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "let subCategory = 1;\n\nswitch (category) {\n    case \"A\":\n        switch (subCategory) {\n            \n        }\n}"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "f91a8c33-cdb6-45d2-afc1-22c488653716",
+    "generationUUID": "64bb4220-27ba-438d-8cab-c1f3d48b9daa",
+    "timestamp": "2025-03-19T08:14:06.148Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "f91a8c33-cdb6-45d2-afc1-22c488653716",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T08:14:06.148Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "0811f343-7323-499a-9d0d-6df33f541277",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 180,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 180,
+      "monotonicallyIncreasingSuggestionId": 137,
+      "range": {
+        "startLineNumber": 59,
+        "startColumn": 1,
+        "endLineNumberInclusive": 60,
+        "endColumn": 1
+      },
+      "replaceText": "let subCategory = 1;\n\nswitch (category) {\n    case \"A\":\n        switch (subCategory) {\n            \n        }\n}",
+      "originalText": "let subCategory = 1;\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 59,
+        "startColumn": 1,
+        "endLineNumberInclusive": 60,
+        "endColumn": 1
+      },
+      "diffText": "let subCategory = 1;\n\nswitch (category) {\n    case \"A\":\n        switch (subCategory) {\n            \n        }\n}",
+      "fullOriginalText": "let subCategory = 1;\n",
+      "suggestionTriggerTime": 1742372045453.5,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "64bb4220-27ba-438d-8cab-c1f3d48b9daa",
+      "selection": {
+        "startLineNumber": 59,
+        "startColumn": 1,
+        "endLineNumberInclusive": 60,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "f91a8c33-cdb6-45d2-afc1-22c488653716",
+      "undoRedoGroup": {
+        "id": 137,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;562"
+    },
+    "generationUUID": "64bb4220-27ba-438d-8cab-c1f3d48b9daa",
+    "timestamp": "2025-03-19T08:14:09.135Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "0811f343-7323-499a-9d0d-6df33f541277",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 180,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 180,
+      "monotonicallyIncreasingSuggestionId": 137,
+      "range": {
+        "startLineNumber": 59,
+        "startColumn": 1,
+        "endLineNumberInclusive": 60,
+        "endColumn": 1
+      },
+      "replaceText": "let subCategory = 1;\n\nswitch (category) {\n    case \"A\":\n        switch (subCategory) {\n            \n        }\n}",
+      "originalText": "let subCategory = 1;\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 59,
+        "startColumn": 1,
+        "endLineNumberInclusive": 60,
+        "endColumn": 1
+      },
+      "diffText": "let subCategory = 1;\n\nswitch (category) {\n    case \"A\":\n        switch (subCategory) {\n            \n        }\n}",
+      "fullOriginalText": "let subCategory = 1;\n",
+      "suggestionTriggerTime": 1742372045453.5,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "64bb4220-27ba-438d-8cab-c1f3d48b9daa",
+      "selection": {
+        "startLineNumber": 59,
+        "startColumn": 1,
+        "endLineNumberInclusive": 60,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "f91a8c33-cdb6-45d2-afc1-22c488653716",
+      "undoRedoGroup": {
+        "id": 137,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;562"
+    },
+    "generationUUID": "64bb4220-27ba-438d-8cab-c1f3d48b9daa",
+    "timestamp": "2025-03-19T08:14:09.153Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "f91a8c33-cdb6-45d2-afc1-22c488653716",
+    "fusedCursorPrediction": null,
+    "oldText": "let subCategory = 1;\n",
+    "newText": "let subCategory = 1;\n\nswitch (category) {\n    case \"A\":\n        switch (subCategory) {\n            \n        }\n}",
+    "timestamp": "2025-03-19T08:14:09.153Z"
+  }
+]

@@ -1,0 +1,428 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "eafeb394-a5b1-4345-b3fb-12aece18ee6c",
+    "timestamp": "2025-03-19T08:14:01.960Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/switch1.ets",
+          "diffHistory": [
+            "1+|type Color = \"red\" | \"blue\" | \"green\";\n2+|\n3+|let color: Color = \"red\";\n4+|\n5+|switch (color) {\n6+|    case \"red\":\n7+|        console.log(\"red\");\n8+|        break;\n9+|}\n",
+            "9-|        \n10-|}\n9+|    case \"blue\":\n10+|}\n",
+            "10+|        console.log(\"blue\");\n11+|        break;\n12+|    case \"green\":\n13+|        console.log(\"green\");\n14+|        break;\n16+|\n17+|enum Direction {}\n18+|\n",
+            "17-|enum Direction {}\n17+|enum Direction {\n18+|    Up,\n19+|    Down,\n20+|    Left,\n21+|    Right,\n22+|}\n23+|let dir: Direction = Direction.Up;\n",
+            "25+|switch (dir) {\n26+|    case Direction.Up:\n27+|        console.log(\"up\");\n28+|        break;\n29+|}\n30+|\n",
+            "29+|    case Direction.Down:\n30+|        console.log(\"down\");\n31+|        break;\n32+|    case Direction.Left:\n33+|        console.log(\"left\");\n34+|        break;\n35+|        \n",
+            "38+|interface Square {\n39+|    kind: \"square\";\n40+|    size: number;\n41+|}\n42+|\n43+|interface Rectangle {\n44+|    \n45+|}\n",
+            "42+|interface Circle {\n43+|    kind: \"circle\";\n44+|    radius: number;\n45+|}\n43-|interface Rectangle {\n44-|    \n45-|}\n",
+            "47-|\n47+|function getArea()\n",
+            "47+|type Shape = Square | Circle;\n48+|\n",
+            "49-|function getArea()\n49+|function getArea(shape: Shape) {\n50+|    switch (shape.kind) {\n51+|        case \"square\":\n52+|            return shape.size * shape.size;\n53+|        case \"circle\":\n54+|            return Math.PI * shape.radius ** 2;\n55+|    }\n56+|}\n57+|\n58+|let category = \"A\";\n59+|let subCa\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/switch1.ets",
+        "contents": "type Color = \"red\" | \"blue\" | \"green\";\n\nlet color: Color = \"red\";\n\nswitch (color) {\n    case \"red\":\n        console.log(\"red\");\n        break;\n    case \"blue\":\n        console.log(\"blue\");\n        break;\n    case \"green\":\n        console.log(\"green\");\n        break;\n}\n\nenum Direction {\n    Up,\n    Down,\n    Left,\n    Right,\n}\nlet dir: Direction = Direction.Up;\n\nswitch (dir) {\n    case Direction.Up:\n        console.log(\"up\");\n        break;\n    case Direction.Down:\n        console.log(\"down\");\n        break;\n    case Direction.Left:\n        console.log(\"left\");\n        break;\n\n}\n\ninterface Square {\n    kind: \"square\";\n    size: number;\n}\ninterface Circle {\n    kind: \"circle\";\n    radius: number;\n}\n\ntype Shape = Square | Circle;\n\nfunction getArea(shape: Shape) {\n    switch (shape.kind) {\n        case \"square\":\n            return shape.size * shape.size;\n        case \"circle\":\n            return Math.PI * shape.radius ** 2;\n    }\n}\n\nlet category = \"A\";\nlet subCa",
+        "cursorPosition": {
+          "line": 58,
+          "column": 9
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 170,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742372042006,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 55.10009765625,
+      "timeAtRequestSend": 1742372042007
+    },
+    "generateUuid": "eafeb394-a5b1-4345-b3fb-12aece18ee6c",
+    "timestamp": "2025-03-19T08:14:02.008Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "eafeb394-a5b1-4345-b3fb-12aece18ee6c",
+    "timestamp": "2025-03-19T08:14:02.367Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "let category = \"A\";\nlet subCategory",
+      "rangeToReplace": {
+        "startLineNumber": 58,
+        "endLineNumberInclusive": 59
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "eafeb394-a5b1-4345-b3fb-12aece18ee6c",
+    "timestamp": "2025-03-19T08:14:02.368Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "eafeb394-a5b1-4345-b3fb-12aece18ee6c",
+    "timestamp": "2025-03-19T08:14:02.387Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \"B"
+    },
+    "generationUUID": "eafeb394-a5b1-4345-b3fb-12aece18ee6c",
+    "timestamp": "2025-03-19T08:14:02.395Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\";"
+    },
+    "generationUUID": "eafeb394-a5b1-4345-b3fb-12aece18ee6c",
+    "timestamp": "2025-03-19T08:14:02.406Z"
+  },
+  {
+    "firstChunkValue": "let category = \"A\";\nlet subCategory = \"B\";",
+    "generationUUID": "eafeb394-a5b1-4345-b3fb-12aece18ee6c",
+    "timestamp": "2025-03-19T08:14:02.413Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "let category = \"A\";\nlet subCategory = \"B\";"
+    },
+    "generationUUID": "eafeb394-a5b1-4345-b3fb-12aece18ee6c",
+    "timestamp": "2025-03-19T08:14:02.414Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "eafeb394-a5b1-4345-b3fb-12aece18ee6c",
+    "timestamp": "2025-03-19T08:14:02.414Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "switch"
+    },
+    "generationUUID": "eafeb394-a5b1-4345-b3fb-12aece18ee6c",
+    "timestamp": "2025-03-19T08:14:02.427Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " (category"
+    },
+    "generationUUID": "eafeb394-a5b1-4345-b3fb-12aece18ee6c",
+    "timestamp": "2025-03-19T08:14:02.431Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ")"
+    },
+    "generationUUID": "eafeb394-a5b1-4345-b3fb-12aece18ee6c",
+    "timestamp": "2025-03-19T08:14:02.440Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "eafeb394-a5b1-4345-b3fb-12aece18ee6c",
+    "timestamp": "2025-03-19T08:14:02.451Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n   "
+    },
+    "generationUUID": "eafeb394-a5b1-4345-b3fb-12aece18ee6c",
+    "timestamp": "2025-03-19T08:14:02.458Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " case"
+    },
+    "generationUUID": "eafeb394-a5b1-4345-b3fb-12aece18ee6c",
+    "timestamp": "2025-03-19T08:14:02.465Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \""
+    },
+    "generationUUID": "eafeb394-a5b1-4345-b3fb-12aece18ee6c",
+    "timestamp": "2025-03-19T08:14:02.474Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "A"
+    },
+    "generationUUID": "eafeb394-a5b1-4345-b3fb-12aece18ee6c",
+    "timestamp": "2025-03-19T08:14:02.483Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\":"
+    },
+    "generationUUID": "eafeb394-a5b1-4345-b3fb-12aece18ee6c",
+    "timestamp": "2025-03-19T08:14:02.492Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n       "
+    },
+    "generationUUID": "eafeb394-a5b1-4345-b3fb-12aece18ee6c",
+    "timestamp": "2025-03-19T08:14:02.500Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " switch"
+    },
+    "generationUUID": "eafeb394-a5b1-4345-b3fb-12aece18ee6c",
+    "timestamp": "2025-03-19T08:14:02.506Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " (sub"
+    },
+    "generationUUID": "eafeb394-a5b1-4345-b3fb-12aece18ee6c",
+    "timestamp": "2025-03-19T08:14:02.514Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Category"
+    },
+    "generationUUID": "eafeb394-a5b1-4345-b3fb-12aece18ee6c",
+    "timestamp": "2025-03-19T08:14:02.521Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ")"
+    },
+    "generationUUID": "eafeb394-a5b1-4345-b3fb-12aece18ee6c",
+    "timestamp": "2025-03-19T08:14:02.527Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {\n"
+    },
+    "generationUUID": "eafeb394-a5b1-4345-b3fb-12aece18ee6c",
+    "timestamp": "2025-03-19T08:14:02.535Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "            "
+    },
+    "generationUUID": "eafeb394-a5b1-4345-b3fb-12aece18ee6c",
+    "timestamp": "2025-03-19T08:14:02.544Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "eafeb394-a5b1-4345-b3fb-12aece18ee6c",
+    "timestamp": "2025-03-19T08:14:02.549Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "       "
+    },
+    "generationUUID": "eafeb394-a5b1-4345-b3fb-12aece18ee6c",
+    "timestamp": "2025-03-19T08:14:02.556Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " }"
+    },
+    "generationUUID": "eafeb394-a5b1-4345-b3fb-12aece18ee6c",
+    "timestamp": "2025-03-19T08:14:02.564Z"
+  },
+  {
+    "fullText": "let category = \"A\";\nlet subCategory = \"B\";\n\nswitch (category) {\n    case \"A\":\n        switch (subCategory) {\n            \n        }",
+    "generationUUID": "eafeb394-a5b1-4345-b3fb-12aece18ee6c",
+    "timestamp": "2025-03-19T08:14:02.575Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "let category = \"A\";\nlet subCategory = \"B\";"
+    },
+    "fullText": "let category = \"A\";\nlet subCategory = \"B\";\n\nswitch (category) {\n    case \"A\":\n        switch (subCategory) {\n            \n        }",
+    "generationUUID": "eafeb394-a5b1-4345-b3fb-12aece18ee6c",
+    "timestamp": "2025-03-19T08:14:02.576Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && currentSuggestion uniqueId is different && need to create newSuggestion according fullText",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "3ff9a2d6-e24d-4460-b11c-7e9b5d781930",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 170,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 172,
+      "monotonicallyIncreasingSuggestionId": 135,
+      "range": {
+        "startLineNumber": 58,
+        "startColumn": 1,
+        "endLineNumberInclusive": 59,
+        "endColumn": 12
+      },
+      "replaceText": "let category = \"A\";\nlet subCategory = \"B\";\n\nswitch (category) {\n    case \"A\":\n        switch (subCategory) {\n            \n        }",
+      "originalText": "let category = \"A\";\nlet subCate",
+      "startingSuggestionRange": {
+        "startLineNumber": 58,
+        "startColumn": 1,
+        "endLineNumberInclusive": 59,
+        "endColumn": 12
+      },
+      "diffText": "let category = \"A\";\nlet subCategory = \"B\";\n\nswitch (category) {\n    case \"A\":\n        switch (subCategory) {\n            \n        }",
+      "fullOriginalText": "let category = \"A\";\nlet subCate",
+      "suggestionTriggerTime": 1742372041951.7,
+      "greens": [],
+      "source": "typing",
+      "requestId": "eafeb394-a5b1-4345-b3fb-12aece18ee6c",
+      "selection": {
+        "startLineNumber": 58,
+        "startColumn": 1,
+        "endLineNumberInclusive": 59,
+        "endColumn": 12
+      },
+      "fusedCursorPredictionId": "8df7b049-eba4-403c-b94b-d5ff76ed787f",
+      "undoRedoGroup": {
+        "id": 135,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "eafeb394-a5b1-4345-b3fb-12aece18ee6c",
+    "timestamp": "2025-03-19T08:14:02.577Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "eafeb394-a5b1-4345-b3fb-12aece18ee6c",
+    "timestamp": "2025-03-19T08:14:02.577Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "eafeb394-a5b1-4345-b3fb-12aece18ee6c",
+    "timestamp": "2025-03-19T08:14:02.577Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "8df7b049-eba4-403c-b94b-d5ff76ed787f",
+    "generationUUID": "eafeb394-a5b1-4345-b3fb-12aece18ee6c",
+    "timestamp": "2025-03-19T08:14:02.584Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "let category = \"A\";\nlet subCategory = \"B\";"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "8df7b049-eba4-403c-b94b-d5ff76ed787f",
+    "generationUUID": "eafeb394-a5b1-4345-b3fb-12aece18ee6c",
+    "timestamp": "2025-03-19T08:14:02.585Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "8df7b049-eba4-403c-b94b-d5ff76ed787f",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T08:14:02.585Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "ef6fb8c4-4346-4f18-9da5-2fab1083699d",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 169,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 171,
+      "monotonicallyIncreasingSuggestionId": 133,
+      "range": {
+        "startLineNumber": 58,
+        "startColumn": 1,
+        "endLineNumberInclusive": 59,
+        "endColumn": 22
+      },
+      "replaceText": "let category = \"A\";\nlet subCategory = \"B\";\n\nswitch (category) {\n    case \"A\":\n        switch (subCategory) {\n            \n        }",
+      "originalText": "let category = \"A\";\nlet subCategory = \"B\"",
+      "startingSuggestionRange": {
+        "startLineNumber": 58,
+        "startColumn": 1,
+        "endLineNumberInclusive": 59,
+        "endColumn": 22
+      },
+      "diffText": "let category = \"A\";\nlet subCategory = \"B\";\n\nswitch (category) {\n    case \"A\":\n        switch (subCategory) {\n            \n        }",
+      "fullOriginalText": "let category = \"A\";\nlet subCategory = \"B\"",
+      "suggestionTriggerTime": 1742372041600.9001,
+      "greens": [],
+      "source": "typing",
+      "requestId": "1f8a02f2-6353-407f-aa07-61c5bd606915",
+      "selection": {
+        "startLineNumber": 58,
+        "startColumn": 1,
+        "endLineNumberInclusive": 59,
+        "endColumn": 10
+      },
+      "fusedCursorPredictionId": "3fcdb463-6ed2-4aae-bfc0-b1d28e015608",
+      "undoRedoGroup": {
+        "id": 133,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "eafeb394-a5b1-4345-b3fb-12aece18ee6c",
+    "timestamp": "2025-03-19T08:14:02.773Z"
+  }
+]

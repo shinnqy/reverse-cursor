@@ -1,0 +1,469 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+    "timestamp": "2025-03-19T07:40:08.522Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/functionReturn.ets",
+          "diffHistory": [
+            "1+|function add(a: number, b: number): number {\n2+|    return a + b;\n3+|}\n4+|\n5+|function subtract(a: number, b: number): number {\n6+|    return a - b;\n7+|}\n8+|\n9+|let sum = add(1, 2);\n10+|\n11+|function getUser(name: string, age: number): { name: string, age: number } {\n12+|    return { name, age };\n13+|}\n14+|\n15+|let user = getUser(\"John\", 30);\n16+|\n17+|  \n",
+            "11-|function getUser(name: string, age: number): { name: string, age: number } {\n11+|interface User {\n12+|    name: string;\n13+|    age: number;\n14+|}\n15+|\n16+|function getUser(name: string, age: number): User {\n",
+            "22+|function wrapValue<T>(value: T): {data {\n23+|    return { data: value };\n24+|}\n25+|\n26+|let wrappedValue = wrapValue(10);\n27+|\n28+|\n",
+            "22-|function wrapValue<T>(value: T): {data {\n22+|function wrapValue<T>(value: T): {data: T}   {\n",
+            "28+|let wrappedString = wrapValue(\"Hello\");\n30+|let wrappedBoolean = wrapValue(true);\n31+|\n32+|let wrappedArray = wrapValue([1, 2, 3]);\n33+|\n34+|\n",
+            "22-|function wrapValue<T>(value: T): {data: T}   {\n22+|interface Wrapper<T> {\n23+|    data: T;\n24+|}\n25+|\n26+|function wrapValue<T>(value: T): Wrapper<T> {\n",
+            "39+|async function fetchData(): Promise<{ item: string }> {\n40+|    return { item: \"Hello\" };\n41+|}\n42+|\n43+|let data = await fetchData();\n44+|\n45+|\n",
+            "38+|interface Data {\n39+|    item: string;\n40+|}\n39-|async function fetchData(): Promise<{ item: string }> {\n42+|async function fetchData(): Promise<Data> {\n",
+            "48-|\n48+|function parse(input: string): string | number {\n49+|  \n50+|}\n",
+            "49-|  \n49+|  return isNaN(Number(input)) ? input : Number(input);\n",
+            "51+|\n52+|let parsed = parse(\"123\");\n53+|\n54+|let parsedString = parse(\"Hello\");\n55+|\n56+|\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/functionReturn.ets",
+        "contents": "function add(a: number, b: number): number {\n    return a + b;\n}\n\nfunction subtract(a: number, b: number): number {\n    return a - b;\n}\n\nlet sum = add(1, 2);\n\ninterface User {\n    name: string;\n    age: number;\n}\n\nfunction getUser(name: string, age: number): User {\n    return { name, age };\n}\n\nlet user = getUser(\"John\", 30);\n\ninterface Wrapper<T> {\n    data: T;\n}\n\nfunction wrapValue<T>(value: T): Wrapper<T> {\n    return { data: value };\n}\n\nlet wrappedValue = wrapValue(10);\n\nlet wrappedString = wrapValue(\"Hello\");\n\nlet wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\ninterface Data {\n    item: string;\n}\n\nasync function fetchData(): Promise<Data> {\n    return { item: \"Hello\" };\n}\n\nlet data = await fetchData();\n\nfunction parse(input: string): string | number {\n  return isNaN(Number(input)) ? input : Number(input);\n}\n\nlet parsed = parse(\"123\");\n\nlet parsedString = parse(\"Hello\");\n\n\n",
+        "cursorPosition": {
+          "line": 54,
+          "column": 0
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 238,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1742370008569,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.300048828125,
+      "timeAtRequestSend": 1742370008569
+    },
+    "generateUuid": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+    "timestamp": "2025-03-19T07:40:08.572Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+    "timestamp": "2025-03-19T07:40:09.051Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nlet parsed = parse(\"123\");\n\nlet parsedString = parse(\"Hello\");\n\nfunction",
+      "rangeToReplace": {
+        "startLineNumber": 51,
+        "endLineNumberInclusive": 57
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+    "timestamp": "2025-03-19T07:40:09.052Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " is"
+    },
+    "generationUUID": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+    "timestamp": "2025-03-19T07:40:09.070Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Even"
+    },
+    "generationUUID": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+    "timestamp": "2025-03-19T07:40:09.120Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "("
+    },
+    "generationUUID": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+    "timestamp": "2025-03-19T07:40:09.121Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "n"
+    },
+    "generationUUID": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+    "timestamp": "2025-03-19T07:40:09.121Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " number"
+    },
+    "generationUUID": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+    "timestamp": "2025-03-19T07:40:09.147Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+    "timestamp": "2025-03-19T07:40:09.147Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "): boolean"
+    },
+    "generationUUID": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+    "timestamp": "2025-03-19T07:40:09.147Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+    "timestamp": "2025-03-19T07:40:09.195Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n   "
+    },
+    "generationUUID": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+    "timestamp": "2025-03-19T07:40:09.195Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " return n"
+    },
+    "generationUUID": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+    "timestamp": "2025-03-19T07:40:09.196Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " %"
+    },
+    "generationUUID": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+    "timestamp": "2025-03-19T07:40:09.196Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+    "timestamp": "2025-03-19T07:40:09.196Z"
+  },
+  {
+    "firstChunkValue": "\nlet parsed = parse(\"123\");\n\nlet parsedString = parse(\"Hello\");\n\nfunction isEven(n: number): boolean {\n",
+    "generationUUID": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+    "timestamp": "2025-03-19T07:40:09.198Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nlet parsed = parse(\"123\");\n\nlet parsedString = parse(\"Hello\");\n\nfunction isEven(n: number): boolean {\n"
+    },
+    "generationUUID": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+    "timestamp": "2025-03-19T07:40:09.198Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "c96a5eb6-75c1-4264-8fb4-fefad6560e6b",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 238,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 238,
+      "monotonicallyIncreasingSuggestionId": 196,
+      "range": {
+        "startLineNumber": 51,
+        "startColumn": 1,
+        "endLineNumberInclusive": 57,
+        "endColumn": 1
+      },
+      "replaceText": "\nlet parsed = parse(\"123\");\n\nlet parsedString = parse(\"Hello\");\n\nfunction isEven(n: number): boolean {\n",
+      "originalText": "\nlet parsed = parse(\"123\");\n\nlet parsedString = parse(\"Hello\");\n\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 51,
+        "startColumn": 1,
+        "endLineNumberInclusive": 57,
+        "endColumn": 1
+      },
+      "diffText": "\nlet parsed = parse(\"123\");\n\nlet parsedString = parse(\"Hello\");\n\nfunction isEven(n: number): boolean {\n",
+      "fullOriginalText": "\nlet parsed = parse(\"123\");\n\nlet parsedString = parse(\"Hello\");\n\n\n",
+      "suggestionTriggerTime": 1742370008524.5999,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+      "selection": {
+        "startLineNumber": 51,
+        "startColumn": 1,
+        "endLineNumberInclusive": 57,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 196,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+    "timestamp": "2025-03-19T07:40:09.201Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "2"
+    },
+    "generationUUID": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+    "timestamp": "2025-03-19T07:40:09.221Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ==="
+    },
+    "generationUUID": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+    "timestamp": "2025-03-19T07:40:09.221Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+    "timestamp": "2025-03-19T07:40:09.267Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "0"
+    },
+    "generationUUID": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+    "timestamp": "2025-03-19T07:40:09.267Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";"
+    },
+    "generationUUID": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+    "timestamp": "2025-03-19T07:40:09.268Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n}"
+    },
+    "generationUUID": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+    "timestamp": "2025-03-19T07:40:09.268Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+    "timestamp": "2025-03-19T07:40:09.294Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "let"
+    },
+    "generationUUID": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+    "timestamp": "2025-03-19T07:40:09.294Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " is"
+    },
+    "generationUUID": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+    "timestamp": "2025-03-19T07:40:09.294Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "EvenResult"
+    },
+    "generationUUID": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+    "timestamp": "2025-03-19T07:40:09.333Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+    "timestamp": "2025-03-19T07:40:09.333Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " is"
+    },
+    "generationUUID": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+    "timestamp": "2025-03-19T07:40:09.335Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Even"
+    },
+    "generationUUID": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+    "timestamp": "2025-03-19T07:40:09.335Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "(2"
+    },
+    "generationUUID": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+    "timestamp": "2025-03-19T07:40:09.358Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ");"
+    },
+    "generationUUID": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+    "timestamp": "2025-03-19T07:40:09.364Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+    "timestamp": "2025-03-19T07:40:09.402Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+    "timestamp": "2025-03-19T07:40:09.402Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+    "timestamp": "2025-03-19T07:40:09.409Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+    "timestamp": "2025-03-19T07:40:09.409Z"
+  },
+  {
+    "fullText": "\nlet parsed = parse(\"123\");\n\nlet parsedString = parse(\"Hello\");\n\nfunction isEven(n: number): boolean {\n    return n % 2 === 0;\n}\n\nlet isEvenResult = isEven(2);\n\n\n",
+    "generationUUID": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+    "timestamp": "2025-03-19T07:40:09.425Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nlet parsed = parse(\"123\");\n\nlet parsedString = parse(\"Hello\");\n\nfunction isEven(n: number): boolean {\n"
+    },
+    "fullText": "\nlet parsed = parse(\"123\");\n\nlet parsedString = parse(\"Hello\");\n\nfunction isEven(n: number): boolean {\n    return n % 2 === 0;\n}\n\nlet isEvenResult = isEven(2);\n\n\n",
+    "generationUUID": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+    "timestamp": "2025-03-19T07:40:09.425Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "341c8549-a1fc-4c09-ad47-1fcbc0782b42",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 238,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 239,
+      "monotonicallyIncreasingSuggestionId": 197,
+      "range": {
+        "startLineNumber": 51,
+        "startColumn": 1,
+        "endLineNumberInclusive": 57,
+        "endColumn": 1
+      },
+      "replaceText": "\nlet parsed = parse(\"123\");\n\nlet parsedString = parse(\"Hello\");\n\nfunction isEven(n: number): boolean {\n    return n % 2 === 0;\n}\n\nlet isEvenResult = isEven(2);\n\n\n",
+      "originalText": "\nlet parsed = parse(\"123\");\n\nlet parsedString = parse(\"Hello\");\n\nfunction isEven(n: number): boolean {\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 51,
+        "startColumn": 1,
+        "endLineNumberInclusive": 57,
+        "endColumn": 1
+      },
+      "diffText": "\nlet parsed = parse(\"123\");\n\nlet parsedString = parse(\"Hello\");\n\nfunction isEven(n: number): boolean {\n    return n % 2 === 0;\n}\n\nlet isEvenResult = isEven(2);\n\n\n",
+      "fullOriginalText": "\nlet parsed = parse(\"123\");\n\nlet parsedString = parse(\"Hello\");\n\nfunction isEven(n: number): boolean {\n",
+      "suggestionTriggerTime": 1742370008524.5999,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+      "selection": {
+        "startLineNumber": 51,
+        "startColumn": 1,
+        "endLineNumberInclusive": 57,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "134181dd-7830-4f81-a4da-330c1d784ed2",
+      "undoRedoGroup": {
+        "id": 197,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+    "timestamp": "2025-03-19T07:40:09.426Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "134181dd-7830-4f81-a4da-330c1d784ed2",
+    "generationUUID": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+    "timestamp": "2025-03-19T07:40:09.434Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nlet parsed = parse(\"123\");\n\nlet parsedString = parse(\"Hello\");\n\nfunction isEven(n: number): boolean {\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "134181dd-7830-4f81-a4da-330c1d784ed2",
+    "generationUUID": "30af1f50-eeb9-4222-9e1e-45ca795cc00e",
+    "timestamp": "2025-03-19T07:40:09.435Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "134181dd-7830-4f81-a4da-330c1d784ed2",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T07:40:09.435Z"
+  }
+]

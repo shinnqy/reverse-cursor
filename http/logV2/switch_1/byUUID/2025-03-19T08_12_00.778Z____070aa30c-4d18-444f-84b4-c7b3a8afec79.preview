@@ -1,0 +1,54 @@
+{"line":8,"column":8}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+        [ToFill]
+}
+-------------------------------[               firstChunkValue               ]--------------------------------
+        break;
+    case "blue":
+}
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+}
+-------------------------------[                   fullText                  ]--------------------------------
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+-------------------------------[         replacedContentsWithFullText         ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}

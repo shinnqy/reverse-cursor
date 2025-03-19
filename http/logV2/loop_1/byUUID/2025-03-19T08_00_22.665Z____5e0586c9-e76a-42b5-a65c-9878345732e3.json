@@ -1,0 +1,523 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "5e0586c9-e76a-42b5-a65c-9878345732e3",
+    "timestamp": "2025-03-19T08:00:22.665Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/loop1.ets",
+          "diffHistory": [
+            "1+|let numbers = [1, 2, 3, 4, 5]\n2+|\n3+|for (let i = 0; i < numbers.length; i++) {\n4+|    console.log(numbers[i])\n5+|}\n6+|\n",
+            "5+|    numbers[i].\n",
+            "5-|    numbers[i].\n",
+            "5-|    \n5+|    const number = numbers[i]\n6+|    nm\n",
+            "6-|    nm\n6+|    numbers.\n",
+            "6-|    numbers.\n8+|let users = [\n9+|    { name: 'John', age: 30 },\n10+|    { name: 'Jane', age: 25 },\n11+|    { name: 'Jim', age: 35 },\n12+|]\n13+|\n14+|\n15+|\n",
+            "14+|for (let i = 0; i < users.length; i++) {\n15+|    const user = users[i]\n16+|    console.log(user.name)\n17+|}\n",
+            "14-|for (let i = 0; i < users.length; i++) {\n15-|    const user = users[i]\n14+|for (const user of users) {\n",
+            "18+|for (const key in users) {\n19+|    console.log(key)\n20+|}\n",
+            "20+|    const user = users[key];\n21+|    user.name = 'John';\n",
+            "8-|let users = [\n8+|interface User {\n9+|    name: string;\n10+|    age: number;\n11+|}\n12+|\n13+|let users: User[] = [\n",
+            "29+|let counter = 0;\n",
+            "31+|while (counter < 10) {\n32+|    console.log(counter)\n33+|    counter++;\n34+|}\n",
+            "36+|let mat\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/loop1.ets",
+        "contents": "let numbers = [1, 2, 3, 4, 5]\n\nfor (let i = 0; i < numbers.length; i++) {\n    console.log(numbers[i])\n    const number = numbers[i]\n}\n\ninterface User {\n    name: string;\n    age: number;\n}\n\nlet users: User[] = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]\n\nfor (const user of users) {\n    console.log(user.name)\n}\n\nfor (const key in users) {\n    console.log(key)\n    const user = users[key];\n    user.name = 'John';\n}\n\nlet counter = 0;\n\nwhile (counter < 10) {\n    console.log(counter)\n    counter++;\n}\n\nlet mat\n\n\n",
+        "cursorPosition": {
+          "line": 35,
+          "column": 7
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 175,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742371222704,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.199951171875,
+      "timeAtRequestSend": 1742371222704
+    },
+    "generateUuid": "5e0586c9-e76a-42b5-a65c-9878345732e3",
+    "timestamp": "2025-03-19T08:00:22.706Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "5e0586c9-e76a-42b5-a65c-9878345732e3",
+    "timestamp": "2025-03-19T08:00:23.310Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nlet matrix",
+      "rangeToReplace": {
+        "startLineNumber": 35,
+        "endLineNumberInclusive": 38
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "5e0586c9-e76a-42b5-a65c-9878345732e3",
+    "timestamp": "2025-03-19T08:00:23.315Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "5e0586c9-e76a-42b5-a65c-9878345732e3",
+    "timestamp": "2025-03-19T08:00:23.315Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ["
+    },
+    "generationUUID": "5e0586c9-e76a-42b5-a65c-9878345732e3",
+    "timestamp": "2025-03-19T08:00:23.316Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n   "
+    },
+    "generationUUID": "5e0586c9-e76a-42b5-a65c-9878345732e3",
+    "timestamp": "2025-03-19T08:00:23.318Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ["
+    },
+    "generationUUID": "5e0586c9-e76a-42b5-a65c-9878345732e3",
+    "timestamp": "2025-03-19T08:00:23.319Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "1"
+    },
+    "generationUUID": "5e0586c9-e76a-42b5-a65c-9878345732e3",
+    "timestamp": "2025-03-19T08:00:23.320Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ", 2, 3],"
+    },
+    "generationUUID": "5e0586c9-e76a-42b5-a65c-9878345732e3",
+    "timestamp": "2025-03-19T08:00:23.321Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "5e0586c9-e76a-42b5-a65c-9878345732e3",
+    "timestamp": "2025-03-19T08:00:23.322Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "   "
+    },
+    "generationUUID": "5e0586c9-e76a-42b5-a65c-9878345732e3",
+    "timestamp": "2025-03-19T08:00:23.323Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ["
+    },
+    "generationUUID": "5e0586c9-e76a-42b5-a65c-9878345732e3",
+    "timestamp": "2025-03-19T08:00:23.326Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "4"
+    },
+    "generationUUID": "5e0586c9-e76a-42b5-a65c-9878345732e3",
+    "timestamp": "2025-03-19T08:00:23.327Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ","
+    },
+    "generationUUID": "5e0586c9-e76a-42b5-a65c-9878345732e3",
+    "timestamp": "2025-03-19T08:00:23.329Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " 5,"
+    },
+    "generationUUID": "5e0586c9-e76a-42b5-a65c-9878345732e3",
+    "timestamp": "2025-03-19T08:00:23.330Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "5e0586c9-e76a-42b5-a65c-9878345732e3",
+    "timestamp": "2025-03-19T08:00:23.330Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "6"
+    },
+    "generationUUID": "5e0586c9-e76a-42b5-a65c-9878345732e3",
+    "timestamp": "2025-03-19T08:00:23.331Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "],"
+    },
+    "generationUUID": "5e0586c9-e76a-42b5-a65c-9878345732e3",
+    "timestamp": "2025-03-19T08:00:23.332Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ","
+    },
+    "generationUUID": "5e0586c9-e76a-42b5-a65c-9878345732e3",
+    "timestamp": "2025-03-19T08:00:23.333Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n    [7"
+    },
+    "generationUUID": "5e0586c9-e76a-42b5-a65c-9878345732e3",
+    "timestamp": "2025-03-19T08:00:23.334Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " 8"
+    },
+    "generationUUID": "5e0586c9-e76a-42b5-a65c-9878345732e3",
+    "timestamp": "2025-03-19T08:00:23.335Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ","
+    },
+    "generationUUID": "5e0586c9-e76a-42b5-a65c-9878345732e3",
+    "timestamp": "2025-03-19T08:00:23.336Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "5e0586c9-e76a-42b5-a65c-9878345732e3",
+    "timestamp": "2025-03-19T08:00:23.337Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "9"
+    },
+    "generationUUID": "5e0586c9-e76a-42b5-a65c-9878345732e3",
+    "timestamp": "2025-03-19T08:00:23.337Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "],"
+    },
+    "generationUUID": "5e0586c9-e76a-42b5-a65c-9878345732e3",
+    "timestamp": "2025-03-19T08:00:23.338Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "5e0586c9-e76a-42b5-a65c-9878345732e3",
+    "timestamp": "2025-03-19T08:00:23.338Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "]"
+    },
+    "generationUUID": "5e0586c9-e76a-42b5-a65c-9878345732e3",
+    "timestamp": "2025-03-19T08:00:23.343Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n\n"
+    },
+    "generationUUID": "5e0586c9-e76a-42b5-a65c-9878345732e3",
+    "timestamp": "2025-03-19T08:00:23.354Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "5e0586c9-e76a-42b5-a65c-9878345732e3",
+    "timestamp": "2025-03-19T08:00:23.365Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "5e0586c9-e76a-42b5-a65c-9878345732e3",
+    "timestamp": "2025-03-19T08:00:23.365Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "5e0586c9-e76a-42b5-a65c-9878345732e3",
+    "timestamp": "2025-03-19T08:00:23.365Z"
+  },
+  {
+    "firstChunkValue": "\nlet matrix = [\n    [1, 2, 3],\n    [4, 5, 6],\n    [7, 8, 9],\n]\n\n\n\n",
+    "generationUUID": "5e0586c9-e76a-42b5-a65c-9878345732e3",
+    "timestamp": "2025-03-19T08:00:23.366Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nlet matrix = [\n    [1, 2, 3],\n    [4, 5, 6],\n    [7, 8, 9],\n]\n\n\n\n"
+    },
+    "generationUUID": "5e0586c9-e76a-42b5-a65c-9878345732e3",
+    "timestamp": "2025-03-19T08:00:23.367Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "12bdd8c7-d3cb-4fcc-b6ba-b544725a0f68",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 175,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 175,
+      "monotonicallyIncreasingSuggestionId": 116,
+      "range": {
+        "startLineNumber": 35,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "replaceText": "\nlet matrix = [\n    [1, 2, 3],\n    [4, 5, 6],\n    [7, 8, 9],\n]\n\n\n\n",
+      "originalText": "\nlet mat\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 35,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "diffText": "\nlet matrix = [\n    [1, 2, 3],\n    [4, 5, 6],\n    [7, 8, 9],\n]\n\n\n\n",
+      "fullOriginalText": "\nlet mat\n\n",
+      "suggestionTriggerTime": 1742371222653.2,
+      "greens": [],
+      "source": "typing",
+      "requestId": "5e0586c9-e76a-42b5-a65c-9878345732e3",
+      "selection": {
+        "startLineNumber": 35,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "0e48b681-1f38-471f-a9c0-402817196031",
+      "undoRedoGroup": {
+        "id": 116,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 35,
+        "startColumn": 1,
+        "endLineNumber": 38,
+        "endColumn": 1
+      },
+      "trackedText": "\nlet matri\n\n"
+    },
+    "generationUUID": "5e0586c9-e76a-42b5-a65c-9878345732e3",
+    "timestamp": "2025-03-19T08:00:23.368Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "0e48b681-1f38-471f-a9c0-402817196031",
+    "generationUUID": "5e0586c9-e76a-42b5-a65c-9878345732e3",
+    "timestamp": "2025-03-19T08:00:23.372Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nlet matrix = [\n    [1, 2, 3],\n    [4, 5, 6],\n    [7, 8, 9],\n]\n\n\n\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "0e48b681-1f38-471f-a9c0-402817196031",
+    "generationUUID": "5e0586c9-e76a-42b5-a65c-9878345732e3",
+    "timestamp": "2025-03-19T08:00:23.372Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "0e48b681-1f38-471f-a9c0-402817196031",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T08:00:23.372Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "12bdd8c7-d3cb-4fcc-b6ba-b544725a0f68",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 175,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 175,
+      "monotonicallyIncreasingSuggestionId": 116,
+      "range": {
+        "startLineNumber": 35,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "replaceText": "\nlet matrix = [\n    [1, 2, 3],\n    [4, 5, 6],\n    [7, 8, 9],\n]\n\n\n\n",
+      "originalText": "\nlet mat\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 35,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "diffText": "\nlet matrix = [\n    [1, 2, 3],\n    [4, 5, 6],\n    [7, 8, 9],\n]\n\n\n\n",
+      "fullOriginalText": "\nlet mat\n\n",
+      "suggestionTriggerTime": 1742371222653.2,
+      "greens": [],
+      "source": "typing",
+      "requestId": "5e0586c9-e76a-42b5-a65c-9878345732e3",
+      "selection": {
+        "startLineNumber": 35,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "0e48b681-1f38-471f-a9c0-402817196031",
+      "undoRedoGroup": {
+        "id": 116,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 35,
+        "startColumn": 1,
+        "endLineNumber": 38,
+        "endColumn": 1
+      },
+      "trackedText": "\nlet matri\n\n",
+      "decorationId": "b;604"
+    },
+    "generationUUID": "5e0586c9-e76a-42b5-a65c-9878345732e3",
+    "timestamp": "2025-03-19T08:00:25.218Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "12bdd8c7-d3cb-4fcc-b6ba-b544725a0f68",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 175,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 175,
+      "monotonicallyIncreasingSuggestionId": 116,
+      "range": {
+        "startLineNumber": 35,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "replaceText": "\nlet matrix = [\n    [1, 2, 3],\n    [4, 5, 6],\n    [7, 8, 9],\n]\n\n\n\n",
+      "originalText": "\nlet mat\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 35,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "diffText": "\nlet matrix = [\n    [1, 2, 3],\n    [4, 5, 6],\n    [7, 8, 9],\n]\n\n\n\n",
+      "fullOriginalText": "\nlet mat\n\n",
+      "suggestionTriggerTime": 1742371222653.2,
+      "greens": [],
+      "source": "typing",
+      "requestId": "5e0586c9-e76a-42b5-a65c-9878345732e3",
+      "selection": {
+        "startLineNumber": 35,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "0e48b681-1f38-471f-a9c0-402817196031",
+      "undoRedoGroup": {
+        "id": 116,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 35,
+        "startColumn": 1,
+        "endLineNumber": 38,
+        "endColumn": 1
+      },
+      "trackedText": "\nlet matri\n\n",
+      "decorationId": "b;604"
+    },
+    "generationUUID": "5e0586c9-e76a-42b5-a65c-9878345732e3",
+    "timestamp": "2025-03-19T08:00:25.234Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "0e48b681-1f38-471f-a9c0-402817196031",
+    "fusedCursorPrediction": null,
+    "oldText": "\nlet mat\n\n",
+    "newText": "\nlet matrix = [\n    [1, 2, 3],\n    [4, 5, 6],\n    [7, 8, 9],\n]\n\n\n\n",
+    "timestamp": "2025-03-19T08:00:25.235Z"
+  }
+]

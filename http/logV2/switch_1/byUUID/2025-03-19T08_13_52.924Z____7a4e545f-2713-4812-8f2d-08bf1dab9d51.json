@@ -1,0 +1,414 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "7a4e545f-2713-4812-8f2d-08bf1dab9d51",
+    "timestamp": "2025-03-19T08:13:52.924Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/switch1.ets",
+          "diffHistory": [
+            "1+|type Color = \"red\" | \"blue\" | \"green\";\n2+|\n3+|let color: Color = \"red\";\n4+|\n5+|switch (color) {\n6+|    case \"red\":\n7+|        console.log(\"red\");\n8+|        break;\n9+|}\n",
+            "9-|        \n10-|}\n9+|    case \"blue\":\n10+|}\n",
+            "10+|        console.log(\"blue\");\n11+|        break;\n12+|    case \"green\":\n13+|        console.log(\"green\");\n14+|        break;\n16+|\n17+|enum Direction {}\n18+|\n",
+            "17-|enum Direction {}\n17+|enum Direction {\n18+|    Up,\n19+|    Down,\n20+|    Left,\n21+|    Right,\n22+|}\n23+|let dir: Direction = Direction.Up;\n",
+            "25+|switch (dir) {\n26+|    case Direction.Up:\n27+|        console.log(\"up\");\n28+|        break;\n29+|}\n30+|\n",
+            "29+|    case Direction.Down:\n30+|        console.log(\"down\");\n31+|        break;\n32+|    case Direction.Left:\n33+|        console.log(\"left\");\n34+|        break;\n35+|        \n",
+            "38+|interface Square {\n39+|    kind: \"square\";\n40+|    size: number;\n41+|}\n42+|\n43+|interface Rectangle {\n44+|    \n45+|}\n",
+            "42+|interface Circle {\n43+|    kind: \"circle\";\n44+|    radius: number;\n45+|}\n43-|interface Rectangle {\n44-|    \n45-|}\n",
+            "47-|\n47+|function getArea()\n",
+            "47+|type Shape = Square | Circle;\n48+|\n",
+            "49-|function getArea()\n49+|function getArea(shape: Shape) {\n50+|    switch (shape.kind) {\n51+|        case \"square\":\n52+|            return shape.size * shape.size;\n53+|        case \"circle\":\n54+|            return Math.PI * shape.radius ** 2;\n55+|    }\n56+|}\n57+|\n58+|let category \n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/switch1.ets",
+        "contents": "type Color = \"red\" | \"blue\" | \"green\";\n\nlet color: Color = \"red\";\n\nswitch (color) {\n    case \"red\":\n        console.log(\"red\");\n        break;\n    case \"blue\":\n        console.log(\"blue\");\n        break;\n    case \"green\":\n        console.log(\"green\");\n        break;\n}\n\nenum Direction {\n    Up,\n    Down,\n    Left,\n    Right,\n}\nlet dir: Direction = Direction.Up;\n\nswitch (dir) {\n    case Direction.Up:\n        console.log(\"up\");\n        break;\n    case Direction.Down:\n        console.log(\"down\");\n        break;\n    case Direction.Left:\n        console.log(\"left\");\n        break;\n\n}\n\ninterface Square {\n    kind: \"square\";\n    size: number;\n}\ninterface Circle {\n    kind: \"circle\";\n    radius: number;\n}\n\ntype Shape = Square | Circle;\n\nfunction getArea(shape: Shape) {\n    switch (shape.kind) {\n        case \"square\":\n            return shape.size * shape.size;\n        case \"circle\":\n            return Math.PI * shape.radius ** 2;\n    }\n}\n\nlet category ",
+        "cursorPosition": {
+          "line": 57,
+          "column": 13
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 151,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742372032964,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.400146484375,
+      "timeAtRequestSend": 1742372032964
+    },
+    "generateUuid": "7a4e545f-2713-4812-8f2d-08bf1dab9d51",
+    "timestamp": "2025-03-19T08:13:52.966Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "7a4e545f-2713-4812-8f2d-08bf1dab9d51",
+    "timestamp": "2025-03-19T08:13:53.331Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nlet category =",
+      "rangeToReplace": {
+        "startLineNumber": 57,
+        "endLineNumberInclusive": 58
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "7a4e545f-2713-4812-8f2d-08bf1dab9d51",
+    "timestamp": "2025-03-19T08:13:53.331Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \""
+    },
+    "generationUUID": "7a4e545f-2713-4812-8f2d-08bf1dab9d51",
+    "timestamp": "2025-03-19T08:13:53.391Z"
+  },
+  {
+    "firstChunkValue": "\nlet category = \"animal\";",
+    "generationUUID": "7a4e545f-2713-4812-8f2d-08bf1dab9d51",
+    "timestamp": "2025-03-19T08:13:53.411Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "animal"
+    },
+    "generationUUID": "7a4e545f-2713-4812-8f2d-08bf1dab9d51",
+    "timestamp": "2025-03-19T08:13:53.412Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nlet category = \"animal\";"
+    },
+    "generationUUID": "7a4e545f-2713-4812-8f2d-08bf1dab9d51",
+    "timestamp": "2025-03-19T08:13:53.418Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "eaf6913e-c126-48cd-9240-55426aa7db92",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 151,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 151,
+      "monotonicallyIncreasingSuggestionId": 116,
+      "range": {
+        "startLineNumber": 57,
+        "startColumn": 1,
+        "endLineNumberInclusive": 58,
+        "endColumn": 16
+      },
+      "replaceText": "\nlet category = \"animal\";",
+      "originalText": "\nlet category ",
+      "startingSuggestionRange": {
+        "startLineNumber": 57,
+        "startColumn": 1,
+        "endLineNumberInclusive": 58,
+        "endColumn": 16
+      },
+      "diffText": "\nlet category = \"animal\";",
+      "fullOriginalText": "\nlet category ",
+      "suggestionTriggerTime": 1742372032912.7,
+      "greens": [],
+      "source": "typing",
+      "requestId": "7a4e545f-2713-4812-8f2d-08bf1dab9d51",
+      "selection": {
+        "startLineNumber": 57,
+        "startColumn": 1,
+        "endLineNumberInclusive": 58,
+        "endColumn": 16
+      },
+      "undoRedoGroup": {
+        "id": 116,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 57,
+        "startColumn": 1,
+        "endLineNumber": 58,
+        "endColumn": 16
+      },
+      "trackedText": "\nlet category = "
+    },
+    "generationUUID": "7a4e545f-2713-4812-8f2d-08bf1dab9d51",
+    "timestamp": "2025-03-19T08:13:53.418Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\";"
+    },
+    "generationUUID": "7a4e545f-2713-4812-8f2d-08bf1dab9d51",
+    "timestamp": "2025-03-19T08:13:53.419Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "7a4e545f-2713-4812-8f2d-08bf1dab9d51",
+    "timestamp": "2025-03-19T08:13:53.421Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "switch"
+    },
+    "generationUUID": "7a4e545f-2713-4812-8f2d-08bf1dab9d51",
+    "timestamp": "2025-03-19T08:13:53.423Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " (category"
+    },
+    "generationUUID": "7a4e545f-2713-4812-8f2d-08bf1dab9d51",
+    "timestamp": "2025-03-19T08:13:53.423Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ")"
+    },
+    "generationUUID": "7a4e545f-2713-4812-8f2d-08bf1dab9d51",
+    "timestamp": "2025-03-19T08:13:53.434Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "7a4e545f-2713-4812-8f2d-08bf1dab9d51",
+    "timestamp": "2025-03-19T08:13:53.448Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n   "
+    },
+    "generationUUID": "7a4e545f-2713-4812-8f2d-08bf1dab9d51",
+    "timestamp": "2025-03-19T08:13:53.460Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " case"
+    },
+    "generationUUID": "7a4e545f-2713-4812-8f2d-08bf1dab9d51",
+    "timestamp": "2025-03-19T08:13:53.477Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \""
+    },
+    "generationUUID": "7a4e545f-2713-4812-8f2d-08bf1dab9d51",
+    "timestamp": "2025-03-19T08:13:53.483Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "animal"
+    },
+    "generationUUID": "7a4e545f-2713-4812-8f2d-08bf1dab9d51",
+    "timestamp": "2025-03-19T08:13:53.495Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\":"
+    },
+    "generationUUID": "7a4e545f-2713-4812-8f2d-08bf1dab9d51",
+    "timestamp": "2025-03-19T08:13:53.511Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n       "
+    },
+    "generationUUID": "7a4e545f-2713-4812-8f2d-08bf1dab9d51",
+    "timestamp": "2025-03-19T08:13:53.521Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " console"
+    },
+    "generationUUID": "7a4e545f-2713-4812-8f2d-08bf1dab9d51",
+    "timestamp": "2025-03-19T08:13:53.531Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ".log(\"animal"
+    },
+    "generationUUID": "7a4e545f-2713-4812-8f2d-08bf1dab9d51",
+    "timestamp": "2025-03-19T08:13:53.547Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\");"
+    },
+    "generationUUID": "7a4e545f-2713-4812-8f2d-08bf1dab9d51",
+    "timestamp": "2025-03-19T08:13:53.554Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n       "
+    },
+    "generationUUID": "7a4e545f-2713-4812-8f2d-08bf1dab9d51",
+    "timestamp": "2025-03-19T08:13:53.567Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " break"
+    },
+    "generationUUID": "7a4e545f-2713-4812-8f2d-08bf1dab9d51",
+    "timestamp": "2025-03-19T08:13:53.578Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";\n}"
+    },
+    "generationUUID": "7a4e545f-2713-4812-8f2d-08bf1dab9d51",
+    "timestamp": "2025-03-19T08:13:53.591Z"
+  },
+  {
+    "fullText": "\nlet category = \"animal\";\n\nswitch (category) {\n    case \"animal\":\n        console.log(\"animal\");\n        break;\n}",
+    "generationUUID": "7a4e545f-2713-4812-8f2d-08bf1dab9d51",
+    "timestamp": "2025-03-19T08:13:53.608Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nlet category = \"animal\";"
+    },
+    "fullText": "\nlet category = \"animal\";\n\nswitch (category) {\n    case \"animal\":\n        console.log(\"animal\");\n        break;\n}",
+    "generationUUID": "7a4e545f-2713-4812-8f2d-08bf1dab9d51",
+    "timestamp": "2025-03-19T08:13:53.609Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "7503dc29-ff0c-47ed-828e-c253aaa24a25",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 151,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 154,
+      "monotonicallyIncreasingSuggestionId": 118,
+      "range": {
+        "startLineNumber": 57,
+        "startColumn": 1,
+        "endLineNumberInclusive": 58,
+        "endColumn": 24
+      },
+      "replaceText": "\nlet category = \"animal\";\n\nswitch (category) {\n    case \"animal\":\n        console.log(\"animal\");\n        break;\n}",
+      "originalText": "\nlet category = \"animal\"",
+      "startingSuggestionRange": {
+        "startLineNumber": 57,
+        "startColumn": 1,
+        "endLineNumberInclusive": 58,
+        "endColumn": 24
+      },
+      "diffText": "\nlet category = \"animal\";\n\nswitch (category) {\n    case \"animal\":\n        console.log(\"animal\");\n        break;\n}",
+      "fullOriginalText": "\nlet category = \"animal\"",
+      "suggestionTriggerTime": 1742372032912.7,
+      "greens": [],
+      "source": "typing",
+      "requestId": "7a4e545f-2713-4812-8f2d-08bf1dab9d51",
+      "selection": {
+        "startLineNumber": 57,
+        "startColumn": 1,
+        "endLineNumberInclusive": 58,
+        "endColumn": 16
+      },
+      "fusedCursorPredictionId": "2b999dcc-d895-45d6-8c8e-9b43fe62167e",
+      "undoRedoGroup": {
+        "id": 118,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "7a4e545f-2713-4812-8f2d-08bf1dab9d51",
+    "timestamp": "2025-03-19T08:13:53.609Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "7a4e545f-2713-4812-8f2d-08bf1dab9d51",
+    "timestamp": "2025-03-19T08:13:53.611Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "7a4e545f-2713-4812-8f2d-08bf1dab9d51",
+    "timestamp": "2025-03-19T08:13:53.611Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "2b999dcc-d895-45d6-8c8e-9b43fe62167e",
+    "generationUUID": "7a4e545f-2713-4812-8f2d-08bf1dab9d51",
+    "timestamp": "2025-03-19T08:13:53.615Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nlet category = \"animal\";"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "2b999dcc-d895-45d6-8c8e-9b43fe62167e",
+    "generationUUID": "7a4e545f-2713-4812-8f2d-08bf1dab9d51",
+    "timestamp": "2025-03-19T08:13:53.615Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "2b999dcc-d895-45d6-8c8e-9b43fe62167e",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T08:13:53.615Z"
+  }
+]

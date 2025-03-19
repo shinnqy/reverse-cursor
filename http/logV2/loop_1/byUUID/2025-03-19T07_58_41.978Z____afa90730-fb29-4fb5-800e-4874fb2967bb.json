@@ -1,0 +1,627 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "afa90730-fb29-4fb5-800e-4874fb2967bb",
+    "timestamp": "2025-03-19T07:58:41.978Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/loop1.ets",
+          "diffHistory": [
+            "1+|let numbers = [1, 2, 3, 4, 5]\n2+|\n3+|for (let i = 0; i < numbers.length; i++) {\n4+|    console.log(numbers[i])\n5+|}\n6+|\n",
+            "5+|    numbers[i].\n",
+            "5-|    numbers[i].\n",
+            "5-|    \n5+|    const number = numbers[i]\n6+|    nm\n",
+            "6-|    nm\n6+|    numbers.\n",
+            "6-|    numbers.\n8+|let users = [\n9+|    { name: 'John', age: 30 },\n10+|    { name: 'Jane', age: 25 },\n11+|    { name: 'Jim', age: 35 },\n12+|]\n13+|\n14+|\n15+|\n",
+            "14+|for (let i = 0; i < users.length; i++) {\n15+|    const user = users[i]\n16+|    console.log(user.name)\n17+|}\n",
+            "14-|for (let i = 0; i < users.length; i++) {\n15-|    const user = users[i]\n14+|for (const user of users) {\n",
+            "18+|for (const k)\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/loop1.ets",
+        "contents": "let numbers = [1, 2, 3, 4, 5]\n\nfor (let i = 0; i < numbers.length; i++) {\n    console.log(numbers[i])\n    const number = numbers[i]\n}\n\nlet users = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]\n\nfor (const user of users) {\n    console.log(user.name)\n}\n\nfor (const k)\n\n\n\n\n\n",
+        "cursorPosition": {
+          "line": 17,
+          "column": 12
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 130,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742371122013,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.699951171875,
+      "timeAtRequestSend": 1742371122013
+    },
+    "generateUuid": "afa90730-fb29-4fb5-800e-4874fb2967bb",
+    "timestamp": "2025-03-19T07:58:42.015Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "afa90730-fb29-4fb5-800e-4874fb2967bb",
+    "timestamp": "2025-03-19T07:58:42.376Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "for (const user of users) {\n    console.log(user.name)\n}\n\nfor (const key",
+      "rangeToReplace": {
+        "startLineNumber": 14,
+        "endLineNumberInclusive": 24
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "afa90730-fb29-4fb5-800e-4874fb2967bb",
+    "timestamp": "2025-03-19T07:58:42.377Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " in"
+    },
+    "generationUUID": "afa90730-fb29-4fb5-800e-4874fb2967bb",
+    "timestamp": "2025-03-19T07:58:42.393Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " users"
+    },
+    "generationUUID": "afa90730-fb29-4fb5-800e-4874fb2967bb",
+    "timestamp": "2025-03-19T07:58:42.406Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ") {\n    console.log("
+    },
+    "generationUUID": "afa90730-fb29-4fb5-800e-4874fb2967bb",
+    "timestamp": "2025-03-19T07:58:42.417Z"
+  },
+  {
+    "firstChunkValue": "for (const user of users) {\n    console.log(user.name)\n}\n\nfor (const key in users) {\n\n\n\n\n\n",
+    "generationUUID": "afa90730-fb29-4fb5-800e-4874fb2967bb",
+    "timestamp": "2025-03-19T07:58:42.420Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "for (const user of users) {\n    console.log(user.name)\n}\n\nfor (const key in users) {\n\n\n\n\n\n"
+    },
+    "generationUUID": "afa90730-fb29-4fb5-800e-4874fb2967bb",
+    "timestamp": "2025-03-19T07:58:42.422Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "253d5b55-3810-411a-abe8-34758e139eda",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 130,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 130,
+      "monotonicallyIncreasingSuggestionId": 76,
+      "range": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "replaceText": "for (const user of users) {\n    console.log(user.name)\n}\n\nfor (const key in users) {\n\n\n\n\n\n",
+      "originalText": "for (const user of users) {\n    console.log(user.name)\n}\n\nfor (const k)\n\n\n\n\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "diffText": "for (const user of users) {\n    console.log(user.name)\n}\n\nfor (const key in users) {\n\n\n\n\n\n",
+      "fullOriginalText": "for (const user of users) {\n    console.log(user.name)\n}\n\nfor (const k)\n\n\n\n\n\n",
+      "suggestionTriggerTime": 1742371121961.7,
+      "greens": [],
+      "source": "typing",
+      "requestId": "afa90730-fb29-4fb5-800e-4874fb2967bb",
+      "selection": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 76,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumber": 24,
+        "endColumn": 1
+      },
+      "trackedText": "for (const user of users) {\n    console.log(user.name)\n}\n\nfor (const key)\n\n\n\n\n\n"
+    },
+    "generationUUID": "afa90730-fb29-4fb5-800e-4874fb2967bb",
+    "timestamp": "2025-03-19T07:58:42.423Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "key"
+    },
+    "generationUUID": "afa90730-fb29-4fb5-800e-4874fb2967bb",
+    "timestamp": "2025-03-19T07:58:42.428Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ")"
+    },
+    "generationUUID": "afa90730-fb29-4fb5-800e-4874fb2967bb",
+    "timestamp": "2025-03-19T07:58:42.443Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "afa90730-fb29-4fb5-800e-4874fb2967bb",
+    "timestamp": "2025-03-19T07:58:42.453Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}"
+    },
+    "generationUUID": "afa90730-fb29-4fb5-800e-4874fb2967bb",
+    "timestamp": "2025-03-19T07:58:42.464Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n\n"
+    },
+    "generationUUID": "afa90730-fb29-4fb5-800e-4874fb2967bb",
+    "timestamp": "2025-03-19T07:58:42.475Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "afa90730-fb29-4fb5-800e-4874fb2967bb",
+    "timestamp": "2025-03-19T07:58:42.488Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "afa90730-fb29-4fb5-800e-4874fb2967bb",
+    "timestamp": "2025-03-19T07:58:42.504Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "afa90730-fb29-4fb5-800e-4874fb2967bb",
+    "timestamp": "2025-03-19T07:58:42.535Z"
+  },
+  {
+    "fullText": "for (const user of users) {\n    console.log(user.name)\n}\n\nfor (const key in users) {\n    console.log(key)\n}\n\n\n\n\n\n",
+    "generationUUID": "afa90730-fb29-4fb5-800e-4874fb2967bb",
+    "timestamp": "2025-03-19T07:58:42.537Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "for (const user of users) {\n    console.log(user.name)\n}\n\nfor (const key in users) {\n\n\n\n\n\n"
+    },
+    "fullText": "for (const user of users) {\n    console.log(user.name)\n}\n\nfor (const key in users) {\n    console.log(key)\n}\n\n\n\n\n\n",
+    "generationUUID": "afa90730-fb29-4fb5-800e-4874fb2967bb",
+    "timestamp": "2025-03-19T07:58:42.538Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "6bfd7075-76ab-42d4-acf8-9b30c7cf0715",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 130,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 133,
+      "monotonicallyIncreasingSuggestionId": 77,
+      "range": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "replaceText": "for (const user of users) {\n    console.log(user.name)\n}\n\nfor (const key in users) {\n    console.log(key)\n}\n\n\n\n\n\n",
+      "originalText": "for (const user of users) {\n    console.log(user.name)\n}\n\nfor (const key in users) {\n\n\n\n\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "diffText": "for (const user of users) {\n    console.log(user.name)\n}\n\nfor (const key in users) {\n    console.log(key)\n}\n\n\n\n\n\n",
+      "fullOriginalText": "for (const user of users) {\n    console.log(user.name)\n}\n\nfor (const key in users) {\n\n\n\n\n\n",
+      "suggestionTriggerTime": 1742371121961.7,
+      "greens": [],
+      "source": "typing",
+      "requestId": "afa90730-fb29-4fb5-800e-4874fb2967bb",
+      "selection": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "7a04196a-fdf8-4f55-9f88-5a4d1280e7d6",
+      "undoRedoGroup": {
+        "id": 77,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "afa90730-fb29-4fb5-800e-4874fb2967bb",
+    "timestamp": "2025-03-19T07:58:42.538Z"
+  },
+  {
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/loop1.ets",
+      "lineNumberOneIndexed": 1,
+      "text": "let numbers = [1, 2, 3, 4, 5]\n\nfor (let i = 0; i < numbers.length; i++) {\nconsole.log(numbers[i])\nconst number = numbers[i]",
+      "shouldRetriggerCpp": false
+    },
+    "predictionId": "7a04196a-fdf8-4f55-9f88-5a4d1280e7d6",
+    "generationUUID": "afa90730-fb29-4fb5-800e-4874fb2967bb",
+    "timestamp": "2025-03-19T07:58:42.791Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "for (const user of users) {\n    console.log(user.name)\n}\n\nfor (const key in users) {\n\n\n\n\n\n"
+    },
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/loop1.ets",
+      "lineNumberOneIndexed": 1,
+      "text": "let numbers = [1, 2, 3, 4, 5]\n\nfor (let i = 0; i < numbers.length; i++) {\nconsole.log(numbers[i])\nconst number = numbers[i]",
+      "shouldRetriggerCpp": false
+    },
+    "predictionId": "7a04196a-fdf8-4f55-9f88-5a4d1280e7d6",
+    "generationUUID": "afa90730-fb29-4fb5-800e-4874fb2967bb",
+    "timestamp": "2025-03-19T07:58:42.792Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "7a04196a-fdf8-4f55-9f88-5a4d1280e7d6",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/loop1.ets",
+      "lineNumberOneIndexed": 1,
+      "text": "let numbers = [1, 2, 3, 4, 5]\n\nfor (let i = 0; i < numbers.length; i++) {\nconsole.log(numbers[i])\nconst number = numbers[i]",
+      "shouldRetriggerCpp": false
+    },
+    "timestamp": "2025-03-19T07:58:42.793Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "cursorPredictionTarget": {
+        "relativePath": "entry/src/main/ets/utils/loop1.ets",
+        "lineNumberOneIndexed": 1,
+        "expectedContent": "let numbers = [1, 2, 3, 4, 5]\n\nfor (let i = 0; i < numbers.length; i++) {\nconsole.log(numbers[i])\nconst number = numbers[i]",
+        "shouldRetriggerCpp": false
+      }
+    },
+    "generationUUID": "afa90730-fb29-4fb5-800e-4874fb2967bb",
+    "timestamp": "2025-03-19T07:58:42.796Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "afa90730-fb29-4fb5-800e-4874fb2967bb",
+    "timestamp": "2025-03-19T07:58:42.797Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "253d5b55-3810-411a-abe8-34758e139eda",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 130,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 130,
+      "monotonicallyIncreasingSuggestionId": 76,
+      "range": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "replaceText": "for (const user of users) {\n    console.log(user.name)\n}\n\nfor (const key in users) {\n\n\n\n\n\n",
+      "originalText": "for (const user of users) {\n    console.log(user.name)\n}\n\nfor (const k)\n\n\n\n\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "diffText": "for (const user of users) {\n    console.log(user.name)\n}\n\nfor (const key in users) {\n\n\n\n\n\n",
+      "fullOriginalText": "for (const user of users) {\n    console.log(user.name)\n}\n\nfor (const k)\n\n\n\n\n\n",
+      "suggestionTriggerTime": 1742371121961.7,
+      "greens": [],
+      "source": "typing",
+      "requestId": "afa90730-fb29-4fb5-800e-4874fb2967bb",
+      "selection": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 76,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumber": 24,
+        "endColumn": 1
+      },
+      "trackedText": "for (const user of users) {\n    console.log(user.name)\n}\n\nfor (const key)\n\n\n\n\n\n",
+      "decorationId": "b;433",
+      "onAcceptDisplayId": "6bfd7075-76ab-42d4-acf8-9b30c7cf0715"
+    },
+    "generationUUID": "afa90730-fb29-4fb5-800e-4874fb2967bb",
+    "timestamp": "2025-03-19T07:58:42.927Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "253d5b55-3810-411a-abe8-34758e139eda",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 130,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 130,
+      "monotonicallyIncreasingSuggestionId": 76,
+      "range": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "replaceText": "for (const user of users) {\n    console.log(user.name)\n}\n\nfor (const key in users) {\n\n\n\n\n\n",
+      "originalText": "for (const user of users) {\n    console.log(user.name)\n}\n\nfor (const k)\n\n\n\n\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "diffText": "for (const user of users) {\n    console.log(user.name)\n}\n\nfor (const key in users) {\n\n\n\n\n\n",
+      "fullOriginalText": "for (const user of users) {\n    console.log(user.name)\n}\n\nfor (const k)\n\n\n\n\n\n",
+      "suggestionTriggerTime": 1742371121961.7,
+      "greens": [],
+      "source": "typing",
+      "requestId": "afa90730-fb29-4fb5-800e-4874fb2967bb",
+      "selection": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 76,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumber": 24,
+        "endColumn": 1
+      },
+      "trackedText": "for (const user of users) {\n    console.log(user.name)\n}\n\nfor (const key)\n\n\n\n\n\n",
+      "decorationId": "b;433",
+      "onAcceptDisplayId": "6bfd7075-76ab-42d4-acf8-9b30c7cf0715"
+    },
+    "generationUUID": "afa90730-fb29-4fb5-800e-4874fb2967bb",
+    "timestamp": "2025-03-19T07:58:42.932Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "6bfd7075-76ab-42d4-acf8-9b30c7cf0715",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 130,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 133,
+      "monotonicallyIncreasingSuggestionId": 77,
+      "range": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "replaceText": "for (const user of users) {\n    console.log(user.name)\n}\n\nfor (const key in users) {\n    console.log(key)\n}\n\n\n\n\n\n",
+      "originalText": "for (const user of users) {\n    console.log(user.name)\n}\n\nfor (const key in users) {\n\n\n\n\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "diffText": "for (const user of users) {\n    console.log(user.name)\n}\n\nfor (const key in users) {\n    console.log(key)\n}\n\n\n\n\n\n",
+      "fullOriginalText": "for (const user of users) {\n    console.log(user.name)\n}\n\nfor (const key in users) {\n\n\n\n\n\n",
+      "suggestionTriggerTime": 1742371121961.7,
+      "greens": [],
+      "source": "typing",
+      "requestId": "afa90730-fb29-4fb5-800e-4874fb2967bb",
+      "selection": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "7a04196a-fdf8-4f55-9f88-5a4d1280e7d6",
+      "undoRedoGroup": {
+        "id": 77,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;446"
+    },
+    "generationUUID": "afa90730-fb29-4fb5-800e-4874fb2967bb",
+    "timestamp": "2025-03-19T07:58:43.560Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "6bfd7075-76ab-42d4-acf8-9b30c7cf0715",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 130,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 133,
+      "monotonicallyIncreasingSuggestionId": 77,
+      "range": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "replaceText": "for (const user of users) {\n    console.log(user.name)\n}\n\nfor (const key in users) {\n    console.log(key)\n}\n\n\n\n\n\n",
+      "originalText": "for (const user of users) {\n    console.log(user.name)\n}\n\nfor (const key in users) {\n\n\n\n\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "diffText": "for (const user of users) {\n    console.log(user.name)\n}\n\nfor (const key in users) {\n    console.log(key)\n}\n\n\n\n\n\n",
+      "fullOriginalText": "for (const user of users) {\n    console.log(user.name)\n}\n\nfor (const key in users) {\n\n\n\n\n\n",
+      "suggestionTriggerTime": 1742371121961.7,
+      "greens": [],
+      "source": "typing",
+      "requestId": "afa90730-fb29-4fb5-800e-4874fb2967bb",
+      "selection": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "7a04196a-fdf8-4f55-9f88-5a4d1280e7d6",
+      "undoRedoGroup": {
+        "id": 77,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;446"
+    },
+    "generationUUID": "afa90730-fb29-4fb5-800e-4874fb2967bb",
+    "timestamp": "2025-03-19T07:58:43.577Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "7a04196a-fdf8-4f55-9f88-5a4d1280e7d6",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/loop1.ets",
+      "lineNumberOneIndexed": 1,
+      "text": "let numbers = [1, 2, 3, 4, 5]\n\nfor (let i = 0; i < numbers.length; i++) {\nconsole.log(numbers[i])\nconst number = numbers[i]",
+      "shouldRetriggerCpp": false
+    },
+    "oldText": "for (const user of users) {\n    console.log(user.name)\n}\n\nfor (const key in users) {\n\n\n\n\n\n",
+    "newText": "for (const user of users) {\n    console.log(user.name)\n}\n\nfor (const key in users) {\n    console.log(key)\n}\n\n\n\n\n\n",
+    "timestamp": "2025-03-19T07:58:43.577Z"
+  },
+  {
+    "action": "displayFusedCursorPrediction",
+    "predictionId": "7a04196a-fdf8-4f55-9f88-5a4d1280e7d6",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/loop1.ets",
+      "lineNumberOneIndexed": 1,
+      "text": "let numbers = [1, 2, 3, 4, 5]\n\nfor (let i = 0; i < numbers.length; i++) {\nconsole.log(numbers[i])\nconst number = numbers[i]",
+      "shouldRetriggerCpp": false
+    },
+    "oldText": "for (const user of users) {\n    console.log(user.name)\n}\n\nfor (const key in users) {\n\n\n\n\n\n",
+    "newText": "for (const user of users) {\n    console.log(user.name)\n}\n\nfor (const key in users) {\n    console.log(key)\n}\n\n\n\n\n\n",
+    "timestamp": "2025-03-19T07:58:43.578Z"
+  }
+]

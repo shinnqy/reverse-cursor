@@ -1,0 +1,533 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:37.844Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/functionReturn.ets",
+          "diffHistory": [
+            "1+|function add(a: number, b: number): number {\n2+|    return a + b;\n3+|}\n4+|\n5+|function subtract(a: number, b: number): number {\n6+|    return a - b;\n7+|}\n8+|\n9+|let sum = add(1, 2);\n10+|\n11+|function getUser(name: string, age: number): { name: string, age: number } {\n12+|    return { name, age };\n13+|}\n14+|\n15+|let user = getUser(\"John\", 30);\n16+|\n17+|  \n",
+            "11-|function getUser(name: string, age: number): { name: string, age: number } {\n11+|interface User {\n12+|    name: string;\n13+|    age: number;\n14+|}\n15+|\n16+|function getUser(name: string, age: number): User {\n",
+            "22+|function wrapValue<T>(value: T): {data {\n23+|    return { data: value };\n24+|}\n25+|\n26+|let wrappedValue = wrapValue(10);\n27+|\n28+|\n",
+            "22-|function wrapValue<T>(value: T): {data {\n22+|function wrapValue<T>(value: T): {data: T}   {\n",
+            "28+|let wrappedString = wrapValue(\"Hello\");\n30+|let wrappedBoolean = wrapValue(true);\n31+|\n32+|let wrappedArray = wrapValue([1, 2, 3]);\n33+|\n34+|\n",
+            "22-|function wrapValue<T>(value: T): {data: T}   {\n22+|interface Wrapper<T> {\n23+|    data: T;\n24+|}\n25+|\n26+|function wrapValue<T>(value: T): Wrapper<T> {\n",
+            "38-|\n38+|asy\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/functionReturn.ets",
+        "contents": "function add(a: number, b: number): number {\n    return a + b;\n}\n\nfunction subtract(a: number, b: number): number {\n    return a - b;\n}\n\nlet sum = add(1, 2);\n\ninterface User {\n    name: string;\n    age: number;\n}\n\nfunction getUser(name: string, age: number): User {\n    return { name, age };\n}\n\nlet user = getUser(\"John\", 30);\n\ninterface Wrapper<T> {\n    data: T;\n}\n\nfunction wrapValue<T>(value: T): Wrapper<T> {\n    return { data: value };\n}\n\nlet wrappedValue = wrapValue(10);\n\nlet wrappedString = wrapValue(\"Hello\");\n\nlet wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasy\n",
+        "cursorPosition": {
+          "line": 37,
+          "column": 3
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 124,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742369917891,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 54.900146484375,
+      "timeAtRequestSend": 1742369917891
+    },
+    "generateUuid": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:37.915Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.253Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nasync",
+      "rangeToReplace": {
+        "startLineNumber": 37,
+        "endLineNumberInclusive": 39
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.254Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " function"
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.361Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " fetch"
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.374Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Data"
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.387Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "("
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.401Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "url"
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.417Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.426Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " string"
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.441Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "):"
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.453Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Promise"
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.467Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "<"
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.477Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "string"
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.496Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ">"
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.503Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.520Z"
+  },
+  {
+    "firstChunkValue": "\nasync function fetchData(url: string): Promise<string> {\n",
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.536Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nasync function fetchData(url: string): Promise<string> {\n"
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.537Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n   "
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.537Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " const"
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.548Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " response"
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.559Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.579Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " await"
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.589Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " fetch"
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.606Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "("
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.620Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "url);"
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.631Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n   "
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.644Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " return"
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.657Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " response"
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.672Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.686Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "text"
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.701Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "();"
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.717Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.727Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}"
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.739Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.754Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "let"
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.766Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " data"
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.780Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.801Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " await fetchData"
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.806Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "(\""
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.822Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "https"
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.833Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "://"
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.846Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "api"
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.861Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.877Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "example"
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.889Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.906Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "com"
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.922Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "/"
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.932Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "data"
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.943Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\");"
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.967Z"
+  },
+  {
+    "fullText": "\nasync function fetchData(url: string): Promise<string> {\n    const response = await fetch(url);\n    return response.text();\n}\n\nlet data = await fetchData(\"https://api.example.com/data\");\n\n",
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.978Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nasync function fetchData(url: string): Promise<string> {\n"
+    },
+    "fullText": "\nasync function fetchData(url: string): Promise<string> {\n    const response = await fetch(url);\n    return response.text();\n}\n\nlet data = await fetchData(\"https://api.example.com/data\");\n\n",
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.978Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && currentSuggestion uniqueId is different && need to create newSuggestion according fullText",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "232b9d6a-b9e3-47b3-a63e-0d056796222c",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 124,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 127,
+      "monotonicallyIncreasingSuggestionId": 122,
+      "range": {
+        "startLineNumber": 37,
+        "startColumn": 1,
+        "endLineNumberInclusive": 39,
+        "endColumn": 1
+      },
+      "replaceText": "\nasync function fetchData(url: string): Promise<string> {\n    const response = await fetch(url);\n    return response.text();\n}\n\nlet data = await fetchData(\"https://api.example.com/data\");\n\n",
+      "originalText": "\nasync \n",
+      "startingSuggestionRange": {
+        "startLineNumber": 37,
+        "startColumn": 1,
+        "endLineNumberInclusive": 39,
+        "endColumn": 1
+      },
+      "diffText": "\nasync function fetchData(url: string): Promise<string> {\n    const response = await fetch(url);\n    return response.text();\n}\n\nlet data = await fetchData(\"https://api.example.com/data\");\n\n",
+      "fullOriginalText": "\nasync \n",
+      "suggestionTriggerTime": 1742369917840.5999,
+      "greens": [],
+      "source": "typing",
+      "requestId": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+      "selection": {
+        "startLineNumber": 37,
+        "startColumn": 1,
+        "endLineNumberInclusive": 39,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "1756aaf5-0ac2-4cb9-98aa-9090db3d5e67",
+      "undoRedoGroup": {
+        "id": 122,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.978Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.979Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "1756aaf5-0ac2-4cb9-98aa-9090db3d5e67",
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.986Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nasync function fetchData(url: string): Promise<string> {\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "1756aaf5-0ac2-4cb9-98aa-9090db3d5e67",
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.987Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "1756aaf5-0ac2-4cb9-98aa-9090db3d5e67",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T07:38:38.988Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.989Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "085232f0-2fd6-42af-9ead-6e1952a481bc",
+    "timestamp": "2025-03-19T07:38:38.990Z"
+  }
+]

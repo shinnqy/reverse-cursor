@@ -1,0 +1,397 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "8ceb769b-e569-4c49-91fe-8a27f85553fb",
+    "timestamp": "2025-03-19T07:59:20.509Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/loop1.ets",
+          "diffHistory": [
+            "1+|let numbers = [1, 2, 3, 4, 5]\n2+|\n3+|for (let i = 0; i < numbers.length; i++) {\n4+|    console.log(numbers[i])\n5+|}\n6+|\n",
+            "5+|    numbers[i].\n",
+            "5-|    numbers[i].\n",
+            "5-|    \n5+|    const number = numbers[i]\n6+|    nm\n",
+            "6-|    nm\n6+|    numbers.\n",
+            "6-|    numbers.\n8+|let users = [\n9+|    { name: 'John', age: 30 },\n10+|    { name: 'Jane', age: 25 },\n11+|    { name: 'Jim', age: 35 },\n12+|]\n13+|\n14+|\n15+|\n",
+            "14+|for (let i = 0; i < users.length; i++) {\n15+|    const user = users[i]\n16+|    console.log(user.name)\n17+|}\n",
+            "14-|for (let i = 0; i < users.length; i++) {\n15-|    const user = users[i]\n14+|for (const user of users) {\n",
+            "18+|for (const key in users) {\n19+|    console.log(key)\n20+|}\n",
+            "20+|    const user = users[key];\n21+|    user.name = 'John';\n",
+            "8+|in\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/loop1.ets",
+        "contents": "let numbers = [1, 2, 3, 4, 5]\n\nfor (let i = 0; i < numbers.length; i++) {\n    console.log(numbers[i])\n    const number = numbers[i]\n}\n\nin\nlet users = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]\n\nfor (const user of users) {\n    console.log(user.name)\n}\n\nfor (const key in users) {\n    console.log(key)\n    const user = users[key];\n    user.name = 'John';\n}\n\n\n\n\n\n",
+        "cursorPosition": {
+          "line": 7,
+          "column": 2
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 147,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742371160554,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 54.599853515625,
+      "timeAtRequestSend": 1742371160554
+    },
+    "generateUuid": "8ceb769b-e569-4c49-91fe-8a27f85553fb",
+    "timestamp": "2025-03-19T07:59:20.556Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "8ceb769b-e569-4c49-91fe-8a27f85553fb",
+    "timestamp": "2025-03-19T07:59:20.905Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\ninterface",
+      "rangeToReplace": {
+        "startLineNumber": 7,
+        "endLineNumberInclusive": 13
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "8ceb769b-e569-4c49-91fe-8a27f85553fb",
+    "timestamp": "2025-03-19T07:59:20.906Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " User"
+    },
+    "generationUUID": "8ceb769b-e569-4c49-91fe-8a27f85553fb",
+    "timestamp": "2025-03-19T07:59:20.924Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "8ceb769b-e569-4c49-91fe-8a27f85553fb",
+    "timestamp": "2025-03-19T07:59:20.935Z"
+  },
+  {
+    "firstChunkValue": "\ninterface User {\nlet users = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]",
+    "generationUUID": "8ceb769b-e569-4c49-91fe-8a27f85553fb",
+    "timestamp": "2025-03-19T07:59:20.945Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\ninterface User {\nlet users = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]"
+    },
+    "generationUUID": "8ceb769b-e569-4c49-91fe-8a27f85553fb",
+    "timestamp": "2025-03-19T07:59:20.948Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n    name"
+    },
+    "generationUUID": "8ceb769b-e569-4c49-91fe-8a27f85553fb",
+    "timestamp": "2025-03-19T07:59:20.949Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": string"
+    },
+    "generationUUID": "8ceb769b-e569-4c49-91fe-8a27f85553fb",
+    "timestamp": "2025-03-19T07:59:20.959Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";"
+    },
+    "generationUUID": "8ceb769b-e569-4c49-91fe-8a27f85553fb",
+    "timestamp": "2025-03-19T07:59:20.967Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "8ceb769b-e569-4c49-91fe-8a27f85553fb",
+    "timestamp": "2025-03-19T07:59:20.980Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "   "
+    },
+    "generationUUID": "8ceb769b-e569-4c49-91fe-8a27f85553fb",
+    "timestamp": "2025-03-19T07:59:20.991Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " age"
+    },
+    "generationUUID": "8ceb769b-e569-4c49-91fe-8a27f85553fb",
+    "timestamp": "2025-03-19T07:59:21.008Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": number"
+    },
+    "generationUUID": "8ceb769b-e569-4c49-91fe-8a27f85553fb",
+    "timestamp": "2025-03-19T07:59:21.020Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";"
+    },
+    "generationUUID": "8ceb769b-e569-4c49-91fe-8a27f85553fb",
+    "timestamp": "2025-03-19T07:59:21.029Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n}"
+    },
+    "generationUUID": "8ceb769b-e569-4c49-91fe-8a27f85553fb",
+    "timestamp": "2025-03-19T07:59:21.042Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\nlet"
+    },
+    "generationUUID": "8ceb769b-e569-4c49-91fe-8a27f85553fb",
+    "timestamp": "2025-03-19T07:59:21.052Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " users:"
+    },
+    "generationUUID": "8ceb769b-e569-4c49-91fe-8a27f85553fb",
+    "timestamp": "2025-03-19T07:59:21.064Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " User"
+    },
+    "generationUUID": "8ceb769b-e569-4c49-91fe-8a27f85553fb",
+    "timestamp": "2025-03-19T07:59:21.072Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "[]"
+    },
+    "generationUUID": "8ceb769b-e569-4c49-91fe-8a27f85553fb",
+    "timestamp": "2025-03-19T07:59:21.086Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "8ceb769b-e569-4c49-91fe-8a27f85553fb",
+    "timestamp": "2025-03-19T07:59:21.094Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ["
+    },
+    "generationUUID": "8ceb769b-e569-4c49-91fe-8a27f85553fb",
+    "timestamp": "2025-03-19T07:59:21.110Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n    { name: 'John',"
+    },
+    "generationUUID": "8ceb769b-e569-4c49-91fe-8a27f85553fb",
+    "timestamp": "2025-03-19T07:59:21.116Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " age: 30"
+    },
+    "generationUUID": "8ceb769b-e569-4c49-91fe-8a27f85553fb",
+    "timestamp": "2025-03-19T07:59:21.128Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " },\n    { name: 'Jane"
+    },
+    "generationUUID": "8ceb769b-e569-4c49-91fe-8a27f85553fb",
+    "timestamp": "2025-03-19T07:59:21.140Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "', age: 25 },\n"
+    },
+    "generationUUID": "8ceb769b-e569-4c49-91fe-8a27f85553fb",
+    "timestamp": "2025-03-19T07:59:21.151Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "    {"
+    },
+    "generationUUID": "8ceb769b-e569-4c49-91fe-8a27f85553fb",
+    "timestamp": "2025-03-19T07:59:21.166Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " name:"
+    },
+    "generationUUID": "8ceb769b-e569-4c49-91fe-8a27f85553fb",
+    "timestamp": "2025-03-19T07:59:21.183Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " '"
+    },
+    "generationUUID": "8ceb769b-e569-4c49-91fe-8a27f85553fb",
+    "timestamp": "2025-03-19T07:59:21.184Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Jim', age: 35 },"
+    },
+    "generationUUID": "8ceb769b-e569-4c49-91fe-8a27f85553fb",
+    "timestamp": "2025-03-19T07:59:21.194Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n]"
+    },
+    "generationUUID": "8ceb769b-e569-4c49-91fe-8a27f85553fb",
+    "timestamp": "2025-03-19T07:59:21.207Z"
+  },
+  {
+    "fullText": "\ninterface User {\n    name: string;\n    age: number;\n}\n\nlet users: User[] = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]",
+    "generationUUID": "8ceb769b-e569-4c49-91fe-8a27f85553fb",
+    "timestamp": "2025-03-19T07:59:21.229Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "8ceb769b-e569-4c49-91fe-8a27f85553fb",
+    "timestamp": "2025-03-19T07:59:21.230Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\ninterface User {\nlet users = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]"
+    },
+    "fullText": "\ninterface User {\n    name: string;\n    age: number;\n}\n\nlet users: User[] = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]",
+    "generationUUID": "8ceb769b-e569-4c49-91fe-8a27f85553fb",
+    "timestamp": "2025-03-19T07:59:21.230Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && currentSuggestion uniqueId is different && need to create newSuggestion according fullText",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "bec8ab30-5ec0-4690-ac40-0d9f385c6c34",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 147,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 149,
+      "monotonicallyIncreasingSuggestionId": 92,
+      "range": {
+        "startLineNumber": 7,
+        "startColumn": 1,
+        "endLineNumberInclusive": 13,
+        "endColumn": 2
+      },
+      "replaceText": "\ninterface User {\n    name: string;\n    age: number;\n}\n\nlet users: User[] = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]",
+      "originalText": "\ninte\nlet users = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]",
+      "startingSuggestionRange": {
+        "startLineNumber": 7,
+        "startColumn": 1,
+        "endLineNumberInclusive": 13,
+        "endColumn": 2
+      },
+      "diffText": "\ninterface User {\n    name: string;\n    age: number;\n}\n\nlet users: User[] = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]",
+      "fullOriginalText": "\ninte\nlet users = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]",
+      "suggestionTriggerTime": 1742371160499.7,
+      "greens": [],
+      "source": "typing",
+      "requestId": "8ceb769b-e569-4c49-91fe-8a27f85553fb",
+      "selection": {
+        "startLineNumber": 7,
+        "startColumn": 1,
+        "endLineNumberInclusive": 13,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "0e542f5b-d019-4c31-996c-86ed1f9d0628",
+      "undoRedoGroup": {
+        "id": 92,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "8ceb769b-e569-4c49-91fe-8a27f85553fb",
+    "timestamp": "2025-03-19T07:59:21.231Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "8ceb769b-e569-4c49-91fe-8a27f85553fb",
+    "timestamp": "2025-03-19T07:59:21.290Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "0e542f5b-d019-4c31-996c-86ed1f9d0628",
+    "generationUUID": "8ceb769b-e569-4c49-91fe-8a27f85553fb",
+    "timestamp": "2025-03-19T07:59:21.295Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\ninterface User {\nlet users = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "0e542f5b-d019-4c31-996c-86ed1f9d0628",
+    "generationUUID": "8ceb769b-e569-4c49-91fe-8a27f85553fb",
+    "timestamp": "2025-03-19T07:59:21.297Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "0e542f5b-d019-4c31-996c-86ed1f9d0628",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T07:59:21.298Z"
+  }
+]

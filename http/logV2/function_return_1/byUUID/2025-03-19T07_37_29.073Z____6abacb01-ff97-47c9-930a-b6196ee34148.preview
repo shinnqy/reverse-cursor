@@ -1,0 +1,52 @@
+{"line":21,"column":44}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+function add(a: number, b: number): number {
+    return a + b;
+}
+
+function subtract(a: number, b: number): number {
+    return a - b;
+}
+
+let sum = add(1, 2);
+
+interface User {
+    name: string;
+    age: number;
+}
+
+function getUser(name: string, age: number): User {
+    return { name, age };
+}
+
+let user = getUser("John", 30);
+
+function wrapValue<T>(value: T): {data: T}  [ToFill] {
+    return { data: value };
+}
+
+let wrappedValue = wrapValue(10);
+
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+function wrapValue<T>(value: T): {data: T} {
+    return { data: value };
+}
+
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/functionReturn.ets",
+  "lineNumberOneIndexed": 26,
+  "text": "let wrappedValue = wrapValue(10);\n\n\n",
+  "shouldRetriggerCpp": true
+}
+--------------------------------[        displayedFusedCursorPrediction       ]---------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/functionReturn.ets",
+  "lineNumberOneIndexed": 26,
+  "text": "let wrappedValue = wrapValue(10);\n\n\n",
+  "shouldRetriggerCpp": true
+}

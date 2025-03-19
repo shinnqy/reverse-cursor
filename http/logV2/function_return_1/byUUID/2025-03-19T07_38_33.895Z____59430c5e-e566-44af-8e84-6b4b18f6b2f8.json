@@ -1,0 +1,513 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:33.895Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/functionReturn.ets",
+          "diffHistory": [
+            "1+|function add(a: number, b: number): number {\n2+|    return a + b;\n3+|}\n4+|\n5+|function subtract(a: number, b: number): number {\n6+|    return a - b;\n7+|}\n8+|\n9+|let sum = add(1, 2);\n10+|\n11+|function getUser(name: string, age: number): { name: string, age: number } {\n12+|    return { name, age };\n13+|}\n14+|\n15+|let user = getUser(\"John\", 30);\n16+|\n17+|  \n",
+            "11-|function getUser(name: string, age: number): { name: string, age: number } {\n11+|interface User {\n12+|    name: string;\n13+|    age: number;\n14+|}\n15+|\n16+|function getUser(name: string, age: number): User {\n",
+            "22+|function wrapValue<T>(value: T): {data {\n23+|    return { data: value };\n24+|}\n25+|\n26+|let wrappedValue = wrapValue(10);\n27+|\n28+|\n",
+            "22-|function wrapValue<T>(value: T): {data {\n22+|function wrapValue<T>(value: T): {data: T}   {\n",
+            "28+|let wrappedString = wrapValue(\"Hello\");\n30+|let wrappedBoolean = wrapValue(true);\n31+|\n32+|let wrappedArray = wrapValue([1, 2, 3]);\n33+|\n34+|\n",
+            "22-|function wrapValue<T>(value: T): {data: T}   {\n22+|interface Wrapper<T> {\n23+|    data: T;\n24+|}\n25+|\n26+|function wrapValue<T>(value: T): Wrapper<T> {\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/functionReturn.ets",
+        "contents": "function add(a: number, b: number): number {\n    return a + b;\n}\n\nfunction subtract(a: number, b: number): number {\n    return a - b;\n}\n\nlet sum = add(1, 2);\n\ninterface User {\n    name: string;\n    age: number;\n}\n\nfunction getUser(name: string, age: number): User {\n    return { name, age };\n}\n\nlet user = getUser(\"John\", 30);\n\ninterface Wrapper<T> {\n    data: T;\n}\n\nfunction wrapValue<T>(value: T): Wrapper<T> {\n    return { data: value };\n}\n\nlet wrappedValue = wrapValue(10);\n\nlet wrappedString = wrapValue(\"Hello\");\n\nlet wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\n\n",
+        "cursorPosition": {
+          "line": 37,
+          "column": 0
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 121,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1742369913934,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51,
+      "timeAtRequestSend": 1742369913934
+    },
+    "generateUuid": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:33.937Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.304Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nlet",
+      "rangeToReplace": {
+        "startLineNumber": 37,
+        "endLineNumberInclusive": 39
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.306Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " wrappedObject"
+    },
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.321Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.332Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " wrapValue({"
+    },
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.341Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " name"
+    },
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.352Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": \""
+    },
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.364Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "John"
+    },
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.371Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\", age"
+    },
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.384Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": "
+    },
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.393Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "30"
+    },
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.404Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " });"
+    },
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.418Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.426Z"
+  },
+  {
+    "firstChunkValue": "\nlet wrappedObject = wrapValue({ name: \"John\", age: 30 });\n",
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.428Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "f2687a43-e666-46a3-9cf1-01aa71727bdd",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 121,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 121,
+      "monotonicallyIncreasingSuggestionId": 116,
+      "range": {
+        "startLineNumber": 37,
+        "startColumn": 1,
+        "endLineNumberInclusive": 39,
+        "endColumn": 1
+      },
+      "replaceText": "\nlet wrappedObject = wrapValue({ name: \"John\", age: 30 });\n",
+      "originalText": "\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 37,
+        "startColumn": 1,
+        "endLineNumberInclusive": 39,
+        "endColumn": 1
+      },
+      "diffText": "\nlet wrappedObject = wrapValue({ name: \"John\", age: 30 });\n",
+      "fullOriginalText": "\n\n",
+      "suggestionTriggerTime": 1742369913887.9,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+      "selection": {
+        "startLineNumber": 37,
+        "startColumn": 1,
+        "endLineNumberInclusive": 39,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 116,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.432Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nlet wrappedObject = wrapValue({ name: \"John\", age: 30 });\n"
+    },
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.433Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.435Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "let"
+    },
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.445Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " wrappedFunction"
+    },
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.463Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.498Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " wrap"
+    },
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.508Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Value(()"
+    },
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.524Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " =>"
+    },
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.531Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \""
+    },
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.539Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Hello"
+    },
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.550Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\");\n\nlet wrappedPromise"
+    },
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.559Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.580Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " wrapValue"
+    },
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.586Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "("
+    },
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.711Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "new"
+    },
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.720Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Promise"
+    },
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.728Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "(("
+    },
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.738Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "resolve"
+    },
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.748Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ")"
+    },
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.777Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " =>"
+    },
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.785Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " resolve"
+    },
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.794Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "(\""
+    },
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.803Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Hello\")));"
+    },
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.815Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.824Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.835Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.842Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.856Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.856Z"
+  },
+  {
+    "fullText": "\nlet wrappedObject = wrapValue({ name: \"John\", age: 30 });\n\nlet wrappedFunction = wrapValue(() => \"Hello\");\n\nlet wrappedPromise = wrapValue(new Promise((resolve) => resolve(\"Hello\")));\n\n\n",
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.857Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nlet wrappedObject = wrapValue({ name: \"John\", age: 30 });\n"
+    },
+    "fullText": "\nlet wrappedObject = wrapValue({ name: \"John\", age: 30 });\n\nlet wrappedFunction = wrapValue(() => \"Hello\");\n\nlet wrappedPromise = wrapValue(new Promise((resolve) => resolve(\"Hello\")));\n\n\n",
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.857Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "7aaba72c-9e72-4008-b478-8da0a79c27ab",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 121,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 122,
+      "monotonicallyIncreasingSuggestionId": 117,
+      "range": {
+        "startLineNumber": 37,
+        "startColumn": 1,
+        "endLineNumberInclusive": 39,
+        "endColumn": 1
+      },
+      "replaceText": "\nlet wrappedObject = wrapValue({ name: \"John\", age: 30 });\n\nlet wrappedFunction = wrapValue(() => \"Hello\");\n\nlet wrappedPromise = wrapValue(new Promise((resolve) => resolve(\"Hello\")));\n\n\n",
+      "originalText": "\nlet wrappedObject = wrapValue({ name: \"John\", age: 30 });\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 37,
+        "startColumn": 1,
+        "endLineNumberInclusive": 39,
+        "endColumn": 1
+      },
+      "diffText": "\nlet wrappedObject = wrapValue({ name: \"John\", age: 30 });\n\nlet wrappedFunction = wrapValue(() => \"Hello\");\n\nlet wrappedPromise = wrapValue(new Promise((resolve) => resolve(\"Hello\")));\n\n\n",
+      "fullOriginalText": "\nlet wrappedObject = wrapValue({ name: \"John\", age: 30 });\n",
+      "suggestionTriggerTime": 1742369913887.9,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+      "selection": {
+        "startLineNumber": 37,
+        "startColumn": 1,
+        "endLineNumberInclusive": 39,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "45b82894-4109-4e6a-bfe6-ac5dfd1639ae",
+      "undoRedoGroup": {
+        "id": 117,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.858Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "45b82894-4109-4e6a-bfe6-ac5dfd1639ae",
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.863Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nlet wrappedObject = wrapValue({ name: \"John\", age: 30 });\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "45b82894-4109-4e6a-bfe6-ac5dfd1639ae",
+    "generationUUID": "59430c5e-e566-44af-8e84-6b4b18f6b2f8",
+    "timestamp": "2025-03-19T07:38:34.863Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "45b82894-4109-4e6a-bfe6-ac5dfd1639ae",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T07:38:34.863Z"
+  }
+]

@@ -1,0 +1,45 @@
+{"line":21,"column":33}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+function add(a: number, b: number): number {
+    return a + b;
+}
+
+function subtract(a: number, b: number): number {
+    return a - b;
+}
+
+let sum = add(1, 2);
+
+interface User {
+    name: string;
+    age: number;
+}
+
+function getUser(name: string, age: number): User {
+    return { name, age };
+}
+
+let user = getUser("John", 30);
+
+function wrapValue<T>(value: T): [ToFill] {
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+}
+
+let user = getUser("John", 30);
+
+function wrapValue<T>(value: T): { value: T } {
+
+-------------------------------[                   fullText                  ]--------------------------------
+}
+
+let user = getUser("John", 30);
+
+function wrapValue<T>(value: T): { value: T } {
+    return { value };
+}
+
+let wrappedValue = wrapValue(10);
+
+
