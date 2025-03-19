@@ -1,0 +1,53 @@
+{"line":2,"column":0}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+[ToFill]struct BasicComponent {
+  build() {
+    Column() {
+      Text('Hello, World!')
+    }
+  }
+}
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+@Entry
+@Component
+struct BasicComponent {
+  @State message: string = 'Hello, World!'
+
+  build() {
+    Column() {
+      Text(this.message)
+    }
+  }
+}
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+@Entry
+@Component
+struct BasicComponent {
+  @State message: string = 'Hello, World!'
+
+  build() {
+    Column() {
+      Text(this.message)
+    }
+  }
+
+}
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/basicComponent.ets",
+  "lineNumberOneIndexed": 10,
+  "text": "",
+  "shouldRetriggerCpp": true
+}
+--------------------------------[        displayedFusedCursorPrediction       ]---------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/basicComponent.ets",
+  "lineNumberOneIndexed": 10,
+  "text": "",
+  "shouldRetriggerCpp": true
+}

@@ -1,0 +1,120 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "e98839bb-aa8d-4581-9d8c-1269d9ec5dbe",
+    "timestamp": "2025-03-19T08:49:03.762Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/basicComponent.ets",
+          "diffHistory": [
+            "1+|@Entry\n2+|@Component\n3+|struct BasicComponent {\n4+|  @State message: string = 'Hello, World!'\n5+|}\n6+|\n",
+            "4-|  @State message: string = 'Hello, World!'\n",
+            "4-|  \n4+|  build() {\n5+|    Column() {\n6+|      Text('Hello, World!')\n7+|    }\n8+|  }\n",
+            "6-|      Text('Hello, World!')\n6+|      Text(this.message)\n",
+            "4+|  @State message: string = 'Hello, World!'\n5+|\n8+|      Row\n10+|      }\n",
+            "8-|      Row\n9-|      Text(this.message)\n8+|      Row() {\n9+|        Text(this.message)\n11+|      .width('100%')\n12+|      .height(100)\n13+|      .backgroundColor('#000000')\n14+|      .justifyContent(FlexAlign.Center)\n15+|      .alignItems(ItemAlign.Center)\n16+|\n17+|      Stack() {\n18+|        Text('Hello, World!')\n19+|        Text('Hello, World!')\n20+|        Text('Hello, World!')\n21+|      }\n22+|      .width('100%')\n23+|      .height(100)\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/basicComponent.ets",
+        "contents": "@Entry\n@Component\nstruct BasicComponent {\n  @State message: string = 'Hello, World!'\n\n  build() {\n    Column() {\n      Row() {\n        Text(this.message)\n      }\n      .width('100%')\n      .height(100)\n      .backgroundColor('#000000')\n      .justifyContent(FlexAlign.Center)\n      .alignItems(ItemAlign.Center)\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }\n      .width('100%')\n      .height(100)\n    }\n  }\n}\n\n",
+        "cursorPosition": {
+          "line": 15,
+          "column": 0
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 28,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1742374143804,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.7001953125,
+      "timeAtRequestSend": 1742374143804
+    },
+    "generateUuid": "e98839bb-aa8d-4581-9d8c-1269d9ec5dbe",
+    "timestamp": "2025-03-19T08:49:03.807Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "e98839bb-aa8d-4581-9d8c-1269d9ec5dbe",
+    "timestamp": "2025-03-19T08:49:04.152Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "      .alignItems(ItemAlign.Center)\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }",
+      "rangeToReplace": {
+        "startLineNumber": 15,
+        "endLineNumberInclusive": 21
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "e98839bb-aa8d-4581-9d8c-1269d9ec5dbe",
+    "timestamp": "2025-03-19T08:49:04.153Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "e98839bb-aa8d-4581-9d8c-1269d9ec5dbe",
+    "timestamp": "2025-03-19T08:49:04.169Z"
+  },
+  {
+    "firstChunkValue": "      .alignItems(ItemAlign.Center)\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }",
+    "generationUUID": "e98839bb-aa8d-4581-9d8c-1269d9ec5dbe",
+    "timestamp": "2025-03-19T08:49:04.171Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": false
+    },
+    "generationUUID": "e98839bb-aa8d-4581-9d8c-1269d9ec5dbe",
+    "timestamp": "2025-03-19T08:49:04.171Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "e98839bb-aa8d-4581-9d8c-1269d9ec5dbe",
+    "timestamp": "2025-03-19T08:49:04.221Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "f2e2cd22-bc27-43e7-87a1-b6cd91984fb3",
+    "generationUUID": "e98839bb-aa8d-4581-9d8c-1269d9ec5dbe",
+    "timestamp": "2025-03-19T08:49:04.227Z"
+  }
+]

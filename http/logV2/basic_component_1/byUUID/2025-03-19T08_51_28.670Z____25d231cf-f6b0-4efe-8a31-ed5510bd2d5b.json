@@ -1,0 +1,449 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:28.670Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/basicComponent.ets",
+          "diffHistory": [
+            "1+|@Entry\n2+|@Component\n3+|struct BasicComponent {\n4+|  @State message: string = 'Hello, World!'\n5+|}\n6+|\n",
+            "4-|  @State message: string = 'Hello, World!'\n",
+            "4-|  \n4+|  build() {\n5+|    Column() {\n6+|      Text('Hello, World!')\n7+|    }\n8+|  }\n",
+            "6-|      Text('Hello, World!')\n6+|      Text(this.message)\n",
+            "4+|  @State message: string = 'Hello, World!'\n5+|\n8+|      Row\n10+|      }\n",
+            "8-|      Row\n9-|      Text(this.message)\n8+|      Row() {\n9+|        Text(this.message)\n11+|      .width('100%')\n12+|      .height(100)\n13+|      .backgroundColor('#000000')\n14+|      .justifyContent(FlexAlign.Center)\n15+|      .alignItems(ItemAlign.Center)\n16+|\n17+|      Stack() {\n18+|        Text('Hello, World!')\n19+|        Text('Hello, World!')\n20+|        Text('Hello, World!')\n21+|      }\n22+|      .width('100%')\n23+|      .height(100)\n",
+            "16-|      \n17-|      \n17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .width('100%')\n21+|      .height(100)\n22+|      .backgroundColor('#000000')\n23+|      .justifyContent(FlexAlign.Center)\n24+|      .alignItems(ItemAlign.Center)\n25+|\n",
+            "37+|@Entry\n38+|@Component\n39+|struct BasicComponent {\n40+|  @State message: string = 'Hello, World!'\n41+|  \n42+|}\n",
+            "37-|@Entry\n",
+            "38-|struct BasicComponent {\n38+|struct ListExample {\n",
+            "41+|  build() {\n42+|    List() {\n43+|      Text('Hello, World!')\n44+|    }\n45+|  }\n",
+            "39-|  @State message: string = 'Hello, World!'\n",
+            "39-|  \n39+|  @State items: string[] = ['Item 1', 'Item 2', 'Item 3']\n",
+            "43-|      Text('Hello, World!')\n44-|    }\n43+|      Text('Hello, World!th('100%')\n44+|    .height(100)\n",
+            "43-|      Text('Hello, World!th('100%')\n43+|      Text('Hello, Worl }\n44+|    .width('100%')\n",
+            "43-|      Text('Hello, Worl }\n43+|      Text('Hello,m)\n44+|      })\n45+|    }\n",
+            "43-|      Text('Hello,m)\n43+|      ForEach(this.items, (item) => {\n44+|        Text(item)\n",
+            "44+|        ListItem() {\n46+|        }\n",
+            "47+|        .height(100)\n48+|        .width('100%')\n49+|        .backgroundColor('#000000')\n50+|        .justifyContent(FlexAlign.Center)\n51+|        .alignItems(ItemAlign.Center)\n",
+            "58+|\n59+|@Component\n60+|struct FunctionComponent {\n61+|  @Prop message: string = 'Hello, World!'\n62+|\n63+|  build() {\n64+|    Text(this.message)\n65+|  }\n66+|}\n",
+            "61-|  @Prop message: string = 'Hello, World!'\n",
+            "62-|    Text(this.message)\n",
+            "62-|    \n62+|    column() {\n63+|      Text('Hello, World!')\n64+|    }\n65+|    .width('100%')\n66+|    .height(100)\n",
+            "62-|    column() {\n62+|    Column() {\n",
+            "63-|      Text('Hello, World!')\n",
+            "63-|      \n63+|      IMmage('@assets/images/icon.png')\n64+|      .width(100)\n65+|      .height(100)\n",
+            "63-|      IMmage('@assets/images/icon.png')\n63+|      Image('@assets/images/icon.png')\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/basicComponent.ets",
+        "contents": "@Entry\n@Component\nstruct BasicComponent {\n  @State message: string = 'Hello, World!'\n\n  build() {\n    Column() {\n      Row() {\n        Text(this.message)\n      }\n      .width('100%')\n      .height(100)\n      .backgroundColor('#000000')\n      .justifyContent(FlexAlign.Center)\n      .alignItems(ItemAlign.Center)\n\n      Button() {\n        Text('Click me')\n      }\n      .width('100%')\n      .height(100)\n      .backgroundColor('#000000')\n      .justifyContent(FlexAlign.Center)\n      .alignItems(ItemAlign.Center)\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }\n      .width('100%')\n      .height(100)\n    }\n  }\n}\n\n@Component\nstruct ListExample {\n  @State items: string[] = ['Item 1', 'Item 2', 'Item 3']\n\n  build() {\n    List() {\n      ForEach(this.items, (item) => {\n        ListItem() {\n          Text(item)\n        }\n        .height(100)\n        .width('100%')\n        .backgroundColor('#000000')\n        .justifyContent(FlexAlign.Center)\n        .alignItems(ItemAlign.Center)\n      })\n    }\n    .width('100%')\n    .height(100)\n  }\n}\n\n@Component\nstruct FunctionComponent {\n  build() {\n    Column() {\n      Image('@assets/images/icon.png')\n      .width(100)\n      .height(100)\n    }\n    .width('100%')\n    .height(100)\n  }\n}\n",
+        "cursorPosition": {
+          "line": 63,
+          "column": 16
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 113,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1742374288711,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.300048828125,
+      "timeAtRequestSend": 1742374288711
+    },
+    "generateUuid": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:28.713Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.078Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "    Column() {\n      Image('@assets/images/icon.png')\n      .width(100)\n      .height(100)\n     ",
+      "rangeToReplace": {
+        "startLineNumber": 62,
+        "endLineNumberInclusive": 67
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.078Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " .border"
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.115Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Radius"
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.127Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "("
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.141Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "10)"
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.153Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.165Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "     "
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.178Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " .border"
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.194Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Width"
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.205Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "("
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.217Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "1"
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.234Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ")"
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.263Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n      ."
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.264Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "border"
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.273Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Color"
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.285Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "('#"
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.296Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "000000')\n"
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.310Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "      ."
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.327Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "borderStyle"
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.339Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "("
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.354Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Border"
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.368Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Style"
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.375Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.395Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Solid"
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.399Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ")"
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.411Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.424Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "      ."
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.447Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "border"
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.450Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Radius"
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.466Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "(1"
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.479Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "0"
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.492Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ")"
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.503Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n     "
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.516Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ."
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.534Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "border"
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.540Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Width"
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.553Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "(1)\n"
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.564Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "   "
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.577Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " }"
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.588Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n    .width('100"
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.600Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "%"
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.612Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.639Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "')"
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.640Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.640Z"
+  },
+  {
+    "firstChunkValue": "    Column() {\n      Image('@assets/images/icon.png')\n      .width(100)\n      .height(100)\n      .borderRadius(10)\n      .borderWidth(1)\n      .borderColor('#000000')\n      .borderStyle(BorderStyle.Solid)\n      .borderRadius(10)\n      .borderWidth(1)\n    }\n    .width('100%')",
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.642Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "    Column() {\n      Image('@assets/images/icon.png')\n      .width(100)\n      .height(100)\n      .borderRadius(10)\n      .borderWidth(1)\n      .borderColor('#000000')\n      .borderStyle(BorderStyle.Solid)\n      .borderRadius(10)\n      .borderWidth(1)\n    }\n    .width('100%')"
+    },
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.643Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "ee46ad8b-013e-4399-b0d9-152cced12417",
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.647Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "    Column() {\n      Image('@assets/images/icon.png')\n      .width(100)\n      .height(100)\n      .borderRadius(10)\n      .borderWidth(1)\n      .borderColor('#000000')\n      .borderStyle(BorderStyle.Solid)\n      .borderRadius(10)\n      .borderWidth(1)\n    }\n    .width('100%')"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "ee46ad8b-013e-4399-b0d9-152cced12417",
+    "generationUUID": "25d231cf-f6b0-4efe-8a31-ed5510bd2d5b",
+    "timestamp": "2025-03-19T08:51:29.648Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "ee46ad8b-013e-4399-b0d9-152cced12417",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T08:51:29.648Z"
+  }
+]

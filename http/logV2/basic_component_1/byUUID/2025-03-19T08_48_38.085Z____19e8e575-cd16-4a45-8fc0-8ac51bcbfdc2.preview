@@ -1,0 +1,39 @@
+{"line":7,"column":7}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+struct BasicComponent {
+  @State message: string = 'Hello, World!'
+
+  build() {
+    Column() {
+      R[ToFill]
+      Text(this.message)
+    }
+  }
+}
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+  build() {
+    Column() {
+      Row() {
+        Text(this.message)
+      }
+    }
+  }
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+@Entry
+@Component
+struct BasicComponent {
+  @State message: string = 'Hello, World!'
+
+  build() {
+    Column() {
+      Row() {
+        Text(this.message)
+      }
+    }
+  }
+

@@ -1,0 +1,58 @@
+{"line":37,"column":7}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+struct BasicComponent {
+  @State message: string = 'Hello, World!'
+
+  build() {
+    Column() {
+      Row() {
+        Text(this.message)
+      }
+      .width('100%')
+      .height(100)
+      .backgroundColor('#000000')
+      .justifyContent(FlexAlign.Center)
+      .alignItems(ItemAlign.Center)
+
+      Button() {
+        Text('Click me')
+      }
+      .width('100%')
+      .height(100)
+      .backgroundColor('#000000')
+      .justifyContent(FlexAlign.Center)
+      .alignItems(ItemAlign.Center)
+
+      Stack() {
+        Text('Hello, World!')
+        Text('Hello, World!')
+        Text('Hello, World!')
+      }
+      .width('100%')
+      .height(100)
+    }
+  }
+}
+
+@Component
+struct [ToFill] {
+  @State message: string = 'Hello, World!'
+
+}
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+@Component
+struct BasicComponent {
+  @State message: string = 'Hello, World!'
+
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/basicComponent.ets",
+  "lineNumberOneIndexed": 41,
+  "text": "}",
+  "shouldRetriggerCpp": true
+}

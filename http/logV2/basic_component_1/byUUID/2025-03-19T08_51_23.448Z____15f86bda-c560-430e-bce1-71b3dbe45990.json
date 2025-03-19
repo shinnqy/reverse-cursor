@@ -1,0 +1,490 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "15f86bda-c560-430e-bce1-71b3dbe45990",
+    "timestamp": "2025-03-19T08:51:23.448Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/basicComponent.ets",
+          "diffHistory": [
+            "1+|@Entry\n2+|@Component\n3+|struct BasicComponent {\n4+|  @State message: string = 'Hello, World!'\n5+|}\n6+|\n",
+            "4-|  @State message: string = 'Hello, World!'\n",
+            "4-|  \n4+|  build() {\n5+|    Column() {\n6+|      Text('Hello, World!')\n7+|    }\n8+|  }\n",
+            "6-|      Text('Hello, World!')\n6+|      Text(this.message)\n",
+            "4+|  @State message: string = 'Hello, World!'\n5+|\n8+|      Row\n10+|      }\n",
+            "8-|      Row\n9-|      Text(this.message)\n8+|      Row() {\n9+|        Text(this.message)\n11+|      .width('100%')\n12+|      .height(100)\n13+|      .backgroundColor('#000000')\n14+|      .justifyContent(FlexAlign.Center)\n15+|      .alignItems(ItemAlign.Center)\n16+|\n17+|      Stack() {\n18+|        Text('Hello, World!')\n19+|        Text('Hello, World!')\n20+|        Text('Hello, World!')\n21+|      }\n22+|      .width('100%')\n23+|      .height(100)\n",
+            "16-|      \n17-|      \n17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .width('100%')\n21+|      .height(100)\n22+|      .backgroundColor('#000000')\n23+|      .justifyContent(FlexAlign.Center)\n24+|      .alignItems(ItemAlign.Center)\n25+|\n",
+            "37+|@Entry\n38+|@Component\n39+|struct BasicComponent {\n40+|  @State message: string = 'Hello, World!'\n41+|  \n42+|}\n",
+            "37-|@Entry\n",
+            "38-|struct BasicComponent {\n38+|struct ListExample {\n",
+            "41+|  build() {\n42+|    List() {\n43+|      Text('Hello, World!')\n44+|    }\n45+|  }\n",
+            "39-|  @State message: string = 'Hello, World!'\n",
+            "39-|  \n39+|  @State items: string[] = ['Item 1', 'Item 2', 'Item 3']\n",
+            "43-|      Text('Hello, World!')\n44-|    }\n43+|      Text('Hello, World!th('100%')\n44+|    .height(100)\n",
+            "43-|      Text('Hello, World!th('100%')\n43+|      Text('Hello, Worl }\n44+|    .width('100%')\n",
+            "43-|      Text('Hello, Worl }\n43+|      Text('Hello,m)\n44+|      })\n45+|    }\n",
+            "43-|      Text('Hello,m)\n43+|      ForEach(this.items, (item) => {\n44+|        Text(item)\n",
+            "44+|        ListItem() {\n46+|        }\n",
+            "47+|        .height(100)\n48+|        .width('100%')\n49+|        .backgroundColor('#000000')\n50+|        .justifyContent(FlexAlign.Center)\n51+|        .alignItems(ItemAlign.Center)\n",
+            "58+|\n59+|@Component\n60+|struct FunctionComponent {\n61+|  @Prop message: string = 'Hello, World!'\n62+|\n63+|  build() {\n64+|    Text(this.message)\n65+|  }\n66+|}\n",
+            "61-|  @Prop message: string = 'Hello, World!'\n",
+            "62-|    Text(this.message)\n",
+            "62-|    \n62+|    column() {\n63+|      Text('Hello, World!')\n64+|    }\n65+|    .width('100%')\n66+|    .height(100)\n",
+            "62-|    column() {\n62+|    Column() {\n",
+            "63-|      Text('Hello, World!')\n",
+            "63-|      \n63+|      IM\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/basicComponent.ets",
+        "contents": "@Entry\n@Component\nstruct BasicComponent {\n  @State message: string = 'Hello, World!'\n\n  build() {\n    Column() {\n      Row() {\n        Text(this.message)\n      }\n      .width('100%')\n      .height(100)\n      .backgroundColor('#000000')\n      .justifyContent(FlexAlign.Center)\n      .alignItems(ItemAlign.Center)\n\n      Button() {\n        Text('Click me')\n      }\n      .width('100%')\n      .height(100)\n      .backgroundColor('#000000')\n      .justifyContent(FlexAlign.Center)\n      .alignItems(ItemAlign.Center)\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }\n      .width('100%')\n      .height(100)\n    }\n  }\n}\n\n@Component\nstruct ListExample {\n  @State items: string[] = ['Item 1', 'Item 2', 'Item 3']\n\n  build() {\n    List() {\n      ForEach(this.items, (item) => {\n        ListItem() {\n          Text(item)\n        }\n        .height(100)\n        .width('100%')\n        .backgroundColor('#000000')\n        .justifyContent(FlexAlign.Center)\n        .alignItems(ItemAlign.Center)\n      })\n    }\n    .width('100%')\n    .height(100)\n  }\n}\n\n@Component\nstruct FunctionComponent {\n  build() {\n    Column() {\n      IM\n    }\n    .width('100%')\n    .height(100)\n  }\n}\n",
+        "cursorPosition": {
+          "line": 62,
+          "column": 8
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 112,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742374283494,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 56.199951171875,
+      "timeAtRequestSend": 1742374283494
+    },
+    "generateUuid": "15f86bda-c560-430e-bce1-71b3dbe45990",
+    "timestamp": "2025-03-19T08:51:23.497Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "15f86bda-c560-430e-bce1-71b3dbe45990",
+    "timestamp": "2025-03-19T08:51:23.839Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "    Column() {\n      Image",
+      "rangeToReplace": {
+        "startLineNumber": 62,
+        "endLineNumberInclusive": 66
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "15f86bda-c560-430e-bce1-71b3dbe45990",
+    "timestamp": "2025-03-19T08:51:23.841Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "('"
+    },
+    "generationUUID": "15f86bda-c560-430e-bce1-71b3dbe45990",
+    "timestamp": "2025-03-19T08:51:23.867Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "@"
+    },
+    "generationUUID": "15f86bda-c560-430e-bce1-71b3dbe45990",
+    "timestamp": "2025-03-19T08:51:23.880Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "assets"
+    },
+    "generationUUID": "15f86bda-c560-430e-bce1-71b3dbe45990",
+    "timestamp": "2025-03-19T08:51:23.888Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "/"
+    },
+    "generationUUID": "15f86bda-c560-430e-bce1-71b3dbe45990",
+    "timestamp": "2025-03-19T08:51:23.917Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "images"
+    },
+    "generationUUID": "15f86bda-c560-430e-bce1-71b3dbe45990",
+    "timestamp": "2025-03-19T08:51:23.920Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "/"
+    },
+    "generationUUID": "15f86bda-c560-430e-bce1-71b3dbe45990",
+    "timestamp": "2025-03-19T08:51:23.921Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "icon"
+    },
+    "generationUUID": "15f86bda-c560-430e-bce1-71b3dbe45990",
+    "timestamp": "2025-03-19T08:51:23.929Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "15f86bda-c560-430e-bce1-71b3dbe45990",
+    "timestamp": "2025-03-19T08:51:23.939Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "png"
+    },
+    "generationUUID": "15f86bda-c560-430e-bce1-71b3dbe45990",
+    "timestamp": "2025-03-19T08:51:23.951Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "')"
+    },
+    "generationUUID": "15f86bda-c560-430e-bce1-71b3dbe45990",
+    "timestamp": "2025-03-19T08:51:23.963Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n     "
+    },
+    "generationUUID": "15f86bda-c560-430e-bce1-71b3dbe45990",
+    "timestamp": "2025-03-19T08:51:23.974Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ."
+    },
+    "generationUUID": "15f86bda-c560-430e-bce1-71b3dbe45990",
+    "timestamp": "2025-03-19T08:51:23.985Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "width"
+    },
+    "generationUUID": "15f86bda-c560-430e-bce1-71b3dbe45990",
+    "timestamp": "2025-03-19T08:51:23.993Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "("
+    },
+    "generationUUID": "15f86bda-c560-430e-bce1-71b3dbe45990",
+    "timestamp": "2025-03-19T08:51:24.004Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "100)\n     "
+    },
+    "generationUUID": "15f86bda-c560-430e-bce1-71b3dbe45990",
+    "timestamp": "2025-03-19T08:51:24.013Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " .height"
+    },
+    "generationUUID": "15f86bda-c560-430e-bce1-71b3dbe45990",
+    "timestamp": "2025-03-19T08:51:24.024Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "(100)\n   "
+    },
+    "generationUUID": "15f86bda-c560-430e-bce1-71b3dbe45990",
+    "timestamp": "2025-03-19T08:51:24.042Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " }"
+    },
+    "generationUUID": "15f86bda-c560-430e-bce1-71b3dbe45990",
+    "timestamp": "2025-03-19T08:51:24.043Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n    .width('100"
+    },
+    "generationUUID": "15f86bda-c560-430e-bce1-71b3dbe45990",
+    "timestamp": "2025-03-19T08:51:24.051Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "%"
+    },
+    "generationUUID": "15f86bda-c560-430e-bce1-71b3dbe45990",
+    "timestamp": "2025-03-19T08:51:24.059Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "')\n    .height(10"
+    },
+    "generationUUID": "15f86bda-c560-430e-bce1-71b3dbe45990",
+    "timestamp": "2025-03-19T08:51:24.072Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "0"
+    },
+    "generationUUID": "15f86bda-c560-430e-bce1-71b3dbe45990",
+    "timestamp": "2025-03-19T08:51:24.080Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ")"
+    },
+    "generationUUID": "15f86bda-c560-430e-bce1-71b3dbe45990",
+    "timestamp": "2025-03-19T08:51:24.089Z"
+  },
+  {
+    "firstChunkValue": "    Column() {\n      Image('@assets/images/icon.png')\n      .width(100)\n      .height(100)\n    }\n    .width('100%')\n    .height(100)",
+    "generationUUID": "15f86bda-c560-430e-bce1-71b3dbe45990",
+    "timestamp": "2025-03-19T08:51:24.108Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "    Column() {\n      Image('@assets/images/icon.png')\n      .width(100)\n      .height(100)\n    }\n    .width('100%')\n    .height(100)"
+    },
+    "generationUUID": "15f86bda-c560-430e-bce1-71b3dbe45990",
+    "timestamp": "2025-03-19T08:51:24.109Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "7af5b721-2c1b-478c-9e4b-8b21853bb792",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 112,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 112,
+      "monotonicallyIncreasingSuggestionId": 86,
+      "range": {
+        "startLineNumber": 62,
+        "startColumn": 1,
+        "endLineNumberInclusive": 66,
+        "endColumn": 17
+      },
+      "replaceText": "    Column() {\n      Image('@assets/images/icon.png')\n      .width(100)\n      .height(100)\n    }\n    .width('100%')\n    .height(100)",
+      "originalText": "    Column() {\n      IM\n    }\n    .width('100%')\n    .height(100)",
+      "startingSuggestionRange": {
+        "startLineNumber": 62,
+        "startColumn": 1,
+        "endLineNumberInclusive": 66,
+        "endColumn": 17
+      },
+      "diffText": "    Column() {\n      Image('@assets/images/icon.png')\n      .width(100)\n      .height(100)\n    }\n    .width('100%')\n    .height(100)",
+      "fullOriginalText": "    Column() {\n      IM\n    }\n    .width('100%')\n    .height(100)",
+      "suggestionTriggerTime": 1742374283399.9,
+      "greens": [],
+      "source": "typing",
+      "requestId": "15f86bda-c560-430e-bce1-71b3dbe45990",
+      "selection": {
+        "startLineNumber": 62,
+        "startColumn": 1,
+        "endLineNumberInclusive": 66,
+        "endColumn": 17
+      },
+      "fusedCursorPredictionId": "cf9285f8-00ae-4b44-b3dd-b153844b5a8f",
+      "undoRedoGroup": {
+        "id": 86,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "15f86bda-c560-430e-bce1-71b3dbe45990",
+    "timestamp": "2025-03-19T08:51:24.110Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "15f86bda-c560-430e-bce1-71b3dbe45990",
+    "timestamp": "2025-03-19T08:51:24.111Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "15f86bda-c560-430e-bce1-71b3dbe45990",
+    "timestamp": "2025-03-19T08:51:24.126Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "cf9285f8-00ae-4b44-b3dd-b153844b5a8f",
+    "generationUUID": "15f86bda-c560-430e-bce1-71b3dbe45990",
+    "timestamp": "2025-03-19T08:51:24.135Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "    Column() {\n      Image('@assets/images/icon.png')\n      .width(100)\n      .height(100)\n    }\n    .width('100%')\n    .height(100)"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "cf9285f8-00ae-4b44-b3dd-b153844b5a8f",
+    "generationUUID": "15f86bda-c560-430e-bce1-71b3dbe45990",
+    "timestamp": "2025-03-19T08:51:24.136Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "cf9285f8-00ae-4b44-b3dd-b153844b5a8f",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T08:51:24.136Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "7af5b721-2c1b-478c-9e4b-8b21853bb792",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 112,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 112,
+      "monotonicallyIncreasingSuggestionId": 86,
+      "range": {
+        "startLineNumber": 62,
+        "startColumn": 1,
+        "endLineNumberInclusive": 66,
+        "endColumn": 17
+      },
+      "replaceText": "    Column() {\n      Image('@assets/images/icon.png')\n      .width(100)\n      .height(100)\n    }\n    .width('100%')\n    .height(100)",
+      "originalText": "    Column() {\n      IM\n    }\n    .width('100%')\n    .height(100)",
+      "startingSuggestionRange": {
+        "startLineNumber": 62,
+        "startColumn": 1,
+        "endLineNumberInclusive": 66,
+        "endColumn": 17
+      },
+      "diffText": "    Column() {\n      Image('@assets/images/icon.png')\n      .width(100)\n      .height(100)\n    }\n    .width('100%')\n    .height(100)",
+      "fullOriginalText": "    Column() {\n      IM\n    }\n    .width('100%')\n    .height(100)",
+      "suggestionTriggerTime": 1742374283399.9,
+      "greens": [],
+      "source": "typing",
+      "requestId": "15f86bda-c560-430e-bce1-71b3dbe45990",
+      "selection": {
+        "startLineNumber": 62,
+        "startColumn": 1,
+        "endLineNumberInclusive": 66,
+        "endColumn": 17
+      },
+      "fusedCursorPredictionId": "cf9285f8-00ae-4b44-b3dd-b153844b5a8f",
+      "undoRedoGroup": {
+        "id": 86,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;496"
+    },
+    "generationUUID": "15f86bda-c560-430e-bce1-71b3dbe45990",
+    "timestamp": "2025-03-19T08:51:27.048Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "7af5b721-2c1b-478c-9e4b-8b21853bb792",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 112,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 112,
+      "monotonicallyIncreasingSuggestionId": 86,
+      "range": {
+        "startLineNumber": 62,
+        "startColumn": 1,
+        "endLineNumberInclusive": 66,
+        "endColumn": 17
+      },
+      "replaceText": "    Column() {\n      Image('@assets/images/icon.png')\n      .width(100)\n      .height(100)\n    }\n    .width('100%')\n    .height(100)",
+      "originalText": "    Column() {\n      IM\n    }\n    .width('100%')\n    .height(100)",
+      "startingSuggestionRange": {
+        "startLineNumber": 62,
+        "startColumn": 1,
+        "endLineNumberInclusive": 66,
+        "endColumn": 17
+      },
+      "diffText": "    Column() {\n      Image('@assets/images/icon.png')\n      .width(100)\n      .height(100)\n    }\n    .width('100%')\n    .height(100)",
+      "fullOriginalText": "    Column() {\n      IM\n    }\n    .width('100%')\n    .height(100)",
+      "suggestionTriggerTime": 1742374283399.9,
+      "greens": [],
+      "source": "typing",
+      "requestId": "15f86bda-c560-430e-bce1-71b3dbe45990",
+      "selection": {
+        "startLineNumber": 62,
+        "startColumn": 1,
+        "endLineNumberInclusive": 66,
+        "endColumn": 17
+      },
+      "fusedCursorPredictionId": "cf9285f8-00ae-4b44-b3dd-b153844b5a8f",
+      "undoRedoGroup": {
+        "id": 86,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;496"
+    },
+    "generationUUID": "15f86bda-c560-430e-bce1-71b3dbe45990",
+    "timestamp": "2025-03-19T08:51:27.066Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "cf9285f8-00ae-4b44-b3dd-b153844b5a8f",
+    "fusedCursorPrediction": null,
+    "oldText": "    Column() {\n      IM\n    }\n    .width('100%')\n    .height(100)",
+    "newText": "    Column() {\n      Image('@assets/images/icon.png')\n      .width(100)\n      .height(100)\n    }\n    .width('100%')\n    .height(100)",
+    "timestamp": "2025-03-19T08:51:27.067Z"
+  }
+]

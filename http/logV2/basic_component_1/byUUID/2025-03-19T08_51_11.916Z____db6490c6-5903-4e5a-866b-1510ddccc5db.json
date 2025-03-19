@@ -1,0 +1,362 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "db6490c6-5903-4e5a-866b-1510ddccc5db",
+    "timestamp": "2025-03-19T08:51:11.916Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/basicComponent.ets",
+          "diffHistory": [
+            "1+|@Entry\n2+|@Component\n3+|struct BasicComponent {\n4+|  @State message: string = 'Hello, World!'\n5+|}\n6+|\n",
+            "4-|  @State message: string = 'Hello, World!'\n",
+            "4-|  \n4+|  build() {\n5+|    Column() {\n6+|      Text('Hello, World!')\n7+|    }\n8+|  }\n",
+            "6-|      Text('Hello, World!')\n6+|      Text(this.message)\n",
+            "4+|  @State message: string = 'Hello, World!'\n5+|\n8+|      Row\n10+|      }\n",
+            "8-|      Row\n9-|      Text(this.message)\n8+|      Row() {\n9+|        Text(this.message)\n11+|      .width('100%')\n12+|      .height(100)\n13+|      .backgroundColor('#000000')\n14+|      .justifyContent(FlexAlign.Center)\n15+|      .alignItems(ItemAlign.Center)\n16+|\n17+|      Stack() {\n18+|        Text('Hello, World!')\n19+|        Text('Hello, World!')\n20+|        Text('Hello, World!')\n21+|      }\n22+|      .width('100%')\n23+|      .height(100)\n",
+            "16-|      \n17-|      \n17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .width('100%')\n21+|      .height(100)\n22+|      .backgroundColor('#000000')\n23+|      .justifyContent(FlexAlign.Center)\n24+|      .alignItems(ItemAlign.Center)\n25+|\n",
+            "37+|@Entry\n38+|@Component\n39+|struct BasicComponent {\n40+|  @State message: string = 'Hello, World!'\n41+|  \n42+|}\n",
+            "37-|@Entry\n",
+            "38-|struct BasicComponent {\n38+|struct ListExample {\n",
+            "41+|  build() {\n42+|    List() {\n43+|      Text('Hello, World!')\n44+|    }\n45+|  }\n",
+            "39-|  @State message: string = 'Hello, World!'\n",
+            "39-|  \n39+|  @State items: string[] = ['Item 1', 'Item 2', 'Item 3']\n",
+            "43-|      Text('Hello, World!')\n44-|    }\n43+|      Text('Hello, World!th('100%')\n44+|    .height(100)\n",
+            "43-|      Text('Hello, World!th('100%')\n43+|      Text('Hello, Worl }\n44+|    .width('100%')\n",
+            "43-|      Text('Hello, Worl }\n43+|      Text('Hello,m)\n44+|      })\n45+|    }\n",
+            "43-|      Text('Hello,m)\n43+|      ForEach(this.items, (item) => {\n44+|        Text(item)\n",
+            "44+|        ListItem() {\n46+|        }\n",
+            "47+|        .height(100)\n48+|        .width('100%')\n49+|        .backgroundColor('#000000')\n50+|        .justifyContent(FlexAlign.Center)\n51+|        .alignItems(ItemAlign.Center)\n",
+            "58+|\n59+|@Component\n60+|struct FunctionComponent {\n61+|  @Prop message: string = 'Hello, World!'\n62+|\n63+|  build() {\n64+|    Text(this.message)\n65+|  }\n66+|}\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/basicComponent.ets",
+        "contents": "@Entry\n@Component\nstruct BasicComponent {\n  @State message: string = 'Hello, World!'\n\n  build() {\n    Column() {\n      Row() {\n        Text(this.message)\n      }\n      .width('100%')\n      .height(100)\n      .backgroundColor('#000000')\n      .justifyContent(FlexAlign.Center)\n      .alignItems(ItemAlign.Center)\n\n      Button() {\n        Text('Click me')\n      }\n      .width('100%')\n      .height(100)\n      .backgroundColor('#000000')\n      .justifyContent(FlexAlign.Center)\n      .alignItems(ItemAlign.Center)\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }\n      .width('100%')\n      .height(100)\n    }\n  }\n}\n\n@Component\nstruct ListExample {\n  @State items: string[] = ['Item 1', 'Item 2', 'Item 3']\n\n  build() {\n    List() {\n      ForEach(this.items, (item) => {\n        ListItem() {\n          Text(item)\n        }\n        .height(100)\n        .width('100%')\n        .backgroundColor('#000000')\n        .justifyContent(FlexAlign.Center)\n        .alignItems(ItemAlign.Center)\n      })\n    }\n    .width('100%')\n    .height(100)\n  }\n}\n\n@Component\nstruct FunctionComponent {\n  @Prop message: string = 'Hello, World!'\n\n  build() {\n    Text(this.message)\n  }\n}\n",
+        "cursorPosition": {
+          "line": 63,
+          "column": 0
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 95,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1742374271958,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 52.10009765625,
+      "timeAtRequestSend": 1742374271959
+    },
+    "generateUuid": "db6490c6-5903-4e5a-866b-1510ddccc5db",
+    "timestamp": "2025-03-19T08:51:11.961Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "struct FunctionComponent {\n  @Prop message: string = 'Hello, World!'\n\n  build() {\n    Column",
+      "rangeToReplace": {
+        "startLineNumber": 60,
+        "endLineNumberInclusive": 67
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "db6490c6-5903-4e5a-866b-1510ddccc5db",
+    "timestamp": "2025-03-19T08:51:12.334Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "db6490c6-5903-4e5a-866b-1510ddccc5db",
+    "timestamp": "2025-03-19T08:51:12.343Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "() {\n     "
+    },
+    "generationUUID": "db6490c6-5903-4e5a-866b-1510ddccc5db",
+    "timestamp": "2025-03-19T08:51:12.370Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Text"
+    },
+    "generationUUID": "db6490c6-5903-4e5a-866b-1510ddccc5db",
+    "timestamp": "2025-03-19T08:51:12.375Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "("
+    },
+    "generationUUID": "db6490c6-5903-4e5a-866b-1510ddccc5db",
+    "timestamp": "2025-03-19T08:51:12.385Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "this.message)\n   "
+    },
+    "generationUUID": "db6490c6-5903-4e5a-866b-1510ddccc5db",
+    "timestamp": "2025-03-19T08:51:12.399Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " }"
+    },
+    "generationUUID": "db6490c6-5903-4e5a-866b-1510ddccc5db",
+    "timestamp": "2025-03-19T08:51:12.412Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n    .width('100"
+    },
+    "generationUUID": "db6490c6-5903-4e5a-866b-1510ddccc5db",
+    "timestamp": "2025-03-19T08:51:12.424Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "%"
+    },
+    "generationUUID": "db6490c6-5903-4e5a-866b-1510ddccc5db",
+    "timestamp": "2025-03-19T08:51:12.451Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "')\n    .height(10"
+    },
+    "generationUUID": "db6490c6-5903-4e5a-866b-1510ddccc5db",
+    "timestamp": "2025-03-19T08:51:12.454Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "0"
+    },
+    "generationUUID": "db6490c6-5903-4e5a-866b-1510ddccc5db",
+    "timestamp": "2025-03-19T08:51:12.463Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ")\n   "
+    },
+    "generationUUID": "db6490c6-5903-4e5a-866b-1510ddccc5db",
+    "timestamp": "2025-03-19T08:51:12.476Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ."
+    },
+    "generationUUID": "db6490c6-5903-4e5a-866b-1510ddccc5db",
+    "timestamp": "2025-03-19T08:51:12.494Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "backgroundColor"
+    },
+    "generationUUID": "db6490c6-5903-4e5a-866b-1510ddccc5db",
+    "timestamp": "2025-03-19T08:51:12.504Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "('#000000')"
+    },
+    "generationUUID": "db6490c6-5903-4e5a-866b-1510ddccc5db",
+    "timestamp": "2025-03-19T08:51:12.514Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n    .justify"
+    },
+    "generationUUID": "db6490c6-5903-4e5a-866b-1510ddccc5db",
+    "timestamp": "2025-03-19T08:51:12.527Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Content(FlexAlign.Center)\n"
+    },
+    "generationUUID": "db6490c6-5903-4e5a-866b-1510ddccc5db",
+    "timestamp": "2025-03-19T08:51:12.538Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "   "
+    },
+    "generationUUID": "db6490c6-5903-4e5a-866b-1510ddccc5db",
+    "timestamp": "2025-03-19T08:51:12.553Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ."
+    },
+    "generationUUID": "db6490c6-5903-4e5a-866b-1510ddccc5db",
+    "timestamp": "2025-03-19T08:51:12.562Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "align"
+    },
+    "generationUUID": "db6490c6-5903-4e5a-866b-1510ddccc5db",
+    "timestamp": "2025-03-19T08:51:12.574Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Items(ItemAlign.Center)\n"
+    },
+    "generationUUID": "db6490c6-5903-4e5a-866b-1510ddccc5db",
+    "timestamp": "2025-03-19T08:51:12.599Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "db6490c6-5903-4e5a-866b-1510ddccc5db",
+    "timestamp": "2025-03-19T08:51:12.600Z"
+  },
+  {
+    "firstChunkValue": "struct FunctionComponent {\n  @Prop message: string = 'Hello, World!'\n\n  build() {\n    Column() {\n      Text(this.message)\n    }\n    .width('100%')\n    .height(100)\n    .backgroundColor('#000000')\n    .justifyContent(FlexAlign.Center)\n    .alignItems(ItemAlign.Center)\n  }\n}\n",
+    "generationUUID": "db6490c6-5903-4e5a-866b-1510ddccc5db",
+    "timestamp": "2025-03-19T08:51:12.610Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "struct FunctionComponent {\n  @Prop message: string = 'Hello, World!'\n\n  build() {\n    Column() {\n      Text(this.message)\n    }\n    .width('100%')\n    .height(100)\n    .backgroundColor('#000000')\n    .justifyContent(FlexAlign.Center)\n    .alignItems(ItemAlign.Center)\n  }\n}\n"
+    },
+    "generationUUID": "db6490c6-5903-4e5a-866b-1510ddccc5db",
+    "timestamp": "2025-03-19T08:51:12.612Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " }\n}\n"
+    },
+    "generationUUID": "db6490c6-5903-4e5a-866b-1510ddccc5db",
+    "timestamp": "2025-03-19T08:51:12.615Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "db6490c6-5903-4e5a-866b-1510ddccc5db",
+    "timestamp": "2025-03-19T08:51:12.615Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "db6490c6-5903-4e5a-866b-1510ddccc5db",
+    "timestamp": "2025-03-19T08:51:12.625Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "524c59ff-6234-4c1d-ae99-64392320b7a6",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 95,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 95,
+      "monotonicallyIncreasingSuggestionId": 76,
+      "range": {
+        "startLineNumber": 60,
+        "startColumn": 1,
+        "endLineNumberInclusive": 67,
+        "endColumn": 1
+      },
+      "replaceText": "struct FunctionComponent {\n  @Prop message: string = 'Hello, World!'\n\n  build() {\n    Column() {\n      Text(this.message)\n    }\n    .width('100%')\n    .height(100)\n    .backgroundColor('#000000')\n    .justifyContent(FlexAlign.Center)\n    .alignItems(ItemAlign.Center)\n  }\n}\n",
+      "originalText": "struct FunctionComponent {\n  @Prop message: string = 'Hello, World!'\n\n  build() {\n    Text(this.message)\n  }\n}\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 60,
+        "startColumn": 1,
+        "endLineNumberInclusive": 67,
+        "endColumn": 1
+      },
+      "diffText": "struct FunctionComponent {\n  @Prop message: string = 'Hello, World!'\n\n  build() {\n    Column() {\n      Text(this.message)\n    }\n    .width('100%')\n    .height(100)\n    .backgroundColor('#000000')\n    .justifyContent(FlexAlign.Center)\n    .alignItems(ItemAlign.Center)\n  }\n}\n",
+      "fullOriginalText": "struct FunctionComponent {\n  @Prop message: string = 'Hello, World!'\n\n  build() {\n    Text(this.message)\n  }\n}\n",
+      "suggestionTriggerTime": 1742374271868.9,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "db6490c6-5903-4e5a-866b-1510ddccc5db",
+      "selection": {
+        "startLineNumber": 60,
+        "startColumn": 1,
+        "endLineNumberInclusive": 67,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "00fccd0a-cf13-4686-8e6b-c4ad04e21924",
+      "undoRedoGroup": {
+        "id": 76,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 60,
+        "startColumn": 1,
+        "endLineNumber": 67,
+        "endColumn": 1
+      },
+      "trackedText": "struct FunctionComponent {\n  @Prop message: string = 'Hello, World!'\n\n  build() {\n    Text(this.message)\n  }\n}\n"
+    },
+    "generationUUID": "db6490c6-5903-4e5a-866b-1510ddccc5db",
+    "timestamp": "2025-03-19T08:51:12.627Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "00fccd0a-cf13-4686-8e6b-c4ad04e21924",
+    "generationUUID": "db6490c6-5903-4e5a-866b-1510ddccc5db",
+    "timestamp": "2025-03-19T08:51:12.645Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "struct FunctionComponent {\n  @Prop message: string = 'Hello, World!'\n\n  build() {\n    Column() {\n      Text(this.message)\n    }\n    .width('100%')\n    .height(100)\n    .backgroundColor('#000000')\n    .justifyContent(FlexAlign.Center)\n    .alignItems(ItemAlign.Center)\n  }\n}\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "00fccd0a-cf13-4686-8e6b-c4ad04e21924",
+    "generationUUID": "db6490c6-5903-4e5a-866b-1510ddccc5db",
+    "timestamp": "2025-03-19T08:51:12.645Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "00fccd0a-cf13-4686-8e6b-c4ad04e21924",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T08:51:12.645Z"
+  }
+]

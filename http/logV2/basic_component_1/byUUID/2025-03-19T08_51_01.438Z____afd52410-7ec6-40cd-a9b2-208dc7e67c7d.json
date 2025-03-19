@@ -1,0 +1,336 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "afd52410-7ec6-40cd-a9b2-208dc7e67c7d",
+    "timestamp": "2025-03-19T08:51:01.438Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/basicComponent.ets",
+          "diffHistory": [
+            "1+|@Entry\n2+|@Component\n3+|struct BasicComponent {\n4+|  @State message: string = 'Hello, World!'\n5+|}\n6+|\n",
+            "4-|  @State message: string = 'Hello, World!'\n",
+            "4-|  \n4+|  build() {\n5+|    Column() {\n6+|      Text('Hello, World!')\n7+|    }\n8+|  }\n",
+            "6-|      Text('Hello, World!')\n6+|      Text(this.message)\n",
+            "4+|  @State message: string = 'Hello, World!'\n5+|\n8+|      Row\n10+|      }\n",
+            "8-|      Row\n9-|      Text(this.message)\n8+|      Row() {\n9+|        Text(this.message)\n11+|      .width('100%')\n12+|      .height(100)\n13+|      .backgroundColor('#000000')\n14+|      .justifyContent(FlexAlign.Center)\n15+|      .alignItems(ItemAlign.Center)\n16+|\n17+|      Stack() {\n18+|        Text('Hello, World!')\n19+|        Text('Hello, World!')\n20+|        Text('Hello, World!')\n21+|      }\n22+|      .width('100%')\n23+|      .height(100)\n",
+            "16-|      \n17-|      \n17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .width('100%')\n21+|      .height(100)\n22+|      .backgroundColor('#000000')\n23+|      .justifyContent(FlexAlign.Center)\n24+|      .alignItems(ItemAlign.Center)\n25+|\n",
+            "37+|@Entry\n38+|@Component\n39+|struct BasicComponent {\n40+|  @State message: string = 'Hello, World!'\n41+|  \n42+|}\n",
+            "37-|@Entry\n",
+            "38-|struct BasicComponent {\n38+|struct ListExample {\n",
+            "41+|  build() {\n42+|    List() {\n43+|      Text('Hello, World!')\n44+|    }\n45+|  }\n",
+            "39-|  @State message: string = 'Hello, World!'\n",
+            "39-|  \n39+|  @State items: string[] = ['Item 1', 'Item 2', 'Item 3']\n",
+            "43-|      Text('Hello, World!')\n44-|    }\n43+|      Text('Hello, World!th('100%')\n44+|    .height(100)\n",
+            "43-|      Text('Hello, World!th('100%')\n43+|      Text('Hello, Worl }\n44+|    .width('100%')\n",
+            "43-|      Text('Hello, Worl }\n43+|      Text('Hello,m)\n44+|      })\n45+|    }\n",
+            "43-|      Text('Hello,m)\n43+|      ForEach(this.items, (item) => {\n44+|        Text(item)\n",
+            "44+|        ListItem() {\n46+|        }\n",
+            "47+|        .height(100)\n48+|        .width('100%')\n49+|        .backgroundColor('#000000')\n50+|        .justifyContent(FlexAlign.Center)\n51+|        .alignItems(ItemAlign.Center)\n",
+            "58+|\n59+|@Component\n60+|struct Funct\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/basicComponent.ets",
+        "contents": "@Entry\n@Component\nstruct BasicComponent {\n  @State message: string = 'Hello, World!'\n\n  build() {\n    Column() {\n      Row() {\n        Text(this.message)\n      }\n      .width('100%')\n      .height(100)\n      .backgroundColor('#000000')\n      .justifyContent(FlexAlign.Center)\n      .alignItems(ItemAlign.Center)\n\n      Button() {\n        Text('Click me')\n      }\n      .width('100%')\n      .height(100)\n      .backgroundColor('#000000')\n      .justifyContent(FlexAlign.Center)\n      .alignItems(ItemAlign.Center)\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }\n      .width('100%')\n      .height(100)\n    }\n  }\n}\n\n@Component\nstruct ListExample {\n  @State items: string[] = ['Item 1', 'Item 2', 'Item 3']\n\n  build() {\n    List() {\n      ForEach(this.items, (item) => {\n        ListItem() {\n          Text(item)\n        }\n        .height(100)\n        .width('100%')\n        .backgroundColor('#000000')\n        .justifyContent(FlexAlign.Center)\n        .alignItems(ItemAlign.Center)\n      })\n    }\n    .width('100%')\n    .height(100)\n  }\n}\n\n@Component\nstruct Funct\n",
+        "cursorPosition": {
+          "line": 59,
+          "column": 12
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 91,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742374261483,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 55.10009765625,
+      "timeAtRequestSend": 1742374261483
+    },
+    "generateUuid": "afd52410-7ec6-40cd-a9b2-208dc7e67c7d",
+    "timestamp": "2025-03-19T08:51:01.485Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "afd52410-7ec6-40cd-a9b2-208dc7e67c7d",
+    "timestamp": "2025-03-19T08:51:01.848Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "@Component\nstruct Function",
+      "rangeToReplace": {
+        "startLineNumber": 59,
+        "endLineNumberInclusive": 61
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "afd52410-7ec6-40cd-a9b2-208dc7e67c7d",
+    "timestamp": "2025-03-19T08:51:01.849Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Component"
+    },
+    "generationUUID": "afd52410-7ec6-40cd-a9b2-208dc7e67c7d",
+    "timestamp": "2025-03-19T08:51:01.891Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "afd52410-7ec6-40cd-a9b2-208dc7e67c7d",
+    "timestamp": "2025-03-19T08:51:01.899Z"
+  },
+  {
+    "firstChunkValue": "@Component\nstruct FunctionComponent {\n",
+    "generationUUID": "afd52410-7ec6-40cd-a9b2-208dc7e67c7d",
+    "timestamp": "2025-03-19T08:51:01.911Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "@Component\nstruct FunctionComponent {\n"
+    },
+    "generationUUID": "afd52410-7ec6-40cd-a9b2-208dc7e67c7d",
+    "timestamp": "2025-03-19T08:51:01.911Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n "
+    },
+    "generationUUID": "afd52410-7ec6-40cd-a9b2-208dc7e67c7d",
+    "timestamp": "2025-03-19T08:51:01.912Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " @"
+    },
+    "generationUUID": "afd52410-7ec6-40cd-a9b2-208dc7e67c7d",
+    "timestamp": "2025-03-19T08:51:01.921Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Prop"
+    },
+    "generationUUID": "afd52410-7ec6-40cd-a9b2-208dc7e67c7d",
+    "timestamp": "2025-03-19T08:51:01.930Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " message"
+    },
+    "generationUUID": "afd52410-7ec6-40cd-a9b2-208dc7e67c7d",
+    "timestamp": "2025-03-19T08:51:01.952Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": string = 'Hello, World!'"
+    },
+    "generationUUID": "afd52410-7ec6-40cd-a9b2-208dc7e67c7d",
+    "timestamp": "2025-03-19T08:51:01.960Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "afd52410-7ec6-40cd-a9b2-208dc7e67c7d",
+    "timestamp": "2025-03-19T08:51:01.972Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "afd52410-7ec6-40cd-a9b2-208dc7e67c7d",
+    "timestamp": "2025-03-19T08:51:01.979Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " build"
+    },
+    "generationUUID": "afd52410-7ec6-40cd-a9b2-208dc7e67c7d",
+    "timestamp": "2025-03-19T08:51:01.999Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "() {\n    Text"
+    },
+    "generationUUID": "afd52410-7ec6-40cd-a9b2-208dc7e67c7d",
+    "timestamp": "2025-03-19T08:51:02.003Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "(this"
+    },
+    "generationUUID": "afd52410-7ec6-40cd-a9b2-208dc7e67c7d",
+    "timestamp": "2025-03-19T08:51:02.016Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ".message"
+    },
+    "generationUUID": "afd52410-7ec6-40cd-a9b2-208dc7e67c7d",
+    "timestamp": "2025-03-19T08:51:02.038Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ")\n "
+    },
+    "generationUUID": "afd52410-7ec6-40cd-a9b2-208dc7e67c7d",
+    "timestamp": "2025-03-19T08:51:02.046Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " }"
+    },
+    "generationUUID": "afd52410-7ec6-40cd-a9b2-208dc7e67c7d",
+    "timestamp": "2025-03-19T08:51:02.060Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n}\n"
+    },
+    "generationUUID": "afd52410-7ec6-40cd-a9b2-208dc7e67c7d",
+    "timestamp": "2025-03-19T08:51:02.069Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "afd52410-7ec6-40cd-a9b2-208dc7e67c7d",
+    "timestamp": "2025-03-19T08:51:02.070Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "afd52410-7ec6-40cd-a9b2-208dc7e67c7d",
+    "timestamp": "2025-03-19T08:51:02.071Z"
+  },
+  {
+    "fullText": "@Component\nstruct FunctionComponent {\n  @Prop message: string = 'Hello, World!'\n\n  build() {\n    Text(this.message)\n  }\n}\n",
+    "generationUUID": "afd52410-7ec6-40cd-a9b2-208dc7e67c7d",
+    "timestamp": "2025-03-19T08:51:02.073Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "@Component\nstruct FunctionComponent {\n"
+    },
+    "fullText": "@Component\nstruct FunctionComponent {\n  @Prop message: string = 'Hello, World!'\n\n  build() {\n    Text(this.message)\n  }\n}\n",
+    "generationUUID": "afd52410-7ec6-40cd-a9b2-208dc7e67c7d",
+    "timestamp": "2025-03-19T08:51:02.075Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && currentSuggestion uniqueId is different && need to create newSuggestion according fullText",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "729b7a83-4d32-4f71-85cf-c092c0567c44",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 91,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 93,
+      "monotonicallyIncreasingSuggestionId": 74,
+      "range": {
+        "startLineNumber": 59,
+        "startColumn": 1,
+        "endLineNumberInclusive": 61,
+        "endColumn": 1
+      },
+      "replaceText": "@Component\nstruct FunctionComponent {\n  @Prop message: string = 'Hello, World!'\n\n  build() {\n    Text(this.message)\n  }\n}\n",
+      "originalText": "@Component\nstruct Functio\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 59,
+        "startColumn": 1,
+        "endLineNumberInclusive": 61,
+        "endColumn": 1
+      },
+      "diffText": "@Component\nstruct FunctionComponent {\n  @Prop message: string = 'Hello, World!'\n\n  build() {\n    Text(this.message)\n  }\n}\n",
+      "fullOriginalText": "@Component\nstruct Functio\n",
+      "suggestionTriggerTime": 1742374261390.9,
+      "greens": [],
+      "source": "typing",
+      "requestId": "afd52410-7ec6-40cd-a9b2-208dc7e67c7d",
+      "selection": {
+        "startLineNumber": 59,
+        "startColumn": 1,
+        "endLineNumberInclusive": 61,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "ae8092ce-0cb1-4dc6-ae2c-dc04fba8d1fb",
+      "undoRedoGroup": {
+        "id": 74,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "afd52410-7ec6-40cd-a9b2-208dc7e67c7d",
+    "timestamp": "2025-03-19T08:51:02.077Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "ae8092ce-0cb1-4dc6-ae2c-dc04fba8d1fb",
+    "generationUUID": "afd52410-7ec6-40cd-a9b2-208dc7e67c7d",
+    "timestamp": "2025-03-19T08:51:02.080Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "@Component\nstruct FunctionComponent {\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "ae8092ce-0cb1-4dc6-ae2c-dc04fba8d1fb",
+    "generationUUID": "afd52410-7ec6-40cd-a9b2-208dc7e67c7d",
+    "timestamp": "2025-03-19T08:51:02.081Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "ae8092ce-0cb1-4dc6-ae2c-dc04fba8d1fb",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T08:51:02.082Z"
+  }
+]

@@ -1,0 +1,57 @@
+{"line":37,"column":15}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+struct BasicComponent {
+  @State message: string = 'Hello, World!'
+
+  build() {
+    Column() {
+      Row() {
+        Text(this.message)
+      }
+      .width('100%')
+      .height(100)
+      .backgroundColor('#000000')
+      .justifyContent(FlexAlign.Center)
+      .alignItems(ItemAlign.Center)
+
+      Button() {
+        Text('Click me')
+      }
+      .width('100%')
+      .height(100)
+      .backgroundColor('#000000')
+      .justifyContent(FlexAlign.Center)
+      .alignItems(ItemAlign.Center)
+
+      Stack() {
+        Text('Hello, World!')
+        Text('Hello, World!')
+        Text('Hello, World!')
+      }
+      .width('100%')
+      .height(100)
+    }
+  }
+}
+
+@Component
+struct ListExam[ToFill] {
+  @State message: string = 'Hello, World!'
+
+}
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+@Component
+struct ListExample {
+  @State message: string = 'Hello, World!'
+
+  build() {
+    List() {
+      ForEach(this.message, (item) => {
+        Text(item)
+      })
+    }

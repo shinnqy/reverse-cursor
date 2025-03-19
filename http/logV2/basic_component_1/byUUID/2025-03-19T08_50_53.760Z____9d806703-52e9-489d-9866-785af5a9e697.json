@@ -1,0 +1,457 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "9d806703-52e9-489d-9866-785af5a9e697",
+    "timestamp": "2025-03-19T08:50:53.760Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/basicComponent.ets",
+          "diffHistory": [
+            "1+|@Entry\n2+|@Component\n3+|struct BasicComponent {\n4+|  @State message: string = 'Hello, World!'\n5+|}\n6+|\n",
+            "4-|  @State message: string = 'Hello, World!'\n",
+            "4-|  \n4+|  build() {\n5+|    Column() {\n6+|      Text('Hello, World!')\n7+|    }\n8+|  }\n",
+            "6-|      Text('Hello, World!')\n6+|      Text(this.message)\n",
+            "4+|  @State message: string = 'Hello, World!'\n5+|\n8+|      Row\n10+|      }\n",
+            "8-|      Row\n9-|      Text(this.message)\n8+|      Row() {\n9+|        Text(this.message)\n11+|      .width('100%')\n12+|      .height(100)\n13+|      .backgroundColor('#000000')\n14+|      .justifyContent(FlexAlign.Center)\n15+|      .alignItems(ItemAlign.Center)\n16+|\n17+|      Stack() {\n18+|        Text('Hello, World!')\n19+|        Text('Hello, World!')\n20+|        Text('Hello, World!')\n21+|      }\n22+|      .width('100%')\n23+|      .height(100)\n",
+            "16-|      \n17-|      \n17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .width('100%')\n21+|      .height(100)\n22+|      .backgroundColor('#000000')\n23+|      .justifyContent(FlexAlign.Center)\n24+|      .alignItems(ItemAlign.Center)\n25+|\n",
+            "37+|@Entry\n38+|@Component\n39+|struct BasicComponent {\n40+|  @State message: string = 'Hello, World!'\n41+|  \n42+|}\n",
+            "37-|@Entry\n",
+            "38-|struct BasicComponent {\n38+|struct ListExample {\n",
+            "41+|  build() {\n42+|    List() {\n43+|      Text('Hello, World!')\n44+|    }\n45+|  }\n",
+            "39-|  @State message: string = 'Hello, World!'\n",
+            "39-|  \n39+|  @State items: string[] = ['Item 1', 'Item 2', 'Item 3']\n",
+            "43-|      Text('Hello, World!')\n44-|    }\n43+|      Text('Hello, World!th('100%')\n44+|    .height(100)\n",
+            "43-|      Text('Hello, World!th('100%')\n43+|      Text('Hello, Worl }\n44+|    .width('100%')\n",
+            "43-|      Text('Hello, Worl }\n43+|      Text('Hello,m)\n44+|      })\n45+|    }\n",
+            "43-|      Text('Hello,m)\n43+|      ForEach(this.items, (item) => {\n44+|        Text(item)\n",
+            "44+|        ListItem() {\n46+|        }\n",
+            "47+|        .height(100)\n48+|        .width('100%')\n49+|        .backgroundColor('#000000')\n50+|        .justifyContent(FlexAlign.Center)\n51+|        .alignItems(ItemAlign.Center)\n",
+            "58+|\n59+|@Component\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/basicComponent.ets",
+        "contents": "@Entry\n@Component\nstruct BasicComponent {\n  @State message: string = 'Hello, World!'\n\n  build() {\n    Column() {\n      Row() {\n        Text(this.message)\n      }\n      .width('100%')\n      .height(100)\n      .backgroundColor('#000000')\n      .justifyContent(FlexAlign.Center)\n      .alignItems(ItemAlign.Center)\n\n      Button() {\n        Text('Click me')\n      }\n      .width('100%')\n      .height(100)\n      .backgroundColor('#000000')\n      .justifyContent(FlexAlign.Center)\n      .alignItems(ItemAlign.Center)\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }\n      .width('100%')\n      .height(100)\n    }\n  }\n}\n\n@Component\nstruct ListExample {\n  @State items: string[] = ['Item 1', 'Item 2', 'Item 3']\n\n  build() {\n    List() {\n      ForEach(this.items, (item) => {\n        ListItem() {\n          Text(item)\n        }\n        .height(100)\n        .width('100%')\n        .backgroundColor('#000000')\n        .justifyContent(FlexAlign.Center)\n        .alignItems(ItemAlign.Center)\n      })\n    }\n    .width('100%')\n    .height(100)\n  }\n}\n\n@Component\n",
+        "cursorPosition": {
+          "line": 58,
+          "column": 10
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 74,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742374253784,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.300048828125,
+      "timeAtRequestSend": 1742374253784
+    },
+    "generateUuid": "9d806703-52e9-489d-9866-785af5a9e697",
+    "timestamp": "2025-03-19T08:50:53.785Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "9d806703-52e9-489d-9866-785af5a9e697",
+    "timestamp": "2025-03-19T08:50:54.145Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n@Component\nstruct",
+      "rangeToReplace": {
+        "startLineNumber": 58,
+        "endLineNumberInclusive": 60
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "9d806703-52e9-489d-9866-785af5a9e697",
+    "timestamp": "2025-03-19T08:50:54.146Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Grid"
+    },
+    "generationUUID": "9d806703-52e9-489d-9866-785af5a9e697",
+    "timestamp": "2025-03-19T08:50:54.157Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Example"
+    },
+    "generationUUID": "9d806703-52e9-489d-9866-785af5a9e697",
+    "timestamp": "2025-03-19T08:50:54.166Z"
+  },
+  {
+    "firstChunkValue": "\n@Component\nstruct GridExample {",
+    "generationUUID": "9d806703-52e9-489d-9866-785af5a9e697",
+    "timestamp": "2025-03-19T08:50:54.174Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {\n "
+    },
+    "generationUUID": "9d806703-52e9-489d-9866-785af5a9e697",
+    "timestamp": "2025-03-19T08:50:54.175Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\n@Component\nstruct GridExample {"
+    },
+    "generationUUID": "9d806703-52e9-489d-9866-785af5a9e697",
+    "timestamp": "2025-03-19T08:50:54.176Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "af7750e0-c7fd-4da7-99f7-328087cd27b5",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 74,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 74,
+      "monotonicallyIncreasingSuggestionId": 58,
+      "range": {
+        "startLineNumber": 58,
+        "startColumn": 1,
+        "endLineNumberInclusive": 60,
+        "endColumn": 1
+      },
+      "replaceText": "\n@Component\nstruct GridExample {",
+      "originalText": "\n@Component\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 58,
+        "startColumn": 1,
+        "endLineNumberInclusive": 60,
+        "endColumn": 1
+      },
+      "diffText": "\n@Component\nstruct GridExample {",
+      "fullOriginalText": "\n@Component\n",
+      "suggestionTriggerTime": 1742374253696.2998,
+      "greens": [],
+      "source": "typing",
+      "requestId": "9d806703-52e9-489d-9866-785af5a9e697",
+      "selection": {
+        "startLineNumber": 58,
+        "startColumn": 1,
+        "endLineNumberInclusive": 60,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 58,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "9d806703-52e9-489d-9866-785af5a9e697",
+    "timestamp": "2025-03-19T08:50:54.177Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " @"
+    },
+    "generationUUID": "9d806703-52e9-489d-9866-785af5a9e697",
+    "timestamp": "2025-03-19T08:50:54.188Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "State items: string[] = ['Item"
+    },
+    "generationUUID": "9d806703-52e9-489d-9866-785af5a9e697",
+    "timestamp": "2025-03-19T08:50:54.198Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "9d806703-52e9-489d-9866-785af5a9e697",
+    "timestamp": "2025-03-19T08:50:54.211Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "1"
+    },
+    "generationUUID": "9d806703-52e9-489d-9866-785af5a9e697",
+    "timestamp": "2025-03-19T08:50:54.220Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "', 'Item 2', 'Item"
+    },
+    "generationUUID": "9d806703-52e9-489d-9866-785af5a9e697",
+    "timestamp": "2025-03-19T08:50:54.230Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " 3"
+    },
+    "generationUUID": "9d806703-52e9-489d-9866-785af5a9e697",
+    "timestamp": "2025-03-19T08:50:54.241Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "',"
+    },
+    "generationUUID": "9d806703-52e9-489d-9866-785af5a9e697",
+    "timestamp": "2025-03-19T08:50:54.257Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " 'Item 4"
+    },
+    "generationUUID": "9d806703-52e9-489d-9866-785af5a9e697",
+    "timestamp": "2025-03-19T08:50:54.266Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "',"
+    },
+    "generationUUID": "9d806703-52e9-489d-9866-785af5a9e697",
+    "timestamp": "2025-03-19T08:50:54.275Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " '"
+    },
+    "generationUUID": "9d806703-52e9-489d-9866-785af5a9e697",
+    "timestamp": "2025-03-19T08:50:54.291Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Item 5"
+    },
+    "generationUUID": "9d806703-52e9-489d-9866-785af5a9e697",
+    "timestamp": "2025-03-19T08:50:54.298Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "',"
+    },
+    "generationUUID": "9d806703-52e9-489d-9866-785af5a9e697",
+    "timestamp": "2025-03-19T08:50:54.308Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " 'Item"
+    },
+    "generationUUID": "9d806703-52e9-489d-9866-785af5a9e697",
+    "timestamp": "2025-03-19T08:50:54.320Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "9d806703-52e9-489d-9866-785af5a9e697",
+    "timestamp": "2025-03-19T08:50:54.332Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "6"
+    },
+    "generationUUID": "9d806703-52e9-489d-9866-785af5a9e697",
+    "timestamp": "2025-03-19T08:50:54.343Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "']"
+    },
+    "generationUUID": "9d806703-52e9-489d-9866-785af5a9e697",
+    "timestamp": "2025-03-19T08:50:54.355Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "9d806703-52e9-489d-9866-785af5a9e697",
+    "timestamp": "2025-03-19T08:50:54.368Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "9d806703-52e9-489d-9866-785af5a9e697",
+    "timestamp": "2025-03-19T08:50:54.380Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " build"
+    },
+    "generationUUID": "9d806703-52e9-489d-9866-785af5a9e697",
+    "timestamp": "2025-03-19T08:50:54.392Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "() {\n    Grid"
+    },
+    "generationUUID": "9d806703-52e9-489d-9866-785af5a9e697",
+    "timestamp": "2025-03-19T08:50:54.404Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "()"
+    },
+    "generationUUID": "9d806703-52e9-489d-9866-785af5a9e697",
+    "timestamp": "2025-03-19T08:50:54.417Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {\n  "
+    },
+    "generationUUID": "9d806703-52e9-489d-9866-785af5a9e697",
+    "timestamp": "2025-03-19T08:50:54.431Z"
+  },
+  {
+    "fullText": "\n@Component\nstruct GridExample {\n  @State items: string[] = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6']\n\n  build() {\n    Grid() {\n  \n",
+    "generationUUID": "9d806703-52e9-489d-9866-785af5a9e697",
+    "timestamp": "2025-03-19T08:50:54.449Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\n@Component\nstruct GridExample {"
+    },
+    "fullText": "\n@Component\nstruct GridExample {\n  @State items: string[] = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6']\n\n  build() {\n    Grid() {\n  \n",
+    "generationUUID": "9d806703-52e9-489d-9866-785af5a9e697",
+    "timestamp": "2025-03-19T08:50:54.449Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "567e9ea4-a22c-470f-80b1-44479ea27c2b",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 74,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 75,
+      "monotonicallyIncreasingSuggestionId": 59,
+      "range": {
+        "startLineNumber": 58,
+        "startColumn": 1,
+        "endLineNumberInclusive": 60,
+        "endColumn": 1
+      },
+      "replaceText": "\n@Component\nstruct GridExample {\n  @State items: string[] = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6']\n\n  build() {\n    Grid() {\n  \n",
+      "originalText": "\n@Component\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 58,
+        "startColumn": 1,
+        "endLineNumberInclusive": 60,
+        "endColumn": 1
+      },
+      "diffText": "\n@Component\nstruct GridExample {\n  @State items: string[] = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6']\n\n  build() {\n    Grid() {\n  \n",
+      "fullOriginalText": "\n@Component\n",
+      "suggestionTriggerTime": 1742374253696.2998,
+      "greens": [],
+      "source": "typing",
+      "requestId": "9d806703-52e9-489d-9866-785af5a9e697",
+      "selection": {
+        "startLineNumber": 58,
+        "startColumn": 1,
+        "endLineNumberInclusive": 60,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "73cf5226-c10f-4c82-8e3d-e999884dc194",
+      "undoRedoGroup": {
+        "id": 59,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "9d806703-52e9-489d-9866-785af5a9e697",
+    "timestamp": "2025-03-19T08:50:54.450Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "9d806703-52e9-489d-9866-785af5a9e697",
+    "timestamp": "2025-03-19T08:50:54.450Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "9d806703-52e9-489d-9866-785af5a9e697",
+    "timestamp": "2025-03-19T08:50:54.451Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "9d806703-52e9-489d-9866-785af5a9e697",
+    "timestamp": "2025-03-19T08:50:54.451Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "73cf5226-c10f-4c82-8e3d-e999884dc194",
+    "generationUUID": "9d806703-52e9-489d-9866-785af5a9e697",
+    "timestamp": "2025-03-19T08:50:54.452Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\n@Component\nstruct GridExample {"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "73cf5226-c10f-4c82-8e3d-e999884dc194",
+    "generationUUID": "9d806703-52e9-489d-9866-785af5a9e697",
+    "timestamp": "2025-03-19T08:50:54.453Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "73cf5226-c10f-4c82-8e3d-e999884dc194",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T08:50:54.453Z"
+  }
+]
