@@ -1,0 +1,48 @@
+{"line":33,"column":5}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+let status = 'active'
+
+if (status === 'active') {
+  let count = 10;
+} else {
+  let count = 0;
+}
+
+console.log(count);
+
+function printValue(value: string | number) {
+  if (typeof value === 'string') {
+    console.log(value.toUpperCase());
+  } else {
+    console.log(value.toFixed(2));
+  }
+}
+
+class Cat {
+  meow() {}
+}
+class Dog {
+  bark() {}
+}
+
+function printAnimal(animal: Cat | Dog) {
+  if (animal instanceof Cat) {
+    animal.meow();
+  } else {
+    animal.bark();
+  }
+}
+
+let s[ToFill]
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+let status = 'active';
+
+if (status === 'active') {
+  console.log('active');
+} else if (status === 'inactive') {
+  console.log('inactive');
+} else {
+  console.log('unknown');

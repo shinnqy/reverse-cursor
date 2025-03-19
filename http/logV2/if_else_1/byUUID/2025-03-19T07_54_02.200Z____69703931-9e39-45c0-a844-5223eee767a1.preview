@@ -1,0 +1,64 @@
+{"line":14,"column":22}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+let status = 'active'
+
+if (status === 'active') {
+  let count = 10;
+} else {
+  let count = 0;
+}
+
+console.log(count);
+
+function printValue(value: string | number) {
+  if (typeof value === 'string') {
+    console.log(value.toUpperCase());
+  } else {
+    console.log(value.[ToFill]);
+  }
+}
+-------------------------------[               firstChunkValue               ]--------------------------------
+  if (typeof value === 'string') {
+    console.log(value.toUpperCase());
+  } else {
+    console.log(value.toFixed(2));
+  }
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+let status = 'active'
+
+if (status === 'active') {
+  let count = 10;
+} else {
+  let count = 0;
+}
+
+console.log(count);
+
+function printValue(value: string | number) {
+  if (typeof value === 'string') {
+    console.log(value.toUpperCase());
+  } else {
+    console.log(value.toFixed(2));
+  }
+}
+-------------------------------[                   fullText                  ]--------------------------------
+  if (typeof value === 'string') {
+    console.log(value.toUpperCase());
+  } else {
+    console.log(value.toFixed(2));
+  }
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/ifElse1.ets",
+  "lineNumberOneIndexed": 16,
+  "text": "}",
+  "shouldRetriggerCpp": true
+}
+--------------------------------[        displayedFusedCursorPrediction       ]---------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/ifElse1.ets",
+  "lineNumberOneIndexed": 16,
+  "text": "}",
+  "shouldRetriggerCpp": true
+}
