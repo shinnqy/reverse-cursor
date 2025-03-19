@@ -1,0 +1,167 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "6c164376-8951-448f-be46-6e9b2d11e92f",
+    "timestamp": "2025-03-19T13:12:50.351Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/twoWayBinding.ets",
+          "diffHistory": [
+            "16+|  @Link t\n",
+            "16-|  @Link t\n16+|  @Link target: number = 0;\n",
+            "22-|          //\n22+|          this.target++;\n",
+            "9-|      LinkChildComponent()\n9+|      LinkChildComponent({ target: this.parentCount })\n",
+            "46+|  @Link user\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/twoWayBinding.ets",
+        "contents": "@Entry\n@Component\nstruct ParentComponent {\n  @State parentCount: number = 0;\n\n  build() {\n    Column() {\n      Text(this.parentCount.toString())\n      LinkChildComponent({ target: this.parentCount })\n    }\n  }\n}\n\n@Component\nstruct LinkChildComponent {\n  @Link target: number = 0;\n\n  build() {\n    Column() {\n      Button()\n        .onClick(() => {\n          this.target++;\n        })\n    }\n  }\n}\n\ninterface User {\n  name: string;\n  age: number;\n}\n\n@Component\nstruct ComplexBindingExample {\n  @State user: User = { name: 'John', age: 30 };\n\n  build() {\n    Column() {\n      Text(this.user.name)\n    }\n  }\n}\n\n@Component\nstruct UserEditor {\n  @Link user\n\n  build() {\n    Column() {\n      Text(\"\")\n      Text(\"\")\n    }\n  }\n}\n\n\n",
+        "cursorPosition": {
+          "line": 45,
+          "column": 12
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 25,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742389970397,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.7001953125,
+      "timeAtRequestSend": 1742389970397
+    },
+    "generateUuid": "6c164376-8951-448f-be46-6e9b2d11e92f",
+    "timestamp": "2025-03-19T13:12:50.399Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}\n\n@Component\nstruct UserEditor {\n  @Link user:",
+      "rangeToReplace": {
+        "startLineNumber": 42,
+        "endLineNumberInclusive": 49
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "6c164376-8951-448f-be46-6e9b2d11e92f",
+    "timestamp": "2025-03-19T13:12:50.760Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "6c164376-8951-448f-be46-6e9b2d11e92f",
+    "timestamp": "2025-03-19T13:12:50.778Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " User"
+    },
+    "generationUUID": "6c164376-8951-448f-be46-6e9b2d11e92f",
+    "timestamp": "2025-03-19T13:12:50.790Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " = { name: 'John', age"
+    },
+    "generationUUID": "6c164376-8951-448f-be46-6e9b2d11e92f",
+    "timestamp": "2025-03-19T13:12:50.803Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": 30 };\n\n "
+    },
+    "generationUUID": "6c164376-8951-448f-be46-6e9b2d11e92f",
+    "timestamp": "2025-03-19T13:12:50.818Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " build"
+    },
+    "generationUUID": "6c164376-8951-448f-be46-6e9b2d11e92f",
+    "timestamp": "2025-03-19T13:12:50.828Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "() {\n    Column() {"
+    },
+    "generationUUID": "6c164376-8951-448f-be46-6e9b2d11e92f",
+    "timestamp": "2025-03-19T13:12:50.839Z"
+  },
+  {
+    "firstChunkValue": "}\n\n@Component\nstruct UserEditor {\n  @Link user: User = { name: 'John', age: 30 };\n\n  build() {\n    Column() {",
+    "generationUUID": "6c164376-8951-448f-be46-6e9b2d11e92f",
+    "timestamp": "2025-03-19T13:12:50.863Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "}\n\n@Component\nstruct UserEditor {\n  @Link user: User = { name: 'John', age: 30 };\n\n  build() {\n    Column() {"
+    },
+    "generationUUID": "6c164376-8951-448f-be46-6e9b2d11e92f",
+    "timestamp": "2025-03-19T13:12:50.864Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "ff34e276-f7c9-4940-955d-e7bf7426fe1c",
+    "generationUUID": "6c164376-8951-448f-be46-6e9b2d11e92f",
+    "timestamp": "2025-03-19T13:12:50.868Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "6c164376-8951-448f-be46-6e9b2d11e92f",
+    "timestamp": "2025-03-19T13:12:50.871Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "}\n\n@Component\nstruct UserEditor {\n  @Link user: User = { name: 'John', age: 30 };\n\n  build() {\n    Column() {"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "ff34e276-f7c9-4940-955d-e7bf7426fe1c",
+    "generationUUID": "6c164376-8951-448f-be46-6e9b2d11e92f",
+    "timestamp": "2025-03-19T13:12:50.872Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "ff34e276-f7c9-4940-955d-e7bf7426fe1c",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T13:12:50.873Z"
+  }
+]

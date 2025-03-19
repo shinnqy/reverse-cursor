@@ -1,0 +1,683 @@
+[
+  {
+    "intent": "cursor_prediction",
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:53.242Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/twoWayBinding.ets",
+          "diffHistory": [
+            "16+|  @Link t\n",
+            "16-|  @Link t\n16+|  @Link target: number = 0;\n",
+            "22-|          //\n22+|          this.target++;\n",
+            "9-|      LinkChildComponent()\n9+|      LinkChildComponent({ target: this.parentCount })\n",
+            "46+|  @Link userName: string = '';\n47+|  @Link userAge: number = 0;\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/twoWayBinding.ets",
+        "contents": "@Entry\n@Component\nstruct ParentComponent {\n  @State parentCount: number = 0;\n\n  build() {\n    Column() {\n      Text(this.parentCount.toString())\n      LinkChildComponent({ target: this.parentCount })\n    }\n  }\n}\n\n@Component\nstruct LinkChildComponent {\n  @Link target: number = 0;\n\n  build() {\n    Column() {\n      Button()\n        .onClick(() => {\n          this.target++;\n        })\n    }\n  }\n}\n\ninterface User {\n  name: string;\n  age: number;\n}\n\n@Component\nstruct ComplexBindingExample {\n  @State user: User = { name: 'John', age: 30 };\n\n  build() {\n    Column() {\n      Text(this.user.name)\n    }\n  }\n}\n\n@Component\nstruct UserEditor {\n  @Link userName: string = '';\n  @Link userAge: number = 0;\n\n  build() {\n    Column() {\n      Text(\"\")\n      Text(\"\")\n    }\n  }\n}\n\n\n",
+        "cursorPosition": {
+          "line": 50,
+          "column": 0
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 29,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "cursor_prediction"
+      },
+      "clientTime": 1742389973250,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 9,
+      "timeAtRequestSend": 1742389973250
+    },
+    "generateUuid": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:53.252Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:53.621Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "  build() {\n    Column() {\n      Text(\"",
+      "rangeToReplace": {
+        "startLineNumber": 49,
+        "endLineNumberInclusive": 54
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:53.623Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Name"
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:53.636Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":\")"
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:53.650Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:53.661Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "     "
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:53.671Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " TextField"
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:53.684Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "({"
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:53.697Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " value"
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:53.713Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:53.723Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " this"
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:53.736Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ".userName"
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:53.751Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ","
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:53.766Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " onChange"
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:53.773Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:53.786Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ("
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:53.800Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "value"
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:53.815Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:53.828Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " string"
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:53.840Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ")"
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:53.856Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " =>"
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:53.865Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " { this"
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:53.881Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:53.891Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "userName"
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:53.908Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:53.922Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " value"
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:53.930Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " }"
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:53.947Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " })"
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:53.957Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n     "
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:53.975Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Text"
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:53.984Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "(\""
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:53.997Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Age"
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:54.013Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":\")"
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:54.024Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n      Text"
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:54.035Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Field"
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:54.048Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "({ value: this."
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:54.067Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "user"
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:54.075Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Age"
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:54.085Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ","
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:54.097Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " onChange: (value: number"
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:54.113Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ")"
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:54.124Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " => {"
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:54.136Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " this"
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:54.149Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ".user"
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:54.163Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Age ="
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:54.177Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " value } })\n"
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:54.191Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "   "
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:54.203Z"
+  },
+  {
+    "firstChunkValue": "  build() {\n    Column() {\n      Text(\"Name:\")\n      TextField({ value: this.userName, onChange: (value: string) => { this.userName = value } })\n      Text(\"Age:\")\n      TextField({ value: this.userAge, onChange: (value: number) => { this.userAge = value } })\n    }\n  }",
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:54.222Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " }\n  }"
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:54.223Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "  build() {\n    Column() {\n      Text(\"Name:\")\n      TextField({ value: this.userName, onChange: (value: string) => { this.userName = value } })\n      Text(\"Age:\")\n      TextField({ value: this.userAge, onChange: (value: number) => { this.userAge = value } })\n    }\n  }"
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:54.224Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "a8774725-1272-42b1-a73f-b11752ab84c1",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/twoWayBinding.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/twoWayBinding.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/twoWayBinding.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 29,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 29,
+      "monotonicallyIncreasingSuggestionId": 16,
+      "range": {
+        "startLineNumber": 49,
+        "startColumn": 1,
+        "endLineNumberInclusive": 54,
+        "endColumn": 4
+      },
+      "replaceText": "  build() {\n    Column() {\n      Text(\"Name:\")\n      TextField({ value: this.userName, onChange: (value: string) => { this.userName = value } })\n      Text(\"Age:\")\n      TextField({ value: this.userAge, onChange: (value: number) => { this.userAge = value } })\n    }\n  }",
+      "originalText": "  build() {\n    Column() {\n      Text(\"\")\n      Text(\"\")\n    }\n  }",
+      "startingSuggestionRange": {
+        "startLineNumber": 49,
+        "startColumn": 1,
+        "endLineNumberInclusive": 54,
+        "endColumn": 4
+      },
+      "diffText": "  build() {\n    Column() {\n      Text(\"Name:\")\n      TextField({ value: this.userName, onChange: (value: string) => { this.userName = value } })\n      Text(\"Age:\")\n      TextField({ value: this.userAge, onChange: (value: number) => { this.userAge = value } })\n    }\n  }",
+      "fullOriginalText": "  build() {\n    Column() {\n      Text(\"\")\n      Text(\"\")\n    }\n  }",
+      "suggestionTriggerTime": 1742389973242.4,
+      "greens": [],
+      "source": "cursor_prediction",
+      "requestId": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+      "selection": {
+        "startLineNumber": 49,
+        "startColumn": 1,
+        "endLineNumberInclusive": 54,
+        "endColumn": 4
+      },
+      "fusedCursorPredictionId": "d281072e-5da2-42e0-96e8-6e9e196d399d",
+      "undoRedoGroup": {
+        "id": 16,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:54.224Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:54.225Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:54.225Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "d281072e-5da2-42e0-96e8-6e9e196d399d",
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:54.249Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "  build() {\n    Column() {\n      Text(\"Name:\")\n      TextField({ value: this.userName, onChange: (value: string) => { this.userName = value } })\n      Text(\"Age:\")\n      TextField({ value: this.userAge, onChange: (value: number) => { this.userAge = value } })\n    }\n  }"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "d281072e-5da2-42e0-96e8-6e9e196d399d",
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:54.251Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "d281072e-5da2-42e0-96e8-6e9e196d399d",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T13:12:54.257Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "a8774725-1272-42b1-a73f-b11752ab84c1",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/twoWayBinding.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/twoWayBinding.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/twoWayBinding.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 29,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 29,
+      "monotonicallyIncreasingSuggestionId": 16,
+      "range": {
+        "startLineNumber": 49,
+        "startColumn": 1,
+        "endLineNumberInclusive": 54,
+        "endColumn": 4
+      },
+      "replaceText": "  build() {\n    Column() {\n      Text(\"Name:\")\n      TextField({ value: this.userName, onChange: (value: string) => { this.userName = value } })\n      Text(\"Age:\")\n      TextField({ value: this.userAge, onChange: (value: number) => { this.userAge = value } })\n    }\n  }",
+      "originalText": "  build() {\n    Column() {\n      Text(\"\")\n      Text(\"\")\n    }\n  }",
+      "startingSuggestionRange": {
+        "startLineNumber": 49,
+        "startColumn": 1,
+        "endLineNumberInclusive": 54,
+        "endColumn": 4
+      },
+      "diffText": "  build() {\n    Column() {\n      Text(\"Name:\")\n      TextField({ value: this.userName, onChange: (value: string) => { this.userName = value } })\n      Text(\"Age:\")\n      TextField({ value: this.userAge, onChange: (value: number) => { this.userAge = value } })\n    }\n  }",
+      "fullOriginalText": "  build() {\n    Column() {\n      Text(\"\")\n      Text(\"\")\n    }\n  }",
+      "suggestionTriggerTime": 1742389973242.4,
+      "greens": [],
+      "source": "cursor_prediction",
+      "requestId": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+      "selection": {
+        "startLineNumber": 49,
+        "startColumn": 1,
+        "endLineNumberInclusive": 54,
+        "endColumn": 4
+      },
+      "fusedCursorPredictionId": "d281072e-5da2-42e0-96e8-6e9e196d399d",
+      "undoRedoGroup": {
+        "id": 16,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;141"
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:57.326Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "a8774725-1272-42b1-a73f-b11752ab84c1",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/twoWayBinding.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/twoWayBinding.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/twoWayBinding.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 29,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 29,
+      "monotonicallyIncreasingSuggestionId": 16,
+      "range": {
+        "startLineNumber": 49,
+        "startColumn": 1,
+        "endLineNumberInclusive": 54,
+        "endColumn": 4
+      },
+      "replaceText": "  build() {\n    Column() {\n      Text(\"Name:\")\n      TextField({ value: this.userName, onChange: (value: string) => { this.userName = value } })\n      Text(\"Age:\")\n      TextField({ value: this.userAge, onChange: (value: number) => { this.userAge = value } })\n    }\n  }",
+      "originalText": "  build() {\n    Column() {\n      Text(\"\")\n      Text(\"\")\n    }\n  }",
+      "startingSuggestionRange": {
+        "startLineNumber": 49,
+        "startColumn": 1,
+        "endLineNumberInclusive": 54,
+        "endColumn": 4
+      },
+      "diffText": "  build() {\n    Column() {\n      Text(\"Name:\")\n      TextField({ value: this.userName, onChange: (value: string) => { this.userName = value } })\n      Text(\"Age:\")\n      TextField({ value: this.userAge, onChange: (value: number) => { this.userAge = value } })\n    }\n  }",
+      "fullOriginalText": "  build() {\n    Column() {\n      Text(\"\")\n      Text(\"\")\n    }\n  }",
+      "suggestionTriggerTime": 1742389973242.4,
+      "greens": [],
+      "source": "cursor_prediction",
+      "requestId": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+      "selection": {
+        "startLineNumber": 49,
+        "startColumn": 1,
+        "endLineNumberInclusive": 54,
+        "endColumn": 4
+      },
+      "fusedCursorPredictionId": "d281072e-5da2-42e0-96e8-6e9e196d399d",
+      "undoRedoGroup": {
+        "id": 16,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;141"
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:58.221Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "a8774725-1272-42b1-a73f-b11752ab84c1",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/twoWayBinding.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/twoWayBinding.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/twoWayBinding.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 29,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 29,
+      "monotonicallyIncreasingSuggestionId": 16,
+      "range": {
+        "startLineNumber": 49,
+        "startColumn": 1,
+        "endLineNumberInclusive": 54,
+        "endColumn": 4
+      },
+      "replaceText": "  build() {\n    Column() {\n      Text(\"Name:\")\n      TextField({ value: this.userName, onChange: (value: string) => { this.userName = value } })\n      Text(\"Age:\")\n      TextField({ value: this.userAge, onChange: (value: number) => { this.userAge = value } })\n    }\n  }",
+      "originalText": "  build() {\n    Column() {\n      Text(\"\")\n      Text(\"\")\n    }\n  }",
+      "startingSuggestionRange": {
+        "startLineNumber": 49,
+        "startColumn": 1,
+        "endLineNumberInclusive": 54,
+        "endColumn": 4
+      },
+      "diffText": "  build() {\n    Column() {\n      Text(\"Name:\")\n      TextField({ value: this.userName, onChange: (value: string) => { this.userName = value } })\n      Text(\"Age:\")\n      TextField({ value: this.userAge, onChange: (value: number) => { this.userAge = value } })\n    }\n  }",
+      "fullOriginalText": "  build() {\n    Column() {\n      Text(\"\")\n      Text(\"\")\n    }\n  }",
+      "suggestionTriggerTime": 1742389973242.4,
+      "greens": [],
+      "source": "cursor_prediction",
+      "requestId": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+      "selection": {
+        "startLineNumber": 49,
+        "startColumn": 1,
+        "endLineNumberInclusive": 54,
+        "endColumn": 4
+      },
+      "fusedCursorPredictionId": "d281072e-5da2-42e0-96e8-6e9e196d399d",
+      "undoRedoGroup": {
+        "id": 16,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;141"
+    },
+    "generationUUID": "469c31c9-28e0-42b8-bd5c-72e37d4a4b4e",
+    "timestamp": "2025-03-19T13:12:58.233Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "d281072e-5da2-42e0-96e8-6e9e196d399d",
+    "fusedCursorPrediction": null,
+    "oldText": "  build() {\n    Column() {\n      Text(\"\")\n      Text(\"\")\n    }\n  }",
+    "newText": "  build() {\n    Column() {\n      Text(\"Name:\")\n      TextField({ value: this.userName, onChange: (value: string) => { this.userName = value } })\n      Text(\"Age:\")\n      TextField({ value: this.userAge, onChange: (value: number) => { this.userAge = value } })\n    }\n  }",
+    "timestamp": "2025-03-19T13:12:58.234Z"
+  }
+]

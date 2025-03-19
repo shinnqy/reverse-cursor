@@ -1,0 +1,272 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "5715007a-771b-464a-938f-be4d730efefd",
+    "timestamp": "2025-03-19T13:11:56.546Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/twoWayBinding.ets",
+          "diffHistory": [
+            "16+|  @Link t\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/twoWayBinding.ets",
+        "contents": "@Entry\n@Component\nstruct ParentComponent {\n  @State parentCount: number = 0;\n\n  build() {\n    Column() {\n      Text(this.parentCount.toString())\n      LinkChildComponent()\n    }\n  }\n}\n\n@Component\nstruct LinkChildComponent {\n  @Link t\n\n  build() {\n    Column() {\n      Button()\n        .onClick(() => {\n          //\n        })\n    }\n  }\n}\n\ninterface User {\n  name: string;\n  age: number;\n}\n\n@Component\nstruct ComplexBindingExample {\n  @State user: User = { name: 'John', age: 30 };\n\n  build() {\n    Column() {\n      Text(this.user.name)\n    }\n  }\n}\n\n@Component\nstruct UserEditor {\n\n  build() {\n    Column() {\n      Text(\"\")\n      Text(\"\")\n    }\n  }\n}\n\n\n",
+        "cursorPosition": {
+          "line": 15,
+          "column": 9
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 9,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742389916578,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.60009765625,
+      "timeAtRequestSend": 1742389916579
+    },
+    "generateUuid": "5715007a-771b-464a-938f-be4d730efefd",
+    "timestamp": "2025-03-19T13:11:56.581Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "5715007a-771b-464a-938f-be4d730efefd",
+    "timestamp": "2025-03-19T13:11:56.946Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}\n\n@Component\nstruct LinkChildComponent {\n  @Link parent",
+      "rangeToReplace": {
+        "startLineNumber": 12,
+        "endLineNumberInclusive": 19
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "5715007a-771b-464a-938f-be4d730efefd",
+    "timestamp": "2025-03-19T13:11:56.947Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Count: number;"
+    },
+    "generationUUID": "5715007a-771b-464a-938f-be4d730efefd",
+    "timestamp": "2025-03-19T13:11:56.977Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "5715007a-771b-464a-938f-be4d730efefd",
+    "timestamp": "2025-03-19T13:11:56.983Z"
+  },
+  {
+    "firstChunkValue": "}\n\n@Component\nstruct LinkChildComponent {\n  @Link parentCount: number;\n\n  build() {\n    Column() {",
+    "generationUUID": "5715007a-771b-464a-938f-be4d730efefd",
+    "timestamp": "2025-03-19T13:11:56.983Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "}\n\n@Component\nstruct LinkChildComponent {\n  @Link parentCount: number;\n\n  build() {\n    Column() {"
+    },
+    "generationUUID": "5715007a-771b-464a-938f-be4d730efefd",
+    "timestamp": "2025-03-19T13:11:56.987Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "2849c06a-316a-4f2b-80ef-7bcd2ae75fad",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/twoWayBinding.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/twoWayBinding.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/twoWayBinding.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 9,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 9,
+      "monotonicallyIncreasingSuggestionId": 2,
+      "range": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 19,
+        "endColumn": 15
+      },
+      "replaceText": "}\n\n@Component\nstruct LinkChildComponent {\n  @Link parentCount: number;\n\n  build() {\n    Column() {",
+      "originalText": "}\n\n@Component\nstruct LinkChildComponent {\n  @Link t\n\n  build() {\n    Column() {",
+      "startingSuggestionRange": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 19,
+        "endColumn": 15
+      },
+      "diffText": "}\n\n@Component\nstruct LinkChildComponent {\n  @Link parentCount: number;\n\n  build() {\n    Column() {",
+      "fullOriginalText": "}\n\n@Component\nstruct LinkChildComponent {\n  @Link t\n\n  build() {\n    Column() {",
+      "suggestionTriggerTime": 1742389916527.7,
+      "greens": [],
+      "source": "typing",
+      "requestId": "5715007a-771b-464a-938f-be4d730efefd",
+      "selection": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 19,
+        "endColumn": 15
+      },
+      "undoRedoGroup": {
+        "id": 2,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "5715007a-771b-464a-938f-be4d730efefd",
+    "timestamp": "2025-03-19T13:11:56.988Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "5715007a-771b-464a-938f-be4d730efefd",
+    "timestamp": "2025-03-19T13:11:56.996Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " build"
+    },
+    "generationUUID": "5715007a-771b-464a-938f-be4d730efefd",
+    "timestamp": "2025-03-19T13:11:57.003Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "() {\n    Column() {"
+    },
+    "generationUUID": "5715007a-771b-464a-938f-be4d730efefd",
+    "timestamp": "2025-03-19T13:11:57.013Z"
+  },
+  {
+    "fullText": "}\n\n@Component\nstruct LinkChildComponent {\n  @Link parentCount: number;\n\n  build() {\n    Column() {",
+    "generationUUID": "5715007a-771b-464a-938f-be4d730efefd",
+    "timestamp": "2025-03-19T13:11:57.034Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "5715007a-771b-464a-938f-be4d730efefd",
+    "timestamp": "2025-03-19T13:11:57.038Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "generationUUID": "5715007a-771b-464a-938f-be4d730efefd",
+    "timestamp": "2025-03-19T13:11:57.039Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "}\n\n@Component\nstruct LinkChildComponent {\n  @Link parentCount: number;\n\n  build() {\n    Column() {"
+    },
+    "fullText": "}\n\n@Component\nstruct LinkChildComponent {\n  @Link parentCount: number;\n\n  build() {\n    Column() {",
+    "generationUUID": "5715007a-771b-464a-938f-be4d730efefd",
+    "timestamp": "2025-03-19T13:11:57.039Z"
+  },
+  {
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/twoWayBinding.ets",
+      "lineNumberOneIndexed": 22,
+      "text": "//\n})\n}\n}\n}",
+      "shouldRetriggerCpp": true
+    },
+    "predictionId": "96a4fb80-5bd6-430d-b4db-aebbce5ed7ee",
+    "generationUUID": "5715007a-771b-464a-938f-be4d730efefd",
+    "timestamp": "2025-03-19T13:11:57.134Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "}\n\n@Component\nstruct LinkChildComponent {\n  @Link parentCount: number;\n\n  build() {\n    Column() {"
+    },
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/twoWayBinding.ets",
+      "lineNumberOneIndexed": 22,
+      "text": "//\n})\n}\n}\n}",
+      "shouldRetriggerCpp": true
+    },
+    "predictionId": "96a4fb80-5bd6-430d-b4db-aebbce5ed7ee",
+    "generationUUID": "5715007a-771b-464a-938f-be4d730efefd",
+    "timestamp": "2025-03-19T13:11:57.136Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "96a4fb80-5bd6-430d-b4db-aebbce5ed7ee",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/twoWayBinding.ets",
+      "lineNumberOneIndexed": 22,
+      "text": "//\n})\n}\n}\n}",
+      "shouldRetriggerCpp": true
+    },
+    "timestamp": "2025-03-19T13:11:57.136Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "cursorPredictionTarget": {
+        "relativePath": "entry/src/main/ets/utils/twoWayBinding.ets",
+        "lineNumberOneIndexed": 22,
+        "expectedContent": "//\n})\n}\n}\n}",
+        "shouldRetriggerCpp": true
+      }
+    },
+    "generationUUID": "5715007a-771b-464a-938f-be4d730efefd",
+    "timestamp": "2025-03-19T13:11:57.137Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "5715007a-771b-464a-938f-be4d730efefd",
+    "timestamp": "2025-03-19T13:11:57.138Z"
+  }
+]

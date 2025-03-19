@@ -1,0 +1,69 @@
+{"line":45,"column":11}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+struct ParentComponent {
+  @State parentCount: number = 0;
+
+  build() {
+    Column() {
+      Text(this.parentCount.toString())
+      LinkChildComponent({ target: this.parentCount })
+    }
+  }
+}
+
+@Component
+struct LinkChildComponent {
+  @Link target: number = 0;
+
+  build() {
+    Column() {
+      Button()
+        .onClick(() => {
+          this.target++;
+        })
+    }
+  }
+}
+
+interface User {
+  name: string;
+  age: number;
+}
+
+@Component
+struct ComplexBindingExample {
+  @State user: User = { name: 'John', age: 30 };
+
+  build() {
+    Column() {
+      Text(this.user.name)
+    }
+  }
+}
+
+@Component
+struct UserEditor {
+  @Link use[ToFill]
+
+  build() {
+    Column() {
+      Text("")
+      Text("")
+    }
+  }
+}
+
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+}
+
+@Component
+struct UserEditor {
+  @Link user: User = { name: 'John', age: 30 };
+
+  build() {
+    Column() {

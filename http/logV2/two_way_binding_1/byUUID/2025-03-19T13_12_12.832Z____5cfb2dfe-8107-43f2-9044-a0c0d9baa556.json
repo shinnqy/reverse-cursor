@@ -1,0 +1,118 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "5cfb2dfe-8107-43f2-9044-a0c0d9baa556",
+    "timestamp": "2025-03-19T13:12:12.832Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/twoWayBinding.ets",
+          "diffHistory": [
+            "16+|  @Link t\n",
+            "16-|  @Link t\n16+|  @Link target: number = 0;\n",
+            "22-|          //\n22+|          this.target++;\n",
+            "9-|      LinkChildComponent()\n9+|      LinkChildComponent({ target: this.parentCount })\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/twoWayBinding.ets",
+        "contents": "@Entry\n@Component\nstruct ParentComponent {\n  @State parentCount: number = 0;\n\n  build() {\n    Column() {\n      Text(this.parentCount.toString())\n      LinkChildComponent({ target: this.parentCount })\n    }\n  }\n}\n\n@Component\nstruct LinkChildComponent {\n  @Link target: number = 0;\n\n  build() {\n    Column() {\n      Button()\n        .onClick(() => {\n          this.target++;\n        })\n    }\n  }\n}\n\ninterface User {\n  name: string;\n  age: number;\n}\n\n@Component\nstruct ComplexBindingExample {\n  @State user: User = { name: 'John', age: 30 };\n\n  build() {\n    Column() {\n      Text(this.user.name)\n    }\n  }\n}\n\n@Component\nstruct UserEditor {\n\n  build() {\n    Column() {\n      Text(\"\")\n      Text(\"\")\n    }\n  }\n}\n\n\n",
+        "cursorPosition": {
+          "line": 11,
+          "column": 1
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 14,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1742389932882,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 52,
+      "timeAtRequestSend": 1742389932882
+    },
+    "generateUuid": "5cfb2dfe-8107-43f2-9044-a0c0d9baa556",
+    "timestamp": "2025-03-19T13:12:12.883Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "5cfb2dfe-8107-43f2-9044-a0c0d9baa556",
+    "timestamp": "2025-03-19T13:12:13.260Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "  }\n}\n\n@Component\nstruct LinkChildComponent {\n  @Link target: number = 0;",
+      "rangeToReplace": {
+        "startLineNumber": 11,
+        "endLineNumberInclusive": 16
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "5cfb2dfe-8107-43f2-9044-a0c0d9baa556",
+    "timestamp": "2025-03-19T13:12:13.262Z"
+  },
+  {
+    "firstChunkValue": "  }\n}\n\n@Component\nstruct LinkChildComponent {\n  @Link target: number = 0;",
+    "generationUUID": "5cfb2dfe-8107-43f2-9044-a0c0d9baa556",
+    "timestamp": "2025-03-19T13:12:13.290Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": false
+    },
+    "generationUUID": "5cfb2dfe-8107-43f2-9044-a0c0d9baa556",
+    "timestamp": "2025-03-19T13:12:13.291Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "5cfb2dfe-8107-43f2-9044-a0c0d9baa556",
+    "timestamp": "2025-03-19T13:12:13.291Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "5cfb2dfe-8107-43f2-9044-a0c0d9baa556",
+    "timestamp": "2025-03-19T13:12:13.379Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "a8451826-5568-41e5-94a8-9cb21d583ad2",
+    "generationUUID": "5cfb2dfe-8107-43f2-9044-a0c0d9baa556",
+    "timestamp": "2025-03-19T13:12:13.382Z"
+  }
+]
