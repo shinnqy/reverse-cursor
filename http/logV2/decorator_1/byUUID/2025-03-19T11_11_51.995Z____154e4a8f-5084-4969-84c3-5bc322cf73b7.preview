@@ -1,0 +1,122 @@
+{"line":14,"column":9}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+struct Example {
+  @State count: number = 0
+
+  build() {
+    Button('Click me').onClick(() => {
+      this.count++
+    })
+  }
+}
+
+@Component
+struct ChildComponent {
+  @Prop m[ToFill] 
+
+  build() {
+    Text(this.count.toString())
+  }
+}
+
+@Component
+struct LinkChild {
+
+  build() {
+    Button('Click me')
+  }
+}
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+struct ChildComponent {
+  @Prop message: string
+
+  build() {
+    Text(this.count.toString())
+  }
+}
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+@Entry
+@Component
+struct Example {
+  @State count: number = 0
+
+  build() {
+    Button('Click me').onClick(() => {
+      this.count++
+    })
+  }
+}
+
+@Component
+struct ChildComponent {
+  @Prop message: string
+
+  build() {
+    Text(this.count.toString())
+  }
+}
+
+@Component
+struct LinkChild {
+
+  build() {
+    Button('Click me')
+  }
+}
+
+-------------------------------[                   fullText                  ]--------------------------------
+struct ChildComponent {
+  @Prop message: string
+
+  build() {
+    Text(this.message)
+  }
+}
+-------------------------------[         replacedContentsWithFullText         ]--------------------------------
+@Entry
+@Component
+struct Example {
+  @State count: number = 0
+
+  build() {
+    Button('Click me').onClick(() => {
+      this.count++
+    })
+  }
+}
+
+@Component
+struct ChildComponent {
+  @Prop message: string
+
+  build() {
+    Text(this.message)
+  }
+}
+
+@Component
+struct LinkChild {
+
+  build() {
+    Button('Click me')
+  }
+}
+
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/decorator.ets",
+  "lineNumberOneIndexed": 24,
+  "text": "\nbuild() {\nButton('Click me')\n}\n}",
+  "shouldRetriggerCpp": false
+}
+--------------------------------[        displayedFusedCursorPrediction       ]---------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/decorator.ets",
+  "lineNumberOneIndexed": 24,
+  "text": "\nbuild() {\nButton('Click me')\n}\n}",
+  "shouldRetriggerCpp": false
+}

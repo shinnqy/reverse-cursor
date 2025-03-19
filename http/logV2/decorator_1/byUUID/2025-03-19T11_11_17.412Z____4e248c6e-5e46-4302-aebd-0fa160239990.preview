@@ -1,0 +1,98 @@
+{"line":3,"column":2}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+struct Example {
+  [ToFill]
+  
+  build() {
+    Text('Hello, world!')
+  }
+}
+
+@Component
+struct ChildComponent {
+
+  build() {
+    Text('Hello, world!')
+  }
+}
+
+@Component
+struct LinkChild {
+
+  build() {
+    Button('Click me')
+  }
+}
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+struct Example {
+  @State message: string = 'Hello, world!'
+  
+  build() {
+    Text('Hello, world!')
+  }
+}
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+@Entry
+@Component
+struct Example {
+  @State message: string = 'Hello, world!'
+  
+  build() {
+    Text('Hello, world!')
+  }
+}
+
+@Component
+struct ChildComponent {
+
+  build() {
+    Text('Hello, world!')
+  }
+}
+
+@Component
+struct LinkChild {
+
+  build() {
+    Button('Click me')
+  }
+}
+
+-------------------------------[                   fullText                  ]--------------------------------
+struct Example {
+  @State message: string = 'Hello, world!'
+  
+  build() {
+    Text(this.message)
+  }
+}
+-------------------------------[         replacedContentsWithFullText         ]--------------------------------
+@Entry
+@Component
+struct Example {
+  @State message: string = 'Hello, world!'
+  
+  build() {
+    Text(this.message)
+  }
+}
+
+@Component
+struct ChildComponent {
+
+  build() {
+    Text('Hello, world!')
+  }
+}
+
+@Component
+struct LinkChild {
+
+  build() {
+    Button('Click me')
+  }
+}

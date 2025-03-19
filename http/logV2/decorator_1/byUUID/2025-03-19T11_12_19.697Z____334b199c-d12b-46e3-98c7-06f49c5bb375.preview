@@ -1,0 +1,53 @@
+{"line":23,"column":30}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+struct Example {
+  @State count: number = 0
+
+  build() {
+    Button('Click me').onClick(() => {
+      this.count++
+    })
+  }
+}
+
+@Component
+struct ChildComponent {
+  @Prop message: string
+
+  build() {
+    Text(this.message)
+  }
+}
+
+@Component
+struct LinkChild {
+  @Link child: ChildComponent [ToFill]
+
+  build() {
+    Button('Click me').onClick(() => {
+      this.child.message = 'Hello, world!'
+    })
+  }
+}
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+}
+
+@Component
+struct LinkChild {
+  @Link child: ChildComponent = ChildComponent()
+
+  build() {
+    Button('Click me').onClick(() => {
+-------------------------------[                   fullText                  ]--------------------------------
+}
+
+@Component
+struct LinkChild {
+  @Link child: ChildComponent = ChildComponent()
+
+  build() {
+    Button('Click

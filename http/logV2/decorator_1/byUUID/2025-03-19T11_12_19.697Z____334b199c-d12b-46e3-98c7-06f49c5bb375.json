@@ -1,0 +1,237 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "334b199c-d12b-46e3-98c7-06f49c5bb375",
+    "timestamp": "2025-03-19T11:12:19.697Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/decorator.ets",
+          "diffHistory": [
+            "4+|  @State message: string = 'Hello, world!'\n",
+            "7-|    Text('Hello, world!')\n7+|    Text(this.message)\n",
+            "4-|  @State message: string = 'Hello, world!'\n4+|  @State count: string = 'Hello, world!'\n",
+            "7-|    Text(this.message)\n7+|    Text(this.count.toString())\n",
+            "4-|  @State count: string = 'Hello, world!'\n4+|  @State count: number = 0\n",
+            "7-|    Text(this.count.toString())\n",
+            "5-|  \n5+|\n7+|    Button('Click me').onClick(() => {\n8+|      this.count++\n9+|    })\n",
+            "15+|  @Prop count: number\n",
+            "18-|    Text('Hello, world!')\n18+|    Text(this.count.toString())\n",
+            "15-|  @Prop count: number\n15+|  @Prop message: string\n",
+            "18-|    Text(this.count.toString())\n18+|    Text(this.message)\n",
+            "24-|\n24+|  @Link child: ChildComponent\n",
+            "24-|  @Link child: ChildComponent\n24+|  @Link child: ChildComponent \n25+|\n26-|    Button('Click me')\n27+|    Button('Click me').onClick(() => {\n28+|      this.child.message = 'Hello, world!'\n29+|    })\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/decorator.ets",
+        "contents": "@Entry\n@Component\nstruct Example {\n  @State count: number = 0\n\n  build() {\n    Button('Click me').onClick(() => {\n      this.count++\n    })\n  }\n}\n\n@Component\nstruct ChildComponent {\n  @Prop message: string\n\n  build() {\n    Text(this.message)\n  }\n}\n\n@Component\nstruct LinkChild {\n  @Link child: ChildComponent \n\n  build() {\n    Button('Click me').onClick(() => {\n      this.child.message = 'Hello, world!'\n    })\n  }\n}\n",
+        "cursorPosition": {
+          "line": 23,
+          "column": 30
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 40,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742382739727,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.800048828125,
+      "timeAtRequestSend": 1742382739727
+    },
+    "generateUuid": "334b199c-d12b-46e3-98c7-06f49c5bb375",
+    "timestamp": "2025-03-19T11:12:19.729Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "334b199c-d12b-46e3-98c7-06f49c5bb375",
+    "timestamp": "2025-03-19T11:12:20.088Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}\n\n@Component\nstruct LinkChild {\n  @Link child: ChildComponent =",
+      "rangeToReplace": {
+        "startLineNumber": 20,
+        "endLineNumberInclusive": 27
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "334b199c-d12b-46e3-98c7-06f49c5bb375",
+    "timestamp": "2025-03-19T11:12:20.089Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Child"
+    },
+    "generationUUID": "334b199c-d12b-46e3-98c7-06f49c5bb375",
+    "timestamp": "2025-03-19T11:12:20.116Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Component()"
+    },
+    "generationUUID": "334b199c-d12b-46e3-98c7-06f49c5bb375",
+    "timestamp": "2025-03-19T11:12:20.131Z"
+  },
+  {
+    "firstChunkValue": "}\n\n@Component\nstruct LinkChild {\n  @Link child: ChildComponent = ChildComponent()\n\n  build() {\n    Button('Click me').onClick(() => {",
+    "generationUUID": "334b199c-d12b-46e3-98c7-06f49c5bb375",
+    "timestamp": "2025-03-19T11:12:20.140Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "}\n\n@Component\nstruct LinkChild {\n  @Link child: ChildComponent = ChildComponent()\n\n  build() {\n    Button('Click me').onClick(() => {"
+    },
+    "generationUUID": "334b199c-d12b-46e3-98c7-06f49c5bb375",
+    "timestamp": "2025-03-19T11:12:20.144Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "334b199c-d12b-46e3-98c7-06f49c5bb375",
+    "timestamp": "2025-03-19T11:12:20.145Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "0e9358d1-ed22-45ce-a037-dfda8f5beeb0",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 40,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 40,
+      "monotonicallyIncreasingSuggestionId": 28,
+      "range": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 27,
+        "endColumn": 39
+      },
+      "replaceText": "}\n\n@Component\nstruct LinkChild {\n  @Link child: ChildComponent = ChildComponent()\n\n  build() {\n    Button('Click me').onClick(() => {",
+      "originalText": "}\n\n@Component\nstruct LinkChild {\n  @Link child: ChildComponent \n\n  build() {\n    Button('Click me').onClick(() => {",
+      "startingSuggestionRange": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 27,
+        "endColumn": 39
+      },
+      "diffText": "}\n\n@Component\nstruct LinkChild {\n  @Link child: ChildComponent = ChildComponent()\n\n  build() {\n    Button('Click me').onClick(() => {",
+      "fullOriginalText": "}\n\n@Component\nstruct LinkChild {\n  @Link child: ChildComponent \n\n  build() {\n    Button('Click me').onClick(() => {",
+      "suggestionTriggerTime": 1742382739676.6,
+      "greens": [],
+      "source": "typing",
+      "requestId": "334b199c-d12b-46e3-98c7-06f49c5bb375",
+      "selection": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 27,
+        "endColumn": 39
+      },
+      "undoRedoGroup": {
+        "id": 28,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "334b199c-d12b-46e3-98c7-06f49c5bb375",
+    "timestamp": "2025-03-19T11:12:20.146Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "334b199c-d12b-46e3-98c7-06f49c5bb375",
+    "timestamp": "2025-03-19T11:12:20.157Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "334b199c-d12b-46e3-98c7-06f49c5bb375",
+    "timestamp": "2025-03-19T11:12:20.167Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " build() {\n    Button('Click"
+    },
+    "generationUUID": "334b199c-d12b-46e3-98c7-06f49c5bb375",
+    "timestamp": "2025-03-19T11:12:20.178Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " me').onClick(() => {"
+    },
+    "generationUUID": "334b199c-d12b-46e3-98c7-06f49c5bb375",
+    "timestamp": "2025-03-19T11:12:20.190Z"
+  },
+  {
+    "fullText": "}\n\n@Component\nstruct LinkChild {\n  @Link child: ChildComponent = ChildComponent()\n\n  build() {\n    Button('Click",
+    "generationUUID": "334b199c-d12b-46e3-98c7-06f49c5bb375",
+    "timestamp": "2025-03-19T11:12:20.205Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "1719baec-5fef-43a5-9e28-4f7009f0cd22",
+    "generationUUID": "334b199c-d12b-46e3-98c7-06f49c5bb375",
+    "timestamp": "2025-03-19T11:12:20.210Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "}\n\n@Component\nstruct LinkChild {\n  @Link child: ChildComponent = ChildComponent()\n\n  build() {\n    Button('Click me').onClick(() => {"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "1719baec-5fef-43a5-9e28-4f7009f0cd22",
+    "generationUUID": "334b199c-d12b-46e3-98c7-06f49c5bb375",
+    "timestamp": "2025-03-19T11:12:20.211Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "1719baec-5fef-43a5-9e28-4f7009f0cd22",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T11:12:20.213Z"
+  }
+]

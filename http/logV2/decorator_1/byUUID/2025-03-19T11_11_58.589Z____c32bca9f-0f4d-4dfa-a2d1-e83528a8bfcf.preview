@@ -1,0 +1,115 @@
+{"line":23,"column":0}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+struct Example {
+  @State count: number = 0
+
+  build() {
+    Button('Click me').onClick(() => {
+      this.count++
+    })
+  }
+}
+
+@Component
+struct ChildComponent {
+  @Prop message: string
+
+  build() {
+    Text(this.message)
+  }
+}
+
+@Component
+struct LinkChild {
+[ToFill]
+  build() {
+    Button('Click me')
+  }
+}
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+@Component
+struct LinkChild {
+  @Link child: ChildComponent
+  build() {
+    Button('Click me')
+  }
+}
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+@Entry
+@Component
+struct Example {
+  @State count: number = 0
+
+  build() {
+    Button('Click me').onClick(() => {
+      this.count++
+    })
+  }
+}
+
+@Component
+struct ChildComponent {
+  @Prop message: string
+
+  build() {
+    Text(this.message)
+  }
+}
+
+@Component
+struct LinkChild {
+  @Link child: ChildComponent
+  build() {
+    Button('Click me')
+  }
+}
+
+-------------------------------[                   fullText                  ]--------------------------------
+
+@Component
+struct LinkChild {
+  @Link child: ChildComponent
+
+  build() {
+    Button('Click me').onClick(() => {
+      this.child.message = 'Hello, world!'
+    })
+  }
+}
+-------------------------------[         replacedContentsWithFullText         ]--------------------------------
+@Entry
+@Component
+struct Example {
+  @State count: number = 0
+
+  build() {
+    Button('Click me').onClick(() => {
+      this.count++
+    })
+  }
+}
+
+@Component
+struct ChildComponent {
+  @Prop message: string
+
+  build() {
+    Text(this.message)
+  }
+}
+
+@Component
+struct LinkChild {
+  @Link child: ChildComponent
+
+  build() {
+    Button('Click me').onClick(() => {
+      this.child.message = 'Hello, world!'
+    })
+  }
+}

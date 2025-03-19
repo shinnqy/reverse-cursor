@@ -1,0 +1,674 @@
+[
+  {
+    "intent": "cursor_prediction",
+    "generationUUID": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+    "timestamp": "2025-03-19T11:11:58.589Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/decorator.ets",
+          "diffHistory": [
+            "4+|  @State message: string = 'Hello, world!'\n",
+            "7-|    Text('Hello, world!')\n7+|    Text(this.message)\n",
+            "4-|  @State message: string = 'Hello, world!'\n4+|  @State count: string = 'Hello, world!'\n",
+            "7-|    Text(this.message)\n7+|    Text(this.count.toString())\n",
+            "4-|  @State count: string = 'Hello, world!'\n4+|  @State count: number = 0\n",
+            "7-|    Text(this.count.toString())\n",
+            "5-|  \n5+|\n7+|    Button('Click me').onClick(() => {\n8+|      this.count++\n9+|    })\n",
+            "15+|  @Prop count: number\n",
+            "18-|    Text('Hello, world!')\n18+|    Text(this.count.toString())\n",
+            "15-|  @Prop count: number\n15+|  @Prop message: string\n",
+            "18-|    Text(this.count.toString())\n18+|    Text(this.message)\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/decorator.ets",
+        "contents": "@Entry\n@Component\nstruct Example {\n  @State count: number = 0\n\n  build() {\n    Button('Click me').onClick(() => {\n      this.count++\n    })\n  }\n}\n\n@Component\nstruct ChildComponent {\n  @Prop message: string\n\n  build() {\n    Text(this.message)\n  }\n}\n\n@Component\nstruct LinkChild {\n\n  build() {\n    Button('Click me')\n  }\n}\n",
+        "cursorPosition": {
+          "line": 23,
+          "column": 0
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 36,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "cursor_prediction"
+      },
+      "clientTime": 1742382718599,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 12.39990234375,
+      "timeAtRequestSend": 1742382718600
+    },
+    "generateUuid": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+    "timestamp": "2025-03-19T11:11:58.601Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+    "timestamp": "2025-03-19T11:11:58.969Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n@Component\nstruct LinkChild {\n ",
+      "rangeToReplace": {
+        "startLineNumber": 21,
+        "endLineNumberInclusive": 28
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+    "timestamp": "2025-03-19T11:11:58.970Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " @"
+    },
+    "generationUUID": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+    "timestamp": "2025-03-19T11:11:58.995Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Link"
+    },
+    "generationUUID": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+    "timestamp": "2025-03-19T11:11:59.003Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " child"
+    },
+    "generationUUID": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+    "timestamp": "2025-03-19T11:11:59.013Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+    "timestamp": "2025-03-19T11:11:59.022Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Child"
+    },
+    "generationUUID": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+    "timestamp": "2025-03-19T11:11:59.039Z"
+  },
+  {
+    "firstChunkValue": "\n@Component\nstruct LinkChild {\n  @Link child: ChildComponent\n  build() {\n    Button('Click me')\n  }\n}",
+    "generationUUID": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+    "timestamp": "2025-03-19T11:11:59.046Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Component\n"
+    },
+    "generationUUID": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+    "timestamp": "2025-03-19T11:11:59.046Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\n@Component\nstruct LinkChild {\n  @Link child: ChildComponent\n  build() {\n    Button('Click me')\n  }\n}"
+    },
+    "generationUUID": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+    "timestamp": "2025-03-19T11:11:59.049Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "c59f5db6-eb10-4b0e-9fa4-f006e943861d",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 36,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 36,
+      "monotonicallyIncreasingSuggestionId": 26,
+      "range": {
+        "startLineNumber": 21,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 2
+      },
+      "replaceText": "\n@Component\nstruct LinkChild {\n  @Link child: ChildComponent\n  build() {\n    Button('Click me')\n  }\n}",
+      "originalText": "\n@Component\nstruct LinkChild {\n\n  build() {\n    Button('Click me')\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 21,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 2
+      },
+      "diffText": "\n@Component\nstruct LinkChild {\n  @Link child: ChildComponent\n  build() {\n    Button('Click me')\n  }\n}",
+      "fullOriginalText": "\n@Component\nstruct LinkChild {\n\n  build() {\n    Button('Click me')\n  }\n}",
+      "suggestionTriggerTime": 1742382718587.8,
+      "greens": [],
+      "source": "cursor_prediction",
+      "requestId": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+      "selection": {
+        "startLineNumber": 21,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 2
+      },
+      "undoRedoGroup": {
+        "id": 26,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+    "timestamp": "2025-03-19T11:11:59.050Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+    "timestamp": "2025-03-19T11:11:59.057Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+    "timestamp": "2025-03-19T11:11:59.070Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " build() {\n    Button('Click"
+    },
+    "generationUUID": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+    "timestamp": "2025-03-19T11:11:59.084Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " me')."
+    },
+    "generationUUID": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+    "timestamp": "2025-03-19T11:11:59.092Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "onClick(() => {\n      this."
+    },
+    "generationUUID": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+    "timestamp": "2025-03-19T11:11:59.105Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "child"
+    },
+    "generationUUID": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+    "timestamp": "2025-03-19T11:11:59.116Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+    "timestamp": "2025-03-19T11:11:59.126Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "message"
+    },
+    "generationUUID": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+    "timestamp": "2025-03-19T11:11:59.138Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+    "timestamp": "2025-03-19T11:11:59.151Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " '"
+    },
+    "generationUUID": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+    "timestamp": "2025-03-19T11:11:59.164Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Hello, world!'\n   "
+    },
+    "generationUUID": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+    "timestamp": "2025-03-19T11:11:59.174Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " })"
+    },
+    "generationUUID": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+    "timestamp": "2025-03-19T11:11:59.189Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n  }\n}"
+    },
+    "generationUUID": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+    "timestamp": "2025-03-19T11:11:59.200Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+    "timestamp": "2025-03-19T11:11:59.227Z"
+  },
+  {
+    "fullText": "\n@Component\nstruct LinkChild {\n  @Link child: ChildComponent\n\n  build() {\n    Button('Click me').onClick(() => {\n      this.child.message = 'Hello, world!'\n    })\n  }\n}",
+    "generationUUID": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+    "timestamp": "2025-03-19T11:11:59.229Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\n@Component\nstruct LinkChild {\n  @Link child: ChildComponent\n  build() {\n    Button('Click me')\n  }\n}"
+    },
+    "fullText": "\n@Component\nstruct LinkChild {\n  @Link child: ChildComponent\n\n  build() {\n    Button('Click me').onClick(() => {\n      this.child.message = 'Hello, world!'\n    })\n  }\n}",
+    "generationUUID": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+    "timestamp": "2025-03-19T11:11:59.229Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "2429cf67-aa5a-4f25-9ea8-125fa5a3d715",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 36,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 37,
+      "monotonicallyIncreasingSuggestionId": 27,
+      "range": {
+        "startLineNumber": 21,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 2
+      },
+      "replaceText": "\n@Component\nstruct LinkChild {\n  @Link child: ChildComponent\n\n  build() {\n    Button('Click me').onClick(() => {\n      this.child.message = 'Hello, world!'\n    })\n  }\n}",
+      "originalText": "\n@Component\nstruct LinkChild {\n  @Link child: ChildComponent\n  build() {\n    Button('Click me')\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 21,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 2
+      },
+      "diffText": "\n@Component\nstruct LinkChild {\n  @Link child: ChildComponent\n\n  build() {\n    Button('Click me').onClick(() => {\n      this.child.message = 'Hello, world!'\n    })\n  }\n}",
+      "fullOriginalText": "\n@Component\nstruct LinkChild {\n  @Link child: ChildComponent\n  build() {\n    Button('Click me')\n  }\n}",
+      "suggestionTriggerTime": 1742382718587.8,
+      "greens": [],
+      "source": "cursor_prediction",
+      "requestId": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+      "selection": {
+        "startLineNumber": 21,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "4f190817-f946-468c-9b82-cdaa15a933dc",
+      "undoRedoGroup": {
+        "id": 27,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+    "timestamp": "2025-03-19T11:11:59.231Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+    "timestamp": "2025-03-19T11:11:59.325Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "4f190817-f946-468c-9b82-cdaa15a933dc",
+    "generationUUID": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+    "timestamp": "2025-03-19T11:11:59.331Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\n@Component\nstruct LinkChild {\n  @Link child: ChildComponent\n  build() {\n    Button('Click me')\n  }\n}"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "4f190817-f946-468c-9b82-cdaa15a933dc",
+    "generationUUID": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+    "timestamp": "2025-03-19T11:11:59.331Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "4f190817-f946-468c-9b82-cdaa15a933dc",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T11:11:59.331Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "c59f5db6-eb10-4b0e-9fa4-f006e943861d",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 36,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 36,
+      "monotonicallyIncreasingSuggestionId": 26,
+      "range": {
+        "startLineNumber": 21,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 2
+      },
+      "replaceText": "\n@Component\nstruct LinkChild {\n  @Link child: ChildComponent\n  build() {\n    Button('Click me')\n  }\n}",
+      "originalText": "\n@Component\nstruct LinkChild {\n\n  build() {\n    Button('Click me')\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 21,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 2
+      },
+      "diffText": "\n@Component\nstruct LinkChild {\n  @Link child: ChildComponent\n  build() {\n    Button('Click me')\n  }\n}",
+      "fullOriginalText": "\n@Component\nstruct LinkChild {\n\n  build() {\n    Button('Click me')\n  }\n}",
+      "suggestionTriggerTime": 1742382718587.8,
+      "greens": [],
+      "source": "cursor_prediction",
+      "requestId": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+      "selection": {
+        "startLineNumber": 21,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 2
+      },
+      "undoRedoGroup": {
+        "id": 26,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;211",
+      "onAcceptDisplayId": "2429cf67-aa5a-4f25-9ea8-125fa5a3d715"
+    },
+    "generationUUID": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+    "timestamp": "2025-03-19T11:12:08.471Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "c59f5db6-eb10-4b0e-9fa4-f006e943861d",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 36,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 36,
+      "monotonicallyIncreasingSuggestionId": 26,
+      "range": {
+        "startLineNumber": 21,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 2
+      },
+      "replaceText": "\n@Component\nstruct LinkChild {\n  @Link child: ChildComponent\n  build() {\n    Button('Click me')\n  }\n}",
+      "originalText": "\n@Component\nstruct LinkChild {\n\n  build() {\n    Button('Click me')\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 21,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 2
+      },
+      "diffText": "\n@Component\nstruct LinkChild {\n  @Link child: ChildComponent\n  build() {\n    Button('Click me')\n  }\n}",
+      "fullOriginalText": "\n@Component\nstruct LinkChild {\n\n  build() {\n    Button('Click me')\n  }\n}",
+      "suggestionTriggerTime": 1742382718587.8,
+      "greens": [],
+      "source": "cursor_prediction",
+      "requestId": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+      "selection": {
+        "startLineNumber": 21,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 2
+      },
+      "undoRedoGroup": {
+        "id": 26,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;211",
+      "onAcceptDisplayId": "2429cf67-aa5a-4f25-9ea8-125fa5a3d715"
+    },
+    "generationUUID": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+    "timestamp": "2025-03-19T11:12:08.481Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "2429cf67-aa5a-4f25-9ea8-125fa5a3d715",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 36,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 37,
+      "monotonicallyIncreasingSuggestionId": 27,
+      "range": {
+        "startLineNumber": 21,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 2
+      },
+      "replaceText": "\n@Component\nstruct LinkChild {\n  @Link child: ChildComponent\n\n  build() {\n    Button('Click me').onClick(() => {\n      this.child.message = 'Hello, world!'\n    })\n  }\n}",
+      "originalText": "\n@Component\nstruct LinkChild {\n  @Link child: ChildComponent\n  build() {\n    Button('Click me')\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 21,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 2
+      },
+      "diffText": "\n@Component\nstruct LinkChild {\n  @Link child: ChildComponent\n\n  build() {\n    Button('Click me').onClick(() => {\n      this.child.message = 'Hello, world!'\n    })\n  }\n}",
+      "fullOriginalText": "\n@Component\nstruct LinkChild {\n  @Link child: ChildComponent\n  build() {\n    Button('Click me')\n  }\n}",
+      "suggestionTriggerTime": 1742382718587.8,
+      "greens": [],
+      "source": "cursor_prediction",
+      "requestId": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+      "selection": {
+        "startLineNumber": 21,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "4f190817-f946-468c-9b82-cdaa15a933dc",
+      "undoRedoGroup": {
+        "id": 27,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+    "timestamp": "2025-03-19T11:12:08.488Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "2429cf67-aa5a-4f25-9ea8-125fa5a3d715",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 36,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 37,
+      "monotonicallyIncreasingSuggestionId": 27,
+      "range": {
+        "startLineNumber": 21,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 2
+      },
+      "replaceText": "\n@Component\nstruct LinkChild {\n  @Link child: ChildComponent\n\n  build() {\n    Button('Click me').onClick(() => {\n      this.child.message = 'Hello, world!'\n    })\n  }\n}",
+      "originalText": "\n@Component\nstruct LinkChild {\n  @Link child: ChildComponent\n  build() {\n    Button('Click me')\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 21,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 2
+      },
+      "diffText": "\n@Component\nstruct LinkChild {\n  @Link child: ChildComponent\n\n  build() {\n    Button('Click me').onClick(() => {\n      this.child.message = 'Hello, world!'\n    })\n  }\n}",
+      "fullOriginalText": "\n@Component\nstruct LinkChild {\n  @Link child: ChildComponent\n  build() {\n    Button('Click me')\n  }\n}",
+      "suggestionTriggerTime": 1742382718587.8,
+      "greens": [],
+      "source": "cursor_prediction",
+      "requestId": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+      "selection": {
+        "startLineNumber": 21,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "4f190817-f946-468c-9b82-cdaa15a933dc",
+      "undoRedoGroup": {
+        "id": 27,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;219"
+    },
+    "generationUUID": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+    "timestamp": "2025-03-19T11:12:15.807Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "2429cf67-aa5a-4f25-9ea8-125fa5a3d715",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 36,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 37,
+      "monotonicallyIncreasingSuggestionId": 27,
+      "range": {
+        "startLineNumber": 21,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 2
+      },
+      "replaceText": "\n@Component\nstruct LinkChild {\n  @Link child: ChildComponent\n\n  build() {\n    Button('Click me').onClick(() => {\n      this.child.message = 'Hello, world!'\n    })\n  }\n}",
+      "originalText": "\n@Component\nstruct LinkChild {\n  @Link child: ChildComponent\n  build() {\n    Button('Click me')\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 21,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 2
+      },
+      "diffText": "\n@Component\nstruct LinkChild {\n  @Link child: ChildComponent\n\n  build() {\n    Button('Click me').onClick(() => {\n      this.child.message = 'Hello, world!'\n    })\n  }\n}",
+      "fullOriginalText": "\n@Component\nstruct LinkChild {\n  @Link child: ChildComponent\n  build() {\n    Button('Click me')\n  }\n}",
+      "suggestionTriggerTime": 1742382718587.8,
+      "greens": [],
+      "source": "cursor_prediction",
+      "requestId": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+      "selection": {
+        "startLineNumber": 21,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "4f190817-f946-468c-9b82-cdaa15a933dc",
+      "undoRedoGroup": {
+        "id": 27,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;219"
+    },
+    "generationUUID": "c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf",
+    "timestamp": "2025-03-19T11:12:15.815Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "4f190817-f946-468c-9b82-cdaa15a933dc",
+    "fusedCursorPrediction": null,
+    "oldText": "\n@Component\nstruct LinkChild {\n  @Link child: ChildComponent\n  build() {\n    Button('Click me')\n  }\n}",
+    "newText": "\n@Component\nstruct LinkChild {\n  @Link child: ChildComponent\n\n  build() {\n    Button('Click me').onClick(() => {\n      this.child.message = 'Hello, world!'\n    })\n  }\n}",
+    "timestamp": "2025-03-19T11:12:15.820Z"
+  }
+]

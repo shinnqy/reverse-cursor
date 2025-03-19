@@ -1,0 +1,55 @@
+{"line":14,"column":8}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+struct Example {
+  @State count: number = 0
+
+  build() {
+    Button('Click me').onClick(() => {
+      this.count++
+    })
+  }
+}
+
+@Component
+struct ChildComponent {
+  @Prop [ToFill] 
+
+  build() {
+    Text(this.count.toString())
+  }
+}
+
+@Component
+struct LinkChild {
+
+  build() {
+    Button('Click me')
+  }
+}
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+struct ChildComponent {
+  @Prop count: number
+
+  build() {
+    Text(this.count.toString())
+  }
+}
+-------------------------------[                   fullText                  ]--------------------------------
+struct ChildComponent {
+  @Prop count: number
+
+  build() {
+    Text(this.count.toString())
+  }
+}
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/decorator.ets",
+  "lineNumberOneIndexed": 24,
+  "text": "\nbuild() {\nButton('Click me')\n}\n}",
+  "shouldRetriggerCpp": false
+}

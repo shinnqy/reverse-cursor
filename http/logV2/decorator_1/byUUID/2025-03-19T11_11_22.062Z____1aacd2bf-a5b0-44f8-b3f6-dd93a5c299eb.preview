@@ -1,0 +1,63 @@
+{"line":3,"column":11}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+struct Example {
+  @State co[ToFill]: string = 'Hello, world!'
+  
+  build() {
+    Text(this.message)
+  }
+}
+
+@Component
+struct ChildComponent {
+
+  build() {
+    Text('Hello, world!')
+  }
+}
+
+@Component
+struct LinkChild {
+
+  build() {
+    Button('Click me')
+  }
+}
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+struct Example {
+  @State count: number = 0
+  
+  build() {
+    Text(this.count.toString())
+  }
+}
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+@Entry
+@Component
+struct Example {
+  @State count: number = 0
+  
+  build() {
+    Text(this.count.toString())
+  }
+}
+
+@Component
+struct ChildComponent {
+
+  build() {
+    Text('Hello, world!')
+  }
+}
+
+@Component
+struct LinkChild {
+
+  build() {
+    Button('Click me')
+  }
+}

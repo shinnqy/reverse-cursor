@@ -1,0 +1,601 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "c17369e4-d721-44e2-92db-52781b3dab17",
+    "timestamp": "2025-03-19T11:11:39.549Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/decorator.ets",
+          "diffHistory": [
+            "4+|  @State message: string = 'Hello, world!'\n",
+            "7-|    Text('Hello, world!')\n7+|    Text(this.message)\n",
+            "4-|  @State message: string = 'Hello, world!'\n4+|  @State count: string = 'Hello, world!'\n",
+            "7-|    Text(this.message)\n7+|    Text(this.count.toString())\n",
+            "4-|  @State count: string = 'Hello, world!'\n4+|  @State count: number = 0\n",
+            "7-|    Text(this.count.toString())\n",
+            "5-|  \n5+|\n7+|    Button('Click me').onClick(() => {\n8+|      this.count++\n9+|    })\n",
+            "15+|  @P\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/decorator.ets",
+        "contents": "@Entry\n@Component\nstruct Example {\n  @State count: number = 0\n\n  build() {\n    Button('Click me').onClick(() => {\n      this.count++\n    })\n  }\n}\n\n@Component\nstruct ChildComponent {\n  @P\n\n  build() {\n    Text('Hello, world!')\n  }\n}\n\n@Component\nstruct LinkChild {\n\n  build() {\n    Button('Click me')\n  }\n}\n",
+        "cursorPosition": {
+          "line": 14,
+          "column": 4
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 26,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742382699583,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.699951171875,
+      "timeAtRequestSend": 1742382699583
+    },
+    "generateUuid": "c17369e4-d721-44e2-92db-52781b3dab17",
+    "timestamp": "2025-03-19T11:11:39.585Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "c17369e4-d721-44e2-92db-52781b3dab17",
+    "timestamp": "2025-03-19T11:11:40.010Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "struct ChildComponent {\n  @Prop",
+      "rangeToReplace": {
+        "startLineNumber": 14,
+        "endLineNumberInclusive": 20
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "c17369e4-d721-44e2-92db-52781b3dab17",
+    "timestamp": "2025-03-19T11:11:40.011Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " count"
+    },
+    "generationUUID": "c17369e4-d721-44e2-92db-52781b3dab17",
+    "timestamp": "2025-03-19T11:11:40.022Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": number\n"
+    },
+    "generationUUID": "c17369e4-d721-44e2-92db-52781b3dab17",
+    "timestamp": "2025-03-19T11:11:40.036Z"
+  },
+  {
+    "firstChunkValue": "struct ChildComponent {\n  @Prop count: number\n\n  build() {\n    Text('Hello, world!')\n  }\n}",
+    "generationUUID": "c17369e4-d721-44e2-92db-52781b3dab17",
+    "timestamp": "2025-03-19T11:11:40.039Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "struct ChildComponent {\n  @Prop count: number\n\n  build() {\n    Text('Hello, world!')\n  }\n}"
+    },
+    "generationUUID": "c17369e4-d721-44e2-92db-52781b3dab17",
+    "timestamp": "2025-03-19T11:11:40.040Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "ed61c731-baa6-4b56-849d-6780d72a5acd",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 26,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 26,
+      "monotonicallyIncreasingSuggestionId": 18,
+      "range": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "replaceText": "struct ChildComponent {\n  @Prop count: number\n\n  build() {\n    Text('Hello, world!')\n  }\n}",
+      "originalText": "struct ChildComponent {\n  @P\n\n  build() {\n    Text('Hello, world!')\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "diffText": "struct ChildComponent {\n  @Prop count: number\n\n  build() {\n    Text('Hello, world!')\n  }\n}",
+      "fullOriginalText": "struct ChildComponent {\n  @P\n\n  build() {\n    Text('Hello, world!')\n  }\n}",
+      "suggestionTriggerTime": 1742382699533.3,
+      "greens": [],
+      "source": "typing",
+      "requestId": "c17369e4-d721-44e2-92db-52781b3dab17",
+      "selection": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "undoRedoGroup": {
+        "id": 18,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "c17369e4-d721-44e2-92db-52781b3dab17",
+    "timestamp": "2025-03-19T11:11:40.041Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "c17369e4-d721-44e2-92db-52781b3dab17",
+    "timestamp": "2025-03-19T11:11:40.050Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "c17369e4-d721-44e2-92db-52781b3dab17",
+    "timestamp": "2025-03-19T11:11:40.067Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " build() {\n    Text"
+    },
+    "generationUUID": "c17369e4-d721-44e2-92db-52781b3dab17",
+    "timestamp": "2025-03-19T11:11:40.077Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "("
+    },
+    "generationUUID": "c17369e4-d721-44e2-92db-52781b3dab17",
+    "timestamp": "2025-03-19T11:11:40.091Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "this.count.toString())\n "
+    },
+    "generationUUID": "c17369e4-d721-44e2-92db-52781b3dab17",
+    "timestamp": "2025-03-19T11:11:40.109Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " }"
+    },
+    "generationUUID": "c17369e4-d721-44e2-92db-52781b3dab17",
+    "timestamp": "2025-03-19T11:11:40.119Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n}"
+    },
+    "generationUUID": "c17369e4-d721-44e2-92db-52781b3dab17",
+    "timestamp": "2025-03-19T11:11:40.133Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "c17369e4-d721-44e2-92db-52781b3dab17",
+    "timestamp": "2025-03-19T11:11:40.160Z"
+  },
+  {
+    "fullText": "struct ChildComponent {\n  @Prop count: number\n\n  build() {\n    Text(this.count.toString())\n  }\n}",
+    "generationUUID": "c17369e4-d721-44e2-92db-52781b3dab17",
+    "timestamp": "2025-03-19T11:11:40.161Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "struct ChildComponent {\n  @Prop count: number\n\n  build() {\n    Text('Hello, world!')\n  }\n}"
+    },
+    "fullText": "struct ChildComponent {\n  @Prop count: number\n\n  build() {\n    Text(this.count.toString())\n  }\n}",
+    "generationUUID": "c17369e4-d721-44e2-92db-52781b3dab17",
+    "timestamp": "2025-03-19T11:11:40.161Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "6a9606a4-062f-490b-bf62-0c7308ff1912",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 26,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 27,
+      "monotonicallyIncreasingSuggestionId": 19,
+      "range": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "replaceText": "struct ChildComponent {\n  @Prop count: number\n\n  build() {\n    Text(this.count.toString())\n  }\n}",
+      "originalText": "struct ChildComponent {\n  @Prop count: number\n\n  build() {\n    Text('Hello, world!')\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "diffText": "struct ChildComponent {\n  @Prop count: number\n\n  build() {\n    Text(this.count.toString())\n  }\n}",
+      "fullOriginalText": "struct ChildComponent {\n  @Prop count: number\n\n  build() {\n    Text('Hello, world!')\n  }\n}",
+      "suggestionTriggerTime": 1742382699533.3,
+      "greens": [],
+      "source": "typing",
+      "requestId": "c17369e4-d721-44e2-92db-52781b3dab17",
+      "selection": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "2487f1c0-45e9-4eab-a19e-c2d443cc5170",
+      "undoRedoGroup": {
+        "id": 19,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "c17369e4-d721-44e2-92db-52781b3dab17",
+    "timestamp": "2025-03-19T11:11:40.161Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "c17369e4-d721-44e2-92db-52781b3dab17",
+    "timestamp": "2025-03-19T11:11:40.269Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "2487f1c0-45e9-4eab-a19e-c2d443cc5170",
+    "generationUUID": "c17369e4-d721-44e2-92db-52781b3dab17",
+    "timestamp": "2025-03-19T11:11:40.277Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "struct ChildComponent {\n  @Prop count: number\n\n  build() {\n    Text('Hello, world!')\n  }\n}"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "2487f1c0-45e9-4eab-a19e-c2d443cc5170",
+    "generationUUID": "c17369e4-d721-44e2-92db-52781b3dab17",
+    "timestamp": "2025-03-19T11:11:40.277Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "2487f1c0-45e9-4eab-a19e-c2d443cc5170",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T11:11:40.277Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "ed61c731-baa6-4b56-849d-6780d72a5acd",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 26,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 26,
+      "monotonicallyIncreasingSuggestionId": 18,
+      "range": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "replaceText": "struct ChildComponent {\n  @Prop count: number\n\n  build() {\n    Text('Hello, world!')\n  }\n}",
+      "originalText": "struct ChildComponent {\n  @P\n\n  build() {\n    Text('Hello, world!')\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "diffText": "struct ChildComponent {\n  @Prop count: number\n\n  build() {\n    Text('Hello, world!')\n  }\n}",
+      "fullOriginalText": "struct ChildComponent {\n  @P\n\n  build() {\n    Text('Hello, world!')\n  }\n}",
+      "suggestionTriggerTime": 1742382699533.3,
+      "greens": [],
+      "source": "typing",
+      "requestId": "c17369e4-d721-44e2-92db-52781b3dab17",
+      "selection": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "undoRedoGroup": {
+        "id": 18,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;124",
+      "onAcceptDisplayId": "6a9606a4-062f-490b-bf62-0c7308ff1912"
+    },
+    "generationUUID": "c17369e4-d721-44e2-92db-52781b3dab17",
+    "timestamp": "2025-03-19T11:11:43.507Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "ed61c731-baa6-4b56-849d-6780d72a5acd",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 26,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 26,
+      "monotonicallyIncreasingSuggestionId": 18,
+      "range": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "replaceText": "struct ChildComponent {\n  @Prop count: number\n\n  build() {\n    Text('Hello, world!')\n  }\n}",
+      "originalText": "struct ChildComponent {\n  @P\n\n  build() {\n    Text('Hello, world!')\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "diffText": "struct ChildComponent {\n  @Prop count: number\n\n  build() {\n    Text('Hello, world!')\n  }\n}",
+      "fullOriginalText": "struct ChildComponent {\n  @P\n\n  build() {\n    Text('Hello, world!')\n  }\n}",
+      "suggestionTriggerTime": 1742382699533.3,
+      "greens": [],
+      "source": "typing",
+      "requestId": "c17369e4-d721-44e2-92db-52781b3dab17",
+      "selection": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "undoRedoGroup": {
+        "id": 18,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;124",
+      "onAcceptDisplayId": "6a9606a4-062f-490b-bf62-0c7308ff1912"
+    },
+    "generationUUID": "c17369e4-d721-44e2-92db-52781b3dab17",
+    "timestamp": "2025-03-19T11:11:43.523Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "6a9606a4-062f-490b-bf62-0c7308ff1912",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 26,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 27,
+      "monotonicallyIncreasingSuggestionId": 19,
+      "range": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "replaceText": "struct ChildComponent {\n  @Prop count: number\n\n  build() {\n    Text(this.count.toString())\n  }\n}",
+      "originalText": "struct ChildComponent {\n  @Prop count: number\n\n  build() {\n    Text('Hello, world!')\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "diffText": "struct ChildComponent {\n  @Prop count: number\n\n  build() {\n    Text(this.count.toString())\n  }\n}",
+      "fullOriginalText": "struct ChildComponent {\n  @Prop count: number\n\n  build() {\n    Text('Hello, world!')\n  }\n}",
+      "suggestionTriggerTime": 1742382699533.3,
+      "greens": [],
+      "source": "typing",
+      "requestId": "c17369e4-d721-44e2-92db-52781b3dab17",
+      "selection": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "2487f1c0-45e9-4eab-a19e-c2d443cc5170",
+      "undoRedoGroup": {
+        "id": 19,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "c17369e4-d721-44e2-92db-52781b3dab17",
+    "timestamp": "2025-03-19T11:11:43.524Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "6a9606a4-062f-490b-bf62-0c7308ff1912",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 26,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 27,
+      "monotonicallyIncreasingSuggestionId": 19,
+      "range": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "replaceText": "struct ChildComponent {\n  @Prop count: number\n\n  build() {\n    Text(this.count.toString())\n  }\n}",
+      "originalText": "struct ChildComponent {\n  @Prop count: number\n\n  build() {\n    Text('Hello, world!')\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "diffText": "struct ChildComponent {\n  @Prop count: number\n\n  build() {\n    Text(this.count.toString())\n  }\n}",
+      "fullOriginalText": "struct ChildComponent {\n  @Prop count: number\n\n  build() {\n    Text('Hello, world!')\n  }\n}",
+      "suggestionTriggerTime": 1742382699533.3,
+      "greens": [],
+      "source": "typing",
+      "requestId": "c17369e4-d721-44e2-92db-52781b3dab17",
+      "selection": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "2487f1c0-45e9-4eab-a19e-c2d443cc5170",
+      "undoRedoGroup": {
+        "id": 19,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;130"
+    },
+    "generationUUID": "c17369e4-d721-44e2-92db-52781b3dab17",
+    "timestamp": "2025-03-19T11:11:44.484Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "6a9606a4-062f-490b-bf62-0c7308ff1912",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 26,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 27,
+      "monotonicallyIncreasingSuggestionId": 19,
+      "range": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "replaceText": "struct ChildComponent {\n  @Prop count: number\n\n  build() {\n    Text(this.count.toString())\n  }\n}",
+      "originalText": "struct ChildComponent {\n  @Prop count: number\n\n  build() {\n    Text('Hello, world!')\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "diffText": "struct ChildComponent {\n  @Prop count: number\n\n  build() {\n    Text(this.count.toString())\n  }\n}",
+      "fullOriginalText": "struct ChildComponent {\n  @Prop count: number\n\n  build() {\n    Text('Hello, world!')\n  }\n}",
+      "suggestionTriggerTime": 1742382699533.3,
+      "greens": [],
+      "source": "typing",
+      "requestId": "c17369e4-d721-44e2-92db-52781b3dab17",
+      "selection": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "2487f1c0-45e9-4eab-a19e-c2d443cc5170",
+      "undoRedoGroup": {
+        "id": 19,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;130"
+    },
+    "generationUUID": "c17369e4-d721-44e2-92db-52781b3dab17",
+    "timestamp": "2025-03-19T11:11:44.499Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "2487f1c0-45e9-4eab-a19e-c2d443cc5170",
+    "fusedCursorPrediction": null,
+    "oldText": "struct ChildComponent {\n  @Prop count: number\n\n  build() {\n    Text('Hello, world!')\n  }\n}",
+    "newText": "struct ChildComponent {\n  @Prop count: number\n\n  build() {\n    Text(this.count.toString())\n  }\n}",
+    "timestamp": "2025-03-19T11:11:44.499Z"
+  }
+]
