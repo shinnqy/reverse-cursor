@@ -1,0 +1,87 @@
+You're an expert in ArkTS. Your task is to help the user update the code around current cursor position.
+
+## Recent Actions
+Here is what the user has been doing from the earliest to the latest:
+
+File: entry/src/main/ets/utils/eventCallback.ets
+deleted the code `    ` in line 5
+added the code `      .onClick(() => {` in line 5
+added the code `        console.log('Button clicked')` in line 6
+added the code `      })` in line 7
+
+deleted the code `      .onClick(() => {` in line 5
+deleted the code `        console.log('Button clicked')` in line 6
+added the code `      .onClick((event: ClickEvent) => {` in line 5
+added the code `        console.log('Button clicked', event)` in line 6
+
+added the code `      .onLongPress((event: LongPressEvent) => {` in line 15
+added the code `        console.log('Button long pressed', event)` in line 16
+added the code `      })` in line 17
+
+added the code `      .onSwipe((event: SwipeEvent) => {` in line 25
+added the code `        console.log('Button swiped', event)` in line 26
+added the code `      })` in line 27
+
+
+## Current Code
+Here is the current code file path:
+entry/src/main/ets/utils/eventCallback.ets
+
+Here is the current code around the cursor position:
+
+```
+@Component
+struct ClickEventExample {
+  build() {
+    Button('Click me')
+      .onClick((event: ClickEvent) => {
+        console.log('Button clicked', event)
+      })
+  }
+}
+
+@Component
+struct LongPressEventExample {
+  build() {
+    Button('Long press me')
+      .onLongPress((event: LongPressEvent) => {
+        console.log('Button long pressed', event)
+      })
+  }
+}
+
+@Component
+struct SwipeEventExample {
+  build() {
+    Button('Swipe me')
+      .onSwipe((event: SwipeEvent) => {
+        console.log('Button swiped', event)
+<|editable_region_start|>
+      })
+  }
+}
+
+@Component
+struct ChildComponent {
+  @Prop() onCustomEvent: () => void
+
+  build() {
+    Button('Touch me')
+  <|current_cursor_position|>}
+}
+
+
+<|editable_region_end|>
+```
+
+## Task
+Rewrite the code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> according to the following requirements:
+1. Enforce code format strictly matching existing code style.
+2. Propagate naming convention changes to all related cases
+3. Preserve original functionality
+4. Apply changes to entire code regardless of cursor position
+5. Focus on code after cursor position at <|current_cursor_position|>
+
+# Output Format
+Return ONLY the rewritten code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> without any other words.
+Never use markdown formatting like ```. Return raw text only.

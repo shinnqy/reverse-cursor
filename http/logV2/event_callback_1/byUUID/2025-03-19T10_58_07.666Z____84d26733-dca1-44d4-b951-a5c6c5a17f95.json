@@ -1,0 +1,444 @@
+[
+  {
+    "intent": "cursor_prediction",
+    "generationUUID": "84d26733-dca1-44d4-b951-a5c6c5a17f95",
+    "timestamp": "2025-03-19T10:58:07.666Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/eventCallback.ets",
+          "diffHistory": [
+            "5-|    \n5+|      .onClick(() => {\n6+|        console.log('Button clicked')\n7+|      })\n",
+            "5-|      .onClick(() => {\n6-|        console.log('Button clicked')\n5+|      .onClick((event: ClickEvent) => {\n6+|        console.log('Button clicked', event)\n",
+            "15+|      .onLongPress((event: LongPressEvent) => {\n16+|        console.log('Button long pressed', event)\n17+|      })\n",
+            "25+|      .onSwipe((event: SwipeEvent) => {\n26+|        console.log('Button swiped', event)\n27+|      })\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/eventCallback.ets",
+        "contents": "@Component\nstruct ClickEventExample {\n  build() {\n    Button('Click me')\n      .onClick((event: ClickEvent) => {\n        console.log('Button clicked', event)\n      })\n  }\n}\n\n@Component\nstruct LongPressEventExample {\n  build() {\n    Button('Long press me')\n      .onLongPress((event: LongPressEvent) => {\n        console.log('Button long pressed', event)\n      })\n  }\n}\n\n@Component\nstruct SwipeEventExample {\n  build() {\n    Button('Swipe me')\n      .onSwipe((event: SwipeEvent) => {\n        console.log('Button swiped', event)\n      })\n  }\n}\n\n@Component\nstruct ChildComponent {\n  @Prop() onCustomEvent: () => void\n\n  build() {\n    Button('Touch me')\n  }\n}\n\n",
+        "cursorPosition": {
+          "line": 36,
+          "column": 2
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 14,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "cursor_prediction"
+      },
+      "clientTime": 1742381887675,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 11.199951171875,
+      "timeAtRequestSend": 1742381887675
+    },
+    "generateUuid": "84d26733-dca1-44d4-b951-a5c6c5a17f95",
+    "timestamp": "2025-03-19T10:58:07.677Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "84d26733-dca1-44d4-b951-a5c6c5a17f95",
+    "timestamp": "2025-03-19T10:58:08.040Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "    Button('Touch me')\n     ",
+      "rangeToReplace": {
+        "startLineNumber": 36,
+        "endLineNumberInclusive": 39
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "84d26733-dca1-44d4-b951-a5c6c5a17f95",
+    "timestamp": "2025-03-19T10:58:08.043Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ."
+    },
+    "generationUUID": "84d26733-dca1-44d4-b951-a5c6c5a17f95",
+    "timestamp": "2025-03-19T10:58:08.046Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "onTouch"
+    },
+    "generationUUID": "84d26733-dca1-44d4-b951-a5c6c5a17f95",
+    "timestamp": "2025-03-19T10:58:08.054Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "(("
+    },
+    "generationUUID": "84d26733-dca1-44d4-b951-a5c6c5a17f95",
+    "timestamp": "2025-03-19T10:58:08.062Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "event: Touch"
+    },
+    "generationUUID": "84d26733-dca1-44d4-b951-a5c6c5a17f95",
+    "timestamp": "2025-03-19T10:58:08.071Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Event"
+    },
+    "generationUUID": "84d26733-dca1-44d4-b951-a5c6c5a17f95",
+    "timestamp": "2025-03-19T10:58:08.081Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ") => {\n       "
+    },
+    "generationUUID": "84d26733-dca1-44d4-b951-a5c6c5a17f95",
+    "timestamp": "2025-03-19T10:58:08.088Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " console.log('Button touched"
+    },
+    "generationUUID": "84d26733-dca1-44d4-b951-a5c6c5a17f95",
+    "timestamp": "2025-03-19T10:58:08.102Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "',"
+    },
+    "generationUUID": "84d26733-dca1-44d4-b951-a5c6c5a17f95",
+    "timestamp": "2025-03-19T10:58:08.110Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " event)\n     "
+    },
+    "generationUUID": "84d26733-dca1-44d4-b951-a5c6c5a17f95",
+    "timestamp": "2025-03-19T10:58:08.123Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " })"
+    },
+    "generationUUID": "84d26733-dca1-44d4-b951-a5c6c5a17f95",
+    "timestamp": "2025-03-19T10:58:08.131Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n "
+    },
+    "generationUUID": "84d26733-dca1-44d4-b951-a5c6c5a17f95",
+    "timestamp": "2025-03-19T10:58:08.140Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " }\n}"
+    },
+    "generationUUID": "84d26733-dca1-44d4-b951-a5c6c5a17f95",
+    "timestamp": "2025-03-19T10:58:08.147Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "84d26733-dca1-44d4-b951-a5c6c5a17f95",
+    "timestamp": "2025-03-19T10:58:08.157Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "84d26733-dca1-44d4-b951-a5c6c5a17f95",
+    "timestamp": "2025-03-19T10:58:08.186Z"
+  },
+  {
+    "firstChunkValue": "    Button('Touch me')\n      .onTouch((event: TouchEvent) => {\n        console.log('Button touched', event)\n      })\n  }\n}\n",
+    "generationUUID": "84d26733-dca1-44d4-b951-a5c6c5a17f95",
+    "timestamp": "2025-03-19T10:58:08.187Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "    Button('Touch me')\n      .onTouch((event: TouchEvent) => {\n        console.log('Button touched', event)\n      })\n  }\n}\n"
+    },
+    "generationUUID": "84d26733-dca1-44d4-b951-a5c6c5a17f95",
+    "timestamp": "2025-03-19T10:58:08.187Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "ec90c42c-4ae2-497a-b236-523740f9b0eb",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/eventCallback.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/eventCallback.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/eventCallback.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 14,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 14,
+      "monotonicallyIncreasingSuggestionId": 11,
+      "range": {
+        "startLineNumber": 36,
+        "startColumn": 1,
+        "endLineNumberInclusive": 39,
+        "endColumn": 1
+      },
+      "replaceText": "    Button('Touch me')\n      .onTouch((event: TouchEvent) => {\n        console.log('Button touched', event)\n      })\n  }\n}\n",
+      "originalText": "    Button('Touch me')\n  }\n}\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 36,
+        "startColumn": 1,
+        "endLineNumberInclusive": 39,
+        "endColumn": 1
+      },
+      "diffText": "    Button('Touch me')\n      .onTouch((event: TouchEvent) => {\n        console.log('Button touched', event)\n      })\n  }\n}\n",
+      "fullOriginalText": "    Button('Touch me')\n  }\n}\n",
+      "suggestionTriggerTime": 1742381887664,
+      "greens": [],
+      "source": "cursor_prediction",
+      "requestId": "84d26733-dca1-44d4-b951-a5c6c5a17f95",
+      "selection": {
+        "startLineNumber": 36,
+        "startColumn": 1,
+        "endLineNumberInclusive": 39,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "d44ff503-f50d-4b56-b868-adec99a8bf8c",
+      "undoRedoGroup": {
+        "id": 11,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "84d26733-dca1-44d4-b951-a5c6c5a17f95",
+    "timestamp": "2025-03-19T10:58:08.188Z"
+  },
+  {
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/eventCallback.ets",
+      "lineNumberOneIndexed": 33,
+      "text": "@Prop() onCustomEvent: () => void\n\nbuild() {\nButton('Touch me')\n.onTouch((event: TouchEvent) => {",
+      "shouldRetriggerCpp": false
+    },
+    "predictionId": "d44ff503-f50d-4b56-b868-adec99a8bf8c",
+    "generationUUID": "84d26733-dca1-44d4-b951-a5c6c5a17f95",
+    "timestamp": "2025-03-19T10:58:08.364Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "    Button('Touch me')\n      .onTouch((event: TouchEvent) => {\n        console.log('Button touched', event)\n      })\n  }\n}\n"
+    },
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/eventCallback.ets",
+      "lineNumberOneIndexed": 33,
+      "text": "@Prop() onCustomEvent: () => void\n\nbuild() {\nButton('Touch me')\n.onTouch((event: TouchEvent) => {",
+      "shouldRetriggerCpp": false
+    },
+    "predictionId": "d44ff503-f50d-4b56-b868-adec99a8bf8c",
+    "generationUUID": "84d26733-dca1-44d4-b951-a5c6c5a17f95",
+    "timestamp": "2025-03-19T10:58:08.364Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "d44ff503-f50d-4b56-b868-adec99a8bf8c",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/eventCallback.ets",
+      "lineNumberOneIndexed": 33,
+      "text": "@Prop() onCustomEvent: () => void\n\nbuild() {\nButton('Touch me')\n.onTouch((event: TouchEvent) => {",
+      "shouldRetriggerCpp": false
+    },
+    "timestamp": "2025-03-19T10:58:08.364Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "cursorPredictionTarget": {
+        "relativePath": "entry/src/main/ets/utils/eventCallback.ets",
+        "lineNumberOneIndexed": 33,
+        "expectedContent": "@Prop() onCustomEvent: () => void\n\nbuild() {\nButton('Touch me')\n.onTouch((event: TouchEvent) => {",
+        "shouldRetriggerCpp": false
+      }
+    },
+    "generationUUID": "84d26733-dca1-44d4-b951-a5c6c5a17f95",
+    "timestamp": "2025-03-19T10:58:08.365Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "84d26733-dca1-44d4-b951-a5c6c5a17f95",
+    "timestamp": "2025-03-19T10:58:08.365Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "ec90c42c-4ae2-497a-b236-523740f9b0eb",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/eventCallback.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/eventCallback.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/eventCallback.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 14,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 14,
+      "monotonicallyIncreasingSuggestionId": 11,
+      "range": {
+        "startLineNumber": 36,
+        "startColumn": 1,
+        "endLineNumberInclusive": 39,
+        "endColumn": 1
+      },
+      "replaceText": "    Button('Touch me')\n      .onTouch((event: TouchEvent) => {\n        console.log('Button touched', event)\n      })\n  }\n}\n",
+      "originalText": "    Button('Touch me')\n  }\n}\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 36,
+        "startColumn": 1,
+        "endLineNumberInclusive": 39,
+        "endColumn": 1
+      },
+      "diffText": "    Button('Touch me')\n      .onTouch((event: TouchEvent) => {\n        console.log('Button touched', event)\n      })\n  }\n}\n",
+      "fullOriginalText": "    Button('Touch me')\n  }\n}\n",
+      "suggestionTriggerTime": 1742381887664,
+      "greens": [],
+      "source": "cursor_prediction",
+      "requestId": "84d26733-dca1-44d4-b951-a5c6c5a17f95",
+      "selection": {
+        "startLineNumber": 36,
+        "startColumn": 1,
+        "endLineNumberInclusive": 39,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "d44ff503-f50d-4b56-b868-adec99a8bf8c",
+      "undoRedoGroup": {
+        "id": 11,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;78"
+    },
+    "generationUUID": "84d26733-dca1-44d4-b951-a5c6c5a17f95",
+    "timestamp": "2025-03-19T10:58:18.764Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "ec90c42c-4ae2-497a-b236-523740f9b0eb",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/eventCallback.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/eventCallback.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/eventCallback.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 14,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 14,
+      "monotonicallyIncreasingSuggestionId": 11,
+      "range": {
+        "startLineNumber": 36,
+        "startColumn": 1,
+        "endLineNumberInclusive": 39,
+        "endColumn": 1
+      },
+      "replaceText": "    Button('Touch me')\n      .onTouch((event: TouchEvent) => {\n        console.log('Button touched', event)\n      })\n  }\n}\n",
+      "originalText": "    Button('Touch me')\n  }\n}\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 36,
+        "startColumn": 1,
+        "endLineNumberInclusive": 39,
+        "endColumn": 1
+      },
+      "diffText": "    Button('Touch me')\n      .onTouch((event: TouchEvent) => {\n        console.log('Button touched', event)\n      })\n  }\n}\n",
+      "fullOriginalText": "    Button('Touch me')\n  }\n}\n",
+      "suggestionTriggerTime": 1742381887664,
+      "greens": [],
+      "source": "cursor_prediction",
+      "requestId": "84d26733-dca1-44d4-b951-a5c6c5a17f95",
+      "selection": {
+        "startLineNumber": 36,
+        "startColumn": 1,
+        "endLineNumberInclusive": 39,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "d44ff503-f50d-4b56-b868-adec99a8bf8c",
+      "undoRedoGroup": {
+        "id": 11,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;78"
+    },
+    "generationUUID": "84d26733-dca1-44d4-b951-a5c6c5a17f95",
+    "timestamp": "2025-03-19T10:58:18.767Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "d44ff503-f50d-4b56-b868-adec99a8bf8c",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/eventCallback.ets",
+      "lineNumberOneIndexed": 33,
+      "text": "@Prop() onCustomEvent: () => void\n\nbuild() {\nButton('Touch me')\n.onTouch((event: TouchEvent) => {",
+      "shouldRetriggerCpp": false
+    },
+    "oldText": "    Button('Touch me')\n  }\n}\n",
+    "newText": "    Button('Touch me')\n      .onTouch((event: TouchEvent) => {\n        console.log('Button touched', event)\n      })\n  }\n}\n",
+    "timestamp": "2025-03-19T10:58:18.773Z"
+  },
+  {
+    "action": "displayFusedCursorPrediction",
+    "predictionId": "d44ff503-f50d-4b56-b868-adec99a8bf8c",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/eventCallback.ets",
+      "lineNumberOneIndexed": 33,
+      "text": "@Prop() onCustomEvent: () => void\n\nbuild() {\nButton('Touch me')\n.onTouch((event: TouchEvent) => {",
+      "shouldRetriggerCpp": false
+    },
+    "oldText": "    Button('Touch me')\n  }\n}\n",
+    "newText": "    Button('Touch me')\n      .onTouch((event: TouchEvent) => {\n        console.log('Button touched', event)\n      })\n  }\n}\n",
+    "timestamp": "2025-03-19T10:58:18.773Z"
+  }
+]

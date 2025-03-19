@@ -1,0 +1,452 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "7d5f708f-81e7-43d9-b4e0-1e3669a658c9",
+    "timestamp": "2025-03-19T10:57:41.697Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/eventCallback.ets",
+          "diffHistory": [
+            "5-|    \n5+|      .onClick(() => {\n6+|        console.log('Button clicked')\n7+|      })\n",
+            "5-|      .onClick(() => {\n5+|      .onClick((eve) => {\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/eventCallback.ets",
+        "contents": "@Component\nstruct ClickEventExample {\n  build() {\n    Button('Click me')\n      .onClick((eve) => {\n        console.log('Button clicked')\n      })\n  }\n}\n\n@Component\nstruct LongPressEventExample {\n  build() {\n    Button('Long press me')\n  }\n}\n\n@Component\nstruct SwipeEventExample {\n  build() {\n    Button('Swipe me')\n  }\n}\n\n@Component\nstruct ChildComponent {\n  @Prop() onCustomEvent: () => void\n\n  build() {\n    Button('Touch me')\n  }\n}\n\n",
+        "cursorPosition": {
+          "line": 4,
+          "column": 19
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 8,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742381861739,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.5,
+      "timeAtRequestSend": 1742381861739
+    },
+    "generateUuid": "7d5f708f-81e7-43d9-b4e0-1e3669a658c9",
+    "timestamp": "2025-03-19T10:57:41.740Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "7d5f708f-81e7-43d9-b4e0-1e3669a658c9",
+    "timestamp": "2025-03-19T10:57:42.090Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "    Button('Click me')\n      .onClick((event",
+      "rangeToReplace": {
+        "startLineNumber": 4,
+        "endLineNumberInclusive": 7
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "7d5f708f-81e7-43d9-b4e0-1e3669a658c9",
+    "timestamp": "2025-03-19T10:57:42.092Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "7d5f708f-81e7-43d9-b4e0-1e3669a658c9",
+    "timestamp": "2025-03-19T10:57:42.110Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Click"
+    },
+    "generationUUID": "7d5f708f-81e7-43d9-b4e0-1e3669a658c9",
+    "timestamp": "2025-03-19T10:57:42.121Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Event)"
+    },
+    "generationUUID": "7d5f708f-81e7-43d9-b4e0-1e3669a658c9",
+    "timestamp": "2025-03-19T10:57:42.132Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " =>"
+    },
+    "generationUUID": "7d5f708f-81e7-43d9-b4e0-1e3669a658c9",
+    "timestamp": "2025-03-19T10:57:42.140Z"
+  },
+  {
+    "firstChunkValue": "    Button('Click me')\n      .onClick((event: ClickEvent) => {\n        console.log('Button clicked')\n      })",
+    "generationUUID": "7d5f708f-81e7-43d9-b4e0-1e3669a658c9",
+    "timestamp": "2025-03-19T10:57:42.150Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {\n       "
+    },
+    "generationUUID": "7d5f708f-81e7-43d9-b4e0-1e3669a658c9",
+    "timestamp": "2025-03-19T10:57:42.150Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "    Button('Click me')\n      .onClick((event: ClickEvent) => {\n        console.log('Button clicked')\n      })"
+    },
+    "generationUUID": "7d5f708f-81e7-43d9-b4e0-1e3669a658c9",
+    "timestamp": "2025-03-19T10:57:42.151Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "a72b8cea-7830-4756-a771-2e9109ba5fb0",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/eventCallback.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/eventCallback.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/eventCallback.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 8,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 8,
+      "monotonicallyIncreasingSuggestionId": 5,
+      "range": {
+        "startLineNumber": 4,
+        "startColumn": 1,
+        "endLineNumberInclusive": 7,
+        "endColumn": 9
+      },
+      "replaceText": "    Button('Click me')\n      .onClick((event: ClickEvent) => {\n        console.log('Button clicked')\n      })",
+      "originalText": "    Button('Click me')\n      .onClick((eve) => {\n        console.log('Button clicked')\n      })",
+      "startingSuggestionRange": {
+        "startLineNumber": 4,
+        "startColumn": 1,
+        "endLineNumberInclusive": 7,
+        "endColumn": 9
+      },
+      "diffText": "    Button('Click me')\n      .onClick((event: ClickEvent) => {\n        console.log('Button clicked')\n      })",
+      "fullOriginalText": "    Button('Click me')\n      .onClick((eve) => {\n        console.log('Button clicked')\n      })",
+      "suggestionTriggerTime": 1742381861687.7998,
+      "greens": [],
+      "source": "typing",
+      "requestId": "7d5f708f-81e7-43d9-b4e0-1e3669a658c9",
+      "selection": {
+        "startLineNumber": 4,
+        "startColumn": 1,
+        "endLineNumberInclusive": 7,
+        "endColumn": 9
+      },
+      "undoRedoGroup": {
+        "id": 5,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 4,
+        "startColumn": 1,
+        "endLineNumber": 7,
+        "endColumn": 9
+      },
+      "trackedText": "    Button('Click me')\n      .onClick((event) => {\n        console.log('Button clicked')\n      })"
+    },
+    "generationUUID": "7d5f708f-81e7-43d9-b4e0-1e3669a658c9",
+    "timestamp": "2025-03-19T10:57:42.151Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " console.log('Button clicked')\n"
+    },
+    "generationUUID": "7d5f708f-81e7-43d9-b4e0-1e3669a658c9",
+    "timestamp": "2025-03-19T10:57:42.162Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "     "
+    },
+    "generationUUID": "7d5f708f-81e7-43d9-b4e0-1e3669a658c9",
+    "timestamp": "2025-03-19T10:57:42.177Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " })"
+    },
+    "generationUUID": "7d5f708f-81e7-43d9-b4e0-1e3669a658c9",
+    "timestamp": "2025-03-19T10:57:42.184Z"
+  },
+  {
+    "fullText": "    Button('Click me')\n      .onClick((event: ClickEvent) => {\n        console.log('Button clicked')\n      })",
+    "generationUUID": "7d5f708f-81e7-43d9-b4e0-1e3669a658c9",
+    "timestamp": "2025-03-19T10:57:42.219Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "    Button('Click me')\n      .onClick((event: ClickEvent) => {\n        console.log('Button clicked')\n      })"
+    },
+    "fullText": "    Button('Click me')\n      .onClick((event: ClickEvent) => {\n        console.log('Button clicked')\n      })",
+    "generationUUID": "7d5f708f-81e7-43d9-b4e0-1e3669a658c9",
+    "timestamp": "2025-03-19T10:57:42.219Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "generationUUID": "7d5f708f-81e7-43d9-b4e0-1e3669a658c9",
+    "timestamp": "2025-03-19T10:57:42.219Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "7d5f708f-81e7-43d9-b4e0-1e3669a658c9",
+    "timestamp": "2025-03-19T10:57:42.222Z"
+  },
+  {
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/eventCallback.ets",
+      "lineNumberOneIndexed": 14,
+      "text": "Button('Long press me')\n}\n}\n\n@Component",
+      "shouldRetriggerCpp": false
+    },
+    "predictionId": "6d6a6488-9ef3-4e32-b323-31bcba0f12ff",
+    "generationUUID": "7d5f708f-81e7-43d9-b4e0-1e3669a658c9",
+    "timestamp": "2025-03-19T10:57:42.303Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "    Button('Click me')\n      .onClick((event: ClickEvent) => {\n        console.log('Button clicked')\n      })"
+    },
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/eventCallback.ets",
+      "lineNumberOneIndexed": 14,
+      "text": "Button('Long press me')\n}\n}\n\n@Component",
+      "shouldRetriggerCpp": false
+    },
+    "predictionId": "6d6a6488-9ef3-4e32-b323-31bcba0f12ff",
+    "generationUUID": "7d5f708f-81e7-43d9-b4e0-1e3669a658c9",
+    "timestamp": "2025-03-19T10:57:42.303Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "6d6a6488-9ef3-4e32-b323-31bcba0f12ff",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/eventCallback.ets",
+      "lineNumberOneIndexed": 14,
+      "text": "Button('Long press me')\n}\n}\n\n@Component",
+      "shouldRetriggerCpp": false
+    },
+    "timestamp": "2025-03-19T10:57:42.303Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "cursorPredictionTarget": {
+        "relativePath": "entry/src/main/ets/utils/eventCallback.ets",
+        "lineNumberOneIndexed": 14,
+        "expectedContent": "Button('Long press me')\n}\n}\n\n@Component",
+        "shouldRetriggerCpp": false
+      }
+    },
+    "generationUUID": "7d5f708f-81e7-43d9-b4e0-1e3669a658c9",
+    "timestamp": "2025-03-19T10:57:42.306Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "7d5f708f-81e7-43d9-b4e0-1e3669a658c9",
+    "timestamp": "2025-03-19T10:57:42.306Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "a72b8cea-7830-4756-a771-2e9109ba5fb0",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/eventCallback.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/eventCallback.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/eventCallback.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 8,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 8,
+      "monotonicallyIncreasingSuggestionId": 5,
+      "range": {
+        "startLineNumber": 4,
+        "startColumn": 1,
+        "endLineNumberInclusive": 7,
+        "endColumn": 9
+      },
+      "replaceText": "    Button('Click me')\n      .onClick((event: ClickEvent) => {\n        console.log('Button clicked')\n      })",
+      "originalText": "    Button('Click me')\n      .onClick((eve) => {\n        console.log('Button clicked')\n      })",
+      "startingSuggestionRange": {
+        "startLineNumber": 4,
+        "startColumn": 1,
+        "endLineNumberInclusive": 7,
+        "endColumn": 9
+      },
+      "diffText": "    Button('Click me')\n      .onClick((event: ClickEvent) => {\n        console.log('Button clicked')\n      })",
+      "fullOriginalText": "    Button('Click me')\n      .onClick((eve) => {\n        console.log('Button clicked')\n      })",
+      "suggestionTriggerTime": 1742381861687.7998,
+      "greens": [],
+      "source": "typing",
+      "requestId": "7d5f708f-81e7-43d9-b4e0-1e3669a658c9",
+      "selection": {
+        "startLineNumber": 4,
+        "startColumn": 1,
+        "endLineNumberInclusive": 7,
+        "endColumn": 9
+      },
+      "fusedCursorPredictionId": "6d6a6488-9ef3-4e32-b323-31bcba0f12ff",
+      "undoRedoGroup": {
+        "id": 5,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 4,
+        "startColumn": 1,
+        "endLineNumber": 7,
+        "endColumn": 9
+      },
+      "trackedText": "    Button('Click me')\n      .onClick((event) => {\n        console.log('Button clicked')\n      })",
+      "decorationId": "b;36"
+    },
+    "generationUUID": "7d5f708f-81e7-43d9-b4e0-1e3669a658c9",
+    "timestamp": "2025-03-19T10:57:43.013Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "a72b8cea-7830-4756-a771-2e9109ba5fb0",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/eventCallback.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/eventCallback.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/eventCallback.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 8,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 8,
+      "monotonicallyIncreasingSuggestionId": 5,
+      "range": {
+        "startLineNumber": 4,
+        "startColumn": 1,
+        "endLineNumberInclusive": 7,
+        "endColumn": 9
+      },
+      "replaceText": "    Button('Click me')\n      .onClick((event: ClickEvent) => {\n        console.log('Button clicked')\n      })",
+      "originalText": "    Button('Click me')\n      .onClick((eve) => {\n        console.log('Button clicked')\n      })",
+      "startingSuggestionRange": {
+        "startLineNumber": 4,
+        "startColumn": 1,
+        "endLineNumberInclusive": 7,
+        "endColumn": 9
+      },
+      "diffText": "    Button('Click me')\n      .onClick((event: ClickEvent) => {\n        console.log('Button clicked')\n      })",
+      "fullOriginalText": "    Button('Click me')\n      .onClick((eve) => {\n        console.log('Button clicked')\n      })",
+      "suggestionTriggerTime": 1742381861687.7998,
+      "greens": [],
+      "source": "typing",
+      "requestId": "7d5f708f-81e7-43d9-b4e0-1e3669a658c9",
+      "selection": {
+        "startLineNumber": 4,
+        "startColumn": 1,
+        "endLineNumberInclusive": 7,
+        "endColumn": 9
+      },
+      "fusedCursorPredictionId": "6d6a6488-9ef3-4e32-b323-31bcba0f12ff",
+      "undoRedoGroup": {
+        "id": 5,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 4,
+        "startColumn": 1,
+        "endLineNumber": 7,
+        "endColumn": 9
+      },
+      "trackedText": "    Button('Click me')\n      .onClick((event) => {\n        console.log('Button clicked')\n      })",
+      "decorationId": "b;36"
+    },
+    "generationUUID": "7d5f708f-81e7-43d9-b4e0-1e3669a658c9",
+    "timestamp": "2025-03-19T10:57:43.024Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "6d6a6488-9ef3-4e32-b323-31bcba0f12ff",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/eventCallback.ets",
+      "lineNumberOneIndexed": 14,
+      "text": "Button('Long press me')\n}\n}\n\n@Component",
+      "shouldRetriggerCpp": false
+    },
+    "oldText": "    Button('Click me')\n      .onClick((eve) => {\n        console.log('Button clicked')\n      })",
+    "newText": "    Button('Click me')\n      .onClick((event: ClickEvent) => {\n        console.log('Button clicked')\n      })",
+    "timestamp": "2025-03-19T10:57:43.025Z"
+  },
+  {
+    "action": "displayFusedCursorPrediction",
+    "predictionId": "6d6a6488-9ef3-4e32-b323-31bcba0f12ff",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/eventCallback.ets",
+      "lineNumberOneIndexed": 14,
+      "text": "Button('Long press me')\n}\n}\n\n@Component",
+      "shouldRetriggerCpp": false
+    },
+    "oldText": "    Button('Click me')\n      .onClick((eve) => {\n        console.log('Button clicked')\n      })",
+    "newText": "    Button('Click me')\n      .onClick((event: ClickEvent) => {\n        console.log('Button clicked')\n      })",
+    "timestamp": "2025-03-19T10:57:43.025Z"
+  }
+]

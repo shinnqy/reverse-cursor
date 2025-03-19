@@ -1,0 +1,134 @@
+{"line":4,"column":6}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Component
+struct ClickEventExample {
+  build() {
+    Button('Click me')
+      [ToFill]
+  }
+}
+
+@Component
+struct LongPressEventExample {
+  build() {
+    Button('Long press me')
+  }
+}
+
+@Component
+struct SwipeEventExample {
+  build() {
+    Button('Swipe me')
+  }
+}
+
+@Component
+struct ChildComponent {
+  @Prop() onCustomEvent: () => void
+
+  build() {
+    Button('Touch me')
+  }
+}
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+struct ClickEventExample {
+  build() {
+    Button('Click me')
+      .onClick(() => {
+  }
+}
+
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+@Component
+struct ClickEventExample {
+  build() {
+    Button('Click me')
+      .onClick(() => {
+  }
+}
+
+@Component
+struct LongPressEventExample {
+  build() {
+    Button('Long press me')
+  }
+}
+
+@Component
+struct SwipeEventExample {
+  build() {
+    Button('Swipe me')
+  }
+}
+
+@Component
+struct ChildComponent {
+  @Prop() onCustomEvent: () => void
+
+  build() {
+    Button('Touch me')
+  }
+}
+
+
+-------------------------------[                   fullText                  ]--------------------------------
+struct ClickEventExample {
+  build() {
+    Button('Click me')
+      .onClick(() => {
+        console.log('Button clicked')
+      })
+  }
+}
+
+-------------------------------[         replacedContentsWithFullText         ]--------------------------------
+@Component
+struct ClickEventExample {
+  build() {
+    Button('Click me')
+      .onClick(() => {
+        console.log('Button clicked')
+      })
+  }
+}
+struct LongPressEventExample {
+  build() {
+    Button('Long press me')
+  }
+}
+
+@Component
+struct SwipeEventExample {
+  build() {
+    Button('Swipe me')
+  }
+}
+
+@Component
+struct ChildComponent {
+  @Prop() onCustomEvent: () => void
+
+  build() {
+    Button('Touch me')
+  }
+}
+
+
+
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/eventCallback.ets",
+  "lineNumberOneIndexed": 13,
+  "text": "}\n}\n\n@Component\nstruct SwipeEventExample {",
+  "shouldRetriggerCpp": true
+}
+--------------------------------[        displayedFusedCursorPrediction       ]---------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/eventCallback.ets",
+  "lineNumberOneIndexed": 13,
+  "text": "}\n}\n\n@Component\nstruct SwipeEventExample {",
+  "shouldRetriggerCpp": true
+}

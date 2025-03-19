@@ -1,0 +1,380 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "1198fe42-ecd4-47b9-9d42-dca1479867cb",
+    "timestamp": "2025-03-19T10:58:27.930Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/eventCallback.ets",
+          "diffHistory": [
+            "5-|    \n5+|      .onClick(() => {\n6+|        console.log('Button clicked')\n7+|      })\n",
+            "5-|      .onClick(() => {\n6-|        console.log('Button clicked')\n5+|      .onClick((event: ClickEvent) => {\n6+|        console.log('Button clicked', event)\n",
+            "15+|      .onLongPress((event: LongPressEvent) => {\n16+|        console.log('Button long pressed', event)\n17+|      })\n",
+            "25+|      .onSwipe((event: SwipeEvent) => {\n26+|        console.log('Button swiped', event)\n27+|      })\n",
+            "37+|      .onTouch((event: TouchEvent) => {\n38+|        console.log('Button touched', event)\n39+|      })\n",
+            "38-|        console.log('Button touched', event)\n",
+            "38-|        \n38+|        t\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/eventCallback.ets",
+        "contents": "@Component\nstruct ClickEventExample {\n  build() {\n    Button('Click me')\n      .onClick((event: ClickEvent) => {\n        console.log('Button clicked', event)\n      })\n  }\n}\n\n@Component\nstruct LongPressEventExample {\n  build() {\n    Button('Long press me')\n      .onLongPress((event: LongPressEvent) => {\n        console.log('Button long pressed', event)\n      })\n  }\n}\n\n@Component\nstruct SwipeEventExample {\n  build() {\n    Button('Swipe me')\n      .onSwipe((event: SwipeEvent) => {\n        console.log('Button swiped', event)\n      })\n  }\n}\n\n@Component\nstruct ChildComponent {\n  @Prop() onCustomEvent: () => void\n\n  build() {\n    Button('Touch me')\n      .onTouch((event: TouchEvent) => {\n        t\n      })\n  }\n}\n\n",
+        "cursorPosition": {
+          "line": 37,
+          "column": 9
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 20,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742381907971,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.39990234375,
+      "timeAtRequestSend": 1742381907971
+    },
+    "generateUuid": "1198fe42-ecd4-47b9-9d42-dca1479867cb",
+    "timestamp": "2025-03-19T10:58:27.973Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "      .onTouch((event: TouchEvent) => {\n        this",
+      "rangeToReplace": {
+        "startLineNumber": 37,
+        "endLineNumberInclusive": 41
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "1198fe42-ecd4-47b9-9d42-dca1479867cb",
+    "timestamp": "2025-03-19T10:58:28.319Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "1198fe42-ecd4-47b9-9d42-dca1479867cb",
+    "timestamp": "2025-03-19T10:58:28.320Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "1198fe42-ecd4-47b9-9d42-dca1479867cb",
+    "timestamp": "2025-03-19T10:58:28.344Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "on"
+    },
+    "generationUUID": "1198fe42-ecd4-47b9-9d42-dca1479867cb",
+    "timestamp": "2025-03-19T10:58:28.353Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Custom"
+    },
+    "generationUUID": "1198fe42-ecd4-47b9-9d42-dca1479867cb",
+    "timestamp": "2025-03-19T10:58:28.361Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Event()"
+    },
+    "generationUUID": "1198fe42-ecd4-47b9-9d42-dca1479867cb",
+    "timestamp": "2025-03-19T10:58:28.371Z"
+  },
+  {
+    "firstChunkValue": "      .onTouch((event: TouchEvent) => {\n        this.onCustomEvent()\n      })\n  }\n}",
+    "generationUUID": "1198fe42-ecd4-47b9-9d42-dca1479867cb",
+    "timestamp": "2025-03-19T10:58:28.379Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "1198fe42-ecd4-47b9-9d42-dca1479867cb",
+    "timestamp": "2025-03-19T10:58:28.379Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "      .onTouch((event: TouchEvent) => {\n        this.onCustomEvent()\n      })\n  }\n}"
+    },
+    "generationUUID": "1198fe42-ecd4-47b9-9d42-dca1479867cb",
+    "timestamp": "2025-03-19T10:58:28.382Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "042c742e-ae31-4e33-94c8-e1af789ab976",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/eventCallback.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/eventCallback.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/eventCallback.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 20,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 20,
+      "monotonicallyIncreasingSuggestionId": 15,
+      "range": {
+        "startLineNumber": 37,
+        "startColumn": 1,
+        "endLineNumberInclusive": 41,
+        "endColumn": 2
+      },
+      "replaceText": "      .onTouch((event: TouchEvent) => {\n        this.onCustomEvent()\n      })\n  }\n}",
+      "originalText": "      .onTouch((event: TouchEvent) => {\n        t\n      })\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 37,
+        "startColumn": 1,
+        "endLineNumberInclusive": 41,
+        "endColumn": 2
+      },
+      "diffText": "      .onTouch((event: TouchEvent) => {\n        this.onCustomEvent()\n      })\n  }\n}",
+      "fullOriginalText": "      .onTouch((event: TouchEvent) => {\n        t\n      })\n  }\n}",
+      "suggestionTriggerTime": 1742381907920.2,
+      "greens": [],
+      "source": "typing",
+      "requestId": "1198fe42-ecd4-47b9-9d42-dca1479867cb",
+      "selection": {
+        "startLineNumber": 37,
+        "startColumn": 1,
+        "endLineNumberInclusive": 41,
+        "endColumn": 2
+      },
+      "undoRedoGroup": {
+        "id": 15,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "1198fe42-ecd4-47b9-9d42-dca1479867cb",
+    "timestamp": "2025-03-19T10:58:28.383Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "     "
+    },
+    "generationUUID": "1198fe42-ecd4-47b9-9d42-dca1479867cb",
+    "timestamp": "2025-03-19T10:58:28.390Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " })\n  }\n}"
+    },
+    "generationUUID": "1198fe42-ecd4-47b9-9d42-dca1479867cb",
+    "timestamp": "2025-03-19T10:58:28.397Z"
+  },
+  {
+    "fullText": "      .onTouch((event: TouchEvent) => {\n        this.onCustomEvent()\n      })\n  }\n}",
+    "generationUUID": "1198fe42-ecd4-47b9-9d42-dca1479867cb",
+    "timestamp": "2025-03-19T10:58:28.422Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "      .onTouch((event: TouchEvent) => {\n        this.onCustomEvent()\n      })\n  }\n}"
+    },
+    "fullText": "      .onTouch((event: TouchEvent) => {\n        this.onCustomEvent()\n      })\n  }\n}",
+    "generationUUID": "1198fe42-ecd4-47b9-9d42-dca1479867cb",
+    "timestamp": "2025-03-19T10:58:28.422Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "generationUUID": "1198fe42-ecd4-47b9-9d42-dca1479867cb",
+    "timestamp": "2025-03-19T10:58:28.422Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "1198fe42-ecd4-47b9-9d42-dca1479867cb",
+    "timestamp": "2025-03-19T10:58:28.423Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "4cecaf67-b749-4f12-a0fe-9a8113235fa0",
+    "generationUUID": "1198fe42-ecd4-47b9-9d42-dca1479867cb",
+    "timestamp": "2025-03-19T10:58:28.577Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "      .onTouch((event: TouchEvent) => {\n        this.onCustomEvent()\n      })\n  }\n}"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "4cecaf67-b749-4f12-a0fe-9a8113235fa0",
+    "generationUUID": "1198fe42-ecd4-47b9-9d42-dca1479867cb",
+    "timestamp": "2025-03-19T10:58:28.578Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "4cecaf67-b749-4f12-a0fe-9a8113235fa0",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T10:58:28.579Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "1198fe42-ecd4-47b9-9d42-dca1479867cb",
+    "timestamp": "2025-03-19T10:58:28.579Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "042c742e-ae31-4e33-94c8-e1af789ab976",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/eventCallback.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/eventCallback.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/eventCallback.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 20,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 20,
+      "monotonicallyIncreasingSuggestionId": 15,
+      "range": {
+        "startLineNumber": 37,
+        "startColumn": 1,
+        "endLineNumberInclusive": 41,
+        "endColumn": 2
+      },
+      "replaceText": "      .onTouch((event: TouchEvent) => {\n        this.onCustomEvent()\n      })\n  }\n}",
+      "originalText": "      .onTouch((event: TouchEvent) => {\n        t\n      })\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 37,
+        "startColumn": 1,
+        "endLineNumberInclusive": 41,
+        "endColumn": 2
+      },
+      "diffText": "      .onTouch((event: TouchEvent) => {\n        this.onCustomEvent()\n      })\n  }\n}",
+      "fullOriginalText": "      .onTouch((event: TouchEvent) => {\n        t\n      })\n  }\n}",
+      "suggestionTriggerTime": 1742381907920.2,
+      "greens": [],
+      "source": "typing",
+      "requestId": "1198fe42-ecd4-47b9-9d42-dca1479867cb",
+      "selection": {
+        "startLineNumber": 37,
+        "startColumn": 1,
+        "endLineNumberInclusive": 41,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "4cecaf67-b749-4f12-a0fe-9a8113235fa0",
+      "undoRedoGroup": {
+        "id": 15,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;100"
+    },
+    "generationUUID": "1198fe42-ecd4-47b9-9d42-dca1479867cb",
+    "timestamp": "2025-03-19T10:58:30.649Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "042c742e-ae31-4e33-94c8-e1af789ab976",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/eventCallback.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/eventCallback.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/eventCallback.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 20,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 20,
+      "monotonicallyIncreasingSuggestionId": 15,
+      "range": {
+        "startLineNumber": 37,
+        "startColumn": 1,
+        "endLineNumberInclusive": 41,
+        "endColumn": 2
+      },
+      "replaceText": "      .onTouch((event: TouchEvent) => {\n        this.onCustomEvent()\n      })\n  }\n}",
+      "originalText": "      .onTouch((event: TouchEvent) => {\n        t\n      })\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 37,
+        "startColumn": 1,
+        "endLineNumberInclusive": 41,
+        "endColumn": 2
+      },
+      "diffText": "      .onTouch((event: TouchEvent) => {\n        this.onCustomEvent()\n      })\n  }\n}",
+      "fullOriginalText": "      .onTouch((event: TouchEvent) => {\n        t\n      })\n  }\n}",
+      "suggestionTriggerTime": 1742381907920.2,
+      "greens": [],
+      "source": "typing",
+      "requestId": "1198fe42-ecd4-47b9-9d42-dca1479867cb",
+      "selection": {
+        "startLineNumber": 37,
+        "startColumn": 1,
+        "endLineNumberInclusive": 41,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "4cecaf67-b749-4f12-a0fe-9a8113235fa0",
+      "undoRedoGroup": {
+        "id": 15,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;100"
+    },
+    "generationUUID": "1198fe42-ecd4-47b9-9d42-dca1479867cb",
+    "timestamp": "2025-03-19T10:58:30.667Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "4cecaf67-b749-4f12-a0fe-9a8113235fa0",
+    "fusedCursorPrediction": null,
+    "oldText": "      .onTouch((event: TouchEvent) => {\n        t\n      })\n  }\n}",
+    "newText": "      .onTouch((event: TouchEvent) => {\n        this.onCustomEvent()\n      })\n  }\n}",
+    "timestamp": "2025-03-19T10:58:30.667Z"
+  }
+]
