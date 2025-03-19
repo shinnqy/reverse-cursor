@@ -1,0 +1,690 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+    "timestamp": "2025-03-19T08:48:50.740Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/basicComponent.ets",
+          "diffHistory": [
+            "1+|@Entry\n2+|@Component\n3+|struct BasicComponent {\n4+|  @State message: string = 'Hello, World!'\n5+|}\n6+|\n",
+            "4-|  @State message: string = 'Hello, World!'\n",
+            "4-|  \n4+|  build() {\n5+|    Column() {\n6+|      Text('Hello, World!')\n7+|    }\n8+|  }\n",
+            "6-|      Text('Hello, World!')\n6+|      Text(this.message)\n",
+            "4+|  @State message: string = 'Hello, World!'\n5+|\n8+|      Row\n10+|      }\n",
+            "8-|      Row\n9-|      Text(this.message)\n8+|      Row() {\n9+|        Text(this.message)\n11+|      .width('100%')\n12+|      .height(100)\n13+|      .backgroundColor('#000000')\n14+|      .justifyContent(FlexAlign.Center)\n15+|      .alignItems(ItemAlign.Center)\n16+|\n17+|  S\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/basicComponent.ets",
+        "contents": "@Entry\n@Component\nstruct BasicComponent {\n  @State message: string = 'Hello, World!'\n\n  build() {\n    Column() {\n      Row() {\n        Text(this.message)\n      }\n      .width('100%')\n      .height(100)\n      .backgroundColor('#000000')\n      .justifyContent(FlexAlign.Center)\n      .alignItems(ItemAlign.Center)\n\n  S\n    }\n  }\n}\n\n",
+        "cursorPosition": {
+          "line": 16,
+          "column": 3
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 26,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742374130782,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.199951171875,
+      "timeAtRequestSend": 1742374130782
+    },
+    "generateUuid": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+    "timestamp": "2025-03-19T08:48:50.784Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+    "timestamp": "2025-03-19T08:48:51.214Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "      .alignItems(ItemAlign.Center)\n\n     ",
+      "rangeToReplace": {
+        "startLineNumber": 15,
+        "endLineNumberInclusive": 20
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+    "timestamp": "2025-03-19T08:48:51.221Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Stack"
+    },
+    "generationUUID": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+    "timestamp": "2025-03-19T08:48:51.223Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "()"
+    },
+    "generationUUID": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+    "timestamp": "2025-03-19T08:48:51.224Z"
+  },
+  {
+    "firstChunkValue": "      .alignItems(ItemAlign.Center)\n\n      Stack() {\n    }\n  }\n}",
+    "generationUUID": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+    "timestamp": "2025-03-19T08:48:51.230Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "      .alignItems(ItemAlign.Center)\n\n      Stack() {\n    }\n  }\n}"
+    },
+    "generationUUID": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+    "timestamp": "2025-03-19T08:48:51.231Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "a1016006-f61a-427a-bb9e-3e989efe0af4",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 26,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 26,
+      "monotonicallyIncreasingSuggestionId": 21,
+      "range": {
+        "startLineNumber": 15,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "replaceText": "      .alignItems(ItemAlign.Center)\n\n      Stack() {\n    }\n  }\n}",
+      "originalText": "      .alignItems(ItemAlign.Center)\n\n  S\n    }\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 15,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "diffText": "      .alignItems(ItemAlign.Center)\n\n      Stack() {\n    }\n  }\n}",
+      "fullOriginalText": "      .alignItems(ItemAlign.Center)\n\n  S\n    }\n  }\n}",
+      "suggestionTriggerTime": 1742374130697.5,
+      "greens": [],
+      "source": "typing",
+      "requestId": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+      "selection": {
+        "startLineNumber": 15,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "undoRedoGroup": {
+        "id": 21,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+    "timestamp": "2025-03-19T08:48:51.232Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {\n       "
+    },
+    "generationUUID": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+    "timestamp": "2025-03-19T08:48:51.232Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Text('"
+    },
+    "generationUUID": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+    "timestamp": "2025-03-19T08:48:51.243Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Hello"
+    },
+    "generationUUID": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+    "timestamp": "2025-03-19T08:48:51.257Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ", World!')\n       "
+    },
+    "generationUUID": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+    "timestamp": "2025-03-19T08:48:51.268Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Text"
+    },
+    "generationUUID": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+    "timestamp": "2025-03-19T08:48:51.284Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "('"
+    },
+    "generationUUID": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+    "timestamp": "2025-03-19T08:48:51.295Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Hello, World!')\n       "
+    },
+    "generationUUID": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+    "timestamp": "2025-03-19T08:48:51.309Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Text('Hello"
+    },
+    "generationUUID": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+    "timestamp": "2025-03-19T08:48:51.319Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ","
+    },
+    "generationUUID": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+    "timestamp": "2025-03-19T08:48:51.331Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " World!"
+    },
+    "generationUUID": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+    "timestamp": "2025-03-19T08:48:51.345Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "')"
+    },
+    "generationUUID": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+    "timestamp": "2025-03-19T08:48:51.358Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n     "
+    },
+    "generationUUID": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+    "timestamp": "2025-03-19T08:48:51.372Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " }"
+    },
+    "generationUUID": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+    "timestamp": "2025-03-19T08:48:51.384Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n      .width('100"
+    },
+    "generationUUID": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+    "timestamp": "2025-03-19T08:48:51.395Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "%"
+    },
+    "generationUUID": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+    "timestamp": "2025-03-19T08:48:51.406Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "')\n     "
+    },
+    "generationUUID": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+    "timestamp": "2025-03-19T08:48:51.424Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ."
+    },
+    "generationUUID": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+    "timestamp": "2025-03-19T08:48:51.434Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "height"
+    },
+    "generationUUID": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+    "timestamp": "2025-03-19T08:48:51.445Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "(100)\n   "
+    },
+    "generationUUID": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+    "timestamp": "2025-03-19T08:48:51.462Z"
+  },
+  {
+    "fullText": "      .alignItems(ItemAlign.Center)\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }\n      .width('100%')\n      .height(100)\n    }\n  }\n}",
+    "generationUUID": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+    "timestamp": "2025-03-19T08:48:51.476Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "      .alignItems(ItemAlign.Center)\n\n      Stack() {\n    }\n  }\n}"
+    },
+    "fullText": "      .alignItems(ItemAlign.Center)\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }\n      .width('100%')\n      .height(100)\n    }\n  }\n}",
+    "generationUUID": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+    "timestamp": "2025-03-19T08:48:51.477Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "79eeb084-d053-4062-855f-e3e0dd9b32db",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 26,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 27,
+      "monotonicallyIncreasingSuggestionId": 22,
+      "range": {
+        "startLineNumber": 15,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "replaceText": "      .alignItems(ItemAlign.Center)\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }\n      .width('100%')\n      .height(100)\n    }\n  }\n}",
+      "originalText": "      .alignItems(ItemAlign.Center)\n\n      Stack() {\n    }\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 15,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "diffText": "      .alignItems(ItemAlign.Center)\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }\n      .width('100%')\n      .height(100)\n    }\n  }\n}",
+      "fullOriginalText": "      .alignItems(ItemAlign.Center)\n\n      Stack() {\n    }\n  }\n}",
+      "suggestionTriggerTime": 1742374130697.5,
+      "greens": [],
+      "source": "typing",
+      "requestId": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+      "selection": {
+        "startLineNumber": 15,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "bf8e2337-95d3-43ba-b34f-dd3db0544904",
+      "undoRedoGroup": {
+        "id": 22,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+    "timestamp": "2025-03-19T08:48:51.478Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " }\n  }\n}"
+    },
+    "generationUUID": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+    "timestamp": "2025-03-19T08:48:51.479Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "bf8e2337-95d3-43ba-b34f-dd3db0544904",
+    "generationUUID": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+    "timestamp": "2025-03-19T08:48:51.479Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+    "timestamp": "2025-03-19T08:48:51.480Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "      .alignItems(ItemAlign.Center)\n\n      Stack() {\n    }\n  }\n}"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "bf8e2337-95d3-43ba-b34f-dd3db0544904",
+    "generationUUID": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+    "timestamp": "2025-03-19T08:48:51.480Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "bf8e2337-95d3-43ba-b34f-dd3db0544904",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T08:48:51.480Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+    "timestamp": "2025-03-19T08:48:51.481Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "a1016006-f61a-427a-bb9e-3e989efe0af4",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 26,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 26,
+      "monotonicallyIncreasingSuggestionId": 21,
+      "range": {
+        "startLineNumber": 15,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "replaceText": "      .alignItems(ItemAlign.Center)\n\n      Stack() {\n    }\n  }\n}",
+      "originalText": "      .alignItems(ItemAlign.Center)\n\n  S\n    }\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 15,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "diffText": "      .alignItems(ItemAlign.Center)\n\n      Stack() {\n    }\n  }\n}",
+      "fullOriginalText": "      .alignItems(ItemAlign.Center)\n\n  S\n    }\n  }\n}",
+      "suggestionTriggerTime": 1742374130697.5,
+      "greens": [],
+      "source": "typing",
+      "requestId": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+      "selection": {
+        "startLineNumber": 15,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "undoRedoGroup": {
+        "id": 21,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;116",
+      "onAcceptDisplayId": "79eeb084-d053-4062-855f-e3e0dd9b32db"
+    },
+    "generationUUID": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+    "timestamp": "2025-03-19T08:48:51.934Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "a1016006-f61a-427a-bb9e-3e989efe0af4",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 26,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 26,
+      "monotonicallyIncreasingSuggestionId": 21,
+      "range": {
+        "startLineNumber": 15,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "replaceText": "      .alignItems(ItemAlign.Center)\n\n      Stack() {\n    }\n  }\n}",
+      "originalText": "      .alignItems(ItemAlign.Center)\n\n  S\n    }\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 15,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "diffText": "      .alignItems(ItemAlign.Center)\n\n      Stack() {\n    }\n  }\n}",
+      "fullOriginalText": "      .alignItems(ItemAlign.Center)\n\n  S\n    }\n  }\n}",
+      "suggestionTriggerTime": 1742374130697.5,
+      "greens": [],
+      "source": "typing",
+      "requestId": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+      "selection": {
+        "startLineNumber": 15,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "undoRedoGroup": {
+        "id": 21,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;116",
+      "onAcceptDisplayId": "79eeb084-d053-4062-855f-e3e0dd9b32db"
+    },
+    "generationUUID": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+    "timestamp": "2025-03-19T08:48:51.948Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "79eeb084-d053-4062-855f-e3e0dd9b32db",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 26,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 27,
+      "monotonicallyIncreasingSuggestionId": 22,
+      "range": {
+        "startLineNumber": 15,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "replaceText": "      .alignItems(ItemAlign.Center)\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }\n      .width('100%')\n      .height(100)\n    }\n  }\n}",
+      "originalText": "      .alignItems(ItemAlign.Center)\n\n      Stack() {\n    }\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 15,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "diffText": "      .alignItems(ItemAlign.Center)\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }\n      .width('100%')\n      .height(100)\n    }\n  }\n}",
+      "fullOriginalText": "      .alignItems(ItemAlign.Center)\n\n      Stack() {\n    }\n  }\n}",
+      "suggestionTriggerTime": 1742374130697.5,
+      "greens": [],
+      "source": "typing",
+      "requestId": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+      "selection": {
+        "startLineNumber": 15,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "bf8e2337-95d3-43ba-b34f-dd3db0544904",
+      "undoRedoGroup": {
+        "id": 22,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+    "timestamp": "2025-03-19T08:48:51.949Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "79eeb084-d053-4062-855f-e3e0dd9b32db",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 26,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 27,
+      "monotonicallyIncreasingSuggestionId": 22,
+      "range": {
+        "startLineNumber": 15,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "replaceText": "      .alignItems(ItemAlign.Center)\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }\n      .width('100%')\n      .height(100)\n    }\n  }\n}",
+      "originalText": "      .alignItems(ItemAlign.Center)\n\n      Stack() {\n    }\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 15,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "diffText": "      .alignItems(ItemAlign.Center)\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }\n      .width('100%')\n      .height(100)\n    }\n  }\n}",
+      "fullOriginalText": "      .alignItems(ItemAlign.Center)\n\n      Stack() {\n    }\n  }\n}",
+      "suggestionTriggerTime": 1742374130697.5,
+      "greens": [],
+      "source": "typing",
+      "requestId": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+      "selection": {
+        "startLineNumber": 15,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "bf8e2337-95d3-43ba-b34f-dd3db0544904",
+      "undoRedoGroup": {
+        "id": 22,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;122"
+    },
+    "generationUUID": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+    "timestamp": "2025-03-19T08:48:53.389Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "79eeb084-d053-4062-855f-e3e0dd9b32db",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 26,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 27,
+      "monotonicallyIncreasingSuggestionId": 22,
+      "range": {
+        "startLineNumber": 15,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "replaceText": "      .alignItems(ItemAlign.Center)\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }\n      .width('100%')\n      .height(100)\n    }\n  }\n}",
+      "originalText": "      .alignItems(ItemAlign.Center)\n\n      Stack() {\n    }\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 15,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "diffText": "      .alignItems(ItemAlign.Center)\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }\n      .width('100%')\n      .height(100)\n    }\n  }\n}",
+      "fullOriginalText": "      .alignItems(ItemAlign.Center)\n\n      Stack() {\n    }\n  }\n}",
+      "suggestionTriggerTime": 1742374130697.5,
+      "greens": [],
+      "source": "typing",
+      "requestId": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+      "selection": {
+        "startLineNumber": 15,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "bf8e2337-95d3-43ba-b34f-dd3db0544904",
+      "undoRedoGroup": {
+        "id": 22,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;122"
+    },
+    "generationUUID": "fadf2791-b2c1-426f-99e3-88b50f17a96a",
+    "timestamp": "2025-03-19T08:48:53.411Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "bf8e2337-95d3-43ba-b34f-dd3db0544904",
+    "fusedCursorPrediction": null,
+    "oldText": "      .alignItems(ItemAlign.Center)\n\n      Stack() {\n    }\n  }\n}",
+    "newText": "      .alignItems(ItemAlign.Center)\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }\n      .width('100%')\n      .height(100)\n    }\n  }\n}",
+    "timestamp": "2025-03-19T08:48:53.411Z"
+  }
+]

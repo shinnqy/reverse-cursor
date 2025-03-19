@@ -1,0 +1,719 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:06.695Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/basicComponent.ets",
+          "diffHistory": [
+            "1+|@Entry\n2+|@Component\n3+|struct BasicComponent {\n4+|  @State message: string = 'Hello, World!'\n5+|}\n6+|\n",
+            "4-|  @State message: string = 'Hello, World!'\n",
+            "4-|  \n4+|  build() {\n5+|    Column() {\n6+|      Text('Hello, World!')\n7+|    }\n8+|  }\n",
+            "6-|      Text('Hello, World!')\n6+|      Text(this.message)\n",
+            "4+|  @State message: string = 'Hello, World!'\n5+|\n8+|      Row\n10+|      }\n",
+            "8-|      Row\n9-|      Text(this.message)\n8+|      Row() {\n9+|        Text(this.message)\n11+|      .width('100%')\n12+|      .height(100)\n13+|      .backgroundColor('#000000')\n14+|      .justifyContent(FlexAlign.Center)\n15+|      .alignItems(ItemAlign.Center)\n16+|\n17+|      Stack() {\n18+|        Text('Hello, World!')\n19+|        Text('Hello, World!')\n20+|        Text('Hello, World!')\n21+|      }\n22+|      .width('100%')\n23+|      .height(100)\n",
+            "16-|      \n17-|      \n17+|      B\n18+|\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/basicComponent.ets",
+        "contents": "@Entry\n@Component\nstruct BasicComponent {\n  @State message: string = 'Hello, World!'\n\n  build() {\n    Column() {\n      Row() {\n        Text(this.message)\n      }\n      .width('100%')\n      .height(100)\n      .backgroundColor('#000000')\n      .justifyContent(FlexAlign.Center)\n      .alignItems(ItemAlign.Center)\n\n      B\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }\n      .width('100%')\n      .height(100)\n    }\n  }\n}\n\n",
+        "cursorPosition": {
+          "line": 16,
+          "column": 7
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 31,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742374146738,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 53.5,
+      "timeAtRequestSend": 1742374146738
+    },
+    "generateUuid": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:06.739Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:07.083Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n      Button",
+      "rangeToReplace": {
+        "startLineNumber": 16,
+        "endLineNumberInclusive": 23
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:07.084Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "()"
+    },
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:07.101Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {\n        Text('Click"
+    },
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:07.112Z"
+  },
+  {
+    "firstChunkValue": "\n      Button() {\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }",
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:07.114Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\n      Button() {\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }"
+    },
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:07.115Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "ce080b1b-5858-4830-9799-b3a4ed07aced",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 31,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 31,
+      "monotonicallyIncreasingSuggestionId": 24,
+      "range": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumberInclusive": 23,
+        "endColumn": 8
+      },
+      "replaceText": "\n      Button() {\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }",
+      "originalText": "\n      B\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }",
+      "startingSuggestionRange": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumberInclusive": 23,
+        "endColumn": 8
+      },
+      "diffText": "\n      Button() {\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }",
+      "fullOriginalText": "\n      B\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }",
+      "suggestionTriggerTime": 1742374146649.2998,
+      "greens": [],
+      "source": "typing",
+      "requestId": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+      "selection": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumberInclusive": 23,
+        "endColumn": 8
+      },
+      "undoRedoGroup": {
+        "id": 24,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumber": 23,
+        "endColumn": 8
+      },
+      "trackedText": "\n      Bu\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }"
+    },
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:07.116Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " me"
+    },
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:07.125Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "')"
+    },
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:07.136Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n      }"
+    },
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:07.147Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n     "
+    },
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:07.156Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ."
+    },
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:07.167Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "width"
+    },
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:07.177Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "('100%')\n     "
+    },
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:07.189Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " .height"
+    },
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:07.200Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "(100)\n     "
+    },
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:07.210Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ."
+    },
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:07.222Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "backgroundColor"
+    },
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:07.233Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "('#000000')"
+    },
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:07.245Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:07.257Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "      .justify"
+    },
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:07.269Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Content(FlexAlign.Center)\n"
+    },
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:07.280Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "     "
+    },
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:07.291Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ."
+    },
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:07.302Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "align"
+    },
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:07.314Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Items(ItemAlign.Center)\n"
+    },
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:07.323Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:07.334Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "     "
+    },
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:07.345Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Stack() {\n        Text('Hello"
+    },
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:07.357Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ", World!')\n       "
+    },
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:07.366Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Text('Hello, World!')\n"
+    },
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:07.375Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "       "
+    },
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:07.389Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Text('Hello, World!')\n"
+    },
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:07.396Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "     "
+    },
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:07.409Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " }"
+    },
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:07.422Z"
+  },
+  {
+    "fullText": "\n      Button() {\n        Text('Click me')\n      }\n      .width('100%')\n      .height(100)\n      .backgroundColor('#000000')\n      .justifyContent(FlexAlign.Center)\n      .alignItems(ItemAlign.Center)\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }",
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:07.435Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\n      Button() {\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }"
+    },
+    "fullText": "\n      Button() {\n        Text('Click me')\n      }\n      .width('100%')\n      .height(100)\n      .backgroundColor('#000000')\n      .justifyContent(FlexAlign.Center)\n      .alignItems(ItemAlign.Center)\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }",
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:07.435Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "a029121c-cde7-479c-bcc0-f12a3bc136bd",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 31,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 33,
+      "monotonicallyIncreasingSuggestionId": 26,
+      "range": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumberInclusive": 23,
+        "endColumn": 8
+      },
+      "replaceText": "\n      Button() {\n        Text('Click me')\n      }\n      .width('100%')\n      .height(100)\n      .backgroundColor('#000000')\n      .justifyContent(FlexAlign.Center)\n      .alignItems(ItemAlign.Center)\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }",
+      "originalText": "\n      Button() {\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }",
+      "startingSuggestionRange": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumberInclusive": 23,
+        "endColumn": 8
+      },
+      "diffText": "\n      Button() {\n        Text('Click me')\n      }\n      .width('100%')\n      .height(100)\n      .backgroundColor('#000000')\n      .justifyContent(FlexAlign.Center)\n      .alignItems(ItemAlign.Center)\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }",
+      "fullOriginalText": "\n      Button() {\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }",
+      "suggestionTriggerTime": 1742374146649.2998,
+      "greens": [],
+      "source": "typing",
+      "requestId": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+      "selection": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumberInclusive": 23,
+        "endColumn": 8
+      },
+      "fusedCursorPredictionId": "a5759e2a-6107-4b68-8e06-e28d868f1797",
+      "undoRedoGroup": {
+        "id": 26,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:07.436Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:07.436Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "a5759e2a-6107-4b68-8e06-e28d868f1797",
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:07.440Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\n      Button() {\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "a5759e2a-6107-4b68-8e06-e28d868f1797",
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:07.441Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "a5759e2a-6107-4b68-8e06-e28d868f1797",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T08:49:07.441Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:07.441Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "ce080b1b-5858-4830-9799-b3a4ed07aced",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 31,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 31,
+      "monotonicallyIncreasingSuggestionId": 24,
+      "range": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumberInclusive": 23,
+        "endColumn": 8
+      },
+      "replaceText": "\n      Button() {\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }",
+      "originalText": "\n      B\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }",
+      "startingSuggestionRange": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumberInclusive": 23,
+        "endColumn": 8
+      },
+      "diffText": "\n      Button() {\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }",
+      "fullOriginalText": "\n      B\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }",
+      "suggestionTriggerTime": 1742374146649.2998,
+      "greens": [],
+      "source": "typing",
+      "requestId": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+      "selection": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumberInclusive": 23,
+        "endColumn": 8
+      },
+      "undoRedoGroup": {
+        "id": 24,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumber": 23,
+        "endColumn": 8
+      },
+      "trackedText": "\n      Bu\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }",
+      "decorationId": "b;151",
+      "onAcceptDisplayId": "a029121c-cde7-479c-bcc0-f12a3bc136bd"
+    },
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:11.980Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "ce080b1b-5858-4830-9799-b3a4ed07aced",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 31,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 31,
+      "monotonicallyIncreasingSuggestionId": 24,
+      "range": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumberInclusive": 23,
+        "endColumn": 8
+      },
+      "replaceText": "\n      Button() {\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }",
+      "originalText": "\n      B\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }",
+      "startingSuggestionRange": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumberInclusive": 23,
+        "endColumn": 8
+      },
+      "diffText": "\n      Button() {\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }",
+      "fullOriginalText": "\n      B\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }",
+      "suggestionTriggerTime": 1742374146649.2998,
+      "greens": [],
+      "source": "typing",
+      "requestId": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+      "selection": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumberInclusive": 23,
+        "endColumn": 8
+      },
+      "undoRedoGroup": {
+        "id": 24,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumber": 23,
+        "endColumn": 8
+      },
+      "trackedText": "\n      Bu\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }",
+      "decorationId": "b;151",
+      "onAcceptDisplayId": "a029121c-cde7-479c-bcc0-f12a3bc136bd"
+    },
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:11.997Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "a029121c-cde7-479c-bcc0-f12a3bc136bd",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 31,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 33,
+      "monotonicallyIncreasingSuggestionId": 26,
+      "range": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumberInclusive": 23,
+        "endColumn": 8
+      },
+      "replaceText": "\n      Button() {\n        Text('Click me')\n      }\n      .width('100%')\n      .height(100)\n      .backgroundColor('#000000')\n      .justifyContent(FlexAlign.Center)\n      .alignItems(ItemAlign.Center)\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }",
+      "originalText": "\n      Button() {\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }",
+      "startingSuggestionRange": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumberInclusive": 23,
+        "endColumn": 8
+      },
+      "diffText": "\n      Button() {\n        Text('Click me')\n      }\n      .width('100%')\n      .height(100)\n      .backgroundColor('#000000')\n      .justifyContent(FlexAlign.Center)\n      .alignItems(ItemAlign.Center)\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }",
+      "fullOriginalText": "\n      Button() {\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }",
+      "suggestionTriggerTime": 1742374146649.2998,
+      "greens": [],
+      "source": "typing",
+      "requestId": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+      "selection": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumberInclusive": 23,
+        "endColumn": 8
+      },
+      "fusedCursorPredictionId": "a5759e2a-6107-4b68-8e06-e28d868f1797",
+      "undoRedoGroup": {
+        "id": 26,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;159"
+    },
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:14.719Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "a029121c-cde7-479c-bcc0-f12a3bc136bd",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 31,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 33,
+      "monotonicallyIncreasingSuggestionId": 26,
+      "range": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumberInclusive": 23,
+        "endColumn": 8
+      },
+      "replaceText": "\n      Button() {\n        Text('Click me')\n      }\n      .width('100%')\n      .height(100)\n      .backgroundColor('#000000')\n      .justifyContent(FlexAlign.Center)\n      .alignItems(ItemAlign.Center)\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }",
+      "originalText": "\n      Button() {\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }",
+      "startingSuggestionRange": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumberInclusive": 23,
+        "endColumn": 8
+      },
+      "diffText": "\n      Button() {\n        Text('Click me')\n      }\n      .width('100%')\n      .height(100)\n      .backgroundColor('#000000')\n      .justifyContent(FlexAlign.Center)\n      .alignItems(ItemAlign.Center)\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }",
+      "fullOriginalText": "\n      Button() {\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }",
+      "suggestionTriggerTime": 1742374146649.2998,
+      "greens": [],
+      "source": "typing",
+      "requestId": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+      "selection": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumberInclusive": 23,
+        "endColumn": 8
+      },
+      "fusedCursorPredictionId": "a5759e2a-6107-4b68-8e06-e28d868f1797",
+      "undoRedoGroup": {
+        "id": 26,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;159"
+    },
+    "generationUUID": "fc92e57e-2a1f-46ec-8a4f-e4844f2cfb96",
+    "timestamp": "2025-03-19T08:49:14.742Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "a5759e2a-6107-4b68-8e06-e28d868f1797",
+    "fusedCursorPrediction": null,
+    "oldText": "\n      Button() {\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }",
+    "newText": "\n      Button() {\n        Text('Click me')\n      }\n      .width('100%')\n      .height(100)\n      .backgroundColor('#000000')\n      .justifyContent(FlexAlign.Center)\n      .alignItems(ItemAlign.Center)\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }",
+    "timestamp": "2025-03-19T08:49:14.743Z"
+  }
+]

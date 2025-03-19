@@ -1,0 +1,96 @@
+{"line":16,"column":3}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+struct BasicComponent {
+  @State message: string = 'Hello, World!'
+
+  build() {
+    Column() {
+      Row() {
+        Text(this.message)
+      }
+      .width('100%')
+      .height(100)
+      .backgroundColor('#000000')
+      .justifyContent(FlexAlign.Center)
+      .alignItems(ItemAlign.Center)
+
+  S[ToFill]
+    }
+  }
+}
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+      .alignItems(ItemAlign.Center)
+
+      Stack() {
+    }
+  }
+}
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+@Entry
+@Component
+struct BasicComponent {
+  @State message: string = 'Hello, World!'
+
+  build() {
+    Column() {
+      Row() {
+        Text(this.message)
+      }
+      .width('100%')
+      .height(100)
+      .backgroundColor('#000000')
+      .justifyContent(FlexAlign.Center)
+      .alignItems(ItemAlign.Center)
+
+      Stack() {
+    }
+  }
+}
+
+
+-------------------------------[                   fullText                  ]--------------------------------
+      .alignItems(ItemAlign.Center)
+
+      Stack() {
+        Text('Hello, World!')
+        Text('Hello, World!')
+        Text('Hello, World!')
+      }
+      .width('100%')
+      .height(100)
+    }
+  }
+}
+-------------------------------[         replacedContentsWithFullText         ]--------------------------------
+@Entry
+@Component
+struct BasicComponent {
+  @State message: string = 'Hello, World!'
+
+  build() {
+    Column() {
+      Row() {
+        Text(this.message)
+      }
+      .width('100%')
+      .height(100)
+      .backgroundColor('#000000')
+      .justifyContent(FlexAlign.Center)
+      .alignItems(ItemAlign.Center)
+
+      Stack() {
+        Text('Hello, World!')
+        Text('Hello, World!')
+        Text('Hello, World!')
+      }
+
+      .width('100%')
+      .height(100)
+    }
+  }
+}

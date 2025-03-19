@@ -1,0 +1,76 @@
+{"line":58,"column":10}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+struct BasicComponent {
+  @State message: string = 'Hello, World!'
+
+  build() {
+    Column() {
+      Row() {
+        Text(this.message)
+      }
+      .width('100%')
+      .height(100)
+      .backgroundColor('#000000')
+      .justifyContent(FlexAlign.Center)
+      .alignItems(ItemAlign.Center)
+
+      Button() {
+        Text('Click me')
+      }
+      .width('100%')
+      .height(100)
+      .backgroundColor('#000000')
+      .justifyContent(FlexAlign.Center)
+      .alignItems(ItemAlign.Center)
+
+      Stack() {
+        Text('Hello, World!')
+        Text('Hello, World!')
+        Text('Hello, World!')
+      }
+      .width('100%')
+      .height(100)
+    }
+  }
+}
+
+@Component
+struct ListExample {
+  @State items: string[] = ['Item 1', 'Item 2', 'Item 3']
+
+  build() {
+    List() {
+      ForEach(this.items, (item) => {
+        ListItem() {
+          Text(item)
+        }
+        .height(100)
+        .width('100%')
+        .backgroundColor('#000000')
+        .justifyContent(FlexAlign.Center)
+        .alignItems(ItemAlign.Center)
+      })
+    }
+    .width('100%')
+    .height(100)
+  }
+}
+
+@Component[ToFill]
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+@Component
+struct GridExample {
+-------------------------------[                   fullText                  ]--------------------------------
+
+@Component
+struct GridExample {
+  @State items: string[] = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6']
+
+  build() {
+    Grid() {
+  

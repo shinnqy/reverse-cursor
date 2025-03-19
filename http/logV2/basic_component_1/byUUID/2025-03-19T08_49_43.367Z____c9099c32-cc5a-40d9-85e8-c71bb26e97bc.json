@@ -1,0 +1,242 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "c9099c32-cc5a-40d9-85e8-c71bb26e97bc",
+    "timestamp": "2025-03-19T08:49:43.367Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/basicComponent.ets",
+          "diffHistory": [
+            "1+|@Entry\n2+|@Component\n3+|struct BasicComponent {\n4+|  @State message: string = 'Hello, World!'\n5+|}\n6+|\n",
+            "4-|  @State message: string = 'Hello, World!'\n",
+            "4-|  \n4+|  build() {\n5+|    Column() {\n6+|      Text('Hello, World!')\n7+|    }\n8+|  }\n",
+            "6-|      Text('Hello, World!')\n6+|      Text(this.message)\n",
+            "4+|  @State message: string = 'Hello, World!'\n5+|\n8+|      Row\n10+|      }\n",
+            "8-|      Row\n9-|      Text(this.message)\n8+|      Row() {\n9+|        Text(this.message)\n11+|      .width('100%')\n12+|      .height(100)\n13+|      .backgroundColor('#000000')\n14+|      .justifyContent(FlexAlign.Center)\n15+|      .alignItems(ItemAlign.Center)\n16+|\n17+|      Stack() {\n18+|        Text('Hello, World!')\n19+|        Text('Hello, World!')\n20+|        Text('Hello, World!')\n21+|      }\n22+|      .width('100%')\n23+|      .height(100)\n",
+            "16-|      \n17-|      \n17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .width('100%')\n21+|      .height(100)\n22+|      .backgroundColor('#000000')\n23+|      .justifyContent(FlexAlign.Center)\n24+|      .alignItems(ItemAlign.Center)\n25+|\n",
+            "37+|@Entry\n38+|@Component\n39+|struct BasicComponent {\n40+|  @State message: string = 'Hello, World!'\n41+|  \n42+|}\n",
+            "37-|@Entry\n",
+            "38-|struct BasicComponent {\n38+|struct Li {\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/basicComponent.ets",
+        "contents": "@Entry\n@Component\nstruct BasicComponent {\n  @State message: string = 'Hello, World!'\n\n  build() {\n    Column() {\n      Row() {\n        Text(this.message)\n      }\n      .width('100%')\n      .height(100)\n      .backgroundColor('#000000')\n      .justifyContent(FlexAlign.Center)\n      .alignItems(ItemAlign.Center)\n\n      Button() {\n        Text('Click me')\n      }\n      .width('100%')\n      .height(100)\n      .backgroundColor('#000000')\n      .justifyContent(FlexAlign.Center)\n      .alignItems(ItemAlign.Center)\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }\n      .width('100%')\n      .height(100)\n    }\n  }\n}\n\n@Component\nstruct Li {\n  @State message: string = 'Hello, World!'\n\n}\n",
+        "cursorPosition": {
+          "line": 37,
+          "column": 9
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 44,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742374183416,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 53.10009765625,
+      "timeAtRequestSend": 1742374183416
+    },
+    "generateUuid": "c9099c32-cc5a-40d9-85e8-c71bb26e97bc",
+    "timestamp": "2025-03-19T08:49:43.417Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "c9099c32-cc5a-40d9-85e8-c71bb26e97bc",
+    "timestamp": "2025-03-19T08:49:43.779Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n@Component\nstruct List",
+      "rangeToReplace": {
+        "startLineNumber": 36,
+        "endLineNumberInclusive": 40
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "c9099c32-cc5a-40d9-85e8-c71bb26e97bc",
+    "timestamp": "2025-03-19T08:49:43.780Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Component"
+    },
+    "generationUUID": "c9099c32-cc5a-40d9-85e8-c71bb26e97bc",
+    "timestamp": "2025-03-19T08:49:43.805Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {\n "
+    },
+    "generationUUID": "c9099c32-cc5a-40d9-85e8-c71bb26e97bc",
+    "timestamp": "2025-03-19T08:49:43.815Z"
+  },
+  {
+    "firstChunkValue": "\n@Component\nstruct ListComponent {\n  @State message: string = 'Hello, World!'\n",
+    "generationUUID": "c9099c32-cc5a-40d9-85e8-c71bb26e97bc",
+    "timestamp": "2025-03-19T08:49:43.815Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\n@Component\nstruct ListComponent {\n  @State message: string = 'Hello, World!'\n"
+    },
+    "generationUUID": "c9099c32-cc5a-40d9-85e8-c71bb26e97bc",
+    "timestamp": "2025-03-19T08:49:43.816Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " @State message: string = 'Hello"
+    },
+    "generationUUID": "c9099c32-cc5a-40d9-85e8-c71bb26e97bc",
+    "timestamp": "2025-03-19T08:49:43.827Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ", World!'\n"
+    },
+    "generationUUID": "c9099c32-cc5a-40d9-85e8-c71bb26e97bc",
+    "timestamp": "2025-03-19T08:49:43.837Z"
+  },
+  {
+    "fullText": "\n@Component\nstruct ListComponent {\n  @State message: string = 'Hello, World!'\n",
+    "generationUUID": "c9099c32-cc5a-40d9-85e8-c71bb26e97bc",
+    "timestamp": "2025-03-19T08:49:43.859Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\n@Component\nstruct ListComponent {\n  @State message: string = 'Hello, World!'\n"
+    },
+    "fullText": "\n@Component\nstruct ListComponent {\n  @State message: string = 'Hello, World!'\n",
+    "generationUUID": "c9099c32-cc5a-40d9-85e8-c71bb26e97bc",
+    "timestamp": "2025-03-19T08:49:43.860Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "c9099c32-cc5a-40d9-85e8-c71bb26e97bc",
+    "timestamp": "2025-03-19T08:49:43.860Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && currentSuggestion uniqueId is different && need to create newSuggestion according fullText",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "d647d866-fbde-420b-9b38-8ff55c616c73",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 44,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 46,
+      "monotonicallyIncreasingSuggestionId": 37,
+      "range": {
+        "startLineNumber": 36,
+        "startColumn": 1,
+        "endLineNumberInclusive": 40,
+        "endColumn": 1
+      },
+      "replaceText": "\n@Component\nstruct ListComponent {\n  @State message: string = 'Hello, World!'\n",
+      "originalText": "\n@Component\nstruct List {\n  @State message: string = 'Hello, World!'\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 36,
+        "startColumn": 1,
+        "endLineNumberInclusive": 40,
+        "endColumn": 1
+      },
+      "diffText": "\n@Component\nstruct ListComponent {\n  @State message: string = 'Hello, World!'\n",
+      "fullOriginalText": "\n@Component\nstruct List {\n  @State message: string = 'Hello, World!'\n",
+      "suggestionTriggerTime": 1742374183326.7998,
+      "greens": [],
+      "source": "typing",
+      "requestId": "c9099c32-cc5a-40d9-85e8-c71bb26e97bc",
+      "selection": {
+        "startLineNumber": 36,
+        "startColumn": 1,
+        "endLineNumberInclusive": 40,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "00c70626-8c6d-459d-af46-c4d0db090dae",
+      "undoRedoGroup": {
+        "id": 37,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "c9099c32-cc5a-40d9-85e8-c71bb26e97bc",
+    "timestamp": "2025-03-19T08:49:43.860Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "c9099c32-cc5a-40d9-85e8-c71bb26e97bc",
+    "timestamp": "2025-03-19T08:49:43.899Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "00c70626-8c6d-459d-af46-c4d0db090dae",
+    "generationUUID": "c9099c32-cc5a-40d9-85e8-c71bb26e97bc",
+    "timestamp": "2025-03-19T08:49:43.909Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\n@Component\nstruct ListComponent {\n  @State message: string = 'Hello, World!'\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "00c70626-8c6d-459d-af46-c4d0db090dae",
+    "generationUUID": "c9099c32-cc5a-40d9-85e8-c71bb26e97bc",
+    "timestamp": "2025-03-19T08:49:43.910Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "00c70626-8c6d-459d-af46-c4d0db090dae",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T08:49:43.910Z"
+  }
+]

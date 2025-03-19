@@ -1,0 +1,137 @@
+You're an expert in ArkTS. Your task is to help the user update the code around current cursor position.
+
+## Recent Actions
+Here is what the user has been doing from the earliest to the latest:
+
+File: entry/src/main/ets/utils/basicComponent.ets
+added the code `@Entry` in line 1
+added the code `@Component` in line 2
+added the code `struct BasicComponent {` in line 3
+added the code `  @State message: string = 'Hello, World!'` in line 4
+added the code `}` in line 5
+added the code `` in line 6
+
+deleted the code `  @State message: string = 'Hello, World!'` in line 4
+
+deleted the code `  ` in line 4
+added the code `  build() {` in line 4
+added the code `    Column() {` in line 5
+added the code `      Text('Hello, World!')` in line 6
+added the code `    }` in line 7
+added the code `  }` in line 8
+
+deleted the code `      Text('Hello, World!')` in line 6
+added the code `      Text(this.message)` in line 6
+
+added the code `  @State message: string = 'Hello, World!'` in line 4
+added the code `` in line 5
+added the code `      Row` in line 8
+added the code `      }` in line 10
+
+deleted the code `      Row` in line 8
+deleted the code `      Text(this.message)` in line 9
+added the code `      Row() {` in line 8
+added the code `        Text(this.message)` in line 9
+added the code `      .width('100%')` in line 11
+added the code `      .height(100)` in line 12
+added the code `      .backgroundColor('#000000')` in line 13
+added the code `      .justifyContent(FlexAlign.Center)` in line 14
+added the code `      .alignItems(ItemAlign.Center)` in line 15
+added the code `` in line 16
+added the code `      Stack() {` in line 17
+added the code `        Text('Hello, World!')` in line 18
+added the code `        Text('Hello, World!')` in line 19
+added the code `        Text('Hello, World!')` in line 20
+added the code `      }` in line 21
+added the code `      .width('100%')` in line 22
+added the code `      .height(100)` in line 23
+
+deleted the code `      ` in line 16
+deleted the code `      ` in line 17
+added the code `      Button() {` in line 17
+added the code `        Text('Click me')` in line 18
+added the code `      }` in line 19
+added the code `      .width('100%')` in line 20
+added the code `      .height(100)` in line 21
+added the code `      .backgroundColor('#000000')` in line 22
+added the code `      .justifyContent(FlexAlign.Center)` in line 23
+added the code `      .alignItems(ItemAlign.Center)` in line 24
+added the code `` in line 25
+
+added the code `@Entry` in line 37
+added the code `@Component` in line 38
+added the code `struct BasicComponent {` in line 39
+added the code `  @State message: string = 'Hello, World!'` in line 40
+added the code `  ` in line 41
+added the code `}` in line 42
+
+deleted the code `@Entry` in line 37
+
+deleted the code `struct BasicComponent {` in line 38
+added the code `struct ListExample {` in line 38
+
+
+## Current Code
+Here is the current code file path:
+entry/src/main/ets/utils/basicComponent.ets
+
+Here is the current code around the cursor position:
+
+```
+@Entry
+@Component
+struct BasicComponent {
+  @State message: string = 'Hello, World!'
+
+  build() {
+    Column() {
+      Row() {
+        Text(this.message)
+      }
+      .width('100%')
+      .height(100)
+      .backgroundColor('#000000')
+      .justifyContent(FlexAlign.Center)
+      .alignItems(ItemAlign.Center)
+
+      Button() {
+        Text('Click me')
+      }
+      .width('100%')
+      .height(100)
+      .backgroundColor('#000000')
+      .justifyContent(FlexAlign.Center)
+      .alignItems(ItemAlign.Center)
+
+      Stack() {
+        Text('Hello, World!')
+        Text('Hello, World!')
+<|editable_region_start|>
+        Text('Hello, World!')
+      }
+      .width('100%')
+      .height(100)
+    }
+  }
+}
+
+@Component
+struct ListExample {
+  @State message:<|current_cursor_position|> string = 'Hello, World!'
+
+}
+
+<|editable_region_end|>
+```
+
+## Task
+Rewrite the code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> according to the following requirements:
+1. Enforce code format strictly matching existing code style.
+2. Propagate naming convention changes to all related cases
+3. Preserve original functionality
+4. Apply changes to entire code regardless of cursor position
+5. Focus on code after cursor position at <|current_cursor_position|>
+
+# Output Format
+Return ONLY the rewritten code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> without any other words.
+Never use markdown formatting like ```. Return raw text only.
