@@ -1,0 +1,68 @@
+{"line":23,"column":4}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Component
+struct ChainCall {
+  build() {
+    Text('Hello, World!')
+      .width(100)
+      .height(100)
+      .background(Color.red)
+  }
+}
+
+@Component
+struct StyleModifier {
+  build() {
+    Text('Hello, World!')
+      .width(100)
+      .height(100)
+      .background(Color.red)
+  }
+}
+
+@Component
+struct LayoutModifier {
+  build() {
+    [ToFill]Text('Hello, World!')
+  }
+}
+-------------------------------[               firstChunkValue               ]--------------------------------
+struct LayoutModifier {
+  build() {
+    Text('Hello, World!')
+      .width(100)
+      .height(100)
+      .background(Color.red)
+  }
+}
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+@Component
+struct ChainCall {
+  build() {
+    Text('Hello, World!')
+      .width(100)
+      .height(100)
+      .background(Color.red)
+  }
+}
+
+@Component
+struct StyleModifier {
+  build() {
+    Text('Hello, World!')
+      .width(100)
+      .height(100)
+      .background(Color.red)
+  }
+}
+
+@Component
+struct LayoutModifier {
+  build() {
+    Text('Hello, World!')
+      .width(100)
+      .height(100)
+      .background(Color.red)
+  }
+}

@@ -1,0 +1,104 @@
+{"line":36,"column":12}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Component
+struct ChainCall {
+  build() {
+    Text('Hello, World!')
+      .width(100)
+      .height(100)
+      .background(Color.red)
+  }
+}
+
+@Component
+struct StyleModifier {
+  build() {
+    Text('Hello, World!')
+      .width(100)
+      .height(100)
+      .background(Color.red)
+      .fontSize(20)
+      .fontWeight(FontWeight.bold)
+      .fontFamily(FontFamily.monospace)
+      .fontStyle(FontStyle.italic)
+      .fontColor(Color.blue)
+      .fontOpacity(0.5)
+      .textAlign(TextAlign.center)
+  }
+}
+
+@Component
+struct LayoutModifier {
+  build() {
+    Text('Hello, World!')
+      .width(100)
+      .height(100)
+      .background(Color.red)
+      .alignItems(AlignItems.center)
+      .justifyContent(JustifyContent.center)
+      .flexG[ToFill]
+  }
+}
+-------------------------------[               firstChunkValue               ]--------------------------------
+      .height(100)
+      .background(Color.red)
+      .alignItems(AlignItems.center)
+      .justifyContent(JustifyContent.center)
+      .flexGrow(1)
+  }
+}
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+@Component
+struct ChainCall {
+  build() {
+    Text('Hello, World!')
+      .width(100)
+      .height(100)
+      .background(Color.red)
+  }
+}
+
+@Component
+struct StyleModifier {
+  build() {
+    Text('Hello, World!')
+      .width(100)
+      .height(100)
+      .background(Color.red)
+      .fontSize(20)
+      .fontWeight(FontWeight.bold)
+      .fontFamily(FontFamily.monospace)
+      .fontStyle(FontStyle.italic)
+      .fontColor(Color.blue)
+      .fontOpacity(0.5)
+      .textAlign(TextAlign.center)
+  }
+}
+
+@Component
+struct LayoutModifier {
+  build() {
+    Text('Hello, World!')
+      .width(100)
+      .height(100)
+      .background(Color.red)
+      .alignItems(AlignItems.center)
+      .justifyContent(JustifyContent.center)
+      .flexGrow(1)
+  }
+}
+-------------------------------[                   fullText                  ]--------------------------------
+      .height(100)
+      .background(Color.red)
+      .alignItems(AlignItems.center)
+      .justifyContent(JustifyContent.center)
+      .flexGrow(1)
+      .flexShrink(1)
+      .flexBasis(FlexBasis.auto)
+      .flexWrap(FlexWrap.wrap)
+      .flexDirection(FlexDirection.row)
+      .flexWrap(FlexWrap.wrap)
+      .flexDirection(FlexDirection.row)
+  }
+}

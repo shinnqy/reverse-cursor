@@ -1,0 +1,121 @@
+{"line":17,"column":8}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Component
+struct ChainCall {
+  build() {
+    Text('Hello, World!')
+      .width(100)
+      .height(100)
+      .background(Color.red)
+  }
+}
+
+@Component
+struct StyleModifier {
+  build() {
+    Text('Hello, World!')
+      .width(100)
+      .height(100)
+      .background(Color.red)
+      fo[ToFill]
+  }
+}
+
+@Component
+struct LayoutModifier {
+  build() {
+    Text('Hello, World!')
+      .width(100)
+      .height(100)
+      .background(Color.red)
+  }
+}
+-------------------------------[               firstChunkValue               ]--------------------------------
+      .width(100)
+      .height(100)
+      .background(Color.red)
+      .fontSize(20)
+  }
+}
+
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+@Component
+struct ChainCall {
+  build() {
+    Text('Hello, World!')
+      .width(100)
+      .height(100)
+      .background(Color.red)
+  }
+}
+
+@Component
+struct StyleModifier {
+  build() {
+    Text('Hello, World!')
+      .width(100)
+      .height(100)
+      .background(Color.red)
+      .fontSize(20)
+  }
+}
+
+@Component
+struct LayoutModifier {
+  build() {
+    Text('Hello, World!')
+      .width(100)
+      .height(100)
+      .background(Color.red)
+  }
+}
+-------------------------------[                   fullText                  ]--------------------------------
+      .width(100)
+      .height(100)
+      .background(Color.red)
+      .fontSize(20)
+      .fontWeight(FontWeight.bold)
+      .fontFamily(FontFamily.monospace)
+      .fontStyle(FontStyle.italic)
+      .fontColor(Color.blue)
+      .fontOpacity(0.5)
+      
+  }
+}
+
+-------------------------------[         replacedContentsWithFullText         ]--------------------------------
+@Component
+struct ChainCall {
+  build() {
+    Text('Hello, World!')
+      .width(100)
+      .height(100)
+      .background(Color.red)
+  }
+}
+
+@Component
+struct StyleModifier {
+  build() {
+    Text('Hello, World!')
+      .width(100)
+      .height(100)
+      .background(Color.red)
+      .fontSize(20)
+      .fontWeight(FontWeight.bold)
+      .fontFamily(FontFamily.monospace)
+      .fontStyle(FontStyle.italic)
+      .fontColor(Color.blue)
+struct LayoutModifier {
+  build() {
+    Text('Hello, World!')
+      .width(100)
+      .height(100)
+      .background(Color.red)
+  }
+}
+      .fontOpacity(0.5)
+      
+  }
+}

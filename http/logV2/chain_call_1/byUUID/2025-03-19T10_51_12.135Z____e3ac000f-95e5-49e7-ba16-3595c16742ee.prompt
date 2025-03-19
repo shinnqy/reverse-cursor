@@ -1,0 +1,91 @@
+You're an expert in ArkTS. Your task is to help the user update the code around current cursor position.
+
+## Recent Actions
+Here is what the user has been doing from the earliest to the latest:
+
+File: entry/src/main/ets/utils/chainCall.ets
+added the code `      .width(100)` in line 5
+added the code `      .height(100)` in line 6
+added the code `      .background(Color.red)` in line 7
+
+added the code `      .width(100)` in line 15
+added the code `      .height(100)` in line 16
+added the code `      .background(Color.red)` in line 17
+
+added the code `      .width(100)` in line 25
+added the code `      .height(100)` in line 26
+added the code `      .background(Color.red)` in line 27
+
+added the code `      fo` in line 18
+
+deleted the code `      fo` in line 18
+added the code `      .fontSize(20)` in line 18
+added the code `      .fontWeight(FontWeight.bold)` in line 19
+added the code `      .fontFamily(FontFamily.monospace)` in line 20
+added the code `      .fontStyle(FontStyle.italic)` in line 21
+added the code `      .fontColor(Color.blue)` in line 22
+added the code `      .fontOpacity(0.5)` in line 23
+added the code `      ` in line 24
+
+deleted the code `      ` in line 24
+added the code `` in line 24
+
+
+## Current Code
+Here is the current code file path:
+entry/src/main/ets/utils/chainCall.ets
+
+Here is the current code around the cursor position:
+
+```
+@Component
+struct ChainCall {
+  build() {
+    Text('Hello, World!')
+      .width(100)
+      .height(100)
+      .background(Color.red)
+  }
+}
+
+@Component
+struct StyleModifier {
+<|editable_region_start|>
+  build() {
+    Text('Hello, World!')
+      .width(100)
+      .height(100)
+      .background(Color.red)
+      .fontSize(20)
+      .fontWeight(FontWeight.bold)
+      .fontFamily(FontFamily.monospace)
+      .fontStyle(FontStyle.italic)
+      .fontColor(Color.blue)
+      .fontOpacity(0.5)<|current_cursor_position|>
+
+  }
+}
+
+@Component
+struct LayoutModifier {
+  build() {
+    Text('Hello, World!')
+      .width(100)
+      .height(100)
+<|editable_region_end|>
+      .background(Color.red)
+  }
+}
+```
+
+## Task
+Rewrite the code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> according to the following requirements:
+1. Enforce code format strictly matching existing code style.
+2. Propagate naming convention changes to all related cases
+3. Preserve original functionality
+4. Apply changes to entire code regardless of cursor position
+5. Focus on code after cursor position at <|current_cursor_position|>
+
+# Output Format
+Return ONLY the rewritten code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> without any other words.
+Never use markdown formatting like ```. Return raw text only.

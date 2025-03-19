@@ -1,0 +1,76 @@
+{"line":13,"column":0}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Component
+struct ChainCall {
+  build() {
+    Text('Hello, World!')
+      .width(100)
+      .height(100)
+      .background(Color.red)
+  }
+}
+
+@Component
+struct StyleModifier {
+  build() {
+[ToFill]    Text('Hello, World!')
+  }
+}
+
+@Component
+struct LayoutModifier {
+  build() {
+    Text('Hello, World!')
+  }
+}
+-------------------------------[               firstChunkValue               ]--------------------------------
+struct StyleModifier {
+  build() {
+    Text('Hello, World!')
+      .width(100)
+      .height(100)
+      .background(Color.red)
+  }
+}
+
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+@Component
+struct ChainCall {
+  build() {
+    Text('Hello, World!')
+      .width(100)
+      .height(100)
+      .background(Color.red)
+  }
+}
+
+@Component
+struct StyleModifier {
+  build() {
+    Text('Hello, World!')
+      .width(100)
+      .height(100)
+      .background(Color.red)
+  }
+struct LayoutModifier {
+  build() {
+    Text('Hello, World!')
+  }
+}
+}
+
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/chainCall.ets",
+  "lineNumberOneIndexed": 15,
+  "text": "}\n}\n",
+  "shouldRetriggerCpp": true
+}
+--------------------------------[        displayedFusedCursorPrediction       ]---------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/chainCall.ets",
+  "lineNumberOneIndexed": 15,
+  "text": "}\n}\n",
+  "shouldRetriggerCpp": true
+}
