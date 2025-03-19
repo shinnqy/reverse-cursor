@@ -1,0 +1,107 @@
+{"line":14,"column":4}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+struct Example {
+  @State count: number = 0
+
+  build() {
+    Button('Click me').onClick(() => {
+      this.count++
+    })
+  }
+}
+
+@Component
+struct ChildComponent {
+  @P[ToFill]
+
+  build() {
+    Text('Hello, world!')
+  }
+}
+
+@Component
+struct LinkChild {
+
+  build() {
+    Button('Click me')
+  }
+}
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+struct ChildComponent {
+  @Prop count: number
+
+  build() {
+    Text('Hello, world!')
+  }
+}
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+@Entry
+@Component
+struct Example {
+  @State count: number = 0
+
+  build() {
+    Button('Click me').onClick(() => {
+      this.count++
+    })
+  }
+}
+
+@Component
+struct ChildComponent {
+  @Prop count: number
+
+  build() {
+    Text('Hello, world!')
+  }
+}
+
+@Component
+struct LinkChild {
+
+  build() {
+    Button('Click me')
+  }
+}
+
+-------------------------------[                   fullText                  ]--------------------------------
+struct ChildComponent {
+  @Prop count: number
+
+  build() {
+    Text(this.count.toString())
+  }
+}
+-------------------------------[         replacedContentsWithFullText         ]--------------------------------
+@Entry
+@Component
+struct Example {
+  @State count: number = 0
+
+  build() {
+    Button('Click me').onClick(() => {
+      this.count++
+    })
+  }
+}
+
+@Component
+struct ChildComponent {
+  @Prop count: number
+
+  build() {
+    Text(this.count.toString())
+  }
+}
+
+@Component
+struct LinkChild {
+
+  build() {
+    Button('Click me')
+  }
+}

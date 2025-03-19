@@ -1,0 +1,37 @@
+{"line":3,"column":14}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+struct Example {
+  @State count[ToFill]: number = 0
+  
+  build() {
+    Text(this.count.toString())
+  }
+}
+
+@Component
+struct ChildComponent {
+
+  build() {
+    Text('Hello, world!')
+  }
+}
+
+@Component
+struct LinkChild {
+
+  build() {
+    Button('Click me')
+  }
+}
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+struct Example {
+  @State count: number = 0
+  
+  build() {
+    Text(this.count.toString())
+  }
+}

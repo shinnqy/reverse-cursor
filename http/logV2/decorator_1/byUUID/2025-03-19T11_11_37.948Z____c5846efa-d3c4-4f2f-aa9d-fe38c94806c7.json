@@ -1,0 +1,332 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "c5846efa-d3c4-4f2f-aa9d-fe38c94806c7",
+    "timestamp": "2025-03-19T11:11:37.948Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/decorator.ets",
+          "diffHistory": [
+            "4+|  @State message: string = 'Hello, world!'\n",
+            "7-|    Text('Hello, world!')\n7+|    Text(this.message)\n",
+            "4-|  @State message: string = 'Hello, world!'\n4+|  @State count: string = 'Hello, world!'\n",
+            "7-|    Text(this.message)\n7+|    Text(this.count.toString())\n",
+            "4-|  @State count: string = 'Hello, world!'\n4+|  @State count: number = 0\n",
+            "7-|    Text(this.count.toString())\n",
+            "5-|  \n5+|\n7+|    Button('Click me').onClick(() => {\n8+|      this.count++\n9+|    })\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/decorator.ets",
+        "contents": "@Entry\n@Component\nstruct Example {\n  @State count: number = 0\n\n  build() {\n    Button('Click me').onClick(() => {\n      this.count++\n    })\n  }\n}\n\n@Component\nstruct ChildComponent {\n\n  build() {\n    Text('Hello, world!')\n  }\n}\n\n@Component\nstruct LinkChild {\n\n  build() {\n    Button('Click me')\n  }\n}\n",
+        "cursorPosition": {
+          "line": 13,
+          "column": 23
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 23,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1742382697992,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.60009765625,
+      "timeAtRequestSend": 1742382697992
+    },
+    "generateUuid": "c5846efa-d3c4-4f2f-aa9d-fe38c94806c7",
+    "timestamp": "2025-03-19T11:11:37.994Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "c5846efa-d3c4-4f2f-aa9d-fe38c94806c7",
+    "timestamp": "2025-03-19T11:11:38.355Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n@Component\nstruct ChildComponent {\n ",
+      "rangeToReplace": {
+        "startLineNumber": 12,
+        "endLineNumberInclusive": 19
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "c5846efa-d3c4-4f2f-aa9d-fe38c94806c7",
+    "timestamp": "2025-03-19T11:11:38.356Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " @"
+    },
+    "generationUUID": "c5846efa-d3c4-4f2f-aa9d-fe38c94806c7",
+    "timestamp": "2025-03-19T11:11:38.375Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "State count: number = 0\n"
+    },
+    "generationUUID": "c5846efa-d3c4-4f2f-aa9d-fe38c94806c7",
+    "timestamp": "2025-03-19T11:11:38.387Z"
+  },
+  {
+    "firstChunkValue": "\n@Component\nstruct ChildComponent {\n  @State count: number = 0\n  build() {\n    Text('Hello, world!')\n  }\n}",
+    "generationUUID": "c5846efa-d3c4-4f2f-aa9d-fe38c94806c7",
+    "timestamp": "2025-03-19T11:11:38.387Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\n@Component\nstruct ChildComponent {\n  @State count: number = 0\n  build() {\n    Text('Hello, world!')\n  }\n}"
+    },
+    "generationUUID": "c5846efa-d3c4-4f2f-aa9d-fe38c94806c7",
+    "timestamp": "2025-03-19T11:11:38.389Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "8b392e85-eedf-4ecb-85b5-b366aed19029",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 23,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 23,
+      "monotonicallyIncreasingSuggestionId": 16,
+      "range": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 19,
+        "endColumn": 2
+      },
+      "replaceText": "\n@Component\nstruct ChildComponent {\n  @State count: number = 0\n  build() {\n    Text('Hello, world!')\n  }\n}",
+      "originalText": "\n@Component\nstruct ChildComponent {\n\n  build() {\n    Text('Hello, world!')\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 19,
+        "endColumn": 2
+      },
+      "diffText": "\n@Component\nstruct ChildComponent {\n  @State count: number = 0\n  build() {\n    Text('Hello, world!')\n  }\n}",
+      "fullOriginalText": "\n@Component\nstruct ChildComponent {\n\n  build() {\n    Text('Hello, world!')\n  }\n}",
+      "suggestionTriggerTime": 1742382697941.2,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "c5846efa-d3c4-4f2f-aa9d-fe38c94806c7",
+      "selection": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 19,
+        "endColumn": 2
+      },
+      "undoRedoGroup": {
+        "id": 16,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "c5846efa-d3c4-4f2f-aa9d-fe38c94806c7",
+    "timestamp": "2025-03-19T11:11:38.390Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "c5846efa-d3c4-4f2f-aa9d-fe38c94806c7",
+    "timestamp": "2025-03-19T11:11:38.401Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "c5846efa-d3c4-4f2f-aa9d-fe38c94806c7",
+    "timestamp": "2025-03-19T11:11:38.419Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " build() {\n    Button('Click"
+    },
+    "generationUUID": "c5846efa-d3c4-4f2f-aa9d-fe38c94806c7",
+    "timestamp": "2025-03-19T11:11:38.429Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " me').onClick(() => {\n     "
+    },
+    "generationUUID": "c5846efa-d3c4-4f2f-aa9d-fe38c94806c7",
+    "timestamp": "2025-03-19T11:11:38.443Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " this.count++\n   "
+    },
+    "generationUUID": "c5846efa-d3c4-4f2f-aa9d-fe38c94806c7",
+    "timestamp": "2025-03-19T11:11:38.454Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " })\n "
+    },
+    "generationUUID": "c5846efa-d3c4-4f2f-aa9d-fe38c94806c7",
+    "timestamp": "2025-03-19T11:11:38.470Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " }"
+    },
+    "generationUUID": "c5846efa-d3c4-4f2f-aa9d-fe38c94806c7",
+    "timestamp": "2025-03-19T11:11:38.476Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n}"
+    },
+    "generationUUID": "c5846efa-d3c4-4f2f-aa9d-fe38c94806c7",
+    "timestamp": "2025-03-19T11:11:38.489Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "c5846efa-d3c4-4f2f-aa9d-fe38c94806c7",
+    "timestamp": "2025-03-19T11:11:38.512Z"
+  },
+  {
+    "fullText": "\n@Component\nstruct ChildComponent {\n  @State count: number = 0\n\n  build() {\n    Button('Click me').onClick(() => {\n      this.count++\n    })\n  }\n}",
+    "generationUUID": "c5846efa-d3c4-4f2f-aa9d-fe38c94806c7",
+    "timestamp": "2025-03-19T11:11:38.512Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "fea76b78-7767-4016-ab8e-f4becb914cd6",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 23,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 24,
+      "monotonicallyIncreasingSuggestionId": 17,
+      "range": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 19,
+        "endColumn": 2
+      },
+      "replaceText": "\n@Component\nstruct ChildComponent {\n  @State count: number = 0\n\n  build() {\n    Button('Click me').onClick(() => {\n      this.count++\n    })\n  }\n}",
+      "originalText": "\n@Component\nstruct ChildComponent {\n  @State count: number = 0\n  build() {\n    Text('Hello, world!')\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 19,
+        "endColumn": 2
+      },
+      "diffText": "\n@Component\nstruct ChildComponent {\n  @State count: number = 0\n\n  build() {\n    Button('Click me').onClick(() => {\n      this.count++\n    })\n  }\n}",
+      "fullOriginalText": "\n@Component\nstruct ChildComponent {\n  @State count: number = 0\n  build() {\n    Text('Hello, world!')\n  }\n}",
+      "suggestionTriggerTime": 1742382697941.2,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "c5846efa-d3c4-4f2f-aa9d-fe38c94806c7",
+      "selection": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 19,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "5fe139e2-f89e-46dd-8023-6981478feeeb",
+      "undoRedoGroup": {
+        "id": 17,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "c5846efa-d3c4-4f2f-aa9d-fe38c94806c7",
+    "timestamp": "2025-03-19T11:11:38.518Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\n@Component\nstruct ChildComponent {\n  @State count: number = 0\n  build() {\n    Text('Hello, world!')\n  }\n}"
+    },
+    "fullText": "\n@Component\nstruct ChildComponent {\n  @State count: number = 0\n\n  build() {\n    Button('Click me').onClick(() => {\n      this.count++\n    })\n  }\n}",
+    "generationUUID": "c5846efa-d3c4-4f2f-aa9d-fe38c94806c7",
+    "timestamp": "2025-03-19T11:11:38.519Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "c5846efa-d3c4-4f2f-aa9d-fe38c94806c7",
+    "timestamp": "2025-03-19T11:11:38.603Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "5fe139e2-f89e-46dd-8023-6981478feeeb",
+    "generationUUID": "c5846efa-d3c4-4f2f-aa9d-fe38c94806c7",
+    "timestamp": "2025-03-19T11:11:38.607Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\n@Component\nstruct ChildComponent {\n  @State count: number = 0\n  build() {\n    Text('Hello, world!')\n  }\n}"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "5fe139e2-f89e-46dd-8023-6981478feeeb",
+    "generationUUID": "c5846efa-d3c4-4f2f-aa9d-fe38c94806c7",
+    "timestamp": "2025-03-19T11:11:38.608Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "5fe139e2-f89e-46dd-8023-6981478feeeb",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T11:11:38.608Z"
+  }
+]
