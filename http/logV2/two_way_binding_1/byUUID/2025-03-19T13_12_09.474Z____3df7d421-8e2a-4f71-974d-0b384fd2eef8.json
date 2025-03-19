@@ -1,0 +1,118 @@
+[
+  {
+    "intent": "cursor_prediction",
+    "generationUUID": "3df7d421-8e2a-4f71-974d-0b384fd2eef8",
+    "timestamp": "2025-03-19T13:12:09.474Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/twoWayBinding.ets",
+          "diffHistory": [
+            "16+|  @Link t\n",
+            "16-|  @Link t\n16+|  @Link target: number = 0;\n",
+            "22-|          //\n22+|          this.target++;\n",
+            "9-|      LinkChildComponent()\n9+|      LinkChildComponent({ target: this.parentCount })\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/twoWayBinding.ets",
+        "contents": "@Entry\n@Component\nstruct ParentComponent {\n  @State parentCount: number = 0;\n\n  build() {\n    Column() {\n      Text(this.parentCount.toString())\n      LinkChildComponent({ target: this.parentCount })\n    }\n  }\n}\n\n@Component\nstruct LinkChildComponent {\n  @Link target: number = 0;\n\n  build() {\n    Column() {\n      Button()\n        .onClick(() => {\n          this.target++;\n        })\n    }\n  }\n}\n\ninterface User {\n  name: string;\n  age: number;\n}\n\n@Component\nstruct ComplexBindingExample {\n  @State user: User = { name: 'John', age: 30 };\n\n  build() {\n    Column() {\n      Text(this.user.name)\n    }\n  }\n}\n\n@Component\nstruct UserEditor {\n\n  build() {\n    Column() {\n      Text(\"\")\n      Text(\"\")\n    }\n  }\n}\n\n\n",
+        "cursorPosition": {
+          "line": 15,
+          "column": 2
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 14,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "cursor_prediction"
+      },
+      "clientTime": 1742389929485,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 12.89990234375,
+      "timeAtRequestSend": 1742389929485
+    },
+    "generateUuid": "3df7d421-8e2a-4f71-974d-0b384fd2eef8",
+    "timestamp": "2025-03-19T13:12:09.490Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "3df7d421-8e2a-4f71-974d-0b384fd2eef8",
+    "timestamp": "2025-03-19T13:12:09.863Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "@Component\nstruct LinkChildComponent {\n  @Link target: number = 0;\n",
+      "rangeToReplace": {
+        "startLineNumber": 14,
+        "endLineNumberInclusive": 17
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "3df7d421-8e2a-4f71-974d-0b384fd2eef8",
+    "timestamp": "2025-03-19T13:12:09.864Z"
+  },
+  {
+    "firstChunkValue": "@Component\nstruct LinkChildComponent {\n  @Link target: number = 0;\n",
+    "generationUUID": "3df7d421-8e2a-4f71-974d-0b384fd2eef8",
+    "timestamp": "2025-03-19T13:12:09.875Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": false
+    },
+    "generationUUID": "3df7d421-8e2a-4f71-974d-0b384fd2eef8",
+    "timestamp": "2025-03-19T13:12:09.876Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "3df7d421-8e2a-4f71-974d-0b384fd2eef8",
+    "timestamp": "2025-03-19T13:12:09.876Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "e78de619-1f86-4282-a3cf-b382db784220",
+    "generationUUID": "3df7d421-8e2a-4f71-974d-0b384fd2eef8",
+    "timestamp": "2025-03-19T13:12:09.954Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "3df7d421-8e2a-4f71-974d-0b384fd2eef8",
+    "timestamp": "2025-03-19T13:12:09.954Z"
+  }
+]

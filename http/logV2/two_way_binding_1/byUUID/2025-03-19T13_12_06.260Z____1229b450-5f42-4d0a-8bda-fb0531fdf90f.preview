@@ -1,0 +1,142 @@
+{"line":8,"column":9}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+struct ParentComponent {
+  @State parentCount: number = 0;
+
+  build() {
+    Column() {
+      Text(this.parentCount.toString())
+      Lin[ToFill]kChildComponent()
+    }
+  }
+}
+
+@Component
+struct LinkChildComponent {
+  @Link target: number = 0;
+
+  build() {
+    Column() {
+      Button()
+        .onClick(() => {
+          this.target++;
+        })
+    }
+  }
+}
+
+interface User {
+  name: string;
+  age: number;
+}
+
+@Component
+struct ComplexBindingExample {
+  @State user: User = { name: 'John', age: 30 };
+
+  build() {
+    Column() {
+      Text(this.user.name)
+    }
+  }
+}
+
+@Component
+struct UserEditor {
+
+  build() {
+    Column() {
+      Text("")
+      Text("")
+    }
+  }
+}
+
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+      Text(this.parentCount.toString())
+      LinkChildComponent({ target: this.parentCount })
+    }
+  }
+}
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+@Entry
+@Component
+struct ParentComponent {
+  @State parentCount: number = 0;
+
+  build() {
+    Column() {
+      Text(this.parentCount.toString())
+      LinkChildComponent({ target: this.parentCount })
+    }
+  }
+}
+
+@Component
+struct LinkChildComponent {
+  @Link target: number = 0;
+
+  build() {
+    Column() {
+      Button()
+        .onClick(() => {
+          this.target++;
+        })
+    }
+  }
+}
+
+interface User {
+  name: string;
+  age: number;
+}
+
+@Component
+struct ComplexBindingExample {
+  @State user: User = { name: 'John', age: 30 };
+
+  build() {
+    Column() {
+      Text(this.user.name)
+    }
+  }
+}
+
+@Component
+struct UserEditor {
+
+  build() {
+    Column() {
+      Text("")
+      Text("")
+    }
+  }
+}
+
+
+
+-------------------------------[                   fullText                  ]--------------------------------
+      Text(this.parentCount.toString())
+      LinkChildComponent({ target: this.parentCount })
+    }
+  }
+}
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/twoWayBinding.ets",
+  "lineNumberOneIndexed": 16,
+  "text": "@Link target: number = 0;\n\nbuild() {\nColumn() {\nButton()",
+  "shouldRetriggerCpp": false
+}
+--------------------------------[        displayedFusedCursorPrediction       ]---------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/twoWayBinding.ets",
+  "lineNumberOneIndexed": 16,
+  "text": "@Link target: number = 0;\n\nbuild() {\nColumn() {\nButton()",
+  "shouldRetriggerCpp": false
+}
