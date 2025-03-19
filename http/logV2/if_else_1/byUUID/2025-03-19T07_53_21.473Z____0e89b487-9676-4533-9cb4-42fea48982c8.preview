@@ -1,0 +1,42 @@
+{"line":3,"column":17}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+let status = 'active'
+
+if (status === 'active') {
+  let count = 10;[ToFill]
+} else {
+    console.log('inactive')
+}
+-------------------------------[               firstChunkValue               ]--------------------------------
+if (status === 'active') {
+  let count = 10;
+} else {
+  let count = 0;
+}
+
+console.log(count);
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+let status = 'active'
+
+if (status === 'active') {
+  let count = 10;
+} else {
+  let count = 0;
+}
+
+console.log(count);
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/ifElse1.ets",
+  "lineNumberOneIndexed": 1,
+  "text": "let status = 'active'\n\nif (status === 'active') {\nlet count = 10;\n} else {",
+  "shouldRetriggerCpp": true
+}
+--------------------------------[        displayedFusedCursorPrediction       ]---------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/ifElse1.ets",
+  "lineNumberOneIndexed": 1,
+  "text": "let status = 'active'\n\nif (status === 'active') {\nlet count = 10;\n} else {",
+  "shouldRetriggerCpp": true
+}

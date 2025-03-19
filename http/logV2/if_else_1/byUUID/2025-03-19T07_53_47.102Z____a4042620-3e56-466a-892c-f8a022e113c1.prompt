@@ -1,0 +1,71 @@
+You're an expert in ArkTS. Your task is to help the user update the code around current cursor position.
+
+## Recent Actions
+Here is what the user has been doing from the earliest to the latest:
+
+File: entry/src/main/ets/utils/ifElse1.ets
+added the code `let status = 'ac'` in line 1
+added the code `` in line 2
+added the code `if (status === 'active') {` in line 3
+added the code `    console.log('active')` in line 4
+added the code `} else {` in line 5
+added the code `    console.log('inactive')` in line 6
+added the code `}` in line 7
+
+deleted the code `let status = 'ac'` in line 1
+added the code `let status = 'active'` in line 1
+
+deleted the code `    console.log('active')` in line 4
+
+deleted the code `  ` in line 4
+added the code `  let count = 10;` in line 4
+
+deleted the code `    console.log('inactive')` in line 6
+deleted the code `}` in line 7
+added the code `    = 0;` in line 6
+added the code `}` in line 7
+added the code `` in line 8
+added the code `console.log(count);` in line 9
+
+deleted the code `    = 0;` in line 6
+added the code `  let count = 0;` in line 6
+
+deleted the code `console.log(count);` in line 9
+added the code `console.log(count);` in line 9
+added the code `` in line 10
+added the code `function printValue(value: string` in line 11
+
+
+## Current Code
+Here is the current code file path:
+entry/src/main/ets/utils/ifElse1.ets
+
+Here is the current code around the cursor position:
+
+```
+<|editable_region_start|>
+let status = 'active'
+
+if (status === 'active') {
+  let count = 10;
+} else {
+  let count = 0;
+}
+
+console.log(count);
+
+function printValue(value: string|<|current_cursor_position|>)
+<|editable_region_end|>
+```
+
+## Task
+Rewrite the code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> according to the following requirements:
+1. Enforce code format strictly matching existing code style.
+2. Propagate naming convention changes to all related cases
+3. Preserve original functionality
+4. Apply changes to entire code regardless of cursor position
+5. Focus on code after cursor position at <|current_cursor_position|>
+
+# Output Format
+Return ONLY the rewritten code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> without any other words.
+Never use markdown formatting like ```. Return raw text only.

@@ -1,0 +1,336 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "5485517d-7b88-4c3e-8b1f-d7c76fd9665a",
+    "timestamp": "2025-03-19T07:54:44.236Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/ifElse1.ets",
+          "diffHistory": [
+            "1+|let status = 'ac'\n2+|\n3+|if (status === 'active') {\n4+|    console.log('active')\n5+|} else {\n6+|    console.log('inactive')\n7+|}\n",
+            "1-|let status = 'ac'\n1+|let status = 'active'\n",
+            "4-|    console.log('active')\n",
+            "4-|  \n4+|  let count = 10;\n",
+            "6-|    console.log('inactive')\n7-|}\n6+|    = 0;\n7+|}\n8+|\n9+|console.log(count);\n",
+            "6-|    = 0;\n6+|  let count = 0;\n",
+            "9-|console.log(count);\n9+|console.log(count);\n10+|\n11+|function printValue(value: string | number) {\n12+|  if (typeof value === 'string') {\n13+|    console.log(value);\n14+|  } else {\n15+|    console.log(value);\n16+|  }\n17+|}\n",
+            "13-|    console.log(value);\n13+|    console.log(value.toUpperCase());\n",
+            "15-|    console.log(value);\n15+|    console.log(value.toFixed(2));\n",
+            "17+|}\n18+|\n19+|class Cat {\n20+|  \n",
+            "20-|  \n21-|}\n20+|  meow() {}\n21+|}\n22+|class Dog {\n23+|  bark() {}\n24+|}\n25+|\n26+|function printAnimal(animal: Cat | Dog) {\n27+|  if (animal instanceof Cat) {\n28+|    animal.meow();\n29+|  } else {\n30+|    animal.bark();\n31+|  }\n32+|}\n33+|\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/ifElse1.ets",
+        "contents": "let status = 'active'\n\nif (status === 'active') {\n  let count = 10;\n} else {\n  let count = 0;\n}\n\nconsole.log(count);\n\nfunction printValue(value: string | number) {\n  if (typeof value === 'string') {\n    console.log(value.toUpperCase());\n  } else {\n    console.log(value.toFixed(2));\n  }\n}\n\nclass Cat {\n  meow() {}\n}\nclass Dog {\n  bark() {}\n}\n\nfunction printAnimal(animal: Cat | Dog) {\n  if (animal instanceof Cat) {\n    animal.meow();\n  } else {\n    animal.bark();\n  }\n}\n\n",
+        "cursorPosition": {
+          "line": 32,
+          "column": 0
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 129,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1742370884285,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.10009765625,
+      "timeAtRequestSend": 1742370884285
+    },
+    "generateUuid": "5485517d-7b88-4c3e-8b1f-d7c76fd9665a",
+    "timestamp": "2025-03-19T07:54:44.287Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "5485517d-7b88-4c3e-8b1f-d7c76fd9665a",
+    "timestamp": "2025-03-19T07:54:44.660Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}\n\nprint",
+      "rangeToReplace": {
+        "startLineNumber": 32,
+        "endLineNumberInclusive": 34
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "5485517d-7b88-4c3e-8b1f-d7c76fd9665a",
+    "timestamp": "2025-03-19T07:54:44.662Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Animal"
+    },
+    "generationUUID": "5485517d-7b88-4c3e-8b1f-d7c76fd9665a",
+    "timestamp": "2025-03-19T07:54:44.700Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "(new"
+    },
+    "generationUUID": "5485517d-7b88-4c3e-8b1f-d7c76fd9665a",
+    "timestamp": "2025-03-19T07:54:44.701Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Cat"
+    },
+    "generationUUID": "5485517d-7b88-4c3e-8b1f-d7c76fd9665a",
+    "timestamp": "2025-03-19T07:54:44.702Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "());"
+    },
+    "generationUUID": "5485517d-7b88-4c3e-8b1f-d7c76fd9665a",
+    "timestamp": "2025-03-19T07:54:44.711Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nprint"
+    },
+    "generationUUID": "5485517d-7b88-4c3e-8b1f-d7c76fd9665a",
+    "timestamp": "2025-03-19T07:54:44.726Z"
+  },
+  {
+    "firstChunkValue": "}\n\nprintAnimal(new Cat());",
+    "generationUUID": "5485517d-7b88-4c3e-8b1f-d7c76fd9665a",
+    "timestamp": "2025-03-19T07:54:44.729Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "}\n\nprintAnimal(new Cat());"
+    },
+    "generationUUID": "5485517d-7b88-4c3e-8b1f-d7c76fd9665a",
+    "timestamp": "2025-03-19T07:54:44.734Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "a9845f19-3079-4669-9029-e3e390cabb29",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/ifElse1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/ifElse1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/ifElse1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 129,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 129,
+      "monotonicallyIncreasingSuggestionId": 91,
+      "range": {
+        "startLineNumber": 32,
+        "startColumn": 1,
+        "endLineNumberInclusive": 34,
+        "endColumn": 1
+      },
+      "replaceText": "}\n\nprintAnimal(new Cat());",
+      "originalText": "}\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 32,
+        "startColumn": 1,
+        "endLineNumberInclusive": 34,
+        "endColumn": 1
+      },
+      "diffText": "}\n\nprintAnimal(new Cat());",
+      "fullOriginalText": "}\n\n",
+      "suggestionTriggerTime": 1742370884234,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "5485517d-7b88-4c3e-8b1f-d7c76fd9665a",
+      "selection": {
+        "startLineNumber": 32,
+        "startColumn": 1,
+        "endLineNumberInclusive": 34,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 91,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "5485517d-7b88-4c3e-8b1f-d7c76fd9665a",
+    "timestamp": "2025-03-19T07:54:44.735Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Animal("
+    },
+    "generationUUID": "5485517d-7b88-4c3e-8b1f-d7c76fd9665a",
+    "timestamp": "2025-03-19T07:54:44.742Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "new"
+    },
+    "generationUUID": "5485517d-7b88-4c3e-8b1f-d7c76fd9665a",
+    "timestamp": "2025-03-19T07:54:44.757Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Dog"
+    },
+    "generationUUID": "5485517d-7b88-4c3e-8b1f-d7c76fd9665a",
+    "timestamp": "2025-03-19T07:54:44.765Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "5485517d-7b88-4c3e-8b1f-d7c76fd9665a",
+    "timestamp": "2025-03-19T07:54:44.806Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "());"
+    },
+    "generationUUID": "5485517d-7b88-4c3e-8b1f-d7c76fd9665a",
+    "timestamp": "2025-03-19T07:54:44.807Z"
+  },
+  {
+    "fullText": "}\n\nprintAnimal(new Cat());\nprintAnimal(new Dog());\n",
+    "generationUUID": "5485517d-7b88-4c3e-8b1f-d7c76fd9665a",
+    "timestamp": "2025-03-19T07:54:44.831Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "}\n\nprintAnimal(new Cat());"
+    },
+    "fullText": "}\n\nprintAnimal(new Cat());\nprintAnimal(new Dog());\n",
+    "generationUUID": "5485517d-7b88-4c3e-8b1f-d7c76fd9665a",
+    "timestamp": "2025-03-19T07:54:44.831Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "7f98fa2d-6fb6-4a80-b52d-c1f09a92467f",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/ifElse1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/ifElse1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/ifElse1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 129,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 130,
+      "monotonicallyIncreasingSuggestionId": 92,
+      "range": {
+        "startLineNumber": 32,
+        "startColumn": 1,
+        "endLineNumberInclusive": 34,
+        "endColumn": 1
+      },
+      "replaceText": "}\n\nprintAnimal(new Cat());\nprintAnimal(new Dog());\n",
+      "originalText": "}\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 32,
+        "startColumn": 1,
+        "endLineNumberInclusive": 34,
+        "endColumn": 1
+      },
+      "diffText": "}\n\nprintAnimal(new Cat());\nprintAnimal(new Dog());\n",
+      "fullOriginalText": "}\n\n",
+      "suggestionTriggerTime": 1742370884234,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "5485517d-7b88-4c3e-8b1f-d7c76fd9665a",
+      "selection": {
+        "startLineNumber": 32,
+        "startColumn": 1,
+        "endLineNumberInclusive": 34,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "59154f3a-f7eb-42b4-b155-183e34836ab1",
+      "undoRedoGroup": {
+        "id": 92,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "5485517d-7b88-4c3e-8b1f-d7c76fd9665a",
+    "timestamp": "2025-03-19T07:54:44.832Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "5485517d-7b88-4c3e-8b1f-d7c76fd9665a",
+    "timestamp": "2025-03-19T07:54:44.832Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "59154f3a-f7eb-42b4-b155-183e34836ab1",
+    "generationUUID": "5485517d-7b88-4c3e-8b1f-d7c76fd9665a",
+    "timestamp": "2025-03-19T07:54:45.150Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "}\n\nprintAnimal(new Cat());"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "59154f3a-f7eb-42b4-b155-183e34836ab1",
+    "generationUUID": "5485517d-7b88-4c3e-8b1f-d7c76fd9665a",
+    "timestamp": "2025-03-19T07:54:45.151Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "59154f3a-f7eb-42b4-b155-183e34836ab1",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T07:54:45.151Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "5485517d-7b88-4c3e-8b1f-d7c76fd9665a",
+    "timestamp": "2025-03-19T07:54:45.151Z"
+  }
+]
