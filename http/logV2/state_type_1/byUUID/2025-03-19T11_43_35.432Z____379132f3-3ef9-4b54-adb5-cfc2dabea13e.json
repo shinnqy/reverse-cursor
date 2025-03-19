@@ -1,0 +1,121 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "379132f3-3ef9-4b54-adb5-cfc2dabea13e",
+    "timestamp": "2025-03-19T11:43:35.432Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/stateType.ets",
+          "diffHistory": [
+            "4+|  @State score: number = 0\n",
+            "8+|      Text(this.score.toString())\n9-|      Text('Hello, world!')\n",
+            "4-|  @State score: number = 0\n4+|  @State score: number = 0;\n5+|  @State name: string = 'John';\n",
+            "10-|      Text('Hello, world!')\n10+|      Text(this.name.toUpperCase())\n",
+            "16+|\n18+|  @State user: { name: string; age: number } = { name: 'John', age: 30 };\n19+|\n",
+            "21-|      Text('Hello, world!')\n21+|      Text('Hello,UpperCase())\n22+|      Text(this.user.age.toString())\n",
+            "21-|      Text('Hello,UpperCase())\n21+|      Text(this.user.name.toUpperCase())\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/stateType.ets",
+        "contents": "@Entry\n@Component\nstruct BasicTypeExample {\n  @State score: number = 0;\n  @State name: string = 'John';\n\n  build() {\n    Column() {\n      Text(this.score.toString())\n      Text(this.name.toUpperCase())\n    }\n  }\n}\n\n@Component\nstruct ObjectTypeExample {\n  @State user: { name: string; age: number } = { name: 'John', age: 30 };\n\n  build() {\n    Column() {\n      Text(this.user.name.toUpperCase())\n      Text(this.user.age.toString())\n    }\n  }\n}\n\n@Component\nstruct ArrayTypeExample {\n  build() {\n    Column() {\n      Text('Hello, world!')\n    }\n  }\n}",
+        "cursorPosition": {
+          "line": 16,
+          "column": 5
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 50,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1742384615471,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50,
+      "timeAtRequestSend": 1742384615472
+    },
+    "generateUuid": "379132f3-3ef9-4b54-adb5-cfc2dabea13e",
+    "timestamp": "2025-03-19T11:43:35.473Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "379132f3-3ef9-4b54-adb5-cfc2dabea13e",
+    "timestamp": "2025-03-19T11:43:36.394Z"
+  },
+  {
+    "firstChunkValue": "struct ObjectTypeExample {\n  @State user: { name: string; age: number } = { name: 'John', age: 30 };\n",
+    "generationUUID": "379132f3-3ef9-4b54-adb5-cfc2dabea13e",
+    "timestamp": "2025-03-19T11:43:36.395Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": false
+    },
+    "generationUUID": "379132f3-3ef9-4b54-adb5-cfc2dabea13e",
+    "timestamp": "2025-03-19T11:43:36.395Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "ffc1dcf0-f9bf-4687-aee3-944994af0edc",
+    "generationUUID": "379132f3-3ef9-4b54-adb5-cfc2dabea13e",
+    "timestamp": "2025-03-19T11:43:36.398Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "struct ObjectTypeExample {\n  @State user: { name: string; age: number } = { name: 'John', age: 30 };\n",
+      "rangeToReplace": {
+        "startLineNumber": 16,
+        "endLineNumberInclusive": 18
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "379132f3-3ef9-4b54-adb5-cfc2dabea13e",
+    "timestamp": "2025-03-19T11:43:36.399Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "379132f3-3ef9-4b54-adb5-cfc2dabea13e",
+    "timestamp": "2025-03-19T11:43:36.400Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "379132f3-3ef9-4b54-adb5-cfc2dabea13e",
+    "timestamp": "2025-03-19T11:43:36.401Z"
+  }
+]

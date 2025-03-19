@@ -1,0 +1,39 @@
+{"line":5,"column":10}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+struct BasicTypeExample {
+  @State score: number = 0
+
+  build() [ToFill]{
+    Column() {
+      Text(this.score.toString())
+      Text('Hello, world!')
+    }
+  }
+}
+
+@Component
+struct ObjectTypeExample {
+  build() {
+    Column() {
+      Text('Hello, world!')
+    }
+  }
+}
+
+@Component
+struct ArrayTypeExample {
+  build() {
+    Column() {
+      Text('Hello, world!')
+    }
+  }
+}
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+  build() {
+    Column() {
+      Text(this.score.toString())
+      Button('Increment').onClick

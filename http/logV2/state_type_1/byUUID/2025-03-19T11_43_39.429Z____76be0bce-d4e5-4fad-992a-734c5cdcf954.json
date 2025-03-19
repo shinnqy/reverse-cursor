@@ -1,0 +1,69 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "76be0bce-d4e5-4fad-992a-734c5cdcf954",
+    "timestamp": "2025-03-19T11:43:39.429Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/stateType.ets",
+          "diffHistory": [
+            "4+|  @State score: number = 0\n",
+            "8+|      Text(this.score.toString())\n9-|      Text('Hello, world!')\n",
+            "4-|  @State score: number = 0\n4+|  @State score: number = 0;\n5+|  @State name: string = 'John';\n",
+            "10-|      Text('Hello, world!')\n10+|      Text(this.name.toUpperCase())\n",
+            "16+|\n18+|  @State user: { name: string; age: number } = { name: 'John', age: 30 };\n19+|\n",
+            "21-|      Text('Hello, world!')\n21+|      Text('Hello,UpperCase())\n22+|      Text(this.user.age.toString())\n",
+            "21-|      Text('Hello,UpperCase())\n21+|      Text(this.user.name.toUpperCase())\n",
+            "15+|int\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/stateType.ets",
+        "contents": "@Entry\n@Component\nstruct BasicTypeExample {\n  @State score: number = 0;\n  @State name: string = 'John';\n\n  build() {\n    Column() {\n      Text(this.score.toString())\n      Text(this.name.toUpperCase())\n    }\n  }\n}\n\nint\n@Component\nstruct ObjectTypeExample {\n  @State user: { name: string; age: number } = { name: 'John', age: 30 };\n\n  build() {\n    Column() {\n      Text(this.user.name.toUpperCase())\n      Text(this.user.age.toString())\n    }\n  }\n}\n\n@Component\nstruct ArrayTypeExample {\n  build() {\n    Column() {\n      Text('Hello, world!')\n    }\n  }\n}",
+        "cursorPosition": {
+          "line": 14,
+          "column": 3
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 54,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742384619468,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.5,
+      "timeAtRequestSend": 1742384619468
+    },
+    "generateUuid": "76be0bce-d4e5-4fad-992a-734c5cdcf954",
+    "timestamp": "2025-03-19T11:43:39.469Z"
+  }
+]

@@ -1,0 +1,684 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+    "timestamp": "2025-03-19T11:43:39.117Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/stateType.ets",
+          "diffHistory": [
+            "4+|  @State score: number = 0\n",
+            "8+|      Text(this.score.toString())\n9-|      Text('Hello, world!')\n",
+            "4-|  @State score: number = 0\n4+|  @State score: number = 0;\n5+|  @State name: string = 'John';\n",
+            "10-|      Text('Hello, world!')\n10+|      Text(this.name.toUpperCase())\n",
+            "16+|\n18+|  @State user: { name: string; age: number } = { name: 'John', age: 30 };\n19+|\n",
+            "21-|      Text('Hello, world!')\n21+|      Text('Hello,UpperCase())\n22+|      Text(this.user.age.toString())\n",
+            "21-|      Text('Hello,UpperCase())\n21+|      Text(this.user.name.toUpperCase())\n",
+            "15+|i\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/stateType.ets",
+        "contents": "@Entry\n@Component\nstruct BasicTypeExample {\n  @State score: number = 0;\n  @State name: string = 'John';\n\n  build() {\n    Column() {\n      Text(this.score.toString())\n      Text(this.name.toUpperCase())\n    }\n  }\n}\n\ni\n@Component\nstruct ObjectTypeExample {\n  @State user: { name: string; age: number } = { name: 'John', age: 30 };\n\n  build() {\n    Column() {\n      Text(this.user.name.toUpperCase())\n      Text(this.user.age.toString())\n    }\n  }\n}\n\n@Component\nstruct ArrayTypeExample {\n  build() {\n    Column() {\n      Text('Hello, world!')\n    }\n  }\n}",
+        "cursorPosition": {
+          "line": 14,
+          "column": 1
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 52,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742384619160,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 54.400146484375,
+      "timeAtRequestSend": 1742384619160
+    },
+    "generateUuid": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+    "timestamp": "2025-03-19T11:43:39.162Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+    "timestamp": "2025-03-19T11:43:39.833Z"
+  },
+  {
+    "firstChunkValue": "\ninterface User {\n@Component\nstruct ObjectTypeExample {\n  @State user: { name: string; age: number } = { name: 'John', age: 30 };",
+    "generationUUID": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+    "timestamp": "2025-03-19T11:43:39.834Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\ninterface",
+      "rangeToReplace": {
+        "startLineNumber": 14,
+        "endLineNumberInclusive": 18
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+    "timestamp": "2025-03-19T11:43:39.851Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+    "timestamp": "2025-03-19T11:43:39.852Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\ninterface User {\n@Component\nstruct ObjectTypeExample {\n  @State user: { name: string; age: number } = { name: 'John', age: 30 };"
+    },
+    "generationUUID": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+    "timestamp": "2025-03-19T11:43:39.852Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "eced0961-c914-4f6d-97ba-a6f7233374f6",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 52,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 52,
+      "monotonicallyIncreasingSuggestionId": 33,
+      "range": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 18,
+        "endColumn": 74
+      },
+      "replaceText": "\ninterface User {\n@Component\nstruct ObjectTypeExample {\n  @State user: { name: string; age: number } = { name: 'John', age: 30 };",
+      "originalText": "\ni\n@Component\nstruct ObjectTypeExample {\n  @State user: { name: string; age: number } = { name: 'John', age: 30 };",
+      "startingSuggestionRange": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 18,
+        "endColumn": 74
+      },
+      "diffText": "\ninterface User {\n@Component\nstruct ObjectTypeExample {\n  @State user: { name: string; age: number } = { name: 'John', age: 30 };",
+      "fullOriginalText": "\ni\n@Component\nstruct ObjectTypeExample {\n  @State user: { name: string; age: number } = { name: 'John', age: 30 };",
+      "suggestionTriggerTime": 1742384619106.0999,
+      "greens": [],
+      "source": "typing",
+      "requestId": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+      "selection": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 18,
+        "endColumn": 74
+      },
+      "undoRedoGroup": {
+        "id": 33,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumber": 18,
+        "endColumn": 74
+      },
+      "trackedText": "\nint\n@Component\nstruct ObjectTypeExample {\n  @State user: { name: string; age: number } = { name: 'John', age: 30 };"
+    },
+    "generationUUID": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+    "timestamp": "2025-03-19T11:43:39.852Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " User"
+    },
+    "generationUUID": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+    "timestamp": "2025-03-19T11:43:39.853Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n "
+    },
+    "generationUUID": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+    "timestamp": "2025-03-19T11:43:39.853Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " name"
+    },
+    "generationUUID": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+    "timestamp": "2025-03-19T11:43:39.854Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": string"
+    },
+    "generationUUID": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+    "timestamp": "2025-03-19T11:43:39.854Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";\n"
+    },
+    "generationUUID": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+    "timestamp": "2025-03-19T11:43:39.854Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+    "timestamp": "2025-03-19T11:43:39.855Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " age"
+    },
+    "generationUUID": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+    "timestamp": "2025-03-19T11:43:39.855Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";"
+    },
+    "generationUUID": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+    "timestamp": "2025-03-19T11:43:39.855Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": number"
+    },
+    "generationUUID": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+    "timestamp": "2025-03-19T11:43:39.856Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "eced0961-c914-4f6d-97ba-a6f7233374f6",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 52,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 52,
+      "monotonicallyIncreasingSuggestionId": 33,
+      "range": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 18,
+        "endColumn": 74
+      },
+      "replaceText": "\ninterface User {\n@Component\nstruct ObjectTypeExample {\n  @State user: { name: string; age: number } = { name: 'John', age: 30 };",
+      "originalText": "\ni\n@Component\nstruct ObjectTypeExample {\n  @State user: { name: string; age: number } = { name: 'John', age: 30 };",
+      "startingSuggestionRange": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 18,
+        "endColumn": 74
+      },
+      "diffText": "\ninterface User {\n@Component\nstruct ObjectTypeExample {\n  @State user: { name: string; age: number } = { name: 'John', age: 30 };",
+      "fullOriginalText": "\ni\n@Component\nstruct ObjectTypeExample {\n  @State user: { name: string; age: number } = { name: 'John', age: 30 };",
+      "suggestionTriggerTime": 1742384619106.0999,
+      "greens": [],
+      "source": "typing",
+      "requestId": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+      "selection": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 18,
+        "endColumn": 74
+      },
+      "undoRedoGroup": {
+        "id": 33,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumber": 18,
+        "endColumn": 74
+      },
+      "trackedText": "\nint\n@Component\nstruct ObjectTypeExample {\n  @State user: { name: string; age: number } = { name: 'John', age: 30 };",
+      "decorationId": "b;220"
+    },
+    "generationUUID": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+    "timestamp": "2025-03-19T11:43:40.414Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "eced0961-c914-4f6d-97ba-a6f7233374f6",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 52,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 52,
+      "monotonicallyIncreasingSuggestionId": 33,
+      "range": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 18,
+        "endColumn": 74
+      },
+      "replaceText": "\ninterface User {\n@Component\nstruct ObjectTypeExample {\n  @State user: { name: string; age: number } = { name: 'John', age: 30 };",
+      "originalText": "\ni\n@Component\nstruct ObjectTypeExample {\n  @State user: { name: string; age: number } = { name: 'John', age: 30 };",
+      "startingSuggestionRange": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 18,
+        "endColumn": 74
+      },
+      "diffText": "\ninterface User {\n@Component\nstruct ObjectTypeExample {\n  @State user: { name: string; age: number } = { name: 'John', age: 30 };",
+      "fullOriginalText": "\ni\n@Component\nstruct ObjectTypeExample {\n  @State user: { name: string; age: number } = { name: 'John', age: 30 };",
+      "suggestionTriggerTime": 1742384619106.0999,
+      "greens": [],
+      "source": "typing",
+      "requestId": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+      "selection": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 18,
+        "endColumn": 74
+      },
+      "undoRedoGroup": {
+        "id": 33,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumber": 18,
+        "endColumn": 74
+      },
+      "trackedText": "\nint\n@Component\nstruct ObjectTypeExample {\n  @State user: { name: string; age: number } = { name: 'John', age: 30 };",
+      "decorationId": "b;220"
+    },
+    "generationUUID": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+    "timestamp": "2025-03-19T11:43:40.429Z"
+  },
+  {
+    "fullText": "\ninterface User {\n  name: string;\n  age: number;\n}\n\n@Component\nstruct ObjectTypeExample {\n  @State user: User = { name: 'John', age: 30 };",
+    "generationUUID": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+    "timestamp": "2025-03-19T11:43:40.762Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\ninterface User {\n@Component\nstruct ObjectTypeExample {\n  @State user: { name: string; age: number } = { name: 'John', age: 30 };"
+    },
+    "fullText": "\ninterface User {\n  name: string;\n  age: number;\n}\n\n@Component\nstruct ObjectTypeExample {\n  @State user: User = { name: 'John', age: 30 };",
+    "generationUUID": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+    "timestamp": "2025-03-19T11:43:40.763Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && currentSuggestion is undefined && need to create newSuggestion according fullText",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "e6797a15-0171-496f-937b-00d0f386cabb",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 52,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 56,
+      "monotonicallyIncreasingSuggestionId": 34,
+      "range": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 18,
+        "endColumn": 74
+      },
+      "replaceText": "\ninterface User {\n  name: string;\n  age: number;\n}\n\n@Component\nstruct ObjectTypeExample {\n  @State user: User = { name: 'John', age: 30 };",
+      "originalText": "\ninterface User {\n@Component\nstruct ObjectTypeExample {\n  @State user: { name: string; age: number } = { name: 'John', age: 30 };",
+      "startingSuggestionRange": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 18,
+        "endColumn": 74
+      },
+      "diffText": "\ninterface User {\n  name: string;\n  age: number;\n}\n\n@Component\nstruct ObjectTypeExample {\n  @State user: User = { name: 'John', age: 30 };",
+      "fullOriginalText": "\ninterface User {\n@Component\nstruct ObjectTypeExample {\n  @State user: { name: string; age: number } = { name: 'John', age: 30 };",
+      "suggestionTriggerTime": 1742384619106.0999,
+      "greens": [],
+      "source": "typing",
+      "requestId": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+      "selection": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 18,
+        "endColumn": 74
+      },
+      "fusedCursorPredictionId": "409a40a1-0a59-4554-8b2c-1245f31639cb",
+      "undoRedoGroup": {
+        "id": 34,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+    "timestamp": "2025-03-19T11:43:40.763Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "e6797a15-0171-496f-937b-00d0f386cabb",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 52,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 56,
+      "monotonicallyIncreasingSuggestionId": 34,
+      "range": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 18,
+        "endColumn": 74
+      },
+      "replaceText": "\ninterface User {\n  name: string;\n  age: number;\n}\n\n@Component\nstruct ObjectTypeExample {\n  @State user: User = { name: 'John', age: 30 };",
+      "originalText": "\ninterface User {\n@Component\nstruct ObjectTypeExample {\n  @State user: { name: string; age: number } = { name: 'John', age: 30 };",
+      "startingSuggestionRange": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 18,
+        "endColumn": 74
+      },
+      "diffText": "\ninterface User {\n  name: string;\n  age: number;\n}\n\n@Component\nstruct ObjectTypeExample {\n  @State user: User = { name: 'John', age: 30 };",
+      "fullOriginalText": "\ninterface User {\n@Component\nstruct ObjectTypeExample {\n  @State user: { name: string; age: number } = { name: 'John', age: 30 };",
+      "suggestionTriggerTime": 1742384619106.0999,
+      "greens": [],
+      "source": "typing",
+      "requestId": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+      "selection": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 18,
+        "endColumn": 74
+      },
+      "fusedCursorPredictionId": "409a40a1-0a59-4554-8b2c-1245f31639cb",
+      "undoRedoGroup": {
+        "id": 34,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+    "timestamp": "2025-03-19T11:43:40.764Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+    "timestamp": "2025-03-19T11:43:40.782Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}"
+    },
+    "generationUUID": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+    "timestamp": "2025-03-19T11:43:40.782Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n@Component\nstruct Object"
+    },
+    "generationUUID": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+    "timestamp": "2025-03-19T11:43:40.782Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "TypeExample {\n  @State user"
+    },
+    "generationUUID": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+    "timestamp": "2025-03-19T11:43:40.783Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": User"
+    },
+    "generationUUID": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+    "timestamp": "2025-03-19T11:43:40.783Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+    "timestamp": "2025-03-19T11:43:40.783Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " { name: 'John', age:"
+    },
+    "generationUUID": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+    "timestamp": "2025-03-19T11:43:40.783Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+    "timestamp": "2025-03-19T11:43:40.784Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "30 };"
+    },
+    "generationUUID": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+    "timestamp": "2025-03-19T11:43:40.784Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+    "timestamp": "2025-03-19T11:43:40.784Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "e6797a15-0171-496f-937b-00d0f386cabb",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 52,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 56,
+      "monotonicallyIncreasingSuggestionId": 34,
+      "range": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 18,
+        "endColumn": 74
+      },
+      "replaceText": "\ninterface User {\n  name: string;\n  age: number;\n}\n\n@Component\nstruct ObjectTypeExample {\n  @State user: User = { name: 'John', age: 30 };",
+      "originalText": "\ninterface User {\n@Component\nstruct ObjectTypeExample {\n  @State user: { name: string; age: number } = { name: 'John', age: 30 };",
+      "startingSuggestionRange": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 18,
+        "endColumn": 74
+      },
+      "diffText": "\ninterface User {\n  name: string;\n  age: number;\n}\n\n@Component\nstruct ObjectTypeExample {\n  @State user: User = { name: 'John', age: 30 };",
+      "fullOriginalText": "\ninterface User {\n@Component\nstruct ObjectTypeExample {\n  @State user: { name: string; age: number } = { name: 'John', age: 30 };",
+      "suggestionTriggerTime": 1742384619106.0999,
+      "greens": [],
+      "source": "typing",
+      "requestId": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+      "selection": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 18,
+        "endColumn": 74
+      },
+      "fusedCursorPredictionId": "409a40a1-0a59-4554-8b2c-1245f31639cb",
+      "undoRedoGroup": {
+        "id": 34,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;225"
+    },
+    "generationUUID": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+    "timestamp": "2025-03-19T11:43:40.823Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "e6797a15-0171-496f-937b-00d0f386cabb",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 52,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 56,
+      "monotonicallyIncreasingSuggestionId": 34,
+      "range": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 18,
+        "endColumn": 74
+      },
+      "replaceText": "\ninterface User {\n  name: string;\n  age: number;\n}\n\n@Component\nstruct ObjectTypeExample {\n  @State user: User = { name: 'John', age: 30 };",
+      "originalText": "\ninterface User {\n@Component\nstruct ObjectTypeExample {\n  @State user: { name: string; age: number } = { name: 'John', age: 30 };",
+      "startingSuggestionRange": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 18,
+        "endColumn": 74
+      },
+      "diffText": "\ninterface User {\n  name: string;\n  age: number;\n}\n\n@Component\nstruct ObjectTypeExample {\n  @State user: User = { name: 'John', age: 30 };",
+      "fullOriginalText": "\ninterface User {\n@Component\nstruct ObjectTypeExample {\n  @State user: { name: string; age: number } = { name: 'John', age: 30 };",
+      "suggestionTriggerTime": 1742384619106.0999,
+      "greens": [],
+      "source": "typing",
+      "requestId": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+      "selection": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 18,
+        "endColumn": 74
+      },
+      "fusedCursorPredictionId": "409a40a1-0a59-4554-8b2c-1245f31639cb",
+      "undoRedoGroup": {
+        "id": 34,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;225"
+    },
+    "generationUUID": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+    "timestamp": "2025-03-19T11:43:40.832Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+    "timestamp": "2025-03-19T11:43:40.875Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "409a40a1-0a59-4554-8b2c-1245f31639cb",
+    "generationUUID": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+    "timestamp": "2025-03-19T11:43:40.878Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\ninterface User {\n@Component\nstruct ObjectTypeExample {\n  @State user: { name: string; age: number } = { name: 'John', age: 30 };"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "409a40a1-0a59-4554-8b2c-1245f31639cb",
+    "generationUUID": "38fde0d9-7e89-4575-8d30-3a7788c7238e",
+    "timestamp": "2025-03-19T11:43:40.879Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "409a40a1-0a59-4554-8b2c-1245f31639cb",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T11:43:40.879Z"
+  }
+]

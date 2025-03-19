@@ -1,0 +1,53 @@
+{"line":9,"column":21}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+struct BasicTypeExample {
+  @State score: number = 0;
+  @State name: string = 'John';
+
+  build() {
+    Column() {
+      Text(this.score.toString())
+      Text(this.name.[ToFill])
+    }
+  }
+}
+
+@Component
+struct ObjectTypeExample {
+  build() {
+    Column() {
+      Text('Hello, world!')
+    }
+  }
+}
+
+@Component
+struct ArrayTypeExample {
+  build() {
+    Column() {
+      Text('Hello, world!')
+    }
+  }
+}
+-------------------------------[               firstChunkValue               ]--------------------------------
+      Text(this.score.toString())
+      Text(this.name.toString())
+    }
+  }
+}
+-------------------------------[                   fullText                  ]--------------------------------
+      Text(this.score.toString())
+      Text(this.name.toString())
+    }
+  }
+}
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/stateType.ets",
+  "lineNumberOneIndexed": 5,
+  "text": "@State name: string = 'John';\n\nbuild() {\nColumn() {\nText(this.score.toString())",
+  "shouldRetriggerCpp": true
+}

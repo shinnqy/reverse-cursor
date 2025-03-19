@@ -1,0 +1,113 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "97c6486e-4815-422c-a870-6c4c6a67905e",
+    "timestamp": "2025-03-19T11:43:34.711Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/stateType.ets",
+          "diffHistory": [
+            "4+|  @State score: number = 0\n",
+            "8+|      Text(this.score.toString())\n9-|      Text('Hello, world!')\n",
+            "4-|  @State score: number = 0\n4+|  @State score: number = 0;\n5+|  @State name: string = 'John';\n",
+            "10-|      Text('Hello, world!')\n10+|      Text(this.name.toUpperCase())\n",
+            "16+|\n18+|  @State user: { name: string; age: number } = { name: 'John', age: 30 };\n19+|\n",
+            "21-|      Text('Hello, world!')\n21+|      Text('Hello,UpperCase())\n22+|      Text(this.user.age.toString())\n",
+            "21-|      Text('Hello,UpperCase())\n21+|      Text(this.user.name.toUpperCase())\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/stateType.ets",
+        "contents": "@Entry\n@Component\nstruct BasicTypeExample {\n  @State score: number = 0;\n  @State name: string = 'John';\n\n  build() {\n    Column() {\n      Text(this.score.toString())\n      Text(this.name.toUpperCase())\n    }\n  }\n}\n\n@Component\nstruct ObjectTypeExample {\n  @State user: { name: string; age: number } = { name: 'John', age: 30 };\n\n  build() {\n    Column() {\n      Text(this.user.name.toUpperCase())\n      Text(this.user.age.toString())\n    }\n  }\n}\n\n@Component\nstruct ArrayTypeExample {\n  build() {\n    Column() {\n      Text('Hello, world!')\n    }\n  }\n}",
+        "cursorPosition": {
+          "line": 20,
+          "column": 5
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 50,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1742384614760,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.7998046875,
+      "timeAtRequestSend": 1742384614760
+    },
+    "generateUuid": "97c6486e-4815-422c-a870-6c4c6a67905e",
+    "timestamp": "2025-03-19T11:43:34.762Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "97c6486e-4815-422c-a870-6c4c6a67905e",
+    "timestamp": "2025-03-19T11:43:35.695Z"
+  },
+  {
+    "firstChunkValue": "    Column() {\n      Text(this.user.name.toUpperCase())\n      Text(this.user.age.toString())\n    }",
+    "generationUUID": "97c6486e-4815-422c-a870-6c4c6a67905e",
+    "timestamp": "2025-03-19T11:43:35.695Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": false
+    },
+    "generationUUID": "97c6486e-4815-422c-a870-6c4c6a67905e",
+    "timestamp": "2025-03-19T11:43:35.696Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "    Column() {\n      Text(this.user.name.toUpperCase())\n      Text(this.user.age.toString())\n    }",
+      "rangeToReplace": {
+        "startLineNumber": 20,
+        "endLineNumberInclusive": 23
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "97c6486e-4815-422c-a870-6c4c6a67905e",
+    "timestamp": "2025-03-19T11:43:35.696Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "97c6486e-4815-422c-a870-6c4c6a67905e",
+    "timestamp": "2025-03-19T11:43:35.697Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "6d507edd-2b9b-4f54-9137-c8a1f2fe3616",
+    "generationUUID": "97c6486e-4815-422c-a870-6c4c6a67905e",
+    "timestamp": "2025-03-19T11:43:35.724Z"
+  }
+]

@@ -1,0 +1,45 @@
+{"line":13,"column":0}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+struct BasicTypeExample {
+  @State score: number = 0;
+  @State name: string = 'John';
+
+  build() {
+    Column() {
+      Text(this.score.toString())
+      Text(this.name.toUpperCase())
+    }
+  }
+}
+[ToFill]
+
+@Component
+struct ObjectTypeExample {
+  @State user: { name: string; age: number } = { name: 'John', age: 30 };
+
+  build() {
+    Column() {
+      Text(this.user.name.toUpperCase())
+      Text(this.user.age.toString())
+    }
+  }
+}
+
+@Component
+struct ArrayTypeExample {
+  build() {
+    Column() {
+      Text('Hello, world!')
+    }
+  }
+}
+-------------------------------[               firstChunkValue               ]--------------------------------
+}
+
+
+@Component
+struct ObjectTypeExample {
+  @State user: { name: string; age: number } = { name: 'John', age: 30 };

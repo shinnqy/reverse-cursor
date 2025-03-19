@@ -1,0 +1,108 @@
+You're an expert in ArkTS. Your task is to help the user update the code around current cursor position.
+
+## Recent Actions
+Here is what the user has been doing from the earliest to the latest:
+
+File: entry/src/main/ets/utils/stateType.ets
+added the code `  @State score: number = 0` in line 4
+
+added the code `      Text(this.score.toString())` in line 8
+deleted the code `      Text('Hello, world!')` in line 9
+
+deleted the code `  @State score: number = 0` in line 4
+added the code `  @State score: number = 0;` in line 4
+added the code `  @State name: string = 'John';` in line 5
+
+deleted the code `      Text('Hello, world!')` in line 10
+added the code `      Text(this.name.toUpperCase())` in line 10
+
+added the code `` in line 16
+added the code `  @State user: { name: string; age: number } = { name: 'John', age: 30 };` in line 18
+added the code `` in line 19
+
+deleted the code `      Text('Hello, world!')` in line 21
+added the code `      Text('Hello,UpperCase())` in line 21
+added the code `      Text(this.user.age.toString())` in line 22
+
+deleted the code `      Text('Hello,UpperCase())` in line 21
+added the code `      Text(this.user.name.toUpperCase())` in line 21
+
+added the code `interface User {` in line 15
+
+deleted the code `  @State user: { name: string; age: number } = { name: 'John', age: 30 };` in line 18
+added the code `  @State user: User = { name: 'John', age: 30 };` in line 18
+
+added the code `  name: string;` in line 16
+added the code `  age: number;` in line 17
+added the code `}` in line 18
+added the code `` in line 19
+
+added the code `  @State numbers: number[] = [1, 2, 3, 4, 5];` in line 34
+
+deleted the code `      Text('Hello, world!')` in line 37
+added the code `      Text(this.numbers.join(', '))` in line 37
+
+added the code `` in line 35
+
+
+## Current Code
+Here is the current code file path:
+entry/src/main/ets/utils/stateType.ets
+
+Here is the current code around the cursor position:
+
+```
+@Entry
+@Component
+struct BasicTypeExample {
+  @State score: number = 0;
+  @State name: string = 'John';
+
+  build() {
+    Column() {
+      Text(this.score.toString())
+      Text(this.name.toUpperCase())
+    }
+  }
+}
+
+interface User {
+  name: string;
+  age: number;
+}
+
+@Component
+struct ObjectTypeExample {
+  @State user: User = { name: 'John', age: 30 };
+
+  build() {
+    Column() {
+      Text(this.user.name.toUpperCase())
+<|editable_region_start|>
+      Text(this.user.age.toString())
+    }
+  }
+}
+
+@Component
+struct ArrayTypeExample {
+  @State numbers: number[] = [1, 2, 3, 4, 5];
+
+  build() {
+    L<|current_cursor_position|>
+  }
+}
+<|editable_region_end|>
+```
+
+## Task
+Rewrite the code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> according to the following requirements:
+1. Enforce code format strictly matching existing code style.
+2. Propagate naming convention changes to all related cases
+3. Preserve original functionality
+4. Apply changes to entire code regardless of cursor position
+5. Focus on code after cursor position at <|current_cursor_position|>
+
+# Output Format
+Return ONLY the rewritten code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> without any other words.
+Never use markdown formatting like ```. Return raw text only.

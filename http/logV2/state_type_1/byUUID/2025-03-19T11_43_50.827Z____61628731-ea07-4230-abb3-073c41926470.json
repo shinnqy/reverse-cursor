@@ -1,0 +1,849 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:50.827Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/stateType.ets",
+          "diffHistory": [
+            "4+|  @State score: number = 0\n",
+            "8+|      Text(this.score.toString())\n9-|      Text('Hello, world!')\n",
+            "4-|  @State score: number = 0\n4+|  @State score: number = 0;\n5+|  @State name: string = 'John';\n",
+            "10-|      Text('Hello, world!')\n10+|      Text(this.name.toUpperCase())\n",
+            "16+|\n18+|  @State user: { name: string; age: number } = { name: 'John', age: 30 };\n19+|\n",
+            "21-|      Text('Hello, world!')\n21+|      Text('Hello,UpperCase())\n22+|      Text(this.user.age.toString())\n",
+            "21-|      Text('Hello,UpperCase())\n21+|      Text(this.user.name.toUpperCase())\n",
+            "15+|interface User {\n",
+            "18-|  @State user: { name: string; age: number } = { name: 'John', age: 30 };\n18+|  @State user: User = { name: 'John', age: 30 };\n",
+            "16+|  name: string;\n17+|  age: number;\n18+|}\n19+|\n",
+            "34+|  \n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/stateType.ets",
+        "contents": "@Entry\n@Component\nstruct BasicTypeExample {\n  @State score: number = 0;\n  @State name: string = 'John';\n\n  build() {\n    Column() {\n      Text(this.score.toString())\n      Text(this.name.toUpperCase())\n    }\n  }\n}\n\ninterface User {\n  name: string;\n  age: number;\n}\n\n@Component\nstruct ObjectTypeExample {\n  @State user: User = { name: 'John', age: 30 };\n\n  build() {\n    Column() {\n      Text(this.user.name.toUpperCase())\n      Text(this.user.age.toString())\n    }\n  }\n}\n\n@Component\nstruct ArrayTypeExample {\n  \n  build() {\n    Column() {\n      Text('Hello, world!')\n    }\n  }\n}",
+        "cursorPosition": {
+          "line": 33,
+          "column": 2
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 57,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1742384630875,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.2998046875,
+      "timeAtRequestSend": 1742384630875
+    },
+    "generateUuid": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:50.877Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.006Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "struct ArrayTypeExample {\n ",
+      "rangeToReplace": {
+        "startLineNumber": 33,
+        "endLineNumberInclusive": 40
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.006Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " @"
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.007Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "State numbers"
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.007Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.008Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " number"
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.008Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "[]"
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.008Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ["
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.009Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.009Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "1"
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.009Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.010Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ","
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.010Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "2"
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.010Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ","
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.011Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " 3"
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.011Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ","
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.012Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.012Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "4"
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.013Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ","
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.013Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "];"
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.151Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " 5"
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.152Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.152Z"
+  },
+  {
+    "firstChunkValue": "struct ArrayTypeExample {\n  @State numbers: number[] = [1, 2, 3, 4, 5];\n  build() {\n    Column() {\n      Text('Hello, world!')\n    }\n  }\n}",
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.152Z"
+  },
+  {
+    "fullText": "struct ArrayTypeExample {\n  @State numbers: number[] = [1, 2, 3, 4, 5];\n\n  build() {\n    Column() {\n      Text(this.numbers.join(', '))\n    }\n  }\n}",
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.153Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.154Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "struct ArrayTypeExample {\n  @State numbers: number[] = [1, 2, 3, 4, 5];\n  build() {\n    Column() {\n      Text('Hello, world!')\n    }\n  }\n}"
+    },
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/stateType.ets",
+      "lineNumberOneIndexed": 34,
+      "text": "",
+      "shouldRetriggerCpp": true
+    },
+    "predictionId": "9496330b-6ccc-400e-a248-dd10c920e160",
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.154Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "9496330b-6ccc-400e-a248-dd10c920e160",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/stateType.ets",
+      "lineNumberOneIndexed": 34,
+      "text": "",
+      "shouldRetriggerCpp": true
+    },
+    "timestamp": "2025-03-19T11:43:52.154Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.155Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "struct ArrayTypeExample {\n  @State numbers: number[] = [1, 2, 3, 4, 5];\n  build() {\n    Column() {\n      Text('Hello, world!')\n    }\n  }\n}"
+    },
+    "fullText": "struct ArrayTypeExample {\n  @State numbers: number[] = [1, 2, 3, 4, 5];\n\n  build() {\n    Column() {\n      Text(this.numbers.join(', '))\n    }\n  }\n}",
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.156Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " build() {\n   "
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.157Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "58139eda-e800-4791-9b9f-0f87894b4ef3",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 57,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 60,
+      "monotonicallyIncreasingSuggestionId": 36,
+      "range": {
+        "startLineNumber": 33,
+        "startColumn": 1,
+        "endLineNumberInclusive": 40,
+        "endColumn": 2
+      },
+      "replaceText": "struct ArrayTypeExample {\n  @State numbers: number[] = [1, 2, 3, 4, 5];\n\n  build() {\n    Column() {\n      Text(this.numbers.join(', '))\n    }\n  }\n}",
+      "originalText": "struct ArrayTypeExample {\n  @State numbers: number[] = [1, 2, 3, 4, 5];\n  build() {\n    Column() {\n      Text('Hello, world!')\n    }\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 33,
+        "startColumn": 1,
+        "endLineNumberInclusive": 40,
+        "endColumn": 2
+      },
+      "diffText": "struct ArrayTypeExample {\n  @State numbers: number[] = [1, 2, 3, 4, 5];\n\n  build() {\n    Column() {\n      Text(this.numbers.join(', '))\n    }\n  }\n}",
+      "fullOriginalText": "struct ArrayTypeExample {\n  @State numbers: number[] = [1, 2, 3, 4, 5];\n  build() {\n    Column() {\n      Text('Hello, world!')\n    }\n  }\n}",
+      "suggestionTriggerTime": 1742384630825.3,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "61628731-ea07-4230-abb3-073c41926470",
+      "selection": {
+        "startLineNumber": 33,
+        "startColumn": 1,
+        "endLineNumberInclusive": 40,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "9496330b-6ccc-400e-a248-dd10c920e160",
+      "undoRedoGroup": {
+        "id": 36,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.161Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Column"
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.162Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "this.numbers"
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.163Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.164Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "() {\n      Text("
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.164Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "(',"
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.165Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " '"
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.165Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "))"
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.165Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "join"
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.165Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.165Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "   "
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.165Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " }\n  }\n}"
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.165Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.166Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "cursorPredictionTarget": {
+        "relativePath": "entry/src/main/ets/utils/stateType.ets",
+        "lineNumberOneIndexed": 34,
+        "expectedContent": "",
+        "shouldRetriggerCpp": true
+      }
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.166Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.166Z"
+  },
+  {
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/stateType.ets",
+      "lineNumberOneIndexed": 34,
+      "text": "",
+      "shouldRetriggerCpp": true
+    },
+    "predictionId": "9496330b-6ccc-400e-a248-dd10c920e160",
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.167Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "struct ArrayTypeExample {\n  @State numbers: number[] = [1, 2, 3, 4, 5];\n  build() {\n    Column() {\n      Text('Hello, world!')\n    }\n  }\n}"
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.167Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "25288012-3a47-4fa5-8e02-76307066f65d",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 57,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 57,
+      "monotonicallyIncreasingSuggestionId": 35,
+      "range": {
+        "startLineNumber": 33,
+        "startColumn": 1,
+        "endLineNumberInclusive": 40,
+        "endColumn": 2
+      },
+      "replaceText": "struct ArrayTypeExample {\n  @State numbers: number[] = [1, 2, 3, 4, 5];\n  build() {\n    Column() {\n      Text('Hello, world!')\n    }\n  }\n}",
+      "originalText": "struct ArrayTypeExample {\n  \n  build() {\n    Column() {\n      Text('Hello, world!')\n    }\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 33,
+        "startColumn": 1,
+        "endLineNumberInclusive": 40,
+        "endColumn": 2
+      },
+      "diffText": "struct ArrayTypeExample {\n  @State numbers: number[] = [1, 2, 3, 4, 5];\n  build() {\n    Column() {\n      Text('Hello, world!')\n    }\n  }\n}",
+      "fullOriginalText": "struct ArrayTypeExample {\n  \n  build() {\n    Column() {\n      Text('Hello, world!')\n    }\n  }\n}",
+      "suggestionTriggerTime": 1742384630825.3,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "61628731-ea07-4230-abb3-073c41926470",
+      "selection": {
+        "startLineNumber": 33,
+        "startColumn": 1,
+        "endLineNumberInclusive": 40,
+        "endColumn": 2
+      },
+      "undoRedoGroup": {
+        "id": 35,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 33,
+        "startColumn": 1,
+        "endLineNumber": 40,
+        "endColumn": 2
+      },
+      "trackedText": "struct ArrayTypeExample {\n  @S\n  build() {\n    Column() {\n      Text('Hello, world!')\n    }\n  }\n}"
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:52.167Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "25288012-3a47-4fa5-8e02-76307066f65d",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 57,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 57,
+      "monotonicallyIncreasingSuggestionId": 35,
+      "range": {
+        "startLineNumber": 33,
+        "startColumn": 1,
+        "endLineNumberInclusive": 40,
+        "endColumn": 2
+      },
+      "replaceText": "struct ArrayTypeExample {\n  @State numbers: number[] = [1, 2, 3, 4, 5];\n  build() {\n    Column() {\n      Text('Hello, world!')\n    }\n  }\n}",
+      "originalText": "struct ArrayTypeExample {\n  \n  build() {\n    Column() {\n      Text('Hello, world!')\n    }\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 33,
+        "startColumn": 1,
+        "endLineNumberInclusive": 40,
+        "endColumn": 2
+      },
+      "diffText": "struct ArrayTypeExample {\n  @State numbers: number[] = [1, 2, 3, 4, 5];\n  build() {\n    Column() {\n      Text('Hello, world!')\n    }\n  }\n}",
+      "fullOriginalText": "struct ArrayTypeExample {\n  \n  build() {\n    Column() {\n      Text('Hello, world!')\n    }\n  }\n}",
+      "suggestionTriggerTime": 1742384630825.3,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "61628731-ea07-4230-abb3-073c41926470",
+      "selection": {
+        "startLineNumber": 33,
+        "startColumn": 1,
+        "endLineNumberInclusive": 40,
+        "endColumn": 2
+      },
+      "undoRedoGroup": {
+        "id": 35,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 33,
+        "startColumn": 1,
+        "endLineNumber": 40,
+        "endColumn": 2
+      },
+      "trackedText": "struct ArrayTypeExample {\n  @S\n  build() {\n    Column() {\n      Text('Hello, world!')\n    }\n  }\n}",
+      "decorationId": "b;240",
+      "onAcceptDisplayId": "58139eda-e800-4791-9b9f-0f87894b4ef3"
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:53.257Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "25288012-3a47-4fa5-8e02-76307066f65d",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 57,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 57,
+      "monotonicallyIncreasingSuggestionId": 35,
+      "range": {
+        "startLineNumber": 33,
+        "startColumn": 1,
+        "endLineNumberInclusive": 40,
+        "endColumn": 2
+      },
+      "replaceText": "struct ArrayTypeExample {\n  @State numbers: number[] = [1, 2, 3, 4, 5];\n  build() {\n    Column() {\n      Text('Hello, world!')\n    }\n  }\n}",
+      "originalText": "struct ArrayTypeExample {\n  \n  build() {\n    Column() {\n      Text('Hello, world!')\n    }\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 33,
+        "startColumn": 1,
+        "endLineNumberInclusive": 40,
+        "endColumn": 2
+      },
+      "diffText": "struct ArrayTypeExample {\n  @State numbers: number[] = [1, 2, 3, 4, 5];\n  build() {\n    Column() {\n      Text('Hello, world!')\n    }\n  }\n}",
+      "fullOriginalText": "struct ArrayTypeExample {\n  \n  build() {\n    Column() {\n      Text('Hello, world!')\n    }\n  }\n}",
+      "suggestionTriggerTime": 1742384630825.3,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "61628731-ea07-4230-abb3-073c41926470",
+      "selection": {
+        "startLineNumber": 33,
+        "startColumn": 1,
+        "endLineNumberInclusive": 40,
+        "endColumn": 2
+      },
+      "undoRedoGroup": {
+        "id": 35,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 33,
+        "startColumn": 1,
+        "endLineNumber": 40,
+        "endColumn": 2
+      },
+      "trackedText": "struct ArrayTypeExample {\n  @S\n  build() {\n    Column() {\n      Text('Hello, world!')\n    }\n  }\n}",
+      "decorationId": "b;240",
+      "onAcceptDisplayId": "58139eda-e800-4791-9b9f-0f87894b4ef3"
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:53.268Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "58139eda-e800-4791-9b9f-0f87894b4ef3",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 57,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 60,
+      "monotonicallyIncreasingSuggestionId": 36,
+      "range": {
+        "startLineNumber": 33,
+        "startColumn": 1,
+        "endLineNumberInclusive": 40,
+        "endColumn": 2
+      },
+      "replaceText": "struct ArrayTypeExample {\n  @State numbers: number[] = [1, 2, 3, 4, 5];\n\n  build() {\n    Column() {\n      Text(this.numbers.join(', '))\n    }\n  }\n}",
+      "originalText": "struct ArrayTypeExample {\n  @State numbers: number[] = [1, 2, 3, 4, 5];\n  build() {\n    Column() {\n      Text('Hello, world!')\n    }\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 33,
+        "startColumn": 1,
+        "endLineNumberInclusive": 40,
+        "endColumn": 2
+      },
+      "diffText": "struct ArrayTypeExample {\n  @State numbers: number[] = [1, 2, 3, 4, 5];\n\n  build() {\n    Column() {\n      Text(this.numbers.join(', '))\n    }\n  }\n}",
+      "fullOriginalText": "struct ArrayTypeExample {\n  @State numbers: number[] = [1, 2, 3, 4, 5];\n  build() {\n    Column() {\n      Text('Hello, world!')\n    }\n  }\n}",
+      "suggestionTriggerTime": 1742384630825.3,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "61628731-ea07-4230-abb3-073c41926470",
+      "selection": {
+        "startLineNumber": 33,
+        "startColumn": 1,
+        "endLineNumberInclusive": 40,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "9496330b-6ccc-400e-a248-dd10c920e160",
+      "undoRedoGroup": {
+        "id": 36,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:53.269Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "58139eda-e800-4791-9b9f-0f87894b4ef3",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 57,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 60,
+      "monotonicallyIncreasingSuggestionId": 36,
+      "range": {
+        "startLineNumber": 33,
+        "startColumn": 1,
+        "endLineNumberInclusive": 40,
+        "endColumn": 2
+      },
+      "replaceText": "struct ArrayTypeExample {\n  @State numbers: number[] = [1, 2, 3, 4, 5];\n\n  build() {\n    Column() {\n      Text(this.numbers.join(', '))\n    }\n  }\n}",
+      "originalText": "struct ArrayTypeExample {\n  @State numbers: number[] = [1, 2, 3, 4, 5];\n  build() {\n    Column() {\n      Text('Hello, world!')\n    }\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 33,
+        "startColumn": 1,
+        "endLineNumberInclusive": 40,
+        "endColumn": 2
+      },
+      "diffText": "struct ArrayTypeExample {\n  @State numbers: number[] = [1, 2, 3, 4, 5];\n\n  build() {\n    Column() {\n      Text(this.numbers.join(', '))\n    }\n  }\n}",
+      "fullOriginalText": "struct ArrayTypeExample {\n  @State numbers: number[] = [1, 2, 3, 4, 5];\n  build() {\n    Column() {\n      Text('Hello, world!')\n    }\n  }\n}",
+      "suggestionTriggerTime": 1742384630825.3,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "61628731-ea07-4230-abb3-073c41926470",
+      "selection": {
+        "startLineNumber": 33,
+        "startColumn": 1,
+        "endLineNumberInclusive": 40,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "9496330b-6ccc-400e-a248-dd10c920e160",
+      "undoRedoGroup": {
+        "id": 36,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;248"
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:54.497Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "58139eda-e800-4791-9b9f-0f87894b4ef3",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 57,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 60,
+      "monotonicallyIncreasingSuggestionId": 36,
+      "range": {
+        "startLineNumber": 33,
+        "startColumn": 1,
+        "endLineNumberInclusive": 40,
+        "endColumn": 2
+      },
+      "replaceText": "struct ArrayTypeExample {\n  @State numbers: number[] = [1, 2, 3, 4, 5];\n\n  build() {\n    Column() {\n      Text(this.numbers.join(', '))\n    }\n  }\n}",
+      "originalText": "struct ArrayTypeExample {\n  @State numbers: number[] = [1, 2, 3, 4, 5];\n  build() {\n    Column() {\n      Text('Hello, world!')\n    }\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 33,
+        "startColumn": 1,
+        "endLineNumberInclusive": 40,
+        "endColumn": 2
+      },
+      "diffText": "struct ArrayTypeExample {\n  @State numbers: number[] = [1, 2, 3, 4, 5];\n\n  build() {\n    Column() {\n      Text(this.numbers.join(', '))\n    }\n  }\n}",
+      "fullOriginalText": "struct ArrayTypeExample {\n  @State numbers: number[] = [1, 2, 3, 4, 5];\n  build() {\n    Column() {\n      Text('Hello, world!')\n    }\n  }\n}",
+      "suggestionTriggerTime": 1742384630825.3,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "61628731-ea07-4230-abb3-073c41926470",
+      "selection": {
+        "startLineNumber": 33,
+        "startColumn": 1,
+        "endLineNumberInclusive": 40,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "9496330b-6ccc-400e-a248-dd10c920e160",
+      "undoRedoGroup": {
+        "id": 36,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;248"
+    },
+    "generationUUID": "61628731-ea07-4230-abb3-073c41926470",
+    "timestamp": "2025-03-19T11:43:54.514Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "9496330b-6ccc-400e-a248-dd10c920e160",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/stateType.ets",
+      "lineNumberOneIndexed": 34,
+      "text": "",
+      "shouldRetriggerCpp": true
+    },
+    "oldText": "struct ArrayTypeExample {\n  @State numbers: number[] = [1, 2, 3, 4, 5];\n  build() {\n    Column() {\n      Text('Hello, world!')\n    }\n  }\n}",
+    "newText": "struct ArrayTypeExample {\n  @State numbers: number[] = [1, 2, 3, 4, 5];\n\n  build() {\n    Column() {\n      Text(this.numbers.join(', '))\n    }\n  }\n}",
+    "timestamp": "2025-03-19T11:43:54.515Z"
+  },
+  {
+    "action": "displayFusedCursorPrediction",
+    "predictionId": "9496330b-6ccc-400e-a248-dd10c920e160",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/stateType.ets",
+      "lineNumberOneIndexed": 34,
+      "text": "",
+      "shouldRetriggerCpp": true
+    },
+    "oldText": "struct ArrayTypeExample {\n  @State numbers: number[] = [1, 2, 3, 4, 5];\n  build() {\n    Column() {\n      Text('Hello, world!')\n    }\n  }\n}",
+    "newText": "struct ArrayTypeExample {\n  @State numbers: number[] = [1, 2, 3, 4, 5];\n\n  build() {\n    Column() {\n      Text(this.numbers.join(', '))\n    }\n  }\n}",
+    "timestamp": "2025-03-19T11:43:54.515Z"
+  }
+]
