@@ -1,0 +1,221 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "b29e98ed-a0f4-4a3b-896c-5de9b0f2a892",
+    "timestamp": "2025-03-19T07:39:51.911Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/functionReturn.ets",
+          "diffHistory": [
+            "1+|function add(a: number, b: number): number {\n2+|    return a + b;\n3+|}\n4+|\n5+|function subtract(a: number, b: number): number {\n6+|    return a - b;\n7+|}\n8+|\n9+|let sum = add(1, 2);\n10+|\n11+|function getUser(name: string, age: number): { name: string, age: number } {\n12+|    return { name, age };\n13+|}\n14+|\n15+|let user = getUser(\"John\", 30);\n16+|\n17+|  \n",
+            "11-|function getUser(name: string, age: number): { name: string, age: number } {\n11+|interface User {\n12+|    name: string;\n13+|    age: number;\n14+|}\n15+|\n16+|function getUser(name: string, age: number): User {\n",
+            "22+|function wrapValue<T>(value: T): {data {\n23+|    return { data: value };\n24+|}\n25+|\n26+|let wrappedValue = wrapValue(10);\n27+|\n28+|\n",
+            "22-|function wrapValue<T>(value: T): {data {\n22+|function wrapValue<T>(value: T): {data: T}   {\n",
+            "28+|let wrappedString = wrapValue(\"Hello\");\n30+|let wrappedBoolean = wrapValue(true);\n31+|\n32+|let wrappedArray = wrapValue([1, 2, 3]);\n33+|\n34+|\n",
+            "22-|function wrapValue<T>(value: T): {data: T}   {\n22+|interface Wrapper<T> {\n23+|    data: T;\n24+|}\n25+|\n26+|function wrapValue<T>(value: T): Wrapper<T> {\n",
+            "39+|async function fetchData(): Promise<{ item: string }> {\n40+|    return { item: \"Hello\" };\n41+|}\n42+|\n43+|let data = await fetchData();\n44+|\n45+|\n",
+            "38+|interface Data {\n39+|    item: string;\n40+|}\n39-|async function fetchData(): Promise<{ item: string }> {\n42+|async function fetchData(): Promise<Data> {\n",
+            "48-|\n48+|function parse(input: string): str\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/functionReturn.ets",
+        "contents": "function add(a: number, b: number): number {\n    return a + b;\n}\n\nfunction subtract(a: number, b: number): number {\n    return a - b;\n}\n\nlet sum = add(1, 2);\n\ninterface User {\n    name: string;\n    age: number;\n}\n\nfunction getUser(name: string, age: number): User {\n    return { name, age };\n}\n\nlet user = getUser(\"John\", 30);\n\ninterface Wrapper<T> {\n    data: T;\n}\n\nfunction wrapValue<T>(value: T): Wrapper<T> {\n    return { data: value };\n}\n\nlet wrappedValue = wrapValue(10);\n\nlet wrappedString = wrapValue(\"Hello\");\n\nlet wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\ninterface Data {\n    item: string;\n}\n\nasync function fetchData(): Promise<Data> {\n    return { item: \"Hello\" };\n}\n\nlet data = await fetchData();\n\nfunction parse(input: string): str\n",
+        "cursorPosition": {
+          "line": 47,
+          "column": 34
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 214,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742369991952,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 52.300048828125,
+      "timeAtRequestSend": 1742369991952
+    },
+    "generateUuid": "b29e98ed-a0f4-4a3b-896c-5de9b0f2a892",
+    "timestamp": "2025-03-19T07:39:51.953Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "b29e98ed-a0f4-4a3b-896c-5de9b0f2a892",
+    "timestamp": "2025-03-19T07:39:52.439Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nfunction parse(input: string): string",
+      "rangeToReplace": {
+        "startLineNumber": 47,
+        "endLineNumberInclusive": 49
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "b29e98ed-a0f4-4a3b-896c-5de9b0f2a892",
+    "timestamp": "2025-03-19T07:39:52.443Z"
+  },
+  {
+    "firstChunkValue": "\nfunction parse(input: string): string {\n    return input;\n}\n\nlet parsed = parse(\"Hello\");\n\n\n",
+    "generationUUID": "b29e98ed-a0f4-4a3b-896c-5de9b0f2a892",
+    "timestamp": "2025-03-19T07:39:52.444Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "b29e98ed-a0f4-4a3b-896c-5de9b0f2a892",
+    "timestamp": "2025-03-19T07:39:52.445Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "b29e98ed-a0f4-4a3b-896c-5de9b0f2a892",
+    "timestamp": "2025-03-19T07:39:52.445Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "    return input"
+    },
+    "generationUUID": "b29e98ed-a0f4-4a3b-896c-5de9b0f2a892",
+    "timestamp": "2025-03-19T07:39:52.445Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";"
+    },
+    "generationUUID": "b29e98ed-a0f4-4a3b-896c-5de9b0f2a892",
+    "timestamp": "2025-03-19T07:39:52.446Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " parsed"
+    },
+    "generationUUID": "b29e98ed-a0f4-4a3b-896c-5de9b0f2a892",
+    "timestamp": "2025-03-19T07:39:52.446Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n}\n\nlet"
+    },
+    "generationUUID": "b29e98ed-a0f4-4a3b-896c-5de9b0f2a892",
+    "timestamp": "2025-03-19T07:39:52.446Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "b29e98ed-a0f4-4a3b-896c-5de9b0f2a892",
+    "timestamp": "2025-03-19T07:39:52.446Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " parse"
+    },
+    "generationUUID": "b29e98ed-a0f4-4a3b-896c-5de9b0f2a892",
+    "timestamp": "2025-03-19T07:39:52.446Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "(\""
+    },
+    "generationUUID": "b29e98ed-a0f4-4a3b-896c-5de9b0f2a892",
+    "timestamp": "2025-03-19T07:39:52.446Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Hello\");\n\n"
+    },
+    "generationUUID": "b29e98ed-a0f4-4a3b-896c-5de9b0f2a892",
+    "timestamp": "2025-03-19T07:39:52.447Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "b29e98ed-a0f4-4a3b-896c-5de9b0f2a892",
+    "timestamp": "2025-03-19T07:39:52.447Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "b29e98ed-a0f4-4a3b-896c-5de9b0f2a892",
+    "timestamp": "2025-03-19T07:39:52.447Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "b29e98ed-a0f4-4a3b-896c-5de9b0f2a892",
+    "timestamp": "2025-03-19T07:39:52.447Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nfunction parse(input: string): string {\n    return input;\n}\n\nlet parsed = parse(\"Hello\");\n\n\n"
+    },
+    "generationUUID": "b29e98ed-a0f4-4a3b-896c-5de9b0f2a892",
+    "timestamp": "2025-03-19T07:39:52.447Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "8e0031aa-7df4-4e71-b54d-bb5ba3398e58",
+    "generationUUID": "b29e98ed-a0f4-4a3b-896c-5de9b0f2a892",
+    "timestamp": "2025-03-19T07:39:52.490Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nfunction parse(input: string): string {\n    return input;\n}\n\nlet parsed = parse(\"Hello\");\n\n\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "8e0031aa-7df4-4e71-b54d-bb5ba3398e58",
+    "generationUUID": "b29e98ed-a0f4-4a3b-896c-5de9b0f2a892",
+    "timestamp": "2025-03-19T07:39:52.490Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "8e0031aa-7df4-4e71-b54d-bb5ba3398e58",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T07:39:52.491Z"
+  }
+]

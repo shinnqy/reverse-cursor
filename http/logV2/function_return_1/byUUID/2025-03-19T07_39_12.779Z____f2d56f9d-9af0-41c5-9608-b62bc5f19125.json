@@ -1,0 +1,362 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "f2d56f9d-9af0-41c5-9608-b62bc5f19125",
+    "timestamp": "2025-03-19T07:39:12.779Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/functionReturn.ets",
+          "diffHistory": [
+            "1+|function add(a: number, b: number): number {\n2+|    return a + b;\n3+|}\n4+|\n5+|function subtract(a: number, b: number): number {\n6+|    return a - b;\n7+|}\n8+|\n9+|let sum = add(1, 2);\n10+|\n11+|function getUser(name: string, age: number): { name: string, age: number } {\n12+|    return { name, age };\n13+|}\n14+|\n15+|let user = getUser(\"John\", 30);\n16+|\n17+|  \n",
+            "11-|function getUser(name: string, age: number): { name: string, age: number } {\n11+|interface User {\n12+|    name: string;\n13+|    age: number;\n14+|}\n15+|\n16+|function getUser(name: string, age: number): User {\n",
+            "22+|function wrapValue<T>(value: T): {data {\n23+|    return { data: value };\n24+|}\n25+|\n26+|let wrappedValue = wrapValue(10);\n27+|\n28+|\n",
+            "22-|function wrapValue<T>(value: T): {data {\n22+|function wrapValue<T>(value: T): {data: T}   {\n",
+            "28+|let wrappedString = wrapValue(\"Hello\");\n30+|let wrappedBoolean = wrapValue(true);\n31+|\n32+|let wrappedArray = wrapValue([1, 2, 3]);\n33+|\n34+|\n",
+            "22-|function wrapValue<T>(value: T): {data: T}   {\n22+|interface Wrapper<T> {\n23+|    data: T;\n24+|}\n25+|\n26+|function wrapValue<T>(value: T): Wrapper<T> {\n",
+            "39+|async function fetchData(): Promise<{ item: string }> {\n40+|    return { item: \"Hello\" };\n41+|}\n42+|\n43+|let data = await fetchData();\n44+|\n45+|\n",
+            "38-|\n38+|in\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/functionReturn.ets",
+        "contents": "function add(a: number, b: number): number {\n    return a + b;\n}\n\nfunction subtract(a: number, b: number): number {\n    return a - b;\n}\n\nlet sum = add(1, 2);\n\ninterface User {\n    name: string;\n    age: number;\n}\n\nfunction getUser(name: string, age: number): User {\n    return { name, age };\n}\n\nlet user = getUser(\"John\", 30);\n\ninterface Wrapper<T> {\n    data: T;\n}\n\nfunction wrapValue<T>(value: T): Wrapper<T> {\n    return { data: value };\n}\n\nlet wrappedValue = wrapValue(10);\n\nlet wrappedString = wrapValue(\"Hello\");\n\nlet wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nin\nasync function fetchData(): Promise<{ item: string }> {\n    return { item: \"Hello\" };\n}\n\nlet data = await fetchData();\n\n\n",
+        "cursorPosition": {
+          "line": 37,
+          "column": 2
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 169,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742369952817,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 49.89990234375,
+      "timeAtRequestSend": 1742369952817
+    },
+    "generateUuid": "f2d56f9d-9af0-41c5-9608-b62bc5f19125",
+    "timestamp": "2025-03-19T07:39:12.819Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\ninterface",
+      "rangeToReplace": {
+        "startLineNumber": 37,
+        "endLineNumberInclusive": 41
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "f2d56f9d-9af0-41c5-9608-b62bc5f19125",
+    "timestamp": "2025-03-19T07:39:13.172Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "f2d56f9d-9af0-41c5-9608-b62bc5f19125",
+    "timestamp": "2025-03-19T07:39:13.172Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Data"
+    },
+    "generationUUID": "f2d56f9d-9af0-41c5-9608-b62bc5f19125",
+    "timestamp": "2025-03-19T07:39:13.217Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "f2d56f9d-9af0-41c5-9608-b62bc5f19125",
+    "timestamp": "2025-03-19T07:39:13.230Z"
+  },
+  {
+    "firstChunkValue": "\ninterface Data {\nasync function fetchData(): Promise<{ item: string }> {\n    return { item: \"Hello\" };\n}",
+    "generationUUID": "f2d56f9d-9af0-41c5-9608-b62bc5f19125",
+    "timestamp": "2025-03-19T07:39:13.240Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "f2d56f9d-9af0-41c5-9608-b62bc5f19125",
+    "timestamp": "2025-03-19T07:39:13.241Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\ninterface Data {\nasync function fetchData(): Promise<{ item: string }> {\n    return { item: \"Hello\" };\n}"
+    },
+    "generationUUID": "f2d56f9d-9af0-41c5-9608-b62bc5f19125",
+    "timestamp": "2025-03-19T07:39:13.242Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "    item"
+    },
+    "generationUUID": "f2d56f9d-9af0-41c5-9608-b62bc5f19125",
+    "timestamp": "2025-03-19T07:39:13.251Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": string"
+    },
+    "generationUUID": "f2d56f9d-9af0-41c5-9608-b62bc5f19125",
+    "timestamp": "2025-03-19T07:39:13.269Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";"
+    },
+    "generationUUID": "f2d56f9d-9af0-41c5-9608-b62bc5f19125",
+    "timestamp": "2025-03-19T07:39:13.277Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n}"
+    },
+    "generationUUID": "f2d56f9d-9af0-41c5-9608-b62bc5f19125",
+    "timestamp": "2025-03-19T07:39:13.290Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "f2d56f9d-9af0-41c5-9608-b62bc5f19125",
+    "timestamp": "2025-03-19T07:39:13.303Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "async"
+    },
+    "generationUUID": "f2d56f9d-9af0-41c5-9608-b62bc5f19125",
+    "timestamp": "2025-03-19T07:39:13.320Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " function fetchData(): Promise<Data"
+    },
+    "generationUUID": "f2d56f9d-9af0-41c5-9608-b62bc5f19125",
+    "timestamp": "2025-03-19T07:39:13.333Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ">"
+    },
+    "generationUUID": "f2d56f9d-9af0-41c5-9608-b62bc5f19125",
+    "timestamp": "2025-03-19T07:39:13.344Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "f2d56f9d-9af0-41c5-9608-b62bc5f19125",
+    "timestamp": "2025-03-19T07:39:13.357Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n    return { item: \"Hello"
+    },
+    "generationUUID": "f2d56f9d-9af0-41c5-9608-b62bc5f19125",
+    "timestamp": "2025-03-19T07:39:13.370Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\" };\n}"
+    },
+    "generationUUID": "f2d56f9d-9af0-41c5-9608-b62bc5f19125",
+    "timestamp": "2025-03-19T07:39:13.386Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "f2d56f9d-9af0-41c5-9608-b62bc5f19125",
+    "timestamp": "2025-03-19T07:39:13.411Z"
+  },
+  {
+    "fullText": "\ninterface Data {\n    item: string;\n}\n\nasync function fetchData(): Promise<Data> {\n    return { item: \"Hello\" };\n}",
+    "generationUUID": "f2d56f9d-9af0-41c5-9608-b62bc5f19125",
+    "timestamp": "2025-03-19T07:39:13.412Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\ninterface Data {\nasync function fetchData(): Promise<{ item: string }> {\n    return { item: \"Hello\" };\n}"
+    },
+    "fullText": "\ninterface Data {\n    item: string;\n}\n\nasync function fetchData(): Promise<Data> {\n    return { item: \"Hello\" };\n}",
+    "generationUUID": "f2d56f9d-9af0-41c5-9608-b62bc5f19125",
+    "timestamp": "2025-03-19T07:39:13.413Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && currentSuggestion uniqueId is different && need to create newSuggestion according fullText",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "7c47c8b2-27ec-4ed4-a2fe-af4ffd27888a",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 169,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 169,
+      "monotonicallyIncreasingSuggestionId": 142,
+      "range": {
+        "startLineNumber": 37,
+        "startColumn": 1,
+        "endLineNumberInclusive": 41,
+        "endColumn": 2
+      },
+      "replaceText": "\ninterface Data {\n    item: string;\n}\n\nasync function fetchData(): Promise<Data> {\n    return { item: \"Hello\" };\n}",
+      "originalText": "\nin\nasync function fetchData(): Promise<{ item: string }> {\n    return { item: \"Hello\" };\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 37,
+        "startColumn": 1,
+        "endLineNumberInclusive": 41,
+        "endColumn": 2
+      },
+      "diffText": "\ninterface Data {\n    item: string;\n}\n\nasync function fetchData(): Promise<Data> {\n    return { item: \"Hello\" };\n}",
+      "fullOriginalText": "\nin\nasync function fetchData(): Promise<{ item: string }> {\n    return { item: \"Hello\" };\n}",
+      "suggestionTriggerTime": 1742369952772.5,
+      "greens": [],
+      "source": "typing",
+      "requestId": "f2d56f9d-9af0-41c5-9608-b62bc5f19125",
+      "selection": {
+        "startLineNumber": 37,
+        "startColumn": 1,
+        "endLineNumberInclusive": 41,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "89385688-f5a0-428c-972d-868359aceb26",
+      "undoRedoGroup": {
+        "id": 142,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "f2d56f9d-9af0-41c5-9608-b62bc5f19125",
+    "timestamp": "2025-03-19T07:39:13.414Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "f2d56f9d-9af0-41c5-9608-b62bc5f19125",
+    "timestamp": "2025-03-19T07:39:13.466Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "89385688-f5a0-428c-972d-868359aceb26",
+    "generationUUID": "f2d56f9d-9af0-41c5-9608-b62bc5f19125",
+    "timestamp": "2025-03-19T07:39:13.468Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\ninterface Data {\nasync function fetchData(): Promise<{ item: string }> {\n    return { item: \"Hello\" };\n}"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "89385688-f5a0-428c-972d-868359aceb26",
+    "generationUUID": "f2d56f9d-9af0-41c5-9608-b62bc5f19125",
+    "timestamp": "2025-03-19T07:39:13.469Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "89385688-f5a0-428c-972d-868359aceb26",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T07:39:13.470Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "284ae9c6-d4b7-4d12-88d4-1d063c8920aa",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 168,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 170,
+      "monotonicallyIncreasingSuggestionId": 141,
+      "range": {
+        "startLineNumber": 37,
+        "startColumn": 1,
+        "endLineNumberInclusive": 41,
+        "endColumn": 2
+      },
+      "replaceText": "\ninterface Data {\n    item: string;\n}\n\nasync function fetchData(): Promise<Data> {\n    return { item: \"Hello\" };\n}",
+      "originalText": "\ninterface Data {\nasync function fetchData(): Promise<{ item: string }> {\n    return { item: \"Hello\" };\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 37,
+        "startColumn": 1,
+        "endLineNumberInclusive": 41,
+        "endColumn": 2
+      },
+      "diffText": "\ninterface Data {\n    item: string;\n}\n\nasync function fetchData(): Promise<Data> {\n    return { item: \"Hello\" };\n}",
+      "fullOriginalText": "\ninterface Data {\nasync function fetchData(): Promise<{ item: string }> {\n    return { item: \"Hello\" };\n}",
+      "suggestionTriggerTime": 1742369952609.0999,
+      "greens": [],
+      "source": "typing",
+      "requestId": "6b1c7349-0fbe-4fde-aa9b-fb939be4efd1",
+      "selection": {
+        "startLineNumber": 37,
+        "startColumn": 1,
+        "endLineNumberInclusive": 41,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "8488c5ea-ec0f-46e9-8ec2-e746b8f93886",
+      "undoRedoGroup": {
+        "id": 141,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "f2d56f9d-9af0-41c5-9608-b62bc5f19125",
+    "timestamp": "2025-03-19T07:39:13.592Z"
+  }
+]

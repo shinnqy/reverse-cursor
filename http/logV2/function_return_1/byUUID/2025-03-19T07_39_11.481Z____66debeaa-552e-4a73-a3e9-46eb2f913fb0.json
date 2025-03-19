@@ -1,0 +1,121 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "66debeaa-552e-4a73-a3e9-46eb2f913fb0",
+    "timestamp": "2025-03-19T07:39:11.481Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/functionReturn.ets",
+          "diffHistory": [
+            "1+|function add(a: number, b: number): number {\n2+|    return a + b;\n3+|}\n4+|\n5+|function subtract(a: number, b: number): number {\n6+|    return a - b;\n7+|}\n8+|\n9+|let sum = add(1, 2);\n10+|\n11+|function getUser(name: string, age: number): { name: string, age: number } {\n12+|    return { name, age };\n13+|}\n14+|\n15+|let user = getUser(\"John\", 30);\n16+|\n17+|  \n",
+            "11-|function getUser(name: string, age: number): { name: string, age: number } {\n11+|interface User {\n12+|    name: string;\n13+|    age: number;\n14+|}\n15+|\n16+|function getUser(name: string, age: number): User {\n",
+            "22+|function wrapValue<T>(value: T): {data {\n23+|    return { data: value };\n24+|}\n25+|\n26+|let wrappedValue = wrapValue(10);\n27+|\n28+|\n",
+            "22-|function wrapValue<T>(value: T): {data {\n22+|function wrapValue<T>(value: T): {data: T}   {\n",
+            "28+|let wrappedString = wrapValue(\"Hello\");\n30+|let wrappedBoolean = wrapValue(true);\n31+|\n32+|let wrappedArray = wrapValue([1, 2, 3]);\n33+|\n34+|\n",
+            "22-|function wrapValue<T>(value: T): {data: T}   {\n22+|interface Wrapper<T> {\n23+|    data: T;\n24+|}\n25+|\n26+|function wrapValue<T>(value: T): Wrapper<T> {\n",
+            "38+|async function fetchData(): Promise<{ item: string }> {\n39+|    return { item: \"Hello\" };\n40+|}\n42+|let data = await fetchData();\n43+|\n44+|\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/functionReturn.ets",
+        "contents": "function add(a: number, b: number): number {\n    return a + b;\n}\n\nfunction subtract(a: number, b: number): number {\n    return a - b;\n}\n\nlet sum = add(1, 2);\n\ninterface User {\n    name: string;\n    age: number;\n}\n\nfunction getUser(name: string, age: number): User {\n    return { name, age };\n}\n\nlet user = getUser(\"John\", 30);\n\ninterface Wrapper<T> {\n    data: T;\n}\n\nfunction wrapValue<T>(value: T): Wrapper<T> {\n    return { data: value };\n}\n\nlet wrappedValue = wrapValue(10);\n\nlet wrappedString = wrapValue(\"Hello\");\n\nlet wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ item: string }> {\n    return { item: \"Hello\" };\n}\n\nlet data = await fetchData();\n\n\n",
+        "cursorPosition": {
+          "line": 36,
+          "column": 0
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 166,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1742369951528,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 53.39990234375,
+      "timeAtRequestSend": 1742369951528
+    },
+    "generateUuid": "66debeaa-552e-4a73-a3e9-46eb2f913fb0",
+    "timestamp": "2025-03-19T07:39:11.533Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "66debeaa-552e-4a73-a3e9-46eb2f913fb0",
+    "timestamp": "2025-03-19T07:39:11.889Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ item: string }> {\n    return { item: \"Hello\" };\n}",
+      "rangeToReplace": {
+        "startLineNumber": 35,
+        "endLineNumberInclusive": 40
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "66debeaa-552e-4a73-a3e9-46eb2f913fb0",
+    "timestamp": "2025-03-19T07:39:11.889Z"
+  },
+  {
+    "firstChunkValue": "\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ item: string }> {\n    return { item: \"Hello\" };\n}",
+    "generationUUID": "66debeaa-552e-4a73-a3e9-46eb2f913fb0",
+    "timestamp": "2025-03-19T07:39:11.932Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": false
+    },
+    "generationUUID": "66debeaa-552e-4a73-a3e9-46eb2f913fb0",
+    "timestamp": "2025-03-19T07:39:11.932Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "66debeaa-552e-4a73-a3e9-46eb2f913fb0",
+    "timestamp": "2025-03-19T07:39:11.933Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "66debeaa-552e-4a73-a3e9-46eb2f913fb0",
+    "timestamp": "2025-03-19T07:39:11.945Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "d2f765ba-1437-4a03-954d-dbdb49c1bcb7",
+    "generationUUID": "66debeaa-552e-4a73-a3e9-46eb2f913fb0",
+    "timestamp": "2025-03-19T07:39:11.955Z"
+  }
+]

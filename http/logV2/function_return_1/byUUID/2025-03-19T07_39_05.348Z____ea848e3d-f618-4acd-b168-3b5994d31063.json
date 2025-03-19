@@ -1,0 +1,399 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "ea848e3d-f618-4acd-b168-3b5994d31063",
+    "timestamp": "2025-03-19T07:39:05.348Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/functionReturn.ets",
+          "diffHistory": [
+            "1+|function add(a: number, b: number): number {\n2+|    return a + b;\n3+|}\n4+|\n5+|function subtract(a: number, b: number): number {\n6+|    return a - b;\n7+|}\n8+|\n9+|let sum = add(1, 2);\n10+|\n11+|function getUser(name: string, age: number): { name: string, age: number } {\n12+|    return { name, age };\n13+|}\n14+|\n15+|let user = getUser(\"John\", 30);\n16+|\n17+|  \n",
+            "11-|function getUser(name: string, age: number): { name: string, age: number } {\n11+|interface User {\n12+|    name: string;\n13+|    age: number;\n14+|}\n15+|\n16+|function getUser(name: string, age: number): User {\n",
+            "22+|function wrapValue<T>(value: T): {data {\n23+|    return { data: value };\n24+|}\n25+|\n26+|let wrappedValue = wrapValue(10);\n27+|\n28+|\n",
+            "22-|function wrapValue<T>(value: T): {data {\n22+|function wrapValue<T>(value: T): {data: T}   {\n",
+            "28+|let wrappedString = wrapValue(\"Hello\");\n30+|let wrappedBoolean = wrapValue(true);\n31+|\n32+|let wrappedArray = wrapValue([1, 2, 3]);\n33+|\n34+|\n",
+            "22-|function wrapValue<T>(value: T): {data: T}   {\n22+|interface Wrapper<T> {\n23+|    data: T;\n24+|}\n25+|\n26+|function wrapValue<T>(value: T): Wrapper<T> {\n",
+            "38-|\n38+|async function fetchData(): Promise<{ it}>\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/functionReturn.ets",
+        "contents": "function add(a: number, b: number): number {\n    return a + b;\n}\n\nfunction subtract(a: number, b: number): number {\n    return a - b;\n}\n\nlet sum = add(1, 2);\n\ninterface User {\n    name: string;\n    age: number;\n}\n\nfunction getUser(name: string, age: number): User {\n    return { name, age };\n}\n\nlet user = getUser(\"John\", 30);\n\ninterface Wrapper<T> {\n    data: T;\n}\n\nfunction wrapValue<T>(value: T): Wrapper<T> {\n    return { data: value };\n}\n\nlet wrappedValue = wrapValue(10);\n\nlet wrappedString = wrapValue(\"Hello\");\n\nlet wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ it}>\n",
+        "cursorPosition": {
+          "line": 37,
+          "column": 40
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 161,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742369945387,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.199951171875,
+      "timeAtRequestSend": 1742369945387
+    },
+    "generateUuid": "ea848e3d-f618-4acd-b168-3b5994d31063",
+    "timestamp": "2025-03-19T07:39:05.388Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "ea848e3d-f618-4acd-b168-3b5994d31063",
+    "timestamp": "2025-03-19T07:39:05.758Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ items",
+      "rangeToReplace": {
+        "startLineNumber": 34,
+        "endLineNumberInclusive": 39
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "ea848e3d-f618-4acd-b168-3b5994d31063",
+    "timestamp": "2025-03-19T07:39:05.758Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "ea848e3d-f618-4acd-b168-3b5994d31063",
+    "timestamp": "2025-03-19T07:39:05.792Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " string"
+    },
+    "generationUUID": "ea848e3d-f618-4acd-b168-3b5994d31063",
+    "timestamp": "2025-03-19T07:39:05.800Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "[]"
+    },
+    "generationUUID": "ea848e3d-f618-4acd-b168-3b5994d31063",
+    "timestamp": "2025-03-19T07:39:05.817Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " }"
+    },
+    "generationUUID": "ea848e3d-f618-4acd-b168-3b5994d31063",
+    "timestamp": "2025-03-19T07:39:05.830Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ">"
+    },
+    "generationUUID": "ea848e3d-f618-4acd-b168-3b5994d31063",
+    "timestamp": "2025-03-19T07:39:05.841Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "ea848e3d-f618-4acd-b168-3b5994d31063",
+    "timestamp": "2025-03-19T07:39:05.858Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n    return { items"
+    },
+    "generationUUID": "ea848e3d-f618-4acd-b168-3b5994d31063",
+    "timestamp": "2025-03-19T07:39:05.869Z"
+  },
+  {
+    "firstChunkValue": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ items: string[] }> {\n",
+    "generationUUID": "ea848e3d-f618-4acd-b168-3b5994d31063",
+    "timestamp": "2025-03-19T07:39:05.871Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ items: string[] }> {\n"
+    },
+    "generationUUID": "ea848e3d-f618-4acd-b168-3b5994d31063",
+    "timestamp": "2025-03-19T07:39:05.873Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "47ffa69c-2b9e-4f10-873d-fe96b3f45e3f",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 161,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 161,
+      "monotonicallyIncreasingSuggestionId": 135,
+      "range": {
+        "startLineNumber": 34,
+        "startColumn": 1,
+        "endLineNumberInclusive": 39,
+        "endColumn": 1
+      },
+      "replaceText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ items: string[] }> {\n",
+      "originalText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ it}>\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 34,
+        "startColumn": 1,
+        "endLineNumberInclusive": 39,
+        "endColumn": 1
+      },
+      "diffText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ items: string[] }> {\n",
+      "fullOriginalText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ it}>\n",
+      "suggestionTriggerTime": 1742369945341.2,
+      "greens": [],
+      "source": "typing",
+      "requestId": "ea848e3d-f618-4acd-b168-3b5994d31063",
+      "selection": {
+        "startLineNumber": 34,
+        "startColumn": 1,
+        "endLineNumberInclusive": 39,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 135,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 34,
+        "startColumn": 1,
+        "endLineNumber": 39,
+        "endColumn": 1
+      },
+      "trackedText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ item}>\n"
+    },
+    "generationUUID": "ea848e3d-f618-4acd-b168-3b5994d31063",
+    "timestamp": "2025-03-19T07:39:05.883Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": [\""
+    },
+    "generationUUID": "ea848e3d-f618-4acd-b168-3b5994d31063",
+    "timestamp": "2025-03-19T07:39:05.911Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "item"
+    },
+    "generationUUID": "ea848e3d-f618-4acd-b168-3b5994d31063",
+    "timestamp": "2025-03-19T07:39:05.912Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "1"
+    },
+    "generationUUID": "ea848e3d-f618-4acd-b168-3b5994d31063",
+    "timestamp": "2025-03-19T07:39:05.912Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\","
+    },
+    "generationUUID": "ea848e3d-f618-4acd-b168-3b5994d31063",
+    "timestamp": "2025-03-19T07:39:05.921Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \""
+    },
+    "generationUUID": "ea848e3d-f618-4acd-b168-3b5994d31063",
+    "timestamp": "2025-03-19T07:39:05.934Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "item"
+    },
+    "generationUUID": "ea848e3d-f618-4acd-b168-3b5994d31063",
+    "timestamp": "2025-03-19T07:39:05.951Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "2"
+    },
+    "generationUUID": "ea848e3d-f618-4acd-b168-3b5994d31063",
+    "timestamp": "2025-03-19T07:39:05.965Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\","
+    },
+    "generationUUID": "ea848e3d-f618-4acd-b168-3b5994d31063",
+    "timestamp": "2025-03-19T07:39:05.977Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \"item3"
+    },
+    "generationUUID": "ea848e3d-f618-4acd-b168-3b5994d31063",
+    "timestamp": "2025-03-19T07:39:05.992Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\"]"
+    },
+    "generationUUID": "ea848e3d-f618-4acd-b168-3b5994d31063",
+    "timestamp": "2025-03-19T07:39:06.007Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " };"
+    },
+    "generationUUID": "ea848e3d-f618-4acd-b168-3b5994d31063",
+    "timestamp": "2025-03-19T07:39:06.021Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n}\n\nlet data"
+    },
+    "generationUUID": "ea848e3d-f618-4acd-b168-3b5994d31063",
+    "timestamp": "2025-03-19T07:39:06.033Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "ea848e3d-f618-4acd-b168-3b5994d31063",
+    "timestamp": "2025-03-19T07:39:06.046Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " await"
+    },
+    "generationUUID": "ea848e3d-f618-4acd-b168-3b5994d31063",
+    "timestamp": "2025-03-19T07:39:06.061Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " fetch"
+    },
+    "generationUUID": "ea848e3d-f618-4acd-b168-3b5994d31063",
+    "timestamp": "2025-03-19T07:39:06.073Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Data();"
+    },
+    "generationUUID": "ea848e3d-f618-4acd-b168-3b5994d31063",
+    "timestamp": "2025-03-19T07:39:06.087Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "ea848e3d-f618-4acd-b168-3b5994d31063",
+    "timestamp": "2025-03-19T07:39:06.103Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "ea848e3d-f618-4acd-b168-3b5994d31063",
+    "timestamp": "2025-03-19T07:39:06.116Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "ea848e3d-f618-4acd-b168-3b5994d31063",
+    "timestamp": "2025-03-19T07:39:06.138Z"
+  },
+  {
+    "fullText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ items: string[] }> {\n    return { items: [\"item1\", \"item2\", \"item3\"] };\n}\n\nlet data = await fetchData();\n\n\n",
+    "generationUUID": "ea848e3d-f618-4acd-b168-3b5994d31063",
+    "timestamp": "2025-03-19T07:39:06.152Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ items: string[] }> {\n"
+    },
+    "fullText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ items: string[] }> {\n    return { items: [\"item1\", \"item2\", \"item3\"] };\n}\n\nlet data = await fetchData();\n\n\n",
+    "generationUUID": "ea848e3d-f618-4acd-b168-3b5994d31063",
+    "timestamp": "2025-03-19T07:39:06.153Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "ea848e3d-f618-4acd-b168-3b5994d31063",
+    "timestamp": "2025-03-19T07:39:06.153Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "ea848e3d-f618-4acd-b168-3b5994d31063",
+    "timestamp": "2025-03-19T07:39:06.153Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "bc3140ee-cf55-4f0d-af44-94717a807986",
+    "generationUUID": "ea848e3d-f618-4acd-b168-3b5994d31063",
+    "timestamp": "2025-03-19T07:39:06.160Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<{ items: string[] }> {\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "bc3140ee-cf55-4f0d-af44-94717a807986",
+    "generationUUID": "ea848e3d-f618-4acd-b168-3b5994d31063",
+    "timestamp": "2025-03-19T07:39:06.160Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "bc3140ee-cf55-4f0d-af44-94717a807986",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T07:39:06.160Z"
+  }
+]

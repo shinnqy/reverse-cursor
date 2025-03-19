@@ -1,0 +1,321 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "85e92702-3df8-4101-b5ca-d3b6a8752c2a",
+    "timestamp": "2025-03-19T07:58:40.021Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/loop1.ets",
+          "diffHistory": [
+            "1+|let numbers = [1, 2, 3, 4, 5]\n2+|\n3+|for (let i = 0; i < numbers.length; i++) {\n4+|    console.log(numbers[i])\n5+|}\n6+|\n",
+            "5+|    numbers[i].\n",
+            "5-|    numbers[i].\n",
+            "5-|    \n5+|    const number = numbers[i]\n6+|    nm\n",
+            "6-|    nm\n6+|    numbers.\n",
+            "6-|    numbers.\n8+|let users = [\n9+|    { name: 'John', age: 30 },\n10+|    { name: 'Jane', age: 25 },\n11+|    { name: 'Jim', age: 35 },\n12+|]\n13+|\n14+|\n15+|\n",
+            "14+|for (let i = 0; i < users.length; i++) {\n15+|    const user = users[i]\n16+|    console.log(user.name)\n17+|}\n",
+            "14-|for (let i = 0; i < users.length; i++) {\n15-|    const user = users[i]\n14+|for (const user of users) {\n",
+            "18+|f\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/loop1.ets",
+        "contents": "let numbers = [1, 2, 3, 4, 5]\n\nfor (let i = 0; i < numbers.length; i++) {\n    console.log(numbers[i])\n    const number = numbers[i]\n}\n\nlet users = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]\n\nfor (const user of users) {\n    console.log(user.name)\n}\n\nf\n\n\n\n\n\n",
+        "cursorPosition": {
+          "line": 17,
+          "column": 1
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 119,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742371120064,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 53.199951171875,
+      "timeAtRequestSend": 1742371120064
+    },
+    "generateUuid": "85e92702-3df8-4101-b5ca-d3b6a8752c2a",
+    "timestamp": "2025-03-19T07:58:40.066Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "85e92702-3df8-4101-b5ca-d3b6a8752c2a",
+    "timestamp": "2025-03-19T07:58:40.405Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "    console.log(user.name)\n}\n\nfor",
+      "rangeToReplace": {
+        "startLineNumber": 15,
+        "endLineNumberInclusive": 23
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "85e92702-3df8-4101-b5ca-d3b6a8752c2a",
+    "timestamp": "2025-03-19T07:58:40.407Z"
+  },
+  {
+    "firstChunkValue": "    console.log(user.name)\n}\n\nfor (const user of users) {\n\n\n\n\n",
+    "generationUUID": "85e92702-3df8-4101-b5ca-d3b6a8752c2a",
+    "timestamp": "2025-03-19T07:58:40.462Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "    console.log(user.name)\n}\n\nfor (const user of users) {\n\n\n\n\n"
+    },
+    "generationUUID": "85e92702-3df8-4101-b5ca-d3b6a8752c2a",
+    "timestamp": "2025-03-19T07:58:40.465Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " (const user of users) {\n"
+    },
+    "generationUUID": "85e92702-3df8-4101-b5ca-d3b6a8752c2a",
+    "timestamp": "2025-03-19T07:58:40.467Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "a39f7761-43d5-405e-a8fd-6aacf3d1fcc1",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 119,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 119,
+      "monotonicallyIncreasingSuggestionId": 67,
+      "range": {
+        "startLineNumber": 15,
+        "startColumn": 1,
+        "endLineNumberInclusive": 23,
+        "endColumn": 1
+      },
+      "replaceText": "    console.log(user.name)\n}\n\nfor (const user of users) {\n\n\n\n\n",
+      "originalText": "    console.log(user.name)\n}\n\nf\n\n\n\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 15,
+        "startColumn": 1,
+        "endLineNumberInclusive": 23,
+        "endColumn": 1
+      },
+      "diffText": "    console.log(user.name)\n}\n\nfor (const user of users) {\n\n\n\n\n",
+      "fullOriginalText": "    console.log(user.name)\n}\n\nf\n\n\n\n\n",
+      "suggestionTriggerTime": 1742371120011.5,
+      "greens": [],
+      "source": "typing",
+      "requestId": "85e92702-3df8-4101-b5ca-d3b6a8752c2a",
+      "selection": {
+        "startLineNumber": 15,
+        "startColumn": 1,
+        "endLineNumberInclusive": 23,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 67,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 15,
+        "startColumn": 1,
+        "endLineNumber": 23,
+        "endColumn": 1
+      },
+      "trackedText": "    console.log(user.name)\n}\n\nfor \n\n\n\n\n"
+    },
+    "generationUUID": "85e92702-3df8-4101-b5ca-d3b6a8752c2a",
+    "timestamp": "2025-03-19T07:58:40.467Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "   "
+    },
+    "generationUUID": "85e92702-3df8-4101-b5ca-d3b6a8752c2a",
+    "timestamp": "2025-03-19T07:58:40.479Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " console.log(user.name)"
+    },
+    "generationUUID": "85e92702-3df8-4101-b5ca-d3b6a8752c2a",
+    "timestamp": "2025-03-19T07:58:40.492Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "85e92702-3df8-4101-b5ca-d3b6a8752c2a",
+    "timestamp": "2025-03-19T07:58:40.505Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}\n\n\n"
+    },
+    "generationUUID": "85e92702-3df8-4101-b5ca-d3b6a8752c2a",
+    "timestamp": "2025-03-19T07:58:40.515Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "85e92702-3df8-4101-b5ca-d3b6a8752c2a",
+    "timestamp": "2025-03-19T07:58:40.529Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "85e92702-3df8-4101-b5ca-d3b6a8752c2a",
+    "timestamp": "2025-03-19T07:58:40.545Z"
+  },
+  {
+    "fullText": "    console.log(user.name)\n}\n\nfor (const user of users) {\n    console.log(user.name)\n}\n\n\n\n\n",
+    "generationUUID": "85e92702-3df8-4101-b5ca-d3b6a8752c2a",
+    "timestamp": "2025-03-19T07:58:40.581Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "    console.log(user.name)\n}\n\nfor (const user of users) {\n\n\n\n\n"
+    },
+    "fullText": "    console.log(user.name)\n}\n\nfor (const user of users) {\n    console.log(user.name)\n}\n\n\n\n\n",
+    "generationUUID": "85e92702-3df8-4101-b5ca-d3b6a8752c2a",
+    "timestamp": "2025-03-19T07:58:40.582Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "623e3e67-b97e-4f7a-86a9-99f830e77cc6",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 119,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 124,
+      "monotonicallyIncreasingSuggestionId": 69,
+      "range": {
+        "startLineNumber": 15,
+        "startColumn": 1,
+        "endLineNumberInclusive": 23,
+        "endColumn": 1
+      },
+      "replaceText": "    console.log(user.name)\n}\n\nfor (const user of users) {\n    console.log(user.name)\n}\n\n\n\n\n",
+      "originalText": "    console.log(user.name)\n}\n\nfor (const user of users) {\n\n\n\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 15,
+        "startColumn": 1,
+        "endLineNumberInclusive": 23,
+        "endColumn": 1
+      },
+      "diffText": "    console.log(user.name)\n}\n\nfor (const user of users) {\n    console.log(user.name)\n}\n\n\n\n\n",
+      "fullOriginalText": "    console.log(user.name)\n}\n\nfor (const user of users) {\n\n\n\n\n",
+      "suggestionTriggerTime": 1742371120011.5,
+      "greens": [],
+      "source": "typing",
+      "requestId": "85e92702-3df8-4101-b5ca-d3b6a8752c2a",
+      "selection": {
+        "startLineNumber": 15,
+        "startColumn": 1,
+        "endLineNumberInclusive": 23,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "e5ee36e4-cc1b-4e28-bbe1-a3f84082d607",
+      "undoRedoGroup": {
+        "id": 69,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "85e92702-3df8-4101-b5ca-d3b6a8752c2a",
+    "timestamp": "2025-03-19T07:58:40.582Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "85e92702-3df8-4101-b5ca-d3b6a8752c2a",
+    "timestamp": "2025-03-19T07:58:40.585Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "85e92702-3df8-4101-b5ca-d3b6a8752c2a",
+    "timestamp": "2025-03-19T07:58:40.714Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "e5ee36e4-cc1b-4e28-bbe1-a3f84082d607",
+    "generationUUID": "85e92702-3df8-4101-b5ca-d3b6a8752c2a",
+    "timestamp": "2025-03-19T07:58:40.729Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "    console.log(user.name)\n}\n\nfor (const user of users) {\n\n\n\n\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "e5ee36e4-cc1b-4e28-bbe1-a3f84082d607",
+    "generationUUID": "85e92702-3df8-4101-b5ca-d3b6a8752c2a",
+    "timestamp": "2025-03-19T07:58:40.730Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "e5ee36e4-cc1b-4e28-bbe1-a3f84082d607",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T07:58:40.731Z"
+  }
+]

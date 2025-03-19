@@ -1,0 +1,55 @@
+{"line":37,"column":0}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+function add(a: number, b: number): number {
+    return a + b;
+}
+
+function subtract(a: number, b: number): number {
+    return a - b;
+}
+
+let sum = add(1, 2);
+
+interface User {
+    name: string;
+    age: number;
+}
+
+function getUser(name: string, age: number): User {
+    return { name, age };
+}
+
+let user = getUser("John", 30);
+
+interface Wrapper<T> {
+    data: T;
+}
+
+function wrapValue<T>(value: T): Wrapper<T> {
+    return { data: value };
+}
+
+let wrappedValue = wrapValue(10);
+
+let wrappedString = wrapValue("Hello");
+
+let wrappedBoolean = wrapValue(true);
+
+let wrappedArray = wrapValue([1, 2, 3]);
+
+[ToFill]
+async function fetchData(): Promise<{ item: string }> {
+    return { item: "Hello" };
+}
+
+let data = await fetchData();
+
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+
+async function fetchData(): Promise<{ item: string }> {
+    return { item: "Hello" };
+}

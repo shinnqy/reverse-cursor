@@ -1,0 +1,140 @@
+You're an expert in ArkTS. Your task is to help the user update the code around current cursor position.
+
+## Recent Actions
+Here is what the user has been doing from the earliest to the latest:
+
+File: entry/src/main/ets/utils/loop1.ets
+added the code `let numbers = [1, 2, 3, 4, 5]` in line 1
+added the code `` in line 2
+added the code `for (let i = 0; i < numbers.length; i++) {` in line 3
+added the code `    console.log(numbers[i])` in line 4
+added the code `}` in line 5
+added the code `` in line 6
+
+added the code `    numbers[i].` in line 5
+
+deleted the code `    numbers[i].` in line 5
+
+deleted the code `    ` in line 5
+added the code `    const number = numbers[i]` in line 5
+added the code `    nm` in line 6
+
+deleted the code `    nm` in line 6
+added the code `    numbers.` in line 6
+
+deleted the code `    numbers.` in line 6
+added the code `let users = [` in line 8
+added the code `    { name: 'John', age: 30 },` in line 9
+added the code `    { name: 'Jane', age: 25 },` in line 10
+added the code `    { name: 'Jim', age: 35 },` in line 11
+added the code `]` in line 12
+added the code `` in line 13
+added the code `` in line 14
+added the code `` in line 15
+
+added the code `for (let i = 0; i < users.length; i++) {` in line 14
+added the code `    const user = users[i]` in line 15
+added the code `    console.log(user.name)` in line 16
+added the code `}` in line 17
+
+deleted the code `for (let i = 0; i < users.length; i++) {` in line 14
+deleted the code `    const user = users[i]` in line 15
+added the code `for (const user of users) {` in line 14
+
+added the code `for (const key in users) {` in line 18
+added the code `    console.log(key)` in line 19
+added the code `}` in line 20
+
+added the code `    const user = users[key];` in line 20
+added the code `    user.name = 'John';` in line 21
+
+deleted the code `let users = [` in line 8
+added the code `interface User {` in line 8
+added the code `    name: string;` in line 9
+added the code `    age: number;` in line 10
+added the code `}` in line 11
+added the code `` in line 12
+added the code `let users: User[] = [` in line 13
+
+added the code `let counter = 0;` in line 29
+
+added the code `while (counter < 10) {` in line 31
+added the code `    console.log(counter)` in line 32
+added the code `    counter++;` in line 33
+added the code `}` in line 34
+
+added the code `let matrix = [` in line 36
+added the code `    [1, 2, 3],` in line 37
+added the code `    [4, 5, 6],` in line 38
+added the code `    [7, 8, 9],` in line 39
+added the code `]` in line 40
+added the code `f` in line 42
+
+
+## Current Code
+Here is the current code file path:
+entry/src/main/ets/utils/loop1.ets
+
+Here is the current code around the cursor position:
+
+```
+let numbers = [1, 2, 3, 4, 5]
+
+for (let i = 0; i < numbers.length; i++) {
+    console.log(numbers[i])
+    const number = numbers[i]
+}
+
+interface User {
+    name: string;
+    age: number;
+}
+
+let users: User[] = [
+    { name: 'John', age: 30 },
+    { name: 'Jane', age: 25 },
+    { name: 'Jim', age: 35 },
+]
+
+for (const user of users) {
+    console.log(user.name)
+}
+
+for (const key in users) {
+    console.log(key)
+    const user = users[key];
+    user.name = 'John';
+}
+
+let counter = 0;
+
+while (counter < 10) {
+<|editable_region_start|>
+    console.log(counter)
+    counter++;
+}
+
+let matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9],
+]
+
+f<|current_cursor_position|>
+
+
+
+<|editable_region_end|>
+```
+
+## Task
+Rewrite the code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> according to the following requirements:
+1. Enforce code format strictly matching existing code style.
+2. Propagate naming convention changes to all related cases
+3. Preserve original functionality
+4. Apply changes to entire code regardless of cursor position
+5. Focus on code after cursor position at <|current_cursor_position|>
+
+# Output Format
+Return ONLY the rewritten code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> without any other words.
+Never use markdown formatting like ```. Return raw text only.

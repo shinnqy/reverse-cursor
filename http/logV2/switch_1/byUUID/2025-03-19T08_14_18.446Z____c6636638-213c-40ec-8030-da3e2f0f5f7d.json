@@ -1,0 +1,731 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:18.446Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/switch1.ets",
+          "diffHistory": [
+            "1+|type Color = \"red\" | \"blue\" | \"green\";\n2+|\n3+|let color: Color = \"red\";\n4+|\n5+|switch (color) {\n6+|    case \"red\":\n7+|        console.log(\"red\");\n8+|        break;\n9+|}\n",
+            "9-|        \n10-|}\n9+|    case \"blue\":\n10+|}\n",
+            "10+|        console.log(\"blue\");\n11+|        break;\n12+|    case \"green\":\n13+|        console.log(\"green\");\n14+|        break;\n16+|\n17+|enum Direction {}\n18+|\n",
+            "17-|enum Direction {}\n17+|enum Direction {\n18+|    Up,\n19+|    Down,\n20+|    Left,\n21+|    Right,\n22+|}\n23+|let dir: Direction = Direction.Up;\n",
+            "25+|switch (dir) {\n26+|    case Direction.Up:\n27+|        console.log(\"up\");\n28+|        break;\n29+|}\n30+|\n",
+            "29+|    case Direction.Down:\n30+|        console.log(\"down\");\n31+|        break;\n32+|    case Direction.Left:\n33+|        console.log(\"left\");\n34+|        break;\n35+|        \n",
+            "38+|interface Square {\n39+|    kind: \"square\";\n40+|    size: number;\n41+|}\n42+|\n43+|interface Rectangle {\n44+|    \n45+|}\n",
+            "42+|interface Circle {\n43+|    kind: \"circle\";\n44+|    radius: number;\n45+|}\n43-|interface Rectangle {\n44-|    \n45-|}\n",
+            "47-|\n47+|function getArea()\n",
+            "47+|type Shape = Square | Circle;\n48+|\n",
+            "49-|function getArea()\n49+|function getArea(shape: Shape) {\n50+|    switch (shape.kind) {\n51+|        case \"square\":\n52+|            return shape.size * shape.size;\n53+|        case \"circle\":\n54+|            return Math.PI * shape.radius ** 2;\n55+|    }\n56+|}\n57+|\n58+|let category = \"A\";\n59+|let subCategory = 1;\n60+|\n61+|switch (category) {\n62+|    case \"A\":\n63+|        switch (subCategory) {\n64+|            \n65+|        }\n66+|}\n",
+            "64-|            \n64+|          \n65+|\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/switch1.ets",
+        "contents": "type Color = \"red\" | \"blue\" | \"green\";\n\nlet color: Color = \"red\";\n\nswitch (color) {\n    case \"red\":\n        console.log(\"red\");\n        break;\n    case \"blue\":\n        console.log(\"blue\");\n        break;\n    case \"green\":\n        console.log(\"green\");\n        break;\n}\n\nenum Direction {\n    Up,\n    Down,\n    Left,\n    Right,\n}\nlet dir: Direction = Direction.Up;\n\nswitch (dir) {\n    case Direction.Up:\n        console.log(\"up\");\n        break;\n    case Direction.Down:\n        console.log(\"down\");\n        break;\n    case Direction.Left:\n        console.log(\"left\");\n        break;\n\n}\n\ninterface Square {\n    kind: \"square\";\n    size: number;\n}\ninterface Circle {\n    kind: \"circle\";\n    radius: number;\n}\n\ntype Shape = Square | Circle;\n\nfunction getArea(shape: Shape) {\n    switch (shape.kind) {\n        case \"square\":\n            return shape.size * shape.size;\n        case \"circle\":\n            return Math.PI * shape.radius ** 2;\n    }\n}\n\nlet category = \"A\";\nlet subCategory = 1;\n\nswitch (category) {\n    case \"A\":\n        switch (subCategory) {\n          \n\n        }\n}",
+        "cursorPosition": {
+          "line": 63,
+          "column": 10
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 188,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1742372058493,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 49.5,
+      "timeAtRequestSend": 1742372058493
+    },
+    "generateUuid": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:18.495Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:18.928Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "    case \"A\":\n        switch (subCategory) {\n           ",
+      "rangeToReplace": {
+        "startLineNumber": 62,
+        "endLineNumberInclusive": 66
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:18.936Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " case"
+    },
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:18.940Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:18.941Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "1:"
+    },
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:18.941Z"
+  },
+  {
+    "firstChunkValue": "    case \"A\":\n        switch (subCategory) {\n            case 1:\n\n        }",
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:18.950Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:18.951Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "    case \"A\":\n        switch (subCategory) {\n            case 1:\n\n        }"
+    },
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:18.952Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "4e4e63e2-5a5f-49a2-85f3-4c9dfe4b0421",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 188,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 188,
+      "monotonicallyIncreasingSuggestionId": 150,
+      "range": {
+        "startLineNumber": 62,
+        "startColumn": 1,
+        "endLineNumberInclusive": 66,
+        "endColumn": 10
+      },
+      "replaceText": "    case \"A\":\n        switch (subCategory) {\n            case 1:\n\n        }",
+      "originalText": "    case \"A\":\n        switch (subCategory) {\n          \n\n        }",
+      "startingSuggestionRange": {
+        "startLineNumber": 62,
+        "startColumn": 1,
+        "endLineNumberInclusive": 66,
+        "endColumn": 10
+      },
+      "diffText": "    case \"A\":\n        switch (subCategory) {\n            case 1:\n\n        }",
+      "fullOriginalText": "    case \"A\":\n        switch (subCategory) {\n          \n\n        }",
+      "suggestionTriggerTime": 1742372058444.1,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+      "selection": {
+        "startLineNumber": 62,
+        "startColumn": 1,
+        "endLineNumberInclusive": 66,
+        "endColumn": 10
+      },
+      "undoRedoGroup": {
+        "id": 150,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:18.953Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "               "
+    },
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:18.964Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " console"
+    },
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:18.975Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ".log(\"A"
+    },
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:18.987Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "1"
+    },
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:18.999Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\");"
+    },
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:19.011Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n               "
+    },
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:19.024Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " break"
+    },
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:19.037Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";\n           "
+    },
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:19.055Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " case 2"
+    },
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:19.064Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:19.073Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n                console."
+    },
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:19.093Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "log"
+    },
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:19.100Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "(\"A"
+    },
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:19.111Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "2"
+    },
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:19.124Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\");"
+    },
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:19.142Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:19.151Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "               "
+    },
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:19.161Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " break"
+    },
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:19.178Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";"
+    },
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:19.190Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n       "
+    },
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:19.200Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " }\n       "
+    },
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:19.212Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " break"
+    },
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:19.225Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";\n        "
+    },
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:19.239Z"
+  },
+  {
+    "fullText": "    case \"A\":\n        switch (subCategory) {\n            case 1:\n                console.log(\"A1\");\n                break;\n            case 2:\n                console.log(\"A2\");\n                break;\n        }\n        break;\n        ",
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:19.255Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "    case \"A\":\n        switch (subCategory) {\n            case 1:\n\n        }"
+    },
+    "fullText": "    case \"A\":\n        switch (subCategory) {\n            case 1:\n                console.log(\"A1\");\n                break;\n            case 2:\n                console.log(\"A2\");\n                break;\n        }\n        break;\n        ",
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:19.255Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "4b5e9608-45a0-4525-9309-a9000f04d05f",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 188,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 189,
+      "monotonicallyIncreasingSuggestionId": 151,
+      "range": {
+        "startLineNumber": 62,
+        "startColumn": 1,
+        "endLineNumberInclusive": 66,
+        "endColumn": 10
+      },
+      "replaceText": "    case \"A\":\n        switch (subCategory) {\n            case 1:\n                console.log(\"A1\");\n                break;\n            case 2:\n                console.log(\"A2\");\n                break;\n        }\n        break;\n        ",
+      "originalText": "    case \"A\":\n        switch (subCategory) {\n            case 1:\n\n        }",
+      "startingSuggestionRange": {
+        "startLineNumber": 62,
+        "startColumn": 1,
+        "endLineNumberInclusive": 66,
+        "endColumn": 10
+      },
+      "diffText": "    case \"A\":\n        switch (subCategory) {\n            case 1:\n                console.log(\"A1\");\n                break;\n            case 2:\n                console.log(\"A2\");\n                break;\n        }\n        break;\n        ",
+      "fullOriginalText": "    case \"A\":\n        switch (subCategory) {\n            case 1:\n\n        }",
+      "suggestionTriggerTime": 1742372058444.1,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+      "selection": {
+        "startLineNumber": 62,
+        "startColumn": 1,
+        "endLineNumberInclusive": 66,
+        "endColumn": 10
+      },
+      "fusedCursorPredictionId": "c97028f8-245c-44a0-bb49-d84b8b2cc6b4",
+      "undoRedoGroup": {
+        "id": 151,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:19.256Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:19.256Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:19.256Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "c97028f8-245c-44a0-bb49-d84b8b2cc6b4",
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:19.261Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "    case \"A\":\n        switch (subCategory) {\n            case 1:\n\n        }"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "c97028f8-245c-44a0-bb49-d84b8b2cc6b4",
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:19.261Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "c97028f8-245c-44a0-bb49-d84b8b2cc6b4",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T08:14:19.261Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "4e4e63e2-5a5f-49a2-85f3-4c9dfe4b0421",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 188,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 188,
+      "monotonicallyIncreasingSuggestionId": 150,
+      "range": {
+        "startLineNumber": 62,
+        "startColumn": 1,
+        "endLineNumberInclusive": 66,
+        "endColumn": 10
+      },
+      "replaceText": "    case \"A\":\n        switch (subCategory) {\n            case 1:\n\n        }",
+      "originalText": "    case \"A\":\n        switch (subCategory) {\n          \n\n        }",
+      "startingSuggestionRange": {
+        "startLineNumber": 62,
+        "startColumn": 1,
+        "endLineNumberInclusive": 66,
+        "endColumn": 10
+      },
+      "diffText": "    case \"A\":\n        switch (subCategory) {\n            case 1:\n\n        }",
+      "fullOriginalText": "    case \"A\":\n        switch (subCategory) {\n          \n\n        }",
+      "suggestionTriggerTime": 1742372058444.1,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+      "selection": {
+        "startLineNumber": 62,
+        "startColumn": 1,
+        "endLineNumberInclusive": 66,
+        "endColumn": 10
+      },
+      "undoRedoGroup": {
+        "id": 150,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;594",
+      "onAcceptDisplayId": "4b5e9608-45a0-4525-9309-a9000f04d05f"
+    },
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:20.207Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "4e4e63e2-5a5f-49a2-85f3-4c9dfe4b0421",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 188,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 188,
+      "monotonicallyIncreasingSuggestionId": 150,
+      "range": {
+        "startLineNumber": 62,
+        "startColumn": 1,
+        "endLineNumberInclusive": 66,
+        "endColumn": 10
+      },
+      "replaceText": "    case \"A\":\n        switch (subCategory) {\n            case 1:\n\n        }",
+      "originalText": "    case \"A\":\n        switch (subCategory) {\n          \n\n        }",
+      "startingSuggestionRange": {
+        "startLineNumber": 62,
+        "startColumn": 1,
+        "endLineNumberInclusive": 66,
+        "endColumn": 10
+      },
+      "diffText": "    case \"A\":\n        switch (subCategory) {\n            case 1:\n\n        }",
+      "fullOriginalText": "    case \"A\":\n        switch (subCategory) {\n          \n\n        }",
+      "suggestionTriggerTime": 1742372058444.1,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+      "selection": {
+        "startLineNumber": 62,
+        "startColumn": 1,
+        "endLineNumberInclusive": 66,
+        "endColumn": 10
+      },
+      "undoRedoGroup": {
+        "id": 150,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;594",
+      "onAcceptDisplayId": "4b5e9608-45a0-4525-9309-a9000f04d05f"
+    },
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:20.223Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "4b5e9608-45a0-4525-9309-a9000f04d05f",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 188,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 189,
+      "monotonicallyIncreasingSuggestionId": 151,
+      "range": {
+        "startLineNumber": 62,
+        "startColumn": 1,
+        "endLineNumberInclusive": 66,
+        "endColumn": 10
+      },
+      "replaceText": "    case \"A\":\n        switch (subCategory) {\n            case 1:\n                console.log(\"A1\");\n                break;\n            case 2:\n                console.log(\"A2\");\n                break;\n        }\n        break;\n        ",
+      "originalText": "    case \"A\":\n        switch (subCategory) {\n            case 1:\n\n        }",
+      "startingSuggestionRange": {
+        "startLineNumber": 62,
+        "startColumn": 1,
+        "endLineNumberInclusive": 66,
+        "endColumn": 10
+      },
+      "diffText": "    case \"A\":\n        switch (subCategory) {\n            case 1:\n                console.log(\"A1\");\n                break;\n            case 2:\n                console.log(\"A2\");\n                break;\n        }\n        break;\n        ",
+      "fullOriginalText": "    case \"A\":\n        switch (subCategory) {\n            case 1:\n\n        }",
+      "suggestionTriggerTime": 1742372058444.1,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+      "selection": {
+        "startLineNumber": 62,
+        "startColumn": 1,
+        "endLineNumberInclusive": 66,
+        "endColumn": 10
+      },
+      "fusedCursorPredictionId": "c97028f8-245c-44a0-bb49-d84b8b2cc6b4",
+      "undoRedoGroup": {
+        "id": 151,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:20.224Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "4b5e9608-45a0-4525-9309-a9000f04d05f",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 188,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 189,
+      "monotonicallyIncreasingSuggestionId": 151,
+      "range": {
+        "startLineNumber": 62,
+        "startColumn": 1,
+        "endLineNumberInclusive": 66,
+        "endColumn": 10
+      },
+      "replaceText": "    case \"A\":\n        switch (subCategory) {\n            case 1:\n                console.log(\"A1\");\n                break;\n            case 2:\n                console.log(\"A2\");\n                break;\n        }\n        break;\n        ",
+      "originalText": "    case \"A\":\n        switch (subCategory) {\n            case 1:\n\n        }",
+      "startingSuggestionRange": {
+        "startLineNumber": 62,
+        "startColumn": 1,
+        "endLineNumberInclusive": 66,
+        "endColumn": 10
+      },
+      "diffText": "    case \"A\":\n        switch (subCategory) {\n            case 1:\n                console.log(\"A1\");\n                break;\n            case 2:\n                console.log(\"A2\");\n                break;\n        }\n        break;\n        ",
+      "fullOriginalText": "    case \"A\":\n        switch (subCategory) {\n            case 1:\n\n        }",
+      "suggestionTriggerTime": 1742372058444.1,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+      "selection": {
+        "startLineNumber": 62,
+        "startColumn": 1,
+        "endLineNumberInclusive": 66,
+        "endColumn": 10
+      },
+      "fusedCursorPredictionId": "c97028f8-245c-44a0-bb49-d84b8b2cc6b4",
+      "undoRedoGroup": {
+        "id": 151,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;603"
+    },
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:21.969Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "4b5e9608-45a0-4525-9309-a9000f04d05f",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 188,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 189,
+      "monotonicallyIncreasingSuggestionId": 151,
+      "range": {
+        "startLineNumber": 62,
+        "startColumn": 1,
+        "endLineNumberInclusive": 66,
+        "endColumn": 10
+      },
+      "replaceText": "    case \"A\":\n        switch (subCategory) {\n            case 1:\n                console.log(\"A1\");\n                break;\n            case 2:\n                console.log(\"A2\");\n                break;\n        }\n        break;\n        ",
+      "originalText": "    case \"A\":\n        switch (subCategory) {\n            case 1:\n\n        }",
+      "startingSuggestionRange": {
+        "startLineNumber": 62,
+        "startColumn": 1,
+        "endLineNumberInclusive": 66,
+        "endColumn": 10
+      },
+      "diffText": "    case \"A\":\n        switch (subCategory) {\n            case 1:\n                console.log(\"A1\");\n                break;\n            case 2:\n                console.log(\"A2\");\n                break;\n        }\n        break;\n        ",
+      "fullOriginalText": "    case \"A\":\n        switch (subCategory) {\n            case 1:\n\n        }",
+      "suggestionTriggerTime": 1742372058444.1,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+      "selection": {
+        "startLineNumber": 62,
+        "startColumn": 1,
+        "endLineNumberInclusive": 66,
+        "endColumn": 10
+      },
+      "fusedCursorPredictionId": "c97028f8-245c-44a0-bb49-d84b8b2cc6b4",
+      "undoRedoGroup": {
+        "id": 151,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;603"
+    },
+    "generationUUID": "c6636638-213c-40ec-8030-da3e2f0f5f7d",
+    "timestamp": "2025-03-19T08:14:21.990Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "c97028f8-245c-44a0-bb49-d84b8b2cc6b4",
+    "fusedCursorPrediction": null,
+    "oldText": "    case \"A\":\n        switch (subCategory) {\n            case 1:\n\n        }",
+    "newText": "    case \"A\":\n        switch (subCategory) {\n            case 1:\n                console.log(\"A1\");\n                break;\n            case 2:\n                console.log(\"A2\");\n                break;\n        }\n        break;\n        ",
+    "timestamp": "2025-03-19T08:14:21.991Z"
+  }
+]

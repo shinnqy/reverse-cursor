@@ -1,0 +1,78 @@
+{"line":10,"column":1}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+function add(a: number, b: number): number {
+    return a + b;
+}
+
+function subtract(a: number, b: number): number {
+    return a - b;
+}
+
+let sum = add(1, 2);
+
+i[ToFill]
+function getUser(name: string, age: number): { name: string, age: number } {
+    return { name, age };
+}
+
+let user = getUser("John", 30);
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+interface User {
+function getUser(name: string, age: number): { name: string, age: number } {
+    return { name, age };
+}
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+function add(a: number, b: number): number {
+    return a + b;
+}
+
+function subtract(a: number, b: number): number {
+    return a - b;
+}
+
+let sum = add(1, 2);
+
+interface User {
+function getUser(name: string, age: number): { name: string, age: number } {
+    return { name, age };
+}
+
+let user = getUser("John", 30);
+
+
+-------------------------------[                   fullText                  ]--------------------------------
+
+interface User {
+    name: string;
+    age: number;
+}
+
+function getUser(name: string, age: number): User {
+    return { name, age };
+}
+-------------------------------[         replacedContentsWithFullText         ]--------------------------------
+function add(a: number, b: number): number {
+    return a + b;
+}
+
+function subtract(a: number, b: number): number {
+    return a - b;
+}
+
+let sum = add(1, 2);
+
+interface User {
+    name: string;
+    age: number;
+}
+
+let user = getUser("John", 30);
+
+
+function getUser(name: string, age: number): User {
+    return { name, age };
+}

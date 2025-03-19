@@ -1,0 +1,88 @@
+You're an expert in ArkTS. Your task is to help the user update the code around current cursor position.
+
+## Recent Actions
+Here is what the user has been doing from the earliest to the latest:
+
+File: entry/src/main/ets/utils/loop1.ets
+added the code `let numbers = [1, 2, 3, 4, 5]` in line 1
+added the code `` in line 2
+added the code `for (let i = 0; i < numbers.length; i++) {` in line 3
+added the code `    console.log(numbers[i])` in line 4
+added the code `}` in line 5
+added the code `` in line 6
+
+added the code `    numbers[i].` in line 5
+
+deleted the code `    numbers[i].` in line 5
+
+deleted the code `    ` in line 5
+added the code `    const number = numbers[i]` in line 5
+added the code `    nm` in line 6
+
+deleted the code `    nm` in line 6
+added the code `    numbers.` in line 6
+
+deleted the code `    numbers.` in line 6
+added the code `let users = [` in line 8
+added the code `    { name: 'John', age: 30 },` in line 9
+added the code `    { name: 'Jane', age: 25 },` in line 10
+added the code `    { name: 'Jim', age: 35 },` in line 11
+added the code `]` in line 12
+added the code `` in line 13
+added the code `` in line 14
+added the code `` in line 15
+
+added the code `for (let i = 0; i < users.length; i++) {` in line 14
+added the code `    const user = users[i]` in line 15
+added the code `    console.log(user.name)` in line 16
+added the code `}` in line 17
+
+deleted the code `for (let i = 0; i < users.length; i++) {` in line 14
+deleted the code `    const user = users[i]` in line 15
+deleted the code `    console.log(user.name)` in line 16
+deleted the code `}` in line 17
+added the code `for (co)` in line 14
+
+
+## Current Code
+Here is the current code file path:
+entry/src/main/ets/utils/loop1.ets
+
+Here is the current code around the cursor position:
+
+```
+let numbers = [1, 2, 3, 4, 5]
+
+for (let i = 0; i < numbers.length; i++) {
+<|editable_region_start|>
+    console.log(numbers[i])
+    const number = numbers[i]
+}
+
+let users = [
+    { name: 'John', age: 30 },
+    { name: 'Jane', age: 25 },
+    { name: 'Jim', age: 35 },
+]
+
+for (co<|current_cursor_position|>)
+
+
+
+
+
+
+<|editable_region_end|>
+```
+
+## Task
+Rewrite the code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> according to the following requirements:
+1. Enforce code format strictly matching existing code style.
+2. Propagate naming convention changes to all related cases
+3. Preserve original functionality
+4. Apply changes to entire code regardless of cursor position
+5. Focus on code after cursor position at <|current_cursor_position|>
+
+# Output Format
+Return ONLY the rewritten code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> without any other words.
+Never use markdown formatting like ```. Return raw text only.

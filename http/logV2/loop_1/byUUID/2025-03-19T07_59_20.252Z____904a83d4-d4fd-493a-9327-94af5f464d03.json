@@ -1,0 +1,695 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:20.252Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/loop1.ets",
+          "diffHistory": [
+            "1+|let numbers = [1, 2, 3, 4, 5]\n2+|\n3+|for (let i = 0; i < numbers.length; i++) {\n4+|    console.log(numbers[i])\n5+|}\n6+|\n",
+            "5+|    numbers[i].\n",
+            "5-|    numbers[i].\n",
+            "5-|    \n5+|    const number = numbers[i]\n6+|    nm\n",
+            "6-|    nm\n6+|    numbers.\n",
+            "6-|    numbers.\n8+|let users = [\n9+|    { name: 'John', age: 30 },\n10+|    { name: 'Jane', age: 25 },\n11+|    { name: 'Jim', age: 35 },\n12+|]\n13+|\n14+|\n15+|\n",
+            "14+|for (let i = 0; i < users.length; i++) {\n15+|    const user = users[i]\n16+|    console.log(user.name)\n17+|}\n",
+            "14-|for (let i = 0; i < users.length; i++) {\n15-|    const user = users[i]\n14+|for (const user of users) {\n",
+            "18+|for (const key in users) {\n19+|    console.log(key)\n20+|}\n",
+            "20+|    const user = users[key];\n21+|    user.name = 'John';\n",
+            "8+|i\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/loop1.ets",
+        "contents": "let numbers = [1, 2, 3, 4, 5]\n\nfor (let i = 0; i < numbers.length; i++) {\n    console.log(numbers[i])\n    const number = numbers[i]\n}\n\ni\nlet users = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]\n\nfor (const user of users) {\n    console.log(user.name)\n}\n\nfor (const key in users) {\n    console.log(key)\n    const user = users[key];\n    user.name = 'John';\n}\n\n\n\n\n\n",
+        "cursorPosition": {
+          "line": 7,
+          "column": 1
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 146,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742371160292,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.300048828125,
+      "timeAtRequestSend": 1742371160292
+    },
+    "generateUuid": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:20.294Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:20.754Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\ninterface",
+      "rangeToReplace": {
+        "startLineNumber": 7,
+        "endLineNumberInclusive": 13
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:20.755Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " User"
+    },
+    "generationUUID": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:20.760Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:20.771Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n    name"
+    },
+    "generationUUID": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:20.785Z"
+  },
+  {
+    "firstChunkValue": "\ninterface User {\nlet users = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]",
+    "generationUUID": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:20.793Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\ninterface User {\nlet users = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]"
+    },
+    "generationUUID": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:20.800Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "e137f433-789f-43a8-8f99-d5af4d5a97de",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 146,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 146,
+      "monotonicallyIncreasingSuggestionId": 89,
+      "range": {
+        "startLineNumber": 7,
+        "startColumn": 1,
+        "endLineNumberInclusive": 13,
+        "endColumn": 2
+      },
+      "replaceText": "\ninterface User {\nlet users = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]",
+      "originalText": "\ni\nlet users = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]",
+      "startingSuggestionRange": {
+        "startLineNumber": 7,
+        "startColumn": 1,
+        "endLineNumberInclusive": 13,
+        "endColumn": 2
+      },
+      "diffText": "\ninterface User {\nlet users = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]",
+      "fullOriginalText": "\ni\nlet users = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]",
+      "suggestionTriggerTime": 1742371160241.0999,
+      "greens": [],
+      "source": "typing",
+      "requestId": "904a83d4-d4fd-493a-9327-94af5f464d03",
+      "selection": {
+        "startLineNumber": 7,
+        "startColumn": 1,
+        "endLineNumberInclusive": 13,
+        "endColumn": 2
+      },
+      "undoRedoGroup": {
+        "id": 89,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 7,
+        "startColumn": 1,
+        "endLineNumber": 13,
+        "endColumn": 2
+      },
+      "trackedText": "\nint\nlet users = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]"
+    },
+    "generationUUID": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:20.800Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": string"
+    },
+    "generationUUID": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:20.801Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";"
+    },
+    "generationUUID": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:20.808Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:20.822Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "   "
+    },
+    "generationUUID": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:20.832Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " age"
+    },
+    "generationUUID": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:20.849Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": number"
+    },
+    "generationUUID": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:20.860Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";"
+    },
+    "generationUUID": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:20.909Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n}"
+    },
+    "generationUUID": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:20.909Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\nlet"
+    },
+    "generationUUID": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:20.910Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " users:"
+    },
+    "generationUUID": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:20.910Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " User"
+    },
+    "generationUUID": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:20.923Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "[]"
+    },
+    "generationUUID": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:20.935Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:20.949Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ["
+    },
+    "generationUUID": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:20.959Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n    { name: 'John',"
+    },
+    "generationUUID": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:20.972Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " age: 30"
+    },
+    "generationUUID": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:20.983Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " },\n    { name: 'Jane"
+    },
+    "generationUUID": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:21.008Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "', age: 25 },\n"
+    },
+    "generationUUID": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:21.020Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "    {"
+    },
+    "generationUUID": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:21.028Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " name:"
+    },
+    "generationUUID": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:21.040Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " '"
+    },
+    "generationUUID": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:21.053Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Jim', age: 35 },"
+    },
+    "generationUUID": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:21.065Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n]"
+    },
+    "generationUUID": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:21.076Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:21.098Z"
+  },
+  {
+    "fullText": "\ninterface User {\n    name: string;\n    age: number;\n}\n\nlet users: User[] = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]",
+    "generationUUID": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:21.109Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\ninterface User {\nlet users = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]"
+    },
+    "fullText": "\ninterface User {\n    name: string;\n    age: number;\n}\n\nlet users: User[] = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]",
+    "generationUUID": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:21.110Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "f6de5ea4-171a-4974-b725-fd980079feff",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 146,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 150,
+      "monotonicallyIncreasingSuggestionId": 91,
+      "range": {
+        "startLineNumber": 7,
+        "startColumn": 1,
+        "endLineNumberInclusive": 13,
+        "endColumn": 2
+      },
+      "replaceText": "\ninterface User {\n    name: string;\n    age: number;\n}\n\nlet users: User[] = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]",
+      "originalText": "\ninterface User {\nlet users = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]",
+      "startingSuggestionRange": {
+        "startLineNumber": 7,
+        "startColumn": 1,
+        "endLineNumberInclusive": 13,
+        "endColumn": 2
+      },
+      "diffText": "\ninterface User {\n    name: string;\n    age: number;\n}\n\nlet users: User[] = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]",
+      "fullOriginalText": "\ninterface User {\nlet users = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]",
+      "suggestionTriggerTime": 1742371160241.0999,
+      "greens": [],
+      "source": "typing",
+      "requestId": "904a83d4-d4fd-493a-9327-94af5f464d03",
+      "selection": {
+        "startLineNumber": 7,
+        "startColumn": 1,
+        "endLineNumberInclusive": 13,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "5d62da63-52d1-4168-a482-9e3f39e23181",
+      "undoRedoGroup": {
+        "id": 91,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:21.112Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:21.166Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "5d62da63-52d1-4168-a482-9e3f39e23181",
+    "generationUUID": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:21.168Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\ninterface User {\nlet users = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "5d62da63-52d1-4168-a482-9e3f39e23181",
+    "generationUUID": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:21.168Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "5d62da63-52d1-4168-a482-9e3f39e23181",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T07:59:21.169Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "e137f433-789f-43a8-8f99-d5af4d5a97de",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 146,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 146,
+      "monotonicallyIncreasingSuggestionId": 89,
+      "range": {
+        "startLineNumber": 7,
+        "startColumn": 1,
+        "endLineNumberInclusive": 13,
+        "endColumn": 2
+      },
+      "replaceText": "\ninterface User {\nlet users = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]",
+      "originalText": "\ni\nlet users = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]",
+      "startingSuggestionRange": {
+        "startLineNumber": 7,
+        "startColumn": 1,
+        "endLineNumberInclusive": 13,
+        "endColumn": 2
+      },
+      "diffText": "\ninterface User {\nlet users = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]",
+      "fullOriginalText": "\ni\nlet users = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]",
+      "suggestionTriggerTime": 1742371160241.0999,
+      "greens": [],
+      "source": "typing",
+      "requestId": "904a83d4-d4fd-493a-9327-94af5f464d03",
+      "selection": {
+        "startLineNumber": 7,
+        "startColumn": 1,
+        "endLineNumberInclusive": 13,
+        "endColumn": 2
+      },
+      "undoRedoGroup": {
+        "id": 89,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 7,
+        "startColumn": 1,
+        "endLineNumber": 13,
+        "endColumn": 2
+      },
+      "trackedText": "\nint\nlet users = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]",
+      "decorationId": "b;502",
+      "onAcceptDisplayId": "f6de5ea4-171a-4974-b725-fd980079feff"
+    },
+    "generationUUID": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:21.474Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "e137f433-789f-43a8-8f99-d5af4d5a97de",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 146,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 146,
+      "monotonicallyIncreasingSuggestionId": 89,
+      "range": {
+        "startLineNumber": 7,
+        "startColumn": 1,
+        "endLineNumberInclusive": 13,
+        "endColumn": 2
+      },
+      "replaceText": "\ninterface User {\nlet users = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]",
+      "originalText": "\ni\nlet users = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]",
+      "startingSuggestionRange": {
+        "startLineNumber": 7,
+        "startColumn": 1,
+        "endLineNumberInclusive": 13,
+        "endColumn": 2
+      },
+      "diffText": "\ninterface User {\nlet users = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]",
+      "fullOriginalText": "\ni\nlet users = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]",
+      "suggestionTriggerTime": 1742371160241.0999,
+      "greens": [],
+      "source": "typing",
+      "requestId": "904a83d4-d4fd-493a-9327-94af5f464d03",
+      "selection": {
+        "startLineNumber": 7,
+        "startColumn": 1,
+        "endLineNumberInclusive": 13,
+        "endColumn": 2
+      },
+      "undoRedoGroup": {
+        "id": 89,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 7,
+        "startColumn": 1,
+        "endLineNumber": 13,
+        "endColumn": 2
+      },
+      "trackedText": "\nint\nlet users = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]",
+      "decorationId": "b;502",
+      "onAcceptDisplayId": "f6de5ea4-171a-4974-b725-fd980079feff"
+    },
+    "generationUUID": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:21.484Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "f6de5ea4-171a-4974-b725-fd980079feff",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 146,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 150,
+      "monotonicallyIncreasingSuggestionId": 91,
+      "range": {
+        "startLineNumber": 7,
+        "startColumn": 1,
+        "endLineNumberInclusive": 13,
+        "endColumn": 2
+      },
+      "replaceText": "\ninterface User {\n    name: string;\n    age: number;\n}\n\nlet users: User[] = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]",
+      "originalText": "\ninterface User {\nlet users = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]",
+      "startingSuggestionRange": {
+        "startLineNumber": 7,
+        "startColumn": 1,
+        "endLineNumberInclusive": 13,
+        "endColumn": 2
+      },
+      "diffText": "\ninterface User {\n    name: string;\n    age: number;\n}\n\nlet users: User[] = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]",
+      "fullOriginalText": "\ninterface User {\nlet users = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]",
+      "suggestionTriggerTime": 1742371160241.0999,
+      "greens": [],
+      "source": "typing",
+      "requestId": "904a83d4-d4fd-493a-9327-94af5f464d03",
+      "selection": {
+        "startLineNumber": 7,
+        "startColumn": 1,
+        "endLineNumberInclusive": 13,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "5d62da63-52d1-4168-a482-9e3f39e23181",
+      "undoRedoGroup": {
+        "id": 91,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;516"
+    },
+    "generationUUID": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:22.310Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "f6de5ea4-171a-4974-b725-fd980079feff",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 146,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 150,
+      "monotonicallyIncreasingSuggestionId": 91,
+      "range": {
+        "startLineNumber": 7,
+        "startColumn": 1,
+        "endLineNumberInclusive": 13,
+        "endColumn": 2
+      },
+      "replaceText": "\ninterface User {\n    name: string;\n    age: number;\n}\n\nlet users: User[] = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]",
+      "originalText": "\ninterface User {\nlet users = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]",
+      "startingSuggestionRange": {
+        "startLineNumber": 7,
+        "startColumn": 1,
+        "endLineNumberInclusive": 13,
+        "endColumn": 2
+      },
+      "diffText": "\ninterface User {\n    name: string;\n    age: number;\n}\n\nlet users: User[] = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]",
+      "fullOriginalText": "\ninterface User {\nlet users = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]",
+      "suggestionTriggerTime": 1742371160241.0999,
+      "greens": [],
+      "source": "typing",
+      "requestId": "904a83d4-d4fd-493a-9327-94af5f464d03",
+      "selection": {
+        "startLineNumber": 7,
+        "startColumn": 1,
+        "endLineNumberInclusive": 13,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "5d62da63-52d1-4168-a482-9e3f39e23181",
+      "undoRedoGroup": {
+        "id": 91,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;516"
+    },
+    "generationUUID": "904a83d4-d4fd-493a-9327-94af5f464d03",
+    "timestamp": "2025-03-19T07:59:22.326Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "5d62da63-52d1-4168-a482-9e3f39e23181",
+    "fusedCursorPrediction": null,
+    "oldText": "\ninterface User {\nlet users = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]",
+    "newText": "\ninterface User {\n    name: string;\n    age: number;\n}\n\nlet users: User[] = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]",
+    "timestamp": "2025-03-19T07:59:22.326Z"
+  }
+]

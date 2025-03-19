@@ -1,0 +1,434 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "edc53998-f794-435a-afe2-4892c84663b2",
+    "timestamp": "2025-03-19T07:37:56.170Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/functionReturn.ets",
+          "diffHistory": [
+            "1+|function add(a: number, b: number): number {\n2+|    return a + b;\n3+|}\n4+|\n5+|function subtract(a: number, b: number): number {\n6+|    return a - b;\n7+|}\n8+|\n9+|let sum = add(1, 2);\n10+|\n11+|function getUser(name: string, age: number): { name: string, age: number } {\n12+|    return { name, age };\n13+|}\n14+|\n15+|let user = getUser(\"John\", 30);\n16+|\n17+|  \n",
+            "11-|function getUser(name: string, age: number): { name: string, age: number } {\n11+|interface User {\n12+|    name: string;\n13+|    age: number;\n14+|}\n15+|\n16+|function getUser(name: string, age: number): User {\n",
+            "22+|function wrapValue<T>(value: T): {data {\n23+|    return { data: value };\n24+|}\n25+|\n26+|let wrappedValue = wrapValue(10);\n27+|\n28+|\n",
+            "22-|function wrapValue<T>(value: T): {data {\n22+|function wrapValue<T>(value: T): {data: T}   {\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/functionReturn.ets",
+        "contents": "function add(a: number, b: number): number {\n    return a + b;\n}\n\nfunction subtract(a: number, b: number): number {\n    return a - b;\n}\n\nlet sum = add(1, 2);\n\ninterface User {\n    name: string;\n    age: number;\n}\n\nfunction getUser(name: string, age: number): User {\n    return { name, age };\n}\n\nlet user = getUser(\"John\", 30);\n\nfunction wrapValue<T>(value: T): {data: T}   {\n    return { data: value };\n}\n\nlet wrappedValue = wrapValue(10);\n\n\n",
+        "cursorPosition": {
+          "line": 27,
+          "column": 0
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 105,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1742369876206,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51,
+      "timeAtRequestSend": 1742369876206
+    },
+    "generateUuid": "edc53998-f794-435a-afe2-4892c84663b2",
+    "timestamp": "2025-03-19T07:37:56.208Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "edc53998-f794-435a-afe2-4892c84663b2",
+    "timestamp": "2025-03-19T07:37:56.703Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nfunction",
+      "rangeToReplace": {
+        "startLineNumber": 27,
+        "endLineNumberInclusive": 29
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "edc53998-f794-435a-afe2-4892c84663b2",
+    "timestamp": "2025-03-19T07:37:56.708Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " getValue"
+    },
+    "generationUUID": "edc53998-f794-435a-afe2-4892c84663b2",
+    "timestamp": "2025-03-19T07:37:56.709Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "<"
+    },
+    "generationUUID": "edc53998-f794-435a-afe2-4892c84663b2",
+    "timestamp": "2025-03-19T07:37:56.713Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "T>(obj:"
+    },
+    "generationUUID": "edc53998-f794-435a-afe2-4892c84663b2",
+    "timestamp": "2025-03-19T07:37:56.740Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "edc53998-f794-435a-afe2-4892c84663b2",
+    "timestamp": "2025-03-19T07:37:56.752Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "data"
+    },
+    "generationUUID": "edc53998-f794-435a-afe2-4892c84663b2",
+    "timestamp": "2025-03-19T07:37:56.782Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": T}):"
+    },
+    "generationUUID": "edc53998-f794-435a-afe2-4892c84663b2",
+    "timestamp": "2025-03-19T07:37:56.793Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " T"
+    },
+    "generationUUID": "edc53998-f794-435a-afe2-4892c84663b2",
+    "timestamp": "2025-03-19T07:37:56.820Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "edc53998-f794-435a-afe2-4892c84663b2",
+    "timestamp": "2025-03-19T07:37:56.831Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "edc53998-f794-435a-afe2-4892c84663b2",
+    "timestamp": "2025-03-19T07:37:56.842Z"
+  },
+  {
+    "firstChunkValue": "\nfunction getValue<T>(obj: {data: T}): T {\n",
+    "generationUUID": "edc53998-f794-435a-afe2-4892c84663b2",
+    "timestamp": "2025-03-19T07:37:56.846Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nfunction getValue<T>(obj: {data: T}): T {\n"
+    },
+    "generationUUID": "edc53998-f794-435a-afe2-4892c84663b2",
+    "timestamp": "2025-03-19T07:37:56.850Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "3224a1b7-79a9-4b20-b095-344cf7cfd525",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 105,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 105,
+      "monotonicallyIncreasingSuggestionId": 104,
+      "range": {
+        "startLineNumber": 27,
+        "startColumn": 1,
+        "endLineNumberInclusive": 29,
+        "endColumn": 1
+      },
+      "replaceText": "\nfunction getValue<T>(obj: {data: T}): T {\n",
+      "originalText": "\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 27,
+        "startColumn": 1,
+        "endLineNumberInclusive": 29,
+        "endColumn": 1
+      },
+      "diffText": "\nfunction getValue<T>(obj: {data: T}): T {\n",
+      "fullOriginalText": "\n\n",
+      "suggestionTriggerTime": 1742369876159,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "edc53998-f794-435a-afe2-4892c84663b2",
+      "selection": {
+        "startLineNumber": 27,
+        "startColumn": 1,
+        "endLineNumberInclusive": 29,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 104,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "edc53998-f794-435a-afe2-4892c84663b2",
+    "timestamp": "2025-03-19T07:37:56.855Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "   "
+    },
+    "generationUUID": "edc53998-f794-435a-afe2-4892c84663b2",
+    "timestamp": "2025-03-19T07:37:56.858Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " return obj."
+    },
+    "generationUUID": "edc53998-f794-435a-afe2-4892c84663b2",
+    "timestamp": "2025-03-19T07:37:56.891Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "data"
+    },
+    "generationUUID": "edc53998-f794-435a-afe2-4892c84663b2",
+    "timestamp": "2025-03-19T07:37:56.900Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";"
+    },
+    "generationUUID": "edc53998-f794-435a-afe2-4892c84663b2",
+    "timestamp": "2025-03-19T07:37:56.909Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n}"
+    },
+    "generationUUID": "edc53998-f794-435a-afe2-4892c84663b2",
+    "timestamp": "2025-03-19T07:37:56.920Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "edc53998-f794-435a-afe2-4892c84663b2",
+    "timestamp": "2025-03-19T07:37:56.934Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nlet un"
+    },
+    "generationUUID": "edc53998-f794-435a-afe2-4892c84663b2",
+    "timestamp": "2025-03-19T07:37:56.947Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "wrapped"
+    },
+    "generationUUID": "edc53998-f794-435a-afe2-4892c84663b2",
+    "timestamp": "2025-03-19T07:37:56.958Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Value"
+    },
+    "generationUUID": "edc53998-f794-435a-afe2-4892c84663b2",
+    "timestamp": "2025-03-19T07:37:56.969Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "edc53998-f794-435a-afe2-4892c84663b2",
+    "timestamp": "2025-03-19T07:37:56.981Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " getValue"
+    },
+    "generationUUID": "edc53998-f794-435a-afe2-4892c84663b2",
+    "timestamp": "2025-03-19T07:37:56.994Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "("
+    },
+    "generationUUID": "edc53998-f794-435a-afe2-4892c84663b2",
+    "timestamp": "2025-03-19T07:37:57.006Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "wrapped"
+    },
+    "generationUUID": "edc53998-f794-435a-afe2-4892c84663b2",
+    "timestamp": "2025-03-19T07:37:57.019Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Value);"
+    },
+    "generationUUID": "edc53998-f794-435a-afe2-4892c84663b2",
+    "timestamp": "2025-03-19T07:37:57.032Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "edc53998-f794-435a-afe2-4892c84663b2",
+    "timestamp": "2025-03-19T07:37:57.044Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "edc53998-f794-435a-afe2-4892c84663b2",
+    "timestamp": "2025-03-19T07:37:57.055Z"
+  },
+  {
+    "fullText": "\nfunction getValue<T>(obj: {data: T}): T {\n    return obj.data;\n}\n\nlet unwrappedValue = getValue(wrappedValue);\n\n\n",
+    "generationUUID": "edc53998-f794-435a-afe2-4892c84663b2",
+    "timestamp": "2025-03-19T07:37:57.071Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nfunction getValue<T>(obj: {data: T}): T {\n"
+    },
+    "fullText": "\nfunction getValue<T>(obj: {data: T}): T {\n    return obj.data;\n}\n\nlet unwrappedValue = getValue(wrappedValue);\n\n\n",
+    "generationUUID": "edc53998-f794-435a-afe2-4892c84663b2",
+    "timestamp": "2025-03-19T07:37:57.072Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "edc53998-f794-435a-afe2-4892c84663b2",
+    "timestamp": "2025-03-19T07:37:57.073Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "edc53998-f794-435a-afe2-4892c84663b2",
+    "timestamp": "2025-03-19T07:37:57.074Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "715134d3-9855-441d-9069-b4bc69bafd6c",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 105,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 106,
+      "monotonicallyIncreasingSuggestionId": 105,
+      "range": {
+        "startLineNumber": 27,
+        "startColumn": 1,
+        "endLineNumberInclusive": 29,
+        "endColumn": 1
+      },
+      "replaceText": "\nfunction getValue<T>(obj: {data: T}): T {\n    return obj.data;\n}\n\nlet unwrappedValue = getValue(wrappedValue);\n\n\n",
+      "originalText": "\nfunction getValue<T>(obj: {data: T}): T {\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 27,
+        "startColumn": 1,
+        "endLineNumberInclusive": 29,
+        "endColumn": 1
+      },
+      "diffText": "\nfunction getValue<T>(obj: {data: T}): T {\n    return obj.data;\n}\n\nlet unwrappedValue = getValue(wrappedValue);\n\n\n",
+      "fullOriginalText": "\nfunction getValue<T>(obj: {data: T}): T {\n",
+      "suggestionTriggerTime": 1742369876159,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "edc53998-f794-435a-afe2-4892c84663b2",
+      "selection": {
+        "startLineNumber": 27,
+        "startColumn": 1,
+        "endLineNumberInclusive": 29,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "75ef1563-350f-406f-8699-5908da2777d3",
+      "undoRedoGroup": {
+        "id": 105,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "edc53998-f794-435a-afe2-4892c84663b2",
+    "timestamp": "2025-03-19T07:37:57.074Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "75ef1563-350f-406f-8699-5908da2777d3",
+    "generationUUID": "edc53998-f794-435a-afe2-4892c84663b2",
+    "timestamp": "2025-03-19T07:37:57.075Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nfunction getValue<T>(obj: {data: T}): T {\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "75ef1563-350f-406f-8699-5908da2777d3",
+    "generationUUID": "edc53998-f794-435a-afe2-4892c84663b2",
+    "timestamp": "2025-03-19T07:37:57.076Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "75ef1563-350f-406f-8699-5908da2777d3",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T07:37:57.076Z"
+  }
+]
