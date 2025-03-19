@@ -1,0 +1,159 @@
+{"line":33,"column":2}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+struct BasicTypeExample {
+  @State score: number = 0;
+  @State name: string = 'John';
+
+  build() {
+    Column() {
+      Text(this.score.toString())
+      Text(this.name.toUpperCase())
+    }
+  }
+}
+
+interface User {
+  name: string;
+  age: number;
+}
+
+@Component
+struct ObjectTypeExample {
+  @State user: User = { name: 'John', age: 30 };
+
+  build() {
+    Column() {
+      Text(this.user.name.toUpperCase())
+      Text(this.user.age.toString())
+    }
+  }
+}
+
+@Component
+struct ArrayTypeExample {
+  [ToFill]
+  build() {
+    Column() {
+      Text('Hello, world!')
+    }
+  }
+}
+-------------------------------[               firstChunkValue               ]--------------------------------
+struct ArrayTypeExample {
+  @State numbers: number[] = [1, 2, 3, 4, 5];
+  build() {
+    Column() {
+      Text('Hello, world!')
+    }
+  }
+}
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+@Entry
+@Component
+struct BasicTypeExample {
+  @State score: number = 0;
+  @State name: string = 'John';
+
+  build() {
+    Column() {
+      Text(this.score.toString())
+      Text(this.name.toUpperCase())
+    }
+  }
+}
+
+interface User {
+  name: string;
+  age: number;
+}
+
+@Component
+struct ObjectTypeExample {
+  @State user: User = { name: 'John', age: 30 };
+
+  build() {
+    Column() {
+      Text(this.user.name.toUpperCase())
+      Text(this.user.age.toString())
+    }
+  }
+}
+
+@Component
+struct ArrayTypeExample {
+  @State numbers: number[] = [1, 2, 3, 4, 5];
+  build() {
+    Column() {
+      Text('Hello, world!')
+    }
+  }
+}
+-------------------------------[                   fullText                  ]--------------------------------
+struct ArrayTypeExample {
+  @State numbers: number[] = [1, 2, 3, 4, 5];
+
+  build() {
+    Column() {
+      Text(this.numbers.join(', '))
+    }
+  }
+}
+-------------------------------[         replacedContentsWithFullText         ]--------------------------------
+@Entry
+@Component
+struct BasicTypeExample {
+  @State score: number = 0;
+  @State name: string = 'John';
+
+  build() {
+    Column() {
+      Text(this.score.toString())
+      Text(this.name.toUpperCase())
+    }
+  }
+}
+
+interface User {
+  name: string;
+  age: number;
+}
+
+@Component
+struct ObjectTypeExample {
+  @State user: User = { name: 'John', age: 30 };
+
+  build() {
+    Column() {
+      Text(this.user.name.toUpperCase())
+      Text(this.user.age.toString())
+    }
+  }
+}
+
+@Component
+struct ArrayTypeExample {
+  @State numbers: number[] = [1, 2, 3, 4, 5];
+
+  build() {
+    Column() {
+      Text(this.numbers.join(', '))
+    }
+  }
+}
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/stateType.ets",
+  "lineNumberOneIndexed": 34,
+  "text": "",
+  "shouldRetriggerCpp": true
+}
+--------------------------------[        displayedFusedCursorPrediction       ]---------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/stateType.ets",
+  "lineNumberOneIndexed": 34,
+  "text": "",
+  "shouldRetriggerCpp": true
+}

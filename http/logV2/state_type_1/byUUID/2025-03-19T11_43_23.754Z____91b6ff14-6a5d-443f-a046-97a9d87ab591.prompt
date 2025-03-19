@@ -1,0 +1,72 @@
+You're an expert in ArkTS. Your task is to help the user update the code around current cursor position.
+
+## Recent Actions
+Here is what the user has been doing from the earliest to the latest:
+
+File: entry/src/main/ets/utils/stateType.ets
+added the code `  @State score: number = 0` in line 4
+
+added the code `      Text(this.score.toString())` in line 8
+deleted the code `      Text('Hello, world!')` in line 9
+
+deleted the code `  @State score: number = 0` in line 4
+added the code `  @State score: number = 0;` in line 4
+added the code `  @State name: string = 'John';` in line 5
+
+deleted the code `      Text('Hello, world!')` in line 10
+added the code `      Text(this.name.toUpperCase())` in line 10
+
+
+## Current Code
+Here is the current code file path:
+entry/src/main/ets/utils/stateType.ets
+
+Here is the current code around the cursor position:
+
+```
+@Entry
+@Component
+struct BasicTypeExample {
+  @State score: number = 0;
+<|editable_region_start|>
+  @State name: string = 'John';
+
+  build() {
+    Column() {
+      Text(this.score.toString())
+      Text(this.name.toUpperCase())
+    }
+  }
+}
+
+@Componen<|current_cursor_position|>t
+struct ObjectTypeExample {
+  build() {
+    Column() {
+      Text('Hello, world!')
+    }
+  }
+}
+
+@Component
+struct ArrayTypeExample {
+<|editable_region_end|>
+  build() {
+    Column() {
+      Text('Hello, world!')
+    }
+  }
+}
+```
+
+## Task
+Rewrite the code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> according to the following requirements:
+1. Enforce code format strictly matching existing code style.
+2. Propagate naming convention changes to all related cases
+3. Preserve original functionality
+4. Apply changes to entire code regardless of cursor position
+5. Focus on code after cursor position at <|current_cursor_position|>
+
+# Output Format
+Return ONLY the rewritten code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> without any other words.
+Never use markdown formatting like ```. Return raw text only.

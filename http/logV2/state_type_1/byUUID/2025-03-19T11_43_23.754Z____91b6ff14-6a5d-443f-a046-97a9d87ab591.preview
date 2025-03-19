@@ -1,0 +1,89 @@
+{"line":14,"column":9}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+struct BasicTypeExample {
+  @State score: number = 0;
+  @State name: string = 'John';
+
+  build() {
+    Column() {
+      Text(this.score.toString())
+      Text(this.name.toUpperCase())
+    }
+  }
+}
+
+@Componen[ToFill]t
+struct ObjectTypeExample {
+  build() {
+    Column() {
+      Text('Hello, world!')
+    }
+  }
+}
+
+@Component
+struct ArrayTypeExample {
+  build() {
+    Column() {
+      Text('Hello, world!')
+    }
+  }
+}
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+@Component
+struct ObjectTypeExample {
+  @State user: { name: string; age: number } = { name: 'John', age: 30 };
+
+  build() {
+    Column() {
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+@Entry
+@Component
+struct BasicTypeExample {
+  @State score: number = 0;
+  @State name: string = 'John';
+
+  build() {
+    Column() {
+      Text(this.score.toString())
+      Text(this.name.toUpperCase())
+    }
+  }
+}
+
+@Component
+struct ObjectTypeExample {
+  @State user: { name: string; age: number } = { name: 'John', age: 30 };
+
+  build() {
+    }
+  }
+}
+
+@Component
+struct ArrayTypeExample {
+  build() {
+    Column() {
+      Text('Hello, world!')
+    }
+  }
+}
+    Column() {
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/stateType.ets",
+  "lineNumberOneIndexed": 19,
+  "text": "Text('Hello, world!')\n}\n}\n}\n",
+  "shouldRetriggerCpp": true
+}
+--------------------------------[        displayedFusedCursorPrediction       ]---------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/stateType.ets",
+  "lineNumberOneIndexed": 19,
+  "text": "Text('Hello, world!')\n}\n}\n}\n",
+  "shouldRetriggerCpp": true
+}

@@ -1,0 +1,90 @@
+{"line":3,"column":11}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+struct BasicTypeExample {
+  @State sc[ToFill]
+
+  build() {
+    Column() {
+      Text('Hello, world!')
+      Text('Hello, world!')
+    }
+  }
+}
+
+@Component
+struct ObjectTypeExample {
+  build() {
+    Column() {
+      Text('Hello, world!')
+    }
+  }
+}
+
+@Component
+struct ArrayTypeExample {
+  build() {
+    Column() {
+      Text('Hello, world!')
+    }
+  }
+}
+-------------------------------[               firstChunkValue               ]--------------------------------
+struct BasicTypeExample {
+  @State score: number = 0
+
+  build() {
+    Column() {
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+@Entry
+@Component
+struct BasicTypeExample {
+  @State score: number = 0
+
+  build() {
+    Column() {
+      Text('Hello, world!')
+      Text('Hello, world!')
+    }
+  }
+}
+
+@Component
+struct ObjectTypeExample {
+  build() {
+    Column() {
+      Text('Hello, world!')
+    }
+  }
+}
+
+@Component
+struct ArrayTypeExample {
+  build() {
+    Column() {
+      Text('Hello, world!')
+    }
+  }
+}
+-------------------------------[                   fullText                  ]--------------------------------
+struct BasicTypeExample {
+  @State score: number = 0
+
+  build() {
+    Column() {
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/stateType.ets",
+  "lineNumberOneIndexed": 8,
+  "text": "Text('Hello, world!')\nText('Hello, world!')\n}\n}\n}",
+  "shouldRetriggerCpp": true
+}
+--------------------------------[        displayedFusedCursorPrediction       ]---------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/stateType.ets",
+  "lineNumberOneIndexed": 8,
+  "text": "Text('Hello, world!')\nText('Hello, world!')\n}\n}\n}",
+  "shouldRetriggerCpp": true
+}

@@ -1,0 +1,90 @@
+{"line":4,"column":2}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+struct BasicTypeExample {
+  @State score: number = 0;
+  [ToFill]
+
+  build() {
+    Column() {
+      Text(this.score.toString())
+      Text('Hello, world!')
+    }
+  }
+}
+
+@Component
+struct ObjectTypeExample {
+  build() {
+    Column() {
+      Text('Hello, world!')
+    }
+  }
+}
+
+@Component
+struct ArrayTypeExample {
+  build() {
+    Column() {
+      Text('Hello, world!')
+    }
+  }
+}
+-------------------------------[               firstChunkValue               ]--------------------------------
+struct BasicTypeExample {
+  @State score: number = 0;
+  @State name: string = 'John';
+
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+@Entry
+@Component
+struct BasicTypeExample {
+  @State score: number = 0;
+  @State name: string = 'John';
+
+  build() {
+    Column() {
+      Text(this.score.toString())
+      Text('Hello, world!')
+    }
+  }
+}
+
+@Component
+struct ObjectTypeExample {
+  build() {
+    Column() {
+      Text('Hello, world!')
+    }
+  }
+}
+
+@Component
+struct ArrayTypeExample {
+  build() {
+    Column() {
+      Text('Hello, world!')
+    }
+  }
+}
+-------------------------------[                   fullText                  ]--------------------------------
+struct BasicTypeExample {
+  @State score: number = 0;
+  @State name: string = 'John';
+
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/stateType.ets",
+  "lineNumberOneIndexed": 10,
+  "text": "Text('Hello, world!')\n}\n}\n}\n",
+  "shouldRetriggerCpp": true
+}
+--------------------------------[        displayedFusedCursorPrediction       ]---------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/stateType.ets",
+  "lineNumberOneIndexed": 10,
+  "text": "Text('Hello, world!')\n}\n}\n}\n",
+  "shouldRetriggerCpp": true
+}

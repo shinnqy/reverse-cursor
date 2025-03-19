@@ -1,0 +1,48 @@
+{"line":5,"column":10}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+struct BasicTypeExample {
+  @State score: number = 0
+
+  build() [ToFill]{
+    Column() {
+      Text('Hello, world!')
+      Text('Hello, world!')
+    }
+  }
+}
+
+@Component
+struct ObjectTypeExample {
+  build() {
+    Column() {
+      Text('Hello, world!')
+    }
+  }
+}
+
+@Component
+struct ArrayTypeExample {
+  build() {
+    Column() {
+      Text('Hello, world!')
+    }
+  }
+}
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+  build() {
+    Column() {
+      Text('Hello, world!')
+      Text('Hello, world!')
+    }
+  }
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/stateType.ets",
+  "lineNumberOneIndexed": 4,
+  "text": "@State score: number = 0\n\nbuild() {\nColumn() {\nText('Hello, world!')",
+  "shouldRetriggerCpp": true
+}

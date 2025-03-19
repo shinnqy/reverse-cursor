@@ -1,0 +1,121 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "b7ad03d3-52a8-4453-bb5b-2edb356e2b84",
+    "timestamp": "2025-03-19T11:43:35.274Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/stateType.ets",
+          "diffHistory": [
+            "4+|  @State score: number = 0\n",
+            "8+|      Text(this.score.toString())\n9-|      Text('Hello, world!')\n",
+            "4-|  @State score: number = 0\n4+|  @State score: number = 0;\n5+|  @State name: string = 'John';\n",
+            "10-|      Text('Hello, world!')\n10+|      Text(this.name.toUpperCase())\n",
+            "16+|\n18+|  @State user: { name: string; age: number } = { name: 'John', age: 30 };\n19+|\n",
+            "21-|      Text('Hello, world!')\n21+|      Text('Hello,UpperCase())\n22+|      Text(this.user.age.toString())\n",
+            "21-|      Text('Hello,UpperCase())\n21+|      Text(this.user.name.toUpperCase())\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/stateType.ets",
+        "contents": "@Entry\n@Component\nstruct BasicTypeExample {\n  @State score: number = 0;\n  @State name: string = 'John';\n\n  build() {\n    Column() {\n      Text(this.score.toString())\n      Text(this.name.toUpperCase())\n    }\n  }\n}\n\n@Component\nstruct ObjectTypeExample {\n  @State user: { name: string; age: number } = { name: 'John', age: 30 };\n\n  build() {\n    Column() {\n      Text(this.user.name.toUpperCase())\n      Text(this.user.age.toString())\n    }\n  }\n}\n\n@Component\nstruct ArrayTypeExample {\n  build() {\n    Column() {\n      Text('Hello, world!')\n    }\n  }\n}",
+        "cursorPosition": {
+          "line": 17,
+          "column": 0
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 50,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1742384615319,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 53.2001953125,
+      "timeAtRequestSend": 1742384615319
+    },
+    "generateUuid": "b7ad03d3-52a8-4453-bb5b-2edb356e2b84",
+    "timestamp": "2025-03-19T11:43:35.322Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "b7ad03d3-52a8-4453-bb5b-2edb356e2b84",
+    "timestamp": "2025-03-19T11:43:36.373Z"
+  },
+  {
+    "firstChunkValue": "  @State user: { name: string; age: number } = { name: 'John', age: 30 };\n\n  build() {\n    Column() {\n      Text(this.user.name.toUpperCase())\n      Text(this.user.age.toString())\n    }\n  }",
+    "generationUUID": "b7ad03d3-52a8-4453-bb5b-2edb356e2b84",
+    "timestamp": "2025-03-19T11:43:36.375Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": false
+    },
+    "generationUUID": "b7ad03d3-52a8-4453-bb5b-2edb356e2b84",
+    "timestamp": "2025-03-19T11:43:36.376Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "b7ad03d3-52a8-4453-bb5b-2edb356e2b84",
+    "timestamp": "2025-03-19T11:43:36.394Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "  @State user: { name: string; age: number } = { name: 'John', age: 30 };\n\n  build() {\n    Column() {\n      Text(this.user.name.toUpperCase())\n      Text(this.user.age.toString())\n    }\n  }",
+      "rangeToReplace": {
+        "startLineNumber": 17,
+        "endLineNumberInclusive": 24
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "b7ad03d3-52a8-4453-bb5b-2edb356e2b84",
+    "timestamp": "2025-03-19T11:43:36.397Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "38aeafff-5a7e-44b4-8d01-d3b89fb636ff",
+    "generationUUID": "b7ad03d3-52a8-4453-bb5b-2edb356e2b84",
+    "timestamp": "2025-03-19T11:43:36.398Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "b7ad03d3-52a8-4453-bb5b-2edb356e2b84",
+    "timestamp": "2025-03-19T11:43:36.400Z"
+  }
+]
