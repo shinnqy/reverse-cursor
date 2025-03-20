@@ -1,0 +1,775 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:44.228Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/dynamicProp.ets",
+          "diffHistory": [
+            "1+|const user = {}\n",
+            "2-|  \n3-|}\n2+|  name: \"Alice\",\n3+|  age: 30,\n4+|  address: {\n5+|},\n6+|};\n7+|\n8+|\n",
+            "5-|},\n5+|    city: \"New York\",\n6+|    country: \"USA\",\n7+|  },\n10+|const greeting = `Hello, ${user.name}!`;\n",
+            "1-|\n1+|interface User {\n2+|  name: string;\n3+|  age: number;\n4+|  address: {\n5+|    city: string;\n6+|    country: string;\n7+|  };\n8+|}\n",
+            "1-|\n1+|interface Address {\n",
+            "5-|  address: {\n5+|  address: Address;\n",
+            "2+|  city: string;\n3+|  country: string;\n4+|}\n",
+            "9-|    city: string;\n10-|    country: string;\n11-|  };\n13-|const user = {\n10+|const user: User = {\n",
+            "21+|function getFullName(user: { firstName: string; lastName: string }) {\n22+|  return `${user.firstName} ${user.lastName}`;\n23+|}\n25+|const fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n26+|\n27+|\n28+|\n",
+            "25-|const fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n",
+            "25+|const currentUser = {\n26+|  firstName: \"John\",\n27+|  lastName: \"Doe\",\n28+|};\n30+|const fullName = getFullName(currentUser);\n",
+            "30-|const fullName = getFullName(currentUser);\n30+|const fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n",
+            "21-|function getFullName(user: { firstName: string; lastName: string }) {\n21+|interface FullName {\n22+|function getFullName(user: { firstName: string; lastName: string }\n23+|function getFullName(user: FullName) {\n",
+            "22-|function getFullName(user: { firstName: string; lastName: string }\n22+|function getFullName(user: { firstName: string; lastName: string ;\n23+|}\n",
+            "22-|function getFullName(user: { firstName: string;\n22+|  firstName: string;\n",
+            "29-|const currentUser = {\n29+|const currentUser: FullName = {\n",
+            "36+|const price = 100;\n37+|const discount = 0.1;\n38+|const priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n40+|const isAdmin = true;\n41+|const roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n43+|const products = [\n44+|  { name: \"Product 1\", price: 100 },\n45+|  { name: \"Product 2\", price: 200 },\n46+|  { name: \"Product 3\", price: 300 },\n47+|];\n49+|const productInfo = `Current product: ${products[0].name}`;\n50+|\n51+|type Status = \"active\" | \"inactive\";\n52+|let status: Status = \"active\";\n53+|const statusText = `Status: ${status}`;\n54+|\n55+|const company = {\n56+|  name: \"Acme Inc.\",\n57+|  address: {\n58+|    street: \"123 Main St\",\n59+|    city: \"Anytown\",\n60+|  },\n61+|};\n62+|\n",
+            "57-|  address: {\n58-|    street: \"123 Main St\",\n59-|    city: \"Anytown\",\n60-|  },\n57+|  ceo: {\n58+|    name: \"John Doe\",\n59+|    contact: {\n",
+            "60+|      email: \"john.doe@acme.com\",\n61+|      phone: \"+1234567890\",\n62+|    },\n63+|  },\n66+|const companyInfo = `Company: ${company.name}, CEO: ${company.ceo.name}`;\n",
+            "55+|interface Company {\n56+|  name: string;\n57+|  ceo: {\n58+|    name: string;\n59+|    contact: {\n60+|      email: string;\n61+|      phone: string;\n",
+            "62-|const company = {\n62+|      \n63+|const company: Company = {\n",
+            "62-|      \n62+|      };\n63+|}\n",
+            "62-|      };\n62+|    };\n63+|  };\n",
+            "55+|interface CEO {\n56+|  name: string;\n57+|  contact: {\n58+|    email: string;\n59+|    phone: string;\n60+|  };\n61+|}\n",
+            "70-|  };\n70+|  }CEO;\n",
+            "64-|  ceo: {\n65-|    name: string;\n66-|    contact: {\n67-|      email: string;\n68-|      phone: string;\n69-|    };\n70-|  }CEO;\n64+|  ceo: CEO;\n",
+            "55+|interface Contact {\n",
+            "58-|  contact: {\n59-|    email: string;\n58+|  contact: Contact;\n",
+            "56+|  email: string;\n57+|  phone: string;\n58+|}\n",
+            "62-|    phone: string;\n63-|  };\n",
+            "43+|\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/dynamicProp.ets",
+        "contents": "interface Address {\n  city: string;\n  country: string;\n}\ninterface User {\n  name: string;\n  age: number;\n  address: Address;\n}\nconst user: User = {\n  name: \"Alice\",\n  age: 30,\n  address: {\n    city: \"New York\",\n    country: \"USA\",\n  },\n};\n\nconst greeting = `Hello, ${user.name}!`;\n\ninterface FullName {\n  firstName: string;\n  lastName: string;\n}\nfunction getFullName(user: FullName) {\n  return `${user.firstName} ${user.lastName}`;\n}\n\nconst currentUser: FullName = {\n  firstName: \"John\",\n  lastName: \"Doe\",\n};\n\nconst fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n\nconst price = 100;\nconst discount = 0.1;\nconst priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\n\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];\n\nconst productInfo = `Current product: ${products[0].name}`;\n\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\ninterface Contact {\n  email: string;\n  phone: string;\n}\ninterface CEO {\n  name: string;\n  contact: Contact;\n}\ninterface Company {\n  name: string;\n  ceo: CEO;\n}\nconst company: Company = {\n  name: \"Acme Inc.\",\n  ceo: {\n    name: \"John Doe\",\n    contact: {\n      email: \"john.doe@acme.com\",\n      phone: \"+1234567890\",\n    },\n  },\n};\n\nconst companyInfo = `Company: ${company.name}, CEO: ${company.ceo.name}`;\n\n",
+        "cursorPosition": {
+          "line": 42,
+          "column": 0
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 572,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1742475884275,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.10009765625,
+      "timeAtRequestSend": 1742475884275
+    },
+    "generateUuid": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:44.277Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\ninterface",
+      "rangeToReplace": {
+        "startLineNumber": 42,
+        "endLineNumberInclusive": 48
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:44.619Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:44.621Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Product"
+    },
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:44.636Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:44.644Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n "
+    },
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:44.652Z"
+  },
+  {
+    "firstChunkValue": "\ninterface Product {\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];",
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:44.658Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\ninterface Product {\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];"
+    },
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:44.659Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "fc3fbb59-04fd-4672-b4ca-7978b0967409",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 572,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 572,
+      "monotonicallyIncreasingSuggestionId": 357,
+      "range": {
+        "startLineNumber": 42,
+        "startColumn": 1,
+        "endLineNumberInclusive": 48,
+        "endColumn": 3
+      },
+      "replaceText": "\ninterface Product {\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];",
+      "originalText": "\n\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];",
+      "startingSuggestionRange": {
+        "startLineNumber": 42,
+        "startColumn": 1,
+        "endLineNumberInclusive": 48,
+        "endColumn": 3
+      },
+      "diffText": "\ninterface Product {\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];",
+      "fullOriginalText": "\n\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];",
+      "suggestionTriggerTime": 1742475884199.2,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+      "selection": {
+        "startLineNumber": 42,
+        "startColumn": 1,
+        "endLineNumberInclusive": 48,
+        "endColumn": 3
+      },
+      "undoRedoGroup": {
+        "id": 357,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 42,
+        "startColumn": 1,
+        "endLineNumber": 48,
+        "endColumn": 3
+      },
+      "trackedText": "\nin\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];"
+    },
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:44.660Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " name"
+    },
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:44.660Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": string;\n  price"
+    },
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:44.670Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": number"
+    },
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:44.678Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";\n}"
+    },
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:44.686Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nconst products"
+    },
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:44.694Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:44.702Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Product"
+    },
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:44.711Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "[]"
+    },
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:44.718Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:44.729Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ["
+    },
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:44.735Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n  { name: \"Product "
+    },
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:44.743Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "1"
+    },
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:44.751Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\","
+    },
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:44.759Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " price: 100 },\n"
+    },
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:44.768Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:44.775Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:44.782Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " name: \"Product 2"
+    },
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:44.790Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\","
+    },
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:44.796Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " price: 200 },\n"
+    },
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:44.806Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "  { name"
+    },
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:44.811Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:44.823Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \""
+    },
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:44.827Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Product 3\", price: 3"
+    },
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:44.835Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "0"
+    },
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:44.844Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "0 },\n];"
+    },
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:44.854Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:44.871Z"
+  },
+  {
+    "fullText": "\ninterface Product {\n  name: string;\n  price: number;\n}\nconst products: Product[] = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];",
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:44.874Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\ninterface Product {\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];"
+    },
+    "fullText": "\ninterface Product {\n  name: string;\n  price: number;\n}\nconst products: Product[] = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];",
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:44.875Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "8208ac24-29c2-412f-8b4d-7726fa8c0f01",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 572,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 576,
+      "monotonicallyIncreasingSuggestionId": 358,
+      "range": {
+        "startLineNumber": 42,
+        "startColumn": 1,
+        "endLineNumberInclusive": 48,
+        "endColumn": 3
+      },
+      "replaceText": "\ninterface Product {\n  name: string;\n  price: number;\n}\nconst products: Product[] = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];",
+      "originalText": "\ninterface Product {\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];",
+      "startingSuggestionRange": {
+        "startLineNumber": 42,
+        "startColumn": 1,
+        "endLineNumberInclusive": 48,
+        "endColumn": 3
+      },
+      "diffText": "\ninterface Product {\n  name: string;\n  price: number;\n}\nconst products: Product[] = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];",
+      "fullOriginalText": "\ninterface Product {\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];",
+      "suggestionTriggerTime": 1742475884199.2,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+      "selection": {
+        "startLineNumber": 42,
+        "startColumn": 1,
+        "endLineNumberInclusive": 48,
+        "endColumn": 3
+      },
+      "fusedCursorPredictionId": "470986f3-289c-4ce4-a574-d2d2f7d54811",
+      "undoRedoGroup": {
+        "id": 358,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:44.877Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "cursorPredictionTarget": {
+        "relativePath": "entry/src/main/ets/utils/dynamicProp.ets",
+        "lineNumberOneIndexed": 42,
+        "expectedContent": "\n",
+        "shouldRetriggerCpp": false
+      }
+    },
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:44.902Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:44.902Z"
+  },
+  {
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/dynamicProp.ets",
+      "lineNumberOneIndexed": 42,
+      "text": "\n",
+      "shouldRetriggerCpp": false
+    },
+    "predictionId": "470986f3-289c-4ce4-a574-d2d2f7d54811",
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:44.905Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\ninterface Product {\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];"
+    },
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/dynamicProp.ets",
+      "lineNumberOneIndexed": 42,
+      "text": "\n",
+      "shouldRetriggerCpp": false
+    },
+    "predictionId": "470986f3-289c-4ce4-a574-d2d2f7d54811",
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:44.906Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "470986f3-289c-4ce4-a574-d2d2f7d54811",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/dynamicProp.ets",
+      "lineNumberOneIndexed": 42,
+      "text": "\n",
+      "shouldRetriggerCpp": false
+    },
+    "timestamp": "2025-03-20T13:04:44.906Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "fc3fbb59-04fd-4672-b4ca-7978b0967409",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 572,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 572,
+      "monotonicallyIncreasingSuggestionId": 357,
+      "range": {
+        "startLineNumber": 42,
+        "startColumn": 1,
+        "endLineNumberInclusive": 48,
+        "endColumn": 3
+      },
+      "replaceText": "\ninterface Product {\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];",
+      "originalText": "\n\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];",
+      "startingSuggestionRange": {
+        "startLineNumber": 42,
+        "startColumn": 1,
+        "endLineNumberInclusive": 48,
+        "endColumn": 3
+      },
+      "diffText": "\ninterface Product {\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];",
+      "fullOriginalText": "\n\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];",
+      "suggestionTriggerTime": 1742475884199.2,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+      "selection": {
+        "startLineNumber": 42,
+        "startColumn": 1,
+        "endLineNumberInclusive": 48,
+        "endColumn": 3
+      },
+      "undoRedoGroup": {
+        "id": 357,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 42,
+        "startColumn": 1,
+        "endLineNumber": 48,
+        "endColumn": 3
+      },
+      "trackedText": "\nin\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];",
+      "decorationId": "b;2192",
+      "onAcceptDisplayId": "8208ac24-29c2-412f-8b4d-7726fa8c0f01"
+    },
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:45.327Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "fc3fbb59-04fd-4672-b4ca-7978b0967409",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 572,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 572,
+      "monotonicallyIncreasingSuggestionId": 357,
+      "range": {
+        "startLineNumber": 42,
+        "startColumn": 1,
+        "endLineNumberInclusive": 48,
+        "endColumn": 3
+      },
+      "replaceText": "\ninterface Product {\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];",
+      "originalText": "\n\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];",
+      "startingSuggestionRange": {
+        "startLineNumber": 42,
+        "startColumn": 1,
+        "endLineNumberInclusive": 48,
+        "endColumn": 3
+      },
+      "diffText": "\ninterface Product {\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];",
+      "fullOriginalText": "\n\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];",
+      "suggestionTriggerTime": 1742475884199.2,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+      "selection": {
+        "startLineNumber": 42,
+        "startColumn": 1,
+        "endLineNumberInclusive": 48,
+        "endColumn": 3
+      },
+      "undoRedoGroup": {
+        "id": 357,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 42,
+        "startColumn": 1,
+        "endLineNumber": 48,
+        "endColumn": 3
+      },
+      "trackedText": "\nin\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];",
+      "decorationId": "b;2192",
+      "onAcceptDisplayId": "8208ac24-29c2-412f-8b4d-7726fa8c0f01"
+    },
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:45.333Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "8208ac24-29c2-412f-8b4d-7726fa8c0f01",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 572,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 576,
+      "monotonicallyIncreasingSuggestionId": 358,
+      "range": {
+        "startLineNumber": 42,
+        "startColumn": 1,
+        "endLineNumberInclusive": 48,
+        "endColumn": 3
+      },
+      "replaceText": "\ninterface Product {\n  name: string;\n  price: number;\n}\nconst products: Product[] = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];",
+      "originalText": "\ninterface Product {\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];",
+      "startingSuggestionRange": {
+        "startLineNumber": 42,
+        "startColumn": 1,
+        "endLineNumberInclusive": 48,
+        "endColumn": 3
+      },
+      "diffText": "\ninterface Product {\n  name: string;\n  price: number;\n}\nconst products: Product[] = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];",
+      "fullOriginalText": "\ninterface Product {\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];",
+      "suggestionTriggerTime": 1742475884199.2,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+      "selection": {
+        "startLineNumber": 42,
+        "startColumn": 1,
+        "endLineNumberInclusive": 48,
+        "endColumn": 3
+      },
+      "fusedCursorPredictionId": "470986f3-289c-4ce4-a574-d2d2f7d54811",
+      "undoRedoGroup": {
+        "id": 358,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;2203"
+    },
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:45.724Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "8208ac24-29c2-412f-8b4d-7726fa8c0f01",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 572,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 576,
+      "monotonicallyIncreasingSuggestionId": 358,
+      "range": {
+        "startLineNumber": 42,
+        "startColumn": 1,
+        "endLineNumberInclusive": 48,
+        "endColumn": 3
+      },
+      "replaceText": "\ninterface Product {\n  name: string;\n  price: number;\n}\nconst products: Product[] = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];",
+      "originalText": "\ninterface Product {\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];",
+      "startingSuggestionRange": {
+        "startLineNumber": 42,
+        "startColumn": 1,
+        "endLineNumberInclusive": 48,
+        "endColumn": 3
+      },
+      "diffText": "\ninterface Product {\n  name: string;\n  price: number;\n}\nconst products: Product[] = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];",
+      "fullOriginalText": "\ninterface Product {\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];",
+      "suggestionTriggerTime": 1742475884199.2,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+      "selection": {
+        "startLineNumber": 42,
+        "startColumn": 1,
+        "endLineNumberInclusive": 48,
+        "endColumn": 3
+      },
+      "fusedCursorPredictionId": "470986f3-289c-4ce4-a574-d2d2f7d54811",
+      "undoRedoGroup": {
+        "id": 358,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;2203"
+    },
+    "generationUUID": "9ea8c641-6314-4e02-8484-afa7f21dfced",
+    "timestamp": "2025-03-20T13:04:45.741Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "470986f3-289c-4ce4-a574-d2d2f7d54811",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/dynamicProp.ets",
+      "lineNumberOneIndexed": 42,
+      "text": "\n",
+      "shouldRetriggerCpp": false
+    },
+    "oldText": "\ninterface Product {\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];",
+    "newText": "\ninterface Product {\n  name: string;\n  price: number;\n}\nconst products: Product[] = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];",
+    "timestamp": "2025-03-20T13:04:45.741Z"
+  },
+  {
+    "action": "displayFusedCursorPrediction",
+    "predictionId": "470986f3-289c-4ce4-a574-d2d2f7d54811",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/dynamicProp.ets",
+      "lineNumberOneIndexed": 42,
+      "text": "\n",
+      "shouldRetriggerCpp": false
+    },
+    "oldText": "\ninterface Product {\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];",
+    "newText": "\ninterface Product {\n  name: string;\n  price: number;\n}\nconst products: Product[] = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];",
+    "timestamp": "2025-03-20T13:04:45.742Z"
+  }
+]

@@ -1,0 +1,614 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:11.460Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/dynamicProp.ets",
+          "diffHistory": [
+            "1+|const user = {}\n",
+            "2-|  \n3-|}\n2+|  name: \"Alice\",\n3+|  age: 30,\n4+|  address: {\n5+|},\n6+|};\n7+|\n8+|\n",
+            "5-|},\n5+|    city: \"New York\",\n6+|    country: \"USA\",\n7+|  },\n10+|const greeting = `Hello, ${user.name}!`;\n",
+            "1-|\n1+|interface User {\n2+|  name: string;\n3+|  age: number;\n4+|  address: {\n5+|    city: string;\n6+|    country: string;\n7+|  };\n8+|}\n",
+            "1-|\n1+|interface Address {\n",
+            "5-|  address: {\n5+|  address: Address;\n",
+            "2+|  city: string;\n3+|  country: string;\n4+|}\n",
+            "9-|    city: string;\n10-|    country: string;\n11-|  };\n13-|const user = {\n10+|const user: User = {\n",
+            "21+|function getFullName(user: { firstName: string; lastName: string }) {\n22+|  return `${user.firstName} ${user.lastName}`;\n23+|}\n25+|const fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n26+|\n27+|\n28+|\n",
+            "25-|const fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n",
+            "25+|const currentUser = {\n26+|  firstName: \"John\",\n27+|  lastName: \"Doe\",\n28+|};\n30+|const fullName = getFullName(currentUser);\n",
+            "30-|const fullName = getFullName(currentUser);\n30+|const fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n",
+            "21-|function getFullName(user: { firstName: string; lastName: string }) {\n21+|interface FullName {\n22+|function getFullName(user: { firstName: string; lastName: string }\n23+|function getFullName(user: FullName) {\n",
+            "22-|function getFullName(user: { firstName: string; lastName: string }\n22+|function getFullName(user: { firstName: string; lastName: string ;\n23+|}\n",
+            "22-|function getFullName(user: { firstName: string;\n22+|  firstName: string;\n",
+            "29-|const currentUser = {\n29+|const currentUser: FullName = {\n",
+            "36+|const price = 100;\n37+|const discount = 0.1;\n38+|const priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n40+|const isAdmin = true;\n41+|const roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n43+|const products\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/dynamicProp.ets",
+        "contents": "interface Address {\n  city: string;\n  country: string;\n}\ninterface User {\n  name: string;\n  age: number;\n  address: Address;\n}\nconst user: User = {\n  name: \"Alice\",\n  age: 30,\n  address: {\n    city: \"New York\",\n    country: \"USA\",\n  },\n};\n\nconst greeting = `Hello, ${user.name}!`;\n\ninterface FullName {\n  firstName: string;\n  lastName: string;\n}\nfunction getFullName(user: FullName) {\n  return `${user.firstName} ${user.lastName}`;\n}\n\nconst currentUser: FullName = {\n  firstName: \"John\",\n  lastName: \"Doe\",\n};\n\nconst fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n\nconst price = 100;\nconst discount = 0.1;\nconst priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\nconst products\n\n",
+        "cursorPosition": {
+          "line": 42,
+          "column": 14
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 337,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742475731505,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 55,
+      "timeAtRequestSend": 1742475731505
+    },
+    "generateUuid": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:11.507Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\nconst products =",
+      "rangeToReplace": {
+        "startLineNumber": 39,
+        "endLineNumberInclusive": 45
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:11.852Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:11.854Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ["
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:11.878Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:11.890Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:11.903Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:11.916Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " name"
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:11.927Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": \""
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:11.939Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Product"
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:11.952Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:11.965Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "1"
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:11.976Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\","
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:11.988Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " price"
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:12.000Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:12.013Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:12.024Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "1"
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:12.036Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "0"
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:12.048Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "0 },"
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:12.060Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n "
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:12.072Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:12.084Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " name:"
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:12.096Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \""
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:12.107Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Product"
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:12.119Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " 2"
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:12.128Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\","
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:12.138Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " price: 2"
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:12.148Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "0"
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:12.158Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "0"
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:12.167Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " },"
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:12.179Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:12.191Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:12.200Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " { name:"
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:12.215Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \"Product "
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:12.222Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "3"
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:12.232Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\","
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:12.244Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " price"
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:12.254Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": 3"
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:12.263Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "0"
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:12.274Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "0"
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:12.285Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " },\n];"
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:12.294Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:12.316Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:12.316Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:12.329Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:12.336Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:12.352Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:12.352Z"
+  },
+  {
+    "firstChunkValue": "\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];\n\n\n\n",
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:12.355Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];\n\n\n\n"
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:12.357Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "768e7e9f-f3fd-4b50-acde-4c2395af0a47",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 337,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 337,
+      "monotonicallyIncreasingSuggestionId": 197,
+      "range": {
+        "startLineNumber": 39,
+        "startColumn": 1,
+        "endLineNumberInclusive": 45,
+        "endColumn": 1
+      },
+      "replaceText": "\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];\n\n\n\n",
+      "originalText": "\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\nconst products\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 39,
+        "startColumn": 1,
+        "endLineNumberInclusive": 45,
+        "endColumn": 1
+      },
+      "diffText": "\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];\n\n\n\n",
+      "fullOriginalText": "\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\nconst products\n\n",
+      "suggestionTriggerTime": 1742475731451.5999,
+      "greens": [],
+      "source": "typing",
+      "requestId": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+      "selection": {
+        "startLineNumber": 39,
+        "startColumn": 1,
+        "endLineNumberInclusive": 45,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "172a90ec-0a0f-4e10-9b75-668439a0ae3f",
+      "undoRedoGroup": {
+        "id": 197,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:12.358Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "172a90ec-0a0f-4e10-9b75-668439a0ae3f",
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:12.368Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];\n\n\n\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "172a90ec-0a0f-4e10-9b75-668439a0ae3f",
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:12.369Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "172a90ec-0a0f-4e10-9b75-668439a0ae3f",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-20T13:02:12.369Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "768e7e9f-f3fd-4b50-acde-4c2395af0a47",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 337,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 337,
+      "monotonicallyIncreasingSuggestionId": 197,
+      "range": {
+        "startLineNumber": 39,
+        "startColumn": 1,
+        "endLineNumberInclusive": 45,
+        "endColumn": 1
+      },
+      "replaceText": "\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];\n\n\n\n",
+      "originalText": "\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\nconst products\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 39,
+        "startColumn": 1,
+        "endLineNumberInclusive": 45,
+        "endColumn": 1
+      },
+      "diffText": "\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];\n\n\n\n",
+      "fullOriginalText": "\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\nconst products\n\n",
+      "suggestionTriggerTime": 1742475731451.5999,
+      "greens": [],
+      "source": "typing",
+      "requestId": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+      "selection": {
+        "startLineNumber": 39,
+        "startColumn": 1,
+        "endLineNumberInclusive": 45,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "172a90ec-0a0f-4e10-9b75-668439a0ae3f",
+      "undoRedoGroup": {
+        "id": 197,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;1316"
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:15.939Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "768e7e9f-f3fd-4b50-acde-4c2395af0a47",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 337,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 337,
+      "monotonicallyIncreasingSuggestionId": 197,
+      "range": {
+        "startLineNumber": 39,
+        "startColumn": 1,
+        "endLineNumberInclusive": 45,
+        "endColumn": 1
+      },
+      "replaceText": "\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];\n\n\n\n",
+      "originalText": "\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\nconst products\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 39,
+        "startColumn": 1,
+        "endLineNumberInclusive": 45,
+        "endColumn": 1
+      },
+      "diffText": "\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];\n\n\n\n",
+      "fullOriginalText": "\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\nconst products\n\n",
+      "suggestionTriggerTime": 1742475731451.5999,
+      "greens": [],
+      "source": "typing",
+      "requestId": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+      "selection": {
+        "startLineNumber": 39,
+        "startColumn": 1,
+        "endLineNumberInclusive": 45,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "172a90ec-0a0f-4e10-9b75-668439a0ae3f",
+      "undoRedoGroup": {
+        "id": 197,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;1316"
+    },
+    "generationUUID": "bfafc1bf-7a49-4f24-8563-1fa4c2819586",
+    "timestamp": "2025-03-20T13:02:15.958Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "172a90ec-0a0f-4e10-9b75-668439a0ae3f",
+    "fusedCursorPrediction": null,
+    "oldText": "\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\nconst products\n\n",
+    "newText": "\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];\n\n\n\n",
+    "timestamp": "2025-03-20T13:02:15.959Z"
+  }
+]

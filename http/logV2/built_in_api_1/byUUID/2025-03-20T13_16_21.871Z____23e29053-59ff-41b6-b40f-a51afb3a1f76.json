@@ -1,0 +1,361 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "23e29053-59ff-41b6-b40f-a51afb3a1f76",
+    "timestamp": "2025-03-20T13:16:21.871Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/dynamicProp.ets",
+          "diffHistory": [
+            "1+|const user = {}\n",
+            "2-|  \n3-|}\n2+|  name: \"Alice\",\n3+|  age: 30,\n4+|  address: {\n5+|},\n6+|};\n7+|\n8+|\n",
+            "5-|},\n5+|    city: \"New York\",\n6+|    country: \"USA\",\n7+|  },\n10+|const greeting = `Hello, ${user.name}!`;\n",
+            "1-|\n1+|interface User {\n2+|  name: string;\n3+|  age: number;\n4+|  address: {\n5+|    city: string;\n6+|    country: string;\n7+|  };\n8+|}\n",
+            "1-|\n1+|interface Address {\n",
+            "5-|  address: {\n5+|  address: Address;\n",
+            "2+|  city: string;\n3+|  country: string;\n4+|}\n",
+            "9-|    city: string;\n10-|    country: string;\n11-|  };\n13-|const user = {\n10+|const user: User = {\n",
+            "21+|function getFullName(user: { firstName: string; lastName: string }) {\n22+|  return `${user.firstName} ${user.lastName}`;\n23+|}\n25+|const fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n26+|\n27+|\n28+|\n",
+            "25-|const fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n",
+            "25+|const currentUser = {\n26+|  firstName: \"John\",\n27+|  lastName: \"Doe\",\n28+|};\n30+|const fullName = getFullName(currentUser);\n",
+            "30-|const fullName = getFullName(currentUser);\n30+|const fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n",
+            "21-|function getFullName(user: { firstName: string; lastName: string }) {\n21+|interface FullName {\n22+|function getFullName(user: { firstName: string; lastName: string }\n23+|function getFullName(user: FullName) {\n",
+            "22-|function getFullName(user: { firstName: string; lastName: string }\n22+|function getFullName(user: { firstName: string; lastName: string ;\n23+|}\n",
+            "22-|function getFullName(user: { firstName: string;\n22+|  firstName: string;\n",
+            "29-|const currentUser = {\n29+|const currentUser: FullName = {\n",
+            "36+|const price = 100;\n37+|const discount = 0.1;\n38+|const priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n40+|const isAdmin = true;\n41+|const roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n43+|const products = [\n44+|  { name: \"Product 1\", price: 100 },\n45+|  { name: \"Product 2\", price: 200 },\n46+|  { name: \"Product 3\", price: 300 },\n47+|];\n49+|const productInfo = `Current product: ${products[0].name}`;\n50+|\n51+|type Status = \"active\" | \"inactive\";\n52+|let status: Status = \"active\";\n53+|const statusText = `Status: ${status}`;\n54+|\n55+|const company = {\n56+|  name: \"Acme Inc.\",\n57+|  address: {\n58+|    street: \"123 Main St\",\n59+|    city: \"Anytown\",\n60+|  },\n61+|};\n62+|\n",
+            "57-|  address: {\n58-|    street: \"123 Main St\",\n59-|    city: \"Anytown\",\n60-|  },\n57+|  ceo: {\n58+|    name: \"John Doe\",\n59+|    contact: {\n",
+            "60+|      email: \"john.doe@acme.com\",\n61+|      phone: \"+1234567890\",\n62+|    },\n63+|  },\n66+|const companyInfo = `Company: ${company.name}, CEO: ${company.ceo.name}`;\n",
+            "55+|interface Company {\n56+|  name: string;\n57+|  ceo: {\n58+|    name: string;\n59+|    contact: {\n60+|      email: string;\n61+|      phone: string;\n",
+            "62-|const company = {\n62+|      \n63+|const company: Company = {\n",
+            "62-|      \n62+|      };\n63+|}\n",
+            "62-|      };\n62+|    };\n63+|  };\n",
+            "55+|interface CEO {\n56+|  name: string;\n57+|  contact: {\n58+|    email: string;\n59+|    phone: string;\n60+|  };\n61+|}\n",
+            "70-|  };\n70+|  }CEO;\n",
+            "64-|  ceo: {\n65-|    name: string;\n66-|    contact: {\n67-|      email: string;\n68-|      phone: string;\n69-|    };\n70-|  }CEO;\n64+|  ceo: CEO;\n",
+            "55+|interface Contact {\n",
+            "58-|  contact: {\n59-|    email: string;\n58+|  contact: Contact;\n",
+            "56+|  email: string;\n57+|  phone: string;\n58+|}\n",
+            "62-|    phone: string;\n63-|  };\n",
+            "43-|const products = [\n43+|interface Product {\n44+|  name: string;\n45+|  price: number;\n46+|}\n47+|const products: Product[] = [\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/utils/builtInAPI.ets",
+          "diffHistory": [
+            "1+|import router from \"@ohos.router\";\n2+|\n3+|@Entry\n4+|@Component\n5+|struct Main {\n6+|  @State message: string = \"Hello World\";\n7+|\n8+|  build() {\n9+|    Row() {\n10+|      Text(this.message)\n11+|        .fontSize(20)\n12+|        .fontWeight(FontWeight.Bold)\n13+|        .onClick(() => {\n14+|          router.push({\n15+|            url: \"pages/SecondPage\",\n",
+            "16+|            params: {\n17+|              message: \"Hello from Second Page\",\n18+|            },\n19+|          });\n20+|        })\n21+|        .width(200)\n22+|        .height(100)\n",
+            "23+|        .backgroundColor(Color.Red)\n24+|        .borderRadius(10)\n25+|        .borderWidth(2)\n26+|        .borderColor(Color.Black)\n27+|        .padding(10)\n28+|        .margin(10)\n29+|        \n30+|        \n31+|        \n",
+            "29-|          \n29+|        .textAlign(TextAlign.Center)\n30+|        .fontColor(Color.White)\n31+|        .fontSize(20)\n32+|        .fontWeight(FontWeight.Bold)\n33+|        .textOverflow(TextOverflow.Ellipsis)\n34+|        .textWrap(TextWrap.Wrap)\n35+|        .textAlign(TextAlign.Center)\n",
+            "36+|        .textShadow(Color.Black, 2, 2, 2)\n37+|        .textShadowColor(Color.White)\n38+|        .textShadowOffset(2, 2)\n39+|        .textShadowRadius(2)\n40+|        .textShadowBlur(2)\n41+|        .textShadowSpread(2)\n42+|  \n",
+            "42-|  \n42+|        .textAlign(TextAlign.Center)\n43+|        .textAlign(TextAlign.Center)\n44+|        .textAlign(TextAlign.Center)\n45+|        .textAlign(TextAlign.Center)\n46+|        .textAlign(TextAlign.Center)\n47+|        .textAlign(TextAlign.Center)\n",
+            "48+|        .textAlign(TextAlign.Center)\n49+|        .textAlign(TextAlign.Center)\n50+|        .textAlign(TextAlign.Center)\n51+|        .textAlign(TextAlign.Center)\n52+|        .textAlign(TextAlign.Center)\n53+|        .textAlign(TextAlign.Center)\n",
+            "23-|        .backgroundColor(Color.Red)\n24-|        .borderRadius(10)\n25-|        .borderWidth(2)\n26-|        .borderColor(Color.Black)\n27-|        .padding(10)\n28-|        .margin(10)\n29-|          .textAlign(TextAlign.Center)\n30-|        .fontColor(Color.White)\n31-|        .fontSize(20)\n32-|        .fontWeight(FontWeight.Bold)\n33-|        .textOverflow(TextOverflow.Ellipsis)\n34-|        .textWrap(TextWrap.Wrap)\n35-|        .textAlign(TextAlign.Center)\n36-|        .textShadow(Color.Black, 2, 2, 2)\n37-|        .textShadowColor(Color.White)\n38-|        .textShadowOffset(2, 2)\n39-|        .textShadowRadius(2)\n40-|        .textShadowBlur(2)\n41-|        .textShadowSpread(2)\n42-|        .textAlign(TextAlign.Center)\n43-|        .textAlign(TextAlign.Center)\n44-|        .textAlign(TextAlign.Center)\n45-|        .textAlign(TextAlign.Center)\n46-|        .textAlign(TextAlign.Center)\n47-|        .textAlign(TextAlign.Center)\n48-|        .textAlign(TextAlign.Center)\n49-|        .textAlign(TextAlign.Center)\n50-|        .textAlign(TextAlign.Center)\n51-|        .textAlign(TextAlign.Center)\n52-|        .textAlign(TextAlign.Center)\n53-|        .textAlign(TextAlign.Center)\n23+|        \n24+|    }\n25+|  \n26+|}\n",
+            "25-|  \n25+|  }\n",
+            "14-|          router.push({\n14+|          router.pushUrl({\n",
+            "28+|@Entry\n29+|@Component\n30+|struct SecondPage {\n31+|  @State message: string = \"\";\n32+|\n33+|  build() {\n34+|  \n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/builtInAPI.ets",
+        "contents": "import router from \"@ohos.router\";\n\n@Entry\n@Component\nstruct Main {\n  @State message: string = \"Hello World\";\n\n  build() {\n    Row() {\n      Text(this.message)\n        .fontSize(20)\n        .fontWeight(FontWeight.Bold)\n        .onClick(() => {\n          router.pushUrl({\n            url: \"pages/SecondPage\",\n            params: {\n              message: \"Hello from Second Page\",\n            },\n          });\n        })\n        .width(200)\n        .height(100)\n\n    }\n  }\n}\n\n@Entry\n@Component\nstruct SecondPage {\n  @State message: string = \"\";\n\n  build() {\n  ",
+        "cursorPosition": {
+          "line": 32,
+          "column": 1
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 84,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/utils/dynamicProp.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            33
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 33,
+              "endLineNumberInclusive": 67
+            }
+          ],
+          "lastViewedAt": 1742476421483
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1742476581914,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.599853515625,
+      "timeAtRequestSend": 1742476581914
+    },
+    "generateUuid": "23e29053-59ff-41b6-b40f-a51afb3a1f76",
+    "timestamp": "2025-03-20T13:16:21.917Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "23e29053-59ff-41b6-b40f-a51afb3a1f76",
+    "timestamp": "2025-03-20T13:16:22.329Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n  build() {\n   ",
+      "rangeToReplace": {
+        "startLineNumber": 32,
+        "endLineNumberInclusive": 34
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "23e29053-59ff-41b6-b40f-a51afb3a1f76",
+    "timestamp": "2025-03-20T13:16:22.330Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Column"
+    },
+    "generationUUID": "23e29053-59ff-41b6-b40f-a51afb3a1f76",
+    "timestamp": "2025-03-20T13:16:22.371Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "()"
+    },
+    "generationUUID": "23e29053-59ff-41b6-b40f-a51afb3a1f76",
+    "timestamp": "2025-03-20T13:16:22.382Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {\n     "
+    },
+    "generationUUID": "23e29053-59ff-41b6-b40f-a51afb3a1f76",
+    "timestamp": "2025-03-20T13:16:22.395Z"
+  },
+  {
+    "firstChunkValue": "\n  build() {\n    Column() {",
+    "generationUUID": "23e29053-59ff-41b6-b40f-a51afb3a1f76",
+    "timestamp": "2025-03-20T13:16:22.398Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\n  build() {\n    Column() {"
+    },
+    "generationUUID": "23e29053-59ff-41b6-b40f-a51afb3a1f76",
+    "timestamp": "2025-03-20T13:16:22.400Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "f2ee492d-e6bf-483e-ada6-2433a4bbd4fa",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 84,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 84,
+      "monotonicallyIncreasingSuggestionId": 417,
+      "range": {
+        "startLineNumber": 32,
+        "startColumn": 1,
+        "endLineNumberInclusive": 34,
+        "endColumn": 3
+      },
+      "replaceText": "\n  build() {\n    Column() {",
+      "originalText": "\n  build() {\n  ",
+      "startingSuggestionRange": {
+        "startLineNumber": 32,
+        "startColumn": 1,
+        "endLineNumberInclusive": 34,
+        "endColumn": 3
+      },
+      "diffText": "\n  build() {\n    Column() {",
+      "fullOriginalText": "\n  build() {\n  ",
+      "suggestionTriggerTime": 1742476581834.5,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "23e29053-59ff-41b6-b40f-a51afb3a1f76",
+      "selection": {
+        "startLineNumber": 32,
+        "startColumn": 1,
+        "endLineNumberInclusive": 34,
+        "endColumn": 3
+      },
+      "undoRedoGroup": {
+        "id": 418,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 32,
+        "startColumn": 1,
+        "endLineNumber": 34,
+        "endColumn": 3
+      },
+      "trackedText": "\n  build() {\n  "
+    },
+    "generationUUID": "23e29053-59ff-41b6-b40f-a51afb3a1f76",
+    "timestamp": "2025-03-20T13:16:22.400Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Text(this.message)\n       "
+    },
+    "generationUUID": "23e29053-59ff-41b6-b40f-a51afb3a1f76",
+    "timestamp": "2025-03-20T13:16:22.409Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " .font"
+    },
+    "generationUUID": "23e29053-59ff-41b6-b40f-a51afb3a1f76",
+    "timestamp": "2025-03-20T13:16:22.421Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Size"
+    },
+    "generationUUID": "23e29053-59ff-41b6-b40f-a51afb3a1f76",
+    "timestamp": "2025-03-20T13:16:22.433Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "(20)\n       "
+    },
+    "generationUUID": "23e29053-59ff-41b6-b40f-a51afb3a1f76",
+    "timestamp": "2025-03-20T13:16:22.445Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ."
+    },
+    "generationUUID": "23e29053-59ff-41b6-b40f-a51afb3a1f76",
+    "timestamp": "2025-03-20T13:16:22.458Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "font"
+    },
+    "generationUUID": "23e29053-59ff-41b6-b40f-a51afb3a1f76",
+    "timestamp": "2025-03-20T13:16:22.473Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Weight(FontWeight.Bold)\n"
+    },
+    "generationUUID": "23e29053-59ff-41b6-b40f-a51afb3a1f76",
+    "timestamp": "2025-03-20T13:16:22.487Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "       "
+    },
+    "generationUUID": "23e29053-59ff-41b6-b40f-a51afb3a1f76",
+    "timestamp": "2025-03-20T13:16:22.501Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " .text"
+    },
+    "generationUUID": "23e29053-59ff-41b6-b40f-a51afb3a1f76",
+    "timestamp": "2025-03-20T13:16:22.515Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Align(TextAlign.Center)\n"
+    },
+    "generationUUID": "23e29053-59ff-41b6-b40f-a51afb3a1f76",
+    "timestamp": "2025-03-20T13:16:22.529Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "        ."
+    },
+    "generationUUID": "23e29053-59ff-41b6-b40f-a51afb3a1f76",
+    "timestamp": "2025-03-20T13:16:22.543Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "fontColor"
+    },
+    "generationUUID": "23e29053-59ff-41b6-b40f-a51afb3a1f76",
+    "timestamp": "2025-03-20T13:16:22.556Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "("
+    },
+    "generationUUID": "23e29053-59ff-41b6-b40f-a51afb3a1f76",
+    "timestamp": "2025-03-20T13:16:22.568Z"
+  },
+  {
+    "fullText": "\n  build() {\n    Column() {\n      Text(this.message)\n        .fontSize(20)\n        .fontWeight(FontWeight.Bold)\n        .textAlign(TextAlign.Center)\n        .fontColor",
+    "generationUUID": "23e29053-59ff-41b6-b40f-a51afb3a1f76",
+    "timestamp": "2025-03-20T13:16:22.584Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "8e0b8474-f44e-4613-a808-b00a71029465",
+    "generationUUID": "23e29053-59ff-41b6-b40f-a51afb3a1f76",
+    "timestamp": "2025-03-20T13:16:22.584Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\n  build() {\n    Column() {"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "8e0b8474-f44e-4613-a808-b00a71029465",
+    "generationUUID": "23e29053-59ff-41b6-b40f-a51afb3a1f76",
+    "timestamp": "2025-03-20T13:16:22.585Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "8e0b8474-f44e-4613-a808-b00a71029465",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-20T13:16:22.585Z"
+  }
+]

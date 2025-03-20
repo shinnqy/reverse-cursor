@@ -1,0 +1,583 @@
+You're an expert in ArkTS. Your task is to help the user update the code around current cursor position.
+
+## Recent Actions
+Here is what the user has been doing from the earliest to the latest:
+
+File: entry/src/main/ets/utils/dynamicProp.ets
+added the code `const user = {}` in line 1
+
+deleted the code `  ` in line 2
+deleted the code `}` in line 3
+added the code `  name: "Alice",` in line 2
+added the code `  age: 30,` in line 3
+added the code `  address: {` in line 4
+added the code `},` in line 5
+added the code `};` in line 6
+added the code `` in line 7
+added the code `` in line 8
+
+deleted the code `},` in line 5
+added the code `    city: "New York",` in line 5
+added the code `    country: "USA",` in line 6
+added the code `  },` in line 7
+added the code `const greeting = `Hello, ${user.name}!`;` in line 10
+
+deleted the code `` in line 1
+added the code `interface User {` in line 1
+added the code `  name: string;` in line 2
+added the code `  age: number;` in line 3
+added the code `  address: {` in line 4
+added the code `    city: string;` in line 5
+added the code `    country: string;` in line 6
+added the code `  };` in line 7
+added the code `}` in line 8
+
+deleted the code `` in line 1
+added the code `interface Address {` in line 1
+
+deleted the code `  address: {` in line 5
+added the code `  address: Address;` in line 5
+
+added the code `  city: string;` in line 2
+added the code `  country: string;` in line 3
+added the code `}` in line 4
+
+deleted the code `    city: string;` in line 9
+deleted the code `    country: string;` in line 10
+deleted the code `  };` in line 11
+deleted the code `const user = {` in line 13
+added the code `const user: User = {` in line 10
+
+added the code `function getFullName(user: { firstName: string; lastName: string }) {` in line 21
+added the code `  return `${user.firstName} ${user.lastName}`;` in line 22
+added the code `}` in line 23
+added the code `const fullName = getFullName({ firstName: "John", lastName: "Doe" });` in line 25
+added the code `` in line 26
+added the code `` in line 27
+added the code `` in line 28
+
+deleted the code `const fullName = getFullName({ firstName: "John", lastName: "Doe" });` in line 25
+
+added the code `const currentUser = {` in line 25
+added the code `  firstName: "John",` in line 26
+added the code `  lastName: "Doe",` in line 27
+added the code `};` in line 28
+added the code `const fullName = getFullName(currentUser);` in line 30
+
+deleted the code `const fullName = getFullName(currentUser);` in line 30
+added the code `const fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;` in line 30
+
+deleted the code `function getFullName(user: { firstName: string; lastName: string }) {` in line 21
+added the code `interface FullName {` in line 21
+added the code `function getFullName(user: { firstName: string; lastName: string }` in line 22
+added the code `function getFullName(user: FullName) {` in line 23
+
+deleted the code `function getFullName(user: { firstName: string; lastName: string }` in line 22
+added the code `function getFullName(user: { firstName: string; lastName: string ;` in line 22
+added the code `}` in line 23
+
+deleted the code `function getFullName(user: { firstName: string;` in line 22
+added the code `  firstName: string;` in line 22
+
+deleted the code `const currentUser = {` in line 29
+added the code `const currentUser: FullName = {` in line 29
+
+added the code `const price = 100;` in line 36
+added the code `const discount = 0.1;` in line 37
+added the code `const priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;` in line 38
+added the code `const isAdmin = true;` in line 40
+added the code `const roleMessage = `User is ${isAdmin ? "admin" : "not admin"}`;` in line 41
+added the code `const products = [` in line 43
+added the code `  { name: "Product 1", price: 100 },` in line 44
+added the code `  { name: "Product 2", price: 200 },` in line 45
+added the code `  { name: "Product 3", price: 300 },` in line 46
+added the code `];` in line 47
+added the code `const productInfo = `Current product: ${products[0].name}`;` in line 49
+added the code `` in line 50
+added the code `type Status = "active" ` in line 51
+added the code `let status: Status = "active";` in line 52
+added the code `const statusText = `Status: ${status}`;` in line 53
+added the code `` in line 54
+added the code `const company = {` in line 55
+added the code `  name: "Acme Inc.",` in line 56
+added the code `  address: {` in line 57
+added the code `    street: "123 Main St",` in line 58
+added the code `    city: "Anytown",` in line 59
+added the code `  },` in line 60
+added the code `};` in line 61
+added the code `` in line 62
+
+deleted the code `  address: {` in line 57
+deleted the code `    street: "123 Main St",` in line 58
+deleted the code `    city: "Anytown",` in line 59
+deleted the code `  },` in line 60
+added the code `  ceo: {` in line 57
+added the code `    name: "John Doe",` in line 58
+added the code `    contact: {` in line 59
+
+added the code `      email: "john.doe@acme.com",` in line 60
+added the code `      phone: "+1234567890",` in line 61
+added the code `    },` in line 62
+added the code `  },` in line 63
+added the code `const companyInfo = `Company: ${company.name}, CEO: ${company.ceo.name}`;` in line 66
+
+added the code `interface Company {` in line 55
+added the code `  name: string;` in line 56
+added the code `  ceo: {` in line 57
+added the code `    name: string;` in line 58
+added the code `    contact: {` in line 59
+added the code `      email: string;` in line 60
+added the code `      phone: string;` in line 61
+
+deleted the code `const company = {` in line 62
+added the code `      ` in line 62
+added the code `const company: Company = {` in line 63
+
+deleted the code `      ` in line 62
+added the code `      };` in line 62
+added the code `}` in line 63
+
+deleted the code `      };` in line 62
+added the code `    };` in line 62
+added the code `  };` in line 63
+
+added the code `interface CEO {` in line 55
+added the code `  name: string;` in line 56
+added the code `  contact: {` in line 57
+added the code `    email: string;` in line 58
+added the code `    phone: string;` in line 59
+added the code `  };` in line 60
+added the code `}` in line 61
+
+deleted the code `  };` in line 70
+added the code `  }CEO;` in line 70
+
+deleted the code `  ceo: {` in line 64
+deleted the code `    name: string;` in line 65
+deleted the code `    contact: {` in line 66
+deleted the code `      email: string;` in line 67
+deleted the code `      phone: string;` in line 68
+deleted the code `    };` in line 69
+deleted the code `  }CEO;` in line 70
+added the code `  ceo: CEO;` in line 64
+
+added the code `interface Contact {` in line 55
+
+deleted the code `  contact: {` in line 58
+deleted the code `    email: string;` in line 59
+added the code `  contact: Contact;` in line 58
+
+added the code `  email: string;` in line 56
+added the code `  phone: string;` in line 57
+added the code `}` in line 58
+
+deleted the code `    phone: string;` in line 62
+deleted the code `  };` in line 63
+
+deleted the code `const products = [` in line 43
+added the code `interface Product {` in line 43
+added the code `  name: string;` in line 44
+added the code `  price: number;` in line 45
+added the code `}` in line 46
+added the code `const products: Product[] = [` in line 47
+-----------------------------------------------
+
+File: entry/src/main/ets/utils/builtInAPI.ets
+added the code `import router from "@ohos.router";` in line 1
+added the code `` in line 2
+added the code `@Entry` in line 3
+added the code `@Component` in line 4
+added the code `struct Main {` in line 5
+added the code `  @State message: string = "Hello World";` in line 6
+added the code `` in line 7
+added the code `  build() {` in line 8
+added the code `    Row() {` in line 9
+added the code `      Text(this.message)` in line 10
+added the code `        .fontSize(20)` in line 11
+added the code `        .fontWeight(FontWeight.Bold)` in line 12
+added the code `        .onClick(() => {` in line 13
+added the code `          router.push({` in line 14
+added the code `            url: "pages/SecondPage",` in line 15
+
+added the code `            params: {` in line 16
+added the code `              message: "Hello from Second Page",` in line 17
+added the code `            },` in line 18
+added the code `          });` in line 19
+added the code `        })` in line 20
+added the code `        .width(200)` in line 21
+added the code `        .height(100)` in line 22
+
+added the code `        .backgroundColor(Color.Red)` in line 23
+added the code `        .borderRadius(10)` in line 24
+added the code `        .borderWidth(2)` in line 25
+added the code `        .borderColor(Color.Black)` in line 26
+added the code `        .padding(10)` in line 27
+added the code `        .margin(10)` in line 28
+added the code `        ` in line 29
+added the code `        ` in line 30
+added the code `        ` in line 31
+
+deleted the code `          ` in line 29
+added the code `        .textAlign(TextAlign.Center)` in line 29
+added the code `        .fontColor(Color.White)` in line 30
+added the code `        .fontSize(20)` in line 31
+added the code `        .fontWeight(FontWeight.Bold)` in line 32
+added the code `        .textOverflow(TextOverflow.Ellipsis)` in line 33
+added the code `        .textWrap(TextWrap.Wrap)` in line 34
+added the code `        .textAlign(TextAlign.Center)` in line 35
+
+added the code `        .textShadow(Color.Black, 2, 2, 2)` in line 36
+added the code `        .textShadowColor(Color.White)` in line 37
+added the code `        .textShadowOffset(2, 2)` in line 38
+added the code `        .textShadowRadius(2)` in line 39
+added the code `        .textShadowBlur(2)` in line 40
+added the code `        .textShadowSpread(2)` in line 41
+added the code `  ` in line 42
+
+deleted the code `  ` in line 42
+added the code `        .textAlign(TextAlign.Center)` in line 42
+added the code `        .textAlign(TextAlign.Center)` in line 43
+added the code `        .textAlign(TextAlign.Center)` in line 44
+added the code `        .textAlign(TextAlign.Center)` in line 45
+added the code `        .textAlign(TextAlign.Center)` in line 46
+added the code `        .textAlign(TextAlign.Center)` in line 47
+
+added the code `        .textAlign(TextAlign.Center)` in line 48
+added the code `        .textAlign(TextAlign.Center)` in line 49
+added the code `        .textAlign(TextAlign.Center)` in line 50
+added the code `        .textAlign(TextAlign.Center)` in line 51
+added the code `        .textAlign(TextAlign.Center)` in line 52
+added the code `        .textAlign(TextAlign.Center)` in line 53
+
+deleted the code `        .backgroundColor(Color.Red)` in line 23
+deleted the code `        .borderRadius(10)` in line 24
+deleted the code `        .borderWidth(2)` in line 25
+deleted the code `        .borderColor(Color.Black)` in line 26
+deleted the code `        .padding(10)` in line 27
+deleted the code `        .margin(10)` in line 28
+deleted the code `          .textAlign(TextAlign.Center)` in line 29
+deleted the code `        .fontColor(Color.White)` in line 30
+deleted the code `        .fontSize(20)` in line 31
+deleted the code `        .fontWeight(FontWeight.Bold)` in line 32
+deleted the code `        .textOverflow(TextOverflow.Ellipsis)` in line 33
+deleted the code `        .textWrap(TextWrap.Wrap)` in line 34
+deleted the code `        .textAlign(TextAlign.Center)` in line 35
+deleted the code `        .textShadow(Color.Black, 2, 2, 2)` in line 36
+deleted the code `        .textShadowColor(Color.White)` in line 37
+deleted the code `        .textShadowOffset(2, 2)` in line 38
+deleted the code `        .textShadowRadius(2)` in line 39
+deleted the code `        .textShadowBlur(2)` in line 40
+deleted the code `        .textShadowSpread(2)` in line 41
+deleted the code `        .textAlign(TextAlign.Center)` in line 42
+deleted the code `        .textAlign(TextAlign.Center)` in line 43
+deleted the code `        .textAlign(TextAlign.Center)` in line 44
+deleted the code `        .textAlign(TextAlign.Center)` in line 45
+deleted the code `        .textAlign(TextAlign.Center)` in line 46
+deleted the code `        .textAlign(TextAlign.Center)` in line 47
+deleted the code `        .textAlign(TextAlign.Center)` in line 48
+deleted the code `        .textAlign(TextAlign.Center)` in line 49
+deleted the code `        .textAlign(TextAlign.Center)` in line 50
+deleted the code `        .textAlign(TextAlign.Center)` in line 51
+deleted the code `        .textAlign(TextAlign.Center)` in line 52
+deleted the code `        .textAlign(TextAlign.Center)` in line 53
+added the code `        ` in line 23
+added the code `    }` in line 24
+added the code `  ` in line 25
+added the code `}` in line 26
+
+deleted the code `  ` in line 25
+added the code `  }` in line 25
+
+deleted the code `          router.push({` in line 14
+added the code `          router.pushUrl({` in line 14
+
+added the code `@Entry` in line 28
+added the code `@Component` in line 29
+added the code `struct SecondPage {` in line 30
+added the code `  @State message: string = "";` in line 31
+added the code `` in line 32
+added the code `  build() {` in line 33
+added the code `  ` in line 34
+
+deleted the code `@Entry` in line 28
+
+added the code `  ` in line 33
+added the code `      Text(this.message)` in line 34
+added the code `        .fontSize(20)` in line 35
+added the code `        .fontWeight(FontWeight.Bold)` in line 36
+added the code `        .textAlign(TextAlign.Center)` in line 37
+added the code `        .fontColor(Color.White)` in line 38
+added the code `  ` in line 39
+
+deleted the code `  ` in line 33
+added the code `    Column() {` in line 33
+
+deleted the code `  ` in line 39
+deleted the code `  ` in line 40
+added the code `` in line 39
+added the code `          router.back();` in line 40
+added the code `        })` in line 41
+added the code `    }` in line 42
+added the code `  }` in line 43
+added the code `}` in line 44
+
+deleted the code `` in line 39
+added the code `        .onClick(() => {` in line 39
+
+deleted the code `` in line 23
+added the code `        .backgroundColor(Color.Red)` in line 23
+
+added the code `import storage from "@ohos.storage";` in line 2
+
+added the code `` in line 46
+added the code `const STORAGE_KEY = "myStorage";` in line 47
+added the code `let myStorage = storage.getStorageSync(STORAGE_KEY);` in line 48
+added the code `` in line 49
+added the code `if (!myStorage) {` in line 50
+added the code `  myStorage = storage.getStorageSync(STORAGE_KEY);` in line 51
+added the code `}` in line 52
+added the code `` in line 53
+added the code `myStorage.putSync("name", "John");` in line 54
+added the code `myStorage.putSync("age", 30);` in line 55
+added the code `myStorage.putSync("city", "New York");` in line 56
+added the code `` in line 57
+added the code `const name = myStorage.getSync("name");` in line 58
+added the code `const age = myStorage.getSync("age");` in line 59
+added the code `const city = myStorage.getSync("city");` in line 60
+added the code `` in line 61
+added the code `interface Settings {` in line 62
+added the code `  theme: string;` in line 63
+added the code `  notifications: boolean;` in line 64
+added the code `  language: string;` in line 65
+added the code `}` in line 66
+added the code `` in line 67
+added the code `let settings: Settings = {` in line 68
+added the code `  theme: "light",` in line 69
+added the code `  notifications: true,` in line 70
+added the code `  language: "en",` in line 71
+added the code `};` in line 72
+added the code `` in line 73
+added the code `` in line 74
+
+added the code `myStorage.putSync("settings", settings);` in line 74
+added the code `myStorage.removeSync("name");` in line 76
+added the code `myStorage.on('change', (data) => {` in line 77
+added the code `  console.log("Storage changed:", data);` in line 78
+added the code `});` in line 79
+added the code `` in line 80
+added the code `myStorage.clearSync();` in line 81
+added the code `` in line 82
+added the code `` in line 83
+
+added the code `import http from "@ohos.net.http";` in line 3
+
+added the code `const url = "https://api.example.com/data";` in line 84
+added the code `const headers = {` in line 85
+added the code `  "Content-Type": "application/json",` in line 86
+added the code `};` in line 87
+added the code `const response = http.request(url, {` in line 89
+added the code `` in line 90
+
+deleted the code `const response = http.request(url, {` in line 89
+added the code `const response = http.request(url, {  method: "GET",` in line 89
+added the code `  headers: headers,` in line 90
+added the code `});` in line 91
+added the code `const data = response.body;` in line 93
+added the code `` in line 94
+added the code `` in line 95
+
+deleted the code `const response = http.request(url, {` in line 89
+added the code `let httpRequest = http.createHttp();` in line 89
+added the code `` in line 90
+added the code `httpRequest.request(url, {` in line 91
+deleted the code `const data = response.body;` in line 94
+
+added the code `}, (err, data) => {` in line 94
+added the code `  if (err) {` in line 95
+added the code `    console.error("Request failed:", err);` in line 96
+added the code `  } else {` in line 97
+added the code `    console.log("Request successful:", data);` in line 98
+added the code `  }` in line 99
+
+deleted the code `  method: "GET",` in line 92
+added the code `  method: http.RequestMethod.GET,` in line 92
+
+deleted the code `  headers: headers,` in line 93
+
+added the code `import deviceInfo from "@ohos.device.info";` in line 4
+
+added the code `let deviceModel = deviceInfo.deviceModel;` in line 102
+added the code `let osVersion = deviceInfo.osFullName;` in line 103
+
+added the code `import logger from "@ohos.logger";` in line 5
+
+added the code `logger.info(`Device Model: ${deviceModel}");` in line 106
+added the code `` in line 107
+added the code `let batteryInfo = deviceInfo.getBatteryInfo();` in line 108
+added the code `let batteryLevel = batteryInfo.batteryLevel;` in line 109
+added the code `let isCharging = batteryInfo.isCharging;` in line 110
+
+deleted the code `logger.info(`Device Model: ${deviceModel}");` in line 106
+added the code `logger.info(`Device Model: ${deviceModel}"`);` in line 106
+added the code `logger.info(`OS Version: ${osVersion}`);` in line 107
+
+deleted the code `logger.info(`Device Model: ${deviceModel}"`);` in line 106
+added the code `logger.info(`Device Model: ${deviceModel}`);` in line 106
+
+added the code `import prompt from "@ohos.prompt";` in line 6
+deleted the code `logger.info(`OS Version: ${osVersion}`);` in line 107
+deleted the code `let batteryInfo = deviceInfo.getBatteryInfo();` in line 109
+deleted the code `let batteryLevel = batteryInfo.batteryLevel;` in line 110
+deleted the code `let isCharging = batteryInfo.isCharging;` in line 111
+
+added the code `prompt.showToast({` in line 109
+added the code `  message: "Hello, World!",` in line 110
+added the code `  duration: 3000,` in line 111
+added the code `});` in line 112
+added the code `` in line 113
+added the code `prompt.showDialog({` in line 114
+added the code `` in line 115
+
+deleted the code `prompt.showDialog({` in line 114
+
+added the code `let timerI` in line 114
+
+
+## Current Code
+Here is the current code file path:
+entry/src/main/ets/utils/builtInAPI.ets
+
+Here is the current code around the cursor position:
+
+```
+import router from "@ohos.router";
+import storage from "@ohos.storage";
+import http from "@ohos.net.http";
+import deviceInfo from "@ohos.device.info";
+import logger from "@ohos.logger";
+import prompt from "@ohos.prompt";
+
+@Entry
+@Component
+struct Main {
+  @State message: string = "Hello World";
+
+  build() {
+    Row() {
+      Text(this.message)
+        .fontSize(20)
+        .fontWeight(FontWeight.Bold)
+        .onClick(() => {
+          router.pushUrl({
+            url: "pages/SecondPage",
+            params: {
+              message: "Hello from Second Page",
+            },
+          });
+        })
+        .width(200)
+        .height(100)
+        .backgroundColor(Color.Red)
+    }
+  }
+}
+
+@Component
+struct SecondPage {
+  @State message: string = "";
+
+  build() {
+    Column() {
+      Text(this.message)
+        .fontSize(20)
+        .fontWeight(FontWeight.Bold)
+        .textAlign(TextAlign.Center)
+        .fontColor(Color.White)
+        .onClick(() => {
+          router.back();
+        })
+    }
+  }
+}
+
+const STORAGE_KEY = "myStorage";
+let myStorage = storage.getStorageSync(STORAGE_KEY);
+
+if (!myStorage) {
+  myStorage = storage.getStorageSync(STORAGE_KEY);
+}
+
+myStorage.putSync("name", "John");
+myStorage.putSync("age", 30);
+myStorage.putSync("city", "New York");
+
+const name = myStorage.getSync("name");
+const age = myStorage.getSync("age");
+const city = myStorage.getSync("city");
+
+interface Settings {
+  theme: string;
+  notifications: boolean;
+  language: string;
+}
+
+let settings: Settings = {
+  theme: "light",
+  notifications: true,
+  language: "en",
+};
+
+myStorage.putSync("settings", settings);
+
+myStorage.removeSync("name");
+myStorage.on('change', (data) => {
+  console.log("Storage changed:", data);
+});
+
+myStorage.clearSync();
+
+const url = "https://api.example.com/data";
+const headers = {
+  "Content-Type": "application/json",
+};
+
+let httpRequest = http.createHttp();
+
+httpRequest.request(url, {
+  method: http.RequestMethod.GET,
+}, (err, data) => {
+  if (err) {
+    console.error("Request failed:", err);
+  } else {
+    console.log("Request successful:", data);
+  }
+});
+
+<|editable_region_start|>
+let deviceModel = deviceInfo.deviceModel;
+let osVersion = deviceInfo.osFullName;
+
+logger.info(`Device Model: ${deviceModel}`);
+
+prompt.showToast({
+  message: "Hello, World!",
+  duration: 3000,
+});
+
+let timerI<|current_cursor_position|>
+
+
+<|editable_region_end|>
+```
+
+## Task
+Rewrite the code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> according to the following requirements:
+1. Enforce code format strictly matching existing code style.
+2. Propagate naming convention changes to all related cases
+3. Preserve original functionality
+4. Apply changes to entire code regardless of cursor position
+5. Focus on code after cursor position at <|current_cursor_position|>
+
+# Output Format
+Return ONLY the rewritten code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> without any other words.
+Never use markdown formatting like ```. Return raw text only.

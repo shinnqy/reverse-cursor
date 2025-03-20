@@ -1,0 +1,355 @@
+[
+  {
+    "intent": "cursor_prediction",
+    "generationUUID": "e78b6915-887e-4c0b-a310-8039fa5ca5bf",
+    "timestamp": "2025-03-20T12:56:27.050Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/dynamicProp.ets",
+          "diffHistory": [
+            "14-|const greeting = `Hello, ${user}!`;\n14+|const greeting = `Hello, ${user.name}!`;\n",
+            "24-|const fullName = `Full Name: ${getFullName(currentUser)}`;\n24+|const fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n",
+            "41-|const productInfo = `Current Product: ${products[0]}.`;\n41+|const productInfo = `Current Product: ${products[0].name}.`;\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/dynamicProp.ets",
+        "contents": "interface Address {\n    city: string;\n}\ninterface User {\n    name: string;\n    age: number;\n    address: Address;\n}\nconst user: User = {\n    name: \"Alice\",\n    age: 30,\n    address: { city: \"Shenzhen\" }\n};\nconst greeting = `Hello, ${user.name}!`;\n\ninterface FullName {\n    firstName: string;\n    lastName: string;\n}\nfunction getFullName(user: FullName) {\n    return `${user.firstName} ${user.lastName}`;\n}\nconst currentUser: FullName = { firstName: \"John\", lastName: \"Doe\" };\nconst fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n\nconst price = 99.99;\nconst discount = 0.2;\nconst priceInfo = `Price: ${(price * (1 - discount))}`;\n\nconst isAdmin = true;\nconst roleMessage = `Role: ${isAdmin ? \"Administrator\" : \"Guest\"}.`;\n\ninterface Product {\n    id: number;\n    name: string;\n}\nconst products: Product[] = [\n    { id: 1, name: \"Phone\" },\n    { id: 2, name: \"Laptop\" }\n];\nconst productInfo = `Current Product: ${products[0].name}.`;\n\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\ninterface Company {\n    name: string;\n    ceo: CEO;\n}\ninterface CEO {\n    name: string;\n    contact: Contact;\n}\n\ninterface Contact {\n    email: string;\n}\nconst company: Company = {\n    name: \"Tech Corp\",\n    ceo: {\n        name: \"Bob\",\n        contact: { email: \"bob@tech.com\" }\n    }\n};\nconst emailTemplate = `CEO Email: ${company}`;",
+        "cursorPosition": {
+          "line": 65,
+          "column": 0
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 6,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "cursor_prediction"
+      },
+      "clientTime": 1742475387059,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 12.300048828125,
+      "timeAtRequestSend": 1742475387059
+    },
+    "generateUuid": "e78b6915-887e-4c0b-a310-8039fa5ca5bf",
+    "timestamp": "2025-03-20T12:56:27.061Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "};\nconst emailTemplate = `CEO Email: ${company.",
+      "rangeToReplace": {
+        "startLineNumber": 65,
+        "endLineNumberInclusive": 66
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "e78b6915-887e-4c0b-a310-8039fa5ca5bf",
+    "timestamp": "2025-03-20T12:56:27.452Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "e78b6915-887e-4c0b-a310-8039fa5ca5bf",
+    "timestamp": "2025-03-20T12:56:27.454Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "ceo"
+    },
+    "generationUUID": "e78b6915-887e-4c0b-a310-8039fa5ca5bf",
+    "timestamp": "2025-03-20T12:56:27.455Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "e78b6915-887e-4c0b-a310-8039fa5ca5bf",
+    "timestamp": "2025-03-20T12:56:27.457Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "contact"
+    },
+    "generationUUID": "e78b6915-887e-4c0b-a310-8039fa5ca5bf",
+    "timestamp": "2025-03-20T12:56:27.460Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "e78b6915-887e-4c0b-a310-8039fa5ca5bf",
+    "timestamp": "2025-03-20T12:56:27.468Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "email"
+    },
+    "generationUUID": "e78b6915-887e-4c0b-a310-8039fa5ca5bf",
+    "timestamp": "2025-03-20T12:56:27.481Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}`"
+    },
+    "generationUUID": "e78b6915-887e-4c0b-a310-8039fa5ca5bf",
+    "timestamp": "2025-03-20T12:56:27.493Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";"
+    },
+    "generationUUID": "e78b6915-887e-4c0b-a310-8039fa5ca5bf",
+    "timestamp": "2025-03-20T12:56:27.506Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "e78b6915-887e-4c0b-a310-8039fa5ca5bf",
+    "timestamp": "2025-03-20T12:56:27.530Z"
+  },
+  {
+    "firstChunkValue": "};\nconst emailTemplate = `CEO Email: ${company.ceo.contact.email}`;",
+    "generationUUID": "e78b6915-887e-4c0b-a310-8039fa5ca5bf",
+    "timestamp": "2025-03-20T12:56:27.531Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "};\nconst emailTemplate = `CEO Email: ${company.ceo.contact.email}`;"
+    },
+    "generationUUID": "e78b6915-887e-4c0b-a310-8039fa5ca5bf",
+    "timestamp": "2025-03-20T12:56:27.535Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "9f93a7c1-a4d4-4acb-8b7d-2fb06f3973fb",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 6,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 6,
+      "monotonicallyIncreasingSuggestionId": 4,
+      "range": {
+        "startLineNumber": 65,
+        "startColumn": 1,
+        "endLineNumberInclusive": 66,
+        "endColumn": 47
+      },
+      "replaceText": "};\nconst emailTemplate = `CEO Email: ${company.ceo.contact.email}`;",
+      "originalText": "};\nconst emailTemplate = `CEO Email: ${company}`;",
+      "startingSuggestionRange": {
+        "startLineNumber": 65,
+        "startColumn": 1,
+        "endLineNumberInclusive": 66,
+        "endColumn": 47
+      },
+      "diffText": "};\nconst emailTemplate = `CEO Email: ${company.ceo.contact.email}`;",
+      "fullOriginalText": "};\nconst emailTemplate = `CEO Email: ${company}`;",
+      "suggestionTriggerTime": 1742475387047.5999,
+      "greens": [],
+      "source": "cursor_prediction",
+      "requestId": "e78b6915-887e-4c0b-a310-8039fa5ca5bf",
+      "selection": {
+        "startLineNumber": 65,
+        "startColumn": 1,
+        "endLineNumberInclusive": 66,
+        "endColumn": 47
+      },
+      "fusedCursorPredictionId": "2bd3901c-075a-4366-a827-9d8a92e956d9",
+      "undoRedoGroup": {
+        "id": 4,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "e78b6915-887e-4c0b-a310-8039fa5ca5bf",
+    "timestamp": "2025-03-20T12:56:27.537Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "e78b6915-887e-4c0b-a310-8039fa5ca5bf",
+    "timestamp": "2025-03-20T12:56:27.649Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "2bd3901c-075a-4366-a827-9d8a92e956d9",
+    "generationUUID": "e78b6915-887e-4c0b-a310-8039fa5ca5bf",
+    "timestamp": "2025-03-20T12:56:27.657Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "};\nconst emailTemplate = `CEO Email: ${company.ceo.contact.email}`;"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "2bd3901c-075a-4366-a827-9d8a92e956d9",
+    "generationUUID": "e78b6915-887e-4c0b-a310-8039fa5ca5bf",
+    "timestamp": "2025-03-20T12:56:27.657Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "2bd3901c-075a-4366-a827-9d8a92e956d9",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-20T12:56:27.658Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "9f93a7c1-a4d4-4acb-8b7d-2fb06f3973fb",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 6,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 6,
+      "monotonicallyIncreasingSuggestionId": 4,
+      "range": {
+        "startLineNumber": 65,
+        "startColumn": 1,
+        "endLineNumberInclusive": 66,
+        "endColumn": 47
+      },
+      "replaceText": "};\nconst emailTemplate = `CEO Email: ${company.ceo.contact.email}`;",
+      "originalText": "};\nconst emailTemplate = `CEO Email: ${company}`;",
+      "startingSuggestionRange": {
+        "startLineNumber": 65,
+        "startColumn": 1,
+        "endLineNumberInclusive": 66,
+        "endColumn": 47
+      },
+      "diffText": "};\nconst emailTemplate = `CEO Email: ${company.ceo.contact.email}`;",
+      "fullOriginalText": "};\nconst emailTemplate = `CEO Email: ${company}`;",
+      "suggestionTriggerTime": 1742475387047.5999,
+      "greens": [],
+      "source": "cursor_prediction",
+      "requestId": "e78b6915-887e-4c0b-a310-8039fa5ca5bf",
+      "selection": {
+        "startLineNumber": 65,
+        "startColumn": 1,
+        "endLineNumberInclusive": 66,
+        "endColumn": 47
+      },
+      "fusedCursorPredictionId": "2bd3901c-075a-4366-a827-9d8a92e956d9",
+      "undoRedoGroup": {
+        "id": 4,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;143"
+    },
+    "generationUUID": "e78b6915-887e-4c0b-a310-8039fa5ca5bf",
+    "timestamp": "2025-03-20T12:56:28.202Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "9f93a7c1-a4d4-4acb-8b7d-2fb06f3973fb",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 6,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 6,
+      "monotonicallyIncreasingSuggestionId": 4,
+      "range": {
+        "startLineNumber": 65,
+        "startColumn": 1,
+        "endLineNumberInclusive": 66,
+        "endColumn": 47
+      },
+      "replaceText": "};\nconst emailTemplate = `CEO Email: ${company.ceo.contact.email}`;",
+      "originalText": "};\nconst emailTemplate = `CEO Email: ${company}`;",
+      "startingSuggestionRange": {
+        "startLineNumber": 65,
+        "startColumn": 1,
+        "endLineNumberInclusive": 66,
+        "endColumn": 47
+      },
+      "diffText": "};\nconst emailTemplate = `CEO Email: ${company.ceo.contact.email}`;",
+      "fullOriginalText": "};\nconst emailTemplate = `CEO Email: ${company}`;",
+      "suggestionTriggerTime": 1742475387047.5999,
+      "greens": [],
+      "source": "cursor_prediction",
+      "requestId": "e78b6915-887e-4c0b-a310-8039fa5ca5bf",
+      "selection": {
+        "startLineNumber": 65,
+        "startColumn": 1,
+        "endLineNumberInclusive": 66,
+        "endColumn": 47
+      },
+      "fusedCursorPredictionId": "2bd3901c-075a-4366-a827-9d8a92e956d9",
+      "undoRedoGroup": {
+        "id": 4,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;143"
+    },
+    "generationUUID": "e78b6915-887e-4c0b-a310-8039fa5ca5bf",
+    "timestamp": "2025-03-20T12:56:28.214Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "2bd3901c-075a-4366-a827-9d8a92e956d9",
+    "fusedCursorPrediction": null,
+    "oldText": "};\nconst emailTemplate = `CEO Email: ${company}`;",
+    "newText": "};\nconst emailTemplate = `CEO Email: ${company.ceo.contact.email}`;",
+    "timestamp": "2025-03-20T12:56:28.215Z"
+  }
+]

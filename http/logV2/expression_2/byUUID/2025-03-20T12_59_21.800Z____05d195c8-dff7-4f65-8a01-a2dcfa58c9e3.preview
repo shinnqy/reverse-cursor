@@ -1,0 +1,60 @@
+{"line":9,"column":0}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+interface Address {
+  city: string;
+  country: string;
+}
+interface User {
+  name: string;
+  age: number;
+  address: Address;
+}
+[ToFill]const user = {
+  name: "Alice",
+  age: 30,
+  address: {
+    city: "New York",
+    country: "USA",
+  },
+};
+
+const greeting = `Hello, ${user.name}!`;
+
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+}
+const user: User = {
+  name: "Alice",
+  age: 30,
+  address: {
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+interface Address {
+  city: string;
+  country: string;
+}
+interface User {
+  name: string;
+  age: number;
+  address: Address;
+}
+const user: User = {
+  name: "Alice",
+  age: 30,
+  address: {
+    city: "New York",
+    country: "USA",
+  },
+};
+
+const greeting = `Hello, ${user.name}!`;
+
+
+
+-------------------------------[                   fullText                  ]--------------------------------
+}
+const user: User = {
+  name: "Alice",
+  age: 30,
+  address: {

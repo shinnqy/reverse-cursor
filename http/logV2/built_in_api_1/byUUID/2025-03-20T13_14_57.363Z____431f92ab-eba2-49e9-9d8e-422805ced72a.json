@@ -1,0 +1,474 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:57.363Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/dynamicProp.ets",
+          "diffHistory": [
+            "1+|const user = {}\n",
+            "2-|  \n3-|}\n2+|  name: \"Alice\",\n3+|  age: 30,\n4+|  address: {\n5+|},\n6+|};\n7+|\n8+|\n",
+            "5-|},\n5+|    city: \"New York\",\n6+|    country: \"USA\",\n7+|  },\n10+|const greeting = `Hello, ${user.name}!`;\n",
+            "1-|\n1+|interface User {\n2+|  name: string;\n3+|  age: number;\n4+|  address: {\n5+|    city: string;\n6+|    country: string;\n7+|  };\n8+|}\n",
+            "1-|\n1+|interface Address {\n",
+            "5-|  address: {\n5+|  address: Address;\n",
+            "2+|  city: string;\n3+|  country: string;\n4+|}\n",
+            "9-|    city: string;\n10-|    country: string;\n11-|  };\n13-|const user = {\n10+|const user: User = {\n",
+            "21+|function getFullName(user: { firstName: string; lastName: string }) {\n22+|  return `${user.firstName} ${user.lastName}`;\n23+|}\n25+|const fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n26+|\n27+|\n28+|\n",
+            "25-|const fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n",
+            "25+|const currentUser = {\n26+|  firstName: \"John\",\n27+|  lastName: \"Doe\",\n28+|};\n30+|const fullName = getFullName(currentUser);\n",
+            "30-|const fullName = getFullName(currentUser);\n30+|const fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n",
+            "21-|function getFullName(user: { firstName: string; lastName: string }) {\n21+|interface FullName {\n22+|function getFullName(user: { firstName: string; lastName: string }\n23+|function getFullName(user: FullName) {\n",
+            "22-|function getFullName(user: { firstName: string; lastName: string }\n22+|function getFullName(user: { firstName: string; lastName: string ;\n23+|}\n",
+            "22-|function getFullName(user: { firstName: string;\n22+|  firstName: string;\n",
+            "29-|const currentUser = {\n29+|const currentUser: FullName = {\n",
+            "36+|const price = 100;\n37+|const discount = 0.1;\n38+|const priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n40+|const isAdmin = true;\n41+|const roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n43+|const products = [\n44+|  { name: \"Product 1\", price: 100 },\n45+|  { name: \"Product 2\", price: 200 },\n46+|  { name: \"Product 3\", price: 300 },\n47+|];\n49+|const productInfo = `Current product: ${products[0].name}`;\n50+|\n51+|type Status = \"active\" | \"inactive\";\n52+|let status: Status = \"active\";\n53+|const statusText = `Status: ${status}`;\n54+|\n55+|const company = {\n56+|  name: \"Acme Inc.\",\n57+|  address: {\n58+|    street: \"123 Main St\",\n59+|    city: \"Anytown\",\n60+|  },\n61+|};\n62+|\n",
+            "57-|  address: {\n58-|    street: \"123 Main St\",\n59-|    city: \"Anytown\",\n60-|  },\n57+|  ceo: {\n58+|    name: \"John Doe\",\n59+|    contact: {\n",
+            "60+|      email: \"john.doe@acme.com\",\n61+|      phone: \"+1234567890\",\n62+|    },\n63+|  },\n66+|const companyInfo = `Company: ${company.name}, CEO: ${company.ceo.name}`;\n",
+            "55+|interface Company {\n56+|  name: string;\n57+|  ceo: {\n58+|    name: string;\n59+|    contact: {\n60+|      email: string;\n61+|      phone: string;\n",
+            "62-|const company = {\n62+|      \n63+|const company: Company = {\n",
+            "62-|      \n62+|      };\n63+|}\n",
+            "62-|      };\n62+|    };\n63+|  };\n",
+            "55+|interface CEO {\n56+|  name: string;\n57+|  contact: {\n58+|    email: string;\n59+|    phone: string;\n60+|  };\n61+|}\n",
+            "70-|  };\n70+|  }CEO;\n",
+            "64-|  ceo: {\n65-|    name: string;\n66-|    contact: {\n67-|      email: string;\n68-|      phone: string;\n69-|    };\n70-|  }CEO;\n64+|  ceo: CEO;\n",
+            "55+|interface Contact {\n",
+            "58-|  contact: {\n59-|    email: string;\n58+|  contact: Contact;\n",
+            "56+|  email: string;\n57+|  phone: string;\n58+|}\n",
+            "62-|    phone: string;\n63-|  };\n",
+            "43-|const products = [\n43+|interface Product {\n44+|  name: string;\n45+|  price: number;\n46+|}\n47+|const products: Product[] = [\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/utils/builtInAPI.ets",
+          "diffHistory": [
+            "1+|import router from \"@ohos.router\";\n2+|\n3+|@Entry\n4+|@Component\n5+|struct Main {\n6+|  @State message: string = \"Hello World\";\n7+|\n8+|  build() {\n9+|    Row() {\n10+|      Text(this.message)\n11+|        .fontSize(20)\n12+|        .fontWeight(FontWeight.Bold)\n13+|        .onClick(() => {\n14+|          router.push({\n15+|            url: \"pages/SecondPage\",\n",
+            "16+|            params: {\n17+|              message: \"Hello from Second Page\",\n18+|            },\n19+|          });\n20+|        })\n21+|        .width(200)\n22+|        .height(100)\n",
+            "23+|        .backgroundColor(Color.Red)\n24+|        .borderRadius(10)\n25+|        .borderWidth(2)\n26+|        .borderColor(Color.Black)\n27+|        .padding(10)\n28+|        .margin(10)\n29+|        \n30+|        \n31+|        \n",
+            "29-|          \n29+|            \n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/builtInAPI.ets",
+        "contents": "import router from \"@ohos.router\";\n\n@Entry\n@Component\nstruct Main {\n  @State message: string = \"Hello World\";\n\n  build() {\n    Row() {\n      Text(this.message)\n        .fontSize(20)\n        .fontWeight(FontWeight.Bold)\n        .onClick(() => {\n          router.push({\n            url: \"pages/SecondPage\",\n            params: {\n              message: \"Hello from Second Page\",\n            },\n          });\n        })\n        .width(200)\n        .height(100)\n        .backgroundColor(Color.Red)\n        .borderRadius(10)\n        .borderWidth(2)\n        .borderColor(Color.Black)\n        .padding(10)\n        .margin(10)\n            \n\n\n",
+        "cursorPosition": {
+          "line": 28,
+          "column": 4
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 47,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/utils/dynamicProp.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            33
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 33,
+              "endLineNumberInclusive": 67
+            }
+          ],
+          "lastViewedAt": 1742476421483
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742476497402,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.099853515625,
+      "timeAtRequestSend": 1742476497402
+    },
+    "generateUuid": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:57.404Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:57.763Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "        .borderWidth(2)\n        .borderColor(Color.Black)\n        .padding(10)\n        .margin(10)\n   ",
+      "rangeToReplace": {
+        "startLineNumber": 25,
+        "endLineNumberInclusive": 32
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:57.764Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " }"
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:57.798Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:57.808Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "   "
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:57.821Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ."
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:57.834Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "width"
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:57.844Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "(\""
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:57.855Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "1"
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:57.869Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "00"
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:57.880Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "%"
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:57.894Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\")"
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:57.906Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:57.920Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "    .height"
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:57.934Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "(\""
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:57.944Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "100"
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:57.957Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "%\")\n   "
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:57.971Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " .backgroundColor"
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:57.982Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "(Color.White"
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:57.996Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ")"
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:58.010Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:58.018Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "   "
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:58.029Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " .align"
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:58.041Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Items"
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:58.051Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "("
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:58.062Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Alignment"
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:58.073Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:58.084Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Center"
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:58.095Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ")"
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:58.106Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n    ."
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:58.117Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "justify"
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:58.128Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Content"
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:58.139Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "("
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:58.150Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "J"
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:58.161Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "us"
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:58.171Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ")"
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:58.183Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:58.193Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:58.205Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " }"
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:58.214Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:58.225Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}"
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:58.236Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:58.247Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:58.261Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:58.261Z"
+  },
+  {
+    "firstChunkValue": "        .borderWidth(2)\n        .borderColor(Color.Black)\n        .padding(10)\n        .margin(10)\n    }\n    .width(\"100%\")\n    .height(\"100%\")\n    .backgroundColor(Color.White)\n    .alignItems(Alignment.Center)\n    .justifyContent(Jus)\n  }\n}\n\n",
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:58.265Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "        .borderWidth(2)\n        .borderColor(Color.Black)\n        .padding(10)\n        .margin(10)\n    }\n    .width(\"100%\")\n    .height(\"100%\")\n    .backgroundColor(Color.White)\n    .alignItems(Alignment.Center)\n    .justifyContent(Jus)\n  }\n}\n\n"
+    },
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:58.267Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "7becbeb8-4829-40c4-940b-24083c813544",
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:58.270Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "        .borderWidth(2)\n        .borderColor(Color.Black)\n        .padding(10)\n        .margin(10)\n    }\n    .width(\"100%\")\n    .height(\"100%\")\n    .backgroundColor(Color.White)\n    .alignItems(Alignment.Center)\n    .justifyContent(Jus)\n  }\n}\n\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "7becbeb8-4829-40c4-940b-24083c813544",
+    "generationUUID": "431f92ab-eba2-49e9-9d8e-422805ced72a",
+    "timestamp": "2025-03-20T13:14:58.270Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "7becbeb8-4829-40c4-940b-24083c813544",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-20T13:14:58.271Z"
+  }
+]

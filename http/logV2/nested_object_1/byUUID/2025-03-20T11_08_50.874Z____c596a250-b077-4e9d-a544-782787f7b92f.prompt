@@ -1,0 +1,183 @@
+You're an expert in ArkTS. Your task is to help the user update the code around current cursor position.
+
+## Recent Actions
+Here is what the user has been doing from the earliest to the latest:
+
+File: entry/src/main/ets/utils/nestedObj.ets
+added the code `type Shape =` in line 55
+added the code `    ` in line 56
+added the code `    ` in line 57
+added the code `    ` in line 58
+added the code `function getArea(shape: Shape) {` in line 60
+added the code `    switch (shape.type) {` in line 61
+added the code `        case "circle":` in line 62
+
+deleted the code `    ` in line 56
+added the code `    ` in line 56
+
+deleted the code `    ` in line 57
+deleted the code `    ` in line 58
+added the code `    ` in line 57
+added the code `    ` in line 58
+
+deleted the code `` in line 63
+added the code `            return Math.PI * shape.radius * shape.radius;` in line 63
+added the code `        case "rectangle":` in line 64
+added the code `            return shape.width * shape.height;` in line 65
+added the code `        case "triangle":` in line 66
+added the code `            return shape.side1 * shape.side2 * shape.side3;` in line 67
+added the code `    }` in line 68
+added the code `}` in line 69
+
+added the code `type Circle = { type: "circle"; radius: number; color: string };` in line 55
+
+deleted the code `    ` in line 58
+added the code `    ` in line 58
+added the code `type Shape = Circle ` in line 59
+added the code `` in line 60
+added the code `function getArea(shape: Shape) {` in line 61
+
+deleted the code `    ` in line 57
+deleted the code `    ` in line 58
+added the code `    ` in line 57
+added the code `type Triangle = { type: "triangle"; side1: number; side2: number; side3: number; color: string };` in line 58
+
+deleted the code `type Shape =` in line 56
+deleted the code `    ` in line 57
+added the code `type Rectangle = { type: "rectangle"; width: number; height: number; color: string };` in line 56
+
+deleted the code `    ` in line 61
+deleted the code `` in line 62
+deleted the code `function getArea(shape: Shape) {` in line 63
+
+deleted the code `type Circle = { type: "circle"; radius: number; color: string };` in line 55
+added the code `inter Circle = { type: "circle"; radius: number; color: string };` in line 55
+
+deleted the code `type Rectangle = { type: "rectangle"; width: number; height: number; color: string };` in line 56
+deleted the code `type Triangle = { type: "triangle"; side1: number; side2: number; side3: number; color: string };` in line 57
+added the code `type Rectangle { type: "rectangle"; width: number; height: number; color: string };` in line 56
+added the code `interface Triangle { type: "triangle"; side1: number; side2: number; side3: number; color: string };` in line 57
+
+deleted the code `inter Circle = { type: "circle"; radius: number; color: string };` in line 55
+deleted the code `type Rectangle { type: "rectangle"; width: number; height: number; color: string };` in line 56
+added the code `inter Circle { type: "circle"; radius: number; color: string };` in line 55
+added the code `interface Rectangle { type: "rectangle"; width: number; height: number; color: string };` in line 56
+
+deleted the code `inter Circle { type: "circle"; radius: number; color: string };` in line 55
+added the code `interface Circle { type: "circle"; radius: number; color: string };` in line 55
+
+added the code `let shape: Shape = { type: "circle", radius: 10, color: "red" };` in line 60
+added the code `` in line 61
+deleted the code `        case "rectangle":` in line 64
+deleted the code `            return shape.width * shape.height;` in line 65
+deleted the code `        case "triangle":` in line 66
+deleted the code `            return shape.side1 * shape.side2 * shape.side3;` in line 67
+deleted the code `    }` in line 68
+deleted the code `}` in line 69
+
+deleted the code `function getArea(shape: Shape) {` in line 62
+deleted the code `    switch (shape.type) {` in line 63
+deleted the code `        case "circle":` in line 64
+deleted the code `            return Math.PI * shape.radius * shape.radius;` in line 65
+
+added the code `user.address.city = "New York";` in line 25
+added the code `user.address.zip = "10001";` in line 26
+added the code `user.address.state = "NY";` in line 27
+added the code `user.address.country = "USA";` in line 28
+added the code `` in line 29
+
+added the code `p` in line 60
+added the code `` in line 61
+
+
+## Current Code
+Here is the current code file path:
+entry/src/main/ets/utils/nestedObj.ets
+
+Here is the current code around the cursor position:
+
+```
+interface Address {
+    street: string;
+    city: string;
+    state: string;
+    zip: string;
+}
+
+interface User {
+    name: string;
+    age: number;
+    address: Address;
+}
+
+let user: User = {
+    name: "John",
+    age: 30,
+    address: {
+        street: "123 Main St",
+        city: "Anytown",
+        state: "CA",
+        zip: "12345",
+    },
+};
+
+user.address.city = "New York";
+user.address.zip = "10001";
+user.address.state = "NY";
+user.address.country = "USA";
+
+interface ProductDetails {
+    name: string;
+    price: number;
+    category: string;
+}
+
+interface Product {
+    id: number;
+    details: ProductDetails;
+}
+
+let products: Product[] = [
+    {
+        id: 1,
+        details: {
+            name: "Product 1",
+            price: 100,
+            category: "Category 1",
+        },
+    },
+<|editable_region_start|>
+    {
+        id: 2,
+        details: {
+            name: "Product 2",
+            price: 200,
+            category: "Category 2",
+        },
+    },
+];
+
+p<|current_cursor_position|>
+
+interface Circle { type: "circle"; radius: number; color: string };
+interface Rectangle { type: "rectangle"; width: number; height: number; color: string };
+interface Triangle { type: "triangle"; side1: number; side2: number; side3: number; color: string };
+type Shape = Circle | Rectangle | Triangle;
+
+let shape: Shape = { type: "circle", radius: 10, color: "red" };
+
+
+<|editable_region_end|>
+```
+
+## Task
+Rewrite the code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> according to the following requirements:
+1. Enforce code format strictly matching existing code style.
+2. Propagate naming convention changes to all related cases
+3. Preserve original functionality
+4. Apply changes to entire code regardless of cursor position
+5. Focus on code after cursor position at <|current_cursor_position|>
+
+# Output Format
+Return ONLY the rewritten code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> without any other words.
+Never use markdown formatting like ```. Return raw text only.

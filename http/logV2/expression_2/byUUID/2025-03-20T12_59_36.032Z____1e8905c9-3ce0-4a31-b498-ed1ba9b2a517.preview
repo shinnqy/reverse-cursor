@@ -1,0 +1,38 @@
+{"line":20,"column":13}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+interface Address {
+  city: string;
+  country: string;
+}
+interface User {
+  name: string;
+  age: number;
+  address: Address;
+}
+const user: User = {
+  name: "Alice",
+  age: 30,
+  address: {
+    city: "New York",
+    country: "USA",
+  },
+};
+
+const greeting = `Hello, ${user.name}!`;
+
+function getF[ToFill]
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+const greeting = `Hello, ${user.name}!`;
+
+function getField(obj: any, field: string) {
+  return obj[field];
+}
+
+const field = getField(user, "name");
+console.log(field);
+
+

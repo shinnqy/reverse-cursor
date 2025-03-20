@@ -1,0 +1,106 @@
+{"line":54,"column":2}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+interface Address {
+  city: string;
+  country: string;
+}
+interface User {
+  name: string;
+  age: number;
+  address: Address;
+}
+const user: User = {
+  name: "Alice",
+  age: 30,
+  address: {
+    city: "New York",
+    country: "USA",
+  },
+};
+
+const greeting = `Hello, ${user.name}!`;
+
+interface FullName {
+  firstName: string;
+  lastName: string;
+}
+function getFullName(user: FullName) {
+  return `${user.firstName} ${user.lastName}`;
+}
+
+const currentUser: FullName = {
+  firstName: "John",
+  lastName: "Doe",
+};
+
+const fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;
+
+const price = 100;
+const discount = 0.1;
+const priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;
+
+const isAdmin = true;
+const roleMessage = `User is ${isAdmin ? "admin" : "not admin"}`;
+
+const products = [
+  { name: "Product 1", price: 100 },
+  { name: "Product 2", price: 200 },
+  { name: "Product 3", price: 300 },
+];
+
+const productInfo = `Current product: ${products[0].name}`;
+
+type Status = "active" | "inactive";
+let status: Status = "active";
+const statusText = `Status: ${status}`;
+
+in[ToFill]
+interface Company {
+  name: string;
+  ceo: {
+    name: string;
+    contact: {
+      email: string;
+      phone: string;
+    };
+  };
+}
+const company: Company = {
+  name: "Acme Inc.",
+  ceo: {
+    name: "John Doe",
+    contact: {
+      email: "john.doe@acme.com",
+      phone: "+1234567890",
+    },
+  },
+};
+
+const companyInfo = `Company: ${company.name}, CEO: ${company.ceo.name}`;
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+interface Contact {
+interface Company {
+  name: string;
+  ceo: {
+    name: string;
+-------------------------------[                   fullText                  ]--------------------------------
+
+interface Contact {
+  email: string;
+  phone: string;
+}
+interface Company {
+  name: string;
+  ceo: {
+    name: string;
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/dynamicProp.ets",
+  "lineNumberOneIndexed": 60,
+  "text": "contact: {\nemail: string;\nphone: string;\n};\n};",
+  "shouldRetriggerCpp": true
+}

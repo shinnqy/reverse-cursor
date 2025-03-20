@@ -1,0 +1,102 @@
+{"line":0,"column":12}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+interface Ad[ToFill]
+interface User {
+  name: string;
+  age: number;
+  address: {
+    city: string;
+    country: string;
+  };
+}
+const user = {
+  name: "Alice",
+  age: 30,
+  address: {
+    city: "New York",
+    country: "USA",
+  },
+};
+
+const greeting = `Hello, ${user.name}!`;
+
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+interface Address {
+interface User {
+  name: string;
+  age: number;
+  address: {
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+interface Address {
+interface User {
+  name: string;
+  age: number;
+  address: {
+    city: string;
+    country: string;
+  };
+}
+const user = {
+  name: "Alice",
+  age: 30,
+  address: {
+    city: "New York",
+    country: "USA",
+  },
+};
+
+const greeting = `Hello, ${user.name}!`;
+
+
+
+-------------------------------[                   fullText                  ]--------------------------------
+interface Address {
+  city: string;
+  country: string;
+}
+interface User {
+  name: string;
+  age: number;
+  address: Address;
+-------------------------------[         replacedContentsWithFullText         ]--------------------------------
+interface Address {
+  city: string;
+  country: string;
+}
+interface User {
+  name: string;
+    country: string;
+  };
+}
+const user = {
+  name: "Alice",
+  age: 30,
+  address: {
+    city: "New York",
+    country: "USA",
+  },
+};
+
+const greeting = `Hello, ${user.name}!`;
+
+
+
+  age: number;
+  address: Address;
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/dynamicProp.ets",
+  "lineNumberOneIndexed": 6,
+  "text": "city: string;\ncountry: string;\n};\n}\nconst user = {",
+  "shouldRetriggerCpp": true
+}
+--------------------------------[        displayedFusedCursorPrediction       ]---------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/dynamicProp.ets",
+  "lineNumberOneIndexed": 6,
+  "text": "city: string;\ncountry: string;\n};\n}\nconst user = {",
+  "shouldRetriggerCpp": true
+}

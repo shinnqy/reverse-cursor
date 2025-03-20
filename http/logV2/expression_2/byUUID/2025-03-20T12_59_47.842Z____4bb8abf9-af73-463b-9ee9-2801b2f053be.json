@@ -1,0 +1,123 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "4bb8abf9-af73-463b-9ee9-2801b2f053be",
+    "timestamp": "2025-03-20T12:59:47.842Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/dynamicProp.ets",
+          "diffHistory": [
+            "1+|const user = {}\n",
+            "2-|  \n3-|}\n2+|  name: \"Alice\",\n3+|  age: 30,\n4+|  address: {\n5+|},\n6+|};\n7+|\n8+|\n",
+            "5-|},\n5+|    city: \"New York\",\n6+|    country: \"USA\",\n7+|  },\n10+|const greeting = `Hello, ${user.name}!`;\n",
+            "1-|\n1+|interface User {\n2+|  name: string;\n3+|  age: number;\n4+|  address: {\n5+|    city: string;\n6+|    country: string;\n7+|  };\n8+|}\n",
+            "1-|\n1+|interface Address {\n",
+            "5-|  address: {\n5+|  address: Address;\n",
+            "2+|  city: string;\n3+|  country: string;\n4+|}\n",
+            "9-|    city: string;\n10-|    country: string;\n11-|  };\n13-|const user = {\n10+|const user: User = {\n",
+            "21+|function getFullName(user: { firstName: string; lastName: string }) {\n22+|  return `${user.firstName} ${user.lastName}`;\n23+|}\n25+|const fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n26+|\n27+|\n28+|\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/dynamicProp.ets",
+        "contents": "interface Address {\n  city: string;\n  country: string;\n}\ninterface User {\n  name: string;\n  age: number;\n  address: Address;\n}\nconst user: User = {\n  name: \"Alice\",\n  age: 30,\n  address: {\n    city: \"New York\",\n    country: \"USA\",\n  },\n};\n\nconst greeting = `Hello, ${user.name}!`;\n\nfunction getFullName(user: { firstName: string; lastName: string }) {\n  return `${user.firstName} ${user.lastName}`;\n}\n\nconst fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n\n\n\n",
+        "cursorPosition": {
+          "line": 24,
+          "column": 45
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 135,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1742475587887,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 52.7998046875,
+      "timeAtRequestSend": 1742475587887
+    },
+    "generateUuid": "4bb8abf9-af73-463b-9ee9-2801b2f053be",
+    "timestamp": "2025-03-20T12:59:47.888Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nconst fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n\n\n\n",
+      "rangeToReplace": {
+        "startLineNumber": 24,
+        "endLineNumberInclusive": 29
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "4bb8abf9-af73-463b-9ee9-2801b2f053be",
+    "timestamp": "2025-03-20T12:59:48.348Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "4bb8abf9-af73-463b-9ee9-2801b2f053be",
+    "timestamp": "2025-03-20T12:59:48.349Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "4bb8abf9-af73-463b-9ee9-2801b2f053be",
+    "timestamp": "2025-03-20T12:59:48.377Z"
+  },
+  {
+    "firstChunkValue": "\nconst fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n\n\n\n",
+    "generationUUID": "4bb8abf9-af73-463b-9ee9-2801b2f053be",
+    "timestamp": "2025-03-20T12:59:48.380Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": false
+    },
+    "generationUUID": "4bb8abf9-af73-463b-9ee9-2801b2f053be",
+    "timestamp": "2025-03-20T12:59:48.383Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "4bb8abf9-af73-463b-9ee9-2801b2f053be",
+    "timestamp": "2025-03-20T12:59:48.551Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "edbde905-ec50-44ba-969c-34dd17ba671f",
+    "generationUUID": "4bb8abf9-af73-463b-9ee9-2801b2f053be",
+    "timestamp": "2025-03-20T12:59:48.558Z"
+  }
+]

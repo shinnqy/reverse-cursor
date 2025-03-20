@@ -1,0 +1,48 @@
+{"line":9,"column":32}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+const user = {
+  name: "Alice",
+  age: 30,
+  address: {
+    city: "New York",
+    country: "USA",
+  },
+};
+
+const greeting = `Hello, ${user.[ToFill]}`
+
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+const greeting = `Hello, ${user.name}!`;
+
+
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+const user = {
+  name: "Alice",
+  age: 30,
+  address: {
+    city: "New York",
+    country: "USA",
+  },
+};
+
+const greeting = `Hello, ${user.name}!`;
+
+
+
+-------------------------------[                   fullText                  ]--------------------------------
+
+const greeting = `Hello, ${user.name}!`;
+
+console.log(greeting);
+
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/dynamicProp.ets",
+  "lineNumberOneIndexed": 1,
+  "text": "const user = {\nname: \"Alice\",\nage: 30,\naddress: {\ncity: \"New York\",",
+  "shouldRetriggerCpp": true
+}

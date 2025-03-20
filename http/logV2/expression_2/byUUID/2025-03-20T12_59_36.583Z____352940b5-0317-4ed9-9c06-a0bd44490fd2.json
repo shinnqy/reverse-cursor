@@ -1,0 +1,465 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:36.583Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/dynamicProp.ets",
+          "diffHistory": [
+            "1+|const user = {}\n",
+            "2-|  \n3-|}\n2+|  name: \"Alice\",\n3+|  age: 30,\n4+|  address: {\n5+|},\n6+|};\n7+|\n8+|\n",
+            "5-|},\n5+|    city: \"New York\",\n6+|    country: \"USA\",\n7+|  },\n10+|const greeting = `Hello, ${user.name}!`;\n",
+            "1-|\n1+|interface User {\n2+|  name: string;\n3+|  age: number;\n4+|  address: {\n5+|    city: string;\n6+|    country: string;\n7+|  };\n8+|}\n",
+            "1-|\n1+|interface Address {\n",
+            "5-|  address: {\n5+|  address: Address;\n",
+            "2+|  city: string;\n3+|  country: string;\n4+|}\n",
+            "9-|    city: string;\n10-|    country: string;\n11-|  };\n13-|const user = {\n10+|const user: User = {\n",
+            "21+|function getFull\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/dynamicProp.ets",
+        "contents": "interface Address {\n  city: string;\n  country: string;\n}\ninterface User {\n  name: string;\n  age: number;\n  address: Address;\n}\nconst user: User = {\n  name: \"Alice\",\n  age: 30,\n  address: {\n    city: \"New York\",\n    country: \"USA\",\n  },\n};\n\nconst greeting = `Hello, ${user.name}!`;\n\nfunction getFull\n\n",
+        "cursorPosition": {
+          "line": 20,
+          "column": 16
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 121,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742475576625,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.699951171875,
+      "timeAtRequestSend": 1742475576625
+    },
+    "generateUuid": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:36.626Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nconst greeting = `Hello, ${user.name}!`;\n\nfunction getFullName",
+      "rangeToReplace": {
+        "startLineNumber": 18,
+        "endLineNumberInclusive": 23
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:36.977Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:36.979Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "("
+    },
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.014Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "user"
+    },
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.026Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.040Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " User"
+    },
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.051Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ")"
+    },
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.067Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.076Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n "
+    },
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.089Z"
+  },
+  {
+    "firstChunkValue": "\nconst greeting = `Hello, ${user.name}!`;\n\nfunction getFullName(user: User) {\n\n",
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.100Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nconst greeting = `Hello, ${user.name}!`;\n\nfunction getFullName(user: User) {\n\n"
+    },
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.101Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " return"
+    },
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.106Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " `${"
+    },
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.113Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "user"
+    },
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.128Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.143Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "name} ${"
+    },
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.151Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "user.address"
+    },
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.163Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.174Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "city"
+    },
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.185Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}"
+    },
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.198Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ${"
+    },
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.207Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "user"
+    },
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.221Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ".address"
+    },
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.236Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ".country"
+    },
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.242Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}`"
+    },
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.252Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";"
+    },
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.262Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n}"
+    },
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.283Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.286Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.295Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "const"
+    },
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.307Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " full"
+    },
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.319Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Name"
+    },
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.330Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.341Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " get"
+    },
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.354Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "FullName"
+    },
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.365Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "(user);"
+    },
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.379Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.396Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.403Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.416Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.432Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.442Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.443Z"
+  },
+  {
+    "fullText": "\nconst greeting = `Hello, ${user.name}!`;\n\nfunction getFullName(user: User) {\n  return `${user.name} ${user.address.city} ${user.address.country}`;\n}\n\nconst fullName = getFullName(user);\n\n\n\n",
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.447Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nconst greeting = `Hello, ${user.name}!`;\n\nfunction getFullName(user: User) {\n\n"
+    },
+    "fullText": "\nconst greeting = `Hello, ${user.name}!`;\n\nfunction getFullName(user: User) {\n  return `${user.name} ${user.address.city} ${user.address.country}`;\n}\n\nconst fullName = getFullName(user);\n\n\n\n",
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.448Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && currentSuggestion uniqueId is different && need to create newSuggestion according fullText",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "bf16dee4-da2c-452f-a753-ff79e193a8c0",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 121,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 125,
+      "monotonicallyIncreasingSuggestionId": 75,
+      "range": {
+        "startLineNumber": 18,
+        "startColumn": 1,
+        "endLineNumberInclusive": 23,
+        "endColumn": 1
+      },
+      "replaceText": "\nconst greeting = `Hello, ${user.name}!`;\n\nfunction getFullName(user: User) {\n  return `${user.name} ${user.address.city} ${user.address.country}`;\n}\n\nconst fullName = getFullName(user);\n\n\n\n",
+      "originalText": "\nconst greeting = `Hello, ${user.name}!`;\n\nfunction getFullName\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 18,
+        "startColumn": 1,
+        "endLineNumberInclusive": 23,
+        "endColumn": 1
+      },
+      "diffText": "\nconst greeting = `Hello, ${user.name}!`;\n\nfunction getFullName(user: User) {\n  return `${user.name} ${user.address.city} ${user.address.country}`;\n}\n\nconst fullName = getFullName(user);\n\n\n\n",
+      "fullOriginalText": "\nconst greeting = `Hello, ${user.name}!`;\n\nfunction getFullName\n\n",
+      "suggestionTriggerTime": 1742475576575,
+      "greens": [],
+      "source": "typing",
+      "requestId": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+      "selection": {
+        "startLineNumber": 18,
+        "startColumn": 1,
+        "endLineNumberInclusive": 23,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "bedd010a-5e04-4250-ab66-192248c69629",
+      "undoRedoGroup": {
+        "id": 75,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.449Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "bedd010a-5e04-4250-ab66-192248c69629",
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.453Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nconst greeting = `Hello, ${user.name}!`;\n\nfunction getFullName(user: User) {\n\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "bedd010a-5e04-4250-ab66-192248c69629",
+    "generationUUID": "352940b5-0317-4ed9-9c06-a0bd44490fd2",
+    "timestamp": "2025-03-20T12:59:37.453Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "bedd010a-5e04-4250-ab66-192248c69629",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-20T12:59:37.454Z"
+  }
+]

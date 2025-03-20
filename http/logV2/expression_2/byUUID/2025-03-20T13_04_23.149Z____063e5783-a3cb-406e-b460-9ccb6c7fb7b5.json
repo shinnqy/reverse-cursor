@@ -1,0 +1,371 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "063e5783-a3cb-406e-b460-9ccb6c7fb7b5",
+    "timestamp": "2025-03-20T13:04:23.149Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/dynamicProp.ets",
+          "diffHistory": [
+            "1+|const user = {}\n",
+            "2-|  \n3-|}\n2+|  name: \"Alice\",\n3+|  age: 30,\n4+|  address: {\n5+|},\n6+|};\n7+|\n8+|\n",
+            "5-|},\n5+|    city: \"New York\",\n6+|    country: \"USA\",\n7+|  },\n10+|const greeting = `Hello, ${user.name}!`;\n",
+            "1-|\n1+|interface User {\n2+|  name: string;\n3+|  age: number;\n4+|  address: {\n5+|    city: string;\n6+|    country: string;\n7+|  };\n8+|}\n",
+            "1-|\n1+|interface Address {\n",
+            "5-|  address: {\n5+|  address: Address;\n",
+            "2+|  city: string;\n3+|  country: string;\n4+|}\n",
+            "9-|    city: string;\n10-|    country: string;\n11-|  };\n13-|const user = {\n10+|const user: User = {\n",
+            "21+|function getFullName(user: { firstName: string; lastName: string }) {\n22+|  return `${user.firstName} ${user.lastName}`;\n23+|}\n25+|const fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n26+|\n27+|\n28+|\n",
+            "25-|const fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n",
+            "25+|const currentUser = {\n26+|  firstName: \"John\",\n27+|  lastName: \"Doe\",\n28+|};\n30+|const fullName = getFullName(currentUser);\n",
+            "30-|const fullName = getFullName(currentUser);\n30+|const fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n",
+            "21-|function getFullName(user: { firstName: string; lastName: string }) {\n21+|interface FullName {\n22+|function getFullName(user: { firstName: string; lastName: string }\n23+|function getFullName(user: FullName) {\n",
+            "22-|function getFullName(user: { firstName: string; lastName: string }\n22+|function getFullName(user: { firstName: string; lastName: string ;\n23+|}\n",
+            "22-|function getFullName(user: { firstName: string;\n22+|  firstName: string;\n",
+            "29-|const currentUser = {\n29+|const currentUser: FullName = {\n",
+            "36+|const price = 100;\n37+|const discount = 0.1;\n38+|const priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n40+|const isAdmin = true;\n41+|const roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n43+|const products = [\n44+|  { name: \"Product 1\", price: 100 },\n45+|  { name: \"Product 2\", price: 200 },\n46+|  { name: \"Product 3\", price: 300 },\n47+|];\n49+|const productInfo = `Current product: ${products[0].name}`;\n50+|\n51+|type Status = \"active\" | \"inactive\";\n52+|let status: Status = \"active\";\n53+|const statusText = `Status: ${status}`;\n54+|\n55+|const company = {\n56+|  name: \"Acme Inc.\",\n57+|  address: {\n58+|    street: \"123 Main St\",\n59+|    city: \"Anytown\",\n60+|  },\n61+|};\n62+|\n",
+            "57-|  address: {\n58-|    street: \"123 Main St\",\n59-|    city: \"Anytown\",\n60-|  },\n57+|  ceo: {\n58+|    name: \"John Doe\",\n59+|    contact: {\n",
+            "60+|      email: \"john.doe@acme.com\",\n61+|      phone: \"+1234567890\",\n62+|    },\n63+|  },\n66+|const companyInfo = `Company: ${company.name}, CEO: ${company.ceo.name}`;\n",
+            "55+|interface Company {\n56+|  name: string;\n57+|  ceo: {\n58+|    name: string;\n59+|    contact: {\n60+|      email: string;\n61+|      phone: string;\n",
+            "62-|const company = {\n62+|      \n63+|const company: Company = {\n",
+            "62-|      \n62+|      };\n63+|}\n",
+            "62-|      };\n62+|    };\n63+|  };\n",
+            "55+|interface CEO {\n56+|  name: string;\n57+|  contact: {\n58+|    email: string;\n59+|    phone: string;\n60+|  };\n61+|}\n",
+            "70-|  };\n70+|  }CEO;\n",
+            "64-|  ceo: {\n65-|    name: string;\n66-|    contact: {\n67-|      email: string;\n68-|      phone: string;\n69-|    };\n70-|  }CEO;\n64+|  ceo: CEO;\n",
+            "55+|int\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/dynamicProp.ets",
+        "contents": "interface Address {\n  city: string;\n  country: string;\n}\ninterface User {\n  name: string;\n  age: number;\n  address: Address;\n}\nconst user: User = {\n  name: \"Alice\",\n  age: 30,\n  address: {\n    city: \"New York\",\n    country: \"USA\",\n  },\n};\n\nconst greeting = `Hello, ${user.name}!`;\n\ninterface FullName {\n  firstName: string;\n  lastName: string;\n}\nfunction getFullName(user: FullName) {\n  return `${user.firstName} ${user.lastName}`;\n}\n\nconst currentUser: FullName = {\n  firstName: \"John\",\n  lastName: \"Doe\",\n};\n\nconst fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n\nconst price = 100;\nconst discount = 0.1;\nconst priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];\n\nconst productInfo = `Current product: ${products[0].name}`;\n\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\nint\ninterface CEO {\n  name: string;\n  contact: {\n    email: string;\n    phone: string;\n  };\n}\ninterface Company {\n  name: string;\n  ceo: CEO;\n}\nconst company: Company = {\n  name: \"Acme Inc.\",\n  ceo: {\n    name: \"John Doe\",\n    contact: {\n      email: \"john.doe@acme.com\",\n      phone: \"+1234567890\",\n    },\n  },\n};\n\nconst companyInfo = `Company: ${company.name}, CEO: ${company.ceo.name}`;\n\n",
+        "cursorPosition": {
+          "line": 54,
+          "column": 3
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 556,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742475863183,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.39990234375,
+      "timeAtRequestSend": 1742475863184
+    },
+    "generateUuid": "063e5783-a3cb-406e-b460-9ccb6c7fb7b5",
+    "timestamp": "2025-03-20T13:04:23.186Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\ninterface",
+      "rangeToReplace": {
+        "startLineNumber": 54,
+        "endLineNumberInclusive": 59
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "063e5783-a3cb-406e-b460-9ccb6c7fb7b5",
+    "timestamp": "2025-03-20T13:04:23.529Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "063e5783-a3cb-406e-b460-9ccb6c7fb7b5",
+    "timestamp": "2025-03-20T13:04:23.533Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Contact"
+    },
+    "generationUUID": "063e5783-a3cb-406e-b460-9ccb6c7fb7b5",
+    "timestamp": "2025-03-20T13:04:23.544Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "063e5783-a3cb-406e-b460-9ccb6c7fb7b5",
+    "timestamp": "2025-03-20T13:04:23.552Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n "
+    },
+    "generationUUID": "063e5783-a3cb-406e-b460-9ccb6c7fb7b5",
+    "timestamp": "2025-03-20T13:04:23.559Z"
+  },
+  {
+    "firstChunkValue": "\ninterface Contact {\ninterface CEO {\n  name: string;\n  contact: {\n    email: string;",
+    "generationUUID": "063e5783-a3cb-406e-b460-9ccb6c7fb7b5",
+    "timestamp": "2025-03-20T13:04:23.563Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\ninterface Contact {\ninterface CEO {\n  name: string;\n  contact: {\n    email: string;"
+    },
+    "generationUUID": "063e5783-a3cb-406e-b460-9ccb6c7fb7b5",
+    "timestamp": "2025-03-20T13:04:23.564Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " email"
+    },
+    "generationUUID": "063e5783-a3cb-406e-b460-9ccb6c7fb7b5",
+    "timestamp": "2025-03-20T13:04:23.567Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": string"
+    },
+    "generationUUID": "063e5783-a3cb-406e-b460-9ccb6c7fb7b5",
+    "timestamp": "2025-03-20T13:04:23.574Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";\n  phone"
+    },
+    "generationUUID": "063e5783-a3cb-406e-b460-9ccb6c7fb7b5",
+    "timestamp": "2025-03-20T13:04:23.581Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": string"
+    },
+    "generationUUID": "063e5783-a3cb-406e-b460-9ccb6c7fb7b5",
+    "timestamp": "2025-03-20T13:04:23.588Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";"
+    },
+    "generationUUID": "063e5783-a3cb-406e-b460-9ccb6c7fb7b5",
+    "timestamp": "2025-03-20T13:04:23.595Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n}"
+    },
+    "generationUUID": "063e5783-a3cb-406e-b460-9ccb6c7fb7b5",
+    "timestamp": "2025-03-20T13:04:23.604Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\ninterface"
+    },
+    "generationUUID": "063e5783-a3cb-406e-b460-9ccb6c7fb7b5",
+    "timestamp": "2025-03-20T13:04:23.611Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " CEO"
+    },
+    "generationUUID": "063e5783-a3cb-406e-b460-9ccb6c7fb7b5",
+    "timestamp": "2025-03-20T13:04:23.620Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {\n  name: string;\n"
+    },
+    "generationUUID": "063e5783-a3cb-406e-b460-9ccb6c7fb7b5",
+    "timestamp": "2025-03-20T13:04:23.626Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "063e5783-a3cb-406e-b460-9ccb6c7fb7b5",
+    "timestamp": "2025-03-20T13:04:23.633Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " contact"
+    },
+    "generationUUID": "063e5783-a3cb-406e-b460-9ccb6c7fb7b5",
+    "timestamp": "2025-03-20T13:04:23.641Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": Contact"
+    },
+    "generationUUID": "063e5783-a3cb-406e-b460-9ccb6c7fb7b5",
+    "timestamp": "2025-03-20T13:04:23.647Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";"
+    },
+    "generationUUID": "063e5783-a3cb-406e-b460-9ccb6c7fb7b5",
+    "timestamp": "2025-03-20T13:04:23.654Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "063e5783-a3cb-406e-b460-9ccb6c7fb7b5",
+    "timestamp": "2025-03-20T13:04:23.676Z"
+  },
+  {
+    "fullText": "\ninterface Contact {\n  email: string;\n  phone: string;\n}\ninterface CEO {\n  name: string;\n  contact: Contact;",
+    "generationUUID": "063e5783-a3cb-406e-b460-9ccb6c7fb7b5",
+    "timestamp": "2025-03-20T13:04:23.681Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\ninterface Contact {\ninterface CEO {\n  name: string;\n  contact: {\n    email: string;"
+    },
+    "fullText": "\ninterface Contact {\n  email: string;\n  phone: string;\n}\ninterface CEO {\n  name: string;\n  contact: Contact;",
+    "generationUUID": "063e5783-a3cb-406e-b460-9ccb6c7fb7b5",
+    "timestamp": "2025-03-20T13:04:23.682Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && currentSuggestion uniqueId is different && need to create newSuggestion according fullText",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "0fc78f79-049a-4265-82ab-d73ae6cc6dc5",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 556,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 558,
+      "monotonicallyIncreasingSuggestionId": 348,
+      "range": {
+        "startLineNumber": 54,
+        "startColumn": 1,
+        "endLineNumberInclusive": 59,
+        "endColumn": 19
+      },
+      "replaceText": "\ninterface Contact {\n  email: string;\n  phone: string;\n}\ninterface CEO {\n  name: string;\n  contact: Contact;",
+      "originalText": "\ninter\ninterface CEO {\n  name: string;\n  contact: {\n    email: string;",
+      "startingSuggestionRange": {
+        "startLineNumber": 54,
+        "startColumn": 1,
+        "endLineNumberInclusive": 59,
+        "endColumn": 19
+      },
+      "diffText": "\ninterface Contact {\n  email: string;\n  phone: string;\n}\ninterface CEO {\n  name: string;\n  contact: Contact;",
+      "fullOriginalText": "\ninter\ninterface CEO {\n  name: string;\n  contact: {\n    email: string;",
+      "suggestionTriggerTime": 1742475863107.8,
+      "greens": [],
+      "source": "typing",
+      "requestId": "063e5783-a3cb-406e-b460-9ccb6c7fb7b5",
+      "selection": {
+        "startLineNumber": 54,
+        "startColumn": 1,
+        "endLineNumberInclusive": 59,
+        "endColumn": 19
+      },
+      "fusedCursorPredictionId": "4c490007-2945-4b27-a1b9-5d4e84af7a5d",
+      "undoRedoGroup": {
+        "id": 348,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "063e5783-a3cb-406e-b460-9ccb6c7fb7b5",
+    "timestamp": "2025-03-20T13:04:23.682Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "cursorPredictionTarget": {
+        "relativePath": "entry/src/main/ets/utils/dynamicProp.ets",
+        "lineNumberOneIndexed": 60,
+        "expectedContent": "phone: string;\n};\n}\ninterface Company {\nname: string;",
+        "shouldRetriggerCpp": true
+      }
+    },
+    "generationUUID": "063e5783-a3cb-406e-b460-9ccb6c7fb7b5",
+    "timestamp": "2025-03-20T13:04:23.775Z"
+  },
+  {
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/dynamicProp.ets",
+      "lineNumberOneIndexed": 60,
+      "text": "phone: string;\n};\n}\ninterface Company {\nname: string;",
+      "shouldRetriggerCpp": true
+    },
+    "predictionId": "4c490007-2945-4b27-a1b9-5d4e84af7a5d",
+    "generationUUID": "063e5783-a3cb-406e-b460-9ccb6c7fb7b5",
+    "timestamp": "2025-03-20T13:04:23.776Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\ninterface Contact {\ninterface CEO {\n  name: string;\n  contact: {\n    email: string;"
+    },
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/dynamicProp.ets",
+      "lineNumberOneIndexed": 60,
+      "text": "phone: string;\n};\n}\ninterface Company {\nname: string;",
+      "shouldRetriggerCpp": true
+    },
+    "predictionId": "4c490007-2945-4b27-a1b9-5d4e84af7a5d",
+    "generationUUID": "063e5783-a3cb-406e-b460-9ccb6c7fb7b5",
+    "timestamp": "2025-03-20T13:04:23.776Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "4c490007-2945-4b27-a1b9-5d4e84af7a5d",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/dynamicProp.ets",
+      "lineNumberOneIndexed": 60,
+      "text": "phone: string;\n};\n}\ninterface Company {\nname: string;",
+      "shouldRetriggerCpp": true
+    },
+    "timestamp": "2025-03-20T13:04:23.777Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "063e5783-a3cb-406e-b460-9ccb6c7fb7b5",
+    "timestamp": "2025-03-20T13:04:23.777Z"
+  }
+]

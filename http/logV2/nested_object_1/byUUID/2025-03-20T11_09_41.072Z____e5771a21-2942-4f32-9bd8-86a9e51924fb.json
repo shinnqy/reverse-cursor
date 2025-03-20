@@ -1,0 +1,907 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.072Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/nestedObj.ets",
+          "diffHistory": [
+            "55+|type Shape =\n56+|    | { type: \"circle\"; radius: number }\n57+|    | { type: \"rectangle\"; width: number; height: number }\n58+|    | { type: \"triangle\"; side1: number; side2: number; side3: number };\n60+|function getArea(shape: Shape) {\n61+|    switch (shape.type) {\n62+|        case \"circle\":\n",
+            "56-|    | { type: \"circle\"; radius: number  }\n56+|    | { type: \"circle\"; radius: number; color: string }\n",
+            "57-|    | { type: \"rectangle\"; width: number; height: number }\n58-|    | { type: \"triangle\"; side1: number; side2: number; side3: number };\n57+|    | { type: \"rectangle\"; width: number; height: number; color: string }\n58+|    | { type: \"triangle\"; side1: number; side2: number; side3: number; color: string };\n",
+            "63-|\n63+|            return Math.PI * shape.radius * shape.radius;\n64+|        case \"rectangle\":\n65+|            return shape.width * shape.height;\n66+|        case \"triangle\":\n67+|            return shape.side1 * shape.side2 * shape.side3;\n68+|    }\n69+|}\n",
+            "55+|type Circle = { type: \"circle\"; radius: number; color: string };\n",
+            "58-|    | { type: \"rectangle\"; width: number; height: number; color: string }\n58+|    | { type: \"rectangle\"; width: number; height: number; color: string };\n59+|type Shape = Circle | Rectangle | Triangle;\n60+|\n61+|function getArea(shape: Shape) {\n",
+            "57-|    | { type: \"circle\"; radius: number; color: string }\n58-|    | { type: \"rectangle\"; width: number; height: number; color: string };\n57+|    | { type: \"circle\"; radius: number; color: string };\n58+|type Triangle = { type: \"triangle\"; side1: number; side2: number; side3: number; color: string };\n",
+            "56-|type Shape =\n57-|    | { type: \"circle\"; radius: number; color: string };\n56+|type Rectangle = { type: \"rectangle\"; width: number; height: number; color: string };\n",
+            "61-|    | { type: \"triangle\"; side1: number; side2: number; side3: number; color: string };\n62-|\n63-|function getArea(shape: Shape) {\n",
+            "55-|type Circle = { type: \"circle\"; radius: number; color: string };\n55+|inter Circle = { type: \"circle\"; radius: number; color: string };\n",
+            "56-|type Rectangle = { type: \"rectangle\"; width: number; height: number; color: string };\n57-|type Triangle = { type: \"triangle\"; side1: number; side2: number; side3: number; color: string };\n56+|type Rectangle { type: \"rectangle\"; width: number; height: number; color: string };\n57+|interface Triangle { type: \"triangle\"; side1: number; side2: number; side3: number; color: string };\n",
+            "55-|inter Circle = { type: \"circle\"; radius: number; color: string };\n56-|type Rectangle { type: \"rectangle\"; width: number; height: number; color: string };\n55+|inter Circle { type: \"circle\"; radius: number; color: string };\n56+|interface Rectangle { type: \"rectangle\"; width: number; height: number; color: string };\n",
+            "55-|inter Circle { type: \"circle\"; radius: number; color: string };\n55+|interface Circle { type: \"circle\"; radius: number; color: string };\n",
+            "60+|let shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n61+|\n64-|        case \"rectangle\":\n65-|            return shape.width * shape.height;\n66-|        case \"triangle\":\n67-|            return shape.side1 * shape.side2 * shape.side3;\n68-|    }\n69-|}\n",
+            "62-|function getArea(shape: Shape) {\n63-|    switch (shape.type) {\n64-|        case \"circle\":\n65-|            return Math.PI * shape.radius * shape.radius;\n",
+            "25+|user.address.city = \"New York\";\n26+|user.address.zip = \"10001\";\n27+|user.address.state = \"NY\";\n28+|user.address.country = \"USA\";\n29+|\n",
+            "60+|products[0].details.name = \"Product 1 Updated\";\n61+|products[1].details.name = \"Product 2 Updated\";\n62+|\n",
+            "62+|products[0].details.price = 150;\n63+|products[1].details.price = 250;\n",
+            "64+|products[0].details.category = \"Category 3\";\n65+|products[1].details.category = \"Category 4\";\n",
+            "74+|if\n75+|\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/nestedObj.ets",
+        "contents": "interface Address {\n    street: string;\n    city: string;\n    state: string;\n    zip: string;\n}\n\ninterface User {\n    name: string;\n    age: number;\n    address: Address;\n}\n\nlet user: User = {\n    name: \"John\",\n    age: 30,\n    address: {\n        street: \"123 Main St\",\n        city: \"Anytown\",\n        state: \"CA\",\n        zip: \"12345\",\n    },\n};\n\nuser.address.city = \"New York\";\nuser.address.zip = \"10001\";\nuser.address.state = \"NY\";\nuser.address.country = \"USA\";\n\ninterface ProductDetails {\n    name: string;\n    price: number;\n    category: string;\n}\n\ninterface Product {\n    id: number;\n    details: ProductDetails;\n}\n\nlet products: Product[] = [\n    {\n        id: 1,\n        details: {\n            name: \"Product 1\",\n            price: 100,\n            category: \"Category 1\",\n        },\n    },\n    {\n        id: 2,\n        details: {\n            name: \"Product 2\",\n            price: 200,\n            category: \"Category 2\",\n        },\n    },\n];\n\nproducts[0].details.name = \"Product 1 Updated\";\nproducts[1].details.name = \"Product 2 Updated\";\nproducts[0].details.price = 150;\nproducts[1].details.price = 250;\nproducts[0].details.category = \"Category 3\";\nproducts[1].details.category = \"Category 4\";\n\ninterface Circle { type: \"circle\"; radius: number; color: string };\ninterface Rectangle { type: \"rectangle\"; width: number; height: number; color: string };\ninterface Triangle { type: \"triangle\"; side1: number; side2: number; side3: number; color: string };\ntype Shape = Circle | Rectangle | Triangle;\n\nlet shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n\nif\n\n",
+        "cursorPosition": {
+          "line": 73,
+          "column": 2
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 121,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742468981114,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 53.199951171875,
+      "timeAtRequestSend": 1742468981114
+    },
+    "generateUuid": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.116Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "type Shape = Circle | Rectangle | Triangle;\n\nlet shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n\nif (",
+      "rangeToReplace": {
+        "startLineNumber": 70,
+        "endLineNumberInclusive": 76
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.505Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.505Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "shape"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.525Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ".type ==="
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.537Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \""
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.551Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "circle"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.562Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\")"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.578Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.588Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.601Z"
+  },
+  {
+    "firstChunkValue": "type Shape = Circle | Rectangle | Triangle;\n\nlet shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n\nif (shape.type === \"circle\") {\n\n",
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.602Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "type Shape = Circle | Rectangle | Triangle;\n\nlet shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n\nif (shape.type === \"circle\") {\n\n"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.604Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "d04e9d76-b191-4cc0-8356-ca9eb2b1dc8e",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/nestedObj.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/nestedObj.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/nestedObj.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 121,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 121,
+      "monotonicallyIncreasingSuggestionId": 74,
+      "range": {
+        "startLineNumber": 70,
+        "startColumn": 1,
+        "endLineNumberInclusive": 76,
+        "endColumn": 1
+      },
+      "replaceText": "type Shape = Circle | Rectangle | Triangle;\n\nlet shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n\nif (shape.type === \"circle\") {\n\n",
+      "originalText": "type Shape = Circle | Rectangle | Triangle;\n\nlet shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n\nif\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 70,
+        "startColumn": 1,
+        "endLineNumberInclusive": 76,
+        "endColumn": 1
+      },
+      "diffText": "type Shape = Circle | Rectangle | Triangle;\n\nlet shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n\nif (shape.type === \"circle\") {\n\n",
+      "fullOriginalText": "type Shape = Circle | Rectangle | Triangle;\n\nlet shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n\nif\n\n",
+      "suggestionTriggerTime": 1742468981063.1,
+      "greens": [],
+      "source": "typing",
+      "requestId": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+      "selection": {
+        "startLineNumber": 70,
+        "startColumn": 1,
+        "endLineNumberInclusive": 76,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 74,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 70,
+        "startColumn": 1,
+        "endLineNumber": 76,
+        "endColumn": 1
+      },
+      "trackedText": "type Shape = Circle | Rectangle | Triangle;\n\nlet shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n\nif \n\n"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.605Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "   "
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.611Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " console"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.624Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.636Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "log"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.649Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "("
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.660Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "shape."
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.672Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "radius"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.686Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ");"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.694Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.705Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.717Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " else"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.727Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " if"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.738Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ("
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.750Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "shape."
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.760Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "type"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.772Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ==="
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.785Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \"rectangle"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.794Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\")"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.807Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {\n    console.log(shape"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.815Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.826Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "width"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.837Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ","
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.847Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " shape"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.856Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.867Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "height"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.877Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ");"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.888Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n} else if (shape"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.899Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ".type"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.909Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " === \""
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.921Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "triangle"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.933Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\")"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.943Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.954Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n    console.log(shape"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.965Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.978Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "side"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.987Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "1"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:41.997Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ","
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:42.009Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " shape"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:42.020Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ".side"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:42.032Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "2"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:42.044Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ","
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:42.056Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " shape"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:42.067Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:42.079Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "side"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:42.091Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "3);"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:42.105Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:42.117Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}\n"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:42.132Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:42.143Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:42.161Z"
+  },
+  {
+    "fullText": "type Shape = Circle | Rectangle | Triangle;\n\nlet shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n\nif (shape.type === \"circle\") {\n    console.log(shape.radius);\n} else if (shape.type === \"rectangle\") {\n    console.log(shape.width, shape.height);\n} else if (shape.type === \"triangle\") {\n    console.log(shape.side1, shape.side2, shape.side3);\n}\n\n",
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:42.162Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "type Shape = Circle | Rectangle | Triangle;\n\nlet shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n\nif (shape.type === \"circle\") {\n\n"
+    },
+    "fullText": "type Shape = Circle | Rectangle | Triangle;\n\nlet shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n\nif (shape.type === \"circle\") {\n    console.log(shape.radius);\n} else if (shape.type === \"rectangle\") {\n    console.log(shape.width, shape.height);\n} else if (shape.type === \"triangle\") {\n    console.log(shape.side1, shape.side2, shape.side3);\n}\n\n",
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:42.162Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "258c21f0-8718-467d-a5ed-bd593bf9057d",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/nestedObj.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/nestedObj.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/nestedObj.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 121,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 123,
+      "monotonicallyIncreasingSuggestionId": 77,
+      "range": {
+        "startLineNumber": 70,
+        "startColumn": 1,
+        "endLineNumberInclusive": 76,
+        "endColumn": 1
+      },
+      "replaceText": "type Shape = Circle | Rectangle | Triangle;\n\nlet shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n\nif (shape.type === \"circle\") {\n    console.log(shape.radius);\n} else if (shape.type === \"rectangle\") {\n    console.log(shape.width, shape.height);\n} else if (shape.type === \"triangle\") {\n    console.log(shape.side1, shape.side2, shape.side3);\n}\n\n",
+      "originalText": "type Shape = Circle | Rectangle | Triangle;\n\nlet shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n\nif (shape.type === \"circle\") {\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 70,
+        "startColumn": 1,
+        "endLineNumberInclusive": 76,
+        "endColumn": 1
+      },
+      "diffText": "type Shape = Circle | Rectangle | Triangle;\n\nlet shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n\nif (shape.type === \"circle\") {\n    console.log(shape.radius);\n} else if (shape.type === \"rectangle\") {\n    console.log(shape.width, shape.height);\n} else if (shape.type === \"triangle\") {\n    console.log(shape.side1, shape.side2, shape.side3);\n}\n\n",
+      "fullOriginalText": "type Shape = Circle | Rectangle | Triangle;\n\nlet shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n\nif (shape.type === \"circle\") {\n\n",
+      "suggestionTriggerTime": 1742468981063.1,
+      "greens": [],
+      "source": "typing",
+      "requestId": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+      "selection": {
+        "startLineNumber": 70,
+        "startColumn": 1,
+        "endLineNumberInclusive": 76,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "d390ca7e-e57c-4534-94db-b1c5777d7908",
+      "undoRedoGroup": {
+        "id": 77,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:42.162Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:42.163Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "d390ca7e-e57c-4534-94db-b1c5777d7908",
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:42.172Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "type Shape = Circle | Rectangle | Triangle;\n\nlet shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n\nif (shape.type === \"circle\") {\n\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "d390ca7e-e57c-4534-94db-b1c5777d7908",
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:42.172Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "d390ca7e-e57c-4534-94db-b1c5777d7908",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-20T11:09:42.172Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "d04e9d76-b191-4cc0-8356-ca9eb2b1dc8e",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/nestedObj.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/nestedObj.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/nestedObj.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 121,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 121,
+      "monotonicallyIncreasingSuggestionId": 74,
+      "range": {
+        "startLineNumber": 70,
+        "startColumn": 1,
+        "endLineNumberInclusive": 76,
+        "endColumn": 1
+      },
+      "replaceText": "type Shape = Circle | Rectangle | Triangle;\n\nlet shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n\nif (shape.type === \"circle\") {\n\n",
+      "originalText": "type Shape = Circle | Rectangle | Triangle;\n\nlet shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n\nif\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 70,
+        "startColumn": 1,
+        "endLineNumberInclusive": 76,
+        "endColumn": 1
+      },
+      "diffText": "type Shape = Circle | Rectangle | Triangle;\n\nlet shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n\nif (shape.type === \"circle\") {\n\n",
+      "fullOriginalText": "type Shape = Circle | Rectangle | Triangle;\n\nlet shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n\nif\n\n",
+      "suggestionTriggerTime": 1742468981063.1,
+      "greens": [],
+      "source": "typing",
+      "requestId": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+      "selection": {
+        "startLineNumber": 70,
+        "startColumn": 1,
+        "endLineNumberInclusive": 76,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 74,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 70,
+        "startColumn": 1,
+        "endLineNumber": 76,
+        "endColumn": 1
+      },
+      "trackedText": "type Shape = Circle | Rectangle | Triangle;\n\nlet shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n\nif \n\n",
+      "decorationId": "b;537",
+      "onAcceptDisplayId": "258c21f0-8718-467d-a5ed-bd593bf9057d"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:42.434Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "d04e9d76-b191-4cc0-8356-ca9eb2b1dc8e",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/nestedObj.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/nestedObj.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/nestedObj.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 121,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 121,
+      "monotonicallyIncreasingSuggestionId": 74,
+      "range": {
+        "startLineNumber": 70,
+        "startColumn": 1,
+        "endLineNumberInclusive": 76,
+        "endColumn": 1
+      },
+      "replaceText": "type Shape = Circle | Rectangle | Triangle;\n\nlet shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n\nif (shape.type === \"circle\") {\n\n",
+      "originalText": "type Shape = Circle | Rectangle | Triangle;\n\nlet shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n\nif\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 70,
+        "startColumn": 1,
+        "endLineNumberInclusive": 76,
+        "endColumn": 1
+      },
+      "diffText": "type Shape = Circle | Rectangle | Triangle;\n\nlet shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n\nif (shape.type === \"circle\") {\n\n",
+      "fullOriginalText": "type Shape = Circle | Rectangle | Triangle;\n\nlet shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n\nif\n\n",
+      "suggestionTriggerTime": 1742468981063.1,
+      "greens": [],
+      "source": "typing",
+      "requestId": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+      "selection": {
+        "startLineNumber": 70,
+        "startColumn": 1,
+        "endLineNumberInclusive": 76,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 74,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 70,
+        "startColumn": 1,
+        "endLineNumber": 76,
+        "endColumn": 1
+      },
+      "trackedText": "type Shape = Circle | Rectangle | Triangle;\n\nlet shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n\nif \n\n",
+      "decorationId": "b;537",
+      "onAcceptDisplayId": "258c21f0-8718-467d-a5ed-bd593bf9057d"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:42.446Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "258c21f0-8718-467d-a5ed-bd593bf9057d",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/nestedObj.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/nestedObj.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/nestedObj.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 121,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 123,
+      "monotonicallyIncreasingSuggestionId": 77,
+      "range": {
+        "startLineNumber": 70,
+        "startColumn": 1,
+        "endLineNumberInclusive": 76,
+        "endColumn": 1
+      },
+      "replaceText": "type Shape = Circle | Rectangle | Triangle;\n\nlet shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n\nif (shape.type === \"circle\") {\n    console.log(shape.radius);\n} else if (shape.type === \"rectangle\") {\n    console.log(shape.width, shape.height);\n} else if (shape.type === \"triangle\") {\n    console.log(shape.side1, shape.side2, shape.side3);\n}\n\n",
+      "originalText": "type Shape = Circle | Rectangle | Triangle;\n\nlet shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n\nif (shape.type === \"circle\") {\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 70,
+        "startColumn": 1,
+        "endLineNumberInclusive": 76,
+        "endColumn": 1
+      },
+      "diffText": "type Shape = Circle | Rectangle | Triangle;\n\nlet shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n\nif (shape.type === \"circle\") {\n    console.log(shape.radius);\n} else if (shape.type === \"rectangle\") {\n    console.log(shape.width, shape.height);\n} else if (shape.type === \"triangle\") {\n    console.log(shape.side1, shape.side2, shape.side3);\n}\n\n",
+      "fullOriginalText": "type Shape = Circle | Rectangle | Triangle;\n\nlet shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n\nif (shape.type === \"circle\") {\n\n",
+      "suggestionTriggerTime": 1742468981063.1,
+      "greens": [],
+      "source": "typing",
+      "requestId": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+      "selection": {
+        "startLineNumber": 70,
+        "startColumn": 1,
+        "endLineNumberInclusive": 76,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "d390ca7e-e57c-4534-94db-b1c5777d7908",
+      "undoRedoGroup": {
+        "id": 77,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;543"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:49.349Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "258c21f0-8718-467d-a5ed-bd593bf9057d",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/nestedObj.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/nestedObj.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/nestedObj.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 121,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 123,
+      "monotonicallyIncreasingSuggestionId": 77,
+      "range": {
+        "startLineNumber": 70,
+        "startColumn": 1,
+        "endLineNumberInclusive": 76,
+        "endColumn": 1
+      },
+      "replaceText": "type Shape = Circle | Rectangle | Triangle;\n\nlet shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n\nif (shape.type === \"circle\") {\n    console.log(shape.radius);\n} else if (shape.type === \"rectangle\") {\n    console.log(shape.width, shape.height);\n} else if (shape.type === \"triangle\") {\n    console.log(shape.side1, shape.side2, shape.side3);\n}\n\n",
+      "originalText": "type Shape = Circle | Rectangle | Triangle;\n\nlet shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n\nif (shape.type === \"circle\") {\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 70,
+        "startColumn": 1,
+        "endLineNumberInclusive": 76,
+        "endColumn": 1
+      },
+      "diffText": "type Shape = Circle | Rectangle | Triangle;\n\nlet shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n\nif (shape.type === \"circle\") {\n    console.log(shape.radius);\n} else if (shape.type === \"rectangle\") {\n    console.log(shape.width, shape.height);\n} else if (shape.type === \"triangle\") {\n    console.log(shape.side1, shape.side2, shape.side3);\n}\n\n",
+      "fullOriginalText": "type Shape = Circle | Rectangle | Triangle;\n\nlet shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n\nif (shape.type === \"circle\") {\n\n",
+      "suggestionTriggerTime": 1742468981063.1,
+      "greens": [],
+      "source": "typing",
+      "requestId": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+      "selection": {
+        "startLineNumber": 70,
+        "startColumn": 1,
+        "endLineNumberInclusive": 76,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "d390ca7e-e57c-4534-94db-b1c5777d7908",
+      "undoRedoGroup": {
+        "id": 77,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;543"
+    },
+    "generationUUID": "e5771a21-2942-4f32-9bd8-86a9e51924fb",
+    "timestamp": "2025-03-20T11:09:49.366Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "d390ca7e-e57c-4534-94db-b1c5777d7908",
+    "fusedCursorPrediction": null,
+    "oldText": "type Shape = Circle | Rectangle | Triangle;\n\nlet shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n\nif (shape.type === \"circle\") {\n\n",
+    "newText": "type Shape = Circle | Rectangle | Triangle;\n\nlet shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n\nif (shape.type === \"circle\") {\n    console.log(shape.radius);\n} else if (shape.type === \"rectangle\") {\n    console.log(shape.width, shape.height);\n} else if (shape.type === \"triangle\") {\n    console.log(shape.side1, shape.side2, shape.side3);\n}\n\n",
+    "timestamp": "2025-03-20T11:09:49.367Z"
+  }
+]

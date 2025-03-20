@@ -1,0 +1,325 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "9dbcf57f-19a4-4d71-809a-c24c4aa2ad0a",
+    "timestamp": "2025-03-20T12:56:07.110Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/dynamicProp.ets",
+          "diffHistory": [
+            "14-|const greeting = `Hello, ${user}!`;\n14+|const greeting = `Hello, ${user.}!`;\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/dynamicProp.ets",
+        "contents": "interface Address {\n    city: string;\n}\ninterface User {\n    name: string;\n    age: number;\n    address: Address;\n}\nconst user: User = {\n    name: \"Alice\",\n    age: 30,\n    address: { city: \"Shenzhen\" }\n};\nconst greeting = `Hello, ${user.}!`;\n\ninterface FullName {\n    firstName: string;\n    lastName: string;\n}\nfunction getFullName(user: FullName) {\n    return `${user.firstName} ${user.lastName}`;\n}\nconst currentUser: FullName = { firstName: \"John\", lastName: \"Doe\" };\nconst fullName = `Full Name: ${getFullName(currentUser)}`;\n\nconst price = 99.99;\nconst discount = 0.2;\nconst priceInfo = `Price: ${(price * (1 - discount))}`;\n\nconst isAdmin = true;\nconst roleMessage = `Role: ${isAdmin ? \"Administrator\" : \"Guest\"}.`;\n\ninterface Product {\n    id: number;\n    name: string;\n}\nconst products: Product[] = [\n    { id: 1, name: \"Phone\" },\n    { id: 2, name: \"Laptop\" }\n];\nconst productInfo = `Current Product: ${products[0]}.`;\n\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\ninterface Company {\n    name: string;\n    ceo: CEO;\n}\ninterface CEO {\n    name: string;\n    contact: Contact;\n}\n\ninterface Contact {\n    email: string;\n}\nconst company: Company = {\n    name: \"Tech Corp\",\n    ceo: {\n        name: \"Bob\",\n        contact: { email: \"bob@tech.com\" }\n    }\n};\nconst emailTemplate = `CEO Email: ${company}`;",
+        "cursorPosition": {
+          "line": 13,
+          "column": 32
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 2,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742475367125,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 52,
+      "timeAtRequestSend": 1742475367126
+    },
+    "generateUuid": "9dbcf57f-19a4-4d71-809a-c24c4aa2ad0a",
+    "timestamp": "2025-03-20T12:56:07.127Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "9dbcf57f-19a4-4d71-809a-c24c4aa2ad0a",
+    "timestamp": "2025-03-20T12:56:07.911Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "    address: { city: \"Shenzhen\" }\n};\nconst greeting = `Hello, ${user.",
+      "rangeToReplace": {
+        "startLineNumber": 12,
+        "endLineNumberInclusive": 15
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "9dbcf57f-19a4-4d71-809a-c24c4aa2ad0a",
+    "timestamp": "2025-03-20T12:56:07.913Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "name"
+    },
+    "generationUUID": "9dbcf57f-19a4-4d71-809a-c24c4aa2ad0a",
+    "timestamp": "2025-03-20T12:56:07.968Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}"
+    },
+    "generationUUID": "9dbcf57f-19a4-4d71-809a-c24c4aa2ad0a",
+    "timestamp": "2025-03-20T12:56:07.979Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "!`;\n"
+    },
+    "generationUUID": "9dbcf57f-19a4-4d71-809a-c24c4aa2ad0a",
+    "timestamp": "2025-03-20T12:56:08.005Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "9dbcf57f-19a4-4d71-809a-c24c4aa2ad0a",
+    "timestamp": "2025-03-20T12:56:08.019Z"
+  },
+  {
+    "firstChunkValue": "    address: { city: \"Shenzhen\" }\n};\nconst greeting = `Hello, ${user.name}!`;\n",
+    "generationUUID": "9dbcf57f-19a4-4d71-809a-c24c4aa2ad0a",
+    "timestamp": "2025-03-20T12:56:08.023Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "    address: { city: \"Shenzhen\" }\n};\nconst greeting = `Hello, ${user.name}!`;\n"
+    },
+    "generationUUID": "9dbcf57f-19a4-4d71-809a-c24c4aa2ad0a",
+    "timestamp": "2025-03-20T12:56:08.025Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "a2dac429-d1c4-4682-931f-05d9798eeae5",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 2,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 2,
+      "monotonicallyIncreasingSuggestionId": 1,
+      "range": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 15,
+        "endColumn": 1
+      },
+      "replaceText": "    address: { city: \"Shenzhen\" }\n};\nconst greeting = `Hello, ${user.name}!`;\n",
+      "originalText": "    address: { city: \"Shenzhen\" }\n};\nconst greeting = `Hello, ${user.}!`;\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 15,
+        "endColumn": 1
+      },
+      "diffText": "    address: { city: \"Shenzhen\" }\n};\nconst greeting = `Hello, ${user.name}!`;\n",
+      "fullOriginalText": "    address: { city: \"Shenzhen\" }\n};\nconst greeting = `Hello, ${user.}!`;\n",
+      "suggestionTriggerTime": 1742475367074.2,
+      "greens": [],
+      "source": "typing",
+      "requestId": "9dbcf57f-19a4-4d71-809a-c24c4aa2ad0a",
+      "selection": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 15,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "8c6a50e4-9c2c-4186-9d78-74dc3dd006d7",
+      "undoRedoGroup": {
+        "id": 1,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "9dbcf57f-19a4-4d71-809a-c24c4aa2ad0a",
+    "timestamp": "2025-03-20T12:56:08.026Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "9dbcf57f-19a4-4d71-809a-c24c4aa2ad0a",
+    "timestamp": "2025-03-20T12:56:08.074Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "8c6a50e4-9c2c-4186-9d78-74dc3dd006d7",
+    "generationUUID": "9dbcf57f-19a4-4d71-809a-c24c4aa2ad0a",
+    "timestamp": "2025-03-20T12:56:08.085Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "    address: { city: \"Shenzhen\" }\n};\nconst greeting = `Hello, ${user.name}!`;\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "8c6a50e4-9c2c-4186-9d78-74dc3dd006d7",
+    "generationUUID": "9dbcf57f-19a4-4d71-809a-c24c4aa2ad0a",
+    "timestamp": "2025-03-20T12:56:08.087Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "8c6a50e4-9c2c-4186-9d78-74dc3dd006d7",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-20T12:56:08.088Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "a2dac429-d1c4-4682-931f-05d9798eeae5",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 2,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 2,
+      "monotonicallyIncreasingSuggestionId": 1,
+      "range": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 15,
+        "endColumn": 1
+      },
+      "replaceText": "    address: { city: \"Shenzhen\" }\n};\nconst greeting = `Hello, ${user.name}!`;\n",
+      "originalText": "    address: { city: \"Shenzhen\" }\n};\nconst greeting = `Hello, ${user.}!`;\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 15,
+        "endColumn": 1
+      },
+      "diffText": "    address: { city: \"Shenzhen\" }\n};\nconst greeting = `Hello, ${user.name}!`;\n",
+      "fullOriginalText": "    address: { city: \"Shenzhen\" }\n};\nconst greeting = `Hello, ${user.}!`;\n",
+      "suggestionTriggerTime": 1742475367074.2,
+      "greens": [],
+      "source": "typing",
+      "requestId": "9dbcf57f-19a4-4d71-809a-c24c4aa2ad0a",
+      "selection": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 15,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "8c6a50e4-9c2c-4186-9d78-74dc3dd006d7",
+      "undoRedoGroup": {
+        "id": 1,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;43"
+    },
+    "generationUUID": "9dbcf57f-19a4-4d71-809a-c24c4aa2ad0a",
+    "timestamp": "2025-03-20T12:56:08.650Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "a2dac429-d1c4-4682-931f-05d9798eeae5",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 2,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 2,
+      "monotonicallyIncreasingSuggestionId": 1,
+      "range": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 15,
+        "endColumn": 1
+      },
+      "replaceText": "    address: { city: \"Shenzhen\" }\n};\nconst greeting = `Hello, ${user.name}!`;\n",
+      "originalText": "    address: { city: \"Shenzhen\" }\n};\nconst greeting = `Hello, ${user.}!`;\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 15,
+        "endColumn": 1
+      },
+      "diffText": "    address: { city: \"Shenzhen\" }\n};\nconst greeting = `Hello, ${user.name}!`;\n",
+      "fullOriginalText": "    address: { city: \"Shenzhen\" }\n};\nconst greeting = `Hello, ${user.}!`;\n",
+      "suggestionTriggerTime": 1742475367074.2,
+      "greens": [],
+      "source": "typing",
+      "requestId": "9dbcf57f-19a4-4d71-809a-c24c4aa2ad0a",
+      "selection": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 15,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "8c6a50e4-9c2c-4186-9d78-74dc3dd006d7",
+      "undoRedoGroup": {
+        "id": 1,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;43"
+    },
+    "generationUUID": "9dbcf57f-19a4-4d71-809a-c24c4aa2ad0a",
+    "timestamp": "2025-03-20T12:56:08.667Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "8c6a50e4-9c2c-4186-9d78-74dc3dd006d7",
+    "fusedCursorPrediction": null,
+    "oldText": "    address: { city: \"Shenzhen\" }\n};\nconst greeting = `Hello, ${user.}!`;\n",
+    "newText": "    address: { city: \"Shenzhen\" }\n};\nconst greeting = `Hello, ${user.name}!`;\n",
+    "timestamp": "2025-03-20T12:56:08.669Z"
+  }
+]

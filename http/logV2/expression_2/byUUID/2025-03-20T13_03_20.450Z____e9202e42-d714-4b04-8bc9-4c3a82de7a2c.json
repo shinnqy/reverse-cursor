@@ -1,0 +1,764 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:20.450Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/dynamicProp.ets",
+          "diffHistory": [
+            "1+|const user = {}\n",
+            "2-|  \n3-|}\n2+|  name: \"Alice\",\n3+|  age: 30,\n4+|  address: {\n5+|},\n6+|};\n7+|\n8+|\n",
+            "5-|},\n5+|    city: \"New York\",\n6+|    country: \"USA\",\n7+|  },\n10+|const greeting = `Hello, ${user.name}!`;\n",
+            "1-|\n1+|interface User {\n2+|  name: string;\n3+|  age: number;\n4+|  address: {\n5+|    city: string;\n6+|    country: string;\n7+|  };\n8+|}\n",
+            "1-|\n1+|interface Address {\n",
+            "5-|  address: {\n5+|  address: Address;\n",
+            "2+|  city: string;\n3+|  country: string;\n4+|}\n",
+            "9-|    city: string;\n10-|    country: string;\n11-|  };\n13-|const user = {\n10+|const user: User = {\n",
+            "21+|function getFullName(user: { firstName: string; lastName: string }) {\n22+|  return `${user.firstName} ${user.lastName}`;\n23+|}\n25+|const fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n26+|\n27+|\n28+|\n",
+            "25-|const fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n",
+            "25+|const currentUser = {\n26+|  firstName: \"John\",\n27+|  lastName: \"Doe\",\n28+|};\n30+|const fullName = getFullName(currentUser);\n",
+            "30-|const fullName = getFullName(currentUser);\n30+|const fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n",
+            "21-|function getFullName(user: { firstName: string; lastName: string }) {\n21+|interface FullName {\n22+|function getFullName(user: { firstName: string; lastName: string }\n23+|function getFullName(user: FullName) {\n",
+            "22-|function getFullName(user: { firstName: string; lastName: string }\n22+|function getFullName(user: { firstName: string; lastName: string ;\n23+|}\n",
+            "22-|function getFullName(user: { firstName: string;\n22+|  firstName: string;\n",
+            "29-|const currentUser = {\n29+|const currentUser: FullName = {\n",
+            "36+|const price = 100;\n37+|const discount = 0.1;\n38+|const priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n40+|const isAdmin = true;\n41+|const roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n43+|const products = [\n44+|  { name: \"Product 1\", price: 100 },\n45+|  { name: \"Product 2\", price: 200 },\n46+|  { name: \"Product 3\", price: 300 },\n47+|];\n49+|const productInfo = `Current product: ${products[0].name}`;\n50+|\n51+|type Status = \"active\" | \"inactive\";\n52+|let status: Status = \"active\";\n53+|const statusText = `Status: ${status}`;\n54+|\n55+|const com\n56+|\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/dynamicProp.ets",
+        "contents": "interface Address {\n  city: string;\n  country: string;\n}\ninterface User {\n  name: string;\n  age: number;\n  address: Address;\n}\nconst user: User = {\n  name: \"Alice\",\n  age: 30,\n  address: {\n    city: \"New York\",\n    country: \"USA\",\n  },\n};\n\nconst greeting = `Hello, ${user.name}!`;\n\ninterface FullName {\n  firstName: string;\n  lastName: string;\n}\nfunction getFullName(user: FullName) {\n  return `${user.firstName} ${user.lastName}`;\n}\n\nconst currentUser: FullName = {\n  firstName: \"John\",\n  lastName: \"Doe\",\n};\n\nconst fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n\nconst price = 100;\nconst discount = 0.1;\nconst priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];\n\nconst productInfo = `Current product: ${products[0].name}`;\n\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\nconst com\n\n",
+        "cursorPosition": {
+          "line": 54,
+          "column": 9
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 477,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742475800489,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.099853515625,
+      "timeAtRequestSend": 1742475800489
+    },
+    "generateUuid": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:20.490Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "type Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\nconst company",
+      "rangeToReplace": {
+        "startLineNumber": 51,
+        "endLineNumberInclusive": 57
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:20.870Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:20.871Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:20.891Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:20.900Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n "
+    },
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:20.909Z"
+  },
+  {
+    "firstChunkValue": "type Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\nconst company = {\n\n",
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:20.910Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "type Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\nconst company = {\n\n"
+    },
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:20.914Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "8900f81f-fd41-4efe-be94-eeafc1a67125",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 477,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 477,
+      "monotonicallyIncreasingSuggestionId": 293,
+      "range": {
+        "startLineNumber": 51,
+        "startColumn": 1,
+        "endLineNumberInclusive": 57,
+        "endColumn": 1
+      },
+      "replaceText": "type Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\nconst company = {\n\n",
+      "originalText": "type Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\nconst com\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 51,
+        "startColumn": 1,
+        "endLineNumberInclusive": 57,
+        "endColumn": 1
+      },
+      "diffText": "type Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\nconst company = {\n\n",
+      "fullOriginalText": "type Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\nconst com\n\n",
+      "suggestionTriggerTime": 1742475800439.5,
+      "greens": [],
+      "source": "typing",
+      "requestId": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+      "selection": {
+        "startLineNumber": 51,
+        "startColumn": 1,
+        "endLineNumberInclusive": 57,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 293,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:20.915Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " name"
+    },
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:20.921Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": \""
+    },
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:20.925Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Ac"
+    },
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:20.931Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "me"
+    },
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:20.938Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Inc"
+    },
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:20.944Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ".\","
+    },
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:20.951Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:20.958Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:20.966Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " address"
+    },
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:20.975Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": {\n    street"
+    },
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:20.986Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:20.992Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \""
+    },
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:21.000Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "1"
+    },
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:21.009Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "2"
+    },
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:21.018Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "3"
+    },
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:21.026Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Main"
+    },
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:21.037Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " St"
+    },
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:21.043Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\","
+    },
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:21.050Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:21.060Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "   "
+    },
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:21.069Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " city"
+    },
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:21.078Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": \"Any"
+    },
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:21.089Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "town"
+    },
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:21.097Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\","
+    },
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:21.105Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n "
+    },
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:21.117Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " },"
+    },
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:21.124Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n};"
+    },
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:21.134Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:21.143Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:21.155Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:21.156Z"
+  },
+  {
+    "fullText": "type Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\nconst company = {\n  name: \"Acme Inc.\",\n  address: {\n    street: \"123 Main St\",\n    city: \"Anytown\",\n  },\n};\n\n",
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:21.156Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "type Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\nconst company = {\n\n"
+    },
+    "fullText": "type Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\nconst company = {\n  name: \"Acme Inc.\",\n  address: {\n    street: \"123 Main St\",\n    city: \"Anytown\",\n  },\n};\n\n",
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:21.157Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "cfedfadd-6fa5-4210-9dd8-c6c0399e273e",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 477,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 479,
+      "monotonicallyIncreasingSuggestionId": 294,
+      "range": {
+        "startLineNumber": 51,
+        "startColumn": 1,
+        "endLineNumberInclusive": 57,
+        "endColumn": 1
+      },
+      "replaceText": "type Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\nconst company = {\n  name: \"Acme Inc.\",\n  address: {\n    street: \"123 Main St\",\n    city: \"Anytown\",\n  },\n};\n\n",
+      "originalText": "type Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\nconst company = {\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 51,
+        "startColumn": 1,
+        "endLineNumberInclusive": 57,
+        "endColumn": 1
+      },
+      "diffText": "type Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\nconst company = {\n  name: \"Acme Inc.\",\n  address: {\n    street: \"123 Main St\",\n    city: \"Anytown\",\n  },\n};\n\n",
+      "fullOriginalText": "type Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\nconst company = {\n\n",
+      "suggestionTriggerTime": 1742475800439.5,
+      "greens": [],
+      "source": "typing",
+      "requestId": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+      "selection": {
+        "startLineNumber": 51,
+        "startColumn": 1,
+        "endLineNumberInclusive": 57,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "893a8e87-df39-419d-a7e1-b8ad7a566a0d",
+      "undoRedoGroup": {
+        "id": 294,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:21.157Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "893a8e87-df39-419d-a7e1-b8ad7a566a0d",
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:21.163Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "type Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\nconst company = {\n\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "893a8e87-df39-419d-a7e1-b8ad7a566a0d",
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:21.163Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "893a8e87-df39-419d-a7e1-b8ad7a566a0d",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-20T13:03:21.163Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "8900f81f-fd41-4efe-be94-eeafc1a67125",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 477,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 477,
+      "monotonicallyIncreasingSuggestionId": 293,
+      "range": {
+        "startLineNumber": 51,
+        "startColumn": 1,
+        "endLineNumberInclusive": 57,
+        "endColumn": 1
+      },
+      "replaceText": "type Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\nconst company = {\n\n",
+      "originalText": "type Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\nconst com\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 51,
+        "startColumn": 1,
+        "endLineNumberInclusive": 57,
+        "endColumn": 1
+      },
+      "diffText": "type Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\nconst company = {\n\n",
+      "fullOriginalText": "type Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\nconst com\n\n",
+      "suggestionTriggerTime": 1742475800439.5,
+      "greens": [],
+      "source": "typing",
+      "requestId": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+      "selection": {
+        "startLineNumber": 51,
+        "startColumn": 1,
+        "endLineNumberInclusive": 57,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 293,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;1746",
+      "onAcceptDisplayId": "cfedfadd-6fa5-4210-9dd8-c6c0399e273e"
+    },
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:21.512Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "8900f81f-fd41-4efe-be94-eeafc1a67125",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 477,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 477,
+      "monotonicallyIncreasingSuggestionId": 293,
+      "range": {
+        "startLineNumber": 51,
+        "startColumn": 1,
+        "endLineNumberInclusive": 57,
+        "endColumn": 1
+      },
+      "replaceText": "type Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\nconst company = {\n\n",
+      "originalText": "type Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\nconst com\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 51,
+        "startColumn": 1,
+        "endLineNumberInclusive": 57,
+        "endColumn": 1
+      },
+      "diffText": "type Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\nconst company = {\n\n",
+      "fullOriginalText": "type Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\nconst com\n\n",
+      "suggestionTriggerTime": 1742475800439.5,
+      "greens": [],
+      "source": "typing",
+      "requestId": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+      "selection": {
+        "startLineNumber": 51,
+        "startColumn": 1,
+        "endLineNumberInclusive": 57,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 293,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;1746",
+      "onAcceptDisplayId": "cfedfadd-6fa5-4210-9dd8-c6c0399e273e"
+    },
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:21.517Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "cfedfadd-6fa5-4210-9dd8-c6c0399e273e",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 477,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 479,
+      "monotonicallyIncreasingSuggestionId": 294,
+      "range": {
+        "startLineNumber": 51,
+        "startColumn": 1,
+        "endLineNumberInclusive": 57,
+        "endColumn": 1
+      },
+      "replaceText": "type Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\nconst company = {\n  name: \"Acme Inc.\",\n  address: {\n    street: \"123 Main St\",\n    city: \"Anytown\",\n  },\n};\n\n",
+      "originalText": "type Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\nconst company = {\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 51,
+        "startColumn": 1,
+        "endLineNumberInclusive": 57,
+        "endColumn": 1
+      },
+      "diffText": "type Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\nconst company = {\n  name: \"Acme Inc.\",\n  address: {\n    street: \"123 Main St\",\n    city: \"Anytown\",\n  },\n};\n\n",
+      "fullOriginalText": "type Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\nconst company = {\n\n",
+      "suggestionTriggerTime": 1742475800439.5,
+      "greens": [],
+      "source": "typing",
+      "requestId": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+      "selection": {
+        "startLineNumber": 51,
+        "startColumn": 1,
+        "endLineNumberInclusive": 57,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "893a8e87-df39-419d-a7e1-b8ad7a566a0d",
+      "undoRedoGroup": {
+        "id": 294,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:21.518Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "cfedfadd-6fa5-4210-9dd8-c6c0399e273e",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 477,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 479,
+      "monotonicallyIncreasingSuggestionId": 294,
+      "range": {
+        "startLineNumber": 51,
+        "startColumn": 1,
+        "endLineNumberInclusive": 57,
+        "endColumn": 1
+      },
+      "replaceText": "type Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\nconst company = {\n  name: \"Acme Inc.\",\n  address: {\n    street: \"123 Main St\",\n    city: \"Anytown\",\n  },\n};\n\n",
+      "originalText": "type Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\nconst company = {\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 51,
+        "startColumn": 1,
+        "endLineNumberInclusive": 57,
+        "endColumn": 1
+      },
+      "diffText": "type Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\nconst company = {\n  name: \"Acme Inc.\",\n  address: {\n    street: \"123 Main St\",\n    city: \"Anytown\",\n  },\n};\n\n",
+      "fullOriginalText": "type Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\nconst company = {\n\n",
+      "suggestionTriggerTime": 1742475800439.5,
+      "greens": [],
+      "source": "typing",
+      "requestId": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+      "selection": {
+        "startLineNumber": 51,
+        "startColumn": 1,
+        "endLineNumberInclusive": 57,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "893a8e87-df39-419d-a7e1-b8ad7a566a0d",
+      "undoRedoGroup": {
+        "id": 294,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;1757"
+    },
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:26.791Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "cfedfadd-6fa5-4210-9dd8-c6c0399e273e",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 477,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 479,
+      "monotonicallyIncreasingSuggestionId": 294,
+      "range": {
+        "startLineNumber": 51,
+        "startColumn": 1,
+        "endLineNumberInclusive": 57,
+        "endColumn": 1
+      },
+      "replaceText": "type Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\nconst company = {\n  name: \"Acme Inc.\",\n  address: {\n    street: \"123 Main St\",\n    city: \"Anytown\",\n  },\n};\n\n",
+      "originalText": "type Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\nconst company = {\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 51,
+        "startColumn": 1,
+        "endLineNumberInclusive": 57,
+        "endColumn": 1
+      },
+      "diffText": "type Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\nconst company = {\n  name: \"Acme Inc.\",\n  address: {\n    street: \"123 Main St\",\n    city: \"Anytown\",\n  },\n};\n\n",
+      "fullOriginalText": "type Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\nconst company = {\n\n",
+      "suggestionTriggerTime": 1742475800439.5,
+      "greens": [],
+      "source": "typing",
+      "requestId": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+      "selection": {
+        "startLineNumber": 51,
+        "startColumn": 1,
+        "endLineNumberInclusive": 57,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "893a8e87-df39-419d-a7e1-b8ad7a566a0d",
+      "undoRedoGroup": {
+        "id": 294,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;1757"
+    },
+    "generationUUID": "e9202e42-d714-4b04-8bc9-4c3a82de7a2c",
+    "timestamp": "2025-03-20T13:03:26.810Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "893a8e87-df39-419d-a7e1-b8ad7a566a0d",
+    "fusedCursorPrediction": null,
+    "oldText": "type Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\nconst company = {\n\n",
+    "newText": "type Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\nconst company = {\n  name: \"Acme Inc.\",\n  address: {\n    street: \"123 Main St\",\n    city: \"Anytown\",\n  },\n};\n\n",
+    "timestamp": "2025-03-20T13:03:26.811Z"
+  }
+]

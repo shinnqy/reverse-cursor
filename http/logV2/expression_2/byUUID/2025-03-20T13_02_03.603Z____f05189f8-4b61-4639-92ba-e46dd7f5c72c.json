@@ -1,0 +1,697 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:03.603Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/dynamicProp.ets",
+          "diffHistory": [
+            "1+|const user = {}\n",
+            "2-|  \n3-|}\n2+|  name: \"Alice\",\n3+|  age: 30,\n4+|  address: {\n5+|},\n6+|};\n7+|\n8+|\n",
+            "5-|},\n5+|    city: \"New York\",\n6+|    country: \"USA\",\n7+|  },\n10+|const greeting = `Hello, ${user.name}!`;\n",
+            "1-|\n1+|interface User {\n2+|  name: string;\n3+|  age: number;\n4+|  address: {\n5+|    city: string;\n6+|    country: string;\n7+|  };\n8+|}\n",
+            "1-|\n1+|interface Address {\n",
+            "5-|  address: {\n5+|  address: Address;\n",
+            "2+|  city: string;\n3+|  country: string;\n4+|}\n",
+            "9-|    city: string;\n10-|    country: string;\n11-|  };\n13-|const user = {\n10+|const user: User = {\n",
+            "21+|function getFullName(user: { firstName: string; lastName: string }) {\n22+|  return `${user.firstName} ${user.lastName}`;\n23+|}\n25+|const fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n26+|\n27+|\n28+|\n",
+            "25-|const fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n",
+            "25+|const currentUser = {\n26+|  firstName: \"John\",\n27+|  lastName: \"Doe\",\n28+|};\n30+|const fullName = getFullName(currentUser);\n",
+            "30-|const fullName = getFullName(currentUser);\n30+|const fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n",
+            "21-|function getFullName(user: { firstName: string; lastName: string }) {\n21+|interface FullName {\n22+|function getFullName(user: { firstName: string; lastName: string }\n23+|function getFullName(user: FullName) {\n",
+            "22-|function getFullName(user: { firstName: string; lastName: string }\n22+|function getFullName(user: { firstName: string; lastName: string ;\n23+|}\n",
+            "22-|function getFullName(user: { firstName: string;\n22+|  firstName: string;\n",
+            "29-|const currentUser = {\n29+|const currentUser: FullName = {\n",
+            "36+|const price = 100;\n37+|const discount = 0.1;\n38+|const priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n40+|const isAdmin = true;\n41+|const roleMessage = ``\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/dynamicProp.ets",
+        "contents": "interface Address {\n  city: string;\n  country: string;\n}\ninterface User {\n  name: string;\n  age: number;\n  address: Address;\n}\nconst user: User = {\n  name: \"Alice\",\n  age: 30,\n  address: {\n    city: \"New York\",\n    country: \"USA\",\n  },\n};\n\nconst greeting = `Hello, ${user.name}!`;\n\ninterface FullName {\n  firstName: string;\n  lastName: string;\n}\nfunction getFullName(user: FullName) {\n  return `${user.firstName} ${user.lastName}`;\n}\n\nconst currentUser: FullName = {\n  firstName: \"John\",\n  lastName: \"Doe\",\n};\n\nconst fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n\nconst price = 100;\nconst discount = 0.1;\nconst priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n\nconst isAdmin = true;\nconst roleMessage = ``\n\n",
+        "cursorPosition": {
+          "line": 40,
+          "column": 21
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 312,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742475723643,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.7998046875,
+      "timeAtRequestSend": 1742475723643
+    },
+    "generateUuid": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:03.644Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "const discount = 0.1;\nconst priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n\nconst isAdmin = true;\nconst roleMessage = `",
+      "rangeToReplace": {
+        "startLineNumber": 37,
+        "endLineNumberInclusive": 43
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.009Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.011Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "User"
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.043Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " is"
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.054Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ${"
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.066Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "is"
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.078Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Admin"
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.089Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ?"
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.100Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \""
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.112Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "admin"
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.123Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\""
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.136Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " :"
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.146Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \""
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.158Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "not"
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.169Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " admin"
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.180Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\"}"
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.191Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "`;"
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.203Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.213Z"
+  },
+  {
+    "firstChunkValue": "const discount = 0.1;\nconst priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\n",
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.219Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "const discount = 0.1;\nconst priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\n"
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.221Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "4ac6623a-b377-4637-97e2-0733dcb0904c",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 312,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 312,
+      "monotonicallyIncreasingSuggestionId": 185,
+      "range": {
+        "startLineNumber": 37,
+        "startColumn": 1,
+        "endLineNumberInclusive": 43,
+        "endColumn": 1
+      },
+      "replaceText": "const discount = 0.1;\nconst priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\n",
+      "originalText": "const discount = 0.1;\nconst priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n\nconst isAdmin = true;\nconst roleMessage = ``\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 37,
+        "startColumn": 1,
+        "endLineNumberInclusive": 43,
+        "endColumn": 1
+      },
+      "diffText": "const discount = 0.1;\nconst priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\n",
+      "fullOriginalText": "const discount = 0.1;\nconst priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n\nconst isAdmin = true;\nconst roleMessage = ``\n\n",
+      "suggestionTriggerTime": 1742475723592.3,
+      "greens": [],
+      "source": "typing",
+      "requestId": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+      "selection": {
+        "startLineNumber": 37,
+        "startColumn": 1,
+        "endLineNumberInclusive": 43,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 185,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.222Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "const"
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.226Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " user"
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.238Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Info"
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.249Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " = {"
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.261Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n  name"
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.274Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": \""
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.286Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Alice"
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.297Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\",\n "
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.309Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " age"
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.320Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": "
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.332Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "3"
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.344Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "0,\n "
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.355Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " address"
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.365Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": {"
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.378Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.392Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "   "
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.404Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " city: \"New York\",\n   "
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.413Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " country"
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.423Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": \""
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.435Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "USA"
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.445Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\",\n "
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.456Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " },"
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.467Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.480Z"
+  },
+  {
+    "fullText": "const discount = 0.1;\nconst priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\nconst userInfo = {\n  name: \"Alice\",\n  age: 30,\n  address: {\n    city: \"New York\",\n    country: \"USA\",\n  },",
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.481Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.481Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "const discount = 0.1;\nconst priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\n"
+    },
+    "fullText": "const discount = 0.1;\nconst priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\nconst userInfo = {\n  name: \"Alice\",\n  age: 30,\n  address: {\n    city: \"New York\",\n    country: \"USA\",\n  },",
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.481Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "6a35fc86-817e-4466-856d-5c294745553a",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 312,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 313,
+      "monotonicallyIncreasingSuggestionId": 186,
+      "range": {
+        "startLineNumber": 37,
+        "startColumn": 1,
+        "endLineNumberInclusive": 43,
+        "endColumn": 1
+      },
+      "replaceText": "const discount = 0.1;\nconst priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\nconst userInfo = {\n  name: \"Alice\",\n  age: 30,\n  address: {\n    city: \"New York\",\n    country: \"USA\",\n  },",
+      "originalText": "const discount = 0.1;\nconst priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 37,
+        "startColumn": 1,
+        "endLineNumberInclusive": 43,
+        "endColumn": 1
+      },
+      "diffText": "const discount = 0.1;\nconst priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\nconst userInfo = {\n  name: \"Alice\",\n  age: 30,\n  address: {\n    city: \"New York\",\n    country: \"USA\",\n  },",
+      "fullOriginalText": "const discount = 0.1;\nconst priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\n",
+      "suggestionTriggerTime": 1742475723592.3,
+      "greens": [],
+      "source": "typing",
+      "requestId": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+      "selection": {
+        "startLineNumber": 37,
+        "startColumn": 1,
+        "endLineNumberInclusive": 43,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "1ab3e997-90a9-4fed-b5e2-2e62d557336d",
+      "undoRedoGroup": {
+        "id": 186,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.482Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "1ab3e997-90a9-4fed-b5e2-2e62d557336d",
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.493Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "const discount = 0.1;\nconst priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "1ab3e997-90a9-4fed-b5e2-2e62d557336d",
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:04.493Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "1ab3e997-90a9-4fed-b5e2-2e62d557336d",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-20T13:02:04.494Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "4ac6623a-b377-4637-97e2-0733dcb0904c",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 312,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 312,
+      "monotonicallyIncreasingSuggestionId": 185,
+      "range": {
+        "startLineNumber": 37,
+        "startColumn": 1,
+        "endLineNumberInclusive": 43,
+        "endColumn": 1
+      },
+      "replaceText": "const discount = 0.1;\nconst priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\n",
+      "originalText": "const discount = 0.1;\nconst priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n\nconst isAdmin = true;\nconst roleMessage = ``\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 37,
+        "startColumn": 1,
+        "endLineNumberInclusive": 43,
+        "endColumn": 1
+      },
+      "diffText": "const discount = 0.1;\nconst priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\n",
+      "fullOriginalText": "const discount = 0.1;\nconst priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n\nconst isAdmin = true;\nconst roleMessage = ``\n\n",
+      "suggestionTriggerTime": 1742475723592.3,
+      "greens": [],
+      "source": "typing",
+      "requestId": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+      "selection": {
+        "startLineNumber": 37,
+        "startColumn": 1,
+        "endLineNumberInclusive": 43,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 185,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;1271",
+      "onAcceptDisplayId": "6a35fc86-817e-4466-856d-5c294745553a"
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:05.301Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "4ac6623a-b377-4637-97e2-0733dcb0904c",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 312,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 312,
+      "monotonicallyIncreasingSuggestionId": 185,
+      "range": {
+        "startLineNumber": 37,
+        "startColumn": 1,
+        "endLineNumberInclusive": 43,
+        "endColumn": 1
+      },
+      "replaceText": "const discount = 0.1;\nconst priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\n",
+      "originalText": "const discount = 0.1;\nconst priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n\nconst isAdmin = true;\nconst roleMessage = ``\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 37,
+        "startColumn": 1,
+        "endLineNumberInclusive": 43,
+        "endColumn": 1
+      },
+      "diffText": "const discount = 0.1;\nconst priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\n",
+      "fullOriginalText": "const discount = 0.1;\nconst priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n\nconst isAdmin = true;\nconst roleMessage = ``\n\n",
+      "suggestionTriggerTime": 1742475723592.3,
+      "greens": [],
+      "source": "typing",
+      "requestId": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+      "selection": {
+        "startLineNumber": 37,
+        "startColumn": 1,
+        "endLineNumberInclusive": 43,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 185,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;1271",
+      "onAcceptDisplayId": "6a35fc86-817e-4466-856d-5c294745553a"
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:05.307Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "6a35fc86-817e-4466-856d-5c294745553a",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 312,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 313,
+      "monotonicallyIncreasingSuggestionId": 186,
+      "range": {
+        "startLineNumber": 37,
+        "startColumn": 1,
+        "endLineNumberInclusive": 43,
+        "endColumn": 1
+      },
+      "replaceText": "const discount = 0.1;\nconst priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\nconst userInfo = {\n  name: \"Alice\",\n  age: 30,\n  address: {\n    city: \"New York\",\n    country: \"USA\",\n  },",
+      "originalText": "const discount = 0.1;\nconst priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 37,
+        "startColumn": 1,
+        "endLineNumberInclusive": 43,
+        "endColumn": 1
+      },
+      "diffText": "const discount = 0.1;\nconst priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\nconst userInfo = {\n  name: \"Alice\",\n  age: 30,\n  address: {\n    city: \"New York\",\n    country: \"USA\",\n  },",
+      "fullOriginalText": "const discount = 0.1;\nconst priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\n",
+      "suggestionTriggerTime": 1742475723592.3,
+      "greens": [],
+      "source": "typing",
+      "requestId": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+      "selection": {
+        "startLineNumber": 37,
+        "startColumn": 1,
+        "endLineNumberInclusive": 43,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "1ab3e997-90a9-4fed-b5e2-2e62d557336d",
+      "undoRedoGroup": {
+        "id": 186,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "f05189f8-4b61-4639-92ba-e46dd7f5c72c",
+    "timestamp": "2025-03-20T13:02:05.308Z"
+  }
+]

@@ -1,0 +1,65 @@
+{"line":29,"column":20}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+interface Address {
+  city: string;
+  country: string;
+}
+interface User {
+  name: string;
+  age: number;
+  address: Address;
+}
+const user: User = {
+  name: "Alice",
+  age: 30,
+  address: {
+    city: "New York",
+    country: "USA",
+  },
+};
+
+const greeting = `Hello, ${user.name}!`;
+
+function getFullName(user: { firstName: string; lastName: string }) {
+  return `${user.firstName} ${user.lastName}`;
+}
+
+const currentUser = {
+  firstName: "John",
+  lastName: "Doe",
+};
+
+const fullName = `Fu[ToFill] 
+
+
+
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+  lastName: "Doe",
+};
+
+const fullName = `Full Name: ${getFullName(currentUser)}`;
+
+
+
+
+
+-------------------------------[                   fullText                  ]--------------------------------
+  lastName: "Doe",
+};
+
+const fullName = `Full Name: ${getFullName(currentUser)}`;
+
+
+
+
+
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/dynamicProp.ets",
+  "lineNumberOneIndexed": 21,
+  "text": "function getFullName(user: { firstName: string; lastName: string }) {\nreturn `${user.firstName} ${user.lastName}`;\n}\n\nconst currentUser = {",
+  "shouldRetriggerCpp": false
+}
