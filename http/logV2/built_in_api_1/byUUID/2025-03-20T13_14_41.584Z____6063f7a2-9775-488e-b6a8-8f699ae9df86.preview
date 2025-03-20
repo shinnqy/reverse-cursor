@@ -1,0 +1,23 @@
+{"line":5,"column":0}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+import router from "@ohos.router";
+
+@Entry
+@Component
+struct Main {
+[ToFill]  @State message: string = "Hello World";
+
+  build() {
+    Row() {
+      Text(this.message)
+        .fontSize(20)
+        .fontWeight(FontWeight.Bold)
+        .onClick(() => {
+          router.push({
+            url: "pages/SecondPage",
+        
+-------------------------------[               firstChunkValue               ]--------------------------------
+@Component
+struct Main {
+  @State message: string = "Hello World";

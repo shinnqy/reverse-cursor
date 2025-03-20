@@ -1,0 +1,115 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "9b118414-46bc-400f-aa3d-e7e1e9967fd0",
+    "timestamp": "2025-03-20T12:56:11.658Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/dynamicProp.ets",
+          "diffHistory": [
+            "14-|const greeting = `Hello, ${user}!`;\n14+|const greeting = `Hello, ${user.name}!`;\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/dynamicProp.ets",
+        "contents": "interface Address {\n    city: string;\n}\ninterface User {\n    name: string;\n    age: number;\n    address: Address;\n}\nconst user: User = {\n    name: \"Alice\",\n    age: 30,\n    address: { city: \"Shenzhen\" }\n};\nconst greeting = `Hello, ${user.name}!`;\n\ninterface FullName {\n    firstName: string;\n    lastName: string;\n}\nfunction getFullName(user: FullName) {\n    return `${user.firstName} ${user.lastName}`;\n}\nconst currentUser: FullName = { firstName: \"John\", lastName: \"Doe\" };\nconst fullName = `Full Name: ${getFullName(currentUser)}`;\n\nconst price = 99.99;\nconst discount = 0.2;\nconst priceInfo = `Price: ${(price * (1 - discount))}`;\n\nconst isAdmin = true;\nconst roleMessage = `Role: ${isAdmin ? \"Administrator\" : \"Guest\"}.`;\n\ninterface Product {\n    id: number;\n    name: string;\n}\nconst products: Product[] = [\n    { id: 1, name: \"Phone\" },\n    { id: 2, name: \"Laptop\" }\n];\nconst productInfo = `Current Product: ${products[0]}.`;\n\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\ninterface Company {\n    name: string;\n    ceo: CEO;\n}\ninterface CEO {\n    name: string;\n    contact: Contact;\n}\n\ninterface Contact {\n    email: string;\n}\nconst company: Company = {\n    name: \"Tech Corp\",\n    ceo: {\n        name: \"Bob\",\n        contact: { email: \"bob@tech.com\" }\n    }\n};\nconst emailTemplate = `CEO Email: ${company}`;",
+        "cursorPosition": {
+          "line": 15,
+          "column": 19
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 3,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1742475371701,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.10009765625,
+      "timeAtRequestSend": 1742475371701
+    },
+    "generateUuid": "9b118414-46bc-400f-aa3d-e7e1e9967fd0",
+    "timestamp": "2025-03-20T12:56:11.703Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\ninterface FullName {\n    firstName: string;\n    lastName: string;\n}",
+      "rangeToReplace": {
+        "startLineNumber": 15,
+        "endLineNumberInclusive": 19
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "9b118414-46bc-400f-aa3d-e7e1e9967fd0",
+    "timestamp": "2025-03-20T12:56:12.161Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "9b118414-46bc-400f-aa3d-e7e1e9967fd0",
+    "timestamp": "2025-03-20T12:56:12.162Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "9b118414-46bc-400f-aa3d-e7e1e9967fd0",
+    "timestamp": "2025-03-20T12:56:12.198Z"
+  },
+  {
+    "firstChunkValue": "\ninterface FullName {\n    firstName: string;\n    lastName: string;\n}",
+    "generationUUID": "9b118414-46bc-400f-aa3d-e7e1e9967fd0",
+    "timestamp": "2025-03-20T12:56:12.199Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": false
+    },
+    "generationUUID": "9b118414-46bc-400f-aa3d-e7e1e9967fd0",
+    "timestamp": "2025-03-20T12:56:12.200Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "9b118414-46bc-400f-aa3d-e7e1e9967fd0",
+    "timestamp": "2025-03-20T12:56:12.236Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "c0d5aad3-2e6f-4596-adef-512ce153f9da",
+    "generationUUID": "9b118414-46bc-400f-aa3d-e7e1e9967fd0",
+    "timestamp": "2025-03-20T12:56:12.245Z"
+  }
+]

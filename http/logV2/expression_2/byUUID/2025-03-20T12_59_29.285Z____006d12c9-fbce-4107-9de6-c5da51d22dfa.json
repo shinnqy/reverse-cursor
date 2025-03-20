@@ -1,0 +1,425 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "006d12c9-fbce-4107-9de6-c5da51d22dfa",
+    "timestamp": "2025-03-20T12:59:29.285Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/dynamicProp.ets",
+          "diffHistory": [
+            "1+|const user = {}\n",
+            "2-|  \n3-|}\n2+|  name: \"Alice\",\n3+|  age: 30,\n4+|  address: {\n5+|},\n6+|};\n7+|\n8+|\n",
+            "5-|},\n5+|    city: \"New York\",\n6+|    country: \"USA\",\n7+|  },\n10+|const greeting = `Hello, ${user.name}!`;\n",
+            "1-|\n1+|interface User {\n2+|  name: string;\n3+|  age: number;\n4+|  address: {\n5+|    city: string;\n6+|    country: string;\n7+|  };\n8+|}\n",
+            "1-|\n1+|interface Address {\n",
+            "5-|  address: {\n5+|  address: Address;\n",
+            "2+|  city: string;\n3+|  country: string;\n4+|}\n",
+            "9-|    city: string;\n10-|    country: string;\n11-|  };\n13-|const user = {\n10+|const user: User = {\n",
+            "22+|\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/dynamicProp.ets",
+        "contents": "interface Address {\n  city: string;\n  country: string;\n}\ninterface User {\n  name: string;\n  age: number;\n  address: Address;\n}\nconst user: User = {\n  name: \"Alice\",\n  age: 30,\n  address: {\n    city: \"New York\",\n    country: \"USA\",\n  },\n};\n\nconst greeting = `Hello, ${user.name}!`;\n\n\n\n",
+        "cursorPosition": {
+          "line": 20,
+          "column": 0
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 105,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1742475569334,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.5,
+      "timeAtRequestSend": 1742475569334
+    },
+    "generateUuid": "006d12c9-fbce-4107-9de6-c5da51d22dfa",
+    "timestamp": "2025-03-20T12:59:29.335Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nconst",
+      "rangeToReplace": {
+        "startLineNumber": 20,
+        "endLineNumberInclusive": 23
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "006d12c9-fbce-4107-9de6-c5da51d22dfa",
+    "timestamp": "2025-03-20T12:59:29.690Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "006d12c9-fbce-4107-9de6-c5da51d22dfa",
+    "timestamp": "2025-03-20T12:59:29.691Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " user"
+    },
+    "generationUUID": "006d12c9-fbce-4107-9de6-c5da51d22dfa",
+    "timestamp": "2025-03-20T12:59:29.704Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "2"
+    },
+    "generationUUID": "006d12c9-fbce-4107-9de6-c5da51d22dfa",
+    "timestamp": "2025-03-20T12:59:29.713Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "006d12c9-fbce-4107-9de6-c5da51d22dfa",
+    "timestamp": "2025-03-20T12:59:29.721Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " User"
+    },
+    "generationUUID": "006d12c9-fbce-4107-9de6-c5da51d22dfa",
+    "timestamp": "2025-03-20T12:59:29.729Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " = {\n "
+    },
+    "generationUUID": "006d12c9-fbce-4107-9de6-c5da51d22dfa",
+    "timestamp": "2025-03-20T12:59:29.737Z"
+  },
+  {
+    "firstChunkValue": "\nconst user2: User = {\n\n",
+    "generationUUID": "006d12c9-fbce-4107-9de6-c5da51d22dfa",
+    "timestamp": "2025-03-20T12:59:29.740Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nconst user2: User = {\n\n"
+    },
+    "generationUUID": "006d12c9-fbce-4107-9de6-c5da51d22dfa",
+    "timestamp": "2025-03-20T12:59:29.742Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "1a561bbc-987f-4d33-8ac4-7ae587b4d613",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 105,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 105,
+      "monotonicallyIncreasingSuggestionId": 59,
+      "range": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 23,
+        "endColumn": 1
+      },
+      "replaceText": "\nconst user2: User = {\n\n",
+      "originalText": "\n\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 23,
+        "endColumn": 1
+      },
+      "diffText": "\nconst user2: User = {\n\n",
+      "fullOriginalText": "\n\n\n",
+      "suggestionTriggerTime": 1742475569284.2,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "006d12c9-fbce-4107-9de6-c5da51d22dfa",
+      "selection": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 23,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 59,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "006d12c9-fbce-4107-9de6-c5da51d22dfa",
+    "timestamp": "2025-03-20T12:59:29.743Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " name"
+    },
+    "generationUUID": "006d12c9-fbce-4107-9de6-c5da51d22dfa",
+    "timestamp": "2025-03-20T12:59:29.747Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": \""
+    },
+    "generationUUID": "006d12c9-fbce-4107-9de6-c5da51d22dfa",
+    "timestamp": "2025-03-20T12:59:29.753Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Bob"
+    },
+    "generationUUID": "006d12c9-fbce-4107-9de6-c5da51d22dfa",
+    "timestamp": "2025-03-20T12:59:29.762Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\","
+    },
+    "generationUUID": "006d12c9-fbce-4107-9de6-c5da51d22dfa",
+    "timestamp": "2025-03-20T12:59:29.773Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "006d12c9-fbce-4107-9de6-c5da51d22dfa",
+    "timestamp": "2025-03-20T12:59:29.782Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "  age"
+    },
+    "generationUUID": "006d12c9-fbce-4107-9de6-c5da51d22dfa",
+    "timestamp": "2025-03-20T12:59:29.791Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": 2"
+    },
+    "generationUUID": "006d12c9-fbce-4107-9de6-c5da51d22dfa",
+    "timestamp": "2025-03-20T12:59:29.802Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "5"
+    },
+    "generationUUID": "006d12c9-fbce-4107-9de6-c5da51d22dfa",
+    "timestamp": "2025-03-20T12:59:29.813Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ","
+    },
+    "generationUUID": "006d12c9-fbce-4107-9de6-c5da51d22dfa",
+    "timestamp": "2025-03-20T12:59:29.824Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "006d12c9-fbce-4107-9de6-c5da51d22dfa",
+    "timestamp": "2025-03-20T12:59:29.834Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "  address: {\n    city:"
+    },
+    "generationUUID": "006d12c9-fbce-4107-9de6-c5da51d22dfa",
+    "timestamp": "2025-03-20T12:59:29.845Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \""
+    },
+    "generationUUID": "006d12c9-fbce-4107-9de6-c5da51d22dfa",
+    "timestamp": "2025-03-20T12:59:29.856Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Los"
+    },
+    "generationUUID": "006d12c9-fbce-4107-9de6-c5da51d22dfa",
+    "timestamp": "2025-03-20T12:59:29.868Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Angeles"
+    },
+    "generationUUID": "006d12c9-fbce-4107-9de6-c5da51d22dfa",
+    "timestamp": "2025-03-20T12:59:29.879Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\","
+    },
+    "generationUUID": "006d12c9-fbce-4107-9de6-c5da51d22dfa",
+    "timestamp": "2025-03-20T12:59:29.888Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n   "
+    },
+    "generationUUID": "006d12c9-fbce-4107-9de6-c5da51d22dfa",
+    "timestamp": "2025-03-20T12:59:29.901Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " country: \"USA\",\n  },"
+    },
+    "generationUUID": "006d12c9-fbce-4107-9de6-c5da51d22dfa",
+    "timestamp": "2025-03-20T12:59:29.911Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n};\n"
+    },
+    "generationUUID": "006d12c9-fbce-4107-9de6-c5da51d22dfa",
+    "timestamp": "2025-03-20T12:59:29.928Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "006d12c9-fbce-4107-9de6-c5da51d22dfa",
+    "timestamp": "2025-03-20T12:59:29.929Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "006d12c9-fbce-4107-9de6-c5da51d22dfa",
+    "timestamp": "2025-03-20T12:59:29.930Z"
+  },
+  {
+    "fullText": "\nconst user2: User = {\n  name: \"Bob\",\n  age: 25,\n  address: {\n    city: \"Los Angeles\",\n    country: \"USA\",\n  },\n};\n",
+    "generationUUID": "006d12c9-fbce-4107-9de6-c5da51d22dfa",
+    "timestamp": "2025-03-20T12:59:29.930Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nconst user2: User = {\n\n"
+    },
+    "fullText": "\nconst user2: User = {\n  name: \"Bob\",\n  age: 25,\n  address: {\n    city: \"Los Angeles\",\n    country: \"USA\",\n  },\n};\n",
+    "generationUUID": "006d12c9-fbce-4107-9de6-c5da51d22dfa",
+    "timestamp": "2025-03-20T12:59:29.930Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "1d18898f-c79c-492b-8aa8-3fea46d99af9",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 105,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 106,
+      "monotonicallyIncreasingSuggestionId": 60,
+      "range": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 23,
+        "endColumn": 1
+      },
+      "replaceText": "\nconst user2: User = {\n  name: \"Bob\",\n  age: 25,\n  address: {\n    city: \"Los Angeles\",\n    country: \"USA\",\n  },\n};\n",
+      "originalText": "\nconst user2: User = {\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 23,
+        "endColumn": 1
+      },
+      "diffText": "\nconst user2: User = {\n  name: \"Bob\",\n  age: 25,\n  address: {\n    city: \"Los Angeles\",\n    country: \"USA\",\n  },\n};\n",
+      "fullOriginalText": "\nconst user2: User = {\n\n",
+      "suggestionTriggerTime": 1742475569284.2,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "006d12c9-fbce-4107-9de6-c5da51d22dfa",
+      "selection": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 23,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "bf631f02-650f-4d7e-9feb-042f1ae787eb",
+      "undoRedoGroup": {
+        "id": 60,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "006d12c9-fbce-4107-9de6-c5da51d22dfa",
+    "timestamp": "2025-03-20T12:59:29.931Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "bf631f02-650f-4d7e-9feb-042f1ae787eb",
+    "generationUUID": "006d12c9-fbce-4107-9de6-c5da51d22dfa",
+    "timestamp": "2025-03-20T12:59:29.940Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nconst user2: User = {\n\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "bf631f02-650f-4d7e-9feb-042f1ae787eb",
+    "generationUUID": "006d12c9-fbce-4107-9de6-c5da51d22dfa",
+    "timestamp": "2025-03-20T12:59:29.941Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "bf631f02-650f-4d7e-9feb-042f1ae787eb",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-20T12:59:29.941Z"
+  }
+]

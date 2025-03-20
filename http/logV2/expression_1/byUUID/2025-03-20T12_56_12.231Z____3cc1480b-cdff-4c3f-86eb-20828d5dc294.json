@@ -1,0 +1,115 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "3cc1480b-cdff-4c3f-86eb-20828d5dc294",
+    "timestamp": "2025-03-20T12:56:12.231Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/dynamicProp.ets",
+          "diffHistory": [
+            "14-|const greeting = `Hello, ${user}!`;\n14+|const greeting = `Hello, ${user.name}!`;\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/dynamicProp.ets",
+        "contents": "interface Address {\n    city: string;\n}\ninterface User {\n    name: string;\n    age: number;\n    address: Address;\n}\nconst user: User = {\n    name: \"Alice\",\n    age: 30,\n    address: { city: \"Shenzhen\" }\n};\nconst greeting = `Hello, ${user.name}!`;\n\ninterface FullName {\n    firstName: string;\n    lastName: string;\n}\nfunction getFullName(user: FullName) {\n    return `${user.firstName} ${user.lastName}`;\n}\nconst currentUser: FullName = { firstName: \"John\", lastName: \"Doe\" };\nconst fullName = `Full Name: ${getFullName(currentUser)}`;\n\nconst price = 99.99;\nconst discount = 0.2;\nconst priceInfo = `Price: ${(price * (1 - discount))}`;\n\nconst isAdmin = true;\nconst roleMessage = `Role: ${isAdmin ? \"Administrator\" : \"Guest\"}.`;\n\ninterface Product {\n    id: number;\n    name: string;\n}\nconst products: Product[] = [\n    { id: 1, name: \"Phone\" },\n    { id: 2, name: \"Laptop\" }\n];\nconst productInfo = `Current Product: ${products[0]}.`;\n\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\ninterface Company {\n    name: string;\n    ceo: CEO;\n}\ninterface CEO {\n    name: string;\n    contact: Contact;\n}\n\ninterface Contact {\n    email: string;\n}\nconst company: Company = {\n    name: \"Tech Corp\",\n    ceo: {\n        name: \"Bob\",\n        contact: { email: \"bob@tech.com\" }\n    }\n};\nconst emailTemplate = `CEO Email: ${company}`;",
+        "cursorPosition": {
+          "line": 19,
+          "column": 35
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 3,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1742475372280,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 53.39990234375,
+      "timeAtRequestSend": 1742475372281
+    },
+    "generateUuid": "3cc1480b-cdff-4c3f-86eb-20828d5dc294",
+    "timestamp": "2025-03-20T12:56:12.282Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}\nfunction getFullName(user: FullName) {\n    return `${user.firstName} ${user.lastName}`;\n}\nconst currentUser: FullName = { firstName: \"John\", lastName: \"Doe\" };\nconst fullName = `Full Name: ${getFullName(currentUser)}`;\n",
+      "rangeToReplace": {
+        "startLineNumber": 19,
+        "endLineNumberInclusive": 25
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "3cc1480b-cdff-4c3f-86eb-20828d5dc294",
+    "timestamp": "2025-03-20T12:56:12.621Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "3cc1480b-cdff-4c3f-86eb-20828d5dc294",
+    "timestamp": "2025-03-20T12:56:12.622Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "3cc1480b-cdff-4c3f-86eb-20828d5dc294",
+    "timestamp": "2025-03-20T12:56:12.651Z"
+  },
+  {
+    "firstChunkValue": "}\nfunction getFullName(user: FullName) {\n    return `${user.firstName} ${user.lastName}`;\n}\nconst currentUser: FullName = { firstName: \"John\", lastName: \"Doe\" };\nconst fullName = `Full Name: ${getFullName(currentUser)}`;\n",
+    "generationUUID": "3cc1480b-cdff-4c3f-86eb-20828d5dc294",
+    "timestamp": "2025-03-20T12:56:12.664Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": false
+    },
+    "generationUUID": "3cc1480b-cdff-4c3f-86eb-20828d5dc294",
+    "timestamp": "2025-03-20T12:56:12.665Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "3cc1480b-cdff-4c3f-86eb-20828d5dc294",
+    "timestamp": "2025-03-20T12:56:12.686Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "b54865cf-fcd6-461b-b733-10f2f2024b5f",
+    "generationUUID": "3cc1480b-cdff-4c3f-86eb-20828d5dc294",
+    "timestamp": "2025-03-20T12:56:12.699Z"
+  }
+]

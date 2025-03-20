@@ -1,0 +1,438 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "ddd3ddb3-17aa-4789-82c8-31776c122b0d",
+    "timestamp": "2025-03-20T12:56:15.508Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/dynamicProp.ets",
+          "diffHistory": [
+            "14-|const greeting = `Hello, ${user}!`;\n14+|const greeting = `Hello, ${user.name}!`;\n",
+            "24-|const fullName = `Full Name: ${getFullName(currentUser)}`;\n24+|const fullName = `Full Name: ${getFullName(currentUser).}`;\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/dynamicProp.ets",
+        "contents": "interface Address {\n    city: string;\n}\ninterface User {\n    name: string;\n    age: number;\n    address: Address;\n}\nconst user: User = {\n    name: \"Alice\",\n    age: 30,\n    address: { city: \"Shenzhen\" }\n};\nconst greeting = `Hello, ${user.name}!`;\n\ninterface FullName {\n    firstName: string;\n    lastName: string;\n}\nfunction getFullName(user: FullName) {\n    return `${user.firstName} ${user.lastName}`;\n}\nconst currentUser: FullName = { firstName: \"John\", lastName: \"Doe\" };\nconst fullName = `Full Name: ${getFullName(currentUser).}`;\n\nconst price = 99.99;\nconst discount = 0.2;\nconst priceInfo = `Price: ${(price * (1 - discount))}`;\n\nconst isAdmin = true;\nconst roleMessage = `Role: ${isAdmin ? \"Administrator\" : \"Guest\"}.`;\n\ninterface Product {\n    id: number;\n    name: string;\n}\nconst products: Product[] = [\n    { id: 1, name: \"Phone\" },\n    { id: 2, name: \"Laptop\" }\n];\nconst productInfo = `Current Product: ${products[0]}.`;\n\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\ninterface Company {\n    name: string;\n    ceo: CEO;\n}\ninterface CEO {\n    name: string;\n    contact: Contact;\n}\n\ninterface Contact {\n    email: string;\n}\nconst company: Company = {\n    name: \"Tech Corp\",\n    ceo: {\n        name: \"Bob\",\n        contact: { email: \"bob@tech.com\" }\n    }\n};\nconst emailTemplate = `CEO Email: ${company}`;",
+        "cursorPosition": {
+          "line": 23,
+          "column": 56
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 4,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742475375544,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.900146484375,
+      "timeAtRequestSend": 1742475375544
+    },
+    "generateUuid": "ddd3ddb3-17aa-4789-82c8-31776c122b0d",
+    "timestamp": "2025-03-20T12:56:15.546Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "const currentUser: FullName = { firstName: \"John\", lastName: \"Doe\" };\nconst fullName = `Full Name: ${getFullName(currentUser).",
+      "rangeToReplace": {
+        "startLineNumber": 23,
+        "endLineNumberInclusive": 30
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "ddd3ddb3-17aa-4789-82c8-31776c122b0d",
+    "timestamp": "2025-03-20T12:56:15.887Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "ddd3ddb3-17aa-4789-82c8-31776c122b0d",
+    "timestamp": "2025-03-20T12:56:15.888Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "toUpperCase"
+    },
+    "generationUUID": "ddd3ddb3-17aa-4789-82c8-31776c122b0d",
+    "timestamp": "2025-03-20T12:56:15.907Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "()"
+    },
+    "generationUUID": "ddd3ddb3-17aa-4789-82c8-31776c122b0d",
+    "timestamp": "2025-03-20T12:56:15.915Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}`"
+    },
+    "generationUUID": "ddd3ddb3-17aa-4789-82c8-31776c122b0d",
+    "timestamp": "2025-03-20T12:56:15.926Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";\n\nconst price"
+    },
+    "generationUUID": "ddd3ddb3-17aa-4789-82c8-31776c122b0d",
+    "timestamp": "2025-03-20T12:56:15.937Z"
+  },
+  {
+    "firstChunkValue": "const currentUser: FullName = { firstName: \"John\", lastName: \"Doe\" };\nconst fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n\nconst price = 99.99;\nconst discount = 0.2;\nconst priceInfo = `Price: ${(price * (1 - discount))}`;\n\nconst isAdmin = true;",
+    "generationUUID": "ddd3ddb3-17aa-4789-82c8-31776c122b0d",
+    "timestamp": "2025-03-20T12:56:15.938Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "const currentUser: FullName = { firstName: \"John\", lastName: \"Doe\" };\nconst fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n\nconst price = 99.99;\nconst discount = 0.2;\nconst priceInfo = `Price: ${(price * (1 - discount))}`;\n\nconst isAdmin = true;"
+    },
+    "generationUUID": "ddd3ddb3-17aa-4789-82c8-31776c122b0d",
+    "timestamp": "2025-03-20T12:56:15.939Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "7b082dc0-e10b-4cfb-a773-8afc763cebc6",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 4,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 4,
+      "monotonicallyIncreasingSuggestionId": 2,
+      "range": {
+        "startLineNumber": 23,
+        "startColumn": 1,
+        "endLineNumberInclusive": 30,
+        "endColumn": 22
+      },
+      "replaceText": "const currentUser: FullName = { firstName: \"John\", lastName: \"Doe\" };\nconst fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n\nconst price = 99.99;\nconst discount = 0.2;\nconst priceInfo = `Price: ${(price * (1 - discount))}`;\n\nconst isAdmin = true;",
+      "originalText": "const currentUser: FullName = { firstName: \"John\", lastName: \"Doe\" };\nconst fullName = `Full Name: ${getFullName(currentUser).}`;\n\nconst price = 99.99;\nconst discount = 0.2;\nconst priceInfo = `Price: ${(price * (1 - discount))}`;\n\nconst isAdmin = true;",
+      "startingSuggestionRange": {
+        "startLineNumber": 23,
+        "startColumn": 1,
+        "endLineNumberInclusive": 30,
+        "endColumn": 22
+      },
+      "diffText": "const currentUser: FullName = { firstName: \"John\", lastName: \"Doe\" };\nconst fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n\nconst price = 99.99;\nconst discount = 0.2;\nconst priceInfo = `Price: ${(price * (1 - discount))}`;\n\nconst isAdmin = true;",
+      "fullOriginalText": "const currentUser: FullName = { firstName: \"John\", lastName: \"Doe\" };\nconst fullName = `Full Name: ${getFullName(currentUser).}`;\n\nconst price = 99.99;\nconst discount = 0.2;\nconst priceInfo = `Price: ${(price * (1 - discount))}`;\n\nconst isAdmin = true;",
+      "suggestionTriggerTime": 1742475375493.5999,
+      "greens": [],
+      "source": "typing",
+      "requestId": "ddd3ddb3-17aa-4789-82c8-31776c122b0d",
+      "selection": {
+        "startLineNumber": 23,
+        "startColumn": 1,
+        "endLineNumberInclusive": 30,
+        "endColumn": 22
+      },
+      "undoRedoGroup": {
+        "id": 2,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "ddd3ddb3-17aa-4789-82c8-31776c122b0d",
+    "timestamp": "2025-03-20T12:56:15.939Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "ddd3ddb3-17aa-4789-82c8-31776c122b0d",
+    "timestamp": "2025-03-20T12:56:15.948Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " 99.99;\n"
+    },
+    "generationUUID": "ddd3ddb3-17aa-4789-82c8-31776c122b0d",
+    "timestamp": "2025-03-20T12:56:15.959Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "const"
+    },
+    "generationUUID": "ddd3ddb3-17aa-4789-82c8-31776c122b0d",
+    "timestamp": "2025-03-20T12:56:15.968Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " discount"
+    },
+    "generationUUID": "ddd3ddb3-17aa-4789-82c8-31776c122b0d",
+    "timestamp": "2025-03-20T12:56:15.981Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " = 0.2;\nconst"
+    },
+    "generationUUID": "ddd3ddb3-17aa-4789-82c8-31776c122b0d",
+    "timestamp": "2025-03-20T12:56:15.992Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " price"
+    },
+    "generationUUID": "ddd3ddb3-17aa-4789-82c8-31776c122b0d",
+    "timestamp": "2025-03-20T12:56:16.002Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Info = `Price: ${(price"
+    },
+    "generationUUID": "ddd3ddb3-17aa-4789-82c8-31776c122b0d",
+    "timestamp": "2025-03-20T12:56:16.014Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " * (1 - discount))}`;"
+    },
+    "generationUUID": "ddd3ddb3-17aa-4789-82c8-31776c122b0d",
+    "timestamp": "2025-03-20T12:56:16.024Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "ddd3ddb3-17aa-4789-82c8-31776c122b0d",
+    "timestamp": "2025-03-20T12:56:16.035Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "const"
+    },
+    "generationUUID": "ddd3ddb3-17aa-4789-82c8-31776c122b0d",
+    "timestamp": "2025-03-20T12:56:16.046Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " is"
+    },
+    "generationUUID": "ddd3ddb3-17aa-4789-82c8-31776c122b0d",
+    "timestamp": "2025-03-20T12:56:16.058Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Admin = true;"
+    },
+    "generationUUID": "ddd3ddb3-17aa-4789-82c8-31776c122b0d",
+    "timestamp": "2025-03-20T12:56:16.066Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "ddd3ddb3-17aa-4789-82c8-31776c122b0d",
+    "timestamp": "2025-03-20T12:56:16.086Z"
+  },
+  {
+    "fullText": "const currentUser: FullName = { firstName: \"John\", lastName: \"Doe\" };\nconst fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n\nconst price = 99.99;\nconst discount = 0.2;\nconst priceInfo = `Price: ${(price * (1 - discount))}`;\n\nconst isAdmin = true;",
+    "generationUUID": "ddd3ddb3-17aa-4789-82c8-31776c122b0d",
+    "timestamp": "2025-03-20T12:56:16.087Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "const currentUser: FullName = { firstName: \"John\", lastName: \"Doe\" };\nconst fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n\nconst price = 99.99;\nconst discount = 0.2;\nconst priceInfo = `Price: ${(price * (1 - discount))}`;\n\nconst isAdmin = true;"
+    },
+    "fullText": "const currentUser: FullName = { firstName: \"John\", lastName: \"Doe\" };\nconst fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n\nconst price = 99.99;\nconst discount = 0.2;\nconst priceInfo = `Price: ${(price * (1 - discount))}`;\n\nconst isAdmin = true;",
+    "generationUUID": "ddd3ddb3-17aa-4789-82c8-31776c122b0d",
+    "timestamp": "2025-03-20T12:56:16.087Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "generationUUID": "ddd3ddb3-17aa-4789-82c8-31776c122b0d",
+    "timestamp": "2025-03-20T12:56:16.088Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "ddd3ddb3-17aa-4789-82c8-31776c122b0d",
+    "timestamp": "2025-03-20T12:56:16.168Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "8e41d540-3941-4a5f-a46e-ab14c4a55565",
+    "generationUUID": "ddd3ddb3-17aa-4789-82c8-31776c122b0d",
+    "timestamp": "2025-03-20T12:56:16.178Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "const currentUser: FullName = { firstName: \"John\", lastName: \"Doe\" };\nconst fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n\nconst price = 99.99;\nconst discount = 0.2;\nconst priceInfo = `Price: ${(price * (1 - discount))}`;\n\nconst isAdmin = true;"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "8e41d540-3941-4a5f-a46e-ab14c4a55565",
+    "generationUUID": "ddd3ddb3-17aa-4789-82c8-31776c122b0d",
+    "timestamp": "2025-03-20T12:56:16.179Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "8e41d540-3941-4a5f-a46e-ab14c4a55565",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-20T12:56:16.180Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "7b082dc0-e10b-4cfb-a773-8afc763cebc6",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 4,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 4,
+      "monotonicallyIncreasingSuggestionId": 2,
+      "range": {
+        "startLineNumber": 23,
+        "startColumn": 1,
+        "endLineNumberInclusive": 30,
+        "endColumn": 22
+      },
+      "replaceText": "const currentUser: FullName = { firstName: \"John\", lastName: \"Doe\" };\nconst fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n\nconst price = 99.99;\nconst discount = 0.2;\nconst priceInfo = `Price: ${(price * (1 - discount))}`;\n\nconst isAdmin = true;",
+      "originalText": "const currentUser: FullName = { firstName: \"John\", lastName: \"Doe\" };\nconst fullName = `Full Name: ${getFullName(currentUser).}`;\n\nconst price = 99.99;\nconst discount = 0.2;\nconst priceInfo = `Price: ${(price * (1 - discount))}`;\n\nconst isAdmin = true;",
+      "startingSuggestionRange": {
+        "startLineNumber": 23,
+        "startColumn": 1,
+        "endLineNumberInclusive": 30,
+        "endColumn": 22
+      },
+      "diffText": "const currentUser: FullName = { firstName: \"John\", lastName: \"Doe\" };\nconst fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n\nconst price = 99.99;\nconst discount = 0.2;\nconst priceInfo = `Price: ${(price * (1 - discount))}`;\n\nconst isAdmin = true;",
+      "fullOriginalText": "const currentUser: FullName = { firstName: \"John\", lastName: \"Doe\" };\nconst fullName = `Full Name: ${getFullName(currentUser).}`;\n\nconst price = 99.99;\nconst discount = 0.2;\nconst priceInfo = `Price: ${(price * (1 - discount))}`;\n\nconst isAdmin = true;",
+      "suggestionTriggerTime": 1742475375493.5999,
+      "greens": [],
+      "source": "typing",
+      "requestId": "ddd3ddb3-17aa-4789-82c8-31776c122b0d",
+      "selection": {
+        "startLineNumber": 23,
+        "startColumn": 1,
+        "endLineNumberInclusive": 30,
+        "endColumn": 22
+      },
+      "fusedCursorPredictionId": "8e41d540-3941-4a5f-a46e-ab14c4a55565",
+      "undoRedoGroup": {
+        "id": 2,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;81"
+    },
+    "generationUUID": "ddd3ddb3-17aa-4789-82c8-31776c122b0d",
+    "timestamp": "2025-03-20T12:56:16.342Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "7b082dc0-e10b-4cfb-a773-8afc763cebc6",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 4,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 4,
+      "monotonicallyIncreasingSuggestionId": 2,
+      "range": {
+        "startLineNumber": 23,
+        "startColumn": 1,
+        "endLineNumberInclusive": 30,
+        "endColumn": 22
+      },
+      "replaceText": "const currentUser: FullName = { firstName: \"John\", lastName: \"Doe\" };\nconst fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n\nconst price = 99.99;\nconst discount = 0.2;\nconst priceInfo = `Price: ${(price * (1 - discount))}`;\n\nconst isAdmin = true;",
+      "originalText": "const currentUser: FullName = { firstName: \"John\", lastName: \"Doe\" };\nconst fullName = `Full Name: ${getFullName(currentUser).}`;\n\nconst price = 99.99;\nconst discount = 0.2;\nconst priceInfo = `Price: ${(price * (1 - discount))}`;\n\nconst isAdmin = true;",
+      "startingSuggestionRange": {
+        "startLineNumber": 23,
+        "startColumn": 1,
+        "endLineNumberInclusive": 30,
+        "endColumn": 22
+      },
+      "diffText": "const currentUser: FullName = { firstName: \"John\", lastName: \"Doe\" };\nconst fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n\nconst price = 99.99;\nconst discount = 0.2;\nconst priceInfo = `Price: ${(price * (1 - discount))}`;\n\nconst isAdmin = true;",
+      "fullOriginalText": "const currentUser: FullName = { firstName: \"John\", lastName: \"Doe\" };\nconst fullName = `Full Name: ${getFullName(currentUser).}`;\n\nconst price = 99.99;\nconst discount = 0.2;\nconst priceInfo = `Price: ${(price * (1 - discount))}`;\n\nconst isAdmin = true;",
+      "suggestionTriggerTime": 1742475375493.5999,
+      "greens": [],
+      "source": "typing",
+      "requestId": "ddd3ddb3-17aa-4789-82c8-31776c122b0d",
+      "selection": {
+        "startLineNumber": 23,
+        "startColumn": 1,
+        "endLineNumberInclusive": 30,
+        "endColumn": 22
+      },
+      "fusedCursorPredictionId": "8e41d540-3941-4a5f-a46e-ab14c4a55565",
+      "undoRedoGroup": {
+        "id": 2,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;81"
+    },
+    "generationUUID": "ddd3ddb3-17aa-4789-82c8-31776c122b0d",
+    "timestamp": "2025-03-20T12:56:16.355Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "8e41d540-3941-4a5f-a46e-ab14c4a55565",
+    "fusedCursorPrediction": null,
+    "oldText": "const currentUser: FullName = { firstName: \"John\", lastName: \"Doe\" };\nconst fullName = `Full Name: ${getFullName(currentUser).}`;\n\nconst price = 99.99;\nconst discount = 0.2;\nconst priceInfo = `Price: ${(price * (1 - discount))}`;\n\nconst isAdmin = true;",
+    "newText": "const currentUser: FullName = { firstName: \"John\", lastName: \"Doe\" };\nconst fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n\nconst price = 99.99;\nconst discount = 0.2;\nconst priceInfo = `Price: ${(price * (1 - discount))}`;\n\nconst isAdmin = true;",
+    "timestamp": "2025-03-20T12:56:16.356Z"
+  }
+]

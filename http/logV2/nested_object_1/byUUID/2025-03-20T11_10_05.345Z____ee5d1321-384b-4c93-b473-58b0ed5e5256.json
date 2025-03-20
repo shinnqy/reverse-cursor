@@ -1,0 +1,606 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:05.345Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/nestedObj.ets",
+          "diffHistory": [
+            "55+|type Shape =\n56+|    | { type: \"circle\"; radius: number }\n57+|    | { type: \"rectangle\"; width: number; height: number }\n58+|    | { type: \"triangle\"; side1: number; side2: number; side3: number };\n60+|function getArea(shape: Shape) {\n61+|    switch (shape.type) {\n62+|        case \"circle\":\n",
+            "56-|    | { type: \"circle\"; radius: number  }\n56+|    | { type: \"circle\"; radius: number; color: string }\n",
+            "57-|    | { type: \"rectangle\"; width: number; height: number }\n58-|    | { type: \"triangle\"; side1: number; side2: number; side3: number };\n57+|    | { type: \"rectangle\"; width: number; height: number; color: string }\n58+|    | { type: \"triangle\"; side1: number; side2: number; side3: number; color: string };\n",
+            "63-|\n63+|            return Math.PI * shape.radius * shape.radius;\n64+|        case \"rectangle\":\n65+|            return shape.width * shape.height;\n66+|        case \"triangle\":\n67+|            return shape.side1 * shape.side2 * shape.side3;\n68+|    }\n69+|}\n",
+            "55+|type Circle = { type: \"circle\"; radius: number; color: string };\n",
+            "58-|    | { type: \"rectangle\"; width: number; height: number; color: string }\n58+|    | { type: \"rectangle\"; width: number; height: number; color: string };\n59+|type Shape = Circle | Rectangle | Triangle;\n60+|\n61+|function getArea(shape: Shape) {\n",
+            "57-|    | { type: \"circle\"; radius: number; color: string }\n58-|    | { type: \"rectangle\"; width: number; height: number; color: string };\n57+|    | { type: \"circle\"; radius: number; color: string };\n58+|type Triangle = { type: \"triangle\"; side1: number; side2: number; side3: number; color: string };\n",
+            "56-|type Shape =\n57-|    | { type: \"circle\"; radius: number; color: string };\n56+|type Rectangle = { type: \"rectangle\"; width: number; height: number; color: string };\n",
+            "61-|    | { type: \"triangle\"; side1: number; side2: number; side3: number; color: string };\n62-|\n63-|function getArea(shape: Shape) {\n",
+            "55-|type Circle = { type: \"circle\"; radius: number; color: string };\n55+|inter Circle = { type: \"circle\"; radius: number; color: string };\n",
+            "56-|type Rectangle = { type: \"rectangle\"; width: number; height: number; color: string };\n57-|type Triangle = { type: \"triangle\"; side1: number; side2: number; side3: number; color: string };\n56+|type Rectangle { type: \"rectangle\"; width: number; height: number; color: string };\n57+|interface Triangle { type: \"triangle\"; side1: number; side2: number; side3: number; color: string };\n",
+            "55-|inter Circle = { type: \"circle\"; radius: number; color: string };\n56-|type Rectangle { type: \"rectangle\"; width: number; height: number; color: string };\n55+|inter Circle { type: \"circle\"; radius: number; color: string };\n56+|interface Rectangle { type: \"rectangle\"; width: number; height: number; color: string };\n",
+            "55-|inter Circle { type: \"circle\"; radius: number; color: string };\n55+|interface Circle { type: \"circle\"; radius: number; color: string };\n",
+            "60+|let shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n61+|\n64-|        case \"rectangle\":\n65-|            return shape.width * shape.height;\n66-|        case \"triangle\":\n67-|            return shape.side1 * shape.side2 * shape.side3;\n68-|    }\n69-|}\n",
+            "62-|function getArea(shape: Shape) {\n63-|    switch (shape.type) {\n64-|        case \"circle\":\n65-|            return Math.PI * shape.radius * shape.radius;\n",
+            "25+|user.address.city = \"New York\";\n26+|user.address.zip = \"10001\";\n27+|user.address.state = \"NY\";\n28+|user.address.country = \"USA\";\n29+|\n",
+            "60+|products[0].details.name = \"Product 1 Updated\";\n61+|products[1].details.name = \"Product 2 Updated\";\n62+|\n",
+            "62+|products[0].details.price = 150;\n63+|products[1].details.price = 250;\n",
+            "64+|products[0].details.category = \"Category 3\";\n65+|products[1].details.category = \"Category 4\";\n",
+            "74+|if (shape.type === \"circle\") {\n75+|    console.log(shape.radius);\n76+|} else if (shape.type === \"rectangle\") {\n77+|    console.log(shape.width, shape.height);\n78+|} else if (shape.type === \"triangle\") {\n79+|    console.log(shape.side1, shape.side2, shape.side3);\n80+|}\n81+|\n",
+            "75-|    console.log(shape.radius);\n75+|    console.log(shape.radius +);\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/nestedObj.ets",
+        "contents": "interface Address {\n    street: string;\n    city: string;\n    state: string;\n    zip: string;\n}\n\ninterface User {\n    name: string;\n    age: number;\n    address: Address;\n}\n\nlet user: User = {\n    name: \"John\",\n    age: 30,\n    address: {\n        street: \"123 Main St\",\n        city: \"Anytown\",\n        state: \"CA\",\n        zip: \"12345\",\n    },\n};\n\nuser.address.city = \"New York\";\nuser.address.zip = \"10001\";\nuser.address.state = \"NY\";\nuser.address.country = \"USA\";\n\ninterface ProductDetails {\n    name: string;\n    price: number;\n    category: string;\n}\n\ninterface Product {\n    id: number;\n    details: ProductDetails;\n}\n\nlet products: Product[] = [\n    {\n        id: 1,\n        details: {\n            name: \"Product 1\",\n            price: 100,\n            category: \"Category 1\",\n        },\n    },\n    {\n        id: 2,\n        details: {\n            name: \"Product 2\",\n            price: 200,\n            category: \"Category 2\",\n        },\n    },\n];\n\nproducts[0].details.name = \"Product 1 Updated\";\nproducts[1].details.name = \"Product 2 Updated\";\nproducts[0].details.price = 150;\nproducts[1].details.price = 250;\nproducts[0].details.category = \"Category 3\";\nproducts[1].details.category = \"Category 4\";\n\ninterface Circle { type: \"circle\"; radius: number; color: string };\ninterface Rectangle { type: \"rectangle\"; width: number; height: number; color: string };\ninterface Triangle { type: \"triangle\"; side1: number; side2: number; side3: number; color: string };\ntype Shape = Circle | Rectangle | Triangle;\n\nlet shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n\nif (shape.type === \"circle\") {\n    console.log(shape.radius +);\n} else if (shape.type === \"rectangle\") {\n    console.log(shape.width, shape.height);\n} else if (shape.type === \"triangle\") {\n    console.log(shape.side1, shape.side2, shape.side3);\n}\n\n",
+        "cursorPosition": {
+          "line": 74,
+          "column": 30
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 126,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742469005388,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 52.5,
+      "timeAtRequestSend": 1742469005388
+    },
+    "generateUuid": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:05.390Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "if (shape.type === \"circle\") {\n    console.log(shape.radius + \"",
+      "rangeToReplace": {
+        "startLineNumber": 74,
+        "endLineNumberInclusive": 80
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:05.755Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:05.756Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \""
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:05.784Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " +"
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:05.792Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " shape"
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:05.802Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ".color"
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:05.811Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ");"
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:05.820Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n}"
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:05.831Z"
+  },
+  {
+    "firstChunkValue": "if (shape.type === \"circle\") {\n    console.log(shape.radius + \" \" + shape.color);\n} else if (shape.type === \"rectangle\") {\n    console.log(shape.width, shape.height);\n} else if (shape.type === \"triangle\") {\n    console.log(shape.side1, shape.side2, shape.side3);\n}",
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:05.832Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "if (shape.type === \"circle\") {\n    console.log(shape.radius + \" \" + shape.color);\n} else if (shape.type === \"rectangle\") {\n    console.log(shape.width, shape.height);\n} else if (shape.type === \"triangle\") {\n    console.log(shape.side1, shape.side2, shape.side3);\n}"
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:05.834Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "da505c8d-7dfb-48cd-90ff-7556454b851a",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/nestedObj.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/nestedObj.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/nestedObj.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 126,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 126,
+      "monotonicallyIncreasingSuggestionId": 79,
+      "range": {
+        "startLineNumber": 74,
+        "startColumn": 1,
+        "endLineNumberInclusive": 80,
+        "endColumn": 2
+      },
+      "replaceText": "if (shape.type === \"circle\") {\n    console.log(shape.radius + \" \" + shape.color);\n} else if (shape.type === \"rectangle\") {\n    console.log(shape.width, shape.height);\n} else if (shape.type === \"triangle\") {\n    console.log(shape.side1, shape.side2, shape.side3);\n}",
+      "originalText": "if (shape.type === \"circle\") {\n    console.log(shape.radius +);\n} else if (shape.type === \"rectangle\") {\n    console.log(shape.width, shape.height);\n} else if (shape.type === \"triangle\") {\n    console.log(shape.side1, shape.side2, shape.side3);\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 74,
+        "startColumn": 1,
+        "endLineNumberInclusive": 80,
+        "endColumn": 2
+      },
+      "diffText": "if (shape.type === \"circle\") {\n    console.log(shape.radius + \" \" + shape.color);\n} else if (shape.type === \"rectangle\") {\n    console.log(shape.width, shape.height);\n} else if (shape.type === \"triangle\") {\n    console.log(shape.side1, shape.side2, shape.side3);\n}",
+      "fullOriginalText": "if (shape.type === \"circle\") {\n    console.log(shape.radius +);\n} else if (shape.type === \"rectangle\") {\n    console.log(shape.width, shape.height);\n} else if (shape.type === \"triangle\") {\n    console.log(shape.side1, shape.side2, shape.side3);\n}",
+      "suggestionTriggerTime": 1742469005338.3,
+      "greens": [],
+      "source": "typing",
+      "requestId": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+      "selection": {
+        "startLineNumber": 74,
+        "startColumn": 1,
+        "endLineNumberInclusive": 80,
+        "endColumn": 2
+      },
+      "undoRedoGroup": {
+        "id": 79,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 74,
+        "startColumn": 1,
+        "endLineNumber": 80,
+        "endColumn": 2
+      },
+      "trackedText": "if (shape.type === \"circle\") {\n    console.log(shape.radius + );\n} else if (shape.type === \"rectangle\") {\n    console.log(shape.width, shape.height);\n} else if (shape.type === \"triangle\") {\n    console.log(shape.side1, shape.side2, shape.side3);\n}"
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:05.835Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " else"
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:05.843Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " if (shape.type === \"rectangle"
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:05.852Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\") {\n    console.log("
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:05.859Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "shape.width"
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:05.869Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " +"
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:05.879Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \""
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:05.888Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \""
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:05.897Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " + shape."
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:05.907Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "height"
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:05.916Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " +"
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:05.926Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \" \" +"
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:05.933Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " shape"
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:05.940Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:05.950Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "color"
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:05.959Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ");\n"
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:05.968Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}"
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:05.978Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " else"
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:05.987Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " if (shape.type === \"triangle"
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:05.997Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\") {\n    console.log("
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:06.007Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "shape"
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:06.017Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ".side"
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:06.027Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "1"
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:06.037Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " +"
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:06.049Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \""
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:06.057Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \" +"
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:06.067Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " shape."
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:06.075Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "side"
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:06.085Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "2"
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:06.096Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " +"
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:06.105Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \""
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:06.113Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \""
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:06.124Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " +"
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:06.133Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " shape."
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:06.143Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "side3"
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:06.153Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " +"
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:06.162Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \""
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:06.172Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \" + shape"
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:06.183Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ".color);"
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:06.193Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:06.204Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}"
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:06.215Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:06.245Z"
+  },
+  {
+    "fullText": "if (shape.type === \"circle\") {\n    console.log(shape.radius + \" \" + shape.color);\n} else if (shape.type === \"rectangle\") {\n    console.log(shape.width + \" \" + shape.height + \" \" + shape.color);\n} else if (shape.type === \"triangle\") {\n    console.log(shape.side1 + \" \" + shape.side2 + \" \" + shape.side3 + \" \" + shape.color);\n}",
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:06.248Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "if (shape.type === \"circle\") {\n    console.log(shape.radius + \" \" + shape.color);\n} else if (shape.type === \"rectangle\") {\n    console.log(shape.width, shape.height);\n} else if (shape.type === \"triangle\") {\n    console.log(shape.side1, shape.side2, shape.side3);\n}"
+    },
+    "fullText": "if (shape.type === \"circle\") {\n    console.log(shape.radius + \" \" + shape.color);\n} else if (shape.type === \"rectangle\") {\n    console.log(shape.width + \" \" + shape.height + \" \" + shape.color);\n} else if (shape.type === \"triangle\") {\n    console.log(shape.side1 + \" \" + shape.side2 + \" \" + shape.side3 + \" \" + shape.color);\n}",
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:06.249Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "fa5756bc-a006-4141-a406-e2381683da48",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/nestedObj.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/nestedObj.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/nestedObj.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 126,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 128,
+      "monotonicallyIncreasingSuggestionId": 82,
+      "range": {
+        "startLineNumber": 74,
+        "startColumn": 1,
+        "endLineNumberInclusive": 80,
+        "endColumn": 2
+      },
+      "replaceText": "if (shape.type === \"circle\") {\n    console.log(shape.radius + \" \" + shape.color);\n} else if (shape.type === \"rectangle\") {\n    console.log(shape.width + \" \" + shape.height + \" \" + shape.color);\n} else if (shape.type === \"triangle\") {\n    console.log(shape.side1 + \" \" + shape.side2 + \" \" + shape.side3 + \" \" + shape.color);\n}",
+      "originalText": "if (shape.type === \"circle\") {\n    console.log(shape.radius + \" \" + shape.color);\n} else if (shape.type === \"rectangle\") {\n    console.log(shape.width, shape.height);\n} else if (shape.type === \"triangle\") {\n    console.log(shape.side1, shape.side2, shape.side3);\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 74,
+        "startColumn": 1,
+        "endLineNumberInclusive": 80,
+        "endColumn": 2
+      },
+      "diffText": "if (shape.type === \"circle\") {\n    console.log(shape.radius + \" \" + shape.color);\n} else if (shape.type === \"rectangle\") {\n    console.log(shape.width + \" \" + shape.height + \" \" + shape.color);\n} else if (shape.type === \"triangle\") {\n    console.log(shape.side1 + \" \" + shape.side2 + \" \" + shape.side3 + \" \" + shape.color);\n}",
+      "fullOriginalText": "if (shape.type === \"circle\") {\n    console.log(shape.radius + \" \" + shape.color);\n} else if (shape.type === \"rectangle\") {\n    console.log(shape.width, shape.height);\n} else if (shape.type === \"triangle\") {\n    console.log(shape.side1, shape.side2, shape.side3);\n}",
+      "suggestionTriggerTime": 1742469005338.3,
+      "greens": [],
+      "source": "typing",
+      "requestId": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+      "selection": {
+        "startLineNumber": 74,
+        "startColumn": 1,
+        "endLineNumberInclusive": 80,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "9d4e57e2-329b-4694-aa3c-4f9c5113534b",
+      "undoRedoGroup": {
+        "id": 82,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:06.250Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:06.269Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "9d4e57e2-329b-4694-aa3c-4f9c5113534b",
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:06.276Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "if (shape.type === \"circle\") {\n    console.log(shape.radius + \" \" + shape.color);\n} else if (shape.type === \"rectangle\") {\n    console.log(shape.width, shape.height);\n} else if (shape.type === \"triangle\") {\n    console.log(shape.side1, shape.side2, shape.side3);\n}"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "9d4e57e2-329b-4694-aa3c-4f9c5113534b",
+    "generationUUID": "ee5d1321-384b-4c93-b473-58b0ed5e5256",
+    "timestamp": "2025-03-20T11:10:06.277Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "9d4e57e2-329b-4694-aa3c-4f9c5113534b",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-20T11:10:06.277Z"
+  }
+]

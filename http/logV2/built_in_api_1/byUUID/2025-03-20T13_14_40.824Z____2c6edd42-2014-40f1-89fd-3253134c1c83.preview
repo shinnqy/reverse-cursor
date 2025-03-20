@@ -1,0 +1,32 @@
+{"line":1,"column":0}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+import router from "@ohos.router";
+[ToFill]
+@Entry
+@Component
+struct Main {
+  @State message: string = "Hello World";
+
+  build() {
+    Row() {
+      Text(this.message)
+        .fontSize(20)
+        .fontWeight(FontWeight.Bold)
+        .onClick(() => {
+          router.push({
+            url: "pages/SecondPage",
+        
+-------------------------------[               firstChunkValue               ]--------------------------------
+import router from "@ohos.router";
+
+@Entry
+@Component
+struct Main {
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/builtInAPI.ets",
+  "lineNumberOneIndexed": 2,
+  "text": "",
+  "shouldRetriggerCpp": true
+}

@@ -1,0 +1,421 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "2ec81b5e-ffdc-4b15-a14b-fd827e16fd74",
+    "timestamp": "2025-03-20T11:08:33.931Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/nestedObj.ets",
+          "diffHistory": [
+            "55+|type Shape =\n56+|    | { type: \"circle\"; radius: number }\n57+|    | { type: \"rectangle\"; width: number; height: number }\n58+|    | { type: \"triangle\"; side1: number; side2: number; side3: number };\n60+|function getArea(shape: Shape) {\n61+|    switch (shape.type) {\n62+|        case \"circle\":\n",
+            "56-|    | { type: \"circle\"; radius: number  }\n56+|    | { type: \"circle\"; radius: number; color: string }\n",
+            "57-|    | { type: \"rectangle\"; width: number; height: number }\n58-|    | { type: \"triangle\"; side1: number; side2: number; side3: number };\n57+|    | { type: \"rectangle\"; width: number; height: number; color: string }\n58+|    | { type: \"triangle\"; side1: number; side2: number; side3: number; color: string };\n",
+            "63-|\n63+|            return Math.PI * shape.radius * shape.radius;\n64+|        case \"rectangle\":\n65+|            return shape.width * shape.height;\n66+|        case \"triangle\":\n67+|            return shape.side1 * shape.side2 * shape.side3;\n68+|    }\n69+|}\n",
+            "55+|type Circle = { type: \"circle\"; radius: number; color: string };\n",
+            "58-|    | { type: \"rectangle\"; width: number; height: number; color: string }\n58+|    | { type: \"rectangle\"; width: number; height: number; color: string };\n59+|type Shape = Circle | Rectangle | Triangle;\n60+|\n61+|function getArea(shape: Shape) {\n",
+            "57-|    | { type: \"circle\"; radius: number; color: string }\n58-|    | { type: \"rectangle\"; width: number; height: number; color: string };\n57+|    | { type: \"circle\"; radius: number; color: string };\n58+|type Triangle = { type: \"triangle\"; side1: number; side2: number; side3: number; color: string };\n",
+            "56-|type Shape =\n57-|    | { type: \"circle\"; radius: number; color: string };\n56+|type Rectangle = { type: \"rectangle\"; width: number; height: number; color: string };\n",
+            "61-|    | { type: \"triangle\"; side1: number; side2: number; side3: number; color: string };\n62-|\n63-|function getArea(shape: Shape) {\n",
+            "55-|type Circle = { type: \"circle\"; radius: number; color: string };\n55+|inter Circle = { type: \"circle\"; radius: number; color: string };\n",
+            "56-|type Rectangle = { type: \"rectangle\"; width: number; height: number; color: string };\n57-|type Triangle = { type: \"triangle\"; side1: number; side2: number; side3: number; color: string };\n56+|type Rectangle { type: \"rectangle\"; width: number; height: number; color: string };\n57+|interface Triangle { type: \"triangle\"; side1: number; side2: number; side3: number; color: string };\n",
+            "55-|inter Circle = { type: \"circle\"; radius: number; color: string };\n56-|type Rectangle { type: \"rectangle\"; width: number; height: number; color: string };\n55+|inter Circle { type: \"circle\"; radius: number; color: string };\n56+|interface Rectangle { type: \"rectangle\"; width: number; height: number; color: string };\n",
+            "55-|inter Circle { type: \"circle\"; radius: number; color: string };\n55+|interface Circle { type: \"circle\"; radius: number; color: string };\n",
+            "60+|let shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n61+|\n64-|        case \"rectangle\":\n65-|            return shape.width * shape.height;\n66-|        case \"triangle\":\n67-|            return shape.side1 * shape.side2 * shape.side3;\n68-|    }\n69-|}\n",
+            "62-|function getArea(shape: Shape) {\n63-|    switch (shape.type) {\n64-|        case \"circle\":\n65-|            return Math.PI * shape.radius * shape.radius;\n",
+            "25+|user.address.city = \"New York\";\n26+|user.address.zip = \"10001\";\n27+|user.address.state = \"NY\";\n28+|u\n29+|\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/nestedObj.ets",
+        "contents": "interface Address {\n    street: string;\n    city: string;\n    state: string;\n    zip: string;\n}\n\ninterface User {\n    name: string;\n    age: number;\n    address: Address;\n}\n\nlet user: User = {\n    name: \"John\",\n    age: 30,\n    address: {\n        street: \"123 Main St\",\n        city: \"Anytown\",\n        state: \"CA\",\n        zip: \"12345\",\n    },\n};\n\nuser.address.city = \"New York\";\nuser.address.zip = \"10001\";\nuser.address.state = \"NY\";\nu\n\ninterface ProductDetails {\n    name: string;\n    price: number;\n    category: string;\n}\n\ninterface Product {\n    id: number;\n    details: ProductDetails;\n}\n\nlet products: Product[] = [\n    {\n        id: 1,\n        details: {\n            name: \"Product 1\",\n            price: 100,\n            category: \"Category 1\",\n        },\n    },\n    {\n        id: 2,\n        details: {\n            name: \"Product 2\",\n            price: 200,\n            category: \"Category 2\",\n        },\n    },\n];\n\ninterface Circle { type: \"circle\"; radius: number; color: string };\ninterface Rectangle { type: \"rectangle\"; width: number; height: number; color: string };\ninterface Triangle { type: \"triangle\"; side1: number; side2: number; side3: number; color: string };\ntype Shape = Circle | Rectangle | Triangle;\n\nlet shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n\n",
+        "cursorPosition": {
+          "line": 27,
+          "column": 1
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 99,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742468913975,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.900146484375,
+      "timeAtRequestSend": 1742468913975
+    },
+    "generateUuid": "2ec81b5e-ffdc-4b15-a14b-fd827e16fd74",
+    "timestamp": "2025-03-20T11:08:33.977Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "user.address.zip = \"10001\";\nuser.address.state = \"NY\";\nuser",
+      "rangeToReplace": {
+        "startLineNumber": 26,
+        "endLineNumberInclusive": 29
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "2ec81b5e-ffdc-4b15-a14b-fd827e16fd74",
+    "timestamp": "2025-03-20T11:08:34.325Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "2ec81b5e-ffdc-4b15-a14b-fd827e16fd74",
+    "timestamp": "2025-03-20T11:08:34.328Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ".address.country"
+    },
+    "generationUUID": "2ec81b5e-ffdc-4b15-a14b-fd827e16fd74",
+    "timestamp": "2025-03-20T11:08:34.362Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "2ec81b5e-ffdc-4b15-a14b-fd827e16fd74",
+    "timestamp": "2025-03-20T11:08:34.371Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \"USA"
+    },
+    "generationUUID": "2ec81b5e-ffdc-4b15-a14b-fd827e16fd74",
+    "timestamp": "2025-03-20T11:08:34.382Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\";"
+    },
+    "generationUUID": "2ec81b5e-ffdc-4b15-a14b-fd827e16fd74",
+    "timestamp": "2025-03-20T11:08:34.392Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "2ec81b5e-ffdc-4b15-a14b-fd827e16fd74",
+    "timestamp": "2025-03-20T11:08:34.404Z"
+  },
+  {
+    "firstChunkValue": "user.address.zip = \"10001\";\nuser.address.state = \"NY\";\nuser.address.country = \"USA\";\n",
+    "generationUUID": "2ec81b5e-ffdc-4b15-a14b-fd827e16fd74",
+    "timestamp": "2025-03-20T11:08:34.406Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "user.address.zip = \"10001\";\nuser.address.state = \"NY\";\nuser.address.country = \"USA\";\n"
+    },
+    "generationUUID": "2ec81b5e-ffdc-4b15-a14b-fd827e16fd74",
+    "timestamp": "2025-03-20T11:08:34.409Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "102da0cf-15dc-4f5d-84e3-6d28a3e39252",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/nestedObj.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/nestedObj.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/nestedObj.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 99,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 99,
+      "monotonicallyIncreasingSuggestionId": 58,
+      "range": {
+        "startLineNumber": 26,
+        "startColumn": 1,
+        "endLineNumberInclusive": 29,
+        "endColumn": 1
+      },
+      "replaceText": "user.address.zip = \"10001\";\nuser.address.state = \"NY\";\nuser.address.country = \"USA\";\n",
+      "originalText": "user.address.zip = \"10001\";\nuser.address.state = \"NY\";\nu\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 26,
+        "startColumn": 1,
+        "endLineNumberInclusive": 29,
+        "endColumn": 1
+      },
+      "diffText": "user.address.zip = \"10001\";\nuser.address.state = \"NY\";\nuser.address.country = \"USA\";\n",
+      "fullOriginalText": "user.address.zip = \"10001\";\nuser.address.state = \"NY\";\nu\n",
+      "suggestionTriggerTime": 1742468913926,
+      "greens": [],
+      "source": "typing",
+      "requestId": "2ec81b5e-ffdc-4b15-a14b-fd827e16fd74",
+      "selection": {
+        "startLineNumber": 26,
+        "startColumn": 1,
+        "endLineNumberInclusive": 29,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 58,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "2ec81b5e-ffdc-4b15-a14b-fd827e16fd74",
+    "timestamp": "2025-03-20T11:08:34.410Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "2ec81b5e-ffdc-4b15-a14b-fd827e16fd74",
+    "timestamp": "2025-03-20T11:08:34.424Z"
+  },
+  {
+    "fullText": "user.address.zip = \"10001\";\nuser.address.state = \"NY\";\nuser.address.country = \"USA\";\n",
+    "generationUUID": "2ec81b5e-ffdc-4b15-a14b-fd827e16fd74",
+    "timestamp": "2025-03-20T11:08:34.431Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "user.address.zip = \"10001\";\nuser.address.state = \"NY\";\nuser.address.country = \"USA\";\n"
+    },
+    "fullText": "user.address.zip = \"10001\";\nuser.address.state = \"NY\";\nuser.address.country = \"USA\";\n",
+    "generationUUID": "2ec81b5e-ffdc-4b15-a14b-fd827e16fd74",
+    "timestamp": "2025-03-20T11:08:34.432Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "generationUUID": "2ec81b5e-ffdc-4b15-a14b-fd827e16fd74",
+    "timestamp": "2025-03-20T11:08:34.432Z"
+  },
+  {
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/nestedObj.ets",
+      "lineNumberOneIndexed": 5,
+      "text": "zip: string;\n}\n\ninterface User {\nname: string;",
+      "shouldRetriggerCpp": true
+    },
+    "predictionId": "a58b9ea4-9aa1-4fbe-9815-94289d75bcca",
+    "generationUUID": "2ec81b5e-ffdc-4b15-a14b-fd827e16fd74",
+    "timestamp": "2025-03-20T11:08:34.534Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "cursorPredictionTarget": {
+        "relativePath": "entry/src/main/ets/utils/nestedObj.ets",
+        "lineNumberOneIndexed": 5,
+        "expectedContent": "zip: string;\n}\n\ninterface User {\nname: string;",
+        "shouldRetriggerCpp": true
+      }
+    },
+    "generationUUID": "2ec81b5e-ffdc-4b15-a14b-fd827e16fd74",
+    "timestamp": "2025-03-20T11:08:34.536Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "user.address.zip = \"10001\";\nuser.address.state = \"NY\";\nuser.address.country = \"USA\";\n"
+    },
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/nestedObj.ets",
+      "lineNumberOneIndexed": 5,
+      "text": "zip: string;\n}\n\ninterface User {\nname: string;",
+      "shouldRetriggerCpp": true
+    },
+    "predictionId": "a58b9ea4-9aa1-4fbe-9815-94289d75bcca",
+    "generationUUID": "2ec81b5e-ffdc-4b15-a14b-fd827e16fd74",
+    "timestamp": "2025-03-20T11:08:34.536Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "a58b9ea4-9aa1-4fbe-9815-94289d75bcca",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/nestedObj.ets",
+      "lineNumberOneIndexed": 5,
+      "text": "zip: string;\n}\n\ninterface User {\nname: string;",
+      "shouldRetriggerCpp": true
+    },
+    "timestamp": "2025-03-20T11:08:34.537Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "2ec81b5e-ffdc-4b15-a14b-fd827e16fd74",
+    "timestamp": "2025-03-20T11:08:34.537Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "102da0cf-15dc-4f5d-84e3-6d28a3e39252",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/nestedObj.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/nestedObj.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/nestedObj.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 99,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 99,
+      "monotonicallyIncreasingSuggestionId": 58,
+      "range": {
+        "startLineNumber": 26,
+        "startColumn": 1,
+        "endLineNumberInclusive": 29,
+        "endColumn": 1
+      },
+      "replaceText": "user.address.zip = \"10001\";\nuser.address.state = \"NY\";\nuser.address.country = \"USA\";\n",
+      "originalText": "user.address.zip = \"10001\";\nuser.address.state = \"NY\";\nu\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 26,
+        "startColumn": 1,
+        "endLineNumberInclusive": 29,
+        "endColumn": 1
+      },
+      "diffText": "user.address.zip = \"10001\";\nuser.address.state = \"NY\";\nuser.address.country = \"USA\";\n",
+      "fullOriginalText": "user.address.zip = \"10001\";\nuser.address.state = \"NY\";\nu\n",
+      "suggestionTriggerTime": 1742468913926,
+      "greens": [],
+      "source": "typing",
+      "requestId": "2ec81b5e-ffdc-4b15-a14b-fd827e16fd74",
+      "selection": {
+        "startLineNumber": 26,
+        "startColumn": 1,
+        "endLineNumberInclusive": 29,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "a58b9ea4-9aa1-4fbe-9815-94289d75bcca",
+      "undoRedoGroup": {
+        "id": 58,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;461"
+    },
+    "generationUUID": "2ec81b5e-ffdc-4b15-a14b-fd827e16fd74",
+    "timestamp": "2025-03-20T11:08:34.764Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "102da0cf-15dc-4f5d-84e3-6d28a3e39252",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/nestedObj.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/nestedObj.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/nestedObj.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 99,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 99,
+      "monotonicallyIncreasingSuggestionId": 58,
+      "range": {
+        "startLineNumber": 26,
+        "startColumn": 1,
+        "endLineNumberInclusive": 29,
+        "endColumn": 1
+      },
+      "replaceText": "user.address.zip = \"10001\";\nuser.address.state = \"NY\";\nuser.address.country = \"USA\";\n",
+      "originalText": "user.address.zip = \"10001\";\nuser.address.state = \"NY\";\nu\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 26,
+        "startColumn": 1,
+        "endLineNumberInclusive": 29,
+        "endColumn": 1
+      },
+      "diffText": "user.address.zip = \"10001\";\nuser.address.state = \"NY\";\nuser.address.country = \"USA\";\n",
+      "fullOriginalText": "user.address.zip = \"10001\";\nuser.address.state = \"NY\";\nu\n",
+      "suggestionTriggerTime": 1742468913926,
+      "greens": [],
+      "source": "typing",
+      "requestId": "2ec81b5e-ffdc-4b15-a14b-fd827e16fd74",
+      "selection": {
+        "startLineNumber": 26,
+        "startColumn": 1,
+        "endLineNumberInclusive": 29,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "a58b9ea4-9aa1-4fbe-9815-94289d75bcca",
+      "undoRedoGroup": {
+        "id": 58,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;461"
+    },
+    "generationUUID": "2ec81b5e-ffdc-4b15-a14b-fd827e16fd74",
+    "timestamp": "2025-03-20T11:08:34.778Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "a58b9ea4-9aa1-4fbe-9815-94289d75bcca",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/nestedObj.ets",
+      "lineNumberOneIndexed": 5,
+      "text": "zip: string;\n}\n\ninterface User {\nname: string;",
+      "shouldRetriggerCpp": true
+    },
+    "oldText": "user.address.zip = \"10001\";\nuser.address.state = \"NY\";\nu\n",
+    "newText": "user.address.zip = \"10001\";\nuser.address.state = \"NY\";\nuser.address.country = \"USA\";\n",
+    "timestamp": "2025-03-20T11:08:34.779Z"
+  },
+  {
+    "action": "displayFusedCursorPrediction",
+    "predictionId": "a58b9ea4-9aa1-4fbe-9815-94289d75bcca",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/nestedObj.ets",
+      "lineNumberOneIndexed": 5,
+      "text": "zip: string;\n}\n\ninterface User {\nname: string;",
+      "shouldRetriggerCpp": true
+    },
+    "oldText": "user.address.zip = \"10001\";\nuser.address.state = \"NY\";\nu\n",
+    "newText": "user.address.zip = \"10001\";\nuser.address.state = \"NY\";\nuser.address.country = \"USA\";\n",
+    "timestamp": "2025-03-20T11:08:34.779Z"
+  }
+]

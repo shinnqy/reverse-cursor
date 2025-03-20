@@ -1,0 +1,109 @@
+{"line":39,"column":9}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+interface Address {
+  city: string;
+  country: string;
+}
+interface User {
+  name: string;
+  age: number;
+  address: Address;
+}
+const user: User = {
+  name: "Alice",
+  age: 30,
+  address: {
+    city: "New York",
+    country: "USA",
+  },
+};
+
+const greeting = `Hello, ${user.name}!`;
+
+interface FullName {
+  firstName: string;
+  lastName: string;
+}
+function getFullName(user: FullName) {
+  return `${user.firstName} ${user.lastName}`;
+}
+
+const currentUser: FullName = {
+  firstName: "John",
+  lastName: "Doe",
+};
+
+const fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;
+
+const price = 100;
+const discount = 0.1;
+const priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;
+
+const isA[ToFill]
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+const price = 100;
+const discount = 0.1;
+const priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;
+
+const isAdmin = true;
+
+
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+interface Address {
+  city: string;
+  country: string;
+}
+interface User {
+  name: string;
+  age: number;
+  address: Address;
+}
+const user: User = {
+  name: "Alice",
+  age: 30,
+  address: {
+    city: "New York",
+    country: "USA",
+  },
+};
+
+const greeting = `Hello, ${user.name}!`;
+
+interface FullName {
+  firstName: string;
+  lastName: string;
+}
+function getFullName(user: FullName) {
+  return `${user.firstName} ${user.lastName}`;
+}
+
+const currentUser: FullName = {
+  firstName: "John",
+  lastName: "Doe",
+};
+
+const fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;
+
+const price = 100;
+const discount = 0.1;
+const priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;
+
+const isAdmin = true;
+
+
+-------------------------------[                   fullText                  ]--------------------------------
+const price = 100;
+const discount = 0.1;
+const priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;
+
+const isAdmin = true;
+const userInfo = `User is ${isAdmin ? "admin" : "user"}`;
+
+const userList = [
+  { name: "Alice", age: 30 },
+  { name: "Bob", age: 25 },
+];
+

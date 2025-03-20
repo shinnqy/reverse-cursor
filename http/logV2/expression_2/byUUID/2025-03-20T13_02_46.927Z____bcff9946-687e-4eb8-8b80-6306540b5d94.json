@@ -1,0 +1,497 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:46.927Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/dynamicProp.ets",
+          "diffHistory": [
+            "1+|const user = {}\n",
+            "2-|  \n3-|}\n2+|  name: \"Alice\",\n3+|  age: 30,\n4+|  address: {\n5+|},\n6+|};\n7+|\n8+|\n",
+            "5-|},\n5+|    city: \"New York\",\n6+|    country: \"USA\",\n7+|  },\n10+|const greeting = `Hello, ${user.name}!`;\n",
+            "1-|\n1+|interface User {\n2+|  name: string;\n3+|  age: number;\n4+|  address: {\n5+|    city: string;\n6+|    country: string;\n7+|  };\n8+|}\n",
+            "1-|\n1+|interface Address {\n",
+            "5-|  address: {\n5+|  address: Address;\n",
+            "2+|  city: string;\n3+|  country: string;\n4+|}\n",
+            "9-|    city: string;\n10-|    country: string;\n11-|  };\n13-|const user = {\n10+|const user: User = {\n",
+            "21+|function getFullName(user: { firstName: string; lastName: string }) {\n22+|  return `${user.firstName} ${user.lastName}`;\n23+|}\n25+|const fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n26+|\n27+|\n28+|\n",
+            "25-|const fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n",
+            "25+|const currentUser = {\n26+|  firstName: \"John\",\n27+|  lastName: \"Doe\",\n28+|};\n30+|const fullName = getFullName(currentUser);\n",
+            "30-|const fullName = getFullName(currentUser);\n30+|const fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n",
+            "21-|function getFullName(user: { firstName: string; lastName: string }) {\n21+|interface FullName {\n22+|function getFullName(user: { firstName: string; lastName: string }\n23+|function getFullName(user: FullName) {\n",
+            "22-|function getFullName(user: { firstName: string; lastName: string }\n22+|function getFullName(user: { firstName: string; lastName: string ;\n23+|}\n",
+            "22-|function getFullName(user: { firstName: string;\n22+|  firstName: string;\n",
+            "29-|const currentUser = {\n29+|const currentUser: FullName = {\n",
+            "36+|const price = 100;\n37+|const discount = 0.1;\n38+|const priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n40+|const isAdmin = true;\n41+|const roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n43+|const products = [\n44+|  { name: \"Product 1\", price: 100 },\n45+|  { name: \"Product 2\", price: 200 },\n46+|  { name: \"Product 3\", price: 300 },\n47+|];\n49+|const productInfo = `Current product: ${products[0].name}`;\n50+|\n51+|type S\n52+|\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/dynamicProp.ets",
+        "contents": "interface Address {\n  city: string;\n  country: string;\n}\ninterface User {\n  name: string;\n  age: number;\n  address: Address;\n}\nconst user: User = {\n  name: \"Alice\",\n  age: 30,\n  address: {\n    city: \"New York\",\n    country: \"USA\",\n  },\n};\n\nconst greeting = `Hello, ${user.name}!`;\n\ninterface FullName {\n  firstName: string;\n  lastName: string;\n}\nfunction getFullName(user: FullName) {\n  return `${user.firstName} ${user.lastName}`;\n}\n\nconst currentUser: FullName = {\n  firstName: \"John\",\n  lastName: \"Doe\",\n};\n\nconst fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n\nconst price = 100;\nconst discount = 0.1;\nconst priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];\n\nconst productInfo = `Current product: ${products[0].name}`;\n\ntype S\n\n",
+        "cursorPosition": {
+          "line": 50,
+          "column": 6
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 392,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742475766971,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 56,
+      "timeAtRequestSend": 1742475766971
+    },
+    "generateUuid": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:46.973Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nconst productInfo =",
+      "rangeToReplace": {
+        "startLineNumber": 48,
+        "endLineNumberInclusive": 53
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:47.332Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " `Current product: ${products[0].name}`;\n\ntype Status"
+    },
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:47.342Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:47.345Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:47.368Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \""
+    },
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:47.373Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "pending"
+    },
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:47.382Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\""
+    },
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:47.391Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " |"
+    },
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:47.400Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \""
+    },
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:47.409Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "completed"
+    },
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:47.419Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\""
+    },
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:47.430Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " | \"canc"
+    },
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:47.437Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "elled"
+    },
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:47.450Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\";"
+    },
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:47.457Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:47.466Z"
+  },
+  {
+    "firstChunkValue": "\nconst productInfo = `Current product: ${products[0].name}`;\n\ntype Status = \"pending\" | \"completed\" | \"cancelled\";\n\n",
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:47.468Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nconst productInfo = `Current product: ${products[0].name}`;\n\ntype Status = \"pending\" | \"completed\" | \"cancelled\";\n\n"
+    },
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:47.469Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "c669c5f5-3d55-448d-a21d-fec7293e8117",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 392,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 392,
+      "monotonicallyIncreasingSuggestionId": 238,
+      "range": {
+        "startLineNumber": 48,
+        "startColumn": 1,
+        "endLineNumberInclusive": 53,
+        "endColumn": 1
+      },
+      "replaceText": "\nconst productInfo = `Current product: ${products[0].name}`;\n\ntype Status = \"pending\" | \"completed\" | \"cancelled\";\n\n",
+      "originalText": "\nconst productInfo = `Current product: ${products[0].name}`;\n\ntype S\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 48,
+        "startColumn": 1,
+        "endLineNumberInclusive": 53,
+        "endColumn": 1
+      },
+      "diffText": "\nconst productInfo = `Current product: ${products[0].name}`;\n\ntype Status = \"pending\" | \"completed\" | \"cancelled\";\n\n",
+      "fullOriginalText": "\nconst productInfo = `Current product: ${products[0].name}`;\n\ntype S\n\n",
+      "suggestionTriggerTime": 1742475766916.8,
+      "greens": [],
+      "source": "typing",
+      "requestId": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+      "selection": {
+        "startLineNumber": 48,
+        "startColumn": 1,
+        "endLineNumberInclusive": 53,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 238,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 48,
+        "startColumn": 1,
+        "endLineNumber": 53,
+        "endColumn": 1
+      },
+      "trackedText": "\nconst productInfo = `Current product: ${products[0].name}`;\n\ntype Stat\n\n"
+    },
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:47.470Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:47.478Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "const"
+    },
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:47.489Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " order"
+    },
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:47.502Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Status"
+    },
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:47.507Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:47.518Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Status = \"pending\";"
+    },
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:47.531Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\nconst status"
+    },
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:47.540Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Message"
+    },
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:47.552Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " status"
+    },
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:47.570Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " = `Order"
+    },
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:47.570Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:47.581Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ${"
+    },
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:47.590Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "order"
+    },
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:47.600Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Status"
+    },
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:47.613Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}`"
+    },
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:47.621Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";\n\n"
+    },
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:47.633Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:47.642Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:47.654Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:47.665Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:47.666Z"
+  },
+  {
+    "fullText": "\nconst productInfo = `Current product: ${products[0].name}`;\n\ntype Status = \"pending\" | \"completed\" | \"cancelled\";\n\nconst orderStatus: Status = \"pending\";\n\nconst statusMessage = `Order status: ${orderStatus}`;\n\n\n\n",
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:47.667Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nconst productInfo = `Current product: ${products[0].name}`;\n\ntype Status = \"pending\" | \"completed\" | \"cancelled\";\n\n"
+    },
+    "fullText": "\nconst productInfo = `Current product: ${products[0].name}`;\n\ntype Status = \"pending\" | \"completed\" | \"cancelled\";\n\nconst orderStatus: Status = \"pending\";\n\nconst statusMessage = `Order status: ${orderStatus}`;\n\n\n\n",
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:47.667Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "34af6a44-1555-49e4-8c16-1e01b6ea3f15",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 392,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 396,
+      "monotonicallyIncreasingSuggestionId": 239,
+      "range": {
+        "startLineNumber": 48,
+        "startColumn": 1,
+        "endLineNumberInclusive": 53,
+        "endColumn": 1
+      },
+      "replaceText": "\nconst productInfo = `Current product: ${products[0].name}`;\n\ntype Status = \"pending\" | \"completed\" | \"cancelled\";\n\nconst orderStatus: Status = \"pending\";\n\nconst statusMessage = `Order status: ${orderStatus}`;\n\n\n\n",
+      "originalText": "\nconst productInfo = `Current product: ${products[0].name}`;\n\ntype Status = \"pending\" | \"completed\" | \"cancelled\";\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 48,
+        "startColumn": 1,
+        "endLineNumberInclusive": 53,
+        "endColumn": 1
+      },
+      "diffText": "\nconst productInfo = `Current product: ${products[0].name}`;\n\ntype Status = \"pending\" | \"completed\" | \"cancelled\";\n\nconst orderStatus: Status = \"pending\";\n\nconst statusMessage = `Order status: ${orderStatus}`;\n\n\n\n",
+      "fullOriginalText": "\nconst productInfo = `Current product: ${products[0].name}`;\n\ntype Status = \"pending\" | \"completed\" | \"cancelled\";\n\n",
+      "suggestionTriggerTime": 1742475766916.8,
+      "greens": [],
+      "source": "typing",
+      "requestId": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+      "selection": {
+        "startLineNumber": 48,
+        "startColumn": 1,
+        "endLineNumberInclusive": 53,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "58717c35-3f33-4041-aa34-d860bb143db1",
+      "undoRedoGroup": {
+        "id": 239,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:47.667Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "58717c35-3f33-4041-aa34-d860bb143db1",
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:47.679Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nconst productInfo = `Current product: ${products[0].name}`;\n\ntype Status = \"pending\" | \"completed\" | \"cancelled\";\n\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "58717c35-3f33-4041-aa34-d860bb143db1",
+    "generationUUID": "bcff9946-687e-4eb8-8b80-6306540b5d94",
+    "timestamp": "2025-03-20T13:02:47.679Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "58717c35-3f33-4041-aa34-d860bb143db1",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-20T13:02:47.679Z"
+  }
+]

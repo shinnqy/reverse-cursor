@@ -1,0 +1,361 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "10bc64bc-554a-43a1-a438-3924192347a6",
+    "timestamp": "2025-03-20T12:56:20.737Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/dynamicProp.ets",
+          "diffHistory": [
+            "14-|const greeting = `Hello, ${user}!`;\n14+|const greeting = `Hello, ${user.name}!`;\n",
+            "24-|const fullName = `Full Name: ${getFullName(currentUser)}`;\n24+|const fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/dynamicProp.ets",
+        "contents": "interface Address {\n    city: string;\n}\ninterface User {\n    name: string;\n    age: number;\n    address: Address;\n}\nconst user: User = {\n    name: \"Alice\",\n    age: 30,\n    address: { city: \"Shenzhen\" }\n};\nconst greeting = `Hello, ${user.name}!`;\n\ninterface FullName {\n    firstName: string;\n    lastName: string;\n}\nfunction getFullName(user: FullName) {\n    return `${user.firstName} ${user.lastName}`;\n}\nconst currentUser: FullName = { firstName: \"John\", lastName: \"Doe\" };\nconst fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n\nconst price = 99.99;\nconst discount = 0.2;\nconst priceInfo = `Price: ${(price * (1 - discount))}`;\n\nconst isAdmin = true;\nconst roleMessage = `Role: ${isAdmin ? \"Administrator\" : \"Guest\"}.`;\n\ninterface Product {\n    id: number;\n    name: string;\n}\nconst products: Product[] = [\n    { id: 1, name: \"Phone\" },\n    { id: 2, name: \"Laptop\" }\n];\nconst productInfo = `Current Product: ${products[0]}.`;\n\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\ninterface Company {\n    name: string;\n    ceo: CEO;\n}\ninterface CEO {\n    name: string;\n    contact: Contact;\n}\n\ninterface Contact {\n    email: string;\n}\nconst company: Company = {\n    name: \"Tech Corp\",\n    ceo: {\n        name: \"Bob\",\n        contact: { email: \"bob@tech.com\" }\n    }\n};\nconst emailTemplate = `CEO Email: ${company}`;",
+        "cursorPosition": {
+          "line": 40,
+          "column": 51
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 5,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1742475380787,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 55.10009765625,
+      "timeAtRequestSend": 1742475380788
+    },
+    "generateUuid": "10bc64bc-554a-43a1-a438-3924192347a6",
+    "timestamp": "2025-03-20T12:56:20.790Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "];\nconst productInfo = `Current Product: ${products[0].",
+      "rangeToReplace": {
+        "startLineNumber": 40,
+        "endLineNumberInclusive": 46
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "10bc64bc-554a-43a1-a438-3924192347a6",
+    "timestamp": "2025-03-20T12:56:21.191Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "10bc64bc-554a-43a1-a438-3924192347a6",
+    "timestamp": "2025-03-20T12:56:21.194Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "name"
+    },
+    "generationUUID": "10bc64bc-554a-43a1-a438-3924192347a6",
+    "timestamp": "2025-03-20T12:56:21.232Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}."
+    },
+    "generationUUID": "10bc64bc-554a-43a1-a438-3924192347a6",
+    "timestamp": "2025-03-20T12:56:21.244Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "`;\n\ntype"
+    },
+    "generationUUID": "10bc64bc-554a-43a1-a438-3924192347a6",
+    "timestamp": "2025-03-20T12:56:21.255Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Status = \"active\" | \"inactive"
+    },
+    "generationUUID": "10bc64bc-554a-43a1-a438-3924192347a6",
+    "timestamp": "2025-03-20T12:56:21.267Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\";\nlet status: Status = \""
+    },
+    "generationUUID": "10bc64bc-554a-43a1-a438-3924192347a6",
+    "timestamp": "2025-03-20T12:56:21.278Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "active"
+    },
+    "generationUUID": "10bc64bc-554a-43a1-a438-3924192347a6",
+    "timestamp": "2025-03-20T12:56:21.291Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\";\nconst statusText = `Status"
+    },
+    "generationUUID": "10bc64bc-554a-43a1-a438-3924192347a6",
+    "timestamp": "2025-03-20T12:56:21.301Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": ${status}`;\n"
+    },
+    "generationUUID": "10bc64bc-554a-43a1-a438-3924192347a6",
+    "timestamp": "2025-03-20T12:56:21.311Z"
+  },
+  {
+    "firstChunkValue": "];\nconst productInfo = `Current Product: ${products[0].name}.`;\n\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n",
+    "generationUUID": "10bc64bc-554a-43a1-a438-3924192347a6",
+    "timestamp": "2025-03-20T12:56:21.336Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "10bc64bc-554a-43a1-a438-3924192347a6",
+    "timestamp": "2025-03-20T12:56:21.339Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "];\nconst productInfo = `Current Product: ${products[0].name}.`;\n\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n"
+    },
+    "generationUUID": "10bc64bc-554a-43a1-a438-3924192347a6",
+    "timestamp": "2025-03-20T12:56:21.341Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "760b497a-d9fe-4277-b494-6c6a82c2366c",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 5,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 5,
+      "monotonicallyIncreasingSuggestionId": 3,
+      "range": {
+        "startLineNumber": 40,
+        "startColumn": 1,
+        "endLineNumberInclusive": 46,
+        "endColumn": 1
+      },
+      "replaceText": "];\nconst productInfo = `Current Product: ${products[0].name}.`;\n\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n",
+      "originalText": "];\nconst productInfo = `Current Product: ${products[0]}.`;\n\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 40,
+        "startColumn": 1,
+        "endLineNumberInclusive": 46,
+        "endColumn": 1
+      },
+      "diffText": "];\nconst productInfo = `Current Product: ${products[0].name}.`;\n\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n",
+      "fullOriginalText": "];\nconst productInfo = `Current Product: ${products[0]}.`;\n\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n",
+      "suggestionTriggerTime": 1742475380733.0999,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "10bc64bc-554a-43a1-a438-3924192347a6",
+      "selection": {
+        "startLineNumber": 40,
+        "startColumn": 1,
+        "endLineNumberInclusive": 46,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "5edac803-4935-41d4-8498-31770d7d59a7",
+      "undoRedoGroup": {
+        "id": 3,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "10bc64bc-554a-43a1-a438-3924192347a6",
+    "timestamp": "2025-03-20T12:56:21.341Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "10bc64bc-554a-43a1-a438-3924192347a6",
+    "timestamp": "2025-03-20T12:56:21.388Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "5edac803-4935-41d4-8498-31770d7d59a7",
+    "generationUUID": "10bc64bc-554a-43a1-a438-3924192347a6",
+    "timestamp": "2025-03-20T12:56:21.401Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "];\nconst productInfo = `Current Product: ${products[0].name}.`;\n\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "5edac803-4935-41d4-8498-31770d7d59a7",
+    "generationUUID": "10bc64bc-554a-43a1-a438-3924192347a6",
+    "timestamp": "2025-03-20T12:56:21.401Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "5edac803-4935-41d4-8498-31770d7d59a7",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-20T12:56:21.402Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "760b497a-d9fe-4277-b494-6c6a82c2366c",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 5,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 5,
+      "monotonicallyIncreasingSuggestionId": 3,
+      "range": {
+        "startLineNumber": 40,
+        "startColumn": 1,
+        "endLineNumberInclusive": 46,
+        "endColumn": 1
+      },
+      "replaceText": "];\nconst productInfo = `Current Product: ${products[0].name}.`;\n\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n",
+      "originalText": "];\nconst productInfo = `Current Product: ${products[0]}.`;\n\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 40,
+        "startColumn": 1,
+        "endLineNumberInclusive": 46,
+        "endColumn": 1
+      },
+      "diffText": "];\nconst productInfo = `Current Product: ${products[0].name}.`;\n\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n",
+      "fullOriginalText": "];\nconst productInfo = `Current Product: ${products[0]}.`;\n\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n",
+      "suggestionTriggerTime": 1742475380733.0999,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "10bc64bc-554a-43a1-a438-3924192347a6",
+      "selection": {
+        "startLineNumber": 40,
+        "startColumn": 1,
+        "endLineNumberInclusive": 46,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "5edac803-4935-41d4-8498-31770d7d59a7",
+      "undoRedoGroup": {
+        "id": 3,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;87"
+    },
+    "generationUUID": "10bc64bc-554a-43a1-a438-3924192347a6",
+    "timestamp": "2025-03-20T12:56:22.339Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "760b497a-d9fe-4277-b494-6c6a82c2366c",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 5,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 5,
+      "monotonicallyIncreasingSuggestionId": 3,
+      "range": {
+        "startLineNumber": 40,
+        "startColumn": 1,
+        "endLineNumberInclusive": 46,
+        "endColumn": 1
+      },
+      "replaceText": "];\nconst productInfo = `Current Product: ${products[0].name}.`;\n\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n",
+      "originalText": "];\nconst productInfo = `Current Product: ${products[0]}.`;\n\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 40,
+        "startColumn": 1,
+        "endLineNumberInclusive": 46,
+        "endColumn": 1
+      },
+      "diffText": "];\nconst productInfo = `Current Product: ${products[0].name}.`;\n\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n",
+      "fullOriginalText": "];\nconst productInfo = `Current Product: ${products[0]}.`;\n\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n",
+      "suggestionTriggerTime": 1742475380733.0999,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "10bc64bc-554a-43a1-a438-3924192347a6",
+      "selection": {
+        "startLineNumber": 40,
+        "startColumn": 1,
+        "endLineNumberInclusive": 46,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "5edac803-4935-41d4-8498-31770d7d59a7",
+      "undoRedoGroup": {
+        "id": 3,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;87"
+    },
+    "generationUUID": "10bc64bc-554a-43a1-a438-3924192347a6",
+    "timestamp": "2025-03-20T12:56:22.353Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "5edac803-4935-41d4-8498-31770d7d59a7",
+    "fusedCursorPrediction": null,
+    "oldText": "];\nconst productInfo = `Current Product: ${products[0]}.`;\n\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n",
+    "newText": "];\nconst productInfo = `Current Product: ${products[0].name}.`;\n\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n",
+    "timestamp": "2025-03-20T12:56:22.353Z"
+  }
+]

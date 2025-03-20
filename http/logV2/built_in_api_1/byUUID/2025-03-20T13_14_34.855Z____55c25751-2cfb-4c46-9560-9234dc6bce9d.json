@@ -1,0 +1,894 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:34.855Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/dynamicProp.ets",
+          "diffHistory": [
+            "1+|const user = {}\n",
+            "2-|  \n3-|}\n2+|  name: \"Alice\",\n3+|  age: 30,\n4+|  address: {\n5+|},\n6+|};\n7+|\n8+|\n",
+            "5-|},\n5+|    city: \"New York\",\n6+|    country: \"USA\",\n7+|  },\n10+|const greeting = `Hello, ${user.name}!`;\n",
+            "1-|\n1+|interface User {\n2+|  name: string;\n3+|  age: number;\n4+|  address: {\n5+|    city: string;\n6+|    country: string;\n7+|  };\n8+|}\n",
+            "1-|\n1+|interface Address {\n",
+            "5-|  address: {\n5+|  address: Address;\n",
+            "2+|  city: string;\n3+|  country: string;\n4+|}\n",
+            "9-|    city: string;\n10-|    country: string;\n11-|  };\n13-|const user = {\n10+|const user: User = {\n",
+            "21+|function getFullName(user: { firstName: string; lastName: string }) {\n22+|  return `${user.firstName} ${user.lastName}`;\n23+|}\n25+|const fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n26+|\n27+|\n28+|\n",
+            "25-|const fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n",
+            "25+|const currentUser = {\n26+|  firstName: \"John\",\n27+|  lastName: \"Doe\",\n28+|};\n30+|const fullName = getFullName(currentUser);\n",
+            "30-|const fullName = getFullName(currentUser);\n30+|const fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n",
+            "21-|function getFullName(user: { firstName: string; lastName: string }) {\n21+|interface FullName {\n22+|function getFullName(user: { firstName: string; lastName: string }\n23+|function getFullName(user: FullName) {\n",
+            "22-|function getFullName(user: { firstName: string; lastName: string }\n22+|function getFullName(user: { firstName: string; lastName: string ;\n23+|}\n",
+            "22-|function getFullName(user: { firstName: string;\n22+|  firstName: string;\n",
+            "29-|const currentUser = {\n29+|const currentUser: FullName = {\n",
+            "36+|const price = 100;\n37+|const discount = 0.1;\n38+|const priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n40+|const isAdmin = true;\n41+|const roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n43+|const products = [\n44+|  { name: \"Product 1\", price: 100 },\n45+|  { name: \"Product 2\", price: 200 },\n46+|  { name: \"Product 3\", price: 300 },\n47+|];\n49+|const productInfo = `Current product: ${products[0].name}`;\n50+|\n51+|type Status = \"active\" | \"inactive\";\n52+|let status: Status = \"active\";\n53+|const statusText = `Status: ${status}`;\n54+|\n55+|const company = {\n56+|  name: \"Acme Inc.\",\n57+|  address: {\n58+|    street: \"123 Main St\",\n59+|    city: \"Anytown\",\n60+|  },\n61+|};\n62+|\n",
+            "57-|  address: {\n58-|    street: \"123 Main St\",\n59-|    city: \"Anytown\",\n60-|  },\n57+|  ceo: {\n58+|    name: \"John Doe\",\n59+|    contact: {\n",
+            "60+|      email: \"john.doe@acme.com\",\n61+|      phone: \"+1234567890\",\n62+|    },\n63+|  },\n66+|const companyInfo = `Company: ${company.name}, CEO: ${company.ceo.name}`;\n",
+            "55+|interface Company {\n56+|  name: string;\n57+|  ceo: {\n58+|    name: string;\n59+|    contact: {\n60+|      email: string;\n61+|      phone: string;\n",
+            "62-|const company = {\n62+|      \n63+|const company: Company = {\n",
+            "62-|      \n62+|      };\n63+|}\n",
+            "62-|      };\n62+|    };\n63+|  };\n",
+            "55+|interface CEO {\n56+|  name: string;\n57+|  contact: {\n58+|    email: string;\n59+|    phone: string;\n60+|  };\n61+|}\n",
+            "70-|  };\n70+|  }CEO;\n",
+            "64-|  ceo: {\n65-|    name: string;\n66-|    contact: {\n67-|      email: string;\n68-|      phone: string;\n69-|    };\n70-|  }CEO;\n64+|  ceo: CEO;\n",
+            "55+|interface Contact {\n",
+            "58-|  contact: {\n59-|    email: string;\n58+|  contact: Contact;\n",
+            "56+|  email: string;\n57+|  phone: string;\n58+|}\n",
+            "62-|    phone: string;\n63-|  };\n",
+            "43-|const products = [\n43+|interface Product {\n44+|  name: string;\n45+|  price: number;\n46+|}\n47+|const products: Product[] = [\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/utils/builtInAPI.ets",
+          "diffHistory": [
+            "1+|import router from \"@ohos.router\";\n2+|\n3+|@Entry\n4+|@Component\n5+|struct Main {\n6+|  @State message: string = \"Hello World\";\n7+|\n8+|  build() {\n9+|    Row() {\n10+|      \n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/builtInAPI.ets",
+        "contents": "import router from \"@ohos.router\";\n\n@Entry\n@Component\nstruct Main {\n  @State message: string = \"Hello World\";\n\n  build() {\n    Row() {\n      ",
+        "cursorPosition": {
+          "line": 9,
+          "column": 6
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 33,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/utils/dynamicProp.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            33
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 33,
+              "endLineNumberInclusive": 67
+            }
+          ],
+          "lastViewedAt": 1742476421483
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1742476474904,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.099853515625,
+      "timeAtRequestSend": 1742476474904
+    },
+    "generateUuid": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:34.907Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "    Row() {\n     ",
+      "rangeToReplace": {
+        "startLineNumber": 9,
+        "endLineNumberInclusive": 10
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.284Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.286Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Text"
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.307Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "("
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.315Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "this"
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.332Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.333Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "message"
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.344Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ")"
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.353Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.363Z"
+  },
+  {
+    "firstChunkValue": "    Row() {\n      Text(this.message)",
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.367Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "    Row() {\n      Text(this.message)"
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.369Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "8329b7c8-8134-4742-983e-a8be5cf3b09c",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 33,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 33,
+      "monotonicallyIncreasingSuggestionId": 384,
+      "range": {
+        "startLineNumber": 9,
+        "startColumn": 1,
+        "endLineNumberInclusive": 10,
+        "endColumn": 7
+      },
+      "replaceText": "    Row() {\n      Text(this.message)",
+      "originalText": "    Row() {\n      ",
+      "startingSuggestionRange": {
+        "startLineNumber": 9,
+        "startColumn": 1,
+        "endLineNumberInclusive": 10,
+        "endColumn": 7
+      },
+      "diffText": "    Row() {\n      Text(this.message)",
+      "fullOriginalText": "    Row() {\n      ",
+      "suggestionTriggerTime": 1742476474825.8,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+      "selection": {
+        "startLineNumber": 9,
+        "startColumn": 1,
+        "endLineNumberInclusive": 10,
+        "endColumn": 7
+      },
+      "undoRedoGroup": {
+        "id": 385,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.370Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "       "
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.371Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ."
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.381Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "font"
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.391Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Size"
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.400Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "("
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.408Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "2"
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.418Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "0"
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.428Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ")"
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.437Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n        .fontWeight"
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.452Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "("
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.457Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Font"
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.467Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Weight"
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.478Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.565Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Bold"
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.567Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ")"
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.568Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.568Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "(()"
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.568Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "        .onClick"
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.569Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " =>"
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.569Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.569Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n         "
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.570Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " router"
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.577Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.586Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "push"
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.595Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "({"
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.607Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.616Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "           "
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.628Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " url"
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.636Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.645Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \""
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.656Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "pages"
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.664Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "/"
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.673Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Second"
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.681Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Page"
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.694Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\","
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.703Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.713Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "      "
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.723Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.736Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.737Z"
+  },
+  {
+    "fullText": "    Row() {\n      Text(this.message)\n        .fontSize(20)\n        .fontWeight(FontWeight.Bold)\n        .onClick(() => {\n          router.push({\n            url: \"pages/SecondPage\",\n      ",
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.739Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "    Row() {\n      Text(this.message)"
+    },
+    "fullText": "    Row() {\n      Text(this.message)\n        .fontSize(20)\n        .fontWeight(FontWeight.Bold)\n        .onClick(() => {\n          router.push({\n            url: \"pages/SecondPage\",\n      ",
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.740Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "7cca6732-6718-4cbc-8a39-645ee85fe88c",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 33,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 34,
+      "monotonicallyIncreasingSuggestionId": 385,
+      "range": {
+        "startLineNumber": 9,
+        "startColumn": 1,
+        "endLineNumberInclusive": 10,
+        "endColumn": 24
+      },
+      "replaceText": "    Row() {\n      Text(this.message)\n        .fontSize(20)\n        .fontWeight(FontWeight.Bold)\n        .onClick(() => {\n          router.push({\n            url: \"pages/SecondPage\",\n      ",
+      "originalText": "    Row() {\n      Text(this.message",
+      "startingSuggestionRange": {
+        "startLineNumber": 9,
+        "startColumn": 1,
+        "endLineNumberInclusive": 10,
+        "endColumn": 24
+      },
+      "diffText": "    Row() {\n      Text(this.message)\n        .fontSize(20)\n        .fontWeight(FontWeight.Bold)\n        .onClick(() => {\n          router.push({\n            url: \"pages/SecondPage\",\n      ",
+      "fullOriginalText": "    Row() {\n      Text(this.message",
+      "suggestionTriggerTime": 1742476474825.8,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+      "selection": {
+        "startLineNumber": 9,
+        "startColumn": 1,
+        "endLineNumberInclusive": 10,
+        "endColumn": 7
+      },
+      "fusedCursorPredictionId": "4d2c547c-e7f7-4d22-bdcc-8cf100af6ca0",
+      "undoRedoGroup": {
+        "id": 386,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.740Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "4d2c547c-e7f7-4d22-bdcc-8cf100af6ca0",
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.745Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "    Row() {\n      Text(this.message)"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "4d2c547c-e7f7-4d22-bdcc-8cf100af6ca0",
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:35.746Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "4d2c547c-e7f7-4d22-bdcc-8cf100af6ca0",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-20T13:14:35.746Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "8329b7c8-8134-4742-983e-a8be5cf3b09c",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 33,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 33,
+      "monotonicallyIncreasingSuggestionId": 384,
+      "range": {
+        "startLineNumber": 9,
+        "startColumn": 1,
+        "endLineNumberInclusive": 10,
+        "endColumn": 7
+      },
+      "replaceText": "    Row() {\n      Text(this.message)",
+      "originalText": "    Row() {\n      ",
+      "startingSuggestionRange": {
+        "startLineNumber": 9,
+        "startColumn": 1,
+        "endLineNumberInclusive": 10,
+        "endColumn": 7
+      },
+      "diffText": "    Row() {\n      Text(this.message)",
+      "fullOriginalText": "    Row() {\n      ",
+      "suggestionTriggerTime": 1742476474825.8,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+      "selection": {
+        "startLineNumber": 9,
+        "startColumn": 1,
+        "endLineNumberInclusive": 10,
+        "endColumn": 7
+      },
+      "undoRedoGroup": {
+        "id": 385,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "d;90",
+      "onAcceptDisplayId": "7cca6732-6718-4cbc-8a39-645ee85fe88c"
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:36.316Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "8329b7c8-8134-4742-983e-a8be5cf3b09c",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 33,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 33,
+      "monotonicallyIncreasingSuggestionId": 384,
+      "range": {
+        "startLineNumber": 9,
+        "startColumn": 1,
+        "endLineNumberInclusive": 10,
+        "endColumn": 7
+      },
+      "replaceText": "    Row() {\n      Text(this.message)",
+      "originalText": "    Row() {\n      ",
+      "startingSuggestionRange": {
+        "startLineNumber": 9,
+        "startColumn": 1,
+        "endLineNumberInclusive": 10,
+        "endColumn": 7
+      },
+      "diffText": "    Row() {\n      Text(this.message)",
+      "fullOriginalText": "    Row() {\n      ",
+      "suggestionTriggerTime": 1742476474825.8,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+      "selection": {
+        "startLineNumber": 9,
+        "startColumn": 1,
+        "endLineNumberInclusive": 10,
+        "endColumn": 7
+      },
+      "undoRedoGroup": {
+        "id": 385,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "d;90",
+      "onAcceptDisplayId": "7cca6732-6718-4cbc-8a39-645ee85fe88c"
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:36.321Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "7cca6732-6718-4cbc-8a39-645ee85fe88c",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 33,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 34,
+      "monotonicallyIncreasingSuggestionId": 385,
+      "range": {
+        "startLineNumber": 9,
+        "startColumn": 1,
+        "endLineNumberInclusive": 10,
+        "endColumn": 24
+      },
+      "replaceText": "    Row() {\n      Text(this.message)\n        .fontSize(20)\n        .fontWeight(FontWeight.Bold)\n        .onClick(() => {\n          router.push({\n            url: \"pages/SecondPage\",\n      ",
+      "originalText": "    Row() {\n      Text(this.message",
+      "startingSuggestionRange": {
+        "startLineNumber": 9,
+        "startColumn": 1,
+        "endLineNumberInclusive": 10,
+        "endColumn": 24
+      },
+      "diffText": "    Row() {\n      Text(this.message)\n        .fontSize(20)\n        .fontWeight(FontWeight.Bold)\n        .onClick(() => {\n          router.push({\n            url: \"pages/SecondPage\",\n      ",
+      "fullOriginalText": "    Row() {\n      Text(this.message",
+      "suggestionTriggerTime": 1742476474825.8,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+      "selection": {
+        "startLineNumber": 9,
+        "startColumn": 1,
+        "endLineNumberInclusive": 10,
+        "endColumn": 7
+      },
+      "fusedCursorPredictionId": "4d2c547c-e7f7-4d22-bdcc-8cf100af6ca0",
+      "undoRedoGroup": {
+        "id": 386,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:36.322Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "7cca6732-6718-4cbc-8a39-645ee85fe88c",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 33,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 34,
+      "monotonicallyIncreasingSuggestionId": 385,
+      "range": {
+        "startLineNumber": 9,
+        "startColumn": 1,
+        "endLineNumberInclusive": 10,
+        "endColumn": 24
+      },
+      "replaceText": "    Row() {\n      Text(this.message)\n        .fontSize(20)\n        .fontWeight(FontWeight.Bold)\n        .onClick(() => {\n          router.push({\n            url: \"pages/SecondPage\",\n      ",
+      "originalText": "    Row() {\n      Text(this.message",
+      "startingSuggestionRange": {
+        "startLineNumber": 9,
+        "startColumn": 1,
+        "endLineNumberInclusive": 10,
+        "endColumn": 24
+      },
+      "diffText": "    Row() {\n      Text(this.message)\n        .fontSize(20)\n        .fontWeight(FontWeight.Bold)\n        .onClick(() => {\n          router.push({\n            url: \"pages/SecondPage\",\n      ",
+      "fullOriginalText": "    Row() {\n      Text(this.message",
+      "suggestionTriggerTime": 1742476474825.8,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+      "selection": {
+        "startLineNumber": 9,
+        "startColumn": 1,
+        "endLineNumberInclusive": 10,
+        "endColumn": 7
+      },
+      "fusedCursorPredictionId": "4d2c547c-e7f7-4d22-bdcc-8cf100af6ca0",
+      "undoRedoGroup": {
+        "id": 386,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "d;96"
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:37.156Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "7cca6732-6718-4cbc-8a39-645ee85fe88c",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 33,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 34,
+      "monotonicallyIncreasingSuggestionId": 385,
+      "range": {
+        "startLineNumber": 9,
+        "startColumn": 1,
+        "endLineNumberInclusive": 10,
+        "endColumn": 24
+      },
+      "replaceText": "    Row() {\n      Text(this.message)\n        .fontSize(20)\n        .fontWeight(FontWeight.Bold)\n        .onClick(() => {\n          router.push({\n            url: \"pages/SecondPage\",\n      ",
+      "originalText": "    Row() {\n      Text(this.message",
+      "startingSuggestionRange": {
+        "startLineNumber": 9,
+        "startColumn": 1,
+        "endLineNumberInclusive": 10,
+        "endColumn": 24
+      },
+      "diffText": "    Row() {\n      Text(this.message)\n        .fontSize(20)\n        .fontWeight(FontWeight.Bold)\n        .onClick(() => {\n          router.push({\n            url: \"pages/SecondPage\",\n      ",
+      "fullOriginalText": "    Row() {\n      Text(this.message",
+      "suggestionTriggerTime": 1742476474825.8,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+      "selection": {
+        "startLineNumber": 9,
+        "startColumn": 1,
+        "endLineNumberInclusive": 10,
+        "endColumn": 7
+      },
+      "fusedCursorPredictionId": "4d2c547c-e7f7-4d22-bdcc-8cf100af6ca0",
+      "undoRedoGroup": {
+        "id": 386,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "d;96"
+    },
+    "generationUUID": "55c25751-2cfb-4c46-9560-9234dc6bce9d",
+    "timestamp": "2025-03-20T13:14:37.171Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "4d2c547c-e7f7-4d22-bdcc-8cf100af6ca0",
+    "fusedCursorPrediction": null,
+    "oldText": "    Row() {\n      Text(this.message",
+    "newText": "    Row() {\n      Text(this.message)\n        .fontSize(20)\n        .fontWeight(FontWeight.Bold)\n        .onClick(() => {\n          router.push({\n            url: \"pages/SecondPage\",\n      ",
+    "timestamp": "2025-03-20T13:14:37.172Z"
+  }
+]

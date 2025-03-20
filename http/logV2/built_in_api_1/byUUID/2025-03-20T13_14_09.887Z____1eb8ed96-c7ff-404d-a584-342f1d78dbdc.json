@@ -1,0 +1,624 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+    "timestamp": "2025-03-20T13:14:09.887Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/dynamicProp.ets",
+          "diffHistory": [
+            "1+|const user = {}\n",
+            "2-|  \n3-|}\n2+|  name: \"Alice\",\n3+|  age: 30,\n4+|  address: {\n5+|},\n6+|};\n7+|\n8+|\n",
+            "5-|},\n5+|    city: \"New York\",\n6+|    country: \"USA\",\n7+|  },\n10+|const greeting = `Hello, ${user.name}!`;\n",
+            "1-|\n1+|interface User {\n2+|  name: string;\n3+|  age: number;\n4+|  address: {\n5+|    city: string;\n6+|    country: string;\n7+|  };\n8+|}\n",
+            "1-|\n1+|interface Address {\n",
+            "5-|  address: {\n5+|  address: Address;\n",
+            "2+|  city: string;\n3+|  country: string;\n4+|}\n",
+            "9-|    city: string;\n10-|    country: string;\n11-|  };\n13-|const user = {\n10+|const user: User = {\n",
+            "21+|function getFullName(user: { firstName: string; lastName: string }) {\n22+|  return `${user.firstName} ${user.lastName}`;\n23+|}\n25+|const fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n26+|\n27+|\n28+|\n",
+            "25-|const fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n",
+            "25+|const currentUser = {\n26+|  firstName: \"John\",\n27+|  lastName: \"Doe\",\n28+|};\n30+|const fullName = getFullName(currentUser);\n",
+            "30-|const fullName = getFullName(currentUser);\n30+|const fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n",
+            "21-|function getFullName(user: { firstName: string; lastName: string }) {\n21+|interface FullName {\n22+|function getFullName(user: { firstName: string; lastName: string }\n23+|function getFullName(user: FullName) {\n",
+            "22-|function getFullName(user: { firstName: string; lastName: string }\n22+|function getFullName(user: { firstName: string; lastName: string ;\n23+|}\n",
+            "22-|function getFullName(user: { firstName: string;\n22+|  firstName: string;\n",
+            "29-|const currentUser = {\n29+|const currentUser: FullName = {\n",
+            "36+|const price = 100;\n37+|const discount = 0.1;\n38+|const priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n40+|const isAdmin = true;\n41+|const roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n43+|const products = [\n44+|  { name: \"Product 1\", price: 100 },\n45+|  { name: \"Product 2\", price: 200 },\n46+|  { name: \"Product 3\", price: 300 },\n47+|];\n49+|const productInfo = `Current product: ${products[0].name}`;\n50+|\n51+|type Status = \"active\" | \"inactive\";\n52+|let status: Status = \"active\";\n53+|const statusText = `Status: ${status}`;\n54+|\n55+|const company = {\n56+|  name: \"Acme Inc.\",\n57+|  address: {\n58+|    street: \"123 Main St\",\n59+|    city: \"Anytown\",\n60+|  },\n61+|};\n62+|\n",
+            "57-|  address: {\n58-|    street: \"123 Main St\",\n59-|    city: \"Anytown\",\n60-|  },\n57+|  ceo: {\n58+|    name: \"John Doe\",\n59+|    contact: {\n",
+            "60+|      email: \"john.doe@acme.com\",\n61+|      phone: \"+1234567890\",\n62+|    },\n63+|  },\n66+|const companyInfo = `Company: ${company.name}, CEO: ${company.ceo.name}`;\n",
+            "55+|interface Company {\n56+|  name: string;\n57+|  ceo: {\n58+|    name: string;\n59+|    contact: {\n60+|      email: string;\n61+|      phone: string;\n",
+            "62-|const company = {\n62+|      \n63+|const company: Company = {\n",
+            "62-|      \n62+|      };\n63+|}\n",
+            "62-|      };\n62+|    };\n63+|  };\n",
+            "55+|interface CEO {\n56+|  name: string;\n57+|  contact: {\n58+|    email: string;\n59+|    phone: string;\n60+|  };\n61+|}\n",
+            "70-|  };\n70+|  }CEO;\n",
+            "64-|  ceo: {\n65-|    name: string;\n66-|    contact: {\n67-|      email: string;\n68-|      phone: string;\n69-|    };\n70-|  }CEO;\n64+|  ceo: CEO;\n",
+            "55+|interface Contact {\n",
+            "58-|  contact: {\n59-|    email: string;\n58+|  contact: Contact;\n",
+            "56+|  email: string;\n57+|  phone: string;\n58+|}\n",
+            "62-|    phone: string;\n63-|  };\n",
+            "43-|const products = [\n43+|interface Product {\n44+|  name: string;\n45+|  price: number;\n46+|}\n47+|const products: Product[] = [\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/utils/builtInAPI.ets",
+          "diffHistory": [
+            "1+|import r\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/builtInAPI.ets",
+        "contents": "import r",
+        "cursorPosition": {
+          "line": 0,
+          "column": 8
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 9,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/utils/dynamicProp.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            33
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 33,
+              "endLineNumberInclusive": 67
+            }
+          ],
+          "lastViewedAt": 1742476421483
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742476449932,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 54.60009765625,
+      "timeAtRequestSend": 1742476449932
+    },
+    "generateUuid": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+    "timestamp": "2025-03-20T13:14:09.934Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "import router",
+      "rangeToReplace": {
+        "startLineNumber": 1,
+        "endLineNumberInclusive": 1
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+    "timestamp": "2025-03-20T13:14:10.315Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+    "timestamp": "2025-03-20T13:14:10.321Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " from"
+    },
+    "generationUUID": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+    "timestamp": "2025-03-20T13:14:10.341Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \"@"
+    },
+    "generationUUID": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+    "timestamp": "2025-03-20T13:14:10.353Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "oh"
+    },
+    "generationUUID": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+    "timestamp": "2025-03-20T13:14:10.366Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "os"
+    },
+    "generationUUID": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+    "timestamp": "2025-03-20T13:14:10.377Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+    "timestamp": "2025-03-20T13:14:10.389Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "router"
+    },
+    "generationUUID": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+    "timestamp": "2025-03-20T13:14:10.401Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\";"
+    },
+    "generationUUID": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+    "timestamp": "2025-03-20T13:14:10.414Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+    "timestamp": "2025-03-20T13:14:10.427Z"
+  },
+  {
+    "firstChunkValue": "import router from \"@ohos.router\";",
+    "generationUUID": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+    "timestamp": "2025-03-20T13:14:10.428Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "import router from \"@ohos.router\";"
+    },
+    "generationUUID": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+    "timestamp": "2025-03-20T13:14:10.429Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "0831691b-7605-4144-b253-c4324b34bf6e",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 9,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 9,
+      "monotonicallyIncreasingSuggestionId": 368,
+      "range": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 1,
+        "endColumn": 12
+      },
+      "replaceText": "import router from \"@ohos.router\";",
+      "originalText": "import r",
+      "startingSuggestionRange": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 1,
+        "endColumn": 12
+      },
+      "diffText": "import router from \"@ohos.router\";",
+      "fullOriginalText": "import r",
+      "suggestionTriggerTime": 1742476449850.2,
+      "greens": [],
+      "source": "typing",
+      "requestId": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+      "selection": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 1,
+        "endColumn": 12
+      },
+      "undoRedoGroup": {
+        "id": 369,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumber": 1,
+        "endColumn": 12
+      },
+      "trackedText": "import rout"
+    },
+    "generationUUID": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+    "timestamp": "2025-03-20T13:14:10.430Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "router"
+    },
+    "generationUUID": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+    "timestamp": "2025-03-20T13:14:10.439Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+    "timestamp": "2025-03-20T13:14:10.451Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "push"
+    },
+    "generationUUID": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+    "timestamp": "2025-03-20T13:14:10.465Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "({"
+    },
+    "generationUUID": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+    "timestamp": "2025-03-20T13:14:10.476Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+    "timestamp": "2025-03-20T13:14:10.487Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+    "timestamp": "2025-03-20T13:14:10.501Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " url"
+    },
+    "generationUUID": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+    "timestamp": "2025-03-20T13:14:10.514Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+    "timestamp": "2025-03-20T13:14:10.528Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \""
+    },
+    "generationUUID": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+    "timestamp": "2025-03-20T13:14:10.547Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "pages"
+    },
+    "generationUUID": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+    "timestamp": "2025-03-20T13:14:10.552Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "/"
+    },
+    "generationUUID": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+    "timestamp": "2025-03-20T13:14:10.564Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "index"
+    },
+    "generationUUID": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+    "timestamp": "2025-03-20T13:14:10.575Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "/"
+    },
+    "generationUUID": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+    "timestamp": "2025-03-20T13:14:10.589Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "index\","
+    },
+    "generationUUID": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+    "timestamp": "2025-03-20T13:14:10.601Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+    "timestamp": "2025-03-20T13:14:10.613Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "});"
+    },
+    "generationUUID": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+    "timestamp": "2025-03-20T13:14:10.626Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+    "timestamp": "2025-03-20T13:14:10.638Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+    "timestamp": "2025-03-20T13:14:10.652Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+    "timestamp": "2025-03-20T13:14:10.664Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+    "timestamp": "2025-03-20T13:14:10.665Z"
+  },
+  {
+    "fullText": "import router from \"@ohos.router\";\n\nrouter.push({\n  url: \"pages/index/index\",\n});\n\n",
+    "generationUUID": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+    "timestamp": "2025-03-20T13:14:10.666Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "import router from \"@ohos.router\";"
+    },
+    "fullText": "import router from \"@ohos.router\";\n\nrouter.push({\n  url: \"pages/index/index\",\n});\n\n",
+    "generationUUID": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+    "timestamp": "2025-03-20T13:14:10.667Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "8a766a13-5c72-4f54-9972-166888cca430",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 9,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 14,
+      "monotonicallyIncreasingSuggestionId": 370,
+      "range": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 1,
+        "endColumn": 35
+      },
+      "replaceText": "import router from \"@ohos.router\";\n\nrouter.push({\n  url: \"pages/index/index\",\n});\n\n",
+      "originalText": "import router from \"@ohos.router\";",
+      "startingSuggestionRange": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 1,
+        "endColumn": 35
+      },
+      "diffText": "import router from \"@ohos.router\";\n\nrouter.push({\n  url: \"pages/index/index\",\n});\n\n",
+      "fullOriginalText": "import router from \"@ohos.router\";",
+      "suggestionTriggerTime": 1742476449850.2,
+      "greens": [],
+      "source": "typing",
+      "requestId": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+      "selection": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 1,
+        "endColumn": 12
+      },
+      "fusedCursorPredictionId": "9943f345-1809-42ef-827c-968cdfde9ba3",
+      "undoRedoGroup": {
+        "id": 371,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+    "timestamp": "2025-03-20T13:14:10.668Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "9943f345-1809-42ef-827c-968cdfde9ba3",
+    "generationUUID": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+    "timestamp": "2025-03-20T13:14:10.685Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "import router from \"@ohos.router\";"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "9943f345-1809-42ef-827c-968cdfde9ba3",
+    "generationUUID": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+    "timestamp": "2025-03-20T13:14:10.686Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "9943f345-1809-42ef-827c-968cdfde9ba3",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-20T13:14:10.686Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "0831691b-7605-4144-b253-c4324b34bf6e",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 9,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 9,
+      "monotonicallyIncreasingSuggestionId": 368,
+      "range": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 1,
+        "endColumn": 12
+      },
+      "replaceText": "import router from \"@ohos.router\";",
+      "originalText": "import r",
+      "startingSuggestionRange": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 1,
+        "endColumn": 12
+      },
+      "diffText": "import router from \"@ohos.router\";",
+      "fullOriginalText": "import r",
+      "suggestionTriggerTime": 1742476449850.2,
+      "greens": [],
+      "source": "typing",
+      "requestId": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+      "selection": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 1,
+        "endColumn": 12
+      },
+      "undoRedoGroup": {
+        "id": 369,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumber": 1,
+        "endColumn": 12
+      },
+      "trackedText": "import rout",
+      "decorationId": "d;22",
+      "onAcceptDisplayId": "8a766a13-5c72-4f54-9972-166888cca430"
+    },
+    "generationUUID": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+    "timestamp": "2025-03-20T13:14:12.604Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "0831691b-7605-4144-b253-c4324b34bf6e",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 9,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 9,
+      "monotonicallyIncreasingSuggestionId": 368,
+      "range": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 1,
+        "endColumn": 12
+      },
+      "replaceText": "import router from \"@ohos.router\";",
+      "originalText": "import r",
+      "startingSuggestionRange": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 1,
+        "endColumn": 12
+      },
+      "diffText": "import router from \"@ohos.router\";",
+      "fullOriginalText": "import r",
+      "suggestionTriggerTime": 1742476449850.2,
+      "greens": [],
+      "source": "typing",
+      "requestId": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+      "selection": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 1,
+        "endColumn": 12
+      },
+      "undoRedoGroup": {
+        "id": 369,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumber": 1,
+        "endColumn": 12
+      },
+      "trackedText": "import rout",
+      "decorationId": "d;22",
+      "onAcceptDisplayId": "8a766a13-5c72-4f54-9972-166888cca430"
+    },
+    "generationUUID": "1eb8ed96-c7ff-404d-a584-342f1d78dbdc",
+    "timestamp": "2025-03-20T13:14:12.615Z"
+  }
+]

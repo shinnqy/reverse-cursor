@@ -1,0 +1,56 @@
+{"line":28,"column":0}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+interface Address {
+  city: string;
+  country: string;
+}
+interface User {
+  name: string;
+  age: number;
+  address: Address;
+}
+const user: User = {
+  name: "Alice",
+  age: 30,
+  address: {
+    city: "New York",
+    country: "USA",
+  },
+};
+
+const greeting = `Hello, ${user.name}!`;
+
+function getFullName(user: { firstName: string; lastName: string }) {
+  return `${user.firstName} ${user.lastName}`;
+}
+
+const currentUser = {
+  firstName: "John",
+  lastName: "Doe",
+};
+[ToFill]
+const fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;
+
+
+
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+};
+
+const fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;
+
+const userInfo = {
+
+
+
+-------------------------------[                   fullText                  ]--------------------------------
+};
+
+const fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;
+
+const userInfo = {
+  name: "Alice",
+  age: 30,
+  address

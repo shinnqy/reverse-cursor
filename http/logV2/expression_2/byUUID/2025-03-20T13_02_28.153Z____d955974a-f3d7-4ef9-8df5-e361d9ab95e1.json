@@ -1,0 +1,683 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:28.153Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/dynamicProp.ets",
+          "diffHistory": [
+            "1+|const user = {}\n",
+            "2-|  \n3-|}\n2+|  name: \"Alice\",\n3+|  age: 30,\n4+|  address: {\n5+|},\n6+|};\n7+|\n8+|\n",
+            "5-|},\n5+|    city: \"New York\",\n6+|    country: \"USA\",\n7+|  },\n10+|const greeting = `Hello, ${user.name}!`;\n",
+            "1-|\n1+|interface User {\n2+|  name: string;\n3+|  age: number;\n4+|  address: {\n5+|    city: string;\n6+|    country: string;\n7+|  };\n8+|}\n",
+            "1-|\n1+|interface Address {\n",
+            "5-|  address: {\n5+|  address: Address;\n",
+            "2+|  city: string;\n3+|  country: string;\n4+|}\n",
+            "9-|    city: string;\n10-|    country: string;\n11-|  };\n13-|const user = {\n10+|const user: User = {\n",
+            "21+|function getFullName(user: { firstName: string; lastName: string }) {\n22+|  return `${user.firstName} ${user.lastName}`;\n23+|}\n25+|const fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n26+|\n27+|\n28+|\n",
+            "25-|const fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n",
+            "25+|const currentUser = {\n26+|  firstName: \"John\",\n27+|  lastName: \"Doe\",\n28+|};\n30+|const fullName = getFullName(currentUser);\n",
+            "30-|const fullName = getFullName(currentUser);\n30+|const fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n",
+            "21-|function getFullName(user: { firstName: string; lastName: string }) {\n21+|interface FullName {\n22+|function getFullName(user: { firstName: string; lastName: string }\n23+|function getFullName(user: FullName) {\n",
+            "22-|function getFullName(user: { firstName: string; lastName: string }\n22+|function getFullName(user: { firstName: string; lastName: string ;\n23+|}\n",
+            "22-|function getFullName(user: { firstName: string;\n22+|  firstName: string;\n",
+            "29-|const currentUser = {\n29+|const currentUser: FullName = {\n",
+            "36+|const price = 100;\n37+|const discount = 0.1;\n38+|const priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n40+|const isAdmin = true;\n41+|const roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n43+|const products = [\n44+|  { name: \"Product 1\", price: 100 },\n45+|  { name: \"Product 2\", price: 200 },\n46+|  { name: \"Product 3\", price: 300 },\n47+|];\n49+|const productInfo = `Cu`\n50+|\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/dynamicProp.ets",
+        "contents": "interface Address {\n  city: string;\n  country: string;\n}\ninterface User {\n  name: string;\n  age: number;\n  address: Address;\n}\nconst user: User = {\n  name: \"Alice\",\n  age: 30,\n  address: {\n    city: \"New York\",\n    country: \"USA\",\n  },\n};\n\nconst greeting = `Hello, ${user.name}!`;\n\ninterface FullName {\n  firstName: string;\n  lastName: string;\n}\nfunction getFullName(user: FullName) {\n  return `${user.firstName} ${user.lastName}`;\n}\n\nconst currentUser: FullName = {\n  firstName: \"John\",\n  lastName: \"Doe\",\n};\n\nconst fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n\nconst price = 100;\nconst discount = 0.1;\nconst priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];\n\nconst productInfo = `Cu`\n\n",
+        "cursorPosition": {
+          "line": 48,
+          "column": 23
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 362,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742475748200,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 53.199951171875,
+      "timeAtRequestSend": 1742475748200
+    },
+    "generateUuid": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:28.202Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "  { name: \"Product 3\", price: 300 },\n];\n\nconst productInfo = `Current",
+      "rangeToReplace": {
+        "startLineNumber": 46,
+        "endLineNumberInclusive": 51
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:28.548Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:28.550Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Product"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:28.576Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:28.588Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ${"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:28.598Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "products"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:28.608Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "["
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:28.621Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "0"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:28.632Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "]."
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:28.644Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "name"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:28.656Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "} -"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:28.667Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Price"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:28.679Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:28.692Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " $"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:28.705Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "${"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:28.717Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "products"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:28.727Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "[0].price"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:28.741Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}`"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:28.752Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";\n\n"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:28.765Z"
+  },
+  {
+    "firstChunkValue": "  { name: \"Product 3\", price: 300 },\n];\n\nconst productInfo = `Current Product: ${products[0].name} - Price: $${products[0].price}`;\n\n",
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:28.774Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "  { name: \"Product 3\", price: 300 },\n];\n\nconst productInfo = `Current Product: ${products[0].name} - Price: $${products[0].price}`;\n\n"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:28.776Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "const"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:28.780Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " user"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:28.790Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Info"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:28.802Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " = `User"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:28.815Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:28.828Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ${"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:28.841Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "user"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:28.854Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ".name"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:28.867Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "},"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:28.879Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Age"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:28.894Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:28.910Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ${user."
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:28.922Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "age"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:28.932Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "},"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:28.944Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Address"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:28.957Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:28.970Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ${"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:28.983Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "user."
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:28.996Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "address"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:29.008Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:29.022Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "city"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:29.034Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "},"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:29.048Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ${"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:29.059Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "user"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:29.074Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:29.084Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "address"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:29.099Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ".country"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:29.111Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}`"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:29.124Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:29.139Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:29.151Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "const"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:29.165Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " user"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:29.176Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Info ="
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:29.187Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " `"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:29.198Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "User"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:29.210Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:29.224Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ${user."
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:29.235Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "name"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:29.245Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "},"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:29.258Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Age: ${"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:29.270Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "user.age"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:29.282Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}, Address: ${user"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:29.294Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ".address."
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:29.306Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "city"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:29.317Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}, ${user.address."
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:29.328Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "country"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:29.346Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}`;\n\n"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:29.350Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:29.365Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:29.373Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:29.397Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:29.397Z"
+  },
+  {
+    "fullText": "  { name: \"Product 3\", price: 300 },\n];\n\nconst productInfo = `Current Product: ${products[0].name} - Price: $${products[0].price}`;\n\nconst userInfo = `User: ${user.name}, Age: ${user.age}, Address: ${user.address.city}, ${user.address.country}`;\n\nconst userInfo = `User: ${user.name}, Age: ${user.age}, Address: ${user.address.city}, ${user.address.country}`;\n\n\n\n",
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:29.399Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "  { name: \"Product 3\", price: 300 },\n];\n\nconst productInfo = `Current Product: ${products[0].name} - Price: $${products[0].price}`;\n\n"
+    },
+    "fullText": "  { name: \"Product 3\", price: 300 },\n];\n\nconst productInfo = `Current Product: ${products[0].name} - Price: $${products[0].price}`;\n\nconst userInfo = `User: ${user.name}, Age: ${user.age}, Address: ${user.address.city}, ${user.address.country}`;\n\nconst userInfo = `User: ${user.name}, Age: ${user.age}, Address: ${user.address.city}, ${user.address.country}`;\n\n\n\n",
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:29.399Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && currentSuggestion uniqueId is different && need to create newSuggestion according fullText",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "f1a47ac6-d3e1-43e8-9513-fc4e2efcfb67",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 362,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 367,
+      "monotonicallyIncreasingSuggestionId": 218,
+      "range": {
+        "startLineNumber": 46,
+        "startColumn": 1,
+        "endLineNumberInclusive": 51,
+        "endColumn": 1
+      },
+      "replaceText": "  { name: \"Product 3\", price: 300 },\n];\n\nconst productInfo = `Current Product: ${products[0].name} - Price: $${products[0].price}`;\n\nconst userInfo = `User: ${user.name}, Age: ${user.age}, Address: ${user.address.city}, ${user.address.country}`;\n\nconst userInfo = `User: ${user.name}, Age: ${user.age}, Address: ${user.address.city}, ${user.address.country}`;\n\n\n\n",
+      "originalText": "  { name: \"Product 3\", price: 300 },\n];\n\nconst productInfo = `Current`\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 46,
+        "startColumn": 1,
+        "endLineNumberInclusive": 51,
+        "endColumn": 1
+      },
+      "diffText": "  { name: \"Product 3\", price: 300 },\n];\n\nconst productInfo = `Current Product: ${products[0].name} - Price: $${products[0].price}`;\n\nconst userInfo = `User: ${user.name}, Age: ${user.age}, Address: ${user.address.city}, ${user.address.country}`;\n\nconst userInfo = `User: ${user.name}, Age: ${user.age}, Address: ${user.address.city}, ${user.address.country}`;\n\n\n\n",
+      "fullOriginalText": "  { name: \"Product 3\", price: 300 },\n];\n\nconst productInfo = `Current`\n\n",
+      "suggestionTriggerTime": 1742475748148.2,
+      "greens": [],
+      "source": "typing",
+      "requestId": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+      "selection": {
+        "startLineNumber": 46,
+        "startColumn": 1,
+        "endLineNumberInclusive": 51,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "2242fd37-b5ba-420b-a1fc-761b488066e6",
+      "undoRedoGroup": {
+        "id": 218,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:29.399Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "2242fd37-b5ba-420b-a1fc-761b488066e6",
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:29.410Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "  { name: \"Product 3\", price: 300 },\n];\n\nconst productInfo = `Current Product: ${products[0].name} - Price: $${products[0].price}`;\n\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "2242fd37-b5ba-420b-a1fc-761b488066e6",
+    "generationUUID": "d955974a-f3d7-4ef9-8df5-e361d9ab95e1",
+    "timestamp": "2025-03-20T13:02:29.410Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "2242fd37-b5ba-420b-a1fc-761b488066e6",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-20T13:02:29.411Z"
+  }
+]

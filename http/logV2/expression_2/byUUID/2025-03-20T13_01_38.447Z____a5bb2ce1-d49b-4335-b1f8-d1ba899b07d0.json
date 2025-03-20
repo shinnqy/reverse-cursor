@@ -1,0 +1,421 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "a5bb2ce1-d49b-4335-b1f8-d1ba899b07d0",
+    "timestamp": "2025-03-20T13:01:38.447Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/dynamicProp.ets",
+          "diffHistory": [
+            "1+|const user = {}\n",
+            "2-|  \n3-|}\n2+|  name: \"Alice\",\n3+|  age: 30,\n4+|  address: {\n5+|},\n6+|};\n7+|\n8+|\n",
+            "5-|},\n5+|    city: \"New York\",\n6+|    country: \"USA\",\n7+|  },\n10+|const greeting = `Hello, ${user.name}!`;\n",
+            "1-|\n1+|interface User {\n2+|  name: string;\n3+|  age: number;\n4+|  address: {\n5+|    city: string;\n6+|    country: string;\n7+|  };\n8+|}\n",
+            "1-|\n1+|interface Address {\n",
+            "5-|  address: {\n5+|  address: Address;\n",
+            "2+|  city: string;\n3+|  country: string;\n4+|}\n",
+            "9-|    city: string;\n10-|    country: string;\n11-|  };\n13-|const user = {\n10+|const user: User = {\n",
+            "21+|function getFullName(user: { firstName: string; lastName: string }) {\n22+|  return `${user.firstName} ${user.lastName}`;\n23+|}\n25+|const fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n26+|\n27+|\n28+|\n",
+            "25-|const fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n",
+            "25+|const currentUser = {\n26+|  firstName: \"John\",\n27+|  lastName: \"Doe\",\n28+|};\n30+|const fullName = getFullName(currentUser);\n",
+            "30-|const fullName = getFullName(currentUser);\n30+|const fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n",
+            "21-|function getFullName(user: { firstName: string; lastName: string }) {\n21+|interface FullName {\n22+|function getFullName(user: { firstName: string; lastName: string }\n23+|function getFullName(user: FullName) {\n",
+            "22-|function getFullName(user: { firstName: string; lastName: string }\n22+|function getFullName(user: { firstName: string; lastName: string ;\n23+|}\n",
+            "22-|function getFullName(user: { firstName: string;\n22+|  firstName: string;\n",
+            "29-|const currentUser = {\n29+|const currentUser: FullName = {\n",
+            "36+|const price = 100;\n37+|const discount = 0.1;\n38+|const priceInfo = `Price: ${()}`\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/dynamicProp.ets",
+        "contents": "interface Address {\n  city: string;\n  country: string;\n}\ninterface User {\n  name: string;\n  age: number;\n  address: Address;\n}\nconst user: User = {\n  name: \"Alice\",\n  age: 30,\n  address: {\n    city: \"New York\",\n    country: \"USA\",\n  },\n};\n\nconst greeting = `Hello, ${user.name}!`;\n\ninterface FullName {\n  firstName: string;\n  lastName: string;\n}\nfunction getFullName(user: FullName) {\n  return `${user.firstName} ${user.lastName}`;\n}\n\nconst currentUser: FullName = {\n  firstName: \"John\",\n  lastName: \"Doe\",\n};\n\nconst fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n\nconst price = 100;\nconst discount = 0.1;\nconst priceInfo = `Price: ${()}`\n\n\n",
+        "cursorPosition": {
+          "line": 37,
+          "column": 29
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 272,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742475698484,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.5,
+      "timeAtRequestSend": 1742475698485
+    },
+    "generateUuid": "a5bb2ce1-d49b-4335-b1f8-d1ba899b07d0",
+    "timestamp": "2025-03-20T13:01:38.487Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nconst price = 100;\nconst discount = 0.1;\nconst priceInfo = `Price: ${price",
+      "rangeToReplace": {
+        "startLineNumber": 35,
+        "endLineNumberInclusive": 41
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "a5bb2ce1-d49b-4335-b1f8-d1ba899b07d0",
+    "timestamp": "2025-03-20T13:01:38.849Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "a5bb2ce1-d49b-4335-b1f8-d1ba899b07d0",
+    "timestamp": "2025-03-20T13:01:38.850Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}"
+    },
+    "generationUUID": "a5bb2ce1-d49b-4335-b1f8-d1ba899b07d0",
+    "timestamp": "2025-03-20T13:01:38.885Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " -"
+    },
+    "generationUUID": "a5bb2ce1-d49b-4335-b1f8-d1ba899b07d0",
+    "timestamp": "2025-03-20T13:01:38.893Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Discount"
+    },
+    "generationUUID": "a5bb2ce1-d49b-4335-b1f8-d1ba899b07d0",
+    "timestamp": "2025-03-20T13:01:38.902Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "a5bb2ce1-d49b-4335-b1f8-d1ba899b07d0",
+    "timestamp": "2025-03-20T13:01:38.912Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ${"
+    },
+    "generationUUID": "a5bb2ce1-d49b-4335-b1f8-d1ba899b07d0",
+    "timestamp": "2025-03-20T13:01:38.922Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "discount"
+    },
+    "generationUUID": "a5bb2ce1-d49b-4335-b1f8-d1ba899b07d0",
+    "timestamp": "2025-03-20T13:01:38.931Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}`"
+    },
+    "generationUUID": "a5bb2ce1-d49b-4335-b1f8-d1ba899b07d0",
+    "timestamp": "2025-03-20T13:01:38.940Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";"
+    },
+    "generationUUID": "a5bb2ce1-d49b-4335-b1f8-d1ba899b07d0",
+    "timestamp": "2025-03-20T13:01:38.951Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "a5bb2ce1-d49b-4335-b1f8-d1ba899b07d0",
+    "timestamp": "2025-03-20T13:01:38.959Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "const"
+    },
+    "generationUUID": "a5bb2ce1-d49b-4335-b1f8-d1ba899b07d0",
+    "timestamp": "2025-03-20T13:01:38.971Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " user"
+    },
+    "generationUUID": "a5bb2ce1-d49b-4335-b1f8-d1ba899b07d0",
+    "timestamp": "2025-03-20T13:01:38.977Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Info"
+    },
+    "generationUUID": "a5bb2ce1-d49b-4335-b1f8-d1ba899b07d0",
+    "timestamp": "2025-03-20T13:01:38.986Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " = {"
+    },
+    "generationUUID": "a5bb2ce1-d49b-4335-b1f8-d1ba899b07d0",
+    "timestamp": "2025-03-20T13:01:38.997Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n  name"
+    },
+    "generationUUID": "a5bb2ce1-d49b-4335-b1f8-d1ba899b07d0",
+    "timestamp": "2025-03-20T13:01:39.008Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": \""
+    },
+    "generationUUID": "a5bb2ce1-d49b-4335-b1f8-d1ba899b07d0",
+    "timestamp": "2025-03-20T13:01:39.016Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "John"
+    },
+    "generationUUID": "a5bb2ce1-d49b-4335-b1f8-d1ba899b07d0",
+    "timestamp": "2025-03-20T13:01:39.028Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\",\n  age"
+    },
+    "generationUUID": "a5bb2ce1-d49b-4335-b1f8-d1ba899b07d0",
+    "timestamp": "2025-03-20T13:01:39.039Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": "
+    },
+    "generationUUID": "a5bb2ce1-d49b-4335-b1f8-d1ba899b07d0",
+    "timestamp": "2025-03-20T13:01:39.050Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "3"
+    },
+    "generationUUID": "a5bb2ce1-d49b-4335-b1f8-d1ba899b07d0",
+    "timestamp": "2025-03-20T13:01:39.061Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "0,\n "
+    },
+    "generationUUID": "a5bb2ce1-d49b-4335-b1f8-d1ba899b07d0",
+    "timestamp": "2025-03-20T13:01:39.073Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " address"
+    },
+    "generationUUID": "a5bb2ce1-d49b-4335-b1f8-d1ba899b07d0",
+    "timestamp": "2025-03-20T13:01:39.084Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": {"
+    },
+    "generationUUID": "a5bb2ce1-d49b-4335-b1f8-d1ba899b07d0",
+    "timestamp": "2025-03-20T13:01:39.096Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "a5bb2ce1-d49b-4335-b1f8-d1ba899b07d0",
+    "timestamp": "2025-03-20T13:01:39.106Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "   "
+    },
+    "generationUUID": "a5bb2ce1-d49b-4335-b1f8-d1ba899b07d0",
+    "timestamp": "2025-03-20T13:01:39.115Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " city: \"New York\",\n   "
+    },
+    "generationUUID": "a5bb2ce1-d49b-4335-b1f8-d1ba899b07d0",
+    "timestamp": "2025-03-20T13:01:39.126Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " country"
+    },
+    "generationUUID": "a5bb2ce1-d49b-4335-b1f8-d1ba899b07d0",
+    "timestamp": "2025-03-20T13:01:39.139Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": \""
+    },
+    "generationUUID": "a5bb2ce1-d49b-4335-b1f8-d1ba899b07d0",
+    "timestamp": "2025-03-20T13:01:39.147Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "USA"
+    },
+    "generationUUID": "a5bb2ce1-d49b-4335-b1f8-d1ba899b07d0",
+    "timestamp": "2025-03-20T13:01:39.157Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\",\n "
+    },
+    "generationUUID": "a5bb2ce1-d49b-4335-b1f8-d1ba899b07d0",
+    "timestamp": "2025-03-20T13:01:39.167Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " },"
+    },
+    "generationUUID": "a5bb2ce1-d49b-4335-b1f8-d1ba899b07d0",
+    "timestamp": "2025-03-20T13:01:39.177Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n};"
+    },
+    "generationUUID": "a5bb2ce1-d49b-4335-b1f8-d1ba899b07d0",
+    "timestamp": "2025-03-20T13:01:39.187Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "a5bb2ce1-d49b-4335-b1f8-d1ba899b07d0",
+    "timestamp": "2025-03-20T13:01:39.201Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "a5bb2ce1-d49b-4335-b1f8-d1ba899b07d0",
+    "timestamp": "2025-03-20T13:01:39.201Z"
+  },
+  {
+    "firstChunkValue": "\nconst price = 100;\nconst discount = 0.1;\nconst priceInfo = `Price: ${price} - Discount: ${discount}`;\n\nconst userInfo = {\n  name: \"John\",\n  age: 30,\n  address: {\n    city: \"New York\",\n    country: \"USA\",\n  },\n};",
+    "generationUUID": "a5bb2ce1-d49b-4335-b1f8-d1ba899b07d0",
+    "timestamp": "2025-03-20T13:01:39.204Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nconst price = 100;\nconst discount = 0.1;\nconst priceInfo = `Price: ${price} - Discount: ${discount}`;\n\nconst userInfo = {\n  name: \"John\",\n  age: 30,\n  address: {\n    city: \"New York\",\n    country: \"USA\",\n  },\n};"
+    },
+    "generationUUID": "a5bb2ce1-d49b-4335-b1f8-d1ba899b07d0",
+    "timestamp": "2025-03-20T13:01:39.207Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "f66f9ae4-fffd-42be-8e6b-a6ff887250b6",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 272,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 272,
+      "monotonicallyIncreasingSuggestionId": 163,
+      "range": {
+        "startLineNumber": 35,
+        "startColumn": 1,
+        "endLineNumberInclusive": 41,
+        "endColumn": 1
+      },
+      "replaceText": "\nconst price = 100;\nconst discount = 0.1;\nconst priceInfo = `Price: ${price} - Discount: ${discount}`;\n\nconst userInfo = {\n  name: \"John\",\n  age: 30,\n  address: {\n    city: \"New York\",\n    country: \"USA\",\n  },\n};",
+      "originalText": "\nconst price = 100;\nconst discount = 0.1;\nconst priceInfo = `Price: ${()}`\n\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 35,
+        "startColumn": 1,
+        "endLineNumberInclusive": 41,
+        "endColumn": 1
+      },
+      "diffText": "\nconst price = 100;\nconst discount = 0.1;\nconst priceInfo = `Price: ${price} - Discount: ${discount}`;\n\nconst userInfo = {\n  name: \"John\",\n  age: 30,\n  address: {\n    city: \"New York\",\n    country: \"USA\",\n  },\n};",
+      "fullOriginalText": "\nconst price = 100;\nconst discount = 0.1;\nconst priceInfo = `Price: ${()}`\n\n\n",
+      "suggestionTriggerTime": 1742475698434.4,
+      "greens": [],
+      "source": "typing",
+      "requestId": "a5bb2ce1-d49b-4335-b1f8-d1ba899b07d0",
+      "selection": {
+        "startLineNumber": 35,
+        "startColumn": 1,
+        "endLineNumberInclusive": 41,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "6d9be9f1-32e4-41e1-9216-7c066baa100b",
+      "undoRedoGroup": {
+        "id": 163,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "a5bb2ce1-d49b-4335-b1f8-d1ba899b07d0",
+    "timestamp": "2025-03-20T13:01:39.207Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "6d9be9f1-32e4-41e1-9216-7c066baa100b",
+    "generationUUID": "a5bb2ce1-d49b-4335-b1f8-d1ba899b07d0",
+    "timestamp": "2025-03-20T13:01:39.223Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nconst price = 100;\nconst discount = 0.1;\nconst priceInfo = `Price: ${price} - Discount: ${discount}`;\n\nconst userInfo = {\n  name: \"John\",\n  age: 30,\n  address: {\n    city: \"New York\",\n    country: \"USA\",\n  },\n};"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "6d9be9f1-32e4-41e1-9216-7c066baa100b",
+    "generationUUID": "a5bb2ce1-d49b-4335-b1f8-d1ba899b07d0",
+    "timestamp": "2025-03-20T13:01:39.223Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "6d9be9f1-32e4-41e1-9216-7c066baa100b",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-20T13:01:39.223Z"
+  }
+]

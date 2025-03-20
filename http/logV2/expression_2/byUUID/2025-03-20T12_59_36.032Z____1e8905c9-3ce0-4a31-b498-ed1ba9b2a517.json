@@ -1,0 +1,403 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.032Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/dynamicProp.ets",
+          "diffHistory": [
+            "1+|const user = {}\n",
+            "2-|  \n3-|}\n2+|  name: \"Alice\",\n3+|  age: 30,\n4+|  address: {\n5+|},\n6+|};\n7+|\n8+|\n",
+            "5-|},\n5+|    city: \"New York\",\n6+|    country: \"USA\",\n7+|  },\n10+|const greeting = `Hello, ${user.name}!`;\n",
+            "1-|\n1+|interface User {\n2+|  name: string;\n3+|  age: number;\n4+|  address: {\n5+|    city: string;\n6+|    country: string;\n7+|  };\n8+|}\n",
+            "1-|\n1+|interface Address {\n",
+            "5-|  address: {\n5+|  address: Address;\n",
+            "2+|  city: string;\n3+|  country: string;\n4+|}\n",
+            "9-|    city: string;\n10-|    country: string;\n11-|  };\n13-|const user = {\n10+|const user: User = {\n",
+            "21+|function getF\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/dynamicProp.ets",
+        "contents": "interface Address {\n  city: string;\n  country: string;\n}\ninterface User {\n  name: string;\n  age: number;\n  address: Address;\n}\nconst user: User = {\n  name: \"Alice\",\n  age: 30,\n  address: {\n    city: \"New York\",\n    country: \"USA\",\n  },\n};\n\nconst greeting = `Hello, ${user.name}!`;\n\nfunction getF\n\n",
+        "cursorPosition": {
+          "line": 20,
+          "column": 13
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 118,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742475576069,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.39990234375,
+      "timeAtRequestSend": 1742475576069
+    },
+    "generateUuid": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.070Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nconst greeting = `Hello, ${user.name}!`;\n\nfunction getField",
+      "rangeToReplace": {
+        "startLineNumber": 18,
+        "endLineNumberInclusive": 23
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.423Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.424Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "("
+    },
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.462Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "obj:"
+    },
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.493Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " any"
+    },
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.507Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ","
+    },
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.512Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " field"
+    },
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.526Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.539Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " string"
+    },
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.558Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ")"
+    },
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.572Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.579Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n "
+    },
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.603Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " return"
+    },
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.604Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " obj["
+    },
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.633Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "field"
+    },
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.645Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "];"
+    },
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.651Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.669Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}"
+    },
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.681Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.689Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "const"
+    },
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.702Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " field"
+    },
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.715Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.730Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " get"
+    },
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.742Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Field"
+    },
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.755Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "(user"
+    },
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.768Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ","
+    },
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.783Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \""
+    },
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.794Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "name"
+    },
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.807Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\");"
+    },
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.822Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.834Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "console"
+    },
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.846Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.859Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "log"
+    },
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.872Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "("
+    },
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.884Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "field"
+    },
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.897Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ");"
+    },
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.909Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.925Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.938Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.949Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.964Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.965Z"
+  },
+  {
+    "firstChunkValue": "\nconst greeting = `Hello, ${user.name}!`;\n\nfunction getField(obj: any, field: string) {\n  return obj[field];\n}\n\nconst field = getField(user, \"name\");\nconsole.log(field);\n\n\n",
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.967Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nconst greeting = `Hello, ${user.name}!`;\n\nfunction getField(obj: any, field: string) {\n  return obj[field];\n}\n\nconst field = getField(user, \"name\");\nconsole.log(field);\n\n\n"
+    },
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.968Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "44b7e562-d6f5-48dc-87ab-f290667b53d5",
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.973Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nconst greeting = `Hello, ${user.name}!`;\n\nfunction getField(obj: any, field: string) {\n  return obj[field];\n}\n\nconst field = getField(user, \"name\");\nconsole.log(field);\n\n\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "44b7e562-d6f5-48dc-87ab-f290667b53d5",
+    "generationUUID": "1e8905c9-3ce0-4a31-b498-ed1ba9b2a517",
+    "timestamp": "2025-03-20T12:59:36.973Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "44b7e562-d6f5-48dc-87ab-f290667b53d5",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-20T12:59:36.973Z"
+  }
+]

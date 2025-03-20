@@ -1,0 +1,43 @@
+{"line":3,"column":3}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+const user = {
+  name: "Alice",
+  age: 30,
+  a[ToFill]
+}
+-------------------------------[               firstChunkValue               ]--------------------------------
+const user = {
+  name: "Alice",
+  age: 30,
+  address: {
+}
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+const user = {
+  name: "Alice",
+  age: 30,
+  address: {
+}
+-------------------------------[                   fullText                  ]--------------------------------
+const user = {
+  name: "Alice",
+  age: 30,
+  address: {
+    city: "New York",
+    country: "USA",
+  },
+};
+
+
+
+-------------------------------[         replacedContentsWithFullText         ]--------------------------------
+const user = {
+  name: "Alice",
+  age: 30,
+  address: {
+    city: "New York",
+    country: "USA",
+  },
+};
+
+

@@ -1,0 +1,393 @@
+[
+  {
+    "intent": "cursor_prediction",
+    "generationUUID": "ff3f13c1-835a-49d8-bfb5-8021cbc84777",
+    "timestamp": "2025-03-20T13:04:18.872Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/dynamicProp.ets",
+          "diffHistory": [
+            "1+|const user = {}\n",
+            "2-|  \n3-|}\n2+|  name: \"Alice\",\n3+|  age: 30,\n4+|  address: {\n5+|},\n6+|};\n7+|\n8+|\n",
+            "5-|},\n5+|    city: \"New York\",\n6+|    country: \"USA\",\n7+|  },\n10+|const greeting = `Hello, ${user.name}!`;\n",
+            "1-|\n1+|interface User {\n2+|  name: string;\n3+|  age: number;\n4+|  address: {\n5+|    city: string;\n6+|    country: string;\n7+|  };\n8+|}\n",
+            "1-|\n1+|interface Address {\n",
+            "5-|  address: {\n5+|  address: Address;\n",
+            "2+|  city: string;\n3+|  country: string;\n4+|}\n",
+            "9-|    city: string;\n10-|    country: string;\n11-|  };\n13-|const user = {\n10+|const user: User = {\n",
+            "21+|function getFullName(user: { firstName: string; lastName: string }) {\n22+|  return `${user.firstName} ${user.lastName}`;\n23+|}\n25+|const fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n26+|\n27+|\n28+|\n",
+            "25-|const fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n",
+            "25+|const currentUser = {\n26+|  firstName: \"John\",\n27+|  lastName: \"Doe\",\n28+|};\n30+|const fullName = getFullName(currentUser);\n",
+            "30-|const fullName = getFullName(currentUser);\n30+|const fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n",
+            "21-|function getFullName(user: { firstName: string; lastName: string }) {\n21+|interface FullName {\n22+|function getFullName(user: { firstName: string; lastName: string }\n23+|function getFullName(user: FullName) {\n",
+            "22-|function getFullName(user: { firstName: string; lastName: string }\n22+|function getFullName(user: { firstName: string; lastName: string ;\n23+|}\n",
+            "22-|function getFullName(user: { firstName: string;\n22+|  firstName: string;\n",
+            "29-|const currentUser = {\n29+|const currentUser: FullName = {\n",
+            "36+|const price = 100;\n37+|const discount = 0.1;\n38+|const priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n40+|const isAdmin = true;\n41+|const roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n43+|const products = [\n44+|  { name: \"Product 1\", price: 100 },\n45+|  { name: \"Product 2\", price: 200 },\n46+|  { name: \"Product 3\", price: 300 },\n47+|];\n49+|const productInfo = `Current product: ${products[0].name}`;\n50+|\n51+|type Status = \"active\" | \"inactive\";\n52+|let status: Status = \"active\";\n53+|const statusText = `Status: ${status}`;\n54+|\n55+|const company = {\n56+|  name: \"Acme Inc.\",\n57+|  address: {\n58+|    street: \"123 Main St\",\n59+|    city: \"Anytown\",\n60+|  },\n61+|};\n62+|\n",
+            "57-|  address: {\n58-|    street: \"123 Main St\",\n59-|    city: \"Anytown\",\n60-|  },\n57+|  ceo: {\n58+|    name: \"John Doe\",\n59+|    contact: {\n",
+            "60+|      email: \"john.doe@acme.com\",\n61+|      phone: \"+1234567890\",\n62+|    },\n63+|  },\n66+|const companyInfo = `Company: ${company.name}, CEO: ${company.ceo.name}`;\n",
+            "55+|interface Company {\n56+|  name: string;\n57+|  ceo: {\n58+|    name: string;\n59+|    contact: {\n60+|      email: string;\n61+|      phone: string;\n",
+            "62-|const company = {\n62+|      \n63+|const company: Company = {\n",
+            "62-|      \n62+|      };\n63+|}\n",
+            "62-|      };\n62+|    };\n63+|  };\n",
+            "55+|interface CEO {\n56+|  name: string;\n57+|  contact: {\n58+|    email: string;\n59+|    phone: string;\n60+|  };\n61+|}\n",
+            "70-|  };\n70+|  }CEO;\n",
+            "64-|  ceo: {\n65-|    name: string;\n66-|    contact: {\n67-|      email: string;\n68-|      phone: string;\n69-|    };\n70-|  }CEO;\n64+|  ceo: CEO;\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/dynamicProp.ets",
+        "contents": "interface Address {\n  city: string;\n  country: string;\n}\ninterface User {\n  name: string;\n  age: number;\n  address: Address;\n}\nconst user: User = {\n  name: \"Alice\",\n  age: 30,\n  address: {\n    city: \"New York\",\n    country: \"USA\",\n  },\n};\n\nconst greeting = `Hello, ${user.name}!`;\n\ninterface FullName {\n  firstName: string;\n  lastName: string;\n}\nfunction getFullName(user: FullName) {\n  return `${user.firstName} ${user.lastName}`;\n}\n\nconst currentUser: FullName = {\n  firstName: \"John\",\n  lastName: \"Doe\",\n};\n\nconst fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n\nconst price = 100;\nconst discount = 0.1;\nconst priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];\n\nconst productInfo = `Current product: ${products[0].name}`;\n\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\ninterface CEO {\n  name: string;\n  contact: {\n    email: string;\n    phone: string;\n  };\n}\ninterface Company {\n  name: string;\n  ceo: CEO;\n}\nconst company: Company = {\n  name: \"Acme Inc.\",\n  ceo: {\n    name: \"John Doe\",\n    contact: {\n      email: \"john.doe@acme.com\",\n      phone: \"+1234567890\",\n    },\n  },\n};\n\nconst companyInfo = `Company: ${company.name}, CEO: ${company.ceo.name}`;\n\n",
+        "cursorPosition": {
+          "line": 77,
+          "column": 0
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 550,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "cursor_prediction"
+      },
+      "clientTime": 1742475858882,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 10.599853515625,
+      "timeAtRequestSend": 1742475858882
+    },
+    "generateUuid": "ff3f13c1-835a-49d8-bfb5-8021cbc84777",
+    "timestamp": "2025-03-20T13:04:18.884Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nconst companyInfo = `Company: ${company.name}, CEO: ${company.ceo.name}`;\n\nconst",
+      "rangeToReplace": {
+        "startLineNumber": 76,
+        "endLineNumberInclusive": 79
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "ff3f13c1-835a-49d8-bfb5-8021cbc84777",
+    "timestamp": "2025-03-20T13:04:19.259Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "ff3f13c1-835a-49d8-bfb5-8021cbc84777",
+    "timestamp": "2025-03-20T13:04:19.261Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " user"
+    },
+    "generationUUID": "ff3f13c1-835a-49d8-bfb5-8021cbc84777",
+    "timestamp": "2025-03-20T13:04:19.265Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "ff3f13c1-835a-49d8-bfb5-8021cbc84777",
+    "timestamp": "2025-03-20T13:04:19.272Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {\n "
+    },
+    "generationUUID": "ff3f13c1-835a-49d8-bfb5-8021cbc84777",
+    "timestamp": "2025-03-20T13:04:19.280Z"
+  },
+  {
+    "firstChunkValue": "\nconst companyInfo = `Company: ${company.name}, CEO: ${company.ceo.name}`;\n\nconst user = {",
+    "generationUUID": "ff3f13c1-835a-49d8-bfb5-8021cbc84777",
+    "timestamp": "2025-03-20T13:04:19.285Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nconst companyInfo = `Company: ${company.name}, CEO: ${company.ceo.name}`;\n\nconst user = {"
+    },
+    "generationUUID": "ff3f13c1-835a-49d8-bfb5-8021cbc84777",
+    "timestamp": "2025-03-20T13:04:19.286Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "6e64d740-cafc-40f5-a57d-1e805c7011e8",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 550,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 550,
+      "monotonicallyIncreasingSuggestionId": 340,
+      "range": {
+        "startLineNumber": 76,
+        "startColumn": 1,
+        "endLineNumberInclusive": 79,
+        "endColumn": 1
+      },
+      "replaceText": "\nconst companyInfo = `Company: ${company.name}, CEO: ${company.ceo.name}`;\n\nconst user = {",
+      "originalText": "\nconst companyInfo = `Company: ${company.name}, CEO: ${company.ceo.name}`;\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 76,
+        "startColumn": 1,
+        "endLineNumberInclusive": 79,
+        "endColumn": 1
+      },
+      "diffText": "\nconst companyInfo = `Company: ${company.name}, CEO: ${company.ceo.name}`;\n\nconst user = {",
+      "fullOriginalText": "\nconst companyInfo = `Company: ${company.name}, CEO: ${company.ceo.name}`;\n\n",
+      "suggestionTriggerTime": 1742475858846.3,
+      "greens": [],
+      "source": "cursor_prediction",
+      "requestId": "ff3f13c1-835a-49d8-bfb5-8021cbc84777",
+      "selection": {
+        "startLineNumber": 76,
+        "startColumn": 1,
+        "endLineNumberInclusive": 79,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 340,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "ff3f13c1-835a-49d8-bfb5-8021cbc84777",
+    "timestamp": "2025-03-20T13:04:19.287Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " name"
+    },
+    "generationUUID": "ff3f13c1-835a-49d8-bfb5-8021cbc84777",
+    "timestamp": "2025-03-20T13:04:19.288Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": \""
+    },
+    "generationUUID": "ff3f13c1-835a-49d8-bfb5-8021cbc84777",
+    "timestamp": "2025-03-20T13:04:19.295Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Alice"
+    },
+    "generationUUID": "ff3f13c1-835a-49d8-bfb5-8021cbc84777",
+    "timestamp": "2025-03-20T13:04:19.308Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\",\n "
+    },
+    "generationUUID": "ff3f13c1-835a-49d8-bfb5-8021cbc84777",
+    "timestamp": "2025-03-20T13:04:19.315Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " age"
+    },
+    "generationUUID": "ff3f13c1-835a-49d8-bfb5-8021cbc84777",
+    "timestamp": "2025-03-20T13:04:19.324Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": "
+    },
+    "generationUUID": "ff3f13c1-835a-49d8-bfb5-8021cbc84777",
+    "timestamp": "2025-03-20T13:04:19.331Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "3"
+    },
+    "generationUUID": "ff3f13c1-835a-49d8-bfb5-8021cbc84777",
+    "timestamp": "2025-03-20T13:04:19.340Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "0,"
+    },
+    "generationUUID": "ff3f13c1-835a-49d8-bfb5-8021cbc84777",
+    "timestamp": "2025-03-20T13:04:19.349Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "ff3f13c1-835a-49d8-bfb5-8021cbc84777",
+    "timestamp": "2025-03-20T13:04:19.358Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "ff3f13c1-835a-49d8-bfb5-8021cbc84777",
+    "timestamp": "2025-03-20T13:04:19.369Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " address: {\n    city: \""
+    },
+    "generationUUID": "ff3f13c1-835a-49d8-bfb5-8021cbc84777",
+    "timestamp": "2025-03-20T13:04:19.375Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "New"
+    },
+    "generationUUID": "ff3f13c1-835a-49d8-bfb5-8021cbc84777",
+    "timestamp": "2025-03-20T13:04:19.384Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " York\",\n\n"
+    },
+    "generationUUID": "ff3f13c1-835a-49d8-bfb5-8021cbc84777",
+    "timestamp": "2025-03-20T13:04:19.393Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "ff3f13c1-835a-49d8-bfb5-8021cbc84777",
+    "timestamp": "2025-03-20T13:04:19.404Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "ff3f13c1-835a-49d8-bfb5-8021cbc84777",
+    "timestamp": "2025-03-20T13:04:19.405Z"
+  },
+  {
+    "fullText": "\nconst companyInfo = `Company: ${company.name}, CEO: ${company.ceo.name}`;\n\nconst user = {\n  name: \"Alice\",\n  age: 30,\n  address: {\n    city: \"New York\",\n\n",
+    "generationUUID": "ff3f13c1-835a-49d8-bfb5-8021cbc84777",
+    "timestamp": "2025-03-20T13:04:19.409Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nconst companyInfo = `Company: ${company.name}, CEO: ${company.ceo.name}`;\n\nconst user = {"
+    },
+    "fullText": "\nconst companyInfo = `Company: ${company.name}, CEO: ${company.ceo.name}`;\n\nconst user = {\n  name: \"Alice\",\n  age: 30,\n  address: {\n    city: \"New York\",\n\n",
+    "generationUUID": "ff3f13c1-835a-49d8-bfb5-8021cbc84777",
+    "timestamp": "2025-03-20T13:04:19.409Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "4e97860c-aa64-4ea3-a179-2899c66924c7",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 550,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 551,
+      "monotonicallyIncreasingSuggestionId": 341,
+      "range": {
+        "startLineNumber": 76,
+        "startColumn": 1,
+        "endLineNumberInclusive": 79,
+        "endColumn": 1
+      },
+      "replaceText": "\nconst companyInfo = `Company: ${company.name}, CEO: ${company.ceo.name}`;\n\nconst user = {\n  name: \"Alice\",\n  age: 30,\n  address: {\n    city: \"New York\",\n\n",
+      "originalText": "\nconst companyInfo = `Company: ${company.name}, CEO: ${company.ceo.name}`;\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 76,
+        "startColumn": 1,
+        "endLineNumberInclusive": 79,
+        "endColumn": 1
+      },
+      "diffText": "\nconst companyInfo = `Company: ${company.name}, CEO: ${company.ceo.name}`;\n\nconst user = {\n  name: \"Alice\",\n  age: 30,\n  address: {\n    city: \"New York\",\n\n",
+      "fullOriginalText": "\nconst companyInfo = `Company: ${company.name}, CEO: ${company.ceo.name}`;\n\n",
+      "suggestionTriggerTime": 1742475858846.3,
+      "greens": [],
+      "source": "cursor_prediction",
+      "requestId": "ff3f13c1-835a-49d8-bfb5-8021cbc84777",
+      "selection": {
+        "startLineNumber": 76,
+        "startColumn": 1,
+        "endLineNumberInclusive": 79,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "67762799-cd27-4617-b74c-0e9ad6187cfe",
+      "undoRedoGroup": {
+        "id": 341,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "ff3f13c1-835a-49d8-bfb5-8021cbc84777",
+    "timestamp": "2025-03-20T13:04:19.410Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "67762799-cd27-4617-b74c-0e9ad6187cfe",
+    "generationUUID": "ff3f13c1-835a-49d8-bfb5-8021cbc84777",
+    "timestamp": "2025-03-20T13:04:19.414Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nconst companyInfo = `Company: ${company.name}, CEO: ${company.ceo.name}`;\n\nconst user = {"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "67762799-cd27-4617-b74c-0e9ad6187cfe",
+    "generationUUID": "ff3f13c1-835a-49d8-bfb5-8021cbc84777",
+    "timestamp": "2025-03-20T13:04:19.416Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "67762799-cd27-4617-b74c-0e9ad6187cfe",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-20T13:04:19.417Z"
+  }
+]

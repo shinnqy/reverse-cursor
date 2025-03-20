@@ -1,0 +1,140 @@
+{"line":3,"column":20}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+try {
+  JSON.parse("{ invalid JSON }");
+} catch (error) {
+  console.log(error.[ToFill]);
+}
+
+class NetworkError extends Error {
+  statusCode: number;
+  constructor(message: string, code: number) {
+    super(message);
+    this.statusCode = code;
+  }
+}
+
+try {
+  throw new NetworkError("Timeout", 504);
+} catch (error) {
+  if (error instanceof NetworkError) {
+    console.log(error);
+  }
+}
+
+fetch("https://api.example.com")
+  .then(res => res.json())
+  .catch(error => {
+    console.error(error);
+  });
+
+interface User { profile?: { email?: string } }
+let user: User = {};
+
+type Result = string | Error;
+function getResult(): Result {
+  return Math.random() > 0.5 ? "OK" : new Error("Failed");
+}
+
+let result = getResult();
+if (result instanceof Error) {
+} else {
+}
+
+async function loadData() {
+  try {
+    await fetch("invalid-url");
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+try {
+  let data = {} as { items: string[] };
+  data.items.push("test");
+} catch (error) {
+}
+-------------------------------[               firstChunkValue               ]--------------------------------
+try {
+  JSON.parse("{ invalid JSON }");
+} catch (error) {
+  console.log(error.message);
+}
+
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+try {
+  JSON.parse("{ invalid JSON }");
+} catch (error) {
+  console.log(error.message);
+}
+
+class NetworkError extends Error {
+  statusCode: number;
+  constructor(message: string, code: number) {
+    super(message);
+    this.statusCode = code;
+  }
+}
+
+try {
+  throw new NetworkError("Timeout", 504);
+} catch (error) {
+  if (error instanceof NetworkError) {
+    console.log(error);
+  }
+}
+
+fetch("https://api.example.com")
+  .then(res => res.json())
+  .catch(error => {
+    console.error(error);
+  });
+
+interface User { profile?: { email?: string } }
+let user: User = {};
+
+type Result = string | Error;
+function getResult(): Result {
+  return Math.random() > 0.5 ? "OK" : new Error("Failed");
+}
+
+let result = getResult();
+if (result instanceof Error) {
+} else {
+}
+
+async function loadData() {
+  try {
+    await fetch("invalid-url");
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+try {
+  let data = {} as { items: string[] };
+  data.items.push("test");
+} catch (error) {
+}
+-------------------------------[                   fullText                  ]--------------------------------
+try {
+  JSON.parse("{ invalid JSON }");
+} catch (error) {
+  console.log(error.message);
+}
+
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/errorHandling2.ets",
+  "lineNumberOneIndexed": 19,
+  "text": "console.log(error);\n}\n}\n\ntry {",
+  "shouldRetriggerCpp": false
+}
+--------------------------------[        displayedFusedCursorPrediction       ]---------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/errorHandling2.ets",
+  "lineNumberOneIndexed": 19,
+  "text": "console.log(error);\n}\n}\n\ntry {",
+  "shouldRetriggerCpp": false
+}

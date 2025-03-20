@@ -1,0 +1,12 @@
+{"line":0,"column":7}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+const u[ToFill]
+-------------------------------[               firstChunkValue               ]--------------------------------
+const utils = {
+    dynamicProp: (obj, prop, value) => {
+        Object.defineProperty(obj, prop, {
+            get: () => value,
+            set: (v) => value = v
+        })
+    }

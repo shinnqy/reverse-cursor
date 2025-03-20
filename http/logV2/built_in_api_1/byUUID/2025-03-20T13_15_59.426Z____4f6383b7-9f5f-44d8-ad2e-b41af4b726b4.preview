@@ -1,0 +1,54 @@
+{"line":13,"column":20}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+import router from "@ohos.router";
+
+@Entry
+@Component
+struct Main {
+  @State message: string = "Hello World";
+
+  build() {
+    Row() {
+      Text(this.message)
+        .fontSize(20)
+        .fontWeight(FontWeight.Bold)
+        .onClick(() => {
+          router.pus[ToFill]h({
+            url: "pages/SecondPage",
+            params: {
+              message: "Hello from Second Page",
+            },
+          });
+        })
+        .width(200)
+        .height(100)
+
+    }
+  }
+}
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+        .onClick(() => {
+          router.push({
+            url: "pages/SecondPage",
+            params: {
+              message: "Hello from Second Page",
+            },
+          });
+        })
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/builtInAPI.ets",
+  "lineNumberOneIndexed": 23,
+  "text": "\n}\n}\n}\n",
+  "shouldRetriggerCpp": true
+}
+--------------------------------[        displayedFusedCursorPrediction       ]---------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/builtInAPI.ets",
+  "lineNumberOneIndexed": 23,
+  "text": "\n}\n}\n}\n",
+  "shouldRetriggerCpp": true
+}

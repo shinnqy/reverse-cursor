@@ -1,0 +1,529 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.004Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/dynamicProp.ets",
+          "diffHistory": [
+            "1+|const user = {}\n",
+            "2-|  \n3-|}\n2+|  name: \"Alice\",\n3+|  age: 30,\n4+|  address: {\n5+|},\n6+|};\n7+|\n8+|\n",
+            "5-|},\n5+|    city: \"New York\",\n6+|    country: \"USA\",\n7+|  },\n10+|const greeting = `Hello, ${user.name}!`;\n",
+            "1-|\n1+|interface User {\n2+|  name: string;\n3+|  age: number;\n4+|  address: {\n5+|    city: string;\n6+|    country: string;\n7+|  };\n8+|}\n",
+            "1-|\n1+|interface Address {\n",
+            "5-|  address: {\n5+|  address: Address;\n",
+            "2+|  city: string;\n3+|  country: string;\n4+|}\n",
+            "9-|    city: string;\n10-|    country: string;\n11-|  };\n13-|const user = {\n10+|const user: User = {\n",
+            "21+|function getFullName(user: { firstName: string; lastName: string }) {\n22+|  return `${user.firstName} ${user.lastName}`;\n23+|}\n25+|const fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n26+|\n27+|\n28+|\n",
+            "25-|const fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n",
+            "25+|const currentUser = {\n26+|  firstName: \"John\",\n27+|  lastName: \"Doe\",\n28+|};\n30+|const fullName = getFullName(currentUser);\n",
+            "30-|const fullName = getFullName(currentUser);\n30+|const fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n",
+            "21-|function getFullName(user: { firstName: string; lastName: string }) {\n21+|interface FullName {\n22+|function getFullName(user: { firstName: string; lastName: string }\n23+|function getFullName(user: FullName) {\n",
+            "22-|function getFullName(user: { firstName: string; lastName: string }\n22+|function getFullName(user: { firstName: string; lastName: string ;\n23+|}\n",
+            "22-|function getFullName(user: { firstName: string;\n22+|  firstName: string;\n",
+            "29-|const currentUser = {\n29+|const currentUser: FullName = {\n",
+            "36+|const price = 100;\n37+|const discount = 0.1;\n38+|const priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n40+|const isAdmin = true;\n41+|const roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n43+|const products = [\n44+|  { name: \"Product 1\", price: 100 },\n45+|  { name: \"Product 2\", price: 200 },\n46+|  { name: \"Product 3\", price: 300 },\n47+|];\n49+|cons\n50+|\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/dynamicProp.ets",
+        "contents": "interface Address {\n  city: string;\n  country: string;\n}\ninterface User {\n  name: string;\n  age: number;\n  address: Address;\n}\nconst user: User = {\n  name: \"Alice\",\n  age: 30,\n  address: {\n    city: \"New York\",\n    country: \"USA\",\n  },\n};\n\nconst greeting = `Hello, ${user.name}!`;\n\ninterface FullName {\n  firstName: string;\n  lastName: string;\n}\nfunction getFullName(user: FullName) {\n  return `${user.firstName} ${user.lastName}`;\n}\n\nconst currentUser: FullName = {\n  firstName: \"John\",\n  lastName: \"Doe\",\n};\n\nconst fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n\nconst price = 100;\nconst discount = 0.1;\nconst priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];\n\ncons\n\n",
+        "cursorPosition": {
+          "line": 48,
+          "column": 4
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 343,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742475739046,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 52.199951171875,
+      "timeAtRequestSend": 1742475739046
+    },
+    "generateUuid": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.047Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "  { name: \"Product 3\", price: 300 },\n];\n\nconst",
+      "rangeToReplace": {
+        "startLineNumber": 46,
+        "endLineNumberInclusive": 51
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.393Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.397Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " product"
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.431Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "List"
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.441Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.451Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " products"
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.465Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.478Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "map"
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.487Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "(("
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.500Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "product"
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.510Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ")"
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.523Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " =>"
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.536Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.548Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.560Z"
+  },
+  {
+    "firstChunkValue": "  { name: \"Product 3\", price: 300 },\n];\n\nconst productList = products.map((product) => {\n\n",
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.565Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "  { name: \"Product 3\", price: 300 },\n];\n\nconst productList = products.map((product) => {\n\n"
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.567Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.573Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " return"
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.585Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " `"
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.598Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Product"
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.610Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.620Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ${"
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.632Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "product"
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.644Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.656Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "name"
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.673Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "},"
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.680Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Price"
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.692Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.703Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ${product.price"
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.715Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}`"
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.728Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";\n});"
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.739Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.750Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.768Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "const"
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.779Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " product"
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.785Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "ListString"
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.797Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.809Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " product"
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.819Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "List"
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.832Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.843Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "join"
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.856Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "(\"\\"
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.868Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "n"
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.879Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\");"
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.889Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.901Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.911Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.924Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.935Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.949Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.950Z"
+  },
+  {
+    "fullText": "  { name: \"Product 3\", price: 300 },\n];\n\nconst productList = products.map((product) => {\n  return `Product: ${product.name}, Price: ${product.price}`;\n});\n\nconst productListString = productList.join(\"\\n\");\n\n\n\n",
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.954Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "  { name: \"Product 3\", price: 300 },\n];\n\nconst productList = products.map((product) => {\n\n"
+    },
+    "fullText": "  { name: \"Product 3\", price: 300 },\n];\n\nconst productList = products.map((product) => {\n  return `Product: ${product.name}, Price: ${product.price}`;\n});\n\nconst productListString = productList.join(\"\\n\");\n\n\n\n",
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.954Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && currentSuggestion uniqueId is different && need to create newSuggestion according fullText",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "4012a75c-50b0-4780-a9d7-f119f4daf6e0",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 343,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 345,
+      "monotonicallyIncreasingSuggestionId": 205,
+      "range": {
+        "startLineNumber": 46,
+        "startColumn": 1,
+        "endLineNumberInclusive": 51,
+        "endColumn": 1
+      },
+      "replaceText": "  { name: \"Product 3\", price: 300 },\n];\n\nconst productList = products.map((product) => {\n  return `Product: ${product.name}, Price: ${product.price}`;\n});\n\nconst productListString = productList.join(\"\\n\");\n\n\n\n",
+      "originalText": "  { name: \"Product 3\", price: 300 },\n];\n\nconst \n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 46,
+        "startColumn": 1,
+        "endLineNumberInclusive": 51,
+        "endColumn": 1
+      },
+      "diffText": "  { name: \"Product 3\", price: 300 },\n];\n\nconst productList = products.map((product) => {\n  return `Product: ${product.name}, Price: ${product.price}`;\n});\n\nconst productListString = productList.join(\"\\n\");\n\n\n\n",
+      "fullOriginalText": "  { name: \"Product 3\", price: 300 },\n];\n\nconst \n\n",
+      "suggestionTriggerTime": 1742475738994.7,
+      "greens": [],
+      "source": "typing",
+      "requestId": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+      "selection": {
+        "startLineNumber": 46,
+        "startColumn": 1,
+        "endLineNumberInclusive": 51,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "e9104d24-3ba6-4d52-9ac8-695b1694473f",
+      "undoRedoGroup": {
+        "id": 205,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.954Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "e9104d24-3ba6-4d52-9ac8-695b1694473f",
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.960Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "  { name: \"Product 3\", price: 300 },\n];\n\nconst productList = products.map((product) => {\n\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "e9104d24-3ba6-4d52-9ac8-695b1694473f",
+    "generationUUID": "68e4a00d-d627-4c84-9458-5f6fef983cd4",
+    "timestamp": "2025-03-20T13:02:19.960Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "e9104d24-3ba6-4d52-9ac8-695b1694473f",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-20T13:02:19.960Z"
+  }
+]

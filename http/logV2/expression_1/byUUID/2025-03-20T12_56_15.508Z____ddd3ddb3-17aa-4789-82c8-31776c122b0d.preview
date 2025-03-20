@@ -1,0 +1,154 @@
+{"line":23,"column":56}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+interface Address {
+    city: string;
+}
+interface User {
+    name: string;
+    age: number;
+    address: Address;
+}
+const user: User = {
+    name: "Alice",
+    age: 30,
+    address: { city: "Shenzhen" }
+};
+const greeting = `Hello, ${user.name}!`;
+
+interface FullName {
+    firstName: string;
+    lastName: string;
+}
+function getFullName(user: FullName) {
+    return `${user.firstName} ${user.lastName}`;
+}
+const currentUser: FullName = { firstName: "John", lastName: "Doe" };
+const fullName = `Full Name: ${getFullName(currentUser).[ToFill]}`;
+
+const price = 99.99;
+const discount = 0.2;
+const priceInfo = `Price: ${(price * (1 - discount))}`;
+
+const isAdmin = true;
+const roleMessage = `Role: ${isAdmin ? "Administrator" : "Guest"}.`;
+
+interface Product {
+    id: number;
+    name: string;
+}
+const products: Product[] = [
+    { id: 1, name: "Phone" },
+    { id: 2, name: "Laptop" }
+];
+const productInfo = `Current Product: ${products[0]}.`;
+
+type Status = "active" | "inactive";
+let status: Status = "active";
+const statusText = `Status: ${status}`;
+
+interface Company {
+    name: string;
+    ceo: CEO;
+}
+interface CEO {
+    name: string;
+    contact: Contact;
+}
+
+interface Contact {
+    email: string;
+}
+const company: Company = {
+    name: "Tech Corp",
+    ceo: {
+        name: "Bob",
+        contact: { email: "bob@tech.com" }
+    }
+};
+const emailTemplate = `CEO Email: ${company}`;
+-------------------------------[               firstChunkValue               ]--------------------------------
+const currentUser: FullName = { firstName: "John", lastName: "Doe" };
+const fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;
+
+const price = 99.99;
+const discount = 0.2;
+const priceInfo = `Price: ${(price * (1 - discount))}`;
+
+const isAdmin = true;
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+interface Address {
+    city: string;
+}
+interface User {
+    name: string;
+    age: number;
+    address: Address;
+}
+const user: User = {
+    name: "Alice",
+    age: 30,
+    address: { city: "Shenzhen" }
+};
+const greeting = `Hello, ${user.name}!`;
+
+interface FullName {
+    firstName: string;
+    lastName: string;
+}
+function getFullName(user: FullName) {
+    return `${user.firstName} ${user.lastName}`;
+}
+const currentUser: FullName = { firstName: "John", lastName: "Doe" };
+const fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;
+
+const price = 99.99;
+const discount = 0.2;
+const priceInfo = `Price: ${(price * (1 - discount))}`;
+
+const isAdmin = true;
+const roleMessage = `Role: ${isAdmin ? "Administrator" : "Guest"}.`;
+
+interface Product {
+    id: number;
+    name: string;
+}
+const products: Product[] = [
+    { id: 1, name: "Phone" },
+    { id: 2, name: "Laptop" }
+];
+const productInfo = `Current Product: ${products[0]}.`;
+
+type Status = "active" | "inactive";
+let status: Status = "active";
+const statusText = `Status: ${status}`;
+
+interface Company {
+    name: string;
+    ceo: CEO;
+}
+interface CEO {
+    name: string;
+    contact: Contact;
+}
+
+interface Contact {
+    email: string;
+}
+const company: Company = {
+    name: "Tech Corp",
+    ceo: {
+        name: "Bob",
+        contact: { email: "bob@tech.com" }
+    }
+};
+const emailTemplate = `CEO Email: ${company}`;
+-------------------------------[                   fullText                  ]--------------------------------
+const currentUser: FullName = { firstName: "John", lastName: "Doe" };
+const fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;
+
+const price = 99.99;
+const discount = 0.2;
+const priceInfo = `Price: ${(price * (1 - discount))}`;
+
+const isAdmin = true;
