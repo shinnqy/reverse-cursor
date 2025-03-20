@@ -3,7 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const { generateDataset } = require('./generateDataset');
-const { batchInvokeLLMAndEvaluate } = require('./evaluateDataset');
+const { batchInvokeLLMAndEvaluate, batchEvaluateByUUID } = require('./evaluateDataset');
 const { config } = require('./config');
 
 const logContainerFolder = config.logContainerFolder;
@@ -21,6 +21,7 @@ function main(logFileName) {
   formatLogIntoJSON(logPath, formattedJSONPath);
 
   const promptFilePathList = formatByGeneratedUUID(formattedJSONPath);
+  batchEvaluateByUUID(specificLogFolderPath);
 
   batchInvokeLLMAndEvaluate(promptFilePathList, specificLogFolderPath);
 }
@@ -69,6 +70,8 @@ function formatByGeneratedUUID(formattedJSONPath) {
   const jsonList = JSON.parse(jsonListStr);
   const originDataLength = jsonList.length;
   let countProcessedData = 0;
+  let countAcceptSuccessfully = 0;
+  let countDisplayedSuggestion = 0;
 
   const byUUIDFolder = path.join(path.dirname(formattedJSONPath), 'byUUID');
   ensureFolder(byUUIDFolder);
@@ -92,6 +95,12 @@ function formatByGeneratedUUID(formattedJSONPath) {
       }
       // count
       countProcessedData++;
+      if (item.action === 'press Tab to acceptFullSuggestion and succeed') {
+        countAcceptSuccessfully++;
+      }
+      if (item.action === 'displayCppSuggestion') {
+        countDisplayedSuggestion++;
+      }
     } else if (!!item.predictionId) {
       const uuid = predictionIdMapGenerationUUID[item.predictionId];
       if (!uuid) {
@@ -138,6 +147,10 @@ function formatByGeneratedUUID(formattedJSONPath) {
   console.log('======= Summary =======');
   console.log('Total data: ' + originDataLength);
   console.log('Processed data: ' + countProcessedData);
+  console.log('======= Performance =======');
+  console.log('Accepted suggestions count: ' + countAcceptSuccessfully);
+  console.log('All Displayed suggestions count: ' + countDisplayedSuggestion);
+  console.log('Accept rate: ', countAcceptSuccessfully / countDisplayedSuggestion);
 
   const dirPath = path.dirname(formattedJSONPath);
   const unProcessedDataPath = path.resolve(dirPath, `./${logFileName}_unprocessed.json`);

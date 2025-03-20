@@ -40,11 +40,11 @@ const modelMap = {
   [EndPoint.aliQwen32BInstruct]: 'qwen2.5-coder-32b-instruct',
 };
 
-const endpoint = config.endpointType;
+const defaultEndpoint = config.endpointType;
 
-const useOpenAICompatible = endpoint !== EndPoint.GPT35;
-const stream = false;
-async function completion(code = "hi") {
+async function completion(code = "hi", endpoint = defaultEndpoint) {
+  const useOpenAICompatible = endpoint !== EndPoint.GPT35;
+  const stream = false;
   const startTime = performance.now();
 
   let fetchRes;
@@ -153,13 +153,18 @@ async function completion(code = "hi") {
 
     return fullText;
   } else {
-    const res = await fetchRes.json();
+    try {
+      const res = await fetchRes.json();
 
-    const endTime = performance.now();
-    console.log('Duration LLM call: ', endTime - startTime);
+      const endTime = performance.now();
+      console.log('Duration LLM call: ', endTime - startTime);
 
-    const data = res.choices[0].message.content;
-    return data
+      const data = res.choices[0].message.content;
+      return data
+    } catch(e) {
+      console.error(e);
+      return null;
+    }
   }
 }
 
