@@ -1,0 +1,72 @@
+{"line":18,"column":22}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+try {
+  JSON.parse("{ invalid JSON }");
+} catch (error) {
+  console.log(error.message);
+}
+
+class NetworkError extends Error {
+  statusCode: number;
+  constructor(message: string, code: number) {
+    super(message);
+    this.statusCode = code;
+  }
+}
+
+try {
+  throw new NetworkError("Timeout", 504);
+} catch (error) {
+  if (error instanceof NetworkError) {
+    console.log(error.[ToFill]);
+  }
+}
+
+fetch("https://api.example.com")
+  .then(res => res.json())
+  .catch(error => {
+    console.error(error);
+  });
+
+interface User { profile?: { email?: string } }
+let user: User = {};
+
+type Result = string | Error;
+function getResult(): Result {
+  return Math.random() > 0.5 ? "OK" : new Error("Failed");
+}
+
+let result = getResult();
+if (result instanceof Error) {
+} else {
+}
+
+async function loadData() {
+  try {
+    await fetch("invalid-url");
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+try {
+  let data = {} as { items: string[] };
+  data.items.push("test");
+} catch (error) {
+}
+-------------------------------[               firstChunkValue               ]--------------------------------
+  if (error instanceof NetworkError) {
+    console.log(error.message);
+  }
+-------------------------------[                   fullText                  ]--------------------------------
+  if (error instanceof NetworkError) {
+    console.log(error.message);
+  }
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/errorHandling2.ets",
+  "lineNumberOneIndexed": 26,
+  "text": "console.error(error);\n});\n\ninterface User { profile?: { email?: string } }\nlet user: User = {};",
+  "shouldRetriggerCpp": true
+}
