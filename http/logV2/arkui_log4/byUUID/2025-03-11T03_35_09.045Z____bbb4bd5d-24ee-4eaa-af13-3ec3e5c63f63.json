@@ -1,0 +1,423 @@
+[
+  {
+    "intent": "editor_change",
+    "generationUUID": "bbb4bd5d-24ee-4eaa-af13-3ec3e5c63f63",
+    "timestamp": "2025-03-11T03:35:09.045Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/pages/Index.ets",
+          "diffHistory": [
+            "17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Button clicked';\n22+|      })\n",
+            "18-|        Text('Click me')\n18+|        Text('Abou')\n",
+            "18-|        Text('Abou')\n18+|        Text('About Me')\n",
+            "21-|        this.message = 'Button clicked';\n",
+            "21-|        \n21+|        router.push({\n22+|          uri: 'pages/About'\n23+|        })\n",
+            "21-|        router.push({\n22-|          uri: 'pages/About'\n21+|        router.pushU({\n22+|          url: 'pages/AboutMe'\n",
+            "21-|        router.pushU({\n21+|        router.pushUrl({\n",
+            "1+|import router from '@ohos.router';\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/pages/AboutMe.ets",
+          "diffHistory": [
+            "1-|\n1+|@Pr\n2+|@Entry\n3+|@Component\n4+|struct AboutMe {\n5+|  build() {\n6+|    Text('About Me')\n7+|  }\n8+|}\n",
+            "1-|@Pr\n1+|@Preview  \n",
+            "1-|@Preview  \n2-|@Entry\n1+|@Preview\n",
+            "6-|    \n7-|    \n6+|\n7+|    Banner()\n",
+            "1+|import Banner from '../components/Banner.ets'\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/components/Banner.ets",
+          "diffHistory": [
+            "4+|  @Prop title: string = 'Banner'\n",
+            "7-|    Text(\"Banner\")\n7+|    Text(this.title)\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/resources/base/profile/main_pages.json",
+        "contents": "{\n  \"src\": [\n    \"pages/Index\"\n  ]\n}\n",
+        "cursorPosition": {
+          "line": 2,
+          "column": 17
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 1,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/pages/Index.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 31
+            }
+          ],
+          "lastViewedAt": 1741664039674
+        },
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/pages/AboutMe.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 11
+            }
+          ],
+          "lastViewedAt": 1741664080147
+        },
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/components/Banner.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 9
+            }
+          ],
+          "lastViewedAt": 1741664102534
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "editor_change"
+      },
+      "clientTime": 1741664109118,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 73.60009765625,
+      "timeAtRequestSend": 1741664109118
+    },
+    "generateUuid": "bbb4bd5d-24ee-4eaa-af13-3ec3e5c63f63",
+    "timestamp": "2025-03-11T03:35:09.119Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "bbb4bd5d-24ee-4eaa-af13-3ec3e5c63f63",
+    "timestamp": "2025-03-11T03:35:09.539Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "{\n  \"src\": [\n    \"pages/Index\",",
+      "rangeToReplace": {
+        "startLineNumber": 1,
+        "endLineNumberInclusive": 5
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "bbb4bd5d-24ee-4eaa-af13-3ec3e5c63f63",
+    "timestamp": "2025-03-11T03:35:09.541Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "bbb4bd5d-24ee-4eaa-af13-3ec3e5c63f63",
+    "timestamp": "2025-03-11T03:35:09.562Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "   "
+    },
+    "generationUUID": "bbb4bd5d-24ee-4eaa-af13-3ec3e5c63f63",
+    "timestamp": "2025-03-11T03:35:09.569Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \"pages/About"
+    },
+    "generationUUID": "bbb4bd5d-24ee-4eaa-af13-3ec3e5c63f63",
+    "timestamp": "2025-03-11T03:35:09.579Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Me"
+    },
+    "generationUUID": "bbb4bd5d-24ee-4eaa-af13-3ec3e5c63f63",
+    "timestamp": "2025-03-11T03:35:09.588Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\""
+    },
+    "generationUUID": "bbb4bd5d-24ee-4eaa-af13-3ec3e5c63f63",
+    "timestamp": "2025-03-11T03:35:09.599Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n "
+    },
+    "generationUUID": "bbb4bd5d-24ee-4eaa-af13-3ec3e5c63f63",
+    "timestamp": "2025-03-11T03:35:09.609Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ]\n}"
+    },
+    "generationUUID": "bbb4bd5d-24ee-4eaa-af13-3ec3e5c63f63",
+    "timestamp": "2025-03-11T03:35:09.620Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "bbb4bd5d-24ee-4eaa-af13-3ec3e5c63f63",
+    "timestamp": "2025-03-11T03:35:09.620Z"
+  },
+  {
+    "firstChunkValue": "{\n  \"src\": [\n    \"pages/Index\",\n    \"pages/AboutMe\"\n  ]\n}",
+    "generationUUID": "bbb4bd5d-24ee-4eaa-af13-3ec3e5c63f63",
+    "timestamp": "2025-03-11T03:35:09.627Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "21cdb2bc-ac79-4169-8a16-32d22ac5cb36",
+    "generationUUID": "bbb4bd5d-24ee-4eaa-af13-3ec3e5c63f63",
+    "timestamp": "2025-03-11T03:35:09.628Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "{\n  \"src\": [\n    \"pages/Index\",\n    \"pages/AboutMe\"\n  ]\n}"
+    },
+    "generationUUID": "bbb4bd5d-24ee-4eaa-af13-3ec3e5c63f63",
+    "timestamp": "2025-03-11T03:35:09.628Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "233cf55b-11ce-41b7-94a9-c72e88cd1025",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/resources/base/profile/main_pages.json",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/resources/base/profile/main_pages.json",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/resources/base/profile/main_pages.json",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 1,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 1,
+      "monotonicallyIncreasingSuggestionId": 51,
+      "range": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 5,
+        "endColumn": 2
+      },
+      "replaceText": "{\n  \"src\": [\n    \"pages/Index\",\n    \"pages/AboutMe\"\n  ]\n}",
+      "originalText": "{\n  \"src\": [\n    \"pages/Index\"\n  ]\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 5,
+        "endColumn": 2
+      },
+      "diffText": "{\n  \"src\": [\n    \"pages/Index\",\n    \"pages/AboutMe\"\n  ]\n}",
+      "fullOriginalText": "{\n  \"src\": [\n    \"pages/Index\"\n  ]\n}",
+      "suggestionTriggerTime": 1741664109044.0999,
+      "greens": [],
+      "source": "editor_change",
+      "requestId": "bbb4bd5d-24ee-4eaa-af13-3ec3e5c63f63",
+      "selection": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 5,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "21cdb2bc-ac79-4169-8a16-32d22ac5cb36",
+      "undoRedoGroup": {
+        "id": 52,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "bbb4bd5d-24ee-4eaa-af13-3ec3e5c63f63",
+    "timestamp": "2025-03-11T03:35:09.629Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "{\n  \"src\": [\n    \"pages/Index\",\n    \"pages/AboutMe\"\n  ]\n}"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "21cdb2bc-ac79-4169-8a16-32d22ac5cb36",
+    "generationUUID": "bbb4bd5d-24ee-4eaa-af13-3ec3e5c63f63",
+    "timestamp": "2025-03-11T03:35:09.630Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "21cdb2bc-ac79-4169-8a16-32d22ac5cb36",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-11T03:35:09.630Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "233cf55b-11ce-41b7-94a9-c72e88cd1025",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/resources/base/profile/main_pages.json",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/resources/base/profile/main_pages.json",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/resources/base/profile/main_pages.json",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 1,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 1,
+      "monotonicallyIncreasingSuggestionId": 51,
+      "range": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 5,
+        "endColumn": 2
+      },
+      "replaceText": "{\n  \"src\": [\n    \"pages/Index\",\n    \"pages/AboutMe\"\n  ]\n}",
+      "originalText": "{\n  \"src\": [\n    \"pages/Index\"\n  ]\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 5,
+        "endColumn": 2
+      },
+      "diffText": "{\n  \"src\": [\n    \"pages/Index\",\n    \"pages/AboutMe\"\n  ]\n}",
+      "fullOriginalText": "{\n  \"src\": [\n    \"pages/Index\"\n  ]\n}",
+      "suggestionTriggerTime": 1741664109044.0999,
+      "greens": [],
+      "source": "editor_change",
+      "requestId": "bbb4bd5d-24ee-4eaa-af13-3ec3e5c63f63",
+      "selection": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 5,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "21cdb2bc-ac79-4169-8a16-32d22ac5cb36",
+      "undoRedoGroup": {
+        "id": 52,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "f;7"
+    },
+    "generationUUID": "bbb4bd5d-24ee-4eaa-af13-3ec3e5c63f63",
+    "timestamp": "2025-03-11T03:35:11.200Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "233cf55b-11ce-41b7-94a9-c72e88cd1025",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/resources/base/profile/main_pages.json",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/resources/base/profile/main_pages.json",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/resources/base/profile/main_pages.json",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 1,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 1,
+      "monotonicallyIncreasingSuggestionId": 51,
+      "range": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 5,
+        "endColumn": 2
+      },
+      "replaceText": "{\n  \"src\": [\n    \"pages/Index\",\n    \"pages/AboutMe\"\n  ]\n}",
+      "originalText": "{\n  \"src\": [\n    \"pages/Index\"\n  ]\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 5,
+        "endColumn": 2
+      },
+      "diffText": "{\n  \"src\": [\n    \"pages/Index\",\n    \"pages/AboutMe\"\n  ]\n}",
+      "fullOriginalText": "{\n  \"src\": [\n    \"pages/Index\"\n  ]\n}",
+      "suggestionTriggerTime": 1741664109044.0999,
+      "greens": [],
+      "source": "editor_change",
+      "requestId": "bbb4bd5d-24ee-4eaa-af13-3ec3e5c63f63",
+      "selection": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 5,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "21cdb2bc-ac79-4169-8a16-32d22ac5cb36",
+      "undoRedoGroup": {
+        "id": 52,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "f;7"
+    },
+    "generationUUID": "bbb4bd5d-24ee-4eaa-af13-3ec3e5c63f63",
+    "timestamp": "2025-03-11T03:35:11.215Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "21cdb2bc-ac79-4169-8a16-32d22ac5cb36",
+    "fusedCursorPrediction": null,
+    "oldText": "{\n  \"src\": [\n    \"pages/Index\"\n  ]\n}",
+    "newText": "{\n  \"src\": [\n    \"pages/Index\",\n    \"pages/AboutMe\"\n  ]\n}",
+    "timestamp": "2025-03-11T03:35:11.215Z"
+  }
+]

@@ -1,0 +1,66 @@
+{"line":12,"column":0}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case light.RED:
+      return light.GREEN;
+    case light.GREEN:
+      return light.YELLOW;
+    case light.YELLOW:
+      return light.RED;
+    default:
+      return light.RED;
+  }
+}
+[ToFill]
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+}
+
+enum TrafficLight {
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case light.RED:
+      return light.GREEN;
+    case light.GREEN:
+      return light.YELLOW;
+    case light.YELLOW:
+      return light.RED;
+    default:
+      return light.RED;
+  }
+}
+
+enum TrafficLight {
+-------------------------------[                   fullText                  ]--------------------------------
+}
+
+enum TrafficLight {
+  RED = 'red',
+  GREEN = 'green',
+  YELLOW = 'yellow',
+}
+
+
+-------------------------------[         replacedContentsWithFullText         ]--------------------------------
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case light.RED:
+      return light.GREEN;
+    case light.GREEN:
+      return light.YELLOW;
+    case light.YELLOW:
+      return light.RED;
+    default:
+      return light.RED;
+  }
+}
+
+enum TrafficLight {
+  RED = 'red',
+  GREEN = 'green',
+  YELLOW = 'yellow',
+}
+

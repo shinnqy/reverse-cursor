@@ -1,0 +1,57 @@
+{"line":37,"column":15}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+interface Address {
+  city: string;
+  country: string;
+}
+interface User {
+  name: string;
+  age: number;
+  address: Address;
+}
+const user: User = {
+  name: "Alice",
+  age: 30,
+  address: {
+    city: "New York",
+    country: "USA",
+  },
+};
+
+const greeting = `Hello, ${user.name}!`;
+
+interface FullName {
+  firstName: string;
+  lastName: string;
+}
+function getFullName(user: FullName) {
+  return `${user.firstName} ${user.lastName}`;
+}
+
+const currentUser: FullName = {
+  firstName: "John",
+  lastName: "Doe",
+};
+
+const fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;
+
+const price = 100;
+const discount = 0.1;
+const priceInfo[ToFill]
+
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+const price = 100;
+const discount = 0.1;
+const priceInfo = {
+  price,
+  discount,
+  finalPrice: price * (1 - discount),
+};
+
+
+
+

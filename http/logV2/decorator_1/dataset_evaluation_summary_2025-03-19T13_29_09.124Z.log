@@ -1,0 +1,987 @@
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/decorator_1/byUUID/2025-03-19T11_11_22.062Z____1aacd2bf-a5b0-44f8-b3f6-dd93a5c299eb.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+struct Example {
+  @State co<|current_cursor_position|>: string = 'Hello, world!'
+
+  build() {
+    Text(this.message)
+  }
+}
+
+@Component
+struct ChildComponent {
+
+  build() {
+    Text('Hello, world!')
+  }
+}
+
+@Component
+struct LinkChild {
+
+  build() {
+    Button('Click me')
+  }
+}
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+struct Example {
+  @State count: number = 0
+
+  build() {
+    Text(this.count.toString())
+  }
+}
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+@Entry
+@Component
+struct Example {
+  @State count: number = 0
+
+  build() {
+    Text(this.count.toString())
+  }
+}
+
+@Component
+struct ChildComponent {
+
+  build() {
+    Text('Hello, world!')
+  }
+}
+
+@Component
+struct LinkChild {
+
+  build() {
+    Button('Click me')
+  }
+}
+
+[Analysis]:
+The combined code integrates the partial output from the LLM with the original text. The LLM output correctly replaces the incomplete `@State co` with `@State count: number = 0`, which is a valid state declaration. The `build()` method in the `Example` struct is also updated to display the count as a string, which is correct. The rest of the original code remains unchanged and is syntactically correct. The combined code is complete and improves the correctness and completeness of the original text.
+
+[Score]:
+10
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/decorator_1/byUUID/2025-03-19T11_11_28.606Z____66d29078-d9ef-44a5-927c-9d54442aaea7.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+struct Example {
+  @State count: number = 0
+
+  build() {
+    Bu<|current_cursor_position|>
+  }
+}
+
+@Component
+struct ChildComponent {
+
+  build() {
+    Text('Hello, world!')
+  }
+}
+
+@Component
+struct LinkChild {
+
+  build() {
+    Button('Click me')
+  }
+}
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+struct Example {
+  @State count: number = 0
+
+  build() {
+    Button('Click me').onClick(() => {
+  }
+}
+
+@Component
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+@Entry
+@Component
+struct Example {
+  @State count: number = 0
+
+  build() {
+    Button('Click me').onClick(() => {
+      this.count++;
+    });
+  }
+}
+
+@Component
+struct ChildComponent {
+
+  build() {
+    Text('Hello, world!')
+  }
+}
+
+@Component
+struct LinkChild {
+
+  build() {
+    Button('Click me')
+  }
+}
+
+[Analysis]:
+The combined code integrates the partial output from the LLM with the original text. The LLM's output correctly adds a `Button` with an `onClick` handler that increments the `count` state. This improves the completeness of the original text, which had an incomplete `build` method in the `Example` struct. The rest of the original code remains unchanged and correct. The combined code is now more complete and functional.
+
+[Score]:
+9
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/decorator_1/byUUID/2025-03-19T11_11_52.319Z____88a802f2-cfce-4617-a75f-d73e5b715056.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+struct Example {
+  @State count: number = 0
+
+  build() {
+    Button('Click me').onClick(() => {
+      this.count++
+    })
+  }
+}
+
+@Component
+struct ChildComponent {
+  @Prop mes<|current_cursor_position|>
+
+  build() {
+    Text(this.count.toString())
+  }
+}
+
+@Component
+struct LinkChild {
+
+  build() {
+    Button('Click me')
+  }
+}
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+struct ChildComponent {
+  @Prop message: string = 'Hello, world!'
+
+  build() {
+    Text(this.count.toString())
+  }
+}
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+@Entry
+@Component
+struct Example {
+  @State count: number = 0
+
+  build() {
+    Button('Click me').onClick(() => {
+      this.count++
+    })
+  }
+}
+
+@Component
+struct ChildComponent {
+  @Prop message: string = 'Hello, world!'
+
+  build() {
+    Text(this.count.toString())
+  }
+}
+
+@Component
+struct LinkChild {
+
+  build() {
+    Button('Click me')
+  }
+}
+
+[Analysis]:
+The combined code is mostly correct, but there is a logical inconsistency in the `ChildComponent` struct. The `build` method attempts to access `this.count`, which is not defined in the `ChildComponent` struct. This is likely a mistake, as `count` is defined in the `Example` struct. The model output did improve the completeness of the original text by adding the `message` property to the `ChildComponent` struct, which was missing in the original text. However, the logical error in the `build` method remains unresolved.
+
+[Score]:
+7
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/decorator_1/byUUID/2025-03-19T11_11_14.755Z____a2f15db9-a482-4ad4-bd37-d821d106de34.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+struct Example {
+  <|current_cursor_position|>
+  build() {
+    Text('Hello, world!')
+  }
+}
+
+@Component
+struct ChildComponent {
+
+  build() {
+    Text('Hello, world!')
+  }
+}
+
+@Component
+struct LinkChild {
+
+  build() {
+    Button('Click me')
+  }
+}
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+struct Example {
+  @State message: string = 'Hello, world!'
+  build() {
+    Text('Hello, world!')
+  }
+}
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+@Entry
+@Component
+struct Example {
+  @State message: string = 'Hello, world!'
+  build() {
+    Text('Hello, world!')
+  }
+}
+
+@Component
+struct ChildComponent {
+
+  build() {
+    Text('Hello, world!')
+  }
+}
+
+@Component
+struct LinkChild {
+
+  build() {
+    Button('Click me')
+  }
+}
+
+[Analysis]:
+The combined code is correct and complete. The LLM output added the `@State message: string = 'Hello, world!'` line to the `Example` struct, which is a valid addition. The rest of the original text remains unchanged and is correctly integrated. The code is syntactically correct and improves the completeness of the original text by adding a state variable.
+
+[Score]:
+10
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/decorator_1/byUUID/2025-03-19T11_11_51.995Z____154e4a8f-5084-4969-84c3-5bc322cf73b7.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+struct Example {
+  @State count: number = 0
+
+  build() {
+    Button('Click me').onClick(() => {
+      this.count++
+    })
+  }
+}
+
+@Component
+struct ChildComponent {
+  @Prop m<|current_cursor_position|>
+
+  build() {
+    Text(this.count.toString())
+  }
+}
+
+@Component
+struct LinkChild {
+
+  build() {
+    Button('Click me')
+  }
+}
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+struct ChildComponent {
+  @Prop message: string
+
+  build() {
+    Text(this.count.toString())
+  }
+}
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+@Entry
+@Component
+struct Example {
+  @State count: number = 0
+
+  build() {
+    Button('Click me').onClick(() => {
+      this.count++
+    })
+  }
+}
+
+@Component
+struct ChildComponent {
+  @Prop message: string
+
+  build() {
+    Text(this.count.toString())
+  }
+}
+
+@Component
+struct LinkChild {
+
+  build() {
+    Button('Click me')
+  }
+}
+
+[Analysis]:
+The combined code is mostly correct, but there is a logical inconsistency in the `ChildComponent`. The `Text` component is trying to display `this.count.toString()`, but `count` is not defined in `ChildComponent`. It should likely be `this.message` instead, as `message` is the prop being passed. The model output improved the completeness of the original text by adding the `message` prop to `ChildComponent`, but the logical error in the `build` method remains. The rest of the code is correct and complete.
+
+[Score]:
+7
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/decorator_1/byUUID/2025-03-19T11_11_39.549Z____c17369e4-d721-44e2-92db-52781b3dab17.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+struct Example {
+  @State count: number = 0
+
+  build() {
+    Button('Click me').onClick(() => {
+      this.count++
+    })
+  }
+}
+
+@Component
+struct ChildComponent {
+  @P<|current_cursor_position|>
+
+  build() {
+    Text('Hello, world!')
+  }
+}
+
+@Component
+struct LinkChild {
+
+  build() {
+    Button('Click me')
+  }
+}
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+struct ChildComponent {
+  @Prop count: number
+
+  build() {
+    Text('Hello, world!')
+  }
+}
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+@Entry
+@Component
+struct Example {
+  @State count: number = 0
+
+  build() {
+    Button('Click me').onClick(() => {
+      this.count++
+    })
+  }
+}
+
+@Component
+struct ChildComponent {
+  @Prop count: number
+
+  build() {
+    Text('Hello, world!')
+  }
+}
+
+@Component
+struct LinkChild {
+
+  build() {
+    Button('Click me')
+  }
+}
+
+[Analysis]:
+The combined code is correct and complete. The model output correctly added the `@Prop count: number` to the `ChildComponent` struct, which was missing in the original text. This improves the completeness of the original text by providing a necessary property for the `ChildComponent`. The rest of the code remains unchanged and is syntactically correct.
+
+[Score]:
+10
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/decorator_1/byUUID/2025-03-19T11_11_27.828Z____0c7e5969-109a-4c73-874e-a3d84d5fb53c.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+struct Example {
+  @State count: number = 0
+
+  build() {
+    <|current_cursor_position|>
+  }
+}
+
+@Component
+struct ChildComponent {
+
+  build() {
+    Text('Hello, world!')
+  }
+}
+
+@Component
+struct LinkChild {
+
+  build() {
+    Button('Click me')
+  }
+}
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+struct Example {
+  @State count: number = 0
+
+  build() {
+    Column() {
+  }
+}
+
+@Component
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+@Entry
+@Component
+struct Example {
+  @State count: number = 0
+
+  build() {
+    Column() {
+    }
+  }
+}
+
+@Component
+struct ChildComponent {
+
+  build() {
+    Text('Hello, world!')
+  }
+}
+
+@Component
+struct LinkChild {
+
+  build() {
+    Button('Click me')
+  }
+}
+
+[Analysis]:
+The combined code is mostly correct and improves the completeness of the original text. The original text had an incomplete `build()` method in the `Example` struct, and the LLM output correctly added a `Column()` component inside the `build()` method. However, the `Column()` is empty, which might not be the intended functionality, but it does improve the structural completeness of the code. The rest of the original text remains unchanged and correct.
+
+[Score]:
+8
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/decorator_1/byUUID/2025-03-19T11_11_17.412Z____4e248c6e-5e46-4302-aebd-0fa160239990.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+struct Example {
+  <|current_cursor_position|>
+
+  build() {
+    Text('Hello, world!')
+  }
+}
+
+@Component
+struct ChildComponent {
+
+  build() {
+    Text('Hello, world!')
+  }
+}
+
+@Component
+struct LinkChild {
+
+  build() {
+    Button('Click me')
+  }
+}
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+struct Example {
+  @State message: string = 'Hello, world!'
+
+  build() {
+    Text('Hello, world!')
+  }
+}
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+@Entry
+@Component
+struct Example {
+  @State message: string = 'Hello, world!'
+
+  build() {
+    Text('Hello, world!')
+  }
+}
+
+@Component
+struct ChildComponent {
+
+  build() {
+    Text('Hello, world!')
+  }
+}
+
+@Component
+struct LinkChild {
+
+  build() {
+    Button('Click me')
+  }
+}
+
+[Analysis]:
+The combined code is correct and complete. The LLM output added a `@State` property to the `Example` struct, which improves the completeness of the original text. The rest of the original code remains unchanged and is correctly integrated. The addition of the `@State` property is a meaningful enhancement, as it introduces state management to the component, which is a common requirement in UI frameworks.
+
+[Score]:
+10
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/decorator_1/byUUID/2025-03-19T11_11_25.883Z____00b6bd11-2a23-41a9-987d-bb76bd721ba8.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+struct Example {
+  @State count: number = 0
+ <|current_cursor_position|>
+  build() {
+    Text(this.count.toString())
+  }
+}
+
+@Component
+struct ChildComponent {
+
+  build() {
+    Text('Hello, world!')
+  }
+}
+
+@Component
+struct LinkChild {
+
+  build() {
+    Button('Click me')
+  }
+}
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+  @State count: number = 0
+  @State message: string = 'Hello, world!'
+  build() {
+    Text(this.count.toString())
+  }
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+@Entry
+@Component
+struct Example {
+  @State count: number = 0
+  @State message: string = 'Hello, world!'
+  build() {
+    Text(this.count.toString())
+  }
+}
+
+@Component
+struct ChildComponent {
+
+  build() {
+    Text('Hello, world!')
+  }
+}
+
+@Component
+struct LinkChild {
+
+  build() {
+    Button('Click me')
+  }
+}
+
+[Analysis]:
+The combined code is correct and complete. The model output added a new state variable `message` to the `Example` component, which improves the completeness of the original text. The rest of the code remains unchanged and is syntactically correct. The addition of `@State message: string = 'Hello, world!'` is a valid enhancement, making the code more versatile without introducing any errors.
+
+[Score]:
+10
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/decorator_1/byUUID/2025-03-19T11_11_37.948Z____c5846efa-d3c4-4f2f-aa9d-fe38c94806c7.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+struct Example {
+  @State count: number = 0
+
+  build() {
+    Button('Click me').onClick(() => {
+      this.count++
+    })
+  }
+}
+
+@Component
+struct ChildComponent {<|current_cursor_position|>
+
+  build() {
+    Text('Hello, world!')
+  }
+}
+
+@Component
+struct LinkChild {
+
+  build() {
+    Button('Click me')
+  }
+}
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+@Component
+struct ChildComponent {
+  @State count: number = 0
+  build() {
+    Text('Hello, world!')
+  }
+}
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+@Entry
+@Component
+struct Example {
+  @State count: number = 0
+
+  build() {
+    Button('Click me').onClick(() => {
+      this.count++
+    })
+  }
+}
+
+@Component
+struct ChildComponent {
+  @State count: number = 0
+  build() {
+    Text('Hello, world!')
+  }
+}
+
+@Component
+struct LinkChild {
+
+  build() {
+    Button('Click me')
+  }
+}
+
+[Analysis]:
+The combined code is correct and complete. The LLM output added the `@State count: number = 0` to the `ChildComponent`, which was missing in the original text. This addition improves the completeness of the original text, making the `ChildComponent` more functional and consistent with the `Example` component. The rest of the code remains unchanged and is syntactically correct.
+
+[Score]:
+10
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/decorator_1/byUUID/2025-03-19T11_12_19.697Z____334b199c-d12b-46e3-98c7-06f49c5bb375.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+struct Example {
+  @State count: number = 0
+
+  build() {
+    Button('Click me').onClick(() => {
+      this.count++
+    })
+  }
+}
+
+@Component
+struct ChildComponent {
+  @Prop message: string
+
+  build() {
+    Text(this.message)
+  }
+}
+
+@Component
+struct LinkChild {
+  @Link child: ChildComponent <|current_cursor_position|>
+
+  build() {
+    Button('Click me').onClick(() => {
+      this.child.message = 'Hello, world!'
+    })
+  }
+}
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+}
+
+@Component
+struct LinkChild {
+  @Link child: ChildComponent = ChildComponent()
+
+  build() {
+    Button('Click me').onClick(() => {
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+@Entry
+@Component
+struct Example {
+  @State count: number = 0
+
+  build() {
+    Button('Click me').onClick(() => {
+      this.count++
+    })
+  }
+}
+
+@Component
+struct ChildComponent {
+  @Prop message: string
+
+  build() {
+    Text(this.message)
+  }
+}
+
+@Component
+struct LinkChild {
+  @Link child: ChildComponent = ChildComponent()
+
+  build() {
+    Button('Click me').onClick(() => {
+      this.child.message = 'Hello, world!'
+    })
+  }
+}
+
+[Analysis]:
+The combined code is correct and complete. The model output correctly initializes the `@Link` property `child` with `ChildComponent()`, which was missing in the original text. This improves the completeness and correctness of the code. The rest of the code remains unchanged and is syntactically correct.
+
+[Score]:
+10 -> 0 // @Link不能初始化
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/decorator_1/byUUID/2025-03-19T11_11_58.589Z____c32bca9f-0f4d-4dfa-a2d1-e83528a8bfcf.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+struct Example {
+  @State count: number = 0
+
+  build() {
+    Button('Click me').onClick(() => {
+      this.count++
+    })
+  }
+}
+
+@Component
+struct ChildComponent {
+  @Prop message: string
+
+  build() {
+    Text(this.message)
+  }
+}
+
+@Component
+struct LinkChild {
+<|current_cursor_position|>
+  build() {
+    Button('Click me')
+  }
+}
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+@Component
+struct LinkChild {
+  @Link child: ChildComponent
+  build() {
+    Button('Click me')
+  }
+}
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+@Entry
+@Component
+struct Example {
+  @State count: number = 0
+
+  build() {
+    Button('Click me').onClick(() => {
+      this.count++
+    })
+  }
+}
+
+@Component
+struct ChildComponent {
+  @Prop message: string
+
+  build() {
+    Text(this.message)
+  }
+}
+
+@Component
+struct LinkChild {
+  @Link child: ChildComponent
+  build() {
+    Button('Click me')
+  }
+}
+
+[Analysis]:
+The combined code is correct and complete. The model output added the `@Link` decorator to the `LinkChild` struct, which is a valid and meaningful addition. This improves the completeness of the original text by introducing a new property (`child`) that can be used to link to a `ChildComponent`. The code is syntactically correct and aligns with the expected structure of the framework being used.
+
+[Score]:
+10
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/decorator_1/byUUID/2025-03-19T11_11_28.378Z____f246fe39-54d7-4c70-b4cd-30adefa6066e.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+struct Example {
+  @State count: number = 0
+
+  build() {
+    B<|current_cursor_position|>
+  }
+}
+
+@Component
+struct ChildComponent {
+
+  build() {
+    Text('Hello, world!')
+  }
+}
+
+@Component
+struct LinkChild {
+
+  build() {
+    Button('Click me')
+  }
+}
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+struct Example {
+  @State count: number = 0
+
+  build() {
+    Button('Click me').onClick(() => {
+  }
+}
+
+@Component
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+@Entry
+@Component
+struct Example {
+  @State count: number = 0
+
+  build() {
+    Button('Click me').onClick(() => {
+      this.count++;
+    });
+  }
+}
+
+@Component
+struct ChildComponent {
+
+  build() {
+    Text('Hello, world!')
+  }
+}
+
+@Component
+struct LinkChild {
+
+  build() {
+    Button('Click me')
+  }
+}
+
+[Analysis]:
+The combined code integrates the partial output from the LLM with the original text. The LLM's output correctly adds a `Button` with an `onClick` handler that increments the `count` state. This improves the completeness of the original text, which only had a placeholder `B` at the cursor position. The code is syntactically correct and aligns with the expected structure of the original text. The addition of the `onClick` handler is a meaningful improvement, making the code more functional and complete.
+
+[Score]:
+9
+==============================================================================================================
+
+Pass rate:
+12/13 = 1

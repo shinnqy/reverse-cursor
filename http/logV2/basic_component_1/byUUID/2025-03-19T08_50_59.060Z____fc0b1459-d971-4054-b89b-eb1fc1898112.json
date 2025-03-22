@@ -1,0 +1,473 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "fc0b1459-d971-4054-b89b-eb1fc1898112",
+    "timestamp": "2025-03-19T08:50:59.060Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/basicComponent.ets",
+          "diffHistory": [
+            "1+|@Entry\n2+|@Component\n3+|struct BasicComponent {\n4+|  @State message: string = 'Hello, World!'\n5+|}\n6+|\n",
+            "4-|  @State message: string = 'Hello, World!'\n",
+            "4-|  \n4+|  build() {\n5+|    Column() {\n6+|      Text('Hello, World!')\n7+|    }\n8+|  }\n",
+            "6-|      Text('Hello, World!')\n6+|      Text(this.message)\n",
+            "4+|  @State message: string = 'Hello, World!'\n5+|\n8+|      Row\n10+|      }\n",
+            "8-|      Row\n9-|      Text(this.message)\n8+|      Row() {\n9+|        Text(this.message)\n11+|      .width('100%')\n12+|      .height(100)\n13+|      .backgroundColor('#000000')\n14+|      .justifyContent(FlexAlign.Center)\n15+|      .alignItems(ItemAlign.Center)\n16+|\n17+|      Stack() {\n18+|        Text('Hello, World!')\n19+|        Text('Hello, World!')\n20+|        Text('Hello, World!')\n21+|      }\n22+|      .width('100%')\n23+|      .height(100)\n",
+            "16-|      \n17-|      \n17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .width('100%')\n21+|      .height(100)\n22+|      .backgroundColor('#000000')\n23+|      .justifyContent(FlexAlign.Center)\n24+|      .alignItems(ItemAlign.Center)\n25+|\n",
+            "37+|@Entry\n38+|@Component\n39+|struct BasicComponent {\n40+|  @State message: string = 'Hello, World!'\n41+|  \n42+|}\n",
+            "37-|@Entry\n",
+            "38-|struct BasicComponent {\n38+|struct ListExample {\n",
+            "41+|  build() {\n42+|    List() {\n43+|      Text('Hello, World!')\n44+|    }\n45+|  }\n",
+            "39-|  @State message: string = 'Hello, World!'\n",
+            "39-|  \n39+|  @State items: string[] = ['Item 1', 'Item 2', 'Item 3']\n",
+            "43-|      Text('Hello, World!')\n44-|    }\n43+|      Text('Hello, World!th('100%')\n44+|    .height(100)\n",
+            "43-|      Text('Hello, World!th('100%')\n43+|      Text('Hello, Worl }\n44+|    .width('100%')\n",
+            "43-|      Text('Hello, Worl }\n43+|      Text('Hello,m)\n44+|      })\n45+|    }\n",
+            "43-|      Text('Hello,m)\n43+|      ForEach(this.items, (item) => {\n44+|        Text(item)\n",
+            "44+|        ListItem() {\n46+|        }\n",
+            "47+|        .height(100)\n48+|        .width('100%')\n49+|        .backgroundColor('#000000')\n50+|        .justifyContent(FlexAlign.Center)\n51+|        .alignItems(ItemAlign.Center)\n",
+            "58+|\n59+|@Component\n60+|struc\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/basicComponent.ets",
+        "contents": "@Entry\n@Component\nstruct BasicComponent {\n  @State message: string = 'Hello, World!'\n\n  build() {\n    Column() {\n      Row() {\n        Text(this.message)\n      }\n      .width('100%')\n      .height(100)\n      .backgroundColor('#000000')\n      .justifyContent(FlexAlign.Center)\n      .alignItems(ItemAlign.Center)\n\n      Button() {\n        Text('Click me')\n      }\n      .width('100%')\n      .height(100)\n      .backgroundColor('#000000')\n      .justifyContent(FlexAlign.Center)\n      .alignItems(ItemAlign.Center)\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }\n      .width('100%')\n      .height(100)\n    }\n  }\n}\n\n@Component\nstruct ListExample {\n  @State items: string[] = ['Item 1', 'Item 2', 'Item 3']\n\n  build() {\n    List() {\n      ForEach(this.items, (item) => {\n        ListItem() {\n          Text(item)\n        }\n        .height(100)\n        .width('100%')\n        .backgroundColor('#000000')\n        .justifyContent(FlexAlign.Center)\n        .alignItems(ItemAlign.Center)\n      })\n    }\n    .width('100%')\n    .height(100)\n  }\n}\n\n@Component\nstruc\n",
+        "cursorPosition": {
+          "line": 59,
+          "column": 5
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 84,
+        "cellStartLines": [],
+        "cells": [],
+        "sha256Hash": "892394a345373f16212974c33c6ed67b24e7dc27648280311d4f509346ad2939",
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742374259103,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.699951171875,
+      "timeAtRequestSend": 1742374259103
+    },
+    "generateUuid": "fc0b1459-d971-4054-b89b-eb1fc1898112",
+    "timestamp": "2025-03-19T08:50:59.105Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "fc0b1459-d971-4054-b89b-eb1fc1898112",
+    "timestamp": "2025-03-19T08:50:59.458Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "@Component\nstruct",
+      "rangeToReplace": {
+        "startLineNumber": 59,
+        "endLineNumberInclusive": 61
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "fc0b1459-d971-4054-b89b-eb1fc1898112",
+    "timestamp": "2025-03-19T08:50:59.459Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Grid"
+    },
+    "generationUUID": "fc0b1459-d971-4054-b89b-eb1fc1898112",
+    "timestamp": "2025-03-19T08:50:59.477Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Example"
+    },
+    "generationUUID": "fc0b1459-d971-4054-b89b-eb1fc1898112",
+    "timestamp": "2025-03-19T08:50:59.486Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {\n "
+    },
+    "generationUUID": "fc0b1459-d971-4054-b89b-eb1fc1898112",
+    "timestamp": "2025-03-19T08:50:59.499Z"
+  },
+  {
+    "firstChunkValue": "@Component\nstruct GridExample {\n",
+    "generationUUID": "fc0b1459-d971-4054-b89b-eb1fc1898112",
+    "timestamp": "2025-03-19T08:50:59.501Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "@Component\nstruct GridExample {\n"
+    },
+    "generationUUID": "fc0b1459-d971-4054-b89b-eb1fc1898112",
+    "timestamp": "2025-03-19T08:50:59.503Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "c55d3c3f-263f-4252-9a2f-48f44df4b3ca",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 84,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 84,
+      "monotonicallyIncreasingSuggestionId": 60,
+      "range": {
+        "startLineNumber": 59,
+        "startColumn": 1,
+        "endLineNumberInclusive": 61,
+        "endColumn": 1
+      },
+      "replaceText": "@Component\nstruct GridExample {\n",
+      "originalText": "@Component\nstruc\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 59,
+        "startColumn": 1,
+        "endLineNumberInclusive": 61,
+        "endColumn": 1
+      },
+      "diffText": "@Component\nstruct GridExample {\n",
+      "fullOriginalText": "@Component\nstruc\n",
+      "suggestionTriggerTime": 1742374259014,
+      "greens": [],
+      "source": "typing",
+      "requestId": "fc0b1459-d971-4054-b89b-eb1fc1898112",
+      "selection": {
+        "startLineNumber": 59,
+        "startColumn": 1,
+        "endLineNumberInclusive": 61,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 60,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 59,
+        "startColumn": 1,
+        "endLineNumber": 61,
+        "endColumn": 1
+      },
+      "trackedText": "@Component\nstruct \n"
+    },
+    "generationUUID": "fc0b1459-d971-4054-b89b-eb1fc1898112",
+    "timestamp": "2025-03-19T08:50:59.503Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " @"
+    },
+    "generationUUID": "fc0b1459-d971-4054-b89b-eb1fc1898112",
+    "timestamp": "2025-03-19T08:50:59.509Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "State items: string[] = ['Item"
+    },
+    "generationUUID": "fc0b1459-d971-4054-b89b-eb1fc1898112",
+    "timestamp": "2025-03-19T08:50:59.521Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "fc0b1459-d971-4054-b89b-eb1fc1898112",
+    "timestamp": "2025-03-19T08:50:59.532Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "1"
+    },
+    "generationUUID": "fc0b1459-d971-4054-b89b-eb1fc1898112",
+    "timestamp": "2025-03-19T08:50:59.542Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "', 'Item 2', 'Item"
+    },
+    "generationUUID": "fc0b1459-d971-4054-b89b-eb1fc1898112",
+    "timestamp": "2025-03-19T08:50:59.553Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " 3"
+    },
+    "generationUUID": "fc0b1459-d971-4054-b89b-eb1fc1898112",
+    "timestamp": "2025-03-19T08:50:59.563Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "',"
+    },
+    "generationUUID": "fc0b1459-d971-4054-b89b-eb1fc1898112",
+    "timestamp": "2025-03-19T08:50:59.573Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " 'Item 4"
+    },
+    "generationUUID": "fc0b1459-d971-4054-b89b-eb1fc1898112",
+    "timestamp": "2025-03-19T08:50:59.583Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "',"
+    },
+    "generationUUID": "fc0b1459-d971-4054-b89b-eb1fc1898112",
+    "timestamp": "2025-03-19T08:50:59.594Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " '"
+    },
+    "generationUUID": "fc0b1459-d971-4054-b89b-eb1fc1898112",
+    "timestamp": "2025-03-19T08:50:59.604Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Item 5"
+    },
+    "generationUUID": "fc0b1459-d971-4054-b89b-eb1fc1898112",
+    "timestamp": "2025-03-19T08:50:59.612Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "',"
+    },
+    "generationUUID": "fc0b1459-d971-4054-b89b-eb1fc1898112",
+    "timestamp": "2025-03-19T08:50:59.624Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " 'Item"
+    },
+    "generationUUID": "fc0b1459-d971-4054-b89b-eb1fc1898112",
+    "timestamp": "2025-03-19T08:50:59.631Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "fc0b1459-d971-4054-b89b-eb1fc1898112",
+    "timestamp": "2025-03-19T08:50:59.644Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "6"
+    },
+    "generationUUID": "fc0b1459-d971-4054-b89b-eb1fc1898112",
+    "timestamp": "2025-03-19T08:50:59.654Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "']"
+    },
+    "generationUUID": "fc0b1459-d971-4054-b89b-eb1fc1898112",
+    "timestamp": "2025-03-19T08:50:59.671Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "fc0b1459-d971-4054-b89b-eb1fc1898112",
+    "timestamp": "2025-03-19T08:50:59.677Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "fc0b1459-d971-4054-b89b-eb1fc1898112",
+    "timestamp": "2025-03-19T08:50:59.692Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " build"
+    },
+    "generationUUID": "fc0b1459-d971-4054-b89b-eb1fc1898112",
+    "timestamp": "2025-03-19T08:50:59.700Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "() {\n    Grid"
+    },
+    "generationUUID": "fc0b1459-d971-4054-b89b-eb1fc1898112",
+    "timestamp": "2025-03-19T08:50:59.712Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "()"
+    },
+    "generationUUID": "fc0b1459-d971-4054-b89b-eb1fc1898112",
+    "timestamp": "2025-03-19T08:50:59.726Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {\n "
+    },
+    "generationUUID": "fc0b1459-d971-4054-b89b-eb1fc1898112",
+    "timestamp": "2025-03-19T08:50:59.732Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " }"
+    },
+    "generationUUID": "fc0b1459-d971-4054-b89b-eb1fc1898112",
+    "timestamp": "2025-03-19T08:50:59.745Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n}\n"
+    },
+    "generationUUID": "fc0b1459-d971-4054-b89b-eb1fc1898112",
+    "timestamp": "2025-03-19T08:50:59.761Z"
+  },
+  {
+    "fullText": "@Component\nstruct GridExample {\n  @State items: string[] = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6']\n\n  build() {\n    Grid() {\n  }\n}\n",
+    "generationUUID": "fc0b1459-d971-4054-b89b-eb1fc1898112",
+    "timestamp": "2025-03-19T08:50:59.761Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "@Component\nstruct GridExample {\n"
+    },
+    "fullText": "@Component\nstruct GridExample {\n  @State items: string[] = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6']\n\n  build() {\n    Grid() {\n  }\n}\n",
+    "generationUUID": "fc0b1459-d971-4054-b89b-eb1fc1898112",
+    "timestamp": "2025-03-19T08:50:59.761Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "3b43da7c-93b1-4a01-b38b-853936dce4c7",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 84,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 87,
+      "monotonicallyIncreasingSuggestionId": 62,
+      "range": {
+        "startLineNumber": 59,
+        "startColumn": 1,
+        "endLineNumberInclusive": 61,
+        "endColumn": 1
+      },
+      "replaceText": "@Component\nstruct GridExample {\n  @State items: string[] = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6']\n\n  build() {\n    Grid() {\n  }\n}\n",
+      "originalText": "@Component\nstruct GridExample {\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 59,
+        "startColumn": 1,
+        "endLineNumberInclusive": 61,
+        "endColumn": 1
+      },
+      "diffText": "@Component\nstruct GridExample {\n  @State items: string[] = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6']\n\n  build() {\n    Grid() {\n  }\n}\n",
+      "fullOriginalText": "@Component\nstruct GridExample {\n",
+      "suggestionTriggerTime": 1742374259014,
+      "greens": [],
+      "source": "typing",
+      "requestId": "fc0b1459-d971-4054-b89b-eb1fc1898112",
+      "selection": {
+        "startLineNumber": 59,
+        "startColumn": 1,
+        "endLineNumberInclusive": 61,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "70810932-8847-42ff-8d0a-da895e4ae98a",
+      "undoRedoGroup": {
+        "id": 62,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "fc0b1459-d971-4054-b89b-eb1fc1898112",
+    "timestamp": "2025-03-19T08:50:59.762Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "fc0b1459-d971-4054-b89b-eb1fc1898112",
+    "timestamp": "2025-03-19T08:50:59.765Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "fc0b1459-d971-4054-b89b-eb1fc1898112",
+    "timestamp": "2025-03-19T08:50:59.765Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "70810932-8847-42ff-8d0a-da895e4ae98a",
+    "generationUUID": "fc0b1459-d971-4054-b89b-eb1fc1898112",
+    "timestamp": "2025-03-19T08:50:59.771Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "@Component\nstruct GridExample {\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "70810932-8847-42ff-8d0a-da895e4ae98a",
+    "generationUUID": "fc0b1459-d971-4054-b89b-eb1fc1898112",
+    "timestamp": "2025-03-19T08:50:59.772Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "70810932-8847-42ff-8d0a-da895e4ae98a",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T08:50:59.772Z"
+  }
+]

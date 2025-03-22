@@ -1,0 +1,54 @@
+{"line":6,"column":0}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case light.RED:
+      return light.GREEN;
+    case light.GREEN:
+      return light.YELLOW;
+[ToFill]    case 'yellow':
+      return 'red';
+    default:
+      return 'red';
+  }
+}
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+      return light.GREEN;
+    case light.GREEN:
+      return light.YELLOW;
+    case light.YELLOW:
+      return light.RED;
+    default:
+      return light.RED;
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case light.RED:
+      return light.GREEN;
+    case light.GREEN:
+      return light.YELLOW;
+    case light.YELLOW:
+      return light.RED;
+    default:
+      return light.RED;
+  }
+}
+
+
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "src/components/test2.ts",
+  "lineNumberOneIndexed": 13,
+  "text": "\n",
+  "shouldRetriggerCpp": false
+}
+--------------------------------[        displayedFusedCursorPrediction       ]---------------------------------
+{
+  "relativePath": "src/components/test2.ts",
+  "lineNumberOneIndexed": 13,
+  "text": "\n",
+  "shouldRetriggerCpp": false
+}

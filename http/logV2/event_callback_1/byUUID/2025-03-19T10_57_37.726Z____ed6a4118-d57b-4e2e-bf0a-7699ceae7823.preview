@@ -1,0 +1,54 @@
+{"line":14,"column":0}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Component
+struct ClickEventExample {
+  build() {
+    Button('Click me')
+      .onClick(() => {
+        console.log('Button clicked')
+      })
+  }
+}
+
+@Component
+struct LongPressEventExample {
+  build() {
+    Button('Long press me')
+[ToFill]  }
+}
+
+@Component
+struct SwipeEventExample {
+  build() {
+    Button('Swipe me')
+  }
+}
+
+@Component
+struct ChildComponent {
+  @Prop() onCustomEvent: () => void
+
+  build() {
+    Button('Touch me')
+  }
+}
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+struct LongPressEventExample {
+  build() {
+    Button('Long press me')
+      .onLongPress(() => {
+        console.log('Button long pressed')
+      })
+  }
+}
+
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/eventCallback.ets",
+  "lineNumberOneIndexed": 22,
+  "text": "}\n}\n\n@Component\nstruct ChildComponent {",
+  "shouldRetriggerCpp": true
+}

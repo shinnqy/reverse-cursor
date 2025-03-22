@@ -1,0 +1,64 @@
+{"line":28,"column":10}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+import router from "@ohos.router";
+
+@Entry
+@Component
+struct Main {
+  @State message: string = "Hello World";
+
+  build() {
+    Row() {
+      Text(this.message)
+        .fontSize(20)
+        .fontWeight(FontWeight.Bold)
+        .onClick(() => {
+          router.push({
+            url: "pages/SecondPage",
+            params: {
+              message: "Hello from Second Page",
+            },
+          });
+        })
+        .width(200)
+        .height(100)
+        .backgroundColor(Color.Red)
+        .borderRadius(10)
+        .borderWidth(2)
+        .borderColor(Color.Black)
+        .padding(10)
+        .margin(10)
+          [ToFill].textAlign(TextAlign.Center)
+        .fontColor(Color.White)
+        .fontSize(20)
+        .fontWeight(FontWeight.Bold)
+        .textOverflow(TextOverflow.Ellipsis)
+        .textWrap(TextWrap.Wrap)
+        .textAlign(TextAlign.Center)
+
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+        .margin(10)
+        .textAlign(TextAlign.Center)
+        .fontColor(Color.White)
+        .fontSize(20)
+        .fontWeight(FontWeight.Bold)
+        .textOverflow(TextOverflow.Ellipsis)
+        .textWrap(TextWrap.Wrap)
+        .textAlign(TextAlign.Center)
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/builtInAPI.ets",
+  "lineNumberOneIndexed": 36,
+  "text": "\n\n",
+  "shouldRetriggerCpp": true
+}
+--------------------------------[        displayedFusedCursorPrediction       ]---------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/builtInAPI.ets",
+  "lineNumberOneIndexed": 36,
+  "text": "\n\n",
+  "shouldRetriggerCpp": true
+}

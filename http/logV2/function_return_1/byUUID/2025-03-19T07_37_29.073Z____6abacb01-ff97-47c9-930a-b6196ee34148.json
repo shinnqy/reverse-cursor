@@ -1,0 +1,186 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "6abacb01-ff97-47c9-930a-b6196ee34148",
+    "timestamp": "2025-03-19T07:37:29.073Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/functionReturn.ets",
+          "diffHistory": [
+            "1+|function add(a: number, b: number): number {\n2+|    return a + b;\n3+|}\n4+|\n5+|function subtract(a: number, b: number): number {\n6+|    return a - b;\n7+|}\n8+|\n9+|let sum = add(1, 2);\n10+|\n11+|function getUser(name: string, age: number): { name: string, age: number } {\n12+|    return { name, age };\n13+|}\n14+|\n15+|let user = getUser(\"John\", 30);\n16+|\n17+|  \n",
+            "11-|function getUser(name: string, age: number): { name: string, age: number } {\n11+|interface User {\n12+|    name: string;\n13+|    age: number;\n14+|}\n15+|\n16+|function getUser(name: string, age: number): User {\n",
+            "22+|function wrapValue<T>(value: T): {data {\n23+|    return { data: value };\n24+|}\n25+|\n26+|let wrappedValue = wrapValue(10);\n27+|\n28+|\n",
+            "22-|function wrapValue<T>(value: T): {data {\n22+|function wrapValue<T>(value: T): {data: T}   {\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/functionReturn.ets",
+        "contents": "function add(a: number, b: number): number {\n    return a + b;\n}\n\nfunction subtract(a: number, b: number): number {\n    return a - b;\n}\n\nlet sum = add(1, 2);\n\ninterface User {\n    name: string;\n    age: number;\n}\n\nfunction getUser(name: string, age: number): User {\n    return { name, age };\n}\n\nlet user = getUser(\"John\", 30);\n\nfunction wrapValue<T>(value: T): {data: T}   {\n    return { data: value };\n}\n\nlet wrappedValue = wrapValue(10);\n\n\n",
+        "cursorPosition": {
+          "line": 21,
+          "column": 44
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 105,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742369849110,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.89990234375,
+      "timeAtRequestSend": 1742369849110
+    },
+    "generateUuid": "6abacb01-ff97-47c9-930a-b6196ee34148",
+    "timestamp": "2025-03-19T07:37:29.112Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "6abacb01-ff97-47c9-930a-b6196ee34148",
+    "timestamp": "2025-03-19T07:37:29.451Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nfunction wrapValue<T>(value: T): {data: T} {",
+      "rangeToReplace": {
+        "startLineNumber": 21,
+        "endLineNumberInclusive": 25
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "6abacb01-ff97-47c9-930a-b6196ee34148",
+    "timestamp": "2025-03-19T07:37:29.451Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n   "
+    },
+    "generationUUID": "6abacb01-ff97-47c9-930a-b6196ee34148",
+    "timestamp": "2025-03-19T07:37:29.476Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " return { data: value };\n}"
+    },
+    "generationUUID": "6abacb01-ff97-47c9-930a-b6196ee34148",
+    "timestamp": "2025-03-19T07:37:29.481Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "6abacb01-ff97-47c9-930a-b6196ee34148",
+    "timestamp": "2025-03-19T07:37:29.490Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "6abacb01-ff97-47c9-930a-b6196ee34148",
+    "timestamp": "2025-03-19T07:37:29.523Z"
+  },
+  {
+    "firstChunkValue": "\nfunction wrapValue<T>(value: T): {data: T} {\n    return { data: value };\n}\n",
+    "generationUUID": "6abacb01-ff97-47c9-930a-b6196ee34148",
+    "timestamp": "2025-03-19T07:37:29.524Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": false
+    },
+    "generationUUID": "6abacb01-ff97-47c9-930a-b6196ee34148",
+    "timestamp": "2025-03-19T07:37:29.524Z"
+  },
+  {
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/functionReturn.ets",
+      "lineNumberOneIndexed": 26,
+      "text": "let wrappedValue = wrapValue(10);\n\n\n",
+      "shouldRetriggerCpp": true
+    },
+    "predictionId": "c46a64db-07c7-4318-ba6c-828ba6920f56",
+    "generationUUID": "6abacb01-ff97-47c9-930a-b6196ee34148",
+    "timestamp": "2025-03-19T07:37:29.565Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is false",
+    "invokePlace": "before this.displayFusedCursorPrediction, about to show prediction icon",
+    "isValidCase4firstChunkValue": {
+      "valid": false
+    },
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/functionReturn.ets",
+      "lineNumberOneIndexed": 26,
+      "text": "let wrappedValue = wrapValue(10);\n\n\n",
+      "shouldRetriggerCpp": true
+    },
+    "predictionId": "c46a64db-07c7-4318-ba6c-828ba6920f56",
+    "generationUUID": "6abacb01-ff97-47c9-930a-b6196ee34148",
+    "timestamp": "2025-03-19T07:37:29.566Z"
+  },
+  {
+    "action": "displayFusedCursorPrediction",
+    "predictionId": "c46a64db-07c7-4318-ba6c-828ba6920f56",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/functionReturn.ets",
+      "lineNumberOneIndexed": 26,
+      "text": "let wrappedValue = wrapValue(10);\n\n\n",
+      "shouldRetriggerCpp": true
+    },
+    "oldText": "",
+    "newText": "",
+    "timestamp": "2025-03-19T07:37:29.566Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "cursorPredictionTarget": {
+        "relativePath": "entry/src/main/ets/utils/functionReturn.ets",
+        "lineNumberOneIndexed": 26,
+        "expectedContent": "let wrappedValue = wrapValue(10);\n\n\n",
+        "shouldRetriggerCpp": true
+      }
+    },
+    "generationUUID": "6abacb01-ff97-47c9-930a-b6196ee34148",
+    "timestamp": "2025-03-19T07:37:29.566Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "6abacb01-ff97-47c9-930a-b6196ee34148",
+    "timestamp": "2025-03-19T07:37:29.566Z"
+  }
+]

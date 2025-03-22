@@ -1,0 +1,132 @@
+{"line":0,"column":30}
+
+========= processedCurrentFileContents ========
+function changeLight(light: Tr[ToFill]
+
+function modifyCode(code, lineNumber, columnNumber, insertString) {
+  if (!code) {
+    return '';
+  }
+
+  try {
+    // start from 0
+    lineNumber = lineNumber;
+    columnNumber = columnNumber;
+
+    const lines = code.split('\n');
+
+    if (lineNumber < 0 || lineNumber > lines.length - 1) {
+      throw new Error('Invalid line number');
+    }
+
+    const targetLine = lines[lineNumber];
+
+    if (columnNumber < 0 || columnNumber > targetLine.length - 1) {
+
+      const needColumnCount = columnNumber - targetLine.length;
+      const newLine = targetLine + (new Array(needColumnCount)).fill('').join(' ') + insertString;
+      lines[lineNumber] = newLine;
+      return lines.join('\n');
+    }
+
+    const newLine = targetLine.slice(0, columnNumber) + insertString + targetLine.slice(columnNumber);
+    lines[lineNumber] = newLine;
+
+    return lines.join('\n');
+  } catch (e) {
+    console.error(e)
+  }
+}
+
+======== firstChunkValue ========
+function changeLight(light: TrafficLight) {
+
+function modifyCode(code, lineNumber, columnNumber, insertString) {
+  if (!code) {
+======== replace firstChunkValue ========
+function changeLight(light: TrafficLight) {
+
+function modifyCode(code, lineNumber, columnNumber, insertString) {
+  if (!code) {
+    return '';
+  }
+
+  try {
+    // start from 0
+    lineNumber = lineNumber;
+    columnNumber = columnNumber;
+
+    const lines = code.split('\n');
+
+    if (lineNumber < 0 || lineNumber > lines.length - 1) {
+      throw new Error('Invalid line number');
+    }
+
+    const targetLine = lines[lineNumber];
+
+    if (columnNumber < 0 || columnNumber > targetLine.length - 1) {
+
+      const needColumnCount = columnNumber - targetLine.length;
+      const newLine = targetLine + (new Array(needColumnCount)).fill('').join(' ') + insertString;
+      lines[lineNumber] = newLine;
+      return lines.join('\n');
+    }
+
+    const newLine = targetLine.slice(0, columnNumber) + insertString + targetLine.slice(columnNumber);
+    lines[lineNumber] = newLine;
+
+    return lines.join('\n');
+  } catch (e) {
+    console.error(e)
+  }
+}
+
+======== replacedContentsWithCursorPosition ========
+function changeLight(light: TrafficLight) {<|current_cursor_position|>
+
+function modifyCode(code, lineNumber, columnNumber, insertString) {
+  if (!code) {
+    return '';
+  }
+
+  try {
+    // start from 0
+    lineNumber = lineNumber;
+    columnNumber = columnNumber;
+
+    const lines = code.split('\n');
+
+    if (lineNumber < 0 || lineNumber > lines.length - 1) {
+      throw new Error('Invalid line number');
+    }
+
+    const targetLine = lines[lineNumber];
+
+    if (columnNumber < 0 || columnNumber > targetLine.length - 1) {
+
+      const needColumnCount = columnNumber - targetLine.length;
+      const newLine = targetLine + (new Array(needColumnCount)).fill('').join(' ') + insertString;
+      lines[lineNumber] = newLine;
+      return lines.join('\n');
+    }
+
+    const newLine = targetLine.slice(0, columnNumber) + insertString + targetLine.slice(columnNumber);
+    lines[lineNumber] = newLine;
+
+    return lines.join('\n');
+  } catch (e) {
+    console.error(e)
+  }
+}
+
+======== fullText ========
+function changeLight(light: TrafficLight) {
+  light = 'green';
+}
+
+const light = 'red';
+changeLight(light);
+
+
+function modifyCode(code, lineNumber, columnNumber, insertString) {
+  if (!code) {

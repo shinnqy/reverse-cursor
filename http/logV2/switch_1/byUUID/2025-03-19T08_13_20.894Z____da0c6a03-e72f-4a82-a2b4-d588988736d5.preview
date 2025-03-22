@@ -1,0 +1,65 @@
+{"line":46,"column":10}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+function g[ToFill]
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+function getArea(shape: Square | Circle) {
+
+-------------------------------[                   fullText                  ]--------------------------------
+
+function getArea(shape: Square | Circle) {
+    switch (shape.kind) {
+        case "square":
+            return shape.size * shape.size;
+        case "circle":
+            return Math.PI * shape.radius ** 2;
+    }
+}

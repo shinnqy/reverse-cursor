@@ -1,0 +1,358 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "5c546614-4371-4e39-807d-4e0b5df6618e",
+    "timestamp": "2025-03-19T08:14:24.501Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/switch1.ets",
+          "diffHistory": [
+            "1+|type Color = \"red\" | \"blue\" | \"green\";\n2+|\n3+|let color: Color = \"red\";\n4+|\n5+|switch (color) {\n6+|    case \"red\":\n7+|        console.log(\"red\");\n8+|        break;\n9+|}\n",
+            "9-|        \n10-|}\n9+|    case \"blue\":\n10+|}\n",
+            "10+|        console.log(\"blue\");\n11+|        break;\n12+|    case \"green\":\n13+|        console.log(\"green\");\n14+|        break;\n16+|\n17+|enum Direction {}\n18+|\n",
+            "17-|enum Direction {}\n17+|enum Direction {\n18+|    Up,\n19+|    Down,\n20+|    Left,\n21+|    Right,\n22+|}\n23+|let dir: Direction = Direction.Up;\n",
+            "25+|switch (dir) {\n26+|    case Direction.Up:\n27+|        console.log(\"up\");\n28+|        break;\n29+|}\n30+|\n",
+            "29+|    case Direction.Down:\n30+|        console.log(\"down\");\n31+|        break;\n32+|    case Direction.Left:\n33+|        console.log(\"left\");\n34+|        break;\n35+|        \n",
+            "38+|interface Square {\n39+|    kind: \"square\";\n40+|    size: number;\n41+|}\n42+|\n43+|interface Rectangle {\n44+|    \n45+|}\n",
+            "42+|interface Circle {\n43+|    kind: \"circle\";\n44+|    radius: number;\n45+|}\n43-|interface Rectangle {\n44-|    \n45-|}\n",
+            "47-|\n47+|function getArea()\n",
+            "47+|type Shape = Square | Circle;\n48+|\n",
+            "49-|function getArea()\n49+|function getArea(shape: Shape) {\n50+|    switch (shape.kind) {\n51+|        case \"square\":\n52+|            return shape.size * shape.size;\n53+|        case \"circle\":\n54+|            return Math.PI * shape.radius ** 2;\n55+|    }\n56+|}\n57+|\n58+|let category = \"A\";\n59+|let subCategory = 1;\n60+|\n61+|switch (category) {\n62+|    case \"A\":\n63+|        switch (subCategory) {\n64+|            \n65+|        }\n66+|}\n",
+            "64-|          \n64+|            case 1:\n",
+            "64-|            case 1:\n64+|            case 1: \n65+|                console.log(\"A1\");\n66+|                break;\n67+|            case 2:\n68+|                console.log(\"A2\");\n69+|                break;\n70+|        }\n71+|        break;\n66-|        }\n",
+            "64-|            case 1: \n64+|            case 1:\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/switch1.ets",
+        "contents": "type Color = \"red\" | \"blue\" | \"green\";\n\nlet color: Color = \"red\";\n\nswitch (color) {\n    case \"red\":\n        console.log(\"red\");\n        break;\n    case \"blue\":\n        console.log(\"blue\");\n        break;\n    case \"green\":\n        console.log(\"green\");\n        break;\n}\n\nenum Direction {\n    Up,\n    Down,\n    Left,\n    Right,\n}\nlet dir: Direction = Direction.Up;\n\nswitch (dir) {\n    case Direction.Up:\n        console.log(\"up\");\n        break;\n    case Direction.Down:\n        console.log(\"down\");\n        break;\n    case Direction.Left:\n        console.log(\"left\");\n        break;\n\n}\n\ninterface Square {\n    kind: \"square\";\n    size: number;\n}\ninterface Circle {\n    kind: \"circle\";\n    radius: number;\n}\n\ntype Shape = Square | Circle;\n\nfunction getArea(shape: Shape) {\n    switch (shape.kind) {\n        case \"square\":\n            return shape.size * shape.size;\n        case \"circle\":\n            return Math.PI * shape.radius ** 2;\n    }\n}\n\nlet category = \"A\";\nlet subCategory = 1;\n\nswitch (category) {\n    case \"A\":\n        switch (subCategory) {\n            case 1:\n                console.log(\"A1\");\n                break;\n            case 2:\n                console.log(\"A2\");\n                break;\n        }\n        break;\n\n}",
+        "cursorPosition": {
+          "line": 68,
+          "column": 18
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 193,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1742372064552,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 55.800048828125,
+      "timeAtRequestSend": 1742372064552
+    },
+    "generateUuid": "5c546614-4371-4e39-807d-4e0b5df6618e",
+    "timestamp": "2025-03-19T08:14:24.553Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "5c546614-4371-4e39-807d-4e0b5df6618e",
+    "timestamp": "2025-03-19T08:14:24.915Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "                console.log(\"A2\");\n                break;\n        }\n        break;\n   ",
+      "rangeToReplace": {
+        "startLineNumber": 68,
+        "endLineNumberInclusive": 72
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "5c546614-4371-4e39-807d-4e0b5df6618e",
+    "timestamp": "2025-03-19T08:14:24.916Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " case \"B"
+    },
+    "generationUUID": "5c546614-4371-4e39-807d-4e0b5df6618e",
+    "timestamp": "2025-03-19T08:14:24.959Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\":"
+    },
+    "generationUUID": "5c546614-4371-4e39-807d-4e0b5df6618e",
+    "timestamp": "2025-03-19T08:14:24.967Z"
+  },
+  {
+    "firstChunkValue": "                console.log(\"A2\");\n                break;\n        }\n        break;\n    case \"B\":",
+    "generationUUID": "5c546614-4371-4e39-807d-4e0b5df6618e",
+    "timestamp": "2025-03-19T08:14:24.978Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "                console.log(\"A2\");\n                break;\n        }\n        break;\n    case \"B\":"
+    },
+    "generationUUID": "5c546614-4371-4e39-807d-4e0b5df6618e",
+    "timestamp": "2025-03-19T08:14:24.978Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n       "
+    },
+    "generationUUID": "5c546614-4371-4e39-807d-4e0b5df6618e",
+    "timestamp": "2025-03-19T08:14:24.979Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " console"
+    },
+    "generationUUID": "5c546614-4371-4e39-807d-4e0b5df6618e",
+    "timestamp": "2025-03-19T08:14:24.992Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ".log(\"B"
+    },
+    "generationUUID": "5c546614-4371-4e39-807d-4e0b5df6618e",
+    "timestamp": "2025-03-19T08:14:25.006Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\");"
+    },
+    "generationUUID": "5c546614-4371-4e39-807d-4e0b5df6618e",
+    "timestamp": "2025-03-19T08:14:25.016Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n       "
+    },
+    "generationUUID": "5c546614-4371-4e39-807d-4e0b5df6618e",
+    "timestamp": "2025-03-19T08:14:25.032Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " break"
+    },
+    "generationUUID": "5c546614-4371-4e39-807d-4e0b5df6618e",
+    "timestamp": "2025-03-19T08:14:25.043Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";\n   "
+    },
+    "generationUUID": "5c546614-4371-4e39-807d-4e0b5df6618e",
+    "timestamp": "2025-03-19T08:14:25.056Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " case"
+    },
+    "generationUUID": "5c546614-4371-4e39-807d-4e0b5df6618e",
+    "timestamp": "2025-03-19T08:14:25.069Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \"C"
+    },
+    "generationUUID": "5c546614-4371-4e39-807d-4e0b5df6618e",
+    "timestamp": "2025-03-19T08:14:25.082Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\":"
+    },
+    "generationUUID": "5c546614-4371-4e39-807d-4e0b5df6618e",
+    "timestamp": "2025-03-19T08:14:25.096Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "5c546614-4371-4e39-807d-4e0b5df6618e",
+    "timestamp": "2025-03-19T08:14:25.109Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "       "
+    },
+    "generationUUID": "5c546614-4371-4e39-807d-4e0b5df6618e",
+    "timestamp": "2025-03-19T08:14:25.122Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " console"
+    },
+    "generationUUID": "5c546614-4371-4e39-807d-4e0b5df6618e",
+    "timestamp": "2025-03-19T08:14:25.148Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ".log(\"C"
+    },
+    "generationUUID": "5c546614-4371-4e39-807d-4e0b5df6618e",
+    "timestamp": "2025-03-19T08:14:25.148Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\");"
+    },
+    "generationUUID": "5c546614-4371-4e39-807d-4e0b5df6618e",
+    "timestamp": "2025-03-19T08:14:25.157Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "5c546614-4371-4e39-807d-4e0b5df6618e",
+    "timestamp": "2025-03-19T08:14:25.170Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "       "
+    },
+    "generationUUID": "5c546614-4371-4e39-807d-4e0b5df6618e",
+    "timestamp": "2025-03-19T08:14:25.183Z"
+  },
+  {
+    "fullText": "                console.log(\"A2\");\n                break;\n        }\n        break;\n    case \"B\":\n        console.log(\"B\");\n        break;\n    case \"C\":\n        console.log(\"C\");\n        break;\n",
+    "generationUUID": "5c546614-4371-4e39-807d-4e0b5df6618e",
+    "timestamp": "2025-03-19T08:14:25.204Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "                console.log(\"A2\");\n                break;\n        }\n        break;\n    case \"B\":"
+    },
+    "fullText": "                console.log(\"A2\");\n                break;\n        }\n        break;\n    case \"B\":\n        console.log(\"B\");\n        break;\n    case \"C\":\n        console.log(\"C\");\n        break;\n",
+    "generationUUID": "5c546614-4371-4e39-807d-4e0b5df6618e",
+    "timestamp": "2025-03-19T08:14:25.204Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && currentSuggestion uniqueId is different && need to create newSuggestion according fullText",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "ac39f706-ad20-4089-813b-d0fa9d0ec4ad",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 193,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 193,
+      "monotonicallyIncreasingSuggestionId": 154,
+      "range": {
+        "startLineNumber": 68,
+        "startColumn": 1,
+        "endLineNumberInclusive": 72,
+        "endColumn": 1
+      },
+      "replaceText": "                console.log(\"A2\");\n                break;\n        }\n        break;\n    case \"B\":\n        console.log(\"B\");\n        break;\n    case \"C\":\n        console.log(\"C\");\n        break;\n",
+      "originalText": "                console.log(\"A2\");\n                break;\n        }\n        break;\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 68,
+        "startColumn": 1,
+        "endLineNumberInclusive": 72,
+        "endColumn": 1
+      },
+      "diffText": "                console.log(\"A2\");\n                break;\n        }\n        break;\n    case \"B\":\n        console.log(\"B\");\n        break;\n    case \"C\":\n        console.log(\"C\");\n        break;\n",
+      "fullOriginalText": "                console.log(\"A2\");\n                break;\n        }\n        break;\n",
+      "suggestionTriggerTime": 1742372064496,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "5c546614-4371-4e39-807d-4e0b5df6618e",
+      "selection": {
+        "startLineNumber": 68,
+        "startColumn": 1,
+        "endLineNumberInclusive": 72,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "4b9fe797-22a5-4895-a2d5-d8554bde13a7",
+      "undoRedoGroup": {
+        "id": 154,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "5c546614-4371-4e39-807d-4e0b5df6618e",
+    "timestamp": "2025-03-19T08:14:25.205Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " break;\n"
+    },
+    "generationUUID": "5c546614-4371-4e39-807d-4e0b5df6618e",
+    "timestamp": "2025-03-19T08:14:25.205Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "5c546614-4371-4e39-807d-4e0b5df6618e",
+    "timestamp": "2025-03-19T08:14:25.205Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "5c546614-4371-4e39-807d-4e0b5df6618e",
+    "timestamp": "2025-03-19T08:14:25.206Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "4b9fe797-22a5-4895-a2d5-d8554bde13a7",
+    "generationUUID": "5c546614-4371-4e39-807d-4e0b5df6618e",
+    "timestamp": "2025-03-19T08:14:25.206Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "                console.log(\"A2\");\n                break;\n        }\n        break;\n    case \"B\":"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "4b9fe797-22a5-4895-a2d5-d8554bde13a7",
+    "generationUUID": "5c546614-4371-4e39-807d-4e0b5df6618e",
+    "timestamp": "2025-03-19T08:14:25.206Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "4b9fe797-22a5-4895-a2d5-d8554bde13a7",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T08:14:25.207Z"
+  }
+]

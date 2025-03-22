@@ -1,0 +1,477 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "0d0344d3-1e99-4095-bc0e-04d4bb27a8e6",
+    "timestamp": "2025-03-11T03:34:51.095Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/pages/Index.ets",
+          "diffHistory": [
+            "17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Button clicked';\n22+|      })\n",
+            "18-|        Text('Click me')\n18+|        Text('Abou')\n",
+            "18-|        Text('Abou')\n18+|        Text('About Me')\n",
+            "21-|        this.message = 'Button clicked';\n",
+            "21-|        \n21+|        router.push({\n22+|          uri: 'pages/About'\n23+|        })\n",
+            "21-|        router.push({\n22-|          uri: 'pages/About'\n21+|        router.pushU({\n22+|          url: 'pages/AboutMe'\n",
+            "21-|        router.pushU({\n21+|        router.pushUrl({\n",
+            "1+|import router from '@ohos.router';\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/pages/AboutMe.ets",
+          "diffHistory": [
+            "1-|\n1+|@Pr\n2+|@Entry\n3+|@Component\n4+|struct AboutMe {\n5+|  build() {\n6+|    Text('About Me')\n7+|  }\n8+|}\n",
+            "1-|@Pr\n1+|@Preview  \n",
+            "1-|@Preview  \n2-|@Entry\n1+|@Preview\n",
+            "6-|    \n7-|    \n6+|\n7+|    Banner()\n",
+            "1+|import Banner from '../'\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/pages/AboutMe.ets",
+        "contents": "import Banner from '../'\n\n@Preview\n@Component\nstruct AboutMe {\n  build() {\n    Text('About Me')\n\n    Banner()\n  }\n}",
+        "cursorPosition": {
+          "line": 0,
+          "column": 23
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 45,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/pages/Index.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 31
+            }
+          ],
+          "lastViewedAt": 1741664039674
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1741664091141,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 55.5,
+      "timeAtRequestSend": 1741664091141
+    },
+    "generateUuid": "0d0344d3-1e99-4095-bc0e-04d4bb27a8e6",
+    "timestamp": "2025-03-11T03:34:51.143Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "0d0344d3-1e99-4095-bc0e-04d4bb27a8e6",
+    "timestamp": "2025-03-11T03:34:51.523Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "import Banner from '../components",
+      "rangeToReplace": {
+        "startLineNumber": 1,
+        "endLineNumberInclusive": 6
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "0d0344d3-1e99-4095-bc0e-04d4bb27a8e6",
+    "timestamp": "2025-03-11T03:34:51.525Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "/"
+    },
+    "generationUUID": "0d0344d3-1e99-4095-bc0e-04d4bb27a8e6",
+    "timestamp": "2025-03-11T03:34:51.555Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Banner"
+    },
+    "generationUUID": "0d0344d3-1e99-4095-bc0e-04d4bb27a8e6",
+    "timestamp": "2025-03-11T03:34:51.571Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "0d0344d3-1e99-4095-bc0e-04d4bb27a8e6",
+    "timestamp": "2025-03-11T03:34:51.578Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "ets'"
+    },
+    "generationUUID": "0d0344d3-1e99-4095-bc0e-04d4bb27a8e6",
+    "timestamp": "2025-03-11T03:34:51.588Z"
+  },
+  {
+    "firstChunkValue": "import Banner from '../components/Banner.ets'\n\n@Preview\n@Component\nstruct AboutMe {\n  build() {",
+    "generationUUID": "0d0344d3-1e99-4095-bc0e-04d4bb27a8e6",
+    "timestamp": "2025-03-11T03:34:51.597Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n@"
+    },
+    "generationUUID": "0d0344d3-1e99-4095-bc0e-04d4bb27a8e6",
+    "timestamp": "2025-03-11T03:34:51.599Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "import Banner from '../components/Banner.ets'\n\n@Preview\n@Component\nstruct AboutMe {\n  build() {"
+    },
+    "generationUUID": "0d0344d3-1e99-4095-bc0e-04d4bb27a8e6",
+    "timestamp": "2025-03-11T03:34:51.600Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "8abccfe8-5a0a-4fd8-bf75-4b6382c87867",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 45,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 45,
+      "monotonicallyIncreasingSuggestionId": 43,
+      "range": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 6,
+        "endColumn": 12
+      },
+      "replaceText": "import Banner from '../components/Banner.ets'\n\n@Preview\n@Component\nstruct AboutMe {\n  build() {",
+      "originalText": "import Banner from '../'\n\n@Preview\n@Component\nstruct AboutMe {\n  build() {",
+      "startingSuggestionRange": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 6,
+        "endColumn": 12
+      },
+      "diffText": "import Banner from '../components/Banner.ets'\n\n@Preview\n@Component\nstruct AboutMe {\n  build() {",
+      "fullOriginalText": "import Banner from '../'\n\n@Preview\n@Component\nstruct AboutMe {\n  build() {",
+      "suggestionTriggerTime": 1741664091085.2,
+      "greens": [],
+      "source": "typing",
+      "requestId": "0d0344d3-1e99-4095-bc0e-04d4bb27a8e6",
+      "selection": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 6,
+        "endColumn": 12
+      },
+      "undoRedoGroup": {
+        "id": 44,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "0d0344d3-1e99-4095-bc0e-04d4bb27a8e6",
+    "timestamp": "2025-03-11T03:34:51.600Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Preview"
+    },
+    "generationUUID": "0d0344d3-1e99-4095-bc0e-04d4bb27a8e6",
+    "timestamp": "2025-03-11T03:34:51.608Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n@Component\nstruct AboutMe {"
+    },
+    "generationUUID": "0d0344d3-1e99-4095-bc0e-04d4bb27a8e6",
+    "timestamp": "2025-03-11T03:34:51.621Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n "
+    },
+    "generationUUID": "0d0344d3-1e99-4095-bc0e-04d4bb27a8e6",
+    "timestamp": "2025-03-11T03:34:51.629Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " build"
+    },
+    "generationUUID": "0d0344d3-1e99-4095-bc0e-04d4bb27a8e6",
+    "timestamp": "2025-03-11T03:34:51.644Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "() {"
+    },
+    "generationUUID": "0d0344d3-1e99-4095-bc0e-04d4bb27a8e6",
+    "timestamp": "2025-03-11T03:34:51.649Z"
+  },
+  {
+    "fullText": "import Banner from '../components/Banner.ets'\n\n@Preview\n@Component\nstruct AboutMe {\n  build() {",
+    "generationUUID": "0d0344d3-1e99-4095-bc0e-04d4bb27a8e6",
+    "timestamp": "2025-03-11T03:34:51.702Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "import Banner from '../components/Banner.ets'\n\n@Preview\n@Component\nstruct AboutMe {\n  build() {"
+    },
+    "fullText": "import Banner from '../components/Banner.ets'\n\n@Preview\n@Component\nstruct AboutMe {\n  build() {",
+    "generationUUID": "0d0344d3-1e99-4095-bc0e-04d4bb27a8e6",
+    "timestamp": "2025-03-11T03:34:51.702Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "generationUUID": "0d0344d3-1e99-4095-bc0e-04d4bb27a8e6",
+    "timestamp": "2025-03-11T03:34:51.702Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "0d0344d3-1e99-4095-bc0e-04d4bb27a8e6",
+    "timestamp": "2025-03-11T03:34:51.706Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "cursorPredictionTarget": {
+        "relativePath": "entry/src/main/ets/pages/AboutMe.ets",
+        "lineNumberOneIndexed": 2,
+        "expectedContent": "",
+        "shouldRetriggerCpp": true
+      }
+    },
+    "generationUUID": "0d0344d3-1e99-4095-bc0e-04d4bb27a8e6",
+    "timestamp": "2025-03-11T03:34:51.706Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "0d0344d3-1e99-4095-bc0e-04d4bb27a8e6",
+    "timestamp": "2025-03-11T03:34:51.706Z"
+  },
+  {
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/pages/AboutMe.ets",
+      "lineNumberOneIndexed": 2,
+      "text": "",
+      "shouldRetriggerCpp": true
+    },
+    "predictionId": "ae2b2ea9-e3e7-432f-a486-73a9dc309cf9",
+    "generationUUID": "0d0344d3-1e99-4095-bc0e-04d4bb27a8e6",
+    "timestamp": "2025-03-11T03:34:51.706Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "import Banner from '../components/Banner.ets'\n\n@Preview\n@Component\nstruct AboutMe {\n  build() {"
+    },
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/pages/AboutMe.ets",
+      "lineNumberOneIndexed": 2,
+      "text": "",
+      "shouldRetriggerCpp": true
+    },
+    "predictionId": "ae2b2ea9-e3e7-432f-a486-73a9dc309cf9",
+    "generationUUID": "0d0344d3-1e99-4095-bc0e-04d4bb27a8e6",
+    "timestamp": "2025-03-11T03:34:51.706Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "ae2b2ea9-e3e7-432f-a486-73a9dc309cf9",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/pages/AboutMe.ets",
+      "lineNumberOneIndexed": 2,
+      "text": "",
+      "shouldRetriggerCpp": true
+    },
+    "timestamp": "2025-03-11T03:34:51.706Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "8abccfe8-5a0a-4fd8-bf75-4b6382c87867",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 45,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 45,
+      "monotonicallyIncreasingSuggestionId": 43,
+      "range": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 6,
+        "endColumn": 12
+      },
+      "replaceText": "import Banner from '../components/Banner.ets'\n\n@Preview\n@Component\nstruct AboutMe {\n  build() {",
+      "originalText": "import Banner from '../'\n\n@Preview\n@Component\nstruct AboutMe {\n  build() {",
+      "startingSuggestionRange": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 6,
+        "endColumn": 12
+      },
+      "diffText": "import Banner from '../components/Banner.ets'\n\n@Preview\n@Component\nstruct AboutMe {\n  build() {",
+      "fullOriginalText": "import Banner from '../'\n\n@Preview\n@Component\nstruct AboutMe {\n  build() {",
+      "suggestionTriggerTime": 1741664091085.2,
+      "greens": [],
+      "source": "typing",
+      "requestId": "0d0344d3-1e99-4095-bc0e-04d4bb27a8e6",
+      "selection": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 6,
+        "endColumn": 12
+      },
+      "fusedCursorPredictionId": "ae2b2ea9-e3e7-432f-a486-73a9dc309cf9",
+      "undoRedoGroup": {
+        "id": 44,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "d;158"
+    },
+    "generationUUID": "0d0344d3-1e99-4095-bc0e-04d4bb27a8e6",
+    "timestamp": "2025-03-11T03:34:52.309Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "8abccfe8-5a0a-4fd8-bf75-4b6382c87867",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 45,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 45,
+      "monotonicallyIncreasingSuggestionId": 43,
+      "range": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 6,
+        "endColumn": 12
+      },
+      "replaceText": "import Banner from '../components/Banner.ets'\n\n@Preview\n@Component\nstruct AboutMe {\n  build() {",
+      "originalText": "import Banner from '../'\n\n@Preview\n@Component\nstruct AboutMe {\n  build() {",
+      "startingSuggestionRange": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 6,
+        "endColumn": 12
+      },
+      "diffText": "import Banner from '../components/Banner.ets'\n\n@Preview\n@Component\nstruct AboutMe {\n  build() {",
+      "fullOriginalText": "import Banner from '../'\n\n@Preview\n@Component\nstruct AboutMe {\n  build() {",
+      "suggestionTriggerTime": 1741664091085.2,
+      "greens": [],
+      "source": "typing",
+      "requestId": "0d0344d3-1e99-4095-bc0e-04d4bb27a8e6",
+      "selection": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 6,
+        "endColumn": 12
+      },
+      "fusedCursorPredictionId": "ae2b2ea9-e3e7-432f-a486-73a9dc309cf9",
+      "undoRedoGroup": {
+        "id": 44,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "d;158"
+    },
+    "generationUUID": "0d0344d3-1e99-4095-bc0e-04d4bb27a8e6",
+    "timestamp": "2025-03-11T03:34:52.316Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "ae2b2ea9-e3e7-432f-a486-73a9dc309cf9",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/pages/AboutMe.ets",
+      "lineNumberOneIndexed": 2,
+      "text": "",
+      "shouldRetriggerCpp": true
+    },
+    "oldText": "import Banner from '../'\n\n@Preview\n@Component\nstruct AboutMe {\n  build() {",
+    "newText": "import Banner from '../components/Banner.ets'\n\n@Preview\n@Component\nstruct AboutMe {\n  build() {",
+    "timestamp": "2025-03-11T03:34:52.318Z"
+  },
+  {
+    "action": "displayFusedCursorPrediction",
+    "predictionId": "ae2b2ea9-e3e7-432f-a486-73a9dc309cf9",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/pages/AboutMe.ets",
+      "lineNumberOneIndexed": 2,
+      "text": "",
+      "shouldRetriggerCpp": true
+    },
+    "oldText": "import Banner from '../'\n\n@Preview\n@Component\nstruct AboutMe {\n  build() {",
+    "newText": "import Banner from '../components/Banner.ets'\n\n@Preview\n@Component\nstruct AboutMe {\n  build() {",
+    "timestamp": "2025-03-11T03:34:52.319Z"
+  }
+]

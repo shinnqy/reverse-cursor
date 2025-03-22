@@ -1,0 +1,313 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "633480c7-2100-4836-ae29-05efbc356cfa",
+    "timestamp": "2025-03-19T07:36:53.462Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/functionReturn.ets",
+          "diffHistory": [
+            "1+|function add(a: number, b: number): number {\n2+|    return a + b;\n3+|}\n4+|\n5+|function subtract(a: number, b: number): number {\n6+|    return a - b;\n7+|}\n8+|\n9+|let sum = add(1, 2);\n10+|\n11+|function getUser(name: string, age: number): { name: string, age: number } {\n12+|    return { name, age };\n13+|}\n14+|\n15+|let user = getUser(\"John\", 30);\n16+|\n17+|  \n",
+            "11-|function getUser(name: string, age: number): { name: string, age: number } {\n11+|interface User {\n12+|    name: string;\n13+|    age: number;\n14+|}\n15+|\n16+|function getUser(name: string, age: number): User {\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/functionReturn.ets",
+        "contents": "function add(a: number, b: number): number {\n    return a + b;\n}\n\nfunction subtract(a: number, b: number): number {\n    return a - b;\n}\n\nlet sum = add(1, 2);\n\ninterface User {\n    name: string;\n    age: number;\n}\n\nfunction getUser(name: string, age: number): User {\n    return { name, age };\n}\n\nlet user = getUser(\"John\", 30);\n\n",
+        "cursorPosition": {
+          "line": 19,
+          "column": 31
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 75,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1742369813497,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.699951171875,
+      "timeAtRequestSend": 1742369813497
+    },
+    "generateUuid": "633480c7-2100-4836-ae29-05efbc356cfa",
+    "timestamp": "2025-03-19T07:36:53.499Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "function getUser(name: string, age: number): User {\n    return { name, age };\n}\n\nlet user = getUser(\"John\", 30);\n\nfunction",
+      "rangeToReplace": {
+        "startLineNumber": 16,
+        "endLineNumberInclusive": 22
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "633480c7-2100-4836-ae29-05efbc356cfa",
+    "timestamp": "2025-03-19T07:36:53.871Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "633480c7-2100-4836-ae29-05efbc356cfa",
+    "timestamp": "2025-03-19T07:36:53.877Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " getUser(name: string, age"
+    },
+    "generationUUID": "633480c7-2100-4836-ae29-05efbc356cfa",
+    "timestamp": "2025-03-19T07:36:53.890Z"
+  },
+  {
+    "firstChunkValue": "function getUser(name: string, age: number): User {\n    return { name, age };\n}\n\nlet user = getUser(\"John\", 30);\n\nfunction getUser(name: string, age: number): User {",
+    "generationUUID": "633480c7-2100-4836-ae29-05efbc356cfa",
+    "timestamp": "2025-03-19T07:36:53.896Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": number): User {\n   "
+    },
+    "generationUUID": "633480c7-2100-4836-ae29-05efbc356cfa",
+    "timestamp": "2025-03-19T07:36:53.900Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "a75d73a3-f8cf-4747-afbf-050effcd4625",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 75,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 75,
+      "monotonicallyIncreasingSuggestionId": 73,
+      "range": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumberInclusive": 22,
+        "endColumn": 1
+      },
+      "replaceText": "function getUser(name: string, age: number): User {\n    return { name, age };\n}\n\nlet user = getUser(\"John\", 30);\n\nfunction getUser(name: string, age: number): User {",
+      "originalText": "function getUser(name: string, age: number): User {\n    return { name, age };\n}\n\nlet user = getUser(\"John\", 30);\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumberInclusive": 22,
+        "endColumn": 1
+      },
+      "diffText": "function getUser(name: string, age: number): User {\n    return { name, age };\n}\n\nlet user = getUser(\"John\", 30);\n\nfunction getUser(name: string, age: number): User {",
+      "fullOriginalText": "function getUser(name: string, age: number): User {\n    return { name, age };\n}\n\nlet user = getUser(\"John\", 30);\n\n",
+      "suggestionTriggerTime": 1742369813448,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "633480c7-2100-4836-ae29-05efbc356cfa",
+      "selection": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumberInclusive": 22,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 73,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "633480c7-2100-4836-ae29-05efbc356cfa",
+    "timestamp": "2025-03-19T07:36:53.901Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "function getUser(name: string, age: number): User {\n    return { name, age };\n}\n\nlet user = getUser(\"John\", 30);\n\nfunction getUser(name: string, age: number): User {"
+    },
+    "generationUUID": "633480c7-2100-4836-ae29-05efbc356cfa",
+    "timestamp": "2025-03-19T07:36:53.901Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " return"
+    },
+    "generationUUID": "633480c7-2100-4836-ae29-05efbc356cfa",
+    "timestamp": "2025-03-19T07:36:53.908Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " { name, age };\n}\n"
+    },
+    "generationUUID": "633480c7-2100-4836-ae29-05efbc356cfa",
+    "timestamp": "2025-03-19T07:36:53.925Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "633480c7-2100-4836-ae29-05efbc356cfa",
+    "timestamp": "2025-03-19T07:36:53.934Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "let"
+    },
+    "generationUUID": "633480c7-2100-4836-ae29-05efbc356cfa",
+    "timestamp": "2025-03-19T07:36:53.945Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " user = getUser(\"John\", "
+    },
+    "generationUUID": "633480c7-2100-4836-ae29-05efbc356cfa",
+    "timestamp": "2025-03-19T07:36:53.959Z"
+  },
+  {
+    "fullText": "function getUser(name: string, age: number): User {\n    return { name, age };\n}\n\nlet user = getUser(\"John\", 30);\n\nfunction getUser(name: string, age: number): User {\n    return { name, age };\n}\n\nlet user = getUser(\"John\", 30);\n\n",
+    "generationUUID": "633480c7-2100-4836-ae29-05efbc356cfa",
+    "timestamp": "2025-03-19T07:36:53.975Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "function getUser(name: string, age: number): User {\n    return { name, age };\n}\n\nlet user = getUser(\"John\", 30);\n\nfunction getUser(name: string, age: number): User {"
+    },
+    "fullText": "function getUser(name: string, age: number): User {\n    return { name, age };\n}\n\nlet user = getUser(\"John\", 30);\n\nfunction getUser(name: string, age: number): User {\n    return { name, age };\n}\n\nlet user = getUser(\"John\", 30);\n\n",
+    "generationUUID": "633480c7-2100-4836-ae29-05efbc356cfa",
+    "timestamp": "2025-03-19T07:36:53.975Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "f01923b1-e410-4e98-8b5a-e762c86b503c",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 75,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 76,
+      "monotonicallyIncreasingSuggestionId": 74,
+      "range": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumberInclusive": 22,
+        "endColumn": 1
+      },
+      "replaceText": "function getUser(name: string, age: number): User {\n    return { name, age };\n}\n\nlet user = getUser(\"John\", 30);\n\nfunction getUser(name: string, age: number): User {\n    return { name, age };\n}\n\nlet user = getUser(\"John\", 30);\n\n",
+      "originalText": "function getUser(name: string, age: number): User {\n    return { name, age };\n}\n\nlet user = getUser(\"John\", 30);\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumberInclusive": 22,
+        "endColumn": 1
+      },
+      "diffText": "function getUser(name: string, age: number): User {\n    return { name, age };\n}\n\nlet user = getUser(\"John\", 30);\n\nfunction getUser(name: string, age: number): User {\n    return { name, age };\n}\n\nlet user = getUser(\"John\", 30);\n\n",
+      "fullOriginalText": "function getUser(name: string, age: number): User {\n    return { name, age };\n}\n\nlet user = getUser(\"John\", 30);\n\n",
+      "suggestionTriggerTime": 1742369813448,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "633480c7-2100-4836-ae29-05efbc356cfa",
+      "selection": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumberInclusive": 22,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "1c151744-b7dc-4a2c-9821-0d8783ba6402",
+      "undoRedoGroup": {
+        "id": 74,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "633480c7-2100-4836-ae29-05efbc356cfa",
+    "timestamp": "2025-03-19T07:36:53.976Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "30);\n\n"
+    },
+    "generationUUID": "633480c7-2100-4836-ae29-05efbc356cfa",
+    "timestamp": "2025-03-19T07:36:53.976Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "633480c7-2100-4836-ae29-05efbc356cfa",
+    "timestamp": "2025-03-19T07:36:53.977Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "633480c7-2100-4836-ae29-05efbc356cfa",
+    "timestamp": "2025-03-19T07:36:53.977Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "1c151744-b7dc-4a2c-9821-0d8783ba6402",
+    "generationUUID": "633480c7-2100-4836-ae29-05efbc356cfa",
+    "timestamp": "2025-03-19T07:36:53.982Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "function getUser(name: string, age: number): User {\n    return { name, age };\n}\n\nlet user = getUser(\"John\", 30);\n\nfunction getUser(name: string, age: number): User {"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "1c151744-b7dc-4a2c-9821-0d8783ba6402",
+    "generationUUID": "633480c7-2100-4836-ae29-05efbc356cfa",
+    "timestamp": "2025-03-19T07:36:53.983Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "1c151744-b7dc-4a2c-9821-0d8783ba6402",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T07:36:53.983Z"
+  }
+]

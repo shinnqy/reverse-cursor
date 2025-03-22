@@ -1,0 +1,53 @@
+------------------------------------------[        output        ]-------------------------------------------
+@Preview
+@Component
+struct AboutMe {
+  @State message: string = 'About Me';
+
+  build() {
+    Column() {
+      Text(this.message)
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+
+      Banner({ title: 'About Me' })
+    }
+  }
+}
+------------------------------------------[    replacedOutput    ]-------------------------------------------
+import Banner from '../components/Banner.ets';
+
+@Preview
+@Preview
+@Component
+struct AboutMe {
+  @State message: string = 'About Me';
+
+  build() {
+    Column() {
+      Text(this.message)
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+
+      Banner({ title: 'About Me' })
+    }
+  }
+}
+-------------------------------[ groundTruth (replacedContentsWithFirstChunk) ]--------------------------------
+import Banner from '../components/Banner.ets';
+
+@Preview
+@Component
+struct AboutMe {
+  @State message: string = 'About Me';
+
+  build() {
+    Column() {
+      Text(this.message)
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+
+      Banner({ title: 'About Me' })
+    }
+  }
+}

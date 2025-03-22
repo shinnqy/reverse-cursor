@@ -1,0 +1,108 @@
+{"line":27,"column":6}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+let status = 'active'
+
+if (status === 'active') {
+  let count = 10;
+} else {
+  let count = 0;
+}
+
+console.log(count);
+
+function printValue(value: string | number) {
+  if (typeof value === 'string') {
+    console.log(value.toUpperCase());
+  } else {
+    console.log(value.toFixed(2));
+  }
+}
+
+class Cat {
+  meow() {}
+}
+class Dog {
+  bark() {}
+}
+
+function printAnimal(animal: Cat | Dog) {
+  if (animal instanceof Cat) {
+      [ToFill]
+-------------------------------[               firstChunkValue               ]--------------------------------
+function printAnimal(animal: Cat | Dog) {
+  if (animal instanceof Cat) {
+    animal.meow();
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+let status = 'active'
+
+if (status === 'active') {
+  let count = 10;
+} else {
+  let count = 0;
+}
+
+console.log(count);
+
+function printValue(value: string | number) {
+  if (typeof value === 'string') {
+    console.log(value.toUpperCase());
+  } else {
+    console.log(value.toFixed(2));
+  }
+}
+
+class Cat {
+  meow() {}
+}
+class Dog {
+  bark() {}
+}
+
+function printAnimal(animal: Cat | Dog) {
+  if (animal instanceof Cat) {
+    animal.meow();
+-------------------------------[                   fullText                  ]--------------------------------
+function printAnimal(animal: Cat | Dog) {
+  if (animal instanceof Cat) {
+    animal.meow();
+  } else {
+    animal.bark();
+  }
+}
+
+
+-------------------------------[         replacedContentsWithFullText         ]--------------------------------
+let status = 'active'
+
+if (status === 'active') {
+  let count = 10;
+} else {
+  let count = 0;
+}
+
+console.log(count);
+
+function printValue(value: string | number) {
+  if (typeof value === 'string') {
+    console.log(value.toUpperCase());
+  } else {
+    console.log(value.toFixed(2));
+  }
+}
+
+class Cat {
+  meow() {}
+}
+class Dog {
+  bark() {}
+}
+
+function printAnimal(animal: Cat | Dog) {
+  if (animal instanceof Cat) {
+    animal.meow();
+  } else {
+    animal.bark();
+  }
+}
+

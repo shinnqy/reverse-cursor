@@ -1,0 +1,395 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "5046ccb0-db2f-44c6-99b5-5eca9f580389",
+    "timestamp": "2025-03-20T13:00:39.247Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/dynamicProp.ets",
+          "diffHistory": [
+            "1+|const user = {}\n",
+            "2-|  \n3-|}\n2+|  name: \"Alice\",\n3+|  age: 30,\n4+|  address: {\n5+|},\n6+|};\n7+|\n8+|\n",
+            "5-|},\n5+|    city: \"New York\",\n6+|    country: \"USA\",\n7+|  },\n10+|const greeting = `Hello, ${user.name}!`;\n",
+            "1-|\n1+|interface User {\n2+|  name: string;\n3+|  age: number;\n4+|  address: {\n5+|    city: string;\n6+|    country: string;\n7+|  };\n8+|}\n",
+            "1-|\n1+|interface Address {\n",
+            "5-|  address: {\n5+|  address: Address;\n",
+            "2+|  city: string;\n3+|  country: string;\n4+|}\n",
+            "9-|    city: string;\n10-|    country: string;\n11-|  };\n13-|const user = {\n10+|const user: User = {\n",
+            "21+|function getFullName(user: { firstName: string; lastName: string }) {\n22+|  return `${user.firstName} ${user.lastName}`;\n23+|}\n25+|const fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n26+|\n27+|\n28+|\n",
+            "25-|const fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n",
+            "25+|const currentUser = {\n26+|  firstName: \"John\",\n27+|  lastName: \"Doe\",\n28+|};\n30+|const fullName = getFullName(currentUser);\n",
+            "30-|const fullName = getFullName(currentUser);\n30+|const fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n",
+            "21+|interface Fu\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/dynamicProp.ets",
+        "contents": "interface Address {\n  city: string;\n  country: string;\n}\ninterface User {\n  name: string;\n  age: number;\n  address: Address;\n}\nconst user: User = {\n  name: \"Alice\",\n  age: 30,\n  address: {\n    city: \"New York\",\n    country: \"USA\",\n  },\n};\n\nconst greeting = `Hello, ${user.name}!`;\n\ninterface Fu\nfunction getFullName(user: { firstName: string; lastName: string }) {\n  return `${user.firstName} ${user.lastName}`;\n}\n\nconst currentUser = {\n  firstName: \"John\",\n  lastName: \"Doe\",\n};\n\nconst fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n\n\n\n\n",
+        "cursorPosition": {
+          "line": 20,
+          "column": 12
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 198,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742475639283,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.60009765625,
+      "timeAtRequestSend": 1742475639284
+    },
+    "generateUuid": "5046ccb0-db2f-44c6-99b5-5eca9f580389",
+    "timestamp": "2025-03-20T13:00:39.285Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\ninterface Full",
+      "rangeToReplace": {
+        "startLineNumber": 20,
+        "endLineNumberInclusive": 24
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "5046ccb0-db2f-44c6-99b5-5eca9f580389",
+    "timestamp": "2025-03-20T13:00:39.637Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "5046ccb0-db2f-44c6-99b5-5eca9f580389",
+    "timestamp": "2025-03-20T13:00:39.638Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Name"
+    },
+    "generationUUID": "5046ccb0-db2f-44c6-99b5-5eca9f580389",
+    "timestamp": "2025-03-20T13:00:39.656Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "5046ccb0-db2f-44c6-99b5-5eca9f580389",
+    "timestamp": "2025-03-20T13:00:39.663Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n  firstName: string"
+    },
+    "generationUUID": "5046ccb0-db2f-44c6-99b5-5eca9f580389",
+    "timestamp": "2025-03-20T13:00:39.673Z"
+  },
+  {
+    "firstChunkValue": "\ninterface FullName {\nfunction getFullName(user: { firstName: string; lastName: string }) {\n  return `${user.firstName} ${user.lastName}`;\n}",
+    "generationUUID": "5046ccb0-db2f-44c6-99b5-5eca9f580389",
+    "timestamp": "2025-03-20T13:00:39.678Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\ninterface FullName {\nfunction getFullName(user: { firstName: string; lastName: string }) {\n  return `${user.firstName} ${user.lastName}`;\n}"
+    },
+    "generationUUID": "5046ccb0-db2f-44c6-99b5-5eca9f580389",
+    "timestamp": "2025-03-20T13:00:39.681Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";"
+    },
+    "generationUUID": "5046ccb0-db2f-44c6-99b5-5eca9f580389",
+    "timestamp": "2025-03-20T13:00:39.682Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "5046ccb0-db2f-44c6-99b5-5eca9f580389",
+    "timestamp": "2025-03-20T13:00:39.689Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "5046ccb0-db2f-44c6-99b5-5eca9f580389",
+    "timestamp": "2025-03-20T13:00:39.697Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " last"
+    },
+    "generationUUID": "5046ccb0-db2f-44c6-99b5-5eca9f580389",
+    "timestamp": "2025-03-20T13:00:39.707Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Name: string"
+    },
+    "generationUUID": "5046ccb0-db2f-44c6-99b5-5eca9f580389",
+    "timestamp": "2025-03-20T13:00:39.718Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";\n}"
+    },
+    "generationUUID": "5046ccb0-db2f-44c6-99b5-5eca9f580389",
+    "timestamp": "2025-03-20T13:00:39.723Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nfunction"
+    },
+    "generationUUID": "5046ccb0-db2f-44c6-99b5-5eca9f580389",
+    "timestamp": "2025-03-20T13:00:39.731Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " getFullName(user: Full"
+    },
+    "generationUUID": "5046ccb0-db2f-44c6-99b5-5eca9f580389",
+    "timestamp": "2025-03-20T13:00:39.742Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Name)"
+    },
+    "generationUUID": "5046ccb0-db2f-44c6-99b5-5eca9f580389",
+    "timestamp": "2025-03-20T13:00:39.750Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "5046ccb0-db2f-44c6-99b5-5eca9f580389",
+    "timestamp": "2025-03-20T13:00:39.759Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "5046ccb0-db2f-44c6-99b5-5eca9f580389",
+    "timestamp": "2025-03-20T13:00:39.768Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "  return"
+    },
+    "generationUUID": "5046ccb0-db2f-44c6-99b5-5eca9f580389",
+    "timestamp": "2025-03-20T13:00:39.776Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " `${user.firstName} ${user."
+    },
+    "generationUUID": "5046ccb0-db2f-44c6-99b5-5eca9f580389",
+    "timestamp": "2025-03-20T13:00:39.786Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "lastName"
+    },
+    "generationUUID": "5046ccb0-db2f-44c6-99b5-5eca9f580389",
+    "timestamp": "2025-03-20T13:00:39.795Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}`;\n}"
+    },
+    "generationUUID": "5046ccb0-db2f-44c6-99b5-5eca9f580389",
+    "timestamp": "2025-03-20T13:00:39.806Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "5046ccb0-db2f-44c6-99b5-5eca9f580389",
+    "timestamp": "2025-03-20T13:00:39.829Z"
+  },
+  {
+    "fullText": "\ninterface FullName {\n  firstName: string;\n  lastName: string;\n}\nfunction getFullName(user: FullName) {\n  return `${user.firstName} ${user.lastName}`;\n}",
+    "generationUUID": "5046ccb0-db2f-44c6-99b5-5eca9f580389",
+    "timestamp": "2025-03-20T13:00:39.829Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\ninterface FullName {\nfunction getFullName(user: { firstName: string; lastName: string }) {\n  return `${user.firstName} ${user.lastName}`;\n}"
+    },
+    "fullText": "\ninterface FullName {\n  firstName: string;\n  lastName: string;\n}\nfunction getFullName(user: FullName) {\n  return `${user.firstName} ${user.lastName}`;\n}",
+    "generationUUID": "5046ccb0-db2f-44c6-99b5-5eca9f580389",
+    "timestamp": "2025-03-20T13:00:39.830Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && currentSuggestion uniqueId is different && need to create newSuggestion according fullText",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "015b3dc6-f144-4257-9e14-4b99e8606526",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 198,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 199,
+      "monotonicallyIncreasingSuggestionId": 118,
+      "range": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 2
+      },
+      "replaceText": "\ninterface FullName {\n  firstName: string;\n  lastName: string;\n}\nfunction getFullName(user: FullName) {\n  return `${user.firstName} ${user.lastName}`;\n}",
+      "originalText": "\ninterface Ful\nfunction getFullName(user: { firstName: string; lastName: string }) {\n  return `${user.firstName} ${user.lastName}`;\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 2
+      },
+      "diffText": "\ninterface FullName {\n  firstName: string;\n  lastName: string;\n}\nfunction getFullName(user: FullName) {\n  return `${user.firstName} ${user.lastName}`;\n}",
+      "fullOriginalText": "\ninterface Ful\nfunction getFullName(user: { firstName: string; lastName: string }) {\n  return `${user.firstName} ${user.lastName}`;\n}",
+      "suggestionTriggerTime": 1742475639234.0999,
+      "greens": [],
+      "source": "typing",
+      "requestId": "5046ccb0-db2f-44c6-99b5-5eca9f580389",
+      "selection": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "81e4cf74-dcae-4068-a04a-9aa4e22145b1",
+      "undoRedoGroup": {
+        "id": 118,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "5046ccb0-db2f-44c6-99b5-5eca9f580389",
+    "timestamp": "2025-03-20T13:00:39.830Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "5046ccb0-db2f-44c6-99b5-5eca9f580389",
+    "timestamp": "2025-03-20T13:00:39.878Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "81e4cf74-dcae-4068-a04a-9aa4e22145b1",
+    "generationUUID": "5046ccb0-db2f-44c6-99b5-5eca9f580389",
+    "timestamp": "2025-03-20T13:00:39.887Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\ninterface FullName {\nfunction getFullName(user: { firstName: string; lastName: string }) {\n  return `${user.firstName} ${user.lastName}`;\n}"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "81e4cf74-dcae-4068-a04a-9aa4e22145b1",
+    "generationUUID": "5046ccb0-db2f-44c6-99b5-5eca9f580389",
+    "timestamp": "2025-03-20T13:00:39.888Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "81e4cf74-dcae-4068-a04a-9aa4e22145b1",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-20T13:00:39.889Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "5a102fcd-7a47-4530-8d12-7e00a2c485da",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 197,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 199,
+      "monotonicallyIncreasingSuggestionId": 116,
+      "range": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 2
+      },
+      "replaceText": "\ninterface FullName {\n  firstName: string;\n  lastName: string;\n}\nfunction getFullName(user: FullName) {\n  return `${user.firstName} ${user.lastName}`;\n}",
+      "originalText": "\ninterface FullName {\nfunction getFullName(user: { firstName: string; lastName: string }) {\n  return `${user.firstName} ${user.lastName}`;\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 2
+      },
+      "diffText": "\ninterface FullName {\n  firstName: string;\n  lastName: string;\n}\nfunction getFullName(user: FullName) {\n  return `${user.firstName} ${user.lastName}`;\n}",
+      "fullOriginalText": "\ninterface FullName {\nfunction getFullName(user: { firstName: string; lastName: string }) {\n  return `${user.firstName} ${user.lastName}`;\n}",
+      "suggestionTriggerTime": 1742475638875.3,
+      "greens": [],
+      "source": "typing",
+      "requestId": "eff8cb66-4bba-4ab9-9709-9aef14e94b83",
+      "selection": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "86862cb7-0f27-44c1-bfa7-af415bd6ef5e",
+      "undoRedoGroup": {
+        "id": 116,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "5046ccb0-db2f-44c6-99b5-5eca9f580389",
+    "timestamp": "2025-03-20T13:00:43.007Z"
+  }
+]

@@ -1,0 +1,142 @@
+{"line":36,"column":24}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+function greet(name: string) {
+    return `Hello, ${name}!`;
+}
+
+greet('John');
+greet('Jane');
+
+interface Person {
+    name: string;
+    age: number;
+}
+
+function printPerson(person: Person) {
+    console.log(person);
+}
+
+printPerson({ name: 'John', age: 20 });
+printPerson({ name: 'Jane', age: 21 });
+
+
+function printValue(value: string | number) {
+    console.log(value);
+}
+
+printValue('Hello');
+printValue(123);
+
+function createUser(name: string, age: number) {
+    return {
+        name,
+        age,
+    };
+}
+
+const user = createUser('John', 20);
+
+function updateConfig({w[ToFill]})
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+const user = createUser('John', 20);
+
+function updateConfig({width, height}: {width: number, height: number}) {
+
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+function greet(name: string) {
+    return `Hello, ${name}!`;
+}
+
+greet('John');
+greet('Jane');
+
+interface Person {
+    name: string;
+    age: number;
+}
+
+function printPerson(person: Person) {
+    console.log(person);
+}
+
+printPerson({ name: 'John', age: 20 });
+printPerson({ name: 'Jane', age: 21 });
+
+
+function printValue(value: string | number) {
+    console.log(value);
+}
+
+printValue('Hello');
+printValue(123);
+
+function createUser(name: string, age: number) {
+    return {
+        name,
+        age,
+    };
+}
+
+const user = createUser('John', 20);
+
+function updateConfig({width, height}: {width: number, height: number}) {
+
+-------------------------------[                   fullText                  ]--------------------------------
+
+const user = createUser('John', 20);
+
+function updateConfig({width, height}: {width: number, height: number}) {
+    return {
+        width,
+        height,
+    };
+}
+
+
+-------------------------------[         replacedContentsWithFullText         ]--------------------------------
+function greet(name: string) {
+    return `Hello, ${name}!`;
+}
+
+greet('John');
+greet('Jane');
+
+interface Person {
+    name: string;
+    age: number;
+}
+
+function printPerson(person: Person) {
+    console.log(person);
+}
+
+printPerson({ name: 'John', age: 20 });
+printPerson({ name: 'Jane', age: 21 });
+
+
+function printValue(value: string | number) {
+    console.log(value);
+}
+
+printValue('Hello');
+printValue(123);
+
+function createUser(name: string, age: number) {
+    return {
+        name,
+        age,
+    };
+}
+
+const user = createUser('John', 20);
+
+function updateConfig({width, height}: {width: number, height: number}) {
+    return {
+        width,
+        height,
+    };
+}
+

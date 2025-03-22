@@ -1,0 +1,403 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "ba911e21-3174-4b91-b8b1-63dc2fed1226",
+    "timestamp": "2025-03-20T13:02:51.351Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/dynamicProp.ets",
+          "diffHistory": [
+            "1+|const user = {}\n",
+            "2-|  \n3-|}\n2+|  name: \"Alice\",\n3+|  age: 30,\n4+|  address: {\n5+|},\n6+|};\n7+|\n8+|\n",
+            "5-|},\n5+|    city: \"New York\",\n6+|    country: \"USA\",\n7+|  },\n10+|const greeting = `Hello, ${user.name}!`;\n",
+            "1-|\n1+|interface User {\n2+|  name: string;\n3+|  age: number;\n4+|  address: {\n5+|    city: string;\n6+|    country: string;\n7+|  };\n8+|}\n",
+            "1-|\n1+|interface Address {\n",
+            "5-|  address: {\n5+|  address: Address;\n",
+            "2+|  city: string;\n3+|  country: string;\n4+|}\n",
+            "9-|    city: string;\n10-|    country: string;\n11-|  };\n13-|const user = {\n10+|const user: User = {\n",
+            "21+|function getFullName(user: { firstName: string; lastName: string }) {\n22+|  return `${user.firstName} ${user.lastName}`;\n23+|}\n25+|const fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n26+|\n27+|\n28+|\n",
+            "25-|const fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n",
+            "25+|const currentUser = {\n26+|  firstName: \"John\",\n27+|  lastName: \"Doe\",\n28+|};\n30+|const fullName = getFullName(currentUser);\n",
+            "30-|const fullName = getFullName(currentUser);\n30+|const fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n",
+            "21-|function getFullName(user: { firstName: string; lastName: string }) {\n21+|interface FullName {\n22+|function getFullName(user: { firstName: string; lastName: string }\n23+|function getFullName(user: FullName) {\n",
+            "22-|function getFullName(user: { firstName: string; lastName: string }\n22+|function getFullName(user: { firstName: string; lastName: string ;\n23+|}\n",
+            "22-|function getFullName(user: { firstName: string;\n22+|  firstName: string;\n",
+            "29-|const currentUser = {\n29+|const currentUser: FullName = {\n",
+            "36+|const price = 100;\n37+|const discount = 0.1;\n38+|const priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n40+|const isAdmin = true;\n41+|const roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n43+|const products = [\n44+|  { name: \"Product 1\", price: 100 },\n45+|  { name: \"Product 2\", price: 200 },\n46+|  { name: \"Product 3\", price: 300 },\n47+|];\n49+|const productInfo = `Current product: ${products[0].name}`;\n50+|\n51+|type Status \n52+|\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/dynamicProp.ets",
+        "contents": "interface Address {\n  city: string;\n  country: string;\n}\ninterface User {\n  name: string;\n  age: number;\n  address: Address;\n}\nconst user: User = {\n  name: \"Alice\",\n  age: 30,\n  address: {\n    city: \"New York\",\n    country: \"USA\",\n  },\n};\n\nconst greeting = `Hello, ${user.name}!`;\n\ninterface FullName {\n  firstName: string;\n  lastName: string;\n}\nfunction getFullName(user: FullName) {\n  return `${user.firstName} ${user.lastName}`;\n}\n\nconst currentUser: FullName = {\n  firstName: \"John\",\n  lastName: \"Doe\",\n};\n\nconst fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n\nconst price = 100;\nconst discount = 0.1;\nconst priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];\n\nconst productInfo = `Current product: ${products[0].name}`;\n\ntype Status \n\n",
+        "cursorPosition": {
+          "line": 50,
+          "column": 12
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 404,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742475771390,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 49.89990234375,
+      "timeAtRequestSend": 1742475771390
+    },
+    "generateUuid": "ba911e21-3174-4b91-b8b1-63dc2fed1226",
+    "timestamp": "2025-03-20T13:02:51.392Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nconst productInfo = `Current product: ${products[0].name}`;\n\ntype Status =",
+      "rangeToReplace": {
+        "startLineNumber": 48,
+        "endLineNumberInclusive": 53
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "ba911e21-3174-4b91-b8b1-63dc2fed1226",
+    "timestamp": "2025-03-20T13:02:51.729Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "ba911e21-3174-4b91-b8b1-63dc2fed1226",
+    "timestamp": "2025-03-20T13:02:51.733Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \""
+    },
+    "generationUUID": "ba911e21-3174-4b91-b8b1-63dc2fed1226",
+    "timestamp": "2025-03-20T13:02:51.754Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "pending"
+    },
+    "generationUUID": "ba911e21-3174-4b91-b8b1-63dc2fed1226",
+    "timestamp": "2025-03-20T13:02:51.766Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\""
+    },
+    "generationUUID": "ba911e21-3174-4b91-b8b1-63dc2fed1226",
+    "timestamp": "2025-03-20T13:02:51.776Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " |"
+    },
+    "generationUUID": "ba911e21-3174-4b91-b8b1-63dc2fed1226",
+    "timestamp": "2025-03-20T13:02:51.787Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \""
+    },
+    "generationUUID": "ba911e21-3174-4b91-b8b1-63dc2fed1226",
+    "timestamp": "2025-03-20T13:02:51.798Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "success"
+    },
+    "generationUUID": "ba911e21-3174-4b91-b8b1-63dc2fed1226",
+    "timestamp": "2025-03-20T13:02:51.809Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\""
+    },
+    "generationUUID": "ba911e21-3174-4b91-b8b1-63dc2fed1226",
+    "timestamp": "2025-03-20T13:02:51.822Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " | \"error"
+    },
+    "generationUUID": "ba911e21-3174-4b91-b8b1-63dc2fed1226",
+    "timestamp": "2025-03-20T13:02:51.832Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\";"
+    },
+    "generationUUID": "ba911e21-3174-4b91-b8b1-63dc2fed1226",
+    "timestamp": "2025-03-20T13:02:51.842Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "ba911e21-3174-4b91-b8b1-63dc2fed1226",
+    "timestamp": "2025-03-20T13:02:51.856Z"
+  },
+  {
+    "firstChunkValue": "\nconst productInfo = `Current product: ${products[0].name}`;\n\ntype Status = \"pending\" | \"success\" | \"error\";\n\n",
+    "generationUUID": "ba911e21-3174-4b91-b8b1-63dc2fed1226",
+    "timestamp": "2025-03-20T13:02:51.862Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nconst productInfo = `Current product: ${products[0].name}`;\n\ntype Status = \"pending\" | \"success\" | \"error\";\n\n"
+    },
+    "generationUUID": "ba911e21-3174-4b91-b8b1-63dc2fed1226",
+    "timestamp": "2025-03-20T13:02:51.863Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "ba911e21-3174-4b91-b8b1-63dc2fed1226",
+    "timestamp": "2025-03-20T13:02:51.869Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "const"
+    },
+    "generationUUID": "ba911e21-3174-4b91-b8b1-63dc2fed1226",
+    "timestamp": "2025-03-20T13:02:51.881Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " status"
+    },
+    "generationUUID": "ba911e21-3174-4b91-b8b1-63dc2fed1226",
+    "timestamp": "2025-03-20T13:02:51.893Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "ba911e21-3174-4b91-b8b1-63dc2fed1226",
+    "timestamp": "2025-03-20T13:02:51.901Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Status"
+    },
+    "generationUUID": "ba911e21-3174-4b91-b8b1-63dc2fed1226",
+    "timestamp": "2025-03-20T13:02:51.914Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "ba911e21-3174-4b91-b8b1-63dc2fed1226",
+    "timestamp": "2025-03-20T13:02:51.926Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \"pending\";"
+    },
+    "generationUUID": "ba911e21-3174-4b91-b8b1-63dc2fed1226",
+    "timestamp": "2025-03-20T13:02:51.938Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\nconst statusMessage"
+    },
+    "generationUUID": "ba911e21-3174-4b91-b8b1-63dc2fed1226",
+    "timestamp": "2025-03-20T13:02:51.951Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " = `Status"
+    },
+    "generationUUID": "ba911e21-3174-4b91-b8b1-63dc2fed1226",
+    "timestamp": "2025-03-20T13:02:51.964Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "ba911e21-3174-4b91-b8b1-63dc2fed1226",
+    "timestamp": "2025-03-20T13:02:51.976Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ${"
+    },
+    "generationUUID": "ba911e21-3174-4b91-b8b1-63dc2fed1226",
+    "timestamp": "2025-03-20T13:02:51.988Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "status"
+    },
+    "generationUUID": "ba911e21-3174-4b91-b8b1-63dc2fed1226",
+    "timestamp": "2025-03-20T13:02:52.000Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}`"
+    },
+    "generationUUID": "ba911e21-3174-4b91-b8b1-63dc2fed1226",
+    "timestamp": "2025-03-20T13:02:52.013Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";\n\n"
+    },
+    "generationUUID": "ba911e21-3174-4b91-b8b1-63dc2fed1226",
+    "timestamp": "2025-03-20T13:02:52.025Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "ba911e21-3174-4b91-b8b1-63dc2fed1226",
+    "timestamp": "2025-03-20T13:02:52.040Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "ba911e21-3174-4b91-b8b1-63dc2fed1226",
+    "timestamp": "2025-03-20T13:02:52.051Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "ba911e21-3174-4b91-b8b1-63dc2fed1226",
+    "timestamp": "2025-03-20T13:02:52.066Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "ba911e21-3174-4b91-b8b1-63dc2fed1226",
+    "timestamp": "2025-03-20T13:02:52.066Z"
+  },
+  {
+    "fullText": "\nconst productInfo = `Current product: ${products[0].name}`;\n\ntype Status = \"pending\" | \"success\" | \"error\";\n\nconst status: Status = \"pending\";\n\nconst statusMessage = `Status: ${status}`;\n\n\n\n",
+    "generationUUID": "ba911e21-3174-4b91-b8b1-63dc2fed1226",
+    "timestamp": "2025-03-20T13:02:52.071Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nconst productInfo = `Current product: ${products[0].name}`;\n\ntype Status = \"pending\" | \"success\" | \"error\";\n\n"
+    },
+    "fullText": "\nconst productInfo = `Current product: ${products[0].name}`;\n\ntype Status = \"pending\" | \"success\" | \"error\";\n\nconst status: Status = \"pending\";\n\nconst statusMessage = `Status: ${status}`;\n\n\n\n",
+    "generationUUID": "ba911e21-3174-4b91-b8b1-63dc2fed1226",
+    "timestamp": "2025-03-20T13:02:52.072Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && currentSuggestion uniqueId is different && need to create newSuggestion according fullText",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "98d36938-213b-46a3-a4a2-34a9215947d6",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 404,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 407,
+      "monotonicallyIncreasingSuggestionId": 250,
+      "range": {
+        "startLineNumber": 48,
+        "startColumn": 1,
+        "endLineNumberInclusive": 53,
+        "endColumn": 1
+      },
+      "replaceText": "\nconst productInfo = `Current product: ${products[0].name}`;\n\ntype Status = \"pending\" | \"success\" | \"error\";\n\nconst status: Status = \"pending\";\n\nconst statusMessage = `Status: ${status}`;\n\n\n\n",
+      "originalText": "\nconst productInfo = `Current product: ${products[0].name}`;\n\ntype Status = \"\"\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 48,
+        "startColumn": 1,
+        "endLineNumberInclusive": 53,
+        "endColumn": 1
+      },
+      "diffText": "\nconst productInfo = `Current product: ${products[0].name}`;\n\ntype Status = \"pending\" | \"success\" | \"error\";\n\nconst status: Status = \"pending\";\n\nconst statusMessage = `Status: ${status}`;\n\n\n\n",
+      "fullOriginalText": "\nconst productInfo = `Current product: ${products[0].name}`;\n\ntype Status = \"\"\n\n",
+      "suggestionTriggerTime": 1742475771341.8,
+      "greens": [],
+      "source": "typing",
+      "requestId": "ba911e21-3174-4b91-b8b1-63dc2fed1226",
+      "selection": {
+        "startLineNumber": 48,
+        "startColumn": 1,
+        "endLineNumberInclusive": 53,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "357af389-7eae-4413-8bee-8c655bf6048e",
+      "undoRedoGroup": {
+        "id": 250,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "ba911e21-3174-4b91-b8b1-63dc2fed1226",
+    "timestamp": "2025-03-20T13:02:52.072Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "357af389-7eae-4413-8bee-8c655bf6048e",
+    "generationUUID": "ba911e21-3174-4b91-b8b1-63dc2fed1226",
+    "timestamp": "2025-03-20T13:02:52.077Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nconst productInfo = `Current product: ${products[0].name}`;\n\ntype Status = \"pending\" | \"success\" | \"error\";\n\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "357af389-7eae-4413-8bee-8c655bf6048e",
+    "generationUUID": "ba911e21-3174-4b91-b8b1-63dc2fed1226",
+    "timestamp": "2025-03-20T13:02:52.078Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "357af389-7eae-4413-8bee-8c655bf6048e",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-20T13:02:52.078Z"
+  }
+]

@@ -1,0 +1,404 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "ef65e86a-a45b-4f08-8545-732a8268ab43",
+    "timestamp": "2025-03-19T08:13:49.595Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/switch1.ets",
+          "diffHistory": [
+            "1+|type Color = \"red\" | \"blue\" | \"green\";\n2+|\n3+|let color: Color = \"red\";\n4+|\n5+|switch (color) {\n6+|    case \"red\":\n7+|        console.log(\"red\");\n8+|        break;\n9+|}\n",
+            "9-|        \n10-|}\n9+|    case \"blue\":\n10+|}\n",
+            "10+|        console.log(\"blue\");\n11+|        break;\n12+|    case \"green\":\n13+|        console.log(\"green\");\n14+|        break;\n16+|\n17+|enum Direction {}\n18+|\n",
+            "17-|enum Direction {}\n17+|enum Direction {\n18+|    Up,\n19+|    Down,\n20+|    Left,\n21+|    Right,\n22+|}\n23+|let dir: Direction = Direction.Up;\n",
+            "25+|switch (dir) {\n26+|    case Direction.Up:\n27+|        console.log(\"up\");\n28+|        break;\n29+|}\n30+|\n",
+            "29+|    case Direction.Down:\n30+|        console.log(\"down\");\n31+|        break;\n32+|    case Direction.Left:\n33+|        console.log(\"left\");\n34+|        break;\n35+|        \n",
+            "38+|interface Square {\n39+|    kind: \"square\";\n40+|    size: number;\n41+|}\n42+|\n43+|interface Rectangle {\n44+|    \n45+|}\n",
+            "42+|interface Circle {\n43+|    kind: \"circle\";\n44+|    radius: number;\n45+|}\n43-|interface Rectangle {\n44-|    \n45-|}\n",
+            "47-|\n47+|function getArea()\n",
+            "47+|type Shape = Square | Circle;\n48+|\n",
+            "49-|function getArea()\n49+|function getArea(shape: Shape) {\n50+|    switch (shape.kind) {\n51+|        case \"square\":\n52+|            return shape.size * shape.size;\n53+|        case \"circle\":\n54+|            return Math.PI * shape.radius ** 2;\n55+|    }\n56+|}\n57+|\n58+|let catego\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/switch1.ets",
+        "contents": "type Color = \"red\" | \"blue\" | \"green\";\n\nlet color: Color = \"red\";\n\nswitch (color) {\n    case \"red\":\n        console.log(\"red\");\n        break;\n    case \"blue\":\n        console.log(\"blue\");\n        break;\n    case \"green\":\n        console.log(\"green\");\n        break;\n}\n\nenum Direction {\n    Up,\n    Down,\n    Left,\n    Right,\n}\nlet dir: Direction = Direction.Up;\n\nswitch (dir) {\n    case Direction.Up:\n        console.log(\"up\");\n        break;\n    case Direction.Down:\n        console.log(\"down\");\n        break;\n    case Direction.Left:\n        console.log(\"left\");\n        break;\n\n}\n\ninterface Square {\n    kind: \"square\";\n    size: number;\n}\ninterface Circle {\n    kind: \"circle\";\n    radius: number;\n}\n\ntype Shape = Square | Circle;\n\nfunction getArea(shape: Shape) {\n    switch (shape.kind) {\n        case \"square\":\n            return shape.size * shape.size;\n        case \"circle\":\n            return Math.PI * shape.radius ** 2;\n    }\n}\n\nlet catego",
+        "cursorPosition": {
+          "line": 57,
+          "column": 10
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 148,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742372029640,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.39990234375,
+      "timeAtRequestSend": 1742372029640
+    },
+    "generateUuid": "ef65e86a-a45b-4f08-8545-732a8268ab43",
+    "timestamp": "2025-03-19T08:13:49.642Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "ef65e86a-a45b-4f08-8545-732a8268ab43",
+    "timestamp": "2025-03-19T08:13:49.998Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nlet category",
+      "rangeToReplace": {
+        "startLineNumber": 57,
+        "endLineNumberInclusive": 58
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "ef65e86a-a45b-4f08-8545-732a8268ab43",
+    "timestamp": "2025-03-19T08:13:49.998Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "ef65e86a-a45b-4f08-8545-732a8268ab43",
+    "timestamp": "2025-03-19T08:13:50.023Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \""
+    },
+    "generationUUID": "ef65e86a-a45b-4f08-8545-732a8268ab43",
+    "timestamp": "2025-03-19T08:13:50.029Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "animal"
+    },
+    "generationUUID": "ef65e86a-a45b-4f08-8545-732a8268ab43",
+    "timestamp": "2025-03-19T08:13:50.036Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\""
+    },
+    "generationUUID": "ef65e86a-a45b-4f08-8545-732a8268ab43",
+    "timestamp": "2025-03-19T08:13:50.046Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " | \"plant"
+    },
+    "generationUUID": "ef65e86a-a45b-4f08-8545-732a8268ab43",
+    "timestamp": "2025-03-19T08:13:50.057Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\""
+    },
+    "generationUUID": "ef65e86a-a45b-4f08-8545-732a8268ab43",
+    "timestamp": "2025-03-19T08:13:50.066Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "ef65e86a-a45b-4f08-8545-732a8268ab43",
+    "timestamp": "2025-03-19T08:13:50.080Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \""
+    },
+    "generationUUID": "ef65e86a-a45b-4f08-8545-732a8268ab43",
+    "timestamp": "2025-03-19T08:13:50.088Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "animal"
+    },
+    "generationUUID": "ef65e86a-a45b-4f08-8545-732a8268ab43",
+    "timestamp": "2025-03-19T08:13:50.096Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\";"
+    },
+    "generationUUID": "ef65e86a-a45b-4f08-8545-732a8268ab43",
+    "timestamp": "2025-03-19T08:13:50.108Z"
+  },
+  {
+    "firstChunkValue": "\nlet category: \"animal\" | \"plant\" = \"animal\";",
+    "generationUUID": "ef65e86a-a45b-4f08-8545-732a8268ab43",
+    "timestamp": "2025-03-19T08:13:50.118Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "ef65e86a-a45b-4f08-8545-732a8268ab43",
+    "timestamp": "2025-03-19T08:13:50.118Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nlet category: \"animal\" | \"plant\" = \"animal\";"
+    },
+    "generationUUID": "ef65e86a-a45b-4f08-8545-732a8268ab43",
+    "timestamp": "2025-03-19T08:13:50.118Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "switch"
+    },
+    "generationUUID": "ef65e86a-a45b-4f08-8545-732a8268ab43",
+    "timestamp": "2025-03-19T08:13:50.131Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " (category"
+    },
+    "generationUUID": "ef65e86a-a45b-4f08-8545-732a8268ab43",
+    "timestamp": "2025-03-19T08:13:50.139Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ")"
+    },
+    "generationUUID": "ef65e86a-a45b-4f08-8545-732a8268ab43",
+    "timestamp": "2025-03-19T08:13:50.149Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "ef65e86a-a45b-4f08-8545-732a8268ab43",
+    "timestamp": "2025-03-19T08:13:50.169Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n   "
+    },
+    "generationUUID": "ef65e86a-a45b-4f08-8545-732a8268ab43",
+    "timestamp": "2025-03-19T08:13:50.171Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " case"
+    },
+    "generationUUID": "ef65e86a-a45b-4f08-8545-732a8268ab43",
+    "timestamp": "2025-03-19T08:13:50.186Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \""
+    },
+    "generationUUID": "ef65e86a-a45b-4f08-8545-732a8268ab43",
+    "timestamp": "2025-03-19T08:13:50.195Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "animal"
+    },
+    "generationUUID": "ef65e86a-a45b-4f08-8545-732a8268ab43",
+    "timestamp": "2025-03-19T08:13:50.204Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\":"
+    },
+    "generationUUID": "ef65e86a-a45b-4f08-8545-732a8268ab43",
+    "timestamp": "2025-03-19T08:13:50.210Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n       "
+    },
+    "generationUUID": "ef65e86a-a45b-4f08-8545-732a8268ab43",
+    "timestamp": "2025-03-19T08:13:50.230Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " console"
+    },
+    "generationUUID": "ef65e86a-a45b-4f08-8545-732a8268ab43",
+    "timestamp": "2025-03-19T08:13:50.237Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ".log(\"animal"
+    },
+    "generationUUID": "ef65e86a-a45b-4f08-8545-732a8268ab43",
+    "timestamp": "2025-03-19T08:13:50.249Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\");"
+    },
+    "generationUUID": "ef65e86a-a45b-4f08-8545-732a8268ab43",
+    "timestamp": "2025-03-19T08:13:50.259Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n       "
+    },
+    "generationUUID": "ef65e86a-a45b-4f08-8545-732a8268ab43",
+    "timestamp": "2025-03-19T08:13:50.273Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " break"
+    },
+    "generationUUID": "ef65e86a-a45b-4f08-8545-732a8268ab43",
+    "timestamp": "2025-03-19T08:13:50.283Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";\n}"
+    },
+    "generationUUID": "ef65e86a-a45b-4f08-8545-732a8268ab43",
+    "timestamp": "2025-03-19T08:13:50.293Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "ef65e86a-a45b-4f08-8545-732a8268ab43",
+    "timestamp": "2025-03-19T08:13:50.307Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "ef65e86a-a45b-4f08-8545-732a8268ab43",
+    "timestamp": "2025-03-19T08:13:50.310Z"
+  },
+  {
+    "fullText": "\nlet category: \"animal\" | \"plant\" = \"animal\";\n\nswitch (category) {\n    case \"animal\":\n        console.log(\"animal\");\n        break;\n}",
+    "generationUUID": "ef65e86a-a45b-4f08-8545-732a8268ab43",
+    "timestamp": "2025-03-19T08:13:50.311Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nlet category: \"animal\" | \"plant\" = \"animal\";"
+    },
+    "fullText": "\nlet category: \"animal\" | \"plant\" = \"animal\";\n\nswitch (category) {\n    case \"animal\":\n        console.log(\"animal\");\n        break;\n}",
+    "generationUUID": "ef65e86a-a45b-4f08-8545-732a8268ab43",
+    "timestamp": "2025-03-19T08:13:50.311Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && currentSuggestion uniqueId is different && need to create newSuggestion according fullText",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "d5535ab0-2fdf-4740-af72-3b4a41978a51",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/switch1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 148,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 149,
+      "monotonicallyIncreasingSuggestionId": 113,
+      "range": {
+        "startLineNumber": 57,
+        "startColumn": 1,
+        "endLineNumberInclusive": 58,
+        "endColumn": 12
+      },
+      "replaceText": "\nlet category: \"animal\" | \"plant\" = \"animal\";\n\nswitch (category) {\n    case \"animal\":\n        console.log(\"animal\");\n        break;\n}",
+      "originalText": "\nlet categor",
+      "startingSuggestionRange": {
+        "startLineNumber": 57,
+        "startColumn": 1,
+        "endLineNumberInclusive": 58,
+        "endColumn": 12
+      },
+      "diffText": "\nlet category: \"animal\" | \"plant\" = \"animal\";\n\nswitch (category) {\n    case \"animal\":\n        console.log(\"animal\");\n        break;\n}",
+      "fullOriginalText": "\nlet categor",
+      "suggestionTriggerTime": 1742372029589.6,
+      "greens": [],
+      "source": "typing",
+      "requestId": "ef65e86a-a45b-4f08-8545-732a8268ab43",
+      "selection": {
+        "startLineNumber": 57,
+        "startColumn": 1,
+        "endLineNumberInclusive": 58,
+        "endColumn": 12
+      },
+      "fusedCursorPredictionId": "2b4dddd0-f71a-4451-ad97-66220f0d9579",
+      "undoRedoGroup": {
+        "id": 113,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "ef65e86a-a45b-4f08-8545-732a8268ab43",
+    "timestamp": "2025-03-19T08:13:50.312Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "2b4dddd0-f71a-4451-ad97-66220f0d9579",
+    "generationUUID": "ef65e86a-a45b-4f08-8545-732a8268ab43",
+    "timestamp": "2025-03-19T08:13:50.318Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nlet category: \"animal\" | \"plant\" = \"animal\";"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "2b4dddd0-f71a-4451-ad97-66220f0d9579",
+    "generationUUID": "ef65e86a-a45b-4f08-8545-732a8268ab43",
+    "timestamp": "2025-03-19T08:13:50.319Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "2b4dddd0-f71a-4451-ad97-66220f0d9579",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T08:13:50.319Z"
+  }
+]

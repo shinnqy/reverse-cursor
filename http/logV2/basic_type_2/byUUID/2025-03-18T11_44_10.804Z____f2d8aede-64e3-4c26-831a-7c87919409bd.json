@@ -1,0 +1,509 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:10.804Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/basicType.ets",
+          "diffHistory": [
+            "1+|let a: number = 1;\n2+|let b: string = '1';\n3+|let c: boolean = true;\n4+|let d: any = '1';\n5+|let e: void = undefined;\n6+|let f: null = null;\n7+|let g: undefined = undefined;\n",
+            "1-|let a: number = 1;\n2-|let b: string = '1';\n3-|let c: boolean = true;\n4-|let d: any = '1';\n5-|let e: void = undefined;\n6-|let f: null = null;\n7-|let g: undefined = undefined;\n1+|let str: string = '123';\n2+|str.split('');\n",
+            "1-|let str: string = '123';\n2-|str.split('');\n1+|let str1: string = '123';\n2+|str1.sptr2;\n3+|\n4+|let num1: number = 123;\n5+|let num2: number = 456;\n6+|let num3: number = num1 + num2;\n",
+            "2-|str1.sptr2;\n2+|let str2: string = '456';\n3+|let str3: string = str1 + str2;\n",
+            "2-|let str2: string = '456';\n3-|let str3: string = str1 + str2;\n2+|str1.split('');\n6-|let num2: number = 456;\n7-|let num3: number = num1 + num2;\n5+|num1.toString();\n6+|\n7+|let bool1: boolean = true;\n8+|bool1.toString();\n",
+            "4+|let str2: string = `Template string ${str1}`;\n5+|str2.split('');\n6+|\n7+|const str3 = \"Constant string\";\n8+|str3.toLocaleUpperCase();\n9+|\n5-|num1.toString();\n11+|num1.toFixed(2);\n",
+            "13+|let num2: number = 123.456;\n14+|num2.toExponential(2);\n15+|\n",
+            "17-|bool1.toString();\n17+|bool1.toString();\n18+|\n19+|let arr1: Array<number> = [1, 2, 3];\n20+|arr1.push(4);\n21+|\n22+|let arr2: number[] = [1, 2, 3];\n23+|arr2.push(4);\n24+|\n",
+            "21+|arr2.m\n",
+            "25+|arr2.map((item: number) => item * 2);\n27+|let obj1: { name: string; age: number } = { name: 'John', age: 20 };\n28+|obj1.name;\n29+|obj1.age;\n30+|\n31+|\n",
+            "21-|arr2.m\n21+|arr1.map((item: number) => item * 2);\n",
+            "25-|arr2.map((item: number) => item * 2);\n27-|let obj1: { name: string; age: number } = { name: 'John', age: 20 };\n28-|obj1.name;\n29-|obj1.age;\n30-|\n31-|\n",
+            "21-|arr1.map((item: number) => item * 2);\n",
+            "26+|let obj1: { name: string; age: number } = { name: 'John', age: 20 };\n27+|obj1.name;\n28+|obj1.age;\n29+|\n30+|let obj2: { name: string; age: number } = { name: 'John', age: 20 };\n31+|obj2.name;\n32+|obj2.age;\n",
+            "25-|let obj1: { name: string; age: number } = { name: 'John', age: 20 };\n26-|obj1.name;\n27-|obj1.age;\n28-|\n29-|let obj2: { name: string; age: number } = { name: 'John', age: 20 };\n30-|obj2.name;\n31-|obj2.age;\n",
+            "21+|arr1.map((item: number) => item * 2);\n",
+            "25-|\n25+|arr2.map((item: number) => item * 2);\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/utils/arktsType.ets",
+          "diffHistory": [
+            "1+|let image1: Resource = $r('app.media.image1');\n2+|let image2: Resource = $r('app.media.image2');\n3+|let image3: Resource = $r('app.media.image3');\n4+|let image4: Resource = $r('app.media.image4');\n5+|let image5: Resource = $r('app.media.image5');\n6+|let image6: Resource = $r('app.media.image6');\n",
+            "7+|\n8+|const image7: Resource = $r('app.media.image7');\n9+|const image8: Resource = $r('app.media.image8');\n10+|const image9: Resource = $r('app.media.image9');\n11+|const image10: Resource = $r('app.media.image10');\n12+|\n13+|let image11: Resource = $r('app.media.image11');\n14+|\n",
+            "15+|let image12: Resource = $r('app.media.image12');\n16+|let image13: Resource = $r('app.media.image13');\n17+|let image14: Resource = $r('app.media.image14');\n18+|let image15: Resource = $r('app.media.image15');\n19+|\n20+|\n",
+            "15-|let image12: Resource = $r('app.media.image12');\n16-|let image13: Resource = $r('app.media.image13');\n17-|let image14: Resource = $r('app.media.image14');\n18-|let image15: Resource = $r('app.media.image15');\n19-|\n20-|\n",
+            "9-|const image8: Resource = $r('app.media.image8');\n10-|const image9: Resource = $r('app.media.image9');\n11-|const image10: Resource = $r('app.media.image10');\n13-|let image11: Resource = $r('app.media.image11');\n10+|let pixelMap: PixelMap = new PixelMap();\n12+|let i18n: I18n = new I18n();\n",
+            "10-|let pixelMap: PixelMap = new PixelMap();\n11-|\n12-|let i18n: I18n = new I18n();\n10+|// let pixelMap: PixelMap = new PixelMap();\n",
+            "10-|// let pixelMap: PixelMap = new PixelMap();\n10+|let pixelMap: PixelMap = new PixelMap();\n11+|\n12+|pixelMap.getPixelBytesNumber();\n13+|\n14+|let i18n: I18n = new I18n();\n15+|\n16+|i18n.getString();\n17+|\n",
+            "12-|pixelMap.getPixelBytesNumber();\n13-|\n14-|let i18n: I18n = new I18n();\n15-|\n16-|i18n.getString();\n17-|\n12+|pixelMap.getPixelBytesNumber();\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/utils/basicType2.ets",
+          "diffHistory": [
+            "1+|let u\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/basicType2.ets",
+        "contents": "let u",
+        "cursorPosition": {
+          "line": 0,
+          "column": 5
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 6,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/utils/arktsType.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 12
+            }
+          ],
+          "lastViewedAt": 1742298205212
+        },
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/utils/basicType.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 26
+            }
+          ],
+          "lastViewedAt": 1742298241160
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742298250849,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 52.300048828125,
+      "timeAtRequestSend": 1742298250849
+    },
+    "generateUuid": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:10.850Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.253Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "let u1",
+      "rangeToReplace": {
+        "startLineNumber": 1,
+        "endLineNumberInclusive": 1
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.255Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.269Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " undefined"
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.279Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " = undefined;\nlet"
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.300Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " u2"
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.303Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.316Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " undefined"
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.327Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.341Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " null"
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.353Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";\nlet"
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.364Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " u"
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.377Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "3"
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.389Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.401Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " undefined"
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.413Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " = void"
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.428Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";"
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.441Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nlet"
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.454Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " u4"
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.466Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.494Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " undefined"
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.495Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.505Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.517Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "1;"
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.529Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.542Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "let"
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.554Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " u5"
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.573Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.578Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " undefined"
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.599Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " = '"
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.603Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "1"
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.614Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "';"
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.630Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nlet"
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.650Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " u"
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.666Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "6"
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.666Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.676Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " undefined"
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.692Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.713Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " true"
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.715Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";\nlet"
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.726Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " u7"
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.735Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.752Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " undefined"
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.763Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " = false"
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.775Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";"
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.788Z"
+  },
+  {
+    "firstChunkValue": "let u1: undefined = undefined;\nlet u2: undefined = null;\nlet u3: undefined = void;\nlet u4: undefined = 1;\nlet u5: undefined = '1';\nlet u6: undefined = true;\nlet u7: undefined = false;",
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.803Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "let u1: undefined = undefined;\nlet u2: undefined = null;\nlet u3: undefined = void;\nlet u4: undefined = 1;\nlet u5: undefined = '1';\nlet u6: undefined = true;\nlet u7: undefined = false;"
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.804Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.805Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.805Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "646d8da5-38c7-4274-b4b6-0a52925ed00b",
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.806Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "let u1: undefined = undefined;\nlet u2: undefined = null;\nlet u3: undefined = void;\nlet u4: undefined = 1;\nlet u5: undefined = '1';\nlet u6: undefined = true;\nlet u7: undefined = false;"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "646d8da5-38c7-4274-b4b6-0a52925ed00b",
+    "generationUUID": "f2d8aede-64e3-4c26-831a-7c87919409bd",
+    "timestamp": "2025-03-18T11:44:11.806Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "646d8da5-38c7-4274-b4b6-0a52925ed00b",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-18T11:44:11.807Z"
+  }
+]

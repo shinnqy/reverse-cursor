@@ -1,0 +1,270 @@
+[
+  {
+    "intent": "lint_errors",
+    "generationUUID": "a8464dc1-1fc8-45ec-ac96-060555f46a21",
+    "timestamp": "2025-03-02T14:51:02.311Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "src/components/test.ts",
+          "diffHistory": [
+            "6-|    case light.GREEN:\n7-|      console.log('GREEN');\n8-|      break;\n9-|    case light.YELLOW:\n10-|      console.log('YELLOW');\n11-|      break;\n12-|    default:\n13-|      console.log('Invalid light');\n",
+            "6+|    case light.GREEN:\n7+|      console.log('GREEN');\n8+|      break;\n9+|    case light.YELLOW:\n10+|      console.log('YELLOW');\n11+|      break;\n",
+            "11-|      break;  \n12-|\n11+|      break;\n12+|    default:\n13+|      console.log('Invalid light');\n",
+            "6-|    case light.GREEN:\n7-|      console.log('GREEN');\n8-|      break;\n9-|    case light.YELLOW:\n10-|      console.log('YELLOW');\n11-|      break;\n12-|    default:\n13-|      console.log('Invalid light');\n",
+            "6+|    case light.GREEN:\n7+|      console.log('GREEN');\n8+|      break;\n9+|    case light.YELLOW:\n10+|      console.log('YELLOW');\n11+|      break;\n",
+            "12+|    default:\n13+|      console.log('Invalid light');\n",
+            "6-|    case light.GREEN:\n7-|      console.log('GREEN');\n8-|      break;\n9-|    case light.YELLOW:\n10-|      console.log('YELLOW');\n11-|      break;\n12-|    default:\n13-|      console.log('Invalid light');\n",
+            "6+|    case light.YELLOW:\n7+|      console.log('YELLOW');\n8+|      break;\n9+|    default:\n10+|      console.log('Invalid light');\n",
+            "6-|    case light.YELLOW:\n7-|      console.log('YELLOW');\n8-|      break;\n9-|    default:\n10-|      console.log('Invalid light');\n12-|}\n7+|} \n",
+            "6+|    case light.YELLOW:\n7+|      console.log('YELLOW');\n8+|      break;\n9+|    default:\n10+|      console.log('Invalid light');\n",
+            "11+|      break;\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "linterErrors": {
+        "relativeWorkspacePath": "src/components/test.ts",
+        "errors": [
+          {
+            "message": "'changeLight' is defined but never used.",
+            "range": {
+              "startPosition": {
+                "line": 1,
+                "column": 10
+              },
+              "endPosition": {
+                "line": 1,
+                "column": 21
+              }
+            },
+            "source": "eslint",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          },
+          {
+            "message": "Cannot find name 'TrafficLight'.",
+            "range": {
+              "startPosition": {
+                "line": 1,
+                "column": 29
+              },
+              "endPosition": {
+                "line": 1,
+                "column": 41
+              }
+            },
+            "source": "ts",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          }
+        ],
+        "fileContents": ""
+      },
+      "currentFile": {
+        "relativeWorkspacePath": "src/components/test.ts",
+        "contents": "function changeLight(light: TrafficLight) {\n  switch (light) {\n    case light.RED:\n      console.log('RED');\n      break;\n    case light.YELLOW:\n      console.log('YELLOW');\n      break;\n    default:\n      console.log('Invalid light');\n      break;\n  }\n}",
+        "cursorPosition": {
+          "line": 0,
+          "column": 0
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 71,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/Documents/personal/vite-react-demo2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "lint_errors"
+      },
+      "clientTime": 1740927062310,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "8u65ni1hw3pqzyyqn4vyf",
+      "timeSinceRequestStart": 1.10009765625,
+      "timeAtRequestSend": 1740927062310
+    },
+    "generateUuid": "a8464dc1-1fc8-45ec-ac96-060555f46a21",
+    "timestamp": "2025-03-02T14:51:02.312Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "a8464dc1-1fc8-45ec-ac96-060555f46a21",
+    "timestamp": "2025-03-02T14:51:02.665Z"
+  },
+  {
+    "firstChunkValue": "shared/types/traffic-light.ts\n\nfunction changeLight(light: TrafficLight) {\n  switch (light) {\n    case light.RED:\n      console.log('RED');",
+    "generationUUID": "a8464dc1-1fc8-45ec-ac96-060555f46a21",
+    "timestamp": "2025-03-02T14:51:03.059Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "shared/types/traffic-light.ts\n\nfunction changeLight(light: TrafficLight) {\n  switch (light) {\n    case light.RED:\n      console.log('RED');"
+    },
+    "generationUUID": "a8464dc1-1fc8-45ec-ac96-060555f46a21",
+    "timestamp": "2025-03-02T14:51:03.061Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "a7b712b7-b0dc-4c98-8912-0e6a928bab1d",
+    "generationUUID": "a8464dc1-1fc8-45ec-ac96-060555f46a21",
+    "timestamp": "2025-03-02T14:51:03.084Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "shared/types/traffic-light.ts\n\nfunction changeLight(light: TrafficLight) {\n  switch (light) {\n    case light.RED:\n      console.log('RED');"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "a7b712b7-b0dc-4c98-8912-0e6a928bab1d",
+    "generationUUID": "a8464dc1-1fc8-45ec-ac96-060555f46a21",
+    "timestamp": "2025-03-02T14:51:03.085Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "a7b712b7-b0dc-4c98-8912-0e6a928bab1d",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-02T14:51:03.086Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "1292d929-3086-4d57-ad36-186cf714da79",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/Documents/personal/vite-react-demo2/src/components/test.ts",
+        "external": "file:///Users/shinn/Documents/personal/vite-react-demo2/src/components/test.ts",
+        "path": "/Users/shinn/Documents/personal/vite-react-demo2/src/components/test.ts",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 71,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 71,
+      "monotonicallyIncreasingSuggestionId": 37,
+      "range": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 4,
+        "endColumn": 26
+      },
+      "replaceText": "shared/types/traffic-light.ts\n\nfunction changeLight(light: TrafficLight) {\n  switch (light) {\n    case light.RED:\n      console.log('RED');",
+      "originalText": "function changeLight(light: TrafficLight) {\n  switch (light) {\n    case light.RED:\n      console.log('RED');",
+      "startingSuggestionRange": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 4,
+        "endColumn": 26
+      },
+      "diffText": "shared/types/traffic-light.ts\n\nfunction changeLight(light: TrafficLight) {\n  switch (light) {\n    case light.RED:\n      console.log('RED');",
+      "fullOriginalText": "function changeLight(light: TrafficLight) {\n  switch (light) {\n    case light.RED:\n      console.log('RED');",
+      "suggestionTriggerTime": 1740927062308.4,
+      "greens": [],
+      "source": "lint_errors",
+      "requestId": "a8464dc1-1fc8-45ec-ac96-060555f46a21",
+      "selection": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 4,
+        "endColumn": 26
+      },
+      "fusedCursorPredictionId": "a7b712b7-b0dc-4c98-8912-0e6a928bab1d",
+      "undoRedoGroup": {
+        "id": 37,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;268"
+    },
+    "generationUUID": "a8464dc1-1fc8-45ec-ac96-060555f46a21",
+    "timestamp": "2025-03-02T14:51:03.943Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "1292d929-3086-4d57-ad36-186cf714da79",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/Documents/personal/vite-react-demo2/src/components/test.ts",
+        "external": "file:///Users/shinn/Documents/personal/vite-react-demo2/src/components/test.ts",
+        "path": "/Users/shinn/Documents/personal/vite-react-demo2/src/components/test.ts",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 71,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 71,
+      "monotonicallyIncreasingSuggestionId": 37,
+      "range": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 4,
+        "endColumn": 26
+      },
+      "replaceText": "shared/types/traffic-light.ts\n\nfunction changeLight(light: TrafficLight) {\n  switch (light) {\n    case light.RED:\n      console.log('RED');",
+      "originalText": "function changeLight(light: TrafficLight) {\n  switch (light) {\n    case light.RED:\n      console.log('RED');",
+      "startingSuggestionRange": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 4,
+        "endColumn": 26
+      },
+      "diffText": "shared/types/traffic-light.ts\n\nfunction changeLight(light: TrafficLight) {\n  switch (light) {\n    case light.RED:\n      console.log('RED');",
+      "fullOriginalText": "function changeLight(light: TrafficLight) {\n  switch (light) {\n    case light.RED:\n      console.log('RED');",
+      "suggestionTriggerTime": 1740927062308.4,
+      "greens": [],
+      "source": "lint_errors",
+      "requestId": "a8464dc1-1fc8-45ec-ac96-060555f46a21",
+      "selection": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 4,
+        "endColumn": 26
+      },
+      "fusedCursorPredictionId": "a7b712b7-b0dc-4c98-8912-0e6a928bab1d",
+      "undoRedoGroup": {
+        "id": 37,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;268"
+    },
+    "generationUUID": "a8464dc1-1fc8-45ec-ac96-060555f46a21",
+    "timestamp": "2025-03-02T14:51:03.961Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "a7b712b7-b0dc-4c98-8912-0e6a928bab1d",
+    "fusedCursorPrediction": null,
+    "oldText": "function changeLight(light: TrafficLight) {\n  switch (light) {\n    case light.RED:\n      console.log('RED');",
+    "newText": "shared/types/traffic-light.ts\n\nfunction changeLight(light: TrafficLight) {\n  switch (light) {\n    case light.RED:\n      console.log('RED');",
+    "timestamp": "2025-03-02T14:51:03.962Z"
+  }
+]

@@ -1,0 +1,43 @@
+{"line":21,"column":26}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+struct Index {
+  @State message: string = 'Hello World';
+
+  build() {
+    RelativeContainer() {
+      Text(this.message)
+        .id('HelloWorld')
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+        .alignRules({
+          center: { anchor: '__container__', align: VerticalAlign.Center },
+          middle: { anchor: '__container__', align: HorizontalAlign.Center }
+        })
+
+      Button() {
+        Text('About Me')
+      }
+      .onClick(() => {
+        router.pushUrl({
+          url: 'pages/Abou[ToFill]'
+        })
+      })
+    }
+    .height('100%')
+    .width('100%')
+  }
+}
+-------------------------------[               firstChunkValue               ]--------------------------------
+        router.pushUrl({
+          url: 'pages/AboutMe'
+        })
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/pages/Index.ets",
+  "lineNumberOneIndexed": 16,
+  "text": "",
+  "shouldRetriggerCpp": true
+}

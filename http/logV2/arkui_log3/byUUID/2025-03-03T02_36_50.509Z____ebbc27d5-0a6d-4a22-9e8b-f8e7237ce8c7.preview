@@ -1,0 +1,31 @@
+{"line":11,"column":12}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Preview
+@Component
+struct AboutMe {
+  @State message: string = 'About Me';
+
+  build() {
+    Column() {
+      Text(this.message)
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+
+      Banner[ToFill]
+    }
+  }
+}
+-------------------------------[               firstChunkValue               ]--------------------------------
+        .fontWeight(FontWeight.Bold)
+
+      Banner() {
+        Text('Banner')
+      }
+      .id('banner')
+      .autoPlay(true)
+      .interval(3000)
+      
+    }
+  }
+}

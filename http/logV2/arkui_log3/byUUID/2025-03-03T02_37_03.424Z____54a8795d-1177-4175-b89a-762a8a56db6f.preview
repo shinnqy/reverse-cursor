@@ -1,0 +1,27 @@
+{"line":0,"column":22}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+import Banner from '..[ToFill]'
+
+@Preview
+@Component
+struct AboutMe {
+  @State message: string = 'About Me';
+
+  build() {
+    Column() {
+      Text(this.message)
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+
+      Banner()
+    }
+  }
+}
+-------------------------------[               firstChunkValue               ]--------------------------------
+import Banner from '@/components/Banner.ets';
+
+@Preview
+@Component
+struct AboutMe {
+  @State message: string = 'About Me';

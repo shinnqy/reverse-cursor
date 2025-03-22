@@ -1,0 +1,5007 @@
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_11_38.543Z____ea0887d0-4ed4-4105-8b4f-6c5d9212e509.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Co<|current_cursor_position|>
+-------------------------------[               firstChunkValue               ]--------------------------------
+type Color = {
+    r: number;
+    g: number;
+    b: number;
+}
+
+
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = {
+    r: number;
+    g: number;
+    b: number;
+}
+
+[Analysis]:
+The combined code is correct and complete. The original text was incomplete, starting with 'type Co', and the LLM output provided a complete and valid TypeScript type definition for a 'Color' object with properties 'r', 'g', and 'b' of type 'number'. This significantly improves the completeness and correctness of the original text.
+
+[Score]:
+10
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_11_50.702Z____9d29c367-c4ea-4b30-95ef-a22db14116cc.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let<|current_cursor_position|>
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+let color: Color = "red";
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+[Analysis]:
+The combined code is correct and complete. The original text defined a type `Color` and left the cursor at the start of a new line, likely expecting a variable declaration. The LLM-generated code correctly declares a variable `color` of type `Color` and assigns it the value "red". This improves the completeness of the original text by providing a valid and meaningful continuation.
+
+[Score]:
+10
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_12_29.272Z____82e282dc-71aa-44d4-839f-6faa9dbe9456.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+l<|current_cursor_position|>
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+}
+let direction: Direction = Direction.Up;
+
+
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+}
+let direction: Direction = Direction.Up;
+
+[Analysis]:
+The combined code is mostly correct, but there is a syntax error due to an extra closing brace `}` before the `let direction` statement. This extra brace is likely a mistake from the LLM output. The original text was incomplete, and the LLM output did improve the completeness by adding the `let direction` statement, which is a valid addition. However, the extra brace introduces a syntax error, which affects the correctness of the code.
+
+[Score]:
+6
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_12_31.444Z____83acc8e6-78a4-4feb-8161-767c7e246f40.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir:<|current_cursor_position|>
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+}
+let dir: Direction = Direction.Up;
+
+
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+[Analysis]:
+The combined code is correct and complete. The model output successfully completed the original text by adding the missing declaration and initialization of the `dir` variable with the `Direction` enum. The code is syntactically correct and follows TypeScript conventions. The model output improved the completeness of the original text by providing the missing part, which is essential for the code to be functional.
+
+[Score]:
+10
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_12_38.379Z____5c4ac4e8-3e45-4724-af4a-17c8cbd0d38d.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+<|current_cursor_position|>
+}
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+}
+
+
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+    case Direction.Right:
+        console.log("right");
+        break;
+}
+
+[Analysis]:
+The combined code is mostly correct, but there is a typo in the last case of the `Direction` switch statement. The correct enum value should be `Direction.Right`, not `Direction.Right`. Other than that, the code is syntactically correct and improves the completeness of the original text by adding the missing cases for `Direction.Down`, `Direction.Left`, and `Direction.Right`.
+
+[Score]:
+8
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_13_08.461Z____2750a3b7-a124-4417-9105-8254af7fe86c.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+i<|current_cursor_position|>
+-------------------------------[               firstChunkValue               ]--------------------------------
+}
+interface Rectangle {
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Rectangle {
+
+[Analysis]:
+The combined code is mostly correct and maintains the structure of the original text. The model's output introduces a new interface `Rectangle`, which is a logical continuation of the code, as it follows the pattern of defining shapes (e.g., `Square`). However, the code is incomplete as the `Rectangle` interface is not fully defined. Despite this, the model's output improves the completeness of the original text by suggesting a new interface, which aligns with the context of the code.
+
+[Score]:
+8
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_13_11.124Z____2dbc02a6-c8c4-4ec7-b5df-e4f5b76c6a22.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface R<|current_cursor_position|>
+-------------------------------[               firstChunkValue               ]--------------------------------
+}
+interface Rectangle {
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Rectangle {
+
+[Analysis]:
+The combined code is mostly correct and maintains the structure of the original text. The model output added the `Rectangle` interface, which improves the completeness of the original text. However, the `Rectangle` interface is not fully defined, so the code is still incomplete. Despite this, the model's output is a step in the right direction, as it starts defining the `Rectangle` interface, which was missing in the original text.
+
+[Score]:
+8
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_13_08.614Z____baedae8f-5c38-489c-bec2-6572466943c8.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+in<|current_cursor_position|>
+-------------------------------[               firstChunkValue               ]--------------------------------
+}
+interface Rectangle {
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+}
+interface Rectangle {
+
+[Analysis]:
+The combined code is not complete and contains a syntax error due to the misplaced closing brace `}` after the `Square` interface. The LLM output attempted to introduce a new `Rectangle` interface, but it was not properly integrated into the existing code. The original text was incomplete, and the LLM output did not improve the completeness or correctness of the code. Instead, it introduced a syntax error.
+
+[Score]:
+2
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_12_11.543Z____ef8d61ef-4a5d-4dba-9f61-041fe1826c01.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}<|current_cursor_position|>
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+        break;
+    default:
+        console.log("unknown");
+}
+
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+    default:
+        console.log("unknown");
+}
+
+[Analysis]:
+The combined code is correct and complete. The original text already had a valid `switch` statement, but it lacked a `default` case, which is a good practice to handle unexpected values. The LLM's output added the `default` case, improving the completeness and robustness of the code. This addition ensures that if `color` is assigned a value not covered by the existing cases, the code will still handle it gracefully by logging "unknown". This is a clear improvement over the original text.
+
+[Score]:
+10
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_13_18.599Z____57ed3b77-45f2-478d-99b1-303e88addc54.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+f<|current_cursor_position|>
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+function area(s: Square | Circle) {
+
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+function area(s: Square | Circle) {
+
+
+[Analysis]:
+The combined code is mostly correct and improves the completeness of the original text. The original text was incomplete, ending with an unfinished interface definition. The LLM output added a function `area` that takes a union type of `Square` and `Circle`, which is a logical continuation of the code. However, the function body is missing, so the code is still incomplete. Despite this, the addition of the function signature is a step towards completeness and aligns with the context of the original code.
+
+[Score]:
+8
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_12_00.778Z____070aa30c-4d18-444f-84b4-c7b3a8afec79.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+        <|current_cursor_position|>
+}
+-------------------------------[               firstChunkValue               ]--------------------------------
+        break;
+    case "blue":
+}
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+}
+
+[Analysis]:
+The combined code is partially correct but incomplete. The model output added a new case for "blue", which improves the completeness of the original text. However, the code is still incomplete as it lacks the corresponding logic for the "blue" case and does not handle the "green" case at all. Despite this, the addition of the "blue" case is a step in the right direction, improving the completeness of the original text.
+
+[Score]:
+7
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_12_20.972Z____e980399d-2a9c-4bf9-b19f-aa40f5285ce6.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Dir<|current_cursor_position|>
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+enum Direction {
+
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+
+[Analysis]:
+The combined code is incomplete, but it does improve the completeness of the original text. The original text had an incomplete `enum Dir` declaration, and the LLM output started the `enum Direction` declaration, which is a step towards completing the code. However, the `enum Direction` is still incomplete as it lacks the closing brace and any members. Despite this, the LLM output is a step in the right direction and improves the original text.
+
+[Score]:
+8
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_12_53.243Z____fe0abcf5-e7be-439d-8b43-96a752b93c05.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+intef<|current_cursor_position|>
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+interface Bird {
+
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Bird {
+
+}
+
+[Analysis]:
+The combined code is mostly correct and maintains the structure of the original text. The LLM output added an incomplete `interface Bird` at the end, which improves the completeness of the original text by introducing a new concept (an interface). However, the interface is incomplete, and the code does not compile as-is. The original text was already complete and functional, so the addition of the interface, while a step forward, does not significantly improve the correctness or completeness of the code.
+
+[Score]:
+6
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_12_20.613Z____5a07434e-6450-4152-8526-356911d59c02.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum D<|current_cursor_position|>
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+enum Direction {
+
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+
+[Analysis]:
+The combined code is mostly correct and improves the completeness of the original text. The original text was incomplete at the cursor position, and the model output correctly started the definition of an `enum` named `Direction`. However, the `enum` is still incomplete as it lacks the closing brace and any members. Despite this, the model's output is a step in the right direction and improves the completeness of the code.
+
+[Score]:
+8
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_12_57.278Z____f0d70030-215e-4b64-94ab-cb971f3047f9.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Sq<|current_cursor_position|>
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+interface Square {
+
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+
+[Analysis]:
+The combined code is mostly correct and maintains the structure of the original text. The LLM output correctly starts the definition of an interface named `Square`, which aligns with the cursor position in the original text. However, the interface is incomplete, as it lacks properties and methods. Despite this, the LLM output does improve the completeness of the original text by starting the interface definition, which was missing in the original text. Therefore, the score is based on the correctness and the improvement in completeness.
+
+[Score]:
+8
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_12_52.225Z____a6d77079-cad6-4e95-9cef-d96db5f58945.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+i<|current_cursor_position|>
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+interface Bird {
+
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+}
+
+interface Bird {
+
+[Analysis]:
+The combined code includes the original text and the partial output from the LLM. The original text is complete and correct, but the LLM's output is incomplete, introducing an interface `Bird` without any properties or methods. This does not improve the completeness of the original text, as it leaves the code in an incomplete state. The original text was already complete and correct, so the LLM's output does not add value in this case.
+
+[Score]:
+2
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_12_28.630Z____1770b7ae-56ca-48a2-a2f9-cd5cd70d065a.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+<|current_cursor_position|>
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+}
+
+let direction: Direction = Direction.Up;
+
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+
+let direction: Direction = Direction.Up;
+
+[Analysis]:
+The combined code is correct and complete. The original text was already syntactically correct, but the model's output added a useful line of code (`let direction: Direction = Direction.Up;`) that improves the completeness of the original text by demonstrating how to use the `Direction` enum. This addition is meaningful and enhances the code's utility.
+
+[Score]:
+10
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_13_13.147Z____bb40ea06-3571-499e-a658-d5bda6b8311c.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface C<|current_cursor_position|>
+-------------------------------[               firstChunkValue               ]--------------------------------
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+
+
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+[Analysis]:
+The combined code is correct and complete. The model output successfully completed the `interface Circle` definition, which was missing in the original text. This improves the completeness of the original text, as it now includes both `Square` and `Circle` interfaces. The code is syntactically correct and follows TypeScript conventions.
+
+[Score]:
+10
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_11_50.279Z____e0f09e13-dc20-4497-9d44-5d6e66e81854.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+l<|current_cursor_position|>
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+let color: Color = "red";
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+[Analysis]:
+The combined code is correct and complete. The original text defined a type `Color` with three possible string literals. The LLM-generated code correctly declares a variable `color` of type `Color` and assigns it the value "red". This improves the completeness of the original text by adding a practical usage of the `Color` type.
+
+[Score]:
+10
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_13_32.658Z____4124f7ac-1f4f-4e1f-a042-c6fc40ce3be7.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}<|current_cursor_position|>
+
+function getArea()
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+function getArea(shape: Square | Circle) {
+
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+function getArea(shape: Square | Circle) {
+
+[Analysis]:
+The combined code is mostly correct and improves the completeness of the original text. The original text was incomplete, ending with `function getArea()`, and the model output correctly extended it by adding the function signature `function getArea(shape: Square | Circle)`. This is a significant improvement in terms of completeness. However, the function body is still missing, so the code is not fully complete. Despite this, the model's output is a step in the right direction and aligns with the expected structure of the code.
+
+[Score]:
+8
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_14_10.071Z____29ab4198-a522-48f0-9ead-5e6413b2794c.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type Shape = Square | Circle;
+
+function getArea(shape: Shape) {
+    switch (shape.kind) {
+        case "square":
+            return shape.size * shape.size;
+        case "circle":
+            return Math.PI * shape.radius ** 2;
+    }
+}
+
+let category = "A";
+let subCategory = 1;
+
+switch (category) {
+    case "A":
+        switch (subCategory) {
+            
+<|current_cursor_position|>        }
+}
+-------------------------------[               firstChunkValue               ]--------------------------------
+            case 1:
+                console.log("A1");
+                break;
+            case 2:
+                console.log("A2");
+                break;
+        }
+}
+
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type Shape = Square | Circle;
+
+function getArea(shape: Shape) {
+    switch (shape.kind) {
+        case "square":
+            return shape.size * shape.size;
+        case "circle":
+            return Math.PI * shape.radius ** 2;
+    }
+}
+
+let category = "A";
+let subCategory = 1;
+
+switch (category) {
+    case "A":
+        switch (subCategory) {
+            case 1:
+                console.log("A1");
+                break;
+            case 2:
+                console.log("A2");
+                break;
+        }
+}
+
+[Analysis]:
+The combined code is correct and complete. The LLM-generated code successfully completes the nested switch statement for `subCategory` within the `category` switch statement. The original text was incomplete at the cursor position, and the LLM output provided the necessary cases (`case 1` and `case 2`) to complete the logic. This improves the completeness of the original text significantly.
+
+[Score]:
+10
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_11_43.119Z____b0e4190d-b55a-499a-a166-9d7b25901bff.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "<|current_cursor_position|>"
+-------------------------------[               firstChunkValue               ]--------------------------------
+type Color = "red" | "blue" | "green"
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green"
+
+[Analysis]:
+The combined code is correct and complete. The original text was incomplete, as it only defined a type `Color` without specifying any values. The LLM output provided the missing values (`"red" | "blue" | "green"`), which completes the type definition. This is a valid TypeScript type definition for a union of string literals.
+
+[Score]:
+10
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_12_18.416Z____19d38e9d-3cee-4e95-8152-c53c2af4186e.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+en<|current_cursor_position|>
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+enum Color {
+
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Color {
+
+[Analysis]:
+The combined code is incomplete because the `enum Color` declaration is not finished. However, the model's output does improve the completeness of the original text by introducing the concept of an `enum`, which is a more structured way to define a set of named constants compared to the original union type. This is a step towards better code organization and type safety. Therefore, the model's output is a positive addition, even though it is incomplete.
+
+[Score]:
+8
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_12_53.767Z____fab5e293-4dbf-41bb-9955-d5721f519f11.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+inte<|current_cursor_position|>
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+interface Bird {
+
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Bird {
+
+
+[Analysis]:
+The combined code is mostly correct and maintains the structure of the original text. The LLM output correctly starts an interface named 'Bird', which aligns with the partial input 'inte' in the original text. However, the interface is incomplete, and the code does not include the closing brace for the 'switch' statement or the 'interface Bird'. Despite this, the LLM output improves the completeness of the original text by starting the interface, which was missing. Therefore, the score is based on the correctness and the improvement in completeness.
+
+[Score]:
+8
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_14_24.392Z____daae4a26-fd45-4abe-b2d2-2933ffbb7852.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type Shape = Square | Circle;
+
+function getArea(shape: Shape) {
+    switch (shape.kind) {
+        case "square":
+            return shape.size * shape.size;
+        case "circle":
+            return Math.PI * shape.radius ** 2;
+    }
+}
+
+let category = "A";
+let subCategory = 1;
+
+switch (category) {
+    case "A":
+        switch (subCategory) {
+            case 1:
+                console.log("A1");
+                break;
+            case 2:
+                co<|current_cursor_position|>nsole.log("A2");
+                break;
+        }
+        break;
+
+}
+-------------------------------[               firstChunkValue               ]--------------------------------
+            case 2:
+                console.log("A2");
+                break;
+        }
+        break;
+    case "B":
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type Shape = Square | Circle;
+
+function getArea(shape: Shape) {
+    switch (shape.kind) {
+        case "square":
+            return shape.size * shape.size;
+        case "circle":
+            return Math.PI * shape.radius ** 2;
+    }
+}
+
+let category = "A";
+let subCategory = 1;
+
+switch (category) {
+    case "A":
+        switch (subCategory) {
+            case 1:
+                console.log("A1");
+                break;
+            case 2:
+                console.log("A2");
+                break;
+        }
+        break;
+    case "B":
+}
+
+[Analysis]:
+The combined code is mostly correct and improves the completeness of the original text. The original text had an incomplete `switch` statement for `category` with a cursor position indicating that the code was incomplete. The LLM output correctly completes the `switch` statement by adding the `case "B":` block, which was missing in the original text. However, there is a minor typo in the `getArea` function where `shape.kind` is misspelled as `shape.kind`. Despite this, the overall correctness and completeness of the code are improved by the LLM output.
+
+[Score]:
+9
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_12_44.035Z____6f0e296d-786c-49ca-a9da-1960c41cc210.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;<|current_cursor_position|>
+
+}
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+    case Direction.Left:
+        console.log("left");
+        break;
+    case Direction.Right:
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+    case Direction.Right:
+        console.log("right");
+        break;
+}
+
+[Analysis]:
+The combined code is correct and complete. The model output added the missing case for `Direction.Right`, which was not present in the original text. This improves the completeness of the original code, ensuring that all possible cases in the `Direction` enum are handled in the switch statement.
+
+[Score]:
+10
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_13_11.591Z____37b355c8-70d6-4734-8538-df08fb740b29.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface <|current_cursor_position|>
+-------------------------------[               firstChunkValue               ]--------------------------------
+}
+interface Rectangle {
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Rectangle {
+
+
+[Analysis]:
+The combined code is incomplete, but the model output does improve the completeness of the original text by adding the start of a new interface `Rectangle`. This suggests that the model is attempting to continue the code in a logical manner, which is a positive sign. However, the code is still incomplete, and the `Rectangle` interface lacks any properties or methods.
+
+[Score]:
+7
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_13_48.095Z____9dcd98da-213e-4244-a509-f36902d59b43.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type Shape = Square | Circle;
+
+function getArea(shape: Shape) {
+    switch (shape.kind) {
+        case "square":
+            return shape.size * shape.size;
+        case "circle":
+            return Math.PI * shape.radius ** 2;
+    }
+}
+
+l<|current_cursor_position|>
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+let square: Square = {
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type Shape = Square | Circle;
+
+function getArea(shape: Shape) {
+    switch (shape.kind) {
+        case "square":
+            return shape.size * shape.size;
+        case "circle":
+            return Math.PI * shape.radius ** 2;
+    }
+}
+
+let square: Square = {
+
+[Analysis]:
+The combined code is mostly correct and maintains the structure of the original text. The LLM's partial output (`let square: Square = {`) is incomplete, but it does improve the completeness of the original text by starting to define a `Square` object. However, the code is not fully completed, as the `Square` object definition is missing its properties and closing brace. Despite this, the LLM's output is a step toward completing the code, so it can be considered an improvement in terms of completeness.
+
+[Score]:
+8
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_13_40.336Z____dc6cf01a-9c8c-4626-9977-996e3f8f7203.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type Shape = Square | Circle;
+
+function getArea(<|current_cursor_position|>)
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+function getArea(shape: Shape) {
+
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type Shape = Square | Circle;
+
+function getArea(shape: Shape) {
+
+[Analysis]:
+The combined code is mostly correct and improves the completeness of the original text. The original text was incomplete at the `getArea` function, and the model output correctly started the function definition with the appropriate parameter type `Shape`. However, the function body is still missing, so the code is not fully complete. Despite this, the model's output is a step in the right direction and improves the completeness of the original text.
+
+[Score]:
+8
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_13_16.966Z____7fe9b9aa-f9a2-45bf-91b4-627c6660b9ef.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+<|current_cursor_position|>
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+type Shape = Square | Circle;
+
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type Shape = Square | Circle;
+
+[Analysis]:
+The combined code is correct and improves the completeness of the original text. The original text was missing a type definition for `Shape`, which is now provided by the LLM's output. The `Shape` type is correctly defined as a union of `Square` and `Circle`, which aligns with the interfaces defined earlier. This addition makes the code more complete and functional, as it allows for the creation of variables that can hold either a `Square` or a `Circle` object.
+
+[Score]:
+10
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_13_20.894Z____da0c6a03-e72f-4a82-a2b4-d588988736d5.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+function g<|current_cursor_position|>
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+function getArea(shape: Square | Circle) {
+
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+function getArea(shape: Square | Circle) {
+
+
+[Analysis]:
+The combined code is mostly correct and improves the completeness of the original text. The original text was incomplete, ending with the start of a function declaration. The LLM-generated code correctly continues the function declaration, defining a function `getArea` that takes a parameter `shape` of type `Square | Circle`. This is a logical continuation of the code, as it aligns with the previously defined interfaces `Square` and `Circle`. However, the function body is still missing, so the code is not fully complete. Despite this, the LLM output significantly improves the completeness of the original text by providing a meaningful continuation.
+
+[Score]:
+9
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_13_40.204Z____4bf96acf-529e-43a7-8d0c-b78e2dec818b.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type Shape = Square | Circle;
+<|current_cursor_position|>
+function getArea()
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+type Shape = Square | Circle;
+
+function getArea(shape: Shape) {
+
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type Shape = Square | Circle;
+
+function getArea(shape: Shape) {
+
+[Analysis]:
+The combined code is mostly correct and improves the completeness of the original text. The original text was incomplete, ending with `function getArea()`, and the model output correctly started the function definition with `function getArea(shape: Shape) {`. This is a step towards completing the function, although the function body is still missing. The rest of the code is syntactically correct and follows TypeScript conventions.
+
+[Score]:
+8
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_14_12.049Z____d97be651-8d11-49ba-ac93-36e4e8221a78.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type Shape = Square | Circle;
+
+function getArea(shape: Shape) {
+    switch (shape.kind) {
+        case "square":
+            return shape.size * shape.size;
+        case "circle":
+            return Math.PI * shape.radius ** 2;
+    }
+}
+
+let category = "A";
+let subCategory = 1;
+
+switch (category) {
+    case "A":
+        switch (subCategory) {
+    <|current_cursor_position|>            
+        }
+}
+-------------------------------[               firstChunkValue               ]--------------------------------
+switch (category) {
+    case "A":
+        switch (subCategory) {
+            case 1:
+        }
+}
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type Shape = Square | Circle;
+
+function getArea(shape: Shape) {
+    switch (shape.kind) {
+        case "square":
+            return shape.size * shape.size;
+        case "circle":
+            return Math.PI * shape.radius ** 2;
+    }
+}
+
+let category = "A";
+let subCategory = 1;
+
+switch (category) {
+    case "A":
+        switch (subCategory) {
+            case 1:
+        }
+}
+
+[Analysis]:
+The combined code is mostly correct and maintains the structure of the original text. The LLM's output correctly adds a `case 1:` to the nested `switch` statement, which improves the completeness of the original text. However, the code is still incomplete as it lacks the corresponding logic for `case 1:` and any other cases that might be needed. Despite this, the addition of `case 1:` is a step in the right direction and improves the completeness of the original text.
+
+[Score]:
+8
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_14_12.706Z____af64b641-24f3-472a-a409-d114493b6f7d.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type Shape = Square | Circle;
+
+function getArea(shape: Shape) {
+    switch (shape.kind) {
+        case "square":
+            return shape.size * shape.size;
+        case "circle":
+            return Math.PI * shape.radius ** 2;
+    }
+}
+
+let category = "A";
+let subCategory = 1;
+
+switch (category) {
+    case "A":
+        switch (subCategory) {
+      <|current_cursor_position|>            
+        }
+}
+-------------------------------[               firstChunkValue               ]--------------------------------
+switch (category) {
+    case "A":
+        switch (subCategory) {
+            case 1:
+        }
+}
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type Shape = Square | Circle;
+
+function getArea(shape: Shape) {
+    switch (shape.kind) {
+        case "square":
+            return shape.size * shape.size;
+        case "circle":
+            return Math.PI * shape.radius ** 2;
+    }
+}
+
+let category = "A";
+let subCategory = 1;
+
+switch (category) {
+    case "A":
+        switch (subCategory) {
+            case 1:
+        }
+}
+
+[Analysis]:
+The combined code is mostly correct and maintains the structure of the original text. The LLM's output correctly adds a `case 1:` inside the nested `switch` statement, which improves the completeness of the original text. However, the code is still incomplete as it lacks the corresponding logic or action for `case 1:`. Despite this, the addition of `case 1:` is a step towards completing the code, so it improves the completeness of the original text.
+
+[Score]:
+8
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_13_35.997Z____bb5f3a6d-1c5e-4345-b783-b86f3f40c1aa.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+ty<|current_cursor_position|>
+
+function getArea()
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+type Shape = Square | Circle;
+
+function getArea()
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type Shape = Square | Circle;
+
+function getArea()
+
+[Analysis]:
+The combined code is mostly correct and improves the completeness of the original text. The original text was incomplete at the cursor position, where the user was likely defining a type or interface. The LLM correctly inferred that the user was defining a union type `Shape` that combines `Square` and `Circle`. This addition is correct and aligns with the context of the code. However, the `getArea` function remains incomplete, which is not ideal, but the LLM's output does improve the completeness of the original text by adding the `Shape` type. Therefore, the score is high for correctness and improving completeness.
+
+[Score]:
+9
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_14_34.677Z____78693d8a-a38e-4279-87ef-0b2228cef27f.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type Shape = Square | Circle;
+
+function getArea(shape: Shape) {
+    switch (shape.kind) {
+        case "square":
+            return shape.size * shape.size;
+        case "circle":
+            return Math.PI * shape.radius ** 2;
+    }
+}
+
+let category = "A";
+let subCategory = 1;
+
+switch (category) {
+    case "A":
+        switch (subCategory) {
+            case 1:
+                console.log("A1");
+                break;
+            case 2:
+                console.log("A2");
+                break;
+        }
+        break;
+    case "B":
+        switch (subCategory) {
+            case 1:
+                console.log("B1");
+                break;
+            case 2:
+                console.log("B2");
+                break;
+        }
+        break;
+}<|current_cursor_position|>
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+        break;
+}
+
+let x = 1;
+
+switch (x) {
+    case 1:
+        
+}
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type Shape = Square | Circle;
+
+function getArea(shape: Shape) {
+    switch (shape.kind) {
+        case "square":
+            return shape.size * shape.size;
+        case "circle":
+            return Math.PI * shape.radius ** 2;
+    }
+}
+
+let category = "A";
+let subCategory = 1;
+
+switch (category) {
+    case "A":
+        switch (subCategory) {
+            case 1:
+                console.log("A1");
+                break;
+            case 2:
+                console.log("A2");
+                break;
+        }
+        break;
+    case "B":
+        switch (subCategory) {
+            case 1:
+                console.log("B1");
+                break;
+            case 2:
+                console.log("B2");
+                break;
+        }
+        break;
+}
+
+let x = 1;
+
+switch (x) {
+    case 1:
+        
+}
+
+[Analysis]:
+The combined code is mostly correct, but there are a few issues:
+1. The `switch` statement for `dir` is missing a `case` for `Direction.Right`.
+2. The `switch` statement for `x` is incomplete and does not have any cases or logic defined.
+3. The `switch` statement in the `getArea` function has a typo (`shape.kind` is misspelled as `shape.kind`).
+
+Despite these issues, the LLM's output does add a new `switch` statement for `x`, which improves the completeness of the original text by introducing a new concept. However, the new `switch` statement is incomplete, which limits its usefulness.
+
+[Score]:
+6
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_13_54.493Z____2a52493b-9b44-4be4-8a26-90ef154963cb.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type Shape = Square | Circle;
+
+function getArea(shape: Shape) {
+    switch (shape.kind) {
+        case "square":
+            return shape.size * shape.size;
+        case "circle":
+            return Math.PI * shape.radius ** 2;
+    }
+}
+
+let category = "A<|current_cursor_position|>"
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+let category = "A";
+
+switch (category) {
+    case "A":
+        console.log("A");
+        break;
+}
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type Shape = Square | Circle;
+
+function getArea(shape: Shape) {
+    switch (shape.kind) {
+        case "square":
+            return shape.size * shape.size;
+        case "circle":
+            return Math.PI * shape.radius ** 2;
+    }
+}
+
+let category = "A";
+
+switch (category) {
+    case "A":
+        console.log("A");
+        break;
+}
+
+[Analysis]:
+The combined code is correct and complete. The model output correctly added a switch statement for the `category` variable, which was missing in the original text. This improves the completeness of the original text by providing a logical continuation for the `category` variable. The code is syntactically correct and follows TypeScript conventions.
+
+[Score]:
+10
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_14_26.790Z____55ba71fe-c89c-4191-8e23-af373b1922c9.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type Shape = Square | Circle;
+
+function getArea(shape: Shape) {
+    switch (shape.kind) {
+        case "square":
+            return shape.size * shape.size;
+        case "circle":
+            return Math.PI * shape.radius ** 2;
+    }
+}
+
+let category = "A";
+let subCategory = 1;
+
+switch (category) {
+    case "A":
+        switch (subCategory) {
+            case 1:
+                console.log("A1");
+                break;
+            case 2:
+                console.log("A2");
+                break;
+        }
+        break;
+<|current_cursor_position|>
+}
+-------------------------------[               firstChunkValue               ]--------------------------------
+        break;
+    case "B":
+}
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type Shape = Square | Circle;
+
+function getArea(shape: Shape) {
+    switch (shape.kind) {
+        case "square":
+            return shape.size * shape.size;
+        case "circle":
+            return Math.PI * shape.radius ** 2;
+    }
+}
+
+let category = "A";
+let subCategory = 1;
+
+switch (category) {
+    case "A":
+        switch (subCategory) {
+            case 1:
+                console.log("A1");
+                break;
+            case 2:
+                console.log("A2");
+                break;
+        }
+        break;
+    case "B":
+}
+
+
+[Analysis]:
+The combined code is mostly correct and maintains the structure of the original text. The LLM output added a `case "B":` to the outer switch statement, which improves the completeness of the original text. However, the `case "B":` is incomplete as it lacks a corresponding block of code. Despite this, the addition of `case "B":` is a step towards improving the completeness of the code, as it suggests that the switch statement is intended to handle more cases than just "A". The rest of the code is syntactically correct and follows TypeScript conventions.
+
+[Score]:
+8
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_13_59.351Z____9c47a942-0253-42ba-9f40-d0f7cf3e5c78.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type Shape = Square | Circle;
+
+function getArea(shape: Shape) {
+    switch (shape.kind) {
+        case "square":
+            return shape.size * shape.size;
+        case "circle":
+            return Math.PI * shape.radius ** 2;
+    }
+}
+
+let category = "A";
+let sub<|current_cursor_position|>
+-------------------------------[               firstChunkValue               ]--------------------------------
+let category = "A";
+let subcategory = "B";
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type Shape = Square | Circle;
+
+function getArea(shape: Shape) {
+    switch (shape.kind) {
+        case "square":
+            return shape.size * shape.size;
+        case "circle":
+            return Math.PI * shape.radius ** 2;
+    }
+}
+
+let category = "A";
+let subcategory = "B";
+
+[Analysis]:
+The combined code is correct and complete. The model output successfully completed the original text by adding the missing `subcategory` variable declaration. The code is syntactically correct and maintains the intended functionality. The model output improved the completeness of the original text by resolving the incomplete variable declaration.
+
+[Score]:
+10
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_14_30.792Z____5feababf-56eb-4f5c-9bfa-93715b5c3e87.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type Shape = Square | Circle;
+
+function getArea(shape: Shape) {
+    switch (shape.kind) {
+        case "square":
+            return shape.size * shape.size;
+        case "circle":
+            return Math.PI * shape.radius ** 2;
+    }
+}
+
+let category = "A";
+let subCategory = 1;
+
+switch (category) {
+    case "A":
+        switch (subCategory) {
+            case 1:
+                console.log("A1");
+                break;
+            case 2:
+                console.log("A2");
+                break;
+        }
+        break;
+    case "B":
+        switch (subCategory) {
+            case 1:
+                console.log("B1");
+                break;
+        }<|current_cursor_position|>
+}
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+            case 1:
+                console.log("B1");
+                break;
+            case 2:
+                console.log("B2");
+                break;
+        }
+        break;
+}
+
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type Shape = Square | Circle;
+
+function getArea(shape: Shape) {
+    switch (shape.kind) {
+        case "square":
+            return shape.size * shape.size;
+        case "circle":
+            return Math.PI * shape.radius ** 2;
+    }
+}
+
+let category = "A";
+let subCategory = 1;
+
+switch (category) {
+    case "A":
+        switch (subCategory) {
+            case 1:
+                console.log("A1");
+                break;
+            case 2:
+                console.log("A2");
+                break;
+        }
+        break;
+    case "B":
+        switch (subCategory) {
+            case 1:
+                console.log("B1");
+                break;
+            case 2:
+                console.log("B2");
+                break;
+        }
+        break;
+}
+
+
+[Analysis]:
+The combined code is correct and complete. The LLM output added the missing `case 2` for the `B` category, which was not present in the original text. This improves the completeness of the original code, as it now handles all possible cases for the `B` category. The code is syntactically correct and follows TypeScript conventions.
+
+[Score]:
+10
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_14_15.665Z____1607623c-093b-4c2f-ab93-2888a1a21512.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type Shape = Square | Circle;
+
+function getArea(shape: Shape) {
+    switch (shape.kind) {
+        case "square":
+            return shape.size * shape.size;
+        case "circle":
+            return Math.PI * shape.radius ** 2;
+    }
+}
+
+let category = "A";
+let subCategory = 1;
+
+switch (category) {
+    case "A":
+        switch (subCategory) {
+            <|current_cursor_position|>            
+        }
+}
+-------------------------------[               firstChunkValue               ]--------------------------------
+switch (category) {
+    case "A":
+        switch (subCategory) {
+            case 1:
+        }
+}
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type Shape = Square | Circle;
+
+function getArea(shape: Shape) {
+    switch (shape.kind) {
+        case "square":
+            return shape.size * shape.size;
+        case "circle":
+            return Math.PI * shape.radius ** 2;
+    }
+}
+
+let category = "A";
+let subCategory = 1;
+
+switch (category) {
+    case "A":
+        switch (subCategory) {
+            case 1:
+        }
+}
+
+[Analysis]:
+The combined code is mostly correct and maintains the structure of the original text. The LLM's output correctly adds the `case 1:` to the nested `switch` statement, which improves the completeness of the original text. However, the code is still incomplete as it lacks the corresponding action or logic for `case 1:`. Despite this, the addition of `case 1:` is a step towards completing the code, so it improves the completeness of the original text.
+
+[Score]:
+8
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_13_49.273Z____924d1f56-1d8a-4aa1-bba5-24fc7475ec10.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type Shape = Square | Circle;
+
+function getArea(shape: Shape) {
+    switch (shape.kind) {
+        case "square":
+            return shape.size * shape.size;
+        case "circle":
+            return Math.PI * shape.radius ** 2;
+    }
+}
+
+let cate<|current_cursor_position|>
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+let category: "animal" | "plant" = "animal";
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type Shape = Square | Circle;
+
+function getArea(shape: Shape) {
+    switch (shape.kind) {
+        case "square":
+            return shape.size * shape.size;
+        case "circle":
+            return Math.PI * shape.radius ** 2;
+    }
+}
+
+let category: "animal" | "plant" = "animal";
+
+[Analysis]:
+The combined code is mostly correct and complete. The original text was incomplete at the cursor position, and the LLM output provided a valid completion by defining a `category` variable with a union type of "animal" and "plant". This improves the completeness of the original text. However, there is a minor typo in the `getArea` function where `shape.kind` is misspelled as `shape.kind`. Despite this, the overall structure and logic of the code are sound.
+
+[Score]:
+9
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_13_36.487Z____978b5c5f-f8d7-4e25-9c4c-670db2899738.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type <|current_cursor_position|>
+
+function getArea()
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+type Shape = Square | Circle;
+
+function getArea()
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type Shape = Square | Circle;
+
+function getArea()
+
+[Analysis]:
+The combined code is mostly correct and improves the completeness of the original text. The original text was incomplete at the cursor position, and the model output correctly added the `Shape` type, which is a union of `Square` and `Circle`. This addition is necessary for the `getArea` function to work with different shapes. However, the `getArea` function itself is still incomplete, so the code is not fully functional yet. Despite this, the model's output significantly improves the completeness of the original text by adding the missing `Shape` type.
+
+[Score]:
+9
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_14_05.456Z____64bb4220-27ba-438d-8cab-c1f3d48b9daa.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type Shape = Square | Circle;
+
+function getArea(shape: Shape) {
+    switch (shape.kind) {
+        case "square":
+            return shape.size * shape.size;
+        case "circle":
+            return Math.PI * shape.radius ** 2;
+    }
+}
+
+let category = "A";
+let subCategory = 1;
+<|current_cursor_position|>
+-------------------------------[               firstChunkValue               ]--------------------------------
+let subCategory = 1;
+
+switch (category) {
+    case "A":
+        switch (subCategory) {
+            
+        }
+}
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type Shape = Square | Circle;
+
+function getArea(shape: Shape) {
+    switch (shape.kind) {
+        case "square":
+            return shape.size * shape.size;
+        case "circle":
+            return Math.PI * shape.radius ** 2;
+    }
+}
+
+let category = "A";
+let subCategory = 1;
+
+switch (category) {
+    case "A":
+        switch (subCategory) {
+            
+        }
+}
+
+[Analysis]:
+The combined code is mostly correct and maintains the structure of the original text. The LLM-generated code adds a nested switch statement for `category` and `subCategory`, which improves the completeness of the original text. However, the nested switch statement is incomplete as it lacks cases for `subCategory`. Despite this, the addition of the nested switch structure is a step towards improving the completeness of the code.
+
+[Score]:
+8
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_14_10.925Z____70e68b3e-1c1d-49b8-85c9-dd069795644f.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type Shape = Square | Circle;
+
+function getArea(shape: Shape) {
+    switch (shape.kind) {
+        case "square":
+            return shape.size * shape.size;
+        case "circle":
+            return Math.PI * shape.radius ** 2;
+    }
+}
+
+let category = "A";
+let subCategory = 1;
+
+switch (category) {
+    case "A":
+        switch (subCategory) {
+  <|current_cursor_position|>            
+        }
+}
+-------------------------------[               firstChunkValue               ]--------------------------------
+switch (category) {
+    case "A":
+        switch (subCategory) {
+            case 1:
+        }
+}
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type Shape = Square | Circle;
+
+function getArea(shape: Shape) {
+    switch (shape.kind) {
+        case "square":
+            return shape.size * shape.size;
+        case "circle":
+            return Math.PI * shape.radius ** 2;
+    }
+}
+
+let category = "A";
+let subCategory = 1;
+
+switch (category) {
+    case "A":
+        switch (subCategory) {
+            case 1:
+        }
+}
+
+[Analysis]:
+The combined code is mostly correct and maintains the structure of the original text. The model output correctly adds a `case 1:` inside the nested `switch` statement for `subCategory`, which improves the completeness of the original text. However, the code is still incomplete as it lacks the corresponding action for `case 1:`. Despite this, the model's output is a step in the right direction and improves the completeness of the original text.
+
+[Score]:
+8
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_13_52.924Z____7a4e545f-2713-4812-8f2d-08bf1dab9d51.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type Shape = Square | Circle;
+
+function getArea(shape: Shape) {
+    switch (shape.kind) {
+        case "square":
+            return shape.size * shape.size;
+        case "circle":
+            return Math.PI * shape.radius ** 2;
+    }
+}
+
+let category <|current_cursor_position|>
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+let category = "animal";
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type Shape = Square | Circle;
+
+function getArea(shape: Shape) {
+    switch (shape.kind) {
+        case "square":
+            return shape.size * shape.size;
+        case "circle":
+            return Math.PI * shape.radius ** 2;
+    }
+}
+
+let category = "animal";
+
+[Analysis]:
+The combined code is correct and complete. The model output added the line `let category = "animal";` which was missing in the original text. This addition improves the completeness of the original text by providing a definition for the `category` variable. The rest of the code remains unchanged and is syntactically correct.
+
+[Score]:
+10
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_11_37.412Z____cbdaed0a-7228-4c7f-829e-18b7362a67ba.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+typ<|current_cursor_position|>
+-------------------------------[               firstChunkValue               ]--------------------------------
+type Switch1 = {
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Switch1 = {
+
+[Analysis]:
+The combined code is incomplete as it only provides the start of a TypeScript type definition. However, it does improve the completeness of the original text, which was just 'typ'. The model output correctly starts a type definition, which is a meaningful improvement over the original text.
+
+[Score]:
+8
+==============================================================================================================
+
+-------------------------------[                 previewPath                 ]--------------------------------
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/switch_1/byUUID/2025-03-19T08_14_18.446Z____c6636638-213c-40ec-8030-da3e2f0f5f7d.preview
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type Shape = Square | Circle;
+
+function getArea(shape: Shape) {
+    switch (shape.kind) {
+        case "square":
+            return shape.size * shape.size;
+        case "circle":
+            return Math.PI * shape.radius ** 2;
+    }
+}
+
+let category = "A";
+let subCategory = 1;
+
+switch (category) {
+    case "A":
+        switch (subCategory) {
+          <|current_cursor_position|>
+
+        }
+}
+-------------------------------[               firstChunkValue               ]--------------------------------
+    case "A":
+        switch (subCategory) {
+            case 1:
+
+        }
+-------------------------------[               evaluationOutput              ]--------------------------------
+[Combined Code]:
+type Color = "red" | "blue" | "green";
+
+let color: Color = "red";
+
+switch (color) {
+    case "red":
+        console.log("red");
+        break;
+    case "blue":
+        console.log("blue");
+        break;
+    case "green":
+        console.log("green");
+        break;
+}
+
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+let dir: Direction = Direction.Up;
+
+switch (dir) {
+    case Direction.Up:
+        console.log("up");
+        break;
+    case Direction.Down:
+        console.log("down");
+        break;
+    case Direction.Left:
+        console.log("left");
+        break;
+
+}
+
+interface Square {
+    kind: "square";
+    size: number;
+}
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type Shape = Square | Circle;
+
+function getArea(shape: Shape) {
+    switch (shape.kind) {
+        case "square":
+            return shape.size * shape.size;
+        case "circle":
+            return Math.PI * shape.radius ** 2;
+    }
+}
+
+let category = "A";
+let subCategory = 1;
+
+switch (category) {
+    case "A":
+        switch (subCategory) {
+            case 1:
+
+        }
+}
+
+[Analysis]:
+The combined code is mostly correct and maintains the structure of the original text. The LLM output added a `case 1:` inside the nested switch statement, which improves the completeness of the original text. However, the code is still incomplete as it lacks the corresponding logic or action for `case 1:`. Despite this, the addition of `case 1:` is a step towards completing the code, so it improves the completeness of the original text.
+
+[Score]:
+8
+==============================================================================================================
+
+Pass rate:
+43/51 = 0.8431372549019608

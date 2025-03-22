@@ -1,0 +1,768 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:30.680Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/dynamicProp.ets",
+          "diffHistory": [
+            "1+|const user = {}\n",
+            "2-|  \n3-|}\n2+|  name: \"Alice\",\n3+|  age: 30,\n4+|  address: {\n5+|},\n6+|};\n7+|\n8+|\n",
+            "5-|},\n5+|    city: \"New York\",\n6+|    country: \"USA\",\n7+|  },\n10+|const greeting = `Hello, ${user.name}!`;\n",
+            "1-|\n1+|interface User {\n2+|  name: string;\n3+|  age: number;\n4+|  address: {\n5+|    city: string;\n6+|    country: string;\n7+|  };\n8+|}\n",
+            "1-|\n1+|interface Address {\n",
+            "5-|  address: {\n5+|  address: Address;\n",
+            "2+|  city: string;\n3+|  country: string;\n4+|}\n",
+            "9-|    city: string;\n10-|    country: string;\n11-|  };\n13-|const user = {\n10+|const user: User = {\n",
+            "21+|function getFullName(user: { firstName: string; lastName: string }) {\n22+|  return `${user.firstName} ${user.lastName}`;\n23+|}\n25+|const fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n26+|\n27+|\n28+|\n",
+            "25-|const fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n",
+            "25+|const currentUser = {\n26+|  firstName: \"John\",\n27+|  lastName: \"Doe\",\n28+|};\n30+|const fullName = getFullName(currentUser);\n",
+            "30-|const fullName = getFullName(currentUser);\n30+|const fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n",
+            "21-|function getFullName(user: { firstName: string; lastName: string }) {\n21+|interface FullName {\n22+|function getFullName(user: { firstName: string; lastName: string }\n23+|function getFullName(user: FullName) {\n",
+            "22-|function getFullName(user: { firstName: string; lastName: string }\n22+|function getFullName(user: { firstName: string; lastName: string ;\n23+|}\n",
+            "22-|function getFullName(user: { firstName: string;\n22+|  firstName: string;\n",
+            "29-|const currentUser = {\n29+|const currentUser: FullName = {\n",
+            "36+|const price = 100;\n37+|const discount = 0.1;\n38+|const priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n40+|const isAdmin = true;\n41+|const roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n43+|const products = [\n44+|  { name: \"Product 1\", price: 100 },\n45+|  { name: \"Product 2\", price: 200 },\n46+|  { name: \"Product 3\", price: 300 },\n47+|];\n49+|const productInfo = `Current product: ${products[0].name}`;\n50+|\n51+|type Status = \"active\" | \"inactive\";\n52+|let status: Status = \"active\";\n53+|const statusText = `Status: ${status}`;\n54+|\n55+|const company = {\n56+|  name: \"Acme Inc.\",\n57+|  address: {\n58+|    street: \"123 Main St\",\n59+|    city: \"Anytown\",\n60+|  },\n61+|};\n62+|\n",
+            "57-|  address: {\n58-|    street: \"123 Main St\",\n59-|    city: \"Anytown\",\n60-|  },\n57+|  ceo: {\n58+|    name: \"John Doe\",\n59+|    contact: {\n",
+            "60+|      email: \"john.doe@acme.com\",\n61+|      phone: \"+1234567890\",\n62+|    },\n63+|  },\n66+|const companyInfo = `Company: ${company.name}, CEO: ${company.ceo.name}`;\n",
+            "55+|interface Company {\n56+|  name: string;\n57+|  ceo: {\n58+|    name: string;\n59+|    contact: {\n60+|      email: string;\n61+|      phone: string;\n",
+            "62-|const company = {\n62+|      \n63+|const company: Company = {\n",
+            "62-|      \n62+|      };\n63+|}\n",
+            "62-|      };\n62+|    };\n63+|  };\n",
+            "55+|interface CEO {\n56+|  name: string;\n57+|  contact: {\n58+|    email: string;\n59+|    phone: string;\n60+|  };\n61+|}\n",
+            "70-|  };\n70+|  }CEO;\n",
+            "64-|  ceo: {\n65-|    name: string;\n66-|    contact: {\n67-|      email: string;\n68-|      phone: string;\n69-|    };\n70-|  }CEO;\n64+|  ceo: CEO;\n",
+            "55+|interface Contact {\n",
+            "58-|  contact: {\n59-|    email: string;\n58+|  contact: Contact;\n",
+            "56+|  email: string;\n57+|  phone: string;\n58+|}\n",
+            "62-|    phone: string;\n63-|  };\n",
+            "43-|const products = [\n43+|interface Product {\n44+|  name: string;\n45+|  price: number;\n46+|}\n47+|const products: Product[] = [\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/utils/builtInAPI.ets",
+          "diffHistory": [
+            "1+|import router from \"@ohos.router\";\n2+|\n3+|@Entry\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/builtInAPI.ets",
+        "contents": "import router from \"@ohos.router\";\n\n@Entry\n",
+        "cursorPosition": {
+          "line": 3,
+          "column": 0
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 30,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/utils/dynamicProp.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            33
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 33,
+              "endLineNumberInclusive": 67
+            }
+          ],
+          "lastViewedAt": 1742476421483
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1742476470728,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.5,
+      "timeAtRequestSend": 1742476470728
+    },
+    "generateUuid": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:30.730Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "@Entry\n@",
+      "rangeToReplace": {
+        "startLineNumber": 3,
+        "endLineNumberInclusive": 4
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:31.085Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:31.088Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Component"
+    },
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:31.112Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:31.121Z"
+  },
+  {
+    "firstChunkValue": "@Entry\n@Component",
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:31.122Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "@Entry\n@Component"
+    },
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:31.125Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "bd49afd3-cd91-4aff-bb67-a9b8af1e1023",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 30,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 30,
+      "monotonicallyIncreasingSuggestionId": 382,
+      "range": {
+        "startLineNumber": 3,
+        "startColumn": 1,
+        "endLineNumberInclusive": 4,
+        "endColumn": 1
+      },
+      "replaceText": "@Entry\n@Component",
+      "originalText": "@Entry\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 3,
+        "startColumn": 1,
+        "endLineNumberInclusive": 4,
+        "endColumn": 1
+      },
+      "diffText": "@Entry\n@Component",
+      "fullOriginalText": "@Entry\n",
+      "suggestionTriggerTime": 1742476470649.5999,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+      "selection": {
+        "startLineNumber": 3,
+        "startColumn": 1,
+        "endLineNumberInclusive": 4,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 383,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:31.125Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "struct"
+    },
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:31.132Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Main"
+    },
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:31.142Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:31.154Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n "
+    },
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:31.163Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " @"
+    },
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:31.174Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "State"
+    },
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:31.185Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " message"
+    },
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:31.196Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:31.207Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " string"
+    },
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:31.218Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:31.230Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \""
+    },
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:31.241Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Hello"
+    },
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:31.251Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " World"
+    },
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:31.263Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\";"
+    },
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:31.276Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:31.289Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:31.300Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " build"
+    },
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:31.314Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "()"
+    },
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:31.328Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:31.336Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:31.350Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "   "
+    },
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:31.362Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Row"
+    },
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:31.373Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "()"
+    },
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:31.386Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {\n"
+    },
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:31.399Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:31.400Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:31.401Z"
+  },
+  {
+    "fullText": "@Entry\n@Component\nstruct Main {\n  @State message: string = \"Hello World\";\n\n  build() {\n    Row() {\n",
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:31.402Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "@Entry\n@Component"
+    },
+    "fullText": "@Entry\n@Component\nstruct Main {\n  @State message: string = \"Hello World\";\n\n  build() {\n    Row() {\n",
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:31.402Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "504c0cb7-4d73-41e8-b6aa-4fcdd222a3c9",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 30,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 31,
+      "monotonicallyIncreasingSuggestionId": 383,
+      "range": {
+        "startLineNumber": 3,
+        "startColumn": 1,
+        "endLineNumberInclusive": 4,
+        "endColumn": 10
+      },
+      "replaceText": "@Entry\n@Component\nstruct Main {\n  @State message: string = \"Hello World\";\n\n  build() {\n    Row() {\n",
+      "originalText": "@Entry\n@Componen",
+      "startingSuggestionRange": {
+        "startLineNumber": 3,
+        "startColumn": 1,
+        "endLineNumberInclusive": 4,
+        "endColumn": 10
+      },
+      "diffText": "@Entry\n@Component\nstruct Main {\n  @State message: string = \"Hello World\";\n\n  build() {\n    Row() {\n",
+      "fullOriginalText": "@Entry\n@Componen",
+      "suggestionTriggerTime": 1742476470649.5999,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+      "selection": {
+        "startLineNumber": 3,
+        "startColumn": 1,
+        "endLineNumberInclusive": 4,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "0634307d-48ab-49f6-a2aa-c55a3a7cdd32",
+      "undoRedoGroup": {
+        "id": 384,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:31.403Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "0634307d-48ab-49f6-a2aa-c55a3a7cdd32",
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:31.407Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "@Entry\n@Component"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "0634307d-48ab-49f6-a2aa-c55a3a7cdd32",
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:31.408Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "0634307d-48ab-49f6-a2aa-c55a3a7cdd32",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-20T13:14:31.409Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "bd49afd3-cd91-4aff-bb67-a9b8af1e1023",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 30,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 30,
+      "monotonicallyIncreasingSuggestionId": 382,
+      "range": {
+        "startLineNumber": 3,
+        "startColumn": 1,
+        "endLineNumberInclusive": 4,
+        "endColumn": 1
+      },
+      "replaceText": "@Entry\n@Component",
+      "originalText": "@Entry\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 3,
+        "startColumn": 1,
+        "endLineNumberInclusive": 4,
+        "endColumn": 1
+      },
+      "diffText": "@Entry\n@Component",
+      "fullOriginalText": "@Entry\n",
+      "suggestionTriggerTime": 1742476470649.5999,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+      "selection": {
+        "startLineNumber": 3,
+        "startColumn": 1,
+        "endLineNumberInclusive": 4,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 383,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "d;78",
+      "onAcceptDisplayId": "504c0cb7-4d73-41e8-b6aa-4fcdd222a3c9"
+    },
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:31.802Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "bd49afd3-cd91-4aff-bb67-a9b8af1e1023",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 30,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 30,
+      "monotonicallyIncreasingSuggestionId": 382,
+      "range": {
+        "startLineNumber": 3,
+        "startColumn": 1,
+        "endLineNumberInclusive": 4,
+        "endColumn": 1
+      },
+      "replaceText": "@Entry\n@Component",
+      "originalText": "@Entry\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 3,
+        "startColumn": 1,
+        "endLineNumberInclusive": 4,
+        "endColumn": 1
+      },
+      "diffText": "@Entry\n@Component",
+      "fullOriginalText": "@Entry\n",
+      "suggestionTriggerTime": 1742476470649.5999,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+      "selection": {
+        "startLineNumber": 3,
+        "startColumn": 1,
+        "endLineNumberInclusive": 4,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 383,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "d;78",
+      "onAcceptDisplayId": "504c0cb7-4d73-41e8-b6aa-4fcdd222a3c9"
+    },
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:31.811Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "504c0cb7-4d73-41e8-b6aa-4fcdd222a3c9",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 30,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 31,
+      "monotonicallyIncreasingSuggestionId": 383,
+      "range": {
+        "startLineNumber": 3,
+        "startColumn": 1,
+        "endLineNumberInclusive": 4,
+        "endColumn": 10
+      },
+      "replaceText": "@Entry\n@Component\nstruct Main {\n  @State message: string = \"Hello World\";\n\n  build() {\n    Row() {\n",
+      "originalText": "@Entry\n@Componen",
+      "startingSuggestionRange": {
+        "startLineNumber": 3,
+        "startColumn": 1,
+        "endLineNumberInclusive": 4,
+        "endColumn": 10
+      },
+      "diffText": "@Entry\n@Component\nstruct Main {\n  @State message: string = \"Hello World\";\n\n  build() {\n    Row() {\n",
+      "fullOriginalText": "@Entry\n@Componen",
+      "suggestionTriggerTime": 1742476470649.5999,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+      "selection": {
+        "startLineNumber": 3,
+        "startColumn": 1,
+        "endLineNumberInclusive": 4,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "0634307d-48ab-49f6-a2aa-c55a3a7cdd32",
+      "undoRedoGroup": {
+        "id": 384,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:31.811Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "504c0cb7-4d73-41e8-b6aa-4fcdd222a3c9",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 30,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 31,
+      "monotonicallyIncreasingSuggestionId": 383,
+      "range": {
+        "startLineNumber": 3,
+        "startColumn": 1,
+        "endLineNumberInclusive": 4,
+        "endColumn": 10
+      },
+      "replaceText": "@Entry\n@Component\nstruct Main {\n  @State message: string = \"Hello World\";\n\n  build() {\n    Row() {\n",
+      "originalText": "@Entry\n@Componen",
+      "startingSuggestionRange": {
+        "startLineNumber": 3,
+        "startColumn": 1,
+        "endLineNumberInclusive": 4,
+        "endColumn": 10
+      },
+      "diffText": "@Entry\n@Component\nstruct Main {\n  @State message: string = \"Hello World\";\n\n  build() {\n    Row() {\n",
+      "fullOriginalText": "@Entry\n@Componen",
+      "suggestionTriggerTime": 1742476470649.5999,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+      "selection": {
+        "startLineNumber": 3,
+        "startColumn": 1,
+        "endLineNumberInclusive": 4,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "0634307d-48ab-49f6-a2aa-c55a3a7cdd32",
+      "undoRedoGroup": {
+        "id": 384,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "d;84"
+    },
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:33.455Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "504c0cb7-4d73-41e8-b6aa-4fcdd222a3c9",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 30,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 31,
+      "monotonicallyIncreasingSuggestionId": 383,
+      "range": {
+        "startLineNumber": 3,
+        "startColumn": 1,
+        "endLineNumberInclusive": 4,
+        "endColumn": 10
+      },
+      "replaceText": "@Entry\n@Component\nstruct Main {\n  @State message: string = \"Hello World\";\n\n  build() {\n    Row() {\n",
+      "originalText": "@Entry\n@Componen",
+      "startingSuggestionRange": {
+        "startLineNumber": 3,
+        "startColumn": 1,
+        "endLineNumberInclusive": 4,
+        "endColumn": 10
+      },
+      "diffText": "@Entry\n@Component\nstruct Main {\n  @State message: string = \"Hello World\";\n\n  build() {\n    Row() {\n",
+      "fullOriginalText": "@Entry\n@Componen",
+      "suggestionTriggerTime": 1742476470649.5999,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+      "selection": {
+        "startLineNumber": 3,
+        "startColumn": 1,
+        "endLineNumberInclusive": 4,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "0634307d-48ab-49f6-a2aa-c55a3a7cdd32",
+      "undoRedoGroup": {
+        "id": 384,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "d;84"
+    },
+    "generationUUID": "ecaaeb30-b143-410a-a9f5-8f3dc437ef66",
+    "timestamp": "2025-03-20T13:14:33.471Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "0634307d-48ab-49f6-a2aa-c55a3a7cdd32",
+    "fusedCursorPrediction": null,
+    "oldText": "@Entry\n@Componen",
+    "newText": "@Entry\n@Component\nstruct Main {\n  @State message: string = \"Hello World\";\n\n  build() {\n    Row() {\n",
+    "timestamp": "2025-03-20T13:14:33.472Z"
+  }
+]

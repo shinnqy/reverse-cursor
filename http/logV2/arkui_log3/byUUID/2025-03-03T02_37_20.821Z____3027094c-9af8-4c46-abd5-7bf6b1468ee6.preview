@@ -1,0 +1,52 @@
+{"line":13,"column":13}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+import Banner from '../components/Banner.ets';
+
+@Preview
+@Component
+struct AboutMe {
+  @State message: string = 'About Me';
+
+  build() {
+    Column() {
+      Text(this.message)
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+
+      Banner([ToFill])
+    }
+  }
+}
+-------------------------------[               firstChunkValue               ]--------------------------------
+        .fontWeight(FontWeight.Bold)
+
+      Banner({ title: 'About Me' })
+    }
+  }
+}
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+import Banner from '../components/Banner.ets';
+
+@Preview
+@Component
+struct AboutMe {
+  @State message: string = 'About Me';
+
+  build() {
+    Column() {
+      Text(this.message)
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+
+      Banner({ title: 'About Me' })
+    }
+  }
+}
+-------------------------------[                   fullText                  ]--------------------------------
+        .fontWeight(FontWeight.Bold)
+
+      Banner({ title: 'About Me' })
+    }
+  }
+}

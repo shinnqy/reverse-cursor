@@ -1,0 +1,64 @@
+{"line":5,"column":6}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case light.RED:
+      console.log('RED');
+      break;
+      [ToFill]
+  }
+} 
+-------------------------------[               firstChunkValue               ]--------------------------------
+  switch (light) {
+    case light.RED:
+      console.log('RED');
+      break;
+    case light.YELLOW:
+  }
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case light.RED:
+      console.log('RED');
+      break;
+    case light.YELLOW:
+  }
+} 
+-------------------------------[                   fullText                  ]--------------------------------
+  switch (light) {
+    case light.RED:
+      console.log('RED');
+      break;
+    case light.YELLOW:
+      console.log('YELLOW');
+      break;
+    default:
+      console.log('Invalid light');
+  }
+-------------------------------[         replacedContentsWithFullText         ]--------------------------------
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case light.RED:
+      console.log('RED');
+      break;
+    case light.YELLOW:
+      console.log('YELLOW');
+      break;
+    default:
+      console.log('Invalid light');
+  }
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "src/components/test.ts",
+  "lineNumberOneIndexed": 7,
+  "text": "}",
+  "shouldRetriggerCpp": true
+}
+--------------------------------[        displayedFusedCursorPrediction       ]---------------------------------
+{
+  "relativePath": "src/components/test.ts",
+  "lineNumberOneIndexed": 7,
+  "text": "}",
+  "shouldRetriggerCpp": true
+}

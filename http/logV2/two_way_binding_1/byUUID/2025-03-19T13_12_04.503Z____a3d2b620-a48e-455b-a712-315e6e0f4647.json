@@ -1,0 +1,117 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "a3d2b620-a48e-455b-a712-315e6e0f4647",
+    "timestamp": "2025-03-19T13:12:04.503Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/twoWayBinding.ets",
+          "diffHistory": [
+            "16+|  @Link t\n",
+            "16-|  @Link t\n16+|  @Link target: number = 0;\n",
+            "22-|          //\n22+|          this.target++;\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/twoWayBinding.ets",
+        "contents": "@Entry\n@Component\nstruct ParentComponent {\n  @State parentCount: number = 0;\n\n  build() {\n    Column() {\n      Text(this.parentCount.toString())\n      LinkChildComponent()\n    }\n  }\n}\n\n@Component\nstruct LinkChildComponent {\n  @Link target: number = 0;\n\n  build() {\n    Column() {\n      Button()\n        .onClick(() => {\n          this.target++;\n        })\n    }\n  }\n}\n\ninterface User {\n  name: string;\n  age: number;\n}\n\n@Component\nstruct ComplexBindingExample {\n  @State user: User = { name: 'John', age: 30 };\n\n  build() {\n    Column() {\n      Text(this.user.name)\n    }\n  }\n}\n\n@Component\nstruct UserEditor {\n\n  build() {\n    Column() {\n      Text(\"\")\n      Text(\"\")\n    }\n  }\n}\n\n\n",
+        "cursorPosition": {
+          "line": 17,
+          "column": 9
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 13,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1742389924550,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 55.39990234375,
+      "timeAtRequestSend": 1742389924550
+    },
+    "generateUuid": "a3d2b620-a48e-455b-a712-315e6e0f4647",
+    "timestamp": "2025-03-19T13:12:04.552Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n  build() {\n    Column() {\n      Button()\n        .onClick(() => {",
+      "rangeToReplace": {
+        "startLineNumber": 17,
+        "endLineNumberInclusive": 21
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "a3d2b620-a48e-455b-a712-315e6e0f4647",
+    "timestamp": "2025-03-19T13:12:04.907Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "a3d2b620-a48e-455b-a712-315e6e0f4647",
+    "timestamp": "2025-03-19T13:12:04.907Z"
+  },
+  {
+    "firstChunkValue": "\n  build() {\n    Column() {\n      Button()\n        .onClick(() => {",
+    "generationUUID": "a3d2b620-a48e-455b-a712-315e6e0f4647",
+    "timestamp": "2025-03-19T13:12:04.930Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": false
+    },
+    "generationUUID": "a3d2b620-a48e-455b-a712-315e6e0f4647",
+    "timestamp": "2025-03-19T13:12:04.931Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "a3d2b620-a48e-455b-a712-315e6e0f4647",
+    "timestamp": "2025-03-19T13:12:04.932Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "a3d2b620-a48e-455b-a712-315e6e0f4647",
+    "timestamp": "2025-03-19T13:12:04.986Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "4b664cef-fce8-49cb-ba07-843ccf31b472",
+    "generationUUID": "a3d2b620-a48e-455b-a712-315e6e0f4647",
+    "timestamp": "2025-03-19T13:12:05.006Z"
+  }
+]

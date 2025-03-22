@@ -1,0 +1,66 @@
+{"line":0,"column":23}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+import Banner from '../[ToFill]'
+
+@Preview
+@Component
+struct AboutMe {
+  @State message: string = 'About Me';
+
+  build() {
+    Column() {
+      Text(this.message)
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+
+      Banner()
+    }
+  }
+}
+-------------------------------[               firstChunkValue               ]--------------------------------
+import Banner from '../components/Banner.ets';
+
+@Preview
+@Component
+struct AboutMe {
+  @State message: string = 'About Me';
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+import Banner from '../components/Banner.ets';
+
+@Preview
+@Component
+struct AboutMe {
+  @State message: string = 'About Me';
+
+  build() {
+    Column() {
+      Text(this.message)
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+
+      Banner()
+    }
+  }
+}
+-------------------------------[                   fullText                  ]--------------------------------
+import Banner from '../components/Banner.ets';
+
+@Preview
+@Component
+struct AboutMe {
+  @State message: string = 'About Me';
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/pages/AboutMe.ets",
+  "lineNumberOneIndexed": 2,
+  "text": "",
+  "shouldRetriggerCpp": false
+}
+--------------------------------[        displayedFusedCursorPrediction       ]---------------------------------
+{
+  "relativePath": "entry/src/main/ets/pages/AboutMe.ets",
+  "lineNumberOneIndexed": 2,
+  "text": "",
+  "shouldRetriggerCpp": false
+}

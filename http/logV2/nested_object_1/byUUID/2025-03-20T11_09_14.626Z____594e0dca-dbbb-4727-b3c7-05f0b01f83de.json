@@ -1,0 +1,380 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "594e0dca-dbbb-4727-b3c7-05f0b01f83de",
+    "timestamp": "2025-03-20T11:09:14.626Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/nestedObj.ets",
+          "diffHistory": [
+            "55+|type Shape =\n56+|    | { type: \"circle\"; radius: number }\n57+|    | { type: \"rectangle\"; width: number; height: number }\n58+|    | { type: \"triangle\"; side1: number; side2: number; side3: number };\n60+|function getArea(shape: Shape) {\n61+|    switch (shape.type) {\n62+|        case \"circle\":\n",
+            "56-|    | { type: \"circle\"; radius: number  }\n56+|    | { type: \"circle\"; radius: number; color: string }\n",
+            "57-|    | { type: \"rectangle\"; width: number; height: number }\n58-|    | { type: \"triangle\"; side1: number; side2: number; side3: number };\n57+|    | { type: \"rectangle\"; width: number; height: number; color: string }\n58+|    | { type: \"triangle\"; side1: number; side2: number; side3: number; color: string };\n",
+            "63-|\n63+|            return Math.PI * shape.radius * shape.radius;\n64+|        case \"rectangle\":\n65+|            return shape.width * shape.height;\n66+|        case \"triangle\":\n67+|            return shape.side1 * shape.side2 * shape.side3;\n68+|    }\n69+|}\n",
+            "55+|type Circle = { type: \"circle\"; radius: number; color: string };\n",
+            "58-|    | { type: \"rectangle\"; width: number; height: number; color: string }\n58+|    | { type: \"rectangle\"; width: number; height: number; color: string };\n59+|type Shape = Circle | Rectangle | Triangle;\n60+|\n61+|function getArea(shape: Shape) {\n",
+            "57-|    | { type: \"circle\"; radius: number; color: string }\n58-|    | { type: \"rectangle\"; width: number; height: number; color: string };\n57+|    | { type: \"circle\"; radius: number; color: string };\n58+|type Triangle = { type: \"triangle\"; side1: number; side2: number; side3: number; color: string };\n",
+            "56-|type Shape =\n57-|    | { type: \"circle\"; radius: number; color: string };\n56+|type Rectangle = { type: \"rectangle\"; width: number; height: number; color: string };\n",
+            "61-|    | { type: \"triangle\"; side1: number; side2: number; side3: number; color: string };\n62-|\n63-|function getArea(shape: Shape) {\n",
+            "55-|type Circle = { type: \"circle\"; radius: number; color: string };\n55+|inter Circle = { type: \"circle\"; radius: number; color: string };\n",
+            "56-|type Rectangle = { type: \"rectangle\"; width: number; height: number; color: string };\n57-|type Triangle = { type: \"triangle\"; side1: number; side2: number; side3: number; color: string };\n56+|type Rectangle { type: \"rectangle\"; width: number; height: number; color: string };\n57+|interface Triangle { type: \"triangle\"; side1: number; side2: number; side3: number; color: string };\n",
+            "55-|inter Circle = { type: \"circle\"; radius: number; color: string };\n56-|type Rectangle { type: \"rectangle\"; width: number; height: number; color: string };\n55+|inter Circle { type: \"circle\"; radius: number; color: string };\n56+|interface Rectangle { type: \"rectangle\"; width: number; height: number; color: string };\n",
+            "55-|inter Circle { type: \"circle\"; radius: number; color: string };\n55+|interface Circle { type: \"circle\"; radius: number; color: string };\n",
+            "60+|let shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n61+|\n64-|        case \"rectangle\":\n65-|            return shape.width * shape.height;\n66-|        case \"triangle\":\n67-|            return shape.side1 * shape.side2 * shape.side3;\n68-|    }\n69-|}\n",
+            "62-|function getArea(shape: Shape) {\n63-|    switch (shape.type) {\n64-|        case \"circle\":\n65-|            return Math.PI * shape.radius * shape.radius;\n",
+            "25+|user.address.city = \"New York\";\n26+|user.address.zip = \"10001\";\n27+|user.address.state = \"NY\";\n28+|user.address.country = \"USA\";\n29+|\n",
+            "60+|products[0].details.name = \"Product 1 Updated\";\n61+|products[1].details.name = \"Product 2 Updated\";\n62+|\n",
+            "62+|products[0].details.price = 150;\n63+|products[1].details.price = 250;\n",
+            "64+|p\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/nestedObj.ets",
+        "contents": "interface Address {\n    street: string;\n    city: string;\n    state: string;\n    zip: string;\n}\n\ninterface User {\n    name: string;\n    age: number;\n    address: Address;\n}\n\nlet user: User = {\n    name: \"John\",\n    age: 30,\n    address: {\n        street: \"123 Main St\",\n        city: \"Anytown\",\n        state: \"CA\",\n        zip: \"12345\",\n    },\n};\n\nuser.address.city = \"New York\";\nuser.address.zip = \"10001\";\nuser.address.state = \"NY\";\nuser.address.country = \"USA\";\n\ninterface ProductDetails {\n    name: string;\n    price: number;\n    category: string;\n}\n\ninterface Product {\n    id: number;\n    details: ProductDetails;\n}\n\nlet products: Product[] = [\n    {\n        id: 1,\n        details: {\n            name: \"Product 1\",\n            price: 100,\n            category: \"Category 1\",\n        },\n    },\n    {\n        id: 2,\n        details: {\n            name: \"Product 2\",\n            price: 200,\n            category: \"Category 2\",\n        },\n    },\n];\n\nproducts[0].details.name = \"Product 1 Updated\";\nproducts[1].details.name = \"Product 2 Updated\";\nproducts[0].details.price = 150;\nproducts[1].details.price = 250;\np\n\ninterface Circle { type: \"circle\"; radius: number; color: string };\ninterface Rectangle { type: \"rectangle\"; width: number; height: number; color: string };\ninterface Triangle { type: \"triangle\"; side1: number; side2: number; side3: number; color: string };\ntype Shape = Circle | Rectangle | Triangle;\n\nlet shape: Shape = { type: \"circle\", radius: 10, color: \"red\" };\n\n",
+        "cursorPosition": {
+          "line": 63,
+          "column": 1
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 113,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742468954672,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 54.39990234375,
+      "timeAtRequestSend": 1742468954672
+    },
+    "generateUuid": "594e0dca-dbbb-4727-b3c7-05f0b01f83de",
+    "timestamp": "2025-03-20T11:09:14.674Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "594e0dca-dbbb-4727-b3c7-05f0b01f83de",
+    "timestamp": "2025-03-20T11:09:15.017Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "products[0].details.price = 150;\nproducts[1].details.price = 250;\nproducts",
+      "rangeToReplace": {
+        "startLineNumber": 62,
+        "endLineNumberInclusive": 65
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "594e0dca-dbbb-4727-b3c7-05f0b01f83de",
+    "timestamp": "2025-03-20T11:09:15.018Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "[0"
+    },
+    "generationUUID": "594e0dca-dbbb-4727-b3c7-05f0b01f83de",
+    "timestamp": "2025-03-20T11:09:15.036Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "]."
+    },
+    "generationUUID": "594e0dca-dbbb-4727-b3c7-05f0b01f83de",
+    "timestamp": "2025-03-20T11:09:15.046Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "details.category"
+    },
+    "generationUUID": "594e0dca-dbbb-4727-b3c7-05f0b01f83de",
+    "timestamp": "2025-03-20T11:09:15.054Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "594e0dca-dbbb-4727-b3c7-05f0b01f83de",
+    "timestamp": "2025-03-20T11:09:15.064Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " \""
+    },
+    "generationUUID": "594e0dca-dbbb-4727-b3c7-05f0b01f83de",
+    "timestamp": "2025-03-20T11:09:15.075Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Category"
+    },
+    "generationUUID": "594e0dca-dbbb-4727-b3c7-05f0b01f83de",
+    "timestamp": "2025-03-20T11:09:15.086Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " 3"
+    },
+    "generationUUID": "594e0dca-dbbb-4727-b3c7-05f0b01f83de",
+    "timestamp": "2025-03-20T11:09:15.095Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\";"
+    },
+    "generationUUID": "594e0dca-dbbb-4727-b3c7-05f0b01f83de",
+    "timestamp": "2025-03-20T11:09:15.105Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "594e0dca-dbbb-4727-b3c7-05f0b01f83de",
+    "timestamp": "2025-03-20T11:09:15.114Z"
+  },
+  {
+    "firstChunkValue": "products[0].details.price = 150;\nproducts[1].details.price = 250;\nproducts[0].details.category = \"Category 3\";\n",
+    "generationUUID": "594e0dca-dbbb-4727-b3c7-05f0b01f83de",
+    "timestamp": "2025-03-20T11:09:15.118Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "products[0].details.price = 150;\nproducts[1].details.price = 250;\nproducts[0].details.category = \"Category 3\";\n"
+    },
+    "generationUUID": "594e0dca-dbbb-4727-b3c7-05f0b01f83de",
+    "timestamp": "2025-03-20T11:09:15.120Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "products"
+    },
+    "generationUUID": "594e0dca-dbbb-4727-b3c7-05f0b01f83de",
+    "timestamp": "2025-03-20T11:09:15.124Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "[1].details.category"
+    },
+    "generationUUID": "594e0dca-dbbb-4727-b3c7-05f0b01f83de",
+    "timestamp": "2025-03-20T11:09:15.136Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " = \"Category "
+    },
+    "generationUUID": "594e0dca-dbbb-4727-b3c7-05f0b01f83de",
+    "timestamp": "2025-03-20T11:09:15.143Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "4"
+    },
+    "generationUUID": "594e0dca-dbbb-4727-b3c7-05f0b01f83de",
+    "timestamp": "2025-03-20T11:09:15.153Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\";"
+    },
+    "generationUUID": "594e0dca-dbbb-4727-b3c7-05f0b01f83de",
+    "timestamp": "2025-03-20T11:09:15.164Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "594e0dca-dbbb-4727-b3c7-05f0b01f83de",
+    "timestamp": "2025-03-20T11:09:15.173Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "594e0dca-dbbb-4727-b3c7-05f0b01f83de",
+    "timestamp": "2025-03-20T11:09:15.195Z"
+  },
+  {
+    "fullText": "products[0].details.price = 150;\nproducts[1].details.price = 250;\nproducts[0].details.category = \"Category 3\";\nproducts[1].details.category = \"Category 4\";\n",
+    "generationUUID": "594e0dca-dbbb-4727-b3c7-05f0b01f83de",
+    "timestamp": "2025-03-20T11:09:15.201Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "products[0].details.price = 150;\nproducts[1].details.price = 250;\nproducts[0].details.category = \"Category 3\";\n"
+    },
+    "fullText": "products[0].details.price = 150;\nproducts[1].details.price = 250;\nproducts[0].details.category = \"Category 3\";\nproducts[1].details.category = \"Category 4\";\n",
+    "generationUUID": "594e0dca-dbbb-4727-b3c7-05f0b01f83de",
+    "timestamp": "2025-03-20T11:09:15.202Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && currentSuggestion uniqueId is different && need to create newSuggestion according fullText",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "06fc02b0-b6f6-45b0-b0cb-233de77343fa",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/nestedObj.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/nestedObj.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/nestedObj.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 113,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 113,
+      "monotonicallyIncreasingSuggestionId": 71,
+      "range": {
+        "startLineNumber": 62,
+        "startColumn": 1,
+        "endLineNumberInclusive": 65,
+        "endColumn": 1
+      },
+      "replaceText": "products[0].details.price = 150;\nproducts[1].details.price = 250;\nproducts[0].details.category = \"Category 3\";\nproducts[1].details.category = \"Category 4\";\n",
+      "originalText": "products[0].details.price = 150;\nproducts[1].details.price = 250;\np\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 62,
+        "startColumn": 1,
+        "endLineNumberInclusive": 65,
+        "endColumn": 1
+      },
+      "diffText": "products[0].details.price = 150;\nproducts[1].details.price = 250;\nproducts[0].details.category = \"Category 3\";\nproducts[1].details.category = \"Category 4\";\n",
+      "fullOriginalText": "products[0].details.price = 150;\nproducts[1].details.price = 250;\np\n",
+      "suggestionTriggerTime": 1742468954620.1,
+      "greens": [],
+      "source": "typing",
+      "requestId": "594e0dca-dbbb-4727-b3c7-05f0b01f83de",
+      "selection": {
+        "startLineNumber": 62,
+        "startColumn": 1,
+        "endLineNumberInclusive": 65,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "80285655-2bb4-4927-8e05-fda04097582d",
+      "undoRedoGroup": {
+        "id": 71,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "594e0dca-dbbb-4727-b3c7-05f0b01f83de",
+    "timestamp": "2025-03-20T11:09:15.202Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "594e0dca-dbbb-4727-b3c7-05f0b01f83de",
+    "timestamp": "2025-03-20T11:09:15.231Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "80285655-2bb4-4927-8e05-fda04097582d",
+    "generationUUID": "594e0dca-dbbb-4727-b3c7-05f0b01f83de",
+    "timestamp": "2025-03-20T11:09:15.243Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "products[0].details.price = 150;\nproducts[1].details.price = 250;\nproducts[0].details.category = \"Category 3\";\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "80285655-2bb4-4927-8e05-fda04097582d",
+    "generationUUID": "594e0dca-dbbb-4727-b3c7-05f0b01f83de",
+    "timestamp": "2025-03-20T11:09:15.244Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "80285655-2bb4-4927-8e05-fda04097582d",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-20T11:09:15.244Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "c7e6f279-3fe6-4c44-b1b9-e29a9b43745f",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/nestedObj.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/nestedObj.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/nestedObj.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 112,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 114,
+      "monotonicallyIncreasingSuggestionId": 69,
+      "range": {
+        "startLineNumber": 62,
+        "startColumn": 1,
+        "endLineNumberInclusive": 65,
+        "endColumn": 1
+      },
+      "replaceText": "products[0].details.price = 150;\nproducts[1].details.price = 250;\nproducts[0].details.category = \"Category 3\";\nproducts[1].details.category = \"Category 4\";\n",
+      "originalText": "products[0].details.price = 150;\nproducts[1].details.price = 250;\nproducts[0].details.category = \"Category 3\";\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 62,
+        "startColumn": 1,
+        "endLineNumberInclusive": 65,
+        "endColumn": 1
+      },
+      "diffText": "products[0].details.price = 150;\nproducts[1].details.price = 250;\nproducts[0].details.category = \"Category 3\";\nproducts[1].details.category = \"Category 4\";\n",
+      "fullOriginalText": "products[0].details.price = 150;\nproducts[1].details.price = 250;\nproducts[0].details.category = \"Category 3\";\n",
+      "suggestionTriggerTime": 1742468954261.2,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "80ac19e6-0e73-4e80-8775-da308126d4e1",
+      "selection": {
+        "startLineNumber": 62,
+        "startColumn": 1,
+        "endLineNumberInclusive": 65,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "63d94b6d-75ce-4924-b814-55849f97bd1f",
+      "undoRedoGroup": {
+        "id": 69,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "594e0dca-dbbb-4727-b3c7-05f0b01f83de",
+    "timestamp": "2025-03-20T11:09:15.284Z"
+  }
+]

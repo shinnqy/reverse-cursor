@@ -1,0 +1,363 @@
+[
+  {
+    "intent": "cursor_prediction",
+    "generationUUID": "7a2c0b1f-ec51-461b-9e98-3d7c95f614ab",
+    "timestamp": "2025-03-20T12:59:09.537Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/dynamicProp.ets",
+          "diffHistory": [
+            "1+|const user = {}\n",
+            "2-|  \n3-|}\n2+|  name: \"Alice\",\n3+|  age: 30,\n4+|  address: {\n5+|},\n6+|};\n7+|\n8+|\n",
+            "5-|},\n5+|    city: \"New York\",\n6+|    country: \"USA\",\n7+|  },\n10+|const greeting = `Hello, ${user.name}!`;\n",
+            "1-|\n1+|interface User {\n2+|  name: string;\n3+|  age: number;\n4+|  address: {\n5+|    city: string;\n6+|    country: string;\n7+|  };\n8+|}\n",
+            "1-|\n1+|interface Address {\n",
+            "5-|  address: {\n5+|  address: Address;\n",
+            "2+|  city: string;\n3+|  country: string;\n4+|}\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/dynamicProp.ets",
+        "contents": "interface Address {\n  city: string;\n  country: string;\n}\ninterface User {\n  name: string;\n  age: number;\n  address: Address;\n    city: string;\n    country: string;\n  };\n}\nconst user = {\n  name: \"Alice\",\n  age: 30,\n  address: {\n    city: \"New York\",\n    country: \"USA\",\n  },\n};\n\nconst greeting = `Hello, ${user.name}!`;\n\n\n",
+        "cursorPosition": {
+          "line": 8,
+          "column": 0
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 102,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "cursor_prediction"
+      },
+      "clientTime": 1742475549548,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 12.39990234375,
+      "timeAtRequestSend": 1742475549549
+    },
+    "generateUuid": "7a2c0b1f-ec51-461b-9e98-3d7c95f614ab",
+    "timestamp": "2025-03-20T12:59:09.550Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "  address: Address;\n}",
+      "rangeToReplace": {
+        "startLineNumber": 8,
+        "endLineNumberInclusive": 12
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "7a2c0b1f-ec51-461b-9e98-3d7c95f614ab",
+    "timestamp": "2025-03-20T12:59:10.021Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "7a2c0b1f-ec51-461b-9e98-3d7c95f614ab",
+    "timestamp": "2025-03-20T12:59:10.025Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "7a2c0b1f-ec51-461b-9e98-3d7c95f614ab",
+    "timestamp": "2025-03-20T12:59:10.048Z"
+  },
+  {
+    "firstChunkValue": "  address: Address;\n}",
+    "generationUUID": "7a2c0b1f-ec51-461b-9e98-3d7c95f614ab",
+    "timestamp": "2025-03-20T12:59:10.051Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "  address: Address;\n}"
+    },
+    "generationUUID": "7a2c0b1f-ec51-461b-9e98-3d7c95f614ab",
+    "timestamp": "2025-03-20T12:59:10.055Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "e3a34a5d-6629-4dc8-a924-1fbfd61375ad",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 102,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 102,
+      "monotonicallyIncreasingSuggestionId": 56,
+      "range": {
+        "startLineNumber": 8,
+        "startColumn": 1,
+        "endLineNumberInclusive": 12,
+        "endColumn": 2
+      },
+      "replaceText": "  address: Address;\n}",
+      "originalText": "  address: Address;\n    city: string;\n    country: string;\n  };\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 8,
+        "startColumn": 1,
+        "endLineNumberInclusive": 12,
+        "endColumn": 2
+      },
+      "diffText": "  address: Address;\n}",
+      "fullOriginalText": "  address: Address;\n    city: string;\n    country: string;\n  };\n}",
+      "suggestionTriggerTime": 1742475549537,
+      "greens": [],
+      "source": "cursor_prediction",
+      "requestId": "7a2c0b1f-ec51-461b-9e98-3d7c95f614ab",
+      "selection": {
+        "startLineNumber": 8,
+        "startColumn": 1,
+        "endLineNumberInclusive": 12,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "4cfaf723-3d51-43d4-8eb9-c95e3dd3479d",
+      "undoRedoGroup": {
+        "id": 56,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "7a2c0b1f-ec51-461b-9e98-3d7c95f614ab",
+    "timestamp": "2025-03-20T12:59:10.057Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "7a2c0b1f-ec51-461b-9e98-3d7c95f614ab",
+    "timestamp": "2025-03-20T12:59:10.080Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "4cfaf723-3d51-43d4-8eb9-c95e3dd3479d",
+    "generationUUID": "7a2c0b1f-ec51-461b-9e98-3d7c95f614ab",
+    "timestamp": "2025-03-20T12:59:10.093Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "  address: Address;\n}"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "4cfaf723-3d51-43d4-8eb9-c95e3dd3479d",
+    "generationUUID": "7a2c0b1f-ec51-461b-9e98-3d7c95f614ab",
+    "timestamp": "2025-03-20T12:59:10.093Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "4cfaf723-3d51-43d4-8eb9-c95e3dd3479d",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-20T12:59:10.093Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "e3a34a5d-6629-4dc8-a924-1fbfd61375ad",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 102,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 102,
+      "monotonicallyIncreasingSuggestionId": 56,
+      "range": {
+        "startLineNumber": 8,
+        "startColumn": 1,
+        "endLineNumberInclusive": 12,
+        "endColumn": 2
+      },
+      "replaceText": "  address: Address;\n}",
+      "originalText": "  address: Address;\n    city: string;\n    country: string;\n  };\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 8,
+        "startColumn": 1,
+        "endLineNumberInclusive": 12,
+        "endColumn": 2
+      },
+      "diffText": "  address: Address;\n}",
+      "fullOriginalText": "  address: Address;\n    city: string;\n    country: string;\n  };\n}",
+      "suggestionTriggerTime": 1742475549537,
+      "greens": [],
+      "source": "cursor_prediction",
+      "requestId": "7a2c0b1f-ec51-461b-9e98-3d7c95f614ab",
+      "selection": {
+        "startLineNumber": 8,
+        "startColumn": 1,
+        "endLineNumberInclusive": 12,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "4cfaf723-3d51-43d4-8eb9-c95e3dd3479d",
+      "undoRedoGroup": {
+        "id": 56,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;402"
+    },
+    "generationUUID": "7a2c0b1f-ec51-461b-9e98-3d7c95f614ab",
+    "timestamp": "2025-03-20T12:59:10.427Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "e3a34a5d-6629-4dc8-a924-1fbfd61375ad",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 102,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 102,
+      "monotonicallyIncreasingSuggestionId": 56,
+      "range": {
+        "startLineNumber": 8,
+        "startColumn": 1,
+        "endLineNumberInclusive": 12,
+        "endColumn": 2
+      },
+      "replaceText": "  address: Address;\n}",
+      "originalText": "  address: Address;\n    city: string;\n    country: string;\n  };\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 8,
+        "startColumn": 1,
+        "endLineNumberInclusive": 12,
+        "endColumn": 2
+      },
+      "diffText": "  address: Address;\n}",
+      "fullOriginalText": "  address: Address;\n    city: string;\n    country: string;\n  };\n}",
+      "suggestionTriggerTime": 1742475549537,
+      "greens": [],
+      "source": "cursor_prediction",
+      "requestId": "7a2c0b1f-ec51-461b-9e98-3d7c95f614ab",
+      "selection": {
+        "startLineNumber": 8,
+        "startColumn": 1,
+        "endLineNumberInclusive": 12,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "4cfaf723-3d51-43d4-8eb9-c95e3dd3479d",
+      "undoRedoGroup": {
+        "id": 56,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;402"
+    },
+    "generationUUID": "7a2c0b1f-ec51-461b-9e98-3d7c95f614ab",
+    "timestamp": "2025-03-20T12:59:10.994Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "e3a34a5d-6629-4dc8-a924-1fbfd61375ad",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 102,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 102,
+      "monotonicallyIncreasingSuggestionId": 56,
+      "range": {
+        "startLineNumber": 8,
+        "startColumn": 1,
+        "endLineNumberInclusive": 12,
+        "endColumn": 2
+      },
+      "replaceText": "  address: Address;\n}",
+      "originalText": "  address: Address;\n    city: string;\n    country: string;\n  };\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 8,
+        "startColumn": 1,
+        "endLineNumberInclusive": 12,
+        "endColumn": 2
+      },
+      "diffText": "  address: Address;\n}",
+      "fullOriginalText": "  address: Address;\n    city: string;\n    country: string;\n  };\n}",
+      "suggestionTriggerTime": 1742475549537,
+      "greens": [],
+      "source": "cursor_prediction",
+      "requestId": "7a2c0b1f-ec51-461b-9e98-3d7c95f614ab",
+      "selection": {
+        "startLineNumber": 8,
+        "startColumn": 1,
+        "endLineNumberInclusive": 12,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "4cfaf723-3d51-43d4-8eb9-c95e3dd3479d",
+      "undoRedoGroup": {
+        "id": 56,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;402"
+    },
+    "generationUUID": "7a2c0b1f-ec51-461b-9e98-3d7c95f614ab",
+    "timestamp": "2025-03-20T12:59:11.006Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "4cfaf723-3d51-43d4-8eb9-c95e3dd3479d",
+    "fusedCursorPrediction": null,
+    "oldText": "  address: Address;\n    city: string;\n    country: string;\n  };\n}",
+    "newText": "  address: Address;\n}",
+    "timestamp": "2025-03-20T12:59:11.007Z"
+  }
+]

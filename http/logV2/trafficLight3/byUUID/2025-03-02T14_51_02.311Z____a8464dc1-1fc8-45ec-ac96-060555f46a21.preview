@@ -1,0 +1,38 @@
+{"line":0,"column":0}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+[ToFill]function changeLight(light: TrafficLight) {
+  switch (light) {
+    case light.RED:
+      console.log('RED');
+      break;
+    case light.YELLOW:
+      console.log('YELLOW');
+      break;
+    default:
+      console.log('Invalid light');
+      break;
+  }
+}
+-------------------------------[               firstChunkValue               ]--------------------------------
+shared/types/traffic-light.ts
+
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case light.RED:
+      console.log('RED');
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+shared/types/traffic-light.ts
+
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case light.RED:
+    case light.YELLOW:
+      console.log('YELLOW');
+      break;
+    default:
+      console.log('Invalid light');
+      break;
+  }
+}
+      console.log('RED');

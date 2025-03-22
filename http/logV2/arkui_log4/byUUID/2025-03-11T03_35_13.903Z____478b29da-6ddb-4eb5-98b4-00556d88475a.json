@@ -1,0 +1,459 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "478b29da-6ddb-4eb5-98b4-00556d88475a",
+    "timestamp": "2025-03-11T03:35:13.903Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/pages/Index.ets",
+          "diffHistory": [
+            "17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Button clicked';\n22+|      })\n",
+            "18-|        Text('Click me')\n18+|        Text('Abou')\n",
+            "18-|        Text('Abou')\n18+|        Text('About Me')\n",
+            "21-|        this.message = 'Button clicked';\n",
+            "21-|        \n21+|        router.push({\n22+|          uri: 'pages/About'\n23+|        })\n",
+            "21-|        router.push({\n22-|          uri: 'pages/About'\n21+|        router.pushU({\n22+|          url: 'pages/AboutMe'\n",
+            "21-|        router.pushU({\n21+|        router.pushUrl({\n",
+            "1+|import router from '@ohos.router';\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/pages/AboutMe.ets",
+          "diffHistory": [
+            "1-|\n1+|@Pr\n2+|@Entry\n3+|@Component\n4+|struct AboutMe {\n5+|  build() {\n6+|    Text('About Me')\n7+|  }\n8+|}\n",
+            "1-|@Pr\n1+|@Preview  \n",
+            "1-|@Preview  \n2-|@Entry\n1+|@Preview\n",
+            "6-|    \n7-|    \n6+|\n7+|    Banner()\n",
+            "1+|import Banner from '../components/Banner.ets'\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/components/Banner.ets",
+          "diffHistory": [
+            "4+|  @Prop title: string = 'Banner'\n",
+            "7-|    Text(\"Banner\")\n7+|    Text(this.title)\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/resources/base/profile/main_pages.json",
+          "diffHistory": [
+            "3-|    \"pages/Index\"\n3+|    \"pages/Index\",\n4+|    \"pages/AboutMe\"\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/pages/AboutMe.ets",
+        "contents": "import Banner from '../components/Banner.ets'\n\n@Preview\n@Component\nstruct AboutMe {\n  build() {\n    Text('About Me')\n\n    Banner()\n  }\n}",
+        "cursorPosition": {
+          "line": 8,
+          "column": 11
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 49,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/pages/Index.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 31
+            }
+          ],
+          "lastViewedAt": 1741664039674
+        },
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/components/Banner.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 9
+            }
+          ],
+          "lastViewedAt": 1741664102534
+        },
+        {
+          "relativeWorkspacePath": "entry/src/main/resources/base/profile/main_pages.json",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 7
+            }
+          ],
+          "lastViewedAt": 1741664111209
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1741664113951,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.39990234375,
+      "timeAtRequestSend": 1741664113951
+    },
+    "generateUuid": "478b29da-6ddb-4eb5-98b4-00556d88475a",
+    "timestamp": "2025-03-11T03:35:13.953Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "478b29da-6ddb-4eb5-98b4-00556d88475a",
+    "timestamp": "2025-03-11T03:35:14.313Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "  build() {\n    Text('About Me')\n\n    Banner({",
+      "rangeToReplace": {
+        "startLineNumber": 6,
+        "endLineNumberInclusive": 10
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "478b29da-6ddb-4eb5-98b4-00556d88475a",
+    "timestamp": "2025-03-11T03:35:14.313Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n     "
+    },
+    "generationUUID": "478b29da-6ddb-4eb5-98b4-00556d88475a",
+    "timestamp": "2025-03-11T03:35:14.335Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " title"
+    },
+    "generationUUID": "478b29da-6ddb-4eb5-98b4-00556d88475a",
+    "timestamp": "2025-03-11T03:35:14.340Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": '"
+    },
+    "generationUUID": "478b29da-6ddb-4eb5-98b4-00556d88475a",
+    "timestamp": "2025-03-11T03:35:14.352Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "About"
+    },
+    "generationUUID": "478b29da-6ddb-4eb5-98b4-00556d88475a",
+    "timestamp": "2025-03-11T03:35:14.369Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Me"
+    },
+    "generationUUID": "478b29da-6ddb-4eb5-98b4-00556d88475a",
+    "timestamp": "2025-03-11T03:35:14.375Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "'"
+    },
+    "generationUUID": "478b29da-6ddb-4eb5-98b4-00556d88475a",
+    "timestamp": "2025-03-11T03:35:14.387Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n   "
+    },
+    "generationUUID": "478b29da-6ddb-4eb5-98b4-00556d88475a",
+    "timestamp": "2025-03-11T03:35:14.394Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " })"
+    },
+    "generationUUID": "478b29da-6ddb-4eb5-98b4-00556d88475a",
+    "timestamp": "2025-03-11T03:35:14.413Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n "
+    },
+    "generationUUID": "478b29da-6ddb-4eb5-98b4-00556d88475a",
+    "timestamp": "2025-03-11T03:35:14.413Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " }"
+    },
+    "generationUUID": "478b29da-6ddb-4eb5-98b4-00556d88475a",
+    "timestamp": "2025-03-11T03:35:14.431Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "478b29da-6ddb-4eb5-98b4-00556d88475a",
+    "timestamp": "2025-03-11T03:35:14.431Z"
+  },
+  {
+    "firstChunkValue": "  build() {\n    Text('About Me')\n\n    Banner({\n      title: 'About Me'\n    })\n  }",
+    "generationUUID": "478b29da-6ddb-4eb5-98b4-00556d88475a",
+    "timestamp": "2025-03-11T03:35:14.432Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "  build() {\n    Text('About Me')\n\n    Banner({\n      title: 'About Me'\n    })\n  }"
+    },
+    "generationUUID": "478b29da-6ddb-4eb5-98b4-00556d88475a",
+    "timestamp": "2025-03-11T03:35:14.433Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "cb3a3a5d-b791-4ae3-b2d5-6ab05cca8152",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 49,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 49,
+      "monotonicallyIncreasingSuggestionId": 52,
+      "range": {
+        "startLineNumber": 6,
+        "startColumn": 1,
+        "endLineNumberInclusive": 10,
+        "endColumn": 4
+      },
+      "replaceText": "  build() {\n    Text('About Me')\n\n    Banner({\n      title: 'About Me'\n    })\n  }",
+      "originalText": "  build() {\n    Text('About Me')\n\n    Banner()\n  }",
+      "startingSuggestionRange": {
+        "startLineNumber": 6,
+        "startColumn": 1,
+        "endLineNumberInclusive": 10,
+        "endColumn": 4
+      },
+      "diffText": "  build() {\n    Text('About Me')\n\n    Banner({\n      title: 'About Me'\n    })\n  }",
+      "fullOriginalText": "  build() {\n    Text('About Me')\n\n    Banner()\n  }",
+      "suggestionTriggerTime": 1741664113899.4,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "478b29da-6ddb-4eb5-98b4-00556d88475a",
+      "selection": {
+        "startLineNumber": 6,
+        "startColumn": 1,
+        "endLineNumberInclusive": 10,
+        "endColumn": 4
+      },
+      "fusedCursorPredictionId": "61ecca39-2868-47ea-9df2-ea668cc072e8",
+      "undoRedoGroup": {
+        "id": 53,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "478b29da-6ddb-4eb5-98b4-00556d88475a",
+    "timestamp": "2025-03-11T03:35:14.434Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "478b29da-6ddb-4eb5-98b4-00556d88475a",
+    "timestamp": "2025-03-11T03:35:14.560Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "61ecca39-2868-47ea-9df2-ea668cc072e8",
+    "generationUUID": "478b29da-6ddb-4eb5-98b4-00556d88475a",
+    "timestamp": "2025-03-11T03:35:14.565Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "  build() {\n    Text('About Me')\n\n    Banner({\n      title: 'About Me'\n    })\n  }"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "61ecca39-2868-47ea-9df2-ea668cc072e8",
+    "generationUUID": "478b29da-6ddb-4eb5-98b4-00556d88475a",
+    "timestamp": "2025-03-11T03:35:14.566Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "61ecca39-2868-47ea-9df2-ea668cc072e8",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-11T03:35:14.566Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "cb3a3a5d-b791-4ae3-b2d5-6ab05cca8152",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 49,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 49,
+      "monotonicallyIncreasingSuggestionId": 52,
+      "range": {
+        "startLineNumber": 6,
+        "startColumn": 1,
+        "endLineNumberInclusive": 10,
+        "endColumn": 4
+      },
+      "replaceText": "  build() {\n    Text('About Me')\n\n    Banner({\n      title: 'About Me'\n    })\n  }",
+      "originalText": "  build() {\n    Text('About Me')\n\n    Banner()\n  }",
+      "startingSuggestionRange": {
+        "startLineNumber": 6,
+        "startColumn": 1,
+        "endLineNumberInclusive": 10,
+        "endColumn": 4
+      },
+      "diffText": "  build() {\n    Text('About Me')\n\n    Banner({\n      title: 'About Me'\n    })\n  }",
+      "fullOriginalText": "  build() {\n    Text('About Me')\n\n    Banner()\n  }",
+      "suggestionTriggerTime": 1741664113899.4,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "478b29da-6ddb-4eb5-98b4-00556d88475a",
+      "selection": {
+        "startLineNumber": 6,
+        "startColumn": 1,
+        "endLineNumberInclusive": 10,
+        "endColumn": 4
+      },
+      "fusedCursorPredictionId": "61ecca39-2868-47ea-9df2-ea668cc072e8",
+      "undoRedoGroup": {
+        "id": 53,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "d;186"
+    },
+    "generationUUID": "478b29da-6ddb-4eb5-98b4-00556d88475a",
+    "timestamp": "2025-03-11T03:35:15.174Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "cb3a3a5d-b791-4ae3-b2d5-6ab05cca8152",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 49,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 49,
+      "monotonicallyIncreasingSuggestionId": 52,
+      "range": {
+        "startLineNumber": 6,
+        "startColumn": 1,
+        "endLineNumberInclusive": 10,
+        "endColumn": 4
+      },
+      "replaceText": "  build() {\n    Text('About Me')\n\n    Banner({\n      title: 'About Me'\n    })\n  }",
+      "originalText": "  build() {\n    Text('About Me')\n\n    Banner()\n  }",
+      "startingSuggestionRange": {
+        "startLineNumber": 6,
+        "startColumn": 1,
+        "endLineNumberInclusive": 10,
+        "endColumn": 4
+      },
+      "diffText": "  build() {\n    Text('About Me')\n\n    Banner({\n      title: 'About Me'\n    })\n  }",
+      "fullOriginalText": "  build() {\n    Text('About Me')\n\n    Banner()\n  }",
+      "suggestionTriggerTime": 1741664113899.4,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "478b29da-6ddb-4eb5-98b4-00556d88475a",
+      "selection": {
+        "startLineNumber": 6,
+        "startColumn": 1,
+        "endLineNumberInclusive": 10,
+        "endColumn": 4
+      },
+      "fusedCursorPredictionId": "61ecca39-2868-47ea-9df2-ea668cc072e8",
+      "undoRedoGroup": {
+        "id": 53,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "d;186"
+    },
+    "generationUUID": "478b29da-6ddb-4eb5-98b4-00556d88475a",
+    "timestamp": "2025-03-11T03:35:15.187Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "61ecca39-2868-47ea-9df2-ea668cc072e8",
+    "fusedCursorPrediction": null,
+    "oldText": "  build() {\n    Text('About Me')\n\n    Banner()\n  }",
+    "newText": "  build() {\n    Text('About Me')\n\n    Banner({\n      title: 'About Me'\n    })\n  }",
+    "timestamp": "2025-03-11T03:35:15.188Z"
+  }
+]

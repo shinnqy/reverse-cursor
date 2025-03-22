@@ -1,0 +1,260 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "54faea0b-dd53-477e-ac44-46449b31e20b",
+    "timestamp": "2025-03-03T02:37:04.339Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/pages/Index.ets",
+          "diffHistory": [
+            "17-|\n17+|      Button() {\n",
+            "18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Hello World';\n22+|      })\n",
+            "18-|        Text('Click me')\n18+|        Text('Abount')\n",
+            "18-|        Text('Abount')\n18+|        Text('About Me')\n",
+            "21-|        this.message = 'Hello World';\n",
+            "21-|        \n21+|        router.push({\n",
+            "22+|          uri: 'pages/About'\n23+|        })\n",
+            "21-|        router.push({\n21+|        router.pushU({\n",
+            "21-|        router.pushU({\n22-|          uri: 'pages/About'\n21+|        router.pushUrl({\n22+|          url: 'pages/About'\n",
+            "22-|          url: 'pages/About'\n22+|          url: 'pages/AboutMe'\n",
+            "1+|import router from '@ohos.router';\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/pages/AboutMe.ets",
+          "diffHistory": [
+            "1+|@Preview\n",
+            "2+|@Entry\n3+|@Component\n4+|struct AboutMe {\n5+|  @State message: string = 'About Me';\n6+|  \n7+|}\n",
+            "2-|@Entry\n",
+            "5-|\n6-|}\n5+|  \n6+|  build() {\n7+|    Column() {\n8+|      Text(this.message)\n9+|        .fontSize(50)\n10+|        .fontWeight(FontWeight.Bold)\n11+|    }\n12+|  }\n13+|}\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/resources/base/profile/main_pages.json",
+          "diffHistory": [
+            "3-|    \"pages/Index\"\n3+|    \"pages/Index\",\n4+|    \"pages/AboutMe\"\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/pages/AboutMe.ets",
+          "diffHistory": [
+            "12-|        \n12+|      Banner()\n",
+            "1+|import Banner from '../c'\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/pages/AboutMe.ets",
+        "contents": "import Banner from '../c'\n\n@Preview\n@Component\nstruct AboutMe {\n  @State message: string = 'About Me';\n\n  build() {\n    Column() {\n      Text(this.message)\n        .fontSize(50)\n        .fontWeight(FontWeight.Bold)\n\n      Banner()\n    }\n  }\n}",
+        "cursorPosition": {
+          "line": 0,
+          "column": 24
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 53,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/pages/Index.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 31
+            }
+          ],
+          "lastViewedAt": 1740969350213
+        },
+        {
+          "relativeWorkspacePath": "entry/src/main/resources/base/profile/main_pages.json",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 7
+            }
+          ],
+          "lastViewedAt": 1740969401037
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1740969424382,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.800048828125,
+      "timeAtRequestSend": 1740969424382
+    },
+    "generateUuid": "54faea0b-dd53-477e-ac44-46449b31e20b",
+    "timestamp": "2025-03-03T02:37:04.384Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "54faea0b-dd53-477e-ac44-46449b31e20b",
+    "timestamp": "2025-03-03T02:37:04.790Z"
+  },
+  {
+    "firstChunkValue": "import Banner from '../components/Banner.ets';\n\n@Preview\n@Component\nstruct AboutMe {\n  @State message: string = 'About Me';",
+    "generationUUID": "54faea0b-dd53-477e-ac44-46449b31e20b",
+    "timestamp": "2025-03-03T02:37:04.898Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "import Banner from '../components/Banner.ets';\n\n@Preview\n@Component\nstruct AboutMe {\n  @State message: string = 'About Me';"
+    },
+    "generationUUID": "54faea0b-dd53-477e-ac44-46449b31e20b",
+    "timestamp": "2025-03-03T02:37:04.905Z"
+  },
+  {
+    "fullText": "import Banner from '../components/Banner.ets';\n\n@Preview\n@Component\nstruct AboutMe {\n  @State message: string = 'About Me';",
+    "generationUUID": "54faea0b-dd53-477e-ac44-46449b31e20b",
+    "timestamp": "2025-03-03T02:37:04.945Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "import Banner from '../components/Banner.ets';\n\n@Preview\n@Component\nstruct AboutMe {\n  @State message: string = 'About Me';"
+    },
+    "fullText": "import Banner from '../components/Banner.ets';\n\n@Preview\n@Component\nstruct AboutMe {\n  @State message: string = 'About Me';",
+    "generationUUID": "54faea0b-dd53-477e-ac44-46449b31e20b",
+    "timestamp": "2025-03-03T02:37:04.946Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && currentSuggestion uniqueId is different && need to create newSuggestion according fullText",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "5a8f6c01-f4fc-4ec5-93e8-7a53935c87ad",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 53,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 54,
+      "monotonicallyIncreasingSuggestionId": 62,
+      "range": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 6,
+        "endColumn": 39
+      },
+      "replaceText": "import Banner from '../components/Banner.ets';\n\n@Preview\n@Component\nstruct AboutMe {\n  @State message: string = 'About Me';",
+      "originalText": "import Banner from '../co'\n\n@Preview\n@Component\nstruct AboutMe {\n  @State message: string = 'About Me';",
+      "startingSuggestionRange": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 6,
+        "endColumn": 39
+      },
+      "diffText": "import Banner from '../components/Banner.ets';\n\n@Preview\n@Component\nstruct AboutMe {\n  @State message: string = 'About Me';",
+      "fullOriginalText": "import Banner from '../co'\n\n@Preview\n@Component\nstruct AboutMe {\n  @State message: string = 'About Me';",
+      "suggestionTriggerTime": 1740969424330.8,
+      "greens": [],
+      "source": "typing",
+      "requestId": "54faea0b-dd53-477e-ac44-46449b31e20b",
+      "selection": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 6,
+        "endColumn": 39
+      },
+      "fusedCursorPredictionId": "8df36825-985d-4c5c-acb5-1f16a1edebb3",
+      "undoRedoGroup": {
+        "id": 63,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "54faea0b-dd53-477e-ac44-46449b31e20b",
+    "timestamp": "2025-03-03T02:37:04.946Z"
+  },
+  {
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/pages/AboutMe.ets",
+      "lineNumberOneIndexed": 2,
+      "text": "",
+      "shouldRetriggerCpp": false
+    },
+    "predictionId": "8df36825-985d-4c5c-acb5-1f16a1edebb3",
+    "generationUUID": "54faea0b-dd53-477e-ac44-46449b31e20b",
+    "timestamp": "2025-03-03T02:37:04.970Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "import Banner from '../components/Banner.ets';\n\n@Preview\n@Component\nstruct AboutMe {\n  @State message: string = 'About Me';"
+    },
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/pages/AboutMe.ets",
+      "lineNumberOneIndexed": 2,
+      "text": "",
+      "shouldRetriggerCpp": false
+    },
+    "predictionId": "8df36825-985d-4c5c-acb5-1f16a1edebb3",
+    "generationUUID": "54faea0b-dd53-477e-ac44-46449b31e20b",
+    "timestamp": "2025-03-03T02:37:04.970Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "8df36825-985d-4c5c-acb5-1f16a1edebb3",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/pages/AboutMe.ets",
+      "lineNumberOneIndexed": 2,
+      "text": "",
+      "shouldRetriggerCpp": false
+    },
+    "timestamp": "2025-03-03T02:37:04.971Z"
+  }
+]

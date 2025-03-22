@@ -1,0 +1,152 @@
+You're an expert in ArkTS. Your task is to help the user update the code around current cursor position.
+
+## Recent Actions
+Here is what the user has been doing from the earliest to the latest:
+
+File: entry/src/main/ets/utils/dynamicProp.ets
+added the code `const user = {}` in line 1
+
+deleted the code `  ` in line 2
+deleted the code `}` in line 3
+added the code `  name: "Alice",` in line 2
+added the code `  age: 30,` in line 3
+added the code `  address: {` in line 4
+added the code `},` in line 5
+added the code `};` in line 6
+added the code `` in line 7
+added the code `` in line 8
+
+deleted the code `},` in line 5
+added the code `    city: "New York",` in line 5
+added the code `    country: "USA",` in line 6
+added the code `  },` in line 7
+added the code `const greeting = `Hello, ${user.name}!`;` in line 10
+
+deleted the code `` in line 1
+added the code `interface User {` in line 1
+added the code `  name: string;` in line 2
+added the code `  age: number;` in line 3
+added the code `  address: {` in line 4
+added the code `    city: string;` in line 5
+added the code `    country: string;` in line 6
+added the code `  };` in line 7
+added the code `}` in line 8
+
+deleted the code `` in line 1
+added the code `interface Address {` in line 1
+
+deleted the code `  address: {` in line 5
+added the code `  address: Address;` in line 5
+
+added the code `  city: string;` in line 2
+added the code `  country: string;` in line 3
+added the code `}` in line 4
+
+deleted the code `    city: string;` in line 9
+deleted the code `    country: string;` in line 10
+deleted the code `  };` in line 11
+deleted the code `const user = {` in line 13
+added the code `const user: User = {` in line 10
+
+added the code `function getFullName(user: { firstName: string; lastName: string }) {` in line 21
+added the code `  return `${user.firstName} ${user.lastName}`;` in line 22
+added the code `}` in line 23
+added the code `const fullName = getFullName({ firstName: "John", lastName: "Doe" });` in line 25
+added the code `` in line 26
+added the code `` in line 27
+added the code `` in line 28
+
+deleted the code `const fullName = getFullName({ firstName: "John", lastName: "Doe" });` in line 25
+
+added the code `const currentUser = {` in line 25
+added the code `  firstName: "John",` in line 26
+added the code `  lastName: "Doe",` in line 27
+added the code `};` in line 28
+added the code `const fullName = getFullName(currentUser);` in line 30
+
+deleted the code `const fullName = getFullName(currentUser);` in line 30
+added the code `const fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;` in line 30
+
+deleted the code `function getFullName(user: { firstName: string; lastName: string }) {` in line 21
+added the code `interface FullName {` in line 21
+added the code `function getFullName(user: { firstName: string; lastName: string }` in line 22
+added the code `function getFullName(user: FullName) {` in line 23
+
+deleted the code `function getFullName(user: { firstName: string; lastName: string }` in line 22
+added the code `function getFullName(user: { firstName: string; lastName: string ;` in line 22
+added the code `}` in line 23
+
+deleted the code `function getFullName(user: { firstName: string;` in line 22
+added the code `  firstName: string;` in line 22
+
+deleted the code `const currentUser = {` in line 29
+added the code `const currentUser: FullName = {` in line 29
+
+added the code `const price = 100;` in line 36
+added the code `const discount = 0.1;` in line 37
+added the code `const priceInfo = `Price: ${(p)}`` in line 38
+
+
+## Current Code
+Here is the current code file path:
+entry/src/main/ets/utils/dynamicProp.ets
+
+Here is the current code around the cursor position:
+
+```
+interface Address {
+  city: string;
+  country: string;
+}
+interface User {
+  name: string;
+  age: number;
+  address: Address;
+}
+const user: User = {
+  name: "Alice",
+  age: 30,
+  address: {
+    city: "New York",
+    country: "USA",
+  },
+};
+
+const greeting = `Hello, ${user.name}!`;
+
+interface FullName {
+  firstName: string;
+  lastName: string;
+}
+function getFullName(user: FullName) {
+  return `${user.firstName} ${user.lastName}`;
+}
+<|editable_region_start|>
+
+const currentUser: FullName = {
+  firstName: "John",
+  lastName: "Doe",
+};
+
+const fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;
+
+const price = 100;
+const discount = 0.1;
+const priceInfo = `Price: ${(p<|current_cursor_position|>)}`
+
+
+
+<|editable_region_end|>
+```
+
+## Task
+Rewrite the code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> according to the following requirements:
+1. Enforce code format strictly matching existing code style.
+2. Propagate naming convention changes to all related cases
+3. Preserve original functionality
+4. Apply changes to entire code regardless of cursor position
+5. Focus on code after cursor position at <|current_cursor_position|>
+
+# Output Format
+Return ONLY the rewritten code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> without any other words.
+Never use markdown formatting like ```. Return raw text only.

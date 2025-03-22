@@ -1,0 +1,28 @@
+{"line":0,"column":0}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+[ToFill]function greet(name: string) {
+    return `Hello, ${name}!`;
+}
+
+greet('John');
+greet('John', 'Doe');
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+function greet(name: string, greeting: string = 'Hello') {
+    return `Hello, ${name}!`;
+}
+
+-------------------------------[                   fullText                  ]--------------------------------
+function greet(name: string, greeting: string = 'Hello') {
+    return `${greeting}, ${name}!`;
+}
+
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/function.ets",
+  "lineNumberOneIndexed": 5,
+  "text": "greet('John');\ngreet('John', 'Doe');\n\n",
+  "shouldRetriggerCpp": false
+}

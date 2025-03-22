@@ -1,0 +1,97 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "24e7f076-29c7-458d-a44b-5b59f604b346",
+    "timestamp": "2025-03-11T03:34:39.580Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/pages/Index.ets",
+          "diffHistory": [
+            "17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Button clicked';\n22+|      })\n",
+            "18-|        Text('Click me')\n18+|        Text('Abou')\n",
+            "18-|        Text('Abou')\n18+|        Text('About Me')\n",
+            "21-|        this.message = 'Button clicked';\n",
+            "21-|        \n21+|        router.push({\n22+|          uri: 'pages/About'\n23+|        })\n",
+            "21-|        router.push({\n22-|          uri: 'pages/About'\n21+|        router.pushU({\n22+|          url: 'pages/AboutMe'\n",
+            "21-|        router.pushU({\n21+|        router.pushUrl({\n",
+            "1+|import router from '@ohos.router';\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/pages/AboutMe.ets",
+          "diffHistory": [
+            "1-|\n1+|@Pr\n2+|@Entry\n3+|@Component\n4+|struct AboutMe {\n5+|  build() {\n6+|    Text('About Me')\n7+|  }\n8+|}\n",
+            "1-|@Pr\n1+|@Preview  \n",
+            "1-|@Preview  \n2-|@Entry\n1+|@Preview\n",
+            "6-|    \n7-|    \n6+|\n7+|    Banner()\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/pages/AboutMe.ets",
+        "contents": "@Preview\n@Component\nstruct AboutMe {\n  build() {\n    Text('About Me')\n\n    Banner()\n  }\n}",
+        "cursorPosition": {
+          "line": 0,
+          "column": 7
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 20,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/pages/Index.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 31
+            }
+          ],
+          "lastViewedAt": 1741664039674
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1741664079624,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 49.699951171875,
+      "timeAtRequestSend": 1741664079624
+    },
+    "generateUuid": "24e7f076-29c7-458d-a44b-5b59f604b346",
+    "timestamp": "2025-03-11T03:34:39.626Z"
+  }
+]

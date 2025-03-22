@@ -1,0 +1,292 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "b5edd723-0d55-4394-a290-a8c3756ec317",
+    "timestamp": "2025-03-20T14:24:06.039Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/builtInAPI.ets",
+          "diffHistory": [
+            "5+|import logger from \"@ohos.logger\";\n",
+            "106+|logger.info(`Device Model: ${deviceModel}\");\n107+|\n108+|let batteryInfo = deviceInfo.getBatteryInfo();\n109+|let batteryLevel = batteryInfo.batteryLevel;\n110+|let isCharging = batteryInfo.isCharging;\n",
+            "106-|logger.info(`Device Model: ${deviceModel}\");\n106+|logger.info(`Device Model: ${deviceModel}\"`);\n107+|logger.info(`OS Version: ${osVersion}`);\n",
+            "106-|logger.info(`Device Model: ${deviceModel}\"`);\n106+|logger.info(`Device Model: ${deviceModel}`);\n",
+            "6+|import prompt from \"@ohos.prompt\";\n107-|logger.info(`OS Version: ${osVersion}`);\n109-|let batteryInfo = deviceInfo.getBatteryInfo();\n110-|let batteryLevel = batteryInfo.batteryLevel;\n111-|let isCharging = batteryInfo.isCharging;\n",
+            "109+|prompt.showToast({\n110+|  message: \"Hello, World!\",\n111+|  duration: 3000,\n112+|});\n113+|\n114+|prompt.showDialog({\n115+|\n",
+            "114-|prompt.showDialog({\n",
+            "114+|let timerId = setInterval(() => {\n115+|  console.log(\"Timer event\");\n116+|}, 1000);\n118+|clearInterval(timerId);\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/utils/errorHandling.ets",
+          "diffHistory": [
+            "1-|\n1+|function calculateSum(a: number, b: number {\n2+|  return a + b;\n3+|  \n4+|  \n",
+            "3-|  \n4-|  \n3+|}\n4+|\n5+|\n6+|const user = {};\n7+|\n",
+            "6-|const user = {};\n6+|const user = {\n7+|  name: \"John\",\n8+|  age: 30,\n9+|  email: \"john@example.com\",\n10+|};\n",
+            "4+|// 测试点：输入 `a.` 应提示 `.toFixed()`\n5+|// 测试点：输入 `b.` 应提示 `.toExponential()`\n5-|\n7+|// 场景1.2：对象字面量缺少逗号\n7-|  name: \"John\",\n8-|  age: 30,\n9-|  email: \"john@example.com\",\n9+|  name: \"Alice\"\n10+|  age: 30 // 缺少逗号\n12+|// 测试点：输入 `user.` 应提示 `name` 和 `age`（IDE应自动容错）\n14+|// 场景1.3：条件语句缺少右括号\n15+|if (user.age > 25 && (user.name === \"Alice\" {\n16+|  // 输入 `user.` 应提示 `name`/`age`\n17+|}\n18+|\n19+|// 场景1.4：未闭合的模板字符串\n20+|const message = `Hello, ${user.name; // 缺少反引号 `\n21+|// 测试点：输入 `user.` 仍应提示属性\n22+|\n23+|// 场景1.5：错误的符号使用（用中文符号）\n24+|const list = [1, 2, 3； // 错误的分号 `；`\n25+|// 测试点：输入 `list.` 应提示数组方法\n26+|\n27+|// 场景1.6：函数体未闭合\n28+|function printUser(user: { name: string }) {\n29+|  console.log(user.name);\n30+|// 缺少右大括号 `}`\n31+|// 测试点：后续代码中输入 `user.` 仍应提示属性\n32+|\n33+|// 场景1.7：泛型参数错误\n34+|interface Response<T> { data: T }\n35+|let res: Response<string> = { data: \"OK\" };\n36+|let value = res.dat; // 拼写错误 `dat`\n37+|// 测试点：输入 `res.` 应提示 `data`（即使上下文存在拼写错误）\n",
+            "4-|// 测试点：输入 `a.` 应提示 `.toFixed()`\n",
+            "4-|// 测试点：输入 `b.` 应提示 `.toExponential()`\n",
+            "5-|// 场景1.2：对象字面量缺少逗号\n",
+            "9-|// 测试点：输入 `user.` 应提示 `name` 和 `age`（IDE应自动容错）\n",
+            "12-|  // 输入 `user.` 应提示 `name`/`age`\n",
+            "10-|// 场景1.3：条件语句缺少右括号\n",
+            "15-|// 测试点：输入 `user.` 仍应提示属性\n",
+            "13-|// 场景1.4：未闭合的模板字符串\n",
+            "16-|const list = [1, 2, 3； // 错误的分号 `；`\n17-|// 测试点：输入 `list.` 应提示数组方法\n16+|const list = [1, 2, 3；; // 错误的分号 `；`\n",
+            "16-|const list = [1, 2, 3；; // 错误的分号 `；`\n16+|const list = [1, 2, 3; // 错误的分号 `；`\n",
+            "15-|// 场景1.5：错误的符号使用（用中文符号）\n",
+            "20-|// 缺少右大括号 `}`\n20+|}\n",
+            "17-|// 场景1.6：函数体未闭合\n",
+            "26-|// 测试点：输入 `res.` 应提示 `data`（即使上下文存在拼写错误）\n",
+            "20-|// 测试点：后续代码中输入 `user.` 仍应提示属性\n22-|// 场景1.7：泛型参数错误\n",
+            "7-|  age: 30 // 缺少逗号\n7+|  age: 30\n",
+            "15-|const list = [1, 2, 3; // 错误的分号 `；`\n15+|const list = [1, 2, 3;\n",
+            "13-|const message = `Hello, ${user.name; // 缺少反引号 `\n13+|const message = `Hello, ${user.name;\n",
+            "23-|let value = res.dat; // 拼写错误 `dat`\n23+|let value = res.dat;\n",
+            "1-|function calculateSum(a: number, b: number {\n1+|function calculateSum(a: number, b: number) {\n",
+            "10-|if (user.age > 25 && (user.name === \"Alice\" {\n10+|if (user.age > 25 && (user.name === \"Alice\")) {\n",
+            "15-|const list = [1, 2, 3;\n15+|const list = [1, 2, 3];\n",
+            "13-|const message = `Hello, ${user.name;\n13+|const message = `Hello, ${user.name}`;\n",
+            "23-|let value = res.dat;\n23+|let value = res.data;\n",
+            "6-|  name: \"Alice\"\n6+|  name: \"Alice\",\n",
+            "5-|const user = {\n5+|interface User {\n6+|  name: string;\n7+|  age: number;\n8+|}\n9+|\n10+|const user: User = {\n",
+            "22-|function printUser(user: { name: string }) {\n22+|interface PrintUser {\n23+|  name: string;\n24+|}\n25+|function printUser(user: PrintUser) {\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/utils/errorHandling2.ets",
+          "diffHistory": [
+            "1-|// 场景2.1：基础try/catch\n",
+            "2-|  JSON.parse(\"{ invalid JSON }\"); // 强制抛出异常\n2+|  JSON.parse(\"{ invalid JSON }\");\n4-|  // 输入 `error.` 应提示 `.message`/`.stack`\n",
+            "7-|// 场景2.2：自定义错误类型\n",
+            "20-|    console.log(error.statusCode); // 输入 `error.` 应提示 `.statusCode`\n20+|    console.log(error.statusCode);\n",
+            "18-|  // 输入 `error.` 应提示 `.statusCode`（需IDE识别子类）\n",
+            "23-|// 场景2.3：Promise链式异常\n",
+            "26-|    // 输入 `error.` 应提示网络错误属性（如 `.code`）\n",
+            "32-|// 输入 `user.profile?.email.` 应提示字符串方法（即使可能为`undefined`）\n",
+            "28-|\n29-|// 场景2.4：可选链与空值容错\n",
+            "32-|// 场景2.5：联合类型异常\n",
+            "41-|  // 输入 `result.` 应提示字符串方法\n41+|  console.log(result);\n",
+            "39-|  // 输入 `result.` 应提示 `.message`\n39+|  console.log(result.message);\n",
+            "44-|// 场景2.6：异步函数错误处理\n",
+            "44+|// 场景2.6：异步函数错误处理\n",
+            "41-|  console.log(result);\n41+|  // 输入 `result.` 应提示字符串方法\n",
+            "39-|  console.log(result.message);\n39+|  // 输入 `result.` 应提示 `.message`\n",
+            "32+|// 场景2.5：联合类型异常\n",
+            "31+|// 输入 `user.profile?.email.` 应提示字符串方法（即使可能为`undefined`）\n",
+            "29+|// 场景2.4：可选链与空值容错\n",
+            "26+|    // 输入 `error.` 应提示网络错误属性（如 `.code`）\n",
+            "23+|// 场景2.3：Promise链式异常\n",
+            "18+|  // 输入 `error.` 应提示 `.statusCode`（需IDE识别子类）\n19-|    console.log(error.statusCode);\n20+|    console.log(error.statusCode); // 输入 `error.` 应提示 `.statusCode`\n",
+            "7+|// 场景2.2：自定义错误类型\n",
+            "1+|// 场景2.1：基础try/catch\n2-|  JSON.parse(\"{ invalid JSON }\");\n3+|  JSON.parse(\"{ invalid JSON }\"); // 强制抛出异常\n5+|  // 输入 `error.` 应提示 `.message`/`.stack`\n",
+            "1-|// 场景2.1：基础try/catch\n",
+            "4-|  // 输入 `error.` 应提示 `.message`/`.stack`\n",
+            "7-|// 场景2.2：自定义错误类型\n",
+            "20-|    console.log(error.statusCode); // 输入 `error.` 应提示 `.statusCode`\n20+|    console.log(error.statusCode);\n",
+            "18-|  // 输入 `error.` 应提示 `.statusCode`（需IDE识别子类）\n",
+            "23-|// 场景2.3：Promise链式异常\n",
+            "26-|    // 输入 `error.` 应提示网络错误属性（如 `.code`）\n",
+            "32-|// 输入 `user.profile?.email.` 应提示字符串方法（即使可能为`undefined`）\n",
+            "28-|\n29-|// 场景2.4：可选链与空值容错\n",
+            "32-|// 场景2.5：联合类型异常\n",
+            "41-|  // 输入 `result.` 应提示字符串方法\n41+|  console.log(result);\n",
+            "39-|  // 输入 `result.` 应提示 `.message`\n39+|  console.log(result.message);\n",
+            "39-|  console.log(result.message);\n",
+            "40-|  console.log(result);\n",
+            "42-|// 场景2.6：异步函数错误处理\n",
+            "46-|    // 输入 `e.` 应提示错误属性\n",
+            "52-|  // 强制类型断言模拟错误\n",
+            "50-|// 场景2.7：类型断言后的补全\n",
+            "54-|  // 输入 `error.` 应提示 `.message`\n",
+            "52-|  data.items.push(\"test\"); // 运行时错误，但IDE应推断类型\n52+|  data.items.push(\"test\");\n",
+            "2-|  JSON.parse(\"{ invalid JSON }\"); // 强制抛出异常\n2+|  JSON.parse(\"{ invalid JSON }\");\n",
+            "4-|  console.log(error.message);\n4+|  console.log(error);\n",
+            "19-|    console.log(error.statusCode);\n19+|    console.log(error);\n",
+            "26-|    console.error(error.message);\n26+|    console.error(error);\n",
+            "46-|    console.log(e.message);\n46+|    console.log(e);\n",
+            "4-|  console.log(error);\n4+|  console.log(error.message);\n",
+            "19-|    console.log(error);\n19+|    console.log(error.st);\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/errorHandling2.ets",
+        "contents": "try {\n  JSON.parse(\"{ invalid JSON }\");\n} catch (error) {\n  console.log(error.message);\n}\n\nclass NetworkError extends Error {\n  statusCode: number;\n  constructor(message: string, code: number) {\n    super(message);\n    this.statusCode = code;\n  }\n}\n\ntry {\n  throw new NetworkError(\"Timeout\", 504);\n} catch (error) {\n  if (error instanceof NetworkError) {\n    console.log(error.st);\n  }\n}\n\nfetch(\"https://api.example.com\")\n  .then(res => res.json())\n  .catch(error => {\n    console.error(error);\n  });\n\ninterface User { profile?: { email?: string } }\nlet user: User = {};\n\ntype Result = string | Error;\nfunction getResult(): Result {\n  return Math.random() > 0.5 ? \"OK\" : new Error(\"Failed\");\n}\n\nlet result = getResult();\nif (result instanceof Error) {\n} else {\n}\n\nasync function loadData() {\n  try {\n    await fetch(\"invalid-url\");\n  } catch (e) {\n    console.log(e);\n  }\n}\n\ntry {\n  let data = {} as { items: string[] };\n  data.items.push(\"test\");\n} catch (error) {\n}",
+        "cursorPosition": {
+          "line": 18,
+          "column": 24
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 59,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/utils/builtInAPI.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 36
+            }
+          ],
+          "lastViewedAt": 1742479750044
+        },
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/utils/errorHandling",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 1
+            }
+          ],
+          "lastViewedAt": 1742479755915
+        },
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/utils/errorHandling.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 32
+            }
+          ],
+          "lastViewedAt": 1742480109241
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742480646070,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 49.89990234375,
+      "timeAtRequestSend": 1742480646070
+    },
+    "generateUuid": "b5edd723-0d55-4394-a290-a8c3756ec317",
+    "timestamp": "2025-03-20T14:24:06.073Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "  if (error instanceof NetworkError) {\n    console.log(error.statusCode",
+      "rangeToReplace": {
+        "startLineNumber": 18,
+        "endLineNumberInclusive": 20
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "b5edd723-0d55-4394-a290-a8c3756ec317",
+    "timestamp": "2025-03-20T14:24:06.473Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "b5edd723-0d55-4394-a290-a8c3756ec317",
+    "timestamp": "2025-03-20T14:24:06.474Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ");"
+    },
+    "generationUUID": "b5edd723-0d55-4394-a290-a8c3756ec317",
+    "timestamp": "2025-03-20T14:24:06.493Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n "
+    },
+    "generationUUID": "b5edd723-0d55-4394-a290-a8c3756ec317",
+    "timestamp": "2025-03-20T14:24:06.501Z"
+  },
+  {
+    "firstChunkValue": "  if (error instanceof NetworkError) {\n    console.log(error.statusCode);\n  }",
+    "generationUUID": "b5edd723-0d55-4394-a290-a8c3756ec317",
+    "timestamp": "2025-03-20T14:24:06.504Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "  if (error instanceof NetworkError) {\n    console.log(error.statusCode);\n  }"
+    },
+    "generationUUID": "b5edd723-0d55-4394-a290-a8c3756ec317",
+    "timestamp": "2025-03-20T14:24:06.506Z"
+  },
+  {
+    "fullText": "  if (error instanceof NetworkError) {\n    console.log(error.statusCode);\n ",
+    "generationUUID": "b5edd723-0d55-4394-a290-a8c3756ec317",
+    "timestamp": "2025-03-20T14:24:06.511Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "dc29de74-ae2c-4de6-bb0c-1e1e6ca07e58",
+    "generationUUID": "b5edd723-0d55-4394-a290-a8c3756ec317",
+    "timestamp": "2025-03-20T14:24:06.511Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "  if (error instanceof NetworkError) {\n    console.log(error.statusCode);\n  }"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "dc29de74-ae2c-4de6-bb0c-1e1e6ca07e58",
+    "generationUUID": "b5edd723-0d55-4394-a290-a8c3756ec317",
+    "timestamp": "2025-03-20T14:24:06.512Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "dc29de74-ae2c-4de6-bb0c-1e1e6ca07e58",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-20T14:24:06.512Z"
+  }
+]

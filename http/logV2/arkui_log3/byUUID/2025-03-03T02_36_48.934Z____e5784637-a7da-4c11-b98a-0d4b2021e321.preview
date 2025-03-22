@@ -1,0 +1,35 @@
+{"line":11,"column":6}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Preview
+@Component
+struct AboutMe {
+  @State message: string = 'About Me';
+
+  build() {
+    Column() {
+      Text(this.message)
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+
+      [ToFill]
+    }
+  }
+}
+-------------------------------[               firstChunkValue               ]--------------------------------
+        .fontWeight(FontWeight.Bold)
+
+      Button() {
+    }
+  }
+-------------------------------[                   fullText                  ]--------------------------------
+        .fontWeight(FontWeight.Bold)
+
+      Button() {
+        Text('Back')
+      }
+      .onClick(() => {
+        router.back();
+      })
+    }
+  }

@@ -1,0 +1,49 @@
+{"line":4,"column":4}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Component
+struct ClickEventExample {
+  build() {
+    Button('Click me')
+    [ToFill]
+  }
+}
+
+@Component
+struct LongPressEventExample {
+  build() {
+    Button('Long press me')
+  }
+}
+
+@Component
+struct SwipeEventExample {
+  build() {
+    Button('Swipe me')
+  }
+}
+
+@Component
+struct ChildComponent {
+  @Prop() onCustomEvent: () => void
+
+  build() {
+    Button('Touch me')
+  }
+}
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+struct ClickEventExample {
+  build() {
+    Button('Click me')
+    .onClick(() => {
+  }
+}
+
+-------------------------------[                   fullText                  ]--------------------------------
+struct ClickEventExample {
+  build() {
+    Button('Click me')
+    .onClick(() => {
+     

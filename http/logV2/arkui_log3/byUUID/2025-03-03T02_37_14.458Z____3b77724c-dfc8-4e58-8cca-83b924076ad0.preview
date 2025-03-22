@@ -1,0 +1,62 @@
+{"line":3,"column":4}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Preview
+@Component
+export default struct Banner {
+  @P[ToFill]
+
+  build() {
+    Text("Banner")
+  }
+}
+-------------------------------[               firstChunkValue               ]--------------------------------
+export default struct Banner {
+  @Prop title: string = 'Banner';
+
+  build() {
+    Text("Banner")
+  }
+}
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+@Preview
+@Component
+export default struct Banner {
+  @Prop title: string = 'Banner';
+
+  build() {
+    Text("Banner")
+  }
+}
+-------------------------------[                   fullText                  ]--------------------------------
+export default struct Banner {
+  @Prop title: string = 'Banner';
+
+  build() {
+    Text(this.title)
+  }
+}
+-------------------------------[         replacedContentsWithFullText         ]--------------------------------
+@Preview
+@Component
+export default struct Banner {
+  @Prop title: string = 'Banner';
+
+  build() {
+    Text(this.title)
+  }
+}
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/pages/AboutMe.ets",
+  "lineNumberOneIndexed": 14,
+  "text": "Banner()\n}\n}\n}",
+  "shouldRetriggerCpp": true
+}
+--------------------------------[        displayedFusedCursorPrediction       ]---------------------------------
+{
+  "relativePath": "entry/src/main/ets/pages/AboutMe.ets",
+  "lineNumberOneIndexed": 14,
+  "text": "Banner()\n}\n}\n}",
+  "shouldRetriggerCpp": true
+}

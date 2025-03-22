@@ -1,0 +1,218 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "5f315ac2-8baf-4230-87ad-661aa4a68aa4",
+    "timestamp": "2025-03-18T11:44:19.282Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/basicType.ets",
+          "diffHistory": [
+            "1+|let a: number = 1;\n2+|let b: string = '1';\n3+|let c: boolean = true;\n4+|let d: any = '1';\n5+|let e: void = undefined;\n6+|let f: null = null;\n7+|let g: undefined = undefined;\n",
+            "1-|let a: number = 1;\n2-|let b: string = '1';\n3-|let c: boolean = true;\n4-|let d: any = '1';\n5-|let e: void = undefined;\n6-|let f: null = null;\n7-|let g: undefined = undefined;\n1+|let str: string = '123';\n2+|str.split('');\n",
+            "1-|let str: string = '123';\n2-|str.split('');\n1+|let str1: string = '123';\n2+|str1.sptr2;\n3+|\n4+|let num1: number = 123;\n5+|let num2: number = 456;\n6+|let num3: number = num1 + num2;\n",
+            "2-|str1.sptr2;\n2+|let str2: string = '456';\n3+|let str3: string = str1 + str2;\n",
+            "2-|let str2: string = '456';\n3-|let str3: string = str1 + str2;\n2+|str1.split('');\n6-|let num2: number = 456;\n7-|let num3: number = num1 + num2;\n5+|num1.toString();\n6+|\n7+|let bool1: boolean = true;\n8+|bool1.toString();\n",
+            "4+|let str2: string = `Template string ${str1}`;\n5+|str2.split('');\n6+|\n7+|const str3 = \"Constant string\";\n8+|str3.toLocaleUpperCase();\n9+|\n5-|num1.toString();\n11+|num1.toFixed(2);\n",
+            "13+|let num2: number = 123.456;\n14+|num2.toExponential(2);\n15+|\n",
+            "17-|bool1.toString();\n17+|bool1.toString();\n18+|\n19+|let arr1: Array<number> = [1, 2, 3];\n20+|arr1.push(4);\n21+|\n22+|let arr2: number[] = [1, 2, 3];\n23+|arr2.push(4);\n24+|\n",
+            "21+|arr2.m\n",
+            "25+|arr2.map((item: number) => item * 2);\n27+|let obj1: { name: string; age: number } = { name: 'John', age: 20 };\n28+|obj1.name;\n29+|obj1.age;\n30+|\n31+|\n",
+            "21-|arr2.m\n21+|arr1.map((item: number) => item * 2);\n",
+            "25-|arr2.map((item: number) => item * 2);\n27-|let obj1: { name: string; age: number } = { name: 'John', age: 20 };\n28-|obj1.name;\n29-|obj1.age;\n30-|\n31-|\n",
+            "21-|arr1.map((item: number) => item * 2);\n",
+            "26+|let obj1: { name: string; age: number } = { name: 'John', age: 20 };\n27+|obj1.name;\n28+|obj1.age;\n29+|\n30+|let obj2: { name: string; age: number } = { name: 'John', age: 20 };\n31+|obj2.name;\n32+|obj2.age;\n",
+            "25-|let obj1: { name: string; age: number } = { name: 'John', age: 20 };\n26-|obj1.name;\n27-|obj1.age;\n28-|\n29-|let obj2: { name: string; age: number } = { name: 'John', age: 20 };\n30-|obj2.name;\n31-|obj2.age;\n",
+            "21+|arr1.map((item: number) => item * 2);\n",
+            "25-|\n25+|arr2.map((item: number) => item * 2);\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/utils/arktsType.ets",
+          "diffHistory": [
+            "1+|let image1: Resource = $r('app.media.image1');\n2+|let image2: Resource = $r('app.media.image2');\n3+|let image3: Resource = $r('app.media.image3');\n4+|let image4: Resource = $r('app.media.image4');\n5+|let image5: Resource = $r('app.media.image5');\n6+|let image6: Resource = $r('app.media.image6');\n",
+            "7+|\n8+|const image7: Resource = $r('app.media.image7');\n9+|const image8: Resource = $r('app.media.image8');\n10+|const image9: Resource = $r('app.media.image9');\n11+|const image10: Resource = $r('app.media.image10');\n12+|\n13+|let image11: Resource = $r('app.media.image11');\n14+|\n",
+            "15+|let image12: Resource = $r('app.media.image12');\n16+|let image13: Resource = $r('app.media.image13');\n17+|let image14: Resource = $r('app.media.image14');\n18+|let image15: Resource = $r('app.media.image15');\n19+|\n20+|\n",
+            "15-|let image12: Resource = $r('app.media.image12');\n16-|let image13: Resource = $r('app.media.image13');\n17-|let image14: Resource = $r('app.media.image14');\n18-|let image15: Resource = $r('app.media.image15');\n19-|\n20-|\n",
+            "9-|const image8: Resource = $r('app.media.image8');\n10-|const image9: Resource = $r('app.media.image9');\n11-|const image10: Resource = $r('app.media.image10');\n13-|let image11: Resource = $r('app.media.image11');\n10+|let pixelMap: PixelMap = new PixelMap();\n12+|let i18n: I18n = new I18n();\n",
+            "10-|let pixelMap: PixelMap = new PixelMap();\n11-|\n12-|let i18n: I18n = new I18n();\n10+|// let pixelMap: PixelMap = new PixelMap();\n",
+            "10-|// let pixelMap: PixelMap = new PixelMap();\n10+|let pixelMap: PixelMap = new PixelMap();\n11+|\n12+|pixelMap.getPixelBytesNumber();\n13+|\n14+|let i18n: I18n = new I18n();\n15+|\n16+|i18n.getString();\n17+|\n",
+            "12-|pixelMap.getPixelBytesNumber();\n13-|\n14-|let i18n: I18n = new I18n();\n15-|\n16-|i18n.getString();\n17-|\n12+|pixelMap.getPixelBytesNumber();\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/utils/basicType2.ets",
+          "diffHistory": [
+            "1+|let user1 = {\n2+|    name: 'John',\n3+|    age: 20,\n4+|    gender: 'male',\n5+|    email: 'john@example.com',\n6+|    phone: '1234567890',\n7+|}\n8+|\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/basicType2.ets",
+        "contents": "let user1 = {\n    name: 'John',\n    age: 20,\n    gender: 'male',\n    email: 'john@example.com',\n    phone: '1234567890',\n}\n\n",
+        "cursorPosition": {
+          "line": 8,
+          "column": 0
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 18,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/utils/arktsType.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 12
+            }
+          ],
+          "lastViewedAt": 1742298205212
+        },
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/utils/basicType.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 26
+            }
+          ],
+          "lastViewedAt": 1742298241160
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1742298259328,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.400146484375,
+      "timeAtRequestSend": 1742298259328
+    },
+    "generateUuid": "5f315ac2-8baf-4230-87ad-661aa4a68aa4",
+    "timestamp": "2025-03-18T11:44:19.334Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "5f315ac2-8baf-4230-87ad-661aa4a68aa4",
+    "timestamp": "2025-03-18T11:44:19.696Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nlet",
+      "rangeToReplace": {
+        "startLineNumber": 8,
+        "endLineNumberInclusive": 9
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "5f315ac2-8baf-4230-87ad-661aa4a68aa4",
+    "timestamp": "2025-03-18T11:44:19.697Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " user2"
+    },
+    "generationUUID": "5f315ac2-8baf-4230-87ad-661aa4a68aa4",
+    "timestamp": "2025-03-18T11:44:19.717Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "5f315ac2-8baf-4230-87ad-661aa4a68aa4",
+    "timestamp": "2025-03-18T11:44:19.726Z"
+  },
+  {
+    "firstChunkValue": "\nlet user2 = {",
+    "generationUUID": "5f315ac2-8baf-4230-87ad-661aa4a68aa4",
+    "timestamp": "2025-03-18T11:44:19.736Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nlet user2 = {"
+    },
+    "generationUUID": "5f315ac2-8baf-4230-87ad-661aa4a68aa4",
+    "timestamp": "2025-03-18T11:44:19.737Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {\n   "
+    },
+    "generationUUID": "5f315ac2-8baf-4230-87ad-661aa4a68aa4",
+    "timestamp": "2025-03-18T11:44:19.737Z"
+  },
+  {
+    "fullText": "\nlet user2 = {\n   ",
+    "generationUUID": "5f315ac2-8baf-4230-87ad-661aa4a68aa4",
+    "timestamp": "2025-03-18T11:44:19.741Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "c3104b0e-98f0-4027-81ab-831b26770b79",
+    "generationUUID": "5f315ac2-8baf-4230-87ad-661aa4a68aa4",
+    "timestamp": "2025-03-18T11:44:19.742Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nlet user2 = {"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "c3104b0e-98f0-4027-81ab-831b26770b79",
+    "generationUUID": "5f315ac2-8baf-4230-87ad-661aa4a68aa4",
+    "timestamp": "2025-03-18T11:44:19.742Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "c3104b0e-98f0-4027-81ab-831b26770b79",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-18T11:44:19.743Z"
+  }
+]

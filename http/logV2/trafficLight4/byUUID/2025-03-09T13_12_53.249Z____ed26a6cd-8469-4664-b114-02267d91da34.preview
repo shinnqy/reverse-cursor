@@ -1,0 +1,70 @@
+{"line":4,"column":4}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case TrafficLight.RED:
+      return TrafficLight.GREEN;
+    [ToFill]case light.GREEN:
+      return light.YELLOW;
+    case light.YELLOW:
+      return light.RED;
+    default:
+      return light.RED;
+  }
+}
+
+enum TrafficLight {
+  RED = 'red',
+  GREEN = 'green',
+  YELLOW = 'yellow',
+}
+
+const light = TrafficLight.RED;
+const newLight = changeLight(light);
+console.log(newLight);
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+      return TrafficLight.GREEN;
+    case TrafficLight.GREEN:
+      return TrafficLight.YELLOW;
+    case TrafficLight.YELLOW:
+      return TrafficLight.RED;
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case TrafficLight.RED:
+      return TrafficLight.GREEN;
+    case TrafficLight.GREEN:
+      return TrafficLight.YELLOW;
+    case TrafficLight.YELLOW:
+      return TrafficLight.RED;
+    default:
+      return light.RED;
+  }
+}
+
+enum TrafficLight {
+  RED = 'red',
+  GREEN = 'green',
+  YELLOW = 'yellow',
+}
+
+const light = TrafficLight.RED;
+const newLight = changeLight(light);
+console.log(newLight);
+
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "src/components/test2.ts",
+  "lineNumberOneIndexed": 10,
+  "text": "return light.RED;\n}\n}\n\nenum TrafficLight {",
+  "shouldRetriggerCpp": true
+}
+--------------------------------[        displayedFusedCursorPrediction       ]---------------------------------
+{
+  "relativePath": "src/components/test2.ts",
+  "lineNumberOneIndexed": 10,
+  "text": "return light.RED;\n}\n}\n\nenum TrafficLight {",
+  "shouldRetriggerCpp": true
+}

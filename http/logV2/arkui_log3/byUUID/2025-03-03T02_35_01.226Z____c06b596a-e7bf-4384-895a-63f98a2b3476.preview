@@ -1,0 +1,41 @@
+{"line":14,"column":8}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+struct Index {
+  @State message: string = 'Hello World';
+
+  build() {
+    RelativeContainer() {
+      Text(this.message)
+        .id('HelloWorld')
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+        .alignRules({
+          center: { anchor: '__container__', align: VerticalAlign.Center },
+          middle: { anchor: '__container__', align: HorizontalAlign.Center }
+        [ToFill]})
+
+      Button() {
+        Text('About Me')
+      }
+      .onClick(() => {
+        this.message = 'Hello World';
+      })
+    }
+    .height('100%')
+    .width('100%')
+  }
+}
+-------------------------------[               firstChunkValue               ]--------------------------------
+          middle: { anchor: '__container__', align: HorizontalAlign.Center }
+        })
+
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/pages/Index.ets",
+  "lineNumberOneIndexed": 21,
+  "text": "this.message = 'Hello World';\n})\n}\n.height('100%')\n.width('100%')",
+  "shouldRetriggerCpp": true
+}

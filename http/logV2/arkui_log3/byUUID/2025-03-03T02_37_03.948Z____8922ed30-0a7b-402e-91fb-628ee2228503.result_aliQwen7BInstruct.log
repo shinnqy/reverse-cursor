@@ -1,0 +1,20 @@
+------------------------------------------[        output        ]-------------------------------------------
+import Banner from '../components/Banner'
+------------------------------------------[    replacedOutput    ]-------------------------------------------
+import Banner from '../components/Banner'
+
+@Preview
+@Component
+struct AboutMe {
+  @State message: string = 'About Me';
+
+  build() {
+    Column() {
+      Text(this.message)
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+
+      Banner()
+    }
+  }
+}

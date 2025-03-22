@@ -1,0 +1,117 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "5b2e51af-11c8-4343-83c0-56c21d2b6325",
+    "timestamp": "2025-03-20T12:56:24.069Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/dynamicProp.ets",
+          "diffHistory": [
+            "14-|const greeting = `Hello, ${user}!`;\n14+|const greeting = `Hello, ${user.name}!`;\n",
+            "24-|const fullName = `Full Name: ${getFullName(currentUser)}`;\n24+|const fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n",
+            "41-|const productInfo = `Current Product: ${products[0]}.`;\n41+|const productInfo = `Current Product: ${products[0].name}.`;\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/dynamicProp.ets",
+        "contents": "interface Address {\n    city: string;\n}\ninterface User {\n    name: string;\n    age: number;\n    address: Address;\n}\nconst user: User = {\n    name: \"Alice\",\n    age: 30,\n    address: { city: \"Shenzhen\" }\n};\nconst greeting = `Hello, ${user.name}!`;\n\ninterface FullName {\n    firstName: string;\n    lastName: string;\n}\nfunction getFullName(user: FullName) {\n    return `${user.firstName} ${user.lastName}`;\n}\nconst currentUser: FullName = { firstName: \"John\", lastName: \"Doe\" };\nconst fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n\nconst price = 99.99;\nconst discount = 0.2;\nconst priceInfo = `Price: ${(price * (1 - discount))}`;\n\nconst isAdmin = true;\nconst roleMessage = `Role: ${isAdmin ? \"Administrator\" : \"Guest\"}.`;\n\ninterface Product {\n    id: number;\n    name: string;\n}\nconst products: Product[] = [\n    { id: 1, name: \"Phone\" },\n    { id: 2, name: \"Laptop\" }\n];\nconst productInfo = `Current Product: ${products[0].name}.`;\n\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\ninterface Company {\n    name: string;\n    ceo: CEO;\n}\ninterface CEO {\n    name: string;\n    contact: Contact;\n}\n\ninterface Contact {\n    email: string;\n}\nconst company: Company = {\n    name: \"Tech Corp\",\n    ceo: {\n        name: \"Bob\",\n        contact: { email: \"bob@tech.com\" }\n    }\n};\nconst emailTemplate = `CEO Email: ${company}`;",
+        "cursorPosition": {
+          "line": 42,
+          "column": 35
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 6,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1742475384115,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 53.10009765625,
+      "timeAtRequestSend": 1742475384116
+    },
+    "generateUuid": "5b2e51af-11c8-4343-83c0-56c21d2b6325",
+    "timestamp": "2025-03-20T12:56:24.117Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n",
+      "rangeToReplace": {
+        "startLineNumber": 42,
+        "endLineNumberInclusive": 46
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "5b2e51af-11c8-4343-83c0-56c21d2b6325",
+    "timestamp": "2025-03-20T12:56:24.465Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "5b2e51af-11c8-4343-83c0-56c21d2b6325",
+    "timestamp": "2025-03-20T12:56:24.467Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "5b2e51af-11c8-4343-83c0-56c21d2b6325",
+    "timestamp": "2025-03-20T12:56:24.502Z"
+  },
+  {
+    "firstChunkValue": "\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n",
+    "generationUUID": "5b2e51af-11c8-4343-83c0-56c21d2b6325",
+    "timestamp": "2025-03-20T12:56:24.505Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": false
+    },
+    "generationUUID": "5b2e51af-11c8-4343-83c0-56c21d2b6325",
+    "timestamp": "2025-03-20T12:56:24.507Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "5b2e51af-11c8-4343-83c0-56c21d2b6325",
+    "timestamp": "2025-03-20T12:56:24.549Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "bd568ae4-745b-4431-bc67-670a82ae1adb",
+    "generationUUID": "5b2e51af-11c8-4343-83c0-56c21d2b6325",
+    "timestamp": "2025-03-20T12:56:24.559Z"
+  }
+]

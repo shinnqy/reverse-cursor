@@ -1,0 +1,596 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:29.714Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/basicType.ets",
+          "diffHistory": [
+            "1+|let a: number = 1;\n2+|let b: string = '1';\n3+|let c: boolean = true;\n4+|let d: any = '1';\n5+|let e: void = undefined;\n6+|let f: null = null;\n7+|let g: undefined = undefined;\n",
+            "1-|let a: number = 1;\n2-|let b: string = '1';\n3-|let c: boolean = true;\n4-|let d: any = '1';\n5-|let e: void = undefined;\n6-|let f: null = null;\n7-|let g: undefined = undefined;\n1+|let str: string = '123';\n2+|str.split('');\n",
+            "1-|let str: string = '123';\n2-|str.split('');\n1+|let str1: string = '123';\n2+|str1.sptr2;\n3+|\n4+|let num1: number = 123;\n5+|let num2: number = 456;\n6+|let num3: number = num1 + num2;\n",
+            "2-|str1.sptr2;\n2+|let str2: string = '456';\n3+|let str3: string = str1 + str2;\n",
+            "2-|let str2: string = '456';\n3-|let str3: string = str1 + str2;\n2+|str1.split('');\n6-|let num2: number = 456;\n7-|let num3: number = num1 + num2;\n5+|num1.toString();\n6+|\n7+|let bool1: boolean = true;\n8+|bool1.toString();\n",
+            "4+|let str2: string = `Template string ${str1}`;\n5+|str2.split('');\n6+|\n7+|const str3 = \"Constant string\";\n8+|str3.toLocaleUpperCase();\n9+|\n5-|num1.toString();\n11+|num1.toFixed(2);\n",
+            "13+|let num2: number = 123.456;\n14+|num2.toExponential(2);\n15+|\n",
+            "17-|bool1.toString();\n17+|bool1.toString();\n18+|\n19+|let arr1: Array<number> = [1, 2, 3];\n20+|arr1.push(4);\n21+|\n22+|let arr2: number[] = [1, 2, 3];\n23+|arr2.push(4);\n24+|\n",
+            "21+|arr2.m\n",
+            "25+|arr2.map((item: number) => item * 2);\n27+|let obj1: { name: string; age: number } = { name: 'John', age: 20 };\n28+|obj1.name;\n29+|obj1.age;\n30+|\n31+|\n",
+            "21-|arr2.m\n21+|arr1.map((item: number) => item * 2);\n",
+            "25-|arr2.map((item: number) => item * 2);\n27-|let obj1: { name: string; age: number } = { name: 'John', age: 20 };\n28-|obj1.name;\n29-|obj1.age;\n30-|\n31-|\n",
+            "21-|arr1.map((item: number) => item * 2);\n",
+            "26+|let obj1: { name: string; age: number } = { name: 'John', age: 20 };\n27+|obj1.name;\n28+|obj1.age;\n29+|\n30+|let obj2: { name: string; age: number } = { name: 'John', age: 20 };\n31+|obj2.name;\n32+|obj2.age;\n",
+            "25-|let obj1: { name: string; age: number } = { name: 'John', age: 20 };\n26-|obj1.name;\n27-|obj1.age;\n28-|\n29-|let obj2: { name: string; age: number } = { name: 'John', age: 20 };\n30-|obj2.name;\n31-|obj2.age;\n",
+            "21+|arr1.map((item: number) => item * 2);\n",
+            "25-|\n25+|arr2.map((item: number) => item * 2);\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/utils/arktsType.ets",
+          "diffHistory": [
+            "1+|let image1: Resource = $r('app.media.image1');\n2+|let image2: Resource = $r('app.media.image2');\n3+|let image3: Resource = $r('app.media.image3');\n4+|let image4: Resource = $r('app.media.image4');\n5+|let image5: Resource = $r('app.media.image5');\n6+|let image6: Resource = $r('app.media.image6');\n",
+            "7+|\n8+|const image7: Resource = $r('app.media.image7');\n9+|const image8: Resource = $r('app.media.image8');\n10+|const image9: Resource = $r('app.media.image9');\n11+|const image10: Resource = $r('app.media.image10');\n12+|\n13+|let image11: Resource = $r('app.media.image11');\n14+|\n",
+            "15+|let image12: Resource = $r('app.media.image12');\n16+|let image13: Resource = $r('app.media.image13');\n17+|let image14: Resource = $r('app.media.image14');\n18+|let image15: Resource = $r('app.media.image15');\n19+|\n20+|\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/arktsType.ets",
+        "contents": "let image1: Resource = $r('app.media.image1');\nlet image2: Resource = $r('app.media.image2');\nlet image3: Resource = $r('app.media.image3');\nlet image4: Resource = $r('app.media.image4');\nlet image5: Resource = $r('app.media.image5');\nlet image6: Resource = $r('app.media.image6');\n\nconst image7: Resource = $r('app.media.image7');\nconst image8: Resource = $r('app.media.image8');\nconst image9: Resource = $r('app.media.image9');\nconst image10: Resource = $r('app.media.image10');\n\nlet image11: Resource = $r('app.media.image11');\n\nlet image12: Resource = $r('app.media.image12');\nlet image13: Resource = $r('app.media.image13');\nlet image14: Resource = $r('app.media.image14');\nlet image15: Resource = $r('app.media.image15');\n\n\n",
+        "cursorPosition": {
+          "line": 14,
+          "column": 48
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 42,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/pages/AboutMe.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 13
+            }
+          ],
+          "lastViewedAt": 1742296854734
+        },
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/utils/basicType.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            8
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 8,
+              "endLineNumberInclusive": 26
+            }
+          ],
+          "lastViewedAt": 1742297476629
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742297549753,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51,
+      "timeAtRequestSend": 1742297549753
+    },
+    "generateUuid": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:29.755Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.113Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nlet image12: Resource = $r('app.media.image12');\nlet image13: Resource = $r('app.media.image13');\nlet image14: Resource = $r('app.media.image14');\nlet image15: Resource = $r('",
+      "rangeToReplace": {
+        "startLineNumber": 14,
+        "endLineNumberInclusive": 21
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.115Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "app.media.image15');\n\nlet"
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.154Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " image16"
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.157Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.158Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Resource = $r('app.media"
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.164Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ".image16"
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.176Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "');"
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.187Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nlet"
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.195Z"
+  },
+  {
+    "firstChunkValue": "\nlet image12: Resource = $r('app.media.image12');\nlet image13: Resource = $r('app.media.image13');\nlet image14: Resource = $r('app.media.image14');\nlet image15: Resource = $r('app.media.image15');\n\nlet image16: Resource = $r('app.media.image16');\n",
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.198Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nlet image12: Resource = $r('app.media.image12');\nlet image13: Resource = $r('app.media.image13');\nlet image14: Resource = $r('app.media.image14');\nlet image15: Resource = $r('app.media.image15');\n\nlet image16: Resource = $r('app.media.image16');\n"
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.203Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "efd1dabc-37fb-4a7b-a9b1-dee26cb80741",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/arktsType.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/arktsType.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/arktsType.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 42,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 42,
+      "monotonicallyIncreasingSuggestionId": 190,
+      "range": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 21,
+        "endColumn": 1
+      },
+      "replaceText": "\nlet image12: Resource = $r('app.media.image12');\nlet image13: Resource = $r('app.media.image13');\nlet image14: Resource = $r('app.media.image14');\nlet image15: Resource = $r('app.media.image15');\n\nlet image16: Resource = $r('app.media.image16');\n",
+      "originalText": "\nlet image12: Resource = $r('app.media.image12');\nlet image13: Resource = $r('app.media.image13');\nlet image14: Resource = $r('app.media.image14');\nlet image15: Resource = $r('app.media.image15');\n\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 21,
+        "endColumn": 1
+      },
+      "diffText": "\nlet image12: Resource = $r('app.media.image12');\nlet image13: Resource = $r('app.media.image13');\nlet image14: Resource = $r('app.media.image14');\nlet image15: Resource = $r('app.media.image15');\n\nlet image16: Resource = $r('app.media.image16');\n",
+      "fullOriginalText": "\nlet image12: Resource = $r('app.media.image12');\nlet image13: Resource = $r('app.media.image13');\nlet image14: Resource = $r('app.media.image14');\nlet image15: Resource = $r('app.media.image15');\n\n\n",
+      "suggestionTriggerTime": 1742297549704.8,
+      "greens": [],
+      "source": "typing",
+      "requestId": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+      "selection": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 21,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 193,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.204Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " image"
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.211Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "17"
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.217Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": Resource = $r('app."
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.225Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "media"
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.235Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ".image17"
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.246Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "');"
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.258Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nlet"
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.267Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " image1"
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.274Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "8"
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.287Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.295Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Resource = $r('app.media"
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.306Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.316Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "image18"
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.326Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "');"
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.337Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nlet"
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.348Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " image"
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.357Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "1"
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.370Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "9"
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.380Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.393Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Resource = $r('app.media"
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.402Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ".image"
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.412Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "19"
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.423Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "');\nlet"
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.433Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " image2"
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.443Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "0"
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.453Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.461Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Resource = $r('app.media"
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.473Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.487Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "image"
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.503Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "2"
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.509Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "0"
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.517Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "');"
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.526Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n\n"
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.535Z"
+  },
+  {
+    "fullText": "\nlet image12: Resource = $r('app.media.image12');\nlet image13: Resource = $r('app.media.image13');\nlet image14: Resource = $r('app.media.image14');\nlet image15: Resource = $r('app.media.image15');\n\nlet image16: Resource = $r('app.media.image16');\nlet image17: Resource = $r('app.media.image17');\nlet image18: Resource = $r('app.media.image18');\nlet image19: Resource = $r('app.media.image19');\nlet image20: Resource = $r('app.media.image20');\n\n\n",
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.547Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nlet image12: Resource = $r('app.media.image12');\nlet image13: Resource = $r('app.media.image13');\nlet image14: Resource = $r('app.media.image14');\nlet image15: Resource = $r('app.media.image15');\n\nlet image16: Resource = $r('app.media.image16');\n"
+    },
+    "fullText": "\nlet image12: Resource = $r('app.media.image12');\nlet image13: Resource = $r('app.media.image13');\nlet image14: Resource = $r('app.media.image14');\nlet image15: Resource = $r('app.media.image15');\n\nlet image16: Resource = $r('app.media.image16');\nlet image17: Resource = $r('app.media.image17');\nlet image18: Resource = $r('app.media.image18');\nlet image19: Resource = $r('app.media.image19');\nlet image20: Resource = $r('app.media.image20');\n\n\n",
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.549Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "69855f89-018c-4384-b206-e8011c7b6a47",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/arktsType.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/arktsType.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/arktsType.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 42,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 43,
+      "monotonicallyIncreasingSuggestionId": 191,
+      "range": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 21,
+        "endColumn": 1
+      },
+      "replaceText": "\nlet image12: Resource = $r('app.media.image12');\nlet image13: Resource = $r('app.media.image13');\nlet image14: Resource = $r('app.media.image14');\nlet image15: Resource = $r('app.media.image15');\n\nlet image16: Resource = $r('app.media.image16');\nlet image17: Resource = $r('app.media.image17');\nlet image18: Resource = $r('app.media.image18');\nlet image19: Resource = $r('app.media.image19');\nlet image20: Resource = $r('app.media.image20');\n\n\n",
+      "originalText": "\nlet image12: Resource = $r('app.media.image12');\nlet image13: Resource = $r('app.media.image13');\nlet image14: Resource = $r('app.media.image14');\nlet image15: Resource = $r('app.media.image15');\n\nlet image16: Resource = $r('app.media.image16');\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 21,
+        "endColumn": 1
+      },
+      "diffText": "\nlet image12: Resource = $r('app.media.image12');\nlet image13: Resource = $r('app.media.image13');\nlet image14: Resource = $r('app.media.image14');\nlet image15: Resource = $r('app.media.image15');\n\nlet image16: Resource = $r('app.media.image16');\nlet image17: Resource = $r('app.media.image17');\nlet image18: Resource = $r('app.media.image18');\nlet image19: Resource = $r('app.media.image19');\nlet image20: Resource = $r('app.media.image20');\n\n\n",
+      "fullOriginalText": "\nlet image12: Resource = $r('app.media.image12');\nlet image13: Resource = $r('app.media.image13');\nlet image14: Resource = $r('app.media.image14');\nlet image15: Resource = $r('app.media.image15');\n\nlet image16: Resource = $r('app.media.image16');\n",
+      "suggestionTriggerTime": 1742297549704.8,
+      "greens": [],
+      "source": "typing",
+      "requestId": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+      "selection": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 21,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "4782b768-fd00-4f58-adc3-adb4a8c2ee60",
+      "undoRedoGroup": {
+        "id": 194,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.550Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.550Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.550Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "4782b768-fd00-4f58-adc3-adb4a8c2ee60",
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.557Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nlet image12: Resource = $r('app.media.image12');\nlet image13: Resource = $r('app.media.image13');\nlet image14: Resource = $r('app.media.image14');\nlet image15: Resource = $r('app.media.image15');\n\nlet image16: Resource = $r('app.media.image16');\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "4782b768-fd00-4f58-adc3-adb4a8c2ee60",
+    "generationUUID": "fbf451a6-b35b-4a25-a2a9-05840319c358",
+    "timestamp": "2025-03-18T11:32:30.557Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "4782b768-fd00-4f58-adc3-adb4a8c2ee60",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-18T11:32:30.557Z"
+  }
+]

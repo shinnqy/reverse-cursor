@@ -1,0 +1,121 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "0b6fcf9a-3197-4935-8ee2-5d2ec690f432",
+    "timestamp": "2025-03-19T13:13:02.023Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/twoWayBinding.ets",
+          "diffHistory": [
+            "16+|  @Link t\n",
+            "16-|  @Link t\n16+|  @Link target: number = 0;\n",
+            "22-|          //\n22+|          this.target++;\n",
+            "9-|      LinkChildComponent()\n9+|      LinkChildComponent({ target: this.parentCount })\n",
+            "46+|  @Link userName: string = '';\n47+|  @Link userAge: number = 0;\n",
+            "53+|      TextField({ value: this.userAge, onChange: (value: number) => { this.userAge = value } })\n",
+            "51-|      Text(\"\")\n52-|      Text(\"\")\n51+|      Text(\"Name:\")\n52+|      TextField({ value: this.userName, onChange: (value: string) => { this.userName = value } })\n53+|      Text(\"Age:\")\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/twoWayBinding.ets",
+        "contents": "@Entry\n@Component\nstruct ParentComponent {\n  @State parentCount: number = 0;\n\n  build() {\n    Column() {\n      Text(this.parentCount.toString())\n      LinkChildComponent({ target: this.parentCount })\n    }\n  }\n}\n\n@Component\nstruct LinkChildComponent {\n  @Link target: number = 0;\n\n  build() {\n    Column() {\n      Button()\n        .onClick(() => {\n          this.target++;\n        })\n    }\n  }\n}\n\ninterface User {\n  name: string;\n  age: number;\n}\n\n@Component\nstruct ComplexBindingExample {\n  @State user: User = { name: 'John', age: 30 };\n\n  build() {\n    Column() {\n      Text(this.user.name)\n    }\n  }\n}\n\n@Component\nstruct UserEditor {\n  @Link userName: string = '';\n  @Link userAge: number = 0;\n\n  build() {\n    Column() {\n      Text(\"Name:\")\n      TextField({ value: this.userName, onChange: (value: string) => { this.userName = value } })\n      Text(\"Age:\")\n      TextField({ value: this.userAge, onChange: (value: number) => { this.userAge = value } })\n    }\n  }\n}\n\n\n",
+        "cursorPosition": {
+          "line": 50,
+          "column": 6
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 32,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742389982064,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.5,
+      "timeAtRequestSend": 1742389982064
+    },
+    "generateUuid": "0b6fcf9a-3197-4935-8ee2-5d2ec690f432",
+    "timestamp": "2025-03-19T13:13:02.066Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "0b6fcf9a-3197-4935-8ee2-5d2ec690f432",
+    "timestamp": "2025-03-19T13:13:02.430Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "    Column() {\n      Text(\"Name:\")\n      TextField({ value: this.userName, onChange: (value: string) => { this.userName = value } })\n      Text(\"Age:\")\n      TextField({ value: this.userAge, onChange: (value: number) => { this.userAge = value } })\n    }",
+      "rangeToReplace": {
+        "startLineNumber": 50,
+        "endLineNumberInclusive": 55
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "0b6fcf9a-3197-4935-8ee2-5d2ec690f432",
+    "timestamp": "2025-03-19T13:13:02.431Z"
+  },
+  {
+    "firstChunkValue": "    Column() {\n      Text(\"Name:\")\n      TextField({ value: this.userName, onChange: (value: string) => { this.userName = value } })\n      Text(\"Age:\")\n      TextField({ value: this.userAge, onChange: (value: number) => { this.userAge = value } })\n    }",
+    "generationUUID": "0b6fcf9a-3197-4935-8ee2-5d2ec690f432",
+    "timestamp": "2025-03-19T13:13:02.442Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": false
+    },
+    "generationUUID": "0b6fcf9a-3197-4935-8ee2-5d2ec690f432",
+    "timestamp": "2025-03-19T13:13:02.443Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "0b6fcf9a-3197-4935-8ee2-5d2ec690f432",
+    "timestamp": "2025-03-19T13:13:02.448Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "0b6fcf9a-3197-4935-8ee2-5d2ec690f432",
+    "timestamp": "2025-03-19T13:13:02.525Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "5c3936cc-1da9-404a-bfde-4921d9ec1496",
+    "generationUUID": "0b6fcf9a-3197-4935-8ee2-5d2ec690f432",
+    "timestamp": "2025-03-19T13:13:02.530Z"
+  }
+]

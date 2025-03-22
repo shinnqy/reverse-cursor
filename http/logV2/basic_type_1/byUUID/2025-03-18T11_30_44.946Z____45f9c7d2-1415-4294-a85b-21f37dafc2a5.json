@@ -1,0 +1,746 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:44.946Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/basicType.ets",
+          "diffHistory": [
+            "1+|let a: number = 1;\n2+|let b: string = '1';\n3+|let c: boolean = true;\n4+|let d: any = '1';\n5+|let e: void = undefined;\n6+|let f: null = null;\n7+|let g: undefined = undefined;\n",
+            "1-|let a: number = 1;\n2-|let b: string = '1';\n3-|let c: boolean = true;\n4-|let d: any = '1';\n5-|let e: void = undefined;\n6-|let f: null = null;\n7-|let g: undefined = undefined;\n1+|let str: string = '123';\n2+|str.split('');\n",
+            "1-|let str: string = '123';\n2-|str.split('');\n1+|let str1: string = '123';\n2+|str1.sptr2;\n3+|\n4+|let num1: number = 123;\n5+|let num2: number = 456;\n6+|let num3: number = num1 + num2;\n",
+            "2-|str1.sptr2;\n2+|let str2: string = '456';\n3+|let str3: string = str1 + str2;\n",
+            "2-|let str2: string = '456';\n3-|let str3: string = str1 + str2;\n2+|str1.split('');\n6-|let num2: number = 456;\n7-|let num3: number = num1 + num2;\n5+|num1.toString();\n6+|\n7+|let bool1: boolean = true;\n8+|bool1.toString();\n",
+            "4+|let str2: string = `Template string ${str1}`;\n5+|str2.split('');\n6+|\n7+|const str3 = \"Constant string\";\n8+|str3.toLocaleUpperCase();\n9+|\n5-|num1.toString();\n11+|num1.toFixed(2);\n",
+            "13+|let num2: number = 123.456;\n14+|num2.toExponential(2);\n15+|\n",
+            "17-|bool1.toString();\n17+|bool1.toString();\n18+|\n19+|let arr1: Array<number> = [1, 2, 3];\n20+|arr1.push(4);\n21+|\n22+|let arr2: number[] = [1, 2, 3];\n23+|arr2.push(4);\n24+|\n",
+            "21+|arr2.m\n",
+            "25+|arr2.map((item: number) => item * 2);\n27+|let obj1: { name: string; age: number } = { name: 'John', age: 20 };\n28+|obj1.name;\n29+|obj1.age;\n30+|\n31+|\n",
+            "21-|arr2.m\n21+|arr1.map((item: number) => item * 2);\n",
+            "25-|arr2.map((item: number) => item * 2);\n27-|let obj1: { name: string; age: number } = { name: 'John', age: 20 };\n28-|obj1.name;\n29-|obj1.age;\n30-|\n31-|\n",
+            "21-|arr1.map((item: number) => item * 2);\n",
+            "26+|let obj1: { name: string; age: number } = { name: 'John', age: 20 };\n27+|obj1.name;\n28+|obj1.age;\n29+|\n30+|let obj2: { name: string; age: number } = { name: 'John', age: 20 };\n31+|obj2.name;\n32+|obj2.age;\n",
+            "25-|let obj1: { name: string; age: number } = { name: 'John', age: 20 };\n26-|obj1.name;\n27-|obj1.age;\n28-|\n29-|let obj2: { name: string; age: number } = { name: 'John', age: 20 };\n30-|obj2.name;\n31-|obj2.age;\n",
+            "22+|\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/basicType.ets",
+        "contents": "let str1: string = '123';\nstr1.split('');\n\nlet str2: string = `Template string ${str1}`;\nstr2.split('');\n\nconst str3 = \"Constant string\";\nstr3.toLocaleUpperCase();\n\nlet num1: number = 123;\nnum1.toFixed(2);\n\nlet num2: number = 123.456;\nnum2.toExponential(2);\n\nlet bool1: boolean = true;\nbool1.toString();\n\nlet arr1: Array<number> = [1, 2, 3];\narr1.push(4);\n\n\nlet arr2: number[] = [1, 2, 3];\narr2.push(4);\n\n",
+        "cursorPosition": {
+          "line": 20,
+          "column": 0
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 218,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/pages/AboutMe.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 13
+            }
+          ],
+          "lastViewedAt": 1742296854734
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742297444986,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.300048828125,
+      "timeAtRequestSend": 1742297444986
+    },
+    "generateUuid": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:44.988Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:45.376Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "bool1.toString();\n\nlet arr1: Array<number> = [1, 2, 3];\narr1.push(4);\narr",
+      "rangeToReplace": {
+        "startLineNumber": 17,
+        "endLineNumberInclusive": 26
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:45.377Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "1"
+    },
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:45.407Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ".map"
+    },
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:45.423Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "((item: number) => item *"
+    },
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:45.433Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " 2);\n\n"
+    },
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:45.442Z"
+  },
+  {
+    "firstChunkValue": "bool1.toString();\n\nlet arr1: Array<number> = [1, 2, 3];\narr1.push(4);\narr1.map((item: number) => item * 2);\n\nlet arr2: number[] = [1, 2, 3];\narr2.push(4);\n\n",
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:45.444Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "bool1.toString();\n\nlet arr1: Array<number> = [1, 2, 3];\narr1.push(4);\narr1.map((item: number) => item * 2);\n\nlet arr2: number[] = [1, 2, 3];\narr2.push(4);\n\n"
+    },
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:45.446Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "36130ed0-4d7a-4966-bbc1-a808209ab04f",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 218,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 218,
+      "monotonicallyIncreasingSuggestionId": 150,
+      "range": {
+        "startLineNumber": 17,
+        "startColumn": 1,
+        "endLineNumberInclusive": 26,
+        "endColumn": 1
+      },
+      "replaceText": "bool1.toString();\n\nlet arr1: Array<number> = [1, 2, 3];\narr1.push(4);\narr1.map((item: number) => item * 2);\n\nlet arr2: number[] = [1, 2, 3];\narr2.push(4);\n\n",
+      "originalText": "bool1.toString();\n\nlet arr1: Array<number> = [1, 2, 3];\narr1.push(4);\n\n\nlet arr2: number[] = [1, 2, 3];\narr2.push(4);\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 17,
+        "startColumn": 1,
+        "endLineNumberInclusive": 26,
+        "endColumn": 1
+      },
+      "diffText": "bool1.toString();\n\nlet arr1: Array<number> = [1, 2, 3];\narr1.push(4);\narr1.map((item: number) => item * 2);\n\nlet arr2: number[] = [1, 2, 3];\narr2.push(4);\n\n",
+      "fullOriginalText": "bool1.toString();\n\nlet arr1: Array<number> = [1, 2, 3];\narr1.push(4);\n\n\nlet arr2: number[] = [1, 2, 3];\narr2.push(4);\n\n",
+      "suggestionTriggerTime": 1742297444937.5,
+      "greens": [],
+      "source": "typing",
+      "requestId": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+      "selection": {
+        "startLineNumber": 17,
+        "startColumn": 1,
+        "endLineNumberInclusive": 26,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 152,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:45.447Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "let"
+    },
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:45.456Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " arr2: number[] = [1"
+    },
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:45.466Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ","
+    },
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:45.486Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " 2, 3];\narr"
+    },
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:45.495Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "2"
+    },
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:45.508Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ".push(4);\narr"
+    },
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:45.521Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "2."
+    },
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:45.534Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "map"
+    },
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:45.549Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "((item: number) => item *"
+    },
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:45.558Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:45.571Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "2);\n\n"
+    },
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:45.583Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "let obj1"
+    },
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:45.610Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": { name: string; age:"
+    },
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:45.624Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " number"
+    },
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:45.634Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " }"
+    },
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:45.649Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " = { name: 'John', age"
+    },
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:45.660Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": 20 };\nobj1"
+    },
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:45.696Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ".name"
+    },
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:45.696Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";\nobj1."
+    },
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:45.720Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "age"
+    },
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:45.734Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";\n\n"
+    },
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:45.745Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:45.758Z"
+  },
+  {
+    "fullText": "bool1.toString();\n\nlet arr1: Array<number> = [1, 2, 3];\narr1.push(4);\narr1.map((item: number) => item * 2);\n\nlet arr2: number[] = [1, 2, 3];\narr2.push(4);\narr2.map((item: number) => item * 2);\n\nlet obj1: { name: string; age: number } = { name: 'John', age: 20 };\nobj1.name;\nobj1.age;\n\n\n",
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:45.773Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "bool1.toString();\n\nlet arr1: Array<number> = [1, 2, 3];\narr1.push(4);\narr1.map((item: number) => item * 2);\n\nlet arr2: number[] = [1, 2, 3];\narr2.push(4);\n\n"
+    },
+    "fullText": "bool1.toString();\n\nlet arr1: Array<number> = [1, 2, 3];\narr1.push(4);\narr1.map((item: number) => item * 2);\n\nlet arr2: number[] = [1, 2, 3];\narr2.push(4);\narr2.map((item: number) => item * 2);\n\nlet obj1: { name: string; age: number } = { name: 'John', age: 20 };\nobj1.name;\nobj1.age;\n\n\n",
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:45.774Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:45.775Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:45.776Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "d5290b70-c4af-4080-a310-207ed0b355ea",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 218,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 219,
+      "monotonicallyIncreasingSuggestionId": 151,
+      "range": {
+        "startLineNumber": 17,
+        "startColumn": 1,
+        "endLineNumberInclusive": 26,
+        "endColumn": 1
+      },
+      "replaceText": "bool1.toString();\n\nlet arr1: Array<number> = [1, 2, 3];\narr1.push(4);\narr1.map((item: number) => item * 2);\n\nlet arr2: number[] = [1, 2, 3];\narr2.push(4);\narr2.map((item: number) => item * 2);\n\nlet obj1: { name: string; age: number } = { name: 'John', age: 20 };\nobj1.name;\nobj1.age;\n\n\n",
+      "originalText": "bool1.toString();\n\nlet arr1: Array<number> = [1, 2, 3];\narr1.push(4);\narr1.map((item: number) => item * 2);\n\nlet arr2: number[] = [1, 2, 3];\narr2.push(4);\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 17,
+        "startColumn": 1,
+        "endLineNumberInclusive": 26,
+        "endColumn": 1
+      },
+      "diffText": "bool1.toString();\n\nlet arr1: Array<number> = [1, 2, 3];\narr1.push(4);\narr1.map((item: number) => item * 2);\n\nlet arr2: number[] = [1, 2, 3];\narr2.push(4);\narr2.map((item: number) => item * 2);\n\nlet obj1: { name: string; age: number } = { name: 'John', age: 20 };\nobj1.name;\nobj1.age;\n\n\n",
+      "fullOriginalText": "bool1.toString();\n\nlet arr1: Array<number> = [1, 2, 3];\narr1.push(4);\narr1.map((item: number) => item * 2);\n\nlet arr2: number[] = [1, 2, 3];\narr2.push(4);\n\n",
+      "suggestionTriggerTime": 1742297444937.5,
+      "greens": [],
+      "source": "typing",
+      "requestId": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+      "selection": {
+        "startLineNumber": 17,
+        "startColumn": 1,
+        "endLineNumberInclusive": 26,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "2cbbb77d-e4cf-425c-a347-366afe1d2786",
+      "undoRedoGroup": {
+        "id": 153,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:45.776Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "2cbbb77d-e4cf-425c-a347-366afe1d2786",
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:45.779Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "bool1.toString();\n\nlet arr1: Array<number> = [1, 2, 3];\narr1.push(4);\narr1.map((item: number) => item * 2);\n\nlet arr2: number[] = [1, 2, 3];\narr2.push(4);\n\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "2cbbb77d-e4cf-425c-a347-366afe1d2786",
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:45.779Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "2cbbb77d-e4cf-425c-a347-366afe1d2786",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-18T11:30:45.779Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "36130ed0-4d7a-4966-bbc1-a808209ab04f",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 218,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 218,
+      "monotonicallyIncreasingSuggestionId": 150,
+      "range": {
+        "startLineNumber": 17,
+        "startColumn": 1,
+        "endLineNumberInclusive": 26,
+        "endColumn": 1
+      },
+      "replaceText": "bool1.toString();\n\nlet arr1: Array<number> = [1, 2, 3];\narr1.push(4);\narr1.map((item: number) => item * 2);\n\nlet arr2: number[] = [1, 2, 3];\narr2.push(4);\n\n",
+      "originalText": "bool1.toString();\n\nlet arr1: Array<number> = [1, 2, 3];\narr1.push(4);\n\n\nlet arr2: number[] = [1, 2, 3];\narr2.push(4);\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 17,
+        "startColumn": 1,
+        "endLineNumberInclusive": 26,
+        "endColumn": 1
+      },
+      "diffText": "bool1.toString();\n\nlet arr1: Array<number> = [1, 2, 3];\narr1.push(4);\narr1.map((item: number) => item * 2);\n\nlet arr2: number[] = [1, 2, 3];\narr2.push(4);\n\n",
+      "fullOriginalText": "bool1.toString();\n\nlet arr1: Array<number> = [1, 2, 3];\narr1.push(4);\n\n\nlet arr2: number[] = [1, 2, 3];\narr2.push(4);\n\n",
+      "suggestionTriggerTime": 1742297444937.5,
+      "greens": [],
+      "source": "typing",
+      "requestId": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+      "selection": {
+        "startLineNumber": 17,
+        "startColumn": 1,
+        "endLineNumberInclusive": 26,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 152,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "d;697",
+      "onAcceptDisplayId": "d5290b70-c4af-4080-a310-207ed0b355ea"
+    },
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:46.434Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "36130ed0-4d7a-4966-bbc1-a808209ab04f",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 218,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 218,
+      "monotonicallyIncreasingSuggestionId": 150,
+      "range": {
+        "startLineNumber": 17,
+        "startColumn": 1,
+        "endLineNumberInclusive": 26,
+        "endColumn": 1
+      },
+      "replaceText": "bool1.toString();\n\nlet arr1: Array<number> = [1, 2, 3];\narr1.push(4);\narr1.map((item: number) => item * 2);\n\nlet arr2: number[] = [1, 2, 3];\narr2.push(4);\n\n",
+      "originalText": "bool1.toString();\n\nlet arr1: Array<number> = [1, 2, 3];\narr1.push(4);\n\n\nlet arr2: number[] = [1, 2, 3];\narr2.push(4);\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 17,
+        "startColumn": 1,
+        "endLineNumberInclusive": 26,
+        "endColumn": 1
+      },
+      "diffText": "bool1.toString();\n\nlet arr1: Array<number> = [1, 2, 3];\narr1.push(4);\narr1.map((item: number) => item * 2);\n\nlet arr2: number[] = [1, 2, 3];\narr2.push(4);\n\n",
+      "fullOriginalText": "bool1.toString();\n\nlet arr1: Array<number> = [1, 2, 3];\narr1.push(4);\n\n\nlet arr2: number[] = [1, 2, 3];\narr2.push(4);\n\n",
+      "suggestionTriggerTime": 1742297444937.5,
+      "greens": [],
+      "source": "typing",
+      "requestId": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+      "selection": {
+        "startLineNumber": 17,
+        "startColumn": 1,
+        "endLineNumberInclusive": 26,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 152,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "d;697",
+      "onAcceptDisplayId": "d5290b70-c4af-4080-a310-207ed0b355ea"
+    },
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:46.444Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "d5290b70-c4af-4080-a310-207ed0b355ea",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 218,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 219,
+      "monotonicallyIncreasingSuggestionId": 151,
+      "range": {
+        "startLineNumber": 17,
+        "startColumn": 1,
+        "endLineNumberInclusive": 26,
+        "endColumn": 1
+      },
+      "replaceText": "bool1.toString();\n\nlet arr1: Array<number> = [1, 2, 3];\narr1.push(4);\narr1.map((item: number) => item * 2);\n\nlet arr2: number[] = [1, 2, 3];\narr2.push(4);\narr2.map((item: number) => item * 2);\n\nlet obj1: { name: string; age: number } = { name: 'John', age: 20 };\nobj1.name;\nobj1.age;\n\n\n",
+      "originalText": "bool1.toString();\n\nlet arr1: Array<number> = [1, 2, 3];\narr1.push(4);\narr1.map((item: number) => item * 2);\n\nlet arr2: number[] = [1, 2, 3];\narr2.push(4);\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 17,
+        "startColumn": 1,
+        "endLineNumberInclusive": 26,
+        "endColumn": 1
+      },
+      "diffText": "bool1.toString();\n\nlet arr1: Array<number> = [1, 2, 3];\narr1.push(4);\narr1.map((item: number) => item * 2);\n\nlet arr2: number[] = [1, 2, 3];\narr2.push(4);\narr2.map((item: number) => item * 2);\n\nlet obj1: { name: string; age: number } = { name: 'John', age: 20 };\nobj1.name;\nobj1.age;\n\n\n",
+      "fullOriginalText": "bool1.toString();\n\nlet arr1: Array<number> = [1, 2, 3];\narr1.push(4);\narr1.map((item: number) => item * 2);\n\nlet arr2: number[] = [1, 2, 3];\narr2.push(4);\n\n",
+      "suggestionTriggerTime": 1742297444937.5,
+      "greens": [],
+      "source": "typing",
+      "requestId": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+      "selection": {
+        "startLineNumber": 17,
+        "startColumn": 1,
+        "endLineNumberInclusive": 26,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "2cbbb77d-e4cf-425c-a347-366afe1d2786",
+      "undoRedoGroup": {
+        "id": 153,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:46.445Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "d5290b70-c4af-4080-a310-207ed0b355ea",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 218,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 219,
+      "monotonicallyIncreasingSuggestionId": 151,
+      "range": {
+        "startLineNumber": 17,
+        "startColumn": 1,
+        "endLineNumberInclusive": 26,
+        "endColumn": 1
+      },
+      "replaceText": "bool1.toString();\n\nlet arr1: Array<number> = [1, 2, 3];\narr1.push(4);\narr1.map((item: number) => item * 2);\n\nlet arr2: number[] = [1, 2, 3];\narr2.push(4);\narr2.map((item: number) => item * 2);\n\nlet obj1: { name: string; age: number } = { name: 'John', age: 20 };\nobj1.name;\nobj1.age;\n\n\n",
+      "originalText": "bool1.toString();\n\nlet arr1: Array<number> = [1, 2, 3];\narr1.push(4);\narr1.map((item: number) => item * 2);\n\nlet arr2: number[] = [1, 2, 3];\narr2.push(4);\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 17,
+        "startColumn": 1,
+        "endLineNumberInclusive": 26,
+        "endColumn": 1
+      },
+      "diffText": "bool1.toString();\n\nlet arr1: Array<number> = [1, 2, 3];\narr1.push(4);\narr1.map((item: number) => item * 2);\n\nlet arr2: number[] = [1, 2, 3];\narr2.push(4);\narr2.map((item: number) => item * 2);\n\nlet obj1: { name: string; age: number } = { name: 'John', age: 20 };\nobj1.name;\nobj1.age;\n\n\n",
+      "fullOriginalText": "bool1.toString();\n\nlet arr1: Array<number> = [1, 2, 3];\narr1.push(4);\narr1.map((item: number) => item * 2);\n\nlet arr2: number[] = [1, 2, 3];\narr2.push(4);\n\n",
+      "suggestionTriggerTime": 1742297444937.5,
+      "greens": [],
+      "source": "typing",
+      "requestId": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+      "selection": {
+        "startLineNumber": 17,
+        "startColumn": 1,
+        "endLineNumberInclusive": 26,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "2cbbb77d-e4cf-425c-a347-366afe1d2786",
+      "undoRedoGroup": {
+        "id": 153,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "d;703"
+    },
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:51.627Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "d5290b70-c4af-4080-a310-207ed0b355ea",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 218,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 219,
+      "monotonicallyIncreasingSuggestionId": 151,
+      "range": {
+        "startLineNumber": 17,
+        "startColumn": 1,
+        "endLineNumberInclusive": 26,
+        "endColumn": 1
+      },
+      "replaceText": "bool1.toString();\n\nlet arr1: Array<number> = [1, 2, 3];\narr1.push(4);\narr1.map((item: number) => item * 2);\n\nlet arr2: number[] = [1, 2, 3];\narr2.push(4);\narr2.map((item: number) => item * 2);\n\nlet obj1: { name: string; age: number } = { name: 'John', age: 20 };\nobj1.name;\nobj1.age;\n\n\n",
+      "originalText": "bool1.toString();\n\nlet arr1: Array<number> = [1, 2, 3];\narr1.push(4);\narr1.map((item: number) => item * 2);\n\nlet arr2: number[] = [1, 2, 3];\narr2.push(4);\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 17,
+        "startColumn": 1,
+        "endLineNumberInclusive": 26,
+        "endColumn": 1
+      },
+      "diffText": "bool1.toString();\n\nlet arr1: Array<number> = [1, 2, 3];\narr1.push(4);\narr1.map((item: number) => item * 2);\n\nlet arr2: number[] = [1, 2, 3];\narr2.push(4);\narr2.map((item: number) => item * 2);\n\nlet obj1: { name: string; age: number } = { name: 'John', age: 20 };\nobj1.name;\nobj1.age;\n\n\n",
+      "fullOriginalText": "bool1.toString();\n\nlet arr1: Array<number> = [1, 2, 3];\narr1.push(4);\narr1.map((item: number) => item * 2);\n\nlet arr2: number[] = [1, 2, 3];\narr2.push(4);\n\n",
+      "suggestionTriggerTime": 1742297444937.5,
+      "greens": [],
+      "source": "typing",
+      "requestId": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+      "selection": {
+        "startLineNumber": 17,
+        "startColumn": 1,
+        "endLineNumberInclusive": 26,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "2cbbb77d-e4cf-425c-a347-366afe1d2786",
+      "undoRedoGroup": {
+        "id": 153,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "d;703"
+    },
+    "generationUUID": "45f9c7d2-1415-4294-a85b-21f37dafc2a5",
+    "timestamp": "2025-03-18T11:30:51.635Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "2cbbb77d-e4cf-425c-a347-366afe1d2786",
+    "fusedCursorPrediction": null,
+    "oldText": "bool1.toString();\n\nlet arr1: Array<number> = [1, 2, 3];\narr1.push(4);\narr1.map((item: number) => item * 2);\n\nlet arr2: number[] = [1, 2, 3];\narr2.push(4);\n\n",
+    "newText": "bool1.toString();\n\nlet arr1: Array<number> = [1, 2, 3];\narr1.push(4);\narr1.map((item: number) => item * 2);\n\nlet arr2: number[] = [1, 2, 3];\narr2.push(4);\narr2.map((item: number) => item * 2);\n\nlet obj1: { name: string; age: number } = { name: 'John', age: 20 };\nobj1.name;\nobj1.age;\n\n\n",
+    "timestamp": "2025-03-18T11:30:51.635Z"
+  }
+]

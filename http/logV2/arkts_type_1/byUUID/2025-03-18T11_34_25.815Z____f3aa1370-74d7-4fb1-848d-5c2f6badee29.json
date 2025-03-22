@@ -1,0 +1,479 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "f3aa1370-74d7-4fb1-848d-5c2f6badee29",
+    "timestamp": "2025-03-18T11:34:25.815Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/basicType.ets",
+          "diffHistory": [
+            "1+|let a: number = 1;\n2+|let b: string = '1';\n3+|let c: boolean = true;\n4+|let d: any = '1';\n5+|let e: void = undefined;\n6+|let f: null = null;\n7+|let g: undefined = undefined;\n",
+            "1-|let a: number = 1;\n2-|let b: string = '1';\n3-|let c: boolean = true;\n4-|let d: any = '1';\n5-|let e: void = undefined;\n6-|let f: null = null;\n7-|let g: undefined = undefined;\n1+|let str: string = '123';\n2+|str.split('');\n",
+            "1-|let str: string = '123';\n2-|str.split('');\n1+|let str1: string = '123';\n2+|str1.sptr2;\n3+|\n4+|let num1: number = 123;\n5+|let num2: number = 456;\n6+|let num3: number = num1 + num2;\n",
+            "2-|str1.sptr2;\n2+|let str2: string = '456';\n3+|let str3: string = str1 + str2;\n",
+            "2-|let str2: string = '456';\n3-|let str3: string = str1 + str2;\n2+|str1.split('');\n6-|let num2: number = 456;\n7-|let num3: number = num1 + num2;\n5+|num1.toString();\n6+|\n7+|let bool1: boolean = true;\n8+|bool1.toString();\n",
+            "4+|let str2: string = `Template string ${str1}`;\n5+|str2.split('');\n6+|\n7+|const str3 = \"Constant string\";\n8+|str3.toLocaleUpperCase();\n9+|\n5-|num1.toString();\n11+|num1.toFixed(2);\n",
+            "13+|let num2: number = 123.456;\n14+|num2.toExponential(2);\n15+|\n",
+            "17-|bool1.toString();\n17+|bool1.toString();\n18+|\n19+|let arr1: Array<number> = [1, 2, 3];\n20+|arr1.push(4);\n21+|\n22+|let arr2: number[] = [1, 2, 3];\n23+|arr2.push(4);\n24+|\n",
+            "21+|arr2.m\n",
+            "25+|arr2.map((item: number) => item * 2);\n27+|let obj1: { name: string; age: number } = { name: 'John', age: 20 };\n28+|obj1.name;\n29+|obj1.age;\n30+|\n31+|\n",
+            "21-|arr2.m\n21+|arr1.map((item: number) => item * 2);\n",
+            "25-|arr2.map((item: number) => item * 2);\n27-|let obj1: { name: string; age: number } = { name: 'John', age: 20 };\n28-|obj1.name;\n29-|obj1.age;\n30-|\n31-|\n",
+            "21-|arr1.map((item: number) => item * 2);\n",
+            "26+|let obj1: { name: string; age: number } = { name: 'John', age: 20 };\n27+|obj1.name;\n28+|obj1.age;\n29+|\n30+|let obj2: { name: string; age: number } = { name: 'John', age: 20 };\n31+|obj2.name;\n32+|obj2.age;\n",
+            "25-|let obj1: { name: string; age: number } = { name: 'John', age: 20 };\n26-|obj1.name;\n27-|obj1.age;\n28-|\n29-|let obj2: { name: string; age: number } = { name: 'John', age: 20 };\n30-|obj2.name;\n31-|obj2.age;\n",
+            "21+|arr1.map((item: number) => item * 2);\n",
+            "25-|\n25+|arr2.map((item: number) => item * 2);\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/utils/arktsType.ets",
+          "diffHistory": [
+            "1+|let image1: Resource = $r('app.media.image1');\n2+|let image2: Resource = $r('app.media.image2');\n3+|let image3: Resource = $r('app.media.image3');\n4+|let image4: Resource = $r('app.media.image4');\n5+|let image5: Resource = $r('app.media.image5');\n6+|let image6: Resource = $r('app.media.image6');\n",
+            "7+|\n8+|const image7: Resource = $r('app.media.image7');\n9+|const image8: Resource = $r('app.media.image8');\n10+|const image9: Resource = $r('app.media.image9');\n11+|const image10: Resource = $r('app.media.image10');\n12+|\n13+|let image11: Resource = $r('app.media.image11');\n14+|\n",
+            "15+|let image12: Resource = $r('app.media.image12');\n16+|let image13: Resource = $r('app.media.image13');\n17+|let image14: Resource = $r('app.media.image14');\n18+|let image15: Resource = $r('app.media.image15');\n19+|\n20+|\n",
+            "15-|let image12: Resource = $r('app.media.image12');\n16-|let image13: Resource = $r('app.media.image13');\n17-|let image14: Resource = $r('app.media.image14');\n18-|let image15: Resource = $r('app.media.image15');\n19-|\n20-|\n",
+            "9-|const image8: Resource = $r('app.media.image8');\n10-|const image9: Resource = $r('app.media.image9');\n11-|const image10: Resource = $r('app.media.image10');\n13-|let image11: Resource = $r('app.media.image11');\n10+|let pixelMap: PixelMap = new PixelMap();\n12+|let i18n: I18n = new I18n();\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/arktsType.ets",
+        "contents": "let image1: Resource = $r('app.media.image1');\nlet image2: Resource = $r('app.media.image2');\nlet image3: Resource = $r('app.media.image3');\nlet image4: Resource = $r('app.media.image4');\nlet image5: Resource = $r('app.media.image5');\nlet image6: Resource = $r('app.media.image6');\n\nconst image7: Resource = $r('app.media.image7');\n\nlet pixelMap: PixelMap = new PixelMap();\n",
+        "cursorPosition": {
+          "line": 9,
+          "column": 0
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 67,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/pages/AboutMe.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 13
+            }
+          ],
+          "lastViewedAt": 1742296854734
+        },
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/utils/basicType.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            8
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 8,
+              "endLineNumberInclusive": 26
+            }
+          ],
+          "lastViewedAt": 1742297476629
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1742297665843,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 52.5,
+      "timeAtRequestSend": 1742297665843
+    },
+    "generateUuid": "f3aa1370-74d7-4fb1-848d-5c2f6badee29",
+    "timestamp": "2025-03-18T11:34:25.845Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "f3aa1370-74d7-4fb1-848d-5c2f6badee29",
+    "timestamp": "2025-03-18T11:34:26.245Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "let image6: Resource = $r('app.media.image6');\n\nconst image7: Resource = $r('app.media.image7');\n\nlet pixelMap: PixelMap = new PixelMap();\nlet",
+      "rangeToReplace": {
+        "startLineNumber": 6,
+        "endLineNumberInclusive": 11
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "f3aa1370-74d7-4fb1-848d-5c2f6badee29",
+    "timestamp": "2025-03-18T11:34:26.247Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " pixelMap2"
+    },
+    "generationUUID": "f3aa1370-74d7-4fb1-848d-5c2f6badee29",
+    "timestamp": "2025-03-18T11:34:26.260Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "f3aa1370-74d7-4fb1-848d-5c2f6badee29",
+    "timestamp": "2025-03-18T11:34:26.270Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Pixel"
+    },
+    "generationUUID": "f3aa1370-74d7-4fb1-848d-5c2f6badee29",
+    "timestamp": "2025-03-18T11:34:26.280Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Map = new PixelMap();\n\n"
+    },
+    "generationUUID": "f3aa1370-74d7-4fb1-848d-5c2f6badee29",
+    "timestamp": "2025-03-18T11:34:26.289Z"
+  },
+  {
+    "firstChunkValue": "let image6: Resource = $r('app.media.image6');\n\nconst image7: Resource = $r('app.media.image7');\n\nlet pixelMap: PixelMap = new PixelMap();\nlet pixelMap2: PixelMap = new PixelMap();",
+    "generationUUID": "f3aa1370-74d7-4fb1-848d-5c2f6badee29",
+    "timestamp": "2025-03-18T11:34:26.290Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "let image6: Resource = $r('app.media.image6');\n\nconst image7: Resource = $r('app.media.image7');\n\nlet pixelMap: PixelMap = new PixelMap();\nlet pixelMap2: PixelMap = new PixelMap();"
+    },
+    "generationUUID": "f3aa1370-74d7-4fb1-848d-5c2f6badee29",
+    "timestamp": "2025-03-18T11:34:26.291Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "954c6ab4-89c6-47b1-a311-62735593f9ba",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/arktsType.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/arktsType.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/arktsType.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 67,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 67,
+      "monotonicallyIncreasingSuggestionId": 204,
+      "range": {
+        "startLineNumber": 6,
+        "startColumn": 1,
+        "endLineNumberInclusive": 11,
+        "endColumn": 1
+      },
+      "replaceText": "let image6: Resource = $r('app.media.image6');\n\nconst image7: Resource = $r('app.media.image7');\n\nlet pixelMap: PixelMap = new PixelMap();\nlet pixelMap2: PixelMap = new PixelMap();",
+      "originalText": "let image6: Resource = $r('app.media.image6');\n\nconst image7: Resource = $r('app.media.image7');\n\nlet pixelMap: PixelMap = new PixelMap();\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 6,
+        "startColumn": 1,
+        "endLineNumberInclusive": 11,
+        "endColumn": 1
+      },
+      "diffText": "let image6: Resource = $r('app.media.image6');\n\nconst image7: Resource = $r('app.media.image7');\n\nlet pixelMap: PixelMap = new PixelMap();\nlet pixelMap2: PixelMap = new PixelMap();",
+      "fullOriginalText": "let image6: Resource = $r('app.media.image6');\n\nconst image7: Resource = $r('app.media.image7');\n\nlet pixelMap: PixelMap = new PixelMap();\n",
+      "suggestionTriggerTime": 1742297665793.4001,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "f3aa1370-74d7-4fb1-848d-5c2f6badee29",
+      "selection": {
+        "startLineNumber": 6,
+        "startColumn": 1,
+        "endLineNumberInclusive": 11,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 207,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "f3aa1370-74d7-4fb1-848d-5c2f6badee29",
+    "timestamp": "2025-03-18T11:34:26.295Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "let"
+    },
+    "generationUUID": "f3aa1370-74d7-4fb1-848d-5c2f6badee29",
+    "timestamp": "2025-03-18T11:34:26.302Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " pixelMap3"
+    },
+    "generationUUID": "f3aa1370-74d7-4fb1-848d-5c2f6badee29",
+    "timestamp": "2025-03-18T11:34:26.309Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "f3aa1370-74d7-4fb1-848d-5c2f6badee29",
+    "timestamp": "2025-03-18T11:34:26.321Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Pixel"
+    },
+    "generationUUID": "f3aa1370-74d7-4fb1-848d-5c2f6badee29",
+    "timestamp": "2025-03-18T11:34:26.331Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Map"
+    },
+    "generationUUID": "f3aa1370-74d7-4fb1-848d-5c2f6badee29",
+    "timestamp": "2025-03-18T11:34:26.339Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " = new PixelMap();\nlet"
+    },
+    "generationUUID": "f3aa1370-74d7-4fb1-848d-5c2f6badee29",
+    "timestamp": "2025-03-18T11:34:26.350Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " pixel"
+    },
+    "generationUUID": "f3aa1370-74d7-4fb1-848d-5c2f6badee29",
+    "timestamp": "2025-03-18T11:34:26.361Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Map4"
+    },
+    "generationUUID": "f3aa1370-74d7-4fb1-848d-5c2f6badee29",
+    "timestamp": "2025-03-18T11:34:26.373Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "f3aa1370-74d7-4fb1-848d-5c2f6badee29",
+    "timestamp": "2025-03-18T11:34:26.383Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Pixel"
+    },
+    "generationUUID": "f3aa1370-74d7-4fb1-848d-5c2f6badee29",
+    "timestamp": "2025-03-18T11:34:26.393Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Map ="
+    },
+    "generationUUID": "f3aa1370-74d7-4fb1-848d-5c2f6badee29",
+    "timestamp": "2025-03-18T11:34:26.405Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " new PixelMap();\nlet"
+    },
+    "generationUUID": "f3aa1370-74d7-4fb1-848d-5c2f6badee29",
+    "timestamp": "2025-03-18T11:34:26.415Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " pixelMap"
+    },
+    "generationUUID": "f3aa1370-74d7-4fb1-848d-5c2f6badee29",
+    "timestamp": "2025-03-18T11:34:26.427Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "5"
+    },
+    "generationUUID": "f3aa1370-74d7-4fb1-848d-5c2f6badee29",
+    "timestamp": "2025-03-18T11:34:26.435Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "f3aa1370-74d7-4fb1-848d-5c2f6badee29",
+    "timestamp": "2025-03-18T11:34:26.447Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Pixel"
+    },
+    "generationUUID": "f3aa1370-74d7-4fb1-848d-5c2f6badee29",
+    "timestamp": "2025-03-18T11:34:26.457Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Map"
+    },
+    "generationUUID": "f3aa1370-74d7-4fb1-848d-5c2f6badee29",
+    "timestamp": "2025-03-18T11:34:26.469Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "f3aa1370-74d7-4fb1-848d-5c2f6badee29",
+    "timestamp": "2025-03-18T11:34:26.479Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " new PixelMap();\n\n"
+    },
+    "generationUUID": "f3aa1370-74d7-4fb1-848d-5c2f6badee29",
+    "timestamp": "2025-03-18T11:34:26.494Z"
+  },
+  {
+    "fullText": "let image6: Resource = $r('app.media.image6');\n\nconst image7: Resource = $r('app.media.image7');\n\nlet pixelMap: PixelMap = new PixelMap();\nlet pixelMap2: PixelMap = new PixelMap();\n\nlet pixelMap3: PixelMap = new PixelMap();\nlet pixelMap4: PixelMap = new PixelMap();\nlet pixelMap5: PixelMap = new PixelMap();\n\n",
+    "generationUUID": "f3aa1370-74d7-4fb1-848d-5c2f6badee29",
+    "timestamp": "2025-03-18T11:34:26.494Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "let image6: Resource = $r('app.media.image6');\n\nconst image7: Resource = $r('app.media.image7');\n\nlet pixelMap: PixelMap = new PixelMap();\nlet pixelMap2: PixelMap = new PixelMap();"
+    },
+    "fullText": "let image6: Resource = $r('app.media.image6');\n\nconst image7: Resource = $r('app.media.image7');\n\nlet pixelMap: PixelMap = new PixelMap();\nlet pixelMap2: PixelMap = new PixelMap();\n\nlet pixelMap3: PixelMap = new PixelMap();\nlet pixelMap4: PixelMap = new PixelMap();\nlet pixelMap5: PixelMap = new PixelMap();\n\n",
+    "generationUUID": "f3aa1370-74d7-4fb1-848d-5c2f6badee29",
+    "timestamp": "2025-03-18T11:34:26.494Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "f3aa1370-74d7-4fb1-848d-5c2f6badee29",
+    "timestamp": "2025-03-18T11:34:26.496Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "f3aa1370-74d7-4fb1-848d-5c2f6badee29",
+    "timestamp": "2025-03-18T11:34:26.496Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "02f7fb6e-709f-475b-b443-2acc50d5c91f",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/arktsType.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/arktsType.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/arktsType.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 67,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 68,
+      "monotonicallyIncreasingSuggestionId": 205,
+      "range": {
+        "startLineNumber": 6,
+        "startColumn": 1,
+        "endLineNumberInclusive": 11,
+        "endColumn": 1
+      },
+      "replaceText": "let image6: Resource = $r('app.media.image6');\n\nconst image7: Resource = $r('app.media.image7');\n\nlet pixelMap: PixelMap = new PixelMap();\nlet pixelMap2: PixelMap = new PixelMap();\n\nlet pixelMap3: PixelMap = new PixelMap();\nlet pixelMap4: PixelMap = new PixelMap();\nlet pixelMap5: PixelMap = new PixelMap();\n\n",
+      "originalText": "let image6: Resource = $r('app.media.image6');\n\nconst image7: Resource = $r('app.media.image7');\n\nlet pixelMap: PixelMap = new PixelMap();\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 6,
+        "startColumn": 1,
+        "endLineNumberInclusive": 11,
+        "endColumn": 1
+      },
+      "diffText": "let image6: Resource = $r('app.media.image6');\n\nconst image7: Resource = $r('app.media.image7');\n\nlet pixelMap: PixelMap = new PixelMap();\nlet pixelMap2: PixelMap = new PixelMap();\n\nlet pixelMap3: PixelMap = new PixelMap();\nlet pixelMap4: PixelMap = new PixelMap();\nlet pixelMap5: PixelMap = new PixelMap();\n\n",
+      "fullOriginalText": "let image6: Resource = $r('app.media.image6');\n\nconst image7: Resource = $r('app.media.image7');\n\nlet pixelMap: PixelMap = new PixelMap();\n",
+      "suggestionTriggerTime": 1742297665793.4001,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "f3aa1370-74d7-4fb1-848d-5c2f6badee29",
+      "selection": {
+        "startLineNumber": 6,
+        "startColumn": 1,
+        "endLineNumberInclusive": 11,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "417448bd-58d0-4567-b8e0-b6b05d7a89bb",
+      "undoRedoGroup": {
+        "id": 208,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "f3aa1370-74d7-4fb1-848d-5c2f6badee29",
+    "timestamp": "2025-03-18T11:34:26.497Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "417448bd-58d0-4567-b8e0-b6b05d7a89bb",
+    "generationUUID": "f3aa1370-74d7-4fb1-848d-5c2f6badee29",
+    "timestamp": "2025-03-18T11:34:26.505Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "let image6: Resource = $r('app.media.image6');\n\nconst image7: Resource = $r('app.media.image7');\n\nlet pixelMap: PixelMap = new PixelMap();\nlet pixelMap2: PixelMap = new PixelMap();"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "417448bd-58d0-4567-b8e0-b6b05d7a89bb",
+    "generationUUID": "f3aa1370-74d7-4fb1-848d-5c2f6badee29",
+    "timestamp": "2025-03-18T11:34:26.505Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "417448bd-58d0-4567-b8e0-b6b05d7a89bb",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-18T11:34:26.505Z"
+  }
+]

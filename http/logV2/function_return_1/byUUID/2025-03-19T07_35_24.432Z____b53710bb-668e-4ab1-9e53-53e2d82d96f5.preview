@@ -1,0 +1,29 @@
+{"line":9,"column":1}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+function add(a: number, b: number): number {
+    return a + b;
+}
+
+function subtract(a: number, b: number): number {
+    return a - b;
+}
+
+let sum = add(1, 2);
+s[ToFill]
+-------------------------------[               firstChunkValue               ]--------------------------------
+let sum = add(1, 2);
+sum = subtract(sum, 1);
+-------------------------------[                   fullText                  ]--------------------------------
+let sum = add(1, 2);
+sum = subtract(sum, 1);
+
+console.log(sum);
+
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/functionReturn.ets",
+  "lineNumberOneIndexed": 1,
+  "text": "function add(a: number, b: number): number {\nreturn a + b;\n}\n\nfunction subtract(a: number, b: number): number {",
+  "shouldRetriggerCpp": true
+}

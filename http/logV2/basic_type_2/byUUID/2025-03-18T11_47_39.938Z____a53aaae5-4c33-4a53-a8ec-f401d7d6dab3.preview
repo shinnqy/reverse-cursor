@@ -1,0 +1,91 @@
+{"line":77,"column":5}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+let user1 = {
+    name: 'John',
+    age: 20,
+    gender: 'male',
+    email: 'john@example.com',
+    phone: '1234567890',
+}
+
+user1.name;
+user1.age;
+user1.gender;
+user1.email;
+user1.phone;
+
+let company1 = {
+    name: 'Google',
+    address: '123 Main St, Anytown, USA',
+    employees: [user1],
+}
+
+company1.employees[0].name;
+
+let dynamicKey = 'name';
+let user2 = {
+    [dynamicKey]: 'John',
+}
+
+user2.name;
+
+type Point = {
+    x: number;
+    y: number;
+}
+
+let point1: Point = {
+    x: 10,
+    y: 20,
+}
+
+point1.x;
+point1.y;
+
+interface Animal {
+    name: string;
+    age: number;
+}
+
+interface Dog extends Animal {
+    breed: string;
+}
+
+let dog: Dog = {
+    name: 'Dog',
+    age: 10,
+    breed: 'Labrador',
+}
+
+dog.name;
+dog.age;
+
+interface Config {
+    url: string;
+    method: string;
+    data: any;
+    height?: number;
+}
+
+let config: Config = {
+    url: 'https://example.com',
+    method: 'GET',
+    data: {
+        name: 'John',
+        age: 20,
+    },
+}
+config.height;
+
+let u[ToFill]
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+let user3: {
+    name: string;
+    age: number;
+    gender: string;
+    email: string;
+    phone: string;
+}

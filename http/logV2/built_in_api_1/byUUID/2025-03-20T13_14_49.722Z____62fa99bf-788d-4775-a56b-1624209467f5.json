@@ -1,0 +1,861 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:49.722Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/dynamicProp.ets",
+          "diffHistory": [
+            "1+|const user = {}\n",
+            "2-|  \n3-|}\n2+|  name: \"Alice\",\n3+|  age: 30,\n4+|  address: {\n5+|},\n6+|};\n7+|\n8+|\n",
+            "5-|},\n5+|    city: \"New York\",\n6+|    country: \"USA\",\n7+|  },\n10+|const greeting = `Hello, ${user.name}!`;\n",
+            "1-|\n1+|interface User {\n2+|  name: string;\n3+|  age: number;\n4+|  address: {\n5+|    city: string;\n6+|    country: string;\n7+|  };\n8+|}\n",
+            "1-|\n1+|interface Address {\n",
+            "5-|  address: {\n5+|  address: Address;\n",
+            "2+|  city: string;\n3+|  country: string;\n4+|}\n",
+            "9-|    city: string;\n10-|    country: string;\n11-|  };\n13-|const user = {\n10+|const user: User = {\n",
+            "21+|function getFullName(user: { firstName: string; lastName: string }) {\n22+|  return `${user.firstName} ${user.lastName}`;\n23+|}\n25+|const fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n26+|\n27+|\n28+|\n",
+            "25-|const fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n",
+            "25+|const currentUser = {\n26+|  firstName: \"John\",\n27+|  lastName: \"Doe\",\n28+|};\n30+|const fullName = getFullName(currentUser);\n",
+            "30-|const fullName = getFullName(currentUser);\n30+|const fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n",
+            "21-|function getFullName(user: { firstName: string; lastName: string }) {\n21+|interface FullName {\n22+|function getFullName(user: { firstName: string; lastName: string }\n23+|function getFullName(user: FullName) {\n",
+            "22-|function getFullName(user: { firstName: string; lastName: string }\n22+|function getFullName(user: { firstName: string; lastName: string ;\n23+|}\n",
+            "22-|function getFullName(user: { firstName: string;\n22+|  firstName: string;\n",
+            "29-|const currentUser = {\n29+|const currentUser: FullName = {\n",
+            "36+|const price = 100;\n37+|const discount = 0.1;\n38+|const priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n40+|const isAdmin = true;\n41+|const roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n43+|const products = [\n44+|  { name: \"Product 1\", price: 100 },\n45+|  { name: \"Product 2\", price: 200 },\n46+|  { name: \"Product 3\", price: 300 },\n47+|];\n49+|const productInfo = `Current product: ${products[0].name}`;\n50+|\n51+|type Status = \"active\" | \"inactive\";\n52+|let status: Status = \"active\";\n53+|const statusText = `Status: ${status}`;\n54+|\n55+|const company = {\n56+|  name: \"Acme Inc.\",\n57+|  address: {\n58+|    street: \"123 Main St\",\n59+|    city: \"Anytown\",\n60+|  },\n61+|};\n62+|\n",
+            "57-|  address: {\n58-|    street: \"123 Main St\",\n59-|    city: \"Anytown\",\n60-|  },\n57+|  ceo: {\n58+|    name: \"John Doe\",\n59+|    contact: {\n",
+            "60+|      email: \"john.doe@acme.com\",\n61+|      phone: \"+1234567890\",\n62+|    },\n63+|  },\n66+|const companyInfo = `Company: ${company.name}, CEO: ${company.ceo.name}`;\n",
+            "55+|interface Company {\n56+|  name: string;\n57+|  ceo: {\n58+|    name: string;\n59+|    contact: {\n60+|      email: string;\n61+|      phone: string;\n",
+            "62-|const company = {\n62+|      \n63+|const company: Company = {\n",
+            "62-|      \n62+|      };\n63+|}\n",
+            "62-|      };\n62+|    };\n63+|  };\n",
+            "55+|interface CEO {\n56+|  name: string;\n57+|  contact: {\n58+|    email: string;\n59+|    phone: string;\n60+|  };\n61+|}\n",
+            "70-|  };\n70+|  }CEO;\n",
+            "64-|  ceo: {\n65-|    name: string;\n66-|    contact: {\n67-|      email: string;\n68-|      phone: string;\n69-|    };\n70-|  }CEO;\n64+|  ceo: CEO;\n",
+            "55+|interface Contact {\n",
+            "58-|  contact: {\n59-|    email: string;\n58+|  contact: Contact;\n",
+            "56+|  email: string;\n57+|  phone: string;\n58+|}\n",
+            "62-|    phone: string;\n63-|  };\n",
+            "43-|const products = [\n43+|interface Product {\n44+|  name: string;\n45+|  price: number;\n46+|}\n47+|const products: Product[] = [\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/utils/builtInAPI.ets",
+          "diffHistory": [
+            "1+|import router from \"@ohos.router\";\n2+|\n3+|@Entry\n4+|@Component\n5+|struct Main {\n6+|  @State message: string = \"Hello World\";\n7+|\n8+|  build() {\n9+|    Row() {\n10+|      Text(this.message)\n11+|        .fontSize(20)\n12+|        .fontWeight(FontWeight.Bold)\n13+|        .onClick(() => {\n14+|          router.push({\n15+|            url: \"pages/SecondPage\",\n",
+            "16+|            params: {\n17+|              message: \"Hello from Second Page\",\n18+|            },\n19+|          });\n20+|        })\n21+|        .width(200)\n22+|        .height(100)\n",
+            "23+|        \n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/builtInAPI.ets",
+        "contents": "import router from \"@ohos.router\";\n\n@Entry\n@Component\nstruct Main {\n  @State message: string = \"Hello World\";\n\n  build() {\n    Row() {\n      Text(this.message)\n        .fontSize(20)\n        .fontWeight(FontWeight.Bold)\n        .onClick(() => {\n          router.push({\n            url: \"pages/SecondPage\",\n            params: {\n              message: \"Hello from Second Page\",\n            },\n          });\n        })\n        .width(200)\n        .height(100)\n        \n",
+        "cursorPosition": {
+          "line": 22,
+          "column": 8
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 40,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/utils/dynamicProp.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            33
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 33,
+              "endLineNumberInclusive": 67
+            }
+          ],
+          "lastViewedAt": 1742476421483
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1742476489765,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.199951171875,
+      "timeAtRequestSend": 1742476489765
+    },
+    "generateUuid": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:49.767Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "        })\n        .width(200)\n        .height(100)\n       ",
+      "rangeToReplace": {
+        "startLineNumber": 20,
+        "endLineNumberInclusive": 24
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.161Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.166Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " .backgroundColor"
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.188Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "("
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.199Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Color"
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.210Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.219Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Red"
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.229Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ")"
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.243Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.253Z"
+  },
+  {
+    "firstChunkValue": "        })\n        .width(200)\n        .height(100)\n        .backgroundColor(Color.Red)\n",
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.254Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "        })\n        .width(200)\n        .height(100)\n        .backgroundColor(Color.Red)\n"
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.255Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "1de6ed3f-a79d-42f4-ac44-90f42d41a784",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 40,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 40,
+      "monotonicallyIncreasingSuggestionId": 388,
+      "range": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "replaceText": "        })\n        .width(200)\n        .height(100)\n        .backgroundColor(Color.Red)\n",
+      "originalText": "        })\n        .width(200)\n        .height(100)\n        \n",
+      "startingSuggestionRange": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "diffText": "        })\n        .width(200)\n        .height(100)\n        .backgroundColor(Color.Red)\n",
+      "fullOriginalText": "        })\n        .width(200)\n        .height(100)\n        \n",
+      "suggestionTriggerTime": 1742476489687.7,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "62fa99bf-788d-4775-a56b-1624209467f5",
+      "selection": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 389,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.256Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "       "
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.265Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " .border"
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.276Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Radius"
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.287Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "("
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.300Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "1"
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.311Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "0)"
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.323Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n        ."
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.336Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "border"
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.348Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Width"
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.359Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "("
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.370Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "2"
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.381Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ")"
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.393Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.404Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "        ."
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.416Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "borderColor"
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.428Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "("
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.440Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Color"
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.450Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ".Black"
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.463Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ")"
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.474Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n       "
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.485Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ."
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.498Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "padding"
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.510Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "("
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.523Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "1"
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.539Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "0"
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.549Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ")"
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.561Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n       "
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.572Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " .margin"
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.586Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "("
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.597Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "10)\n"
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.609Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "        "
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.621Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.641Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.641Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.642Z"
+  },
+  {
+    "fullText": "        })\n        .width(200)\n        .height(100)\n        .backgroundColor(Color.Red)\n        .borderRadius(10)\n        .borderWidth(2)\n        .borderColor(Color.Black)\n        .padding(10)\n        .margin(10)\n        \n",
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.642Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "        })\n        .width(200)\n        .height(100)\n        .backgroundColor(Color.Red)\n"
+    },
+    "fullText": "        })\n        .width(200)\n        .height(100)\n        .backgroundColor(Color.Red)\n        .borderRadius(10)\n        .borderWidth(2)\n        .borderColor(Color.Black)\n        .padding(10)\n        .margin(10)\n        \n",
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.642Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "61041056-803a-45b9-b91f-540ed912e774",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 40,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 41,
+      "monotonicallyIncreasingSuggestionId": 389,
+      "range": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "replaceText": "        })\n        .width(200)\n        .height(100)\n        .backgroundColor(Color.Red)\n        .borderRadius(10)\n        .borderWidth(2)\n        .borderColor(Color.Black)\n        .padding(10)\n        .margin(10)\n        \n",
+      "originalText": "        })\n        .width(200)\n        .height(100)\n        .backgroundColor(Color.Red)\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "diffText": "        })\n        .width(200)\n        .height(100)\n        .backgroundColor(Color.Red)\n        .borderRadius(10)\n        .borderWidth(2)\n        .borderColor(Color.Black)\n        .padding(10)\n        .margin(10)\n        \n",
+      "fullOriginalText": "        })\n        .width(200)\n        .height(100)\n        .backgroundColor(Color.Red)\n",
+      "suggestionTriggerTime": 1742476489687.7,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "62fa99bf-788d-4775-a56b-1624209467f5",
+      "selection": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "b0941317-699d-4b03-aa77-d8989c5afe59",
+      "undoRedoGroup": {
+        "id": 390,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.643Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "b0941317-699d-4b03-aa77-d8989c5afe59",
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.656Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "        })\n        .width(200)\n        .height(100)\n        .backgroundColor(Color.Red)\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "b0941317-699d-4b03-aa77-d8989c5afe59",
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.657Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "b0941317-699d-4b03-aa77-d8989c5afe59",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-20T13:14:50.657Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "1de6ed3f-a79d-42f4-ac44-90f42d41a784",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 40,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 40,
+      "monotonicallyIncreasingSuggestionId": 388,
+      "range": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "replaceText": "        })\n        .width(200)\n        .height(100)\n        .backgroundColor(Color.Red)\n",
+      "originalText": "        })\n        .width(200)\n        .height(100)\n        \n",
+      "startingSuggestionRange": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "diffText": "        })\n        .width(200)\n        .height(100)\n        .backgroundColor(Color.Red)\n",
+      "fullOriginalText": "        })\n        .width(200)\n        .height(100)\n        \n",
+      "suggestionTriggerTime": 1742476489687.7,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "62fa99bf-788d-4775-a56b-1624209467f5",
+      "selection": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 389,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "d;123",
+      "onAcceptDisplayId": "61041056-803a-45b9-b91f-540ed912e774"
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.682Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "1de6ed3f-a79d-42f4-ac44-90f42d41a784",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 40,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 40,
+      "monotonicallyIncreasingSuggestionId": 388,
+      "range": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "replaceText": "        })\n        .width(200)\n        .height(100)\n        .backgroundColor(Color.Red)\n",
+      "originalText": "        })\n        .width(200)\n        .height(100)\n        \n",
+      "startingSuggestionRange": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "diffText": "        })\n        .width(200)\n        .height(100)\n        .backgroundColor(Color.Red)\n",
+      "fullOriginalText": "        })\n        .width(200)\n        .height(100)\n        \n",
+      "suggestionTriggerTime": 1742476489687.7,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "62fa99bf-788d-4775-a56b-1624209467f5",
+      "selection": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 389,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "d;123",
+      "onAcceptDisplayId": "61041056-803a-45b9-b91f-540ed912e774"
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.688Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "61041056-803a-45b9-b91f-540ed912e774",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 40,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 41,
+      "monotonicallyIncreasingSuggestionId": 389,
+      "range": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "replaceText": "        })\n        .width(200)\n        .height(100)\n        .backgroundColor(Color.Red)\n        .borderRadius(10)\n        .borderWidth(2)\n        .borderColor(Color.Black)\n        .padding(10)\n        .margin(10)\n        \n",
+      "originalText": "        })\n        .width(200)\n        .height(100)\n        .backgroundColor(Color.Red)\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "diffText": "        })\n        .width(200)\n        .height(100)\n        .backgroundColor(Color.Red)\n        .borderRadius(10)\n        .borderWidth(2)\n        .borderColor(Color.Black)\n        .padding(10)\n        .margin(10)\n        \n",
+      "fullOriginalText": "        })\n        .width(200)\n        .height(100)\n        .backgroundColor(Color.Red)\n",
+      "suggestionTriggerTime": 1742476489687.7,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "62fa99bf-788d-4775-a56b-1624209467f5",
+      "selection": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "b0941317-699d-4b03-aa77-d8989c5afe59",
+      "undoRedoGroup": {
+        "id": 390,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:50.689Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "61041056-803a-45b9-b91f-540ed912e774",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 40,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 41,
+      "monotonicallyIncreasingSuggestionId": 389,
+      "range": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "replaceText": "        })\n        .width(200)\n        .height(100)\n        .backgroundColor(Color.Red)\n        .borderRadius(10)\n        .borderWidth(2)\n        .borderColor(Color.Black)\n        .padding(10)\n        .margin(10)\n        \n",
+      "originalText": "        })\n        .width(200)\n        .height(100)\n        .backgroundColor(Color.Red)\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "diffText": "        })\n        .width(200)\n        .height(100)\n        .backgroundColor(Color.Red)\n        .borderRadius(10)\n        .borderWidth(2)\n        .borderColor(Color.Black)\n        .padding(10)\n        .margin(10)\n        \n",
+      "fullOriginalText": "        })\n        .width(200)\n        .height(100)\n        .backgroundColor(Color.Red)\n",
+      "suggestionTriggerTime": 1742476489687.7,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "62fa99bf-788d-4775-a56b-1624209467f5",
+      "selection": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "b0941317-699d-4b03-aa77-d8989c5afe59",
+      "undoRedoGroup": {
+        "id": 390,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "d;129"
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:51.492Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "61041056-803a-45b9-b91f-540ed912e774",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 40,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 41,
+      "monotonicallyIncreasingSuggestionId": 389,
+      "range": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "replaceText": "        })\n        .width(200)\n        .height(100)\n        .backgroundColor(Color.Red)\n        .borderRadius(10)\n        .borderWidth(2)\n        .borderColor(Color.Black)\n        .padding(10)\n        .margin(10)\n        \n",
+      "originalText": "        })\n        .width(200)\n        .height(100)\n        .backgroundColor(Color.Red)\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "diffText": "        })\n        .width(200)\n        .height(100)\n        .backgroundColor(Color.Red)\n        .borderRadius(10)\n        .borderWidth(2)\n        .borderColor(Color.Black)\n        .padding(10)\n        .margin(10)\n        \n",
+      "fullOriginalText": "        })\n        .width(200)\n        .height(100)\n        .backgroundColor(Color.Red)\n",
+      "suggestionTriggerTime": 1742476489687.7,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "62fa99bf-788d-4775-a56b-1624209467f5",
+      "selection": {
+        "startLineNumber": 20,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "b0941317-699d-4b03-aa77-d8989c5afe59",
+      "undoRedoGroup": {
+        "id": 390,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "d;129"
+    },
+    "generationUUID": "62fa99bf-788d-4775-a56b-1624209467f5",
+    "timestamp": "2025-03-20T13:14:51.503Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "b0941317-699d-4b03-aa77-d8989c5afe59",
+    "fusedCursorPrediction": null,
+    "oldText": "        })\n        .width(200)\n        .height(100)\n        .backgroundColor(Color.Red)\n",
+    "newText": "        })\n        .width(200)\n        .height(100)\n        .backgroundColor(Color.Red)\n        .borderRadius(10)\n        .borderWidth(2)\n        .borderColor(Color.Black)\n        .padding(10)\n        .margin(10)\n        \n",
+    "timestamp": "2025-03-20T13:14:51.504Z"
+  }
+]

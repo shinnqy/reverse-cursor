@@ -1,0 +1,22 @@
+{"line":4,"column":2}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Preview
+@Component
+export default struct Banner {
+
+  [ToFill]
+  build() {
+    Text("Banner")
+  }
+}
+-------------------------------[               firstChunkValue               ]--------------------------------
+@Preview
+@Component
+export default struct Banner {
+  @State message: string = 'Banner';
+
+  build() {
+    Text(this.message)
+      .fontSize(50)
+      .

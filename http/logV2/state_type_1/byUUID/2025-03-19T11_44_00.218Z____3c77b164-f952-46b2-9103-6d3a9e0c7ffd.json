@@ -1,0 +1,340 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "3c77b164-f952-46b2-9103-6d3a9e0c7ffd",
+    "timestamp": "2025-03-19T11:44:00.218Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/stateType.ets",
+          "diffHistory": [
+            "4+|  @State score: number = 0\n",
+            "8+|      Text(this.score.toString())\n9-|      Text('Hello, world!')\n",
+            "4-|  @State score: number = 0\n4+|  @State score: number = 0;\n5+|  @State name: string = 'John';\n",
+            "10-|      Text('Hello, world!')\n10+|      Text(this.name.toUpperCase())\n",
+            "16+|\n18+|  @State user: { name: string; age: number } = { name: 'John', age: 30 };\n19+|\n",
+            "21-|      Text('Hello, world!')\n21+|      Text('Hello,UpperCase())\n22+|      Text(this.user.age.toString())\n",
+            "21-|      Text('Hello,UpperCase())\n21+|      Text(this.user.name.toUpperCase())\n",
+            "15+|interface User {\n",
+            "18-|  @State user: { name: string; age: number } = { name: 'John', age: 30 };\n18+|  @State user: User = { name: 'John', age: 30 };\n",
+            "16+|  name: string;\n17+|  age: number;\n18+|}\n19+|\n",
+            "34+|  @State numbers: number[] = [1, 2, 3, 4, 5];\n",
+            "37-|      Text('Hello, world!')\n37+|      Text(this.numbers.join(', '))\n",
+            "35+|\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/stateType.ets",
+        "contents": "@Entry\n@Component\nstruct BasicTypeExample {\n  @State score: number = 0;\n  @State name: string = 'John';\n\n  build() {\n    Column() {\n      Text(this.score.toString())\n      Text(this.name.toUpperCase())\n    }\n  }\n}\n\ninterface User {\n  name: string;\n  age: number;\n}\n\n@Component\nstruct ObjectTypeExample {\n  @State user: User = { name: 'John', age: 30 };\n\n  build() {\n    Column() {\n      Text(this.user.name.toUpperCase())\n      Text(this.user.age.toString())\n    }\n  }\n}\n\n@Component\nstruct ArrayTypeExample {\n  @State numbers: number[] = [1, 2, 3, 4, 5];\n\n  build() {\n    Column() {\n      Text(this.numbers.join(', '))\n    }\n  }\n}",
+        "cursorPosition": {
+          "line": 39,
+          "column": 3
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 61,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1742384640252,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 49.89990234375,
+      "timeAtRequestSend": 1742384640252
+    },
+    "generateUuid": "3c77b164-f952-46b2-9103-6d3a9e0c7ffd",
+    "timestamp": "2025-03-19T11:44:00.253Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "3c77b164-f952-46b2-9103-6d3a9e0c7ffd",
+    "timestamp": "2025-03-19T11:44:01.355Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "    Column() {\n      Text(this.numbers.join(', '))\n    }\n  }\n}\n",
+      "rangeToReplace": {
+        "startLineNumber": 37,
+        "endLineNumberInclusive": 41
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "3c77b164-f952-46b2-9103-6d3a9e0c7ffd",
+    "timestamp": "2025-03-19T11:44:01.356Z"
+  },
+  {
+    "firstChunkValue": "    Column() {\n      Text(this.numbers.join(', '))\n    }\n  }\n}\n\n@Component\nstruct TupleTypeExample {\n  @State person: [string, number] = ['John', 30];\n\n",
+    "generationUUID": "3c77b164-f952-46b2-9103-6d3a9e0c7ffd",
+    "timestamp": "2025-03-19T11:44:01.633Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "3c77b164-f952-46b2-9103-6d3a9e0c7ffd",
+    "timestamp": "2025-03-19T11:44:01.664Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "@"
+    },
+    "generationUUID": "3c77b164-f952-46b2-9103-6d3a9e0c7ffd",
+    "timestamp": "2025-03-19T11:44:01.665Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Component\nstruct Tuple"
+    },
+    "generationUUID": "3c77b164-f952-46b2-9103-6d3a9e0c7ffd",
+    "timestamp": "2025-03-19T11:44:01.666Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Type"
+    },
+    "generationUUID": "3c77b164-f952-46b2-9103-6d3a9e0c7ffd",
+    "timestamp": "2025-03-19T11:44:01.666Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Example"
+    },
+    "generationUUID": "3c77b164-f952-46b2-9103-6d3a9e0c7ffd",
+    "timestamp": "2025-03-19T11:44:01.666Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {\n  @State person"
+    },
+    "generationUUID": "3c77b164-f952-46b2-9103-6d3a9e0c7ffd",
+    "timestamp": "2025-03-19T11:44:01.666Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "018f4214-1b17-4152-9412-f81bdb8a6d5a",
+    "generationUUID": "3c77b164-f952-46b2-9103-6d3a9e0c7ffd",
+    "timestamp": "2025-03-19T11:44:01.667Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "3c77b164-f952-46b2-9103-6d3a9e0c7ffd",
+    "timestamp": "2025-03-19T11:44:01.667Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ["
+    },
+    "generationUUID": "3c77b164-f952-46b2-9103-6d3a9e0c7ffd",
+    "timestamp": "2025-03-19T11:44:01.669Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "string"
+    },
+    "generationUUID": "3c77b164-f952-46b2-9103-6d3a9e0c7ffd",
+    "timestamp": "2025-03-19T11:44:01.670Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "018f4214-1b17-4152-9412-f81bdb8a6d5a",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T11:44:01.671Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ","
+    },
+    "generationUUID": "3c77b164-f952-46b2-9103-6d3a9e0c7ffd",
+    "timestamp": "2025-03-19T11:44:01.671Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " number"
+    },
+    "generationUUID": "3c77b164-f952-46b2-9103-6d3a9e0c7ffd",
+    "timestamp": "2025-03-19T11:44:01.671Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "]"
+    },
+    "generationUUID": "3c77b164-f952-46b2-9103-6d3a9e0c7ffd",
+    "timestamp": "2025-03-19T11:44:01.672Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "3c77b164-f952-46b2-9103-6d3a9e0c7ffd",
+    "timestamp": "2025-03-19T11:44:01.672Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ['"
+    },
+    "generationUUID": "3c77b164-f952-46b2-9103-6d3a9e0c7ffd",
+    "timestamp": "2025-03-19T11:44:01.672Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "John"
+    },
+    "generationUUID": "3c77b164-f952-46b2-9103-6d3a9e0c7ffd",
+    "timestamp": "2025-03-19T11:44:01.672Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "', "
+    },
+    "generationUUID": "3c77b164-f952-46b2-9103-6d3a9e0c7ffd",
+    "timestamp": "2025-03-19T11:44:01.673Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "3"
+    },
+    "generationUUID": "3c77b164-f952-46b2-9103-6d3a9e0c7ffd",
+    "timestamp": "2025-03-19T11:44:01.673Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "0"
+    },
+    "generationUUID": "3c77b164-f952-46b2-9103-6d3a9e0c7ffd",
+    "timestamp": "2025-03-19T11:44:01.674Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "];"
+    },
+    "generationUUID": "3c77b164-f952-46b2-9103-6d3a9e0c7ffd",
+    "timestamp": "2025-03-19T11:44:01.674Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "3c77b164-f952-46b2-9103-6d3a9e0c7ffd",
+    "timestamp": "2025-03-19T11:44:01.674Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "3c77b164-f952-46b2-9103-6d3a9e0c7ffd",
+    "timestamp": "2025-03-19T11:44:01.675Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "3c77b164-f952-46b2-9103-6d3a9e0c7ffd",
+    "timestamp": "2025-03-19T11:44:01.675Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "    Column() {\n      Text(this.numbers.join(', '))\n    }\n  }\n}\n\n@Component\nstruct TupleTypeExample {\n  @State person: [string, number] = ['John', 30];\n\n"
+    },
+    "generationUUID": "3c77b164-f952-46b2-9103-6d3a9e0c7ffd",
+    "timestamp": "2025-03-19T11:44:01.675Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "c4bd9ba4-c1c3-4e09-8fa6-6e3bb8aef704",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 61,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 61,
+      "monotonicallyIncreasingSuggestionId": 37,
+      "range": {
+        "startLineNumber": 37,
+        "startColumn": 1,
+        "endLineNumberInclusive": 41,
+        "endColumn": 2
+      },
+      "replaceText": "    Column() {\n      Text(this.numbers.join(', '))\n    }\n  }\n}\n\n@Component\nstruct TupleTypeExample {\n  @State person: [string, number] = ['John', 30];\n\n",
+      "originalText": "    Column() {\n      Text(this.numbers.join(', '))\n    }\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 37,
+        "startColumn": 1,
+        "endLineNumberInclusive": 41,
+        "endColumn": 2
+      },
+      "diffText": "    Column() {\n      Text(this.numbers.join(', '))\n    }\n  }\n}\n\n@Component\nstruct TupleTypeExample {\n  @State person: [string, number] = ['John', 30];\n\n",
+      "fullOriginalText": "    Column() {\n      Text(this.numbers.join(', '))\n    }\n  }\n}",
+      "suggestionTriggerTime": 1742384640202,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "3c77b164-f952-46b2-9103-6d3a9e0c7ffd",
+      "selection": {
+        "startLineNumber": 37,
+        "startColumn": 1,
+        "endLineNumberInclusive": 41,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "018f4214-1b17-4152-9412-f81bdb8a6d5a",
+      "undoRedoGroup": {
+        "id": 37,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "3c77b164-f952-46b2-9103-6d3a9e0c7ffd",
+    "timestamp": "2025-03-19T11:44:01.676Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "    Column() {\n      Text(this.numbers.join(', '))\n    }\n  }\n}\n\n@Component\nstruct TupleTypeExample {\n  @State person: [string, number] = ['John', 30];\n\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "018f4214-1b17-4152-9412-f81bdb8a6d5a",
+    "generationUUID": "3c77b164-f952-46b2-9103-6d3a9e0c7ffd",
+    "timestamp": "2025-03-19T11:44:01.677Z"
+  }
+]

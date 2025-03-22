@@ -1,0 +1,22 @@
+{"line":4,"column":0}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Preview
+@Entry
+@Component
+struct AboutMe {
+[ToFill]  @State message: string = 'About Me';
+
+}
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+@Component
+struct AboutMe {
+  @State message: string = 'About Me';
+
+  build() {
+    RelativeContainer() {
+      Text(this.message)
+    }
+  }
+}

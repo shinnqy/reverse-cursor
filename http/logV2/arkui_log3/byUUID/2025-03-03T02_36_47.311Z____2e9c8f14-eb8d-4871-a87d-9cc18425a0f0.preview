@@ -1,0 +1,31 @@
+{"line":9,"column":36}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Preview
+@Component
+struct AboutMe {
+  @State message: string = 'About Me';
+
+  build() {
+    Column() {
+      Text(this.message)
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)[ToFill]
+    }
+  }
+}
+-------------------------------[               firstChunkValue               ]--------------------------------
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+    }
+    .height('100%')
+    .width('100%')
+  }
+}
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/pages/AboutMe.ets",
+  "lineNumberOneIndexed": 7,
+  "text": "Column() {\nText(this.message)\n.fontSize(50)\n.fontWeight(FontWeight.Bold)\n}",
+  "shouldRetriggerCpp": true
+}

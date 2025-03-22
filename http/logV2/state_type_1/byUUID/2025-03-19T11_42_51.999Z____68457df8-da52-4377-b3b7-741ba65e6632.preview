@@ -1,0 +1,37 @@
+{"line":3,"column":25}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+struct BasicTypeExample {
+  @State score: number = [ToFill]0
+
+  build() {
+    Column() {
+      Text(this.score.toString())
+      Text('Hello, world!')
+    }
+  }
+}
+
+@Component
+struct ObjectTypeExample {
+  build() {
+    Column() {
+      Text('Hello, world!')
+    }
+  }
+}
+
+@Component
+struct ArrayTypeExample {
+  build() {
+    Column() {
+      Text('Hello, world!')
+    }
+  }
+}
+-------------------------------[               firstChunkValue               ]--------------------------------
+@Component
+struct BasicTypeExample {
+  @State score: number = 0

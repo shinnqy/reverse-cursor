@@ -1,0 +1,172 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "598cc2bc-cf09-4b15-b2ca-2e859d8c7c74",
+    "timestamp": "2025-03-03T02:37:12.113Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/pages/Index.ets",
+          "diffHistory": [
+            "17-|\n17+|      Button() {\n",
+            "18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Hello World';\n22+|      })\n",
+            "18-|        Text('Click me')\n18+|        Text('Abount')\n",
+            "18-|        Text('Abount')\n18+|        Text('About Me')\n",
+            "21-|        this.message = 'Hello World';\n",
+            "21-|        \n21+|        router.push({\n",
+            "22+|          uri: 'pages/About'\n23+|        })\n",
+            "21-|        router.push({\n21+|        router.pushU({\n",
+            "21-|        router.pushU({\n22-|          uri: 'pages/About'\n21+|        router.pushUrl({\n22+|          url: 'pages/About'\n",
+            "22-|          url: 'pages/About'\n22+|          url: 'pages/AboutMe'\n",
+            "1+|import router from '@ohos.router';\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/pages/AboutMe.ets",
+          "diffHistory": [
+            "1+|@Preview\n",
+            "2+|@Entry\n3+|@Component\n4+|struct AboutMe {\n5+|  @State message: string = 'About Me';\n6+|  \n7+|}\n",
+            "2-|@Entry\n",
+            "5-|\n6-|}\n5+|  \n6+|  build() {\n7+|    Column() {\n8+|      Text(this.message)\n9+|        .fontSize(50)\n10+|        .fontWeight(FontWeight.Bold)\n11+|    }\n12+|  }\n13+|}\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/resources/base/profile/main_pages.json",
+          "diffHistory": [
+            "3-|    \"pages/Index\"\n3+|    \"pages/Index\",\n4+|    \"pages/AboutMe\"\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/pages/AboutMe.ets",
+          "diffHistory": [
+            "12-|        \n12+|      Banner()\n",
+            "1+|import Banner from '../components/Banner.ets';\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/components/Banner.ets",
+          "diffHistory": [
+            "4+|\n5 |  \n5-|  \n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/components/Banner.ets",
+        "contents": "@Preview\n@Component\nexport default struct Banner {\n\n  \n  build() {\n    Text(\"Banner\")\n  }\n}",
+        "cursorPosition": {
+          "line": 4,
+          "column": 2
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 3,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/pages/Index.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 31
+            }
+          ],
+          "lastViewedAt": 1740969350213
+        },
+        {
+          "relativeWorkspacePath": "entry/src/main/resources/base/profile/main_pages.json",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 7
+            }
+          ],
+          "lastViewedAt": 1740969401037
+        },
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/pages/AboutMe.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 17
+            }
+          ],
+          "lastViewedAt": 1740969415869
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1740969432158,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.7001953125,
+      "timeAtRequestSend": 1740969432158
+    },
+    "generateUuid": "598cc2bc-cf09-4b15-b2ca-2e859d8c7c74",
+    "timestamp": "2025-03-03T02:37:12.160Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "598cc2bc-cf09-4b15-b2ca-2e859d8c7c74",
+    "timestamp": "2025-03-03T02:37:12.564Z"
+  },
+  {
+    "firstChunkValue": "@Preview\n@Component\nexport default struct Banner {\n  @State message: string = 'Banner';\n\n  build() {\n    Text(this.message)\n      .fontSize(50)\n      .",
+    "generationUUID": "598cc2bc-cf09-4b15-b2ca-2e859d8c7c74",
+    "timestamp": "2025-03-03T02:37:12.819Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "d6b7a065-aefc-4f3f-ac9c-2601ba30f2d7",
+    "generationUUID": "598cc2bc-cf09-4b15-b2ca-2e859d8c7c74",
+    "timestamp": "2025-03-03T02:37:12.820Z"
+  }
+]

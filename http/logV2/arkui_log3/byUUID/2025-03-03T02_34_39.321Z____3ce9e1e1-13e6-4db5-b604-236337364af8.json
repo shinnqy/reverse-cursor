@@ -1,0 +1,414 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "3ce9e1e1-13e6-4db5-b604-236337364af8",
+    "timestamp": "2025-03-03T02:34:39.321Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/pages/Index.ets",
+          "diffHistory": [
+            "17+|\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/pages/Index.ets",
+        "contents": "@Entry\n@Component\nstruct Index {\n  @State message: string = 'Hello World';\n\n  build() {\n    RelativeContainer() {\n      Text(this.message)\n        .id('HelloWorld')\n        .fontSize(50)\n        .fontWeight(FontWeight.Bold)\n        .alignRules({\n          center: { anchor: '__container__', align: VerticalAlign.Center },\n          middle: { anchor: '__container__', align: HorizontalAlign.Center }\n        })\n\n\n    }\n    .height('100%')\n    .width('100%')\n  }\n}",
+        "cursorPosition": {
+          "line": 16,
+          "column": 0
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 2,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1740969279368,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.5,
+      "timeAtRequestSend": 1740969279368
+    },
+    "generateUuid": "3ce9e1e1-13e6-4db5-b604-236337364af8",
+    "timestamp": "2025-03-03T02:34:39.370Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "3ce9e1e1-13e6-4db5-b604-236337364af8",
+    "timestamp": "2025-03-03T02:34:40.250Z"
+  },
+  {
+    "firstChunkValue": "\n      Button() {\n    }\n    .height('100%')\n    .width('100%')",
+    "generationUUID": "3ce9e1e1-13e6-4db5-b604-236337364af8",
+    "timestamp": "2025-03-03T02:34:40.303Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\n      Button() {\n    }\n    .height('100%')\n    .width('100%')"
+    },
+    "generationUUID": "3ce9e1e1-13e6-4db5-b604-236337364af8",
+    "timestamp": "2025-03-03T02:34:40.305Z"
+  },
+  {
+    "fullText": "\n      Button() {\n        Text('Click me')\n      }\n      .onClick(() => {\n        this.message = 'Hello World';\n      })\n    }\n    .height('100%')\n    .width('100%')",
+    "generationUUID": "3ce9e1e1-13e6-4db5-b604-236337364af8",
+    "timestamp": "2025-03-03T02:34:40.628Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\n      Button() {\n    }\n    .height('100%')\n    .width('100%')"
+    },
+    "fullText": "\n      Button() {\n        Text('Click me')\n      }\n      .onClick(() => {\n        this.message = 'Hello World';\n      })\n    }\n    .height('100%')\n    .width('100%')",
+    "generationUUID": "3ce9e1e1-13e6-4db5-b604-236337364af8",
+    "timestamp": "2025-03-03T02:34:40.630Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "bc420c2f-68b9-4703-ab05-dd60310256e4",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/Index.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/Index.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/Index.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 2,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 6,
+      "monotonicallyIncreasingSuggestionId": 2,
+      "range": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 19
+      },
+      "replaceText": "\n      Button() {\n        Text('Click me')\n      }\n      .onClick(() => {\n        this.message = 'Hello World';\n      })\n    }\n    .height('100%')\n    .width('100%')",
+      "originalText": "\n      Button() {\n    }\n    .height('100%')\n    .width('100%')",
+      "startingSuggestionRange": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 19
+      },
+      "diffText": "\n      Button() {\n        Text('Click me')\n      }\n      .onClick(() => {\n        this.message = 'Hello World';\n      })\n    }\n    .height('100%')\n    .width('100%')",
+      "fullOriginalText": "\n      Button() {\n    }\n    .height('100%')\n    .width('100%')",
+      "suggestionTriggerTime": 1740969279318.3,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "3ce9e1e1-13e6-4db5-b604-236337364af8",
+      "selection": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 19
+      },
+      "fusedCursorPredictionId": "b8d77694-e05f-449b-9aa3-14d0276c1607",
+      "undoRedoGroup": {
+        "id": 2,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "3ce9e1e1-13e6-4db5-b604-236337364af8",
+    "timestamp": "2025-03-03T02:34:40.631Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "b8d77694-e05f-449b-9aa3-14d0276c1607",
+    "generationUUID": "3ce9e1e1-13e6-4db5-b604-236337364af8",
+    "timestamp": "2025-03-03T02:34:40.827Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\n      Button() {\n    }\n    .height('100%')\n    .width('100%')"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "b8d77694-e05f-449b-9aa3-14d0276c1607",
+    "generationUUID": "3ce9e1e1-13e6-4db5-b604-236337364af8",
+    "timestamp": "2025-03-03T02:34:40.828Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "b8d77694-e05f-449b-9aa3-14d0276c1607",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-03T02:34:40.829Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "74419e1d-b899-40d0-933b-84598fa6956e",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/Index.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/Index.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/Index.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 2,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 2,
+      "monotonicallyIncreasingSuggestionId": 1,
+      "range": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 19
+      },
+      "replaceText": "\n      Button() {\n    }\n    .height('100%')\n    .width('100%')",
+      "originalText": "\n\n    }\n    .height('100%')\n    .width('100%')",
+      "startingSuggestionRange": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 19
+      },
+      "diffText": "\n      Button() {\n    }\n    .height('100%')\n    .width('100%')",
+      "fullOriginalText": "\n\n    }\n    .height('100%')\n    .width('100%')",
+      "suggestionTriggerTime": 1740969279318.3,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "3ce9e1e1-13e6-4db5-b604-236337364af8",
+      "selection": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 19
+      },
+      "undoRedoGroup": {
+        "id": 1,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumber": 20,
+        "endColumn": 19
+      },
+      "trackedText": "\n      \n    }\n    .height('100%')\n    .width('100%')",
+      "decorationId": "b;20",
+      "onAcceptDisplayId": "bc420c2f-68b9-4703-ab05-dd60310256e4"
+    },
+    "generationUUID": "3ce9e1e1-13e6-4db5-b604-236337364af8",
+    "timestamp": "2025-03-03T02:34:41.006Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "74419e1d-b899-40d0-933b-84598fa6956e",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/Index.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/Index.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/Index.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 2,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 2,
+      "monotonicallyIncreasingSuggestionId": 1,
+      "range": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 19
+      },
+      "replaceText": "\n      Button() {\n    }\n    .height('100%')\n    .width('100%')",
+      "originalText": "\n\n    }\n    .height('100%')\n    .width('100%')",
+      "startingSuggestionRange": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 19
+      },
+      "diffText": "\n      Button() {\n    }\n    .height('100%')\n    .width('100%')",
+      "fullOriginalText": "\n\n    }\n    .height('100%')\n    .width('100%')",
+      "suggestionTriggerTime": 1740969279318.3,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "3ce9e1e1-13e6-4db5-b604-236337364af8",
+      "selection": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 19
+      },
+      "undoRedoGroup": {
+        "id": 1,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumber": 20,
+        "endColumn": 19
+      },
+      "trackedText": "\n      \n    }\n    .height('100%')\n    .width('100%')",
+      "decorationId": "b;20",
+      "onAcceptDisplayId": "bc420c2f-68b9-4703-ab05-dd60310256e4"
+    },
+    "generationUUID": "3ce9e1e1-13e6-4db5-b604-236337364af8",
+    "timestamp": "2025-03-03T02:34:41.016Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "bc420c2f-68b9-4703-ab05-dd60310256e4",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/Index.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/Index.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/Index.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 2,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 6,
+      "monotonicallyIncreasingSuggestionId": 2,
+      "range": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 19
+      },
+      "replaceText": "\n      Button() {\n        Text('Click me')\n      }\n      .onClick(() => {\n        this.message = 'Hello World';\n      })\n    }\n    .height('100%')\n    .width('100%')",
+      "originalText": "\n      Button() {\n    }\n    .height('100%')\n    .width('100%')",
+      "startingSuggestionRange": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 19
+      },
+      "diffText": "\n      Button() {\n        Text('Click me')\n      }\n      .onClick(() => {\n        this.message = 'Hello World';\n      })\n    }\n    .height('100%')\n    .width('100%')",
+      "fullOriginalText": "\n      Button() {\n    }\n    .height('100%')\n    .width('100%')",
+      "suggestionTriggerTime": 1740969279318.3,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "3ce9e1e1-13e6-4db5-b604-236337364af8",
+      "selection": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 19
+      },
+      "fusedCursorPredictionId": "b8d77694-e05f-449b-9aa3-14d0276c1607",
+      "undoRedoGroup": {
+        "id": 2,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;26"
+    },
+    "generationUUID": "3ce9e1e1-13e6-4db5-b604-236337364af8",
+    "timestamp": "2025-03-03T02:34:42.261Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "bc420c2f-68b9-4703-ab05-dd60310256e4",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/Index.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/Index.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/Index.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 2,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 6,
+      "monotonicallyIncreasingSuggestionId": 2,
+      "range": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 19
+      },
+      "replaceText": "\n      Button() {\n        Text('Click me')\n      }\n      .onClick(() => {\n        this.message = 'Hello World';\n      })\n    }\n    .height('100%')\n    .width('100%')",
+      "originalText": "\n      Button() {\n    }\n    .height('100%')\n    .width('100%')",
+      "startingSuggestionRange": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 19
+      },
+      "diffText": "\n      Button() {\n        Text('Click me')\n      }\n      .onClick(() => {\n        this.message = 'Hello World';\n      })\n    }\n    .height('100%')\n    .width('100%')",
+      "fullOriginalText": "\n      Button() {\n    }\n    .height('100%')\n    .width('100%')",
+      "suggestionTriggerTime": 1740969279318.3,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "3ce9e1e1-13e6-4db5-b604-236337364af8",
+      "selection": {
+        "startLineNumber": 16,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 19
+      },
+      "fusedCursorPredictionId": "b8d77694-e05f-449b-9aa3-14d0276c1607",
+      "undoRedoGroup": {
+        "id": 2,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;26"
+    },
+    "generationUUID": "3ce9e1e1-13e6-4db5-b604-236337364af8",
+    "timestamp": "2025-03-03T02:34:42.273Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "b8d77694-e05f-449b-9aa3-14d0276c1607",
+    "fusedCursorPrediction": null,
+    "oldText": "\n      Button() {\n    }\n    .height('100%')\n    .width('100%')",
+    "newText": "\n      Button() {\n        Text('Click me')\n      }\n      .onClick(() => {\n        this.message = 'Hello World';\n      })\n    }\n    .height('100%')\n    .width('100%')",
+    "timestamp": "2025-03-03T02:34:42.274Z"
+  }
+]

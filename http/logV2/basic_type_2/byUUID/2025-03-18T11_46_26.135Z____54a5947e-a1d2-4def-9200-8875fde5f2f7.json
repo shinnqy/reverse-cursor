@@ -1,0 +1,792 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+    "timestamp": "2025-03-18T11:46:26.135Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/basicType.ets",
+          "diffHistory": [
+            "1+|let a: number = 1;\n2+|let b: string = '1';\n3+|let c: boolean = true;\n4+|let d: any = '1';\n5+|let e: void = undefined;\n6+|let f: null = null;\n7+|let g: undefined = undefined;\n",
+            "1-|let a: number = 1;\n2-|let b: string = '1';\n3-|let c: boolean = true;\n4-|let d: any = '1';\n5-|let e: void = undefined;\n6-|let f: null = null;\n7-|let g: undefined = undefined;\n1+|let str: string = '123';\n2+|str.split('');\n",
+            "1-|let str: string = '123';\n2-|str.split('');\n1+|let str1: string = '123';\n2+|str1.sptr2;\n3+|\n4+|let num1: number = 123;\n5+|let num2: number = 456;\n6+|let num3: number = num1 + num2;\n",
+            "2-|str1.sptr2;\n2+|let str2: string = '456';\n3+|let str3: string = str1 + str2;\n",
+            "2-|let str2: string = '456';\n3-|let str3: string = str1 + str2;\n2+|str1.split('');\n6-|let num2: number = 456;\n7-|let num3: number = num1 + num2;\n5+|num1.toString();\n6+|\n7+|let bool1: boolean = true;\n8+|bool1.toString();\n",
+            "4+|let str2: string = `Template string ${str1}`;\n5+|str2.split('');\n6+|\n7+|const str3 = \"Constant string\";\n8+|str3.toLocaleUpperCase();\n9+|\n5-|num1.toString();\n11+|num1.toFixed(2);\n",
+            "13+|let num2: number = 123.456;\n14+|num2.toExponential(2);\n15+|\n",
+            "17-|bool1.toString();\n17+|bool1.toString();\n18+|\n19+|let arr1: Array<number> = [1, 2, 3];\n20+|arr1.push(4);\n21+|\n22+|let arr2: number[] = [1, 2, 3];\n23+|arr2.push(4);\n24+|\n",
+            "21+|arr2.m\n",
+            "25+|arr2.map((item: number) => item * 2);\n27+|let obj1: { name: string; age: number } = { name: 'John', age: 20 };\n28+|obj1.name;\n29+|obj1.age;\n30+|\n31+|\n",
+            "21-|arr2.m\n21+|arr1.map((item: number) => item * 2);\n",
+            "25-|arr2.map((item: number) => item * 2);\n27-|let obj1: { name: string; age: number } = { name: 'John', age: 20 };\n28-|obj1.name;\n29-|obj1.age;\n30-|\n31-|\n",
+            "21-|arr1.map((item: number) => item * 2);\n",
+            "26+|let obj1: { name: string; age: number } = { name: 'John', age: 20 };\n27+|obj1.name;\n28+|obj1.age;\n29+|\n30+|let obj2: { name: string; age: number } = { name: 'John', age: 20 };\n31+|obj2.name;\n32+|obj2.age;\n",
+            "25-|let obj1: { name: string; age: number } = { name: 'John', age: 20 };\n26-|obj1.name;\n27-|obj1.age;\n28-|\n29-|let obj2: { name: string; age: number } = { name: 'John', age: 20 };\n30-|obj2.name;\n31-|obj2.age;\n",
+            "21+|arr1.map((item: number) => item * 2);\n",
+            "25-|\n25+|arr2.map((item: number) => item * 2);\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/utils/arktsType.ets",
+          "diffHistory": [
+            "1+|let image1: Resource = $r('app.media.image1');\n2+|let image2: Resource = $r('app.media.image2');\n3+|let image3: Resource = $r('app.media.image3');\n4+|let image4: Resource = $r('app.media.image4');\n5+|let image5: Resource = $r('app.media.image5');\n6+|let image6: Resource = $r('app.media.image6');\n",
+            "7+|\n8+|const image7: Resource = $r('app.media.image7');\n9+|const image8: Resource = $r('app.media.image8');\n10+|const image9: Resource = $r('app.media.image9');\n11+|const image10: Resource = $r('app.media.image10');\n12+|\n13+|let image11: Resource = $r('app.media.image11');\n14+|\n",
+            "15+|let image12: Resource = $r('app.media.image12');\n16+|let image13: Resource = $r('app.media.image13');\n17+|let image14: Resource = $r('app.media.image14');\n18+|let image15: Resource = $r('app.media.image15');\n19+|\n20+|\n",
+            "15-|let image12: Resource = $r('app.media.image12');\n16-|let image13: Resource = $r('app.media.image13');\n17-|let image14: Resource = $r('app.media.image14');\n18-|let image15: Resource = $r('app.media.image15');\n19-|\n20-|\n",
+            "9-|const image8: Resource = $r('app.media.image8');\n10-|const image9: Resource = $r('app.media.image9');\n11-|const image10: Resource = $r('app.media.image10');\n13-|let image11: Resource = $r('app.media.image11');\n10+|let pixelMap: PixelMap = new PixelMap();\n12+|let i18n: I18n = new I18n();\n",
+            "10-|let pixelMap: PixelMap = new PixelMap();\n11-|\n12-|let i18n: I18n = new I18n();\n10+|// let pixelMap: PixelMap = new PixelMap();\n",
+            "10-|// let pixelMap: PixelMap = new PixelMap();\n10+|let pixelMap: PixelMap = new PixelMap();\n11+|\n12+|pixelMap.getPixelBytesNumber();\n13+|\n14+|let i18n: I18n = new I18n();\n15+|\n16+|i18n.getString();\n17+|\n",
+            "12-|pixelMap.getPixelBytesNumber();\n13-|\n14-|let i18n: I18n = new I18n();\n15-|\n16-|i18n.getString();\n17-|\n12+|pixelMap.getPixelBytesNumber();\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/utils/basicType2.ets",
+          "diffHistory": [
+            "1+|let user1 = {\n2+|    name: 'John',\n3+|    age: 20,\n4+|    gender: 'male',\n5+|    email: 'john@example.com',\n6+|    phone: '1234567890',\n7+|}\n8+|\n9+|user1.name;\n10+|user1.age;\n11+|user1.gender;\n12+|user1.email;\n13+|user1.phone;\n14+|\n",
+            "15+|let company1 = {\n16+|    name: 'Google',\n17+|    address: '123 Main St, Anytown, USA',\n18+|    employees: [user1],\n19+|}\n20+|\n21+|company1.employees[0].name;\n",
+            "22+|\n23+|let dynamicKey = 'name';\n24+|let user2 = {\n25+|    [dynamicKey]: 'John',\n26+|}\n27+|\n28+|user2.name;\n29+|\n30+|\n",
+            "30+|type Point = \n",
+            "32-|\n32+|let point1: Point = {\n33+|    x: 10,\n34+|    y: 20,\n35+|}\n",
+            "30-|type Point = \n30+|type Point = {\n31+|    x: number;\n32+|    y: number;\n33+|}\n",
+            "39+|\n40+|point1.x;\n41+|point1.y;\n",
+            "42+|\n43+|interface Ani\n44+|    name: string;\n45+|    age: number;\n46+|}\n47+|\n48+|let dog: Animal = {\n49+|    name: 'Dog',\n50+|    age: 10,\n",
+            "43-|interface Ani\n43+|interface Animal {\n",
+            "50-|    age: 10,\n50+|    age: 10,\n51+|}\n52+|\n53+|dog.name;\n54+|dog.age;\n55+|\n",
+            "48+|\n49+|\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/basicType2.ets",
+        "contents": "let user1 = {\n    name: 'John',\n    age: 20,\n    gender: 'male',\n    email: 'john@example.com',\n    phone: '1234567890',\n}\n\nuser1.name;\nuser1.age;\nuser1.gender;\nuser1.email;\nuser1.phone;\n\nlet company1 = {\n    name: 'Google',\n    address: '123 Main St, Anytown, USA',\n    employees: [user1],\n}\n\ncompany1.employees[0].name;\n\nlet dynamicKey = 'name';\nlet user2 = {\n    [dynamicKey]: 'John',\n}\n\nuser2.name;\n\ntype Point = {\n    x: number;\n    y: number;\n}\n\nlet point1: Point = {\n    x: 10,\n    y: 20,\n}\n\npoint1.x;\npoint1.y;\n\ninterface Animal {\n    name: string;\n    age: number;\n}\n\n\n\nlet dog: Animal = {\n    name: 'Dog',\n    age: 10,\n}\n\ndog.name;\ndog.age;\n\n",
+        "cursorPosition": {
+          "line": 47,
+          "column": 0
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 112,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/utils/arktsType.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 12
+            }
+          ],
+          "lastViewedAt": 1742298205212
+        },
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/utils/basicType.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 26
+            }
+          ],
+          "lastViewedAt": 1742298241160
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1742298386182,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.099853515625,
+      "timeAtRequestSend": 1742298386182
+    },
+    "generateUuid": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+    "timestamp": "2025-03-18T11:46:26.184Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+    "timestamp": "2025-03-18T11:46:26.650Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\ninterface",
+      "rangeToReplace": {
+        "startLineNumber": 47,
+        "endLineNumberInclusive": 53
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+    "timestamp": "2025-03-18T11:46:26.651Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Dog"
+    },
+    "generationUUID": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+    "timestamp": "2025-03-18T11:46:26.678Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " extends"
+    },
+    "generationUUID": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+    "timestamp": "2025-03-18T11:46:26.687Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Animal"
+    },
+    "generationUUID": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+    "timestamp": "2025-03-18T11:46:26.698Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+    "timestamp": "2025-03-18T11:46:26.711Z"
+  },
+  {
+    "firstChunkValue": "\ninterface Dog extends Animal {\n\nlet dog: Animal = {\n    name: 'Dog',\n    age: 10,\n}",
+    "generationUUID": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+    "timestamp": "2025-03-18T11:46:26.733Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\ninterface Dog extends Animal {\n\nlet dog: Animal = {\n    name: 'Dog',\n    age: 10,\n}"
+    },
+    "generationUUID": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+    "timestamp": "2025-03-18T11:46:26.734Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "133ae8ff-7674-4849-8db3-6b4f75db73bd",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType2.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType2.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType2.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 112,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 112,
+      "monotonicallyIncreasingSuggestionId": 342,
+      "range": {
+        "startLineNumber": 47,
+        "startColumn": 1,
+        "endLineNumberInclusive": 53,
+        "endColumn": 2
+      },
+      "replaceText": "\ninterface Dog extends Animal {\n\nlet dog: Animal = {\n    name: 'Dog',\n    age: 10,\n}",
+      "originalText": "\n\n\nlet dog: Animal = {\n    name: 'Dog',\n    age: 10,\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 47,
+        "startColumn": 1,
+        "endLineNumberInclusive": 53,
+        "endColumn": 2
+      },
+      "diffText": "\ninterface Dog extends Animal {\n\nlet dog: Animal = {\n    name: 'Dog',\n    age: 10,\n}",
+      "fullOriginalText": "\n\n\nlet dog: Animal = {\n    name: 'Dog',\n    age: 10,\n}",
+      "suggestionTriggerTime": 1742298386136.4001,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+      "selection": {
+        "startLineNumber": 47,
+        "startColumn": 1,
+        "endLineNumberInclusive": 53,
+        "endColumn": 2
+      },
+      "undoRedoGroup": {
+        "id": 346,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 47,
+        "startColumn": 1,
+        "endLineNumber": 53,
+        "endColumn": 2
+      },
+      "trackedText": "\nint\n\nlet dog: Animal = {\n    name: 'Dog',\n    age: 10,\n}"
+    },
+    "generationUUID": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+    "timestamp": "2025-03-18T11:46:26.734Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n    breed"
+    },
+    "generationUUID": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+    "timestamp": "2025-03-18T11:46:26.735Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+    "timestamp": "2025-03-18T11:46:26.736Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " string"
+    },
+    "generationUUID": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+    "timestamp": "2025-03-18T11:46:26.742Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";\n}"
+    },
+    "generationUUID": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+    "timestamp": "2025-03-18T11:46:26.753Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+    "timestamp": "2025-03-18T11:46:26.764Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "let"
+    },
+    "generationUUID": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+    "timestamp": "2025-03-18T11:46:26.774Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " dog: Dog"
+    },
+    "generationUUID": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+    "timestamp": "2025-03-18T11:46:26.785Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+    "timestamp": "2025-03-18T11:46:26.801Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {\n    name: 'Dog',"
+    },
+    "generationUUID": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+    "timestamp": "2025-03-18T11:46:26.807Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n    age: 10,"
+    },
+    "generationUUID": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+    "timestamp": "2025-03-18T11:46:26.818Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+    "timestamp": "2025-03-18T11:46:26.832Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "   "
+    },
+    "generationUUID": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+    "timestamp": "2025-03-18T11:46:26.843Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " breed"
+    },
+    "generationUUID": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+    "timestamp": "2025-03-18T11:46:26.850Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": '"
+    },
+    "generationUUID": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+    "timestamp": "2025-03-18T11:46:26.862Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Lab"
+    },
+    "generationUUID": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+    "timestamp": "2025-03-18T11:46:26.876Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "rador"
+    },
+    "generationUUID": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+    "timestamp": "2025-03-18T11:46:26.884Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "',"
+    },
+    "generationUUID": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+    "timestamp": "2025-03-18T11:46:26.899Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+    "timestamp": "2025-03-18T11:46:26.910Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}"
+    },
+    "generationUUID": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+    "timestamp": "2025-03-18T11:46:26.918Z"
+  },
+  {
+    "fullText": "\ninterface Dog extends Animal {\n    breed: string;\n}\n\nlet dog: Dog = {\n    name: 'Dog',\n    age: 10,\n    breed: 'Labrador',\n}",
+    "generationUUID": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+    "timestamp": "2025-03-18T11:46:26.953Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\ninterface Dog extends Animal {\n\nlet dog: Animal = {\n    name: 'Dog',\n    age: 10,\n}"
+    },
+    "fullText": "\ninterface Dog extends Animal {\n    breed: string;\n}\n\nlet dog: Dog = {\n    name: 'Dog',\n    age: 10,\n    breed: 'Labrador',\n}",
+    "generationUUID": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+    "timestamp": "2025-03-18T11:46:26.953Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "4823779d-d526-4b04-b617-9e89f9bada24",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType2.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType2.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType2.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 112,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 116,
+      "monotonicallyIncreasingSuggestionId": 345,
+      "range": {
+        "startLineNumber": 47,
+        "startColumn": 1,
+        "endLineNumberInclusive": 53,
+        "endColumn": 2
+      },
+      "replaceText": "\ninterface Dog extends Animal {\n    breed: string;\n}\n\nlet dog: Dog = {\n    name: 'Dog',\n    age: 10,\n    breed: 'Labrador',\n}",
+      "originalText": "\ninterface Dog extends Animal {\n\nlet dog: Animal = {\n    name: 'Dog',\n    age: 10,\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 47,
+        "startColumn": 1,
+        "endLineNumberInclusive": 53,
+        "endColumn": 2
+      },
+      "diffText": "\ninterface Dog extends Animal {\n    breed: string;\n}\n\nlet dog: Dog = {\n    name: 'Dog',\n    age: 10,\n    breed: 'Labrador',\n}",
+      "fullOriginalText": "\ninterface Dog extends Animal {\n\nlet dog: Animal = {\n    name: 'Dog',\n    age: 10,\n}",
+      "suggestionTriggerTime": 1742298386136.4001,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+      "selection": {
+        "startLineNumber": 47,
+        "startColumn": 1,
+        "endLineNumberInclusive": 53,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "9cd23449-6a0d-4a28-aeb1-2ab68e1910be",
+      "undoRedoGroup": {
+        "id": 349,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+    "timestamp": "2025-03-18T11:46:26.954Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+    "timestamp": "2025-03-18T11:46:26.954Z"
+  },
+  {
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/basicType2.ets",
+      "lineNumberOneIndexed": 48,
+      "text": "\n",
+      "shouldRetriggerCpp": false
+    },
+    "predictionId": "9cd23449-6a0d-4a28-aeb1-2ab68e1910be",
+    "generationUUID": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+    "timestamp": "2025-03-18T11:46:26.999Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\ninterface Dog extends Animal {\n\nlet dog: Animal = {\n    name: 'Dog',\n    age: 10,\n}"
+    },
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/basicType2.ets",
+      "lineNumberOneIndexed": 48,
+      "text": "\n",
+      "shouldRetriggerCpp": false
+    },
+    "predictionId": "9cd23449-6a0d-4a28-aeb1-2ab68e1910be",
+    "generationUUID": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+    "timestamp": "2025-03-18T11:46:27.000Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "9cd23449-6a0d-4a28-aeb1-2ab68e1910be",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/basicType2.ets",
+      "lineNumberOneIndexed": 48,
+      "text": "\n",
+      "shouldRetriggerCpp": false
+    },
+    "timestamp": "2025-03-18T11:46:27.000Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "cursorPredictionTarget": {
+        "relativePath": "entry/src/main/ets/utils/basicType2.ets",
+        "lineNumberOneIndexed": 48,
+        "expectedContent": "\n",
+        "shouldRetriggerCpp": false
+      }
+    },
+    "generationUUID": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+    "timestamp": "2025-03-18T11:46:27.000Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+    "timestamp": "2025-03-18T11:46:27.001Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "133ae8ff-7674-4849-8db3-6b4f75db73bd",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType2.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType2.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType2.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 112,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 112,
+      "monotonicallyIncreasingSuggestionId": 342,
+      "range": {
+        "startLineNumber": 47,
+        "startColumn": 1,
+        "endLineNumberInclusive": 53,
+        "endColumn": 2
+      },
+      "replaceText": "\ninterface Dog extends Animal {\n\nlet dog: Animal = {\n    name: 'Dog',\n    age: 10,\n}",
+      "originalText": "\n\n\nlet dog: Animal = {\n    name: 'Dog',\n    age: 10,\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 47,
+        "startColumn": 1,
+        "endLineNumberInclusive": 53,
+        "endColumn": 2
+      },
+      "diffText": "\ninterface Dog extends Animal {\n\nlet dog: Animal = {\n    name: 'Dog',\n    age: 10,\n}",
+      "fullOriginalText": "\n\n\nlet dog: Animal = {\n    name: 'Dog',\n    age: 10,\n}",
+      "suggestionTriggerTime": 1742298386136.4001,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+      "selection": {
+        "startLineNumber": 47,
+        "startColumn": 1,
+        "endLineNumberInclusive": 53,
+        "endColumn": 2
+      },
+      "undoRedoGroup": {
+        "id": 346,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 47,
+        "startColumn": 1,
+        "endLineNumber": 53,
+        "endColumn": 2
+      },
+      "trackedText": "\nint\n\nlet dog: Animal = {\n    name: 'Dog',\n    age: 10,\n}",
+      "decorationId": "g;382",
+      "onAcceptDisplayId": "4823779d-d526-4b04-b617-9e89f9bada24"
+    },
+    "generationUUID": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+    "timestamp": "2025-03-18T11:46:27.157Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "133ae8ff-7674-4849-8db3-6b4f75db73bd",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType2.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType2.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType2.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 112,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 112,
+      "monotonicallyIncreasingSuggestionId": 342,
+      "range": {
+        "startLineNumber": 47,
+        "startColumn": 1,
+        "endLineNumberInclusive": 53,
+        "endColumn": 2
+      },
+      "replaceText": "\ninterface Dog extends Animal {\n\nlet dog: Animal = {\n    name: 'Dog',\n    age: 10,\n}",
+      "originalText": "\n\n\nlet dog: Animal = {\n    name: 'Dog',\n    age: 10,\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 47,
+        "startColumn": 1,
+        "endLineNumberInclusive": 53,
+        "endColumn": 2
+      },
+      "diffText": "\ninterface Dog extends Animal {\n\nlet dog: Animal = {\n    name: 'Dog',\n    age: 10,\n}",
+      "fullOriginalText": "\n\n\nlet dog: Animal = {\n    name: 'Dog',\n    age: 10,\n}",
+      "suggestionTriggerTime": 1742298386136.4001,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+      "selection": {
+        "startLineNumber": 47,
+        "startColumn": 1,
+        "endLineNumberInclusive": 53,
+        "endColumn": 2
+      },
+      "undoRedoGroup": {
+        "id": 346,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 47,
+        "startColumn": 1,
+        "endLineNumber": 53,
+        "endColumn": 2
+      },
+      "trackedText": "\nint\n\nlet dog: Animal = {\n    name: 'Dog',\n    age: 10,\n}",
+      "decorationId": "g;382",
+      "onAcceptDisplayId": "4823779d-d526-4b04-b617-9e89f9bada24"
+    },
+    "generationUUID": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+    "timestamp": "2025-03-18T11:46:27.162Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "4823779d-d526-4b04-b617-9e89f9bada24",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType2.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType2.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType2.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 112,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 116,
+      "monotonicallyIncreasingSuggestionId": 345,
+      "range": {
+        "startLineNumber": 47,
+        "startColumn": 1,
+        "endLineNumberInclusive": 53,
+        "endColumn": 2
+      },
+      "replaceText": "\ninterface Dog extends Animal {\n    breed: string;\n}\n\nlet dog: Dog = {\n    name: 'Dog',\n    age: 10,\n    breed: 'Labrador',\n}",
+      "originalText": "\ninterface Dog extends Animal {\n\nlet dog: Animal = {\n    name: 'Dog',\n    age: 10,\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 47,
+        "startColumn": 1,
+        "endLineNumberInclusive": 53,
+        "endColumn": 2
+      },
+      "diffText": "\ninterface Dog extends Animal {\n    breed: string;\n}\n\nlet dog: Dog = {\n    name: 'Dog',\n    age: 10,\n    breed: 'Labrador',\n}",
+      "fullOriginalText": "\ninterface Dog extends Animal {\n\nlet dog: Animal = {\n    name: 'Dog',\n    age: 10,\n}",
+      "suggestionTriggerTime": 1742298386136.4001,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+      "selection": {
+        "startLineNumber": 47,
+        "startColumn": 1,
+        "endLineNumberInclusive": 53,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "9cd23449-6a0d-4a28-aeb1-2ab68e1910be",
+      "undoRedoGroup": {
+        "id": 349,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "g;390"
+    },
+    "generationUUID": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+    "timestamp": "2025-03-18T11:46:28.288Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "4823779d-d526-4b04-b617-9e89f9bada24",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType2.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType2.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicType2.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 112,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 116,
+      "monotonicallyIncreasingSuggestionId": 345,
+      "range": {
+        "startLineNumber": 47,
+        "startColumn": 1,
+        "endLineNumberInclusive": 53,
+        "endColumn": 2
+      },
+      "replaceText": "\ninterface Dog extends Animal {\n    breed: string;\n}\n\nlet dog: Dog = {\n    name: 'Dog',\n    age: 10,\n    breed: 'Labrador',\n}",
+      "originalText": "\ninterface Dog extends Animal {\n\nlet dog: Animal = {\n    name: 'Dog',\n    age: 10,\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 47,
+        "startColumn": 1,
+        "endLineNumberInclusive": 53,
+        "endColumn": 2
+      },
+      "diffText": "\ninterface Dog extends Animal {\n    breed: string;\n}\n\nlet dog: Dog = {\n    name: 'Dog',\n    age: 10,\n    breed: 'Labrador',\n}",
+      "fullOriginalText": "\ninterface Dog extends Animal {\n\nlet dog: Animal = {\n    name: 'Dog',\n    age: 10,\n}",
+      "suggestionTriggerTime": 1742298386136.4001,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+      "selection": {
+        "startLineNumber": 47,
+        "startColumn": 1,
+        "endLineNumberInclusive": 53,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "9cd23449-6a0d-4a28-aeb1-2ab68e1910be",
+      "undoRedoGroup": {
+        "id": 349,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "g;390"
+    },
+    "generationUUID": "54a5947e-a1d2-4def-9200-8875fde5f2f7",
+    "timestamp": "2025-03-18T11:46:28.298Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "9cd23449-6a0d-4a28-aeb1-2ab68e1910be",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/basicType2.ets",
+      "lineNumberOneIndexed": 48,
+      "text": "\n",
+      "shouldRetriggerCpp": false
+    },
+    "oldText": "\ninterface Dog extends Animal {\n\nlet dog: Animal = {\n    name: 'Dog',\n    age: 10,\n}",
+    "newText": "\ninterface Dog extends Animal {\n    breed: string;\n}\n\nlet dog: Dog = {\n    name: 'Dog',\n    age: 10,\n    breed: 'Labrador',\n}",
+    "timestamp": "2025-03-18T11:46:28.299Z"
+  },
+  {
+    "action": "displayFusedCursorPrediction",
+    "predictionId": "9cd23449-6a0d-4a28-aeb1-2ab68e1910be",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/basicType2.ets",
+      "lineNumberOneIndexed": 48,
+      "text": "\n",
+      "shouldRetriggerCpp": false
+    },
+    "oldText": "\ninterface Dog extends Animal {\n\nlet dog: Animal = {\n    name: 'Dog',\n    age: 10,\n}",
+    "newText": "\ninterface Dog extends Animal {\n    breed: string;\n}\n\nlet dog: Dog = {\n    name: 'Dog',\n    age: 10,\n    breed: 'Labrador',\n}",
+    "timestamp": "2025-03-18T11:46:28.300Z"
+  }
+]

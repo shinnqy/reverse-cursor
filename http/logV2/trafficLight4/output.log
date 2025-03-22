@@ -1,0 +1,416 @@
+============================
+----promptFilePath----:
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/trafficLight4/byUUID/2025-03-09T13_13_19.684Z____01f91a06-8129-44d8-b00c-e785cda4d48b.prompt
+
+----output----:
+      console.log('Caution');
+      break;
+    default:
+      console.log('red');
+  }
+}
+
+enum TrafficLight {
+  RED = 'red',
+  GREEN = 'green',
+  YELLOW = 'yellow',
+}
+
+const light = TrafficLight.RED;
+changeLight(light);
+
+----firstChunkValue----:
+    case TrafficLight.YELLOW:
+      console.log('Wait');
+      break;
+    default:
+      console.log('red');
+
+----fullText----:
+undefined
+============================
+----promptFilePath----:
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/trafficLight4/byUUID/2025-03-09T13_12_39.398Z____74947c92-812a-4053-814a-3e892879668a.prompt
+
+----output----:
+    case light.RED:
+      return light.GREEN;
+    case light.GREEN:
+      return light.YELLOW;
+    case light.YELLOW:
+      return light.RED;
+    default:
+      return light.RED;
+  }
+}
+
+----firstChunkValue----:
+}
+
+enum TrafficLight {
+
+----fullText----:
+}
+
+enum TrafficLight {
+  RED = 'red',
+  GREEN = 'green',
+  YELLOW = 'yellow',
+}
+
+
+============================
+----promptFilePath----:
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/trafficLight4/byUUID/2025-03-09T13_12_46.313Z____0a4f95d5-3ec2-44b2-b0a3-f72ddf53b9ce.prompt
+
+----output----:
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case TrafficLight.RED:
+      return TrafficLight.GREEN;
+    case TrafficLight.GREEN:
+      return TrafficLight.YELLOW;
+    case TrafficLight.YELLOW:
+      return TrafficLight.RED;
+    default:
+      return TrafficLight.RED;
+  }
+}
+
+enum TrafficLight {
+  RED = 'red',
+  GREEN = 'green',
+  YELLOW = 'yellow',
+}
+
+const light = TrafficLight.RED;
+const newLight = changeLight(light);
+console.log(newLight);
+
+----firstChunkValue----:
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case TrafficLight.RED:
+      return TrafficLight.GREEN;
+
+----fullText----:
+undefined
+============================
+----promptFilePath----:
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/trafficLight4/byUUID/2025-03-09T13_12_13.898Z____557c55e4-eb70-4469-9037-08767814e1be.prompt
+
+----output----:
+) {
+    // Function implementation remains the same
+}
+
+----firstChunkValue----:
+function changeLight(light: TrafficLight) {
+
+----fullText----:
+function changeLight(light: TrafficLight) {
+  light = 'green';
+}
+
+const light = 'red';
+changeLight(light);
+
+============================
+----promptFilePath----:
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/trafficLight4/byUUID/2025-03-09T13_12_35.912Z____61823a51-b0e1-4363-95c2-4d0e7f03cef8.prompt
+
+----output----:
+    case light.YELLOW:
+      return light.RED;
+    default:
+      return light.RED;
+  }
+}
+
+----firstChunkValue----:
+      return light.GREEN;
+    case light.GREEN:
+      return light.YELLOW;
+    case light.YELLOW:
+      return light.RED;
+    default:
+      return light.RED;
+
+----fullText----:
+undefined
+============================
+----promptFilePath----:
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/trafficLight4/byUUID/2025-03-09T13_12_23.345Z____6889297b-7e15-4f97-8d7a-344debfea572.prompt
+
+----output----:
+    case 'yellow':
+      return 'red';
+  }
+}
+
+----firstChunkValue----:
+    case 'yellow':
+      return 'red';
+    default:
+      return 'red';
+  }
+}
+
+
+----fullText----:
+undefined
+============================
+----promptFilePath----:
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/trafficLight4/byUUID/2025-03-09T13_13_18.332Z____fd22ea90-c668-45af-b6ce-21c68adbcff7.prompt
+
+----output----:
+      console.log('red');
+      break;
+    case TrafficLight.GREEN:
+      console.log('green');
+      break;
+    case TrafficLight.YELLOW:
+      console.log('yellow');
+      break;
+    default:
+      console.log('red');
+  }
+}
+
+enum TrafficLight {
+  RED = 'red',
+  GREEN = 'green',
+  YELLOW = 'yellow',
+}
+
+const light = TrafficLight.RED;
+changeLight(light);
+
+----firstChunkValue----:
+    case TrafficLight.RED:
+      console.log('Stop');
+      break;
+    case TrafficLight.GREEN:
+      console.log('Go');
+
+----fullText----:
+undefined
+============================
+----promptFilePath----:
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/trafficLight4/byUUID/2025-03-09T13_12_32.110Z____965d0a11-82af-42cb-891c-887939aa4307.prompt
+
+----output----:
+    case 'red':
+      return 'green';
+    case 'green':
+      return 'yellow';
+    case 'yellow':
+      return 'red';
+    default:
+      return 'red';
+  }
+
+----firstChunkValue----:
+  switch (light) {
+    case light.RED:
+      return 'green';
+    case 'green':
+      return 'yellow';
+
+----fullText----:
+  switch (light) {
+    case light.RED:
+      return light.GREEN;
+    case light.GREEN:
+      return light.YELLOW;
+============================
+----promptFilePath----:
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/trafficLight4/byUUID/2025-03-09T13_12_53.249Z____ed26a6cd-8469-4664-b114-02267d91da34.prompt
+
+----output----:
+    case TrafficLight.GREEN:
+      return TrafficLight.YELLOW;
+    case TrafficLight.YELLOW:
+      return TrafficLight.RED;
+    default:
+      return TrafficLight.RED;
+  }
+}
+
+enum TrafficLight {
+  RED = 'red',
+  GREEN = 'green',
+  YELLOW = 'yellow',
+}
+
+const light = TrafficLight.RED;
+const newLight = changeLight(light);
+console.log(newLight);
+
+----firstChunkValue----:
+      return TrafficLight.GREEN;
+    case TrafficLight.GREEN:
+      return TrafficLight.YELLOW;
+    case TrafficLight.YELLOW:
+      return TrafficLight.RED;
+
+----fullText----:
+undefined
+============================
+----promptFilePath----:
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/trafficLight4/byUUID/2025-03-09T13_12_20.325Z____1326056f-aad3-4f87-a214-78270e950f50.prompt
+
+----output----:
+  light = 'green';
+}
+
+----firstChunkValue----:
+function changeLight(light: TrafficLight) {
+  switch (light) {
+}
+
+
+----fullText----:
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case 'red':
+      return 'green';
+    case 'green':
+      return 'yellow';
+      
+  }
+}
+
+============================
+----promptFilePath----:
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/trafficLight4/byUUID/2025-03-09T13_13_02.147Z____27c5ed56-e8a3-4f4f-a64e-0dcbd40c6ec3.prompt
+
+----output----:
+      return TrafficLight.GREEN;
+    case TrafficLight.GREEN:
+      return TrafficLight.YELLOW;
+    case TrafficLight.YELLOW:
+      return TrafficLight.RED;
+    default:
+      return TrafficLight.RED;
+  }
+}
+
+enum TrafficLight {
+  RED = 'red',
+  GREEN = 'green',
+  YELLOW = 'yellow',
+}
+
+const light = TrafficLight.RED;
+const newLight = changeLight(light);
+console.log(newLight);
+
+----firstChunkValue----:
+    case TrafficLight.RED:
+      console.log('red');
+    case TrafficLight.GREEN:
+      return TrafficLight.YELLOW;
+    case TrafficLight.YELLOW:
+
+----fullText----:
+    case TrafficLight.RED:
+      console.log('red');
+      break;
+    case TrafficLight.GREEN:
+      console.log('green');
+      break;
+    case TrafficLight.YELLOW:
+============================
+----promptFilePath----:
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/trafficLight4/byUUID/2025-03-09T13_12_54.811Z____e7e7fedc-b86f-4b66-94bf-6c881ec3f691.prompt
+
+----output----:
+      return TrafficLight.RED;
+  }
+}
+
+enum TrafficLight {
+  RED = 'red',
+  GREEN = 'green',
+  YELLOW = 'yellow',
+}
+
+const light = TrafficLight.RED;
+const newLight = changeLight(light);
+console.log(newLight);
+
+----firstChunkValue----:
+      return TrafficLight.RED;
+    default:
+      return TrafficLight.RED;
+  }
+}
+
+
+----fullText----:
+undefined
+============================
+----promptFilePath----:
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/trafficLight4/byUUID/2025-03-09T13_13_06.912Z____77447846-7ddd-47c8-8213-c5a3ae58ab1b.prompt
+
+----output----:
+console.log(newLight);
+
+----firstChunkValue----:
+
+const light = TrafficLight.RED;
+changeLight(light);
+
+
+----fullText----:
+undefined
+============================
+----promptFilePath----:
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/trafficLight4/byUUID/2025-03-09T13_12_42.923Z____1870c49a-238d-4026-96e4-16865efcb4d4.prompt
+
+----output----:
+  const nextLight = changeLight(TrafficLight.RED);
+  console.log(nextLight); // Output: TrafficLight.GREEN
+}
+
+----firstChunkValue----:
+
+const light = TrafficLight.RED;
+
+----fullText----:
+
+const light = TrafficLight.RED;
+const newLight = changeLight(light);
+console.log(newLight);
+
+============================
+----promptFilePath----:
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/trafficLight4/byUUID/2025-03-09T13_13_04.206Z____400ce835-a238-4974-90eb-f3292d0ab389.prompt
+
+----output----:
+      return TrafficLight.RED;
+    default:
+      return TrafficLight.RED;
+  }
+}
+
+enum TrafficLight {
+  RED = 'red',
+  GREEN = 'green',
+  YELLOW = 'yellow',
+}
+
+const light = TrafficLight.RED;
+const newLight = changeLight(light);
+console.log(newLight);
+
+----firstChunkValue----:
+    case TrafficLight.YELLOW:
+      console.log('yellow');
+      break;
+    default:
+      console.log('red');
+
+----fullText----:
+undefined

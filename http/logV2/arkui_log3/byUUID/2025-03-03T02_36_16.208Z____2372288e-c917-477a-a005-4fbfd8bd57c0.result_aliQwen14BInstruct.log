@@ -1,0 +1,35 @@
+------------------------------------------[        output        ]-------------------------------------------
+@Entry
+@Component
+struct AboutMe {
+  build() {
+    Column() {
+      Text('About Me')
+        .fontSize(24)
+        .fontWeight(FontWeight.Bold)
+        .margin({ top: 20 })
+    }
+    .width('100%')
+    .height('100%')
+    .backgroundColor('#FFFFFF')
+  }
+}
+------------------------------------------[    replacedOutput    ]-------------------------------------------
+@Entry
+@Component
+struct AboutMe {
+  build() {
+    Column() {
+      Text('About Me')
+        .fontSize(24)
+        .fontWeight(FontWeight.Bold)
+        .margin({ top: 20 })
+    }
+    .width('100%')
+    .height('100%')
+    .backgroundColor('#FFFFFF')
+  }
+}
+-------------------------------[ groundTruth (replacedContentsWithFirstChunk) ]--------------------------------
+@Preview
+@Entry

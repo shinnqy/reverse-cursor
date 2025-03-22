@@ -1,0 +1,77 @@
+{"line":58,"column":0}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+interface Address {
+    street: string;
+    city: string;
+    state: string;
+    zip: string;
+}
+
+interface User {
+    name: string;
+    age: number;
+    address: Address;
+}
+
+let user: User = {
+    name: "John",
+    age: 30,
+    address: {
+        street: "123 Main St",
+        city: "Anytown",
+        state: "CA",
+        zip: "12345",
+    },
+};
+
+user.address.city = "New York";
+user.address.zip = "10001";
+user.address.state = "NY";
+user.address.country = "USA";
+
+interface ProductDetails {
+    name: string;
+    price: number;
+    category: string;
+}
+
+interface Product {
+    id: number;
+    details: ProductDetails;
+}
+
+let products: Product[] = [
+    {
+        id: 1,
+        details: {
+            name: "Product 1",
+            price: 100,
+            category: "Category 1",
+        },
+    },
+    {
+        id: 2,
+        details: {
+            name: "Product 2",
+            price: 200,
+            category: "Category 2",
+        },
+    },
+];
+[ToFill]
+interface Circle { type: "circle"; radius: number; color: string };
+interface Rectangle { type: "rectangle"; width: number; height: number; color: string };
+interface Triangle { type: "triangle"; side1: number; side2: number; side3: number; color: string };
+type Shape = Circle | Rectangle | Triangle;
+
+let shape: Shape = { type: "circle", radius: 10, color: "red" };
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+];
+
+interface Circle { type: "circle"; radius: number; color: string };
+interface Rectangle { type: "rectangle"; width: number; height: number; color: string };
+interface Triangle { type: "triangle"; side1: number; side2: number; side3: number; color: string };
+type Shape = Circle | Rectangle | Triangle;

@@ -1,0 +1,275 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "09cc23a5-b10b-46fe-8179-714f96152d10",
+    "timestamp": "2025-03-03T02:36:23.829Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/pages/Index.ets",
+          "diffHistory": [
+            "17-|\n17+|      Button() {\n",
+            "18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Hello World';\n22+|      })\n",
+            "18-|        Text('Click me')\n18+|        Text('Abount')\n",
+            "18-|        Text('Abount')\n18+|        Text('About Me')\n",
+            "21-|        this.message = 'Hello World';\n",
+            "21-|        \n21+|        router.push({\n",
+            "22+|          uri: 'pages/About'\n23+|        })\n",
+            "21-|        router.push({\n21+|        router.pushU({\n",
+            "21-|        router.pushU({\n22-|          uri: 'pages/About'\n21+|        router.pushUrl({\n22+|          url: 'pages/About'\n",
+            "22-|          url: 'pages/About'\n22+|          url: 'pages/AboutMe'\n",
+            "1+|import router from '@ohos.router';\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/pages/AboutMe.ets",
+          "diffHistory": [
+            "1+|@Preview\n",
+            "2+|@Entry\n3+|@Component\n4+|struct AboutMe {\n5+|  @State message: string = 'About Me';\n6+|  \n7+|}\n",
+            "2-|@Entry\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/pages/AboutMe.ets",
+        "contents": "@Preview\n@Component\nstruct AboutMe {\n  @State message: string = 'About Me';\n\n}\n",
+        "cursorPosition": {
+          "line": 3,
+          "column": 0
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 14,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/pages/Index.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 31
+            }
+          ],
+          "lastViewedAt": 1740969350213
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1740969383869,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.60009765625,
+      "timeAtRequestSend": 1740969383869
+    },
+    "generateUuid": "09cc23a5-b10b-46fe-8179-714f96152d10",
+    "timestamp": "2025-03-03T02:36:23.872Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "09cc23a5-b10b-46fe-8179-714f96152d10",
+    "timestamp": "2025-03-03T02:36:24.248Z"
+  },
+  {
+    "firstChunkValue": "@Component\nstruct AboutMe {\n  @State message: string = 'About Me';\n\n  build() {\n    Column() {\n      Text(this.message)\n        .fontSize(50)\n        .fontWeight(FontWeight.Bold)\n    }\n  }\n}",
+    "generationUUID": "09cc23a5-b10b-46fe-8179-714f96152d10",
+    "timestamp": "2025-03-03T02:36:24.537Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "e0f8d63d-e79f-41e3-a3b5-544081cb05af",
+    "generationUUID": "09cc23a5-b10b-46fe-8179-714f96152d10",
+    "timestamp": "2025-03-03T02:36:24.538Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "@Component\nstruct AboutMe {\n  @State message: string = 'About Me';\n\n  build() {\n    Column() {\n      Text(this.message)\n        .fontSize(50)\n        .fontWeight(FontWeight.Bold)\n    }\n  }\n}"
+    },
+    "generationUUID": "09cc23a5-b10b-46fe-8179-714f96152d10",
+    "timestamp": "2025-03-03T02:36:24.539Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "@Component\nstruct AboutMe {\n  @State message: string = 'About Me';\n\n  build() {\n    Column() {\n      Text(this.message)\n        .fontSize(50)\n        .fontWeight(FontWeight.Bold)\n    }\n  }\n}"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "e0f8d63d-e79f-41e3-a3b5-544081cb05af",
+    "generationUUID": "09cc23a5-b10b-46fe-8179-714f96152d10",
+    "timestamp": "2025-03-03T02:36:24.543Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "e0f8d63d-e79f-41e3-a3b5-544081cb05af",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-03T02:36:24.544Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "792dbb43-f9bd-41c2-8861-941577761a7c",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 14,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 14,
+      "monotonicallyIncreasingSuggestionId": 35,
+      "range": {
+        "startLineNumber": 2,
+        "startColumn": 1,
+        "endLineNumberInclusive": 7,
+        "endColumn": 1
+      },
+      "replaceText": "@Component\nstruct AboutMe {\n  @State message: string = 'About Me';\n\n  build() {\n    Column() {\n      Text(this.message)\n        .fontSize(50)\n        .fontWeight(FontWeight.Bold)\n    }\n  }\n}",
+      "originalText": "@Component\nstruct AboutMe {\n  @State message: string = 'About Me';\n\n}\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 2,
+        "startColumn": 1,
+        "endLineNumberInclusive": 7,
+        "endColumn": 1
+      },
+      "diffText": "@Component\nstruct AboutMe {\n  @State message: string = 'About Me';\n\n  build() {\n    Column() {\n      Text(this.message)\n        .fontSize(50)\n        .fontWeight(FontWeight.Bold)\n    }\n  }\n}",
+      "fullOriginalText": "@Component\nstruct AboutMe {\n  @State message: string = 'About Me';\n\n}\n",
+      "suggestionTriggerTime": 1740969383817.2,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "09cc23a5-b10b-46fe-8179-714f96152d10",
+      "selection": {
+        "startLineNumber": 2,
+        "startColumn": 1,
+        "endLineNumberInclusive": 7,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "e0f8d63d-e79f-41e3-a3b5-544081cb05af",
+      "undoRedoGroup": {
+        "id": 36,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 2,
+        "startColumn": 1,
+        "endLineNumber": 7,
+        "endColumn": 1
+      },
+      "trackedText": "@Component\nstruct AboutMe {\n  @State message: string = 'About Me';\n\n}\n",
+      "decorationId": "d;61"
+    },
+    "generationUUID": "09cc23a5-b10b-46fe-8179-714f96152d10",
+    "timestamp": "2025-03-03T02:36:27.563Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "792dbb43-f9bd-41c2-8861-941577761a7c",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/pages/AboutMe.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 14,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 14,
+      "monotonicallyIncreasingSuggestionId": 35,
+      "range": {
+        "startLineNumber": 2,
+        "startColumn": 1,
+        "endLineNumberInclusive": 7,
+        "endColumn": 1
+      },
+      "replaceText": "@Component\nstruct AboutMe {\n  @State message: string = 'About Me';\n\n  build() {\n    Column() {\n      Text(this.message)\n        .fontSize(50)\n        .fontWeight(FontWeight.Bold)\n    }\n  }\n}",
+      "originalText": "@Component\nstruct AboutMe {\n  @State message: string = 'About Me';\n\n}\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 2,
+        "startColumn": 1,
+        "endLineNumberInclusive": 7,
+        "endColumn": 1
+      },
+      "diffText": "@Component\nstruct AboutMe {\n  @State message: string = 'About Me';\n\n  build() {\n    Column() {\n      Text(this.message)\n        .fontSize(50)\n        .fontWeight(FontWeight.Bold)\n    }\n  }\n}",
+      "fullOriginalText": "@Component\nstruct AboutMe {\n  @State message: string = 'About Me';\n\n}\n",
+      "suggestionTriggerTime": 1740969383817.2,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "09cc23a5-b10b-46fe-8179-714f96152d10",
+      "selection": {
+        "startLineNumber": 2,
+        "startColumn": 1,
+        "endLineNumberInclusive": 7,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "e0f8d63d-e79f-41e3-a3b5-544081cb05af",
+      "undoRedoGroup": {
+        "id": 36,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 2,
+        "startColumn": 1,
+        "endLineNumber": 7,
+        "endColumn": 1
+      },
+      "trackedText": "@Component\nstruct AboutMe {\n  @State message: string = 'About Me';\n\n}\n",
+      "decorationId": "d;61"
+    },
+    "generationUUID": "09cc23a5-b10b-46fe-8179-714f96152d10",
+    "timestamp": "2025-03-03T02:36:27.578Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "e0f8d63d-e79f-41e3-a3b5-544081cb05af",
+    "fusedCursorPrediction": null,
+    "oldText": "@Component\nstruct AboutMe {\n  @State message: string = 'About Me';\n\n}\n",
+    "newText": "@Component\nstruct AboutMe {\n  @State message: string = 'About Me';\n\n  build() {\n    Column() {\n      Text(this.message)\n        .fontSize(50)\n        .fontWeight(FontWeight.Bold)\n    }\n  }\n}",
+    "timestamp": "2025-03-03T02:36:27.579Z"
+  }
+]

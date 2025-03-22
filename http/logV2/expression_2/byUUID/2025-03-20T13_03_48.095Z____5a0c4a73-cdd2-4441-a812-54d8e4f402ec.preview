@@ -1,0 +1,90 @@
+{"line":63,"column":1}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+interface Address {
+  city: string;
+  country: string;
+}
+interface User {
+  name: string;
+  age: number;
+  address: Address;
+}
+const user: User = {
+  name: "Alice",
+  age: 30,
+  address: {
+    city: "New York",
+    country: "USA",
+  },
+};
+
+const greeting = `Hello, ${user.name}!`;
+
+interface FullName {
+  firstName: string;
+  lastName: string;
+}
+function getFullName(user: FullName) {
+  return `${user.firstName} ${user.lastName}`;
+}
+
+const currentUser: FullName = {
+  firstName: "John",
+  lastName: "Doe",
+};
+
+const fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;
+
+const price = 100;
+const discount = 0.1;
+const priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;
+
+const isAdmin = true;
+const roleMessage = `User is ${isAdmin ? "admin" : "not admin"}`;
+
+const products = [
+  { name: "Product 1", price: 100 },
+  { name: "Product 2", price: 200 },
+  { name: "Product 3", price: 300 },
+];
+
+const productInfo = `Current product: ${products[0].name}`;
+
+type Status = "active" | "inactive";
+let status: Status = "active";
+const statusText = `Status: ${status}`;
+
+const company = {
+  name: "Acme Inc.",
+  ceo: {
+    name: "John Doe",
+    contact: {
+      email: "john.doe@acme.com",
+      phone: "+1234567890",
+    },
+  },
+}[ToFill];
+
+
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+      phone: "+1234567890",
+    },
+  },
+};
+
+const companyInfo = `Company: ${company.name}, CEO: ${company.ceo.name}`;
+
+
+-------------------------------[                   fullText                  ]--------------------------------
+      phone: "+1234567890",
+    },
+  },
+};
+
+const companyInfo = `Company: ${company.name}, CEO: ${company.ceo.name}`;
+
+const userList = [
+  { id: 1, name: "Alice

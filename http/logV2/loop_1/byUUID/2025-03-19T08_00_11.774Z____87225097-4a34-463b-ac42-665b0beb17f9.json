@@ -1,0 +1,443 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "87225097-4a34-463b-ac42-665b0beb17f9",
+    "timestamp": "2025-03-19T08:00:11.774Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/loop1.ets",
+          "diffHistory": [
+            "1+|let numbers = [1, 2, 3, 4, 5]\n2+|\n3+|for (let i = 0; i < numbers.length; i++) {\n4+|    console.log(numbers[i])\n5+|}\n6+|\n",
+            "5+|    numbers[i].\n",
+            "5-|    numbers[i].\n",
+            "5-|    \n5+|    const number = numbers[i]\n6+|    nm\n",
+            "6-|    nm\n6+|    numbers.\n",
+            "6-|    numbers.\n8+|let users = [\n9+|    { name: 'John', age: 30 },\n10+|    { name: 'Jane', age: 25 },\n11+|    { name: 'Jim', age: 35 },\n12+|]\n13+|\n14+|\n15+|\n",
+            "14+|for (let i = 0; i < users.length; i++) {\n15+|    const user = users[i]\n16+|    console.log(user.name)\n17+|}\n",
+            "14-|for (let i = 0; i < users.length; i++) {\n15-|    const user = users[i]\n14+|for (const user of users) {\n",
+            "18+|for (const key in users) {\n19+|    console.log(key)\n20+|}\n",
+            "20+|    const user = users[key];\n21+|    user.name = 'John';\n",
+            "8-|let users = [\n8+|interface User {\n9+|    name: string;\n10+|    age: number;\n11+|}\n12+|\n13+|let users: User[] = [\n",
+            "29+|l\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/loop1.ets",
+        "contents": "let numbers = [1, 2, 3, 4, 5]\n\nfor (let i = 0; i < numbers.length; i++) {\n    console.log(numbers[i])\n    const number = numbers[i]\n}\n\ninterface User {\n    name: string;\n    age: number;\n}\n\nlet users: User[] = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]\n\nfor (const user of users) {\n    console.log(user.name)\n}\n\nfor (const key in users) {\n    console.log(key)\n    const user = users[key];\n    user.name = 'John';\n}\n\nl\n\n\n\n",
+        "cursorPosition": {
+          "line": 28,
+          "column": 1
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 152,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742371211811,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.900146484375,
+      "timeAtRequestSend": 1742371211811
+    },
+    "generateUuid": "87225097-4a34-463b-ac42-665b0beb17f9",
+    "timestamp": "2025-03-19T08:00:11.813Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "87225097-4a34-463b-ac42-665b0beb17f9",
+    "timestamp": "2025-03-19T08:00:12.164Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nlet",
+      "rangeToReplace": {
+        "startLineNumber": 28,
+        "endLineNumberInclusive": 31
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "87225097-4a34-463b-ac42-665b0beb17f9",
+    "timestamp": "2025-03-19T08:00:12.165Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " user"
+    },
+    "generationUUID": "87225097-4a34-463b-ac42-665b0beb17f9",
+    "timestamp": "2025-03-19T08:00:12.186Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "87225097-4a34-463b-ac42-665b0beb17f9",
+    "timestamp": "2025-03-19T08:00:12.197Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "87225097-4a34-463b-ac42-665b0beb17f9",
+    "timestamp": "2025-03-19T08:00:12.207Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n    name"
+    },
+    "generationUUID": "87225097-4a34-463b-ac42-665b0beb17f9",
+    "timestamp": "2025-03-19T08:00:12.218Z"
+  },
+  {
+    "firstChunkValue": "\nlet user = {\n\n",
+    "generationUUID": "87225097-4a34-463b-ac42-665b0beb17f9",
+    "timestamp": "2025-03-19T08:00:12.219Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nlet user = {\n\n"
+    },
+    "generationUUID": "87225097-4a34-463b-ac42-665b0beb17f9",
+    "timestamp": "2025-03-19T08:00:12.221Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "c871ef98-d110-493c-ba4a-3cb4ebdad691",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 152,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 152,
+      "monotonicallyIncreasingSuggestionId": 94,
+      "range": {
+        "startLineNumber": 28,
+        "startColumn": 1,
+        "endLineNumberInclusive": 31,
+        "endColumn": 1
+      },
+      "replaceText": "\nlet user = {\n\n",
+      "originalText": "\nl\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 28,
+        "startColumn": 1,
+        "endLineNumberInclusive": 31,
+        "endColumn": 1
+      },
+      "diffText": "\nlet user = {\n\n",
+      "fullOriginalText": "\nl\n\n",
+      "suggestionTriggerTime": 1742371211759.2998,
+      "greens": [],
+      "source": "typing",
+      "requestId": "87225097-4a34-463b-ac42-665b0beb17f9",
+      "selection": {
+        "startLineNumber": 28,
+        "startColumn": 1,
+        "endLineNumberInclusive": 31,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 94,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 28,
+        "startColumn": 1,
+        "endLineNumber": 31,
+        "endColumn": 1
+      },
+      "trackedText": "\nlet\n\n"
+    },
+    "generationUUID": "87225097-4a34-463b-ac42-665b0beb17f9",
+    "timestamp": "2025-03-19T08:00:12.222Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": 'John"
+    },
+    "generationUUID": "87225097-4a34-463b-ac42-665b0beb17f9",
+    "timestamp": "2025-03-19T08:00:12.231Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "',"
+    },
+    "generationUUID": "87225097-4a34-463b-ac42-665b0beb17f9",
+    "timestamp": "2025-03-19T08:00:12.239Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "87225097-4a34-463b-ac42-665b0beb17f9",
+    "timestamp": "2025-03-19T08:00:12.251Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "   "
+    },
+    "generationUUID": "87225097-4a34-463b-ac42-665b0beb17f9",
+    "timestamp": "2025-03-19T08:00:12.258Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " age"
+    },
+    "generationUUID": "87225097-4a34-463b-ac42-665b0beb17f9",
+    "timestamp": "2025-03-19T08:00:12.269Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": "
+    },
+    "generationUUID": "87225097-4a34-463b-ac42-665b0beb17f9",
+    "timestamp": "2025-03-19T08:00:12.277Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "3"
+    },
+    "generationUUID": "87225097-4a34-463b-ac42-665b0beb17f9",
+    "timestamp": "2025-03-19T08:00:12.288Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "0"
+    },
+    "generationUUID": "87225097-4a34-463b-ac42-665b0beb17f9",
+    "timestamp": "2025-03-19T08:00:12.298Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ","
+    },
+    "generationUUID": "87225097-4a34-463b-ac42-665b0beb17f9",
+    "timestamp": "2025-03-19T08:00:12.309Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "87225097-4a34-463b-ac42-665b0beb17f9",
+    "timestamp": "2025-03-19T08:00:12.319Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}"
+    },
+    "generationUUID": "87225097-4a34-463b-ac42-665b0beb17f9",
+    "timestamp": "2025-03-19T08:00:12.328Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "87225097-4a34-463b-ac42-665b0beb17f9",
+    "timestamp": "2025-03-19T08:00:12.338Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "for"
+    },
+    "generationUUID": "87225097-4a34-463b-ac42-665b0beb17f9",
+    "timestamp": "2025-03-19T08:00:12.348Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " (const key in user"
+    },
+    "generationUUID": "87225097-4a34-463b-ac42-665b0beb17f9",
+    "timestamp": "2025-03-19T08:00:12.357Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ")"
+    },
+    "generationUUID": "87225097-4a34-463b-ac42-665b0beb17f9",
+    "timestamp": "2025-03-19T08:00:12.369Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "87225097-4a34-463b-ac42-665b0beb17f9",
+    "timestamp": "2025-03-19T08:00:12.378Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n    console.log(key)"
+    },
+    "generationUUID": "87225097-4a34-463b-ac42-665b0beb17f9",
+    "timestamp": "2025-03-19T08:00:12.391Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "87225097-4a34-463b-ac42-665b0beb17f9",
+    "timestamp": "2025-03-19T08:00:12.396Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}"
+    },
+    "generationUUID": "87225097-4a34-463b-ac42-665b0beb17f9",
+    "timestamp": "2025-03-19T08:00:12.410Z"
+  },
+  {
+    "fullText": "\nlet user = {\n    name: 'John',\n    age: 30,\n}\n\nfor (const key in user) {\n    console.log(key)\n}\n",
+    "generationUUID": "87225097-4a34-463b-ac42-665b0beb17f9",
+    "timestamp": "2025-03-19T08:00:12.425Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nlet user = {\n\n"
+    },
+    "fullText": "\nlet user = {\n    name: 'John',\n    age: 30,\n}\n\nfor (const key in user) {\n    console.log(key)\n}\n",
+    "generationUUID": "87225097-4a34-463b-ac42-665b0beb17f9",
+    "timestamp": "2025-03-19T08:00:12.427Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "87225097-4a34-463b-ac42-665b0beb17f9",
+    "timestamp": "2025-03-19T08:00:12.431Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "87225097-4a34-463b-ac42-665b0beb17f9",
+    "timestamp": "2025-03-19T08:00:12.434Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "87225097-4a34-463b-ac42-665b0beb17f9",
+    "timestamp": "2025-03-19T08:00:12.436Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "94d9face-7cba-430c-a294-5af21800ba80",
+    "generationUUID": "87225097-4a34-463b-ac42-665b0beb17f9",
+    "timestamp": "2025-03-19T08:00:12.437Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nlet user = {\n\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "94d9face-7cba-430c-a294-5af21800ba80",
+    "generationUUID": "87225097-4a34-463b-ac42-665b0beb17f9",
+    "timestamp": "2025-03-19T08:00:12.437Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "234996b8-4e0d-4dbf-8231-f2aeca3503b1",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/loop1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 152,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 156,
+      "monotonicallyIncreasingSuggestionId": 95,
+      "range": {
+        "startLineNumber": 28,
+        "startColumn": 1,
+        "endLineNumberInclusive": 31,
+        "endColumn": 1
+      },
+      "replaceText": "\nlet user = {\n    name: 'John',\n    age: 30,\n}\n\nfor (const key in user) {\n    console.log(key)\n}\n",
+      "originalText": "\nlet user = {\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 28,
+        "startColumn": 1,
+        "endLineNumberInclusive": 31,
+        "endColumn": 1
+      },
+      "diffText": "\nlet user = {\n    name: 'John',\n    age: 30,\n}\n\nfor (const key in user) {\n    console.log(key)\n}\n",
+      "fullOriginalText": "\nlet user = {\n\n",
+      "suggestionTriggerTime": 1742371211759.2998,
+      "greens": [],
+      "source": "typing",
+      "requestId": "87225097-4a34-463b-ac42-665b0beb17f9",
+      "selection": {
+        "startLineNumber": 28,
+        "startColumn": 1,
+        "endLineNumberInclusive": 31,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "94d9face-7cba-430c-a294-5af21800ba80",
+      "undoRedoGroup": {
+        "id": 95,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "87225097-4a34-463b-ac42-665b0beb17f9",
+    "timestamp": "2025-03-19T08:00:12.438Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "94d9face-7cba-430c-a294-5af21800ba80",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T08:00:12.438Z"
+  }
+]

@@ -1,0 +1,35 @@
+------------------------------------------[        output        ]-------------------------------------------
+@Preview
+@Component
+export default struct Banner {
+  @Prop title: string = 'Default Title';
+
+  build() {
+    Text(this.title)
+      .fontSize(30)
+      .fontWeight(FontWeight.Bold);
+  }
+}
+------------------------------------------[    replacedOutput    ]-------------------------------------------
+@Preview
+@Preview
+@Component
+export default struct Banner {
+  @Prop title: string = 'Default Title';
+
+  build() {
+    Text(this.title)
+      .fontSize(30)
+      .fontWeight(FontWeight.Bold);
+  }
+}
+-------------------------------[ groundTruth (replacedContentsWithFirstChunk) ]--------------------------------
+@Preview
+@Component
+export default struct Banner {
+  @Prop title: string = 'Banner';
+
+  build() {
+    Text("Banner")
+  }
+}

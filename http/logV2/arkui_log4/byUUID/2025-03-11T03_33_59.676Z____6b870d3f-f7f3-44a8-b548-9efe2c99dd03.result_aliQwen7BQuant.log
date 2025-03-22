@@ -1,0 +1,85 @@
+============================
+----promptFilePath----:
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/arkui_log4/byUUID/2025-03-11T03_33_59.676Z____6b870d3f-f7f3-44a8-b548-9efe2c99dd03.prompt
+
+----output----:
+```typescript
+Text('About Me')
+```
+
+-----replacedOutput-----
+
+```typescript
+Text('About Me')
+```
+struct Index {
+  @State message: string = 'Hello World';
+
+  build() {
+    RelativeContainer() {
+      Text(this.message)
+        .id('HelloWorld')
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+        .alignRules({
+          center: { anchor: '__container__', align: VerticalAlign.Center },
+          middle: { anchor: '__container__', align: HorizontalAlign.Center }
+        })
+
+      Button() {
+        Text('About Me')
+      }
+      .onClick(() => {
+        router.pushUrl({
+          url: 'pages/AboutMe'
+        })
+      })
+    }
+    .height('100%')
+    .width('100%')
+  }
+}
+
+----firstChunkValue----:
+import router from '@ohos.router';
+
+@Entry
+@Component
+struct Index {
+  @State message: string = 'Hello World';
+
+----replacedContents(firstChunkValue)----
+import router from '@ohos.router';
+
+@Entry
+@Component
+struct Index {
+  @State message: string = 'Hello World';
+
+  build() {
+    RelativeContainer() {
+      Text(this.message)
+        .id('HelloWorld')
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+        .alignRules({
+          center: { anchor: '__container__', align: VerticalAlign.Center },
+          middle: { anchor: '__container__', align: HorizontalAlign.Center }
+        })
+
+      Button() {
+        Text('About Me')
+      }
+      .onClick(() => {
+        router.pushUrl({
+          url: 'pages/AboutMe'
+        })
+      })
+    }
+    .height('100%')
+    .width('100%')
+  }
+}
+
+----fullText----:
+undefined

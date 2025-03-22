@@ -1,0 +1,124 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "c7ae97a9-f2f3-4d7b-89f5-0c7740188ad1",
+    "timestamp": "2025-03-19T07:59:19.037Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/loop1.ets",
+          "diffHistory": [
+            "1+|let numbers = [1, 2, 3, 4, 5]\n2+|\n3+|for (let i = 0; i < numbers.length; i++) {\n4+|    console.log(numbers[i])\n5+|}\n6+|\n",
+            "5+|    numbers[i].\n",
+            "5-|    numbers[i].\n",
+            "5-|    \n5+|    const number = numbers[i]\n6+|    nm\n",
+            "6-|    nm\n6+|    numbers.\n",
+            "6-|    numbers.\n8+|let users = [\n9+|    { name: 'John', age: 30 },\n10+|    { name: 'Jane', age: 25 },\n11+|    { name: 'Jim', age: 35 },\n12+|]\n13+|\n14+|\n15+|\n",
+            "14+|for (let i = 0; i < users.length; i++) {\n15+|    const user = users[i]\n16+|    console.log(user.name)\n17+|}\n",
+            "14-|for (let i = 0; i < users.length; i++) {\n15-|    const user = users[i]\n14+|for (const user of users) {\n",
+            "18+|for (const key in users) {\n19+|    console.log(key)\n20+|}\n",
+            "20+|    const user = users[key];\n21+|    user.name = 'John';\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/loop1.ets",
+        "contents": "let numbers = [1, 2, 3, 4, 5]\n\nfor (let i = 0; i < numbers.length; i++) {\n    console.log(numbers[i])\n    const number = numbers[i]\n}\n\nlet users = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]\n\nfor (const user of users) {\n    console.log(user.name)\n}\n\nfor (const key in users) {\n    console.log(key)\n    const user = users[key];\n    user.name = 'John';\n}\n\n\n\n\n\n",
+        "cursorPosition": {
+          "line": 6,
+          "column": 0
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 144,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1742371159078,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.300048828125,
+      "timeAtRequestSend": 1742371159078
+    },
+    "generateUuid": "c7ae97a9-f2f3-4d7b-89f5-0c7740188ad1",
+    "timestamp": "2025-03-19T07:59:19.080Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "c7ae97a9-f2f3-4d7b-89f5-0c7740188ad1",
+    "timestamp": "2025-03-19T07:59:19.448Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}\n\nlet users = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]",
+      "rangeToReplace": {
+        "startLineNumber": 6,
+        "endLineNumberInclusive": 12
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "c7ae97a9-f2f3-4d7b-89f5-0c7740188ad1",
+    "timestamp": "2025-03-19T07:59:19.449Z"
+  },
+  {
+    "firstChunkValue": "}\n\nlet users = [\n    { name: 'John', age: 30 },\n    { name: 'Jane', age: 25 },\n    { name: 'Jim', age: 35 },\n]",
+    "generationUUID": "c7ae97a9-f2f3-4d7b-89f5-0c7740188ad1",
+    "timestamp": "2025-03-19T07:59:19.516Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "c7ae97a9-f2f3-4d7b-89f5-0c7740188ad1",
+    "timestamp": "2025-03-19T07:59:19.521Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": false
+    },
+    "generationUUID": "c7ae97a9-f2f3-4d7b-89f5-0c7740188ad1",
+    "timestamp": "2025-03-19T07:59:19.521Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "c7ae97a9-f2f3-4d7b-89f5-0c7740188ad1",
+    "timestamp": "2025-03-19T07:59:19.550Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "50a9922c-06dd-4e7c-b5e8-73c8f00c1ae7",
+    "generationUUID": "c7ae97a9-f2f3-4d7b-89f5-0c7740188ad1",
+    "timestamp": "2025-03-19T07:59:19.557Z"
+  }
+]

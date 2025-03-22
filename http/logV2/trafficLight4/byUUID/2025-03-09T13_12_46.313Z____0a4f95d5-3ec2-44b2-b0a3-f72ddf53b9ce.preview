@@ -1,0 +1,69 @@
+{"line":0,"column":0}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+[ToFill]function changeLight(light: TrafficLight) {
+  switch (light) {
+    case light.RED:
+      return light.GREEN;
+    case light.GREEN:
+      return light.YELLOW;
+    case light.YELLOW:
+      return light.RED;
+    default:
+      return light.RED;
+  }
+}
+
+enum TrafficLight {
+  RED = 'red',
+  GREEN = 'green',
+  YELLOW = 'yellow',
+}
+
+const light = TrafficLight.RED;
+const newLight = changeLight(light);
+console.log(newLight);
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case TrafficLight.RED:
+      return TrafficLight.GREEN;
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case TrafficLight.RED:
+      return TrafficLight.GREEN;
+    case light.GREEN:
+      return light.YELLOW;
+    case light.YELLOW:
+      return light.RED;
+    default:
+      return light.RED;
+  }
+}
+
+enum TrafficLight {
+  RED = 'red',
+  GREEN = 'green',
+  YELLOW = 'yellow',
+}
+
+const light = TrafficLight.RED;
+const newLight = changeLight(light);
+console.log(newLight);
+
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "src/components/test2.ts",
+  "lineNumberOneIndexed": 5,
+  "text": "case light.GREEN:\nreturn light.YELLOW;\ncase light.YELLOW:\nreturn light.RED;\ndefault:",
+  "shouldRetriggerCpp": false
+}
+--------------------------------[        displayedFusedCursorPrediction       ]---------------------------------
+{
+  "relativePath": "src/components/test2.ts",
+  "lineNumberOneIndexed": 5,
+  "text": "case light.GREEN:\nreturn light.YELLOW;\ncase light.YELLOW:\nreturn light.RED;\ndefault:",
+  "shouldRetriggerCpp": false
+}

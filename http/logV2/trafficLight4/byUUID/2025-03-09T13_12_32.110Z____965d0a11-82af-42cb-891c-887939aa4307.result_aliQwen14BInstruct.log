@@ -1,0 +1,43 @@
+------------------------------------------[        output        ]-------------------------------------------
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case 'red':
+      return 'green';
+    case 'green':
+      return 'yellow';
+    case 'yellow':
+      return 'red';
+    default:
+      return 'red';
+  }
+}
+------------------------------------------[    replacedOutput    ]-------------------------------------------
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case 'red':
+      return 'green';
+    case 'green':
+      return 'yellow';
+    case 'yellow':
+      return 'red';
+    default:
+      return 'red';
+  }
+}
+
+
+-------------------------------[ groundTruth (replacedContentsWithFirstChunk) ]--------------------------------
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case light.RED:
+      return 'green';
+    case 'green':
+      return 'yellow';
+    case 'yellow':
+      return 'red';
+    default:
+      return 'red';
+  }
+}
+
+

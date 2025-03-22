@@ -1,0 +1,205 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "3e44c364-c0fb-4bc5-bda4-9f3923fed15a",
+    "timestamp": "2025-03-09T13:13:23.425Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "src/components/test2.ts",
+          "diffHistory": [
+            "1+|function changeLight(light: TrafficLight) {\n2+|  light = 'green';\n3+|}\n4+|\n",
+            "2-|  light = 'green';\n",
+            "2-|  \n2+|  switch (light) {\n3+|    case 'red':\n4+|      return 'green';\n5+|    case 'green':\n6+|      return 'yellow';\n7+|      \n8+|  }\n",
+            "7-|\n7+|    case 'yellow':\n8+|      return 'red';\n9+|    default:\n10+|      return 'red';\n",
+            "3-|    case 'red':\n3+|    case light.RED:\n",
+            "5-|    case 'green':\n6-|      return 'yellow';\n5+|    case 'green'ht.GREEN:\n6+|      return light.YELLOW;\n",
+            "4-|      return 'green';\n5-|    case 'green'ht.GREEN:\n4+|      return 'green'ht.GREEN;\n5+|    case light.GREEN:\n",
+            "4-|      return 'green'ht.GREEN;\n4+|      return light.GREEN;\n",
+            "10-|      return 'red';\n10+|      return light.RED;\n",
+            "7-|    case 'yellow':\n8-|      return 'red';\n7+|    case 'yellow'ight.YELLOW:\n8+|      return light.RED;\n",
+            "7-|    case 'yellow'ight.YELLOW:\n7+|    case light.YELLOW:\n",
+            "14+|enum TrafficLight {\n15+|  RED = 'red',\n16+|  GREEN = 'green',\n17+|  YELLOW = 'yellow',\n18+|}\n19+|\n20+|const light = TrafficLight.RED;\n21+|const newLight = changeLight(light);\n22+|console.log(newLight);\n",
+            "3-|    case light.RED:\n4-|      return light.GREEN;\n3+|    case lTrafficLight.RED:\n4+|      return TrafficLight.GREEN;\n",
+            "3-|    case lTrafficLight.RED:\n3+|    case TrafficLight.RED:\n",
+            "7-|    case light.YELLOW:\n8-|      return light.RED;\n7+|    case lTrafficLight.YELLOW:\n8+|      return TrafficLight.RED;\n",
+            "6-|      return light.YELLOW;\n7-|    case lTrafficLight.YELLOW:\n6+|      return lTrafficLight.YELLOW;\n7+|    case TrafficLight.YELLOW:\n",
+            "5-|    case light.GREEN:\n6-|      return lTrafficLight.YELLOW;\n5+|    case lTrafficLight.GREEN:\n6+|      return TrafficLight.YELLOW;\n",
+            "5-|    case lTrafficLight.GREEN:\n5+|    case TrafficLight.GREEN:\n",
+            "10-|      return light.RED;\n10+|      return TrafficLight.RED;\n",
+            "4-|      return TrafficLight.GREEN;\n",
+            "4-|      \n4+|      console.log('red');\n",
+            "6-|      return TrafficLight.YELLOW;\n6+|      return');\n7+|      break;\n",
+            "5+|      break;\n6-|      return');\n7+|      console.log('green');\n",
+            "12-|      return TrafficLight.RED;\n12+|      console.log('red');\n",
+            "10-|      return TrafficLight.RED;\n10+|      return.log('yellow');\n11+|      break;\n",
+            "10-|      return.log('yellow');\n10+|      console.log('yellow');\n",
+            "24-|const newLight = changeLight(light);\n25-|console.log(newLight);\n24+|changeLight(light);\n",
+            "4-|      console.log('red');\n4+|      console.log('');\n",
+            "7-|      console.log('green');\n7+|      console.log('Go');\n",
+            "4-|      console.log('');\n4+|      console.log('Stop');\n",
+            "10-|      console.log('yellow');\n10+|        console.log('Wait');\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "src/components/test2.ts",
+        "contents": "function changeLight(light: TrafficLight) {\n  switch (light) {\n    case TrafficLight.RED:\n      console.log('Stop');\n      break;\n    case TrafficLight.GREEN:\n      console.log('Go');\n      break;\n    case TrafficLight.YELLOW:\n        console.log('Wait');\n      break;\n    default:\n      console.log('red');\n  }\n}\n\nenum TrafficLight {\n  RED = 'red',\n  GREEN = 'green',\n  YELLOW = 'yellow',\n}\n\nconst light = TrafficLight.RED;\nchangeLight(light);\n",
+        "cursorPosition": {
+          "line": 9,
+          "column": 8
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 79,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/Documents/personal/vite-react-demo2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "src/components/test.ts",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            4
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 4,
+              "endLineNumberInclusive": 24
+            }
+          ],
+          "lastViewedAt": 1741525907939
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1741526003474,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "8u65ni1hw3pqzyyqn4vyf",
+      "timeSinceRequestStart": 50.5,
+      "timeAtRequestSend": 1741526003474
+    },
+    "generateUuid": "3e44c364-c0fb-4bc5-bda4-9f3923fed15a",
+    "timestamp": "2025-03-09T13:13:23.476Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "3e44c364-c0fb-4bc5-bda4-9f3923fed15a",
+    "timestamp": "2025-03-09T13:13:23.846Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "    case TrafficLight.YELLOW:\n     ",
+      "rangeToReplace": {
+        "startLineNumber": 9,
+        "endLineNumberInclusive": 13
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "3e44c364-c0fb-4bc5-bda4-9f3923fed15a",
+    "timestamp": "2025-03-09T13:13:23.847Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " console.log('Wait"
+    },
+    "generationUUID": "3e44c364-c0fb-4bc5-bda4-9f3923fed15a",
+    "timestamp": "2025-03-09T13:13:23.869Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "');\n     "
+    },
+    "generationUUID": "3e44c364-c0fb-4bc5-bda4-9f3923fed15a",
+    "timestamp": "2025-03-09T13:13:23.870Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " break"
+    },
+    "generationUUID": "3e44c364-c0fb-4bc5-bda4-9f3923fed15a",
+    "timestamp": "2025-03-09T13:13:23.878Z"
+  },
+  {
+    "firstChunkValue": "    case TrafficLight.YELLOW:\n      console.log('Wait');\n      break;\n    default:\n      console.log('red');",
+    "generationUUID": "3e44c364-c0fb-4bc5-bda4-9f3923fed15a",
+    "timestamp": "2025-03-09T13:13:23.932Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": false
+    },
+    "generationUUID": "3e44c364-c0fb-4bc5-bda4-9f3923fed15a",
+    "timestamp": "2025-03-09T13:13:23.933Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";\n    default:\n      console"
+    },
+    "generationUUID": "3e44c364-c0fb-4bc5-bda4-9f3923fed15a",
+    "timestamp": "2025-03-09T13:13:23.934Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ".log('red"
+    },
+    "generationUUID": "3e44c364-c0fb-4bc5-bda4-9f3923fed15a",
+    "timestamp": "2025-03-09T13:13:23.934Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "3e44c364-c0fb-4bc5-bda4-9f3923fed15a",
+    "timestamp": "2025-03-09T13:13:23.935Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "');"
+    },
+    "generationUUID": "3e44c364-c0fb-4bc5-bda4-9f3923fed15a",
+    "timestamp": "2025-03-09T13:13:23.935Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "3e44c364-c0fb-4bc5-bda4-9f3923fed15a",
+    "timestamp": "2025-03-09T13:13:23.973Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "ea3bc317-435f-4a21-aa45-1e4eea930573",
+    "generationUUID": "3e44c364-c0fb-4bc5-bda4-9f3923fed15a",
+    "timestamp": "2025-03-09T13:13:24.041Z"
+  }
+]

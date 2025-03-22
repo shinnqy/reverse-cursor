@@ -1,0 +1,348 @@
+[
+  {
+    "intent": "cursor_prediction",
+    "generationUUID": "d0254368-ab11-4dd1-8ef1-aef11d728dd5",
+    "timestamp": "2025-03-19T11:42:59.385Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/stateType.ets",
+          "diffHistory": [
+            "4+|  @State score: number = 0\n",
+            "8+|      Text(this.score.toString())\n9-|      Text('Hello, world!')\n",
+            "4-|  @State score: number = 0\n4+|  @State score: number = 0;\n5+|  @State name: string = 'John';\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/stateType.ets",
+        "contents": "@Entry\n@Component\nstruct BasicTypeExample {\n  @State score: number = 0;\n  @State name: string = 'John';\n\n  build() {\n    Column() {\n      Text(this.score.toString())\n      Text('Hello, world!')\n    }\n  }\n}\n\n@Component\nstruct ObjectTypeExample {\n  build() {\n    Column() {\n      Text('Hello, world!')\n    }\n  }\n}\n\n@Component\nstruct ArrayTypeExample {\n  build() {\n    Column() {\n      Text('Hello, world!')\n    }\n  }\n}",
+        "cursorPosition": {
+          "line": 9,
+          "column": 0
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 41,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "cursor_prediction"
+      },
+      "clientTime": 1742384579393,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 9,
+      "timeAtRequestSend": 1742384579393
+    },
+    "generateUuid": "d0254368-ab11-4dd1-8ef1-aef11d728dd5",
+    "timestamp": "2025-03-19T11:42:59.394Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "d0254368-ab11-4dd1-8ef1-aef11d728dd5",
+    "timestamp": "2025-03-19T11:42:59.819Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "      Text(this.score.toString())\n      Text(",
+      "rangeToReplace": {
+        "startLineNumber": 9,
+        "endLineNumberInclusive": 13
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "d0254368-ab11-4dd1-8ef1-aef11d728dd5",
+    "timestamp": "2025-03-19T11:42:59.819Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "this.name"
+    },
+    "generationUUID": "d0254368-ab11-4dd1-8ef1-aef11d728dd5",
+    "timestamp": "2025-03-19T11:42:59.840Z"
+  },
+  {
+    "firstChunkValue": "      Text(this.score.toString())\n      Text(this.name)\n    }\n  }\n}",
+    "generationUUID": "d0254368-ab11-4dd1-8ef1-aef11d728dd5",
+    "timestamp": "2025-03-19T11:42:59.959Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ")"
+    },
+    "generationUUID": "d0254368-ab11-4dd1-8ef1-aef11d728dd5",
+    "timestamp": "2025-03-19T11:42:59.961Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "      Text(this.score.toString())\n      Text(this.name)\n    }\n  }\n}"
+    },
+    "generationUUID": "d0254368-ab11-4dd1-8ef1-aef11d728dd5",
+    "timestamp": "2025-03-19T11:42:59.962Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "2cd3bf86-bc14-40a8-ae30-db532413b010",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 41,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 41,
+      "monotonicallyIncreasingSuggestionId": 28,
+      "range": {
+        "startLineNumber": 9,
+        "startColumn": 1,
+        "endLineNumberInclusive": 13,
+        "endColumn": 2
+      },
+      "replaceText": "      Text(this.score.toString())\n      Text(this.name)\n    }\n  }\n}",
+      "originalText": "      Text(this.score.toString())\n      Text('Hello, world!')\n    }\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 9,
+        "startColumn": 1,
+        "endLineNumberInclusive": 13,
+        "endColumn": 2
+      },
+      "diffText": "      Text(this.score.toString())\n      Text(this.name)\n    }\n  }\n}",
+      "fullOriginalText": "      Text(this.score.toString())\n      Text('Hello, world!')\n    }\n  }\n}",
+      "suggestionTriggerTime": 1742384579384.5999,
+      "greens": [],
+      "source": "cursor_prediction",
+      "requestId": "d0254368-ab11-4dd1-8ef1-aef11d728dd5",
+      "selection": {
+        "startLineNumber": 9,
+        "startColumn": 1,
+        "endLineNumberInclusive": 13,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "5c0c691b-8674-420d-bfc9-fd937d54ed64",
+      "undoRedoGroup": {
+        "id": 28,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "d0254368-ab11-4dd1-8ef1-aef11d728dd5",
+    "timestamp": "2025-03-19T11:42:59.963Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "d0254368-ab11-4dd1-8ef1-aef11d728dd5",
+    "timestamp": "2025-03-19T11:42:59.963Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "   "
+    },
+    "generationUUID": "d0254368-ab11-4dd1-8ef1-aef11d728dd5",
+    "timestamp": "2025-03-19T11:42:59.964Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " }"
+    },
+    "generationUUID": "d0254368-ab11-4dd1-8ef1-aef11d728dd5",
+    "timestamp": "2025-03-19T11:42:59.964Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n  }\n}"
+    },
+    "generationUUID": "d0254368-ab11-4dd1-8ef1-aef11d728dd5",
+    "timestamp": "2025-03-19T11:42:59.964Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "d0254368-ab11-4dd1-8ef1-aef11d728dd5",
+    "timestamp": "2025-03-19T11:42:59.965Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "d0254368-ab11-4dd1-8ef1-aef11d728dd5",
+    "timestamp": "2025-03-19T11:43:00.057Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "5c0c691b-8674-420d-bfc9-fd937d54ed64",
+    "generationUUID": "d0254368-ab11-4dd1-8ef1-aef11d728dd5",
+    "timestamp": "2025-03-19T11:43:00.553Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "      Text(this.score.toString())\n      Text(this.name)\n    }\n  }\n}"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "5c0c691b-8674-420d-bfc9-fd937d54ed64",
+    "generationUUID": "d0254368-ab11-4dd1-8ef1-aef11d728dd5",
+    "timestamp": "2025-03-19T11:43:00.555Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "5c0c691b-8674-420d-bfc9-fd937d54ed64",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T11:43:00.555Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "2cd3bf86-bc14-40a8-ae30-db532413b010",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 41,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 41,
+      "monotonicallyIncreasingSuggestionId": 28,
+      "range": {
+        "startLineNumber": 9,
+        "startColumn": 1,
+        "endLineNumberInclusive": 13,
+        "endColumn": 2
+      },
+      "replaceText": "      Text(this.score.toString())\n      Text(this.name)\n    }\n  }\n}",
+      "originalText": "      Text(this.score.toString())\n      Text('Hello, world!')\n    }\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 9,
+        "startColumn": 1,
+        "endLineNumberInclusive": 13,
+        "endColumn": 2
+      },
+      "diffText": "      Text(this.score.toString())\n      Text(this.name)\n    }\n  }\n}",
+      "fullOriginalText": "      Text(this.score.toString())\n      Text('Hello, world!')\n    }\n  }\n}",
+      "suggestionTriggerTime": 1742384579384.5999,
+      "greens": [],
+      "source": "cursor_prediction",
+      "requestId": "d0254368-ab11-4dd1-8ef1-aef11d728dd5",
+      "selection": {
+        "startLineNumber": 9,
+        "startColumn": 1,
+        "endLineNumberInclusive": 13,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "5c0c691b-8674-420d-bfc9-fd937d54ed64",
+      "undoRedoGroup": {
+        "id": 28,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;112"
+    },
+    "generationUUID": "d0254368-ab11-4dd1-8ef1-aef11d728dd5",
+    "timestamp": "2025-03-19T11:43:00.767Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "2cd3bf86-bc14-40a8-ae30-db532413b010",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/stateType.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 41,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 41,
+      "monotonicallyIncreasingSuggestionId": 28,
+      "range": {
+        "startLineNumber": 9,
+        "startColumn": 1,
+        "endLineNumberInclusive": 13,
+        "endColumn": 2
+      },
+      "replaceText": "      Text(this.score.toString())\n      Text(this.name)\n    }\n  }\n}",
+      "originalText": "      Text(this.score.toString())\n      Text('Hello, world!')\n    }\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 9,
+        "startColumn": 1,
+        "endLineNumberInclusive": 13,
+        "endColumn": 2
+      },
+      "diffText": "      Text(this.score.toString())\n      Text(this.name)\n    }\n  }\n}",
+      "fullOriginalText": "      Text(this.score.toString())\n      Text('Hello, world!')\n    }\n  }\n}",
+      "suggestionTriggerTime": 1742384579384.5999,
+      "greens": [],
+      "source": "cursor_prediction",
+      "requestId": "d0254368-ab11-4dd1-8ef1-aef11d728dd5",
+      "selection": {
+        "startLineNumber": 9,
+        "startColumn": 1,
+        "endLineNumberInclusive": 13,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "5c0c691b-8674-420d-bfc9-fd937d54ed64",
+      "undoRedoGroup": {
+        "id": 28,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;112"
+    },
+    "generationUUID": "d0254368-ab11-4dd1-8ef1-aef11d728dd5",
+    "timestamp": "2025-03-19T11:43:00.779Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "5c0c691b-8674-420d-bfc9-fd937d54ed64",
+    "fusedCursorPrediction": null,
+    "oldText": "      Text(this.score.toString())\n      Text('Hello, world!')\n    }\n  }\n}",
+    "newText": "      Text(this.score.toString())\n      Text(this.name)\n    }\n  }\n}",
+    "timestamp": "2025-03-19T11:43:00.779Z"
+  }
+]

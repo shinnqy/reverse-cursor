@@ -1,0 +1,877 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:03.857Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/dynamicProp.ets",
+          "diffHistory": [
+            "1+|const user = {}\n",
+            "2-|  \n3-|}\n2+|  name: \"Alice\",\n3+|  age: 30,\n4+|  address: {\n5+|},\n6+|};\n7+|\n8+|\n",
+            "5-|},\n5+|    city: \"New York\",\n6+|    country: \"USA\",\n7+|  },\n10+|const greeting = `Hello, ${user.name}!`;\n",
+            "1-|\n1+|interface User {\n2+|  name: string;\n3+|  age: number;\n4+|  address: {\n5+|    city: string;\n6+|    country: string;\n7+|  };\n8+|}\n",
+            "1-|\n1+|interface Address {\n",
+            "5-|  address: {\n5+|  address: Address;\n",
+            "2+|  city: string;\n3+|  country: string;\n4+|}\n",
+            "9-|    city: string;\n10-|    country: string;\n11-|  };\n13-|const user = {\n10+|const user: User = {\n",
+            "21+|function getFullName(user: { firstName: string; lastName: string }) {\n22+|  return `${user.firstName} ${user.lastName}`;\n23+|}\n25+|const fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n26+|\n27+|\n28+|\n",
+            "25-|const fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n",
+            "25+|const currentUser = {\n26+|  firstName: \"John\",\n27+|  lastName: \"Doe\",\n28+|};\n30+|const fullName = getFullName(currentUser);\n",
+            "30-|const fullName = getFullName(currentUser);\n30+|const fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n",
+            "21-|function getFullName(user: { firstName: string; lastName: string }) {\n21+|interface FullName {\n22+|function getFullName(user: { firstName: string; lastName: string }\n23+|function getFullName(user: FullName) {\n",
+            "22-|function getFullName(user: { firstName: string; lastName: string }\n22+|function getFullName(user: { firstName: string; lastName: string ;\n23+|}\n",
+            "22-|function getFullName(user: { firstName: string;\n22+|  firstName: string;\n",
+            "29-|const currentUser = {\n29+|const currentUser: FullName = {\n",
+            "36+|const price = 100;\n37+|const discount = 0.1;\n38+|const priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n40+|const isAdmin = true;\n41+|const roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n43+|const products = [\n44+|  { name: \"Product 1\", price: 100 },\n45+|  { name: \"Product 2\", price: 200 },\n46+|  { name: \"Product 3\", price: 300 },\n47+|];\n49+|const productInfo = `Current product: ${products[0].name}`;\n50+|\n51+|type Status = \"active\" | \"inactive\";\n52+|let status: Status = \"active\";\n53+|const statusText = `Status: ${status}`;\n54+|\n55+|const company = {\n56+|  name: \"Acme Inc.\",\n57+|  address: {\n58+|    street: \"123 Main St\",\n59+|    city: \"Anytown\",\n60+|  },\n61+|};\n62+|\n",
+            "57-|  address: {\n58-|    street: \"123 Main St\",\n59-|    city: \"Anytown\",\n60-|  },\n57+|  ceo: {\n58+|    name: \"John Doe\",\n59+|    contact: {\n",
+            "60+|      email: \"john.doe@acme.com\",\n61+|      phone: \"+1234567890\",\n62+|    },\n63+|  },\n66+|const companyInfo = `Company: ${company.name}, CEO: ${company.ceo.name}`;\n",
+            "55+|interface Company {\n56+|  name: string;\n57+|  ceo: {\n58+|    name: string;\n59+|    contact: {\n60+|      email: string;\n61+|      phone: string;\n",
+            "62-|const company = {\n62+|      \n63+|const company: Company = {\n",
+            "62-|      \n62+|      };\n63+|}\n",
+            "62-|      };\n62+|    };\n63+|  };\n",
+            "55+|interface CEO {\n56+|  name: string;\n57+|  contact: {\n58+|    email: string;\n59+|    phone: string;\n60+|  };\n61+|}\n",
+            "70-|  };\n70+|  }CEO;\n",
+            "64-|  ceo: {\n65-|    name: string;\n66-|    contact: {\n67-|      email: string;\n68-|      phone: string;\n69-|    };\n70-|  }CEO;\n64+|  ceo: CEO;\n",
+            "55+|interface Contact {\n",
+            "58-|  contact: {\n59-|    email: string;\n58+|  contact: Contact;\n",
+            "56+|  email: string;\n57+|  phone: string;\n58+|}\n",
+            "62-|    phone: string;\n63-|  };\n",
+            "43-|const products = [\n43+|interface Product {\n44+|  name: string;\n45+|  price: number;\n46+|}\n47+|const products: Product[] = [\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/utils/builtInAPI.ets",
+          "diffHistory": [
+            "1+|import router from \"@ohos.router\";\n2+|\n3+|@Entry\n4+|@Component\n5+|struct Main {\n6+|  @State message: string = \"Hello World\";\n7+|\n8+|  build() {\n9+|    Row() {\n10+|      Text(this.message)\n11+|        .fontSize(20)\n12+|        .fontWeight(FontWeight.Bold)\n13+|        .onClick(() => {\n14+|          router.push({\n15+|            url: \"pages/SecondPage\",\n",
+            "16+|            params: {\n17+|              message: \"Hello from Second Page\",\n18+|            },\n19+|          });\n20+|        })\n21+|        .width(200)\n22+|        .height(100)\n",
+            "23+|        .backgroundColor(Color.Red)\n24+|        .borderRadius(10)\n25+|        .borderWidth(2)\n26+|        .borderColor(Color.Black)\n27+|        .padding(10)\n28+|        .margin(10)\n29+|        \n30+|        \n31+|        \n",
+            "29-|          \n29+|        .textAlign(TextAlign.Center)\n30+|        .fontColor(Color.White)\n31+|        .fontSize(20)\n32+|        .fontWeight(FontWeight.Bold)\n33+|        .textOverflow(TextOverflow.Ellipsis)\n34+|        .textWrap(TextWrap.Wrap)\n35+|        .textAlign(TextAlign.Center)\n",
+            "36+|  \n37-|\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/builtInAPI.ets",
+        "contents": "import router from \"@ohos.router\";\n\n@Entry\n@Component\nstruct Main {\n  @State message: string = \"Hello World\";\n\n  build() {\n    Row() {\n      Text(this.message)\n        .fontSize(20)\n        .fontWeight(FontWeight.Bold)\n        .onClick(() => {\n          router.push({\n            url: \"pages/SecondPage\",\n            params: {\n              message: \"Hello from Second Page\",\n            },\n          });\n        })\n        .width(200)\n        .height(100)\n        .backgroundColor(Color.Red)\n        .borderRadius(10)\n        .borderWidth(2)\n        .borderColor(Color.Black)\n        .padding(10)\n        .margin(10)\n          .textAlign(TextAlign.Center)\n        .fontColor(Color.White)\n        .fontSize(20)\n        .fontWeight(FontWeight.Bold)\n        .textOverflow(TextOverflow.Ellipsis)\n        .textWrap(TextWrap.Wrap)\n        .textAlign(TextAlign.Center)\n  \n\n",
+        "cursorPosition": {
+          "line": 35,
+          "column": 2
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 53,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/utils/dynamicProp.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            33
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 33,
+              "endLineNumberInclusive": 67
+            }
+          ],
+          "lastViewedAt": 1742476421483
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1742476503905,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.60009765625,
+      "timeAtRequestSend": 1742476503905
+    },
+    "generateUuid": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:03.908Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.300Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "        .fontWeight(FontWeight.Bold)\n        .textOverflow(TextOverflow.Ellipsis)\n        .textWrap(TextWrap.Wrap)\n        .textAlign(TextAlign.Center)\n       ",
+      "rangeToReplace": {
+        "startLineNumber": 32,
+        "endLineNumberInclusive": 38
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.301Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " .textShadow"
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.327Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "("
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.339Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Color"
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.352Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ".Black"
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.366Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ","
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.374Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.389Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "2"
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.401Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ","
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.414Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " 2, 2)"
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.427Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.440Z"
+  },
+  {
+    "firstChunkValue": "        .fontWeight(FontWeight.Bold)\n        .textOverflow(TextOverflow.Ellipsis)\n        .textWrap(TextWrap.Wrap)\n        .textAlign(TextAlign.Center)\n        .textShadow(Color.Black, 2, 2, 2)\n\n",
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.445Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "        .fontWeight(FontWeight.Bold)\n        .textOverflow(TextOverflow.Ellipsis)\n        .textWrap(TextWrap.Wrap)\n        .textAlign(TextAlign.Center)\n        .textShadow(Color.Black, 2, 2, 2)\n\n"
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.447Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "c36d6b82-7af9-41f6-8cc6-98af81a7ac58",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 53,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 53,
+      "monotonicallyIncreasingSuggestionId": 398,
+      "range": {
+        "startLineNumber": 32,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "replaceText": "        .fontWeight(FontWeight.Bold)\n        .textOverflow(TextOverflow.Ellipsis)\n        .textWrap(TextWrap.Wrap)\n        .textAlign(TextAlign.Center)\n        .textShadow(Color.Black, 2, 2, 2)\n\n",
+      "originalText": "        .fontWeight(FontWeight.Bold)\n        .textOverflow(TextOverflow.Ellipsis)\n        .textWrap(TextWrap.Wrap)\n        .textAlign(TextAlign.Center)\n  \n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 32,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "diffText": "        .fontWeight(FontWeight.Bold)\n        .textOverflow(TextOverflow.Ellipsis)\n        .textWrap(TextWrap.Wrap)\n        .textAlign(TextAlign.Center)\n        .textShadow(Color.Black, 2, 2, 2)\n\n",
+      "fullOriginalText": "        .fontWeight(FontWeight.Bold)\n        .textOverflow(TextOverflow.Ellipsis)\n        .textWrap(TextWrap.Wrap)\n        .textAlign(TextAlign.Center)\n  \n\n",
+      "suggestionTriggerTime": 1742476503827.2,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "6191fdbe-2efc-4689-941d-a661439a1b76",
+      "selection": {
+        "startLineNumber": 32,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 399,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.448Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "       "
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.455Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " .textShadow"
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.462Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Color"
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.475Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "("
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.488Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Color.White)\n        .text"
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.501Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Shadow"
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.513Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Offset"
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.527Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "("
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.539Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "2"
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.549Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ","
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.562Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.576Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "2)"
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.587Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n        ."
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.603Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "textShadow"
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.611Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Radius"
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.623Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "(2"
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.635Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ")"
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.647Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n        .text"
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.661Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "ShadowBlur"
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.672Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "("
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.683Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "2)"
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.695Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.708Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "        ."
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.719Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "text"
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.732Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Shadow"
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.744Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Spread"
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.758Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "("
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.768Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "2"
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.781Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ")"
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.795Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n  "
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.808Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.822Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.822Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.822Z"
+  },
+  {
+    "fullText": "        .fontWeight(FontWeight.Bold)\n        .textOverflow(TextOverflow.Ellipsis)\n        .textWrap(TextWrap.Wrap)\n        .textAlign(TextAlign.Center)\n        .textShadow(Color.Black, 2, 2, 2)\n        .textShadowColor(Color.White)\n        .textShadowOffset(2, 2)\n        .textShadowRadius(2)\n        .textShadowBlur(2)\n        .textShadowSpread(2)\n  \n\n",
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.825Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "        .fontWeight(FontWeight.Bold)\n        .textOverflow(TextOverflow.Ellipsis)\n        .textWrap(TextWrap.Wrap)\n        .textAlign(TextAlign.Center)\n        .textShadow(Color.Black, 2, 2, 2)\n\n"
+    },
+    "fullText": "        .fontWeight(FontWeight.Bold)\n        .textOverflow(TextOverflow.Ellipsis)\n        .textWrap(TextWrap.Wrap)\n        .textAlign(TextAlign.Center)\n        .textShadow(Color.Black, 2, 2, 2)\n        .textShadowColor(Color.White)\n        .textShadowOffset(2, 2)\n        .textShadowRadius(2)\n        .textShadowBlur(2)\n        .textShadowSpread(2)\n  \n\n",
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.825Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "8f635866-3c62-4c8d-9ca7-d410d40ef788",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 53,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 54,
+      "monotonicallyIncreasingSuggestionId": 399,
+      "range": {
+        "startLineNumber": 32,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "replaceText": "        .fontWeight(FontWeight.Bold)\n        .textOverflow(TextOverflow.Ellipsis)\n        .textWrap(TextWrap.Wrap)\n        .textAlign(TextAlign.Center)\n        .textShadow(Color.Black, 2, 2, 2)\n        .textShadowColor(Color.White)\n        .textShadowOffset(2, 2)\n        .textShadowRadius(2)\n        .textShadowBlur(2)\n        .textShadowSpread(2)\n  \n\n",
+      "originalText": "        .fontWeight(FontWeight.Bold)\n        .textOverflow(TextOverflow.Ellipsis)\n        .textWrap(TextWrap.Wrap)\n        .textAlign(TextAlign.Center)\n        .textShadow(Color.Black, 2, 2, 2)\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 32,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "diffText": "        .fontWeight(FontWeight.Bold)\n        .textOverflow(TextOverflow.Ellipsis)\n        .textWrap(TextWrap.Wrap)\n        .textAlign(TextAlign.Center)\n        .textShadow(Color.Black, 2, 2, 2)\n        .textShadowColor(Color.White)\n        .textShadowOffset(2, 2)\n        .textShadowRadius(2)\n        .textShadowBlur(2)\n        .textShadowSpread(2)\n  \n\n",
+      "fullOriginalText": "        .fontWeight(FontWeight.Bold)\n        .textOverflow(TextOverflow.Ellipsis)\n        .textWrap(TextWrap.Wrap)\n        .textAlign(TextAlign.Center)\n        .textShadow(Color.Black, 2, 2, 2)\n\n",
+      "suggestionTriggerTime": 1742476503827.2,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "6191fdbe-2efc-4689-941d-a661439a1b76",
+      "selection": {
+        "startLineNumber": 32,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "89ed77cd-dc0d-433a-b860-240617348bf4",
+      "undoRedoGroup": {
+        "id": 400,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.825Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "89ed77cd-dc0d-433a-b860-240617348bf4",
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.829Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "        .fontWeight(FontWeight.Bold)\n        .textOverflow(TextOverflow.Ellipsis)\n        .textWrap(TextWrap.Wrap)\n        .textAlign(TextAlign.Center)\n        .textShadow(Color.Black, 2, 2, 2)\n\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "89ed77cd-dc0d-433a-b860-240617348bf4",
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:04.830Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "89ed77cd-dc0d-433a-b860-240617348bf4",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-20T13:15:04.830Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "c36d6b82-7af9-41f6-8cc6-98af81a7ac58",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 53,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 53,
+      "monotonicallyIncreasingSuggestionId": 398,
+      "range": {
+        "startLineNumber": 32,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "replaceText": "        .fontWeight(FontWeight.Bold)\n        .textOverflow(TextOverflow.Ellipsis)\n        .textWrap(TextWrap.Wrap)\n        .textAlign(TextAlign.Center)\n        .textShadow(Color.Black, 2, 2, 2)\n\n",
+      "originalText": "        .fontWeight(FontWeight.Bold)\n        .textOverflow(TextOverflow.Ellipsis)\n        .textWrap(TextWrap.Wrap)\n        .textAlign(TextAlign.Center)\n  \n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 32,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "diffText": "        .fontWeight(FontWeight.Bold)\n        .textOverflow(TextOverflow.Ellipsis)\n        .textWrap(TextWrap.Wrap)\n        .textAlign(TextAlign.Center)\n        .textShadow(Color.Black, 2, 2, 2)\n\n",
+      "fullOriginalText": "        .fontWeight(FontWeight.Bold)\n        .textOverflow(TextOverflow.Ellipsis)\n        .textWrap(TextWrap.Wrap)\n        .textAlign(TextAlign.Center)\n  \n\n",
+      "suggestionTriggerTime": 1742476503827.2,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "6191fdbe-2efc-4689-941d-a661439a1b76",
+      "selection": {
+        "startLineNumber": 32,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 399,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "d;163",
+      "onAcceptDisplayId": "8f635866-3c62-4c8d-9ca7-d410d40ef788"
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:05.851Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "c36d6b82-7af9-41f6-8cc6-98af81a7ac58",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 53,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 53,
+      "monotonicallyIncreasingSuggestionId": 398,
+      "range": {
+        "startLineNumber": 32,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "replaceText": "        .fontWeight(FontWeight.Bold)\n        .textOverflow(TextOverflow.Ellipsis)\n        .textWrap(TextWrap.Wrap)\n        .textAlign(TextAlign.Center)\n        .textShadow(Color.Black, 2, 2, 2)\n\n",
+      "originalText": "        .fontWeight(FontWeight.Bold)\n        .textOverflow(TextOverflow.Ellipsis)\n        .textWrap(TextWrap.Wrap)\n        .textAlign(TextAlign.Center)\n  \n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 32,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "diffText": "        .fontWeight(FontWeight.Bold)\n        .textOverflow(TextOverflow.Ellipsis)\n        .textWrap(TextWrap.Wrap)\n        .textAlign(TextAlign.Center)\n        .textShadow(Color.Black, 2, 2, 2)\n\n",
+      "fullOriginalText": "        .fontWeight(FontWeight.Bold)\n        .textOverflow(TextOverflow.Ellipsis)\n        .textWrap(TextWrap.Wrap)\n        .textAlign(TextAlign.Center)\n  \n\n",
+      "suggestionTriggerTime": 1742476503827.2,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "6191fdbe-2efc-4689-941d-a661439a1b76",
+      "selection": {
+        "startLineNumber": 32,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 399,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "d;163",
+      "onAcceptDisplayId": "8f635866-3c62-4c8d-9ca7-d410d40ef788"
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:05.869Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "8f635866-3c62-4c8d-9ca7-d410d40ef788",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 53,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 54,
+      "monotonicallyIncreasingSuggestionId": 399,
+      "range": {
+        "startLineNumber": 32,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "replaceText": "        .fontWeight(FontWeight.Bold)\n        .textOverflow(TextOverflow.Ellipsis)\n        .textWrap(TextWrap.Wrap)\n        .textAlign(TextAlign.Center)\n        .textShadow(Color.Black, 2, 2, 2)\n        .textShadowColor(Color.White)\n        .textShadowOffset(2, 2)\n        .textShadowRadius(2)\n        .textShadowBlur(2)\n        .textShadowSpread(2)\n  \n\n",
+      "originalText": "        .fontWeight(FontWeight.Bold)\n        .textOverflow(TextOverflow.Ellipsis)\n        .textWrap(TextWrap.Wrap)\n        .textAlign(TextAlign.Center)\n        .textShadow(Color.Black, 2, 2, 2)\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 32,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "diffText": "        .fontWeight(FontWeight.Bold)\n        .textOverflow(TextOverflow.Ellipsis)\n        .textWrap(TextWrap.Wrap)\n        .textAlign(TextAlign.Center)\n        .textShadow(Color.Black, 2, 2, 2)\n        .textShadowColor(Color.White)\n        .textShadowOffset(2, 2)\n        .textShadowRadius(2)\n        .textShadowBlur(2)\n        .textShadowSpread(2)\n  \n\n",
+      "fullOriginalText": "        .fontWeight(FontWeight.Bold)\n        .textOverflow(TextOverflow.Ellipsis)\n        .textWrap(TextWrap.Wrap)\n        .textAlign(TextAlign.Center)\n        .textShadow(Color.Black, 2, 2, 2)\n\n",
+      "suggestionTriggerTime": 1742476503827.2,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "6191fdbe-2efc-4689-941d-a661439a1b76",
+      "selection": {
+        "startLineNumber": 32,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "89ed77cd-dc0d-433a-b860-240617348bf4",
+      "undoRedoGroup": {
+        "id": 400,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:05.871Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "8f635866-3c62-4c8d-9ca7-d410d40ef788",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 53,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 54,
+      "monotonicallyIncreasingSuggestionId": 399,
+      "range": {
+        "startLineNumber": 32,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "replaceText": "        .fontWeight(FontWeight.Bold)\n        .textOverflow(TextOverflow.Ellipsis)\n        .textWrap(TextWrap.Wrap)\n        .textAlign(TextAlign.Center)\n        .textShadow(Color.Black, 2, 2, 2)\n        .textShadowColor(Color.White)\n        .textShadowOffset(2, 2)\n        .textShadowRadius(2)\n        .textShadowBlur(2)\n        .textShadowSpread(2)\n  \n\n",
+      "originalText": "        .fontWeight(FontWeight.Bold)\n        .textOverflow(TextOverflow.Ellipsis)\n        .textWrap(TextWrap.Wrap)\n        .textAlign(TextAlign.Center)\n        .textShadow(Color.Black, 2, 2, 2)\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 32,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "diffText": "        .fontWeight(FontWeight.Bold)\n        .textOverflow(TextOverflow.Ellipsis)\n        .textWrap(TextWrap.Wrap)\n        .textAlign(TextAlign.Center)\n        .textShadow(Color.Black, 2, 2, 2)\n        .textShadowColor(Color.White)\n        .textShadowOffset(2, 2)\n        .textShadowRadius(2)\n        .textShadowBlur(2)\n        .textShadowSpread(2)\n  \n\n",
+      "fullOriginalText": "        .fontWeight(FontWeight.Bold)\n        .textOverflow(TextOverflow.Ellipsis)\n        .textWrap(TextWrap.Wrap)\n        .textAlign(TextAlign.Center)\n        .textShadow(Color.Black, 2, 2, 2)\n\n",
+      "suggestionTriggerTime": 1742476503827.2,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "6191fdbe-2efc-4689-941d-a661439a1b76",
+      "selection": {
+        "startLineNumber": 32,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "89ed77cd-dc0d-433a-b860-240617348bf4",
+      "undoRedoGroup": {
+        "id": 400,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "d;178"
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:06.368Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "8f635866-3c62-4c8d-9ca7-d410d40ef788",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/builtInAPI.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 53,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 54,
+      "monotonicallyIncreasingSuggestionId": 399,
+      "range": {
+        "startLineNumber": 32,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "replaceText": "        .fontWeight(FontWeight.Bold)\n        .textOverflow(TextOverflow.Ellipsis)\n        .textWrap(TextWrap.Wrap)\n        .textAlign(TextAlign.Center)\n        .textShadow(Color.Black, 2, 2, 2)\n        .textShadowColor(Color.White)\n        .textShadowOffset(2, 2)\n        .textShadowRadius(2)\n        .textShadowBlur(2)\n        .textShadowSpread(2)\n  \n\n",
+      "originalText": "        .fontWeight(FontWeight.Bold)\n        .textOverflow(TextOverflow.Ellipsis)\n        .textWrap(TextWrap.Wrap)\n        .textAlign(TextAlign.Center)\n        .textShadow(Color.Black, 2, 2, 2)\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 32,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "diffText": "        .fontWeight(FontWeight.Bold)\n        .textOverflow(TextOverflow.Ellipsis)\n        .textWrap(TextWrap.Wrap)\n        .textAlign(TextAlign.Center)\n        .textShadow(Color.Black, 2, 2, 2)\n        .textShadowColor(Color.White)\n        .textShadowOffset(2, 2)\n        .textShadowRadius(2)\n        .textShadowBlur(2)\n        .textShadowSpread(2)\n  \n\n",
+      "fullOriginalText": "        .fontWeight(FontWeight.Bold)\n        .textOverflow(TextOverflow.Ellipsis)\n        .textWrap(TextWrap.Wrap)\n        .textAlign(TextAlign.Center)\n        .textShadow(Color.Black, 2, 2, 2)\n\n",
+      "suggestionTriggerTime": 1742476503827.2,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "6191fdbe-2efc-4689-941d-a661439a1b76",
+      "selection": {
+        "startLineNumber": 32,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "89ed77cd-dc0d-433a-b860-240617348bf4",
+      "undoRedoGroup": {
+        "id": 400,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "d;178"
+    },
+    "generationUUID": "6191fdbe-2efc-4689-941d-a661439a1b76",
+    "timestamp": "2025-03-20T13:15:06.386Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "89ed77cd-dc0d-433a-b860-240617348bf4",
+    "fusedCursorPrediction": null,
+    "oldText": "        .fontWeight(FontWeight.Bold)\n        .textOverflow(TextOverflow.Ellipsis)\n        .textWrap(TextWrap.Wrap)\n        .textAlign(TextAlign.Center)\n        .textShadow(Color.Black, 2, 2, 2)\n\n",
+    "newText": "        .fontWeight(FontWeight.Bold)\n        .textOverflow(TextOverflow.Ellipsis)\n        .textWrap(TextWrap.Wrap)\n        .textAlign(TextAlign.Center)\n        .textShadow(Color.Black, 2, 2, 2)\n        .textShadowColor(Color.White)\n        .textShadowOffset(2, 2)\n        .textShadowRadius(2)\n        .textShadowBlur(2)\n        .textShadowSpread(2)\n  \n\n",
+    "timestamp": "2025-03-20T13:15:06.387Z"
+  }
+]

@@ -1,0 +1,646 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "1e435068-b73f-4f3c-9614-b91c9a1a7c33",
+    "timestamp": "2025-03-19T07:54:39.267Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/ifElse1.ets",
+          "diffHistory": [
+            "1+|let status = 'ac'\n2+|\n3+|if (status === 'active') {\n4+|    console.log('active')\n5+|} else {\n6+|    console.log('inactive')\n7+|}\n",
+            "1-|let status = 'ac'\n1+|let status = 'active'\n",
+            "4-|    console.log('active')\n",
+            "4-|  \n4+|  let count = 10;\n",
+            "6-|    console.log('inactive')\n7-|}\n6+|    = 0;\n7+|}\n8+|\n9+|console.log(count);\n",
+            "6-|    = 0;\n6+|  let count = 0;\n",
+            "9-|console.log(count);\n9+|console.log(count);\n10+|\n11+|function printValue(value: string | number) {\n12+|  if (typeof value === 'string') {\n13+|    console.log(value);\n14+|  } else {\n15+|    console.log(value);\n16+|  }\n17+|}\n",
+            "13-|    console.log(value);\n13+|    console.log(value.toUpperCase());\n",
+            "15-|    console.log(value);\n15+|    console.log(value.toFixed(2));\n",
+            "17+|}\n18+|\n19+|class Cat {\n20+|  \n",
+            "20-|  \n21-|}\n20+|  meow() {}\n21+|}\n22+|class Dog {\n23+|  bark() {}\n24+|}\n25+|\n26+|function printAnimal(animal: Cat | Dog) {\n27+|  if (animal instanceof Cat) {\n28+|      \n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/ifElse1.ets",
+        "contents": "let status = 'active'\n\nif (status === 'active') {\n  let count = 10;\n} else {\n  let count = 0;\n}\n\nconsole.log(count);\n\nfunction printValue(value: string | number) {\n  if (typeof value === 'string') {\n    console.log(value.toUpperCase());\n  } else {\n    console.log(value.toFixed(2));\n  }\n}\n\nclass Cat {\n  meow() {}\n}\nclass Dog {\n  bark() {}\n}\n\nfunction printAnimal(animal: Cat | Dog) {\n  if (animal instanceof Cat) {\n      ",
+        "cursorPosition": {
+          "line": 27,
+          "column": 6
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 127,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1742370879305,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.800048828125,
+      "timeAtRequestSend": 1742370879305
+    },
+    "generateUuid": "1e435068-b73f-4f3c-9614-b91c9a1a7c33",
+    "timestamp": "2025-03-19T07:54:39.306Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "1e435068-b73f-4f3c-9614-b91c9a1a7c33",
+    "timestamp": "2025-03-19T07:54:39.913Z"
+  },
+  {
+    "firstChunkValue": "function printAnimal(animal: Cat | Dog) {\n  if (animal instanceof Cat) {\n    animal.meow();",
+    "generationUUID": "1e435068-b73f-4f3c-9614-b91c9a1a7c33",
+    "timestamp": "2025-03-19T07:54:39.914Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "function printAnimal(animal: Cat | Dog) {\n  if (animal instanceof Cat) {\n   ",
+      "rangeToReplace": {
+        "startLineNumber": 26,
+        "endLineNumberInclusive": 28
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "1e435068-b73f-4f3c-9614-b91c9a1a7c33",
+    "timestamp": "2025-03-19T07:54:39.927Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " animal"
+    },
+    "generationUUID": "1e435068-b73f-4f3c-9614-b91c9a1a7c33",
+    "timestamp": "2025-03-19T07:54:39.927Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "1e435068-b73f-4f3c-9614-b91c9a1a7c33",
+    "timestamp": "2025-03-19T07:54:39.927Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "function printAnimal(animal: Cat | Dog) {\n  if (animal instanceof Cat) {\n    animal.meow();"
+    },
+    "generationUUID": "1e435068-b73f-4f3c-9614-b91c9a1a7c33",
+    "timestamp": "2025-03-19T07:54:39.929Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "c8b28fa7-dca8-4a26-bb5e-a33ccaac3ab9",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/ifElse1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/ifElse1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/ifElse1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 127,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 127,
+      "monotonicallyIncreasingSuggestionId": 89,
+      "range": {
+        "startLineNumber": 26,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 7
+      },
+      "replaceText": "function printAnimal(animal: Cat | Dog) {\n  if (animal instanceof Cat) {\n    animal.meow();",
+      "originalText": "function printAnimal(animal: Cat | Dog) {\n  if (animal instanceof Cat) {\n      ",
+      "startingSuggestionRange": {
+        "startLineNumber": 26,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 7
+      },
+      "diffText": "function printAnimal(animal: Cat | Dog) {\n  if (animal instanceof Cat) {\n    animal.meow();",
+      "fullOriginalText": "function printAnimal(animal: Cat | Dog) {\n  if (animal instanceof Cat) {\n      ",
+      "suggestionTriggerTime": 1742370879254.1,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "1e435068-b73f-4f3c-9614-b91c9a1a7c33",
+      "selection": {
+        "startLineNumber": 26,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 7
+      },
+      "undoRedoGroup": {
+        "id": 89,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "1e435068-b73f-4f3c-9614-b91c9a1a7c33",
+    "timestamp": "2025-03-19T07:54:39.929Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "me"
+    },
+    "generationUUID": "1e435068-b73f-4f3c-9614-b91c9a1a7c33",
+    "timestamp": "2025-03-19T07:54:39.929Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "ow"
+    },
+    "generationUUID": "1e435068-b73f-4f3c-9614-b91c9a1a7c33",
+    "timestamp": "2025-03-19T07:54:39.930Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "();"
+    },
+    "generationUUID": "1e435068-b73f-4f3c-9614-b91c9a1a7c33",
+    "timestamp": "2025-03-19T07:54:39.930Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "1e435068-b73f-4f3c-9614-b91c9a1a7c33",
+    "timestamp": "2025-03-19T07:54:39.931Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "1e435068-b73f-4f3c-9614-b91c9a1a7c33",
+    "timestamp": "2025-03-19T07:54:39.931Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " }"
+    },
+    "generationUUID": "1e435068-b73f-4f3c-9614-b91c9a1a7c33",
+    "timestamp": "2025-03-19T07:54:39.931Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " else"
+    },
+    "generationUUID": "1e435068-b73f-4f3c-9614-b91c9a1a7c33",
+    "timestamp": "2025-03-19T07:54:39.931Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {\n    animal"
+    },
+    "generationUUID": "1e435068-b73f-4f3c-9614-b91c9a1a7c33",
+    "timestamp": "2025-03-19T07:54:39.931Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ".bark"
+    },
+    "generationUUID": "1e435068-b73f-4f3c-9614-b91c9a1a7c33",
+    "timestamp": "2025-03-19T07:54:39.931Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "();"
+    },
+    "generationUUID": "1e435068-b73f-4f3c-9614-b91c9a1a7c33",
+    "timestamp": "2025-03-19T07:54:39.932Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n  }\n"
+    },
+    "generationUUID": "1e435068-b73f-4f3c-9614-b91c9a1a7c33",
+    "timestamp": "2025-03-19T07:54:39.932Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}"
+    },
+    "generationUUID": "1e435068-b73f-4f3c-9614-b91c9a1a7c33",
+    "timestamp": "2025-03-19T07:54:39.933Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "1e435068-b73f-4f3c-9614-b91c9a1a7c33",
+    "timestamp": "2025-03-19T07:54:39.933Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "1e435068-b73f-4f3c-9614-b91c9a1a7c33",
+    "timestamp": "2025-03-19T07:54:39.934Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "1e435068-b73f-4f3c-9614-b91c9a1a7c33",
+    "timestamp": "2025-03-19T07:54:39.934Z"
+  },
+  {
+    "fullText": "function printAnimal(animal: Cat | Dog) {\n  if (animal instanceof Cat) {\n    animal.meow();\n  } else {\n    animal.bark();\n  }\n}\n\n",
+    "generationUUID": "1e435068-b73f-4f3c-9614-b91c9a1a7c33",
+    "timestamp": "2025-03-19T07:54:39.945Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "function printAnimal(animal: Cat | Dog) {\n  if (animal instanceof Cat) {\n    animal.meow();"
+    },
+    "fullText": "function printAnimal(animal: Cat | Dog) {\n  if (animal instanceof Cat) {\n    animal.meow();\n  } else {\n    animal.bark();\n  }\n}\n\n",
+    "generationUUID": "1e435068-b73f-4f3c-9614-b91c9a1a7c33",
+    "timestamp": "2025-03-19T07:54:39.945Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "72b2036a-b3a5-4a35-a35b-066eb23af369",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/ifElse1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/ifElse1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/ifElse1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 127,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 128,
+      "monotonicallyIncreasingSuggestionId": 90,
+      "range": {
+        "startLineNumber": 26,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 18
+      },
+      "replaceText": "function printAnimal(animal: Cat | Dog) {\n  if (animal instanceof Cat) {\n    animal.meow();\n  } else {\n    animal.bark();\n  }\n}\n\n",
+      "originalText": "function printAnimal(animal: Cat | Dog) {\n  if (animal instanceof Cat) {\n    animal.meow()",
+      "startingSuggestionRange": {
+        "startLineNumber": 26,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 18
+      },
+      "diffText": "function printAnimal(animal: Cat | Dog) {\n  if (animal instanceof Cat) {\n    animal.meow();\n  } else {\n    animal.bark();\n  }\n}\n\n",
+      "fullOriginalText": "function printAnimal(animal: Cat | Dog) {\n  if (animal instanceof Cat) {\n    animal.meow()",
+      "suggestionTriggerTime": 1742370879254.1,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "1e435068-b73f-4f3c-9614-b91c9a1a7c33",
+      "selection": {
+        "startLineNumber": 26,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 7
+      },
+      "fusedCursorPredictionId": "5c54287c-ff0a-4aeb-a725-e48c6a958a5b",
+      "undoRedoGroup": {
+        "id": 90,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "1e435068-b73f-4f3c-9614-b91c9a1a7c33",
+    "timestamp": "2025-03-19T07:54:39.945Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "5c54287c-ff0a-4aeb-a725-e48c6a958a5b",
+    "generationUUID": "1e435068-b73f-4f3c-9614-b91c9a1a7c33",
+    "timestamp": "2025-03-19T07:54:39.950Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "function printAnimal(animal: Cat | Dog) {\n  if (animal instanceof Cat) {\n    animal.meow();"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "5c54287c-ff0a-4aeb-a725-e48c6a958a5b",
+    "generationUUID": "1e435068-b73f-4f3c-9614-b91c9a1a7c33",
+    "timestamp": "2025-03-19T07:54:39.950Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "5c54287c-ff0a-4aeb-a725-e48c6a958a5b",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T07:54:39.951Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "c8b28fa7-dca8-4a26-bb5e-a33ccaac3ab9",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/ifElse1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/ifElse1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/ifElse1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 127,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 127,
+      "monotonicallyIncreasingSuggestionId": 89,
+      "range": {
+        "startLineNumber": 26,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 7
+      },
+      "replaceText": "function printAnimal(animal: Cat | Dog) {\n  if (animal instanceof Cat) {\n    animal.meow();",
+      "originalText": "function printAnimal(animal: Cat | Dog) {\n  if (animal instanceof Cat) {\n      ",
+      "startingSuggestionRange": {
+        "startLineNumber": 26,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 7
+      },
+      "diffText": "function printAnimal(animal: Cat | Dog) {\n  if (animal instanceof Cat) {\n    animal.meow();",
+      "fullOriginalText": "function printAnimal(animal: Cat | Dog) {\n  if (animal instanceof Cat) {\n      ",
+      "suggestionTriggerTime": 1742370879254.1,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "1e435068-b73f-4f3c-9614-b91c9a1a7c33",
+      "selection": {
+        "startLineNumber": 26,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 7
+      },
+      "undoRedoGroup": {
+        "id": 89,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;462",
+      "onAcceptDisplayId": "72b2036a-b3a5-4a35-a35b-066eb23af369"
+    },
+    "generationUUID": "1e435068-b73f-4f3c-9614-b91c9a1a7c33",
+    "timestamp": "2025-03-19T07:54:40.713Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "c8b28fa7-dca8-4a26-bb5e-a33ccaac3ab9",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/ifElse1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/ifElse1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/ifElse1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 127,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 127,
+      "monotonicallyIncreasingSuggestionId": 89,
+      "range": {
+        "startLineNumber": 26,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 7
+      },
+      "replaceText": "function printAnimal(animal: Cat | Dog) {\n  if (animal instanceof Cat) {\n    animal.meow();",
+      "originalText": "function printAnimal(animal: Cat | Dog) {\n  if (animal instanceof Cat) {\n      ",
+      "startingSuggestionRange": {
+        "startLineNumber": 26,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 7
+      },
+      "diffText": "function printAnimal(animal: Cat | Dog) {\n  if (animal instanceof Cat) {\n    animal.meow();",
+      "fullOriginalText": "function printAnimal(animal: Cat | Dog) {\n  if (animal instanceof Cat) {\n      ",
+      "suggestionTriggerTime": 1742370879254.1,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "1e435068-b73f-4f3c-9614-b91c9a1a7c33",
+      "selection": {
+        "startLineNumber": 26,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 7
+      },
+      "undoRedoGroup": {
+        "id": 89,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;462",
+      "onAcceptDisplayId": "72b2036a-b3a5-4a35-a35b-066eb23af369"
+    },
+    "generationUUID": "1e435068-b73f-4f3c-9614-b91c9a1a7c33",
+    "timestamp": "2025-03-19T07:54:40.729Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "72b2036a-b3a5-4a35-a35b-066eb23af369",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/ifElse1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/ifElse1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/ifElse1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 127,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 128,
+      "monotonicallyIncreasingSuggestionId": 90,
+      "range": {
+        "startLineNumber": 26,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 18
+      },
+      "replaceText": "function printAnimal(animal: Cat | Dog) {\n  if (animal instanceof Cat) {\n    animal.meow();\n  } else {\n    animal.bark();\n  }\n}\n\n",
+      "originalText": "function printAnimal(animal: Cat | Dog) {\n  if (animal instanceof Cat) {\n    animal.meow()",
+      "startingSuggestionRange": {
+        "startLineNumber": 26,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 18
+      },
+      "diffText": "function printAnimal(animal: Cat | Dog) {\n  if (animal instanceof Cat) {\n    animal.meow();\n  } else {\n    animal.bark();\n  }\n}\n\n",
+      "fullOriginalText": "function printAnimal(animal: Cat | Dog) {\n  if (animal instanceof Cat) {\n    animal.meow()",
+      "suggestionTriggerTime": 1742370879254.1,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "1e435068-b73f-4f3c-9614-b91c9a1a7c33",
+      "selection": {
+        "startLineNumber": 26,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 7
+      },
+      "fusedCursorPredictionId": "5c54287c-ff0a-4aeb-a725-e48c6a958a5b",
+      "undoRedoGroup": {
+        "id": 90,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "1e435068-b73f-4f3c-9614-b91c9a1a7c33",
+    "timestamp": "2025-03-19T07:54:40.731Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "72b2036a-b3a5-4a35-a35b-066eb23af369",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/ifElse1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/ifElse1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/ifElse1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 127,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 128,
+      "monotonicallyIncreasingSuggestionId": 90,
+      "range": {
+        "startLineNumber": 26,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 18
+      },
+      "replaceText": "function printAnimal(animal: Cat | Dog) {\n  if (animal instanceof Cat) {\n    animal.meow();\n  } else {\n    animal.bark();\n  }\n}\n\n",
+      "originalText": "function printAnimal(animal: Cat | Dog) {\n  if (animal instanceof Cat) {\n    animal.meow()",
+      "startingSuggestionRange": {
+        "startLineNumber": 26,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 18
+      },
+      "diffText": "function printAnimal(animal: Cat | Dog) {\n  if (animal instanceof Cat) {\n    animal.meow();\n  } else {\n    animal.bark();\n  }\n}\n\n",
+      "fullOriginalText": "function printAnimal(animal: Cat | Dog) {\n  if (animal instanceof Cat) {\n    animal.meow()",
+      "suggestionTriggerTime": 1742370879254.1,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "1e435068-b73f-4f3c-9614-b91c9a1a7c33",
+      "selection": {
+        "startLineNumber": 26,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 7
+      },
+      "fusedCursorPredictionId": "5c54287c-ff0a-4aeb-a725-e48c6a958a5b",
+      "undoRedoGroup": {
+        "id": 90,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;468"
+    },
+    "generationUUID": "1e435068-b73f-4f3c-9614-b91c9a1a7c33",
+    "timestamp": "2025-03-19T07:54:41.515Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "72b2036a-b3a5-4a35-a35b-066eb23af369",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/ifElse1.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/ifElse1.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/ifElse1.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 127,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 128,
+      "monotonicallyIncreasingSuggestionId": 90,
+      "range": {
+        "startLineNumber": 26,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 18
+      },
+      "replaceText": "function printAnimal(animal: Cat | Dog) {\n  if (animal instanceof Cat) {\n    animal.meow();\n  } else {\n    animal.bark();\n  }\n}\n\n",
+      "originalText": "function printAnimal(animal: Cat | Dog) {\n  if (animal instanceof Cat) {\n    animal.meow()",
+      "startingSuggestionRange": {
+        "startLineNumber": 26,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 18
+      },
+      "diffText": "function printAnimal(animal: Cat | Dog) {\n  if (animal instanceof Cat) {\n    animal.meow();\n  } else {\n    animal.bark();\n  }\n}\n\n",
+      "fullOriginalText": "function printAnimal(animal: Cat | Dog) {\n  if (animal instanceof Cat) {\n    animal.meow()",
+      "suggestionTriggerTime": 1742370879254.1,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "1e435068-b73f-4f3c-9614-b91c9a1a7c33",
+      "selection": {
+        "startLineNumber": 26,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 7
+      },
+      "fusedCursorPredictionId": "5c54287c-ff0a-4aeb-a725-e48c6a958a5b",
+      "undoRedoGroup": {
+        "id": 90,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;468"
+    },
+    "generationUUID": "1e435068-b73f-4f3c-9614-b91c9a1a7c33",
+    "timestamp": "2025-03-19T07:54:41.528Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "5c54287c-ff0a-4aeb-a725-e48c6a958a5b",
+    "fusedCursorPrediction": null,
+    "oldText": "function printAnimal(animal: Cat | Dog) {\n  if (animal instanceof Cat) {\n    animal.meow()",
+    "newText": "function printAnimal(animal: Cat | Dog) {\n  if (animal instanceof Cat) {\n    animal.meow();\n  } else {\n    animal.bark();\n  }\n}\n\n",
+    "timestamp": "2025-03-19T07:54:41.529Z"
+  }
+]

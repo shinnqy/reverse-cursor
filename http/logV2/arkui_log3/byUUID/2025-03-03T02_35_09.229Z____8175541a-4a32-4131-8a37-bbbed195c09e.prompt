@@ -1,0 +1,73 @@
+You're an expert in ArkTS. Your task is to help the user update the code around current cursor position.
+
+## Recent Actions
+Here is what the user has been doing from the earliest to the latest:
+
+File: entry/src/main/ets/pages/Index.ets
+deleted the code `` in line 17
+added the code `      Button() {` in line 17
+
+added the code `        Text('Click me')` in line 18
+added the code `      }` in line 19
+added the code `      .onClick(() => {` in line 20
+added the code `        this.message = 'Hello World';` in line 21
+added the code `      })` in line 22
+
+deleted the code `        Text('Click me')` in line 18
+added the code `        Text('Abount')` in line 18
+
+deleted the code `        Text('Abount')` in line 18
+added the code `        Text('About Me')` in line 18
+
+deleted the code `        this.message = 'Hello World';` in line 21
+
+
+## Current Code
+Here is the current code file path:
+entry/src/main/ets/pages/Index.ets
+
+Here is the current code around the cursor position:
+
+```
+@Entry
+@Component
+struct Index {
+  @State message: string = 'Hello World';
+
+  build() {
+    RelativeContainer() {
+      Text(this.message)
+        .id('HelloWorld')
+        .fontSize(50)
+<|editable_region_start|>
+        .fontWeight(FontWeight.Bold)
+        .alignRules({
+          center: { anchor: '__container__', align: VerticalAlign.Center },
+          middle: { anchor: '__container__', align: HorizontalAlign.Center }
+        })
+
+      Button() {
+        Text('About Me')
+      }
+      .onClick(() => {
+        <|current_cursor_position|>
+      })
+    }
+    .height('100%')
+    .width('100%')
+  }
+}
+<|editable_region_end|>
+```
+
+## Task
+Rewrite the code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> according to the following requirements:
+1. Enforce code format strictly matching existing code style.
+2. Propagate naming convention changes to all related cases
+3. Preserve original functionality
+4. Apply changes to entire code regardless of cursor position
+5. Focus on code after cursor position at <|current_cursor_position|>
+
+# Output Format
+Return ONLY the rewritten code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> without any other words.
+Never use markdown formatting like ```. Return raw text only.

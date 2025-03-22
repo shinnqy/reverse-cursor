@@ -1,0 +1,346 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "a37814ca-651e-47c6-b2d0-ebcc621aa8d4",
+    "timestamp": "2025-03-20T13:04:02.291Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/dynamicProp.ets",
+          "diffHistory": [
+            "1+|const user = {}\n",
+            "2-|  \n3-|}\n2+|  name: \"Alice\",\n3+|  age: 30,\n4+|  address: {\n5+|},\n6+|};\n7+|\n8+|\n",
+            "5-|},\n5+|    city: \"New York\",\n6+|    country: \"USA\",\n7+|  },\n10+|const greeting = `Hello, ${user.name}!`;\n",
+            "1-|\n1+|interface User {\n2+|  name: string;\n3+|  age: number;\n4+|  address: {\n5+|    city: string;\n6+|    country: string;\n7+|  };\n8+|}\n",
+            "1-|\n1+|interface Address {\n",
+            "5-|  address: {\n5+|  address: Address;\n",
+            "2+|  city: string;\n3+|  country: string;\n4+|}\n",
+            "9-|    city: string;\n10-|    country: string;\n11-|  };\n13-|const user = {\n10+|const user: User = {\n",
+            "21+|function getFullName(user: { firstName: string; lastName: string }) {\n22+|  return `${user.firstName} ${user.lastName}`;\n23+|}\n25+|const fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n26+|\n27+|\n28+|\n",
+            "25-|const fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n",
+            "25+|const currentUser = {\n26+|  firstName: \"John\",\n27+|  lastName: \"Doe\",\n28+|};\n30+|const fullName = getFullName(currentUser);\n",
+            "30-|const fullName = getFullName(currentUser);\n30+|const fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n",
+            "21-|function getFullName(user: { firstName: string; lastName: string }) {\n21+|interface FullName {\n22+|function getFullName(user: { firstName: string; lastName: string }\n23+|function getFullName(user: FullName) {\n",
+            "22-|function getFullName(user: { firstName: string; lastName: string }\n22+|function getFullName(user: { firstName: string; lastName: string ;\n23+|}\n",
+            "22-|function getFullName(user: { firstName: string;\n22+|  firstName: string;\n",
+            "29-|const currentUser = {\n29+|const currentUser: FullName = {\n",
+            "36+|const price = 100;\n37+|const discount = 0.1;\n38+|const priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n40+|const isAdmin = true;\n41+|const roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n43+|const products = [\n44+|  { name: \"Product 1\", price: 100 },\n45+|  { name: \"Product 2\", price: 200 },\n46+|  { name: \"Product 3\", price: 300 },\n47+|];\n49+|const productInfo = `Current product: ${products[0].name}`;\n50+|\n51+|type Status = \"active\" | \"inactive\";\n52+|let status: Status = \"active\";\n53+|const statusText = `Status: ${status}`;\n54+|\n55+|const company = {\n56+|  name: \"Acme Inc.\",\n57+|  address: {\n58+|    street: \"123 Main St\",\n59+|    city: \"Anytown\",\n60+|  },\n61+|};\n62+|\n",
+            "57-|  address: {\n58-|    street: \"123 Main St\",\n59-|    city: \"Anytown\",\n60-|  },\n57+|  ceo: {\n58+|    name: \"John Doe\",\n59+|    contact: {\n",
+            "60+|      email: \"john.doe@acme.com\",\n61+|      phone: \"+1234567890\",\n62+|    },\n63+|  },\n66+|const companyInfo = `Company: ${company.name}, CEO: ${company.ceo.name}`;\n",
+            "55+|interface \n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/dynamicProp.ets",
+        "contents": "interface Address {\n  city: string;\n  country: string;\n}\ninterface User {\n  name: string;\n  age: number;\n  address: Address;\n}\nconst user: User = {\n  name: \"Alice\",\n  age: 30,\n  address: {\n    city: \"New York\",\n    country: \"USA\",\n  },\n};\n\nconst greeting = `Hello, ${user.name}!`;\n\ninterface FullName {\n  firstName: string;\n  lastName: string;\n}\nfunction getFullName(user: FullName) {\n  return `${user.firstName} ${user.lastName}`;\n}\n\nconst currentUser: FullName = {\n  firstName: \"John\",\n  lastName: \"Doe\",\n};\n\nconst fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n\nconst price = 100;\nconst discount = 0.1;\nconst priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];\n\nconst productInfo = `Current product: ${products[0].name}`;\n\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\ninterface \nconst company = {\n  name: \"Acme Inc.\",\n  ceo: {\n    name: \"John Doe\",\n    contact: {\n      email: \"john.doe@acme.com\",\n      phone: \"+1234567890\",\n    },\n  },\n};\n\nconst companyInfo = `Company: ${company.name}, CEO: ${company.ceo.name}`;\n\n",
+        "cursorPosition": {
+          "line": 54,
+          "column": 10
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 526,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742475842335,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.199951171875,
+      "timeAtRequestSend": 1742475842335
+    },
+    "generateUuid": "a37814ca-651e-47c6-b2d0-ebcc621aa8d4",
+    "timestamp": "2025-03-20T13:04:02.337Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\ninterface Contact",
+      "rangeToReplace": {
+        "startLineNumber": 54,
+        "endLineNumberInclusive": 58
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "a37814ca-651e-47c6-b2d0-ebcc621aa8d4",
+    "timestamp": "2025-03-20T13:04:02.721Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "a37814ca-651e-47c6-b2d0-ebcc621aa8d4",
+    "timestamp": "2025-03-20T13:04:02.724Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "a37814ca-651e-47c6-b2d0-ebcc621aa8d4",
+    "timestamp": "2025-03-20T13:04:02.748Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n "
+    },
+    "generationUUID": "a37814ca-651e-47c6-b2d0-ebcc621aa8d4",
+    "timestamp": "2025-03-20T13:04:02.760Z"
+  },
+  {
+    "firstChunkValue": "\ninterface Contact {\nconst company = {\n  name: \"Acme Inc.\",\n  ceo: {",
+    "generationUUID": "a37814ca-651e-47c6-b2d0-ebcc621aa8d4",
+    "timestamp": "2025-03-20T13:04:02.760Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": false
+    },
+    "generationUUID": "a37814ca-651e-47c6-b2d0-ebcc621aa8d4",
+    "timestamp": "2025-03-20T13:04:02.761Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " email"
+    },
+    "generationUUID": "a37814ca-651e-47c6-b2d0-ebcc621aa8d4",
+    "timestamp": "2025-03-20T13:04:02.772Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": string"
+    },
+    "generationUUID": "a37814ca-651e-47c6-b2d0-ebcc621aa8d4",
+    "timestamp": "2025-03-20T13:04:02.784Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";\n "
+    },
+    "generationUUID": "a37814ca-651e-47c6-b2d0-ebcc621aa8d4",
+    "timestamp": "2025-03-20T13:04:02.795Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " phone"
+    },
+    "generationUUID": "a37814ca-651e-47c6-b2d0-ebcc621aa8d4",
+    "timestamp": "2025-03-20T13:04:02.807Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": string"
+    },
+    "generationUUID": "a37814ca-651e-47c6-b2d0-ebcc621aa8d4",
+    "timestamp": "2025-03-20T13:04:02.821Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";"
+    },
+    "generationUUID": "a37814ca-651e-47c6-b2d0-ebcc621aa8d4",
+    "timestamp": "2025-03-20T13:04:02.833Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n}"
+    },
+    "generationUUID": "a37814ca-651e-47c6-b2d0-ebcc621aa8d4",
+    "timestamp": "2025-03-20T13:04:02.845Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "a37814ca-651e-47c6-b2d0-ebcc621aa8d4",
+    "timestamp": "2025-03-20T13:04:02.857Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "interface"
+    },
+    "generationUUID": "a37814ca-651e-47c6-b2d0-ebcc621aa8d4",
+    "timestamp": "2025-03-20T13:04:02.869Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " CEO"
+    },
+    "generationUUID": "a37814ca-651e-47c6-b2d0-ebcc621aa8d4",
+    "timestamp": "2025-03-20T13:04:02.881Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "a37814ca-651e-47c6-b2d0-ebcc621aa8d4",
+    "timestamp": "2025-03-20T13:04:02.894Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "a37814ca-651e-47c6-b2d0-ebcc621aa8d4",
+    "timestamp": "2025-03-20T13:04:02.905Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "a37814ca-651e-47c6-b2d0-ebcc621aa8d4",
+    "timestamp": "2025-03-20T13:04:02.917Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " name: string"
+    },
+    "generationUUID": "a37814ca-651e-47c6-b2d0-ebcc621aa8d4",
+    "timestamp": "2025-03-20T13:04:02.929Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";\n"
+    },
+    "generationUUID": "a37814ca-651e-47c6-b2d0-ebcc621aa8d4",
+    "timestamp": "2025-03-20T13:04:02.941Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "  contact"
+    },
+    "generationUUID": "a37814ca-651e-47c6-b2d0-ebcc621aa8d4",
+    "timestamp": "2025-03-20T13:04:02.952Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": Contact"
+    },
+    "generationUUID": "a37814ca-651e-47c6-b2d0-ebcc621aa8d4",
+    "timestamp": "2025-03-20T13:04:02.965Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";"
+    },
+    "generationUUID": "a37814ca-651e-47c6-b2d0-ebcc621aa8d4",
+    "timestamp": "2025-03-20T13:04:02.977Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "a37814ca-651e-47c6-b2d0-ebcc621aa8d4",
+    "timestamp": "2025-03-20T13:04:02.989Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}"
+    },
+    "generationUUID": "a37814ca-651e-47c6-b2d0-ebcc621aa8d4",
+    "timestamp": "2025-03-20T13:04:03.001Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nconst"
+    },
+    "generationUUID": "a37814ca-651e-47c6-b2d0-ebcc621aa8d4",
+    "timestamp": "2025-03-20T13:04:03.017Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " company ="
+    },
+    "generationUUID": "a37814ca-651e-47c6-b2d0-ebcc621aa8d4",
+    "timestamp": "2025-03-20T13:04:03.026Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "a37814ca-651e-47c6-b2d0-ebcc621aa8d4",
+    "timestamp": "2025-03-20T13:04:03.039Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n  name: \"Acme Inc"
+    },
+    "generationUUID": "a37814ca-651e-47c6-b2d0-ebcc621aa8d4",
+    "timestamp": "2025-03-20T13:04:03.051Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ".\",\n  ceo: {"
+    },
+    "generationUUID": "a37814ca-651e-47c6-b2d0-ebcc621aa8d4",
+    "timestamp": "2025-03-20T13:04:03.064Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "a37814ca-651e-47c6-b2d0-ebcc621aa8d4",
+    "timestamp": "2025-03-20T13:04:03.091Z"
+  },
+  {
+    "fullText": "\ninterface Contact {\n  email: string;\n  phone: string;\n}\ninterface CEO {\n  name: string;\n  contact: Contact;\n}\nconst company = {\n  name: \"Acme Inc.\",\n  ceo: {",
+    "generationUUID": "a37814ca-651e-47c6-b2d0-ebcc621aa8d4",
+    "timestamp": "2025-03-20T13:04:03.092Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "cursorPredictionTarget": {
+        "relativePath": "entry/src/main/ets/utils/dynamicProp.ets",
+        "lineNumberOneIndexed": 68,
+        "expectedContent": "\n",
+        "shouldRetriggerCpp": true
+      }
+    },
+    "generationUUID": "a37814ca-651e-47c6-b2d0-ebcc621aa8d4",
+    "timestamp": "2025-03-20T13:04:03.132Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "a37814ca-651e-47c6-b2d0-ebcc621aa8d4",
+    "timestamp": "2025-03-20T13:04:03.132Z"
+  },
+  {
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/dynamicProp.ets",
+      "lineNumberOneIndexed": 68,
+      "text": "\n",
+      "shouldRetriggerCpp": true
+    },
+    "predictionId": "2992a925-991f-4515-ac17-c1245cf1a31e",
+    "generationUUID": "a37814ca-651e-47c6-b2d0-ebcc621aa8d4",
+    "timestamp": "2025-03-20T13:04:03.143Z"
+  }
+]

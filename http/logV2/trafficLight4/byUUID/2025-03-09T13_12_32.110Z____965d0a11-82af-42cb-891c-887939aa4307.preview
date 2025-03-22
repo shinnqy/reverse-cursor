@@ -1,0 +1,73 @@
+{"line":2,"column":11}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case li[ToFill]:
+      return 'green';
+    case 'green':
+      return 'yellow';
+    case 'yellow':
+      return 'red';
+    default:
+      return 'red';
+  }
+}
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+  switch (light) {
+    case light.RED:
+      return 'green';
+    case 'green':
+      return 'yellow';
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case light.RED:
+      return 'green';
+    case 'green':
+      return 'yellow';
+    case 'yellow':
+      return 'red';
+    default:
+      return 'red';
+  }
+}
+
+
+-------------------------------[                   fullText                  ]--------------------------------
+  switch (light) {
+    case light.RED:
+      return light.GREEN;
+    case light.GREEN:
+      return light.YELLOW;
+-------------------------------[         replacedContentsWithFullText         ]--------------------------------
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case light.RED:
+      return light.GREEN;
+    case light.GREEN:
+      return light.YELLOW;
+    case 'yellow':
+      return 'red';
+    default:
+      return 'red';
+  }
+}
+
+
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "src/components/test2.ts",
+  "lineNumberOneIndexed": 7,
+  "text": "case 'yellow':\nreturn 'red';\ndefault:\nreturn 'red';\n}",
+  "shouldRetriggerCpp": true
+}
+--------------------------------[        displayedFusedCursorPrediction       ]---------------------------------
+{
+  "relativePath": "src/components/test2.ts",
+  "lineNumberOneIndexed": 7,
+  "text": "case 'yellow':\nreturn 'red';\ndefault:\nreturn 'red';\n}",
+  "shouldRetriggerCpp": true
+}

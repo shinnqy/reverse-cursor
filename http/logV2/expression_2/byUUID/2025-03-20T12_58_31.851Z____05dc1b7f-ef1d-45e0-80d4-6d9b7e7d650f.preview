@@ -1,0 +1,35 @@
+{"line":6,"column":3}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+const user = {
+  name: "Alice",
+  age: 30,
+  address: {
+    city: "New York",
+    country: "USA",
+  }[ToFill],
+};
+
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+    city: "New York",
+    country: "USA",
+  },
+};
+
+const userProxy = new Proxy(user, {
+
+-------------------------------[                   fullText                  ]--------------------------------
+    city: "New York",
+    country: "USA",
+  },
+};
+
+const userProxy = new Proxy(user, {
+  get(target, prop) {
+    if (prop in target) {
+      return target[prop];
+    }
+  },
+});

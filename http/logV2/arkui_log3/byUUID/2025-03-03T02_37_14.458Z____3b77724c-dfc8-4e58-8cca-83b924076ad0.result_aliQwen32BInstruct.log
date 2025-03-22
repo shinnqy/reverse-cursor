@@ -1,0 +1,38 @@
+------------------------------------------[        output        ]-------------------------------------------
+@Preview
+@Component
+export default struct Banner {
+  build() {
+    Text("Banner")
+  }
+}
+------------------------------------------[    replacedOutput    ]-------------------------------------------
+@Preview
+@Component
+export default struct Banner {
+  build() {
+    Text("Banner")
+  }
+}
+  }
+}
+-------------------------------[ groundTruth (replacedContentsWithFirstChunk) ]--------------------------------
+@Preview
+@Component
+export default struct Banner {
+  @Prop title: string = 'Banner';
+
+  build() {
+    Text("Banner")
+  }
+}
+-------------------------------[  groundTruth (replacedContentsWithFullText)  ]--------------------------------
+@Preview
+@Component
+export default struct Banner {
+  @Prop title: string = 'Banner';
+
+  build() {
+    Text(this.title)
+  }
+}

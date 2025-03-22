@@ -1,0 +1,24 @@
+{"line":4,"column":0}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+function changeLight(light: TrafficLight) {
+  light = 'green';
+}
+
+[ToFill]
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+const light = 'red';
+-------------------------------[                   fullText                  ]--------------------------------
+
+const light = 'red';
+changeLight(light);
+console.log(light);
+
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "src/components/test2.ts",
+  "lineNumberOneIndexed": 1,
+  "text": "function changeLight(light: TrafficLight) {\nlight = 'green';\n}\n\nconst light = 'red';",
+  "shouldRetriggerCpp": true
+}

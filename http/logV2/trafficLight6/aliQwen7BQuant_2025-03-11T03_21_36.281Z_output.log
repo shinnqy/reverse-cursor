@@ -1,0 +1,417 @@
+============================
+----promptFilePath----:
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/trafficLight6/byUUID/2025-03-11T03_20_38.416Z____1b56e92e-2066-4f11-8e8b-dd1198247f36.prompt
+
+----output----:
+```typescript
+      break;
+```
+
+-----replacedOutput-----
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case TrafficLight.Red:
+```typescript
+      break;
+```
+      
+  } 
+}
+
+
+----firstChunkValue----:
+    case TrafficLight.Red:
+      return TrafficLight.Green;
+    case TrafficLight.Green:
+      return TrafficLight.Yellow;
+    case TrafficLight.Yellow:
+
+----replacedContents(firstChunkValue)----
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case TrafficLight.Red:
+      return TrafficLight.Green;
+    case TrafficLight.Green:
+      return TrafficLight.Yellow;
+    case TrafficLight.Yellow:
+  } 
+}
+
+
+----fullText----:
+undefined
+============================
+----promptFilePath----:
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/trafficLight6/byUUID/2025-03-11T03_20_51.072Z____b460506d-6048-4af9-98cc-9f8dbd5b0bc3.prompt
+
+----output----:
+```typescript
+      return TrafficLight.Green;
+```
+
+-----replacedOutput-----
+function changeLight(light: TrafficLight) {
+  switch (light) {
+```typescript
+      return TrafficLight.Green;
+```
+      return TrafficLight.Yellow;
+    case TrafficLight.Yellow:
+      return TrafficLight.Red;
+    default:
+      throw new Error('Invalid traffic light');
+  }
+}
+
+
+----firstChunkValue----:
+  switch (light) {
+    case TrafficLight.RED:
+      return TrafficLight.GREEN;
+    case TrafficLight.GREEN:
+      return TrafficLight.YELLOW;
+
+----replacedContents(firstChunkValue)----
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case TrafficLight.RED:
+      return TrafficLight.GREEN;
+    case TrafficLight.GREEN:
+      return TrafficLight.YELLOW;
+    case TrafficLight.Yellow:
+      return TrafficLight.Red;
+    default:
+      throw new Error('Invalid traffic light');
+  }
+}
+
+
+----fullText----:
+undefined
+============================
+----promptFilePath----:
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/trafficLight6/byUUID/2025-03-11T03_20_40.129Z____2d7e95d0-2326-4125-b574-3e18e7e5a39e.prompt
+
+----output----:
+```typescript
+  }
+}
+```
+
+-----replacedOutput-----
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case TrafficLight.Red:
+      return TrafficLight.Green;
+    case TrafficLight.Green:
+      return TrafficLight.Yellow;
+    case TrafficLight.Yellow:
+```typescript
+  }
+}
+```
+
+----firstChunkValue----:
+      return TrafficLight.Yellow;
+    case TrafficLight.Yellow:
+      return TrafficLight.Red;
+    default:
+      throw new Error('Invalid traffic light');
+  }
+}
+
+
+----replacedContents(firstChunkValue)----
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case TrafficLight.Red:
+      return TrafficLight.Green;
+    case TrafficLight.Green:
+      return TrafficLight.Yellow;
+    case TrafficLight.Yellow:
+      return TrafficLight.Red;
+    default:
+      throw new Error('Invalid traffic light');
+  }
+}
+
+
+----fullText----:
+undefined
+============================
+----promptFilePath----:
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/trafficLight6/byUUID/2025-03-11T03_20_58.021Z____7a7363e2-57f5-4f7b-961c-ebfdbaee8d7f.prompt
+
+----output----:
+```typescript
+return TrafficLight.YELLOW;
+```
+
+-----replacedOutput-----
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case TrafficLight.RED:
+      console.log('Red');
+      break;
+    case TrafficLight.GREEN:
+      console.log('Green');
+      break;
+    case TrafficLight.YELLOW:
+```typescript
+return TrafficLight.YELLOW;
+```
+  }
+}
+
+
+----firstChunkValue----:
+      break;
+    case TrafficLight.YELLOW:
+      console.log('Yellow');
+      break;
+    default:
+      throw new Error('Invalid traffic light');
+
+----replacedContents(firstChunkValue)----
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case TrafficLight.RED:
+      console.log('Red');
+      break;
+    case TrafficLight.GREEN:
+      console.log('Green');
+      break;
+    case TrafficLight.YELLOW:
+      console.log('Yellow');
+      break;
+    default:
+      throw new Error('Invalid traffic light');
+}
+
+
+----fullText----:
+undefined
+============================
+----promptFilePath----:
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/trafficLight6/byUUID/2025-03-11T03_20_51.962Z____3f6f9bef-95c0-48ea-b3ab-32ba97cded1d.prompt
+
+----output----:
+```typescript
+      return TrafficLight.RED;
+```
+
+-----replacedOutput-----
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case TrafficLight.RED:
+      return TrafficLight.GREEN;
+    case TrafficLight.GREEN:
+      return TrafficLight.YELLOW;
+```typescript
+      return TrafficLight.RED;
+```
+      throw new Error('Invalid traffic light');
+  }
+}
+
+
+----firstChunkValue----:
+      return TrafficLight.YELLOW;
+    case TrafficLight.YELLOW:
+      return TrafficLight.RED;
+    default:
+      throw new Error('Invalid traffic light');
+
+----replacedContents(firstChunkValue)----
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case TrafficLight.RED:
+      return TrafficLight.GREEN;
+    case TrafficLight.GREEN:
+      return TrafficLight.YELLOW;
+    case TrafficLight.YELLOW:
+      return TrafficLight.RED;
+    default:
+      throw new Error('Invalid traffic light');
+  }
+}
+
+
+----fullText----:
+undefined
+============================
+----promptFilePath----:
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/trafficLight6/byUUID/2025-03-11T03_20_56.914Z____194b0a08-99a2-4252-83d2-c084c7f47608.prompt
+
+----output----:
+```typescript
+      return TrafficLight.GREEN;
+```
+
+-----replacedOutput-----
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case TrafficLight.RED:
+```typescript
+      return TrafficLight.GREEN;
+```
+    case TrafficLight.YELLOW:
+      return TrafficLight.RED;
+    default:
+      throw new Error('Invalid traffic light');
+  }
+}
+
+
+----firstChunkValue----:
+    case TrafficLight.RED:
+      console.log('Red');
+    case TrafficLight.GREEN:
+      return TrafficLight.YELLOW;
+    case TrafficLight.YELLOW:
+
+----replacedContents(firstChunkValue)----
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case TrafficLight.RED:
+      console.log('Red');
+    case TrafficLight.GREEN:
+      return TrafficLight.YELLOW;
+    case TrafficLight.YELLOW:
+      return TrafficLight.RED;
+    default:
+      throw new Error('Invalid traffic light');
+  }
+}
+
+
+----fullText----:
+    case TrafficLight.RED:
+      console.log('Red');
+      break;
+    case TrafficLight.GREEN:
+      console.log('Green');
+      break;
+    case TrafficLight.YELLOW:
+============================
+----promptFilePath----:
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/trafficLight6/byUUID/2025-03-11T03_20_35.128Z____e0ac2400-d86c-4f64-b0e8-a8fef7059c75.prompt
+
+----output----:
+```typescript
+if (light === TrafficLight.Red) {
+  return TrafficLight.Green;
+} else {
+  console.log('light', light);
+}
+```
+
+-----replacedOutput-----
+function changeLight(light: TrafficLight) {
+```typescript
+if (light === TrafficLight.Red) {
+  return TrafficLight.Green;
+} else {
+  console.log('light', light);
+}
+```
+
+----firstChunkValue----:
+function changeLight(light: TrafficLight) {
+  switch (light) {
+}
+
+
+----replacedContents(firstChunkValue)----
+function changeLight(light: TrafficLight) {
+  switch (light) {
+}
+
+
+----fullText----:
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case TrafficLight.Red:
+      return TrafficLight.Green;
+    case TrafficLight.Green:
+      return TrafficLight.Yellow;
+      
+  }
+}
+
+============================
+----promptFilePath----:
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/trafficLight6/byUUID/2025-03-11T03_20_19.881Z____079986b6-c184-4913-869e-53cc1b3a4d56.prompt
+
+----output----:
+```typescript
+function changeLight(light: string): string {
+  if (light === 'red') {
+    return 'green';
+  }
+  console.log('light', light);
+}
+```
+
+-----replacedOutput-----
+```typescript
+function changeLight(light: string): string {
+  if (light === 'red') {
+    return 'green';
+  }
+  console.log('light', light);
+}
+```
+
+----firstChunkValue----:
+function test() {
+
+----replacedContents(firstChunkValue)----
+function test() {
+
+----fullText----:
+function test() {
+  console.log('test');
+}
+
+test();
+
+
+============================
+----promptFilePath----:
+/Users/shinn/Documents/personal/reverse-cursor/http/logV2/trafficLight6/byUUID/2025-03-11T03_20_23.159Z____a1efb3ef-0423-4d75-8c44-cd9bdb591a73.prompt
+
+----output----:
+```
+function changeLight(light: string): string {
+  if (light === 'red') {
+    return 'green';
+  }
+  console.log('light', light);
+}
+```
+
+-----replacedOutput-----
+```
+function changeLight(light: string): string {
+  if (light === 'red') {
+    return 'green';
+  }
+  console.log('light', light);
+}
+```
+
+----firstChunkValue----:
+function changeLight(light: TrafficLight) {
+
+----replacedContents(firstChunkValue)----
+function changeLight(light: TrafficLight) {
+
+----fullText----:
+function changeLight(light: TrafficLight) {
+  if (light === TrafficLight.Red) {
+    return TrafficLight.Green;
+  }
+  console.log('light', light);
+}
+

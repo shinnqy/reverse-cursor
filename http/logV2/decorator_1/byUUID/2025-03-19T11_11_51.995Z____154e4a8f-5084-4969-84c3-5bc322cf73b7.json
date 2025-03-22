@@ -1,0 +1,614 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "154e4a8f-5084-4969-84c3-5bc322cf73b7",
+    "timestamp": "2025-03-19T11:11:51.995Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/decorator.ets",
+          "diffHistory": [
+            "4+|  @State message: string = 'Hello, world!'\n",
+            "7-|    Text('Hello, world!')\n7+|    Text(this.message)\n",
+            "4-|  @State message: string = 'Hello, world!'\n4+|  @State count: string = 'Hello, world!'\n",
+            "7-|    Text(this.message)\n7+|    Text(this.count.toString())\n",
+            "4-|  @State count: string = 'Hello, world!'\n4+|  @State count: number = 0\n",
+            "7-|    Text(this.count.toString())\n",
+            "5-|  \n5+|\n7+|    Button('Click me').onClick(() => {\n8+|      this.count++\n9+|    })\n",
+            "15+|  @Prop count: number\n",
+            "18-|    Text('Hello, world!')\n18+|    Text(this.count.toString())\n",
+            "15-|  @Prop count: number\n15+|  @Prop m \n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/decorator.ets",
+        "contents": "@Entry\n@Component\nstruct Example {\n  @State count: number = 0\n\n  build() {\n    Button('Click me').onClick(() => {\n      this.count++\n    })\n  }\n}\n\n@Component\nstruct ChildComponent {\n  @Prop m \n\n  build() {\n    Text(this.count.toString())\n  }\n}\n\n@Component\nstruct LinkChild {\n\n  build() {\n    Button('Click me')\n  }\n}\n",
+        "cursorPosition": {
+          "line": 14,
+          "column": 9
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 31,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742382712034,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.2998046875,
+      "timeAtRequestSend": 1742382712034
+    },
+    "generateUuid": "154e4a8f-5084-4969-84c3-5bc322cf73b7",
+    "timestamp": "2025-03-19T11:11:52.035Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "154e4a8f-5084-4969-84c3-5bc322cf73b7",
+    "timestamp": "2025-03-19T11:11:52.395Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "struct ChildComponent {\n  @Prop message",
+      "rangeToReplace": {
+        "startLineNumber": 14,
+        "endLineNumberInclusive": 20
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "154e4a8f-5084-4969-84c3-5bc322cf73b7",
+    "timestamp": "2025-03-19T11:11:52.395Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": string\n"
+    },
+    "generationUUID": "154e4a8f-5084-4969-84c3-5bc322cf73b7",
+    "timestamp": "2025-03-19T11:11:52.414Z"
+  },
+  {
+    "firstChunkValue": "struct ChildComponent {\n  @Prop message: string\n\n  build() {\n    Text(this.count.toString())\n  }\n}",
+    "generationUUID": "154e4a8f-5084-4969-84c3-5bc322cf73b7",
+    "timestamp": "2025-03-19T11:11:52.415Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "struct ChildComponent {\n  @Prop message: string\n\n  build() {\n    Text(this.count.toString())\n  }\n}"
+    },
+    "generationUUID": "154e4a8f-5084-4969-84c3-5bc322cf73b7",
+    "timestamp": "2025-03-19T11:11:52.416Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "585a3285-d0e0-42fb-a629-cdb80790d0aa",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 31,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 31,
+      "monotonicallyIncreasingSuggestionId": 20,
+      "range": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "replaceText": "struct ChildComponent {\n  @Prop message: string\n\n  build() {\n    Text(this.count.toString())\n  }\n}",
+      "originalText": "struct ChildComponent {\n  @Prop m \n\n  build() {\n    Text(this.count.toString())\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "diffText": "struct ChildComponent {\n  @Prop message: string\n\n  build() {\n    Text(this.count.toString())\n  }\n}",
+      "fullOriginalText": "struct ChildComponent {\n  @Prop m \n\n  build() {\n    Text(this.count.toString())\n  }\n}",
+      "suggestionTriggerTime": 1742382711982.9001,
+      "greens": [],
+      "source": "typing",
+      "requestId": "154e4a8f-5084-4969-84c3-5bc322cf73b7",
+      "selection": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "undoRedoGroup": {
+        "id": 20,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumber": 20,
+        "endColumn": 2
+      },
+      "trackedText": "struct ChildComponent {\n  @Prop mes \n\n  build() {\n    Text(this.count.toString())\n  }\n}"
+    },
+    "generationUUID": "154e4a8f-5084-4969-84c3-5bc322cf73b7",
+    "timestamp": "2025-03-19T11:11:52.417Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "154e4a8f-5084-4969-84c3-5bc322cf73b7",
+    "timestamp": "2025-03-19T11:11:52.422Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "154e4a8f-5084-4969-84c3-5bc322cf73b7",
+    "timestamp": "2025-03-19T11:11:52.430Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " build() {\n    Text"
+    },
+    "generationUUID": "154e4a8f-5084-4969-84c3-5bc322cf73b7",
+    "timestamp": "2025-03-19T11:11:52.440Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "(this.message"
+    },
+    "generationUUID": "154e4a8f-5084-4969-84c3-5bc322cf73b7",
+    "timestamp": "2025-03-19T11:11:52.449Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ")\n "
+    },
+    "generationUUID": "154e4a8f-5084-4969-84c3-5bc322cf73b7",
+    "timestamp": "2025-03-19T11:11:52.461Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " }"
+    },
+    "generationUUID": "154e4a8f-5084-4969-84c3-5bc322cf73b7",
+    "timestamp": "2025-03-19T11:11:52.467Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n}"
+    },
+    "generationUUID": "154e4a8f-5084-4969-84c3-5bc322cf73b7",
+    "timestamp": "2025-03-19T11:11:52.476Z"
+  },
+  {
+    "fullText": "struct ChildComponent {\n  @Prop message: string\n\n  build() {\n    Text(this.message)\n  }\n}",
+    "generationUUID": "154e4a8f-5084-4969-84c3-5bc322cf73b7",
+    "timestamp": "2025-03-19T11:11:52.498Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "struct ChildComponent {\n  @Prop message: string\n\n  build() {\n    Text(this.count.toString())\n  }\n}"
+    },
+    "fullText": "struct ChildComponent {\n  @Prop message: string\n\n  build() {\n    Text(this.message)\n  }\n}",
+    "generationUUID": "154e4a8f-5084-4969-84c3-5bc322cf73b7",
+    "timestamp": "2025-03-19T11:11:52.498Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "7be6d102-a96f-4ed7-9c02-69688bde588b",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 31,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 35,
+      "monotonicallyIncreasingSuggestionId": 21,
+      "range": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "replaceText": "struct ChildComponent {\n  @Prop message: string\n\n  build() {\n    Text(this.message)\n  }\n}",
+      "originalText": "struct ChildComponent {\n  @Prop message: string\n\n  build() {\n    Text(this.count.toString())\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "diffText": "struct ChildComponent {\n  @Prop message: string\n\n  build() {\n    Text(this.message)\n  }\n}",
+      "fullOriginalText": "struct ChildComponent {\n  @Prop message: string\n\n  build() {\n    Text(this.count.toString())\n  }\n}",
+      "suggestionTriggerTime": 1742382711982.9001,
+      "greens": [],
+      "source": "typing",
+      "requestId": "154e4a8f-5084-4969-84c3-5bc322cf73b7",
+      "selection": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "62924060-32d3-49a9-9ab3-342922492390",
+      "undoRedoGroup": {
+        "id": 21,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "154e4a8f-5084-4969-84c3-5bc322cf73b7",
+    "timestamp": "2025-03-19T11:11:52.499Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "154e4a8f-5084-4969-84c3-5bc322cf73b7",
+    "timestamp": "2025-03-19T11:11:52.500Z"
+  },
+  {
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/decorator.ets",
+      "lineNumberOneIndexed": 24,
+      "text": "\nbuild() {\nButton('Click me')\n}\n}",
+      "shouldRetriggerCpp": false
+    },
+    "predictionId": "62924060-32d3-49a9-9ab3-342922492390",
+    "generationUUID": "154e4a8f-5084-4969-84c3-5bc322cf73b7",
+    "timestamp": "2025-03-19T11:11:52.592Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "struct ChildComponent {\n  @Prop message: string\n\n  build() {\n    Text(this.count.toString())\n  }\n}"
+    },
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/decorator.ets",
+      "lineNumberOneIndexed": 24,
+      "text": "\nbuild() {\nButton('Click me')\n}\n}",
+      "shouldRetriggerCpp": false
+    },
+    "predictionId": "62924060-32d3-49a9-9ab3-342922492390",
+    "generationUUID": "154e4a8f-5084-4969-84c3-5bc322cf73b7",
+    "timestamp": "2025-03-19T11:11:52.593Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "62924060-32d3-49a9-9ab3-342922492390",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/decorator.ets",
+      "lineNumberOneIndexed": 24,
+      "text": "\nbuild() {\nButton('Click me')\n}\n}",
+      "shouldRetriggerCpp": false
+    },
+    "timestamp": "2025-03-19T11:11:52.593Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "cursorPredictionTarget": {
+        "relativePath": "entry/src/main/ets/utils/decorator.ets",
+        "lineNumberOneIndexed": 24,
+        "expectedContent": "\nbuild() {\nButton('Click me')\n}\n}",
+        "shouldRetriggerCpp": false
+      }
+    },
+    "generationUUID": "154e4a8f-5084-4969-84c3-5bc322cf73b7",
+    "timestamp": "2025-03-19T11:11:52.594Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "154e4a8f-5084-4969-84c3-5bc322cf73b7",
+    "timestamp": "2025-03-19T11:11:52.594Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "585a3285-d0e0-42fb-a629-cdb80790d0aa",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 31,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 31,
+      "monotonicallyIncreasingSuggestionId": 20,
+      "range": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "replaceText": "struct ChildComponent {\n  @Prop message: string\n\n  build() {\n    Text(this.count.toString())\n  }\n}",
+      "originalText": "struct ChildComponent {\n  @Prop m \n\n  build() {\n    Text(this.count.toString())\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "diffText": "struct ChildComponent {\n  @Prop message: string\n\n  build() {\n    Text(this.count.toString())\n  }\n}",
+      "fullOriginalText": "struct ChildComponent {\n  @Prop m \n\n  build() {\n    Text(this.count.toString())\n  }\n}",
+      "suggestionTriggerTime": 1742382711982.9001,
+      "greens": [],
+      "source": "typing",
+      "requestId": "154e4a8f-5084-4969-84c3-5bc322cf73b7",
+      "selection": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "undoRedoGroup": {
+        "id": 20,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumber": 20,
+        "endColumn": 2
+      },
+      "trackedText": "struct ChildComponent {\n  @Prop mes \n\n  build() {\n    Text(this.count.toString())\n  }\n}",
+      "decorationId": "b;182",
+      "onAcceptDisplayId": "7be6d102-a96f-4ed7-9c02-69688bde588b"
+    },
+    "generationUUID": "154e4a8f-5084-4969-84c3-5bc322cf73b7",
+    "timestamp": "2025-03-19T11:11:55.204Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "585a3285-d0e0-42fb-a629-cdb80790d0aa",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 31,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 31,
+      "monotonicallyIncreasingSuggestionId": 20,
+      "range": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "replaceText": "struct ChildComponent {\n  @Prop message: string\n\n  build() {\n    Text(this.count.toString())\n  }\n}",
+      "originalText": "struct ChildComponent {\n  @Prop m \n\n  build() {\n    Text(this.count.toString())\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "diffText": "struct ChildComponent {\n  @Prop message: string\n\n  build() {\n    Text(this.count.toString())\n  }\n}",
+      "fullOriginalText": "struct ChildComponent {\n  @Prop m \n\n  build() {\n    Text(this.count.toString())\n  }\n}",
+      "suggestionTriggerTime": 1742382711982.9001,
+      "greens": [],
+      "source": "typing",
+      "requestId": "154e4a8f-5084-4969-84c3-5bc322cf73b7",
+      "selection": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "undoRedoGroup": {
+        "id": 20,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumber": 20,
+        "endColumn": 2
+      },
+      "trackedText": "struct ChildComponent {\n  @Prop mes \n\n  build() {\n    Text(this.count.toString())\n  }\n}",
+      "decorationId": "b;182",
+      "onAcceptDisplayId": "7be6d102-a96f-4ed7-9c02-69688bde588b"
+    },
+    "generationUUID": "154e4a8f-5084-4969-84c3-5bc322cf73b7",
+    "timestamp": "2025-03-19T11:11:55.213Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "7be6d102-a96f-4ed7-9c02-69688bde588b",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 31,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 35,
+      "monotonicallyIncreasingSuggestionId": 21,
+      "range": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "replaceText": "struct ChildComponent {\n  @Prop message: string\n\n  build() {\n    Text(this.message)\n  }\n}",
+      "originalText": "struct ChildComponent {\n  @Prop message: string\n\n  build() {\n    Text(this.count.toString())\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "diffText": "struct ChildComponent {\n  @Prop message: string\n\n  build() {\n    Text(this.message)\n  }\n}",
+      "fullOriginalText": "struct ChildComponent {\n  @Prop message: string\n\n  build() {\n    Text(this.count.toString())\n  }\n}",
+      "suggestionTriggerTime": 1742382711982.9001,
+      "greens": [],
+      "source": "typing",
+      "requestId": "154e4a8f-5084-4969-84c3-5bc322cf73b7",
+      "selection": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "62924060-32d3-49a9-9ab3-342922492390",
+      "undoRedoGroup": {
+        "id": 21,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;201"
+    },
+    "generationUUID": "154e4a8f-5084-4969-84c3-5bc322cf73b7",
+    "timestamp": "2025-03-19T11:11:55.837Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "7be6d102-a96f-4ed7-9c02-69688bde588b",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/decorator.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 31,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 35,
+      "monotonicallyIncreasingSuggestionId": 21,
+      "range": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "replaceText": "struct ChildComponent {\n  @Prop message: string\n\n  build() {\n    Text(this.message)\n  }\n}",
+      "originalText": "struct ChildComponent {\n  @Prop message: string\n\n  build() {\n    Text(this.count.toString())\n  }\n}",
+      "startingSuggestionRange": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "diffText": "struct ChildComponent {\n  @Prop message: string\n\n  build() {\n    Text(this.message)\n  }\n}",
+      "fullOriginalText": "struct ChildComponent {\n  @Prop message: string\n\n  build() {\n    Text(this.count.toString())\n  }\n}",
+      "suggestionTriggerTime": 1742382711982.9001,
+      "greens": [],
+      "source": "typing",
+      "requestId": "154e4a8f-5084-4969-84c3-5bc322cf73b7",
+      "selection": {
+        "startLineNumber": 14,
+        "startColumn": 1,
+        "endLineNumberInclusive": 20,
+        "endColumn": 2
+      },
+      "fusedCursorPredictionId": "62924060-32d3-49a9-9ab3-342922492390",
+      "undoRedoGroup": {
+        "id": 21,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;201"
+    },
+    "generationUUID": "154e4a8f-5084-4969-84c3-5bc322cf73b7",
+    "timestamp": "2025-03-19T11:11:55.855Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "62924060-32d3-49a9-9ab3-342922492390",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/decorator.ets",
+      "lineNumberOneIndexed": 24,
+      "text": "\nbuild() {\nButton('Click me')\n}\n}",
+      "shouldRetriggerCpp": false
+    },
+    "oldText": "struct ChildComponent {\n  @Prop message: string\n\n  build() {\n    Text(this.count.toString())\n  }\n}",
+    "newText": "struct ChildComponent {\n  @Prop message: string\n\n  build() {\n    Text(this.message)\n  }\n}",
+    "timestamp": "2025-03-19T11:11:55.856Z"
+  },
+  {
+    "action": "displayFusedCursorPrediction",
+    "predictionId": "62924060-32d3-49a9-9ab3-342922492390",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/decorator.ets",
+      "lineNumberOneIndexed": 24,
+      "text": "\nbuild() {\nButton('Click me')\n}\n}",
+      "shouldRetriggerCpp": false
+    },
+    "oldText": "struct ChildComponent {\n  @Prop message: string\n\n  build() {\n    Text(this.count.toString())\n  }\n}",
+    "newText": "struct ChildComponent {\n  @Prop message: string\n\n  build() {\n    Text(this.message)\n  }\n}",
+    "timestamp": "2025-03-19T11:11:55.856Z"
+  }
+]

@@ -1,0 +1,37 @@
+{"line":10,"column":5}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+function add(a: number, b: number): number {
+    return a + b;
+}
+
+function subtract(a: number, b: number): number {
+    return a - b;
+}
+
+let sum = add(1, 2);
+
+inter[ToFill]
+function getUser(name: string, age: number): { name: string, age: number } {
+    return { name, age };
+}
+
+let user = getUser("John", 30);
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+interface User {
+function getUser(name: string, age: number): { name: string, age: number } {
+    return { name, age };
+}
+-------------------------------[                   fullText                  ]--------------------------------
+
+interface User {
+    name: string;
+    age: number;
+}
+
+function getUser(name: string, age: number): User {
+    return { name, age };
+}

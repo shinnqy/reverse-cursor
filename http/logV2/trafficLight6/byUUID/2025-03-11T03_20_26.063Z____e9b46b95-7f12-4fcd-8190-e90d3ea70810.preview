@@ -1,0 +1,22 @@
+{"line":3,"column":0}
+
+======== fileDiffHistories ========
+
+File: src/components/test2.ts
+1-|enum TrafficLight {\n2-|  Red = 'red',\n3-|  Yellow = 'yellow',\n4-|  Green = 'green',\n5-|}\n6-|\n10-|  } \n4+|  }\n
+
+======== processedCurrentFileContents ========
+function changeLight(light: TrafficLight) {
+  if (light === TrafficLight.Red) {
+    return TrafficLight.Green;
+[ToFill]  }
+  console.log('light', light);
+}
+
+======== firstChunkValue ========
+function changeLight(light: TrafficLight) {
+  if (light === TrafficLight.Red) {
+    return TrafficLight.Green;
+  }
+  console.log('light', light);
+}

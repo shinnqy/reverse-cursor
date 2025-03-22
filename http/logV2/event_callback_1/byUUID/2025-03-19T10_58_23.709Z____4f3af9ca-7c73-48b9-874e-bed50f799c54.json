@@ -1,0 +1,119 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "4f3af9ca-7c73-48b9-874e-bed50f799c54",
+    "timestamp": "2025-03-19T10:58:23.709Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/eventCallback.ets",
+          "diffHistory": [
+            "5-|    \n5+|      .onClick(() => {\n6+|        console.log('Button clicked')\n7+|      })\n",
+            "5-|      .onClick(() => {\n6-|        console.log('Button clicked')\n5+|      .onClick((event: ClickEvent) => {\n6+|        console.log('Button clicked', event)\n",
+            "15+|      .onLongPress((event: LongPressEvent) => {\n16+|        console.log('Button long pressed', event)\n17+|      })\n",
+            "25+|      .onSwipe((event: SwipeEvent) => {\n26+|        console.log('Button swiped', event)\n27+|      })\n",
+            "37+|      .onTouch((event: TouchEvent) => {\n38+|        console.log('Button touched', event)\n39+|      })\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/eventCallback.ets",
+        "contents": "@Component\nstruct ClickEventExample {\n  build() {\n    Button('Click me')\n      .onClick((event: ClickEvent) => {\n        console.log('Button clicked', event)\n      })\n  }\n}\n\n@Component\nstruct LongPressEventExample {\n  build() {\n    Button('Long press me')\n      .onLongPress((event: LongPressEvent) => {\n        console.log('Button long pressed', event)\n      })\n  }\n}\n\n@Component\nstruct SwipeEventExample {\n  build() {\n    Button('Swipe me')\n      .onSwipe((event: SwipeEvent) => {\n        console.log('Button swiped', event)\n      })\n  }\n}\n\n@Component\nstruct ChildComponent {\n  @Prop() onCustomEvent: () => void\n\n  build() {\n    Button('Touch me')\n      .onTouch((event: TouchEvent) => {\n        console.log('Button touched', event)\n      })\n  }\n}\n\n",
+        "cursorPosition": {
+          "line": 35,
+          "column": 1
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 15,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1742381903747,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51,
+      "timeAtRequestSend": 1742381903747
+    },
+    "generateUuid": "4f3af9ca-7c73-48b9-874e-bed50f799c54",
+    "timestamp": "2025-03-19T10:58:23.749Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "4f3af9ca-7c73-48b9-874e-bed50f799c54",
+    "timestamp": "2025-03-19T10:58:24.204Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "  build() {\n    Button('Touch me')\n      .onTouch((event: TouchEvent) => {\n        console.log('Button touched', event)\n      })\n  }",
+      "rangeToReplace": {
+        "startLineNumber": 35,
+        "endLineNumberInclusive": 40
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "4f3af9ca-7c73-48b9-874e-bed50f799c54",
+    "timestamp": "2025-03-19T10:58:24.205Z"
+  },
+  {
+    "firstChunkValue": "  build() {\n    Button('Touch me')\n      .onTouch((event: TouchEvent) => {\n        console.log('Button touched', event)\n      })\n  }",
+    "generationUUID": "4f3af9ca-7c73-48b9-874e-bed50f799c54",
+    "timestamp": "2025-03-19T10:58:24.232Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": false
+    },
+    "generationUUID": "4f3af9ca-7c73-48b9-874e-bed50f799c54",
+    "timestamp": "2025-03-19T10:58:24.232Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "4f3af9ca-7c73-48b9-874e-bed50f799c54",
+    "timestamp": "2025-03-19T10:58:24.233Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "4f3af9ca-7c73-48b9-874e-bed50f799c54",
+    "timestamp": "2025-03-19T10:58:24.263Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "90525972-235e-45ac-ae62-1837968988f8",
+    "generationUUID": "4f3af9ca-7c73-48b9-874e-bed50f799c54",
+    "timestamp": "2025-03-19T10:58:24.267Z"
+  }
+]

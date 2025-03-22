@@ -1,0 +1,41 @@
+{"line":0,"column":0}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+[ToFill]
+
+@Preview
+@Component
+struct AboutMe {
+  @State message: string = 'About Me';
+
+  build() {
+    Column() {
+      Text(this.message)
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+
+      Banner()
+    }
+  }
+}
+-------------------------------[               firstChunkValue               ]--------------------------------
+import banner from '@ohos.banner';
+
+@Preview
+@Component
+struct AboutMe {
+  @State message: string = 'About Me';
+-------------------------------[                   fullText                  ]--------------------------------
+import banner from '@ohos.banner';
+
+@Preview
+@Component
+struct AboutMe {
+  @State message: string = 'About Me';
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/pages/AboutMe.ets",
+  "lineNumberOneIndexed": 14,
+  "text": "Banner()\n}\n}\n}\n",
+  "shouldRetriggerCpp": true
+}

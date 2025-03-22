@@ -1,0 +1,32 @@
+You're an expert in TypeScript. Your task is to help the user update the code around current cursor position.
+
+## Recent Actions
+Here is what the user has been doing from the earliest to the latest:
+
+File: src/components/test2.ts
+added the code `function changeLight(light: T)` in line 1
+
+
+## Current Code
+Here is the current code file path:
+src/components/test2.ts
+
+Here is the current code around the cursor position:
+
+```
+<|editable_region_start|>
+function changeLight(light: T<|current_cursor_position|>)
+<|editable_region_end|>
+```
+
+## Task
+Rewrite the code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> according to the following requirements:
+1. Enforce code format strictly matching existing code style.
+2. Propagate naming convention changes to all related cases
+3. Preserve original functionality
+4. Apply changes to entire code regardless of cursor position
+5. Focus on code after cursor position at <|current_cursor_position|>
+
+# Output Format
+Return ONLY the rewritten code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> without any other words.
+Never use markdown formatting like ```. Return raw text only.

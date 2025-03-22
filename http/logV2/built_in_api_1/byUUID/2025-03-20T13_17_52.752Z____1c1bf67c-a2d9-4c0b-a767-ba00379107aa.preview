@@ -1,0 +1,60 @@
+{"line":47,"column":3}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+import router from "@ohos.router";
+import storage from "@ohos.storage";
+
+@Entry
+@Component
+struct Main {
+  @State message: string = "Hello World";
+
+  build() {
+    Row() {
+      Text(this.message)
+        .fontSize(20)
+        .fontWeight(FontWeight.Bold)
+        .onClick(() => {
+          router.pushUrl({
+            url: "pages/SecondPage",
+            params: {
+              message: "Hello from Second Page",
+            },
+          });
+        })
+        .width(200)
+        .height(100)
+        .backgroundColor(Color.Red)
+    }
+  }
+}
+
+@Component
+struct SecondPage {
+  @State message: string = "";
+
+  build() {
+    Column() {
+      Text(this.message)
+        .fontSize(20)
+        .fontWeight(FontWeight.Bold)
+        .textAlign(TextAlign.Center)
+        .fontColor(Color.White)
+        .onClick(() => {
+          router.back();
+        })
+    }
+  }
+}
+
+const STORAGE_KEY = "myStorage";
+let[ToFill]
+-------------------------------[               firstChunkValue               ]--------------------------------
+const STORAGE_KEY = "myStorage";
+let storage = storage.getStorageSync(STORAGE_KEY);
+
+storage.setSync(STORAGE_KEY, "Hello World");
+
+storage.getSync(STORAGE_KEY).then((value) => {
+  console.log(value);
+});

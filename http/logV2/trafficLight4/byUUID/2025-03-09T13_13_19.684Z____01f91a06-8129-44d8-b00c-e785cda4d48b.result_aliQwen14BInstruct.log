@@ -1,0 +1,58 @@
+------------------------------------------[        output        ]-------------------------------------------
+    case TrafficLight.YELLOW:
+      console.log('Caution');
+      break;
+    default:
+      console.log('Error');
+------------------------------------------[    replacedOutput    ]-------------------------------------------
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case TrafficLight.RED:
+      console.log('Stop');
+      break;
+    case TrafficLight.GREEN:
+      console.log('Go');
+    case TrafficLight.YELLOW:
+      console.log('Caution');
+      break;
+    default:
+      console.log('Error');
+      console.log('red');
+  }
+}
+
+enum TrafficLight {
+  RED = 'red',
+  GREEN = 'green',
+  YELLOW = 'yellow',
+}
+
+const light = TrafficLight.RED;
+changeLight(light);
+
+-------------------------------[ groundTruth (replacedContentsWithFirstChunk) ]--------------------------------
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case TrafficLight.RED:
+      console.log('Stop');
+      break;
+    case TrafficLight.GREEN:
+      console.log('Go');
+      break;
+    case TrafficLight.YELLOW:
+      console.log('Wait');
+      break;
+    default:
+      console.log('red');
+  }
+}
+
+enum TrafficLight {
+  RED = 'red',
+  GREEN = 'green',
+  YELLOW = 'yellow',
+}
+
+const light = TrafficLight.RED;
+changeLight(light);
+

@@ -1,0 +1,39 @@
+{"line":1,"column":3}
+
+======== fileDiffHistories ========
+
+File: src/components/test2.ts
+1-|enum TrafficLight {\n2-|  Red = 'red',\n3-|  Yellow = 'yellow',\n4-|  Green = 'green',\n5-|}\n6-|\n10-|  } \n4+|  }\n2-|  if (light === TrafficLight.Red) {\n3-|    return TrafficLight.Green;\n4-|  }\n5-|  console.log('light', light);\n2-|  \n2+|  s\n
+1-|enum TrafficLight {\n2-|  Red = 'red',\n3-|  Yellow = 'yellow',\n4-|  Green = 'green',\n5-|}\n6-|\n10-|  } \n4+|  }\n2-|  if (light === TrafficLight.Red) {\n3-|    return TrafficLight.Green;\n4-|  }\n5-|  console.log('light', light);\n2-|  \n2+|  s\n
+1-|enum TrafficLight {\n2-|  Red = 'red',\n3-|  Yellow = 'yellow',\n4-|  Green = 'green',\n5-|}\n6-|\n10-|  } \n4+|  }\n2-|  if (light === TrafficLight.Red) {\n3-|    return TrafficLight.Green;\n4-|  }\n5-|  console.log('light', light);\n2-|  \n2+|  s\n
+
+======== processedCurrentFileContents ========
+function changeLight(light: TrafficLight) {
+  s[ToFill]
+}
+
+======== firstChunkValue ========
+function changeLight(light: TrafficLight) {
+  switch (light) {
+}
+
+======== replace firstChunkValue ========
+function changeLight(light: TrafficLight) {
+  switch (light) {
+}
+
+======== replacedContentsWithCursorPosition ========
+function changeLight(light: TrafficLight) {<|current_cursor_position|>
+  switch (light) {
+}
+
+======== fullText ========
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case TrafficLight.Red:
+      return TrafficLight.Green;
+    case TrafficLight.Green:
+      return TrafficLight.Yellow;
+      
+  }
+}

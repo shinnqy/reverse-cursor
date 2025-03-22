@@ -1,0 +1,120 @@
+You're an expert in ArkTS. Your task is to help the user update the code around current cursor position.
+
+## Recent Actions
+Here is what the user has been doing from the earliest to the latest:
+
+File: entry/src/main/ets/pages/Index.ets
+deleted the code `` in line 17
+added the code `      Button() {` in line 17
+
+added the code `        Text('Click me')` in line 18
+added the code `      }` in line 19
+added the code `      .onClick(() => {` in line 20
+added the code `        this.message = 'Hello World';` in line 21
+added the code `      })` in line 22
+
+deleted the code `        Text('Click me')` in line 18
+added the code `        Text('Abount')` in line 18
+
+deleted the code `        Text('Abount')` in line 18
+added the code `        Text('About Me')` in line 18
+
+deleted the code `        this.message = 'Hello World';` in line 21
+
+deleted the code `        ` in line 21
+added the code `        router.push({` in line 21
+
+added the code `          uri: 'pages/About'` in line 22
+added the code `        })` in line 23
+
+deleted the code `        router.push({` in line 21
+added the code `        router.pushU({` in line 21
+
+deleted the code `        router.pushU({` in line 21
+deleted the code `          uri: 'pages/About'` in line 22
+added the code `        router.pushUrl({` in line 21
+added the code `          url: 'pages/About'` in line 22
+
+deleted the code `          url: 'pages/About'` in line 22
+added the code `          url: 'pages/AboutMe'` in line 22
+
+added the code `import router from '@ohos.router';` in line 1
+-----------------------------------------------
+
+File: entry/src/main/ets/pages/AboutMe.ets
+added the code `@Preview` in line 1
+
+added the code `@Entry` in line 2
+added the code `@Component` in line 3
+added the code `struct AboutMe {` in line 4
+added the code `  @State message: string = 'About Me';` in line 5
+added the code `  ` in line 6
+added the code `}` in line 7
+
+deleted the code `@Entry` in line 2
+
+deleted the code `` in line 5
+deleted the code `}` in line 6
+added the code `  ` in line 5
+added the code `  build() {` in line 6
+added the code `    Column() {` in line 7
+added the code `      Text(this.message)` in line 8
+added the code `        .fontSize(50)` in line 9
+added the code `        .fontWeight(FontWeight.Bold)` in line 10
+added the code `    }` in line 11
+added the code `  }` in line 12
+added the code `}` in line 13
+-----------------------------------------------
+
+File: entry/src/main/resources/base/profile/main_pages.json
+deleted the code `    "pages/Index"` in line 3
+added the code `    "pages/Index",` in line 3
+added the code `    "pages/AboutMe"` in line 4
+-----------------------------------------------
+
+File: entry/src/main/ets/pages/AboutMe.ets
+deleted the code `        ` in line 12
+added the code `      Banner()` in line 12
+
+added the code `import Banner from '../'` in line 1
+
+
+## Current Code
+Here is the current code file path:
+entry/src/main/ets/pages/AboutMe.ets
+
+Here is the current code around the cursor position:
+
+```
+<|editable_region_start|>
+import Banner from '../<|current_cursor_position|>'
+
+@Preview
+@Component
+struct AboutMe {
+  @State message: string = 'About Me';
+
+  build() {
+    Column() {
+      Text(this.message)
+        .fontSize(50)
+<|editable_region_end|>
+        .fontWeight(FontWeight.Bold)
+
+      Banner()
+    }
+  }
+}
+```
+
+## Task
+Rewrite the code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> according to the following requirements:
+1. Enforce code format strictly matching existing code style.
+2. Propagate naming convention changes to all related cases
+3. Preserve original functionality
+4. Apply changes to entire code regardless of cursor position
+5. Focus on code after cursor position at <|current_cursor_position|>
+
+# Output Format
+Return ONLY the rewritten code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> without any other words.
+Never use markdown formatting like ```. Return raw text only.

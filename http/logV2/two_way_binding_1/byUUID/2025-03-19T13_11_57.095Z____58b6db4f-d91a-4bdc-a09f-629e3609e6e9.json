@@ -1,0 +1,414 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "58b6db4f-d91a-4bdc-a09f-629e3609e6e9",
+    "timestamp": "2025-03-19T13:11:57.095Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/twoWayBinding.ets",
+          "diffHistory": [
+            "16+|  @Link t\n",
+            "16-|  @Link t\n16+|  @Link ta\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/twoWayBinding.ets",
+        "contents": "@Entry\n@Component\nstruct ParentComponent {\n  @State parentCount: number = 0;\n\n  build() {\n    Column() {\n      Text(this.parentCount.toString())\n      LinkChildComponent()\n    }\n  }\n}\n\n@Component\nstruct LinkChildComponent {\n  @Link ta\n\n  build() {\n    Column() {\n      Button()\n        .onClick(() => {\n          //\n        })\n    }\n  }\n}\n\ninterface User {\n  name: string;\n  age: number;\n}\n\n@Component\nstruct ComplexBindingExample {\n  @State user: User = { name: 'John', age: 30 };\n\n  build() {\n    Column() {\n      Text(this.user.name)\n    }\n  }\n}\n\n@Component\nstruct UserEditor {\n\n  build() {\n    Column() {\n      Text(\"\")\n      Text(\"\")\n    }\n  }\n}\n\n\n",
+        "cursorPosition": {
+          "line": 15,
+          "column": 10
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 10,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742389917129,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.5,
+      "timeAtRequestSend": 1742389917129
+    },
+    "generateUuid": "58b6db4f-d91a-4bdc-a09f-629e3609e6e9",
+    "timestamp": "2025-03-19T13:11:57.138Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "58b6db4f-d91a-4bdc-a09f-629e3609e6e9",
+    "timestamp": "2025-03-19T13:11:57.501Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}\n\n@Component\nstruct LinkChildComponent {\n  @Link target",
+      "rangeToReplace": {
+        "startLineNumber": 12,
+        "endLineNumberInclusive": 19
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "58b6db4f-d91a-4bdc-a09f-629e3609e6e9",
+    "timestamp": "2025-03-19T13:11:57.503Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "58b6db4f-d91a-4bdc-a09f-629e3609e6e9",
+    "timestamp": "2025-03-19T13:11:57.512Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " number"
+    },
+    "generationUUID": "58b6db4f-d91a-4bdc-a09f-629e3609e6e9",
+    "timestamp": "2025-03-19T13:11:57.522Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "58b6db4f-d91a-4bdc-a09f-629e3609e6e9",
+    "timestamp": "2025-03-19T13:11:57.527Z"
+  },
+  {
+    "firstChunkValue": "}\n\n@Component\nstruct LinkChildComponent {\n  @Link target: number = 0;\n\n  build() {\n    Column() {",
+    "generationUUID": "58b6db4f-d91a-4bdc-a09f-629e3609e6e9",
+    "timestamp": "2025-03-19T13:11:57.539Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " 0;\n\n  build()"
+    },
+    "generationUUID": "58b6db4f-d91a-4bdc-a09f-629e3609e6e9",
+    "timestamp": "2025-03-19T13:11:57.540Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "}\n\n@Component\nstruct LinkChildComponent {\n  @Link target: number = 0;\n\n  build() {\n    Column() {"
+    },
+    "generationUUID": "58b6db4f-d91a-4bdc-a09f-629e3609e6e9",
+    "timestamp": "2025-03-19T13:11:57.540Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "eecd7b28-03f6-4bd2-a7dd-60d44c63874e",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/twoWayBinding.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/twoWayBinding.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/twoWayBinding.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 10,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 10,
+      "monotonicallyIncreasingSuggestionId": 3,
+      "range": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 19,
+        "endColumn": 15
+      },
+      "replaceText": "}\n\n@Component\nstruct LinkChildComponent {\n  @Link target: number = 0;\n\n  build() {\n    Column() {",
+      "originalText": "}\n\n@Component\nstruct LinkChildComponent {\n  @Link ta\n\n  build() {\n    Column() {",
+      "startingSuggestionRange": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 19,
+        "endColumn": 15
+      },
+      "diffText": "}\n\n@Component\nstruct LinkChildComponent {\n  @Link target: number = 0;\n\n  build() {\n    Column() {",
+      "fullOriginalText": "}\n\n@Component\nstruct LinkChildComponent {\n  @Link ta\n\n  build() {\n    Column() {",
+      "suggestionTriggerTime": 1742389917079,
+      "greens": [],
+      "source": "typing",
+      "requestId": "58b6db4f-d91a-4bdc-a09f-629e3609e6e9",
+      "selection": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 19,
+        "endColumn": 15
+      },
+      "undoRedoGroup": {
+        "id": 3,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "58b6db4f-d91a-4bdc-a09f-629e3609e6e9",
+    "timestamp": "2025-03-19T13:11:57.541Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {\n   "
+    },
+    "generationUUID": "58b6db4f-d91a-4bdc-a09f-629e3609e6e9",
+    "timestamp": "2025-03-19T13:11:57.549Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Column() {"
+    },
+    "generationUUID": "58b6db4f-d91a-4bdc-a09f-629e3609e6e9",
+    "timestamp": "2025-03-19T13:11:57.566Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "58b6db4f-d91a-4bdc-a09f-629e3609e6e9",
+    "timestamp": "2025-03-19T13:11:57.586Z"
+  },
+  {
+    "fullText": "}\n\n@Component\nstruct LinkChildComponent {\n  @Link target: number = 0;\n\n  build() {\n    Column() {",
+    "generationUUID": "58b6db4f-d91a-4bdc-a09f-629e3609e6e9",
+    "timestamp": "2025-03-19T13:11:57.587Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "}\n\n@Component\nstruct LinkChildComponent {\n  @Link target: number = 0;\n\n  build() {\n    Column() {"
+    },
+    "fullText": "}\n\n@Component\nstruct LinkChildComponent {\n  @Link target: number = 0;\n\n  build() {\n    Column() {",
+    "generationUUID": "58b6db4f-d91a-4bdc-a09f-629e3609e6e9",
+    "timestamp": "2025-03-19T13:11:57.588Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "generationUUID": "58b6db4f-d91a-4bdc-a09f-629e3609e6e9",
+    "timestamp": "2025-03-19T13:11:57.588Z"
+  },
+  {
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/twoWayBinding.ets",
+      "lineNumberOneIndexed": 22,
+      "text": "//\n})\n}\n}\n}",
+      "shouldRetriggerCpp": true
+    },
+    "predictionId": "ff4b8dfe-7c51-448e-98f7-39f3eb6e7464",
+    "generationUUID": "58b6db4f-d91a-4bdc-a09f-629e3609e6e9",
+    "timestamp": "2025-03-19T13:11:57.710Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "}\n\n@Component\nstruct LinkChildComponent {\n  @Link target: number = 0;\n\n  build() {\n    Column() {"
+    },
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/twoWayBinding.ets",
+      "lineNumberOneIndexed": 22,
+      "text": "//\n})\n}\n}\n}",
+      "shouldRetriggerCpp": true
+    },
+    "predictionId": "ff4b8dfe-7c51-448e-98f7-39f3eb6e7464",
+    "generationUUID": "58b6db4f-d91a-4bdc-a09f-629e3609e6e9",
+    "timestamp": "2025-03-19T13:11:57.711Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "ff4b8dfe-7c51-448e-98f7-39f3eb6e7464",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/twoWayBinding.ets",
+      "lineNumberOneIndexed": 22,
+      "text": "//\n})\n}\n}\n}",
+      "shouldRetriggerCpp": true
+    },
+    "timestamp": "2025-03-19T13:11:57.712Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "cursorPredictionTarget": {
+        "relativePath": "entry/src/main/ets/utils/twoWayBinding.ets",
+        "lineNumberOneIndexed": 22,
+        "expectedContent": "//\n})\n}\n}\n}",
+        "shouldRetriggerCpp": true
+      }
+    },
+    "generationUUID": "58b6db4f-d91a-4bdc-a09f-629e3609e6e9",
+    "timestamp": "2025-03-19T13:11:57.713Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "58b6db4f-d91a-4bdc-a09f-629e3609e6e9",
+    "timestamp": "2025-03-19T13:11:57.720Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "eecd7b28-03f6-4bd2-a7dd-60d44c63874e",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/twoWayBinding.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/twoWayBinding.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/twoWayBinding.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 10,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 10,
+      "monotonicallyIncreasingSuggestionId": 3,
+      "range": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 19,
+        "endColumn": 15
+      },
+      "replaceText": "}\n\n@Component\nstruct LinkChildComponent {\n  @Link target: number = 0;\n\n  build() {\n    Column() {",
+      "originalText": "}\n\n@Component\nstruct LinkChildComponent {\n  @Link ta\n\n  build() {\n    Column() {",
+      "startingSuggestionRange": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 19,
+        "endColumn": 15
+      },
+      "diffText": "}\n\n@Component\nstruct LinkChildComponent {\n  @Link target: number = 0;\n\n  build() {\n    Column() {",
+      "fullOriginalText": "}\n\n@Component\nstruct LinkChildComponent {\n  @Link ta\n\n  build() {\n    Column() {",
+      "suggestionTriggerTime": 1742389917079,
+      "greens": [],
+      "source": "typing",
+      "requestId": "58b6db4f-d91a-4bdc-a09f-629e3609e6e9",
+      "selection": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 19,
+        "endColumn": 15
+      },
+      "fusedCursorPredictionId": "ff4b8dfe-7c51-448e-98f7-39f3eb6e7464",
+      "undoRedoGroup": {
+        "id": 3,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;57"
+    },
+    "generationUUID": "58b6db4f-d91a-4bdc-a09f-629e3609e6e9",
+    "timestamp": "2025-03-19T13:11:58.187Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "eecd7b28-03f6-4bd2-a7dd-60d44c63874e",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/twoWayBinding.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/twoWayBinding.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/twoWayBinding.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 10,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 10,
+      "monotonicallyIncreasingSuggestionId": 3,
+      "range": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 19,
+        "endColumn": 15
+      },
+      "replaceText": "}\n\n@Component\nstruct LinkChildComponent {\n  @Link target: number = 0;\n\n  build() {\n    Column() {",
+      "originalText": "}\n\n@Component\nstruct LinkChildComponent {\n  @Link ta\n\n  build() {\n    Column() {",
+      "startingSuggestionRange": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 19,
+        "endColumn": 15
+      },
+      "diffText": "}\n\n@Component\nstruct LinkChildComponent {\n  @Link target: number = 0;\n\n  build() {\n    Column() {",
+      "fullOriginalText": "}\n\n@Component\nstruct LinkChildComponent {\n  @Link ta\n\n  build() {\n    Column() {",
+      "suggestionTriggerTime": 1742389917079,
+      "greens": [],
+      "source": "typing",
+      "requestId": "58b6db4f-d91a-4bdc-a09f-629e3609e6e9",
+      "selection": {
+        "startLineNumber": 12,
+        "startColumn": 1,
+        "endLineNumberInclusive": 19,
+        "endColumn": 15
+      },
+      "fusedCursorPredictionId": "ff4b8dfe-7c51-448e-98f7-39f3eb6e7464",
+      "undoRedoGroup": {
+        "id": 3,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;57"
+    },
+    "generationUUID": "58b6db4f-d91a-4bdc-a09f-629e3609e6e9",
+    "timestamp": "2025-03-19T13:11:58.202Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "ff4b8dfe-7c51-448e-98f7-39f3eb6e7464",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/twoWayBinding.ets",
+      "lineNumberOneIndexed": 22,
+      "text": "//\n})\n}\n}\n}",
+      "shouldRetriggerCpp": true
+    },
+    "oldText": "}\n\n@Component\nstruct LinkChildComponent {\n  @Link ta\n\n  build() {\n    Column() {",
+    "newText": "}\n\n@Component\nstruct LinkChildComponent {\n  @Link target: number = 0;\n\n  build() {\n    Column() {",
+    "timestamp": "2025-03-19T13:11:58.203Z"
+  },
+  {
+    "action": "displayFusedCursorPrediction",
+    "predictionId": "ff4b8dfe-7c51-448e-98f7-39f3eb6e7464",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/twoWayBinding.ets",
+      "lineNumberOneIndexed": 22,
+      "text": "//\n})\n}\n}\n}",
+      "shouldRetriggerCpp": true
+    },
+    "oldText": "}\n\n@Component\nstruct LinkChildComponent {\n  @Link ta\n\n  build() {\n    Column() {",
+    "newText": "}\n\n@Component\nstruct LinkChildComponent {\n  @Link target: number = 0;\n\n  build() {\n    Column() {",
+    "timestamp": "2025-03-19T13:11:58.203Z"
+  }
+]

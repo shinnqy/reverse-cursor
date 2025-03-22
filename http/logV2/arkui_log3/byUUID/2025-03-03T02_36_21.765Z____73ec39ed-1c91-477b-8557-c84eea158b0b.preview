@@ -1,0 +1,24 @@
+{"line":5,"column":0}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Preview
+@Entry
+@Component
+struct AboutMe {
+  @State message: string = 'About Me';
+[ToFill]
+}
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+@Component
+struct AboutMe {
+  @State message: string = 'About Me';
+
+  build() {
+    Column() {
+      Text(this.message)
+        .fontSize(50)
+        .fontWeight(FontWeight.Bold)
+    }
+  }
+}

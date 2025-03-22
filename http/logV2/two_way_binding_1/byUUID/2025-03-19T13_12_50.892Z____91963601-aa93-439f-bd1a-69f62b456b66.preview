@@ -1,0 +1,86 @@
+{"line":45,"column":14}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+struct ParentComponent {
+  @State parentCount: number = 0;
+
+  build() {
+    Column() {
+      Text(this.parentCount.toString())
+      LinkChildComponent({ target: this.parentCount })
+    }
+  }
+}
+
+@Component
+struct LinkChildComponent {
+  @Link target: number = 0;
+
+  build() {
+    Column() {
+      Button()
+        .onClick(() => {
+          this.target++;
+        })
+    }
+  }
+}
+
+interface User {
+  name: string;
+  age: number;
+}
+
+@Component
+struct ComplexBindingExample {
+  @State user: User = { name: 'John', age: 30 };
+
+  build() {
+    Column() {
+      Text(this.user.name)
+    }
+  }
+}
+
+@Component
+struct UserEditor {
+  @Link userNa[ToFill]
+
+  build() {
+    Column() {
+      Text("")
+      Text("")
+    }
+  }
+}
+
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+}
+
+@Component
+struct UserEditor {
+  @Link userName: string = '';
+
+  build() {
+    Column() {
+-------------------------------[                   fullText                  ]--------------------------------
+}
+
+@Component
+struct UserEditor {
+  @Link userName: string = '';
+  @Link userAge: number = 0;
+
+  build() {
+    Column() {
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/twoWayBinding.ets",
+  "lineNumberOneIndexed": 50,
+  "text": "Text(\"\")\nText(\"\")\n}\n}\n}",
+  "shouldRetriggerCpp": true
+}

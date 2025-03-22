@@ -1,0 +1,274 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "bd4b3a46-f025-4a66-b3cb-bfa7b6e9c90f",
+    "timestamp": "2025-03-19T13:13:01.149Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/twoWayBinding.ets",
+          "diffHistory": [
+            "16+|  @Link t\n",
+            "16-|  @Link t\n16+|  @Link target: number = 0;\n",
+            "22-|          //\n22+|          this.target++;\n",
+            "9-|      LinkChildComponent()\n9+|      LinkChildComponent({ target: this.parentCount })\n",
+            "46+|  @Link userName: string = '';\n47+|  @Link userAge: number = 0;\n",
+            "53+|      TextField({ value: this.userAge, onChange: (value: number) => { this.userAge = value } })\n",
+            "51-|      Text(\"\")\n52-|      Text(\"\")\n51+|      Text(\"Name:\")\n52+|      TextField({ value: this.userName, onChange: (value: string) => { this.userName = value } })\n53+|      Text(\"Age:\")\n",
+            "51-|      Text(\"Name:\")\n51+|        Text(\"Name:\")\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/twoWayBinding.ets",
+        "contents": "@Entry\n@Component\nstruct ParentComponent {\n  @State parentCount: number = 0;\n\n  build() {\n    Column() {\n      Text(this.parentCount.toString())\n      LinkChildComponent({ target: this.parentCount })\n    }\n  }\n}\n\n@Component\nstruct LinkChildComponent {\n  @Link target: number = 0;\n\n  build() {\n    Column() {\n      Button()\n        .onClick(() => {\n          this.target++;\n        })\n    }\n  }\n}\n\ninterface User {\n  name: string;\n  age: number;\n}\n\n@Component\nstruct ComplexBindingExample {\n  @State user: User = { name: 'John', age: 30 };\n\n  build() {\n    Column() {\n      Text(this.user.name)\n    }\n  }\n}\n\n@Component\nstruct UserEditor {\n  @Link userName: string = '';\n  @Link userAge: number = 0;\n\n  build() {\n    Column() {\n        Text(\"Name:\")\n      TextField({ value: this.userName, onChange: (value: string) => { this.userName = value } })\n      Text(\"Age:\")\n      TextField({ value: this.userAge, onChange: (value: number) => { this.userAge = value } })\n    }\n  }\n}\n\n\n",
+        "cursorPosition": {
+          "line": 50,
+          "column": 8
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 31,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1742389981198,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.300048828125,
+      "timeAtRequestSend": 1742389981198
+    },
+    "generateUuid": "bd4b3a46-f025-4a66-b3cb-bfa7b6e9c90f",
+    "timestamp": "2025-03-19T13:13:01.200Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "bd4b3a46-f025-4a66-b3cb-bfa7b6e9c90f",
+    "timestamp": "2025-03-19T13:13:01.573Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "    Column() {\n     ",
+      "rangeToReplace": {
+        "startLineNumber": 50,
+        "endLineNumberInclusive": 55
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "bd4b3a46-f025-4a66-b3cb-bfa7b6e9c90f",
+    "timestamp": "2025-03-19T13:13:01.575Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Text(\"Name:\")\n     "
+    },
+    "generationUUID": "bd4b3a46-f025-4a66-b3cb-bfa7b6e9c90f",
+    "timestamp": "2025-03-19T13:13:01.588Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Text"
+    },
+    "generationUUID": "bd4b3a46-f025-4a66-b3cb-bfa7b6e9c90f",
+    "timestamp": "2025-03-19T13:13:01.601Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Field"
+    },
+    "generationUUID": "bd4b3a46-f025-4a66-b3cb-bfa7b6e9c90f",
+    "timestamp": "2025-03-19T13:13:01.607Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "({ value: this.userName"
+    },
+    "generationUUID": "bd4b3a46-f025-4a66-b3cb-bfa7b6e9c90f",
+    "timestamp": "2025-03-19T13:13:01.618Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ","
+    },
+    "generationUUID": "bd4b3a46-f025-4a66-b3cb-bfa7b6e9c90f",
+    "timestamp": "2025-03-19T13:13:01.635Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " onChange: (value: string) =>"
+    },
+    "generationUUID": "bd4b3a46-f025-4a66-b3cb-bfa7b6e9c90f",
+    "timestamp": "2025-03-19T13:13:01.640Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " { this.userName"
+    },
+    "generationUUID": "bd4b3a46-f025-4a66-b3cb-bfa7b6e9c90f",
+    "timestamp": "2025-03-19T13:13:01.651Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "bd4b3a46-f025-4a66-b3cb-bfa7b6e9c90f",
+    "timestamp": "2025-03-19T13:13:01.662Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " value } })\n      Text(\"Age"
+    },
+    "generationUUID": "bd4b3a46-f025-4a66-b3cb-bfa7b6e9c90f",
+    "timestamp": "2025-03-19T13:13:01.672Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "bd4b3a46-f025-4a66-b3cb-bfa7b6e9c90f",
+    "timestamp": "2025-03-19T13:13:01.685Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\")\n      TextField({ value:"
+    },
+    "generationUUID": "bd4b3a46-f025-4a66-b3cb-bfa7b6e9c90f",
+    "timestamp": "2025-03-19T13:13:01.697Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " this"
+    },
+    "generationUUID": "bd4b3a46-f025-4a66-b3cb-bfa7b6e9c90f",
+    "timestamp": "2025-03-19T13:13:01.706Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ".userAge, onChange: (value"
+    },
+    "generationUUID": "bd4b3a46-f025-4a66-b3cb-bfa7b6e9c90f",
+    "timestamp": "2025-03-19T13:13:01.717Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": number) => { this.user"
+    },
+    "generationUUID": "bd4b3a46-f025-4a66-b3cb-bfa7b6e9c90f",
+    "timestamp": "2025-03-19T13:13:01.733Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Age = value } })\n    }"
+    },
+    "generationUUID": "bd4b3a46-f025-4a66-b3cb-bfa7b6e9c90f",
+    "timestamp": "2025-03-19T13:13:01.738Z"
+  },
+  {
+    "firstChunkValue": "    Column() {\n      Text(\"Name:\")\n      TextField({ value: this.userName, onChange: (value: string) => { this.userName = value } })\n      Text(\"Age:\")\n      TextField({ value: this.userAge, onChange: (value: number) => { this.userAge = value } })\n    }",
+    "generationUUID": "bd4b3a46-f025-4a66-b3cb-bfa7b6e9c90f",
+    "timestamp": "2025-03-19T13:13:01.773Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": false
+    },
+    "generationUUID": "bd4b3a46-f025-4a66-b3cb-bfa7b6e9c90f",
+    "timestamp": "2025-03-19T13:13:01.774Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "bd4b3a46-f025-4a66-b3cb-bfa7b6e9c90f",
+    "timestamp": "2025-03-19T13:13:01.774Z"
+  },
+  {
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/twoWayBinding.ets",
+      "lineNumberOneIndexed": 39,
+      "text": "Text(this.user.name)\n}\n}\n}\n",
+      "shouldRetriggerCpp": true
+    },
+    "predictionId": "3460181c-2b23-4574-ac76-362bff713974",
+    "generationUUID": "bd4b3a46-f025-4a66-b3cb-bfa7b6e9c90f",
+    "timestamp": "2025-03-19T13:13:01.856Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "cursorPredictionTarget": {
+        "relativePath": "entry/src/main/ets/utils/twoWayBinding.ets",
+        "lineNumberOneIndexed": 39,
+        "expectedContent": "Text(this.user.name)\n}\n}\n}\n",
+        "shouldRetriggerCpp": true
+      }
+    },
+    "generationUUID": "bd4b3a46-f025-4a66-b3cb-bfa7b6e9c90f",
+    "timestamp": "2025-03-19T13:13:01.857Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is false",
+    "invokePlace": "before this.displayFusedCursorPrediction, about to show prediction icon",
+    "isValidCase4firstChunkValue": {
+      "valid": false
+    },
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/twoWayBinding.ets",
+      "lineNumberOneIndexed": 39,
+      "text": "Text(this.user.name)\n}\n}\n}\n",
+      "shouldRetriggerCpp": true
+    },
+    "predictionId": "3460181c-2b23-4574-ac76-362bff713974",
+    "generationUUID": "bd4b3a46-f025-4a66-b3cb-bfa7b6e9c90f",
+    "timestamp": "2025-03-19T13:13:01.858Z"
+  },
+  {
+    "action": "displayFusedCursorPrediction",
+    "predictionId": "3460181c-2b23-4574-ac76-362bff713974",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/twoWayBinding.ets",
+      "lineNumberOneIndexed": 39,
+      "text": "Text(this.user.name)\n}\n}\n}\n",
+      "shouldRetriggerCpp": true
+    },
+    "oldText": "",
+    "newText": "",
+    "timestamp": "2025-03-19T13:13:01.858Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "bd4b3a46-f025-4a66-b3cb-bfa7b6e9c90f",
+    "timestamp": "2025-03-19T13:13:01.858Z"
+  }
+]

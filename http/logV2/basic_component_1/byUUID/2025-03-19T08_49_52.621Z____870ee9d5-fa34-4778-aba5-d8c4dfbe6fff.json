@@ -1,0 +1,290 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "870ee9d5-fa34-4778-aba5-d8c4dfbe6fff",
+    "timestamp": "2025-03-19T08:49:52.621Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/basicComponent.ets",
+          "diffHistory": [
+            "1+|@Entry\n2+|@Component\n3+|struct BasicComponent {\n4+|  @State message: string = 'Hello, World!'\n5+|}\n6+|\n",
+            "4-|  @State message: string = 'Hello, World!'\n",
+            "4-|  \n4+|  build() {\n5+|    Column() {\n6+|      Text('Hello, World!')\n7+|    }\n8+|  }\n",
+            "6-|      Text('Hello, World!')\n6+|      Text(this.message)\n",
+            "4+|  @State message: string = 'Hello, World!'\n5+|\n8+|      Row\n10+|      }\n",
+            "8-|      Row\n9-|      Text(this.message)\n8+|      Row() {\n9+|        Text(this.message)\n11+|      .width('100%')\n12+|      .height(100)\n13+|      .backgroundColor('#000000')\n14+|      .justifyContent(FlexAlign.Center)\n15+|      .alignItems(ItemAlign.Center)\n16+|\n17+|      Stack() {\n18+|        Text('Hello, World!')\n19+|        Text('Hello, World!')\n20+|        Text('Hello, World!')\n21+|      }\n22+|      .width('100%')\n23+|      .height(100)\n",
+            "16-|      \n17-|      \n17+|      Button() {\n18+|        Text('Click me')\n19+|      }\n20+|      .width('100%')\n21+|      .height(100)\n22+|      .backgroundColor('#000000')\n23+|      .justifyContent(FlexAlign.Center)\n24+|      .alignItems(ItemAlign.Center)\n25+|\n",
+            "37+|@Entry\n38+|@Component\n39+|struct BasicComponent {\n40+|  @State message: string = 'Hello, World!'\n41+|  \n42+|}\n",
+            "37-|@Entry\n",
+            "38-|struct BasicComponent {\n38+|struct ListExample {\n",
+            "41+|  build() {\n42+|    List() {\n43+|      Text('Hello, World!')\n44+|    }\n45+|  }\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/basicComponent.ets",
+        "contents": "@Entry\n@Component\nstruct BasicComponent {\n  @State message: string = 'Hello, World!'\n\n  build() {\n    Column() {\n      Row() {\n        Text(this.message)\n      }\n      .width('100%')\n      .height(100)\n      .backgroundColor('#000000')\n      .justifyContent(FlexAlign.Center)\n      .alignItems(ItemAlign.Center)\n\n      Button() {\n        Text('Click me')\n      }\n      .width('100%')\n      .height(100)\n      .backgroundColor('#000000')\n      .justifyContent(FlexAlign.Center)\n      .alignItems(ItemAlign.Center)\n\n      Stack() {\n        Text('Hello, World!')\n        Text('Hello, World!')\n        Text('Hello, World!')\n      }\n      .width('100%')\n      .height(100)\n    }\n  }\n}\n\n@Component\nstruct ListExample {\n  @State message: string = 'Hello, World!'\n\n  build() {\n    List() {\n      Text('Hello, World!')\n    }\n  }\n}\n",
+        "cursorPosition": {
+          "line": 43,
+          "column": 2
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 54,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1742374192664,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.60009765625,
+      "timeAtRequestSend": 1742374192664
+    },
+    "generateUuid": "870ee9d5-fa34-4778-aba5-d8c4dfbe6fff",
+    "timestamp": "2025-03-19T08:49:52.666Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "870ee9d5-fa34-4778-aba5-d8c4dfbe6fff",
+    "timestamp": "2025-03-19T08:49:53.033Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "    List() {\n      Text('Hello, World!')\n     ",
+      "rangeToReplace": {
+        "startLineNumber": 42,
+        "endLineNumberInclusive": 47
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "870ee9d5-fa34-4778-aba5-d8c4dfbe6fff",
+    "timestamp": "2025-03-19T08:49:53.034Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Text('Hello, World!')\n"
+    },
+    "generationUUID": "870ee9d5-fa34-4778-aba5-d8c4dfbe6fff",
+    "timestamp": "2025-03-19T08:49:53.055Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "     "
+    },
+    "generationUUID": "870ee9d5-fa34-4778-aba5-d8c4dfbe6fff",
+    "timestamp": "2025-03-19T08:49:53.068Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Text('Hello, World!')\n"
+    },
+    "generationUUID": "870ee9d5-fa34-4778-aba5-d8c4dfbe6fff",
+    "timestamp": "2025-03-19T08:49:53.079Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "   "
+    },
+    "generationUUID": "870ee9d5-fa34-4778-aba5-d8c4dfbe6fff",
+    "timestamp": "2025-03-19T08:49:53.093Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " }\n   "
+    },
+    "generationUUID": "870ee9d5-fa34-4778-aba5-d8c4dfbe6fff",
+    "timestamp": "2025-03-19T08:49:53.110Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ."
+    },
+    "generationUUID": "870ee9d5-fa34-4778-aba5-d8c4dfbe6fff",
+    "timestamp": "2025-03-19T08:49:53.122Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "width"
+    },
+    "generationUUID": "870ee9d5-fa34-4778-aba5-d8c4dfbe6fff",
+    "timestamp": "2025-03-19T08:49:53.134Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "('100%')\n   "
+    },
+    "generationUUID": "870ee9d5-fa34-4778-aba5-d8c4dfbe6fff",
+    "timestamp": "2025-03-19T08:49:53.145Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " .height"
+    },
+    "generationUUID": "870ee9d5-fa34-4778-aba5-d8c4dfbe6fff",
+    "timestamp": "2025-03-19T08:49:53.161Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "(100)\n "
+    },
+    "generationUUID": "870ee9d5-fa34-4778-aba5-d8c4dfbe6fff",
+    "timestamp": "2025-03-19T08:49:53.173Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " }\n}"
+    },
+    "generationUUID": "870ee9d5-fa34-4778-aba5-d8c4dfbe6fff",
+    "timestamp": "2025-03-19T08:49:53.184Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "870ee9d5-fa34-4778-aba5-d8c4dfbe6fff",
+    "timestamp": "2025-03-19T08:49:53.198Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "870ee9d5-fa34-4778-aba5-d8c4dfbe6fff",
+    "timestamp": "2025-03-19T08:49:53.225Z"
+  },
+  {
+    "firstChunkValue": "    List() {\n      Text('Hello, World!')\n      Text('Hello, World!')\n      Text('Hello, World!')\n    }\n    .width('100%')\n    .height(100)\n  }\n}\n",
+    "generationUUID": "870ee9d5-fa34-4778-aba5-d8c4dfbe6fff",
+    "timestamp": "2025-03-19T08:49:53.237Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "    List() {\n      Text('Hello, World!')\n      Text('Hello, World!')\n      Text('Hello, World!')\n    }\n    .width('100%')\n    .height(100)\n  }\n}\n"
+    },
+    "generationUUID": "870ee9d5-fa34-4778-aba5-d8c4dfbe6fff",
+    "timestamp": "2025-03-19T08:49:53.239Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "902fccc3-968a-4447-962e-620da6ce4145",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/basicComponent.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 54,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 54,
+      "monotonicallyIncreasingSuggestionId": 47,
+      "range": {
+        "startLineNumber": 42,
+        "startColumn": 1,
+        "endLineNumberInclusive": 47,
+        "endColumn": 1
+      },
+      "replaceText": "    List() {\n      Text('Hello, World!')\n      Text('Hello, World!')\n      Text('Hello, World!')\n    }\n    .width('100%')\n    .height(100)\n  }\n}\n",
+      "originalText": "    List() {\n      Text('Hello, World!')\n    }\n  }\n}\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 42,
+        "startColumn": 1,
+        "endLineNumberInclusive": 47,
+        "endColumn": 1
+      },
+      "diffText": "    List() {\n      Text('Hello, World!')\n      Text('Hello, World!')\n      Text('Hello, World!')\n    }\n    .width('100%')\n    .height(100)\n  }\n}\n",
+      "fullOriginalText": "    List() {\n      Text('Hello, World!')\n    }\n  }\n}\n",
+      "suggestionTriggerTime": 1742374192577.7998,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "870ee9d5-fa34-4778-aba5-d8c4dfbe6fff",
+      "selection": {
+        "startLineNumber": 42,
+        "startColumn": 1,
+        "endLineNumberInclusive": 47,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "d1c8568d-74c7-4980-adb4-209b963bf0e3",
+      "undoRedoGroup": {
+        "id": 47,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 42,
+        "startColumn": 1,
+        "endLineNumber": 47,
+        "endColumn": 1
+      },
+      "trackedText": "    List() {\n      Text('Hello, World!')\n    }\n  }\n}\n"
+    },
+    "generationUUID": "870ee9d5-fa34-4778-aba5-d8c4dfbe6fff",
+    "timestamp": "2025-03-19T08:49:53.240Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "870ee9d5-fa34-4778-aba5-d8c4dfbe6fff",
+    "timestamp": "2025-03-19T08:49:53.394Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "d1c8568d-74c7-4980-adb4-209b963bf0e3",
+    "generationUUID": "870ee9d5-fa34-4778-aba5-d8c4dfbe6fff",
+    "timestamp": "2025-03-19T08:49:53.401Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "    List() {\n      Text('Hello, World!')\n      Text('Hello, World!')\n      Text('Hello, World!')\n    }\n    .width('100%')\n    .height(100)\n  }\n}\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "d1c8568d-74c7-4980-adb4-209b963bf0e3",
+    "generationUUID": "870ee9d5-fa34-4778-aba5-d8c4dfbe6fff",
+    "timestamp": "2025-03-19T08:49:53.401Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "d1c8568d-74c7-4980-adb4-209b963bf0e3",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T08:49:53.402Z"
+  }
+]

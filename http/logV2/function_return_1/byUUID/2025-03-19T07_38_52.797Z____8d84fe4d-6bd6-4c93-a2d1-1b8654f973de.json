@@ -1,0 +1,449 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:52.797Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/functionReturn.ets",
+          "diffHistory": [
+            "1+|function add(a: number, b: number): number {\n2+|    return a + b;\n3+|}\n4+|\n5+|function subtract(a: number, b: number): number {\n6+|    return a - b;\n7+|}\n8+|\n9+|let sum = add(1, 2);\n10+|\n11+|function getUser(name: string, age: number): { name: string, age: number } {\n12+|    return { name, age };\n13+|}\n14+|\n15+|let user = getUser(\"John\", 30);\n16+|\n17+|  \n",
+            "11-|function getUser(name: string, age: number): { name: string, age: number } {\n11+|interface User {\n12+|    name: string;\n13+|    age: number;\n14+|}\n15+|\n16+|function getUser(name: string, age: number): User {\n",
+            "22+|function wrapValue<T>(value: T): {data {\n23+|    return { data: value };\n24+|}\n25+|\n26+|let wrappedValue = wrapValue(10);\n27+|\n28+|\n",
+            "22-|function wrapValue<T>(value: T): {data {\n22+|function wrapValue<T>(value: T): {data: T}   {\n",
+            "28+|let wrappedString = wrapValue(\"Hello\");\n30+|let wrappedBoolean = wrapValue(true);\n31+|\n32+|let wrappedArray = wrapValue([1, 2, 3]);\n33+|\n34+|\n",
+            "22-|function wrapValue<T>(value: T): {data: T}   {\n22+|interface Wrapper<T> {\n23+|    data: T;\n24+|}\n25+|\n26+|function wrapValue<T>(value: T): Wrapper<T> {\n",
+            "38-|\n38+|async function fetchData(): \n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/functionReturn.ets",
+        "contents": "function add(a: number, b: number): number {\n    return a + b;\n}\n\nfunction subtract(a: number, b: number): number {\n    return a - b;\n}\n\nlet sum = add(1, 2);\n\ninterface User {\n    name: string;\n    age: number;\n}\n\nfunction getUser(name: string, age: number): User {\n    return { name, age };\n}\n\nlet user = getUser(\"John\", 30);\n\ninterface Wrapper<T> {\n    data: T;\n}\n\nfunction wrapValue<T>(value: T): Wrapper<T> {\n    return { data: value };\n}\n\nlet wrappedValue = wrapValue(10);\n\nlet wrappedString = wrapValue(\"Hello\");\n\nlet wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): \n",
+        "cursorPosition": {
+          "line": 37,
+          "column": 28
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 148,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742369932838,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.39990234375,
+      "timeAtRequestSend": 1742369932838
+    },
+    "generateUuid": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:52.840Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise",
+      "rangeToReplace": {
+        "startLineNumber": 34,
+        "endLineNumberInclusive": 39
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.319Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.320Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "<"
+    },
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.363Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "string"
+    },
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.371Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ">"
+    },
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.372Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.380Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n    return new"
+    },
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.390Z"
+  },
+  {
+    "firstChunkValue": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<string> {\n",
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.393Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<string> {\n"
+    },
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.394Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Promise"
+    },
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.405Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "(("
+    },
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.411Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "resolve"
+    },
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.420Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ")"
+    },
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.429Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " =>"
+    },
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.438Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.446Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.459Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "       "
+    },
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.465Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " setTimeout"
+    },
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.472Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "(()"
+    },
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.483Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " =>"
+    },
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.492Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {\n           "
+    },
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.503Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " resolve"
+    },
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.510Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "(\""
+    },
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.520Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Data"
+    },
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.530Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " fetched"
+    },
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.540Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\");"
+    },
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.554Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n       "
+    },
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.564Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " },"
+    },
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.569Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.577Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "1"
+    },
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.589Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "0"
+    },
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.600Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "0"
+    },
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.606Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "0);"
+    },
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.616Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n   "
+    },
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.625Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " });"
+    },
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.631Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.640Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}"
+    },
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.649Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.666Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.666Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.666Z"
+  },
+  {
+    "fullText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<string> {\n    return new Promise((resolve) => {\n        setTimeout(() => {\n            resolve(\"Data fetched\");\n        }, 1000);\n    });\n}\n",
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.666Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<string> {\n"
+    },
+    "fullText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<string> {\n    return new Promise((resolve) => {\n        setTimeout(() => {\n            resolve(\"Data fetched\");\n        }, 1000);\n    });\n}\n",
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.667Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && currentSuggestion uniqueId is different && need to create newSuggestion according fullText",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "8359cadb-88df-457e-a4b2-d4990e084120",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 148,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 148,
+      "monotonicallyIncreasingSuggestionId": 130,
+      "range": {
+        "startLineNumber": 34,
+        "startColumn": 1,
+        "endLineNumberInclusive": 39,
+        "endColumn": 1
+      },
+      "replaceText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<string> {\n    return new Promise((resolve) => {\n        setTimeout(() => {\n            resolve(\"Data fetched\");\n        }, 1000);\n    });\n}\n",
+      "originalText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): \n",
+      "startingSuggestionRange": {
+        "startLineNumber": 34,
+        "startColumn": 1,
+        "endLineNumberInclusive": 39,
+        "endColumn": 1
+      },
+      "diffText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<string> {\n    return new Promise((resolve) => {\n        setTimeout(() => {\n            resolve(\"Data fetched\");\n        }, 1000);\n    });\n}\n",
+      "fullOriginalText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): \n",
+      "suggestionTriggerTime": 1742369932792,
+      "greens": [],
+      "source": "typing",
+      "requestId": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+      "selection": {
+        "startLineNumber": 34,
+        "startColumn": 1,
+        "endLineNumberInclusive": 39,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "9b5f6939-7220-4002-af3a-4580c34370c2",
+      "undoRedoGroup": {
+        "id": 130,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.668Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "9b5f6939-7220-4002-af3a-4580c34370c2",
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.671Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "let wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\nasync function fetchData(): Promise<string> {\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "9b5f6939-7220-4002-af3a-4580c34370c2",
+    "generationUUID": "8d84fe4d-6bd6-4c93-a2d1-1b8654f973de",
+    "timestamp": "2025-03-19T07:38:53.671Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "9b5f6939-7220-4002-af3a-4580c34370c2",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T07:38:53.671Z"
+  }
+]

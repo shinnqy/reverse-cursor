@@ -1,0 +1,68 @@
+{"line":30,"column":19}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+try {
+  JSON.parse("{ invalid JSON }");
+} catch (error) {
+  console.log(error.message);
+}
+
+class NetworkError extends Error {
+  statusCode: number;
+  constructor(message: string, code: number) {
+    super(message);
+    this.statusCode = code;
+  }
+}
+
+try {
+  throw new NetworkError("Timeout", 504);
+} catch (error) {
+  if (error instanceof NetworkError) {
+    console.log(error.statusCode);
+  }
+}
+
+fetch("https://api.example.com")
+  .then(res => res.json())
+  .catch(error => {
+    console.error(error.message);
+  });
+
+interface User { profile?: { email?: string } }
+let user: User = {};
+user.profile?.email[ToFill].toLowerCase();
+
+type Result = string | Error;
+function getResult(): Result {
+  return Math.random() > 0.5 ? "OK" : new Error("Failed");
+}
+
+let result = getResult();
+if (result instanceof Error) {
+} else {
+}
+
+async function loadData() {
+  try {
+    await fetch("invalid-url");
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+try {
+  let data = {} as { items: string[] };
+  data.items.push("test");
+} catch (error) {
+}
+-------------------------------[               firstChunkValue               ]--------------------------------
+interface User { profile?: { email?: string } }
+let user: User = {};
+user.profile?.email?.toLowerCase();
+
+let result = user.profile?.email?.toLowerCase();
+
+if (result) {
+  console.log(result);
+}

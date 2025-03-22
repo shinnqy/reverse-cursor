@@ -1,0 +1,530 @@
+[
+  {
+    "intent": "cursor_prediction",
+    "generationUUID": "61823a51-b0e1-4363-95c2-4d0e7f03cef8",
+    "timestamp": "2025-03-09T13:12:35.912Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "src/components/test2.ts",
+          "diffHistory": [
+            "1+|function changeLight(light: TrafficLight) {\n2+|  light = 'green';\n3+|}\n4+|\n",
+            "2-|  light = 'green';\n",
+            "2-|  \n2+|  switch (light) {\n3+|    case 'red':\n4+|      return 'green';\n5+|    case 'green':\n6+|      return 'yellow';\n7+|      \n8+|  }\n",
+            "7-|\n7+|    case 'yellow':\n8+|      return 'red';\n9+|    default:\n10+|      return 'red';\n",
+            "3-|    case 'red':\n3+|    case light.RED:\n",
+            "5-|    case 'green':\n6-|      return 'yellow';\n5+|    case 'green'ht.GREEN:\n6+|      return light.YELLOW;\n",
+            "4-|      return 'green';\n5-|    case 'green'ht.GREEN:\n4+|      return 'green'ht.GREEN;\n5+|    case light.GREEN:\n",
+            "4-|      return 'green'ht.GREEN;\n4+|      return light.GREEN;\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "linterErrors": {
+        "relativeWorkspacePath": "src/components/test2.ts",
+        "errors": [
+          {
+            "message": "Cannot find name 'TrafficLight'.",
+            "range": {
+              "startPosition": {
+                "line": 1,
+                "column": 29
+              },
+              "endPosition": {
+                "line": 1,
+                "column": 41
+              }
+            },
+            "source": "ts",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          },
+          {
+            "message": "'changeLight' is defined but never used.",
+            "range": {
+              "startPosition": {
+                "line": 1,
+                "column": 10
+              },
+              "endPosition": {
+                "line": 1,
+                "column": 21
+              }
+            },
+            "source": "eslint",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          },
+          {
+            "message": "Unterminated string literal.",
+            "range": {
+              "startPosition": {
+                "line": 3,
+                "column": 12
+              },
+              "endPosition": {
+                "line": 3,
+                "column": 12
+              }
+            },
+            "source": "",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          },
+          {
+            "message": "':' expected.",
+            "range": {
+              "startPosition": {
+                "line": 4,
+                "column": 7
+              },
+              "endPosition": {
+                "line": 4,
+                "column": 13
+              }
+            },
+            "source": "",
+            "relatedInformation": [],
+            "severity": "DIAGNOSTIC_SEVERITY_ERROR"
+          }
+        ],
+        "fileContents": ""
+      },
+      "currentFile": {
+        "relativeWorkspacePath": "src/components/test2.ts",
+        "contents": "function changeLight(light: TrafficLight) {\n  switch (light) {\n    case light.RED:\n      return light.GREEN;\n    case light.GREEN:\n      return light.YELLOW;\n    case 'yellow':\n      return 'red';\n    default:\n      return 'red';\n  }\n}\n\n",
+        "cursorPosition": {
+          "line": 6,
+          "column": 0
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 52,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/Documents/personal/vite-react-demo2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "src/components/test.ts",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            4
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 4,
+              "endLineNumberInclusive": 24
+            }
+          ],
+          "lastViewedAt": 1741525907939
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "cursor_prediction"
+      },
+      "clientTime": 1741525955917,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "8u65ni1hw3pqzyyqn4vyf",
+      "timeSinceRequestStart": 6,
+      "timeAtRequestSend": 1741525955917
+    },
+    "generateUuid": "61823a51-b0e1-4363-95c2-4d0e7f03cef8",
+    "timestamp": "2025-03-09T13:12:35.918Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "61823a51-b0e1-4363-95c2-4d0e7f03cef8",
+    "timestamp": "2025-03-09T13:12:36.287Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "      return light.GREEN;\n    case light.GREEN:\n      return light.YELLOW;\n    case light",
+      "rangeToReplace": {
+        "startLineNumber": 4,
+        "endLineNumberInclusive": 10
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "61823a51-b0e1-4363-95c2-4d0e7f03cef8",
+    "timestamp": "2025-03-09T13:12:36.289Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ".Y"
+    },
+    "generationUUID": "61823a51-b0e1-4363-95c2-4d0e7f03cef8",
+    "timestamp": "2025-03-09T13:12:36.304Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "61823a51-b0e1-4363-95c2-4d0e7f03cef8",
+    "timestamp": "2025-03-09T13:12:36.379Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "ELLOW:"
+    },
+    "generationUUID": "61823a51-b0e1-4363-95c2-4d0e7f03cef8",
+    "timestamp": "2025-03-09T13:12:36.381Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "     "
+    },
+    "generationUUID": "61823a51-b0e1-4363-95c2-4d0e7f03cef8",
+    "timestamp": "2025-03-09T13:12:36.382Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " return light"
+    },
+    "generationUUID": "61823a51-b0e1-4363-95c2-4d0e7f03cef8",
+    "timestamp": "2025-03-09T13:12:36.382Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "61823a51-b0e1-4363-95c2-4d0e7f03cef8",
+    "timestamp": "2025-03-09T13:12:36.383Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "RED"
+    },
+    "generationUUID": "61823a51-b0e1-4363-95c2-4d0e7f03cef8",
+    "timestamp": "2025-03-09T13:12:36.383Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";"
+    },
+    "generationUUID": "61823a51-b0e1-4363-95c2-4d0e7f03cef8",
+    "timestamp": "2025-03-09T13:12:36.384Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n   "
+    },
+    "generationUUID": "61823a51-b0e1-4363-95c2-4d0e7f03cef8",
+    "timestamp": "2025-03-09T13:12:36.385Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " default"
+    },
+    "generationUUID": "61823a51-b0e1-4363-95c2-4d0e7f03cef8",
+    "timestamp": "2025-03-09T13:12:36.386Z"
+  },
+  {
+    "firstChunkValue": "      return light.GREEN;\n    case light.GREEN:\n      return light.YELLOW;\n    case light.YELLOW:\n      return light.RED;\n    default:\n      return light.RED;",
+    "generationUUID": "61823a51-b0e1-4363-95c2-4d0e7f03cef8",
+    "timestamp": "2025-03-09T13:12:36.575Z"
+  },
+  {
+    "fusedCursorPrediction": {
+      "relativePath": "src/components/test2.ts",
+      "lineNumberOneIndexed": 13,
+      "text": "\n",
+      "shouldRetriggerCpp": false
+    },
+    "predictionId": "d6ad0cc0-02ef-40ad-a7ce-c6d5023dcd89",
+    "generationUUID": "61823a51-b0e1-4363-95c2-4d0e7f03cef8",
+    "timestamp": "2025-03-09T13:12:36.576Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":\n      return light"
+    },
+    "generationUUID": "61823a51-b0e1-4363-95c2-4d0e7f03cef8",
+    "timestamp": "2025-03-09T13:12:36.577Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ".RED;"
+    },
+    "generationUUID": "61823a51-b0e1-4363-95c2-4d0e7f03cef8",
+    "timestamp": "2025-03-09T13:12:36.578Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "61823a51-b0e1-4363-95c2-4d0e7f03cef8",
+    "timestamp": "2025-03-09T13:12:36.579Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "cursorPredictionTarget": {
+        "relativePath": "src/components/test2.ts",
+        "lineNumberOneIndexed": 13,
+        "expectedContent": "\n",
+        "shouldRetriggerCpp": false
+      }
+    },
+    "generationUUID": "61823a51-b0e1-4363-95c2-4d0e7f03cef8",
+    "timestamp": "2025-03-09T13:12:36.580Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "61823a51-b0e1-4363-95c2-4d0e7f03cef8",
+    "timestamp": "2025-03-09T13:12:36.581Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "      return light.GREEN;\n    case light.GREEN:\n      return light.YELLOW;\n    case light.YELLOW:\n      return light.RED;\n    default:\n      return light.RED;"
+    },
+    "generationUUID": "61823a51-b0e1-4363-95c2-4d0e7f03cef8",
+    "timestamp": "2025-03-09T13:12:36.609Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "      return light.GREEN;\n    case light.GREEN:\n      return light.YELLOW;\n    case light.YELLOW:\n      return light.RED;\n    default:\n      return light.RED;"
+    },
+    "fusedCursorPrediction": {
+      "relativePath": "src/components/test2.ts",
+      "lineNumberOneIndexed": 13,
+      "text": "\n",
+      "shouldRetriggerCpp": false
+    },
+    "predictionId": "d6ad0cc0-02ef-40ad-a7ce-c6d5023dcd89",
+    "generationUUID": "61823a51-b0e1-4363-95c2-4d0e7f03cef8",
+    "timestamp": "2025-03-09T13:12:36.620Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "d6ad0cc0-02ef-40ad-a7ce-c6d5023dcd89",
+    "fusedCursorPrediction": {
+      "relativePath": "src/components/test2.ts",
+      "lineNumberOneIndexed": 13,
+      "text": "\n",
+      "shouldRetriggerCpp": false
+    },
+    "timestamp": "2025-03-09T13:12:36.622Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "7e69d993-3657-4ec5-bb80-5f0501435e8f",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/Documents/personal/vite-react-demo2/src/components/test2.ts",
+        "external": "file:///Users/shinn/Documents/personal/vite-react-demo2/src/components/test2.ts",
+        "path": "/Users/shinn/Documents/personal/vite-react-demo2/src/components/test2.ts",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 52,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 52,
+      "monotonicallyIncreasingSuggestionId": 33,
+      "range": {
+        "startLineNumber": 4,
+        "startColumn": 1,
+        "endLineNumberInclusive": 10,
+        "endColumn": 20
+      },
+      "replaceText": "      return light.GREEN;\n    case light.GREEN:\n      return light.YELLOW;\n    case light.YELLOW:\n      return light.RED;\n    default:\n      return light.RED;",
+      "originalText": "      return light.GREEN;\n    case light.GREEN:\n      return light.YELLOW;\n    case 'yellow':\n      return 'red';\n    default:\n      return 'red';",
+      "startingSuggestionRange": {
+        "startLineNumber": 4,
+        "startColumn": 1,
+        "endLineNumberInclusive": 10,
+        "endColumn": 20
+      },
+      "diffText": "      return light.GREEN;\n    case light.GREEN:\n      return light.YELLOW;\n    case light.YELLOW:\n      return light.RED;\n    default:\n      return light.RED;",
+      "fullOriginalText": "      return light.GREEN;\n    case light.GREEN:\n      return light.YELLOW;\n    case 'yellow':\n      return 'red';\n    default:\n      return 'red';",
+      "suggestionTriggerTime": 1741525955910.3,
+      "greens": [],
+      "source": "cursor_prediction",
+      "requestId": "61823a51-b0e1-4363-95c2-4d0e7f03cef8",
+      "selection": {
+        "startLineNumber": 4,
+        "startColumn": 1,
+        "endLineNumberInclusive": 10,
+        "endColumn": 20
+      },
+      "fusedCursorPredictionId": "d6ad0cc0-02ef-40ad-a7ce-c6d5023dcd89",
+      "undoRedoGroup": {
+        "id": 34,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "f;198"
+    },
+    "generationUUID": "61823a51-b0e1-4363-95c2-4d0e7f03cef8",
+    "timestamp": "2025-03-09T13:12:37.458Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "7e69d993-3657-4ec5-bb80-5f0501435e8f",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/Documents/personal/vite-react-demo2/src/components/test2.ts",
+        "external": "file:///Users/shinn/Documents/personal/vite-react-demo2/src/components/test2.ts",
+        "path": "/Users/shinn/Documents/personal/vite-react-demo2/src/components/test2.ts",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 52,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 52,
+      "monotonicallyIncreasingSuggestionId": 33,
+      "range": {
+        "startLineNumber": 4,
+        "startColumn": 1,
+        "endLineNumberInclusive": 10,
+        "endColumn": 20
+      },
+      "replaceText": "      return light.GREEN;\n    case light.GREEN:\n      return light.YELLOW;\n    case light.YELLOW:\n      return light.RED;\n    default:\n      return light.RED;",
+      "originalText": "      return light.GREEN;\n    case light.GREEN:\n      return light.YELLOW;\n    case 'yellow':\n      return 'red';\n    default:\n      return 'red';",
+      "startingSuggestionRange": {
+        "startLineNumber": 4,
+        "startColumn": 1,
+        "endLineNumberInclusive": 10,
+        "endColumn": 20
+      },
+      "diffText": "      return light.GREEN;\n    case light.GREEN:\n      return light.YELLOW;\n    case light.YELLOW:\n      return light.RED;\n    default:\n      return light.RED;",
+      "fullOriginalText": "      return light.GREEN;\n    case light.GREEN:\n      return light.YELLOW;\n    case 'yellow':\n      return 'red';\n    default:\n      return 'red';",
+      "suggestionTriggerTime": 1741525955910.3,
+      "greens": [],
+      "source": "cursor_prediction",
+      "requestId": "61823a51-b0e1-4363-95c2-4d0e7f03cef8",
+      "selection": {
+        "startLineNumber": 4,
+        "startColumn": 1,
+        "endLineNumberInclusive": 10,
+        "endColumn": 20
+      },
+      "fusedCursorPredictionId": "d6ad0cc0-02ef-40ad-a7ce-c6d5023dcd89",
+      "undoRedoGroup": {
+        "id": 34,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "f;198"
+    },
+    "generationUUID": "61823a51-b0e1-4363-95c2-4d0e7f03cef8",
+    "timestamp": "2025-03-09T13:12:38.455Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "7e69d993-3657-4ec5-bb80-5f0501435e8f",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/Documents/personal/vite-react-demo2/src/components/test2.ts",
+        "external": "file:///Users/shinn/Documents/personal/vite-react-demo2/src/components/test2.ts",
+        "path": "/Users/shinn/Documents/personal/vite-react-demo2/src/components/test2.ts",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 52,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 52,
+      "monotonicallyIncreasingSuggestionId": 33,
+      "range": {
+        "startLineNumber": 4,
+        "startColumn": 1,
+        "endLineNumberInclusive": 10,
+        "endColumn": 20
+      },
+      "replaceText": "      return light.GREEN;\n    case light.GREEN:\n      return light.YELLOW;\n    case light.YELLOW:\n      return light.RED;\n    default:\n      return light.RED;",
+      "originalText": "      return light.GREEN;\n    case light.GREEN:\n      return light.YELLOW;\n    case 'yellow':\n      return 'red';\n    default:\n      return 'red';",
+      "startingSuggestionRange": {
+        "startLineNumber": 4,
+        "startColumn": 1,
+        "endLineNumberInclusive": 10,
+        "endColumn": 20
+      },
+      "diffText": "      return light.GREEN;\n    case light.GREEN:\n      return light.YELLOW;\n    case light.YELLOW:\n      return light.RED;\n    default:\n      return light.RED;",
+      "fullOriginalText": "      return light.GREEN;\n    case light.GREEN:\n      return light.YELLOW;\n    case 'yellow':\n      return 'red';\n    default:\n      return 'red';",
+      "suggestionTriggerTime": 1741525955910.3,
+      "greens": [],
+      "source": "cursor_prediction",
+      "requestId": "61823a51-b0e1-4363-95c2-4d0e7f03cef8",
+      "selection": {
+        "startLineNumber": 4,
+        "startColumn": 1,
+        "endLineNumberInclusive": 10,
+        "endColumn": 20
+      },
+      "fusedCursorPredictionId": "d6ad0cc0-02ef-40ad-a7ce-c6d5023dcd89",
+      "undoRedoGroup": {
+        "id": 34,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "f;198"
+    },
+    "generationUUID": "61823a51-b0e1-4363-95c2-4d0e7f03cef8",
+    "timestamp": "2025-03-09T13:12:38.464Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "d6ad0cc0-02ef-40ad-a7ce-c6d5023dcd89",
+    "fusedCursorPrediction": {
+      "relativePath": "src/components/test2.ts",
+      "lineNumberOneIndexed": 13,
+      "text": "\n",
+      "shouldRetriggerCpp": false
+    },
+    "oldText": "      return light.GREEN;\n    case light.GREEN:\n      return light.YELLOW;\n    case 'yellow':\n      return 'red';\n    default:\n      return 'red';",
+    "newText": "      return light.GREEN;\n    case light.GREEN:\n      return light.YELLOW;\n    case light.YELLOW:\n      return light.RED;\n    default:\n      return light.RED;",
+    "timestamp": "2025-03-09T13:12:38.465Z"
+  },
+  {
+    "action": "displayFusedCursorPrediction",
+    "predictionId": "d6ad0cc0-02ef-40ad-a7ce-c6d5023dcd89",
+    "fusedCursorPrediction": {
+      "relativePath": "src/components/test2.ts",
+      "lineNumberOneIndexed": 13,
+      "text": "\n",
+      "shouldRetriggerCpp": false
+    },
+    "oldText": "      return light.GREEN;\n    case light.GREEN:\n      return light.YELLOW;\n    case 'yellow':\n      return 'red';\n    default:\n      return 'red';",
+    "newText": "      return light.GREEN;\n    case light.GREEN:\n      return light.YELLOW;\n    case light.YELLOW:\n      return light.RED;\n    default:\n      return light.RED;",
+    "timestamp": "2025-03-09T13:12:38.465Z"
+  }
+]

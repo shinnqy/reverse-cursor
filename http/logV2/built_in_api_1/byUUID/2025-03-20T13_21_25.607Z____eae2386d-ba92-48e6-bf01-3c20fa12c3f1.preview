@@ -1,0 +1,118 @@
+{"line":88,"column":32}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+import router from "@ohos.router";
+import storage from "@ohos.storage";
+import http from "@ohos.net.http";
+
+@Entry
+@Component
+struct Main {
+  @State message: string = "Hello World";
+
+  build() {
+    Row() {
+      Text(this.message)
+        .fontSize(20)
+        .fontWeight(FontWeight.Bold)
+        .onClick(() => {
+          router.pushUrl({
+            url: "pages/SecondPage",
+            params: {
+              message: "Hello from Second Page",
+            },
+          });
+        })
+        .width(200)
+        .height(100)
+        .backgroundColor(Color.Red)
+    }
+  }
+}
+
+@Component
+struct SecondPage {
+  @State message: string = "";
+
+  build() {
+    Column() {
+      Text(this.message)
+        .fontSize(20)
+        .fontWeight(FontWeight.Bold)
+        .textAlign(TextAlign.Center)
+        .fontColor(Color.White)
+        .onClick(() => {
+          router.back();
+        })
+    }
+  }
+}
+
+const STORAGE_KEY = "myStorage";
+let myStorage = storage.getStorageSync(STORAGE_KEY);
+
+if (!myStorage) {
+  myStorage = storage.getStorageSync(STORAGE_KEY);
+}
+
+myStorage.putSync("name", "John");
+myStorage.putSync("age", 30);
+myStorage.putSync("city", "New York");
+
+const name = myStorage.getSync("name");
+const age = myStorage.getSync("age");
+const city = myStorage.getSync("city");
+
+interface Settings {
+  theme: string;
+  notifications: boolean;
+  language: string;
+}
+
+let settings: Settings = {
+  theme: "light",
+  notifications: true,
+  language: "en",
+};
+
+myStorage.putSync("settings", settings);
+
+myStorage.removeSync("name");
+myStorage.on('change', (data) => {
+  console.log("Storage changed:", data);
+});
+
+myStorage.clearSync();
+
+const url = "https://api.example.com/data";
+const headers = {
+  "Content-Type": "application/json",
+};
+
+let httpRequest = http.createHtt[ToFill]
+
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+const headers = {
+  "Content-Type": "application/json",
+};
+
+let httpRequest = http.createHttpRequest();
+
+
+
+-------------------------------[                   fullText                  ]--------------------------------
+const headers = {
+  "Content-Type": "application/json",
+};
+
+let httpRequest = http.createHttpRequest();
+httpRequest.request(url, http.RequestMethod.GET, headers);
+httpRequest.send();
+
+httpRequest.on('response', (data) => {
+  console.log("Response:", data);
+});
+
+

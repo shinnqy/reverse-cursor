@@ -1,0 +1,400 @@
+[
+  {
+    "intent": "cursor_prediction",
+    "generationUUID": "99db00cb-6632-4563-9d13-35dfee2f928e",
+    "timestamp": "2025-03-19T13:11:58.208Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/twoWayBinding.ets",
+          "diffHistory": [
+            "16+|  @Link t\n",
+            "16-|  @Link t\n16+|  @Link target: number = 0;\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/twoWayBinding.ets",
+        "contents": "@Entry\n@Component\nstruct ParentComponent {\n  @State parentCount: number = 0;\n\n  build() {\n    Column() {\n      Text(this.parentCount.toString())\n      LinkChildComponent()\n    }\n  }\n}\n\n@Component\nstruct LinkChildComponent {\n  @Link target: number = 0;\n\n  build() {\n    Column() {\n      Button()\n        .onClick(() => {\n          //\n        })\n    }\n  }\n}\n\ninterface User {\n  name: string;\n  age: number;\n}\n\n@Component\nstruct ComplexBindingExample {\n  @State user: User = { name: 'John', age: 30 };\n\n  build() {\n    Column() {\n      Text(this.user.name)\n    }\n  }\n}\n\n@Component\nstruct UserEditor {\n\n  build() {\n    Column() {\n      Text(\"\")\n      Text(\"\")\n    }\n  }\n}\n\n\n",
+        "cursorPosition": {
+          "line": 21,
+          "column": 0
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 12,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "cursor_prediction"
+      },
+      "clientTime": 1742389918213,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 8.900146484375,
+      "timeAtRequestSend": 1742389918213
+    },
+    "generateUuid": "99db00cb-6632-4563-9d13-35dfee2f928e",
+    "timestamp": "2025-03-19T13:11:58.215Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "99db00cb-6632-4563-9d13-35dfee2f928e",
+    "timestamp": "2025-03-19T13:11:58.698Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "    Column() {\n      Button()\n        .onClick(() => {\n          this",
+      "rangeToReplace": {
+        "startLineNumber": 19,
+        "endLineNumberInclusive": 24
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "99db00cb-6632-4563-9d13-35dfee2f928e",
+    "timestamp": "2025-03-19T13:11:58.700Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "99db00cb-6632-4563-9d13-35dfee2f928e",
+    "timestamp": "2025-03-19T13:11:58.704Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "target"
+    },
+    "generationUUID": "99db00cb-6632-4563-9d13-35dfee2f928e",
+    "timestamp": "2025-03-19T13:11:58.713Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "++;"
+    },
+    "generationUUID": "99db00cb-6632-4563-9d13-35dfee2f928e",
+    "timestamp": "2025-03-19T13:11:58.721Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "99db00cb-6632-4563-9d13-35dfee2f928e",
+    "timestamp": "2025-03-19T13:11:58.730Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "       "
+    },
+    "generationUUID": "99db00cb-6632-4563-9d13-35dfee2f928e",
+    "timestamp": "2025-03-19T13:11:58.742Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " })\n    }"
+    },
+    "generationUUID": "99db00cb-6632-4563-9d13-35dfee2f928e",
+    "timestamp": "2025-03-19T13:11:58.763Z"
+  },
+  {
+    "firstChunkValue": "    Column() {\n      Button()\n        .onClick(() => {\n          this.target++;\n        })\n    }",
+    "generationUUID": "99db00cb-6632-4563-9d13-35dfee2f928e",
+    "timestamp": "2025-03-19T13:11:58.764Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "    Column() {\n      Button()\n        .onClick(() => {\n          this.target++;\n        })\n    }"
+    },
+    "generationUUID": "99db00cb-6632-4563-9d13-35dfee2f928e",
+    "timestamp": "2025-03-19T13:11:58.765Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "99db00cb-6632-4563-9d13-35dfee2f928e",
+    "timestamp": "2025-03-19T13:11:58.765Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "949a02a3-f735-44a2-9b35-417ebd6345f3",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/twoWayBinding.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/twoWayBinding.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/twoWayBinding.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 12,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 12,
+      "monotonicallyIncreasingSuggestionId": 4,
+      "range": {
+        "startLineNumber": 19,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 6
+      },
+      "replaceText": "    Column() {\n      Button()\n        .onClick(() => {\n          this.target++;\n        })\n    }",
+      "originalText": "    Column() {\n      Button()\n        .onClick(() => {\n          //\n        })\n    }",
+      "startingSuggestionRange": {
+        "startLineNumber": 19,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 6
+      },
+      "diffText": "    Column() {\n      Button()\n        .onClick(() => {\n          this.target++;\n        })\n    }",
+      "fullOriginalText": "    Column() {\n      Button()\n        .onClick(() => {\n          //\n        })\n    }",
+      "suggestionTriggerTime": 1742389918205.0999,
+      "greens": [],
+      "source": "cursor_prediction",
+      "requestId": "99db00cb-6632-4563-9d13-35dfee2f928e",
+      "selection": {
+        "startLineNumber": 19,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 6
+      },
+      "fusedCursorPredictionId": "6d733ff9-4553-4373-a650-e89f81cef735",
+      "undoRedoGroup": {
+        "id": 4,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "99db00cb-6632-4563-9d13-35dfee2f928e",
+    "timestamp": "2025-03-19T13:11:58.766Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "99db00cb-6632-4563-9d13-35dfee2f928e",
+    "timestamp": "2025-03-19T13:11:58.766Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "6d733ff9-4553-4373-a650-e89f81cef735",
+    "generationUUID": "99db00cb-6632-4563-9d13-35dfee2f928e",
+    "timestamp": "2025-03-19T13:11:58.797Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "    Column() {\n      Button()\n        .onClick(() => {\n          this.target++;\n        })\n    }"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "6d733ff9-4553-4373-a650-e89f81cef735",
+    "generationUUID": "99db00cb-6632-4563-9d13-35dfee2f928e",
+    "timestamp": "2025-03-19T13:11:58.798Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "6d733ff9-4553-4373-a650-e89f81cef735",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T13:11:58.799Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "949a02a3-f735-44a2-9b35-417ebd6345f3",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/twoWayBinding.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/twoWayBinding.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/twoWayBinding.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 12,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 12,
+      "monotonicallyIncreasingSuggestionId": 4,
+      "range": {
+        "startLineNumber": 19,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 6
+      },
+      "replaceText": "    Column() {\n      Button()\n        .onClick(() => {\n          this.target++;\n        })\n    }",
+      "originalText": "    Column() {\n      Button()\n        .onClick(() => {\n          //\n        })\n    }",
+      "startingSuggestionRange": {
+        "startLineNumber": 19,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 6
+      },
+      "diffText": "    Column() {\n      Button()\n        .onClick(() => {\n          this.target++;\n        })\n    }",
+      "fullOriginalText": "    Column() {\n      Button()\n        .onClick(() => {\n          //\n        })\n    }",
+      "suggestionTriggerTime": 1742389918205.0999,
+      "greens": [],
+      "source": "cursor_prediction",
+      "requestId": "99db00cb-6632-4563-9d13-35dfee2f928e",
+      "selection": {
+        "startLineNumber": 19,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 6
+      },
+      "fusedCursorPredictionId": "6d733ff9-4553-4373-a650-e89f81cef735",
+      "undoRedoGroup": {
+        "id": 4,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;67"
+    },
+    "generationUUID": "99db00cb-6632-4563-9d13-35dfee2f928e",
+    "timestamp": "2025-03-19T13:11:59.471Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "949a02a3-f735-44a2-9b35-417ebd6345f3",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/twoWayBinding.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/twoWayBinding.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/twoWayBinding.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 12,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 12,
+      "monotonicallyIncreasingSuggestionId": 4,
+      "range": {
+        "startLineNumber": 19,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 6
+      },
+      "replaceText": "    Column() {\n      Button()\n        .onClick(() => {\n          this.target++;\n        })\n    }",
+      "originalText": "    Column() {\n      Button()\n        .onClick(() => {\n          //\n        })\n    }",
+      "startingSuggestionRange": {
+        "startLineNumber": 19,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 6
+      },
+      "diffText": "    Column() {\n      Button()\n        .onClick(() => {\n          this.target++;\n        })\n    }",
+      "fullOriginalText": "    Column() {\n      Button()\n        .onClick(() => {\n          //\n        })\n    }",
+      "suggestionTriggerTime": 1742389918205.0999,
+      "greens": [],
+      "source": "cursor_prediction",
+      "requestId": "99db00cb-6632-4563-9d13-35dfee2f928e",
+      "selection": {
+        "startLineNumber": 19,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 6
+      },
+      "fusedCursorPredictionId": "6d733ff9-4553-4373-a650-e89f81cef735",
+      "undoRedoGroup": {
+        "id": 4,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;67"
+    },
+    "generationUUID": "99db00cb-6632-4563-9d13-35dfee2f928e",
+    "timestamp": "2025-03-19T13:11:59.913Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "949a02a3-f735-44a2-9b35-417ebd6345f3",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/twoWayBinding.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/twoWayBinding.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/twoWayBinding.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 12,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 12,
+      "monotonicallyIncreasingSuggestionId": 4,
+      "range": {
+        "startLineNumber": 19,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 6
+      },
+      "replaceText": "    Column() {\n      Button()\n        .onClick(() => {\n          this.target++;\n        })\n    }",
+      "originalText": "    Column() {\n      Button()\n        .onClick(() => {\n          //\n        })\n    }",
+      "startingSuggestionRange": {
+        "startLineNumber": 19,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 6
+      },
+      "diffText": "    Column() {\n      Button()\n        .onClick(() => {\n          this.target++;\n        })\n    }",
+      "fullOriginalText": "    Column() {\n      Button()\n        .onClick(() => {\n          //\n        })\n    }",
+      "suggestionTriggerTime": 1742389918205.0999,
+      "greens": [],
+      "source": "cursor_prediction",
+      "requestId": "99db00cb-6632-4563-9d13-35dfee2f928e",
+      "selection": {
+        "startLineNumber": 19,
+        "startColumn": 1,
+        "endLineNumberInclusive": 24,
+        "endColumn": 6
+      },
+      "fusedCursorPredictionId": "6d733ff9-4553-4373-a650-e89f81cef735",
+      "undoRedoGroup": {
+        "id": 4,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;67"
+    },
+    "generationUUID": "99db00cb-6632-4563-9d13-35dfee2f928e",
+    "timestamp": "2025-03-19T13:11:59.933Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "6d733ff9-4553-4373-a650-e89f81cef735",
+    "fusedCursorPrediction": null,
+    "oldText": "    Column() {\n      Button()\n        .onClick(() => {\n          //\n        })\n    }",
+    "newText": "    Column() {\n      Button()\n        .onClick(() => {\n          this.target++;\n        })\n    }",
+    "timestamp": "2025-03-19T13:11:59.934Z"
+  }
+]

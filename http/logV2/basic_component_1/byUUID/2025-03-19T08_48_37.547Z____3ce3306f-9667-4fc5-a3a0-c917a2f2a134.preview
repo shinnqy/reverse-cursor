@@ -1,0 +1,30 @@
+{"line":7,"column":6}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+struct BasicComponent {
+  @State message: string = 'Hello, World!'
+
+  build() {
+    Column() {
+      [ToFill]
+      Text(this.message)
+    }
+  }
+}
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+  build() {
+    Column() {
+      Text(this.message)
+    }
+  }
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/basicComponent.ets",
+  "lineNumberOneIndexed": 4,
+  "text": "@State message: string = 'Hello, World!'\n\nbuild() {\nColumn() {\nText(this.message)",
+  "shouldRetriggerCpp": true
+}

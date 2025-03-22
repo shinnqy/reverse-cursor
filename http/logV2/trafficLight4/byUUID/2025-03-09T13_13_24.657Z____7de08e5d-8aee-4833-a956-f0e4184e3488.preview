@@ -1,0 +1,34 @@
+{"line":9,"column":6}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case TrafficLight.RED:
+      console.log('Stop');
+      break;
+    case TrafficLight.GREEN:
+      console.log('Go');
+      break;
+    case TrafficLight.YELLOW:
+      [ToFill]console.log('Wait');
+      break;
+    default:
+      console.log('red');
+  }
+}
+
+enum TrafficLight {
+  RED = 'red',
+  GREEN = 'green',
+  YELLOW = 'yellow',
+}
+
+const light = TrafficLight.RED;
+changeLight(light);
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+    case TrafficLight.YELLOW:
+      console.log('Wait');
+      break;
+    default:
+      console.log('red');

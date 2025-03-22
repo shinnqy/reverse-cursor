@@ -1,0 +1,53 @@
+{"line":0,"column":0}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+[ToFill]shared/types/traffic-light.ts
+
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case light.RED:
+      console.log('RED');
+      break;
+    case light.YELLOW:
+      console.log('YELLOW');
+      break;
+    default:
+      console.log('Invalid light');
+      break;
+  }
+}
+-------------------------------[               firstChunkValue               ]--------------------------------
+import { TrafficLight } from '@shared/types/traffic-light';
+
+function changeLight(light: TrafficLight) {
+  switch (light) {
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+import { TrafficLight } from '@shared/types/traffic-light';
+
+function changeLight(light: TrafficLight) {
+  switch (light) {
+    case light.RED:
+      console.log('RED');
+      break;
+    case light.YELLOW:
+      console.log('YELLOW');
+      break;
+    default:
+      console.log('Invalid light');
+      break;
+  }
+}
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "src/components/test.ts",
+  "lineNumberOneIndexed": 2,
+  "text": "",
+  "shouldRetriggerCpp": true
+}
+--------------------------------[        displayedFusedCursorPrediction       ]---------------------------------
+{
+  "relativePath": "src/components/test.ts",
+  "lineNumberOneIndexed": 2,
+  "text": "",
+  "shouldRetriggerCpp": true
+}

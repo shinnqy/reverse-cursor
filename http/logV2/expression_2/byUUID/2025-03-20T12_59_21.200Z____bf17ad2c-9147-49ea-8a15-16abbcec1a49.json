@@ -1,0 +1,218 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "bf17ad2c-9147-49ea-8a15-16abbcec1a49",
+    "timestamp": "2025-03-20T12:59:21.200Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/dynamicProp.ets",
+          "diffHistory": [
+            "1+|const user = {}\n",
+            "2-|  \n3-|}\n2+|  name: \"Alice\",\n3+|  age: 30,\n4+|  address: {\n5+|},\n6+|};\n7+|\n8+|\n",
+            "5-|},\n5+|    city: \"New York\",\n6+|    country: \"USA\",\n7+|  },\n10+|const greeting = `Hello, ${user.name}!`;\n",
+            "1-|\n1+|interface User {\n2+|  name: string;\n3+|  age: number;\n4+|  address: {\n5+|    city: string;\n6+|    country: string;\n7+|  };\n8+|}\n",
+            "1-|\n1+|interface Address {\n",
+            "5-|  address: {\n5+|  address: Address;\n",
+            "2+|  city: string;\n3+|  country: string;\n4+|}\n",
+            "9-|    city: string;\n10-|    country: string;\n11-|  };\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/dynamicProp.ets",
+        "contents": "interface Address {\n  city: string;\n  country: string;\n}\ninterface User {\n  name: string;\n  age: number;\n  address: Address;\n}\nconst user = {\n  name: \"Alice\",\n  age: 30,\n  address: {\n    city: \"New York\",\n    country: \"USA\",\n  },\n};\n\nconst greeting = `Hello, ${user.name}!`;\n\n\n",
+        "cursorPosition": {
+          "line": 8,
+          "column": 1
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 103,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1742475561230,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.89990234375,
+      "timeAtRequestSend": 1742475561230
+    },
+    "generateUuid": "bf17ad2c-9147-49ea-8a15-16abbcec1a49",
+    "timestamp": "2025-03-20T12:59:21.231Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "  address: Address;\n}\nconst user:",
+      "rangeToReplace": {
+        "startLineNumber": 8,
+        "endLineNumberInclusive": 13
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "bf17ad2c-9147-49ea-8a15-16abbcec1a49",
+    "timestamp": "2025-03-20T12:59:21.585Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "bf17ad2c-9147-49ea-8a15-16abbcec1a49",
+    "timestamp": "2025-03-20T12:59:21.587Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " User"
+    },
+    "generationUUID": "bf17ad2c-9147-49ea-8a15-16abbcec1a49",
+    "timestamp": "2025-03-20T12:59:21.606Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "bf17ad2c-9147-49ea-8a15-16abbcec1a49",
+    "timestamp": "2025-03-20T12:59:21.616Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "bf17ad2c-9147-49ea-8a15-16abbcec1a49",
+    "timestamp": "2025-03-20T12:59:21.627Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n  name: \"Alice\",\n"
+    },
+    "generationUUID": "bf17ad2c-9147-49ea-8a15-16abbcec1a49",
+    "timestamp": "2025-03-20T12:59:21.639Z"
+  },
+  {
+    "firstChunkValue": "  address: Address;\n}\nconst user: User = {\n  name: \"Alice\",\n  age: 30,\n  address: {",
+    "generationUUID": "bf17ad2c-9147-49ea-8a15-16abbcec1a49",
+    "timestamp": "2025-03-20T12:59:21.645Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "  address: Address;\n}\nconst user: User = {\n  name: \"Alice\",\n  age: 30,\n  address: {"
+    },
+    "generationUUID": "bf17ad2c-9147-49ea-8a15-16abbcec1a49",
+    "timestamp": "2025-03-20T12:59:21.652Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "  age"
+    },
+    "generationUUID": "bf17ad2c-9147-49ea-8a15-16abbcec1a49",
+    "timestamp": "2025-03-20T12:59:21.653Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "02a1363d-629b-4436-8494-81662dcc198b",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 103,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 103,
+      "monotonicallyIncreasingSuggestionId": 57,
+      "range": {
+        "startLineNumber": 8,
+        "startColumn": 1,
+        "endLineNumberInclusive": 13,
+        "endColumn": 13
+      },
+      "replaceText": "  address: Address;\n}\nconst user: User = {\n  name: \"Alice\",\n  age: 30,\n  address: {",
+      "originalText": "  address: Address;\n}\nconst user = {\n  name: \"Alice\",\n  age: 30,\n  address: {",
+      "startingSuggestionRange": {
+        "startLineNumber": 8,
+        "startColumn": 1,
+        "endLineNumberInclusive": 13,
+        "endColumn": 13
+      },
+      "diffText": "  address: Address;\n}\nconst user: User = {\n  name: \"Alice\",\n  age: 30,\n  address: {",
+      "fullOriginalText": "  address: Address;\n}\nconst user = {\n  name: \"Alice\",\n  age: 30,\n  address: {",
+      "suggestionTriggerTime": 1742475561179.8,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "bf17ad2c-9147-49ea-8a15-16abbcec1a49",
+      "selection": {
+        "startLineNumber": 8,
+        "startColumn": 1,
+        "endLineNumberInclusive": 13,
+        "endColumn": 13
+      },
+      "undoRedoGroup": {
+        "id": 57,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "bf17ad2c-9147-49ea-8a15-16abbcec1a49",
+    "timestamp": "2025-03-20T12:59:21.653Z"
+  },
+  {
+    "fullText": "  address: Address;\n}\nconst user: User = {\n  name: \"Alice\",\n",
+    "generationUUID": "bf17ad2c-9147-49ea-8a15-16abbcec1a49",
+    "timestamp": "2025-03-20T12:59:21.658Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "e661d388-2432-411f-bafd-37c7f15d9729",
+    "generationUUID": "bf17ad2c-9147-49ea-8a15-16abbcec1a49",
+    "timestamp": "2025-03-20T12:59:21.658Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "  address: Address;\n}\nconst user: User = {\n  name: \"Alice\",\n  age: 30,\n  address: {"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "e661d388-2432-411f-bafd-37c7f15d9729",
+    "generationUUID": "bf17ad2c-9147-49ea-8a15-16abbcec1a49",
+    "timestamp": "2025-03-20T12:59:21.659Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "e661d388-2432-411f-bafd-37c7f15d9729",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-20T12:59:21.660Z"
+  }
+]

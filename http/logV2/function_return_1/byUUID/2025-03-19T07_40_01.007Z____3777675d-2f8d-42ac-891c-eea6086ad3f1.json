@@ -1,0 +1,750 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:01.007Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/functionReturn.ets",
+          "diffHistory": [
+            "1+|function add(a: number, b: number): number {\n2+|    return a + b;\n3+|}\n4+|\n5+|function subtract(a: number, b: number): number {\n6+|    return a - b;\n7+|}\n8+|\n9+|let sum = add(1, 2);\n10+|\n11+|function getUser(name: string, age: number): { name: string, age: number } {\n12+|    return { name, age };\n13+|}\n14+|\n15+|let user = getUser(\"John\", 30);\n16+|\n17+|  \n",
+            "11-|function getUser(name: string, age: number): { name: string, age: number } {\n11+|interface User {\n12+|    name: string;\n13+|    age: number;\n14+|}\n15+|\n16+|function getUser(name: string, age: number): User {\n",
+            "22+|function wrapValue<T>(value: T): {data {\n23+|    return { data: value };\n24+|}\n25+|\n26+|let wrappedValue = wrapValue(10);\n27+|\n28+|\n",
+            "22-|function wrapValue<T>(value: T): {data {\n22+|function wrapValue<T>(value: T): {data: T}   {\n",
+            "28+|let wrappedString = wrapValue(\"Hello\");\n30+|let wrappedBoolean = wrapValue(true);\n31+|\n32+|let wrappedArray = wrapValue([1, 2, 3]);\n33+|\n34+|\n",
+            "22-|function wrapValue<T>(value: T): {data: T}   {\n22+|interface Wrapper<T> {\n23+|    data: T;\n24+|}\n25+|\n26+|function wrapValue<T>(value: T): Wrapper<T> {\n",
+            "39+|async function fetchData(): Promise<{ item: string }> {\n40+|    return { item: \"Hello\" };\n41+|}\n42+|\n43+|let data = await fetchData();\n44+|\n45+|\n",
+            "38+|interface Data {\n39+|    item: string;\n40+|}\n39-|async function fetchData(): Promise<{ item: string }> {\n42+|async function fetchData(): Promise<Data> {\n",
+            "48-|\n48+|function parse(input: string): string | number {\n49+|  \n50+|}\n",
+            "49-|  \n49+|  return is\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/functionReturn.ets",
+        "contents": "function add(a: number, b: number): number {\n    return a + b;\n}\n\nfunction subtract(a: number, b: number): number {\n    return a - b;\n}\n\nlet sum = add(1, 2);\n\ninterface User {\n    name: string;\n    age: number;\n}\n\nfunction getUser(name: string, age: number): User {\n    return { name, age };\n}\n\nlet user = getUser(\"John\", 30);\n\ninterface Wrapper<T> {\n    data: T;\n}\n\nfunction wrapValue<T>(value: T): Wrapper<T> {\n    return { data: value };\n}\n\nlet wrappedValue = wrapValue(10);\n\nlet wrappedString = wrapValue(\"Hello\");\n\nlet wrappedBoolean = wrapValue(true);\n\nlet wrappedArray = wrapValue([1, 2, 3]);\n\ninterface Data {\n    item: string;\n}\n\nasync function fetchData(): Promise<Data> {\n    return { item: \"Hello\" };\n}\n\nlet data = await fetchData();\n\nfunction parse(input: string): string | number {\n  return is\n}\n",
+        "cursorPosition": {
+          "line": 48,
+          "column": 11
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 236,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742370001046,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.5,
+      "timeAtRequestSend": 1742370001046
+    },
+    "generateUuid": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:01.048Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:01.431Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nlet data = await fetchData();\n\nfunction parse(input: string): string | number {\n  return isNaN",
+      "rangeToReplace": {
+        "startLineNumber": 45,
+        "endLineNumberInclusive": 51
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:01.432Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "("
+    },
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:01.495Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "("
+    },
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:01.495Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Number"
+    },
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:01.499Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "input"
+    },
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:01.499Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "))"
+    },
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:01.500Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ?"
+    },
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:01.500Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " input"
+    },
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:01.514Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " :"
+    },
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:01.522Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Number"
+    },
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:01.531Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "("
+    },
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:01.540Z"
+  },
+  {
+    "firstChunkValue": "\nlet data = await fetchData();\n\nfunction parse(input: string): string | number {\n  return isNaN(Number(input)) ? input : Number(input);\n}\n",
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:01.594Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "input);"
+    },
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:01.598Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n}"
+    },
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:01.599Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nlet data = await fetchData();\n\nfunction parse(input: string): string | number {\n  return isNaN(Number(input)) ? input : Number(input);\n}\n"
+    },
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:01.599Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "54b5bfd4-63fd-44af-aacf-ee136f91a26b",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 236,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 236,
+      "monotonicallyIncreasingSuggestionId": 194,
+      "range": {
+        "startLineNumber": 45,
+        "startColumn": 1,
+        "endLineNumberInclusive": 51,
+        "endColumn": 1
+      },
+      "replaceText": "\nlet data = await fetchData();\n\nfunction parse(input: string): string | number {\n  return isNaN(Number(input)) ? input : Number(input);\n}\n",
+      "originalText": "\nlet data = await fetchData();\n\nfunction parse(input: string): string | number {\n  return is\n}\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 45,
+        "startColumn": 1,
+        "endLineNumberInclusive": 51,
+        "endColumn": 1
+      },
+      "diffText": "\nlet data = await fetchData();\n\nfunction parse(input: string): string | number {\n  return isNaN(Number(input)) ? input : Number(input);\n}\n",
+      "fullOriginalText": "\nlet data = await fetchData();\n\nfunction parse(input: string): string | number {\n  return is\n}\n",
+      "suggestionTriggerTime": 1742370001000.9,
+      "greens": [],
+      "source": "typing",
+      "requestId": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+      "selection": {
+        "startLineNumber": 45,
+        "startColumn": 1,
+        "endLineNumberInclusive": 51,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 194,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:01.600Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\nlet"
+    },
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:01.600Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " parsed"
+    },
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:01.603Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:01.603Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " parse"
+    },
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:01.603Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "(\""
+    },
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:01.612Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "1"
+    },
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:01.623Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "2"
+    },
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:01.636Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "3"
+    },
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:01.646Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\");"
+    },
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:01.681Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:01.681Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "let"
+    },
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:01.681Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " parsed"
+    },
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:01.862Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "String"
+    },
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:01.863Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " = parse"
+    },
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:01.863Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "(\"Hello"
+    },
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:01.863Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\");"
+    },
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:01.863Z"
+  },
+  {
+    "fullText": "\nlet data = await fetchData();\n\nfunction parse(input: string): string | number {\n  return isNaN(Number(input)) ? input : Number(input);\n}\n\nlet parsed = parse(\"123\");\n\nlet parsedString = parse(\"Hello\");\n\n\n",
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:01.961Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nlet data = await fetchData();\n\nfunction parse(input: string): string | number {\n  return isNaN(Number(input)) ? input : Number(input);\n}\n"
+    },
+    "fullText": "\nlet data = await fetchData();\n\nfunction parse(input: string): string | number {\n  return isNaN(Number(input)) ? input : Number(input);\n}\n\nlet parsed = parse(\"123\");\n\nlet parsedString = parse(\"Hello\");\n\n\n",
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:01.962Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "cf704128-841f-40d9-8049-67f86caa45b9",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 236,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 237,
+      "monotonicallyIncreasingSuggestionId": 195,
+      "range": {
+        "startLineNumber": 45,
+        "startColumn": 1,
+        "endLineNumberInclusive": 51,
+        "endColumn": 1
+      },
+      "replaceText": "\nlet data = await fetchData();\n\nfunction parse(input: string): string | number {\n  return isNaN(Number(input)) ? input : Number(input);\n}\n\nlet parsed = parse(\"123\");\n\nlet parsedString = parse(\"Hello\");\n\n\n",
+      "originalText": "\nlet data = await fetchData();\n\nfunction parse(input: string): string | number {\n  return isNaN(Number(input)) ? input : Number(input);\n}\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 45,
+        "startColumn": 1,
+        "endLineNumberInclusive": 51,
+        "endColumn": 1
+      },
+      "diffText": "\nlet data = await fetchData();\n\nfunction parse(input: string): string | number {\n  return isNaN(Number(input)) ? input : Number(input);\n}\n\nlet parsed = parse(\"123\");\n\nlet parsedString = parse(\"Hello\");\n\n\n",
+      "fullOriginalText": "\nlet data = await fetchData();\n\nfunction parse(input: string): string | number {\n  return isNaN(Number(input)) ? input : Number(input);\n}\n",
+      "suggestionTriggerTime": 1742370001000.9,
+      "greens": [],
+      "source": "typing",
+      "requestId": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+      "selection": {
+        "startLineNumber": 45,
+        "startColumn": 1,
+        "endLineNumberInclusive": 51,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "dc7cebea-7c7a-448d-ad85-f4a9db8ac54e",
+      "undoRedoGroup": {
+        "id": 195,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:01.962Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:01.968Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:01.969Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:01.969Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:01.969Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "dc7cebea-7c7a-448d-ad85-f4a9db8ac54e",
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:02.128Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nlet data = await fetchData();\n\nfunction parse(input: string): string | number {\n  return isNaN(Number(input)) ? input : Number(input);\n}\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "dc7cebea-7c7a-448d-ad85-f4a9db8ac54e",
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:02.129Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "dc7cebea-7c7a-448d-ad85-f4a9db8ac54e",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-19T07:40:02.129Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "54b5bfd4-63fd-44af-aacf-ee136f91a26b",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 236,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 236,
+      "monotonicallyIncreasingSuggestionId": 194,
+      "range": {
+        "startLineNumber": 45,
+        "startColumn": 1,
+        "endLineNumberInclusive": 51,
+        "endColumn": 1
+      },
+      "replaceText": "\nlet data = await fetchData();\n\nfunction parse(input: string): string | number {\n  return isNaN(Number(input)) ? input : Number(input);\n}\n",
+      "originalText": "\nlet data = await fetchData();\n\nfunction parse(input: string): string | number {\n  return is\n}\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 45,
+        "startColumn": 1,
+        "endLineNumberInclusive": 51,
+        "endColumn": 1
+      },
+      "diffText": "\nlet data = await fetchData();\n\nfunction parse(input: string): string | number {\n  return isNaN(Number(input)) ? input : Number(input);\n}\n",
+      "fullOriginalText": "\nlet data = await fetchData();\n\nfunction parse(input: string): string | number {\n  return is\n}\n",
+      "suggestionTriggerTime": 1742370001000.9,
+      "greens": [],
+      "source": "typing",
+      "requestId": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+      "selection": {
+        "startLineNumber": 45,
+        "startColumn": 1,
+        "endLineNumberInclusive": 51,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 194,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;874",
+      "onAcceptDisplayId": "cf704128-841f-40d9-8049-67f86caa45b9"
+    },
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:04.761Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "54b5bfd4-63fd-44af-aacf-ee136f91a26b",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 236,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 236,
+      "monotonicallyIncreasingSuggestionId": 194,
+      "range": {
+        "startLineNumber": 45,
+        "startColumn": 1,
+        "endLineNumberInclusive": 51,
+        "endColumn": 1
+      },
+      "replaceText": "\nlet data = await fetchData();\n\nfunction parse(input: string): string | number {\n  return isNaN(Number(input)) ? input : Number(input);\n}\n",
+      "originalText": "\nlet data = await fetchData();\n\nfunction parse(input: string): string | number {\n  return is\n}\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 45,
+        "startColumn": 1,
+        "endLineNumberInclusive": 51,
+        "endColumn": 1
+      },
+      "diffText": "\nlet data = await fetchData();\n\nfunction parse(input: string): string | number {\n  return isNaN(Number(input)) ? input : Number(input);\n}\n",
+      "fullOriginalText": "\nlet data = await fetchData();\n\nfunction parse(input: string): string | number {\n  return is\n}\n",
+      "suggestionTriggerTime": 1742370001000.9,
+      "greens": [],
+      "source": "typing",
+      "requestId": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+      "selection": {
+        "startLineNumber": 45,
+        "startColumn": 1,
+        "endLineNumberInclusive": 51,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 194,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;874",
+      "onAcceptDisplayId": "cf704128-841f-40d9-8049-67f86caa45b9"
+    },
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:04.776Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "cf704128-841f-40d9-8049-67f86caa45b9",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 236,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 237,
+      "monotonicallyIncreasingSuggestionId": 195,
+      "range": {
+        "startLineNumber": 45,
+        "startColumn": 1,
+        "endLineNumberInclusive": 51,
+        "endColumn": 1
+      },
+      "replaceText": "\nlet data = await fetchData();\n\nfunction parse(input: string): string | number {\n  return isNaN(Number(input)) ? input : Number(input);\n}\n\nlet parsed = parse(\"123\");\n\nlet parsedString = parse(\"Hello\");\n\n\n",
+      "originalText": "\nlet data = await fetchData();\n\nfunction parse(input: string): string | number {\n  return isNaN(Number(input)) ? input : Number(input);\n}\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 45,
+        "startColumn": 1,
+        "endLineNumberInclusive": 51,
+        "endColumn": 1
+      },
+      "diffText": "\nlet data = await fetchData();\n\nfunction parse(input: string): string | number {\n  return isNaN(Number(input)) ? input : Number(input);\n}\n\nlet parsed = parse(\"123\");\n\nlet parsedString = parse(\"Hello\");\n\n\n",
+      "fullOriginalText": "\nlet data = await fetchData();\n\nfunction parse(input: string): string | number {\n  return isNaN(Number(input)) ? input : Number(input);\n}\n",
+      "suggestionTriggerTime": 1742370001000.9,
+      "greens": [],
+      "source": "typing",
+      "requestId": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+      "selection": {
+        "startLineNumber": 45,
+        "startColumn": 1,
+        "endLineNumberInclusive": 51,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "dc7cebea-7c7a-448d-ad85-f4a9db8ac54e",
+      "undoRedoGroup": {
+        "id": 195,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:04.777Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "cf704128-841f-40d9-8049-67f86caa45b9",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 236,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 237,
+      "monotonicallyIncreasingSuggestionId": 195,
+      "range": {
+        "startLineNumber": 45,
+        "startColumn": 1,
+        "endLineNumberInclusive": 51,
+        "endColumn": 1
+      },
+      "replaceText": "\nlet data = await fetchData();\n\nfunction parse(input: string): string | number {\n  return isNaN(Number(input)) ? input : Number(input);\n}\n\nlet parsed = parse(\"123\");\n\nlet parsedString = parse(\"Hello\");\n\n\n",
+      "originalText": "\nlet data = await fetchData();\n\nfunction parse(input: string): string | number {\n  return isNaN(Number(input)) ? input : Number(input);\n}\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 45,
+        "startColumn": 1,
+        "endLineNumberInclusive": 51,
+        "endColumn": 1
+      },
+      "diffText": "\nlet data = await fetchData();\n\nfunction parse(input: string): string | number {\n  return isNaN(Number(input)) ? input : Number(input);\n}\n\nlet parsed = parse(\"123\");\n\nlet parsedString = parse(\"Hello\");\n\n\n",
+      "fullOriginalText": "\nlet data = await fetchData();\n\nfunction parse(input: string): string | number {\n  return isNaN(Number(input)) ? input : Number(input);\n}\n",
+      "suggestionTriggerTime": 1742370001000.9,
+      "greens": [],
+      "source": "typing",
+      "requestId": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+      "selection": {
+        "startLineNumber": 45,
+        "startColumn": 1,
+        "endLineNumberInclusive": 51,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "dc7cebea-7c7a-448d-ad85-f4a9db8ac54e",
+      "undoRedoGroup": {
+        "id": 195,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;880"
+    },
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:07.163Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "cf704128-841f-40d9-8049-67f86caa45b9",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/functionReturn.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 236,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 237,
+      "monotonicallyIncreasingSuggestionId": 195,
+      "range": {
+        "startLineNumber": 45,
+        "startColumn": 1,
+        "endLineNumberInclusive": 51,
+        "endColumn": 1
+      },
+      "replaceText": "\nlet data = await fetchData();\n\nfunction parse(input: string): string | number {\n  return isNaN(Number(input)) ? input : Number(input);\n}\n\nlet parsed = parse(\"123\");\n\nlet parsedString = parse(\"Hello\");\n\n\n",
+      "originalText": "\nlet data = await fetchData();\n\nfunction parse(input: string): string | number {\n  return isNaN(Number(input)) ? input : Number(input);\n}\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 45,
+        "startColumn": 1,
+        "endLineNumberInclusive": 51,
+        "endColumn": 1
+      },
+      "diffText": "\nlet data = await fetchData();\n\nfunction parse(input: string): string | number {\n  return isNaN(Number(input)) ? input : Number(input);\n}\n\nlet parsed = parse(\"123\");\n\nlet parsedString = parse(\"Hello\");\n\n\n",
+      "fullOriginalText": "\nlet data = await fetchData();\n\nfunction parse(input: string): string | number {\n  return isNaN(Number(input)) ? input : Number(input);\n}\n",
+      "suggestionTriggerTime": 1742370001000.9,
+      "greens": [],
+      "source": "typing",
+      "requestId": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+      "selection": {
+        "startLineNumber": 45,
+        "startColumn": 1,
+        "endLineNumberInclusive": 51,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "dc7cebea-7c7a-448d-ad85-f4a9db8ac54e",
+      "undoRedoGroup": {
+        "id": 195,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;880"
+    },
+    "generationUUID": "3777675d-2f8d-42ac-891c-eea6086ad3f1",
+    "timestamp": "2025-03-19T07:40:07.180Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "dc7cebea-7c7a-448d-ad85-f4a9db8ac54e",
+    "fusedCursorPrediction": null,
+    "oldText": "\nlet data = await fetchData();\n\nfunction parse(input: string): string | number {\n  return isNaN(Number(input)) ? input : Number(input);\n}\n",
+    "newText": "\nlet data = await fetchData();\n\nfunction parse(input: string): string | number {\n  return isNaN(Number(input)) ? input : Number(input);\n}\n\nlet parsed = parse(\"123\");\n\nlet parsedString = parse(\"Hello\");\n\n\n",
+    "timestamp": "2025-03-19T07:40:07.181Z"
+  }
+]

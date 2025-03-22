@@ -1,0 +1,225 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "b725db49-9c23-4b6b-9823-a67237fc960b",
+    "timestamp": "2025-03-19T11:11:50.768Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/decorator.ets",
+          "diffHistory": [
+            "4+|  @State message: string = 'Hello, world!'\n",
+            "7-|    Text('Hello, world!')\n7+|    Text(this.message)\n",
+            "4-|  @State message: string = 'Hello, world!'\n4+|  @State count: string = 'Hello, world!'\n",
+            "7-|    Text(this.message)\n7+|    Text(this.count.toString())\n",
+            "4-|  @State count: string = 'Hello, world!'\n4+|  @State count: number = 0\n",
+            "7-|    Text(this.count.toString())\n",
+            "5-|  \n5+|\n7+|    Button('Click me').onClick(() => {\n8+|      this.count++\n9+|    })\n",
+            "15+|  @Prop count: number\n",
+            "18-|    Text('Hello, world!')\n18+|    Text(this.count.toString())\n",
+            "15-|  @Prop count: number\n15+|  @Prop \n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/decorator.ets",
+        "contents": "@Entry\n@Component\nstruct Example {\n  @State count: number = 0\n\n  build() {\n    Button('Click me').onClick(() => {\n      this.count++\n    })\n  }\n}\n\n@Component\nstruct ChildComponent {\n  @Prop \n\n  build() {\n    Text(this.count.toString())\n  }\n}\n\n@Component\nstruct LinkChild {\n\n  build() {\n    Button('Click me')\n  }\n}\n",
+        "cursorPosition": {
+          "line": 14,
+          "column": 8
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 29,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742382710798,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.5,
+      "timeAtRequestSend": 1742382710798
+    },
+    "generateUuid": "b725db49-9c23-4b6b-9823-a67237fc960b",
+    "timestamp": "2025-03-19T11:11:50.799Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "b725db49-9c23-4b6b-9823-a67237fc960b",
+    "timestamp": "2025-03-19T11:11:51.167Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "struct ChildComponent {\n  @Prop count",
+      "rangeToReplace": {
+        "startLineNumber": 14,
+        "endLineNumberInclusive": 20
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "b725db49-9c23-4b6b-9823-a67237fc960b",
+    "timestamp": "2025-03-19T11:11:51.168Z"
+  },
+  {
+    "firstChunkValue": "struct ChildComponent {\n  @Prop count: number\n\n  build() {\n    Text(this.count.toString())\n  }\n}",
+    "generationUUID": "b725db49-9c23-4b6b-9823-a67237fc960b",
+    "timestamp": "2025-03-19T11:11:51.191Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": number\n\n"
+    },
+    "generationUUID": "b725db49-9c23-4b6b-9823-a67237fc960b",
+    "timestamp": "2025-03-19T11:11:51.195Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": false
+    },
+    "generationUUID": "b725db49-9c23-4b6b-9823-a67237fc960b",
+    "timestamp": "2025-03-19T11:11:51.199Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "b725db49-9c23-4b6b-9823-a67237fc960b",
+    "timestamp": "2025-03-19T11:11:51.200Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " build"
+    },
+    "generationUUID": "b725db49-9c23-4b6b-9823-a67237fc960b",
+    "timestamp": "2025-03-19T11:11:51.206Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "() {\n    Text"
+    },
+    "generationUUID": "b725db49-9c23-4b6b-9823-a67237fc960b",
+    "timestamp": "2025-03-19T11:11:51.219Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "(this.count.toString())\n"
+    },
+    "generationUUID": "b725db49-9c23-4b6b-9823-a67237fc960b",
+    "timestamp": "2025-03-19T11:11:51.228Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "  }"
+    },
+    "generationUUID": "b725db49-9c23-4b6b-9823-a67237fc960b",
+    "timestamp": "2025-03-19T11:11:51.240Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n}"
+    },
+    "generationUUID": "b725db49-9c23-4b6b-9823-a67237fc960b",
+    "timestamp": "2025-03-19T11:11:51.248Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "b725db49-9c23-4b6b-9823-a67237fc960b",
+    "timestamp": "2025-03-19T11:11:51.273Z"
+  },
+  {
+    "fullText": "struct ChildComponent {\n  @Prop count: number\n\n  build() {\n    Text(this.count.toString())\n  }\n}",
+    "generationUUID": "b725db49-9c23-4b6b-9823-a67237fc960b",
+    "timestamp": "2025-03-19T11:11:51.274Z"
+  },
+  {
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/decorator.ets",
+      "lineNumberOneIndexed": 24,
+      "text": "\nbuild() {\nButton('Click me')\n}\n}",
+      "shouldRetriggerCpp": false
+    },
+    "predictionId": "3fe0ac6a-47b0-47e0-8d37-c70c03c73eda",
+    "generationUUID": "b725db49-9c23-4b6b-9823-a67237fc960b",
+    "timestamp": "2025-03-19T11:11:51.352Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is false",
+    "invokePlace": "before this.displayFusedCursorPrediction, about to show prediction icon",
+    "isValidCase4firstChunkValue": {
+      "valid": false
+    },
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/decorator.ets",
+      "lineNumberOneIndexed": 24,
+      "text": "\nbuild() {\nButton('Click me')\n}\n}",
+      "shouldRetriggerCpp": false
+    },
+    "predictionId": "3fe0ac6a-47b0-47e0-8d37-c70c03c73eda",
+    "generationUUID": "b725db49-9c23-4b6b-9823-a67237fc960b",
+    "timestamp": "2025-03-19T11:11:51.354Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "cursorPredictionTarget": {
+        "relativePath": "entry/src/main/ets/utils/decorator.ets",
+        "lineNumberOneIndexed": 24,
+        "expectedContent": "\nbuild() {\nButton('Click me')\n}\n}",
+        "shouldRetriggerCpp": false
+      }
+    },
+    "generationUUID": "b725db49-9c23-4b6b-9823-a67237fc960b",
+    "timestamp": "2025-03-19T11:11:51.356Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "b725db49-9c23-4b6b-9823-a67237fc960b",
+    "timestamp": "2025-03-19T11:11:51.356Z"
+  },
+  {
+    "action": "displayFusedCursorPrediction",
+    "predictionId": "3fe0ac6a-47b0-47e0-8d37-c70c03c73eda",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/decorator.ets",
+      "lineNumberOneIndexed": 24,
+      "text": "\nbuild() {\nButton('Click me')\n}\n}",
+      "shouldRetriggerCpp": false
+    },
+    "oldText": "",
+    "newText": "",
+    "timestamp": "2025-03-19T11:11:51.357Z"
+  }
+]

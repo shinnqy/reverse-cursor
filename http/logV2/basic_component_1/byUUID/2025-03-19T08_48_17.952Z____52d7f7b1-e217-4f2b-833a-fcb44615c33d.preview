@@ -1,0 +1,49 @@
+{"line":3,"column":5}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+struct BasicComponent {
+  bui[ToFill]
+}
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+struct BasicComponent {
+  build() {
+}
+
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+@Entry
+@Component
+struct BasicComponent {
+  build() {
+    Column() {
+      Text('Hello, World!')
+    }
+  }
+}
+
+-------------------------------[                   fullText                  ]--------------------------------
+struct BasicComponent {
+  build() {
+    Column() {
+      Text('Hello, World!')
+    }
+  }
+}
+
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/basicComponent.ets",
+  "lineNumberOneIndexed": 1,
+  "text": "@Entry\n@Component\nstruct BasicComponent {\nbuild() {\nColumn() {",
+  "shouldRetriggerCpp": true
+}
+--------------------------------[        displayedFusedCursorPrediction       ]---------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/basicComponent.ets",
+  "lineNumberOneIndexed": 1,
+  "text": "@Entry\n@Component\nstruct BasicComponent {\nbuild() {\nColumn() {",
+  "shouldRetriggerCpp": true
+}

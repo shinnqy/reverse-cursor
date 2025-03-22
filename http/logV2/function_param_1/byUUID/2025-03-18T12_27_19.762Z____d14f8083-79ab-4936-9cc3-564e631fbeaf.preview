@@ -1,0 +1,54 @@
+{"line":36,"column":13}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+function greet(name: string) {
+    return `Hello, ${name}!`;
+}
+
+greet('John');
+greet('Jane');
+
+interface Person {
+    name: string;
+    age: number;
+}
+
+function printPerson(person: Person) {
+    console.log(person);
+}
+
+printPerson({ name: 'John', age: 20 });
+printPerson({ name: 'Jane', age: 21 });
+
+
+function printValue(value: string | number) {
+    console.log(value);
+}
+
+printValue('Hello');
+printValue(123);
+
+function createUser(name: string, age: number) {
+    return {
+        name,
+        age,
+    };
+}
+
+const user = createUser('John', 20);
+
+function upda[ToFill]
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+function updateUser(user: User, name: string, age: number) {
+
+-------------------------------[                   fullText                  ]--------------------------------
+
+function updateUser(user: User, name: string, age: number) {
+    return {
+        ...user,
+        name,
+        age,
+    };
+}

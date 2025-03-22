@@ -1,0 +1,676 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:09.816Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/dynamicProp.ets",
+          "diffHistory": [
+            "1+|const user = {}\n",
+            "2-|  \n3-|}\n2+|  name: \"Alice\",\n3+|  age: 30,\n4+|  address: {\n5+|},\n6+|};\n7+|\n8+|\n",
+            "5-|},\n5+|    city: \"New York\",\n6+|    country: \"USA\",\n7+|  },\n10+|const greeting = `Hello, ${user.name}!`;\n",
+            "1-|\n1+|interface User {\n2+|  name: string;\n3+|  age: number;\n4+|  address: {\n5+|    city: string;\n6+|    country: string;\n7+|  };\n8+|}\n",
+            "1-|\n1+|interface Address {\n",
+            "5-|  address: {\n5+|  address: Address;\n",
+            "2+|  city: string;\n3+|  country: string;\n4+|}\n",
+            "9-|    city: string;\n10-|    country: string;\n11-|  };\n13-|const user = {\n10+|const user: User = {\n",
+            "21+|function getFullName(user: { firstName: string; lastName: string }) {\n22+|  return `${user.firstName} ${user.lastName}`;\n23+|}\n25+|const fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n26+|\n27+|\n28+|\n",
+            "25-|const fullName = getFullName({ firstName: \"John\", lastName: \"Doe\" });\n",
+            "25+|const currentUser = {\n26+|  firstName: \"John\",\n27+|  lastName: \"Doe\",\n28+|};\n30+|const fullName = getFullName(currentUser);\n",
+            "30-|const fullName = getFullName(currentUser);\n30+|const fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n",
+            "21-|function getFullName(user: { firstName: string; lastName: string }) {\n21+|interface FullName {\n22+|function getFullName(user: { firstName: string; lastName: string }\n23+|function getFullName(user: FullName) {\n",
+            "22-|function getFullName(user: { firstName: string; lastName: string }\n22+|function getFullName(user: { firstName: string; lastName: string ;\n23+|}\n",
+            "22-|function getFullName(user: { firstName: string;\n22+|  firstName: string;\n",
+            "29-|const currentUser = {\n29+|const currentUser: FullName = {\n",
+            "36+|const price = 100;\n37+|const discount = 0.1;\n38+|const priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n40+|const isAdmin = true;\n41+|const roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n43+|const products = [\n44+|  { name: \"Product 1\", price: 100 },\n45+|  { name: \"Product 2\", price: 200 },\n46+|  { name: \"Product 3\", price: 300 },\n47+|];\n49+|const productInfo = `Current product: ${products[0].name}`;\n50+|\n51+|type Status = \"active\" | \"inactive\";\n52+|let status: Status = \"active\";\n53+|const statusT\n54+|\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/dynamicProp.ets",
+        "contents": "interface Address {\n  city: string;\n  country: string;\n}\ninterface User {\n  name: string;\n  age: number;\n  address: Address;\n}\nconst user: User = {\n  name: \"Alice\",\n  age: 30,\n  address: {\n    city: \"New York\",\n    country: \"USA\",\n  },\n};\n\nconst greeting = `Hello, ${user.name}!`;\n\ninterface FullName {\n  firstName: string;\n  lastName: string;\n}\nfunction getFullName(user: FullName) {\n  return `${user.firstName} ${user.lastName}`;\n}\n\nconst currentUser: FullName = {\n  firstName: \"John\",\n  lastName: \"Doe\",\n};\n\nconst fullName = `Full Name: ${getFullName(currentUser).toUpperCase()}`;\n\nconst price = 100;\nconst discount = 0.1;\nconst priceInfo = `Price: ${(price * (1 - discount)).toFixed(2)}`;\n\nconst isAdmin = true;\nconst roleMessage = `User is ${isAdmin ? \"admin\" : \"not admin\"}`;\n\nconst products = [\n  { name: \"Product 1\", price: 100 },\n  { name: \"Product 2\", price: 200 },\n  { name: \"Product 3\", price: 300 },\n];\n\nconst productInfo = `Current product: ${products[0].name}`;\n\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusT\n\n",
+        "cursorPosition": {
+          "line": 52,
+          "column": 13
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 457,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742475789855,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.800048828125,
+      "timeAtRequestSend": 1742475789855
+    },
+    "generateUuid": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:09.859Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText",
+      "rangeToReplace": {
+        "startLineNumber": 50,
+        "endLineNumberInclusive": 55
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.204Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.208Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.227Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " `"
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.236Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Status"
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.248Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.260Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ${"
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.271Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "status"
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.283Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}`"
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.293Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";\n\n"
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.304Z"
+  },
+  {
+    "firstChunkValue": "\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\n",
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.308Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\n"
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.309Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "1031626c-d8e2-444f-8015-6be262c3e3ec",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 457,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 457,
+      "monotonicallyIncreasingSuggestionId": 287,
+      "range": {
+        "startLineNumber": 50,
+        "startColumn": 1,
+        "endLineNumberInclusive": 55,
+        "endColumn": 1
+      },
+      "replaceText": "\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\n",
+      "originalText": "\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusT\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 50,
+        "startColumn": 1,
+        "endLineNumberInclusive": 55,
+        "endColumn": 1
+      },
+      "diffText": "\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\n",
+      "fullOriginalText": "\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusT\n\n",
+      "suggestionTriggerTime": 1742475789806,
+      "greens": [],
+      "source": "typing",
+      "requestId": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+      "selection": {
+        "startLineNumber": 50,
+        "startColumn": 1,
+        "endLineNumberInclusive": 55,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 287,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 50,
+        "startColumn": 1,
+        "endLineNumber": 55,
+        "endColumn": 1
+      },
+      "trackedText": "\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusTex\n\n"
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.310Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "const"
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.315Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " user"
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.327Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "List"
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.339Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.351Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ["
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.361Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n "
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.372Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.383Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " name: \"Alice"
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.396Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\", age"
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.408Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": "
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.417Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "3"
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.430Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "0 },"
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.439Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n "
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.451Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.462Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " name"
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.473Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": \"Bob"
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.484Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\","
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.498Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " age"
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.508Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.519Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.530Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "2"
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.543Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "5"
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.554Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " },"
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.567Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.579Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.592Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " { name: \"Charlie"
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.604Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\","
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.617Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " age: 3"
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.631Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "5"
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.642Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " },\n];"
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.655Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.671Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.683Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.683Z"
+  },
+  {
+    "fullText": "\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\nconst userList = [\n  { name: \"Alice\", age: 30 },\n  { name: \"Bob\", age: 25 },\n  { name: \"Charlie\", age: 35 },\n];\n\n",
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.691Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\n"
+    },
+    "fullText": "\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\nconst userList = [\n  { name: \"Alice\", age: 30 },\n  { name: \"Bob\", age: 25 },\n  { name: \"Charlie\", age: 35 },\n];\n\n",
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.691Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "b5fe5850-43d5-46ce-a6dd-cf28f8b8f381",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 457,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 462,
+      "monotonicallyIncreasingSuggestionId": 289,
+      "range": {
+        "startLineNumber": 50,
+        "startColumn": 1,
+        "endLineNumberInclusive": 55,
+        "endColumn": 1
+      },
+      "replaceText": "\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\nconst userList = [\n  { name: \"Alice\", age: 30 },\n  { name: \"Bob\", age: 25 },\n  { name: \"Charlie\", age: 35 },\n];\n\n",
+      "originalText": "\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 50,
+        "startColumn": 1,
+        "endLineNumberInclusive": 55,
+        "endColumn": 1
+      },
+      "diffText": "\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\nconst userList = [\n  { name: \"Alice\", age: 30 },\n  { name: \"Bob\", age: 25 },\n  { name: \"Charlie\", age: 35 },\n];\n\n",
+      "fullOriginalText": "\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\n",
+      "suggestionTriggerTime": 1742475789806,
+      "greens": [],
+      "source": "typing",
+      "requestId": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+      "selection": {
+        "startLineNumber": 50,
+        "startColumn": 1,
+        "endLineNumberInclusive": 55,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "25eea80b-0fc8-43b3-97af-756014e642b4",
+      "undoRedoGroup": {
+        "id": 289,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.691Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "25eea80b-0fc8-43b3-97af-756014e642b4",
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.697Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "25eea80b-0fc8-43b3-97af-756014e642b4",
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:10.697Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "25eea80b-0fc8-43b3-97af-756014e642b4",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-20T13:03:10.697Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "1031626c-d8e2-444f-8015-6be262c3e3ec",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 457,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 457,
+      "monotonicallyIncreasingSuggestionId": 287,
+      "range": {
+        "startLineNumber": 50,
+        "startColumn": 1,
+        "endLineNumberInclusive": 55,
+        "endColumn": 1
+      },
+      "replaceText": "\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\n",
+      "originalText": "\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusT\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 50,
+        "startColumn": 1,
+        "endLineNumberInclusive": 55,
+        "endColumn": 1
+      },
+      "diffText": "\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\n",
+      "fullOriginalText": "\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusT\n\n",
+      "suggestionTriggerTime": 1742475789806,
+      "greens": [],
+      "source": "typing",
+      "requestId": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+      "selection": {
+        "startLineNumber": 50,
+        "startColumn": 1,
+        "endLineNumberInclusive": 55,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 287,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 50,
+        "startColumn": 1,
+        "endLineNumber": 55,
+        "endColumn": 1
+      },
+      "trackedText": "\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusTex\n\n",
+      "decorationId": "b;1677",
+      "onAcceptDisplayId": "b5fe5850-43d5-46ce-a6dd-cf28f8b8f381"
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:13.034Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "1031626c-d8e2-444f-8015-6be262c3e3ec",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/dynamicProp.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 457,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 457,
+      "monotonicallyIncreasingSuggestionId": 287,
+      "range": {
+        "startLineNumber": 50,
+        "startColumn": 1,
+        "endLineNumberInclusive": 55,
+        "endColumn": 1
+      },
+      "replaceText": "\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\n",
+      "originalText": "\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusT\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 50,
+        "startColumn": 1,
+        "endLineNumberInclusive": 55,
+        "endColumn": 1
+      },
+      "diffText": "\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusText = `Status: ${status}`;\n\n",
+      "fullOriginalText": "\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusT\n\n",
+      "suggestionTriggerTime": 1742475789806,
+      "greens": [],
+      "source": "typing",
+      "requestId": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+      "selection": {
+        "startLineNumber": 50,
+        "startColumn": 1,
+        "endLineNumberInclusive": 55,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 287,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 50,
+        "startColumn": 1,
+        "endLineNumber": 55,
+        "endColumn": 1
+      },
+      "trackedText": "\ntype Status = \"active\" | \"inactive\";\nlet status: Status = \"active\";\nconst statusTex\n\n",
+      "decorationId": "b;1677",
+      "onAcceptDisplayId": "b5fe5850-43d5-46ce-a6dd-cf28f8b8f381"
+    },
+    "generationUUID": "ca7222dd-02f3-4408-9dbe-0d87c9ad3328",
+    "timestamp": "2025-03-20T13:03:13.048Z"
+  }
+]

@@ -1,0 +1,175 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "586e1842-24b9-4890-bb6e-67ae58aeb240",
+    "timestamp": "2025-03-03T02:36:49.482Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/pages/Index.ets",
+          "diffHistory": [
+            "17-|\n17+|      Button() {\n",
+            "18+|        Text('Click me')\n19+|      }\n20+|      .onClick(() => {\n21+|        this.message = 'Hello World';\n22+|      })\n",
+            "18-|        Text('Click me')\n18+|        Text('Abount')\n",
+            "18-|        Text('Abount')\n18+|        Text('About Me')\n",
+            "21-|        this.message = 'Hello World';\n",
+            "21-|        \n21+|        router.push({\n",
+            "22+|          uri: 'pages/About'\n23+|        })\n",
+            "21-|        router.push({\n21+|        router.pushU({\n",
+            "21-|        router.pushU({\n22-|          uri: 'pages/About'\n21+|        router.pushUrl({\n22+|          url: 'pages/About'\n",
+            "22-|          url: 'pages/About'\n22+|          url: 'pages/AboutMe'\n",
+            "1+|import router from '@ohos.router';\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/pages/AboutMe.ets",
+          "diffHistory": [
+            "1+|@Preview\n",
+            "2+|@Entry\n3+|@Component\n4+|struct AboutMe {\n5+|  @State message: string = 'About Me';\n6+|  \n7+|}\n",
+            "2-|@Entry\n",
+            "5-|\n6-|}\n5+|  \n6+|  build() {\n7+|    Column() {\n8+|      Text(this.message)\n9+|        .fontSize(50)\n10+|        .fontWeight(FontWeight.Bold)\n11+|    }\n12+|  }\n13+|}\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/resources/base/profile/main_pages.json",
+          "diffHistory": [
+            "3-|    \"pages/Index\"\n3+|    \"pages/Index\",\n4+|    \"pages/AboutMe\"\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/pages/AboutMe.ets",
+          "diffHistory": [
+            "12-|        \n12+|      B\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/pages/AboutMe.ets",
+        "contents": "@Preview\n@Component\nstruct AboutMe {\n  @State message: string = 'About Me';\n\n  build() {\n    Column() {\n      Text(this.message)\n        .fontSize(50)\n        .fontWeight(FontWeight.Bold)\n\n      B\n    }\n  }\n}",
+        "cursorPosition": {
+          "line": 11,
+          "column": 7
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 21,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/pages/Index.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 31
+            }
+          ],
+          "lastViewedAt": 1740969350213
+        },
+        {
+          "relativeWorkspacePath": "entry/src/main/resources/base/profile/main_pages.json",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 7
+            }
+          ],
+          "lastViewedAt": 1740969401037
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1740969409520,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51,
+      "timeAtRequestSend": 1740969409521
+    },
+    "generateUuid": "586e1842-24b9-4890-bb6e-67ae58aeb240",
+    "timestamp": "2025-03-03T02:36:49.523Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "586e1842-24b9-4890-bb6e-67ae58aeb240",
+    "timestamp": "2025-03-03T02:36:49.943Z"
+  },
+  {
+    "firstChunkValue": "        .fontWeight(FontWeight.Bold)\n\n      Button() {\n        Text('Back')\n      }\n      .onClick(() => {\n        router.back();\n      })\n    }\n  }\n}",
+    "generationUUID": "586e1842-24b9-4890-bb6e-67ae58aeb240",
+    "timestamp": "2025-03-03T02:36:50.302Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "        .fontWeight(FontWeight.Bold)\n\n      Button() {\n        Text('Back')\n      }\n      .onClick(() => {\n        router.back();\n      })\n    }\n  }\n}"
+    },
+    "generationUUID": "586e1842-24b9-4890-bb6e-67ae58aeb240",
+    "timestamp": "2025-03-03T02:36:50.303Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "d20ec3bd-5263-4297-8d48-6e19104c4f57",
+    "generationUUID": "586e1842-24b9-4890-bb6e-67ae58aeb240",
+    "timestamp": "2025-03-03T02:36:50.306Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "        .fontWeight(FontWeight.Bold)\n\n      Button() {\n        Text('Back')\n      }\n      .onClick(() => {\n        router.back();\n      })\n    }\n  }\n}"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "d20ec3bd-5263-4297-8d48-6e19104c4f57",
+    "generationUUID": "586e1842-24b9-4890-bb6e-67ae58aeb240",
+    "timestamp": "2025-03-03T02:36:50.307Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "d20ec3bd-5263-4297-8d48-6e19104c4f57",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-03T02:36:50.307Z"
+  }
+]

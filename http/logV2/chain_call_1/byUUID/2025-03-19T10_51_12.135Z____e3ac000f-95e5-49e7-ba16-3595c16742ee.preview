@@ -1,0 +1,91 @@
+{"line":22,"column":23}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Component
+struct ChainCall {
+  build() {
+    Text('Hello, World!')
+      .width(100)
+      .height(100)
+      .background(Color.red)
+  }
+}
+
+@Component
+struct StyleModifier {
+  build() {
+    Text('Hello, World!')
+      .width(100)
+      .height(100)
+      .background(Color.red)
+      .fontSize(20)
+      .fontWeight(FontWeight.bold)
+      .fontFamily(FontFamily.monospace)
+      .fontStyle(FontStyle.italic)
+      .fontColor(Color.blue)
+      .fontOpacity(0.5)[ToFill]
+
+  }
+}
+
+@Component
+struct LayoutModifier {
+  build() {
+    Text('Hello, World!')
+      .width(100)
+      .height(100)
+      .background(Color.red)
+  }
+}
+-------------------------------[               firstChunkValue               ]--------------------------------
+      .fontStyle(FontStyle.italic)
+      .fontColor(Color.blue)
+      .fontOpacity(0.5)
+      .textAlign(TextAlign.center)
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+@Component
+struct ChainCall {
+  build() {
+    Text('Hello, World!')
+      .width(100)
+      .height(100)
+      .background(Color.red)
+  }
+}
+
+@Component
+struct StyleModifier {
+  build() {
+    Text('Hello, World!')
+      .width(100)
+      .height(100)
+      .background(Color.red)
+      .fontSize(20)
+      .fontWeight(FontWeight.bold)
+      .fontFamily(FontFamily.monospace)
+      .fontStyle(FontStyle.italic)
+      .fontColor(Color.blue)
+      .fontOpacity(0.5)
+      .textAlign(TextAlign.center)
+  }
+}
+
+@Component
+struct LayoutModifier {
+  build() {
+    Text('Hello, World!')
+      .width(100)
+      .height(100)
+      .background(Color.red)
+  }
+}
+-------------------------------[                   fullText                  ]--------------------------------
+      .fontStyle(FontStyle.italic)
+      .fontColor(Color.blue)
+      .fontOpacity(0.5)
+      .textAlign(TextAlign.center)
+      .textDecoration(TextDecoration.underline)
+      .textOverflow(TextOverflow.ellipsis)
+      .textShadow(Color.black, 2, 2, 2)
+      .textWrap(TextWrap.wrap)
+      .textWrapWidth(100)

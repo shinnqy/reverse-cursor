@@ -1,0 +1,137 @@
+{"line":37,"column":14}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+@Entry
+@Component
+struct ParentComponent {
+  @State parentCount: number = 0;
+
+  build() {
+    Column() {
+      Text(this.parentCount.toString())
+      LinkChildComponent({ target: this.parentCount })
+    }
+  }
+}
+
+@Component
+struct LinkChildComponent {
+  @Link target: number = 0;
+
+  build() {
+    Column() {
+      Button()
+        .onClick(() => {
+          this.target++;
+        })
+    }
+  }
+}
+
+interface User {
+  name: string;
+  age: number;
+}
+
+@Component
+struct ComplexBindingExample {
+  @State user: User = { name: 'John', age: 30 };
+
+  build() {
+    Column() {[ToFill]
+      Text(this.user.name)
+    }
+  }
+}
+
+@Component
+struct UserEditor {
+  @Link userName: string = '';
+  @Link userAge: number = 0;
+
+  build() {
+    Column() {
+      Text("Name:")
+      TextField({ value: this.userName, onChange: (value: string) => { this.userName = value } })
+      Text("Age:")
+      TextField({ value: this.userAge, onChange: (value: number) => { this.userAge = value } })
+    }
+  }
+}
+
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+  build() {
+    Column() {
+      Text(this.user.name)
+      UserEditor({ userName: this.user.name, userAge: this.user.age })
+  }
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+@Entry
+@Component
+struct ParentComponent {
+  @State parentCount: number = 0;
+
+  build() {
+    Column() {
+      Text(this.parentCount.toString())
+      LinkChildComponent({ target: this.parentCount })
+    }
+  }
+}
+
+@Component
+struct LinkChildComponent {
+  @Link target: number = 0;
+
+  build() {
+    Column() {
+      Button()
+        .onClick(() => {
+          this.target++;
+        })
+    }
+  }
+}
+
+interface User {
+  name: string;
+  age: number;
+}
+
+@Component
+struct ComplexBindingExample {
+  @State user: User = { name: 'John', age: 30 };
+
+  build() {
+    Column() {
+      Text(this.user.name)
+      UserEditor({ userName: this.user.name, userAge: this.user.age })
+  }
+}
+
+@Component
+struct UserEditor {
+  @Link userName: string = '';
+  @Link userAge: number = 0;
+
+  build() {
+    Column() {
+      Text("Name:")
+      TextField({ value: this.userName, onChange: (value: string) => { this.userName = value } })
+      Text("Age:")
+      TextField({ value: this.userAge, onChange: (value: number) => { this.userAge = value } })
+    }
+  }
+}
+
+
+
+-------------------------------[                   fullText                  ]--------------------------------
+  build() {
+    Column() {
+      Text(this.user.name)
+      UserEditor({ userName: this.user.name, userAge: this.user.age })
+    }
+  }

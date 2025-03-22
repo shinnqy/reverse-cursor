@@ -1,0 +1,284 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "6b2dd950-bce7-4ef7-bf78-6a64d8f391ac",
+    "timestamp": "2025-03-19T13:12:50.088Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/twoWayBinding.ets",
+          "diffHistory": [
+            "16+|  @Link t\n",
+            "16-|  @Link t\n16+|  @Link target: number = 0;\n",
+            "22-|          //\n22+|          this.target++;\n",
+            "9-|      LinkChildComponent()\n9+|      LinkChildComponent({ target: this.parentCount })\n",
+            "46+|  @Link u\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/twoWayBinding.ets",
+        "contents": "@Entry\n@Component\nstruct ParentComponent {\n  @State parentCount: number = 0;\n\n  build() {\n    Column() {\n      Text(this.parentCount.toString())\n      LinkChildComponent({ target: this.parentCount })\n    }\n  }\n}\n\n@Component\nstruct LinkChildComponent {\n  @Link target: number = 0;\n\n  build() {\n    Column() {\n      Button()\n        .onClick(() => {\n          this.target++;\n        })\n    }\n  }\n}\n\ninterface User {\n  name: string;\n  age: number;\n}\n\n@Component\nstruct ComplexBindingExample {\n  @State user: User = { name: 'John', age: 30 };\n\n  build() {\n    Column() {\n      Text(this.user.name)\n    }\n  }\n}\n\n@Component\nstruct UserEditor {\n  @Link u\n\n  build() {\n    Column() {\n      Text(\"\")\n      Text(\"\")\n    }\n  }\n}\n\n\n",
+        "cursorPosition": {
+          "line": 45,
+          "column": 9
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 22,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742389970129,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.5,
+      "timeAtRequestSend": 1742389970129
+    },
+    "generateUuid": "6b2dd950-bce7-4ef7-bf78-6a64d8f391ac",
+    "timestamp": "2025-03-19T13:12:50.131Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "6b2dd950-bce7-4ef7-bf78-6a64d8f391ac",
+    "timestamp": "2025-03-19T13:12:50.489Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}\n\n@Component\nstruct UserEditor {\n  @Link user",
+      "rangeToReplace": {
+        "startLineNumber": 42,
+        "endLineNumberInclusive": 49
+      },
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "6b2dd950-bce7-4ef7-bf78-6a64d8f391ac",
+    "timestamp": "2025-03-19T13:12:50.489Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": User = { name: 'John"
+    },
+    "generationUUID": "6b2dd950-bce7-4ef7-bf78-6a64d8f391ac",
+    "timestamp": "2025-03-19T13:12:50.523Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "', age: 30 };\n"
+    },
+    "generationUUID": "6b2dd950-bce7-4ef7-bf78-6a64d8f391ac",
+    "timestamp": "2025-03-19T13:12:50.530Z"
+  },
+  {
+    "firstChunkValue": "}\n\n@Component\nstruct UserEditor {\n  @Link user: User = { name: 'John', age: 30 };\n\n  build() {\n    Column() {",
+    "generationUUID": "6b2dd950-bce7-4ef7-bf78-6a64d8f391ac",
+    "timestamp": "2025-03-19T13:12:50.532Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "}\n\n@Component\nstruct UserEditor {\n  @Link user: User = { name: 'John', age: 30 };\n\n  build() {\n    Column() {"
+    },
+    "generationUUID": "6b2dd950-bce7-4ef7-bf78-6a64d8f391ac",
+    "timestamp": "2025-03-19T13:12:50.533Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "b90ff034-df49-4359-a1c9-4492e1f641d3",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/twoWayBinding.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/twoWayBinding.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/twoWayBinding.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 22,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 22,
+      "monotonicallyIncreasingSuggestionId": 9,
+      "range": {
+        "startLineNumber": 42,
+        "startColumn": 1,
+        "endLineNumberInclusive": 49,
+        "endColumn": 15
+      },
+      "replaceText": "}\n\n@Component\nstruct UserEditor {\n  @Link user: User = { name: 'John', age: 30 };\n\n  build() {\n    Column() {",
+      "originalText": "}\n\n@Component\nstruct UserEditor {\n  @Link u\n\n  build() {\n    Column() {",
+      "startingSuggestionRange": {
+        "startLineNumber": 42,
+        "startColumn": 1,
+        "endLineNumberInclusive": 49,
+        "endColumn": 15
+      },
+      "diffText": "}\n\n@Component\nstruct UserEditor {\n  @Link user: User = { name: 'John', age: 30 };\n\n  build() {\n    Column() {",
+      "fullOriginalText": "}\n\n@Component\nstruct UserEditor {\n  @Link u\n\n  build() {\n    Column() {",
+      "suggestionTriggerTime": 1742389970079.9,
+      "greens": [],
+      "source": "typing",
+      "requestId": "6b2dd950-bce7-4ef7-bf78-6a64d8f391ac",
+      "selection": {
+        "startLineNumber": 42,
+        "startColumn": 1,
+        "endLineNumberInclusive": 49,
+        "endColumn": 15
+      },
+      "undoRedoGroup": {
+        "id": 9,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 42,
+        "startColumn": 1,
+        "endLineNumber": 49,
+        "endColumn": 15
+      },
+      "trackedText": "}\n\n@Component\nstruct UserEditor {\n  @Link user\n\n  build() {\n    Column() {"
+    },
+    "generationUUID": "6b2dd950-bce7-4ef7-bf78-6a64d8f391ac",
+    "timestamp": "2025-03-19T13:12:50.534Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "6b2dd950-bce7-4ef7-bf78-6a64d8f391ac",
+    "timestamp": "2025-03-19T13:12:50.543Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "6b2dd950-bce7-4ef7-bf78-6a64d8f391ac",
+    "timestamp": "2025-03-19T13:12:50.556Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " build() {\n    Column() {"
+    },
+    "generationUUID": "6b2dd950-bce7-4ef7-bf78-6a64d8f391ac",
+    "timestamp": "2025-03-19T13:12:50.565Z"
+  },
+  {
+    "fullText": "}\n\n@Component\nstruct UserEditor {\n  @Link user: User = { name: 'John', age: 30 };\n\n  build() {\n    Column() {",
+    "generationUUID": "6b2dd950-bce7-4ef7-bf78-6a64d8f391ac",
+    "timestamp": "2025-03-19T13:12:50.606Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "}\n\n@Component\nstruct UserEditor {\n  @Link user: User = { name: 'John', age: 30 };\n\n  build() {\n    Column() {"
+    },
+    "fullText": "}\n\n@Component\nstruct UserEditor {\n  @Link user: User = { name: 'John', age: 30 };\n\n  build() {\n    Column() {",
+    "generationUUID": "6b2dd950-bce7-4ef7-bf78-6a64d8f391ac",
+    "timestamp": "2025-03-19T13:12:50.606Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "generationUUID": "6b2dd950-bce7-4ef7-bf78-6a64d8f391ac",
+    "timestamp": "2025-03-19T13:12:50.606Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "6b2dd950-bce7-4ef7-bf78-6a64d8f391ac",
+    "timestamp": "2025-03-19T13:12:50.607Z"
+  },
+  {
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/twoWayBinding.ets",
+      "lineNumberOneIndexed": 50,
+      "text": "Text(\"\")\nText(\"\")\n}\n}\n}",
+      "shouldRetriggerCpp": true
+    },
+    "predictionId": "8edec118-9d22-4239-ac12-88f0dcb5a4f3",
+    "generationUUID": "6b2dd950-bce7-4ef7-bf78-6a64d8f391ac",
+    "timestamp": "2025-03-19T13:12:50.725Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "}\n\n@Component\nstruct UserEditor {\n  @Link user: User = { name: 'John', age: 30 };\n\n  build() {\n    Column() {"
+    },
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/twoWayBinding.ets",
+      "lineNumberOneIndexed": 50,
+      "text": "Text(\"\")\nText(\"\")\n}\n}\n}",
+      "shouldRetriggerCpp": true
+    },
+    "predictionId": "8edec118-9d22-4239-ac12-88f0dcb5a4f3",
+    "generationUUID": "6b2dd950-bce7-4ef7-bf78-6a64d8f391ac",
+    "timestamp": "2025-03-19T13:12:50.725Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "8edec118-9d22-4239-ac12-88f0dcb5a4f3",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/twoWayBinding.ets",
+      "lineNumberOneIndexed": 50,
+      "text": "Text(\"\")\nText(\"\")\n}\n}\n}",
+      "shouldRetriggerCpp": true
+    },
+    "timestamp": "2025-03-19T13:12:50.726Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "cursorPredictionTarget": {
+        "relativePath": "entry/src/main/ets/utils/twoWayBinding.ets",
+        "lineNumberOneIndexed": 50,
+        "expectedContent": "Text(\"\")\nText(\"\")\n}\n}\n}",
+        "shouldRetriggerCpp": true
+      }
+    },
+    "generationUUID": "6b2dd950-bce7-4ef7-bf78-6a64d8f391ac",
+    "timestamp": "2025-03-19T13:12:50.726Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "6b2dd950-bce7-4ef7-bf78-6a64d8f391ac",
+    "timestamp": "2025-03-19T13:12:50.730Z"
+  }
+]
