@@ -885,5 +885,7 @@ export function createAuth(params) {
     $h,
     pTt,
     mTt,
+    r9i,
+    o9i,
   };
 }
