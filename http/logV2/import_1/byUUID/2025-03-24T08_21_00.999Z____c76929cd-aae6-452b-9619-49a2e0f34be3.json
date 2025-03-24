@@ -1,0 +1,487 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+    "timestamp": "2025-03-24T08:21:00.999Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/import/services.ets",
+          "diffHistory": [
+            "1+|import { Logger } from './utils';\n",
+            "1-|import { Logger } from './utils';\n1+|import { Logger, APi } from './utils';\n",
+            "1-|import { Logger, APi } from './utils';\n1+|import { Logger, ApiResponse } from './utils';\n2+|import { User, Product, Order, CartItem, PaymentMethod } from './models';\n"
+          ],
+          "diffHistoryTimestamps": []
+        },
+        {
+          "fileName": "entry/src/main/ets/utils/import/app.ets",
+          "diffHistory": [
+            "1+|import { Lo}\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/import/app.ets",
+        "contents": "import { Lo}\n\nclass Application {\n  private currentUser?: User;\n  private cart = new CartService();\n\n  // 完整业务流程示例\n  async runShoppingFlow(): Promise<void> {\n    try {\n      // 1. 用户登录\n      const user = new User(\"U1001\", \"Alice\", \"alice@example.com\");\n      const loginRes: ApiResponse<string> = AuthService.login(user);\n      Logger.log(`Login token: ${loginRes.data}`);\n\n      // 2. 添加商品到购物车\n      const sampleProduct: Product = new Product(\n        \"P1001\",\n        \"ArkTS Programming Guide\",\n        59.99,\n        100\n      );\n      this.cart.addItem(sampleProduct, 2);\n      Logger.log(`Cart items count: ${this.cart.getItems().length}`);\n\n      // 3. 创建订单\n      const order = OrderService.createOrder(this.cart.getItems());\n      Logger.log(`Created order: ${order.orderId}`);\n\n      // 4. 支付处理\n      const paymentMethod = new PaymentMethod(\n        \"4111111111111111\",\n        \"12/25\"\n      );\n      const paymentSuccess = new PaymentService().processPayment(order, paymentMethod);\n\n      Logger.log(paymentSuccess ?\n        \"Payment processed successfully\" :\n        \"Payment failed. Please retry\");\n\n    } catch (error) {\n      Logger.log(`Business flow error: ${error.message}`);\n    }\n  }\n\n  // 商品信息展示工具方法\n  static displayProductInfo(product: Product): void {\n    const info = `\n      Product Details:\n      SKU: ${product.sku}\n      Name: ${product.name}\n      Price: $${product.price.toFixed(2)}\n      Stock: ${product.inventory} left\n    `;\n    console.log(info);\n  }\n}\n\n// 启动应用\nconst app = new Application();\napp.runShoppingFlow();\n\n// 示例商品展示\nconst demoProduct = new Product(\"P2001\", \"TypeScript Handbook\", 39.99, 50);\nApplication.displayProductInfo(demoProduct);",
+        "cursorPosition": {
+          "line": 0,
+          "column": 11
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 13,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/utils/import/services.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 36
+            }
+          ],
+          "lastViewedAt": 1742804448663
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742804461035,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 55.2998046875,
+      "timeAtRequestSend": 1742804461035
+    },
+    "generateUuid": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+    "timestamp": "2025-03-24T08:21:01.036Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+    "timestamp": "2025-03-24T08:21:01.576Z"
+  },
+  {
+    "firstChunkValue": "import { Logger, ApiResponse } from './utils';\n\nclass Application {\n  private currentUser?: User;\n  private cart = new CartService();",
+    "generationUUID": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+    "timestamp": "2025-03-24T08:21:01.577Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+    "timestamp": "2025-03-24T08:21:01.580Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "rangeToReplace": {
+        "startLineNumber": 1,
+        "endLineNumberInclusive": 5
+      }
+    },
+    "generationUUID": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+    "timestamp": "2025-03-24T08:21:01.581Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "import { Logger"
+    },
+    "generationUUID": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+    "timestamp": "2025-03-24T08:21:01.581Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ","
+    },
+    "generationUUID": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+    "timestamp": "2025-03-24T08:21:01.581Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ApiResponse } from './utils';\n"
+    },
+    "generationUUID": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+    "timestamp": "2025-03-24T08:21:01.582Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "import"
+    },
+    "generationUUID": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+    "timestamp": "2025-03-24T08:21:01.582Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ","
+    },
+    "generationUUID": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+    "timestamp": "2025-03-24T08:21:01.582Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " { User"
+    },
+    "generationUUID": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+    "timestamp": "2025-03-24T08:21:01.582Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "import { Logger, ApiResponse } from './utils';\n\nclass Application {\n  private currentUser?: User;\n  private cart = new CartService();"
+    },
+    "generationUUID": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+    "timestamp": "2025-03-24T08:21:01.583Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Method } from './models';\nimport"
+    },
+    "generationUUID": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+    "timestamp": "2025-03-24T08:21:01.621Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Product, Order, CartItem, Payment"
+    },
+    "generationUUID": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+    "timestamp": "2025-03-24T08:21:01.622Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Auth"
+    },
+    "generationUUID": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+    "timestamp": "2025-03-24T08:21:01.622Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+    "timestamp": "2025-03-24T08:21:01.623Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Product"
+    },
+    "generationUUID": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+    "timestamp": "2025-03-24T08:21:01.623Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Service,"
+    },
+    "generationUUID": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+    "timestamp": "2025-03-24T08:21:01.623Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Service"
+    },
+    "generationUUID": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+    "timestamp": "2025-03-24T08:21:01.624Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ","
+    },
+    "generationUUID": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+    "timestamp": "2025-03-24T08:21:01.624Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Order"
+    },
+    "generationUUID": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+    "timestamp": "2025-03-24T08:21:01.625Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Service"
+    },
+    "generationUUID": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+    "timestamp": "2025-03-24T08:21:01.625Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ","
+    },
+    "generationUUID": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+    "timestamp": "2025-03-24T08:21:01.625Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Payment"
+    },
+    "generationUUID": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+    "timestamp": "2025-03-24T08:21:01.635Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Service"
+    },
+    "generationUUID": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+    "timestamp": "2025-03-24T08:21:01.680Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " }"
+    },
+    "generationUUID": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+    "timestamp": "2025-03-24T08:21:01.681Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " from './services"
+    },
+    "generationUUID": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+    "timestamp": "2025-03-24T08:21:01.681Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "';"
+    },
+    "generationUUID": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+    "timestamp": "2025-03-24T08:21:01.686Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+    "timestamp": "2025-03-24T08:21:01.698Z"
+  },
+  {
+    "fullText": "import { Logger, ApiResponse } from './utils';\nimport { User, Product, Order, CartItem, PaymentMethod } from './models';\nimport { AuthService, ProductService, OrderService, PaymentService } from './services';\n\nclass Application {\n  private currentUser?: User;\n  private cart = new CartService();",
+    "generationUUID": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+    "timestamp": "2025-03-24T08:21:01.878Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "import { Logger, ApiResponse } from './utils';\n\nclass Application {\n  private currentUser?: User;\n  private cart = new CartService();"
+    },
+    "fullText": "import { Logger, ApiResponse } from './utils';\nimport { User, Product, Order, CartItem, PaymentMethod } from './models';\nimport { AuthService, ProductService, OrderService, PaymentService } from './services';\n\nclass Application {\n  private currentUser?: User;\n  private cart = new CartService();",
+    "generationUUID": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+    "timestamp": "2025-03-24T08:21:01.880Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && currentSuggestion uniqueId is different && need to create newSuggestion according fullText",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "eb1cc447-59bb-4c04-9b4f-ec43082075bd",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/import/app.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/import/app.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/import/app.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 13,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 13,
+      "monotonicallyIncreasingSuggestionId": 42,
+      "range": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 5,
+        "endColumn": 36
+      },
+      "replaceText": "import { Logger, ApiResponse } from './utils';\nimport { User, Product, Order, CartItem, PaymentMethod } from './models';\nimport { AuthService, ProductService, OrderService, PaymentService } from './services';\n\nclass Application {\n  private currentUser?: User;\n  private cart = new CartService();",
+      "originalText": "import { Lo}\n\nclass Application {\n  private currentUser?: User;\n  private cart = new CartService();",
+      "startingSuggestionRange": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 5,
+        "endColumn": 36
+      },
+      "diffText": "import { Logger, ApiResponse } from './utils';\nimport { User, Product, Order, CartItem, PaymentMethod } from './models';\nimport { AuthService, ProductService, OrderService, PaymentService } from './services';\n\nclass Application {\n  private currentUser?: User;\n  private cart = new CartService();",
+      "fullOriginalText": "import { Lo}\n\nclass Application {\n  private currentUser?: User;\n  private cart = new CartService();",
+      "suggestionTriggerTime": 1742804460939.2002,
+      "greens": [],
+      "source": "typing",
+      "requestId": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+      "selection": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 5,
+        "endColumn": 36
+      },
+      "fusedCursorPredictionId": "84aa21db-791e-42c4-9dbe-e1442505407d",
+      "undoRedoGroup": {
+        "id": 42,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+    "timestamp": "2025-03-24T08:21:01.881Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "84aa21db-791e-42c4-9dbe-e1442505407d",
+    "generationUUID": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+    "timestamp": "2025-03-24T08:21:01.882Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "import { Logger, ApiResponse } from './utils';\n\nclass Application {\n  private currentUser?: User;\n  private cart = new CartService();"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "84aa21db-791e-42c4-9dbe-e1442505407d",
+    "generationUUID": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+    "timestamp": "2025-03-24T08:21:01.882Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "84aa21db-791e-42c4-9dbe-e1442505407d",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-24T08:21:01.883Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "class"
+    },
+    "generationUUID": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+    "timestamp": "2025-03-24T08:21:01.884Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Application {\n  private currentUser?:"
+    },
+    "generationUUID": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+    "timestamp": "2025-03-24T08:21:01.885Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " User;\n  private cart = new"
+    },
+    "generationUUID": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+    "timestamp": "2025-03-24T08:21:01.885Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Cart"
+    },
+    "generationUUID": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+    "timestamp": "2025-03-24T08:21:01.886Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Service();"
+    },
+    "generationUUID": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+    "timestamp": "2025-03-24T08:21:01.887Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+    "timestamp": "2025-03-24T08:21:01.888Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+    "timestamp": "2025-03-24T08:21:01.888Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "46c83d95-5af4-4231-9fd5-fc387eb66f23",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/import/app.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/import/app.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/import/app.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 12,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 14,
+      "monotonicallyIncreasingSuggestionId": 40,
+      "range": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 5,
+        "endColumn": 36
+      },
+      "replaceText": "import { Logger, ApiResponse } from './utils';\nimport { User, Product, Order, CartItem, PaymentMethod } from './models';\nimport { AuthService, ProductService, OrderService, PaymentService } from './services';\n\nclass Application {\n  private currentUser?: User;\n  private cart = new CartService();",
+      "originalText": "import { Logger, ApiResponse } from './utils';\n\nclass Application {\n  private currentUser?: User;\n  private cart = new CartService();",
+      "startingSuggestionRange": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 5,
+        "endColumn": 36
+      },
+      "diffText": "import { Logger, ApiResponse } from './utils';\nimport { User, Product, Order, CartItem, PaymentMethod } from './models';\nimport { AuthService, ProductService, OrderService, PaymentService } from './services';\n\nclass Application {\n  private currentUser?: User;\n  private cart = new CartService();",
+      "fullOriginalText": "import { Logger, ApiResponse } from './utils';\n\nclass Application {\n  private currentUser?: User;\n  private cart = new CartService();",
+      "suggestionTriggerTime": 1742804460478,
+      "greens": [],
+      "source": "typing",
+      "requestId": "896d2ed1-27a5-48dc-8314-4f9f3e3ecef5",
+      "selection": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 5,
+        "endColumn": 36
+      },
+      "fusedCursorPredictionId": "9ee01327-3253-41f4-9796-3313d646ccaf",
+      "undoRedoGroup": {
+        "id": 40,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "c76929cd-aae6-452b-9619-49a2e0f34be3",
+    "timestamp": "2025-03-24T08:21:02.131Z"
+  }
+]

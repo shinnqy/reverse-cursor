@@ -1,0 +1,370 @@
+[
+  {
+    "intent": "line_change",
+    "generationUUID": "911f3346-7b07-482b-9e05-5afd1304405e",
+    "timestamp": "2025-03-24T08:19:09.924Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/import/services.ets",
+          "diffHistory": [
+            "1+|import { Logger } from './utils';\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/import/services.ets",
+        "contents": "import { Logger } from './utils';\n\n\nexport class AuthService {\n  static login(user: User): ApiResponse<string> {\n    Logger.log(`User ${user.name} logged in`);\n    return { code: 200, data: 'token', timestamp: Date.now() };\n  }\n}\n\nexport class ProductService {\n  private inventory: Product[] = [];\n\n  updatePrice(product: Product, newPrice: number): void {\n    product.price = newPrice;\n    Logger.log(`Price updated for ${product.sku}`);\n  }\n}\n\nexport class OrderService {\n  static createOrder(items: CartItem[]): Order {\n    return new Order(\n      `ORD-${Date.now()}`,\n      items.map(i =>\n        new CartItem(\n          i.sku,\n          i.name,\n          i.price,\n          i.inventory,\n          i.quantity\n        )\n      ),\n      'pending'\n    );\n  }\n}\n\nexport class PaymentService {\n  processPayment(order: Order, method: PaymentMethod): boolean {\n    Logger.log(`Processing ${method.cardNumber.substring(12)}`); // ✅ 安全访问\n    return Math.random() > 0.5;\n  }\n}\n\nexport class CartService {\n  private items: CartItem[] = [];\n\n  public getItems(): CartItem[] {\n    return [...this.items]; // 返回副本避免直接修改\n  }\n  addItem(product: Product, quantity: number): void {\n    const existing = this.items.find(i => i.sku === product.sku);\n    existing ? existing.quantity += quantity :\n    this.items.push(new CartItem(\n      product.sku,\n      product.name,\n      product.price,\n      product.inventory,\n      quantity\n    ));\n  }\n}\n\n",
+        "cursorPosition": {
+          "line": 1,
+          "column": 0
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 35,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "line_change"
+      },
+      "clientTime": 1742804349973,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.7001953125,
+      "timeAtRequestSend": 1742804349973
+    },
+    "generateUuid": "911f3346-7b07-482b-9e05-5afd1304405e",
+    "timestamp": "2025-03-24T08:19:09.975Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "911f3346-7b07-482b-9e05-5afd1304405e",
+    "timestamp": "2025-03-24T08:19:10.286Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "911f3346-7b07-482b-9e05-5afd1304405e",
+    "timestamp": "2025-03-24T08:19:10.362Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "import { Logger } from './utils';\nimport"
+    },
+    "generationUUID": "911f3346-7b07-482b-9e05-5afd1304405e",
+    "timestamp": "2025-03-24T08:19:10.363Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "rangeToReplace": {
+        "startLineNumber": 1,
+        "endLineNumberInclusive": 5
+      }
+    },
+    "generationUUID": "911f3346-7b07-482b-9e05-5afd1304405e",
+    "timestamp": "2025-03-24T08:19:10.363Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " { User"
+    },
+    "generationUUID": "911f3346-7b07-482b-9e05-5afd1304405e",
+    "timestamp": "2025-03-24T08:19:10.396Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ","
+    },
+    "generationUUID": "911f3346-7b07-482b-9e05-5afd1304405e",
+    "timestamp": "2025-03-24T08:19:10.407Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Product"
+    },
+    "generationUUID": "911f3346-7b07-482b-9e05-5afd1304405e",
+    "timestamp": "2025-03-24T08:19:10.420Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ", Order"
+    },
+    "generationUUID": "911f3346-7b07-482b-9e05-5afd1304405e",
+    "timestamp": "2025-03-24T08:19:10.432Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ","
+    },
+    "generationUUID": "911f3346-7b07-482b-9e05-5afd1304405e",
+    "timestamp": "2025-03-24T08:19:10.446Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Cart"
+    },
+    "generationUUID": "911f3346-7b07-482b-9e05-5afd1304405e",
+    "timestamp": "2025-03-24T08:19:10.498Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Item,"
+    },
+    "generationUUID": "911f3346-7b07-482b-9e05-5afd1304405e",
+    "timestamp": "2025-03-24T08:19:10.499Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Payment"
+    },
+    "generationUUID": "911f3346-7b07-482b-9e05-5afd1304405e",
+    "timestamp": "2025-03-24T08:19:10.499Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Method }"
+    },
+    "generationUUID": "911f3346-7b07-482b-9e05-5afd1304405e",
+    "timestamp": "2025-03-24T08:19:10.500Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " from './types"
+    },
+    "generationUUID": "911f3346-7b07-482b-9e05-5afd1304405e",
+    "timestamp": "2025-03-24T08:19:10.512Z"
+  },
+  {
+    "firstChunkValue": "import { Logger } from './utils';\nimport { User, Product, Order, CartItem, PaymentMethod } from './types';\n\nexport class AuthService {\n  static login(user: User): ApiResponse<string> {",
+    "generationUUID": "911f3346-7b07-482b-9e05-5afd1304405e",
+    "timestamp": "2025-03-24T08:19:10.691Z"
+  },
+  {
+    "fullText": "import { Logger } from './utils';\nimport { User, Product, Order, CartItem, PaymentMethod } from './types';\n\nexport class AuthService {\n  static login(user: User): ApiResponse<string> {",
+    "generationUUID": "911f3346-7b07-482b-9e05-5afd1304405e",
+    "timestamp": "2025-03-24T08:19:10.692Z"
+  },
+  {
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/import/services.ets",
+      "lineNumberOneIndexed": 3,
+      "text": "",
+      "shouldRetriggerCpp": true
+    },
+    "predictionId": "965063eb-90bd-4353-ad32-31c045b78008",
+    "generationUUID": "911f3346-7b07-482b-9e05-5afd1304405e",
+    "timestamp": "2025-03-24T08:19:10.694Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "import { Logger } from './utils';\nimport { User, Product, Order, CartItem, PaymentMethod } from './types';\n\nexport class AuthService {\n  static login(user: User): ApiResponse<string> {"
+    },
+    "generationUUID": "911f3346-7b07-482b-9e05-5afd1304405e",
+    "timestamp": "2025-03-24T08:19:10.695Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "dd446d96-5e0e-4baa-806f-052b8abd3f56",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/import/services.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/import/services.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/import/services.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 35,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 35,
+      "monotonicallyIncreasingSuggestionId": 19,
+      "range": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 5,
+        "endColumn": 50
+      },
+      "replaceText": "import { Logger } from './utils';\nimport { User, Product, Order, CartItem, PaymentMethod } from './types';\n\nexport class AuthService {\n  static login(user: User): ApiResponse<string> {",
+      "originalText": "import { Logger } from './utils';\n\n\nexport class AuthService {\n  static login(user: User): ApiResponse<string> {",
+      "startingSuggestionRange": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 5,
+        "endColumn": 50
+      },
+      "diffText": "import { Logger } from './utils';\nimport { User, Product, Order, CartItem, PaymentMethod } from './types';\n\nexport class AuthService {\n  static login(user: User): ApiResponse<string> {",
+      "fullOriginalText": "import { Logger } from './utils';\n\n\nexport class AuthService {\n  static login(user: User): ApiResponse<string> {",
+      "suggestionTriggerTime": 1742804349923,
+      "greens": [],
+      "source": "line_change",
+      "requestId": "911f3346-7b07-482b-9e05-5afd1304405e",
+      "selection": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 5,
+        "endColumn": 50
+      },
+      "undoRedoGroup": {
+        "id": 19,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "911f3346-7b07-482b-9e05-5afd1304405e",
+    "timestamp": "2025-03-24T08:19:10.697Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "';"
+    },
+    "generationUUID": "911f3346-7b07-482b-9e05-5afd1304405e",
+    "timestamp": "2025-03-24T08:19:10.697Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "generationUUID": "911f3346-7b07-482b-9e05-5afd1304405e",
+    "timestamp": "2025-03-24T08:19:10.697Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "import { Logger } from './utils';\nimport { User, Product, Order, CartItem, PaymentMethod } from './types';\n\nexport class AuthService {\n  static login(user: User): ApiResponse<string> {"
+    },
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/import/services.ets",
+      "lineNumberOneIndexed": 3,
+      "text": "",
+      "shouldRetriggerCpp": true
+    },
+    "predictionId": "965063eb-90bd-4353-ad32-31c045b78008",
+    "generationUUID": "911f3346-7b07-482b-9e05-5afd1304405e",
+    "timestamp": "2025-03-24T08:19:10.698Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "965063eb-90bd-4353-ad32-31c045b78008",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/import/services.ets",
+      "lineNumberOneIndexed": 3,
+      "text": "",
+      "shouldRetriggerCpp": true
+    },
+    "timestamp": "2025-03-24T08:19:10.698Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "import { Logger } from './utils';\nimport { User, Product, Order, CartItem, PaymentMethod } from './types';\n\nexport class AuthService {\n  static login(user: User): ApiResponse<string> {"
+    },
+    "fullText": "import { Logger } from './utils';\nimport { User, Product, Order, CartItem, PaymentMethod } from './types';\n\nexport class AuthService {\n  static login(user: User): ApiResponse<string> {",
+    "generationUUID": "911f3346-7b07-482b-9e05-5afd1304405e",
+    "timestamp": "2025-03-24T08:19:10.698Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "911f3346-7b07-482b-9e05-5afd1304405e",
+    "timestamp": "2025-03-24T08:19:10.699Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "export"
+    },
+    "generationUUID": "911f3346-7b07-482b-9e05-5afd1304405e",
+    "timestamp": "2025-03-24T08:19:10.699Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " class Auth"
+    },
+    "generationUUID": "911f3346-7b07-482b-9e05-5afd1304405e",
+    "timestamp": "2025-03-24T08:19:10.699Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Service {\n  static login(user"
+    },
+    "generationUUID": "911f3346-7b07-482b-9e05-5afd1304405e",
+    "timestamp": "2025-03-24T08:19:10.700Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "911f3346-7b07-482b-9e05-5afd1304405e",
+    "timestamp": "2025-03-24T08:19:10.701Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " User): ApiResponse<string> {"
+    },
+    "generationUUID": "911f3346-7b07-482b-9e05-5afd1304405e",
+    "timestamp": "2025-03-24T08:19:10.702Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "911f3346-7b07-482b-9e05-5afd1304405e",
+    "timestamp": "2025-03-24T08:19:10.702Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "cursorPredictionTarget": {
+        "relativePath": "entry/src/main/ets/utils/import/services.ets",
+        "lineNumberOneIndexed": 3,
+        "expectedContent": "",
+        "shouldRetriggerCpp": true
+      }
+    },
+    "generationUUID": "911f3346-7b07-482b-9e05-5afd1304405e",
+    "timestamp": "2025-03-24T08:19:10.703Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "911f3346-7b07-482b-9e05-5afd1304405e",
+    "timestamp": "2025-03-24T08:19:10.703Z"
+  }
+]

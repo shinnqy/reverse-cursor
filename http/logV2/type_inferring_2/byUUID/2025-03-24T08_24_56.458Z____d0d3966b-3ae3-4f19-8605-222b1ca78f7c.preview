@@ -1,0 +1,87 @@
+{"line":16,"column":9}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+interface User {
+    id: number;
+    name: string;
+    age: number;
+}
+interface Admin { level: number; permission: string[] }
+
+interface Post {title: string; content: string}
+
+interface Comment {
+    id: number;
+    author: string;
+}
+
+type UserRole = User | Admin;
+type Content = Post | Comment;
+type Resu[ToFill]
+
+class Response {
+  data: Error;
+  status: number;
+
+  constructor(data: Error, status: number) {
+    this.data = data;
+    this.status = status;
+  }
+}
+
+class DataProcessor {
+  private items: string[] = [];
+
+  addItem(item: string) {
+    this.items.push(item);
+  }
+
+  getFirstItem(): string | undefined {
+    return this.items[0];
+  }
+
+  getItems(): string[] {
+    return this.items;
+  }
+}
+
+function merge(a: string, b: string): string {
+  return a + b;
+}
+
+function wrap(input: string): string[] {
+  return [input]
+}
+
+class Cache {
+  private store = new Map<string, string>();
+
+  get(key: string): string | undefined {
+    return this.store.get(key);
+  }
+
+  set(key: string, value: string) {
+    this.store.set(key, value);
+  }
+}
+
+function demo() {
+
+}
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+type UserRole = User | Admin;
+type Content = Post | Comment;
+type Result = UserRole | Content;
+
+-------------------------------[                   fullText                  ]--------------------------------
+type UserRole = User | Admin;
+type Content = Post | Comment;
+type Result = UserRole | Content;
+
+function processResult(result: Result) {
+  if (result.id) {
+    return result.id;
+  }
+}

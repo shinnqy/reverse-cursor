@@ -1,0 +1,79 @@
+{"line":0,"column":0}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+[ToFill]
+class Application {
+  private currentUser?: User;
+  private cart = new CartService();
+
+  // 完整业务流程示例
+  async runShoppingFlow(): Promise<void> {
+    try {
+      // 1. 用户登录
+      const user = new User("U1001", "Alice", "alice@example.com");
+      const loginRes: ApiResponse<string> = AuthService.login(user);
+      Logger.log(`Login token: ${loginRes.data}`);
+
+      // 2. 添加商品到购物车
+      const sampleProduct: Product = new Product(
+        "P1001",
+        "ArkTS Programming Guide",
+        59.99,
+        100
+      );
+      this.cart.addItem(sampleProduct, 2);
+      Logger.log(`Cart items count: ${this.cart.getItems().length}`);
+
+      // 3. 创建订单
+      const order = OrderService.createOrder(this.cart.getItems());
+      Logger.log(`Created order: ${order.orderId}`);
+
+      // 4. 支付处理
+      const paymentMethod = new PaymentMethod(
+        "4111111111111111",
+        "12/25"
+      );
+      const paymentSuccess = new PaymentService().processPayment(order, paymentMethod);
+
+      Logger.log(paymentSuccess ?
+        "Payment processed successfully" :
+        "Payment failed. Please retry");
+
+    } catch (error) {
+      Logger.log(`Business flow error: ${error.message}`);
+    }
+  }
+
+  // 商品信息展示工具方法
+  static displayProductInfo(product: Product): void {
+    const info = `
+      Product Details:
+      SKU: ${product.sku}
+      Name: ${product.name}
+      Price: $${product.price.toFixed(2)}
+      Stock: ${product.inventory} left
+    `;
+    console.log(info);
+  }
+}
+
+// 启动应用
+const app = new Application();
+app.runShoppingFlow();
+
+// 示例商品展示
+const demoProduct = new Product("P2001", "TypeScript Handbook", 39.99, 50);
+Application.displayProductInfo(demoProduct);
+-------------------------------[               firstChunkValue               ]--------------------------------
+import { Logger, ApiResponse } from './utils';
+class Application {
+  private currentUser?: User;
+  private cart = new CartService();
+-------------------------------[                   fullText                  ]--------------------------------
+import { Logger, ApiResponse } from './utils';
+import { User, Product, Order, CartItem, PaymentMethod } from './models';
+import { AuthService, ProductService, OrderService, PaymentService } from './services';
+
+class Application {
+  private currentUser?: User;
+  private cart = new CartService();

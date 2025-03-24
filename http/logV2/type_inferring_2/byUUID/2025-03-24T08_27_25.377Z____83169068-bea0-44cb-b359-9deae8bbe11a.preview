@@ -1,0 +1,150 @@
+{"line":47,"column":42}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+interface User {
+    id: number;
+    name: string;
+    age: number;
+}
+interface Admin { level: number; permission: string[] }
+
+interface Post {title: string; content: string}
+
+interface Comment {
+    id: number;
+    author: string;
+}
+
+type UserRole = User | Admin;
+type Content = Post | Comment;
+type Result<T> = T | Error;
+type ID = string | number;
+type Status = 'pending' | 'success' | 'error';
+
+class Response<T> {
+  data: T | Error;
+  status: number;
+
+  constructor(data: T | Error, status: number) {
+    this.data = data;
+    this.status = status;
+  }
+}
+
+class DataProcessor<T extends Content> {
+  private items: (T | string)[] = [];
+
+  addItem(item: T | null) {
+    this.items.push(item);
+  }
+
+  getFirstItem(): T | undefined {
+    return this.items[0];
+  }
+
+  getItems(): T | undefined {
+    return this.items;
+  }
+}
+
+function merge<T extends string | number>(a: T, b: T): T {
+  return (typeof a === 'string' ? a + b : [ToFill]a + b);
+}
+
+function wrap<T>(input: T): T[] {
+  return [input]
+}
+
+class Cache {
+  private store = new Map<string, string>();
+
+  get(key: string): string | undefined {
+    return this.store.get(key);
+  }
+
+  set(key: string, value: string) {
+    this.store.set(key, value);
+  }
+}
+
+function demo() {
+
+}
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+function merge<T extends string | number>(a: T, b: T): T {
+  return (typeof a === 'string' ? a + b : a + b) as T;
+}
+
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+interface User {
+    id: number;
+    name: string;
+    age: number;
+}
+interface Admin { level: number; permission: string[] }
+
+interface Post {title: string; content: string}
+
+interface Comment {
+    id: number;
+    author: string;
+}
+
+type UserRole = User | Admin;
+type Content = Post | Comment;
+type Result<T> = T | Error;
+type ID = string | number;
+type Status = 'pending' | 'success' | 'error';
+
+class Response<T> {
+  data: T | Error;
+  status: number;
+
+  constructor(data: T | Error, status: number) {
+    this.data = data;
+    this.status = status;
+  }
+}
+
+class DataProcessor<T extends Content> {
+  private items: (T | string)[] = [];
+
+  addItem(item: T | null) {
+    this.items.push(item);
+  }
+
+  getFirstItem(): T | undefined {
+    return this.items[0];
+  }
+
+  getItems(): T | undefined {
+    return this.items;
+  }
+}
+
+function merge<T extends string | number>(a: T, b: T): T {
+  return (typeof a === 'string' ? a + b : a + b) as T;
+}
+
+function wrap<T>(input: T): T[] {
+  return [input]
+}
+
+class Cache {
+  private store = new Map<string, string>();
+
+  get(key: string): string | undefined {
+    return this.store.get(key);
+  }
+
+  set(key: string, value: string) {
+    this.store.set(key, value);
+  }
+}
+
+function demo() {
+
+}
+

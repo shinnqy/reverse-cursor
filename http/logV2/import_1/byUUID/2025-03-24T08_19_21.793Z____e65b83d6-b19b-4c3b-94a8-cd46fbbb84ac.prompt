@@ -1,0 +1,98 @@
+You're an expert in ArkTS. Your task is to help the user update the code around current cursor position.
+
+## Recent Actions
+Here is what the user has been doing from the earliest to the latest:
+
+File: entry/src/main/ets/utils/import/services.ets
+added the code `import { Logger } from './utils';` in line 1
+
+deleted the code `import { Logger } from './utils';` in line 1
+added the code `import { Logger, APi } from './utils';` in line 1
+
+
+## Current Code
+Here is the current code file path:
+entry/src/main/ets/utils/import/services.ets
+
+Here is the current code around the cursor position:
+
+```
+<|editable_region_start|>
+import { Logger, APi<|current_cursor_position|> } from './utils';
+
+
+export class AuthService {
+  static login(user: User): ApiResponse<string> {
+    Logger.log(`User ${user.name} logged in`);
+    return { code: 200, data: 'token', timestamp: Date.now() };
+  }
+}
+
+export class ProductService {
+<|editable_region_end|>
+  private inventory: Product[] = [];
+
+  updatePrice(product: Product, newPrice: number): void {
+    product.price = newPrice;
+    Logger.log(`Price updated for ${product.sku}`);
+  }
+}
+
+export class OrderService {
+  static createOrder(items: CartItem[]): Order {
+    return new Order(
+      `ORD-${Date.now()}`,
+      items.map(i =>
+        new CartItem(
+          i.sku,
+          i.name,
+          i.price,
+          i.inventory,
+          i.quantity
+        )
+      ),
+      'pending'
+    );
+  }
+}
+
+export class PaymentService {
+  processPayment(order: Order, method: PaymentMethod): boolean {
+    Logger.log(`Processing ${method.cardNumber.substring(12)}`); // ✅ 安全访问
+    return Math.random() > 0.5;
+  }
+}
+
+export class CartService {
+  private items: CartItem[] = [];
+
+  public getItems(): CartItem[] {
+    return [...this.items]; // 返回副本避免直接修改
+  }
+  addItem(product: Product, quantity: number): void {
+    const existing = this.items.find(i => i.sku === product.sku);
+    existing ? existing.quantity += quantity :
+    this.items.push(new CartItem(
+      product.sku,
+      product.name,
+      product.price,
+      product.inventory,
+      quantity
+    ));
+  }
+}
+
+
+```
+
+## Task
+Rewrite the code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> according to the following requirements:
+1. Enforce code format strictly matching existing code style.
+2. Propagate naming convention changes to all related cases
+3. Preserve original functionality
+4. Apply changes to entire code regardless of cursor position
+5. Focus on code after cursor position at <|current_cursor_position|>
+
+# Output Format
+Return ONLY the rewritten code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> without any other words.
+Never use markdown formatting like ```. Return raw text only.
