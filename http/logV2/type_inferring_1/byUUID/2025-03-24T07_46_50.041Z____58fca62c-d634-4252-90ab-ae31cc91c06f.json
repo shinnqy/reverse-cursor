@@ -1,0 +1,329 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "58fca62c-d634-4252-90ab-ae31cc91c06f",
+    "timestamp": "2025-03-24T07:46:50.041Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/typingInfer.ets",
+          "diffHistory": [
+            "1-|\n1+|ine\n",
+            "1-|ine\n1+|interface User {id: nu}\n2+|\n3+|\n",
+            "1-|interface User {id: nu}\n1+|interface User {id: number;\n2+|    name: string;\n3+|    age: number;\n4+|}\n",
+            "6+|interface Admin { level: number; permission: string[] }\n8+|interface Post {title: string; content: string}\n10+|interface Comment {\n11+|    id: number;\n12+|    content: string;\n13+|}\n14+|\n15+|\n16+|\n17+|\n",
+            "12-|    content: string;\n12+|    author: string;\n",
+            "15+|type UserRole = User | Admin;\n",
+            "17+|type Content = Post | Comment;\n19+|type Result<T> = T | Error;\n20+|\n21+|type ID = string | number;\n22+|\n23+|type Status = 'pending' | 'success' | 'error';\n24+|\n25+|class Response<T> {\n26+|  \n27+|}\n",
+            "25-|class Response<T> {\n26-|  \n25+|class Response<T {\n26+|  data: T | Error;\n27+|  status: number;\n",
+            "25-|class Response<T {\n26-|  data: T | Error;\n25+|class Response {\n26+|  data: Error;\n",
+            "28-|  \n29-|  \n28+|\n29+|  constructor(data: Error, status: number) {\n",
+            "30+|    this.data = data;\n31+|    this.status = status;\n32+|  }\n",
+            "25-|class Response {\n25+|class Response<> {\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/typingInfer.ets",
+        "contents": "interface User {\n    id: number;\n    name: string;\n    age: number;\n}\ninterface Admin { level: number; permission: string[] }\n\ninterface Post {title: string; content: string}\n\ninterface Comment {\n    id: number;\n    author: string;\n}\n\ntype UserRole = User | Admin;\n\ntype Content = Post | Comment;\n\ntype Result<T> = T | Error;\n\ntype ID = string | number;\n\ntype Status = 'pending' | 'success' | 'error';\n\nclass Response<> {\n  data: Error;\n  status: number;\n\n  constructor(data: Error, status: number) {\n    this.data = data;\n    this.status = status;\n  }\n}\n\n\n\n",
+        "cursorPosition": {
+          "line": 24,
+          "column": 16
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 313,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/utils/test.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 1
+            }
+          ],
+          "lastViewedAt": 1742802122439
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742802410088,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 53.39990234375,
+      "timeAtRequestSend": 1742802410088
+    },
+    "generateUuid": "58fca62c-d634-4252-90ab-ae31cc91c06f",
+    "timestamp": "2025-03-24T07:46:50.090Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "58fca62c-d634-4252-90ab-ae31cc91c06f",
+    "timestamp": "2025-03-24T07:46:50.379Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "type ID = string | number;\n\ntype Status = 'pending' | 'success' | 'error';\n\nclass Response<"
+    },
+    "generationUUID": "58fca62c-d634-4252-90ab-ae31cc91c06f",
+    "timestamp": "2025-03-24T07:46:50.459Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "rangeToReplace": {
+        "startLineNumber": 21,
+        "endLineNumberInclusive": 28
+      }
+    },
+    "generationUUID": "58fca62c-d634-4252-90ab-ae31cc91c06f",
+    "timestamp": "2025-03-24T07:46:50.460Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "58fca62c-d634-4252-90ab-ae31cc91c06f",
+    "timestamp": "2025-03-24T07:46:50.460Z"
+  },
+  {
+    "firstChunkValue": "type ID = string | number;\n\ntype Status = 'pending' | 'success' | 'error';\n\nclass Response<T> {\n  data: T;\n  status: number;\n",
+    "generationUUID": "58fca62c-d634-4252-90ab-ae31cc91c06f",
+    "timestamp": "2025-03-24T07:46:50.654Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "T"
+    },
+    "generationUUID": "58fca62c-d634-4252-90ab-ae31cc91c06f",
+    "timestamp": "2025-03-24T07:46:50.655Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "type ID = string | number;\n\ntype Status = 'pending' | 'success' | 'error';\n\nclass Response<T> {\n  data: T;\n  status: number;\n"
+    },
+    "generationUUID": "58fca62c-d634-4252-90ab-ae31cc91c06f",
+    "timestamp": "2025-03-24T07:46:50.656Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ">"
+    },
+    "generationUUID": "58fca62c-d634-4252-90ab-ae31cc91c06f",
+    "timestamp": "2025-03-24T07:46:50.656Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " data"
+    },
+    "generationUUID": "58fca62c-d634-4252-90ab-ae31cc91c06f",
+    "timestamp": "2025-03-24T07:46:50.656Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {\n "
+    },
+    "generationUUID": "58fca62c-d634-4252-90ab-ae31cc91c06f",
+    "timestamp": "2025-03-24T07:46:50.657Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": T"
+    },
+    "generationUUID": "58fca62c-d634-4252-90ab-ae31cc91c06f",
+    "timestamp": "2025-03-24T07:46:50.657Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";"
+    },
+    "generationUUID": "58fca62c-d634-4252-90ab-ae31cc91c06f",
+    "timestamp": "2025-03-24T07:46:50.657Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n  status"
+    },
+    "generationUUID": "58fca62c-d634-4252-90ab-ae31cc91c06f",
+    "timestamp": "2025-03-24T07:46:50.657Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "58fca62c-d634-4252-90ab-ae31cc91c06f",
+    "timestamp": "2025-03-24T07:46:50.658Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " number;"
+    },
+    "generationUUID": "58fca62c-d634-4252-90ab-ae31cc91c06f",
+    "timestamp": "2025-03-24T07:46:50.658Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "58fca62c-d634-4252-90ab-ae31cc91c06f",
+    "timestamp": "2025-03-24T07:46:50.658Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "58fca62c-d634-4252-90ab-ae31cc91c06f",
+    "timestamp": "2025-03-24T07:46:50.658Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "aa130400-e7c3-4fc5-9471-80e645d6428b",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 313,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 313,
+      "monotonicallyIncreasingSuggestionId": 200,
+      "range": {
+        "startLineNumber": 21,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 1
+      },
+      "replaceText": "type ID = string | number;\n\ntype Status = 'pending' | 'success' | 'error';\n\nclass Response<T> {\n  data: T;\n  status: number;\n",
+      "originalText": "type ID = string | number;\n\ntype Status = 'pending' | 'success' | 'error';\n\nclass Response<> {\n  data: Error;\n  status: number;\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 21,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 1
+      },
+      "diffText": "type ID = string | number;\n\ntype Status = 'pending' | 'success' | 'error';\n\nclass Response<T> {\n  data: T;\n  status: number;\n",
+      "fullOriginalText": "type ID = string | number;\n\ntype Status = 'pending' | 'success' | 'error';\n\nclass Response<> {\n  data: Error;\n  status: number;\n",
+      "suggestionTriggerTime": 1742802410047.6,
+      "greens": [],
+      "source": "typing",
+      "requestId": "58fca62c-d634-4252-90ab-ae31cc91c06f",
+      "selection": {
+        "startLineNumber": 21,
+        "startColumn": 1,
+        "endLineNumberInclusive": 28,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "8f4ba21a-997d-4072-9b68-382c40a8f80a",
+      "undoRedoGroup": {
+        "id": 201,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "58fca62c-d634-4252-90ab-ae31cc91c06f",
+    "timestamp": "2025-03-24T07:46:50.659Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "58fca62c-d634-4252-90ab-ae31cc91c06f",
+    "timestamp": "2025-03-24T07:46:50.779Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "cursorPredictionTarget": {
+        "relativePath": "entry/src/main/ets/utils/typingInfer.ets",
+        "lineNumberOneIndexed": 29,
+        "expectedContent": "constructor(data: Error, status: number) {\nthis.data = data;\nthis.status = status;\n}\n}",
+        "shouldRetriggerCpp": true
+      }
+    },
+    "generationUUID": "58fca62c-d634-4252-90ab-ae31cc91c06f",
+    "timestamp": "2025-03-24T07:46:50.779Z"
+  },
+  {
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/typingInfer.ets",
+      "lineNumberOneIndexed": 29,
+      "text": "constructor(data: Error, status: number) {\nthis.data = data;\nthis.status = status;\n}\n}",
+      "shouldRetriggerCpp": true
+    },
+    "predictionId": "8f4ba21a-997d-4072-9b68-382c40a8f80a",
+    "generationUUID": "58fca62c-d634-4252-90ab-ae31cc91c06f",
+    "timestamp": "2025-03-24T07:46:50.786Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "type ID = string | number;\n\ntype Status = 'pending' | 'success' | 'error';\n\nclass Response<T> {\n  data: T;\n  status: number;\n"
+    },
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/typingInfer.ets",
+      "lineNumberOneIndexed": 29,
+      "text": "constructor(data: Error, status: number) {\nthis.data = data;\nthis.status = status;\n}\n}",
+      "shouldRetriggerCpp": true
+    },
+    "predictionId": "8f4ba21a-997d-4072-9b68-382c40a8f80a",
+    "generationUUID": "58fca62c-d634-4252-90ab-ae31cc91c06f",
+    "timestamp": "2025-03-24T07:46:50.786Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "8f4ba21a-997d-4072-9b68-382c40a8f80a",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/typingInfer.ets",
+      "lineNumberOneIndexed": 29,
+      "text": "constructor(data: Error, status: number) {\nthis.data = data;\nthis.status = status;\n}\n}",
+      "shouldRetriggerCpp": true
+    },
+    "timestamp": "2025-03-24T07:46:50.787Z"
+  }
+]

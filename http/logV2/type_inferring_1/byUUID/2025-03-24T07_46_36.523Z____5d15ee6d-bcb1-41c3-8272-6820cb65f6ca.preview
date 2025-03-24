@@ -1,0 +1,46 @@
+{"line":25,"column":8}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+interface User {
+    id: number;
+    name: string;
+    age: number;
+}
+interface Admin { level: number; permission: string[] }
+
+interface Post {title: string; content: string}
+
+interface Comment {
+    id: number;
+    author: string;
+}
+
+type UserRole = User | Admin;
+
+type Content = Post | Comment;
+
+type Result<T> = T | Error;
+
+type ID = string | number;
+
+type Status = 'pending' | 'success' | 'error';
+
+class Response {
+  data: [ToFill]Error;
+  status: number;
+}
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+type Status = 'pending' | 'success' | 'error';
+
+class Response {
+  data: Error;
+  status: number;
+}
+
+type UserResponse = Response<User>;
+
+type AdminResponse = Response<Admin>;
+
+

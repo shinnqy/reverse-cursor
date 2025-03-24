@@ -1,0 +1,39 @@
+{"line":11,"column":10}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+interface User {
+    id: number;
+    name: string;
+    age: number;
+}
+interface Admin { level: number; permission: string[] }
+
+interface Post {title: string; content: string}
+
+interface Comment {
+    id: number;
+    author[ToFill]: string;
+}
+
+
+
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+interface Comment {
+    id: number;
+    author: string;
+    content: string;
+}
+
+
+
+
+
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/typingInfer.ets",
+  "lineNumberOneIndexed": 8,
+  "text": "interface Post {title: string; content: string}\n\ninterface Comment {\nid: number;\nauthor: string;",
+  "shouldRetriggerCpp": false
+}

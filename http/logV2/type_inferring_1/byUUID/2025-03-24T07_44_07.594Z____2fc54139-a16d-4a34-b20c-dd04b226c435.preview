@@ -1,0 +1,33 @@
+{"line":5,"column":23}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+interface User {
+    id: number;
+    name: string;
+    age: number;
+}
+interface Admin { level[ToFill]}
+
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+    name: string;
+    age: number;
+}
+interface Admin { level: number; }
+
+
+
+-------------------------------[                   fullText                  ]--------------------------------
+    name: string;
+    age: number;
+}
+interface Admin { level: number; }
+
+type UserOrAdmin = User | Admin;
+
+function getUserOrAdmin(): UserOrAdmin {
+    return { id: 1, name: "John", age: 20 };
+}
+
+

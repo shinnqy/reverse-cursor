@@ -1,0 +1,54 @@
+{"line":16,"column":10}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+interface User {
+    id: number;
+    name: string;
+    age: number;
+}
+interface Admin { level: number; permission: string[] }
+
+interface Post {title: string; content: string}
+
+interface Comment {
+    id: number;
+    author: string;
+}
+
+type UserRole = User | Admin;
+
+type Conte[ToFill]
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+type Content = Post | Comment;
+
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+interface User {
+    id: number;
+    name: string;
+    age: number;
+}
+interface Admin { level: number; permission: string[] }
+
+interface Post {title: string; content: string}
+
+interface Comment {
+    id: number;
+    author: string;
+}
+
+type UserRole = User | Admin;
+
+type Content = Post | Comment;
+
+-------------------------------[                   fullText                  ]--------------------------------
+
+type Content = Post | Comment;
+
+function getContent(content: Content): string {
+    if ("title" in content) {
+        return content.title;
+    }
+    return content.author;
+}

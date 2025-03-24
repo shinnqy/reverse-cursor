@@ -1,0 +1,321 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "81a538bc-0e84-4a0c-af99-4d9e307fb907",
+    "timestamp": "2025-03-24T07:45:50.272Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/typingInfer.ets",
+          "diffHistory": [
+            "1-|\n1+|ine\n",
+            "1-|ine\n1+|interface User {id: nu}\n2+|\n3+|\n",
+            "1-|interface User {id: nu}\n1+|interface User {id: number;\n2+|    name: string;\n3+|    age: number;\n4+|}\n",
+            "6+|interface Admin { level: number; permission: string[] }\n8+|interface Post {title: string; content: string}\n10+|interface Comment {\n11+|    id: number;\n12+|    content: string;\n13+|}\n14+|\n15+|\n16+|\n17+|\n",
+            "12-|    content: string;\n12+|    author: string;\n",
+            "15+|type UserRole = User | Admin;\n",
+            "17+|type Content = Post | Comment;\n19+|type Result<T> = T | Error;\n20+|\n21+|type ID = string | number;\n22+|\n23+|type Status = 'pending' | 'success' | 'error';\n24+|\n25+|class Re\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/typingInfer.ets",
+        "contents": "interface User {\n    id: number;\n    name: string;\n    age: number;\n}\ninterface Admin { level: number; permission: string[] }\n\ninterface Post {title: string; content: string}\n\ninterface Comment {\n    id: number;\n    author: string;\n}\n\ntype UserRole = User | Admin;\n\ntype Content = Post | Comment;\n\ntype Result<T> = T | Error;\n\ntype ID = string | number;\n\ntype Status = 'pending' | 'success' | 'error';\n\nclass Re\n",
+        "cursorPosition": {
+          "line": 24,
+          "column": 8
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 253,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/utils/test.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 1
+            }
+          ],
+          "lastViewedAt": 1742802122439
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742802350315,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.800048828125,
+      "timeAtRequestSend": 1742802350315
+    },
+    "generateUuid": "81a538bc-0e84-4a0c-af99-4d9e307fb907",
+    "timestamp": "2025-03-24T07:45:50.316Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "81a538bc-0e84-4a0c-af99-4d9e307fb907",
+    "timestamp": "2025-03-24T07:45:51.277Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "81a538bc-0e84-4a0c-af99-4d9e307fb907",
+    "timestamp": "2025-03-24T07:45:51.278Z"
+  },
+  {
+    "firstChunkValue": "\nclass Result<T> {\n    constructor(public data: T | Error) {}\n}\n\ntype UserResponse = Result<User>;\n\n\n",
+    "generationUUID": "81a538bc-0e84-4a0c-af99-4d9e307fb907",
+    "timestamp": "2025-03-24T07:45:51.278Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "rangeToReplace": {
+        "startLineNumber": 24,
+        "endLineNumberInclusive": 26
+      }
+    },
+    "generationUUID": "81a538bc-0e84-4a0c-af99-4d9e307fb907",
+    "timestamp": "2025-03-24T07:45:51.284Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nclass Result"
+    },
+    "generationUUID": "81a538bc-0e84-4a0c-af99-4d9e307fb907",
+    "timestamp": "2025-03-24T07:45:51.284Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "<T> {"
+    },
+    "generationUUID": "81a538bc-0e84-4a0c-af99-4d9e307fb907",
+    "timestamp": "2025-03-24T07:45:51.285Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n   "
+    },
+    "generationUUID": "81a538bc-0e84-4a0c-af99-4d9e307fb907",
+    "timestamp": "2025-03-24T07:45:51.285Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " constructor"
+    },
+    "generationUUID": "81a538bc-0e84-4a0c-af99-4d9e307fb907",
+    "timestamp": "2025-03-24T07:45:51.285Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "("
+    },
+    "generationUUID": "81a538bc-0e84-4a0c-af99-4d9e307fb907",
+    "timestamp": "2025-03-24T07:45:51.285Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " data"
+    },
+    "generationUUID": "81a538bc-0e84-4a0c-af99-4d9e307fb907",
+    "timestamp": "2025-03-24T07:45:51.285Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "public"
+    },
+    "generationUUID": "81a538bc-0e84-4a0c-af99-4d9e307fb907",
+    "timestamp": "2025-03-24T07:45:51.286Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "81a538bc-0e84-4a0c-af99-4d9e307fb907",
+    "timestamp": "2025-03-24T07:45:51.286Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " T"
+    },
+    "generationUUID": "81a538bc-0e84-4a0c-af99-4d9e307fb907",
+    "timestamp": "2025-03-24T07:45:51.286Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " | Error)"
+    },
+    "generationUUID": "81a538bc-0e84-4a0c-af99-4d9e307fb907",
+    "timestamp": "2025-03-24T07:45:51.286Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {}"
+    },
+    "generationUUID": "81a538bc-0e84-4a0c-af99-4d9e307fb907",
+    "timestamp": "2025-03-24T07:45:51.286Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "81a538bc-0e84-4a0c-af99-4d9e307fb907",
+    "timestamp": "2025-03-24T07:45:51.287Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}"
+    },
+    "generationUUID": "81a538bc-0e84-4a0c-af99-4d9e307fb907",
+    "timestamp": "2025-03-24T07:45:51.287Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\ntype UserResponse"
+    },
+    "generationUUID": "81a538bc-0e84-4a0c-af99-4d9e307fb907",
+    "timestamp": "2025-03-24T07:45:51.287Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "81a538bc-0e84-4a0c-af99-4d9e307fb907",
+    "timestamp": "2025-03-24T07:45:51.287Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Result"
+    },
+    "generationUUID": "81a538bc-0e84-4a0c-af99-4d9e307fb907",
+    "timestamp": "2025-03-24T07:45:51.287Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nclass Result<T> {\n    constructor(public data: T | Error) {}\n}\n\ntype UserResponse = Result<User>;\n\n\n"
+    },
+    "generationUUID": "81a538bc-0e84-4a0c-af99-4d9e307fb907",
+    "timestamp": "2025-03-24T07:45:51.288Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "08c6aff7-85d5-4b9a-8b63-0beecd5bd9ec",
+    "generationUUID": "81a538bc-0e84-4a0c-af99-4d9e307fb907",
+    "timestamp": "2025-03-24T07:45:51.288Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\nclass Result<T> {\n    constructor(public data: T | Error) {}\n}\n\ntype UserResponse = Result<User>;\n\n\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "08c6aff7-85d5-4b9a-8b63-0beecd5bd9ec",
+    "generationUUID": "81a538bc-0e84-4a0c-af99-4d9e307fb907",
+    "timestamp": "2025-03-24T07:45:51.288Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "08c6aff7-85d5-4b9a-8b63-0beecd5bd9ec",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-24T07:45:51.289Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "<"
+    },
+    "generationUUID": "81a538bc-0e84-4a0c-af99-4d9e307fb907",
+    "timestamp": "2025-03-24T07:45:51.290Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "User"
+    },
+    "generationUUID": "81a538bc-0e84-4a0c-af99-4d9e307fb907",
+    "timestamp": "2025-03-24T07:45:51.290Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ">;"
+    },
+    "generationUUID": "81a538bc-0e84-4a0c-af99-4d9e307fb907",
+    "timestamp": "2025-03-24T07:45:51.291Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "81a538bc-0e84-4a0c-af99-4d9e307fb907",
+    "timestamp": "2025-03-24T07:45:51.291Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "81a538bc-0e84-4a0c-af99-4d9e307fb907",
+    "timestamp": "2025-03-24T07:45:51.291Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "81a538bc-0e84-4a0c-af99-4d9e307fb907",
+    "timestamp": "2025-03-24T07:45:51.292Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "81a538bc-0e84-4a0c-af99-4d9e307fb907",
+    "timestamp": "2025-03-24T07:45:51.292Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "81a538bc-0e84-4a0c-af99-4d9e307fb907",
+    "timestamp": "2025-03-24T07:45:51.292Z"
+  }
+]

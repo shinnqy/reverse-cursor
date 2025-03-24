@@ -1,0 +1,57 @@
+{"line":18,"column":20}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+interface User {
+    id: number;
+    name: string;
+    age: number;
+}
+interface Admin { level: number; permission: string[] }
+
+interface Post {title: string; content: string}
+
+interface Comment {
+    id: number;
+    author: string;
+}
+
+type UserRole = User | Admin;
+
+type Content = Post | Comment;
+
+type Result<T> = T |[ToFill]
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+type Result<T> = T | Error;
+
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+interface User {
+    id: number;
+    name: string;
+    age: number;
+}
+interface Admin { level: number; permission: string[] }
+
+interface Post {title: string; content: string}
+
+interface Comment {
+    id: number;
+    author: string;
+}
+
+type UserRole = User | Admin;
+
+type Content = Post | Comment;
+
+type Result<T> = T | Error;
+
+-------------------------------[                   fullText                  ]--------------------------------
+
+type Result<T> = T | Error;
+
+type UserResponse = Result<User>;
+
+type AdminResponse = Result<Admin>;
+
+

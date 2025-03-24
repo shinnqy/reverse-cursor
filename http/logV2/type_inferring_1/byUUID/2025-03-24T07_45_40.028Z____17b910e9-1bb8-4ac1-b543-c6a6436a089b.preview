@@ -1,0 +1,65 @@
+{"line":22,"column":10}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+interface User {
+    id: number;
+    name: string;
+    age: number;
+}
+interface Admin { level: number; permission: string[] }
+
+interface Post {title: string; content: string}
+
+interface Comment {
+    id: number;
+    author: string;
+}
+
+type UserRole = User | Admin;
+
+type Content = Post | Comment;
+
+type Result<T> = T | Error;
+
+type ID = string | number;
+
+type Satus[ToFill]
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+type Status = 'pending' | 'success' | 'error';
+
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+interface User {
+    id: number;
+    name: string;
+    age: number;
+}
+interface Admin { level: number; permission: string[] }
+
+interface Post {title: string; content: string}
+
+interface Comment {
+    id: number;
+    author: string;
+}
+
+type UserRole = User | Admin;
+
+type Content = Post | Comment;
+
+type Result<T> = T | Error;
+
+type ID = string | number;
+
+type Status = 'pending' | 'success' | 'error';
+
+-------------------------------[                   fullText                  ]--------------------------------
+
+type Status = 'pending' | 'success' | 'error';
+
+type UserInfo = {
+    id: number;
+    name: string;
+    age: number;
+}

@@ -1,0 +1,33 @@
+{"line":14,"column":6}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+interface User {
+    id: number;
+    name: string;
+    age: number;
+}
+interface Admin { level: number; permission: string[] }
+
+interface Post {title: string; content: string}
+
+interface Comment {
+    id: number;
+    author: string;
+}
+
+type U[ToFill]
+
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+type UserOrAdmin = User | Admin;
+
+
+-------------------------------[                   fullText                  ]--------------------------------
+
+type UserOrAdmin = User | Admin;
+
+type UserOrAdminOrPost = UserOrAdmin | Post;
+
+type UserOrAdmin
