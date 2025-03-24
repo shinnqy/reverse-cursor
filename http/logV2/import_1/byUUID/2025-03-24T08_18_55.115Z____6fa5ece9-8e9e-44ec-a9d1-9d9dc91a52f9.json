@@ -1,0 +1,359 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "6fa5ece9-8e9e-44ec-a9d1-9d9dc91a52f9",
+    "timestamp": "2025-03-24T08:18:55.115Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/import/services.ets",
+          "diffHistory": [
+            "1+|import \n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/import/services.ets",
+        "contents": "import \n\nexport class AuthService {\n  static login(user: User): ApiResponse<string> {\n    Logger.log(`User ${user.name} logged in`);\n    return { code: 200, data: 'token', timestamp: Date.now() };\n  }\n}\n\nexport class ProductService {\n  private inventory: Product[] = [];\n\n  updatePrice(product: Product, newPrice: number): void {\n    product.price = newPrice;\n    Logger.log(`Price updated for ${product.sku}`);\n  }\n}\n\nexport class OrderService {\n  static createOrder(items: CartItem[]): Order {\n    return new Order(\n      `ORD-${Date.now()}`,\n      items.map(i =>\n        new CartItem(\n          i.sku,\n          i.name,\n          i.price,\n          i.inventory,\n          i.quantity\n        )\n      ),\n      'pending'\n    );\n  }\n}\n\nexport class PaymentService {\n  processPayment(order: Order, method: PaymentMethod): boolean {\n    Logger.log(`Processing ${method.cardNumber.substring(12)}`); // ✅ 安全访问\n    return Math.random() > 0.5;\n  }\n}\n\nexport class CartService {\n  private items: CartItem[] = [];\n\n  public getItems(): CartItem[] {\n    return [...this.items]; // 返回副本避免直接修改\n  }\n  addItem(product: Product, quantity: number): void {\n    const existing = this.items.find(i => i.sku === product.sku);\n    existing ? existing.quantity += quantity :\n    this.items.push(new CartItem(\n      product.sku,\n      product.name,\n      product.price,\n      product.inventory,\n      quantity\n    ));\n  }\n}\n\n",
+        "cursorPosition": {
+          "line": 0,
+          "column": 7
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 9,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742804335166,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 56,
+      "timeAtRequestSend": 1742804335166
+    },
+    "generateUuid": "6fa5ece9-8e9e-44ec-a9d1-9d9dc91a52f9",
+    "timestamp": "2025-03-24T08:18:55.167Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "6fa5ece9-8e9e-44ec-a9d1-9d9dc91a52f9",
+    "timestamp": "2025-03-24T08:18:55.497Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "6fa5ece9-8e9e-44ec-a9d1-9d9dc91a52f9",
+    "timestamp": "2025-03-24T08:18:55.516Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "rangeToReplace": {
+        "startLineNumber": 1,
+        "endLineNumberInclusive": 4
+      }
+    },
+    "generationUUID": "6fa5ece9-8e9e-44ec-a9d1-9d9dc91a52f9",
+    "timestamp": "2025-03-24T08:18:55.517Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "import {"
+    },
+    "generationUUID": "6fa5ece9-8e9e-44ec-a9d1-9d9dc91a52f9",
+    "timestamp": "2025-03-24T08:18:55.517Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Logger"
+    },
+    "generationUUID": "6fa5ece9-8e9e-44ec-a9d1-9d9dc91a52f9",
+    "timestamp": "2025-03-24T08:18:55.607Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " }"
+    },
+    "generationUUID": "6fa5ece9-8e9e-44ec-a9d1-9d9dc91a52f9",
+    "timestamp": "2025-03-24T08:18:55.608Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " from"
+    },
+    "generationUUID": "6fa5ece9-8e9e-44ec-a9d1-9d9dc91a52f9",
+    "timestamp": "2025-03-24T08:18:55.611Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " '@"
+    },
+    "generationUUID": "6fa5ece9-8e9e-44ec-a9d1-9d9dc91a52f9",
+    "timestamp": "2025-03-24T08:18:55.622Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "oh"
+    },
+    "generationUUID": "6fa5ece9-8e9e-44ec-a9d1-9d9dc91a52f9",
+    "timestamp": "2025-03-24T08:18:55.636Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "os"
+    },
+    "generationUUID": "6fa5ece9-8e9e-44ec-a9d1-9d9dc91a52f9",
+    "timestamp": "2025-03-24T08:18:55.649Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "6fa5ece9-8e9e-44ec-a9d1-9d9dc91a52f9",
+    "timestamp": "2025-03-24T08:18:55.664Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "logger"
+    },
+    "generationUUID": "6fa5ece9-8e9e-44ec-a9d1-9d9dc91a52f9",
+    "timestamp": "2025-03-24T08:18:55.682Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "';"
+    },
+    "generationUUID": "6fa5ece9-8e9e-44ec-a9d1-9d9dc91a52f9",
+    "timestamp": "2025-03-24T08:18:55.690Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "6fa5ece9-8e9e-44ec-a9d1-9d9dc91a52f9",
+    "timestamp": "2025-03-24T08:18:55.703Z"
+  },
+  {
+    "firstChunkValue": "import { Logger } from '@ohos.logger';\n\nexport class AuthService {\n  static login(user: User): ApiResponse<string> {",
+    "generationUUID": "6fa5ece9-8e9e-44ec-a9d1-9d9dc91a52f9",
+    "timestamp": "2025-03-24T08:18:55.705Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "import { Logger } from '@ohos.logger';\n\nexport class AuthService {\n  static login(user: User): ApiResponse<string> {"
+    },
+    "generationUUID": "6fa5ece9-8e9e-44ec-a9d1-9d9dc91a52f9",
+    "timestamp": "2025-03-24T08:18:55.706Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "6fa5ece9-8e9e-44ec-a9d1-9d9dc91a52f9",
+    "timestamp": "2025-03-24T08:18:55.718Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "export"
+    },
+    "generationUUID": "6fa5ece9-8e9e-44ec-a9d1-9d9dc91a52f9",
+    "timestamp": "2025-03-24T08:18:55.731Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " class Auth"
+    },
+    "generationUUID": "6fa5ece9-8e9e-44ec-a9d1-9d9dc91a52f9",
+    "timestamp": "2025-03-24T08:18:55.744Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Service {\n  static login(user"
+    },
+    "generationUUID": "6fa5ece9-8e9e-44ec-a9d1-9d9dc91a52f9",
+    "timestamp": "2025-03-24T08:18:55.760Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "6fa5ece9-8e9e-44ec-a9d1-9d9dc91a52f9",
+    "timestamp": "2025-03-24T08:18:55.809Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " User): ApiResponse<string> {"
+    },
+    "generationUUID": "6fa5ece9-8e9e-44ec-a9d1-9d9dc91a52f9",
+    "timestamp": "2025-03-24T08:18:55.810Z"
+  },
+  {
+    "fullText": "import { Logger } from '@ohos.logger';\n\nexport class AuthService {\n  static login(user: User): ApiResponse<string> {",
+    "generationUUID": "6fa5ece9-8e9e-44ec-a9d1-9d9dc91a52f9",
+    "timestamp": "2025-03-24T08:18:56.006Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "import { Logger } from '@ohos.logger';\n\nexport class AuthService {\n  static login(user: User): ApiResponse<string> {"
+    },
+    "fullText": "import { Logger } from '@ohos.logger';\n\nexport class AuthService {\n  static login(user: User): ApiResponse<string> {",
+    "generationUUID": "6fa5ece9-8e9e-44ec-a9d1-9d9dc91a52f9",
+    "timestamp": "2025-03-24T08:18:56.008Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && currentSuggestion uniqueId is different && need to create newSuggestion according fullText",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "4ecd2094-ab6a-47da-bb6d-217445620548",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/import/services.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/import/services.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/import/services.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 9,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 9,
+      "monotonicallyIncreasingSuggestionId": 12,
+      "range": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 4,
+        "endColumn": 50
+      },
+      "replaceText": "import { Logger } from '@ohos.logger';\n\nexport class AuthService {\n  static login(user: User): ApiResponse<string> {",
+      "originalText": "import \n\nexport class AuthService {\n  static login(user: User): ApiResponse<string> {",
+      "startingSuggestionRange": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 4,
+        "endColumn": 50
+      },
+      "diffText": "import { Logger } from '@ohos.logger';\n\nexport class AuthService {\n  static login(user: User): ApiResponse<string> {",
+      "fullOriginalText": "import \n\nexport class AuthService {\n  static login(user: User): ApiResponse<string> {",
+      "suggestionTriggerTime": 1742804335110.3,
+      "greens": [],
+      "source": "typing",
+      "requestId": "6fa5ece9-8e9e-44ec-a9d1-9d9dc91a52f9",
+      "selection": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 4,
+        "endColumn": 50
+      },
+      "fusedCursorPredictionId": "54f0f2b2-c044-4dea-bd26-d963ee24127a",
+      "undoRedoGroup": {
+        "id": 12,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "6fa5ece9-8e9e-44ec-a9d1-9d9dc91a52f9",
+    "timestamp": "2025-03-24T08:18:56.009Z"
+  },
+  {
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/import/services.ets",
+      "lineNumberOneIndexed": 2,
+      "text": "",
+      "shouldRetriggerCpp": true
+    },
+    "predictionId": "54f0f2b2-c044-4dea-bd26-d963ee24127a",
+    "generationUUID": "6fa5ece9-8e9e-44ec-a9d1-9d9dc91a52f9",
+    "timestamp": "2025-03-24T08:18:56.009Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "import { Logger } from '@ohos.logger';\n\nexport class AuthService {\n  static login(user: User): ApiResponse<string> {"
+    },
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/import/services.ets",
+      "lineNumberOneIndexed": 2,
+      "text": "",
+      "shouldRetriggerCpp": true
+    },
+    "predictionId": "54f0f2b2-c044-4dea-bd26-d963ee24127a",
+    "generationUUID": "6fa5ece9-8e9e-44ec-a9d1-9d9dc91a52f9",
+    "timestamp": "2025-03-24T08:18:56.010Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "54f0f2b2-c044-4dea-bd26-d963ee24127a",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/import/services.ets",
+      "lineNumberOneIndexed": 2,
+      "text": "",
+      "shouldRetriggerCpp": true
+    },
+    "timestamp": "2025-03-24T08:18:56.011Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "6fa5ece9-8e9e-44ec-a9d1-9d9dc91a52f9",
+    "timestamp": "2025-03-24T08:18:56.012Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "cursorPredictionTarget": {
+        "relativePath": "entry/src/main/ets/utils/import/services.ets",
+        "lineNumberOneIndexed": 2,
+        "expectedContent": "",
+        "shouldRetriggerCpp": true
+      }
+    },
+    "generationUUID": "6fa5ece9-8e9e-44ec-a9d1-9d9dc91a52f9",
+    "timestamp": "2025-03-24T08:18:56.013Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "6fa5ece9-8e9e-44ec-a9d1-9d9dc91a52f9",
+    "timestamp": "2025-03-24T08:18:56.014Z"
+  }
+]

@@ -1,0 +1,503 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "14977e09-af77-450c-b878-01bcc1baa6e0",
+    "timestamp": "2025-03-24T08:27:19.356Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/typingInfer2.ets",
+          "diffHistory": [
+            "15+|type UserRole =U\n16+|\n",
+            "15-|type UserRole =U\n15+|type UserRole = User | Admin;\n16+|type Content = Post | Comment;\n17+|type Result<T> = T | Error;\n18+|type ID = string | number;\n19+|type Status = 'pending' | 'success' | 'error';\n",
+            "21-|class Response {\n22-|  data: Error;\n21+|class Response<> {\n22+|  data: T;\n",
+            "21-|class Response<> {\n22-|  data: T;\n21+|class Response<T> {\n22+|  data: T | Error;\n",
+            "25-|  constructor(data: Error, status: number) {\n25+|  constructor(data: T | Error, status: number) {\n",
+            "31-|class DataProcessor {\n32-|  private items: string[] = [];\n31+|class DataProcessor<T extends Cont {\n32+|  private items: T[] = [];\n",
+            "31-|class DataProcessor<T extends Cont {\n31+|class DataProcessor<T extends Content> {\n",
+            "34-|  addItem(item: string) {\n34+|  addItem(item: T) {\n",
+            "38-|  getFirstItem(): string | undefined {\n38+|  getFirstItem(): T | undefined {\n",
+            "42-|  getItems(): string[] {\n42+|  getItems(): T | undefined {\n",
+            "32-|  private items: T[] = [];\n32+|  private items: (T | string)[] = [];\n",
+            "34-|  addItem(item: T) {\n34+|  addItem(item: T | null) {\n",
+            "47-|function merge(a: string, b: string): string {\n47+|function merge<T extends string | number>(a: T, b: T): T {\n",
+            "51-|function wrap(input: string): string[] {\n51+|function wrap<T>(input: T): T[] {\n",
+            "48-|  return a + b;\n48+|  return (typeof a === 'string' ? a + b: a);\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/typingInfer2.ets",
+        "contents": "interface User {\n    id: number;\n    name: string;\n    age: number;\n}\ninterface Admin { level: number; permission: string[] }\n\ninterface Post {title: string; content: string}\n\ninterface Comment {\n    id: number;\n    author: string;\n}\n\ntype UserRole = User | Admin;\ntype Content = Post | Comment;\ntype Result<T> = T | Error;\ntype ID = string | number;\ntype Status = 'pending' | 'success' | 'error';\n\nclass Response<T> {\n  data: T | Error;\n  status: number;\n\n  constructor(data: T | Error, status: number) {\n    this.data = data;\n    this.status = status;\n  }\n}\n\nclass DataProcessor<T extends Content> {\n  private items: (T | string)[] = [];\n\n  addItem(item: T | null) {\n    this.items.push(item);\n  }\n\n  getFirstItem(): T | undefined {\n    return this.items[0];\n  }\n\n  getItems(): T | undefined {\n    return this.items;\n  }\n}\n\nfunction merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b: a);\n}\n\nfunction wrap<T>(input: T): T[] {\n  return [input]\n}\n\nclass Cache {\n  private store = new Map<string, string>();\n\n  get(key: string): string | undefined {\n    return this.store.get(key);\n  }\n\n  set(key: string, value: string) {\n    this.store.set(key, value);\n  }\n}\n\nfunction demo() {\n\n}\n\n",
+        "cursorPosition": {
+          "line": 47,
+          "column": 42
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 253,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742804839402,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 55.300048828125,
+      "timeAtRequestSend": 1742804839402
+    },
+    "generateUuid": "14977e09-af77-450c-b878-01bcc1baa6e0",
+    "timestamp": "2025-03-24T08:27:19.404Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "14977e09-af77-450c-b878-01bcc1baa6e0",
+    "timestamp": "2025-03-24T08:27:19.769Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "14977e09-af77-450c-b878-01bcc1baa6e0",
+    "timestamp": "2025-03-24T08:27:19.770Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "rangeToReplace": {
+        "startLineNumber": 47,
+        "endLineNumberInclusive": 50
+      }
+    },
+    "generationUUID": "14977e09-af77-450c-b878-01bcc1baa6e0",
+    "timestamp": "2025-03-24T08:27:19.772Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b :"
+    },
+    "generationUUID": "14977e09-af77-450c-b878-01bcc1baa6e0",
+    "timestamp": "2025-03-24T08:27:19.772Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " a"
+    },
+    "generationUUID": "14977e09-af77-450c-b878-01bcc1baa6e0",
+    "timestamp": "2025-03-24T08:27:19.796Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " +"
+    },
+    "generationUUID": "14977e09-af77-450c-b878-01bcc1baa6e0",
+    "timestamp": "2025-03-24T08:27:19.801Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " b);"
+    },
+    "generationUUID": "14977e09-af77-450c-b878-01bcc1baa6e0",
+    "timestamp": "2025-03-24T08:27:19.801Z"
+  },
+  {
+    "firstChunkValue": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b : a + b);\n}\n",
+    "generationUUID": "14977e09-af77-450c-b878-01bcc1baa6e0",
+    "timestamp": "2025-03-24T08:27:19.892Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b : a + b);\n}\n"
+    },
+    "generationUUID": "14977e09-af77-450c-b878-01bcc1baa6e0",
+    "timestamp": "2025-03-24T08:27:19.894Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "cd513f3f-e3ca-4ce4-85a0-67f6cc577ec1",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer2.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer2.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer2.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 253,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 253,
+      "monotonicallyIncreasingSuggestionId": 147,
+      "range": {
+        "startLineNumber": 47,
+        "startColumn": 1,
+        "endLineNumberInclusive": 50,
+        "endColumn": 1
+      },
+      "replaceText": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b : a + b);\n}\n",
+      "originalText": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b: a);\n}\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 47,
+        "startColumn": 1,
+        "endLineNumberInclusive": 50,
+        "endColumn": 1
+      },
+      "diffText": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b : a + b);\n}\n",
+      "fullOriginalText": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b: a);\n}\n",
+      "suggestionTriggerTime": 1742804839345,
+      "greens": [],
+      "source": "typing",
+      "requestId": "14977e09-af77-450c-b878-01bcc1baa6e0",
+      "selection": {
+        "startLineNumber": 47,
+        "startColumn": 1,
+        "endLineNumberInclusive": 50,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "15293652-b60f-4484-b534-ea2f46fb4ac7",
+      "undoRedoGroup": {
+        "id": 147,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "14977e09-af77-450c-b878-01bcc1baa6e0",
+    "timestamp": "2025-03-24T08:27:19.894Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n}"
+    },
+    "generationUUID": "14977e09-af77-450c-b878-01bcc1baa6e0",
+    "timestamp": "2025-03-24T08:27:19.894Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "14977e09-af77-450c-b878-01bcc1baa6e0",
+    "timestamp": "2025-03-24T08:27:19.895Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "14977e09-af77-450c-b878-01bcc1baa6e0",
+    "timestamp": "2025-03-24T08:27:19.895Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "14977e09-af77-450c-b878-01bcc1baa6e0",
+    "timestamp": "2025-03-24T08:27:19.955Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "15293652-b60f-4484-b534-ea2f46fb4ac7",
+    "generationUUID": "14977e09-af77-450c-b878-01bcc1baa6e0",
+    "timestamp": "2025-03-24T08:27:19.963Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b : a + b);\n}\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "15293652-b60f-4484-b534-ea2f46fb4ac7",
+    "generationUUID": "14977e09-af77-450c-b878-01bcc1baa6e0",
+    "timestamp": "2025-03-24T08:27:19.964Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "15293652-b60f-4484-b534-ea2f46fb4ac7",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-24T08:27:19.964Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "cd513f3f-e3ca-4ce4-85a0-67f6cc577ec1",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer2.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer2.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer2.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 253,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 253,
+      "monotonicallyIncreasingSuggestionId": 147,
+      "range": {
+        "startLineNumber": 47,
+        "startColumn": 1,
+        "endLineNumberInclusive": 50,
+        "endColumn": 1
+      },
+      "replaceText": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b : a + b);\n}\n",
+      "originalText": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b: a);\n}\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 47,
+        "startColumn": 1,
+        "endLineNumberInclusive": 50,
+        "endColumn": 1
+      },
+      "diffText": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b : a + b);\n}\n",
+      "fullOriginalText": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b: a);\n}\n",
+      "suggestionTriggerTime": 1742804839345,
+      "greens": [],
+      "source": "typing",
+      "requestId": "14977e09-af77-450c-b878-01bcc1baa6e0",
+      "selection": {
+        "startLineNumber": 47,
+        "startColumn": 1,
+        "endLineNumberInclusive": 50,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "15293652-b60f-4484-b534-ea2f46fb4ac7",
+      "undoRedoGroup": {
+        "id": 147,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;1127"
+    },
+    "generationUUID": "14977e09-af77-450c-b878-01bcc1baa6e0",
+    "timestamp": "2025-03-24T08:27:24.551Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "cd513f3f-e3ca-4ce4-85a0-67f6cc577ec1",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer2.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer2.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer2.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 253,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 253,
+      "monotonicallyIncreasingSuggestionId": 147,
+      "range": {
+        "startLineNumber": 47,
+        "startColumn": 1,
+        "endLineNumberInclusive": 50,
+        "endColumn": 1
+      },
+      "replaceText": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b : a + b);\n}\n",
+      "originalText": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b: a);\n}\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 47,
+        "startColumn": 1,
+        "endLineNumberInclusive": 50,
+        "endColumn": 1
+      },
+      "diffText": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b : a + b);\n}\n",
+      "fullOriginalText": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b: a);\n}\n",
+      "suggestionTriggerTime": 1742804839345,
+      "greens": [],
+      "source": "typing",
+      "requestId": "14977e09-af77-450c-b878-01bcc1baa6e0",
+      "selection": {
+        "startLineNumber": 47,
+        "startColumn": 1,
+        "endLineNumberInclusive": 50,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "15293652-b60f-4484-b534-ea2f46fb4ac7",
+      "undoRedoGroup": {
+        "id": 147,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;1127",
+      "editorSelectionBeforePeek": {
+        "startLineNumber": 48,
+        "startColumn": 44,
+        "endLineNumber": 48,
+        "endColumn": 44,
+        "selectionStartLineNumber": 48,
+        "selectionStartColumn": 44,
+        "positionLineNumber": 48,
+        "positionColumn": 44
+      }
+    },
+    "generationUUID": "14977e09-af77-450c-b878-01bcc1baa6e0",
+    "timestamp": "2025-03-24T08:27:24.552Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "cd513f3f-e3ca-4ce4-85a0-67f6cc577ec1",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer2.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer2.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer2.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 253,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 253,
+      "monotonicallyIncreasingSuggestionId": 147,
+      "range": {
+        "startLineNumber": 47,
+        "startColumn": 1,
+        "endLineNumberInclusive": 50,
+        "endColumn": 1
+      },
+      "replaceText": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b : a + b);\n}\n",
+      "originalText": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b: a);\n}\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 47,
+        "startColumn": 1,
+        "endLineNumberInclusive": 50,
+        "endColumn": 1
+      },
+      "diffText": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b : a + b);\n}\n",
+      "fullOriginalText": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b: a);\n}\n",
+      "suggestionTriggerTime": 1742804839345,
+      "greens": [],
+      "source": "typing",
+      "requestId": "14977e09-af77-450c-b878-01bcc1baa6e0",
+      "selection": {
+        "startLineNumber": 47,
+        "startColumn": 1,
+        "endLineNumberInclusive": 50,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "15293652-b60f-4484-b534-ea2f46fb4ac7",
+      "undoRedoGroup": {
+        "id": 147,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;1127"
+    },
+    "generationUUID": "14977e09-af77-450c-b878-01bcc1baa6e0",
+    "timestamp": "2025-03-24T08:27:24.552Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "15293652-b60f-4484-b534-ea2f46fb4ac7",
+    "fusedCursorPrediction": null,
+    "oldText": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b: a);\n}\n",
+    "newText": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b : a + b);\n}\n",
+    "timestamp": "2025-03-24T08:27:24.552Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "15293652-b60f-4484-b534-ea2f46fb4ac7",
+    "fusedCursorPrediction": null,
+    "oldText": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b: a);\n}\n",
+    "newText": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b : a + b);\n}\n",
+    "timestamp": "2025-03-24T08:27:24.553Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "cd513f3f-e3ca-4ce4-85a0-67f6cc577ec1",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer2.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer2.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer2.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 253,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 253,
+      "monotonicallyIncreasingSuggestionId": 147,
+      "range": {
+        "startLineNumber": 47,
+        "startColumn": 1,
+        "endLineNumberInclusive": 50,
+        "endColumn": 1
+      },
+      "replaceText": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b : a + b);\n}\n",
+      "originalText": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b: a);\n}\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 47,
+        "startColumn": 1,
+        "endLineNumberInclusive": 50,
+        "endColumn": 1
+      },
+      "diffText": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b : a + b);\n}\n",
+      "fullOriginalText": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b: a);\n}\n",
+      "suggestionTriggerTime": 1742804839345,
+      "greens": [],
+      "source": "typing",
+      "requestId": "14977e09-af77-450c-b878-01bcc1baa6e0",
+      "selection": {
+        "startLineNumber": 47,
+        "startColumn": 1,
+        "endLineNumberInclusive": 50,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "15293652-b60f-4484-b534-ea2f46fb4ac7",
+      "undoRedoGroup": {
+        "id": 147,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;1127",
+      "editorSelectionBeforePeek": {
+        "startLineNumber": 48,
+        "startColumn": 44,
+        "endLineNumber": 48,
+        "endColumn": 44,
+        "selectionStartLineNumber": 48,
+        "selectionStartColumn": 44,
+        "positionLineNumber": 48,
+        "positionColumn": 44
+      }
+    },
+    "generationUUID": "14977e09-af77-450c-b878-01bcc1baa6e0",
+    "timestamp": "2025-03-24T08:27:24.553Z"
+  }
+]

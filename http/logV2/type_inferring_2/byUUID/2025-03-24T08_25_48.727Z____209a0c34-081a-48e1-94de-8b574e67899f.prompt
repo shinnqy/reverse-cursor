@@ -1,0 +1,126 @@
+You're an expert in ArkTS. Your task is to help the user update the code around current cursor position.
+
+## Recent Actions
+Here is what the user has been doing from the earliest to the latest:
+
+File: entry/src/main/ets/utils/typingInfer2.ets
+added the code `type UserRole =U` in line 15
+added the code `` in line 16
+
+deleted the code `type UserRole =U` in line 15
+added the code `type UserRole = User ` in line 15
+added the code `type Content = Post ` in line 16
+added the code `type Result<T> = T ` in line 17
+added the code `type ID = string ` in line 18
+added the code `type Status = 'pending' ` in line 19
+
+deleted the code `class Response {` in line 21
+deleted the code `  data: Error;` in line 22
+added the code `class Response<> {` in line 21
+added the code `  data: T;` in line 22
+
+deleted the code `class Response<> {` in line 21
+deleted the code `  data: T;` in line 22
+added the code `class Response<T> {` in line 21
+added the code `  data: T ` in line 22
+
+deleted the code `  constructor(data: Error, status: number) {` in line 25
+added the code `  constructor(data: T ` in line 25
+
+deleted the code `class DataProcessor {` in line 31
+added the code `class DataProcessor<T extends C {` in line 31
+
+
+## Current Code
+Here is the current code file path:
+entry/src/main/ets/utils/typingInfer2.ets
+
+Here is the current code around the cursor position:
+
+```
+interface User {
+    id: number;
+    name: string;
+    age: number;
+}
+interface Admin { level: number; permission: string[] }
+
+interface Post {title: string; content: string}
+
+interface Comment {
+    id: number;
+    author: string;
+}
+
+type UserRole = User | Admin;
+type Content = Post | Comment;
+type Result<T> = T | Error;
+type ID = string | number;
+type Status = 'pending' | 'success' | 'error';
+
+<|editable_region_start|>
+class Response<T> {
+  data: T | Error;
+  status: number;
+
+  constructor(data: T | Error, status: number) {
+    this.data = data;
+    this.status = status;
+  }
+}
+
+class DataProcessor<T extends C<|current_cursor_position|> {
+  private items: string[] = [];
+
+  addItem(item: string) {
+    this.items.push(item);
+  }
+
+  getFirstItem(): string | undefined {
+    return this.items[0];
+  }
+
+<|editable_region_end|>
+  getItems(): string[] {
+    return this.items;
+  }
+}
+
+function merge(a: string, b: string): string {
+  return a + b;
+}
+
+function wrap(input: string): string[] {
+  return [input]
+}
+
+class Cache {
+  private store = new Map<string, string>();
+
+  get(key: string): string | undefined {
+    return this.store.get(key);
+  }
+
+  set(key: string, value: string) {
+    this.store.set(key, value);
+  }
+}
+
+function demo() {
+
+}
+
+
+```
+
+## Task
+Rewrite the code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> according to the following requirements:
+1. Enforce code format strictly matching existing code style.
+2. Propagate naming convention changes to all related cases
+3. Preserve original functionality
+4. Apply changes to entire code regardless of cursor position
+5. Focus on code after cursor position at <|current_cursor_position|>
+
+# Output Format
+Return ONLY the rewritten code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> without any other words.
+Never use markdown formatting like ```. Return raw text only.

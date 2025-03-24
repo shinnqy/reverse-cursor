@@ -1,0 +1,164 @@
+{"line":31,"column":23}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+interface User {
+    id: number;
+    name: string;
+    age: number;
+}
+interface Admin { level: number; permission: string[] }
+
+interface Post {title: string; content: string}
+
+interface Comment {
+    id: number;
+    author: string;
+}
+
+type UserRole = User | Admin;
+type Content = Post | Comment;
+type Result<T> = T | Error;
+type ID = string | number;
+type Status = 'pending' | 'success' | 'error';
+
+class Response<T> {
+  data: T | Error;
+  status: number;
+
+  constructor(data: T | Error, status: number) {
+    this.data = data;
+    this.status = status;
+  }
+}
+
+class DataProcessor<T extends Content> {
+  private items: (T | s[ToFill][] = [];
+
+  addItem(item: T) {
+    this.items.push(item);
+  }
+
+  getFirstItem(): T | undefined {
+    return this.items[0];
+  }
+
+  getItems(): T | undefined {
+    return this.items;
+  }
+}
+
+function merge(a: string, b: string): string {
+  return a + b;
+}
+
+function wrap(input: string): string[] {
+  return [input]
+}
+
+class Cache {
+  private store = new Map<string, string>();
+
+  get(key: string): string | undefined {
+    return this.store.get(key);
+  }
+
+  set(key: string, value: string) {
+    this.store.set(key, value);
+  }
+}
+
+function demo() {
+
+}
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+class DataProcessor<T extends Content> {
+  private items: (T | string)[] = [];
+
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+interface User {
+    id: number;
+    name: string;
+    age: number;
+}
+interface Admin { level: number; permission: string[] }
+
+interface Post {title: string; content: string}
+
+interface Comment {
+    id: number;
+    author: string;
+}
+
+type UserRole = User | Admin;
+type Content = Post | Comment;
+type Result<T> = T | Error;
+type ID = string | number;
+type Status = 'pending' | 'success' | 'error';
+
+class Response<T> {
+  data: T | Error;
+  status: number;
+
+  constructor(data: T | Error, status: number) {
+    this.data = data;
+    this.status = status;
+  }
+}
+
+class DataProcessor<T extends Content> {
+  private items: (T | string)[] = [];
+
+  addItem(item: T) {
+    this.items.push(item);
+  }
+
+  getFirstItem(): T | undefined {
+    return this.items[0];
+  }
+
+  getItems(): T | undefined {
+    return this.items;
+  }
+}
+
+function merge(a: string, b: string): string {
+  return a + b;
+}
+
+function wrap(input: string): string[] {
+  return [input]
+}
+
+class Cache {
+  private store = new Map<string, string>();
+
+  get(key: string): string | undefined {
+    return this.store.get(key);
+  }
+
+  set(key: string, value: string) {
+    this.store.set(key, value);
+  }
+}
+
+function demo() {
+
+}
+
+
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/typingInfer2.ets",
+  "lineNumberOneIndexed": 34,
+  "text": "addItem(item: T) {\nthis.items.push(item);\n}\n\ngetFirstItem(): T | undefined {",
+  "shouldRetriggerCpp": true
+}
+--------------------------------[        displayedFusedCursorPrediction       ]---------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/typingInfer2.ets",
+  "lineNumberOneIndexed": 34,
+  "text": "addItem(item: T) {\nthis.items.push(item);\n}\n\ngetFirstItem(): T | undefined {",
+  "shouldRetriggerCpp": true
+}

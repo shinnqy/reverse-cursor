@@ -1,0 +1,479 @@
+[
+  {
+    "intent": "editor_change",
+    "generationUUID": "bebc0852-7d32-4c52-80f5-87f3df324612",
+    "timestamp": "2025-03-24T08:20:48.832Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/import/services.ets",
+          "diffHistory": [
+            "1+|import { Logger } from './utils';\n",
+            "1-|import { Logger } from './utils';\n1+|import { Logger, APi } from './utils';\n",
+            "1-|import { Logger, APi } from './utils';\n1+|import { Logger, ApiResponse } from './utils';\n2+|import { User, Product, Order, CartItem, PaymentMethod } from './models';\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/import/app.ets",
+        "contents": "\nclass Application {\n  private currentUser?: User;\n  private cart = new CartService();\n\n  // 完整业务流程示例\n  async runShoppingFlow(): Promise<void> {\n    try {\n      // 1. 用户登录\n      const user = new User(\"U1001\", \"Alice\", \"alice@example.com\");\n      const loginRes: ApiResponse<string> = AuthService.login(user);\n      Logger.log(`Login token: ${loginRes.data}`);\n\n      // 2. 添加商品到购物车\n      const sampleProduct: Product = new Product(\n        \"P1001\",\n        \"ArkTS Programming Guide\",\n        59.99,\n        100\n      );\n      this.cart.addItem(sampleProduct, 2);\n      Logger.log(`Cart items count: ${this.cart.getItems().length}`);\n\n      // 3. 创建订单\n      const order = OrderService.createOrder(this.cart.getItems());\n      Logger.log(`Created order: ${order.orderId}`);\n\n      // 4. 支付处理\n      const paymentMethod = new PaymentMethod(\n        \"4111111111111111\",\n        \"12/25\"\n      );\n      const paymentSuccess = new PaymentService().processPayment(order, paymentMethod);\n\n      Logger.log(paymentSuccess ?\n        \"Payment processed successfully\" :\n        \"Payment failed. Please retry\");\n\n    } catch (error) {\n      Logger.log(`Business flow error: ${error.message}`);\n    }\n  }\n\n  // 商品信息展示工具方法\n  static displayProductInfo(product: Product): void {\n    const info = `\n      Product Details:\n      SKU: ${product.sku}\n      Name: ${product.name}\n      Price: $${product.price.toFixed(2)}\n      Stock: ${product.inventory} left\n    `;\n    console.log(info);\n  }\n}\n\n// 启动应用\nconst app = new Application();\napp.runShoppingFlow();\n\n// 示例商品展示\nconst demoProduct = new Product(\"P2001\", \"TypeScript Handbook\", 39.99, 50);\nApplication.displayProductInfo(demoProduct);",
+        "cursorPosition": {
+          "line": 0,
+          "column": 0
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 1,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/utils/import/services.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 36
+            }
+          ],
+          "lastViewedAt": 1742804448663
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "editor_change"
+      },
+      "clientTime": 1742804448884,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 55.199951171875,
+      "timeAtRequestSend": 1742804448884
+    },
+    "generateUuid": "bebc0852-7d32-4c52-80f5-87f3df324612",
+    "timestamp": "2025-03-24T08:20:48.885Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "bebc0852-7d32-4c52-80f5-87f3df324612",
+    "timestamp": "2025-03-24T08:20:49.284Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "rangeToReplace": {
+        "startLineNumber": 1,
+        "endLineNumberInclusive": 4
+      }
+    },
+    "generationUUID": "bebc0852-7d32-4c52-80f5-87f3df324612",
+    "timestamp": "2025-03-24T08:20:49.302Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "import"
+    },
+    "generationUUID": "bebc0852-7d32-4c52-80f5-87f3df324612",
+    "timestamp": "2025-03-24T08:20:49.303Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "bebc0852-7d32-4c52-80f5-87f3df324612",
+    "timestamp": "2025-03-24T08:20:49.305Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " { Logger"
+    },
+    "generationUUID": "bebc0852-7d32-4c52-80f5-87f3df324612",
+    "timestamp": "2025-03-24T08:20:49.325Z"
+  },
+  {
+    "firstChunkValue": "import { Logger, ApiResponse } from './utils';\nclass Application {\n  private currentUser?: User;\n  private cart = new CartService();",
+    "generationUUID": "bebc0852-7d32-4c52-80f5-87f3df324612",
+    "timestamp": "2025-03-24T08:20:49.364Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ", ApiResponse } from './utils';"
+    },
+    "generationUUID": "bebc0852-7d32-4c52-80f5-87f3df324612",
+    "timestamp": "2025-03-24T08:20:49.365Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\nimport"
+    },
+    "generationUUID": "bebc0852-7d32-4c52-80f5-87f3df324612",
+    "timestamp": "2025-03-24T08:20:49.365Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "bebc0852-7d32-4c52-80f5-87f3df324612",
+    "timestamp": "2025-03-24T08:20:49.366Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "import { Logger, ApiResponse } from './utils';\nclass Application {\n  private currentUser?: User;\n  private cart = new CartService();"
+    },
+    "generationUUID": "bebc0852-7d32-4c52-80f5-87f3df324612",
+    "timestamp": "2025-03-24T08:20:49.368Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " User, Product, Order, CartItem"
+    },
+    "generationUUID": "bebc0852-7d32-4c52-80f5-87f3df324612",
+    "timestamp": "2025-03-24T08:20:49.368Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "4ae87aa8-a169-4f6d-8816-650c33966ed3",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/import/app.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/import/app.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/import/app.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 1,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 1,
+      "monotonicallyIncreasingSuggestionId": 35,
+      "range": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 4,
+        "endColumn": 36
+      },
+      "replaceText": "import { Logger, ApiResponse } from './utils';\nclass Application {\n  private currentUser?: User;\n  private cart = new CartService();",
+      "originalText": "\nclass Application {\n  private currentUser?: User;\n  private cart = new CartService();",
+      "startingSuggestionRange": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 4,
+        "endColumn": 36
+      },
+      "diffText": "import { Logger, ApiResponse } from './utils';\nclass Application {\n  private currentUser?: User;\n  private cart = new CartService();",
+      "fullOriginalText": "\nclass Application {\n  private currentUser?: User;\n  private cart = new CartService();",
+      "suggestionTriggerTime": 1742804448789.4001,
+      "greens": [],
+      "source": "editor_change",
+      "requestId": "bebc0852-7d32-4c52-80f5-87f3df324612",
+      "selection": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 4,
+        "endColumn": 36
+      },
+      "undoRedoGroup": {
+        "id": 35,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "bebc0852-7d32-4c52-80f5-87f3df324612",
+    "timestamp": "2025-03-24T08:20:49.369Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ", PaymentMethod } from './models';"
+    },
+    "generationUUID": "bebc0852-7d32-4c52-80f5-87f3df324612",
+    "timestamp": "2025-03-24T08:20:49.380Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "bebc0852-7d32-4c52-80f5-87f3df324612",
+    "timestamp": "2025-03-24T08:20:49.390Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "import"
+    },
+    "generationUUID": "bebc0852-7d32-4c52-80f5-87f3df324612",
+    "timestamp": "2025-03-24T08:20:49.402Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " { Auth"
+    },
+    "generationUUID": "bebc0852-7d32-4c52-80f5-87f3df324612",
+    "timestamp": "2025-03-24T08:20:49.411Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Service,"
+    },
+    "generationUUID": "bebc0852-7d32-4c52-80f5-87f3df324612",
+    "timestamp": "2025-03-24T08:20:49.422Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Product"
+    },
+    "generationUUID": "bebc0852-7d32-4c52-80f5-87f3df324612",
+    "timestamp": "2025-03-24T08:20:49.434Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Service"
+    },
+    "generationUUID": "bebc0852-7d32-4c52-80f5-87f3df324612",
+    "timestamp": "2025-03-24T08:20:49.484Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ","
+    },
+    "generationUUID": "bebc0852-7d32-4c52-80f5-87f3df324612",
+    "timestamp": "2025-03-24T08:20:49.485Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Order"
+    },
+    "generationUUID": "bebc0852-7d32-4c52-80f5-87f3df324612",
+    "timestamp": "2025-03-24T08:20:49.485Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Service"
+    },
+    "generationUUID": "bebc0852-7d32-4c52-80f5-87f3df324612",
+    "timestamp": "2025-03-24T08:20:49.486Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ","
+    },
+    "generationUUID": "bebc0852-7d32-4c52-80f5-87f3df324612",
+    "timestamp": "2025-03-24T08:20:49.486Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Payment"
+    },
+    "generationUUID": "bebc0852-7d32-4c52-80f5-87f3df324612",
+    "timestamp": "2025-03-24T08:20:49.493Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Service"
+    },
+    "generationUUID": "bebc0852-7d32-4c52-80f5-87f3df324612",
+    "timestamp": "2025-03-24T08:20:49.503Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " }"
+    },
+    "generationUUID": "bebc0852-7d32-4c52-80f5-87f3df324612",
+    "timestamp": "2025-03-24T08:20:49.513Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " from './services"
+    },
+    "generationUUID": "bebc0852-7d32-4c52-80f5-87f3df324612",
+    "timestamp": "2025-03-24T08:20:49.524Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "';"
+    },
+    "generationUUID": "bebc0852-7d32-4c52-80f5-87f3df324612",
+    "timestamp": "2025-03-24T08:20:49.549Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "bebc0852-7d32-4c52-80f5-87f3df324612",
+    "timestamp": "2025-03-24T08:20:49.550Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "class"
+    },
+    "generationUUID": "bebc0852-7d32-4c52-80f5-87f3df324612",
+    "timestamp": "2025-03-24T08:20:49.558Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Application {\n  private currentUser?:"
+    },
+    "generationUUID": "bebc0852-7d32-4c52-80f5-87f3df324612",
+    "timestamp": "2025-03-24T08:20:49.568Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " User;\n  private cart = new"
+    },
+    "generationUUID": "bebc0852-7d32-4c52-80f5-87f3df324612",
+    "timestamp": "2025-03-24T08:20:49.580Z"
+  },
+  {
+    "fullText": "import { Logger, ApiResponse } from './utils';\nimport { User, Product, Order, CartItem, PaymentMethod } from './models';\nimport { AuthService, ProductService, OrderService, PaymentService } from './services';\n\nclass Application {\n  private currentUser?: User;\n  private cart = new CartService();",
+    "generationUUID": "bebc0852-7d32-4c52-80f5-87f3df324612",
+    "timestamp": "2025-03-24T08:20:49.691Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "import { Logger, ApiResponse } from './utils';\nclass Application {\n  private currentUser?: User;\n  private cart = new CartService();"
+    },
+    "fullText": "import { Logger, ApiResponse } from './utils';\nimport { User, Product, Order, CartItem, PaymentMethod } from './models';\nimport { AuthService, ProductService, OrderService, PaymentService } from './services';\n\nclass Application {\n  private currentUser?: User;\n  private cart = new CartService();",
+    "generationUUID": "bebc0852-7d32-4c52-80f5-87f3df324612",
+    "timestamp": "2025-03-24T08:20:49.692Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Cart"
+    },
+    "generationUUID": "bebc0852-7d32-4c52-80f5-87f3df324612",
+    "timestamp": "2025-03-24T08:20:49.696Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "6376ac6f-2eb3-485b-bcad-6e29e67dd6b8",
+    "generationUUID": "bebc0852-7d32-4c52-80f5-87f3df324612",
+    "timestamp": "2025-03-24T08:20:49.699Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "import { Logger, ApiResponse } from './utils';\nclass Application {\n  private currentUser?: User;\n  private cart = new CartService();"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "6376ac6f-2eb3-485b-bcad-6e29e67dd6b8",
+    "generationUUID": "bebc0852-7d32-4c52-80f5-87f3df324612",
+    "timestamp": "2025-03-24T08:20:49.700Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Service();"
+    },
+    "generationUUID": "bebc0852-7d32-4c52-80f5-87f3df324612",
+    "timestamp": "2025-03-24T08:20:49.701Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "e43766e8-b118-4802-b521-c5be210bfa6f",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/import/app.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/import/app.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/import/app.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 1,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 2,
+      "monotonicallyIncreasingSuggestionId": 36,
+      "range": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 4,
+        "endColumn": 36
+      },
+      "replaceText": "import { Logger, ApiResponse } from './utils';\nimport { User, Product, Order, CartItem, PaymentMethod } from './models';\nimport { AuthService, ProductService, OrderService, PaymentService } from './services';\n\nclass Application {\n  private currentUser?: User;\n  private cart = new CartService();",
+      "originalText": "import { Logger, ApiResponse } from './utils';\nclass Application {\n  private currentUser?: User;\n  private cart = new CartService();",
+      "startingSuggestionRange": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 4,
+        "endColumn": 36
+      },
+      "diffText": "import { Logger, ApiResponse } from './utils';\nimport { User, Product, Order, CartItem, PaymentMethod } from './models';\nimport { AuthService, ProductService, OrderService, PaymentService } from './services';\n\nclass Application {\n  private currentUser?: User;\n  private cart = new CartService();",
+      "fullOriginalText": "import { Logger, ApiResponse } from './utils';\nclass Application {\n  private currentUser?: User;\n  private cart = new CartService();",
+      "suggestionTriggerTime": 1742804448789.4001,
+      "greens": [],
+      "source": "editor_change",
+      "requestId": "bebc0852-7d32-4c52-80f5-87f3df324612",
+      "selection": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 4,
+        "endColumn": 36
+      },
+      "fusedCursorPredictionId": "6376ac6f-2eb3-485b-bcad-6e29e67dd6b8",
+      "undoRedoGroup": {
+        "id": 36,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "bebc0852-7d32-4c52-80f5-87f3df324612",
+    "timestamp": "2025-03-24T08:20:49.701Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "bebc0852-7d32-4c52-80f5-87f3df324612",
+    "timestamp": "2025-03-24T08:20:49.702Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "bebc0852-7d32-4c52-80f5-87f3df324612",
+    "timestamp": "2025-03-24T08:20:49.702Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "6376ac6f-2eb3-485b-bcad-6e29e67dd6b8",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-24T08:20:49.703Z"
+  }
+]

@@ -1,0 +1,107 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "b3fe7b23-d082-46d8-a4fb-00b0650cc986",
+    "timestamp": "2025-03-24T08:25:12.492Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/typingInfer2.ets",
+          "diffHistory": [
+            "15+|type UserRole =U\n16+|\n",
+            "15-|type UserRole =U\n15+|type UserRole = User | Admin;\n16+|type Content = Post | Comment;\n17+|type Result<T> = T | Error;\n18+|type ID = string | number;\n19+|typ \n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/typingInfer2.ets",
+        "contents": "interface User {\n    id: number;\n    name: string;\n    age: number;\n}\ninterface Admin { level: number; permission: string[] }\n\ninterface Post {title: string; content: string}\n\ninterface Comment {\n    id: number;\n    author: string;\n}\n\ntype UserRole = User | Admin;\ntype Content = Post | Comment;\ntype Result<T> = T | Error;\ntype ID = string | number;\ntyp \n\nclass Response {\n  data: Error;\n  status: number;\n\n  constructor(data: Error, status: number) {\n    this.data = data;\n    this.status = status;\n  }\n}\n\nclass DataProcessor {\n  private items: string[] = [];\n\n  addItem(item: string) {\n    this.items.push(item);\n  }\n\n  getFirstItem(): string | undefined {\n    return this.items[0];\n  }\n\n  getItems(): string[] {\n    return this.items;\n  }\n}\n\nfunction merge(a: string, b: string): string {\n  return a + b;\n}\n\nfunction wrap(input: string): string[] {\n  return [input]\n}\n\nclass Cache {\n  private store = new Map<string, string>();\n\n  get(key: string): string | undefined {\n    return this.store.get(key);\n  }\n\n  set(key: string, value: string) {\n    this.store.set(key, value);\n  }\n}\n\nfunction demo() {\n\n}\n\n",
+        "cursorPosition": {
+          "line": 18,
+          "column": 4
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 96,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742804712530,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 53.39990234375,
+      "timeAtRequestSend": 1742804712530
+    },
+    "generateUuid": "b3fe7b23-d082-46d8-a4fb-00b0650cc986",
+    "timestamp": "2025-03-24T08:25:12.532Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "b3fe7b23-d082-46d8-a4fb-00b0650cc986",
+    "timestamp": "2025-03-24T08:25:12.883Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "b3fe7b23-d082-46d8-a4fb-00b0650cc986",
+    "timestamp": "2025-03-24T08:25:12.887Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "rangeToReplace": {
+        "startLineNumber": 17,
+        "endLineNumberInclusive": 20
+      }
+    },
+    "generationUUID": "b3fe7b23-d082-46d8-a4fb-00b0650cc986",
+    "timestamp": "2025-03-24T08:25:12.888Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "type Result<T> = T | Error;\ntype ID = string | number;\ntype"
+    },
+    "generationUUID": "b3fe7b23-d082-46d8-a4fb-00b0650cc986",
+    "timestamp": "2025-03-24T08:25:12.888Z"
+  },
+  {
+    "firstChunkValue": "type Result<T> = T | Error;\ntype ID = string | number;\ntype",
+    "generationUUID": "b3fe7b23-d082-46d8-a4fb-00b0650cc986",
+    "timestamp": "2025-03-24T08:25:12.927Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "a018aa61-e5d9-47fb-a27d-d1b0f2f47eb4",
+    "generationUUID": "b3fe7b23-d082-46d8-a4fb-00b0650cc986",
+    "timestamp": "2025-03-24T08:25:12.928Z"
+  }
+]

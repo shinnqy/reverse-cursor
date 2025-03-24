@@ -1,0 +1,303 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "a0e95a43-acf3-4fc7-bc0c-eef2ec43f901",
+    "timestamp": "2025-03-24T08:19:06.063Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/import/services.ets",
+          "diffHistory": [
+            "1+|import { Logger } from './'\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/import/services.ets",
+        "contents": "import { Logger } from './'\n\nexport class AuthService {\n  static login(user: User): ApiResponse<string> {\n    Logger.log(`User ${user.name} logged in`);\n    return { code: 200, data: 'token', timestamp: Date.now() };\n  }\n}\n\nexport class ProductService {\n  private inventory: Product[] = [];\n\n  updatePrice(product: Product, newPrice: number): void {\n    product.price = newPrice;\n    Logger.log(`Price updated for ${product.sku}`);\n  }\n}\n\nexport class OrderService {\n  static createOrder(items: CartItem[]): Order {\n    return new Order(\n      `ORD-${Date.now()}`,\n      items.map(i =>\n        new CartItem(\n          i.sku,\n          i.name,\n          i.price,\n          i.inventory,\n          i.quantity\n        )\n      ),\n      'pending'\n    );\n  }\n}\n\nexport class PaymentService {\n  processPayment(order: Order, method: PaymentMethod): boolean {\n    Logger.log(`Processing ${method.cardNumber.substring(12)}`); // ✅ 安全访问\n    return Math.random() > 0.5;\n  }\n}\n\nexport class CartService {\n  private items: CartItem[] = [];\n\n  public getItems(): CartItem[] {\n    return [...this.items]; // 返回副本避免直接修改\n  }\n  addItem(product: Product, quantity: number): void {\n    const existing = this.items.find(i => i.sku === product.sku);\n    existing ? existing.quantity += quantity :\n    this.items.push(new CartItem(\n      product.sku,\n      product.name,\n      product.price,\n      product.inventory,\n      quantity\n    ));\n  }\n}\n\n",
+        "cursorPosition": {
+          "line": 0,
+          "column": 26
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 28,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742804346107,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 56.300048828125,
+      "timeAtRequestSend": 1742804346107
+    },
+    "generateUuid": "a0e95a43-acf3-4fc7-bc0c-eef2ec43f901",
+    "timestamp": "2025-03-24T08:19:06.109Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "a0e95a43-acf3-4fc7-bc0c-eef2ec43f901",
+    "timestamp": "2025-03-24T08:19:06.529Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "a0e95a43-acf3-4fc7-bc0c-eef2ec43f901",
+    "timestamp": "2025-03-24T08:19:06.534Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "rangeToReplace": {
+        "startLineNumber": 1,
+        "endLineNumberInclusive": 4
+      }
+    },
+    "generationUUID": "a0e95a43-acf3-4fc7-bc0c-eef2ec43f901",
+    "timestamp": "2025-03-24T08:19:06.534Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "import { Logger } from './logger"
+    },
+    "generationUUID": "a0e95a43-acf3-4fc7-bc0c-eef2ec43f901",
+    "timestamp": "2025-03-24T08:19:06.535Z"
+  },
+  {
+    "firstChunkValue": "import { Logger } from './logger';\n\nexport class AuthService {\n  static login(user: User): ApiResponse<string> {",
+    "generationUUID": "a0e95a43-acf3-4fc7-bc0c-eef2ec43f901",
+    "timestamp": "2025-03-24T08:19:06.888Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "import { Logger } from './logger';\n\nexport class AuthService {\n  static login(user: User): ApiResponse<string> {"
+    },
+    "generationUUID": "a0e95a43-acf3-4fc7-bc0c-eef2ec43f901",
+    "timestamp": "2025-03-24T08:19:06.891Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "';"
+    },
+    "generationUUID": "a0e95a43-acf3-4fc7-bc0c-eef2ec43f901",
+    "timestamp": "2025-03-24T08:19:06.893Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "a0e95a43-acf3-4fc7-bc0c-eef2ec43f901",
+    "timestamp": "2025-03-24T08:19:06.893Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "a0e95a43-acf3-4fc7-bc0c-eef2ec43f901",
+    "timestamp": "2025-03-24T08:19:06.894Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "export"
+    },
+    "generationUUID": "a0e95a43-acf3-4fc7-bc0c-eef2ec43f901",
+    "timestamp": "2025-03-24T08:19:06.896Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " class Auth"
+    },
+    "generationUUID": "a0e95a43-acf3-4fc7-bc0c-eef2ec43f901",
+    "timestamp": "2025-03-24T08:19:06.898Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Service {\n  static login(user"
+    },
+    "generationUUID": "a0e95a43-acf3-4fc7-bc0c-eef2ec43f901",
+    "timestamp": "2025-03-24T08:19:06.900Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "a0e95a43-acf3-4fc7-bc0c-eef2ec43f901",
+    "timestamp": "2025-03-24T08:19:06.901Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " User): ApiResponse<string> {"
+    },
+    "generationUUID": "a0e95a43-acf3-4fc7-bc0c-eef2ec43f901",
+    "timestamp": "2025-03-24T08:19:06.909Z"
+  },
+  {
+    "fullText": "import { Logger } from './logger';\n\nexport class AuthService {\n  static login(user: User): ApiResponse<string> {",
+    "generationUUID": "a0e95a43-acf3-4fc7-bc0c-eef2ec43f901",
+    "timestamp": "2025-03-24T08:19:07.015Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "import { Logger } from './logger';\n\nexport class AuthService {\n  static login(user: User): ApiResponse<string> {"
+    },
+    "fullText": "import { Logger } from './logger';\n\nexport class AuthService {\n  static login(user: User): ApiResponse<string> {",
+    "generationUUID": "a0e95a43-acf3-4fc7-bc0c-eef2ec43f901",
+    "timestamp": "2025-03-24T08:19:07.016Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && currentSuggestion uniqueId is different && need to create newSuggestion according fullText",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "cc14a617-e7c9-46ce-a8ef-18e646a94bef",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/import/services.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/import/services.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/import/services.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 28,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 28,
+      "monotonicallyIncreasingSuggestionId": 15,
+      "range": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 4,
+        "endColumn": 50
+      },
+      "replaceText": "import { Logger } from './logger';\n\nexport class AuthService {\n  static login(user: User): ApiResponse<string> {",
+      "originalText": "import { Logger } from './'\n\nexport class AuthService {\n  static login(user: User): ApiResponse<string> {",
+      "startingSuggestionRange": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 4,
+        "endColumn": 50
+      },
+      "diffText": "import { Logger } from './logger';\n\nexport class AuthService {\n  static login(user: User): ApiResponse<string> {",
+      "fullOriginalText": "import { Logger } from './'\n\nexport class AuthService {\n  static login(user: User): ApiResponse<string> {",
+      "suggestionTriggerTime": 1742804346051.1,
+      "greens": [],
+      "source": "typing",
+      "requestId": "a0e95a43-acf3-4fc7-bc0c-eef2ec43f901",
+      "selection": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumberInclusive": 4,
+        "endColumn": 50
+      },
+      "fusedCursorPredictionId": "c258c757-8154-4350-ad88-7b87268f4197",
+      "undoRedoGroup": {
+        "id": 15,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "a0e95a43-acf3-4fc7-bc0c-eef2ec43f901",
+    "timestamp": "2025-03-24T08:19:07.017Z"
+  },
+  {
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/import/services.ets",
+      "lineNumberOneIndexed": 2,
+      "text": "",
+      "shouldRetriggerCpp": true
+    },
+    "predictionId": "c258c757-8154-4350-ad88-7b87268f4197",
+    "generationUUID": "a0e95a43-acf3-4fc7-bc0c-eef2ec43f901",
+    "timestamp": "2025-03-24T08:19:07.018Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "a0e95a43-acf3-4fc7-bc0c-eef2ec43f901",
+    "timestamp": "2025-03-24T08:19:07.019Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "cursorPredictionTarget": {
+        "relativePath": "entry/src/main/ets/utils/import/services.ets",
+        "lineNumberOneIndexed": 2,
+        "expectedContent": "",
+        "shouldRetriggerCpp": true
+      }
+    },
+    "generationUUID": "a0e95a43-acf3-4fc7-bc0c-eef2ec43f901",
+    "timestamp": "2025-03-24T08:19:07.019Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "c258c757-8154-4350-ad88-7b87268f4197",
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/import/services.ets",
+      "lineNumberOneIndexed": 2,
+      "text": "",
+      "shouldRetriggerCpp": true
+    },
+    "timestamp": "2025-03-24T08:19:07.020Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "a0e95a43-acf3-4fc7-bc0c-eef2ec43f901",
+    "timestamp": "2025-03-24T08:19:07.020Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "import { Logger } from './logger';\n\nexport class AuthService {\n  static login(user: User): ApiResponse<string> {"
+    },
+    "fusedCursorPrediction": {
+      "relativePath": "entry/src/main/ets/utils/import/services.ets",
+      "lineNumberOneIndexed": 2,
+      "text": "",
+      "shouldRetriggerCpp": true
+    },
+    "predictionId": "c258c757-8154-4350-ad88-7b87268f4197",
+    "generationUUID": "a0e95a43-acf3-4fc7-bc0c-eef2ec43f901",
+    "timestamp": "2025-03-24T08:19:07.021Z"
+  }
+]

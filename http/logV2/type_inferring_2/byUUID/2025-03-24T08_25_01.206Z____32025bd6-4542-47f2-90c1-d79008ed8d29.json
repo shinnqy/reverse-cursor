@@ -1,0 +1,379 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "32025bd6-4542-47f2-90c1-d79008ed8d29",
+    "timestamp": "2025-03-24T08:25:01.206Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/typingInfer2.ets",
+          "diffHistory": [
+            "15+|type UserRole =U\n16+|\n",
+            "15-|type UserRole =U\n15+|type UserRole = User | Admin;\n16+|type Content = Post | Comment;\n17+|type Result<T>\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/typingInfer2.ets",
+        "contents": "interface User {\n    id: number;\n    name: string;\n    age: number;\n}\ninterface Admin { level: number; permission: string[] }\n\ninterface Post {title: string; content: string}\n\ninterface Comment {\n    id: number;\n    author: string;\n}\n\ntype UserRole = User | Admin;\ntype Content = Post | Comment;\ntype Result<T>\n\nclass Response {\n  data: Error;\n  status: number;\n\n  constructor(data: Error, status: number) {\n    this.data = data;\n    this.status = status;\n  }\n}\n\nclass DataProcessor {\n  private items: string[] = [];\n\n  addItem(item: string) {\n    this.items.push(item);\n  }\n\n  getFirstItem(): string | undefined {\n    return this.items[0];\n  }\n\n  getItems(): string[] {\n    return this.items;\n  }\n}\n\nfunction merge(a: string, b: string): string {\n  return a + b;\n}\n\nfunction wrap(input: string): string[] {\n  return [input]\n}\n\nclass Cache {\n  private store = new Map<string, string>();\n\n  get(key: string): string | undefined {\n    return this.store.get(key);\n  }\n\n  set(key: string, value: string) {\n    this.store.set(key, value);\n  }\n}\n\nfunction demo() {\n\n}\n\n",
+        "cursorPosition": {
+          "line": 16,
+          "column": 14
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 56,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742804701247,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.39990234375,
+      "timeAtRequestSend": 1742804701247
+    },
+    "generateUuid": "32025bd6-4542-47f2-90c1-d79008ed8d29",
+    "timestamp": "2025-03-24T08:25:01.248Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "32025bd6-4542-47f2-90c1-d79008ed8d29",
+    "timestamp": "2025-03-24T08:25:01.627Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "rangeToReplace": {
+        "startLineNumber": 15,
+        "endLineNumberInclusive": 18
+      }
+    },
+    "generationUUID": "32025bd6-4542-47f2-90c1-d79008ed8d29",
+    "timestamp": "2025-03-24T08:25:01.676Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "type UserRole = User | Admin;\ntype Content = Post | Comment;\ntype Result<T> ="
+    },
+    "generationUUID": "32025bd6-4542-47f2-90c1-d79008ed8d29",
+    "timestamp": "2025-03-24T08:25:01.677Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "32025bd6-4542-47f2-90c1-d79008ed8d29",
+    "timestamp": "2025-03-24T08:25:01.678Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "32025bd6-4542-47f2-90c1-d79008ed8d29",
+    "timestamp": "2025-03-24T08:25:01.696Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n    success"
+    },
+    "generationUUID": "32025bd6-4542-47f2-90c1-d79008ed8d29",
+    "timestamp": "2025-03-24T08:25:01.705Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "32025bd6-4542-47f2-90c1-d79008ed8d29",
+    "timestamp": "2025-03-24T08:25:01.714Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " true"
+    },
+    "generationUUID": "32025bd6-4542-47f2-90c1-d79008ed8d29",
+    "timestamp": "2025-03-24T08:25:01.724Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";"
+    },
+    "generationUUID": "32025bd6-4542-47f2-90c1-d79008ed8d29",
+    "timestamp": "2025-03-24T08:25:01.733Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n   "
+    },
+    "generationUUID": "32025bd6-4542-47f2-90c1-d79008ed8d29",
+    "timestamp": "2025-03-24T08:25:01.743Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " data"
+    },
+    "generationUUID": "32025bd6-4542-47f2-90c1-d79008ed8d29",
+    "timestamp": "2025-03-24T08:25:01.754Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "32025bd6-4542-47f2-90c1-d79008ed8d29",
+    "timestamp": "2025-03-24T08:25:01.763Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " T"
+    },
+    "generationUUID": "32025bd6-4542-47f2-90c1-d79008ed8d29",
+    "timestamp": "2025-03-24T08:25:01.773Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";"
+    },
+    "generationUUID": "32025bd6-4542-47f2-90c1-d79008ed8d29",
+    "timestamp": "2025-03-24T08:25:01.808Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}"
+    },
+    "generationUUID": "32025bd6-4542-47f2-90c1-d79008ed8d29",
+    "timestamp": "2025-03-24T08:25:01.808Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "32025bd6-4542-47f2-90c1-d79008ed8d29",
+    "timestamp": "2025-03-24T08:25:01.809Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " |"
+    },
+    "generationUUID": "32025bd6-4542-47f2-90c1-d79008ed8d29",
+    "timestamp": "2025-03-24T08:25:01.811Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "32025bd6-4542-47f2-90c1-d79008ed8d29",
+    "timestamp": "2025-03-24T08:25:01.823Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "32025bd6-4542-47f2-90c1-d79008ed8d29",
+    "timestamp": "2025-03-24T08:25:01.833Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": false"
+    },
+    "generationUUID": "32025bd6-4542-47f2-90c1-d79008ed8d29",
+    "timestamp": "2025-03-24T08:25:02.003Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "    success"
+    },
+    "generationUUID": "32025bd6-4542-47f2-90c1-d79008ed8d29",
+    "timestamp": "2025-03-24T08:25:02.004Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";"
+    },
+    "generationUUID": "32025bd6-4542-47f2-90c1-d79008ed8d29",
+    "timestamp": "2025-03-24T08:25:02.004Z"
+  },
+  {
+    "firstChunkValue": "type UserRole = User | Admin;\ntype Content = Post | Comment;\ntype Result<T> = {\n    success: true;\n    data: T;\n} | {\n    success: false;\n    error: string;\n}\n",
+    "generationUUID": "32025bd6-4542-47f2-90c1-d79008ed8d29",
+    "timestamp": "2025-03-24T08:25:02.004Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n   "
+    },
+    "generationUUID": "32025bd6-4542-47f2-90c1-d79008ed8d29",
+    "timestamp": "2025-03-24T08:25:02.005Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " error"
+    },
+    "generationUUID": "32025bd6-4542-47f2-90c1-d79008ed8d29",
+    "timestamp": "2025-03-24T08:25:02.005Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "type UserRole = User | Admin;\ntype Content = Post | Comment;\ntype Result<T> = {\n    success: true;\n    data: T;\n} | {\n    success: false;\n    error: string;\n}\n"
+    },
+    "generationUUID": "32025bd6-4542-47f2-90c1-d79008ed8d29",
+    "timestamp": "2025-03-24T08:25:02.006Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " string"
+    },
+    "generationUUID": "32025bd6-4542-47f2-90c1-d79008ed8d29",
+    "timestamp": "2025-03-24T08:25:02.006Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "32025bd6-4542-47f2-90c1-d79008ed8d29",
+    "timestamp": "2025-03-24T08:25:02.006Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "9e6dd59d-660d-42ee-bfe3-aa281d92254f",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer2.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer2.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer2.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 56,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 56,
+      "monotonicallyIncreasingSuggestionId": 48,
+      "range": {
+        "startLineNumber": 15,
+        "startColumn": 1,
+        "endLineNumberInclusive": 18,
+        "endColumn": 1
+      },
+      "replaceText": "type UserRole = User | Admin;\ntype Content = Post | Comment;\ntype Result<T> = {\n    success: true;\n    data: T;\n} | {\n    success: false;\n    error: string;\n}\n",
+      "originalText": "type UserRole = User | Admin;\ntype Content = Post | Comment;\ntype Result<T>\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 15,
+        "startColumn": 1,
+        "endLineNumberInclusive": 18,
+        "endColumn": 1
+      },
+      "diffText": "type UserRole = User | Admin;\ntype Content = Post | Comment;\ntype Result<T> = {\n    success: true;\n    data: T;\n} | {\n    success: false;\n    error: string;\n}\n",
+      "fullOriginalText": "type UserRole = User | Admin;\ntype Content = Post | Comment;\ntype Result<T>\n",
+      "suggestionTriggerTime": 1742804701196.1,
+      "greens": [],
+      "source": "typing",
+      "requestId": "32025bd6-4542-47f2-90c1-d79008ed8d29",
+      "selection": {
+        "startLineNumber": 15,
+        "startColumn": 1,
+        "endLineNumberInclusive": 18,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "bc0d822c-58f3-42a0-bebb-eea5a352a16d",
+      "undoRedoGroup": {
+        "id": 48,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 15,
+        "startColumn": 1,
+        "endLineNumber": 18,
+        "endColumn": 1
+      },
+      "trackedText": "type UserRole = User | Admin;\ntype Content = Post | Comment;\ntype Result<T> = \n"
+    },
+    "generationUUID": "32025bd6-4542-47f2-90c1-d79008ed8d29",
+    "timestamp": "2025-03-24T08:25:02.007Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";"
+    },
+    "generationUUID": "32025bd6-4542-47f2-90c1-d79008ed8d29",
+    "timestamp": "2025-03-24T08:25:02.007Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n}\n"
+    },
+    "generationUUID": "32025bd6-4542-47f2-90c1-d79008ed8d29",
+    "timestamp": "2025-03-24T08:25:02.008Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "32025bd6-4542-47f2-90c1-d79008ed8d29",
+    "timestamp": "2025-03-24T08:25:02.008Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "32025bd6-4542-47f2-90c1-d79008ed8d29",
+    "timestamp": "2025-03-24T08:25:02.009Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "bc0d822c-58f3-42a0-bebb-eea5a352a16d",
+    "generationUUID": "32025bd6-4542-47f2-90c1-d79008ed8d29",
+    "timestamp": "2025-03-24T08:25:02.012Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "type UserRole = User | Admin;\ntype Content = Post | Comment;\ntype Result<T> = {\n    success: true;\n    data: T;\n} | {\n    success: false;\n    error: string;\n}\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "bc0d822c-58f3-42a0-bebb-eea5a352a16d",
+    "generationUUID": "32025bd6-4542-47f2-90c1-d79008ed8d29",
+    "timestamp": "2025-03-24T08:25:02.012Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "bc0d822c-58f3-42a0-bebb-eea5a352a16d",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-24T08:25:02.013Z"
+  }
+]
