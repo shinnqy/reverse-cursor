@@ -1,0 +1,43 @@
+{"line":5,"column":34}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+interface User {
+    id: number;
+    name: string;
+    age: number;
+}
+interface Admin { level: number; p[ToFill]}
+
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+    name: string;
+    age: number;
+}
+interface Admin { level: number; permission: string[] }
+
+
+
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+interface User {
+    id: number;
+    name: string;
+    age: number;
+}
+interface Admin { level: number; permission: string[] }
+
+
+
+-------------------------------[                   fullText                  ]--------------------------------
+    name: string;
+    age: number;
+}
+interface Admin { level: number; permission: string[] }
+
+type UserInfo = User | Admin;
+
+function getUserInfo(user: UserInfo) {
+    if ("level" in user) {
+        return user.level;
+    }
+}

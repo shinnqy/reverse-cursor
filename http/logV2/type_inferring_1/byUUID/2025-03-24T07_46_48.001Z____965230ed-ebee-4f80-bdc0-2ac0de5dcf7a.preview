@@ -1,0 +1,57 @@
+{"line":26,"column":16}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+interface User {
+    id: number;
+    name: string;
+    age: number;
+}
+interface Admin { level: number; permission: string[] }
+
+interface Post {title: string; content: string}
+
+interface Comment {
+    id: number;
+    author: string;
+}
+
+type UserRole = User | Admin;
+
+type Content = Post | Comment;
+
+type Result<T> = T | Error;
+
+type ID = string | number;
+
+type Status = 'pending' | 'success' | 'error';
+
+class Response {
+  data: Error;
+  status: number[ToFill];
+
+  constructor(data: Error, status: number) {
+    this.data = data;
+    this.status = status;
+  }
+}
+
+
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+  data: Error;
+  status: number;
+
+  constructor(data: Error, status: number) {
+    this.data = data;
+    this.status = status;
+  }
+
+  static success<T>(data: T, status: number = 200) {
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/typingInfer.ets",
+  "lineNumberOneIndexed": 33,
+  "text": "}\n\n\n\n",
+  "shouldRetriggerCpp": true
+}

@@ -1,0 +1,477 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "c2b10963-9fb1-460b-913b-e0c743f68a56",
+    "timestamp": "2025-03-24T07:49:57.702Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/typingInfer.ets",
+          "diffHistory": [
+            "1-|\n1+|ine\n",
+            "1-|ine\n1+|interface User {id: nu}\n2+|\n3+|\n",
+            "1-|interface User {id: nu}\n1+|interface User {id: number;\n2+|    name: string;\n3+|    age: number;\n4+|}\n",
+            "6+|interface Admin { level: number; permission: string[] }\n8+|interface Post {title: string; content: string}\n10+|interface Comment {\n11+|    id: number;\n12+|    content: string;\n13+|}\n14+|\n15+|\n16+|\n17+|\n",
+            "12-|    content: string;\n12+|    author: string;\n",
+            "15+|type UserRole = User | Admin;\n",
+            "17+|type Content = Post | Comment;\n19+|type Result<T> = T | Error;\n20+|\n21+|type ID = string | number;\n22+|\n23+|type Status = 'pending' | 'success' | 'error';\n24+|\n25+|class Response<T> {\n26+|  \n27+|}\n",
+            "25-|class Response<T> {\n26-|  \n25+|class Response<T {\n26+|  data: T | Error;\n27+|  status: number;\n",
+            "25-|class Response<T {\n26-|  data: T | Error;\n25+|class Response {\n26+|  data: Error;\n",
+            "28-|  \n29-|  \n28+|\n29+|  constructor(data: Error, status: number) {\n",
+            "30+|    this.data = data;\n31+|    this.status = status;\n32+|  }\n",
+            "25-|class Response {\n26-|  data: Error;\n25+|class Response<T> {\n26+|  data: T | Error;\n",
+            "29-|  constructor(data: Error, status: number) {\n29+|  constructor(data: T | Error, status: number) {\n",
+            "35+|class DataProcessor {\n36+|}\n",
+            "36+|  private items: string[] = [];\n37+|\n38+|  addItem(item: string) {\n39+|    this.items.push(item);\n40+|  }\n41+|  \n42+|  \n",
+            "41-|  \n42-|  \n41+|\n42+|  getFirstItem(): string | undefined {\n43+|    return this.items[0];\n44+|  }\n45+|\n46+|  getItems(): string[] {\n47+|    return this.items;\n48+|  }\n",
+            "35-|class DataProcessor {\n36-|  private items: string[] = [];\n35+|class DataProcessor<T extends Con> {\n36+|  private items: T[] = [];\n",
+            "35-|class DataProcessor<T extends Con> {\n35+|class DataProcessor<T extends Content> {\n",
+            "38-|  addItem(item: string) {\n38+|  addItem(item: T) {\n",
+            "42-|  getFirstItem(): string | undefined {\n42+|  getFirstItem(): T | undefined {\n",
+            "51+|class UserProcessor extends DataProcessor<User> {\n52+|  private users: User[] = [];\n53+|  \n54+|  \n55+|}\n56+|\n",
+            "46-|  getItems(): string[] {\n46+|  getItems(): T[] {\n",
+            "51-|class UserProcessor extends DataProcessor<User> {\n52-|  private users: User[] = [];\n53-|\n54-|\n51+|function merge(a: string, b: string): string {\n52+|  \n",
+            "51-|function merge(a: string, b: string): string {\n52-|  \n51+|function merge<(a: string, b: string): string {\n52+|  return (typeof a === 'string' ? a + b : a);\n",
+            "51-|function merge<(a: string, b: string): string {\n52-|  return (typeof a === 'string' ? a + b : a);\n51+|function merge<T extends string | number>(a: T, b: T): T {\n52+|  return (typeof a === 'string' ? a + b : a) as;\n",
+            "55+|function processContent<T extends Content>(content: T): T {\n56+|  return content;\n57+|}\n58+|\n59+|\n60+|\n",
+            "52-|  return (typeof a === 'string' ? a + b : a) as;\n52+|  return (typeof a === 'string' ? a + b : a) as T;\n",
+            "55-|function processContent<T extends Content>(content: T): T {\n56-|  return content;\n57-|}\n55+|function w\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/typingInfer.ets",
+        "contents": "interface User {\n    id: number;\n    name: string;\n    age: number;\n}\ninterface Admin { level: number; permission: string[] }\n\ninterface Post {title: string; content: string}\n\ninterface Comment {\n    id: number;\n    author: string;\n}\n\ntype UserRole = User | Admin;\n\ntype Content = Post | Comment;\n\ntype Result<T> = T | Error;\n\ntype ID = string | number;\n\ntype Status = 'pending' | 'success' | 'error';\n\nclass Response<T> {\n  data: T | Error;\n  status: number;\n\n  constructor(data: T | Error, status: number) {\n    this.data = data;\n    this.status = status;\n  }\n}\n\nclass DataProcessor<T extends Content> {\n  private items: T[] = [];\n\n  addItem(item: T) {\n    this.items.push(item);\n  }\n\n  getFirstItem(): T | undefined {\n    return this.items[0];\n  }\n\n  getItems(): T[] {\n    return this.items;\n  }\n}\n\nfunction merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b : a) as T;\n}\n\nfunction w\n\n",
+        "cursorPosition": {
+          "line": 54,
+          "column": 10
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 535,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/utils/test.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 1
+            }
+          ],
+          "lastViewedAt": 1742802122439
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742802597744,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.60009765625,
+      "timeAtRequestSend": 1742802597744
+    },
+    "generateUuid": "c2b10963-9fb1-460b-913b-e0c743f68a56",
+    "timestamp": "2025-03-24T07:49:57.746Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "c2b10963-9fb1-460b-913b-e0c743f68a56",
+    "timestamp": "2025-03-24T07:49:58.085Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "c2b10963-9fb1-460b-913b-e0c743f68a56",
+    "timestamp": "2025-03-24T07:49:58.217Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "rangeToReplace": {
+        "startLineNumber": 51,
+        "endLineNumberInclusive": 57
+      }
+    },
+    "generationUUID": "c2b10963-9fb1-460b-913b-e0c743f68a56",
+    "timestamp": "2025-03-24T07:49:58.218Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b : a) as T;\n}\n\nfunction wrap"
+    },
+    "generationUUID": "c2b10963-9fb1-460b-913b-e0c743f68a56",
+    "timestamp": "2025-03-24T07:49:58.219Z"
+  },
+  {
+    "firstChunkValue": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b : a) as T;\n}\n\nfunction wrapInArray<T>(value: T): T[] {\n\n",
+    "generationUUID": "c2b10963-9fb1-460b-913b-e0c743f68a56",
+    "timestamp": "2025-03-24T07:49:58.385Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "In"
+    },
+    "generationUUID": "c2b10963-9fb1-460b-913b-e0c743f68a56",
+    "timestamp": "2025-03-24T07:49:58.401Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Array"
+    },
+    "generationUUID": "c2b10963-9fb1-460b-913b-e0c743f68a56",
+    "timestamp": "2025-03-24T07:49:58.402Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "<"
+    },
+    "generationUUID": "c2b10963-9fb1-460b-913b-e0c743f68a56",
+    "timestamp": "2025-03-24T07:49:58.402Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b : a) as T;\n}\n\nfunction wrapInArray<T>(value: T): T[] {\n\n"
+    },
+    "generationUUID": "c2b10963-9fb1-460b-913b-e0c743f68a56",
+    "timestamp": "2025-03-24T07:49:58.403Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "edcca20b-eed5-41ee-9b11-55438402a031",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 535,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 535,
+      "monotonicallyIncreasingSuggestionId": 372,
+      "range": {
+        "startLineNumber": 51,
+        "startColumn": 1,
+        "endLineNumberInclusive": 57,
+        "endColumn": 1
+      },
+      "replaceText": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b : a) as T;\n}\n\nfunction wrapInArray<T>(value: T): T[] {\n\n",
+      "originalText": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b : a) as T;\n}\n\nfunction w\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 51,
+        "startColumn": 1,
+        "endLineNumberInclusive": 57,
+        "endColumn": 1
+      },
+      "diffText": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b : a) as T;\n}\n\nfunction wrapInArray<T>(value: T): T[] {\n\n",
+      "fullOriginalText": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b : a) as T;\n}\n\nfunction w\n\n",
+      "suggestionTriggerTime": 1742802597756.9,
+      "greens": [],
+      "source": "typing",
+      "requestId": "c2b10963-9fb1-460b-913b-e0c743f68a56",
+      "selection": {
+        "startLineNumber": 51,
+        "startColumn": 1,
+        "endLineNumberInclusive": 57,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 373,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 51,
+        "startColumn": 1,
+        "endLineNumber": 57,
+        "endColumn": 1
+      },
+      "trackedText": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b : a) as T;\n}\n\nfunction wrap\n\n"
+    },
+    "generationUUID": "c2b10963-9fb1-460b-913b-e0c743f68a56",
+    "timestamp": "2025-03-24T07:49:58.404Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "T>("
+    },
+    "generationUUID": "c2b10963-9fb1-460b-913b-e0c743f68a56",
+    "timestamp": "2025-03-24T07:49:58.407Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "value"
+    },
+    "generationUUID": "c2b10963-9fb1-460b-913b-e0c743f68a56",
+    "timestamp": "2025-03-24T07:49:58.408Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "c2b10963-9fb1-460b-913b-e0c743f68a56",
+    "timestamp": "2025-03-24T07:49:58.409Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " T"
+    },
+    "generationUUID": "c2b10963-9fb1-460b-913b-e0c743f68a56",
+    "timestamp": "2025-03-24T07:49:58.409Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "): T[]"
+    },
+    "generationUUID": "c2b10963-9fb1-460b-913b-e0c743f68a56",
+    "timestamp": "2025-03-24T07:49:58.411Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "c2b10963-9fb1-460b-913b-e0c743f68a56",
+    "timestamp": "2025-03-24T07:49:58.411Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n "
+    },
+    "generationUUID": "c2b10963-9fb1-460b-913b-e0c743f68a56",
+    "timestamp": "2025-03-24T07:49:58.411Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " return ["
+    },
+    "generationUUID": "c2b10963-9fb1-460b-913b-e0c743f68a56",
+    "timestamp": "2025-03-24T07:49:58.412Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "value"
+    },
+    "generationUUID": "c2b10963-9fb1-460b-913b-e0c743f68a56",
+    "timestamp": "2025-03-24T07:49:58.413Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "];"
+    },
+    "generationUUID": "c2b10963-9fb1-460b-913b-e0c743f68a56",
+    "timestamp": "2025-03-24T07:49:58.414Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n}"
+    },
+    "generationUUID": "c2b10963-9fb1-460b-913b-e0c743f68a56",
+    "timestamp": "2025-03-24T07:49:58.415Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Content<T extends Content>(content:"
+    },
+    "generationUUID": "c2b10963-9fb1-460b-913b-e0c743f68a56",
+    "timestamp": "2025-03-24T07:49:58.449Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\nfunction process"
+    },
+    "generationUUID": "c2b10963-9fb1-460b-913b-e0c743f68a56",
+    "timestamp": "2025-03-24T07:49:58.450Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " T):"
+    },
+    "generationUUID": "c2b10963-9fb1-460b-913b-e0c743f68a56",
+    "timestamp": "2025-03-24T07:49:58.451Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " T {\n "
+    },
+    "generationUUID": "c2b10963-9fb1-460b-913b-e0c743f68a56",
+    "timestamp": "2025-03-24T07:49:58.483Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " return"
+    },
+    "generationUUID": "c2b10963-9fb1-460b-913b-e0c743f68a56",
+    "timestamp": "2025-03-24T07:49:58.488Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " content;\n}"
+    },
+    "generationUUID": "c2b10963-9fb1-460b-913b-e0c743f68a56",
+    "timestamp": "2025-03-24T07:49:58.489Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "c2b10963-9fb1-460b-913b-e0c743f68a56",
+    "timestamp": "2025-03-24T07:49:58.497Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "c2b10963-9fb1-460b-913b-e0c743f68a56",
+    "timestamp": "2025-03-24T07:49:58.511Z"
+  },
+  {
+    "fullText": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b : a) as T;\n}\n\nfunction wrapInArray<T>(value: T): T[] {\n  return [value];\n}\n\nfunction processContent<T extends Content>(content: T): T {\n  return content;\n}\n\n",
+    "generationUUID": "c2b10963-9fb1-460b-913b-e0c743f68a56",
+    "timestamp": "2025-03-24T07:49:58.513Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b : a) as T;\n}\n\nfunction wrapInArray<T>(value: T): T[] {\n\n"
+    },
+    "fullText": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b : a) as T;\n}\n\nfunction wrapInArray<T>(value: T): T[] {\n  return [value];\n}\n\nfunction processContent<T extends Content>(content: T): T {\n  return content;\n}\n\n",
+    "generationUUID": "c2b10963-9fb1-460b-913b-e0c743f68a56",
+    "timestamp": "2025-03-24T07:49:58.515Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "6fd05d2a-57be-497a-92e7-b98c11022a92",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 535,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 539,
+      "monotonicallyIncreasingSuggestionId": 374,
+      "range": {
+        "startLineNumber": 51,
+        "startColumn": 1,
+        "endLineNumberInclusive": 57,
+        "endColumn": 1
+      },
+      "replaceText": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b : a) as T;\n}\n\nfunction wrapInArray<T>(value: T): T[] {\n  return [value];\n}\n\nfunction processContent<T extends Content>(content: T): T {\n  return content;\n}\n\n",
+      "originalText": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b : a) as T;\n}\n\nfunction wrapInArray<T>(value: T): T[] {\n\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 51,
+        "startColumn": 1,
+        "endLineNumberInclusive": 57,
+        "endColumn": 1
+      },
+      "diffText": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b : a) as T;\n}\n\nfunction wrapInArray<T>(value: T): T[] {\n  return [value];\n}\n\nfunction processContent<T extends Content>(content: T): T {\n  return content;\n}\n\n",
+      "fullOriginalText": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b : a) as T;\n}\n\nfunction wrapInArray<T>(value: T): T[] {\n\n",
+      "suggestionTriggerTime": 1742802597756.9,
+      "greens": [],
+      "source": "typing",
+      "requestId": "c2b10963-9fb1-460b-913b-e0c743f68a56",
+      "selection": {
+        "startLineNumber": 51,
+        "startColumn": 1,
+        "endLineNumberInclusive": 57,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "470476b4-b3e6-454b-a530-c5ef0a467f9e",
+      "undoRedoGroup": {
+        "id": 375,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "c2b10963-9fb1-460b-913b-e0c743f68a56",
+    "timestamp": "2025-03-24T07:49:58.515Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "c2b10963-9fb1-460b-913b-e0c743f68a56",
+    "timestamp": "2025-03-24T07:49:58.516Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "c2b10963-9fb1-460b-913b-e0c743f68a56",
+    "timestamp": "2025-03-24T07:49:58.516Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "470476b4-b3e6-454b-a530-c5ef0a467f9e",
+    "generationUUID": "c2b10963-9fb1-460b-913b-e0c743f68a56",
+    "timestamp": "2025-03-24T07:49:58.544Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "function merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b : a) as T;\n}\n\nfunction wrapInArray<T>(value: T): T[] {\n\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "470476b4-b3e6-454b-a530-c5ef0a467f9e",
+    "generationUUID": "c2b10963-9fb1-460b-913b-e0c743f68a56",
+    "timestamp": "2025-03-24T07:49:58.545Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "470476b4-b3e6-454b-a530-c5ef0a467f9e",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-24T07:49:58.545Z"
+  }
+]

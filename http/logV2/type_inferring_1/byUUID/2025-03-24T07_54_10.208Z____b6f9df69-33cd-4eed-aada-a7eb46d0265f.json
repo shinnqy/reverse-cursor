@@ -1,0 +1,628 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.208Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/typingInfer.ets",
+          "diffHistory": [
+            "1-|\n1+|ine\n",
+            "1-|ine\n1+|interface User {id: nu}\n2+|\n3+|\n",
+            "1-|interface User {id: nu}\n1+|interface User {id: number;\n2+|    name: string;\n3+|    age: number;\n4+|}\n",
+            "6+|interface Admin { level: number; permission: string[] }\n8+|interface Post {title: string; content: string}\n10+|interface Comment {\n11+|    id: number;\n12+|    content: string;\n13+|}\n14+|\n15+|\n16+|\n17+|\n",
+            "12-|    content: string;\n12+|    author: string;\n",
+            "15+|type UserRole = User | Admin;\n",
+            "17+|type Content = Post | Comment;\n19+|type Result<T> = T | Error;\n20+|\n21+|type ID = string | number;\n22+|\n23+|type Status = 'pending' | 'success' | 'error';\n24+|\n25+|class Response<T> {\n26+|  \n27+|}\n",
+            "25-|class Response<T> {\n26-|  \n25+|class Response<T {\n26+|  data: T | Error;\n27+|  status: number;\n",
+            "25-|class Response<T {\n26-|  data: T | Error;\n25+|class Response {\n26+|  data: Error;\n",
+            "28-|  \n29-|  \n28+|\n29+|  constructor(data: Error, status: number) {\n",
+            "30+|    this.data = data;\n31+|    this.status = status;\n32+|  }\n",
+            "25-|class Response {\n26-|  data: Error;\n25+|class Response<T> {\n26+|  data: T | Error;\n",
+            "29-|  constructor(data: Error, status: number) {\n29+|  constructor(data: T | Error, status: number) {\n",
+            "35+|class DataProcessor {\n36+|}\n",
+            "36+|  private items: string[] = [];\n37+|\n38+|  addItem(item: string) {\n39+|    this.items.push(item);\n40+|  }\n41+|  \n42+|  \n",
+            "41-|  \n42-|  \n41+|\n42+|  getFirstItem(): string | undefined {\n43+|    return this.items[0];\n44+|  }\n45+|\n46+|  getItems(): string[] {\n47+|    return this.items;\n48+|  }\n",
+            "35-|class DataProcessor {\n36-|  private items: string[] = [];\n35+|class DataProcessor<T extends Con> {\n36+|  private items: T[] = [];\n",
+            "35-|class DataProcessor<T extends Con> {\n35+|class DataProcessor<T extends Content> {\n",
+            "38-|  addItem(item: string) {\n38+|  addItem(item: T) {\n",
+            "42-|  getFirstItem(): string | undefined {\n42+|  getFirstItem(): T | undefined {\n",
+            "51+|class UserProcessor extends DataProcessor<User> {\n52+|  private users: User[] = [];\n53+|  \n54+|  \n55+|}\n56+|\n",
+            "46-|  getItems(): string[] {\n46+|  getItems(): T[] {\n",
+            "51-|class UserProcessor extends DataProcessor<User> {\n52-|  private users: User[] = [];\n53-|\n54-|\n51+|function merge(a: string, b: string): string {\n52+|  \n",
+            "51-|function merge(a: string, b: string): string {\n52-|  \n51+|function merge<(a: string, b: string): string {\n52+|  return (typeof a === 'string' ? a + b : a);\n",
+            "51-|function merge<(a: string, b: string): string {\n52-|  return (typeof a === 'string' ? a + b : a);\n51+|function merge<T extends string | number>(a: T, b: T): T {\n52+|  return (typeof a === 'string' ? a + b : a) as;\n",
+            "55+|function processContent<T extends Content>(content: T): T {\n56+|  return content;\n57+|}\n58+|\n59+|\n60+|\n",
+            "52-|  return (typeof a === 'string' ? a + b : a) as;\n52+|  return (typeof a === 'string' ? a + b : a) as T;\n",
+            "55-|function processContent<T extends Content>(content: T): T {\n56-|  return content;\n55+|function wrap(input) {\n56+|  \n",
+            "55-|function wrap(input) {\n56-|  \n55+|function wrap<(input) {\n56+|  return [input]\n",
+            "55-|function wrap<(input) {\n55+|function wrap<T>(input) {\n",
+            "59+|function processContent<T extends Content>(content: T): T {\n60+|  return content;\n61+|}\n62+|\n63+|\n64+|\n",
+            "55-|function wrap<T>(input) {\n55+|function wrap<T>(input: T): T[] {\n",
+            "59-|function processContent<T extends Content>(content: T): T {\n60-|  return content;\n59+|class Cache {\n60+|  \n",
+            "60+|  private store = new Map<string, null>();\n",
+            "61-|  \n62-|  \n61+|\n62+|  get(key: string) {\n63+|    return this.store.get(key);\n64+|  }\n65+|\n66+|  set(key: string, value: null) {\n67+|    this.store.set(key, value);\n68+|  }\n",
+            "59-|class Cache {\n60-|  private store = new Map<string, null>();\n59+|class Cache<T> {\n60+|  private store = new Map<string, T>();\n",
+            "66-|  set(key: string, value: null) {\n66+|  set(key: string, value: T) {\n",
+            "62-|  get(key: string) {\n62+|  get(key: string): T | undefined {\n",
+            "71-|\n71+|function demo() {\n72+|  \n73+|}\n",
+            "72+|  const userRes = new Response<User>({ id: 1, name: 'John', age: 20 }, 200);\n",
+            "73+|\n74+|  const processor = new DataProcessor<Post>();\n75+|  processor.addItem({ title: 'Hello', content: 'World' });\n",
+            "76+|\n77+|  const merged = merge<string>('Hello', 'Arkts');\n78+|  const numbers = merge<number>(1, 2);\n",
+            "79+|\n80+|  const cache = new Cache<ID>();\n81+|  cache.set('user', 1);\n82+|  cache.set('post', '1');\n",
+            "83-|  \n84-|  \n83+|\n84+|  const wrapped = wrap<Status>('pending');\n",
+            "86+|\n87+|type ApiResponse<T> = Promise<Result>;\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/typingInfer.ets",
+        "contents": "interface User {\n    id: number;\n    name: string;\n    age: number;\n}\ninterface Admin { level: number; permission: string[] }\n\ninterface Post {title: string; content: string}\n\ninterface Comment {\n    id: number;\n    author: string;\n}\n\ntype UserRole = User | Admin;\n\ntype Content = Post | Comment;\n\ntype Result<T> = T | Error;\n\ntype ID = string | number;\n\ntype Status = 'pending' | 'success' | 'error';\n\nclass Response<T> {\n  data: T | Error;\n  status: number;\n\n  constructor(data: T | Error, status: number) {\n    this.data = data;\n    this.status = status;\n  }\n}\n\nclass DataProcessor<T extends Content> {\n  private items: T[] = [];\n\n  addItem(item: T) {\n    this.items.push(item);\n  }\n\n  getFirstItem(): T | undefined {\n    return this.items[0];\n  }\n\n  getItems(): T[] {\n    return this.items;\n  }\n}\n\nfunction merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b : a) as T;\n}\n\nfunction wrap<T>(input: T): T[] {\n  return [input]\n}\n\nclass Cache<T> {\n  private store = new Map<string, T>();\n\n  get(key: string): T | undefined {\n    return this.store.get(key);\n  }\n\n  set(key: string, value: T) {\n    this.store.set(key, value);\n  }\n}\n\nfunction demo() {\n  const userRes = new Response<User>({ id: 1, name: 'John', age: 20 }, 200);\n\n  const processor = new DataProcessor<Post>();\n  processor.addItem({ title: 'Hello', content: 'World' });\n\n  const merged = merge<string>('Hello', 'Arkts');\n  const numbers = merge<number>(1, 2);\n\n  const cache = new Cache<ID>();\n  cache.set('user', 1);\n  cache.set('post', '1');\n\n  const wrapped = wrap<Status>('pending');\n}\n\ntype ApiResponse<T> = Promise<Result>;",
+        "cursorPosition": {
+          "line": 86,
+          "column": 36
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 899,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/utils/test.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 1
+            }
+          ],
+          "lastViewedAt": 1742802122439
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742802850240,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.10009765625,
+      "timeAtRequestSend": 1742802850240
+    },
+    "generateUuid": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.242Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.532Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "rangeToReplace": {
+        "startLineNumber": 86,
+        "endLineNumberInclusive": 87
+      }
+    },
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.599Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\ntype ApiResponse<T> = Promise<Result<"
+    },
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.599Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.602Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "T"
+    },
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.626Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ">>"
+    },
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.633Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";"
+    },
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.643Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.654Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "function"
+    },
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.698Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " fetch"
+    },
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.698Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Data"
+    },
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.698Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "<"
+    },
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.698Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "T>("
+    },
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.701Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "url"
+    },
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.711Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.722Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " string"
+    },
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.732Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "): Api"
+    },
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.742Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Response<T> {"
+    },
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.752Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n "
+    },
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.762Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " return"
+    },
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.772Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " fetch"
+    },
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.783Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "("
+    },
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.793Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "url"
+    },
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.802Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ")."
+    },
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.812Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "then"
+    },
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.821Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "res"
+    },
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.930Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "(("
+    },
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.931Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ")"
+    },
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.931Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " =>"
+    },
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.932Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " res"
+    },
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.932Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.932Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "());"
+    },
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.932Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "json"
+    },
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.933Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.933Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}"
+    },
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.933Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.934Z"
+  },
+  {
+    "firstChunkValue": "\ntype ApiResponse<T> = Promise<Result<T>>;\n\nfunction fetchData<T>(url: string): ApiResponse<T> {\n  return fetch(url).then((res) => res.json());\n}\n\n",
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.937Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.937Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.938Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\ntype ApiResponse<T> = Promise<Result<T>>;\n\nfunction fetchData<T>(url: string): ApiResponse<T> {\n  return fetch(url).then((res) => res.json());\n}\n\n"
+    },
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.938Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "c8a3363b-7508-403b-94a2-77507e60f8f5",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 899,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 899,
+      "monotonicallyIncreasingSuggestionId": 609,
+      "range": {
+        "startLineNumber": 86,
+        "startColumn": 1,
+        "endLineNumberInclusive": 87,
+        "endColumn": 40
+      },
+      "replaceText": "\ntype ApiResponse<T> = Promise<Result<T>>;\n\nfunction fetchData<T>(url: string): ApiResponse<T> {\n  return fetch(url).then((res) => res.json());\n}\n\n",
+      "originalText": "\ntype ApiResponse<T> = Promise<Result>;",
+      "startingSuggestionRange": {
+        "startLineNumber": 86,
+        "startColumn": 1,
+        "endLineNumberInclusive": 87,
+        "endColumn": 40
+      },
+      "diffText": "\ntype ApiResponse<T> = Promise<Result<T>>;\n\nfunction fetchData<T>(url: string): ApiResponse<T> {\n  return fetch(url).then((res) => res.json());\n}\n\n",
+      "fullOriginalText": "\ntype ApiResponse<T> = Promise<Result>;",
+      "suggestionTriggerTime": 1742802850252.5,
+      "greens": [],
+      "source": "typing",
+      "requestId": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+      "selection": {
+        "startLineNumber": 86,
+        "startColumn": 1,
+        "endLineNumberInclusive": 87,
+        "endColumn": 40
+      },
+      "fusedCursorPredictionId": "a21e2180-9b12-4020-b912-58721ddd1e25",
+      "undoRedoGroup": {
+        "id": 610,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 86,
+        "startColumn": 1,
+        "endLineNumber": 87,
+        "endColumn": 40
+      },
+      "trackedText": "\ntype ApiResponse<T> = Promise<Result<>;"
+    },
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.939Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "a21e2180-9b12-4020-b912-58721ddd1e25",
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.951Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\ntype ApiResponse<T> = Promise<Result<T>>;\n\nfunction fetchData<T>(url: string): ApiResponse<T> {\n  return fetch(url).then((res) => res.json());\n}\n\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "a21e2180-9b12-4020-b912-58721ddd1e25",
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:10.952Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "a21e2180-9b12-4020-b912-58721ddd1e25",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-24T07:54:10.952Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "c8a3363b-7508-403b-94a2-77507e60f8f5",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 899,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 899,
+      "monotonicallyIncreasingSuggestionId": 609,
+      "range": {
+        "startLineNumber": 86,
+        "startColumn": 1,
+        "endLineNumberInclusive": 87,
+        "endColumn": 40
+      },
+      "replaceText": "\ntype ApiResponse<T> = Promise<Result<T>>;\n\nfunction fetchData<T>(url: string): ApiResponse<T> {\n  return fetch(url).then((res) => res.json());\n}\n\n",
+      "originalText": "\ntype ApiResponse<T> = Promise<Result>;",
+      "startingSuggestionRange": {
+        "startLineNumber": 86,
+        "startColumn": 1,
+        "endLineNumberInclusive": 87,
+        "endColumn": 40
+      },
+      "diffText": "\ntype ApiResponse<T> = Promise<Result<T>>;\n\nfunction fetchData<T>(url: string): ApiResponse<T> {\n  return fetch(url).then((res) => res.json());\n}\n\n",
+      "fullOriginalText": "\ntype ApiResponse<T> = Promise<Result>;",
+      "suggestionTriggerTime": 1742802850252.5,
+      "greens": [],
+      "source": "typing",
+      "requestId": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+      "selection": {
+        "startLineNumber": 86,
+        "startColumn": 1,
+        "endLineNumberInclusive": 87,
+        "endColumn": 40
+      },
+      "fusedCursorPredictionId": "a21e2180-9b12-4020-b912-58721ddd1e25",
+      "undoRedoGroup": {
+        "id": 610,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 86,
+        "startColumn": 1,
+        "endLineNumber": 87,
+        "endColumn": 40
+      },
+      "trackedText": "\ntype ApiResponse<T> = Promise<Result<>;",
+      "decorationId": "c;3523"
+    },
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:11.996Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "c8a3363b-7508-403b-94a2-77507e60f8f5",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 899,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 899,
+      "monotonicallyIncreasingSuggestionId": 609,
+      "range": {
+        "startLineNumber": 86,
+        "startColumn": 1,
+        "endLineNumberInclusive": 87,
+        "endColumn": 40
+      },
+      "replaceText": "\ntype ApiResponse<T> = Promise<Result<T>>;\n\nfunction fetchData<T>(url: string): ApiResponse<T> {\n  return fetch(url).then((res) => res.json());\n}\n\n",
+      "originalText": "\ntype ApiResponse<T> = Promise<Result>;",
+      "startingSuggestionRange": {
+        "startLineNumber": 86,
+        "startColumn": 1,
+        "endLineNumberInclusive": 87,
+        "endColumn": 40
+      },
+      "diffText": "\ntype ApiResponse<T> = Promise<Result<T>>;\n\nfunction fetchData<T>(url: string): ApiResponse<T> {\n  return fetch(url).then((res) => res.json());\n}\n\n",
+      "fullOriginalText": "\ntype ApiResponse<T> = Promise<Result>;",
+      "suggestionTriggerTime": 1742802850252.5,
+      "greens": [],
+      "source": "typing",
+      "requestId": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+      "selection": {
+        "startLineNumber": 86,
+        "startColumn": 1,
+        "endLineNumberInclusive": 87,
+        "endColumn": 40
+      },
+      "fusedCursorPredictionId": "a21e2180-9b12-4020-b912-58721ddd1e25",
+      "undoRedoGroup": {
+        "id": 610,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "abortController": {},
+      "trackedRange": {
+        "startLineNumber": 86,
+        "startColumn": 1,
+        "endLineNumber": 87,
+        "endColumn": 40
+      },
+      "trackedText": "\ntype ApiResponse<T> = Promise<Result<>;",
+      "decorationId": "c;3523"
+    },
+    "generationUUID": "b6f9df69-33cd-4eed-aada-a7eb46d0265f",
+    "timestamp": "2025-03-24T07:54:12.012Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "a21e2180-9b12-4020-b912-58721ddd1e25",
+    "fusedCursorPrediction": null,
+    "oldText": "\ntype ApiResponse<T> = Promise<Result>;",
+    "newText": "\ntype ApiResponse<T> = Promise<Result<T>>;\n\nfunction fetchData<T>(url: string): ApiResponse<T> {\n  return fetch(url).then((res) => res.json());\n}\n\n",
+    "timestamp": "2025-03-24T07:54:12.012Z"
+  }
+]

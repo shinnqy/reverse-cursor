@@ -1,0 +1,348 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "1e26b801-7295-4e6a-ad51-741ffb57a4fc",
+    "timestamp": "2025-03-24T07:53:54.516Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/typingInfer.ets",
+          "diffHistory": [
+            "1-|\n1+|ine\n",
+            "1-|ine\n1+|interface User {id: nu}\n2+|\n3+|\n",
+            "1-|interface User {id: nu}\n1+|interface User {id: number;\n2+|    name: string;\n3+|    age: number;\n4+|}\n",
+            "6+|interface Admin { level: number; permission: string[] }\n8+|interface Post {title: string; content: string}\n10+|interface Comment {\n11+|    id: number;\n12+|    content: string;\n13+|}\n14+|\n15+|\n16+|\n17+|\n",
+            "12-|    content: string;\n12+|    author: string;\n",
+            "15+|type UserRole = User | Admin;\n",
+            "17+|type Content = Post | Comment;\n19+|type Result<T> = T | Error;\n20+|\n21+|type ID = string | number;\n22+|\n23+|type Status = 'pending' | 'success' | 'error';\n24+|\n25+|class Response<T> {\n26+|  \n27+|}\n",
+            "25-|class Response<T> {\n26-|  \n25+|class Response<T {\n26+|  data: T | Error;\n27+|  status: number;\n",
+            "25-|class Response<T {\n26-|  data: T | Error;\n25+|class Response {\n26+|  data: Error;\n",
+            "28-|  \n29-|  \n28+|\n29+|  constructor(data: Error, status: number) {\n",
+            "30+|    this.data = data;\n31+|    this.status = status;\n32+|  }\n",
+            "25-|class Response {\n26-|  data: Error;\n25+|class Response<T> {\n26+|  data: T | Error;\n",
+            "29-|  constructor(data: Error, status: number) {\n29+|  constructor(data: T | Error, status: number) {\n",
+            "35+|class DataProcessor {\n36+|}\n",
+            "36+|  private items: string[] = [];\n37+|\n38+|  addItem(item: string) {\n39+|    this.items.push(item);\n40+|  }\n41+|  \n42+|  \n",
+            "41-|  \n42-|  \n41+|\n42+|  getFirstItem(): string | undefined {\n43+|    return this.items[0];\n44+|  }\n45+|\n46+|  getItems(): string[] {\n47+|    return this.items;\n48+|  }\n",
+            "35-|class DataProcessor {\n36-|  private items: string[] = [];\n35+|class DataProcessor<T extends Con> {\n36+|  private items: T[] = [];\n",
+            "35-|class DataProcessor<T extends Con> {\n35+|class DataProcessor<T extends Content> {\n",
+            "38-|  addItem(item: string) {\n38+|  addItem(item: T) {\n",
+            "42-|  getFirstItem(): string | undefined {\n42+|  getFirstItem(): T | undefined {\n",
+            "51+|class UserProcessor extends DataProcessor<User> {\n52+|  private users: User[] = [];\n53+|  \n54+|  \n55+|}\n56+|\n",
+            "46-|  getItems(): string[] {\n46+|  getItems(): T[] {\n",
+            "51-|class UserProcessor extends DataProcessor<User> {\n52-|  private users: User[] = [];\n53-|\n54-|\n51+|function merge(a: string, b: string): string {\n52+|  \n",
+            "51-|function merge(a: string, b: string): string {\n52-|  \n51+|function merge<(a: string, b: string): string {\n52+|  return (typeof a === 'string' ? a + b : a);\n",
+            "51-|function merge<(a: string, b: string): string {\n52-|  return (typeof a === 'string' ? a + b : a);\n51+|function merge<T extends string | number>(a: T, b: T): T {\n52+|  return (typeof a === 'string' ? a + b : a) as;\n",
+            "55+|function processContent<T extends Content>(content: T): T {\n56+|  return content;\n57+|}\n58+|\n59+|\n60+|\n",
+            "52-|  return (typeof a === 'string' ? a + b : a) as;\n52+|  return (typeof a === 'string' ? a + b : a) as T;\n",
+            "55-|function processContent<T extends Content>(content: T): T {\n56-|  return content;\n55+|function wrap(input) {\n56+|  \n",
+            "55-|function wrap(input) {\n56-|  \n55+|function wrap<(input) {\n56+|  return [input]\n",
+            "55-|function wrap<(input) {\n55+|function wrap<T>(input) {\n",
+            "59+|function processContent<T extends Content>(content: T): T {\n60+|  return content;\n61+|}\n62+|\n63+|\n64+|\n",
+            "55-|function wrap<T>(input) {\n55+|function wrap<T>(input: T): T[] {\n",
+            "59-|function processContent<T extends Content>(content: T): T {\n60-|  return content;\n59+|class Cache {\n60+|  \n",
+            "60+|  private store = new Map<string, null>();\n",
+            "61-|  \n62-|  \n61+|\n62+|  get(key: string) {\n63+|    return this.store.get(key);\n64+|  }\n65+|\n66+|  set(key: string, value: null) {\n67+|    this.store.set(key, value);\n68+|  }\n",
+            "59-|class Cache {\n60-|  private store = new Map<string, null>();\n59+|class Cache<T> {\n60+|  private store = new Map<string, T>();\n",
+            "66-|  set(key: string, value: null) {\n66+|  set(key: string, value: T) {\n",
+            "62-|  get(key: string) {\n62+|  get(key: string): T | undefined {\n",
+            "71-|\n71+|function demo() {\n72+|  \n73+|}\n",
+            "72+|  const userRes = new Response<User>({ id: 1, name: 'John', age: 20 }, 200);\n",
+            "73+|\n74+|  const processor = new DataProcessor<Post>();\n75+|  processor.addItem({ title: 'Hello', content: 'World' });\n",
+            "76+|\n77+|  const merged = merge<string>('Hello', 'Arkts');\n78+|  const numbers = merge<number>(1, 2);\n",
+            "79+|\n80+|  const cache = new Cache<ID>();\n81+|  cache.set('user', 1);\n82+|  cache.set('post', '1');\n",
+            "83-|  \n84-|  \n83+|\n84+|  const wrapped = wrap<Status>('pending');\n",
+            "86+|\n87+|type ApiRrespon\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/typingInfer.ets",
+        "contents": "interface User {\n    id: number;\n    name: string;\n    age: number;\n}\ninterface Admin { level: number; permission: string[] }\n\ninterface Post {title: string; content: string}\n\ninterface Comment {\n    id: number;\n    author: string;\n}\n\ntype UserRole = User | Admin;\n\ntype Content = Post | Comment;\n\ntype Result<T> = T | Error;\n\ntype ID = string | number;\n\ntype Status = 'pending' | 'success' | 'error';\n\nclass Response<T> {\n  data: T | Error;\n  status: number;\n\n  constructor(data: T | Error, status: number) {\n    this.data = data;\n    this.status = status;\n  }\n}\n\nclass DataProcessor<T extends Content> {\n  private items: T[] = [];\n\n  addItem(item: T) {\n    this.items.push(item);\n  }\n\n  getFirstItem(): T | undefined {\n    return this.items[0];\n  }\n\n  getItems(): T[] {\n    return this.items;\n  }\n}\n\nfunction merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b : a) as T;\n}\n\nfunction wrap<T>(input: T): T[] {\n  return [input]\n}\n\nclass Cache<T> {\n  private store = new Map<string, T>();\n\n  get(key: string): T | undefined {\n    return this.store.get(key);\n  }\n\n  set(key: string, value: T) {\n    this.store.set(key, value);\n  }\n}\n\nfunction demo() {\n  const userRes = new Response<User>({ id: 1, name: 'John', age: 20 }, 200);\n\n  const processor = new DataProcessor<Post>();\n  processor.addItem({ title: 'Hello', content: 'World' });\n\n  const merged = merge<string>('Hello', 'Arkts');\n  const numbers = merge<number>(1, 2);\n\n  const cache = new Cache<ID>();\n  cache.set('user', 1);\n  cache.set('post', '1');\n\n  const wrapped = wrap<Status>('pending');\n}\n\ntype ApiRrespon",
+        "cursorPosition": {
+          "line": 86,
+          "column": 15
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 857,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/utils/test.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 1
+            }
+          ],
+          "lastViewedAt": 1742802122439
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742802834532,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.60009765625,
+      "timeAtRequestSend": 1742802834533
+    },
+    "generateUuid": "1e26b801-7295-4e6a-ad51-741ffb57a4fc",
+    "timestamp": "2025-03-24T07:53:54.535Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "1e26b801-7295-4e6a-ad51-741ffb57a4fc",
+    "timestamp": "2025-03-24T07:53:54.821Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "rangeToReplace": {
+        "startLineNumber": 86,
+        "endLineNumberInclusive": 87
+      }
+    },
+    "generationUUID": "1e26b801-7295-4e6a-ad51-741ffb57a4fc",
+    "timestamp": "2025-03-24T07:53:54.933Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\ntype ApiResponse"
+    },
+    "generationUUID": "1e26b801-7295-4e6a-ad51-741ffb57a4fc",
+    "timestamp": "2025-03-24T07:53:54.934Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "<"
+    },
+    "generationUUID": "1e26b801-7295-4e6a-ad51-741ffb57a4fc",
+    "timestamp": "2025-03-24T07:53:54.934Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "T"
+    },
+    "generationUUID": "1e26b801-7295-4e6a-ad51-741ffb57a4fc",
+    "timestamp": "2025-03-24T07:53:54.937Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "> ="
+    },
+    "generationUUID": "1e26b801-7295-4e6a-ad51-741ffb57a4fc",
+    "timestamp": "2025-03-24T07:53:54.948Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "1e26b801-7295-4e6a-ad51-741ffb57a4fc",
+    "timestamp": "2025-03-24T07:53:54.959Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n "
+    },
+    "generationUUID": "1e26b801-7295-4e6a-ad51-741ffb57a4fc",
+    "timestamp": "2025-03-24T07:53:54.971Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " data"
+    },
+    "generationUUID": "1e26b801-7295-4e6a-ad51-741ffb57a4fc",
+    "timestamp": "2025-03-24T07:53:54.981Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "1e26b801-7295-4e6a-ad51-741ffb57a4fc",
+    "timestamp": "2025-03-24T07:53:54.986Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": T;"
+    },
+    "generationUUID": "1e26b801-7295-4e6a-ad51-741ffb57a4fc",
+    "timestamp": "2025-03-24T07:53:54.993Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n "
+    },
+    "generationUUID": "1e26b801-7295-4e6a-ad51-741ffb57a4fc",
+    "timestamp": "2025-03-24T07:53:55.005Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " status"
+    },
+    "generationUUID": "1e26b801-7295-4e6a-ad51-741ffb57a4fc",
+    "timestamp": "2025-03-24T07:53:55.017Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": number;\n}"
+    },
+    "generationUUID": "1e26b801-7295-4e6a-ad51-741ffb57a4fc",
+    "timestamp": "2025-03-24T07:53:55.029Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "1e26b801-7295-4e6a-ad51-741ffb57a4fc",
+    "timestamp": "2025-03-24T07:53:55.040Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "1e26b801-7295-4e6a-ad51-741ffb57a4fc",
+    "timestamp": "2025-03-24T07:53:55.051Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "1e26b801-7295-4e6a-ad51-741ffb57a4fc",
+    "timestamp": "2025-03-24T07:53:55.067Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "1e26b801-7295-4e6a-ad51-741ffb57a4fc",
+    "timestamp": "2025-03-24T07:53:55.068Z"
+  },
+  {
+    "firstChunkValue": "\ntype ApiResponse<T> = {\n  data: T;\n  status: number;\n}\n\n\n",
+    "generationUUID": "1e26b801-7295-4e6a-ad51-741ffb57a4fc",
+    "timestamp": "2025-03-24T07:53:55.093Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\ntype ApiResponse<T> = {\n  data: T;\n  status: number;\n}\n\n\n"
+    },
+    "generationUUID": "1e26b801-7295-4e6a-ad51-741ffb57a4fc",
+    "timestamp": "2025-03-24T07:53:55.093Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "93c3fcf5-387e-47dd-b18f-b745d82ad50f",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 857,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 857,
+      "monotonicallyIncreasingSuggestionId": 589,
+      "range": {
+        "startLineNumber": 86,
+        "startColumn": 1,
+        "endLineNumberInclusive": 87,
+        "endColumn": 16
+      },
+      "replaceText": "\ntype ApiResponse<T> = {\n  data: T;\n  status: number;\n}\n\n\n",
+      "originalText": "\ntype ApiRrespon",
+      "startingSuggestionRange": {
+        "startLineNumber": 86,
+        "startColumn": 1,
+        "endLineNumberInclusive": 87,
+        "endColumn": 16
+      },
+      "diffText": "\ntype ApiResponse<T> = {\n  data: T;\n  status: number;\n}\n\n\n",
+      "fullOriginalText": "\ntype ApiRrespon",
+      "suggestionTriggerTime": 1742802834545.2,
+      "greens": [],
+      "source": "typing",
+      "requestId": "1e26b801-7295-4e6a-ad51-741ffb57a4fc",
+      "selection": {
+        "startLineNumber": 86,
+        "startColumn": 1,
+        "endLineNumberInclusive": 87,
+        "endColumn": 16
+      },
+      "fusedCursorPredictionId": "b53806ad-ed85-48a5-95a4-d6bd3d115ff2",
+      "undoRedoGroup": {
+        "id": 590,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "1e26b801-7295-4e6a-ad51-741ffb57a4fc",
+    "timestamp": "2025-03-24T07:53:55.093Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "b53806ad-ed85-48a5-95a4-d6bd3d115ff2",
+    "generationUUID": "1e26b801-7295-4e6a-ad51-741ffb57a4fc",
+    "timestamp": "2025-03-24T07:53:55.094Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "\ntype ApiResponse<T> = {\n  data: T;\n  status: number;\n}\n\n\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "b53806ad-ed85-48a5-95a4-d6bd3d115ff2",
+    "generationUUID": "1e26b801-7295-4e6a-ad51-741ffb57a4fc",
+    "timestamp": "2025-03-24T07:53:55.094Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "b53806ad-ed85-48a5-95a4-d6bd3d115ff2",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-24T07:53:55.094Z"
+  }
+]

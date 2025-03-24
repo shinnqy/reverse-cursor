@@ -1,0 +1,125 @@
+{"line":34,"column":31}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+interface User {
+    id: number;
+    name: string;
+    age: number;
+}
+interface Admin { level: number; permission: string[] }
+
+interface Post {title: string; content: string}
+
+interface Comment {
+    id: number;
+    author: string;
+}
+
+type UserRole = User | Admin;
+
+type Content = Post | Comment;
+
+type Result<T> = T | Error;
+
+type ID = string | number;
+
+type Status = 'pending' | 'success' | 'error';
+
+class Response<T> {
+  data: T | Error;
+  status: number;
+
+  constructor(data: T | Error, status: number) {
+    this.data = data;
+    this.status = status;
+  }
+}
+
+class DataProcessor<T extends C[ToFill]> {
+  private items: string[] = [];
+
+  addItem(item: string) {
+    this.items.push(item);
+  }
+
+  getFirstItem(): string | undefined {
+    return this.items[0];
+  }
+
+  getItems(): string[] {
+    return this.items;
+  }
+}
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+class DataProcessor<T extends Content> {
+  private items: T[] = [];
+
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+interface User {
+    id: number;
+    name: string;
+    age: number;
+}
+interface Admin { level: number; permission: string[] }
+
+interface Post {title: string; content: string}
+
+interface Comment {
+    id: number;
+    author: string;
+}
+
+type UserRole = User | Admin;
+
+type Content = Post | Comment;
+
+type Result<T> = T | Error;
+
+type ID = string | number;
+
+type Status = 'pending' | 'success' | 'error';
+
+class Response<T> {
+  data: T | Error;
+  status: number;
+
+  constructor(data: T | Error, status: number) {
+    this.data = data;
+    this.status = status;
+  }
+}
+
+class DataProcessor<T extends Content> {
+  private items: T[] = [];
+
+  addItem(item: string) {
+    this.items.push(item);
+  }
+
+  getFirstItem(): string | undefined {
+    return this.items[0];
+  }
+
+  getItems(): string[] {
+    return this.items;
+  }
+}
+
+
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/typingInfer.ets",
+  "lineNumberOneIndexed": 38,
+  "text": "addItem(item: string) {\nthis.items.push(item);\n}\n\ngetFirstItem(): string | undefined {",
+  "shouldRetriggerCpp": true
+}
+--------------------------------[        displayedFusedCursorPrediction       ]---------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/typingInfer.ets",
+  "lineNumberOneIndexed": 38,
+  "text": "addItem(item: string) {\nthis.items.push(item);\n}\n\ngetFirstItem(): string | undefined {",
+  "shouldRetriggerCpp": true
+}

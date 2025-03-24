@@ -1,0 +1,70 @@
+{"line":50,"column":16}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+interface User {
+    id: number;
+    name: string;
+    age: number;
+}
+interface Admin { level: number; permission: string[] }
+
+interface Post {title: string; content: string}
+
+interface Comment {
+    id: number;
+    author: string;
+}
+
+type UserRole = User | Admin;
+
+type Content = Post | Comment;
+
+type Result<T> = T | Error;
+
+type ID = string | number;
+
+type Status = 'pending' | 'success' | 'error';
+
+class Response<T> {
+  data: T | Error;
+  status: number;
+
+  constructor(data: T | Error, status: number) {
+    this.data = data;
+    this.status = status;
+  }
+}
+
+class DataProcessor<T extends Content> {
+  private items: T[] = [];
+
+  addItem(item: T) {
+    this.items.push(item);
+  }
+
+  getFirstItem(): T | undefined {
+    return this.items[0];
+  }
+
+  getItems(): T[] {
+    return this.items;
+  }
+}
+
+function merge<T[ToFill]>(a: string, b: string): string {
+  return (typeof a === 'string' ? a + b : a);
+}
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+function merge<T extends string>(a: T, b: T): T {
+  return (typeof a === 'string' ? a + b : a);
+}
+
+function mergeArray<T>(a: T[], b: T[]): T[] {
+  return [...a, ...b];
+}
+
+
+

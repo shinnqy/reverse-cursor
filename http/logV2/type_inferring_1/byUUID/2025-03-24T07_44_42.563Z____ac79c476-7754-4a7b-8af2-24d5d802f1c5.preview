@@ -1,0 +1,46 @@
+{"line":11,"column":0}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+interface User {
+    id: number;
+    name: string;
+    age: number;
+}
+interface Admin { level: number; permission: string[] }
+
+interface Post {title: string; content: string}
+
+interface Comment {
+    id: number;
+[ToFill]    content: string;
+}
+
+
+
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+interface Comment {
+    id: number;
+    content: string;
+}
+
+interface Like {
+
+
+
+-------------------------------[                   fullText                  ]--------------------------------
+interface Comment {
+    id: number;
+    content: string;
+}
+
+interface Like {
+    id: number;
+    userId: number;
+    postId: number;
+}
+
+
+
+

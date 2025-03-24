@@ -1,0 +1,36 @@
+{"line":22,"column":9}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+interface User {
+    id: number;
+    name: string;
+    age: number;
+}
+interface Admin { level: number; permission: string[] }
+
+interface Post {title: string; content: string}
+
+interface Comment {
+    id: number;
+    author: string;
+}
+
+type UserRole = User | Admin;
+
+type Content = Post | Comment;
+
+type Result<T> = T | Error;
+
+type ID = string | number;
+
+type Satu[ToFill]
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+type SingleOrArray<T> = T | T[];
+
+type UserInfo = {
+    id: ID;
+    name: string;
+    age: number;
+}

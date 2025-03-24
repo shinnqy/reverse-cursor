@@ -1,0 +1,36 @@
+{"line":22,"column":7}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+interface User {
+    id: number;
+    name: string;
+    age: number;
+}
+interface Admin { level: number; permission: string[] }
+
+interface Post {title: string; content: string}
+
+interface Comment {
+    id: number;
+    author: string;
+}
+
+type UserRole = User | Admin;
+
+type Content = Post | Comment;
+
+type Result<T> = T | Error;
+
+type ID = string | number;
+
+type Sa[ToFill]
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+type SafeString = string & { __brand: 'SafeString' };
+
+type SafeNumber = number & { __brand: 'SafeNumber' };
+
+type SafeBoolean = boolean & { __brand: 'SafeBoolean' };
+
+

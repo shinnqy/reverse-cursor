@@ -1,0 +1,572 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.013Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/typingInfer.ets",
+          "diffHistory": [
+            "1-|\n1+|ine\n",
+            "1-|ine\n1+|interface User {id: nu}\n2+|\n3+|\n",
+            "1-|interface User {id: nu}\n1+|interface User {id: number;\n2+|    name: string;\n3+|    age: number;\n4+|}\n",
+            "6+|interface Admin { level: number; permission: string[] }\n8+|interface Post {title: string; content: string}\n10+|interface Comment {\n11+|    id: number;\n12+|    content: string;\n13+|}\n14+|\n15+|\n16+|\n17+|\n",
+            "12-|    content: string;\n12+|    author: string;\n",
+            "15+|type UserRole = User | Admin;\n",
+            "17+|type Content = Post | Comment;\n19+|type Result<T> = T | Error;\n20+|\n21+|type ID = string | number;\n22+|\n23+|type Status = 'pending' | 'success' | 'error';\n24+|\n25+|class Response<T> {\n26+|  \n27+|}\n",
+            "25-|class Response<T> {\n26-|  \n25+|class Response<T {\n26+|  data: T | Error;\n27+|  status: number;\n",
+            "25-|class Response<T {\n26-|  data: T | Error;\n25+|class Response {\n26+|  data: Error;\n",
+            "28-|  \n29-|  \n28+|\n29+|  constructor(data: Error, status: number) {\n",
+            "30+|    this.data = data;\n31+|    this.status = status;\n32+|  }\n",
+            "25-|class Response {\n26-|  data: Error;\n25+|class Response<T> {\n26+|  data: T | Error;\n",
+            "29-|  constructor(data: Error, status: number) {\n29+|  constructor(data: T | Error, status: number) {\n",
+            "35+|class DataProcessor {\n36+|}\n",
+            "36+|  private items: string[] = [];\n37+|\n38+|  addItem(item: string) {\n39+|    this.items.push(item);\n40+|  }\n41+|  \n42+|  \n",
+            "41-|  \n42-|  \n41+|\n42+|  getFirstItem(): string | undefined {\n43+|    return this.items[0];\n44+|  }\n45+|\n46+|  getItems(): string[] {\n47+|    return this.items;\n48+|  }\n",
+            "35-|class DataProcessor {\n36-|  private items: string[] = [];\n35+|class DataProcessor<T extends Con> {\n36+|  private items: T[] = [];\n",
+            "35-|class DataProcessor<T extends Con> {\n35+|class DataProcessor<T extends Content> {\n",
+            "38-|  addItem(item: string) {\n38+|  addItem(item: T) {\n",
+            "42-|  getFirstItem(): string | undefined {\n42+|  getFirstItem(): T | undefined {\n",
+            "51+|class UserProcessor extends DataProcessor<User> {\n52+|  private users: User[] = [];\n53+|  \n54+|  \n55+|}\n56+|\n",
+            "46-|  getItems(): string[] {\n46+|  getItems(): T[] {\n",
+            "51-|class UserProcessor extends DataProcessor<User> {\n52-|  private users: User[] = [];\n53-|\n54-|\n51+|function merge(a: string, b: string): string {\n52+|  \n",
+            "51-|function merge(a: string, b: string): string {\n52-|  \n51+|function merge<(a: string, b: string): string {\n52+|  return (typeof a === 'string' ? a + b : a);\n",
+            "51-|function merge<(a: string, b: string): string {\n52-|  return (typeof a === 'string' ? a + b : a);\n51+|function merge<T extends string | number>(a: T, b: T): T {\n52+|  return (typeof a === 'string' ? a + b : a) as;\n",
+            "55+|function processContent<T extends Content>(content: T): T {\n56+|  return content;\n57+|}\n58+|\n59+|\n60+|\n",
+            "52-|  return (typeof a === 'string' ? a + b : a) as;\n52+|  return (typeof a === 'string' ? a + b : a) as T;\n",
+            "55-|function processContent<T extends Content>(content: T): T {\n56-|  return content;\n55+|function wrap(input) {\n56+|  \n",
+            "55-|function wrap(input) {\n56-|  \n55+|function wrap<(input) {\n56+|  return [input]\n",
+            "55-|function wrap<(input) {\n55+|function wrap<T>(input) {\n",
+            "59+|function processContent<T extends Content>(content: T): T {\n60+|  return content;\n61+|}\n62+|\n63+|\n64+|\n",
+            "55-|function wrap<T>(input) {\n55+|function wrap<T>(input: T): T[] {\n",
+            "59-|function processContent<T extends Content>(content: T): T {\n60-|  return content;\n59+|class Cache {\n60+|  \n",
+            "60+|  private store = new Map<string, null>();\n",
+            "61-|  \n62-|  \n61+|\n62+|  get(key: string) {\n63+|    return this.store.get(key);\n64+|  }\n65+|\n66+|  set(key: string, value: null) {\n67+|    this.store.set(key, value);\n68+|  }\n",
+            "59-|class Cache {\n60-|  private store = new Map<string, null>();\n59+|class Cache<T> {\n60+|  private store = new Map<string, T>();\n",
+            "66-|  set(key: string, value: null) {\n66+|  set(key: string, value: T) {\n",
+            "62-|  get(key: string) {\n62+|  get(key: string): T | undefined {\n",
+            "71-|\n71+|function demo() {\n72+|  \n73+|}\n",
+            "72+|  const userRes = new Response<User>({ id: 1, name: 'John', age: 20 }, 200);\n",
+            "73-|  \n74-|  \n73+|\n74+|  const processor = new DataProcessor<>();\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/typingInfer.ets",
+        "contents": "interface User {\n    id: number;\n    name: string;\n    age: number;\n}\ninterface Admin { level: number; permission: string[] }\n\ninterface Post {title: string; content: string}\n\ninterface Comment {\n    id: number;\n    author: string;\n}\n\ntype UserRole = User | Admin;\n\ntype Content = Post | Comment;\n\ntype Result<T> = T | Error;\n\ntype ID = string | number;\n\ntype Status = 'pending' | 'success' | 'error';\n\nclass Response<T> {\n  data: T | Error;\n  status: number;\n\n  constructor(data: T | Error, status: number) {\n    this.data = data;\n    this.status = status;\n  }\n}\n\nclass DataProcessor<T extends Content> {\n  private items: T[] = [];\n\n  addItem(item: T) {\n    this.items.push(item);\n  }\n\n  getFirstItem(): T | undefined {\n    return this.items[0];\n  }\n\n  getItems(): T[] {\n    return this.items;\n  }\n}\n\nfunction merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b : a) as T;\n}\n\nfunction wrap<T>(input: T): T[] {\n  return [input]\n}\n\nclass Cache<T> {\n  private store = new Map<string, T>();\n\n  get(key: string): T | undefined {\n    return this.store.get(key);\n  }\n\n  set(key: string, value: T) {\n    this.store.set(key, value);\n  }\n}\n\nfunction demo() {\n  const userRes = new Response<User>({ id: 1, name: 'John', age: 20 }, 200);\n\n  const processor = new DataProcessor<>();\n}\n",
+        "cursorPosition": {
+          "line": 73,
+          "column": 38
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 705,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/utils/test.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 1
+            }
+          ],
+          "lastViewedAt": 1742802122439
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742802726053,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 51.300048828125,
+      "timeAtRequestSend": 1742802726053
+    },
+    "generateUuid": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.055Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.418Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.522Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "function demo() {\n  const userRes = new Response<User>({ id: 1, name: 'John', age: 20 }, 200);\n\n  const processor = new DataProcessor<"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.524Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "rangeToReplace": {
+        "startLineNumber": 71,
+        "endLineNumberInclusive": 76
+      }
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.524Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "User"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.555Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ">();"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.566Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n "
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.576Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " processor"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.615Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.616Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "add"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.617Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Item"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.624Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "("
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.635Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "user"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.811Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Res"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.811Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.812Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "data"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.812Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ");"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.812Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n  const post"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.812Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Res"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.813Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.813Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " new Response<Post"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.813Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ">"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.814Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "({"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.814Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " title"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.814Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.814Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " '"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.815Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Post"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.815Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.815Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "1"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.824Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "',"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.862Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " content"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.863Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.863Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " '"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.876Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Content"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.889Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.900Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "1'"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.918Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " },"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.925Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " 200);\n "
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.936Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " const"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.948Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " comment"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.961Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Res"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.973Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " = new"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:06.985Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Response"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:07.001Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "<Comment"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:07.013Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ">"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:07.026Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "({ id"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:07.038Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": 1, author"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:07.054Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": '"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:07.067Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "John"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:07.079Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "'"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:07.094Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " }, 2"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:07.194Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "00);\n  "
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:07.195Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n  "
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:07.195Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:07.195Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:07.195Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:07.196Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:07.196Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:07.196Z"
+  },
+  {
+    "firstChunkValue": "function demo() {\n  const userRes = new Response<User>({ id: 1, name: 'John', age: 20 }, 200);\n\n  const processor = new DataProcessor<User>();\n  processor.addItem(userRes.data);\n\n  const postRes = new Response<Post>({ title: 'Post 1', content: 'Content 1' }, 200);\n  const commentRes = new Response<Comment>({ id: 1, author: 'John' }, 200);\n  \n  \n}\n",
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:07.203Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "function demo() {\n  const userRes = new Response<User>({ id: 1, name: 'John', age: 20 }, 200);\n\n  const processor = new DataProcessor<User>();\n  processor.addItem(userRes.data);\n\n  const postRes = new Response<Post>({ title: 'Post 1', content: 'Content 1' }, 200);\n  const commentRes = new Response<Comment>({ id: 1, author: 'John' }, 200);\n  \n  \n}\n"
+    },
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:07.205Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "05265f44-f157-43cf-8063-43a80d1540af",
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:07.208Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "function demo() {\n  const userRes = new Response<User>({ id: 1, name: 'John', age: 20 }, 200);\n\n  const processor = new DataProcessor<User>();\n  processor.addItem(userRes.data);\n\n  const postRes = new Response<Post>({ title: 'Post 1', content: 'Content 1' }, 200);\n  const commentRes = new Response<Comment>({ id: 1, author: 'John' }, 200);\n  \n  \n}\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "05265f44-f157-43cf-8063-43a80d1540af",
+    "generationUUID": "bfca97a7-cdd1-4de8-9256-de6094e03428",
+    "timestamp": "2025-03-24T07:52:07.209Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "05265f44-f157-43cf-8063-43a80d1540af",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-24T07:52:07.210Z"
+  }
+]

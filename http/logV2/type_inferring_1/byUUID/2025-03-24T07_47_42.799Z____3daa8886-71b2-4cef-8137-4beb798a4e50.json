@@ -1,0 +1,752 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:42.799Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/typingInfer.ets",
+          "diffHistory": [
+            "1-|\n1+|ine\n",
+            "1-|ine\n1+|interface User {id: nu}\n2+|\n3+|\n",
+            "1-|interface User {id: nu}\n1+|interface User {id: number;\n2+|    name: string;\n3+|    age: number;\n4+|}\n",
+            "6+|interface Admin { level: number; permission: string[] }\n8+|interface Post {title: string; content: string}\n10+|interface Comment {\n11+|    id: number;\n12+|    content: string;\n13+|}\n14+|\n15+|\n16+|\n17+|\n",
+            "12-|    content: string;\n12+|    author: string;\n",
+            "15+|type UserRole = User | Admin;\n",
+            "17+|type Content = Post | Comment;\n19+|type Result<T> = T | Error;\n20+|\n21+|type ID = string | number;\n22+|\n23+|type Status = 'pending' | 'success' | 'error';\n24+|\n25+|class Response<T> {\n26+|  \n27+|}\n",
+            "25-|class Response<T> {\n26-|  \n25+|class Response<T {\n26+|  data: T | Error;\n27+|  status: number;\n",
+            "25-|class Response<T {\n26-|  data: T | Error;\n25+|class Response {\n26+|  data: Error;\n",
+            "28-|  \n29-|  \n28+|\n29+|  constructor(data: Error, status: number) {\n",
+            "30+|    this.data = data;\n31+|    this.status = status;\n32+|  }\n",
+            "25-|class Response {\n26-|  data: Error;\n25+|class Response<T> {\n26+|  data: T | Error;\n",
+            "29-|  constructor(data: Error, status: number) {\n29+|  constructor(data: T | Error, status: number) {\n",
+            "35+|class DataProcessor {\n36+|}\n",
+            "36+|  private items: string\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/typingInfer.ets",
+        "contents": "interface User {\n    id: number;\n    name: string;\n    age: number;\n}\ninterface Admin { level: number; permission: string[] }\n\ninterface Post {title: string; content: string}\n\ninterface Comment {\n    id: number;\n    author: string;\n}\n\ntype UserRole = User | Admin;\n\ntype Content = Post | Comment;\n\ntype Result<T> = T | Error;\n\ntype ID = string | number;\n\ntype Status = 'pending' | 'success' | 'error';\n\nclass Response<T> {\n  data: T | Error;\n  status: number;\n\n  constructor(data: T | Error, status: number) {\n    this.data = data;\n    this.status = status;\n  }\n}\n\nclass DataProcessor {\n  private items: string\n}\n\n",
+        "cursorPosition": {
+          "line": 35,
+          "column": 23
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 366,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/utils/test.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 1
+            }
+          ],
+          "lastViewedAt": 1742802122439
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742802462838,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.900146484375,
+      "timeAtRequestSend": 1742802462838
+    },
+    "generateUuid": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:42.839Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:43.142Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:43.212Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "rangeToReplace": {
+        "startLineNumber": 35,
+        "endLineNumberInclusive": 38
+      }
+    },
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:43.213Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "class DataProcessor {\n  private items: string[]"
+    },
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:43.217Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:43.238Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " [];"
+    },
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:43.267Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:43.268Z"
+  },
+  {
+    "firstChunkValue": "class DataProcessor {\n  private items: string[] = [];\n}\n",
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:43.270Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:43.270Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "class DataProcessor {\n  private items: string[] = [];\n}\n"
+    },
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:43.273Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "df9525f6-6065-4a18-b335-a248403469aa",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 366,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 366,
+      "monotonicallyIncreasingSuggestionId": 252,
+      "range": {
+        "startLineNumber": 35,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "replaceText": "class DataProcessor {\n  private items: string[] = [];\n}\n",
+      "originalText": "class DataProcessor {\n  private items: string\n}\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 35,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "diffText": "class DataProcessor {\n  private items: string[] = [];\n}\n",
+      "fullOriginalText": "class DataProcessor {\n  private items: string\n}\n",
+      "suggestionTriggerTime": 1742802462798.4,
+      "greens": [],
+      "source": "typing",
+      "requestId": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+      "selection": {
+        "startLineNumber": 35,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 253,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:43.274Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " "
+    },
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:43.279Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " add"
+    },
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:43.289Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Item"
+    },
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:43.299Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "("
+    },
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:43.308Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "item"
+    },
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:43.319Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ":"
+    },
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:43.326Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " string"
+    },
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:43.335Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ")"
+    },
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:43.344Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:43.354Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n    this.items"
+    },
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:43.362Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:43.370Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "push"
+    },
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:43.379Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "("
+    },
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:43.388Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "item);"
+    },
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:43.400Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:43.405Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "  }"
+    },
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:43.413Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n  "
+    },
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:43.423Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n  "
+    },
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:43.433Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:43.439Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:43.476Z"
+  },
+  {
+    "fullText": "class DataProcessor {\n  private items: string[] = [];\n\n  addItem(item: string) {\n    this.items.push(item);\n  }\n  \n  \n}\n",
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:43.477Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "class DataProcessor {\n  private items: string[] = [];\n}\n"
+    },
+    "fullText": "class DataProcessor {\n  private items: string[] = [];\n\n  addItem(item: string) {\n    this.items.push(item);\n  }\n  \n  \n}\n",
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:43.477Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "61b5b6ae-fc45-4c5b-ae21-48340ff9e2a3",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 366,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 368,
+      "monotonicallyIncreasingSuggestionId": 253,
+      "range": {
+        "startLineNumber": 35,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "replaceText": "class DataProcessor {\n  private items: string[] = [];\n\n  addItem(item: string) {\n    this.items.push(item);\n  }\n  \n  \n}\n",
+      "originalText": "class DataProcessor {\n  private items: string[] = [];\n}\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 35,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "diffText": "class DataProcessor {\n  private items: string[] = [];\n\n  addItem(item: string) {\n    this.items.push(item);\n  }\n  \n  \n}\n",
+      "fullOriginalText": "class DataProcessor {\n  private items: string[] = [];\n}\n",
+      "suggestionTriggerTime": 1742802462798.4,
+      "greens": [],
+      "source": "typing",
+      "requestId": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+      "selection": {
+        "startLineNumber": 35,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "9085a23a-9091-4cdc-8561-c30d4882492f",
+      "undoRedoGroup": {
+        "id": 254,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:43.478Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}"
+    },
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:43.478Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:43.478Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:43.478Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "9085a23a-9091-4cdc-8561-c30d4882492f",
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:43.482Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "class DataProcessor {\n  private items: string[] = [];\n}\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "9085a23a-9091-4cdc-8561-c30d4882492f",
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:43.483Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "9085a23a-9091-4cdc-8561-c30d4882492f",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-24T07:47:43.483Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "df9525f6-6065-4a18-b335-a248403469aa",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 366,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 366,
+      "monotonicallyIncreasingSuggestionId": 252,
+      "range": {
+        "startLineNumber": 35,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "replaceText": "class DataProcessor {\n  private items: string[] = [];\n}\n",
+      "originalText": "class DataProcessor {\n  private items: string\n}\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 35,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "diffText": "class DataProcessor {\n  private items: string[] = [];\n}\n",
+      "fullOriginalText": "class DataProcessor {\n  private items: string\n}\n",
+      "suggestionTriggerTime": 1742802462798.4,
+      "greens": [],
+      "source": "typing",
+      "requestId": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+      "selection": {
+        "startLineNumber": 35,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 253,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "c;1198",
+      "onAcceptDisplayId": "61b5b6ae-fc45-4c5b-ae21-48340ff9e2a3"
+    },
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:43.711Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "df9525f6-6065-4a18-b335-a248403469aa",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 366,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 366,
+      "monotonicallyIncreasingSuggestionId": 252,
+      "range": {
+        "startLineNumber": 35,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "replaceText": "class DataProcessor {\n  private items: string[] = [];\n}\n",
+      "originalText": "class DataProcessor {\n  private items: string\n}\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 35,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "diffText": "class DataProcessor {\n  private items: string[] = [];\n}\n",
+      "fullOriginalText": "class DataProcessor {\n  private items: string\n}\n",
+      "suggestionTriggerTime": 1742802462798.4,
+      "greens": [],
+      "source": "typing",
+      "requestId": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+      "selection": {
+        "startLineNumber": 35,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "undoRedoGroup": {
+        "id": 253,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "c;1198",
+      "onAcceptDisplayId": "61b5b6ae-fc45-4c5b-ae21-48340ff9e2a3"
+    },
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:43.717Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "61b5b6ae-fc45-4c5b-ae21-48340ff9e2a3",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 366,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 368,
+      "monotonicallyIncreasingSuggestionId": 253,
+      "range": {
+        "startLineNumber": 35,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "replaceText": "class DataProcessor {\n  private items: string[] = [];\n\n  addItem(item: string) {\n    this.items.push(item);\n  }\n  \n  \n}\n",
+      "originalText": "class DataProcessor {\n  private items: string[] = [];\n}\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 35,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "diffText": "class DataProcessor {\n  private items: string[] = [];\n\n  addItem(item: string) {\n    this.items.push(item);\n  }\n  \n  \n}\n",
+      "fullOriginalText": "class DataProcessor {\n  private items: string[] = [];\n}\n",
+      "suggestionTriggerTime": 1742802462798.4,
+      "greens": [],
+      "source": "typing",
+      "requestId": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+      "selection": {
+        "startLineNumber": 35,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "9085a23a-9091-4cdc-8561-c30d4882492f",
+      "undoRedoGroup": {
+        "id": 254,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:43.718Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "61b5b6ae-fc45-4c5b-ae21-48340ff9e2a3",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 366,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 368,
+      "monotonicallyIncreasingSuggestionId": 253,
+      "range": {
+        "startLineNumber": 35,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "replaceText": "class DataProcessor {\n  private items: string[] = [];\n\n  addItem(item: string) {\n    this.items.push(item);\n  }\n  \n  \n}\n",
+      "originalText": "class DataProcessor {\n  private items: string[] = [];\n}\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 35,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "diffText": "class DataProcessor {\n  private items: string[] = [];\n\n  addItem(item: string) {\n    this.items.push(item);\n  }\n  \n  \n}\n",
+      "fullOriginalText": "class DataProcessor {\n  private items: string[] = [];\n}\n",
+      "suggestionTriggerTime": 1742802462798.4,
+      "greens": [],
+      "source": "typing",
+      "requestId": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+      "selection": {
+        "startLineNumber": 35,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "9085a23a-9091-4cdc-8561-c30d4882492f",
+      "undoRedoGroup": {
+        "id": 254,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "c;1209"
+    },
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:49.497Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "61b5b6ae-fc45-4c5b-ae21-48340ff9e2a3",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 366,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 368,
+      "monotonicallyIncreasingSuggestionId": 253,
+      "range": {
+        "startLineNumber": 35,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "replaceText": "class DataProcessor {\n  private items: string[] = [];\n\n  addItem(item: string) {\n    this.items.push(item);\n  }\n  \n  \n}\n",
+      "originalText": "class DataProcessor {\n  private items: string[] = [];\n}\n",
+      "startingSuggestionRange": {
+        "startLineNumber": 35,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "diffText": "class DataProcessor {\n  private items: string[] = [];\n\n  addItem(item: string) {\n    this.items.push(item);\n  }\n  \n  \n}\n",
+      "fullOriginalText": "class DataProcessor {\n  private items: string[] = [];\n}\n",
+      "suggestionTriggerTime": 1742802462798.4,
+      "greens": [],
+      "source": "typing",
+      "requestId": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+      "selection": {
+        "startLineNumber": 35,
+        "startColumn": 1,
+        "endLineNumberInclusive": 38,
+        "endColumn": 1
+      },
+      "fusedCursorPredictionId": "9085a23a-9091-4cdc-8561-c30d4882492f",
+      "undoRedoGroup": {
+        "id": 254,
+        "b": 2
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "c;1209"
+    },
+    "generationUUID": "3daa8886-71b2-4cef-8137-4beb798a4e50",
+    "timestamp": "2025-03-24T07:47:49.544Z"
+  },
+  {
+    "getFromDB": "predictionId",
+    "possibleInvokeReason": "no suggestion but has predictionId",
+    "predictionId": "9085a23a-9091-4cdc-8561-c30d4882492f",
+    "fusedCursorPrediction": null,
+    "oldText": "class DataProcessor {\n  private items: string[] = [];\n}\n",
+    "newText": "class DataProcessor {\n  private items: string[] = [];\n\n  addItem(item: string) {\n    this.items.push(item);\n  }\n  \n  \n}\n",
+    "timestamp": "2025-03-24T07:47:49.546Z"
+  }
+]

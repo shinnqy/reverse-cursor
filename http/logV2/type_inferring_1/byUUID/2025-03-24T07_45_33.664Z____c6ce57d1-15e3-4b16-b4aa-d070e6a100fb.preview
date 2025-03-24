@@ -1,0 +1,34 @@
+{"line":20,"column":6}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+interface User {
+    id: number;
+    name: string;
+    age: number;
+}
+interface Admin { level: number; permission: string[] }
+
+interface Post {title: string; content: string}
+
+interface Comment {
+    id: number;
+    author: string;
+}
+
+type UserRole = User | Admin;
+
+type Content = Post | Comment;
+
+type Result<T> = T | Error;
+
+type I[ToFill]
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+type Item = {
+    id: number;
+    name: string;
+    price: number;
+}
+
+

@@ -1,0 +1,64 @@
+{"line":54,"column":1}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+interface User {
+    id: number;
+    name: string;
+    age: number;
+}
+interface Admin { level: number; permission: string[] }
+
+interface Post {title: string; content: string}
+
+interface Comment {
+    id: number;
+    author: string;
+}
+
+type UserRole = User | Admin;
+
+type Content = Post | Comment;
+
+type Result<T> = T | Error;
+
+type ID = string | number;
+
+type Status = 'pending' | 'success' | 'error';
+
+class Response<T> {
+  data: T | Error;
+  status: number;
+
+  constructor(data: T | Error, status: number) {
+    this.data = data;
+    this.status = status;
+  }
+}
+
+class DataProcessor<T extends Content> {
+  private items: T[] = [];
+
+  addItem(item: T) {
+    this.items.push(item);
+  }
+
+  getFirstItem(): T | undefined {
+    return this.items[0];
+  }
+
+  getItems(): T[] {
+    return this.items;
+  }
+}
+
+class UserProcessor extends DataProcessor<User> {
+  private users: User[] = [];
+
+
+}[ToFill]
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+}
+

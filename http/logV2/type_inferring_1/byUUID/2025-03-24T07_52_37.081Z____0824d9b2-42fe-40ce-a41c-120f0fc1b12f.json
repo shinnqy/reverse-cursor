@@ -1,0 +1,447 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:37.081Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/typingInfer.ets",
+          "diffHistory": [
+            "1-|\n1+|ine\n",
+            "1-|ine\n1+|interface User {id: nu}\n2+|\n3+|\n",
+            "1-|interface User {id: nu}\n1+|interface User {id: number;\n2+|    name: string;\n3+|    age: number;\n4+|}\n",
+            "6+|interface Admin { level: number; permission: string[] }\n8+|interface Post {title: string; content: string}\n10+|interface Comment {\n11+|    id: number;\n12+|    content: string;\n13+|}\n14+|\n15+|\n16+|\n17+|\n",
+            "12-|    content: string;\n12+|    author: string;\n",
+            "15+|type UserRole = User | Admin;\n",
+            "17+|type Content = Post | Comment;\n19+|type Result<T> = T | Error;\n20+|\n21+|type ID = string | number;\n22+|\n23+|type Status = 'pending' | 'success' | 'error';\n24+|\n25+|class Response<T> {\n26+|  \n27+|}\n",
+            "25-|class Response<T> {\n26-|  \n25+|class Response<T {\n26+|  data: T | Error;\n27+|  status: number;\n",
+            "25-|class Response<T {\n26-|  data: T | Error;\n25+|class Response {\n26+|  data: Error;\n",
+            "28-|  \n29-|  \n28+|\n29+|  constructor(data: Error, status: number) {\n",
+            "30+|    this.data = data;\n31+|    this.status = status;\n32+|  }\n",
+            "25-|class Response {\n26-|  data: Error;\n25+|class Response<T> {\n26+|  data: T | Error;\n",
+            "29-|  constructor(data: Error, status: number) {\n29+|  constructor(data: T | Error, status: number) {\n",
+            "35+|class DataProcessor {\n36+|}\n",
+            "36+|  private items: string[] = [];\n37+|\n38+|  addItem(item: string) {\n39+|    this.items.push(item);\n40+|  }\n41+|  \n42+|  \n",
+            "41-|  \n42-|  \n41+|\n42+|  getFirstItem(): string | undefined {\n43+|    return this.items[0];\n44+|  }\n45+|\n46+|  getItems(): string[] {\n47+|    return this.items;\n48+|  }\n",
+            "35-|class DataProcessor {\n36-|  private items: string[] = [];\n35+|class DataProcessor<T extends Con> {\n36+|  private items: T[] = [];\n",
+            "35-|class DataProcessor<T extends Con> {\n35+|class DataProcessor<T extends Content> {\n",
+            "38-|  addItem(item: string) {\n38+|  addItem(item: T) {\n",
+            "42-|  getFirstItem(): string | undefined {\n42+|  getFirstItem(): T | undefined {\n",
+            "51+|class UserProcessor extends DataProcessor<User> {\n52+|  private users: User[] = [];\n53+|  \n54+|  \n55+|}\n56+|\n",
+            "46-|  getItems(): string[] {\n46+|  getItems(): T[] {\n",
+            "51-|class UserProcessor extends DataProcessor<User> {\n52-|  private users: User[] = [];\n53-|\n54-|\n51+|function merge(a: string, b: string): string {\n52+|  \n",
+            "51-|function merge(a: string, b: string): string {\n52-|  \n51+|function merge<(a: string, b: string): string {\n52+|  return (typeof a === 'string' ? a + b : a);\n",
+            "51-|function merge<(a: string, b: string): string {\n52-|  return (typeof a === 'string' ? a + b : a);\n51+|function merge<T extends string | number>(a: T, b: T): T {\n52+|  return (typeof a === 'string' ? a + b : a) as;\n",
+            "55+|function processContent<T extends Content>(content: T): T {\n56+|  return content;\n57+|}\n58+|\n59+|\n60+|\n",
+            "52-|  return (typeof a === 'string' ? a + b : a) as;\n52+|  return (typeof a === 'string' ? a + b : a) as T;\n",
+            "55-|function processContent<T extends Content>(content: T): T {\n56-|  return content;\n55+|function wrap(input) {\n56+|  \n",
+            "55-|function wrap(input) {\n56-|  \n55+|function wrap<(input) {\n56+|  return [input]\n",
+            "55-|function wrap<(input) {\n55+|function wrap<T>(input) {\n",
+            "59+|function processContent<T extends Content>(content: T): T {\n60+|  return content;\n61+|}\n62+|\n63+|\n64+|\n",
+            "55-|function wrap<T>(input) {\n55+|function wrap<T>(input: T): T[] {\n",
+            "59-|function processContent<T extends Content>(content: T): T {\n60-|  return content;\n59+|class Cache {\n60+|  \n",
+            "60+|  private store = new Map<string, null>();\n",
+            "61-|  \n62-|  \n61+|\n62+|  get(key: string) {\n63+|    return this.store.get(key);\n64+|  }\n65+|\n66+|  set(key: string, value: null) {\n67+|    this.store.set(key, value);\n68+|  }\n",
+            "59-|class Cache {\n60-|  private store = new Map<string, null>();\n59+|class Cache<T> {\n60+|  private store = new Map<string, T>();\n",
+            "66-|  set(key: string, value: null) {\n66+|  set(key: string, value: T) {\n",
+            "62-|  get(key: string) {\n62+|  get(key: string): T | undefined {\n",
+            "71-|\n71+|function demo() {\n72+|  \n73+|}\n",
+            "72+|  const userRes = new Response<User>({ id: 1, name: 'John', age: 20 }, 200);\n",
+            "73+|\n74+|  const processor = new DataProcessor<Post>();\n75+|  processor.addItem({ title: 'Hello', content: 'World' });\n",
+            "76-|  \n77-|  \n76+|\n77+|  const merged = merge<string>('Hello', 'A');\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/typingInfer.ets",
+        "contents": "interface User {\n    id: number;\n    name: string;\n    age: number;\n}\ninterface Admin { level: number; permission: string[] }\n\ninterface Post {title: string; content: string}\n\ninterface Comment {\n    id: number;\n    author: string;\n}\n\ntype UserRole = User | Admin;\n\ntype Content = Post | Comment;\n\ntype Result<T> = T | Error;\n\ntype ID = string | number;\n\ntype Status = 'pending' | 'success' | 'error';\n\nclass Response<T> {\n  data: T | Error;\n  status: number;\n\n  constructor(data: T | Error, status: number) {\n    this.data = data;\n    this.status = status;\n  }\n}\n\nclass DataProcessor<T extends Content> {\n  private items: T[] = [];\n\n  addItem(item: T) {\n    this.items.push(item);\n  }\n\n  getFirstItem(): T | undefined {\n    return this.items[0];\n  }\n\n  getItems(): T[] {\n    return this.items;\n  }\n}\n\nfunction merge<T extends string | number>(a: T, b: T): T {\n  return (typeof a === 'string' ? a + b : a) as T;\n}\n\nfunction wrap<T>(input: T): T[] {\n  return [input]\n}\n\nclass Cache<T> {\n  private store = new Map<string, T>();\n\n  get(key: string): T | undefined {\n    return this.store.get(key);\n  }\n\n  set(key: string, value: T) {\n    this.store.set(key, value);\n  }\n}\n\nfunction demo() {\n  const userRes = new Response<User>({ id: 1, name: 'John', age: 20 }, 200);\n\n  const processor = new DataProcessor<Post>();\n  processor.addItem({ title: 'Hello', content: 'World' });\n\n  const merged = merge<string>('Hello', 'A');\n}\n",
+        "cursorPosition": {
+          "line": 76,
+          "column": 42
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 740,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [
+        {
+          "relativeWorkspacePath": "entry/src/main/ets/utils/test.ets",
+          "isOpen": false,
+          "visibleRangeContent": [
+            ""
+          ],
+          "startLineNumberOneIndexed": [
+            1
+          ],
+          "visibleRanges": [
+            {
+              "startLineNumber": 1,
+              "endLineNumberInclusive": 1
+            }
+          ],
+          "lastViewedAt": 1742802122439
+        }
+      ],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742802757121,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 50.800048828125,
+      "timeAtRequestSend": 1742802757121
+    },
+    "generateUuid": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:37.123Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:37.747Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:37.817Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "  processor.addItem({ title: 'Hello', content: 'World' });\n\n  const merged = merge<string>('Hello', 'A');\n\n"
+    },
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:37.818Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "rangeToReplace": {
+        "startLineNumber": 75,
+        "endLineNumberInclusive": 79
+      }
+    },
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:37.819Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "  const wrapped"
+    },
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:37.840Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:37.850Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " wrap"
+    },
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:37.860Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "<string"
+    },
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:37.869Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ">('Hello');"
+    },
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:37.878Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n "
+    },
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:37.890Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " const cache"
+    },
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:37.898Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:37.909Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " new"
+    },
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:37.919Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Cache"
+    },
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:37.931Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "<string"
+    },
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:37.942Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ">();"
+    },
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:37.951Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n "
+    },
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:37.962Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " cache."
+    },
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:37.974Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "set"
+    },
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:37.984Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "('"
+    },
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:37.993Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "user"
+    },
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:38.003Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "',"
+    },
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:38.014Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {"
+    },
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:38.025Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " id"
+    },
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:38.034Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ": 1, name: 'John"
+    },
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:38.067Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "', age: 20 });"
+    },
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:38.068Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n "
+    },
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:38.068Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " const"
+    },
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:38.076Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " user"
+    },
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:38.086Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " cache"
+    },
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:38.272Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:38.273Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "."
+    },
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:38.275Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "get"
+    },
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:38.276Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "('"
+    },
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:38.276Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "user');"
+    },
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:38.276Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:38.277Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}"
+    },
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:38.277Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n"
+    },
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:38.278Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:38.278Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:38.278Z"
+  },
+  {
+    "firstChunkValue": "  processor.addItem({ title: 'Hello', content: 'World' });\n\n  const merged = merge<string>('Hello', 'A');\n\n  const wrapped = wrap<string>('Hello');\n\n  const cache = new Cache<string>();\n  cache.set('user', { id: 1, name: 'John', age: 20 });\n  const user = cache.get('user');\n}\n",
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:38.279Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "  processor.addItem({ title: 'Hello', content: 'World' });\n\n  const merged = merge<string>('Hello', 'A');\n\n  const wrapped = wrap<string>('Hello');\n\n  const cache = new Cache<string>();\n  cache.set('user', { id: 1, name: 'John', age: 20 });\n  const user = cache.get('user');\n}\n"
+    },
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:38.279Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "021affc3-9c0f-4229-9176-c743dd091cd2",
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:38.279Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "  processor.addItem({ title: 'Hello', content: 'World' });\n\n  const merged = merge<string>('Hello', 'A');\n\n  const wrapped = wrap<string>('Hello');\n\n  const cache = new Cache<string>();\n  cache.set('user', { id: 1, name: 'John', age: 20 });\n  const user = cache.get('user');\n}\n"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "021affc3-9c0f-4229-9176-c743dd091cd2",
+    "generationUUID": "0824d9b2-42fe-40ce-a41c-120f0fc1b12f",
+    "timestamp": "2025-03-24T07:52:38.280Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "021affc3-9c0f-4229-9176-c743dd091cd2",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-24T07:52:38.281Z"
+  }
+]
