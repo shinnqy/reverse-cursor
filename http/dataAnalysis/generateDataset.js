@@ -101,6 +101,14 @@ function generateDataset(params) {
   //   insertString: '<|current_cursor_position|>'
   // });
 
+  // ======== perf data ========
+  const requestStartISOTime = data.find((i) => !!i.partialData)?.timestamp;
+  const requestStartTimestamp = new Date(requestStartISOTime || '').getTime();
+  const firstChunkResponseISOTime = data.find((i) => !!i.firstChunkValue)?.timestamp;
+  const firstChunkResponseTimestamp = new Date(firstChunkResponseISOTime || '').getTime();
+
+  const duration = firstChunkResponseTimestamp - requestStartTimestamp;
+
   outputPreview({
     previewFilePath,
     currentFileContentsWithToFill,
@@ -117,6 +125,7 @@ function generateDataset(params) {
 
   return {
     promptFilePath: fs.existsSync(promptFilePath) ? promptFilePath : '',
+    firstChunkDuration: duration,
   }
 }
 
