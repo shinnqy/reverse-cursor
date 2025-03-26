@@ -3419,16 +3419,16 @@ export function createFDIClass(params) {
       newText: r,
       _predictionId_for_log,
     }) {
-      fetch('http://localhost:3000', {
-        method: 'POST',
-        body: JSON.stringify({
-          action: 'displayFusedCursorPrediction',
-          predictionId: _predictionId_for_log,
-          fusedCursorPrediction,
-          oldText: n,
-          newText: r,
-        }),
-      });
+      // fetch('http://localhost:3000', {
+      //   method: 'POST',
+      //   body: JSON.stringify({
+      //     action: 'displayFusedCursorPrediction',
+      //     predictionId: _predictionId_for_log,
+      //     fusedCursorPrediction,
+      //     oldText: n,
+      //     newText: r,
+      //   }),
+      // });
       const o = this.mb.resolveRelativePath(fusedCursorPrediction.relativePath)
       if (!o) {
         oa("[fusedCursorPrediction] Could not resolve predicted file path")
@@ -3457,6 +3457,8 @@ export function createFDIClass(params) {
         return
       const d = fusedCursorPrediction.shouldRetriggerCpp && n !== r
       await this.Bb.manuallyCreateCursorPrediction({
+        _predictionId_for_log,
+        _fusedCursorPrediction: fusedCursorPrediction,
         editor: a,
         model: l,
         lineNumber: lineNumber,

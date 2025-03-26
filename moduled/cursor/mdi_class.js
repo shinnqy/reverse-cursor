@@ -693,6 +693,14 @@ export function createMDIClass(params) {
         lineNumber: h,
         text: t,
       }
+      fetch('http://localhost:3000', {
+        method: 'POST',
+        body: JSON.stringify({
+          action: 'displayFusedCursorPrediction',
+          predictionId: e._predictionId_for_log,
+          fusedCursorPrediction: e._fusedCursorPrediction,
+        }),
+      });
       return (
         df(`Created Prediction with RequestId ${b.requestId}`),
         this.Q.recordSuggestCursorPredictionEvent(l, b),
@@ -717,6 +725,8 @@ export function createMDIClass(params) {
         n = o
       }
       const r = await this.createPrediction({
+        _predictionId_for_log: e._predictionId_for_log,
+        _fusedCursorPrediction: e._fusedCursorPrediction,
         editor: s,
         model: n,
         predictedLineNumberInRange: e.lineNumber,
