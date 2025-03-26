@@ -1,0 +1,239 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "79d0c6a8-de8f-4962-bba9-cc42ed3be6d9",
+    "timestamp": "2025-03-26T08:07:31.190Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/typingInfer3.ets",
+          "diffHistory": [
+            "15+|type UserRole = User | Admin;\n16+|t\n17+|\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/typingInfer3.ets",
+        "contents": "interface User {\n    id: number;\n    name: string;\n    age: number;\n}\ninterface Admin { level: number; permission: string[] }\n\ninterface Post {title: string; content: string}\n\ninterface Comment {\n    id: number;\n    author: string;\n}\n\ntype UserRole = User | Admin;\nt\n\nclass Response {\n  data: any;\n  status: number;\n\n  constructor(data: any, status: number) {\n    this.data = data;\n    this.status = status;\n  }\n}\n\nclass DataProcessor {\n  private items: string[] = [];\n\n  addItem(item: string | null) {\n    this.items.push(item);\n  }\n\n  getFirstItem(): string | undefined {\n    return this.items[0];\n  }\n\n  getItems(): string[] {\n    return this.items;\n  }\n}\n\nfunction merge(a: string, b: string): string {\n  return a + b;\n}\n\nfunction wrap(input: string): string[] {\n  return [input]\n}\n\nclass Cache {\n  private store = new Map<string, string>();\n\n  get(key: string): string | undefined {\n    return this.store.get(key);\n  }\n\n  set(key: string, value: string) {\n    this.store.set(key, value);\n  }\n}\n\nfunction demo() {\n  const userRes = new Response(new Error('Error'), 200);\n\n  const processor = new DataProcessor();\n  processor.addItem('Hello');\n\n  const merged = merge<string>('Hello', 'World');\n  const numbers = merge<number>(1, 2);\n\n  const cache = new Cache();\n  cache.set('user1', '123');\n  cache.set('post1', '456');\n\n  const wrapped = wrap('pending');\n}\n\n\n",
+        "cursorPosition": {
+          "line": 15,
+          "column": 1
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 32,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742976451234,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 55.400146484375,
+      "timeAtRequestSend": 1742976451234
+    },
+    "generateUuid": "79d0c6a8-de8f-4962-bba9-cc42ed3be6d9",
+    "timestamp": "2025-03-26T08:07:31.236Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "79d0c6a8-de8f-4962-bba9-cc42ed3be6d9",
+    "timestamp": "2025-03-26T08:07:31.638Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "79d0c6a8-de8f-4962-bba9-cc42ed3be6d9",
+    "timestamp": "2025-03-26T08:07:31.643Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "rangeToReplace": {
+        "startLineNumber": 13,
+        "endLineNumberInclusive": 19
+      }
+    },
+    "generationUUID": "79d0c6a8-de8f-4962-bba9-cc42ed3be6d9",
+    "timestamp": "2025-03-26T08:07:31.643Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Post"
+    },
+    "generationUUID": "79d0c6a8-de8f-4962-bba9-cc42ed3be6d9",
+    "timestamp": "2025-03-26T08:07:31.643Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}\n\ntype UserRole = User | Admin;\ntype"
+    },
+    "generationUUID": "79d0c6a8-de8f-4962-bba9-cc42ed3be6d9",
+    "timestamp": "2025-03-26T08:07:31.643Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Or"
+    },
+    "generationUUID": "79d0c6a8-de8f-4962-bba9-cc42ed3be6d9",
+    "timestamp": "2025-03-26T08:07:31.644Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "Comment"
+    },
+    "generationUUID": "79d0c6a8-de8f-4962-bba9-cc42ed3be6d9",
+    "timestamp": "2025-03-26T08:07:31.644Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " ="
+    },
+    "generationUUID": "79d0c6a8-de8f-4962-bba9-cc42ed3be6d9",
+    "timestamp": "2025-03-26T08:07:31.650Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Post"
+    },
+    "generationUUID": "79d0c6a8-de8f-4962-bba9-cc42ed3be6d9",
+    "timestamp": "2025-03-26T08:07:31.709Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Comment"
+    },
+    "generationUUID": "79d0c6a8-de8f-4962-bba9-cc42ed3be6d9",
+    "timestamp": "2025-03-26T08:07:31.709Z"
+  },
+  {
+    "firstChunkValue": "}\n\ntype UserRole = User | Admin;\ntype PostOrComment = Post | Comment;\n\nclass Response {\n  data: any;",
+    "generationUUID": "79d0c6a8-de8f-4962-bba9-cc42ed3be6d9",
+    "timestamp": "2025-03-26T08:07:31.710Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " |"
+    },
+    "generationUUID": "79d0c6a8-de8f-4962-bba9-cc42ed3be6d9",
+    "timestamp": "2025-03-26T08:07:31.710Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";"
+    },
+    "generationUUID": "79d0c6a8-de8f-4962-bba9-cc42ed3be6d9",
+    "timestamp": "2025-03-26T08:07:31.710Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "79d0c6a8-de8f-4962-bba9-cc42ed3be6d9",
+    "timestamp": "2025-03-26T08:07:31.711Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "}\n\ntype UserRole = User | Admin;\ntype PostOrComment = Post | Comment;\n\nclass Response {\n  data: any;"
+    },
+    "generationUUID": "79d0c6a8-de8f-4962-bba9-cc42ed3be6d9",
+    "timestamp": "2025-03-26T08:07:31.711Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "class"
+    },
+    "generationUUID": "79d0c6a8-de8f-4962-bba9-cc42ed3be6d9",
+    "timestamp": "2025-03-26T08:07:31.717Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Response"
+    },
+    "generationUUID": "79d0c6a8-de8f-4962-bba9-cc42ed3be6d9",
+    "timestamp": "2025-03-26T08:07:31.729Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {\n  data: any;"
+    },
+    "generationUUID": "79d0c6a8-de8f-4962-bba9-cc42ed3be6d9",
+    "timestamp": "2025-03-26T08:07:31.741Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "79d0c6a8-de8f-4962-bba9-cc42ed3be6d9",
+    "timestamp": "2025-03-26T08:07:31.767Z"
+  },
+  {
+    "fullText": "}\n\ntype UserRole = User | Admin;\ntype PostOrComment = Post | Comment;\n\nclass Response {\n  data: any;",
+    "generationUUID": "79d0c6a8-de8f-4962-bba9-cc42ed3be6d9",
+    "timestamp": "2025-03-26T08:07:31.770Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "79d0c6a8-de8f-4962-bba9-cc42ed3be6d9",
+    "timestamp": "2025-03-26T08:07:31.811Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "9244b433-e66f-4e62-a3f1-bc4067373c4b",
+    "generationUUID": "79d0c6a8-de8f-4962-bba9-cc42ed3be6d9",
+    "timestamp": "2025-03-26T08:07:31.819Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "}\n\ntype UserRole = User | Admin;\ntype PostOrComment = Post | Comment;\n\nclass Response {\n  data: any;"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "9244b433-e66f-4e62-a3f1-bc4067373c4b",
+    "generationUUID": "79d0c6a8-de8f-4962-bba9-cc42ed3be6d9",
+    "timestamp": "2025-03-26T08:07:31.820Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "9244b433-e66f-4e62-a3f1-bc4067373c4b",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-26T08:07:31.820Z"
+  }
+]

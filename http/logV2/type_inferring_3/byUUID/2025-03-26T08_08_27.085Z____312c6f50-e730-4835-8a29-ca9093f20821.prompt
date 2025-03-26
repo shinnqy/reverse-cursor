@@ -1,0 +1,159 @@
+You're an expert in ArkTS. Your task is to help the user update the code around current cursor position.
+
+## Recent Actions
+Here is what the user has been doing from the earliest to the latest:
+
+File: entry/src/main/ets/utils/typingInfer3.ets
+added the code `type UserRole = User ` in line 15
+added the code `type Content = Post ` in line 16
+added the code `type Result<T> = T ` in line 17
+added the code `type ID = string ` in line 18
+added the code `type Status = 'pending' ` in line 19
+added the code `` in line 20
+
+deleted the code `class Response {` in line 21
+added the code `class Response< {` in line 21
+
+deleted the code `class Response< {` in line 21
+deleted the code `  data: any;` in line 22
+added the code `class Response<T> {` in line 21
+added the code `  data: T;` in line 22
+
+deleted the code `  constructor(data: any, status: number) {` in line 25
+added the code `  constructor(data: T, status: number) {` in line 25
+
+deleted the code `class DataProcessor {` in line 31
+deleted the code `  private items: string[] = [];` in line 32
+added the code `class DataProcessor<T extends Content> {` in line 31
+added the code `  private items: T[] = [];` in line 32
+
+deleted the code `  addItem(item: string ` in line 34
+added the code `  addItem(item: T) {` in line 34
+
+deleted the code `  getFirstItem(): string ` in line 38
+added the code `  getFirstItem(): T ` in line 38
+
+deleted the code `  getItems(): string[] {` in line 42
+added the code `  getItems(): T[] {` in line 42
+
+deleted the code `function merge(a: string, b: string): string {` in line 47
+added the code `function merge<T>(a: T, b: T): T {` in line 47
+
+deleted the code `function wrap(input: string): string[] {` in line 51
+added the code `function wrap<T>(input: T): T[] {` in line 51
+
+deleted the code `  get(key: string): string ` in line 58
+added the code `  get(key: string): T ` in line 58
+
+deleted the code `class Cache {` in line 55
+deleted the code `  private store = new Map<string, string>();` in line 56
+added the code `class Cache<T> {` in line 55
+added the code `  private store = new Map<string, T>();` in line 56
+
+
+## Current Code
+Here is the current code file path:
+entry/src/main/ets/utils/typingInfer3.ets
+
+Here is the current code around the cursor position:
+
+```
+interface User {
+    id: number;
+    name: string;
+    age: number;
+}
+interface Admin { level: number; permission: string[] }
+
+interface Post {title: string; content: string}
+
+interface Comment {
+    id: number;
+    author: string;
+}
+
+type UserRole = User | Admin;
+type Content = Post | Comment;
+type Result<T> = T | Error;
+type ID = string | number;
+type Status = 'pending' | 'success' | 'error';
+
+class Response<T> {
+  data: T;
+  status: number;
+
+  constructor(data: T, status: number) {
+    this.data = data;
+    this.status = status;
+  }
+}
+
+class DataProcessor<T extends Content> {
+  private items: T[] = [];
+
+  addItem(item: T) {
+    this.items.push(item);
+  }
+
+  getFirstItem(): T | undefined {
+    return this.items[0];
+  }
+
+  getItems(): T[] {
+    return this.items;
+  }
+}
+
+function merge<T>(a: T, b: T): T {
+  return a + b;
+}
+
+function wrap<T>(input: T): T[] {
+<|editable_region_start|>
+  return [input]
+}
+
+class Cache<T> {
+  private store = new Map<string, T>();
+
+  get(key: string): T | undefined {
+    return this.store.get(key);
+  }
+
+<|current_cursor_position|>  set(key: string, value: string) {
+    this.store.set(key, value);
+  }
+}
+
+function demo() {
+  const userRes = new Response(new Error('Error'), 200);
+
+  const processor = new DataProcessor();
+  processor.addItem('Hello');
+
+<|editable_region_end|>
+  const merged = merge<string>('Hello', 'World');
+  const numbers = merge<number>(1, 2);
+
+  const cache = new Cache();
+  cache.set('user1', '123');
+  cache.set('post1', '456');
+
+  const wrapped = wrap('pending');
+}
+
+
+
+```
+
+## Task
+Rewrite the code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> according to the following requirements:
+1. Enforce code format strictly matching existing code style.
+2. Propagate naming convention changes to all related cases
+3. Preserve original functionality
+4. Apply changes to entire code regardless of cursor position
+5. Focus on code after cursor position at <|current_cursor_position|>
+
+# Output Format
+Return ONLY the rewritten code from the first column of the line of <|editable_region_start|> to the line of <|editable_region_end|> without any other words.
+Never use markdown formatting like ```. Return raw text only.

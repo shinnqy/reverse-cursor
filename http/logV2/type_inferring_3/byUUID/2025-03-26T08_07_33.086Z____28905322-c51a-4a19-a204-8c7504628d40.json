@@ -1,0 +1,478 @@
+[
+  {
+    "intent": "typing",
+    "generationUUID": "28905322-c51a-4a19-a204-8c7504628d40",
+    "timestamp": "2025-03-26T08:07:33.086Z"
+  },
+  {
+    "partialData": {
+      "fileDiffHistories": [
+        {
+          "fileName": "entry/src/main/ets/utils/typingInfer3.ets",
+          "diffHistory": [
+            "15+|type UserRole = User | Admin;\n16+|type Content = \n17+|\n"
+          ],
+          "diffHistoryTimestamps": []
+        }
+      ],
+      "diffHistory": [],
+      "blockDiffPatches": [],
+      "mergedDiffHistories": [],
+      "currentFile": {
+        "relativeWorkspacePath": "entry/src/main/ets/utils/typingInfer3.ets",
+        "contents": "interface User {\n    id: number;\n    name: string;\n    age: number;\n}\ninterface Admin { level: number; permission: string[] }\n\ninterface Post {title: string; content: string}\n\ninterface Comment {\n    id: number;\n    author: string;\n}\n\ntype UserRole = User | Admin;\ntype Content = \n\nclass Response {\n  data: any;\n  status: number;\n\n  constructor(data: any, status: number) {\n    this.data = data;\n    this.status = status;\n  }\n}\n\nclass DataProcessor {\n  private items: string[] = [];\n\n  addItem(item: string | null) {\n    this.items.push(item);\n  }\n\n  getFirstItem(): string | undefined {\n    return this.items[0];\n  }\n\n  getItems(): string[] {\n    return this.items;\n  }\n}\n\nfunction merge(a: string, b: string): string {\n  return a + b;\n}\n\nfunction wrap(input: string): string[] {\n  return [input]\n}\n\nclass Cache {\n  private store = new Map<string, string>();\n\n  get(key: string): string | undefined {\n    return this.store.get(key);\n  }\n\n  set(key: string, value: string) {\n    this.store.set(key, value);\n  }\n}\n\nfunction demo() {\n  const userRes = new Response(new Error('Error'), 200);\n\n  const processor = new DataProcessor();\n  processor.addItem('Hello');\n\n  const merged = merge<string>('Hello', 'World');\n  const numbers = merge<number>(1, 2);\n\n  const cache = new Cache();\n  cache.set('user1', '123');\n  cache.set('post1', '456');\n\n  const wrapped = wrap('pending');\n}\n\n\n",
+        "cursorPosition": {
+          "line": 15,
+          "column": 15
+        },
+        "dataframes": [],
+        "languageId": "",
+        "diagnostics": [],
+        "totalNumberOfLines": 0,
+        "contentsStartAtLine": 0,
+        "topChunks": [],
+        "fileVersion": 46,
+        "cellStartLines": [],
+        "cells": [],
+        "relyOnFilesync": false,
+        "workspaceRootPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2"
+      },
+      "additionalFiles": [],
+      "cppIntentInfo": {
+        "source": "typing"
+      },
+      "clientTime": 1742976453130,
+      "clientTimezoneOffset": -480,
+      "modelName": "fast",
+      "diffHistoryKeys": [],
+      "contextItems": [],
+      "parameterHints": [],
+      "lspSuggestedItems": {
+        "suggestions": []
+      },
+      "lspContexts": [],
+      "filesyncUpdates": [],
+      "workspaceId": "w7qbwqdnwclt3gk87qzzc",
+      "timeSinceRequestStart": 55.5,
+      "timeAtRequestSend": 1742976453130
+    },
+    "generateUuid": "28905322-c51a-4a19-a204-8c7504628d40",
+    "timestamp": "2025-03-26T08:07:33.132Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "modelInfo": {
+        "isFusedCursorPredictionModel": true
+      }
+    },
+    "generationUUID": "28905322-c51a-4a19-a204-8c7504628d40",
+    "timestamp": "2025-03-26T08:07:33.423Z"
+  },
+  {
+    "isFusedCursorPredictionModel": true,
+    "generationUUID": "28905322-c51a-4a19-a204-8c7504628d40",
+    "timestamp": "2025-03-26T08:07:33.533Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "rangeToReplace": {
+        "startLineNumber": 13,
+        "endLineNumberInclusive": 19
+      }
+    },
+    "generationUUID": "28905322-c51a-4a19-a204-8c7504628d40",
+    "timestamp": "2025-03-26T08:07:33.534Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "}\n\ntype UserRole = User | Admin;\ntype Content = Post"
+    },
+    "generationUUID": "28905322-c51a-4a19-a204-8c7504628d40",
+    "timestamp": "2025-03-26T08:07:33.535Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " |"
+    },
+    "generationUUID": "28905322-c51a-4a19-a204-8c7504628d40",
+    "timestamp": "2025-03-26T08:07:33.536Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Comment"
+    },
+    "generationUUID": "28905322-c51a-4a19-a204-8c7504628d40",
+    "timestamp": "2025-03-26T08:07:33.666Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": ";"
+    },
+    "generationUUID": "28905322-c51a-4a19-a204-8c7504628d40",
+    "timestamp": "2025-03-26T08:07:33.666Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "\n\n"
+    },
+    "generationUUID": "28905322-c51a-4a19-a204-8c7504628d40",
+    "timestamp": "2025-03-26T08:07:33.667Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "class"
+    },
+    "generationUUID": "28905322-c51a-4a19-a204-8c7504628d40",
+    "timestamp": "2025-03-26T08:07:33.667Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " Response"
+    },
+    "generationUUID": "28905322-c51a-4a19-a204-8c7504628d40",
+    "timestamp": "2025-03-26T08:07:33.667Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": " {\n  data: any;"
+    },
+    "generationUUID": "28905322-c51a-4a19-a204-8c7504628d40",
+    "timestamp": "2025-03-26T08:07:33.668Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneEdit": true
+    },
+    "generationUUID": "28905322-c51a-4a19-a204-8c7504628d40",
+    "timestamp": "2025-03-26T08:07:33.668Z"
+  },
+  {
+    "firstChunkValue": "}\n\ntype UserRole = User | Admin;\ntype Content = Post | Comment;\n\nclass Response {\n  data: any;",
+    "generationUUID": "28905322-c51a-4a19-a204-8c7504628d40",
+    "timestamp": "2025-03-26T08:07:33.668Z"
+  },
+  {
+    "fullText": "}\n\ntype UserRole = User | Admin;\ntype Content = Post | Comment;\n\nclass Response {\n  data: any;",
+    "generationUUID": "28905322-c51a-4a19-a204-8c7504628d40",
+    "timestamp": "2025-03-26T08:07:33.669Z"
+  },
+  {
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "}\n\ntype UserRole = User | Admin;\ntype Content = Post | Comment;\n\nclass Response {\n  data: any;"
+    },
+    "generationUUID": "28905322-c51a-4a19-a204-8c7504628d40",
+    "timestamp": "2025-03-26T08:07:33.669Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "3361d521-871b-476b-a4a4-28f25bd28e7f",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer3.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer3.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer3.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 46,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 46,
+      "monotonicallyIncreasingSuggestionId": 35,
+      "range": {
+        "startLineNumber": 13,
+        "startColumn": 1,
+        "endLineNumberInclusive": 19,
+        "endColumn": 13
+      },
+      "replaceText": "}\n\ntype UserRole = User | Admin;\ntype Content = Post | Comment;\n\nclass Response {\n  data: any;",
+      "originalText": "}\n\ntype UserRole = User | Admin;\ntype Content = \n\nclass Response {\n  data: any;",
+      "startingSuggestionRange": {
+        "startLineNumber": 13,
+        "startColumn": 1,
+        "endLineNumberInclusive": 19,
+        "endColumn": 13
+      },
+      "diffText": "}\n\ntype UserRole = User | Admin;\ntype Content = Post | Comment;\n\nclass Response {\n  data: any;",
+      "fullOriginalText": "}\n\ntype UserRole = User | Admin;\ntype Content = \n\nclass Response {\n  data: any;",
+      "suggestionTriggerTime": 1742976453075.2,
+      "greens": [],
+      "source": "typing",
+      "requestId": "28905322-c51a-4a19-a204-8c7504628d40",
+      "selection": {
+        "startLineNumber": 13,
+        "startColumn": 1,
+        "endLineNumberInclusive": 19,
+        "endColumn": 13
+      },
+      "undoRedoGroup": {
+        "id": 35,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "28905322-c51a-4a19-a204-8c7504628d40",
+    "timestamp": "2025-03-26T08:07:33.670Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true",
+    "invokePlace": "before this.generateFollowupSuggestion",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "}\n\ntype UserRole = User | Admin;\ntype Content = Post | Comment;\n\nclass Response {\n  data: any;"
+    },
+    "fullText": "}\n\ntype UserRole = User | Admin;\ntype Content = Post | Comment;\n\nclass Response {\n  data: any;",
+    "generationUUID": "28905322-c51a-4a19-a204-8c7504628d40",
+    "timestamp": "2025-03-26T08:07:33.673Z"
+  },
+  {
+    "invokeReason": "fullText resolved & isValidCase is true && remaining reason && need to create newSuggestion according fullText, will attach onAcceptDisplayId to currentSuggestion if newSuggestion is not undefined",
+    "invokePlace": "this.generateFollowupSuggestion",
+    "newSuggestion": {
+      "uniqueId": "dc6657a4-e7e6-4c74-bc59-f90288b3d878",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer3.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer3.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer3.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 46,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 47,
+      "monotonicallyIncreasingSuggestionId": 36,
+      "range": {
+        "startLineNumber": 13,
+        "startColumn": 1,
+        "endLineNumberInclusive": 19,
+        "endColumn": 13
+      },
+      "replaceText": "}\n\ntype UserRole = User | Admin;\ntype Content = Post | Comment;\n\nclass Response {\n  data: any;",
+      "originalText": "}\n\ntype UserRole = User | Admin;\ntype Content = \n\nclass Response {\n  data: any;",
+      "startingSuggestionRange": {
+        "startLineNumber": 13,
+        "startColumn": 1,
+        "endLineNumberInclusive": 19,
+        "endColumn": 13
+      },
+      "diffText": "}\n\ntype UserRole = User | Admin;\ntype Content = Post | Comment;\n\nclass Response {\n  data: any;",
+      "fullOriginalText": "}\n\ntype UserRole = User | Admin;\ntype Content = \n\nclass Response {\n  data: any;",
+      "suggestionTriggerTime": 1742976453075.2,
+      "greens": [],
+      "source": "typing",
+      "requestId": "28905322-c51a-4a19-a204-8c7504628d40",
+      "selection": {
+        "startLineNumber": 13,
+        "startColumn": 1,
+        "endLineNumberInclusive": 19,
+        "endColumn": 13
+      },
+      "fusedCursorPredictionId": "d4ac29f3-77fb-4543-ad4b-3a3b5d2dddbe",
+      "undoRedoGroup": {
+        "id": 36,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "28905322-c51a-4a19-a204-8c7504628d40",
+    "timestamp": "2025-03-26T08:07:33.674Z"
+  },
+  {
+    "cursorRetrieval": {
+      "text": "",
+      "doneStream": true
+    },
+    "generationUUID": "28905322-c51a-4a19-a204-8c7504628d40",
+    "timestamp": "2025-03-26T08:07:33.686Z"
+  },
+  {
+    "fusedCursorPrediction": null,
+    "predictionId": "d4ac29f3-77fb-4543-ad4b-3a3b5d2dddbe",
+    "generationUUID": "28905322-c51a-4a19-a204-8c7504628d40",
+    "timestamp": "2025-03-26T08:07:33.693Z"
+  },
+  {
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "before this.uponFusedCursorPredictionReady",
+    "isValidCase4firstChunkValue": {
+      "valid": true,
+      "modelOutputText": "}\n\ntype UserRole = User | Admin;\ntype Content = Post | Comment;\n\nclass Response {\n  data: any;"
+    },
+    "fusedCursorPrediction": null,
+    "predictionId": "d4ac29f3-77fb-4543-ad4b-3a3b5d2dddbe",
+    "generationUUID": "28905322-c51a-4a19-a204-8c7504628d40",
+    "timestamp": "2025-03-26T08:07:33.693Z"
+  },
+  {
+    "setIntoDB": "predictionId",
+    "invokeReason": "fusedCursorPrediction resolved & isValidCase is true",
+    "invokePlace": "right after fusedCursorPrediction resolved",
+    "predictionId": "d4ac29f3-77fb-4543-ad4b-3a3b5d2dddbe",
+    "fusedCursorPrediction": null,
+    "timestamp": "2025-03-26T08:07:33.693Z"
+  },
+  {
+    "action": "press Tab to accept suggestion",
+    "suggestion": {
+      "uniqueId": "3361d521-871b-476b-a4a4-28f25bd28e7f",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer3.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer3.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer3.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 46,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 46,
+      "monotonicallyIncreasingSuggestionId": 35,
+      "range": {
+        "startLineNumber": 13,
+        "startColumn": 1,
+        "endLineNumberInclusive": 19,
+        "endColumn": 13
+      },
+      "replaceText": "}\n\ntype UserRole = User | Admin;\ntype Content = Post | Comment;\n\nclass Response {\n  data: any;",
+      "originalText": "}\n\ntype UserRole = User | Admin;\ntype Content = \n\nclass Response {\n  data: any;",
+      "startingSuggestionRange": {
+        "startLineNumber": 13,
+        "startColumn": 1,
+        "endLineNumberInclusive": 19,
+        "endColumn": 13
+      },
+      "diffText": "}\n\ntype UserRole = User | Admin;\ntype Content = Post | Comment;\n\nclass Response {\n  data: any;",
+      "fullOriginalText": "}\n\ntype UserRole = User | Admin;\ntype Content = \n\nclass Response {\n  data: any;",
+      "suggestionTriggerTime": 1742976453075.2,
+      "greens": [],
+      "source": "typing",
+      "requestId": "28905322-c51a-4a19-a204-8c7504628d40",
+      "selection": {
+        "startLineNumber": 13,
+        "startColumn": 1,
+        "endLineNumberInclusive": 19,
+        "endColumn": 13
+      },
+      "undoRedoGroup": {
+        "id": 35,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;124",
+      "onAcceptDisplayId": "dc6657a4-e7e6-4c74-bc59-f90288b3d878"
+    },
+    "generationUUID": "28905322-c51a-4a19-a204-8c7504628d40",
+    "timestamp": "2025-03-26T08:07:34.847Z"
+  },
+  {
+    "action": "press Tab to acceptFullSuggestion and succeed",
+    "condition": "tabToLineBeforeAcceptingCpp == false",
+    "suggestion": {
+      "uniqueId": "3361d521-871b-476b-a4a4-28f25bd28e7f",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer3.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer3.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer3.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 46,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 46,
+      "monotonicallyIncreasingSuggestionId": 35,
+      "range": {
+        "startLineNumber": 13,
+        "startColumn": 1,
+        "endLineNumberInclusive": 19,
+        "endColumn": 13
+      },
+      "replaceText": "}\n\ntype UserRole = User | Admin;\ntype Content = Post | Comment;\n\nclass Response {\n  data: any;",
+      "originalText": "}\n\ntype UserRole = User | Admin;\ntype Content = \n\nclass Response {\n  data: any;",
+      "startingSuggestionRange": {
+        "startLineNumber": 13,
+        "startColumn": 1,
+        "endLineNumberInclusive": 19,
+        "endColumn": 13
+      },
+      "diffText": "}\n\ntype UserRole = User | Admin;\ntype Content = Post | Comment;\n\nclass Response {\n  data: any;",
+      "fullOriginalText": "}\n\ntype UserRole = User | Admin;\ntype Content = \n\nclass Response {\n  data: any;",
+      "suggestionTriggerTime": 1742976453075.2,
+      "greens": [],
+      "source": "typing",
+      "requestId": "28905322-c51a-4a19-a204-8c7504628d40",
+      "selection": {
+        "startLineNumber": 13,
+        "startColumn": 1,
+        "endLineNumberInclusive": 19,
+        "endColumn": 13
+      },
+      "undoRedoGroup": {
+        "id": 35,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false,
+      "decorationId": "b;124",
+      "onAcceptDisplayId": "dc6657a4-e7e6-4c74-bc59-f90288b3d878"
+    },
+    "generationUUID": "28905322-c51a-4a19-a204-8c7504628d40",
+    "timestamp": "2025-03-26T08:07:34.862Z"
+  },
+  {
+    "action": "displayCppSuggestion",
+    "suggestion": {
+      "uniqueId": "dc6657a4-e7e6-4c74-bc59-f90288b3d878",
+      "uri": {
+        "$mid": 1,
+        "fsPath": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer3.ets",
+        "external": "file:///Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer3.ets",
+        "path": "/Users/shinn/DevEcoStudioProjects/MyApplication2/entry/src/main/ets/utils/typingInfer3.ets",
+        "scheme": "file"
+      },
+      "modelVersionWhenInvoked": 46,
+      "suggestionIsCurrentlyHidden": true,
+      "modelVersionWhenCreated": 47,
+      "monotonicallyIncreasingSuggestionId": 36,
+      "range": {
+        "startLineNumber": 13,
+        "startColumn": 1,
+        "endLineNumberInclusive": 19,
+        "endColumn": 13
+      },
+      "replaceText": "}\n\ntype UserRole = User | Admin;\ntype Content = Post | Comment;\n\nclass Response {\n  data: any;",
+      "originalText": "}\n\ntype UserRole = User | Admin;\ntype Content = \n\nclass Response {\n  data: any;",
+      "startingSuggestionRange": {
+        "startLineNumber": 13,
+        "startColumn": 1,
+        "endLineNumberInclusive": 19,
+        "endColumn": 13
+      },
+      "diffText": "}\n\ntype UserRole = User | Admin;\ntype Content = Post | Comment;\n\nclass Response {\n  data: any;",
+      "fullOriginalText": "}\n\ntype UserRole = User | Admin;\ntype Content = \n\nclass Response {\n  data: any;",
+      "suggestionTriggerTime": 1742976453075.2,
+      "greens": [],
+      "source": "typing",
+      "requestId": "28905322-c51a-4a19-a204-8c7504628d40",
+      "selection": {
+        "startLineNumber": 13,
+        "startColumn": 1,
+        "endLineNumberInclusive": 19,
+        "endColumn": 13
+      },
+      "fusedCursorPredictionId": "d4ac29f3-77fb-4543-ad4b-3a3b5d2dddbe",
+      "undoRedoGroup": {
+        "id": 36,
+        "b": 1
+      },
+      "immediatelySeen": false,
+      "hasBeenSeen": false
+    },
+    "generationUUID": "28905322-c51a-4a19-a204-8c7504628d40",
+    "timestamp": "2025-03-26T08:07:34.863Z"
+  }
+]

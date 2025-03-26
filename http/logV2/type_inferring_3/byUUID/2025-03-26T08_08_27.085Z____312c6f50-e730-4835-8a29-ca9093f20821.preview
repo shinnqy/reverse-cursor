@@ -1,0 +1,176 @@
+{"line":61,"column":0}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+interface User {
+    id: number;
+    name: string;
+    age: number;
+}
+interface Admin { level: number; permission: string[] }
+
+interface Post {title: string; content: string}
+
+interface Comment {
+    id: number;
+    author: string;
+}
+
+type UserRole = User | Admin;
+type Content = Post | Comment;
+type Result<T> = T | Error;
+type ID = string | number;
+type Status = 'pending' | 'success' | 'error';
+
+class Response<T> {
+  data: T;
+  status: number;
+
+  constructor(data: T, status: number) {
+    this.data = data;
+    this.status = status;
+  }
+}
+
+class DataProcessor<T extends Content> {
+  private items: T[] = [];
+
+  addItem(item: T) {
+    this.items.push(item);
+  }
+
+  getFirstItem(): T | undefined {
+    return this.items[0];
+  }
+
+  getItems(): T[] {
+    return this.items;
+  }
+}
+
+function merge<T>(a: T, b: T): T {
+  return a + b;
+}
+
+function wrap<T>(input: T): T[] {
+  return [input]
+}
+
+class Cache<T> {
+  private store = new Map<string, T>();
+
+  get(key: string): T | undefined {
+    return this.store.get(key);
+  }
+
+[ToFill]  set(key: string, value: string) {
+    this.store.set(key, value);
+  }
+}
+
+function demo() {
+  const userRes = new Response(new Error('Error'), 200);
+
+  const processor = new DataProcessor();
+  processor.addItem('Hello');
+
+  const merged = merge<string>('Hello', 'World');
+  const numbers = merge<number>(1, 2);
+
+  const cache = new Cache();
+  cache.set('user1', '123');
+  cache.set('post1', '456');
+
+  const wrapped = wrap('pending');
+}
+
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+  set(key: string, value: T) {
+    this.store.set(key, value);
+  }
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+interface User {
+    id: number;
+    name: string;
+    age: number;
+}
+interface Admin { level: number; permission: string[] }
+
+interface Post {title: string; content: string}
+
+interface Comment {
+    id: number;
+    author: string;
+}
+
+type UserRole = User | Admin;
+type Content = Post | Comment;
+type Result<T> = T | Error;
+type ID = string | number;
+type Status = 'pending' | 'success' | 'error';
+
+class Response<T> {
+  data: T;
+  status: number;
+
+  constructor(data: T, status: number) {
+    this.data = data;
+    this.status = status;
+  }
+}
+
+class DataProcessor<T extends Content> {
+  private items: T[] = [];
+
+  addItem(item: T) {
+    this.items.push(item);
+  }
+
+  getFirstItem(): T | undefined {
+    return this.items[0];
+  }
+
+  getItems(): T[] {
+    return this.items;
+  }
+}
+
+function merge<T>(a: T, b: T): T {
+  return a + b;
+}
+
+function wrap<T>(input: T): T[] {
+  return [input]
+}
+
+class Cache<T> {
+  private store = new Map<string, T>();
+
+  get(key: string): T | undefined {
+    return this.store.get(key);
+  }
+
+  set(key: string, value: T) {
+    this.store.set(key, value);
+  }
+}
+
+function demo() {
+  const userRes = new Response(new Error('Error'), 200);
+
+  const processor = new DataProcessor();
+  processor.addItem('Hello');
+
+  const merged = merge<string>('Hello', 'World');
+  const numbers = merge<number>(1, 2);
+
+  const cache = new Cache();
+  cache.set('user1', '123');
+  cache.set('post1', '456');
+
+  const wrapped = wrap('pending');
+}
+
+
