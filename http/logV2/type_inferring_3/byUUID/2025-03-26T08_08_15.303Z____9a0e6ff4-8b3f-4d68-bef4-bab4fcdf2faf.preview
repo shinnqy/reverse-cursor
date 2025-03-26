@@ -1,0 +1,192 @@
+{"line":33,"column":0}
+
+-------------------------------[        currentFileContentsWithToFill        ]--------------------------------
+interface User {
+    id: number;
+    name: string;
+    age: number;
+}
+interface Admin { level: number; permission: string[] }
+
+interface Post {title: string; content: string}
+
+interface Comment {
+    id: number;
+    author: string;
+}
+
+type UserRole = User | Admin;
+type Content = Post | Comment;
+type Result<T> = T | Error;
+type ID = string | number;
+type Status = 'pending' | 'success' | 'error';
+
+class Response<T> {
+  data: T;
+  status: number;
+
+  constructor(data: T, status: number) {
+    this.data = data;
+    this.status = status;
+  }
+}
+
+class DataProcessor<T extends Content> {
+  private items: T[] = [];
+
+[ToFill]  addItem(item: string | null) {
+    this.items.push(item);
+  }
+
+  getFirstItem(): string | undefined {
+    return this.items[0];
+  }
+
+  getItems(): string[] {
+    return this.items;
+  }
+}
+
+function merge(a: string, b: string): string {
+  return a + b;
+}
+
+function wrap(input: string): string[] {
+  return [input]
+}
+
+class Cache {
+  private store = new Map<string, string>();
+
+  get(key: string): string | undefined {
+    return this.store.get(key);
+  }
+
+  set(key: string, value: string) {
+    this.store.set(key, value);
+  }
+}
+
+function demo() {
+  const userRes = new Response(new Error('Error'), 200);
+
+  const processor = new DataProcessor();
+  processor.addItem('Hello');
+
+  const merged = merge<string>('Hello', 'World');
+  const numbers = merge<number>(1, 2);
+
+  const cache = new Cache();
+  cache.set('user1', '123');
+  cache.set('post1', '456');
+
+  const wrapped = wrap('pending');
+}
+
+
+
+-------------------------------[               firstChunkValue               ]--------------------------------
+
+  addItem(item: T) {
+    this.items.push(item);
+  }
+
+-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
+interface User {
+    id: number;
+    name: string;
+    age: number;
+}
+interface Admin { level: number; permission: string[] }
+
+interface Post {title: string; content: string}
+
+interface Comment {
+    id: number;
+    author: string;
+}
+
+type UserRole = User | Admin;
+type Content = Post | Comment;
+type Result<T> = T | Error;
+type ID = string | number;
+type Status = 'pending' | 'success' | 'error';
+
+class Response<T> {
+  data: T;
+  status: number;
+
+  constructor(data: T, status: number) {
+    this.data = data;
+    this.status = status;
+  }
+}
+
+class DataProcessor<T extends Content> {
+  private items: T[] = [];
+
+  addItem(item: T) {
+    this.items.push(item);
+  }
+
+  getFirstItem(): string | undefined {
+    return this.items[0];
+  }
+
+  getItems(): string[] {
+    return this.items;
+  }
+}
+
+function merge(a: string, b: string): string {
+  return a + b;
+}
+
+function wrap(input: string): string[] {
+  return [input]
+}
+
+class Cache {
+  private store = new Map<string, string>();
+
+  get(key: string): string | undefined {
+    return this.store.get(key);
+  }
+
+  set(key: string, value: string) {
+    this.store.set(key, value);
+  }
+}
+
+function demo() {
+  const userRes = new Response(new Error('Error'), 200);
+
+  const processor = new DataProcessor();
+  processor.addItem('Hello');
+
+  const merged = merge<string>('Hello', 'World');
+  const numbers = merge<number>(1, 2);
+
+  const cache = new Cache();
+  cache.set('user1', '123');
+  cache.set('post1', '456');
+
+  const wrapped = wrap('pending');
+}
+
+
+
+-------------------------------[             fusedCursorPrediction            ]--------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/typingInfer3.ets",
+  "lineNumberOneIndexed": 38,
+  "text": "getFirstItem(): string | undefined {\nreturn this.items[0];\n}\n\ngetItems(): string[] {",
+  "shouldRetriggerCpp": true
+}
+--------------------------------[        displayedFusedCursorPrediction       ]---------------------------------
+{
+  "relativePath": "entry/src/main/ets/utils/typingInfer3.ets",
+  "lineNumberOneIndexed": 38,
+  "text": "getFirstItem(): string | undefined {\nreturn this.items[0];\n}\n\ngetItems(): string[] {",
+  "shouldRetriggerCpp": true
+}
