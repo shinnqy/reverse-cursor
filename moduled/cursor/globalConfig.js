@@ -469,5 +469,6 @@ export function createGlobalConfig(params) {
     MOi,
     $Oi,
     tPn,
+    gae,
   }
 }
