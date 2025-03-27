@@ -2,7 +2,7 @@
 
 // 254597
 export function createDevContext(params) {
-  const { ce, U, vm, ys, li, hb, Zb, J, L1, p7i, ms, ns, bs, le, dt, nr, oi, De, _l, Tt, NG, i7, KWe, X, jo, I, hl, Cu, Y, Vu, qn, wv, xe, tt, ie, $, xBi, Nz, $r, u_, M, y4t, e0, Ze, G, un, $ue, Nae, cc, KLn, $tr, te, CEt, wEt, gG } = params;
+  const { ce, U, vm, ys, li, hb, Zb, J, L1, p7i, ms, ns, bs, le, dt, nr, oi, De, _l, Tt, NG, i7, KWe, X, jo, I, hl, Cu, Y, Vu, qn, wv, xe, tt, ie, $, xBi, Nz, $r, u_, M, y4t, e0, Ze, G, un, Nae, cc, KLn, $tr, te, CEt, wEt, gG } = params;
 
   var Aa
   ;(function (i) {
@@ -2373,6 +2373,11 @@ export function createDevContext(params) {
       }),
       { diffOptions: n }
     )
+  }
+
+  function $ue(i, e, t, s) {
+    let n = 0
+    return i && n++, e && n++, t + s + n
   }
 
   return {
