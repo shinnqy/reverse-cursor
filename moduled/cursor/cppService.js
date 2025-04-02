@@ -2,7 +2,7 @@
 
 
 export function createCppService(params) {
-  const {V, EYe, G, yo, Qfo, ngo, rgo, zt, J, R_n, um, hF, ss, ll, JB, onDidRegisterWindow, fu, Va, nze, WEn, m2i, qEn, b2i, S9, $, Hae, m0t, Ad, fUe, Sp, VB, replaceTextInRange, generateModifiedText, tv, VS, NYi, CUe, Ri, ce, Pn, Cg, EF, MMs, U, mu, Me, ys, $fo, qdt, Ffo, dze, uI, BMs, Cf, hG, mR, fm, gle, xr, Gr, GB, QN, Ycr, Yt, D1t, Kf, rt, handleStreamWithPredictions, handleChunkedStream, consumeRemainingStream, Hu, Aoe, Qcr, TKn, F_, tdi, _fo, rge, OFt, Xfo, Ui, ZXe: computeDiffs, k7, RKi, jBt, qfo, Ho, Qm, T1t, Xf, oj, ee, j, Je, eQe, cppService, ei, wf, yi, Ci, $h} = params;
+  const {V, EYe, G, yo, Qfo, ngo, rgo, zt, J, R_n, um, hF, ss, ll, JB, onDidRegisterWindow, fu, Va, nze, WEn, m2i, qEn, b2i, S9, $, Hae, m0t, Ad, fUe, Sp, VB, replaceTextInRange, generateModifiedText, EditHistoryDiffFormatter, VS, NYi, CUe, Ri, ce, Pn, Cg, EF, MMs, U, mu, Me, ys, $fo, qdt, Ffo, dze, uI, BMs, Cf, hG, mR, fm, gle, xr, Gr, GB, QN, Ycr, Yt, D1t, Kf, rt, handleStreamWithPredictions, handleChunkedStream, consumeRemainingStream, Hu, Aoe, Qcr, TKn, F_, tdi, _fo, rge, OFt, Xfo, Ui, ZXe: computeDiffs, k7, RKi, jBt, qfo, Ho, Qm, T1t, Xf, oj, ee, j, Je, eQe, cppService, ei, wf, yi, Ci, $h} = params;
 
   var bgo = class zmi extends ee {
     static {
@@ -1246,7 +1246,7 @@ export function createCppService(params) {
         null,
       )
       for (const h of c)
-        this.everythingProviderService.onlyLocalProvider?.runCommand(tv.RecordRejectedEdit, {
+        this.everythingProviderService.onlyLocalProvider?.runCommand(EditHistoryDiffFormatter.RecordRejectedEdit, {
           relativePath: a,
           modelValue: h,
           onlySoftRejected: t,
@@ -1265,7 +1265,7 @@ export function createCppService(params) {
       let e = 0
       for (
         ;
-        (await this.everythingProviderService.onlyLocalProvider?.runCommand(tv.Ack, null)) !== true &&
+        (await this.everythingProviderService.onlyLocalProvider?.runCommand(EditHistoryDiffFormatter.Ack, null)) !== true &&
         e < 1e3;
 
       )
@@ -1699,7 +1699,7 @@ export function createCppService(params) {
       }
       const s = this.mb.asRelativePath(t?.uri ?? U.file(""))
       if (
-        (await this.everythingProviderService.onlyLocalProvider?.runCommand(tv.GetModelValue, {
+        (await this.everythingProviderService.onlyLocalProvider?.runCommand(EditHistoryDiffFormatter.GetModelValue, {
           relativePath: s,
         })) === undefined
       ) {
@@ -1710,7 +1710,7 @@ export function createCppService(params) {
           h !== null && (l = h.cellValues.join(c))
         } else l = t.getValue()
         l !== undefined &&
-          (await this.everythingProviderService.onlyLocalProvider?.runCommand(tv.InitModel, {
+          (await this.everythingProviderService.onlyLocalProvider?.runCommand(EditHistoryDiffFormatter.InitModel, {
             relativePath: s,
             currentModelValue: l,
             modelVersion: t.getVersionId(),
@@ -2315,7 +2315,7 @@ export function createCppService(params) {
     }
     async getGlobalDiffTrajectories() {
       return await this.everythingProviderService.onlyLocalProvider?.runCommand(
-        tv.CompileGlobalDiffTrajectories,
+        EditHistoryDiffFormatter.CompileGlobalDiffTrajectories,
         {},
       )
     }
@@ -3919,7 +3919,7 @@ export function createCppService(params) {
     async formatDiffHistory(e, t, s, n) {
       if (s.getValueLength() > hdi || s.isDisposed()) return
       const r = await this.everythingProviderService.onlyLocalProvider?.runCommand(
-        tv.FormatDiffHistory,
+        EditHistoryDiffFormatter.FormatDiffHistory,
         {
           uri: s.uri.toString(),
           changes: e.changes,
@@ -4071,11 +4071,11 @@ export function createCppService(params) {
         this.hb.setNonPersistentStorage("showingCppUpsell", true),
         this.hb.setApplicationUserPersistentStorage("cppConfig", e),
         this.everythingProviderService.onlyLocalProvider?.runCommand(
-          tv.SetEnableCppWhitespaceDiffHistoryMode,
+          EditHistoryDiffFormatter.SetEnableCppWhitespaceDiffHistoryMode,
           { enabled: e.useWhitespaceDiffHistory },
         ),
         this.everythingProviderService.onlyLocalProvider?.runCommand(
-          tv.SetEnableCppIncludeUnchangedLines,
+          EditHistoryDiffFormatter.SetEnableCppIncludeUnchangedLines,
           { enabled: e.includeUnchangedLines },
         ),
         this.wb.setSuggestionHintsConfig(e.suggestionHintConfig)
