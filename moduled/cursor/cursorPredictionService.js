@@ -1,12 +1,388 @@
 // @ts-check
 
-
+// gdi,Bgo,df,Mve,$go,_go,Gdt,Fgo,Ugo
 
 export function createCursorPredictionService(params) {
-  const {V, fu, Va, k3t, ge, ss, Le, ll, ys, Bgo, df, ce, Ho, Qm, wf, CUe, Mve, tv, Ugo, $go, rt, _go, Me, GB, cG, Gdt, Fgo, gdi, QN, L$i, N$i, Pn, Cg, EYe} = params;
+  const {V, fu, Va, k3t, ge, ss, Le, ll, ys, ce, Ho, Qm, wf, CUe, tv, rt, Me, GB, cG, QN, L$i, N$i, Pn, Cg, EYe, q, W, __decorate, __param, Ve, Pt: themeService, ue: configurationService, ie, ei, $, Re, xfe: SUGGESTION_OPTS, Rh, U, G, pu, Qn, aLt, ue, Z, nt, ve, si, Xt, Hi, qi, Nh, cursorPredictionService, it, mo, kH, jdt, kp, yi, cl, hv, Ci } = params;
   ////////
 
-  const mdi = class extends V {
+  var gdi = class extends V {
+    static {
+      this.a = [0]
+    }
+    constructor(e, t, s, n) {
+      super(),
+        (this.g = e),
+        (this.h = t),
+        (this.j = n),
+        (this.f =
+          "cursorPredictionHintLineWidget." +
+          Math.random().toString(36).substring(2, 15)),
+        (this.b = q("span.cursor-prediction-hint-line-widget")),
+        (this.c = q("span", {}, "\u21E5 tab")),
+        W(this.b, this.c),
+        this.b.classList.add("fancy"),
+        (this.c.style.fontSize = this.g.getOption(54) + "px"),
+        this.D(
+          this.j.onDidChangeConfiguration((r) => {
+            r.affectsConfiguration("editor.fontSize") &&
+              (this.c.style.fontSize = this.j.getValue("editor.fontSize") + "px")
+          }),
+        ),
+        this.g.addContentWidget(this)
+    }
+    dispose() {
+      super.dispose(), this.g.removeContentWidget(this), this.b.remove()
+    }
+    hide() {
+      this.g.removeContentWidget(this)
+    }
+    show() {
+      this.g.addContentWidget(this)
+    }
+    getId() {
+      return this.f
+    }
+    getDomNode() {
+      return this.b
+    }
+    getPosition() {
+      const e = this.g.getModel()
+      if (e === null) return null
+      const t = e.getDecorationRange(this.h)
+      return t === null
+        ? null
+        : {
+            position: { lineNumber: t.startLineNumber, column: t.endColumn },
+            preference: [0],
+          }
+    }
+    updateMarginLeft(e) {}
+  }
+  gdi = __decorate([__param(2, themeService), __param(3, configurationService)], gdi)
+  var Mve = 500,
+    $go = "default",
+    Fgo = class extends V {
+      constructor(i, e) {
+        super(),
+          (this.g = i),
+          (this.h = e),
+          (this.c = !1),
+          (this.allowEditorOverflow = !0),
+          (this.f = "top")
+        const t = this.g.getOptions().get(51)
+        ;(this.a = q("div.tooltipEditorUiWidget")),
+          this.g.addOverlayWidget(this),
+          this.g.layoutOverlayWidget(this),
+          (this.a.style.zIndex = "1000"),
+          (this.a.style.display = "flex"),
+          (this.a.style.flexDirection = "column"),
+          (this.a.style.justifyContent = "flex-start"),
+          (this.a.style.alignItems = "center"),
+          (this.a.style.width = "100%"),
+          (this.a.style.height = "100%"),
+          (this.a.style.top = "0px"),
+          (this.a.style.bottom = "0px"),
+          (this.a.style.left = "0px"),
+          (this.a.style.right = "0px"),
+          (this.a.style.pointerEvents = "none"),
+          (this.b = W(this.a, q("div.cursorPredictionOutOfRangeIndicator"))),
+          (this.b.style.display = "flex"),
+          (this.b.style.alignItems = "center"),
+          (this.b.style.width = "fit-content"),
+          (this.b.style.marginTop = "8px"),
+          (this.b.style.marginBottom = "4px"),
+          (this.b.style.padding = "0px 4px"),
+          (this.b.style.lineHeight = "130%"),
+          (this.b.style.borderRadius = "4px"),
+          (this.b.style.backgroundColor = "var(--vscode-editor-background)"),
+          (this.b.style.border =
+            "1px solid var(--vscode-editorWarning-foreground)"),
+          (this.b.style.color = "var(--vscode-editor-foreground)"),
+          (this.b.style.zIndex = "1000"),
+          (this.b.style.fontSize = "10px"),
+          (this.b.style.gap = "4px"),
+          (this.b.style.fontFamily = t)
+        const s = W(this.b, q("div.cursorPredictionOutOfRangeIndicatorText"))
+        s.textContent = "Tab to jump"
+        const n = W(this.b, q("div.cursorPredictionOutOfRangeIndicatorIcon"))
+        ;(n.className = ie.asClassName($.arrowDown)),
+          (n.style.fontSize = "10px"),
+          this.D(
+            this.g.onDidChangeModelOptions((o) => {
+              const a = this.g.getOptions().get(51)
+              a && (this.b.style.fontFamily = a)
+            }),
+          )
+        const r = () => {
+          const o =
+              this.g.getModel()?.getDecorationRange(this.h)?.startLineNumber ??
+              -1,
+            a = this.g.getVisibleRanges()
+          if (o === -1) {
+            this.b.style.visibility = "hidden"
+            return
+          }
+          let l = a[0].startLineNumber,
+            c = a[0].endLineNumber
+          const h = a.some((u) =>
+            u.startLineNumber <= o && o <= u.endLineNumber + 1
+              ? !0
+              : (u.startLineNumber < l && (l = u.startLineNumber),
+                u.endLineNumber > c && (c = u.endLineNumber),
+                !1),
+          )
+          h ||
+            (a && a.length > 0
+              ? (this.f = l > o ? "top" : "bottom")
+              : (this.f = "bottom"),
+            (n.style.transform =
+              this.f === "top" ? "rotate(180deg)" : "rotate(0deg)"),
+            (this.a.style.justifyContent =
+              this.f === "top" ? "flex-start" : "flex-end")),
+            (this.b.style.visibility = h ? "hidden" : "visible")
+        }
+        this.D(this.g.onDidScrollChange(r)),
+          this.D(this.g.onDidChangeCursorPosition(r)),
+          this.D(this.g.onDidChangeCursorSelection(r)),
+          r()
+      }
+      getPosition() {
+        return { preference: 2 }
+      }
+      dispose() {
+        this.c ||
+          (super.dispose(),
+          this.g.removeOverlayWidget(this),
+          this.a.remove(),
+          (this.c = !0))
+      }
+      getId() {
+        return "tooltip.editorUiWidget"
+      }
+      getDomNode() {
+        return this.a
+      }
+    },
+    t$s = Re("cursorPredictionBadHeuristics"),
+    pdi = class {
+      constructor(e) {
+        this.a = e
+      }
+      isValidCursorPredictionCase(e) {
+        return this.a.applicationUserPersistentStorage.cursorPredictionState?.heuristics?.includes(
+          SUGGESTION_OPTS.DISABLE_IN_LAST_CPP_SUGGESTION,
+        ) === !0 &&
+          e.cppSuggestionRange !== void 0 &&
+          e.predictedLineNumber >= e.cppSuggestionRange.startLineNumber &&
+          e.predictedLineNumber <= e.cppSuggestionRange.endLineNumberInclusive
+          ? (console.log(
+              "[Cursor Prediction] Bad Case 1: Do not show prediction if it's in the accepted cpp suggestion range",
+            ),
+            { valid: !1 })
+          : { valid: !0 }
+      }
+    }
+  ;(pdi = __decorate([__param(0, ei)], pdi)), Ve(t$s, pdi, 1)
+  var Gdt = class extends V {
+    constructor(e, t, s, n, r, o, a, l, c, h, u) {
+      super(),
+        (this.j = e),
+        (this.m = n),
+        (this.n = r),
+        (this.q = o),
+        (this.r = a),
+        (this.s = l),
+        (this.t = c),
+        (this.u = h),
+        (this.w = u),
+        (this.f = !1),
+        (this.allowEditorOverflow = !0),
+        console.log(
+          "[CURSOR PREDICTION] Creating non-visible editor indicator",
+          t.toString(),
+        ),
+        (this.g = t),
+        (this.h = s),
+        (this.a = q(".cursor-prediction-non-visible-editor-indicator")),
+        (this.a.style.position = "absolute"),
+        (this.a.style.right = "20px"),
+        (this.a.style.bottom = "20px"),
+        (this.a.style.zIndex = "1000"),
+        (this.a.style.width = "400px"),
+        (this.a.style.maxWidth = "40%"),
+        (this.a.style.backgroundColor = "var(--vscode-editor-background)"),
+        (this.a.style.border =
+          "1px solid var(--vscode-editorWarning-foreground)"),
+        (this.a.style.borderRadius = "4px"),
+        (this.a.style.boxShadow = "0 2px 8px rgba(0, 0, 0, 0.15)"),
+        (this.a.style.overflow = "hidden"),
+        (this.b = W(this.a, q(".indicator"))),
+        (this.b.style.display = "flex"),
+        (this.b.style.alignItems = "center"),
+        (this.b.style.padding = "2px 4px"),
+        (this.b.style.borderBottom =
+          "1px solid var(--vscode-editorWarning-foreground)"),
+        (this.b.style.cursor = "pointer"),
+        (this.b.style.minWidth = "0"),
+        (this.b.style.flexShrink = "1"),
+        (this.b.style.overflow = "hidden"),
+        (this.b.style.textOverflow = "ellipsis"),
+        (this.b.style.whiteSpace = "nowrap")
+      const d = W(this.b, q(".icon"))
+      ;(d.textContent = "\u21E5"),
+        (d.style.marginRight = "4px"),
+        (d.style.fontSize = "16px")
+      const g = W(this.b, q(".text"))
+      ;(g.style.fontSize = "12px"),
+        (g.style.overflow = "hidden"),
+        (g.style.textOverflow = "ellipsis"),
+        (g.style.whiteSpace = "nowrap"),
+        (g.style.minWidth = "0"),
+        (g.style.flexGrow = "1"),
+        (g.textContent = "Jump to prediction")
+      const p = W(this.a, q(".code-block-container"))
+      ;(this.c = this.n.createInstance(
+        Rh,
+        p,
+        { ...Rh.getEditorOptions(this.m), disableLayerHinting: !0 },
+        { overwriteIsSimpleWidget: !0 },
+      )),
+        this.D(ge(this.b, "click", () => this.z())),
+        this.j.addOverlayWidget(this),
+        this.y()
+    }
+    updateContent(e, t) {
+      ;(this.g = e), (this.h = t), this.y()
+    }
+    async y() {
+      console.log("[CURSOR PREDICTION] Updating code block", this.g.toString())
+      let e
+      try {
+        e = await this.t.createModelReference(this.g)
+        const t = e.object.textEditorModel
+        console.log("[CURSOR PREDICTION] Model retrieved", t.uri.toString())
+        const s = t.getValue(),
+          n = this.u.createByFilepathOrFirstLine(this.g),
+          r = U.parse(`cursor-prediction-preview://${this.g.path}`)
+        let o = this.w.getModel(r)
+        o
+          ? (o.setValue(s), o.setLanguage(n.languageId))
+          : (o = this.w.createModel(s, n, r, !1)),
+          this.c.setModel(o),
+          this.c.updateOptions({ readOnly: !0 })
+        const a = this.c.getOption(68),
+          c = a * 4,
+          h = this.c.getDomNode()
+        h && (h.style.height = `${c}px`)
+        const u = Math.max(this.h - 2, 0) * a
+        this.c.setScrollTop(u)
+        const d = [
+          {
+            range: new G(this.h, 1, this.h, 1),
+            options: {
+              isWholeLine: !0,
+              className: "cursor-prediction-highlight-line",
+              stickiness: 1,
+              description: "cursor-prediction-highlight",
+            },
+          },
+        ]
+        this.c.deltaDecorations([], d), this.c.layout()
+        const g = this.g.path.split("/").pop() || "",
+          p = this.b.querySelector(".text")
+        if (p) {
+          for (; p.firstChild; ) p.removeChild(p.firstChild)
+          p.appendChild(document.createTextNode("Tab to "))
+          const m = document.createElement("div")
+          ;(m.className = "show-file-icons"),
+            (m.style.display = "inline-flex"),
+            (m.style.alignItems = "center"),
+            (m.style.justifyContent = "center"),
+            (m.style.verticalAlign = "text-bottom"),
+            (m.style.marginRight = "-2px"),
+            (m.style.height = "16px")
+          const b = document.createElement("div")
+          ;(b.className = "monaco-icon-label"), (b.style.height = "100%")
+          const y = () => {
+            const C = pu(this.w, this.u, this.g, Qn.FILE)
+            b.className = ["monaco-icon-label", "height-override-important"]
+              .concat(C)
+              .join(" ")
+          }
+          y()
+          const w = setTimeout(() => {
+            y()
+          }, 3e3)
+          this.D({ dispose: () => clearTimeout(w) }),
+            m.appendChild(b),
+            p.appendChild(m),
+            p.appendChild(document.createTextNode(g))
+        }
+      } catch (t) {
+        console.error("[CURSOR PREDICTION] Error updating code block:", t)
+      } finally {
+        e?.dispose()
+      }
+    }
+    async z() {
+      await aLt({
+        uri: this.g,
+        fileService: this.q,
+        editorService: this.r,
+        editorGroupsService: this.s,
+      })
+    }
+    getId() {
+      return "cursor-prediction-non-visible-editor-indicator"
+    }
+    getDomNode() {
+      return this.a
+    }
+    getPosition() {
+      return { preference: 1 }
+    }
+    dispose() {
+      if (this.f) return
+      super.dispose(), this.j.removeOverlayWidget(this)
+      const e = this.c.getModel()
+      e && e.dispose(), this.c.dispose(), this.a.remove(), (this.f = !0)
+    }
+  }
+  Gdt = __decorate(
+    [
+      __param(3, ue),
+      __param(4, Z),
+      __param(5, nt),
+      __param(6, ve),
+      __param(7, si),
+      __param(8, Xt),
+      __param(9, Hi),
+      __param(10, qi),
+    ],
+    Gdt,
+  )
+  var Ogo = !1,
+    df = Ogo ? console.log : () => {},
+    Bgo = async (i, e, t, s) => {
+      ;(await e.exists(i)) &&
+        (await t.open(i, {
+          openToSide: s?.inNewTab ?? !1,
+          editorOptions: {
+            revealIfVisible: !0,
+            revealIfOpened: !0,
+            source: Nh.USER,
+            preserveFocus: !0,
+          },
+          fromUserGesture: !0,
+        }))
+    }
+  function _go(i) {
+    return { "X-Request-ID": i, "X-Amzn-Trace-Id": `Root=${i}` }
+  }
+
+  var Ugo = 5,
+  CursorPredictionService = class extends V {
     aiClient() {
       return this.a.get()
     }
@@ -831,6 +1207,27 @@ export function createCursorPredictionService(params) {
         this.clearPrediction({ editor: e, registerReject: !1 })
     }
   }
+  ;(CursorPredictionService = __decorate(
+    [
+      __param(0, ei),
+      __param(1, it),
+      __param(2, mo),
+      __param(3, Z),
+      __param(4, kH),
+      __param(5, jdt),
+      __param(6, kp),
+      __param(7, yi),
+      __param(8, Xt),
+      __param(9, cl),
+      __param(10, hv),
+      __param(11, t$s),
+      __param(12, nt),
+      __param(13, Ci),
+      __param(14, si),
+    ],
+    CursorPredictionService,
+  )),
+    Ve(cursorPredictionService, CursorPredictionService, 1)
 
-  return mdi;
+  return CursorPredictionService;
 }
