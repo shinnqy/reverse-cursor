@@ -1,7 +1,7 @@
 // @ts-check
 
 export function createCppBadHeuristics(params) {
-  const {replaceTextInRange, ZXe, VB, generateModifiedText, tv} = params;
+  const {replaceTextInRange, ZXe, VB, generateModifiedText, EditHistoryDiffFormatter} = params;
 
   const adi = class {
     constructor(applicationStorage, fileSystem, commandRunner) {
@@ -50,7 +50,7 @@ export function createCppBadHeuristics(params) {
         for (const modifiedText of modifiedTexts)
           if (
             await this.c.onlyLocalProvider?.runCommand(
-              tv.IsRevertingToRecentModel,
+              EditHistoryDiffFormatter.IsRevertingToRecentModel,
               { relativePath: relativePath, modelValue: modifiedText },
             )
           )
@@ -95,7 +95,7 @@ export function createCppBadHeuristics(params) {
           for (const modifiedText of modifiedTexts)
             if (
               await this.c.onlyLocalProvider?.runCommand(
-                tv.IsSuggestingRecentlyRejectedEdit,
+                EditHistoryDiffFormatter.IsSuggestingRecentlyRejectedEdit,
                 {
                   relativePath,
                   modelValue: modifiedText,

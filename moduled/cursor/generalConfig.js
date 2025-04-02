@@ -65,7 +65,7 @@ export function createGeneralConfig() {
   ;(function (i) {
     i.GetCachedServerConfig = "aiServerConfigService.getCachedServerConfig"
   })(G1t || (G1t = {}))
-  var tv
+  var EditHistoryDiffFormatter
   ;(function (i) {
     ;(i.Ack = "editHistoryDiffFormatter.ack"),
       (i.GetModelValueInRanges =
@@ -91,7 +91,7 @@ export function createGeneralConfig() {
         "editHistoryDiffFormatter.setEnableCppWhitespaceDiffHistoryMode"),
       (i.SetEnableCppIncludeUnchangedLines =
         "editHistoryDiffFormatter.setEnableCppIncludeUnchangedLines")
-  })(tv || (tv = {}))
+  })(EditHistoryDiffFormatter || (EditHistoryDiffFormatter = {}))
   var J1t
   ;(function (i) {
     i.GetExtHostInfo = "extHostInfo.getExtHostInfo"
@@ -244,7 +244,7 @@ export function createGeneralConfig() {
     o7,
     VEn,
     G1t,
-    tv,
+    EditHistoryDiffFormatter,
     J1t,
     GB,
     K1t,
