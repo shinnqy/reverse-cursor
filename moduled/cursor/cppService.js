@@ -277,37 +277,37 @@ export function createCppService(params) {
       z,
     ) {
       super(),
-        (this.gb = e),
-        (this.hb = t),
-        (this.ib = s),
-        (this.jb = n),
-        (this.kb = r),
-        (this.lb = o),
-        (this.mb = a),
-        (this.nb = l),
-        (this.ob = c),
-        (this.pb = h),
-        (this.qb = u),
-        (this.rb = d),
-        (this.sb = g),
-        (this.tb = p),
-        (this.ub = m),
-        (this.vb = b),
-        (this.wb = y),
-        (this.xb = w),
-        (this.yb = C),
-        (this.zb = S),
-        (this.Ab = x),
-        (this.Bb = k),
-        (this.Cb = E),
-        (this.Db = D), (this.everythingProviderService = D),
-        (this.Eb = P),
-        (this.Fb = L),
-        (this.Gb = A),
-        (this.Hb = F),
-        (this.Ib = H),
-        (this.Jb = B),
-        (this.Kb = z),
+        (this.gb = e), (this.codeEditorService = this.gb),
+        (this.hb = t), (this.reactiveStorageService = this.hb),
+        (this.ib = s), (this.textModelService = this.ib),
+        (this.jb = n), (this.aiFeatureStatusService = this.jb),
+        (this.kb = r), (this.commandService = this.kb),
+        (this.lb = o), (this.aiAssertService = this.lb),
+        (this.mb = a), (this.contextService = this.mb),
+        (this.nb = l), (this.authenticationService = this.nb),
+        (this.ob = c), (this.telemetryService = this.ob),
+        (this.pb = h), (this.productService = this.pd),
+        (this.qb = u), (this.cppEventLoggerService = this.qb),
+        (this.rb = d), (this.markerService = this.rb),
+        (this.sb = g), (this.instantiationService = this.sb),
+        (this.tb = p), (this.metricsService = this.tb),
+        (this.ub = m), (this.statusbarService = this.ub),
+        (this.vb = b), (this.diffingService = this.vb),
+        (this.wb = y), (this.cppTypeService = this.wb),
+        (this.xb = w), (this.ILanguageFeaturesService = this.xb),
+        (this.yb = C), (this.INotebookEditorWidgetService = this.yb),
+        (this.zb = S), (this.editorService = this.zb),
+        (this.Ab = x), (this.configurationService = this.Ab),
+        (this.Bb = k), (this.cursorPredictionService = this.Bb),
+        (this.Cb = E), (this.languageConfigurationService = this.Cb),
+        (this.Db = D), (this.everythingProviderService = this.Db),
+        (this.Eb = P), (this.viewsService = this.Eb),
+        (this.Fb = L), (this.cppBadHeuristics = this.Fb),
+        (this.Gb = A), (this.cppSuggestionService = this.Gb),
+        (this.Hb = F), (this.cursorCredsService = this.Hb),
+        (this.Ib = H), (this.importPredictionService = this.Ib),
+        (this.Jb = B), (this.environmentService = this.Jb),
+        (this.Kb = z), (this.selectedContextService = this.Kb),
         (this.h = 0),
         (this.pauseCppTriggeringUntilUnpaused_DANGEROUS_ONLY_SET_IF_YOU_KNOW_WHAT_YOU_ARE_DOING =
           false),
@@ -359,7 +359,7 @@ export function createCppService(params) {
                 }
                 this.fireCppSuggestionFromTrigger(Ee, ae, ll.ManualTrigger)
               } else
-                this.Bb.maybeUndoCursorPrediction({
+                this.cursorPredictionService.maybeUndoCursorPrediction({
                   event: se,
                   triggerCppCallback:
                     this.fireCppSuggestionFromTrigger.bind(this),
@@ -378,7 +378,7 @@ export function createCppService(params) {
             ) {
               if (this.Ob().cppAutoImportEnabled) {
                 const he = this.getFocusedCodeEditor()
-                if (he !== null && this.Ib.maybeAcceptShownImport(he)) {
+                if (he !== null && this.importPredictionService.maybeAcceptShownImport(he)) {
                   se.preventDefault(),
                     se.stopImmediatePropagation(),
                     se.stopPropagation()
@@ -397,7 +397,7 @@ export function createCppService(params) {
                 });
                 if (
                   he !== undefined &&
-                  !this.Bb.tabToLineBeforeAcceptingCpp(he.source)
+                  !this.cursorPredictionService.tabToLineBeforeAcceptingCpp(he.source)
                 )
                   (this.dontTriggerCppBecauseChangeIsFromCpp = true),
                     se.preventDefault(),
@@ -465,20 +465,20 @@ export function createCppService(params) {
                         Pe !== null &&
                           (this.cleanupAfterAcceptSuggestion(Pe, Ae),
                           this.Ob().cppAutoImportEnabled &&
-                            this.Ib.showCorrectUI(Pe))
+                            this.importPredictionService.showCorrectUI(Pe))
                       })
                       .catch((Pe) => {
                         console.error(Pe)
                       }),
                       this.ac()
                   } else
-                    this.Bb.maybeAcceptCursorPrediction({
+                    this.cursorPredictionService.maybeAcceptCursorPrediction({
                       event: se,
                       triggerCppCallback:
                         this.fireCppSuggestionFromTrigger.bind(this),
                     })
                 } else
-                  this.Bb.maybeAcceptCursorPrediction({
+                  this.cursorPredictionService.maybeAcceptCursorPrediction({
                     event: se,
                     triggerCppCallback:
                       this.fireCppSuggestionFromTrigger.bind(this),
@@ -497,9 +497,9 @@ export function createCppService(params) {
               he !== null && this.markEditAsRejected(he, false),
                 this.clearDecorationsSlowEnumeratesAllDecorations(),
                 this.rejectAndResetAllCppSuggestions(),
-                this.Bb.maybeShowHintLineWidget(),
-                this.Bb.updateHintLineWidgetMarginLeft(undefined),
-                he !== null && this.Ib.showCorrectUI(he)
+                this.cursorPredictionService.maybeShowHintLineWidget(),
+                this.cursorPredictionService.updateHintLineWidgetMarginLeft(undefined),
+                he !== null && this.importPredictionService.showCorrectUI(he)
             } else if (
               se.key === "Escape" &&
               se.ctrlKey === false &&
@@ -508,15 +508,15 @@ export function createCppService(params) {
             )
               if (this.Ob().cppAutoImportEnabled) {
                 const he = this.getFocusedCodeEditor()
-                he !== null && this.Ib.maybeRejectShownImport(he)
+                he !== null && this.importPredictionService.maybeRejectShownImport(he)
                   ? (se.preventDefault(),
                     se.stopImmediatePropagation(),
                     se.stopPropagation())
                   : this.Pb().cursorPrediction !== undefined &&
-                    this.Bb.clearCursorPrediction()
+                    this.cursorPredictionService.clearCursorPrediction()
               } else
                 this.Pb().cursorPrediction !== undefined &&
-                  this.Bb.clearCursorPrediction()
+                  this.cursorPredictionService.clearCursorPrediction()
           }
         }),
         (this.triggerCppOnLintErrorAbortControllers = new Map()),
@@ -653,7 +653,7 @@ export function createCppService(params) {
             this.getCurrentSuggestion() === undefined &&
             !(
               this.Ob().cppAutoImportEnabled &&
-              this.Ib.isShowingImportSuggestion()
+              this.importPredictionService.isShowingImportSuggestion()
             )
           ) {
             this.Vb(se),
@@ -666,7 +666,7 @@ export function createCppService(params) {
         this.getNewDebounceDurations()
       ;(this.Z = new R_n(K, Q, 1e3)),
         (this.fb = !this.Jb.isBuilt || this.Jb.isExtensionDevelopment),
-        this.Ib.registerCppMethods({
+        this.importPredictionService.registerCppMethods({
           getPartialCppRequest: this.getPartialCppRequest.bind(this),
           getModelName: this.getModelName.bind(this),
           getCurrentSuggestion: this.getCurrentSuggestion.bind(this),
@@ -947,7 +947,7 @@ export function createCppService(params) {
         t.appendChild(s)
       const o = document.createElement("div"),
         a = document.createElement("select"),
-        l = this.Bb.isCursorPredictionEnabled() ? "enabled" : "disabled"
+        l = this.cursorPredictionService.isCursorPredictionEnabled() ? "enabled" : "disabled"
       ;["enabled", "disabled"].forEach((u) => {
         const d = document.createElement("option")
         ;(d.value = u),
@@ -1166,7 +1166,7 @@ export function createCppService(params) {
       const e = this.gb.getActiveCodeEditor()
       if (!e) return false
       const t = e.getModel()
-      return t ? this.Bb.shouldTabInsteadOfAccepting(e, t) : false
+      return t ? this.cursorPredictionService.shouldTabInsteadOfAccepting(e, t) : false
     }
     shouldTabInsteadOfAccepting() {
       if (this.isInVimNonInsertMode()) return false
@@ -1403,7 +1403,7 @@ export function createCppService(params) {
                 this.usingFusedCursorPredictionModel() &&
                   ((this.eb = undefined),
                   (this.cb = undefined),
-                  this.Bb.clearCursorPrediction())
+                  this.cursorPredictionService.clearCursorPrediction())
                 const o = e.getModel()?.uri
                 if (
                   o === undefined ||
@@ -1458,7 +1458,7 @@ export function createCppService(params) {
                       d ||
                         (this.markEditAsRejected(e, false),
                         this.rejectAndResetAllCppSuggestions(),
-                        this.Bb.maybeShowHintLineWidget())
+                        this.cursorPredictionService.maybeShowHintLineWidget())
                   }
                   if (
                     !this.R.find(
@@ -1661,7 +1661,7 @@ export function createCppService(params) {
         (this.markEditAsRejected(editor, true),
         this.rejectAndResetAllCppSuggestions({ removeGreens: false, abortAll: shouldAbortAll }),
         (!this.Ob().cppAutoImportEnabled ||
-          !this.Ib.isShowingImportSuggestion()) &&
+          !this.importPredictionService.isShowingImportSuggestion()) &&
           this.allowCppTriggerInComments(editor))
       ) {
         const cachedSuggestion = this.N.popCacheHit(model)
@@ -1758,7 +1758,7 @@ export function createCppService(params) {
               ) {
                 if (
                   this.Ob().cppAutoImportEnabled &&
-                  (this.Ib.markFileAsUpdated(model.uri),
+                  (this.importPredictionService.markFileAsUpdated(model.uri),
                   contentChangeEvent.changes.length === 1 &&
                     contentChangeEvent.changes[0].text.length > 20 &&
                     contentChangeEvent.changes[0].text.length < 5e3)
@@ -1775,7 +1775,7 @@ export function createCppService(params) {
                           ? change.range.endColumn + lines[0].length
                           : lines[lines.length - 1].length,
                     }
-                  this.Ib.handleNewGreens(model, [range]),
+                  this.importPredictionService.handleNewGreens(model, [range]),
                     this.showNearLocationLintErrorsToImportPredictionService({
                       editor: editor,
                       uri: model.uri,
@@ -2012,7 +2012,7 @@ export function createCppService(params) {
       }
       if (
         (this.usingFusedCursorPredictionModel() &&
-          this.Bb.isShowingCursorPrediction(t) &&
+          this.cursorPredictionService.isShowingCursorPrediction(t) &&
           o !== ll.CursorPrediction &&
           o !== ll.LineChange) ||
         (!this.allowCppTriggerInComments(t, u) && o !== ll.CursorPrediction)
@@ -2301,7 +2301,7 @@ export function createCppService(params) {
       let a = this.filterLinterErrors(r, Ri.Warning).filter(
         (l) => Math.abs(l.startLineNumber - n.lineNumber) <= ddi,
       )
-      this.Ib.handleUpdatedLintErrors({
+      this.importPredictionService.handleUpdatedLintErrors({
         openEditor: e,
         uri: t,
         position: n,
@@ -2694,8 +2694,8 @@ export function createCppService(params) {
           Math.random().toString(36).substring(2, 15)),
         this.hb.setWorkspaceUserPersistentStorage("uniqueCppWorkspaceId", workspaceId)),
         source !== ll.CursorPrediction &&
-          !this.Bb.onlyTriggerOnCppAccept() &&
-          this.Bb.getAndShowNextPrediction({
+          !this.cursorPredictionService.onlyTriggerOnCppAccept() &&
+          this.cursorPredictionService.getAndShowNextPrediction({
             editor: editor,
             triggerCppCallback: this.fireCppSuggestionFromTrigger.bind(this),
             getLinterErrors:
@@ -2989,7 +2989,7 @@ export function createCppService(params) {
         this.y !== generationUUID ||
         this.getCurrentSuggestion() !== undefined ||
         model.getVersionId() !== modelVersionId ||
-        (this.Ob().cppAutoImportEnabled && this.Ib.isShowingImportSuggestion())
+        (this.Ob().cppAutoImportEnabled && this.importPredictionService.isShowingImportSuggestion())
           ? ((isSuggestionDisplayed = true),
             this.N.addSuggestion({ ...suggestion, abortController: abortController }, model, editor))
           : (this.Vb(suggestion), (isSuggestionDisplayed = this.displayCppSuggestion(editor, model, suggestion))),
@@ -3395,7 +3395,7 @@ export function createCppService(params) {
           ? this.qb.recordCppSuggestionEvent(model, updatedSuggestion, recoverableData)
           : this.qb.recordCppSuggestionEvent(model, decoratedSuggestion, recoverableData),
         (this.z = recoverableData.requestId),
-        this.Ob().cppAutoImportEnabled && this.Ib.showCorrectUI(editor),
+        this.Ob().cppAutoImportEnabled && this.importPredictionService.showCorrectUI(editor),
         true
       )
     }
@@ -3408,7 +3408,7 @@ export function createCppService(params) {
       const { greenRanges: greenRanges } = OFt(diffs, suggestionRange, "post-change")
       this.getCurrentSuggestion() &&
         (this.updateSuggestionStateHalfSilently({ greens: greenRanges }),
-        this.Ob().cppAutoImportEnabled && this.Ib.handleNewGreens(editorModel, greenRanges),
+        this.Ob().cppAutoImportEnabled && this.importPredictionService.handleNewGreens(editorModel, greenRanges),
         shouldUpdateUI &&
           ((this.didShowGreenHighlights = true),
           (this.decIdsThatAreNotInReactiveStorage.green = editorModel.deltaDecorations(
@@ -3651,7 +3651,7 @@ export function createCppService(params) {
         oa("[fusedCursorPrediction] Could not resolve predicted file path")
         return
       }
-      const a = await this.Bb.getMultifileCursorPredictionEditor(o)
+      const a = await this.cursorPredictionService.getMultifileCursorPredictionEditor(o)
       if (!a) {
         oa("[fusedCursorPrediction] Could not get editor for predicted file")
         return
@@ -3673,7 +3673,7 @@ export function createCppService(params) {
       )
         return
       const d = fusedCursorPrediction.shouldRetriggerCpp && n !== r
-      await this.Bb.manuallyCreateCursorPrediction({
+      await this.cursorPredictionService.manuallyCreateCursorPrediction({
         _predictionId_for_log,
         _fusedCursorPrediction: fusedCursorPrediction,
         editor: a,
@@ -3737,7 +3737,7 @@ export function createCppService(params) {
             return
           }
         }
-        if (this.Bb.isCursorPredictionEnabled()) {
+        if (this.cursorPredictionService.isCursorPredictionEnabled()) {
           visibleSuggestion.fusedCursorPredictionId &&
             this.displayFusedCursorPredictionIfAvailable(
               editor,
@@ -3758,7 +3758,7 @@ export function createCppService(params) {
             : undefined
           this.lastProcessedModel?.modelVersion === model.getVersionId() && this.lastProcessedModel?.modelId === model.id
             ? ((this.pendingSuggestion = { fire: false, acceptedRange: undefined }),
-              this.Bb.getAndShowNextPrediction({
+              this.cursorPredictionService.getAndShowNextPrediction({
                 editor,
                 triggerCppCallback:
                   this.fireCppSuggestionFromTrigger.bind(this),
@@ -3768,7 +3768,7 @@ export function createCppService(params) {
                 cppSuggestionRange: suggestionRange,
               }))
             : (this.pendingSuggestion = { fire: true, acceptedRange: suggestionRange })
-        } else this.Bb.periodicallyReloadCursorPredictionConfig(false)
+        } else this.cursorPredictionService.periodicallyReloadCursorPredictionConfig(false)
       }
     }
     displayFusedCursorPredictionIfAvailable(e, t, fusedCursorPredictionId, n, r) {
@@ -3938,7 +3938,7 @@ export function createCppService(params) {
         throw new Error("Format Diff History not registered in extension host")
       ;(this.lastProcessedModel = { modelVersion: model.getVersionId(), modelId: model.id }),
         this.pendingSuggestion.fire === true &&
-          (this.Bb.getAndShowNextPrediction({
+          (this.cursorPredictionService.getAndShowNextPrediction({
             editor: editor,
             triggerCppCallback: this.fireCppSuggestionFromTrigger.bind(this),
             getLinterErrors:
@@ -4053,7 +4053,7 @@ export function createCppService(params) {
       Date.now() - this.h > 1e3 * 60 &&
         (await this.loadCppConfigIncludingHandlingProAccess(),
         this.Z.setDebouncingDurations(this.getNewDebounceDurations()),
-        this.Ib.handleNewImportPredictionConfig())
+        this.importPredictionService.handleNewImportPredictionConfig())
     }
     async loadCppConfigIncludingHandlingProAccess() {
       ;(this.h = Date.now()), await this.keepCppModelStateUpdated()
