@@ -277,37 +277,37 @@ export function createCppService(params) {
       z,
     ) {
       super(),
-        (this.gb = e),
-        (this.hb = t),
-        (this.ib = s),
-        (this.jb = n),
-        (this.kb = r),
-        (this.lb = o),
-        (this.mb = a),
-        (this.nb = l),
-        (this.ob = c),
-        (this.pb = h),
-        (this.qb = u),
-        (this.rb = d),
-        (this.sb = g),
-        (this.tb = p),
-        (this.ub = m),
-        (this.vb = b),
-        (this.wb = y),
-        (this.xb = w),
-        (this.yb = C),
-        (this.zb = S),
-        (this.Ab = x),
+        (this.gb = e), (this.codeEditorService = this.gb),
+        (this.hb = t), (this.reactiveStorageService = this.hb),
+        (this.ib = s), (this.textModelService = this.ib),
+        (this.jb = n), (this.aiFeatureStatusService = this.jb),
+        (this.kb = r), (this.commandService = this.kb),
+        (this.lb = o), (this.aiAssertService = this.lb),
+        (this.mb = a), (this.contextService = this.mb),
+        (this.nb = l), (this.authenticationService = this.nb),
+        (this.ob = c), (this.telemetryService = this.ob),
+        (this.pb = h), (this.productService = this.pd),
+        (this.qb = u), (this.cppEventLoggerService = this.qb),
+        (this.rb = d), (this.markerService = this.rb),
+        (this.sb = g), (this.instantiationService = this.sb),
+        (this.tb = p), (this.metricsService = this.tb),
+        (this.ub = m), (this.statusbarService = this.ub),
+        (this.vb = b), (this.diffingService = this.vb),
+        (this.wb = y), (this.cppTypeService = this.wb),
+        (this.xb = w), (this.ILanguageFeaturesService = this.xb),
+        (this.yb = C), (this.INotebookEditorWidgetService = this.yb),
+        (this.zb = S), (this.editorService = this.zb),
+        (this.Ab = x), (this.configurationService = this.Ab),
         (this.Bb = k), (this.cursorPredictionService = this.Bb),
-        (this.Cb = E),
+        (this.Cb = E), (this.languageConfigurationService = this.Cb),
         (this.Db = D), (this.everythingProviderService = this.Db),
-        (this.Eb = P),
-        (this.Fb = L),
-        (this.Gb = A),
-        (this.Hb = F),
-        (this.Ib = H),
-        (this.Jb = B),
-        (this.Kb = z),
+        (this.Eb = P), (this.viewsService = this.Eb),
+        (this.Fb = L), (this.cppBadHeuristics = this.Fb),
+        (this.Gb = A), (this.cppSuggestionService = this.Gb),
+        (this.Hb = F), (this.cursorCredsService = this.Hb),
+        (this.Ib = H), (this.importPredictionService = this.Ib),
+        (this.Jb = B), (this.environmentService = this.Jb),
+        (this.Kb = z), (this.selectedContextService = this.Kb),
         (this.h = 0),
         (this.pauseCppTriggeringUntilUnpaused_DANGEROUS_ONLY_SET_IF_YOU_KNOW_WHAT_YOU_ARE_DOING =
           false),
@@ -378,7 +378,7 @@ export function createCppService(params) {
             ) {
               if (this.Ob().cppAutoImportEnabled) {
                 const he = this.getFocusedCodeEditor()
-                if (he !== null && this.Ib.maybeAcceptShownImport(he)) {
+                if (he !== null && this.importPredictionService.maybeAcceptShownImport(he)) {
                   se.preventDefault(),
                     se.stopImmediatePropagation(),
                     se.stopPropagation()
@@ -465,7 +465,7 @@ export function createCppService(params) {
                         Pe !== null &&
                           (this.cleanupAfterAcceptSuggestion(Pe, Ae),
                           this.Ob().cppAutoImportEnabled &&
-                            this.Ib.showCorrectUI(Pe))
+                            this.importPredictionService.showCorrectUI(Pe))
                       })
                       .catch((Pe) => {
                         console.error(Pe)
@@ -499,7 +499,7 @@ export function createCppService(params) {
                 this.rejectAndResetAllCppSuggestions(),
                 this.cursorPredictionService.maybeShowHintLineWidget(),
                 this.cursorPredictionService.updateHintLineWidgetMarginLeft(undefined),
-                he !== null && this.Ib.showCorrectUI(he)
+                he !== null && this.importPredictionService.showCorrectUI(he)
             } else if (
               se.key === "Escape" &&
               se.ctrlKey === false &&
@@ -508,7 +508,7 @@ export function createCppService(params) {
             )
               if (this.Ob().cppAutoImportEnabled) {
                 const he = this.getFocusedCodeEditor()
-                he !== null && this.Ib.maybeRejectShownImport(he)
+                he !== null && this.importPredictionService.maybeRejectShownImport(he)
                   ? (se.preventDefault(),
                     se.stopImmediatePropagation(),
                     se.stopPropagation())
@@ -653,7 +653,7 @@ export function createCppService(params) {
             this.getCurrentSuggestion() === undefined &&
             !(
               this.Ob().cppAutoImportEnabled &&
-              this.Ib.isShowingImportSuggestion()
+              this.importPredictionService.isShowingImportSuggestion()
             )
           ) {
             this.Vb(se),
@@ -666,7 +666,7 @@ export function createCppService(params) {
         this.getNewDebounceDurations()
       ;(this.Z = new R_n(K, Q, 1e3)),
         (this.fb = !this.Jb.isBuilt || this.Jb.isExtensionDevelopment),
-        this.Ib.registerCppMethods({
+        this.importPredictionService.registerCppMethods({
           getPartialCppRequest: this.getPartialCppRequest.bind(this),
           getModelName: this.getModelName.bind(this),
           getCurrentSuggestion: this.getCurrentSuggestion.bind(this),
@@ -1661,7 +1661,7 @@ export function createCppService(params) {
         (this.markEditAsRejected(editor, true),
         this.rejectAndResetAllCppSuggestions({ removeGreens: false, abortAll: shouldAbortAll }),
         (!this.Ob().cppAutoImportEnabled ||
-          !this.Ib.isShowingImportSuggestion()) &&
+          !this.importPredictionService.isShowingImportSuggestion()) &&
           this.allowCppTriggerInComments(editor))
       ) {
         const cachedSuggestion = this.N.popCacheHit(model)
@@ -1758,7 +1758,7 @@ export function createCppService(params) {
               ) {
                 if (
                   this.Ob().cppAutoImportEnabled &&
-                  (this.Ib.markFileAsUpdated(model.uri),
+                  (this.importPredictionService.markFileAsUpdated(model.uri),
                   contentChangeEvent.changes.length === 1 &&
                     contentChangeEvent.changes[0].text.length > 20 &&
                     contentChangeEvent.changes[0].text.length < 5e3)
@@ -1775,7 +1775,7 @@ export function createCppService(params) {
                           ? change.range.endColumn + lines[0].length
                           : lines[lines.length - 1].length,
                     }
-                  this.Ib.handleNewGreens(model, [range]),
+                  this.importPredictionService.handleNewGreens(model, [range]),
                     this.showNearLocationLintErrorsToImportPredictionService({
                       editor: editor,
                       uri: model.uri,
@@ -2301,7 +2301,7 @@ export function createCppService(params) {
       let a = this.filterLinterErrors(r, Ri.Warning).filter(
         (l) => Math.abs(l.startLineNumber - n.lineNumber) <= ddi,
       )
-      this.Ib.handleUpdatedLintErrors({
+      this.importPredictionService.handleUpdatedLintErrors({
         openEditor: e,
         uri: t,
         position: n,
@@ -2989,7 +2989,7 @@ export function createCppService(params) {
         this.y !== generationUUID ||
         this.getCurrentSuggestion() !== undefined ||
         model.getVersionId() !== modelVersionId ||
-        (this.Ob().cppAutoImportEnabled && this.Ib.isShowingImportSuggestion())
+        (this.Ob().cppAutoImportEnabled && this.importPredictionService.isShowingImportSuggestion())
           ? ((isSuggestionDisplayed = true),
             this.N.addSuggestion({ ...suggestion, abortController: abortController }, model, editor))
           : (this.Vb(suggestion), (isSuggestionDisplayed = this.displayCppSuggestion(editor, model, suggestion))),
@@ -3395,7 +3395,7 @@ export function createCppService(params) {
           ? this.qb.recordCppSuggestionEvent(model, updatedSuggestion, recoverableData)
           : this.qb.recordCppSuggestionEvent(model, decoratedSuggestion, recoverableData),
         (this.z = recoverableData.requestId),
-        this.Ob().cppAutoImportEnabled && this.Ib.showCorrectUI(editor),
+        this.Ob().cppAutoImportEnabled && this.importPredictionService.showCorrectUI(editor),
         true
       )
     }
@@ -3408,7 +3408,7 @@ export function createCppService(params) {
       const { greenRanges: greenRanges } = OFt(diffs, suggestionRange, "post-change")
       this.getCurrentSuggestion() &&
         (this.updateSuggestionStateHalfSilently({ greens: greenRanges }),
-        this.Ob().cppAutoImportEnabled && this.Ib.handleNewGreens(editorModel, greenRanges),
+        this.Ob().cppAutoImportEnabled && this.importPredictionService.handleNewGreens(editorModel, greenRanges),
         shouldUpdateUI &&
           ((this.didShowGreenHighlights = true),
           (this.decIdsThatAreNotInReactiveStorage.green = editorModel.deltaDecorations(
@@ -4053,7 +4053,7 @@ export function createCppService(params) {
       Date.now() - this.h > 1e3 * 60 &&
         (await this.loadCppConfigIncludingHandlingProAccess(),
         this.Z.setDebouncingDurations(this.getNewDebounceDurations()),
-        this.Ib.handleNewImportPredictionConfig())
+        this.importPredictionService.handleNewImportPredictionConfig())
     }
     async loadCppConfigIncludingHandlingProAccess() {
       ;(this.h = Date.now()), await this.keepCppModelStateUpdated()
