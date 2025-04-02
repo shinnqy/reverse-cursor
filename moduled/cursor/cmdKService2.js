@@ -1,7 +1,7 @@
 // @ts-check
 
 export function createCmdKService2(params) {
-  const { Re, V, wn, rt, bt, nLt, SN, am, mae, cb, Es, JC, A$, DVe, Ui, G, Foe, _Ui, s$i, n$i, Q7, dP, o$i, __decorate, __param, Br, eg, T1, A_, it, ft, hv, yi, mo, oy, Sk, ei, ece, fP, Md, Ll, st, Xt, zi, xYe, Lg, NI, kp, Ve } = params;
+  const { Re, V, wn, rt, bt, nLt, SN, am, mae, cb, Es, JC, A$, DVe, Ui, G, Foe, _Ui, s$i, n$i, Q7, dP, o$i, __decorate, __param, Br, eg, T1, A_, it, ft, hv, yi, mo, oy, Sk, ei, ece, fP, Md, Ll, st, Xt, zi, xYe, Lg, NI, everythingProviderService, Ve } = params;
 
   var ZR = Re("cmdKService2")
   function bKi(i) {
@@ -1277,7 +1277,7 @@ export function createCmdKService2(params) {
       __param(19, xYe),
       __param(20, Lg),
       __param(21, NI),
-      __param(22, kp),
+      __param(22, everythingProviderService),
     ],
     TFt,
   )),

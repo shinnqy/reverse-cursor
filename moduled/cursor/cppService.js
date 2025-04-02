@@ -294,7 +294,7 @@ export function createCppService(params) {
         (this.Ab = x),
         (this.Bb = k),
         (this.Cb = E),
-        (this.Db = D),
+        (this.Db = D), (this.everythingProviderService = D),
         (this.Eb = P),
         (this.Fb = L),
         (this.Gb = A),
@@ -1246,7 +1246,7 @@ export function createCppService(params) {
         null,
       )
       for (const h of c)
-        this.Db.onlyLocalProvider?.runCommand(tv.RecordRejectedEdit, {
+        this.everythingProviderService.onlyLocalProvider?.runCommand(tv.RecordRejectedEdit, {
           relativePath: a,
           modelValue: h,
           onlySoftRejected: t,
@@ -1265,7 +1265,7 @@ export function createCppService(params) {
       let e = 0
       for (
         ;
-        (await this.Db.onlyLocalProvider?.runCommand(tv.Ack, null)) !== true &&
+        (await this.everythingProviderService.onlyLocalProvider?.runCommand(tv.Ack, null)) !== true &&
         e < 1e3;
 
       )
@@ -1699,7 +1699,7 @@ export function createCppService(params) {
       }
       const s = this.mb.asRelativePath(t?.uri ?? U.file(""))
       if (
-        (await this.Db.onlyLocalProvider?.runCommand(tv.GetModelValue, {
+        (await this.everythingProviderService.onlyLocalProvider?.runCommand(tv.GetModelValue, {
           relativePath: s,
         })) === undefined
       ) {
@@ -1710,7 +1710,7 @@ export function createCppService(params) {
           h !== null && (l = h.cellValues.join(c))
         } else l = t.getValue()
         l !== undefined &&
-          (await this.Db.onlyLocalProvider?.runCommand(tv.InitModel, {
+          (await this.everythingProviderService.onlyLocalProvider?.runCommand(tv.InitModel, {
             relativePath: s,
             currentModelValue: l,
             modelVersion: t.getVersionId(),
@@ -2314,7 +2314,7 @@ export function createCppService(params) {
         : this.getGlobalDiffTrajectories()
     }
     async getGlobalDiffTrajectories() {
-      return await this.Db.onlyLocalProvider?.runCommand(
+      return await this.everythingProviderService.onlyLocalProvider?.runCommand(
         tv.CompileGlobalDiffTrajectories,
         {},
       )
@@ -2647,7 +2647,7 @@ export function createCppService(params) {
         )
       this.fastPeriodicallyReloadCppConfig()
       const shouldRelyOnFileSync =
-          (await this.Db.onlyLocalProvider?.runCommand(
+          (await this.everythingProviderService.onlyLocalProvider?.runCommand(
             GB.ShouldRelyOnFileSyncForFile,
             {
               relativeWorkspacePath: this.mb.asRelativePath(uri),
@@ -3918,7 +3918,7 @@ export function createCppService(params) {
     }
     async formatDiffHistory(e, t, s, n) {
       if (s.getValueLength() > hdi || s.isDisposed()) return
-      const r = await this.Db.onlyLocalProvider?.runCommand(
+      const r = await this.everythingProviderService.onlyLocalProvider?.runCommand(
         tv.FormatDiffHistory,
         {
           uri: s.uri.toString(),
@@ -4070,11 +4070,11 @@ export function createCppService(params) {
         m2i(this.nb.membershipType()) === false &&
         this.hb.setNonPersistentStorage("showingCppUpsell", true),
         this.hb.setApplicationUserPersistentStorage("cppConfig", e),
-        this.Db.onlyLocalProvider?.runCommand(
+        this.everythingProviderService.onlyLocalProvider?.runCommand(
           tv.SetEnableCppWhitespaceDiffHistoryMode,
           { enabled: e.useWhitespaceDiffHistory },
         ),
-        this.Db.onlyLocalProvider?.runCommand(
+        this.everythingProviderService.onlyLocalProvider?.runCommand(
           tv.SetEnableCppIncludeUnchangedLines,
           { enabled: e.includeUnchangedLines },
         ),

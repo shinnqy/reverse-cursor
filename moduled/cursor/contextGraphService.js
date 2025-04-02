@@ -1,7 +1,7 @@
 // @ts-check
 
 export function createContextGraphService(params) {
-  const { Re, V, Ui, mG, U, tPt, VS, ge, __decorate, __param, ei, kp, it, yi, si, ve, Lg, YC, Xt, Ci, nt, tg, Ve, } = params;
+  const { Re, V, Ui, mG, U, tPt, VS, ge, __decorate, __param, ei, everythingProviderService, it, yi, si, ve, Lg, YC, Xt, Ci, nt, tg, Ve, } = params;
 
   var NUi = 5,
     yze = 100,
@@ -215,7 +215,7 @@ export function createContextGraphService(params) {
     __decorate(
       [
         __param(0, ei),
-        __param(1, kp),
+        __param(1, everythingProviderService),
         __param(2, it),
         __param(3, yi),
         __param(4, si),
