@@ -2,7 +2,7 @@
 
 // 240224
 export function createAIProjectService(params) {
-  const {v, _, zr, K9, D$, Re, V, wn, Ka, ho, dc, TR, rt, n6n, __decorate, __param, $h, CR, ei, eg, g2, p0, Br, cv, Ti, Ve } = params;
+  const {v, _, zr, K9, D$, Re, V, wn, Ka, ho, dc, TR, rt, n6n, __decorate, __param, $h, cursorCredsService, ei, eg, g2, p0, Br, cv, Ti, Ve } = params;
 
   var _g
   ;(function (i) {
@@ -2111,7 +2111,7 @@ export function createAIProjectService(params) {
   ;(NFt = __decorate(
     [
       __param(0, $h),
-      __param(1, CR),
+      __param(1, cursorCredsService),
       __param(2, ei),
       __param(3, eg),
       __param(4, g2),

@@ -2,10 +2,10 @@
 
 // 245900
 export function createAIServiceSet(params) {
-  const {Re, V, Ve, __decorate, CYe, __param, _, bt, mUe, ms, U, IMi, ue, it, Ls, fr, yo, Yt, va, rt, ys, J, Es, GJ, nm, Ze, Y1t, OP, Qc, Ri, gVe, _B, pVe, _n, Lg, Xt, everythingProviderService, st, Ci, hw, ei, xp, oy, ve, si, mo, nt, $h, x5, EKn, xFt, fz, G, yi, nl, Z, ize, wn, Va, N1, SN, am, Br, fn, v, Qm, Tgn, gt, fu, Me, ce, oi, Ti, CR, T1, le, co, R, cF, vm, ns, V1t, y$i, M_, jB, fs, v$i, mVe, tK, Md, tg, Wr, Xn, Vu, ss, Ioe, UE, PSt, ls, jt, Mae, Ha, dC, $I, ev, _T, N$, s9e, bn, BMi, hk, iG, L1, Zc, FMi, HC, QWe, uNn, __addDisposableResource, gl, __disposeResources, JJ, lG, wVe, wJi, eoe, j9i, J9, Qb, At, Na, g2, Ll, lU, tqe, op, oTi, wf, et, DEt, $Bi, FBi, yNn, gNn, $ae, bNn, RBi, SNn, wNn, FT, un, Sg, Toe, WB, rc, ft, zi, Zi, mI, Cp, YC, Y$, hv, a7, KNi, pt, bi, B_, eg, An, lb, fP, Pa, Ft, Hi, Sk, ZR, qi, Fo, R1, Pt, Ks, gze, ZUi, rU, Ag, uP, cv, Oc, uc, jM, UUi, HUi, Ht, cppService, es, ua, lv, u0, cl, Vo, wYe, bY, Ac, pKi, NI, p0, Gi, ko, Wi, SKi, uEt, Ce, Vr, H4i, pFt, qv, cursorPredictionService, nPt, importPredictionService, _c, g0, m2, c5, yYe, dEt, Qi, yc, DR, ZJ, fEt, Tk, Ck, _C, f5, vk, Pl, Xp, RHe, jIi, I, Ct } = params;
+  const {Re, V, Ve, __decorate, CYe, __param, _, bt, mUe, ms, U, IMi, ue, it, Ls, fr, yo, Yt, va, rt, ys, J, Es, GJ, nm, Ze, Y1t, OP, Qc, Ri, gVe, _B, pVe, _n, Lg, Xt, everythingProviderService, st, Ci, hw, ei, aiFeatureStatusService, oy, ve, si, mo, nt, $h, x5, EKn, xFt, fz, G, yi, nl, Z, ize, wn, Va, N1, SN, am, Br, fn, v, Qm, Tgn, gt, fu, Me, ce, oi, Ti, cursorCredsService, T1, le, co, R, cF, vm, ns, V1t, y$i, M_, jB, fs, v$i, mVe, tK, Md, selectedContextService, Wr, Xn, Vu, ss, Ioe, UE, PSt, ls, jt, Mae, Ha, dC, $I, ev, _T, N$, s9e, bn, BMi, hk, iG, L1, Zc, FMi, HC, QWe, uNn, __addDisposableResource, gl, __disposeResources, JJ, lG, wVe, wJi, eoe, j9i, J9, Qb, At, Na, g2, Ll, lU, tqe, op, oTi, wf, et, DEt, $Bi, FBi, yNn, gNn, $ae, bNn, RBi, SNn, wNn, FT, un, Sg, Toe, WB, rc, ft, zi, Zi, mI, Cp, YC, Y$, cppEventLoggerService, a7, KNi, pt, bi, B_, eg, An, lb, fP, Pa, Ft, Hi, Sk, ZR, qi, Fo, R1, Pt, Ks, gze, ZUi, rU, Ag, uP, cv, Oc, uc, jM, UUi, HUi, Ht, cppService, es, ua, lv, u0, cl, Vo, wYe, bY, Ac, pKi, NI, p0, Gi, ko, Wi, SKi, uEt, Ce, Vr, H4i, pFt, qv, cursorPredictionService, nPt, importPredictionService, _c, g0, m2, c5, yYe, dEt, Qi, yc, DR, ZJ, fEt, Tk, Ck, _C, f5, vk, Pl, Xp, RHe, jIi, I, Ct } = params;
 
   var vY = Re("interpreterService"),
-    kH = Re("metricsService"),
+    metricsService = Re("metricsService"),
     QKn = class extends V {
       constructor() {
         super(),
@@ -64,8 +64,8 @@ export function createAIServiceSet(params) {
         this.a = void 0
       }
     }
-  Ve(kH, QKn, 1)
-  var lue = Re("diffingService"),
+  Ve(metricsService, QKn, 1)
+  var diffingService = Re("diffingService"),
     ZKn = class extends V {
       constructor() {
         super(), (this.a = void 0)
@@ -88,7 +88,7 @@ export function createAIServiceSet(params) {
         this.a = void 0
       }
     }
-  Ve(lue, ZKn, 1)
+  Ve(diffingService, ZKn, 1)
   var hF = new Map()
   function RFt() {
     const i = document.createElement("div")
@@ -1297,7 +1297,7 @@ export function createAIServiceSet(params) {
       __param(5, Ci),
       __param(6, hw),
       __param(7, ei),
-      __param(8, xp),
+      __param(8, aiFeatureStatusService),
       __param(9, oy),
       __param(10, ve),
       __param(11, si),
@@ -1899,7 +1899,7 @@ export function createAIServiceSet(params) {
         return e === null ? "" : this.n.getValueInRange(e)
       }
     }
-  BFt = __decorate([__param(4, lue), __param(5, yi), __param(6, nl)], BFt)
+  BFt = __decorate([__param(4, diffingService), __param(5, yi), __param(6, nl)], BFt)
   var _Ft = Re("tokenStreamingDiffService"),
     UFt = class extends V {
       constructor(e) {
@@ -2409,7 +2409,7 @@ export function createAIServiceSet(params) {
       __param(3, si),
       __param(4, it),
       __param(5, ve),
-      __param(6, CR),
+      __param(6, cursorCredsService),
       __param(7, T1),
       __param(8, Z),
     ],
@@ -3670,8 +3670,8 @@ export function createAIServiceSet(params) {
       __param(3, Xt),
       __param(4, Br),
       __param(5, Md),
-      __param(6, tg),
-      __param(7, xp),
+      __param(6, selectedContextService),
+      __param(7, aiFeatureStatusService),
     ],
     ZFt,
   )),
@@ -6511,12 +6511,12 @@ export function createAIServiceSet(params) {
         __param(6, everythingProviderService),
         __param(7, Md),
         __param(8, tK),
-        __param(9, tg),
+        __param(9, selectedContextService),
         __param(10, ei),
         __param(11, Xt),
         __param(12, g2),
         __param(13, Ll),
-        __param(14, xp),
+        __param(14, aiFeatureStatusService),
         __param(15, Z),
         __param(16, st),
         __param(17, lU),
@@ -7233,9 +7233,9 @@ export function createAIServiceSet(params) {
       __param(11, it),
       __param(12, yi),
       __param(13, mo),
-      __param(14, tg),
+      __param(14, selectedContextService),
       __param(15, Y$),
-      __param(16, hv),
+      __param(16, cppEventLoggerService),
     ],
     nOt,
   )),
@@ -7605,7 +7605,7 @@ export function createAIServiceSet(params) {
       editorGroupService: si,
       dialogService: Zi,
       fileService: nt,
-      aiFeatureStatusService: xp,
+      aiFeatureStatusService: aiFeatureStatusService,
       webCmdKService: HFt,
       workspacesService: lb,
       instantiationService: Z,
@@ -7642,9 +7642,9 @@ export function createAIServiceSet(params) {
       codeEditorService: yi,
       magicLinkService: Ag,
       urlService: uP,
-      cursorCredsService: CR,
+      cursorCredsService: cursorCredsService,
       applyToFileActionsService: kYe,
-      metricsService: kH,
+      metricsService: metricsService,
       telemetryService: ft,
       chatDataService: cv,
       extensionGalleryService: Oc,
@@ -7684,7 +7684,7 @@ export function createAIServiceSet(params) {
       gitContextService: YC,
       contextKeyService: Ce,
       environmentService: Vr,
-      diffingService: lue,
+      diffingService: diffingService,
       aiPreviewService: H4i,
       aiReaderService: hue,
       everythingProviderService: everythingProviderService,
@@ -7712,7 +7712,7 @@ export function createAIServiceSet(params) {
       paneCompositeService: yc,
       notepadDataService: DR,
       notepadService: ZJ,
-      selectedContextService: tg,
+      selectedContextService: selectedContextService,
       terminalExecutionService: wY,
       quickInputService2: fEt,
       decorationsService: Tk,
@@ -7800,8 +7800,8 @@ export function createAIServiceSet(params) {
 
   return {
     vY,
-    kH,
-    lue,
+    metricsService,
+    diffingService,
     hF,
     RFt,
     yY,

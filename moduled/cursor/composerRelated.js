@@ -2,7 +2,7 @@
 
 // 171883
 export function createComposerRelated(params) {
-  const { cm, ro, D7, Dg, m0, rt, yI, HC, fs, bn, CBi, K$, xR, JJ, r6n, ls, tce, U, yBi, wBi, IBi, op, Re, __decorate, __param, Ti, Ht, Ve, V, et, ei, Gon, Mae, D4i, wt, aU, $I, ys, bs, jt, At, Z, everythingProviderService, tK, M_, it, nt, Xt, tg, vk } = params;
+  const { cm, ro, D7, Dg, m0, rt, yI, HC, fs, bn, CBi, K$, xR, JJ, r6n, ls, tce, U, yBi, wBi, IBi, op, Re, __decorate, __param, Ti, Ht, Ve, V, et, ei, Gon, Mae, D4i, wt, aU, $I, ys, bs, jt, At, Z, everythingProviderService, tK, M_, it, nt, Xt, selectedContextService, vk } = params;
 
   function H8n(i) {
     if (i.type !== "user") return
@@ -557,14 +557,14 @@ export function createComposerRelated(params) {
   function J8n(i) {
     return op(i)
   }
-  var cU = Re("aiAssertService"),
+  var aiAssertService = Re("aiAssertService"),
     lLt = class {
       constructor(e, t) {
         ;(this.a = e), (this.b = t), (this.c = new Set())
       }
       assert(e, t, s) {}
     }
-  ;(lLt = __decorate([__param(0, Ti), __param(1, Ht)], lLt)), Ve(cU, lLt, 1)
+  ;(lLt = __decorate([__param(0, Ti), __param(1, Ht)], lLt)), Ve(aiAssertService, lLt, 1)
   function K8n(i, e, t) {
     return i.createInstance(cLt, e, t)
   }
@@ -707,7 +707,7 @@ export function createComposerRelated(params) {
       return this.loadedComposers.map((e) => e.data.composerId)
     }
   }
-  cLt = __decorate([__param(2, et), __param(3, cU), __param(4, ei)], cLt)
+  cLt = __decorate([__param(2, et), __param(3, aiAssertService), __param(4, ei)], cLt)
   var sce = class Qgi extends V {
       constructor(e, t, s, n = !1) {
         super(),
@@ -2416,7 +2416,7 @@ export function createComposerRelated(params) {
           __param(6, M_),
           __param(7, nt),
           __param(8, Xt),
-          __param(9, tg),
+          __param(9, selectedContextService),
           __param(10, vk),
         ],
         or,
@@ -2425,7 +2425,7 @@ export function createComposerRelated(params) {
 
   return {
     $Ui,
-    cU,
+    aiAssertService,
     Na,
   }
 }

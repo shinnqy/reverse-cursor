@@ -3,7 +3,7 @@
 // gdi,Bgo,df,Mve,$go,_go,Gdt,Fgo,Ugo
 
 export function createCursorPredictionService(params) {
-  const {V, fu, Va, k3t, ge, ss, Le, ll, ys, ce, Ho, Qm, wf, CUe, EditHistoryDiffFormatter, rt, Me, GB, cG, QN, L$i, N$i, Pn, Cg, EYe, q, W, __decorate, __param, Ve, Pt: themeService, ue: configurationService, ie, ei, $, Re, xfe: SUGGESTION_OPTS, Rh, U, G, pu, Qn, aLt, ue, Z, nt, ve, si, Xt, Hi, qi, Nh, cursorPredictionService, it, mo, kH, jdt, everythingProviderService, yi, cl, hv, Ci } = params;
+  const {V, fu, Va, k3t, ge, ss, Le, ll, ys, ce, Ho, Qm, wf, CUe, EditHistoryDiffFormatter, rt, Me, GB, cG, QN, L$i, N$i, Pn, Cg, EYe, q, W, __decorate, __param, Ve, Pt: themeService, ue: configurationService, ie, ei, $, Re, xfe: SUGGESTION_OPTS, Rh, U, G, pu, Qn, aLt, ue, Z, nt, ve, si, Xt, Hi, qi, Nh, cursorPredictionService, it, mo, metricsService, cppTypeService, everythingProviderService, yi, cl, cppEventLoggerService, Ci } = params;
   ////////
 
   var gdi = class extends V {
@@ -1213,13 +1213,13 @@ export function createCursorPredictionService(params) {
       __param(1, it),
       __param(2, mo),
       __param(3, Z),
-      __param(4, kH),
-      __param(5, jdt),
+      __param(4, metricsService),
+      __param(5, cppTypeService),
       __param(6, everythingProviderService),
       __param(7, yi),
       __param(8, Xt),
       __param(9, cl),
-      __param(10, hv),
+      __param(10, cppEventLoggerService),
       __param(11, t$s),
       __param(12, nt),
       __param(13, Ci),

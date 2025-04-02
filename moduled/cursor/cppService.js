@@ -618,7 +618,7 @@ export function createCppService(params) {
               this.loadCppConfigIncludingHandlingProAccess(),
               this.updateStatusBarElement()
             const he = performance.now()
-            this.tb.distribution({ stat: "cppclient.reload", value: he - se })
+            this.metricsService.distribution({ stat: "cppclient.reload", value: he - se })
           },
         }),
         this.c.onChangeEffect({
@@ -773,10 +773,10 @@ export function createCppService(params) {
           true,
         )
       const e = this.nb.isAuthenticated()
-      await this.jb.maybeRefreshFeatureStatus("cppExistingUserMarketingPopup"),
+      await this.aiFeatureStatusService.maybeRefreshFeatureStatus("cppExistingUserMarketingPopup"),
         e &&
           this.Ob().shouldNotTryToGetThemToNoticeCpp !== true &&
-          this.jb.getCachedFeatureStatus("cppExistingUserMarketingPopup") ===
+          this.aiFeatureStatusService.getCachedFeatureStatus("cppExistingUserMarketingPopup") ===
             true &&
           this.isAllowedCpp() &&
           (this.ob.publicLogCapture("cppMarketingPopup.shownPopup"),
@@ -801,7 +801,7 @@ export function createCppService(params) {
       let t
       if (e !== null) {
         const n = e.getModel()
-        if (n == null || this.Wb(n) || this.Kb.shouldIgnoreUri(n.uri)) return false
+        if (n == null || this.Wb(n) || this.selectedContextService.shouldIgnoreUri(n.uri)) return false
         t = { languageId: KMs(n), fsPath: this.mb.asRelativePath(n.uri) }
       }
       let s
@@ -1349,8 +1349,8 @@ export function createCppService(params) {
             this.n.get(t).push(
               this.D(
                 s.onChangedHints((r) => {
-                  const o = this.wb.getRelevantParameterHints(e)
-                  this.wb.onChangedParameterHints(e, r),
+                  const o = this.cppTypeService.getRelevantParameterHints(e)
+                  this.cppTypeService.onChangedParameterHints(e, r),
                     o.length === 0 &&
                       r !== undefined &&
                       this.fireCppSuggestionDebounced(e, ll.ParameterHints)
@@ -1683,8 +1683,8 @@ export function createCppService(params) {
         s = performance.now() - (this.X ?? 0)
       console.info("[CPP TIMING]", `Time Since Start: ${t}`),
         console.info("[CPP TIMING]", `Time Since Trigger: ${s}`),
-        this.tb.distribution({ stat: "cppclient.time_since_start", value: t }),
-        this.tb.distribution({ stat: "cppclient.time_since_trigger", value: s })
+        this.metricsService.distribution({ stat: "cppclient.time_since_start", value: t }),
+        this.metricsService.distribution({ stat: "cppclient.time_since_trigger", value: s })
     }
     onCommentLine(e, t) {
       const s = e.getPosition()
@@ -1812,11 +1812,11 @@ export function createCppService(params) {
         r = mu.get(editor)
       r &&
         (disposables.push(
-          this.wb.registerSuggestListener(editor, model, relativePath, r, () => {
+          this.cppTypeService.registerSuggestListener(editor, model, relativePath, r, () => {
             this.fireCppSuggestionDebounced(editor, ll.LspSuggestions)
           }),
         ),
-        disposables.push(this.wb.registerCancelListener(editor, model, relativePath, r))),
+        disposables.push(this.cppTypeService.registerCancelListener(editor, model, relativePath, r))),
         this.editorListenersMap.has(relativePath) || this.editorListenersMap.set(relativePath, new Map())
       const editorListeners = this.editorListenersMap.get(relativePath),
         editorId = editor.getId()
@@ -1930,7 +1930,7 @@ export function createCppService(params) {
               2,
             ),
           ),
-            this.lb.assert(
+            this.aiAssertService.assert(
               this.R.length <= this.Xb,
               `The size of cppService this.streams is too big! ${this.R.length}`,
             )
@@ -2060,7 +2060,7 @@ export function createCppService(params) {
         : (this.latestGenerationUUID === n &&
             this.reallowCopilotIfWePreviousHidCopilotSuggestions(),
           (this.R = this.R.filter((p) => p.generationUUID !== n))),
-        this.tb.distribution({
+        this.metricsService.distribution({
           stat: "cppclient.immediatelyFire.getExpandedRange",
           value: d - r,
         })
@@ -2392,7 +2392,7 @@ export function createCppService(params) {
         mergedDiffHistories: [],
       }
       const w = performance.now()
-      this.tb.distribution({
+      this.metricsService.distribution({
         stat: "cppclient.immediatelyFire.diffHistory",
         value: w - g,
       })
@@ -2402,7 +2402,7 @@ export function createCppService(params) {
             ? await this.$b(e, t)
             : [],
         x = performance.now()
-      this.tb.distribution({
+      this.metricsService.distribution({
         stat: "cppclient.immediatelyFire.additionalFiles",
         value: x - C,
       })
@@ -2708,15 +2708,15 @@ export function createCppService(params) {
         this.S?.cancelCpp(generationUUID)
       }),
         this.X !== undefined &&
-          this.tb.distribution({
+          this.metricsService.distribution({
             stat: "cppclient.beforeStreamCpp",
             value: performance.now() - this.X,
           }),
         (this.y = generationUUID)
-      const relevantSuggestions = this.wb.getRelevantSuggestions(model, this.mb.asRelativePath(model.uri))
+      const relevantSuggestions = this.cppTypeService.getRelevantSuggestions(model, this.mb.asRelativePath(model.uri))
       relevantSuggestions.suggestions.length > 0 &&
         (oa("Recording event...."),
-        this.qb.recordLspSuggestionEvent(
+        this.cppEventLoggerService.recordLspSuggestionEvent(
           model,
           editor.getId(),
           relevantSuggestions.suggestions.map((Ee) => Ee.label),
@@ -2730,7 +2730,7 @@ export function createCppService(params) {
               modelName: this.getModelName(),
               diffHistoryKeys: [],
               contextItems: [],
-              parameterHints: this.wb.getRelevantParameterHints(editor),
+              parameterHints: this.cppTypeService.getRelevantParameterHints(editor),
               lspSuggestedItems: relevantSuggestions,
               lspContexts: [],
               filesyncUpdates: [],
@@ -2749,7 +2749,7 @@ export function createCppService(params) {
               modelName: this.getModelName(),
               diffHistoryKeys: [],
               contextItems: [],
-              parameterHints: this.wb.getRelevantParameterHints(editor),
+              parameterHints: this.cppTypeService.getRelevantParameterHints(editor),
               lspSuggestedItems: relevantSuggestions,
               lspContexts: [],
               filesyncUpdates: [],
@@ -2865,7 +2865,7 @@ export function createCppService(params) {
       if (abortController.signal.aborted) return { success: false }
       if (
         ((this.w = generationUUID),
-        this.qb.recordCppTriggerEvent(
+        this.cppEventLoggerService.recordCppTriggerEvent(
           model,
           generationUUID,
           new Aoe({
@@ -2881,7 +2881,7 @@ export function createCppService(params) {
         return oa("[Cpp] Bad Case: triggering is paused"), { success: false }
       const eol = model.getEOL(),
         notebookInfo = this.getNotebookCellInfo(model, editor, eol),
-        isValidCase = await this.Fb.isValidCppCase({
+        isValidCase = await this.cppBadHeuristics.isValidCppCase({
           model: model,
           modelOutputText: firstChunkValue,
           startingRange: new Hu(range),
@@ -2890,7 +2890,7 @@ export function createCppService(params) {
         }),
         recordFinishedGeneration = (diffText) => {
           abortController.signal.aborted ||
-            this.qb.recordFinishedCppGeneration(
+            this.cppEventLoggerService.recordFinishedCppGeneration(
               model,
               this.createRecoverableData({
                 requestId: generationUUID,
@@ -2968,7 +2968,7 @@ export function createCppService(params) {
           });
           return (this.uponFusedCursorPredictionReady(predictionId, prediction), true)
         })
-      const suggestion = this.Gb.createUnseenSuggestion({
+      const suggestion = this.cppSuggestionService.createUnseenSuggestion({
         model: modelSnapshot,
         diffText: firstChunkValue,
         startingRange: range,
@@ -2983,7 +2983,7 @@ export function createCppService(params) {
       if (suggestion === undefined)
         return oa("[Cpp] Bad Case: cppSuggestion is undefined"), { success: false }
       const endTime = performance.now()
-      this.tb.distribution({ stat: "cppclient.immediatelyFire", value: endTime - startTime })
+      this.metricsService.distribution({ stat: "cppclient.immediatelyFire", value: endTime - startTime })
       let isSuggestionDisplayed
       return (
         this.y !== generationUUID ||
@@ -3056,7 +3056,7 @@ export function createCppService(params) {
         this.u?.modelId === model.id
       ) {
         currentRange = adjustRange()
-        const newSuggestion = this.Gb.createUnseenSuggestion({
+        const newSuggestion = this.cppSuggestionService.createUnseenSuggestion({
           model: modelCopy,
           diffText: fullTextResult,
           startingRange: currentRange,
@@ -3081,7 +3081,7 @@ export function createCppService(params) {
         this.displayCppSuggestion(editor, model, newSuggestion)
       } else if (currentSuggestion?.uniqueId !== suggestion.uniqueId)
         if (this.N.getMatchingSuggestion(suggestion.uniqueId) !== undefined) {
-          const newSuggestion = this.Gb.createUnseenSuggestion({
+          const newSuggestion = this.cppSuggestionService.createUnseenSuggestion({
             model: model,
             diffText: fullTextResult,
             source: suggestion.source,
@@ -3118,7 +3118,7 @@ export function createCppService(params) {
         } else return
       else {
         currentRange = adjustRange()
-        const newSuggestion = this.Gb.createUnseenSuggestion({
+        const newSuggestion = this.cppSuggestionService.createUnseenSuggestion({
           model: modelCopy,
           diffText: fullTextResult,
           startingRange: currentRange,
@@ -3392,8 +3392,8 @@ export function createCppService(params) {
         })
       return (
         updatedSuggestion
-          ? this.qb.recordCppSuggestionEvent(model, updatedSuggestion, recoverableData)
-          : this.qb.recordCppSuggestionEvent(model, decoratedSuggestion, recoverableData),
+          ? this.cppEventLoggerService.recordCppSuggestionEvent(model, updatedSuggestion, recoverableData)
+          : this.cppEventLoggerService.recordCppSuggestionEvent(model, decoratedSuggestion, recoverableData),
         (this.z = recoverableData.requestId),
         this.Ob().cppAutoImportEnabled && this.importPredictionService.showCorrectUI(editor),
         true
@@ -3423,7 +3423,7 @@ export function createCppService(params) {
               options: { description: "green", className: RKi, stickiness: 1 },
             })),
           )),
-          this.lb.assert(
+          this.aiAssertService.assert(
             this.decIdsThatAreNotInReactiveStorage.green.length < 50,
             "Too many green decorations from cpp",
           )))
@@ -3489,7 +3489,7 @@ export function createCppService(params) {
       if (!suggestionRange) return { type: Sp.NotAccepted }
       let originalText = suggestion.originalText ?? ""
       const replaceText = suggestion.replaceText ?? "",
-        { changes: textChanges } = await this.vb.wordDiff(originalText, replaceText)
+        { changes: textChanges } = await this.diffingService.wordDiff(originalText, replaceText)
       if (isAborted) return { type: Sp.NotAccepted }
       const acceptAllChanges = async (range) => {
           this.updateVisibleSuggestionText(editor, textChanges, range, editorModel, suggestion.undoRedoGroup, eol)
@@ -3700,7 +3700,7 @@ export function createCppService(params) {
       const n = this.getEditorCurrentPositionRange(e)
       if (n === null) return
       const r = this.getHiddenSuggestion(s, n)
-      r !== null && this.qb.recordPartialAcceptSuggestionEvent(s, r, t)
+      r !== null && this.cppEventLoggerService.recordPartialAcceptSuggestionEvent(s, r, t)
     }
     cleanupAfterAcceptSuggestion(editor, suggestion) {
       this.abortAllCppRequests(suggestion?.requestId)
@@ -3720,7 +3720,7 @@ export function createCppService(params) {
             this.Ob().cppConfig?.isGhostText &&
               !this.Pb().cppState?.suggestion?.immediatelySeen,
           ),
-          this.qb.recordAcceptSuggestionEvent(model, visibleSuggestion),
+          this.cppEventLoggerService.recordAcceptSuggestionEvent(model, visibleSuggestion),
           this.hb.applicationUserPersistentStorage.checklistState
             ?.doneAutoComplete !== true)
         ) {
@@ -3811,7 +3811,7 @@ export function createCppService(params) {
         n === null ||
         r === null ||
         (this.ob.publicLogCapture("cursor.revertcppsuggestion"),
-        this.qb.recordRejectSuggestionEvent(n, s),
+        this.cppEventLoggerService.recordRejectSuggestionEvent(n, s),
         this.removeAllHighlights(n, t),
         this.updateSuggestionStateHalfSilently({
           suggestionIsCurrentlyHidden: true,
@@ -3833,7 +3833,7 @@ export function createCppService(params) {
       if (t === undefined) return
       const s = e.getModel()
       s != null &&
-        (this.qb.recordRejectSuggestionEvent(s, t),
+        (this.cppEventLoggerService.recordRejectSuggestionEvent(s, t),
         this.ob.publicLogCapture("cursor.rejectcppsuggestion"))
     }
     rejectAndResetAllCppSuggestions(e = { removeGreens: true, abortAll: true }) {
@@ -4060,7 +4060,7 @@ export function createCppService(params) {
       const t = await (
         await this.aiClient()
       ).cppConfig(new T1t({ model: this.Ob().cppModel ?? "" }))
-      this._applyConfig(t), this.Hb.setGeoCppBackendUrl(t.geoCppBackendUrl)
+      this._applyConfig(t), this.cursorCredsService.setGeoCppBackendUrl(t.geoCppBackendUrl)
     }
     async forceApplyCppConfig() {
       const t = await (await this.aiClient()).cppConfig(new T1t({}))
@@ -4084,7 +4084,7 @@ export function createCppService(params) {
           EditHistoryDiffFormatter.SetEnableCppIncludeUnchangedLines,
           { enabled: e.includeUnchangedLines },
         ),
-        this.wb.setSuggestionHintsConfig(e.suggestionHintConfig)
+        this.cppTypeService.setSuggestionHintsConfig(e.suggestionHintConfig)
     }
     async getCppReport() {
       if (this.S !== undefined) return await this.S.getCppReport()

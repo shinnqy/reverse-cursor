@@ -2322,7 +2322,7 @@ function M4n(i) {
 }
 var Hje = { id: "statusBar.entry.showTooltip", title: "" },
   $4n = ["standard", "warning", "error", "prominent", "remote", "offline"],
-  CR = Re("cursorCredsService"),
+  cursorCredsService = Re("cursorCredsService"),
   cw = "https://staging.cursor.sh",
   aTt = "https://dev-staging.cursor.sh",
   Z7 = "https://dev-staging.cursor.sh",
@@ -2583,7 +2583,7 @@ var Hje = { id: "statusBar.entry.showTooltip", title: "" },
         )
     }
   }
-;(lTt = __decorate([__param(0, ei), __param(1, cl)], lTt)), Ve(CR, lTt, 1)
+;(lTt = __decorate([__param(0, ei), __param(1, cl)], lTt)), Ve(cursorCredsService, lTt, 1)
 var hP
 ;(function (i) {
   ;(i.Prod = "prod"),
@@ -6338,7 +6338,7 @@ var I_n = class t5e extends _ {
     Ule,
     Hle,
     R_,
-    CR,
+    cursorCredsService,
     $4n,
     uP,
     cl,

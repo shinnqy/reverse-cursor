@@ -2,7 +2,7 @@
 
 // 171360
 export function createInlineDiffService(params) {
-  const { Re, V, UT, wn, rt, R, me, fu, vze, Pn, pp, cb, pae, c2, zf, Dks, DKs, TKs, ys, rLt, __decorate, __param, Xt, Z, ei, fP, Ac, Ce, ve, Vi, ft, Br, Sk, hv, yi, fn, Ve, MI, u$, A8n, mze, M8n, A1, Es, U, G, rc, Wm, Bse, Yne, JM, B8n, qi, Hi, ue, Na, Me } = params;
+  const { Re, V, UT, wn, rt, R, me, fu, vze, Pn, pp, cb, pae, c2, zf, Dks, DKs, TKs, ys, rLt, __decorate, __param, Xt, Z, ei, fP, Ac, Ce, ve, Vi, ft, Br, Sk, cppEventLoggerService, yi, fn, Ve, MI, u$, A8n, mze, M8n, A1, Es, U, G, rc, Wm, Bse, Yne, JM, B8n, qi, Hi, ue, Na, Me } = params;
 
   var uLt,
     oy = Re("inlineDiffService")
@@ -857,7 +857,7 @@ export function createInlineDiffService(params) {
         __param(8, ft),
         __param(9, Br),
         __param(10, Sk),
-        __param(11, hv),
+        __param(11, cppEventLoggerService),
         __param(12, yi),
         __param(13, fn),
       ],
