@@ -306,7 +306,7 @@ export function createCppService(params) {
         (this.pauseCppTriggeringUntilUnpaused_DANGEROUS_ONLY_SET_IF_YOU_KNOW_WHAT_YOU_ARE_DOING =
           false),
         (this.j = new yo(20)),
-        (this.m = new Map()),
+        (this.m = new Map()), (this.editorListenersMap = this.m),
         (this.n = new Map()),
         (this.q = undefined),
         (this.u = undefined),
@@ -1690,54 +1690,54 @@ export function createCppService(params) {
       const t = this.H(e)
       return this.G.get(t)
     }
-    async registerModelListenerToEditorModel(e, t) {
-      if (this.Wb(t)) {
+    async registerModelListenerToEditorModel(editor, model) {
+      if (this.Wb(model)) {
         oa(
-          `[Cpp] registerModelListenerToEditorModel: Suppressing trigger because file is too large: filename: ${t.uri.fsPath}, length: ${t.getValueLength()}`,
+          `[Cpp] registerModelListenerToEditorModel: Suppressing trigger because file is too large: filename: ${model.uri.fsPath}, length: ${model.getValueLength()}`,
         )
         return
       }
-      const s = this.mb.asRelativePath(t?.uri ?? U.file(""))
+      const relativePath = this.mb.asRelativePath(model?.uri ?? U.file(""))
       if (
         (await this.everythingProviderService.onlyLocalProvider?.runCommand(EditHistoryDiffFormatter.GetModelValue, {
-          relativePath: s,
+          relativePath: relativePath,
         })) === undefined
       ) {
-        let l
-        if (t.uri.scheme === "vscode-notebook-cell") {
-          const c = t.getEOL(),
-            h = this.getNotebookCellInfo(t, e, c)
-          h !== null && (l = h.cellValues.join(c))
-        } else l = t.getValue()
-        l !== undefined &&
+        let currentModelValue
+        if (model.uri.scheme === "vscode-notebook-cell") {
+          const EOL = model.getEOL(),
+            cellInfo = this.getNotebookCellInfo(model, editor, EOL)
+          cellInfo !== null && (currentModelValue = cellInfo.cellValues.join(EOL))
+        } else currentModelValue = model.getValue()
+        currentModelValue !== undefined &&
           (await this.everythingProviderService.onlyLocalProvider?.runCommand(EditHistoryDiffFormatter.InitModel, {
-            relativePath: s,
-            currentModelValue: l,
-            modelVersion: t.getVersionId(),
+            relativePath: relativePath,
+            currentModelValue: currentModelValue,
+            modelVersion: model.getVersionId(),
           }))
       }
       if (
-        !t ||
-        (t.uri.scheme !== "vscode-notebook-cell" &&
-          t.uri.scheme !== "file" &&
-          t.uri.scheme !== "vscode-remote" &&
-          t.uri.scheme !== "untitled")
+        !model ||
+        (model.uri.scheme !== "vscode-notebook-cell" &&
+          model.uri.scheme !== "file" &&
+          model.uri.scheme !== "vscode-remote" &&
+          model.uri.scheme !== "untitled")
       )
         return
-      this.m.forEach((l) => {
-        l.has(e.getId()) &&
-          (l.get(e.getId())?.forEach((c) => c.dispose()), l.delete(e.getId()))
+      this.editorListenersMap.forEach((listenersMap) => {
+        listenersMap.has(editor.getId()) &&
+          (listenersMap.get(editor.getId())?.forEach((c) => c.dispose()), listenersMap.delete(editor.getId()))
       })
-      const n = [
+      const disposables = [
           this.D(
-            t.onDidChangeContent(async (l) => {
+            model.onDidChangeContent(async (contentChangeEvent) => {
               this.X = performance.now()
-              const c = t.getEOL()
+              const EOL = model.getEOL()
               if (
                 ((this.lastEditTime = Date.now()),
-                this.m.has(s) &&
-                  this.m.get(s).size > 1 &&
-                  e.getId() !== this.gb.getActiveCodeEditor()?.getId())
+                this.editorListenersMap.has(relativePath) &&
+                  this.editorListenersMap.get(relativePath).size > 1 &&
+                  editor.getId() !== this.gb.getActiveCodeEditor()?.getId())
               ) {
                 oa(
                   "[Cpp] onDidChangeModelContent: Suppressing trigger because editor is not active",
@@ -1746,85 +1746,85 @@ export function createCppService(params) {
               }
               if (
                 ((this.bb = []),
-                this.N.addEditAndUpdateCachedSuggestions(l, t),
-                this.triggerCppOnLintErrorAbortControllers.get(s)?.abort(),
+                this.N.addEditAndUpdateCachedSuggestions(contentChangeEvent, model),
+                this.triggerCppOnLintErrorAbortControllers.get(relativePath)?.abort(),
                 this.Ob().cppEnabled !== false)
               ) {
                 if (
                   this.Ob().cppAutoImportEnabled &&
-                  (this.Ib.markFileAsUpdated(t.uri),
-                  l.changes.length === 1 &&
-                    l.changes[0].text.length > 20 &&
-                    l.changes[0].text.length < 5e3)
+                  (this.Ib.markFileAsUpdated(model.uri),
+                  contentChangeEvent.changes.length === 1 &&
+                    contentChangeEvent.changes[0].text.length > 20 &&
+                    contentChangeEvent.changes[0].text.length < 5e3)
                 ) {
-                  const h = l.changes[0],
-                    u = h.text.split(`
+                  const change = contentChangeEvent.changes[0],
+                    lines = change.text.split(`
 `),
-                    d = {
-                      startLineNumber: h.range.startLineNumber,
-                      startColumn: h.range.startColumn,
-                      endLineNumber: h.range.endLineNumber + u.length - 1,
+                    range = {
+                      startLineNumber: change.range.startLineNumber,
+                      startColumn: change.range.startColumn,
+                      endLineNumber: change.range.endLineNumber + lines.length - 1,
                       endColumn:
-                        u.length === 1
-                          ? h.range.endColumn + u[0].length
-                          : u[u.length - 1].length,
+                        lines.length === 1
+                          ? change.range.endColumn + lines[0].length
+                          : lines[lines.length - 1].length,
                     }
-                  this.Ib.handleNewGreens(t, [d]),
+                  this.Ib.handleNewGreens(model, [range]),
                     this.showNearLocationLintErrorsToImportPredictionService({
-                      editor: e,
-                      uri: t.uri,
+                      editor: editor,
+                      uri: model.uri,
                       source: "onDidChangeContent",
                     })
                 }
                 if (
-                  (EF.get(e)?.setChangesSinceLastUpdate(true),
+                  (EF.get(editor)?.setChangesSinceLastUpdate(true),
                   this.dontTriggerCppBecauseChangeIsFromCpp === true ||
                     this
                       .pauseCppTriggeringUntilUnpaused_DANGEROUS_ONLY_SET_IF_YOU_KNOW_WHAT_YOU_ARE_DOING ===
                       true)
                 ) {
-                  const h = this.getPreviousModelValue(t)
+                  const previousModelValue = this.getPreviousModelValue(model)
                   if (
-                    (await this.formatDiffHistory(l, e, t, c),
+                    (await this.formatDiffHistory(contentChangeEvent, editor, model, EOL),
                     (this.dontTriggerCppBecauseChangeIsFromCpp = false),
                     this
                       .pauseCppTriggeringUntilUnpaused_DANGEROUS_ONLY_SET_IF_YOU_KNOW_WHAT_YOU_ARE_DOING ===
                       true || this.getCurrentSuggestion() !== undefined)
                   )
                     return
-                  this.triggerCppIfLintErrorComesUp(l, e, t, c, 2e3, h)
+                  this.triggerCppIfLintErrorComesUp(contentChangeEvent, editor, model, EOL, 2e3, previousModelValue)
                   return
                 }
                 this.isAllowedCpp() &&
-                  this.isCppEnabledForEditor(e) &&
-                  this.disableAndHideCopilotSuggestion(e),
-                  this.continueModelChangeListener(l, e, t, c)
+                  this.isCppEnabledForEditor(editor) &&
+                  this.disableAndHideCopilotSuggestion(editor),
+                  this.continueModelChangeListener(contentChangeEvent, editor, model, EOL)
               }
             }),
           ),
         ],
-        r = mu.get(e)
+        r = mu.get(editor)
       r &&
-        (n.push(
-          this.wb.registerSuggestListener(e, t, s, r, () => {
-            this.fireCppSuggestionDebounced(e, ll.LspSuggestions)
+        (disposables.push(
+          this.wb.registerSuggestListener(editor, model, relativePath, r, () => {
+            this.fireCppSuggestionDebounced(editor, ll.LspSuggestions)
           }),
         ),
-        n.push(this.wb.registerCancelListener(e, t, s, r))),
-        this.m.has(s) || this.m.set(s, new Map())
-      const o = this.m.get(s),
-        a = e.getId()
-      o?.has(a) || o?.set(a, []),
-        o?.get(a)?.push(...n),
+        disposables.push(this.wb.registerCancelListener(editor, model, relativePath, r))),
+        this.editorListenersMap.has(relativePath) || this.editorListenersMap.set(relativePath, new Map())
+      const editorListeners = this.editorListenersMap.get(relativePath),
+        editorId = editor.getId()
+      editorListeners?.has(editorId) || editorListeners?.set(editorId, []),
+        editorListeners?.get(editorId)?.push(...disposables),
         this.Ob().cppAutoImportEnabled &&
-          o?.get(a)?.push(
+          editorListeners?.get(editorId)?.push(
             this.D(
-              this.rb.onMarkerChanged(async (l) => {
-                this.gb.getActiveCodeEditor()?.getId() === e.getId() &&
-                  l.some((c) => c.toString() === t.uri.toString()) &&
+              this.rb.onMarkerChanged(async (changedUris) => {
+                this.gb.getActiveCodeEditor()?.getId() === editor.getId() &&
+                  changedUris.some((c) => c.toString() === model.uri.toString()) &&
                   this.showNearLocationLintErrorsToImportPredictionService({
-                    editor: e,
-                    uri: t.uri,
+                    editor: editor,
+                    uri: model.uri,
                     source: "onMarkerChanged",
                   })
               }),
