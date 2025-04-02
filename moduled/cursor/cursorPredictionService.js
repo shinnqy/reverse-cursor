@@ -2,7 +2,7 @@
 
 
 
-export function createMDIClass(params) {
+export function createCursorPredictionService(params) {
   const {V, fu, Va, k3t, ge, ss, Le, ll, ys, Bgo, df, ce, Ho, Qm, wf, CUe, Mve, tv, Ugo, $go, rt, _go, Me, GB, cG, Gdt, Fgo, gdi, QN, L$i, N$i, Pn, Cg, EYe} = params;
   ////////
 
