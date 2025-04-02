@@ -2,7 +2,7 @@
 
 
 export function createCppService(params) {
-  const {V, EYe, G, yo, Qfo, ngo, rgo, zt, J, R_n, um, hF, ss, ll, JB, Fx, fu, Va, nze, WEn, m2i, qEn, b2i, S9, $, Hae, m0t, Ad, fUe, Sp, VB, replaceTextInRange, generateModifiedText, tv, VS, NYi, CUe, Ri, ce, Pn, Cg, EF, MMs, U, mu, Me, ys, $fo, qdt, Ffo, dze, uI, BMs, Cf, hG, mR, fm, gle, xr, Gr, GB, QN, Ycr, Yt, D1t, Kf, rt, handleStreamWithPredictions, handleChunkedStream, consumeRemainingStream, Hu, Aoe, Qcr, TKn, F_, tdi, _fo, rge, OFt, Xfo, Ui, ZXe: computeDiffs, k7, RKi, jBt, qfo, Ho, Qm, T1t, Xf, oj, ee, j, Je, eQe, cppService, ei, wf, yi, Ci, $h} = params;
+  const {V, EYe, G, yo, Qfo, ngo, rgo, zt, J, R_n, um, hF, ss, ll, JB, onDidRegisterWindow, fu, Va, nze, WEn, m2i, qEn, b2i, S9, $, Hae, m0t, Ad, fUe, Sp, VB, replaceTextInRange, generateModifiedText, tv, VS, NYi, CUe, Ri, ce, Pn, Cg, EF, MMs, U, mu, Me, ys, $fo, qdt, Ffo, dze, uI, BMs, Cf, hG, mR, fm, gle, xr, Gr, GB, QN, Ycr, Yt, D1t, Kf, rt, handleStreamWithPredictions, handleChunkedStream, consumeRemainingStream, Hu, Aoe, Qcr, TKn, F_, tdi, _fo, rge, OFt, Xfo, Ui, ZXe: computeDiffs, k7, RKi, jBt, qfo, Ho, Qm, T1t, Xf, oj, ee, j, Je, eQe, cppService, ei, wf, yi, Ci, $h} = params;
 
   var bgo = class zmi extends ee {
     static {
@@ -27,16 +27,16 @@ export function createCppService(params) {
       const t = e.get(cppService),
         s = e.get(ei),
         n = s.nonPersistentStorage.cppState?.peekViewSuggestion
-      ;(await t.acceptFullSuggestion(void 0, n ? wf(n) : void 0)).type,
+      ;(await t.acceptFullSuggestion(undefined, n ? wf(n) : undefined)).type,
         Sp.NotAccepted,
-        s.setNonPersistentStorage("cppState", "peekViewSuggestion", void 0)
+        s.setNonPersistentStorage("cppState", "peekViewSuggestion", undefined)
     }
   }
   j(bgo)
   function zMs(i) {
     const e = i.get(yi),
       t = e.getActiveCodeEditor() || e.getFocusedCodeEditor()
-    return (t && EF.get(t)) || void 0
+    return (t && EF.get(t)) || undefined
   }
   function vgo(i) {
     return zMs(i)?.cppPeekView
@@ -87,10 +87,10 @@ export function createCppService(params) {
       this.LABEL = "Enable Cursor Tab"
     }
     constructor() {
-      super({ id: m0t, title: { value: Kmi.LABEL, original: Kmi.LABEL }, f1: !0 })
+      super({ id: m0t, title: { value: Kmi.LABEL, original: Kmi.LABEL }, f1: true })
     }
     async run(e, ...t) {
-      e.get(ei).setApplicationUserPersistentStorage("cppEnabled", !0)
+      e.get(ei).setApplicationUserPersistentStorage("cppEnabled", true)
     }
   }
   j(Cgo)
@@ -102,11 +102,11 @@ export function createCppService(params) {
       super({
         id: "editor.cpp.disableenabled",
         title: { value: Ymi.LABEL, original: Ymi.LABEL },
-        f1: !0,
+        f1: true,
       })
     }
     async run(e, ...t) {
-      e.get(ei).setApplicationUserPersistentStorage("cppEnabled", !1)
+      e.get(ei).setApplicationUserPersistentStorage("cppEnabled", false)
     }
   }
   j(Sgo)
@@ -119,18 +119,18 @@ export function createCppService(params) {
         super({
           id: "editor.cpp.snooze",
           title: { value: Xmi.LABEL, original: Xmi.LABEL },
-          f1: !0,
+          f1: true,
         })
       }
       async run(e, ...t) {
         const s = e.get(ei)
         s.applicationUserPersistentStorage.cppEnabled &&
           (s.setApplicationUserPersistentStorage("cppSnoozed", Date.now()),
-          s.setApplicationUserPersistentStorage("cppEnabled", !1),
+          s.setApplicationUserPersistentStorage("cppEnabled", false),
           setTimeout(() => {
             s.applicationUserPersistentStorage.cppSnoozed &&
-              (s.setApplicationUserPersistentStorage("cppSnoozed", void 0),
-              s.setApplicationUserPersistentStorage("cppEnabled", !0))
+              (s.setApplicationUserPersistentStorage("cppSnoozed", undefined),
+              s.setApplicationUserPersistentStorage("cppEnabled", true))
           }, GMs))
       }
     }
@@ -143,7 +143,7 @@ export function createCppService(params) {
       super({
         id: "editor.cpp.toggle",
         title: { value: Qmi.LABEL, original: Qmi.LABEL },
-        f1: !0,
+        f1: true,
       })
     }
     async run(e) {
@@ -164,7 +164,7 @@ export function createCppService(params) {
       super({
         id: ipt.ID,
         title: { value: ipt.LABEL, original: ipt.LABEL },
-        f1: !1,
+        f1: false,
       })
     }
     async run(e) {
@@ -175,7 +175,7 @@ export function createCppService(params) {
   var Igo = 25,
     Dgo = 60,
     hdi = 5e6,
-    JMs = !1,
+    JMs = false,
     oa = JMs ? console.log : () => {},
     zdt = JMs ? console.error : () => {}
   function KMs(i) {
@@ -192,7 +192,7 @@ export function createCppService(params) {
       super({
         id: spt.ID,
         title: { value: spt.LABEL, original: spt.LABEL },
-        f1: !0,
+        f1: true,
       })
     }
     async run(e) {
@@ -213,7 +213,7 @@ export function createCppService(params) {
     ddi = 20,
     e$s = 3,
     Ave = 300,
-    Ago = !1,
+    Ago = false,
     Mgo = "m4CoTMbqtR9vV1zd",
   CppService = class extends V {
     cppServerClient() {
@@ -304,15 +304,15 @@ export function createCppService(params) {
         (this.Kb = z),
         (this.h = 0),
         (this.pauseCppTriggeringUntilUnpaused_DANGEROUS_ONLY_SET_IF_YOU_KNOW_WHAT_YOU_ARE_DOING =
-          !1),
+          false),
         (this.j = new yo(20)),
         (this.m = new Map()),
         (this.n = new Map()),
-        (this.q = void 0),
-        (this.u = void 0),
-        (this.w = void 0),
-        (this.y = void 0),
-        (this.z = void 0),
+        (this.q = undefined),
+        (this.u = undefined),
+        (this.w = undefined),
+        (this.y = undefined),
+        (this.z = undefined),
         (this.C = new yo(10)),
         (this.G = new yo(3)),
         (this.I = []),
@@ -322,26 +322,26 @@ export function createCppService(params) {
         (this.N = new rgo(5, 6)),
         (this.O = new yo(3)),
         (this.Q = new yo(10)),
-        (this.editorThatWeHidGhostTextOn = void 0),
+        (this.editorThatWeHidGhostTextOn = undefined),
         (this.R = []),
-        (this.holdDownAbortController = void 0),
-        (this.S = void 0),
+        (this.holdDownAbortController = undefined),
+        (this.S = undefined),
         (this.numberOfClearedSuggestionsSinceLastAccept = 0),
-        (this.lastEditTime = void 0),
-        (this.U = void 0),
+        (this.lastEditTime = undefined),
+        (this.U = undefined),
         (this.W = this.D(new zt())),
-        (this.Y = { fire: !1, acceptedRange: void 0 }),
+        (this.Y = { fire: false, acceptedRange: undefined }),
         (this.$ = {}),
-        (this.ab = !1),
+        (this.ab = false),
         (this.bb = []),
-        (this.cb = void 0),
+        (this.cb = undefined),
         (this.db = new yo(5)),
-        (this.eb = void 0),
-        (this.fb = !1),
+        (this.eb = undefined),
+        (this.fb = false),
         (this.Mb = new J()),
         (this.Nb = document.createElement("div")),
         (this.handleKeyDownForCppKeys = (se) => {
-          if (this.Ob().cppEnabled === !0) {
+          if (this.Ob().cppEnabled === true) {
             if (se.key === "Tab" && se.shiftKey) {
               if (this.Ob().cppManualTriggerWithOpToken) {
                 const ae = this.gb.getActiveCodeEditor()
@@ -364,10 +364,10 @@ export function createCppService(params) {
             }
             if (
               se.key === "Tab" &&
-              se.shiftKey === !1 &&
-              se.ctrlKey === !1 &&
-              se.altKey === !1 &&
-              se.metaKey === !1 &&
+              se.shiftKey === false &&
+              se.ctrlKey === false &&
+              se.altKey === false &&
+              se.metaKey === false &&
               this.selectionIsNotMultipleLines()
             ) {
               if (this.Ob().cppAutoImportEnabled) {
@@ -390,10 +390,10 @@ export function createCppService(params) {
                   }),
                 });
                 if (
-                  he !== void 0 &&
+                  he !== undefined &&
                   !this.Bb.tabToLineBeforeAcceptingCpp(he.source)
                 )
-                  (this.dontTriggerCppBecauseChangeIsFromCpp = !0),
+                  (this.dontTriggerCppBecauseChangeIsFromCpp = true),
                     se.preventDefault(),
                     se.stopImmediatePropagation(),
                     se.stopPropagation(),
@@ -417,12 +417,12 @@ export function createCppService(params) {
                   (this.Pb().cppState?.additionalSuggestions?.length ?? 0) > 0
                 ) {
                   const ae = this.gb.getActiveCodeEditor(),
-                    de = ae?.getModel() ?? void 0,
+                    de = ae?.getModel() ?? undefined,
                     Ee = ae?.getPosition(),
                     ke = this.Pb().cppState?.additionalSuggestions.filter(
                       (Ae) => {
-                        if (de === void 0 || Ee === void 0 || Ee === null)
-                          return !1
+                        if (de === undefined || Ee === undefined || Ee === null)
+                          return false
                         const Pe = de.getDecorationRange(Ae.decorationId)
                         return (
                           Pe !== null &&
@@ -438,8 +438,8 @@ export function createCppService(params) {
                         )
                       },
                     )
-                  if (ke !== void 0 && ke.length > 0) {
-                    ;(this.dontTriggerCppBecauseChangeIsFromCpp = !0),
+                  if (ke !== undefined && ke.length > 0) {
+                    ;(this.dontTriggerCppBecauseChangeIsFromCpp = true),
                       se.preventDefault(),
                       se.stopImmediatePropagation(),
                       se.stopPropagation()
@@ -482,23 +482,23 @@ export function createCppService(params) {
             }
             if (
               se.key === "Escape" &&
-              se.ctrlKey === !1 &&
-              se.altKey === !1 &&
-              se.metaKey === !1 &&
-              this.Pb().cppState?.suggestion !== void 0
+              se.ctrlKey === false &&
+              se.altKey === false &&
+              se.metaKey === false &&
+              this.Pb().cppState?.suggestion !== undefined
             ) {
               const he = this.getFocusedCodeEditor()
-              he !== null && this.markEditAsRejected(he, !1),
+              he !== null && this.markEditAsRejected(he, false),
                 this.clearDecorationsSlowEnumeratesAllDecorations(),
                 this.rejectAndResetAllCppSuggestions(),
                 this.Bb.maybeShowHintLineWidget(),
-                this.Bb.updateHintLineWidgetMarginLeft(void 0),
+                this.Bb.updateHintLineWidgetMarginLeft(undefined),
                 he !== null && this.Ib.showCorrectUI(he)
             } else if (
               se.key === "Escape" &&
-              se.ctrlKey === !1 &&
-              se.altKey === !1 &&
-              se.metaKey === !1
+              se.ctrlKey === false &&
+              se.altKey === false &&
+              se.metaKey === false
             )
               if (this.Ob().cppAutoImportEnabled) {
                 const he = this.getFocusedCodeEditor()
@@ -506,17 +506,17 @@ export function createCppService(params) {
                   ? (se.preventDefault(),
                     se.stopImmediatePropagation(),
                     se.stopPropagation())
-                  : this.Pb().cursorPrediction !== void 0 &&
+                  : this.Pb().cursorPrediction !== undefined &&
                     this.Bb.clearCursorPrediction()
               } else
-                this.Pb().cursorPrediction !== void 0 &&
+                this.Pb().cursorPrediction !== undefined &&
                   this.Bb.clearCursorPrediction()
           }
         }),
         (this.triggerCppOnLintErrorAbortControllers = new Map()),
         (this.Xb = 6),
-        (this.latestGenerationUUID = void 0),
-        (this.Yb = void 0),
+        (this.latestGenerationUUID = undefined),
+        (this.Yb = undefined),
         (this.Zb = (se, he, ae, de) => {
           const Ee = se.split(ae)
           if (Ee.length < Ave * 2) return se
@@ -530,7 +530,7 @@ export function createCppService(params) {
           const at = this.O.get(de.uri),
             we = 20
           if (at && at.length > 0) {
-            let vt = !1
+            let vt = false
             for (const { decorationId: lt, originalWidth: Xe } of at) {
               const Oe = de.getDecorationRange(lt)
               if (!Oe) continue
@@ -541,7 +541,7 @@ export function createCppService(params) {
                   Math.abs(Oe.endLineNumber - Ae) < we &&
                   (Ae !== Ee.length || Oe.endLineNumber === Ee.length)
               if (Oe && Fe && ut && Math.abs(Ae - ke - Xe) < we) {
-                ;(ke = Oe.startLineNumber), (Ae = Oe.endLineNumber), (vt = !0)
+                ;(ke = Oe.startLineNumber), (Ae = Oe.endLineNumber), (vt = true)
                 break
               }
             }
@@ -577,7 +577,7 @@ export function createCppService(params) {
           return Ee.join(ae)
         }),
         (this.decIdsThatAreNotInReactiveStorage = { green: [] }),
-        (this.didShowGreenHighlights = !1),
+        (this.didShowGreenHighlights = false),
         (this.removedCppNoopGenerationUUIDS = []),
         (this.generationStartTimes = {}),
         (this.c = this.D(this.hb.createScoped(this))),
@@ -590,12 +590,12 @@ export function createCppService(params) {
         this.updateStatusBarElement(),
         (this.P = this.sb.createInstance(fu, { service: Va })),
         (this.g = this.sb.createInstance(fu, { service: nze })),
-        this.Pb().cppState === void 0 &&
+        this.Pb().cppState === undefined &&
           this.hb.setNonPersistentStorage("cppState", {}),
         this.loadCopilotPlusPlusConfigFromGithubCopilot(),
         this.Lb(),
         this.D(
-          Fx(() => {
+          onDidRegisterWindow(() => {
             this.mainRegisterCppListenersToEditorIfCppEnabled()
           }),
         ),
@@ -644,7 +644,7 @@ export function createCppService(params) {
         this.mainRegisterCppListenersToEditorIfCppEnabled(),
         this.N.addListener((se, he, ae) => {
           if (
-            this.getCurrentSuggestion() === void 0 &&
+            this.getCurrentSuggestion() === undefined &&
             !(
               this.Ob().cppAutoImportEnabled &&
               this.Ib.isShowingImportSuggestion()
@@ -675,17 +675,17 @@ export function createCppService(params) {
     Lb() {
       const e = this.hb.applicationUserPersistentStorage.cppSnoozed
       if (
-        e !== void 0 &&
-        this.hb.applicationUserPersistentStorage.cppEnabled === !1
+        e !== undefined &&
+        this.hb.applicationUserPersistentStorage.cppEnabled === false
       ) {
         const t = Date.now(),
           s = e + GMs
         s < t
-          ? (this.hb.setApplicationUserPersistentStorage("cppSnoozed", void 0),
-            this.hb.setApplicationUserPersistentStorage("cppEnabled", !0))
+          ? (this.hb.setApplicationUserPersistentStorage("cppSnoozed", undefined),
+            this.hb.setApplicationUserPersistentStorage("cppEnabled", true))
           : setTimeout(() => {
-              this.hb.setApplicationUserPersistentStorage("cppSnoozed", void 0),
-                this.hb.setApplicationUserPersistentStorage("cppEnabled", !0)
+              this.hb.setApplicationUserPersistentStorage("cppSnoozed", undefined),
+                this.hb.setApplicationUserPersistentStorage("cppEnabled", true)
             }, t - s)
       }
     }
@@ -703,7 +703,7 @@ export function createCppService(params) {
       if (
         !(fusedCursorPrediction === null || !this.usingFusedCursorPredictionModel()) &&
         (this.db.set(predictionId, fusedCursorPrediction),
-        this.eb !== void 0 && this.eb.fusedCursorPredictionId === predictionId)
+        this.eb !== undefined && this.eb.fusedCursorPredictionId === predictionId)
       ) {
         const editor = this.getFocusedCodeEditor()
         if (editor === null) return
@@ -724,7 +724,7 @@ export function createCppService(params) {
     }
     getNewDebounceDurations() {
       const e = this.hb.applicationUserPersistentStorage.cppConfig
-      if (e === void 0)
+      if (e === undefined)
         return { clientDebounceDuration: Igo, totalDebounceDuration: Dgo }
       const t = e.clientDebounceDurationMillis,
         s = e.globalDebounceDurationMillis
@@ -761,22 +761,22 @@ export function createCppService(params) {
       }))
     }
     async updateShouldNotTryToGetThemToNoticeCpp() {
-      this.Ob().cppEnabled === !0 &&
+      this.Ob().cppEnabled === true &&
         this.hb.setApplicationUserPersistentStorage(
           "shouldNotTryToGetThemToNoticeCpp",
-          !0,
+          true,
         )
       const e = this.nb.isAuthenticated()
       await this.jb.maybeRefreshFeatureStatus("cppExistingUserMarketingPopup"),
         e &&
-          this.Ob().shouldNotTryToGetThemToNoticeCpp !== !0 &&
+          this.Ob().shouldNotTryToGetThemToNoticeCpp !== true &&
           this.jb.getCachedFeatureStatus("cppExistingUserMarketingPopup") ===
-            !0 &&
+            true &&
           this.isAllowedCpp() &&
           (this.ob.publicLogCapture("cppMarketingPopup.shownPopup"),
           this.hb.setApplicationUserPersistentStorage(
             "shouldNotTryToGetThemToNoticeCpp",
-            !0,
+            true,
           ),
           this.hb.setNonPersistentStorage(
             "cppPopupState",
@@ -795,7 +795,7 @@ export function createCppService(params) {
       let t
       if (e !== null) {
         const n = e.getModel()
-        if (n == null || this.Wb(n) || this.Kb.shouldIgnoreUri(n.uri)) return !1
+        if (n == null || this.Wb(n) || this.Kb.shouldIgnoreUri(n.uri)) return false
         t = { languageId: KMs(n), fsPath: this.mb.asRelativePath(n.uri) }
       }
       let s
@@ -821,7 +821,7 @@ export function createCppService(params) {
         const t = this.Ab.getValue(JB)
         return b2i(e, t)
       } catch {
-        return !1
+        return false
       }
     }
     getRedDecorationIds(e) {
@@ -833,12 +833,12 @@ export function createCppService(params) {
     pauseCppTriggeringUntilUnpaused() {
       return (
         (this.pauseCppTriggeringUntilUnpaused_DANGEROUS_ONLY_SET_IF_YOU_KNOW_WHAT_YOU_ARE_DOING =
-          !0),
+          true),
         this.rejectAndResetAllCppSuggestions(),
         {
           dispose: () => {
             this.pauseCppTriggeringUntilUnpaused_DANGEROUS_ONLY_SET_IF_YOU_KNOW_WHAT_YOU_ARE_DOING =
-              !1
+              false
           },
         }
       )
@@ -855,12 +855,12 @@ export function createCppService(params) {
         )
     }
     loadCopilotPlusPlusConfigFromGithubCopilot() {
-      if (this.Ob().cppHasLoadedConfigFromCopilot !== !0)
+      if (this.Ob().cppHasLoadedConfigFromCopilot !== true)
         try {
           const e = this.Ab.getValue("github.copilot.enable")
           if (e !== null && typeof e == "object") {
             const t = Object.keys(e)
-              .filter((s) => e[s] === !1)
+              .filter((s) => e[s] === false)
               .filter((s) => s !== "*")
             t.length > 0 && this.Ab.updateValue(JB, t, 2)
           }
@@ -868,7 +868,7 @@ export function createCppService(params) {
         } finally {
           this.hb.setApplicationUserPersistentStorage(
             "cppHasLoadedConfigFromCopilot",
-            !0,
+            true,
           )
         }
     }
@@ -998,7 +998,7 @@ export function createCppService(params) {
         r.addEventListener("change", (c) => {
           const h = c.target.value
           h === S9
-            ? this.hb.setApplicationUserPersistentStorage("cppModel", void 0)
+            ? this.hb.setApplicationUserPersistentStorage("cppModel", undefined)
             : this.hb.setApplicationUserPersistentStorage("cppModel", h),
             this.loadCppConfigIncludingHandlingProAccess()
         }),
@@ -1029,7 +1029,7 @@ export function createCppService(params) {
         o = new um({
           isChecked: n,
           title: r,
-          icon: n ? $.check : void 0,
+          icon: n ? $.check : undefined,
           ...Hae,
           hoverDelegate: { showHover: () => {}, delay: 0 },
         })
@@ -1044,7 +1044,7 @@ export function createCppService(params) {
                 l &&
                   this.hb.setApplicationUserPersistentStorage(
                     "cppSnoozed",
-                    void 0,
+                    undefined,
                   ))
           }),
         )
@@ -1105,7 +1105,7 @@ export function createCppService(params) {
             ? "copilot-plus-plus-status-on"
             : "copilot-plus-plus-status-off",
         tooltip: this.Nb,
-        dontHideHoverOnClick: !0,
+        dontHideHoverOnClick: true,
         command: n ? m0t : s ? "" : YMs.ID,
       }
     }
@@ -1120,7 +1120,7 @@ export function createCppService(params) {
       return this.w
     }
     eventShouldKillPrevCpp(e) {
-      return e.altKey === !0
+      return e.altKey === true
     }
     Ob() {
       return this.hb.applicationUserPersistentStorage
@@ -1129,12 +1129,12 @@ export function createCppService(params) {
       return this.hb.nonPersistentStorage
     }
     reallowCopilotIfWePreviousHidCopilotSuggestions() {
-      this.editorThatWeHidGhostTextOn !== void 0 &&
+      this.editorThatWeHidGhostTextOn !== undefined &&
         (this.unhideCopilotSuggestion(this.editorThatWeHidGhostTextOn),
         Ad.get(this.editorThatWeHidGhostTextOn)
           ?.model.get()
           ?.triggerExplicitly(),
-        (this.editorThatWeHidGhostTextOn = void 0))
+        (this.editorThatWeHidGhostTextOn = undefined))
     }
     isInVimNonInsertMode() {
       const e = this.ub.getViewModel()
@@ -1143,8 +1143,8 @@ export function createCppService(params) {
           t.id === "vscodevim.vim.primary" &&
           !["INSERT"].some((s) => t.container.innerText.includes(s))
         )
-          return !0
-      return !1
+          return true
+      return false
     }
     selectionIsNotMultipleLines() {
       const e = this.gb.getActiveCodeEditor(),
@@ -1152,83 +1152,83 @@ export function createCppService(params) {
       return (
         e === null ||
         t === null ||
-        t === void 0 ||
+        t === undefined ||
         t.startLineNumber === t.endLineNumber
       )
     }
     cursorPredictorWouldTabInsteadOfAccepting() {
       const e = this.gb.getActiveCodeEditor()
-      if (!e) return !1
+      if (!e) return false
       const t = e.getModel()
-      return t ? this.Bb.shouldTabInsteadOfAccepting(e, t) : !1
+      return t ? this.Bb.shouldTabInsteadOfAccepting(e, t) : false
     }
     shouldTabInsteadOfAccepting() {
-      if (this.isInVimNonInsertMode()) return !1
+      if (this.isInVimNonInsertMode()) return false
       const e = this.gb.getActiveCodeEditor()
-      if (!e) return !1
+      if (!e) return false
       const t = e.getPosition(),
         s = e.getModel()
-      if (!t || !s) return !1
+      if (!t || !s) return false
       const n = s.getEOL()
-      if (s.getLineContent(t.lineNumber).trim() !== "") return !1
+      if (s.getLineContent(t.lineNumber).trim() !== "") return false
       const r = this.Pb().cppState?.suggestion
-      if (r === void 0) return !1
+      if (r === undefined) return false
       const o = r.decorationId,
         a = e.getModel()?.getDecorationRange(o)
-      if (a == null) return !1
+      if (a == null) return false
       const l = s.getValueInRange({
         startLineNumber: a.startLineNumber,
         startColumn: a.startColumn,
         endLineNumber: t.lineNumber,
         endColumn: t.column,
       })
-      if (l === void 0) return !1
+      if (l === undefined) return false
       let c = r.replaceText
       t.lineNumber === a.endLineNumber &&
         a.endColumn === 1 &&
         (c = c + (s.getLineContent(t.lineNumber) ?? "") + n)
       const h = l.split(n).length - 1,
         u = l.split(n).at(-1)?.length
-      if (u === void 0) return !1
+      if (u === undefined) return false
       let d = c.split(n)[h]
-      return d === void 0 ||
+      return d === undefined ||
         d.slice(0, u).trim() !== "" ||
-        ((d = d.slice(u)), d === void 0)
-        ? !1
+        ((d = d.slice(u)), d === undefined)
+        ? false
         : d.trimStart() !== d
     }
     async acceptNextWord() {
-      if (this.Ab.getValue(fUe) !== !0) return !1
+      if (this.Ab.getValue(fUe) !== true) return false
       const t = this.Pb().cppState?.suggestion
-      if (t !== void 0) {
-        this.dontTriggerCppBecauseChangeIsFromCpp = !0
+      if (t !== undefined) {
+        this.dontTriggerCppBecauseChangeIsFromCpp = true
         const s = await this.acceptNextWordSuggestion(
           this.holdDownAbortController,
         )
         if (s.type === Sp.AcceptedWord) {
           const n = this.gb.getActiveCodeEditor()
           return (
-            n !== null && this.cleanupAfterNextWordSuggestion(n, s.edit), !0
+            n !== null && this.cleanupAfterNextWordSuggestion(n, s.edit), true
           )
         } else if (s.type === Sp.AcceptedAll) {
           const n = this.gb.getActiveCodeEditor()
-          return n !== null && this.cleanupAfterAcceptSuggestion(n, t), !0
+          return n !== null && this.cleanupAfterAcceptSuggestion(n, t), true
         }
       }
-      return !1
+      return false
     }
     markEditAsRejected(e, t) {
       const s = this.Ob().cppConfig
       if (
-        s === void 0 ||
-        s.heuristics.includes(VB.SUGGESTING_RECENTLY_REJECTED_EDIT) === !1 ||
-        s.recentlyRejectedEditThresholds === void 0
+        s === undefined ||
+        s.heuristics.includes(VB.SUGGESTING_RECENTLY_REJECTED_EDIT) === false ||
+        s.recentlyRejectedEditThresholds === undefined
       )
         return
       const n = e.getModel()
       if (n === null) return
       const r = this.Pb().cppState?.suggestion
-      if (r === void 0) return
+      if (r === undefined) return
       const o = r.uri,
         a = this.mb.asRelativePath(o)
       let { isNoOp: l } = replaceTextInRange(
@@ -1254,7 +1254,7 @@ export function createCppService(params) {
     }
     mainRegisterCppListenersToEditorIfCppEnabled() {
       this.clearEditorListeners(),
-        this.Ob().cppEnabled === !0
+        this.Ob().cppEnabled === true
           ? this.registerAllCppListeners()
           : this.reallowCopilotIfWePreviousHidCopilotSuggestions()
     }
@@ -1265,7 +1265,7 @@ export function createCppService(params) {
       let e = 0
       for (
         ;
-        (await this.Db.onlyLocalProvider?.runCommand(tv.Ack, null)) !== !0 &&
+        (await this.Db.onlyLocalProvider?.runCommand(tv.Ack, null)) !== true &&
         e < 1e3;
 
       )
@@ -1339,14 +1339,14 @@ export function createCppService(params) {
           )
         const s = this.D(new NYi(e, this.xb.signatureHelpProvider))
         this.n.get(t).push(s),
-          s !== void 0 &&
+          s !== undefined &&
             this.n.get(t).push(
               this.D(
                 s.onChangedHints((r) => {
                   const o = this.wb.getRelevantParameterHints(e)
                   this.wb.onChangedParameterHints(e, r),
                     o.length === 0 &&
-                      r !== void 0 &&
+                      r !== undefined &&
                       this.fireCppSuggestionDebounced(e, ll.ParameterHints)
                 }),
               ),
@@ -1395,15 +1395,15 @@ export function createCppService(params) {
                   return
                 }
                 this.usingFusedCursorPredictionModel() &&
-                  ((this.eb = void 0),
-                  (this.cb = void 0),
+                  ((this.eb = undefined),
+                  (this.cb = undefined),
                   this.Bb.clearCursorPrediction())
                 const o = e.getModel()?.uri
                 if (
-                  o === void 0 ||
+                  o === undefined ||
                   (this.updateRecentDiagnostics(o, r.position),
                   this.holdDownAbortController?.abort(),
-                  (this.holdDownAbortController = void 0),
+                  (this.holdDownAbortController = undefined),
                   r.source === "restoreState")
                 )
                   return
@@ -1420,19 +1420,19 @@ export function createCppService(params) {
                       h.severity === Ri.Error &&
                       Math.abs(h.startLineNumber - r.position.lineNumber) <= 1,
                   )
-                if (this.Ob().cppEnabled === !0) {
+                if (this.Ob().cppEnabled === true) {
                   const h = e.getSelection()
                   if (h === null) {
                     oa("[Cpp] onDidChangeCursorPosition: selection is null")
                     return
                   }
                   const u = this.getCurrentSuggestion()
-                  let d = !1
+                  let d = false
                   const g = e.getModel()
                   if (g === null) return
-                  if (u === void 0)
+                  if (u === undefined)
                     this.didShowGreenHighlights
-                      ? ((this.didShowGreenHighlights = !1),
+                      ? ((this.didShowGreenHighlights = false),
                         this.clearDecorationsSlowEnumeratesAllDecorations())
                       : this.clearDecorationsFast()
                   else {
@@ -1440,7 +1440,7 @@ export function createCppService(params) {
                       range: g.getDecorationRange(u.decorationId),
                       id: u.decorationId,
                     }
-                    if (y === void 0 || y.range === null) return
+                    if (y === undefined || y.range === null) return
                     const w = {
                       ...y.range,
                       endColumn: 1e4,
@@ -1450,7 +1450,7 @@ export function createCppService(params) {
                     }
                     ;(d = !!(y.range !== null && h.intersectRanges(w))),
                       d ||
-                        (this.markEditAsRejected(e, !1),
+                        (this.markEditAsRejected(e, false),
                         this.rejectAndResetAllCppSuggestions(),
                         this.Bb.maybeShowHintLineWidget())
                   }
@@ -1459,12 +1459,12 @@ export function createCppService(params) {
                       (b) =>
                         b.modelId === g.id &&
                         b.modelVersion === g.getVersionId() &&
-                        b.position !== void 0 &&
+                        b.position !== undefined &&
                         b.position.equals(r.position),
                     ) &&
                     !d
                   )
-                    if (this.Ob().cppFireOnEveryCursorChange === !0)
+                    if (this.Ob().cppFireOnEveryCursorChange === true)
                       this.fireCppSuggestionDebounced(e, ll.LineChange)
                     else if (
                       (c.length > 0 || Ago) &&
@@ -1509,8 +1509,8 @@ export function createCppService(params) {
     Qb(e, t) {
       const s = e.getModel()?.uri,
         n = e.getModel()?.getVersionId()
-      s !== void 0 &&
-        n !== void 0 &&
+      s !== undefined &&
+        n !== undefined &&
         (this.bb = [...this.bb, { uri: s, modelVersion: n, position: t }])
     }
     Rb() {
@@ -1522,7 +1522,7 @@ export function createCppService(params) {
     }
     Sb() {
       return (
-        this.lastEditTime === void 0 || Date.now() - this.lastEditTime >= 6e4
+        this.lastEditTime === undefined || Date.now() - this.lastEditTime >= 6e4
       )
     }
     Tb(e) {
@@ -1599,9 +1599,9 @@ export function createCppService(params) {
       const a = this.mb.asRelativePath(s?.uri ?? U.file("")),
         l = new AbortController()
       this.triggerCppOnLintErrorAbortControllers.set(a, l)
-      let c = !1
+      let c = false
       l.signal.addEventListener("abort", () => {
-        c = !0
+        c = true
       })
       for (let h = 0; h < r / 50; h++) {
         if ((await new Promise((p) => setTimeout(p, 50)), c)) return
@@ -1620,8 +1620,8 @@ export function createCppService(params) {
         }
       }
     }
-    async continueModelChangeListener(e, t, s, n, r = { removeGreens: !0 }, o) {
-      if (this.Pb().cppState?.shouldNotTrigger === !0) {
+    async continueModelChangeListener(e, t, s, n, r = { removeGreens: true }, o) {
+      if (this.Pb().cppState?.shouldNotTrigger === true) {
         oa("[Cpp] continueModelChangeListener - shouldNotTrigger is true")
         return
       }
@@ -1629,10 +1629,10 @@ export function createCppService(params) {
       const a = async () => {
         await this.formatDiffHistory(e, t, s, n), EF.get(t)?.update()
       }
-      this.ab = !1
+      this.ab = false
       const l = () => {
         const u = this.getCurrentSuggestion()
-        if (u === void 0) return
+        if (u === undefined) return
         const d = s.getDecorationRange(u.decorationId)
         if (d === null) return
         const g = s.getDecorationOptions(u.decorationId)
@@ -1650,16 +1650,16 @@ export function createCppService(params) {
       }
       if (this.isOnShortestEditPath({ event: e, model: s }, o))
         return MMs(e.changes) && l(), a()
-      const h = this.Ub(e) || this.Ob().cppCachedTypeaheadEnabled !== !0
+      const h = this.Ub(e) || this.Ob().cppCachedTypeaheadEnabled !== true
       if (
-        (this.markEditAsRejected(t, !0),
-        this.rejectAndResetAllCppSuggestions({ removeGreens: !1, abortAll: h }),
+        (this.markEditAsRejected(t, true),
+        this.rejectAndResetAllCppSuggestions({ removeGreens: false, abortAll: h }),
         (!this.Ob().cppAutoImportEnabled ||
           !this.Ib.isShowingImportSuggestion()) &&
           this.allowCppTriggerInComments(t))
       ) {
         const u = this.N.popCacheHit(s)
-        if (u !== void 0)
+        if (u !== undefined)
           return this.Vb(u), this.displayCppSuggestion(t, s, u), a()
       }
       await this.fireOnCacheMiss(e, t, s, n, r)
@@ -1701,7 +1701,7 @@ export function createCppService(params) {
       if (
         (await this.Db.onlyLocalProvider?.runCommand(tv.GetModelValue, {
           relativePath: s,
-        })) === void 0
+        })) === undefined
       ) {
         let l
         if (t.uri.scheme === "vscode-notebook-cell") {
@@ -1709,7 +1709,7 @@ export function createCppService(params) {
             h = this.getNotebookCellInfo(t, e, c)
           h !== null && (l = h.cellValues.join(c))
         } else l = t.getValue()
-        l !== void 0 &&
+        l !== undefined &&
           (await this.Db.onlyLocalProvider?.runCommand(tv.InitModel, {
             relativePath: s,
             currentModelValue: l,
@@ -1748,7 +1748,7 @@ export function createCppService(params) {
                 ((this.bb = []),
                 this.N.addEditAndUpdateCachedSuggestions(l, t),
                 this.triggerCppOnLintErrorAbortControllers.get(s)?.abort(),
-                this.Ob().cppEnabled !== !1)
+                this.Ob().cppEnabled !== false)
               ) {
                 if (
                   this.Ob().cppAutoImportEnabled &&
@@ -1777,19 +1777,19 @@ export function createCppService(params) {
                     })
                 }
                 if (
-                  (EF.get(e)?.setChangesSinceLastUpdate(!0),
-                  this.dontTriggerCppBecauseChangeIsFromCpp === !0 ||
+                  (EF.get(e)?.setChangesSinceLastUpdate(true),
+                  this.dontTriggerCppBecauseChangeIsFromCpp === true ||
                     this
                       .pauseCppTriggeringUntilUnpaused_DANGEROUS_ONLY_SET_IF_YOU_KNOW_WHAT_YOU_ARE_DOING ===
-                      !0)
+                      true)
                 ) {
                   const h = this.getPreviousModelValue(t)
                   if (
                     (await this.formatDiffHistory(l, e, t, c),
-                    (this.dontTriggerCppBecauseChangeIsFromCpp = !1),
+                    (this.dontTriggerCppBecauseChangeIsFromCpp = false),
                     this
                       .pauseCppTriggeringUntilUnpaused_DANGEROUS_ONLY_SET_IF_YOU_KNOW_WHAT_YOU_ARE_DOING ===
-                      !0 || this.getCurrentSuggestion() !== void 0)
+                      true || this.getCurrentSuggestion() !== undefined)
                   )
                     return
                   this.triggerCppIfLintErrorComesUp(l, e, t, c, 2e3, h)
@@ -1853,11 +1853,11 @@ export function createCppService(params) {
         oa("skipping due to selection")
         return
       }
-      this.fireCppSuggestionFromTrigger(n, e, t, void 0, {
+      this.fireCppSuggestionFromTrigger(n, e, t, undefined, {
         ...o,
         modelVersion: s.getVersionId(),
         modelId: s.id,
-        position: e.getPosition() ?? void 0,
+        position: e.getPosition() ?? undefined,
       })
     }
     async fireCppSuggestionDebouncedDiffHistory(e, t, s, n) {
@@ -1876,12 +1876,12 @@ export function createCppService(params) {
         l.includes(h.generationUUID) && h.abortController.abort()
       }),
         await this.formatDiffHistory(e, t, r, n),
-        this.getCurrentSuggestion() === void 0 &&
-          this.fireCppSuggestionFromTrigger(o, t, s, void 0, {
+        this.getCurrentSuggestion() === undefined &&
+          this.fireCppSuggestionFromTrigger(o, t, s, undefined, {
             ...c,
             modelVersion: r.getVersionId(),
             modelId: r.id,
-            position: t.getPosition() ?? void 0,
+            position: t.getPosition() ?? undefined,
           })
     }
     async fireCppSuggestionFromTrigger(e, t, s, n, r) {
@@ -1892,7 +1892,7 @@ export function createCppService(params) {
       const o = t.getModel()
       if (o === null || this.Wb(o)) return
       if (
-        this.getCurrentSuggestion() !== void 0 &&
+        this.getCurrentSuggestion() !== undefined &&
         s !== ll.LinterErrors &&
         s !== ll.CursorPrediction &&
         s !== ll.LspSuggestions
@@ -1904,7 +1904,7 @@ export function createCppService(params) {
       try {
         if (
           (s !== ll.CursorPrediction &&
-            this.Ob().cppCachedTypeaheadEnabled !== !0 &&
+            this.Ob().cppCachedTypeaheadEnabled !== true &&
             (this.R.forEach((p) => {
               p.source !== ll.CursorPrediction && p.abortController.abort()
             }),
@@ -1932,7 +1932,7 @@ export function createCppService(params) {
         for (; this.R.length >= this.Xb; )
           this.R.shift()?.abortController.abort()
         let l, c, h, u, d
-        r !== void 0
+        r !== undefined
           ? ((l = r.abortController),
             (a = r.generationUUID),
             (c = r.startTime),
@@ -1945,7 +1945,7 @@ export function createCppService(params) {
             (c = performance.now() + performance.timeOrigin),
             (h = o.getVersionId()),
             (u = o.id),
-            (d = t.getPosition() ?? void 0),
+            (d = t.getPosition() ?? undefined),
             this.R.push({
               startTime: c,
               generationUUID: a,
@@ -1956,10 +1956,10 @@ export function createCppService(params) {
               position: d,
             })),
           (this.latestGenerationUUID = a)
-        let g = !1
+        let g = false
         if (
           (l.signal.addEventListener("abort", () => {
-            ;(g = !0), (this.R = this.R.filter((p) => p.generationUUID !== a))
+            ;(g = true), (this.R = this.R.filter((p) => p.generationUUID !== a))
           }),
           g)
         )
@@ -1978,19 +1978,19 @@ export function createCppService(params) {
     async immediatelyFireCppFromTrigger(e, t, s, n, r, o, a) {
       if (
         this.hb.applicationUserPersistentStorage.oneTimeSettings
-          .shouldDisableGithubCopilot === !0
+          .shouldDisableGithubCopilot === true
       )
         try {
           const p = this.Ab.getValue("github.copilot")
           p !== null &&
             typeof p == "object" &&
-            p.enable["*"] === !0 &&
+            p.enable["*"] === true &&
             this.kb.executeCommand("github.copilot.toggleCopilot")
         } finally {
           this.hb.setApplicationUserPersistentStorage(
             "oneTimeSettings",
             "shouldDisableGithubCopilot",
-            !1,
+            false,
           )
         }
       this.disableAndHideCopilotSuggestion(t)
@@ -1999,7 +1999,7 @@ export function createCppService(params) {
       const c = l.getValue(),
         h = l.getVersionId(),
         u = a?.overridePosition ?? t.getPosition()
-      if (u === null || c === void 0) {
+      if (u === null || c === undefined) {
         oa("[Cpp] Bad Case: position or modelValue is undefined"),
           this.reallowCopilotIfWePreviousHidCopilotSuggestions()
         return
@@ -2014,7 +2014,7 @@ export function createCppService(params) {
         return
       if (
         this.overlapsInlineDiff(e, u.lineNumber, {
-          onlyCheckCurrentlyGenerating: !0,
+          onlyCheckCurrentlyGenerating: true,
         })
       ) {
         oa("[Cpp] Skipping because we are in an inline diff.")
@@ -2023,7 +2023,7 @@ export function createCppService(params) {
       if (
         this.hb.nonPersistentStorage.cppState
           ?.shouldNotTriggerFromInlineDiffReject ??
-        !1
+        false
       ) {
         oa(
           "[Cpp] fireCppSuggestionFromTrigger: suppressing trigger because we are currently rejecting an inlineDiff",
@@ -2061,14 +2061,14 @@ export function createCppService(params) {
     }
     allowCppTriggerInComments(e, t) {
       if (
-        this.hb.applicationUserPersistentStorage.cppTriggerInComments === !1
+        this.hb.applicationUserPersistentStorage.cppTriggerInComments === false
       ) {
         const s = e.getModel()
-        if (s === null) return !0
+        if (s === null) return true
         const n = s.getValue(),
           r = t ?? e.getPosition()
-        if (r === null || n === void 0)
-          return oa("[Cpp] Bad Case: position or modelValue is undefined"), !0
+        if (r === null || n === undefined)
+          return oa("[Cpp] Bad Case: position or modelValue is undefined"), true
         if (s.getLineContent(r.lineNumber).trim() === "") {
           let a = r.lineNumber - 1,
             l = r.lineNumber + 1
@@ -2089,26 +2089,26 @@ export function createCppService(params) {
                 : null
           if (c === 1 && h === 1)
             return (
-              oa("[Cpp] suppressing trigger because we are in a comment"), !1
+              oa("[Cpp] suppressing trigger because we are in a comment"), false
             )
         } else if (
           s.getTokenTypeAtPosition_DANGEROUS_BECAUSE_COSTS_1_MS(r) === 1
         )
-          return oa("[Cpp] suppressing trigger because we are in a comment"), !1
+          return oa("[Cpp] suppressing trigger because we are in a comment"), false
       }
-      return !0
+      return true
     }
     usingFusedCursorPredictionModel() {
       return !!this.Ob()?.cppConfig?.isFusedCursorPredictionModel
     }
     overlapsInlineDiff(e, t, { onlyCheckCurrentlyGenerating: s }) {
       const n = this.hb.nonPersistentStorage.inlineDiffs
-      if (n === void 0) return !1
+      if (n === undefined) return false
       const r = this.hb.nonPersistentStorage.inprogressAIGenerations.map(
         (o) => o.generationUUID,
       )
       return n.some((o) => {
-        if (s && !r.includes(o.generationUUID)) return !1
+        if (s && !r.includes(o.generationUUID)) return false
         const a =
             t >= o.currentRange.startLineNumber &&
             t <= o.currentRange.endLineNumberExclusive,
@@ -2162,14 +2162,14 @@ export function createCppService(params) {
         (n = new Cf({
           relativeWorkspacePath: this.mb.asRelativePath(e),
           errors: r,
-          fileContents: void 0,
+          fileContents: undefined,
         })))
       const o = n
-      o !== void 0 &&
+      o !== undefined &&
         o.errors.length > 0 &&
         this.J.push(
           ...o.errors
-            .filter((l) => l.range !== void 0)
+            .filter((l) => l.range !== undefined)
             .map((l) => ({
               errors: [
                 {
@@ -2241,7 +2241,7 @@ export function createCppService(params) {
       const s = this.rb.read({ resource: e })
       let n
       const r = this.filterLinterErrors(s)
-      let a = (t !== void 0 ? [t, ...r.filter((c) => c !== t)] : r)
+      let a = (t !== undefined ? [t, ...r.filter((c) => c !== t)] : r)
         .map((c) => ({
           message: c.message,
           relatedInformation: BMs(c.relatedInformation),
@@ -2279,7 +2279,7 @@ export function createCppService(params) {
           (n = new Cf({
             relativeWorkspacePath: this.mb.asRelativePath(e),
             errors: a,
-            fileContents: void 0,
+            fileContents: undefined,
           })),
         n
       )
@@ -2307,7 +2307,7 @@ export function createCppService(params) {
       this.Yb = e
     }
     async getGlobalDiffTrajectoriesAllowEvalOverride() {
-      return !1
+      return false
         ? this.Yb
           ? (console.warn("NOTE: Using overridden diff history"), this.Yb)
           : this.getGlobalDiffTrajectories()
@@ -2354,21 +2354,21 @@ export function createCppService(params) {
               a,
               n,
             )),
-        u !== void 0 && u.cursorPosition !== void 0)
+        u !== undefined && u.cursorPosition !== undefined)
       ) {
         const D = !a
           ? this.Zb(u?.contents ?? "", u.cursorPosition.line, h, c)
           : u?.contents
         u.contents = D ?? ""
       }
-      if (this.S === void 0) throw new Error("Diffing provider is undefined")
+      if (this.S === undefined) throw new Error("Diffing provider is undefined")
       let d
       const g = performance.now()
       let p
       const m = this.C.get(this.F(c))
-      if (m === void 0) {
+      if (m === undefined) {
         const E = await this.getGlobalDiffTrajectories()
-        if (E === void 0)
+        if (E === undefined)
           throw new Error(
             "Compile Diff Trajectories not registered in extension host",
           )
@@ -2392,7 +2392,7 @@ export function createCppService(params) {
       })
       const C = performance.now(),
         S =
-          this.Ob().cppConfig?.enableRvfTracking === !0
+          this.Ob().cppConfig?.enableRvfTracking === true
             ? await this.$b(e, t)
             : [],
         x = performance.now()
@@ -2403,7 +2403,7 @@ export function createCppService(params) {
       const k =
         o === ll.ManualTrigger
           ? hG.OP
-          : (this.hb.applicationUserPersistentStorage.cppControlToken ?? void 0)
+          : (this.hb.applicationUserPersistentStorage.cppControlToken ?? undefined)
       return {
         ...d,
         linterErrors: l,
@@ -2421,7 +2421,7 @@ export function createCppService(params) {
         const s = this.zb.visibleEditorPanes,
           n = [],
           r = this.mb.asRelativePath(t),
-          o = this.Ob().cppConfig?.shouldFetchRvfText === !0,
+          o = this.Ob().cppConfig?.shouldFetchRvfText === true,
           a = (u, d) =>
             d.map((g) => ({
               startLineNumber: g.startLineNumber,
@@ -2441,7 +2441,7 @@ export function createCppService(params) {
             }))
         for (const u of s) {
           const d = u.getControl()
-          if (d !== void 0 && Pn(d)) {
+          if (d !== undefined && Pn(d)) {
             if (d.getId() === e.getId()) continue
             const g = d.getModel()
             if (g === null) continue
@@ -2454,8 +2454,8 @@ export function createCppService(params) {
                 startLineNumber: m.startLineNumber,
                 endLineNumberInclusive: m.endLineNumber,
               })),
-              isOpen: !0,
-              lastViewedAt: void 0,
+              isOpen: true,
+              lastViewedAt: undefined,
             })
           }
         }
@@ -2467,7 +2467,7 @@ export function createCppService(params) {
               try {
                 const g = this.mb.asRelativePath(u)
                 if (
-                  g === void 0 ||
+                  g === undefined ||
                   n.find((p) => p.relativeWorkspacePath === g) ||
                   r === g
                 )
@@ -2478,7 +2478,7 @@ export function createCppService(params) {
                   if (o) {
                     const b = await this.ib.createModelReference(u)
                     if (
-                      (c.add(b), (p = b.object.textEditorModel), p === void 0)
+                      (c.add(b), (p = b.object.textEditorModel), p === undefined)
                     )
                       continue
                     if (p.getValueLength() > hdi) {
@@ -2489,7 +2489,7 @@ export function createCppService(params) {
                   const m = a(p, d.visibleRanges)
                   n.push({
                     relativeWorkspacePath: g,
-                    isOpen: !1,
+                    isOpen: false,
                     visibleRangeContent: m.map((b) => b.content),
                     startLineNumberOneIndexed: m.map((b) => b.startLineNumber),
                     visibleRanges: m.map((b) => ({
@@ -2515,7 +2515,7 @@ export function createCppService(params) {
             ? u.isOpen
               ? 1
               : -1
-            : u.lastViewedAt === void 0 || d.lastViewedAt === void 0
+            : u.lastViewedAt === undefined || d.lastViewedAt === undefined
               ? 0
               : u.lastViewedAt - d.lastViewedAt,
         )
@@ -2531,7 +2531,7 @@ export function createCppService(params) {
     getWorkspaceId() {
       let e = this.hb.workspaceUserPersistentStorage.uniqueCppWorkspaceId
       return (
-        e === void 0 &&
+        e === undefined &&
           ((e =
             Math.random().toString(36).substring(2, 15) +
             Math.random().toString(36).substring(2, 15)),
@@ -2540,30 +2540,30 @@ export function createCppService(params) {
       )
     }
     isReferenceFocused(e) {
-      if (!this.hb.applicationUserPersistentStorage.cppInPeek) return !1
+      if (!this.hb.applicationUserPersistentStorage.cppInPeek) return false
       const t = this.gb.getActiveCodeEditor()
-      if (t === null) return !1
+      if (t === null) return false
       const s = mR.get(t)?.getWidget()
-      return s !== void 0 && s.hasFocus() && s.getPreviewEditor() === e
+      return s !== undefined && s.hasFocus() && s.getPreviewEditor() === e
     }
     isFindActive(e) {
       if (
-        this.hb.applicationUserPersistentStorage.cppInCmdF !== !0 ||
-        e === void 0
+        this.hb.applicationUserPersistentStorage.cppInCmdF !== true ||
+        e === undefined
       )
-        return !1
+        return false
       const t = fm.get(e)
       return t instanceof gle && t.isActive()
     }
     isFindFocused(e) {
-      if (!this.hb.applicationUserPersistentStorage.cppInCmdF || e === void 0)
-        return !1
+      if (!this.hb.applicationUserPersistentStorage.cppInCmdF || e === undefined)
+        return false
       const t = fm.get(e)
-      if (t === null) return !1
+      if (t === null) return false
       try {
-        if (!t.isFindInputFocused()) return !1
+        if (!t.isFindInputFocused()) return false
       } catch {
-        return !1
+        return false
       }
       const s = e.getSelection()
       return s !== null && !s.isEmpty()
@@ -2577,11 +2577,11 @@ export function createCppService(params) {
       }
     }
     isProblemFocused(e) {
-      if (!this.hb.applicationUserPersistentStorage.cppInPeek || !e) return !1
+      if (!this.hb.applicationUserPersistentStorage.cppInPeek || !e) return false
       const t = this.gb.getActiveCodeEditor()
       return e !== t
-        ? !1
-        : (this.Eb.getActiveViewWithId(xr.MARKERS_VIEW_ID)?.isFocused() ?? !1)
+        ? false
+        : (this.Eb.getActiveViewWithId(xr.MARKERS_VIEW_ID)?.isFocused() ?? false)
     }
     isTextFocusedOrSimilarlyFocused(e) {
       return e
@@ -2589,11 +2589,11 @@ export function createCppService(params) {
             this.isReferenceFocused(e) ||
             this.isProblemFocused(e) ||
             this.isFindFocused(e)
-        : !1
+        : false
     }
     getFocusedCodeEditor() {
       const e = this.gb.getActiveCodeEditor()
-      return e?.hasTextFocus() === !0
+      return e?.hasTextFocus() === true
         ? e
         : (this.gb
             .listCodeEditors()
@@ -2613,7 +2613,7 @@ export function createCppService(params) {
         c = r.getCellsBefore(o),
         u = r.getCellsAfter(o)?.map((p) => p.model.getValue()),
         d = c?.map((p) => p.model.getValue())
-      return d === void 0
+      return d === undefined
         ? (oa("[Cpp] Bad Case: prevCellValues is undefined"), null)
         : !l || !d
           ? (oa("[Cpp] Bad Case: cellValues or prevCellValues is undefined"),
@@ -2628,7 +2628,7 @@ export function createCppService(params) {
             }
     }
     getModelName() {
-      return this.Ob().cppModel !== "" ? this.Ob().cppModel : void 0
+      return this.Ob().cppModel !== "" ? this.Ob().cppModel : undefined
     }
     async immediatelyFireCppWithSpecifiedPosition({
       uri: uri,
@@ -2641,9 +2641,9 @@ export function createCppService(params) {
       context: context,
       source: source,
     }) {
-      if (this.S === void 0)
+      if (this.S === undefined)
         return (
-          oa("[Cpp] Bad Case: diffingProvider is undefined"), { success: !1 }
+          oa("[Cpp] Bad Case: diffingProvider is undefined"), { success: false }
         )
       this.fastPeriodicallyReloadCppConfig()
       const shouldRelyOnFileSync =
@@ -2653,13 +2653,13 @@ export function createCppService(params) {
               relativeWorkspacePath: this.mb.asRelativePath(uri),
               modelVersion: modelVersion,
             },
-          )) ?? !1,
+          )) ?? false,
         cppConfig = this.Ob().cppConfig
       if (
         (!shouldRelyOnFileSync || !cppConfig?.enableFilesyncDebounceSkipping) &&
         (await this.Z.shouldDebounce(generationUUID))
       )
-        return { success: !1 }
+        return { success: false }
       const startTime = performance.now()
       let partialCppRequest
       try {
@@ -2675,14 +2675,14 @@ export function createCppService(params) {
       } catch (e) {
         return (
           oa(`[Cpp] Bad Case: Error in getPartialCppRequest: ${e}`),
-          { success: !1 }
+          { success: false }
         )
       }
       const model = editor.getModel()
       if (model === null)
-        return oa("[Cpp] Bad Case: model is null"), { success: !1 }
+        return oa("[Cpp] Bad Case: model is null"), { success: false }
       let workspaceId = this.hb.workspaceUserPersistentStorage.uniqueCppWorkspaceId
-      workspaceId === void 0 &&
+      workspaceId === undefined &&
         ((workspaceId =
           Math.random().toString(36).substring(2, 15) +
           Math.random().toString(36).substring(2, 15)),
@@ -2701,7 +2701,7 @@ export function createCppService(params) {
       abortController.signal.addEventListener("abort", () => {
         this.S?.cancelCpp(generationUUID)
       }),
-        this.X !== void 0 &&
+        this.X !== undefined &&
           this.tb.distribution({
             stat: "cppclient.beforeStreamCpp",
             value: performance.now() - this.X,
@@ -2759,7 +2759,7 @@ export function createCppService(params) {
         cppStream = this.streamCpp(abortController, cppProvider, generationUUID)
       if (cppStream == null)
         return (
-          oa("[Cpp] Bad Case: cppStream is null or undefined"), { success: !1 }
+          oa("[Cpp] Bad Case: cppStream is null or undefined"), { success: false }
         )
       const streamIterator = cppStream[Symbol.asyncIterator]()
       let firstChunkValue,
@@ -2771,7 +2771,7 @@ export function createCppService(params) {
       for (;;) {
         const nextValue = await streamIterator.next()
         if (nextValue.done) {
-          if (abortController.signal.aborted) return { success: !1 }
+          if (abortController.signal.aborted) return { success: false }
           zdt("[Cpp] Bad Case: stream ended before finding range")
           break
         }
@@ -2788,10 +2788,10 @@ export function createCppService(params) {
           break
         }
       }
-      if (textToReplace === void 0 || rangeToReplace === void 0)
+      if (textToReplace === undefined || rangeToReplace === undefined)
         return (
           zdt("[Cpp] Bad Case: did not find rewriteRange from stream"),
-          { success: !1 }
+          { success: false }
         )
       const isFusedCursorPredictionModel = modelInfo
           ? modelInfo.isFusedCursorPredictionModel
@@ -2816,7 +2816,7 @@ export function createCppService(params) {
             generationUUID: generationUUID,
           }),
         });
-        this.Ob().chunkedStreamingEnabledV2 === !0
+        this.Ob().chunkedStreamingEnabledV2 === true
           ? ([firstChunkValue, fullText] = await handleChunkedStream(streamIterator, textToReplace, (position.lineNumber ?? 1) - rangeToReplace.startLineNumber))
           : (firstChunkValue = await consumeRemainingStream(streamIterator))
       }
@@ -2856,7 +2856,7 @@ export function createCppService(params) {
         });
       })
 
-      if (abortController.signal.aborted) return { success: !1 }
+      if (abortController.signal.aborted) return { success: false }
       if (
         ((this.w = generationUUID),
         this.qb.recordCppTriggerEvent(
@@ -2870,9 +2870,9 @@ export function createCppService(params) {
         ),
         this
           .pauseCppTriggeringUntilUnpaused_DANGEROUS_ONLY_SET_IF_YOU_KNOW_WHAT_YOU_ARE_DOING ===
-          !0)
+          true)
       )
-        return oa("[Cpp] Bad Case: triggering is paused"), { success: !1 }
+        return oa("[Cpp] Bad Case: triggering is paused"), { success: false }
       const eol = model.getEOL(),
         notebookInfo = this.getNotebookCellInfo(model, editor, eol),
         isValidCase = await this.Fb.isValidCppCase({
@@ -2904,7 +2904,7 @@ export function createCppService(params) {
       if (!isValidCase.valid) {
         const cursorPredictionResult = await fusedCursorPrediction
         return predictionId !== this.cb
-          ? { success: !1 }
+          ? { success: false }
           : (cursorPredictionResult !== null &&
               (this.ab
                 ? oa(
@@ -2945,7 +2945,7 @@ export function createCppService(params) {
                         : oa(
                             "[Cpp] Not displaying fused NCP because the source was cursor prediction",
                           ))),
-            { success: !1 })
+            { success: false })
       }
       ;(firstChunkValue = isValidCase.modelOutputText),
         fusedCursorPrediction?.then((prediction) => {
@@ -2960,7 +2960,7 @@ export function createCppService(params) {
               generationUUID: generationUUID,
             }),
           });
-          return (this.uponFusedCursorPredictionReady(predictionId, prediction), !0)
+          return (this.uponFusedCursorPredictionReady(predictionId, prediction), true)
         })
       const suggestion = this.Gb.createUnseenSuggestion({
         model: modelSnapshot,
@@ -2972,22 +2972,22 @@ export function createCppService(params) {
         selection: range,
         source: source,
         suggestionTriggerTime: context.startOfCpp,
-        fusedCursorPredictionId: fullText === void 0 ? predictionId : void 0,
+        fusedCursorPredictionId: fullText === undefined ? predictionId : undefined,
       })
-      if (suggestion === void 0)
-        return oa("[Cpp] Bad Case: cppSuggestion is undefined"), { success: !1 }
+      if (suggestion === undefined)
+        return oa("[Cpp] Bad Case: cppSuggestion is undefined"), { success: false }
       const endTime = performance.now()
       this.tb.distribution({ stat: "cppclient.immediatelyFire", value: endTime - startTime })
       let isSuggestionDisplayed
       return (
         this.y !== generationUUID ||
-        this.getCurrentSuggestion() !== void 0 ||
+        this.getCurrentSuggestion() !== undefined ||
         model.getVersionId() !== modelVersionId ||
         (this.Ob().cppAutoImportEnabled && this.Ib.isShowingImportSuggestion())
-          ? ((isSuggestionDisplayed = !0),
+          ? ((isSuggestionDisplayed = true),
             this.N.addSuggestion({ ...suggestion, abortController: abortController }, model, editor))
           : (this.Vb(suggestion), (isSuggestionDisplayed = this.displayCppSuggestion(editor, model, suggestion))),
-        fullText !== void 0 && isSuggestionDisplayed && !abortController.signal.aborted
+        fullText !== undefined && isSuggestionDisplayed && !abortController.signal.aborted
           ? fullText.then((fullTextResult) => {
               abortController.signal.aborted ||
                 (recordFinishedGeneration(fullTextResult),
@@ -3004,7 +3004,7 @@ export function createCppService(params) {
                 this.generateFollowupSuggestion(editor, fullTextResult, model, suggestion, position, eol, predictionId),
                 (this.R = this.R.filter((ke) => ke.generationUUID !== generationUUID)))
             })
-          : fullText === void 0 &&
+          : fullText === undefined &&
             (recordFinishedGeneration(firstChunkValue), (this.R = this.R.filter((Ee) => Ee.generationUUID !== generationUUID))),
         { success: isSuggestionDisplayed }
       )
@@ -3044,7 +3044,7 @@ export function createCppService(params) {
         },
         currentSuggestion = this.getCurrentSuggestion()
       if (
-        currentSuggestion === void 0 &&
+        currentSuggestion === undefined &&
         this.u?.requestId === suggestion.requestId &&
         this.u?.modelVersion === model.getVersionId() &&
         this.u?.modelId === model.id
@@ -3071,10 +3071,10 @@ export function createCppService(params) {
             generationUUID: suggestion.requestId,
           }),
         });
-        if (newSuggestion === void 0) return
+        if (newSuggestion === undefined) return
         this.displayCppSuggestion(editor, model, newSuggestion)
       } else if (currentSuggestion?.uniqueId !== suggestion.uniqueId)
-        if (this.N.getMatchingSuggestion(suggestion.uniqueId) !== void 0) {
+        if (this.N.getMatchingSuggestion(suggestion.uniqueId) !== undefined) {
           const newSuggestion = this.Gb.createUnseenSuggestion({
             model: model,
             diffText: fullTextResult,
@@ -3096,8 +3096,8 @@ export function createCppService(params) {
               generationUUID: suggestion.requestId,
             }),
           });
-          if (newSuggestion === void 0) {
-            predictionId !== void 0 &&
+          if (newSuggestion === undefined) {
+            predictionId !== undefined &&
               this.db.has(predictionId) &&
               this.displayFusedCursorPredictionIfAvailable(
                 editor,
@@ -3133,7 +3133,7 @@ export function createCppService(params) {
             generationUUID: suggestion.requestId,
           }),
         });
-        if (newSuggestion === void 0) {
+        if (newSuggestion === undefined) {
           this.createOrUpdateSuggestionState({ fusedCursorPredictionId: predictionId })
           return
         }
@@ -3143,10 +3143,10 @@ export function createCppService(params) {
     }
     getCurrentReplaceText(e) {
       const t = this.getCurrentSuggestion()
-      if (t === void 0) return
+      if (t === undefined) return
       const s = F_(e, t)
       return s === null
-        ? void 0
+        ? undefined
         : e.getValueInRange({
             startLineNumber: s.startLineNumber,
             startColumn: s.startColumn,
@@ -3242,7 +3242,7 @@ export function createCppService(params) {
         (s = {
           description: "cpp suggestion",
           className:
-            t && this.Ob().cppConfig?.isGhostText !== !0
+            t && this.Ob().cppConfig?.isGhostText !== true
               ? XMs
               : "<NO_CLASS_DEFINED_CPP>",
           stickiness: 0,
@@ -3279,8 +3279,8 @@ export function createCppService(params) {
     }
     createSuggestionDecoration(e, t, s) {
       return (
-        this.Ob().cppHighlightCursor === !0 &&
-          ((s = !1), this.showCursorHighlight()),
+        this.Ob().cppHighlightCursor === true &&
+          ((s = false), this.showCursorHighlight()),
         e.deltaDecorations([], [this.getSuggestionDecorationOptions(t, s)])[0]
       )
     }
@@ -3289,23 +3289,23 @@ export function createCppService(params) {
     }
     updateSuggestionStateHalfSilently(e) {
       const t = this.Pb().cppState
-      if (!(t === void 0 || t.suggestion === void 0))
+      if (!(t === undefined || t.suggestion === undefined))
         return this.createOrUpdateSuggestionStateHalfSilently(e)
     }
     createOrUpdateSuggestionStateHalfSilently(e) {
-      this.Pb().cppState !== void 0 &&
+      this.Pb().cppState !== undefined &&
         this.hb.setNonPersistentStorage("cppState", "suggestion", (s) =>
-          s === void 0 ? e : { ...s, ...e },
+          s === undefined ? e : { ...s, ...e },
         )
     }
     updateSuggestionState(e) {
-      if (this.Pb().cppState?.suggestion !== void 0)
+      if (this.Pb().cppState?.suggestion !== undefined)
         return this.createOrUpdateSuggestionState(e)
     }
     createOrUpdateSuggestionState(e) {
-      this.Pb().cppState !== void 0 &&
+      this.Pb().cppState !== undefined &&
         this.hb.setNonPersistentStorage("cppState", (s) => {
-          if (s === void 0) return
+          if (s === undefined) return
           const n = s.suggestion
           return { ...s, suggestion: n ? { ...n, ...e } : e }
         })
@@ -3351,11 +3351,11 @@ export function createCppService(params) {
         }),
       });
       if (this.textEqualsCurrentRange(model, suggestion.replaceText, suggestion.range))
-        return oa("[Cpp] Bad Case: Suggestion text matches current text"), !1
+        return oa("[Cpp] Bad Case: Suggestion text matches current text"), false
       if (
         this.pauseCppTriggeringUntilUnpaused_DANGEROUS_ONLY_SET_IF_YOU_KNOW_WHAT_YOU_ARE_DOING === true
       )
-        return oa("[Cpp] Bad Case: triggering is paused"), !1
+        return oa("[Cpp] Bad Case: triggering is paused"), false
       const currentSuggestion = this.getCurrentSuggestion()
       if (
         currentSuggestion !== undefined &&
@@ -3532,14 +3532,14 @@ export function createCppService(params) {
     }
     getHiddenSuggestion(e, t) {
       const s = this.getCurrentSuggestion()
-      return s === void 0 || !s.suggestionIsCurrentlyHidden ? null : s
+      return s === undefined || !s.suggestionIsCurrentlyHidden ? null : s
     }
     getVisibleSuggestion() {
       const e = this.getCurrentSuggestion()
-      return e === void 0 || e.suggestionIsCurrentlyHidden ? null : e
+      return e === undefined || e.suggestionIsCurrentlyHidden ? null : e
     }
     disableAndHideCopilotSuggestion(e) {
-      this.editorThatWeHidGhostTextOn !== void 0 &&
+      this.editorThatWeHidGhostTextOn !== undefined &&
         this.unhideCopilotSuggestion(this.editorThatWeHidGhostTextOn),
         (this.editorThatWeHidGhostTextOn = e),
         Ad.get(this.editorThatWeHidGhostTextOn)
@@ -3547,17 +3547,17 @@ export function createCppService(params) {
           ?.clearCopilotSuggestions(),
         Ad.get(e)
           ?.model.get()
-          ?.isHidden.set(!0, void 0)
+          ?.isHidden.set(true, undefined)
     }
     unhideCopilotSuggestion(e) {
       Ad.get(e)
         ?.model.get()
-        ?.isHidden.set(!1, void 0)
+        ?.isHidden.set(false, undefined)
     }
     saveEditorSelectionInSuggestion(e, t, s) {
       const n = e.getSelection()
       this.updateSuggestionState({
-        editorSelectionBeforePeek: n !== null ? n : void 0,
+        editorSelectionBeforePeek: n !== null ? n : undefined,
       })
     }
     saveCurrentTextIntoSuggestion(e, t) {
@@ -3587,15 +3587,15 @@ export function createCppService(params) {
       //     action: 'press Tab to acceptFullSuggestion',
       //   }),
       // });
-      return await this.acceptSuggestion(!1, e, t)
+      return await this.acceptSuggestion(false, e, t)
     }
     async acceptNextWordSuggestion(e, t) {
-      return await this.acceptSuggestion(!0, e, t)
+      return await this.acceptSuggestion(true, e, t)
     }
     async acceptSuggestion(e, t, s) {
-      let n = !1
+      let n = false
       t?.signal.addEventListener("abort", () => {
-        n = !0
+        n = true
       })
       const r = this.getFocusedCodeEditor(),
         o = r?.getModel()
@@ -3663,7 +3663,7 @@ export function createCppService(params) {
         lineNumber += r.split(g).length - n.split(g).length
       }
       if (
-        this.overlapsInlineDiff(l.uri, lineNumber, { onlyCheckCurrentlyGenerating: !1 })
+        this.overlapsInlineDiff(l.uri, lineNumber, { onlyCheckCurrentlyGenerating: false })
       )
         return
       const d = fusedCursorPrediction.shouldRetriggerCpp && n !== r
@@ -3682,10 +3682,10 @@ export function createCppService(params) {
     }
     removeSuggestion() {
       const e = this.Pb().cppState
-      e !== void 0 &&
+      e !== undefined &&
         this.hb.setNonPersistentStorage("cppState", {
           ...e,
-          suggestion: void 0,
+          suggestion: undefined,
         })
     }
     cleanupAfterNextWordSuggestion(e, t) {
@@ -3794,23 +3794,23 @@ export function createCppService(params) {
             newText: r,
           })
     }
-    revertSuggestion(e, t = { removeGreens: !0 }) {
+    revertSuggestion(e, t = { removeGreens: true }) {
       const s = this.getVisibleSuggestion()
       if (s === null) return
       const n = e.getModel(),
         r = this.getEditorCurrentPositionRange(e)
       e === null ||
-        e.hasTextFocus() === !1 ||
-        n === void 0 ||
+        e.hasTextFocus() === false ||
+        n === undefined ||
         n === null ||
         r === null ||
         (this.ob.publicLogCapture("cursor.revertcppsuggestion"),
         this.qb.recordRejectSuggestionEvent(n, s),
         this.removeAllHighlights(n, t),
         this.updateSuggestionStateHalfSilently({
-          suggestionIsCurrentlyHidden: !0,
-          hasBeenSeen: !0,
-          editorSelectionBeforePeek: void 0,
+          suggestionIsCurrentlyHidden: true,
+          hasBeenSeen: true,
+          editorSelectionBeforePeek: undefined,
         }),
         this.reallowCopilotIfWePreviousHidCopilotSuggestions())
     }
@@ -3820,28 +3820,28 @@ export function createCppService(params) {
       }),
         (this.R = this.R.filter((t) => t.generationUUID === e)),
         this.holdDownAbortController?.abort(),
-        (this.holdDownAbortController = void 0)
+        (this.holdDownAbortController = undefined)
     }
     rejectSuggestionForTelemetryIfExists(e) {
       const t = this.getCurrentSuggestion()
-      if (t === void 0) return
+      if (t === undefined) return
       const s = e.getModel()
       s != null &&
         (this.qb.recordRejectSuggestionEvent(s, t),
         this.ob.publicLogCapture("cursor.rejectcppsuggestion"))
     }
-    rejectAndResetAllCppSuggestions(e = { removeGreens: !0, abortAll: !0 }) {
+    rejectAndResetAllCppSuggestions(e = { removeGreens: true, abortAll: true }) {
       e.abortAll && this.abortAllCppRequests()
       const t = this.gb.getActiveCodeEditor()
       t != null &&
         (this.rejectSuggestionForTelemetryIfExists(t),
         this.revertSuggestion(t, e),
-        this.clearSuggestions(void 0, e))
+        this.clearSuggestions(undefined, e))
     }
     clearDecorationsSlowEnumeratesAllDecorations() {
       const e = this.gb.getActiveCodeEditor(),
         t = e?.getModel()
-      if (e == null || t === null || t === void 0) return
+      if (e == null || t === null || t === undefined) return
       this.removeAllHighlights(t)
       const s = t.getAllDecorations(),
         n = s
@@ -3860,11 +3860,11 @@ export function createCppService(params) {
         .map((a) => a.id)
       r.length > 0 && t.deltaDecorations(r, []), this.O.delete(t.uri)
       const o = this.getCurrentSuggestion()
-      o !== void 0 &&
-        o.decorationId !== void 0 &&
+      o !== undefined &&
+        o.decorationId !== undefined &&
         t.deltaDecorations([o.decorationId], [])
     }
-    clearDecorationsFast(e = { removeGreens: !0 }) {
+    clearDecorationsFast(e = { removeGreens: true }) {
       const s = this.gb.getActiveCodeEditor()?.getModel()
       if (s == null) return
       const n = this.decIdsThatAreNotInReactiveStorage.green,
@@ -3872,7 +3872,7 @@ export function createCppService(params) {
           .filter((c) => c !== n)
           .flat(),
         o = e.removeGreens ? [...this.I, ...n, ...r] : [...r]
-      e.removeGreens === !1 ? this.I.push(...n) : (this.I = []),
+      e.removeGreens === false ? this.I.push(...n) : (this.I = []),
         o.length > 0 && s.deltaDecorations(o, []),
         (this.decIdsThatAreNotInReactiveStorage = Object.fromEntries(
           Object.keys(this.decIdsThatAreNotInReactiveStorage).map((c) => [
@@ -3881,34 +3881,34 @@ export function createCppService(params) {
           ]),
         ))
       const a = this.getCurrentSuggestion()
-      if (a === void 0) return
+      if (a === undefined) return
       const l = [a.decorationId]
       l.length > 0 && s.deltaDecorations(l, [])
     }
-    clearSuggestions(e, t = { removeGreens: !0 }) {
-      e !== !0 && this.clearDecorationsFast(t),
-        this.Pb().cppState?.suggestion !== void 0 &&
+    clearSuggestions(e, t = { removeGreens: true }) {
+      e !== true && this.clearDecorationsFast(t),
+        this.Pb().cppState?.suggestion !== undefined &&
           (this.numberOfClearedSuggestionsSinceLastAccept += 1),
-        this.hb.setNonPersistentStorage("cppState", "suggestion", void 0)
+        this.hb.setNonPersistentStorage("cppState", "suggestion", undefined)
     }
-    removeAllHighlights(e, t = { removeGreens: !0 }) {
+    removeAllHighlights(e, t = { removeGreens: true }) {
       this.hideCursorHighlight(),
-        t.removeGreens !== !1 && this.clearAllGreenHighlights(e)
+        t.removeGreens !== false && this.clearAllGreenHighlights(e)
     }
     isOnShortestEditPath({ event: e, model: t }, s) {
       const n = this.gb.getActiveCodeEditor()
-      if (n == null || n.getModel()?.id !== t.id) return !1
+      if (n == null || n.getModel()?.id !== t.id) return false
       const r = this.getCurrentSuggestion()
-      if (r === void 0) return !1
+      if (r === undefined) return false
       let o
-      if (s === void 0) {
+      if (s === undefined) {
         const l = this.getPreviousModelValue(t)
-        if (l === void 0) return !1
+        if (l === undefined) return false
         o = l
       } else o = s
       const a = jBt(o, t.uri)
-      return this.L.checkChangeExists(e, !0)
-        ? !0
+      return this.L.checkChangeExists(e, true)
+        ? true
         : qfo({
             event: e,
             model: t,
@@ -3928,10 +3928,10 @@ export function createCppService(params) {
           eol: n,
         },
       )
-      if (r === void 0)
+      if (r === undefined)
         throw new Error("Format Diff History not registered in extension host")
       ;(this.U = { modelVersion: s.getVersionId(), modelId: s.id }),
-        this.Y.fire === !0 &&
+        this.Y.fire === true &&
           (this.Bb.getAndShowNextPrediction({
             editor: t,
             triggerCppCallback: this.fireCppSuggestionFromTrigger.bind(this),
@@ -3940,13 +3940,13 @@ export function createCppService(params) {
             source: QN.ACCEPT,
             cppSuggestionRange: this.Y.acceptedRange,
           }),
-          (this.Y = { fire: !1, acceptedRange: void 0 })),
+          (this.Y = { fire: false, acceptedRange: undefined })),
         this.C.set(this.F(s), r),
         this.G.set(this.H(s), s.getValue())
     }
     checkOverlappingSuggestion(e, t) {
       const s = this.getCurrentSuggestion()
-      if (s === void 0 || s.uri.toString() !== e.uri.toString()) return null
+      if (s === undefined || s.uri.toString() !== e.uri.toString()) return null
       const n = e.getDecorationRange(s.decorationId)
       return n &&
         n.startLineNumber <= t.endLineNumberInclusive &&
@@ -4015,8 +4015,8 @@ export function createCppService(params) {
       return new Ho({
         relativeWorkspacePath: this.mb.asRelativePath(e.uri),
         contents: c.join(o),
-        sha256Hash: n ? await this.bc(c.join(o), this.fb) : void 0,
-        selection: void 0,
+        sha256Hash: n ? await this.bc(c.join(o), this.fb) : undefined,
+        selection: undefined,
         cursorPosition: new Qm({
           line: s.lineNumber - 1 + l,
           column: s.column - 1,
@@ -4032,12 +4032,12 @@ export function createCppService(params) {
         return new Ho({
           relativeWorkspacePath: this.mb.asRelativePath(e),
           contents: t,
-          sha256Hash: n ? await this.bc(t, this.fb) : void 0,
+          sha256Hash: n ? await this.bc(t, this.fb) : undefined,
           cursorPosition: new Qm({
             line: s.lineNumber - 1,
             column: s.column - 1,
           }),
-          selection: void 0,
+          selection: undefined,
           languageId: "",
           fileVersion: r,
           workspaceRootPath: this.mb.getWorkspaceFolder(e)?.uri.fsPath,
@@ -4064,11 +4064,11 @@ export function createCppService(params) {
       const t =
         this.hb.applicationUserPersistentStorage.cppConfig
           ?.shouldLetUserEnableCppEvenIfNotPro
-      this.Ob().cppEnabled === !0 &&
-        e.shouldLetUserEnableCppEvenIfNotPro === !1 &&
-        t === !0 &&
-        m2i(this.nb.membershipType()) === !1 &&
-        this.hb.setNonPersistentStorage("showingCppUpsell", !0),
+      this.Ob().cppEnabled === true &&
+        e.shouldLetUserEnableCppEvenIfNotPro === false &&
+        t === true &&
+        m2i(this.nb.membershipType()) === false &&
+        this.hb.setNonPersistentStorage("showingCppUpsell", true),
         this.hb.setApplicationUserPersistentStorage("cppConfig", e),
         this.Db.onlyLocalProvider?.runCommand(
           tv.SetEnableCppWhitespaceDiffHistoryMode,
@@ -4081,7 +4081,7 @@ export function createCppService(params) {
         this.wb.setSuggestionHintsConfig(e.suggestionHintConfig)
     }
     async getCppReport() {
-      if (this.S !== void 0) return await this.S.getCppReport()
+      if (this.S !== undefined) return await this.S.getCppReport()
     }
   };
 
