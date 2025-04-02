@@ -1,7 +1,7 @@
 // @ts-check
 
 export function createImportPredictionService(params) {
-  const {V, __decorate, __param, Pt: themeService, ue: configurationService, ei, Ve, it, mo, Z, kH, jdt, kp, yi, Xt, cl, hv, zi, xp, st, cU, importPredictionService, yo, DYe, fu, rt, q, W, Un, Va, Ri, ys, ddi, DHe, Ze, gI, G, mp, lp, Me, GB, ll, P1t, HMi, hG, y7, g1, Kh, U, pm } = params;
+  const {V, __decorate, __param, Pt: themeService, ue: configurationService, ei, Ve, it, mo, Z, kH, jdt, everythingProviderService, yi, Xt, cl, hv, zi, xp, st, cU, importPredictionService, yo, DYe, fu, rt, q, W, Un, Va, Ri, ys, ddi, DHe, Ze, gI, G, mp, lp, Me, GB, ll, P1t, HMi, hG, y7, g1, Kh, U, pm } = params;
 
   var bdi,
     vdi = class extends V {
@@ -1293,7 +1293,7 @@ export function createImportPredictionService(params) {
       __param(3, Z),
       __param(4, kH),
       __param(5, jdt),
-      __param(6, kp),
+      __param(6, everythingProviderService),
       __param(7, yi),
       __param(8, Xt),
       __param(9, cl),

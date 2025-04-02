@@ -2,7 +2,7 @@
 
 // 245900
 export function createAIServiceSet(params) {
-  const {Re, V, Ve, __decorate, CYe, __param, _, bt, mUe, ms, U, IMi, ue, it, Ls, fr, yo, Yt, va, rt, ys, J, Es, GJ, nm, Ze, Y1t, OP, Qc, Ri, gVe, _B, pVe, _n, Lg, Xt, kp, st, Ci, hw, ei, xp, oy, ve, si, mo, nt, $h, x5, EKn, xFt, fz, G, yi, nl, Z, ize, wn, Va, N1, SN, am, Br, fn, v, Qm, Tgn, gt, fu, Me, ce, oi, Ti, CR, T1, le, co, R, cF, vm, ns, V1t, y$i, M_, jB, fs, v$i, mVe, tK, Md, tg, Wr, Xn, Vu, ss, Ioe, UE, PSt, ls, jt, Mae, Ha, dC, $I, ev, _T, N$, s9e, bn, BMi, hk, iG, L1, Zc, FMi, HC, QWe, uNn, __addDisposableResource, gl, __disposeResources, JJ, lG, wVe, wJi, eoe, j9i, J9, Qb, At, Na, g2, Ll, lU, tqe, op, oTi, wf, et, DEt, $Bi, FBi, yNn, gNn, $ae, bNn, RBi, SNn, wNn, FT, un, Sg, Toe, WB, rc, ft, zi, Zi, mI, Cp, YC, Y$, hv, a7, KNi, pt, bi, B_, eg, An, lb, fP, Pa, Ft, Hi, Sk, ZR, qi, Fo, R1, Pt, Ks, gze, ZUi, rU, Ag, uP, cv, Oc, uc, jM, UUi, HUi, Ht, cppService, es, ua, lv, u0, cl, Vo, wYe, bY, Ac, pKi, NI, p0, Gi, ko, Wi, SKi, uEt, Ce, Vr, H4i, pFt, qv, cursorPredictionService, nPt, importPredictionService, _c, g0, m2, c5, yYe, dEt, Qi, yc, DR, ZJ, fEt, Tk, Ck, _C, f5, vk, Pl, Xp, RHe, jIi, I, Ct } = params;
+  const {Re, V, Ve, __decorate, CYe, __param, _, bt, mUe, ms, U, IMi, ue, it, Ls, fr, yo, Yt, va, rt, ys, J, Es, GJ, nm, Ze, Y1t, OP, Qc, Ri, gVe, _B, pVe, _n, Lg, Xt, everythingProviderService, st, Ci, hw, ei, xp, oy, ve, si, mo, nt, $h, x5, EKn, xFt, fz, G, yi, nl, Z, ize, wn, Va, N1, SN, am, Br, fn, v, Qm, Tgn, gt, fu, Me, ce, oi, Ti, CR, T1, le, co, R, cF, vm, ns, V1t, y$i, M_, jB, fs, v$i, mVe, tK, Md, tg, Wr, Xn, Vu, ss, Ioe, UE, PSt, ls, jt, Mae, Ha, dC, $I, ev, _T, N$, s9e, bn, BMi, hk, iG, L1, Zc, FMi, HC, QWe, uNn, __addDisposableResource, gl, __disposeResources, JJ, lG, wVe, wJi, eoe, j9i, J9, Qb, At, Na, g2, Ll, lU, tqe, op, oTi, wf, et, DEt, $Bi, FBi, yNn, gNn, $ae, bNn, RBi, SNn, wNn, FT, un, Sg, Toe, WB, rc, ft, zi, Zi, mI, Cp, YC, Y$, hv, a7, KNi, pt, bi, B_, eg, An, lb, fP, Pa, Ft, Hi, Sk, ZR, qi, Fo, R1, Pt, Ks, gze, ZUi, rU, Ag, uP, cv, Oc, uc, jM, UUi, HUi, Ht, cppService, es, ua, lv, u0, cl, Vo, wYe, bY, Ac, pKi, NI, p0, Gi, ko, Wi, SKi, uEt, Ce, Vr, H4i, pFt, qv, cursorPredictionService, nPt, importPredictionService, _c, g0, m2, c5, yYe, dEt, Qi, yc, DR, ZJ, fEt, Tk, Ck, _C, f5, vk, Pl, Xp, RHe, jIi, I, Ct } = params;
 
   var vY = Re("interpreterService"),
     kH = Re("metricsService"),
@@ -1291,7 +1291,7 @@ export function createAIServiceSet(params) {
     [
       __param(0, Lg),
       __param(1, Xt),
-      __param(2, kp),
+      __param(2, everythingProviderService),
       __param(3, st),
       __param(4, it),
       __param(5, Ci),
@@ -2427,7 +2427,7 @@ export function createAIServiceSet(params) {
       }
       async initialize() {}
     }
-  ;(zFt = __decorate([__param(0, kp), __param(1, it)], zFt)), Ve(OKi, zFt, 0)
+  ;(zFt = __decorate([__param(0, everythingProviderService), __param(1, it)], zFt)), Ve(OKi, zFt, 0)
   var BKi
   ;(function (i) {
     i.DocAgent = "DocAgent"
@@ -6508,7 +6508,7 @@ export function createAIServiceSet(params) {
         __param(3, ve),
         __param(4, nl),
         __param(5, nt),
-        __param(6, kp),
+        __param(6, everythingProviderService),
         __param(7, Md),
         __param(8, tK),
         __param(9, tg),
@@ -7576,7 +7576,7 @@ export function createAIServiceSet(params) {
       }
     }
   ;(rOt = __decorate(
-    [__param(0, et), __param(1, kp), __param(2, ei), __param(3, pt)],
+    [__param(0, et), __param(1, everythingProviderService), __param(2, ei), __param(3, pt)],
     rOt,
   )),
     Ve(RYe, rOt, 0),
@@ -7687,7 +7687,7 @@ export function createAIServiceSet(params) {
       diffingService: lue,
       aiPreviewService: H4i,
       aiReaderService: hue,
-      everythingProviderService: kp,
+      everythingProviderService: everythingProviderService,
       fastSemSearchService: FKi,
       semSearchService: pFt,
       tooltipService: qv,
