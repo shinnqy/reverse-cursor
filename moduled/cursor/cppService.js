@@ -228,8 +228,14 @@ export function createCppService(params) {
     F(e) {
       return `${e.id}-${e.getVersionId()}-${e.uri.fsPath}`
     }
+    getModelKey(model) {
+      return this.F(model);
+    }
     H(e) {
       return `${e.id}-${e.uri.fsPath}`
+    }
+    getModelVersionKey(model) {
+      return this.H(model);
     }
     aiClient() {
       return this.P.get()
@@ -313,8 +319,8 @@ export function createCppService(params) {
         (this.w = undefined),
         (this.y = undefined),
         (this.z = undefined),
-        (this.C = new yo(10)),
-        (this.G = new yo(3)),
+        (this.C = new yo(10)), (this.formattedDiffCache = this.C),
+        (this.G = new yo(3)), (this.modelValueCache = this.G),
         (this.I = []),
         (this.J = []),
         (this.L = new Qfo(2)),
@@ -328,9 +334,9 @@ export function createCppService(params) {
         (this.S = undefined),
         (this.numberOfClearedSuggestionsSinceLastAccept = 0),
         (this.lastEditTime = undefined),
-        (this.U = undefined),
+        (this.U = undefined), (this.lastProcessedModel = this.U),
         (this.W = this.D(new zt())),
-        (this.Y = { fire: false, acceptedRange: undefined }),
+        (this.Y = { fire: false, acceptedRange: undefined }), (this.pendingSuggestion = this.Y),
         (this.$ = {}),
         (this.ab = false),
         (this.bb = []),
@@ -1590,10 +1596,10 @@ export function createCppService(params) {
           ),
         )
     }
-    async fireOnCacheMiss(e, t, s, n, r) {
-      t !== null
-        ? await this.fireCppSuggestionDebouncedDiffHistory(e, t, ll.Typing, n)
-        : await this.formatDiffHistory(e, t, s, n)
+    async fireOnCacheMiss(contentChangeEvent, editor, model, EOL, options) {
+      editor !== null
+        ? await this.fireCppSuggestionDebouncedDiffHistory(contentChangeEvent, editor, ll.Typing, EOL)
+        : await this.formatDiffHistory(contentChangeEvent, editor, model, EOL)
     }
     async triggerCppIfLintErrorComesUp(e, t, s, n, r, o) {
       const a = this.mb.asRelativePath(s?.uri ?? U.file("")),
@@ -1620,49 +1626,49 @@ export function createCppService(params) {
         }
       }
     }
-    async continueModelChangeListener(e, t, s, n, r = { removeGreens: true }, o) {
+    async continueModelChangeListener(contentChangeEvent, editor, model, EOL, options = { removeGreens: true }, context) {
       if (this.Pb().cppState?.shouldNotTrigger === true) {
         oa("[Cpp] continueModelChangeListener - shouldNotTrigger is true")
         return
       }
-      if (this.Wb(s)) return
-      const a = async () => {
-        await this.formatDiffHistory(e, t, s, n), EF.get(t)?.update()
+      if (this.Wb(model)) return
+      const formatAndUpdate = async () => {
+        await this.formatDiffHistory(contentChangeEvent, editor, model, EOL), EF.get(editor)?.update()
       }
       this.ab = false
-      const l = () => {
-        const u = this.getCurrentSuggestion()
-        if (u === undefined) return
-        const d = s.getDecorationRange(u.decorationId)
-        if (d === null) return
-        const g = s.getDecorationOptions(u.decorationId)
+      const adjustSuggestionPosition = () => {
+        const currentSuggestion = this.getCurrentSuggestion()
+        if (currentSuggestion === undefined) return
+        const decorationRange = model.getDecorationRange(currentSuggestion.decorationId)
+        if (decorationRange === null) return
+        const decorationOptions = model.getDecorationOptions(currentSuggestion.decorationId)
         if (
-          g === null ||
-          d.startLineNumber <= (t.getPosition()?.lineNumber ?? 0)
+          decorationOptions === null ||
+          decorationRange.startLineNumber <= (editor.getPosition()?.lineNumber ?? 0)
         )
           return
-        const p = { ...d, startLineNumber: d.startLineNumber - 1 }
-        s.changeDecorations((m) => {
-          m.removeDecoration(u.decorationId)
-          const b = m.addDecoration(p, g)
-          this.updateSuggestionState({ decorationId: b })
+        const adjustedRange = { ...decorationRange, startLineNumber: decorationRange.startLineNumber - 1 }
+        model.changeDecorations((changeAccessor) => {
+          changeAccessor.removeDecoration(currentSuggestion.decorationId)
+          const newDecorationId = changeAccessor.addDecoration(adjustedRange, decorationOptions)
+          this.updateSuggestionState({ decorationId: newDecorationId })
         })
       }
-      if (this.isOnShortestEditPath({ event: e, model: s }, o))
-        return MMs(e.changes) && l(), a()
-      const h = this.Ub(e) || this.Ob().cppCachedTypeaheadEnabled !== true
+      if (this.isOnShortestEditPath({ event: contentChangeEvent, model: model }, context))
+        return MMs(contentChangeEvent.changes) && adjustSuggestionPosition(), formatAndUpdate()
+      const shouldAbortAll = this.Ub(contentChangeEvent) || this.Ob().cppCachedTypeaheadEnabled !== true
       if (
-        (this.markEditAsRejected(t, true),
-        this.rejectAndResetAllCppSuggestions({ removeGreens: false, abortAll: h }),
+        (this.markEditAsRejected(editor, true),
+        this.rejectAndResetAllCppSuggestions({ removeGreens: false, abortAll: shouldAbortAll }),
         (!this.Ob().cppAutoImportEnabled ||
           !this.Ib.isShowingImportSuggestion()) &&
-          this.allowCppTriggerInComments(t))
+          this.allowCppTriggerInComments(editor))
       ) {
-        const u = this.N.popCacheHit(s)
-        if (u !== undefined)
-          return this.Vb(u), this.displayCppSuggestion(t, s, u), a()
+        const cachedSuggestion = this.N.popCacheHit(model)
+        if (cachedSuggestion !== undefined)
+          return this.Vb(cachedSuggestion), this.displayCppSuggestion(editor, model, cachedSuggestion), formatAndUpdate()
       }
-      await this.fireOnCacheMiss(e, t, s, n, r)
+      await this.fireOnCacheMiss(contentChangeEvent, editor, model, EOL, options)
     }
     Ub(e) {
       return e.changes.some(
@@ -1687,8 +1693,8 @@ export function createCppService(params) {
       return t.getLineContent(n).trim().startsWith("//")
     }
     getPreviousModelValue(e) {
-      const t = this.H(e)
-      return this.G.get(t)
+      const t = this.getModelVersionKey(e)
+      return this.modelValueCache.get(t)
     }
     async registerModelListenerToEditorModel(editor, model) {
       if (this.Wb(model)) {
@@ -1860,28 +1866,28 @@ export function createCppService(params) {
         position: e.getPosition() ?? undefined,
       })
     }
-    async fireCppSuggestionDebouncedDiffHistory(e, t, s, n) {
-      if (!t) return
-      const r = t.getModel(),
-        o = r?.uri
-      if (!o || this.Wb(r)) return
-      const a = t.getSelection()
+    async fireCppSuggestionDebouncedDiffHistory(contentChangeEvent, editor, intent, EOL) {
+      if (!editor) return
+      const model = editor.getModel(),
+        uri = model?.uri
+      if (!uri || this.Wb(model)) return
+      const selectionRange = editor.getSelection()
       if (
-        a !== null &&
-        (a.startLineNumber !== a.endLineNumber || a.startColumn !== a.endColumn)
+        selectionRange !== null &&
+        (selectionRange.startLineNumber !== selectionRange.endLineNumber || selectionRange.startColumn !== selectionRange.endColumn)
       )
         return
-      const { requestIdsToCancel: l, ...c } = this.Z.runRequest()
+      const { requestIdsToCancel: requestIdsToCancel, ...restRequestOpts } = this.Z.runRequest()
       this.R.forEach((h) => {
-        l.includes(h.generationUUID) && h.abortController.abort()
+        requestIdsToCancel.includes(h.generationUUID) && h.abortController.abort()
       }),
-        await this.formatDiffHistory(e, t, r, n),
+        await this.formatDiffHistory(contentChangeEvent, editor, model, EOL),
         this.getCurrentSuggestion() === undefined &&
-          this.fireCppSuggestionFromTrigger(o, t, s, undefined, {
-            ...c,
-            modelVersion: r.getVersionId(),
-            modelId: r.id,
-            position: t.getPosition() ?? undefined,
+          this.fireCppSuggestionFromTrigger(uri, editor, intent, undefined, {
+            ...restRequestOpts,
+            modelVersion: model.getVersionId(),
+            modelId: model.id,
+            position: editor.getPosition() ?? undefined,
           })
     }
     async fireCppSuggestionFromTrigger(e, t, s, n, r) {
@@ -2365,14 +2371,14 @@ export function createCppService(params) {
       let d
       const g = performance.now()
       let p
-      const m = this.C.get(this.F(c))
+      const m = this.formattedDiffCache.get(this.getModelKey(c))
       if (m === undefined) {
         const E = await this.getGlobalDiffTrajectories()
         if (E === undefined)
           throw new Error(
             "Compile Diff Trajectories not registered in extension host",
           )
-        ;(p = E), this.C.set(this.F(c), p)
+        ;(p = E), this.formattedDiffCache.set(this.getModelKey(c), p)
       } else p = m
       const b = this.mb.asRelativePath(c.uri),
         y = p.find((E) => E.fileName === b)
@@ -3750,8 +3756,8 @@ export function createCppService(params) {
                 endColumn: decorationRange.endColumn,
               }
             : undefined
-          this.U?.modelVersion === model.getVersionId() && this.U?.modelId === model.id
-            ? ((this.Y = { fire: false, acceptedRange: undefined }),
+          this.lastProcessedModel?.modelVersion === model.getVersionId() && this.lastProcessedModel?.modelId === model.id
+            ? ((this.pendingSuggestion = { fire: false, acceptedRange: undefined }),
               this.Bb.getAndShowNextPrediction({
                 editor,
                 triggerCppCallback:
@@ -3761,7 +3767,7 @@ export function createCppService(params) {
                 source: QN.ACCEPT,
                 cppSuggestionRange: suggestionRange,
               }))
-            : (this.Y = { fire: true, acceptedRange: suggestionRange })
+            : (this.pendingSuggestion = { fire: true, acceptedRange: suggestionRange })
         } else this.Bb.periodicallyReloadCursorPredictionConfig(false)
       }
     }
@@ -3916,33 +3922,33 @@ export function createCppService(params) {
             previousModelValue: a,
           })
     }
-    async formatDiffHistory(e, t, s, n) {
-      if (s.getValueLength() > hdi || s.isDisposed()) return
-      const r = await this.everythingProviderService.onlyLocalProvider?.runCommand(
+    async formatDiffHistory(contentChangeEvent, editor, model, eol) {
+      if (model.getValueLength() > hdi || model.isDisposed()) return
+      const formattedDiff = await this.everythingProviderService.onlyLocalProvider?.runCommand(
         EditHistoryDiffFormatter.FormatDiffHistory,
         {
-          uri: s.uri.toString(),
-          changes: e.changes,
+          uri: model.uri.toString(),
+          changes: contentChangeEvent.changes,
           behavior: this.Ob().cppConfig?.mergeBehavior,
-          modelVersion: s.getVersionId(),
-          eol: n,
+          modelVersion: model.getVersionId(),
+          eol: eol,
         },
       )
-      if (r === undefined)
+      if (formattedDiff === undefined)
         throw new Error("Format Diff History not registered in extension host")
-      ;(this.U = { modelVersion: s.getVersionId(), modelId: s.id }),
-        this.Y.fire === true &&
+      ;(this.lastProcessedModel = { modelVersion: model.getVersionId(), modelId: model.id }),
+        this.pendingSuggestion.fire === true &&
           (this.Bb.getAndShowNextPrediction({
-            editor: t,
+            editor: editor,
             triggerCppCallback: this.fireCppSuggestionFromTrigger.bind(this),
             getLinterErrors:
               this.getRecentAndNearLocationLinterErrors.bind(this),
             source: QN.ACCEPT,
-            cppSuggestionRange: this.Y.acceptedRange,
+            cppSuggestionRange: this.pendingSuggestion.acceptedRange,
           }),
-          (this.Y = { fire: false, acceptedRange: undefined })),
-        this.C.set(this.F(s), r),
-        this.G.set(this.H(s), s.getValue())
+          (this.pendingSuggestion = { fire: false, acceptedRange: undefined })),
+        this.formattedDiffCache.set(this.getModelKey(model), formattedDiff),
+        this.modelValueCache.set(this.getModelVersionKey(model), model.getValue())
     }
     checkOverlappingSuggestion(e, t) {
       const s = this.getCurrentSuggestion()
