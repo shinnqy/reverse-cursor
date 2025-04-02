@@ -1,7 +1,7 @@
 // @ts-check
 
 export function createChatDataService(params) {
-  const { Re, V, xR, c6n, U, OT, L1, S1t, Ha, ce, Ln, d6n, f6n, fs, OMi, aG, B9i, _Mi, __decorate, __param, et, Xt, it, u0, YC, ei, nt, Ht, nPt, M_, T1, G9i, yi, QJ, ue, Vo, tg, Ve } = params;
+  const { Re, V, xR, c6n, U, OT, L1, S1t, Ha, ce, Ln, d6n, f6n, fs, OMi, aG, B9i, _Mi, __decorate, __param, et, Xt, it, u0, YC, ei, nt, Ht, nPt, M_, T1, G9i, yi, QJ, ue, Vo, selectedContextService, Ve } = params;
 
   var cPt,
   J6n = class extends Error {
@@ -679,7 +679,7 @@ export function createChatDataService(params) {
         __param(13, QJ),
         __param(14, ue),
         __param(15, Vo),
-        __param(16, tg),
+        __param(16, selectedContextService),
       ],
       Qle,
     )),

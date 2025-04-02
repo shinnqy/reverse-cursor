@@ -2,7 +2,7 @@
 
 // 160284
 export function createAuth(params) {
-  const { Re, V, _n, R, rj, __decorate, __param, et, Ls, ei, pG, o7, Qq, Zq, t9i, co, le, J, fu, Vje, cTt, Q3i, wn, rt, bt, Qwt, Z3i, Vle, M_n, R_, Yt, HS, U, VEn, CR, Ci, uP, pt, ft, Oc, Z, Ti, sqe, hTt, nt, Pl, Ve, ee, j } = params;
+  const { Re, V, _n, R, rj, __decorate, __param, et, Ls, ei, pG, o7, Qq, Zq, t9i, co, le, J, fu, Vje, cTt, Q3i, wn, rt, bt, Qwt, Z3i, Vle, M_n, R_, Yt, HS, U, VEn, cursorCredsService, Ci, uP, pt, ft, Oc, Z, Ti, sqe, hTt, nt, Pl, Ve, ee, j } = params;
 
   var $h = Re("authenticationService"),
     s9i = "cursorAuth/stripeCustomerId",
@@ -848,7 +848,7 @@ export function createAuth(params) {
       __param(0, et),
       __param(1, Ls),
       __param(2, ei),
-      __param(3, CR),
+      __param(3, cursorCredsService),
       __param(4, Ci),
       __param(5, uP),
       __param(6, pt),

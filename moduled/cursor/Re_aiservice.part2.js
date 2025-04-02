@@ -79,7 +79,7 @@ export function create_Re_aiServicePart2(params) {
       },
     ],
   }),
-  xp = Re("aiFeatureStatusService"),
+  aiFeatureStatusService = Re("aiFeatureStatusService"),
   iLt = class extends V {
     constructor(e, t) {
       super(),
@@ -128,7 +128,7 @@ export function create_Re_aiServicePart2(params) {
       return this.cachedConfigs.get(e)
     }
   }
-  ;(iLt = __decorate([__param(0, ei), __param(1, Br)], iLt)), Ve(xp, iLt, 1)
+  ;(iLt = __decorate([__param(0, ei), __param(1, Br)], iLt)), Ve(aiFeatureStatusService, iLt, 1)
   var Sk = Re("cmdKService"),
   sLt = class extends V {
     constructor(e, t, s, n, r, o, a, l, c, h, u, d, g, p, m, b) {
@@ -394,7 +394,7 @@ export function create_Re_aiServicePart2(params) {
     __param(12, Xt),
     __param(13, $h),
     __param(14, nt),
-    __param(15, xp),
+    __param(15, aiFeatureStatusService),
   ],
   sLt,
 )),
@@ -435,7 +435,7 @@ export function create_Re_aiServicePart2(params) {
     fP,
     L8n,
     mze,
-    xp,
+    aiFeatureStatusService,
     Sk,
     PUi,
   }

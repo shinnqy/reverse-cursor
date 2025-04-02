@@ -779,10 +779,10 @@ export function createSelectedContextService(params) {
     ],
     lPt,
   )
-  var tg = Re("selectedContextService")
-  Ve(tg, lPt, 1)
+  var selectedContextService = Re("selectedContextService")
+  Ve(selectedContextService, lPt, 1)
 
   return {
-    tg,
+    selectedContextService,
   }
 }
