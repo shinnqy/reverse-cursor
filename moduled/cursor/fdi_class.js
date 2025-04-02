@@ -1,10 +1,221 @@
 // @ts-check
 
 
-export function createFDIClass(params) {
-  const {V, EYe, G, yo, Qfo, ngo, rgo, zt, J, R_n, um, hF, ss, oa, ll, Ave, JB, e$s, Fx, fu, Va, GMs, Igo, nze,Dgo, WEn, m2i, KMs, qEn, b2i, QMs, ZMs, S9, $, Hae, m0t, YMs, Ad, fUe, Sp, VB, replaceTextInRange, generateModifiedText, tv, VS, NYi, CUe, Ri, ddi, Ago, ce, Pn, Cg, EF, MMs, U, mu, hdi, Me, ys, $fo, qdt, Ffo, dze, uI, BMs, Ngo, Lgo, Cf, hG, Rgo, zdt, mR, fm, gle, xr, Gr, GB, QN, Ycr, Yt, D1t, Kf, rt, handleStreamWithPredictions, handleChunkedStream, consumeRemainingStream, Hu, Aoe, Qcr, TKn, F_, tdi, _fo, udi, XMs, rge, OFt, Xfo, Ui, ZXe: computeDiffs, k7, RKi, Pgo, jBt, qfo, Mgo, Ho, Qm, T1t, Xf, Tgo, oj} = params;
+export function createCppService(params) {
+  const {V, EYe, G, yo, Qfo, ngo, rgo, zt, J, R_n, um, hF, ss, ll, JB, Fx, fu, Va, nze, WEn, m2i, qEn, b2i, S9, $, Hae, m0t, Ad, fUe, Sp, VB, replaceTextInRange, generateModifiedText, tv, VS, NYi, CUe, Ri, ce, Pn, Cg, EF, MMs, U, mu, Me, ys, $fo, qdt, Ffo, dze, uI, BMs, Cf, hG, mR, fm, gle, xr, Gr, GB, QN, Ycr, Yt, D1t, Kf, rt, handleStreamWithPredictions, handleChunkedStream, consumeRemainingStream, Hu, Aoe, Qcr, TKn, F_, tdi, _fo, rge, OFt, Xfo, Ui, ZXe: computeDiffs, k7, RKi, jBt, qfo, Ho, Qm, T1t, Xf, oj, ee, j, Je, eQe, cppService, ei, wf, yi, Ci, $h} = params;
 
-  const fdi = class extends V {
+  var bgo = class zmi extends ee {
+    static {
+      this.ID = "editor.action.acceptCppSuggestion"
+    }
+    static {
+      this.LABEL = "Accept Cursor Tab Suggestion"
+    }
+    constructor() {
+      super({
+        id: zmi.ID,
+        title: { value: zmi.LABEL, original: "Accept Cursor Tab Suggestion" },
+        icon: Je(
+          "accept-cpp-suggestion",
+          $.check,
+          "Accept Cursor Tab Suggestion",
+        ),
+        menu: { id: eQe.TitleMenu, order: 1 },
+      })
+    }
+    async run(e) {
+      const t = e.get(cppService),
+        s = e.get(ei),
+        n = s.nonPersistentStorage.cppState?.peekViewSuggestion
+      ;(await t.acceptFullSuggestion(void 0, n ? wf(n) : void 0)).type,
+        Sp.NotAccepted,
+        s.setNonPersistentStorage("cppState", "peekViewSuggestion", void 0)
+    }
+  }
+  j(bgo)
+  function zMs(i) {
+    const e = i.get(yi),
+      t = e.getActiveCodeEditor() || e.getFocusedCodeEditor()
+    return (t && EF.get(t)) || void 0
+  }
+  function vgo(i) {
+    return zMs(i)?.cppPeekView
+  }
+  var ygo = class Gmi extends ee {
+    static {
+      this.ID = "editor.action.configureCppDiffPeekView"
+    }
+    static {
+      this.LABEL = "Configure Cursor Tab Diff Peek View"
+    }
+    constructor() {
+      super({
+        id: Gmi.ID,
+        title: {
+          value: Gmi.LABEL,
+          original: "Configure Cursor Tab Diff Peek View",
+        },
+      })
+    }
+    async run(e, t) {
+      const s = vgo(e)
+      s && s.diffEditor?.updateOptions(t)
+    }
+  }
+  j(ygo)
+  var wgo = class Jmi extends ee {
+    static {
+      this.ID = "editor.action.setCppDiffPeekView"
+    }
+    static {
+      this.LABEL = "Set Cursor Tab Diff Peek View"
+    }
+    constructor() {
+      super({
+        id: Jmi.ID,
+        title: { value: Jmi.LABEL, original: "Set Cursor Tab Diff Peek View" },
+      })
+    }
+    async run(e, t) {
+      const s = zMs(e)
+      s && (s.cppPeekView = t)
+    }
+  }
+  j(wgo)
+  var Cgo = class Kmi extends ee {
+    static {
+      this.LABEL = "Enable Cursor Tab"
+    }
+    constructor() {
+      super({ id: m0t, title: { value: Kmi.LABEL, original: Kmi.LABEL }, f1: !0 })
+    }
+    async run(e, ...t) {
+      e.get(ei).setApplicationUserPersistentStorage("cppEnabled", !0)
+    }
+  }
+  j(Cgo)
+  var Sgo = class Ymi extends ee {
+    static {
+      this.LABEL = "Disable Cursor Tab"
+    }
+    constructor() {
+      super({
+        id: "editor.cpp.disableenabled",
+        title: { value: Ymi.LABEL, original: Ymi.LABEL },
+        f1: !0,
+      })
+    }
+    async run(e, ...t) {
+      e.get(ei).setApplicationUserPersistentStorage("cppEnabled", !1)
+    }
+  }
+  j(Sgo)
+  var GMs = 1e3 * 60 * 3,
+    xgo = class Xmi extends ee {
+      static {
+        this.LABEL = "Snooze Cursor Tab"
+      }
+      constructor() {
+        super({
+          id: "editor.cpp.snooze",
+          title: { value: Xmi.LABEL, original: Xmi.LABEL },
+          f1: !0,
+        })
+      }
+      async run(e, ...t) {
+        const s = e.get(ei)
+        s.applicationUserPersistentStorage.cppEnabled &&
+          (s.setApplicationUserPersistentStorage("cppSnoozed", Date.now()),
+          s.setApplicationUserPersistentStorage("cppEnabled", !1),
+          setTimeout(() => {
+            s.applicationUserPersistentStorage.cppSnoozed &&
+              (s.setApplicationUserPersistentStorage("cppSnoozed", void 0),
+              s.setApplicationUserPersistentStorage("cppEnabled", !0))
+          }, GMs))
+      }
+    }
+  j(xgo)
+  var kgo = class Qmi extends ee {
+    static {
+      this.LABEL = "Toggle Cursor Tab"
+    }
+    constructor() {
+      super({
+        id: "editor.cpp.toggle",
+        title: { value: Qmi.LABEL, original: Qmi.LABEL },
+        f1: !0,
+      })
+    }
+    async run(e) {
+      const t = e.get(ei),
+        s = t.applicationUserPersistentStorage.cppEnabled
+      t.setApplicationUserPersistentStorage("cppEnabled", !s)
+    }
+  }
+  j(kgo)
+  var Ego = class ipt extends ee {
+    static {
+      this.ID = "editor.cpp.openPro"
+    }
+    static {
+      this.LABEL = "Open Cursor Tab Pro Pricing"
+    }
+    constructor() {
+      super({
+        id: ipt.ID,
+        title: { value: ipt.LABEL, original: ipt.LABEL },
+        f1: !1,
+      })
+    }
+    async run(e) {
+      e.get(Ci).open(U.parse("https://cursor.com/pricing"))
+    }
+  }
+  j(Ego)
+  var Igo = 25,
+    Dgo = 60,
+    hdi = 5e6,
+    JMs = !1,
+    oa = JMs ? console.log : () => {},
+    zdt = JMs ? console.error : () => {}
+  function KMs(i) {
+    return i.uri.scheme === "untitled" ? i.uri.scheme : i.getLanguageId()
+  }
+  var YMs = class spt extends ee {
+    static {
+      this.ID = "editor.cpp.login"
+    }
+    static {
+      this.LABEL = "Log In to Cursor"
+    }
+    constructor() {
+      super({
+        id: spt.ID,
+        title: { value: spt.LABEL, original: spt.LABEL },
+        f1: !0,
+      })
+    }
+    async run(e) {
+      e.get($h).login()
+    }
+  }
+  j(YMs);
+
+  var Tgo = "git30_000_bounded_auto",
+    XMs = "cpp-suggestion-text-decoration-showing",
+    udi = "cpp-suggestion-text-decoration-showing-streaming",
+    Pgo = "cpp-suggestion-text-decoration-showing-gutter",
+    Lgo = 10,
+    Ngo = 10,
+    Rgo = 1e3 * 60 * 15,
+    QMs = 1e5,
+    ZMs = 1e4,
+    ddi = 20,
+    e$s = 3,
+    Ave = 300,
+    Ago = !1,
+    Mgo = "m4CoTMbqtR9vV1zd",
+  CppService = class extends V {
     cppServerClient() {
       return this.g.get()
     }
@@ -3874,5 +4085,8 @@ export function createFDIClass(params) {
     }
   };
 
-  return fdi;
+  return {
+    CppService,
+    ddi,
+  };
 }
