@@ -298,9 +298,9 @@ export function createCppService(params) {
         (this.yb = C),
         (this.zb = S),
         (this.Ab = x),
-        (this.Bb = k),
+        (this.Bb = k), (this.cursorPredictionService = this.Bb),
         (this.Cb = E),
-        (this.Db = D), (this.everythingProviderService = D),
+        (this.Db = D), (this.everythingProviderService = this.Db),
         (this.Eb = P),
         (this.Fb = L),
         (this.Gb = A),
@@ -359,7 +359,7 @@ export function createCppService(params) {
                 }
                 this.fireCppSuggestionFromTrigger(Ee, ae, ll.ManualTrigger)
               } else
-                this.Bb.maybeUndoCursorPrediction({
+                this.cursorPredictionService.maybeUndoCursorPrediction({
                   event: se,
                   triggerCppCallback:
                     this.fireCppSuggestionFromTrigger.bind(this),
@@ -397,7 +397,7 @@ export function createCppService(params) {
                 });
                 if (
                   he !== undefined &&
-                  !this.Bb.tabToLineBeforeAcceptingCpp(he.source)
+                  !this.cursorPredictionService.tabToLineBeforeAcceptingCpp(he.source)
                 )
                   (this.dontTriggerCppBecauseChangeIsFromCpp = true),
                     se.preventDefault(),
@@ -472,13 +472,13 @@ export function createCppService(params) {
                       }),
                       this.ac()
                   } else
-                    this.Bb.maybeAcceptCursorPrediction({
+                    this.cursorPredictionService.maybeAcceptCursorPrediction({
                       event: se,
                       triggerCppCallback:
                         this.fireCppSuggestionFromTrigger.bind(this),
                     })
                 } else
-                  this.Bb.maybeAcceptCursorPrediction({
+                  this.cursorPredictionService.maybeAcceptCursorPrediction({
                     event: se,
                     triggerCppCallback:
                       this.fireCppSuggestionFromTrigger.bind(this),
@@ -497,8 +497,8 @@ export function createCppService(params) {
               he !== null && this.markEditAsRejected(he, false),
                 this.clearDecorationsSlowEnumeratesAllDecorations(),
                 this.rejectAndResetAllCppSuggestions(),
-                this.Bb.maybeShowHintLineWidget(),
-                this.Bb.updateHintLineWidgetMarginLeft(undefined),
+                this.cursorPredictionService.maybeShowHintLineWidget(),
+                this.cursorPredictionService.updateHintLineWidgetMarginLeft(undefined),
                 he !== null && this.Ib.showCorrectUI(he)
             } else if (
               se.key === "Escape" &&
@@ -513,10 +513,10 @@ export function createCppService(params) {
                     se.stopImmediatePropagation(),
                     se.stopPropagation())
                   : this.Pb().cursorPrediction !== undefined &&
-                    this.Bb.clearCursorPrediction()
+                    this.cursorPredictionService.clearCursorPrediction()
               } else
                 this.Pb().cursorPrediction !== undefined &&
-                  this.Bb.clearCursorPrediction()
+                  this.cursorPredictionService.clearCursorPrediction()
           }
         }),
         (this.triggerCppOnLintErrorAbortControllers = new Map()),
@@ -947,7 +947,7 @@ export function createCppService(params) {
         t.appendChild(s)
       const o = document.createElement("div"),
         a = document.createElement("select"),
-        l = this.Bb.isCursorPredictionEnabled() ? "enabled" : "disabled"
+        l = this.cursorPredictionService.isCursorPredictionEnabled() ? "enabled" : "disabled"
       ;["enabled", "disabled"].forEach((u) => {
         const d = document.createElement("option")
         ;(d.value = u),
@@ -1166,7 +1166,7 @@ export function createCppService(params) {
       const e = this.gb.getActiveCodeEditor()
       if (!e) return false
       const t = e.getModel()
-      return t ? this.Bb.shouldTabInsteadOfAccepting(e, t) : false
+      return t ? this.cursorPredictionService.shouldTabInsteadOfAccepting(e, t) : false
     }
     shouldTabInsteadOfAccepting() {
       if (this.isInVimNonInsertMode()) return false
@@ -1403,7 +1403,7 @@ export function createCppService(params) {
                 this.usingFusedCursorPredictionModel() &&
                   ((this.eb = undefined),
                   (this.cb = undefined),
-                  this.Bb.clearCursorPrediction())
+                  this.cursorPredictionService.clearCursorPrediction())
                 const o = e.getModel()?.uri
                 if (
                   o === undefined ||
@@ -1458,7 +1458,7 @@ export function createCppService(params) {
                       d ||
                         (this.markEditAsRejected(e, false),
                         this.rejectAndResetAllCppSuggestions(),
-                        this.Bb.maybeShowHintLineWidget())
+                        this.cursorPredictionService.maybeShowHintLineWidget())
                   }
                   if (
                     !this.R.find(
@@ -2012,7 +2012,7 @@ export function createCppService(params) {
       }
       if (
         (this.usingFusedCursorPredictionModel() &&
-          this.Bb.isShowingCursorPrediction(t) &&
+          this.cursorPredictionService.isShowingCursorPrediction(t) &&
           o !== ll.CursorPrediction &&
           o !== ll.LineChange) ||
         (!this.allowCppTriggerInComments(t, u) && o !== ll.CursorPrediction)
@@ -2694,8 +2694,8 @@ export function createCppService(params) {
           Math.random().toString(36).substring(2, 15)),
         this.hb.setWorkspaceUserPersistentStorage("uniqueCppWorkspaceId", workspaceId)),
         source !== ll.CursorPrediction &&
-          !this.Bb.onlyTriggerOnCppAccept() &&
-          this.Bb.getAndShowNextPrediction({
+          !this.cursorPredictionService.onlyTriggerOnCppAccept() &&
+          this.cursorPredictionService.getAndShowNextPrediction({
             editor: editor,
             triggerCppCallback: this.fireCppSuggestionFromTrigger.bind(this),
             getLinterErrors:
@@ -3651,7 +3651,7 @@ export function createCppService(params) {
         oa("[fusedCursorPrediction] Could not resolve predicted file path")
         return
       }
-      const a = await this.Bb.getMultifileCursorPredictionEditor(o)
+      const a = await this.cursorPredictionService.getMultifileCursorPredictionEditor(o)
       if (!a) {
         oa("[fusedCursorPrediction] Could not get editor for predicted file")
         return
@@ -3673,7 +3673,7 @@ export function createCppService(params) {
       )
         return
       const d = fusedCursorPrediction.shouldRetriggerCpp && n !== r
-      await this.Bb.manuallyCreateCursorPrediction({
+      await this.cursorPredictionService.manuallyCreateCursorPrediction({
         _predictionId_for_log,
         _fusedCursorPrediction: fusedCursorPrediction,
         editor: a,
@@ -3737,7 +3737,7 @@ export function createCppService(params) {
             return
           }
         }
-        if (this.Bb.isCursorPredictionEnabled()) {
+        if (this.cursorPredictionService.isCursorPredictionEnabled()) {
           visibleSuggestion.fusedCursorPredictionId &&
             this.displayFusedCursorPredictionIfAvailable(
               editor,
@@ -3758,7 +3758,7 @@ export function createCppService(params) {
             : undefined
           this.lastProcessedModel?.modelVersion === model.getVersionId() && this.lastProcessedModel?.modelId === model.id
             ? ((this.pendingSuggestion = { fire: false, acceptedRange: undefined }),
-              this.Bb.getAndShowNextPrediction({
+              this.cursorPredictionService.getAndShowNextPrediction({
                 editor,
                 triggerCppCallback:
                   this.fireCppSuggestionFromTrigger.bind(this),
@@ -3768,7 +3768,7 @@ export function createCppService(params) {
                 cppSuggestionRange: suggestionRange,
               }))
             : (this.pendingSuggestion = { fire: true, acceptedRange: suggestionRange })
-        } else this.Bb.periodicallyReloadCursorPredictionConfig(false)
+        } else this.cursorPredictionService.periodicallyReloadCursorPredictionConfig(false)
       }
     }
     displayFusedCursorPredictionIfAvailable(e, t, fusedCursorPredictionId, n, r) {
@@ -3938,7 +3938,7 @@ export function createCppService(params) {
         throw new Error("Format Diff History not registered in extension host")
       ;(this.lastProcessedModel = { modelVersion: model.getVersionId(), modelId: model.id }),
         this.pendingSuggestion.fire === true &&
-          (this.Bb.getAndShowNextPrediction({
+          (this.cursorPredictionService.getAndShowNextPrediction({
             editor: editor,
             triggerCppCallback: this.fireCppSuggestionFromTrigger.bind(this),
             getLinterErrors:
