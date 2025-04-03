@@ -2,69 +2,69 @@
 
 // 245900
 export function createAIServiceSet(params) {
-  const {Re, V, Ve, __decorate, CYe, __param, _, bt, mUe, ms, U, IMi, ue, it, Ls, fr, yo, Yt, va, rt, ys, J, Es, GJ, nm, Ze, Y1t, OP, Qc, Ri, gVe, _B, pVe, _n, Lg, Xt, everythingProviderService, st, Ci, hw, ei, aiFeatureStatusService, oy, ve, si, mo, nt, $h, x5, EKn, xFt, fz, G, yi, nl, Z, ize, wn, Va, N1, SN, am, Br, fn, v, Qm, Tgn, gt, fu, Me, ce, oi, Ti, cursorCredsService, T1, le, co, R, cF, vm, ns, V1t, y$i, M_, jB, fs, v$i, mVe, tK, Md, selectedContextService, Wr, Xn, Vu, ss, Ioe, UE, PSt, ls, jt, Mae, Ha, dC, $I, ev, _T, N$, s9e, bn, BMi, hk, iG, L1, Zc, FMi, HC, QWe, uNn, __addDisposableResource, gl, __disposeResources, JJ, lG, wVe, wJi, eoe, j9i, J9, Qb, At, Na, g2, Ll, lU, tqe, op, oTi, wf, et, DEt, $Bi, FBi, yNn, gNn, $ae, bNn, RBi, SNn, wNn, FT, un, Sg, Toe, WB, rc, ft, zi, Zi, mI, Cp, YC, Y$, cppEventLoggerService, a7, KNi, pt, bi, B_, eg, An, lb, fP, Pa, Ft, Hi, Sk, ZR, qi, Fo, R1, Pt, Ks, gze, ZUi, rU, Ag, uP, cv, Oc, uc, jM, UUi, HUi, Ht, cppService, es, ua, lv, u0, cl, Vo, wYe, bY, Ac, pKi, NI, p0, Gi, ko, Wi, SKi, uEt, Ce, Vr, H4i, pFt, qv, cursorPredictionService, nPt, importPredictionService, _c, g0, m2, c5, yYe, dEt, Qi, yc, DR, ZJ, fEt, Tk, Ck, _C, f5, vk, Pl, Xp, RHe, jIi, I, Ct } = params;
+  const {Re, V, Ve, __decorate, CYe, __param, _, bt: window, mUe, ms, U, IMi, ue, it, Ls, fr, yo, Yt, va, rt, ys, J, Es, GJ, nm, Ze, Y1t, OP, Qc, Ri, gVe, _B, pVe, _n, Lg, Xt, everythingProviderService, st, Ci, hw, ei, aiFeatureStatusService, oy, ve, si, mo, nt, $h, x5, EKn, xFt, fz, G, yi, nl, Z, ize, wn, Va, N1, SN, am, Br, fn, v, Qm, Tgn, gt, fu, Me, ce, oi, Ti, cursorCredsService, T1, le, co, R, cF, vm, ns, V1t, y$i, M_, jB, fs, v$i, mVe, tK, Md, selectedContextService, Wr, Xn, Vu, ss, Ioe, UE, PSt, ls, jt, Mae, Ha, dC, $I, ev, _T, N$, s9e, bn, BMi, hk, iG, L1, Zc, FMi, HC, QWe, uNn, __addDisposableResource, gl, __disposeResources, JJ, lG, wVe, wJi, eoe, j9i, J9, Qb, At, Na, g2, Ll, lU, tqe, op, oTi, wf, et, DEt, $Bi, FBi, yNn, gNn, $ae, bNn, RBi, SNn, wNn, FT, un, Sg, Toe, WB, rc, ft, zi, Zi, mI, Cp, YC, Y$, cppEventLoggerService, a7, KNi, pt, bi, B_, eg, An, lb, fP, Pa, Ft, Hi, Sk, ZR, qi, Fo, R1, Pt, Ks, gze, ZUi, rU, Ag, uP, cv, Oc, uc, jM, UUi, HUi, Ht, cppService, es, ua, lv, u0, cl, Vo, wYe, bY, Ac, pKi, NI, p0, Gi, ko, Wi, SKi, uEt, Ce, Vr, H4i, pFt, qv, cursorPredictionService, nPt, importPredictionService, _c, g0, m2, c5, yYe, dEt, Qi, yc, DR, ZJ, fEt, Tk, Ck, _C, f5, vk, Pl, Xp, RHe, jIi, I, Ct } = params;
 
   var vY = Re("interpreterService"),
     metricsService = Re("metricsService"),
-    QKn = class extends V {
+    MetricsService = class extends V {
       constructor() {
         super(),
-          (this.a = void 0),
-          (this.b = Array(1e3).fill(null)),
-          (this.c = 0),
-          bt.setInterval(() => {
-            if (this.a) {
+          (this.a = void 0), (this.metricsProvider = this.a),
+          (this.b = Array(1e3).fill(null)), (this.metricsBuffer = this.b),
+          (this.c = 0), (this.bufferIndex = this.c),
+          window.setInterval(() => {
+            if (this.metricsProvider) {
               let i = !1
-              this.b.forEach((e) => {
-                if (e != null && this.a !== void 0)
+              this.metricsBuffer.forEach((e) => {
+                if (e != null && this.metricsProvider !== void 0)
                   switch (((i = !0), e.method)) {
                     case "increment":
-                      this.a.increment(e.stat)
+                      this.metricsProvider.increment(e.stat)
                       break
                     case "decrement":
-                      this.a.decrement(e.stat)
+                      this.metricsProvider.decrement(e.stat)
                       break
                     case "distribution":
-                      this.a.distribution(e.stat)
+                      this.metricsProvider.distribution(e.stat)
                       break
                     case "gauge":
-                      this.a.gauge(e.stat)
+                      this.metricsProvider.gauge(e.stat)
                       break
                   }
               }),
-                i && ((this.b = Array(1e3).fill(null)), (this.c = 0))
+                i && ((this.metricsBuffer = Array(1e3).fill(null)), (this.bufferIndex = 0))
             }
           }, 3e4)
       }
       increment(i) {
-        this.a
-          ? this.a.increment(i)
-          : ((this.b[this.c % 1e3] = { stat: i, method: "increment" }), this.c++)
+        this.metricsProvider
+          ? this.metricsProvider.increment(i)
+          : ((this.metricsBuffer[this.bufferIndex % 1e3] = { stat: i, method: "increment" }), this.bufferIndex++)
       }
       decrement(i) {
-        this.a
-          ? this.a.decrement(i)
-          : ((this.b[this.c % 1e3] = { stat: i, method: "decrement" }), this.c++)
+        this.metricsProvider
+          ? this.metricsProvider.decrement(i)
+          : ((this.metricsBuffer[this.bufferIndex % 1e3] = { stat: i, method: "decrement" }), this.bufferIndex++)
       }
       distribution(i) {
-        this.a
-          ? this.a.distribution(i)
-          : ((this.b[this.c % 1e3] = { stat: i, method: "distribution" }),
-            this.c++)
+        this.metricsProvider
+          ? this.metricsProvider.distribution(i)
+          : ((this.metricsBuffer[this.bufferIndex % 1e3] = { stat: i, method: "distribution" }),
+            this.bufferIndex++)
       }
       gauge(i) {
-        this.a
-          ? this.a.gauge(i)
-          : ((this.b[this.c % 1e3] = { stat: i, method: "gauge" }), this.c++)
+        this.metricsProvider
+          ? this.metricsProvider.gauge(i)
+          : ((this.metricsBuffer[this.bufferIndex % 1e3] = { stat: i, method: "gauge" }), this.bufferIndex++)
       }
       registerMetricsProvider(i) {
-        this.a = i
+        this.metricsProvider = i
       }
       unregisterMetricsProvider() {
-        this.a = void 0
+        this.metricsProvider = void 0
       }
     }
-  Ve(metricsService, QKn, 1)
+  Ve(metricsService, MetricsService, 1)
   var diffingService = Re("diffingService"),
     ZKn = class extends V {
       constructor() {
@@ -3694,7 +3694,7 @@ export function createAIServiceSet(params) {
       return !0
     })
   }
-  var due = () => bt.vscodeWindowId !== ss()?.vscodeWindowId,
+  var due = () => window.vscodeWindowId !== ss()?.vscodeWindowId,
     yYn = async (i) => {
       const e = await i.getInstalled()
       for (const t of e) if (t.identifier.id === "vscodevim.vim") return !0
@@ -7729,7 +7729,7 @@ export function createAIServiceSet(params) {
     GKi = Xp(),
     yAo = Xp()
   function Wa(i, e, t, s) {
-    const n = bt.document.createElement("div")
+    const n = window.document.createElement("div")
     return (
       (n.style.height = "100%"),
       (n.style.width = "100%"),
