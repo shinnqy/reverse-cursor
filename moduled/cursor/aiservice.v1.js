@@ -20059,7 +20059,7 @@ export function createAIServiceV1(params) {
         return v.util.equals(_De, e, t)
       }
     },
-    VMi = class UDe extends _ {
+    RecordCppFateRequest = class UDe extends _ {
       constructor(e) {
         super(),
           (this.requestId = ""),
@@ -42760,7 +42760,7 @@ export function createAIServiceV1(params) {
     P1t,
     HMi,
     zvn,
-    VMi,
+    RecordCppFateRequest,
     Kvn,
     Yvn,
     Xvn,
