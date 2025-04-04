@@ -2,7 +2,7 @@
 
 
 export function createCppService(params) {
-  const {V, EYe, G, LRUCache, Qfo, ngo, rgo, MutableDisposable, J, R_n, um, hF, ss, ll, JB, onDidRegisterWindow, fu, Va, nze, WEn, m2i, qEn, b2i, S9, $, Hae, m0t, Ad, fUe, Sp, VB, replaceTextInRange, generateModifiedText, EditHistoryDiffFormatter, VS, NYi, CUe, Ri, ce, Pn, Cg, GhostTextController, MMs, U, mu, Me, ys, $fo, qdt, Ffo, dze, uI, BMs, Cf, hG, mR, fm, gle, xr, Gr, GB, QN, Ycr, Yt, D1t, Kf, rt, handleStreamWithPredictions, handleChunkedStream, consumeRemainingStream, Hu, Aoe, Qcr, TKn, F_, tdi, _fo, rge, OFt, Xfo, Ui, ZXe: computeDiffs, k7, RKi, jBt, qfo, Ho, Qm, T1t, Xf, oj, ee, j, Je, CppDiffPeekViewWidget, cppService, ei, wf, yi, Ci, $h} = params;
+  const {V, EYe, G, LRUCache, Qfo, ngo, rgo, MutableDisposable, J, R_n, um, hF, ss, CppIntent, JB, onDidRegisterWindow, fu, Va, nze, WEn, m2i, qEn, b2i, S9, $, Hae, m0t, Ad, fUe, Sp, VB, replaceTextInRange, generateModifiedText, EditHistoryDiffFormatter, VS, NYi, CUe, Ri, ce, Pn, Cg, GhostTextController, MMs, U, mu, Me, ys, $fo, qdt, Ffo, dze, uI, BMs, Cf, hG, mR, fm, gle, xr, Gr, GB, QN, Ycr, Yt, D1t, Kf, rt, handleStreamWithPredictions, handleChunkedStream, consumeRemainingStream, Hu, Aoe, Qcr, TKn, F_, tdi, _fo, rge, OFt, Xfo, Ui, ZXe: computeDiffs, k7, RKi, jBt, qfo, Ho, Qm, T1t, Xf, oj, ee, j, Je, CppDiffPeekViewWidget, cppService, ei, wf, yi, Ci, $h} = params;
 
   var bgo = class zmi extends ee {
     static {
@@ -358,7 +358,7 @@ export function createCppService(params) {
                   oa("[handleKeyDownForCppKeys] Tab: no uri")
                   return
                 }
-                this.fireCppSuggestionFromTrigger(Ee, ae, ll.ManualTrigger)
+                this.fireCppSuggestionFromTrigger(Ee, ae, CppIntent.ManualTrigger)
               } else
                 this.cursorPredictionService.maybeUndoCursorPrediction({
                   event: se,
@@ -1311,7 +1311,7 @@ export function createCppService(params) {
               return
             }
             oa("onDidActiveEditorChange: Triggering suggestion"),
-              this.fireCppSuggestionDebounced(s, ll.EditorChange)
+              this.fireCppSuggestionDebounced(s, CppIntent.EditorChange)
           }),
         )
       const t = VS()
@@ -1360,7 +1360,7 @@ export function createCppService(params) {
                   this.cppTypeService.onChangedParameterHints(e, r),
                     o.length === 0 &&
                       r !== undefined &&
-                      this.fireCppSuggestionDebounced(e, ll.ParameterHints)
+                      this.fireCppSuggestionDebounced(e, CppIntent.ParameterHints)
                 }),
               ),
             )
@@ -1478,18 +1478,18 @@ export function createCppService(params) {
                     !d
                   )
                     if (this.getApplicationUserPersistentStorage().cppFireOnEveryCursorChange === true)
-                      this.fireCppSuggestionDebounced(e, ll.LineChange)
+                      this.fireCppSuggestionDebounced(e, CppIntent.LineChange)
                     else if (
                       (c.length > 0 || Ago) &&
                       this.q !== r.position.lineNumber
                     )
-                      this.fireCppSuggestionDebounced(e, ll.LinterErrors)
+                      this.fireCppSuggestionDebounced(e, CppIntent.LinterErrors)
                     else {
                       const b = this.q === r.position.lineNumber,
                         y = this.Rb(),
                         w = this.Sb()
                       !b && !y && !w
-                        ? this.fireCppSuggestionDebounced(e, ll.LineChange)
+                        ? this.fireCppSuggestionDebounced(e, CppIntent.LineChange)
                         : oa(
                             "[Cpp] Suppressed cursor movement trigger. Conditions (all should be false to trigger):",
                             JSON.stringify({
@@ -1605,7 +1605,7 @@ export function createCppService(params) {
     }
     async fireOnCacheMiss(contentChangeEvent, editor, model, EOL, options) {
       editor !== null
-        ? await this.fireCppSuggestionDebouncedDiffHistory(contentChangeEvent, editor, ll.Typing, EOL)
+        ? await this.fireCppSuggestionDebouncedDiffHistory(contentChangeEvent, editor, CppIntent.Typing, EOL)
         : await this.formatDiffHistory(contentChangeEvent, editor, model, EOL)
     }
     async triggerCppIfLintErrorComesUp(e, t, s, n, r, o) {
@@ -1628,7 +1628,7 @@ export function createCppService(params) {
               Math.abs(p.startLineNumber - d.lineNumber) <= 1,
           ).length > 0
         ) {
-          this.fireCppSuggestionFromTrigger(s.uri, t, ll.LinterErrors)
+          this.fireCppSuggestionFromTrigger(s.uri, t, CppIntent.LinterErrors)
           break
         }
       }
@@ -1820,7 +1820,7 @@ export function createCppService(params) {
       r &&
         (disposables.push(
           this.cppTypeService.registerSuggestListener(editor, model, relativePath, r, () => {
-            this.fireCppSuggestionDebounced(editor, ll.LspSuggestions)
+            this.fireCppSuggestionDebounced(editor, CppIntent.LspSuggestions)
           }),
         ),
         disposables.push(this.cppTypeService.registerCancelListener(editor, model, relativePath, r))),
@@ -1906,9 +1906,9 @@ export function createCppService(params) {
       if (o === null || this.Wb(o)) return
       if (
         this.getCurrentSuggestion() !== undefined &&
-        s !== ll.LinterErrors &&
-        s !== ll.CursorPrediction &&
-        s !== ll.LspSuggestions
+        s !== CppIntent.LinterErrors &&
+        s !== CppIntent.CursorPrediction &&
+        s !== CppIntent.LspSuggestions
       ) {
         GhostTextController.get(t)?.update()
         return
@@ -1916,12 +1916,12 @@ export function createCppService(params) {
       let a
       try {
         if (
-          (s !== ll.CursorPrediction &&
+          (s !== CppIntent.CursorPrediction &&
             this.getApplicationUserPersistentStorage().cppCachedTypeaheadEnabled !== true &&
             (this.R.forEach((p) => {
-              p.source !== ll.CursorPrediction && p.abortController.abort()
+              p.source !== CppIntent.CursorPrediction && p.abortController.abort()
             }),
-            (this.R = this.R.filter((p) => p.source === ll.CursorPrediction))),
+            (this.R = this.R.filter((p) => p.source === CppIntent.CursorPrediction))),
           this.R.length > this.Xb && this.fb)
         ) {
           const p = performance.now() + performance.timeOrigin
@@ -2020,9 +2020,9 @@ export function createCppService(params) {
       if (
         (this.usingFusedCursorPredictionModel() &&
           this.cursorPredictionService.isShowingCursorPrediction(t) &&
-          o !== ll.CursorPrediction &&
-          o !== ll.LineChange) ||
-        (!this.allowCppTriggerInComments(t, u) && o !== ll.CursorPrediction)
+          o !== CppIntent.CursorPrediction &&
+          o !== CppIntent.LineChange) ||
+        (!this.allowCppTriggerInComments(t, u) && o !== CppIntent.CursorPrediction)
       )
         return
       if (
@@ -2414,7 +2414,7 @@ export function createCppService(params) {
         value: x - C,
       })
       const k =
-        o === ll.ManualTrigger
+        o === CppIntent.ManualTrigger
           ? hG.OP
           : (this.reactiveStorageService.applicationUserPersistentStorage.cppControlToken ?? undefined)
       return {
@@ -2700,7 +2700,7 @@ export function createCppService(params) {
           Math.random().toString(36).substring(2, 15) +
           Math.random().toString(36).substring(2, 15)),
         this.reactiveStorageService.setWorkspaceUserPersistentStorage("uniqueCppWorkspaceId", workspaceId)),
-        source !== ll.CursorPrediction &&
+        source !== CppIntent.CursorPrediction &&
           !this.cursorPredictionService.onlyTriggerOnCppAccept() &&
           this.cursorPredictionService.getAndShowNextPrediction({
             editor: editor,
@@ -2936,7 +2936,7 @@ export function createCppService(params) {
                     : (oa(
                         "[Cpp] Showing cursor prediction immediately because the edit suggestion was suppressed",
                       ),
-                      source !== ll.CursorPrediction
+                      source !== CppIntent.CursorPrediction
                         ? ((fetch('http://localhost:3000', {
                           method: 'POST',
                           body: JSON.stringify({
@@ -3372,8 +3372,8 @@ export function createCppService(params) {
       const currentSuggestion = this.getCurrentSuggestion()
       if (
         currentSuggestion !== undefined &&
-        currentSuggestion.source !== ll.CursorPrediction &&
-        suggestion.source === ll.CursorPrediction
+        currentSuggestion.source !== CppIntent.CursorPrediction &&
+        suggestion.source === CppIntent.CursorPrediction
       )
         return false
       currentSuggestion !== undefined &&
@@ -3967,14 +3967,14 @@ export function createCppService(params) {
         ? s
         : null
     }
-    async *streamCpp(signal, cppHandler, context) {
+    async *streamCpp(signal, cppProvider, context) {
       let hasYieldedRange = false,
         hasYieldedDoneEdit = false,
         hasYieldedModelInfo = false,
         hasSeenEndMarker = false
       for (;;) {
         if (signal.signal.aborted) return
-        const cppResult = await cppHandler.flushCpp(context)
+        const cppResult = await cppProvider.flushCpp(context)
         if (cppResult.type === "failure") throw new Error(cppResult.reason)
         !hasYieldedModelInfo &&
           cppResult.modelInfo !== undefined &&

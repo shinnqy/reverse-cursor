@@ -1,7 +1,7 @@
 // @ts-check
 
 export function createWatcherService(params) {
-  const { V, __decorate, __param, A_, yi, Br, eg, Xt, ei, mo, nt, it, Md, Fn, ve, ft, si, zi, st, Ac, Lg, ue, Ti, cppService, fn, Ve, watcherService, Kt, G, VS, J, rt, zB, ll, SYe, o2i, Ri, Boe, Zui, U, d$i, W1t, j$i, q$i, wn, Hu, IKn, Y6n} = params;
+  const { V, __decorate, __param, A_, yi, Br, eg, Xt, ei, mo, nt, it, Md, Fn, ve, ft, si, zi, st, Ac, Lg, ue, Ti, cppService, fn, Ve, watcherService, Kt, G, VS, J, rt, zB, CppIntent, SYe, o2i, Ri, Boe, Zui, U, d$i, W1t, j$i, q$i, wn, Hu, IKn, Y6n} = params;
 
   var edi = class extends V {
     constructor(
@@ -227,7 +227,7 @@ export function createWatcherService(params) {
             modelValue: t.getValue(),
             modelVersion: t.getVersionId(),
             position: n,
-            source: ll.Unknown,
+            source: CppIntent.Unknown,
             shouldRelyOnFileSyncForFile: !1,
           }),
           u = h.currentFile?.contents

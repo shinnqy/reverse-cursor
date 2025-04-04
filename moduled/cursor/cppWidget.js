@@ -3,7 +3,7 @@
 import { createZXe } from './diff.utils.js';
 
 export function createCppWidget(params) {
-  const { V, CYe, FFt, KS, oR, N, zT, Ye, f_, g_, p_, G, q, W, Yy, U, hu, __decorate, __param, Pt, ve, Z, ei, si, qi, Hi, Ds, Ce, Me, DKi, eI, ge, R, rt, Jl, pl, Ic, a0, oT, f3, b4, np, K3, J3, B4, bf, _v, OFt, ll, k7, f, ss, aiFeatureStatusService, ue, cppService, st, cursorPredictionService, importPredictionService, Ai, Jon, Zt, so, me, Tn } = params;
+  const { V, CYe, FFt, KS, oR, N, zT, Ye, f_, g_, p_, G, q, W, Yy, U, hu, __decorate, __param, Pt, ve, Z, ei, si, qi, Hi, Ds, Ce, Me, DKi, eI, ge, R, rt, Jl, pl, Ic, a0, oT, f3, b4, np, K3, J3, B4, bf, _v, OFt, CppIntent, k7, f, ss, aiFeatureStatusService, ue, cppService, st, cursorPredictionService, importPredictionService, Ai, Jon, Zt, so, me, Tn } = params;
 
   var Acr = new CYe()
   function WBt(i, e, t) {
@@ -1320,7 +1320,7 @@ export function createCppWidget(params) {
       const k = {
           newValue: g,
           changesSinceLastUpdate: t?.changesSinceLastUpdate ?? !1,
-          source: e?.source ?? ll.Unknown,
+          source: e?.source ?? CppIntent.Unknown,
           forceViewZones: t?.forceViewZones ?? !1,
         },
         E = this.I.getPosition()
@@ -1809,7 +1809,7 @@ export function createCppWidget(params) {
       const e = this.q.nonPersistentStorage.cppState?.suggestion
       if (this.j) return
       const t = this.a.getPosition()
-      if (t !== null && e !== void 0 && e.source !== ll.CursorPrediction) {
+      if (t !== null && e !== void 0 && e.source !== CppIntent.CursorPrediction) {
         const s = this.a.getModel()?.getDecorationRange(e.decorationId)
         if (s == null) return
         if (
