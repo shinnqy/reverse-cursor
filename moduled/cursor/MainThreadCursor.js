@@ -1,7 +1,7 @@
 // @ts-check
 
 export function createMainThreadCursor(params) {
-  const {V: Disposable, __decorate, __param, cr: MainContext, Pr: ExtHostContext, bt: window, Sfe: AIServerV1ShadowWorkspaceService, Qr, ei, $h, Md, pt, ft, metricsService, diffingService, Pcs, Lcs, everythingProviderService, xYe, HFt, hue, yY, sqe, Ncs, mI, cppEventLoggerService, I3t, hTt, Y$, selectedContextService, co, Yt, Bcs, rt, oi, Con, _cs, XRi, du, vo, Qq, Zq, S4, dk, x$ } = params;
+  const {V: Disposable, __decorate, __param, MainContext, ExtHostContext, bt: window, Sfe: AIServerV1ShadowWorkspaceService, Qr, ei, $h, Md, pt, ft, metricsService, diffingService, Pcs, Lcs, everythingProviderService, xYe, HFt, hue, yY, sqe, Ncs, mI, cppEventLoggerService, I3t, hTt, Y$, selectedContextService, co, Yt, Bcs, rt, oi, Con, _cs, XRi, du, vo, Qq, Zq, S4, dk, x$ } = params;
 
   var Ucs = (i) => {
     const e = i.at(0)
