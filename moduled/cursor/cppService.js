@@ -350,7 +350,7 @@ export function createCppService(params) {
           if (this.Ob().cppEnabled === true) {
             if (se.key === "Tab" && se.shiftKey) {
               if (this.Ob().cppManualTriggerWithOpToken) {
-                const ae = this.gb.getActiveCodeEditor()
+                const ae = this.codeEditorService.getActiveCodeEditor()
                 if (ae === null) return
                 const Ee = ae.getModel()?.uri
                 if (!Ee) {
@@ -422,7 +422,7 @@ export function createCppService(params) {
                 else if (
                   (this.Pb().cppState?.additionalSuggestions?.length ?? 0) > 0
                 ) {
-                  const ae = this.gb.getActiveCodeEditor(),
+                  const ae = this.codeEditorService.getActiveCodeEditor(),
                     de = ae?.getModel() ?? undefined,
                     Ee = ae?.getPosition(),
                     ke = this.Pb().cppState?.additionalSuggestions.filter(
@@ -586,18 +586,18 @@ export function createCppService(params) {
         (this.didShowGreenHighlights = false),
         (this.removedCppNoopGenerationUUIDS = []),
         (this.generationStartTimes = {}),
-        (this.c = this.D(this.hb.createScoped(this))),
-        (this.W.value = this.ub.addEntry(
+        (this.c = this.D(this.reactiveStorageService.createScoped(this))),
+        (this.W.value = this.statusbarService.addEntry(
           this.statusBarElementProps(),
           "Cursor Tab",
           1,
           100,
         )),
         this.updateStatusBarElement(),
-        (this.P = this.sb.createInstance(fu, { service: Va })),
-        (this.g = this.sb.createInstance(fu, { service: nze })),
+        (this.P = this.instantiationService.createInstance(fu, { service: Va })),
+        (this.g = this.instantiationService.createInstance(fu, { service: nze })),
         this.Pb().cppState === undefined &&
-          this.hb.setNonPersistentStorage("cppState", {}),
+          this.reactiveStorageService.setNonPersistentStorage("cppState", {}),
         this.loadCopilotPlusPlusConfigFromGithubCopilot(),
         this.Lb(),
         this.D(
@@ -627,23 +627,23 @@ export function createCppService(params) {
             this.updateStatusBarElement()
           },
         }),
-        this.nb.onDidChangeSubscription(() => {
+        this.authenticationService.onDidChangeSubscription(() => {
           this.updateStatusBarElement(),
             this.loadCppConfigIncludingHandlingProAccess()
         }),
         this.D(
-          this.zb.onDidActiveEditorChange(() => {
+          this.editorService.onDidActiveEditorChange(() => {
             this.updateStatusBarElement()
           }),
         ),
-        this.nb.addLoginChangedListener(() => {
+        this.authenticationService.addLoginChangedListener(() => {
           this.updateStatusBarElement()
         }),
-        this.nb.addSubscriptionChangedListener(() => {
+        this.authenticationService.addSubscriptionChangedListener(() => {
           this.updateStatusBarElement(),
             this.loadCppConfigIncludingHandlingProAccess()
         }),
-        this.Ab.onDidChangeConfiguration((se) => {
+        this.configurationService.onDidChangeConfiguration((se) => {
           se.affectsConfiguration(JB) && this.updateStatusBarElement()
         }),
         this.loadCppConfigIncludingHandlingProAccess(),
@@ -665,7 +665,7 @@ export function createCppService(params) {
       const { clientDebounceDuration: K, totalDebounceDuration: Q } =
         this.getNewDebounceDurations()
       ;(this.Z = new R_n(K, Q, 1e3)),
-        (this.fb = !this.Jb.isBuilt || this.Jb.isExtensionDevelopment),
+        (this.fb = !this.environmentService.isBuilt || this.environmentService.isExtensionDevelopment),
         this.importPredictionService.registerCppMethods({
           getPartialCppRequest: this.getPartialCppRequest.bind(this),
           getModelName: this.getModelName.bind(this),
@@ -679,19 +679,19 @@ export function createCppService(params) {
         })
     }
     Lb() {
-      const e = this.hb.applicationUserPersistentStorage.cppSnoozed
+      const e = this.reactiveStorageService.applicationUserPersistentStorage.cppSnoozed
       if (
         e !== undefined &&
-        this.hb.applicationUserPersistentStorage.cppEnabled === false
+        this.reactiveStorageService.applicationUserPersistentStorage.cppEnabled === false
       ) {
         const t = Date.now(),
           s = e + GMs
         s < t
-          ? (this.hb.setApplicationUserPersistentStorage("cppSnoozed", undefined),
-            this.hb.setApplicationUserPersistentStorage("cppEnabled", true))
+          ? (this.reactiveStorageService.setApplicationUserPersistentStorage("cppSnoozed", undefined),
+            this.reactiveStorageService.setApplicationUserPersistentStorage("cppEnabled", true))
           : setTimeout(() => {
-              this.hb.setApplicationUserPersistentStorage("cppSnoozed", undefined),
-                this.hb.setApplicationUserPersistentStorage("cppEnabled", true)
+              this.reactiveStorageService.setApplicationUserPersistentStorage("cppSnoozed", undefined),
+                this.reactiveStorageService.setApplicationUserPersistentStorage("cppEnabled", true)
             }, t - s)
       }
     }
@@ -729,7 +729,7 @@ export function createCppService(params) {
       return this.u
     }
     getNewDebounceDurations() {
-      const e = this.hb.applicationUserPersistentStorage.cppConfig
+      const e = this.reactiveStorageService.applicationUserPersistentStorage.cppConfig
       if (e === undefined)
         return { clientDebounceDuration: Igo, totalDebounceDuration: Dgo }
       const t = e.clientDebounceDurationMillis,
@@ -743,7 +743,7 @@ export function createCppService(params) {
       const e = new J()
       try {
         for (const [t, s] of this.O.entries()) {
-          const n = await this.ib.createModelReference(t)
+          const n = await this.textModelService.createModelReference(t)
           e.add(n),
             n.object.textEditorModel.deltaDecorations(
               s.map((r) => r.decorationId),
@@ -756,35 +756,35 @@ export function createCppService(params) {
     }
     sendCppEnabledUpdateRequest() {
       this.Ob().cppEnabled
-        ? this.ob.publicLogCapture("cpp.cppUpdate.cppEnabled")
-        : this.ob.publicLogCapture("cpp.cppUpdate.cppDisabled")
+        ? this.telemetryService.publicLogCapture("cpp.cppUpdate.cppEnabled")
+        : this.telemetryService.publicLogCapture("cpp.cppUpdate.cppDisabled")
     }
     async keepCppModelStateUpdated() {
       const e = await (await this.g.get()).availableModels({})
-      this.hb.setApplicationUserPersistentStorage("cppModelsState", (t) => ({
+      this.reactiveStorageService.setApplicationUserPersistentStorage("cppModelsState", (t) => ({
         cppModels: e.models,
         defaultModel: e.defaultModel ?? t.defaultCppModel,
       }))
     }
     async updateShouldNotTryToGetThemToNoticeCpp() {
       this.Ob().cppEnabled === true &&
-        this.hb.setApplicationUserPersistentStorage(
+        this.reactiveStorageService.setApplicationUserPersistentStorage(
           "shouldNotTryToGetThemToNoticeCpp",
           true,
         )
-      const e = this.nb.isAuthenticated()
+      const e = this.authenticationService.isAuthenticated()
       await this.aiFeatureStatusService.maybeRefreshFeatureStatus("cppExistingUserMarketingPopup"),
         e &&
           this.Ob().shouldNotTryToGetThemToNoticeCpp !== true &&
           this.aiFeatureStatusService.getCachedFeatureStatus("cppExistingUserMarketingPopup") ===
             true &&
           this.isAllowedCpp() &&
-          (this.ob.publicLogCapture("cppMarketingPopup.shownPopup"),
-          this.hb.setApplicationUserPersistentStorage(
+          (this.telemetryService.publicLogCapture("cppMarketingPopup.shownPopup"),
+          this.reactiveStorageService.setApplicationUserPersistentStorage(
             "shouldNotTryToGetThemToNoticeCpp",
             true,
           ),
-          this.hb.setNonPersistentStorage(
+          this.reactiveStorageService.setNonPersistentStorage(
             "cppPopupState",
             "cardState",
             "first",
@@ -793,8 +793,8 @@ export function createCppService(params) {
     isAllowedCpp() {
       return WEn(
         this.Ob().cppConfig,
-        this.nb.isAuthenticated(),
-        m2i(this.nb.membershipType()),
+        this.authenticationService.isAuthenticated(),
+        m2i(this.authenticationService.membershipType()),
       )
     }
     isCppEnabledForEditor(e) {
@@ -802,29 +802,29 @@ export function createCppService(params) {
       if (e !== null) {
         const n = e.getModel()
         if (n == null || this.Wb(n) || this.selectedContextService.shouldIgnoreUri(n.uri)) return false
-        t = { languageId: KMs(n), fsPath: this.mb.asRelativePath(n.uri) }
+        t = { languageId: KMs(n), fsPath: this.contextService.asRelativePath(n.uri) }
       }
       let s
       try {
-        s = this.Ab.getValue(JB)
+        s = this.configurationService.getValue(JB)
       } catch {
         s = []
       }
       return qEn(this.Ob().cppEnabled, t, s)
     }
     setCppDisabledForLanguage(e, t) {
-      const s = this.Ab.getValue(JB)
+      const s = this.configurationService.getValue(JB)
       Array.isArray(s)
-        ? this.Ab.updateValue(
+        ? this.configurationService.updateValue(
             JB,
             t === "enabled" ? s.filter((n) => n !== e) : [...s, e],
             2,
           )
-        : this.Ab.updateValue(JB, t === "enabled" ? [] : [e], 2)
+        : this.configurationService.updateValue(JB, t === "enabled" ? [] : [e], 2)
     }
     isCppDisabledForLanguage(e) {
       try {
-        const t = this.Ab.getValue(JB)
+        const t = this.configurationService.getValue(JB)
         return b2i(e, t)
       } catch {
         return false
@@ -863,16 +863,16 @@ export function createCppService(params) {
     loadCopilotPlusPlusConfigFromGithubCopilot() {
       if (this.Ob().cppHasLoadedConfigFromCopilot !== true)
         try {
-          const e = this.Ab.getValue("github.copilot.enable")
+          const e = this.configurationService.getValue("github.copilot.enable")
           if (e !== null && typeof e == "object") {
             const t = Object.keys(e)
               .filter((s) => e[s] === false)
               .filter((s) => s !== "*")
-            t.length > 0 && this.Ab.updateValue(JB, t, 2)
+            t.length > 0 && this.configurationService.updateValue(JB, t, 2)
           }
         } catch {
         } finally {
-          this.hb.setApplicationUserPersistentStorage(
+          this.reactiveStorageService.setApplicationUserPersistentStorage(
             "cppHasLoadedConfigFromCopilot",
             true,
           )
@@ -957,7 +957,7 @@ export function createCppService(params) {
       }),
         a.addEventListener("change", (u) => {
           const d = u.target.value
-          this.hb.setApplicationUserPersistentStorage(
+          this.reactiveStorageService.setApplicationUserPersistentStorage(
             "cursorPredictionEnabled",
             d === "enabled",
           )
@@ -990,10 +990,10 @@ export function createCppService(params) {
         t.appendChild(s)
       const n = document.createElement("div"),
         r = document.createElement("select"),
-        o = this.hb.applicationUserPersistentStorage.cppModel || S9
+        o = this.reactiveStorageService.applicationUserPersistentStorage.cppModel || S9
       ;[
         S9,
-        ...this.hb.applicationUserPersistentStorage.cppModelsState.cppModels,
+        ...this.reactiveStorageService.applicationUserPersistentStorage.cppModelsState.cppModels,
       ].forEach((c) => {
         const h = document.createElement("option")
         ;(h.value = c),
@@ -1004,8 +1004,8 @@ export function createCppService(params) {
         r.addEventListener("change", (c) => {
           const h = c.target.value
           h === S9
-            ? this.hb.setApplicationUserPersistentStorage("cppModel", undefined)
-            : this.hb.setApplicationUserPersistentStorage("cppModel", h),
+            ? this.reactiveStorageService.setApplicationUserPersistentStorage("cppModel", undefined)
+            : this.reactiveStorageService.setApplicationUserPersistentStorage("cppModel", h),
             this.loadCppConfigIncludingHandlingProAccess()
         }),
         (r.style.background = "none"),
@@ -1046,9 +1046,9 @@ export function createCppService(params) {
             const l = o.checked
             t
               ? this.setCppDisabledForLanguage(t, l ? "disabled" : "enabled")
-              : (this.hb.setApplicationUserPersistentStorage("cppEnabled", !l),
+              : (this.reactiveStorageService.setApplicationUserPersistentStorage("cppEnabled", !l),
                 l &&
-                  this.hb.setApplicationUserPersistentStorage(
+                  this.reactiveStorageService.setApplicationUserPersistentStorage(
                     "cppSnoozed",
                     undefined,
                   ))
@@ -1064,12 +1064,12 @@ export function createCppService(params) {
       )
     }
     statusBarElementProps() {
-      for (this.nb.refreshAuthService(), this.Mb.clear(); this.Nb.firstChild; )
+      for (this.authenticationService.refreshAuthService(), this.Mb.clear(); this.Nb.firstChild; )
         this.Nb.removeChild(this.Nb.firstChild)
-      const e = Xf(this.zb.activeTextEditorControl)
+      const e = Xf(this.editorService.activeTextEditorControl)
       e?.onDidChangeModelLanguage(this.updateStatusBarElement, this, this.Mb)
       const t = e?.getModel(),
-        s = this.nb.isAuthenticated(),
+        s = this.authenticationService.isAuthenticated(),
         n = this.isAllowedCpp(),
         r = this.isCppEnabledForEditor(e)
       if (n) {
@@ -1092,7 +1092,7 @@ export function createCppService(params) {
           (a.textContent = "Upgrade here."),
           (a.style.marginLeft = "4px"),
           (a.onclick = (l) => {
-            l.preventDefault(), this.nb.pay()
+            l.preventDefault(), this.authenticationService.pay()
           }),
           o.appendChild(a),
           this.Nb.appendChild(o)
@@ -1129,10 +1129,10 @@ export function createCppService(params) {
       return e.altKey === true
     }
     Ob() {
-      return this.hb.applicationUserPersistentStorage
+      return this.reactiveStorageService.applicationUserPersistentStorage
     }
     Pb() {
-      return this.hb.nonPersistentStorage
+      return this.reactiveStorageService.nonPersistentStorage
     }
     reallowCopilotIfWePreviousHidCopilotSuggestions() {
       this.editorThatWeHidGhostTextOn !== undefined &&
@@ -1143,7 +1143,7 @@ export function createCppService(params) {
         (this.editorThatWeHidGhostTextOn = undefined))
     }
     isInVimNonInsertMode() {
-      const e = this.ub.getViewModel()
+      const e = this.statusbarService.getViewModel()
       for (const t of [...e.getEntries(0), ...e.getEntries(1)])
         if (
           t.id === "vscodevim.vim.primary" &&
@@ -1153,7 +1153,7 @@ export function createCppService(params) {
       return false
     }
     selectionIsNotMultipleLines() {
-      const e = this.gb.getActiveCodeEditor(),
+      const e = this.codeEditorService.getActiveCodeEditor(),
         t = e?.getSelection()
       return (
         e === null ||
@@ -1163,14 +1163,14 @@ export function createCppService(params) {
       )
     }
     cursorPredictorWouldTabInsteadOfAccepting() {
-      const e = this.gb.getActiveCodeEditor()
+      const e = this.codeEditorService.getActiveCodeEditor()
       if (!e) return false
       const t = e.getModel()
       return t ? this.cursorPredictionService.shouldTabInsteadOfAccepting(e, t) : false
     }
     shouldTabInsteadOfAccepting() {
       if (this.isInVimNonInsertMode()) return false
-      const e = this.gb.getActiveCodeEditor()
+      const e = this.codeEditorService.getActiveCodeEditor()
       if (!e) return false
       const t = e.getPosition(),
         s = e.getModel()
@@ -1204,7 +1204,7 @@ export function createCppService(params) {
         : d.trimStart() !== d
     }
     async acceptNextWord() {
-      if (this.Ab.getValue(fUe) !== true) return false
+      if (this.configurationService.getValue(fUe) !== true) return false
       const t = this.Pb().cppState?.suggestion
       if (t !== undefined) {
         this.dontTriggerCppBecauseChangeIsFromCpp = true
@@ -1212,12 +1212,12 @@ export function createCppService(params) {
           this.holdDownAbortController,
         )
         if (s.type === Sp.AcceptedWord) {
-          const n = this.gb.getActiveCodeEditor()
+          const n = this.codeEditorService.getActiveCodeEditor()
           return (
             n !== null && this.cleanupAfterNextWordSuggestion(n, s.edit), true
           )
         } else if (s.type === Sp.AcceptedAll) {
-          const n = this.gb.getActiveCodeEditor()
+          const n = this.codeEditorService.getActiveCodeEditor()
           return n !== null && this.cleanupAfterAcceptSuggestion(n, t), true
         }
       }
@@ -1236,7 +1236,7 @@ export function createCppService(params) {
       const r = this.Pb().cppState?.suggestion
       if (r === undefined) return
       const o = r.uri,
-        a = this.mb.asRelativePath(o)
+        a = this.contextService.asRelativePath(o)
       let { isNoOp: l } = replaceTextInRange(
         n,
         r.startingSuggestionRange,
@@ -1276,19 +1276,19 @@ export function createCppService(params) {
 
       )
         await new Promise((s) => setTimeout(s, 100))
-      for (let s of this.gb.listCodeEditors())
+      for (let s of this.codeEditorService.listCodeEditors())
         this.registerEditorListenersToEditor(s)
       this.n.set("global", [
         this.D(
-          this.gb.onCodeEditorAdd((s) => {
+          this.codeEditorService.onCodeEditorAdd((s) => {
             this.registerEditorListenersToEditor(s)
           }),
         ),
       ]),
         this.D(
-          this.zb.onDidActiveEditorChange(() => {
+          this.editorService.onDidActiveEditorChange(() => {
             oa("onDidActiveEditorChange:")
-            const s = this.gb.getActiveCodeEditor()
+            const s = this.codeEditorService.getActiveCodeEditor()
             if (s === null) {
               oa("onDidActiveEditorChange: editor is null")
               return
@@ -1343,7 +1343,7 @@ export function createCppService(params) {
               }),
             ),
           )
-        const s = this.D(new NYi(e, this.xb.signatureHelpProvider))
+        const s = this.D(new NYi(e, this.ILanguageFeaturesService.signatureHelpProvider))
         this.n.get(t).push(s),
           s !== undefined &&
             this.n.get(t).push(
@@ -1373,7 +1373,7 @@ export function createCppService(params) {
             this.D(
               e.onDidChangeCursorPosition((r) => {
                 if (
-                  this.gb.getActiveCodeEditor() !== e &&
+                  this.codeEditorService.getActiveCodeEditor() !== e &&
                   !this.isReferenceFocused(e) &&
                   !this.isFindFocused(e)
                 ) {
@@ -1413,7 +1413,7 @@ export function createCppService(params) {
                   r.source === "restoreState")
                 )
                   return
-                let c = this.rb
+                let c = this.markerService
                   .read({ resource: o })
                   .filter(
                     (h) =>
@@ -1540,7 +1540,7 @@ export function createCppService(params) {
             e.onDidFocusEditorText(() => {
               const n = e.getModel()
               if (n == null) return
-              const r = this.mb.asRelativePath(n.uri),
+              const r = this.contextService.asRelativePath(n.uri),
                 o = [
                   ce.file,
                   ce.inMemory,
@@ -1575,7 +1575,7 @@ export function createCppService(params) {
               const n = e.getModel(),
                 r = n?.uri
               if (n == null || r == null) return
-              const o = this.mb.asRelativePath(r),
+              const o = this.contextService.asRelativePath(r),
                 a = [
                   ce.file,
                   ce.inMemory,
@@ -1602,7 +1602,7 @@ export function createCppService(params) {
         : await this.formatDiffHistory(contentChangeEvent, editor, model, EOL)
     }
     async triggerCppIfLintErrorComesUp(e, t, s, n, r, o) {
-      const a = this.mb.asRelativePath(s?.uri ?? U.file("")),
+      const a = this.contextService.asRelativePath(s?.uri ?? U.file("")),
         l = new AbortController()
       this.triggerCppOnLintErrorAbortControllers.set(a, l)
       let c = false
@@ -1611,7 +1611,7 @@ export function createCppService(params) {
       })
       for (let h = 0; h < r / 50; h++) {
         if ((await new Promise((p) => setTimeout(p, 50)), c)) return
-        const u = this.rb.read({ resource: s.uri }),
+        const u = this.markerService.read({ resource: s.uri }),
           d = t.getPosition()
         if (d === null) return
         if (
@@ -1703,7 +1703,7 @@ export function createCppService(params) {
         )
         return
       }
-      const relativePath = this.mb.asRelativePath(model?.uri ?? U.file(""))
+      const relativePath = this.contextService.asRelativePath(model?.uri ?? U.file(""))
       if (
         (await this.everythingProviderService.onlyLocalProvider?.runCommand(EditHistoryDiffFormatter.GetModelValue, {
           relativePath: relativePath,
@@ -1743,7 +1743,7 @@ export function createCppService(params) {
                 ((this.lastEditTime = Date.now()),
                 this.editorListenersMap.has(relativePath) &&
                   this.editorListenersMap.get(relativePath).size > 1 &&
-                  editor.getId() !== this.gb.getActiveCodeEditor()?.getId())
+                  editor.getId() !== this.codeEditorService.getActiveCodeEditor()?.getId())
               ) {
                 oa(
                   "[Cpp] onDidChangeModelContent: Suppressing trigger because editor is not active",
@@ -1825,8 +1825,8 @@ export function createCppService(params) {
         this.Ob().cppAutoImportEnabled &&
           editorListeners?.get(editorId)?.push(
             this.D(
-              this.rb.onMarkerChanged(async (changedUris) => {
-                this.gb.getActiveCodeEditor()?.getId() === editor.getId() &&
+              this.markerService.onMarkerChanged(async (changedUris) => {
+                this.codeEditorService.getActiveCodeEditor()?.getId() === editor.getId() &&
                   changedUris.some((c) => c.toString() === model.uri.toString()) &&
                   this.showNearLocationLintErrorsToImportPredictionService({
                     editor: editor,
@@ -1983,17 +1983,17 @@ export function createCppService(params) {
     }
     async immediatelyFireCppFromTrigger(e, t, s, n, r, o, a) {
       if (
-        this.hb.applicationUserPersistentStorage.oneTimeSettings
+        this.reactiveStorageService.applicationUserPersistentStorage.oneTimeSettings
           .shouldDisableGithubCopilot === true
       )
         try {
-          const p = this.Ab.getValue("github.copilot")
+          const p = this.configurationService.getValue("github.copilot")
           p !== null &&
             typeof p == "object" &&
             p.enable["*"] === true &&
-            this.kb.executeCommand("github.copilot.toggleCopilot")
+            this.commandService.executeCommand("github.copilot.toggleCopilot")
         } finally {
-          this.hb.setApplicationUserPersistentStorage(
+          this.reactiveStorageService.setApplicationUserPersistentStorage(
             "oneTimeSettings",
             "shouldDisableGithubCopilot",
             false,
@@ -2027,7 +2027,7 @@ export function createCppService(params) {
         return
       }
       if (
-        this.hb.nonPersistentStorage.cppState
+        this.reactiveStorageService.nonPersistentStorage.cppState
           ?.shouldNotTriggerFromInlineDiffReject ??
         false
       ) {
@@ -2067,7 +2067,7 @@ export function createCppService(params) {
     }
     allowCppTriggerInComments(e, t) {
       if (
-        this.hb.applicationUserPersistentStorage.cppTriggerInComments === false
+        this.reactiveStorageService.applicationUserPersistentStorage.cppTriggerInComments === false
       ) {
         const s = e.getModel()
         if (s === null) return true
@@ -2108,9 +2108,9 @@ export function createCppService(params) {
       return !!this.Ob()?.cppConfig?.isFusedCursorPredictionModel
     }
     overlapsInlineDiff(e, t, { onlyCheckCurrentlyGenerating: s }) {
-      const n = this.hb.nonPersistentStorage.inlineDiffs
+      const n = this.reactiveStorageService.nonPersistentStorage.inlineDiffs
       if (n === undefined) return false
-      const r = this.hb.nonPersistentStorage.inprogressAIGenerations.map(
+      const r = this.reactiveStorageService.nonPersistentStorage.inprogressAIGenerations.map(
         (o) => o.generationUUID,
       )
       return n.some((o) => {
@@ -2139,7 +2139,7 @@ export function createCppService(params) {
       }
     }
     updateRecentDiagnostics(e, t) {
-      const s = this.rb.read({ resource: e })
+      const s = this.markerService.read({ resource: e })
       let n,
         r = this.filterLinterErrors(s).map((l) => ({
           message: l.message,
@@ -2166,7 +2166,7 @@ export function createCppService(params) {
             ),
         )),
         (n = new Cf({
-          relativeWorkspacePath: this.mb.asRelativePath(e),
+          relativeWorkspacePath: this.contextService.asRelativePath(e),
           errors: r,
           fileContents: undefined,
         })))
@@ -2244,7 +2244,7 @@ export function createCppService(params) {
         (this.J = this.J.slice(0, Math.min(this.J.length, 10)))
     }
     getRecentAndNearLocationLinterErrors(e, t) {
-      const s = this.rb.read({ resource: e })
+      const s = this.markerService.read({ resource: e })
       let n
       const r = this.filterLinterErrors(s)
       let a = (t !== undefined ? [t, ...r.filter((c) => c !== t)] : r)
@@ -2283,7 +2283,7 @@ export function createCppService(params) {
         )),
         a.length > 0 &&
           (n = new Cf({
-            relativeWorkspacePath: this.mb.asRelativePath(e),
+            relativeWorkspacePath: this.contextService.asRelativePath(e),
             errors: a,
             fileContents: undefined,
           })),
@@ -2297,7 +2297,7 @@ export function createCppService(params) {
     }) {
       const n = e.getPosition()
       if (n === null) return
-      const r = this.rb.read({ resource: t })
+      const r = this.markerService.read({ resource: t })
       let a = this.filterLinterErrors(r, Ri.Warning).filter(
         (l) => Math.abs(l.startLineNumber - n.lineNumber) <= ddi,
       )
@@ -2380,7 +2380,7 @@ export function createCppService(params) {
           )
         ;(p = E), this.formattedDiffCache.set(this.getModelKey(c), p)
       } else p = m
-      const b = this.mb.asRelativePath(c.uri),
+      const b = this.contextService.asRelativePath(c.uri),
         y = p.find((E) => E.fileName === b)
       if (y) {
         const E = y.diffHistory.at(-1)
@@ -2409,7 +2409,7 @@ export function createCppService(params) {
       const k =
         o === ll.ManualTrigger
           ? hG.OP
-          : (this.hb.applicationUserPersistentStorage.cppControlToken ?? undefined)
+          : (this.reactiveStorageService.applicationUserPersistentStorage.cppControlToken ?? undefined)
       return {
         ...d,
         linterErrors: l,
@@ -2424,9 +2424,9 @@ export function createCppService(params) {
     }
     async $b(e, t) {
       try {
-        const s = this.zb.visibleEditorPanes,
+        const s = this.editorService.visibleEditorPanes,
           n = [],
-          r = this.mb.asRelativePath(t),
+          r = this.contextService.asRelativePath(t),
           o = this.Ob().cppConfig?.shouldFetchRvfText === true,
           a = (u, d) =>
             d.map((g) => ({
@@ -2453,7 +2453,7 @@ export function createCppService(params) {
             if (g === null) continue
             const p = a(g, d.getVisibleRanges())
             n.push({
-              relativeWorkspacePath: this.mb.asRelativePath(g.uri),
+              relativeWorkspacePath: this.contextService.asRelativePath(g.uri),
               visibleRangeContent: p.map((m) => m.content),
               startLineNumberOneIndexed: p.map((m) => m.startLineNumber),
               visibleRanges: p.map((m) => ({
@@ -2471,7 +2471,7 @@ export function createCppService(params) {
           for (const [u, d] of this.j.entries())
             if (t !== u)
               try {
-                const g = this.mb.asRelativePath(u)
+                const g = this.contextService.asRelativePath(u)
                 if (
                   g === undefined ||
                   n.find((p) => p.relativeWorkspacePath === g) ||
@@ -2479,10 +2479,10 @@ export function createCppService(params) {
                 )
                   continue
                 if (d.lastViewedAt < Date.now() - Rgo) l.push(u)
-                else if (this.ib.canHandleResource(u)) {
+                else if (this.textModelService.canHandleResource(u)) {
                   let p = null
                   if (o) {
-                    const b = await this.ib.createModelReference(u)
+                    const b = await this.textModelService.createModelReference(u)
                     if (
                       (c.add(b), (p = b.object.textEditorModel), p === undefined)
                     )
@@ -2535,26 +2535,26 @@ export function createCppService(params) {
       }
     }
     getWorkspaceId() {
-      let e = this.hb.workspaceUserPersistentStorage.uniqueCppWorkspaceId
+      let e = this.reactiveStorageService.workspaceUserPersistentStorage.uniqueCppWorkspaceId
       return (
         e === undefined &&
           ((e =
             Math.random().toString(36).substring(2, 15) +
             Math.random().toString(36).substring(2, 15)),
-          this.hb.setWorkspaceUserPersistentStorage("uniqueCppWorkspaceId", e)),
+          this.reactiveStorageService.setWorkspaceUserPersistentStorage("uniqueCppWorkspaceId", e)),
         `${e}-${Tgo}`
       )
     }
     isReferenceFocused(e) {
-      if (!this.hb.applicationUserPersistentStorage.cppInPeek) return false
-      const t = this.gb.getActiveCodeEditor()
+      if (!this.reactiveStorageService.applicationUserPersistentStorage.cppInPeek) return false
+      const t = this.codeEditorService.getActiveCodeEditor()
       if (t === null) return false
       const s = mR.get(t)?.getWidget()
       return s !== undefined && s.hasFocus() && s.getPreviewEditor() === e
     }
     isFindActive(e) {
       if (
-        this.hb.applicationUserPersistentStorage.cppInCmdF !== true ||
+        this.reactiveStorageService.applicationUserPersistentStorage.cppInCmdF !== true ||
         e === undefined
       )
         return false
@@ -2562,7 +2562,7 @@ export function createCppService(params) {
       return t instanceof gle && t.isActive()
     }
     isFindFocused(e) {
-      if (!this.hb.applicationUserPersistentStorage.cppInCmdF || e === undefined)
+      if (!this.reactiveStorageService.applicationUserPersistentStorage.cppInCmdF || e === undefined)
         return false
       const t = fm.get(e)
       if (t === null) return false
@@ -2575,19 +2575,19 @@ export function createCppService(params) {
       return s !== null && !s.isEmpty()
     }
     ac() {
-      if (!this.hb.applicationUserPersistentStorage.cppInCmdF) return
-      const e = this.gb.getActiveCodeEditor()
+      if (!this.reactiveStorageService.applicationUserPersistentStorage.cppInCmdF) return
+      const e = this.codeEditorService.getActiveCodeEditor()
       if (e !== null && this.isFindActive(e)) {
         const t = fm.get(e)
         t instanceof gle && t.focusFindInputWithoutSelecting()
       }
     }
     isProblemFocused(e) {
-      if (!this.hb.applicationUserPersistentStorage.cppInPeek || !e) return false
-      const t = this.gb.getActiveCodeEditor()
+      if (!this.reactiveStorageService.applicationUserPersistentStorage.cppInPeek || !e) return false
+      const t = this.codeEditorService.getActiveCodeEditor()
       return e !== t
         ? false
-        : (this.Eb.getActiveViewWithId(xr.MARKERS_VIEW_ID)?.isFocused() ?? false)
+        : (this.viewsService.getActiveViewWithId(xr.MARKERS_VIEW_ID)?.isFocused() ?? false)
     }
     isTextFocusedOrSimilarlyFocused(e) {
       return e
@@ -2598,17 +2598,17 @@ export function createCppService(params) {
         : false
     }
     getFocusedCodeEditor() {
-      const e = this.gb.getActiveCodeEditor()
+      const e = this.codeEditorService.getActiveCodeEditor()
       return e?.hasTextFocus() === true
         ? e
-        : (this.gb
+        : (this.codeEditorService
             .listCodeEditors()
             .find((t) => this.isTextFocusedOrSimilarlyFocused(t)) ?? e)
     }
     getNotebookCellInfo(e, t, s) {
       if (!e.uri.scheme.startsWith("vscode-notebook-cell")) return null
       const n = Gr.parse(e.uri),
-        r = this.yb.getNotebookEditorByCellEditorId(t.getId())
+        r = this.INotebookEditorWidgetService.getNotebookEditorByCellEditorId(t.getId())
       if (!n || !r)
         return (
           oa("[Cpp] Bad Case: cellUri or notebookEditor is undefined"), null
@@ -2656,7 +2656,7 @@ export function createCppService(params) {
           (await this.everythingProviderService.onlyLocalProvider?.runCommand(
             GB.ShouldRelyOnFileSyncForFile,
             {
-              relativeWorkspacePath: this.mb.asRelativePath(uri),
+              relativeWorkspacePath: this.contextService.asRelativePath(uri),
               modelVersion: modelVersion,
             },
           )) ?? false,
@@ -2687,12 +2687,12 @@ export function createCppService(params) {
       const model = editor.getModel()
       if (model === null)
         return oa("[Cpp] Bad Case: model is null"), { success: false }
-      let workspaceId = this.hb.workspaceUserPersistentStorage.uniqueCppWorkspaceId
+      let workspaceId = this.reactiveStorageService.workspaceUserPersistentStorage.uniqueCppWorkspaceId
       workspaceId === undefined &&
         ((workspaceId =
           Math.random().toString(36).substring(2, 15) +
           Math.random().toString(36).substring(2, 15)),
-        this.hb.setWorkspaceUserPersistentStorage("uniqueCppWorkspaceId", workspaceId)),
+        this.reactiveStorageService.setWorkspaceUserPersistentStorage("uniqueCppWorkspaceId", workspaceId)),
         source !== ll.CursorPrediction &&
           !this.cursorPredictionService.onlyTriggerOnCppAccept() &&
           this.cursorPredictionService.getAndShowNextPrediction({
@@ -2713,7 +2713,7 @@ export function createCppService(params) {
             value: performance.now() - this.X,
           }),
         (this.y = generationUUID)
-      const relevantSuggestions = this.cppTypeService.getRelevantSuggestions(model, this.mb.asRelativePath(model.uri))
+      const relevantSuggestions = this.cppTypeService.getRelevantSuggestions(model, this.contextService.asRelativePath(model.uri))
       relevantSuggestions.suggestions.length > 0 &&
         (oa("Recording event...."),
         this.cppEventLoggerService.recordLspSuggestionEvent(
@@ -3300,7 +3300,7 @@ export function createCppService(params) {
     }
     createOrUpdateSuggestionStateHalfSilently(e) {
       this.Pb().cppState !== undefined &&
-        this.hb.setNonPersistentStorage("cppState", "suggestion", (s) =>
+        this.reactiveStorageService.setNonPersistentStorage("cppState", "suggestion", (s) =>
           s === undefined ? e : { ...s, ...e },
         )
     }
@@ -3310,7 +3310,7 @@ export function createCppService(params) {
     }
     createOrUpdateSuggestionState(e) {
       this.Pb().cppState !== undefined &&
-        this.hb.setNonPersistentStorage("cppState", (s) => {
+        this.reactiveStorageService.setNonPersistentStorage("cppState", (s) => {
           if (s === undefined) return
           const n = s.suggestion
           return { ...s, suggestion: n ? { ...n, ...e } : e }
@@ -3439,7 +3439,7 @@ export function createCppService(params) {
       const o = t.decorationId,
         a = e.getDecorationRange(o)
       if (a === null) return { type: Sp.NotAccepted }
-      const l = this.Cb.getLanguageConfiguration(e.getLanguageId()),
+      const l = this.languageConfigurationService.getLanguageConfiguration(e.getLanguageId()),
         c = Xfo(n, r, a.getStartPosition(), l)
       if (c.type === Sp.NotAccepted) return { type: Sp.NotAccepted }
       {
@@ -3531,7 +3531,7 @@ export function createCppService(params) {
       return onlyAcceptFirstWord ? await acceptNextWord(suggestionRange) : await acceptAllChanges(suggestionRange)
     }
     increaseCppUsage() {
-      this.hb.setApplicationUserPersistentStorage(
+      this.reactiveStorageService.setApplicationUserPersistentStorage(
         "cppShown",
         (e) => (e ?? 0) + 1,
       )
@@ -3612,7 +3612,7 @@ export function createCppService(params) {
         return { type: Sp.NotAccepted }
       let c = s ?? this.getHiddenSuggestion(o, l)
       if (c === null) return { type: Sp.NotAccepted }
-      this.ob.publicLogCapture("cursor.peekcppsuggestion"),
+      this.telemetryService.publicLogCapture("cursor.peekcppsuggestion"),
         this.increaseCppUsage(),
         (c = this.saveCurrentTextIntoSuggestion(o, c)),
         this.saveEditorSelectionInSuggestion(r, o, c)
@@ -3646,7 +3646,7 @@ export function createCppService(params) {
       //     newText: r,
       //   }),
       // });
-      const o = this.mb.resolveRelativePath(fusedCursorPrediction.relativePath)
+      const o = this.contextService.resolveRelativePath(fusedCursorPrediction.relativePath)
       if (!o) {
         oa("[fusedCursorPrediction] Could not resolve predicted file path")
         return
@@ -3689,7 +3689,7 @@ export function createCppService(params) {
     removeSuggestion() {
       const e = this.Pb().cppState
       e !== undefined &&
-        this.hb.setNonPersistentStorage("cppState", {
+        this.reactiveStorageService.setNonPersistentStorage("cppState", {
           ...e,
           suggestion: undefined,
         })
@@ -3721,11 +3721,11 @@ export function createCppService(params) {
               !this.Pb().cppState?.suggestion?.immediatelySeen,
           ),
           this.cppEventLoggerService.recordAcceptSuggestionEvent(model, visibleSuggestion),
-          this.hb.applicationUserPersistentStorage.checklistState
+          this.reactiveStorageService.applicationUserPersistentStorage.checklistState
             ?.doneAutoComplete !== true)
         ) {
-          const checklistState = this.hb.applicationUserPersistentStorage.checklistState
-          this.hb.setApplicationUserPersistentStorage(
+          const checklistState = this.reactiveStorageService.applicationUserPersistentStorage.checklistState
+          this.reactiveStorageService.setApplicationUserPersistentStorage(
             "checklistState",
             (state) => ({ ...(state ?? {}), doneAutoComplete: true }),
           )
@@ -3810,7 +3810,7 @@ export function createCppService(params) {
         n === undefined ||
         n === null ||
         r === null ||
-        (this.ob.publicLogCapture("cursor.revertcppsuggestion"),
+        (this.telemetryService.publicLogCapture("cursor.revertcppsuggestion"),
         this.cppEventLoggerService.recordRejectSuggestionEvent(n, s),
         this.removeAllHighlights(n, t),
         this.updateSuggestionStateHalfSilently({
@@ -3834,18 +3834,18 @@ export function createCppService(params) {
       const s = e.getModel()
       s != null &&
         (this.cppEventLoggerService.recordRejectSuggestionEvent(s, t),
-        this.ob.publicLogCapture("cursor.rejectcppsuggestion"))
+        this.telemetryService.publicLogCapture("cursor.rejectcppsuggestion"))
     }
     rejectAndResetAllCppSuggestions(e = { removeGreens: true, abortAll: true }) {
       e.abortAll && this.abortAllCppRequests()
-      const t = this.gb.getActiveCodeEditor()
+      const t = this.codeEditorService.getActiveCodeEditor()
       t != null &&
         (this.rejectSuggestionForTelemetryIfExists(t),
         this.revertSuggestion(t, e),
         this.clearSuggestions(undefined, e))
     }
     clearDecorationsSlowEnumeratesAllDecorations() {
-      const e = this.gb.getActiveCodeEditor(),
+      const e = this.codeEditorService.getActiveCodeEditor(),
         t = e?.getModel()
       if (e == null || t === null || t === undefined) return
       this.removeAllHighlights(t)
@@ -3871,7 +3871,7 @@ export function createCppService(params) {
         t.deltaDecorations([o.decorationId], [])
     }
     clearDecorationsFast(e = { removeGreens: true }) {
-      const s = this.gb.getActiveCodeEditor()?.getModel()
+      const s = this.codeEditorService.getActiveCodeEditor()?.getModel()
       if (s == null) return
       const n = this.decIdsThatAreNotInReactiveStorage.green,
         r = Object.values(this.decIdsThatAreNotInReactiveStorage)
@@ -3895,14 +3895,14 @@ export function createCppService(params) {
       e !== true && this.clearDecorationsFast(t),
         this.Pb().cppState?.suggestion !== undefined &&
           (this.numberOfClearedSuggestionsSinceLastAccept += 1),
-        this.hb.setNonPersistentStorage("cppState", "suggestion", undefined)
+        this.reactiveStorageService.setNonPersistentStorage("cppState", "suggestion", undefined)
     }
     removeAllHighlights(e, t = { removeGreens: true }) {
       this.hideCursorHighlight(),
         t.removeGreens !== false && this.clearAllGreenHighlights(e)
     }
     isOnShortestEditPath({ event: e, model: t }, s) {
-      const n = this.gb.getActiveCodeEditor()
+      const n = this.codeEditorService.getActiveCodeEditor()
       if (n == null || n.getModel()?.id !== t.id) return false
       const r = this.getCurrentSuggestion()
       if (r === undefined) return false
@@ -4019,7 +4019,7 @@ export function createCppService(params) {
 `).length),
           u.push(h)
       return new Ho({
-        relativeWorkspacePath: this.mb.asRelativePath(e.uri),
+        relativeWorkspacePath: this.contextService.asRelativePath(e.uri),
         contents: c.join(o),
         sha256Hash: n ? await this.bc(c.join(o), this.fb) : undefined,
         selection: undefined,
@@ -4030,13 +4030,13 @@ export function createCppService(params) {
         languageId: "",
         fileVersion: r,
         cellStartLines: u,
-        workspaceRootPath: this.mb.getWorkspaceFolder(e.uri)?.uri.fsPath,
+        workspaceRootPath: this.contextService.getWorkspaceFolder(e.uri)?.uri.fsPath,
       })
     }
     async fastCurrentFileInfoDoesNotWorkForNotebooks(e, t, s, n, r) {
       if (e.scheme !== ce.aiChat && s !== null)
         return new Ho({
-          relativeWorkspacePath: this.mb.asRelativePath(e),
+          relativeWorkspacePath: this.contextService.asRelativePath(e),
           contents: t,
           sha256Hash: n ? await this.bc(t, this.fb) : undefined,
           cursorPosition: new Qm({
@@ -4046,7 +4046,7 @@ export function createCppService(params) {
           selection: undefined,
           languageId: "",
           fileVersion: r,
-          workspaceRootPath: this.mb.getWorkspaceFolder(e)?.uri.fsPath,
+          workspaceRootPath: this.contextService.getWorkspaceFolder(e)?.uri.fsPath,
         })
     }
     async fastPeriodicallyReloadCppConfig() {
@@ -4068,14 +4068,14 @@ export function createCppService(params) {
     }
     async _applyConfig(e) {
       const t =
-        this.hb.applicationUserPersistentStorage.cppConfig
+        this.reactiveStorageService.applicationUserPersistentStorage.cppConfig
           ?.shouldLetUserEnableCppEvenIfNotPro
       this.Ob().cppEnabled === true &&
         e.shouldLetUserEnableCppEvenIfNotPro === false &&
         t === true &&
-        m2i(this.nb.membershipType()) === false &&
-        this.hb.setNonPersistentStorage("showingCppUpsell", true),
-        this.hb.setApplicationUserPersistentStorage("cppConfig", e),
+        m2i(this.authenticationService.membershipType()) === false &&
+        this.reactiveStorageService.setNonPersistentStorage("showingCppUpsell", true),
+        this.reactiveStorageService.setApplicationUserPersistentStorage("cppConfig", e),
         this.everythingProviderService.onlyLocalProvider?.runCommand(
           EditHistoryDiffFormatter.SetEnableCppWhitespaceDiffHistoryMode,
           { enabled: e.useWhitespaceDiffHistory },
