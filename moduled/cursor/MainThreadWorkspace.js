@@ -1,7 +1,7 @@
 // @ts-check
 
 export function createMainThreadWorkspace(params) {
-  const { __decorate, __param, Qr, cr, hw, it, Yde, Els, ve, R1, Ht, ay, Z, es, Vr, nt, Oh, sS, Br, Md, u0, mI, cppService, $h, J, g0, Pr, _o, U, f, dB, Ec, wr, P8t, Ln, In, _s, JMi, Yt } = params;
+  const { __decorate, __param, Qr, MainContext, hw, it, Yde, Els, ve, R1, Ht, ay, Z, es, Vr, nt, Oh, sS, Br, Md, u0, mI, cppService, $h, J, g0, ExtHostContext, _o, U, f, dB, Ec, wr, P8t, Ln, In, _s, JMi, Yt } = params;
 
   var Ils = class {
     constructor(e, t, s, n, r, o, a, l, c, h, u, d, g, p, m, b, y, w, C, S, x) {
@@ -30,13 +30,13 @@ export function createMainThreadWorkspace(params) {
         (this.G = new Map()),
         (this.H = new Map()),
         (this.I = new Map()),
-        (this.c = e.getProxy(Pr.ExtHostWorkspace))
+        (this.c = e.getProxy(ExtHostContext.ExtHostWorkspace)), (this._proxy = this.c)
       const k = this.g.getWorkspace()
       k.configuration && !_o && !g.hasProvider(k.configuration)
-        ? this.c.$initializeWorkspace(this.C(k), this.E())
+        ? this._proxy.$initializeWorkspace(this.C(k), this.E())
         : this.g
             .getCompleteWorkspace()
-            .then((E) => this.c.$initializeWorkspace(this.C(E), this.E())),
+            .then((E) => this._proxy.$initializeWorkspace(this.C(E), this.E())),
         this.g.onDidChangeWorkspaceFolders(this.B, this, this.a),
         this.g.onDidChangeWorkbenchState(this.B, this, this.a),
         this.s.onDidChangeTrust(this.F, this, this.a)
@@ -70,7 +70,7 @@ export function createMainThreadWorkspace(params) {
       )
     }
     B() {
-      this.c.$acceptWorkspaceData(this.C(this.g.getWorkspace()))
+      this._proxy.$acceptWorkspaceData(this.C(this.g.getWorkspace()))
     }
     C(e) {
       return this.g.getWorkbenchState() === 1
@@ -100,7 +100,7 @@ export function createMainThreadWorkspace(params) {
         c = this.d.text(e, l, Ec(s))
       c._reason = "startTextSearch"
       const h = (d) => {
-        d.results && this.c.$handleTextSearchResult(d, n)
+        d.results && this._proxy.$handleTextSearchResult(d, n)
       }
       return this.e.textSearch(c, r, h).then(
         (d) => ({ limitHit: d.limitHit }),
@@ -151,15 +151,15 @@ export function createMainThreadWorkspace(params) {
       return this.s.isWorkspaceTrusted()
     }
     F() {
-      this.c.$onDidGrantWorkspaceTrust()
+      this._proxy.$onDidGrantWorkspaceTrust()
     }
     $registerEditSessionIdentityProvider(e, t) {
       const s = this.h.registerEditSessionIdentityProvider({
         scheme: t,
         getEditSessionIdentifier: async (n, r) =>
-          this.c.$getEditSessionIdentifier(n.uri, r),
+          this._proxy.$getEditSessionIdentifier(n.uri, r),
         provideEditSessionIdentityMatch: async (n, r, o, a) =>
-          this.c.$provideEditSessionIdentityMatch(n.uri, r, o, a),
+          this._proxy.$provideEditSessionIdentityMatch(n.uri, r, o, a),
       })
       this.G.set(e, s), this.a.add(s)
     }
@@ -167,13 +167,13 @@ export function createMainThreadWorkspace(params) {
       this.G.get(e)?.dispose(), this.G.delete(e)
     }
     $registerControlProvider(e, t) {
-      const s = (n) => this.c.$controlGetDataframeSummary(n)
+      const s = (n) => this._proxy.$controlGetDataframeSummary(n)
       if (t === "vscode-jupyter") {
         const n = this.u.registerControlProvider(t, { getDataframeSummary: s })
         this.H.set(e, n), this.a.add(n)
       } else if (t === "git") {
         const n = async (r, o) =>
-          await this.c
+          await this._proxy
             .$controlGetFullDiff(r, o)
             .then((a) =>
               a
@@ -190,23 +190,23 @@ export function createMainThreadWorkspace(params) {
       } else if (t === "cursor-retrieval") {
         const n = async (o) => {
           const a = new JMi(o).toBinary()
-          return await this.c.$controlAppendCppTelem(
+          return await this._proxy.$controlAppendCppTelem(
             Yt.wrap(a),
             this.z.reactivePrivacyMode(),
           )
         }
         this.x.registerCppTelemProvider({ appendCppTelem: n })
         const r = async (o, a) => {
-          await this.c.$controlStreamCpp(o, a)
+          await this._proxy.$controlStreamCpp(o, a)
         }
         this.cppService.registerDiffingProvider({
           streamCpp: r,
-          cancelCpp: this.c.$controlCancelCpp,
-          flushCpp: this.c.$controlFlushCpp,
-          getCppReport: this.c.$controlGetCppReport,
+          cancelCpp: this._proxy.$controlCancelCpp,
+          flushCpp: this._proxy.$controlFlushCpp,
+          getCppReport: this._proxy.$controlGetCppReport,
         })
       } else if (t === "cursor-tokenize") {
-        const n = async (r, o) => await this.c.$controlTokenizeBPE(r, o)
+        const n = async (r, o) => await this._proxy.$controlTokenizeBPE(r, o)
         this.w.registerBPETokenizerProvider({ tokenizeBPE: n })
       }
     }
@@ -217,7 +217,7 @@ export function createMainThreadWorkspace(params) {
       const s = this.i.registerCanonicalUriProvider({
         scheme: t,
         provideCanonicalUri: async (n, r, o) => {
-          const a = await this.c.$provideCanonicalUri(n, r, o)
+          const a = await this._proxy.$provideCanonicalUri(n, r, o)
           return a && U.revive(a)
         },
       })
@@ -229,7 +229,7 @@ export function createMainThreadWorkspace(params) {
   }
   Ils = __decorate(
     [
-      Qr(cr.MainThreadWorkspace),
+      Qr(MainContext.MainThreadWorkspace),
       __param(1, hw),
       __param(2, it),
       __param(3, Yde),
