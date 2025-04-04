@@ -2,7 +2,7 @@
 
 
 export function createCppService(params) {
-  const {V, EYe, G, LRUCache, Qfo, ngo, rgo, MutableDisposable, J, R_n, um, hF, ss, CppIntent, JB, onDidRegisterWindow, fu, Va, nze, WEn, m2i, qEn, b2i, S9, $, Hae, m0t, Ad, fUe, Sp, VB, replaceTextInRange, generateModifiedText, EditHistoryDiffFormatter, VS, NYi, CUe, Ri, ce, Pn, Cg, GhostTextController, MMs, U, mu, Me, ys, $fo, qdt, Ffo, dze, uI, BMs, Cf, hG, mR, fm, gle, xr, Gr, GB, QN, Ycr, Yt, D1t, Kf, rt, handleStreamWithPredictions, handleChunkedStream, consumeRemainingStream, Hu, Aoe, Qcr, TKn, F_, tdi, _fo, rge, OFt, Xfo, Ui, ZXe: computeDiffs, k7, RKi, jBt, qfo, Ho, Qm, T1t, Xf, oj, ee, j, Je, CppDiffPeekViewWidget, cppService, ei, wf, yi, Ci, $h} = params;
+  const {V, EYe, G, LRUCache, Qfo, SuggestionCache, SuggestionManager, MutableDisposable, J, RequestDebouncer, um, hF, ss, CppIntent, JB, onDidRegisterWindow, fu, Va, nze, WEn, m2i, qEn, b2i, S9, $, Hae, m0t, Ad, fUe, Sp, VB, replaceTextInRange, generateModifiedText, EditHistoryDiffFormatter, VS, NYi, CUe, Ri, ce, Pn, Cg, GhostTextController, MMs, U, mu, Me, ys, $fo, qdt, Ffo, dze, uI, BMs, Cf, hG, mR, fm, gle, xr, Gr, GB, QN, Ycr, Yt, D1t, Kf, rt, handleStreamWithPredictions, handleChunkedStream, consumeRemainingStream, Hu, Aoe, Qcr, TKn, F_, tdi, _fo, rge, OFt, Xfo, Ui, ZXe: computeDiffs, k7, RKi, jBt, qfo, Ho, Qm, T1t, Xf, oj, ee, j, Je, CppDiffPeekViewWidget, cppService, ei, wf, yi, Ci, $h} = params;
 
   var bgo = class zmi extends ee {
     static {
@@ -325,8 +325,8 @@ export function createCppService(params) {
         (this.I = []),
         (this.J = []),
         (this.L = new Qfo(2)),
-        (this.M = new ngo(5)),
-        (this.N = new rgo(5, 6)),
+        (this.M = new SuggestionCache(5)), (this.suggestionCache = this.M),
+        (this.N = new SuggestionManager(5, 6)), (this.suggestionManager = this.N),
         (this.O = new LRUCache(3)),
         (this.Q = new LRUCache(10)),
         (this.editorThatWeHidGhostTextOn = undefined),
@@ -649,7 +649,7 @@ export function createCppService(params) {
         }),
         this.loadCppConfigIncludingHandlingProAccess(),
         this.mainRegisterCppListenersToEditorIfCppEnabled(),
-        this.N.addListener((se, he, ae) => {
+        this.suggestionManager.addListener((suggestion, model, editor) => {
           if (
             this.getCurrentSuggestion() === undefined &&
             !(
@@ -657,15 +657,15 @@ export function createCppService(params) {
               this.importPredictionService.isShowingImportSuggestion()
             )
           ) {
-            this.Vb(se),
-              this.displayCppSuggestion(ae, he, se),
-              this.N.removeSuggestion(se)
+            this.Vb(suggestion),
+              this.displayCppSuggestion(editor, model, suggestion),
+              this.suggestionManager.removeSuggestion(suggestion)
             return
           }
         })
-      const { clientDebounceDuration: K, totalDebounceDuration: Q } =
+      const { clientDebounceDuration, totalDebounceDuration } =
         this.getNewDebounceDurations()
-      ;(this.Z = new R_n(K, Q, 1e3)),
+      ;(this.Z = new RequestDebouncer(clientDebounceDuration, totalDebounceDuration, 1e3)), (this.requestDebouncer = this.Z),
         (this.fb = !this.environmentService.isBuilt || this.environmentService.isExtensionDevelopment),
         this.importPredictionService.registerCppMethods({
           getPartialCppRequest: this.getPartialCppRequest.bind(this),
@@ -730,12 +730,12 @@ export function createCppService(params) {
       return this.u
     }
     getNewDebounceDurations() {
-      const e = this.reactiveStorageService.applicationUserPersistentStorage.cppConfig
-      if (e === undefined)
+      const cppConfig = this.reactiveStorageService.applicationUserPersistentStorage.cppConfig
+      if (cppConfig === undefined)
         return { clientDebounceDuration: Igo, totalDebounceDuration: Dgo }
-      const t = e.clientDebounceDurationMillis,
-        s = e.globalDebounceDurationMillis
-      return { clientDebounceDuration: t, totalDebounceDuration: s }
+      const clientDebounceDuration = cppConfig.clientDebounceDurationMillis,
+        totalDebounceDuration = cppConfig.globalDebounceDurationMillis
+      return { clientDebounceDuration, totalDebounceDuration }
     }
     setSuggestionType(e, t) {
       this.Q.set(e, t)
@@ -1671,7 +1671,7 @@ export function createCppService(params) {
           !this.importPredictionService.isShowingImportSuggestion()) &&
           this.allowCppTriggerInComments(editor))
       ) {
-        const cachedSuggestion = this.N.popCacheHit(model)
+        const cachedSuggestion = this.suggestionManager.popCacheHit(model)
         if (cachedSuggestion !== undefined)
           return this.Vb(cachedSuggestion), this.displayCppSuggestion(editor, model, cachedSuggestion), formatAndUpdate()
       }
@@ -1684,9 +1684,9 @@ export function createCppService(params) {
 `) || t.rangeLength > 0,
       )
     }
-    Vb(e) {
+    Vb(suggestion) {
       const t =
-          performance.now() + performance.timeOrigin - e.suggestionTriggerTime,
+          performance.now() + performance.timeOrigin - suggestion.suggestionTriggerTime,
         s = performance.now() - (this.X ?? 0)
       console.info("[CPP TIMING]", `Time Since Start: ${t}`),
         console.info("[CPP TIMING]", `Time Since Trigger: ${s}`),
@@ -1759,7 +1759,7 @@ export function createCppService(params) {
               }
               if (
                 ((this.bb = []),
-                this.N.addEditAndUpdateCachedSuggestions(contentChangeEvent, model),
+                this.suggestionManager.addEditAndUpdateCachedSuggestions(contentChangeEvent, model),
                 this.triggerCppOnLintErrorAbortControllers.get(relativePath)?.abort(),
                 this.getApplicationUserPersistentStorage().cppEnabled !== false)
               ) {
@@ -1852,7 +1852,7 @@ export function createCppService(params) {
       const s = e.getModel(),
         n = s?.uri
       if (!n || this.Wb(s)) return
-      const { requestIdsToCancel: r, ...o } = this.Z.runRequest()
+      const { requestIdsToCancel: r, ...o } = this.requestDebouncer.runRequest()
       this.R.forEach((l) => {
         r.includes(l.generationUUID) && l.abortController.abort()
       }),
@@ -1884,7 +1884,7 @@ export function createCppService(params) {
         (selectionRange.startLineNumber !== selectionRange.endLineNumber || selectionRange.startColumn !== selectionRange.endColumn)
       )
         return
-      const { requestIdsToCancel: requestIdsToCancel, ...restRequestOpts } = this.Z.runRequest()
+      const { requestIdsToCancel: requestIdsToCancel, ...restRequestOpts } = this.requestDebouncer.runRequest()
       this.R.forEach((h) => {
         requestIdsToCancel.includes(h.generationUUID) && h.abortController.abort()
       }),
@@ -2670,7 +2670,7 @@ export function createCppService(params) {
         cppConfig = this.getApplicationUserPersistentStorage().cppConfig
       if (
         (!shouldRelyOnFileSync || !cppConfig?.enableFilesyncDebounceSkipping) &&
-        (await this.Z.shouldDebounce(generationUUID))
+        (await this.requestDebouncer.shouldDebounce(generationUUID))
       )
         return { success: false }
       const startTime = performance.now()
@@ -2998,7 +2998,7 @@ export function createCppService(params) {
         model.getVersionId() !== modelVersionId ||
         (this.getApplicationUserPersistentStorage().cppAutoImportEnabled && this.importPredictionService.isShowingImportSuggestion())
           ? ((isSuggestionDisplayed = true),
-            this.N.addSuggestion({ ...suggestion, abortController: abortController }, model, editor))
+            this.suggestionManager.addSuggestion({ ...suggestion, abortController: abortController }, model, editor))
           : (this.Vb(suggestion), (isSuggestionDisplayed = this.displayCppSuggestion(editor, model, suggestion))),
         fullText !== undefined && isSuggestionDisplayed && !abortController.signal.aborted
           ? fullText.then((fullTextResult) => {
@@ -3087,7 +3087,7 @@ export function createCppService(params) {
         if (newSuggestion === undefined) return
         this.displayCppSuggestion(editor, model, newSuggestion)
       } else if (currentSuggestion?.uniqueId !== suggestion.uniqueId)
-        if (this.N.getMatchingSuggestion(suggestion.uniqueId) !== undefined) {
+        if (this.suggestionManager.getMatchingSuggestion(suggestion.uniqueId) !== undefined) {
           const newSuggestion = this.cppSuggestionService.createUnseenSuggestion({
             model: model,
             diffText: fullTextResult,
@@ -3121,7 +3121,7 @@ export function createCppService(params) {
               )
             return
           }
-          this.N.replaceSuggestionOnChunkedFollowup(suggestion.uniqueId, newSuggestion)
+          this.suggestionManager.replaceSuggestionOnChunkedFollowup(suggestion.uniqueId, newSuggestion)
         } else return
       else {
         currentRange = adjustRange()
@@ -3150,7 +3150,7 @@ export function createCppService(params) {
           this.createOrUpdateSuggestionState({ fusedCursorPredictionId: predictionId })
           return
         }
-        this.M.addSuggestion(newSuggestion),
+        this.suggestionCache.addSuggestion(newSuggestion),
           this.createOrUpdateSuggestionState({ onAcceptDisplayId: newSuggestion.uniqueId })
       }
     }
@@ -3738,7 +3738,7 @@ export function createCppService(params) {
           )
         }
         if (visibleSuggestion.onAcceptDisplayId !== undefined) {
-          const matchingSuggestion = this.M.getAndEvictMatchingSuggestion(visibleSuggestion.onAcceptDisplayId)
+          const matchingSuggestion = this.suggestionCache.getAndEvictMatchingSuggestion(visibleSuggestion.onAcceptDisplayId)
           if (matchingSuggestion) {
             this.displayCppSuggestion(editor, model, matchingSuggestion)
             return
@@ -4059,7 +4059,7 @@ export function createCppService(params) {
     async fastPeriodicallyReloadCppConfig() {
       Date.now() - this.h > 1e3 * 60 &&
         (await this.loadCppConfigIncludingHandlingProAccess(),
-        this.Z.setDebouncingDurations(this.getNewDebounceDurations()),
+        this.requestDebouncer.setDebouncingDurations(this.getNewDebounceDurations()),
         this.importPredictionService.handleNewImportPredictionConfig())
     }
     async loadCppConfigIncludingHandlingProAccess() {
