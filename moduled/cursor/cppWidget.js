@@ -1624,7 +1624,7 @@ export function createCppWidget(params) {
         ((t[s].added = !0), (t[s].removed = !0))
     return t
   }
-  function (i, e, t, s) {
+  function rhr(i, e, t, s) {
     let { wordDiffs: n, charDiffs: r } = ZXe(i, e, s)
     const o = _es(n, s)
     let a = !0
