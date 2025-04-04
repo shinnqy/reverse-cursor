@@ -5,7 +5,7 @@ export function createReactiveStorageService(params) {
 
   var BRr = Re("devOnlyRedisStorageService"),
     QF,
-    ast = class extends V {
+    ReactiveStorageService = class extends V {
       static {
         QF = this
       }
@@ -350,11 +350,11 @@ export function createReactiveStorageService(params) {
         return this.D(new kkt(e))
       }
     }
-  ast = QF = __decorate([__param(0, et), __param(1, Z), __param(2, pt)], ast)
+  ReactiveStorageService = QF = __decorate([__param(0, et), __param(1, Z), __param(2, pt)], ReactiveStorageService)
 
-  // Ve(ei, ast, 1),
+  // Ve(ei, ReactiveStorageService, 1),
 
   return {
-    ast
+    ReactiveStorageService
   }
 }
