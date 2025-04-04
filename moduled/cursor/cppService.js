@@ -313,7 +313,7 @@ export function createCppService(params) {
         (this.pauseCppTriggeringUntilUnpaused_DANGEROUS_ONLY_SET_IF_YOU_KNOW_WHAT_YOU_ARE_DOING =
           false),
         (this.j = new LRUCache(20)),
-        (this.m = new Map()), (this.editorListenersMap = this.m),
+        (this.m = new Map()), (this.modelListeners2EditorMap = this.m),
         (this.n = new Map()),
         (this.q = undefined),
         (this.u = undefined),
@@ -1737,7 +1737,7 @@ export function createCppService(params) {
           model.uri.scheme !== "untitled")
       )
         return
-      this.editorListenersMap.forEach((listenersMap) => {
+      this.modelListeners2EditorMap.forEach((listenersMap) => {
         listenersMap.has(editor.getId()) &&
           (listenersMap.get(editor.getId())?.forEach((c) => c.dispose()), listenersMap.delete(editor.getId()))
       })
@@ -1748,8 +1748,8 @@ export function createCppService(params) {
               const EOL = model.getEOL()
               if (
                 ((this.lastEditTime = Date.now()),
-                this.editorListenersMap.has(relativePath) &&
-                  this.editorListenersMap.get(relativePath).size > 1 &&
+                this.modelListeners2EditorMap.has(relativePath) &&
+                  this.modelListeners2EditorMap.get(relativePath).size > 1 &&
                   editor.getId() !== this.codeEditorService.getActiveCodeEditor()?.getId())
               ) {
                 oa(
@@ -1824,13 +1824,13 @@ export function createCppService(params) {
           }),
         ),
         disposables.push(this.cppTypeService.registerCancelListener(editor, model, relativePath, r))),
-        this.editorListenersMap.has(relativePath) || this.editorListenersMap.set(relativePath, new Map())
-      const editorListeners = this.editorListenersMap.get(relativePath),
+        this.modelListeners2EditorMap.has(relativePath) || this.modelListeners2EditorMap.set(relativePath, new Map())
+      const modelListeners = this.modelListeners2EditorMap.get(relativePath),
         editorId = editor.getId()
-      editorListeners?.has(editorId) || editorListeners?.set(editorId, []),
-        editorListeners?.get(editorId)?.push(...disposables),
+      modelListeners?.has(editorId) || modelListeners?.set(editorId, []),
+        modelListeners?.get(editorId)?.push(...disposables),
         this.getApplicationUserPersistentStorage().cppAutoImportEnabled &&
-          editorListeners?.get(editorId)?.push(
+          modelListeners?.get(editorId)?.push(
             this.D(
               this.markerService.onMarkerChanged(async (changedUris) => {
                 this.codeEditorService.getActiveCodeEditor()?.getId() === editor.getId() &&
