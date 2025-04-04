@@ -1,7 +1,7 @@
 // @ts-check
 
 export function createReactiveStorageService(params) {
-  const {op: createObserver, Re, V, yo, R, gB, AOi, applicationUserPersistentStorageState, CWe, zf, yUe, $Oi, MOi, bkt, J, jon, nonPersistentStorageState, kkt, rt, wf, jrn, __decorate, __param, et, Z, pt } = params;
+  const {op: createObserver, Re, V, LRUCache, R, gB, AOi, applicationUserPersistentStorageState, CWe, zf, yUe, $Oi, MOi, bkt, J, jon, nonPersistentStorageState, kkt, rt, wf, jrn, __decorate, __param, et, Z, pt } = params;
 
   var BRr = Re("devOnlyRedisStorageService"),
     QF,
@@ -23,7 +23,7 @@ export function createReactiveStorageService(params) {
           (this.DEV_ONLY_serverApplicationUserPersistentStorage = void 0),
           (this.set_DEV_ONLY_ServerApplicationUserPersistentStorage = void 0),
           (this.b = void 0),
-          (this.n = new yo(10)),
+          (this.n = new LRUCache(10)),
           (this.y = this.D(new R())),
           (this.z = this.y.event),
           ([this.nonPersistentStorage, this.setNonPersistentStorage] = this.m()),

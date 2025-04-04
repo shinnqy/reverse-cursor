@@ -1,7 +1,7 @@
 // @ts-check
 
 export function createInterfaceAgentService(params) {
-  const { Re, V, yo, oi, ys, rt, q1t, wn, J, H1t, s2i, j1t, rm, Son, Ln, Pn, U, Yt, __decorate, __param, Br, nt, ft, ei, g2, it, ve, Xt, bY, ue, vr, fn, Lg, Ve } = params;
+  const { Re, V, LRUCache, oi, ys, rt, q1t, wn, J, H1t, s2i, j1t, rm, Son, Ln, Pn, U, Yt, __decorate, __param, Br, nt, ft, ei, g2, it, ve, Xt, bY, ue, vr, fn, Lg, Ve } = params;
 
   var pKi = Re("interfaceAgentService"),
     SFt = class extends V {
@@ -20,7 +20,7 @@ export function createInterfaceAgentService(params) {
           (this.s = u),
           (this.u = d),
           (this.w = g),
-          (this.C = new yo(100)),
+          (this.C = new LRUCache(100)),
           (this.a = this.D(this.g.createScoped(this))),
           this.a.onChangeEffect({
             onChange: () => {
