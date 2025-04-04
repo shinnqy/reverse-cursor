@@ -1,7 +1,7 @@
 // @ts-check
 
 export function createReactiveStorageService(params) {
-  const {op: createObserver, Re, V, yo, R, gB, AOi, ePn, CWe, zf, yUe, $Oi, MOi, bkt, J, jon, tPn, kkt, rt, wf, jrn, __decorate, __param, et, Z, pt } = params;
+  const {op: createObserver, Re, V, yo, R, gB, AOi, applicationUserPersistentStorageState, CWe, zf, yUe, $Oi, MOi, bkt, J, jon, nonPersistentStorageState, kkt, rt, wf, jrn, __decorate, __param, et, Z, pt } = params;
 
   var BRr = Re("devOnlyRedisStorageService"),
     QF,
@@ -32,7 +32,7 @@ export function createReactiveStorageService(params) {
             0,
             gB,
             AOi,
-            ePn,
+            applicationUserPersistentStorageState,
             CWe,
           )),
           (this.setApplicationUserPersistentStorage = (...n) => {
@@ -131,7 +131,7 @@ export function createReactiveStorageService(params) {
           ))
       }
       m() {
-        return createObserver(tPn, void 0)
+        return createObserver(nonPersistentStorageState, void 0)
       }
       manuallyDisposedWrapper(e) {
         const t = new kkt(this)
