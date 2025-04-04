@@ -2,7 +2,7 @@
 
 
 export function createCppService(params) {
-  const {V, EYe, G, yo, Qfo, ngo, rgo, zt, J, R_n, um, hF, ss, ll, JB, onDidRegisterWindow, fu, Va, nze, WEn, m2i, qEn, b2i, S9, $, Hae, m0t, Ad, fUe, Sp, VB, replaceTextInRange, generateModifiedText, EditHistoryDiffFormatter, VS, NYi, CUe, Ri, ce, Pn, Cg, EF, MMs, U, mu, Me, ys, $fo, qdt, Ffo, dze, uI, BMs, Cf, hG, mR, fm, gle, xr, Gr, GB, QN, Ycr, Yt, D1t, Kf, rt, handleStreamWithPredictions, handleChunkedStream, consumeRemainingStream, Hu, Aoe, Qcr, TKn, F_, tdi, _fo, rge, OFt, Xfo, Ui, ZXe: computeDiffs, k7, RKi, jBt, qfo, Ho, Qm, T1t, Xf, oj, ee, j, Je, eQe, cppService, ei, wf, yi, Ci, $h} = params;
+  const {V, EYe, G, LRUCache, Qfo, ngo, rgo, zt, J, R_n, um, hF, ss, ll, JB, onDidRegisterWindow, fu, Va, nze, WEn, m2i, qEn, b2i, S9, $, Hae, m0t, Ad, fUe, Sp, VB, replaceTextInRange, generateModifiedText, EditHistoryDiffFormatter, VS, NYi, CUe, Ri, ce, Pn, Cg, EF, MMs, U, mu, Me, ys, $fo, qdt, Ffo, dze, uI, BMs, Cf, hG, mR, fm, gle, xr, Gr, GB, QN, Ycr, Yt, D1t, Kf, rt, handleStreamWithPredictions, handleChunkedStream, consumeRemainingStream, Hu, Aoe, Qcr, TKn, F_, tdi, _fo, rge, OFt, Xfo, Ui, ZXe: computeDiffs, k7, RKi, jBt, qfo, Ho, Qm, T1t, Xf, oj, ee, j, Je, eQe, cppService, ei, wf, yi, Ci, $h} = params;
 
   var bgo = class zmi extends ee {
     static {
@@ -311,7 +311,7 @@ export function createCppService(params) {
         (this.h = 0),
         (this.pauseCppTriggeringUntilUnpaused_DANGEROUS_ONLY_SET_IF_YOU_KNOW_WHAT_YOU_ARE_DOING =
           false),
-        (this.j = new yo(20)),
+        (this.j = new LRUCache(20)),
         (this.m = new Map()), (this.editorListenersMap = this.m),
         (this.n = new Map()),
         (this.q = undefined),
@@ -319,15 +319,15 @@ export function createCppService(params) {
         (this.w = undefined),
         (this.y = undefined),
         (this.z = undefined),
-        (this.C = new yo(10)), (this.formattedDiffCache = this.C),
-        (this.G = new yo(3)), (this.modelValueCache = this.G),
+        (this.C = new LRUCache(10)), (this.formattedDiffCache = this.C),
+        (this.G = new LRUCache(3)), (this.modelValueCache = this.G),
         (this.I = []),
         (this.J = []),
         (this.L = new Qfo(2)),
         (this.M = new ngo(5)),
         (this.N = new rgo(5, 6)),
-        (this.O = new yo(3)),
-        (this.Q = new yo(10)),
+        (this.O = new LRUCache(3)),
+        (this.Q = new LRUCache(10)),
         (this.editorThatWeHidGhostTextOn = undefined),
         (this.R = []),
         (this.holdDownAbortController = undefined),
@@ -341,7 +341,7 @@ export function createCppService(params) {
         (this.ab = false),
         (this.bb = []),
         (this.cb = undefined),
-        (this.db = new yo(5)),
+        (this.db = new LRUCache(5)),
         (this.eb = undefined),
         (this.fb = false),
         (this.Mb = new J()),

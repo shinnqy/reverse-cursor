@@ -1,7 +1,7 @@
 // @ts-check
 
 export function createImportPredictionService(params) {
-  const {V, __decorate, __param, Pt: themeService, ue: configurationService, ei, Ve, it, mo, Z, metricsService, cppTypeService, everythingProviderService, yi, Xt, cl, cppEventLoggerService, zi, aiFeatureStatusService, st, aiAssertService, importPredictionService, yo, DYe, fu, rt, q, W, Un, Va, Ri, ys, ddi, DHe, Ze, gI, G, mp, lp, Me, GB, ll, P1t, HMi, hG, y7, g1, Kh, U, pm } = params;
+  const {V, __decorate, __param, Pt: themeService, ue: configurationService, ei, Ve, it, mo, Z, metricsService, cppTypeService, everythingProviderService, yi, Xt, cl, cppEventLoggerService, zi, aiFeatureStatusService, st, aiAssertService, importPredictionService, LRUCache, DYe, fu, rt, q, W, Un, Va, Ri, ys, ddi, DHe, Ze, gI, G, mp, lp, Me, GB, ll, P1t, HMi, hG, y7, g1, Kh, U, pm } = params;
 
   var bdi,
     vdi = class extends V {
@@ -144,7 +144,7 @@ export function createImportPredictionService(params) {
           (this.N = m),
           (this.g = void 0),
           (this.h = new Map()),
-          (this.m = new yo(100)),
+          (this.m = new LRUCache(100)),
           (this.n = []),
           (this.r = []),
           (this.Q = [

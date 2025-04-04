@@ -1,7 +1,7 @@
 // @ts-check
 
 export function createFastEditService(params) {
-  const { Re, rt, yo, fu, vze, zr, ys, F$, wn, fs, JC, Va, nm, cb, LKn, Es, Qb, aG, x1t, Kf, J, SYe, _Ui, EFt, PKn, V$i, Pn, pm, VC, AVe, s7, l$i, c$i, h$i, __decorate, __param, A_, Br, rU, ft, g2, ei, nl, Xt, oy, ve, st, cv, it, Ac, Z, _C, Na, Ve } = params;
+  const { Re, rt, LRUCache, fu, vze, zr, ys, F$, wn, fs, JC, Va, nm, cb, LKn, Es, Qb, aG, x1t, Kf, J, SYe, _Ui, EFt, PKn, V$i, Pn, pm, VC, AVe, s7, l$i, c$i, h$i, __decorate, __param, A_, Br, rU, ft, g2, ei, nl, Xt, oy, ve, st, cv, it, Ac, Z, _C, Na, Ve } = params;
 
   var x5 = Re("fastEditService"),
     OP = "speculative-full-file",
@@ -23,7 +23,7 @@ export function createFastEditService(params) {
           (this.u = p),
           (this.v = b),
           (this.w = y),
-          (this.x = new yo(10)),
+          (this.x = new LRUCache(10)),
           (this.a = m.createInstance(fu, { service: vze }))
       }
       async performChatEditFinetunedModel(e) {

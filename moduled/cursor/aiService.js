@@ -1,7 +1,7 @@
 // @ts-check
 
 export function createAIService(params) {
-  const { Re, V, rt, fu, yo, Va, X7, Q7, Kle, fPt, OTt, _Tt, wn, B$i, zr, Y$i, s7, Tg, du, rl, ce, G, ao, Ho, Qm, RC, Sf, iG, rze, T$i, hk, dc, ew, fs, ov, gPt, RVe, QDi, JC, N1, WSt, $$i, A$i, J9i, M$i, ZN, W3i, WJ, mPt, K$i, z$i, r2i, q3i, G$i, PI, ks, Z$i, Q$i, z3i, Ob, Ha, PVe, M$, __decorate, __param, A_, ve, Hi, ft, cppEventLoggerService, Ti, Cp, st, it, ue, nt, $h, eg, NI, QJ, et, ei, rU, Md, Xt, u0, mo, T1, qi, Z, cv, YC, Ag, lU, Ve } = params;
+  const { Re, V, rt, fu, LRUCache, Va, X7, Q7, Kle, fPt, OTt, _Tt, wn, B$i, zr, Y$i, s7, Tg, du, rl, ce, G, ao, Ho, Qm, RC, Sf, iG, rze, T$i, hk, dc, ew, fs, ov, gPt, RVe, QDi, JC, N1, WSt, $$i, A$i, J9i, M$i, ZN, W3i, WJ, mPt, K$i, z$i, r2i, q3i, G$i, PI, ks, Z$i, Q$i, z3i, Ob, Ha, PVe, M$, __decorate, __param, A_, ve, Hi, ft, cppEventLoggerService, Ti, Cp, st, it, ue, nt, $h, eg, NI, QJ, et, ei, rU, Md, Xt, u0, mo, T1, qi, Z, cv, YC, Ag, lU, Ve } = params;
 
   var Br = Re("aiService"),
     x7i
@@ -86,7 +86,7 @@ export function createAIService(params) {
         (this.h = "aiService.prompts"),
         (this.streamingAbortControllers = new Map()),
         (this.repositories = []),
-        (this.F = new yo(100)),
+        (this.F = new LRUCache(100)),
         (this.G = "aiService.generations"),
         (this.rb = new Map()),
         (this.z = this.D(this.cb.createScoped(this))),
