@@ -2,7 +2,7 @@
 
 
 export function createCppService(params) {
-  const {V, EYe, G, LRUCache, Qfo, SuggestionCache, SuggestionManager, MutableDisposable, J, RequestDebouncer, um, hF, ss, CppIntent, JB, onDidRegisterWindow, fu, Va, nze, WEn, m2i, qEn, b2i, S9, $, Hae, m0t, Ad, fUe, Sp, VB, replaceTextInRange, generateModifiedText, EditHistoryDiffFormatter, VS, NYi, CUe, Ri, ce, Pn, Cg, GhostTextController, MMs, U, mu, Me, ys, $fo, qdt, Ffo, dze, uI, BMs, Cf, hG, mR, fm, gle, xr, Gr, GB, QN, Ycr, Yt, D1t, Kf, rt, handleStreamWithPredictions, handleChunkedStream, consumeRemainingStream, Hu, Aoe, Qcr, TKn, F_, tdi, _fo, rge, OFt, Xfo, Ui, ZXe: computeDiffs, k7, RKi, jBt, qfo, Ho, Qm, T1t, Xf, oj, ee, j, Je, CppDiffPeekViewWidget, cppService, ei, wf, yi, Ci, $h} = params;
+  const {V, EYe, G, LRUCache, Qfo, SuggestionCache, SuggestionManager, MutableDisposable, J, RequestDebouncer, um, hF, ss, CppIntent, JB, onDidRegisterWindow, fu, Va, nze, WEn, m2i, qEn, b2i, S9, $, Hae, m0t, Ad, fUe, Sp, VB, replaceTextInRange, generateModifiedText, EditHistoryDiffFormatter, VS: getWindows, NYi, CURSOR_PREDICTION, Ri, ce, Pn, Cg, GhostTextController, MMs, U, mu, Me, ys, $fo, qdt, Ffo, dze, uI, BMs, Cf, hG, mR, fm, gle, xr, Gr, GB, QN, Ycr, Yt, D1t, Kf, rt, handleStreamWithPredictions, handleChunkedStream, consumeRemainingStream, Hu, Aoe, Qcr, TKn, F_, tdi, _fo, rge, OFt, Xfo, Ui, ZXe: computeDiffs, k7, RKi, jBt, qfo, Ho, Qm, T1t, Xf, oj, ee, j, Je, CppDiffPeekViewWidget, cppService, ei, wf, yi, Ci, $h} = params;
 
   var bgo = class zmi extends ee {
     static {
@@ -339,7 +339,7 @@ export function createCppService(params) {
         (this.W = this.D(new MutableDisposable())),
         (this.Y = { fire: false, acceptedRange: undefined }), (this.pendingSuggestion = this.Y),
         (this.$ = {}),
-        (this.ab = false),
+        (this.ab = false), (this.lastCursorMovementIsCursorPrediction = this.ab),
         (this.bb = []),
         (this.cb = undefined),
         (this.db = new LRUCache(5)),
@@ -1283,24 +1283,24 @@ export function createCppService(params) {
 
       )
         await new Promise((s) => setTimeout(s, 100))
-      for (let s of this.codeEditorService.listCodeEditors())
-        this.registerEditorListenersToEditor(s)
+      for (let editor of this.codeEditorService.listCodeEditors())
+        this.registerEditorListenersToEditor(editor)
       this.editorListenersMap.set("global", [
         this.D(
-          this.codeEditorService.onCodeEditorAdd((s) => {
-            this.registerEditorListenersToEditor(s)
+          this.codeEditorService.onCodeEditorAdd((editor) => {
+            this.registerEditorListenersToEditor(editor)
           }),
         ),
       ]),
         this.D(
           this.editorService.onDidActiveEditorChange(() => {
             oa("onDidActiveEditorChange:")
-            const s = this.codeEditorService.getActiveCodeEditor()
-            if (s === null) {
+            const editor = this.codeEditorService.getActiveCodeEditor()
+            if (editor === null) {
               oa("onDidActiveEditorChange: editor is null")
               return
             }
-            if (s.getModel() === null) {
+            if (editor.getModel() === null) {
               oa("onDidActiveEditorChange: model is null")
               return
             }
@@ -1311,78 +1311,78 @@ export function createCppService(params) {
               return
             }
             oa("onDidActiveEditorChange: Triggering suggestion"),
-              this.fireCppSuggestionDebounced(s, CppIntent.EditorChange)
+              this.fireCppSuggestionDebounced(editor, CppIntent.EditorChange)
           }),
         )
-      const t = VS()
+      const windowList = getWindows()
       this.editorListenersMap.set("window", [
         this.D({
           dispose: () => {
-            for (const s of t)
-              s.window.document.removeEventListener(
+            for (const windowItem of windowList)
+              windowItem.window.document.removeEventListener(
                 "keydown",
                 this.handleKeyDownForCppKeys,
               )
           },
         }),
       ])
-      for (const s of t)
-        s.window.document.addEventListener(
+      for (const windowItem of windowList)
+        windowItem.window.document.addEventListener(
           "keydown",
           this.handleKeyDownForCppKeys,
         )
     }
-    async registerEditorListenersToEditor(e) {
-      const t = e.getId()
-      this.editorListenersMap.set(t, [
-        e.onDidDispose(() => {
-          this.editorListenersMap.get(t)?.forEach((s) => s.dispose()), this.editorListenersMap.delete(t)
+    async registerEditorListenersToEditor(editor) {
+      const editorId = editor.getId()
+      this.editorListenersMap.set(editorId, [
+        editor.onDidDispose(() => {
+          this.editorListenersMap.get(editorId)?.forEach((listener) => listener.dispose()), this.editorListenersMap.delete(editorId)
         }),
       ])
       try {
-        this.editorListenersMap.has(t) || this.editorListenersMap.set(t, []),
-          this.editorListenersMap.get(t).push(
+        this.editorListenersMap.has(editorId) || this.editorListenersMap.set(editorId, []),
+          this.editorListenersMap.get(editorId).push(
             this.D(
-              e.onDidBlurEditorText(() => {
+              editor.onDidBlurEditorText(() => {
                 oa("[Cpp] onDidBlurEditorText: resetting suggestions"),
                   this.rejectAndResetAllCppSuggestions(),
                   (this.numberOfClearedSuggestionsSinceLastAccept = 0)
               }),
             ),
           )
-        const s = this.D(new NYi(e, this.ILanguageFeaturesService.signatureHelpProvider))
-        this.editorListenersMap.get(t).push(s),
+        const s = this.D(new NYi(editor, this.ILanguageFeaturesService.signatureHelpProvider))
+        this.editorListenersMap.get(editorId).push(s),
           s !== undefined &&
-            this.editorListenersMap.get(t).push(
+            this.editorListenersMap.get(editorId).push(
               this.D(
-                s.onChangedHints((r) => {
-                  const o = this.cppTypeService.getRelevantParameterHints(e)
-                  this.cppTypeService.onChangedParameterHints(e, r),
-                    o.length === 0 &&
-                      r !== undefined &&
-                      this.fireCppSuggestionDebounced(e, CppIntent.ParameterHints)
+                s.onChangedHints((hintsChanges) => {
+                  const parameterHints = this.cppTypeService.getRelevantParameterHints(editor)
+                  this.cppTypeService.onChangedParameterHints(editor, hintsChanges),
+                    parameterHints.length === 0 &&
+                      hintsChanges !== undefined &&
+                      this.fireCppSuggestionDebounced(editor, CppIntent.ParameterHints)
                 }),
               ),
             )
-        const n = e.getModel()
-        n !== null && (await this.registerModelListenerToEditorModel(e, n)),
-          this.editorListenersMap.has(t) || this.editorListenersMap.set(t, []),
-          this.editorListenersMap.get(t).push(
+        const model = editor.getModel()
+        model !== null && (await this.registerModelListenerToEditorModel(editor, model)),
+          this.editorListenersMap.has(editorId) || this.editorListenersMap.set(editorId, []),
+          this.editorListenersMap.get(editorId).push(
             this.D(
-              e.onDidChangeModel(() => {
-                const r = e.getModel()
-                r !== null && this.registerModelListenerToEditorModel(e, r)
+              editor.onDidChangeModel(() => {
+                const r = editor.getModel()
+                r !== null && this.registerModelListenerToEditorModel(editor, r)
               }),
             ),
           ),
-          this.editorListenersMap.has(t) || this.editorListenersMap.set(t, []),
-          this.editorListenersMap.get(t).push(
+          this.editorListenersMap.has(editorId) || this.editorListenersMap.set(editorId, []),
+          this.editorListenersMap.get(editorId).push(
             this.D(
-              e.onDidChangeCursorPosition((r) => {
+              editor.onDidChangeCursorPosition((event) => {
                 if (
-                  this.codeEditorService.getActiveCodeEditor() !== e &&
-                  !this.isReferenceFocused(e) &&
-                  !this.isFindFocused(e)
+                  this.codeEditorService.getActiveCodeEditor() !== editor &&
+                  !this.isReferenceFocused(editor) &&
+                  !this.isFindFocused(editor)
                 ) {
                   oa(
                     "[Cpp] onDidChangeCursorPosition: Suppressing trigger because editor is not active",
@@ -1390,20 +1390,20 @@ export function createCppService(params) {
                   return
                 }
                 if (
-                  ((this.ab = r.source === CUe),
-                  r.source === CUe && this.Qb(e, r.position),
-                  r.source === "cpp-peek" ||
-                    r.source === "cpp-next-suggestion" ||
-                    r.source === "cpp-revert" ||
-                    r.source === CUe)
+                  ((this.lastCursorMovementIsCursorPrediction = event.source === CURSOR_PREDICTION),
+                  event.source === CURSOR_PREDICTION && this.Qb(editor, event.position),
+                  event.source === "cpp-peek" ||
+                    event.source === "cpp-next-suggestion" ||
+                    event.source === "cpp-revert" ||
+                    event.source === CURSOR_PREDICTION)
                 ) {
                   oa(
-                    `[Cpp] onDidChangeCursorPosition: exiting listener because source is ${r.source}`,
+                    `[Cpp] onDidChangeCursorPosition: exiting listener because source is ${event.source}`,
                   )
                   return
-                } else if (r.reason === 2 && r.source === "modelChange") {
+                } else if (event.reason === 2 && event.source === "modelChange") {
                   oa(
-                    `[Cpp] onDidChangeCursorPosition: suppress b/c reason is ${r.reason} and source is ${r.source}`,
+                    `[Cpp] onDidChangeCursorPosition: suppress b/c reason is ${event.reason} and source is ${event.source}`,
                   )
                   return
                 }
@@ -1411,91 +1411,92 @@ export function createCppService(params) {
                   ((this.eb = undefined),
                   (this.cb = undefined),
                   this.cursorPredictionService.clearCursorPrediction())
-                const o = e.getModel()?.uri
+                const uri = editor.getModel()?.uri
                 if (
-                  o === undefined ||
-                  (this.updateRecentDiagnostics(o, r.position),
+                  uri === undefined ||
+                  (this.updateRecentDiagnostics(uri, event.position),
                   this.holdDownAbortController?.abort(),
                   (this.holdDownAbortController = undefined),
-                  r.source === "restoreState")
+                  event.source === "restoreState")
                 )
                   return
                 let c = this.markerService
-                  .read({ resource: o })
+                  .read({ resource: uri })
                   .filter(
                     (h) =>
                       [Ri.Error, Ri.Warning].includes(h.severity) &&
-                      Math.abs(h.startLineNumber - r.position.lineNumber) <=
+                      Math.abs(h.startLineNumber - event.position.lineNumber) <=
                         ddi,
                   )
                   .filter(
                     (h) =>
                       h.severity === Ri.Error &&
-                      Math.abs(h.startLineNumber - r.position.lineNumber) <= 1,
+                      Math.abs(h.startLineNumber - event.position.lineNumber) <= 1,
                   )
                 if (this.getApplicationUserPersistentStorage().cppEnabled === true) {
-                  const h = e.getSelection()
-                  if (h === null) {
+                  const selection = editor.getSelection()
+                  if (selection === null) {
                     oa("[Cpp] onDidChangeCursorPosition: selection is null")
                     return
                   }
-                  const u = this.getCurrentSuggestion()
+                  const currentSuggestion = this.getCurrentSuggestion()
                   let d = false
-                  const g = e.getModel()
-                  if (g === null) return
-                  if (u === undefined)
+                  const model = editor.getModel()
+                  if (model === null) return
+                  if (currentSuggestion === undefined)
                     this.didShowGreenHighlights
                       ? ((this.didShowGreenHighlights = false),
                         this.clearDecorationsSlowEnumeratesAllDecorations())
                       : this.clearDecorationsFast()
                   else {
-                    const y = {
-                      range: g.getDecorationRange(u.decorationId),
-                      id: u.decorationId,
+                    const suggestionDecoration = {
+                      range: model.getDecorationRange(currentSuggestion.decorationId),
+                      id: currentSuggestion.decorationId,
                     }
-                    if (y === undefined || y.range === null) return
+                    if (suggestionDecoration === undefined || suggestionDecoration.range === null) return
                     const w = {
-                      ...y.range,
+                      ...suggestionDecoration.range,
                       endColumn: 1e4,
                       startLineNumber:
-                        u.startingSuggestionRange.startLineNumber,
-                      startColumn: u.startingSuggestionRange.startColumn,
+                        currentSuggestion.startingSuggestionRange.startLineNumber,
+                      startColumn: currentSuggestion.startingSuggestionRange.startColumn,
                     }
-                    ;(d = !!(y.range !== null && h.intersectRanges(w))),
+                    ;(d = !!(suggestionDecoration.range !== null && selection.intersectRanges(w))),
                       d ||
-                        (this.markEditAsRejected(e, false),
+                        (this.markEditAsRejected(editor, false),
                         this.rejectAndResetAllCppSuggestions(),
                         this.cursorPredictionService.maybeShowHintLineWidget())
                   }
                   if (
+                    // this.streams
                     !this.R.find(
                       (b) =>
-                        b.modelId === g.id &&
-                        b.modelVersion === g.getVersionId() &&
+                        b.modelId === model.id &&
+                        b.modelVersion === model.getVersionId() &&
                         b.position !== undefined &&
-                        b.position.equals(r.position),
+                        b.position.equals(event.position),
                     ) &&
                     !d
                   )
                     if (this.getApplicationUserPersistentStorage().cppFireOnEveryCursorChange === true)
-                      this.fireCppSuggestionDebounced(e, CppIntent.LineChange)
+                      this.fireCppSuggestionDebounced(editor, CppIntent.LineChange)
                     else if (
                       (c.length > 0 || Ago) &&
-                      this.q !== r.position.lineNumber
+                      this.q !== event.position.lineNumber
                     )
-                      this.fireCppSuggestionDebounced(e, CppIntent.LinterErrors)
+                      this.fireCppSuggestionDebounced(editor, CppIntent.LinterErrors)
                     else {
-                      const b = this.q === r.position.lineNumber,
-                        y = this.Rb(),
-                        w = this.Sb()
-                      !b && !y && !w
-                        ? this.fireCppSuggestionDebounced(e, CppIntent.LineChange)
+                      const linesAreTheSame = this.q === event.position.lineNumber,
+                        hasRejectedTooManySuggestions = this.Rb(),
+                        isUserReadingCode = this.Sb()
+                      !linesAreTheSame && !hasRejectedTooManySuggestions && !isUserReadingCode
+                        ? this.fireCppSuggestionDebounced(editor, CppIntent.LineChange)
                         : oa(
                             "[Cpp] Suppressed cursor movement trigger. Conditions (all should be false to trigger):",
                             JSON.stringify({
-                              linesAreTheSame: b,
-                              hasRejectedTooManySuggestions: y,
-                              isUserReadingCode: w,
+                              linesAreTheSame,
+                              hasRejectedTooManySuggestions,
+                              isUserReadingCode,
                             }),
                           )
                     }
@@ -1503,18 +1504,18 @@ export function createCppService(params) {
                     oa(
                       "[Cpp] onDidChangeCursorPosition: suppress b/c shouldTrigger is false",
                     )
-                  this.q = r.position.lineNumber
+                  this.q = event.position.lineNumber
                 }
                 this.getApplicationUserPersistentStorage().cppAutoImportEnabled &&
                   this.showNearLocationLintErrorsToImportPredictionService({
-                    editor: e,
-                    uri: o,
+                    editor: editor,
+                    uri: uri,
                     source: "onDidChangeCursorPosition",
                   })
               }),
             ),
           ),
-          this.Tb(e)
+          this.Tb(editor)
       } catch (s) {
         console.error("Cpp: error", s)
       }
@@ -1642,7 +1643,7 @@ export function createCppService(params) {
       const formatAndUpdate = async () => {
         await this.formatDiffHistory(contentChangeEvent, editor, model, EOL), GhostTextController.get(editor)?.update()
       }
-      this.ab = false
+      this.lastCursorMovementIsCursorPrediction = false
       const adjustSuggestionPosition = () => {
         const currentSuggestion = this.getCurrentSuggestion()
         if (currentSuggestion === undefined) return
@@ -2919,7 +2920,7 @@ export function createCppService(params) {
         return predictionId !== this.cb
           ? { success: false }
           : (cursorPredictionResult !== null &&
-              (this.ab
+              (this.lastCursorMovementIsCursorPrediction
                 ? oa(
                     "[Cpp] Suppressing cursor prediction because the last cursor movement was a cursor prediction",
                   )
