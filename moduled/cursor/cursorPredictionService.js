@@ -3,7 +3,7 @@
 // gdi,Bgo,df,Mve,$go,_go,Gdt,Fgo,Ugo
 
 export function createCursorPredictionService(params) {
-  const {V, fu, Va, k3t, ge, ss, Le, CppIntent, ys, ce, Ho, Qm, wf, CUe, EditHistoryDiffFormatter, rt, Me, GB, cG, QN, L$i, N$i, Pn, Cg, EYe, q, W, __decorate, __param, Ve, Pt: themeService, ue: configurationService, ie, ei, $, Re, xfe: SUGGESTION_OPTS, Rh, U, G, pu, Qn, aLt, ue, Z, nt, ve, si, Xt, Hi, qi, Nh, cursorPredictionService, it, mo, metricsService, cppTypeService, everythingProviderService, yi, cl, cppEventLoggerService, Ci } = params;
+  const {V, fu, Va, k3t, ge, ss, Le, CppIntent, ys, ce, Ho, Qm, wf, CURSOR_PREDICTION, EditHistoryDiffFormatter, rt, Me, GB, cG, QN, L$i, N$i, Pn, Cg, EYe, q, W, __decorate, __param, Ve, Pt: themeService, ue: configurationService, ie, ei, $, Re, xfe: SUGGESTION_OPTS, Rh, U, G, pu, Qn, aLt, ue, Z, nt, ve, si, Xt, Hi, qi, Nh, cursorPredictionService, it, mo, metricsService, cppTypeService, everythingProviderService, yi, cl, cppEventLoggerService, Ci } = params;
   ////////
 
   var gdi = class extends V {
@@ -547,7 +547,7 @@ export function createCursorPredictionService(params) {
           c = r.getPosition()
         c && this.g.push({ position: c, prediction: wf(s) }),
           r.hasTextFocus() || r.focus(),
-          r.setPosition({ lineNumber: n, column: l }, CUe),
+          r.setPosition({ lineNumber: n, column: l }, CURSOR_PREDICTION),
           r.revealLineInCenterIfOutsideViewport(n),
           e.stopPropagation(),
           e.stopImmediatePropagation(),
