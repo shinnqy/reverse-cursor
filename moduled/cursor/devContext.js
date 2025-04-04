@@ -2,7 +2,7 @@
 
 // 254597
 export function createDevContext(params) {
-  const { ce, U, vm, ys, li, hb, Zb, J, L1, p7i, ms, ns, bs, le, dt, nr, oi, De, _l, Tt, NG, i7, KWe, X, jo, I, hl, Cu, Y, Vu, qn, wv, xe, tt, ie, $, xBi, Nz, $r, u_, M, y4t, e0, Ze, G, un, Nae, cc, KLn, $tr, te, CEt, wEt, gG } = params;
+  const { ce, U, vm, ys, li, hb, Zb, J, L1, p7i, ms, ResourceMap, bs, le, dt, nr, oi, De, _l, Tt, NG, i7, KWe, X, jo, I, hl, Cu, Y, Vu, qn, wv, xe, tt, ie, $, xBi, Nz, $r, u_, M, y4t, e0, Ze, G, un, Nae, cc, KLn, $tr, te, CEt, wEt, gG } = params;
 
   var Aa
   ;(function (i) {
@@ -210,7 +210,7 @@ export function createDevContext(params) {
       n = p7i(s)
     ms && (n = n.replaceAll("/", "\\"))
     let o = (
-      await e.anythingQuickAccessProvider.getFilePicks(vm(n), new ns(), t.token)
+      await e.anythingQuickAccessProvider.getFilePicks(vm(n), new ResourceMap(), t.token)
     ).map((g) => g.resource ?? U.parse(""))
     const l = e.editorService
       .getEditors(0)
@@ -1094,7 +1094,7 @@ export function createDevContext(params) {
             ((b = (
               await n.anythingQuickAccessProvider.getFilePicks(
                 vm(m),
-                new ns(),
+                new ResourceMap(),
                 d.token,
               )
             ).map((F) => F.resource ?? U.parse(""))),
