@@ -314,7 +314,7 @@ export function createCppService(params) {
           false),
         (this.j = new LRUCache(20)),
         (this.m = new Map()), (this.modelListeners2EditorMap = this.m),
-        (this.n = new Map()),
+        (this.n = new Map()), (this.editorListenersMap = this.n),
         (this.q = undefined),
         (this.u = undefined),
         (this.w = undefined), (this.mostRecentNonAbortedRequestId = this.w),
@@ -1272,7 +1272,7 @@ export function createCppService(params) {
           : this.reallowCopilotIfWePreviousHidCopilotSuggestions()
     }
     clearEditorListeners() {
-      this.n.forEach((e) => e.forEach((t) => t.dispose())), this.n.clear()
+      this.editorListenersMap.forEach((e) => e.forEach((t) => t.dispose())), this.editorListenersMap.clear()
     }
     async registerAllCppListeners() {
       let e = 0
@@ -1285,7 +1285,7 @@ export function createCppService(params) {
         await new Promise((s) => setTimeout(s, 100))
       for (let s of this.codeEditorService.listCodeEditors())
         this.registerEditorListenersToEditor(s)
-      this.n.set("global", [
+      this.editorListenersMap.set("global", [
         this.D(
           this.codeEditorService.onCodeEditorAdd((s) => {
             this.registerEditorListenersToEditor(s)
@@ -1315,7 +1315,7 @@ export function createCppService(params) {
           }),
         )
       const t = VS()
-      this.n.set("window", [
+      this.editorListenersMap.set("window", [
         this.D({
           dispose: () => {
             for (const s of t)
@@ -1334,14 +1334,14 @@ export function createCppService(params) {
     }
     async registerEditorListenersToEditor(e) {
       const t = e.getId()
-      this.n.set(t, [
+      this.editorListenersMap.set(t, [
         e.onDidDispose(() => {
-          this.n.get(t)?.forEach((s) => s.dispose()), this.n.delete(t)
+          this.editorListenersMap.get(t)?.forEach((s) => s.dispose()), this.editorListenersMap.delete(t)
         }),
       ])
       try {
-        this.n.has(t) || this.n.set(t, []),
-          this.n.get(t).push(
+        this.editorListenersMap.has(t) || this.editorListenersMap.set(t, []),
+          this.editorListenersMap.get(t).push(
             this.D(
               e.onDidBlurEditorText(() => {
                 oa("[Cpp] onDidBlurEditorText: resetting suggestions"),
@@ -1351,9 +1351,9 @@ export function createCppService(params) {
             ),
           )
         const s = this.D(new NYi(e, this.ILanguageFeaturesService.signatureHelpProvider))
-        this.n.get(t).push(s),
+        this.editorListenersMap.get(t).push(s),
           s !== undefined &&
-            this.n.get(t).push(
+            this.editorListenersMap.get(t).push(
               this.D(
                 s.onChangedHints((r) => {
                   const o = this.cppTypeService.getRelevantParameterHints(e)
@@ -1366,8 +1366,8 @@ export function createCppService(params) {
             )
         const n = e.getModel()
         n !== null && (await this.registerModelListenerToEditorModel(e, n)),
-          this.n.has(t) || this.n.set(t, []),
-          this.n.get(t).push(
+          this.editorListenersMap.has(t) || this.editorListenersMap.set(t, []),
+          this.editorListenersMap.get(t).push(
             this.D(
               e.onDidChangeModel(() => {
                 const r = e.getModel()
@@ -1375,8 +1375,8 @@ export function createCppService(params) {
               }),
             ),
           ),
-          this.n.has(t) || this.n.set(t, []),
-          this.n.get(t).push(
+          this.editorListenersMap.has(t) || this.editorListenersMap.set(t, []),
+          this.editorListenersMap.get(t).push(
             this.D(
               e.onDidChangeCursorPosition((r) => {
                 if (
@@ -1541,8 +1541,8 @@ export function createCppService(params) {
     Tb(e) {
       const t = e.getId(),
         s = this.getApplicationUserPersistentStorage().cppConfig?.excludeRecentlyViewedFilesPatterns ?? []
-      this.n.has(t) || this.n.set(t, []),
-        this.n.get(t).push(
+      this.editorListenersMap.has(t) || this.editorListenersMap.set(t, []),
+        this.editorListenersMap.get(t).push(
           this.D(
             e.onDidFocusEditorText(() => {
               const n = e.getModel()
@@ -1575,8 +1575,8 @@ export function createCppService(params) {
             }),
           ),
         ),
-        this.n.has(t) || this.n.set(t, []),
-        this.n.get(t).push(
+        this.editorListenersMap.has(t) || this.editorListenersMap.set(t, []),
+        this.editorListenersMap.get(t).push(
           this.D(
             e.onDidScrollChange(() => {
               const n = e.getModel(),
