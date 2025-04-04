@@ -108,7 +108,7 @@ export function createGlobalConfig(params) {
     })
   }
   var ROi = rt(),
-    ePn = {
+    applicationUserPersistentStorageState = {
       composerState: { ...KTn },
       mcpServers: [],
       notepadState: { ...YTn },
@@ -366,7 +366,7 @@ export function createGlobalConfig(params) {
         e
       ),
     ],
-    tPn = {
+    nonPersistentStorageState = {
       composerState: { infoBoxMessage: void 0 },
       notepadState: { notepadEditorFocusSignal: void 0 },
       aiReaderState: {},
@@ -464,11 +464,11 @@ export function createGlobalConfig(params) {
     LOi,
     ZTn,
     NOi,
-    ePn,
+    applicationUserPersistentStorageState,
     AOi,
     MOi,
     $Oi,
-    tPn,
+    nonPersistentStorageState,
     gae,
   }
 }
