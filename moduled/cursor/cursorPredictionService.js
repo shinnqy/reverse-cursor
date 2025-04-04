@@ -3,7 +3,7 @@
 // gdi,Bgo,df,Mve,$go,_go,Gdt,Fgo,Ugo
 
 export function createCursorPredictionService(params) {
-  const {V, fu, Va, k3t, ge, ss, Le, ll, ys, ce, Ho, Qm, wf, CUe, EditHistoryDiffFormatter, rt, Me, GB, cG, QN, L$i, N$i, Pn, Cg, EYe, q, W, __decorate, __param, Ve, Pt: themeService, ue: configurationService, ie, ei, $, Re, xfe: SUGGESTION_OPTS, Rh, U, G, pu, Qn, aLt, ue, Z, nt, ve, si, Xt, Hi, qi, Nh, cursorPredictionService, it, mo, metricsService, cppTypeService, everythingProviderService, yi, cl, cppEventLoggerService, Ci } = params;
+  const {V, fu, Va, k3t, ge, ss, Le, CppIntent, ys, ce, Ho, Qm, wf, CUe, EditHistoryDiffFormatter, rt, Me, GB, cG, QN, L$i, N$i, Pn, Cg, EYe, q, W, __decorate, __param, Ve, Pt: themeService, ue: configurationService, ie, ei, $, Re, xfe: SUGGESTION_OPTS, Rh, U, G, pu, Qn, aLt, ue, Z, nt, ve, si, Xt, Hi, qi, Nh, cursorPredictionService, it, mo, metricsService, cppTypeService, everythingProviderService, yi, cl, cppEventLoggerService, Ci } = params;
   ////////
 
   var gdi = class extends V {
@@ -473,7 +473,7 @@ export function createCursorPredictionService(params) {
     tabToLineBeforeAcceptingCpp(e) {
       return (
         this.isCursorPredictionEnabled() &&
-        e === ll.CursorPrediction &&
+        e === CppIntent.CursorPrediction &&
         this.cursorPredictionTabToLineFirst() &&
         this.F.nonPersistentStorage.cursorPrediction !== void 0
       )
@@ -555,7 +555,7 @@ export function createCursorPredictionService(params) {
           (this.X = !0),
           this.clearPrediction({ editor: r, registerReject: !1 }),
           this.Q.recordAcceptCursorPredictionEvent(a, s),
-          this.r && t?.(a.uri, r, ll.CursorPrediction),
+          this.r && t?.(a.uri, r, CppIntent.CursorPrediction),
           (this.r = !1)
       }
     }
@@ -803,7 +803,7 @@ export function createCursorPredictionService(params) {
           this.F.nonPersistentStorage.cppState?.suggestion === void 0
         ) {
           const E = new Me(k.lineNumber, 1)
-          t(o.uri, e, ll.CursorPrediction, E)
+          t(o.uri, e, CppIntent.CursorPrediction, E)
         }
       } catch {}
     }
@@ -1113,7 +1113,7 @@ export function createCursorPredictionService(params) {
       })
       if (r !== void 0 && e.triggerCppCallback !== null) {
         const o = new Me(r.lineNumber, 1)
-        e.triggerCppCallback(n.uri, s, ll.CursorPrediction, o)
+        e.triggerCppCallback(n.uri, s, CppIntent.CursorPrediction, o)
       }
     }
     getDecoration({ model: e, lineNumber: t }) {

@@ -1,7 +1,7 @@
 // @ts-check
 
 export function createImportPredictionService(params) {
-  const {V, __decorate, __param, Pt: themeService, ue: configurationService, ei, Ve, it, mo, Z, metricsService, cppTypeService, everythingProviderService, yi, Xt, cl, cppEventLoggerService, zi, aiFeatureStatusService, st, aiAssertService, importPredictionService, LRUCache, DYe, fu, rt, q, W, Un, Va, Ri, ys, ddi, DHe, Ze, gI, G, mp, lp, Me, GB, ll, P1t, HMi, hG, y7, g1, Kh, U, pm } = params;
+  const {V, __decorate, __param, Pt: themeService, ue: configurationService, ei, Ve, it, mo, Z, metricsService, cppTypeService, everythingProviderService, yi, Xt, cl, cppEventLoggerService, zi, aiFeatureStatusService, st, aiAssertService, importPredictionService, LRUCache, DYe, fu, rt, q, W, Un, Va, Ri, ys, ddi, DHe, Ze, gI, G, mp, lp, Me, GB, CppIntent, P1t, HMi, hG, y7, g1, Kh, U, pm } = params;
 
   var bdi,
     vdi = class extends V {
@@ -477,7 +477,7 @@ export function createImportPredictionService(params) {
                 modelValue: l,
                 modelVersion: c,
                 position: m,
-                source: ll.Typing,
+                source: CppIntent.Typing,
                 shouldRelyOnFileSyncForFile: b,
               })
               .catch((se) => {

@@ -169,7 +169,7 @@ export function createGeneralConfig() {
       (i.CreateClient = "mcp.createClient"),
       (i.DeleteClient = "mcp.deleteClient")
   })(a7 || (a7 = {}))
-  var ll
+  var CppIntent
   ;(function (i) {
     ;(i.Unknown = "unknown"),
       (i.LineChange = "line_change"),
@@ -181,7 +181,7 @@ export function createGeneralConfig() {
       (i.ManualTrigger = "manual_trigger"),
       (i.EditorChange = "editor_change"),
       (i.LspSuggestions = "lsp_suggestions")
-  })(ll || (ll = {}))
+  })(CppIntent || (CppIntent = {}))
   var _n
   ;(function (i) {
     ;(i.FREE = "free"),
@@ -255,7 +255,7 @@ export function createGeneralConfig() {
     X1t,
     Q1t,
     a7,
-    ll,
+    CppIntent,
     _n,
     JB,
     WEn,
