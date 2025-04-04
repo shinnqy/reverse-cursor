@@ -2,7 +2,7 @@
 
 
 export function createCppService(params) {
-  const {V, EYe, G, LRUCache, Qfo, ngo, rgo, MutableDisposable, J, R_n, um, hF, ss, ll, JB, onDidRegisterWindow, fu, Va, nze, WEn, m2i, qEn, b2i, S9, $, Hae, m0t, Ad, fUe, Sp, VB, replaceTextInRange, generateModifiedText, EditHistoryDiffFormatter, VS, NYi, CUe, Ri, ce, Pn, Cg, EF, MMs, U, mu, Me, ys, $fo, qdt, Ffo, dze, uI, BMs, Cf, hG, mR, fm, gle, xr, Gr, GB, QN, Ycr, Yt, D1t, Kf, rt, handleStreamWithPredictions, handleChunkedStream, consumeRemainingStream, Hu, Aoe, Qcr, TKn, F_, tdi, _fo, rge, OFt, Xfo, Ui, ZXe: computeDiffs, k7, RKi, jBt, qfo, Ho, Qm, T1t, Xf, oj, ee, j, Je, eQe, cppService, ei, wf, yi, Ci, $h} = params;
+  const {V, EYe, G, LRUCache, Qfo, ngo, rgo, MutableDisposable, J, R_n, um, hF, ss, ll, JB, onDidRegisterWindow, fu, Va, nze, WEn, m2i, qEn, b2i, S9, $, Hae, m0t, Ad, fUe, Sp, VB, replaceTextInRange, generateModifiedText, EditHistoryDiffFormatter, VS, NYi, CUe, Ri, ce, Pn, Cg, GhostTextController, MMs, U, mu, Me, ys, $fo, qdt, Ffo, dze, uI, BMs, Cf, hG, mR, fm, gle, xr, Gr, GB, QN, Ycr, Yt, D1t, Kf, rt, handleStreamWithPredictions, handleChunkedStream, consumeRemainingStream, Hu, Aoe, Qcr, TKn, F_, tdi, _fo, rge, OFt, Xfo, Ui, ZXe: computeDiffs, k7, RKi, jBt, qfo, Ho, Qm, T1t, Xf, oj, ee, j, Je, CppDiffPeekViewWidget, cppService, ei, wf, yi, Ci, $h} = params;
 
   var bgo = class zmi extends ee {
     static {
@@ -20,7 +20,7 @@ export function createCppService(params) {
           $.check,
           "Accept Cursor Tab Suggestion",
         ),
-        menu: { id: eQe.TitleMenu, order: 1 },
+        menu: { id: CppDiffPeekViewWidget.TitleMenu, order: 1 },
       })
     }
     async run(e) {
@@ -36,7 +36,7 @@ export function createCppService(params) {
   function zMs(i) {
     const e = i.get(yi),
       t = e.getActiveCodeEditor() || e.getFocusedCodeEditor()
-    return (t && EF.get(t)) || undefined
+    return (t && GhostTextController.get(t)) || undefined
   }
   function vgo(i) {
     return zMs(i)?.cppPeekView
@@ -1639,7 +1639,7 @@ export function createCppService(params) {
       }
       if (this.Wb(model)) return
       const formatAndUpdate = async () => {
-        await this.formatDiffHistory(contentChangeEvent, editor, model, EOL), EF.get(editor)?.update()
+        await this.formatDiffHistory(contentChangeEvent, editor, model, EOL), GhostTextController.get(editor)?.update()
       }
       this.ab = false
       const adjustSuggestionPosition = () => {
@@ -1789,7 +1789,7 @@ export function createCppService(params) {
                     })
                 }
                 if (
-                  (EF.get(editor)?.setChangesSinceLastUpdate(true),
+                  (GhostTextController.get(editor)?.setChangesSinceLastUpdate(true),
                   this.dontTriggerCppBecauseChangeIsFromCpp === true ||
                     this
                       .pauseCppTriggeringUntilUnpaused_DANGEROUS_ONLY_SET_IF_YOU_KNOW_WHAT_YOU_ARE_DOING ===
@@ -1909,7 +1909,7 @@ export function createCppService(params) {
         s !== ll.CursorPrediction &&
         s !== ll.LspSuggestions
       ) {
-        EF.get(t)?.update()
+        GhostTextController.get(t)?.update()
         return
       }
       let a
