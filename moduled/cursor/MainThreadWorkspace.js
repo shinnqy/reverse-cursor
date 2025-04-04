@@ -22,7 +22,7 @@ export function createMainThreadWorkspace(params) {
         (this.v = y),
         (this.w = w),
         (this.x = C),
-        (this.y = S),
+        (this.y = S), (this.cppService = this.y),
         (this.z = x),
         (this.a = new J()),
         (this.b = Object.create(null)),
@@ -199,7 +199,7 @@ export function createMainThreadWorkspace(params) {
         const r = async (o, a) => {
           await this.c.$controlStreamCpp(o, a)
         }
-        this.y.registerDiffingProvider({
+        this.cppService.registerDiffingProvider({
           streamCpp: r,
           cancelCpp: this.c.$controlCancelCpp,
           flushCpp: this.c.$controlFlushCpp,

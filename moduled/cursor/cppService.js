@@ -241,7 +241,8 @@ export function createCppService(params) {
       return this.P.get()
     }
     registerDiffingProvider(e) {
-      this.S = e
+      this.S = e;
+      this.cppProvider = this.S;
     }
     constructor(
       e,
@@ -331,7 +332,7 @@ export function createCppService(params) {
         (this.editorThatWeHidGhostTextOn = undefined),
         (this.R = []),
         (this.holdDownAbortController = undefined),
-        (this.S = undefined),
+        (this.S = undefined), (this.cppProvider = this.S),
         (this.numberOfClearedSuggestionsSinceLastAccept = 0),
         (this.lastEditTime = undefined),
         (this.U = undefined), (this.lastProcessedModel = this.U),
@@ -2373,7 +2374,7 @@ export function createCppService(params) {
           : u?.contents
         u.contents = D ?? ""
       }
-      if (this.S === undefined) throw new Error("Diffing provider is undefined")
+      if (this.cppProvider === undefined) throw new Error("Diffing provider is undefined")
       let d
       const g = performance.now()
       let p
@@ -2653,7 +2654,7 @@ export function createCppService(params) {
       context: context,
       source: source,
     }) {
-      if (this.S === undefined)
+      if (this.cppProvider === undefined)
         return (
           oa("[Cpp] Bad Case: diffingProvider is undefined"), { success: false }
         )
@@ -2711,7 +2712,7 @@ export function createCppService(params) {
       const modelVersionId = model.getVersionId(),
         modelSnapshot = Ycr(model)
       abortController.signal.addEventListener("abort", () => {
-        this.S?.cancelCpp(generationUUID)
+        this.cppProvider?.cancelCpp(generationUUID)
       }),
         this.X !== undefined &&
           this.metricsService.distribution({
@@ -2748,7 +2749,7 @@ export function createCppService(params) {
             generateUuid: generationUUID
           })
         }),
-        await this.S.streamCpp(
+        await this.cppProvider.streamCpp(
           Yt.wrap(
             new D1t({
               ...partialCppRequest,
@@ -2767,7 +2768,7 @@ export function createCppService(params) {
           ),
           { generateUuid: generationUUID, startOfCpp: context.startOfCpp },
         )
-      const cppProvider = this.S,
+      const cppProvider = this.cppProvider,
         cppStream = this.streamCpp(abortController, cppProvider, generationUUID)
       if (cppStream == null)
         return (
@@ -4093,7 +4094,7 @@ export function createCppService(params) {
         this.cppTypeService.setSuggestionHintsConfig(e.suggestionHintConfig)
     }
     async getCppReport() {
-      if (this.S !== undefined) return await this.S.getCppReport()
+      if (this.cppProvider !== undefined) return await this.cppProvider.getCppReport()
     }
   };
 
