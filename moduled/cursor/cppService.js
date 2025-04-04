@@ -2,7 +2,7 @@
 
 
 export function createCppService(params) {
-  const {V, EYe, G, LRUCache, Qfo, ngo, rgo, zt, J, R_n, um, hF, ss, ll, JB, onDidRegisterWindow, fu, Va, nze, WEn, m2i, qEn, b2i, S9, $, Hae, m0t, Ad, fUe, Sp, VB, replaceTextInRange, generateModifiedText, EditHistoryDiffFormatter, VS, NYi, CUe, Ri, ce, Pn, Cg, EF, MMs, U, mu, Me, ys, $fo, qdt, Ffo, dze, uI, BMs, Cf, hG, mR, fm, gle, xr, Gr, GB, QN, Ycr, Yt, D1t, Kf, rt, handleStreamWithPredictions, handleChunkedStream, consumeRemainingStream, Hu, Aoe, Qcr, TKn, F_, tdi, _fo, rge, OFt, Xfo, Ui, ZXe: computeDiffs, k7, RKi, jBt, qfo, Ho, Qm, T1t, Xf, oj, ee, j, Je, eQe, cppService, ei, wf, yi, Ci, $h} = params;
+  const {V, EYe, G, LRUCache, Qfo, ngo, rgo, MutableDisposable, J, R_n, um, hF, ss, ll, JB, onDidRegisterWindow, fu, Va, nze, WEn, m2i, qEn, b2i, S9, $, Hae, m0t, Ad, fUe, Sp, VB, replaceTextInRange, generateModifiedText, EditHistoryDiffFormatter, VS, NYi, CUe, Ri, ce, Pn, Cg, EF, MMs, U, mu, Me, ys, $fo, qdt, Ffo, dze, uI, BMs, Cf, hG, mR, fm, gle, xr, Gr, GB, QN, Ycr, Yt, D1t, Kf, rt, handleStreamWithPredictions, handleChunkedStream, consumeRemainingStream, Hu, Aoe, Qcr, TKn, F_, tdi, _fo, rge, OFt, Xfo, Ui, ZXe: computeDiffs, k7, RKi, jBt, qfo, Ho, Qm, T1t, Xf, oj, ee, j, Je, eQe, cppService, ei, wf, yi, Ci, $h} = params;
 
   var bgo = class zmi extends ee {
     static {
@@ -335,7 +335,7 @@ export function createCppService(params) {
         (this.numberOfClearedSuggestionsSinceLastAccept = 0),
         (this.lastEditTime = undefined),
         (this.U = undefined), (this.lastProcessedModel = this.U),
-        (this.W = this.D(new zt())),
+        (this.W = this.D(new MutableDisposable())),
         (this.Y = { fire: false, acceptedRange: undefined }), (this.pendingSuggestion = this.Y),
         (this.$ = {}),
         (this.ab = false),
@@ -581,7 +581,7 @@ export function createCppService(params) {
           for (let vt = 0; vt < ke; vt++) Ee[vt] = ""
           for (let vt = Ae; vt < Ee.length; vt++) Ee[vt] = ""
           return Ee.join(ae)
-        }),
+        }), (this.truncateCurrentFile = this.Zb),
         (this.decIdsThatAreNotInReactiveStorage = { green: [] }),
         (this.didShowGreenHighlights = false),
         (this.removedCppNoopGenerationUUIDS = []),
@@ -672,7 +672,7 @@ export function createCppService(params) {
           getCurrentSuggestion: this.getCurrentSuggestion.bind(this),
           getRecentAndNearLocationLinterErrors:
             this.getRecentAndNearLocationLinterErrors.bind(this),
-          truncateCurrentFile: this.Zb.bind(this),
+          truncateCurrentFile: this.truncateCurrentFile.bind(this),
           getFocusedCodeEditor: this.getFocusedCodeEditor.bind(this),
           isTextFocusedOrSimilarlyFocused:
             this.isTextFocusedOrSimilarlyFocused.bind(this),
@@ -2363,7 +2363,7 @@ export function createCppService(params) {
         u !== undefined && u.cursorPosition !== undefined)
       ) {
         const D = !a
-          ? this.Zb(u?.contents ?? "", u.cursorPosition.line, h, c)
+          ? this.truncateCurrentFile(u?.contents ?? "", u.cursorPosition.line, h, c)
           : u?.contents
         u.contents = D ?? ""
       }
