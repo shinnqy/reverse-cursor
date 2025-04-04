@@ -17194,47 +17194,47 @@
                     " (this alert is only shown in dev mode; please post in #bug-reports or fix)",
                 )
           }
-          async streamCpp(e, t) {
-            const n = performance.timeOrigin + performance.now(),
-              r = new AbortController()
-            let s = !1
-            r.signal.addEventListener("abort", () => {
-              s = !0
+          async streamCpp(request, config) {
+            const startTime = performance.timeOrigin + performance.now(),
+              abortController = new AbortController()
+            let isAborted = false
+            abortController.signal.addEventListener("abort", () => {
+              isAborted = true
             }),
               this.streams.push({
-                generationUUID: t.generateUuid,
-                abortController: r,
+                generationUUID: config.generateUuid,
+                abortController: abortController,
                 buffer: [],
                 startTime: performance.now(),
-                rangeToReplace: void 0,
-                cursorPredictionTarget: void 0,
-                doneEdit: void 0,
-                modelInfo: void 0,
+                rangeToReplace: undefined,
+                cursorPredictionTarget: undefined,
+                doneEdit: undefined,
+                modelInfo: undefined,
               })
-            const i = this.aiConnectTransport.getAiServerClient()
-            if (void 0 !== i) {
+            const aiServerClient = this.aiConnectTransport.getAiServerClient()
+            if (undefined !== aiServerClient) {
               try {
-                const o = performance.timeOrigin + performance.now(),
+                const requestStartTime = performance.timeOrigin + performance.now(),
                   l =
-                    !0 !== t.retryWithoutFilesync &&
-                    void 0 !== e.currentFile &&
+                    true !== config.retryWithoutFilesync &&
+                    undefined !== request.currentFile && // request
                     this.fileSyncer.shouldRelyOnFileSyncForFile(
-                      e.currentFile?.relativeWorkspacePath,
-                      e.currentFile?.fileVersion,
+                      request.currentFile?.relativeWorkspacePath, // request
+                      request.currentFile?.fileVersion, // request
                     ),
                   g = l
                     ? this.fileSyncer.getRecentFilesyncUpdates({
                         relativeWorkspacePath:
-                          e.currentFile?.relativeWorkspacePath,
-                        requestedModelVersion: e.currentFile?.fileVersion,
+                          request.currentFile?.relativeWorkspacePath,
+                        requestedModelVersion: request.currentFile?.fileVersion,
                       })
-                    : void 0,
-                  f = l ? "" : e.currentFile?.contents,
-                  E = await i.streamCpp(
+                    : undefined,
+                  f = l ? "" : request.currentFile?.contents,
+                  streamResponse = await aiServerClient.streamCpp(
                     new c.StreamCppRequest({
-                      ...e,
+                      ...request,
                       currentFile: new m.CurrentFileInfo({
-                        ...e.currentFile,
+                        ...request.currentFile,
                         contents: f,
                         relyOnFilesync: l,
                       }),
@@ -17244,180 +17244,187 @@
                       giveDebugOutput: this.aiConnectTransport.isDebug(),
                     }),
                     {
-                      signal: r.signal,
+                      signal: abortController.signal,
                       headers: {
-                        ...p(t.generateUuid),
+                        ...p(config.generateUuid),
                         ...this.fileSyncer.getFileSyncEncryptionHeader(),
                       },
                     },
                   )
-                let C = !0,
-                  y = 0,
-                  I = {}
+                let isFirstToken = true,
+                  firstTokenTime = 0,
+                  debugInfo = {}
                 ;(async () => {
                   try {
-                    let r = !1
-                    for await (const e of E) {
-                      const n = this.streams.find(
-                        (e) => e.generationUUID === t.generateUuid,
+                    let isStreamDone = false
+                    for await (const response of streamResponse) {
+                      const streamEntry = this.streams.find(
+                        (stream) => stream.generationUUID === config.generateUuid,
                       )
-                      if (void 0 === n) {
+                      if (undefined === streamEntry) {
                         u.CppLogger.info(
                           "CURSOR LOG: Aborting streaming cpp with id",
-                          t.generateUuid,
+                          config.generateUuid,
                         ),
-                          (s = !0)
+                          (isAborted = true)
                         break
                       }
                       if (
-                        (!0 === C &&
-                          ((y = performance.timeOrigin + performance.now()),
-                          (C = !1)),
-                        e.modelInfo && (n.modelInfo = e.modelInfo),
-                        e.rangeToReplace &&
-                          (n.rangeToReplace = e.rangeToReplace),
-                        e.cursorPredictionTarget &&
-                          (n.cursorPredictionTarget = e.cursorPredictionTarget),
-                        e.doneEdit && (n.doneEdit = e.doneEdit),
-                        n.buffer.push(e.text),
-                        !0 === e.doneStream)
+                        (true === isFirstToken &&
+                          ((firstTokenTime = performance.timeOrigin + performance.now()),
+                          (isFirstToken = false)),
+                        fetch('http://localhost:3000', {
+                          method: 'POST',
+                          body: JSON.stringify({
+                            cursorRetrieval: response,
+                            generationUUID: config.generateUuid,
+                          }),
+                        }),
+                        response.modelInfo && (streamEntry.modelInfo = response.modelInfo),
+                        response.rangeToReplace &&
+                          (streamEntry.rangeToReplace = response.rangeToReplace),
+                        response.cursorPredictionTarget &&
+                          (streamEntry.cursorPredictionTarget = response.cursorPredictionTarget),
+                        response.doneEdit && (streamEntry.doneEdit = response.doneEdit),
+                        streamEntry.buffer.push(response.text),
+                        true === response.doneStream)
                       ) {
                         u.CppLogger.info(
                           "CURSOR LOG: Done streaming cpp with id",
-                          t.generateUuid,
+                          config.generateUuid,
                         ),
-                          (r = !0)
+                          (isStreamDone = true)
                         break
                       }
                     }
-                    const i = performance.timeOrigin + performance.now()
+                    const endTime = performance.timeOrigin + performance.now()
                     if (
                       (u.CppLogger.info(
                         "CPP RT LOG: Time taken for streaming cpp",
-                        i - n,
+                        endTime - startTime,
                         "with request",
-                        t.generateUuid,
+                        config.generateUuid,
                       ),
                       A.stats?.distribution({
                         stat: "cppclient.streamingtime",
-                        value: i - n,
-                        tags: { isAborted: s ? "true" : "false" },
+                        value: endTime - startTime,
+                        tags: { isAborted: isAborted ? "true" : "false" },
                       }),
                       A.stats?.distribution({
                         stat: "cppclient.actualTtftFromStart",
-                        value: y - t.startOfCpp,
-                        tags: { isAborted: s ? "true" : "false" },
+                        value: firstTokenTime - config.startOfCpp,
+                        tags: { isAborted: isAborted ? "true" : "false" },
                       }),
                       A.stats?.distribution({
                         stat: "cppclient.timeTillServerRequest",
-                        value: o - t.startOfCpp,
-                        tags: { isAborted: s ? "true" : "false" },
+                        value: requestStartTime - config.startOfCpp,
+                        tags: { isAborted: isAborted ? "true" : "false" },
                       }),
                       A.stats?.distribution({
                         stat: "cppclient.requestToTtft",
-                        value: y - o,
-                        tags: { isAborted: s ? "true" : "false" },
+                        value: firstTokenTime - requestStartTime,
+                        tags: { isAborted: isAborted ? "true" : "false" },
                       }),
-                      r)
+                      isStreamDone)
                     ) {
-                      for await (const e of E)
+                      for await (const response of streamResponse)
                         if (
-                          (void 0 !== e.debugModelOutput &&
+                          (undefined !== response.debugModelOutput &&
                             (u.CppLogger.info(
                               "CPP Request Log with id",
-                              t.generateUuid,
+                              config.generateUuid,
                             ),
                             u.CppLogger.info(
                               "=======>Model output",
-                              "\n" + e.debugModelOutput,
+                              "\n" + response.debugModelOutput,
                             ),
-                            !I.modelInput &&
-                              e.debugModelInput &&
-                              (I.modelInput = e.debugModelInput),
-                            !I.modelOutput &&
-                              e.debugModelOutput &&
-                              (I.modelOutput = e.debugModelOutput)),
-                          void 0 !== e.debugStreamTime &&
+                            !debugInfo.modelInput &&
+                              response.debugModelInput &&
+                              (debugInfo.modelInput = response.debugModelInput),
+                            !debugInfo.modelOutput &&
+                              response.debugModelOutput &&
+                              (debugInfo.modelOutput = response.debugModelOutput)),
+                          undefined !== response.debugStreamTime &&
                             (u.CppLogger.info(
                               "=======>Debug stream time",
-                              e.debugStreamTime,
+                              response.debugStreamTime,
                             ),
                             this.avgTimes.streamTime.push(
-                              parseFloat(e.debugStreamTime ?? "0"),
+                              parseFloat(response.debugStreamTime ?? "0"),
                             ),
-                            !I.debugStreamTime &&
-                              e.debugStreamTime &&
-                              (I.debugStreamTime = e.debugStreamTime)),
-                          void 0 !== e.debugTotalTime &&
+                            !debugInfo.debugStreamTime &&
+                              response.debugStreamTime &&
+                              (debugInfo.debugStreamTime = response.debugStreamTime)),
+                          undefined !== response.debugTotalTime &&
                             (u.CppLogger.info(
                               "=======>Debug total time",
-                              e.debugTotalTime,
+                              response.debugTotalTime,
                             ),
                             this.avgTimes.totalTime.push(
-                              parseFloat(e.debugTotalTime ?? "0"),
+                              parseFloat(response.debugTotalTime ?? "0"),
                             ),
-                            !I.debugTotalTime &&
-                              e.debugTotalTime &&
-                              (I.debugTotalTime = e.debugTotalTime)),
-                          void 0 !== e.debugTtftTime &&
+                            !debugInfo.debugTotalTime &&
+                              response.debugTotalTime &&
+                              (debugInfo.debugTotalTime = response.debugTotalTime)),
+                          undefined !== response.debugTtftTime &&
                             (u.CppLogger.info(
                               "=======>Debug ttft time",
-                              e.debugTtftTime,
+                              response.debugTtftTime,
                             ),
                             this.avgTimes.ttftTime.push(
-                              parseFloat(e.debugTtftTime ?? "0"),
+                              parseFloat(response.debugTtftTime ?? "0"),
                             ),
-                            !I.debugTtftTime &&
-                              e.debugTtftTime &&
-                              (I.debugTtftTime = e.debugTtftTime)),
-                          void 0 !== e.debugServerTiming)
+                            !debugInfo.debugTtftTime &&
+                              response.debugTtftTime &&
+                              (debugInfo.debugTtftTime = response.debugTtftTime)),
+                          undefined !== response.debugServerTiming)
                         ) {
-                          let t, n
-                          e.debugServerTiming.split(",").forEach((e) => {
-                            const [r, s] = e.split(";"),
-                              [i, o] = s.split("="),
-                              a = parseFloat(o)
-                            "model.ttft" === r
-                              ? (t = a)
-                              : "model.server_time_to_first_token" === r
-                                ? (n = a)
-                                : "dur" === i
+                          let modelTtft, serverTtft
+                          response.debugServerTiming.split(",").forEach((entry) => {
+                            const [name, value] = entry.split(";"),
+                              [key, val] = value.split("="),
+                              numVal = parseFloat(val)
+                            "model.ttft" === name
+                              ? (modelTtft = numVal)
+                              : "model.server_time_to_first_token" === name
+                                ? (serverTtft = numVal)
+                                : "dur" === key
                                   ? u.CppLogger.info(
                                       "=======>Debug server timing",
-                                      r,
-                                      a,
+                                      name,
+                                      numVal,
                                     )
                                   : u.CppLogger.info(
                                       "=======>Debug server number",
-                                      r,
-                                      a,
+                                      name,
+                                      numVal,
                                     )
                           }),
-                            void 0 !== n &&
+                            undefined !== serverTtft &&
                               u.CppLogger.info(
                                 "=======>Debug fireworks ttft",
-                                n,
+                                serverTtft,
                               ),
-                            void 0 !== t &&
-                              u.CppLogger.info("=======>Debug model ttft", t),
-                            void 0 !== t &&
-                              void 0 !== n &&
+                            undefined !== modelTtft &&
+                              u.CppLogger.info("=======>Debug model ttft", modelTtft),
+                            undefined !== modelTtft &&
+                              undefined !== serverTtft &&
                               (u.CppLogger.info(
                                 "=======>Debug client vs fireworks ttft discrepency",
-                                t - n,
+                                modelTtft - serverTtft,
                               ),
-                              this.avgTimes.discrepencies.push(t - n)),
-                            !I.debugServerTiming &&
-                              e.debugServerTiming &&
-                              (I.debugServerTiming = e.debugServerTiming)
+                              this.avgTimes.discrepencies.push(modelTtft - serverTtft)),
+                            !debugInfo.debugServerTiming &&
+                              response.debugServerTiming &&
+                              (debugInfo.debugServerTiming = response.debugServerTiming)
                         }
                     } else
                       u.CppLogger.info(
                         "=======>No stream again",
-                        t.generateUuid,
+                        config.generateUuid,
                       )
                     if (
-                      (this.avgTimes.clientTime.push(i - n),
+                      (this.avgTimes.clientTime.push(endTime - startTime),
                       this.avgTimes.streamTime.length > 20 &&
                         (this.avgTimes.streamTime =
                           this.avgTimes.streamTime.slice(-20)),
@@ -17430,185 +17437,185 @@
                       this.avgTimes.ttftTime.length > 20 &&
                         (this.avgTimes.ttftTime =
                           this.avgTimes.ttftTime.slice(-20)),
-                      !s)
+                      !isAborted)
                     ) {
                       this.avgTimes.discrepencies.length > 0 &&
                         u.CppLogger.info(
                           "Average of latest 20 discrepencies",
                           this.avgTimes.discrepencies.reduce(
-                            (e, t) => e + t,
+                            (sum, val) => sum + val,
                             0,
                           ) / this.avgTimes.discrepencies.length,
                         ),
                         u.CppLogger.info(
                           "Average of latest 20 ttft time",
-                          this.avgTimes.ttftTime.reduce((e, t) => e + t, 0) /
+                          this.avgTimes.ttftTime.reduce((sum, val) => sum + val, 0) /
                             this.avgTimes.ttftTime.length,
                         ),
                         u.CppLogger.info(
                           "Average of latest 20 stream time",
-                          this.avgTimes.streamTime.reduce((e, t) => e + t, 0) /
+                          this.avgTimes.streamTime.reduce((sum, val) => sum + val, 0) /
                             this.avgTimes.streamTime.length,
                         ),
                         u.CppLogger.info(
                           "Average of latest 20 total time",
-                          this.avgTimes.totalTime.reduce((e, t) => e + t, 0) /
+                          this.avgTimes.totalTime.reduce((sum, val) => sum + val, 0) /
                             this.avgTimes.totalTime.length,
                         ),
                         u.CppLogger.info(
                           "Average of latest 20 client time",
-                          this.avgTimes.clientTime.reduce((e, t) => e + t, 0) /
+                          this.avgTimes.clientTime.reduce((sum, val) => sum + val, 0) /
                             this.avgTimes.clientTime.length,
                         ),
                         u.CppLogger.info(
                           "Average of latest 20 discrepencies",
                           this.avgTimes.discrepencies.reduce(
-                            (e, t) => e + t,
+                            (sum, val) => sum + val,
                             0,
                           ) / this.avgTimes.discrepencies.length,
                         ),
                         u.CppLogger.info("CPP RT LOG: All stats", {
-                          streamingtime: i - n,
-                          actualTtftFromStart: y - t.startOfCpp,
-                          timeTillServerRequest: o - t.startOfCpp,
-                          requestToTtft: y - o,
-                          totalTime: i - t.startOfCpp,
+                          streamingtime: endTime - startTime,
+                          actualTtftFromStart: firstTokenTime - config.startOfCpp,
+                          timeTillServerRequest: requestStartTime - config.startOfCpp,
+                          requestToTtft: firstTokenTime - requestStartTime,
+                          totalTime: endTime - config.startOfCpp,
                         }),
-                        this.succeeded.push(t.generateUuid),
+                        this.succeeded.push(config.generateUuid),
                         (this.succeeded = this.succeeded.slice(-20))
                       try {
-                        const r = {
-                          requestId: t.generateUuid,
+                        const report = {
+                          requestId: config.generateUuid,
                           relativeWorkspacePath:
-                            e.currentFile?.relativeWorkspacePath ?? "",
-                          timestamp: n,
-                          modelName: e.modelName ?? "unspecified",
+                            request.currentFile?.relativeWorkspacePath ?? "",
+                          timestamp: startTime,
+                          modelName: request.modelName ?? "unspecified",
                           metrics: {
-                            timeToFirstToken: y - t.startOfCpp,
-                            serverTimeToFirstToken: I.debugTtftTime
-                              ? parseFloat(I.debugTtftTime)
+                            timeToFirstToken: firstTokenTime - config.startOfCpp,
+                            serverTimeToFirstToken: debugInfo.debugTtftTime
+                              ? parseFloat(debugInfo.debugTtftTime)
                               : 0,
-                            streamingTime: i - n,
-                            totalTime: i - t.startOfCpp,
-                            requestToTtft: y - o,
+                            streamingTime: endTime - startTime,
+                            totalTime: endTime - config.startOfCpp,
+                            requestToTtft: firstTokenTime - requestStartTime,
                           },
                           debugInfo: {
-                            modelInput: I.modelInput,
-                            modelOutput: I.modelOutput,
-                            serverTimings: I.debugServerTiming
-                              ? h(I.debugServerTiming)
-                              : void 0,
-                            streamTime: I.debugStreamTime,
-                            totalTime: I.debugTotalTime,
-                            ttftTime: I.debugTtftTime,
+                            modelInput: debugInfo.modelInput,
+                            modelOutput: debugInfo.modelOutput,
+                            serverTimings: debugInfo.debugServerTiming
+                              ? h(debugInfo.debugServerTiming)
+                              : undefined,
+                            streamTime: debugInfo.debugStreamTime,
+                            totalTime: debugInfo.debugTotalTime,
+                            ttftTime: debugInfo.debugTtftTime,
                           },
                         }
-                        this.cppEvents.unshift(r),
+                        this.cppEvents.unshift(report),
                           this.cppEvents.length > 20 &&
                             (this.cppEvents = this.cppEvents.slice(0, 20))
-                      } catch (e) {
+                      } catch (error) {
                         u.CppLogger.info(
                           "CURSOR LOG: Error in adding cpp report event",
-                          e,
+                          error,
                         )
                       }
                     }
-                  } catch (n) {
-                    if (n instanceof a.ConnectError) {
+                  } catch (error) {
+                    if (error instanceof a.ConnectError) {
                       if (
                         (u.CppLogger.info(
                           "CURSOR LOG: Error in streaming cpp (connect error)",
-                          n.message,
+                          error.message,
                         ),
-                        n
+                        error
                           .findDetails(m.ErrorDetails)
                           .some(
-                            (e) =>
-                              e.error === m.ErrorDetails_Error.FILE_NOT_FOUND,
-                          ) && !0 !== t.retryWithoutFilesync)
+                            (detail) =>
+                              detail.error === m.ErrorDetails_Error.FILE_NOT_FOUND,
+                          ) && true !== config.retryWithoutFilesync)
                       )
                         return (
                           this.fileSyncer.resetSequentialSuccessfulSync(
-                            e.currentFile?.relativeWorkspacePath ?? "",
+                            request.currentFile?.relativeWorkspacePath ?? "",
                           ),
                           d.FileSyncLogger.error(
                             "Error in getting file contents for cpp",
-                            n.message,
+                            error.message,
                           ),
-                          await this.streamCpp(e, {
-                            ...t,
-                            retryWithoutFilesync: !0,
+                          await this.streamCpp(request, {
+                            ...config,
+                            retryWithoutFilesync: true,
                           })
                         )
                     } else
                       u.CppLogger.info(
                         "CURSOR LOG: Error in streaming cpp (not connect error)",
-                        n,
+                        error,
                       )
                   }
                 })()
-              } catch (e) {
-                null != e.message &&
-                  e.message.includes("ENHANCE_YOUR_CALM") &&
+              } catch (error) {
+                null != error.message &&
+                  error.message.includes("ENHANCE_YOUR_CALM") &&
                   (u.CppLogger.info(
                     "CURSOR LOG: Refreshing cpp client",
-                    t.generateUuid,
+                    config.generateUuid,
                   ),
                   this.aiConnectTransport.refresh()),
                   u.CppLogger.info(
                     "CURSOR LOG: Error in streaming cpp (setup call)",
-                    e.message,
+                    error.message,
                   )
               }
-              u.CppLogger.info("CURSOR LOG: requestId", t.generateUuid, " ")
+              u.CppLogger.info("CURSOR LOG: requestId", config.generateUuid, " ")
             }
           }
           cancelCpp(e) {
             this.abortCpp(e)
           }
-          flushCpp(e) {
-            const t = this.streams.find((t) => t.generationUUID === e)
-            if (void 0 === t)
-              return this.succeeded.includes(e)
+          flushCpp(generationUUID) {
+            const stream = this.streams.find((stream) => stream.generationUUID === generationUUID)
+            if (undefined === stream)
+              return this.succeeded.includes(generationUUID)
                 ? {
                     type: "success",
-                    rangeToReplaceOneIndexed: void 0,
-                    cursorPredictionTarget: void 0,
-                    doneEdit: void 0,
+                    rangeToReplaceOneIndexed: undefined,
+                    cursorPredictionTarget: undefined,
+                    doneEdit: undefined,
                     buffer: ["m4CoTMbqtR9vV1zd"],
-                    modelInfo: void 0,
+                    modelInfo: undefined,
                   }
                 : { type: "failure", reason: "stream not found" }
-            if (performance.now() - (t?.startTime ?? 0) > 4e3)
+            if (performance.now() - (stream?.startTime ?? 0) > 4e3)
               return (
                 (this.streams = this.streams.filter(
-                  (t) => t.generationUUID !== e,
+                  (stream) => stream.generationUUID !== generationUUID,
                 )),
                 { type: "failure", reason: "stream took too long" }
               )
-            const n = t.buffer
+            const buffer = stream.buffer
             return (
-              (t.buffer = []),
-              this.succeeded.includes(e) &&
+              (stream.buffer = []),
+              this.succeeded.includes(generationUUID) &&
                 (this.streams = this.streams.filter(
-                  (t) => t.generationUUID !== e,
+                  (stream) => stream.generationUUID !== generationUUID,
                 )),
               {
                 type: "success",
-                rangeToReplaceOneIndexed: t?.rangeToReplace ?? void 0,
-                doneEdit: t?.doneEdit ?? void 0,
-                cursorPredictionTarget: t?.cursorPredictionTarget
+                rangeToReplaceOneIndexed: stream?.rangeToReplace ?? undefined,
+                doneEdit: stream?.doneEdit ?? undefined,
+                cursorPredictionTarget: stream?.cursorPredictionTarget
                   ? {
-                      relativePath: t.cursorPredictionTarget.relativePath,
+                      relativePath: stream.cursorPredictionTarget.relativePath,
                       lineNumberOneIndexed:
-                        t.cursorPredictionTarget.lineNumberOneIndexed,
-                      text: t.cursorPredictionTarget.expectedContent,
+                        stream.cursorPredictionTarget.lineNumberOneIndexed,
+                      text: stream.cursorPredictionTarget.expectedContent,
                       shouldRetriggerCpp:
-                        t.cursorPredictionTarget.shouldRetriggerCpp,
+                        stream.cursorPredictionTarget.shouldRetriggerCpp,
                     }
-                  : void 0,
-                buffer: n,
-                modelInfo: t?.modelInfo ?? void 0,
+                  : undefined,
+                buffer: buffer,
+                modelInfo: stream?.modelInfo ?? undefined,
               }
             )
           }
