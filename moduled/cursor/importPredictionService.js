@@ -1,7 +1,7 @@
 // @ts-check
 
 export function createImportPredictionService(params) {
-  const {V, __decorate, __param, Pt: themeService, ue: configurationService, ei, Ve, it, mo, Z, metricsService, cppTypeService, everythingProviderService, yi, Xt, cl, cppEventLoggerService, zi, aiFeatureStatusService, st, aiAssertService, importPredictionService, LRUCache, DYe, fu, rt, q, W, Un, Va, Ri, ys, ddi, DHe, Ze, gI, G, mp, lp, Me, GB, CppIntent, P1t, HMi, hG, y7, g1, Kh, U, pm } = params;
+  const {V, __decorate, __param, Pt: themeService, ue: configurationService, ei, Ve, it, mo, Z, metricsService, cppTypeService, everythingProviderService, yi, Xt, cl, cppEventLoggerService, zi, aiFeatureStatusService, st, aiAssertService, importPredictionService, LRUCache, DYe, fu, rt, q, W, Un, Va, Ri, ys, MAX_DIAGNOSTIC_DISTANCE, DHe, Ze, gI, G, mp, lp, Me, GB, CppIntent, P1t, HMi, hG, y7, g1, Kh, U, pm } = params;
 
   var bdi,
     vdi = class extends V {
@@ -244,7 +244,7 @@ export function createImportPredictionService(params) {
             return g !== void 0 && g.seenAt.getTime() > Date.now() - jgo
               ? (g.currentMarkers.push(h),
                 g.status === "debouncing" ? ((g.status = "computing"), !0) : !1)
-              : Math.abs(h.startLineNumber - s.lineNumber) >= ddi
+              : Math.abs(h.startLineNumber - s.lineNumber) >= MAX_DIAGNOSTIC_DISTANCE
                 ? !1
                 : (this.m.set(this.Z(e, h), {
                     uri: t,
