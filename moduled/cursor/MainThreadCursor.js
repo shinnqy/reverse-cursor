@@ -49,7 +49,7 @@ export function createMainThreadCursor(params) {
         (this.r = l),
         (this.s = c),
         (this.t = h),
-        (this.u = u),
+        (this.u = u), (this.everythingProviderService = this.u),
         (this.w = d),
         (this.y = g),
         (this.z = p),
@@ -508,17 +508,17 @@ export function createMainThreadCursor(params) {
     }
     async $registerEverythingProvider() {
       const e = (t, s) => this.a.$getEverythingProviderRunCommand(t, s)
-      this.u.registerEverythingProvider({ runCommand: e })
+      this.everythingProviderService.registerEverythingProvider({ runCommand: e })
     }
     async $unregisterEverythingProvider() {
-      this.u.unregisterEverythingProvider()
+      this.everythingProviderService.unregisterEverythingProvider()
     }
     async $registerEverythingProviderAllLocal() {
       const e = (t, s) => this.a.$getEverythingAllLocalProviderRunCommand(t, s)
-      this.u.registerEverythingProviderAllLocal({ runCommand: e })
+      this.everythingProviderService.registerEverythingProviderAllLocal({ runCommand: e })
     }
     async $unregisterEverythingProviderAllLocal() {
-      this.u.unregisterEverythingProviderAllLocal()
+      this.everythingProviderService.unregisterEverythingProviderAllLocal()
     }
     async $showWebCmdKInputBox(e) {
       return this.y.showWebCmdKInputBox(e)

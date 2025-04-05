@@ -2,7 +2,7 @@
 
 
 export function createCppService(params) {
-  const {V, EYe, G, LRUCache, Qfo, SuggestionCache, SuggestionManager, MutableDisposable, J: DisposableStore, RequestDebouncer, um, hF, ss, CppIntent, JB, onDidRegisterWindow, fu, Va, nze, WEn, m2i, qEn, b2i, S9, $, Hae, m0t, Ad, fUe, Sp, VB, replaceTextInRange, generateModifiedText, EditHistoryDiffFormatter, VS: getWindows, NYi, CURSOR_PREDICTION, Ri: MarkerSeverity, ce: Schemas, Pn, Cg, GhostTextController, MMs, U, mu, Me, ys, $fo, qdt, Ffo, normalizeSeverity, uI, formatRelatedInformation, Cf: LinterErrors, hG: StreamCppRequestControlToken, mR, fm, gle, xr, Gr, GB, QN, Ycr, Yt, D1t, Kf, rt, handleStreamWithPredictions, handleChunkedStream, consumeRemainingStream, Hu, Aoe, Qcr, TKn, F_, tdi, _fo, rge, OFt, Xfo, Ui, ZXe: computeDiffs, k7, RKi, jBt, qfo, Ho: CurrentFileInfo, Qm, T1t, Xf, oj, ee, j, Je, CppDiffPeekViewWidget, cppService, ei, wf, yi, Ci, $h} = params;
+  const {V, EYe, G, LRUCache, EditHistoryCache, SuggestionCache, SuggestionManager, MutableDisposable, J: DisposableStore, RequestDebouncer, um, hF, ss, CppIntent, JB, onDidRegisterWindow, fu, Va, nze, WEn, m2i, qEn, b2i, S9, $, Hae, m0t, Ad, fUe, Sp, VB, replaceTextInRange, generateModifiedText, EditHistoryDiffFormatter, VS: getWindows, NYi, CURSOR_PREDICTION, Ri: MarkerSeverity, ce: Schemas, Pn, Cg, GhostTextController, isPureEmptyLineInsertion, U, mu, Me, ys, $fo, qdt, Ffo, normalizeSeverity, uI, formatRelatedInformation, Cf: LinterErrors, hG: StreamCppRequestControlToken, mR, fm, gle, xr, Gr, GB, QN, Ycr, Yt: VSBuffer, StreamCppRequest, Kf, rt, handleStreamWithPredictions, handleChunkedStream, consumeRemainingStream, Hu, Aoe, Qcr, TKn, F_, tdi, _fo, rge, OFt, Xfo, Ui, ZXe: computeDiffs, k7, RKi, jBt, isEditOnShortestPath, Ho: CurrentFileInfo, Qm, T1t, Xf, oj, ee, j, Je, CppDiffPeekViewWidget, cppService, ei, wf, yi, Ci, $h} = params;
 
   var bgo = class zmi extends ee {
     static {
@@ -324,7 +324,7 @@ export function createCppService(params) {
         (this.G = new LRUCache(3)), (this.modelValueCache = this.G),
         (this.I = []),
         (this.J = []),
-        (this.L = new Qfo(2)),
+        (this.L = new EditHistoryCache(2)), (this.editHistoryCache = this.L),
         (this.M = new SuggestionCache(5)), (this.suggestionCache = this.M),
         (this.N = new SuggestionManager(5, 6)), (this.suggestionManager = this.N),
         (this.O = new LRUCache(3)), (this.decorationCache = this.O),
@@ -1665,7 +1665,7 @@ export function createCppService(params) {
         })
       }
       if (this.isOnShortestEditPath({ event: contentChangeEvent, model: model }, context))
-        return MMs(contentChangeEvent.changes) && adjustSuggestionPosition(), formatAndUpdate()
+        return isPureEmptyLineInsertion(contentChangeEvent.changes) && adjustSuggestionPosition(), formatAndUpdate()
       const shouldAbortAll = this.Ub(contentChangeEvent) || this.getApplicationUserPersistentStorage().cppCachedTypeaheadEnabled !== true
       if (
         (this.markEditAsRejected(editor, true),
@@ -2763,8 +2763,8 @@ export function createCppService(params) {
           })
         }),
         await this.cppProvider.streamCpp(
-          Yt.wrap(
-            new D1t({
+          VSBuffer.wrap(
+            new StreamCppRequest({
               ...partialCppRequest,
               modelName: this.getModelName(),
               diffHistoryKeys: [],
@@ -3486,7 +3486,7 @@ export function createCppService(params) {
             },
           )
           return (
-            this.L.addEdit(c.edit),
+            this.editHistoryCache.addEdit(c.edit),
             g && s.setPosition(g[0].getSelectionStart()),
             c
           )
@@ -3933,9 +3933,9 @@ export function createCppService(params) {
         previousContext = cachedModelValue
       } else previousContext = context
       const previousModelValue = jBt(previousContext, model.uri)
-      return this.L.checkChangeExists(event, true)
+      return this.editHistoryCache.checkChangeExists(event, true)
         ? true
-        : qfo({
+        : isEditOnShortestPath({
             event,
             model,
             proposedSuggestion,
