@@ -2,7 +2,7 @@
 
 
 export function createCppService(params) {
-  const {V, EYe, G, LRUCache, Qfo, SuggestionCache, SuggestionManager, MutableDisposable, J, RequestDebouncer, um, hF, ss, CppIntent, JB, onDidRegisterWindow, fu, Va, nze, WEn, m2i, qEn, b2i, S9, $, Hae, m0t, Ad, fUe, Sp, VB, replaceTextInRange, generateModifiedText, EditHistoryDiffFormatter, VS: getWindows, NYi, CURSOR_PREDICTION, Ri, ce, Pn, Cg, GhostTextController, MMs, U, mu, Me, ys, $fo, qdt, Ffo, dze, uI, BMs, Cf, hG, mR, fm, gle, xr, Gr, GB, QN, Ycr, Yt, D1t, Kf, rt, handleStreamWithPredictions, handleChunkedStream, consumeRemainingStream, Hu, Aoe, Qcr, TKn, F_, tdi, _fo, rge, OFt, Xfo, Ui, ZXe: computeDiffs, k7, RKi, jBt, qfo, Ho, Qm, T1t, Xf, oj, ee, j, Je, CppDiffPeekViewWidget, cppService, ei, wf, yi, Ci, $h} = params;
+  const {V, EYe, G, LRUCache, Qfo, SuggestionCache, SuggestionManager, MutableDisposable, J, RequestDebouncer, um, hF, ss, CppIntent, JB, onDidRegisterWindow, fu, Va, nze, WEn, m2i, qEn, b2i, S9, $, Hae, m0t, Ad, fUe, Sp, VB, replaceTextInRange, generateModifiedText, EditHistoryDiffFormatter, VS: getWindows, NYi, CURSOR_PREDICTION, Ri: MarkerSeverity, ce: Schemas, Pn, Cg, GhostTextController, MMs, U, mu, Me, ys, $fo, qdt, Ffo, dze, uI, BMs, Cf, hG, mR, fm, gle, xr, Gr, GB, QN, Ycr, Yt, D1t, Kf, rt, handleStreamWithPredictions, handleChunkedStream, consumeRemainingStream, Hu, Aoe, Qcr, TKn, F_, tdi, _fo, rge, OFt, Xfo, Ui, ZXe: computeDiffs, k7, RKi, jBt, qfo, Ho, Qm, T1t, Xf, oj, ee, j, Je, CppDiffPeekViewWidget, cppService, ei, wf, yi, Ci, $h} = params;
 
   var bgo = class zmi extends ee {
     static {
@@ -210,7 +210,7 @@ export function createCppService(params) {
     Rgo = 1e3 * 60 * 15,
     QMs = 1e5,
     ZMs = 1e4,
-    ddi = 20,
+    MAX_DIAGNOSTIC_DISTANCE = 20,
     e$s = 3,
     Ave = 300,
     Ago = false,
@@ -312,7 +312,7 @@ export function createCppService(params) {
         (this.h = 0),
         (this.pauseCppTriggeringUntilUnpaused_DANGEROUS_ONLY_SET_IF_YOU_KNOW_WHAT_YOU_ARE_DOING =
           false),
-        (this.j = new LRUCache(20)),
+        (this.j = new LRUCache(20)), (this.recentlyViewedFilesCache = this.j),
         (this.m = new Map()), (this.modelListeners2EditorMap = this.m),
         (this.n = new Map()), (this.editorListenersMap = this.n),
         (this.q = undefined),
@@ -802,7 +802,7 @@ export function createCppService(params) {
       let t
       if (e !== null) {
         const n = e.getModel()
-        if (n == null || this.Wb(n) || this.selectedContextService.shouldIgnoreUri(n.uri)) return false
+        if (n == null || this.isTextLengthTooLarge(n) || this.selectedContextService.shouldIgnoreUri(n.uri)) return false
         t = { languageId: KMs(n), fsPath: this.contextService.asRelativePath(n.uri) }
       }
       let s
@@ -850,7 +850,7 @@ export function createCppService(params) {
         }
       )
     }
-    filterLinterErrors(e, t = Ri.Error) {
+    filterLinterErrors(e, t = MarkerSeverity.Error) {
       return e
         .filter((s) => s.severity >= t)
         .filter(
@@ -1420,18 +1420,18 @@ export function createCppService(params) {
                   event.source === "restoreState")
                 )
                   return
-                let c = this.markerService
+                let nearbyMarkers = this.markerService
                   .read({ resource: uri })
                   .filter(
-                    (h) =>
-                      [Ri.Error, Ri.Warning].includes(h.severity) &&
-                      Math.abs(h.startLineNumber - event.position.lineNumber) <=
-                        ddi,
+                    (marker) =>
+                      [MarkerSeverity.Error, MarkerSeverity.Warning].includes(marker.severity) &&
+                      Math.abs(marker.startLineNumber - event.position.lineNumber) <=
+                        MAX_DIAGNOSTIC_DISTANCE,
                   )
                   .filter(
-                    (h) =>
-                      h.severity === Ri.Error &&
-                      Math.abs(h.startLineNumber - event.position.lineNumber) <= 1,
+                    (marker) =>
+                      marker.severity === MarkerSeverity.Error &&
+                      Math.abs(marker.startLineNumber - event.position.lineNumber) <= 1,
                   )
                 if (this.getApplicationUserPersistentStorage().cppEnabled === true) {
                   const selection = editor.getSelection()
@@ -1440,7 +1440,7 @@ export function createCppService(params) {
                     return
                   }
                   const currentSuggestion = this.getCurrentSuggestion()
-                  let d = false
+                  let isWithinSuggestionRange = false
                   const model = editor.getModel()
                   if (model === null) return
                   if (currentSuggestion === undefined)
@@ -1461,32 +1461,33 @@ export function createCppService(params) {
                         currentSuggestion.startingSuggestionRange.startLineNumber,
                       startColumn: currentSuggestion.startingSuggestionRange.startColumn,
                     }
-                    ;(d = !!(suggestionDecoration.range !== null && selection.intersectRanges(w))),
-                      d ||
+                    ;(isWithinSuggestionRange = !!(suggestionDecoration.range !== null && selection.intersectRanges(w))),
+                      isWithinSuggestionRange ||
                         (this.markEditAsRejected(editor, false),
                         this.rejectAndResetAllCppSuggestions(),
                         this.cursorPredictionService.maybeShowHintLineWidget())
                   }
+                  // 1. 检查streamRequest得不一样，避免重复请求；2. 检查光标不在建议范围内，避免干扰用户操作
                   if (
                     // this.streams
                     !this.R.find(
-                      (b) =>
-                        b.modelId === model.id &&
-                        b.modelVersion === model.getVersionId() &&
-                        b.position !== undefined &&
-                        b.position.equals(event.position),
+                      (streamRequest) =>
+                        streamRequest.modelId === model.id &&
+                        streamRequest.modelVersion === model.getVersionId() &&
+                        streamRequest.position !== undefined &&
+                        streamRequest.position.equals(event.position),
                     ) &&
-                    !d
+                    !isWithinSuggestionRange
                   )
                     if (this.getApplicationUserPersistentStorage().cppFireOnEveryCursorChange === true)
                       this.fireCppSuggestionDebounced(editor, CppIntent.LineChange)
                     else if (
-                      (c.length > 0 || Ago) &&
-                      this.q !== event.position.lineNumber
+                      (nearbyMarkers.length > 0 || Ago) &&
+                      this.q !== event.position.lineNumber // this.p(lastTriggeredLine)
                     )
                       this.fireCppSuggestionDebounced(editor, CppIntent.LinterErrors)
                     else {
-                      const linesAreTheSame = this.q === event.position.lineNumber,
+                      const linesAreTheSame = this.q === event.position.lineNumber, // this.p(lastTriggeredLine)
                         hasRejectedTooManySuggestions = this.Rb(),
                         isUserReadingCode = this.Sb()
                       !linesAreTheSame && !hasRejectedTooManySuggestions && !isUserReadingCode
@@ -1539,65 +1540,65 @@ export function createCppService(params) {
         this.lastEditTime === undefined || Date.now() - this.lastEditTime >= 6e4
       )
     }
-    Tb(e) {
-      const t = e.getId(),
-        s = this.getApplicationUserPersistentStorage().cppConfig?.excludeRecentlyViewedFilesPatterns ?? []
-      this.editorListenersMap.has(t) || this.editorListenersMap.set(t, []),
-        this.editorListenersMap.get(t).push(
+    Tb(editor) {
+      const editorId = editor.getId(),
+        excludeRecentlyViewedFilesPatterns = this.getApplicationUserPersistentStorage().cppConfig?.excludeRecentlyViewedFilesPatterns ?? []
+      this.editorListenersMap.has(editorId) || this.editorListenersMap.set(editorId, []),
+        this.editorListenersMap.get(editorId).push(
           this.D(
-            e.onDidFocusEditorText(() => {
-              const n = e.getModel()
-              if (n == null) return
-              const r = this.contextService.asRelativePath(n.uri),
-                o = [
-                  ce.file,
-                  ce.inMemory,
-                  ce.vscodeNotebookCell,
-                  ce.vscodeFileResource,
-                  ce.vscodeRemote,
-                  ce.vscodeRemoteResource,
-                  ce.vscodeManagedRemoteResource,
+            editor.onDidFocusEditorText(() => {
+              const model = editor.getModel()
+              if (model == null) return
+              const relativePath = this.contextService.asRelativePath(model.uri),
+                allowedSchemes = [
+                  Schemas.file,
+                  Schemas.inMemory,
+                  Schemas.vscodeNotebookCell,
+                  Schemas.vscodeFileResource,
+                  Schemas.vscodeRemote,
+                  Schemas.vscodeRemoteResource,
+                  Schemas.vscodeManagedRemoteResource,
                 ]
               if (
-                !Pn(e) ||
-                s.some((c) => r.includes(c)) ||
-                !o.some((c) => Cg(n.uri, c))
+                !Pn(editor) ||
+                excludeRecentlyViewedFilesPatterns.some((pattern) => relativePath.includes(pattern)) ||
+                !allowedSchemes.some((scheme) => Cg(model.uri, scheme))
               )
                 return
-              const a = e.getVisibleRanges(),
-                l = n.uri
-              this.j.set(l, { visibleRanges: a, lastViewedAt: Date.now() }),
+              const visibleRanges = editor.getVisibleRanges(),
+                uri = model.uri
+              this.recentlyViewedFilesCache.set(uri, { visibleRanges: visibleRanges, lastViewedAt: Date.now() }),
                 this.getApplicationUserPersistentStorage().cppAutoImportEnabled &&
                   this.showNearLocationLintErrorsToImportPredictionService({
-                    editor: e,
-                    uri: l,
+                    editor: editor,
+                    uri: uri,
                     source: "onDidFocusEditorText",
                   })
             }),
           ),
         ),
-        this.editorListenersMap.has(t) || this.editorListenersMap.set(t, []),
-        this.editorListenersMap.get(t).push(
+        this.editorListenersMap.has(editorId) || this.editorListenersMap.set(editorId, []),
+        this.editorListenersMap.get(editorId).push(
           this.D(
-            e.onDidScrollChange(() => {
-              const n = e.getModel(),
-                r = n?.uri
-              if (n == null || r == null) return
-              const o = this.contextService.asRelativePath(r),
-                a = [
-                  ce.file,
-                  ce.inMemory,
-                  ce.vscodeNotebookCell,
-                  ce.vscodeFileResource,
-                  ce.vscodeRemote,
-                  ce.vscodeRemoteResource,
-                  ce.vscodeManagedRemoteResource,
+            editor.onDidScrollChange(() => {
+              const model = editor.getModel(),
+                uri = model?.uri
+              if (model == null || uri == null) return
+              const relativePath = this.contextService.asRelativePath(uri),
+                allowedSchemes = [
+                  Schemas.file,
+                  Schemas.inMemory,
+                  Schemas.vscodeNotebookCell,
+                  Schemas.vscodeFileResource,
+                  Schemas.vscodeRemote,
+                  Schemas.vscodeRemoteResource,
+                  Schemas.vscodeManagedRemoteResource,
                 ]
-              !Pn(e) ||
-                s.some((l) => o.includes(l)) ||
-                !a.some((l) => Cg(r, l)) ||
-                this.j.set(r, {
-                  visibleRanges: e.getVisibleRanges(),
+              !Pn(editor) ||
+                excludeRecentlyViewedFilesPatterns.some((pattern) => relativePath.includes(pattern)) ||
+                !allowedSchemes.some((scheme) => Cg(uri, scheme)) ||
+                this.recentlyViewedFilesCache.set(uri, {
+                  visibleRanges: editor.getVisibleRanges(),
                   lastViewedAt: Date.now(),
                 })
             }),
@@ -1625,7 +1626,7 @@ export function createCppService(params) {
         if (
           markers.filter(
             (marker) =>
-              marker.severity === Ri.Error &&
+              marker.severity === MarkerSeverity.Error &&
               Math.abs(marker.startLineNumber - cursorPosition.lineNumber) <= 1,
           ).length > 0
         ) {
@@ -1639,7 +1640,7 @@ export function createCppService(params) {
         oa("[Cpp] continueModelChangeListener - shouldNotTrigger is true")
         return
       }
-      if (this.Wb(model)) return
+      if (this.isTextLengthTooLarge(model)) return
       const formatAndUpdate = async () => {
         await this.formatDiffHistory(contentChangeEvent, editor, model, EOL), GhostTextController.get(editor)?.update()
       }
@@ -1705,7 +1706,7 @@ export function createCppService(params) {
       return this.modelValueCache.get(t)
     }
     async registerModelListenerToEditorModel(editor, model) {
-      if (this.Wb(model)) {
+      if (this.isTextLengthTooLarge(model)) {
         oa(
           `[Cpp] registerModelListenerToEditorModel: Suppressing trigger because file is too large: filename: ${model.uri.fsPath}, length: ${model.getValueLength()}`,
         )
@@ -1845,14 +1846,17 @@ export function createCppService(params) {
             ),
           )
     }
-    Wb(e) {
-      return e.getValueLength() > hdi
+    Wb(model) {
+      return model.getValueLength() > hdi
+    }
+    isTextLengthTooLarge(model) {
+      return this.Wb(model);
     }
     fireCppSuggestionDebounced(editor, intentSource) {
       if (!editor) return
       const model = editor.getModel(),
         uri = model?.uri
-      if (!uri || this.Wb(model)) return
+      if (!uri || this.isTextLengthTooLarge(model)) return
       const { requestIdsToCancel, ...restRequestOpts } = this.requestDebouncer.runRequest()
       this.R.forEach((streamRequest) => {
         requestIdsToCancel.includes(streamRequest.generationUUID) && streamRequest.abortController.abort()
@@ -1878,7 +1882,7 @@ export function createCppService(params) {
       if (!editor) return
       const model = editor.getModel(),
         uri = model?.uri
-      if (!uri || this.Wb(model)) return
+      if (!uri || this.isTextLengthTooLarge(model)) return
       const selectionRange = editor.getSelection()
       if (
         selectionRange !== null &&
@@ -1904,7 +1908,7 @@ export function createCppService(params) {
         return
       }
       const model = editor.getModel()
-      if (model === null || this.Wb(model)) return
+      if (model === null || this.isTextLengthTooLarge(model)) return
       if (
         this.getCurrentSuggestion() !== undefined &&
         intentSource !== CppIntent.LinterErrors &&
@@ -2009,7 +2013,7 @@ export function createCppService(params) {
         }
       this.disableAndHideCopilotSuggestion(editor)
       const model = editor.getModel()
-      if (model === null || this.Wb(model)) return
+      if (model === null || this.isTextLengthTooLarge(model)) return
       const modelValue = model.getValue(),
         modelVersion = model.getVersionId(),
         position = options?.overridePosition ?? editor.getPosition()
@@ -2306,8 +2310,8 @@ export function createCppService(params) {
       const n = e.getPosition()
       if (n === null) return
       const r = this.markerService.read({ resource: t })
-      let a = this.filterLinterErrors(r, Ri.Warning).filter(
-        (l) => Math.abs(l.startLineNumber - n.lineNumber) <= ddi,
+      let a = this.filterLinterErrors(r, MarkerSeverity.Warning).filter(
+        (l) => Math.abs(l.startLineNumber - n.lineNumber) <= MAX_DIAGNOSTIC_DISTANCE,
       )
       this.importPredictionService.handleUpdatedLintErrors({
         openEditor: e,
@@ -2476,7 +2480,7 @@ export function createCppService(params) {
         const l = [],
           c = new J()
         try {
-          for (const [u, d] of this.j.entries())
+          for (const [u, d] of this.recentlyViewedFilesCache.entries())
             if (t !== u)
               try {
                 const g = this.contextService.asRelativePath(u)
@@ -2523,7 +2527,7 @@ export function createCppService(params) {
         } finally {
           c.dispose()
         }
-        for (const u of l) this.j.delete(u)
+        for (const u of l) this.recentlyViewedFilesCache.delete(u)
         return n.sort((u, d) =>
           u.isOpen !== d.isOpen
             ? u.isOpen
@@ -4042,7 +4046,7 @@ export function createCppService(params) {
       })
     }
     async fastCurrentFileInfoDoesNotWorkForNotebooks(e, t, s, n, r) {
-      if (e.scheme !== ce.aiChat && s !== null)
+      if (e.scheme !== Schemas.aiChat && s !== null)
         return new Ho({
           relativeWorkspacePath: this.contextService.asRelativePath(e),
           contents: t,
@@ -4101,6 +4105,6 @@ export function createCppService(params) {
 
   return {
     CppService,
-    ddi,
+    MAX_DIAGNOSTIC_DISTANCE,
   };
 }
