@@ -2,7 +2,7 @@
 
 
 export function createCppService(params) {
-  const {V, EYe, G, LRUCache, Qfo, SuggestionCache, SuggestionManager, MutableDisposable, J: DisposableStore, RequestDebouncer, um, hF, ss, CppIntent, JB, onDidRegisterWindow, fu, Va, nze, WEn, m2i, qEn, b2i, S9, $, Hae, m0t, Ad, fUe, Sp, VB, replaceTextInRange, generateModifiedText, EditHistoryDiffFormatter, VS: getWindows, NYi, CURSOR_PREDICTION, Ri: MarkerSeverity, ce: Schemas, Pn, Cg, GhostTextController, MMs, U, mu, Me, ys, $fo, qdt, Ffo, dze, uI, BMs, Cf, hG: StreamCppRequestControlToken, mR, fm, gle, xr, Gr, GB, QN, Ycr, Yt, D1t, Kf, rt, handleStreamWithPredictions, handleChunkedStream, consumeRemainingStream, Hu, Aoe, Qcr, TKn, F_, tdi, _fo, rge, OFt, Xfo, Ui, ZXe: computeDiffs, k7, RKi, jBt, qfo, Ho: CurrentFileInfo, Qm, T1t, Xf, oj, ee, j, Je, CppDiffPeekViewWidget, cppService, ei, wf, yi, Ci, $h} = params;
+  const {V, EYe, G, LRUCache, Qfo, SuggestionCache, SuggestionManager, MutableDisposable, J: DisposableStore, RequestDebouncer, um, hF, ss, CppIntent, JB, onDidRegisterWindow, fu, Va, nze, WEn, m2i, qEn, b2i, S9, $, Hae, m0t, Ad, fUe, Sp, VB, replaceTextInRange, generateModifiedText, EditHistoryDiffFormatter, VS: getWindows, NYi, CURSOR_PREDICTION, Ri: MarkerSeverity, ce: Schemas, Pn, Cg, GhostTextController, MMs, U, mu, Me, ys, $fo, qdt, Ffo, normalizeSeverity, uI, formatRelatedInformation, Cf: LinterErrors, hG: StreamCppRequestControlToken, mR, fm, gle, xr, Gr, GB, QN, Ycr, Yt, D1t, Kf, rt, handleStreamWithPredictions, handleChunkedStream, consumeRemainingStream, Hu, Aoe, Qcr, TKn, F_, tdi, _fo, rge, OFt, Xfo, Ui, ZXe: computeDiffs, k7, RKi, jBt, qfo, Ho: CurrentFileInfo, Qm, T1t, Xf, oj, ee, j, Je, CppDiffPeekViewWidget, cppService, ei, wf, yi, Ci, $h} = params;
 
   var bgo = class zmi extends ee {
     static {
@@ -205,8 +205,8 @@ export function createCppService(params) {
     XMs = "cpp-suggestion-text-decoration-showing",
     udi = "cpp-suggestion-text-decoration-showing-streaming",
     Pgo = "cpp-suggestion-text-decoration-showing-gutter",
-    Lgo = 10,
-    Ngo = 10,
+    MAX_HISTORIC_ERRORS = 10,
+    MAX_CURRENT_ERRORS = 10,
     FIFTEEN_MINUTES_MS = 1e3 * 60 * 15,
     QMs = 1e5,
     ZMs = 1e4,
@@ -851,15 +851,15 @@ export function createCppService(params) {
         }
       )
     }
-    filterLinterErrors(e, t = MarkerSeverity.Error) {
-      return e
-        .filter((s) => s.severity >= t)
+    filterLinterErrors(allMarkers, severityThreshold = MarkerSeverity.Error) {
+      return allMarkers
+        .filter((marker) => marker.severity >= severityThreshold)
         .filter(
-          (s) =>
-            s.startLineNumber < QMs &&
-            s.endLineNumber < QMs &&
-            s.startColumn < ZMs &&
-            s.endColumn < ZMs,
+          (marker) =>
+            marker.startLineNumber < QMs &&
+            marker.endLineNumber < QMs &&
+            marker.startColumn < ZMs &&
+            marker.endColumn < ZMs,
         )
     }
     loadCopilotPlusPlusConfigFromGithubCopilot() {
@@ -2158,7 +2158,7 @@ export function createCppService(params) {
           message: l.message,
           relatedInformation: l.relatedInformation ?? [],
           source: l.source,
-          severity: dze(l.severity),
+          severity: normalizeSeverity(l.severity),
           uri: e.toString(),
           range: {
             startPosition: { line: l.startLineNumber, column: l.startColumn },
@@ -2178,7 +2178,7 @@ export function createCppService(params) {
                 u.message === l.message,
             ),
         )),
-        (n = new Cf({
+        (n = new LinterErrors({
           relativeWorkspacePath: this.contextService.asRelativePath(e),
           errors: r,
           fileContents: undefined,
@@ -2232,7 +2232,7 @@ export function createCppService(params) {
         ))
       const a = s.map((l) => ({
         message: l.message,
-        relatedInformation: BMs(l.relatedInformation),
+        relatedInformation: formatRelatedInformation(l.relatedInformation),
         source: l.source,
         uri: e.toString(),
         range: {
@@ -2256,70 +2256,74 @@ export function createCppService(params) {
         (this.J = this.J.filter((l) => Date.now() - l.timestamp < 1e3 * 20)),
         (this.J = this.J.slice(0, Math.min(this.J.length, 10)))
     }
-    getRecentAndNearLocationLinterErrors(e, t) {
-      const s = this.markerService.read({ resource: e })
-      let n
-      const r = this.filterLinterErrors(s)
-      let a = (t !== undefined ? [t, ...r.filter((c) => c !== t)] : r)
-        .map((c) => ({
-          message: c.message,
-          relatedInformation: BMs(c.relatedInformation),
-          source: c.source,
+    getRecentAndNearLocationLinterErrors(uri, t) {
+      // 1. 获取当前文件的所有标记（包含错误、警告等）
+      const allMarkers = this.markerService.read({ resource: uri })
+      let resultContext
+      const linterErrors = this.filterLinterErrors(allMarkers) // 2. 过滤出Linter错误（排除警告等其他类型）
+      // 3. 处理错误列表：如果指定了光标位置，将光标处的错误置顶
+      let processedErrors = (t !== undefined ? [t, ...linterErrors.filter((linterError) => linterError !== t)] : linterErrors)
+        .map((linterError) => ({
+          message: linterError.message,
+          relatedInformation: formatRelatedInformation(linterError.relatedInformation),
+          source: linterError.source,
           range: {
-            startPosition: { line: c.startLineNumber, column: c.startColumn },
-            endPosition: { line: c.endLineNumber, column: c.endColumn },
+            startPosition: { line: linterError.startLineNumber, column: linterError.startColumn },
+            endPosition: { line: linterError.endLineNumber, column: linterError.endColumn },
           },
-          severity: dze(c.severity),
-          uri: e.toString(),
+          severity: normalizeSeverity(linterError.severity),
+          uri: uri.toString(),
         }))
-        .slice(0, Ngo)
-      const l = Date.now() - 2e4
+        .slice(0, MAX_CURRENT_ERRORS)
+      const recentThreshold = Date.now() - 2e4 // 4. 添加最近20秒内的历史错误（来自缓存）
       return (
-        a.push(
-          ...this.J.filter((c) => c.timestamp > l)
-            .map((c) => c.errors)
+        processedErrors.push(
+          ...this.J.filter((recentDiagnostic) => recentDiagnostic.timestamp > recentThreshold)
+            .map((recentDiagnostic) => recentDiagnostic.errors)
             .flat()
-            .slice(0, Lgo),
+            .slice(0, MAX_HISTORIC_ERRORS),
         ),
-        (a = a.filter(
-          (c, h, u) =>
-            h ===
-            u.findIndex(
-              (d) =>
-                d.range.startPosition.line === c.range.startPosition.line &&
-                d.range.startPosition.column === c.range.startPosition.column &&
-                d.range.endPosition.line === c.range.endPosition.line &&
-                d.range.endPosition.column === c.range.endPosition.column &&
-                d.message === c.message &&
-                d.uri === c.uri,
+        // 5. 去重：确保相同位置和消息的错误只出现一次
+        (processedErrors = processedErrors.filter(
+          (error, index, array) =>
+            index ===
+            array.findIndex(
+              (item) =>
+                item.range.startPosition.line === error.range.startPosition.line &&
+                item.range.startPosition.column === error.range.startPosition.column &&
+                item.range.endPosition.line === error.range.endPosition.line &&
+                item.range.endPosition.column === error.range.endPosition.column &&
+                item.message === error.message &&
+                item.uri === error.uri,
             ),
         )),
-        a.length > 0 &&
-          (n = new Cf({
-            relativeWorkspacePath: this.contextService.asRelativePath(e),
-            errors: a,
+        // 6. 如果有错误，构建上下文对象
+        processedErrors.length > 0 &&
+          (resultContext = new LinterErrors({
+            relativeWorkspacePath: this.contextService.asRelativePath(uri),
+            errors: processedErrors,
             fileContents: undefined,
           })),
-        n
+        resultContext
       )
     }
     showNearLocationLintErrorsToImportPredictionService({
-      editor: e,
-      uri: t,
-      source: s,
+      editor,
+      uri,
+      source: source,
     }) {
-      const n = e.getPosition()
-      if (n === null) return
-      const r = this.markerService.read({ resource: t })
-      let a = this.filterLinterErrors(r, MarkerSeverity.Warning).filter(
-        (l) => Math.abs(l.startLineNumber - n.lineNumber) <= MAX_DIAGNOSTIC_DISTANCE,
+      const position = editor.getPosition()
+      if (position === null) return
+      const markers = this.markerService.read({ resource: uri })
+      let allMarkers = this.filterLinterErrors(markers, MarkerSeverity.Warning).filter(
+        (marker) => Math.abs(marker.startLineNumber - position.lineNumber) <= MAX_DIAGNOSTIC_DISTANCE,
       )
       this.importPredictionService.handleUpdatedLintErrors({
-        openEditor: e,
-        uri: t,
-        position: n,
-        allMarkers: a,
-        source: s,
+        openEditor: editor,
+        uri: uri,
+        position: position,
+        allMarkers: allMarkers,
+        source: source,
       })
     }
     overrideDiffHistory(e) {
@@ -3917,25 +3921,25 @@ export function createCppService(params) {
       this.hideCursorHighlight(),
         t.removeGreens !== false && this.clearAllGreenHighlights(e)
     }
-    isOnShortestEditPath({ event: e, model: t }, s) {
-      const n = this.codeEditorService.getActiveCodeEditor()
-      if (n == null || n.getModel()?.id !== t.id) return false
-      const r = this.getCurrentSuggestion()
-      if (r === undefined) return false
-      let o
-      if (s === undefined) {
-        const l = this.getPreviousModelValue(t)
-        if (l === undefined) return false
-        o = l
-      } else o = s
-      const a = jBt(o, t.uri)
-      return this.L.checkChangeExists(e, true)
+    isOnShortestEditPath({ event: event, model: model }, context) {
+      const editor = this.codeEditorService.getActiveCodeEditor()
+      if (editor == null || editor.getModel()?.id !== model.id) return false
+      const proposedSuggestion = this.getCurrentSuggestion()
+      if (proposedSuggestion === undefined) return false
+      let previousContext
+      if (context === undefined) {
+        const cachedModelValue = this.getPreviousModelValue(model)
+        if (cachedModelValue === undefined) return false
+        previousContext = cachedModelValue
+      } else previousContext = context
+      const previousModelValue = jBt(previousContext, model.uri)
+      return this.L.checkChangeExists(event, true)
         ? true
         : qfo({
-            event: e,
-            model: t,
-            proposedSuggestion: r,
-            previousModelValue: a,
+            event,
+            model,
+            proposedSuggestion,
+            previousModelValue,
           })
     }
     async formatDiffHistory(contentChangeEvent, editor, model, eol) {
