@@ -2,7 +2,7 @@
 
 
 export function createCppService(params) {
-  const {V, EYe, G, LRUCache, Qfo, SuggestionCache, SuggestionManager, MutableDisposable, J, RequestDebouncer, um, hF, ss, CppIntent, JB, onDidRegisterWindow, fu, Va, nze, WEn, m2i, qEn, b2i, S9, $, Hae, m0t, Ad, fUe, Sp, VB, replaceTextInRange, generateModifiedText, EditHistoryDiffFormatter, VS: getWindows, NYi, CURSOR_PREDICTION, Ri: MarkerSeverity, ce: Schemas, Pn, Cg, GhostTextController, MMs, U, mu, Me, ys, $fo, qdt, Ffo, dze, uI, BMs, Cf, hG, mR, fm, gle, xr, Gr, GB, QN, Ycr, Yt, D1t, Kf, rt, handleStreamWithPredictions, handleChunkedStream, consumeRemainingStream, Hu, Aoe, Qcr, TKn, F_, tdi, _fo, rge, OFt, Xfo, Ui, ZXe: computeDiffs, k7, RKi, jBt, qfo, Ho, Qm, T1t, Xf, oj, ee, j, Je, CppDiffPeekViewWidget, cppService, ei, wf, yi, Ci, $h} = params;
+  const {V, EYe, G, LRUCache, Qfo, SuggestionCache, SuggestionManager, MutableDisposable, J: DisposableStore, RequestDebouncer, um, hF, ss, CppIntent, JB, onDidRegisterWindow, fu, Va, nze, WEn, m2i, qEn, b2i, S9, $, Hae, m0t, Ad, fUe, Sp, VB, replaceTextInRange, generateModifiedText, EditHistoryDiffFormatter, VS: getWindows, NYi, CURSOR_PREDICTION, Ri: MarkerSeverity, ce: Schemas, Pn, Cg, GhostTextController, MMs, U, mu, Me, ys, $fo, qdt, Ffo, dze, uI, BMs, Cf, hG: StreamCppRequestControlToken, mR, fm, gle, xr, Gr, GB, QN, Ycr, Yt, D1t, Kf, rt, handleStreamWithPredictions, handleChunkedStream, consumeRemainingStream, Hu, Aoe, Qcr, TKn, F_, tdi, _fo, rge, OFt, Xfo, Ui, ZXe: computeDiffs, k7, RKi, jBt, qfo, Ho: CurrentFileInfo, Qm, T1t, Xf, oj, ee, j, Je, CppDiffPeekViewWidget, cppService, ei, wf, yi, Ci, $h} = params;
 
   var bgo = class zmi extends ee {
     static {
@@ -174,7 +174,7 @@ export function createCppService(params) {
   j(Ego)
   var Igo = 25,
     Dgo = 60,
-    hdi = 5e6,
+    MAX_FILE_SIZE_CHARS = 5e6,
     JMs = false,
     oa = JMs ? console.log : () => {},
     zdt = JMs ? console.error : () => {}
@@ -207,12 +207,12 @@ export function createCppService(params) {
     Pgo = "cpp-suggestion-text-decoration-showing-gutter",
     Lgo = 10,
     Ngo = 10,
-    Rgo = 1e3 * 60 * 15,
+    FIFTEEN_MINUTES_MS = 1e3 * 60 * 15,
     QMs = 1e5,
     ZMs = 1e4,
     MAX_DIAGNOSTIC_DISTANCE = 20,
-    e$s = 3,
-    Ave = 300,
+    MAX_CACHE_SIZE = 3,
+    AVERAGE_VISIBLE_LINES = 300,
     Ago = false,
     Mgo = "m4CoTMbqtR9vV1zd",
   CppService = class extends V {
@@ -327,7 +327,7 @@ export function createCppService(params) {
         (this.L = new Qfo(2)),
         (this.M = new SuggestionCache(5)), (this.suggestionCache = this.M),
         (this.N = new SuggestionManager(5, 6)), (this.suggestionManager = this.N),
-        (this.O = new LRUCache(3)),
+        (this.O = new LRUCache(3)), (this.decorationCache = this.O),
         (this.Q = new LRUCache(10)),
         (this.editorThatWeHidGhostTextOn = undefined),
         (this.R = []),
@@ -345,7 +345,7 @@ export function createCppService(params) {
         (this.db = new LRUCache(5)),
         (this.eb = undefined),
         (this.fb = false),
-        (this.Mb = new J()),
+        (this.Mb = new DisposableStore()),
         (this.Nb = document.createElement("div")),
         (this.handleKeyDownForCppKeys = (se) => {
           if (this.getApplicationUserPersistentStorage().cppEnabled === true) {
@@ -524,64 +524,65 @@ export function createCppService(params) {
         (this.Xb = 6),
         (this.latestGenerationUUID = undefined),
         (this.Yb = undefined),
-        (this.Zb = (se, he, ae, de) => {
-          const Ee = se.split(ae)
-          if (Ee.length < Ave * 2) return se
-          let ke = Math.max(0, he - Ave),
-            Ae = Math.min(Ee.length, he + Ave)
-          const Pe = Ave - he,
-            ze = he - (Ee.length - Ave)
-          Pe > 0
-            ? (Ae = Math.min(Ee.length, Ae + Pe))
-            : ze > 0 && (ke = Math.max(0, ke - ze))
-          const at = this.O.get(de.uri),
-            we = 20
-          if (at && at.length > 0) {
-            let vt = false
-            for (const { decorationId: lt, originalWidth: Xe } of at) {
-              const Oe = de.getDecorationRange(lt)
-              if (!Oe) continue
-              const Fe =
-                  Math.abs(Oe.startLineNumber - ke) < we &&
-                  (ke !== 0 || Oe.startLineNumber === 1),
-                ut =
-                  Math.abs(Oe.endLineNumber - Ae) < we &&
-                  (Ae !== Ee.length || Oe.endLineNumber === Ee.length)
-              if (Oe && Fe && ut && Math.abs(Ae - ke - Xe) < we) {
-                ;(ke = Oe.startLineNumber), (Ae = Oe.endLineNumber), (vt = true)
+        // 截断当前文件内容，保留光标附近的相关代码段
+        (this.Zb = (fullContent, cursorLine, eol, model) => {
+          const allLines = fullContent.split(eol)
+          if (allLines.length < AVERAGE_VISIBLE_LINES * 2) return fullContent
+          let startLine = Math.max(0, cursorLine - AVERAGE_VISIBLE_LINES),
+            endLine = Math.min(allLines.length, cursorLine + AVERAGE_VISIBLE_LINES)
+          const paddingStart = AVERAGE_VISIBLE_LINES - cursorLine,
+            paddingEnd = cursorLine - (allLines.length - AVERAGE_VISIBLE_LINES)
+          paddingStart > 0
+            ? (endLine = Math.min(allLines.length, endLine + paddingStart))
+            : paddingEnd > 0 && (startLine = Math.max(0, startLine - paddingEnd))
+          const decorationCacheForURI = this.decorationCache.get(model.uri),
+            DECORATION_MARGIN = 20
+          if (decorationCacheForURI && decorationCacheForURI.length > 0) {
+            let foundCachedRange = false
+            for (const { decorationId, originalWidth: originalWidth } of decorationCacheForURI) {
+              const decorationRange = model.getDecorationRange(decorationId)
+              if (!decorationRange) continue
+              const isStartNear =
+                  Math.abs(decorationRange.startLineNumber - startLine) < DECORATION_MARGIN &&
+                  (startLine !== 0 || decorationRange.startLineNumber === 1),
+                isEndNear =
+                  Math.abs(decorationRange.endLineNumber - endLine) < DECORATION_MARGIN &&
+                  (endLine !== allLines.length || decorationRange.endLineNumber === allLines.length)
+              if (decorationRange && isStartNear && isEndNear && Math.abs(endLine - startLine - originalWidth) < DECORATION_MARGIN) {
+                ;(startLine = decorationRange.startLineNumber), (endLine = decorationRange.endLineNumber), (foundCachedRange = true)
                 break
               }
             }
-            if (!vt) {
-              const lt = de.deltaDecorations(
+            if (!foundCachedRange) {
+              const decorationId = model.deltaDecorations(
                 [],
                 [
                   {
-                    range: new G(ke, 1, Ae, 1),
+                    range: new G(startLine, 1, endLine, 1),
                     options: { description: "cpp-truncation-cache" },
                   },
                 ],
               )[0]
-              at.push({ decorationId: lt, originalWidth: Ae - ke })
-              for (const Xe of at.slice(0, -e$s))
-                de.deltaDecorations([Xe.decorationId], [])
-              this.O.set(de.uri, at.slice(-e$s))
+              decorationCacheForURI.push({ decorationId, originalWidth: endLine - startLine })
+              for (const oldDecoration of decorationCacheForURI.slice(0, -MAX_CACHE_SIZE))
+                model.deltaDecorations([oldDecoration.decorationId], [])
+              this.decorationCache.set(model.uri, decorationCacheForURI.slice(-MAX_CACHE_SIZE))
             }
           } else {
-            const vt = de.deltaDecorations(
+            const newDecorationId = model.deltaDecorations(
               [],
               [
                 {
-                  range: new G(ke, 1, Ae, 1),
+                  range: new G(startLine, 1, endLine, 1),
                   options: { description: "cpp-truncation-cache" },
                 },
               ],
             )[0]
-            this.O.set(de.uri, [{ decorationId: vt, originalWidth: Ae - ke }])
+            this.decorationCache.set(model.uri, [{ decorationId: newDecorationId, originalWidth: endLine - startLine }])
           }
-          for (let vt = 0; vt < ke; vt++) Ee[vt] = ""
-          for (let vt = Ae; vt < Ee.length; vt++) Ee[vt] = ""
-          return Ee.join(ae)
+          for (let i = 0; i < startLine; i++) allLines[i] = ""
+          for (let i = endLine; i < allLines.length; i++) allLines[i] = ""
+          return allLines.join(eol)
         }), (this.truncateCurrentFile = this.Zb),
         (this.decIdsThatAreNotInReactiveStorage = { green: [] }),
         (this.didShowGreenHighlights = false),
@@ -741,9 +742,9 @@ export function createCppService(params) {
       this.Q.set(e, t)
     }
     async dispose() {
-      const e = new J()
+      const e = new DisposableStore()
       try {
-        for (const [t, s] of this.O.entries()) {
+        for (const [t, s] of this.decorationCache.entries()) {
           const n = await this.textModelService.createModelReference(t)
           e.add(n),
             n.object.textEditorModel.deltaDecorations(
@@ -1847,7 +1848,7 @@ export function createCppService(params) {
           )
     }
     Wb(model) {
-      return model.getValueLength() > hdi
+      return model.getValueLength() > MAX_FILE_SIZE_CHARS
     }
     isTextLengthTooLarge(model) {
       return this.Wb(model);
@@ -2349,126 +2350,129 @@ export function createCppService(params) {
         })
     }
     async getPartialCppRequest({
-      editor: e,
-      uri: t,
-      modelValue: s,
-      modelVersion: n,
-      position: r,
-      source: o,
-      shouldRelyOnFileSyncForFile: a,
+      editor: editor,
+      uri: uri,
+      modelValue: modelValue,
+      modelVersion: modelVersion,
+      position: position,
+      source: intentSource,
+      shouldRelyOnFileSyncForFile: shouldRelyOnFileSyncForFile,
     }) {
-      const l = this.getRecentAndNearLocationLinterErrors(t),
-        c = e.getModel()
-      if (c === null) throw new Error("Model is null")
-      const h = c.getEOL()
-      let u
+      const nearbyLinterErrors = this.getRecentAndNearLocationLinterErrors(uri),
+        model = editor.getModel()
+      if (model === null) throw new Error("Model is null")
+      const eol = model.getEOL()
+      let currentFileInfo
       if (
-        (t.scheme === "vscode-notebook-cell" && r !== null
-          ? (u = await this.fastCurrentFileInfoForNotebooks(c, e, r, a))
-          : (u = await this.fastCurrentFileInfoDoesNotWorkForNotebooks(
-              t,
-              s,
-              r,
-              a,
-              n,
+        (uri.scheme === "vscode-notebook-cell" && position !== null
+          ? (currentFileInfo = await this.fastCurrentFileInfoForNotebooks(model, editor, position, shouldRelyOnFileSyncForFile))
+          : (currentFileInfo = await this.fastCurrentFileInfoDoesNotWorkForNotebooks(
+              uri,
+              modelValue,
+              position,
+              shouldRelyOnFileSyncForFile,
+              modelVersion,
             )),
-        u !== undefined && u.cursorPosition !== undefined)
+        currentFileInfo !== undefined && currentFileInfo.cursorPosition !== undefined)
       ) {
-        const D = !a
-          ? this.truncateCurrentFile(u?.contents ?? "", u.cursorPosition.line, h, c)
-          : u?.contents
-        u.contents = D ?? ""
+        const truncatedContent = !shouldRelyOnFileSyncForFile
+          ? this.truncateCurrentFile(currentFileInfo?.contents ?? "", currentFileInfo.cursorPosition.line, eol, model)
+          : currentFileInfo?.contents
+        currentFileInfo.contents = truncatedContent ?? ""
       }
       if (this.cppProvider === undefined) throw new Error("Diffing provider is undefined")
-      let d
-      const g = performance.now()
-      let p
-      const m = this.formattedDiffCache.get(this.getModelKey(c))
-      if (m === undefined) {
-        const E = await this.getGlobalDiffTrajectories()
-        if (E === undefined)
+      let diffContext
+      const diffHistoryStartTime = performance.now()
+      let fileDiffHistories
+      const cachedFleDiffHistories = this.formattedDiffCache.get(this.getModelKey(model))
+      if (cachedFleDiffHistories === undefined) {
+        const globalDiffTrajectories = await this.getGlobalDiffTrajectories()
+        if (globalDiffTrajectories === undefined)
           throw new Error(
             "Compile Diff Trajectories not registered in extension host",
           )
-        ;(p = E), this.formattedDiffCache.set(this.getModelKey(c), p)
-      } else p = m
-      const b = this.contextService.asRelativePath(c.uri),
-        y = p.find((E) => E.fileName === b)
-      if (y) {
-        const E = y.diffHistory.at(-1)
+        ;(fileDiffHistories = globalDiffTrajectories), this.formattedDiffCache.set(this.getModelKey(model), fileDiffHistories)
+      } else fileDiffHistories = cachedFleDiffHistories
+      const relativePath = this.contextService.asRelativePath(model.uri),
+        currentFileDiffHistories = fileDiffHistories.find((item) => item.fileName === relativePath)
+      if (currentFileDiffHistories) {
+        const latestDiff = currentFileDiffHistories.diffHistory.at(-1)
       }
-      d = {
-        fileDiffHistories: p,
+      diffContext = {
+        fileDiffHistories: fileDiffHistories,
         diffHistory: [],
         blockDiffPatches: [],
         mergedDiffHistories: [],
       }
-      const w = performance.now()
+      const diffHistoryEndTime = performance.now()
       this.metricsService.distribution({
         stat: "cppclient.immediatelyFire.diffHistory",
-        value: w - g,
+        value: diffHistoryEndTime - diffHistoryStartTime,
       })
-      const C = performance.now(),
-        S =
+      const additionalFilesStartTime = performance.now(),
+        additionalFiles =
           this.getApplicationUserPersistentStorage().cppConfig?.enableRvfTracking === true
-            ? await this.$b(e, t)
+            ? await this.getAdditionalContextFiles(editor, uri)
             : [],
-        x = performance.now()
+        additionalFilesEndTime = performance.now()
       this.metricsService.distribution({
         stat: "cppclient.immediatelyFire.additionalFiles",
-        value: x - C,
+        value: additionalFilesEndTime - additionalFilesStartTime,
       })
-      const k =
-        o === CppIntent.ManualTrigger
-          ? hG.OP
+      const controlToken =
+        intentSource === CppIntent.ManualTrigger
+          ? StreamCppRequestControlToken.OP
           : (this.reactiveStorageService.applicationUserPersistentStorage.cppControlToken ?? undefined)
       return {
-        ...d,
-        linterErrors: l,
-        currentFile: u,
+        ...diffContext,
+        linterErrors: nearbyLinterErrors,
+        currentFile: currentFileInfo,
         enableMoreContext: this.getApplicationUserPersistentStorage().cppExtraContextEnabled,
-        additionalFiles: S,
-        controlToken: k,
-        cppIntentInfo: { source: o },
+        additionalFiles: additionalFiles,
+        controlToken: controlToken,
+        cppIntentInfo: { source: intentSource },
         clientTime: Date.now(),
         clientTimezoneOffset: new Date().getTimezoneOffset(),
       }
     }
-    async $b(e, t) {
+    async getAdditionalContextFiles(editor, uri) {
+      return await this.$b(editor,uri);
+    }
+    async $b(editor, uri) {
       try {
-        const s = this.editorService.visibleEditorPanes,
-          n = [],
-          r = this.contextService.asRelativePath(t),
-          o = this.getApplicationUserPersistentStorage().cppConfig?.shouldFetchRvfText === true,
-          a = (u, d) =>
-            d.map((g) => ({
-              startLineNumber: g.startLineNumber,
-              startColumn: g.startColumn,
-              endLineNumber: g.endLineNumber,
-              endColumn: g.endColumn,
+        const visibleEditorPanes = this.editorService.visibleEditorPanes,
+          contextFiles = [],
+          currentFileRelativePath = this.contextService.asRelativePath(uri),
+          shouldFetchFileContent = this.getApplicationUserPersistentStorage().cppConfig?.shouldFetchRvfText === true,
+          getVisibleContent = (editorModel, visibleRanges) =>
+            visibleRanges.map((range) => ({
+              startLineNumber: range.startLineNumber,
+              startColumn: range.startColumn,
+              endLineNumber: range.endLineNumber,
+              endColumn: range.endColumn,
               content:
-                u !== null
-                  ? u
-                      .getValueInRange(g)
-                      .split(u.getEOL())
-                      .map((p) =>
-                        p.length > 512 ? p.substring(0, 512) + "..." : p,
+                editorModel !== null
+                  ? editorModel
+                      .getValueInRange(range)
+                      .split(editorModel.getEOL())
+                      .map((line) =>
+                        line.length > 512 ? line.substring(0, 512) + "..." : line,
                       ).join(`
-`)
+  `)
                   : "",
             }))
-        for (const u of s) {
-          const d = u.getControl()
-          if (d !== undefined && Pn(d)) {
-            if (d.getId() === e.getId()) continue
-            const g = d.getModel()
-            if (g === null) continue
-            const p = a(g, d.getVisibleRanges())
-            n.push({
-              relativeWorkspacePath: this.contextService.asRelativePath(g.uri),
-              visibleRangeContent: p.map((m) => m.content),
-              startLineNumberOneIndexed: p.map((m) => m.startLineNumber),
-              visibleRanges: p.map((m) => ({
+        for (const visibleEditorPane of visibleEditorPanes) { // 1. 收集当前可见编辑器内容
+          const editorControl = visibleEditorPane.getControl()
+          if (editorControl !== undefined && Pn(editorControl)) {
+            if (editorControl.getId() === editor.getId()) continue
+            const editorModel = editorControl.getModel()
+            if (editorModel === null) continue
+            const visibleContent = getVisibleContent(editorModel, editorControl.getVisibleRanges())
+            contextFiles.push({
+              relativeWorkspacePath: this.contextService.asRelativePath(editorModel.uri),
+              visibleRangeContent: visibleContent.map((m) => m.content),
+              startLineNumberOneIndexed: visibleContent.map((m) => m.startLineNumber),
+              visibleRanges: visibleContent.map((m) => ({
                 startLineNumber: m.startLineNumber,
                 endLineNumberInclusive: m.endLineNumber,
               })),
@@ -2477,70 +2481,70 @@ export function createCppService(params) {
             })
           }
         }
-        const l = [],
-          c = new J()
+        const filesToRemove = [], // 2. 收集最近查看的文件内容
+          modelReferences = new DisposableStore()
         try {
-          for (const [u, d] of this.recentlyViewedFilesCache.entries())
-            if (t !== u)
+          for (const [fileUri, fileInfo] of this.recentlyViewedFilesCache.entries())
+            if (uri !== fileUri)
               try {
-                const g = this.contextService.asRelativePath(u)
+                const relativePath = this.contextService.asRelativePath(fileUri)
                 if (
-                  g === undefined ||
-                  n.find((p) => p.relativeWorkspacePath === g) ||
-                  r === g
+                  relativePath === undefined ||
+                  contextFiles.find((file) => file.relativeWorkspacePath === relativePath) ||
+                  currentFileRelativePath === relativePath
                 )
                   continue
-                if (d.lastViewedAt < Date.now() - Rgo) l.push(u)
-                else if (this.textModelService.canHandleResource(u)) {
-                  let p = null
-                  if (o) {
-                    const b = await this.textModelService.createModelReference(u)
+                if (fileInfo.lastViewedAt < Date.now() - FIFTEEN_MINUTES_MS) filesToRemove.push(fileUri)
+                else if (this.textModelService.canHandleResource(fileUri)) {
+                  let fileModel = null
+                  if (shouldFetchFileContent) {
+                    const modelRef = await this.textModelService.createModelReference(fileUri)
                     if (
-                      (c.add(b), (p = b.object.textEditorModel), p === undefined)
+                      (modelReferences.add(modelRef), (fileModel = modelRef.object.textEditorModel), fileModel === undefined)
                     )
                       continue
-                    if (p.getValueLength() > hdi) {
-                      l.push(u)
+                    if (fileModel.getValueLength() > MAX_FILE_SIZE_CHARS) {
+                      filesToRemove.push(fileUri)
                       continue
                     }
                   }
-                  const m = a(p, d.visibleRanges)
-                  n.push({
-                    relativeWorkspacePath: g,
+                  const visibleContent = getVisibleContent(fileModel, fileInfo.visibleRanges)
+                  contextFiles.push({
+                    relativeWorkspacePath: relativePath,
                     isOpen: false,
-                    visibleRangeContent: m.map((b) => b.content),
-                    startLineNumberOneIndexed: m.map((b) => b.startLineNumber),
-                    visibleRanges: m.map((b) => ({
+                    visibleRangeContent: visibleContent.map((b) => b.content),
+                    startLineNumberOneIndexed: visibleContent.map((b) => b.startLineNumber),
+                    visibleRanges: visibleContent.map((b) => ({
                       startLineNumber: b.startLineNumber,
                       endLineNumberInclusive: b.endLineNumber,
                     })),
-                    lastViewedAt: d.lastViewedAt,
+                    lastViewedAt: fileInfo.lastViewedAt,
                   })
                 }
-              } catch (g) {
+              } catch (error) {
                 zdt(
-                  `[Cpp] Additional file info: error in recentlyViewedFileURI error: ${g} ${g.stack}`,
+                  `[Cpp] Additional file info: error in recentlyViewedFileURI error: ${error} ${error.stack}`,
                 ),
-                  l.push(u)
+                  filesToRemove.push(fileUri)
                 continue
               }
         } finally {
-          c.dispose()
+          modelReferences.dispose()
         }
-        for (const u of l) this.recentlyViewedFilesCache.delete(u)
-        return n.sort((u, d) =>
-          u.isOpen !== d.isOpen
-            ? u.isOpen
+        for (const fileUri of filesToRemove) this.recentlyViewedFilesCache.delete(fileUri)
+        return contextFiles.sort((a, b) =>
+          a.isOpen !== b.isOpen
+            ? a.isOpen
               ? 1
               : -1
-            : u.lastViewedAt === undefined || d.lastViewedAt === undefined
+            : a.lastViewedAt === undefined || b.lastViewedAt === undefined
               ? 0
-              : u.lastViewedAt - d.lastViewedAt,
+              : a.lastViewedAt - b.lastViewedAt,
         )
-      } catch (s) {
+      } catch (error) {
         return (
           zdt(
-            `[Cpp] Bad Case: Error in getAdditionalFilesInfo: ${s} stack: ${s.stack}`,
+            `[Cpp] Bad Case: Error in getAdditionalFilesInfo: ${error} stack: ${error.stack}`,
           ),
           []
         )
@@ -3876,7 +3880,7 @@ export function createCppService(params) {
       const r = s
         .filter((a) => a.options.description === "cpp-truncation-cache")
         .map((a) => a.id)
-      r.length > 0 && t.deltaDecorations(r, []), this.O.delete(t.uri)
+      r.length > 0 && t.deltaDecorations(r, []), this.decorationCache.delete(t.uri)
       const o = this.getCurrentSuggestion()
       o !== undefined &&
         o.decorationId !== undefined &&
@@ -3935,7 +3939,7 @@ export function createCppService(params) {
           })
     }
     async formatDiffHistory(contentChangeEvent, editor, model, eol) {
-      if (model.getValueLength() > hdi || model.isDisposed()) return
+      if (model.getValueLength() > MAX_FILE_SIZE_CHARS || model.isDisposed()) return
       const formattedDiff = await this.everythingProviderService.onlyLocalProvider?.runCommand(
         EditHistoryDiffFormatter.FormatDiffHistory,
         {
@@ -4030,7 +4034,7 @@ export function createCppService(params) {
         (h += d.split(`
 `).length),
           u.push(h)
-      return new Ho({
+      return new CurrentFileInfo({
         relativeWorkspacePath: this.contextService.asRelativePath(e.uri),
         contents: c.join(o),
         sha256Hash: n ? await this.bc(c.join(o), this.fb) : undefined,
@@ -4047,7 +4051,7 @@ export function createCppService(params) {
     }
     async fastCurrentFileInfoDoesNotWorkForNotebooks(e, t, s, n, r) {
       if (e.scheme !== Schemas.aiChat && s !== null)
-        return new Ho({
+        return new CurrentFileInfo({
           relativeWorkspacePath: this.contextService.asRelativePath(e),
           contents: t,
           sha256Hash: n ? await this.bc(t, this.fb) : undefined,
