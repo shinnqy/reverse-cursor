@@ -351,14 +351,14 @@ export function createCppService(params) {
           if (this.getApplicationUserPersistentStorage().cppEnabled === true) {
             if (se.key === "Tab" && se.shiftKey) {
               if (this.getApplicationUserPersistentStorage().cppManualTriggerWithOpToken) {
-                const ae = this.codeEditorService.getActiveCodeEditor()
-                if (ae === null) return
-                const Ee = ae.getModel()?.uri
-                if (!Ee) {
+                const editor = this.codeEditorService.getActiveCodeEditor()
+                if (editor === null) return
+                const uri = editor.getModel()?.uri
+                if (!uri) {
                   oa("[handleKeyDownForCppKeys] Tab: no uri")
                   return
                 }
-                this.fireCppSuggestionFromTrigger(Ee, ae, CppIntent.ManualTrigger)
+                this.fireCppSuggestionFromTrigger(uri, editor, CppIntent.ManualTrigger)
               } else
                 this.cursorPredictionService.maybeUndoCursorPrediction({
                   event: se,
@@ -1609,27 +1609,27 @@ export function createCppService(params) {
         ? await this.fireCppSuggestionDebouncedDiffHistory(contentChangeEvent, editor, CppIntent.Typing, EOL)
         : await this.formatDiffHistory(contentChangeEvent, editor, model, EOL)
     }
-    async triggerCppIfLintErrorComesUp(e, t, s, n, r, o) {
-      const a = this.contextService.asRelativePath(s?.uri ?? U.file("")),
-        l = new AbortController()
-      this.triggerCppOnLintErrorAbortControllers.set(a, l)
-      let c = false
-      l.signal.addEventListener("abort", () => {
-        c = true
+    async triggerCppIfLintErrorComesUp(contentChangeEvent, editor, model, eol, timeoutDuration, previousModelValue) {
+      const relativePath = this.contextService.asRelativePath(model?.uri ?? U.file("")),
+        abortController = new AbortController()
+      this.triggerCppOnLintErrorAbortControllers.set(relativePath, abortController)
+      let isAborted = false
+      abortController.signal.addEventListener("abort", () => {
+        isAborted = true
       })
-      for (let h = 0; h < r / 50; h++) {
-        if ((await new Promise((p) => setTimeout(p, 50)), c)) return
-        const u = this.markerService.read({ resource: s.uri }),
-          d = t.getPosition()
-        if (d === null) return
+      for (let attempt = 0; attempt < timeoutDuration / 50; attempt++) {
+        if ((await new Promise((p) => setTimeout(p, 50)), isAborted)) return
+        const markers = this.markerService.read({ resource: model.uri }),
+          cursorPosition = editor.getPosition()
+        if (cursorPosition === null) return
         if (
-          u.filter(
-            (p) =>
-              p.severity === Ri.Error &&
-              Math.abs(p.startLineNumber - d.lineNumber) <= 1,
+          markers.filter(
+            (marker) =>
+              marker.severity === Ri.Error &&
+              Math.abs(marker.startLineNumber - cursorPosition.lineNumber) <= 1,
           ).length > 0
         ) {
-          this.fireCppSuggestionFromTrigger(s.uri, t, CppIntent.LinterErrors)
+          this.fireCppSuggestionFromTrigger(model.uri, editor, CppIntent.LinterErrors)
           break
         }
       }
@@ -1848,30 +1848,30 @@ export function createCppService(params) {
     Wb(e) {
       return e.getValueLength() > hdi
     }
-    fireCppSuggestionDebounced(e, t) {
-      if (!e) return
-      const s = e.getModel(),
-        n = s?.uri
-      if (!n || this.Wb(s)) return
-      const { requestIdsToCancel: r, ...o } = this.requestDebouncer.runRequest()
-      this.R.forEach((l) => {
-        r.includes(l.generationUUID) && l.abortController.abort()
+    fireCppSuggestionDebounced(editor, intentSource) {
+      if (!editor) return
+      const model = editor.getModel(),
+        uri = model?.uri
+      if (!uri || this.Wb(model)) return
+      const { requestIdsToCancel, ...restRequestOpts } = this.requestDebouncer.runRequest()
+      this.R.forEach((streamRequest) => {
+        requestIdsToCancel.includes(streamRequest.generationUUID) && streamRequest.abortController.abort()
       }),
-        oa(`[Cpp] fireDebounced post-abort with source: ${t}`)
-      const a = e.getSelection()
+        oa(`[Cpp] fireDebounced post-abort with source: ${intentSource}`)
+      const selection = editor.getSelection()
       if (
-        a !== null &&
-        !this.isFindFocused(e) &&
-        (a.startLineNumber !== a.endLineNumber || a.startColumn !== a.endColumn)
+        selection !== null &&
+        !this.isFindFocused(editor) &&
+        (selection.startLineNumber !== selection.endLineNumber || selection.startColumn !== selection.endColumn)
       ) {
         oa("skipping due to selection")
         return
       }
-      this.fireCppSuggestionFromTrigger(n, e, t, undefined, {
-        ...o,
-        modelVersion: s.getVersionId(),
-        modelId: s.id,
-        position: e.getPosition() ?? undefined,
+      this.fireCppSuggestionFromTrigger(uri, editor, intentSource, undefined, {
+        ...restRequestOpts,
+        modelVersion: model.getVersionId(),
+        modelId: model.id,
+        position: editor.getPosition() ?? undefined,
       })
     }
     async fireCppSuggestionDebouncedDiffHistory(contentChangeEvent, editor, intent, EOL) {
@@ -1898,41 +1898,41 @@ export function createCppService(params) {
             position: editor.getPosition() ?? undefined,
           })
     }
-    async fireCppSuggestionFromTrigger(e, t, s, n, r) {
-      if (!this.isCppEnabled(t)) {
+    async fireCppSuggestionFromTrigger(uri, editor, intentSource, overridePosition, requestOptions) {
+      if (!this.isCppEnabled(editor)) {
         this.reallowCopilotIfWePreviousHidCopilotSuggestions()
         return
       }
-      const o = t.getModel()
-      if (o === null || this.Wb(o)) return
+      const model = editor.getModel()
+      if (model === null || this.Wb(model)) return
       if (
         this.getCurrentSuggestion() !== undefined &&
-        s !== CppIntent.LinterErrors &&
-        s !== CppIntent.CursorPrediction &&
-        s !== CppIntent.LspSuggestions
+        intentSource !== CppIntent.LinterErrors &&
+        intentSource !== CppIntent.CursorPrediction &&
+        intentSource !== CppIntent.LspSuggestions
       ) {
-        GhostTextController.get(t)?.update()
+        GhostTextController.get(editor)?.update()
         return
       }
-      let a
+      let generationUUID
       try {
         if (
-          (s !== CppIntent.CursorPrediction &&
+          (intentSource !== CppIntent.CursorPrediction &&
             this.getApplicationUserPersistentStorage().cppCachedTypeaheadEnabled !== true &&
-            (this.R.forEach((p) => {
-              p.source !== CppIntent.CursorPrediction && p.abortController.abort()
+            (this.R.forEach((streamRequest) => {
+              streamRequest.source !== CppIntent.CursorPrediction && streamRequest.abortController.abort()
             }),
-            (this.R = this.R.filter((p) => p.source === CppIntent.CursorPrediction))),
+            (this.R = this.R.filter((streamRequest) => streamRequest.source === CppIntent.CursorPrediction))),
           this.R.length > this.Xb && this.fb)
         ) {
           const p = performance.now() + performance.timeOrigin
           oa(
             `[Cpp] stream debug info: Too many streams (${this.R.length}) streams (now: ${p})`,
             JSON.stringify(
-              this.R.map((m) => ({
-                uuid: m.generationUUID,
-                source: m.source,
-                startTime: m.startTime,
+              this.R.map((streamRequest) => ({
+                uuid: streamRequest.generationUUID,
+                source: streamRequest.source,
+                startTime: streamRequest.startTime,
               })),
               null,
               2,
@@ -1945,60 +1945,60 @@ export function createCppService(params) {
         }
         for (; this.R.length >= this.Xb; )
           this.R.shift()?.abortController.abort()
-        let l, c, h, u, d
-        r !== undefined
-          ? ((l = r.abortController),
-            (a = r.generationUUID),
-            (c = r.startTime),
-            (h = r.modelVersion),
-            (u = r.modelId),
-            (d = r.position),
-            this.R.push({ ...r, source: s }))
-          : ((a = rt()),
-            (l = new AbortController()),
-            (c = performance.now() + performance.timeOrigin),
-            (h = o.getVersionId()),
-            (u = o.id),
-            (d = t.getPosition() ?? undefined),
+        let abortController, startTimeOfCpp, modelVersion, modelId, position
+        requestOptions !== undefined
+          ? ((abortController = requestOptions.abortController),
+            (generationUUID = requestOptions.generationUUID),
+            (startTimeOfCpp = requestOptions.startTime),
+            (modelVersion = requestOptions.modelVersion),
+            (modelId = requestOptions.modelId),
+            (position = requestOptions.position),
+            this.R.push({ ...requestOptions, source: intentSource }))
+          : ((generationUUID = rt()),
+            (abortController = new AbortController()),
+            (startTimeOfCpp = performance.now() + performance.timeOrigin),
+            (modelVersion = model.getVersionId()),
+            (modelId = model.id),
+            (position = editor.getPosition() ?? undefined),
             this.R.push({
-              startTime: c,
-              generationUUID: a,
-              abortController: l,
-              source: s,
-              modelVersion: h,
-              modelId: u,
-              position: d,
+              startTime: startTimeOfCpp,
+              generationUUID: generationUUID,
+              abortController: abortController,
+              source: intentSource,
+              modelVersion: modelVersion,
+              modelId: modelId,
+              position: position,
             })),
-          (this.latestGenerationUUID = a)
-        let g = false
+          (this.latestGenerationUUID = generationUUID)
+        let isAborted = false
         if (
-          (l.signal.addEventListener("abort", () => {
-            ;(g = true), (this.R = this.R.filter((p) => p.generationUUID !== a))
+          (abortController.signal.addEventListener("abort", () => {
+            ;(isAborted = true), (this.R = this.R.filter((p) => p.generationUUID !== generationUUID))
           }),
-          g)
+          isAborted)
         )
           return
-        await this.immediatelyFireCppFromTrigger(e, t, l, a, c, s, {
-          overridePosition: n,
+        await this.immediatelyFireCppFromTrigger(uri, editor, abortController, generationUUID, startTimeOfCpp, intentSource, {
+          overridePosition: overridePosition,
         })
-      } catch (l) {
-        console.error("Cpp: error when triggering from source", s, l, l?.stack),
-          (this.R = this.R.filter((c) => c.generationUUID !== a))
+      } catch (error) {
+        console.error("Cpp: error when triggering from source", intentSource, error, error?.stack),
+          (this.R = this.R.filter((streamRequest) => streamRequest.generationUUID !== generationUUID))
       }
     }
     isCppEnabled(e) {
       return this.isAllowedCpp() && this.isCppEnabledForEditor(e)
     }
-    async immediatelyFireCppFromTrigger(e, t, s, n, r, o, a) {
+    async immediatelyFireCppFromTrigger(uri, editor, abortController, generationUUID, startOfCpp, intentSource, options) {
       if (
         this.reactiveStorageService.applicationUserPersistentStorage.oneTimeSettings
           .shouldDisableGithubCopilot === true
       )
         try {
-          const p = this.configurationService.getValue("github.copilot")
-          p !== null &&
-            typeof p == "object" &&
-            p.enable["*"] === true &&
+          const copilotConfig = this.configurationService.getValue("github.copilot")
+          copilotConfig !== null &&
+            typeof copilotConfig == "object" &&
+            copilotConfig.enable["*"] === true &&
             this.commandService.executeCommand("github.copilot.toggleCopilot")
         } finally {
           this.reactiveStorageService.setApplicationUserPersistentStorage(
@@ -2007,27 +2007,27 @@ export function createCppService(params) {
             false,
           )
         }
-      this.disableAndHideCopilotSuggestion(t)
-      const l = t.getModel()
-      if (l === null || this.Wb(l)) return
-      const c = l.getValue(),
-        h = l.getVersionId(),
-        u = a?.overridePosition ?? t.getPosition()
-      if (u === null || c === undefined) {
+      this.disableAndHideCopilotSuggestion(editor)
+      const model = editor.getModel()
+      if (model === null || this.Wb(model)) return
+      const modelValue = model.getValue(),
+        modelVersion = model.getVersionId(),
+        position = options?.overridePosition ?? editor.getPosition()
+      if (position === null || modelValue === undefined) {
         oa("[Cpp] Bad Case: position or modelValue is undefined"),
           this.reallowCopilotIfWePreviousHidCopilotSuggestions()
         return
       }
       if (
         (this.usingFusedCursorPredictionModel() &&
-          this.cursorPredictionService.isShowingCursorPrediction(t) &&
-          o !== CppIntent.CursorPrediction &&
-          o !== CppIntent.LineChange) ||
-        (!this.allowCppTriggerInComments(t, u) && o !== CppIntent.CursorPrediction)
+          this.cursorPredictionService.isShowingCursorPrediction(editor) &&
+          intentSource !== CppIntent.CursorPrediction &&
+          intentSource !== CppIntent.LineChange) ||
+        (!this.allowCppTriggerInComments(editor, position) && intentSource !== CppIntent.CursorPrediction)
       )
         return
       if (
-        this.overlapsInlineDiff(e, u.lineNumber, {
+        this.overlapsInlineDiff(uri, position.lineNumber, {
           onlyCheckCurrentlyGenerating: true,
         })
       ) {
@@ -2047,30 +2047,30 @@ export function createCppService(params) {
       fetch('http://localhost:3000', {
         method: 'POST',
         body: JSON.stringify({
-          intent: o,
-          generationUUID: n,
+          intent: intentSource,
+          generationUUID: generationUUID,
         })
       });
       const d = performance.now(),
-        { success: g } = await this.immediatelyFireCppWithSpecifiedPosition({
-          uri: e,
-          editor: t,
-          position: u,
-          abortController: s,
-          generationUUID: n,
-          modelValue: c,
-          modelVersion: h,
-          context: { startOfCpp: r },
-          source: o,
+        { success: success } = await this.immediatelyFireCppWithSpecifiedPosition({
+          uri: uri,
+          editor: editor,
+          position: position,
+          abortController: abortController,
+          generationUUID: generationUUID,
+          modelValue: modelValue,
+          modelVersion: modelVersion,
+          context: { startOfCpp: startOfCpp },
+          source: intentSource,
         })
-      g
-        ? this.disableAndHideCopilotSuggestion(t)
-        : (this.latestGenerationUUID === n &&
+      success
+        ? this.disableAndHideCopilotSuggestion(editor)
+        : (this.latestGenerationUUID === generationUUID &&
             this.reallowCopilotIfWePreviousHidCopilotSuggestions(),
-          (this.R = this.R.filter((p) => p.generationUUID !== n))),
+          (this.R = this.R.filter((streamRequest) => streamRequest.generationUUID !== generationUUID))),
         this.metricsService.distribution({
           stat: "cppclient.immediatelyFire.getExpandedRange",
-          value: d - r,
+          value: d - startOfCpp,
         })
     }
     allowCppTriggerInComments(e, t) {
@@ -3688,8 +3688,8 @@ export function createCppService(params) {
         model: l,
         lineNumber: lineNumber,
         triggerCppCallback: d
-          ? (g, p, m, b) => {
-              this.fireCppSuggestionFromTrigger(g, p, m, b)
+          ? (uri, editor, intentSource, overridePosition) => {
+              this.fireCppSuggestionFromTrigger(uri, editor, intentSource, overridePosition)
             }
           : null,
       })
