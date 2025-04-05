@@ -2151,60 +2151,60 @@ export function createCppService(params) {
         return console.error("Cpp: error", n), "<ERRORED>"
       }
     }
-    updateRecentDiagnostics(e, t) {
-      const s = this.markerService.read({ resource: e })
-      let n,
-        r = this.filterLinterErrors(s).map((l) => ({
-          message: l.message,
-          relatedInformation: l.relatedInformation ?? [],
-          source: l.source,
-          severity: normalizeSeverity(l.severity),
-          uri: e.toString(),
+    updateRecentDiagnostics(uri, position) {
+      const allMarkers = this.markerService.read({ resource: uri }) // 1. 获取当前文件的所有诊断标记（错误/警告等）
+      let linterErrorContext,
+        filteredErrors = this.filterLinterErrors(allMarkers).map((marker) => ({ // 2. 过滤出Linter错误并格式化
+          message: marker.message,
+          relatedInformation: marker.relatedInformation ?? [],
+          source: marker.source,
+          severity: normalizeSeverity(marker.severity),
+          uri: uri.toString(),
           range: {
-            startPosition: { line: l.startLineNumber, column: l.startColumn },
-            endPosition: { line: l.endLineNumber, column: l.endColumn },
+            startPosition: { line: marker.startLineNumber, column: marker.startColumn },
+            endPosition: { line: marker.endLineNumber, column: marker.endColumn },
           },
         }))
-      r.length > 0 &&
-        ((r = r.filter(
-          (l, c, h) =>
-            c ===
-            h.findIndex(
-              (u) =>
-                u.range.startPosition.line === l.range.startPosition.line &&
-                u.range.startPosition.column === l.range.startPosition.column &&
-                u.range.endPosition.line === l.range.endPosition.line &&
-                u.range.endPosition.column === l.range.endPosition.column &&
-                u.message === l.message,
+      filteredErrors.length > 0 && // 3. 如果有错误，去重后创建错误上下文
+        ((filteredErrors = filteredErrors.filter( // 去重：相同位置和消息的错误只保留一个
+          (error, index, array) =>
+            index ===
+            array.findIndex(
+              (item) =>
+                item.range.startPosition.line === error.range.startPosition.line &&
+                item.range.startPosition.column === error.range.startPosition.column &&
+                item.range.endPosition.line === error.range.endPosition.line &&
+                item.range.endPosition.column === error.range.endPosition.column &&
+                item.message === error.message,
             ),
         )),
-        (n = new LinterErrors({
-          relativeWorkspacePath: this.contextService.asRelativePath(e),
-          errors: r,
-          fileContents: undefined,
+        (linterErrorContext = new LinterErrors({
+          relativeWorkspacePath: this.contextService.asRelativePath(uri),
+          errors: filteredErrors,
+          fileContents: undefined, // 不包含文件内容
         })))
-      const o = n
-      o !== undefined &&
-        o.errors.length > 0 &&
-        this.J.push(
-          ...o.errors
-            .filter((l) => l.range !== undefined)
-            .map((l) => ({
+      const _linterErrorContext = linterErrorContext
+      _linterErrorContext !== undefined &&
+        _linterErrorContext.errors.length > 0 &&
+        this.J.push( // 4. 更新错误缓存（this.J -> recentErrorCache）
+          ..._linterErrorContext.errors
+            .filter((error) => error.range !== undefined)
+            .map((error) => ({
               errors: [
                 {
-                  ...l,
+                  ...error,
                   source: "",
-                  uri: e.toString(),
-                  relatedInformation: l.relatedInformation,
-                  severity: l.severity ?? uI.UNSPECIFIED,
+                  uri: uri.toString(),
+                  relatedInformation: error.relatedInformation,
+                  severity: error.severity ?? uI.UNSPECIFIED,
                   range: {
                     startPosition: {
-                      line: l.range?.startPosition?.line || 0,
-                      column: l.range?.startPosition?.column || 0,
+                      line: error.range?.startPosition?.line || 0,
+                      column: error.range?.startPosition?.column || 0,
                     },
                     endPosition: {
-                      line: l.range?.endPosition?.line || 0,
-                      column: l.range?.endPosition?.column || 0,
+                      line: error.range?.endPosition?.line || 0,
+                      column: error.range?.endPosition?.column || 0,
                     },
                   },
                 },
@@ -2212,49 +2212,49 @@ export function createCppService(params) {
               timestamp: Date.now(),
             })),
         ),
-        this.J.sort((l, c) => c.timestamp - l.timestamp),
-        (this.J = this.J.filter(
-          (l, c, h) =>
-            c ===
-            h.findIndex(
-              (u) =>
-                u.errors[0].range.startPosition.line ===
-                  l.errors[0].range.startPosition.line &&
-                u.errors[0].range.startPosition.column ===
-                  l.errors[0].range.startPosition.column &&
-                u.errors[0].range.endPosition.line ===
-                  l.errors[0].range.endPosition.line &&
-                u.errors[0].range.endPosition.column ===
-                  l.errors[0].range.endPosition.column &&
-                u.errors[0].message === l.errors[0].message &&
-                u.errors[0].uri === l.errors[0].uri,
+        this.J.sort((a, b) => b.timestamp - a.timestamp), // 按时间戳降序排序
+        (this.J = this.J.filter( // 去重缓存
+          (entry, index, array) =>
+            index ===
+            array.findIndex(
+              (item) =>
+                item.errors[0].range.startPosition.line ===
+                  entry.errors[0].range.startPosition.line &&
+                item.errors[0].range.startPosition.column ===
+                  entry.errors[0].range.startPosition.column &&
+                item.errors[0].range.endPosition.line ===
+                  entry.errors[0].range.endPosition.line &&
+                item.errors[0].range.endPosition.column ===
+                  entry.errors[0].range.endPosition.column &&
+                item.errors[0].message === entry.errors[0].message &&
+                item.errors[0].uri === entry.errors[0].uri,
             ),
         ))
-      const a = s.map((l) => ({
-        message: l.message,
-        relatedInformation: formatRelatedInformation(l.relatedInformation),
-        source: l.source,
-        uri: e.toString(),
+      const currentMarkersFormatted = allMarkers.map((marker) => ({ // 5. 清理缓存：移除已修复的错误和过期条目
+        message: marker.message,
+        relatedInformation: formatRelatedInformation(marker.relatedInformation),
+        source: marker.source,
+        uri: uri.toString(),
         range: {
-          startPosition: { line: l.startLineNumber, column: l.startColumn },
-          endPosition: { line: l.endLineNumber, column: l.endColumn },
+          startPosition: { line: marker.startLineNumber, column: marker.startColumn },
+          endPosition: { line: marker.endLineNumber, column: marker.endColumn },
         },
       }))
-      ;(this.J = this.J.filter((l) =>
-        a.some(
-          (c) =>
-            c.message === l.errors[0].message &&
-            c.uri === l.errors[0].uri &&
-            c.range.startPosition.line ===
-              l.errors[0].range.startPosition.line &&
-            c.range.startPosition.column ===
-              l.errors[0].range.startPosition.column &&
-            c.range.endPosition.line === l.errors[0].range.endPosition.line &&
-            c.range.endPosition.column === l.errors[0].range.endPosition.column,
+      ;(this.J = this.J.filter((cacheEntry) => // 移除已修复的错误（不在当前诊断结果中的）
+        currentMarkersFormatted.some(
+          (marker) =>
+            marker.message === cacheEntry.errors[0].message &&
+            marker.uri === cacheEntry.errors[0].uri &&
+            marker.range.startPosition.line ===
+              cacheEntry.errors[0].range.startPosition.line &&
+            marker.range.startPosition.column ===
+              cacheEntry.errors[0].range.startPosition.column &&
+            marker.range.endPosition.line === cacheEntry.errors[0].range.endPosition.line &&
+            marker.range.endPosition.column === cacheEntry.errors[0].range.endPosition.column,
         ),
       )),
-        (this.J = this.J.filter((l) => Date.now() - l.timestamp < 1e3 * 20)),
-        (this.J = this.J.slice(0, Math.min(this.J.length, 10)))
+        (this.J = this.J.filter((cacheEntry) => Date.now() - cacheEntry.timestamp < 1e3 * 20)), // 移除20秒前的旧记录
+        (this.J = this.J.slice(0, Math.min(this.J.length, 10))) // 限制缓存大小（最多10条）
     }
     getRecentAndNearLocationLinterErrors(uri, t) {
       // 1. 获取当前文件的所有标记（包含错误、警告等）
