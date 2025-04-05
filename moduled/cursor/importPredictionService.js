@@ -19,7 +19,7 @@ export function createImportPredictionService(params) {
           (this.n = n),
           (this.q = o),
           (this.r = a),
-          (this.g = !1),
+          (this.g = false),
           (this.f = "importPredictionWidget." + rt()),
           (this.b = q("div.importPredictionWidgetBackground")),
           (this.c = q("span", {}, "")),
@@ -57,10 +57,10 @@ export function createImportPredictionService(params) {
           this.D(this.h.onDidChangeModelContent(() => this.t())),
           this.D(this.h.onDidChangeCursorPosition(() => this.t())),
           this.b.addEventListener("mouseenter", () => {
-            ;(this.g = !0), this.s()
+            ;(this.g = true), this.s()
           }),
           this.b.addEventListener("mouseleave", () => {
-            ;(this.g = !1), this.s()
+            ;(this.g = false), this.s()
           })
       }
       s() {
@@ -142,7 +142,7 @@ export function createImportPredictionService(params) {
           (this.L = g),
           (this.M = p),
           (this.N = m),
-          (this.g = void 0),
+          (this.g = undefined),
           (this.h = new Map()),
           (this.m = new LRUCache(100)),
           (this.n = []),
@@ -175,7 +175,7 @@ export function createImportPredictionService(params) {
           (this.ob = []),
           (this.pb = 50),
           (this.qb = 10),
-          (this.rb = !1),
+          (this.rb = false),
           (this.Eb = []),
           (this.Fb = 10),
           (this.Gb = 6e4),
@@ -190,25 +190,25 @@ export function createImportPredictionService(params) {
         const e =
           this.s.applicationUserPersistentStorage.cppConfig
             ?.importPredictionConfig
-        e !== void 0 &&
+        e !== undefined &&
           (this.s.setApplicationUserPersistentStorage(
             "backendHasDisabledCppAutoImport",
             e.isDisabledByBackend,
           ),
           this.s.applicationUserPersistentStorage.cppAutoImportEnabled ===
-            void 0 &&
+            undefined &&
             e.shouldTurnOnAutomatically &&
             this.s.setApplicationUserPersistentStorage(
               "cppAutoImportEnabled",
-              !0,
+              true,
             ))
       }
       O() {
         return (
           this.s.applicationUserPersistentStorage.cppConfig
-            ?.importPredictionConfig?.pythonEnabled === !0 ||
+            ?.importPredictionConfig?.pythonEnabled === true ||
           this.s.applicationUserPersistentStorage
-            .userHasEnabledImportPredictionForPython === !0
+            .userHasEnabledImportPredictionForPython === true
         )
       }
       P(e) {
@@ -239,13 +239,13 @@ export function createImportPredictionService(params) {
         const l = (h) => {
             const u = this.$(h),
               d = this.xb(e, h)
-            if (u === void 0 || d !== u) return !1
+            if (u === undefined || d !== u) return false
             const g = this.ab(e, h)
-            return g !== void 0 && g.seenAt.getTime() > Date.now() - jgo
+            return g !== undefined && g.seenAt.getTime() > Date.now() - jgo
               ? (g.currentMarkers.push(h),
-                g.status === "debouncing" ? ((g.status = "computing"), !0) : !1)
+                g.status === "debouncing" ? ((g.status = "computing"), true) : false)
               : Math.abs(h.startLineNumber - s.lineNumber) >= MAX_DIAGNOSTIC_DISTANCE
-                ? !1
+                ? false
                 : (this.m.set(this.Z(e, h), {
                     uri: t,
                     symbolName: u,
@@ -254,7 +254,7 @@ export function createImportPredictionService(params) {
                     seenAt: new Date(),
                     versionComputedAt: e.getModel()?.getVersionId() ?? 0,
                   }),
-                  !0)
+                  true)
           },
           c = a
             .sort(
@@ -304,12 +304,12 @@ export function createImportPredictionService(params) {
             } finally {
               this.R--
             }
-            if (h === void 0)
+            if (h === undefined)
               throw new Error(
                 "no code actions found - this should be unreachable",
               )
             const u = (w) =>
-                w !== void 0 &&
+                w !== undefined &&
                 Array.isArray(w.arguments) &&
                 w.arguments.length === 1 &&
                 typeof w.arguments[0] == "string" &&
@@ -324,10 +324,10 @@ export function createImportPredictionService(params) {
               g = new Map()
             d.filter(
               (w) =>
-                w.action.edit?.edits.at(0) !== void 0 &&
+                w.action.edit?.edits.at(0) !== undefined &&
                 "textEdit" in w.action.edit.edits[0],
             ).forEach((w) => {
-              w.action.edit !== void 0 && g.set(w, w.action.edit)
+              w.action.edit !== undefined && g.set(w, w.action.edit)
             })
             const m = d.flatMap((w) =>
                 u(w.action.command)
@@ -339,13 +339,13 @@ export function createImportPredictionService(params) {
               m.length <= Wgo &&
               (await Promise.allSettled(
                 m.map(async ({ action: w, command: C }) => {
-                  if (b === void 0) return
+                  if (b === undefined) return
                   const S = await this.Lb(w, C, b.symbolName)
-                  S !== void 0 && g.set(w, S)
+                  S !== undefined && g.set(w, S)
                 }),
               ))
             const y = [...g.entries()].flatMap(([w, C]) => {
-              if (C === void 0) return []
+              if (C === undefined) return []
               const S = C.edits.flatMap((x) =>
                 "textEdit" in x
                   ? ys.isEqual(x.resource, e.getModel()?.uri)
@@ -383,7 +383,7 @@ export function createImportPredictionService(params) {
                     }
                   : []
             })
-            if (y.length > 0 && b !== void 0) {
+            if (y.length > 0 && b !== undefined) {
               if (y.length > Vgo)
                 if (b) {
                   ;(b.status = "error"),
@@ -429,7 +429,7 @@ export function createImportPredictionService(params) {
             throw new Error("model uri is different from uri, not doing anything")
           let h = this.s.workspaceUserPersistentStorage.uniqueCppWorkspaceId
           if (
-            (h === void 0 &&
+            (h === undefined &&
               ((h =
                 Math.random().toString(36).substring(2, 15) +
                 Math.random().toString(36).substring(2, 15)),
@@ -458,7 +458,7 @@ export function createImportPredictionService(params) {
             )[0],
             p = await this.moveLineToEndOfImportsSectionExclusive(t, g),
             m = new Me(p, 1)
-          if (this.g?.getPartialCppRequest === void 0)
+          if (this.g?.getPartialCppRequest === undefined)
             throw new Error(
               "getPartialCppRequest is undefined, this should not happen",
             )
@@ -469,7 +469,7 @@ export function createImportPredictionService(params) {
                   relativeWorkspacePath: this.t.asRelativePath(e),
                   modelVersion: a.getVersionId(),
                 },
-              )) ?? !1,
+              )) ?? false,
             y = await this.g
               .getPartialCppRequest({
                 editor: t,
@@ -498,7 +498,7 @@ export function createImportPredictionService(params) {
                 }),
             ),
             { getModelName: C } = this.g
-          if (C === void 0)
+          if (C === undefined)
             throw new Error("getModelName is undefined, this should not happen")
           const S = this.g?.getRecentAndNearLocationLinterErrors?.(e, n),
             x = S && { ...S, errors: S.errors.slice(0, Hgo) },
@@ -534,7 +534,7 @@ export function createImportPredictionService(params) {
             { scoredEdits: A, shouldNoop: F, generationEdit: H } = L,
             B = i$s(A.at(0)),
             z = s.find(({ edit: se }) => se.textEdit.text === B.edit?.text)
-          if (z === void 0) throw new Error("bestImport is undefined")
+          if (z === undefined) throw new Error("bestImport is undefined")
           const K = i$s(B?.logProbs)
           return (F ??
             this.X({
@@ -579,7 +579,7 @@ export function createImportPredictionService(params) {
           u = t?.tokens.join("").match(/(\w+)/g),
           d = r ? 2 : 1
         return u && u.includes(n) && Math.exp(c) * d > 0.1
-          ? !1
+          ? false
           : Math.exp(c + h) * d < 0.02
       }
       async Y(e, t, s, n, r) {
@@ -623,7 +623,7 @@ export function createImportPredictionService(params) {
         const t = this.Q.find(
           (s) => s.source === e.source && s.codeMatches(e.code),
         )
-        if (t !== void 0) return t.getSymbolName(e.message)
+        if (t !== undefined) return t.getSymbolName(e.message)
       }
       ab(e, t) {
         return this.m.get(this.Z(e, t))
@@ -632,16 +632,16 @@ export function createImportPredictionService(params) {
         return ys.isEqual(e.uri, t.getModel()?.uri)
       }
       maybeAcceptShownImport(e) {
-        if (!this.isEnabled()) return !1
+        if (!this.isEnabled()) return false
         const { q: t } = this
-        if (t === void 0) return !1
-        if (!this.bb(t.shownImport, e)) return this.hideShownImport(e), !1
+        if (t === undefined) return false
+        if (!this.bb(t.shownImport, e)) return this.hideShownImport(e), false
         const s = e.getVisibleRanges(),
           n = e.getModel()?.getDecorationRange(t.decorationId)
         if (!n || !s.some((a) => this.Cb(a, n)))
-          return this.hideShownImport(e), !1
+          return this.hideShownImport(e), false
         const r = this.ab(e, t.shownImport.marker)
-        r !== void 0 &&
+        r !== undefined &&
           ((r.status = "accepted"),
           (r.seenAt = new Date()),
           (async () => {
@@ -658,7 +658,7 @@ export function createImportPredictionService(params) {
                   y7,
                   a,
                   g1.FromAILightbulb,
-                  void 0,
+                  undefined,
                   Ze.None,
                 )
               } else
@@ -666,7 +666,7 @@ export function createImportPredictionService(params) {
                   y7,
                   t.shownImport.action,
                   g1.FromAILightbulb,
-                  void 0,
+                  undefined,
                   Ze.None,
                 )
               this.s.setApplicationUserPersistentStorage(
@@ -678,20 +678,20 @@ export function createImportPredictionService(params) {
           this.db(e, t.shownImport),
           this.yb(e, t.shownImport.edit)
         const o = e.getModel()?.uri
-        return o !== void 0 && this.Hb(o), this.showCorrectUI(e), !0
+        return o !== undefined && this.Hb(o), this.showCorrectUI(e), true
       }
       maybeRejectShownImport(e) {
-        if (!this.isEnabled() || !e.hasTextFocus()) return !1
+        if (!this.isEnabled() || !e.hasTextFocus()) return false
         const t = e.getSelection()
         if (
           t !== null &&
           (t.startLineNumber !== t.endLineNumber || t.startColumn !== t.endColumn)
         )
-          return !1
+          return false
         const s = this.vb
-        return s === void 0 || !this.bb(s, e) || this.wb()
-          ? !1
-          : (this.rejectImport(e, s), this.showCorrectUI(e), !0)
+        return s === undefined || !this.bb(s, e) || this.wb()
+          ? false
+          : (this.rejectImport(e, s), this.showCorrectUI(e), true)
       }
       async cb(e, t) {
         const s = e.getModel()
@@ -729,8 +729,8 @@ export function createImportPredictionService(params) {
           if (
             (r.hide(),
             r.dispose(),
-            (this.q = void 0),
-            e !== void 0 && this.bb(s, e))
+            (this.q = undefined),
+            e !== undefined && this.bb(s, e))
           ) {
             const o = e.getModel()
             o && o.deltaDecorations([n], [])
@@ -822,8 +822,8 @@ export function createImportPredictionService(params) {
                   stickiness: 1,
                   zIndex: 5,
                   description: "Pending import decoration",
-                  isWholeLine: !1,
-                  collapseOnReplaceEdit: !0,
+                  isWholeLine: false,
+                  collapseOnReplaceEdit: true,
                 },
               },
             ],
@@ -849,7 +849,7 @@ export function createImportPredictionService(params) {
           throw new Error("model is undefined, so we can't update cached markers")
         for (const n of t) {
           const r = this.ab(e, n)
-          r !== void 0 && r.currentMarkers.push(n)
+          r !== undefined && r.currentMarkers.push(n)
         }
         this.h.set(e.getModel()?.uri?.toString() ?? "", t)
       }
@@ -864,7 +864,7 @@ export function createImportPredictionService(params) {
       }
       kb(e, t, s) {
         const n = this.ab(e, t.marker)?.currentMarkers
-        return n === void 0
+        return n === undefined
           ? 1 / 0
           : Math.min(1 / 0, ...n.map((r) => this.jb(r, s)))
       }
@@ -877,7 +877,7 @@ export function createImportPredictionService(params) {
         if (t?.hideIfSameState && r !== null) {
           const S = e.getModel(),
             x = S?.uri
-          if (S !== null && x !== void 0) {
+          if (S !== null && x !== undefined) {
             const k = S.getVersionId()
             if (
               k === this.j?.modelVersion &&
@@ -899,14 +899,14 @@ export function createImportPredictionService(params) {
         const l = (S) => {
             if (this.bb(S, e) && this.kb(e, S, r) < this.ib) {
               const x = this.ab(e, S.marker)
-              if (x !== void 0 && x.currentMarkers.length > 0)
+              if (x !== undefined && x.currentMarkers.length > 0)
                 return x.currentMarkers.some(
                   (k) =>
                     this.xb(e, k) === x.symbolName &&
                     (!a || o.some((E) => this.Cb(E, k))),
                 )
             }
-            return !1
+            return false
           },
           c = this.n.filter(l)
         n.push({ name: "validImportsTime", time: performance.now() })
@@ -917,13 +917,13 @@ export function createImportPredictionService(params) {
               ? []
               : u.sort((S, x) => this.kb(e, S, r) - this.kb(e, x, r)),
           p =
-            h === void 0 ||
+            h === undefined ||
             (d.length > 0 && this.kb(e, d[0], r) + qgo < this.kb(e, h, r))
               ? d.at(0)
               : h
         n.push({ name: "nextPossiblyShownImportTime", time: performance.now() })
         const m = e.getModel()?.uri
-        if (m === void 0)
+        if (m === undefined)
           throw new Error("uri is undefined, so we can't check if cpp is showing")
         const b = p && this.tb(m, p.marker.startLineNumber)
         n.push({
@@ -935,8 +935,8 @@ export function createImportPredictionService(params) {
             .sort((S, x) => this.jb(S, r) - this.jb(x, r))
             .find((S) => this.xb(e, S) === y.symbolName)
         n.push({ name: "matchingMarkerTime", time: performance.now() })
-        const C = b ? void 0 : w && p
-        C === void 0
+        const C = b ? undefined : w && p
+        C === undefined
           ? (this.hideShownImport(e),
             n.push({ name: "hideShownImportTime", time: performance.now() }))
           : l(C) &&
@@ -957,7 +957,7 @@ export function createImportPredictionService(params) {
             (this.nb.shift(),
             this.nb.reduce((n, r) => n + r, 0) / this.nb.length > this.mb &&
               !this.rb &&
-              ((this.rb = !0),
+              ((this.rb = true),
               (async () => {
                 try {
                   ;(await this.aiClient()).reportBug({
@@ -969,7 +969,7 @@ export function createImportPredictionService(params) {
       }
       tb(e, t) {
         const s = this.s.nonPersistentStorage.inlineDiffs
-        if (s !== void 0) {
+        if (s !== undefined) {
           const a = this.s.nonPersistentStorage.inprogressAIGenerations.map(
             (c) => c.generationUUID,
           )
@@ -983,16 +983,16 @@ export function createImportPredictionService(params) {
               return h && u && d
             })
           )
-            return !0
+            return true
         }
         const n = this.g?.getCurrentSuggestion?.()
-        if (n === void 0) return !1
+        if (n === undefined) return false
         const { originalText: r, replaceText: o } = n
         return r.trim() !== o.trim()
       }
       ub(e, t) {
         const s = this.s.nonPersistentStorage.inlineDiffs
-        if (s === void 0) return !1
+        if (s === undefined) return false
         const n = this.s.nonPersistentStorage.inprogressAIGenerations.map(
           (r) => r.generationUUID,
         )
@@ -1015,8 +1015,8 @@ export function createImportPredictionService(params) {
             t.id === "vscodevim.vim.primary" &&
             ["INSERT"].some((s) => t.container.innerText.includes(s))
           )
-            return !0
-        return !1
+            return true
+        return false
       }
       xb(e, t) {
         const s = e.getModel()
@@ -1068,8 +1068,8 @@ export function createImportPredictionService(params) {
           throw new Error(
             "seenLintError is undefined, so we can't check if the version is the same",
           )
-        if (r.versionComputedAt === n) return !1
-        const o = t.action.action.command !== void 0,
+        if (r.versionComputedAt === n) return false
+        const o = t.action.action.command !== undefined,
           a =
             t.edit.text.split(`
   `).length === 2 &&
@@ -1078,7 +1078,7 @@ export function createImportPredictionService(params) {
         return o || !a
       }
       isShowingImportSuggestion() {
-        return !1
+        return false
       }
       hideWidgetsIfConflictsWithCppSuggestion(e, t) {
         const s = this.q
@@ -1170,17 +1170,17 @@ export function createImportPredictionService(params) {
               ;(this.Jb = h),
                 setTimeout(() => {
                   this.Jb === h &&
-                    ((this.Jb = void 0), c("action was not applied in time"))
+                    ((this.Jb = undefined), c("action was not applied in time"))
                 }, this.Ib),
                 (async () => {
                   try {
                     const d = (
                       await this.M.executeCommand(t.id, ...(t.arguments || []))
                     ).changes
-                    if (d === void 0)
+                    if (d === undefined)
                       throw new Error("command returned no changes")
                     if (h === this.Jb) {
-                      this.Jb = void 0
+                      this.Jb = undefined
                       const g = {
                         edits: Object.entries(d).flatMap(([p, m]) =>
                           m.map((b) => ({
@@ -1201,7 +1201,7 @@ export function createImportPredictionService(params) {
                       l(g)
                     }
                   } catch (u) {
-                    this.Jb === h && ((this.Jb = void 0), c(u)),
+                    this.Jb === h && ((this.Jb = undefined), c(u)),
                       (async () => {
                         try {
                           ;(await this.aiClient()).reportBug({
@@ -1211,7 +1211,7 @@ export function createImportPredictionService(params) {
                         } catch {}
                       })(),
                       this.N.assert(
-                        !1,
+                        false,
                         `command execution for import prediction threw an error: ${u}`,
                       )
                     return
@@ -1219,7 +1219,7 @@ export function createImportPredictionService(params) {
                 })()
             }),
         )
-        if (n === void 0) throw new Error("startTime is undefined")
+        if (n === undefined) throw new Error("startTime is undefined")
         const o = Date.now() - n
         return (
           o > 250 &&
@@ -1236,9 +1236,9 @@ export function createImportPredictionService(params) {
       }
       Mb() {
         const e = this.Jb
-        if (e !== void 0) {
+        if (e !== undefined) {
           if (e.appliedAt < Date.now() - this.Ib) {
-            ;(this.Jb = void 0), e.rejectEdits("action was not applied in time")
+            ;(this.Jb = undefined), e.rejectEdits("action was not applied in time")
             return
           }
           return e
@@ -1247,14 +1247,14 @@ export function createImportPredictionService(params) {
       maybeInterceptBulkEdit(e) {
         const t = this.Mb(),
           s = 250
-        return t !== void 0 &&
+        return t !== undefined &&
           e.edits.some(
             (n) =>
               "textEdit" in n &&
               n.textEdit.text.match(new RegExp("(?<!\\w)" + t.symbolName)),
           )
-          ? (e.edits.length > 0 && (t.resolveEdits(e), (this.Jb = void 0)), !0)
-          : t !== void 0 && Date.now() - t.appliedAt < s
+          ? (e.edits.length > 0 && (t.resolveEdits(e), (this.Jb = undefined)), true)
+          : t !== undefined && Date.now() - t.appliedAt < s
       }
       async moveLineToEndOfImportsSectionExclusive(e, t) {
         const s = pm.get(e)
@@ -1268,8 +1268,8 @@ export function createImportPredictionService(params) {
       }
       Nb(e, t) {
         const s = e.getModel()?.getLineContent(t)
-        return s === void 0
-          ? !1
+        return s === undefined
+          ? false
           : s.startsWith("from ") ||
               s.startsWith("import ") ||
               s.includes("= require(") ||
@@ -1280,7 +1280,7 @@ export function createImportPredictionService(params) {
           GB.GetFileSyncEncryptionHeader,
           null,
         )
-        if (e === void 0)
+        if (e === undefined)
           throw new Error("Could not retrieve file sync encryption header")
         return e
       }
@@ -1306,7 +1306,7 @@ export function createImportPredictionService(params) {
     ydi,
   )
   var i$s = (i) => {
-    if (i === void 0) throw new Error("x is undefined")
+    if (i === undefined) throw new Error("x is undefined")
     return i
   }
   Ve(importPredictionService, ydi, 1)
