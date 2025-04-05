@@ -19265,7 +19265,7 @@ export function createAIServiceV1(params) {
         return v.util.equals(xDe, e, t)
       }
     },
-    D1t = class kDe extends _ {
+    StreamCppRequest = class kDe extends _ {
       constructor(e) {
         super(),
           (this.diffHistory = []),
@@ -19886,7 +19886,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "cpp_request", kind: "message", T: D1t },
+          { no: 1, name: "cpp_request", kind: "message", T: StreamCppRequest },
           {
             no: 25,
             name: "suggested_edits",
@@ -42753,7 +42753,7 @@ export function createAIServiceV1(params) {
     MCo,
     Fvn,
     Ovn,
-    D1t,
+    StreamCppRequest,
     Bvn,
     T1t,
     Hvn,
