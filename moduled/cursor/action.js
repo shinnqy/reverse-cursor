@@ -4,7 +4,7 @@
 export function createAction(params) {
   // Ai: EditorAction
   // Zt: registerEditorAction
-  const { z1, Ai, TZn, T, me, ft, ei, yi, Zt, LZn, ao, ve, OP, Pn, ys, kue, Eue, ms, PZn, st, cUe, $N, GYe, Iue, eXi, V, Me, wf, a4t, o4t, rt, __decorate, __param, Z, Hi, Ce, Ac, oy, Vi, Pt, ue, Tn, s4t, n4t, JYe, KYe, dt, ud, Y, le, De, Gt, I, DZn, Wa, so, Pg, R, q, Jl, it } = params;
+  const { z1, Ai, TZn, T, me, ft, ei, yi, Zt, LZn, ao, ve, OP, Pn, extUri, kue, Eue, ms, PZn, st, cUe, $N, GYe, Iue, eXi, V, Me, wf, a4t, o4t, rt, __decorate, __param, Z, Hi, Ce, Ac, oy, Vi, Pt, ue, Tn, s4t, n4t, JYe, KYe, dt, ud, Y, le, De, Gt, I, DZn, Wa, so, Pg, R, q, Jl, it } = params;
 
   var h4t,
     $Zn = class extends Ai {
@@ -73,7 +73,7 @@ export function createAction(params) {
       s = t.getModel()
     } else return !1
     return e.nonPersistentStorage.inlineDiffs.some((r) =>
-      ys.isEqual(r.uri, s.uri),
+      extUri.isEqual(r.uri, s.uri),
     )
   }
   z1.registerEditorAction(kue, (i, e) => {
@@ -473,7 +473,7 @@ export function createAction(params) {
       if (!this.f.hasModel()) return
       const s = this.f.getModel(),
         n = this.u.nonPersistentStorage.inlineDiffs
-          .filter((a) => ys.isEqual(a.uri, s.uri))
+          .filter((a) => extUri.isEqual(a.uri, s.uri))
           .flatMap((a) =>
             a.changes.map((l) => ({
               startLineNumber:
@@ -746,7 +746,7 @@ export function createAction(params) {
           const r = i.nonPersistentStorage.inlineDiffs,
             o = n.getModel()?.uri
           if (o) {
-            const a = r.findIndex((l) => ys.isEqual(l.uri, o))
+            const a = r.findIndex((l) => extUri.isEqual(l.uri, o))
             if (a > 0) {
               const l = r[a - 1]
               e.openEditor({ resource: l.uri })
@@ -775,7 +775,7 @@ export function createAction(params) {
             const r = i.nonPersistentStorage.inlineDiffs,
               o = n.getModel()?.uri
             if (o) {
-              const a = r.findIndex((l) => ys.isEqual(l.uri, o))
+              const a = r.findIndex((l) => extUri.isEqual(l.uri, o))
               if (a < r.length - 1) {
                 const l = r[a + 1]
                 e.openEditor({ resource: l.uri })
@@ -810,7 +810,7 @@ export function createAction(params) {
                 ? H.createdAt < B.createdAt
                   ? -1
                   : 1
-                : ys.isEqual(H.uri, B.uri)
+                : extUri.isEqual(H.uri, B.uri)
                   ? H.currentRange.startLineNumber -
                     B.currentRange.startLineNumber
                   : H.uri.toString() < B.uri.toString()
@@ -840,11 +840,11 @@ export function createAction(params) {
               e.reactiveStorageService.nonPersistentStorage.inprogressAIGenerations.some(
                 (B) =>
                   B.generationUUID === H.generationUUID &&
-                  ys.isEqual(H.uri, i.uri),
+                  extUri.isEqual(H.uri, i.uri),
               ),
             )
       }),
-      u = Y(() => (i.uri ? c().filter((F) => ys.isEqual(F.uri, i.uri)) : [])),
+      u = Y(() => (i.uri ? c().filter((F) => extUri.isEqual(F.uri, i.uri)) : [])),
       d = Y(() => {
         const F = c()
         if (F.length === 0) return []
@@ -865,7 +865,7 @@ export function createAction(params) {
         e.commandService.executeCommand(JYe)
       },
       m = () => {
-        if (i.uri) return l().find((F) => ys.isEqual(F.uri, i.uri))
+        if (i.uri) return l().find((F) => extUri.isEqual(F.uri, i.uri))
       },
       b = () => {
         const F = m()
@@ -885,7 +885,7 @@ export function createAction(params) {
         if (Sv.get(i.editor)) {
           const H = i.uri,
             B = l()
-              .filter((he) => ys.isEqual(he.uri, H))
+              .filter((he) => extUri.isEqual(he.uri, H))
               .flatMap((he) =>
                 he.changes.map((ae) => ({
                   startLineNumber:
@@ -965,7 +965,7 @@ export function createAction(params) {
       P = () => {
         e.commandService.executeCommand(KYe)
       },
-      L = Y(() => (i.uri ? l().some((F) => ys.isEqual(F.uri, i.uri)) : !1))
+      L = Y(() => (i.uri ? l().some((F) => extUri.isEqual(F.uri, i.uri)) : !1))
     return I(DZn, {
       get isGenerating() {
         return h()

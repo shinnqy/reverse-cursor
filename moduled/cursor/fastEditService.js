@@ -1,7 +1,7 @@
 // @ts-check
 
 export function createFastEditService(params) {
-  const { Re, rt, LRUCache, fu, vze, zr, ys, F$, wn, fs, JC, Va, nm, cb, LKn, Es, Qb, aG, x1t, Kf, J, SYe, _Ui, EFt, PKn, V$i, Pn, pm, VC, AVe, s7, l$i, c$i, h$i, __decorate, __param, A_, Br, rU, ft, g2, ei, nl, Xt, oy, ve, st, cv, it, Ac, Z, _C, Na, Ve } = params;
+  const { Re, rt, LRUCache, fu, vze, zr, extUri, F$, wn, fs, JC, Va, nm, cb, LKn, Es, Qb, aG, x1t, Kf, J, SYe, _Ui, EFt, PKn, V$i, Pn, pm, VC, AVe, s7, l$i, c$i, h$i, __decorate, __param, A_, Br, rU, ft, g2, ei, nl, Xt, oy, ve, st, cv, it, Ac, Z, _C, Na, Ve } = params;
 
   var x5 = Re("fastEditService"),
     OP = "speculative-full-file",
@@ -49,7 +49,7 @@ export function createFastEditService(params) {
         const o = this.c.getLastActiveFileEditor()?.input?.resource
         if (o === void 0) throw new Error("Failed to get last active file editor")
         const a = this.j.nonPersistentStorage.inlineDiffs
-          .filter((b) => ys.isEqual(b.uri, o))
+          .filter((b) => extUri.isEqual(b.uri, o))
           .map((b) => b.id)
         for (const b of a)
           this.m.cancelDiff(b), this.m.rejectDiff(b, { close: !0 })
@@ -165,7 +165,7 @@ export function createFastEditService(params) {
           throw new Error("Failed to get last active file editor")
         const a = () =>
             this.j.nonPersistentStorage.inlineDiffs
-              .filter((H) => ys.isEqual(H.uri, s))
+              .filter((H) => extUri.isEqual(H.uri, s))
               .map((H) => H.id),
           l = (H) => {
             const B = a()

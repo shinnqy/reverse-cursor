@@ -1,7 +1,7 @@
 // @ts-check
 
 export function createInterfaceAgentService(params) {
-  const { Re, V, LRUCache, oi, ys, rt, q1t, wn, J, H1t, s2i, j1t, rm, Son, Ln, Pn, U, Yt, __decorate, __param, Br, nt, ft, ei, g2, it, ve, Xt, bY, ue, vr, fn, Lg, Ve } = params;
+  const { Re, V, LRUCache, oi, extUri, rt, q1t, wn, J, H1t, s2i, j1t, rm, Son, Ln, Pn, U, Yt, __decorate, __param, Br, nt, ft, ei, g2, it, ve, Xt, bY, ue, vr, fn, Lg, Ve } = params;
 
   var pKi = Re("interfaceAgentService"),
     SFt = class extends V {
@@ -123,7 +123,7 @@ export function createInterfaceAgentService(params) {
         }
         if (
           this.g.nonPersistentStorage.aiInterfaceState.activeAgents.some((n) =>
-            ys.isEqual(n.interfaceUri, e),
+            extUri.isEqual(n.interfaceUri, e),
           )
         )
           return
@@ -204,7 +204,7 @@ export function createInterfaceAgentService(params) {
               "activeAgents",
               (o) =>
                 o.map((a) =>
-                  ys.isEqual(a.interfaceUri, e)
+                  extUri.isEqual(a.interfaceUri, e)
                     ? ((r = !0), { ...a, status: n })
                     : a,
                 ),
@@ -279,7 +279,7 @@ export function createInterfaceAgentService(params) {
       }
       z(e) {
         const s = this.g.nonPersistentStorage.aiInterfaceState.activeAgents.find(
-          (n) => ys.isEqual(n.interfaceUri, e),
+          (n) => extUri.isEqual(n.interfaceUri, e),
         )
         if (!s) {
           console.error("no active agent found for uri", e)
