@@ -1,7 +1,7 @@
 // @ts-check
 
 export function createImportPredictionService(params) {
-  const {V, __decorate, __param, Pt: themeService, ue: configurationService, ei, Ve, it, mo, Z, metricsService, cppTypeService, everythingProviderService, yi, Xt, cl, cppEventLoggerService, zi, aiFeatureStatusService, st, aiAssertService, importPredictionService, LRUCache, DYe, fu, rt, q, W, Un, Va, Ri, ys, MAX_DIAGNOSTIC_DISTANCE, DHe, Ze, gI, G, mp, lp, Me, GB, CppIntent, P1t, HMi, hG, y7, g1, Kh, U, pm } = params;
+  const {V, __decorate, __param, Pt: themeService, ue: configurationService, ei: reactiveStorageService, Ve, it: contextService, mo: markerService, Z: instantiationService, metricsService, cppTypeService, everythingProviderService, yi: codeEditorService, Xt: textModelService, cl: statusbarService, cppEventLoggerService, zi: ILanguageFeaturesService, aiFeatureStatusService, st: commandService, aiAssertService, importPredictionService, LRUCache, DYe, fu, rt, q, W, Un, Va, Ri, ys, MAX_DIAGNOSTIC_DISTANCE, DHe, Ze, gI, G, mp, lp, Me, GB, CppIntent, P1t, HMi, hG, y7, g1, Kh, U, pm } = params;
 
   var bdi,
     vdi = class extends V {
@@ -115,33 +115,33 @@ export function createImportPredictionService(params) {
         this.getPosition() && this.h.layoutContentWidget(this)
       }
     }
-  vdi = bdi = __decorate([__param(4, themeService), __param(5, configurationService), __param(6, ei)], vdi)
+  vdi = bdi = __decorate([__param(4, themeService), __param(5, configurationService), __param(6, reactiveStorageService)], vdi)
   var Hgo = 5,
     Vgo = 7,
     Wgo = 4,
     qgo = 5,
     jgo = 5e3 * 60,
-    ydi = class extends V {
+    ImportPredictionService = class extends V {
       aiClient() {
         return this.c.get()
       }
       constructor(e, t, s, n, r, o, a, l, c, h, u, d, g, p, m) {
         super(),
-          (this.s = e),
-          (this.t = t),
-          (this.u = s),
-          (this.w = n),
-          (this.y = r),
-          (this.z = o),
-          (this.C = a),
-          (this.F = l),
-          (this.G = c),
-          (this.H = h),
-          (this.I = u),
-          (this.J = d),
-          (this.L = g),
-          (this.M = p),
-          (this.N = m),
+          (this.s = e), (this.reactiveStorageService = this.s),
+          (this.t = t), (this.contextService = this.t),
+          (this.u = s), (this.markerService = this.u),
+          (this.w = n), (this.instantiationService = this.w),
+          (this.y = r), (this.metricsService = this.y),
+          (this.z = o), (this.cppTypeService = this.z),
+          (this.C = a), (this.everythingProviderService = this.C),
+          (this.F = l), (this.codeEditorService = this.F),
+          (this.G = c), (this.textModelService = this.G),
+          (this.H = h), (this.statusbarService = this.H),
+          (this.I = u), (this.cppEventLoggerService = this.I),
+          (this.J = d), (this.ILanguageFeaturesService = this.J),
+          (this.L = g), (this.aiFeatureStatusService = this.L),
+          (this.M = p), (this.commandService = this.M),
+          (this.N = m), (this.aiAssertService = this.N),
           (this.g = undefined),
           (this.h = new Map()),
           (this.m = new LRUCache(100)),
@@ -181,33 +181,33 @@ export function createImportPredictionService(params) {
           (this.Gb = 6e4),
           (this.Ib = 1e4),
           (this.Kb = new DYe(1)),
-          (this.c = this.w.createInstance(fu, { service: Va }))
+          (this.c = this.instantiationService.createInstance(fu, { service: Va }))
       }
       registerCppMethods(e) {
         this.g = e
       }
       handleNewImportPredictionConfig() {
         const e =
-          this.s.applicationUserPersistentStorage.cppConfig
+          this.reactiveStorageService.applicationUserPersistentStorage.cppConfig
             ?.importPredictionConfig
         e !== undefined &&
-          (this.s.setApplicationUserPersistentStorage(
+          (this.reactiveStorageService.setApplicationUserPersistentStorage(
             "backendHasDisabledCppAutoImport",
             e.isDisabledByBackend,
           ),
-          this.s.applicationUserPersistentStorage.cppAutoImportEnabled ===
+          this.reactiveStorageService.applicationUserPersistentStorage.cppAutoImportEnabled ===
             undefined &&
             e.shouldTurnOnAutomatically &&
-            this.s.setApplicationUserPersistentStorage(
+            this.reactiveStorageService.setApplicationUserPersistentStorage(
               "cppAutoImportEnabled",
               true,
             ))
       }
       O() {
         return (
-          this.s.applicationUserPersistentStorage.cppConfig
+          this.reactiveStorageService.applicationUserPersistentStorage.cppConfig
             ?.importPredictionConfig?.pythonEnabled === true ||
-          this.s.applicationUserPersistentStorage
+          this.reactiveStorageService.applicationUserPersistentStorage
             .userHasEnabledImportPredictionForPython === true
         )
       }
@@ -291,7 +291,7 @@ export function createImportPredictionService(params) {
                 throw new Error("too many code actions requests in flight")
               this.R++,
                 (h = await gI(
-                  this.J.codeActionProvider,
+                  this.ILanguageFeaturesService.codeActionProvider,
                   s,
                   G.lift(c),
                   { type: 2, triggerAction: mp.QuickFix },
@@ -427,13 +427,13 @@ export function createImportPredictionService(params) {
             c = a.getVersionId()
           if (a.uri !== e)
             throw new Error("model uri is different from uri, not doing anything")
-          let h = this.s.workspaceUserPersistentStorage.uniqueCppWorkspaceId
+          let h = this.reactiveStorageService.workspaceUserPersistentStorage.uniqueCppWorkspaceId
           if (
             (h === undefined &&
               ((h =
                 Math.random().toString(36).substring(2, 15) +
                 Math.random().toString(36).substring(2, 15)),
-              this.s.setWorkspaceUserPersistentStorage(
+              this.reactiveStorageService.setWorkspaceUserPersistentStorage(
                 "uniqueCppWorkspaceId",
                 h,
               )),
@@ -463,10 +463,10 @@ export function createImportPredictionService(params) {
               "getPartialCppRequest is undefined, this should not happen",
             )
           const b =
-              (await this.C.onlyLocalProvider?.runCommand(
+              (await this.everythingProviderService.onlyLocalProvider?.runCommand(
                 GB.ShouldRelyOnFileSyncForFile,
                 {
-                  relativeWorkspacePath: this.t.asRelativePath(e),
+                  relativeWorkspacePath: this.contextService.asRelativePath(e),
                   modelVersion: a.getVersionId(),
                 },
               )) ?? false,
@@ -510,7 +510,7 @@ export function createImportPredictionService(params) {
                 modelName: C(),
                 diffHistoryKeys: [],
                 contextItems: [],
-                parameterHints: this.z.getRelevantParameterHints(t),
+                parameterHints: this.cppTypeService.getRelevantParameterHints(t),
                 lspContexts: [],
                 filesyncUpdates: [],
                 workspaceId: h,
@@ -591,7 +591,7 @@ export function createImportPredictionService(params) {
                 (this.ab(e, c.marker)?.seenAt.getTime() ?? 0),
             )
             .slice(0, 20),
-          l = this.G.createModelReference(t)
+          l = this.textModelService.createModelReference(t)
         try {
           const c = (await l).object.textEditorModel
           this.n = [
@@ -654,7 +654,7 @@ export function createImportPredictionService(params) {
                       await new Promise((l) => setTimeout(l, 75))
                     })(),
                   ])) ?? t.shownImport.action
-                await this.w.invokeFunction(
+                await this.instantiationService.invokeFunction(
                   y7,
                   a,
                   g1.FromAILightbulb,
@@ -662,14 +662,14 @@ export function createImportPredictionService(params) {
                   Ze.None,
                 )
               } else
-                await this.w.invokeFunction(
+                await this.instantiationService.invokeFunction(
                   y7,
                   t.shownImport.action,
                   g1.FromAILightbulb,
                   undefined,
                   Ze.None,
                 )
-              this.s.setApplicationUserPersistentStorage(
+              this.reactiveStorageService.setApplicationUserPersistentStorage(
                 "howManyTimesHasUserAcceptedImportPrediction",
                 (a) => (a ?? 0) + 1,
               )
@@ -702,7 +702,7 @@ export function createImportPredictionService(params) {
         const n = performance.now()
         return (
           await gI(
-            this.J.codeActionProvider,
+            this.ILanguageFeaturesService.codeActionProvider,
             s,
             G.lift(t.marker),
             { type: 2, triggerAction: mp.QuickFix },
@@ -735,7 +735,7 @@ export function createImportPredictionService(params) {
             const o = e.getModel()
             o && o.deltaDecorations([n], [])
           } else {
-            const o = this.G.createModelReference(s.uri)
+            const o = this.textModelService.createModelReference(s.uri)
             ;(async () => {
               try {
                 ;(await o).object.textEditorModel.deltaDecorations([n], [])
@@ -804,7 +804,7 @@ export function createImportPredictionService(params) {
               "model is undefined, so we couldn't remove decoration - this should never happen",
             )
           const r =
-              this.s.applicationUserPersistentStorage
+              this.reactiveStorageService.applicationUserPersistentStorage
                 .cppAutoImportDecorationStyle,
             o = [
               {
@@ -831,7 +831,7 @@ export function createImportPredictionService(params) {
           ;(this.q = {
             shownImport: t,
             decorationId: a,
-            importWidget: this.w.createInstance(
+            importWidget: this.instantiationService.createInstance(
               vdi,
               e,
               a,
@@ -949,7 +949,7 @@ export function createImportPredictionService(params) {
         this.nb.push(e),
           e > this.qb &&
             (this.ob.push(t), this.ob.length > this.pb && this.ob.shift()),
-          this.N.assert(
+          this.aiAssertService.assert(
             e < this.qb,
             `showCorrectUI took too long: ${JSON.stringify({ latency: e, evtTimes: t.slice(1).map((s, n) => ({ name: s.name, latency: Math.round(s.time - t[n].time) })) })}`,
           ),
@@ -968,9 +968,9 @@ export function createImportPredictionService(params) {
               })()))
       }
       tb(e, t) {
-        const s = this.s.nonPersistentStorage.inlineDiffs
+        const s = this.reactiveStorageService.nonPersistentStorage.inlineDiffs
         if (s !== undefined) {
-          const a = this.s.nonPersistentStorage.inprogressAIGenerations.map(
+          const a = this.reactiveStorageService.nonPersistentStorage.inprogressAIGenerations.map(
             (c) => c.generationUUID,
           )
           if (
@@ -991,9 +991,9 @@ export function createImportPredictionService(params) {
         return r.trim() !== o.trim()
       }
       ub(e, t) {
-        const s = this.s.nonPersistentStorage.inlineDiffs
+        const s = this.reactiveStorageService.nonPersistentStorage.inlineDiffs
         if (s === undefined) return false
-        const n = this.s.nonPersistentStorage.inprogressAIGenerations.map(
+        const n = this.reactiveStorageService.nonPersistentStorage.inprogressAIGenerations.map(
           (r) => r.generationUUID,
         )
         return s.some((r) => {
@@ -1009,7 +1009,7 @@ export function createImportPredictionService(params) {
         return this.q?.shownImport
       }
       wb() {
-        const e = this.H.getViewModel()
+        const e = this.statusbarService.getViewModel()
         for (const t of [...e.getEntries(0), ...e.getEntries(1)])
           if (
             t.id === "vscodevim.vim.primary" &&
@@ -1126,10 +1126,10 @@ export function createImportPredictionService(params) {
       }
       isEnabled() {
         return !!(
-          this.s.applicationUserPersistentStorage.cppAutoImportEnabled &&
-          !this.s.applicationUserPersistentStorage
+          this.reactiveStorageService.applicationUserPersistentStorage.cppAutoImportEnabled &&
+          !this.reactiveStorageService.applicationUserPersistentStorage
             .backendHasDisabledCppAutoImport &&
-          this.s.applicationUserPersistentStorage.cppEnabled
+          this.reactiveStorageService.applicationUserPersistentStorage.cppEnabled
         )
       }
       Db(e) {
@@ -1175,7 +1175,7 @@ export function createImportPredictionService(params) {
                 (async () => {
                   try {
                     const d = (
-                      await this.M.executeCommand(t.id, ...(t.arguments || []))
+                      await this.commandService.executeCommand(t.id, ...(t.arguments || []))
                     ).changes
                     if (d === undefined)
                       throw new Error("command returned no changes")
@@ -1210,7 +1210,7 @@ export function createImportPredictionService(params) {
                           })
                         } catch {}
                       })(),
-                      this.N.assert(
+                      this.aiAssertService.assert(
                         false,
                         `command execution for import prediction threw an error: ${u}`,
                       )
@@ -1276,7 +1276,7 @@ export function createImportPredictionService(params) {
               s.startsWith("use ")
       }
       async Ob() {
-        const e = await this.C.onlyLocalProvider?.runCommand(
+        const e = await this.everythingProviderService.onlyLocalProvider?.runCommand(
           GB.GetFileSyncEncryptionHeader,
           null,
         )
@@ -1285,29 +1285,29 @@ export function createImportPredictionService(params) {
         return e
       }
     }
-  ydi = __decorate(
+  ImportPredictionService = __decorate(
     [
-      __param(0, ei),
-      __param(1, it),
-      __param(2, mo),
-      __param(3, Z),
+      __param(0, reactiveStorageService),
+      __param(1, contextService),
+      __param(2, markerService),
+      __param(3, instantiationService),
       __param(4, metricsService),
       __param(5, cppTypeService),
       __param(6, everythingProviderService),
-      __param(7, yi),
-      __param(8, Xt),
-      __param(9, cl),
+      __param(7, codeEditorService),
+      __param(8, textModelService),
+      __param(9, statusbarService),
       __param(10, cppEventLoggerService),
-      __param(11, zi),
+      __param(11, ILanguageFeaturesService),
       __param(12, aiFeatureStatusService),
-      __param(13, st),
+      __param(13, commandService),
       __param(14, aiAssertService),
     ],
-    ydi,
+    ImportPredictionService,
   )
   var i$s = (i) => {
     if (i === undefined) throw new Error("x is undefined")
     return i
   }
-  Ve(importPredictionService, ydi, 1)
+  Ve(importPredictionService, ImportPredictionService, 1)
 }
