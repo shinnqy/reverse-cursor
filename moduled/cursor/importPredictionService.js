@@ -1,7 +1,7 @@
 // @ts-check
 
 export function createImportPredictionService(params) {
-  const {V, __decorate, __param, Pt: themeService, ue: configurationService, ei: reactiveStorageService, Ve, it: contextService, mo: markerService, Z: instantiationService, metricsService, cppTypeService, everythingProviderService, yi: codeEditorService, Xt: textModelService, cl: statusbarService, cppEventLoggerService, zi: ILanguageFeaturesService, aiFeatureStatusService, st: commandService, aiAssertService, importPredictionService, LRUCache, DYe, fu, rt, q, W, Un, Va, Ri, ys, MAX_DIAGNOSTIC_DISTANCE, DHe, Ze, gI, G, mp, lp, Me, GB, CppIntent, P1t, HMi, hG, y7, g1, Kh, U, pm } = params;
+  const {V, __decorate, __param, Pt: themeService, ue: configurationService, ei: reactiveStorageService, Ve, it: contextService, mo: markerService, Z: instantiationService, metricsService, cppTypeService, everythingProviderService, yi: codeEditorService, Xt: textModelService, cl: statusbarService, cppEventLoggerService, zi: ILanguageFeaturesService, aiFeatureStatusService, st: commandService, aiAssertService, importPredictionService, LRUCache, DYe, fu, rt, q, W, Un, Va, Ri, extUri, MAX_DIAGNOSTIC_DISTANCE, DHe, Ze, gI, G, mp, lp, Me, GB, CppIntent, P1t, HMi, hG, y7, g1, Kh, U, pm } = params;
 
   var bdi,
     vdi = class extends V {
@@ -233,7 +233,7 @@ export function createImportPredictionService(params) {
         const a = n.filter(
           (h) =>
             [Ri.Error, Ri.Warning].includes(h.severity) &&
-            ys.isEqual(h.resource, t),
+            extUri.isEqual(h.resource, t),
         )
         this.Db(e)
         const l = (h) => {
@@ -348,7 +348,7 @@ export function createImportPredictionService(params) {
               if (C === undefined) return []
               const S = C.edits.flatMap((x) =>
                 "textEdit" in x
-                  ? ys.isEqual(x.resource, e.getModel()?.uri)
+                  ? extUri.isEqual(x.resource, e.getModel()?.uri)
                     ? e.getModel()?.getValueInRange(x.textEdit.range) ===
                       x.textEdit.text
                       ? []
@@ -629,7 +629,7 @@ export function createImportPredictionService(params) {
         return this.m.get(this.Z(e, t))
       }
       bb(e, t) {
-        return ys.isEqual(e.uri, t.getModel()?.uri)
+        return extUri.isEqual(e.uri, t.getModel()?.uri)
       }
       maybeAcceptShownImport(e) {
         if (!this.isEnabled()) return false
@@ -881,7 +881,7 @@ export function createImportPredictionService(params) {
             const k = S.getVersionId()
             if (
               k === this.j?.modelVersion &&
-              ys.isEqual(this.j?.uri, x) &&
+              extUri.isEqual(this.j?.uri, x) &&
               r?.lineNumber === this.j?.cursorPosition?.lineNumber &&
               r?.column === this.j?.cursorPosition?.column
             )
@@ -979,7 +979,7 @@ export function createImportPredictionService(params) {
                 u =
                   t >= c.currentRange.startLineNumber &&
                   t <= c.currentRange.endLineNumberExclusive,
-                d = ys.isEqual(c.uri, e) || e.fsPath === c.uri.fsPath
+                d = extUri.isEqual(c.uri, e) || e.fsPath === c.uri.fsPath
               return h && u && d
             })
           )
@@ -1001,7 +1001,7 @@ export function createImportPredictionService(params) {
             a =
               t >= r.currentRange.startLineNumber &&
               t < r.currentRange.endLineNumberExclusive,
-            l = ys.isEqual(r.uri, e) || e.fsPath === r.uri.fsPath
+            l = extUri.isEqual(r.uri, e) || e.fsPath === r.uri.fsPath
           return !o && a && l
         })
       }
@@ -1031,29 +1031,30 @@ export function createImportPredictionService(params) {
           endColumn: t.endColumn,
         })
       }
-      handleNewGreens(e, t) {
-        const s = Date.now()
+      handleNewGreens(editor, newRanges) {
+        const currentTime = Date.now()
         this.r = this.r
-          .filter((n) => s - n.timestamp <= 3e4)
-          .concat(t.map((n) => ({ uri: e.uri, range: n, timestamp: s })))
+          .filter((marker) => currentTime - marker.timestamp <= 3e4)
+          .concat(newRanges.map((range) => ({ uri: editor.uri, range, timestamp: currentTime })))
       }
-      yb(e, t) {
-        const { startLineNumber: s, endLineNumber: n } = t.range,
-          r = n - s + 1,
-          a =
+      yb(editor, t) {
+        const { startLineNumber, endLineNumber } = t.range,
+          originalLineCount = endLineNumber - startLineNumber + 1,
+          // 计算新增/删除的行数差
+          lineDelta =
             t.text.split(`
-  `).length - r
-        this.r = this.r.map((l) =>
-          l.range.startLineNumber > s && ys.isEqual(l.uri, e.getModel()?.uri)
+  `).length - originalLineCount
+        this.r = this.r.map((marker) =>
+          marker.range.startLineNumber > startLineNumber && extUri.isEqual(marker.uri, editor.getModel()?.uri)
             ? {
-                ...l,
+                ...marker,
                 range: {
-                  ...l.range,
-                  startLineNumber: l.range.startLineNumber + a,
-                  endLineNumber: l.range.endLineNumber + a,
+                  ...marker.range,
+                  startLineNumber: marker.range.startLineNumber + lineDelta,
+                  endLineNumber: marker.range.endLineNumber + lineDelta,
                 },
               }
-            : l,
+            : marker,
         )
       }
       zb(e, t) {
@@ -1102,7 +1103,7 @@ export function createImportPredictionService(params) {
           (this.r = this.r.filter((n) => t - n.timestamp <= s)),
           this.r.some(
             (n) =>
-              ys.isEqual(n.uri, e.resource) &&
+              extUri.isEqual(n.uri, e.resource) &&
               this.Cb(n.range, {
                 startLineNumber: e.startLineNumber,
                 startColumn: e.startColumn,
@@ -1135,7 +1136,7 @@ export function createImportPredictionService(params) {
       Db(e) {
         for (const [t, s] of [...this.m.entries()]) {
           const { status: n, seenAt: r, uri: o } = s
-          ys.isEqual(o, e.getModel()?.uri) &&
+          extUri.isEqual(o, e.getModel()?.uri) &&
             n === "no-actions" &&
             this.Eb.filter((l) => l.time > +r && l.uri !== e.getModel()?.uri + "")
               .length > 0 &&
@@ -1148,7 +1149,7 @@ export function createImportPredictionService(params) {
       }
       Hb(e) {
         for (const [t, s] of [...this.m.entries()])
-          ys.isEqual(s.uri, e) &&
+          extUri.isEqual(s.uri, e) &&
             s.status === "noop" &&
             +s.seenAt > Date.now() - this.Gb &&
             this.m.delete(t)

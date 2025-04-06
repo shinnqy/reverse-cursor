@@ -2,7 +2,7 @@
 
 // 254597
 export function createDevContext(params) {
-  const { ce, U, vm, ys, li, hb, Zb, J, L1, p7i, ms, ResourceMap, bs, le, dt, nr, oi, De, _l, Tt, NG, i7, KWe, X, jo, I, hl, Cu, Y, Vu, qn, wv, xe, tt, ie, $, xBi, Nz, $r, u_, M, y4t, e0, Ze, G, un, Nae, cc, KLn, $tr, te, CEt, wEt, gG } = params;
+  const { ce, U, vm, extUri, li, hb, Zb, J, L1, p7i, ms, ResourceMap, bs, le, dt, nr, oi, De, _l, Tt, NG, i7, KWe, X, jo, I, hl, Cu, Y, Vu, qn, wv, xe, tt, ie, $, xBi, Nz, $r, u_, M, y4t, e0, Ze, G, un, Nae, cc, KLn, $tr, te, CEt, wEt, gG } = params;
 
   var Aa
   ;(function (i) {
@@ -114,7 +114,7 @@ export function createDevContext(params) {
     let r = []
     const o = []
     if (!(s?.autoPopulate ?? !0) && !i) return []
-    const l = (d) => o.some((g) => ys.isEqual(d, g))
+    const l = (d) => o.some((g) => extUri.isEqual(d, g))
     ;(s?.includeOpenEditors ?? !1) &&
       e.editorService
         .getEditors(0)

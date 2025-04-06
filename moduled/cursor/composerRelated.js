@@ -2,7 +2,7 @@
 
 // 171883
 export function createComposerRelated(params) {
-  const { cm, ro, D7, Dg, m0, rt, yI, HC, fs, bn, CBi, K$, xR, JJ, r6n, ls, tce, U, yBi, wBi, IBi, op, Re, __decorate, __param, Ti, Ht, Ve, V, et, ei, Gon, Mae, D4i, wt, aU, $I, ys, bs, jt, At, Z, everythingProviderService, tK, M_, it, nt, Xt, selectedContextService, vk } = params;
+  const { cm, ro, D7, Dg, m0, rt, yI, HC, fs, bn, CBi, K$, xR, JJ, r6n, ls, tce, U, yBi, wBi, IBi, op, Re, __decorate, __param, Ti, Ht, Ve, V, et, ei, Gon, Mae, D4i, wt, aU, $I, extUri, bs, jt, At, Z, everythingProviderService, tK, M_, it, nt, Xt, selectedContextService, vk } = params;
 
   function H8n(i) {
     if (i.type !== "user") return
@@ -1785,10 +1785,10 @@ export function createComposerRelated(params) {
           .reduce((c, h) => {
             const u = h.uri
             if (r.has(u.toString())) return c
-            const d = c.find((g) => ys.isEqual(g.uri, h.uri))
+            const d = c.find((g) => extUri.isEqual(g.uri, h.uri))
             return (
               (!d || h.weight > d.weight) &&
-                (d && (c = c.filter((g) => !ys.isEqual(g.uri, h.uri))),
+                (d && (c = c.filter((g) => !extUri.isEqual(g.uri, h.uri))),
                 c.push(h)),
               c
             )

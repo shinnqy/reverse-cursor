@@ -2,7 +2,7 @@
 
 // 245900
 export function createAIServiceSet(params) {
-  const {Re, V, Ve, __decorate, CYe, __param, _, bt: window, mUe, ms, U, IMi, ue, it, Ls, fr, LRUCache, Yt, va, rt, ys, J, Es, GJ, nm, Ze, Y1t, OP, Qc, Ri, gVe, _B, pVe, _n, Lg, Xt, everythingProviderService, st, Ci, hw, ei, aiFeatureStatusService, oy, ve, si, mo, nt, $h, x5, EKn, xFt, fz, G, yi, nl, Z, ize, wn, Va, N1, SN, am, Br, fn, v, Qm, Tgn, gt, fu, Me, ce, oi, Ti, cursorCredsService, T1, le, co, R, cF, vm, ResourceMap, V1t, y$i, M_, jB, fs, v$i, mVe, tK, Md, selectedContextService, Wr, Xn, Vu, ss, Ioe, UE, PSt, ls, jt, Mae, Ha, dC, $I, ev, _T, N$, s9e, bn, BMi, hk, iG, L1, Zc, FMi, HC, QWe, uNn, __addDisposableResource, gl, __disposeResources, JJ, lG, wVe, wJi, eoe, j9i, J9, Qb, At, Na, g2, Ll, lU, tqe, op, oTi, wf, et, DEt, $Bi, FBi, yNn, gNn, $ae, bNn, RBi, SNn, wNn, FT, un, Sg, Toe, WB, rc, ft, zi, Zi, mI, Cp, YC, Y$, cppEventLoggerService, a7, KNi, pt, bi, B_, eg, An, lb, fP, Pa, Ft, Hi, Sk, ZR, qi, Fo, R1, Pt, Ks, gze, ZUi, rU, Ag, uP, cv, Oc, uc, jM, UUi, HUi, Ht, cppService, es, ua, lv, u0, cl, Vo, wYe, bY, Ac, pKi, NI, p0, Gi, ko, Wi, SKi, uEt, Ce, Vr, H4i, pFt, qv, cursorPredictionService, nPt, importPredictionService, _c, g0, m2, c5, yYe, dEt, Qi, yc, DR, ZJ, fEt, Tk, Ck, _C, f5, vk, Pl, Xp, RHe, jIi, I, Ct } = params;
+  const {Re, V, Ve, __decorate, CYe, __param, _, bt: window, mUe, ms, U, IMi, ue, it, Ls, fr, LRUCache, Yt, va, rt, extUri, J, Es, GJ, nm, Ze, Y1t, OP, Qc, Ri, gVe, _B, pVe, _n, Lg, Xt, everythingProviderService, st, Ci, hw, ei, aiFeatureStatusService, oy, ve, si, mo, nt, $h, x5, EKn, xFt, fz, G, yi, nl, Z, ize, wn, Va, N1, SN, am, Br, fn, v, Qm, Tgn, gt, fu, Me, ce, oi, Ti, cursorCredsService, T1, le, co, R, cF, vm, ResourceMap, V1t, y$i, M_, jB, fs, v$i, mVe, tK, Md, selectedContextService, Wr, Xn, Vu, ss, Ioe, UE, PSt, ls, jt, Mae, Ha, dC, $I, ev, _T, N$, s9e, bn, BMi, hk, iG, L1, Zc, FMi, HC, QWe, uNn, __addDisposableResource, gl, __disposeResources, JJ, lG, wVe, wJi, eoe, j9i, J9, Qb, At, Na, g2, Ll, lU, tqe, op, oTi, wf, et, DEt, $Bi, FBi, yNn, gNn, $ae, bNn, RBi, SNn, wNn, FT, un, Sg, Toe, WB, rc, ft, zi, Zi, mI, Cp, YC, Y$, cppEventLoggerService, a7, KNi, pt, bi, B_, eg, An, lb, fP, Pa, Ft, Hi, Sk, ZR, qi, Fo, R1, Pt, Ks, gze, ZUi, rU, Ag, uP, cv, Oc, uc, jM, UUi, HUi, Ht, cppService, es, ua, lv, u0, cl, Vo, wYe, bY, Ac, pKi, NI, p0, Gi, ko, Wi, SKi, uEt, Ce, Vr, H4i, pFt, qv, cursorPredictionService, nPt, importPredictionService, _c, g0, m2, c5, yYe, dEt, Qi, yc, DR, ZJ, fEt, Tk, Ck, _C, f5, vk, Pl, Xp, RHe, jIi, I, Ct } = params;
 
   var vY = Re("interpreterService"),
     metricsService = Re("metricsService"),
@@ -386,7 +386,7 @@ export function createAIServiceSet(params) {
     }
     async cacheCodeBlockApplyButton(e, t, s) {
       const n = this.s.nonPersistentStorage.inlineDiffs.filter((o) =>
-        ys.isEqual(o.uri, e),
+        extUri.isEqual(o.uri, e),
       )
       if (this.isAlreadyCachingCode >= 4 || n.length > 0) return
       this.isAlreadyCachingCode++
@@ -499,7 +499,7 @@ export function createAIServiceSet(params) {
           onApplyFailed: c,
         } = e,
         h = this.s.nonPersistentStorage.inlineDiffs.filter((d) =>
-          ys.isEqual(d.uri, t),
+          extUri.isEqual(d.uri, t),
         )
       if (this.isAlreadyCachingCode >= 4 || h.length > 0) return
       this.isAlreadyCachingCode++
@@ -748,7 +748,7 @@ export function createAIServiceSet(params) {
     }
     R(e) {
       return this.s.nonPersistentStorage.inlineDiffs.find(
-        (t) => ys.isEqual(t.uri, e) && t.source === OP,
+        (t) => extUri.isEqual(t.uri, e) && t.source === OP,
       )
     }
     async getApplyToFileMenuItems_MAY_RUN_LONG(e, t, s, n) {
@@ -2706,7 +2706,7 @@ export function createAIServiceSet(params) {
       }
       getHallucinatedFunctions(e) {
         const t = this.h
-        return e ? t.filter((s) => !e.uri || ys.isEqual(s.uri, e.uri)) : t
+        return e ? t.filter((s) => !e.uri || extUri.isEqual(s.uri, e.uri)) : t
       }
       getHallucinatedFunction(e) {
         return this.h.find((t) => t.uuid === e)
@@ -3541,7 +3541,7 @@ export function createAIServiceSet(params) {
         const r = n
           .flat()
           .reduce((d, { uri: g, weight: p }) => {
-            const m = d.findIndex((b) => ys.isEqual(b.uri, g))
+            const m = d.findIndex((b) => extUri.isEqual(b.uri, g))
             return m >= 0 ? (d[m].weight += p) : d.push({ uri: g, weight: p }), d
           }, [])
           .sort((d, g) => g.weight - d.weight)
