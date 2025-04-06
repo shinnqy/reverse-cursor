@@ -273,21 +273,24 @@ export function createImportPredictionService(params) {
             hideIfSameState: source === "onDidChangeCursorPosition",
           })
         try {
-          markersToProcess.length > 0 && (await this.U(openEditor, markersToProcess))
+          markersToProcess.length > 0 && (await this._processDiagnosticsForImports(openEditor, markersToProcess))
         } catch {}
       }
-      async U(e, t) {
+      async _processDiagnosticsForImports(editor, allMarkers) {
+        return await this.U(editor, allMarkers);
+      }
+      async U(editor, allMarkers) {
         if (!this.isEnabled()) return
-        const s = e.getModel()
+        const s = editor.getModel()
         if (s === null) return
-        const n = s.uri,
+        const uri = s.uri,
           r = performance.now(),
           o = new DHe(s, Ze.None),
           a = 250
-        await new Promise((c) => setTimeout(c, a))
-        const l = s.getVersionId()
+        await new Promise((resolve) => setTimeout(resolve, a))
+        const currentVersionId = s.getVersionId()
         await Promise.all(
-          t.map(async (c) => {
+          allMarkers.map(async (marker) => {
             let h
             try {
               if (o.token.isCancellationRequested)
@@ -298,14 +301,14 @@ export function createImportPredictionService(params) {
                 (h = await gI(
                   this.ILanguageFeaturesService.codeActionProvider,
                   s,
-                  G.lift(c),
+                  G.lift(marker),
                   { type: 2, triggerAction: mp.QuickFix },
                   lp.None,
                   Ze.None,
                 ))
-            } catch (w) {
-              const C = this._getMarkerStateFromCache(e, c)
-              throw (C && (C.status = "debouncing"), w)
+            } catch (error) {
+              const C = this._getMarkerStateFromCache(editor, marker)
+              throw (C && (C.status = "debouncing"), error)
             } finally {
               this.R--
             }
@@ -313,86 +316,86 @@ export function createImportPredictionService(params) {
               throw new Error(
                 "no code actions found - this should be unreachable",
               )
-            const u = (w) =>
-                w !== undefined &&
-                Array.isArray(w.arguments) &&
-                w.arguments.length === 1 &&
-                typeof w.arguments[0] == "string" &&
-                w.arguments[0].startsWith("python.addImport"),
-              d = h.allActions.filter(
-                (w) =>
-                  !w.action.disabled &&
-                  (w.action.title.includes("Add import from") ||
-                    w.action.title.includes("Update import from") ||
-                    u(w.action.command)),
+            const isPythonImportCommand = (action) =>
+                action !== undefined &&
+                Array.isArray(action.arguments) &&
+                action.arguments.length === 1 &&
+                typeof action.arguments[0] == "string" &&
+                action.arguments[0].startsWith("python.addImport"),
+              importActions = h.allActions.filter(
+                (action) =>
+                  !action.action.disabled &&
+                  (action.action.title.includes("Add import from") ||
+                    action.action.title.includes("Update import from") ||
+                    isPythonImportCommand(action.action.command)),
               ),
-              g = new Map()
-            d.filter(
-              (w) =>
-                w.action.edit?.edits.at(0) !== undefined &&
-                "textEdit" in w.action.edit.edits[0],
-            ).forEach((w) => {
-              w.action.edit !== undefined && g.set(w, w.action.edit)
+              textEditsMap = new Map()
+            importActions.filter(
+              (action) =>
+                action.action.edit?.edits.at(0) !== undefined &&
+                "textEdit" in action.action.edit.edits[0],
+            ).forEach((action) => {
+              action.action.edit !== undefined && textEditsMap.set(action, action.action.edit)
             })
-            const m = d.flatMap((w) =>
-                u(w.action.command)
-                  ? [{ action: w, command: w.action.command }]
+            const pythonImportCommands = importActions.flatMap((action) =>
+                isPythonImportCommand(action.action.command)
+                  ? [{ action: action, command: action.action.command }]
                   : [],
               ),
-              b = this._getMarkerStateFromCache(e, c)
+              markerState = this._getMarkerStateFromCache(editor, marker)
             this.O() &&
-              m.length <= Wgo &&
+              pythonImportCommands.length <= Wgo &&
               (await Promise.allSettled(
-                m.map(async ({ action: w, command: C }) => {
-                  if (b === undefined) return
-                  const S = await this.Lb(w, C, b.symbolName)
-                  S !== undefined && g.set(w, S)
+                pythonImportCommands.map(async ({ action: action, command: command }) => {
+                  if (markerState === undefined) return
+                  const edit = await this.Lb(action, command, markerState.symbolName)
+                  edit !== undefined && textEditsMap.set(action, edit)
                 }),
               ))
-            const y = [...g.entries()].flatMap(([w, C]) => {
-              if (C === undefined) return []
-              const S = C.edits.flatMap((x) =>
-                "textEdit" in x
-                  ? extUri.isEqual(x.resource, e.getModel()?.uri)
-                    ? e.getModel()?.getValueInRange(x.textEdit.range) ===
-                      x.textEdit.text
+            const validEdits = [...textEditsMap.entries()].flatMap(([action, editValue]) => {
+              if (editValue === undefined) return []
+              const applicableEdits = editValue.edits.flatMap((edit) =>
+                "textEdit" in edit
+                  ? extUri.isEqual(edit.resource, editor.getModel()?.uri)
+                    ? editor.getModel()?.getValueInRange(edit.textEdit.range) ===
+                      edit.textEdit.text
                       ? []
-                      : [{ edit: x, action: w }]
+                      : [{ edit: edit, action: action }]
                     : []
                   : [],
               )
-              return S.length === 1
-                ? { edit: S[0].edit, action: w }
-                : S.every(
-                      (x) =>
-                        x.edit.textEdit.range.startLineNumber ===
-                          S[0].edit.textEdit.range.startLineNumber &&
-                        x.edit.textEdit.range.endLineNumber ===
-                          S[0].edit.textEdit.range.endLineNumber &&
-                        x.edit.textEdit.range.startColumn ===
-                          S[0].edit.textEdit.range.startColumn &&
-                        x.edit.textEdit.range.endColumn ===
-                          S[0].edit.textEdit.range.endColumn,
+              return applicableEdits.length === 1
+                ? { edit: applicableEdits[0].edit, action: action }
+                : applicableEdits.every(
+                      (edit) =>
+                        edit.edit.textEdit.range.startLineNumber ===
+                          applicableEdits[0].edit.textEdit.range.startLineNumber &&
+                        edit.edit.textEdit.range.endLineNumber ===
+                          applicableEdits[0].edit.textEdit.range.endLineNumber &&
+                        edit.edit.textEdit.range.startColumn ===
+                          applicableEdits[0].edit.textEdit.range.startColumn &&
+                        edit.edit.textEdit.range.endColumn ===
+                          applicableEdits[0].edit.textEdit.range.endColumn,
                     )
                   ? {
                       edit: {
-                        ...S[0].edit,
+                        ...applicableEdits[0].edit,
                         textEdit: {
-                          ...S[0].edit.textEdit,
-                          text: S.map((x) => x.edit.textEdit.text)
+                          ...applicableEdits[0].edit.textEdit,
+                          text: applicableEdits.map((edit) => edit.edit.textEdit.text)
                             .reverse()
                             .join(""),
                         },
                       },
-                      action: w,
+                      action: action,
                     }
                   : []
             })
-            if (y.length > 0 && b !== undefined) {
-              if (y.length > Vgo)
-                if (b) {
-                  ;(b.status = "error"),
-                    (b.errorReason = new Error(
+            if (validEdits.length > 0 && markerState !== undefined) {
+              if (validEdits.length > Vgo)
+                if (markerState) {
+                  ;(markerState.status = "error"),
+                    (markerState.errorReason = new Error(
                       "too many code actions, not doing anything",
                     ))
                   return
@@ -400,221 +403,235 @@ export function createImportPredictionService(params) {
                   throw new Error(
                     "lintError is undefined, this should not happen",
                   )
-              const w = await this.W(n, e, y, c, b)
-              if (b)
-                (b.versionComputedAt = l),
-                  (b.status = w.status),
-                  w.status === "error" && (b.errorReason = w.reason)
+              const result = await this._applyBestImportEdit(uri, editor, validEdits, marker, markerState)
+              if (markerState)
+                (markerState.versionComputedAt = currentVersionId),
+                  (markerState.status = result.status),
+                  result.status === "error" && (markerState.errorReason = result.reason)
               else
                 throw new Error("lintError is undefined, this should not happen")
-            } else if (b) b.status = "no-actions"
+            } else if (markerState) markerState.status = "no-actions"
             else throw new Error("lintError is undefined, this should not happen")
           }),
         )
       }
-      async W(e, t, s, n, r) {
+      async _applyBestImportEdit(uri, editor, validEdits, marker, markerState) {
+        return await this.W(uri, editor, validEdits, marker, markerState);
+      }
+      async W(uri, editor, validEdits, marker, markerState) {
         if (!this.isEnabled())
           return {
             status: "error",
             reason: new Error("importPredictionEnabled is false"),
           }
-        if (s.length === 0)
+        if (validEdits.length === 0)
           return {
             status: "error",
             reason: new Error("no edits with actions, this should not happen"),
           }
         try {
-          if (this.n.find((se) => this._generateMarkerCacheKey(t, se.marker) === this._generateMarkerCacheKey(t, n)))
+          if (this.n.find((se) => this._generateMarkerCacheKey(editor, se.marker) === this._generateMarkerCacheKey(editor, marker)))
             return { status: "pending" }
-          const a = t.getModel()
-          if (a === null) throw new Error("model is null")
-          const l = a.getValue(),
-            c = a.getVersionId()
-          if (a.uri !== e)
+          const model = editor.getModel()
+          if (model === null) throw new Error("model is null")
+          const modelValue = model.getValue(),
+            modelVersion = model.getVersionId()
+          if (model.uri !== uri)
             throw new Error("model uri is different from uri, not doing anything")
-          let h = this.reactiveStorageService.workspaceUserPersistentStorage.uniqueCppWorkspaceId
+          let uniqueCppWorkspaceId = this.reactiveStorageService.workspaceUserPersistentStorage.uniqueCppWorkspaceId
           if (
-            (h === undefined &&
-              ((h =
+            (uniqueCppWorkspaceId === undefined &&
+              ((uniqueCppWorkspaceId =
                 Math.random().toString(36).substring(2, 15) +
                 Math.random().toString(36).substring(2, 15)),
               this.reactiveStorageService.setWorkspaceUserPersistentStorage(
                 "uniqueCppWorkspaceId",
-                h,
+                uniqueCppWorkspaceId,
               )),
-            !s.every(
-              (se) =>
-                se.edit.textEdit.range.startColumn === 1 &&
-                se.edit.textEdit.range.endColumn === 1 &&
-                se.edit.textEdit.text.includes(`
-  `),
-            ) && n.source === "ts")
+            !validEdits.every(
+              (edit) =>
+                edit.edit.textEdit.range.startColumn === 1 &&
+                edit.edit.textEdit.range.endColumn === 1 &&
+                edit.edit.textEdit.text.includes(`
+    `),
+            ) && marker.source === "ts")
           )
             return (
-              await this.Y(t, e, s[0].action, s[0].edit.textEdit, n),
+              await this._recordEdit(editor, uri, validEdits[0].action, validEdits[0].edit.textEdit, marker),
               { status: "pending" }
             )
-          const d = s
-              .map((se) => se.edit.textEdit.range.startLineNumber)
-              .reduce((se, he) => ((se[he] = (se[he] || 0) + 1), se), {}),
-            g = Object.entries(d).reduce(
-              (se, [he, ae]) => (ae > se[1] ? [parseInt(he + ""), ae] : se),
+          // 统计编辑行频率，确定最佳插入位置
+          const lineFrequencyMap = validEdits
+              .map((edit) => edit.edit.textEdit.range.startLineNumber)
+              .reduce((map, lineNum) => ((map[lineNum] = (map[lineNum] || 0) + 1), map), {}),
+            mostFrequentLine = Object.entries(lineFrequencyMap).reduce(
+              (mostFrequentLineAndCount, [lineNum, lineCount]) => (lineCount > mostFrequentLineAndCount[1] ? [parseInt(lineNum + ""), lineCount] : mostFrequentLineAndCount),
               [0, 0],
             )[0],
-            p = await this.moveLineToEndOfImportsSectionExclusive(t, g),
-            m = new Me(p, 1)
+            // 定位到导入区域的末尾行
+            importSectionEndLine = await this.moveLineToEndOfImportsSectionExclusive(editor, mostFrequentLine),
+            insertPosition = new Me(importSectionEndLine, 1)
           if (this.cppMethods?.getPartialCppRequest === undefined)
             throw new Error(
               "getPartialCppRequest is undefined, this should not happen",
             )
-          const b =
+          const shouldRelyOnFileSyncForFile =
               (await this.everythingProviderService.onlyLocalProvider?.runCommand(
                 GB.ShouldRelyOnFileSyncForFile,
                 {
-                  relativeWorkspacePath: this.contextService.asRelativePath(e),
-                  modelVersion: a.getVersionId(),
+                  relativeWorkspacePath: this.contextService.asRelativePath(uri),
+                  modelVersion: model.getVersionId(),
                 },
               )) ?? false,
-            y = await this.cppMethods
+            cppPartialRequest = await this.cppMethods
               .getPartialCppRequest({
-                editor: t,
-                uri: e,
-                modelValue: l,
-                modelVersion: c,
-                position: m,
+                editor: editor,
+                uri: uri,
+                modelValue: modelValue,
+                modelVersion: modelVersion,
+                position: insertPosition,
                 source: CppIntent.Typing,
-                shouldRelyOnFileSyncForFile: b,
+                shouldRelyOnFileSyncForFile: shouldRelyOnFileSyncForFile,
               })
-              .catch((se) => {
-                throw se
+              .catch((error) => {
+                throw error
               })
-          if (t.getModel()?.uri !== e)
+          if (editor.getModel()?.uri !== uri)
             throw new Error("model uri is different from uri, not doing anything")
-          const w = s.map(
-              (se) =>
+          const suggestedEdits = validEdits.map(
+              (edit) =>
                 new P1t({
-                  text: se.edit.textEdit.text,
+                  text: edit.edit.textEdit.text,
                   editRange: {
-                    startLineNumber: m.lineNumber,
+                    startLineNumber: insertPosition.lineNumber,
                     startColumn: 1,
-                    endLineNumberInclusive: m.lineNumber,
+                    endLineNumberInclusive: insertPosition.lineNumber,
                     endColumn: 1,
                   },
                 }),
             ),
-            { getModelName: C } = this.cppMethods
-          if (C === undefined)
+            { getModelName: getModelName } = this.cppMethods
+          if (getModelName === undefined)
             throw new Error("getModelName is undefined, this should not happen")
-          const S = this.cppMethods?.getRecentAndNearLocationLinterErrors?.(e, n),
-            x = S && { ...S, errors: S.errors.slice(0, Hgo) },
-            k = this.Bb(n),
-            E = new HMi({
+          const nearbyLinterErrors = this.cppMethods?.getRecentAndNearLocationLinterErrors?.(uri, marker),
+            filteredLinterErrors = nearbyLinterErrors && { ...nearbyLinterErrors, errors: nearbyLinterErrors.errors.slice(0, Hgo) },
+            markerTouchesGreen = this.Bb(marker),
+            cppEditClassificationRequest = new HMi({
               cppRequest: {
-                ...y,
+                ...cppPartialRequest,
                 controlToken: hG.LOUD,
-                modelName: C(),
+                modelName: getModelName(),
                 diffHistoryKeys: [],
                 contextItems: [],
-                parameterHints: this.cppTypeService.getRelevantParameterHints(t),
+                parameterHints: this.cppTypeService.getRelevantParameterHints(editor),
                 lspContexts: [],
                 filesyncUpdates: [],
-                workspaceId: h,
+                workspaceId: uniqueCppWorkspaceId,
                 timeAtRequestSend: Date.now(),
-                linterErrors: x,
+                linterErrors: filteredLinterErrors,
               },
-              suggestedEdits: w,
-              markerTouchesGreen: k,
+              suggestedEdits: suggestedEdits,
+              markerTouchesGreen: markerTouchesGreen,
               currentFileContentsForLinterErrors: this.cppMethods?.truncateCurrentFile(
-                l,
-                n.startLineNumber,
-                a.getEOL(),
-                a,
+                modelValue,
+                marker.startLineNumber,
+                model.getEOL(),
+                model,
               ),
             }),
             D = performance.now(),
-            P = await this.Ob(),
-            L = await (
+            authHeaders = await this.Ob(),
+            cppEditClassificationResponse = await (
               await this.aiClient()
-            ).getCppEditClassification(E, { headers: { ...P } }),
-            { scoredEdits: A, shouldNoop: F, generationEdit: H } = L,
-            B = i$s(A.at(0)),
-            z = s.find(({ edit: se }) => se.textEdit.text === B.edit?.text)
-          if (z === undefined) throw new Error("bestImport is undefined")
-          const K = i$s(B?.logProbs)
-          return (F ??
-            this.X({
-              bestEditLogprobs: K,
-              generationEditLogprobs: H?.logProbs,
-              opEditString: z.edit.textEdit.text,
-              symbolName: r.symbolName,
-              markerTouchesGreen: k,
+            ).getCppEditClassification(cppEditClassificationRequest, { headers: { ...authHeaders } }),
+            { scoredEdits: scoredEdits, shouldNoop: shouldNoop, generationEdit: generationEdit } = cppEditClassificationResponse,
+            bestEdit = i$s(scoredEdits.at(0)),
+            matchingEdit = validEdits.find(({ edit: edit }) => edit.textEdit.text === bestEdit.edit?.text)
+          if (matchingEdit === undefined) throw new Error("bestImport is undefined")
+          const bestEditLogprobs = i$s(bestEdit?.logProbs)
+          return (shouldNoop ??
+            this._shouldSkipEdit({
+              bestEditLogprobs: bestEditLogprobs,
+              generationEditLogprobs: generationEdit?.logProbs,
+              opEditString: matchingEdit.edit.textEdit.text,
+              symbolName: markerState.symbolName,
+              markerTouchesGreen: markerTouchesGreen,
             }))
             ? { status: "noop" }
-            : (await this.Y(t, e, z.action, z.edit.textEdit, n),
+            : (await this._recordEdit(editor, uri, matchingEdit.action, matchingEdit.edit.textEdit, marker),
               { status: "pending" })
-        } catch (o) {
-          return { status: "error", reason: o }
+        } catch (error) {
+          return { status: "error", reason: error }
         } finally {
         }
       }
+      _shouldSkipEdit(params) {
+        return this.X(params);
+      }
       X({
-        bestEditLogprobs: e,
-        generationEditLogprobs: t,
-        opEditString: s,
-        symbolName: n,
-        markerTouchesGreen: r,
+        bestEditLogprobs,
+        generationEditLogprobs,
+        opEditString,
+        symbolName,
+        markerTouchesGreen,
       }) {
-        const a = ((p, m) => {
-            for (let b = p.length - 1; b >= 0; b--) if (m(p[b], b)) return b
+        // 找到最后一个与提议编辑匹配的token的索引
+        const lastMatchingTokenIndex = ((tokens, predicate) => {
+            for (let i = tokens.length - 1; i >= 0; i--) if (predicate(tokens[i], i)) return i
             return -1
-          })(e.tokens, (p, m) =>
-            e.tokens.slice(m).join("").trim().startsWith(s.trim()),
+          })(bestEditLogprobs.tokens, (token, index) =>
+            bestEditLogprobs.tokens.slice(index).join("").trim().startsWith(opEditString.trim()),
           ),
-          l = e.tokens.findIndex(
-            (p, m) =>
-              m >= a &&
-              !!e.tokens
-                .slice(a, m)
+          // 查找符号名出现的索引
+          symbolNameIndex = bestEditLogprobs.tokens.findIndex(
+            (token, index) =>
+              index >= lastMatchingTokenIndex &&
+              !!bestEditLogprobs.tokens
+                .slice(lastMatchingTokenIndex, index)
                 .join("")
                 .trim()
-                .match(new RegExp(`\\b${n}\\b`)),
+                .match(new RegExp(`\\b${symbolName}\\b`)),
           ),
-          c = e.tokenLogprobs[a],
-          h = Math.min(0, ...e.tokenLogprobs.slice(a + 1, l)),
-          u = t?.tokens.join("").match(/(\w+)/g),
-          d = r ? 2 : 1
-        return u && u.includes(n) && Math.exp(c) * d > 0.1
+          firstTokenProbability = bestEditLogprobs.tokenLogprobs[lastMatchingTokenIndex],
+          minIntermediateProbability = Math.min(0, ...bestEditLogprobs.tokenLogprobs.slice(lastMatchingTokenIndex + 1, symbolNameIndex)),
+          generatedSymbols = generationEditLogprobs?.tokens.join("").match(/(\w+)/g),
+          touchFactor = markerTouchesGreen ? 2 : 1
+        return generatedSymbols && generatedSymbols.includes(symbolName) && Math.exp(firstTokenProbability) * touchFactor > 0.1
           ? false
-          : Math.exp(c + h) * d < 0.02
+          : Math.exp(firstTokenProbability + minIntermediateProbability) * touchFactor < 0.02
       }
-      async Y(e, t, s, n, r) {
+      async _recordEdit(editor, uri, action, edit, marker) {
+        return await this.Y(editor, uri, action, edit, marker);
+      }
+      async Y(editor, uri, action, edit, marker) {
         if (!this.isEnabled()) return
-        const a = [...this.n]
+        // 获取最近20个编辑记录，按时间排序（从旧到新）
+        const recentEdits = [...this.n]
             .sort(
-              (c, h) =>
-                (this._getMarkerStateFromCache(e, h.marker)?.seenAt.getTime() ?? 0) -
-                (this._getMarkerStateFromCache(e, c.marker)?.seenAt.getTime() ?? 0),
+              (a, b) =>
+                (this._getMarkerStateFromCache(editor, b.marker)?.seenAt.getTime() ?? 0) -
+                (this._getMarkerStateFromCache(editor, a.marker)?.seenAt.getTime() ?? 0),
             )
             .slice(0, 20),
-          l = this.textModelService.createModelReference(t)
+          modelRef = this.textModelService.createModelReference(uri)
         try {
-          const c = (await l).object.textEditorModel
+          const textModel = (await modelRef).object.textEditorModel
           this.n = [
-            ...a,
+            ...recentEdits,
             {
-              uri: t,
-              action: s,
-              edit: n,
-              lineContentsAtStartOfEdit: c.getValueInRange(
-                new G(n.range.startLineNumber, 1, n.range.startLineNumber, 1 / 0),
+              uri: uri,
+              action: action,
+              edit: edit,
+              lineContentsAtStartOfEdit: textModel.getValueInRange(
+                new G(edit.range.startLineNumber, 1, edit.range.startLineNumber, 1 / 0),
               ),
-              marker: r,
+              marker: marker,
             },
           ]
-          const h = this.cppMethods?.getFocusedCodeEditor()
-          h && this.showCorrectUI(h)
+          const focusedEditor = this.cppMethods?.getFocusedCodeEditor()
+          focusedEditor && this.showCorrectUI(focusedEditor)
         } finally {
-          ;(await l).dispose()
+          ;(await modelRef).dispose()
         }
       }
       _generateMarkerCacheKey(editor, marker) {
