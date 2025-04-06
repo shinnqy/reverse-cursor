@@ -1,7 +1,7 @@
 // @ts-check
 
 export function createImportPredictionService(params) {
-  const {V, __decorate, __param, Pt: themeService, ue: configurationService, ei: reactiveStorageService, Ve, it: contextService, mo: markerService, Z: instantiationService, metricsService, cppTypeService, everythingProviderService, yi: codeEditorService, Xt: textModelService, cl: statusbarService, cppEventLoggerService, zi: ILanguageFeaturesService, aiFeatureStatusService, st: commandService, aiAssertService, importPredictionService, LRUCache, DYe, fu, rt, q, W, Un, Va, Ri: MarkerSeverity, extUri, MAX_DIAGNOSTIC_DISTANCE, DHe, Ze, gI, G, mp, lp, Me, GB, CppIntent, P1t, HMi, hG, y7, g1, Kh, U, pm } = params;
+  const {V, __decorate, __param, Pt: themeService, ue: configurationService, ei: reactiveStorageService, Ve, it: contextService, mo: markerService, Z: instantiationService, metricsService, cppTypeService, everythingProviderService, yi: codeEditorService, Xt: textModelService, cl: statusbarService, cppEventLoggerService, zi: ILanguageFeaturesService, aiFeatureStatusService, st: commandService, aiAssertService, importPredictionService, LRUCache, DYe, fu, rt, q, W, Un, Va, Ri: MarkerSeverity, extUri, MAX_DIAGNOSTIC_DISTANCE, DHe, Ze: CancellationToken, gI, G, mp, lp, Me, GB, CppIntent, P1t, HMi, hG, applyCodeAction, ApplyCodeActionReason, Kh, U, pm } = params;
 
   var bdi,
     vdi = class extends V {
@@ -285,7 +285,7 @@ export function createImportPredictionService(params) {
         if (s === null) return
         const uri = s.uri,
           r = performance.now(),
-          o = new DHe(s, Ze.None),
+          o = new DHe(s, CancellationToken.None),
           a = 250
         await new Promise((resolve) => setTimeout(resolve, a))
         const currentVersionId = s.getVersionId()
@@ -304,7 +304,7 @@ export function createImportPredictionService(params) {
                   G.lift(marker),
                   { type: 2, triggerAction: mp.QuickFix },
                   lp.None,
-                  Ze.None,
+                  CancellationToken.None,
                 ))
             } catch (error) {
               const C = this._getMarkerStateFromCache(editor, marker)
@@ -659,57 +659,61 @@ export function createImportPredictionService(params) {
       ab(editor, marker) {
         return this.markerStateCache.get(this._generateMarkerCacheKey(editor, marker))
       }
-      bb(e, t) {
-        return extUri.isEqual(e.uri, t.getModel()?.uri)
+      _isImportForCurrentEditor(shownImport, editor) {
+        return this.bb(shownImport, editor);
       }
-      maybeAcceptShownImport(e) {
+      bb(shownImport, editor) {
+        return extUri.isEqual(shownImport.uri, editor.getModel()?.uri)
+      }
+      maybeAcceptShownImport(editor) {
         if (!this.isEnabled()) return false
-        const { q: t } = this
-        if (t === undefined) return false
-        if (!this.bb(t.shownImport, e)) return this.hideShownImport(e), false
-        const s = e.getVisibleRanges(),
-          n = e.getModel()?.getDecorationRange(t.decorationId)
-        if (!n || !s.some((a) => this.Cb(a, n)))
-          return this.hideShownImport(e), false
-        const r = this._getMarkerStateFromCache(e, t.shownImport.marker)
-        r !== undefined &&
-          ((r.status = "accepted"),
-          (r.seenAt = new Date()),
+        const { q: currentSuggestionState } = this
+        if (currentSuggestionState === undefined) return false
+        if (!this._isImportForCurrentEditor(currentSuggestionState.shownImport, editor)) return this.hideShownImport(editor), false
+        const visibleRanges = editor.getVisibleRanges(),
+          decorationRange = editor.getModel()?.getDecorationRange(currentSuggestionState.decorationId)
+        if (!decorationRange || !visibleRanges.some((range) => this._isRangeOverlapping(range, decorationRange)))
+          return this.hideShownImport(editor), false
+        const markerState = this._getMarkerStateFromCache(editor, currentSuggestionState.shownImport.marker)
+        markerState !== undefined &&
+          ((markerState.status = "accepted"),
+          (markerState.seenAt = new Date()),
           (async () => {
             try {
-              if (this.zb(e, t.shownImport)) {
-                const a =
+              if (this.zb(editor, currentSuggestionState.shownImport)) {
+                // 如果需要跳过，尝试获取替代操作
+                const alternativeAction =
                   (await Promise.race([
-                    this.cb(e, t.shownImport),
+                    this._getMatchingCodeAction(editor, currentSuggestionState.shownImport),
                     (async () => {
-                      await new Promise((l) => setTimeout(l, 75))
+                      await new Promise((resolve) => setTimeout(resolve, 75))
                     })(),
-                  ])) ?? t.shownImport.action
+                  ])) ?? currentSuggestionState.shownImport.action
                 await this.instantiationService.invokeFunction(
-                  y7,
-                  a,
-                  g1.FromAILightbulb,
+                  applyCodeAction,
+                  alternativeAction,
+                  ApplyCodeActionReason.FromAILightbulb,
                   undefined,
-                  Ze.None,
+                  CancellationToken.None,
                 )
               } else
                 await this.instantiationService.invokeFunction(
-                  y7,
-                  t.shownImport.action,
-                  g1.FromAILightbulb,
+                  applyCodeAction,
+                  currentSuggestionState.shownImport.action,
+                  ApplyCodeActionReason.FromAILightbulb,
                   undefined,
-                  Ze.None,
+                  CancellationToken.None,
                 )
               this.reactiveStorageService.setApplicationUserPersistentStorage(
                 "howManyTimesHasUserAcceptedImportPrediction",
-                (a) => (a ?? 0) + 1,
+                (count) => (count ?? 0) + 1,
               )
             } catch {}
           })()),
-          this.db(e, t.shownImport),
-          this.yb(e, t.shownImport.edit)
-        const o = e.getModel()?.uri
-        return o !== undefined && this.Hb(o), this.showCorrectUI(e), true
+          this._cleanupImportSuggestion(editor, currentSuggestionState.shownImport),
+          this._adjustMarkersForEdit(editor, currentSuggestionState.shownImport.edit)
+        const uri = editor.getModel()?.uri
+        return uri !== undefined && this.Hb(uri), this.showCorrectUI(editor), true
       }
       maybeRejectShownImport(e) {
         if (!this.isEnabled() || !e.hasTextFocus()) return false
@@ -720,13 +724,16 @@ export function createImportPredictionService(params) {
         )
           return false
         const s = this.vb
-        return s === undefined || !this.bb(s, e) || this.wb()
+        return s === undefined || !this._isImportForCurrentEditor(s, e) || this.wb()
           ? false
           : (this.rejectImport(e, s), this.showCorrectUI(e), true)
       }
-      async cb(e, t) {
-        const s = e.getModel()
-        if (!s)
+      async _getMatchingCodeAction(editor, shownImport) {
+        return await this.cb(editor, shownImport);
+      }
+      async cb(editor, shownImport) {
+        const model = editor.getModel()
+        if (!model)
           throw new Error(
             "model is undefined, so we can't get the matching code action",
           )
@@ -734,23 +741,26 @@ export function createImportPredictionService(params) {
         return (
           await gI(
             this.ILanguageFeaturesService.codeActionProvider,
-            s,
-            G.lift(t.marker),
+            model,
+            G.lift(shownImport.marker),
             { type: 2, triggerAction: mp.QuickFix },
             lp.None,
-            Ze.None,
+            CancellationToken.None,
           )
-        ).allActions.find((o) => o.action.title === t.action.action.title)
+        ).allActions.find((o) => o.action.title === shownImport.action.action.title)
       }
-      async rejectImport(e, t) {
+      async rejectImport(editor, shownImport) {
         if (!this.isEnabled()) return
-        const s = this._getMarkerStateFromCache(e, t.marker)
-        s && ((s.status = "rejected"), (s.seenAt = new Date())), this.db(e, t)
+        const markerState = this._getMarkerStateFromCache(editor, shownImport.marker)
+        markerState && ((markerState.status = "rejected"), (markerState.seenAt = new Date())), this._cleanupImportSuggestion(editor, shownImport)
       }
-      db(e, t) {
+      _cleanupImportSuggestion(editor, shownImport) {
+        return this.db(editor, shownImport);
+      }
+      db(editor, shownImport) {
         this.isEnabled() &&
-          (this.vb === t && this.hideShownImport(e),
-          (this.n = this.n.filter((s) => s !== t)))
+          (this.vb === shownImport && this.hideShownImport(editor),
+          (this.n = this.n.filter((s) => s !== shownImport)))
       }
       hideShownImport(e) {
         if (!this.isEnabled()) return
@@ -761,7 +771,7 @@ export function createImportPredictionService(params) {
             (r.hide(),
             r.dispose(),
             (this.q = undefined),
-            e !== undefined && this.bb(s, e))
+            e !== undefined && this._isImportForCurrentEditor(s, e))
           ) {
             const o = e.getModel()
             o && o.deltaDecorations([n], [])
@@ -797,57 +807,61 @@ export function createImportPredictionService(params) {
           n.endColumn === l
         )
       }
-      fb(e, t) {
+      _renderImportAtLocation(editor, shownImport) {
+        return this.fb(editor, shownImport);
+      }
+      fb(editor, shownImport) {
         if (!this.isEnabled()) return
-        if (!this.bb(t, e))
+        if (!this._isImportForCurrentEditor(shownImport, editor))
           throw new Error(
             "renderImportAtLocation called with wrong editor - this should never happen",
           )
-        const s = this.q
-        if (s?.shownImport === t && this.eb(e, s)) {
-          const n = e.getModel()
-          if (!n)
+        const currentSuggestionState = this.q
+        // 如果当前显示的建议与要渲染的建议相同且编辑器状态有效
+        if (currentSuggestionState?.shownImport === shownImport && this.eb(editor, currentSuggestionState)) {
+          const model = editor.getModel()
+          if (!model)
             throw new Error(
               "model is undefined, so we couldn't remove decoration - this should never happen",
             )
-          const r = n.getDecorationRange(s.decorationId)
-          if (r === null)
+          const decorationRange = model.getDecorationRange(currentSuggestionState.decorationId)
+          if (decorationRange === null)
             throw new Error("decorationRange is null, this should not happen")
-          const o = {
-            startLineNumber: t.marker.startLineNumber,
-            startColumn: t.marker.startColumn,
-            endLineNumber: t.marker.endLineNumber,
-            endColumn: t.marker.endColumn,
+          const markerRange = {
+            startLineNumber: shownImport.marker.startLineNumber,
+            startColumn: shownImport.marker.startColumn,
+            endLineNumber: shownImport.marker.endLineNumber,
+            endColumn: shownImport.marker.endColumn,
           }
           if (
-            o.endLineNumber - o.startLineNumber !==
-              r.endLineNumber - r.startLineNumber ||
-            o.endColumn - o.startColumn !== r.endColumn - r.startColumn
+            markerRange.endLineNumber - markerRange.startLineNumber !==
+              decorationRange.endLineNumber - decorationRange.startLineNumber ||
+            markerRange.endColumn - markerRange.startColumn !== decorationRange.endColumn - decorationRange.startColumn
           ) {
-            this.hideShownImport(e)
+            this.hideShownImport(editor)
             return
-          } else s.importWidget.show()
+          } else currentSuggestionState.importWidget.show()
         } else {
-          this.hideShownImport(e)
-          const n = e.getModel()
-          if (!n)
+          this.hideShownImport(editor)
+          const model = editor.getModel()
+          if (!model)
             throw new Error(
               "model is undefined, so we couldn't remove decoration - this should never happen",
             )
-          const r =
+          const cppAutoImportDecorationStyle =
               this.reactiveStorageService.applicationUserPersistentStorage
                 .cppAutoImportDecorationStyle,
-            o = [
+            decorations = [
               {
                 range: new G(
-                  t.marker.startLineNumber,
-                  t.marker.startColumn,
-                  t.marker.endLineNumber,
-                  t.marker.endColumn,
+                  shownImport.marker.startLineNumber,
+                  shownImport.marker.startColumn,
+                  shownImport.marker.endLineNumber,
+                  shownImport.marker.endColumn,
                 ),
                 options: {
                   className:
-                    r === "squiggle"
+                    cppAutoImportDecorationStyle === "squiggle"
                       ? "squiggly-ai cpp-pending-import-decoration"
                       : "auto-import-suggestion-blue-background",
                   stickiness: 1,
@@ -858,16 +872,16 @@ export function createImportPredictionService(params) {
                 },
               },
             ],
-            [a] = n.deltaDecorations([], o)
+            [decorationId] = model.deltaDecorations([], decorations)
           ;(this.q = {
-            shownImport: t,
-            decorationId: a,
+            shownImport: shownImport,
+            decorationId: decorationId,
             importWidget: this.instantiationService.createInstance(
               vdi,
-              e,
-              a,
-              t.action.action.title,
-              this._getSymbolFromMarker(t.marker),
+              editor,
+              decorationId,
+              shownImport.action.action.title,
+              this._getSymbolFromMarker(shownImport.marker),
             ),
           }),
             this.q.importWidget.show()
@@ -927,17 +941,17 @@ export function createImportPredictionService(params) {
         const o = e.getVisibleRanges(),
           a = o.some(
             (S) =>
-              r !== null && this.Cb(S, new G(r.lineNumber, 1, r.lineNumber, 1)),
+              r !== null && this._isRangeOverlapping(S, new G(r.lineNumber, 1, r.lineNumber, 1)),
           )
         n.push({ name: "visibleRangesTime", time: performance.now() })
         const l = (S) => {
-            if (this.bb(S, e) && this.kb(e, S, r) < this.ib) {
+            if (this._isImportForCurrentEditor(S, e) && this.kb(e, S, r) < this.ib) {
               const x = this._getMarkerStateFromCache(e, S.marker)
               if (x !== undefined && x.currentMarkers.length > 0)
                 return x.currentMarkers.some(
                   (k) =>
                     this._getCurrentSymbolByMarker(e, k) === x.symbolName &&
-                    (!a || o.some((E) => this.Cb(E, k))),
+                    (!a || o.some((E) => this._isRangeOverlapping(E, k))),
                 )
             }
             return false
@@ -975,7 +989,7 @@ export function createImportPredictionService(params) {
             n.push({ name: "hideShownImportTime", time: performance.now() }))
           : l(C) &&
             ((C.marker = w ?? C.marker),
-            this.fb(e, C),
+            this._renderImportAtLocation(e, C),
             n.push({ name: "showImportTime", time: performance.now() })),
           this.sb(performance.now() - s, n)
       }
@@ -1074,12 +1088,15 @@ export function createImportPredictionService(params) {
           .filter((marker) => currentTime - marker.timestamp <= 3e4)
           .concat(newRanges.map((range) => ({ uri: editor.uri, range, timestamp: currentTime })))
       }
-      yb(editor, t) {
-        const { startLineNumber, endLineNumber } = t.range,
+      _adjustMarkersForEdit(editor, textEdit) {
+        return this.yb(editor, textEdit);
+      }
+      yb(editor, textEdit) {
+        const { startLineNumber, endLineNumber } = textEdit.range,
           originalLineCount = endLineNumber - startLineNumber + 1,
           // 计算新增/删除的行数差
           lineDelta =
-            t.text.split(`
+            textEdit.text.split(`
   `).length - originalLineCount
         this.r = this.r.map((marker) =>
           marker.range.startLineNumber > startLineNumber && extUri.isEqual(marker.uri, editor.getModel()?.uri)
@@ -1094,26 +1111,26 @@ export function createImportPredictionService(params) {
             : marker,
         )
       }
-      zb(e, t) {
-        const s = e.getModel()
-        if (!s)
+      zb(editor, editInfo) {
+        const model = editor.getModel()
+        if (!model)
           throw new Error(
             "model is undefined, so we can't check if the version is the same",
           )
-        const n = s.getVersionId(),
-          r = this.markerStateCache.get(this._generateMarkerCacheKey(e, t.marker))
-        if (!r)
+        const modelVersion = model.getVersionId(),
+          markerState = this.markerStateCache.get(this._generateMarkerCacheKey(editor, editInfo.marker))
+        if (!markerState)
           throw new Error(
             "seenLintError is undefined, so we can't check if the version is the same",
           )
-        if (r.versionComputedAt === n) return false
-        const o = t.action.action.command !== undefined,
-          a =
-            t.edit.text.split(`
-  `).length === 2 &&
-            t.edit.text.trim().split(`
-  `).length === 1
-        return o || !a
+        if (markerState.versionComputedAt === modelVersion) return false
+        const isCommandAction = editInfo.action.action.command !== undefined,
+          isSingleLineEdit =
+            editInfo.edit.text.split(`
+    `).length === 2 &&
+            editInfo.edit.text.trim().split(`
+    `).length === 1
+        return isCommandAction || !isSingleLineEdit
       }
       isShowingImportSuggestion() {
         return false
@@ -1122,7 +1139,7 @@ export function createImportPredictionService(params) {
         const s = this.q
         if (s) {
           const { shownImport: n, decorationId: r } = s
-          if (this.bb(n, e)) {
+          if (this._isImportForCurrentEditor(n, e)) {
             const o = e.getModel()
             if (o === null) return
             const a = o.getDecorationRange(r)
@@ -1141,7 +1158,7 @@ export function createImportPredictionService(params) {
           this.r.some(
             (n) =>
               extUri.isEqual(n.uri, e.resource) &&
-              this.Cb(n.range, {
+              this._isRangeOverlapping(n.range, {
                 startLineNumber: e.startLineNumber,
                 startColumn: e.startColumn,
                 endLineNumber: e.endLineNumber,
@@ -1153,13 +1170,16 @@ export function createImportPredictionService(params) {
       Bb(e) {
         return this.Ab(e) || this.ub(e.resource, e.startLineNumber)
       }
-      Cb(e, t) {
+      _isRangeOverlapping(range, decorationRange) {
+        return this.Cb(range, decorationRange);
+      }
+      Cb(range, decorationRange) {
         return !(
-          e.endLineNumber < t.startLineNumber ||
-          e.startLineNumber > t.endLineNumber ||
-          (e.endLineNumber === t.startLineNumber &&
-            e.endColumn < t.startColumn) ||
-          (e.startLineNumber === t.endLineNumber && e.startColumn > t.endColumn)
+          range.endLineNumber < decorationRange.startLineNumber ||
+          range.startLineNumber > decorationRange.endLineNumber ||
+          (range.endLineNumber === decorationRange.startLineNumber &&
+            range.endColumn < decorationRange.startColumn) ||
+          (range.startLineNumber === decorationRange.endLineNumber && range.startColumn > decorationRange.endColumn)
         )
       }
       isEnabled() {
@@ -1199,7 +1219,7 @@ export function createImportPredictionService(params) {
               n = Date.now()
               const h = {
                 action: e,
-                cancellationToken: Ze.None,
+                cancellationToken: CancellationToken.None,
                 resolveEdits: l,
                 rejectEdits: c,
                 appliedAt: Date.now(),
