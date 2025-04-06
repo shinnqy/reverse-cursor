@@ -67,8 +67,8 @@ export function createCursorPredictionService(params) {
         super(),
           (this.g = i),
           (this.h = e),
-          (this.c = !1),
-          (this.allowEditorOverflow = !0),
+          (this.c = false),
+          (this.allowEditorOverflow = true),
           (this.f = "top")
         const t = this.g.getOptions().get(51)
         ;(this.a = q("div.tooltipEditorUiWidget")),
@@ -127,10 +127,10 @@ export function createCursorPredictionService(params) {
             c = a[0].endLineNumber
           const h = a.some((u) =>
             u.startLineNumber <= o && o <= u.endLineNumber + 1
-              ? !0
+              ? true
               : (u.startLineNumber < l && (l = u.startLineNumber),
                 u.endLineNumber > c && (c = u.endLineNumber),
-                !1),
+                false),
           )
           h ||
             (a && a.length > 0
@@ -155,7 +155,7 @@ export function createCursorPredictionService(params) {
           (super.dispose(),
           this.g.removeOverlayWidget(this),
           this.a.remove(),
-          (this.c = !0))
+          (this.c = true))
       }
       getId() {
         return "tooltip.editorUiWidget"
@@ -172,15 +172,15 @@ export function createCursorPredictionService(params) {
       isValidCursorPredictionCase(e) {
         return this.a.applicationUserPersistentStorage.cursorPredictionState?.heuristics?.includes(
           SUGGESTION_OPTS.DISABLE_IN_LAST_CPP_SUGGESTION,
-        ) === !0 &&
-          e.cppSuggestionRange !== void 0 &&
+        ) === true &&
+          e.cppSuggestionRange !== undefined &&
           e.predictedLineNumber >= e.cppSuggestionRange.startLineNumber &&
           e.predictedLineNumber <= e.cppSuggestionRange.endLineNumberInclusive
           ? (console.log(
               "[Cursor Prediction] Bad Case 1: Do not show prediction if it's in the accepted cpp suggestion range",
             ),
-            { valid: !1 })
-          : { valid: !0 }
+            { valid: false })
+          : { valid: true }
       }
     }
   ;(pdi = __decorate([__param(0, ei)], pdi)), Ve(t$s, pdi, 1)
@@ -196,8 +196,8 @@ export function createCursorPredictionService(params) {
         (this.t = c),
         (this.u = h),
         (this.w = u),
-        (this.f = !1),
-        (this.allowEditorOverflow = !0),
+        (this.f = false),
+        (this.allowEditorOverflow = true),
         console.log(
           "[CURSOR PREDICTION] Creating non-visible editor indicator",
           t.toString(),
@@ -245,8 +245,8 @@ export function createCursorPredictionService(params) {
       ;(this.c = this.n.createInstance(
         Rh,
         p,
-        { ...Rh.getEditorOptions(this.m), disableLayerHinting: !0 },
-        { overwriteIsSimpleWidget: !0 },
+        { ...Rh.getEditorOptions(this.m), disableLayerHinting: true },
+        { overwriteIsSimpleWidget: true },
       )),
         this.D(ge(this.b, "click", () => this.z())),
         this.j.addOverlayWidget(this),
@@ -268,9 +268,9 @@ export function createCursorPredictionService(params) {
         let o = this.w.getModel(r)
         o
           ? (o.setValue(s), o.setLanguage(n.languageId))
-          : (o = this.w.createModel(s, n, r, !1)),
+          : (o = this.w.createModel(s, n, r, false)),
           this.c.setModel(o),
-          this.c.updateOptions({ readOnly: !0 })
+          this.c.updateOptions({ readOnly: true })
         const a = this.c.getOption(68),
           c = a * 4,
           h = this.c.getDomNode()
@@ -281,7 +281,7 @@ export function createCursorPredictionService(params) {
           {
             range: new G(this.h, 1, this.h, 1),
             options: {
-              isWholeLine: !0,
+              isWholeLine: true,
               className: "cursor-prediction-highlight-line",
               stickiness: 1,
               description: "cursor-prediction-highlight",
@@ -346,7 +346,7 @@ export function createCursorPredictionService(params) {
       if (this.f) return
       super.dispose(), this.j.removeOverlayWidget(this)
       const e = this.c.getModel()
-      e && e.dispose(), this.c.dispose(), this.a.remove(), (this.f = !0)
+      e && e.dispose(), this.c.dispose(), this.a.remove(), (this.f = true)
     }
   }
   Gdt = __decorate(
@@ -362,19 +362,19 @@ export function createCursorPredictionService(params) {
     ],
     Gdt,
   )
-  var Ogo = !1,
+  var Ogo = false,
     df = Ogo ? console.log : () => {},
     Bgo = async (i, e, t, s) => {
       ;(await e.exists(i)) &&
         (await t.open(i, {
-          openToSide: s?.inNewTab ?? !1,
+          openToSide: s?.inNewTab ?? false,
           editorOptions: {
-            revealIfVisible: !0,
-            revealIfOpened: !0,
+            revealIfVisible: true,
+            revealIfOpened: true,
             source: Nh.USER,
-            preserveFocus: !0,
+            preserveFocus: true,
           },
-          fromUserGesture: !0,
+          fromUserGesture: true,
         }))
     }
   function _go(i) {
@@ -406,18 +406,18 @@ export function createCursorPredictionService(params) {
         (this.S = g),
         (this.U = p),
         (this.W = m),
-        (this.c = !1),
+        (this.c = false),
         (this.g = []),
-        (this.h = void 0),
+        (this.h = undefined),
         (this.j = new Map()),
-        (this.q = void 0),
-        (this.r = !1),
+        (this.q = undefined),
+        (this.r = false),
         (this.s = 0),
-        (this.t = void 0),
-        (this.w = void 0),
-        (this.y = void 0),
+        (this.t = undefined),
+        (this.w = undefined),
+        (this.y = undefined),
         (this.z = 1),
-        (this.C = !1),
+        (this.C = false),
         (this.a = this.I.createInstance(fu, { service: Va })),
         (this.b = this.I.createInstance(fu, { service: k3t })),
         this.periodicallyReloadCursorPredictionConfig(),
@@ -429,13 +429,16 @@ export function createCursorPredictionService(params) {
     }
     clearCursorPrediction() {
       const e = this.N.getActiveCodeEditor()
-      e && this.clearPrediction({ editor: e, registerReject: !0 })
+      e && this.clearPrediction({ editor: e, registerReject: true })
     }
     set X(e) {
       ;(this.c = e), e || (this.g = [])
     }
     get X() {
       return this.c
+    }
+    _getApplicationUserPersistentStorage() {
+      return this.Y();
     }
     Y() {
       return this.F.applicationUserPersistentStorage
@@ -446,36 +449,36 @@ export function createCursorPredictionService(params) {
         []
       )
     }
-    async periodicallyReloadCursorPredictionConfig(e = !1) {
+    async periodicallyReloadCursorPredictionConfig(e = false) {
       ;(Date.now() - this.s < 1e3 * 60 * 30 && !e) ||
         ((this.s = Date.now()), this._refreshConfig())
     }
     cursorPredictionModel() {
       return (
-        this.Y().cursorPredictionState?.model ?? this.Y().cursorPredictionModel
+        this._getApplicationUserPersistentStorage().cursorPredictionState?.model ?? this._getApplicationUserPersistentStorage().cursorPredictionModel
       )
     }
     cursorPredictionTabToLineFirst() {
       return (
-        this.Y().cursorPredictionTabToLineFirst !== !1 ||
-        this.Y().cursorPredictionState?.tabToLineFirst !== !1
+        this._getApplicationUserPersistentStorage().cursorPredictionTabToLineFirst !== false ||
+        this._getApplicationUserPersistentStorage().cursorPredictionState?.tabToLineFirst !== false
       )
     }
     isCursorPredictionEnabled() {
       return (
-        this.Y().cursorPredictionEnabled !== !1 &&
-        this.Y().cursorPredictionState?.backendEnabled !== !1
+        this._getApplicationUserPersistentStorage().cursorPredictionEnabled !== false &&
+        this._getApplicationUserPersistentStorage().cursorPredictionState?.backendEnabled !== false
       )
     }
     onlyTriggerOnCppAccept() {
       return !this.Z.includes("cursor-pred-always-on")
     }
-    tabToLineBeforeAcceptingCpp(e) {
+    tabToLineBeforeAcceptingCpp(intentSource) {
       return (
         this.isCursorPredictionEnabled() &&
-        e === CppIntent.CursorPrediction &&
+        intentSource === CppIntent.CursorPrediction &&
         this.cursorPredictionTabToLineFirst() &&
-        this.F.nonPersistentStorage.cursorPrediction !== void 0
+        this.F.nonPersistentStorage.cursorPrediction !== undefined
       )
     }
     maybeUndoCursorPrediction({
@@ -501,14 +504,14 @@ export function createCursorPredictionService(params) {
           e.stopPropagation(),
           e.stopImmediatePropagation(),
           e.preventDefault(),
-          this.clearPrediction({ editor: n, registerReject: !0 }),
-          (this.r = !1))
+          this.clearPrediction({ editor: n, registerReject: true }),
+          (this.r = false))
       }
     }
     async maybeAcceptCursorPrediction({ event: e, triggerCppCallback: t }) {
       if (!this.isCursorPredictionEnabled()) return
       const s = this.F.nonPersistentStorage.cursorPrediction
-      if (s === void 0) return
+      if (s === undefined) return
       const n = s.lineNumber
       let r
       const o = this.N.getActiveCodeEditor()
@@ -520,7 +523,7 @@ export function createCursorPredictionService(params) {
             extUri.isEqual(c.activeEditor.resource, s.uri),
         )
         if (((r = l?.activeEditorPane?.getControl()), !l || !r)) {
-          await Bgo(s.uri, this.S, this.U, { inNewTab: !1 })
+          await Bgo(s.uri, this.S, this.U, { inNewTab: false })
           const c = this.W.groups.find(
             (h) =>
               h.activeEditor?.resource &&
@@ -552,11 +555,11 @@ export function createCursorPredictionService(params) {
           e.stopPropagation(),
           e.stopImmediatePropagation(),
           e.preventDefault(),
-          (this.X = !0),
-          this.clearPrediction({ editor: r, registerReject: !1 }),
+          (this.X = true),
+          this.clearPrediction({ editor: r, registerReject: false }),
           this.Q.recordAcceptCursorPredictionEvent(a, s),
           this.r && t?.(a.uri, r, CppIntent.CursorPrediction),
-          (this.r = !1)
+          (this.r = false)
       }
     }
     isInVimNonInsertMode() {
@@ -566,17 +569,17 @@ export function createCursorPredictionService(params) {
           t.id === "vscodevim.vim.primary" &&
           !["INSERT"].some((s) => t.container.innerText.includes(s))
         )
-          return !0
-      return !1
+          return true
+      return false
     }
     shouldTabInsteadOfAccepting(e, t) {
       if (
         this.isInVimNonInsertMode() ||
-        this.Y()?.cppConfig?.isFusedCursorPredictionModel
+        this._getApplicationUserPersistentStorage()?.cppConfig?.isFusedCursorPredictionModel
       )
-        return !1
+        return false
       const s = e.getPosition()?.lineNumber
-      return s === void 0 ? !1 : t.getLineFirstNonWhitespaceColumn(s) === 0
+      return s === undefined ? false : t.getLineFirstNonWhitespaceColumn(s) === 0
     }
     fastCurrentFileInfoDoesNotWorkForNotebooks(e, t, s, n) {
       if (e.scheme !== ce.aiChat)
@@ -628,7 +631,7 @@ export function createCursorPredictionService(params) {
           EditHistoryDiffFormatter.CompileGlobalDiffTrajectories,
           {},
         )
-      if (g === void 0)
+      if (g === undefined)
         throw new Error(
           "Compile Diff Trajectories not registered in extension host",
         )
@@ -664,14 +667,14 @@ export function createCursorPredictionService(params) {
       if (
         (await this.periodicallyReloadCursorPredictionConfig(),
         df("[CURSOR PREDICTION] createPrediction: called"),
-        !this.isCursorPredictionEnabled() || this.C === !0)
+        !this.isCursorPredictionEnabled() || this.C === true)
       ) {
         df(
           "[CURSOR PREDICTION] createPrediction: not enabled or currently clearing prediction",
         )
         return
       }
-      if (this.Y()?.cppConfig?.isFusedCursorPredictionModel) {
+      if (this._getApplicationUserPersistentStorage()?.cppConfig?.isFusedCursorPredictionModel) {
         df(
           "[CURSOR PREDICTION] createPrediction: skipping because fused cursor prediction model is enabled",
         )
@@ -679,7 +682,7 @@ export function createCursorPredictionService(params) {
       }
       try {
         df("[CURSOR PREDICTION] createPrediction: clearing prediction"),
-          await this.clearPrediction({ editor: e, registerReject: !0 }),
+          await this.clearPrediction({ editor: e, registerReject: true }),
           df("[CURSOR PREDICTION] createPrediction: cleared prediction")
         const o = e.getModel()
         if (!o) {
@@ -691,7 +694,7 @@ export function createCursorPredictionService(params) {
           df("[CURSOR PREDICTION] createPrediction: selection is null")
           return
         }
-        if (this.overlapsInlineDiff(o.uri, a.startLineNumber) === !0) {
+        if (this.overlapsInlineDiff(o.uri, a.startLineNumber) === true) {
           df("[CURSOR PREDICTION] createPrediction: overlapsInlineDiff")
           return
         }
@@ -703,10 +706,10 @@ export function createCursorPredictionService(params) {
         }
         let l =
           this.F.applicationUserPersistentStorage.cursorPredictionState?.model
-        l === void 0 && (l = $go)
+        l === undefined && (l = $go)
         let c = this.F.workspaceUserPersistentStorage.uniqueCppWorkspaceId
         if (
-          (c === void 0 &&
+          (c === undefined &&
             ((c =
               Math.random().toString(36).substring(2, 15) +
               Math.random().toString(36).substring(2, 15)),
@@ -737,7 +740,7 @@ export function createCursorPredictionService(params) {
           modelValue: u ? "" : o.getValue(),
           getLinterErrors: s,
         })
-        d.currentFile !== void 0 && (d.currentFile.relyOnFilesync = u)
+        d.currentFile !== undefined && (d.currentFile.relyOnFilesync = u)
         const g = {
           ...d,
           modelName: l,
@@ -749,12 +752,12 @@ export function createCursorPredictionService(params) {
           fileSyncUpdates: h,
           fileVisibleRanges: this.getOpenVisibleRanges(),
         }
-        this.h !== void 0 && this.h.abort(), (this.h = new AbortController())
+        this.h !== undefined && this.h.abort(), (this.h = new AbortController())
         const p = await this.aiClient(),
           m = await this.$()
         let b = "",
           y,
-          w = !1
+          w = false
         const C = rt(),
           S = p.streamNextCursorPrediction(g, {
             signal: this.h.signal,
@@ -767,7 +770,7 @@ export function createCursorPredictionService(params) {
           if (
             (D.case === "fileName" &&
               ((x = this.G.resolveRelativePath(D.value)),
-              x === void 0 &&
+              x === undefined &&
                 df("[CURSOR PREDICTION] predictedUri is undefined")),
             D.case === "lineNumber")
           ) {
@@ -775,15 +778,15 @@ export function createCursorPredictionService(params) {
             break
           }
           if (D.case === "isNotInRange") {
-            w = !0
+            w = true
             break
           }
         }
-        if ((this.h?.abort(), (this.h = void 0), w)) {
+        if ((this.h?.abort(), (this.h = undefined), w)) {
           df("[CURSOR PREDICTION] createPrediction: isNoOp")
           return
         }
-        if (y === void 0) {
+        if (y === undefined) {
           df("[CURSOR PREDICTION] predictedLineNumberInRange is undefined.")
           return
         }
@@ -798,9 +801,9 @@ export function createCursorPredictionService(params) {
           predictedUri: x,
         })
         if (
-          t !== void 0 &&
-          k?.lineNumber !== void 0 &&
-          this.F.nonPersistentStorage.cppState?.suggestion === void 0
+          t !== undefined &&
+          k?.lineNumber !== undefined &&
+          this.F.nonPersistentStorage.cppState?.suggestion === undefined
         ) {
           const E = new Me(k.lineNumber, 1)
           t(o.uri, e, CppIntent.CursorPrediction, E)
@@ -829,7 +832,7 @@ export function createCursorPredictionService(params) {
         )
         return (
           df("[CURSOR PREDICTION] should rely on file sync for file", e, s),
-          s ?? !1
+          s ?? false
         )
       } catch (s) {
         return (
@@ -837,7 +840,7 @@ export function createCursorPredictionService(params) {
             "[CURSOR PREDICTION] error checking if should rely on file sync for file",
             s,
           ),
-          !1
+          false
         )
       }
     }
@@ -846,13 +849,13 @@ export function createCursorPredictionService(params) {
         GB.GetFileSyncEncryptionHeader,
         null,
       )
-      if (e === void 0)
+      if (e === undefined)
         throw new Error("Could not retrieve file sync encryption header")
       return e
     }
     overlapsInlineDiff(e, t) {
       const s = this.F.nonPersistentStorage.inlineDiffs
-      if (s === void 0) return !1
+      if (s === undefined) return false
       const n = this.F.nonPersistentStorage.inprogressAIGenerations.map(
         (r) => r.generationUUID,
       )
@@ -878,7 +881,7 @@ export function createCursorPredictionService(params) {
         )
         .slice(t.startLineNumber - 1, t.endLineNumberExclusive + 2)
       let r = 0,
-        o = !1
+        o = false
       for (r = 0; r < n.length - 2; r++)
         if (
           n
@@ -889,8 +892,8 @@ export function createCursorPredictionService(params) {
             )
             .startsWith(s)
         ) {
-          if (o) return !1
-          o = !0
+          if (o) return false
+          o = true
         }
       return o
     }
@@ -900,19 +903,19 @@ export function createCursorPredictionService(params) {
       registerReject: s,
     }) {
       const n = this.F.nonPersistentStorage.cursorPrediction
-      if (n !== void 0) {
-        this.C = !0
+      if (n !== undefined) {
+        this.C = true
         try {
-          if ((this.m?.dispose(), (this.m = void 0), t === !0)) return
+          if ((this.m?.dispose(), (this.m = undefined), t === true)) return
           const r = e.getModel()
           if (r !== null && extUri.isEqual(r.uri, n.uri))
             r.deltaDecorations([n.decorationId], []),
-              this.t !== void 0 &&
-                (r.deltaDecorations([this.t], []), (this.t = void 0)),
-              this.w !== void 0 &&
-                (r.deltaDecorations([this.w], []), (this.w = void 0)),
+              this.t !== undefined &&
+                (r.deltaDecorations([this.t], []), (this.t = undefined)),
+              this.w !== undefined &&
+                (r.deltaDecorations([this.w], []), (this.w = undefined)),
               s &&
-                n !== void 0 &&
+                n !== undefined &&
                 this.Q.recordRejectCursorPredictionEvent(r, n)
           else {
             const o = await this.O.createModelReference(n.uri)
@@ -920,27 +923,27 @@ export function createCursorPredictionService(params) {
               const a = o.object.textEditorModel
               a.deltaDecorations([n.decorationId], []),
                 s &&
-                  n !== void 0 &&
+                  n !== undefined &&
                   this.Q.recordRejectCursorPredictionEvent(a, n)
             } finally {
               o.dispose()
             }
           }
-          this.n && (this.n.dispose(), (this.n = void 0)),
+          this.n && (this.n.dispose(), (this.n = undefined)),
             this.y?.dispose(),
-            (this.y = void 0),
-            this.F.setNonPersistentStorage("cursorPrediction", void 0)
+            (this.y = undefined),
+            this.F.setNonPersistentStorage("cursorPrediction", undefined)
         } catch (r) {
           r("[CURSOR PREDICTION] error clearing prediction", r)
         } finally {
-          this.C = !1
+          this.C = false
         }
       }
     }
     hideWidgetsIfConflictsWithCppSuggestion(e, t) {
       if (!this.isCursorPredictionEnabled()) return
       const s = this.F.nonPersistentStorage.cursorPrediction
-      if (s === void 0) return
+      if (s === undefined) return
       const n = e.getModel()
       n !== null &&
         extUri.isEqual(n.uri, s.uri) &&
@@ -948,21 +951,21 @@ export function createCursorPredictionService(params) {
         s.lineNumber < t.endLineNumberExclusive &&
         (this.clearPrediction({
           editor: e,
-          onlyRemoveOverlayWidget: !0,
-          registerReject: !1,
+          onlyRemoveOverlayWidget: true,
+          registerReject: false,
         }),
         this.n?.hide())
     }
     maybeShowHintLineWidget() {
       this.isCursorPredictionEnabled() &&
-        (this.F.nonPersistentStorage.cursorPrediction === void 0 ||
-          this.n === void 0 ||
-          (this.n.show(), (this.r = !0)))
+        (this.F.nonPersistentStorage.cursorPrediction === undefined ||
+          this.n === undefined ||
+          (this.n.show(), (this.r = true)))
     }
     async getMultifileCursorPredictionEditor(e) {
       if (
         (df("[CursorPredictionService] createPredictionMultifile: called"),
-        this.C === !0 || e === void 0)
+        this.C === true || e === undefined)
       )
         return
       const t = this.G.asRelativePath(e)
@@ -995,10 +998,10 @@ export function createCursorPredictionService(params) {
       let a = e.editor,
         l = e.model,
         c = l.uri
-      if (o !== void 0) {
+      if (o !== undefined) {
         c = o
         const y = await this.getMultifileCursorPredictionEditor(o)
-        if (y !== void 0) {
+        if (y !== undefined) {
           a = y
           const w = a.getModel()
           if (w === null) return
@@ -1006,56 +1009,56 @@ export function createCursorPredictionService(params) {
         }
       }
       let h = e.predictedLineNumberInRange
-      if (this.C === !0) return
-      await this.clearPrediction({ editor: a, registerReject: !0 })
+      if (this.C === true) return
+      await this.clearPrediction({ editor: a, registerReject: true })
       const u = a.getPosition()
       if (
-        h === void 0 ||
+        h === undefined ||
         u === null ||
         Math.abs(u.lineNumber - h) <= 1 ||
-        this.overlapsInlineDiff(l.uri, h) === !0 ||
+        this.overlapsInlineDiff(l.uri, h) === true ||
         this.R.isValidCursorPredictionCase({
           predictedLineNumber: h,
           cppSuggestionRange: r,
-        }).valid === !1
+        }).valid === false
       )
         return
       const d = this.getDecoration({ model: l, lineNumber: h }),
         g = l.deltaDecorations([], [d]).at(0)
-      if (g === void 0) return
+      if (g === undefined) return
       if (
-        (this.q !== void 0 && clearTimeout(this.q),
+        (this.q !== undefined && clearTimeout(this.q),
         extUri.isEqual(a.getModel()?.uri, c)
           ? ((this.y = this.I.createInstance(Fgo, a, g)),
             (this.n = this.I.createInstance(gdi, a, g)))
           : (df("[CURSOR PREDICTION] Prediction is in a non-visible editor"),
             this.ab(a, c, h, t)),
-        this.j.get(a.getId()) === void 0)
+        this.j.get(a.getId()) === undefined)
       ) {
         const y = this.D(
             a.onDidChangeModel((x) => {
-              ;(this.X = !1),
-                this.clearPrediction({ editor: a, registerReject: !0 })
+              ;(this.X = false),
+                this.clearPrediction({ editor: a, registerReject: true })
             }),
           ),
           w = this.D(
             a.onDidBlurEditorText(() => {
-              ;(this.X = !1),
-                this.clearPrediction({ editor: a, registerReject: !0 })
+              ;(this.X = false),
+                this.clearPrediction({ editor: a, registerReject: true })
             }),
           ),
           C = this.D(
             a.onDidChangeModelContent(() => {
-              ;(this.X = !1),
+              ;(this.X = false),
                 !(
-                  EYe.current === !0 &&
-                  this.Y()?.cppConfig?.isFusedCursorPredictionModel === !0
-                ) && this.clearPrediction({ editor: a, registerReject: !0 })
+                  EYe.current === true &&
+                  this._getApplicationUserPersistentStorage()?.cppConfig?.isFusedCursorPredictionModel === true
+                ) && this.clearPrediction({ editor: a, registerReject: true })
             }),
           ),
           S = this.D(
             a.onDidChangeCursorPosition((x) => {
-              this.X && (this.X = !1)
+              this.X && (this.X = false)
             }),
           )
         this.j.set(a.getId(), [y, w, C, S])
@@ -1086,15 +1089,15 @@ export function createCursorPredictionService(params) {
     }
     isShowingCursorPrediction(e) {
       const t = this.F.nonPersistentStorage.cursorPrediction
-      return t === void 0 ? !1 : extUri.isEqual(t.uri, e.getModel()?.uri)
+      return t === undefined ? false : extUri.isEqual(t.uri, e.getModel()?.uri)
     }
     async manuallyCreateCursorPrediction(e) {
       if (!this.isCursorPredictionEnabled()) return
-      e.triggerCppCallback === null ? (this.r = !0) : (this.r = !1)
+      e.triggerCppCallback === null ? (this.r = true) : (this.r = false)
       const t = await this.getMultifileCursorPredictionEditor(e.model.uri)
       let s = e.editor,
         n = e.model
-      if (t !== void 0) {
+      if (t !== undefined) {
         s = t
         const o = s.getModel()
         if (o === null) return
@@ -1111,7 +1114,7 @@ export function createCursorPredictionService(params) {
         source: QN.UNSPECIFIED,
         predictedUri: e.model.uri,
       })
-      if (r !== void 0 && e.triggerCppCallback !== null) {
+      if (r !== undefined && e.triggerCppCallback !== null) {
         const o = new Me(r.lineNumber, 1)
         e.triggerCppCallback(n.uri, s, CppIntent.CursorPrediction, o)
       }
@@ -1134,7 +1137,7 @@ export function createCursorPredictionService(params) {
     }
     getModel() {
       return (
-        this.Y().cursorPredictionState?.model ?? this.Y().cursorPredictionModel
+        this._getApplicationUserPersistentStorage().cursorPredictionState?.model ?? this._getApplicationUserPersistentStorage().cursorPredictionModel
       )
     }
     async _refreshConfig() {
@@ -1157,7 +1160,7 @@ export function createCursorPredictionService(params) {
     }
     getOpenVisibleRanges() {
       const e = [],
-        t = this.Y().cppConfig?.excludeRecentlyViewedFilesPatterns ?? []
+        t = this._getApplicationUserPersistentStorage().cppConfig?.excludeRecentlyViewedFilesPatterns ?? []
       for (const s of this.N.listCodeEditors()) {
         const n = s.getModel()
         if (Pn(s) && n) {
@@ -1173,7 +1176,7 @@ export function createCursorPredictionService(params) {
               ce.vscodeManagedRemoteResource,
             ]
           if (
-            o === void 0 ||
+            o === undefined ||
             o === "" ||
             o.includes("anysphere") ||
             !a.some((c) => Cg(n.uri, c)) ||
@@ -1204,7 +1207,7 @@ export function createCursorPredictionService(params) {
     }
     cb() {
       for (const e of this.N.listCodeEditors())
-        this.clearPrediction({ editor: e, registerReject: !1 })
+        this.clearPrediction({ editor: e, registerReject: false })
     }
   }
   ;(CursorPredictionService = __decorate(
