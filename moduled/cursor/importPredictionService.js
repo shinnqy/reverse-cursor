@@ -715,18 +715,18 @@ export function createImportPredictionService(params) {
         const uri = editor.getModel()?.uri
         return uri !== undefined && this.Hb(uri), this.showCorrectUI(editor), true
       }
-      maybeRejectShownImport(e) {
-        if (!this.isEnabled() || !e.hasTextFocus()) return false
-        const t = e.getSelection()
+      maybeRejectShownImport(editor) {
+        if (!this.isEnabled() || !editor.hasTextFocus()) return false
+        const selection = editor.getSelection()
         if (
-          t !== null &&
-          (t.startLineNumber !== t.endLineNumber || t.startColumn !== t.endColumn)
+          selection !== null &&
+          (selection.startLineNumber !== selection.endLineNumber || selection.startColumn !== selection.endColumn)
         )
           return false
-        const s = this.vb
-        return s === undefined || !this._isImportForCurrentEditor(s, e) || this.wb()
+        const showImport = this._showImport
+        return showImport === undefined || !this._isImportForCurrentEditor(showImport, editor) || this.wb()
           ? false
-          : (this.rejectImport(e, s), this.showCorrectUI(e), true)
+          : (this.rejectImport(editor, showImport), this.showCorrectUI(editor), true)
       }
       async _getMatchingCodeAction(editor, shownImport) {
         return await this.cb(editor, shownImport);
@@ -759,29 +759,29 @@ export function createImportPredictionService(params) {
       }
       db(editor, shownImport) {
         this.isEnabled() &&
-          (this.vb === shownImport && this.hideShownImport(editor),
+          (this._showImport === shownImport && this.hideShownImport(editor),
           (this.n = this.n.filter((s) => s !== shownImport)))
       }
-      hideShownImport(e) {
+      hideShownImport(editor) {
         if (!this.isEnabled()) return
-        const t = this.q
-        if (t) {
-          const { shownImport: s, decorationId: n, importWidget: r } = t
+        const currentSuggestionState = this.q
+        if (currentSuggestionState) {
+          const { shownImport, decorationId, importWidget } = currentSuggestionState
           if (
-            (r.hide(),
-            r.dispose(),
+            (importWidget.hide(),
+            importWidget.dispose(),
             (this.q = undefined),
-            e !== undefined && this._isImportForCurrentEditor(s, e))
+            editor !== undefined && this._isImportForCurrentEditor(shownImport, editor))
           ) {
-            const o = e.getModel()
-            o && o.deltaDecorations([n], [])
+            const model = editor.getModel()
+            model && model.deltaDecorations([decorationId], [])
           } else {
-            const o = this.textModelService.createModelReference(s.uri)
+            const modelRef = this.textModelService.createModelReference(shownImport.uri)
             ;(async () => {
               try {
-                ;(await o).object.textEditorModel.deltaDecorations([n], [])
+                ;(await modelRef).object.textEditorModel.deltaDecorations([decorationId], [])
               } finally {
-                ;(await o).dispose()
+                ;(await modelRef).dispose()
               }
             })()
           }
@@ -901,97 +901,109 @@ export function createImportPredictionService(params) {
         }
         this.h.set(e.getModel()?.uri?.toString() ?? "", t)
       }
-      jb(e, t) {
-        if (!t)
+      _calculateMarkerDistanceScore(marker, cursorPosition) {
+        return this.jb(marker, cursorPosition);
+      }
+      jb(marker, cursorPosition) {
+        if (!cursorPosition)
           throw new Error("position is undefined, so we can't score the import")
-        const { startLineNumber: s, startColumn: n } = e
+        const { startLineNumber, startColumn } = marker
         return (
-          Math.abs(t.lineNumber - s) +
-          Math.abs(Math.floor(t.column - n) / this.hb)
+          Math.abs(cursorPosition.lineNumber - startLineNumber) +
+          Math.abs(Math.floor(cursorPosition.column - startColumn) / this.hb)
         )
       }
-      kb(e, t, s) {
-        const n = this._getMarkerStateFromCache(e, t.marker)?.currentMarkers
-        return n === undefined
-          ? 1 / 0
-          : Math.min(1 / 0, ...n.map((r) => this.jb(r, s)))
+      _calculateImportPriority(editor, importSuggestion, cursorPosition) {
+        return this.kb(editor, importSuggestion, cursorPosition);
       }
-      showCorrectUI(e, t) {
-        const s = performance.now(),
-          n = []
-        if ((n.push({ name: "start", time: s }), !this.isEnabled())) return
-        const r = e.getPosition()
-        if (r === null) return
-        if (t?.hideIfSameState && r !== null) {
-          const S = e.getModel(),
-            x = S?.uri
-          if (S !== null && x !== undefined) {
-            const k = S.getVersionId()
+      kb(editor, importSuggestion, cursorPosition) {
+        const markers = this._getMarkerStateFromCache(editor, importSuggestion.marker)?.currentMarkers
+        return markers === undefined
+          ? 1 / 0
+          : Math.min(1 / 0, ...markers.map((marker) => this._calculateMarkerDistanceScore(marker, cursorPosition)))
+      }
+      showCorrectUI(editor, config) {
+        const startTime = performance.now(),
+          performanceMetrics = []
+        if ((performanceMetrics.push({ name: "start", time: startTime }), !this.isEnabled())) return
+        const cursorPosition = editor.getPosition()
+        if (cursorPosition === null) return
+        if (config?.hideIfSameState && cursorPosition !== null) {
+          const model = editor.getModel(),
+            uri = model?.uri
+          if (model !== null && uri !== undefined) {
+            const modelVersion = model.getVersionId()
             if (
-              k === this.j?.modelVersion &&
-              extUri.isEqual(this.j?.uri, x) &&
-              r?.lineNumber === this.j?.cursorPosition?.lineNumber &&
-              r?.column === this.j?.cursorPosition?.column
+              // this.j => this.lastState
+              modelVersion === this.j?.modelVersion &&
+              extUri.isEqual(this.j?.uri, uri) &&
+              cursorPosition?.lineNumber === this.j?.cursorPosition?.lineNumber &&
+              cursorPosition?.column === this.j?.cursorPosition?.column
             )
               return
-            this.j = { uri: x, modelVersion: k, cursorPosition: r }
+            this.j = { uri, modelVersion, cursorPosition }
           }
         }
-        n.push({ name: "preProcessingTime", time: performance.now() })
-        const o = e.getVisibleRanges(),
-          a = o.some(
-            (S) =>
-              r !== null && this._isRangeOverlapping(S, new G(r.lineNumber, 1, r.lineNumber, 1)),
+        performanceMetrics.push({ name: "preProcessingTime", time: performance.now() })
+        const visibleRanges = editor.getVisibleRanges(),
+          isCursorVisible = visibleRanges.some(
+            (range) =>
+              cursorPosition !== null && this._isRangeOverlapping(range, new G(cursorPosition.lineNumber, 1, cursorPosition.lineNumber, 1)),
           )
-        n.push({ name: "visibleRangesTime", time: performance.now() })
-        const l = (S) => {
-            if (this._isImportForCurrentEditor(S, e) && this.kb(e, S, r) < this.ib) {
-              const x = this._getMarkerStateFromCache(e, S.marker)
-              if (x !== undefined && x.currentMarkers.length > 0)
-                return x.currentMarkers.some(
-                  (k) =>
-                    this._getCurrentSymbolByMarker(e, k) === x.symbolName &&
-                    (!a || o.some((E) => this._isRangeOverlapping(E, k))),
+        performanceMetrics.push({ name: "visibleRangesTime", time: performance.now() })
+        // 定义导入建议过滤条件
+        const importFilter = (importSuggestion) => {
+            if (this._isImportForCurrentEditor(importSuggestion, editor) && this._calculateImportPriority(editor, importSuggestion, cursorPosition) < this.ib) {
+              const markerState = this._getMarkerStateFromCache(editor, importSuggestion.marker)
+              if (markerState !== undefined && markerState.currentMarkers.length > 0)
+                return markerState.currentMarkers.some(
+                  (marker) =>
+                    this._getCurrentSymbolByMarker(editor, marker) === markerState.symbolName &&
+                    (!isCursorVisible || visibleRanges.some((range) => this._isRangeOverlapping(range, marker))),
                 )
             }
             return false
           },
-          c = this.n.filter(l)
-        n.push({ name: "validImportsTime", time: performance.now() })
-        const h = this.vb,
-          u = c.filter((S) => S !== h),
-          d =
-            r === null
+          // 过滤有效的导入建议
+          validImports = this.n.filter(importFilter)
+        performanceMetrics.push({ name: "validImportsTime", time: performance.now() })
+        const showImport = this._showImport,
+          otherValidImports = validImports.filter((importItem) => importItem !== showImport),
+          sortedImports =
+            cursorPosition === null
               ? []
-              : u.sort((S, x) => this.kb(e, S, r) - this.kb(e, x, r)),
-          p =
-            h === undefined ||
-            (d.length > 0 && this.kb(e, d[0], r) + qgo < this.kb(e, h, r))
-              ? d.at(0)
-              : h
-        n.push({ name: "nextPossiblyShownImportTime", time: performance.now() })
-        const m = e.getModel()?.uri
-        if (m === undefined)
+              : otherValidImports.sort((a, b) => this._calculateImportPriority(editor, a, cursorPosition) - this._calculateImportPriority(editor, b, cursorPosition)),
+          // 选择优先级最高的建议（考虑优先级阈值）
+          nextImportToShow =
+            showImport === undefined ||
+            (sortedImports.length > 0 && this._calculateImportPriority(editor, sortedImports[0], cursorPosition) + qgo < this._calculateImportPriority(editor, showImport, cursorPosition))
+              ? sortedImports.at(0)
+              : showImport
+        performanceMetrics.push({ name: "nextPossiblyShownImportTime", time: performance.now() })
+        // 检查模型URI和CPP状态
+        const uri = editor.getModel()?.uri
+        if (uri === undefined)
           throw new Error("uri is undefined, so we can't check if cpp is showing")
-        const b = p && this.tb(m, p.marker.startLineNumber)
-        n.push({
+        const isCppShowing = nextImportToShow && this.tb(uri, nextImportToShow.marker.startLineNumber)
+        performanceMetrics.push({
           name: "cppIsShowingOrIsInlineDiffTime",
           time: performance.now(),
         })
-        const y = p && this._getMarkerStateFromCache(e, p.marker),
-          w = y?.currentMarkers
-            .sort((S, x) => this.jb(S, r) - this.jb(x, r))
-            .find((S) => this._getCurrentSymbolByMarker(e, S) === y.symbolName)
-        n.push({ name: "matchingMarkerTime", time: performance.now() })
-        const C = b ? undefined : w && p
-        C === undefined
-          ? (this.hideShownImport(e),
-            n.push({ name: "hideShownImportTime", time: performance.now() }))
-          : l(C) &&
-            ((C.marker = w ?? C.marker),
-            this._renderImportAtLocation(e, C),
-            n.push({ name: "showImportTime", time: performance.now() })),
-          this.sb(performance.now() - s, n)
+        const markerState = nextImportToShow && this._getMarkerStateFromCache(editor, nextImportToShow.marker),
+          bestMarker = markerState?.currentMarkers
+            .sort((a, b) => this._calculateMarkerDistanceScore(a, cursorPosition) - this._calculateMarkerDistanceScore(b, cursorPosition))
+            .find((marker) => this._getCurrentSymbolByMarker(editor, marker) === markerState.symbolName)
+        performanceMetrics.push({ name: "matchingMarkerTime", time: performance.now() })
+        // 确定最终要显示的导入
+        const importToDisplay = isCppShowing ? undefined : bestMarker && nextImportToShow
+        importToDisplay === undefined
+          ? (this.hideShownImport(editor),
+            performanceMetrics.push({ name: "hideShownImportTime", time: performance.now() }))
+          : importFilter(importToDisplay) &&
+            ((importToDisplay.marker = bestMarker ?? importToDisplay.marker),
+            this._renderImportAtLocation(editor, importToDisplay),
+            performanceMetrics.push({ name: "showImportTime", time: performance.now() })),
+          this.sb(performance.now() - startTime, performanceMetrics)
       }
       sb(e, t) {
         this.nb.push(e),
@@ -1052,6 +1064,9 @@ export function createImportPredictionService(params) {
             l = extUri.isEqual(r.uri, e) || e.fsPath === r.uri.fsPath
           return !o && a && l
         })
+      }
+      get _showImport() {
+        return this.vb;
       }
       get vb() {
         return this.q?.shownImport
