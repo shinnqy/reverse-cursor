@@ -2,7 +2,7 @@
 
 // 391749
 export function createComposerService(params) {
-  const {V, __decorate, __param, __disposeResources, __addDisposableResource, R, At, Ve, Pa, ei, Z, it, Br, Xt, u0, x5, oy, nt, ve, cursorCredsService, si, Ce, Ci, Md, Gi, Na, sh, $h, nl, Vo, M_, NI, selectedContextService, aiFeatureStatusService, everythingProviderService, aiAssertService, YC, fr, ue, qi, Hi, cS, es, uue, q1, yi, QJ, qgs, _C, mo, kYe, wY, f5, xHt, Ul, fn, vk, RYe, UE, gl, GHt, fu, Det, Zm, eoe, J9, U, Hk, D7, Yt, wf, Dle, $Ui, cm, Dg, vp, T7, Mae, yI, rt, fs, u2, RUi, $I, bs, HC, zRi, v2i, dP, LBi, ls, jt, _n, sG, Er, Cf, rl, ev, J9i, du, vVe, wn, _cs, Q9, N1, jB, Va, Tg, nm, bn, Nh, QWe, One, B4i, BP, f1r, _4i, l7, G, Ggs, zgs, cb, OP, Es, Qb, J1t, ce, cEt, xEt, ys, ice, B5i, vBi, Ln, _5i, vI, zr, Jgs, EditHistoryDiffFormatter, V1r, Kgs, Mit, x2, U1, fy, DBi, rI, LC, l2i, a2i } = params;
+  const {V, __decorate, __param, __disposeResources, __addDisposableResource, R, At, Ve, Pa, ei, Z, it, Br, Xt, u0, x5, oy, nt, ve, cursorCredsService, si, Ce, Ci, Md, Gi, Na, sh, $h, nl, Vo, M_, NI, selectedContextService, aiFeatureStatusService, everythingProviderService, aiAssertService, YC, fr, ue, qi, Hi, cS, es, uue, q1, yi, QJ, qgs, _C, mo, kYe, wY, f5, xHt, Ul, fn, vk, RYe, UE, gl, GHt, fu, Det, Zm, eoe, J9, U, Hk, D7, Yt, wf, Dle, $Ui, cm, Dg, vp, T7, Mae, yI, rt, fs, u2, RUi, $I, bs, HC, zRi, v2i, dP, LBi, ls, jt, _n, sG, Er, Cf, rl, ev, J9i, du, vVe, wn, _cs, Q9, N1, jB, Va, Tg, nm, bn, Nh, QWe, One, B4i, BP, f1r, _4i, l7, G, Ggs, zgs, cb, OP, Es, Qb, J1t, ce, cEt, xEt, extUri, ice, B5i, vBi, Ln, _5i, vI, zr, Jgs, EditHistoryDiffFormatter, V1r, Kgs, Mit, x2, U1, fy, DBi, rI, LC, l2i, a2i } = params;
 
   var G1r = {
     id: "01_jsxLanguageTest",
@@ -5455,7 +5455,7 @@ ${e.description}
             u.push({ uri: S, addedWithoutMention: !0, autoContext: !0 })
       }
       a.forEach((C) => {
-        u.some((S) => ys.isEqual(U.revive(S.uri), U.revive(C.uri))) ||
+        u.some((S) => extUri.isEqual(U.revive(S.uri), U.revive(C.uri))) ||
           (this.selectedContextService.getMentions(r, "fileSelections", C)
             .length > 0 &&
             !this.selectedContextService.shouldIgnoreUri(C.uri) &&
@@ -5468,7 +5468,7 @@ ${e.description}
               d.push(C))
         }),
         c.forEach((C) => {
-          g.some((S) => ys.isEqual(U.revive(S.uri), U.revive(C.uri))) ||
+          g.some((S) => extUri.isEqual(U.revive(S.uri), U.revive(C.uri))) ||
             (this.selectedContextService.getMentions(r, "terminalFiles", C)
               .length > 0 &&
               g.push(C))
@@ -5873,19 +5873,19 @@ ${e.description}
             : m.resource.scheme === ce.vscodeTerminal &&
                 m.resource &&
                 !u.some((b) =>
-                  ys.isEqual(U.revive(b.uri), U.revive(m.resource)),
+                  extUri.isEqual(U.revive(b.uri), U.revive(m.resource)),
                 )
               ? u.push({ uri: m.resource })
               : m.resource &&
                 !c.some((b) =>
-                  ys.isEqual(U.revive(b.uri), U.revive(m.resource)),
+                  extUri.isEqual(U.revive(b.uri), U.revive(m.resource)),
                 ) &&
                 (this.selectedContextService.shouldIgnoreUri(m.resource) ||
                   c.push({ uri: m.resource })))
       const d =
           s.length === c.length &&
           s.every((m) =>
-            c.some((b) => ys.isEqual(U.revive(b.uri), U.revive(m.uri))),
+            c.some((b) => extUri.isEqual(U.revive(b.uri), U.revive(m.uri))),
           ),
         g =
           n.length === h.length &&
@@ -5893,7 +5893,7 @@ ${e.description}
         p =
           r.length === u.length &&
           r.every((m) =>
-            u.some((b) => ys.isEqual(U.revive(b.uri), U.revive(m.uri))),
+            u.some((b) => extUri.isEqual(U.revive(b.uri), U.revive(m.uri))),
           )
       if (d && g && p) {
         const m = this.editorService.activeEditor

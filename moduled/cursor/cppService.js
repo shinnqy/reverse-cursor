@@ -2,7 +2,7 @@
 
 
 export function createCppService(params) {
-  const {V, EYe, G, LRUCache, EditHistoryCache, SuggestionCache, SuggestionManager, MutableDisposable, J: DisposableStore, RequestDebouncer, um, hF, ss, CppIntent, JB, onDidRegisterWindow, fu, Va, nze, WEn, m2i, qEn, b2i, S9, $, Hae, m0t, Ad, fUe, Sp, VB, replaceTextInRange, generateModifiedText, EditHistoryDiffFormatter, VS: getWindows, NYi, CURSOR_PREDICTION, Ri: MarkerSeverity, ce: Schemas, Pn, Cg, GhostTextController, isPureEmptyLineInsertion, U, mu, Me, ys, $fo, qdt, Ffo, normalizeSeverity, uI, formatRelatedInformation, Cf: LinterErrors, hG: StreamCppRequestControlToken, mR, fm, gle, xr, Gr, GB, QN, Ycr, Yt: VSBuffer, StreamCppRequest, Kf, rt, handleStreamWithPredictions, handleChunkedStream, consumeRemainingStream, Hu, Aoe, Qcr, TKn, F_, tdi, _fo, rge, OFt, Xfo, Ui, ZXe: computeDiffs, k7, RKi, jBt, isEditOnShortestPath, Ho: CurrentFileInfo, Qm, T1t, Xf, oj, ee, j, Je, CppDiffPeekViewWidget, cppService, ei, wf, yi, Ci, $h} = params;
+  const {V, EYe, G, LRUCache, EditHistoryCache, SuggestionCache, SuggestionManager, MutableDisposable, J: DisposableStore, RequestDebouncer, um, hF, ss, CppIntent, JB, onDidRegisterWindow, fu, Va, nze, WEn, m2i, qEn, b2i, S9, $, Hae, m0t, Ad, fUe, Sp, VB, replaceTextInRange, generateModifiedText, EditHistoryDiffFormatter, VS: getWindows, NYi, CURSOR_PREDICTION, Ri: MarkerSeverity, ce: Schemas, Pn, Cg, GhostTextController, isPureEmptyLineInsertion, U, mu, Me, extUri, $fo, qdt, Ffo, normalizeSeverity, uI, formatRelatedInformation, Cf: LinterErrors, hG: StreamCppRequestControlToken, mR, fm, gle, xr, Gr, GB, QN, Ycr, Yt: VSBuffer, StreamCppRequest, Kf, rt, handleStreamWithPredictions, handleChunkedStream, consumeRemainingStream, Hu, Aoe, Qcr, TKn, F_, tdi, _fo, rge, OFt, Xfo, Ui, ZXe: computeDiffs, k7, RKi, jBt, isEditOnShortestPath, Ho: CurrentFileInfo, Qm, T1t, Xf, oj, ee, j, Je, CppDiffPeekViewWidget, cppService, ei, wf, yi, Ci, $h} = params;
 
   var bgo = class zmi extends ee {
     static {
@@ -2131,7 +2131,7 @@ export function createCppService(params) {
         const a =
             t >= o.currentRange.startLineNumber &&
             t <= o.currentRange.endLineNumberExclusive,
-          l = ys.isEqual(o.uri, e) || e.fsPath === o.uri.fsPath
+          l = extUri.isEqual(o.uri, e) || e.fsPath === o.uri.fsPath
         return a && l
       })
     }
@@ -3683,7 +3683,7 @@ export function createCppService(params) {
       }
       let lineNumber = fusedCursorPrediction.lineNumberOneIndexed
       const h = e.getPosition(),
-        u = ys.isEqual(t.uri, l.uri)
+        u = extUri.isEqual(t.uri, l.uri)
       if (h && u && lineNumber > h.lineNumber) {
         const g = t.getEOL()
         lineNumber += r.split(g).length - n.split(g).length

@@ -2,7 +2,7 @@
 
 // 171360
 export function createInlineDiffService(params) {
-  const { Re, V, UT, wn, rt, R, me, fu, vze, Pn, pp, cb, pae, c2, zf, Dks, DKs, TKs, ys, rLt, __decorate, __param, Xt, Z, ei, fP, Ac, Ce, ve, Vi, ft, Br, Sk, cppEventLoggerService, yi, fn, Ve, MI, u$, A8n, mze, M8n, A1, Es, U, G, rc, Wm, Bse, Yne, JM, B8n, qi, Hi, ue, Na, Me } = params;
+  const { Re, V, UT, wn, rt, R, me, fu, vze, Pn, pp, cb, pae, c2, zf, Dks, DKs, TKs, extUri, rLt, __decorate, __param, Xt, Z, ei, fP, Ac, Ce, ve, Vi, ft, Br, Sk, cppEventLoggerService, yi, fn, Ve, MI, u$, A8n, mze, M8n, A1, Es, U, G, rc, Wm, Bse, Yne, JM, B8n, qi, Hi, ue, Na, Me } = params;
 
   var uLt,
     oy = Re("inlineDiffService")
@@ -822,7 +822,7 @@ export function createInlineDiffService(params) {
       for (let l = 0; l < r.length; l++) {
         const c = r[l],
           h = o.at(-1)
-        ys.isEqual(a, n.uri) &&
+        extUri.isEqual(a, n.uri) &&
         h !== void 0 &&
         h.addedRange.endLineNumberExclusive + t >= c.addedRange.startLineNumber
           ? o.push(c)
@@ -1868,7 +1868,7 @@ export function createInlineDiffService(params) {
   function fLt(i, e, t, s) {
     const n = i.listCodeEditors()
     for (const r of n)
-      if (r.hasModel() && ys.isEqual(r.getModel().uri, t)) {
+      if (r.hasModel() && extUri.isEqual(r.getModel().uri, t)) {
         const o = r.getPosition()
         o && o.lineNumber >= e.startLineNumber && o.lineNumber <= e.endLineNumber
           ? r.setPosition(s)
