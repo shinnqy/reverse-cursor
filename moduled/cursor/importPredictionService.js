@@ -1,7 +1,7 @@
 // @ts-check
 
 export function createImportPredictionService(params) {
-  const {V, __decorate, __param, Pt: themeService, ue: configurationService, ei: reactiveStorageService, Ve, it: contextService, mo: markerService, Z: instantiationService, metricsService, cppTypeService, everythingProviderService, yi: codeEditorService, Xt: textModelService, cl: statusbarService, cppEventLoggerService, zi: ILanguageFeaturesService, aiFeatureStatusService, st: commandService, aiAssertService, importPredictionService, LRUCache, DYe, fu, rt, q, W, Un, Va, Ri, extUri, MAX_DIAGNOSTIC_DISTANCE, DHe, Ze, gI, G, mp, lp, Me, GB, CppIntent, P1t, HMi, hG, y7, g1, Kh, U, pm } = params;
+  const {V, __decorate, __param, Pt: themeService, ue: configurationService, ei: reactiveStorageService, Ve, it: contextService, mo: markerService, Z: instantiationService, metricsService, cppTypeService, everythingProviderService, yi: codeEditorService, Xt: textModelService, cl: statusbarService, cppEventLoggerService, zi: ILanguageFeaturesService, aiFeatureStatusService, st: commandService, aiAssertService, importPredictionService, LRUCache, DYe, fu, rt, q, W, Un, Va, Ri: MarkerSeverity, extUri, MAX_DIAGNOSTIC_DISTANCE, DHe, Ze, gI, G, mp, lp, Me, GB, CppIntent, P1t, HMi, hG, y7, g1, Kh, U, pm } = params;
 
   var bdi,
     vdi = class extends V {
@@ -120,7 +120,7 @@ export function createImportPredictionService(params) {
     Vgo = 7,
     Wgo = 4,
     qgo = 5,
-    jgo = 5e3 * 60,
+    DEBOUNCE_TIME_MS = 5e3 * 60,
     ImportPredictionService = class extends V {
       aiClient() {
         return this.c.get()
@@ -142,9 +142,9 @@ export function createImportPredictionService(params) {
           (this.L = g), (this.aiFeatureStatusService = this.L),
           (this.M = p), (this.commandService = this.M),
           (this.N = m), (this.aiAssertService = this.N),
-          (this.g = undefined),
+          (this.g = undefined), (this.cppMethods = this.g),
           (this.h = new Map()),
-          (this.m = new LRUCache(100)),
+          (this.m = new LRUCache(100)), (this.markerStateCache = this.m),
           (this.n = []),
           (this.r = []),
           (this.Q = [
@@ -164,7 +164,7 @@ export function createImportPredictionService(params) {
                 if (y) return y[1]
               },
             },
-          ]),
+          ]), (this.registeredParsers = this.Q),
           (this.R = 0),
           (this.S = 5),
           (this.hb = 10),
@@ -184,20 +184,21 @@ export function createImportPredictionService(params) {
           (this.c = this.instantiationService.createInstance(fu, { service: Va }))
       }
       registerCppMethods(e) {
-        this.g = e
+        this.g = e;
+        this.cppMethods = this.g;
       }
       handleNewImportPredictionConfig() {
-        const e =
+        const importPredictionConfig =
           this.reactiveStorageService.applicationUserPersistentStorage.cppConfig
             ?.importPredictionConfig
-        e !== undefined &&
+        importPredictionConfig !== undefined &&
           (this.reactiveStorageService.setApplicationUserPersistentStorage(
             "backendHasDisabledCppAutoImport",
-            e.isDisabledByBackend,
+            importPredictionConfig.isDisabledByBackend,
           ),
           this.reactiveStorageService.applicationUserPersistentStorage.cppAutoImportEnabled ===
             undefined &&
-            e.shouldTurnOnAutomatically &&
+            importPredictionConfig.shouldTurnOnAutomatically &&
             this.reactiveStorageService.setApplicationUserPersistentStorage(
               "cppAutoImportEnabled",
               true,
@@ -211,64 +212,68 @@ export function createImportPredictionService(params) {
             .userHasEnabledImportPredictionForPython === true
         )
       }
-      P(e) {
+      P(uri) {
         return [".js", ".ts", ".jsx", ".tsx", ...(this.O() ? [".py"] : [])].some(
-          (s) => e.toString().endsWith(s),
+          (ext) => uri.toString().endsWith(ext),
         )
       }
+      _isSupportedFileType(uri) {
+        return this.P(uri);
+      }
       async handleUpdatedLintErrors({
-        openEditor: e,
-        uri: t,
-        position: s,
-        allMarkers: n,
-        source: r,
+        openEditor: openEditor,
+        uri: uri,
+        position: position,
+        allMarkers: allMarkers,
+        source: source,
       }) {
         if (
           !this.isEnabled() ||
-          !this.P(t) ||
-          !this.g?.isTextFocusedOrSimilarlyFocused(e) ||
-          !e.getModel()
+          !this._isSupportedFileType(uri) ||
+          !this.cppMethods?.isTextFocusedOrSimilarlyFocused(openEditor) ||
+          !openEditor.getModel()
         )
           return
-        const a = n.filter(
-          (h) =>
-            [Ri.Error, Ri.Warning].includes(h.severity) &&
-            extUri.isEqual(h.resource, t),
+        // 过滤出当前文件的错误/警告
+        const relevantMarkers = allMarkers.filter(
+          (marker) =>
+            [MarkerSeverity.Error, MarkerSeverity.Warning].includes(marker.severity) &&
+            extUri.isEqual(marker.resource, uri),
         )
-        this.Db(e)
-        const l = (h) => {
-            const u = this.$(h),
-              d = this.xb(e, h)
-            if (u === undefined || d !== u) return false
-            const g = this.ab(e, h)
-            return g !== undefined && g.seenAt.getTime() > Date.now() - jgo
-              ? (g.currentMarkers.push(h),
-                g.status === "debouncing" ? ((g.status = "computing"), true) : false)
-              : Math.abs(h.startLineNumber - s.lineNumber) >= MAX_DIAGNOSTIC_DISTANCE
+        this.Db(openEditor)
+        const shouldProcessMarker = (marker) => {
+            const symbolName = this._getSymbolFromMarker(marker),
+              currentSymbol = this._getCurrentSymbolByMarker(openEditor, marker)
+            if (symbolName === undefined || currentSymbol !== symbolName) return false
+            const existingState = this._getMarkerStateFromCache(openEditor, marker)
+            return existingState !== undefined && existingState.seenAt.getTime() > Date.now() - DEBOUNCE_TIME_MS // DEBOUNCE_TIME_MS状态防抖
+              ? (existingState.currentMarkers.push(marker),
+                existingState.status === "debouncing" ? ((existingState.status = "computing"), true) : false)
+              : Math.abs(marker.startLineNumber - position.lineNumber) >= MAX_DIAGNOSTIC_DISTANCE // 忽略距离光标过远的错误
                 ? false
-                : (this.m.set(this.Z(e, h), {
-                    uri: t,
-                    symbolName: u,
-                    currentMarkers: [h],
+                : (this.markerStateCache.set(this._generateMarkerCacheKey(openEditor, marker), {
+                    uri: uri,
+                    symbolName: symbolName,
+                    currentMarkers: [marker],
                     status: "computing",
                     seenAt: new Date(),
-                    versionComputedAt: e.getModel()?.getVersionId() ?? 0,
+                    versionComputedAt: openEditor.getModel()?.getVersionId() ?? 0,
                   }),
                   true)
           },
-          c = a
+          markersToProcess = relevantMarkers
             .sort(
-              (h, u) =>
-                Math.abs(h.startLineNumber - s.lineNumber) -
-                Math.abs(u.startLineNumber - s.lineNumber),
+              (a, b) =>
+                Math.abs(a.startLineNumber - position.lineNumber) -
+                Math.abs(b.startLineNumber - position.lineNumber),
             )
-            .filter(l)
-        this.gb(e, n),
-          this.showCorrectUI(e, {
-            hideIfSameState: r === "onDidChangeCursorPosition",
+            .filter(shouldProcessMarker)
+        this._updateMarkerStateCache(openEditor, allMarkers),
+          this.showCorrectUI(openEditor, {
+            hideIfSameState: source === "onDidChangeCursorPosition",
           })
         try {
-          c.length > 0 && (await this.U(e, c))
+          markersToProcess.length > 0 && (await this.U(openEditor, markersToProcess))
         } catch {}
       }
       async U(e, t) {
@@ -299,7 +304,7 @@ export function createImportPredictionService(params) {
                   Ze.None,
                 ))
             } catch (w) {
-              const C = this.ab(e, c)
+              const C = this._getMarkerStateFromCache(e, c)
               throw (C && (C.status = "debouncing"), w)
             } finally {
               this.R--
@@ -334,7 +339,7 @@ export function createImportPredictionService(params) {
                   ? [{ action: w, command: w.action.command }]
                   : [],
               ),
-              b = this.ab(e, c)
+              b = this._getMarkerStateFromCache(e, c)
             this.O() &&
               m.length <= Wgo &&
               (await Promise.allSettled(
@@ -419,7 +424,7 @@ export function createImportPredictionService(params) {
             reason: new Error("no edits with actions, this should not happen"),
           }
         try {
-          if (this.n.find((se) => this.Z(t, se.marker) === this.Z(t, n)))
+          if (this.n.find((se) => this._generateMarkerCacheKey(t, se.marker) === this._generateMarkerCacheKey(t, n)))
             return { status: "pending" }
           const a = t.getModel()
           if (a === null) throw new Error("model is null")
@@ -458,7 +463,7 @@ export function createImportPredictionService(params) {
             )[0],
             p = await this.moveLineToEndOfImportsSectionExclusive(t, g),
             m = new Me(p, 1)
-          if (this.g?.getPartialCppRequest === undefined)
+          if (this.cppMethods?.getPartialCppRequest === undefined)
             throw new Error(
               "getPartialCppRequest is undefined, this should not happen",
             )
@@ -470,7 +475,7 @@ export function createImportPredictionService(params) {
                   modelVersion: a.getVersionId(),
                 },
               )) ?? false,
-            y = await this.g
+            y = await this.cppMethods
               .getPartialCppRequest({
                 editor: t,
                 uri: e,
@@ -497,10 +502,10 @@ export function createImportPredictionService(params) {
                   },
                 }),
             ),
-            { getModelName: C } = this.g
+            { getModelName: C } = this.cppMethods
           if (C === undefined)
             throw new Error("getModelName is undefined, this should not happen")
-          const S = this.g?.getRecentAndNearLocationLinterErrors?.(e, n),
+          const S = this.cppMethods?.getRecentAndNearLocationLinterErrors?.(e, n),
             x = S && { ...S, errors: S.errors.slice(0, Hgo) },
             k = this.Bb(n),
             E = new HMi({
@@ -519,7 +524,7 @@ export function createImportPredictionService(params) {
               },
               suggestedEdits: w,
               markerTouchesGreen: k,
-              currentFileContentsForLinterErrors: this.g?.truncateCurrentFile(
+              currentFileContentsForLinterErrors: this.cppMethods?.truncateCurrentFile(
                 l,
                 n.startLineNumber,
                 a.getEOL(),
@@ -587,8 +592,8 @@ export function createImportPredictionService(params) {
         const a = [...this.n]
             .sort(
               (c, h) =>
-                (this.ab(e, h.marker)?.seenAt.getTime() ?? 0) -
-                (this.ab(e, c.marker)?.seenAt.getTime() ?? 0),
+                (this._getMarkerStateFromCache(e, h.marker)?.seenAt.getTime() ?? 0) -
+                (this._getMarkerStateFromCache(e, c.marker)?.seenAt.getTime() ?? 0),
             )
             .slice(0, 20),
           l = this.textModelService.createModelReference(t)
@@ -606,27 +611,36 @@ export function createImportPredictionService(params) {
               marker: r,
             },
           ]
-          const h = this.g?.getFocusedCodeEditor()
+          const h = this.cppMethods?.getFocusedCodeEditor()
           h && this.showCorrectUI(h)
         } finally {
           ;(await l).dispose()
         }
       }
+      _generateMarkerCacheKey(editor, marker) {
+        return this.Z(editor, marker);
+      }
       Z(e, t) {
         return JSON.stringify({
           owner: t.owner,
           uri: t.resource.toString(),
-          symbolName: this.$(t),
+          symbolName: this._getSymbolFromMarker(t),
         })
       }
-      $(e) {
-        const t = this.Q.find(
-          (s) => s.source === e.source && s.codeMatches(e.code),
-        )
-        if (t !== undefined) return t.getSymbolName(e.message)
+      _getSymbolFromMarker(marker) {
+        return this.$(marker);
       }
-      ab(e, t) {
-        return this.m.get(this.Z(e, t))
+      $(marker) {
+        const matchedParser = this.registeredParsers.find(
+          (parser) => parser.source === marker.source && parser.codeMatches(marker.code),
+        )
+        if (matchedParser !== undefined) return matchedParser.getSymbolName(marker.message)
+      }
+      _getMarkerStateFromCache(editor, marker) {
+        return this.ab(editor, marker);
+      }
+      ab(editor, marker) {
+        return this.markerStateCache.get(this._generateMarkerCacheKey(editor, marker))
       }
       bb(e, t) {
         return extUri.isEqual(e.uri, t.getModel()?.uri)
@@ -640,7 +654,7 @@ export function createImportPredictionService(params) {
           n = e.getModel()?.getDecorationRange(t.decorationId)
         if (!n || !s.some((a) => this.Cb(a, n)))
           return this.hideShownImport(e), false
-        const r = this.ab(e, t.shownImport.marker)
+        const r = this._getMarkerStateFromCache(e, t.shownImport.marker)
         r !== undefined &&
           ((r.status = "accepted"),
           (r.seenAt = new Date()),
@@ -713,7 +727,7 @@ export function createImportPredictionService(params) {
       }
       async rejectImport(e, t) {
         if (!this.isEnabled()) return
-        const s = this.ab(e, t.marker)
+        const s = this._getMarkerStateFromCache(e, t.marker)
         s && ((s.status = "rejected"), (s.seenAt = new Date())), this.db(e, t)
       }
       db(e, t) {
@@ -836,19 +850,22 @@ export function createImportPredictionService(params) {
               e,
               a,
               t.action.action.title,
-              this.$(t.marker),
+              this._getSymbolFromMarker(t.marker),
             ),
           }),
             this.q.importWidget.show()
         }
       }
+      _updateMarkerStateCache(editor, marker) {
+        return this.gb(editor, marker);
+      }
       gb(e, t) {
         if (!this.isEnabled()) return
-        for (const [n, r] of this.m.entries()) r.currentMarkers = []
+        for (const [n, r] of this.markerStateCache.entries()) r.currentMarkers = []
         if (!e.getModel())
           throw new Error("model is undefined, so we can't update cached markers")
         for (const n of t) {
-          const r = this.ab(e, n)
+          const r = this._getMarkerStateFromCache(e, n)
           r !== undefined && r.currentMarkers.push(n)
         }
         this.h.set(e.getModel()?.uri?.toString() ?? "", t)
@@ -863,7 +880,7 @@ export function createImportPredictionService(params) {
         )
       }
       kb(e, t, s) {
-        const n = this.ab(e, t.marker)?.currentMarkers
+        const n = this._getMarkerStateFromCache(e, t.marker)?.currentMarkers
         return n === undefined
           ? 1 / 0
           : Math.min(1 / 0, ...n.map((r) => this.jb(r, s)))
@@ -898,11 +915,11 @@ export function createImportPredictionService(params) {
         n.push({ name: "visibleRangesTime", time: performance.now() })
         const l = (S) => {
             if (this.bb(S, e) && this.kb(e, S, r) < this.ib) {
-              const x = this.ab(e, S.marker)
+              const x = this._getMarkerStateFromCache(e, S.marker)
               if (x !== undefined && x.currentMarkers.length > 0)
                 return x.currentMarkers.some(
                   (k) =>
-                    this.xb(e, k) === x.symbolName &&
+                    this._getCurrentSymbolByMarker(e, k) === x.symbolName &&
                     (!a || o.some((E) => this.Cb(E, k))),
                 )
             }
@@ -930,10 +947,10 @@ export function createImportPredictionService(params) {
           name: "cppIsShowingOrIsInlineDiffTime",
           time: performance.now(),
         })
-        const y = p && this.ab(e, p.marker),
+        const y = p && this._getMarkerStateFromCache(e, p.marker),
           w = y?.currentMarkers
             .sort((S, x) => this.jb(S, r) - this.jb(x, r))
-            .find((S) => this.xb(e, S) === y.symbolName)
+            .find((S) => this._getCurrentSymbolByMarker(e, S) === y.symbolName)
         n.push({ name: "matchingMarkerTime", time: performance.now() })
         const C = b ? undefined : w && p
         C === undefined
@@ -985,7 +1002,7 @@ export function createImportPredictionService(params) {
           )
             return true
         }
-        const n = this.g?.getCurrentSuggestion?.()
+        const n = this.cppMethods?.getCurrentSuggestion?.()
         if (n === undefined) return false
         const { originalText: r, replaceText: o } = n
         return r.trim() !== o.trim()
@@ -1018,17 +1035,20 @@ export function createImportPredictionService(params) {
             return true
         return false
       }
-      xb(e, t) {
-        const s = e.getModel()
-        if (!s)
+      _getCurrentSymbolByMarker(editor, marker) {
+        return this.xb(editor, marker);
+      }
+      xb(editor, marker) {
+        const model = editor.getModel()
+        if (!marker)
           throw new Error(
             "model is undefined, so we can't get the marker contents",
           )
-        return s.getValueInRange({
-          startLineNumber: t.startLineNumber,
-          startColumn: t.startColumn,
-          endLineNumber: t.endLineNumber,
-          endColumn: t.endColumn,
+        return marker.getValueInRange({
+          startLineNumber: marker.startLineNumber,
+          startColumn: marker.startColumn,
+          endLineNumber: marker.endLineNumber,
+          endColumn: marker.endColumn,
         })
       }
       handleNewGreens(editor, newRanges) {
@@ -1064,7 +1084,7 @@ export function createImportPredictionService(params) {
             "model is undefined, so we can't check if the version is the same",
           )
         const n = s.getVersionId(),
-          r = this.m.get(this.Z(e, t.marker))
+          r = this.markerStateCache.get(this._generateMarkerCacheKey(e, t.marker))
         if (!r)
           throw new Error(
             "seenLintError is undefined, so we can't check if the version is the same",
@@ -1134,13 +1154,13 @@ export function createImportPredictionService(params) {
         )
       }
       Db(e) {
-        for (const [t, s] of [...this.m.entries()]) {
+        for (const [t, s] of [...this.markerStateCache.entries()]) {
           const { status: n, seenAt: r, uri: o } = s
           extUri.isEqual(o, e.getModel()?.uri) &&
             n === "no-actions" &&
             this.Eb.filter((l) => l.time > +r && l.uri !== e.getModel()?.uri + "")
               .length > 0 &&
-            this.m.delete(t)
+            this.markerStateCache.delete(t)
         }
       }
       markFileAsUpdated(e) {
@@ -1148,11 +1168,11 @@ export function createImportPredictionService(params) {
           this.Eb.length > this.Fb && this.Eb.shift()
       }
       Hb(e) {
-        for (const [t, s] of [...this.m.entries()])
+        for (const [t, s] of [...this.markerStateCache.entries()])
           extUri.isEqual(s.uri, e) &&
             s.status === "noop" &&
             +s.seenAt > Date.now() - this.Gb &&
-            this.m.delete(t)
+            this.markerStateCache.delete(t)
       }
       async Lb(e, t, s) {
         let n
