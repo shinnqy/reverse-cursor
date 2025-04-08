@@ -8,9 +8,9 @@ export function createComposerUI(params) {
     const e = Ot(),
       { unifiedMode: t } = Oc(() => i.composerDataHandle),
       [s, n, r] = j0(),
-      [o, a] = le(!1),
+      [o, a] = le(false),
       l = () => {
-        r(), a(!1)
+        r(), a(false)
       },
       c = Q(() => i.modes.find((x) => x.id === i.selectedModeId)),
       { availableModels: u, currentPersistentModel: h } = ePs({
@@ -122,8 +122,8 @@ export function createComposerUI(params) {
                       R.style.setProperty("align-items", "center"),
                       R.style.setProperty("justify-content", "center"),
                       R.style.setProperty("opacity", "0.5"),
-                      (Gs ? "16px" : void 0) != null
-                        ? R.style.setProperty("line-height", Gs ? "16px" : void 0)
+                      (Gs ? "16px" : undefined) != null
+                        ? R.style.setProperty("line-height", Gs ? "16px" : undefined)
                         : R.style.removeProperty("line-height"),
                       Pe(() => tt(R, oe.asClassName(N()))),
                       R
@@ -180,7 +180,7 @@ export function createComposerUI(params) {
                   N
                 )
               },
-              { e: void 0, t: void 0 },
+              { e: undefined, t: undefined },
             ),
             k
           )
@@ -207,7 +207,7 @@ export function createComposerUI(params) {
                   return
                 }
                 const N = P.currentTarget.getBoundingClientRect()
-                a(!0), n({ x: N.left + N.width / 2, y: N.bottom + 3 }), g()
+                a(true), n({ x: N.left + N.width / 2, y: N.bottom + 3 }), g()
               }),
               k.style.setProperty("display", "flex"),
               k.style.setProperty("gap", "2px"),
@@ -262,7 +262,7 @@ export function createComposerUI(params) {
                               R
                             )
                           },
-                          { e: void 0, t: void 0 },
+                          { e: undefined, t: undefined },
                         ),
                         P
                       )
@@ -291,7 +291,7 @@ export function createComposerUI(params) {
                             B
                           )
                         },
-                        { e: void 0, t: void 0, a: void 0, o: void 0 },
+                        { e: undefined, t: undefined, a: undefined, o: undefined },
                       ),
                       P
                     )
@@ -317,7 +317,7 @@ export function createComposerUI(params) {
                     P
                   )
                 },
-                { e: void 0, t: void 0, a: void 0 },
+                { e: undefined, t: undefined, a: undefined },
               ),
               k
             )
@@ -383,7 +383,7 @@ export function createComposerUI(params) {
                 return i.uniqueModelDropdownId
               },
               transformModel: p,
-              shouldAllowSearchMode: !0,
+              shouldAllowSearchMode: true,
             }),
         }),
       ],
@@ -426,10 +426,10 @@ export function createComposerUI(params) {
           ? (e.keybindingService
               .lookupKeybindings(y.actionId)
               .at(0)
-              ?.getLabel() ?? void 0)
-          : void 0
+              ?.getLabel() ?? undefined)
+          : undefined
         return {
-          icon: y.icon ? A[y.icon] : void 0,
+          icon: y.icon ? A[y.icon] : undefined,
           label: y.name,
           id: y.id,
           description: y.description,
@@ -472,7 +472,7 @@ export function createComposerUI(params) {
               h(w)
             },
             onCloseIgnoreClick: () => {
-              e.composerViewsService.focus(s().data.composerId, !1)
+              e.composerViewsService.focus(s().data.composerId, false)
             },
             get openModelToggleDirectly() {
               return i.shouldOpenModelToggleDirectly
@@ -576,7 +576,7 @@ export function createComposerUI(params) {
                 (o.trackEvent("composer.submit", {
                   mode: "edit",
                   entry: "click",
-                  useCodebase: !1,
+                  useCodebase: false,
                   isAgentic: r() === "agent",
                   isEditing: r() === "edit",
                   composerType: i.location,
@@ -636,7 +636,7 @@ export function createComposerUI(params) {
                       get rawText() {
                         return i.message
                       },
-                      finished: !0,
+                      finished: true,
                       codeBlockProps: { shouldRecompute: 0 },
                       get allowCommandLinks_POTENTIALLY_UNSAFE_PLEASE_ONLY_USE_FOR_HANDWRITTEN_TRUSTED_MARKDOWN() {
                         return i.allowCommandLinksPotentiallyUnsafe
@@ -707,7 +707,7 @@ export function createComposerUI(params) {
                 o
               )
             },
-            { e: void 0, t: void 0, a: void 0 },
+            { e: undefined, t: undefined, a: undefined },
           ),
           e
         )
@@ -720,92 +720,92 @@ export function createComposerUI(params) {
     oBr = ie("<span>Skip and Continue"),
     xsi = ie("<div>"),
     aBr = ie("<span>Cancel apply"),
-    lBr = !1
+    lBr = false
   function ksi(i) {
-    const e = Ot(),
-      { composerDataService: t, composerService: s } = e,
-      n = e.analyticsService,
+    const globalContext = Ot(),
+      { composerDataService: composerDataService, composerService: composerService } = globalContext,
+      n = globalContext.analyticsService,
       [r] = SJ(),
-      [o, a] = le(!1),
+      [o, a] = le(false),
       {
-        composerDataHandle: l,
-        currentComposer: c,
-        updateCurrentComposer: u,
-        isAgentic: h,
-        unifiedMode: d,
-        model: g,
-        thinkingLevel: p,
-        setThinkingLevel: m,
-        composerMode: v,
-        updateComposerModeSetStore: y,
+        composerDataHandle: composerDataHandle,
+        currentComposer: currentComposer,
+        updateCurrentComposer: updateCurrentComposer,
+        isAgentic: isAgentic,
+        unifiedMode: unifiedMode,
+        model: model,
+        thinkingLevel: thinkingLevel,
+        setThinkingLevel: setThinkingLevel,
+        composerMode: composerMode,
+        updateComposerModeSetStore: updateComposerModeSetStore,
       } = Oc(() => i.composerDataHandle),
-      w = Q(() => c().composerId),
+      w = Q(() => currentComposer().composerId),
       C = Q(() =>
         i.nonReactiveInputBoxDelegate
           ? i.nonReactiveInputBoxDelegate
-          : e.composerViewsService.getInputDelegate(w()),
+          : globalContext.composerViewsService.getInputDelegate(w()),
       ),
-      [S, x] = le(!1),
-      [k, E] = le(!1),
+      [S, x] = le(false),
+      [k, E] = le(false),
       [I, L] = le(-1),
-      [P, N] = le(void 0),
-      [R, B] = le(!1),
+      [P, N] = le(undefined),
+      [R, B] = le(false),
       [W, G] = le(-1),
-      [te, re] = le(!1),
-      [Z, he] = le(void 0),
-      [ve, pe] = le(void 0)
+      [te, re] = le(false),
+      [Z, he] = le(undefined),
+      [ve, pe] = le(undefined)
     $e(() => {
       const pn = () => {
-        e.aiService.refreshDefaultModels(),
-          e.aiService.checkLastDefaultModelNudge()
+        globalContext.aiService.refreshDefaultModels(),
+          globalContext.aiService.checkLastDefaultModelNudge()
       }
-      e.cursorAuthenticationService.addLoginChangedListener(pn),
+      globalContext.cursorAuthenticationService.addLoginChangedListener(pn),
         pi(() => {
-          e.cursorAuthenticationService.removeLoginChangedListener(pn)
+          globalContext.cursorAuthenticationService.removeLoginChangedListener(pn)
         })
     }),
       $e(
         el(
-          () => g(),
+          () => model(),
           (pn) => {
-            Z() !== pn && he(void 0)
+            Z() !== pn && he(undefined)
           },
         ),
       )
-    const ge = () => g() ?? "unknown",
+    const ge = () => model() ?? "unknown",
       Oe = () => {
-        const pn = g()
-        return pn ? e.aiSettingsService.doesModelSupportAgent(pn) : !0
+        const pn = model()
+        return pn ? globalContext.aiSettingsService.doesModelSupportAgent(pn) : true
       }
     $e(
-      el(d, (pn) => {
+      el(unifiedMode, (pn) => {
         const vr = pn === "agent",
           qr = Oe()
-        he(vr && !qr ? ge() : void 0)
+        he(vr && !qr ? ge() : undefined)
       }),
     )
-    const Ie = Q(() => (i.isInputFocused !== void 0 ? i.isInputFocused() : S())),
+    const Ie = Q(() => (i.isInputFocused !== undefined ? i.isInputFocused() : S())),
       qe = (pn) => {
         i.setIsInputFocused ? i.setIsInputFocused(pn) : x(pn)
       },
       et = Q(() => i.bubbleId),
       We = (pn) => {
-        et() ? t.updateComposerBubble(l(), et(), pn) : u(pn)
+        et() ? composerDataService.updateComposerBubble(composerDataHandle(), et(), pn) : updateCurrentComposer(pn)
       },
-      xe = Q(() =>
+      getRichTextContent = Q(() =>
         i.bubbleId
-          ? (t.getComposerBubble(l(), i.bubbleId)?.richText ?? "")
-          : c()?.richText,
+          ? (composerDataService.getComposerBubble(composerDataHandle(), i.bubbleId)?.richText ?? "")
+          : currentComposer()?.richText,
       ),
-      lt = Q(() =>
+      getCurrentText = Q(() =>
         i.bubbleId
-          ? (t.getComposerBubble(l(), i.bubbleId)?.text ?? "")
-          : c()?.text,
+          ? (composerDataService.getComposerBubble(composerDataHandle(), i.bubbleId)?.text ?? "")
+          : currentComposer()?.text,
       ),
-      { shouldShowAcceptAll: Ut, shouldShowRejectAll: Ye } = fsi(l),
-      Fe = Qft(l),
-      Xe = Z_r(l),
-      zt = p7s(l),
+      { shouldShowAcceptAll: Ut, shouldShowRejectAll: Ye } = fsi(composerDataHandle),
+      Fe = Qft(composerDataHandle),
+      Xe = Z_r(composerDataHandle),
+      zt = p7s(composerDataHandle),
       {
         retryable: dt,
         showRequestId: ut,
@@ -813,10 +813,10 @@ export function createComposerUI(params) {
         allowCommandLinksPotentiallyUnsafe: ti,
         buttons: ot,
         icon: Ct,
-      } = gNs(() => Xe()?.error, Xe()?.generationUUID, e.commandService, zt),
+      } = gNs(() => Xe()?.error, Xe()?.generationUUID, globalContext.commandService, zt),
       ii = Q(() => {
-        if (!Xe()) return !1
-        const pn = c(),
+        if (!Xe()) return false
+        const pn = currentComposer(),
           vr = pn.conversation
         let qr = -1,
           Dn = -1
@@ -829,73 +829,73 @@ export function createComposerUI(params) {
           )
             break
         }
-        if (qr === -1) return !1
+        if (qr === -1) return false
         if (Dn === -1) return !i.bubbleId
         const Pi = vr[Dn].bubbleId
         return i.bubbleId === Pi
-          ? !0
+          ? true
           : i.bubbleId
-            ? !1
+            ? false
             : !(pn.editingBubbleId === Pi)
       }),
       fi = Q(() => {
-        if (!Z()) return !1
-        const pn = c()
+        if (!Z()) return false
+        const pn = currentComposer()
         return i.bubbleId === pn.editingBubbleId
       }),
       [si, ft] = le(null),
-      Ri = async (pn) => {
+      onSubmit = async (pn) => {
         if (!r()) {
-          e.cursorAuthenticationService.login(),
-            e.commandService.executeCommand(CC, "general")
+          globalContext.cursorAuthenticationService.login(),
+            globalContext.commandService.executeCommand(CC, "general")
           return
         }
-        const vr = l().clone()
+        const clonedComposerDataHandle = composerDataHandle().clone()
         try {
-          let qr = lt()
-          const Dn = i.bubbleId
-          let Pi = !0,
-            Cn = !0
-          const Ur = Dn ? s.canComposerSubmit(vr, Dn) : s.canComposerSubmit(vr)
-          if (!i.bubbleId && (!qr || qr.trim().length === 0)) {
-            const du = t.getActionButtons(vr)
-            if (du.length > 0) {
+          let currentText = getCurrentText()
+          const bubbleId = i.bubbleId
+          let shouldCheckout = true,
+            Cn = true
+          const canSubmit = bubbleId ? composerService.canComposerSubmit(clonedComposerDataHandle, bubbleId) : composerService.canComposerSubmit(clonedComposerDataHandle)
+          if (!i.bubbleId && (!currentText || currentText.trim().length === 0)) {
+            const actionButtons = composerDataService.getActionButtons(clonedComposerDataHandle)
+            if (actionButtons.length > 0) {
               if (pn?.keyboardEvent?.altKey) {
                 if (
                   pn?.keyboardEvent?.altKey &&
-                  du.length > 1 &&
-                  du[1].onClick() === !0
+                  actionButtons.length > 1 &&
+                  actionButtons[1].onClick() === true
                 )
                   return
-              } else if (du[0].onClick() === !0) return
+              } else if (actionButtons[0].onClick() === true) return
             }
           }
-          if (!Ur) return
-          if (Dn) {
-            Pi = await e.composerCheckpointService.isCheckpointSameAsCurrent(
-              vr,
-              Dn,
+          if (!canSubmit) return
+          if (bubbleId) {
+            shouldCheckout = await globalContext.composerCheckpointService.isCheckpointSameAsCurrent(
+              clonedComposerDataHandle,
+              bubbleId,
             )
-            const du =
-              vr.data.currentBubbleId === void 0
-                ? vr.data.conversation.length
-                : vr.data.conversation.findIndex((Ho) => Ho.bubbleId === Dn)
-            if (du === -1) throw new Error("Bubble not found")
-            const Ei = vr.data.conversation.findIndex((Ho) => Ho.bubbleId === Dn)
-            if (Ei === -1) throw new Error("Bubble not found")
-            let ts = Math.min(du, Ei),
-              xi = Math.max(du, Ei)
-            const Bi = []
-            for (let Ho = ts + 1; Ho < xi; Ho++) {
-              const Sa = vr.data.conversation[Ho]
-              Sa.type === bn.AI && Bi.push(Sa)
+            const bubbleIndex =
+              clonedComposerDataHandle.data.currentBubbleId === undefined
+                ? clonedComposerDataHandle.data.conversation.length
+                : clonedComposerDataHandle.data.conversation.findIndex((Ho) => Ho.bubbleId === bubbleId)
+            if (bubbleIndex === -1) throw new Error("Bubble not found")
+            const endIndex = clonedComposerDataHandle.data.conversation.findIndex((Ho) => Ho.bubbleId === bubbleId)
+            if (endIndex === -1) throw new Error("Bubble not found")
+            let start = Math.min(bubbleIndex, endIndex),
+              end = Math.max(bubbleIndex, endIndex)
+            const aiMessages = []
+            for (let i = start + 1; i < end; i++) {
+              const message = clonedComposerDataHandle.data.conversation[i]
+              message.type === bn.AI && aiMessages.push(message)
             }
-            const Kn = Bi.map((Ho) =>
-              Ho.codeBlocks
+            const allCodeBlocksNotApplied = aiMessages.map((message) =>
+              message.codeBlocks
                 ?.map((Sa) => {
                   if (Sa.uri)
-                    return e.composerDataService.getComposerCodeBlock(
-                      vr,
+                    return globalContext.composerDataService.getComposerCodeBlock(
+                      clonedComposerDataHandle,
                       Sa.uri,
                       Sa.version,
                     )
@@ -904,9 +904,9 @@ export function createComposerUI(params) {
             )
               .flat()
               .filter(mr)
-              .every((Ho) => Ho.isNotApplied)
-            if (!Pi && c().currentBubbleId !== Dn) {
-              const Ho = await e.prettyDialogService.openDialog({
+              .every((message) => message.isNotApplied)
+            if (!shouldCheckout && currentComposer().currentBubbleId !== bubbleId) {
+              const dialogResult = await globalContext.prettyDialogService.openDialog({
                 title: "Submit from a previous message?",
                 message:
                   "Submitting from a previous message will revert file changes to before this message and clear the messages after this one.",
@@ -923,48 +923,48 @@ export function createComposerUI(params) {
                   C().focus()
                 },
                 dialogKey: "submit-from-previous-message-2",
-                shouldShowDontAskAgain: !0,
+                shouldShowDontAskAgain: true,
               })
-              if (((Cn = Ho === "continue-without-reverting"), Ho === "cancel"))
+              if (((Cn = dialogResult === "continue-without-reverting"), dialogResult === "cancel"))
                 return
             }
-            u({ editingBubbleId: void 0 }),
-              e.composerViewsService.focus(w()),
-              e.composerViewsService.triggerScrollToBottom(w())
+            updateCurrentComposer({ editingBubbleId: undefined }),
+              globalContext.composerViewsService.focus(w()),
+              globalContext.composerViewsService.triggerScrollToBottom(w())
           }
           i.onSubmit && (await i.onSubmit()),
-            e.aiService.addToPromptHistory({
-              prompt: qr,
+            globalContext.aiService.addToPromptHistory({
+              prompt: currentText,
               commandType: SE.COMPOSER,
             })
-          const wl = xe()
-          await e.composerChatService.submitChatMaybeAbortCurrent(
-            vr.data.composerId,
-            qr,
+          const richTextContent = getRichTextContent()
+          await globalContext.composerChatService.submitChatMaybeAbortCurrent(
+            clonedComposerDataHandle.data.composerId,
+            currentText,
             {
-              richText: wl,
-              usesCodebase: h() ? !1 : pn?.useCodebase,
-              bubbleId: Dn,
-              shouldCheckout: !Cn && !Pi,
+              richText: richTextContent,
+              usesCodebase: isAgentic() ? false : pn?.useCodebase,
+              bubbleId: bubbleId,
+              shouldCheckout: !Cn && !shouldCheckout,
             },
           )
         } finally {
-          vr.dispose()
+          clonedComposerDataHandle.dispose()
         }
       }
     let Rt
     const us = tL()
     let nt
-    const jt = X_r({ composerDataHandle: l, bubbleId: et }),
-      $s = W_r(l, jt, et() ? et : void 0),
+    const jt = X_r({ composerDataHandle: composerDataHandle, bubbleId: et }),
+      $s = W_r(composerDataHandle, jt, et() ? et : undefined),
       {
         allPills: Ss,
         selectedPillIndex: vt,
         setSelectedPillIndex: gi,
         generatePillIdByIndex: Ht,
         deleteLastPill: Zt,
-      } = J_r(l, $s, {
-        filePickerOpen: () => !1,
+      } = J_r(composerDataHandle, $s, {
+        filePickerOpen: () => false,
         handleAddPillClick: () => {},
         barRef: () => Rt,
         inputDelegate: C(),
@@ -972,46 +972,46 @@ export function createComposerUI(params) {
       }),
       Wi = Q(() => {
         if (i.bubbleId) {
-          const pn = t.getComposerBubble(l(), i.bubbleId)
+          const pn = composerDataService.getComposerBubble(composerDataHandle(), i.bubbleId)
           return !pn || !pn.context ? yw() : pn.context
         }
-        return c().context
+        return currentComposer().context
       }),
       { suggestedPills: on } = Y_r(
-        l,
+        composerDataHandle,
         Wi,
         et(),
-        () => i.disableSuggestedPills ?? !1,
+        () => i.disableSuggestedPills ?? false,
       ),
-      Js = Q(() => __r(l, et))
+      Js = Q(() => __r(composerDataHandle, et))
     $e(() => {
-      const pn = c().composerId
-      E(!0)
+      const pn = currentComposer().composerId
+      E(true)
     }),
       $e(() => {
         lo(() => {
-          const pn = e.composerEventService.onContextRemoved((Dn) => {
+          const pn = globalContext.composerEventService.onContextRemoved((Dn) => {
               const { composerId: Pi, bubbleId: Cn, removedMentionIds: Ur } = Dn
-              Pi !== l().data.composerId || Cn !== et() || N(Ur)
+              Pi !== composerDataHandle().data.composerId || Cn !== et() || N(Ur)
             }),
-            vr = e.composerEventService.onShouldShowPreview((Dn) => {
+            vr = globalContext.composerEventService.onShouldShowPreview((Dn) => {
               const {
                 composerId: Pi,
                 bubbleId: Cn,
                 contextType: Ur,
                 index: wl,
               } = Dn
-              if (Pi !== l().data.composerId || Cn !== et()) return
+              if (Pi !== composerDataHandle().data.composerId || Cn !== et()) return
               const du = Ss()
               let Ei
-              wl !== void 0
+              wl !== undefined
                 ? (Ei = du.findIndex((xi) => xi.type === Wve[Ur]) + wl)
                 : (Ei = du.findIndex((ts) => ts.type === Wve[Ur])),
-                Ei !== void 0 && Ei !== -1 && L(Ei)
+                Ei !== undefined && Ei !== -1 && L(Ei)
             }),
-            qr = e.composerEventService.onShouldForceText((Dn) => {
+            qr = globalContext.composerEventService.onShouldForceText((Dn) => {
               const { composerId: Pi, bubbleId: Cn } = Dn
-              Pi !== w() || Cn !== et() || E(!0)
+              Pi !== w() || Cn !== et() || E(true)
             })
           pi(() => {
             pn.dispose(), vr.dispose(), qr.dispose()
@@ -1020,18 +1020,18 @@ export function createComposerUI(params) {
       })
     const Cr = Q(() =>
         i.bubbleId
-          ? (t.getComposerBubble(l(), i.bubbleId)?.context ?? yw())
-          : c().context,
+          ? (composerDataService.getComposerBubble(composerDataHandle(), i.bubbleId)?.context ?? yw())
+          : currentComposer().context,
       ),
       ma = (...pn) => {
         et()
-          ? l().setData(
+          ? composerDataHandle().setData(
               "conversation",
               (vr) => vr.bubbleId === et(),
               "context",
               ...pn,
             )
-          : l().setData("context", ...pn)
+          : composerDataHandle().setData("context", ...pn)
       }
     O_r(
       us,
@@ -1040,90 +1040,90 @@ export function createComposerUI(params) {
       () => [vt()],
     )
     const wt = AB(() => Rt, { width: 1e3, height: 0 }),
-      Ne = z_r(l, et() ? et : void 0),
-      [ze] = jf(VJe, e.configurationService, !1),
+      Ne = z_r(composerDataHandle, et() ? et : undefined),
+      [ze] = jf(VJe, globalContext.configurationService, false),
       Vt = () => {
-        const pn = xe(),
-          vr = lt(),
-          qr = c().conversation.length === 0
-        e.composerDataService.updateComposerData(w(), { richText: "", text: "" })
+        const pn = getRichTextContent(),
+          vr = getCurrentText(),
+          qr = currentComposer().conversation.length === 0
+        globalContext.composerDataService.updateComposerData(w(), { richText: "", text: "" })
         const Dn = qr
-          ? void 0
-          : { richText: pn, text: vr, context: z_(c().context) }
-        s.createComposer({ partialState: Dn })
+          ? undefined
+          : { richText: pn, text: vr, context: z_(currentComposer().context) }
+        composerService.createComposer({ partialState: Dn })
       },
-      [wi, Fs] = le(!1),
-      [Zi, Nn] = le(!1),
+      [wi, Fs] = le(false),
+      [Zi, Nn] = le(false),
       pr = Q(
         () =>
-          `f${c().composerId.replaceAll("-", "")}${Mt().replaceAll("-", "")}unifieddropdown`,
+          `f${currentComposer().composerId.replaceAll("-", "")}${Mt().replaceAll("-", "")}unifieddropdown`,
       ),
       Br = Q(
         () =>
-          `f${c().composerId.replaceAll("-", "")}${Mt().replaceAll("-", "")}unifiedmodeldropdown`,
+          `f${currentComposer().composerId.replaceAll("-", "")}${Mt().replaceAll("-", "")}unifiedmodeldropdown`,
       ),
       Xo = (pn) => {
         if (pn.altKey) {
-          const wl = e.window.document.getElementById(pr())
-          wl && (Fs(!1), Nn(!0), wl.click())
+          const wl = globalContext.window.document.getElementById(pr())
+          wl && (Fs(false), Nn(true), wl.click())
           return
         }
-        const vr = e.composerModesService.getComposerUnifiedMode(w()),
-          qr = e.composerModesService.getAllModes()
+        const vr = globalContext.composerModesService.getComposerUnifiedMode(w()),
+          qr = globalContext.composerModesService.getAllModes()
         if (!qr.length) return
         const Dn = qr.map((wl) => wl.id),
           Cn = (Dn.indexOf(vr) + (pn.shiftKey ? -1 : 1) + Dn.length) % Dn.length,
           Ur = Dn[Cn]
-        u({ unifiedMode: Ur })
+        updateCurrentComposer({ unifiedMode: Ur })
       },
       Hr = [
-        { command: XMt, callback: (pn) => (Xo(pn), !0) },
+        { command: XMt, callback: (pn) => (Xo(pn), true) },
         {
           command: r$t,
           callback: (pn) => {
-            const vr = e.window.document.getElementById(pr())
-            return vr && (Fs(!1), Nn(!0), vr.click()), !0
+            const vr = globalContext.window.document.getElementById(pr())
+            return vr && (Fs(false), Nn(true), vr.click()), true
           },
         },
         {
           command: QMt,
           callback: (pn) => {
-            if (c().unifiedMode === "chat") return !1
-            const vr = e.composerViewsService.getComposerLocation(w()),
+            if (currentComposer().unifiedMode === "chat") return false
+            const vr = globalContext.composerViewsService.getComposerLocation(w()),
               qr = ["pane", "editor"],
               Dn = qr[(qr.indexOf(vr) + 1) % qr.length]
             return (
               Dn === "pane"
-                ? s.handleOpenComposerPane(w())
-                : Dn === "editor" && s.handleOpenComposerEditor(w()),
-              !0
+                ? composerService.handleOpenComposerPane(w())
+                : Dn === "editor" && composerService.handleOpenComposerEditor(w()),
+              true
             )
           },
         },
-        { command: IO, callback: (pn) => (Vt(), !0) },
-        { command: e$t, callback: (pn) => (s.closeComposer(w()), !0) },
+        { command: IO, callback: (pn) => (Vt(), true) },
+        { command: e$t, callback: (pn) => (composerService.closeComposer(w()), true) },
         {
           command: ZMt,
-          callback: (pn) => (s.maybeUpdateFileSelectionsFromCmdI(w()), !0),
+          callback: (pn) => (composerService.maybeUpdateFileSelectionsFromCmdI(w()), true),
         },
         {
           command: t$t,
           callback: () => (
-            e.composerUtilsService.selectPrevComposer(),
+            globalContext.composerUtilsService.selectPrevComposer(),
             setTimeout(() => {
-              e.composerViewsService.focus(t.selectedComposerId, !0)
+              globalContext.composerViewsService.focus(composerDataService.selectedComposerId, true)
             }),
-            !0
+            true
           ),
         },
         {
           command: i$t,
           callback: () => (
-            e.composerUtilsService.selectNextComposer(),
+            globalContext.composerUtilsService.selectNextComposer(),
             setTimeout(() => {
-              e.composerViewsService.focus(t.selectedComposerId, !0)
+              globalContext.composerViewsService.focus(composerDataService.selectedComposerId, true)
             }),
-            !0
+            true
           ),
         },
         {
@@ -1131,45 +1131,45 @@ export function createComposerUI(params) {
           callback: (pn) => {
             if (pn.altKey) {
               const vr = Rh() ? pr() : Br(),
-                qr = e.window.document.getElementById(vr)
-              if (qr) return Fs(!0), qr.click(), !0
+                qr = globalContext.window.document.getElementById(vr)
+              if (qr) return Fs(true), qr.click(), true
             }
-            return !0
+            return true
           },
         },
         {
           command: n$t,
           callback: (pn) => {
-            const vr = d(),
+            const vr = unifiedMode(),
               qr = vr === "agent"
-            let Dn = e.aiSettingsService.getAvailableModelsReactive({
-              isLongContextOrDebuggerMode: !1,
+            let Dn = globalContext.aiSettingsService.getAvailableModelsReactive({
+              isLongContextOrDebuggerMode: false,
             })
             if (qr) {
               const du = Dn.filter((Ei) =>
-                e.aiSettingsService.doesModelSupportAgent(Ei),
+                globalContext.aiSettingsService.doesModelSupportAgent(Ei),
               )
               du.length > 0 && (Dn = du)
             }
-            const Pi = g(),
+            const Pi = model(),
               Ur = (Dn.findIndex((du) => du === Pi) + 1) % Dn.length,
               wl = Dn[Ur]
-            return e.composerModesService.setModeModel(vr, wl), !0
+            return globalContext.composerModesService.setModeModel(vr, wl), true
           },
         },
-        { command: JYe, callback: (pn) => (pe(Date.now()), !0) },
+        { command: JYe, callback: (pn) => (pe(Date.now()), true) },
         {
           command: TX,
           callback: (pn) =>
-            e.composerUtilsService.shouldShowCancel(w())
-              ? (e.analyticsService.trackEvent("composer.cancel_chat", {
+            globalContext.composerUtilsService.shouldShowCancel(w())
+              ? (globalContext.analyticsService.trackEvent("composer.cancel_chat", {
                   source: "cmd_backspace",
                 }),
-                s.cancelCurrentStep(w()),
-                !0)
+                composerService.cancelCurrentStep(w()),
+                true)
               : Ye()
-                ? (s.rejectAll(w()), !0)
-                : !1,
+                ? (composerService.rejectAll(w()), true)
+                : false,
         },
       ],
       Jo = Q(() => [
@@ -1177,8 +1177,8 @@ export function createComposerUI(params) {
           command: uYe,
           callback: (pn) => {
             const vr = new Yn(pn),
-              qr = e.keybindingService.softDispatch(vr, vr.target)
-            if (qr.kind !== 2) return !1
+              qr = globalContext.keybindingService.softDispatch(vr, vr.target)
+            if (qr.kind !== 2) return false
             const Dn = [
               "workbench.action.toggleSidebarVisibility",
               Om,
@@ -1189,52 +1189,52 @@ export function createComposerUI(params) {
               YMt,
             ]
             if (
-              qr.commandId?.startsWith(e.composerModesService.getActionIdPrefix())
+              qr.commandId?.startsWith(globalContext.composerModesService.getActionIdPrefix())
             )
               return (
                 setTimeout(() => {
-                  e.commandService.executeCommand(qr.commandId)
+                  globalContext.commandService.executeCommand(qr.commandId)
                 }, 0),
-                !0
+                true
               )
             if (Dn.includes(qr.commandId))
               return (
                 setTimeout(() => {
-                  e.commandService.executeCommand(qr.commandId)
+                  globalContext.commandService.executeCommand(qr.commandId)
                 }, 0),
-                !0
+                true
               )
             for (const Cn of Hr)
               if (Cn.command === qr.commandId && Cn.callback(pn))
-                return pn.stopPropagation(), pn.preventDefault(), !0
-            return !1
+                return pn.stopPropagation(), pn.preventDefault(), true
+            return false
           },
         },
         {
           command: fYe,
           callback: (pn) => {
-            const vr = e.keybindingService.lookupKeybinding(IO)
+            const vr = globalContext.keybindingService.lookupKeybinding(IO)
             return vr?.getDispatchChords()[0] === "meta+[KeyN]" ||
               vr?.getDispatchChords()[0] === "ctrl+[KeyN]"
-              ? (Vt(), !0)
-              : !1
+              ? (Vt(), true)
+              : false
           },
         },
         {
           command: SX,
           callback: (pn) => {
-            if (R()) return !1
-            const vr = c()
-            if (!vr) return !1
+            if (R()) return false
+            const vr = currentComposer()
+            if (!vr) return false
             const qr = i.bubbleId,
               Dn = i.bubbleId
                 ? vr.conversation.findIndex((Cn) => Cn.bubbleId === qr)
                 : -1,
               Pi = (Cn) => {
-                u({ selectedBubbleId: void 0, editingBubbleId: Cn }),
+                updateCurrentComposer({ selectedBubbleId: undefined, editingBubbleId: Cn }),
                   Oq(Cn),
                   setTimeout(() => {
-                    e.composerViewsService
+                    globalContext.composerViewsService
                       .getPrevEditingBubbleInputDelegate(w())
                       ?.focus()
                   })
@@ -1244,45 +1244,45 @@ export function createComposerUI(params) {
               for (let Ur = Cn; Ur >= 0; Ur--) {
                 const wl = vr.conversation[Ur]
                 if (wl.type === bn.HUMAN && !wl.isCapabilityIteration)
-                  return Pi(wl.bubbleId), !0
+                  return Pi(wl.bubbleId), true
               }
-              return !1
+              return false
             }
             if (Dn !== -1) {
               for (let Cn = Dn + 1; Cn < vr.conversation.length; Cn++) {
                 const Ur = vr.conversation[Cn]
                 if (Ur.type === bn.HUMAN && !Ur.isCapabilityIteration)
-                  return Pi(Ur.bubbleId), !0
+                  return Pi(Ur.bubbleId), true
               }
               return (
-                u({ selectedBubbleId: void 0, editingBubbleId: void 0 }),
-                e.composerViewsService.focus(w(), !0),
-                !0
+                updateCurrentComposer({ selectedBubbleId: undefined, editingBubbleId: undefined }),
+                globalContext.composerViewsService.focus(w(), true),
+                true
               )
             }
-            return !1
+            return false
           },
         },
       ]),
       Dc = Q(() =>
-        e.composerDataService.getPendingUserDecisionGroup(l().data.composerId),
+        globalContext.composerDataService.getPendingUserDecisionGroup(composerDataHandle().data.composerId),
       ),
       Rh = Q(() => wt().width < 200)
     let Zh
     const Qg = D(l7s, {
         openAddPillMenuTrigger: ve,
         closeFilePickerMenuTrigger: () =>
-          i.role === "top" && c().conversation.length > 0
-            ? (e.reactiveStorageService.nonPersistentStorage
+          i.role === "top" && currentComposer().conversation.length > 0
+            ? (globalContext.reactiveStorageService.nonPersistentStorage
                 .forceComposerDropdownRerender ?? 0)
             : 0,
         isMentionsMenuOpen: R,
         setIsMentionsMenuOpen: B,
         get composerDataHandle() {
-          return l()
+          return composerDataHandle()
         },
         get id() {
-          return `${c().composerId}-pane`
+          return `${currentComposer().composerId}-pane`
         },
         setContainerRef: (pn) => {
           ;(Rt = pn), i.setRef?.(pn)
@@ -1295,9 +1295,9 @@ export function createComposerUI(params) {
         mentionIdsToDelete: P,
         setMentionIdsToDelete: N,
         setCodebaseSearchSettings: (pn) => {
-          u({ codebaseSearchSettings: pn })
+          updateCurrentComposer({ codebaseSearchSettings: pn })
         },
-        getCodebaseSearchSettings: () => c().codebaseSearchSettings,
+        getCodebaseSearchSettings: () => currentComposer().codebaseSearchSettings,
         getContext: Cr,
         setContext: ma,
         get forceText() {
@@ -1306,32 +1306,32 @@ export function createComposerUI(params) {
         setForceText: E,
         getPickerMenuProps: Ne,
         get richText() {
-          return xe()
+          return getRichTextContent()
         },
         setRichText: (pn) => {
           We({ richText: pn })
         },
         get text() {
-          return lt()
+          return getCurrentText()
         },
         setText: (pn) => {
-          We({ text: pn }), s.handleUserDidType(l())
+          We({ text: pn }), composerService.handleUserDidType(composerDataHandle())
         },
         sideEffects: $s,
         supports: jt,
         onFurtherArrowUp: () => (
-          t.selectLastHumanBubbleAboveInput(l().data.composerId), !0
+          composerDataService.selectLastHumanBubbleAboveInput(composerDataHandle().data.composerId), true
         ),
         onFurtherArrowDown: () =>
           i.location === "bar"
-            ? !1
+            ? false
             : !i.bubbleId &&
                 i.setSelectedPreviousComposerIndex &&
-                c().conversation.length === 0
-              ? (C().getRef()?.blur(), i.setSelectedPreviousComposerIndex(0), !0)
-              : !1,
+                currentComposer().conversation.length === 0
+              ? (C().getRef()?.blur(), i.setSelectedPreviousComposerIndex(0), true)
+              : false,
         get shouldDisplayMultiRowPills() {
-          return Q(() => i.overrideShouldCollapse !== void 0)()
+          return Q(() => i.overrideShouldCollapse !== undefined)()
             ? !i.overrideShouldCollapse
             : !ze()
         },
@@ -1346,12 +1346,12 @@ export function createComposerUI(params) {
           }
         },
         get role() {
-          return i.role ?? (c().conversation.length === 0 ? "top" : "bottom")
+          return i.role ?? (currentComposer().conversation.length === 0 ? "top" : "bottom")
         },
         bottomContainerStyle: { height: "unset" },
         get bottomContent() {
           return Q(() => !!i.hideBottomBar)()
-            ? void 0
+            ? undefined
             : (() => {
                 var pn = nBr(),
                   vr = pn.firstChild
@@ -1367,7 +1367,7 @@ export function createComposerUI(params) {
                   pn.style.setProperty("gap", "4px"),
                   vr.addEventListener("click", (qr) => {
                     qr.target === qr.currentTarget &&
-                      !e.window.getSelection()?.toString() &&
+                      !globalContext.window.getSelection()?.toString() &&
                       C().focus()
                   }),
                   vr.style.setProperty("display", "flex"),
@@ -1407,7 +1407,7 @@ export function createComposerUI(params) {
                             return i.role === "bottom"
                           },
                           get composerDataHandle() {
-                            return l()
+                            return composerDataHandle()
                           },
                           get role() {
                             return i.role
@@ -1415,9 +1415,9 @@ export function createComposerUI(params) {
                           get isFocused() {
                             return Ie()
                           },
-                          onSubmit: Ri,
+                          onSubmit: onSubmit,
                           get plainText() {
-                            return lt()
+                            return getCurrentText()
                           },
                           get uniqueDropdownId() {
                             return pr()
@@ -1438,14 +1438,14 @@ export function createComposerUI(params) {
                             C().focus()
                           },
                           onCloseDropdown: () => {
-                            Fs(!1), Nn(!1)
+                            Fs(false), Nn(false)
                           },
                           get shouldShowHints() {
                             return wt().width > 260
                           },
                           style: { flex: 1, "justify-content": "space-between" },
                           onImageUpload: (qr, Dn) => {
-                            Ajt([Dn], e, $s().addImage), C().focus()
+                            Ajt([Dn], globalContext, $s().addImage), C().focus()
                           },
                         })
                       },
@@ -1457,36 +1457,36 @@ export function createComposerUI(params) {
         },
         placeholder: "Plan, search, build anything",
         get undoRedoUri() {
-          return e.selectedContextService.getUndoRedoUri(
-            e.composerContextService.getContextId(l().data.composerId, et()),
+          return globalContext.selectedContextService.getUndoRedoUri(
+            globalContext.composerContextService.getContextId(composerDataHandle().data.composerId, et()),
           )
         },
         onFocus: () => {
           gi(-1),
-            qe(!0),
+            qe(true),
             G(Date.now()),
             et()
-              ? u({ lastFocusedBubbleId: et() })
-              : u({ lastFocusedBubbleId: void 0 }),
-            kvs.bindTo(e.contextKeyService).set(!0)
+              ? updateCurrentComposer({ lastFocusedBubbleId: et() })
+              : updateCurrentComposer({ lastFocusedBubbleId: undefined }),
+            kvs.bindTo(globalContext.contextKeyService).set(true)
         },
         onBlur: () => {
-          i.onBlur && i.onBlur(), qe(!1), kvs.bindTo(e.contextKeyService).set(!1)
+          i.onBlur && i.onBlur(), qe(false), kvs.bindTo(globalContext.contextKeyService).set(false)
         },
         onSubmit: (pn) => {
           n.trackEvent("composer.submit", {
             mode: "edit",
             entry: "keyboard",
-            useCodebase: !1,
-            isAgentic: e.composerDataService.getComposerIsAgentic(l()),
+            useCodebase: false,
+            isAgentic: globalContext.composerDataService.getComposerIsAgentic(composerDataHandle()),
             isEditing:
-              e.composerModesService.getComposerUnifiedMode(l()) === "edit",
+              globalContext.composerModesService.getComposerUnifiedMode(composerDataHandle()) === "edit",
             composerType: i.location,
-            model: g() ?? "unknown",
-            thinkingLevel: p() ?? "none",
+            model: model() ?? "unknown",
+            thinkingLevel: thinkingLevel() ?? "none",
           }),
-            Ri({ useCodebase: !1, keyboardEvent: pn }),
-            he(void 0)
+            onSubmit({ useCodebase: false, keyboardEvent: pn }),
+            he(undefined)
         },
         onEscape: (pn) => {
           pn.stopImmediatePropagation(),
@@ -1494,8 +1494,8 @@ export function createComposerUI(params) {
             i.onEscape
               ? i.onEscape()
               : i.location === "bar"
-                ? s.close(w())
-                : e.composerViewsService.blur(w())
+                ? composerService.close(w())
+                : globalContext.composerViewsService.blur(w())
         },
         get inputBoxDelegate() {
           return C()
@@ -1506,27 +1506,27 @@ export function createComposerUI(params) {
         onTryDeleteContext: Zt,
         onReset: Vt,
         onResetContext: () => {
-          e.composerContextService.resetContext(l().data.composerId, et())
+          globalContext.composerContextService.resetContext(composerDataHandle().data.composerId, et())
         },
         get forceShouldShowPillPreview() {
           return I()
         },
         resetForceShouldShowPillPreview: () => L(-1),
         onReferenceOpenEditors: () => {
-          e.composerService.referenceOpenEditors(w())
+          globalContext.composerService.referenceOpenEditors(w())
         },
         onReferenceActiveEditors: () => {
-          e.composerService.referenceOpenEditors(w(), !0)
+          globalContext.composerService.referenceOpenEditors(w(), true)
         },
         get isLoopOnLintsEnabled() {
-          return v()?.autoFix ?? !1
+          return composerMode()?.autoFix ?? false
         },
         get onToggleAgentLoopOnLints() {
-          return h()
+          return isAgentic()
             ? () => {
-                e.composerModesService.setComposerAutoFix(l(), !v()?.autoFix)
+                globalContext.composerModesService.setComposerAutoFix(composerDataHandle(), !composerMode()?.autoFix)
               }
-            : void 0
+            : undefined
         },
         get extraPlugins() {
           return [D(a4r, {})]
@@ -1537,31 +1537,31 @@ export function createComposerUI(params) {
             {
               command: zO,
               callback: (pn) => {
-                if (pn.repeat) return !0
+                if (pn.repeat) return true
                 if (pn.shiftKey && (pn.metaKey || pn.ctrlKey)) {
                   if (
-                    s.shouldShowAcceptRejectAll(w()) &&
+                    composerService.shouldShowAcceptRejectAll(w()) &&
                     Fe() &&
-                    lt().trim() === ""
+                    getCurrentText().trim() === ""
                   )
-                    return s.acceptAll(w()), !0
+                    return composerService.acceptAll(w()), true
                   if (ql()) {
-                    const qr = e.composerDataService.getToolFormer(w())
-                    if (qr) return qr.cancel(), !0
+                    const qr = globalContext.composerDataService.getToolFormer(w())
+                    if (qr) return qr.cancel(), true
                   }
-                  return !1
+                  return false
                 }
                 const vr = Dc()
                 if (vr.length > 0) for (const qr of vr) qr.accept()
                 else
-                  Fe() && lt().trim() === ""
-                    ? e.composerApplyService.applyCachedCodeBlocksOfLastMessage(
+                  Fe() && getCurrentText().trim() === ""
+                    ? globalContext.composerApplyService.applyCachedCodeBlocksOfLastMessage(
                         w(),
                       )
-                    : Ut() && lt().trim() === ""
-                      ? s.acceptAll(w())
-                      : Ri({ useCodebase: !0 })
-                return !0
+                    : Ut() && getCurrentText().trim() === ""
+                      ? composerService.acceptAll(w())
+                      : onSubmit({ useCodebase: true })
+                return true
               },
             },
           ]
@@ -1572,14 +1572,14 @@ export function createComposerUI(params) {
         get minHeight() {
           return i.minHeight
         },
-        disableUglyPreview: !0,
+        disableUglyPreview: true,
         get buttonArea() {
           return i.buttonArea
         },
         get onStartDrag() {
-          return i.location === "bar" ? i.onStartDrag : void 0
+          return i.location === "bar" ? i.onStartDrag : undefined
         },
-        enableAddFilePlugin: !0,
+        enableAddFilePlugin: true,
         get children() {
           return [
             Q(() => i.children),
@@ -1613,12 +1613,12 @@ export function createComposerUI(params) {
                               label: o() ? "Copied!" : "Copy request ID",
                               variant: "text",
                               onClick: () => {
-                                e.clipboardService.writeText(
+                                globalContext.clipboardService.writeText(
                                   Xe()?.generationUUID || "",
                                 ),
-                                  a(!0),
+                                  a(true),
                                   setTimeout(() => {
-                                    a(!1)
+                                    a(false)
                                   }, 2e3)
                               },
                             },
@@ -1666,7 +1666,7 @@ export function createComposerUI(params) {
                       })(),
                       " ",
                       "doesn't have good agent support yet. Start a new thread",
-                      Q(() => (d() === "agent" ? " using edit or ask mode" : "")),
+                      Q(() => (unifiedMode() === "agent" ? " using edit or ask mode" : "")),
                       " for better results.",
                     ]
                   },
@@ -1676,23 +1676,23 @@ export function createComposerUI(params) {
                         label: "Continue",
                         variant: "text",
                         onClick: () => {
-                          he(void 0), C().focus()
+                          he(undefined), C().focus()
                         },
                       },
                       {
                         label:
-                          d() !== "agent"
+                          unifiedMode() !== "agent"
                             ? "Start new thread"
                             : "Start new thread with Edit mode",
                         variant: "secondary",
                         class: "py-0.5",
                         onClick: () => {
-                          s.createComposer({
+                          composerService.createComposer({
                             partialState: {
-                              unifiedMode: d() === "chat" ? "chat" : "edit",
+                              unifiedMode: unifiedMode() === "chat" ? "chat" : "edit",
                             },
                           }),
-                            he(void 0)
+                            he(undefined)
                         },
                       },
                     ]
@@ -1710,13 +1710,13 @@ export function createComposerUI(params) {
         },
       }),
       r0 = Q(() =>
-        c()
-          ? e.composerDataService
+        currentComposer()
+          ? globalContext.composerDataService
               .getCodeBlocksOfStatuses(w(), "applying")
               .filter((qr) => !qr.isNotApplied).length > 0
-          : !1,
+          : false,
       ),
-      ql = Q_r(l),
+      ql = Q_r(composerDataHandle),
       o0 = {
         position: "absolute",
         bottom: "100%",
@@ -1779,7 +1779,7 @@ export function createComposerUI(params) {
                               style: a0,
                               onClick: () => {
                                 const qr =
-                                  e.composerDataService.getToolFormer(w())
+                                  globalContext.composerDataService.getToolFormer(w())
                                 qr && qr.cancel()
                               },
                               get children() {
@@ -1815,7 +1815,7 @@ export function createComposerUI(params) {
                             D(Xs, {
                               style: a0,
                               onClick: () => {
-                                e.composerService.cancelAllApplies(w())
+                                globalContext.composerService.cancelAllApplies(w())
                               },
                               class: "composer-float-button",
                               get children() {
@@ -1850,14 +1850,14 @@ export function createComposerUI(params) {
           pn,
           D(ae, {
             get when() {
-              return p() !== "high"
+              return thinkingLevel() !== "high"
             },
             get children() {
               return D(r4r, {
                 get role() {
                   return i.role
                 },
-                composerDataHandle: l,
+                composerDataHandle: composerDataHandle,
                 get forceShow() {
                   return te()
                 },
@@ -1868,7 +1868,7 @@ export function createComposerUI(params) {
                     background:
                       i.role === "bottom"
                         ? "var(--vscode-dropdown-background)"
-                        : void 0,
+                        : undefined,
                   }
                 },
               })
