@@ -1144,10 +1144,10 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
           service: Tat,
         }))
     }
-    async submitChatMaybeAbortCurrent(e, t, s) {
+    async submitChatMaybeAbortCurrent(composerId, currentText, options) {
       const n = Date.now()
       try {
-        await this._composerUtilsService.ensureCapabilitiesAreLoaded(e)
+        await this._composerUtilsService.ensureCapabilitiesAreLoaded(composerId)
       } catch (k) {
         console.error("[composer] error ensuring capabilities are loaded", k)
         return
@@ -1156,95 +1156,95 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
         "showReportFeedbackModal",
         void 0,
       )
-      const r = this._composerModesService.getComposerUnifiedMode(e),
-        o = this._composerModesService.getModeThinkingLevel(r),
-        a = this.getModelDetails(r)
-      s?.modelOverride && (a.modelName = s.modelOverride)
-      const l = (r === "chat" || s?.isChat) ?? !1
-      let c =
-        a.modelName === void 0 ||
-        this._aiSettingsService.doesModelSupportAgent(a.modelName)
-      s = {
-        capabilityProcessesToSkip: l
+      const mode = this._composerModesService.getComposerUnifiedMode(composerId),
+        thinkingLevel = this._composerModesService.getModeThinkingLevel(mode),
+        modelDetails = this.getModelDetails(mode)
+      options?.modelOverride && (modelDetails.modelName = options.modelOverride)
+      const isChat = (mode === "chat" || options?.isChat) ?? !1
+      let isAgentic =
+        modelDetails.modelName === void 0 ||
+        this._aiSettingsService.doesModelSupportAgent(modelDetails.modelName)
+      options = {
+        capabilityProcessesToSkip: isChat
           ? [
               "start-submit-chat",
               "before-submit-chat",
               "after-submit-chat",
               "composer-settled",
             ]
-          : s?.capabilityProcessesToSkip,
-        ...(s ?? {}),
+          : options?.capabilityProcessesToSkip,
+        ...(options ?? {}),
       }
-      const u = this._composerDataService.getComposerFromIdOrHandle(e)
-      if (!u) {
+      const composerState = this._composerDataService.getComposerFromIdOrHandle(composerId)
+      if (!composerState) {
         console.error("[composer] submitted without state!")
         return
       }
       if (
         !this.shouldSkipCapabilities(
-          s?.capabilityProcessesToSkip,
+          options?.capabilityProcessesToSkip,
           "start-submit-chat",
         )
       )
         try {
           if (
             await this._composerUtilsService.runCapabilitiesForProcess(
-              e,
+              composerId,
               "start-submit-chat",
               {
-                composerId: e,
-                isCapabilityIteration: s?.isCapabilityIteration,
-                submitChatProps: { text: t, extra: s },
+                composerId: composerId,
+                isCapabilityIteration: options?.isCapabilityIteration,
+                submitChatProps: { text: currentText, extra: options },
               },
             )
           )
             return
-        } catch (k) {
+        } catch (error) {
           console.error(
             "[composer] error running capabilities for start-submit-chat",
-            k,
+            error,
           ),
-            this._composerDataService.updateComposerDataSetStore(e, (E) =>
+            this._composerDataService.updateComposerDataSetStore(composerId, (E) =>
               E("status", "aborted"),
             )
           return
         }
-      let h = new AbortController(),
-        d = !1,
-        g = !1,
-        p = !1,
-        m = Mt(),
-        v,
-        y,
-        w = yw()
-      const C = () => {
-          v &&
-            this.submitChatMaybeAbortCurrent(e, t, {
-              ...s,
-              bubbleId: v.bubbleId,
+      let abortController = new AbortController(),
+        hasError = !1,
+        isComplete = !1,
+        hasResponse = !1,
+        generationUUID = Mt(),
+        humanBubble,
+        aiBubble,
+        contextUsed = yw()
+      const retrySubmit = () => {
+          humanBubble &&
+            this.submitChatMaybeAbortCurrent(composerId, currentText, {
+              ...options,
+              bubbleId: humanBubble.bubbleId,
             })
         },
-        S = (k) => {
-          const E = this._aiErrorService.shouldShowImmediateErrorMessage(k),
-            I = this._composerDataService.getComposerFromIdOrHandle(e),
-            L = this._composerDataService.getLastAiBubbleId(e),
-            P =
-              c &&
+        handleError = (error) => {
+          const shouldShowError = this._aiErrorService.shouldShowImmediateErrorMessage(error),
+            composer = this._composerDataService.getComposerFromIdOrHandle(composerId),
+            lastAiBubbleId = this._composerDataService.getLastAiBubbleId(composerId),
+            canResume =
+              isAgentic &&
               this._composerDataService
-                .getLastAiBubbles(e)
+                .getLastAiBubbles(composerId)
                 .some((N) => (N.text.length ?? 0) > 0) &&
-              !s?.isResume
-          if (E && I) {
-            const N = vD(k)
-            this._composerDataService.updateComposerDataSetStore(e, (R) =>
-              R("conversation", (B) => B.bubbleId === L, "errorDetails", {
-                generationUUID: m,
+              !options?.isResume
+          if (shouldShowError && composer) {
+            const N = vD(error)
+            this._composerDataService.updateComposerDataSetStore(composerId, (R) =>
+              R("conversation", (B) => B.bubbleId === lastAiBubbleId, "errorDetails", {
+                generationUUID: generationUUID,
                 error: N,
-                message: k?.rawMessage,
-                rerun: s?.isResume ? () => this.resumeChat(e, s) : C,
-                resume: P
+                message: error?.rawMessage,
+                rerun: options?.isResume ? () => this.resumeChat(composerId, options) : retrySubmit,
+                resume: canResume
                   ? () => {
-                      this.resumeChat(e, s)
+                      this.resumeChat(composerId, options)
                     }
                   : void 0,
               }),
@@ -1252,24 +1252,24 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
           }
         }
       try {
-        let k = function (jt, $s) {
+        let timingFunction = function (jt, $s) {
           const Ss = Date.now()
           return jt.finally(() => {
             const vt = Date.now()
             console.log(`[composer.submitChat] ${$s} took ${vt - Ss}ms`)
           })
         }
-        var x = k
-        this._composerDataService.updateComposerDataSetStore(e, (jt) =>
+        var x = timingFunction
+        this._composerDataService.updateComposerDataSetStore(composerId, (jt) =>
           jt("status", "generating"),
         ),
-          this._composerDataService.updateComposerDataSetStore(e, (jt) =>
+          this._composerDataService.updateComposerDataSetStore(composerId, (jt) =>
             jt("editingBubbleId", void 0),
           ),
           this._composerUtilsService.clearErrorDetailsAndServiceStatusUpdatesFromLatestAIMessages(
-            e,
+            composerId,
           )
-        const E = async () => {
+        const getModelChanges = async () => {
             const jt = await this._composerDataService
               .getModelDiffStateManager()
               .renderChanges()
@@ -1277,174 +1277,174 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
               this._composerDataService.getModelDiffStateManager().reset(), jt
             )
           },
-          I = await this._selectedContextService.getHumanChanges(E()),
-          L = fDs(u.capabilities)
-        if (L.length === 0 && s?.isCapabilityIteration) {
+          humanChanges = await this._selectedContextService.getHumanChanges(getModelChanges()),
+          capabilities = fDs(composerState.capabilities)
+        if (capabilities.length === 0 && options?.isCapabilityIteration) {
           console.error(
             "[composer] submitted capability iteration without capabilities!",
           )
           return
         }
-        this._composerDataService.clearActionButtons(e)
-        const P = !s?.isResume
-        s.bubbleId = s?.bubbleId ?? u.currentBubbleId
-        let N
-        s?.shouldCheckout &&
-          s?.bubbleId &&
-          (N = await this._composerCheckpointService.createCheckoutCallback(
-            e,
-            s.bubbleId,
+        this._composerDataService.clearActionButtons(composerId)
+        const isResume = !options?.isResume
+        options.bubbleId = options?.bubbleId ?? composerState.currentBubbleId
+        let checkpointCallback
+        options?.shouldCheckout &&
+          options?.bubbleId &&
+          (checkpointCallback = await this._composerCheckpointService.createCheckoutCallback(
+            composerId,
+            options.bubbleId,
             { skipDialog: !0, fromSubmitChat: !0 },
           ))
-        let R = !1
-        if (s?.bubbleId) {
-          const jt = s.bubbleId ?? u.currentBubbleId,
-            $s = this._composerDataService.getComposerBubble(e, jt),
-            Ss = u.conversation.findIndex((Js) => Js.bubbleId === jt)
-          if (!$s) throw Error("[composer] current bubble is undefined")
-          let vt
-          $s.type === bn.HUMAN
-            ? ((vt = Ss !== -1 ? u.conversation[Ss + 1]?.bubbleId : void 0),
-              (R = !0))
-            : (vt = jt)
-          const gi = u.conversation.slice(Ss + 1),
-            Ht = u.conversation.slice(0, Ss),
-            Zt = (Js) => {
+        let isHumanBubble = !1
+        if (options?.bubbleId) {
+          const bubbleId = options.bubbleId ?? composerState.currentBubbleId,
+            bubble = this._composerDataService.getComposerBubble(composerId, bubbleId),
+            bubbleIndex = composerState.conversation.findIndex((Js) => Js.bubbleId === bubbleId)
+          if (!bubble) throw Error("[composer] current bubble is undefined")
+          let nextBubbleId
+          bubble.type === bn.HUMAN
+            ? ((nextBubbleId = bubbleIndex !== -1 ? composerState.conversation[bubbleIndex + 1]?.bubbleId : void 0),
+              (isHumanBubble = !0))
+            : (nextBubbleId = bubbleId)
+          const subsequentBubbles = composerState.conversation.slice(bubbleIndex + 1),
+            previousBubbles = composerState.conversation.slice(0, bubbleIndex),
+            isTerminalCommand = (Js) => {
               const Cr = this._composerDataService.getComposerCapability(
-                e,
+                composerId,
                 xn.TOOL_FORMER,
               )
               if (!Cr) return !1
               const ma = Cr.getBubbleData(Js.bubbleId)
               return ma ? ma.tool === Et.RUN_TERMINAL_COMMAND_V2 : !1
             },
-            Wi = gi.some(Zt),
-            on = Ht.some(Zt)
-          if (Wi) {
-            const Js = L.find((Cr) => Cr.type === xn.TOOL_FORMER)
-            Js && Js.clearSessionId()
+            hasSubsequentTerminalCommand = subsequentBubbles.some(isTerminalCommand),
+            hasPreviousTerminalCommand = previousBubbles.some(isTerminalCommand)
+          if (hasSubsequentTerminalCommand) {
+            const toolFormerCapability = capabilities.find((Cr) => Cr.type === xn.TOOL_FORMER)
+            toolFormerCapability && toolFormerCapability.clearSessionId()
           }
-          vt && this._composerUtilsService.removeMessagesAfterBubble(e, vt),
-            R
-              ? (this._composerDataService.updateComposerBubble(e, jt, {
+          nextBubbleId && this._composerUtilsService.removeMessagesAfterBubble(composerId, nextBubbleId),
+            isHumanBubble
+              ? (this._composerDataService.updateComposerBubble(composerId, bubbleId, {
                   ...yD(),
-                  bubbleId: jt,
-                  richText: s?.richText ?? t,
-                  text: t,
-                  isCapabilityIteration: s?.isCapabilityIteration,
-                  existedSubsequentTerminalCommand: Wi,
-                  existedPreviousTerminalCommand: on,
-                  humanChanges: I,
-                  attachedHumanChanges: u.context.useRecentChanges,
+                  bubbleId: bubbleId,
+                  richText: options?.richText ?? currentText,
+                  text: currentText,
+                  isCapabilityIteration: options?.isCapabilityIteration,
+                  existedSubsequentTerminalCommand: hasSubsequentTerminalCommand,
+                  existedPreviousTerminalCommand: hasPreviousTerminalCommand,
+                  humanChanges: humanChanges,
+                  attachedHumanChanges: composerState.context.useRecentChanges,
                   skipRendering: !1,
                 }),
                 console.log(
                   `[composer.submitChat] Time between function start and adding human message: ${Date.now() - n}ms`,
                 ))
-              : this._composerDataService.updateComposerBubble(e, jt, {
-                  existedSubsequentTerminalCommand: Wi,
-                  existedPreviousTerminalCommand: on,
-                  humanChanges: I,
-                  attachedHumanChanges: u.context.useRecentChanges,
+              : this._composerDataService.updateComposerBubble(composerId, bubbleId, {
+                  existedSubsequentTerminalCommand: hasSubsequentTerminalCommand,
+                  existedPreviousTerminalCommand: hasPreviousTerminalCommand,
+                  humanChanges: humanChanges,
+                  attachedHumanChanges: composerState.context.useRecentChanges,
                 })
         }
-        if (s?.isResume || R) {
-          const jt = this._composerDataService.getLastHumanBubble(e)
-          if (!jt)
+        if (options?.isResume || isHumanBubble) {
+          const lastHumanBubble = this._composerDataService.getLastHumanBubble(composerId)
+          if (!lastHumanBubble)
             throw new Error(
               "[composer] submitted capability iteration without a last human message!",
             )
-          v = jt
+          humanBubble = lastHumanBubble
         } else
-          (v = {
+          (humanBubble = {
             ...yD(),
-            richText: s?.richText ?? t,
-            text: t,
-            isCapabilityIteration: s?.isCapabilityIteration,
-            tokenDetailsUpUntilHere: u.tokenDetails,
-            tokenCountUpUntilHere: u.tokenCount,
+            richText: options?.richText ?? currentText,
+            text: currentText,
+            isCapabilityIteration: options?.isCapabilityIteration,
+            tokenDetailsUpUntilHere: composerState.tokenDetails,
+            tokenCountUpUntilHere: composerState.tokenCount,
           }),
-            this._composerDataService.updateComposerDataSetStore(e, (jt) =>
-              jt("conversation", [...u.conversation, v]),
+            this._composerDataService.updateComposerDataSetStore(composerId, (jt) =>
+              jt("conversation", [...composerState.conversation, humanBubble]),
             ),
             console.log(
               `[composer.submitChat] Time between function start and adding human message: ${Date.now() - n}ms`,
             )
-        N && (await N())
-        let B = z_(u.context)
+        checkpointCallback && (await checkpointCallback())
+        let context = z_(composerState.context)
         if (
-          (s?.isCapabilityIteration ||
-            (P && this._composerUtilsService.clearText(e),
-            this._composerViewsService.focus(e, !0)),
-          s?.bubbleId !== void 0)
+          (options?.isCapabilityIteration ||
+            (isResume && this._composerUtilsService.clearText(composerId),
+            this._composerViewsService.focus(composerId, !0)),
+          options?.bubbleId !== void 0)
         ) {
-          const jt = this._composerDataService.getComposerBubble(e, s.bubbleId)
-          if (jt && jt.context) {
-            const $s = jt.context
-            B = z_($s)
-            const Ss = mvs(z_($s))
-            this._composerDataService.updateComposerDataSetStore(e, (vt) =>
-              vt("context", Ss),
+          const bubble = this._composerDataService.getComposerBubble(composerId, options.bubbleId)
+          if (bubble && bubble.context) {
+            const bubbleContext = bubble.context
+            context = z_(bubbleContext)
+            const updatedContext = mvs(z_(bubbleContext))
+            this._composerDataService.updateComposerDataSetStore(composerId, (vt) =>
+              vt("context", updatedContext),
             )
           }
         }
-        this._composerDataService.updateComposerDataSetStore(e, (jt) =>
+        this._composerDataService.updateComposerDataSetStore(composerId, (jt) =>
           jt("currentBubbleId", void 0),
         ),
-          this._composerDataService.updateComposerDataSetStore(e, (jt) =>
+          this._composerDataService.updateComposerDataSetStore(composerId, (jt) =>
             jt("latestCheckpoint", void 0),
           )
-        const W = {
-          ...B,
+        const updatedContext = {
+          ...context,
           usesCodebase:
-            B.usesCodebase !== void 0 && B.usesCodebase !== !1
-              ? B
-              : s?.usesCodebase,
-          useDiffReview: B.useDiffReview ?? s?.useDiffReview,
+            context.usesCodebase !== void 0 && context.usesCodebase !== !1
+              ? context
+              : options?.usesCodebase,
+          useDiffReview: context.useDiffReview ?? options?.useDiffReview,
         }
         if (
-          !s?.isCapabilityIteration &&
-          !s?.isResume &&
-          (this._composerContextService.removeNonPersistentContext(e), l)
+          !options?.isCapabilityIteration &&
+          !options?.isResume &&
+          (this._composerContextService.removeNonPersistentContext(composerId), isChat)
         ) {
           this._composerContextService.removeAllListContext({
-            composerId: e,
+            composerId: composerId,
             contextType: "fileSelections",
             addToUndoRedo: !1,
           })
-          const jt = this._composerUtilsService.getCurrentFile()
-          jt !== void 0 &&
-            B.fileSelections.some(
-              ($s) => vv("fileSelections", $s) === vv("fileSelections", jt),
+          const currentFile = this._composerUtilsService.getCurrentFile()
+          currentFile !== void 0 &&
+            context.fileSelections.some(
+              ($s) => vv("fileSelections", $s) === vv("fileSelections", currentFile),
             ) &&
-            this._composerContextService.resetContext(e)
+            this._composerContextService.resetContext(composerId)
         }
-        if (!s?.isResume) {
-          const jt =
-            await this._composerCheckpointService.createCurrentCheckpoint(e)
-          this._composerDataService.updateComposerBubble(e, v.bubbleId, {
-            checkpoint: jt,
-            context: W,
+        if (!options?.isResume) {
+          const checkpoint =
+            await this._composerCheckpointService.createCurrentCheckpoint(composerId)
+          this._composerDataService.updateComposerBubble(composerId, humanBubble.bubbleId, {
+            checkpoint: checkpoint,
+            context: updatedContext,
           })
         }
         console.log(
           `[composer.submitChat] Time between function start and handling context / checkpoints: ${Date.now() - n}ms`,
         )
-        const G = await this._aiService.aiClient()
-        let te
-        const re = W.fileSelections.map((jt) => CR(jt)),
-          Z = l
+        const aiClient = await this._aiService.aiClient()
+        let linterErrors
+        const fileSelections = updatedContext.fileSelections.map((jt) => CR(jt)),
+          codeblockUris = isChat
             ? []
             : this._composerDataService
-                .getUrisOfCodeblocksInLastAiBubbles(u.composerId)
+                .getUrisOfCodeblocksInLastAiBubbles(composerState.composerId)
                 .map((jt) => jt.toString()),
-          ve = (
+          validFiles = (
             await Promise.all(
               (
                 await Promise.all(
-                  Array.from(new Set([...re, ...Z])).map(async (jt) => ({
-                    uri: jt,
-                    exists: await this._fileService.exists(H.parse(jt)),
+                  Array.from(new Set([...fileSelections, ...codeblockUris])).map(async (uri) => ({
+                    uri: uri,
+                    exists: await this._fileService.exists(H.parse(uri)),
                   })),
                 )
               )
@@ -1453,12 +1453,12 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
             )
           ).map((jt) => ({ uri: H.parse(jt), fileName: hn(jt) }))
         if (
-          ((w = { ...W, fileSelections: ve }),
-          (c || w.usesCodebase) &&
+          ((contextUsed = { ...updatedContext, fileSelections: validFiles }),
+          (isAgentic || contextUsed.usesCodebase) &&
             this._reactiveStorageService.applicationUserPersistentStorage
               .checklistState?.doneCommandEnter !== !0)
         ) {
-          const jt =
+          const checklistState =
             this._reactiveStorageService.applicationUserPersistentStorage
               .checklistState
           this._reactiveStorageService.setApplicationUserPersistentStorage(
@@ -1468,104 +1468,104 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
         }
         if (
           !this.shouldSkipCapabilities(
-            s?.capabilityProcessesToSkip,
+            options?.capabilityProcessesToSkip,
             "before-submit-chat",
           )
         )
           try {
             if (
               await this._composerUtilsService.runCapabilitiesForProcess(
-                e,
+                composerId,
                 "before-submit-chat",
                 {
-                  composerId: e,
-                  humanBubbleId: v.bubbleId,
-                  isCapabilityIteration: s?.isCapabilityIteration,
-                  contextUsed: w,
-                  submitChatProps: { text: t, extra: s },
+                  composerId: composerId,
+                  humanBubbleId: humanBubble.bubbleId,
+                  isCapabilityIteration: options?.isCapabilityIteration,
+                  contextUsed: contextUsed,
+                  submitChatProps: { text: currentText, extra: options },
                 },
               )
             )
               return
-          } catch (jt) {
+          } catch (error) {
             console.error(
               "[composer] error running capabilities for before-submit-chat",
-              jt,
+              error,
             )
             return
           }
-        if (u.chatGenerationUUID) {
-          const jt = u.chatGenerationUUID
-          this._composerDataService.updateComposerDataSetStore(e, ($s) =>
+        if (composerState.chatGenerationUUID) {
+          const chatGenerationUUID = composerState.chatGenerationUUID
+          this._composerDataService.updateComposerDataSetStore(composerId, ($s) =>
             $s("chatGenerationUUID", void 0),
           ),
-            this._skipHandleAbortChat.add(e),
-            this._composerUtilsService.abortGenerationUUID(jt),
+            this._skipHandleAbortChat.add(composerId),
+            this._composerUtilsService.abortGenerationUUID(chatGenerationUUID),
             await new Promise(($s) => setTimeout($s, 50)),
-            this._skipHandleAbortChat.delete(e)
+            this._skipHandleAbortChat.delete(composerId)
         }
-        ;(h = this._aiService.registerNewGeneration({
-          generationUUID: m,
-          metadata: l
+        ;(abortController = this._aiService.registerNewGeneration({
+          generationUUID: generationUUID,
+          metadata: isChat
             ? {
                 type: "chat",
-                tabId: u.composerId,
-                bubbleId: v.bubbleId,
+                tabId: composerState.composerId,
+                bubbleId: humanBubble.bubbleId,
                 chatType: "chat",
               }
-            : { type: "composer", textDescription: t },
+            : { type: "composer", textDescription: currentText },
         })[1]),
-          this._composerDataService.updateComposerData(e, {
-            chatGenerationUUID: m,
-            latestChatGenerationUUID: m,
+          this._composerDataService.updateComposerData(composerId, {
+            chatGenerationUUID: generationUUID,
+            latestChatGenerationUUID: generationUUID,
             generatingBubbleIds: [],
             status: "generating",
             lastUpdatedAt: Date.now(),
           })
-        const pe = u.conversation.at(-1),
-          ge =
-            s?.isResume && pe?.type === bn.AI && pe?.capabilityType === void 0
-        if (ge) {
-          if (!pe)
+        const lastBubble = composerState.conversation.at(-1),
+          isResumingAiBubble =
+            options?.isResume && lastBubble?.type === bn.AI && lastBubble?.capabilityType === void 0
+        if (isResumingAiBubble) {
+          if (!lastBubble)
             throw new Error(
               "[composer] submitted capability iteration without a last ai message!",
             )
-          y = pe
+          aiBubble = lastBubble
         } else
-          y = {
+          aiBubble = {
             ...yD(),
             codeBlocks: [],
             type: bn.AI,
             text: "",
-            isCapabilityIteration: s?.isCapabilityIteration,
-            isChat: l,
+            isCapabilityIteration: options?.isCapabilityIteration,
+            isChat: isChat,
             timingInfo: { clientStartTime: n, clientRpcSendTime: Date.now() },
           }
-        const Oe = this.isUsingAPIKeys(),
-          Ie = this._cursorAuthenticationService.membershipType()
+        const isUsingAPIKeys = this.isUsingAPIKeys(),
+          membershipType = this._cursorAuthenticationService.membershipType()
         if (
-          Oe &&
-          !l &&
-          Ie === Vr.FREE &&
+          isUsingAPIKeys &&
+          !isChat &&
+          membershipType === Vr.FREE &&
           this._cursorAuthenticationService.isAuthenticated()
         ) {
           console.log({
-            isUsingApiKey: Oe,
-            isChat: l,
-            membershipType: Ie,
+            isUsingApiKey: isUsingAPIKeys,
+            isChat: isChat,
+            membershipType: membershipType,
             isAuthenticated:
               this._cursorAuthenticationService.isAuthenticated(),
           })
-          const jt = { status: "aborted" }
-          ge || (jt.conversation = [...u.conversation, y]),
-            this._composerDataService.updateComposerData(e, jt),
-            this._composerDataService.updateComposerDataSetStore(e, ($s) =>
+          const abortState = { status: "aborted" }
+          isResumingAiBubble || (abortState.conversation = [...composerState.conversation, aiBubble]),
+            this._composerDataService.updateComposerData(composerId, abortState),
+            this._composerDataService.updateComposerDataSetStore(composerId, ($s) =>
               $s(
                 "conversation",
-                (Ss) => Ss.bubbleId === y.bubbleId,
+                (Ss) => Ss.bubbleId === aiBubble.bubbleId,
                 "errorDetails",
                 {
-                  generationUUID: m,
+                  generationUUID: generationUUID,
                   error: new YW({
                     error: no.UNSPECIFIED,
                     details: {
@@ -1576,104 +1576,104 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
                   }),
                   message:
                     "Agent and Edit rely on custom models that cannot be billed to an API key. Please use a Pro or Business subscription and/or disable API keys. Ask should still work.",
-                  rerun: C,
+                  rerun: retrySubmit,
                 },
               ),
             )
           return
         }
         const qe = Date.now(),
-          et = ve.map((jt) => jt.uri)
-        let We = !l || (w.useLinterErrors && c)
-        const xe = k(
-            We
-              ? this._selectedContextService.getLinterErrorsForFiles(et)
+          fileUris = validFiles.map((jt) => jt.uri)
+        let shouldGetLinterErrors = !isChat || (contextUsed.useLinterErrors && isAgentic)
+        const linterErrorsPromise = timingFunction(
+            shouldGetLinterErrors
+              ? this._selectedContextService.getLinterErrorsForFiles(fileUris)
               : Promise.resolve([]),
             "getPerMessageLinterErrors",
           ),
-          lt = k(
+          codeChunksPromise = timingFunction(
             this._selectedContextService.getCodeChunks({
-              ...w,
-              folderSelections: c ? [] : w.folderSelections,
+              ...contextUsed,
+              folderSelections: isAgentic ? [] : contextUsed.folderSelections,
             }),
             "getCodeChunks",
           ),
-          Ut = k(
-            this._composerDataService.getRelevantFiles(e),
+          relevantFilesPromise = timingFunction(
+            this._composerDataService.getRelevantFiles(composerId),
             "getRelevantFiles",
           ),
-          Ye = k(this.getEnvironmentInfo(), "getEnvironmentInfo"),
-          Fe = k(
-            l
+          environmentInfoPromise = timingFunction(this.getEnvironmentInfo(), "getEnvironmentInfo"),
+          recentlyViewedFilesPromise = timingFunction(
+            isChat
               ? Promise.resolve({
                   recentlyViewedFiles: [],
                   recentLocationsHistory: [],
                 })
-              : this._composerUtilsService.getRecentlyViewedFileInfo(lt),
+              : this._composerUtilsService.getRecentlyViewedFileInfo(codeChunksPromise),
             "getRecentlyViewedFileInfo",
           ),
-          [Xe, zt, dt, ut] = await Promise.all([xe, lt, Ut, Ye])
+          [linterErrorsResult, codeChunksResult, relevantFilesResult, environmentInfoResult] = await Promise.all([linterErrorsPromise, codeChunksPromise, relevantFilesPromise, environmentInfoPromise])
         console.log(
           `[composer.submitChat] Time taken to process context: ${Date.now() - qe}ms`,
         ),
-          (te = Xe),
-          this._composerDataService.updateComposerDataSetStore(e, (jt) =>
-            jt("conversation", ($s) => $s.bubbleId === v.bubbleId, {
+          (linterErrors = linterErrorsResult),
+          this._composerDataService.updateComposerDataSetStore(composerId, (state) =>
+            state("conversation", ($s) => $s.bubbleId === humanBubble.bubbleId, {
               relevantFiles: [
-                ...dt.map(($s) =>
+                ...relevantFilesResult.map(($s) =>
                   this._workspaceContextService.asRelativePath(
                     H.revive($s.uri),
                   ),
                 ),
               ],
               multiFileLinterErrors: [
-                ...te.map(($s) => new Tp({ ...$s, fileContents: void 0 })),
+                ...linterErrors.map(($s) => new Tp({ ...$s, fileContents: void 0 })),
               ],
-              humanChanges: I,
-              attachedHumanChanges: W.useRecentChanges,
-              isAgentic: c,
-              unifiedMode: this.getUnifiedMode(r),
+              humanChanges: humanChanges,
+              attachedHumanChanges: updatedContext.useRecentChanges,
+              isAgentic: isAgentic,
+              unifiedMode: this.getUnifiedMode(mode),
             }),
           )
-        const ht = Af(u.conversation).map((jt) => ({ ...jt })),
-          ti = ht.findIndex((jt) => jt.bubbleId === v.bubbleId)
-        ht[ti].attachedCodeChunks = zt
-        const ot = [...ht]
+        const conversationCopy = Af(composerState.conversation).map((jt) => ({ ...jt })),
+          humanBubbleIndex = conversationCopy.findIndex((jt) => jt.bubbleId === humanBubble.bubbleId)
+        conversationCopy[humanBubbleIndex].attachedCodeChunks = codeChunksResult
+        const lastConversationSummary = [...conversationCopy]
             .reverse()
             .map((jt) => jt.conversationSummary)
             .filter((jt) => jt !== void 0)[0],
-          Ct = ot?.clientShouldStartSendingFromInclusiveBubbleId
-        let ii = Ct
-          ? ht.findIndex((jt) => (jt.serverBubbleId ?? jt.bubbleId) === Ct)
+          startSendingFromBubbleId = lastConversationSummary?.clientShouldStartSendingFromInclusiveBubbleId
+        let startIndex = startSendingFromBubbleId
+          ? conversationCopy.findIndex((jt) => (jt.serverBubbleId ?? jt.bubbleId) === startSendingFromBubbleId)
           : 0
-        ii === -1 && (ii = 0)
-        const fi = ht.slice(ii),
-          si = await this.populateCodeChunksInConversation(e, fi)
-        let ft = si
-        l ||
-          (ft =
-            await this._composerUtilsService.populateRedDiffsInConversation(si))
-        for (const jt of ft)
-          this._composerDataService.updateComposerDataSetStore(e, ($s) =>
+        startIndex === -1 && (startIndex = 0)
+        const conversationSlice = conversationCopy.slice(startIndex),
+          populatedConversation = await this.populateCodeChunksInConversation(composerId, conversationSlice)
+        let finalConversation = populatedConversation
+        isChat ||
+          (finalConversation =
+            await this._composerUtilsService.populateRedDiffsInConversation(populatedConversation))
+        for (const bubble of finalConversation)
+          this._composerDataService.updateComposerDataSetStore(composerId, ($s) =>
             $s(
               "conversation",
-              (Ss) => Ss.bubbleId === jt.bubbleId,
+              (Ss) => Ss.bubbleId === bubble.bubbleId,
               "diffsForCompressingFiles",
-              jt.diffsForCompressingFiles,
+              bubble.diffsForCompressingFiles,
             ),
           )
-        let Ri = ""
+        let responseText = ""
         const Rt = Date.now(),
-          us =
+          conversationWithExtraContext =
             await this._composerUtilsService.populateConversationWithExtraContext(
-              ft,
-              e,
+              finalConversation,
+              composerId,
               {
-                lastBubbleContext: w,
+                lastBubbleContext: contextUsed,
                 removeContext: (jt) =>
                   this._composerContextService.removeContext({
                     ...jt,
-                    composerIdOrHandle: e,
+                    composerIdOrHandle: composerId,
                   }),
               },
             )
@@ -1681,62 +1681,62 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
           `[composer] Time taken to process extra context: ${Date.now() - Rt}ms`,
         ),
           await (async () => {
-            if (h.signal.aborted) return
+            if (abortController.signal.aborted) return
             const jt = Date.now()
             try {
-              const $s = us
-              let Ss = await this._aiService.getCurrentFileInfo()
-              const vt = await this._repositoryService.getNewRepoInfo()
-              let gi
-              vt &&
+              const conversation = conversationWithExtraContext
+              let currentFileInfo = await this._aiService.getCurrentFileInfo()
+              const repoInfo = await this._repositoryService.getNewRepoInfo()
+              let repositoryInfo
+              repoInfo &&
                 this._repositoryService.isIndexedMainLocalRepository() &&
-                (gi = new Sl(vt))
-              const Ht =
+                (repositoryInfo = new Sl(repoInfo))
+              const availableTools =
                   await this._toolsV2HandlerRegistryService.getAvailableTools(
-                    u,
-                    r,
+                    composerState,
+                    mode,
                   ),
-                Wi = this._composerModesService.getMode(r)?.mcpEnabled ?? !1,
-                on = !c
-              let Js
-              Ht.includes(Et.EDIT_FILE)
-                ? (Js = !0)
-                : (Js =
+                isMcpEnabled = this._composerModesService.getMode(mode)?.mcpEnabled ?? !1,
+                shouldDisableTools = !isAgentic
+              let shouldForceNotApply
+              availableTools.includes(Et.EDIT_FILE)
+                ? (shouldForceNotApply = !0)
+                : (shouldForceNotApply =
                     !this._composerModesService.getModeShouldAutoApplyIfNoEditTool(
-                      r,
+                      mode,
                     ))
-              const Cr = this._composerModesService.isModeChatLike(r),
-                ma = a.modelName === "claude-3.7-sonnet-thinking-max",
-                wt = {
-                  conversation: $s,
-                  fullConversationHeadersOnly: $s.map((ql) => ({
+              const shouldUseChatPrompt = this._composerModesService.isModeChatLike(mode),
+                isClaudeModel = modelDetails.modelName === "claude-3.7-sonnet-thinking-max",
+                chatRequest = {
+                  conversation: conversation,
+                  fullConversationHeadersOnly: conversation.map((ql) => ({
                     bubbleId: ql.bubbleId,
                     type: ql.type,
                     serverBubbleId: ql.serverBubbleId,
                   })),
-                  conversationSummary: ot,
+                  conversationSummary: lastConversationSummary,
                   allowLongFileScan: !0,
-                  explicitContext: await this._aiService.getExplicitContext(r),
-                  documentationIdentifiers: (w.selectedDocs ?? []).map(
+                  explicitContext: await this._aiService.getExplicitContext(mode),
+                  documentationIdentifiers: (contextUsed.selectedDocs ?? []).map(
                     (ql) => ql.docId,
                   ),
-                  quotes: w.quotes ?? [],
+                  quotes: contextUsed.quotes ?? [],
                   canHandleFilenamesAfterLanguageIds: !0,
-                  modelDetails: a,
+                  modelDetails: modelDetails,
                   multiFileLinterErrors: [],
-                  useWeb: w.useWeb ? "full_search" : void 0,
-                  externalLinks: w.externalLinks ?? [],
+                  useWeb: contextUsed.useWeb ? "full_search" : void 0,
+                  externalLinks: contextUsed.externalLinks ?? [],
                   diffsForCompressingFiles: [],
                   shouldCache:
                     this._reactiveStorageService
                       .applicationUserPersistentStorage.cacheComposerPrompts,
-                  currentFile: Ss,
+                  currentFile: currentFileInfo,
                   fileDiffHistories: [],
                   useNewCompressionScheme: !0,
                   additionalRankedContext: [],
                   isChat: !1,
-                  conversationId: u.composerId,
-                  repositoryInfo: gi,
+                  conversationId: composerState.composerId,
+                  repositoryInfo: repositoryInfo,
                   repositoryInfoShouldQueryStaging: this._cursorCredsService
                     .getRepoBackendUrl()
                     .includes("dev-staging.cursor.sh"),
@@ -1749,34 +1749,34 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
                       .includes("cursor.sh"),
                   repoQueryAuthToken: "",
                   isHeadless: !1,
-                  environmentInfo: ut,
-                  isAgentic: c,
+                  environmentInfo: environmentInfoResult,
+                  isAgentic: isAgentic,
                   linterErrors:
-                    l && w.useLinterErrors && !c
+                    isChat && contextUsed.useLinterErrors && !isAgentic
                       ? await qbs(
                           this._markerService,
                           this._workspaceContextService,
                           this._aiService,
                         )
                       : void 0,
-                  supportedTools: Ht,
+                  supportedTools: availableTools,
                   enableYoloMode:
-                    this._composerModesService.getModeAutoRun(r) ?? !1,
+                    this._composerModesService.getModeAutoRun(mode) ?? !1,
                   yoloPrompt:
                     this._reactiveStorageService
                       .applicationUserPersistentStorage.composerState
                       .yoloPrompt ?? "",
                   useUnifiedChatPrompt: !1,
-                  mcpTools: Wi
+                  mcpTools: isMcpEnabled
                     ? await this._mcpService.getToolsForComposer()
                     : [],
                   useFullInputsContext:
-                    !ma &&
+                    !isClaudeModel &&
                     !this._reactiveStorageService
                       .applicationUserPersistentStorage.fullContextOptions
                       .compress,
                   toolsRequiringAcceptedReturn: fvs,
-                  isResume: s?.isResume,
+                  isResume: options?.isResume,
                   allowModelFallbacks:
                     this._reactiveStorageService
                       .applicationUserPersistentStorage.allowModelFallbacks,
@@ -1784,95 +1784,95 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
                     this._reactiveStorageService
                       .applicationUserPersistentStorage
                       .numberOfTimesShownFallbackModelWarning ?? 0,
-                  unifiedMode: this.getUnifiedMode(r),
-                  shouldDisableTools: on,
-                  thinkingLevel: this.getThinkingLevel(o),
-                  shouldUseChatPrompt: Cr,
+                  unifiedMode: this.getUnifiedMode(mode),
+                  shouldDisableTools: shouldDisableTools,
+                  thinkingLevel: this.getThinkingLevel(thinkingLevel),
+                  shouldUseChatPrompt: shouldUseChatPrompt,
                   usesRules: await this._cursorRulesService
                     .getRules({ requireDescription: !0 })
                     .then((ql) => ql.length > 0),
                 }
-              console.log("[composer] composerChatRequest", wt)
-              let Ne
+              console.log("[composer] composerChatRequest", chatRequest)
+              let capabilityError
               if (
                 !this.shouldSkipCapabilities(
-                  s?.capabilityProcessesToSkip,
+                  options?.capabilityProcessesToSkip,
                   "mutate-request",
                 )
               )
                 try {
                   await this._composerUtilsService.runCapabilitiesForProcess(
-                    e,
+                    composerId,
                     "mutate-request",
                     {
-                      composerId: e,
-                      humanBubbleId: v.bubbleId,
-                      isCapabilityIteration: s?.isCapabilityIteration,
-                      contextUsed: w,
+                      composerId: composerId,
+                      humanBubbleId: humanBubble.bubbleId,
+                      isCapabilityIteration: options?.isCapabilityIteration,
+                      contextUsed: contextUsed,
                     },
-                    { request: wt },
+                    { request: chatRequest },
                   )
-                } catch (ql) {
-                  if (ql instanceof Ag) Ne = ql
+                } catch (error) {
+                  if (error instanceof Ag) capabilityError = error
                   else {
                     console.error(
                       "[composer] error running capabilities for mutate-request",
-                      ql,
+                      error,
                     )
                     return
                   }
                 }
               if (
-                ((y.capabilitiesRan =
+                ((aiBubble.capabilitiesRan =
                   this._composerDataService.getComposerBubble(
-                    e,
-                    v.bubbleId,
+                    composerId,
+                    humanBubble.bubbleId,
                   )?.capabilitiesRan),
-                h.signal.aborted)
+                abortController.signal.aborted)
               )
                 return
-              const ze = await this._chatClient.get(),
-                Vt = new Rue(wt)
-              wt.usesCodebaseResults &&
-                (Vt.usesCodebaseResults = new PNt({
-                  results: wt.usesCodebaseResults.results,
-                  allFiles: wt.usesCodebaseResults.allFiles,
+              const chatClient = await this._chatClient.get(),
+                chatRequestWrapper = new Rue(chatRequest)
+              chatRequest.usesCodebaseResults &&
+                (chatRequestWrapper.usesCodebaseResults = new PNt({
+                  results: chatRequest.usesCodebaseResults.results,
+                  allFiles: chatRequest.usesCodebaseResults.allFiles,
                 }))
-              let wi
-              if (Ne !== void 0)
-                wi = (async function* () {
-                  throw Ne
+              let responseStream
+              if (capabilityError !== void 0)
+                responseStream = (async function* () {
+                  throw capabilityError
                 })()
               else {
-                const ql = new djt(void 0)
-                ql.push(
+                const streamRequest = new djt(void 0)
+                streamRequest.push(
                   new $O({
-                    request: { case: "streamUnifiedChatRequest", value: wt },
+                    request: { case: "streamUnifiedChatRequest", value: chatRequest },
                   }),
                 )
-                const o0 = ze.streamUnifiedChatWithTools(ql, {
-                  signal: h.signal,
-                  headers: Zo(m),
+                const streamResponse = chatClient.streamUnifiedChatWithTools(streamRequest, {
+                  signal: abortController.signal,
+                  headers: Zo(generationUUID),
                 })
-                wi = this._toolV2Service.toolWrappedStream(ql, o0, h, {
-                  composerId: e,
+                responseStream = this._toolV2Service.toolWrappedStream(streamRequest, streamResponse, abortController, {
+                  composerId: composerId,
                 })
               }
-              const Fs = {
+              const updateState = {
                 generatingBubbleIds: [
-                  ...(u.generatingBubbleIds ?? []),
-                  y.bubbleId,
+                  ...(composerState.generatingBubbleIds ?? []),
+                  aiBubble.bubbleId,
                 ],
                 status: "generating",
               }
-              ge || (Fs.conversation = [...u.conversation, y]),
-                this._composerDataService.updateComposerData(e, Fs)
-              let Zi = Fx(wi)
-              const Nn = this._composerUtilsService.handleStreamComposer({
-                streamer: Zi,
-                abortController: h,
-                generationUUID: m,
-                composerId: e,
+              isResumingAiBubble || (updateState.conversation = [...composerState.conversation, aiBubble]),
+                this._composerDataService.updateComposerData(composerId, updateState)
+              let streamer = Fx(responseStream)
+              const streamHandler = this._composerUtilsService.handleStreamComposer({
+                streamer: streamer,
+                abortController: abortController,
+                generationUUID: generationUUID,
+                composerId: composerId,
                 startTime: n,
               })
               this._composerEventService.fireDidSendRequest(),
@@ -1884,78 +1884,78 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
                       "keepComposerCacheWarm",
                     ) &&
                       (await this.debouncedMaybeKeepComposerCacheWarm(
-                        e,
-                        m,
-                        new cX(wt),
+                        composerId,
+                        generationUUID,
+                        new cX(chatRequest),
                       ))
                 })().catch((ql) => {})
-              const pr = this._aiService.streamResponse({
-                  modelDetails: a,
-                  generationUUID: m,
-                  streamer: Nn,
+              const response = this._aiService.streamResponse({
+                  modelDetails: modelDetails,
+                  generationUUID: generationUUID,
+                  streamer: streamHandler,
                   streamerURL:
                     xu.typeName + "/" + xu.methods.streamComposer.name,
                   source: "composer",
                   rethrowCancellation: !0,
                   failSilently: !1,
                 }),
-                Br = await this._composerUtilsService.runCapabilitiesForProcess(
-                  e,
+                processedResponse = await this._composerUtilsService.runCapabilitiesForProcess(
+                  composerId,
                   "process-stream",
                   {
-                    composerId: e,
-                    humanBubbleId: v.bubbleId,
-                    aiBubbleId: y.bubbleId,
-                    stream: pr,
-                    generationUUID: m,
+                    composerId: composerId,
+                    humanBubbleId: humanBubble.bubbleId,
+                    aiBubbleId: aiBubble.bubbleId,
+                    stream: response,
+                    generationUUID: generationUUID,
                     startTime: n,
-                    submitChatProps: { text: t, extra: s },
+                    submitChatProps: { text: currentText, extra: options },
                   },
                 ),
-                Xo =
+                fakeStreamerId =
                   this._reactiveStorageService.applicationUserPersistentStorage
                     .composerState.selectedFakeStreamerId,
-                Hr = Xo ? sdr.find((ql) => ql.id === Xo) : void 0,
-                Jo = Hr ? Hhr(Hr)() : Br,
-                Dc = this._composerApplyService.processCodeBlocks(e, Jo, {
+                fakeStreamer = fakeStreamerId ? sdr.find((ql) => ql.id === fakeStreamerId) : void 0,
+                finalResponse = fakeStreamer ? Hhr(fakeStreamer)() : processedResponse,
+                codeBlocks = this._composerApplyService.processCodeBlocks(composerId, finalResponse, {
                   skipOnSettled: this.shouldSkipCapabilities(
-                    s?.capabilityProcessesToSkip,
+                    options?.capabilityProcessesToSkip,
                     "composer-settled",
                   ),
-                  isCapabilityIteration: s?.isCapabilityIteration,
+                  isCapabilityIteration: options?.isCapabilityIteration,
                   passTimingInfo: !0,
-                  forceIsNotApplied: Js,
+                  forceIsNotApplied: shouldForceNotApply,
                 })
               console.log(`[composer] Client-side ttft: ${Date.now() - n}ms`),
                 console.log(
                   `[composer.submitChat] Last leg time taken: ${Date.now() - jt}ms`,
                 )
-              let Rh,
-                Zh = y.text,
-                Qg = s?.isResume,
-                r0 = ""
-              for await (const ql of Dc) {
-                const o0 = this._composerDataService.getLastAiBubbleId(e)
-                if (!o0) throw new Error("[composer] No ai bubble id")
+              let currentBubbleId,
+                currentBubbleText = aiBubble.text,
+                isResuming = options?.isResume,
+                resumeText = ""
+              for await (const block of codeBlocks) {
+                const bubbleId = this._composerDataService.getLastAiBubbleId(composerId)
+                if (!bubbleId) throw new Error("[composer] No ai bubble id")
                 if (
-                  (Rh !== o0 &&
-                    ((Rh = o0),
-                    (Zh =
-                      this._composerDataService.getComposerBubble(e, o0)
+                  (currentBubbleId !== bubbleId &&
+                    ((currentBubbleId = bubbleId),
+                    (currentBubbleText =
+                      this._composerDataService.getComposerBubble(composerId, bubbleId)
                         ?.text ?? "")),
-                  (p = !0),
-                  ql.timingInfo)
+                  (hasResponse = !0),
+                  block.timingInfo)
                 ) {
-                  y.timingInfo &&
+                  aiBubble.timingInfo &&
                     this._composerDataService.updateComposerDataSetStore(
-                      e,
-                      (vr) => {
-                        vr(
+                      composerId,
+                      (state) => {
+                        state(
                           "conversation",
-                          (qr) => qr.bubbleId === o0,
+                          (qr) => qr.bubbleId === bubbleId,
                           "timingInfo",
                           (qr) => {
-                            const Dn = ql.timingInfo
+                            const Dn = block.timingInfo
                             if (!(!Dn || !qr))
                               return {
                                 ...qr,
@@ -1983,7 +1983,7 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
                     .composerState.shouldSimulateTimeoutServerErrorOnce
                 ) {
                   console.log("[composer] Simulating timeout server error")
-                  const vr = new Ag(
+                  const timeoutError = new Ag(
                     "Simulated timeout server error",
                     LC.DeadlineExceeded,
                     void 0,
@@ -1995,216 +1995,216 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
                       "shouldSimulateTimeoutServerErrorOnce",
                       !1,
                     ),
-                    vr)
+                    timeoutError)
                   )
                 }
-                const { text: a0 } = ql
-                if (!a0) {
-                  ql.isBigFile &&
+                const { text: text } = block
+                if (!text) {
+                  block.isBigFile &&
                     this._composerDataService.updateComposerDataSetStore(
-                      e,
+                      composerId,
                       (vr) => vr("isReadingLongFile", !0),
                     )
                   continue
                 }
-                u?.isReadingLongFile &&
+                composerState?.isReadingLongFile &&
                   this._composerDataService.updateComposerDataSetStore(
-                    e,
-                    (vr) => vr("isReadingLongFile", !1),
+                    composerId,
+                    (state) => state("isReadingLongFile", !1),
                   )
-                const pn = (vr) => {
-                  ;(Zh += vr),
-                    (Ri += vr),
+                const updateText = (text) => {
+                  ;(currentBubbleText += text),
+                    (responseText += text),
                     this._composerDataService.updateComposerDataSetStore(
-                      e,
-                      (qr) =>
-                        qr(
+                      composerId,
+                      (state) =>
+                        state(
                           "conversation",
-                          (Dn) => Dn.bubbleId === o0,
+                          (bubble) => bubble.bubbleId === bubbleId,
                           "text",
-                          Zh,
+                          currentBubbleText,
                         ),
                     )
                 }
-                if (Qg) {
-                  const vr = r0 + a0
-                  if (Zh.includes(vr)) {
-                    r0 = vr
+                if (isResuming) {
+                  const combinedText = resumeText + text
+                  if (currentBubbleText.includes(combinedText)) {
+                    resumeText = combinedText
                     continue
-                  } else if (r0 !== "") {
-                    const qr = Zh.lastIndexOf(r0),
-                      Dn = Zh.slice(qr + r0.length)
-                    let Pi = a0
-                    a0.startsWith(Dn)
-                      ? (Pi = a0.slice(Dn.length))
-                      : (Zh = Zh.slice(0, qr + r0.length)),
-                      pn(Pi),
-                      (Qg = !1)
+                  } else if (resumeText !== "") {
+                    const lastIndex = currentBubbleText.lastIndexOf(resumeText),
+                      remainingText = currentBubbleText.slice(lastIndex + resumeText.length)
+                    let newText = text
+                    text.startsWith(remainingText)
+                      ? (newText = text.slice(remainingText.length))
+                      : (currentBubbleText = currentBubbleText.slice(0, lastIndex + resumeText.length)),
+                      updateText(newText),
+                      (isResuming = !1)
                     continue
                   } else {
-                    let qr = ""
-                    for (let Dn = 0; Dn < Zh.length; Dn++) {
-                      let Pi = Zh.slice(-Dn - 1)
-                      if (a0.startsWith(Pi)) qr = Pi
+                    let matchedText = ""
+                    for (let i = 0; i < currentBubbleText.length; i++) {
+                      let partialText = currentBubbleText.slice(-i - 1)
+                      if (text.startsWith(partialText)) matchedText = partialText
                       else break
                     }
-                    pn(a0.slice(qr.length)), (Qg = !1)
+                    updateText(text.slice(matchedText.length)), (isResuming = !1)
                     continue
                   }
-                  Qg = !1
-                } else pn(a0)
+                  isResuming = !1
+                } else updateText(text)
               }
-              ;(g = !0), (this._recentlyResumed = !1)
-            } catch ($s) {
+              ;(isComplete = !0), (this._recentlyResumed = !1)
+            } catch (error) {
               if (
-                (console.error("[composer] Error in AI response:", $s),
-                $s instanceof Ag && !this._recentlyResumed)
+                (console.error("[composer] Error in AI response:", error),
+                error instanceof Ag && !this._recentlyResumed)
               ) {
-                const Ss = vD($s)
+                const Ss = vD(error)
                 if (Ss && Ss.error === no.TIMEOUT) {
-                  ;(this._recentlyResumed = !0), this.resumeChat(e, s)
+                  ;(this._recentlyResumed = !0), this.resumeChat(composerId, options)
                   return
                 }
               }
               ;(this._recentlyResumed = !1),
-                (d = !0),
-                this._composerDataService.setGeneratingCodeBlocksToAborted(e),
-                this._composerDataService.setGeneratingCapabilitiesToAborted(e),
+                (hasError = !0),
+                this._composerDataService.setGeneratingCodeBlocksToAborted(composerId),
+                this._composerDataService.setGeneratingCapabilitiesToAborted(composerId),
                 this._composerDataService.setGeneratingCapabilityCodeBlocksToAborted(
-                  e,
+                  composerId,
                 ),
-                S($s)
+                handleError(error)
             }
           })()
-      } catch (k) {
-        ;(d = !0),
-          console.error("[composer] submitChatMaybeAbortCurrent errored!", k)
+      } catch (error) {
+        ;(hasError = !0),
+          console.error("[composer] submitChatMaybeAbortCurrent errored!", error)
       } finally {
-        const k = h.signal.aborted || u?.status === "aborted"
-        v && k && this.handleAbortChat(e, v.bubbleId),
-          !p && !k && S(new Ag("No response from model")),
-          m && this._composerUtilsService.abortGenerationUUID(m)
-        let E
-        const I = []
-        if (y) {
-          const N = u.conversation.findIndex((R) => R.bubbleId === y.bubbleId)
-          for (let R = N; R > -1 && R < u.conversation.length; R++) {
-            const B = u.conversation[R]
-            if (B.type === bn.AI) I.push(B.bubbleId), (E = B.bubbleId)
+        const isAborted = abortController.signal.aborted || composerState?.status === "aborted"
+        humanBubble && isAborted && this.handleAbortChat(composerId, humanBubble.bubbleId),
+          !hasResponse && !isAborted && handleError(new Ag("No response from model")),
+          generationUUID && this._composerUtilsService.abortGenerationUUID(generationUUID)
+        let lastAiBubbleId
+        const aiBubbleIds = []
+        if (aiBubble) {
+          const aiBubbleIndex = composerState.conversation.findIndex((R) => R.bubbleId === aiBubble.bubbleId)
+          for (let i = aiBubbleIndex; i > -1 && i < composerState.conversation.length; i++) {
+            const bubble = composerState.conversation[i]
+            if (bubble.type === bn.AI) aiBubbleIds.push(bubble.bubbleId), (lastAiBubbleId = bubble.bubbleId)
             else break
           }
         }
-        const L = u.conversation.find(
-          (N) => N.type === bn.AI && N.bubbleId === E,
+        const lastAiBubble = composerState.conversation.find(
+          (bubble) => bubble.type === bn.AI && bubble.bubbleId === lastAiBubbleId,
         )
-        L &&
-          L.text === "" &&
-          L?.capabilityType === void 0 &&
-          L.errorDetails === void 0 &&
-          L.serviceStatusUpdate === void 0 &&
-          this._composerDataService.updateComposerDataSetStore(e, (N) =>
-            N("conversation", (R) =>
-              R.filter((B) => B.bubbleId !== L.bubbleId),
+        lastAiBubble &&
+          lastAiBubble.text === "" &&
+          lastAiBubble?.capabilityType === void 0 &&
+          lastAiBubble.errorDetails === void 0 &&
+          lastAiBubble.serviceStatusUpdate === void 0 &&
+          this._composerDataService.updateComposerDataSetStore(composerId, (state) =>
+            state("conversation", (bubbles) =>
+              bubbles.filter((B) => B.bubbleId !== lastAiBubble.bubbleId),
             ),
           )
-        const P =
-          u.chatGenerationUUID !== void 0 &&
-          this.isActiveGeneration(u.chatGenerationUUID)
+        const isActiveGeneration =
+          composerState.chatGenerationUUID !== void 0 &&
+          this.isActiveGeneration(composerState.chatGenerationUUID)
         if (
-          (this._composerDataService.updateComposerData(e, {
+          (this._composerDataService.updateComposerData(composerId, {
             generatingBubbleIds:
-              u?.generatingBubbleIds?.filter((N) => !I.includes(N)) ?? [],
-            chatGenerationUUID: P ? u.chatGenerationUUID : void 0,
+              composerState?.generatingBubbleIds?.filter((N) => !aiBubbleIds.includes(N)) ?? [],
+            chatGenerationUUID: isActiveGeneration ? composerState.chatGenerationUUID : void 0,
           }),
-          this._skipHandleAbortChat.has(e) ||
-            (!g || !p || d || u?.status === "aborted"
+          this._skipHandleAbortChat.has(composerId) ||
+            (!isComplete || !hasResponse || hasError || composerState?.status === "aborted"
               ? (console.error("[composer] Failed to get complete AI response"),
-                u?.conversation.length
+                composerState?.conversation.length
                   ? this._composerDataService.updateComposerDataSetStore(
-                      e,
-                      (N) => N("status", "aborted"),
+                      composerId,
+                      (state) => state("status", "aborted"),
                     )
                   : this._composerDataService.updateComposerDataSetStore(
-                      e,
-                      (N) => N("status", "none"),
+                      composerId,
+                      (state) => state("status", "none"),
                     ))
-              : this._composerDataService.updateComposerDataSetStore(e, (N) =>
-                  N("status", "completed"),
+              : this._composerDataService.updateComposerDataSetStore(composerId, (state) =>
+                  state("status", "completed"),
                 )),
           !this.shouldSkipCapabilities(
-            s?.capabilityProcessesToSkip,
+            options?.capabilityProcessesToSkip,
             "after-submit-chat",
           ) &&
-            u.status !== "aborted" &&
-            E &&
-            v)
+            composerState.status !== "aborted" &&
+            lastAiBubbleId &&
+            humanBubble)
         )
           try {
             await this._composerUtilsService.runCapabilitiesForProcess(
-              e,
+              composerId,
               "after-submit-chat",
               {
-                composerId: e,
-                humanBubbleId: v.bubbleId,
-                aiBubbleId: E,
-                isCapabilityIteration: s?.isCapabilityIteration,
+                composerId: composerId,
+                humanBubbleId: humanBubble.bubbleId,
+                aiBubbleId: lastAiBubbleId,
+                isCapabilityIteration: options?.isCapabilityIteration,
               },
             )
-          } catch (N) {
+          } catch (error) {
             console.error(
               "[composer] error running capabilities for after-submit-chat",
-              N,
+              error,
             ),
-              this._composerDataService.updateComposerDataSetStore(e, (R) =>
-                R("status", "aborted"),
+              this._composerDataService.updateComposerDataSetStore(composerId, (state) =>
+                state("status", "aborted"),
               )
           }
         if (
-          (s?.onFinish?.(),
+          (options?.onFinish?.(),
           this._reactiveStorageService.applicationUserPersistentStorage
             .checklistState?.doneCommandL !== !0)
         ) {
-          const N =
+          const checklistState =
             this._reactiveStorageService.applicationUserPersistentStorage
               .checklistState
           this._reactiveStorageService.setApplicationUserPersistentStorage(
             "checklistState",
-            (R) => ({ ...(R ?? {}), doneCommandL: !0 }),
+            (state) => ({ ...(state ?? {}), doneCommandL: !0 }),
           )
         }
         if (
           this._reactiveStorageService.applicationUserPersistentStorage
             .checklistState?.doneAddingCodeSelection !== !0 &&
-          (w.fileSelections.length > 0 || w.selections.length > 0)
+          (contextUsed.fileSelections.length > 0 || contextUsed.selections.length > 0)
         ) {
-          const N =
+          const checklistState =
             this._reactiveStorageService.applicationUserPersistentStorage
               .checklistState
           this._reactiveStorageService.setApplicationUserPersistentStorage(
             "checklistState",
-            (R) => ({ ...(R ?? {}), doneAddingCodeSelection: !0 }),
+            (state) => ({ ...(state ?? {}), doneAddingCodeSelection: !0 }),
           )
         }
         this.shouldSkipCapabilities(
-          s?.capabilityProcessesToSkip,
+          options?.capabilityProcessesToSkip,
           "composer-settled",
         ) ||
           this._composerEventService.fireMaybeRunOnComposerSettled({
-            composerId: e,
+            composerId: composerId,
           }),
-          await this.renameComposer(e),
-          this.updateComposerSummaryIfOutdated(e),
-          y &&
-            y.timingInfo &&
-            this._composerDataService.updateComposerDataSetStore(e, (N) =>
-              N(
+          await this.renameComposer(composerId),
+          this.updateComposerSummaryIfOutdated(composerId),
+          aiBubble &&
+            aiBubble.timingInfo &&
+            this._composerDataService.updateComposerDataSetStore(composerId, (state) =>
+              state(
                 "conversation",
-                (R) => R.bubbleId === y.bubbleId,
+                (bubble) => bubble.bubbleId === aiBubble.bubbleId,
                 "timingInfo",
-                (R) => {
-                  if (R)
+                (timingInfo) => {
+                  if (timingInfo)
                     return {
-                      ...R,
+                      ...timingInfo,
                       clientSettleTime: Date.now(),
                       clientEndTime: Date.now(),
                     }
