@@ -4,14 +4,14 @@ export function createCodeAction(params) {
   const {Ot, Oc, Q, le, $e, TBr, hn, L7s, Eve, bg, lo, glt, ug, H, w8t, j0, sJt, Xpr, el, uf, pi, Gs, zs, U0, _P, ah, Ln, Am, D, ae, bBr, F, xJ, Au, igt, nJt, aL, SBr, qd, Ubs, Bbs, Jw, Qu, vBr, xBr, R7, Pe, tt, oe, A, kBr, UMt, mBr, $B, yn, wBr, yBr, Oi, CBr, M9, $9, EBr, zc, ect, Pn, IBr, qve, WE, Nl, fPs, PBr, DBr } = params;
 
   function LBr(i) {
-    const e = Ot(),
+    const globalContext = Ot(),
       t = [],
       {
-        composerDataHandle: s,
-        currentComposer: n,
-        updateCurrentComposer: r,
-        composerMode: o,
-        updateComposerModeSetStore: a,
+        composerDataHandle: composerDataHandle,
+        currentComposer: currentComposer,
+        updateCurrentComposer: updateCurrentComposer,
+        composerMode: composerMode,
+        updateComposerModeSetStore: updateComposerModeSetStore,
       } = Oc(() => i.composerDataHandle),
       l = Q(
         () => "unregistered" in i.codeBlock && i.codeBlock.unregistered === !0,
@@ -27,8 +27,8 @@ export function createCodeAction(params) {
       u = Q(() =>
         l()
           ? i.codeBlock
-          : e.composerDataService.getComposerCodeBlock(
-              s(),
+          : globalContext.composerDataService.getComposerCodeBlock(
+              composerDataHandle(),
               i.codeBlock.uri,
               i.codeBlock.version,
             ),
@@ -50,12 +50,12 @@ export function createCodeAction(params) {
     const [w, C] = le(!1),
       [S, x] = le(0),
       [k] = le(Math.min(220, y())),
-      E = Q(() => n().composerId),
+      E = Q(() => currentComposer().composerId),
       I = Q(() =>
         i.forceStatus
           ? i.forceStatus
           : i.codeBlock.uri
-            ? (e.composerDataService.getCodeBlockStatus(
+            ? (globalContext.composerDataService.getCodeBlockStatus(
                 E(),
                 i.codeBlock.uri,
                 i.codeBlock.version,
@@ -81,7 +81,7 @@ export function createCodeAction(params) {
       }),
       N = Q(() =>
         i.codeBlock.uri
-          ? e.composerDataService.getLatestCodeBlockVersion(
+          ? globalContext.composerDataService.getLatestCodeBlockVersion(
               E(),
               i.codeBlock.uri,
               { excludeNonAppliedCodeBlocks: !0 },
@@ -91,7 +91,7 @@ export function createCodeAction(params) {
       R = Q(() =>
         l()
           ? 0
-          : (e.composerDataService.getVersionExcludingNonAppliedCodeBlocks(
+          : (globalContext.composerDataService.getVersionExcludingNonAppliedCodeBlocks(
               E(),
               i.codeBlock.uri,
               i.codeBlock.version,
@@ -100,13 +100,13 @@ export function createCodeAction(params) {
       B = Q(() =>
         l()
           ? "none"
-          : (e.composerDataService.getCodeBlockStatus(
+          : (globalContext.composerDataService.getCodeBlockStatus(
               E(),
               i.codeBlock.uri,
               i.codeBlock.version,
             ) ?? "none"),
       ),
-      W = Eve(bg, e.themeService),
+      W = Eve(bg, globalContext.themeService),
       G = { height: "16px", padding: "0px 3px" }
     let te,
       re,
@@ -178,7 +178,7 @@ export function createCodeAction(params) {
       xi.keyCode === 9 &&
         (xi.preventDefault(),
         p(!0),
-        e.analyticsService.trackEvent("composer.code_block.collapse", {
+        globalContext.analyticsService.trackEvent("composer.code_block.collapse", {
           source: "escape",
         }))
     }
@@ -186,11 +186,11 @@ export function createCodeAction(params) {
       if (te) {
         const xi = glt
         if (
-          ((Z = e.instantiationService.createInstance(
+          ((Z = globalContext.instantiationService.createInstance(
             ug,
             te,
             {
-              ...ug.getEditorOptions(e.configurationService),
+              ...ug.getEditorOptions(globalContext.configurationService),
               hover: { enabled: !0 },
               renderValidationDecorations: "on",
               fontSize: xi,
@@ -207,13 +207,13 @@ export function createCodeAction(params) {
           Z)
         ) {
           t.push(Z), Ye(!0)
-          const Bi = e.languageService.createByLanguageNameOrFilepathOrFirstLine(
+          const Bi = globalContext.languageService.createByLanguageNameOrFilepathOrFirstLine(
               i.languageAlias ?? "",
               u()?.uri ?? null,
               void 0,
             ),
             ls = H.parse(`composer-code-block-anysphere://${w8t()}`)
-          ;(ve = e.modelService.createModel("", Bi, ls, !0)),
+          ;(ve = globalContext.modelService.createModel("", Bi, ls, !0)),
             ve && t.push(ve),
             Z.setModel(ve),
             ut()
@@ -228,7 +228,7 @@ export function createCodeAction(params) {
         const ls = u()
         return !i.codeBlock.uri || !ls.isNotApplied
           ? []
-          : e.applyToFileActionsService.getImportantSymbolsDefinedInCodeblockThatExistInURICanThrowIfExtHostIsNotReady(
+          : globalContext.applyToFileActionsService.getImportantSymbolsDefinedInCodeblockThatExistInURICanThrowIfExtHostIsNotReady(
               i.codeBlock.uri,
               xi.getValue(),
             )
@@ -242,7 +242,7 @@ export function createCodeAction(params) {
       [ft, Ri] = le(!1)
     $e(() => {
       l() ||
-        e.fileService.exists(i.codeBlock.uri).then((xi) => {
+        globalContext.fileService.exists(i.codeBlock.uri).then((xi) => {
           Ri(!xi)
         })
     })
@@ -282,13 +282,13 @@ export function createCodeAction(params) {
         l() || !u()
           ? null
           : Bi
-            ? e.composerUtilsService.getCodeBlockNewModelLines(
-                s(),
+            ? globalContext.composerUtilsService.getCodeBlockNewModelLines(
+                composerDataHandle(),
                 i.codeBlock.uri,
                 xi,
               )
-            : e.composerUtilsService.getCodeBlockOriginalModelLines(
-                s(),
+            : globalContext.composerUtilsService.getCodeBlockOriginalModelLines(
+                composerDataHandle(),
                 i.codeBlock.uri,
                 xi,
               ),
@@ -349,13 +349,13 @@ export function createCodeAction(params) {
             Xe()
             const Bi = glt
             if (
-              ((he = e.instantiationService.createInstance(
+              ((he = globalContext.instantiationService.createInstance(
                 uf,
                 re,
                 {
                   fontFamily:
-                    e.configurationService.getValue("editor.fontFamily"),
-                  fontLigatures: e.configurationService.getValue(
+                    globalContext.configurationService.getValue("editor.fontFamily"),
+                  fontLigatures: globalContext.configurationService.getValue(
                     "editor.fontLigatures",
                   ),
                   renderSideBySide: !1,
@@ -393,7 +393,7 @@ export function createCodeAction(params) {
               throw new Error("Failed to create diff editor")
             t.push(he), Ye(!0)
             const ls =
-                e.languageService.createByLanguageNameOrFilepathOrFirstLine(
+                globalContext.languageService.createByLanguageNameOrFilepathOrFirstLine(
                   "",
                   xi.uri ?? null,
                   void 0,
@@ -403,12 +403,12 @@ export function createCodeAction(params) {
               Sa = $s(i.codeBlock.version, !1),
               Df = $s(i.codeBlock.version),
               Xy = Ss()
-            ;(pe = e.modelService.createModel(Sa?.join(Xy) ?? "", ls, Kn, !0)),
+            ;(pe = globalContext.modelService.createModel(Sa?.join(Xy) ?? "", ls, Kn, !0)),
               pe.setEOL(vt(Xy))
             let wI = !1
             if (
               (pe ? t.push(pe) : (wI = !0),
-              (ge = e.modelService.createModel(Df?.join(Xy) ?? "", ls, Ho, !0)),
+              (ge = globalContext.modelService.createModel(Df?.join(Xy) ?? "", ls, Ho, !0)),
               ge.setEOL(vt(Xy)),
               ge ? t.push(ge) : (wI = !0),
               wI)
@@ -474,7 +474,7 @@ export function createCodeAction(params) {
     const ma = Q(() =>
         l()
           ? !1
-          : e.composerService.shouldShowAcceptReject(
+          : globalContext.composerService.shouldShowAcceptReject(
               E(),
               i.codeBlock.uri,
               i.codeBlock.version,
@@ -493,7 +493,7 @@ export function createCodeAction(params) {
       Vt = () => {
         Z &&
           ve &&
-          (e.clipboardService.writeText(ve.getValue()),
+          (globalContext.clipboardService.writeText(ve.getValue()),
           qe(!1),
           setTimeout(() => qe(!0), 2e3))
       },
@@ -501,7 +501,7 @@ export function createCodeAction(params) {
         const xi = u()?.content
         return !xi || l()
           ? !1
-          : await e.applyToFileActionsService.isEntryCached(
+          : await globalContext.applyToFileActionsService.isEntryCached(
               i.codeBlock.uri,
               xi,
               _P,
@@ -511,7 +511,7 @@ export function createCodeAction(params) {
       Fs = async (xi) => {
         xi.stopPropagation()
         const Bi = xi.currentTarget.getBoundingClientRect()
-        e.analyticsService.trackEvent("composer.code_block.apply")
+        globalContext.analyticsService.trackEvent("composer.code_block.apply")
         const ls = us()
         if (ls.length !== 0) {
           if (ls.length === 1 || (await wi())) {
@@ -527,11 +527,11 @@ export function createCodeAction(params) {
       },
       Zi = async (xi) => {
         const Bi = xi.applyToCurrentFile
-          ? e.editorService.activeEditor?.resource
+          ? globalContext.editorService.activeEditor?.resource
           : xi.uri
         if (
           Bi !== void 0 &&
-          e.selectedContextService.shouldBlockUriFromReading(Bi)
+          globalContext.selectedContextService.shouldBlockUriFromReading(Bi)
         ) {
           Ei(!0)
           return
@@ -546,7 +546,7 @@ export function createCodeAction(params) {
             console.error("[composer] No bubble ID")
             return
           }
-          e.composerApplyService.registerAndApplyUnregisteredCodeBlock(
+          globalContext.composerApplyService.registerAndApplyUnregisteredCodeBlock(
             E(),
             i.bubbleId,
             i.codeBlock.codeBlockIdx,
@@ -562,13 +562,13 @@ export function createCodeAction(params) {
                 endLineNumber: xi.symbol?.range.endLineNumber || 1,
                 endColumn: xi.symbol?.range.endColumn || 1,
               })
-              e.openerService?.open(Kn)
+              globalContext.openerService?.open(Kn)
             } else {
-              const Kn = e.editorService.findEditors(xi.uri)
+              const Kn = globalContext.editorService.findEditors(xi.uri)
               if (Kn.length > 0) {
-                const Ho = e.editorGroupService.getGroup(Kn[0].groupId)
-                e.editorService.openEditor(Kn[0].editor, Ho)
-              } else await e.openerService?.open(xi.uri)
+                const Ho = globalContext.editorGroupService.getGroup(Kn[0].groupId)
+                globalContext.editorService.openEditor(Kn[0].editor, Ho)
+              } else await globalContext.openerService?.open(xi.uri)
             }
           let ls
           xi.symbol?.range &&
@@ -576,7 +576,7 @@ export function createCodeAction(params) {
               xi.symbol.range.startLineNumber,
               xi.symbol.range.endLineNumber + 1,
             )),
-            e.composerApplyService.applyCachedCodeBlock(
+            globalContext.composerApplyService.applyCachedCodeBlock(
               E(),
               xi.uri,
               i.codeBlock.version,
@@ -609,10 +609,10 @@ export function createCodeAction(params) {
         const xi = u()
         if (!xi) return !1
         const ls =
-            (n().codeBlockData[i.codeBlock.uri.toString()] ?? []).findIndex(
+            (currentComposer().codeBlockData[i.codeBlock.uri.toString()] ?? []).findIndex(
               (Ho) => Ho.status === "completed",
             ) === xi.version,
-          Kn = n().newlyCreatedFiles.some(
+          Kn = currentComposer().newlyCreatedFiles.some(
             (Ho) => Ho.uri.toString() === i.codeBlock.uri.toString(),
           )
         return ls && Kn
@@ -728,7 +728,7 @@ export function createCodeAction(params) {
       Rh = aL(),
       Zh = Q(() => {
         if (!l())
-          return e.composerDataService.getInlineDiff(
+          return globalContext.composerDataService.getInlineDiff(
             E(),
             i.codeBlock.uri,
             i.codeBlock.version,
@@ -748,9 +748,9 @@ export function createCodeAction(params) {
           return { count: i.linterErrors.length, errors: i.linterErrors }
       }),
       [pn, vr, qr] = j0(),
-      Dn = Q(() => n().turnOffAutoFixing),
+      Dn = Q(() => currentComposer().turnOffAutoFixing),
       Pi = Q(() => {
-        const xi = o()?.autoFix,
+        const xi = composerMode()?.autoFix,
           Bi = Dn()
         return xi && !Bi ? "Auto-fix" : "Auto-fix off"
       }),
@@ -765,10 +765,10 @@ export function createCodeAction(params) {
           ls = i.codeBlock.version
         Bi === void 0 ||
           ls === void 0 ||
-          (e.composerDataService.updateComposerCodeBlock(E(), Bi, ls, {
+          (globalContext.composerDataService.updateComposerCodeBlock(E(), Bi, ls, {
             codeBlockDisplayPreference: xi,
           }),
-          e.reactiveStorageService.setApplicationUserPersistentStorage(
+          globalContext.reactiveStorageService.setApplicationUserPersistentStorage(
             "composerState",
             "codeBlockDisplayPreference",
             xi,
@@ -787,14 +787,14 @@ export function createCodeAction(params) {
           const Kn = i.codeBlock
           Kn.filePath &&
             Kn.clickableRange &&
-            ((xi = e.workspaceContextService.resolveRelativePath(Kn.filePath)),
+            ((xi = globalContext.workspaceContextService.resolveRelativePath(Kn.filePath)),
             (Bi = Kn.clickableRange.startLine),
             (ls = Kn.clickableRange.endLine))
         }
         if (xi) {
           let Kn
           try {
-            Kn = await e.textModelService.createModelReference(xi)
+            Kn = await globalContext.textModelService.createModelReference(xi)
             const Ho = Kn.object,
               Sa = {
                 selection: {
@@ -806,7 +806,7 @@ export function createCodeAction(params) {
                 preserveFocus: !1,
                 revealIfOpened: !0,
               }
-            await e.editorService.openEditor({ resource: xi, options: Sa })
+            await globalContext.editorService.openEditor({ resource: xi, options: Sa })
           } catch (Ho) {
             console.error("[composer] Error opening clickable codeblock:", Ho)
           } finally {
@@ -845,7 +845,7 @@ export function createCodeAction(params) {
                 endLineNumber: i.clickableOptions.endLine,
                 endColumn: 1,
               })
-              e.openerService.open(Tn, {
+              globalContext.openerService.open(Tn, {
                 openToSide: !1,
                 editorOptions: {
                   revealIfVisible: !0,
@@ -858,7 +858,7 @@ export function createCodeAction(params) {
             }
             const Un = l()
               ? void 0
-              : e.composerDataService.getInlineDiff(
+              : globalContext.composerDataService.getInlineDiff(
                   E(),
                   i.codeBlock.uri,
                   i.codeBlock.version,
@@ -883,13 +883,13 @@ export function createCodeAction(params) {
                     },
                     text: "",
                   },
-                  e.workspaceContextService,
-                  e.openerService,
+                  globalContext.workspaceContextService,
+                  globalContext.openerService,
                 )
                 return
               }
             }
-            l() || Bbs(i.codeBlock.uri, e.fileService, e.openerService, Rr.altKey)
+            l() || Bbs(i.codeBlock.uri, globalContext.fileService, globalContext.openerService, Rr.altKey)
           }),
           ls.style.setProperty("display", "flex"),
           ls.style.setProperty("align-items", "center"),
@@ -947,13 +947,13 @@ export function createCodeAction(params) {
                           : P()
                       },
                       get workspaceContextService() {
-                        return e.workspaceContextService
+                        return globalContext.workspaceContextService
                       },
                       get modelService() {
-                        return e.modelService
+                        return globalContext.modelService
                       },
                       get languageService() {
-                        return e.languageService
+                        return globalContext.languageService
                       },
                       get languageId() {
                         return l() ? i.codeBlock.languageId : void 0
@@ -971,7 +971,7 @@ export function createCodeAction(params) {
             l() ||
               Ne(
                 Rr,
-                e.labelService.getUriLabel(i.codeBlock.uri, { relative: !0 }),
+                globalContext.labelService.getUriLabel(i.codeBlock.uri, { relative: !0 }),
               )
           }),
           Kn.style.setProperty("line-height", "120%"),
@@ -1361,7 +1361,7 @@ export function createCodeAction(params) {
                     return (
                       Rr.addEventListener("click", () => {
                         p(!d()),
-                          e.analyticsService.trackEvent(
+                          globalContext.analyticsService.trackEvent(
                             d()
                               ? "composer.code_block.expand"
                               : "composer.code_block.collapse",
@@ -1388,7 +1388,7 @@ export function createCodeAction(params) {
                       Rr.addEventListener("click", (Un) => {
                         Un.stopPropagation(),
                           Un.stopImmediatePropagation(),
-                          e.analyticsService.trackEvent(
+                          globalContext.analyticsService.trackEvent(
                             d()
                               ? "composer.code_block.expand"
                               : "composer.code_block.collapse",
@@ -1767,7 +1767,7 @@ export function createCodeAction(params) {
         children: (xi) =>
           D(qve, {
             get reactiveCloser() {
-              return e.reactiveStorageService.nonPersistentStorage
+              return globalContext.reactiveStorageService.nonPersistentStorage
                 .forceComposerDropdownRerender
             },
             width: 180,
@@ -1783,30 +1783,30 @@ export function createCodeAction(params) {
                     {
                       id: "composer-message-codeblock-auto-fix",
                       title: "Auto-fix",
-                      showType: o()?.autoFix && !Dn() ? "check" : void 0,
+                      showType: composerMode()?.autoFix && !Dn() ? "check" : void 0,
                       onClick: () => {
-                        e.composerModesService.setComposerAutoFix(s(), !0),
-                          r({ turnOffAutoFixing: !1 }),
+                        globalContext.composerModesService.setComposerAutoFix(composerDataHandle(), !0),
+                          updateCurrentComposer({ turnOffAutoFixing: !1 }),
                           qr()
                       },
                     },
                     {
                       id: "composer-message-codeblock-fix-manually",
                       title: "Fix manually for this chat",
-                      showType: o()?.autoFix && Dn() ? "check" : void 0,
+                      showType: composerMode()?.autoFix && Dn() ? "check" : void 0,
                       onClick: () => {
-                        e.composerModesService.setComposerAutoFix(s(), !0),
-                          r({ turnOffAutoFixing: !0 }),
+                        globalContext.composerModesService.setComposerAutoFix(composerDataHandle(), !0),
+                          updateCurrentComposer({ turnOffAutoFixing: !0 }),
                           qr()
                       },
                     },
                     {
                       id: "composer-message-codeblock-always-fix-manually",
                       title: "Always fix manually",
-                      showType: o()?.autoFix ? void 0 : "check",
+                      showType: composerMode()?.autoFix ? void 0 : "check",
                       onClick: () => {
-                        e.composerModesService.setComposerAutoFix(s(), !1),
-                          r({ turnOffAutoFixing: !0 }),
+                        globalContext.composerModesService.setComposerAutoFix(composerDataHandle(), !1),
+                          updateCurrentComposer({ turnOffAutoFixing: !0 }),
                           qr()
                       },
                     },
@@ -1829,7 +1829,7 @@ export function createCodeAction(params) {
             },
             close: Ct,
             get reactiveCloser() {
-              return e.reactiveStorageService.nonPersistentStorage
+              return globalContext.reactiveStorageService.nonPersistentStorage
                 .forceComposerDropdownRerender
             },
             anchor: "top-right",
@@ -1868,7 +1868,7 @@ export function createCodeAction(params) {
                           const Kn = Q(() => {
                               const Sa = ls.applyToCurrentFile ? Rt() : ls.uri
                               return Sa
-                                ? e.workspaceContextService.asRelativePath(Sa)
+                                ? globalContext.workspaceContextService.asRelativePath(Sa)
                                 : "Current file"
                             }),
                             Ho = ls.symbol ? ` (${ls.symbol.name})` : ""
@@ -1923,13 +1923,13 @@ export function createCodeAction(params) {
                                                 return Kn()
                                               },
                                               get workspaceContextService() {
-                                                return e.workspaceContextService
+                                                return globalContext.workspaceContextService
                                               },
                                               get modelService() {
-                                                return e.modelService
+                                                return globalContext.modelService
                                               },
                                               get languageService() {
-                                                return e.languageService
+                                                return globalContext.languageService
                                               },
                                             })
                                           },
