@@ -1138,7 +1138,7 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
         (this._latestSubmitWarmCacheRequestTimes = []),
         (this._recentTimeWindow = 60 * 1e3),
         (this._maxRecentRequests = 10),
-        (this._recentlyResumed = !1),
+        (this._recentlyResumed = false),
         (this._skipHandleAbortChat = new Set()),
         (this._chatClient = this._instantiationService.createInstance(_d, {
           service: Tat,
@@ -1154,15 +1154,15 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
       }
       this._reactiveStorageService.setNonPersistentStorage(
         "showReportFeedbackModal",
-        void 0,
+        undefined,
       )
       const mode = this._composerModesService.getComposerUnifiedMode(composerId),
         thinkingLevel = this._composerModesService.getModeThinkingLevel(mode),
         modelDetails = this.getModelDetails(mode)
       options?.modelOverride && (modelDetails.modelName = options.modelOverride)
-      const isChat = (mode === "chat" || options?.isChat) ?? !1
+      const isChat = (mode === "chat" || options?.isChat) ?? false
       let isAgentic =
-        modelDetails.modelName === void 0 ||
+        modelDetails.modelName === undefined ||
         this._aiSettingsService.doesModelSupportAgent(modelDetails.modelName)
       options = {
         capabilityProcessesToSkip: isChat
@@ -1210,9 +1210,9 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
           return
         }
       let abortController = new AbortController(),
-        hasError = !1,
-        isComplete = !1,
-        hasResponse = !1,
+        hasError = false,
+        isComplete = false,
+        hasResponse = false,
         generationUUID = Mt(),
         humanBubble,
         aiBubble,
@@ -1246,7 +1246,7 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
                   ? () => {
                       this.resumeChat(composerId, options)
                     }
-                  : void 0,
+                  : undefined,
               }),
             )
           }
@@ -1264,7 +1264,7 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
           jt("status", "generating"),
         ),
           this._composerDataService.updateComposerDataSetStore(composerId, (jt) =>
-            jt("editingBubbleId", void 0),
+            jt("editingBubbleId", undefined),
           ),
           this._composerUtilsService.clearErrorDetailsAndServiceStatusUpdatesFromLatestAIMessages(
             composerId,
@@ -1294,9 +1294,9 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
           (checkpointCallback = await this._composerCheckpointService.createCheckoutCallback(
             composerId,
             options.bubbleId,
-            { skipDialog: !0, fromSubmitChat: !0 },
+            { skipDialog: true, fromSubmitChat: true },
           ))
-        let isHumanBubble = !1
+        let isHumanBubble = false
         if (options?.bubbleId) {
           const bubbleId = options.bubbleId ?? composerState.currentBubbleId,
             bubble = this._composerDataService.getComposerBubble(composerId, bubbleId),
@@ -1304,8 +1304,8 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
           if (!bubble) throw Error("[composer] current bubble is undefined")
           let nextBubbleId
           bubble.type === bn.HUMAN
-            ? ((nextBubbleId = bubbleIndex !== -1 ? composerState.conversation[bubbleIndex + 1]?.bubbleId : void 0),
-              (isHumanBubble = !0))
+            ? ((nextBubbleId = bubbleIndex !== -1 ? composerState.conversation[bubbleIndex + 1]?.bubbleId : undefined),
+              (isHumanBubble = true))
             : (nextBubbleId = bubbleId)
           const subsequentBubbles = composerState.conversation.slice(bubbleIndex + 1),
             previousBubbles = composerState.conversation.slice(0, bubbleIndex),
@@ -1314,9 +1314,9 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
                 composerId,
                 xn.TOOL_FORMER,
               )
-              if (!Cr) return !1
+              if (!Cr) return false
               const ma = Cr.getBubbleData(Js.bubbleId)
-              return ma ? ma.tool === Et.RUN_TERMINAL_COMMAND_V2 : !1
+              return ma ? ma.tool === Et.RUN_TERMINAL_COMMAND_V2 : false
             },
             hasSubsequentTerminalCommand = subsequentBubbles.some(isTerminalCommand),
             hasPreviousTerminalCommand = previousBubbles.some(isTerminalCommand)
@@ -1336,7 +1336,7 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
                   existedPreviousTerminalCommand: hasPreviousTerminalCommand,
                   humanChanges: humanChanges,
                   attachedHumanChanges: composerState.context.useRecentChanges,
-                  skipRendering: !1,
+                  skipRendering: false,
                 }),
                 console.log(
                   `[composer.submitChat] Time between function start and adding human message: ${Date.now() - n}ms`,
@@ -1375,8 +1375,8 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
         if (
           (options?.isCapabilityIteration ||
             (isResume && this._composerUtilsService.clearText(composerId),
-            this._composerViewsService.focus(composerId, !0)),
-          options?.bubbleId !== void 0)
+            this._composerViewsService.focus(composerId, true)),
+          options?.bubbleId !== undefined)
         ) {
           const bubble = this._composerDataService.getComposerBubble(composerId, options.bubbleId)
           if (bubble && bubble.context) {
@@ -1389,15 +1389,15 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
           }
         }
         this._composerDataService.updateComposerDataSetStore(composerId, (jt) =>
-          jt("currentBubbleId", void 0),
+          jt("currentBubbleId", undefined),
         ),
           this._composerDataService.updateComposerDataSetStore(composerId, (jt) =>
-            jt("latestCheckpoint", void 0),
+            jt("latestCheckpoint", undefined),
           )
         const updatedContext = {
           ...context,
           usesCodebase:
-            context.usesCodebase !== void 0 && context.usesCodebase !== !1
+            context.usesCodebase !== undefined && context.usesCodebase !== false
               ? context
               : options?.usesCodebase,
           useDiffReview: context.useDiffReview ?? options?.useDiffReview,
@@ -1410,10 +1410,10 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
           this._composerContextService.removeAllListContext({
             composerId: composerId,
             contextType: "fileSelections",
-            addToUndoRedo: !1,
+            addToUndoRedo: false,
           })
           const currentFile = this._composerUtilsService.getCurrentFile()
-          currentFile !== void 0 &&
+          currentFile !== undefined &&
             context.fileSelections.some(
               ($s) => vv("fileSelections", $s) === vv("fileSelections", currentFile),
             ) &&
@@ -1456,14 +1456,14 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
           ((contextUsed = { ...updatedContext, fileSelections: validFiles }),
           (isAgentic || contextUsed.usesCodebase) &&
             this._reactiveStorageService.applicationUserPersistentStorage
-              .checklistState?.doneCommandEnter !== !0)
+              .checklistState?.doneCommandEnter !== true)
         ) {
           const checklistState =
             this._reactiveStorageService.applicationUserPersistentStorage
               .checklistState
           this._reactiveStorageService.setApplicationUserPersistentStorage(
             "checklistState",
-            ($s) => ({ ...($s ?? {}), doneCommandEnter: !0 }),
+            ($s) => ({ ...($s ?? {}), doneCommandEnter: true }),
           )
         }
         if (
@@ -1497,7 +1497,7 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
         if (composerState.chatGenerationUUID) {
           const chatGenerationUUID = composerState.chatGenerationUUID
           this._composerDataService.updateComposerDataSetStore(composerId, ($s) =>
-            $s("chatGenerationUUID", void 0),
+            $s("chatGenerationUUID", undefined),
           ),
             this._skipHandleAbortChat.add(composerId),
             this._composerUtilsService.abortGenerationUUID(chatGenerationUUID),
@@ -1524,7 +1524,7 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
           })
         const lastBubble = composerState.conversation.at(-1),
           isResumingAiBubble =
-            options?.isResume && lastBubble?.type === bn.AI && lastBubble?.capabilityType === void 0
+            options?.isResume && lastBubble?.type === bn.AI && lastBubble?.capabilityType === undefined
         if (isResumingAiBubble) {
           if (!lastBubble)
             throw new Error(
@@ -1627,7 +1627,7 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
                 ),
               ],
               multiFileLinterErrors: [
-                ...linterErrors.map(($s) => new Tp({ ...$s, fileContents: void 0 })),
+                ...linterErrors.map(($s) => new Tp({ ...$s, fileContents: undefined })),
               ],
               humanChanges: humanChanges,
               attachedHumanChanges: updatedContext.useRecentChanges,
@@ -1641,7 +1641,7 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
         const lastConversationSummary = [...conversationCopy]
             .reverse()
             .map((jt) => jt.conversationSummary)
-            .filter((jt) => jt !== void 0)[0],
+            .filter((jt) => jt !== undefined)[0],
           startSendingFromBubbleId = lastConversationSummary?.clientShouldStartSendingFromInclusiveBubbleId
         let startIndex = startSendingFromBubbleId
           ? conversationCopy.findIndex((jt) => (jt.serverBubbleId ?? jt.bubbleId) === startSendingFromBubbleId)
@@ -1696,11 +1696,11 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
                     composerState,
                     mode,
                   ),
-                isMcpEnabled = this._composerModesService.getMode(mode)?.mcpEnabled ?? !1,
+                isMcpEnabled = this._composerModesService.getMode(mode)?.mcpEnabled ?? false,
                 shouldDisableTools = !isAgentic
               let shouldForceNotApply
               availableTools.includes(Et.EDIT_FILE)
-                ? (shouldForceNotApply = !0)
+                ? (shouldForceNotApply = true)
                 : (shouldForceNotApply =
                     !this._composerModesService.getModeShouldAutoApplyIfNoEditTool(
                       mode,
@@ -1715,16 +1715,16 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
                     serverBubbleId: ql.serverBubbleId,
                   })),
                   conversationSummary: lastConversationSummary,
-                  allowLongFileScan: !0,
+                  allowLongFileScan: true,
                   explicitContext: await this._aiService.getExplicitContext(mode),
                   documentationIdentifiers: (contextUsed.selectedDocs ?? []).map(
                     (ql) => ql.docId,
                   ),
                   quotes: contextUsed.quotes ?? [],
-                  canHandleFilenamesAfterLanguageIds: !0,
+                  canHandleFilenamesAfterLanguageIds: true,
                   modelDetails: modelDetails,
                   multiFileLinterErrors: [],
-                  useWeb: contextUsed.useWeb ? "full_search" : void 0,
+                  useWeb: contextUsed.useWeb ? "full_search" : undefined,
                   externalLinks: contextUsed.externalLinks ?? [],
                   diffsForCompressingFiles: [],
                   shouldCache:
@@ -1732,9 +1732,9 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
                       .applicationUserPersistentStorage.cacheComposerPrompts,
                   currentFile: currentFileInfo,
                   fileDiffHistories: [],
-                  useNewCompressionScheme: !0,
+                  useNewCompressionScheme: true,
                   additionalRankedContext: [],
-                  isChat: !1,
+                  isChat: false,
                   conversationId: composerState.composerId,
                   repositoryInfo: repositoryInfo,
                   repositoryInfoShouldQueryStaging: this._cursorCredsService
@@ -1748,7 +1748,7 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
                       .getBackendUrl()
                       .includes("cursor.sh"),
                   repoQueryAuthToken: "",
-                  isHeadless: !1,
+                  isHeadless: false,
                   environmentInfo: environmentInfoResult,
                   isAgentic: isAgentic,
                   linterErrors:
@@ -1758,15 +1758,15 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
                           this._workspaceContextService,
                           this._aiService,
                         )
-                      : void 0,
+                      : undefined,
                   supportedTools: availableTools,
                   enableYoloMode:
-                    this._composerModesService.getModeAutoRun(mode) ?? !1,
+                    this._composerModesService.getModeAutoRun(mode) ?? false,
                   yoloPrompt:
                     this._reactiveStorageService
                       .applicationUserPersistentStorage.composerState
                       .yoloPrompt ?? "",
-                  useUnifiedChatPrompt: !1,
+                  useUnifiedChatPrompt: false,
                   mcpTools: isMcpEnabled
                     ? await this._mcpService.getToolsForComposer()
                     : [],
@@ -1789,7 +1789,7 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
                   thinkingLevel: this.getThinkingLevel(thinkingLevel),
                   shouldUseChatPrompt: shouldUseChatPrompt,
                   usesRules: await this._cursorRulesService
-                    .getRules({ requireDescription: !0 })
+                    .getRules({ requireDescription: true })
                     .then((ql) => ql.length > 0),
                 }
               console.log("[composer] composerChatRequest", chatRequest)
@@ -1839,12 +1839,12 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
                   allFiles: chatRequest.usesCodebaseResults.allFiles,
                 }))
               let responseStream
-              if (capabilityError !== void 0)
+              if (capabilityError !== undefined)
                 responseStream = (async function* () {
                   throw capabilityError
                 })()
               else {
-                const streamRequest = new djt(void 0)
+                const streamRequest = new djt(undefined)
                 streamRequest.push(
                   new $O({
                     request: { case: "streamUnifiedChatRequest", value: chatRequest },
@@ -1896,8 +1896,8 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
                   streamerURL:
                     xu.typeName + "/" + xu.methods.streamComposer.name,
                   source: "composer",
-                  rethrowCancellation: !0,
-                  failSilently: !1,
+                  rethrowCancellation: true,
+                  failSilently: false,
                 }),
                 processedResponse = await this._composerUtilsService.runCapabilitiesForProcess(
                   composerId,
@@ -1915,7 +1915,7 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
                 fakeStreamerId =
                   this._reactiveStorageService.applicationUserPersistentStorage
                     .composerState.selectedFakeStreamerId,
-                fakeStreamer = fakeStreamerId ? sdr.find((ql) => ql.id === fakeStreamerId) : void 0,
+                fakeStreamer = fakeStreamerId ? sdr.find((ql) => ql.id === fakeStreamerId) : undefined,
                 finalResponse = fakeStreamer ? Hhr(fakeStreamer)() : processedResponse,
                 codeBlocks = this._composerApplyService.processCodeBlocks(composerId, finalResponse, {
                   skipOnSettled: this.shouldSkipCapabilities(
@@ -1923,7 +1923,7 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
                     "composer-settled",
                   ),
                   isCapabilityIteration: options?.isCapabilityIteration,
-                  passTimingInfo: !0,
+                  passTimingInfo: true,
                   forceIsNotApplied: shouldForceNotApply,
                 })
               console.log(`[composer] Client-side ttft: ${Date.now() - n}ms`),
@@ -1943,7 +1943,7 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
                     (currentBubbleText =
                       this._composerDataService.getComposerBubble(composerId, bubbleId)
                         ?.text ?? "")),
-                  (hasResponse = !0),
+                  (hasResponse = true),
                   block.timingInfo)
                 ) {
                   aiBubble.timingInfo &&
@@ -1986,14 +1986,14 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
                   const timeoutError = new Ag(
                     "Simulated timeout server error",
                     LC.DeadlineExceeded,
-                    void 0,
+                    undefined,
                     [new YW({ error: no.TIMEOUT })],
                   )
                   throw (
                     (this._reactiveStorageService.setNonPersistentStorage(
                       "composerState",
                       "shouldSimulateTimeoutServerErrorOnce",
-                      !1,
+                      false,
                     ),
                     timeoutError)
                   )
@@ -2003,14 +2003,14 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
                   block.isBigFile &&
                     this._composerDataService.updateComposerDataSetStore(
                       composerId,
-                      (vr) => vr("isReadingLongFile", !0),
+                      (vr) => vr("isReadingLongFile", true),
                     )
                   continue
                 }
                 composerState?.isReadingLongFile &&
                   this._composerDataService.updateComposerDataSetStore(
                     composerId,
-                    (state) => state("isReadingLongFile", !1),
+                    (state) => state("isReadingLongFile", false),
                   )
                 const updateText = (text) => {
                   ;(currentBubbleText += text),
@@ -2039,7 +2039,7 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
                       ? (newText = text.slice(remainingText.length))
                       : (currentBubbleText = currentBubbleText.slice(0, lastIndex + resumeText.length)),
                       updateText(newText),
-                      (isResuming = !1)
+                      (isResuming = false)
                     continue
                   } else {
                     let matchedText = ""
@@ -2048,13 +2048,13 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
                       if (text.startsWith(partialText)) matchedText = partialText
                       else break
                     }
-                    updateText(text.slice(matchedText.length)), (isResuming = !1)
+                    updateText(text.slice(matchedText.length)), (isResuming = false)
                     continue
                   }
-                  isResuming = !1
+                  isResuming = false
                 } else updateText(text)
               }
-              ;(isComplete = !0), (this._recentlyResumed = !1)
+              ;(isComplete = true), (this._recentlyResumed = false)
             } catch (error) {
               if (
                 (console.error("[composer] Error in AI response:", error),
@@ -2062,12 +2062,12 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
               ) {
                 const Ss = vD(error)
                 if (Ss && Ss.error === no.TIMEOUT) {
-                  ;(this._recentlyResumed = !0), this.resumeChat(composerId, options)
+                  ;(this._recentlyResumed = true), this.resumeChat(composerId, options)
                   return
                 }
               }
-              ;(this._recentlyResumed = !1),
-                (hasError = !0),
+              ;(this._recentlyResumed = false),
+                (hasError = true),
                 this._composerDataService.setGeneratingCodeBlocksToAborted(composerId),
                 this._composerDataService.setGeneratingCapabilitiesToAborted(composerId),
                 this._composerDataService.setGeneratingCapabilityCodeBlocksToAborted(
@@ -2077,7 +2077,7 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
             }
           })()
       } catch (error) {
-        ;(hasError = !0),
+        ;(hasError = true),
           console.error("[composer] submitChatMaybeAbortCurrent errored!", error)
       } finally {
         const isAborted = abortController.signal.aborted || composerState?.status === "aborted"
@@ -2099,22 +2099,22 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
         )
         lastAiBubble &&
           lastAiBubble.text === "" &&
-          lastAiBubble?.capabilityType === void 0 &&
-          lastAiBubble.errorDetails === void 0 &&
-          lastAiBubble.serviceStatusUpdate === void 0 &&
+          lastAiBubble?.capabilityType === undefined &&
+          lastAiBubble.errorDetails === undefined &&
+          lastAiBubble.serviceStatusUpdate === undefined &&
           this._composerDataService.updateComposerDataSetStore(composerId, (state) =>
             state("conversation", (bubbles) =>
               bubbles.filter((B) => B.bubbleId !== lastAiBubble.bubbleId),
             ),
           )
         const isActiveGeneration =
-          composerState.chatGenerationUUID !== void 0 &&
+          composerState.chatGenerationUUID !== undefined &&
           this.isActiveGeneration(composerState.chatGenerationUUID)
         if (
           (this._composerDataService.updateComposerData(composerId, {
             generatingBubbleIds:
               composerState?.generatingBubbleIds?.filter((N) => !aiBubbleIds.includes(N)) ?? [],
-            chatGenerationUUID: isActiveGeneration ? composerState.chatGenerationUUID : void 0,
+            chatGenerationUUID: isActiveGeneration ? composerState.chatGenerationUUID : undefined,
           }),
           this._skipHandleAbortChat.has(composerId) ||
             (!isComplete || !hasResponse || hasError || composerState?.status === "aborted"
@@ -2162,19 +2162,19 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
         if (
           (options?.onFinish?.(),
           this._reactiveStorageService.applicationUserPersistentStorage
-            .checklistState?.doneCommandL !== !0)
+            .checklistState?.doneCommandL !== true)
         ) {
           const checklistState =
             this._reactiveStorageService.applicationUserPersistentStorage
               .checklistState
           this._reactiveStorageService.setApplicationUserPersistentStorage(
             "checklistState",
-            (state) => ({ ...(state ?? {}), doneCommandL: !0 }),
+            (state) => ({ ...(state ?? {}), doneCommandL: true }),
           )
         }
         if (
           this._reactiveStorageService.applicationUserPersistentStorage
-            .checklistState?.doneAddingCodeSelection !== !0 &&
+            .checklistState?.doneAddingCodeSelection !== true &&
           (contextUsed.fileSelections.length > 0 || contextUsed.selections.length > 0)
         ) {
           const checklistState =
@@ -2182,7 +2182,7 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
               .checklistState
           this._reactiveStorageService.setApplicationUserPersistentStorage(
             "checklistState",
-            (state) => ({ ...(state ?? {}), doneAddingCodeSelection: !0 }),
+            (state) => ({ ...(state ?? {}), doneAddingCodeSelection: true }),
           )
         }
         this.shouldSkipCapabilities(
@@ -2238,7 +2238,7 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
             !n ||
             this._composerDataService.getComposerIsAgentic(e) ||
             [...n.conversation].reverse().find((lt) => lt.type === bn.HUMAN)
-              ?.isAgentic === !0
+              ?.isAgentic === true
           )
             return
           try {
@@ -2248,9 +2248,9 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
                 "start-submit-chat",
                 {
                   composerId: n.composerId,
-                  isCapabilityIteration: !1,
+                  isCapabilityIteration: false,
                   submitChatProps: { text: t, extra: s },
-                  isCacheWarming: !0,
+                  isCacheWarming: true,
                 },
               )
             )
@@ -2261,7 +2261,7 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
           let a = z_(n.context)
           const l = n.currentBubbleId
           let c = [...n.conversation]
-          if (l !== void 0) {
+          if (l !== undefined) {
             const lt = this._composerDataService.getComposerBubble(e, l)
             if (!lt) throw Error("[composer] bubble is undefined")
             const Ut = lt.context
@@ -2290,8 +2290,8 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
             p = {
               ...a,
               usesCodebase:
-                a.usesCodebase !== void 0 && a.usesCodebase !== !1 ? a : void 0,
-              useDiffReview: !1,
+                a.usesCodebase !== undefined && a.usesCodebase !== false ? a : undefined,
+              useDiffReview: false,
             },
             m = { ...p, fileSelections: g }
           if (m.useWeb || m.usesCodebase) return
@@ -2302,7 +2302,7 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
             C = Mt(),
             [S, x] = this._aiService.registerNewGeneration({
               generationUUID: C,
-              metadata: void 0,
+              metadata: undefined,
             })
           const k = g.map((lt) => lt.uri),
             E = this._selectedContextService.getLinterErrorsForFiles(k),
@@ -2320,7 +2320,7 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
             R = this._composerUtilsService.getRecentlyViewedFileInfo(P),
             [B, W, G, te, re] = await Promise.all([P, N, E, R, L]),
             Z = c.at(-1)
-          if (Z === void 0) throw new Error("last message is undefined")
+          if (Z === undefined) throw new Error("last message is undefined")
           ;(n = this._composerDataService.getComposerData(e)),
             (c = [
               ...c.slice(0, -1),
@@ -2350,7 +2350,7 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
               await this._composerUtilsService.populateConversationWithExtraContext(
                 pe,
                 e,
-                { disableImageRemoval: !0, lastBubbleContext: m },
+                { disableImageRemoval: true, lastBubbleContext: m },
               ),
             Ie = this._composerModesService.getComposerUnifiedMode(e),
             qe = this.getModelDetails(Ie)
@@ -2358,15 +2358,15 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
           const We = {
             conversationId: n.composerId,
             conversation: Oe,
-            allowLongFileScan: !0,
+            allowLongFileScan: true,
             explicitContext: await this._aiService.getExplicitContext(),
             documentationIdentifiers: (p.selectedDocs ?? []).map(
               (lt) => lt.docId,
             ),
             quotes: m.quotes ?? [],
-            canHandleFilenamesAfterLanguageIds: !0,
+            canHandleFilenamesAfterLanguageIds: true,
             modelDetails: qe,
-            useWeb: m.useWeb ? "full_search" : void 0,
+            useWeb: m.useWeb ? "full_search" : undefined,
             externalLinks: m.externalLinks ?? [],
             projectContext: w,
             diffsForCompressingFiles: [],
@@ -2375,10 +2375,10 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
                 .cacheComposerPrompts,
             multiFileLinterErrors: G,
             currentFile: et,
-            useNewCompressionScheme: !0,
+            useNewCompressionScheme: true,
             additionalRankedContext: [],
             fileDiffHistories: [],
-            useUnifiedChatPrompt: !1,
+            useUnifiedChatPrompt: false,
           }
           try {
             await this._composerUtilsService.runCapabilitiesForProcess(
@@ -2387,9 +2387,9 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
               {
                 composerId: n.composerId,
                 humanBubbleId: y.bubbleId,
-                isCapabilityIteration: !1,
+                isCapabilityIteration: false,
                 contextUsed: m,
-                isCacheWarming: !0,
+                isCacheWarming: true,
               },
               { request: We },
             )
@@ -2412,7 +2412,7 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
       let r
       const o = this.D(
         this._composerEventService.onDidSendRequest(() => {
-          r !== void 0 && clearTimeout(r), o.dispose()
+          r !== undefined && clearTimeout(r), o.dispose()
         }),
       )
       r = setTimeout(async () => {
@@ -2435,8 +2435,8 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
         n.type !== bn.AI ||
         this.submitChatMaybeAbortCurrent(e, "", {
           ...(t ?? { isChat: n.isChat }),
-          isResume: !0,
-          bubbleId: void 0,
+          isResume: true,
+          bubbleId: undefined,
         })
     }
     shouldSkipCapabilities(e, t) {
@@ -2461,12 +2461,12 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
             o =
               r && this._repositoryService.isIndexedMainLocalRepository()
                 ? new Sl(r)
-                : void 0,
+                : undefined,
             a = this._composerModesService.getComposerUnifiedMode(e),
             l = [...t.data.conversation]
               .reverse()
               .map((v) => v.conversationSummary)
-              .filter((v) => v !== void 0)[0],
+              .filter((v) => v !== undefined)[0],
             c = l?.clientShouldStartSendingFromInclusiveBubbleId
           let u = c
             ? t.data.conversation.findIndex(
@@ -2532,7 +2532,7 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
         )
       )
         return
-      if (o.every((c) => c.text.length === 0 && c.errorDetails === void 0)) {
+      if (o.every((c) => c.text.length === 0 && c.errorDetails === undefined)) {
         this._composerDataService.updateComposerDataSetStore(e, (d) =>
           d("conversation", (g) => g.slice(0, r)),
         )
@@ -2545,7 +2545,7 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
           context: c,
         }),
           this._composerEventService.fireShouldForceText({ composerId: e }),
-          this._composerViewsService.focus(e, !0)
+          this._composerViewsService.focus(e, true)
       } else
         s.text.length === 0 &&
           !n.isCapabilityIteration &&
@@ -2561,27 +2561,27 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
           .composerModel ?? "claude-3.5-sonnet"
       ).toLowerCase()
       let s
-      switch (!0) {
+      switch (true) {
         case t === "default" || t.includes("cursor"):
-          s = !1
+          s = false
           break
         case t.includes("gpt") || t.includes("o1") || t.includes("o3"):
           s =
             this._reactiveStorageService.applicationUserPersistentStorage
-              .useOpenAIKey ?? !1
+              .useOpenAIKey ?? false
           break
         case t.includes("claude"):
           s =
             this._reactiveStorageService.applicationUserPersistentStorage
-              .useClaudeKey ?? !1
+              .useClaudeKey ?? false
           break
         case t.includes("gemini"):
           s =
             this._reactiveStorageService.applicationUserPersistentStorage
-              .useGoogleKey ?? !1
+              .useGoogleKey ?? false
           break
         default:
-          s = !0
+          s = true
       }
       return s
     }
@@ -2665,7 +2665,7 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
           return tH.UNSPECIFIED
       }
     }
-    async populateCodeChunksInConversation(e, t, s = !1) {
+    async populateCodeChunksInConversation(e, t, s = false) {
       const n = new Map()
       t.forEach((o, a) => {
         if (o.type !== bn.HUMAN || !o.context) return
