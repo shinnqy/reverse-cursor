@@ -1076,34 +1076,34 @@ export function createComposerApplyService(params) {
           ? !0
           : !(await this._fileService.exists(t))
     }
-    async *processCodeBlocks(e, t, s) {
-      let n = null,
-        r = !1,
-        o = "",
+    async *processCodeBlocks(composerId, finalResponse, s) {
+      let currentCodeBlock = null,
+        isInCodeBlock = !1,
+        buffer = "",
         a,
         l,
         c = 0,
         u = 0,
         h = !1
-      const d = async (m) => {
-        const v = o.slice(0, m),
-          y = n !== null,
-          w = n?.uri === void 0,
-          C = s?.aiBubbleId || this._composerDataService.getLastAiBubbleId(e)
+      const processBlockContent = async (m) => {
+        const v = buffer.slice(0, m),
+          y = currentCodeBlock !== null,
+          w = currentCodeBlock?.uri === void 0,
+          C = s?.aiBubbleId || this._composerDataService.getLastAiBubbleId(composerId)
         if (y)
-          if (((n.content += v), w)) {
+          if (((currentCodeBlock.content += v), w)) {
             if (
-              (this._composerDataService.updateComposerDataSetStore(e, (S) =>
+              (this._composerDataService.updateComposerDataSetStore(composerId, (S) =>
                 S(
                   "conversation",
                   (x) => x.bubbleId === C,
                   "codeBlocks",
                   (x) => x.codeBlockIdx === c,
                   "content",
-                  n.content,
+                  currentCodeBlock.content,
                 ),
               ),
-              this._composerDataService.updateComposerDataSetStore(e, (S) =>
+              this._composerDataService.updateComposerDataSetStore(composerId, (S) =>
                 S(
                   "conversation",
                   (x) => x.bubbleId === C,
@@ -1113,17 +1113,17 @@ export function createComposerApplyService(params) {
                   !1,
                 ),
               ),
-              n.isClickable && n.filePath)
+              currentCodeBlock.isClickable && currentCodeBlock.filePath)
             )
               try {
                 const S = this._workspaceContextService.resolveRelativePath(
-                  n.filePath,
+                  currentCodeBlock.filePath,
                 )
                 if (S) {
                   const x =
                     await this._composerUtilsService.getContentsOfFile(S)
                   if (!x) return
-                  const k = n.content?.trim()
+                  const k = currentCodeBlock.content?.trim()
                   if (k) {
                     const E = k.split(/\r?\n/).map((I) => I.trim())
                     if (E.length > 0) {
@@ -1145,7 +1145,7 @@ export function createComposerApplyService(params) {
                       I >= 0 &&
                         L >= 0 &&
                         this._composerDataService.updateComposerDataSetStore(
-                          e,
+                          composerId,
                           (N) =>
                             N(
                               "conversation",
@@ -1173,39 +1173,39 @@ export function createComposerApplyService(params) {
               }
           } else {
             this._composerDataService.updateComposerCodeBlock(
-              e,
-              n.uri,
-              n.version,
-              { content: n.content },
+              composerId,
+              currentCodeBlock.uri,
+              currentCodeBlock.version,
+              { content: currentCodeBlock.content },
             )
             const S = this._composerDataService.getComposerCodeBlock(
-              e,
-              n.uri,
-              n.version,
+              composerId,
+              currentCodeBlock.uri,
+              currentCodeBlock.version,
             )
-            ;(n.isNotApplied && S?.status !== "generating") ||
+            ;(currentCodeBlock.isNotApplied && S?.status !== "generating") ||
               this.runFastApplyOnCodeBlock(
-                e,
+                composerId,
                 {
-                  uri: n.uri,
-                  version: n.version,
-                  content: n.content,
+                  uri: currentCodeBlock.uri,
+                  version: currentCodeBlock.version,
+                  content: currentCodeBlock.content,
                   status: "generating",
                 },
                 {
-                  isBackground: n.isNotApplied,
+                  isBackground: currentCodeBlock.isNotApplied,
                   skipOnSettled: s?.skipOnSettled,
                 },
               )
           }
-        c++, (n = null)
+        c++, (currentCodeBlock = null)
       }
-      for await (const m of t) {
+      for await (const m of finalResponse) {
         const v =
-            s?.aiBubbleId || this._composerDataService.getLastAiBubbleId(e),
+            s?.aiBubbleId || this._composerDataService.getLastAiBubbleId(composerId),
           y =
             s?.humanBubbleId ||
-            this._composerDataService.getLastHumanBubbleId(e)
+            this._composerDataService.getLastHumanBubbleId(composerId)
         if (!v || !y) throw new Error("[composer] No ai or human bubble id")
         const { text: w } = m
         if (w === void 0) {
@@ -1215,24 +1215,24 @@ export function createComposerApplyService(params) {
         for (
           w.trim() === "<think>" && (h = !0),
             w.trim() === "</think>" && (h = !1),
-            o += w;
-          o.length > 0;
+            buffer += w;
+          buffer.length > 0;
 
         )
-          if (r) {
-            const C = n !== null,
-              S = n?.uri === void 0
+          if (isInCodeBlock) {
+            const C = currentCodeBlock !== null,
+              S = currentCodeBlock?.uri === void 0
             if (YYe) {
               const P = new RegExp(
                 `^(?:\\r?\\n)([\\t ]{${l}})\`{${a}}\\S+`,
-              ).exec(o)
+              ).exec(buffer)
               if (P) {
                 u++,
                   C &&
-                    ((n.content += o.slice(0, P.index + P[0].length)),
+                    ((currentCodeBlock.content += buffer.slice(0, P.index + P[0].length)),
                     S
                       ? this._composerDataService.updateComposerDataSetStore(
-                          e,
+                          composerId,
                           (N) =>
                             N(
                               "conversation",
@@ -1241,16 +1241,16 @@ export function createComposerApplyService(params) {
                               (R) =>
                                 R.codeBlockIdx === c && R.unregistered === !0,
                               "content",
-                              n.content,
+                              currentCodeBlock.content,
                             ),
                         )
                       : this._composerDataService.updateComposerCodeBlock(
-                          e,
-                          n.uri,
-                          n.version,
-                          { content: n.content },
+                          composerId,
+                          currentCodeBlock.uri,
+                          currentCodeBlock.version,
+                          { content: currentCodeBlock.content },
                         )),
-                  (o = o.slice(P.index + P[0].length))
+                  (buffer = buffer.slice(P.index + P[0].length))
                 continue
               }
             }
@@ -1259,15 +1259,15 @@ export function createComposerApplyService(params) {
               ),
               k = /^(?:\r?\n)[\t ]*`*\s*/,
               E = new RegExp(`^(?:\\r?\\n)([\\t ]{${l}})\`{${a}}`),
-              I = x.exec(o)
+              I = x.exec(buffer)
             if (I) {
               if (YYe && u > 0) {
                 u--,
                   C &&
-                    ((n.content += o.slice(0, I.index + I[0].length)),
+                    ((currentCodeBlock.content += buffer.slice(0, I.index + I[0].length)),
                     S
                       ? this._composerDataService.updateComposerDataSetStore(
-                          e,
+                          composerId,
                           (L) =>
                             L(
                               "conversation",
@@ -1276,34 +1276,34 @@ export function createComposerApplyService(params) {
                               (P) =>
                                 P.codeBlockIdx === c && P.unregistered === !0,
                               "content",
-                              n.content,
+                              currentCodeBlock.content,
                             ),
                         )
                       : this._composerDataService.updateComposerCodeBlock(
-                          e,
-                          n.uri,
-                          n.version,
-                          { content: n.content },
+                          composerId,
+                          currentCodeBlock.uri,
+                          currentCodeBlock.version,
+                          { content: currentCodeBlock.content },
                         )),
-                  (o = o.slice(I.index + I[0].length))
+                  (buffer = buffer.slice(I.index + I[0].length))
                 continue
               }
-              ;(r = !1),
-                n && (await d(I.index)),
-                (o = o.slice(I.index + I[0].length)),
+              ;(isInCodeBlock = !1),
+                currentCodeBlock && (await processBlockContent(I.index)),
+                (buffer = buffer.slice(I.index + I[0].length)),
                 (a = void 0),
                 (l = void 0)
             } else {
-              const L = k.exec(o),
-                P = E.exec(o)
-              if ((L && L[0].length === o.length) || P) break
+              const L = k.exec(buffer),
+                P = E.exec(buffer)
+              if ((L && L[0].length === buffer.length) || P) break
               {
-                const N = o.charAt(0)
+                const N = buffer.charAt(0)
                 C &&
-                  ((n.content += N),
+                  ((currentCodeBlock.content += N),
                   S
                     ? this._composerDataService.updateComposerDataSetStore(
-                        e,
+                        composerId,
                         (R) =>
                           R(
                             "conversation",
@@ -1312,24 +1312,24 @@ export function createComposerApplyService(params) {
                             (B) =>
                               B.codeBlockIdx === c && B.unregistered === !0,
                             "content",
-                            n.content,
+                            currentCodeBlock.content,
                           ),
                       )
                     : this._composerDataService.updateComposerCodeBlock(
-                        e,
-                        n.uri,
-                        n.version,
-                        { content: n.content },
+                        composerId,
+                        currentCodeBlock.uri,
+                        currentCodeBlock.version,
+                        { content: currentCodeBlock.content },
                       )),
-                  (o = o.slice(N.length))
+                  (buffer = buffer.slice(N.length))
               }
             }
           } else {
             const C = /^(\n|\n\n)?[\t ]*```+([^\n]*)\n/,
               S = /^(\n|\n\n)?[\t ]*```+[^\n]*$/,
-              x = C.exec(o)
+              x = C.exec(buffer)
             if (x) {
-              r = !0
+              isInCodeBlock = !0
               const k = x[0],
                 E = x[2]
               ;(a = /^(\n|\n\n)?(```+)/.exec(k)?.[2]?.length ?? 3),
@@ -1364,8 +1364,8 @@ export function createComposerApplyService(params) {
                 ;(P = W), G === "citation" ? (B = !0) : (R = G)
               }
               if (
-                ((o = o.slice(x[0].length)),
-                (n = {
+                ((buffer = buffer.slice(x[0].length)),
+                (currentCodeBlock = {
                   language: P,
                   filePath: N,
                   content: "",
@@ -1375,7 +1375,7 @@ export function createComposerApplyService(params) {
                 N && !B)
               ) {
                 const W = this._workspaceContextService.resolveRelativePath(N),
-                  G = await this.shouldAutoApplyURI(e, W),
+                  G = await this.shouldAutoApplyURI(composerId, W),
                   { languageId: te } =
                     this._languageService.createByLanguageNameOrFilepathOrFirstLine(
                       P ?? "",
@@ -1385,9 +1385,9 @@ export function createComposerApplyService(params) {
                 let re = s?.forceIsNotApplied
                 G || (re = !0), h && (re = !0)
                 const Z = this._composerUtilsService.registerNewCodeBlock(
-                  e,
+                  composerId,
                   W,
-                  n.content,
+                  currentCodeBlock.content,
                   c,
                   {
                     languageId: te,
@@ -1396,17 +1396,17 @@ export function createComposerApplyService(params) {
                     bubbleId: v,
                   },
                 )
-                this.warmFastApply(e, {
+                this.warmFastApply(composerId, {
                   uri: Z.uri,
                   version: Z.version,
-                  content: n.content,
+                  content: currentCodeBlock.content,
                   status: "generating",
                 }),
-                  (n.uri = Z.uri),
-                  (n.version = Z.version),
-                  (n.isNotApplied = Z.isNotApplied)
+                  (currentCodeBlock.uri = Z.uri),
+                  (currentCodeBlock.version = Z.version),
+                  (currentCodeBlock.isNotApplied = Z.isNotApplied)
               } else {
-                const W = this._composerDataService.getComposerData(e)
+                const W = this._composerDataService.getComposerData(composerId)
                 if (!W) throw new Error("[composer] Composer not found")
                 const G = W.conversation.findIndex((re) => re.bubbleId === v)
                 if (G === -1) throw new Error("[composer] Message not found")
@@ -1416,9 +1416,9 @@ export function createComposerApplyService(params) {
                     null,
                     void 0,
                   )
-                this._composerUtilsService.addNewCodeBlockToBubble(e, c, G, {
+                this._composerUtilsService.addNewCodeBlockToBubble(composerId, c, G, {
                   unregistered: !0,
-                  content: n.content,
+                  content: currentCodeBlock.content,
                   languageId: te,
                   isGenerating: !0,
                   isClickable: B,
@@ -1426,53 +1426,53 @@ export function createComposerApplyService(params) {
                 })
               }
             } else {
-              if (S.exec(o)) break
+              if (S.exec(buffer)) break
               {
-                const E = o.indexOf(`
+                const E = buffer.indexOf(`
 `)
-                if (E !== -1) o = o.slice(E + 1)
+                if (E !== -1) buffer = buffer.slice(E + 1)
                 else break
               }
             }
           }
         yield m
       }
-      const g = s?.aiBubbleId || this._composerDataService.getLastAiBubbleId(e),
+      const g = s?.aiBubbleId || this._composerDataService.getLastAiBubbleId(composerId),
         p =
-          s?.humanBubbleId || this._composerDataService.getLastHumanBubbleId(e)
+          s?.humanBubbleId || this._composerDataService.getLastHumanBubbleId(composerId)
       if (!g || !p) throw new Error("[composer] No ai or human bubble id")
-      if (r) {
-        const m = n !== null,
-          v = n?.uri === void 0,
-          w = new RegExp(`^(?:\\r?\\n)([\\t ]{${l}})\`{${a}}$`).exec(o)
+      if (isInCodeBlock) {
+        const m = currentCodeBlock !== null,
+          v = currentCodeBlock?.uri === void 0,
+          w = new RegExp(`^(?:\\r?\\n)([\\t ]{${l}})\`{${a}}$`).exec(buffer)
         w
-          ? ((r = !1),
-            m && (await d(w.index)),
-            (o = o.slice(w.index + w[0].length)),
+          ? ((isInCodeBlock = !1),
+            m && (await processBlockContent(w.index)),
+            (buffer = buffer.slice(w.index + w[0].length)),
             (a = void 0),
             (l = void 0))
           : m &&
             (v
-              ? this._composerDataService.updateComposerDataSetStore(e, (C) =>
+              ? this._composerDataService.updateComposerDataSetStore(composerId, (C) =>
                   C(
                     "conversation",
                     (S) => S.bubbleId === g,
                     "codeBlocks",
                     (S) => S.codeBlockIdx === c && S.unregistered === !0,
                     "content",
-                    n.content,
+                    currentCodeBlock.content,
                   ),
                 )
               : (this._composerDataService.updateComposerCodeBlock(
-                  e,
-                  n.uri,
-                  n.version,
-                  { content: n.content },
+                  composerId,
+                  currentCodeBlock.uri,
+                  currentCodeBlock.version,
+                  { content: currentCodeBlock.content },
                 ),
                 this._composerDataService.setCodeBlockStatus(
-                  e,
-                  n.uri,
-                  n.version,
+                  composerId,
+                  currentCodeBlock.uri,
+                  currentCodeBlock.version,
                   "aborted",
                 )))
       }

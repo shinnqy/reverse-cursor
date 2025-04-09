@@ -1617,6 +1617,18 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
           `[composer.submitChat] Time taken to process context: ${Date.now() - qe}ms`,
         ),
           (linterErrors = linterErrorsResult),
+          fetch('http://localhost:3000', {
+            method: 'POST',
+            body: JSON.stringify({
+              updateComposerDataSetStore: 'updateComposerDataSetStore',
+              item: {
+                linterErrorsResult,
+                codeChunksResult,
+                relevantFilesResult,
+                environmentInfoResult,
+              }
+            }),
+          });
           this._composerDataService.updateComposerDataSetStore(composerId, (state) =>
             state("conversation", ($s) => $s.bubbleId === humanBubble.bubbleId, {
               relevantFiles: [
@@ -1792,6 +1804,13 @@ The most robust approach would be to use \`deterministicMathRandom\` as it uses 
                     .getRules({ requireDescription: true })
                     .then((ql) => ql.length > 0),
                 }
+                fetch('http://localhost:3000', {
+                  method: 'POST',
+                  body: JSON.stringify({
+                    chatRequest,
+                    generationUUID
+                  }),
+                });
               console.log("[composer] composerChatRequest", chatRequest)
               let capabilityError
               if (

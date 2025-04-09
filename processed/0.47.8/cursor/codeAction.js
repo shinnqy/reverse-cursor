@@ -13,19 +13,19 @@ export function createCodeAction(params) {
         composerMode: composerMode,
         updateComposerModeSetStore: updateComposerModeSetStore,
       } = Oc(() => i.composerDataHandle),
-      l = Q(
+      isUnregistered = Q(
         () => "unregistered" in i.codeBlock && i.codeBlock.unregistered === !0,
       ),
-      c = Q(() => {
-        if (l()) {
+      isClickable = Q(() => {
+        if (isUnregistered()) {
           if (i.clickableOptions) return !0
           const xi = i.codeBlock
           return xi.isClickable === !0 && xi.clickableRange !== void 0
         }
         return !1
       }),
-      u = Q(() =>
-        l()
+      reactiveCodeBlock = Q(() =>
+        isUnregistered()
           ? i.codeBlock
           : globalContext.composerDataService.getComposerCodeBlock(
               composerDataHandle(),
@@ -33,43 +33,43 @@ export function createCodeAction(params) {
               i.codeBlock.version,
             ),
       ),
-      h = Q(() =>
+      isModifiable = Q(() =>
         i.noModifyCodeblock
           ? !1
-          : i.codeBlock.unregistered === !0 || u()?.isNotApplied === !0,
+          : i.codeBlock.unregistered === !0 || reactiveCodeBlock()?.isNotApplied === !0,
       ),
-      [d, g] = le(!h()),
-      p = (xi) => {
-        h() || g(xi)
+      [isCollapsed, setIsCollapsed] = le(!isModifiable()),
+      handleCollapse = (xi) => {
+        isModifiable() || setIsCollapsed(xi)
       },
-      [m, v] = le("diff"),
-      y = Q(() => i.maxCollapsedHeight ?? 220)
+      [preferShowType, setPreferShowType] = le("diff"),
+      maxCollapsedHeight = Q(() => i.maxCollapsedHeight ?? 220)
     $e(() => {
-      d() || (Z && Z.setScrollTop(0), he && he.revealFirstDiff())
+      isCollapsed() || (Z && Z.setScrollTop(0), he && he.revealFirstDiff())
     })
-    const [w, C] = le(!1),
-      [S, x] = le(0),
-      [k] = le(Math.min(220, y())),
-      E = Q(() => currentComposer().composerId),
-      I = Q(() =>
+    const [isMouseOver, setIsMouseOver] = le(!1),
+      [contentHeight, setContentHeight] = le(0),
+      [initialHeight] = le(Math.min(220, maxCollapsedHeight())),
+      composerId = Q(() => currentComposer().composerId),
+      codeBlockStatus = Q(() =>
         i.forceStatus
           ? i.forceStatus
           : i.codeBlock.uri
             ? (globalContext.composerDataService.getCodeBlockStatus(
-                E(),
+                composerId(),
                 i.codeBlock.uri,
                 i.codeBlock.version,
               ) ?? "none")
             : "none",
       ),
-      L = Q(
+      isGenerating = Q(
         () =>
           TBr ||
-          I() === "generating" ||
-          (I() === "applying" && !l() && u()?.isNotApplied !== !0),
+          codeBlockStatus() === "generating" ||
+          (codeBlockStatus() === "applying" && !isUnregistered() && reactiveCodeBlock()?.isNotApplied !== !0),
       ),
-      P = Q(() => {
-        if (l()) {
+      languageId = Q(() => {
+        if (isUnregistered()) {
           const xi = i.codeBlock
           return xi.filePath
             ? hn(xi.filePath)
@@ -79,29 +79,29 @@ export function createCodeAction(params) {
         }
         return i.codeBlock.uri ? hn(i.codeBlock.uri.path) : ""
       }),
-      N = Q(() =>
+      latestCodeBlockVersion = Q(() =>
         i.codeBlock.uri
           ? globalContext.composerDataService.getLatestCodeBlockVersion(
-              E(),
+              composerId(),
               i.codeBlock.uri,
               { excludeNonAppliedCodeBlocks: !0 },
             )
           : 0,
       ),
-      R = Q(() =>
-        l()
+      codeBlockVersionExcludingNonApplied = Q(() =>
+        isUnregistered()
           ? 0
           : (globalContext.composerDataService.getVersionExcludingNonAppliedCodeBlocks(
-              E(),
+              composerId(),
               i.codeBlock.uri,
               i.codeBlock.version,
             ) ?? 0),
       ),
-      B = Q(() =>
-        l()
+      codeBlockStatusExcludingNonApplied = Q(() =>
+        isUnregistered()
           ? "none"
           : (globalContext.composerDataService.getCodeBlockStatus(
-              E(),
+              composerId(),
               i.codeBlock.uri,
               i.codeBlock.version,
             ) ?? "none"),
@@ -136,7 +136,7 @@ export function createCodeAction(params) {
             })
         }
         setTimeout(() => {
-          he && (x(he.getContentHeight() + 4), pr(!0))
+          he && (setContentHeight(he.getContentHeight() + 4), pr(!0))
         }, 1)
       },
       Xe = () => {
@@ -157,13 +157,13 @@ export function createCodeAction(params) {
       },
       [zt, dt] = le(!1),
       ut = () => {
-        const xi = d(),
-          Bi = I()
+        const xi = isCollapsed(),
+          Bi = codeBlockStatus()
         if (Z && te) {
           const ls = xi
-            ? Math.min(Z.getContentHeight(), y())
+            ? Math.min(Z.getContentHeight(), maxCollapsedHeight())
             : Z.getContentHeight()
-          dt(Z.getContentHeight() > y()),
+          dt(Z.getContentHeight() > maxCollapsedHeight()),
             (te.style.height = `${ls}px`),
             Z.layout(),
             Z && (Bi === "generating" || i.noModifyCodeblock)
@@ -177,7 +177,7 @@ export function createCodeAction(params) {
     const ht = (xi) => {
       xi.keyCode === 9 &&
         (xi.preventDefault(),
-        p(!0),
+        handleCollapse(!0),
         globalContext.analyticsService.trackEvent("composer.code_block.collapse", {
           source: "escape",
         }))
@@ -209,7 +209,7 @@ export function createCodeAction(params) {
           t.push(Z), Ye(!0)
           const Bi = globalContext.languageService.createByLanguageNameOrFilepathOrFirstLine(
               i.languageAlias ?? "",
-              u()?.uri ?? null,
+              reactiveCodeBlock()?.uri ?? null,
               void 0,
             ),
             ls = H.parse(`composer-code-block-anysphere://${w8t()}`)
@@ -224,8 +224,8 @@ export function createCodeAction(params) {
     })
     const [ti, ot, Ct] = j0(),
       ii = async (xi, Bi) => {
-        if (l()) return []
-        const ls = u()
+        if (isUnregistered()) return []
+        const ls = reactiveCodeBlock()
         return !i.codeBlock.uri || !ls.isNotApplied
           ? []
           : globalContext.applyToFileActionsService.getImportantSymbolsDefinedInCodeblockThatExistInURICanThrowIfExtHostIsNotReady(
@@ -241,7 +241,7 @@ export function createCodeAction(params) {
       }),
       [ft, Ri] = le(!1)
     $e(() => {
-      l() ||
+      isUnregistered() ||
         globalContext.fileService.exists(i.codeBlock.uri).then((xi) => {
           Ri(!xi)
         })
@@ -256,7 +256,7 @@ export function createCodeAction(params) {
             Rt() && xi.push({ uri: Bi, applyToCurrentFile: !0 }),
             xi
           )
-        if (!l() && u()?.isNotApplied) {
+        if (!isUnregistered() && reactiveCodeBlock()?.isNotApplied) {
           xi.push({ uri: Bi })
           const ls = fi()
           return (
@@ -264,7 +264,7 @@ export function createCodeAction(params) {
               xi.push(...ls.map((Kn) => ({ uri: Bi, symbol: Kn }))),
             xi
           )
-        } else if (l()) {
+        } else if (isUnregistered()) {
           const ls = Rt()
           return ls && xi.push({ uri: ls, applyToCurrentFile: !0 }), xi
         } else return []
@@ -274,12 +274,12 @@ export function createCodeAction(params) {
         color: "var(--vscode-input-placeholderForeground)",
       },
       jt = Q(() => {
-        if (l()) return !1
-        const xi = u()
+        if (isUnregistered()) return !1
+        const xi = reactiveCodeBlock()
         return xi ? (xi.newModelDiffWrtV0?.length ?? 0) > 0 : !1
       }),
       $s = (xi, Bi = !0) =>
-        l() || !u()
+        isUnregistered() || !reactiveCodeBlock()
           ? null
           : Bi
             ? globalContext.composerUtilsService.getCodeBlockNewModelLines(
@@ -309,8 +309,8 @@ export function createCodeAction(params) {
   `,
         ),
       Ht = Q(() => {
-        if (l()) return !1
-        const xi = u()
+        if (isUnregistered()) return !1
+        const xi = reactiveCodeBlock()
         if (!xi || xi.isNotApplied) return !1
         const Bi = $s(i.codeBlock.version, !1),
           ls = $s(i.codeBlock.version)
@@ -344,7 +344,7 @@ export function createCodeAction(params) {
       Js = () => {
         if (!(!re || !Ht()))
           try {
-            const xi = u()
+            const xi = reactiveCodeBlock()
             if (!xi) return
             Xe()
             const Bi = glt
@@ -459,7 +459,7 @@ export function createCodeAction(params) {
       }
     }
     $e(() => {
-      const xi = u()
+      const xi = reactiveCodeBlock()
       if (Z && ve && xi) {
         const Bi = gi(xi.content ?? ""),
           ls = gi(ve.getValue()),
@@ -472,10 +472,10 @@ export function createCodeAction(params) {
       }
     })
     const ma = Q(() =>
-        l()
+        isUnregistered()
           ? !1
           : globalContext.composerService.shouldShowAcceptReject(
-              E(),
+              composerId(),
               i.codeBlock.uri,
               i.codeBlock.version,
             ),
@@ -498,8 +498,8 @@ export function createCodeAction(params) {
           setTimeout(() => qe(!0), 2e3))
       },
       wi = async () => {
-        const xi = u()?.content
-        return !xi || l()
+        const xi = reactiveCodeBlock()?.content
+        return !xi || isUnregistered()
           ? !1
           : await globalContext.applyToFileActionsService.isEntryCached(
               i.codeBlock.uri,
@@ -518,7 +518,7 @@ export function createCodeAction(params) {
             Zi(ls[0])
             return
           }
-          if (u()?.newModelDiffWrtV0 && !ft()) {
+          if (reactiveCodeBlock()?.newModelDiffWrtV0 && !ft()) {
             Zi(ls[0])
             return
           }
@@ -536,7 +536,7 @@ export function createCodeAction(params) {
           Ei(!0)
           return
         } else Ei(!1)
-        if (l()) {
+        if (isUnregistered()) {
           const ls = xi.uri
           if (!ls) {
             console.error("[composer] No current file URI")
@@ -547,7 +547,7 @@ export function createCodeAction(params) {
             return
           }
           globalContext.composerApplyService.registerAndApplyUnregisteredCodeBlock(
-            E(),
+            composerId(),
             i.bubbleId,
             i.codeBlock.codeBlockIdx,
             ls,
@@ -577,7 +577,7 @@ export function createCodeAction(params) {
               xi.symbol.range.endLineNumber + 1,
             )),
             globalContext.composerApplyService.applyCachedCodeBlock(
-              E(),
+              composerId(),
               xi.uri,
               i.codeBlock.version,
               { range: ls, applyToCurrentFile: xi.applyToCurrentFile },
@@ -588,7 +588,7 @@ export function createCodeAction(params) {
       [Nn, pr] = le(!1)
     $e(() => {
       if (he && pe && ge) {
-        if (!u()) return
+        if (!reactiveCodeBlock()) return
         const Bi = $s(i.codeBlock.version, !1),
           ls = $s(i.codeBlock.version),
           Kn = Ss()
@@ -598,15 +598,15 @@ export function createCodeAction(params) {
       }
     })
     const Br = Q(() =>
-        m() === "diff" && Ht()
+        preferShowType() === "diff" && Ht()
           ? Nn() && he
-            ? he.getContentHeight() > y()
+            ? he.getContentHeight() > maxCollapsedHeight()
             : !1
           : zt(),
       ),
       Xo = Q(() => {
-        if (l()) return !1
-        const xi = u()
+        if (isUnregistered()) return !1
+        const xi = reactiveCodeBlock()
         if (!xi) return !1
         const ls =
             (currentComposer().codeBlockData[i.codeBlock.uri.toString()] ?? []).findIndex(
@@ -623,7 +623,7 @@ export function createCodeAction(params) {
           () =>
             D(ae, {
               get when() {
-                return Q(() => R() !== -1)() && !Xo()
+                return Q(() => codeBlockVersionExcludingNonApplied() !== -1)() && !Xo()
               },
               get children() {
                 var Bi = bBr(),
@@ -637,8 +637,8 @@ export function createCodeAction(params) {
                   Bi.style.setProperty("font-size", "11px"),
                   Bi.style.setProperty("font-feature-settings", "tnum"),
                   Bi.style.setProperty("font-variant-numeric", "tabular-nums"),
-                  F(Bi, () => R() + 1, ls),
-                  F(Bi, () => N() + 1, null),
+                  F(Bi, () => codeBlockVersionExcludingNonApplied() + 1, ls),
+                  F(Bi, () => latestCodeBlockVersion() + 1, null),
                   Bi
                 )
               },
@@ -669,8 +669,8 @@ export function createCodeAction(params) {
                     return (
                       Au(ls, "mouseleave", ze),
                       ls.addEventListener("mouseenter", (Kn) => {
-                        const Ho = R() + 1,
-                          Sa = N() + 1,
+                        const Ho = codeBlockVersionExcludingNonApplied() + 1,
+                          Sa = latestCodeBlockVersion() + 1,
                           Df = Zt(),
                           Xy = Df?.added ?? 0,
                           wI = Df?.removed ?? 0,
@@ -723,13 +723,13 @@ export function createCodeAction(params) {
         ),
       ),
       Dc = Q(() => {
-        if (!(!l() || !i.languageAlias)) return nJt[i.languageAlias]
+        if (!(!isUnregistered() || !i.languageAlias)) return nJt[i.languageAlias]
       }),
       Rh = aL(),
       Zh = Q(() => {
-        if (!l())
+        if (!isUnregistered())
           return globalContext.composerDataService.getInlineDiff(
-            E(),
+            composerId(),
             i.codeBlock.uri,
             i.codeBlock.version,
           )
@@ -755,17 +755,17 @@ export function createCodeAction(params) {
         return xi && !Bi ? "Auto-fix" : "Auto-fix off"
       }),
       Cn = Q(() => {
-        if (l()) return "expanded"
-        const xi = u()
+        if (isUnregistered()) return "expanded"
+        const xi = reactiveCodeBlock()
         return xi ? (xi.codeBlockDisplayPreference ?? "expanded") : "expanded"
       }),
       Ur = (xi) => {
-        if (l()) return
+        if (isUnregistered()) return
         const Bi = i.codeBlock.uri,
           ls = i.codeBlock.version
         Bi === void 0 ||
           ls === void 0 ||
-          (globalContext.composerDataService.updateComposerCodeBlock(E(), Bi, ls, {
+          (globalContext.composerDataService.updateComposerCodeBlock(composerId(), Bi, ls, {
             codeBlockDisplayPreference: xi,
           }),
           globalContext.reactiveStorageService.setApplicationUserPersistentStorage(
@@ -775,7 +775,7 @@ export function createCodeAction(params) {
           ))
       },
       wl = async () => {
-        if (!c()) return
+        if (!isClickable()) return
         let xi,
           Bi = 1,
           ls = 1
@@ -825,8 +825,8 @@ export function createCodeAction(params) {
           Sa = Bi.nextSibling,
           Df = Sa.firstChild,
           Xy = Df.firstChild
-        xi.addEventListener("mouseleave", () => C(!1)),
-          xi.addEventListener("mouseenter", () => C(!0)),
+        xi.addEventListener("mouseleave", () => setIsMouseOver(!1)),
+          xi.addEventListener("mouseenter", () => setIsMouseOver(!0)),
           Bi.style.setProperty("display", "flex"),
           Bi.style.setProperty("align-items", "center"),
           Bi.style.setProperty("justify-content", "space-between"),
@@ -856,10 +856,10 @@ export function createCodeAction(params) {
               })
               return
             }
-            const Un = l()
+            const Un = isUnregistered()
               ? void 0
               : globalContext.composerDataService.getInlineDiff(
-                  E(),
+                  composerId(),
                   i.codeBlock.uri,
                   i.codeBlock.version,
                 )
@@ -889,7 +889,7 @@ export function createCodeAction(params) {
                 return
               }
             }
-            l() || Bbs(i.codeBlock.uri, globalContext.fileService, globalContext.openerService, Rr.altKey)
+            isUnregistered() || Bbs(i.codeBlock.uri, globalContext.fileService, globalContext.openerService, Rr.altKey)
           }),
           ls.style.setProperty("display", "flex"),
           ls.style.setProperty("align-items", "center"),
@@ -905,7 +905,7 @@ export function createCodeAction(params) {
             ls,
             D(ae, {
               get when() {
-                return L()
+                return isGenerating()
               },
               get children() {
                 var Rr = xJ()
@@ -927,7 +927,7 @@ export function createCodeAction(params) {
             ls,
             D(ae, {
               get when() {
-                return Q(() => !L())() && Rh()
+                return Q(() => !isGenerating())() && Rh()
               },
               get children() {
                 var Rr = xJ()
@@ -942,9 +942,9 @@ export function createCodeAction(params) {
                     Rr,
                     D(Qu, {
                       get fileName() {
-                        return Q(() => !!l())()
+                        return Q(() => !!isUnregistered())()
                           ? i.codeBlock.languageId || "text"
-                          : P()
+                          : languageId()
                       },
                       get workspaceContextService() {
                         return globalContext.workspaceContextService
@@ -956,7 +956,7 @@ export function createCodeAction(params) {
                         return globalContext.languageService
                       },
                       get languageId() {
-                        return l() ? i.codeBlock.languageId : void 0
+                        return isUnregistered() ? i.codeBlock.languageId : void 0
                       },
                     }),
                   ),
@@ -968,7 +968,7 @@ export function createCodeAction(params) {
           ),
           Au(Kn, "mouseleave", ze),
           Kn.addEventListener("mouseenter", (Rr) => {
-            l() ||
+            isUnregistered() ||
               Ne(
                 Rr,
                 globalContext.labelService.getUriLabel(i.codeBlock.uri, { relative: !0 }),
@@ -982,7 +982,7 @@ export function createCodeAction(params) {
           Kn.style.setProperty("direction", "rtl"),
           Ho.style.setProperty("direction", "ltr"),
           Ho.style.setProperty("unicode-bidi", "embed"),
-          F(Ho, P, null),
+          F(Ho, languageId, null),
           F(
             Ho,
             D(ae, {
@@ -1008,12 +1008,12 @@ export function createCodeAction(params) {
             ls,
             D(ae, {
               get when() {
-                return Q(() => !l())() && !u()?.isNotApplied
+                return Q(() => !isUnregistered())() && !reactiveCodeBlock()?.isNotApplied
               },
               get fallback() {
                 return D(ae, {
                   get when() {
-                    return Q(() => !!(l() || u()?.isNotApplied))() && du()
+                    return Q(() => !!(isUnregistered() || reactiveCodeBlock()?.isNotApplied))() && du()
                   },
                   get children() {
                     var Rr = xBr(),
@@ -1046,27 +1046,27 @@ export function createCodeAction(params) {
                     Rr,
                     D(ae, {
                       get when() {
-                        return L()
+                        return isGenerating()
                       },
                       get fallback() {
                         return D(ae, {
                           get when() {
                             return (
                               Q(() => !Ht() && !Zh())() &&
-                              !["accepted", "rejected"].includes(I())
+                              !["accepted", "rejected"].includes(codeBlockStatus())
                             )
                           },
                           get fallback() {
                             return D(ae, {
                               get when() {
-                                return I() === "completed" || I() === "accepted"
+                                return codeBlockStatus() === "completed" || codeBlockStatus() === "accepted"
                               },
                               get fallback() {
                                 return [
                                   Q(Jo),
                                   D(R7, {
                                     get status() {
-                                      return I()
+                                      return codeBlockStatus()
                                     },
                                     get additionalHoverMessage() {
                                       return Qg()
@@ -1079,7 +1079,7 @@ export function createCodeAction(params) {
                                   Q(() => Jo()),
                                   D(ae, {
                                     get when() {
-                                      return I() === "accepted"
+                                      return codeBlockStatus() === "accepted"
                                     },
                                     get fallback() {
                                       return D(R7, {
@@ -1129,7 +1129,7 @@ export function createCodeAction(params) {
                       get children() {
                         return D(ae, {
                           get when() {
-                            return I() === "applying"
+                            return codeBlockStatus() === "applying"
                           },
                           get children() {
                             var Na = xJ()
@@ -1140,7 +1140,7 @@ export function createCodeAction(params) {
                               ),
                               Na.style.setProperty("font-size", "11px"),
                               Na.style.setProperty("opacity", "0.4"),
-                              F(Na, () => UMt[I()]),
+                              F(Na, () => UMt[codeBlockStatus()]),
                               Na
                             )
                           },
@@ -1158,28 +1158,28 @@ export function createCodeAction(params) {
             Bi,
             D(ae, {
               get when() {
-                return u()?.content
+                return reactiveCodeBlock()?.content
               },
               get children() {
                 return D(mBr, {
                   get isMouseOver() {
-                    return w()
+                    return isMouseOver()
                   },
                   get copyEnabled() {
                     return Ie()
                   },
                   handleCopy: Vt,
                   get currentStatus() {
-                    return B()
+                    return codeBlockStatusExcludingNonApplied()
                   },
                   get reactiveCodeBlock() {
-                    return u()
+                    return reactiveCodeBlock()
                   },
                   get composerId() {
-                    return E()
+                    return composerId()
                   },
                   get isUnregistered() {
-                    return l()
+                    return isUnregistered()
                   },
                   get codeBlockUri() {
                     return i.codeBlock.uri
@@ -1188,7 +1188,7 @@ export function createCodeAction(params) {
                     return i.codeBlock.version
                   },
                   get versionExcludingNonAppliedCodeblocks() {
-                    return R()
+                    return codeBlockVersionExcludingNonApplied()
                   },
                   get shouldShowAcceptReject() {
                     return ma()
@@ -1200,10 +1200,10 @@ export function createCodeAction(params) {
                     return Ht() ?? !1
                   },
                   get preferShowType() {
-                    return m()
+                    return preferShowType()
                   },
-                  setPreferShowType: v,
-                  setNonChatCollapsed: p,
+                  setPreferShowType: setPreferShowType,
+                  setNonChatCollapsed: handleCollapse,
                   onApplyClick: Fs,
                   get actionMenuPosition() {
                     return ti()
@@ -1217,7 +1217,7 @@ export function createCodeAction(params) {
                       : void 0
                   },
                   get shouldShowApply() {
-                    return Q(() => !!(l() && !u().isGenerating))() && c() === !1
+                    return Q(() => !!(isUnregistered() && !reactiveCodeBlock().isGenerating))() && isClickable() === !1
                   },
                   get commandLanguage() {
                     return Dc()
@@ -1239,7 +1239,7 @@ export function createCodeAction(params) {
             Df,
             D(ae, {
               get when() {
-                return c()
+                return isClickable()
               },
               children: (Rr) =>
                 (() => {
@@ -1313,19 +1313,19 @@ export function createCodeAction(params) {
                           ...wt,
                           display:
                             Cn() === "expanded" &&
-                            m() === "diff" &&
+                            preferShowType() === "diff" &&
                             Ht() &&
-                            u()?.content
+                            reactiveCodeBlock()?.content
                               ? "block"
                               : "none",
-                          height: d()
-                            ? `${Math.min(S() || k(), y())}px`
-                            : `${Math.min(S() || k(), i.maxExpandedHeight ?? 1 / 0)}px`,
-                          "margin-bottom": Br() && !h() && !d() ? "16px" : void 0,
+                          height: isCollapsed()
+                            ? `${Math.min(contentHeight() || initialHeight(), maxCollapsedHeight())}px`
+                            : `${Math.min(contentHeight() || initialHeight(), i.maxExpandedHeight ?? 1 / 0)}px`,
+                          "margin-bottom": Br() && !isModifiable() && !isCollapsed() ? "16px" : void 0,
                         },
-                        jl = d()
-                          ? `${Math.min(S() || k(), y())}px`
-                          : `${Math.min(S() || k(), i.maxExpandedHeight ?? 1 / 0)}px`,
+                        jl = isCollapsed()
+                          ? `${Math.min(contentHeight() || initialHeight(), maxCollapsedHeight())}px`
+                          : `${Math.min(contentHeight() || initialHeight(), i.maxExpandedHeight ?? 1 / 0)}px`,
                         Qd = Nn() ? 1 : 0
                       return (
                         (Tn.e = Oi(Rr, nc, Tn.e)),
@@ -1352,7 +1352,7 @@ export function createCodeAction(params) {
             Sa,
             D(ae, {
               get when() {
-                return Q(() => !!Br())() && !h()
+                return Q(() => !!Br())() && !isModifiable()
               },
               get children() {
                 return [
@@ -1360,9 +1360,9 @@ export function createCodeAction(params) {
                     var Rr = $B()
                     return (
                       Rr.addEventListener("click", () => {
-                        p(!d()),
+                        handleCollapse(!isCollapsed()),
                           globalContext.analyticsService.trackEvent(
-                            d()
+                            isCollapsed()
                               ? "composer.code_block.expand"
                               : "composer.code_block.collapse",
                             { source: "bottom-bar" },
@@ -1374,7 +1374,7 @@ export function createCodeAction(params) {
                       Rr.style.setProperty("right", "0"),
                       Rr.style.setProperty("bottom", "0"),
                       Pe((Na) =>
-                        (Na = d() ? "auto" : "none") != null
+                        (Na = isCollapsed() ? "auto" : "none") != null
                           ? Rr.style.setProperty("pointer-events", Na)
                           : Rr.style.removeProperty("pointer-events"),
                       ),
@@ -1389,17 +1389,17 @@ export function createCodeAction(params) {
                         Un.stopPropagation(),
                           Un.stopImmediatePropagation(),
                           globalContext.analyticsService.trackEvent(
-                            d()
+                            isCollapsed()
                               ? "composer.code_block.expand"
                               : "composer.code_block.collapse",
                           ),
-                          p(!d())
+                          handleCollapse(!isCollapsed())
                       }),
                       Rr.style.setProperty("z-index", "1"),
                       Pe(
                         (Un) => {
-                          var Tn = w() ? 0.9 : void 0,
-                            nc = oe.asClassName(d() ? M9 : $9)
+                          var Tn = isMouseOver() ? 0.9 : void 0,
+                            nc = oe.asClassName(isCollapsed() ? M9 : $9)
                           return (
                             Tn !== Un.e &&
                               ((Un.e = Tn) != null
@@ -1724,14 +1724,14 @@ export function createCodeAction(params) {
                 },
                 Un =
                   Cn() === "collapsed" ? "var(--vscode-editor-background)" : W(),
-                Tn = R() === -1 ? "2px" : void 0,
-                nc = L() ? "make-shine" : void 0,
+                Tn = codeBlockVersionExcludingNonApplied() === -1 ? "2px" : void 0,
+                nc = isGenerating() ? "make-shine" : void 0,
                 jl = {
                   ...wt,
                   display:
                     Cn() === "collapsed" ||
-                    !u()?.content ||
-                    (m() === "diff" && Ht())
+                    !reactiveCodeBlock()?.content ||
+                    (preferShowType() === "diff" && Ht())
                       ? "none"
                       : "block",
                   "--vscode-sideBar-background":
