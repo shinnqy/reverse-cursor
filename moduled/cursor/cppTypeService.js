@@ -8,13 +8,13 @@ export function createCppTypeService(params) {
       constructor(e) {
         super(),
           (this.f = e),
-          (this.a = new FMs(100)),
-          (this.b = new FMs(100)),
+          (this.a = new Cache(100)),
+          (this.b = new Cache(100)), (this.cppEventLoggerService = this.b),
           (this.c = { enabledForPathExtensions: [], importantLspExtensions: [] }),
           (this._cppEventLogger = e)
       }
       setSuggestionHintsConfig(e) {
-        e === void 0
+        e === undefined
           ? (this.c = {
               enabledForPathExtensions: [],
               importantLspExtensions: [],
@@ -37,13 +37,13 @@ export function createCppTypeService(params) {
       }
       getRelevantParameterHints(e) {
         const t = this.a.get(e.getId())
-        return t === void 0 ? [] : t
+        return t === undefined ? [] : t
       }
       g(e, t) {
-        const s = this.b.remove(t.id)
+        const s = this.cppEventLoggerService.remove(t.id)
         t !== null &&
           s &&
-          this._cppEventLogger.recordLspSuggestionEvent(t, e.getId(), [], void 0)
+          this._cppEventLogger.recordLspSuggestionEvent(t, e.getId(), [], undefined)
       }
       h(e, t) {
         const s = []
@@ -62,7 +62,7 @@ export function createCppTypeService(params) {
         const s = e
           .filter(
             (n) =>
-              n.extensionId === void 0 ||
+              n.extensionId === undefined ||
               n.extensionId.value !== "vscode.typescript",
           )
           .filter(this.j)
@@ -79,8 +79,8 @@ export function createCppTypeService(params) {
           return
         }
         t !== null &&
-          this._cppEventLogger.recordLspSuggestionEvent(t, e.getId(), a, void 0),
-          this.b.add(t.id, {
+          this._cppEventLogger.recordLspSuggestionEvent(t, e.getId(), a, undefined),
+          this.cppEventLoggerService.add(t.id, {
             suggestions: a,
             leadingLineContent: s.lineContext.leadingLineContent,
           }),
@@ -89,7 +89,7 @@ export function createCppTypeService(params) {
       q(e) {
         const t = e.lineContext.leadingLineContent,
           s = e.items.slice(0, 5).map((a) => a.textLabel)
-        if (t.endsWith("console.") && s.some((a) => a === "Console")) return !0
+        if (t.endsWith("console.") && s.some((a) => a === "Console")) return true
         const n = s.slice(0, 5).toString(),
           r = [
             "at,charAt,charCodeAt,codePointAt",
@@ -103,7 +103,7 @@ export function createCppTypeService(params) {
       }
       r(e) {
         const t = Ob(e)
-        return t === void 0 ? !1 : this.c.enabledForPathExtensions.includes(t)
+        return t === undefined ? false : this.c.enabledForPathExtensions.includes(t)
       }
       registerCancelListener(e, t, s, n) {
         return n.model.onDidCancel((r) => {
@@ -121,10 +121,10 @@ export function createCppTypeService(params) {
           this.g(e, t)
           return
         }
-        this.n(e, t, s, !1, n)
+        this.n(e, t, s, false, n)
       }
       w(e, t, s) {
-        s.items.length < 20 ? this.n(e, t, s, !0, null) : this.g(e, t)
+        s.items.length < 20 ? this.n(e, t, s, true, null) : this.g(e, t)
       }
       registerSuggestListener(e, t, s, n, r) {
         return n.model.onDidSuggest((o) => {
@@ -139,49 +139,49 @@ export function createCppTypeService(params) {
             this.g(e, t)
             return
           }
-          const c = this.b.get(t.id)
-          if (c === void 0) {
+          const c = this.cppEventLoggerService.get(t.id)
+          if (c === undefined) {
             this.w(e, t, a)
             return
           }
-          if (o.triggerOptions.auto !== !0 || o.triggerOptions.refilter !== !0) {
+          if (o.triggerOptions.auto !== true || o.triggerOptions.refilter !== true) {
             this.g(e, t)
             return
           }
           const { leadingLineContent: h } = c,
             u = a.lineContext.leadingLineContent
           u.startsWith(h) || h.startsWith(u)
-            ? this.n(e, t, a, !1, null)
+            ? this.n(e, t, a, false, null)
             : this.g(e, t)
         })
       }
       getRelevantSuggestions(e, t) {
         if (!this.r(t)) return { suggestions: [] }
-        const s = this.b.get(e.id)
-        return s === void 0
+        const s = this.cppEventLoggerService.get(e.id)
+        return s === undefined
           ? { suggestions: [] }
           : { suggestions: s.suggestions.map((n) => ({ label: n })) }
       }
     }
   CppTypeService = __decorate([__param(0, cppEventLoggerService)], CppTypeService)
-  var FMs = class {
-    constructor(i) {
-      ;(this.a = []), (this.b = i)
+  var Cache = class {
+    constructor(capacity) {
+      ;(this.items = []), (this.capacity = capacity)
     }
-    add(i, e) {
-      this.remove(i),
-        this.a.length >= this.b && this.a.shift(),
-        this.a.push({ key: i, value: e })
+    add(key, value) {
+      this.remove(key),
+        this.items.length >= this.capacity && this.items.shift(),
+        this.items.push({ key, value })
     }
-    get(i) {
-      return this.a.find((t) => t.key === i)?.value
+    get(key) {
+      return this.items.find((item) => item.key === key)?.value
     }
-    remove(i) {
-      const e = this.a.findIndex((t) => t.key === i)
-      return e !== -1 ? (this.a.splice(e, 1), !0) : !1
+    remove(key) {
+      const index = this.items.findIndex((item) => item.key === key)
+      return index !== -1 ? (this.items.splice(index, 1), true) : false
     }
     clear() {
-      this.a.length = 0
+      this.items.length = 0
     }
   }
   Ve(cppTypeService, CppTypeService, 1);
