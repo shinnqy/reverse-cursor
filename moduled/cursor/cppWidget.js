@@ -12,8 +12,8 @@ export function createCppWidget(params) {
   //         e.length,
   //       ),
   //       [
-  //         { value: i, removed: !0 },
-  //         { value: e, added: !0 },
+  //         { value: i, removed: true },
+  //         { value: e, added: true },
   //       ])
   //     : Acr.diff(i, e, t)
   // }
@@ -47,13 +47,13 @@ export function createCppWidget(params) {
   // `,
   //                 )
   //                 .at(-1)?.length ?? 0) + 1),
-  //           u !== void 0 &&
+  //           u !== undefined &&
   //             u !== "" &&
   //             r.push({ lineNumber: h, column: d, value: u }),
   //           (h -= 1)
   //       } else {
   //         const u = c.shift()
-  //         if (u !== void 0 && u !== "") {
+  //         if (u !== undefined && u !== "") {
   //           const g =
   //             e
   //               .split(
@@ -105,8 +105,8 @@ export function createCppWidget(params) {
   //     oldValue: "",
   //   }))
   //   return $cr({ inlineModifications: l, fullLineModifications: a }, t)
-  //     ? { success: !1, inlineModifications: l, fullLineModifications: a }
-  //     : { success: !0, inlineModifications: l, fullLineModifications: a }
+  //     ? { success: false, inlineModifications: l, fullLineModifications: a }
+  //     : { success: true, inlineModifications: l, fullLineModifications: a }
   // }
 
   var qBt,
@@ -128,7 +128,7 @@ export function createCppWidget(params) {
     constructor(e, t, s, n, r, o, a, l, c, h, u, d, g) {
       super(
         e,
-        { showFrame: !0, showArrow: !1, isResizeable: !0, isAccessible: !0 },
+        { showFrame: true, showArrow: false, isResizeable: true, isAccessible: true },
         a,
       ),
         (this.r = t),
@@ -185,7 +185,7 @@ export function createCppWidget(params) {
       })
     }
     kb() {
-      this.y || super.show(G.fromPositions(this.r), Wcr), (this.y = !0)
+      this.y || super.show(G.fromPositions(this.r), Wcr), (this.y = true)
     }
     T(e) {
       const t = q(".cpp-peek-view-title", {})
@@ -203,8 +203,8 @@ export function createCppWidget(params) {
           const o = Yy(n.getActions()),
             a = this.O.getAction(this.O.viewItems.length - 1)
           this.O.clear(),
-            this.O.push(o, { label: !1, icon: !0 }),
-            a && this.O.push([a], { label: !1, icon: !0 })
+            this.O.push(o, { label: false, icon: true }),
+            a && this.O.push([a], { label: false, icon: true })
         }
       this.q.add(n), this.q.add(n.onDidChange(r)), r()
     }
@@ -229,14 +229,14 @@ export function createCppWidget(params) {
           hu,
           e,
           {
-            stickyScroll: { enabled: !1 },
-            readOnly: !0,
-            renderSideBySide: !1,
+            stickyScroll: { enabled: false },
+            readOnly: true,
+            renderSideBySide: false,
             dimension: { width: this.u(a), height: e.clientHeight },
           },
           {
-            originalEditor: { isSimpleWidget: !0, contributions: [] },
-            modifiedEditor: { isSimpleWidget: !0, contributions: [] },
+            originalEditor: { isSimpleWidget: true, contributions: [] },
+            modifiedEditor: { isSimpleWidget: true, contributions: [] },
           },
         )
       l.setModel({ original: n, modified: o }),
@@ -335,7 +335,7 @@ export function createCppWidget(params) {
     const a = t.slice(s, n + 1)
     return a.length === 0
       ? ""
-      : (n >= t.length && (o = void 0),
+      : (n >= t.length && (o = undefined),
         a.length === 1
           ? (a[0] = a[0].slice(r, o))
           : ((a[0] = a[0].slice(r)),
@@ -368,8 +368,8 @@ export function createCppWidget(params) {
     const t = DKi(i.getValue(), e)
     return new tQe(t, i.uri, i.getVersionId() + 1)
   }
-  var Zcr = !1,
-    ehr = !1,
+  var Zcr = false,
+    ehr = false,
     ch = Zcr ? console.log : () => {},
     $es = (i, e) => {
       const t = i.split(e),
@@ -378,12 +378,12 @@ export function createCppWidget(params) {
         .map((r, o) => `${(o + 1).toString().padStart(n, " ")}: ${r}`)
         .join(e)
     },
-    kF = (i, e, t, s = !1) => {
+    kF = (i, e, t, s = false) => {
       ch("[ian] text", JSON.stringify(i)), ch("[ian] startLineNumber", e)
       const n = i.split(t)
       if (s) {
         const r = n[0]
-        r !== void 0 &&
+        r !== undefined &&
           r === "" &&
           i !==
             `
@@ -391,7 +391,7 @@ export function createCppWidget(params) {
           n.shift()
         const o = n[n.length - 1]
         if (
-          (o !== void 0 &&
+          (o !== undefined &&
             o === "" &&
             i !==
               `
@@ -403,7 +403,7 @@ export function createCppWidget(params) {
       }
       return { lineNumber: e + n.length - 1, column: n[n.length - 1].length + 1 }
     }
-  function thr(i, e, t, s, n = !1) {
+  function thr(i, e, t, s, n = false) {
     let r = "",
       o = "",
       a,
@@ -411,7 +411,7 @@ export function createCppWidget(params) {
       c
     const h = [],
       u = (g) => {
-        if (c !== void 0) {
+        if (c !== undefined) {
           const p = kF(g, s.startLineNumber, t, n)
           h.push({
             startLineNumber: c.lineNumber,
@@ -420,34 +420,34 @@ export function createCppWidget(params) {
             endColumn: p.column,
           })
         }
-        c = void 0
+        c = undefined
       }
     for (const g of e)
       g.removed
         ? ((c = kF(r, s.startLineNumber, t, n)),
-          a === void 0 && (a = c),
+          a === undefined && (a = c),
           (l = kF(r + g.value, s.startLineNumber, t, n)))
         : u(r),
         g.added || (r += g.value),
         g.removed || (o += g.value)
-    if ((u(r), a === void 0 || l === void 0))
+    if ((u(r), a === undefined || l === undefined))
       throw new Error(
         "firstRemovedPositionInFullBeforeModel or lastRemovedPositionInFullBeforeModel is undefined",
       )
     let d
     return (
-      (d = zBt(i, a, l, !0, !0)),
+      (d = zBt(i, a, l, true, true)),
       {
         changesRangeInBeforeFullModel: d,
         selectiveNewText: "",
         addedRangesInNewFullModel: [],
         lineCount: 0,
-        deletion: !0,
+        deletion: true,
         deletedRanges: h,
       }
     )
   }
-  function Fes(i, e, t, s, n = !1) {
+  function Fes(i, e, t, s, n = false) {
     const r = []
     if (i.some((k) => k.removed) && !i.some((k) => k.added))
       return thr(e, i, t, s, n)
@@ -462,7 +462,7 @@ export function createCppWidget(params) {
       g,
       p
     const m = (k) => {
-      if (l !== void 0) {
+      if (l !== undefined) {
         const E = kF(k, s.startLineNumber, t)
         r.push({
           startLineNumber: l.lineNumber,
@@ -471,27 +471,27 @@ export function createCppWidget(params) {
           endColumn: E.column,
         })
       }
-      l = void 0
+      l = undefined
     }
     for (const k of i) {
       if (k.added) {
         l = kF(a, s.startLineNumber, t, n)
         const E = kF(o, s.startLineNumber, t, n)
-        if (c === void 0) {
+        if (c === undefined) {
           let D = o
-          p !== void 0 && o.endsWith(p) && (D = o.slice(0, -p.length)),
+          p !== undefined && o.endsWith(p) && (D = o.slice(0, -p.length)),
             (c = kF(D, s.startLineNumber, t, n)),
             (g = k.value)
         }
         ;(h = E),
-          u === void 0 && (u = kF(a, 1, t, n)),
+          u === undefined && (u = kF(a, 1, t, n)),
           (d = kF(a + k.value, 1, t, n))
       } else m(a), k.removed && (p = k.value)
       k.added || (o += k.value), k.removed || (a += k.value)
     }
     m(a)
     const b =
-      g !== void 0 &&
+      g !== undefined &&
       g.startsWith(`
   `)
     ch("[ian] firstAddedPositionInFullBeforeModel", c),
@@ -500,10 +500,10 @@ export function createCppWidget(params) {
       ch("[ian] lastAddedPositionInSubsetAfterModel", d),
       ch("[ian] trimStart", b)
     let y = s
-    h !== void 0 && c !== void 0 && (y = zBt(e, c, h, b, !1))
+    h !== undefined && c !== undefined && (y = zBt(e, c, h, b, false))
     const w = jBt(a, U.parse(""))
     let C
-    d !== void 0 && u !== void 0 && (C = zBt(w, u, d, b, !0)),
+    d !== undefined && u !== undefined && (C = zBt(w, u, d, b, true)),
       ch(
         `[ian] afterModel value:
   ` + $es(w.getValue(), t),
@@ -515,7 +515,7 @@ export function createCppWidget(params) {
       selectiveNewText: S,
       addedRangesInNewFullModel: r.map((k) => G.lift(k)),
       lineCount: S.split(t).length,
-      deletion: !1,
+      deletion: false,
     }
   }
   function ihr(i, e) {
@@ -649,7 +649,7 @@ export function createCppWidget(params) {
         (this.R = c),
         (this.S = h),
         (this.U = u),
-        (this.allowEditorOverflow = !0),
+        (this.allowEditorOverflow = true),
         (this.h = []),
         (this.ghostTextDecorations = []),
         (this.j = this.D(new R())),
@@ -659,7 +659,7 @@ export function createCppWidget(params) {
         (this.F = null),
         (this.G = null),
         (this.H = null),
-        (this.lastSuggestion = void 0),
+        (this.lastSuggestion = undefined),
         (this.c = q("div.cursorGhostTextWidget")),
         this._updateFontStyles(),
         (this.uuid = rt())
@@ -739,42 +739,42 @@ export function createCppWidget(params) {
           ),
         )
       const y = {
-        readOnly: !0,
+        readOnly: true,
         wordWrap: "off",
         wordWrapOverride1: "off",
         wordWrapOverride2: "off",
-        glyphMargin: !1,
+        glyphMargin: false,
         lineDecorationsWidth: 0,
         lineNumbersMinChars: 0,
         lineNumbers: "off",
-        folding: !1,
-        scrollBeyondLastLine: !1,
+        folding: false,
+        scrollBeyondLastLine: false,
         renderLineHighlight: "none",
         renderWhitespace: "none",
-        minimap: { enabled: !1 },
-        quickSuggestions: !1,
-        automaticLayout: !1,
-        automaticLayoutIgnoreHeight: !0,
-        guides: { indentation: !1 },
+        minimap: { enabled: false },
+        quickSuggestions: false,
+        automaticLayout: false,
+        automaticLayoutIgnoreHeight: true,
+        guides: { indentation: false },
         scrollbar: {
-          horizontal: void 0,
-          vertical: void 0,
+          horizontal: undefined,
+          vertical: undefined,
           horizontalScrollbarSize: 0,
           verticalScrollbarSize: 0,
           arrowSize: 0,
           verticalSliderSize: 0,
           horizontalSliderSize: 0,
-          ignoreVerticalScrolling: !0,
-          useShadows: !1,
+          ignoreVerticalScrolling: true,
+          useShadows: false,
         },
-        hover: { enabled: !1 },
+        hover: { enabled: false },
       }
       ;(this.n = this.N.createInstance(
         Ic,
         this.m,
         { ...this.I.getRawOptions(), ...y },
         {
-          isSimpleWidget: !0,
+          isSimpleWidget: true,
           contributions: pl.getSomeEditorContributions([a0.ID]),
           cursorCodeBlockType: "cppPreviewBox",
         },
@@ -803,7 +803,7 @@ export function createCppWidget(params) {
           this.C,
           { ...this.I.getRawOptions(), ...y },
           {
-            isSimpleWidget: !0,
+            isSimpleWidget: true,
             contributions: pl.getSomeEditorContributions([a0.ID]),
             cursorCodeBlockType: "cppPreviewBox",
           },
@@ -857,7 +857,7 @@ export function createCppWidget(params) {
         }),
         this.ib()
     }
-    ab(e, t, s, n, r, o = !1, a = "view-line") {
+    ab(e, t, s, n, r, o = false, a = "view-line") {
       const l = n.get(33),
         c = n.get(122),
         h = "none",
@@ -886,7 +886,7 @@ export function createCppWidget(params) {
             g.isMonospace && !l,
             g.canUseHalfwidthRightwardsArrow,
             x,
-            !1,
+            false,
             k,
             E,
             0,
@@ -961,7 +961,7 @@ export function createCppWidget(params) {
                 inlineClassName: "ghost-text-decoration",
                 cursorStops: _v.Left,
               },
-              showIfCollapsed: !0,
+              showIfCollapsed: true,
               className: "cpp-inline-suggestion",
             },
           })
@@ -976,7 +976,7 @@ export function createCppWidget(params) {
                 inlineClassName: "ghost-text-decoration",
                 cursorStops: _v.Left,
               },
-              showIfCollapsed: !0,
+              showIfCollapsed: true,
               className: "cpp-inline-suggestion",
             },
           })
@@ -1004,9 +1004,9 @@ export function createCppWidget(params) {
       const { greenRanges: o } = OFt(
         e.map((a) =>
           a.removed
-            ? { value: a.value, added: !0 }
+            ? { value: a.value, added: true }
             : a.added
-              ? { value: a.value, removed: !0 }
+              ? { value: a.value, removed: true }
               : a,
         ),
         n,
@@ -1143,7 +1143,7 @@ export function createCppWidget(params) {
             (ch("[ian] isClipped", D),
             r.forceViewZones || ehr || (this.mb() && D))
           ) {
-            const P = e[0] ?? { value: "", added: !1, removed: !1 },
+            const P = e[0] ?? { value: "", added: false, removed: false },
               L =
                 P.value ===
                   `
@@ -1151,7 +1151,7 @@ export function createCppWidget(params) {
                 !P.added &&
                 !P.removed
                   ? o
-                  : Fes(e, t, s, n, !0),
+                  : Fes(e, t, s, n, true),
               A = L.changesRangeInBeforeFullModel.startLineNumber - g
             ch("[ian] changesOnTheRightForViewZone", L),
               ch("[ian] startLineNumberForViewZone", A),
@@ -1159,18 +1159,18 @@ export function createCppWidget(params) {
           } else {
             E(), this.f.appendChild(this.m), this.ib()
             const P = this.n.getOption(68)
-            let L = !1,
+            let L = false,
               A = this.n.getModel()
             if (A) {
               const B = t.getLanguageId()
-              A.getLanguageId() !== B && (A.setLanguage(B), (L = !0)),
-                A.getValue() !== r.newValue && (A.setValue(r.newValue), (L = !0)),
-                r.changesSinceLastUpdate && (L = !0)
+              A.getLanguageId() !== B && (A.setLanguage(B), (L = true)),
+                A.getValue() !== r.newValue && (A.setValue(r.newValue), (L = true)),
+                r.changesSinceLastUpdate && (L = true)
             } else {
               const B = this.L.createById(t.getLanguageId())
-              ;(A = this.P.createModel(r.newValue, B, this.q, !1)),
+              ;(A = this.P.createModel(r.newValue, B, this.q, false)),
                 this.n.setModel(A),
-                (L = !0)
+                (L = true)
             }
             if ((ch("[ian] language", A.getLanguageId()), L)) {
               if (!A) {
@@ -1205,7 +1205,7 @@ export function createCppWidget(params) {
                 (this.m.style.height = `${P * o.lineCount}px`)
             }
             const F = this.I.getModel()?.uri,
-              H = F ? ahr(F) : !1
+              H = F ? ahr(F) : false
             if ((ch("[ian] isIPyNotebook", H), H)) {
               const B = this.I.getTopForLineNumber(u)
               this.n.setScrollTop(B)
@@ -1221,15 +1221,15 @@ export function createCppWidget(params) {
     showChangesAutoCompleteInline(e, t, s, n, r) {
       const o = Fcr(e, t, s, n, r),
         { success: a, inlineModifications: l, fullLineModifications: c } = o
-      if (a === !1) return { success: !1 }
-      l !== void 0 && this._updateLineModificationDecorations(l)
+      if (a === false) return { success: false }
+      l !== undefined && this._updateLineModificationDecorations(l)
       const h = {},
         u = new Set()
       return (
-        c !== void 0 &&
+        c !== undefined &&
           c.forEach((g) => {
             u.add(g.beforeLineNumber),
-              h[g.beforeLineNumber] === void 0 && (h[g.beforeLineNumber] = []),
+              h[g.beforeLineNumber] === undefined && (h[g.beforeLineNumber] = []),
               h[g.beforeLineNumber].push({
                 content: g.content,
                 decorations: g.decorations,
@@ -1252,7 +1252,7 @@ export function createCppWidget(params) {
                 0,
               )
           }),
-        { success: !0, inlineModifications: l, fullLineModifications: c }
+        { success: true, inlineModifications: l, fullLineModifications: c }
       )
     }
     _updateFontStyles() {
@@ -1262,10 +1262,10 @@ export function createCppWidget(params) {
     }
     _updateTextContent(e, t) {
       this._updateFontStyles(), this.s?.abort(), (this.s = new AbortController())
-      let s = !1
+      let s = false
       for (
         this.s.signal.addEventListener("abort", () => {
-          s = !0
+          s = true
         });
         this.f.firstChild;
 
@@ -1273,7 +1273,7 @@ export function createCppWidget(params) {
         this.f.removeChild(this.f.firstChild)
       const n = this.I.getModel(),
         r = e?.decorationId
-      if (n === null || r === void 0) return
+      if (n === null || r === undefined) return
       const o = n.getEOL()
       let a = n.getDecorationRange(r)
       if (a === null) return
@@ -1292,32 +1292,32 @@ export function createCppWidget(params) {
           wordChanges: b,
           isOnlyAddingToEachChar: y,
         } = rhr(l, c, a.startLineNumber, o),
-        w = p.every((D) => D.removed !== !0)
+        w = p.every((D) => D.removed !== true)
       if (s) {
         this.Z()
         return
       }
-      let C = !1,
-        S = !1,
-        x = !1
+      let C = false,
+        S = false,
+        x = false
       for (let D = 0; D < p.length; D++)
         if (
-          (p[D].added === !0 && p[D].value === o && (x = !0),
+          (p[D].added === true && p[D].value === o && (x = true),
           !p[D].added && !p[D].removed)
         )
-          if (p[D].value === o) (S = !1), (x = !1)
+          if (p[D].value === o) (S = false), (x = false)
           else {
             if (S && x) {
-              C = !0
+              C = true
               break
             }
-            S = !0
+            S = true
           }
       const k = {
           newValue: g,
-          changesSinceLastUpdate: t?.changesSinceLastUpdate ?? !1,
+          changesSinceLastUpdate: t?.changesSinceLastUpdate ?? false,
           source: e?.source ?? CppIntent.Unknown,
-          forceViewZones: t?.forceViewZones ?? !1,
+          forceViewZones: t?.forceViewZones ?? false,
         },
         E = this.I.getPosition()
       if (
@@ -1327,7 +1327,7 @@ export function createCppWidget(params) {
         !C &&
         m.length <= 20 &&
         b.length <= 20 &&
-        t?.forceDiffBox !== !0
+        t?.forceDiffBox !== true
       ) {
         const {
           success: D,
@@ -1361,27 +1361,27 @@ export function createCppWidget(params) {
           this.Q.setSuggestionType(r, k7.PreviewBox)
     }
     update(e, t) {
-      t?.avoidEditorWideRemovals !== !0 && this.removeAllInEditorNotModel()
+      t?.avoidEditorWideRemovals !== true && this.removeAllInEditorNotModel()
       const s = this.I.getModel(),
         n = e?.uri,
         r = this.Q.isTextFocusedOrSimilarlyFocused(this.I)
-      if (s === null || n === void 0)
+      if (s === null || n === undefined)
         return this.hideAllInEditor_doesntChangeModel()
       if (
         !(r && s.uri.toString() === n.toString()) &&
-        t?.ignoreFocusCheck !== !0
+        t?.ignoreFocusCheck !== true
       ) {
-        t?.avoidEditorWideRemovals !== !0 &&
+        t?.avoidEditorWideRemovals !== true &&
           this.hideAllInEditor_doesntChangeModel()
         return
       }
       if (
-        (t?.avoidEditorWideRemovals !== !0 && this.Y(s),
-        this.J.applicationUserPersistentStorage.cppConfig?.isGhostText !== !0 ||
-          e === void 0 ||
-          e.immediatelySeen === !0)
+        (t?.avoidEditorWideRemovals !== true && this.Y(s),
+        this.J.applicationUserPersistentStorage.cppConfig?.isGhostText !== true ||
+          e === undefined ||
+          e.immediatelySeen === true)
       ) {
-        t?.avoidEditorWideRemovals !== !0 &&
+        t?.avoidEditorWideRemovals !== true &&
           this.hideAllInEditor_doesntChangeModel()
         return
       }
@@ -1438,10 +1438,10 @@ export function createCppWidget(params) {
         e.appendChild(n)
     }
     ib() {
-      if (this.z !== void 0) {
+      if (this.z !== undefined) {
         const e = this.I.saveViewState()
         this.I.changeViewZones((t) => {
-          t.removeZone(this.z), (this.z = void 0)
+          t.removeZone(this.z), (this.z = undefined)
         }),
           e && this.I.restoreViewState(e)
       }
@@ -1484,14 +1484,14 @@ export function createCppWidget(params) {
             (this.G = u.addDecoration(new G(c + 1, 1, c + 1 + t.lineCount, 1), {
               className: "view-zone-in-view-zone-decoration",
               description: "decoration for view zone in view zone",
-              isWholeLine: !0,
+              isWholeLine: true,
             })))
         }),
         this.w.layout({ width: this.w.getLayoutInfo().contentWidth, height: n }),
         (this.C.style.height = `${n + 2}px`)
       const h = this.I.saveViewState()
       this.I.changeViewZones((u) => {
-        this.z !== void 0 && u.removeZone(this.z),
+        this.z !== undefined && u.removeZone(this.z),
           this.kb(),
           (this.z = u.addZone({
             afterLineNumber: t.changesRangeInBeforeFullModel.endLineNumber,
@@ -1513,7 +1513,7 @@ export function createCppWidget(params) {
           this.F = u.addDecoration(new G(g, 1, p, 1), {
             className: "view-zone-original-range-decoration",
             description: "decoration for view zone original range",
-            isWholeLine: !0,
+            isWholeLine: true,
           })
         })
     }
@@ -1535,17 +1535,17 @@ export function createCppWidget(params) {
     mb() {
       return (
         this.J.applicationUserPersistentStorage
-          .shouldShowViewZoneWhenPreviewBoxIsClipped4 ?? !0
+          .shouldShowViewZoneWhenPreviewBoxIsClipped4 ?? true
       )
     }
     nb(e, t, s) {
       const n = this.I.getDomNode()
-      if (!n) return !1
+      if (!n) return false
       const r = ss().document
-      if (!r) return !1
+      if (!r) return false
       const o = n.getBoundingClientRect(),
         a = this.I.getVisibleRanges()
-      if (a.length === 0) return !1
+      if (a.length === 0) return false
       const l = this.I.getOption(68),
         c = this.I.getOption(52).typicalHalfwidthCharacterWidth,
         h = a[0].startLineNumber,
@@ -1617,23 +1617,23 @@ export function createCppWidget(params) {
       t[s].removed &&
         t[s + 1].added &&
         t[s + 1].value.startsWith(t[s].value) &&
-        ((t[s].added = !0), (t[s].removed = !0))
+        ((t[s].added = true), (t[s].removed = true))
     return t
   }
   function rhr(i, e, t, s) {
     let { wordDiffs: n, charDiffs: r } = ZXe(i, e, s)
     const o = _es(n, s)
-    let a = !0
+    let a = true
     for (let h = 0; h < o.length; h++)
-      if (o[h].added !== !0 && o[h].removed === !0 && o[h].value !== s) {
-        a = !1
+      if (o[h].added !== true && o[h].removed === true && o[h].value !== s) {
+        a = false
         break
       }
     const l = _es(r, s)
-    let c = !0
+    let c = true
     for (let h = 0; h < l.length; h++)
-      if (l[h].added !== !0 && l[h].removed === !0 && l[h].value !== s) {
-        c = !1
+      if (l[h].added !== true && l[h].removed === true && l[h].value !== s) {
+        c = false
         break
       }
     return {
@@ -1673,7 +1673,7 @@ export function createCppWidget(params) {
           id: Jon,
           label: "Update Ghost Text",
           alias: "Update Ghost Text",
-          precondition: void 0,
+          precondition: undefined,
         })
       }
       run(i, e, t) {
@@ -1696,10 +1696,10 @@ export function createCppWidget(params) {
       super(),
         (this.n = s),
         (this.q = n),
-        (this.f = !1),
-        (this.g = !1),
-        (this.j = !1),
-        (this.m = !1),
+        (this.f = false),
+        (this.g = false),
+        (this.j = false),
+        (this.m = false),
         (this.a = e),
         this.D(
           this.a.onDidChangeModel(() => {
@@ -1710,12 +1710,12 @@ export function createCppWidget(params) {
         this.D(this.a.onDidChangeCursorPosition(() => this.update())),
         this.D(
           this.a.onMouseDown(() => {
-            ;(this.g = !0), this.update()
+            ;(this.g = true), this.update()
           }),
         ),
         this.D(
           this.a.onMouseUp(() => {
-            ;(this.g = !1), this.update()
+            ;(this.g = false), this.update()
           }),
         ),
         (this.b = new so(() => this.D(s.createInstance(iQe, this.a)))),
@@ -1744,7 +1744,7 @@ export function createCppWidget(params) {
           onChange: () => {
             this.refreshAdditionalWidgets(), this.update()
           },
-          runNowToo: !0,
+          runNowToo: true,
         }),
         this.update()
     }
@@ -1755,7 +1755,7 @@ export function createCppWidget(params) {
       ;(this.h || !e) && this.disposeCppPeekView(), (this.h = e)
     }
     disposeCppPeekView() {
-      this.h && (this.h.dispose(), (this.h = void 0))
+      this.h && (this.h.dispose(), (this.h = undefined))
     }
     shouldShowHoverAt(e) {
       const t = this.a.getModel()
@@ -1764,7 +1764,7 @@ export function createCppWidget(params) {
             const n = t.getDecorationRange(s)
             return n && n.intersectRanges(e)
           })
-        : !1
+        : false
     }
     r() {
       if (!this.a.hasModel()) return
@@ -1796,8 +1796,8 @@ export function createCppWidget(params) {
         })
         this.c.push(t),
           t.value.update(e, {
-            avoidEditorWideRemovals: e !== void 0,
-            forceDiffBox: !0,
+            avoidEditorWideRemovals: e !== undefined,
+            forceDiffBox: true,
           })
       }
     }
@@ -1805,7 +1805,7 @@ export function createCppWidget(params) {
       const e = this.q.nonPersistentStorage.cppState?.suggestion
       if (this.j) return
       const t = this.a.getPosition()
-      if (t !== null && e !== void 0 && e.source !== CppIntent.CursorPrediction) {
+      if (t !== null && e !== undefined && e.source !== CppIntent.CursorPrediction) {
         const s = this.a.getModel()?.getDecorationRange(e.decorationId)
         if (s == null) return
         if (
@@ -1818,19 +1818,19 @@ export function createCppWidget(params) {
           return
         }
       }
-      this.j = !0
+      this.j = true
       try {
         this.b.value.update(e, { changesSinceLastUpdate: this.m })
       } catch (s) {
         console.error("[Cpp] Error updating ghost text", s)
       } finally {
-        ;(this.j = !1), e !== void 0 && (this.m = !1)
+        ;(this.j = false), e !== undefined && (this.m = false)
       }
       if (this.c.length > 0) {
         let s
-        if (e !== void 0) {
+        if (e !== undefined) {
           const n =
-            this.a.getModel()?.getDecorationRange(e.decorationId) ?? void 0
+            this.a.getModel()?.getDecorationRange(e.decorationId) ?? undefined
           n &&
             (s = new G(
               Math.max(n.startLineNumber - 2, 1),
@@ -1845,11 +1845,11 @@ export function createCppWidget(params) {
         for (let n = this.c.length - 1; n >= 0; n--) {
           const r = this.q.nonPersistentStorage.cppState?.additionalSuggestions[n]
           ;(() => {
-            if (s !== void 0 && r !== void 0) {
+            if (s !== undefined && r !== undefined) {
               const a = this.a.getModel()?.getDecorationRange(r.decorationId)
               return !a || !s || !s.intersectRanges(a)
             }
-            return !0
+            return true
           })()
             ? this.c[n].value.updatePosition(r)
             : (this.c[n].value.dispose(), this.c.splice(n, 1))
