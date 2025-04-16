@@ -12,8 +12,8 @@ export function createCppWidget(params) {
   //         e.length,
   //       ),
   //       [
-  //         { value: i, removed: !0 },
-  //         { value: e, added: !0 },
+  //         { value: i, removed: true },
+  //         { value: e, added: true },
   //       ])
   //     : Acr.diff(i, e, t)
   // }
@@ -47,13 +47,13 @@ export function createCppWidget(params) {
   // `,
   //                 )
   //                 .at(-1)?.length ?? 0) + 1),
-  //           u !== void 0 &&
+  //           u !== undefined &&
   //             u !== "" &&
   //             r.push({ lineNumber: h, column: d, value: u }),
   //           (h -= 1)
   //       } else {
   //         const u = c.shift()
-  //         if (u !== void 0 && u !== "") {
+  //         if (u !== undefined && u !== "") {
   //           const g =
   //             e
   //               .split(
@@ -105,8 +105,8 @@ export function createCppWidget(params) {
   //     oldValue: "",
   //   }))
   //   return $cr({ inlineModifications: l, fullLineModifications: a }, t)
-  //     ? { success: !1, inlineModifications: l, fullLineModifications: a }
-  //     : { success: !0, inlineModifications: l, fullLineModifications: a }
+  //     ? { success: false, inlineModifications: l, fullLineModifications: a }
+  //     : { success: true, inlineModifications: l, fullLineModifications: a }
   // }
 
   var qBt,
