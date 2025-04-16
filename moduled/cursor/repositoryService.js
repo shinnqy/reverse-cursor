@@ -1,13 +1,13 @@
 // @ts-check
 
 export function createRepositoryService(params) {
-  const { Re, V, __decorate, __param, Ve, R, g0, fu, oTt, gae, fAi, wn, rt, dk, U, jle, im, p5i, __n, zje, du, S9i, bn, bt, $h, CR, Ci, ei, Cp, Xt, it, u0, Z, qi } = params;
+  const { Re, V: Disposable, __decorate, __param, Ve, R: Emitter, g0, fu, oTt, gae, fAi, wn, rt, dk, U, jle, im, p5i, __n, zje, du, S9i, bn, bt, $h, cursorCredsService, Ci, ei, Cp, Xt, it, u0, Z, qi } = params;
 
   var Md = Re("repositoryService")
   function K_n(i) {
     return i.provider.rootUri?.path
   }
-  var ETt = class extends V {
+  var ETt = class extends Disposable {
     constructor(e, t, s, n, r, o, a, l, c, h) {
       super(),
         (this.u = e),
@@ -26,15 +26,16 @@ export function createRepositoryService(params) {
         (this.g = new Map()),
         (this.indexingProvider = void 0),
         (this.h = new Map()),
-        (this.m = this.D(new R())),
-        (this.onDidRequestRepoIndex = this.m.event),
-        (this.n = this.D(new R())),
-        (this.onDidRequestRepoInterrupt = this.n.event),
-        (this.q = this.D(new R())),
-        (this.onDidChangeIndexingStatus = this.q.event),
+        (this._onDidRequestRepoIndex = this.D(new Emitter())), // this.D => this._register // new R => new Emitter
+        (this.onDidRequestRepoIndex = this._onDidRequestRepoIndex.event),
+        (this._onDidRequestRepoInterrupt = this.D(new Emitter())), // this._register
+        (this.onDidRequestRepoInterrupt = this._onDidRequestRepoInterrupt.event),
+        (this._onDidChangeIndexingStatus = this.D(new Emitter())), // this._register
+        (this.onDidChangeIndexingStatus = this._onDidChangeIndexingStatus.event),
         (this.t = () => !1),
         (this.s = this.I.createInstance(g0)),
         (this.c = this.I.createInstance(fu, { service: oTt })),
+        // this._register
         this.D(this.z.createScoped(this)).onChangeEffect({
           deps: [
             () =>
@@ -140,7 +141,7 @@ export function createRepositoryService(params) {
       this.indexingProvider = void 0
     }
     fireOnDidChangeIndexingStatus() {
-      this.q.fire()
+      this._onDidChangeIndexingStatus.fire()
     }
     unregisterOnDidChangeIndexingStatus() {}
     async getNewRepoInfo() {
@@ -199,10 +200,12 @@ export function createRepositoryService(params) {
     async deleteMainLocalRepository() {
       const e = await this.getNewRepoInfo()
       if (e === void 0) return
+      const n = await this.c.get();
       await (
-        await this.c.get()
+        // await this.c.get()
+        n
       ).removeRepositoryV2(new fAi({ repository: e }), { headers: wn(rt()) }),
-        this.n.fire(!1),
+        this._onDidRequestRepoInterrupt.fire(!1),
         this.z.setNonPersistentStorage("repositoryIndexingStatus", {
           case: "not-indexed",
         }),
@@ -216,7 +219,7 @@ export function createRepositoryService(params) {
         this.z.setNonPersistentStorage("repositoryIndexingJobs", {})
     }
     async pauseIndexingJob() {
-      this.n.fire(!0)
+      this._onDidRequestRepoInterrupt.fire(!0)
     }
     registerDiffProvider(e) {
       this.diffProvider = e
@@ -590,11 +593,11 @@ export function createRepositoryService(params) {
       return await this.getFinalCodeResults(o, a.codeResults, { ...s, topK: t })
     }
     indexMainLocalRepository() {
-      this.u.isAuthenticated() && (this.n.fire(!0), this.m.fire())
+      this.u.isAuthenticated() && (this._onDidRequestRepoInterrupt.fire(!0), this._onDidRequestRepoIndex.fire())
     }
     interruptLocalRepository(e) {
       if (e.id === dk.id) {
-        this.n.fire(!1)
+        this._onDidRequestRepoInterrupt.fire(!1)
         const t = bt.setInterval(() => {
           this.z.setNonPersistentStorage("repoProgressBars", (s) =>
             s.filter((n) => n.repoId !== dk.id),
@@ -702,7 +705,7 @@ export function createRepositoryService(params) {
   ;(ETt = __decorate(
     [
       __param(0, $h),
-      __param(1, CR),
+      __param(1, cursorCredsService),
       __param(2, Ci),
       __param(3, ei),
       __param(4, Cp),
