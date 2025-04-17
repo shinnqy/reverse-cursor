@@ -1219,7 +1219,7 @@ export function createCppWidget(params) {
           charChanges,
           wordChanges,
           isOnlyAddingToEachChar,
-        } = rhr(originalText, replacementText, decorationRange.startLineNumber, eol),
+        } = renderHighlightedResults(originalText, replacementText, decorationRange.startLineNumber, eol),
         isOnlyAddingText = singleLineCharChanges.every((D) => D.removed !== true)
       if (isAborted) {
         this._clearAllViewZones()
@@ -1563,53 +1563,68 @@ export function createCppWidget(params) {
     ],
     GhostTextWidget,
   )
-  function _es(i, e) {
-    const t = i
-      .map((s) => {
-        const n = s.value.split(e)
-        return n
-          .map((o, a) =>
-            a < n.length - 1
+  /**
+   * 处理差异数组，按指定分隔符拆分
+   * @param {Array} diffArray - 差异数组
+   * @param {string} separator - 分隔符
+   * @returns {Array} 处理后的差异数组
+   */
+  function enhanceSplitDiffs(diffArray, separator) {
+    const enhancedDiffs = diffArray
+      .map((diff) => {
+        const parts = diff.value.split(separator)
+        return parts
+          .map((part, index) =>
+            index < parts.length - 1
               ? [
-                  { value: o, added: s.added, removed: s.removed },
-                  { value: e, added: s.added, removed: s.removed },
+                  { value: part, added: diff.added, removed: diff.removed },
+                  { value: separator, added: diff.added, removed: diff.removed },
                 ]
-              : { value: o, added: s.added, removed: s.removed },
+              : { value: part, added: diff.added, removed: diff.removed },
           )
           .flat()
       })
       .flat()
-      .filter((s) => s.value !== "")
-    for (let s = 0; s < t.length - 1; s++)
-      t[s].removed &&
-        t[s + 1].added &&
-        t[s + 1].value.startsWith(t[s].value) &&
-        ((t[s].added = true), (t[s].removed = true))
-    return t
+      .filter((diff) => diff.value !== "")
+    // 优化相邻的删除和添加操作
+    for (let i = 0; i < enhancedDiffs.length - 1; i++)
+      enhancedDiffs[i].removed &&
+        enhancedDiffs[i + 1].added &&
+        enhancedDiffs[i + 1].value.startsWith(enhancedDiffs[i].value) &&
+        ((enhancedDiffs[i].added = true), (enhancedDiffs[i].removed = true))
+    return enhancedDiffs
   }
-  function rhr(i, e, t, s) {
-    let { wordDiffs: n, charDiffs: r } = computeDiffs(i, e, s)
-    const o = _es(n, s)
-    let a = true
-    for (let h = 0; h < o.length; h++)
-      if (o[h].added !== true && o[h].removed === true && o[h].value !== s) {
-        a = false
+  /**
+   * 计算并返回富文本差异结果
+   * @param {string} oldText - 原始文本
+   * @param {string} newText - 新文本
+   * @param {string} startLineNumber - 分隔符
+   * @param {Object} eol - 配置选项
+   * @returns {Object} 差异结果对象
+   */
+  function renderHighlightedResults(oldText, newText, startLineNumber, eol) {
+    let { wordDiffs, charDiffs } = computeDiffs(oldText, newText, eol)
+    const enhancedWordDiffs = enhanceSplitDiffs(wordDiffs, eol)
+    let isOnlyAddingToEachWord = true
+    for (let i = 0; i < enhancedWordDiffs.length; i++)
+      if (enhancedWordDiffs[i].added !== true && enhancedWordDiffs[i].removed === true && enhancedWordDiffs[i].value !== eol) {
+        isOnlyAddingToEachWord = false
         break
       }
-    const l = _es(r, s)
-    let c = true
-    for (let h = 0; h < l.length; h++)
-      if (l[h].added !== true && l[h].removed === true && l[h].value !== s) {
-        c = false
+    const enhancedCharDiffs = enhanceSplitDiffs(charDiffs, eol)
+    let isOnlyAddingToEachChar = true
+    for (let i = 0; i < enhancedCharDiffs.length; i++)
+      if (enhancedCharDiffs[i].added !== true && enhancedCharDiffs[i].removed === true && enhancedCharDiffs[i].value !== eol) {
+        isOnlyAddingToEachChar = false
         break
       }
     return {
-      singleLineCharChanges: l,
-      singleLineWordChanges: o,
-      charChanges: r,
-      wordChanges: n,
-      isOnlyAddingToEachChar: c,
-      isOnlyAddingToEachWord: a,
+      singleLineCharChanges: enhancedCharDiffs,
+      singleLineWordChanges: enhancedWordDiffs,
+      charChanges: charDiffs,
+      wordChanges: wordDiffs,
+      isOnlyAddingToEachChar,
+      isOnlyAddingToEachWord,
     }
   }
   function getEditorWidth(i) {
