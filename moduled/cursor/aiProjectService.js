@@ -1338,9 +1338,9 @@ export function createAIProjectService(params) {
           u && n(eA),
           n(`
 
-  Any feedback/suggestions on the spec?
+Any feedback/suggestions on the spec?
 
-  `)
+`)
       }
       async getProjectPlanFeedback(
         e,
@@ -1403,19 +1403,19 @@ export function createAIProjectService(params) {
                   ? b +
                     `
 
-  _____
+_____
 
-  After incorporating feedback:
+After incorporating feedback:
 
-  ` +
+` +
                     m
                   : m,
             ),
             u(`
 
-  Any further feedback on the revised plan?
+Any further feedback on the revised plan?
 
-  `)),
+`)),
           console.log(
             "FULL PLAN",
             this.q.chatData.codeInterpreterTabs.find(({ tabId: b }) => b === t)
@@ -1652,14 +1652,14 @@ export function createAIProjectService(params) {
               C.type === TR.newTerminal
                 ? (o(`
 
-  ### Terminal
+### Terminal
 
-  `),
+`),
                   o("```"))
                 : C.type === TR.writingCommand
                   ? o(`
-  $ ${C.value}
-  `)
+$ ${C.value}
+`)
                   : C.type === TR.writingResponse
                     ? o(C.value)
                     : C.type === TR.endTerminal && o("\n```\n\n")
@@ -1735,9 +1735,9 @@ export function createAIProjectService(params) {
         b && o(eA),
           o(`
 
-  Any feedback/suggestions on this step?
+Any feedback/suggestions on this step?
 
-  `)
+`)
       }
       async currentStepFeedback(
         e,
@@ -1803,14 +1803,14 @@ export function createAIProjectService(params) {
               k.type === TR.newTerminal
                 ? (l(`
 
-  ### Terminal
+### Terminal
 
-  `),
+`),
                   l("```"))
                 : k.type === TR.writingCommand
                   ? l(`
-  $ ${k.value}
-  `)
+$ ${k.value}
+`)
                   : k.type === TR.writingResponse
                     ? l(k.value)
                     : k.type === TR.endTerminal && l("\n```\n\n")
@@ -1874,9 +1874,9 @@ export function createAIProjectService(params) {
               x.response.value &&
                 l(`
 
-  Any additional feedback/suggestions?
+Any additional feedback/suggestions?
 
-  `),
+`),
               { repeatStep: x.response.value }
             )
         return { repeatStep: !1 }

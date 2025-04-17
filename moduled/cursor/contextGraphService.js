@@ -162,7 +162,7 @@ export function createContextGraphService(params) {
                   try {
                     const n = await this.C.readFile(s)
                     this.f = n.value.toString().split(`
-  `)
+`)
                   } catch {
                     this.f = []
                   }

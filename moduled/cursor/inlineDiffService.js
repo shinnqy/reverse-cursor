@@ -1011,7 +1011,7 @@ export function createInlineDiffService(params) {
                 case A1.Before: {
                   const y =
                     m.text.split(`
-  `).length -
+`).length -
                     (m.range.endLineNumber - m.range.startLineNumber + 1)
                   ;(this.inlineDiff.currentRange = new Es(
                     this.inlineDiff.currentRange.startLineNumber + y,
@@ -1313,9 +1313,9 @@ export function createInlineDiffService(params) {
           model: this.c.object.textEditorModel,
           requestId: this.inlineDiff.generationUUID,
           redLines: o.split(`
-  `),
+`),
           greenLines: this.c.object.textEditorModel.getValueInRange(n).split(`
-  `),
+`),
           greenRange: n,
           promptBarId: this.promptBarId,
         })
@@ -1419,13 +1419,13 @@ export function createInlineDiffService(params) {
           h = (
             t.removedTextLines.join(this.c.object.textEditorModel.getEOL()) + c
           ).split(`
-  `)
+`)
         this.u.recordPartialAcceptEvent({
           model: this.c.object.textEditorModel,
           requestId: this.inlineDiff.generationUUID,
           redLines: h,
           greenLines: this.c.object.textEditorModel.getValueInRange(l).split(`
-  `),
+`),
           greenRange: l,
           promptBarId: this.promptBarId,
         }),
@@ -1501,7 +1501,7 @@ export function createInlineDiffService(params) {
         const s = []
         for (const o of e) {
           ;(o.includes(`
-  `) ||
+`) ||
             o.includes("\r")) &&
             console.warn(
               "InlineDiffService#addLine: line contains newline characters, which is not supported",

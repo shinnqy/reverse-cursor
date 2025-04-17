@@ -188,7 +188,7 @@ export function createCppWidget(params) {
     }
     getLineCount() {
       return this.a.split(`
-  `).length
+`).length
     }
     getVersionId() {
       return this.b ?? 0
@@ -196,7 +196,7 @@ export function createCppWidget(params) {
   }
   function jcr(i, e) {
     const t = i.split(`
-  `)
+`)
     let s = 0,
       n = 1
     for (const r of t) {
@@ -207,7 +207,7 @@ export function createCppWidget(params) {
   }
   function zcr(i, e) {
     const t = i.split(`
-  `)
+`)
     let s = 0
     if (e.lineNumber > t.length || e.lineNumber < 1) return -1
     for (let n = 0; n < e.lineNumber - 1; n++) s += t[n].length + 1
@@ -216,12 +216,12 @@ export function createCppWidget(params) {
   function Gcr(i, e) {
     if (e < 1) return 0
     const t = i.split(`
-  `)
+`)
     return e > t.length ? t[t.length - 1].length + 1 : t[e - 1].length + 1
   }
   function Jcr(i, e) {
     const t = i.split(`
-  `),
+`),
       s = e.startLineNumber - 1,
       n = e.endLineNumberInclusive - 1,
       r = e.startColumn - 1
@@ -235,7 +235,7 @@ export function createCppWidget(params) {
           : ((a[0] = a[0].slice(r)),
             (a[a.length - 1] = a[a.length - 1].slice(0, o))),
         a.join(`
-  `))
+`))
   }
   function Kcr(i, e) {
     return Jcr(i, {
@@ -281,7 +281,7 @@ export function createCppWidget(params) {
           r === "" &&
           i !==
             `
-  ` &&
+` &&
           n.shift()
         const o = n[n.length - 1]
         if (
@@ -289,7 +289,7 @@ export function createCppWidget(params) {
             o === "" &&
             i !==
               `
-  ` &&
+` &&
             n.pop(),
           n.length === 0)
         )
@@ -387,7 +387,7 @@ export function createCppWidget(params) {
     const b =
       g !== undefined &&
       g.startsWith(`
-  `)
+`)
     logDebug("[ian] firstAddedPositionInFullBeforeModel", c),
       logDebug("[ian] lastAddedPositionInFullBeforeModel", h),
       logDebug("[ian] firstAddedPositionInSubsetAfterModel", u),
@@ -400,7 +400,7 @@ export function createCppWidget(params) {
     d !== undefined && u !== undefined && (C = zBt(w, u, d, b, true)),
       logDebug(
         `[ian] afterModel value:
-  ` + $es(w.getValue(), t),
+` + $es(w.getValue(), t),
       ),
       logDebug("[ian] afterRange", C)
     const S = C ? w.getValueInRange(C) : ""
@@ -992,7 +992,7 @@ export function createCppWidget(params) {
             change.added &&
               change.value ===
                 `
-  ` &&
+` &&
               nextLineNumber > targetLineNumber &&
               currentLineNumber <= targetLineNumber &&
               (totalPureAddedLines += 1),
@@ -1025,7 +1025,7 @@ export function createCppWidget(params) {
           (logDebug("[ian] startLineInNewModel", targetLineNumber),
           logDebug(
             `[ian] new value:
-  ` + $es(updateInfo.newValue, eol),
+` + $es(updateInfo.newValue, eol),
           ),
           logDebug("[ian] position", widgetPosition),
           logDebug("[ian] totalMarginLeft", marginLeft),
@@ -1072,7 +1072,7 @@ export function createCppWidget(params) {
               viewZoneChangesInfo =
                 firstChange.value ===
                   `
-  ` &&
+` &&
                 !firstChange.added &&
                 !firstChange.removed
                   ? changesInfo
@@ -1522,7 +1522,7 @@ export function createCppWidget(params) {
             ...suggestion.selectiveNewText
               .split(
                 `
-  `,
+`,
               )
               .map((line) => line.length),
           ) * charWidth,
@@ -1619,7 +1619,7 @@ export function createCppWidget(params) {
   }
   function ohr(i, e) {
     const t = i.split(`
-  `)
+`)
     let s = 0
     for (const n of t) {
       let r = 0

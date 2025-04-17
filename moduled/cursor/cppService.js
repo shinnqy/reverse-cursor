@@ -2462,7 +2462,7 @@ export function createCppService(params) {
                       .map((line) =>
                         line.length > 512 ? line.substring(0, 512) + "..." : line,
                       ).join(`
-  `)
+`)
                   : "",
             }))
         for (const visibleEditorPane of visibleEditorPanes) { // 1. 收集当前可见编辑器内容
@@ -3207,7 +3207,7 @@ export function createCppService(params) {
         if (
           mergedRange.range.startLineNumber === mergedRange.range.endLineNumber &&
           !mergedRange.text.includes(`
-  `)
+`)
         )
           editor.setPosition(
             new Me(

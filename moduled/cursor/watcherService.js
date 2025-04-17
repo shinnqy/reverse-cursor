@@ -472,11 +472,11 @@ export function createWatcherService(params) {
           )
           y.trim() !== "" &&
             (y += `
-  `)
+`)
           const C = (y + this.j.applicationUserPersistentStorage.lintRules)
             .split(
               `
-  `,
+`,
             )
             .filter((S) => S.trim() !== "")
           for (let S = 0; S < C.length; S++)
@@ -642,10 +642,10 @@ export function createWatcherService(params) {
       if (
         ((s === void 0 && !this.fileStates[r.toString()]) ||
           e.getValue().split(`
-  `).length > 1e4 ||
+`).length > 1e4 ||
           (this.fileStates[r.toString()] !== void 0 &&
             this.fileStates[r.toString()].split(`
-  `).length > 1e4)) &&
+`).length > 1e4)) &&
         ((this.fileStates[r.toString()] = e.getValue()), n !== !0)
       )
         return []
@@ -836,7 +836,7 @@ export function createWatcherService(params) {
             a +
             `
 
-  ` +
+` +
             o,
         ),
         (n.undo = () => {
@@ -844,7 +844,7 @@ export function createWatcherService(params) {
             a.replace(
               `
 
-  ` + o,
+` + o,
               "",
             ),
           )

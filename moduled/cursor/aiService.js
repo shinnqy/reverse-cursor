@@ -561,18 +561,18 @@ export function createAIService(params) {
       let a = await this.gb.cleanText(t, e.path)
       if (n) {
         const c = a.split(`
-  `),
+`),
           h = o.startLineNumber - 1,
           u = o.endLineNumber - 1
         c.splice(h, u - h + 1, n),
           (a = c.join(`
-  `)),
+`)),
           (o = new G(
             o.startLineNumber,
             o.startColumn,
             o.startLineNumber +
               n.split(`
-  `).length -
+`).length -
               1,
             o.startColumn,
           ))
@@ -600,15 +600,15 @@ export function createAIService(params) {
                   return ""
                 }).join(`
 
-  `),
+`),
               ).join(`
 
-  `)
+`)
               return C.length > 400
                 ? C.slice(0, 200) +
                     `
-  ...output cropped...
-  ` +
+...output cropped...
+` +
                     C.slice(-200)
                 : C
             }),
@@ -624,21 +624,21 @@ export function createAIService(params) {
           m =
             p.slice(0, h).join(`
 
-  `) +
+`) +
             `
 
-  `,
+`,
           b =
             `
 
-  ` +
+` +
             p.slice(h + 1).join(`
 
-  `)
+`)
         a = m + a + b
         const y =
           m.split(`
-  `).length - 1
+`).length - 1
         ;(o = new G(
           y + o.startLineNumber,
           o.startColumn,
@@ -1009,7 +1009,7 @@ export function createAIService(params) {
       let w = e
         .map((at, we) => (at.text !== "" ? at.text : null))
         .filter((at) => at !== null).join(`
-  `)
+`)
       const C = 4e3 * 3
       w.length > C && (w = w.slice(w.length - C))
       const S = e.filter((at) => at.type === fs.HUMAN).reverse()[0]
@@ -1200,7 +1200,7 @@ export function createAIService(params) {
             lines: k.currentFile.contents
               .split(
                 `
-  `,
+`,
               )
               .map((at, we) => ({ value: at, lineNumber: we + 1 })),
           }),
@@ -1416,7 +1416,7 @@ export function createAIService(params) {
             let w = l
               .map((D, P) => (D.text !== "" ? D.text : null))
               .filter((D) => D !== null).join(`
-  `)
+`)
             const C = 4e3 * 3
             w.length > C && (w = w.slice(w.length - C))
             const S = [{ text: w, globsNewLineSeparated: "" }],
@@ -1624,7 +1624,7 @@ export function createAIService(params) {
             lines: l.currentFile.contents
               .split(
                 `
-  `,
+`,
               )
               .map((m, b) => ({ value: m, lineNumber: b + 1 })),
           }),
@@ -1798,9 +1798,9 @@ export function createAIService(params) {
         for (
           t += s;
           t.includes(`
-  `) ||
+`) ||
           t.includes(`\r
-  `);
+`);
 
         ) {
           let n = t.search(/\r?\n/)
@@ -1809,9 +1809,9 @@ export function createAIService(params) {
       for (
         ;
         t.includes(`
-  `) ||
+`) ||
         t.includes(`\r
-  `);
+`);
 
       ) {
         let s = t.search(/\r?\n/)
@@ -1825,18 +1825,18 @@ export function createAIService(params) {
           for (
             ;
             t.includes(`
-  `) ||
+`) ||
             t.includes(`\r
-  `);
+`);
 
           ) {
             let s = t.search(/\r?\n/)
             yield t.slice(0, s),
               yield t[s] === "\r"
                 ? `\r
-  `
+`
                 : `
-  `,
+`,
               (t = t.slice(s + (t[s] === "\r" ? 2 : 1)))
           }
           yield t
@@ -1855,9 +1855,9 @@ export function createAIService(params) {
       e =
         (r ?? []).map(
           (y) => `\`\`\`${y.uri.path}
-  ${y.rawText}
-  \`\`\`
-  `,
+${y.rawText}
+\`\`\`
+`,
         ) + e
       const d = new G$i({
         query: e,

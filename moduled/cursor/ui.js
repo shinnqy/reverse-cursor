@@ -2017,7 +2017,7 @@ export function createUI(params) {
           ;(l =
             c ===
             `\r
-  `
+`
               ? -1
               : 0),
             (h += a)
@@ -3530,10 +3530,10 @@ export function createUI(params) {
                 c.value.text
                   .split(
                     `
-  `,
+`,
                   )
                   .slice(1, -1).join(`
-  `),
+`),
                 C,
               )
             }

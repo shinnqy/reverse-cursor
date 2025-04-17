@@ -54,7 +54,7 @@ export function createFastEditService(params) {
         for (const b of a)
           this.m.cancelDiff(b), this.m.rejectDiff(b, { close: !0 })
         let l = `
-  `,
+`,
           c
         try {
           ;(c = await this.l.createModelReference(o)),
@@ -187,7 +187,7 @@ export function createFastEditService(params) {
           ;(u = H.object.textEditorModel.getValue()), H.dispose()
         }
         let d = `
-  `,
+`,
           g
         try {
           ;(g = await this.l.createModelReference(s)),
@@ -610,20 +610,20 @@ export function createFastEditService(params) {
                   for (
                     B += K.value.text;
                     B.includes(`
-  `);
+`);
 
                   ) {
                     const Q = B.slice(
                       0,
                       B.indexOf(`
-  `),
+`),
                     )
                     P.push(Q),
                       F(),
                       E.push(Q),
                       (B = B.slice(
                         B.indexOf(`
-  `) + 1,
+`) + 1,
                       ))
                   }
                   break
@@ -795,20 +795,20 @@ export function createFastEditService(params) {
                   for (
                     H += z.value.text;
                     H.includes(`
-  `);
+`);
 
                   ) {
                     const K = H.slice(
                       0,
                       H.indexOf(`
-  `),
+`),
                     )
                     D.push(K),
                       A(),
                       k.push(K),
                       (H = H.slice(
                         H.indexOf(`
-  `) + 1,
+`) + 1,
                       ))
                   }
                   break
@@ -921,7 +921,7 @@ export function createFastEditService(params) {
           const c = new Map(),
             h = new Set(),
             u = t.currentFile?.contents.split(`
-  `) ?? [""],
+`) ?? [""],
             d = u.length
           for await (const g of e) {
             const p = g.cmdKResponse?.response
@@ -996,18 +996,18 @@ export function createFastEditService(params) {
                 for (
                   w.lineBuffer += p.value.text;
                   w.lineBuffer.includes(`
-  `);
+`);
 
                 ) {
                   const C = w.lineBuffer.slice(
                     0,
                     w.lineBuffer.indexOf(`
-  `),
+`),
                   )
                   this.m.addLineToDiff(w.diffId, C),
                     (w.lineBuffer = w.lineBuffer.slice(
                       w.lineBuffer.indexOf(`
-  `) + 1,
+`) + 1,
                     ))
                 }
                 break
@@ -1181,13 +1181,13 @@ export function createFastEditService(params) {
                 (C === null &&
                   ((C = c.getUpdatedLineNumber(
                     l.currentFile.contents.split(`
-  `).length,
+`).length,
                   )),
                   C !== null && (C += 1)),
                 w === null &&
                   ((w = c.getUpdatedLineNumber(
                     l.currentFile.contents.split(`
-  `).length,
+`).length,
                   )),
                   w !== null && (w += 1)),
                 w === null || C === null)
@@ -1203,7 +1203,7 @@ export function createFastEditService(params) {
                 x = l.currentFile.contents
                   .split(
                     `
-  `,
+`,
                   )
                   .slice(p.lineNumber - 1, p.lineNumber + p.replaceNumLines - 1),
                 k = {
@@ -1317,14 +1317,14 @@ export function createFastEditService(params) {
       }
       z(e) {
         const t = e.split(`
-  `),
+`),
           s = t.findIndex((o) => o.trim() !== ""),
           n = [...t].reverse().findIndex((o) => o.trim() !== ""),
           r = t.length - 1 - n
         return s === -1 || n === -1
           ? ""
           : t.slice(s, r + 1).join(`
-  `)
+`)
       }
       A(e, t) {
         return {
@@ -1353,7 +1353,7 @@ export function createFastEditService(params) {
                       editId: 0,
                       endLineNumberExclusive:
                         t.split(`
-  `).length + 2,
+`).length + 2,
                     }),
                   },
                 }),

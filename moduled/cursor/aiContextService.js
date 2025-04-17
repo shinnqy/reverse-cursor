@@ -219,7 +219,7 @@ export function createAIContextService(params) {
               o,
               this.n.asRelativePath(r.uri),
               r.getValue().split(`
-  `),
+`),
             )
           } else return
         } finally {

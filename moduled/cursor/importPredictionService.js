@@ -453,7 +453,7 @@ export function createImportPredictionService(params) {
                 edit.edit.textEdit.range.startColumn === 1 &&
                 edit.edit.textEdit.range.endColumn === 1 &&
                 edit.edit.textEdit.text.includes(`
-    `),
+`),
             ) && marker.source === "ts")
           )
             return (
@@ -1112,7 +1112,7 @@ export function createImportPredictionService(params) {
           // 计算新增/删除的行数差
           lineDelta =
             textEdit.text.split(`
-  `).length - originalLineCount
+`).length - originalLineCount
         this.r = this.r.map((marker) =>
           marker.range.startLineNumber > startLineNumber && extUri.isEqual(marker.uri, editor.getModel()?.uri)
             ? {
@@ -1142,9 +1142,9 @@ export function createImportPredictionService(params) {
         const isCommandAction = editInfo.action.action.command !== undefined,
           isSingleLineEdit =
             editInfo.edit.text.split(`
-    `).length === 2 &&
+`).length === 2 &&
             editInfo.edit.text.trim().split(`
-    `).length === 1
+`).length === 1
         return isCommandAction || !isSingleLineEdit
       }
       isShowingImportSuggestion() {

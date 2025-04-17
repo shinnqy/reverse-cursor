@@ -841,7 +841,7 @@ export function createCmdKService2(params) {
                     Ie.response.case === "editStream"
                       ? yield Ie.response.value.text.replace(
                           `
-  `,
+`,
                           Bt,
                         )
                       : Ie.response.case === "statusUpdate" &&

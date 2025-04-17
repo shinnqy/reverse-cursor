@@ -204,7 +204,7 @@ export function createDiffUtils(params) {
       currentGroup && currentGroup.added === diff.added && currentGroup.removed === diff.removed
         ? (currentGroup.value +=
             `
-  ` + diff.value)
+` + diff.value)
         : (currentGroup && groupedDiffs.push(currentGroup), (currentGroup = { ...diff }))
     return currentGroup && groupedDiffs.push(currentGroup), groupedDiffs
   }
@@ -217,22 +217,22 @@ export function createDiffUtils(params) {
       currentDiff.removed
         ? nextNonAdded &&
           (normalizedDiffs[i].value += `
-  `)
+`)
         : currentDiff.added
           ? nextNonRemoved &&
             (normalizedDiffs[i].value += `
-  `)
+`)
           : nextNonAdded && nextNonRemoved
             ? (normalizedDiffs[i].value += `
-  `)
+`)
             : nextNonAdded
               ? (nextNonAdded.value =
                   `
-  ` + nextNonAdded.value)
+` + nextNonAdded.value)
               : nextNonRemoved &&
                 (nextNonRemoved.value =
                   `
-  ` + nextNonRemoved.value)
+` + nextNonRemoved.value)
     }
     return normalizedDiffs.filter((t) => t.value !== "")
   }

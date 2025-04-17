@@ -784,8 +784,8 @@ export function createAuth(params) {
     }
     async tb() {
       const e = `# CHANGES TO THIS FILE WILL BE OVERWRITTEN
-  # TO UPDATE THE BLOCKLIST, PLEASE USE THE TEAM SETTINGS PAGE
-  `,
+# TO UPDATE THE BLOCKLIST, PLEASE USE THE TEAM SETTINGS PAGE
+`,
         t = this.f.applicationUserPersistentStorage.aiSettings.teamIds,
         s = await this.adminBlocklistPath()
       if (!t || t.length === 0) {
@@ -816,7 +816,7 @@ export function createAuth(params) {
           r.length > 0)
         ) {
           const o = [e, ...r].join(`
-  `)
+`)
           await this.jb.writeFile(s, Yt.fromString(o))
         } else await this.jb.del(s).catch(() => {})
       } catch (n) {
