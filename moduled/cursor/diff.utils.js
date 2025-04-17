@@ -1,8 +1,140 @@
 // @ts-check
 
-export function createZXe(params) {
+export function createDiffUtils(params) {
   // FFt: computeWordLevelDiffs, WBt: computeCharLevelDiffs
-  const { FFt, WBt } = params;
+  const { FFt, CYe, KS } = params;
+
+  var Acr = new CYe()
+  function WBt(i, e, t) {
+    return i.length > 2e3 || e.length > 2e3
+      ? (console.error(
+          "BAD BAD BAD BAD BAD. THIS SHOULD NOT HAPPEN. PLEASE FIX THE CPP BUG. diffChars received strings that were too long. Returning the trivial diff.",
+          i.length,
+          e.length,
+        ),
+        [
+          { value: i, removed: true },
+          { value: e, added: true },
+        ])
+      : Acr.diff(i, e, t)
+  }
+  /**
+   * 分析差异并提取修改信息
+   * @param {Array} diffChanges - 差异变化数组
+   * @returns {Object} 包含内联修改和整行修改的对象
+   */
+  function analyzeDiffChanges(diffChanges) {
+    let originalText = "",
+      combinedText = "",
+      pendingAddedText = "",
+      additionIndex = 0
+    const inlineModifications = [],
+      fullLineModifications = [],
+      /**
+       * 处理待添加的文本
+       * @param {string} nextValue - 下一个值
+       */
+      processPendingText = (nextValue) => {
+        let pendingLines = pendingAddedText.split(`
+`),
+          currentLineNumber =
+            originalText.split(`
+`).length - 1
+        if (
+          nextValue !== "" &&
+          !nextValue.startsWith(`
+`) &&
+          pendingLines.length > 0
+        ) {
+          // 处理内联添加的情况
+          const lastPendingLine = pendingLines.pop()
+          let column
+          pendingLines.length > 0
+            ? (column = 1)
+            : (column =
+                (originalText
+                  .split(
+                    `
+`,
+                  )
+                  .at(-1)?.length ?? 0) + 1),
+            lastPendingLine !== undefined &&
+              lastPendingLine !== "" &&
+              inlineModifications.push({ lineNumber: currentLineNumber, column, value: lastPendingLine }),
+            (currentLineNumber -= 1)
+        } else {
+          // 处理整行添加的情况
+          const firstPendingLine = pendingLines.shift()
+          if (firstPendingLine !== undefined && firstPendingLine !== "") {
+            const column =
+              originalText
+                .split(
+                  `
+`,
+                )
+                .at(-1)?.length ?? 0
+            inlineModifications.push({ lineNumber: currentLineNumber, column: column + 1, value: firstPendingLine })
+          }
+        }
+        if (pendingLines.length > 0)
+          for (const pendingLine of pendingLines)
+            fullLineModifications.push({
+              beforeLineNumber: currentLineNumber,
+              indexInMultilineAddition: additionIndex++,
+              value: pendingLine,
+            })
+      }
+    for (const diffChange of diffChanges)
+      diffChange.added
+        ? (pendingAddedText += diffChange.value)
+        : (pendingAddedText !== "" && (processPendingText(diffChange.value), (combinedText += pendingAddedText), (pendingAddedText = "")),
+          (originalText += diffChange.value),
+          (combinedText += diffChange.value))
+    return pendingAddedText !== "" && processPendingText(""), { inlineModifications, fullLineModifications }
+  }
+  /**
+   * 检查位置是否在修改之前
+   * @param {Object} modifications - 修改信息
+   * @param {Object} position - 位置信息
+   * @returns {boolean} 是否在修改之前
+   */
+  function isPositionBeforeModifications(modifications, position) {
+    return !!(
+      modifications.fullLineModifications.some((modification) => modification.beforeLineNumber < position.lineNumber) ||
+      modifications.inlineModifications
+        .filter((s) => s.lineNumber === position.lineNumber)
+        .some((s) => s.startColumn < position.column)
+    )
+  }
+  /**
+   * 处理差异变化并应用偏移
+   * @param {Array} singleLineCharChanges - 差异变化数组
+   * @param {number} startLineNumber - 行偏移量
+   * @param {Object} cursorPosition - 光标位置
+   * @param {any} selectionStart - 选择开始位置
+   * @param {any} selectionEnd - 选择结束位置
+   * @returns {Object} 处理结果
+   */
+  function calculateInlineChanges(singleLineCharChanges, startLineNumber, cursorPosition, selectionStart, selectionEnd) {
+    const { inlineModifications, fullLineModifications } = analyzeDiffChanges(singleLineCharChanges),
+      adjustedFullLineModifications = []
+    for (const modification of fullLineModifications)
+      adjustedFullLineModifications.push({
+        beforeLineNumber: modification.beforeLineNumber + startLineNumber,
+        indexInMultilineAddition: modification.indexInMultilineAddition,
+        content: modification.value,
+        decorations: [new KS(1, modification.value.length + 1, "ghost-text", 0)],
+      })
+    const adjustedInlineModifications = inlineModifications.map((modification) => ({
+      lineNumber: modification.lineNumber + startLineNumber,
+      startColumn: modification.column,
+      newValue: modification.value,
+      oldValue: "",
+    }))
+    return isPositionBeforeModifications({ inlineModifications: adjustedInlineModifications, fullLineModifications: adjustedFullLineModifications }, cursorPosition)
+      ? { success: false, inlineModifications: adjustedInlineModifications, fullLineModifications: adjustedFullLineModifications }
+      : { success: true, inlineModifications: adjustedInlineModifications, fullLineModifications: adjustedFullLineModifications }
+  }
 
   function trimCommonLines(oldText, newText, lineSeparator) {
     const oldLines = oldText.split(lineSeparator),
@@ -130,5 +262,9 @@ export function createZXe(params) {
     return flushGroup(), { wordDiffs: wordDiffs, charDiffs: charDiffs }
   }
 
-  return computeDiffs;
+  return {
+    WBt,
+    calculateInlineChanges,
+    computeDiffs,
+  };
 }
