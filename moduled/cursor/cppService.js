@@ -2,7 +2,7 @@
 
 
 export function createCppService(params) {
-  const {V, EYe, G, LRUCache, EditHistoryCache, SuggestionCache, SuggestionManager, MutableDisposable, J: DisposableStore, RequestDebouncer, um, hF, ss, CppIntent, JB, onDidRegisterWindow, fu, Va, nze, WEn, m2i, qEn, b2i, S9, $, Hae, m0t, Ad, fUe, Sp, VB, replaceTextInRange, generateModifiedText, EditHistoryDiffFormatter, VS: getWindows, NYi, CURSOR_PREDICTION, Ri: MarkerSeverity, ce: Schemas, Pn, Cg, GhostTextController, isPureEmptyLineInsertion, U, mu, Me, extUri, $fo, qdt, Ffo, normalizeSeverity, uI, formatRelatedInformation, Cf: LinterErrors, hG: StreamCppRequestControlToken, mR, fm, gle, xr, Gr, GB, QN, Ycr, Yt: VSBuffer, StreamCppRequest, Kf, rt, handleStreamWithPredictions, handleChunkedStream, consumeRemainingStream, Hu, Aoe, Qcr, TKn, F_, tdi, _fo, rge, OFt, Xfo, Ui, computeDiffs, k7, RKi, jBt, isEditOnShortestPath, Ho: CurrentFileInfo, Qm, T1t, Xf, oj, ee, j, Je, CppDiffPeekViewWidget, cppService, ei, wf, yi, Ci, $h} = params;
+  const {V, EYe, G, LRUCache, EditHistoryCache, SuggestionCache, SuggestionManager, MutableDisposable, J: DisposableStore, RequestDebouncer, um, hF, ss, CppIntent, JB, onDidRegisterWindow, fu, Va, nze, WEn, m2i, qEn, b2i, S9, $, Hae, m0t, Ad, fUe, Sp, VB, replaceTextInRange, generateModifiedText, EditHistoryDiffFormatter, VS: getWindows, NYi, CURSOR_PREDICTION, Ri: MarkerSeverity, ce: Schemas, Pn, Cg, GhostTextController, isPureEmptyLineInsertion, U, mu, Me, extUri, $fo, qdt, Ffo, normalizeSeverity, uI, formatRelatedInformation, Cf: LinterErrors, hG: StreamCppRequestControlToken, mR, fm, gle, xr, Gr, GB, QN, Ycr, Yt: VSBuffer, StreamCppRequest, Kf, rt, handleStreamWithPredictions, handleChunkedStream, consumeRemainingStream, Hu, Aoe, Qcr, TKn, F_, tdi, _fo, rge, OFt, Xfo, Ui, computeDiffs, SUGGESTION_DISPLAY_TYPE, RKi, jBt, isEditOnShortestPath, Ho: CurrentFileInfo, Qm, T1t, Xf, oj, ee, j, Je, CppDiffPeekViewWidget, cppService, ei, wf, yi, Ci, $h} = params;
 
   var bgo = class zmi extends ee {
     static {
@@ -3518,7 +3518,7 @@ export function createCppService(params) {
               replaceText,
               eol,
             ),
-            diffsToUse = this.suggestionTypeCache.get(suggestion.decorationId) === k7.PreviewBox ? wordDiffs : charDiffs
+            diffsToUse = this.suggestionTypeCache.get(suggestion.decorationId) === SUGGESTION_DISPLAY_TYPE.PreviewBox ? wordDiffs : charDiffs
           return (
             this.updateSuggestionGreenHighlights(editorModel, suggestion, diffsToUse),
             this.updateSuggestionState({
@@ -3544,7 +3544,7 @@ export function createCppService(params) {
             })
             const currentTextInRange = editorModel.getValueInRange(range),
               { wordDiffs, charDiffs } = computeDiffs(suggestion.originalText ?? "", currentTextInRange, eol),
-              diffsToUse = this.suggestionTypeCache.get(suggestion.decorationId) === k7.PreviewBox ? wordDiffs : charDiffs
+              diffsToUse = this.suggestionTypeCache.get(suggestion.decorationId) === SUGGESTION_DISPLAY_TYPE.PreviewBox ? wordDiffs : charDiffs
             return this.updateSuggestionGreenHighlights(editorModel, suggestion, diffsToUse), nextWordResult
           }
         }
