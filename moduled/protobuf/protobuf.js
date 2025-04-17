@@ -114,7 +114,7 @@ export function createProtoBuf() {
       return JSON.stringify(e, null, i?.prettySpaces ?? 0)
     }
     toJSON() {
-      return this.toJson({ emitDefaultValues: !0 })
+      return this.toJson({ emitDefaultValues: true })
     }
     getType() {
       return Object.getPrototypeOf(this).constructor
@@ -276,7 +276,7 @@ export function createProtoBuf() {
         a = BigInt("18446744073709551615")
       return {
         zero: BigInt(0),
-        supported: !0,
+        supported: true,
         parse(l) {
           const c = typeof l == "bigint" ? l : BigInt(l)
           if (c > r || c < n) throw new Error(`int64 invalid: ${l}`)
@@ -289,21 +289,21 @@ export function createProtoBuf() {
         },
         enc(l) {
           return (
-            i.setBigInt64(0, this.parse(l), !0),
-            { lo: i.getInt32(0, !0), hi: i.getInt32(4, !0) }
+            i.setBigInt64(0, this.parse(l), true),
+            { lo: i.getInt32(0, true), hi: i.getInt32(4, true) }
           )
         },
         uEnc(l) {
           return (
-            i.setBigInt64(0, this.uParse(l), !0),
-            { lo: i.getInt32(0, !0), hi: i.getInt32(4, !0) }
+            i.setBigInt64(0, this.uParse(l), true),
+            { lo: i.getInt32(0, true), hi: i.getInt32(4, true) }
           )
         },
         dec(l, c) {
-          return i.setInt32(0, l, !0), i.setInt32(4, c, !0), i.getBigInt64(0, !0)
+          return i.setInt32(0, l, true), i.setInt32(4, c, true), i.getBigInt64(0, true)
         },
         uDec(l, c) {
-          return i.setInt32(0, l, !0), i.setInt32(4, c, !0), i.getBigUint64(0, !0)
+          return i.setInt32(0, l, true), i.setInt32(4, c, true), i.getBigUint64(0, true)
         },
       }
     }
@@ -311,7 +311,7 @@ export function createProtoBuf() {
       s = (n) => fp(/^[0-9]+$/.test(n), `uint64 invalid: ${n}`)
     return {
       zero: "0",
-      supported: !1,
+      supported: false,
       parse(n) {
         return typeof n != "string" && (n = n.toString()), t(n), n
       },
@@ -356,16 +356,16 @@ export function createProtoBuf() {
     ;(i[(i.BIGINT = 0)] = "BIGINT"), (i[(i.STRING = 1)] = "STRING")
   })(RB || (RB = {}))
   function AB(i, e, t) {
-    if (e === t) return !0
+    if (e === t) return true
     if (i == ds.BYTES) {
       if (
         !(e instanceof Uint8Array) ||
         !(t instanceof Uint8Array) ||
         e.length !== t.length
       )
-        return !1
-      for (let s = 0; s < e.length; s++) if (e[s] !== t[s]) return !1
-      return !0
+        return false
+      for (let s = 0; s < e.length; s++) if (e[s] !== t[s]) return false
+      return true
     }
     switch (i) {
       case ds.UINT64:
@@ -375,12 +375,12 @@ export function createProtoBuf() {
       case ds.SINT64:
         return e == t
     }
-    return !1
+    return false
   }
   function Qz(i, e) {
     switch (i) {
       case ds.BOOL:
-        return !1
+        return false
       case ds.UINT64:
       case ds.FIXED64:
       case ds.INT64:
@@ -401,7 +401,7 @@ export function createProtoBuf() {
   function fRi(i, e) {
     switch (i) {
       case ds.BOOL:
-        return e === !1
+        return e === false
       case ds.STRING:
         return e === ""
       case ds.BYTES:
@@ -435,7 +435,7 @@ export function createProtoBuf() {
   function kfn(i) {
     const e = i.field
     if (e.repeated) return []
-    if (e.default !== void 0) return e.default
+    if (e.default !== undefined) return e.default
     switch (e.kind) {
       case "enum":
         return e.T.values[0].no
@@ -473,7 +473,7 @@ export function createProtoBuf() {
         r,
         o = 0
       for (let a = 0; a < i.length; a++) {
-        if (((r = $He[i.charCodeAt(a)]), r === void 0))
+        if (((r = $He[i.charCodeAt(a)]), r === undefined))
           switch (i[a]) {
             case "=":
               n = 0
@@ -551,7 +551,7 @@ export function createProtoBuf() {
     !a.opt &&
       !a.repeated &&
       (a.kind == "enum" || a.kind == "scalar") &&
-      (a = { ...e.field, opt: !0 }),
+      (a = { ...e.field, opt: true }),
       e.runtime.bin.writeField(a, t, o, r)
     const l = n.readerFactory(o.finish())
     for (; l.pos < l.len; ) {
@@ -581,12 +581,12 @@ export function createProtoBuf() {
       case "enum":
       case "scalar":
         return i.opt || i.req
-          ? e[t] !== void 0
+          ? e[t] !== undefined
           : i.kind == "enum"
             ? e[t] !== i.T.values[0].no
             : !fRi(i.T, e[t])
       case "message":
-        return e[t] !== void 0
+        return e[t] !== undefined
       case "map":
         return Object.keys(e[t]).length > 0
     }
@@ -595,20 +595,20 @@ export function createProtoBuf() {
     const t = i.localName,
       s = !i.opt && !i.req
     if (i.repeated) e[t] = []
-    else if (i.oneof) e[i.oneof.localName] = { case: void 0 }
+    else if (i.oneof) e[i.oneof.localName] = { case: undefined }
     else
       switch (i.kind) {
         case "map":
           e[t] = {}
           break
         case "enum":
-          e[t] = s ? i.T.values[0].no : void 0
+          e[t] = s ? i.T.values[0].no : undefined
           break
         case "scalar":
-          e[t] = s ? Qz(i.T, i.L) : void 0
+          e[t] = s ? Qz(i.T, i.L) : undefined
           break
         case "message":
-          e[t] = void 0
+          e[t] = undefined
           break
       }
   }
@@ -620,15 +620,15 @@ export function createProtoBuf() {
         (s) => s in i && typeof i[s] == "function",
       )
     )
-      return !1
+      return false
     const t = i.getType()
     return t === null ||
       typeof t != "function" ||
       !("typeName" in t) ||
       typeof t.typeName != "string"
-      ? !1
-      : e === void 0
-        ? !0
+      ? false
+      : e === undefined
+        ? true
         : t.typeName == e.typeName
   }
   function wRi(i, e) {
@@ -645,11 +645,11 @@ export function createProtoBuf() {
       "google.protobuf.StringValue": ds.STRING,
       "google.protobuf.BytesValue": ds.BYTES,
     },
-    CRi = { ignoreUnknownFields: !1 },
+    CRi = { ignoreUnknownFields: false },
     SRi = {
-      emitDefaultValues: !1,
-      enumAsInteger: !1,
-      useProtoFieldName: !1,
+      emitDefaultValues: false,
+      enumAsInteger: false,
+      useProtoFieldName: false,
       prettySpaces: 0,
     }
   function Tfn(i) {
@@ -678,7 +678,7 @@ export function createProtoBuf() {
             if (l.oneof) {
               if (a === null && l.kind == "scalar") continue
               const c = n.get(l.oneof)
-              if (c !== void 0)
+              if (c !== undefined)
                 throw new Error(
                   `cannot decode message ${i.typeName} from JSON: multiple keys for oneof "${l.oneof.name}" present: "${c}", "${o}"`,
                 )
@@ -686,11 +686,11 @@ export function createProtoBuf() {
             }
             xRi(s, a, l, t, i)
           } else {
-            let c = !1
+            let c = false
             if (r?.findExtension && o.startsWith("[") && o.endsWith("]")) {
               const h = r.findExtension(o.substring(1, o.length - 1))
               if (h && h.extendee.typeName == i.typeName) {
-                c = !0
+                c = true
                 const [u, d] = gRi(h)
                 xRi(u, a, h.field, t, h), Dfn(s, h, d(), t)
               }
@@ -715,7 +715,7 @@ export function createProtoBuf() {
             }
             const o = n.oneof ? i[n.oneof.localName].value : i[n.localName],
               a = kRi(n, o, e)
-            a !== void 0 && (s[e.useProtoFieldName ? n.name : n.jsonName] = a)
+            a !== undefined && (s[e.useProtoFieldName ? n.name : n.jsonName] = a)
           }
           const r = e.typeRegistry
           if (r?.findExtensionFor)
@@ -724,7 +724,7 @@ export function createProtoBuf() {
               if (a && mRi(i, a)) {
                 const l = Ifn(i, a, e),
                   c = kRi(a.field, l, e)
-                c !== void 0 && (s[a.field.jsonName] = c)
+                c !== undefined && (s[a.field.jsonName] = c)
               }
             }
         } catch (r) {
@@ -737,10 +737,10 @@ export function createProtoBuf() {
         return s
       },
       readScalar(i, e, t) {
-        return Wre(i, e, t ?? RB.BIGINT, !0)
+        return Wre(i, e, t ?? RB.BIGINT, true)
       },
       writeScalar(i, e, t) {
-        if (e !== void 0 && (t || fRi(i, e))) return BHe(i, e)
+        if (e !== undefined && (t || fRi(i, e))) return BHe(i, e)
       },
       debug: YN,
     }
@@ -775,12 +775,12 @@ export function createProtoBuf() {
             o.push(t.T.fromJson(a, s))
             break
           case "enum":
-            const l = ESt(t.T, a, s.ignoreUnknownFields, !0)
+            const l = ESt(t.T, a, s.ignoreUnknownFields, true)
             l !== OHe && o.push(l)
             break
           case "scalar":
             try {
-              o.push(Wre(t.T, a, t.L, !0))
+              o.push(Wre(t.T, a, t.L, true))
             } catch (c) {
               let h = `cannot decode field ${n.typeName}.${t.name} from JSON: ${YN(a)}`
               throw (
@@ -822,12 +822,12 @@ export function createProtoBuf() {
             o[c] = t.V.T.fromJson(l, s)
             break
           case "enum":
-            const h = ESt(t.V.T, l, s.ignoreUnknownFields, !0)
+            const h = ESt(t.V.T, l, s.ignoreUnknownFields, true)
             h !== OHe && (o[c] = h)
             break
           case "scalar":
             try {
-              o[c] = Wre(t.V.T, l, RB.BIGINT, !0)
+              o[c] = Wre(t.V.T, l, RB.BIGINT, true)
             } catch (u) {
               let d = `cannot decode map value for field ${n.typeName}.${t.name} from JSON: ${YN(e)}`
               throw (
@@ -857,7 +857,7 @@ export function createProtoBuf() {
                 (i[r] = o.fieldWrapper.unwrapField(a)))
           break
         case "enum":
-          const l = ESt(t.T, e, s.ignoreUnknownFields, !1)
+          const l = ESt(t.T, e, s.ignoreUnknownFields, false)
           switch (l) {
             case FHe:
               yRi(t, i)
@@ -871,7 +871,7 @@ export function createProtoBuf() {
           break
         case "scalar":
           try {
-            const c = Wre(t.T, e, t.L, !1)
+            const c = Wre(t.T, e, t.L, false)
             switch (c) {
               case FHe:
                 yRi(t, i)
@@ -896,13 +896,13 @@ export function createProtoBuf() {
     if (i === ds.BOOL)
       switch (e) {
         case "true":
-          e = !0
+          e = true
           break
         case "false":
-          e = !1
+          e = false
           break
       }
-    return Wre(i, e, RB.BIGINT, !0).toString()
+    return Wre(i, e, RB.BIGINT, true).toString()
   }
   function Wre(i, e, t, s) {
     if (e === null) return s ? Qz(i, t) : FHe
@@ -934,7 +934,7 @@ export function createProtoBuf() {
               e.length > 0 &&
               e.trim().length === e.length &&
               (r = Number(e)),
-          r === void 0)
+          r === undefined)
         )
           break
         return i == ds.UINT32 || i == ds.FIXED32 ? SSt(r) : AHe(r), r
@@ -980,7 +980,7 @@ export function createProtoBuf() {
         break
       case "string":
         const n = i.findName(e)
-        if (n !== void 0) return n.no
+        if (n !== undefined) return n.no
         if (t) return OHe
         break
     }
@@ -988,7 +988,7 @@ export function createProtoBuf() {
   }
   function Rfn(i) {
     return i.repeated || i.kind == "map"
-      ? !0
+      ? true
       : !(i.oneof || i.kind == "message" || i.opt || i.req)
   }
   function kRi(i, e, t) {
@@ -1008,7 +1008,7 @@ export function createProtoBuf() {
           for (const [o, a] of n) s[o.toString()] = ISt(r, a, t.enumAsInteger)
           break
       }
-      return t.emitDefaultValues || n.length > 0 ? s : void 0
+      return t.emitDefaultValues || n.length > 0 ? s : undefined
     }
     if (i.repeated) {
       fp(Array.isArray(e))
@@ -1025,7 +1025,7 @@ export function createProtoBuf() {
           for (let n = 0; n < e.length; n++) s.push(e[n].toJson(t))
           break
       }
-      return t.emitDefaultValues || s.length > 0 ? s : void 0
+      return t.emitDefaultValues || s.length > 0 ? s : undefined
     }
     switch (i.kind) {
       case "scalar":
@@ -1161,21 +1161,21 @@ export function createProtoBuf() {
       float(i) {
         iRi(i)
         let e = new Uint8Array(4)
-        return new DataView(e.buffer).setFloat32(0, i, !0), this.raw(e)
+        return new DataView(e.buffer).setFloat32(0, i, true), this.raw(e)
       }
       double(i) {
         let e = new Uint8Array(8)
-        return new DataView(e.buffer).setFloat64(0, i, !0), this.raw(e)
+        return new DataView(e.buffer).setFloat64(0, i, true), this.raw(e)
       }
       fixed32(i) {
         SSt(i)
         let e = new Uint8Array(4)
-        return new DataView(e.buffer).setUint32(0, i, !0), this.raw(e)
+        return new DataView(e.buffer).setUint32(0, i, true), this.raw(e)
       }
       sfixed32(i) {
         AHe(i)
         let e = new Uint8Array(4)
-        return new DataView(e.buffer).setInt32(0, i, !0), this.raw(e)
+        return new DataView(e.buffer).setInt32(0, i, true), this.raw(e)
       }
       sint32(i) {
         return AHe(i), (i = ((i << 1) ^ (i >> 31)) >>> 0), dRi(i, this.buf), this
@@ -1184,13 +1184,13 @@ export function createProtoBuf() {
         let e = new Uint8Array(8),
           t = new DataView(e.buffer),
           s = Jf.enc(i)
-        return t.setInt32(0, s.lo, !0), t.setInt32(4, s.hi, !0), this.raw(e)
+        return t.setInt32(0, s.lo, true), t.setInt32(4, s.hi, true), this.raw(e)
       }
       fixed64(i) {
         let e = new Uint8Array(8),
           t = new DataView(e.buffer),
           s = Jf.uEnc(i)
-        return t.setInt32(0, s.lo, !0), t.setInt32(4, s.hi, !0), this.raw(e)
+        return t.setInt32(0, s.lo, true), t.setInt32(4, s.hi, true), this.raw(e)
       }
       int64(i) {
         let e = Jf.enc(i)
@@ -1245,7 +1245,7 @@ export function createProtoBuf() {
             for (;;) {
               const [n, r] = this.tag()
               if (r === tm.EndGroup) {
-                if (e !== void 0 && n !== e)
+                if (e !== undefined && n !== e)
                   throw new Error("invalid end group tag")
                 break
               }
@@ -1287,10 +1287,10 @@ export function createProtoBuf() {
         return i !== 0 || e !== 0
       }
       fixed32() {
-        return this.view.getUint32((this.pos += 4) - 4, !0)
+        return this.view.getUint32((this.pos += 4) - 4, true)
       }
       sfixed32() {
-        return this.view.getInt32((this.pos += 4) - 4, !0)
+        return this.view.getInt32((this.pos += 4) - 4, true)
       }
       fixed64() {
         return Jf.uDec(this.sfixed32(), this.sfixed32())
@@ -1299,10 +1299,10 @@ export function createProtoBuf() {
         return Jf.dec(this.sfixed32(), this.sfixed32())
       }
       float() {
-        return this.view.getFloat32((this.pos += 4) - 4, !0)
+        return this.view.getFloat32((this.pos += 4) - 4, true)
       }
       double() {
-        return this.view.getFloat64((this.pos += 8) - 8, !0)
+        return this.view.getFloat64((this.pos += 8) - 8, true)
       }
       bytes() {
         let i = this.uint32(),
@@ -1314,8 +1314,8 @@ export function createProtoBuf() {
       }
     },
     Zz = Symbol("@bufbuild/protobuf/unknown-fields"),
-    ERi = { readUnknownFields: !0, readerFactory: (i) => new Mfn(i) },
-    IRi = { writeUnknownFields: !0, writerFactory: () => new Afn() }
+    ERi = { readUnknownFields: true, readerFactory: (i) => new Mfn(i) },
+    IRi = { writeUnknownFields: true, writerFactory: () => new Afn() }
   function $fn(i) {
     return i ? { ...ERi, ...i } : ERi
   }
@@ -1347,7 +1347,7 @@ export function createProtoBuf() {
         let a, l
         for (
           ;
-          e.pos < o && (([a, l] = e.tag()), !(n === !0 && l == tm.EndGroup));
+          e.pos < o && (([a, l] = e.tag()), !(n === true && l == tm.EndGroup));
 
         ) {
           const c = r.fields.find(a)
@@ -1378,7 +1378,7 @@ export function createProtoBuf() {
         return t.writeUnknownFields && this.writeUnknownFields(i, e), e
       },
       writeField(i, e, t, s) {
-        e !== void 0 && TRi(i, e, t, s)
+        e !== undefined && TRi(i, e, t, s)
       },
     }
   }
@@ -1446,16 +1446,16 @@ export function createProtoBuf() {
               o = e.int32()
               break
             case "message":
-              o = _He(e, new i.V.T(), t, void 0)
+              o = _He(e, new i.V.T(), t, undefined)
               break
           }
           break
       }
     }
     if (
-      (r === void 0 && (r = Qz(i.K, RB.BIGINT)),
+      (r === undefined && (r = Qz(i.K, RB.BIGINT)),
       typeof r != "string" && typeof r != "number" && (r = r.toString()),
-      o === void 0)
+      o === undefined)
     )
       switch (i.V.kind) {
         case "scalar":
@@ -1509,7 +1509,7 @@ export function createProtoBuf() {
     }
   }
   function TRi(i, e, t, s) {
-    fp(e !== void 0)
+    fp(e !== undefined)
     const n = i.repeated
     switch (i.kind) {
       case "scalar":
@@ -1555,7 +1555,7 @@ export function createProtoBuf() {
         qre(i, ds.INT32, 2, n)
         break
       case "message":
-        fp(n !== void 0), i.tag(2, tm.LengthDelimited).bytes(n.toBinary(e))
+        fp(n !== undefined), i.tag(2, tm.LengthDelimited).bytes(n.toBinary(e))
         break
     }
     i.join()
@@ -1567,7 +1567,7 @@ export function createProtoBuf() {
       : i.tag(t.no, tm.LengthDelimited).bytes(n.toBinary(e))
   }
   function qre(i, e, t, s) {
-    fp(s !== void 0)
+    fp(s !== undefined)
     let [n, r] = LRi(e)
     i.tag(t, n)[r](s)
   }
@@ -1603,7 +1603,7 @@ export function createProtoBuf() {
     return {
       setEnumType: rRi,
       initPartial(i, e) {
-        if (i === void 0) return
+        if (i === undefined) return
         const t = e.getType()
         for (const s of t.fields.byMember()) {
           const n = s.localName,
@@ -1613,7 +1613,7 @@ export function createProtoBuf() {
             switch (s.kind) {
               case "oneof":
                 const a = o[n].case
-                if (a === void 0) continue
+                if (a === undefined) continue
                 const l = s.findField(a)
                 let c = o[n].value
                 l && l.kind == "message" && !G9(c, l.T)
@@ -1661,14 +1661,14 @@ export function createProtoBuf() {
       },
       equals(i, e, t) {
         return e === t
-          ? !0
+          ? true
           : !e || !t
-            ? !1
+            ? false
             : i.fields.byMember().every((s) => {
                 const n = e[s.localName],
                   r = t[s.localName]
                 if (s.repeated) {
-                  if (n.length !== r.length) return !1
+                  if (n.length !== r.length) return false
                   switch (s.kind) {
                     case "message":
                       return n.every((o, a) => s.T.equals(o, r[a]))
@@ -1687,9 +1687,9 @@ export function createProtoBuf() {
                   case "scalar":
                     return AB(s.T, n, r)
                   case "oneof":
-                    if (n.case !== r.case) return !1
+                    if (n.case !== r.case) return false
                     const o = s.findField(n.case)
-                    if (o === void 0) return !0
+                    if (o === undefined) return true
                     switch (o.kind) {
                       case "message":
                         return o.T.equals(n.value, r.value)
@@ -1730,7 +1730,7 @@ export function createProtoBuf() {
             n.kind == "oneof"
               ? (o = n.findField(r.case)
                   ? { case: r.case, value: HHe(r.value) }
-                  : { case: void 0 })
+                  : { case: undefined })
               : (o = HHe(r))
           s[n.localName] = o
         }
@@ -1741,7 +1741,7 @@ export function createProtoBuf() {
     }
   }
   function HHe(i) {
-    if (i === void 0) return i
+    if (i === undefined) return i
     if (G9(i)) return i.clone()
     if (i instanceof Uint8Array) {
       const e = new Uint8Array(i.byteLength)
@@ -1817,17 +1817,17 @@ export function createProtoBuf() {
     return e ? t : Jfn(Gfn(t))
   }
   function Wfn(i) {
-    return ARi(i, !1)
+    return ARi(i, false)
   }
   var qfn = MRi
   function MRi(i) {
-    let e = !1
+    let e = false
     const t = []
     for (let s = 0; s < i.length; s++) {
       let n = i.charAt(s)
       switch (n) {
         case "_":
-          e = !0
+          e = true
           break
         case "0":
         case "1":
@@ -1839,10 +1839,10 @@ export function createProtoBuf() {
         case "7":
         case "8":
         case "9":
-          t.push(n), (e = !1)
+          t.push(n), (e = false)
           break
         default:
-          e && ((e = !1), (n = n.toUpperCase())), t.push(n)
+          e && ((e = false), (n = n.toUpperCase())), t.push(n)
           break
       }
     }
@@ -1867,11 +1867,11 @@ export function createProtoBuf() {
     Kfn = class {
       constructor(i) {
         ;(this.kind = "oneof"),
-          (this.repeated = !1),
-          (this.packed = !1),
-          (this.opt = !1),
-          (this.req = !1),
-          (this.default = void 0),
+          (this.repeated = false),
+          (this.packed = false),
+          (this.opt = false),
+          (this.req = false),
+          (this.default = undefined),
           (this.fields = []),
           (this.name = i),
           (this.localName = Wfn(i))
@@ -1895,20 +1895,20 @@ export function createProtoBuf() {
     for (const n of typeof i == "function" ? i() : i) {
       const r = n
       if (
-        ((r.localName = ARi(n.name, n.oneof !== void 0)),
+        ((r.localName = ARi(n.name, n.oneof !== undefined)),
         (r.jsonName = n.jsonName ?? qfn(n.name)),
-        (r.repeated = n.repeated ?? !1),
+        (r.repeated = n.repeated ?? false),
         n.kind == "scalar" && (r.L = n.L ?? RB.BIGINT),
-        (r.delimited = n.delimited ?? !1),
-        (r.req = n.req ?? !1),
-        (r.opt = n.opt ?? !1),
-        n.packed === void 0 &&
+        (r.delimited = n.delimited ?? false),
+        (r.req = n.req ?? false),
+        (r.opt = n.opt ?? false),
+        n.packed === undefined &&
           (e
             ? (r.packed =
                 n.kind == "enum" ||
                 (n.kind == "scalar" && n.T != ds.BYTES && n.T != ds.STRING))
-            : (r.packed = !1)),
-        n.oneof !== void 0)
+            : (r.packed = false)),
+        n.oneof !== undefined)
       ) {
         const o = typeof n.oneof == "string" ? n.oneof : n.oneof.name
         ;(!s || s.name != o) && (s = new Kfn(o)), (r.oneof = s), s.addField(r)
@@ -1919,7 +1919,7 @@ export function createProtoBuf() {
   }
   var v = NRi(
       "proto3",
-      (i) => new RRi(i, (e) => FRi(e, !0)),
+      (i) => new RRi(i, (e) => FRi(e, true)),
       (i) => {
         for (const e of i.getType().fields.byMember()) {
           if (e.opt) continue
@@ -1931,7 +1931,7 @@ export function createProtoBuf() {
           }
           switch (e.kind) {
             case "oneof":
-              s[t] = { case: void 0 }
+              s[t] = { case: undefined }
               break
             case "enum":
               s[t] = 0
@@ -1950,7 +1950,7 @@ export function createProtoBuf() {
     ),
     pi = NRi(
       "proto2",
-      (i) => new RRi(i, (e) => FRi(e, !1)),
+      (i) => new RRi(i, (e) => FRi(e, false)),
       (i) => {
         for (const e of i.getType().fields.byMember()) {
           const t = e.localName,
@@ -1961,7 +1961,7 @@ export function createProtoBuf() {
           }
           switch (e.kind) {
             case "oneof":
-              s[t] = { case: void 0 }
+              s[t] = { case: undefined }
               break
             case "map":
               s[t] = {}
@@ -2032,7 +2032,7 @@ export function createProtoBuf() {
       }
       static {
         this.fields = pi.util.newFieldList(() => [
-          { no: 1, name: "file", kind: "message", T: DSt, repeated: !0 },
+          { no: 1, name: "file", kind: "message", T: DSt, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -2068,30 +2068,30 @@ export function createProtoBuf() {
       }
       static {
         this.fields = pi.util.newFieldList(() => [
-          { no: 1, name: "name", kind: "scalar", T: 9, opt: !0 },
-          { no: 2, name: "package", kind: "scalar", T: 9, opt: !0 },
-          { no: 3, name: "dependency", kind: "scalar", T: 9, repeated: !0 },
+          { no: 1, name: "name", kind: "scalar", T: 9, opt: true },
+          { no: 2, name: "package", kind: "scalar", T: 9, opt: true },
+          { no: 3, name: "dependency", kind: "scalar", T: 9, repeated: true },
           {
             no: 10,
             name: "public_dependency",
             kind: "scalar",
             T: 5,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 11, name: "weak_dependency", kind: "scalar", T: 5, repeated: !0 },
-          { no: 4, name: "message_type", kind: "message", T: Yfn, repeated: !0 },
-          { no: 5, name: "enum_type", kind: "message", T: BRi, repeated: !0 },
-          { no: 6, name: "service", kind: "message", T: ngn, repeated: !0 },
-          { no: 7, name: "extension", kind: "message", T: TSt, repeated: !0 },
-          { no: 8, name: "options", kind: "message", T: ogn, opt: !0 },
-          { no: 9, name: "source_code_info", kind: "message", T: bgn, opt: !0 },
-          { no: 12, name: "syntax", kind: "scalar", T: 9, opt: !0 },
+          { no: 11, name: "weak_dependency", kind: "scalar", T: 5, repeated: true },
+          { no: 4, name: "message_type", kind: "message", T: Yfn, repeated: true },
+          { no: 5, name: "enum_type", kind: "message", T: BRi, repeated: true },
+          { no: 6, name: "service", kind: "message", T: ngn, repeated: true },
+          { no: 7, name: "extension", kind: "message", T: TSt, repeated: true },
+          { no: 8, name: "options", kind: "message", T: ogn, opt: true },
+          { no: 9, name: "source_code_info", kind: "message", T: bgn, opt: true },
+          { no: 12, name: "syntax", kind: "scalar", T: 9, opt: true },
           {
             no: 14,
             name: "edition",
             kind: "enum",
             T: pi.getEnumType(AT),
-            opt: !0,
+            opt: true,
           },
         ])
       }
@@ -2129,28 +2129,28 @@ export function createProtoBuf() {
       }
       static {
         this.fields = pi.util.newFieldList(() => [
-          { no: 1, name: "name", kind: "scalar", T: 9, opt: !0 },
-          { no: 2, name: "field", kind: "message", T: TSt, repeated: !0 },
-          { no: 6, name: "extension", kind: "message", T: TSt, repeated: !0 },
-          { no: 3, name: "nested_type", kind: "message", T: bte, repeated: !0 },
-          { no: 4, name: "enum_type", kind: "message", T: BRi, repeated: !0 },
+          { no: 1, name: "name", kind: "scalar", T: 9, opt: true },
+          { no: 2, name: "field", kind: "message", T: TSt, repeated: true },
+          { no: 6, name: "extension", kind: "message", T: TSt, repeated: true },
+          { no: 3, name: "nested_type", kind: "message", T: bte, repeated: true },
+          { no: 4, name: "enum_type", kind: "message", T: BRi, repeated: true },
           {
             no: 5,
             name: "extension_range",
             kind: "message",
             T: Xfn,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 8, name: "oneof_decl", kind: "message", T: tgn, repeated: !0 },
-          { no: 7, name: "options", kind: "message", T: agn, opt: !0 },
+          { no: 8, name: "oneof_decl", kind: "message", T: tgn, repeated: true },
+          { no: 7, name: "options", kind: "message", T: agn, opt: true },
           {
             no: 9,
             name: "reserved_range",
             kind: "message",
             T: Qfn,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 10, name: "reserved_name", kind: "scalar", T: 9, repeated: !0 },
+          { no: 10, name: "reserved_name", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -2178,9 +2178,9 @@ export function createProtoBuf() {
       }
       static {
         this.fields = pi.util.newFieldList(() => [
-          { no: 1, name: "start", kind: "scalar", T: 5, opt: !0 },
-          { no: 2, name: "end", kind: "scalar", T: 5, opt: !0 },
-          { no: 3, name: "options", kind: "message", T: Zfn, opt: !0 },
+          { no: 1, name: "start", kind: "scalar", T: 5, opt: true },
+          { no: 2, name: "end", kind: "scalar", T: 5, opt: true },
+          { no: 3, name: "options", kind: "message", T: Zfn, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -2208,8 +2208,8 @@ export function createProtoBuf() {
       }
       static {
         this.fields = pi.util.newFieldList(() => [
-          { no: 1, name: "start", kind: "scalar", T: 5, opt: !0 },
-          { no: 2, name: "end", kind: "scalar", T: 5, opt: !0 },
+          { no: 1, name: "start", kind: "scalar", T: 5, opt: true },
+          { no: 2, name: "end", kind: "scalar", T: 5, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -2245,16 +2245,16 @@ export function createProtoBuf() {
             name: "uninterpreted_option",
             kind: "message",
             T: S$,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 2, name: "declaration", kind: "message", T: egn, repeated: !0 },
-          { no: 50, name: "features", kind: "message", T: MT, opt: !0 },
+          { no: 2, name: "declaration", kind: "message", T: egn, repeated: true },
+          { no: 50, name: "features", kind: "message", T: MT, opt: true },
           {
             no: 3,
             name: "verification",
             kind: "enum",
             T: pi.getEnumType(zre),
-            opt: !0,
+            opt: true,
             default: zre.UNVERIFIED,
           },
         ])
@@ -2297,11 +2297,11 @@ export function createProtoBuf() {
       }
       static {
         this.fields = pi.util.newFieldList(() => [
-          { no: 1, name: "number", kind: "scalar", T: 5, opt: !0 },
-          { no: 2, name: "full_name", kind: "scalar", T: 9, opt: !0 },
-          { no: 3, name: "type", kind: "scalar", T: 9, opt: !0 },
-          { no: 5, name: "reserved", kind: "scalar", T: 8, opt: !0 },
-          { no: 6, name: "repeated", kind: "scalar", T: 8, opt: !0 },
+          { no: 1, name: "number", kind: "scalar", T: 5, opt: true },
+          { no: 2, name: "full_name", kind: "scalar", T: 9, opt: true },
+          { no: 3, name: "type", kind: "scalar", T: 9, opt: true },
+          { no: 5, name: "reserved", kind: "scalar", T: 8, opt: true },
+          { no: 6, name: "repeated", kind: "scalar", T: 8, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -2329,17 +2329,17 @@ export function createProtoBuf() {
       }
       static {
         this.fields = pi.util.newFieldList(() => [
-          { no: 1, name: "name", kind: "scalar", T: 9, opt: !0 },
-          { no: 3, name: "number", kind: "scalar", T: 5, opt: !0 },
-          { no: 4, name: "label", kind: "enum", T: pi.getEnumType(VHe), opt: !0 },
-          { no: 5, name: "type", kind: "enum", T: pi.getEnumType(gp), opt: !0 },
-          { no: 6, name: "type_name", kind: "scalar", T: 9, opt: !0 },
-          { no: 2, name: "extendee", kind: "scalar", T: 9, opt: !0 },
-          { no: 7, name: "default_value", kind: "scalar", T: 9, opt: !0 },
-          { no: 9, name: "oneof_index", kind: "scalar", T: 5, opt: !0 },
-          { no: 10, name: "json_name", kind: "scalar", T: 9, opt: !0 },
-          { no: 8, name: "options", kind: "message", T: lgn, opt: !0 },
-          { no: 17, name: "proto3_optional", kind: "scalar", T: 8, opt: !0 },
+          { no: 1, name: "name", kind: "scalar", T: 9, opt: true },
+          { no: 3, name: "number", kind: "scalar", T: 5, opt: true },
+          { no: 4, name: "label", kind: "enum", T: pi.getEnumType(VHe), opt: true },
+          { no: 5, name: "type", kind: "enum", T: pi.getEnumType(gp), opt: true },
+          { no: 6, name: "type_name", kind: "scalar", T: 9, opt: true },
+          { no: 2, name: "extendee", kind: "scalar", T: 9, opt: true },
+          { no: 7, name: "default_value", kind: "scalar", T: 9, opt: true },
+          { no: 9, name: "oneof_index", kind: "scalar", T: 5, opt: true },
+          { no: 10, name: "json_name", kind: "scalar", T: 9, opt: true },
+          { no: 8, name: "options", kind: "message", T: lgn, opt: true },
+          { no: 17, name: "proto3_optional", kind: "scalar", T: 8, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -2419,8 +2419,8 @@ export function createProtoBuf() {
       }
       static {
         this.fields = pi.util.newFieldList(() => [
-          { no: 1, name: "name", kind: "scalar", T: 9, opt: !0 },
-          { no: 2, name: "options", kind: "message", T: hgn, opt: !0 },
+          { no: 1, name: "name", kind: "scalar", T: 9, opt: true },
+          { no: 2, name: "options", kind: "message", T: hgn, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -2452,17 +2452,17 @@ export function createProtoBuf() {
       }
       static {
         this.fields = pi.util.newFieldList(() => [
-          { no: 1, name: "name", kind: "scalar", T: 9, opt: !0 },
-          { no: 2, name: "value", kind: "message", T: sgn, repeated: !0 },
-          { no: 3, name: "options", kind: "message", T: ugn, opt: !0 },
+          { no: 1, name: "name", kind: "scalar", T: 9, opt: true },
+          { no: 2, name: "value", kind: "message", T: sgn, repeated: true },
+          { no: 3, name: "options", kind: "message", T: ugn, opt: true },
           {
             no: 4,
             name: "reserved_range",
             kind: "message",
             T: ign,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 5, name: "reserved_name", kind: "scalar", T: 9, repeated: !0 },
+          { no: 5, name: "reserved_name", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -2490,8 +2490,8 @@ export function createProtoBuf() {
       }
       static {
         this.fields = pi.util.newFieldList(() => [
-          { no: 1, name: "start", kind: "scalar", T: 5, opt: !0 },
-          { no: 2, name: "end", kind: "scalar", T: 5, opt: !0 },
+          { no: 1, name: "start", kind: "scalar", T: 5, opt: true },
+          { no: 2, name: "end", kind: "scalar", T: 5, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -2519,9 +2519,9 @@ export function createProtoBuf() {
       }
       static {
         this.fields = pi.util.newFieldList(() => [
-          { no: 1, name: "name", kind: "scalar", T: 9, opt: !0 },
-          { no: 2, name: "number", kind: "scalar", T: 5, opt: !0 },
-          { no: 3, name: "options", kind: "message", T: dgn, opt: !0 },
+          { no: 1, name: "name", kind: "scalar", T: 9, opt: true },
+          { no: 2, name: "number", kind: "scalar", T: 5, opt: true },
+          { no: 3, name: "options", kind: "message", T: dgn, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -2549,9 +2549,9 @@ export function createProtoBuf() {
       }
       static {
         this.fields = pi.util.newFieldList(() => [
-          { no: 1, name: "name", kind: "scalar", T: 9, opt: !0 },
-          { no: 2, name: "method", kind: "message", T: rgn, repeated: !0 },
-          { no: 3, name: "options", kind: "message", T: fgn, opt: !0 },
+          { no: 1, name: "name", kind: "scalar", T: 9, opt: true },
+          { no: 2, name: "method", kind: "message", T: rgn, repeated: true },
+          { no: 3, name: "options", kind: "message", T: fgn, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -2579,25 +2579,25 @@ export function createProtoBuf() {
       }
       static {
         this.fields = pi.util.newFieldList(() => [
-          { no: 1, name: "name", kind: "scalar", T: 9, opt: !0 },
-          { no: 2, name: "input_type", kind: "scalar", T: 9, opt: !0 },
-          { no: 3, name: "output_type", kind: "scalar", T: 9, opt: !0 },
-          { no: 4, name: "options", kind: "message", T: ggn, opt: !0 },
+          { no: 1, name: "name", kind: "scalar", T: 9, opt: true },
+          { no: 2, name: "input_type", kind: "scalar", T: 9, opt: true },
+          { no: 3, name: "output_type", kind: "scalar", T: 9, opt: true },
+          { no: 4, name: "options", kind: "message", T: ggn, opt: true },
           {
             no: 5,
             name: "client_streaming",
             kind: "scalar",
             T: 8,
-            opt: !0,
-            default: !1,
+            opt: true,
+            default: false,
           },
           {
             no: 6,
             name: "server_streaming",
             kind: "scalar",
             T: 8,
-            opt: !0,
-            default: !1,
+            opt: true,
+            default: false,
           },
         ])
       }
@@ -2626,100 +2626,100 @@ export function createProtoBuf() {
       }
       static {
         this.fields = pi.util.newFieldList(() => [
-          { no: 1, name: "java_package", kind: "scalar", T: 9, opt: !0 },
-          { no: 8, name: "java_outer_classname", kind: "scalar", T: 9, opt: !0 },
+          { no: 1, name: "java_package", kind: "scalar", T: 9, opt: true },
+          { no: 8, name: "java_outer_classname", kind: "scalar", T: 9, opt: true },
           {
             no: 10,
             name: "java_multiple_files",
             kind: "scalar",
             T: 8,
-            opt: !0,
-            default: !1,
+            opt: true,
+            default: false,
           },
           {
             no: 20,
             name: "java_generate_equals_and_hash",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
           {
             no: 27,
             name: "java_string_check_utf8",
             kind: "scalar",
             T: 8,
-            opt: !0,
-            default: !1,
+            opt: true,
+            default: false,
           },
           {
             no: 9,
             name: "optimize_for",
             kind: "enum",
             T: pi.getEnumType(Gre),
-            opt: !0,
+            opt: true,
             default: Gre.SPEED,
           },
-          { no: 11, name: "go_package", kind: "scalar", T: 9, opt: !0 },
+          { no: 11, name: "go_package", kind: "scalar", T: 9, opt: true },
           {
             no: 16,
             name: "cc_generic_services",
             kind: "scalar",
             T: 8,
-            opt: !0,
-            default: !1,
+            opt: true,
+            default: false,
           },
           {
             no: 17,
             name: "java_generic_services",
             kind: "scalar",
             T: 8,
-            opt: !0,
-            default: !1,
+            opt: true,
+            default: false,
           },
           {
             no: 18,
             name: "py_generic_services",
             kind: "scalar",
             T: 8,
-            opt: !0,
-            default: !1,
+            opt: true,
+            default: false,
           },
           {
             no: 23,
             name: "deprecated",
             kind: "scalar",
             T: 8,
-            opt: !0,
-            default: !1,
+            opt: true,
+            default: false,
           },
           {
             no: 31,
             name: "cc_enable_arenas",
             kind: "scalar",
             T: 8,
-            opt: !0,
-            default: !0,
+            opt: true,
+            default: true,
           },
-          { no: 36, name: "objc_class_prefix", kind: "scalar", T: 9, opt: !0 },
-          { no: 37, name: "csharp_namespace", kind: "scalar", T: 9, opt: !0 },
-          { no: 39, name: "swift_prefix", kind: "scalar", T: 9, opt: !0 },
-          { no: 40, name: "php_class_prefix", kind: "scalar", T: 9, opt: !0 },
-          { no: 41, name: "php_namespace", kind: "scalar", T: 9, opt: !0 },
+          { no: 36, name: "objc_class_prefix", kind: "scalar", T: 9, opt: true },
+          { no: 37, name: "csharp_namespace", kind: "scalar", T: 9, opt: true },
+          { no: 39, name: "swift_prefix", kind: "scalar", T: 9, opt: true },
+          { no: 40, name: "php_class_prefix", kind: "scalar", T: 9, opt: true },
+          { no: 41, name: "php_namespace", kind: "scalar", T: 9, opt: true },
           {
             no: 44,
             name: "php_metadata_namespace",
             kind: "scalar",
             T: 9,
-            opt: !0,
+            opt: true,
           },
-          { no: 45, name: "ruby_package", kind: "scalar", T: 9, opt: !0 },
-          { no: 50, name: "features", kind: "message", T: MT, opt: !0 },
+          { no: 45, name: "ruby_package", kind: "scalar", T: 9, opt: true },
+          { no: 50, name: "features", kind: "message", T: MT, opt: true },
           {
             no: 999,
             name: "uninterpreted_option",
             kind: "message",
             T: S$,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -2764,40 +2764,40 @@ export function createProtoBuf() {
             name: "message_set_wire_format",
             kind: "scalar",
             T: 8,
-            opt: !0,
-            default: !1,
+            opt: true,
+            default: false,
           },
           {
             no: 2,
             name: "no_standard_descriptor_accessor",
             kind: "scalar",
             T: 8,
-            opt: !0,
-            default: !1,
+            opt: true,
+            default: false,
           },
           {
             no: 3,
             name: "deprecated",
             kind: "scalar",
             T: 8,
-            opt: !0,
-            default: !1,
+            opt: true,
+            default: false,
           },
-          { no: 7, name: "map_entry", kind: "scalar", T: 8, opt: !0 },
+          { no: 7, name: "map_entry", kind: "scalar", T: 8, opt: true },
           {
             no: 11,
             name: "deprecated_legacy_json_field_conflicts",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
-          { no: 12, name: "features", kind: "message", T: MT, opt: !0 },
+          { no: 12, name: "features", kind: "message", T: MT, opt: true },
           {
             no: 999,
             name: "uninterpreted_option",
             kind: "message",
             T: S$,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -2835,73 +2835,73 @@ export function createProtoBuf() {
             name: "ctype",
             kind: "enum",
             T: pi.getEnumType(Jre),
-            opt: !0,
+            opt: true,
             default: Jre.STRING,
           },
-          { no: 2, name: "packed", kind: "scalar", T: 8, opt: !0 },
+          { no: 2, name: "packed", kind: "scalar", T: 8, opt: true },
           {
             no: 6,
             name: "jstype",
             kind: "enum",
             T: pi.getEnumType(Kre),
-            opt: !0,
+            opt: true,
             default: Kre.JS_NORMAL,
           },
-          { no: 5, name: "lazy", kind: "scalar", T: 8, opt: !0, default: !1 },
+          { no: 5, name: "lazy", kind: "scalar", T: 8, opt: true, default: false },
           {
             no: 15,
             name: "unverified_lazy",
             kind: "scalar",
             T: 8,
-            opt: !0,
-            default: !1,
+            opt: true,
+            default: false,
           },
           {
             no: 3,
             name: "deprecated",
             kind: "scalar",
             T: 8,
-            opt: !0,
-            default: !1,
+            opt: true,
+            default: false,
           },
-          { no: 10, name: "weak", kind: "scalar", T: 8, opt: !0, default: !1 },
+          { no: 10, name: "weak", kind: "scalar", T: 8, opt: true, default: false },
           {
             no: 16,
             name: "debug_redact",
             kind: "scalar",
             T: 8,
-            opt: !0,
-            default: !1,
+            opt: true,
+            default: false,
           },
           {
             no: 17,
             name: "retention",
             kind: "enum",
             T: pi.getEnumType(WHe),
-            opt: !0,
+            opt: true,
           },
           {
             no: 19,
             name: "targets",
             kind: "enum",
             T: pi.getEnumType(qHe),
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 20,
             name: "edition_defaults",
             kind: "message",
             T: cgn,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 21, name: "features", kind: "message", T: MT, opt: !0 },
-          { no: 22, name: "feature_support", kind: "message", T: _Ri, opt: !0 },
+          { no: 21, name: "features", kind: "message", T: MT, opt: true },
+          { no: 22, name: "feature_support", kind: "message", T: _Ri, opt: true },
           {
             no: 999,
             name: "uninterpreted_option",
             kind: "message",
             T: S$,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -2993,9 +2993,9 @@ export function createProtoBuf() {
             name: "edition",
             kind: "enum",
             T: pi.getEnumType(AT),
-            opt: !0,
+            opt: true,
           },
-          { no: 2, name: "value", kind: "scalar", T: 9, opt: !0 },
+          { no: 2, name: "value", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -3028,22 +3028,22 @@ export function createProtoBuf() {
             name: "edition_introduced",
             kind: "enum",
             T: pi.getEnumType(AT),
-            opt: !0,
+            opt: true,
           },
           {
             no: 2,
             name: "edition_deprecated",
             kind: "enum",
             T: pi.getEnumType(AT),
-            opt: !0,
+            opt: true,
           },
-          { no: 3, name: "deprecation_warning", kind: "scalar", T: 9, opt: !0 },
+          { no: 3, name: "deprecation_warning", kind: "scalar", T: 9, opt: true },
           {
             no: 4,
             name: "edition_removed",
             kind: "enum",
             T: pi.getEnumType(AT),
-            opt: !0,
+            opt: true,
           },
         ])
       }
@@ -3072,13 +3072,13 @@ export function createProtoBuf() {
       }
       static {
         this.fields = pi.util.newFieldList(() => [
-          { no: 1, name: "features", kind: "message", T: MT, opt: !0 },
+          { no: 1, name: "features", kind: "message", T: MT, opt: true },
           {
             no: 999,
             name: "uninterpreted_option",
             kind: "message",
             T: S$,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -3107,29 +3107,29 @@ export function createProtoBuf() {
       }
       static {
         this.fields = pi.util.newFieldList(() => [
-          { no: 2, name: "allow_alias", kind: "scalar", T: 8, opt: !0 },
+          { no: 2, name: "allow_alias", kind: "scalar", T: 8, opt: true },
           {
             no: 3,
             name: "deprecated",
             kind: "scalar",
             T: 8,
-            opt: !0,
-            default: !1,
+            opt: true,
+            default: false,
           },
           {
             no: 6,
             name: "deprecated_legacy_json_field_conflicts",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
-          { no: 7, name: "features", kind: "message", T: MT, opt: !0 },
+          { no: 7, name: "features", kind: "message", T: MT, opt: true },
           {
             no: 999,
             name: "uninterpreted_option",
             kind: "message",
             T: S$,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -3163,25 +3163,25 @@ export function createProtoBuf() {
             name: "deprecated",
             kind: "scalar",
             T: 8,
-            opt: !0,
-            default: !1,
+            opt: true,
+            default: false,
           },
-          { no: 2, name: "features", kind: "message", T: MT, opt: !0 },
+          { no: 2, name: "features", kind: "message", T: MT, opt: true },
           {
             no: 3,
             name: "debug_redact",
             kind: "scalar",
             T: 8,
-            opt: !0,
-            default: !1,
+            opt: true,
+            default: false,
           },
-          { no: 4, name: "feature_support", kind: "message", T: _Ri, opt: !0 },
+          { no: 4, name: "feature_support", kind: "message", T: _Ri, opt: true },
           {
             no: 999,
             name: "uninterpreted_option",
             kind: "message",
             T: S$,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -3210,21 +3210,21 @@ export function createProtoBuf() {
       }
       static {
         this.fields = pi.util.newFieldList(() => [
-          { no: 34, name: "features", kind: "message", T: MT, opt: !0 },
+          { no: 34, name: "features", kind: "message", T: MT, opt: true },
           {
             no: 33,
             name: "deprecated",
             kind: "scalar",
             T: 8,
-            opt: !0,
-            default: !1,
+            opt: true,
+            default: false,
           },
           {
             no: 999,
             name: "uninterpreted_option",
             kind: "message",
             T: S$,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -3258,24 +3258,24 @@ export function createProtoBuf() {
             name: "deprecated",
             kind: "scalar",
             T: 8,
-            opt: !0,
-            default: !1,
+            opt: true,
+            default: false,
           },
           {
             no: 34,
             name: "idempotency_level",
             kind: "enum",
             T: pi.getEnumType(Yre),
-            opt: !0,
+            opt: true,
             default: Yre.IDEMPOTENCY_UNKNOWN,
           },
-          { no: 35, name: "features", kind: "message", T: MT, opt: !0 },
+          { no: 35, name: "features", kind: "message", T: MT, opt: true },
           {
             no: 999,
             name: "uninterpreted_option",
             kind: "message",
             T: S$,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -3315,13 +3315,13 @@ export function createProtoBuf() {
       }
       static {
         this.fields = pi.util.newFieldList(() => [
-          { no: 2, name: "name", kind: "message", T: pgn, repeated: !0 },
-          { no: 3, name: "identifier_value", kind: "scalar", T: 9, opt: !0 },
-          { no: 4, name: "positive_int_value", kind: "scalar", T: 4, opt: !0 },
-          { no: 5, name: "negative_int_value", kind: "scalar", T: 3, opt: !0 },
-          { no: 6, name: "double_value", kind: "scalar", T: 1, opt: !0 },
-          { no: 7, name: "string_value", kind: "scalar", T: 12, opt: !0 },
-          { no: 8, name: "aggregate_value", kind: "scalar", T: 9, opt: !0 },
+          { no: 2, name: "name", kind: "message", T: pgn, repeated: true },
+          { no: 3, name: "identifier_value", kind: "scalar", T: 9, opt: true },
+          { no: 4, name: "positive_int_value", kind: "scalar", T: 4, opt: true },
+          { no: 5, name: "negative_int_value", kind: "scalar", T: 3, opt: true },
+          { no: 6, name: "double_value", kind: "scalar", T: 1, opt: true },
+          { no: 7, name: "string_value", kind: "scalar", T: 12, opt: true },
+          { no: 8, name: "aggregate_value", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -3349,8 +3349,8 @@ export function createProtoBuf() {
       }
       static {
         this.fields = pi.util.newFieldList(() => [
-          { no: 1, name: "name_part", kind: "scalar", T: 9, req: !0 },
-          { no: 2, name: "is_extension", kind: "scalar", T: 8, req: !0 },
+          { no: 1, name: "name_part", kind: "scalar", T: 9, req: true },
+          { no: 2, name: "is_extension", kind: "scalar", T: 8, req: true },
         ])
       }
       static fromBinary(e, t) {
@@ -3383,42 +3383,42 @@ export function createProtoBuf() {
             name: "field_presence",
             kind: "enum",
             T: pi.getEnumType(jHe),
-            opt: !0,
+            opt: true,
           },
           {
             no: 2,
             name: "enum_type",
             kind: "enum",
             T: pi.getEnumType(zHe),
-            opt: !0,
+            opt: true,
           },
           {
             no: 3,
             name: "repeated_field_encoding",
             kind: "enum",
             T: pi.getEnumType(GHe),
-            opt: !0,
+            opt: true,
           },
           {
             no: 4,
             name: "utf8_validation",
             kind: "enum",
             T: pi.getEnumType(JHe),
-            opt: !0,
+            opt: true,
           },
           {
             no: 5,
             name: "message_encoding",
             kind: "enum",
             T: pi.getEnumType(KHe),
-            opt: !0,
+            opt: true,
           },
           {
             no: 6,
             name: "json_format",
             kind: "enum",
             T: pi.getEnumType(YHe),
-            opt: !0,
+            opt: true,
           },
         ])
       }
@@ -3516,20 +3516,20 @@ export function createProtoBuf() {
       }
       static {
         this.fields = pi.util.newFieldList(() => [
-          { no: 1, name: "defaults", kind: "message", T: mgn, repeated: !0 },
+          { no: 1, name: "defaults", kind: "message", T: mgn, repeated: true },
           {
             no: 4,
             name: "minimum_edition",
             kind: "enum",
             T: pi.getEnumType(AT),
-            opt: !0,
+            opt: true,
           },
           {
             no: 5,
             name: "maximum_edition",
             kind: "enum",
             T: pi.getEnumType(AT),
-            opt: !0,
+            opt: true,
           },
         ])
       }
@@ -3564,16 +3564,16 @@ export function createProtoBuf() {
             name: "edition",
             kind: "enum",
             T: pi.getEnumType(AT),
-            opt: !0,
+            opt: true,
           },
           {
             no: 4,
             name: "overridable_features",
             kind: "message",
             T: MT,
-            opt: !0,
+            opt: true,
           },
-          { no: 5, name: "fixed_features", kind: "message", T: MT, opt: !0 },
+          { no: 5, name: "fixed_features", kind: "message", T: MT, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -3601,7 +3601,7 @@ export function createProtoBuf() {
       }
       static {
         this.fields = pi.util.newFieldList(() => [
-          { no: 1, name: "location", kind: "message", T: vgn, repeated: !0 },
+          { no: 1, name: "location", kind: "message", T: vgn, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -3633,16 +3633,16 @@ export function createProtoBuf() {
       }
       static {
         this.fields = pi.util.newFieldList(() => [
-          { no: 1, name: "path", kind: "scalar", T: 5, repeated: !0, packed: !0 },
-          { no: 2, name: "span", kind: "scalar", T: 5, repeated: !0, packed: !0 },
-          { no: 3, name: "leading_comments", kind: "scalar", T: 9, opt: !0 },
-          { no: 4, name: "trailing_comments", kind: "scalar", T: 9, opt: !0 },
+          { no: 1, name: "path", kind: "scalar", T: 5, repeated: true, packed: true },
+          { no: 2, name: "span", kind: "scalar", T: 5, repeated: true, packed: true },
+          { no: 3, name: "leading_comments", kind: "scalar", T: 9, opt: true },
+          { no: 4, name: "trailing_comments", kind: "scalar", T: 9, opt: true },
           {
             no: 6,
             name: "leading_detached_comments",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -3671,7 +3671,7 @@ export function createProtoBuf() {
       }
       static {
         this.fields = pi.util.newFieldList(() => [
-          { no: 1, name: "annotation", kind: "message", T: wgn, repeated: !0 },
+          { no: 1, name: "annotation", kind: "message", T: wgn, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -3699,16 +3699,16 @@ export function createProtoBuf() {
       }
       static {
         this.fields = pi.util.newFieldList(() => [
-          { no: 1, name: "path", kind: "scalar", T: 5, repeated: !0, packed: !0 },
-          { no: 2, name: "source_file", kind: "scalar", T: 9, opt: !0 },
-          { no: 3, name: "begin", kind: "scalar", T: 5, opt: !0 },
-          { no: 4, name: "end", kind: "scalar", T: 5, opt: !0 },
+          { no: 1, name: "path", kind: "scalar", T: 5, repeated: true, packed: true },
+          { no: 2, name: "source_file", kind: "scalar", T: 9, opt: true },
+          { no: 3, name: "begin", kind: "scalar", T: 5, opt: true },
+          { no: 4, name: "end", kind: "scalar", T: 5, opt: true },
           {
             no: 5,
             name: "semantic",
             kind: "enum",
             T: pi.getEnumType(XHe),
-            opt: !0,
+            opt: true,
           },
         ])
       }
@@ -3750,11 +3750,11 @@ export function createProtoBuf() {
       [gp.FIXED32]: ds.FIXED32,
       [gp.BOOL]: ds.BOOL,
       [gp.STRING]: ds.STRING,
-      [gp.GROUP]: void 0,
-      [gp.MESSAGE]: void 0,
+      [gp.GROUP]: undefined,
+      [gp.MESSAGE]: undefined,
       [gp.BYTES]: ds.BYTES,
       [gp.UINT32]: ds.UINT32,
-      [gp.ENUM]: void 0,
+      [gp.ENUM]: undefined,
       [gp.SFIXED32]: ds.SFIXED32,
       [gp.SFIXED64]: ds.SFIXED64,
       [gp.SINT32]: ds.SINT32,
@@ -4024,7 +4024,7 @@ export function createProtoBuf() {
           (this.typeUrl = this.typeNameToUrl(e.getType().typeName))
       }
       unpackTo(e) {
-        return this.is(e.getType()) ? (e.fromBinary(this.value), !0) : !1
+        return this.is(e.getType()) ? (e.fromBinary(this.value), true) : false
       }
       unpack(e) {
         if (this.typeUrl === "") return
@@ -4032,7 +4032,7 @@ export function createProtoBuf() {
         if (t) return t.fromBinary(this.value)
       }
       is(e) {
-        if (this.typeUrl === "") return !1
+        if (this.typeUrl === "") return false
         const t = this.typeUrlToName(this.typeUrl)
         let s = ""
         return typeof e == "string" ? (s = e) : (s = e.typeName), t === s
@@ -4108,13 +4108,13 @@ export function createProtoBuf() {
       }
       toJson(e) {
         function t(s) {
-          let n = !1
+          let n = false
           const r = []
           for (let o = 0; o < s.length; o++) {
             let a = s.charAt(o)
             switch (a) {
               case "_":
-                n = !0
+                n = true
                 break
               case "0":
               case "1":
@@ -4126,10 +4126,10 @@ export function createProtoBuf() {
               case "7":
               case "8":
               case "9":
-                r.push(a), (n = !1)
+                r.push(a), (n = false)
                 break
               default:
-                n && ((n = !1), (a = a.toUpperCase())), r.push(a)
+                n && ((n = false), (a = a.toUpperCase())), r.push(a)
                 break
             }
           }
@@ -4172,7 +4172,7 @@ export function createProtoBuf() {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "paths", kind: "scalar", T: 9, repeated: !0 },
+          { no: 1, name: "paths", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -4244,7 +4244,7 @@ export function createProtoBuf() {
     },
     QHe = class jye extends _ {
       constructor(e) {
-        super(), (this.kind = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.kind = { case: undefined }), v.util.initPartial(e, this)
       }
       toJson(e) {
         switch (this.kind.case) {
@@ -4260,7 +4260,7 @@ export function createProtoBuf() {
             return this.kind.value
           case "structValue":
           case "listValue":
-            return this.kind.value.toJson({ ...e, emitDefaultValues: !0 })
+            return this.kind.value.toJson({ ...e, emitDefaultValues: true })
         }
         throw new Error("google.protobuf.Value must have a value")
       }
@@ -4348,7 +4348,7 @@ export function createProtoBuf() {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "values", kind: "message", T: QHe, repeated: !0 },
+          { no: 1, name: "values", kind: "message", T: QHe, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -4369,7 +4369,7 @@ export function createProtoBuf() {
         super(), (this.value = 0), v.util.initPartial(e, this)
       }
       toJson(e) {
-        return v.json.writeScalar(ds.DOUBLE, this.value, !0)
+        return v.json.writeScalar(ds.DOUBLE, this.value, true)
       }
       fromJson(e, t) {
         try {
@@ -4424,7 +4424,7 @@ export function createProtoBuf() {
         super(), (this.value = 0), v.util.initPartial(e, this)
       }
       toJson(e) {
-        return v.json.writeScalar(ds.FLOAT, this.value, !0)
+        return v.json.writeScalar(ds.FLOAT, this.value, true)
       }
       fromJson(e, t) {
         try {
@@ -4479,7 +4479,7 @@ export function createProtoBuf() {
         super(), (this.value = Jf.zero), v.util.initPartial(e, this)
       }
       toJson(e) {
-        return v.json.writeScalar(ds.INT64, this.value, !0)
+        return v.json.writeScalar(ds.INT64, this.value, true)
       }
       fromJson(e, t) {
         try {
@@ -4534,7 +4534,7 @@ export function createProtoBuf() {
         super(), (this.value = Jf.zero), v.util.initPartial(e, this)
       }
       toJson(e) {
-        return v.json.writeScalar(ds.UINT64, this.value, !0)
+        return v.json.writeScalar(ds.UINT64, this.value, true)
       }
       fromJson(e, t) {
         try {
@@ -4589,7 +4589,7 @@ export function createProtoBuf() {
         super(), (this.value = 0), v.util.initPartial(e, this)
       }
       toJson(e) {
-        return v.json.writeScalar(ds.INT32, this.value, !0)
+        return v.json.writeScalar(ds.INT32, this.value, true)
       }
       fromJson(e, t) {
         try {
@@ -4644,7 +4644,7 @@ export function createProtoBuf() {
         super(), (this.value = 0), v.util.initPartial(e, this)
       }
       toJson(e) {
-        return v.json.writeScalar(ds.UINT32, this.value, !0)
+        return v.json.writeScalar(ds.UINT32, this.value, true)
       }
       fromJson(e, t) {
         try {
@@ -4696,10 +4696,10 @@ export function createProtoBuf() {
     },
     S0o = class Ete extends _ {
       constructor(e) {
-        super(), (this.value = !1), v.util.initPartial(e, this)
+        super(), (this.value = false), v.util.initPartial(e, this)
       }
       toJson(e) {
-        return v.json.writeScalar(ds.BOOL, this.value, !0)
+        return v.json.writeScalar(ds.BOOL, this.value, true)
       }
       fromJson(e, t) {
         try {
@@ -4754,7 +4754,7 @@ export function createProtoBuf() {
         super(), (this.value = ""), v.util.initPartial(e, this)
       }
       toJson(e) {
-        return v.json.writeScalar(ds.STRING, this.value, !0)
+        return v.json.writeScalar(ds.STRING, this.value, true)
       }
       fromJson(e, t) {
         try {
@@ -4809,7 +4809,7 @@ export function createProtoBuf() {
         super(), (this.value = new Uint8Array(0)), v.util.initPartial(e, this)
       }
       toJson(e) {
-        return v.json.writeScalar(ds.BYTES, this.value, !0)
+        return v.json.writeScalar(ds.BYTES, this.value, true)
       }
       fromJson(e, t) {
         try {
@@ -4872,10 +4872,10 @@ export function createProtoBuf() {
       }
       static {
         this.fields = pi.util.newFieldList(() => [
-          { no: 1, name: "major", kind: "scalar", T: 5, opt: !0 },
-          { no: 2, name: "minor", kind: "scalar", T: 5, opt: !0 },
-          { no: 3, name: "patch", kind: "scalar", T: 5, opt: !0 },
-          { no: 4, name: "suffix", kind: "scalar", T: 9, opt: !0 },
+          { no: 1, name: "major", kind: "scalar", T: 5, opt: true },
+          { no: 2, name: "minor", kind: "scalar", T: 5, opt: true },
+          { no: 3, name: "patch", kind: "scalar", T: 5, opt: true },
+          { no: 4, name: "suffix", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -4907,17 +4907,17 @@ export function createProtoBuf() {
       }
       static {
         this.fields = pi.util.newFieldList(() => [
-          { no: 1, name: "file_to_generate", kind: "scalar", T: 9, repeated: !0 },
-          { no: 2, name: "parameter", kind: "scalar", T: 9, opt: !0 },
-          { no: 15, name: "proto_file", kind: "message", T: DSt, repeated: !0 },
+          { no: 1, name: "file_to_generate", kind: "scalar", T: 9, repeated: true },
+          { no: 2, name: "parameter", kind: "scalar", T: 9, opt: true },
+          { no: 15, name: "proto_file", kind: "message", T: DSt, repeated: true },
           {
             no: 17,
             name: "source_file_descriptors",
             kind: "message",
             T: DSt,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 3, name: "compiler_version", kind: "message", T: Cgn, opt: !0 },
+          { no: 3, name: "compiler_version", kind: "message", T: Cgn, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -4945,11 +4945,11 @@ export function createProtoBuf() {
       }
       static {
         this.fields = pi.util.newFieldList(() => [
-          { no: 1, name: "error", kind: "scalar", T: 9, opt: !0 },
-          { no: 2, name: "supported_features", kind: "scalar", T: 4, opt: !0 },
-          { no: 3, name: "minimum_edition", kind: "scalar", T: 5, opt: !0 },
-          { no: 4, name: "maximum_edition", kind: "scalar", T: 5, opt: !0 },
-          { no: 15, name: "file", kind: "message", T: Sgn, repeated: !0 },
+          { no: 1, name: "error", kind: "scalar", T: 9, opt: true },
+          { no: 2, name: "supported_features", kind: "scalar", T: 4, opt: true },
+          { no: 3, name: "minimum_edition", kind: "scalar", T: 5, opt: true },
+          { no: 4, name: "maximum_edition", kind: "scalar", T: 5, opt: true },
+          { no: 15, name: "file", kind: "message", T: Sgn, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -4992,15 +4992,15 @@ export function createProtoBuf() {
       }
       static {
         this.fields = pi.util.newFieldList(() => [
-          { no: 1, name: "name", kind: "scalar", T: 9, opt: !0 },
-          { no: 2, name: "insertion_point", kind: "scalar", T: 9, opt: !0 },
-          { no: 15, name: "content", kind: "scalar", T: 9, opt: !0 },
+          { no: 1, name: "name", kind: "scalar", T: 9, opt: true },
+          { no: 2, name: "insertion_point", kind: "scalar", T: 9, opt: true },
+          { no: 15, name: "content", kind: "scalar", T: 9, opt: true },
           {
             no: 16,
             name: "generated_code_info",
             kind: "message",
             T: ygn,
-            opt: !0,
+            opt: true,
           },
         ])
       }
@@ -5076,9 +5076,9 @@ export function createProtoBuf() {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "name", kind: "scalar", T: 9 },
-          { no: 2, name: "fields", kind: "message", T: xgn, repeated: !0 },
-          { no: 3, name: "oneofs", kind: "scalar", T: 9, repeated: !0 },
-          { no: 4, name: "options", kind: "message", T: tG, repeated: !0 },
+          { no: 2, name: "fields", kind: "message", T: xgn, repeated: true },
+          { no: 3, name: "oneofs", kind: "scalar", T: 9, repeated: true },
+          { no: 4, name: "options", kind: "message", T: tG, repeated: true },
           { no: 5, name: "source_context", kind: "message", T: RSt },
           { no: 6, name: "syntax", kind: "enum", T: v.getEnumType($T) },
           { no: 7, name: "edition", kind: "scalar", T: 9 },
@@ -5106,7 +5106,7 @@ export function createProtoBuf() {
           (this.name = ""),
           (this.typeUrl = ""),
           (this.oneofIndex = 0),
-          (this.packed = !1),
+          (this.packed = false),
           (this.options = []),
           (this.jsonName = ""),
           (this.defaultValue = ""),
@@ -5127,7 +5127,7 @@ export function createProtoBuf() {
           { no: 6, name: "type_url", kind: "scalar", T: 9 },
           { no: 7, name: "oneof_index", kind: "scalar", T: 5 },
           { no: 8, name: "packed", kind: "scalar", T: 8 },
-          { no: 9, name: "options", kind: "message", T: tG, repeated: !0 },
+          { no: 9, name: "options", kind: "message", T: tG, repeated: true },
           { no: 10, name: "json_name", kind: "scalar", T: 9 },
           { no: 11, name: "default_value", kind: "scalar", T: 9 },
         ])
@@ -5220,8 +5220,8 @@ export function createProtoBuf() {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "name", kind: "scalar", T: 9 },
-          { no: 2, name: "enumvalue", kind: "message", T: kgn, repeated: !0 },
-          { no: 3, name: "options", kind: "message", T: tG, repeated: !0 },
+          { no: 2, name: "enumvalue", kind: "message", T: kgn, repeated: true },
+          { no: 3, name: "options", kind: "message", T: tG, repeated: true },
           { no: 4, name: "source_context", kind: "message", T: RSt },
           { no: 5, name: "syntax", kind: "enum", T: v.getEnumType($T) },
           { no: 6, name: "edition", kind: "scalar", T: 9 },
@@ -5258,7 +5258,7 @@ export function createProtoBuf() {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "name", kind: "scalar", T: 9 },
           { no: 2, name: "number", kind: "scalar", T: 5 },
-          { no: 3, name: "options", kind: "message", T: tG, repeated: !0 },
+          { no: 3, name: "options", kind: "message", T: tG, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -5323,11 +5323,11 @@ export function createProtoBuf() {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "name", kind: "scalar", T: 9 },
-          { no: 2, name: "methods", kind: "message", T: Egn, repeated: !0 },
-          { no: 3, name: "options", kind: "message", T: tG, repeated: !0 },
+          { no: 2, name: "methods", kind: "message", T: Egn, repeated: true },
+          { no: 3, name: "options", kind: "message", T: tG, repeated: true },
           { no: 4, name: "version", kind: "scalar", T: 9 },
           { no: 5, name: "source_context", kind: "message", T: RSt },
-          { no: 6, name: "mixins", kind: "message", T: Ign, repeated: !0 },
+          { no: 6, name: "mixins", kind: "message", T: Ign, repeated: true },
           { no: 7, name: "syntax", kind: "enum", T: v.getEnumType($T) },
         ])
       }
@@ -5349,9 +5349,9 @@ export function createProtoBuf() {
         super(),
           (this.name = ""),
           (this.requestTypeUrl = ""),
-          (this.requestStreaming = !1),
+          (this.requestStreaming = false),
           (this.responseTypeUrl = ""),
-          (this.responseStreaming = !1),
+          (this.responseStreaming = false),
           (this.options = []),
           (this.syntax = $T.PROTO2),
           v.util.initPartial(e, this)
@@ -5369,7 +5369,7 @@ export function createProtoBuf() {
           { no: 3, name: "request_streaming", kind: "scalar", T: 8 },
           { no: 4, name: "response_type_url", kind: "scalar", T: 9 },
           { no: 5, name: "response_streaming", kind: "scalar", T: 8 },
-          { no: 6, name: "options", kind: "message", T: tG, repeated: !0 },
+          { no: 6, name: "options", kind: "message", T: tG, repeated: true },
           { no: 7, name: "syntax", kind: "enum", T: v.getEnumType($T) },
         ])
       }

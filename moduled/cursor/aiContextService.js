@@ -8,7 +8,7 @@ export function createAIContextService(params) {
     const t = i.resource
     let s
     for (const n of e)
-      (s === void 0 || n.toString().length > s.toString().length) &&
+      (s === undefined || n.toString().length > s.toString().length) &&
         t.toString().startsWith(n.toString()) &&
         (s = n)
     return s
@@ -26,10 +26,10 @@ export function createAIContextService(params) {
     for (; a.length > 0; ) {
       const p = a.pop(),
         m = r.find((b) => b.kind === p.kind)
-      m !== void 0 &&
+      m !== undefined &&
         p.range.endLineNumber + 1 - p.range.startLineNumber >= m.minLines &&
         (o.add(p.range.startLineNumber),
-        p.children !== void 0 && a.push(...p.children))
+        p.children !== undefined && a.push(...p.children))
     }
     const l = new Map()
     for (let p = 0; p < i.length; p++) {
@@ -50,7 +50,7 @@ export function createAIContextService(params) {
           uri: t.uri,
           region: p.region,
           children: p.children,
-          parent: void 0,
+          parent: undefined,
         }
         for (const y of p.children) y.parent = b
         return (
@@ -68,7 +68,7 @@ export function createAIContextService(params) {
           x = 0,
           k = 0,
           E = y.startLineNumber,
-          D = !1,
+          D = false,
           P = 0,
           L = 0,
           A = 0,
@@ -76,7 +76,7 @@ export function createAIContextService(params) {
           H = 0
         const B = () => H < m.length && F === m[H].region.startLineNumber,
           z = (Q, se, he, ae) => {
-            ;(A = Q), (E = se ?? F), (P = he ?? k), (L = H), (D = ae ?? !1)
+            ;(A = Q), (E = se ?? F), (P = he ?? k), (L = H), (D = ae ?? false)
           },
           K = () => {
             C.push({
@@ -92,7 +92,7 @@ export function createAIContextService(params) {
               (x = L),
               (k = 0),
               (P = 0),
-              (D = !1),
+              (D = false),
               (A = 0),
               (F = S),
               (H = x)
@@ -106,10 +106,10 @@ export function createAIContextService(params) {
           k <= 100 &&
             (H === x
               ? (A === 0 && z(0), c[F - 1] === "" && A <= 1 && z(1))
-              : (H > L && A <= 2 && z(2, F + 1, k + 1, !0),
+              : (H > L && A <= 2 && z(2, F + 1, k + 1, true),
                 A == 2 &&
                   F === m[H - 1].region.endLineNumber + 2 &&
-                  z(3, F, k, !1),
+                  z(3, F, k, false),
                 c[F - 1] === "" && A >= 2 && z(4))),
             k >= 100 && K()
         }
@@ -120,7 +120,7 @@ export function createAIContextService(params) {
             foldingRegionIdx: p.foldingRegionIdx,
             region: y,
             freeLines: C[0].freeLines,
-            children: C[0].children.concat(C.slice(1).map((Q) => h(Q, !1))),
+            children: C[0].children.concat(C.slice(1).map((Q) => h(Q, false))),
           }
         )
       },
@@ -142,7 +142,7 @@ export function createAIContextService(params) {
           const k = d(x)
           ;(w -= k.region.endLineNumber - k.region.startLineNumber + 1),
             o.has(k.region.startLineNumber)
-              ? b.push(h(k, !0))
+              ? b.push(h(k, true))
               : (m.push(k), (w += k.freeLines))
         }
         for (
@@ -151,7 +151,7 @@ export function createAIContextService(params) {
 
         ) {
           const x = m.pop()
-          ;(w -= Math.max(0, x.freeLines - 1)), b.push(h(x, !0))
+          ;(w -= Math.max(0, x.freeLines - 1)), b.push(h(x, true))
         }
         const C = [
           ...m.map((x) => ({ region: x.region, freeLines: x.freeLines })),
@@ -164,7 +164,7 @@ export function createAIContextService(params) {
           u({ foldingRegionIdx: p, children: b, region: y, freeLines: w }, C)
         )
       }
-    return h(d(-1), !0)
+    return h(d(-1), true)
   }
   var wFt = class extends V {
     constructor(e, t, s, n, r, o, a, l, c, h, u) {
@@ -202,8 +202,8 @@ export function createAIContextService(params) {
     async getNodeChunks(e) {
       const t = U.file(e),
         s = await this.s.resolve(t, {
-          resolveSingleChildDescendants: !0,
-          resolveMetadata: !1,
+          resolveSingleChildDescendants: true,
+          resolveMetadata: false,
         })
       return await this.q.createModelReference(s.resource).then(async (n) => {
         try {
@@ -236,7 +236,7 @@ export function createAIContextService(params) {
         for (; l.length > 0; ) {
           const c = l.shift()
           if (c.isDirectory && c.children) l.push(...c.children)
-          else if (!c.isDirectory && (e === void 0 || e(c.resource.fsPath))) {
+          else if (!c.isDirectory && (e === undefined || e(c.resource.fsPath))) {
             const h = this.n.asRelativePath(c.resource)
             s.push(this.getNodeChunks(h))
           }
@@ -264,15 +264,15 @@ export function createAIContextService(params) {
               const u =
                 (
                   await this.s.resolve(c.resource, {
-                    resolveSingleChildDescendants: !0,
-                    resolveMetadata: !1,
+                    resolveSingleChildDescendants: true,
+                    resolveMetadata: false,
                   })
                 ).children || []
               l.push(...u)
             }
           else o.push(c)
         }
-        if (r !== void 0) {
+        if (r !== undefined) {
           const c = await this.j.executeCommand(
               "git.api.checkIgnore",
               r,
@@ -293,8 +293,8 @@ export function createAIContextService(params) {
       if (!(await this.s.stat(s)).isDirectory)
         throw new Error("Target directory is not a directory")
       const r = await this.s.resolve(s, {
-          resolveSingleChildDescendants: !0,
-          resolveMetadata: !1,
+          resolveSingleChildDescendants: true,
+          resolveMetadata: false,
         }),
         o = await this.j.executeCommand("git.api.getRepositories"),
         a = t.map(
@@ -359,8 +359,8 @@ export function createAIContextService(params) {
     async buildFileEdges(e, t, s) {
       const n = this.n.getWorkspace().folders[0].toResource(t),
         r = await this.s.resolve(n, {
-          resolveSingleChildDescendants: !0,
-          resolveMetadata: !1,
+          resolveSingleChildDescendants: true,
+          resolveMetadata: false,
         }),
         o = await this.m.aiClient()
       let a = []
@@ -395,14 +395,14 @@ export function createAIContextService(params) {
           for (const x of S) {
             const k = [],
               E = x.symbol
-            if (E === void 0) continue
+            if (E === undefined) continue
             const D = E.lineNumber,
               P = E.symbolEndColumn - 1,
               L = await v1(
                 this.f.definitionProvider,
                 u,
                 new Me(D, P),
-                !1,
+                false,
                 Ze.None,
               )
             for (const A of L) {
@@ -488,7 +488,7 @@ export function createAIContextService(params) {
                       this.f.definitionProvider,
                       d,
                       new Me(g.lineNumber, g.symbolEndColumn - 1),
-                      !1,
+                      false,
                       Ze.None,
                     )
                     break
@@ -497,7 +497,7 @@ export function createAIContextService(params) {
                       this.f.implementationProvider,
                       d,
                       new Me(g.lineNumber, g.symbolEndColumn - 1),
-                      !1,
+                      false,
                       Ze.None,
                     )
                     break
@@ -506,8 +506,8 @@ export function createAIContextService(params) {
                       this.f.referenceProvider,
                       d,
                       new Me(g.lineNumber, g.symbolEndColumn - 1),
-                      !1,
-                      !1,
+                      false,
+                      false,
                       Ze.None,
                     )
                     break
@@ -573,7 +573,7 @@ export function createAIContextService(params) {
       return a.dependencies
     }
     async _linkNode(e, t, s) {
-      const n = s?.force ?? !1,
+      const n = s?.force ?? false,
         r = e + "-" + t,
         o = Date.now(),
         a = async () => {
@@ -638,7 +638,7 @@ export function createAIContextService(params) {
           await this.z.get(r))
     }
     async linkNode(e, t) {
-      return await this._linkNode(e, t, { force: !0 })
+      return await this._linkNode(e, t, { force: true })
     }
     _createDependencySummaryRequest(e, t, s) {
       const n = "index:" + e + ":node:" + t
@@ -647,7 +647,7 @@ export function createAIContextService(params) {
       const r = this._summarizeNode({
         indexId: e,
         nodeId: t,
-        force: !1,
+        force: false,
         ...(s ?? {}),
       })
         .then(async () => {
@@ -668,11 +668,11 @@ export function createAIContextService(params) {
       cachedSummary: o,
     }) {
       const a = o?.(t)
-      if (a !== void 0) return a
+      if (a !== undefined) return a
       const l = new rVe({ indexId: e, nodeId: t, recompute: s }),
         c = await this.getIndex(e)
       let h
-      await this._linkNode(e, t, { force: !1, onLink: n })
+      await this._linkNode(e, t, { force: false, onLink: n })
       let u = 0
       for (;;)
         try {
@@ -742,7 +742,7 @@ export function createAIContextService(params) {
       return await this._summarizeNode({
         indexId: e,
         nodeId: t,
-        force: !0,
+        force: true,
         ...(s ?? {}),
       })
     }
@@ -754,7 +754,7 @@ export function createAIContextService(params) {
             this._summarizeNode({
               indexId: e,
               nodeId: a,
-              force: !1,
+              force: false,
               ...(s ?? {}),
             })
         for (
@@ -776,13 +776,13 @@ export function createAIContextService(params) {
       return await this._summarizeNode({
         indexId: e,
         nodeId: t,
-        force: !1,
+        force: false,
         ...(s ?? {}),
       })
     }
     async contextualizeSymbol(e) {}
     F(e, t, s) {
-      if (s.range === void 0) {
+      if (s.range === undefined) {
         console.error(
           "No target selection range found for ref " + JSON.stringify(s, null, 2),
         )
@@ -808,7 +808,7 @@ export function createAIContextService(params) {
       const r = pm.getFoldingRangeProviders(this.f, e)
       r.length > 0 && (n.dispose(), (n = new eJ(e, r, () => {}, t, s)))
       const o = await n.compute(Ze.None)
-      return n.dispose(), o ?? void 0
+      return n.dispose(), o ?? undefined
     }
     async H(e) {
       const t = new Map()
@@ -830,7 +830,7 @@ export function createAIContextService(params) {
                 ? r
                     .slice(0, 10)
                     .map((d) => this.F(l, h, d))
-                    .filter((d) => d !== void 0)
+                    .filter((d) => d !== undefined)
                 : []
             } finally {
               a?.dispose()

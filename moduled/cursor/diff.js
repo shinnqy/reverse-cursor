@@ -10,9 +10,9 @@ export function createDiff() {
       function r(y) {
         return s
           ? (setTimeout(function () {
-              s(void 0, y)
+              s(undefined, y)
             }, 0),
-            !0)
+            true)
           : y
       }
       ;(i = this.castInput(i)),
@@ -26,7 +26,7 @@ export function createDiff() {
       t.maxEditLength && (c = Math.min(c, t.maxEditLength))
       const h = t.timeout ?? 1 / 0,
         u = Date.now() + h
-      let d = [{ oldPos: -1, lastComponent: void 0 }],
+      let d = [{ oldPos: -1, lastComponent: undefined }],
         g = this.extractCommon(d[0], e, i, 0)
       if (d[0].oldPos + 1 >= a && g + 1 >= o)
         return r([{ value: this.join(e), count: e.length }])
@@ -37,21 +37,21 @@ export function createDiff() {
           let w,
             C = d[y - 1],
             S = d[y + 1]
-          C && (d[y - 1] = void 0)
-          let x = !1
+          C && (d[y - 1] = undefined)
+          let x = false
           if (S) {
             const E = S.oldPos - y
             x = S && 0 <= E && E < o
           }
           let k = C && C.oldPos + 1 < a
           if (!x && !k) {
-            d[y] = void 0
+            d[y] = undefined
             continue
           }
           if (
             (!k || (x && C.oldPos + 1 < S.oldPos)
-              ? (w = n.addToPath(S, !0, void 0, 0))
-              : (w = n.addToPath(C, void 0, !0, 1)),
+              ? (w = n.addToPath(S, true, undefined, 0))
+              : (w = n.addToPath(C, undefined, true, 1)),
             (g = n.extractCommon(w, e, i, y)),
             w.oldPos + 1 >= a && g + 1 >= o)
           )

@@ -170,7 +170,7 @@ export function createMainThreadCursor(params) {
       })
     }
     async $unregisterExtHostEventLogger() {
-      this.Q && (this.Q.dispose(), (this.Q = void 0))
+      this.Q && (this.Q.dispose(), (this.Q = undefined))
     }
     async $registerIndexProvider() {
       const e = () => this.a.$getIndexProviderGetGlobalStatus(),
@@ -249,9 +249,9 @@ export function createMainThreadCursor(params) {
               get: (t, s, n) => {
                 if (typeof s == "string") {
                   const r = AIServerV1ShadowWorkspaceService.methods[s]?.I
-                  if (r === void 0) return
+                  if (r === undefined) return
                   const o = AIServerV1ShadowWorkspaceService.methods[s]?.O
-                  if (o === void 0) return
+                  if (o === undefined) return
                   const a = s
                   return async (l) => {
                     const c = new r(l),
@@ -266,7 +266,7 @@ export function createMainThreadCursor(params) {
       )
     }
     async $unregisterShadowClientProvider() {
-      this.R && (this.R.dispose(), (this.R = void 0))
+      this.R && (this.R.dispose(), (this.R = undefined))
     }
     async $unregisterMetricsProvider() {
       this.n.unregisterMetricsProvider()
@@ -367,7 +367,7 @@ export function createMainThreadCursor(params) {
       const y = Tet(b.header),
         w = Tet(b.trailer)
       return {
-        stream: !0,
+        stream: true,
         service: e,
         method: t,
         message: m(),
@@ -377,7 +377,7 @@ export function createMainThreadCursor(params) {
     }
     async $pushAiConnectTransportStreamChunk(e, t) {
       const s = this.S.get(t)
-      return s ? (s.push(e), { success: !0 }) : { success: !1 }
+      return s ? (s.push(e), { success: true }) : { success: false }
     }
     async $endAiConnectTransportStreamChunk(e) {
       const t = this.S.get(e)
@@ -394,7 +394,7 @@ export function createMainThreadCursor(params) {
     W(e) {
       e.details = e.details.map((t) => {
         const s = "value" in t && t.value instanceof Uint8Array
-        if ("value" in t && s === !1) {
+        if ("value" in t && s === false) {
           const n = Object.values(t.value)
           t.value = Uint8Array.from(n)
         }
@@ -407,7 +407,7 @@ export function createMainThreadCursor(params) {
       this.U(t)
         ? ((n = new du(t.rawMessage, t.code, t.metadata, t.details)), this.W(n))
         : (n = t),
-        s && n !== void 0 && s.error(n)
+        s && n !== undefined && s.error(n)
     }
     async $registerAiConnectTransportProvider() {
       const e = this.a,
@@ -465,7 +465,7 @@ export function createMainThreadCursor(params) {
               service: o,
               method: a,
               message: E,
-              stream: !1,
+              stream: false,
               header: Tet(x),
               trailer: Tet(k),
             }
@@ -523,7 +523,7 @@ export function createMainThreadCursor(params) {
     async $showWebCmdKInputBox(e) {
       return this.y.showWebCmdKInputBox(e)
     }
-    async $updateUploadProgress(e, t, s = !1) {
+    async $updateUploadProgress(e, t, s = false) {
       s
         ? this.c.setNonPersistentStorage("repoProgressBars", (n) =>
             n.filter((r) => r.repoId !== dk.id),

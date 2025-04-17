@@ -39,7 +39,7 @@ export async function handleChunkedStream(stream, expectedText, maxLines) {
         if (result.state === uf.NON_STREAMING) break
       }
   }
-  return [fullText, void 0]
+  return [fullText, undefined]
 }
 
 export async function consumeRemainingStream(stream) {
@@ -61,7 +61,7 @@ function createDeferred() {
   const promise = new Promise((resolver) => {
     resolve = resolver
   })
-  if (resolve === void 0) throw new Error("unreachable")
+  if (resolve === undefined) throw new Error("unreachable")
   return { resolve, promise }
 }
 
@@ -75,7 +75,7 @@ export function handleStreamWithPredictions(stream, expectedText, maxLines) {
         currentText = "",
         state = uf.INIT
       const finalize = (text) => {
-        resolveText({ firstChunk: text, fullText: void 0 }), resolveFullText(text)
+        resolveText({ firstChunk: text, fullText: undefined }), resolveFullText(text)
       }
       for (;;) {
         const nextValue = await stream.next()
@@ -117,7 +117,7 @@ function isPrefixMatch(prefix, text) {
 }
 
 function isSimilarWithSuffix(prefix, text, suffix) {
-  if (!text.startsWith(prefix)) return !1
+  if (!text.startsWith(prefix)) return false
   const remainingText = text.slice(prefix.length)
   return remainingText.length > MIN_DIFF_LENGTH && remainingText === suffix
 }
@@ -148,7 +148,7 @@ function processStreamState(state, expectedText, maxLines, currentText) {
             .slice(lastLineIndex + 1)
             .map((d) => d.trim())
             .filter((d) => d !== "")[0]
-        if (nextExpectedLine !== void 0 && nextExpectedLine === currentLine) return { state: uf.MAYBE_LINE_MATCH }
+        if (nextExpectedLine !== undefined && nextExpectedLine === currentLine) return { state: uf.MAYBE_LINE_MATCH }
         if (!isPrefixMatch(expectedLine, currentLine)) return { state: uf.NON_STREAMING }
         if (isSimilarWithSuffix(expectedLine, currentLine, nextExpectedLine)) return { state: uf.NON_STREAMING }
         if (currentLine.length - expectedLine.length < MIN_DIFF_LENGTH) return { state: uf.NON_STREAMING }

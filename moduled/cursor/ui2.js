@@ -98,7 +98,7 @@ export function createUI2(params) {
     return Hir(i, 0)
   }
   function Fue(i, e) {
-    let t = { current: !1 }
+    let t = { current: false }
     if (
       (e.getEditorState().read(() => {
         const a = Vu().getTextContent()
@@ -151,8 +151,8 @@ export function createUI2(params) {
               },
               a,
             ),
-            !1,
-            !0,
+            false,
+            true,
           ),
           M(l, n),
           xe((c) => Bi(l, r, c)),
@@ -217,7 +217,7 @@ export function createUI2(params) {
         },
         [c, { refetch: h }] = a$(() => i.option.sizeBytes),
         u = Y(() =>
-          c.loading || c.error || c() === void 0 ? "" : "(" + l(c() ?? 0) + ")",
+          c.loading || c.error || c() === undefined ? "" : "(" + l(c() ?? 0) + ")",
         )
       return (() => {
         var d = Yir(),
@@ -278,14 +278,14 @@ export function createUI2(params) {
                             w
                           )
                         },
-                        { e: void 0, t: void 0 },
+                        { e: undefined, t: undefined },
                       ),
                       b
                     )
                   })(),
                   I(te, {
                     get when() {
-                      return i.option.sizeBytes !== void 0
+                      return i.option.sizeBytes !== undefined
                     },
                     get children() {
                       var b = Jir(),
@@ -319,7 +319,7 @@ export function createUI2(params) {
             d,
             I(te, {
               get when() {
-                return i.option.onSettingClick !== void 0
+                return i.option.onSettingClick !== undefined
               },
               get children() {
                 var b = P4t()
@@ -341,7 +341,7 @@ export function createUI2(params) {
                         y
                       )
                     },
-                    { e: void 0, t: void 0 },
+                    { e: undefined, t: undefined },
                   ),
                   b
                 )
@@ -359,7 +359,7 @@ export function createUI2(params) {
                 return I(Kk, {
                   size: "small",
                   get text() {
-                    return Y(() => i.option.score !== void 0)()
+                    return Y(() => i.option.score !== undefined)()
                       ? `semantic (${i.option.score.toFixed(2)})`
                       : "semantic"
                   },
@@ -408,13 +408,13 @@ export function createUI2(params) {
               )
             },
             {
-              e: void 0,
-              t: void 0,
-              a: void 0,
-              o: void 0,
-              i: void 0,
-              n: void 0,
-              s: void 0,
+              e: undefined,
+              t: undefined,
+              a: undefined,
+              o: undefined,
+              i: undefined,
+              n: undefined,
+              s: undefined,
             },
           ),
           d
@@ -431,7 +431,7 @@ export function createUI2(params) {
   var L4t = (i, e, t) => {
       const s = t ?? 12,
         n = 18,
-        [r, o] = le(!1),
+        [r, o] = le(false),
         a = i.text,
         l = Yo(() =>
           (() => {
@@ -459,7 +459,7 @@ export function createUI2(params) {
         d = e.languageService.createByLanguageNameOrFilepathOrFirstLine(
           u,
           null,
-          void 0,
+          undefined,
         ),
         g = csr(),
         p = a
@@ -474,7 +474,7 @@ export function createUI2(params) {
 `),
           d,
           g,
-          !1,
+          false,
         )
       return (
         c.setModel(b),
@@ -485,10 +485,10 @@ export function createUI2(params) {
                   vertical: "auto",
                   verticalScrollbarSize: 10,
                   horizontal: "auto",
-                  handleMouseWheel: !0,
-                  alwaysConsumeMouseWheel: !0,
+                  handleMouseWheel: true,
+                  alwaysConsumeMouseWheel: true,
                   horizontalScrollbarSize: 10,
-                  ignoreHorizontalScrollbarInContentHeight: !0,
+                  ignoreHorizontalScrollbarInContentHeight: true,
                 },
               })
             : (c.updateOptions({
@@ -496,10 +496,10 @@ export function createUI2(params) {
                   vertical: "hidden",
                   verticalScrollbarSize: 0,
                   horizontal: "hidden",
-                  handleMouseWheel: !1,
-                  alwaysConsumeMouseWheel: !1,
+                  handleMouseWheel: false,
+                  alwaysConsumeMouseWheel: false,
                   horizontalScrollbarSize: 0,
-                  ignoreHorizontalScrollbarInContentHeight: !0,
+                  ignoreHorizontalScrollbarInContentHeight: true,
                 },
               }),
               c.setScrollTop(0),
@@ -622,7 +622,7 @@ export function createUI2(params) {
           i.selectedOption.type === "file" ||
           i.selectedOption.type === "auto_context"
         ) {
-          r(void 0)
+          r(undefined)
           const p = i.selectedOption.selectionPrecursor?.uri.fsPath
           if (!p) return
           const m = await l.everythingProviderService.provider?.runCommand(
@@ -630,7 +630,7 @@ export function createUI2(params) {
             { fsPath: p },
           )
           if (!m) {
-            a(void 0)
+            a(undefined)
             return
           }
           const b = l.workspaceContextService.asRelativePath(U.file(p)),
@@ -639,7 +639,7 @@ export function createUI2(params) {
           a({ basePath: w, relativeWorkspacePath: b, neighboringFiles: m })
           return
         }
-        a(void 0)
+        a(undefined)
         const g = await Oue(i.selectedOption, l)
         if (
           g.type === da.Failure ||
@@ -650,7 +650,7 @@ export function createUI2(params) {
           g.type === da.CursorRule ||
           i.selectedOption.type !== Tt.code
         ) {
-          r(void 0)
+          r(undefined)
           return
         }
         if (g.type === da.File) {
@@ -810,7 +810,7 @@ export function createUI2(params) {
                                 P
                               )
                             },
-                            { e: void 0, t: void 0, a: void 0 },
+                            { e: undefined, t: undefined, a: undefined },
                           ),
                           k
                         )
@@ -926,7 +926,7 @@ export function createUI2(params) {
                       S
                     )
                   },
-                  { e: void 0, t: void 0, a: void 0 },
+                  { e: undefined, t: undefined, a: undefined },
                 ),
                 p
               )
@@ -960,7 +960,7 @@ export function createUI2(params) {
                       m
                     )
                   },
-                  { e: void 0, t: void 0 },
+                  { e: undefined, t: undefined },
                 ),
                 p
               )
@@ -969,7 +969,7 @@ export function createUI2(params) {
       ]
     }
   async function usr(i, e) {
-    if (i.selectionPrecursor === void 0)
+    if (i.selectionPrecursor === undefined)
       return { type: da.Failure, message: "No selection precursor" }
     if (x4t.test(i.selectionPrecursor.uri.fsPath))
       return { type: da.Image, imageUri: i.selectionPrecursor.uri }
@@ -1006,10 +1006,10 @@ export function createUI2(params) {
       : { type: da.Failure, message: "No secondary text" }
   }
   async function gsr(i, e) {
-    if (i.selectionPrecursor === void 0)
+    if (i.selectionPrecursor === undefined)
       return { type: da.Failure, message: "No selection precursor" }
     let t
-    i.selectionPrecursor.initialRange !== void 0 &&
+    i.selectionPrecursor.initialRange !== undefined &&
       (t = new G(
         i.selectionPrecursor.initialRange.startLineNumber - 0,
         1,
@@ -1022,7 +1022,7 @@ export function createUI2(params) {
       i.selectionPrecursor.uri,
       t,
     )
-    return s === void 0
+    return s === undefined
       ? { type: da.Failure, message: "Unable to get code selection" }
       : { type: da.Code, selectionWithoutUuid: s }
   }
@@ -1080,7 +1080,7 @@ export function createUI2(params) {
     const e = dt(),
       [t] = Cu(),
       [s, n] = le(Tt.none),
-      [r, o] = le(!1),
+      [r, o] = le(false),
       [a, l] = le(null),
       [c, h] = le(""),
       u = new J()
@@ -1092,9 +1092,9 @@ export function createUI2(params) {
           ? e.aiContextSessionService.getReactiveReadonlyContextSession(
               i.contextSessionUuid,
             )
-          : void 0,
+          : undefined,
       ),
-      [g, p] = le(!1)
+      [g, p] = le(false)
     function m(_e) {
       let Nt = A.get(_e)
       return (
@@ -1107,7 +1107,7 @@ export function createUI2(params) {
     }
     De(() => {
       const _e = d()
-      if (_e === void 0) return
+      if (_e === undefined) return
       const Nt = _e.intents.map((ni) => ni.intent.uuid)
       A.forEach((ni, ri) => {
         const dn = ni.__contextIntent?.uuid
@@ -1133,10 +1133,10 @@ export function createUI2(params) {
                 Tt.file,
                 0,
                 { uri: _e.uri },
-                void 0,
+                undefined,
                 _e.relativePath,
               )
-            z(dn, void 0, _e.defaultCollapsed), Nt?.(null)
+            z(dn, undefined, _e.defaultCollapsed), Nt?.(null)
           })
       }),
       De(() => {
@@ -1155,12 +1155,12 @@ export function createUI2(params) {
           ni = new jS(_e, {
             onDrop: async (ri) => {
               const dn = ri.dataTransfer?.files[0]?.type
-              if (dn !== void 0 && dn !== "text/plain" && dn !== "") return
+              if (dn !== undefined && dn !== "text/plain" && dn !== "") return
               const xi = [],
                 Bs = await e.instantiationService.invokeFunction((yt) =>
                   wHe(yt, ri),
                 )
-              ;(ri.hardcodedStopper = !0), ri.preventDefault()
+              ;(ri.hardcodedStopper = true), ri.preventDefault()
               for (const yt of Bs) {
                 const je = yt.resource
                 if (!je) continue
@@ -1170,11 +1170,11 @@ export function createUI2(params) {
                       .filter((ki) => ki !== "")
                       .pop() ?? St
                 if ((await e.fileService.resolve(je)).isDirectory) {
-                  const ki = new jo(Ie, xi, Tt.folder, 0, { uri: je }, void 0, St)
+                  const ki = new jo(Ie, xi, Tt.folder, 0, { uri: je }, undefined, St)
                   z(ki)
                 } else {
                   const ki = St.split("/").pop() ?? St,
-                    Ii = new jo(ki, xi, Tt.file, 0, { uri: je }, void 0, St)
+                    Ii = new jo(ki, xi, Tt.file, 0, { uri: je }, undefined, St)
                   z(Ii)
                 }
               }
@@ -1224,8 +1224,8 @@ export function createUI2(params) {
       ZB,
       (_e) =>
         r() && Mi().length > 0
-          ? (o(!1), qe([]), i.onMentionsMenuClose?.(), !0)
-          : !1,
+          ? (o(false), qe([]), i.onMentionsMenuClose?.(), true)
+          : false,
       fI,
     )
     Gt(() => {
@@ -1247,17 +1247,17 @@ export function createUI2(params) {
                 ri.metadata?.selectedOption && z(ri.metadata.selectedOption, ri))
             })
           else if (ni === "destroyed") {
-            he(!1), n(Tt.none)
+            he(false), n(Tt.none)
             const ri = m(Nt)
             if (ri) {
               const dn = ri.__contextIntent
               if (dn) {
                 const xi = d()
-                xi !== void 0 &&
+                xi !== undefined &&
                   e.aiContextSessionService.updateContextSession(xi.uuid, {
                     removedIntentUuids: [dn.uuid],
                     upsertedIntents: [],
-                    rerankEndpoint: void 0,
+                    rerankEndpoint: undefined,
                   })
               }
             }
@@ -1307,13 +1307,13 @@ export function createUI2(params) {
               : _e.type === Tt.toggle_commit_options || Nt.replace(xi)),
           Bs)
         ) {
-          z(_e, void 0, void 0, !0, !0)
+          z(_e, undefined, undefined, true, true)
           return
         }
         ni(), z(_e)
       },
       B = new Set(),
-      z = async (_e, Nt, ni, ri = !1, dn = !1) => {
+      z = async (_e, Nt, ni, ri = false, dn = false) => {
         if (
           (console.log("[balta] finishSelectingOption", _e),
           Nt && B.has(Nt.__key))
@@ -1331,7 +1331,7 @@ export function createUI2(params) {
           p(!g())
           return
         }
-        he(!1), dn || n(Tt.none)
+        he(false), dn || n(Tt.none)
         let xi = _e.name
         if (_e.type === Tt.folder) {
           const Dt = typeof _e.secondaryText == "string" ? _e.secondaryText : xi
@@ -1339,14 +1339,14 @@ export function createUI2(params) {
         }
         _e.type === Tt.link && (xi = K() ?? "")
         let Bs = _e.docSelection,
-          yt = !0
+          yt = true
         if (_e.name === "Add new doc") {
           if (
-            (Nt === void 0 &&
-              (e.reactiveStorageService.setNonPersistentStorage("newDoc", void 0),
+            (Nt === undefined &&
+              (e.reactiveStorageService.setNonPersistentStorage("newDoc", undefined),
               await e.commandService.executeCommand("cursor.newdocs")),
             (yt =
-              e.reactiveStorageService.nonPersistentStorage.newDoc !== void 0),
+              e.reactiveStorageService.nonPersistentStorage.newDoc !== undefined),
             (xi =
               e.reactiveStorageService.nonPersistentStorage.newDoc?.name ?? ""),
             !xi)
@@ -1384,7 +1384,7 @@ export function createUI2(params) {
                   n(Bn)
                   break
                 }
-              he(!0), de(Date.now())
+              he(true), de(Date.now())
               return
             }
             let Dt
@@ -1394,15 +1394,15 @@ export function createUI2(params) {
                 "case" in _e.type &&
                 _e.type.case === "simple_mentions_handler" &&
                 ((Dt = new i7(_e.type.contextIntent())),
-                Mt !== void 0 &&
+                Mt !== undefined &&
                   e.aiContextSessionService.updateContextSession(Mt.uuid, {
                     removedIntentUuids: [],
                     upsertedIntents: [Dt],
-                    rerankEndpoint: void 0,
+                    rerankEndpoint: undefined,
                   })),
               _e.type === "file" &&
-                Mt !== void 0 &&
-                _e.selectionPrecursor !== void 0)
+                Mt !== undefined &&
+                _e.selectionPrecursor !== undefined)
             )
               (Dt = new i7({
                 type: lc.USER_ADDED,
@@ -1421,14 +1421,14 @@ export function createUI2(params) {
                 e.aiContextSessionService.updateContextSession(Mt.uuid, {
                   removedIntentUuids: [],
                   upsertedIntents: [Dt],
-                  rerankEndpoint: void 0,
+                  rerankEndpoint: undefined,
                 })
             else if (
               _e.type === Tt.code &&
-              Mt !== void 0 &&
-              Ie !== void 0 &&
-              _e.selectionPrecursor !== void 0 &&
-              _e.selectionPrecursor.initialRange !== void 0
+              Mt !== undefined &&
+              Ie !== undefined &&
+              _e.selectionPrecursor !== undefined &&
+              _e.selectionPrecursor.initialRange !== undefined
             ) {
               if (!_e.selectionPrecursor?.initialRange)
                 throw new Error("No selection precursor initial range")
@@ -1455,7 +1455,7 @@ export function createUI2(params) {
                 e.aiContextSessionService.updateContextSession(Mt.uuid, {
                   removedIntentUuids: [],
                   upsertedIntents: [Dt],
-                  rerankEndpoint: void 0,
+                  rerankEndpoint: undefined,
                 })
             }
             if (_e.type === Tt.reset) {
@@ -1477,10 +1477,10 @@ export function createUI2(params) {
               Jk(
                 xi,
                 Dt,
-                void 0,
-                _e.type === Tt.link || KWe.includes(_e.type) ? _e.type : void 0,
+                undefined,
+                _e.type === Tt.link || KWe.includes(_e.type) ? _e.type : undefined,
                 St,
-                void 0,
+                undefined,
                 _e,
               )
             if ((B.add(ki.__key), !Nt)) {
@@ -1488,7 +1488,7 @@ export function createUI2(params) {
                 jr = $c("")
               if (
                 (jr.setMode("segmented").toggleDirectionless(),
-                St.type === da.Failure && Dt === void 0)
+                St.type === da.Failure && Dt === undefined)
               ) {
                 je()(St.message)
                 return
@@ -1521,7 +1521,7 @@ export function createUI2(params) {
               const Bn = {
                 ...St.selectionWithoutUuid,
                 uuid: ki.storedKey,
-                collapseByDefault: ni ?? !1,
+                collapseByDefault: ni ?? false,
               }
               i.insertFileSelection(Bn)
             } else if (St.type === da.Image && !Dt)
@@ -1534,7 +1534,7 @@ export function createUI2(params) {
                 filename: St.selectionWithoutUuid.filename,
                 uuid: ki.storedKey,
               })
-            else if (Bs !== void 0 && yt)
+            else if (Bs !== undefined && yt)
               i.insertDocs({ ...Bs, uuid: ki.storedKey })
             else if (_e.type === Tt.text_search)
               i.insertTextSearch({
@@ -1558,19 +1558,19 @@ export function createUI2(params) {
                   i.insertDiffToMain(ki.storedKey)
             } else if (_e.type === Tt.lint)
               i.addLinterErrors(ki.storedKey),
-                w((Bn) => ({ ...Bn, [ki.storedKey]: !0 }))
+                w((Bn) => ({ ...Bn, [ki.storedKey]: true }))
             else if (_e.type === Tt.current_file)
-              i.addCurrentFile(), S((Bn) => ({ ...Bn, [ki.storedKey]: !0 }))
+              i.addCurrentFile(), S((Bn) => ({ ...Bn, [ki.storedKey]: true }))
             else if (_e.type === Tt.web)
-              i.addWeb(ki.storedKey), D((Bn) => ({ ...Bn, [ki.storedKey]: !0 }))
+              i.addWeb(ki.storedKey), D((Bn) => ({ ...Bn, [ki.storedKey]: true }))
             else if (_e.type === Tt.recent_changes)
               i.addRecentChanges(ki.storedKey)
             else if (_e.type === Tt.repo_map)
               i.addRepoMap?.(ki.storedKey),
-                L((Bn) => ({ ...Bn, [ki.storedKey]: !0 }))
+                L((Bn) => ({ ...Bn, [ki.storedKey]: true }))
             else if (_e.type === Tt.codebase)
               i.addCodebase(ki.storedKey),
-                k((Bn) => ({ ...Bn, [ki.storedKey]: !0 }))
+                k((Bn) => ({ ...Bn, [ki.storedKey]: true }))
             else if (_e.type === Tt.folder)
               i.insertFolderSelection({
                 relativePath:
@@ -1605,11 +1605,11 @@ export function createUI2(params) {
           })
       },
       [K, Q] = le(null),
-      [se, he] = le(!1),
+      [se, he] = le(false),
       [ae, de] = le(0)
     De(() => {
       const _e = K()
-      Date.now() - ae() > 100 && he(!1),
+      Date.now() - ae() > 100 && he(false),
         (_e === null || _e === "") && Date.now() - ae() > 100 && n(Tt.none)
     })
     const Ee = Y(() => (r() ? K() : c()) ?? ""),
@@ -1649,7 +1649,7 @@ export function createUI2(params) {
         cursorRuleOptions: () => mt(ut()),
         contextSession: d,
         autoContextOptions: () => mt(Ue()),
-        showCommitOptions: () => (r() ? g() : !1),
+        showCommitOptions: () => (r() ? g() : false),
         autoContextLoading: Ke,
         props: i,
       })
@@ -1694,16 +1694,16 @@ export function createUI2(params) {
       return !ri && !ni && !dn && Nt ? Nt : null
     }
     function Ge(_e) {
-      if (!Xn(_e) || !_e.isCollapsed()) return [!1, ""]
+      if (!Xn(_e) || !_e.isCollapsed()) return [false, ""]
       const Nt = _e.getNodes()[0],
         ni = _e.anchor
-      if (!qn(Nt) || !Nt.isSimpleText() || !qZn(ni)) return [!1, ""]
+      if (!qn(Nt) || !Nt.isSimpleText() || !qZn(ni)) return [false, ""]
       const ri = [],
         dn = Nt.getTextContent()
       let xi = Nt.getTextContentSize(),
         Bs
       for (; xi-- && xi >= 0 && (Bs = dn[xi]) !== " "; ) ri.push(Bs)
-      return ri.length === 0 ? [!1, ""] : [!0, ri.reverse().join("")]
+      return ri.length === 0 ? [false, ""] : [true, ri.reverse().join("")]
     }
     let Et = null
     De(() => {
@@ -1728,12 +1728,12 @@ export function createUI2(params) {
         })
       function ni() {
         const dn = a()
-        if (dn === null) return !1
+        if (dn === null) return false
         const xi = Et ? PXi(Et) : null
-        return i.setGhostText(""), H(dn, xi, () => {}), !0
+        return i.setGhostText(""), H(dn, xi, () => {}), true
       }
       function ri(dn) {
-        return ni() ? (dn.preventDefault(), !0) : !1
+        return ni() ? (dn.preventDefault(), true) : false
       }
       return (
         Gt(gF(t.registerCommand(DG, ri, Xv), t.registerCommand(_xt, ri, Xv))), Nt
@@ -1766,8 +1766,8 @@ export function createUI2(params) {
                     : ((yt === " " &&
                         s() !== Tt.auto_context &&
                         s() !== Tt.none) ||
-                        yt === void 0) &&
-                      o(!1)
+                        yt === undefined) &&
+                      o(false)
               })
           },
         )
@@ -1783,7 +1783,7 @@ export function createUI2(params) {
         onSelectOption: H,
         triggerFn: Bt,
         get options() {
-          return Y(() => r() === !1)()
+          return Y(() => r() === false)()
             ? []
             : [...Mi()]
                 .sort((_e, Nt) => Nt.score - _e.score)
@@ -1862,7 +1862,7 @@ export function createUI2(params) {
     let p
     const m = (y) => {
         const w = { x: y.clientX, y: y.clientY },
-          C = p === void 0 || w.x !== p.x || w.y !== p.y
+          C = p === undefined || w.x !== p.x || w.y !== p.y
         return (p = w), C
       },
       b = (y, w) =>
@@ -1981,7 +1981,7 @@ export function createUI2(params) {
   }
   function vsr(i) {
     const e = i.textContent
-    return e !== null ? { node: mXe(e, void 0) } : null
+    return e !== null ? { node: mXe(e, undefined) } : null
   }
   var ysr = "background-color: rgba(24, 119, 232, 0.2)",
     N4t = class n_s extends NG {
@@ -1999,7 +1999,7 @@ export function createUI2(params) {
           t.setDetail(e.detail),
           t.setMode(e.mode),
           t.setStyle(e.style),
-          e.storedKey !== void 0 && (t.storedKey = e.storedKey),
+          e.storedKey !== undefined && (t.storedKey = e.storedKey),
           t
         )
       }
@@ -2042,7 +2042,7 @@ export function createUI2(params) {
         )
       }
       isSegmented() {
-        return !1
+        return false
       }
       static importDOM() {
         return {
@@ -2053,15 +2053,15 @@ export function createUI2(params) {
         }
       }
       isTextEntity() {
-        return !0
+        return true
       }
       isToken() {
-        return !0
+        return true
       }
     }
   function mXe(i, e) {
     const t = k4t.includes(i) ? i : "unknown",
-      s = new N4t(t, void 0, e)
+      s = new N4t(t, undefined, e)
     return s.setMode("segmented").toggleDirectionless(), s
   }
   var wsr = X("<i>"),
@@ -2156,7 +2156,7 @@ export function createUI2(params) {
                 d
               )
             },
-            { e: void 0, t: void 0, a: void 0, o: void 0, i: void 0 },
+            { e: undefined, t: undefined, a: undefined, o: undefined, i: undefined },
           ),
           l
         )
@@ -2194,7 +2194,7 @@ export function createUI2(params) {
         d && (d.select(), d.replace(p)), g(), h(u)
       }
     De(() => {
-      if (i.delegate !== void 0) {
+      if (i.delegate !== undefined) {
         const u = i.delegate.onFireEditNode((d) => {
           t.update(() => {
             const g = mXe("edit"),
@@ -2316,10 +2316,10 @@ export function createUI2(params) {
               for (let a = 0; a < o.length; a++)
                 if (o[a].type.indexOf("image") !== -1) {
                   const l = o[a].getAsFile()
-                  return l ? (R4t(l, t, s), !0) : !1
+                  return l ? (R4t(l, t, s), true) : false
                 }
             }
-            return !1
+            return false
           },
           fI,
         )
@@ -2342,18 +2342,18 @@ export function createUI2(params) {
             (o) => {
               const a = Array.from(o.dataTransfer?.files || [])[0]
               return !a || !a?.type.startsWith("image")
-                ? !1
+                ? false
                 : (o.preventDefault(),
                   o.stopPropagation(),
                   o.stopImmediatePropagation(),
                   R4t(a, t, s),
-                  !0)
+                  true)
             },
             Xv,
           ),
           r = e.registerCommand(
             cOi,
-            (o) => (o.dataTransfer && (o.dataTransfer.dropEffect = "copy"), !0),
+            (o) => (o.dataTransfer && (o.dataTransfer.dropEffect = "copy"), true),
             fI,
           )
         Gt(() => {
@@ -2386,7 +2386,7 @@ export function createUI2(params) {
         super(s), (this.__uuid = e), (this.__text = t)
       }
       updateDOM(e, t, s) {
-        return !1
+        return false
       }
       createDOM(e) {
         const t = document.createElement("span")
@@ -2485,7 +2485,7 @@ export function createUI2(params) {
         },
         [c, { refetch: h }] = a$(() => i.option.sizeBytes),
         u = Y(() =>
-          c.loading || c.error || c() === void 0 ? "" : "(" + l(c() ?? 0) + ")",
+          c.loading || c.error || c() === undefined ? "" : "(" + l(c() ?? 0) + ")",
         )
       return (() => {
         var d = Msr(),
@@ -2543,14 +2543,14 @@ export function createUI2(params) {
                             w
                           )
                         },
-                        { e: void 0, t: void 0 },
+                        { e: undefined, t: undefined },
                       ),
                       b
                     )
                   })(),
                   I(te, {
                     get when() {
-                      return i.option.sizeBytes !== void 0
+                      return i.option.sizeBytes !== undefined
                     },
                     get children() {
                       var b = Asr(),
@@ -2602,13 +2602,13 @@ export function createUI2(params) {
               )
             },
             {
-              e: void 0,
-              t: void 0,
-              a: void 0,
-              o: void 0,
-              i: void 0,
-              n: void 0,
-              s: void 0,
+              e: undefined,
+              t: undefined,
+              a: undefined,
+              o: undefined,
+              i: undefined,
+              n: undefined,
+              s: undefined,
             },
           ),
           d
@@ -2621,7 +2621,7 @@ export function createUI2(params) {
         l = dt()
       De(async () => {
         if (i.selectedOption.type === "file") {
-          r(void 0)
+          r(undefined)
           const p = i.selectedOption.selectionPrecursor?.uri.fsPath
           if (!p) return
           const m = await l.everythingProviderService.provider?.runCommand(
@@ -2629,7 +2629,7 @@ export function createUI2(params) {
             { fsPath: p },
           )
           if (!m) {
-            a(void 0)
+            a(undefined)
             return
           }
           const b = l.workspaceContextService.asRelativePath(U.file(p)),
@@ -2638,7 +2638,7 @@ export function createUI2(params) {
           a({ basePath: w, relativeWorkspacePath: b, neighboringFiles: m })
           return
         }
-        a(void 0)
+        a(undefined)
         const g = await Oue(i.selectedOption, l)
         if (
           g.type === da.Failure ||
@@ -2649,7 +2649,7 @@ export function createUI2(params) {
           g.type === da.CursorRule ||
           i.selectedOption.type !== Tt.code
         ) {
-          r(void 0)
+          r(undefined)
           return
         }
         if (g.type === da.File) {
@@ -2792,7 +2792,7 @@ export function createUI2(params) {
                                 P
                               )
                             },
-                            { e: void 0, t: void 0, a: void 0 },
+                            { e: undefined, t: undefined, a: undefined },
                           ),
                           k
                         )
@@ -2856,7 +2856,7 @@ export function createUI2(params) {
                       S
                     )
                   },
-                  { e: void 0, t: void 0, a: void 0 },
+                  { e: undefined, t: undefined, a: undefined },
                 ),
                 p
               )
@@ -2890,7 +2890,7 @@ export function createUI2(params) {
                       m
                     )
                   },
-                  { e: void 0, t: void 0 },
+                  { e: undefined, t: undefined },
                 ),
                 p
               )
@@ -2905,24 +2905,24 @@ export function createUI2(params) {
       r = {
         ...I7,
         ghostText: () => "",
-        isLongContextMode: !1,
+        isLongContextMode: false,
         insertTextSearch: () => {},
         selectedTextSearches: [],
-        supportsGit: !1,
-        supportsCommitNotes: !1,
-        supportsWeb: !1,
-        supportsFolderSelections: !1,
-        supportsLint: !1,
-        supportsCodebase: !1,
-        supportsLink: !1,
+        supportsGit: false,
+        supportsCommitNotes: false,
+        supportsWeb: false,
+        supportsFolderSelections: false,
+        supportsLint: false,
+        supportsCodebase: false,
+        supportsLink: false,
         recentFiles: new Set(),
         setGhostText: () => {},
         showErrorMessage: () => {},
       },
-      [o, a] = le(!1),
+      [o, a] = le(false),
       c = {
         queryString: Y(() => (o() ? s() : "")),
-        justClickedIntoMenu: () => !1,
+        justClickedIntoMenu: () => false,
         mode: () => Tt.file,
         props: r,
         vsContext: e,
@@ -2937,7 +2937,7 @@ export function createUI2(params) {
       },
       p = t.registerCommand(
         ZB,
-        (y) => (o() && d().length > 0 ? (a(!1), u([]), !0) : !1),
+        (y) => (o() && d().length > 0 ? (a(false), u([]), true) : false),
         fI,
       )
     Gt(() => {
@@ -2952,7 +2952,7 @@ export function createUI2(params) {
                 if (!Xn(x) || !x.isCollapsed()) return
                 const k = x.anchor.getNode()
                 if (!qn(k)) return
-                k.getTextContent()[x.anchor.offset - 1] === "#" && a(!0)
+                k.getTextContent()[x.anchor.offset - 1] === "#" && a(true)
               })
           },
         )
@@ -2966,7 +2966,7 @@ export function createUI2(params) {
       b = async (y) => {
         const w = await Oue(y, e)
         if (w.type === da.File) {
-          const C = { ...w.selectionWithoutUuid, collapseByDefault: !1 }
+          const C = { ...w.selectionWithoutUuid, collapseByDefault: false }
           i.addFile && i.addFile(U.revive(C.uri))
         }
       }
@@ -3164,7 +3164,7 @@ export function createUI2(params) {
             l,
             I(te, {
               get when() {
-                return i.option.onSettingClick !== void 0
+                return i.option.onSettingClick !== undefined
               },
               get children() {
                 var d = Gsr()
@@ -3217,7 +3217,7 @@ export function createUI2(params) {
                 d
               )
             },
-            { e: void 0, t: void 0, a: void 0, o: void 0, i: void 0, n: void 0 },
+            { e: undefined, t: undefined, a: undefined, o: undefined, i: undefined, n: undefined },
           ),
           l
         )
@@ -3229,7 +3229,7 @@ export function createUI2(params) {
         l = dt()
       De(async () => {
         if (i.selectedOption.type === "file") {
-          r(void 0)
+          r(undefined)
           const p = i.selectedOption.selectionPrecursor?.uri.fsPath
           if (!p) return
           const m = await l.everythingProviderService.provider?.runCommand(
@@ -3237,7 +3237,7 @@ export function createUI2(params) {
             { fsPath: p },
           )
           if (!m) {
-            a(void 0)
+            a(undefined)
             return
           }
           const b = l.workspaceContextService.asRelativePath(U.file(p)),
@@ -3246,7 +3246,7 @@ export function createUI2(params) {
           a({ basePath: w, relativeWorkspacePath: b, neighboringFiles: m })
           return
         }
-        a(void 0)
+        a(undefined)
         const g = await Oue(i.selectedOption, l)
         if (
           g.type === da.Failure ||
@@ -3257,7 +3257,7 @@ export function createUI2(params) {
           g.type === da.CursorRule ||
           i.selectedOption.type !== Tt.code
         ) {
-          r(void 0)
+          r(undefined)
           return
         }
         if (g.type === da.File) {
@@ -3395,7 +3395,7 @@ export function createUI2(params) {
                                 D
                               )
                             },
-                            { e: void 0, t: void 0, a: void 0 },
+                            { e: undefined, t: undefined, a: undefined },
                           ),
                           x
                         )
@@ -3459,7 +3459,7 @@ export function createUI2(params) {
                       C
                     )
                   },
-                  { e: void 0, t: void 0, a: void 0 },
+                  { e: undefined, t: undefined, a: undefined },
                 ),
                 p
               )
@@ -3493,7 +3493,7 @@ export function createUI2(params) {
                       m
                     )
                   },
-                  { e: void 0, t: void 0 },
+                  { e: undefined, t: undefined },
                 ),
                 p
               )
@@ -3575,14 +3575,14 @@ export function createUI2(params) {
     const e = dt(),
       [t] = Cu(),
       [s, n] = le(null),
-      [r, o] = le(!1),
+      [r, o] = le(false),
       [a, l] = le(iQi),
       c = Y(() => i.excludeFiles ?? []),
       { options: h, isLoading: u } = qXi(s, {
         resultsLimit: a,
         excludeFiles: c,
-        showLoadMore: !0,
-        showLoading: !0,
+        showLoadMore: true,
+        showLoading: true,
         disabled: () => !r(),
       })
     De(() => {
@@ -3612,7 +3612,7 @@ export function createUI2(params) {
       },
       g = t.registerCommand(
         ZB,
-        (p) => (r() && h().length > 0 ? (o(!1), !0) : !1),
+        (p) => (r() && h().length > 0 ? (o(false), true) : false),
         fI,
       )
     return (
@@ -3627,7 +3627,7 @@ export function createUI2(params) {
             b = Fue(p, t),
             y = jir(p),
             w = y && !b && !m ? y : null
-          return w ? (o(!0), w) : (o(!1), null)
+          return w ? (o(true), w) : (o(false), null)
         },
         get options() {
           return h()
@@ -3655,18 +3655,18 @@ export function createUI2(params) {
       tn(
         I7,
         {
-          readonly: !1,
-          useArrowsForHistory: !1,
-          supportsGit: !1,
-          supportsCommitNotes: !1,
-          supportsLint: !1,
-          supportsCodebase: !1,
-          supportsLink: !1,
-          supportsFolderSelections: !1,
-          supportsWeb: !1,
-          showDocs: !1,
-          atMentionsDisabled: !0,
-          isLongContextMode: !1,
+          readonly: false,
+          useArrowsForHistory: false,
+          supportsGit: false,
+          supportsCommitNotes: false,
+          supportsLint: false,
+          supportsCodebase: false,
+          supportsLink: false,
+          supportsFolderSelections: false,
+          supportsWeb: false,
+          showDocs: false,
+          atMentionsDisabled: true,
+          isLongContextMode: false,
           source: "simple_input_box",
           editorConfig: () => ({
             ...PH(),
@@ -3720,7 +3720,7 @@ export function createUI2(params) {
           .map((y) => y?.fsPath ?? "")
         return new Set(b)
       }),
-      [o, a] = le(!1),
+      [o, a] = le(false),
       l = () =>
         I(DXi, {
           class: "aislash-editor-input",
@@ -3746,12 +3746,12 @@ export function createUI2(params) {
             }
           },
           get turnOffCmdZ() {
-            return i.externalHistoryBundle !== void 0
+            return i.externalHistoryBundle !== undefined
           },
-          spellCheck: !1,
+          spellCheck: false,
           autoCapitalize: "off",
         }),
-      [c, h] = le(!1),
+      [c, h] = le(false),
       [u, d] = le(""),
       [g, p] = le(null)
     return (() => {
@@ -3823,7 +3823,7 @@ export function createUI2(params) {
                 }),
                 I(te, {
                   get when() {
-                    return i.externalHistoryBundle !== void 0
+                    return i.externalHistoryBundle !== undefined
                   },
                   get fallback() {
                     return I(Dtr, {})
@@ -3837,7 +3837,7 @@ export function createUI2(params) {
                 }),
                 I(te, {
                   get when() {
-                    return i.atMentionsDisabled !== !0
+                    return i.atMentionsDisabled !== true
                   },
                   get children() {
                     return I(
@@ -3867,8 +3867,8 @@ export function createUI2(params) {
                           return i.removeSelection
                         },
                         insertImage: (y) => {
-                          if (i.insertImage !== void 0) return i.insertImage(y)
-                          if (i.addImage === void 0) return
+                          if (i.insertImage !== undefined) return i.insertImage(y)
+                          if (i.addImage === undefined) return
                           const w = new Image()
                           ;(w.src = Mr.uriToBrowserUri(U.from(y.uri)).toString()),
                             i.addImage(y.uuid, {
@@ -3948,10 +3948,10 @@ export function createUI2(params) {
                         },
                         showErrorMessage: n,
                         onMentionsMenuOpen: () => {
-                          i.onMentionsMenuOpen?.(), h(!0)
+                          i.onMentionsMenuOpen?.(), h(true)
                         },
                         onMentionsMenuClose: () => {
-                          i.onMentionsMenuClose?.(), h(!1)
+                          i.onMentionsMenuClose?.(), h(false)
                         },
                         get addCommitNotes() {
                           return i.addCommitNotes
@@ -4010,8 +4010,8 @@ export function createUI2(params) {
                 I(gnr, {
                   get supportsLink() {
                     return (
-                      (i.shouldAutoParseLink === void 0
-                        ? !0
+                      (i.shouldAutoParseLink === undefined
+                        ? true
                         : i.shouldAutoParseLink) && i.supportsLink
                     )
                   },
@@ -4025,7 +4025,7 @@ export function createUI2(params) {
                     return i.supportsWeb
                   },
                   get supportsDocs() {
-                    return i.showDocs ?? !1
+                    return i.showDocs ?? false
                   },
                   get supportsFolder() {
                     return i.supportsFolderSelections
@@ -4131,9 +4131,9 @@ export function createUI2(params) {
                         callback: (y) => (
                           g()?.update(() => {
                             const w = Wr()
-                            return Xn(w) ? (GZn(w), !0) : !1
+                            return Xn(w) ? (GZn(w), true) : false
                           }),
-                          !0
+                          true
                         ),
                       },
                     ]
@@ -4153,7 +4153,7 @@ export function createUI2(params) {
                     p(y), i.setEditor?.(y)
                   },
                   get readonly() {
-                    return i.readonly ?? !1
+                    return i.readonly ?? false
                   },
                 }),
               ]
@@ -4170,7 +4170,7 @@ export function createUI2(params) {
   function bXe(i) {
     const e = Ct(i),
       t = e.getSelection()
-    if (!t) return !1
+    if (!t) return false
     const s = t.getRangeAt(0),
       n = s.cloneRange()
     n.selectNodeContents(i), n.setEnd(s.endContainer, s.endOffset)
@@ -4192,7 +4192,7 @@ export function createUI2(params) {
   function vXe(i) {
     const e = Ct(i),
       t = e.getSelection()
-    if (!t) return !1
+    if (!t) return false
     const s = t.getRangeAt(0),
       n = s.cloneRange()
     n.selectNodeContents(i), n.setStart(s.startContainer, s.startOffset)
@@ -4215,10 +4215,10 @@ export function createUI2(params) {
       const [e] = Cu()
       return (
         De(() => {
-          i.setEditor && (i.setEditor(e), e.setEditable(!(i.readonly ?? !1)))
+          i.setEditor && (i.setEditor(e), e.setEditable(!(i.readonly ?? false)))
         }),
         De(() => {
-          i.readonly && e.setEditable(!1)
+          i.readonly && e.setEditable(false)
         }, [i.readonly]),
         null
       )
@@ -4257,7 +4257,7 @@ export function createUI2(params) {
                 bXe(d) &&
                 (s() === r().length - 1 ||
                   (s() === -1 && l(d.innerText), n((g) => g + 1))),
-              !1
+              false
             )
           },
           Xv,
@@ -4266,7 +4266,7 @@ export function createUI2(params) {
           EG,
           (u) => {
             const d = e.getRootElement()
-            return d !== null && vXe(d) && s() !== -1 && n(s() - 1), !1
+            return d !== null && vXe(d) && s() !== -1 && n(s() - 1), false
           },
           Xv,
         )
@@ -4308,9 +4308,9 @@ export function createUI2(params) {
     const [e] = Cu(),
       [t, s] = le("")
     De(() => {
-      i.text !== void 0 && s(i.text)
+      i.text !== undefined && s(i.text)
     })
-    let n = !1
+    let n = false
     const r = e.registerTextContentListener((l) => {
         s(l)
       }),
@@ -4321,16 +4321,16 @@ export function createUI2(params) {
             h = e.getRootElement(),
             u = WKi(e)
           return l.repeat
-            ? ((n = !0), !1)
-            : (!l.repeat && n && (n = !1),
+            ? ((n = true), false)
+            : (!l.repeat && n && (n = false),
               !i.onTryDeleteContext &&
               c.length > 0 &&
               ((i.ignoreTextForLastSelectionRemoval && u) || t() === "")
-                ? (i.removeSelection()(c.length - 1), !0)
+                ? (i.removeSelection()(c.length - 1), true)
                 : (t() === "" || (i.ignoreTextForLastSelectionRemoval && u)) &&
                     i.onTryDeleteContext
                   ? i.onTryDeleteContext()?.()
-                  : !1)
+                  : false)
         },
         UVe,
       ),
@@ -4347,12 +4347,12 @@ export function createUI2(params) {
       t = XI(),
       s = e.registerCommand(
         Kxt,
-        (c) => (i.setIsFocused && i.setIsFocused(!0), !1),
+        (c) => (i.setIsFocused && i.setIsFocused(true), false),
         fI,
       ),
       n = e.registerCommand(
         dOi,
-        (c) => (i.setIsFocused && i.setIsFocused(!1), !1),
+        (c) => (i.setIsFocused && i.setIsFocused(false), false),
         fI,
       )
     let r = 0
@@ -4361,25 +4361,25 @@ export function createUI2(params) {
         c.keyCode === 9 && (r = c.timeStamp)
       }
     De(() => {
-      t.window.addEventListener("keydown", a, !0)
+      t.window.addEventListener("keydown", a, true)
     })
     const l = e.registerCommand(
       Kxt,
       (c) => {
         const h = Wr()
-        return Xn(h) && r + o > c.timeStamp && eR(h.clone()), !1
+        return Xn(h) && r + o > c.timeStamp && eR(h.clone()), false
       },
       Xv,
     )
     return (
       De(() => {
-        i.delegate !== void 0 &&
+        i.delegate !== undefined &&
           i.delegate.setForceFocusNoScroll(() => {
-            e.getRootElement().focus({ preventScroll: !0 })
+            e.getRootElement().focus({ preventScroll: true })
           })
       }),
       Gt(() => {
-        s(), n(), l(), t.window.removeEventListener("keydown", a, !0)
+        s(), n(), l(), t.window.removeEventListener("keydown", a, true)
       }),
       null
     )
@@ -4390,10 +4390,10 @@ export function createUI2(params) {
           IG,
           (s) =>
             s.repeat
-              ? !0
+              ? true
               : s.shiftKey || i.handleSubmit(s) === "do-not-stop-propagation"
-                ? !1
-                : (s.preventDefault(), !0),
+                ? false
+                : (s.preventDefault(), true),
           UVe,
         )
       return (
@@ -4406,7 +4406,7 @@ export function createUI2(params) {
     gnr = (i) => {
       const [e] = Cu(),
         t = dt()
-      let s = !1
+      let s = false
       const n = (c) => {
           i.source === "chat" && t.tooltipService.registerEvent("chat.paste")
           let h = c.clipboardData?.getData("Text")
@@ -4414,7 +4414,7 @@ export function createUI2(params) {
             !s &&
             t.reactiveStorageService.nonPersistentStorage.lastCopy &&
             t.reactiveStorageService.nonPersistentStorage.lastCopy.text === h &&
-            h !== void 0 &&
+            h !== undefined &&
             h.includes(`
 `) &&
             !i.disableSelectionCopyPaste
@@ -4428,11 +4428,11 @@ export function createUI2(params) {
                 t.dataScrubbingService,
               ).then((m) => {
                 m &&
-                  (m.text.trim().startsWith("```bash") && g !== void 0
+                  (m.text.trim().startsWith("```bash") && g !== undefined
                     ? g(m)
                     : p(m))
               }),
-              !0
+              true
             )
           }
           if (s && h)
@@ -4442,9 +4442,9 @@ export function createUI2(params) {
                 const g = Wr()
                 Xn(g) && g.insertText(h)
               }),
-              !0
+              true
             )
-          if (h !== void 0 && h.includes("@")) {
+          if (h !== undefined && h.includes("@")) {
             for (let g = 0; g < h.length; g++) {
               const p = h.charAt(g)
               if (p === "@") {
@@ -4454,24 +4454,24 @@ export function createUI2(params) {
                   w = "@" + cc[Tt.recent_changes],
                   C = h.slice(g),
                   S = Wr()
-                if (S === null) return !1
+                if (S === null) return false
                 if (C.startsWith(m))
                   if (i.supportsCodebase) {
-                    const x = Jk(cc[Tt.codebase], void 0, void 0, Tt.codebase)
+                    const x = Jk(cc[Tt.codebase], undefined, undefined, Tt.codebase)
                     S.insertNodes([x]),
                       x.select(),
                       i.addCodebase(x.storedKey),
                       (g += m.length - 1)
                   } else g += m.length
                 else if (C.startsWith(b)) {
-                  const x = Jk(cc[Tt.lint], void 0, void 0, Tt.lint)
+                  const x = Jk(cc[Tt.lint], undefined, undefined, Tt.lint)
                   S.insertNodes([x]),
                     x.select(),
                     i.addLinterErrors(x.storedKey),
                     (g += b.length - 1)
                 } else if (C.startsWith(y))
                   if (i.supportsWeb) {
-                    const x = Jk(cc[Tt.web], void 0, void 0, Tt.web)
+                    const x = Jk(cc[Tt.web], undefined, undefined, Tt.web)
                     S.insertNodes([x]),
                       x.select(),
                       i.addWeb(x.storedKey),
@@ -4480,8 +4480,8 @@ export function createUI2(params) {
                 else if (C.startsWith(w)) {
                   const x = Jk(
                     cc[Tt.recent_changes],
-                    void 0,
-                    void 0,
+                    undefined,
+                    undefined,
                     Tt.recent_changes,
                   )
                   S.insertNodes([x]),
@@ -4497,7 +4497,7 @@ export function createUI2(params) {
                   if (k) {
                     const E = k.displayName.replace(/^@/, "")
                     if (k.selection.type === da.Code) {
-                      const D = Jk(E, void 0, void 0, Tt.code, k.selection)
+                      const D = Jk(E, undefined, undefined, Tt.code, k.selection)
                       S.insertNodes([D]),
                         i.addCode({
                           ...k.selection.selectionWithoutUuid,
@@ -4505,7 +4505,7 @@ export function createUI2(params) {
                         }),
                         (g += k.displayName.length - 1)
                     } else if (k.selection.type === da.File) {
-                      const D = Jk(E, void 0, void 0, Tt.file, k.selection)
+                      const D = Jk(E, undefined, undefined, Tt.file, k.selection)
                       S.insertNodes([D]),
                         i.addFile({
                           ...k.selection.selectionWithoutUuid,
@@ -4514,7 +4514,7 @@ export function createUI2(params) {
                         (g += k.displayName.length - 1)
                     } else if (k.selection.type === da.Folder)
                       if (i.supportsFolder) {
-                        const D = Jk(E, void 0, void 0, Tt.folder, k.selection)
+                        const D = Jk(E, undefined, undefined, Tt.folder, k.selection)
                         S.insertNodes([D]),
                           i.addFolder({
                             ...k.selection.selectionWithoutUuid,
@@ -4524,7 +4524,7 @@ export function createUI2(params) {
                       } else g += k.displayName.length
                     else if (k.selection.type === da.Docs)
                       if (i.supportsDocs) {
-                        const D = Jk(E, void 0, void 0, Tt.doc, k.selection)
+                        const D = Jk(E, undefined, undefined, Tt.doc, k.selection)
                         S.insertNodes([D]),
                           i.addDoc({
                             ...k.selection.selectionWithoutUuid,
@@ -4536,11 +4536,11 @@ export function createUI2(params) {
                 }
               } else {
                 const m = Wr()
-                if (m === null) return !1
+                if (m === null) return false
                 m.insertText(p)
               }
             }
-            return c.preventDefault(), c.stopPropagation(), !0
+            return c.preventDefault(), c.stopPropagation(), true
           }
           const u = Array.from(c.clipboardData?.items || []).find(
               (g) => g.kind === "file",
@@ -4549,7 +4549,7 @@ export function createUI2(params) {
               try {
                 return new URL(g).hostname.includes(".")
               } catch {
-                return !1
+                return false
               }
             }
           if (u) {
@@ -4562,13 +4562,13 @@ export function createUI2(params) {
                   const m = Wr()
                   m !== null && m.insertText(p)
                 }),
-                !0
+                true
               )
             }
           } else if (
             i.supportsLink &&
             !i.isMentionsMenuOpen() &&
-            h !== void 0 &&
+            h !== undefined &&
             h.length < 2e3 &&
             d(h)
           )
@@ -4577,7 +4577,7 @@ export function createUI2(params) {
               e._rootElement?.blur(),
               e.update(() => {
                 if (!h) return
-                const g = Jk(h, void 0, void 0, Tt.link),
+                const g = Jk(h, undefined, undefined, Tt.link),
                   p = $c(" "),
                   m = Wr()
                 m !== null &&
@@ -4585,9 +4585,9 @@ export function createUI2(params) {
                   p.select(),
                   i.insertLink({ url: h, uuid: g.storedKey }))
               }),
-              !0
+              true
             )
-          return !1
+          return false
         },
         r = e.registerCommand(oae, (c) => n(c), UVe),
         o = e.registerCommand(
@@ -4596,13 +4596,13 @@ export function createUI2(params) {
             (c.metaKey || c.ctrlKey) && c.shiftKey
               ? (c.preventDefault(),
                 e.getRootElement() &&
-                  ((s = !0),
+                  ((s = true),
                   t.window.document.execCommand("paste"),
                   setTimeout(() => {
-                    s = !1
+                    s = false
                   }, 100)),
-                !0)
-              : !1,
+                true)
+              : false,
           UVe,
         ),
         a = e.registerCommand(
@@ -4639,8 +4639,8 @@ export function createUI2(params) {
               ? (u.getNodes().forEach((d) => {
                   h(d)
                 }),
-                !0)
-              : !1
+                true)
+              : false
           },
           Xv,
         ),
@@ -4678,8 +4678,8 @@ export function createUI2(params) {
               ? (u.getNodes().forEach((d) => {
                   h(d)
                 }),
-                !0)
-              : !1
+                true)
+              : false
           },
           Xv,
         )
@@ -4692,12 +4692,12 @@ export function createUI2(params) {
     },
     pnr = (i) => {
       const [e] = Cu(),
-        [t, s] = le(!1),
+        [t, s] = le(false),
         n = e.registerTextContentListener((o) => {
           const a = co(() => i.setIsTyping())
           a && a(o !== ""),
-            i.setText !== void 0 && (i.setText?.(o), t() || s(!0)),
-            i.setRichText !== void 0 &&
+            i.setText !== undefined && (i.setText?.(o), t() || s(true)),
+            i.setRichText !== undefined &&
               i.setRichText?.(JSON.stringify(e.getEditorState()))
           const l = e.getRootElement()
           i.setContentHeight &&
@@ -4720,7 +4720,7 @@ export function createUI2(params) {
         De(() => {
           const o = e.registerCommand(
             ZB,
-            (a) => (i.onEscape ? (i.onEscape(a), !0) : !1),
+            (a) => (i.onEscape ? (i.onEscape(a), true) : false),
             fI,
           )
           Gt(() => {
@@ -4757,7 +4757,7 @@ export function createUI2(params) {
             if (
               !h
                 .getChildren()
-                .every((m) => (m instanceof AG ? m.getTextContent() === "" : !1))
+                .every((m) => (m instanceof AG ? m.getTextContent() === "" : false))
             )
               return
             if (c.startsWith("{"))
@@ -4793,7 +4793,7 @@ export function createUI2(params) {
         })
         Gt(c)
         const h = i.delegate.onClear((u) => {
-          if (u?.dontStealFocus === !0) {
+          if (u?.dontStealFocus === true) {
             const d = e.parseEditorState(
               '{"root":{"children":[{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1}],"direction":null,"format":"","indent":0,"type":"root","version":1}}',
             )
@@ -4937,7 +4937,7 @@ export function createUI2(params) {
     H6: { top: "20px", bottom: "0px" },
   }
   function yXe(i, e) {
-    if (i.appendText !== void 0) i.appendText(e)
+    if (i.appendText !== undefined) i.appendText(e)
     else if (i.type === ci.BLOCK_CODE) {
       const t = i.codeTextModel
       t.applyEdits([
@@ -4949,7 +4949,7 @@ export function createUI2(params) {
             endColumn: t.getLineMaxColumn(t.getLineCount()),
           },
           text: e,
-          forceMoveMarkers: !0,
+          forceMoveMarkers: true,
         },
       ])
     } else {
@@ -5246,7 +5246,7 @@ export function createUI2(params) {
                               endColumn: P + g.symbolSearchString.length + 1,
                             },
                           },
-                          good: !0,
+                          good: true,
                         }
                     }
                     return {
@@ -5259,7 +5259,7 @@ export function createUI2(params) {
                           endColumn: 1,
                         },
                       },
-                      good: !1,
+                      good: false,
                     }
                   } catch {
                   } finally {
@@ -5275,7 +5275,7 @@ export function createUI2(params) {
                     return p
                 },
                 h = (g) => {
-                  if (!n.symbolLinks) return !1
+                  if (!n.symbolLinks) return false
                   let m
                   for (const b of n.symbolLinks ?? [])
                     b.symbolName === g && (m = b)
@@ -5304,11 +5304,11 @@ export function createUI2(params) {
                       }),
                       (r.style.cursor = "pointer"),
                       (r.style.color = "var(--vscode-textLink-foreground)"),
-                      !0)
-                    : !1
+                      true)
+                    : false
                 },
                 u = (g) => {
-                  if (!n.fileLinks) return !1
+                  if (!n.fileLinks) return false
                   let m
                   for (const b of n.fileLinks ?? [])
                     b.displayName === g && (m = b)
@@ -5321,10 +5321,10 @@ export function createUI2(params) {
                       }),
                       (r.style.cursor = "pointer"),
                       (r.style.color = "var(--vscode-textLink-foreground)"),
-                      !0)
-                    : !1
+                      true)
+                    : false
                 }
-              let d = { hasFound: !1 }
+              let d = { hasFound: false }
               return (
                 Yx((g) => {
                   t.push({ dispose: () => g() }),
@@ -5417,8 +5417,8 @@ export function createUI2(params) {
               },
               s,
             ),
-            !1,
-            !0,
+            false,
+            true,
           ),
           M(
             o,
@@ -5437,7 +5437,7 @@ export function createUI2(params) {
                         h !== c.e && tt(l, (c.e = h)), (c.t = Bi(l, u, c.t)), c
                       )
                     },
-                    { e: void 0, t: void 0 },
+                    { e: undefined, t: undefined },
                   ),
                   l
                 )
@@ -5463,7 +5463,7 @@ export function createUI2(params) {
                         h !== c.e && tt(l, (c.e = h)), (c.t = Bi(l, u, c.t)), c
                       )
                     },
-                    { e: void 0, t: void 0 },
+                    { e: undefined, t: undefined },
                   ),
                   l
                 )
@@ -5480,20 +5480,20 @@ export function createUI2(params) {
     Anr = X("<div><div>"),
     Mnr = X("<span>")
   function O4t(i) {
-    const [e, t] = le(!1)
+    const [e, t] = le(false)
     let s, n
     const r = XI(),
       o = () => {
         t(!e())
       },
       a = () => {
-        t(!0)
+        t(true)
       },
       l = (h) => {
-        ;(n && n.contains(h.relatedTarget)) || t(!1)
+        ;(n && n.contains(h.relatedTarget)) || t(false)
       },
       c = () => {
-        t(!1)
+        t(false)
       }
     return [
       I(te, {
@@ -5506,7 +5506,7 @@ export function createUI2(params) {
       }),
       I(te, {
         get when() {
-          return i.hidden !== !0
+          return i.hidden !== true
         },
         get children() {
           return [
@@ -5575,7 +5575,7 @@ export function createUI2(params) {
                             g
                           )
                         },
-                        { e: void 0, t: void 0 },
+                        { e: undefined, t: undefined },
                       ),
                       h
                     )
@@ -5605,7 +5605,7 @@ export function createUI2(params) {
                 n = ie.asClassName($.info)
               return (t.e = Bi(e, s, t.e)), n !== t.t && tt(e, (t.t = n)), t
             },
-            { e: void 0, t: void 0 },
+            { e: undefined, t: undefined },
           ),
           e
         )

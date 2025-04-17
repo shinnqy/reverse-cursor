@@ -5,9 +5,9 @@ export function createGeneralConfig() {
     pG = "x-ghost-mode",
     UEn = "x-session-id"
   function o7(i) {
-    if (i === !0) return "true"
-    if (i === !1) return "false"
-    if (i === void 0) return "implicit-false"
+    if (i === true) return "true"
+    if (i === false) return "false"
+    if (i === undefined) return "implicit-false"
     {
       let e = i
       return (e = e), "true"
@@ -43,13 +43,13 @@ export function createGeneralConfig() {
         d = s(u)
       i.header.set(
         "x-cursor-checksum",
-        t === void 0 ? `${d}${e}` : `${d}${e}/${t}`,
+        t === undefined ? `${d}${e}` : `${d}${e}/${t}`,
       )
     } catch {}
     i.header.set("x-cursor-client-version", n),
-      l !== void 0 && i.header.set(UEn, l),
+      l !== undefined && i.header.set(UEn, l),
       i.header.set(pG, o7(r)),
-      a !== void 0 && i.header.set(_En, a)
+      a !== undefined && i.header.set(_En, a)
     try {
       const c = Intl.DateTimeFormat().resolvedOptions().timeZone
       i.header.set("x-cursor-timezone", c)
@@ -194,12 +194,12 @@ export function createGeneralConfig() {
   }
   var JB = "cursor.cpp.disabledLanguages"
   function WEn(i, e, t) {
-    return i === void 0 || i.isOn === !1
-      ? !1
-      : !(e === !1 || (t === !1 && !i.shouldLetUserEnableCppEvenIfNotPro))
+    return i === undefined || i.isOn === false
+      ? false
+      : !(e === false || (t === false && !i.shouldLetUserEnableCppEvenIfNotPro))
   }
   function qEn(i, e, t) {
-    if (e !== void 0) {
+    if (e !== undefined) {
       const s = [
         ".env",
         ".env.local",
@@ -216,9 +216,9 @@ export function createGeneralConfig() {
         (e.languageId === "plaintext" && s.some((n) => e.fsPath.endsWith(n))) ||
         b2i(e.languageId, t)
       )
-        return !1
+        return false
     }
-    return i === !0
+    return i === true
   }
   function b2i(i, e) {
     return !!(Array.isArray(e) && e.includes(i))

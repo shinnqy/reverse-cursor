@@ -9,15 +9,15 @@ export function createAIServiceSet(params) {
     MetricsService = class extends V {
       constructor() {
         super(),
-          (this.a = void 0), (this.metricsProvider = this.a),
+          (this.a = undefined), (this.metricsProvider = this.a),
           (this.b = Array(1e3).fill(null)), (this.metricsBuffer = this.b),
           (this.c = 0), (this.bufferIndex = this.c),
           window.setInterval(() => {
             if (this.metricsProvider) {
-              let i = !1
+              let i = false
               this.metricsBuffer.forEach((e) => {
-                if (e != null && this.metricsProvider !== void 0)
-                  switch (((i = !0), e.method)) {
+                if (e != null && this.metricsProvider !== undefined)
+                  switch (((i = true), e.method)) {
                     case "increment":
                       this.metricsProvider.increment(e.stat)
                       break
@@ -61,14 +61,14 @@ export function createAIServiceSet(params) {
         this.metricsProvider = i
       }
       unregisterMetricsProvider() {
-        this.metricsProvider = void 0
+        this.metricsProvider = undefined
       }
     }
   Ve(metricsService, MetricsService, 1)
   var diffingService = Re("diffingService"),
     ZKn = class extends V {
       constructor() {
-        super(), (this.a = void 0)
+        super(), (this.a = undefined)
       }
       async wordDiff(i, e) {
         return this.a
@@ -76,8 +76,8 @@ export function createAIServiceSet(params) {
           : (console.error("No diffing provider registered"),
             {
               changes: [
-                { value: e, added: !0 },
-                { value: i, removed: !0 },
+                { value: e, added: true },
+                { value: i, removed: true },
               ],
             })
       }
@@ -85,7 +85,7 @@ export function createAIServiceSet(params) {
         this.a = i
       }
       unregisterDiffingProvider() {
-        this.a = void 0
+        this.a = undefined
       }
     }
   Ve(diffingService, ZKn, 1)
@@ -109,7 +109,7 @@ export function createAIServiceSet(params) {
           (this.f = s),
           (this.g = n),
           (this.a = []),
-          (this.h = !1),
+          (this.h = false),
           this.D(
             this.g.onWillShutdown((r) => {
               const o = (async () => {
@@ -132,7 +132,7 @@ export function createAIServiceSet(params) {
         this.a.push(e)
       }
       enabled() {
-        return this.b.getValue(mUe) ?? !1
+        return this.b.getValue(mUe) ?? false
       }
       dispose() {
         this.closeShadowWorkspace(), super.dispose()
@@ -143,17 +143,17 @@ export function createAIServiceSet(params) {
             "Already opening a shadow workspace. Please wait a bit.",
           )
         try {
-          this.h = !0
+          this.h = true
           for (const e of this.a)
-            if (e.hasOpenShadowWorkspace()) return { didReuse: !0 }
+            if (e.hasOpenShadowWorkspace()) return { didReuse: true }
           if ((await this.closeShadowWorkspace(), !this.enabled()))
             throw new Error("Shadow workspace is not enabled")
           for (const e of this.a)
             if (e.available())
-              return await e.openShadowWorkspace(), { didReuse: !1 }
+              return await e.openShadowWorkspace(), { didReuse: false }
           throw new Error("No shadow workspace manager available")
         } finally {
-          this.h = !1
+          this.h = false
         }
       }
       async closeShadowWorkspace() {
@@ -193,8 +193,8 @@ export function createAIServiceSet(params) {
             new Error("Shadow workspace is not enabled"))
           )
         const { didReuse: t } = await this.openShadowWorkspace()
-        if (this.n === void 0) {
-          if (this.m === void 0) throw new Error("No client provider found.")
+        if (this.n === undefined) {
+          if (this.m === undefined) throw new Error("No client provider found.")
           this.n = this.m(this.getClientSocketPath())
         }
         try {
@@ -226,14 +226,14 @@ export function createAIServiceSet(params) {
         }
       }
       q() {
-        this.n = void 0
+        this.n = undefined
       }
       provideClient(e) {
         return (
           (this.m = e),
           {
             dispose: () => {
-              this.m === e && ((this.m = void 0), (this.n = void 0))
+              this.m === e && ((this.m = undefined), (this.n = undefined))
             },
           }
         )
@@ -349,26 +349,26 @@ export function createAIServiceSet(params) {
       return n
     }
     async L(e) {
-      if (!this.S.find((s) => s.uri.toString() === e.toString())) return !1
+      if (!this.S.find((s) => s.uri.toString() === e.toString())) return false
       try {
         const s = this.y.findEditors(e)
         for (const r of s)
-          await this.y.revert(r, { force: !0 }), await this.y.closeEditor(r)
-        await this.G.del(e, { recursive: !0, useTrash: !0 }),
+          await this.y.revert(r, { force: true }), await this.y.closeEditor(r)
+        await this.G.del(e, { recursive: true, useTrash: true }),
           (this.S = this.S.filter((r) => r.uri.toString() !== e.toString()))
         const n = this.U.filter((r) => e.toString().startsWith(r.uri.toString()))
         for (const r of n)
           (
-            (await this.G.resolve(r.uri, { resolveMetadata: !0 })).children ?? []
+            (await this.G.resolve(r.uri, { resolveMetadata: true })).children ?? []
           ).filter((l) => !l.isDirectory).length === 0 &&
-            (await this.G.del(r.uri, { recursive: !0, useTrash: !0 }),
+            (await this.G.del(r.uri, { recursive: true, useTrash: true }),
             (this.U = this.U.filter(
               (l) => l.uri.toString() !== r.uri.toString(),
             )))
-        return !0
+        return true
       } catch (s) {
         return (
-          console.error(`[aichat] Error deleting file ${e.toString()}:`, s), !1
+          console.error(`[aichat] Error deleting file ${e.toString()}:`, s), false
         )
       }
     }
@@ -413,23 +413,23 @@ export function createAIServiceSet(params) {
           u = c.object.textEditorModel.getAlternativeVersionId(),
           d = this.getCacheKey(o, BP, c.object.textEditorModel),
           g = this.N.get(d)
-        if (g !== void 0) {
+        if (g !== undefined) {
           g.succeeded &&
             this.Q(s) &&
-            this.R(e) === void 0 &&
+            this.R(e) === undefined &&
             this.W({
               uri: e,
               chatCodeblockModel: t,
               tabId: s.tabId,
               bubbleId: s.bubbleId,
-              useLintsFromShadowWorkspace: !0,
+              useLintsFromShadowWorkspace: true,
             })
           return
         }
         const p = rt()
         this.N.set(d, {
           diff: [],
-          succeeded: !1,
+          succeeded: false,
           originalRange: new Es(h.startLine, h.endLineExclusive),
           originalResource: e,
           generationUUID: p,
@@ -440,38 +440,38 @@ export function createAIServiceSet(params) {
           inlineDiffServiceLookalike: {
             usedCurrentFileInfo: (w) => {
               const C = this.N.get(d)
-              C !== void 0 &&
+              C !== undefined &&
                 w.alternativeVersionId !== u &&
                 (console.log(
                   "Cancelled cache apply because the cache key model version is not the same as the alternative version id.",
                 ),
-                (C.succeeded = !1),
+                (C.succeeded = false),
                 this.N.delete(d))
             },
             cancel: () => {
               const w = this.N.get(d)
-              w !== void 0 &&
-                ((w.succeeded = !1), this.N.delete(d), this.O.delete(d))
+              w !== undefined &&
+                ((w.succeeded = false), this.N.delete(d), this.O.delete(d))
             },
             finish: async (w) => {
               const C = this.N.get(d)
-              C !== void 0 &&
+              C !== undefined &&
                 (w.length > 0 &&
                   ((C.diff = w),
-                  (C.succeeded = !0),
+                  (C.succeeded = true),
                   this.Q(s) &&
-                    this.R(e) === void 0 &&
+                    this.R(e) === undefined &&
                     (await this.W({
                       uri: e,
                       chatCodeblockModel: t,
                       tabId: s.tabId,
                       bubbleId: s.bubbleId,
-                      useLintsFromShadowWorkspace: !0,
+                      useLintsFromShadowWorkspace: true,
                     }))),
                 this.O.delete(d))
             },
           },
-          isBackgroundApply: !0,
+          isBackgroundApply: true,
           onStreamerCreated: (w) => {
             this.O.set(d, {
               streamer: w,
@@ -480,9 +480,9 @@ export function createAIServiceSet(params) {
             })
           },
           clickedCodeBlockContents: t.getValue(),
-          rejectChangesInURI: !1,
+          rejectChangesInURI: false,
         }
-        await this.m.executeCommand(GJ, e, void 0, y)
+        await this.m.executeCommand(GJ, e, undefined, y)
       } finally {
         r.dispose(), this.isAlreadyCachingCode--
       }
@@ -518,11 +518,11 @@ export function createAIServiceSet(params) {
           },
           p = d.object.textEditorModel.getAlternativeVersionId(),
           m = this.getCacheKey(s, BP, d.object.textEditorModel)
-        if (this.N.get(m) !== void 0) return
+        if (this.N.get(m) !== undefined) return
         const y = rt()
         this.N.set(m, {
           diff: [],
-          succeeded: !1,
+          succeeded: false,
           originalRange: new Es(g.startLine, g.endLineExclusive),
           originalResource: t,
           generationUUID: y,
@@ -537,23 +537,23 @@ export function createAIServiceSet(params) {
           C = {
             usedCurrentFileInfo: (S) => {
               const x = this.N.get(m)
-              x !== void 0 &&
+              x !== undefined &&
                 S.alternativeVersionId !== p &&
                 (console.log(
                   "Cancelled cache apply because the cache key model version is not the same as the alternative version id.",
                 ),
-                (x.succeeded = !1),
+                (x.succeeded = false),
                 this.N.delete(m))
             },
             cancel: () => {
               const S = this.N.get(m)
-              S !== void 0 &&
-                ((S.succeeded = !1), this.N.delete(m), this.O.delete(m))
+              S !== undefined &&
+                ((S.succeeded = false), this.N.delete(m), this.O.delete(m))
             },
             finish: async (S) => {
               const x = this.N.get(m)
-              x !== void 0 &&
-                (S.length > 0 && ((x.diff = S), (x.succeeded = !0)),
+              x !== undefined &&
+                (S.length > 0 && ((x.diff = S), (x.succeeded = true)),
                 this.O.delete(m))
             },
           }
@@ -563,13 +563,13 @@ export function createAIServiceSet(params) {
             overrideCurrentFileURI: t,
             failSilently: n === nm.CACHED_APPLY,
           },
-          generationMetadata: void 0,
+          generationMetadata: undefined,
           clickedCodeBlockContents: s,
           inlineDiffServiceLookalike: C,
           isBackgroundApply: n === nm.CACHED_APPLY,
           onStreamerCreated: w,
-          existingStreamer: void 0,
-          isReapply: !1,
+          existingStreamer: undefined,
+          isReapply: false,
           generationUUID: rt(),
           parentRequestId: r,
           conversationHistory: o,
@@ -596,7 +596,7 @@ export function createAIServiceSet(params) {
         composerMetadata: d,
       } = e
       let g
-      l === void 0 && (g = await this.getPendingStreamer(t, s, BP, "fullfile")),
+      l === undefined && (g = await this.getPendingStreamer(t, s, BP, "fullfile")),
         await this.I.performChatEdit({
           source: n,
           options: {
@@ -604,7 +604,7 @@ export function createAIServiceSet(params) {
             overrideLineRange: l,
             failSilently: n === nm.CACHED_APPLY,
           },
-          generationMetadata: void 0,
+          generationMetadata: undefined,
           clickedCodeBlockContents: s,
           isBackgroundApply: n === nm.CACHED_APPLY,
           existingStreamer: g,
@@ -616,7 +616,7 @@ export function createAIServiceSet(params) {
           onApplyDone: h,
           onApplyFailed: u,
           composerMetadata: d,
-          cleanUpOnFail: !0,
+          cleanUpOnFail: true,
         })
     }
     async _getTieredSymbols(e) {
@@ -670,7 +670,7 @@ export function createAIServiceSet(params) {
         a = []
       for (const l of o) {
         const c = n.find((h) => h === l.name)
-        c !== void 0 && (n.splice(n.indexOf(c), 1), a.push(l))
+        c !== undefined && (n.splice(n.indexOf(c), 1), a.push(l))
       }
       return a
     }
@@ -685,17 +685,17 @@ export function createAIServiceSet(params) {
         1,
         5e3,
       )
-      if (s === void 0) return
+      if (s === undefined) return
       const n = s
       return n.length === 0
-        ? void 0
+        ? undefined
         : n.reduce((o, a) =>
             o.range.endLineNumber > a.range.endLineNumber ? o : a,
           ).range.startLineNumber
     }
     async applyCachedEntry(e, t, s, n) {
       const r = this.N.get(t)
-      if (r === void 0) return
+      if (r === undefined) return
       const o = s,
         a = e
           .getLinesContent()
@@ -706,8 +706,8 @@ export function createAIServiceSet(params) {
           currentRange: o,
           originalTextLines: a,
           prompt: "hi",
-          isHidden: !1,
-          attachedToPromptBar: !1,
+          isHidden: false,
+          attachedToPromptBar: false,
           source: OP,
           createdAt: Date.now(),
           composerMetadata: n,
@@ -765,7 +765,7 @@ export function createAIServiceSet(params) {
           1,
           5e3,
         )
-        o === void 0 && (o = [])
+        o === undefined && (o = [])
         for (const a of o) {
           const l = `Apply to ${a.name}`,
             c = new Es(a.range.startLineNumber, a.range.endLineNumber + 1)
@@ -785,8 +785,8 @@ export function createAIServiceSet(params) {
               })
               if (
                 (this.q.open(d),
-                h !== void 0 &&
-                  u !== !0 &&
+                h !== undefined &&
+                  u !== true &&
                   (await this.maybeApplyCachedEntry({
                     uri: e,
                     codeblockContent: h.getValue(),
@@ -799,24 +799,24 @@ export function createAIServiceSet(params) {
                 ...n,
                 isReapply: u,
                 existingStreamer:
-                  h === void 0
-                    ? void 0
+                  h === undefined
+                    ? undefined
                     : await this.getPendingStreamer(e, h.getValue(), l, c),
               }
               await this.m.executeCommand(GJ, e, c, g),
-                h !== void 0 &&
-                  this.R(e) !== void 0 &&
+                h !== undefined &&
+                  this.R(e) !== undefined &&
                   this.Q(n) &&
                   this.W({
                     uri: e,
                     chatCodeblockModel: h,
                     tabId: n.tabId,
                     bubbleId: n.bubbleId,
-                    useLintsFromShadowWorkspace: !1,
+                    useLintsFromShadowWorkspace: false,
                   })
             },
             isCached: async (h) =>
-              h === void 0 ? !1 : this.isEntryCached(e, h, l, c),
+              h === undefined ? false : this.isEntryCached(e, h, l, c),
             uri: e,
           })
         }
@@ -827,24 +827,24 @@ export function createAIServiceSet(params) {
     }
     async getApplyToFileMenuItemsNewFile(e, t) {
       const s = this.y.activeEditor?.resource
-      if (s === void 0 || e.length === 0) return e
+      if (s === undefined || e.length === 0) return e
       const n = "Apply to current file"
       return [
         {
           menuString: n,
-          wholeFile: !1,
+          wholeFile: false,
           callback: async (o, a) => {
             const l = {
               ...t,
               isReapply: a,
               existingStreamer:
-                o === void 0
-                  ? void 0
+                o === undefined
+                  ? undefined
                   : await this.getPendingStreamer(s, o.getValue(), n, "fullfile"),
             }
-            await this.m.executeCommand(GJ, s, void 0, l)
+            await this.m.executeCommand(GJ, s, undefined, l)
           },
-          isCached: async (o) => !1,
+          isCached: async (o) => false,
           uri: s,
         },
         { ...e[0], menuString: "Create new file" },
@@ -863,14 +863,14 @@ export function createAIServiceSet(params) {
       }
     }
     async isEntryCached(e, t, s, n) {
-      if (!(await this.G.exists(e))) return !1
+      if (!(await this.G.exists(e))) return false
       const r = new J()
       try {
         const o = await this.h.createModelReference(e)
         r.add(o)
         const a = this.getCacheKey(t, s, o.object.textEditorModel),
           l = this.N.get(a)
-        return l !== void 0 && l.succeeded
+        return l !== undefined && l.succeeded
       } finally {
         r.dispose()
       }
@@ -922,7 +922,7 @@ export function createAIServiceSet(params) {
       return [
         {
           menuString: BP,
-          wholeFile: !0,
+          wholeFile: true,
           callback: async (s, n) => {
             await this.J(e)
             const r = this.y.findEditors(e)
@@ -932,7 +932,7 @@ export function createAIServiceSet(params) {
             } else await this.q.open(e)
             if (
               s &&
-              n !== !0 &&
+              n !== true &&
               (await this.maybeApplyCachedEntry({
                 uri: e,
                 codeblockContent: s.getValue(),
@@ -945,8 +945,8 @@ export function createAIServiceSet(params) {
               ...t,
               isReapply: n,
               existingStreamer:
-                s === void 0
-                  ? void 0
+                s === undefined
+                  ? undefined
                   : await this.getPendingStreamer(
                       e,
                       s.getValue(),
@@ -954,20 +954,20 @@ export function createAIServiceSet(params) {
                       "fullfile",
                     ),
             }
-            await this.m.executeCommand(GJ, e, void 0, o),
-              s !== void 0 &&
-                this.R(e) !== void 0 &&
+            await this.m.executeCommand(GJ, e, undefined, o),
+              s !== undefined &&
+                this.R(e) !== undefined &&
                 this.Q(t) &&
                 this.W({
                   uri: e,
                   chatCodeblockModel: s,
                   tabId: t.tabId,
                   bubbleId: t.bubbleId,
-                  useLintsFromShadowWorkspace: !1,
+                  useLintsFromShadowWorkspace: false,
                 })
           },
           isCached: async (s) =>
-            s === void 0 ? !1 : this.isEntryCached(e, s, BP, "fullfile"),
+            s === undefined ? false : this.isEntryCached(e, s, BP, "fullfile"),
           uri: e,
         },
       ]
@@ -993,7 +993,7 @@ export function createAIServiceSet(params) {
         if (r) {
           const b = this.getCacheKey(t.getValue(), BP, o.object.textEditorModel),
             y = this.N.get(b)
-          if (y === void 0) return
+          if (y === undefined) return
           const w = o.object.textEditorModel
             .getLinesContent()
             .slice(
@@ -1005,12 +1005,12 @@ export function createAIServiceSet(params) {
             (l = o.object.textEditorModel.getValue()),
             (h = await this.X(e, l, a))
         } else {
-          if (((a = o.object.textEditorModel.getValue()), this.R(e) === void 0))
+          if (((a = o.object.textEditorModel.getValue()), this.R(e) === undefined))
             return
           h = await this.getLinterErrorsInModifiedRanges(e)
         }
         if (
-          h === void 0 ||
+          h === undefined ||
           h.lints.length === 0 ||
           !this.Q({ tabId: s, bubbleId: n })
         )
@@ -1056,7 +1056,7 @@ export function createAIServiceSet(params) {
               bubbleId: p,
               tabId: m,
               intermediateChunks: [],
-              intermediateSectionType: void 0,
+              intermediateSectionType: undefined,
               steps: [],
               ...y,
               lints: [...(y?.lints ?? []), { lints: u, codeBlockUri: t.uri }],
@@ -1138,9 +1138,9 @@ export function createAIServiceSet(params) {
               const p = o(u.relativeWorkspacePath)
               if (
                 (g === -1 &&
-                  p !== void 0 &&
+                  p !== undefined &&
                   (g = c.findIndex((m) => {
-                    if (a(m, p)) return !1
+                    if (a(m, p)) return false
                     const b = m.indexOf(p)
                     return (b === -1 ? m : m.slice(0, b)).trim() === d.trim()
                   })),
@@ -1171,7 +1171,7 @@ export function createAIServiceSet(params) {
                 b = u.endColumnOneIndexed - 1,
                 y = p.slice(m, b)
               return /\s/.test(y)
-                ? void 0
+                ? undefined
                 : new pVe({
                     severity: u.severity,
                     relativeWorkspacePath: u.relativeWorkspacePath,
@@ -1183,12 +1183,12 @@ export function createAIServiceSet(params) {
                   })
             }
           })
-          .filter((u) => u !== void 0)
+          .filter((u) => u !== undefined)
       return new _B({ lints: h })
     }
     async getLinterErrorsInModifiedRanges(e) {
       const t = this.R(e)
-      if (t === void 0) return
+      if (t === undefined) return
       const s = this.F.read({ resource: e }),
         n = this.Z(s).map((r) => ({
           message: r.message,
@@ -1275,14 +1275,14 @@ export function createAIServiceSet(params) {
     async isFileTooBigToApply(e) {
       const t = await this.ab(),
         s = await this.bb(e)
-      return s !== void 0 && s > t
+      return s !== undefined && s > t
     }
     isUsingAPIKeyAndNotPro() {
       return (
         ((this.s.applicationUserPersistentStorage.useOpenAIKey ||
           this.s.applicationUserPersistentStorage.useClaudeKey ||
           this.s.applicationUserPersistentStorage.useGoogleKey) ??
-          !1) &&
+          false) &&
         this.H.membershipType() === _n.FREE
       )
     }
@@ -1330,7 +1330,7 @@ export function createAIServiceSet(params) {
           ((e[t] += e[t + 2]), e.splice(t + 1, 2), t--)
       return e
     })
-  function FFt(i, e, t = {}, s = !0) {
+  function FFt(i, e, t = {}, s = true) {
     return i.length > 2e4 ||
       e.length > 2e4 ||
       cue.tokenize(i).length > 2e3 ||
@@ -1341,8 +1341,8 @@ export function createAIServiceSet(params) {
           e.length,
         ),
         [
-          { value: i, removed: !0 },
-          { value: e, added: !0 },
+          { value: i, removed: true },
+          { value: e, added: true },
         ])
       : ((t = EKn(t, { ignoreWhitespace: s })), cue.diff(i, e, t))
   }
@@ -1417,7 +1417,7 @@ export function createAIServiceSet(params) {
         h = (i[r - 1] ?? "").substring(0, o - 1),
         u = i[a - 1] ?? "",
         d = l === 1 ? u : u.substring(l - 1)
-      t?.noNeedToMakeSureLinesAreLines === !0
+      t?.noNeedToMakeSureLinesAreLines === true
         ? i.splice(r - 1, a - r + 1, h + n + d)
         : i.splice(
             r - 1,
@@ -1433,14 +1433,14 @@ export function createAIServiceSet(params) {
     const t = i.split(`
 `)
     return (
-      tYn(t, e, { noNeedToMakeSureLinesAreLines: !0 }),
+      tYn(t, e, { noNeedToMakeSureLinesAreLines: true }),
       t.join(`
 `)
     )
   }
   var iYn = "cursorhashversionC7wtBsDmlFaPg4ToTvIlm"
   function TKi(i, e) {
-    if (e === void 0 || e === 0) return `${PKi(i, 0)}`
+    if (e === undefined || e === 0) return `${PKi(i, 0)}`
     if (e === 1) {
       const t = `${iYn}:1:`
       return i.length > 1e4 ? `${t}${PKi(i, 0)}` : `${t}${i}`
@@ -1457,9 +1457,9 @@ export function createAIServiceSet(params) {
   function OFt(i, e, t) {
     const s = []
     let n = "",
-      r = !1
+      r = false
     for (const c of i)
-      if (c.added) (r = !0), (n += c.value)
+      if (c.added) (r = true), (n += c.value)
       else if (!c.removed) break
     const o = r
       ? n.split(`
@@ -1472,7 +1472,7 @@ export function createAIServiceSet(params) {
 `),
         u = a + h.length - 1,
         d = h.length > 1 ? h[h.length - 1].length + 1 : l + c.value.length
-      if (c.added === !0) {
+      if (c.added === true) {
         const g = {
           startLineNumber: a,
           startColumn: l,
@@ -1496,13 +1496,13 @@ export function createAIServiceSet(params) {
           (l = d),
           (a = u)
       }
-      c.removed !== !0 && ((l = d), (a = u))
+      c.removed !== true && ((l = d), (a = u))
     }
     return { greenRanges: s, redRanges: [] }
   }
   var NKi = class {
       constructor() {
-        this.ok_ = !1
+        this.ok_ = false
       }
       ok() {
         return this.ok_
@@ -1513,12 +1513,12 @@ export function createAIServiceSet(params) {
     },
     sYn = class extends NKi {
       constructor(i) {
-        super(), (this.ok_ = !0), (this.v = i), (this.err = void 0)
+        super(), (this.ok_ = true), (this.v = i), (this.err = undefined)
       }
     },
     nYn = class extends NKi {
       constructor(i) {
-        super(), (this.ok_ = !1), (this.err = i), (this.v = void 0)
+        super(), (this.ok_ = false), (this.err = i), (this.v = undefined)
       }
     }
   function og(i) {
@@ -1527,7 +1527,7 @@ export function createAIServiceSet(params) {
   function lh(i) {
     return new nYn(i)
   }
-  var EYe = { current: !1 },
+  var EYe = { current: false },
     RKi = "cpp-suggestion-green-background",
     rYn = class {
       constructor(i, e, t, s) {
@@ -1570,13 +1570,13 @@ export function createAIServiceSet(params) {
           (this.d = s),
           (this.f = n),
           (this.g = r),
-          (this.h = void 0),
-          (this.i = void 0),
-          (this.j = void 0)
+          (this.h = undefined),
+          (this.i = undefined),
+          (this.j = undefined)
       }
       async process(i) {
         if (((this.h = i.state), this.b.aborted)) return
-        if (i.tryAgainCount !== void 0 && i.tryAgainCount > 5) {
+        if (i.tryAgainCount !== undefined && i.tryAgainCount > 5) {
           this.d(
             new Error(
               "SimpleSerialProcessor: tried 5 times and failed, giving up",
@@ -1585,8 +1585,8 @@ export function createAIServiceSet(params) {
           return
         }
         if (
-          (this.i !== void 0 && !this.c(this.i, this.h)) ||
-          (!i.runEvenIfAlreadyProcessing && this.j !== void 0)
+          (this.i !== undefined && !this.c(this.i, this.h)) ||
+          (!i.runEvenIfAlreadyProcessing && this.j !== undefined)
         )
           return
         this.j?.abort(), (this.j = new AbortController())
@@ -1594,20 +1594,20 @@ export function createAIServiceSet(params) {
           this.j?.abort()
         }
         this.b.addEventListener("abort", e)
-        let t = !0
+        let t = true
         try {
           ;(await this.a(this.j.signal)).ok() &&
             ((this.i = i.state), this.g?.(this.i))
         } catch (s) {
-          this.d(s), (t = !1)
+          this.d(s), (t = false)
         } finally {
           await new Promise((s) => setTimeout(s, this.f)),
             this.b.removeEventListener("abort", e),
-            (this.j = void 0),
+            (this.j = undefined),
             t &&
               this.process({
                 state: this.h,
-                runEvenIfAlreadyProcessing: !1,
+                runEvenIfAlreadyProcessing: false,
                 tryAgainCount:
                   this.h === i.state ? (i.tryAgainCount ?? 0) + 1 : 0,
               })
@@ -1623,13 +1623,13 @@ export function createAIServiceSet(params) {
           (this.t = r),
           (this.u = o),
           (this.w = a),
-          (this.b = void 0),
+          (this.b = undefined),
           (this.c = []),
           (this.replaceText = ""),
-          (this.f = !1),
-          (this.originalText = void 0),
+          (this.f = false),
+          (this.originalText = undefined),
           (this.g = new fz()),
-          (this.h = void 0),
+          (this.h = undefined),
           (this.O = new AbortController()),
           (this.a = e.deltaDecorations([], [this.y(s)])[0])
       }
@@ -1655,7 +1655,7 @@ export function createAIServiceSet(params) {
         )
       }
       isShowing() {
-        return this.originalText !== void 0
+        return this.originalText !== undefined
       }
       append(e) {
         if (this.f) {
@@ -1665,18 +1665,18 @@ export function createAIServiceSet(params) {
         ;(this.replaceText += e), this.z().catch((t) => console.error(t))
       }
       async setReplaceText(e) {
-        ;(this.f = !0),
+        ;(this.f = true),
           (this.replaceText = e),
-          await this.z({ isFinal: !0 }).catch((t) => console.error(t))
+          await this.z({ isFinal: true }).catch((t) => console.error(t))
       }
       async finish() {
-        return (this.f = !0), this.z({ isFinal: !0 })
+        return (this.f = true), this.z({ isFinal: true })
       }
       async z(e) {
         this.j &&
           (await this.j.process({
-            runEvenIfAlreadyProcessing: !1,
-            waitUntilProcessed: e?.isFinal === !0,
+            runEvenIfAlreadyProcessing: false,
+            waitUntilProcessed: e?.isFinal === true,
           }))
       }
       async C(e) {
@@ -1695,33 +1695,33 @@ export function createAIServiceSet(params) {
                 r,
                 n,
                 {
-                  computeMoves: !1,
-                  ignoreTrimWhitespace: !1,
+                  computeMoves: false,
+                  ignoreTrimWhitespace: false,
                   maxComputationTimeMs: 100,
                   onlyCareAboutPrefixOfOriginalLines: !this.f,
                 },
               )
             if (!this.f) {
               const h = o.at(-1)
-              h && h.removed === !0 && (h.removed = !1)
+              h && h.removed === true && (h.removed = false)
               const u = o.at(-2)
               h &&
                 u &&
-                u.added === !0 &&
+                u.added === true &&
                 h.value.startsWith(u.value) &&
                 (o = [...o.slice(0, -2), h])
             }
             let a = ""
-            for (const h of o) h.removed === !1 && (a += h.value)
+            for (const h of o) h.removed === false && (a += h.value)
             const { changes: l } =
               await this.w.computeWordDiff_FOR_STRINGS_SMALLER_THAN_100_KB_ONLY(
                 s,
                 a,
                 {
-                  computeMoves: !1,
-                  ignoreTrimWhitespace: !1,
+                  computeMoves: false,
+                  ignoreTrimWhitespace: false,
                   maxComputationTimeMs: 100,
-                  onlyCareAboutPrefixOfOriginalLines: !1,
+                  onlyCareAboutPrefixOfOriginalLines: false,
                 },
               )
             if (!this.isShowing()) return
@@ -1766,7 +1766,7 @@ export function createAIServiceSet(params) {
         const s = e.split(`
 `),
           n = s.at(-1)
-        if (n === void 0) return
+        if (n === undefined) return
         const r = n.length,
           o = t.startLineNumber + s.length - 1,
           a = Math.max(
@@ -1795,7 +1795,7 @@ export function createAIServiceSet(params) {
         this.b = this.n.deltaDecorations(this.b ? [this.b] : [], [h]).at(0)
       }
       I() {
-        this.b && (this.n.deltaDecorations([this.b], []), (this.b = void 0))
+        this.b && (this.n.deltaDecorations([this.b], []), (this.b = undefined))
       }
       J(e) {
         let t = this.n.getDecorationRange(this.a)
@@ -1808,12 +1808,12 @@ export function createAIServiceSet(params) {
 `),
             l = s + a.length - 1,
             c = a.length > 1 ? a[a.length - 1].length + 1 : n + o.value.length
-          o.added === !0
+          o.added === true
             ? r.push({ range: new G(s, n, s, n), text: o.value })
-            : o.removed === !0 && r.push({ range: new G(s, n, l, c), text: "" }),
-            o.added !== !0 && ((n = c), (s = l))
+            : o.removed === true && r.push({ range: new G(s, n, l, c), text: "" }),
+            o.added !== true && ((n = c), (s = l))
         }
-        ;(EYe.current = !0),
+        ;(EYe.current = true),
           this.r.shouldAppendToUndoRedoGroup
             ? this.n.pushEditOperations([], r, () => null, this.g)
             : this.n.applyEdits(r)
@@ -1838,11 +1838,11 @@ export function createAIServiceSet(params) {
             ),
             "cpp-peek",
           ),
-          (this.h = e !== null ? e : void 0))
+          (this.h = e !== null ? e : undefined))
       }
       M() {
         this.q?.getModel()?.id === this.n.id &&
-          this.h !== void 0 &&
+          this.h !== undefined &&
           this.q.setSelection(this.h, "cpp-revert")
       }
       async show(e) {
@@ -1857,7 +1857,7 @@ export function createAIServiceSet(params) {
             (this.originalText = this.getCurrentModelText()),
             this.L()
         }
-        e?.dontFlush !== !0 && (await this.z())
+        e?.dontFlush !== true && (await this.z())
       }
       async N(e, t) {
         if (this.n.getDecorationRange(this.a)) {
@@ -1880,7 +1880,7 @@ export function createAIServiceSet(params) {
           const e = this.P(),
             t = this.originalText ?? ""
           if (
-            ((this.originalText = void 0),
+            ((this.originalText = undefined),
             await this.N(t, e.signal),
             e.signal.aborted)
           )
@@ -1925,11 +1925,11 @@ export function createAIServiceSet(params) {
       }
       async submit() {
         const e = this.a.nonPersistentStorage.webCmdKState.promptBar
-        if (e === void 0) {
+        if (e === undefined) {
           console.error("no prompt bar")
           return
         }
-        const [t, s] = this.f.registerNewGeneration({ metadata: void 0 })
+        const [t, s] = this.f.registerNewGeneration({ metadata: undefined })
         this.a.setNonPersistentStorage(
           "webCmdKState",
           "promptBar",
@@ -1985,8 +1985,8 @@ export function createAIServiceSet(params) {
               streamer: N1(g),
               generationUUID: t,
               streamerURL: p,
-              rethrowCancellation: !0,
-              rerun: void 0,
+              rethrowCancellation: true,
+              rerun: undefined,
               source: "other",
             })
           h.show()
@@ -2003,7 +2003,7 @@ export function createAIServiceSet(params) {
       }
       close() {
         this.b.activeEditorPane?.focus(),
-          this.a.setNonPersistentStorage("webCmdKState", "promptBar", void 0)
+          this.a.setNonPersistentStorage("webCmdKState", "promptBar", undefined)
       }
       async showWebCmdKInputBox(e) {
         const t = {
@@ -2084,13 +2084,13 @@ export function createAIServiceSet(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "uuid", kind: "scalar", T: 9 },
           { no: 2, name: "cursor_position", kind: "message", T: Qm },
-          { no: 3, name: "open_tabs", kind: "message", T: WFt, repeated: !0 },
+          { no: 3, name: "open_tabs", kind: "message", T: WFt, repeated: true },
           {
             no: 4,
             name: "context_graph_files",
             kind: "message",
             T: WFt,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -2109,7 +2109,7 @@ export function createAIServiceSet(params) {
     },
     AKi = class U6e extends _ {
       constructor(e) {
-        super(), (this.response = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.response = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -2144,7 +2144,7 @@ export function createAIServiceSet(params) {
     },
     MKi = class H6e extends _ {
       constructor(e) {
-        super(), (this.ready = !1), v.util.initPartial(e, this)
+        super(), (this.ready = false), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -2182,7 +2182,7 @@ export function createAIServiceSet(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "file", kind: "scalar", T: 9, repeated: !0 },
+          { no: 1, name: "file", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -2239,7 +2239,7 @@ export function createAIServiceSet(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "file_chunks", kind: "message", T: cYn, repeated: !0 },
+          { no: 1, name: "file_chunks", kind: "message", T: cYn, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -2320,7 +2320,7 @@ export function createAIServiceSet(params) {
             .getGroups(1)
             .map((a) => a.editors.map((l) => l.resource))
             .flat()
-            .filter((a) => a !== void 0)
+            .filter((a) => a !== undefined)
             .map((a) => this.h.asRelativePath(a))
             .map((a) => new WFt({ relativeWorkspacePath: a })),
           r =
@@ -2333,7 +2333,7 @@ export function createAIServiceSet(params) {
           ).startFastSearch({ uuid: e, cursorPosition: r, openTabs: t })
         } catch {
           o = new AKi({
-            response: { case: "ready", value: new MKi({ ready: !0 }) },
+            response: { case: "ready", value: new MKi({ ready: true }) },
           })
         }
         return o
@@ -2357,7 +2357,7 @@ export function createAIServiceSet(params) {
       async postProcessSearchResults(e) {
         const t = e.fileChunks
             .map((o) => o.chunk?.relativeWorkspacePath)
-            .filter((o) => o !== void 0),
+            .filter((o) => o !== undefined),
           s = new oi()
         let n = new Map()
         await Promise.allSettled(
@@ -2385,7 +2385,7 @@ export function createAIServiceSet(params) {
               )
               return G.containsRange(l, c)
             }
-            return !0
+            return true
           },
           r = s.filter((a) => !n(a))
         let o = e
@@ -2447,19 +2447,19 @@ export function createAIServiceSet(params) {
           (this.taskUuid = e),
           (this.delegate = t),
           (this.uuid = rt()),
-          (this.a = le(void 0)),
-          (this.b = le(void 0)),
-          (this.c = le(void 0)),
-          (this.d = le(void 0)),
-          (this.e = le(!1)),
+          (this.a = le(undefined)),
+          (this.b = le(undefined)),
+          (this.c = le(undefined)),
+          (this.d = le(undefined)),
+          (this.e = le(false)),
           (this.g = le("none")),
           (this.h = le("none")),
-          (this.i = le(void 0)),
+          (this.i = le(undefined)),
           (this.j = le("none")),
-          (this.k = le(!1)),
-          (this.l = le(void 0)),
-          (this.m = le(void 0)),
-          (this.n = le(void 0))
+          (this.k = le(false)),
+          (this.l = le(undefined)),
+          (this.m = le(undefined)),
+          (this.n = le(undefined))
       }
       getPlan() {
         return co(() => this.a[0]())
@@ -2507,7 +2507,7 @@ export function createAIServiceSet(params) {
         this.e[1](i)
       }
       setHasBeenShown() {
-        this.getImplementationStatus() === "finished" && this.f(!0)
+        this.getImplementationStatus() === "finished" && this.f(true)
       }
       getPlanStatus() {
         return co(() => this.g[0]())
@@ -2620,8 +2620,8 @@ export function createAIServiceSet(params) {
           (this.showingIndices = a),
           (this.ignorePotentialDeletes = l),
           (this.implementations = c),
-          (this.a = le(void 0)),
-          (this.b = le(!1))
+          (this.a = le(undefined)),
+          (this.b = le(false))
       }
       getPrompt() {
         return co(() => this.a[0]())
@@ -2670,7 +2670,7 @@ export function createAIServiceSet(params) {
           console.error("Hallucinated function not found for UUID:", e)
           return
         }
-        t.getPrompt() === void 0 && (t.setPrompt(new HKi(rt())), this.r.fire(t)),
+        t.getPrompt() === undefined && (t.setPrompt(new HKi(rt())), this.r.fire(t)),
           t.getPrompt()?.inputBoxDelegate.focus()
       }
       deleteCandidate(e, t) {
@@ -2694,7 +2694,7 @@ export function createAIServiceSet(params) {
         this.g.push({
           ...e,
           createdAtUnixSeconds: Math.floor(Date.now() / 1e3),
-          isCreating: !1,
+          isCreating: false,
           uuid: rt(),
         }),
           setTimeout(() => {
@@ -2739,7 +2739,7 @@ export function createAIServiceSet(params) {
       getHallucinatedFunctionAtCallPosition(e, t) {
         if (e)
           for (const s of this.h) {
-            if (s.callSiteDecorationId === void 0) continue
+            if (s.callSiteDecorationId === undefined) continue
             const n = t.getDecorationRange(s.callSiteDecorationId)
             if (n && n.containsPosition(e)) return s
           }
@@ -2747,7 +2747,7 @@ export function createAIServiceSet(params) {
       getHallucinatedFunctionName(e, t) {
         const s = e.callSiteDecorationId
           ? t.getDecorationRange(e.callSiteDecorationId)
-          : void 0
+          : undefined
         if (!s) {
           const r = (l) => l.slice(0, 100),
             o = t.getDecorationRange(e.implementationDecorationId)
@@ -2771,7 +2771,7 @@ export function createAIServiceSet(params) {
       }
       getHallucinatedFunctionReferenceImplementation(e, t) {
         const s = e.implementations.at(0)
-        return s === void 0
+        return s === undefined
           ? ""
           : this.getHallucinatedFunctionImplementation(e, s, t)
       }
@@ -2806,7 +2806,7 @@ export function createAIServiceSet(params) {
                   (this.h[n].currentImplementationIndex =
                     this.h[n].implementations.length - 1),
               o++
-          while (!1)
+          while (false)
           if (o > this.h[n].implementations.length)
             throw new Error("No implementation found")
           const a = t.getDecorationRange(this.h[n].implementationDecorationId)
@@ -2840,14 +2840,14 @@ export function createAIServiceSet(params) {
       getShowingImplementation(e) {
         const t = this.getHallucinatedFunction(e)
         if (t)
-          return t.showingImplementationIndex !== void 0
+          return t.showingImplementationIndex !== undefined
             ? t.implementations.at(t.showingImplementationIndex)
-            : void 0
+            : undefined
       }
       nextShowingImplementation(e) {
         const t = this.getHallucinatedFunction(e)
         if (t) {
-          if (t.showingImplementationIndex === void 0)
+          if (t.showingImplementationIndex === undefined)
             t.showingImplementationIndex = t.showingIndices.at(0)
           else {
             const s = t.showingIndices.indexOf(t.showingImplementationIndex)
@@ -2863,7 +2863,7 @@ export function createAIServiceSet(params) {
       previousShowingImplementation(e) {
         const t = this.getHallucinatedFunction(e)
         if (t) {
-          if (t.showingImplementationIndex === void 0)
+          if (t.showingImplementationIndex === undefined)
             t.showingImplementationIndex = t.showingIndices.at(0)
           else {
             const s = t.showingIndices.indexOf(t.showingImplementationIndex)
@@ -2882,7 +2882,7 @@ export function createAIServiceSet(params) {
           this.r.fire(e)
       }
       rejectImplementation(e, t) {
-        t.setIsRejected(!0)
+        t.setIsRejected(true)
         const s = e.implementations.indexOf(t)
         this.setHallucinatedFunctionShowingIndices(
           e,
@@ -2902,7 +2902,7 @@ export function createAIServiceSet(params) {
             if (
               n.implementations[o].getImplementation() !== s.getValueInRange(a) &&
               this.w.applicationUserPersistentStorage
-                .hallucinatedFunctionsPersistentState.noninvasiveUI !== !0
+                .hallucinatedFunctionsPersistentState.noninvasiveUI !== true
             ) {
               n.currentImplementationIndex = o
               return
@@ -2928,7 +2928,7 @@ export function createAIServiceSet(params) {
               ((n.currentImplementationIndex = r),
               l.setHasBeenShown(),
               this.w.applicationUserPersistentStorage
-                ?.hallucinatedFunctionsPersistentState?.instantAccept === !0)
+                ?.hallucinatedFunctionsPersistentState?.instantAccept === true)
             ) {
               if (!n.callSiteDecorationId) return
               const h = s.getDecorationRange(n.callSiteDecorationId)
@@ -2951,7 +2951,7 @@ export function createAIServiceSet(params) {
           }
       }
       deleteHallucinatedFunctionNoModelChanges(e) {
-        this.deleteHallucinatedFunction(e, void 0)
+        this.deleteHallucinatedFunction(e, undefined)
       }
       deleteHallucinatedFunction(e, t) {
         this.j.forEach((n) => {
@@ -2960,7 +2960,7 @@ export function createAIServiceSet(params) {
         const s = this.h.findIndex((n) => n.uuid === e)
         if (s !== -1) {
           const n = this.h[s]
-          if ((this.h.splice(s, 1), t !== void 0)) {
+          if ((this.h.splice(s, 1), t !== undefined)) {
             const r = t.getDecorationRange(n.implementationDecorationId)
             t.deltaDecorations(
               [
@@ -2995,7 +2995,7 @@ export function createAIServiceSet(params) {
       }
       markCandidateCreating(e) {
         const t = this.g.findIndex((s) => s.uuid === e)
-        t !== -1 && (this.g[t].isCreating = !0)
+        t !== -1 && (this.g[t].isCreating = true)
       }
       removeCandidate(e) {
         const t = this.g.findIndex((s) => s.uuid === e)
@@ -3019,19 +3019,19 @@ export function createAIServiceSet(params) {
         return {
           description: "hallucinated function implementation",
           className: "hallucinated-function-implementation",
-          collapseOnReplaceEdit: !1,
+          collapseOnReplaceEdit: false,
           stickiness: 3,
-          isWholeLine: !0,
+          isWholeLine: true,
         }
       }
       createHallucinatedFunction(e, t, s) {
         let n
-        if (s?.callSiteDecorationId !== void 0 || s?.callSiteRange !== void 0) {
+        if (s?.callSiteDecorationId !== undefined || s?.callSiteRange !== undefined) {
           const c =
             s?.callSiteRange ?? e.getDecorationRange(s.callSiteDecorationId)
           if (!c) throw new Error("Decoration range not found")
           for (const h of this.h) {
-            if (h.callSiteDecorationId === void 0) continue
+            if (h.callSiteDecorationId === undefined) continue
             const u = e.getDecorationRange(h.callSiteDecorationId)
             if (u && u.intersectRanges(c))
               throw new Error("Intersecting callsite")
@@ -3054,19 +3054,19 @@ export function createAIServiceSet(params) {
             new Date(),
             n,
             r,
-            s?.initialImplementation !== void 0 ? 1 : 0,
-            void 0,
+            s?.initialImplementation !== undefined ? 1 : 0,
+            undefined,
             [],
-            !1,
+            false,
             [],
           )
-        if (s?.prompt !== void 0) {
+        if (s?.prompt !== undefined) {
           const c = new HKi(rt())
           c.setRichText(s.prompt.richText),
             c.setText(s.prompt.plainText),
             a.setPrompt(c)
         }
-        const l = new JFt("initial", void 0, {
+        const l = new JFt("initial", undefined, {
           onDidFinish: () => {
             this.s.fire(a)
           },
@@ -3075,11 +3075,11 @@ export function createAIServiceSet(params) {
           (l.setImplementation(o),
           l.setImplementationStatus("finished"),
           l.setHasBeenShown(),
-          l.setIsRejected(!0),
+          l.setIsRejected(true),
           a.implementations.push(l),
-          s?.initialImplementation !== void 0)
+          s?.initialImplementation !== undefined)
         ) {
-          const c = new JFt("initial", void 0, {
+          const c = new JFt("initial", undefined, {
             onDidFinish: () => {
               this.s.fire(a)
             },
@@ -3087,7 +3087,7 @@ export function createAIServiceSet(params) {
           c.setImplementation(e.getValueInRange(t)),
             c.setImplementationStatus("finished"),
             c.setHasBeenShown(),
-            c.setIsRejected(!0),
+            c.setIsRejected(true),
             a.implementations.push(c)
         }
         this.h.push(a), this.m.fire(a)
@@ -3138,7 +3138,7 @@ export function createAIServiceSet(params) {
           (this.f = new Map()),
           (this.g = 5 * 60 * 1e3),
           (this.h = []),
-          (this.j = !1),
+          (this.j = false),
           (this.c = this.n.createInstance(cF)),
           this.z(),
           this.D(
@@ -3204,7 +3204,7 @@ export function createAIServiceSet(params) {
             S = []
           ;[
             ...Object.keys(p),
-            ...(!1 ? [...Object.keys(m), ...Object.keys(b)] : []),
+            ...(false ? [...Object.keys(m), ...Object.keys(b)] : []),
           ].forEach((H) => {
             S.push(new V1t({ name: H, fromFile: "package.json" }))
           }),
@@ -3249,7 +3249,7 @@ export function createAIServiceSet(params) {
             []
           )
         } finally {
-          this.m = void 0
+          this.m = undefined
         }
       }
       y(e, t) {
@@ -3269,17 +3269,17 @@ export function createAIServiceSet(params) {
               (t) => t.identifier,
             ),
         })
-        ;(this.h = e), (this.j = !0)
+        ;(this.h = e), (this.j = true)
       }
       C(e) {
         function t(h) {
-          if (h !== void 0)
+          if (h !== undefined)
             return (
               (h = h.trim()),
               h === "true"
-                ? !0
+                ? true
                 : h === "false"
-                  ? !1
+                  ? false
                   : h === "null"
                     ? null
                     : (h.startsWith('"') && h.endsWith('"')) ||
@@ -3305,7 +3305,7 @@ export function createAIServiceSet(params) {
             if (p.length < 2) continue
             const m = p[0].trim(),
               b = p.slice(1).join("=").trim()
-            m && b !== void 0 && (u[m] = t(b))
+            m && b !== undefined && (u[m] = t(b))
           }
           return u
         }
@@ -3348,10 +3348,10 @@ export function createAIServiceSet(params) {
               if (p.startsWith("[") && !p.endsWith("]")) {
                 for (a = [], c(l, a); !r[++h].trim().endsWith("]"); ) {
                   const b = t(r[h].trim())
-                  b !== void 0 && a.push(b)
+                  b !== undefined && a.push(b)
                 }
                 const m = t(r[h].trim().slice(0, -1))
-                m !== void 0 && a.push(m), (a = null)
+                m !== undefined && a.push(m), (a = null)
               } else c(l, t(p))
             }
           }
@@ -3409,7 +3409,7 @@ export function createAIServiceSet(params) {
       C() {
         return (
           this.u.maybeRefreshFeatureStatus("contextBank"),
-          this.u.getCachedFeatureStatus("contextBank") ?? !0
+          this.u.getCachedFeatureStatus("contextBank") ?? true
         )
       }
       async getRankedFiles(e) {
@@ -3429,7 +3429,7 @@ export function createAIServiceSet(params) {
       async filterCursorIgnoredFiles(e) {
         return (
           await new Promise((t) =>
-            this.t.addOnCursorIgnoreLoadedCallback(() => t(void 0)),
+            this.t.addOnCursorIgnoreLoadedCallback(() => t(undefined)),
           ),
           e.filter(
             (t) =>
@@ -3485,7 +3485,7 @@ export function createAIServiceSet(params) {
             (this.g = this.g.slice(0, QFt)))
         try {
           const r = await this.getAllFiles({ request: t })
-          if (r === void 0) return []
+          if (r === undefined) return []
           const a = (await this.q.aiClient()).getRankedContextFromContextBank(
               new v$i({ composerRequest: t, contextToRank: r }),
               { signal: s.signal },
@@ -3518,7 +3518,7 @@ export function createAIServiceSet(params) {
         const s = e.conversation
           .map((d) => d.attachedCodeChunks.map((g) => g.relativeWorkspacePath))
           .flat()
-          .filter((d, g, p) => p.findIndex((m) => m === d) === g && d !== void 0)
+          .filter((d, g, p) => p.findIndex((m) => m === d) === g && d !== undefined)
           .map((d) => {
             let g = Promise.resolve([])
             return (
@@ -3557,7 +3557,7 @@ export function createAIServiceSet(params) {
             ...o.map((d) => d.relativePath),
           ]
             .filter((d, g, p) => p.findIndex((m) => m === d) === g)
-            .filter((d) => d !== void 0)
+            .filter((d) => d !== undefined)
             .filter(
               (d) =>
                 !e.conversation.some((g) =>
@@ -3577,7 +3577,7 @@ export function createAIServiceSet(params) {
                   const m = g.object.textEditorModel.getValue()
                   return m.split(`
 `).length > vYn
-                    ? void 0
+                    ? undefined
                     : new mVe({ relativeWorkspacePath: d, contents: m })
                 } catch (p) {
                   console.warn(`Unable to read file '${d}':`, p)
@@ -3587,7 +3587,7 @@ export function createAIServiceSet(params) {
                 }
               }),
             )
-          ).filter((d) => d !== void 0)
+          ).filter((d) => d !== undefined)
         let h = 0
         const u = []
         for (const d of c)
@@ -3612,7 +3612,7 @@ export function createAIServiceSet(params) {
             })
             s = await Promise.race([
               this.s.parallelSearch(t, 30, 30, {
-                fast: !0,
+                fast: true,
                 raceNRequests: 6,
                 abortSignal: r.signal,
               }),
@@ -3625,7 +3625,7 @@ export function createAIServiceSet(params) {
         const n = []
         for (const r of s) {
           const o = r.codeBlock
-          o !== void 0 &&
+          o !== undefined &&
             n.push(
               new mVe({
                 relativeWorkspacePath: o.relativeWorkspacePath,
@@ -3679,35 +3679,35 @@ export function createAIServiceSet(params) {
   function WKi(i) {
     return i.getEditorState().read(() => {
       const e = Wr()
-      if (!Xn(e)) return !1
+      if (!Xn(e)) return false
       const t = e.anchor,
         s = e.focus
-      if (t.key !== s.key || t.offset !== s.offset) return !1
+      if (t.key !== s.key || t.offset !== s.offset) return false
       const n = t.getNode()
-      if (t.offset !== 0) return !1
-      if (n === Vu().getFirstChild()) return !0
+      if (t.offset !== 0) return false
+      if (n === Vu().getFirstChild()) return true
       let r = n.getPreviousSibling()
       for (; r; ) {
-        if (r.getTextContent().trim() !== "") return !1
+        if (r.getTextContent().trim() !== "") return false
         r = r.getPreviousSibling()
       }
-      return !0
+      return true
     })
   }
   var due = () => window.vscodeWindowId !== ss()?.vscodeWindowId,
     yYn = async (i) => {
       const e = await i.getInstalled()
-      for (const t of e) if (t.identifier.id === "vscodevim.vim") return !0
-      return !1
+      for (const t of e) if (t.identifier.id === "vscodevim.vim") return true
+      return false
     },
     wYn = (i) => {
       const e = i.statusbarService.getViewModel()
-      let t = !1,
-        s = !1
+      let t = false,
+        s = false
       for (const n of [...e.getEntries(0), ...e.getEntries(1)])
         if (n.id === "vscodevim.vim.primary") {
-          ;(t = !0),
-            ["NORMAL"].some((r) => n.container.innerText.includes(r)) && (s = !0)
+          ;(t = true),
+            ["NORMAL"].some((r) => n.container.innerText.includes(r)) && (s = true)
           break
         }
       return { didFindVimStatusbar: t, isInNormalMode: s }
@@ -3792,7 +3792,7 @@ export function createAIServiceSet(params) {
   async function jKi(i, e, t) {
     let s
     try {
-      s = await e.resolve(i, { resolveMetadata: !0 })
+      s = await e.resolve(i, { resolveMetadata: true })
     } catch (h) {
       throw new Error(`Could not resolve URI: ${h}`)
     }
@@ -3803,7 +3803,7 @@ export function createAIServiceSet(params) {
     if (n.length === 0) return new Ioe({ files: [] })
     const r = n.sort((h, u) => (u.mtime || 0) - (h.mtime || 0)).slice(0, xYn),
       o = r
-        .filter((h) => !h.isDirectory && h.size !== void 0 && h.size <= qKi)
+        .filter((h) => !h.isDirectory && h.size !== undefined && h.size <= qKi)
         .slice(0, SYn),
       a = new Set(o.map((h) => h.name)),
       l = new UE(CYn),
@@ -3816,10 +3816,10 @@ export function createAIServiceSet(params) {
             {
               name: h.name,
               isDirectory: h.isDirectory,
-              size: h.size !== void 0 ? BigInt(h.size) : void 0,
+              size: h.size !== undefined ? BigInt(h.size) : undefined,
               lastModified: h.mtime
                 ? new PSt({ seconds: BigInt(Math.floor(h.mtime / 1e3)) })
-                : void 0,
+                : undefined,
               numChildren: h.children?.length,
               numLines: d,
             }
@@ -3829,7 +3829,7 @@ export function createAIServiceSet(params) {
     return new Ioe({ files: c, directoryRelativeWorkspacePath: i.path })
   }
   async function kYn(i, e, t) {
-    if (!(e === void 0 || e > qKi))
+    if (!(e === undefined || e > qKi))
       try {
         const n = (await t.readFile(i)).value.toString()
         return (n.match(/\n/g) || []).length + (n.length > 0 ? 1 : 0)
@@ -3838,7 +3838,7 @@ export function createAIServiceSet(params) {
         return
       }
   }
-  var zKi = { shouldGracefullyFallBackOnTimeout: !0 },
+  var zKi = { shouldGracefullyFallBackOnTimeout: true },
     EYn = 5,
     TYe = 2,
     q1 = Re("composerUtilsService"),
@@ -3882,7 +3882,7 @@ export function createAIServiceSet(params) {
               onChange: ({ deps: C, prevDeps: S }) => {
                 const x = C[0],
                   k = S?.[0]
-                if (x !== void 0 || !k) return
+                if (x !== undefined || !k) return
                 const E =
                   this._composerDataService.allComposersData
                     .selectedComposerHandle?.data
@@ -3941,7 +3941,7 @@ export function createAIServiceSet(params) {
       }
       async ensureCapabilitiesAreLoaded(e) {
         const t = await this._composerDataService.getComposerHandleById(e)
-        if (t !== void 0)
+        if (t !== undefined)
           try {
             if (t.data.capabilities.length > 0) return
             const n = Mae(
@@ -3967,22 +3967,22 @@ export function createAIServiceSet(params) {
         )
       }
       getShouldAutoSaveAgenticEdits() {
-        return !0
+        return true
       }
       replacedBubbleForParallelApply(e, t, s) {
-        if (e.additionalData === void 0) return s
+        if (e.additionalData === undefined) return s
         const n = `${t.uri}-${t.version}`,
           { codeBlockData: r } = e.additionalData
-        if (r[n] === void 0) return s
+        if (r[n] === undefined) return s
         const o = r[n]
         return new Ha({ ...s, text: o.response })
       }
       replacedBubbleForEdit(e, t, s) {
-        if (e.additionalData === void 0) return s
+        if (e.additionalData === undefined) return s
         const { instructions: n } = e.additionalData
-        if (n === void 0) return s
+        if (n === undefined) return s
         let r = ""
-        n !== void 0 &&
+        n !== undefined &&
           (r += `${n}
 
 `)
@@ -4004,7 +4004,7 @@ export function createAIServiceSet(params) {
           e,
           ls.TOOL_FORMER,
         )
-        if (n === void 0) return t
+        if (n === undefined) return t
         const r = n.getBubbleData(t.bubbleId)
         return r
           ? r.tool === jt.EDIT_FILE
@@ -4039,7 +4039,7 @@ export function createAIServiceSet(params) {
         }
         return o
       }
-      async populateCodeChunksInConversation(e, t = !1) {
+      async populateCodeChunksInConversation(e, t = false) {
         const s = new Map()
         return (
           e.forEach((n, r) => {
@@ -4103,7 +4103,7 @@ export function createAIServiceSet(params) {
                             ),
                           startLineNumber: 1,
                           lines: [],
-                          contentsAreMissing: !0,
+                          contentsAreMissing: true,
                           summarizationStrategy: N$.NONE_UNSPECIFIED,
                           intent: g,
                         }),
@@ -4162,12 +4162,12 @@ export function createAIServiceSet(params) {
                       n.attachedCodeChunks.map(async (l) => {
                         if (
                           !this.codeChunkHasFullFileIntent(l) ||
-                          l.contentsAreMissing === !0
+                          l.contentsAreMissing === true
                         )
                           return
                         const c = l.relativeWorkspacePath,
                           h = t.get(l.relativeWorkspacePath)
-                        if (h === void 0 || h.messageIndex >= r) return
+                        if (h === undefined || h.messageIndex >= r) return
                         const { content: u } = h,
                           d = l.lines.join(`
 `),
@@ -4175,7 +4175,7 @@ export function createAIServiceSet(params) {
                             (w) =>
                               w.relativeWorkspacePath === l.relativeWorkspacePath,
                           )
-                        if (g !== void 0 && r < e.length - 1) return g
+                        if (g !== undefined && r < e.length - 1) return g
                         const p = await s9e(u),
                           m = await s9e(d),
                           b = e
@@ -4191,8 +4191,8 @@ export function createAIServiceSet(params) {
                           first: u,
                           second: d,
                           options: {
-                            ignoreTrimWhitespace: !1,
-                            computeMoves: !1,
+                            ignoreTrimWhitespace: false,
+                            computeMoves: false,
                             maxComputationTimeMs: 500,
                             ...zKi,
                           },
@@ -4216,7 +4216,7 @@ export function createAIServiceSet(params) {
                       }),
                     )
                   ).flatMap((l) =>
-                    l.status === "fulfilled" && l.value !== void 0
+                    l.status === "fulfilled" && l.value !== undefined
                       ? [l.value]
                       : [],
                   )
@@ -4266,7 +4266,7 @@ export function createAIServiceSet(params) {
                 l.map(async (h) => {
                   const u = await this._aiService.getCurrentFileInfo(
                     this._workspaceContextService.resolveRelativePath(h),
-                    { actuallyReadFromOverrideURI: !0 },
+                    { actuallyReadFromOverrideURI: true },
                   )
                   if (u) return { relativeWorkspacePath: h, content: u.contents }
                 }),
@@ -4322,14 +4322,14 @@ export function createAIServiceSet(params) {
                     )
                     .map(
                       (w) =>
-                        new _T({ ...w, contentsAreMissing: !0, lines: void 0 }),
+                        new _T({ ...w, contentsAreMissing: true, lines: undefined }),
                     )
                 if (
                   !l.includes(g) ||
                   (await this._fileService.stat(p)).size > 5e5
                 )
                   return [
-                    new _T({ relativeWorkspacePath: g, contentsAreMissing: !0 }),
+                    new _T({ relativeWorkspacePath: g, contentsAreMissing: true }),
                   ]
                 const y =
                   await this._selectedContextService.getCodeChunksFromFileSelections(
@@ -4361,7 +4361,7 @@ export function createAIServiceSet(params) {
         }
       }
       async *handleStreamComposer(e) {
-        let t = !1
+        let t = false
         for await (const s of e.streamer) {
           const n = this._composerDataService.getComposerData(e.composerId)
           if (!n) continue
@@ -4370,7 +4370,7 @@ export function createAIServiceSet(params) {
           if (
             ("conversationSummary" in s &&
               s.conversationSummary &&
-              r !== void 0 &&
+              r !== undefined &&
               this._composerDataService.updateComposerDataSetStore(
                 e.composerId,
                 (a) =>
@@ -4385,7 +4385,7 @@ export function createAIServiceSet(params) {
               s.serverBubbleId &&
               typeof s.serverBubbleId == "string" &&
               s.serverBubbleId !== "" &&
-              r !== void 0 &&
+              r !== undefined &&
               this._composerDataService.updateComposerDataSetStore(
                 e.composerId,
                 (a) =>
@@ -4399,7 +4399,7 @@ export function createAIServiceSet(params) {
             s !== null &&
               typeof s == "object" &&
               "webCitation" in s &&
-              s.webCitation !== void 0 &&
+              s.webCitation !== undefined &&
               s.webCitation !== null &&
               r &&
               this._composerDataService.updateComposerDataSetStore(
@@ -4415,7 +4415,7 @@ export function createAIServiceSet(params) {
             s !== null &&
               typeof s == "object" &&
               "docsReference" in s &&
-              s.docsReference !== void 0 &&
+              s.docsReference !== undefined &&
               s.docsReference !== null &&
               r &&
               this._composerDataService.updateComposerDataSetStore(
@@ -4431,7 +4431,7 @@ export function createAIServiceSet(params) {
             s !== null &&
               typeof s == "object" &&
               "statusUpdates" in s &&
-              s.statusUpdates !== void 0 &&
+              s.statusUpdates !== undefined &&
               s.statusUpdates !== null &&
               r &&
               this._composerDataService.updateComposerDataSetStore(
@@ -4447,7 +4447,7 @@ export function createAIServiceSet(params) {
             s !== null &&
               typeof s == "object" &&
               "serviceStatusUpdate" in s &&
-              s.serviceStatusUpdate !== void 0 &&
+              s.serviceStatusUpdate !== undefined &&
               s.serviceStatusUpdate !== null &&
               r &&
               (this._composerDataService.updateComposerDataSetStore(
@@ -4476,7 +4476,7 @@ export function createAIServiceSet(params) {
             s !== null &&
             typeof s == "object" &&
             "usedCode" in s &&
-            s.usedCode !== void 0 &&
+            s.usedCode !== undefined &&
             s.usedCode !== null &&
             s.usedCode.codeResults &&
             r &&
@@ -4508,7 +4508,7 @@ export function createAIServiceSet(params) {
             s !== null &&
             typeof s == "object" &&
             "symbolLink" in s &&
-            s.symbolLink !== void 0 &&
+            s.symbolLink !== undefined &&
             s.symbolLink !== null &&
             r
           ) {
@@ -4528,7 +4528,7 @@ export function createAIServiceSet(params) {
             s !== null &&
             typeof s == "object" &&
             "fileLink" in s &&
-            s.fileLink !== void 0 &&
+            s.fileLink !== undefined &&
             s.fileLink !== null &&
             r
           ) {
@@ -4547,7 +4547,7 @@ export function createAIServiceSet(params) {
           s !== null &&
             typeof s == "object" &&
             "viewableGitContext" in s &&
-            s.viewableGitContext !== void 0 &&
+            s.viewableGitContext !== undefined &&
             s.viewableGitContext !== null &&
             r &&
             this._composerDataService.updateComposerDataSetStore(
@@ -4561,9 +4561,9 @@ export function createAIServiceSet(params) {
                 ),
             ),
             yield s,
-            t === !1 &&
+            t === false &&
               (s.text?.length ?? 0) > 0 &&
-              ((t = !0),
+              ((t = true),
               console.log(`[composer] ttft is ${Date.now() - e.startTime}ms`))
         }
       }
@@ -4598,7 +4598,7 @@ export function createAIServiceSet(params) {
                   : "docs"
           h !== u && n(), r(u)
           const d = this._composerDataService.getComposerBubble(t, s)
-          if (d === void 0) return
+          if (d === undefined) return
           let g = d.intermediateChunks ?? []
           const p = (w, C) =>
             w.startLine === C.startLine && w.fileName === C.fileName
@@ -4625,7 +4625,7 @@ export function createAIServiceSet(params) {
               l !== null &&
                 typeof l == "object" &&
                 "chunkIdentity" in l &&
-                l.chunkIdentity !== void 0 &&
+                l.chunkIdentity !== undefined &&
                 o(l.intermediateText ?? "", l.chunkIdentity),
               yield l
         })()
@@ -4635,8 +4635,8 @@ export function createAIServiceSet(params) {
         if (!t) return []
         const s = await this._repositoryService
             .parallelSearch(t.text, 30, 10, {
-              fast: !0,
-              abortSignal: void 0,
+              fast: true,
+              abortSignal: undefined,
               raceNRequests: 6,
             })
             .then((c) =>
@@ -4649,9 +4649,9 @@ export function createAIServiceSet(params) {
                         ),
                         score: h.score,
                       }
-                    : void 0,
+                    : undefined,
                 )
-                .filter((h) => ({ uri: h?.uri, score: h?.score }) !== void 0),
+                .filter((h) => ({ uri: h?.uri, score: h?.score }) !== undefined),
             ),
           n = new Set(),
           r = []
@@ -4685,7 +4685,7 @@ export function createAIServiceSet(params) {
         return (await this._fileService.readFile(e)).value.toString()
       }
       async populateConversationWithExtraContext(e, t, s) {
-        s = { ...(s ?? {}), disableImageRemoval: !1 }
+        s = { ...(s ?? {}), disableImageRemoval: false }
         const n = new Map()
         return (
           e.forEach((r, o) => {
@@ -4750,7 +4750,7 @@ export function createAIServiceSet(params) {
                                     })
                                 }),
                               )
-                            ).filter((F) => F !== void 0))
+                            ).filter((F) => F !== undefined))
                           : [])()
                     : Promise.resolve([]),
                   p = a?.selectedImages
@@ -4770,7 +4770,7 @@ export function createAIServiceSet(params) {
                                     ),
                                     z = H?.composerId
                                   z &&
-                                    B !== void 0 &&
+                                    B !== undefined &&
                                     B !== -1 &&
                                     s.removeContext({
                                       composerId: z,
@@ -4824,7 +4824,7 @@ export function createAIServiceSet(params) {
                     g,
                     y,
                   ]),
-                  L = k.filter((A) => A !== void 0)
+                  L = k.filter((A) => A !== undefined)
                 return {
                   ...r,
                   commits: w,
@@ -4855,204 +4855,204 @@ export function createAIServiceSet(params) {
                         h = new Zc({
                           tool: jt.READ_SEMSEARCH_FILES,
                           result:
-                            c.result !== void 0
+                            c.result !== undefined
                               ? {
                                   case: "readSemsearchFilesResult",
                                   value: c.result,
                                 }
-                              : void 0,
+                              : undefined,
                         })
                         break
                       case jt.READ_FILE_FOR_IMPORTS:
                         h = new Zc({
                           tool: jt.READ_FILE_FOR_IMPORTS,
                           result:
-                            c.result !== void 0
+                            c.result !== undefined
                               ? {
                                   case: "readFileForImportsResult",
                                   value: c.result,
                                 }
-                              : void 0,
+                              : undefined,
                         })
                         break
                       case jt.RIPGREP_SEARCH:
                         h = new Zc({
                           tool: jt.RIPGREP_SEARCH,
                           result:
-                            c.result !== void 0
+                            c.result !== undefined
                               ? { case: "ripgrepSearchResult", value: c.result }
-                              : void 0,
+                              : undefined,
                         })
                         break
                       case jt.RUN_TERMINAL_COMMAND_V2:
                         h = new Zc({
                           tool: jt.RUN_TERMINAL_COMMAND_V2,
                           result:
-                            c.result !== void 0
+                            c.result !== undefined
                               ? {
                                   case: "runTerminalCommandV2Result",
                                   value: c.result,
                                 }
-                              : void 0,
+                              : undefined,
                         })
                         break
                       case jt.READ_FILE:
                         h = new Zc({
                           tool: jt.READ_FILE,
                           result:
-                            c.result !== void 0
+                            c.result !== undefined
                               ? { case: "readFileResult", value: c.result }
-                              : void 0,
+                              : undefined,
                         })
                         break
                       case jt.LIST_DIR:
                         h = new Zc({
                           tool: jt.LIST_DIR,
                           result:
-                            c.result !== void 0
+                            c.result !== undefined
                               ? { case: "listDirResult", value: c.result }
-                              : void 0,
+                              : undefined,
                         })
                         break
                       case jt.EDIT_FILE:
                         h = new Zc({
                           tool: jt.EDIT_FILE,
                           result:
-                            c.result !== void 0
+                            c.result !== undefined
                               ? { case: "editFileResult", value: c.result }
-                              : void 0,
+                              : undefined,
                         })
                         break
                       case jt.FILE_SEARCH:
                         h = new Zc({
                           tool: jt.FILE_SEARCH,
                           result:
-                            c.result !== void 0
+                            c.result !== undefined
                               ? { case: "fileSearchResult", value: c.result }
-                              : void 0,
+                              : undefined,
                         })
                         break
                       case jt.SEMANTIC_SEARCH_FULL:
                         h = new Zc({
                           tool: jt.SEMANTIC_SEARCH_FULL,
                           result:
-                            c.result !== void 0
+                            c.result !== undefined
                               ? {
                                   case: "semanticSearchFullResult",
                                   value: c.result,
                                 }
-                              : void 0,
+                              : undefined,
                         })
                         break
                       case jt.DELETE_FILE:
                         h = new Zc({
                           tool: jt.DELETE_FILE,
                           result:
-                            c.result !== void 0
+                            c.result !== undefined
                               ? { case: "deleteFileResult", value: c.result }
-                              : void 0,
+                              : undefined,
                         })
                         break
                       case jt.CREATE_FILE:
                         h = new Zc({
                           tool: jt.CREATE_FILE,
                           result:
-                            c.result !== void 0
+                            c.result !== undefined
                               ? { case: "createFileResult", value: c.result }
-                              : void 0,
+                              : undefined,
                         })
                         break
                       case jt.REAPPLY:
                         h = new Zc({
                           tool: jt.REAPPLY,
                           result:
-                            c.result !== void 0
+                            c.result !== undefined
                               ? { case: "reapplyResult", value: c.result }
-                              : void 0,
+                              : undefined,
                         })
                         break
                       case jt.PARALLEL_APPLY:
                         h = new Zc({
                           tool: jt.PARALLEL_APPLY,
                           result:
-                            c.result !== void 0
+                            c.result !== undefined
                               ? { case: "parallelApplyResult", value: c.result }
-                              : void 0,
+                              : undefined,
                         })
                         break
                       case jt.GET_RELATED_FILES:
                         h = new Zc({
                           tool: jt.GET_RELATED_FILES,
                           result:
-                            c.result !== void 0
+                            c.result !== undefined
                               ? { case: "getRelatedFilesResult", value: c.result }
-                              : void 0,
+                              : undefined,
                         })
                         break
                       case jt.FETCH_RULES:
                         h = new Zc({
                           tool: jt.FETCH_RULES,
                           result:
-                            c.result !== void 0
+                            c.result !== undefined
                               ? { case: "fetchRulesResult", value: c.result }
-                              : void 0,
+                              : undefined,
                         })
                         break
                       case jt.PLANNER:
                         h = new Zc({
                           tool: jt.PLANNER,
                           result:
-                            c.result !== void 0
+                            c.result !== undefined
                               ? { case: "plannerResult", value: c.result }
-                              : void 0,
+                              : undefined,
                         })
                         break
                       case jt.RUN_TERMINAL_COMMAND:
                         h = new Zc({
                           tool: jt.RUN_TERMINAL_COMMAND,
                           result:
-                            c.result !== void 0
+                            c.result !== undefined
                               ? {
                                   case: "runTerminalCommandResult",
                                   value: c.result,
                                 }
-                              : void 0,
+                              : undefined,
                         })
                         break
                       case jt.WEB_SEARCH:
                         h = new Zc({
                           tool: jt.WEB_SEARCH,
                           result:
-                            c.result !== void 0
+                            c.result !== undefined
                               ? { case: "webSearchResult", value: c.result }
-                              : void 0,
+                              : undefined,
                         })
                         break
                       case jt.WEB_VIEWER:
                         h = new Zc({
                           tool: jt.WEB_VIEWER,
                           result:
-                            c.result !== void 0
+                            c.result !== undefined
                               ? { case: "webViewerResult", value: c.result }
-                              : void 0,
+                              : undefined,
                         })
                         break
                       case jt.MCP:
                         h = new Zc({
                           tool: jt.MCP,
                           result:
-                            c.result !== void 0
+                            c.result !== undefined
                               ? { case: "mcpResult", value: c.result }
-                              : void 0,
+                              : undefined,
                         })
                         break
                       case jt.DIFF_HISTORY:
                         h = new Zc({
                           tool: jt.DIFF_HISTORY,
                           result:
-                            c.result !== void 0
+                            c.result !== undefined
                               ? { case: "diffHistoryResult", value: c.result }
-                              : void 0,
+                              : undefined,
                         })
                         break
                       default: {
@@ -5216,15 +5216,15 @@ export function createAIServiceSet(params) {
       }
       removeMessagesAfterBubble(e, t) {
         const s = this._composerDataService.getComposerData(e)
-        if (!s || t === void 0) return
+        if (!s || t === undefined) return
         const n = s.conversation.findIndex((c) => c.bubbleId === t)
         if (n === -1) return
         const r = this.getCodeBlockDataFromBubbleId(e, t)
         this._composerDataService.updateComposerDataSetStore(e, (c) =>
-          c("currentBubbleId", void 0),
+          c("currentBubbleId", undefined),
         ),
           this._composerDataService.updateComposerDataSetStore(e, (c) =>
-            c("latestCheckpoint", void 0),
+            c("latestCheckpoint", undefined),
           )
         const o = s.conversation.slice(0, n)
         this._composerDataService.updateComposerDataSetStore(e, (c) =>
@@ -5233,7 +5233,7 @@ export function createAIServiceSet(params) {
         const a = Object.keys(s.codeBlockData).filter((c) => !(c in r))
         for (const c of a)
           this._composerDataService.updateComposerDataSetStore(e, (h) =>
-            h("codeBlockData", c, void 0),
+            h("codeBlockData", c, undefined),
           )
         for (const c of Object.keys(r))
           this._composerDataService.updateComposerDataSetStore(e, (h) =>
@@ -5275,7 +5275,7 @@ export function createAIServiceSet(params) {
       }
       async runCapabilitiesForProcess(e, t, s, n) {
         const r = this._composerDataService.getComposerData(e)
-        if (!r) return t === "composer-settled" ? !1 : void 0
+        if (!r) return t === "composer-settled" ? false : undefined
         const o = uNn(r.capabilities, t, s)
         if (t === "process-stream") {
           let l = s.stream
@@ -5292,14 +5292,14 @@ export function createAIServiceSet(params) {
             .filter((c) => c.onStartSubmitChatReturnShouldStop)
             .sort((c, h) => c.priority - h.priority)
           for (const c of l)
-            if (await c.onStartSubmitChatReturnShouldStop?.(s)) return !0
+            if (await c.onStartSubmitChatReturnShouldStop?.(s)) return true
         }
         if (t === "before-submit-chat") {
           const l = o
             .filter((c) => c.onBeforeSubmitChat)
             .sort((c, h) => c.priority - h.priority)
-          for (const c of l) if (await c.onBeforeSubmitChat?.(s)) return !0
-          return !1
+          for (const c of l) if (await c.onBeforeSubmitChat?.(s)) return true
+          return false
         }
         const a = await Promise.all(
           o.map(async (l) => {
@@ -5317,21 +5317,21 @@ export function createAIServiceSet(params) {
                 await l.onComposerDone?.(s)
                 return
               case "composer-settled":
-                return (await l.onComposerSettledReturnShouldLoop?.(s)) ?? !1
+                return (await l.onComposerSettledReturnShouldLoop?.(s)) ?? false
               default:
                 return
             }
           }),
         )
-        if (t === "composer-settled") return a.some((l) => l === !0)
+        if (t === "composer-settled") return a.some((l) => l === true)
       }
       async *handleTaskStreamChatContextResponse(e, t, s, n) {
-        const r = { stack: [], error: void 0, hasError: !1 }
+        const r = { stack: [], error: undefined, hasError: false }
         try {
           const o = __addDisposableResource(
               r,
               gl("ComposerUtilsService.handleTaskStreamChatContextResponse"),
-              !1,
+              false,
             ),
             a = this._aiTaskService.handleTaskGetStream(e, n)
           for await (const l of a)
@@ -5417,7 +5417,7 @@ export function createAIServiceSet(params) {
               }
             }
         } catch (o) {
-          ;(r.error = o), (r.hasError = !0)
+          ;(r.error = o), (r.hasError = true)
         } finally {
           __disposeResources(r)
         }
@@ -5491,17 +5491,17 @@ export function createAIServiceSet(params) {
           )
       }
       async computeDiff(e, t, s) {
-        if (e === t) return new lG({ chunks: [], hitTimeout: !1 })
+        if (e === t) return new lG({ chunks: [], hitTimeout: false })
         const n = await this.computeLinesDiffWithSemaphore({
           first: e,
           second: t,
           options: {
-            ignoreTrimWhitespace: !0,
-            computeMoves: !1,
+            ignoreTrimWhitespace: true,
+            computeMoves: false,
             maxComputationTimeMs: 1e3,
           },
         })
-        if (n.hitTimeout) return new lG({ chunks: [], hitTimeout: !0 })
+        if (n.hitTimeout) return new lG({ chunks: [], hitTimeout: true })
         const a = n.changes
           .map((l) => {
             const c = e
@@ -5550,7 +5550,7 @@ export function createAIServiceSet(params) {
             )
           }, [])
           .map((l) => this.growChunk(l, e, t))
-        return new lG({ chunks: a, hitTimeout: !1 })
+        return new lG({ chunks: a, hitTimeout: false })
       }
       computeLinesDiffWithSemaphore({ first: e, second: t, options: s }) {
         return this._composerDiffSemaphore.withSemaphore(async () => {
@@ -5641,14 +5641,14 @@ export function createAIServiceSet(params) {
       }
       codeChunkHasFullFileIntent(e) {
         return (
-          e.intent !== void 0 &&
+          e.intent !== undefined &&
           [ev.COMPOSER_FILE, ev.MENTIONED_FILE].includes(e.intent)
         )
       }
       async getRootFolderFileTreeWithDistance(e, t) {
-        const s = async (r, o = 0, a = "", l = !0) => {
+        const s = async (r, o = 0, a = "", l = true) => {
             if (o > t) return ""
-            const c = await this._fileService.resolve(r, { resolveMetadata: !0 }),
+            const c = await this._fileService.resolve(r, { resolveMetadata: true }),
               h = "/" + this._workspaceContextService.asRelativePath(r)
             if (
               this._gitIgnoreFile &&
@@ -5695,8 +5695,8 @@ export function createAIServiceSet(params) {
         if (n === "" || n.indexOf("/") === -1)
           return this.getRootFolderFileTreeWithDistance(s, t - 1)
         const r = (c) => U.joinPath(c, ".."),
-          o = async (c, h, u, d = "", g = !0) => {
-            const p = await this._fileService.resolve(c, { resolveMetadata: !0 }),
+          o = async (c, h, u, d = "", g = true) => {
+            const p = await this._fileService.resolve(c, { resolveMetadata: true }),
               m = "/" + this._workspaceContextService.asRelativePath(c)
             if (
               this._gitIgnoreFile &&
@@ -5774,8 +5774,8 @@ export function createAIServiceSet(params) {
 `),
               e.join(`
 `),
-              !1,
-              { ignoreWhitespace: !0 },
+              false,
+              { ignoreWhitespace: true },
             )
           ).flatMap((g) =>
             g.value
@@ -5831,9 +5831,9 @@ export function createAIServiceSet(params) {
             this._composerDataService
               .getCodeBlocksOfStatuses(e, "applying")
               .filter((r) => !r.isNotApplied).length > 0
-            ? !0
+            ? true
             : this._composerDataService.isRunningCapabilities(e)
-          : !1
+          : false
       }
       changeCodeBlockUri(e, t, s, n) {
         const r = this._composerDataService.getComposerData(e)
@@ -5850,7 +5850,7 @@ export function createAIServiceSet(params) {
         const c = r.conversation[l].codeBlocks?.findIndex(
           (u) => u.uri.toString() === o && u.version === n,
         )
-        if (c === void 0 || c === -1)
+        if (c === undefined || c === -1)
           throw new Error("[composer] Codeblock not found in the message")
         const h = this.determineNewVersion(r, a, l, c)
         if (
@@ -5863,7 +5863,7 @@ export function createAIServiceSet(params) {
               p = u.filter((m, b) => b !== d)
             p.length === 0
               ? this._composerDataService.updateComposerDataSetStore(e, (m) =>
-                  m("codeBlockData", o, void 0),
+                  m("codeBlockData", o, undefined),
                 )
               : this._composerDataService.updateComposerDataSetStore(e, (m) =>
                   m("codeBlockData", o, p),
@@ -6004,7 +6004,7 @@ export function createAIServiceSet(params) {
       }
       async isCheckpointSameAsCurrent(e, t) {
         const s = this._composerDataService.getComposerData(e)
-        if (!s) return !1
+        if (!s) return false
         let n,
           r = new Set(),
           o = new Map(),
@@ -6016,10 +6016,10 @@ export function createAIServiceSet(params) {
               console.error(
                 "[composer] No message found with the given bubble ID",
               ),
-              !1
+              false
             )
           const h = s.conversation[c].checkpoint
-          if (!h) return !0
+          if (!h) return true
           n = h
           const u = s.currentBubbleId
             ? s.conversation.findIndex((d) => d.bubbleId === s.currentBubbleId)
@@ -6052,20 +6052,20 @@ export function createAIServiceSet(params) {
           const u = l.get(c) || []
           if (h)
             if (h.isNewlyCreated) {
-              if (await this._fileService.exists(h.uri)) return !1
+              if (await this._fileService.exists(h.uri)) return false
             } else {
-              if (!(await this._fileService.exists(h.uri))) return !1
+              if (!(await this._fileService.exists(h.uri))) return false
               const d =
                 this.getCodeBlockLinesByDiff(
                   s.composerId,
                   h.uri,
                   h.originalModelDiffWrtV0 ?? [],
                 ) ?? []
-              if (!this.areContentsEqual(u, d ?? [])) return !1
+              if (!this.areContentsEqual(u, d ?? [])) return false
             }
-          else if (u.length > 0) return !1
+          else if (u.length > 0) return false
         }
-        if (a.size > 0 || n.nonExistentFiles.length > 0) return !1
+        if (a.size > 0 || n.nonExistentFiles.length > 0) return false
         for (const c of n.activeInlineDiffs ?? []) {
           const { uri: h, version: u } = c,
             d =
@@ -6077,14 +6077,14 @@ export function createAIServiceSet(params) {
             u !== d.composerMetadata?.version ||
             s.composerId !== d.composerMetadata?.composerId
           )
-            return !1
+            return false
         }
-        return !0
+        return true
       }
       areContentsEqual(e, t) {
-        if (e.length !== t.length) return !1
-        for (let s = 0; s < e.length; s++) if (e[s] !== t[s]) return !1
-        return !0
+        if (e.length !== t.length) return false
+        for (let s = 0; s < e.length; s++) if (e[s] !== t[s]) return false
+        return true
       }
       async computeLineDiffs(e, t, s) {
         const n = this.getCodeBlockV0ModelLines(e, t)
@@ -6093,8 +6093,8 @@ export function createAIServiceSet(params) {
           first: n,
           second: s,
           options: {
-            ignoreTrimWhitespace: !1,
-            computeMoves: !1,
+            ignoreTrimWhitespace: false,
+            computeMoves: false,
             maxComputationTimeMs: 500,
             ...zKi,
           },
@@ -6103,7 +6103,7 @@ export function createAIServiceSet(params) {
         return (
           r.hitTimeout &&
             (o = [
-              new Qb(new Es(1, n.length + 1), new Es(1, s.length + 1), void 0),
+              new Qb(new Es(1, n.length + 1), new Es(1, s.length + 1), undefined),
             ]),
           o.map((l) => ({
             original: l.original,
@@ -6188,22 +6188,22 @@ export function createAIServiceSet(params) {
       shouldShowCheckpointInToolFormerMessage(e, t) {
         switch (t.tool) {
           case jt.EDIT_FILE: {
-            if (!t.params?.relativeWorkspacePath) return !1
+            if (!t.params?.relativeWorkspacePath) return false
             const n = this._workspaceContextService.resolveRelativePath(
               t.params.relativeWorkspacePath,
             )
-            if (!n) return !1
+            if (!n) return false
             const r = t.additionalData?.version
-            if (r === void 0) return !1
+            if (r === undefined) return false
             const o = this._composerDataService.getComposerCodeBlock(e, n, r)
-            return o ? !["generating", "aborted"].includes(o.status) : !1
+            return o ? !["generating", "aborted"].includes(o.status) : false
           }
           case jt.PARALLEL_APPLY:
-            return !0
+            return true
           case jt.DELETE_FILE:
             return t.userDecision === "accepted"
           default:
-            return !1
+            return false
         }
       }
       clearErrorDetailsFromLatestAIMessages(e) {
@@ -6214,7 +6214,7 @@ export function createAIServiceSet(params) {
             if (n.type === fs.AI) {
               if (n.errorDetails) {
                 this._composerDataService.updateComposerDataSetStore(e, (r) =>
-                  r("conversation", s, "errorDetails", void 0),
+                  r("conversation", s, "errorDetails", undefined),
                 )
                 break
               }
@@ -6528,8 +6528,8 @@ export function createAIServiceSet(params) {
   function iOt(i) {
     return {
       bugbotId: i ?? rt(),
-      requestId: void 0,
-      isBackground: !1,
+      requestId: undefined,
+      isBackground: false,
       status: { type: "none" },
       text: "",
       createdAt: Date.now(),
@@ -6607,7 +6607,7 @@ export function createAIServiceSet(params) {
         )
       }
       trimFileInPlace(e, t, s, n) {
-        if (t[s] === void 0) return
+        if (t[s] === undefined) return
         const o = new Set(),
           a = e.bugReports?.bugReports ?? []
         for (const c of a)
@@ -6631,7 +6631,7 @@ export function createAIServiceSet(params) {
         if (t < 10)
           for (const s in e.fileSnapshots) {
             const n = e.fileSnapshots[s]
-            n !== void 0 &&
+            n !== undefined &&
               (Array.isArray(n)
                 ? n.length > 1e4 &&
                   (this.trimFileInPlace(e, e.fileSnapshots, s, n),
@@ -6641,7 +6641,7 @@ export function createAIServiceSet(params) {
         else {
           for (const s in e.fileSnapshots) {
             const n = e.fileSnapshots[s]
-            n !== void 0 &&
+            n !== undefined &&
               Array.isArray(n) &&
               this.trimFileInPlace(e, e.fileSnapshots, s, n)
           }
@@ -6744,7 +6744,7 @@ export function createAIServiceSet(params) {
           (this.f = 0),
           (this.activeBugs = new Map()),
           (this.J = new J()),
-          (this.R = !1),
+          (this.R = false),
           (this.a = this.g.createInstance(fu, { service: NYe })),
           this.D(
             this.C.onCodeEditorAdd((w) => {
@@ -6778,10 +6778,10 @@ export function createAIServiceSet(params) {
         this.c.fire(), this.L()
       }
       N(e) {
-        this.bugConfig.linterStrategyV2?.enabled === !0 && this.P()
+        this.bugConfig.linterStrategyV2?.enabled === true && this.P()
       }
       P() {
-        if (this.bugConfig.linterStrategyV2?.enabled !== !0) return
+        if (this.bugConfig.linterStrategyV2?.enabled !== true) return
         const e = this.C.getActiveCodeEditor()
         if (e === null) return
         const t = e.getModel()
@@ -6811,7 +6811,7 @@ export function createAIServiceSet(params) {
           }
           const c = s.getValueInRange(l),
             h = a.bug.locations.at(0)
-          h !== void 0 &&
+          h !== undefined &&
             c.trim() !== h.codeLines.join(s.getEOL()).trim() &&
             (r.push(o),
             console.log("Bug lines do not match, deleting bug:", a),
@@ -6834,12 +6834,12 @@ export function createAIServiceSet(params) {
       }
       async Q(e) {
         const t = this.s.activeEditor
-        if (!t) return { diff: new FT(), gitRoot: void 0 }
+        if (!t) return { diff: new FT(), gitRoot: undefined }
         const s = t.resource
-        if (!s) return { diff: new FT(), gitRoot: void 0 }
+        if (!s) return { diff: new FT(), gitRoot: undefined }
         const n = un(s),
           r = await this.y.getGitRoot(n.fsPath)
-        if (!r) return { diff: new FT(), gitRoot: void 0 }
+        if (!r) return { diff: new FT(), gitRoot: undefined }
         const o = U.file(r),
           a = await this.y.getBranchDiff({
             cwd: o,
@@ -6860,7 +6860,7 @@ export function createAIServiceSet(params) {
           console.log("Already triggering bug finder, not triggering again!")
           return
         }
-        ;(this.R = !0), (this.f = Date.now())
+        ;(this.R = true), (this.f = Date.now())
         const t = new J()
         try {
           const s = this.C.listCodeEditors()
@@ -6926,7 +6926,7 @@ export function createAIServiceSet(params) {
         } catch (s) {
           console.error("Failed to trigger bug finding:", s)
         } finally {
-          t.dispose(), (this.R = !1)
+          t.dispose(), (this.R = false)
         }
       }
       async createDummyBug() {
@@ -6965,7 +6965,7 @@ export function createAIServiceSet(params) {
         for await (const s of e)
           for (const n of s.bugs) {
             const r = n.locations.at(0)
-            if (r === void 0) {
+            if (r === undefined) {
               console.error("Bug has no location:", n)
               continue
             }
@@ -6994,10 +6994,10 @@ export function createAIServiceSet(params) {
                 const m = r.codeLines.map((C) => ({ value: C, hash: va(C) })),
                   b = []
                 for (let C = 0; C <= p.length - m.length; C++) {
-                  let S = !0
+                  let S = true
                   for (let x = 0; x < m.length; x++)
                     if (p[C + x].hash !== m[x].hash) {
-                      S = !1
+                      S = false
                       break
                     }
                   S && b.push(C + d)
@@ -7012,14 +7012,14 @@ export function createAIServiceSet(params) {
                     Math.abs(S - r.startLine) < Math.abs(C - r.startLine) ? S : C,
                   b[0],
                 )
-                let w = !0
+                let w = true
                 for (let C = 0; C < m.length; C++)
                   if (a.getLineContent(y + C) !== r.codeLines[C]) {
                     console.log(
                       "Bug lines do not match at index, even after a hash match. This is surprising:",
                       C,
                     ),
-                      (w = !1)
+                      (w = false)
                     break
                   }
                 if (!w) return { type: "heuristic", heuristic: WB.LINES_MISMATCH }
@@ -7068,7 +7068,7 @@ export function createAIServiceSet(params) {
                       options: {
                         className: "ai-bug-finder-bug-decoration",
                         description: "bug",
-                        isWholeLine: !0,
+                        isWholeLine: true,
                         overviewRuler: {
                           color: "rgba(255, 100, 100, 0.5)",
                           position: rc.Right,
@@ -7174,8 +7174,8 @@ export function createAIServiceSet(params) {
                   ? []
                   : n.filter((l) => {
                       const c = s.getDecorationRange(l.decorationId)
-                      for (const h of o) if (c && c.intersectRanges(h)) return !0
-                      return !1
+                      for (const h of o) if (c && c.intersectRanges(h)) return true
+                      return false
                     })
               })(),
               bugs: n,
@@ -7271,7 +7271,7 @@ export function createAIServiceSet(params) {
               }),
               r
             ),
-            runNowToo: !0,
+            runNowToo: true,
           })
       }
       async r() {
@@ -7528,7 +7528,7 @@ export function createAIServiceSet(params) {
             typeof r.result.error == "string"
           )
             throw new Error(r.result.error)
-          if (!r || r.result === void 0)
+          if (!r || r.result === undefined)
             throw new Error(`Tool ${e} returned no result`)
           return (
             this.w(n.identifier, { type: "connected" }),

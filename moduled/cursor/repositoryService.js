@@ -24,7 +24,7 @@ export function createRepositoryService(params) {
         (this.clearRepositoryIntervalFunction = () => {}),
         (this.diffProvider = null),
         (this.g = new Map()),
-        (this.indexingProvider = void 0),
+        (this.indexingProvider = undefined),
         (this.h = new Map()),
         (this._onDidRequestRepoIndex = this.D(new Emitter())), // this.D => this._register // new R => new Emitter
         (this.onDidRequestRepoIndex = this._onDidRequestRepoIndex.event),
@@ -32,7 +32,7 @@ export function createRepositoryService(params) {
         (this.onDidRequestRepoInterrupt = this._onDidRequestRepoInterrupt.event),
         (this._onDidChangeIndexingStatus = this.D(new Emitter())), // this._register
         (this.onDidChangeIndexingStatus = this._onDidChangeIndexingStatus.event),
-        (this.t = () => !1),
+        (this.t = () => false),
         (this.s = this.I.createInstance(g0)),
         (this.c = this.I.createInstance(fu, { service: oTt })),
         // this._register
@@ -48,7 +48,7 @@ export function createRepositoryService(params) {
         }),
         this.onDidChangeIndexingStatus(async () => {
           const d = await this.indexingProvider?.getGlobalStatus()
-          if (d !== void 0)
+          if (d !== undefined)
             switch (
               (d.case === "synced" &&
                 this.z.setNonPersistentStorage(
@@ -75,7 +75,7 @@ export function createRepositoryService(params) {
               }
               case "indexing-setup": {
                 const g = await this.getNewRepoInfo()
-                if (g === void 0) {
+                if (g === undefined) {
                   this.z.setNonPersistentStorage("repositoryIndexingError", {
                     type: gae.NO_REPO,
                   })
@@ -85,7 +85,7 @@ export function createRepositoryService(params) {
                   m =
                     this.z.nonPersistentStorage.mainLocalRepositoryProgress
                       ?.progress
-                m !== void 0 &&
+                m !== undefined &&
                   m === 1 &&
                   this.z.setNonPersistentStorage(
                     "mainLocalRepositoryProgress",
@@ -96,7 +96,7 @@ export function createRepositoryService(params) {
               }
               case "indexing": {
                 const g = await this.getNewRepoInfo()
-                if (g === void 0) {
+                if (g === undefined) {
                   this.z.setNonPersistentStorage("repositoryIndexingError", {
                     type: gae.NO_REPO,
                   })
@@ -104,14 +104,14 @@ export function createRepositoryService(params) {
                 }
                 const p = g.repoName,
                   m = await this.indexingProvider?.getCodebases()
-                if (m === void 0) return
+                if (m === undefined) return
                 const b = {}
                 let y = 0
                 for (const w of m) {
                   const C = await this.indexingProvider?.getIndexingProgress(w)
-                  if (C === void 0) continue
+                  if (C === undefined) continue
                   const S = await this.indexingProvider?.getCurrentJobs(w)
-                  S !== void 0 && (C > y && (y = C), (b[w] = S))
+                  S !== undefined && (C > y && (y = C), (b[w] = S))
                 }
                 this.z.setNonPersistentStorage("mainLocalRepositoryProgress", {
                   repoId: p,
@@ -138,7 +138,7 @@ export function createRepositoryService(params) {
       this.indexingProvider = e
     }
     unregisterIndexingProvider() {
-      this.indexingProvider = void 0
+      this.indexingProvider = undefined
     }
     fireOnDidChangeIndexingStatus() {
       this._onDidChangeIndexingStatus.fire()
@@ -162,7 +162,7 @@ export function createRepositoryService(params) {
         (this.z.nonPersistentStorage.mainLocalRepositoryProgress?.progress ?? 0) >
           0.8
       )
-        return !0
+        return true
       {
         const e = this.z.nonPersistentStorage.repositoryIndexingStatus?.case
         if (
@@ -180,14 +180,14 @@ export function createRepositoryService(params) {
             (this.z.nonPersistentStorage.mainLocalRepositoryProgress?.progress ??
               0) < 0.5
           )
-            return !1
+            return false
           const s = this.z.nonPersistentStorage.repositoryLastSyncedTime
-          if (s !== void 0 && Date.now() - s < 1e3 * 60 * 60) return !0
+          if (s !== undefined && Date.now() - s < 1e3 * 60 * 60) return true
         }
-        return !1
+        return false
       }
     }
-    async indexMainRepository(e = !1) {
+    async indexMainRepository(e = false) {
       if (!this.u.isAuthenticated()) {
         this.z.setNonPersistentStorage("repositoryIndexingStatus", {
           case: "error",
@@ -199,17 +199,17 @@ export function createRepositoryService(params) {
     }
     async deleteMainLocalRepository() {
       const e = await this.getNewRepoInfo()
-      if (e === void 0) return
+      if (e === undefined) return
       const n = await this.c.get();
       await (
         // await this.c.get()
         n
       ).removeRepositoryV2(new fAi({ repository: e }), { headers: wn(rt()) }),
-        this._onDidRequestRepoInterrupt.fire(!1),
+        this._onDidRequestRepoInterrupt.fire(false),
         this.z.setNonPersistentStorage("repositoryIndexingStatus", {
           case: "not-indexed",
         }),
-        this.z.nonPersistentStorage.mainLocalRepositoryProgress === void 0 &&
+        this.z.nonPersistentStorage.mainLocalRepositoryProgress === undefined &&
           this.z.setNonPersistentStorage("mainLocalRepositoryProgress", {}),
         this.z.setNonPersistentStorage(
           "mainLocalRepositoryProgress",
@@ -219,7 +219,7 @@ export function createRepositoryService(params) {
         this.z.setNonPersistentStorage("repositoryIndexingJobs", {})
     }
     async pauseIndexingJob() {
-      this._onDidRequestRepoInterrupt.fire(!0)
+      this._onDidRequestRepoInterrupt.fire(true)
     }
     registerDiffProvider(e) {
       this.diffProvider = e
@@ -229,13 +229,13 @@ export function createRepositoryService(params) {
     }
     repositoryToInfo(e) {
       const t = e.provider.remotes
-      if (t === void 0) return null
+      if (t === undefined) return null
       if (t.length === 0) throw new Error("No remotes found")
       const n = t[0].fetchUrl?.split(/\/|\:/)
-      if (n === void 0) throw new Error("Could not parse origin url")
+      if (n === undefined) throw new Error("Could not parse origin url")
       const r = n[n.length - 2],
         o = n[n.length - 1].split(".")[0]
-      if (r === void 0 || o === void 0)
+      if (r === undefined || o === undefined)
         throw new Error("Could not parse repo owner and name")
       return {
         id: e.id,
@@ -250,7 +250,7 @@ export function createRepositoryService(params) {
       if (e.id === dk.id) s = this.G.resolveRelativePath(n)
       else {
         const l = this.g.get(e.id)?.provider?.rootUri
-        if (l === void 0) return null
+        if (l === undefined) return null
         s = U.joinPath(l, n)
       }
       let r,
@@ -263,9 +263,9 @@ export function createRepositoryService(params) {
           (r = await this.F.createModelReference(s))
         const a = t.range
         if (
-          a === void 0 ||
-          a.startPosition === void 0 ||
-          a.endPosition === void 0
+          a === undefined ||
+          a.startPosition === undefined ||
+          a.endPosition === undefined
         )
           return null
         let l,
@@ -288,14 +288,14 @@ export function createRepositoryService(params) {
           u.push({
             lineNumber: g + (a.startPosition?.line - 1) + 1,
             text: p,
-            isSignature: !1,
+            isSignature: false,
           })
         const d = t.signatures?.ranges
         if (d) {
           for (const g of d)
-            g === void 0 ||
-              g.startPosition === void 0 ||
-              g.endPosition === void 0 ||
+            g === undefined ||
+              g.startPosition === undefined ||
+              g.endPosition === undefined ||
               g.endPosition.line >= a.startPosition.line ||
               c.push(
                 r.object.textEditorModel.getValueInRange({
@@ -322,7 +322,7 @@ export function createRepositoryService(params) {
                   u.push({
                     lineNumber: S + (d[m]?.startPosition?.line ?? 1),
                     text: x,
-                    isSignature: !0,
+                    isSignature: true,
                   })
                 y = d[m]?.startPosition?.line ?? 1
               } else y = a.startPosition?.line ?? 1
@@ -340,7 +340,7 @@ export function createRepositoryService(params) {
                   `...
 ` +
                   b),
-                u.push({ lineNumber: y - 0.5, text: C + "...", isSignature: !0 })
+                u.push({ lineNumber: y - 0.5, text: C + "...", isSignature: true })
             }
             l = g
           }
@@ -371,7 +371,7 @@ export function createRepositoryService(params) {
       const o = (
           await this.parallelSearch(e.contentPattern.pattern, 100)
         ).flatMap((c, h) => {
-          if (c.codeBlock === void 0 || c.codeBlock.range === void 0) return []
+          if (c.codeBlock === undefined || c.codeBlock.range === undefined) return []
           const u = n(c.codeBlock.range)
           return [
             {
@@ -394,7 +394,7 @@ export function createRepositoryService(params) {
         a = {}
       for (const c of o)
         c.uri &&
-          (a[c.uri.toString()] === void 0 && (a[c.uri.toString()] = []),
+          (a[c.uri.toString()] === undefined && (a[c.uri.toString()] = []),
           a[c.uri.toString()].push(c))
       const l = []
       for (const c in a) {
@@ -410,10 +410,10 @@ export function createRepositoryService(params) {
     async parallelSearchGetContents(e, t = 10, s, n) {
       return (await this.parallelSearch(e, t, s, n)).map((o) => {
         const a = o.codeBlock
-        if (a === void 0) return o
+        if (a === undefined) return o
         const l = this.G.resolveRelativePath(a.relativeWorkspacePath),
           c = this.J.getModel(l)
-        return !c || a.range === void 0
+        return !c || a.range === undefined
           ? o
           : new im({
               ...o,
@@ -458,7 +458,7 @@ export function createRepositoryService(params) {
     filterResults(e, t = 10, s) {
       return e
         .filter(
-          (n) => n.codeBlock !== void 0 && n.codeBlock.contents.length < 2e4,
+          (n) => n.codeBlock !== undefined && n.codeBlock.contents.length < 2e4,
         )
         .sort((n, r) => r.score - n.score)
         .slice(0, s ?? t)
@@ -466,8 +466,8 @@ export function createRepositoryService(params) {
     async searchNewLocalFast(e, t = 10, s) {
       const n = await this.c.get(),
         r = await this.getNewRepoInfo()
-      if (r === void 0) throw new Error("No repository info found")
-      if (this.indexingProvider === void 0)
+      if (r === undefined) throw new Error("No repository info found")
+      if (this.indexingProvider === undefined)
         throw new Error("Indexing provider not found")
       const o = { ...r, id: dk.id }
       let a
@@ -501,10 +501,10 @@ export function createRepositoryService(params) {
             a = k.response
             break
           }
-          if (a === void 0) throw new Error("Response is undefined")
+          if (a === undefined) throw new Error("Response is undefined")
         } catch {}
         if (s?.abortSignal?.aborted) throw new Error("Aborted")
-        if (a === void 0) {
+        if (a === undefined) {
           const x = performance.now(),
             k = await n.semSearch({ request: y }, C)
           for await (const E of k) {
@@ -516,7 +516,7 @@ export function createRepositoryService(params) {
               )
             break
           }
-          if (a === void 0) throw new Error("Response is undefined")
+          if (a === undefined) throw new Error("Response is undefined")
         }
       } catch (m) {
         if (m instanceof du) return []
@@ -524,7 +524,7 @@ export function createRepositoryService(params) {
       }
       const l = a.codeResults
           .map((m) => m.codeBlock?.relativeWorkspacePath)
-          .filter((m) => m !== void 0),
+          .filter((m) => m !== undefined),
         c = performance.now(),
         h = await this.indexingProvider.decryptPaths(l),
         u = performance.now(),
@@ -533,9 +533,9 @@ export function createRepositoryService(params) {
       const g = performance.now()
       return a.codeResults
         .map((m) => {
-          if (m.codeBlock === void 0) throw new Error("Code block undefined")
+          if (m.codeBlock === undefined) throw new Error("Code block undefined")
           const b = d.get(m.codeBlock.relativeWorkspacePath)
-          if (b === void 0) throw new Error("Path not found")
+          if (b === undefined) throw new Error("Path not found")
           if (
             ((m.codeBlock.relativeWorkspacePath = b),
             (m.codeBlock.relativeWorkspacePath.startsWith("./") ||
@@ -547,7 +547,7 @@ export function createRepositoryService(params) {
             return null
           const y = (async () => {
             try {
-              if (m.codeBlock === void 0) throw new Error("Code block undefined")
+              if (m.codeBlock === undefined) throw new Error("Code block undefined")
               const w = await this.convertToLocalBlock(m.codeBlock, o)
               return w === null ? null : new im({ score: m.score, codeBlock: w })
             } catch (w) {
@@ -563,8 +563,8 @@ export function createRepositoryService(params) {
     async searchNewLocal(e, t = 10, s) {
       const n = await this.c.get(),
         r = await this.getNewRepoInfo()
-      if (r === void 0) throw new Error("No repository info found")
-      if (this.indexingProvider === void 0)
+      if (r === undefined) throw new Error("No repository info found")
+      if (this.indexingProvider === undefined)
         throw new Error("Indexing provider not found")
       const o = { ...r, id: dk.id }
       let a
@@ -593,11 +593,11 @@ export function createRepositoryService(params) {
       return await this.getFinalCodeResults(o, a.codeResults, { ...s, topK: t })
     }
     indexMainLocalRepository() {
-      this.u.isAuthenticated() && (this._onDidRequestRepoInterrupt.fire(!0), this._onDidRequestRepoIndex.fire())
+      this.u.isAuthenticated() && (this._onDidRequestRepoInterrupt.fire(true), this._onDidRequestRepoIndex.fire())
     }
     interruptLocalRepository(e) {
       if (e.id === dk.id) {
-        this._onDidRequestRepoInterrupt.fire(!1)
+        this._onDidRequestRepoInterrupt.fire(false)
         const t = bt.setInterval(() => {
           this.z.setNonPersistentStorage("repoProgressBars", (s) =>
             s.filter((n) => n.repoId !== dk.id),
@@ -636,18 +636,18 @@ export function createRepositoryService(params) {
         ).getLineNumberClassifications(o, { signal: s })
       for await (const c of l) {
         const h = c.classifiedResult
-        if (h?.codeResult !== void 0) {
+        if (h?.codeResult !== undefined) {
           const u = r.get(n(h.codeResult))
-          u !== void 0 && (yield { withClassificationInfo: h, idx: u.idx })
+          u !== undefined && (yield { withClassificationInfo: h, idx: u.idx })
         }
       }
     }
     async convertToLocalBlock(e, t) {
       try {
         const s = await this.codeBlockFromRemote(t, e)
-        return !s || (s.contents !== void 0 && s.contents.length > 2e4)
+        return !s || (s.contents !== undefined && s.contents.length > 2e4)
           ? null
-          : (s.contents !== void 0 &&
+          : (s.contents !== undefined &&
               (s.contents = await this.H.cleanText(
                 s.contents,
                 s.relativeWorkspacePath,
@@ -663,14 +663,14 @@ export function createRepositoryService(params) {
       if (!this.indexingProvider) throw new Error("Indexing provider not found")
       const n = t
           .map((u) => u.codeBlock?.relativeWorkspacePath)
-          .filter((u) => u !== void 0),
+          .filter((u) => u !== undefined),
         r = await this.indexingProvider.decryptPaths(n),
         o = new Map()
       for (let u = 0; u < n.length; u++) o.set(n[u], r[u])
       const a = t.map(async (u) => {
-          if (u.codeBlock === void 0) throw new Error("Code block undefined")
+          if (u.codeBlock === undefined) throw new Error("Code block undefined")
           const d = o.get(u.codeBlock.relativeWorkspacePath)
-          if (d === void 0) throw new Error("Path not found")
+          if (d === undefined) throw new Error("Path not found")
           if (
             ((u.codeBlock.relativeWorkspacePath = d),
             (u.codeBlock.relativeWorkspacePath.startsWith("./") ||

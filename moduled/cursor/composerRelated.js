@@ -28,7 +28,7 @@ export function createComposerRelated(params) {
         Array.isArray(r) && (e[n] = r)
       } else {
         const r = i[n]
-        if (r !== void 0)
+        if (r !== undefined)
           if (n === "usesCodebase") e.usesCodebase = t ?? r
           else
             switch (n) {
@@ -142,18 +142,18 @@ export function createComposerRelated(params) {
     })
   }
   function q8n(i, e) {
-    let t = i.hasMigratedChatData ?? !1,
-      s = i.hasMigratedComposerData ?? !1,
+    let t = i.hasMigratedChatData ?? false,
+      s = i.hasMigratedComposerData ?? false,
       n = i.hasMigratedUseAutoContext,
-      r = !1,
+      r = false,
       o = i.allComposers
     if (
       (s ||
         ((o = o.map((u) =>
           u.type === "head" ? u : (iK(u, e.storageService), K$(u)),
         )),
-        (s = !0),
-        (r = !0)),
+        (s = true),
+        (r = true)),
       e.shouldMigrateChatData && e.workspaceContextService && e.storageService)
     ) {
       const u = xR.CHAT_REACTIVE_STORAGE_ID,
@@ -164,8 +164,8 @@ export function createComposerRelated(params) {
           const p = JSON.parse(g)
           p &&
             ((o = [...V8n(p).map((y) => (iK(y, e.storageService), K$(y))), ...o]),
-            (t = !0),
-            (r = !0))
+            (t = true),
+            (r = true))
         } catch (p) {
           console.error("[composer] Error parsing chat data", p)
         }
@@ -174,9 +174,9 @@ export function createComposerRelated(params) {
       (e.reactiveStorageService.setApplicationUserPersistentStorage(
         "composerState",
         "useAutoContext",
-        !0,
+        true,
       ),
-      (n = !0)),
+      (n = true)),
       (o = JJ(o).map(r6n))
     let a = i.selectedComposerId,
       l = i.selectedChatId
@@ -185,12 +185,12 @@ export function createComposerRelated(params) {
     if (!c) {
       const u = rt(),
         d = yI(u)
-      iK(d, e.storageService), (a = u), (o = [K$(d), ...o]), (r = !0)
+      iK(d, e.storageService), (a = u), (o = [K$(d), ...o]), (r = true)
     }
     if (!h) {
       const u = rt(),
         d = yI(u, "chat")
-      iK(d, e.storageService), (l = u), (o = [K$(d), ...o]), (r = !0)
+      iK(d, e.storageService), (l = u), (o = [K$(d), ...o]), (r = true)
     }
     return (
       (i = {
@@ -200,10 +200,10 @@ export function createComposerRelated(params) {
         hasMigratedChatData: t,
         hasMigratedUseAutoContext: n,
         hasMigratedComposerData: s,
-        selectedComposerHandle: void 0,
-        selectedComposerHandlePromise: void 0,
-        selectedChatHandle: void 0,
-        selectedChatHandlePromise: void 0,
+        selectedComposerHandle: undefined,
+        selectedComposerHandlePromise: undefined,
+        selectedChatHandle: undefined,
+        selectedChatHandlePromise: undefined,
       }),
       [i, { didMigrateComposerOrChatData: r }]
     )
@@ -213,7 +213,7 @@ export function createComposerRelated(params) {
       t = { ...yI(e.composerId), ...e }
     t.isAgentic || t.conversation.some((n) => n.capabilityType === ls.TOOL_FORMER)
       ? (t.unifiedMode = "agent")
-      : t.unifiedMode === void 0 && (t.unifiedMode = t.forceMode ?? "edit"),
+      : t.unifiedMode === undefined && (t.unifiedMode = t.forceMode ?? "edit"),
       (t.forceMode = t.unifiedMode === "agent" ? "edit" : t.unifiedMode),
       (t.isAgentic = t.unifiedMode === "agent"),
       (t.context = { ...cm(), ...tce(e.context) }),
@@ -231,7 +231,7 @@ export function createComposerRelated(params) {
           n,
           r.map((o) => {
             o.version === 0 &&
-              o.originalModelLines !== void 0 &&
+              o.originalModelLines !== undefined &&
               (t.originalModelLines[n] = o.originalModelLines)
             let a = o.status
             a === "generating"
@@ -255,14 +255,14 @@ export function createComposerRelated(params) {
       }))),
       (t.latestCheckpoint = t.latestCheckpoint
         ? yBi(t.latestCheckpoint)
-        : void 0),
+        : undefined),
       (t.conversation = t.conversation.map((n) => {
         const r = n.codeBlocks?.map((h) => ({
             uri: U.revive(h.uri),
             version: h.version,
             codeBlockIdx: h.codeBlockIdx,
           })),
-          o = n.checkpoint ? yBi(n.checkpoint) : void 0,
+          o = n.checkpoint ? yBi(n.checkpoint) : undefined,
           a = n.capabilityStatuses
             ? {
                 ...wBi(),
@@ -278,17 +278,17 @@ export function createComposerRelated(params) {
                     ]),
                 ),
               }
-            : void 0,
+            : undefined,
           l = n.capabilityCodeBlocks
             ? n.capabilityCodeBlocks.map((h) => ({
                 ...h,
                 status: h.status === "generating" ? "aborted" : h.status,
               }))
-            : void 0,
+            : undefined,
           c =
             n.type === fs.HUMAN
               ? { ...cm(), ...(n.context ? tce(n.context) : {}) }
-              : void 0
+              : undefined
         return {
           ...HC(),
           ...n,
@@ -305,14 +305,14 @@ export function createComposerRelated(params) {
       (t.status = s),
       t.tabs[0].type !== "extra" && (t.tabs = [{ type: "extra" }, ...t.tabs]),
       (t.selectedTabIndex = 1),
-      (t.hasLoaded = !1),
+      (t.hasLoaded = false),
       t
     )
   }
   function z8n(i) {
     for (const e of i.capabilities) e.dispose()
   }
-  function $Ui(i, e = !0) {
+  function $Ui(i, e = true) {
     const {
       composerId: t,
       name: s,
@@ -395,13 +395,13 @@ export function createComposerRelated(params) {
                       })),
                     ]),
                 )
-              : void 0,
+              : undefined,
             ke = he
               ? he.map((Ae) => ({
                   ...Ae,
                   status: Ae.status === "generating" ? "aborted" : Ae.status,
                 }))
-              : void 0
+              : undefined
           if (e) {
             const {
               attachedCodeChunks: Ae,
@@ -429,7 +429,7 @@ export function createComposerRelated(params) {
         })
         .filter(bn)
     return (
-      (F = { ...F, terminalFiles: void 0 }),
+      (F = { ...F, terminalFiles: undefined }),
       {
         ...yI(),
         composerId: t,
@@ -480,10 +480,10 @@ export function createComposerRelated(params) {
         hasMigratedChatData: n,
         hasMigratedUseAutoContext: r,
         hasMigratedComposerData: o,
-        selectedComposerHandle: void 0,
-        selectedComposerHandlePromise: void 0,
-        selectedChatHandle: void 0,
-        selectedChatHandlePromise: void 0,
+        selectedComposerHandle: undefined,
+        selectedComposerHandlePromise: undefined,
+        selectedChatHandle: undefined,
+        selectedChatHandlePromise: undefined,
       }
     )
   }
@@ -491,10 +491,10 @@ export function createComposerRelated(params) {
     const r = t.getWorkbenchState() === 1 ? -1 : 1
     let o
     o = i.get(n, r)
-    let a = !1,
-      l = !0,
-      c = !1,
-      h = !1,
+    let a = false,
+      l = true,
+      c = false,
+      h = false,
       u = {
         allComposers: [],
         selectedComposerId: "",
@@ -502,15 +502,15 @@ export function createComposerRelated(params) {
         hasMigratedChatData: a,
         hasMigratedUseAutoContext: l,
         hasMigratedComposerData: c,
-        selectedComposerHandle: void 0,
-        selectedComposerHandlePromise: void 0,
-        selectedChatHandle: void 0,
-        selectedChatHandlePromise: void 0,
+        selectedComposerHandle: undefined,
+        selectedComposerHandlePromise: undefined,
+        selectedChatHandle: undefined,
+        selectedChatHandlePromise: undefined,
       }
-    if (o && !0)
+    if (o && true)
       try {
         let b = JSON.parse(o)
-        if (((a = !!b.hasMigratedChatData), (l = !0), b)) {
+        if (((a = !!b.hasMigratedChatData), (l = true), b)) {
           const [y, w] = q8n(b, {
             shouldMigrateChatData: !a,
             workspaceContextService: t,
@@ -527,7 +527,7 @@ export function createComposerRelated(params) {
       }
     else {
       const b = rt()
-      ;(h = !0), (u = OUi(b, rt(), i, e, a, l, c))
+      ;(h = true), (u = OUi(b, rt(), i, e, a, l, c))
     }
     console.log("[composer] initial composers", JSON.parse(JSON.stringify(u)))
     const [g, p] = op(u)
@@ -623,7 +623,7 @@ export function createComposerRelated(params) {
     getWeakHandleOptimistic(e) {
       const t = this.loadedComposers.find((s) => s.data.composerId === e)
       if (t)
-        return new sce(t.data.composerId, this, this.reactiveStorageService, !0)
+        return new sce(t.data.composerId, this, this.reactiveStorageService, true)
     }
     pushComposer(e) {
       const t = new Y8n(e)
@@ -631,7 +631,7 @@ export function createComposerRelated(params) {
       const s = new sce(t.data.composerId, this, this.reactiveStorageService)
       return (
         this.composerWasLoadedHook(
-          new sce(t.data.composerId, this, this.reactiveStorageService, !0),
+          new sce(t.data.composerId, this, this.reactiveStorageService, true),
         ).catch((n) => {
           console.error("[composer] Error loading composer data:", n)
         }),
@@ -647,7 +647,7 @@ export function createComposerRelated(params) {
       t &&
         (this.unloadComposer(t),
         this.storageService
-          .cursorDiskKVSet(this.getComposerDataStorageKey(e), void 0)
+          .cursorDiskKVSet(this.getComposerDataStorageKey(e), undefined)
           .then(() => {})
           .catch((s) => {
             console.error("[composer] Error deleting composer data from disk:", s)
@@ -709,7 +709,7 @@ export function createComposerRelated(params) {
   }
   cLt = __decorate([__param(2, et), __param(3, aiAssertService), __param(4, ei)], cLt)
   var sce = class Qgi extends V {
-      constructor(e, t, s, n = !1) {
+      constructor(e, t, s, n = false) {
         super(),
           (this.composerId = e),
           (this.composerDataHandleService = t),
@@ -724,7 +724,7 @@ export function createComposerRelated(params) {
             if (!o) throw new Error("[composer] No loaded composer found")
             return o.setData(...r)
           }),
-          (this.isDisposed = !1),
+          (this.isDisposed = false),
           n || this.composerDataHandleService.addHandle(this, this.composerId)
       }
       clone() {
@@ -740,7 +740,7 @@ export function createComposerRelated(params) {
           this.composerId,
           this.composerDataHandleService,
           this.reactiveStorageService,
-          !0,
+          true,
         )
       }
       get data() {
@@ -754,7 +754,7 @@ export function createComposerRelated(params) {
       }
       dispose() {
         this.isDisposed ||
-          ((this.isDisposed = !0),
+          ((this.isDisposed = true),
           super.dispose(),
           this.composerDataHandleService.removeHandle(this, this.composerId))
       }
@@ -789,10 +789,10 @@ export function createComposerRelated(params) {
           this.keepAliveHandles.shift()?.dispose()
         for (let t = 0; t < this.keepAliveHandles.length - 1; t++) {
           const s = this.keepAliveHandles[t]
-          let n = !1
+          let n = false
           try {
             s.data.conversation.length > 100 &&
-              (s.dispose(), this.keepAliveHandles.splice(t, 1), t--, (n = !0))
+              (s.dispose(), this.keepAliveHandles.splice(t, 1), t--, (n = true))
           } catch {
             n || (s.dispose(), this.keepAliveHandles.splice(t, 1), t--)
           }
@@ -856,10 +856,10 @@ export function createComposerRelated(params) {
                 const w = this.composerDataHandleManager.getHandle(m, y)
                 this.setAllComposersData("selectedComposerHandlePromise", w),
                   w.then((C) => {
-                    if (C === void 0) {
+                    if (C === undefined) {
                       this.deleteComposer(m, {
                         forceMode: "edit",
-                        isCurrentlySelected: !0,
+                        isCurrentlySelected: true,
                       })
                       return
                     }
@@ -873,7 +873,7 @@ export function createComposerRelated(params) {
                   })
               }
             },
-            runNowToo: !0,
+            runNowToo: true,
           }),
           this.reactiveStorageRoot.onChangeEffect({
             deps: [() => this.allComposersData.selectedChatId],
@@ -891,10 +891,10 @@ export function createComposerRelated(params) {
                 const w = this.composerDataHandleManager.getHandle(m, y)
                 this.setAllComposersData("selectedChatHandlePromise", w),
                   w.then((C) => {
-                    if (C === void 0) {
+                    if (C === undefined) {
                       this.deleteComposer(m, {
                         forceMode: "chat",
-                        isCurrentlySelected: !0,
+                        isCurrentlySelected: true,
                       })
                       return
                     }
@@ -908,7 +908,7 @@ export function createComposerRelated(params) {
                   })
               }
             },
-            runNowToo: !0,
+            runNowToo: true,
           })
         for (const d of hLt.registeredActions)
           d(this._reactiveStorageService, this)
@@ -975,7 +975,7 @@ export function createComposerRelated(params) {
           ? t
             ? s.conversation[0].bubbleId === t
             : s.conversation.length === 0
-          : !1
+          : false
       }
       async updateComposerDataAsync(e, t) {
         const s = await this.composerDataHandleManager.getHandle(e)
@@ -1067,7 +1067,7 @@ export function createComposerRelated(params) {
                 (n) => n.composerId === t.composerId,
               )
               t.unifiedMode !== s?.unifiedMode &&
-                t.unifiedMode !== void 0 &&
+                t.unifiedMode !== undefined &&
                 this.setAllComposersData(
                   "allComposers",
                   (n) => n.composerId === t.composerId,
@@ -1077,7 +1077,7 @@ export function createComposerRelated(params) {
               console.error("[composer] Error instantiating capabilities:", s)
             }
           } finally {
-            e.setData("hasLoaded", !0)
+            e.setData("hasLoaded", true)
           }
         } catch (t) {
           console.error("[composer] Error loading composer data:", t)
@@ -1330,17 +1330,17 @@ export function createComposerRelated(params) {
         if (!r || r.length === 0) return -1
         const o = r[r.length - 1]?.version
         return s?.excludeNonAppliedCodeBlocks
-          ? r.filter((a) => a.isNotApplied !== !0).length - 1
+          ? r.filter((a) => a.isNotApplied !== true).length - 1
           : o
       }
       getVersionExcludingNonAppliedCodeBlocks(e, t, s) {
         const n = this.getComposerFromIdOrHandle(e)
         if (!n) return -1
         const r = n.codeBlockData[t.toString()]
-        return !r || r.length === 0 || r[s].isNotApplied === !0
+        return !r || r.length === 0 || r[s].isNotApplied === true
           ? -1
           : r
-              .filter((o) => o.isNotApplied !== !0)
+              .filter((o) => o.isNotApplied !== true)
               .findIndex((o) => o.version === s)
       }
       getLatestCodeBlockVersionForMessage(e, t, s, n) {
@@ -1365,7 +1365,7 @@ export function createComposerRelated(params) {
           (n) =>
             n.uri.toString() === t.toString() &&
             n.composerMetadata?.composerId === e &&
-            (s ? n.composerMetadata?.version === s : !0),
+            (s ? n.composerMetadata?.version === s : true),
         )
       }
       getAllInlineDiffs(e) {
@@ -1393,7 +1393,7 @@ export function createComposerRelated(params) {
         const { codeBlockData: s } = t
         return Object.values(s)
           .flat()
-          .filter(({ isCached: r }) => r === !0)
+          .filter(({ isCached: r }) => r === true)
       }
       addTypesToCapabilityStatuses(e, t, s, n) {
         this.updateComposerDataSetStore(e, (r) =>
@@ -1462,20 +1462,20 @@ export function createComposerRelated(params) {
       }
       isRunningCapabilities(e) {
         const t = this.getComposerData(e)
-        if (!t) return !1
+        if (!t) return false
         for (let s = t.conversation.length - 1; s >= 0; s--) {
           const n = t.conversation[s]
           if (n.capabilityStatuses) {
             for (const r of Object.keys(n.capabilityStatuses))
               for (const o of n.capabilityStatuses[r])
-                if (o.status === "generating") return !0
+                if (o.status === "generating") return true
           }
           if (n.capabilityCodeBlocks) {
             for (const r of n.capabilityCodeBlocks)
-              if (r.status === "generating" || r.status === "loading") return !0
+              if (r.status === "generating" || r.status === "loading") return true
           }
         }
-        return !1
+        return false
       }
       getToolFormer(e) {
         const t = this.getComposerCapability(e, ls.TOOL_FORMER)
@@ -1487,7 +1487,7 @@ export function createComposerRelated(params) {
       }
       getIsBlockingUserDecision(e) {
         const t = this.getToolFormer(e)
-        return t ? t.getIsBlockingUserDecision()() : !1
+        return t ? t.getIsBlockingUserDecision()() : false
       }
       setLoadingToolFormerToolsToCancelled(e) {
         const t = this.getToolFormer(e)
@@ -1577,11 +1577,11 @@ export function createComposerRelated(params) {
         const s = this.getComposerData(e)
         return s
           ? [...s.conversation].reverse().find((r) => r.type === fs.AI && t(r))
-          : void 0
+          : undefined
       }
       getLastBubbleWhere(e, t) {
         const s = this.getComposerData(e)
-        return s ? [...s.conversation].reverse().find((r) => t(r)) : void 0
+        return s ? [...s.conversation].reverse().find((r) => t(r)) : undefined
       }
       getLastAiBubbles(e) {
         const t = this.getComposerData(e)
@@ -1649,7 +1649,7 @@ export function createComposerRelated(params) {
                   ? wt
                     ? " \u2325\u23CE"
                     : " alt+\u23CE"
-                  : void 0,
+                  : undefined,
               icon: n?.icon,
               hintText: n?.hintText,
             },
@@ -1666,7 +1666,7 @@ export function createComposerRelated(params) {
             (
               this._reactiveStorageService.nonPersistentStorage.composerState
                 .actionButtons?.[e] ?? []
-            ).filter((s) => (s.id === t ? (s.onRemove?.(), !1) : !0)),
+            ).filter((s) => (s.id === t ? (s.onRemove?.(), false) : true)),
           )
       }
       clearActionButtons(e) {
@@ -1706,17 +1706,17 @@ export function createComposerRelated(params) {
       }
       selectLastHumanBubbleAboveInput(e) {
         const t = this.getComposerData(e)
-        if (!t) return !1
+        if (!t) return false
         for (let s = t.conversation.length - 1; s >= 0; s--) {
           const n = t.conversation[s]
           if (n.type === fs.HUMAN)
             return (
               this.updateComposerData(e, { selectedBubbleId: n.bubbleId }),
               aU(n.bubbleId),
-              !0
+              true
             )
         }
-        return !1
+        return false
       }
       getNonTabFilesInContext(e) {
         const t = this.getComposerData(e)
@@ -1758,7 +1758,7 @@ export function createComposerRelated(params) {
         return (
           await new Promise((a) =>
             this._selectedContextService.addOnCursorIgnoreLoadedCallback(() =>
-              a(void 0),
+              a(undefined),
             ),
           ),
           await this._selectedContextService.filterCursorIgnoredFiles(o, (a) =>

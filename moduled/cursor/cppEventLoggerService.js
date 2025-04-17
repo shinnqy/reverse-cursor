@@ -35,14 +35,14 @@ export function createCppEventLoggerService(params) {
       }
       h(e) {
         const s = this.e.asRelativePath(e).split(".").pop()
-        if (s !== void 0 && s.length > 0 && s.length < 8) return s.toLowerCase()
+        if (s !== undefined && s.length > 0 && s.length < 8) return s.toLowerCase()
       }
       registerExtHostEventLogger(e) {
         return (
           (this.a = e),
           {
             dispose: () => {
-              this.a = void 0
+              this.a = undefined
             },
           }
         )
@@ -121,7 +121,7 @@ export function createCppEventLoggerService(params) {
                     startColumn: n.startColumn,
                     startLineNumber: n.startLineNumber,
                   }
-                : void 0,
+                : undefined,
             },
             edit: s,
             modelVersion: e.getVersionId(),
@@ -149,7 +149,7 @@ export function createCppEventLoggerService(params) {
                     startColumn: s.startColumn,
                     startLineNumber: s.startLineNumber,
                   }
-                : void 0,
+                : undefined,
             },
             modelVersion: e.getVersionId(),
             model: e,
@@ -176,7 +176,7 @@ export function createCppEventLoggerService(params) {
                     startColumn: s.startColumn,
                     startLineNumber: s.startLineNumber,
                   }
-                : void 0,
+                : undefined,
             },
             modelVersion: e.getVersionId(),
             model: e,
@@ -213,7 +213,7 @@ export function createCppEventLoggerService(params) {
                     startColumn: n.startColumn,
                     startLineNumber: n.startLineNumber,
                   }
-                : void 0,
+                : undefined,
             },
             recoverableData: s,
             modelVersion: e.getVersionId(),

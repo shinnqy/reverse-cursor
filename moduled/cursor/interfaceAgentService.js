@@ -40,13 +40,13 @@ export function createInterfaceAgentService(params) {
                 this.g.workspaceUserPersistentStorage.tasksData
                   .activeServerTaskUuids,
             ],
-            runNowToo: !1,
+            runNowToo: false,
           })
       }
       configureTestRunner(e) {
         this.q.insertDummyTestConfig(e),
           this.s.openWorkspaceSettings({
-            jsonEditor: !0,
+            jsonEditor: true,
             revealSetting: { key: "testRunner.config" },
           })
       }
@@ -61,11 +61,11 @@ export function createInterfaceAgentService(params) {
       }
       async getInterfaceAgentClientState(e) {
         const t = this.testUriFromInterfaceUri(e),
-          s = (await this.c.exists(t)) ? t : void 0,
+          s = (await this.c.exists(t)) ? t : undefined,
           n = await this.implementationUriFromInterfaceUri(e),
           r = this.j.asRelativePath(e),
-          o = s ? this.j.asRelativePath(s) : void 0,
-          a = n ? this.j.asRelativePath(n) : void 0
+          o = s ? this.j.asRelativePath(s) : undefined,
+          a = n ? this.j.asRelativePath(n) : undefined
         let l = [],
           c = [],
           h = [],
@@ -147,7 +147,7 @@ export function createInterfaceAgentService(params) {
           const n = this.b.getModelDetails()
           this.f.publicLogCapture("submitted.startInterfaceAgent")
           const [r, o] = this.b.registerNewGeneration({
-              metadata: void 0,
+              metadata: undefined,
               generationUUID: s,
             }),
             a = await this.getInterfaceAgentClientState(e),
@@ -171,7 +171,7 @@ export function createInterfaceAgentService(params) {
                 { interfaceUri: e, taskUuid: h.taskUuid, status: new H1t({}) },
               ],
             )
-          const u = this.h.createTask({ taskInitResponse: h, nonPersistent: !0 })
+          const u = this.h.createTask({ taskInitResponse: h, nonPersistent: true })
           if (!u.ok()) {
             console.error("error creating task", u.err)
             return
@@ -197,7 +197,7 @@ export function createInterfaceAgentService(params) {
             console.error("no status found for uri", e)
             continue
           }
-          let r = !1
+          let r = false
           if (
             (this.g.setNonPersistentStorage(
               "aiInterfaceState",
@@ -205,7 +205,7 @@ export function createInterfaceAgentService(params) {
               (o) =>
                 o.map((a) =>
                   extUri.isEqual(a.interfaceUri, e)
-                    ? ((r = !0), { ...a, status: n })
+                    ? ((r = true), { ...a, status: n })
                     : a,
                 ),
             ),
@@ -254,7 +254,7 @@ export function createInterfaceAgentService(params) {
         try {
           const n = await this.getInterfaceAgentClientState(e),
             [r, o] = this.b.registerNewGeneration({
-              metadata: void 0,
+              metadata: undefined,
               generationUUID: s,
             }),
             a = new q1t({ interfaceAgentClientState: n }),

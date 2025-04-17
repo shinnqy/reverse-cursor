@@ -48,13 +48,13 @@ export function createAIServiceV1Part3(params) {
     static {
       this.fields = v.util.newFieldList(() => [
         { no: 1, name: "current_file", kind: "message", T: Ho },
-        { no: 6, name: "repositories", kind: "message", T: rl, repeated: !0 },
+        { no: 6, name: "repositories", kind: "message", T: rl, repeated: true },
         {
           no: 7,
           name: "context_blocks",
           kind: "message",
           T: i4n,
-          repeated: !0,
+          repeated: true,
         },
         { no: 13, name: "explicit_context", kind: "message", T: Sf },
         { no: 14, name: "model_details", kind: "message", T: zr },
@@ -91,7 +91,7 @@ export function createAIServiceV1Part3(params) {
     static {
       this.fields = v.util.newFieldList(() => [
         { no: 1, name: "context_type", kind: "enum", T: v.getEnumType(WJ) },
-        { no: 2, name: "blocks", kind: "message", T: ed, repeated: !0 },
+        { no: 2, name: "blocks", kind: "message", T: ed, repeated: true },
       ])
     }
     static fromBinary(e, t) {
@@ -141,7 +141,7 @@ var s4n = class S4e extends _ {
           name: "main_symbols_to_analyze_from_go_to_def",
           kind: "message",
           T: ZHe,
-          repeated: !0,
+          repeated: true,
         },
         { no: 4, name: "main_symbol_hover_details", kind: "message", T: JRi },
         {
@@ -149,14 +149,14 @@ var s4n = class S4e extends _ {
           name: "related_symbols",
           kind: "message",
           T: ZHe,
-          repeated: !0,
+          repeated: true,
         },
         {
           no: 6,
           name: "main_symbols_to_analyze_from_implementations",
           kind: "message",
           T: ZHe,
-          repeated: !0,
+          repeated: true,
         },
       ])
     }
@@ -188,7 +188,7 @@ var s4n = class S4e extends _ {
         { no: 1, name: "current_file", kind: "message", T: Ho },
         { no: 2, name: "intent", kind: "message", T: s4n },
         { no: 14, name: "model_details", kind: "message", T: zr },
-        { no: 15, name: "is_detailed", kind: "scalar", T: 8, opt: !0 },
+        { no: 15, name: "is_detailed", kind: "scalar", T: 8, opt: true },
       ])
     }
     static fromBinary(e, t) {
@@ -336,7 +336,7 @@ var s4n = class S4e extends _ {
     }
     static {
       this.fields = v.util.newFieldList(() => [
-        { no: 1, name: "value", kind: "scalar", T: 1, opt: !0 },
+        { no: 1, name: "value", kind: "scalar", T: 1, opt: true },
         { no: 2, name: "tags", kind: "map", K: 9, V: { kind: "scalar", T: 9 } },
       ])
     }
@@ -381,7 +381,7 @@ var s4n = class S4e extends _ {
   },
   l4n = class L4e extends _ {
     constructor(e) {
-      super(), (this.generateTheWholeThing = !1), v.util.initPartial(e, this)
+      super(), (this.generateTheWholeThing = false), v.util.initPartial(e, this)
     }
     static {
       this.runtime = v
@@ -563,14 +563,14 @@ var s4n = class S4e extends _ {
           name: "file_selections",
           kind: "message",
           T: g4n,
-          repeated: !0,
+          repeated: true,
         },
         {
           no: 3,
           name: "file_attachments",
           kind: "message",
           T: p4n,
-          repeated: !0,
+          repeated: true,
         },
       ])
     }
@@ -679,7 +679,7 @@ var s4n = class S4e extends _ {
     constructor(e) {
       super(),
         (this.pathEncryptionKey = ""),
-        (this.repositoryInfoShouldQueryStaging = !1),
+        (this.repositoryInfoShouldQueryStaging = false),
         v.util.initPartial(e, this)
     }
     static {
@@ -756,8 +756,8 @@ var s4n = class S4e extends _ {
     static {
       this.fields = v.util.newFieldList(() => [
         { no: 1, name: "text", kind: "scalar", T: 9 },
-        { no: 2, name: "tool_call", kind: "message", T: EAi, opt: !0 },
-        { no: 3, name: "final_tool_result", kind: "message", T: w4n, opt: !0 },
+        { no: 2, name: "tool_call", kind: "message", T: EAi, opt: true },
+        { no: 3, name: "final_tool_result", kind: "message", T: w4n, opt: true },
       ])
     }
     static fromBinary(e, t) {
@@ -1571,7 +1571,7 @@ var C4n = class q4e extends _ {
     static {
       this.fields = v.util.newFieldList(() => [
         { no: 1, name: "doc_identifier", kind: "scalar", T: 9 },
-        { no: 2, name: "force_reupload", kind: "scalar", T: 8, opt: !0 },
+        { no: 2, name: "force_reupload", kind: "scalar", T: 8, opt: true },
       ])
     }
     static fromBinary(e, t) {
@@ -1600,7 +1600,7 @@ var C4n = class q4e extends _ {
     static {
       this.fields = v.util.newFieldList(() => [
         { no: 1, name: "new_doc_req", kind: "message", T: rTt },
-        { no: 2, name: "force_reupload", kind: "scalar", T: 8, opt: !0 },
+        { no: 2, name: "force_reupload", kind: "scalar", T: 8, opt: true },
       ])
     }
     static fromBinary(e, t) {
@@ -1618,7 +1618,7 @@ var C4n = class q4e extends _ {
   },
   j3i = class z4e extends _ {
     constructor(e) {
-      super(), (this.success = !1), v.util.initPartial(e, this)
+      super(), (this.success = false), v.util.initPartial(e, this)
     }
     static {
       this.runtime = v
@@ -1629,7 +1629,7 @@ var C4n = class q4e extends _ {
     static {
       this.fields = v.util.newFieldList(() => [
         { no: 1, name: "success", kind: "scalar", T: 8 },
-        { no: 2, name: "new_doc_identifier", kind: "scalar", T: 9, opt: !0 },
+        { no: 2, name: "new_doc_identifier", kind: "scalar", T: 9, opt: true },
       ])
     }
     static fromBinary(e, t) {
@@ -1766,15 +1766,15 @@ var C4n = class q4e extends _ {
         (this.docName = ""),
         (this.docUrlRoot = ""),
         (this.docUrlPrefix = ""),
-        (this.isDifferentPrefix = !1),
+        (this.isDifferentPrefix = false),
         (this.createdAt = ""),
         (this.updatedAt = ""),
         (this.lastUploadedAt = ""),
-        (this.showToAllUsers = !1),
+        (this.showToAllUsers = false),
         (this.teamId = 0),
         (this.customInstructions = ""),
         (this.pages = []),
-        (this.publishToTeam = !1),
+        (this.publishToTeam = false),
         v.util.initPartial(e, this)
     }
     static {
@@ -1799,7 +1799,7 @@ var C4n = class q4e extends _ {
         { no: 12, name: "show_to_all_users", kind: "scalar", T: 8 },
         { no: 13, name: "team_id", kind: "scalar", T: 5 },
         { no: 14, name: "custom_instructions", kind: "scalar", T: 9 },
-        { no: 15, name: "pages", kind: "message", T: D4n, repeated: !0 },
+        { no: 15, name: "pages", kind: "message", T: D4n, repeated: true },
         { no: 16, name: "publish_to_team", kind: "scalar", T: 8 },
       ])
     }
@@ -1860,8 +1860,8 @@ var C4n = class q4e extends _ {
     }
     static {
       this.fields = v.util.newFieldList(() => [
-        { no: 1, name: "pages", kind: "scalar", T: 9, repeated: !0 },
-        { no: 2, name: "page_urls", kind: "scalar", T: 9, repeated: !0 },
+        { no: 1, name: "pages", kind: "scalar", T: 9, repeated: true },
+        { no: 2, name: "page_urls", kind: "scalar", T: 9, repeated: true },
       ])
     }
     static fromBinary(e, t) {
@@ -1929,11 +1929,11 @@ var C4n = class q4e extends _ {
       this.fields = v.util.newFieldList(() => [
         { no: 1, name: "doc_identifier", kind: "scalar", T: 9 },
         { no: 2, name: "metadata", kind: "message", T: CMi },
-        { no: 4, name: "ignore_prefixes", kind: "scalar", T: 9, repeated: !0 },
-        { no: 5, name: "ignore_urls", kind: "scalar", T: 9, repeated: !0 },
-        { no: 6, name: "custom_instructions", kind: "scalar", T: 9, opt: !0 },
-        { no: 7, name: "publish_to_team", kind: "scalar", T: 8, opt: !0 },
-        { no: 8, name: "client_handles_uuid", kind: "scalar", T: 8, opt: !0 },
+        { no: 4, name: "ignore_prefixes", kind: "scalar", T: 9, repeated: true },
+        { no: 5, name: "ignore_urls", kind: "scalar", T: 9, repeated: true },
+        { no: 6, name: "custom_instructions", kind: "scalar", T: 9, opt: true },
+        { no: 7, name: "publish_to_team", kind: "scalar", T: 8, opt: true },
+        { no: 8, name: "client_handles_uuid", kind: "scalar", T: 8, opt: true },
       ])
     }
     static fromBinary(e, t) {
@@ -1970,7 +1970,7 @@ var C4n = class q4e extends _ {
         { no: 1, name: "status", kind: "enum", T: v.getEnumType(cP) },
         { no: 2, name: "progress", kind: "scalar", T: 2 },
         { no: 3, name: "similar_doc_identifier", kind: "scalar", T: 9 },
-        { no: 4, name: "uploaded_pages", kind: "scalar", T: 9, repeated: !0 },
+        { no: 4, name: "uploaded_pages", kind: "scalar", T: 9, repeated: true },
         { no: 5, name: "doc_uuid", kind: "scalar", T: 9 },
       ])
     }
@@ -2018,7 +2018,7 @@ var Uje = class sBe extends _ {
     static {
       this.fields = v.util.newFieldList(() => [
         { no: 1, name: "status", kind: "enum", T: v.getEnumType(f0) },
-        { no: 2, name: "uploaded_pages", kind: "scalar", T: 9, repeated: !0 },
+        { no: 2, name: "uploaded_pages", kind: "scalar", T: 9, repeated: true },
       ])
     }
     static fromBinary(e, t) {
@@ -2066,10 +2066,10 @@ var L4n = class nBe extends _ {
           name: "upload_status",
           kind: "enum",
           T: v.getEnumType(_je),
-          opt: !0,
+          opt: true,
         },
-        { no: 2, name: "ignore_index_prefix", kind: "scalar", T: 9, opt: !0 },
-        { no: 3, name: "doc_id", kind: "scalar", T: 5, opt: !0 },
+        { no: 2, name: "ignore_index_prefix", kind: "scalar", T: 9, opt: true },
+        { no: 3, name: "doc_id", kind: "scalar", T: 5, opt: true },
       ])
     }
     static fromBinary(e, t) {
@@ -2097,7 +2097,7 @@ var L4n = class nBe extends _ {
     }
     static {
       this.fields = v.util.newFieldList(() => [
-        { no: 1, name: "responses", kind: "message", T: G3i, repeated: !0 },
+        { no: 1, name: "responses", kind: "message", T: G3i, repeated: true },
       ])
     }
     static fromBinary(e, t) {
@@ -2380,7 +2380,7 @@ var Hje = { id: "statusBar.entry.showTooltip", title: "" },
     hallucinatedFunctionsDebugUrl() {
       return this.c.workspaceUserPersistentStorage
         .hallucinatedFunctionsWorkspaceState
-        ?.hallucinatedFunctionsLocalBackend === !0
+        ?.hallucinatedFunctionsLocalBackend === true
         ? ry + this.localBackendPort()
         : Ckt
     }
@@ -2785,7 +2785,7 @@ var Y3i = class oBe extends _ {
     constructor(e) {
       super(),
         (this.teamId = 0),
-        (this.privacyModeForced = !1),
+        (this.privacyModeForced = false),
         v.util.initPartial(e, this)
     }
     static {
@@ -2869,7 +2869,7 @@ var Y3i = class oBe extends _ {
   },
   V4n = class pBe extends _ {
     constructor(e) {
-      super(), (this.privacyModeForced = !1), v.util.initPartial(e, this)
+      super(), (this.privacyModeForced = false), v.util.initPartial(e, this)
     }
     static {
       this.runtime = v
@@ -2926,7 +2926,7 @@ var Y3i = class oBe extends _ {
   q4n = class bBe extends _ {
     constructor(e) {
       super(),
-        (this.hasValidPaymentMethod = !1),
+        (this.hasValidPaymentMethod = false),
         (this.trialDaysRemaining = 0),
         v.util.initPartial(e, this)
     }
@@ -2968,7 +2968,7 @@ var Y3i = class oBe extends _ {
     static {
       this.fields = v.util.newFieldList(() => [
         { no: 1, name: "name", kind: "scalar", T: 9 },
-        { no: 2, name: "privacy_mode_forced", kind: "scalar", T: 8, opt: !0 },
+        { no: 2, name: "privacy_mode_forced", kind: "scalar", T: 8, opt: true },
       ])
     }
     static fromBinary(e, t) {
@@ -3055,7 +3055,7 @@ var Y3i = class oBe extends _ {
           name: "pricing_history",
           kind: "message",
           T: K4n,
-          repeated: !0,
+          repeated: true,
         },
       ])
     }
@@ -3120,10 +3120,10 @@ var Y3i = class oBe extends _ {
     }
     static {
       this.fields = v.util.newFieldList(() => [
-        { no: 1, name: "team_id", kind: "scalar", T: 5, opt: !0 },
+        { no: 1, name: "team_id", kind: "scalar", T: 5, opt: true },
         { no: 2, name: "month", kind: "scalar", T: 5 },
         { no: 3, name: "year", kind: "scalar", T: 5 },
-        { no: 4, name: "include_usage_events", kind: "scalar", T: 8, opt: !0 },
+        { no: 4, name: "include_usage_events", kind: "scalar", T: 8, opt: true },
       ])
     }
     static fromBinary(e, t) {
@@ -3144,8 +3144,8 @@ var Y3i = class oBe extends _ {
       super(),
         (this.items = []),
         (this.usageEvents = []),
-        (this.isUsageEventsMaybeCutoff = !1),
-        (this.hasUnpaidMidMonthInvoice = !1),
+        (this.isUsageEventsMaybeCutoff = false),
+        (this.hasUnpaidMidMonthInvoice = false),
         v.util.initPartial(e, this)
     }
     static {
@@ -3156,9 +3156,9 @@ var Y3i = class oBe extends _ {
     }
     static {
       this.fields = v.util.newFieldList(() => [
-        { no: 1, name: "items", kind: "message", T: Q4n, repeated: !0 },
+        { no: 1, name: "items", kind: "message", T: Q4n, repeated: true },
         { no: 2, name: "pricing_description", kind: "message", T: Z4n },
-        { no: 3, name: "usage_events", kind: "message", T: gCn, repeated: !0 },
+        { no: 3, name: "usage_events", kind: "message", T: gCn, repeated: true },
         { no: 4, name: "is_usage_events_maybe_cutoff", kind: "scalar", T: 8 },
         { no: 5, name: "has_unpaid_mid_month_invoice", kind: "scalar", T: 8 },
       ])
@@ -3252,7 +3252,7 @@ var Y3i = class oBe extends _ {
     }
     static {
       this.fields = v.util.newFieldList(() => [
-        { no: 1, name: "team_id", kind: "scalar", T: 5, opt: !0 },
+        { no: 1, name: "team_id", kind: "scalar", T: 5, opt: true },
       ])
     }
     static fromBinary(e, t) {
@@ -3272,7 +3272,7 @@ var Y3i = class oBe extends _ {
     constructor(e) {
       super(),
         (this.hardLimit = 0),
-        (this.noUsageBasedAllowed = !1),
+        (this.noUsageBasedAllowed = false),
         v.util.initPartial(e, this)
     }
     static {
@@ -3304,7 +3304,7 @@ var Y3i = class oBe extends _ {
     constructor(e) {
       super(),
         (this.hardLimit = 0),
-        (this.noUsageBasedAllowed = !1),
+        (this.noUsageBasedAllowed = false),
         v.util.initPartial(e, this)
     }
     static {
@@ -3315,7 +3315,7 @@ var Y3i = class oBe extends _ {
     }
     static {
       this.fields = v.util.newFieldList(() => [
-        { no: 1, name: "team_id", kind: "scalar", T: 5, opt: !0 },
+        { no: 1, name: "team_id", kind: "scalar", T: 5, opt: true },
         { no: 2, name: "hard_limit", kind: "scalar", T: 5 },
         { no: 3, name: "no_usage_based_allowed", kind: "scalar", T: 8 },
       ])
@@ -3366,11 +3366,11 @@ var Y3i = class oBe extends _ {
         (this.id = 0),
         (this.role = LI.UNSPECIFIED),
         (this.seats = 0),
-        (this.hasBilling = !1),
+        (this.hasBilling = false),
         (this.requestQuotaPerSeat = 0),
-        (this.privacyModeForced = !1),
-        (this.allowSso = !1),
-        (this.adminOnlyUsagePricing = !1),
+        (this.privacyModeForced = false),
+        (this.allowSso = false),
+        (this.adminOnlyUsagePricing = false),
         v.util.initPartial(e, this)
     }
     static {
@@ -3443,7 +3443,7 @@ var Y3i = class oBe extends _ {
     }
     static {
       this.fields = v.util.newFieldList(() => [
-        { no: 1, name: "teams", kind: "message", T: nBn, repeated: !0 },
+        { no: 1, name: "teams", kind: "message", T: nBn, repeated: true },
       ])
     }
     static fromBinary(e, t) {
@@ -3464,7 +3464,7 @@ var Y3i = class oBe extends _ {
       super(),
         (this.teamId = 0),
         (this.seats = 0),
-        (this.yearly = !1),
+        (this.yearly = false),
         (this.requestQuotaPerSeat = 0),
         v.util.initPartial(e, this)
     }
@@ -3658,7 +3658,7 @@ var Y3i = class oBe extends _ {
     }
     static {
       this.fields = v.util.newFieldList(() => [
-        { no: 1, name: "team_members", kind: "message", T: uBn, repeated: !0 },
+        { no: 1, name: "team_members", kind: "message", T: uBn, repeated: true },
         { no: 2, name: "user_id", kind: "scalar", T: 5 },
       ])
     }
@@ -3862,7 +3862,7 @@ var Y3i = class oBe extends _ {
     static {
       this.fields = v.util.newFieldList(() => [
         { no: 1, name: "name", kind: "scalar", T: 9 },
-        { no: 2, name: "privacy_mode_forced", kind: "scalar", T: 8, opt: !0 },
+        { no: 2, name: "privacy_mode_forced", kind: "scalar", T: 8, opt: true },
       ])
     }
     static fromBinary(e, t) {
@@ -4055,7 +4055,7 @@ var Y3i = class oBe extends _ {
   },
   IBn = class e_e extends _ {
     constructor(e) {
-      super(), (this.success = !1), v.util.initPartial(e, this)
+      super(), (this.success = false), v.util.initPartial(e, this)
     }
     static {
       this.runtime = v
@@ -4117,7 +4117,7 @@ var Y3i = class oBe extends _ {
   },
   TBn = class i_e extends _ {
     constructor(e) {
-      super(), (this.success = !1), v.util.initPartial(e, this)
+      super(), (this.success = false), v.util.initPartial(e, this)
     }
     static {
       this.runtime = v
@@ -4188,7 +4188,7 @@ var Y3i = class oBe extends _ {
           name: "team_member_usage",
           kind: "message",
           T: NBn,
-          repeated: !0,
+          repeated: true,
         },
       ])
     }
@@ -4218,7 +4218,7 @@ var Y3i = class oBe extends _ {
     static {
       this.fields = v.util.newFieldList(() => [
         { no: 1, name: "id", kind: "scalar", T: 5 },
-        { no: 2, name: "usage_data", kind: "message", T: RBn, repeated: !0 },
+        { no: 2, name: "usage_data", kind: "message", T: RBn, repeated: true },
       ])
     }
     static fromBinary(e, t) {
@@ -4259,14 +4259,14 @@ var Y3i = class oBe extends _ {
         { no: 4, name: "max_token_usage", kind: "scalar", T: 5 },
         { no: 5, name: "max_request_usage", kind: "scalar", T: 5 },
         { no: 6, name: "last_usage", kind: "scalar", T: 9 },
-        { no: 7, name: "copilot_usage", kind: "scalar", T: 5, opt: !0 },
-        { no: 8, name: "docs_count", kind: "scalar", T: 5, opt: !0 },
+        { no: 7, name: "copilot_usage", kind: "scalar", T: 5, opt: true },
+        { no: 8, name: "docs_count", kind: "scalar", T: 5, opt: true },
         {
           no: 9,
           name: "copilot_accepted_usage",
           kind: "scalar",
           T: 5,
-          opt: !0,
+          opt: true,
         },
       ])
     }
@@ -4397,7 +4397,7 @@ var $Bn = class c_e extends _ {
           name: "daily_team_member_usage",
           kind: "message",
           T: OBn,
-          repeated: !0,
+          repeated: true,
         },
       ])
     }
@@ -4435,9 +4435,9 @@ var $Bn = class c_e extends _ {
           name: "daily_usage_data",
           kind: "message",
           T: BBn,
-          repeated: !0,
+          repeated: true,
         },
-        { no: 3, name: "last_usage", kind: "scalar", T: 9, opt: !0 },
+        { no: 3, name: "last_usage", kind: "scalar", T: 9, opt: true },
       ])
     }
     static fromBinary(e, t) {
@@ -4469,13 +4469,13 @@ var $Bn = class c_e extends _ {
     static {
       this.fields = v.util.newFieldList(() => [
         { no: 1, name: "date", kind: "scalar", T: 9 },
-        { no: 4, name: "copilot_usage", kind: "scalar", T: 5, opt: !0 },
+        { no: 4, name: "copilot_usage", kind: "scalar", T: 5, opt: true },
         {
           no: 2,
           name: "model_usage_data",
           kind: "message",
           T: _Bn,
-          repeated: !0,
+          repeated: true,
         },
       ])
     }
@@ -4665,7 +4665,7 @@ var HBn = class p_e extends _ {
     constructor(e) {
       super(),
         (this.teamId = 0),
-        (this.adminOnlyUsagePricing = !1),
+        (this.adminOnlyUsagePricing = false),
         v.util.initPartial(e, this)
     }
     static {
@@ -4749,7 +4749,7 @@ var HBn = class p_e extends _ {
   },
   GBn = class C_e extends _ {
     constructor(e) {
-      super(), (this.eligible = !1), v.util.initPartial(e, this)
+      super(), (this.eligible = false), v.util.initPartial(e, this)
     }
     static {
       this.runtime = v
@@ -4860,7 +4860,7 @@ var HBn = class p_e extends _ {
   XBn = class E_e extends _ {
     constructor(e) {
       super(),
-        (this.usageBasedPremiumRequests = !1),
+        (this.usageBasedPremiumRequests = false),
         v.util.initPartial(e, this)
     }
     static {
@@ -4891,7 +4891,7 @@ var HBn = class p_e extends _ {
     constructor(e) {
       super(),
         (this.teamId = 0),
-        (this.usageBasedPremiumRequests = !1),
+        (this.usageBasedPremiumRequests = false),
         v.util.initPartial(e, this)
     }
     static {
@@ -5038,9 +5038,9 @@ var HBn = class p_e extends _ {
   s_n = class N_e extends _ {
     constructor(e) {
       super(),
-        (this.isValid = !1),
-        (this.userIsEligible = !1),
-        (this.maxRedemptions = !1),
+        (this.isValid = false),
+        (this.userIsEligible = false),
+        (this.maxRedemptions = false),
         v.util.initPartial(e, this)
     }
     static {
@@ -5109,7 +5109,7 @@ var HBn = class p_e extends _ {
     }
     static {
       this.fields = v.util.newFieldList(() => [
-        { no: 1, name: "repos", kind: "message", T: o_n, repeated: !0 },
+        { no: 1, name: "repos", kind: "message", T: o_n, repeated: true },
       ])
     }
     static fromBinary(e, t) {
@@ -5143,7 +5143,7 @@ var HBn = class p_e extends _ {
       this.fields = v.util.newFieldList(() => [
         { no: 1, name: "id", kind: "scalar", T: 5 },
         { no: 2, name: "url", kind: "scalar", T: 9 },
-        { no: 3, name: "patterns", kind: "message", T: a_n, repeated: !0 },
+        { no: 3, name: "patterns", kind: "message", T: a_n, repeated: true },
       ])
     }
     static fromBinary(e, t) {
@@ -5618,12 +5618,12 @@ var HBn = class p_e extends _ {
     static {
       this.fields = v.util.newFieldList(() => [
         { no: 2, name: "id", kind: "scalar", T: 9 },
-        { no: 3, name: "email", kind: "scalar", T: 9, opt: !0 },
-        { no: 4, name: "email_verified", kind: "scalar", T: 8, opt: !0 },
-        { no: 5, name: "first_name", kind: "scalar", T: 9, opt: !0 },
-        { no: 6, name: "last_name", kind: "scalar", T: 9, opt: !0 },
-        { no: 7, name: "created_at", kind: "scalar", T: 9, opt: !0 },
-        { no: 8, name: "updated_at", kind: "scalar", T: 9, opt: !0 },
+        { no: 3, name: "email", kind: "scalar", T: 9, opt: true },
+        { no: 4, name: "email_verified", kind: "scalar", T: 8, opt: true },
+        { no: 5, name: "first_name", kind: "scalar", T: 9, opt: true },
+        { no: 6, name: "last_name", kind: "scalar", T: 9, opt: true },
+        { no: 7, name: "created_at", kind: "scalar", T: 9, opt: true },
+        { no: 8, name: "updated_at", kind: "scalar", T: 9, opt: true },
       ])
     }
     static fromBinary(e, t) {
@@ -5653,8 +5653,8 @@ var HBn = class p_e extends _ {
       this.fields = v.util.newFieldList(() => [
         { no: 1, name: "user", kind: "message", T: e9i },
         { no: 2, name: "destination", kind: "enum", T: v.getEnumType(Hle) },
-        { no: 3, name: "stub", kind: "scalar", T: 9, opt: !0 },
-        { no: 4, name: "code", kind: "scalar", T: 9, opt: !0 },
+        { no: 3, name: "stub", kind: "scalar", T: 9, opt: true },
+        { no: 4, name: "code", kind: "scalar", T: 9, opt: true },
       ])
     }
     static fromBinary(e, t) {
@@ -5696,7 +5696,7 @@ var b_n = class z_e extends _ {
     static {
       this.fields = v.util.newFieldList(() => [
         { no: 1, name: "session_token", kind: "scalar", T: 9 },
-        { no: 2, name: "id", kind: "scalar", T: 9, opt: !0 },
+        { no: 2, name: "id", kind: "scalar", T: 9, opt: true },
       ])
     }
     static fromBinary(e, t) {
@@ -5743,7 +5743,7 @@ var b_n = class z_e extends _ {
   },
   y_n = class J_e extends _ {
     constructor(e) {
-      super(), (this.valid = !1), v.util.initPartial(e, this)
+      super(), (this.valid = false), v.util.initPartial(e, this)
     }
     static {
       this.runtime = v
@@ -5809,7 +5809,7 @@ var b_n = class z_e extends _ {
     }
     static {
       this.fields = v.util.newFieldList(() => [
-        { no: 1, name: "customer_id", kind: "scalar", T: 9, opt: !0 },
+        { no: 1, name: "customer_id", kind: "scalar", T: 9, opt: true },
       ])
     }
     static fromBinary(e, t) {
@@ -5828,8 +5828,8 @@ var b_n = class z_e extends _ {
   S_n = class X_e extends _ {
     constructor(e) {
       super(),
-        (this.isUsingCurrentAndOnboardingFormat = !1),
-        (this.privacy = !1),
+        (this.isUsingCurrentAndOnboardingFormat = false),
+        (this.privacy = false),
         v.util.initPartial(e, this)
     }
     static {
@@ -5840,13 +5840,13 @@ var b_n = class z_e extends _ {
     }
     static {
       this.fields = v.util.newFieldList(() => [
-        { no: 2, name: "current_privacy_mode", kind: "scalar", T: 8, opt: !0 },
+        { no: 2, name: "current_privacy_mode", kind: "scalar", T: 8, opt: true },
         {
           no: 3,
           name: "onboarding_privacy_mode",
           kind: "scalar",
           T: 8,
-          opt: !0,
+          opt: true,
         },
         {
           no: 4,
@@ -5999,7 +5999,7 @@ var I_n = class t5e extends _ {
   },
   D_n = class i5e extends _ {
     constructor(e) {
-      super(), (this.valid = !1), v.util.initPartial(e, this)
+      super(), (this.valid = false), v.util.initPartial(e, this)
     }
     static {
       this.runtime = v
@@ -6061,7 +6061,7 @@ var I_n = class t5e extends _ {
   },
   P_n = class n5e extends _ {
     constructor(e) {
-      super(), (this.canDownload = !1), v.util.initPartial(e, this)
+      super(), (this.canDownload = false), v.util.initPartial(e, this)
     }
     static {
       this.runtime = v
@@ -6089,7 +6089,7 @@ var I_n = class t5e extends _ {
   },
   L_n = class r5e extends _ {
     constructor(e) {
-      super(), (this.useTurbo = !1), v.util.initPartial(e, this)
+      super(), (this.useTurbo = false), v.util.initPartial(e, this)
     }
     static {
       this.runtime = v

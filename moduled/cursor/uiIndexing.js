@@ -16,20 +16,20 @@ export function createUIIndexing(params) {
   qtr = X("<div class=docs-button title=Edit><span>"),
   jtr = X("<a>")
   function y4t(i) {
-    return new Date(i).toLocaleString(void 0, {
+    return new Date(i).toLocaleString(undefined, {
       month: "numeric",
       day: "numeric",
       year: "2-digit",
       hour: "numeric",
       minute: "2-digit",
-      hour12: !0,
+      hour12: true,
     })
   }
   function ztr(i) {
     const e = dt(),
       [t, s] = le(""),
       [n, r] = le(null),
-      [o, a] = le(!1),
+      [o, a] = le(false),
       l = (m) => `${m.identifier}${m.name}`
     De(() => {
       const m = (b) => {
@@ -41,7 +41,7 @@ export function createUIIndexing(params) {
         })
     })
     const c = (m) => {
-        a(!0), s(m.name)
+        a(true), s(m.name)
         let b = 0
         const y = () => {
           p ? p.focus() : b < 3 && (b++, setTimeout(y, 50))
@@ -54,13 +54,13 @@ export function createUIIndexing(params) {
             "personalDocs",
             (b) => b.map((y) => (l(y) === l(m) ? { ...y, name: t() } : y)),
           ),
-          a(!1),
+          a(false),
           s("")
       },
       u = Vle(async (m, b) => {
         e.aiDocsService.rescrapeDocs(m, b)
       }, 1e3),
-      [d, g] = le(!1)
+      [d, g] = le(false)
     let p
     return (() => {
       var m = Vtr(),
@@ -75,8 +75,8 @@ export function createUIIndexing(params) {
         D = k.nextSibling,
         P = D.firstChild
       return (
-        m.addEventListener("mouseleave", () => g(!1)),
-        m.addEventListener("mouseenter", () => g(!0)),
+        m.addEventListener("mouseleave", () => g(false)),
+        m.addEventListener("mouseenter", () => g(true)),
         m.style.setProperty("display", "flex"),
         m.style.setProperty("gap", "8px"),
         m.style.setProperty("justify-content", "space-between"),
@@ -287,7 +287,7 @@ export function createUIIndexing(params) {
             get children() {
               return I(Wo, {
                 scrollingDirection: "vertical",
-                nonReactiveElementOptions: { alwaysConsumeMouseWheel: !0 },
+                nonReactiveElementOptions: { alwaysConsumeMouseWheel: true },
                 style: {
                   position: "absolute",
                   "background-color": "var(--vscode-editor-background)",
@@ -355,7 +355,7 @@ export function createUIIndexing(params) {
                                     z
                                   )
                                 },
-                                { e: void 0, t: void 0 },
+                                { e: undefined, t: undefined },
                               ),
                               B
                             )
@@ -426,16 +426,16 @@ export function createUIIndexing(params) {
             )
           },
           {
-            e: void 0,
-            t: void 0,
-            a: void 0,
-            o: void 0,
-            i: void 0,
-            n: void 0,
-            s: void 0,
-            h: void 0,
-            r: void 0,
-            d: void 0,
+            e: undefined,
+            t: undefined,
+            a: undefined,
+            o: undefined,
+            i: undefined,
+            n: undefined,
+            s: undefined,
+            h: undefined,
+            r: undefined,
+            d: undefined,
           },
         ),
         m

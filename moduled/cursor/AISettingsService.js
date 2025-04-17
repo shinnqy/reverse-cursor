@@ -41,15 +41,15 @@ export function createAISettingsService(params) {
     }
   },
   x9i = [
-    { name: "gpt-4o", defaultOn: !0 },
-    { name: "gpt-4", defaultOn: !1 },
-    { name: "claude-3-opus", defaultOn: !1 },
-    { name: "claude-3.5-sonnet", defaultOn: !0 },
-    { name: "cursor-small", defaultOn: !1 },
-    { name: "claude-3-5-sonnet-200k", defaultOn: !0, isLongContextOnly: !0 },
-    { name: "claude-3-haiku-200k", defaultOn: !0, isLongContextOnly: !0 },
-    { name: "gemini-1.5-flash-500k", defaultOn: !0, isLongContextOnly: !0 },
-    { name: "gpt-4o-128k", defaultOn: !0, isLongContextOnly: !0 },
+    { name: "gpt-4o", defaultOn: true },
+    { name: "gpt-4", defaultOn: false },
+    { name: "claude-3-opus", defaultOn: false },
+    { name: "claude-3.5-sonnet", defaultOn: true },
+    { name: "cursor-small", defaultOn: false },
+    { name: "claude-3-5-sonnet-200k", defaultOn: true, isLongContextOnly: true },
+    { name: "claude-3-haiku-200k", defaultOn: true, isLongContextOnly: true },
+    { name: "gemini-1.5-flash-500k", defaultOn: true, isLongContextOnly: true },
+    { name: "gpt-4o-128k", defaultOn: true, isLongContextOnly: true },
   ],
   k9i = [
     "gpt-3.5-turbo",
@@ -69,7 +69,7 @@ export function createAISettingsService(params) {
     composer: "composerModel",
   },
   Q_n = (i, e) =>
-    i === void 0 ? "openAIModel" : e ? "longContextOpenAIModel" : X_n[i],
+    i === undefined ? "openAIModel" : e ? "longContextOpenAIModel" : X_n[i],
   zle = (i, e, t, s) => {
     const n = Q_n(s, t),
       r = i.applicationUserPersistentStorage.aiSettings.regularChatModel,
@@ -94,33 +94,33 @@ export function createAISettingsService(params) {
         (this.loadData = () => {
           if (
             this.f.applicationUserPersistentStorage
-              .havePerformedSettingsServiceMigration !== !0
+              .havePerformedSettingsServiceMigration !== true
           ) {
             this.f.setApplicationUserPersistentStorage(
               "havePerformedSettingsServiceMigration",
-              !0,
+              true,
             )
             const r = this.c.get(this.a, -1)
             if (r) {
               const o = JSON.parse(r)
-              o.useOpenAIKey !== void 0 &&
+              o.useOpenAIKey !== undefined &&
                 this.f.setApplicationUserPersistentStorage(
                   "useOpenAIKey",
                   o.useOpenAIKey,
                 ),
-                o.availableModels !== void 0 &&
+                o.availableModels !== undefined &&
                   this.f.setApplicationUserPersistentStorage(
                     "availableAPIKeyModels",
                     o.availableModels,
                   ),
-                o.noStorageMode !== void 0 &&
+                o.noStorageMode !== undefined &&
                   this.f.setApplicationUserPersistentStorage(
                     "noStorageMode",
                     o.noStorageMode ||
                       (this.g.membershipType() === _n.ENTERPRISE &&
                         this.g.shouldHaveGhostModeFromEnterprise()),
                   ),
-                o.watcherEnabled !== void 0 &&
+                o.watcherEnabled !== undefined &&
                   this.f.setApplicationUserPersistentStorage(
                     "watcherEnabled",
                     o.watcherEnabled,
@@ -129,7 +129,7 @@ export function createAISettingsService(params) {
           }
         }),
         (this.getUseOpenAIKey = () =>
-          this.f.applicationUserPersistentStorage.useOpenAIKey ?? !1),
+          this.f.applicationUserPersistentStorage.useOpenAIKey ?? false),
         (this.getModel = () =>
           this.f.applicationUserPersistentStorage.aiSettings.openAIModel ?? W$),
         (this.getLongContextModel = () =>
@@ -250,11 +250,11 @@ export function createAISettingsService(params) {
           const o =
             this.f.applicationUserPersistentStorage.aiSettings
               .modelOverrideEnabled
-          if (o !== void 0) for (const l of o) r.push(l)
+          if (o !== undefined) for (const l of o) r.push(l)
           const a =
             this.f.applicationUserPersistentStorage.aiSettings
               .modelOverrideDisabled
-          if (a !== void 0) for (const l of a) r.push(l)
+          if (a !== undefined) for (const l of a) r.push(l)
           return (r = [...new Set(r)]), r.sort(), r
         }),
         (this.setChatDesiredTokenLimit = (r) => {}),
@@ -264,13 +264,13 @@ export function createAISettingsService(params) {
             ...this.f.applicationUserPersistentStorage.aiSettings,
             privateFTOpenAIModel: r,
           }),
-          !0
+          true
         )),
         (this.setWatcherEnabled = (r) => {
           this.f.setApplicationUserPersistentStorage("watcherEnabled", r)
           for (let o of this.watcherEnabledListeners) o(r)
           this.f.applicationUserPersistentStorage.watcherEnabled ||
-            this.f.setApplicationUserPersistentStorage("hasSilencedLinter", !0)
+            this.f.setApplicationUserPersistentStorage("hasSilencedLinter", true)
         }),
         (this.watcherEnabledListeners = []),
         (this.onWatcherEnabledChanged = (r) => (
@@ -336,11 +336,11 @@ export function createAISettingsService(params) {
                   this.f.applicationUserPersistentStorage.isDebuggerMode,
                 o = this.getAvailableModelsReactive({
                   isLongContextOrDebuggerMode: r,
-                  isChat: !0,
+                  isChat: true,
                 }),
                 a = this.getAvailableModelsReactive({
                   isLongContextOrDebuggerMode: r,
-                  isChat: !1,
+                  isChat: false,
                 })
               return {
                 availableModelsChat: o,
@@ -352,19 +352,19 @@ export function createAISettingsService(params) {
           onChange: ({
             deps: [{ availableModelsChat: r, availableModelsNonChat: o }],
           }) => {
-            zle(this.f, r, !1, "regular-chat"),
-              zle(this.f, o, !1, "cmd-k"),
-              zle(this.f, o, !1, "terminal-cmd-k"),
-              zle(this.f, o, !1)
+            zle(this.f, r, false, "regular-chat"),
+              zle(this.f, o, false, "cmd-k"),
+              zle(this.f, o, false, "terminal-cmd-k"),
+              zle(this.f, o, false)
           },
-          runNowToo: !0,
+          runNowToo: true,
         })
     }
     getUseApiKeyForModel(e) {
       return r9i(e) && this.f.applicationUserPersistentStorage.useClaudeKey
         ? this.f.applicationUserPersistentStorage.useClaudeKey
         : o9i(e) && this.f.applicationUserPersistentStorage.useGoogleKey
-          ? !0
+          ? true
           : this.getUseOpenAIKey()
     }
     getAvailableDefaultModels() {
@@ -382,21 +382,21 @@ export function createAISettingsService(params) {
         : (t = [
             ...this.getAvailableDefaultModels()
               .filter((r) => {
-                if (!r.defaultOn) return !1
-                const o = e?.isLongContextOrDebuggerMode ?? !1
-                if (r.isLongContextOnly && !o) return !1
-                const a = e?.isChat ?? !1
+                if (!r.defaultOn) return false
+                const o = e?.isLongContextOrDebuggerMode ?? false
+                if (r.isLongContextOnly && !o) return false
+                const a = e?.isChat ?? false
                 return !(r.isChatOnly && !a)
               })
               .map((r) => r.name),
           ])
       const s =
         this.f.applicationUserPersistentStorage.aiSettings.modelOverrideEnabled
-      if (s !== void 0) for (const r of s) t.includes(r) || t.push(r)
+      if (s !== undefined) for (const r of s) t.includes(r) || t.push(r)
       const n =
         this.f.applicationUserPersistentStorage.aiSettings.modelOverrideDisabled
       return (
-        n !== void 0 && (t = t.filter((r) => !n.includes(r))),
+        n !== undefined && (t = t.filter((r) => !n.includes(r))),
         e?.isLongContextOrDebuggerMode
           ? (t = t.filter((r) => this.h(r)))
           : (t = t.filter(
@@ -482,7 +482,7 @@ export function createAISettingsService(params) {
     _didChangeAvailableModels() {
       const e = this.getAvailableModelsReactive()
       for (let t of this.availableModelsListeners) t(e)
-      if (e.includes(this.getModel()) === !1)
+      if (e.includes(this.getModel()) === false)
         if (e.includes(W$)) this._setOpenAIModel(W$)
         else {
           if (e.length === 0) return
@@ -503,10 +503,10 @@ var DTt = class extends ITt {
         for (let o of this.closePopupListeners) o()
       }),
       this.g.addLoginChangedListener((o) => {
-        this.g.membershipType() === _n.PRO && this.setUseOpenAIKey(!1)
+        this.g.membershipType() === _n.PRO && this.setUseOpenAIKey(false)
       }),
       this.g.addSubscriptionChangedListener((o) => {
-        o !== _n.FREE && this.setUseOpenAIKey(!1)
+        o !== _n.FREE && this.setUseOpenAIKey(false)
       })
   }
   setModel(e) {
@@ -516,7 +516,7 @@ var DTt = class extends ITt {
       this.setCmdKModel(e),
       this.setTerminalCmdKModel(e),
       this.setLongContextModel(e),
-      !0
+      true
     )
   }
   setRegularChatModel(e) {
@@ -526,13 +526,13 @@ var DTt = class extends ITt {
         "regularChatModel",
         e,
       ),
-      !0
+      true
     )
   }
   setCmdKModel(e) {
     return (
       this.f.setApplicationUserPersistentStorage("aiSettings", "cmdKModel", e),
-      !0
+      true
     )
   }
   setTerminalCmdKModel(e) {
@@ -542,7 +542,7 @@ var DTt = class extends ITt {
         "terminalCmdKModel",
         e,
       ),
-      !0
+      true
     )
   }
   setComposerModel(e) {
@@ -552,12 +552,12 @@ var DTt = class extends ITt {
         "composerModel",
         e,
       ),
-      !0
+      true
     )
   }
   setLongContextModel(e) {
     const t = this.getLongContextModel()
-    return this._setLongContextOpenAIModel(e), !0
+    return this._setLongContextOpenAIModel(e), true
   }
   async getApiKey() {
     return await this.g.openAIKey()
@@ -574,28 +574,28 @@ var DTt = class extends ITt {
     }
   }
   async setUseOpenAIKey(e) {
-    if (e === !1)
-      return this._setUseOpenAIKey(!1), this._didChangeAvailableModels(), !1
+    if (e === false)
+      return this._setUseOpenAIKey(false), this._didChangeAvailableModels(), false
     {
-      this._setUseOpenAIKey(!0)
+      this._setUseOpenAIKey(true)
       const t = await this.g.openAIKey()
       if (t) {
         const { models: s } = await this.q(t)
-        return this._setAvailableModels(s), !0
+        return this._setAvailableModels(s), true
       } else
-        return this._setUseOpenAIKey(!1), this._didChangeAvailableModels(), !1
+        return this._setUseOpenAIKey(false), this._didChangeAvailableModels(), false
     }
   }
   async setOpenAIKey(e) {
     const t = await this.r(e)
-    if (t !== !0) return t
+    if (t !== true) return t
     const { models: s } = await this.q(e)
     return (
       this._setAvailableModels(s),
-      this._setUseOpenAIKey(!0),
+      this._setUseOpenAIKey(true),
       s.length !== 0 && this._setOpenAIModel(s[s.length - 1]),
       this.g.storeOpenAIKey(e),
-      !0
+      true
     )
   }
   async q(e) {
@@ -645,10 +645,10 @@ var DTt = class extends ITt {
           ],
           temperature: 1,
           max_tokens: 10,
-          stream: !1,
+          stream: false,
         }),
       })
-      if (s.status === 200) return !0
+      if (s.status === 200) return true
       {
         const n = await Promise.race([
           s.text(),
@@ -759,7 +759,7 @@ j(
         super({
           id: jne,
           title: { value: "Switch to model", original: "Switch to model" },
-          f1: !1,
+          f1: false,
         })
       }
       async run(i, e, t, s) {
@@ -784,7 +784,7 @@ j(
         super({
           id: jne + ".gpt4",
           title: { value: "Switch to gpt-4", original: "Switch to gpt-4" },
-          f1: !0,
+          f1: true,
         })
       }
       async run(i) {
@@ -801,7 +801,7 @@ j(
             value: "Switch to cursor-small",
             original: "Switch to cursor-small",
           },
-          f1: !1,
+          f1: false,
         })
       }
       async run(i) {
@@ -814,7 +814,7 @@ function dP(i) {
   ;((s) => {
     s.details = s.details.map((n) => {
       const r = "value" in n && n.value instanceof Uint8Array
-      if ("value" in n && r === !1) {
+      if ("value" in n && r === false) {
         const o = Object.values(n.value)
         n.value = Uint8Array.from(o)
       }
@@ -845,7 +845,7 @@ var TTt = class {
   }
   tryRerun(e) {
     const t = this.okToRerun()
-    this.a.push(Date.now()), (e !== !0 || t) && this.b !== void 0 && this.b()
+    this.a.push(Date.now()), (e !== true || t) && this.b !== undefined && this.b()
   }
   okToRerun() {
     const s = Date.now(),
@@ -854,9 +854,9 @@ var TTt = class {
     return (this.a = this.a.slice(-2)), r
   }
   shouldShowImmediateErrorMessage(e) {
-    if (!(e instanceof du) || e.code === Tg.Canceled) return !1
+    if (!(e instanceof du) || e.code === Tg.Canceled) return false
     const t = dP(e)
-    if (!t) return !0
+    if (!t) return true
     const s = t.error
     return !(
       s === Er.NOT_LOGGED_IN ||
@@ -869,11 +869,11 @@ var TTt = class {
       s === Er.BAD_MODEL_NAME ||
       s === Er.AUTH_TOKEN_EXPIRED ||
       s === Er.MAX_TOKENS ||
-      t.details?.shouldShowImmediateError === !1
+      t.details?.shouldShowImmediateError === false
     )
   }
   n(e, t, s, n, r, o, a) {
-    if (t?.details?.shouldShowImmediateError === !1) return
+    if (t?.details?.shouldShowImmediateError === false) return
     if (!t?.isExpected) {
       const h = n.rawMessage ?? "unknown error",
         u = {
@@ -928,7 +928,7 @@ error:${JSON.stringify(n)}`,
     }
     let c =
       l === "internet"
-        ? { case: l, generationUUID: r, errorCode: void 0, source: o, error: t }
+        ? { case: l, generationUUID: r, errorCode: undefined, source: o, error: t }
         : { case: l, source: o, error: t }
     this.j.setNonPersistentStorage("showingErrorMetadata", c)
   }
@@ -939,7 +939,7 @@ error:${JSON.stringify(n)}`,
       c = a
     if (
       ((this.b = o),
-      this.j.setNonPersistentStorage("showingErrorHasRerun", o !== void 0),
+      this.j.setNonPersistentStorage("showingErrorHasRerun", o !== undefined),
       this.shouldShowImmediateErrorMessage(e))
     ) {
       this.n(l, c, n, e, s, r, o)
@@ -984,7 +984,7 @@ error:${JSON.stringify(n)}`,
               })
           })
         : l === Er.MAX_TOKENS
-          ? this.j.setNonPersistentStorage("maxTokensHit", !0)
+          ? this.j.setNonPersistentStorage("maxTokensHit", true)
           : this.n(l, c, n, e, s, "other", o)
   }
 }
@@ -1012,13 +1012,13 @@ var rU = Re("reducerService"),
       this.c.setWorkspaceUserPersistentStorage(
         "onboardingMetadata",
         "shouldAskToIndex",
-        !1,
+        false,
       )
     }
     addPersistentChatMetadataIfNotExists(e, t) {
       this.c.workspaceUserPersistentStorage.persistentChatMetadata.find(
         (n) => n.bubbleId === e && n.tabId === t,
-      ) === void 0 &&
+      ) === undefined &&
         this.c.setWorkspaceUserPersistentStorage(
           "persistentChatMetadata",
           (n) => [
@@ -1043,7 +1043,7 @@ var rU = Re("reducerService"),
               : {
                   ...n,
                   intermediateChunks: [],
-                  intermediateSectionType: void 0,
+                  intermediateSectionType: undefined,
                 },
           )
         },
@@ -1066,9 +1066,9 @@ var rU = Re("reducerService"),
               tabId: t,
               ...s,
               intermediateChunks: [],
-              intermediateSectionType: void 0,
+              intermediateSectionType: undefined,
               docsCitations: [],
-              predictedContext: void 0,
+              predictedContext: undefined,
             },
           ],
         )
@@ -1085,7 +1085,7 @@ var rU = Re("reducerService"),
             tabId: t,
             ...n,
             intermediateChunks: [],
-            intermediateSectionType: void 0,
+            intermediateSectionType: undefined,
             steps: [],
           },
         ]),
@@ -1146,7 +1146,7 @@ var rU = Re("reducerService"),
                 usedCodebase: {
                   ...n.usedCodebase,
                   fileResults: t?.map((r) =>
-                    r.file !== void 0
+                    r.file !== undefined
                       ? {
                           file: {
                             relativeWorkspacePath:
@@ -1175,7 +1175,7 @@ var rU = Re("reducerService"),
           s.metadata.bubbleId === e &&
           s.metadata.tabId === t,
         "metadata",
-        (s) => (s?.type !== "chat" ? s : { ...s, intentDetermined: !0 }),
+        (s) => (s?.type !== "chat" ? s : { ...s, intentDetermined: true }),
       )
     }
   }
@@ -1194,7 +1194,7 @@ var I9i
     (i[(i.EDITOR = 2)] = "EDITOR")
 })(I9i || (I9i = {}))
 function e5n(i, e, t) {
-  return D1(i, e, void 0, t)
+  return D1(i, e, undefined, t)
 }
 function D1(i, e, t, s, n) {
   const r = e.slice(),
@@ -1203,7 +1203,7 @@ function D1(i, e, t, s, n) {
   for (
     ;
     r.length > 0 &&
-    ((c = r.pop()), (l = iTt(a, r)), l === void 0 && t !== void 0);
+    ((c = r.pop()), (l = iTt(a, r)), l === undefined && t !== undefined);
 
   )
     typeof c == "string" ? (t = { [c]: t }) : (t = [t])
@@ -1214,8 +1214,8 @@ function D1(i, e, t, s, n) {
       Array.isArray(l.children)
     ) {
       const h = iTt(l, [c])
-      if (h !== void 0)
-        if (t === void 0) {
+      if (h !== undefined)
+        if (t === undefined) {
           if (!h.parent) throw new Error("Malformed AST")
           const u = l.children.indexOf(h.parent)
           let d,
@@ -1234,7 +1234,7 @@ function D1(i, e, t, s, n) {
             s,
           )
       else {
-        if (t === void 0) return []
+        if (t === undefined) return []
         const u = `${JSON.stringify(c)}: ${JSON.stringify(t)}`,
           d = n
             ? n(l.children.map((p) => p.children[0].value))
@@ -1254,7 +1254,7 @@ function D1(i, e, t, s, n) {
       typeof c == "number" &&
       Array.isArray(l.children)
     )
-      if (t !== void 0) {
+      if (t !== undefined) {
         const h = `${JSON.stringify(t)}`
         let u
         if (l.children.length === 0 || c === 0)
@@ -1293,7 +1293,7 @@ function D1(i, e, t, s, n) {
         `Can not add ${typeof c != "number" ? "index" : "property"} to parent of type ${l.type}`,
       )
   else
-    return t === void 0
+    return t === undefined
       ? []
       : oU(
           i,
@@ -1360,12 +1360,12 @@ function T9i(i) {
   return typeof e?.uri == "string" && (!e.name || typeof e.name == "string")
 }
 function ATt(i, e, t, s, n) {
-  if (i.scheme !== s.scheme) return { name: t, uri: i.toString(!0) }
-  let r = e ? void 0 : n.relativePath(s, i)
-  if (r !== void 0) r.length === 0 ? (r = ".") : ms && (r = P9i(r))
+  if (i.scheme !== s.scheme) return { name: t, uri: i.toString(true) }
+  let r = e ? undefined : n.relativePath(s, i)
+  if (r !== undefined) r.length === 0 ? (r = ".") : ms && (r = P9i(r))
   else if (i.scheme === ce.file) (r = i.fsPath), ms && (r = P9i(r))
   else if (n.isEqualAuthority(i.authority, s.authority)) r = i.path
-  else return { name: t, uri: i.toString(!0) }
+  else return { name: t, uri: i.toString(true) }
   return { name: t, path: r }
 }
 function P9i(i) {
@@ -1404,10 +1404,10 @@ function L9i(i, e, t, s, n) {
   for (const d of r.folders) {
     const g = Jje(d) ? n.resolvePath(o, d.path) : U.parse(d.uri)
     let p
-    t ? (p = !1) : (p = !Jje(d) || Ny(d.path)), l.push(ATt(g, p, d.name, a, n))
+    t ? (p = false) : (p = !Jje(d) || Ny(d.path)), l.push(ATt(g, p, d.name, a, n))
   }
   const c = {
-      insertSpaces: !1,
+      insertSpaces: false,
       tabSize: 4,
       eol:
         fo || wt
@@ -1518,7 +1518,7 @@ var T1 = Re("fastContextService"),
       return []
     }
     async getEmbeddingChunks(e, t, s) {
-      return (await this.m.parallelSearch(e, 5, void 0, { globFilter: s })).map(
+      return (await this.m.parallelSearch(e, 5, undefined, { globFilter: s })).map(
         (r) => ({
           relativeWorkspacePath: r.codeBlock?.relativeWorkspacePath ?? "",
           contents: r.codeBlock?.contents ?? "",
@@ -1680,7 +1680,7 @@ var T1 = Re("fastContextService"),
     }
     async getImports() {
       const e = this.s()
-      if (e === void 0) return []
+      if (e === undefined) return []
       const { model: t } = e,
         s = new oi(),
         o = (await this.j.getOrCreate(t, s.token)).getTopLevelSymbols()
@@ -1708,7 +1708,7 @@ var T1 = Re("fastContextService"),
     async getNonEmbeddingChunks(e, t) {
       try {
         const s = await this.getRecentChunks()
-        return t !== void 0 ? s.slice(0, t) : s.slice(0, 5)
+        return t !== undefined ? s.slice(0, t) : s.slice(0, 5)
       } catch (s) {
         return console.error(s), []
       }
@@ -1736,7 +1736,7 @@ var T1 = Re("fastContextService"),
         query: { query: e },
         relativeWorkspacePath: t,
         timestampDouble: Date.now(),
-        cmdkWasAccepted: void 0,
+        cmdkWasAccepted: undefined,
       })
     }
     getCmdKQueryHistoryInAllContextSessions() {
@@ -1776,7 +1776,7 @@ var A_ = Re("aiUtilsService"),
     }
     getWorkspaceRootPath() {
       const e = this.a.getWorkspace().folders
-      return e.length > 0 ? e[0].uri.path : void 0
+      return e.length > 0 ? e[0].uri.path : undefined
     }
   }
 ;(FTt = __decorate([__param(0, it)], FTt)), Ve(A_, FTt, 1);

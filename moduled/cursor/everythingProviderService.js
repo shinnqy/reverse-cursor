@@ -12,13 +12,13 @@ export function createEverythingProviderService(params) {
         this.provider = i
       }
       unregisterEverythingProvider() {
-        this.provider = void 0
+        this.provider = undefined
       }
       registerEverythingProviderAllLocal(i) {
         this.onlyLocalProvider = i
       }
       unregisterEverythingProviderAllLocal() {
-        this.onlyLocalProvider = void 0
+        this.onlyLocalProvider = undefined
       }
       async waitForEverythingProvider(i) {
         return this.provider
