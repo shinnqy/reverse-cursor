@@ -1,7 +1,7 @@
 // @ts-check
 
 export function createCppWidget(params) {
-  const { V, CYe, FFt, KS, oR, N, zT, Ye, f_, g_, p_, G, q, W, Yy, U, hu, __decorate, __param, Pt, ve, Z: instantiationService, ei: reactiveStorageService, si, qi, Hi, Ds, Ce: contextKeyService, Me, DKi, eI, ge, R, rt, Jl, pl, Ic, a0, oT, f3, b4, np, K3, J3, B4, bf, _v, OFt, CppIntent, k7, f, ss, aiFeatureStatusService, ue, cppService, st, cursorPredictionService, importPredictionService, Ai, Jon, Zt, so, me, Tn, calculateInlineChanges, computeDiffs } = params;
+  const { V, CYe, FFt, KS, oR, N, zT, Ye, f_, g_, p_, G, q, W, Yy, U, hu, __decorate, __param, Pt, ve, Z: instantiationService, ei: reactiveStorageService, si, qi, Hi, Ds, Ce: contextKeyService, Me, DKi, eI, ge, R, rt, Jl, pl, Ic, a0, oT, f3, b4, np, K3, J3, B4, bf, _v, OFt, CppIntent, k7, f: getMessage, ss, aiFeatureStatusService, ue, cppService, st, cursorPredictionService, importPredictionService, Ai, Jon, Zt, so, me, Tn, calculateInlineChanges, computeDiffs } = params;
 
   // var Acr = new CYe()
   // function WBt(i, e, t) {
@@ -270,7 +270,7 @@ export function createCppWidget(params) {
     ],
     CppDiffPeekViewWidget,
   )
-  function qcr(i, e, t, s, n) {
+  function createDiffPeekView(i, e, t, s, n) {
     return n.createInstance(CppDiffPeekViewWidget, i, e, t, s)
   }
   var tQe = class {
@@ -578,77 +578,77 @@ export function createCppWidget(params) {
     i.Showing = t
   })(zY || (zY = {}))
   var GhostTextWidget = class extends V {
-    createActionButtons(e) {
-      const t = W(e, q("div"))
-      ;(t.style.display = "flex"),
-        (t.style.alignItems = "center"),
-        (t.style.gap = "4px")
-      const s = W(t, q("button"))
-      s.classList.add("cpp-suggestion-action-button"), (s.textContent = "View")
-      const n = W(t, q("button"))
-      n.classList.add("cpp-suggestion-action-button"), (n.textContent = "Accept")
-      const r = W(n, q("span"))
-      ;(r.textContent = "Tab"),
-        r.classList.add("cpp-suggestion-tab-button"),
-        (r.style.marginLeft = "4px"),
+    createActionButtons(container) {
+      const buttonContainer = W(container, q("div"))
+      ;(buttonContainer.style.display = "flex"),
+        (buttonContainer.style.alignItems = "center"),
+        (buttonContainer.style.gap = "4px")
+      const viewButton = W(buttonContainer, q("button"))
+      viewButton.classList.add("cpp-suggestion-action-button"), (viewButton.textContent = "View")
+      const acceptButton = W(buttonContainer, q("button"))
+      acceptButton.classList.add("cpp-suggestion-action-button"), (acceptButton.textContent = "Accept")
+      const tabHint = W(acceptButton, q("span"))
+      ;(tabHint.textContent = "Tab"),
+        tabHint.classList.add("cpp-suggestion-tab-button"),
+        (tabHint.style.marginLeft = "4px"),
         this.D(
-          ge(s, "mousedown", (o) => {
-            const a = this.J.nonPersistentStorage.cppState?.suggestion
-            if (a) {
-              o.stopPropagation()
-              const { originalText: l, replaceText: c, decorationId: h } = a,
-                u = this.I.getModel()
-              if (u) {
-                const d = u.getDecorationRange(h)
-                if (d) {
-                  const g = u.getOffsetAt(d.getStartPosition()),
-                    p = u.getOffsetAt(d.getEndPosition()),
-                    m = u.getValue(),
-                    b = m.substring(0, g) + c + m.substring(p),
-                    y = { ...a },
-                    w = u.changeDecorations((S) =>
-                      S.addDecoration(d, { description: "duplicatedSuggestion" }),
+          ge(viewButton, "mousedown", (event) => {
+            const suggestion = this.reactiveStorageService.nonPersistentStorage.cppState?.suggestion
+            if (suggestion) {
+              event.stopPropagation()
+              const { originalText: l, replaceText, decorationId } = suggestion,
+                model = this.editor.getModel()
+              if (model) {
+                const decorationRange = model.getDecorationRange(decorationId)
+                if (decorationRange) {
+                  const startOffset = model.getOffsetAt(decorationRange.getStartPosition()),
+                    endOffset = model.getOffsetAt(decorationRange.getEndPosition()),
+                    originalText = model.getValue(),
+                    newText = originalText.substring(0, startOffset) + replaceText + originalText.substring(endOffset),
+                    suggestionCopy = { ...suggestion },
+                    newDecorationId = model.changeDecorations((changeAccessor) =>
+                      changeAccessor.addDecoration(decorationRange, { description: "duplicatedSuggestion" }),
                     )
-                  w && (y.decorationId = w),
-                    this.J.setNonPersistentStorage(
+                  newDecorationId && (suggestionCopy.decorationId = newDecorationId),
+                    this.reactiveStorageService.setNonPersistentStorage(
                       "cppState",
                       "peekViewSuggestion",
-                      y,
+                      suggestionCopy,
                     )
-                  const C = qcr(
-                    this.I,
-                    { lineNumber: d.endLineNumber - 1, column: d.endColumn },
-                    { original: m, new: b },
-                    y,
-                    this.N,
+                  const diffPeekView = createDiffPeekView(
+                    this.editor,
+                    { lineNumber: decorationRange.endLineNumber - 1, column: decorationRange.endColumn },
+                    { original: originalText, new: newText },
+                    suggestionCopy,
+                    this.instantiationService,
                   )
-                  this.R.executeCommand("editor.action.setCppDiffPeekView", C)
+                  this.R.executeCommand("editor.action.setCppDiffPeekView", diffPeekView)
                 }
               }
             }
           }),
         ),
         this.D(
-          ge(n, "mousedown", (o) => {
-            o.stopPropagation(),
+          ge(acceptButton, "mousedown", (event) => {
+            event.stopPropagation(),
               console.log("acceptFullSuggestion"),
-              this.Q.acceptFullSuggestion()
+              this.cppService.acceptFullSuggestion()
           }),
         )
     }
     constructor(e, t, s, n, r, o, a, l, c, h, u) {
       super(),
-        (this.I = e),
-        (this.J = t),
+        (this.I = e), (this.editor = this.I),
+        (this.J = t), (this.reactiveStorageService = this.J),
         (this.L = s),
         (this.M = n),
-        (this.N = r),
+        (this.N = r), (this.instantiationService = this.N),
         (this.O = o),
         (this.P = a),
-        (this.Q = l),
+        (this.Q = l), (this.cppService = this.Q),
         (this.R = c),
-        (this.S = h),
-        (this.U = u),
+        (this.S = h), (this.cursorPredictionService = this.S),
+        (this.U = u), (this.importPredictionService = this.U),
         (this.allowEditorOverflow = true),
         (this.h = []),
         (this.ghostTextDecorations = []),
@@ -660,85 +660,85 @@ export function createCppWidget(params) {
         (this.G = null),
         (this.H = null),
         (this.lastSuggestion = undefined),
-        (this.c = q("div.cursorGhostTextWidget")),
+        (this.c = q("div.cursorGhostTextWidget")), (this.container = this.c),
         this._updateFontStyles(),
         (this.uuid = rt())
-      const d = this.I.getOption(68)
-      this.c.style.marginTop = -d + "px"
-      const g = 2e11,
-        p = W(this.c, q("div.cppOuter"))
-      ;(p.style.pointerEvents = "none"), (p.style.position = "relative")
-      const m = W(p, q("div.cppInner"))
-      ;(m.style.position = "absolute"),
-        (m.style.width = "100000px"),
-        (this.g = W(m, q("div.cppButtonContainer"))),
-        (this.g.style.pointerEvents = "auto"),
-        (this.g.style.zIndex = `${g + 1}`),
-        (this.f = W(this.g, q("div"))),
-        (this.f.style.border =
+      const lineHeight = this.editor.getOption(68)
+      this.container.style.marginTop = -lineHeight + "px"
+      const zIndex = 2e11,
+        outerContainer = W(this.container, q("div.cppOuter"))
+      ;(outerContainer.style.pointerEvents = "none"), (outerContainer.style.position = "relative")
+      const innerContainer = W(outerContainer, q("div.cppInner"))
+      ;(innerContainer.style.position = "absolute"),
+        (innerContainer.style.width = "100000px"),
+        (this.g = W(innerContainer, q("div.cppButtonContainer"))), (this.buttonContainer = this.g),
+        (this.buttonContainer.style.pointerEvents = "auto"),
+        (this.buttonContainer.style.zIndex = `${zIndex + 1}`),
+        (this.f = W(this.buttonContainer, q("div"))), (this.buttonPanel = this.f),
+        (this.buttonPanel.style.border =
           "1px solid var(--vscode-editorSuggestWidget-border)"),
-        (this.f.style.backgroundColor =
+        (this.buttonPanel.style.backgroundColor =
           "var(--vscode-editorSuggestWidget-background)"),
-        (this.f.style.borderRadius = "2px"),
-        (this.f.style.pointerEvents = "auto"),
-        (this.f.style.zIndex = `${g + 2}`),
-        (this.m = W(this.f, q("div"))),
-        (this.m.style.position = "relative")
-      let b
+        (this.buttonPanel.style.borderRadius = "2px"),
+        (this.buttonPanel.style.pointerEvents = "auto"),
+        (this.buttonPanel.style.zIndex = `${zIndex + 2}`),
+        (this.m = W(this.buttonPanel, q("div"))), (this.editorContainer = this.m),
+        (this.editorContainer.style.position = "relative")
+      let actionButtons
       this.D({
         dispose: () => {
-          b && b.remove()
+          actionButtons && actionButtons.remove()
         },
       }),
         this.D(
-          ge(this.f, "mousemove", () => {
-            b && b.remove(),
-              (b = W(this.f, q("div"))),
-              (b.style.display = "flex"),
-              (b.style.justifyContent = "space-between"),
-              (b.style.alignItems = "center"),
-              (b.style.borderTop =
+          ge(this.buttonPanel, "mousemove", () => {
+            actionButtons && actionButtons.remove(),
+              (actionButtons = W(this.buttonPanel, q("div"))),
+              (actionButtons.style.display = "flex"),
+              (actionButtons.style.justifyContent = "space-between"),
+              (actionButtons.style.alignItems = "center"),
+              (actionButtons.style.borderTop =
                 "1px solid var(--vscode-editorSuggestWidget-border)"),
-              (b.style.padding = "0px 4px"),
-              (b.style.fontSize = "10px"),
-              (b.style.gap = "8px"),
-              this.createActionButtons(b),
-              this.f.appendChild(b)
+              (actionButtons.style.padding = "0px 4px"),
+              (actionButtons.style.fontSize = "10px"),
+              (actionButtons.style.gap = "8px"),
+              this.createActionButtons(actionButtons),
+              this.buttonPanel.appendChild(actionButtons)
           }),
         ),
         this.D(
-          ge(this.f, "mouseleave", () => {
-            b && b.remove()
+          ge(this.buttonPanel, "mouseleave", () => {
+            actionButtons && actionButtons.remove()
           }),
         ),
-        this.D(Jl.ignoreTarget(this.c)),
-        this.I.addContentWidget(this),
+        this.D(Jl.ignoreTarget(this.container)),
+        this.editor.addContentWidget(this),
         this.D(
-          this.I.onDidChangeModel((w) => {
-            const C = this.I.getModel()
-            C !== null && this.Y(C)
+          this.editor.onDidChangeModel((w) => {
+            const model = this.editor.getModel()
+            model !== null && this._clearModelDecorations(model)
           }),
         ),
         this.D(
-          this.I.onDidChangeModelContent((w) => {
-            const C = this.I.getModel()
+          this.editor.onDidChangeModelContent((w) => {
+            const model = this.editor.getModel()
             ;(this.db.type !== 1 ||
-              !C ||
-              this.db.editorPosition.lineNumber >= C.getLineCount()) &&
+              !model ||
+              this.db.editorPosition.lineNumber >= model.getLineCount()) &&
               this.hideAllInEditor_doesntChangeModel()
           }),
         ),
         this.D(
-          ge(this.c, "mouseenter", (w) => {
-            ;(w.buttons & 1) === 1 && this.hideAllInEditor_doesntChangeModel()
+          ge(this.container, "mouseenter", (event) => {
+            ;(event.buttons & 1) === 1 && this.hideAllInEditor_doesntChangeModel()
           }),
         ),
         this.D(
-          this.I.onDidBlurEditorText(() =>
+          this.editor.onDidBlurEditorText(() =>
             this.hideAllInEditor_doesntChangeModel(),
           ),
         )
-      const y = {
+      const options = {
         readOnly: true,
         wordWrap: "off",
         wordWrapOverride1: "off",
@@ -769,10 +769,10 @@ export function createCppWidget(params) {
         },
         hover: { enabled: false },
       }
-      ;(this.n = this.N.createInstance(
+      ;(this.n = this.instantiationService.createInstance(
         Ic,
-        this.m,
-        { ...this.I.getRawOptions(), ...y },
+        this.editorContainer,
+        { ...this.editor.getRawOptions(), ...options },
         {
           isSimpleWidget: true,
           contributions: pl.getSomeEditorContributions([a0.ID]),
@@ -780,28 +780,28 @@ export function createCppWidget(params) {
         },
       )),
         this.D(
-          this.I.onDidChangeConfiguration(() => {
-            this.n.updateOptions({ ...this.I.getRawOptions(), ...y })
+          this.editor.onDidChangeConfiguration(() => {
+            this.n.updateOptions({ ...this.editor.getRawOptions(), ...options })
           }),
         ),
         this.D({
           dispose: () => {
-            this.m.remove(),
+            this.editorContainer.remove(),
               this.n.getModel()?.dispose(),
               this.n.dispose(),
-              this.Z(),
-              this.W(),
+              this._clearAllViewZones(),
+              this._clearGhostTextDecorations(),
               this.w?.getModel()?.dispose(),
               this.w?.dispose(),
-              this.ib()
+              this._clearViewZoneAndDecorations()
           },
         }),
-        (this.C = document.createElement("div")),
-        (this.C.className = "cpp-ghost-text-view-zone-wrapper"),
-        (this.w = this.N.createInstance(
+        (this.C = document.createElement("div")), (this.wrapper = this.C),
+        (this.wrapper.className = "cpp-ghost-text-view-zone-wrapper"),
+        (this.w = this.instantiationService.createInstance(
           Ic,
-          this.C,
-          { ...this.I.getRawOptions(), ...y },
+          this.wrapper,
+          { ...this.editor.getRawOptions(), ...options },
           {
             isSimpleWidget: true,
             contributions: pl.getSomeEditorContributions([a0.ID]),
@@ -810,52 +810,65 @@ export function createCppWidget(params) {
         )),
         this.D({
           dispose: () => {
-            this.w.getModel()?.dispose(), this.w.dispose(), this.ib()
+            this.w.getModel()?.dispose(), this.w.dispose(), this._clearViewZoneAndDecorations()
           },
         })
     }
+    _clearGhostTextDecorations() {
+      return this.W();
+    }
     W() {
-      const e = this.I.getModel()
-      e !== null &&
-        (e.deltaDecorations(this.ghostTextDecorations, []),
+      const model = this.editor.getModel()
+      model !== null &&
+        (model.deltaDecorations(this.ghostTextDecorations, []),
         (this.ghostTextDecorations = []))
     }
+    _clearAllDecorations() {
+      return this.X();
+    }
     X() {
-      const e = this.I.getModel()
-      if (e === null) return
+      const model = this.editor.getModel()
+      if (model === null) return
       this.ghostTextDecorations.length > 0 &&
-        (this.ghostTextDecorations = e.deltaDecorations(
+        (this.ghostTextDecorations = model.deltaDecorations(
           this.ghostTextDecorations,
           [],
         ))
-      const t = this.Q.getRedDecorationIds(e.id)
-      t &&
-        t.length > 0 &&
-        (e.deltaDecorations(t, []),
-        this.Q.setRedDecorationIds(e.id, (s) => s.filter((n) => !t.includes(n))))
+      const errorDecorationIds = this.cppService.getRedDecorationIds(model.id)
+      errorDecorationIds &&
+        errorDecorationIds.length > 0 &&
+        (model.deltaDecorations(errorDecorationIds, []),
+        this.cppService.setRedDecorationIds(model.id, (existingIds) => existingIds.filter((id) => !errorDecorationIds.includes(id))))
     }
-    Y(e) {
-      const t = e
+    _clearModelDecorations(model) {
+      return this.Y(model);
+    }
+    Y(model) {
+      const inlineSuggestions = model
         .getAllDecorations()
         .filter((n) => n.options.className === "cpp-inline-suggestion")
-      t.length > 0 &&
-        e.deltaDecorations(
-          t.map((n) => n.id),
+      inlineSuggestions.length > 0 &&
+        model.deltaDecorations(
+          inlineSuggestions.map((decoration) => decoration.id),
           [],
         )
-      const s = this.Q.getRedDecorationIds(e.id)
-      s &&
-        s.length > 0 &&
-        (e.deltaDecorations(s, []),
-        this.Q.setRedDecorationIds(e.id, (n) => n.filter((r) => !s.includes(r))))
+      const errorDecorationIds = this.cppService.getRedDecorationIds(model.id)
+      errorDecorationIds &&
+        errorDecorationIds.length > 0 &&
+        (model.deltaDecorations(errorDecorationIds, []),
+        this.cppService.setRedDecorationIds(model.id, (existingIds) => existingIds.filter((id) => !errorDecorationIds.includes(id))))
+    }
+    _clearAllViewZones() {
+      return this.Z();
     }
     Z() {
       this.h.length > 0 &&
-        this.I.changeViewZones((e) => {
-          for (const t of this.h) e.removeZone(t)
+        this.editor.changeViewZones((changeAccessor) => {
+          // this.h => this.viewZoneIds
+          for (const zoneId of this.h) changeAccessor.removeZone(zoneId)
           this.h = []
         }),
-        this.ib()
+        this._clearViewZoneAndDecorations()
     }
     ab(e, t, s, n, r, o = false, a = "view-line") {
       const l = n.get(33),
@@ -913,15 +926,15 @@ export function createCppWidget(params) {
       e.innerHTML = y
     }
     bb(e, t, s) {
-      this.ib()
-      const n = this.I.getModel()
+      this._clearViewZoneAndDecorations()
+      const n = this.editor.getModel()
       if (!n) return
       const { tabSize: r } = n.getOptions()
-      this.I.changeViewZones((o) => {
+      this.editor.changeViewZones((o) => {
         const a = Math.max(t.length, s)
         if (a > 0) {
           const l = document.createElement("div")
-          this.ab(l, r, t, this.I.getOptions(), this.L.languageIdCodec),
+          this.ab(l, r, t, this.editor.getOptions(), this.L.languageIdCodec),
             this.h.push(
               o.addZone({
                 afterLineNumber: e,
@@ -935,15 +948,15 @@ export function createCppWidget(params) {
     }
     dispose() {
       super.dispose(),
-        this.I.removeContentWidget(this),
-        this.ib(),
+        this.editor.removeContentWidget(this),
+        this._clearViewZoneAndDecorations(),
         this.w?.dispose()
     }
     getId() {
       return "GhostTextWidget" + this.uuid
     }
     getDomNode() {
-      return this.c
+      return this.container
     }
     getPosition() {
       return this.r.type === 1 ? this.r.widgetPosition : null
@@ -981,7 +994,7 @@ export function createCppWidget(params) {
             },
           })
         }
-      const s = this.I.getModel()
+      const s = this.editor.getModel()
       s !== null &&
         (this.ghostTextDecorations.length > 0 || t.length > 0) &&
         (this.ghostTextDecorations = s.deltaDecorations(
@@ -992,13 +1005,13 @@ export function createCppWidget(params) {
     updatePosition(e) {
       const t = this.r.type === 1 ? this.r.widgetPosition.position : null
       if (e && t) {
-        const s = this.I.getModel()?.getDecorationRange(e.decorationId)
+        const s = this.editor.getModel()?.getDecorationRange(e.decorationId)
         if (s) {
           const n = { lineNumber: s.startLineNumber, column: t.column }
           this.r = new zY.Showing(n, { position: n, preference: [2] })
         }
       }
-      this.I.layoutContentWidget(this)
+      this.editor.layoutContentWidget(this)
     }
     showChangesOnTheRightAndMaybeShowReds(e, t, s, n, r) {
       const { greenRanges: o } = OFt(
@@ -1013,7 +1026,7 @@ export function createCppWidget(params) {
         "post-change",
       )
       if (o.length > 0) {
-        const a = this.Q.getRedDecorationIds(t.id) ?? [],
+        const a = this.cppService.getRedDecorationIds(t.id) ?? [],
           l = t.deltaDecorations(
             a,
             o.map((c) => ({
@@ -1026,7 +1039,7 @@ export function createCppWidget(params) {
               options: { description: "red", className: nhr, stickiness: 1 },
             })),
           )
-        this.Q.setRedDecorationIds(t.id, (c) => {
+        this.cppService.setRedDecorationIds(t.id, (c) => {
           const h = c.filter((d) => !a.includes(d)),
             u = new Set([...h, ...l])
           return Array.from(u)
@@ -1036,26 +1049,26 @@ export function createCppWidget(params) {
     }
     showChangesOnTheRight(e, t, s, n, r) {
       try {
-        for (; this.f.firstChild; ) this.f.removeChild(this.f.firstChild)
+        for (; this.buttonPanel.firstChild; ) this.buttonPanel.removeChild(this.buttonPanel.firstChild)
         const o = Fes(e, t, s, n)
-        if ((ch("[ian] changesOnTheRight", o), !this.I.getPosition())) return
-        const l = Ues(this.I),
+        if ((ch("[ian] changesOnTheRight", o), !this.editor.getPosition())) return
+        const l = Ues(this.editor),
           c = (D, P) => {
             let L = -1
             for (let A = D; A <= P; A += 1) {
               const F = t.getLineMaxColumn(A),
-                H = this.I.getStatusbarColumn(new Me(A, F))
+                H = this.editor.getStatusbarColumn(new Me(A, F))
               H > L && (L = H)
             }
             return L
           },
           h = o.changesRangeInBeforeFullModel
-        this.S.hideWidgetsIfConflictsWithCppSuggestion(this.I, {
+        this.cursorPredictionService.hideWidgetsIfConflictsWithCppSuggestion(this.editor, {
           startLineNumber: h.startLineNumber,
           endLineNumberExclusive: h.endLineNumber + 1,
         }),
-          this.J.applicationUserPersistentStorage.cppAutoImportEnabled &&
-            this.U.hideWidgetsIfConflictsWithCppSuggestion(this.I, {
+          this.reactiveStorageService.applicationUserPersistentStorage.cppAutoImportEnabled &&
+            this.importPredictionService.hideWidgetsIfConflictsWithCppSuggestion(this.editor, {
               startLineNumber: h.startLineNumber,
               endLineNumberExclusive: h.endLineNumber + 1,
             })
@@ -1087,14 +1100,14 @@ export function createCppWidget(params) {
           ch("[ian] total reduction", g),
           ch("[ian] total pure added lines", p)
         const m = h.startLineNumber - g,
-          b = this.I.getOption(52).spaceWidth
+          b = this.editor.getOption(52).spaceWidth
         ch("[ian] line to render", m)
         const y = c(h.startLineNumber, h.endLineNumber)
         ch("[ian] maxColumn", y), ch("[ian] editorWidthInColumns", l)
         const w = t.getLineMaxColumn(m),
           S = 24 + Math.max(0, (y - w) * b)
-        this.g.style.marginLeft = `${S}px`
-        const x = this.I.getOption(137) === "on",
+        this.buttonContainer.style.marginLeft = `${S}px`
+        const x = this.editor.getOption(137) === "on",
           k = { lineNumber: m, column: x ? y : Math.min(y, l - 2) },
           E = () => {
             ;(this.db = new zY.Showing(k, { position: k, preference: [2] })),
@@ -1110,7 +1123,7 @@ export function createCppWidget(params) {
           ch("[ian] totalMarginLeft", S),
           o.deletion)
         ) {
-          if (((this.f.style.padding = "0px"), o.deletedRanges.length > 1)) return
+          if (((this.buttonPanel.style.padding = "0px"), o.deletedRanges.length > 1)) return
           if (o.deletedRanges.length === 0) return
           const D = o.deletedRanges[0],
             P = t.getValueInRange(D)
@@ -1126,16 +1139,16 @@ export function createCppWidget(params) {
           E()
           for (let H = L.startLineNumber; H <= L.endLineNumber; H++) {
             const B = t.getLineContent(H),
-              z = W(this.f, q("div.cppCodeLine")),
-              K = this.I.getOption(54)
+              z = W(this.buttonPanel, q("div.cppCodeLine")),
+              K = this.editor.getOption(54)
             ;(z.style.fontSize = `${K}px`), (z.style.height = `${K * 1.5}px`)
             const Q = B.length - B.trimStart().length,
               se = B.length - B.trimEnd().length,
               he = B.trim()
-            this.gb(z, Q, "ghost-text-decoration-remove"),
+            this._createSpaceElement(z, Q, "ghost-text-decoration-remove"),
               he &&
-                (this.hb(z, he, "ghost-text-decoration-inline-remove"),
-                this.gb(z, se, "ghost-text-decoration-inline-remove"))
+                (this._createTextElement(z, he, "ghost-text-decoration-inline-remove"),
+                this._createSpaceElement(z, se, "ghost-text-decoration-inline-remove"))
           }
         } else {
           const D = this.nb(o, k, S)
@@ -1155,9 +1168,9 @@ export function createCppWidget(params) {
               A = L.changesRangeInBeforeFullModel.startLineNumber - g
             ch("[ian] changesOnTheRightForViewZone", L),
               ch("[ian] startLineNumberForViewZone", A),
-              this.jb(r.newValue, L, A)
+              this._renderViewZone(r.newValue, L, A)
           } else {
-            E(), this.f.appendChild(this.m), this.ib()
+            E(), this.buttonPanel.appendChild(this.editorContainer), this._clearViewZoneAndDecorations()
             const P = this.n.getOption(68)
             let L = false,
               A = this.n.getModel()
@@ -1201,13 +1214,13 @@ export function createCppWidget(params) {
                   B = Math.max(B, he)
                 },
               ),
-                (this.m.style.width = `${B * b}px`),
-                (this.m.style.height = `${P * o.lineCount}px`)
+                (this.editorContainer.style.width = `${B * b}px`),
+                (this.editorContainer.style.height = `${P * o.lineCount}px`)
             }
-            const F = this.I.getModel()?.uri,
+            const F = this.editor.getModel()?.uri,
               H = F ? ahr(F) : false
             if ((ch("[ian] isIPyNotebook", H), H)) {
-              const B = this.I.getTopForLineNumber(u)
+              const B = this.editor.getTopForLineNumber(u)
               this.n.setScrollTop(B)
             } else
               ch("[ian] setting to line", Math.max(u - 1, 0)),
@@ -1256,218 +1269,236 @@ export function createCppWidget(params) {
       )
     }
     _updateFontStyles() {
-      const t = this.I.getOptions().get(52)
-      ;(this.c.style.fontFamily = t.fontFamily),
-        (this.c.style.fontSize = t.fontSize + "px")
+      const t = this.editor.getOptions().get(52)
+      ;(this.container.style.fontFamily = t.fontFamily),
+        (this.container.style.fontSize = t.fontSize + "px")
     }
-    _updateTextContent(e, t) {
+    _updateTextContent(suggestion, options) {
       this._updateFontStyles(), this.s?.abort(), (this.s = new AbortController())
-      let s = false
+      let isAborted = false
       for (
         this.s.signal.addEventListener("abort", () => {
-          s = true
+          isAborted = true
         });
-        this.f.firstChild;
+        this.buttonPanel.firstChild;
 
       )
-        this.f.removeChild(this.f.firstChild)
-      const n = this.I.getModel(),
-        r = e?.decorationId
-      if (n === null || r === undefined) return
-      const o = n.getEOL()
-      let a = n.getDecorationRange(r)
-      if (a === null) return
-      a.endLineNumber === n.getLineCount() &&
-        a.endColumn === n.getLineMaxColumn(a.endLineNumber) &&
-        (a = new G(a.startLineNumber, a.startColumn, a.endLineNumber + 1, 1))
-      let l = n.getValueInRange(a),
-        c = e?.replaceText ?? ""
-      const h = n.getOffsetAt(a.getStartPosition()),
-        u = n.getOffsetAt(a.getEndPosition()),
-        d = n.getValue(),
-        g = d.substring(0, h) + c + d.substring(u),
+        this.buttonPanel.removeChild(this.buttonPanel.firstChild)
+      const editorModel = this.editor.getModel(),
+        decorationId = suggestion?.decorationId
+      if (editorModel === null || decorationId === undefined) return
+      const eol = editorModel.getEOL()
+      let decorationRange = editorModel.getDecorationRange(decorationId)
+      if (decorationRange === null) return
+      decorationRange.endLineNumber === editorModel.getLineCount() &&
+        decorationRange.endColumn === editorModel.getLineMaxColumn(decorationRange.endLineNumber) &&
+        (decorationRange = new G(decorationRange.startLineNumber, decorationRange.startColumn, decorationRange.endLineNumber + 1, 1))
+      let originalText = editorModel.getValueInRange(decorationRange),
+        replacementText = suggestion?.replaceText ?? ""
+      const startOffset = editorModel.getOffsetAt(decorationRange.getStartPosition()),
+        endOffset = editorModel.getOffsetAt(decorationRange.getEndPosition()),
+        fullText = editorModel.getValue(),
+        newFullText = fullText.substring(0, startOffset) + replacementText + fullText.substring(endOffset),
         {
-          singleLineCharChanges: p,
-          charChanges: m,
-          wordChanges: b,
-          isOnlyAddingToEachChar: y,
-        } = rhr(l, c, a.startLineNumber, o),
-        w = p.every((D) => D.removed !== true)
-      if (s) {
-        this.Z()
+          singleLineCharChanges,
+          charChanges,
+          wordChanges,
+          isOnlyAddingToEachChar,
+        } = rhr(originalText, replacementText, decorationRange.startLineNumber, eol),
+        isOnlyAddingText = singleLineCharChanges.every((D) => D.removed !== true)
+      if (isAborted) {
+        this._clearAllViewZones()
         return
       }
-      let C = false,
-        S = false,
-        x = false
-      for (let D = 0; D < p.length; D++)
+      let hasComplexMultilineChanges = false,
+        hasNonEmptyLine = false,
+        hasLineBreak = false
+      for (let i = 0; i < singleLineCharChanges.length; i++)
         if (
-          (p[D].added === true && p[D].value === o && (x = true),
-          !p[D].added && !p[D].removed)
+          (singleLineCharChanges[i].added === true && singleLineCharChanges[i].value === eol && (hasLineBreak = true),
+          !singleLineCharChanges[i].added && !singleLineCharChanges[i].removed)
         )
-          if (p[D].value === o) (S = false), (x = false)
+          if (singleLineCharChanges[i].value === eol) (hasNonEmptyLine = false), (hasLineBreak = false)
           else {
-            if (S && x) {
-              C = true
+            if (hasNonEmptyLine && hasLineBreak) {
+              hasComplexMultilineChanges = true
               break
             }
-            S = true
+            hasNonEmptyLine = true
           }
-      const k = {
-          newValue: g,
-          changesSinceLastUpdate: t?.changesSinceLastUpdate ?? false,
-          source: e?.source ?? CppIntent.Unknown,
-          forceViewZones: t?.forceViewZones ?? false,
+      const updateInfo = {
+          newValue: newFullText,
+          changesSinceLastUpdate: options?.changesSinceLastUpdate ?? false,
+          source: suggestion?.source ?? CppIntent.Unknown,
+          forceViewZones: options?.forceViewZones ?? false,
         },
-        E = this.I.getPosition()
+        cursorPosition = this.editor.getPosition()
       if (
-        E &&
-        w &&
-        y &&
-        !C &&
-        m.length <= 20 &&
-        b.length <= 20 &&
-        t?.forceDiffBox !== true
+        cursorPosition &&
+        isOnlyAddingText &&
+        isOnlyAddingToEachChar &&
+        !hasComplexMultilineChanges &&
+        charChanges.length <= 20 &&
+        wordChanges.length <= 20 &&
+        options?.forceDiffBox !== true
       ) {
         const {
-          success: D,
-          inlineModifications: P,
-          fullLineModifications: L,
+          success,
+          inlineModifications,
+          fullLineModifications,
         } = this.showChangesAutoCompleteInline(
-          p,
-          a.startLineNumber,
-          E,
-          n.getValue(),
-          o,
+          singleLineCharChanges,
+          decorationRange.startLineNumber,
+          cursorPosition,
+          editorModel.getValue(),
+          eol,
         )
-        if (!D)
-          this.showChangesOnTheRightAndMaybeShowReds(b, n, o, a, k),
-            this.Q.setSuggestionType(r, k7.PreviewBox)
+        if (!success)
+          this.showChangesOnTheRightAndMaybeShowReds(wordChanges, editorModel, eol, decorationRange, updateInfo),
+            this.cppService.setSuggestionType(decorationId, k7.PreviewBox)
         else {
-          if (P) {
-            let A = {}
-            for (const F of P)
-              A[F.lineNumber] = Math.max(
-                A[F.lineNumber] ?? 0,
-                F.newValue.length - F.oldValue.length,
+          if (inlineModifications) {
+            let lineWidthChanges = {}
+            for (const modification of inlineModifications)
+              lineWidthChanges[modification.lineNumber] = Math.max(
+                lineWidthChanges[modification.lineNumber] ?? 0,
+                modification.newValue.length - modification.oldValue.length,
               )
-            this.S.updateHintLineWidgetMarginLeft(A)
+            this.cursorPredictionService.updateHintLineWidgetMarginLeft(lineWidthChanges)
           }
-          ;((L && L.length > 0) || (P && P.length > 0)) &&
-            this.Q.setSuggestionType(r, k7.GhostText)
+          ;((fullLineModifications && fullLineModifications.length > 0) || (inlineModifications && inlineModifications.length > 0)) &&
+            this.cppService.setSuggestionType(decorationId, k7.GhostText)
         }
       } else
-        this.showChangesOnTheRightAndMaybeShowReds(b, n, o, a, k),
-          this.Q.setSuggestionType(r, k7.PreviewBox)
+        this.showChangesOnTheRightAndMaybeShowReds(wordChanges, editorModel, eol, decorationRange, updateInfo),
+          this.cppService.setSuggestionType(decorationId, k7.PreviewBox)
     }
-    update(e, t) {
-      t?.avoidEditorWideRemovals !== true && this.removeAllInEditorNotModel()
-      const s = this.I.getModel(),
-        n = e?.uri,
-        r = this.Q.isTextFocusedOrSimilarlyFocused(this.I)
-      if (s === null || n === undefined)
+    update(suggestion, options) {
+      options?.avoidEditorWideRemovals !== true && this.removeAllInEditorNotModel()
+      const model = this.editor.getModel(),
+        uri = suggestion?.uri,
+        isEditorFocused = this.cppService.isTextFocusedOrSimilarlyFocused(this.editor)
+      if (model === null || uri === undefined)
         return this.hideAllInEditor_doesntChangeModel()
       if (
-        !(r && s.uri.toString() === n.toString()) &&
-        t?.ignoreFocusCheck !== true
+        !(isEditorFocused && model.uri.toString() === uri.toString()) &&
+        options?.ignoreFocusCheck !== true
       ) {
-        t?.avoidEditorWideRemovals !== true &&
+        options?.avoidEditorWideRemovals !== true &&
           this.hideAllInEditor_doesntChangeModel()
         return
       }
       if (
-        (t?.avoidEditorWideRemovals !== true && this.Y(s),
-        this.J.applicationUserPersistentStorage.cppConfig?.isGhostText !== true ||
-          e === undefined ||
-          e.immediatelySeen === true)
+        (options?.avoidEditorWideRemovals !== true && this._clearModelDecorations(model),
+        this.reactiveStorageService.applicationUserPersistentStorage.cppConfig?.isGhostText !== true ||
+          suggestion === undefined ||
+          suggestion.immediatelySeen === true)
       ) {
-        t?.avoidEditorWideRemovals !== true &&
+        options?.avoidEditorWideRemovals !== true &&
           this.hideAllInEditor_doesntChangeModel()
         return
       }
-      ;(this.f.style.opacity = "1"),
+      ;(this.buttonPanel.style.opacity = "1"),
         this.cb(),
-        this._updateTextContent(e, t),
-        this.I.layoutContentWidget(this)
+        this._updateTextContent(suggestion, options),
+        this.editor.layoutContentWidget(this)
     }
     cb() {
-      this.ib(), this.W(), this.Z()
+      this._clearViewZoneAndDecorations(), this._clearGhostTextDecorations(), this._clearAllViewZones()
     }
     removeAllInEditorNotModel() {
-      this.X(), this.Z()
+      this._clearAllDecorations(), this._clearAllViewZones()
     }
     hideAllInEditor_doesntChangeModel() {
-      for (; this.f.firstChild; ) this.f.removeChild(this.f.firstChild)
+      for (; this.buttonPanel.firstChild; ) this.buttonPanel.removeChild(this.buttonPanel.firstChild)
       ;(this.db = zY.Hidden),
-        this.I.layoutContentWidget(this),
-        (this.f.style.opacity = "0")
+        this.editor.layoutContentWidget(this),
+        (this.buttonPanel.style.opacity = "0")
     }
     get db() {
       return this.r
     }
     set db(e) {
-      ;(this.r = e), this.eb()
+      ;(this.r = e), this._updateTitle()
+    }
+    _updateTitle() {
+      this.eb();
     }
     eb() {
       if (this.db.type === 1 && this.t) {
-        this.fb = f(890, null, this.t)
+        this._title = getMessage(890, null, this.t)
         return
       }
-      this.u ? (this.fb = f(891, null, this.u)) : (this.fb = f(892, null))
+      this.u ? (this._title = getMessage(891, null, this.u)) : (this._title = getMessage(892, null))
+    }
+    set _title(newTitle) {
+      this.fb = newTitle;
     }
     set fb(e) {
-      this.c.title = e
+      this.container.title = e
     }
-    gb(e, t, s = "ghost-text-decoration") {
-      const n = document.createElement("span"),
-        o = this.I.getOption(52).spaceWidth
-      ;(n.className = s),
-        (n.textContent = " ".repeat(t)),
-        (n.style.width = `${o * t}px`),
-        (n.style.display = "inline-block"),
-        e.appendChild(n)
+    _createSpaceElement(parentElement, spaceCount, className) {
+      return this.gb(parentElement, spaceCount, className);
     }
-    hb(e, t, s) {
-      const n = document.createElement("span")
-      ;(n.className = s), (n.textContent = t), (n.style.whiteSpace = "nowrap")
-      const r = this.I.getOption(54)
-      ;(n.style.fontSize = `${r}px`),
-        (n.style.height = `${r * 1.5}px`),
-        (n.style.display = "inline-flex"),
-        (n.style.alignItems = "center"),
-        e.appendChild(n)
+    gb(parentElement, spaceCount, className = "ghost-text-decoration") {
+      const spanElement = document.createElement("span"),
+        spaceWidth = this.editor.getOption(52).spaceWidth
+      ;(spanElement.className = className),
+        (spanElement.textContent = " ".repeat(spaceCount)),
+        (spanElement.style.width = `${spaceWidth * spaceCount}px`),
+        (spanElement.style.display = "inline-block"),
+        parentElement.appendChild(spanElement)
+    }
+    _createTextElement(parentElement, text, className) {
+      return this.hb(parentElement, text, className);
+    }
+    hb(parentElement, text, className) {
+      const spanElement = document.createElement("span")
+      ;(spanElement.className = className), (spanElement.textContent = text), (spanElement.style.whiteSpace = "nowrap")
+      const r = this.editor.getOption(54)
+      ;(spanElement.style.fontSize = `${r}px`),
+        (spanElement.style.height = `${r * 1.5}px`),
+        (spanElement.style.display = "inline-flex"),
+        (spanElement.style.alignItems = "center"),
+        parentElement.appendChild(spanElement)
+    }
+    _clearViewZoneAndDecorations() {
+      return this.ib();
     }
     ib() {
       if (this.z !== undefined) {
-        const e = this.I.saveViewState()
-        this.I.changeViewZones((t) => {
-          t.removeZone(this.z), (this.z = undefined)
+        const viewState = this.editor.saveViewState()
+        this.editor.changeViewZones((accessor) => {
+          accessor.removeZone(this.z), (this.z = undefined)
         }),
-          e && this.I.restoreViewState(e)
+        viewState && this.editor.restoreViewState(viewState)
       }
       this.F &&
-        this.I.changeDecorations((e) => {
-          e.removeDecoration(this.F), (this.F = null)
+        this.editor.changeDecorations((accessor) => {
+          accessor.removeDecoration(this.F), (this.F = null)
         })
     }
-    jb(e, t, s) {
-      const n = t.lineCount * this.I.getOption(68)
-      this.Z()
-      const r = this.I.getModel()
+    _renderViewZone(newContent, changeInfo, scrollPosition) {
+      return this.jb(newContent, changeInfo, scrollPosition);
+    }
+    jb(newContent, changeInfo, scrollPosition) {
+      const n = changeInfo.lineCount * this.editor.getOption(68)
+      this._clearAllViewZones()
+      const r = this.editor.getModel()
       if (!r) return
       const o = this.L.createById(r.getLanguageId())
       let a = this.w.getModel()
       a
-        ? (a.getValue() !== e && a.setValue(e),
+        ? (a.getValue() !== newContent && a.setValue(newContent),
           a.getLanguageId() !== o.languageId && a.setLanguage(o.languageId))
         : ((a = this.P.createModel(
-            e,
+            newContent,
             o,
             U.parse(`cpp-ghost-text-viewzone-anysphere://${Oes()}`),
           )),
           this.w.setModel(a))
       const l = this.w.getOption(68),
-        c = Math.max(s - 1, 0)
+        c = Math.max(scrollPosition - 1, 0)
       this.w.setScrollTop(c * l),
         a.changeDecorations((u) => {
           a &&
@@ -1475,41 +1506,41 @@ export function createCppWidget(params) {
               .getAllDecorations()
               .map((d) => d.id)
               .forEach((d) => u.removeDecoration(d)),
-            t.addedRangesInNewFullModel.forEach((d) => {
+            changeInfo.addedRangesInNewFullModel.forEach((d) => {
               u.addDecoration(G.lift(d), {
                 description: "ghost-text-decoration",
                 className: "ghost-text-decoration-inline-add",
               })
             }),
-            (this.G = u.addDecoration(new G(c + 1, 1, c + 1 + t.lineCount, 1), {
+            (this.G = u.addDecoration(new G(c + 1, 1, c + 1 + changeInfo.lineCount, 1), {
               className: "view-zone-in-view-zone-decoration",
               description: "decoration for view zone in view zone",
               isWholeLine: true,
             })))
         }),
         this.w.layout({ width: this.w.getLayoutInfo().contentWidth, height: n }),
-        (this.C.style.height = `${n + 2}px`)
-      const h = this.I.saveViewState()
-      this.I.changeViewZones((u) => {
+        (this.wrapper.style.height = `${n + 2}px`)
+      const h = this.editor.saveViewState()
+      this.editor.changeViewZones((u) => {
         this.z !== undefined && u.removeZone(this.z),
           this.kb(),
           (this.z = u.addZone({
-            afterLineNumber: t.changesRangeInBeforeFullModel.endLineNumber,
+            afterLineNumber: changeInfo.changesRangeInBeforeFullModel.endLineNumber,
             heightInPx: n,
-            domNode: this.C,
+            domNode: this.wrapper,
             marginDomNode: this.H,
           }))
       }),
-        h && this.I.restoreViewState(h),
+        h && this.editor.restoreViewState(h),
         this.kb(),
-        this.I.changeDecorations((u) => {
+        this.editor.changeDecorations((u) => {
           if (
             (this.F && (u.removeDecoration(this.F), (this.F = null)),
-            !this.I.getModel())
+            !this.editor.getModel())
           )
             return
-          const g = t.changesRangeInBeforeFullModel.startLineNumber,
-            p = t.changesRangeInBeforeFullModel.endLineNumber
+          const g = changeInfo.changesRangeInBeforeFullModel.startLineNumber,
+            p = changeInfo.changesRangeInBeforeFullModel.endLineNumber
           this.F = u.addDecoration(new G(g, 1, p, 1), {
             className: "view-zone-original-range-decoration",
             description: "decoration for view zone original range",
@@ -1534,20 +1565,20 @@ export function createCppWidget(params) {
     }
     mb() {
       return (
-        this.J.applicationUserPersistentStorage
+        this.reactiveStorageService.applicationUserPersistentStorage
           .shouldShowViewZoneWhenPreviewBoxIsClipped4 ?? true
       )
     }
     nb(e, t, s) {
-      const n = this.I.getDomNode()
+      const n = this.editor.getDomNode()
       if (!n) return false
       const r = ss().document
       if (!r) return false
       const o = n.getBoundingClientRect(),
-        a = this.I.getVisibleRanges()
+        a = this.editor.getVisibleRanges()
       if (a.length === 0) return false
-      const l = this.I.getOption(68),
-        c = this.I.getOption(52).typicalHalfwidthCharacterWidth,
+      const l = this.editor.getOption(68),
+        c = this.editor.getOption(52).typicalHalfwidthCharacterWidth,
         h = a[0].startLineNumber,
         u = o.left + (t.column - 1) * c + s,
         d = o.top + (t.lineNumber - h) * l,
@@ -1574,8 +1605,8 @@ export function createCppWidget(params) {
       )
     }
     ob(e, t) {
-      const s = Ues(this.I),
-        n = this.I.getModel() ?? this.w.getModel(),
+      const s = Ues(this.editor),
+        n = this.editor.getModel() ?? this.w.getModel(),
         { tabSize: r } = n ? n.getOptions() : { tabSize: 4 },
         o = ohr(e.selectiveNewText, r)
       return t.column + o > s
