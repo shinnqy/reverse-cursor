@@ -14,7 +14,7 @@ export function createAction(params) {
           label: "Accept All Edits",
           alias: "Accept All Edits",
           precondition: T.or(
-            me.editorHasPromptBar.isEqualTo(!0),
+            me.editorHasPromptBar.isEqualTo(true),
             me.hasDisplayedDiff,
           ),
           kbOpts: { kbExpr: me.editorTextFocus, primary: 2055, weight: 500 },
@@ -45,7 +45,7 @@ export function createAction(params) {
         label: "View All Changes",
         alias: "View All Changes",
         precondition: T.or(
-          me.editorHasPromptBar.isEqualTo(!0),
+          me.editorHasPromptBar.isEqualTo(true),
           me.hasDisplayedDiff,
         ),
       })
@@ -67,11 +67,11 @@ export function createAction(params) {
     if (n) {
       const r = n.getActiveCell()?.textModel
       if (r) s = r
-      else return !1
+      else return false
     } else if (Pn(t)) {
-      if (!t.hasModel()) return !1
+      if (!t.hasModel()) return false
       s = t.getModel()
-    } else return !1
+    } else return false
     return e.nonPersistentStorage.inlineDiffs.some((r) =>
       extUri.isEqual(r.uri, s.uri),
     )
@@ -135,7 +135,7 @@ export function createAction(params) {
         label: "Reject All Edits",
         alias: "Reject All Edits",
         precondition: T.or(
-          me.editorHasPromptBar.isEqualTo(!0),
+          me.editorHasPromptBar.isEqualTo(true),
           me.hasDisplayedDiff,
         ),
         kbOpts: { kbExpr: me.editorTextFocus, primary: 2053, weight: 500 },
@@ -384,7 +384,7 @@ export function createAction(params) {
         (this.q = c.extUri),
         (this.g = me.hasDisplayedDiff.bindTo(e.contextKeyService)),
         (this.h = me.hasActivelyGeneratingDiff.bindTo(e.contextKeyService)),
-        (this.r = !0),
+        (this.r = true),
         this.D(
           this.f.onDidChangeModel((g) => {
             if (this.f.hasModel()) {
@@ -487,7 +487,7 @@ export function createAction(params) {
           .sort((a, l) => a.startLineNumber - l.startLineNumber)
       if (n.length === 0) return
       let r
-      if (t !== void 0) r = t - 1
+      if (t !== undefined) r = t - 1
       else {
         const a = this.f.getPosition()
         if (!a) return
@@ -509,22 +509,22 @@ export function createAction(params) {
         t = this.u.nonPersistentStorage.inlineDiffs,
         s = this.u.nonPersistentStorage.inprogressAIGenerations,
         n = t.filter((a) => this.q.isEqual(a.uri, e))
-      let r = !1
+      let r = false
       for (const a of n) {
-        const c = s.some((h) => h.generationUUID === a.generationUUID) && !0
+        const c = s.some((h) => h.generationUUID === a.generationUUID) && true
         ;(r = r || c), this.showDiff(wf(a), c)
       }
       for (const a of this.n.keys())
         n.some((l) => l.id === a) || this.removeDiff(a)
-      r ? this.h.set(!0) : this.h.set(!1),
+      r ? this.h.set(true) : this.h.set(false),
         n.filter(
           (a) =>
             !this.u.nonPersistentStorage.promptBars.some(
               (l) => l.diffId === a.id,
             ),
         ).length > 0
-          ? this.g.set(!0)
-          : this.g.set(!1)
+          ? this.g.set(true)
+          : this.g.set(false)
     }
     getZoneWidgets(e, t) {
       if (!this.f.hasModel()) return []
@@ -540,10 +540,10 @@ export function createAction(params) {
           o === 0 ? (a = 1) : (a = this.f.getModel().getLineMaxColumn(o))
           const l = `${r.removedLinesOriginalRange.startLineNumber}-${r.removedLinesOriginalRange.endLineNumberExclusive}`,
             c = { lineNumber: o, column: a }
-          let h = !1
+          let h = false
           for (const d of t)
             d.id === l &&
-              ((h = !0),
+              ((h = true),
               d.updatePosition(c),
               d.updateInnerChanges(r.relativeInnerChanges),
               s.push(d),
@@ -583,7 +583,7 @@ export function createAction(params) {
       let s = 0
       for (const n of this.n.get(e)?.zoneWidgets ?? []) {
         const r = n.position?.lineNumber
-        r !== void 0 &&
+        r !== undefined &&
           r >= t.startLineNumber &&
           r <= t.endLineNumber &&
           (s += n.getHeightInLines())
@@ -806,7 +806,7 @@ export function createAction(params) {
         return F.length === 0
           ? []
           : F.sort((H, B) =>
-              H.createdAt !== void 0 && B.createdAt !== void 0
+              H.createdAt !== undefined && B.createdAt !== undefined
                 ? H.createdAt < B.createdAt
                   ? -1
                   : 1
@@ -835,7 +835,7 @@ export function createAction(params) {
       h = Y(() => {
         const F = l()
         return F.length === 0 || !i.uri
-          ? !1
+          ? false
           : F.some((H) =>
               e.reactiveStorageService.nonPersistentStorage.inprogressAIGenerations.some(
                 (B) =>
@@ -948,24 +948,24 @@ export function createAction(params) {
         })
       }
     })
-    const E = (F = !1) => {
+    const E = (F = false) => {
         const H = Sv.get(i.editor)
         if (H) {
-          const B = F ? w() : void 0
+          const B = F ? w() : undefined
           H.navigateToChange("previous", B), k()
         }
       },
-      D = (F = !1) => {
+      D = (F = false) => {
         const H = Sv.get(i.editor)
         if (H) {
-          const B = F ? w() : void 0
+          const B = F ? w() : undefined
           H.navigateToChange("next", B), k()
         }
       },
       P = () => {
         e.commandService.executeCommand(KYe)
       },
-      L = Y(() => (i.uri ? l().some((F) => extUri.isEqual(F.uri, i.uri)) : !1))
+      L = Y(() => (i.uri ? l().some((F) => extUri.isEqual(F.uri, i.uri)) : false))
     return I(DZn, {
       get isGenerating() {
         return h()
@@ -989,8 +989,8 @@ export function createAction(params) {
       onNavigateToPreviousFile: p,
       onAcceptChanges: b,
       onRejectChanges: y,
-      onNavigateToPreviousChange: () => E(!0),
-      onNavigateToNextChange: () => D(!0),
+      onNavigateToPreviousChange: () => E(true),
+      onNavigateToNextChange: () => D(true),
       onNavigateToCurrentChange: (F) => {
         const H = Sv.get(i.editor)
         if (H) {
@@ -1111,11 +1111,11 @@ export function createAction(params) {
         (this.g = t),
         (this.h = s),
         (this.j = n),
-        (this.allowEditorOverflow = !0),
+        (this.allowEditorOverflow = true),
         (this.c = this.D(new R())),
         (this.onClick = this.c.event),
-        (this.isWordWrap = !1),
-        (this.isActiveEditor = !1),
+        (this.isWordWrap = false),
+        (this.isActiveEditor = false),
         (this.a = q("div.aiFullFilePromptBarWidget")),
         (this.a.style.width = "100%"),
         (this.a.style.pointerEvents = "none"),

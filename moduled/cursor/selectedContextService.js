@@ -33,12 +33,12 @@ export function createSelectedContextService(params) {
         ])),
         (this.b = {}),
         (this.f = []),
-        (this.g = !1),
+        (this.g = false),
         (this.j = this.D(new R())),
         (this.q = this.D(new R())),
         (this.onDidAddContext = this.j.event),
         (this.onDidRemoveContext = this.q.event),
-        (this.r = () => Promise.resolve(void 0)),
+        (this.r = () => Promise.resolve(undefined)),
         (this.t = () => Promise.resolve()),
         (this.h = this.O.createInstance(g0)),
         this.Y(),
@@ -107,7 +107,7 @@ export function createSelectedContextService(params) {
               for (const g of Object.keys(r.context))
                 Dg(g)
                   ? (o[g] = this.P(r.context[g], e[g], g))
-                  : e[g] === void 0 && (o[g] = r.context[g])
+                  : e[g] === undefined && (o[g] = r.context[g])
               const [a, l, c, h] = await Promise.all([
                   this.getCodeChunks(o),
                   this.getCommitDetailsFromPartialCommits(
@@ -146,8 +146,8 @@ export function createSelectedContextService(params) {
           t.map(async (n) => {
             const r = await this.r(n)
             try {
-              return r === void 0
-                ? void 0
+              return r === undefined
+                ? undefined
                 : this.shouldUpdateConversationSummary(r.data)
                   ? (await this.t(n),
                     new C1t({
@@ -169,7 +169,7 @@ export function createSelectedContextService(params) {
     }
     shouldUpdateConversationSummary(e) {
       return (
-        e.latestConversationSummary === void 0 ||
+        e.latestConversationSummary === undefined ||
         e.latestConversationSummary.lastBubbleId !==
           e.conversation.at(-1)?.bubbleId
       )
@@ -186,11 +186,11 @@ export function createSelectedContextService(params) {
           await Promise.all(
             e.map(async (s) => {
               const n = await V5i(this.G, U.from(s.uri))
-              if (n !== void 0)
+              if (n !== undefined)
                 return await this.getCodeChunksFromCodeSelection(n)
             }),
           )
-        ).filter((s) => s !== void 0)
+        ).filter((s) => s !== undefined)
       } catch (t) {
         return console.error(t), []
       }
@@ -208,7 +208,7 @@ export function createSelectedContextService(params) {
           e &&
             o.push(
               this.F.getGitDiff().then((a) => {
-                if (a !== void 0)
+                if (a !== undefined)
                   return new FT({
                     diffs: a.map((l) => this.fileDiffToProtoDiff(l)),
                     diffType: cI.DIFF_TO_HEAD,
@@ -222,14 +222,14 @@ export function createSelectedContextService(params) {
                 unifiedContextLines: n,
                 ref: r,
               }).then((a) => {
-                if (a !== void 0)
+                if (a !== undefined)
                   return new FT({
                     diffs: a.map((l) => this.fileDiffToProtoDiff(l)),
                     diffType: cI.DIFF_FROM_BRANCH_TO_MAIN,
                   })
               }),
             ),
-          await Promise.all(o).then((a) => a.filter((l) => l !== void 0))
+          await Promise.all(o).then((a) => a.filter((l) => l !== undefined))
         )
       } catch (o) {
         return console.error("Error in getDiffDetailsFromGitDiff:", o), []
@@ -246,14 +246,14 @@ export function createSelectedContextService(params) {
     }
     async getLastCommit() {
       const e = await this.F.getLastCommits(1)
-      return e.length > 0 ? e[0] : void 0
+      return e.length > 0 ? e[0] : undefined
     }
     async getPullRequestDetailsFromPartialPullRequests(e) {
       try {
         return (
           await Promise.all(e.map(async (s) => this.F.getFullPr(s.number)))
         )
-          .filter((s) => s !== void 0)
+          .filter((s) => s !== undefined)
           .map(
             (s) =>
               new k1t({
@@ -277,7 +277,7 @@ export function createSelectedContextService(params) {
         return (
           await Promise.all(e.map(async (n) => this.F.getFullCommit(n.sha)))
         )
-          .filter((n) => n !== void 0)
+          .filter((n) => n !== undefined)
           .map(
             (n) =>
               new XN({
@@ -346,7 +346,7 @@ export function createSelectedContextService(params) {
                   ? this.getWorktreeUri(r, t.worktreePath)
                   : r,
                 a = await rJ(this.w, this.y, { ...n, uri: o })
-              if (a === void 0) return
+              if (a === undefined) return
               const c =
                 (t?.context
                   ? this.getMentions(t.context, "fileSelections", n)
@@ -374,7 +374,7 @@ export function createSelectedContextService(params) {
     async getCodeChunksFromCodeSelection(e, t) {
       if (
         (await new Promise((s) =>
-          this.addOnCursorIgnoreLoadedCallback(() => s(void 0)),
+          this.addOnCursorIgnoreLoadedCallback(() => s(undefined)),
         ),
         !this.shouldIgnoreUri(e.uri))
       )
@@ -410,7 +410,7 @@ export function createSelectedContextService(params) {
         r = t?.worktreePath ? U.joinPath(U.file(t.worktreePath), s) : n,
         o = this.Q(r),
         a = this.z.getWorkspaceFolder(n)?.uri,
-        l = a === void 0 ? [] : await this.Q(a),
+        l = a === undefined ? [] : await this.Q(a),
         c = tPt()
           .add(await o)
           .add(await l),
@@ -435,7 +435,7 @@ export function createSelectedContextService(params) {
       }
     }
     async R(e, t, s, n) {
-      const o = await this.C.resolve(e, { resolveMetadata: !0 })
+      const o = await this.C.resolve(e, { resolveMetadata: true })
       let a = 0
       if (o.isDirectory && o.children)
         for (const l of o.children) {
@@ -457,7 +457,7 @@ export function createSelectedContextService(params) {
     }
     async S(e) {
       const t = this.z.resolveRelativePath(e),
-        s = await this.C.resolve(t, { resolveMetadata: !0 })
+        s = await this.C.resolve(t, { resolveMetadata: true })
       return !s.isDirectory && !s.isSymbolicLink
     }
     addContext(e) {
@@ -479,7 +479,7 @@ export function createSelectedContextService(params) {
       }
       if (
         (Dg(t)
-          ? this.U({ ...e, value: { ...s, addedWithoutMention: r === void 0 } })
+          ? this.U({ ...e, value: { ...s, addedWithoutMention: r === undefined } })
           : (n(t, s),
             r &&
               n("mentions", t, (c) => [
@@ -490,7 +490,7 @@ export function createSelectedContextService(params) {
           contextType: t,
           value: s,
           mention: r,
-          index: Dg(t) ? a()[t].length - 1 : void 0,
+          index: Dg(t) ? a()[t].length - 1 : undefined,
           id: o,
         }),
         o && l)
@@ -507,7 +507,7 @@ export function createSelectedContextService(params) {
               let p
               Dg(t) &&
                 ((p = g[t].findIndex((m) => vI(t, m, s))),
-                (p = p === -1 ? void 0 : p)),
+                (p = p === -1 ? undefined : p)),
                 this.removeContext({ ...d, index: p })
             },
             () => {
@@ -550,9 +550,9 @@ export function createSelectedContextService(params) {
           ? ((h = l[t]?.[n]), (c = this.W(e)))
           : ((h = l[t]),
             (c = l.mentions[t] || []),
-            s(t, void 0),
+            s(t, undefined),
             s("mentions", t, [])),
-        h !== void 0 &&
+        h !== undefined &&
           this.q.fire({
             contextType: t,
             value: h,
@@ -578,7 +578,7 @@ export function createSelectedContextService(params) {
               let b
               Dg(t) &&
                 ((b = m[t].findIndex((y) => vI(t, y, h))),
-                (b = b === -1 ? void 0 : b)),
+                (b = b === -1 ? undefined : b)),
                 this.removeContext({ ...p, index: b })
             },
           ),
@@ -592,7 +592,7 @@ export function createSelectedContextService(params) {
       return (
         n(t, (a) => {
           if (!a) return a
-          if (s === void 0) {
+          if (s === undefined) {
             const h = a.slice(0, -1),
               u = a[a.length - 1]
             return (o = this.X({ ...e, item: u })), h
@@ -608,7 +608,7 @@ export function createSelectedContextService(params) {
       const { contextType: t, item: s, setContext: n } = e,
         r = vp(t, s)
       let o = []
-      return n("mentions", t, r, (a) => (a === void 0 ? a : ((o = a), []))), o
+      return n("mentions", t, r, (a) => (a === undefined ? a : ((o = a), []))), o
     }
     removeMention(e) {
       const { setContext: t, uuid: s, getContext: n, id: r } = e,
@@ -700,7 +700,7 @@ export function createSelectedContextService(params) {
             errors: r,
             fileContents: (
               await this.J.getCurrentFileInfo(s, {
-                actuallyReadFromOverrideURI: !0,
+                actuallyReadFromOverrideURI: true,
               })
             )?.contents,
           })
@@ -713,18 +713,18 @@ export function createSelectedContextService(params) {
       this.g ? e() : this.f.push(e)
     }
     async Y() {
-      ;(this.g = !0), this.f.forEach((e) => e()), (this.f = [])
+      ;(this.g = true), this.f.forEach((e) => e()), (this.f = [])
     }
     Z() {
       return this.M.applicationUserPersistentStorage.teamBlocklist ?? []
     }
     shouldIgnoreUri(e) {
       const t = this.Z()
-      if (t.length === 0) return !1
+      if (t.length === 0) return false
       const s = e.path
-      if (s === void 0) return !1
-      for (const n of t) if (iy(n, s)) return !0
-      return !1
+      if (s === undefined) return false
+      for (const n of t) if (iy(n, s)) return true
+      return false
     }
     $(e, t) {
       const s = e.toString()
@@ -736,22 +736,22 @@ export function createSelectedContextService(params) {
     async filterCursorIgnoredFiles(e, t) {
       return (
         await new Promise((s) =>
-          this.addOnCursorIgnoreLoadedCallback(() => s(void 0)),
+          this.addOnCursorIgnoreLoadedCallback(() => s(undefined)),
         ),
         e.filter((s) => !this.shouldIgnoreUri(t(s)))
       )
     }
     isCodeChunkEqualToSelection(e, t) {
-      if (e.intent !== ev.CODE_SELECTION) return !1
+      if (e.intent !== ev.CODE_SELECTION) return false
       const s = U.revive(t.uri),
         n = this.z.asRelativePath(s)
-      if (e.relativeWorkspacePath !== n) return !1
+      if (e.relativeWorkspacePath !== n) return false
       const r = e.startLineNumber,
         o = Math.min(
           t.range.positionLineNumber,
           t.range.selectionStartLineNumber,
         )
-      if (r !== o) return !1
+      if (r !== o) return false
       const a = e.lines.length,
         l =
           Math.abs(

@@ -74,7 +74,7 @@ export function create_Re_aiServicePart2(params) {
         type: lc.AUTOMATIC,
         intent: {
           case: "terminalHistory",
-          value: { useActiveInstanceAsFallback: !0 },
+          value: { useActiveInstanceAsFallback: true },
         },
       },
     ],
@@ -175,7 +175,7 @@ export function create_Re_aiServicePart2(params) {
                 ).forEach((E) => {
                   this.w.getReactiveReadonlyContextSession(
                     E.contextSessionUuid,
-                  ) === void 0 &&
+                  ) === undefined &&
                     this.w.createContextSession({
                       ...mze(),
                       explicitUuid: E.contextSessionUuid,
@@ -274,7 +274,7 @@ export function create_Re_aiServicePart2(params) {
                 this.m.getNonEmbeddingChunks(g),
               ]),
           P =
-            n === void 0
+            n === undefined
               ? []
               : n.map((F) => ({
                   relativeWorkspacePath: this.g.asRelativePath(U.revive(F.uri)),
@@ -299,7 +299,7 @@ export function create_Re_aiServicePart2(params) {
                         .map((H, B) => ({
                           text: H,
                           lineNumber: B + F.range.selectionStartLineNumber,
-                          isSignature: !1,
+                          isSignature: false,
                         }))
                     : [],
                 })),
@@ -318,7 +318,7 @@ export function create_Re_aiServicePart2(params) {
             linterErrors: k,
             promptCodeBlocks: P,
             codeBlocks: [...E.map((F) => mPt(F)), ...D.map((F) => mPt(F))],
-            documentationIdentifiers: r === void 0 ? [] : r.map((F) => F.docId),
+            documentationIdentifiers: r === undefined ? [] : r.map((F) => F.docId),
             originalRequest: c,
             images: u ? await this.getPreparedImagesData(u, (F) => {}) : [],
             links: d ?? [],
@@ -337,7 +337,7 @@ export function create_Re_aiServicePart2(params) {
           this.b.getModelDetails({ specificModelField: "cmd-k" })
       this.q.publicLogCapture(`submitted.${t}`, { model: o.modelName })
       const [a, l] = this.b.registerNewGeneration({
-        metadata: void 0,
+        metadata: undefined,
         generationUUID: s,
       })
       this.b.decrementBubbleTimesLeft()
@@ -357,18 +357,18 @@ export function create_Re_aiServicePart2(params) {
         streamerURL: g,
         generationUUID: s,
         modelDetails: o,
-        rethrowCancellation: !0,
+        rethrowCancellation: true,
         source: "cmd-k",
         rerun: n?.rerun,
       })
       return this.b.streamLines(p)
     }
     getPromptBarCurrentRange(e, t) {
-      if (e === void 0) return
+      if (e === undefined) return
       const s = this.t.nonPersistentStorage.inlineDiffs.find(
         (r) => r.id === e.diffId,
       )
-      if (s !== void 0) return s.currentRange
+      if (s !== undefined) return s.currentRange
       const n = t?.getDecorationRange(e.currentRangeDecorationId)
       if (n)
         return {

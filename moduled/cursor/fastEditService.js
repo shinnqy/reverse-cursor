@@ -47,12 +47,12 @@ export function createFastEditService(params) {
         const r = new zr({ modelName: e.privateFtModel.modelName })
         this.g.publicLogCapture("Submitted /edit")
         const o = this.c.getLastActiveFileEditor()?.input?.resource
-        if (o === void 0) throw new Error("Failed to get last active file editor")
+        if (o === undefined) throw new Error("Failed to get last active file editor")
         const a = this.j.nonPersistentStorage.inlineDiffs
           .filter((b) => extUri.isEqual(b.uri, o))
           .map((b) => b.id)
         for (const b of a)
-          this.m.cancelDiff(b), this.m.rejectDiff(b, { close: !0 })
+          this.m.cancelDiff(b), this.m.rejectDiff(b, { close: true })
         let l = `
 `,
           c
@@ -66,16 +66,16 @@ export function createFastEditService(params) {
         }
         const h = {
             currentFile: await this.c.getCurrentFileInfo(o, {
-              includeNotebookCells: !0,
+              includeNotebookCells: true,
             }),
             conversation: e.conversationHistory,
             modelDetails: r,
             explicitContext: await this.c.getExplicitContext(),
             summary: e.generationMetadata.summaryText,
             summaryUpUntilIndex: e.generationMetadata.summaryUpUntilIndex,
-            isCmdI: !1,
+            isCmdI: false,
             files: [],
-            useFastApply: !1,
+            useFastApply: false,
             fastApplyModelType: F$.DEFAULT,
           },
           d = (await this.c.aiClient()).slashEdit(h, {
@@ -106,29 +106,29 @@ export function createFastEditService(params) {
           source: "chat",
           streamer: p,
           streamerURL: m,
-          rethrowCancellation: !0,
+          rethrowCancellation: true,
           rerun: e.options?.rerun,
           failSilently: e.options?.failSilently,
         })
       }
       async warmFastApply(e) {
         const t = e.uri ?? this.c.getLastActiveFileEditor()?.input?.resource
-        if (t === void 0) throw new Error("Failed to get last active file editor")
+        if (t === undefined) throw new Error("Failed to get last active file editor")
         const s = {
           conversation: e.conversationHistory,
           currentFile: await this.c.getCurrentFileInfo(t, {
-            actuallyReadFromOverrideURI: !0,
-            includeNotebookCells: !0,
+            actuallyReadFromOverrideURI: true,
+            includeNotebookCells: true,
           }),
           explicitContext: await this.c.getExplicitContext(),
           source: e.source,
-          willingToPayExtraForSpeed: !0,
+          willingToPayExtraForSpeed: true,
         }
         await (await this.a.get()).warmApply(s, { headers: wn(e.generationUUID) })
       }
       async performChatEdit(e) {
         const t = await this.performAndYieldChatEdit(e)
-        if (t !== void 0) for await (const s of t);
+        if (t !== undefined) for await (const s of t);
       }
       async performAndYieldChatEdit(e) {
         const t = rt()
@@ -161,7 +161,7 @@ export function createFastEditService(params) {
         const o =
           e.options?.overrideModelDetails ||
           this.c.getModelDetails({ specificModelField: "regular-chat" })
-        if ((this.g.publicLogCapture("Submitted /edit"), s === void 0))
+        if ((this.g.publicLogCapture("Submitted /edit"), s === undefined))
           throw new Error("Failed to get last active file editor")
         const a = () =>
             this.j.nonPersistentStorage.inlineDiffs
@@ -172,8 +172,8 @@ export function createFastEditService(params) {
             for (const z of B)
               this.m.cancelDiff(z),
                 this.m.rejectDiff(z, {
-                  close: !0,
-                  rejectSilently: !0,
+                  close: true,
+                  rejectSilently: true,
                   dontBreakConsolidation: H?.dontBreakConsolidation,
                 }),
                 e.onPreviousDiffReject?.(z)
@@ -182,7 +182,7 @@ export function createFastEditService(params) {
           h = e.shouldChainPrevious && c && !e.options?.rejectChangesInURI
         let u = ""
         if (!h) {
-          e.options?.rejectChangesInURI !== !1 && l()
+          e.options?.rejectChangesInURI !== false && l()
           const H = await this.l.createModelReference(s)
           ;(u = H.object.textEditorModel.getValue()), H.dispose()
         }
@@ -201,11 +201,11 @@ export function createFastEditService(params) {
           "using fast apply model type",
           this.j.applicationUserPersistentStorage.fastApplyModelType,
         )
-        const p = e.isBackgroundApply !== !0,
+        const p = e.isBackgroundApply !== true,
           m = {
             currentFile: await this.c.getCurrentFileInfo(s, {
-              actuallyReadFromOverrideURI: !0,
-              includeNotebookCells: !0,
+              actuallyReadFromOverrideURI: true,
+              includeNotebookCells: true,
             }),
             conversation: e.conversationHistory,
             modelDetails: o,
@@ -214,22 +214,22 @@ export function createFastEditService(params) {
             explicitContext: await this.c.getExplicitContext(),
             summary: e.generationMetadata?.summaryText ?? "",
             summaryUpUntilIndex: e.generationMetadata?.summaryUpUntilIndex ?? 0,
-            isCmdI: !1,
-            shouldUseTurboDebugPrompt: !0,
+            isCmdI: false,
+            shouldUseTurboDebugPrompt: true,
             editSelection: e.options?.overrideLineRange
               ? {
                   startLineNumber: e.options?.overrideLineRange.startLineNumber,
                   endLineNumberInclusive:
                     e.options?.overrideLineRange.endLineNumberExclusive - 1,
                 }
-              : void 0,
+              : undefined,
             files: [],
             clickedCodeBlockContents: e.clickedCodeBlockContents,
             specificInstructions: e.specificInstructions,
             isAnOptimisticRequestForCachingAndLinting:
-              e.inlineDiffServiceLookalike !== void 0 ||
+              e.inlineDiffServiceLookalike !== undefined ||
               e.source === nm.CACHED_APPLY,
-            useFastApply: !1,
+            useFastApply: false,
             fastApplyModelType: F$.DEFAULT,
             useChunkSpeculationForLongFiles: p,
             isReapply: e.isReapply,
@@ -242,16 +242,16 @@ export function createFastEditService(params) {
           ;(w = new cb(
             "Undo Chain Diff",
             "undo-chain-diff",
-            void 0,
+            undefined,
             s,
             () => {},
             () => {},
           )),
-            this.m.pushUndoElement(w, { breakConsolidation: !0 })
+            this.m.pushUndoElement(w, { breakConsolidation: true })
           const H = await this.l.createModelReference(s),
             B = H.object.textEditorModel,
             z = B.getValue()
-          l({ dontBreakConsolidation: !0 }), (b = B.getValue()), (y = z)
+          l({ dontBreakConsolidation: true }), (b = B.getValue()), (y = z)
           const K = B.getLineCount(),
             Q = {
               startLineNumber: 1,
@@ -259,25 +259,25 @@ export function createFastEditService(params) {
               startColumn: 1,
               endColumn: B.getLineMaxColumn(K),
             },
-            se = B.applyEdits([{ range: Q, text: z }], !0)
+            se = B.applyEdits([{ range: Q, text: z }], true)
           w.push(
             new cb(
               "Undo Chain Diff",
               "undo-chain-diff",
-              void 0,
+              undefined,
               s,
               () => {
-                B.applyEdits(se, !1)
+                B.applyEdits(se, false)
               },
               () => {
-                B.applyEdits([{ range: Q, text: z }], !1)
+                B.applyEdits([{ range: Q, text: z }], false)
               },
             ),
           ),
             H.dispose()
         }
         let C
-        if (e.existingStreamer !== void 0) C = e.existingStreamer
+        if (e.existingStreamer !== undefined) C = e.existingStreamer
         else {
           const B = (await this.c.aiClient()).slashEdit(m, {
             signal: r.signal,
@@ -319,7 +319,7 @@ export function createFastEditService(params) {
               B = await this.l.createModelReference(s)
               const z = B.object.textEditorModel,
                 K = z.getValue()
-              l({ dontBreakConsolidation: !0 })
+              l({ dontBreakConsolidation: true })
               const Q = z.getLinesContent(),
                 se = z.getLineCount(),
                 he = {
@@ -328,18 +328,18 @@ export function createFastEditService(params) {
                   startColumn: 1,
                   endColumn: z.getLineMaxColumn(se),
                 },
-                ae = z.applyEdits([{ range: he, text: b }], !0)
+                ae = z.applyEdits([{ range: he, text: b }], true)
               w.push(
                 new cb(
                   "Undo Chain Diff",
                   "undo-chain-diff",
-                  void 0,
+                  undefined,
                   s,
                   () => {
-                    z.applyEdits(ae, !1)
+                    z.applyEdits(ae, false)
                   },
                   () => {
-                    z.applyEdits([{ range: he, text: b }], !1)
+                    z.applyEdits([{ range: he, text: b }], false)
                   },
                 ),
               )
@@ -363,8 +363,8 @@ export function createFastEditService(params) {
                   currentRange: Ee,
                   originalTextLines: ke,
                   prompt: "hi",
-                  isHidden: !1,
-                  attachedToPromptBar: !1,
+                  isHidden: false,
+                  attachedToPromptBar: false,
                   source: OP,
                   createdAt: Date.now(),
                   composerMetadata: e.composerMetadata,
@@ -385,7 +385,7 @@ export function createFastEditService(params) {
                 e.onApplyDone?.({
                   newModelLines: K.split(d),
                   originalModelLines: Q,
-                  isChained: !0,
+                  isChained: true,
                 })
             } finally {
               B?.dispose()
@@ -401,7 +401,7 @@ export function createFastEditService(params) {
               const z = B.object.textEditorModel
               let K = ""
               H && (K = z.getValue()),
-                l({ dontBreakConsolidation: !0 }),
+                l({ dontBreakConsolidation: true }),
                 !H && e.cleanUpOnFail && (K = z.getValue())
               const Q = z.getLineCount(),
                 se = {
@@ -410,18 +410,18 @@ export function createFastEditService(params) {
                   startColumn: 1,
                   endColumn: z.getLineMaxColumn(Q),
                 },
-                he = z.applyEdits([{ range: se, text: b }], !0)
+                he = z.applyEdits([{ range: se, text: b }], true)
               w.push(
                 new cb(
                   "Undo Chain Diff",
                   "undo-chain-diff",
-                  void 0,
+                  undefined,
                   s,
                   () => {
-                    z.applyEdits(he, !1)
+                    z.applyEdits(he, false)
                   },
                   () => {
-                    z.applyEdits([{ range: se, text: b }], !1)
+                    z.applyEdits([{ range: se, text: b }], false)
                   },
                 ),
               )
@@ -439,8 +439,8 @@ export function createFastEditService(params) {
                   currentRange: de,
                   originalTextLines: Ee,
                   prompt: "hi",
-                  isHidden: !1,
-                  attachedToPromptBar: !1,
+                  isHidden: false,
+                  attachedToPromptBar: false,
                   source: OP,
                   createdAt: Date.now(),
                   composerMetadata: e.composerMetadata,
@@ -476,14 +476,14 @@ export function createFastEditService(params) {
             source: e.options?.overrideSource,
             inlineDiffServiceLookalike: e.inlineDiffServiceLookalike,
             composerMetadata: e.composerMetadata,
-            onCreateInlineDiff: h ? void 0 : e.onCreateInlineDiff,
+            onCreateInlineDiff: h ? undefined : e.onCreateInlineDiff,
             linesDiffComputerOptions: e.linesDiffComputerOptions,
             originalLineTokens: x,
             onFailed: h ? P : D,
             onFinish: h ? E : k,
           }
         let A
-        e.inlineDiffServiceLookalikePure === void 0
+        e.inlineDiffServiceLookalikePure === undefined
           ? (A = this.handleSlashEditResponseSingleDiff(L))
           : (A = this.handleSlashEditResponseSingleDiffPure({
               ...L,
@@ -496,22 +496,22 @@ export function createFastEditService(params) {
           source: "other",
           streamer: A,
           streamerURL: F,
-          rethrowCancellation: !0,
+          rethrowCancellation: true,
           rerun: e.options?.rerun,
           failSilently: e.options?.failSilently,
         })
       }
       rejectSlashEdit(e) {
         const t = this.x.get(e)
-        t !== void 0 && this.m.rejectDiff(t.diffId)
+        t !== undefined && this.m.rejectDiff(t.diffId)
       }
       getDiffId(e) {
         const t = this.x.get(e)
-        if (t !== void 0) return t.diffId
+        if (t !== undefined) return t.diffId
       }
       acceptSlashEdit(e) {
         const t = this.x.get(e)
-        t !== void 0 && this.m.acceptDiff(t.diffId)
+        t !== undefined && this.m.acceptDiff(t.diffId)
       }
       async *handleSlashEditResponseSingleDiffPure({
         eol: e,
@@ -532,8 +532,8 @@ export function createFastEditService(params) {
         onFailed: b,
         originalLineTokens: y,
       }) {
-        let w = !1,
-          C = !1,
+        let w = false,
+          C = false,
           S
         yield "Performing edit..."
         const x =
@@ -546,7 +546,7 @@ export function createFastEditService(params) {
         const P = []
         let L = Date.now()
         const A = () => {
-            S !== void 0 && d.addLinesToDiff(S, P),
+            S !== undefined && d.addLinesToDiff(S, P),
               (P.length = 0),
               (L = Date.now())
           },
@@ -554,22 +554,22 @@ export function createFastEditService(params) {
             Date.now() - L < 250 || A()
           }
         try {
-          if (k === void 0) throw new Error("Failed to get current file info")
+          if (k === undefined) throw new Error("Failed to get current file info")
           const H = {
             uri: c,
             generationUUID: a,
             currentRange: x,
             originalTextLines: k,
             prompt: "hi4",
-            isHidden: !1,
-            attachedToPromptBar: !1,
+            isHidden: false,
+            attachedToPromptBar: false,
             source: u ?? OP,
             createdAt: Date.now(),
             composerMetadata: n,
             originalLineTokens: y,
           }
           ;(S = (await d.addActiveDiff(H)).id),
-            S !== void 0 && (this.x.set(t, { diffId: S }), g && g(c, S))
+            S !== undefined && (this.x.set(t, { diffId: S }), g && g(c, S))
           let B = ""
           for await (const z of r) {
             if (
@@ -585,7 +585,7 @@ export function createFastEditService(params) {
                 (this.j.setNonPersistentStorage(
                   "composerState",
                   "shouldSimulateApplyError",
-                  !1,
+                  false,
                 ),
                 new Error("Simulated apply error"))
               )
@@ -637,24 +637,24 @@ export function createFastEditService(params) {
               }
           }
           for (; D <= k.length; D++) P.push(k[D - 1]), F(), E.push(k[D - 1])
-          A(), (w = !0), S !== void 0 && d.finishDiffSuccess(S)
+          A(), (w = true), S !== undefined && d.finishDiffSuccess(S)
         } catch (H) {
-          H.message === "[canceled] This operation was aborted" && (C = !0),
+          H.message === "[canceled] This operation was aborted" && (C = true),
             console.error(
               "[composer] error in handleSlashEditResponseSingleDiffPure",
               H,
             )
         } finally {
           if (w) {
-            if ((yield " done!", k !== void 0)) {
+            if ((yield " done!", k !== undefined)) {
               const H = await this.k.computeLinesDiff(k, E, {
-                ignoreTrimWhitespace: !1,
-                computeMoves: !1,
+                ignoreTrimWhitespace: false,
+                computeMoves: false,
                 maxComputationTimeMs: 500,
                 ...p,
               })
               let B = H.changes
-              H.hitTimeout && (B = [new Qb(x, new Es(1, E.length + 1), void 0)])
+              H.hitTimeout && (B = [new Qb(x, new Es(1, E.length + 1), undefined)])
               const z = B.map((Q) => ({
                 original: Q.original,
                 modified: E.slice(
@@ -704,16 +704,16 @@ export function createFastEditService(params) {
             }
           } else yield " failed.", b?.(C)
           l.abort(),
-            w || (S !== void 0 && (A(), d.cancelDiff(S))),
-            (S === void 0 ||
+            w || (S !== undefined && (A(), d.cancelDiff(S))),
+            (S === undefined ||
               this.j.nonPersistentStorage.inlineDiffs.find((H) => H.id === S) ===
-                void 0) &&
+                undefined) &&
               s &&
               this.j.setNonPersistentStorage(
                 "nonPersistentChatMetadata",
                 ({ bubbleId: H, tabId: B }) => H === s.bubbleId && B === s.tabId,
                 "editUuid",
-                void 0,
+                undefined,
               )
         }
       }
@@ -735,8 +735,8 @@ export function createFastEditService(params) {
         onFinish: m,
         onFailed: b,
       }) {
-        let y = !1,
-          w = !1,
+        let y = false,
+          w = false,
           C
         yield "Performing edit..."
         const S =
@@ -750,7 +750,7 @@ export function createFastEditService(params) {
         const D = []
         let P = Date.now()
         const L = () => {
-            C !== void 0 && this.m.addLinesToDiff(C, D),
+            C !== undefined && this.m.addLinesToDiff(C, D),
               (D.length = 0),
               (P = Date.now())
           },
@@ -758,21 +758,21 @@ export function createFastEditService(params) {
             Date.now() - P < 250 || L()
           }
         try {
-          if (x === void 0) throw new Error("Failed to get current file info")
+          if (x === undefined) throw new Error("Failed to get current file info")
           const F = {
             uri: c,
             generationUUID: a,
             currentRange: S,
             originalTextLines: x,
             prompt: "hi5",
-            isHidden: !1,
-            attachedToPromptBar: !1,
+            isHidden: false,
+            attachedToPromptBar: false,
             source: u ?? OP,
             createdAt: Date.now(),
             composerMetadata: n,
           }
-          ;(C = d ? void 0 : (await this.m.addActiveDiff(F)).id),
-            C !== void 0 && (this.x.set(t, { diffId: C }), g && g(c, C))
+          ;(C = d ? undefined : (await this.m.addActiveDiff(F)).id),
+            C !== undefined && (this.x.set(t, { diffId: C }), g && g(c, C))
           let H = ""
           for await (const B of r) {
             const z = B.cmdKResponse?.response
@@ -822,24 +822,24 @@ export function createFastEditService(params) {
               }
           }
           for (; E <= x.length; E++) D.push(x[E - 1]), A(), k.push(x[E - 1])
-          L(), (y = !0), C !== void 0 && this.m.finishDiffSuccess(C)
+          L(), (y = true), C !== undefined && this.m.finishDiffSuccess(C)
         } catch (F) {
-          F.message === "[canceled] This operation was aborted" && (w = !0),
+          F.message === "[canceled] This operation was aborted" && (w = true),
             console.error(
               "[composer] error in handleSlashEditResponseSingleDiff",
               F,
             )
         } finally {
           if (y) {
-            if ((yield " done!", x !== void 0)) {
+            if ((yield " done!", x !== undefined)) {
               const F = await this.k.computeLinesDiff(x, k, {
-                ignoreTrimWhitespace: !1,
-                computeMoves: !1,
+                ignoreTrimWhitespace: false,
+                computeMoves: false,
                 maxComputationTimeMs: 500,
                 ...p,
               })
               let H = F.changes
-              F.hitTimeout && (H = [new Qb(S, new Es(1, k.length + 1), void 0)])
+              F.hitTimeout && (H = [new Qb(S, new Es(1, k.length + 1), undefined)])
               const B = H.map((K) => ({
                 original: K.original,
                 modified: k.slice(
@@ -890,18 +890,18 @@ export function createFastEditService(params) {
             }
           } else yield " failed.", b?.(w)
           l.abort(),
-            y || (C !== void 0 ? (L(), this.m.cancelDiff(C)) : d && d.cancel()),
-            d === void 0 &&
-              (C === void 0 ||
+            y || (C !== undefined ? (L(), this.m.cancelDiff(C)) : d && d.cancel()),
+            d === undefined &&
+              (C === undefined ||
                 this.j.nonPersistentStorage.inlineDiffs.find(
                   (F) => F.id === C,
-                ) === void 0) &&
+                ) === undefined) &&
               s &&
               this.j.setNonPersistentStorage(
                 "nonPersistentChatMetadata",
                 ({ bubbleId: F, tabId: H }) => F === s.bubbleId && H === s.tabId,
                 "editUuid",
-                void 0,
+                undefined,
               )
         }
       }
@@ -937,19 +937,19 @@ export function createFastEditService(params) {
               y = m?.active
             switch (p.case) {
               case "editStart": {
-                if (b !== void 0 || y !== void 0)
+                if (b !== undefined || y !== undefined)
                   throw new Error("BAD BAD BAD YELL AT ARVID PLS")
                 let w = l.getUpdatedLineNumber(p.value.startLineNumber),
                   C = p.value.maxEndLineNumberExclusive
                     ? l.getUpdatedLineNumber(p.value.maxEndLineNumberExclusive)
-                    : void 0
+                    : undefined
                 if (
                   (C === null &&
-                    p.value.maxEndLineNumberExclusive !== void 0 &&
+                    p.value.maxEndLineNumberExclusive !== undefined &&
                     ((C = l.getUpdatedLineNumber(d)), C !== null && (C += 1)),
                   w === null &&
                     ((w = l.getUpdatedLineNumber(d)), w !== null && (w += 1)),
-                  C === void 0 &&
+                  C === undefined &&
                     ((C = l.getUpdatedLineNumber(d)), C !== null && (C += 1)),
                   w === null || C === null)
                 ) {
@@ -968,13 +968,13 @@ export function createFastEditService(params) {
                     currentRange: S,
                     originalTextLines: x,
                     prompt: "hi6",
-                    isHidden: !1,
-                    attachedToPromptBar: !1,
+                    isHidden: false,
+                    attachedToPromptBar: false,
                   },
                   E = await this.m.addActiveDiff(k)
                 c.set(p.value.editId, {
                   diffId: E.id,
-                  active: !0,
+                  active: true,
                   lineBuffer: "",
                   startLine: p.value.startLineNumber,
                 }),
@@ -984,7 +984,7 @@ export function createFastEditService(params) {
                     "diffIds",
                     (P) => [...P, E.id],
                   ),
-                  (y = !0),
+                  (y = true),
                   c.size === 1 && this.m.revealDiff(E.id)
                 const D = Array.from(c.values()).map((P) => P.diffId)
                 this.potentiallyFold(D, E.id)
@@ -992,7 +992,7 @@ export function createFastEditService(params) {
               }
               case "editStream": {
                 const w = c.get(p.value.editId)
-                if (w === void 0) throw new Error("BAD BAD BAD YELL AT ARVID PLS")
+                if (w === undefined) throw new Error("BAD BAD BAD YELL AT ARVID PLS")
                 for (
                   w.lineBuffer += p.value.text;
                   w.lineBuffer.includes(`
@@ -1014,7 +1014,7 @@ export function createFastEditService(params) {
               }
               case "editEnd": {
                 const w = c.get(p.value.editId)
-                if (w === void 0) throw new Error("BAD BAD BAD YELL AT ARVID PLS")
+                if (w === undefined) throw new Error("BAD BAD BAD YELL AT ARVID PLS")
                 w.lineBuffer.length > 0 &&
                   this.m.addLineToDiff(w.diffId, w.lineBuffer)
                 const C =
@@ -1042,8 +1042,8 @@ export function createFastEditService(params) {
                     currentRange: E,
                     originalTextLines: D,
                     prompt: "hi",
-                    isHidden: !1,
-                    attachedToPromptBar: !1,
+                    isHidden: false,
+                    attachedToPromptBar: false,
                   },
                   L = await this.m.addActiveDiff(P)
                 ;(b = L.id),
@@ -1068,7 +1068,7 @@ export function createFastEditService(params) {
           const s =
             t.object.textEditorModel.nonPersistentReactiveStorage.topPromptBarData
               .lastGenerationUUID
-          s !== void 0 &&
+          s !== undefined &&
             this.j.setNonPersistentStorage("inprogressAIGenerations", (n) =>
               n.filter((r) => r.generationUUID !== s),
             )
@@ -1109,7 +1109,7 @@ export function createFastEditService(params) {
             t.object.textEditorModel.setNonPersistentReactiveStorage(
               "topPromptBarData",
               "shown",
-              !1,
+              false,
             ),
             t.object.textEditorModel.setNonPersistentReactiveStorage(
               "topPromptBarData",
@@ -1135,7 +1135,7 @@ export function createFastEditService(params) {
         this.o.executeCommand("editor.unfoldAll")
       }
       async performFastEdit({ query: e, uri: t }) {
-        const [s, n] = this.c.registerNewGeneration({ metadata: void 0 }),
+        const [s, n] = this.c.registerNewGeneration({ metadata: undefined }),
           r = new J(),
           o = await this.l.createModelReference(t)
         r.add(o),
@@ -1152,14 +1152,14 @@ export function createFastEditService(params) {
             l = new V$i({
               query: e,
               currentFile: await this.c.getCurrentFileInfo(t, {
-                includeNotebookCells: !0,
+                includeNotebookCells: true,
               }),
               repositories: this.c.repositories.map((p) => p.repoInfo),
               explicitContext: await this.c.getExplicitContext(),
               workspaceRootPath: this.b.getWorkspaceRootPath(),
               modelDetails: a,
             })
-          if (l.currentFile === void 0)
+          if (l.currentFile === undefined)
             throw new Error("Failed to get current file info")
           const c = new SYe(o, [o.object.textEditorModel.getFullModelRange()])
           this.c.addToPromptHistory({ prompt: e, commandType: JC.CHAT })
@@ -1174,7 +1174,7 @@ export function createFastEditService(params) {
             let m = d.get(p.editUuid),
               b = m?.diffId,
               y = m?.active
-            if (b === void 0 || y === void 0) {
+            if (b === undefined || y === undefined) {
               let w = c.getUpdatedLineNumber(p.lineNumber),
                 C = c.getUpdatedLineNumber(p.lineNumber + p.replaceNumLines)
               if (
@@ -1212,27 +1212,27 @@ export function createFastEditService(params) {
                   currentRange: S,
                   originalTextLines: x,
                   prompt: l.query,
-                  isHidden: !1,
-                  attachedToPromptBar: !1,
+                  isHidden: false,
+                  attachedToPromptBar: false,
                 },
                 E = await this.m.addActiveDiff(k)
-              d.set(p.editUuid, { diffId: E.id, active: !0 }),
+              d.set(p.editUuid, { diffId: E.id, active: true }),
                 (b = E.id),
                 o.object.textEditorModel.setNonPersistentReactiveStorage(
                   "topPromptBarData",
                   "diffIds",
                   (P) => [...P, E.id],
                 ),
-                (y = !0),
+                (y = true),
                 d.size === 1 && this.m.revealDiff(E.id)
               const D = Array.from(d.values()).map((P) => P.diffId)
               this.potentiallyFold(D, E.id)
             }
             y
-              ? (p.newLine !== void 0 && this.m.addLineToDiff(b, p.newLine),
-                p.done === !0 &&
+              ? (p.newLine !== undefined && this.m.addLineToDiff(b, p.newLine),
+                p.done === true &&
                   (this.m.finishDiffSuccess(b),
-                  d.set(p.editUuid, { diffId: b, active: !1 })))
+                  d.set(p.editUuid, { diffId: b, active: false })))
               : console.log("Skipping inactive edit FOR NOW", p.editUuid)
           }
         } finally {
@@ -1244,14 +1244,14 @@ export function createFastEditService(params) {
       }
       async potentiallyFold(e, t) {
         const s = this.j.nonPersistentStorage.inlineDiffs.find((C) => C.id === t)
-        if (s === void 0) return
+        if (s === undefined) return
         const n = e.filter((C) => C !== t)
         if (n.length === 0) return
         const r = n.map((C) => {
           const S = this.j.nonPersistentStorage.inlineDiffs.find(
             (P) => P.id === C,
           )
-          if (S === void 0) return 1 / 0
+          if (S === undefined) return 1 / 0
           const x = S.currentRange,
             k = s.currentRange,
             E = Math.abs(x.endLineNumberExclusive - k.startLineNumber),
@@ -1263,11 +1263,11 @@ export function createFastEditService(params) {
         for (let C = 1; C < r.length; C++) r[C] < a && ((o = C), (a = r[C]))
         const l = n[o],
           c = this.j.nonPersistentStorage.inlineDiffs.find((C) => C.id === l)
-        if (c === void 0 || a < 10) return
+        if (c === undefined || a < 10) return
         const h = this.n.activeEditorPane
-        if (h === void 0) return
+        if (h === undefined) return
         const u = h.getControl()
-        if (u === void 0 || !Pn(u)) return
+        if (u === undefined || !Pn(u)) return
         const d = pm.get(u)
         if (!d) return
         const g = d.getFoldingModel()
@@ -1285,8 +1285,8 @@ export function createFastEditService(params) {
           y = {
             startLineNumber: m.currentRange.endLineNumberExclusive + 5,
             endLineNumber: b.currentRange.startLineNumber - 5,
-            type: void 0,
-            isCollapsed: !0,
+            type: undefined,
+            isCollapsed: true,
             source: 1,
           },
           w = VC.sanitizeAndMerge(p.regions, [y], u.getModel()?.getLineCount())
@@ -1394,7 +1394,7 @@ export function createFastEditService(params) {
         this.a = e
       }
       unregisterProvider() {
-        this.a = void 0
+        this.a = undefined
       }
     }
   ;(DFt = __decorate([__param(0, ei)], DFt)), Ve(xYe, DFt, 1);

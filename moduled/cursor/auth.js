@@ -125,9 +125,9 @@ export function createAuth(params) {
         ) {
           const s = this.getExpirationTime(e) - 5 * 60 * 1e3
           return Date.now() > s
-            ? ((this.r = null), !0)
-            : ((this.r = { accessToken: e, cacheExpiration: s }), !1)
-        } else return !1
+            ? ((this.r = null), true)
+            : ((this.r = { accessToken: e, cacheExpiration: s }), false)
+        } else return false
       }
       addOpenAIKeyChangedListener(e) {
         this.g.push(e)
@@ -188,9 +188,9 @@ export function createAuth(params) {
         (this.M = () => {}),
         (this.N = () => {}),
         (this.O = () => {}),
-        (this.S = () => !0),
+        (this.S = () => true),
         (this.U = () => {}),
-        (this.W = !0),
+        (this.W = true),
         (this.X = new R()),
         (this.onDidPotentiallyChangePrivacyMode = this.X.event),
         (this.getDaysRemainingOnTrial = async () => {
@@ -210,7 +210,7 @@ export function createAuth(params) {
                   )
                 ).json()
               ).daysRemainingOnTrial
-            : void 0
+            : undefined
         }),
         (this.logout = async () => {
           this.a.store("cursorAuth/refreshToken", null, -1, 1),
@@ -220,18 +220,18 @@ export function createAuth(params) {
             this.z(),
             this.C(_n.FREE, _n.FREE),
             this.G(_n.FREE),
-            this.F(!1),
+            this.F(false),
             this.refreshMembershipType(),
-            await this.ab.open(`${this.$.getLogoutUrl()}`, { openExternal: !0 })
+            await this.ab.open(`${this.$.getLogoutUrl()}`, { openExternal: true })
         }),
         (this.debouncedRefetchIsTeamsPrivacyModeOn = t9i(() => {
           this.U()
         }, 3e4)),
-        (this.lb = !1),
-        (this.rb = !1),
-        (this.refreshAccessToken = async (w = !1) => {
+        (this.lb = false),
+        (this.rb = false),
+        (this.refreshAccessToken = async (w = false) => {
           if (this.rb) return
-          this.rb = !0
+          this.rb = true
           let C
           try {
             const S = this.t()
@@ -257,12 +257,12 @@ export function createAuth(params) {
                 throw new Error("Failed to refresh access token")
               console.log("successfully refreshed access token!")
               const L = await P.json()
-              L.shouldLogout === !0 ? this.logout() : this.w(L.access_token, x)
+              L.shouldLogout === true ? this.logout() : this.w(L.access_token, x)
             }
           } catch (S) {
             console.error(S)
           } finally {
-            ;(this.rb = !1), C && clearTimeout(C)
+            ;(this.rb = false), C && clearTimeout(C)
           }
         }),
         (this.getDidUserLastPaymentFailed = async () => {
@@ -341,9 +341,9 @@ export function createAuth(params) {
             ).then((E) => E.json())
             k && typeof k == "string"
               ? (S = { membershipType: _n.PRO, paymentId: k })
-              : (S = void 0)
+              : (S = undefined)
           }
-          S !== void 0 ? this.H(S.membershipType) : this.H(_n.FREE)
+          S !== undefined ? this.H(S.membershipType) : this.H(_n.FREE)
         }),
         (this.sb = le(0)),
         (this.reactiveMembershipType = () => {
@@ -382,7 +382,7 @@ export function createAuth(params) {
           onChange: ({ deps: w }) => {
             this.X.fire(w[0])
           },
-          runNowToo: !0,
+          runNowToo: true,
         }),
         this.eb.registerBearerTokenProvider(() => this.getAccessToken()),
         this.bb.registerHandler({
@@ -393,9 +393,9 @@ export function createAuth(params) {
             ) {
               const S = w.query,
                 x = new URLSearchParams(S)
-              return this.nb(x), !0
+              return this.nb(x), true
             }
-            return !1
+            return false
           },
         }),
         (this.P = this.fb.createInstance(fu, { service: Vje })),
@@ -409,13 +409,13 @@ export function createAuth(params) {
               return
             }
           }
-          this.db.registerAuthId(void 0)
+          this.db.registerAuthId(undefined)
         })
       const b = this.t()
       if (b) {
         const w = this.getAuthIdFromToken(b)
         this.db.registerAuthId(w)
-      } else this.db.registerAuthId(void 0)
+      } else this.db.registerAuthId(undefined)
       this.D(
         this.gb.onDidChangeTransport(() => {
           this.sendPrivacySettings().catch(console.error)
@@ -438,7 +438,7 @@ export function createAuth(params) {
         produceFn: async (w) => {
           let C
           try {
-            if (w === void 0 || w.length === 0) return (this.W = !0), !0
+            if (w === undefined || w.length === 0) return (this.W = true), true
             const S = new AbortController()
             C = setTimeout(() => {
               S.abort()
@@ -467,7 +467,7 @@ export function createAuth(params) {
               })
           }
         },
-        initialValue: !0,
+        initialValue: true,
       })
       ;(this.S = y[0]),
         (this.U = y[1].refetch),
@@ -488,7 +488,7 @@ export function createAuth(params) {
               this.a.store(jJ, _n.FREE, -1, 1),
               this.C(_n.FREE, _n.FREE),
               this.G(_n.FREE),
-              this.F(!1),
+              this.F(false),
               this.login()
           }),
         ),
@@ -509,8 +509,8 @@ export function createAuth(params) {
     reconcilePrivacyMode() {
       try {
         this.a.get(n9i, -1) === "true" &&
-          this.reactivePrivacyMode() !== !0 &&
-          this.f.setApplicationUserPersistentStorage("noStorageMode", !0)
+          this.reactivePrivacyMode() !== true &&
+          this.f.setApplicationUserPersistentStorage("noStorageMode", true)
       } catch (e) {
         console.error(e)
       }
@@ -520,21 +520,21 @@ export function createAuth(params) {
     }
     belongsToDevTeam() {
       const e = this.f.applicationUserPersistentStorage.aiSettings.teamIds
-      return e === void 0 ? !1 : e.includes(1)
+      return e === undefined ? false : e.includes(1)
     }
     reactivePrivacyMode() {
       const e = this.f.applicationUserPersistentStorage.noStorageMode
       return this.reactiveMembershipType() === _n.ENTERPRISE
         ? this.belongsToDevTeam()
-          ? (e !== !1 &&
-              this.f.setApplicationUserPersistentStorage("noStorageMode", !1),
-            !1)
+          ? (e !== false &&
+              this.f.setApplicationUserPersistentStorage("noStorageMode", false),
+            false)
           : this.shouldHaveGhostModeFromEnterprise()
-            ? (this.f.setApplicationUserPersistentStorage("noStorageMode", !0),
-              !0)
+            ? (this.f.setApplicationUserPersistentStorage("noStorageMode", true),
+              true)
             : e
-        : e === void 0 && this.a.get(Qwt, -1, "true") !== "true"
-          ? (this.f.setApplicationUserPersistentStorage("noStorageMode", !0), !0)
+        : e === undefined && this.a.get(Qwt, -1, "true") !== "true"
+          ? (this.f.setApplicationUserPersistentStorage("noStorageMode", true), true)
           : e
     }
     async refreshAuthService() {
@@ -559,18 +559,18 @@ export function createAuth(params) {
     async sendPrivacySettings() {
       Vle(async () => {
         if (!this.lb) {
-          this.lb = !0
+          this.lb = true
           try {
             await M_n(
               async () => {
                 const e = await this.authClient()
-                if (this.t() === void 0) throw new Error("No access token")
+                if (this.t() === undefined) throw new Error("No access token")
                 await e.markPrivacy({
                   currentPrivacyMode: this.reactivePrivacyMode(),
                   onboardingPrivacyMode:
                     this.f.applicationUserPersistentStorage
                       .selectedPrivacyForOnboarding,
-                  isUsingCurrentAndOnboardingFormat: !0,
+                  isUsingCurrentAndOnboardingFormat: true,
                 })
               },
               { initialRetryTimeMs: 3e3, maxNumberOfRetries: 5 },
@@ -578,7 +578,7 @@ export function createAuth(params) {
           } catch (e) {
             console.error(e)
           } finally {
-            this.lb = !1
+            this.lb = false
           }
         }
       }, 10 * 1e3)
@@ -628,7 +628,7 @@ export function createAuth(params) {
     }
     ob(e) {
       const t = Yt.wrap(e)
-      return HS(t, !1, !0)
+      return HS(t, false, true)
     }
     async pb(e) {
       if (!crypto.subtle)
@@ -652,7 +652,7 @@ export function createAuth(params) {
         e !== "dev-trial" &&
         (await this.ab.open(
           `${this.$.getLoginUrl()}?challenge=${n}&uuid=${r}&mode=${e}`,
-          { openExternal: !0 },
+          { openExternal: true },
         ))
       let o = 0
       this.N(), this.cb.info("Starting polling for login")
@@ -680,7 +680,7 @@ export function createAuth(params) {
           return
         const c = await l.json()
         this.cb.info("Got login json", c),
-          c !== void 0 &&
+          c !== undefined &&
             (c.authId && this.qb(c.authId),
             c.accessToken &&
               c.refreshToken &&
@@ -695,14 +695,14 @@ export function createAuth(params) {
         bt.clearInterval(a)
       }),
         await Promise.race([
-          new Promise((l) => setTimeout(() => l(!1), 180 * 1e3)),
+          new Promise((l) => setTimeout(() => l(false), 180 * 1e3)),
         ]),
         bt.clearInterval(a),
         this.mb()
     }
     async pay() {
       this.mb(),
-        await this.ab.open(this.$.getCheckoutUrl(), { openExternal: !0 }),
+        await this.ab.open(this.$.getCheckoutUrl(), { openExternal: true }),
         this.O()
       const e = bt.setInterval(async () => {
         await this.refreshAuthentication(),
@@ -712,7 +712,7 @@ export function createAuth(params) {
         bt.clearInterval(e)
       }),
         await Promise.race([
-          new Promise((t) => setTimeout(() => t(!1), 3 * 60 * 1e3)),
+          new Promise((t) => setTimeout(() => t(false), 3 * 60 * 1e3)),
         ]),
         bt.clearInterval(e),
         this.mb()
@@ -728,7 +728,7 @@ export function createAuth(params) {
       await this.login("signup")
     }
     async settings() {
-      await this.ab.open(this.$.getSettingsUrl(), { openExternal: !0 })
+      await this.ab.open(this.$.getSettingsUrl(), { openExternal: true })
     }
     async refreshAuthentication() {
       ;(await this.getAccessToken()) || (await this.refreshAccessToken()),
@@ -748,7 +748,7 @@ export function createAuth(params) {
     }
     async getAccessToken() {
       const e = this.t()
-      if (e === void 0) return
+      if (e === undefined) return
       const t = new Date(),
         s = rj(e),
         n = new Date(s.exp * 1e3)
@@ -772,7 +772,7 @@ export function createAuth(params) {
         req: e,
         machineId: this.Y ?? this.db.machineId,
         macMachineId: this.Z ?? this.db.macMachineId,
-        base64Fn: (t) => HS(Yt.wrap(t), !1, !0),
+        base64Fn: (t) => HS(Yt.wrap(t), false, true),
         cursorVersion: this.hb.version,
         privacyMode: this.reactivePrivacyMode(),
         sessionId: this.L,
@@ -837,7 +837,7 @@ export function createAuth(params) {
         const t = e.match(/^git@[^:]+:([^/]+)\/([^/]+?)(\.git)?$/)
         if (t) return t[2]
         const s = e.match(/^https?:\/\/[^/]+\/[^/]+\/([^/]+?)(\.git)?$/)
-        return s ? s[1] : void 0
+        return s ? s[1] : undefined
       } catch {
         return
       }
@@ -872,10 +872,10 @@ export function createAuth(params) {
           value: "Trigger Token Refresh",
           original: "Trigger Token Refresh",
         },
-        f1: !0,
+        f1: true,
       })
     }
-    run(i, e = !0) {
+    run(i, e = true) {
       i.get($h).refreshAccessToken(e)
     }
   }

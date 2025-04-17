@@ -9,7 +9,7 @@ export function createGitContextService(params) {
         super(),
           (this.b = e),
           (this.f = t),
-          (this.a = void 0),
+          (this.a = undefined),
           (this._onDidRunGitStatus = this.D(new R())),
           (this.onDidRunGitStatus = this._onDidRunGitStatus.event)
       }
@@ -23,13 +23,13 @@ export function createGitContextService(params) {
         throw new Error("Method not implemented.")
       }
       hasGitContextProvider() {
-        return this.a !== void 0
+        return this.a !== undefined
       }
       registerGitContextProvider(e) {
         this.a = e
       }
       unregisterGitContextProvider() {
-        this.a = void 0
+        this.a = undefined
       }
       async searchAllCommits(e) {
         if (!this.a) throw new Error("No commit search provider registered")

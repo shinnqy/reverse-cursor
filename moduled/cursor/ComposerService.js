@@ -905,11 +905,11 @@ The service is designed with careful attention to:
 It's a core part of the IDE's AI capabilities, managing everything from simple code completions to complex cursor predictions while maintaining performance and reliability.`,
   },
   hxr = [J1r, G1r, exr, txr, ixr, sxr, nxr, rxr, oxr, axr, lxr, cxr],
-  uxr = !1,
+  uxr = false,
   dxr = 500,
   fxr = 10,
   gxr = 1e6,
-  Ygs = { shouldGracefullyFallBackOnTimeout: !0 },
+  Ygs = { shouldGracefullyFallBackOnTimeout: true },
   Sn = class extends V {
     constructor(
       e,
@@ -1010,9 +1010,9 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
         (this.textFileService = lt),
         (this.composerUnificationService = Xe),
         (this.mcpService = Oe),
-        (this._shouldOpenNextAppliedFile = !1),
+        (this._shouldOpenNextAppliedFile = false),
         (this._composerEditingStates = new Map()),
-        (this._isTurningCachedCodeBlocksToDiffs = !1),
+        (this._isTurningCachedCodeBlocksToDiffs = false),
         (this._fileWatchers = new Map()),
         (this._uriToCachedCodeBlocks = new Map()),
         (this._uriToCachedCodeBlocksQueue = new Map()),
@@ -1020,7 +1020,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
         (this._ignoreChangesToContext = new Set()),
         (this._fastApplyQueue = new UE(fxr)),
         (this._skipHandleAbortChat = new Set()),
-        (this._recentlyResumed = !1),
+        (this._recentlyResumed = false),
         (this._onDidOpenComposer = this.D(new R())),
         (this.onDidOpenComposer = this._onDidOpenComposer.event),
         (this._onDidInsertTerminalText = this.D(new R())),
@@ -1055,12 +1055,12 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
         (this.recentTimeWindow = 60 * 1e3),
         (this.maxRecentRequests = 10),
         (this.reapply = async (Ge, Et, Bt) => {
-          const _e = { stack: [], error: void 0, hasError: !1 }
+          const _e = { stack: [], error: undefined, hasError: false }
           try {
             const Nt = __addDisposableResource(
                 _e,
                 gl("ComposerService.reapply"),
-                !1,
+                false,
               ),
               ni = this.composerDataService.getComposerData(Ge)
             if (!ni) return
@@ -1068,37 +1068,37 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
                 ni.composerId,
                 Et,
               ),
-              dn = Bt !== void 0 ? Bt : ri,
+              dn = Bt !== undefined ? Bt : ri,
               xi = ni.codeBlockData[Et.toString()][dn]
             xi?.isNotApplied &&
               this.composerDataService.updateComposerCodeBlock(
                 ni.composerId,
                 Et,
                 dn,
-                { isNotApplied: !1 },
+                { isNotApplied: false },
               ),
               xi && ni.composerId
                 ? await this.runFastApplyOnCodeBlock(
                     ni.composerId,
                     { ...xi },
-                    { isReapply: !0 },
+                    { isReapply: true },
                   )
                 : console.error(
                     `[composer] Unable to reapply version ${dn} for ${Et.toString()}`,
                   )
           } catch (Nt) {
-            ;(_e.error = Nt), (_e.hasError = !0)
+            ;(_e.error = Nt), (_e.hasError = true)
           } finally {
             __disposeResources(_e)
           }
         }),
         (this.reapplyLastMessage = (Ge) => {
-          const Et = { stack: [], error: void 0, hasError: !1 }
+          const Et = { stack: [], error: undefined, hasError: false }
           try {
             const Bt = __addDisposableResource(
                 Et,
                 gl("ComposerService.reapplyLastMessage"),
-                !1,
+                false,
               ),
               _e = this.composerDataService.getLastAiBubble(Ge)
             if (!_e?.codeBlocks) return
@@ -1112,14 +1112,14 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
                 this.reapply(Ge, Nt.uri)
             }
           } catch (Bt) {
-            ;(Et.error = Bt), (Et.hasError = !0)
+            ;(Et.error = Bt), (Et.hasError = true)
           } finally {
             __disposeResources(Et)
           }
         }),
         (this.editorListeners = new Map()),
         (this.tokenCounterAbortControllerMap = new Map()),
-        (this.shouldIgnoreTokenCountUpdate = !1),
+        (this.shouldIgnoreTokenCountUpdate = false),
         (this._modelDiffStateManager = this.D(
           new GHt(
             this.editorWorkerService,
@@ -1139,58 +1139,58 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
         this.reactiveStorageService.setApplicationUserPersistentStorage(
           "composerState",
           "isComposerEnabled2",
-          !0,
+          true,
         ),
         (this.chatClient = this.instantiationService.createInstance(fu, {
           service: Det,
         }))
       const Fe = (Ge, Et, Bt) => {
-          const _e = { stack: [], error: void 0, hasError: !1 }
+          const _e = { stack: [], error: undefined, hasError: false }
           try {
             const Nt = __addDisposableResource(
               _e,
               gl("ComposerService.abortAndRemoveApplyGenerationUUID"),
-              !1,
+              false,
             )
             if (!this.getComposer(Ge)) return
             const ri = this.composerDataService.getComposerCodeBlock(Ge, Et, Bt)
             ri?.applyGenerationUUID &&
               (this.abortGenerationUUID(ri.applyGenerationUUID),
               this.composerDataService.updateComposerCodeBlock(Ge, Et, Bt, {
-                applyGenerationUUID: void 0,
+                applyGenerationUUID: undefined,
               }))
           } catch (Nt) {
-            ;(_e.error = Nt), (_e.hasError = !0)
+            ;(_e.error = Nt), (_e.hasError = true)
           } finally {
             __disposeResources(_e)
           }
         },
         ut = (Ge) => {
-          const Et = { stack: [], error: void 0, hasError: !1 }
+          const Et = { stack: [], error: undefined, hasError: false }
           try {
             const Bt = __addDisposableResource(
               Et,
               gl("ComposerService.handleDiffRemoval"),
-              !1,
+              false,
             )
             if (!Ge.composerId) return
-            Ge.accepted ? Ke(Ge.diffInfo, !1) : Ue(Ge.diffInfo, !1)
+            Ge.accepted ? Ke(Ge.diffInfo, false) : Ue(Ge.diffInfo, false)
           } catch (Bt) {
-            ;(Et.error = Bt), (Et.hasError = !0)
+            ;(Et.error = Bt), (Et.hasError = true)
           } finally {
             __disposeResources(Et)
           }
         },
-        Ue = (Ge, Et = !0) => {
-          const Bt = { stack: [], error: void 0, hasError: !1 }
+        Ue = (Ge, Et = true) => {
+          const Bt = { stack: [], error: undefined, hasError: false }
           try {
             const _e = __addDisposableResource(
                 Bt,
                 gl("ComposerService.handleDiffReject"),
-                !1,
+                false,
               ),
               { composerId: Nt, version: ni } = Ge.composerMetadata ?? {}
-            if (!Nt || ni === void 0) return
+            if (!Nt || ni === undefined) return
             const ri = this.getComposer(Nt)
             if (
               !ri ||
@@ -1214,7 +1214,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
                     return (
                       Ie.userResponseType === Zm.REJECT
                         ? ((Dt.userResponseType = Zm.REJECT),
-                          (Dt.userModificationsToSuggestedCodeBlocks = void 0))
+                          (Dt.userModificationsToSuggestedCodeBlocks = undefined))
                         : (Dt.userResponseType = Zm.MODIFY),
                       [...(St ?? []).filter((Mt) => Mt.filePath !== yt), Dt]
                     )
@@ -1246,24 +1246,24 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
               Fe(Nt, Ge.uri, ni)
             }
             this.deleteNewFileAndMaybeFolder(Nt, Ge.uri).then((Bs) => {
-              Bs || (Et && this.saveFile(Ge.uri, { force: !0 }))
+              Bs || (Et && this.saveFile(Ge.uri, { force: true }))
             })
           } catch (_e) {
-            ;(Bt.error = _e), (Bt.hasError = !0)
+            ;(Bt.error = _e), (Bt.hasError = true)
           } finally {
             __disposeResources(Bt)
           }
         },
-        Ke = (Ge, Et = !0) => {
-          const Bt = { stack: [], error: void 0, hasError: !1 }
+        Ke = (Ge, Et = true) => {
+          const Bt = { stack: [], error: undefined, hasError: false }
           try {
             const _e = __addDisposableResource(
                 Bt,
                 gl("ComposerService.handleDiffAccept"),
-                !1,
+                false,
               ),
               { composerId: Nt, version: ni } = Ge.composerMetadata ?? {}
-            if (!Nt || ni === void 0) return
+            if (!Nt || ni === undefined) return
             const ri = this.getComposer(Nt)
             if (
               !ri ||
@@ -1279,7 +1279,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
                   return (
                     St.userResponseType === Zm.ACCEPT
                       ? ((Ie.userResponseType = Zm.ACCEPT),
-                        (Ie.userModificationsToSuggestedCodeBlocks = void 0))
+                        (Ie.userModificationsToSuggestedCodeBlocks = undefined))
                       : (Ie.userResponseType = Zm.MODIFY),
                     [...(je ?? []).filter((Dt) => Dt.filePath !== xi), Ie]
                   )
@@ -1308,7 +1308,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
                     },
                   )
             }
-            Et && this.saveFile(Ge.uri, { force: !0 }),
+            Et && this.saveFile(Ge.uri, { force: true }),
               this.composerDataService.setCodeBlockStatus(
                 Nt,
                 Ge.uri,
@@ -1318,22 +1318,22 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
               Fe(Nt, Ge.uri, ni),
               this.removeFileFromNewlyCreatedFilesAndFolders(Nt, Ge.uri)
           } catch (_e) {
-            ;(Bt.error = _e), (Bt.hasError = !0)
+            ;(Bt.error = _e), (Bt.hasError = true)
           } finally {
             __disposeResources(Bt)
           }
         },
         mt = (Ge, Et) => {
-          const Bt = { stack: [], error: void 0, hasError: !1 }
+          const Bt = { stack: [], error: undefined, hasError: false }
           try {
             const _e = __addDisposableResource(
                 Bt,
                 gl("ComposerService.handlePartialDiff"),
-                !1,
+                false,
               ),
               { composerId: Nt, version: ni } =
                 Ge.diffInfo.composerMetadata ?? {}
-            if (!Nt || ni === void 0) return
+            if (!Nt || ni === undefined) return
             const ri = this.getComposer(Nt)
             if (!ri) return
             const { diffInfo: dn, isDone: xi, change: Bs } = Ge
@@ -1400,23 +1400,23 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
             }
             xi && (Et === "accepted" ? Ke(dn) : Ue(dn))
           } catch (_e) {
-            ;(Bt.error = _e), (Bt.hasError = !0)
+            ;(Bt.error = _e), (Bt.hasError = true)
           } finally {
             __disposeResources(Bt)
           }
         },
         Mi = (Ge) => {
-          const Et = { stack: [], error: void 0, hasError: !1 }
+          const Et = { stack: [], error: undefined, hasError: false }
           try {
             const Bt = __addDisposableResource(
                 Et,
                 gl("ComposerService.handleAddDiffFromUndoRedo"),
-                !1,
+                false,
               ),
               { composerId: _e, version: Nt } = Ge.composerMetadata ?? {}
             if (
               !_e ||
-              Nt === void 0 ||
+              Nt === undefined ||
               !this.getComposer(_e) ||
               !this.composerDataService.getComposerCodeBlock(_e, Ge.uri, Nt)
             )
@@ -1428,7 +1428,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
                 `[composer] Restored diff for ${Ge.uri.toString()} with version ${Nt}`,
               )
           } catch (Bt) {
-            ;(Et.error = Bt), (Et.hasError = !0)
+            ;(Et.error = Bt), (Et.hasError = true)
           } finally {
             __disposeResources(Et)
           }
@@ -1463,12 +1463,12 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
         this.updateTokenCountOfCurrentComposer(),
         this.D(
           this.editorService.onDidVisibleEditorsChange((Ge) => {
-            const Et = { stack: [], error: void 0, hasError: !1 }
+            const Et = { stack: [], error: undefined, hasError: false }
             try {
               const Bt = __addDisposableResource(
                   Et,
                   gl("ComposerService.onDidVisibleEditorsChange"),
-                  !1,
+                  false,
                 ),
                 _e = this.composerDataService.getComposerData(
                   this.composerDataService.selectedComposerId,
@@ -1491,7 +1491,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
                   this.composerDataService.selectedChatId,
                 )
             } catch (Bt) {
-              ;(Et.error = Bt), (Et.hasError = !0)
+              ;(Et.error = Bt), (Et.hasError = true)
             } finally {
               __disposeResources(Et)
             }
@@ -1499,12 +1499,12 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
         ),
         this.D(
           this.editorService.onDidActiveEditorChange((Ge) => {
-            const Et = { stack: [], error: void 0, hasError: !1 }
+            const Et = { stack: [], error: undefined, hasError: false }
             try {
               const Bt = __addDisposableResource(
                   Et,
                   gl("ComposerService.onDidActiveEditorChange"),
-                  !1,
+                  false,
                 ),
                 _e = this.composerDataService.getComposerData(
                   this.composerDataService.selectedComposerId,
@@ -1531,7 +1531,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
                   this.composerDataService.selectedChatId,
                 )
             } catch (Bt) {
-              ;(Et.error = Bt), (Et.hasError = !0)
+              ;(Et.error = Bt), (Et.hasError = true)
             } finally {
               __disposeResources(Et)
             }
@@ -1545,12 +1545,12 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
                   .composerState.mainComposerMode,
             ],
             onChange: () => {
-              const Ge = { stack: [], error: void 0, hasError: !1 }
+              const Ge = { stack: [], error: undefined, hasError: false }
               try {
                 const Et = __addDisposableResource(
                     Ge,
                     gl("ComposerService.onChangeEffectManuallyDisposed"),
-                    !1,
+                    false,
                   ),
                   Bt = this.composerDataService.getComposerData(
                     this.composerDataService.selectedComposerId,
@@ -1577,7 +1577,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
                     this.composerDataService.selectedChatId,
                   )
               } catch (Et) {
-                ;(Ge.error = Et), (Ge.hasError = !0)
+                ;(Ge.error = Et), (Ge.hasError = true)
               } finally {
                 __disposeResources(Ge)
               }
@@ -1608,19 +1608,19 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
         !this.reactiveStorageService.workspaceUserPersistentStorage
           .composerState)
       ) {
-        const Ge = { stack: [], error: void 0, hasError: !1 }
+        const Ge = { stack: [], error: undefined, hasError: false }
         try {
           const Et = __addDisposableResource(
             Ge,
             gl("ComposerService.setWorkspaceUserPersistentStorage"),
-            !1,
+            false,
           )
           this.reactiveStorageService.setWorkspaceUserPersistentStorage(
             "composerState",
             { horizontalBarSize: 520, tabHeight: 400 },
           )
         } catch (Et) {
-          ;(Ge.error = Et), (Ge.hasError = !0)
+          ;(Ge.error = Et), (Ge.hasError = true)
         } finally {
           __disposeResources(Ge)
         }
@@ -1638,16 +1638,16 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
                   .composerState.isComposerEnabled2,
             ],
             onChange: ({ deps: Ge }) => {
-              const Et = { stack: [], error: void 0, hasError: !1 }
+              const Et = { stack: [], error: undefined, hasError: false }
               try {
                 const Bt = __addDisposableResource(
                   Et,
                   gl("ComposerService.onChangeEffectManuallyDisposed"),
-                  !1,
+                  false,
                 )
                 this._onDidEnableDisableComposer.fire({ enabled: Ge[0] })
               } catch (Bt) {
-                ;(Et.error = Bt), (Et.hasError = !0)
+                ;(Et.error = Bt), (Et.hasError = true)
               } finally {
                 __disposeResources(Et)
               }
@@ -1665,18 +1665,18 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
               },
             ],
             onChange: () => {
-              const Ge = { stack: [], error: void 0, hasError: !1 }
+              const Ge = { stack: [], error: undefined, hasError: false }
               try {
                 const Et = __addDisposableResource(
                   Ge,
                   gl("ComposerService.onChangeEffectManuallyDisposed"),
-                  !1,
+                  false,
                 )
                 this.composerDataService.getContextGraphFilesFromFileSelections(
                   this.composerDataService.selectedComposerId,
                 )
               } catch (Et) {
-                ;(Ge.error = Et), (Ge.hasError = !0)
+                ;(Ge.error = Et), (Ge.hasError = true)
               } finally {
                 __disposeResources(Ge)
               }
@@ -1693,18 +1693,18 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
               },
             ],
             onChange: () => {
-              const Ge = { stack: [], error: void 0, hasError: !1 }
+              const Ge = { stack: [], error: undefined, hasError: false }
               try {
                 const Et = __addDisposableResource(
                   Ge,
                   gl("ComposerService.onChangeEffectManuallyDisposed"),
-                  !1,
+                  false,
                 )
                 this.composerDataService.getContextGraphFilesFromFileSelections(
                   this.composerDataService.selectedChatId,
                 )
               } catch (Et) {
-                ;(Ge.error = Et), (Ge.hasError = !0)
+                ;(Ge.error = Et), (Ge.hasError = true)
               } finally {
                 __disposeResources(Ge)
               }
@@ -1728,12 +1728,12 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
         this.reactiveStorageService.onChangeEffectManuallyDisposed({
           deps: Be(),
           onChange: () => {
-            const Ge = { stack: [], error: void 0, hasError: !1 }
+            const Ge = { stack: [], error: undefined, hasError: false }
             try {
               const Et = __addDisposableResource(
                 Ge,
                 gl("ComposerService.onChangeEffectManuallyDisposed"),
-                !1,
+                false,
               )
               if (
                 this._ignoreChangesToContext.has(
@@ -1747,11 +1747,11 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
                 try {
                   this.updateComposer(
                     this.composerDataService.selectedComposerId,
-                    { hasChangedContext: !0 },
+                    { hasChangedContext: true },
                   )
                 } catch {}
             } catch (Et) {
-              ;(Ge.error = Et), (Ge.hasError = !0)
+              ;(Ge.error = Et), (Ge.hasError = true)
             } finally {
               __disposeResources(Ge)
             }
@@ -1760,14 +1760,14 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
       ),
         this.D(
           this.reactiveStorageService.onChangeEffectManuallyDisposed({
-            deps: Be(!0),
+            deps: Be(true),
             onChange: () => {
-              const Ge = { stack: [], error: void 0, hasError: !1 }
+              const Ge = { stack: [], error: undefined, hasError: false }
               try {
                 const Et = __addDisposableResource(
                   Ge,
                   gl("ComposerService.onChangeEffectManuallyDisposed"),
-                  !1,
+                  false,
                 )
                 if (
                   this._ignoreChangesToContext.has(
@@ -1781,11 +1781,11 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
                   try {
                     this.updateComposer(
                       this.composerDataService.selectedChatId,
-                      { hasChangedContext: !0 },
+                      { hasChangedContext: true },
                     )
                   } catch {}
               } catch (Et) {
-                ;(Ge.error = Et), (Ge.hasError = !0)
+                ;(Ge.error = Et), (Ge.hasError = true)
               } finally {
                 __disposeResources(Ge)
               }
@@ -1816,7 +1816,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
             onChange: ({ deps: Ge, prevDeps: Et }) => {
               const Bt = Ge?.[0],
                 _e = Et?.[0]
-              Bt !== _e && _e && this.close(_e, { skipHiding: !0 })
+              Bt !== _e && _e && this.close(_e, { skipHiding: true })
             },
           }),
         ),
@@ -1877,16 +1877,16 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
         throw new Error(
           "[composer] shouldCache called for non-existent composer",
         )
-      if (t !== void 0) {
+      if (t !== undefined) {
         const n = this.composerDataService.getComposerCodeBlock(
           e,
           t.uri,
           t.version,
         )
-        if (n && n.isNotApplied) return !0
+        if (n && n.isNotApplied) return true
       }
       return this.composerDataService.getComposerForceMode(e) === "chat"
-        ? !1
+        ? false
         : s.composerId !== this.composerDataService.selectedComposerId ||
             this.isBackground(s.composerId)
     }
@@ -1934,8 +1934,8 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
     }
     unregisterCachedCodeBlock(e, t, s) {
       this.composerDataService.updateComposerCodeBlock(e, t, s, {
-        isCached: !1,
-        isNotApplied: !1,
+        isCached: false,
+        isNotApplied: false,
       })
       const n = typeof e == "string" ? e : e.data.composerId,
         o = (this._uriToCachedCodeBlocks.get(t.toString()) ?? []).filter(
@@ -1961,7 +1961,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
     registerCachedCodeBlock(e, t, s, n) {
       if (
         (this.composerDataService.updateComposerCodeBlock(e, t, s, {
-          isCached: !0,
+          isCached: true,
         }),
         !this._fileWatchers.has(t.toString()))
       ) {
@@ -2002,7 +2002,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
                 e.toString(),
                 (l) => l.version === r,
                 "originalModelDiffWrtV0",
-                void 0,
+                undefined,
               ),
             ),
             this.composerDataService.updateComposerDataSetStore(n, (a) =>
@@ -2011,12 +2011,12 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
                 e.toString(),
                 (l) => l.version === r,
                 "newModelDiffWrtV0",
-                void 0,
+                undefined,
               ),
             ))
           : (this.composerDataService.setCodeBlockStatus(n, e, r, "outdated"),
             this.composerDataService.updateComposerCodeBlock(n, e, r, {
-              isCached: !1,
+              isCached: false,
             }))
       }
       t ||
@@ -2082,7 +2082,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
     async deleteFolder(e) {
       if (await this.fileService.exists(e))
         try {
-          await this.fileService.del(e, { recursive: !0 })
+          await this.fileService.del(e, { recursive: true })
         } catch (t) {
           console.error(`Error deleting folder ${e.toString()}:`, t)
         }
@@ -2103,18 +2103,18 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
           }
           const r = this.filesConfigurationService.disableAutoSave(e)
           await this.saveFile(e, {
-            force: !0,
-            waitForEditorToOpen: !0,
-            overwrite: !0,
+            force: true,
+            waitForEditorToOpen: true,
+            overwrite: true,
           }),
             r.dispose(),
             n.dispose(),
-            await this.fileService.del(e, { recursive: !0 })
+            await this.fileService.del(e, { recursive: true })
         }
         const s = this.editorService.findEditors(e)
         if (s.length > 0)
           for (const n of s)
-            await this.editorService.revert(n, { force: !0 }),
+            await this.editorService.revert(n, { force: true }),
               await this.editorService.closeEditor(n)
       } catch (s) {
         console.error(`Error deleting file ${e.toString()}:`, s)
@@ -2127,7 +2127,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
         !e ||
         !s.newlyCreatedFiles?.find((r) => r.uri.toString() === t.toString())
       )
-        return !1
+        return false
       try {
         await this.deleteFile(t)
         const r =
@@ -2138,20 +2138,20 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
         const a = o.filter((l) => t.toString().startsWith(l.uri.toString()))
         for (const l of a)
           (
-            (await this.fileService.resolve(l.uri, { resolveMetadata: !0 }))
+            (await this.fileService.resolve(l.uri, { resolveMetadata: true }))
               .children ?? []
           ).filter((u) => !u.isDirectory).length === 0 &&
-            (await this.fileService.del(l.uri, { recursive: !0, useTrash: !0 }),
+            (await this.fileService.del(l.uri, { recursive: true, useTrash: true }),
             (o = o.filter((u) => u.uri.toString() !== l.uri.toString())))
         return (
           this.updateComposer(e, {
             newlyCreatedFiles: r,
             newlyCreatedFolders: o,
           }),
-          !0
+          true
         )
       } catch (r) {
-        return console.error(`Error deleting file ${t.toString()}:`, r), !1
+        return console.error(`Error deleting file ${t.toString()}:`, r), false
       }
     }
     removeFileFromNewlyCreatedFilesAndFolders(e, t) {
@@ -2180,9 +2180,9 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
       if (t?.overwrite)
         return !!(await this.textFileService.save(e, {
           reason: 1,
-          skipSaveParticipants: t?.skipSaveParticipants ?? !1,
-          force: t?.force ?? !1,
-          ignoreModifiedSince: !0,
+          skipSaveParticipants: t?.skipSaveParticipants ?? false,
+          force: t?.force ?? false,
+          ignoreModifiedSince: true,
         }))
       let s = this.editorService.findEditors(e)
       if (
@@ -2191,7 +2191,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
           (await new Promise((r) => {
             setTimeout(r, 1e3),
               this.editorService.onWillOpenEditor((o) => {
-                o.editor.resource?.toString() === e.toString() && r(void 0)
+                o.editor.resource?.toString() === e.toString() && r(undefined)
               })
           })),
         (s = this.editorService.findEditors(e)),
@@ -2204,22 +2204,22 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
               o.preferredResource.toString() === e.toString(),
           )
           .map((o) => o.resource)
-          .filter((o) => o !== void 0)
+          .filter((o) => o !== undefined)
         r.length > 0 && (s = this.editorService.findEditors(r[0]))
       }
       return s.length === 0
         ? !!(await this.textFileService.save(e, {
             reason: 1,
-            skipSaveParticipants: t?.skipSaveParticipants ?? !1,
-            force: t?.force ?? !1,
-            showPrettyDialogOnError: !0,
+            skipSaveParticipants: t?.skipSaveParticipants ?? false,
+            force: t?.force ?? false,
+            showPrettyDialogOnError: true,
           }))
         : (
             await this.editorService.save(s, {
               reason: 1,
-              skipSaveParticipants: t?.skipSaveParticipants ?? !1,
-              force: t?.force ?? !1,
-              showPrettyDialogOnError: !0,
+              skipSaveParticipants: t?.skipSaveParticipants ?? false,
+              force: t?.force ?? false,
+              showPrettyDialogOnError: true,
             })
           ).success
     }
@@ -2250,7 +2250,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
         a = n.richText,
         l = t?.text ? t.text : r ? o : "",
         c = t?.richText ? t.richText : r ? a : "",
-        h = $Ui(n, !1)
+        h = $Ui(n, false)
       this.cleanUpComposer(e)
       let u = [],
         d = cm()
@@ -2284,7 +2284,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
         createdAt: n.createdAt ?? Date.now(),
         richText: c,
         text: l,
-        hasChangedContext: !1,
+        hasChangedContext: false,
         context: d,
         backgroundInfo: n.backgroundInfo,
         capabilities: u,
@@ -2329,7 +2329,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
     async acceptCached(e, t, s) {
       if (!this.composerDataService.getComposerData(e)) return
       const r = this.composerDataService.getComposerCodeBlock(e, t, s)
-      if (!r || r.isCached !== !0 || !r.newModelDiffWrtV0) {
+      if (!r || r.isCached !== true || !r.newModelDiffWrtV0) {
         console.error("[composer] no cached code block for uri", t)
         return
       }
@@ -2352,8 +2352,8 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
     rejectCached(e, t) {
       const s = this.composerDataService.getComposerData(e)
       if (!s) return
-      const n = s.codeBlockData[t.toString()].find((r) => r.isCached === !0)
-      if (!n || n.isCached !== !0) {
+      const n = s.codeBlockData[t.toString()].find((r) => r.isCached === true)
+      if (!n || n.isCached !== true) {
         console.error("[composer] no cached code block for uri", t)
         return
       }
@@ -2431,7 +2431,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
     }
     shouldShowAcceptRejectAll(e) {
       const t = this.composerDataService.getComposerData(e)
-      if (!t) return !1
+      if (!t) return false
       const s = this.composerDataService.getAllInlineDiffs(e)
       return this.shouldCache(t.composerId)
         ? this.composerDataService
@@ -2447,16 +2447,16 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
           (o) => o.status === "applying" || o.status === "generating",
         )
       )
-        return !1
+        return false
       if (this.shouldCache(n.composerId))
         return (n.codeBlockData[t.toString()] ?? []).some(
           (a) =>
             (a.status === "cancelled" || a.status === "completed") &&
-            a.isCached === !0,
+            a.isCached === true,
         )
       {
         const o = this.composerDataService.getInlineDiff(n.composerId, t)
-        return o ? (s !== void 0 ? o.composerMetadata?.version === s : !0) : !1
+        return o ? (s !== undefined ? o.composerMetadata?.version === s : true) : false
       }
     }
     cacheAllDiffs(e) {
@@ -2466,7 +2466,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
       for (const n of s) {
         if (
           (console.log("[composer] caching diff", n.uri.toString()),
-          n.composerMetadata?.version === void 0)
+          n.composerMetadata?.version === undefined)
         ) {
           console.error(
             "[composer] caching diff with undefined version",
@@ -2478,9 +2478,9 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
           t.composerId,
           n.uri,
           n.composerMetadata.version,
-          !0,
+          true,
         ),
-          this.rejectDiff(t.composerId, n.uri, { dontBreakConsolidation: !0 })
+          this.rejectDiff(t.composerId, n.uri, { dontBreakConsolidation: true })
       }
     }
     cancelOrRejectAllCodeBlocks(e) {
@@ -2504,7 +2504,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
     }
     cancelApply(e, t) {
       const s = this.composerDataService.getComposerData(e)
-      if (!s) return !1
+      if (!s) return false
       const n = s.codeBlockData[t.toString()].find(
         (r) => r.status === "applying",
       )
@@ -2513,23 +2513,23 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
             this.abortGenerationUUID(n.applyGenerationUUID),
           this.composerDataService.updateComposerCodeBlock(e, t, n.version, {
             status: "cancelled",
-            applyGenerationUUID: void 0,
+            applyGenerationUUID: undefined,
           }),
-          this.saveFile(t, { force: !0 }),
-          !0)
+          this.saveFile(t, { force: true }),
+          true)
         : (console.error(
             "[composer] cancelApply called for uri that is not applying",
             t,
           ),
-          !1)
+          false)
     }
     resumeChat(e, t) {
       this.composerDataService.getComposerData(e) &&
         this.submitChatMaybeAbortCurrent(e, "", {
           ...(t ?? {}),
-          isResume: !0,
-          bubbleId: void 0,
-          skipAddNewHumanMessage: !0,
+          isResume: true,
+          bubbleId: undefined,
+          skipAddNewHumanMessage: true,
         })
     }
     cancelChat(e) {
@@ -2539,7 +2539,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
         (this.cancelAllCapabilities(t.composerId),
         t.chatGenerationUUID && this.abortGenerationUUID(t.chatGenerationUUID),
         this.updateComposer(t.composerId, {
-          chatGenerationUUID: void 0,
+          chatGenerationUUID: undefined,
           status: "aborted",
         }),
         this.composerDataService.setGeneratingCapabilitiesToAborted(
@@ -2673,7 +2673,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
       const t = this.getComposer(e)
       if (!t) return
       let s = t.cachingStatus ?? {
-        promptIsCached: !1,
+        promptIsCached: false,
         numCharsTypedSincePromptChanged: 0,
       }
       const n = t.conversation.filter((c) => c.type === fs.AI).length > 0
@@ -2702,7 +2702,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
           ) ?? 5,
         l = n
           ? this.reactiveStorageService.applicationUserPersistentStorage
-              .turboModeOptions.useTurboMode === !0
+              .turboModeOptions.useTurboMode === true
             ? a
             : o
           : r
@@ -2713,7 +2713,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
             }),
             this.updateComposer(e, {
               cachingStatus: {
-                promptIsCached: !0,
+                promptIsCached: true,
                 promptLastCachedAt: Date.now(),
                 cacheKey: this.computeCacheKey(t),
               },
@@ -2738,12 +2738,12 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
       if (!t) return
       const s = 5 * 60 * 1e3,
         { cachingStatus: n } = t
-      n?.promptIsCached === !0 &&
+      n?.promptIsCached === true &&
         (Date.now() - n.promptLastCachedAt > s ||
           n.cacheKey !== this.computeCacheKey(t)) &&
         this.updateComposer(e, {
           cachingStatus: {
-            promptIsCached: !1,
+            promptIsCached: false,
             numCharsTypedSincePromptChanged: 0,
           },
         })
@@ -2777,7 +2777,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
             !r ||
             this.composerDataService.getComposerIsAgentic(e) ||
             [...r.conversation].reverse().find((lt) => lt.type === fs.HUMAN)
-              ?.isAgentic === !0
+              ?.isAgentic === true
           )
             return
           try {
@@ -2787,9 +2787,9 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
                 "start-submit-chat",
                 {
                   composerId: r.composerId,
-                  isCapabilityIteration: !1,
+                  isCapabilityIteration: false,
                   submitChatProps: { text: t, extra: s },
-                  isCacheWarming: !0,
+                  isCacheWarming: true,
                 },
               )
             )
@@ -2801,7 +2801,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
             c = [...(r.userResponsesToSuggestedCodeBlocks ?? [])]
           const h = r.currentBubbleId
           let u = [...r.conversation]
-          if (h !== void 0) {
+          if (h !== undefined) {
             const lt = this.composerDataService.getComposerBubble(e, h)
             if (!lt) throw Error("[composer] bubble is undefined")
             const Xe = lt.context
@@ -2821,8 +2821,8 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
             m = {
               ...l,
               usesCodebase:
-                l.usesCodebase !== void 0 && l.usesCodebase !== !1 ? l : void 0,
-              useDiffReview: !1,
+                l.usesCodebase !== undefined && l.usesCodebase !== false ? l : undefined,
+              useDiffReview: false,
             },
             b = { ...m, fileSelections: p }
           if (b.useWeb || b.usesCodebase) return
@@ -2842,7 +2842,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
             S = rt(),
             [x, k] = this.aiService.registerNewGeneration({
               generationUUID: S,
-              metadata: void 0,
+              metadata: undefined,
             })
           const E = new Set([
               ...Object.keys(r.codeBlockData ?? {}),
@@ -2866,7 +2866,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
                 : () => Promise.resolve([]),
             [z, K, Q, se, he] = await Promise.all([F, H, P, B, A]),
             ae = u.at(-1)
-          if (ae === void 0) throw new Error("last message is undefined")
+          if (ae === undefined) throw new Error("last message is undefined")
           ;(u = [
             ...u.slice(0, -1),
             {
@@ -2900,32 +2900,32 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
               await this.composerUtilsService.populateConversationWithExtraContext(
                 Ee,
                 e,
-                { disableImageRemoval: !0, lastBubbleContext: b },
+                { disableImageRemoval: true, lastBubbleContext: b },
               ),
             ze = this.getModelDetails("composer")
           let at = await this.aiService.getCurrentFileInfo()
           const we = {
             conversationId: r.composerId,
             conversation: Ae,
-            allowLongFileScan: !0,
+            allowLongFileScan: true,
             explicitContext: await this.aiService.getExplicitContext(),
             documentationIdentifiers: (m.selectedDocs ?? []).map(
               (lt) => lt.docId,
             ),
             quotes: b.quotes ?? [],
-            canHandleFilenamesAfterLanguageIds: !0,
+            canHandleFilenamesAfterLanguageIds: true,
             modelDetails: ze,
-            useWeb: b.useWeb ? "full_search" : void 0,
+            useWeb: b.useWeb ? "full_search" : undefined,
             externalLinks: b.externalLinks ?? [],
             projectContext: C,
             diffsForCompressingFiles: [],
-            compressEdits: !0,
+            compressEdits: true,
             shouldCache:
               this.reactiveStorageService.applicationUserPersistentStorage
                 .cacheComposerPrompts,
             multiFileLinterErrors: Q,
             currentFile: at,
-            useNewCompressionScheme: !0,
+            useNewCompressionScheme: true,
             additionalRankedContext: [],
             fileDiffHistories: [],
             useUnifiedChatPrompt:
@@ -2938,9 +2938,9 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
               {
                 composerId: r.composerId,
                 humanBubbleId: w.bubbleId,
-                isCapabilityIteration: !1,
+                isCapabilityIteration: false,
                 contextUsed: b,
-                isCacheWarming: !0,
+                isCacheWarming: true,
               },
               { request: we },
             )
@@ -2964,7 +2964,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
       let o
       const a = this.D(
         this.onDidSendRequest(() => {
-          o !== void 0 && clearTimeout(o), a.dispose()
+          o !== undefined && clearTimeout(o), a.dispose()
         }),
       )
       o = setTimeout(async () => {
@@ -2998,7 +2998,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
         o = r === "chat" || s?.isAsk,
         a = this.composerDataService.getComposerIsAgentic(e)
       s = {
-        skipRegisteringCodeBlocks: s?.isThought ? !0 : void 0,
+        skipRegisteringCodeBlocks: s?.isThought ? true : undefined,
         capabilityProcessesToSkip: o
           ? [
               "start-submit-chat",
@@ -3017,8 +3017,8 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
       if (
         (this.reactiveStorageService.nonPersistentStorage.composerState
           .isTestingHttp2Disabled
-          ? !0
-          : (this.configurationService.getValue(v2i) ?? !1)) &&
+          ? true
+          : (this.configurationService.getValue(v2i) ?? false)) &&
         a
       ) {
         await this.prettyDialogService.openDialog({
@@ -3058,9 +3058,9 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
           return
         }
       let h = new AbortController(),
-        u = !1,
-        d = !1,
-        g = !1,
+        u = false,
+        d = false,
+        g = false,
         p = rt(),
         m,
         b,
@@ -3093,7 +3093,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
                   ? () => {
                       this.resumeChat(e, s)
                     }
-                  : void 0,
+                  : undefined,
               }),
             )
           }
@@ -3125,7 +3125,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
         this.composerDataService.clearActionButtons(e)
         const L = !s?.isResume
         s.bubbleId = s?.bubbleId ?? l.currentBubbleId
-        let A = !1
+        let A = false
         if (s?.bubbleId) {
           const _e = s.bubbleId ?? l.currentBubbleId,
             Nt = this.composerDataService.getComposerBubble(e, _e),
@@ -3133,8 +3133,8 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
           if (!Nt) throw Error("[composer] current bubble is undefined")
           let ri
           Nt.type === fs.HUMAN
-            ? ((ri = ni !== -1 ? l.conversation[ni + 1]?.bubbleId : void 0),
-              (A = !0))
+            ? ((ri = ni !== -1 ? l.conversation[ni + 1]?.bubbleId : undefined),
+              (A = true))
             : (ri = _e)
           const dn = l.conversation.slice(ni + 1),
             xi = l.conversation.slice(0, ni),
@@ -3143,9 +3143,9 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
                 e,
                 ls.TOOL_FORMER,
               )
-              if (!Ie) return !1
+              if (!Ie) return false
               const Dt = Ie.getBubbleData(St.bubbleId)
-              return Dt ? Dt.tool === jt.RUN_TERMINAL_COMMAND_V2 : !1
+              return Dt ? Dt.tool === jt.RUN_TERMINAL_COMMAND_V2 : false
             },
             yt = dn.some(Bs),
             je = xi.some(Bs)
@@ -3202,10 +3202,10 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
             )
         let F = u2(l.context)
         if (
-          ((this.shouldIgnoreTokenCountUpdate = !0),
+          ((this.shouldIgnoreTokenCountUpdate = true),
           s?.isCapabilityIteration ||
-            (L && this.clearText(e), this.composerViewsService.focus(e, !0)),
-          s?.bubbleId !== void 0)
+            (L && this.clearText(e), this.composerViewsService.focus(e, true)),
+          s?.bubbleId !== undefined)
         ) {
           const _e = this.composerDataService.getComposerBubble(e, s.bubbleId)
           if (_e && _e.context) {
@@ -3217,15 +3217,15 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
           }
         }
         this.composerDataService.updateComposerDataSetStore(e, (_e) =>
-          _e("currentBubbleId", void 0),
+          _e("currentBubbleId", undefined),
         ),
           this.composerDataService.updateComposerDataSetStore(e, (_e) =>
-            _e("latestCheckpoint", void 0),
+            _e("latestCheckpoint", undefined),
           )
         const H = {
           ...F,
           usesCodebase:
-            F.usesCodebase !== void 0 && F.usesCodebase !== !1
+            F.usesCodebase !== undefined && F.usesCodebase !== false
               ? F
               : s?.usesCodebase,
           useDiffReview: F.useDiffReview ?? s?.useDiffReview,
@@ -3238,10 +3238,10 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
           this.removeAllListContext({
             composerId: e,
             contextType: "fileSelections",
-            addToUndoRedo: !1,
+            addToUndoRedo: false,
           })
           const _e = this.getCurrentFile()
-          _e !== void 0 &&
+          _e !== undefined &&
             F.fileSelections.some(
               (Nt) => vp("fileSelections", Nt) === vp("fileSelections", _e),
             ) &&
@@ -3254,7 +3254,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
             context: H,
           })
         }
-        ;(this.shouldIgnoreTokenCountUpdate = !1),
+        ;(this.shouldIgnoreTokenCountUpdate = false),
           this.updateTokenCountOfCurrentComposer(),
           console.log(
             `[composer.submitChat] Time between function start and handling context / checkpoints: ${Date.now() - n}ms`,
@@ -3281,14 +3281,14 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
           ((y = { ...H, fileSelections: he }),
           (a || y.usesCodebase) &&
             this.reactiveStorageService.applicationUserPersistentStorage
-              .checklistState?.doneCommandEnter !== !0)
+              .checklistState?.doneCommandEnter !== true)
         ) {
           const _e =
             this.reactiveStorageService.applicationUserPersistentStorage
               .checklistState
           this.reactiveStorageService.setApplicationUserPersistentStorage(
             "checklistState",
-            (Nt) => ({ ...(Nt ?? {}), doneCommandEnter: !0 }),
+            (Nt) => ({ ...(Nt ?? {}), doneCommandEnter: true }),
           )
         }
         if (
@@ -3321,13 +3321,13 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
           }
         if (
           (this.updateComposer(e, {
-            currentBubbleId: void 0,
-            editingBubbleId: void 0,
+            currentBubbleId: undefined,
+            editingBubbleId: undefined,
           }),
           l.chatGenerationUUID)
         ) {
           const _e = l.chatGenerationUUID
-          this.updateComposer(e, { chatGenerationUUID: void 0 }),
+          this.updateComposer(e, { chatGenerationUUID: undefined }),
             this._skipHandleAbortChat.add(e),
             this.abortGenerationUUID(_e),
             await new Promise((Nt) => setTimeout(Nt, 50)),
@@ -3353,7 +3353,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
           })
         const ae = l.conversation.at(-1),
           de =
-            s?.isResume && ae?.type === fs.AI && ae?.capabilityType === void 0
+            s?.isResume && ae?.type === fs.AI && ae?.capabilityType === undefined
         if (de) {
           if (!ae)
             throw new Error(
@@ -3451,7 +3451,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
                 ),
               ],
               multiFileLinterErrors: [
-                ...z.map((Nt) => new Cf({ ...Nt, fileContents: void 0 })),
+                ...z.map((Nt) => new Cf({ ...Nt, fileContents: undefined })),
               ],
               ...Ue,
               humanChanges: E,
@@ -3517,7 +3517,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
               const yt = [...Nt]
                   .reverse()
                   .map((ct) => ct.conversationSummary)
-                  .filter((ct) => ct !== void 0)[0],
+                  .filter((ct) => ct !== undefined)[0],
                 je = yt?.clientShouldStartSendingFromInclusiveBubbleId
               let St = je
                 ? Nt.findIndex(
@@ -3532,7 +3532,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
                     this.workspaceContextService.asRelativePath(
                       U.revive(_t.uri),
                     ) === dn?.relativeWorkspacePath,
-                ) || (dn = void 0)
+                ) || (dn = undefined)
                 const ct = new Map()
                 Ie.forEach((_t, fi) => {
                   _t.type === fs.HUMAN &&
@@ -3562,7 +3562,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
                         if (ln.startLineNumber !== 1) return
                         const Kn = ct.get(ln.relativeWorkspacePath)
                         if (
-                          Kn !== void 0 &&
+                          Kn !== undefined &&
                           fi === Kn.firstMentionIndex &&
                           Kn.firstMentionIndex !== Kn.lastMentionIndex
                         ) {
@@ -3596,11 +3596,11 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
                                       Tr.relativeWorkspacePath &&
                                     (Tr.intent === ev.MENTIONED_FILE ||
                                       Tr.intent === ev.COMPOSER_FILE),
-                                ) === void 0)
+                                ) === undefined)
                           )
-                            return !0
+                            return true
                           const Kn = ct.get(ln.relativeWorkspacePath)
-                          return !(Kn !== void 0 && fi !== Kn.firstMentionIndex)
+                          return !(Kn !== undefined && fi !== Kn.firstMentionIndex)
                         },
                       ))
                   })
@@ -3613,27 +3613,27 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
                   serverBubbleId: ct.serverBubbleId,
                 })),
                 conversationSummary: yt,
-                allowLongFileScan: !0,
+                allowLongFileScan: true,
                 explicitContext: await this.aiService.getExplicitContext(),
                 documentationIdentifiers: (y.selectedDocs ?? []).map(
                   (ct) => ct.docId,
                 ),
                 quotes: y.quotes ?? [],
-                canHandleFilenamesAfterLanguageIds: !0,
+                canHandleFilenamesAfterLanguageIds: true,
                 modelDetails: ri,
                 multiFileLinterErrors: [],
-                useWeb: y.useWeb ? "full_search" : void 0,
+                useWeb: y.useWeb ? "full_search" : undefined,
                 externalLinks: y.externalLinks ?? [],
                 diffsForCompressingFiles: [],
-                compressEdits: !0,
+                compressEdits: true,
                 shouldCache:
                   this.reactiveStorageService.applicationUserPersistentStorage
                     .cacheComposerPrompts,
                 currentFile: dn,
                 fileDiffHistories: [],
-                useNewCompressionScheme: !0,
+                useNewCompressionScheme: true,
                 additionalRankedContext: [],
-                isChat: (o && !a) ?? !1,
+                isChat: (o && !a) ?? false,
                 conversationId: l.composerId,
                 repositoryInfo: Bs,
                 repositoryInfoShouldQueryStaging: this.cursorCredsService
@@ -3648,7 +3648,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
                         this.workspaceContextService,
                         this.aiService,
                       )
-                    : void 0,
+                    : undefined,
                 supportedTools:
                   await this.toolsV2HandlerRegistryService.getAvailableTools(
                     l,
@@ -3656,7 +3656,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
                   ),
                 enableYoloMode:
                   this.reactiveStorageService.applicationUserPersistentStorage
-                    .composerState.useYoloMode ?? !1,
+                    .composerState.useYoloMode ?? false,
                 yoloPrompt:
                   this.reactiveStorageService.applicationUserPersistentStorage
                     .composerState.yoloPrompt ?? "",
@@ -3716,7 +3716,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
               const ki = await this.chatClient.get(),
                 Ii = new vVe(Dt)
               let Bn
-              if (Mt !== void 0)
+              if (Mt !== undefined)
                 Bn = (async function* () {
                   throw Mt
                 })()
@@ -3796,8 +3796,8 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
                   streamerURL:
                     Va.typeName + "/" + Va.methods.streamComposer.name,
                   source: "composer",
-                  rethrowCancellation: !0,
-                  failSilently: !1,
+                  rethrowCancellation: true,
+                  failSilently: false,
                 }),
                 kt = await this.composerUtilsService.runCapabilitiesForProcess(
                   e,
@@ -3815,7 +3815,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
                 qt =
                   this.reactiveStorageService.applicationUserPersistentStorage
                     .composerState.selectedFakeStreamerId,
-                Yi = qt ? hxr.find((ct) => ct.id === qt) : void 0,
+                Yi = qt ? hxr.find((ct) => ct.id === qt) : undefined,
                 Ji = Yi ? Z1r(Yi)() : kt,
                 Us = this.processCodeBlocks(e, Ji, {
                   skipRegisteringCodeBlocks: s?.skipRegisteringCodeBlocks,
@@ -3824,8 +3824,8 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
                     "composer-settled",
                   ),
                   isCapabilityIteration: s?.isCapabilityIteration,
-                  passTimingInfo: !0,
-                  forceIsNotApplied: s?.isAsk ? !0 : void 0,
+                  passTimingInfo: true,
+                  forceIsNotApplied: s?.isAsk ? true : undefined,
                 })
               console.log(`[composer] Client-side ttft: ${Date.now() - n}ms`),
                 console.log(
@@ -3843,7 +3843,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
                     (Nn =
                       this.composerDataService.getComposerBubble(e, _t)?.text ??
                       "")),
-                  (g = !0),
+                  (g = true),
                   ct.timingInfo)
                 ) {
                   b.timingInfo &&
@@ -3886,14 +3886,14 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
                   const er = new du(
                     "Simulated timeout server error",
                     Tg.DeadlineExceeded,
-                    void 0,
+                    undefined,
                     [new sG({ error: Er.TIMEOUT })],
                   )
                   throw (
                     (this.reactiveStorageService.setNonPersistentStorage(
                       "composerState",
                       "shouldSimulateTimeoutServerErrorOnce",
-                      !1,
+                      false,
                     ),
                     er)
                   )
@@ -3901,11 +3901,11 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
                 const { text: fi } = ct
                 if (!fi) {
                   ct.isBigFile &&
-                    this.updateComposer(e, { isReadingLongFile: !0 })
+                    this.updateComposer(e, { isReadingLongFile: true })
                   continue
                 }
                 l?.isReadingLongFile &&
-                  this.updateComposer(e, { isReadingLongFile: !1 })
+                  this.updateComposer(e, { isReadingLongFile: false })
                 const ln = (er) => {
                   ;(Nn += er),
                     (Be += er),
@@ -3934,7 +3934,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
                       ? (pn = fi.slice(Tr.length))
                       : (Nn = Nn.slice(0, gr + Ei.length)),
                       ln(pn),
-                      (Kn = !1)
+                      (Kn = false)
                     continue
                   } else {
                     let gr = ""
@@ -3943,13 +3943,13 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
                       if (fi.startsWith(pn)) gr = pn
                       else break
                     }
-                    ln(fi.slice(gr.length)), (Kn = !1)
+                    ln(fi.slice(gr.length)), (Kn = false)
                     continue
                   }
-                  Kn = !1
+                  Kn = false
                 } else ln(fi)
               }
-              ;(d = !0), (this._recentlyResumed = !1)
+              ;(d = true), (this._recentlyResumed = false)
             } catch (Nt) {
               if (
                 (console.error("[composer] Error in AI response:", Nt),
@@ -3957,12 +3957,12 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
               ) {
                 const ni = dP(Nt)
                 if (ni && ni.error === Er.TIMEOUT) {
-                  ;(this._recentlyResumed = !0), this.resumeChat(e, s)
+                  ;(this._recentlyResumed = true), this.resumeChat(e, s)
                   return
                 }
               }
-              ;(this._recentlyResumed = !1),
-                (u = !0),
+              ;(this._recentlyResumed = false),
+                (u = true),
                 this.composerDataService.setGeneratingCodeBlocksToAborted(e),
                 this.composerDataService.setGeneratingCapabilitiesToAborted(e),
                 this.composerDataService.setGeneratingCapabilityCodeBlocksToAborted(
@@ -3972,7 +3972,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
             }
           })()
       } catch (x) {
-        ;(u = !0),
+        ;(u = true),
           console.error("[composer] submitChatMaybeAbortCurrent errored!", x)
       } finally {
         const x = h.signal.aborted || l?.status === "aborted"
@@ -3990,13 +3990,13 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
           }
         }
         const D =
-          l.chatGenerationUUID !== void 0 &&
+          l.chatGenerationUUID !== undefined &&
           this.isActiveGeneration(l.chatGenerationUUID)
         if (
           (this.updateComposer(e, {
             generatingBubbleIds:
               l?.generatingBubbleIds?.filter((P) => !E.includes(P)) ?? [],
-            chatGenerationUUID: D ? l.chatGenerationUUID : void 0,
+            chatGenerationUUID: D ? l.chatGenerationUUID : undefined,
           }),
           !d || !g || u || l?.status === "aborted"
             ? (console.error("[composer] Failed to get complete AI response"),
@@ -4033,19 +4033,19 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
         if (
           (s?.onFinish?.(),
           this.reactiveStorageService.applicationUserPersistentStorage
-            .checklistState?.doneCommandL !== !0)
+            .checklistState?.doneCommandL !== true)
         ) {
           const P =
             this.reactiveStorageService.applicationUserPersistentStorage
               .checklistState
           this.reactiveStorageService.setApplicationUserPersistentStorage(
             "checklistState",
-            (L) => ({ ...(L ?? {}), doneCommandL: !0 }),
+            (L) => ({ ...(L ?? {}), doneCommandL: true }),
           )
         }
         if (
           this.reactiveStorageService.applicationUserPersistentStorage
-            .checklistState?.doneAddingCodeSelection !== !0 &&
+            .checklistState?.doneAddingCodeSelection !== true &&
           (y.fileSelections.length > 0 || y.selections.length > 0)
         ) {
           const P =
@@ -4053,7 +4053,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
               .checklistState
           this.reactiveStorageService.setApplicationUserPersistentStorage(
             "checklistState",
-            (L) => ({ ...(L ?? {}), doneAddingCodeSelection: !0 }),
+            (L) => ({ ...(L ?? {}), doneAddingCodeSelection: true }),
           )
         }
         this.shouldSkipCapabilities(
@@ -4147,7 +4147,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
         )
       )
         return
-      if (o.every((c) => c.text.length === 0 && c.errorDetails === void 0)) {
+      if (o.every((c) => c.text.length === 0 && c.errorDetails === undefined)) {
         this.composerDataService.updateComposerDataSetStore(e, (d) =>
           d("conversation", (g) => g.slice(0, r)),
         )
@@ -4156,7 +4156,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
           u = n.richText
         this.updateComposer(e, { text: h, richText: u, context: c }),
           this._onShouldForceText.fire({ composerId: e }),
-          this.composerViewsService.focus(e, !0)
+          this.composerViewsService.focus(e, true)
       } else
         s.text.length === 0 &&
           !n.isCapabilityIteration &&
@@ -4173,7 +4173,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
           t.version,
           "apply_pending",
         ),
-        s?.isBackground === !0)
+        s?.isBackground === true)
       )
         return this._fastApplyQueue.queue(() =>
           this.runFastApplyOnCodeBlockInternal(e, t, {
@@ -4195,9 +4195,9 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
         ),
       )
       return (
-        (o.fastApplyRunningMap[r] = !0),
+        (o.fastApplyRunningMap[r] = true),
         o.fastApplyQueue[r].whenIdle().then(() => {
-          ;(o.fastApplyRunningMap[r] = !1), delete o.fastApplyQueue[r]
+          ;(o.fastApplyRunningMap[r] = false), delete o.fastApplyQueue[r]
         }),
         a
       )
@@ -4232,23 +4232,23 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
       let h = rt()
       const d = !(await this.fileService.exists(r))
       let g = []
-      if (d && s?.isBackground !== !0)
-        g = await this.checkToCreateNewFile(e, r, !0)
-      else if (d && s?.isBackground === !0) return
+      if (d && s?.isBackground !== true)
+        g = await this.checkToCreateNewFile(e, r, true)
+      else if (d && s?.isBackground === true) return
       this._shouldOpenNextAppliedFile &&
         (this.openerService.open(r, {
-          openToSide: !1,
+          openToSide: false,
           editorOptions: {
-            revealIfVisible: !0,
-            revealIfOpened: !0,
+            revealIfVisible: true,
+            revealIfOpened: true,
             source: Nh.USER,
-            preserveFocus: !0,
+            preserveFocus: true,
           },
-          fromUserGesture: !0,
+          fromUserGesture: true,
         }),
-        (this._shouldOpenNextAppliedFile = !1))
-      let p = !1,
-        m = !1
+        (this._shouldOpenNextAppliedFile = false))
+      let p = false,
+        m = false
       try {
         if (o === "edit") {
           const L = this.composerDataService.getLastBubbleWhere(
@@ -4279,7 +4279,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
                   (Q) => Q.bubbleId === L.bubbleId,
                   "checkpoint",
                 ]
-              A === void 0 &&
+              A === undefined &&
                 !this.isChat(e) &&
                 this.composerDataService.updateComposerDataSetStore(e, (Q) =>
                   Q(...K, QWe()),
@@ -4308,11 +4308,11 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
           }),
           C,
           S = 0,
-          x = !1
+          x = false
         const E =
-            (this.composerDataService.getInlineDiff(e, r, l) !== void 0 &&
+            (this.composerDataService.getInlineDiff(e, r, l) !== undefined &&
               !t.isChained) ||
-            s?.isBackground === !0,
+            s?.isBackground === true,
           D = async ({
             newModelLines: L,
             originalModelLines: A,
@@ -4325,7 +4325,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
                     this.composerUtilsService.computeLineDiffs(e, r, A),
                   ]),
                   z = [
-                    { key: "isChained", value: F ?? !1 },
+                    { key: "isChained", value: F ?? false },
                     { key: "newModelDiffWrtV0", value: H ?? [] },
                     { key: "originalModelDiffWrtV0", value: B ?? [] },
                   ]
@@ -4334,12 +4334,12 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
                     Q("codeBlockData", r.toString(), l, K.key, K.value),
                   )
               }
-              ;(x = !0), (p = !1), y()
+              ;(x = true), (p = false), y()
             }
           },
           P = () => {
             m ||
-              (console.log("[composer] apply failed"), (x = !0), (p = !0), y())
+              (console.log("[composer] apply failed"), (x = true), (p = true), y())
           }
         for (; S < B4i && !x; ) {
           if (
@@ -4349,15 +4349,15 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
               this.composerUnificationService.reactiveUnificationMode() ===
                 "disabled")
           ) {
-            x = !0
+            x = true
             const L = this.getComposer(e)
             if (!L) {
               console.log("[composer] no state")
               return
             }
             const A = s?.overrideUri ?? t.uri
-            let F = !0
-            if (s?.isBackground === !0) {
+            let F = true
+            if (s?.isBackground === true) {
               this.aiApplyToFileActionsService.cacheCodeBlockApplyComposer({
                 uri: A,
                 codeblock: t.content,
@@ -4375,8 +4375,8 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
               })
               return
             } else
-              s?.range === void 0 &&
-                s?.isReapply !== !0 &&
+              s?.range === undefined &&
+                s?.isReapply !== true &&
                 (await this.aiApplyToFileActionsService.maybeApplyCachedEntry({
                   uri: A,
                   codeblockContent: t.content,
@@ -4384,7 +4384,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
                   range: "fullfile",
                   composerMetadata: { composerId: e, version: l },
                 })) === "didApply" &&
-                ((F = !1), (w = Promise.resolve()))
+                ((F = false), (w = Promise.resolve()))
             F &&
               (await this.aiApplyToFileActionsService.applyComposerMaybeWithExistingStreamer(
                 {
@@ -4399,7 +4399,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
                       L.conversation,
                       t,
                     ),
-                  isReapply: s?.isReapply ?? !1,
+                  isReapply: s?.isReapply ?? false,
                   range: s?.range,
                   onApplyDone: D,
                   onApplyFailed: P,
@@ -4411,7 +4411,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
               ? nm.COMPOSER_AGENT
               : nm.COMPOSER
             C = await this.fastEditService.performAndYieldChatEdit({
-              skipAddToPromptHistory: !0,
+              skipAddToPromptHistory: true,
               composerMetadata: { composerId: e, version: l },
               conversationHistory:
                 this.composerUtilsService.processConversationForFastEdit(
@@ -4427,7 +4427,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
               options: {
                 overrideCurrentFileURI: s?.overrideUri ?? r,
                 overrideLineRange: s?.range,
-                rejectChangesInURI: s?.isBackground === !0 ? !1 : void 0,
+                rejectChangesInURI: s?.isBackground === true ? false : undefined,
                 rerun: () => {
                   this.reapply(e, r, l)
                 },
@@ -4439,7 +4439,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
               onApplyDone: D,
               onApplyFailed: P,
               isReapply: s?.isReapply,
-              cleanUpOnFail: s?.isBackground !== !0,
+              cleanUpOnFail: s?.isBackground !== true,
             })
           }
           if (
@@ -4449,34 +4449,34 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
               t.version,
               { applyGenerationUUID: h, latestApplyGenerationUUID: h },
             ),
-            (m = !1),
+            (m = false),
             C)
           ) {
             if (S !== B4i) {
               let L = f1r
               const A = new Promise((B) => {
-                L = () => B(void 0)
+                L = () => B(undefined)
               })
               let F
               F = setTimeout(() => {
-                L(), (m = !0)
+                L(), (m = true)
               }, _4i)
               const H = new Promise((B) => {
                 ;(async () => {
                   if (!C) {
-                    B(void 0)
+                    B(undefined)
                     return
                   }
                   try {
                     for await (const z of C)
                       clearTimeout(F),
                         (F = setTimeout(() => {
-                          L(), (m = !0)
+                          L(), (m = true)
                         }, _4i))
                   } catch (z) {
                     console.error("[composer] error in apply stream", z)
                   } finally {
-                    B(void 0)
+                    B(undefined)
                   }
                 })()
               })
@@ -4494,7 +4494,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
               this.reactiveStorageService.setNonPersistentStorage(
                 "composerState",
                 "shouldSimulateApplyHanging",
-                !1,
+                false,
               )
           }
           m
@@ -4507,12 +4507,12 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
           this.shouldCache(e, { uri: r, version: l }) ||
             this._onDidAiEditFile.fire({ path: r, version: l })
       } catch (b) {
-        ;(p = !0),
+        ;(p = true),
           console.error("[composer] error in runFastApplyOnCodeBlock", b)
       } finally {
         p &&
           (this.composerDataService.setCodeBlockStatus(e, r, l, "cancelled"),
-          (s.skipOnSettled = !0)),
+          (s.skipOnSettled = true)),
           this.composerDataService.updateComposerDataSetStore(e, (C) =>
             C("codeBlockData", r.toString(), l, "intermediateModelLines", []),
           )
@@ -4523,7 +4523,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
             e,
             t.uri,
             t.version,
-            { applyGenerationUUID: void 0, isNoOp: y },
+            { applyGenerationUUID: undefined, isNoOp: y },
           ),
           await this.runAfterApply(e, h)
         let w
@@ -4553,7 +4553,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
     }
     async runAfterApply(e, t) {
       const s = this.composerDataService.getLastHumanBubbleId(e),
-        n = s ? this.composerDataService.getComposerBubble(e, s) : void 0,
+        n = s ? this.composerDataService.getComposerBubble(e, s) : undefined,
         r = this.composerDataService.getLastBubbleId(e),
         o = this.composerDataService.getLastBubble(e)
       if (!s || !n) {
@@ -4578,7 +4578,7 @@ It's a core part of the IDE's AI capabilities, managing everything from simple c
       errorMessage: e,
       editorUri: t,
       range: s,
-      addToCurrent: n = !1,
+      addToCurrent: n = false,
       forceMode: r,
     }) {
       const o = this.composerDataService.getSelectedIdByForceMode(r),
@@ -4610,13 +4610,13 @@ How can I resolve this? If you propose a fix, please make it concise.`
           composerIdOrHandle: p,
           contextType: "selections",
           value: m,
-          shouldShowPreview: !1,
+          shouldShowPreview: false,
         }),
         this.addContext({
           composerIdOrHandle: p,
           contextType: "fileSelections",
           value: { uri: U.parse(t) },
-          shouldShowPreview: !1,
+          shouldShowPreview: false,
         }),
         this._onShouldForceText.fire({ composerId: p }),
         await this.submitChatMaybeAbortCurrent(p, g)
@@ -4647,13 +4647,13 @@ How can I resolve this? If you propose a fix, please make it concise.`
           composerIdOrHandle: a,
           contextType: "selections",
           value: g,
-          shouldShowPreview: !1,
+          shouldShowPreview: false,
         }),
           this.addContext({
             composerIdOrHandle: a,
             contextType: "fileSelections",
             value: { uri: u },
-            shouldShowPreview: !1,
+            shouldShowPreview: false,
           })
       }
       const l = `Fix this bug in ${Array.from(o)
@@ -4676,14 +4676,14 @@ ${e.description}
           composerIdOrHandle: a,
           contextType: "selections",
           value: c,
-          shouldShowPreview: !1,
+          shouldShowPreview: false,
         }),
         await this.submitChatMaybeAbortCurrent(a, l)
     }
     async turnCachedCodeBlockToDiff(e, t, s) {
       const n = this.composerDataService.getComposerCodeBlock(e, t, s)
       !n ||
-        n.isCached !== !0 ||
+        n.isCached !== true ||
         (this.unregisterCachedCodeBlock(e, t, s),
         await this.turnApplyToInlineDiff(e, t, s))
     }
@@ -4694,7 +4694,7 @@ ${e.description}
         )
         return
       }
-      this._isTurningCachedCodeBlocksToDiffs = !0
+      this._isTurningCachedCodeBlocksToDiffs = true
       try {
         const t = this.composerDataService.getComposerFromIdOrHandle(e)
         if (!t) return
@@ -4707,7 +4707,7 @@ ${e.description}
               n.version,
             ))
       } finally {
-        this._isTurningCachedCodeBlocksToDiffs = !1
+        this._isTurningCachedCodeBlocksToDiffs = false
       }
     }
     async turnApplyToInlineDiff(e, t, s, n) {
@@ -4720,12 +4720,12 @@ ${e.description}
         const b = new cb(
           "Undo Chain Diff",
           "undo-chain-diff",
-          void 0,
+          undefined,
           t,
           () => {},
           () => {},
         )
-        this.inlineDiffService.pushUndoElement(b, { breakConsolidation: !0 })
+        this.inlineDiffService.pushUndoElement(b, { breakConsolidation: true })
         const y =
           this.reactiveStorageService.nonPersistentStorage.inlineDiffs.find(
             (w) => w.uri.toString() === t.toString(),
@@ -4739,9 +4739,9 @@ ${e.description}
         }
         this.inlineDiffService.cancelDiff(y.id),
           this.inlineDiffService.rejectDiff(y.id, {
-            close: !0,
-            rejectSilently: !0,
-            dontBreakConsolidation: !0,
+            close: true,
+            rejectSilently: true,
+            dontBreakConsolidation: true,
           })
       } else {
         const b =
@@ -4752,7 +4752,7 @@ ${e.description}
       }
       console.log("[composer] turning cached to diff", t, r.status),
         (await this.fileService.exists(t)) ||
-          (await this.checkToCreateNewFile(e, t, !0))
+          (await this.checkToCreateNewFile(e, t, true))
       let a, l, c, h
       try {
         a = await this.textModelService.createModelReference(t)
@@ -4763,7 +4763,7 @@ ${e.description}
               e,
               t,
               s,
-              { shouldChain: !0 },
+              { shouldChain: true },
             )
           y &&
             b.textEditorModel.setValue(
@@ -4786,8 +4786,8 @@ ${e.description}
           currentRange: c,
           originalTextLines: h,
           prompt: "hi2",
-          isHidden: !1,
-          attachedToPromptBar: !1,
+          isHidden: false,
+          attachedToPromptBar: false,
           source: OP,
           createdAt: Date.now(),
           composerMetadata: { composerId: e, version: s },
@@ -4836,7 +4836,7 @@ ${e.description}
         this.unregisterCachedCodeBlock(e, t.uri, t.version)
       const s = t.uri
       ;(await this.fileService.exists(s)) ||
-        (await this.checkToCreateNewFile(e, s, !0))
+        (await this.checkToCreateNewFile(e, s, true))
       let r, o, a, l
       try {
         r = await this.textModelService.createModelReference(s)
@@ -4857,8 +4857,8 @@ ${e.description}
           currentRange: o,
           originalTextLines: a,
           prompt: "hi3",
-          isHidden: !1,
-          attachedToPromptBar: !1,
+          isHidden: false,
+          attachedToPromptBar: false,
           source: OP,
           createdAt: Date.now(),
           composerMetadata: {
@@ -4869,19 +4869,19 @@ ${e.description}
         u = this.getApplyingDiffsState(
           typeof e == "string" ? e : e.data.composerId,
         )
-      u.isReactivatingApplyingDiffs[s.toString()] = !0
+      u.isReactivatingApplyingDiffs[s.toString()] = true
       try {
         const d = t.intermediateModelLines ?? []
         let g = []
         if (d.length > 0) {
           const b = await this.editorWorkerService.computeLinesDiff(a, d, {
-            ignoreTrimWhitespace: !1,
-            computeMoves: !1,
+            ignoreTrimWhitespace: false,
+            computeMoves: false,
             maxComputationTimeMs: 500,
             ...Ygs,
           })
           let y = b.changes
-          b.hitTimeout && (y = [new Qb(o, new Es(1, d.length + 1), void 0)])
+          b.hitTimeout && (y = [new Qb(o, new Es(1, d.length + 1), undefined)])
           const w = y.map((C) => ({
             original: C.original,
             modified: d.slice(
@@ -4898,10 +4898,10 @@ ${e.description}
         if (
           !t.isNotApplied &&
           (this.shouldCache(e, { uri: s, version: t.version }) ||
-            u.isReactivatingApplyingDiffs[s.toString()] === !1)
+            u.isReactivatingApplyingDiffs[s.toString()] === false)
         ) {
           ;(u.applyingDiffsBacklogLines[s.toString()] = []),
-            (u.isReactivatingApplyingDiffs[s.toString()] = !1)
+            (u.isReactivatingApplyingDiffs[s.toString()] = false)
           return
         }
         const m = (await this.inlineDiffService.addActiveDiff(h)).id
@@ -4909,7 +4909,7 @@ ${e.description}
       } catch (d) {
         console.error("[composer] error in reactivateApplyingCodeBlock", d)
       } finally {
-        u.isReactivatingApplyingDiffs[s.toString()] = !1
+        u.isReactivatingApplyingDiffs[s.toString()] = false
       }
     }
     async getEnvironmentInfo() {
@@ -5004,7 +5004,7 @@ ${e.description}
     async shouldComposerAutoApply(e) {
       return this.getComposer(e)
         ? this.composerDataService.getComposerUnifiedMode(e) === "edit"
-        : !1
+        : false
     }
     async shouldAutoApplyURI(e, t) {
       return this.getComposer(e)
@@ -5012,9 +5012,9 @@ ${e.description}
           this.composerDataService
             .getAssociatedFileUris(e)
             .some((r) => r.toString() === t.toString())
-          ? !0
+          ? true
           : !(await this.fileService.exists(t))
-        : !1
+        : false
     }
     isUsingAPIKeys(e) {
       const t =
@@ -5029,15 +5029,15 @@ ${e.description}
           : t.toLowerCase().includes("gemini")
             ? this.reactiveStorageService.applicationUserPersistentStorage
                 .useGoogleKey
-            : !0
+            : true
     }
     async *processCodeBlocks(e, t, s) {
       let n = null,
-        r = !1,
+        r = false,
         o = "",
         a,
         l,
-        c = !1,
+        c = false,
         h = null,
         u = 0,
         d = 0
@@ -5070,8 +5070,8 @@ ${e.description}
           const C = o.slice(0, w)
           if (
             y &&
-            y.uri !== void 0 &&
-            y.version !== void 0 &&
+            y.uri !== undefined &&
+            y.version !== undefined &&
             !s?.skipRegisteringCodeBlocks
           ) {
             ;(n.content += C),
@@ -5109,7 +5109,7 @@ ${e.description}
         if (!w || !C) throw new Error("[composer] No ai or human bubble id")
         const { text: S } = y
         if (!S) {
-          s?.passTimingInfo && y.timingInfo !== void 0 && (yield y)
+          s?.passTimingInfo && y.timingInfo !== undefined && (yield y)
           continue
         }
         for (o += S; o.length > 0; )
@@ -5117,8 +5117,8 @@ ${e.description}
             const x = c && h,
               k =
                 n &&
-                n.uri !== void 0 &&
-                n.version !== void 0 &&
+                n.uri !== undefined &&
+                n.version !== undefined &&
                 !s?.skipRegisteringCodeBlocks
             if (cEt) {
               const F = new RegExp(
@@ -5162,12 +5162,12 @@ ${e.description}
                   (o = o.slice(L.index + L[0].length))
                 continue
               }
-              ;(r = !1),
+              ;(r = false),
                 x ? g(h, w, C, L.index) : n && p(n, L.index),
                 (o = o.slice(L.index + L[0].length)),
-                (a = void 0),
-                (l = void 0),
-                (c = !1)
+                (a = undefined),
+                (l = undefined),
+                (c = false)
             } else {
               const A = D.exec(o),
                 F = P.exec(o)
@@ -5192,7 +5192,7 @@ ${e.description}
               k = /^(\n|\n\n)?[\t ]*```+[^\n]*$/,
               E = x.exec(o)
             if (E) {
-              r = !0
+              r = true
               const D = E[0],
                 P = E[2]
               ;(a = /^(\n|\n\n)?(```+)/.exec(D)?.[2]?.length ?? 3),
@@ -5221,13 +5221,13 @@ ${e.description}
               } else F = P?.trim() ?? ""
               const z = xEt.find((K) => K === F)
               if (((o = o.slice(E[0].length)), z))
-                (c = !0),
+                (c = true),
                   (h = {
                     type: z,
                     content: "",
                     status: "generating",
                     codeBlockIdx: u,
-                    arg: H ?? void 0,
+                    arg: H ?? undefined,
                   }),
                   this.composerDataService.updateComposerDataSetStore(e, (K) =>
                     K(
@@ -5240,7 +5240,7 @@ ${e.description}
                           type: z,
                           status: "generating",
                           codeBlockIdx: u,
-                          arg: H ?? void 0,
+                          arg: H ?? undefined,
                         },
                       ],
                     ),
@@ -5262,14 +5262,14 @@ ${e.description}
                     this.languageService.createByLanguageNameOrFilepathOrFirstLine(
                       F ?? "",
                       null,
-                      void 0,
+                      undefined,
                     )
                   let ae = s?.forceIsNotApplied
-                  ;(!se || !Q) && (ae = !0),
-                    ae === void 0 &&
+                  ;(!se || !Q) && (ae = true),
+                    ae === undefined &&
                       this.composerUnificationService.reactiveUnificationMode() ===
                         "full" &&
-                      (B === "edit" ? (ae = !1) : (ae = !0))
+                      (B === "edit" ? (ae = false) : (ae = true))
                   const de = this.registerNewCodeBlock(e, K, n.content, u, {
                     languageId: he,
                     status: "generating",
@@ -5305,17 +5305,17 @@ ${e.description}
         const y = c && h,
           w =
             n &&
-            n.uri !== void 0 &&
-            n.version !== void 0 &&
+            n.uri !== undefined &&
+            n.version !== undefined &&
             !s?.skipRegisteringCodeBlocks,
           S = new RegExp(`^(?:\\r?\\n)([\\t ]{${l}})\`{${a}}$`).exec(o)
         S
-          ? ((r = !1),
+          ? ((r = false),
             y ? g(h, m, b, S.index) : w && p(n, S.index),
             (o = o.slice(S.index + S[0].length)),
-            (a = void 0),
-            (l = void 0),
-            (c = !1))
+            (a = undefined),
+            (l = undefined),
+            (c = false))
           : y
             ? this.composerDataService.updateComposerCapabilityCodeBlock(
                 e,
@@ -5359,27 +5359,27 @@ ${e.description}
       this.removeAllListContext({
         composerId: e,
         contextType: "selectedImages",
-        addToUndoRedo: !1,
+        addToUndoRedo: false,
       }),
         this.removeAllListContext({
           composerId: e,
           contextType: "selections",
-          addToUndoRedo: !1,
+          addToUndoRedo: false,
         }),
         this.removeAllListContext({
           composerId: e,
           contextType: "terminalSelections",
-          addToUndoRedo: !1,
+          addToUndoRedo: false,
         }),
         this.removeAllListContext({
           composerId: e,
           contextType: "externalLinks",
-          addToUndoRedo: !1,
+          addToUndoRedo: false,
         }),
         this.removeAllListContext({
           composerId: e,
           contextType: "editTrailContexts",
-          addToUndoRedo: !1,
+          addToUndoRedo: false,
         })
     }
     async refreshReactiveContextItemAtStartup() {
@@ -5421,22 +5421,22 @@ ${e.description}
           if (!(!k?.resource || !this.isCompatibleScheme(k.resource.scheme)))
             if (k.resource.scheme === ce.notepad) {
               const E = k.resource.path
-              d.push({ notepadId: E, addedWithoutMention: !0, autoContext: !0 })
+              d.push({ notepadId: E, addedWithoutMention: true, autoContext: true })
             } else if (k.resource.scheme === ce.vscodeTerminal) {
               const E = k.resource
-              g.push({ uri: E, addedWithoutMention: !0, autoContext: !0 })
+              g.push({ uri: E, addedWithoutMention: true, autoContext: true })
             } else {
               const E = k.resource
               if (E.path?.endsWith(".mdc")) {
                 const D = bs(E.path)
                 p.push({
                   filename: D,
-                  addedWithoutMention: !0,
-                  autoContext: !0,
+                  addedWithoutMention: true,
+                  autoContext: true,
                 })
               } else
                 this.selectedContextService.shouldIgnoreUri(E) ||
-                  u.push({ uri: E, addedWithoutMention: !0, autoContext: !0 })
+                  u.push({ uri: E, addedWithoutMention: true, autoContext: true })
             }
       } else if (o === "chat") {
         const S = this.getCurrentFile()?.uri
@@ -5444,15 +5444,15 @@ ${e.description}
         if (S.scheme === ce.notepad) {
           const x = S.path
           x &&
-            d.push({ notepadId: x, addedWithoutMention: !0, autoContext: !0 })
+            d.push({ notepadId: x, addedWithoutMention: true, autoContext: true })
         } else if (S.scheme === ce.vscodeTerminal)
-          g.push({ uri: S, addedWithoutMention: !0, autoContext: !0 })
+          g.push({ uri: S, addedWithoutMention: true, autoContext: true })
         else if (S.path?.endsWith(".mdc")) {
           const x = bs(S.path)
-          p.push({ filename: x, addedWithoutMention: !0, autoContext: !0 })
+          p.push({ filename: x, addedWithoutMention: true, autoContext: true })
         } else
           this.selectedContextService.shouldIgnoreUri(S) ||
-            u.push({ uri: S, addedWithoutMention: !0, autoContext: !0 })
+            u.push({ uri: S, addedWithoutMention: true, autoContext: true })
       }
       a.forEach((C) => {
         u.some((S) => extUri.isEqual(U.revive(S.uri), U.revive(C.uri))) ||
@@ -5522,40 +5522,40 @@ ${e.description}
     }
     isComposerEmpty(e) {
       const t = this.getComposer(e)
-      return t ? t.conversation.length === 0 && t.text.trim() === "" : !0
+      return t ? t.conversation.length === 0 && t.text.trim() === "" : true
     }
     isComposerConversationEmpty(e) {
       const t = this.getComposer(e)
-      return t ? t.conversation.length === 0 : !0
+      return t ? t.conversation.length === 0 : true
     }
     isComposerContextUntouched(e) {
       const t = this.getComposer(e)
-      return t ? t.hasChangedContext !== !0 : !0
+      return t ? t.hasChangedContext !== true : true
     }
     isComposerUntouched(e) {
       return this.isComposerEmpty(e) && this.isComposerContextUntouched(e)
     }
     canComposerSubmit(e, t) {
       const s = this.getComposer(e)
-      if (!s) return !1
+      if (!s) return false
       const n = this.composerDataService.getPendingUserDecisionGroup(e)
-      if (s.status === "generating" && !t && !n) return !1
+      if (s.status === "generating" && !t && !n) return false
       const r = this.composerDataService.getComposerCapability(e, ls.EDIT_TRAIL)
       if (t) {
         const l = s.conversation.find((u) => u.bubbleId === t)
-        if (!l) return !1
+        if (!l) return false
         const c =
             (l.context?.editTrailContexts?.length ?? 0) > 0 ||
-            (s.chatGenerationUUID === void 0 &&
-              (r?.state?.().hasModifiedAnyModel ?? !1)),
+            (s.chatGenerationUUID === undefined &&
+              (r?.state?.().hasModifiedAnyModel ?? false)),
           h =
             (l.context?.notepads?.length ?? 0) > 0 && s.status !== "generating"
         return l.text.trim() !== "" || c || h
       }
       const o =
           (s.context.editTrailContexts?.length ?? 0) > 0 ||
-          (s.chatGenerationUUID === void 0 &&
-            (r?.state?.().hasModifiedAnyModel ?? !1)),
+          (s.chatGenerationUUID === undefined &&
+            (r?.state?.().hasModifiedAnyModel ?? false)),
         a = (s.context.notepads?.length ?? 0) > 0 && s.status !== "generating"
       return s.text.trim() !== "" || o || a
     }
@@ -5576,7 +5576,7 @@ ${e.description}
       try {
         const r = this.composerDataService.getAllInlineDiffs(e)
         for (const o of r) {
-          if (o?.composerMetadata?.version === void 0) {
+          if (o?.composerMetadata?.version === undefined) {
             console.error("[composer] Inline diff has no version", o)
             continue
           }
@@ -5604,7 +5604,7 @@ ${e.description}
           setTimeout(() => {
             this.saveFiles(
               r.map((o) => o.uri),
-              { force: !0 },
+              { force: true },
             )
           }, 100)
       } finally {
@@ -5637,7 +5637,7 @@ ${e.description}
       const s = this.composerDataService.getComposerForceMode(e),
         n = this.composerDataService.getSelectedIdByForceMode(s)
       if (t?.insertSelection) {
-        const a = this.terminalService.getActiveInstance()?.hasFocus ?? !1
+        const a = this.terminalService.getActiveInstance()?.hasFocus ?? false
         a &&
           this.analyticsService.trackEvent("terminal.addToComposer", {
             mode: s === "chat" ? "chat" : "composer",
@@ -5698,13 +5698,13 @@ ${e.description}
     }
     getIsNewConversationAgentic(e) {
       return e === "chat"
-        ? !1
+        ? false
         : this.reactiveStorageService.applicationUserPersistentStorage
-            .composerState.defaultUseToolsInEdit === !0
+            .composerState.defaultUseToolsInEdit === true
     }
     async createComposer(e) {
       e = { ...e, forceMode: e?.forceMode }
-      const s = this.terminalService.getActiveInstance()?.hasFocus ?? !1
+      const s = this.terminalService.getActiveInstance()?.hasFocus ?? false
       if (
         (s &&
           this.analyticsService.trackEvent("terminal.addToComposer", {
@@ -5826,7 +5826,7 @@ ${e.description}
             )
           if (r.length > 0) {
             const o = r[0].composerId
-            this.openComposer(o, { skipShowAndFocus: !0 })
+            this.openComposer(o, { skipShowAndFocus: true })
           } else {
             this.resetComposer(e), this.close(e)
             return
@@ -5934,7 +5934,7 @@ ${e.description}
       if (!e) return
       const t = Ln.getOriginalUri(e.input)
       if (t && this.isCompatibleScheme(t.scheme))
-        return { uri: t, isCurrentFile: !0 }
+        return { uri: t, isCurrentFile: true }
     }
     getInlineDiffServiceLookalikePure(e, t, s) {
       return {
@@ -5972,14 +5972,14 @@ ${e.description}
             }
         },
         addActiveDiff: async (n) => {
-          const r = { stack: [], error: void 0, hasError: !1 }
+          const r = { stack: [], error: undefined, hasError: false }
           try {
             const o = __addDisposableResource(
               r,
               gl(
                 "ComposerService.getInlineDiffServiceLookalikePure.addActiveDiff",
               ),
-              !1,
+              false,
             )
             this.composerDataService.updateComposerDataSetStore(e, (l) =>
               l(
@@ -5993,7 +5993,7 @@ ${e.description}
             const a = this.getApplyingDiffsState(e)
             if (
               ((a.applyingDiffsBacklogLines[t.toString()] = []),
-              (a.isReactivatingApplyingDiffs[t.toString()] = !1),
+              (a.isReactivatingApplyingDiffs[t.toString()] = false),
               this.shouldCache(e, { uri: t, version: s }))
             ) {
               const l = rt()
@@ -6008,20 +6008,20 @@ ${e.description}
               )
             }
           } catch (o) {
-            ;(r.error = o), (r.hasError = !0)
+            ;(r.error = o), (r.hasError = true)
           } finally {
             __disposeResources(r)
           }
         },
         finishDiffSuccess: (n) => {
-          const r = { stack: [], error: void 0, hasError: !1 }
+          const r = { stack: [], error: undefined, hasError: false }
           try {
             const o = __addDisposableResource(
               r,
               gl(
                 "ComposerService.getInlineDiffServiceLookalikePure.finishDiffSuccess",
               ),
-              !1,
+              false,
             )
             if (!this.shouldCache(e, { uri: t, version: s })) {
               if (!this.getComposer(e))
@@ -6031,20 +6031,20 @@ ${e.description}
               console.error("[composer] no diff id for uri", t)
             }
           } catch (o) {
-            ;(r.error = o), (r.hasError = !0)
+            ;(r.error = o), (r.hasError = true)
           } finally {
             __disposeResources(r)
           }
         },
         cancelDiff: (n) => {
-          const r = { stack: [], error: void 0, hasError: !1 }
+          const r = { stack: [], error: undefined, hasError: false }
           try {
             const o = __addDisposableResource(
               r,
               gl(
                 "ComposerService.getInlineDiffServiceLookalikePure.cancelDiff",
               ),
-              !1,
+              false,
             )
             if (!this.shouldCache(e, { uri: t, version: s })) {
               if (!this.getComposer(e))
@@ -6054,7 +6054,7 @@ ${e.description}
               console.error("[composer] no diff id for uri", t)
             }
           } catch (o) {
-            ;(r.error = o), (r.hasError = !0)
+            ;(r.error = o), (r.hasError = true)
           } finally {
             __disposeResources(r)
           }
@@ -6073,7 +6073,7 @@ ${e.description}
       return n && r
     }
     async getTerminalText(e) {
-      return await _5i(this.terminalService, this.dataScrubbingService, !1, e)
+      return await _5i(this.terminalService, this.dataScrubbingService, false, e)
     }
     getContextId(e, t) {
       return t ? `${e}:${t}` : e
@@ -6084,8 +6084,8 @@ ${e.description}
           contextType: s,
           value: n,
           uuid: r,
-          addToUndoRedo: o = !0,
-          shouldShowPreview: a = !0,
+          addToUndoRedo: o = true,
+          shouldShowPreview: a = true,
         } = e,
         l = typeof t == "string" ? t : t.data.composerId
       this.selectedContextService.addContext({
@@ -6103,7 +6103,7 @@ ${e.description}
         },
         id: this.getContextId(l),
         shouldAddToUndoRedoStack: o,
-        mention: r ? { uuid: r } : void 0,
+        mention: r ? { uuid: r } : undefined,
       }),
         a &&
           setTimeout(() => {
@@ -6124,7 +6124,7 @@ ${e.description}
           composerId: t,
           bubbleId: s,
           contextType: n,
-          addToUndoRedo: r = !0,
+          addToUndoRedo: r = true,
         } = e,
         o = this.selectedContextService.removeAllListContext({
           contextType: n,
@@ -6165,7 +6165,7 @@ ${e.description}
           composerIdOrHandle: t,
           contextType: s,
           index: n,
-          addToUndoRedo: r = !0,
+          addToUndoRedo: r = true,
         } = e,
         o = typeof t == "string" ? t : t.data.composerId,
         a = this.selectedContextService.removeContext({
@@ -6207,7 +6207,7 @@ ${e.description}
           return s.context
         },
         id: this.getContextId(e),
-        shouldAddToUndoRedoStack: !0,
+        shouldAddToUndoRedoStack: true,
       })
     }
     addBubbleContext(e) {
@@ -6217,7 +6217,7 @@ ${e.description}
           contextType: n,
           value: r,
           uuid: o,
-          addToUndoRedo: a = !0,
+          addToUndoRedo: a = true,
         } = e,
         l = typeof t == "string" ? t : t.data.composerId
       this.selectedContextService.addContext({
@@ -6235,7 +6235,7 @@ ${e.description}
         },
         id: this.getContextId(l, s),
         shouldAddToUndoRedoStack: a,
-        mention: o ? { uuid: o } : void 0,
+        mention: o ? { uuid: o } : undefined,
       })
     }
     removeBubbleContext(e) {
@@ -6244,7 +6244,7 @@ ${e.description}
           bubbleId: s,
           contextType: n,
           index: r,
-          addToUndoRedo: o = !0,
+          addToUndoRedo: o = true,
         } = e,
         a = typeof t == "string" ? t : t.data.composerId,
         l = this.selectedContextService.removeContext({
@@ -6287,7 +6287,7 @@ ${e.description}
           return n.context
         },
         id: this.getContextId(e, t),
-        shouldAddToUndoRedoStack: !0,
+        shouldAddToUndoRedoStack: true,
       })
     }
     resetContext(e, t) {
@@ -6301,22 +6301,22 @@ ${e.description}
               composerId: e,
               bubbleId: t,
               contextType: n,
-              addToUndoRedo: !1,
+              addToUndoRedo: false,
             })
           : t
             ? this.removeBubbleContext({
                 composerIdOrHandle: e,
                 bubbleId: t,
                 contextType: n,
-                addToUndoRedo: !1,
+                addToUndoRedo: false,
               })
             : this.removeContext({
                 composerIdOrHandle: e,
                 contextType: n,
-                addToUndoRedo: !1,
+                addToUndoRedo: false,
               })
-      t || this.updateComposer(e, { hasChangedContext: !1 }),
-        this.refreshReactiveContextItem(e, t, !0),
+      t || this.updateComposer(e, { hasChangedContext: false }),
+        this.refreshReactiveContextItem(e, t, true),
         console.log(`[composer] Reset context for composer ID: ${e}`)
     }
     addContextToLastFocused(e) {
@@ -6352,8 +6352,8 @@ ${e.description}
         console.log("[composer] Checkout to message is the same as current"),
           this.cancelChat(r),
           this.updateComposer(r, {
-            currentBubbleId: o ? t : void 0,
-            editingBubbleId: o ? t : void 0,
+            currentBubbleId: o ? t : undefined,
+            editingBubbleId: o ? t : undefined,
           }),
           setTimeout(() => {
             this.getPrevEditingBubbleInputDelegate(r).focus()
@@ -6386,7 +6386,7 @@ ${e.description}
           messageIndex: a,
           isMovingForward: g,
         }),
-        n.currentBubbleId === void 0)
+        n.currentBubbleId === undefined)
       ) {
         const m = await this.composerUtilsService.createCurrentCheckpoint(
           r,
@@ -6444,7 +6444,7 @@ ${e.description}
               await this.deleteFile(b),
                 console.log(`[composer] Deleted newly created file ${m}`)
             else {
-              await this.createNewFileAndMaybeFolder(r, y.uri, !0)
+              await this.createNewFileAndMaybeFolder(r, y.uri, true)
               let C
               try {
                 C = await this.textModelService.createModelReference(b)
@@ -6472,8 +6472,8 @@ ${e.description}
 `),
                   ),
                   await this.saveFile(b, {
-                    force: !0,
-                    waitForEditorToOpen: !0,
+                    force: true,
+                    waitForEditorToOpen: true,
                   }))
               } finally {
                 C?.dispose()
@@ -6502,8 +6502,8 @@ ${e.description}
             `[composer] Deleted non existent file ${m.uri.toString()}`,
           )
       this.updateComposer(r, {
-        currentBubbleId: o ? t : void 0,
-        editingBubbleId: o ? t : void 0,
+        currentBubbleId: o ? t : undefined,
+        editingBubbleId: o ? t : undefined,
         newlyCreatedFiles: [...p.inlineDiffNewlyCreatedResources.files],
         newlyCreatedFolders: [...p.inlineDiffNewlyCreatedResources.folders],
       }),
@@ -6513,7 +6513,7 @@ ${e.description}
         p.activeInlineDiffs.forEach(async (m) => {
           const { uri: b, version: y } = m
           await this.turnApplyToInlineDiff(r, b, y, {
-            setOriginalModelLines: !0,
+            setOriginalModelLines: true,
           })
         }),
         console.log(
@@ -6565,14 +6565,14 @@ ${e.description}
     }
     async checkIfBackgroundComposerIsCorrupted(e) {
       const t = this.getComposer(e)
-      if (!t || !t.backgroundInfo) return !1
+      if (!t || !t.backgroundInfo) return false
       const { worktreePath: s } = t.backgroundInfo
       return !(await this.fileService.exists(U.parse(s)))
     }
     isBackground(e) {
       return (
         this.composerDataService.getComposerFromIdOrHandle(e)
-          ?.backgroundInfo !== void 0
+          ?.backgroundInfo !== undefined
       )
     }
     getModelDetails(e) {
@@ -6580,10 +6580,10 @@ ${e.description}
           specificModelField: e ?? "composer",
         }),
         s = ["claude-3.5-sonnet", "claude-3-5-sonnet-20241022"]
-      return t.apiKey === void 0 &&
+      return t.apiKey === undefined &&
         this.reactiveStorageService.applicationUserPersistentStorage
-          .turboModeOptions.useTurboMode === !0 &&
-        t.modelName !== void 0 &&
+          .turboModeOptions.useTurboMode === true &&
+        t.modelName !== undefined &&
         s.includes(t.modelName)
         ? new zr({ ...t, modelName: "claude-3-5-sonnet-turbo" })
         : t
@@ -6601,7 +6601,7 @@ ${e.description}
       const { codeBlockData: s } = t
       return Object.values(s)
         .flat()
-        .filter(({ isCached: r }) => r === !0)
+        .filter(({ isCached: r }) => r === true)
     }
     async readFileContents(e) {
       try {
@@ -6614,14 +6614,14 @@ ${e.description}
       const s = this.getComposer(e)
       if (!s) return []
       const n = s.text,
-        r = t?.skipSemSearch ?? !1,
+        r = t?.skipSemSearch ?? false,
         [o, a, l, c, h] = await Promise.all([
           this.recentFilesTrackerService.getRecentlyViewedFiles(Jgs),
           r
             ? Promise.resolve([])
             : this.repositoryService.parallelSearch(n, 30, 15, {
                 raceNRequests: 6,
-                fast: !0,
+                fast: true,
               }),
           s?.gitGraphFileSuggestions?.length
             ? Promise.resolve(s.gitGraphFileSuggestions)
@@ -6651,7 +6651,7 @@ ${e.description}
       const d =
           s.context.fileSelections.length > 0
             ? U.revive(s.context.fileSelections[0].uri)
-            : void 0,
+            : undefined,
         [g, p] = d
           ? await Promise.all([
               this.readFileContents(d),
@@ -6663,7 +6663,7 @@ ${e.description}
                     ?.column,
               },
             ])
-          : [void 0, void 0],
+          : [undefined, undefined],
         m = d
           ? {
               relativeWorkspacePath:
@@ -6671,10 +6671,10 @@ ${e.description}
               contents: g,
               cursorPosition: p,
             }
-          : void 0,
+          : undefined,
         b = [{ text: s.text, type: fs.HUMAN }],
         y =
-          (s.text === void 0 || s.text.trim().length === 0) &&
+          (s.text === undefined || s.text.trim().length === 0) &&
           s.context.fileSelections.length === 1
       return await Kgs(
         c,
@@ -6728,11 +6728,11 @@ ${e.description}
         }
     }
     maybeRunOnComposerSettled(e) {
-      return this.isComposerSettled(e) ? (this.onComposerSettled(e), !0) : !1
+      return this.isComposerSettled(e) ? (this.onComposerSettled(e), true) : false
     }
     isComposerSettled(e) {
       const t = this.getComposer(e)
-      if (!t) return !0
+      if (!t) return true
       const s = (this.composerDataService.getLastAiBubble(e)?.codeBlocks ?? [])
           .map((a) =>
             this.composerDataService.getComposerCodeBlock(e, a.uri, a.version),
@@ -6748,7 +6748,7 @@ ${e.description}
       if (!t || t.status === "aborted") return
       console.log("[composer] on composer settled", e)
       const s = this.composerDataService.getLastHumanBubbleId(e),
-        n = s ? this.composerDataService.getComposerBubble(e, s) : void 0,
+        n = s ? this.composerDataService.getComposerBubble(e, s) : undefined,
         r = this.composerDataService.getLastBubbleId(e),
         o = this.composerDataService.getLastBubble(e)
       if (!s || !n) {
@@ -6786,7 +6786,7 @@ ${e.description}
           a,
         ))
           ? this.submitChatMaybeAbortCurrent(e, "", {
-              isCapabilityIteration: !0,
+              isCapabilityIteration: true,
             })
           : this.isComposerSettled(e) && this.onComposerDone(e, a)
       } catch (l) {
@@ -6894,7 +6894,7 @@ ${e.description}
         ),
         this.composerDataService.getComposerForceMode(e) !== "chat" &&
           m.version === 0 &&
-          o.originalModelLines[c] === void 0 &&
+          o.originalModelLines[c] === undefined &&
           this.composerUtilsService.getContentsOfFile(e, t).then((y) => {
             ;(y = y ?? [" "]),
               this.composerDataService.updateComposerDataSetStore(e, (w) =>
@@ -6947,7 +6947,7 @@ ${e.description}
           l = this.languageService.createByLanguageNameOrFilepathOrFirstLine(
             null,
             n.uri,
-            void 0,
+            undefined,
           )
         if (!l) return
         const c = s.codeBlockData[t.toString()]?.find(
@@ -6966,19 +6966,19 @@ ${e.description}
             x2,
             a,
             "Original",
-            void 0,
+            undefined,
             l.languageId,
             u,
           ),
           p = this.instantiationService.createInstance(
             U1,
             t,
-            void 0,
-            void 0,
-            void 0,
-            void 0,
-            void 0,
-            void 0,
+            undefined,
+            undefined,
+            undefined,
+            undefined,
+            undefined,
+            undefined,
           ),
           m = this.composerDataService.getLatestCodeBlockVersion(
             s.composerId,
@@ -6991,7 +6991,7 @@ ${e.description}
             `${b + 1}/${m + 1}`,
             g,
             p,
-            void 0,
+            undefined,
           )
         await this.editorGroupsService.activeGroup.openEditor(y),
           y.register(this.D(d)),
@@ -7042,19 +7042,19 @@ ${e.description}
             }),
             await this.editorService.openEditor(r, {
               inactive: !!e?.skipOpen,
-              pinned: !0,
+              pinned: true,
             }))
         : e?.skipOpen ||
           (await this.editorService.openEditor(r, {
             inactive: !!e?.skipOpen,
-            pinned: !0,
+            pinned: true,
           }))
     }
     showComposerHistory() {
       this.reactiveStorageService.setNonPersistentStorage(
         "composerState",
         "shouldShowComposerHistory",
-        !0,
+        true,
       ),
         this.composerViewsService.getComposerLocation(
           this.composerDataService.selectedComposerId,
@@ -7064,7 +7064,7 @@ ${e.description}
       this.reactiveStorageService.setNonPersistentStorage(
         "composerState",
         "shouldShowChatHistory",
-        !0,
+        true,
       ),
         this.composerViewsService.getComposerLocation(
           this.composerDataService.selectedChatId,
@@ -7100,7 +7100,7 @@ ${e.description}
           if (o.status === "applying")
             await this.reactivateApplyingCodeBlock(e, o)
           else {
-            let a = !1
+            let a = false
             const l = !!o.newModelDiffWrtV0,
               c =
                 this.reactiveStorageService.nonPersistentStorage.inlineDiffs.find(
@@ -7118,11 +7118,11 @@ ${e.description}
 `) !==
                 u.join(`
 `) &&
-              (a = !0),
+              (a = true),
               l && !a
                 ? c
                   ? await this.turnApplyToInlineDiff(e, t, s, {
-                      shouldChain: !0,
+                      shouldChain: true,
                     })
                   : await this.turnApplyToInlineDiff(e, t, s)
                 : this.runFastApplyOnCodeBlock(e, o, { range: n?.range })
@@ -7130,9 +7130,9 @@ ${e.description}
           return
         }
         this.composerDataService.updateComposerCodeBlock(e, r, s, {
-          newModelDiffWrtV0: void 0,
-          originalModelDiffWrtV0: void 0,
-          intermediateModelLines: void 0,
+          newModelDiffWrtV0: undefined,
+          originalModelDiffWrtV0: undefined,
+          intermediateModelLines: undefined,
         }),
           this.runFastApplyOnCodeBlock(e, o, { range: n?.range })
       }
@@ -7168,7 +7168,7 @@ ${e.description}
             eol: n,
           },
         )
-      if (r === void 0)
+      if (r === undefined)
         throw new Error("Format Diff History not registered in extension host")
       return r
     }
@@ -7187,10 +7187,10 @@ ${e.description}
           (await this.everythingProviderService.onlyLocalProvider?.runCommand(
             l7.GetModelValue,
             { relativePath: s },
-          )) === void 0
+          )) === undefined
         ) {
           let r = t.getValue()
-          if (r !== void 0) {
+          if (r !== undefined) {
             const o =
               await this.everythingProviderService.onlyLocalProvider?.runCommand(
                 l7.InitModel,
@@ -7247,7 +7247,7 @@ ${e.description}
           (await this.everythingProviderService.onlyLocalProvider?.runCommand(
             l7.Ack,
             null,
-          )) !== !0;
+          )) !== true;
           e++
         )
           await new Promise((t) => setTimeout(t, 50))
@@ -7302,10 +7302,10 @@ ${e.description}
         )
         const o = this.textFileService.isDirty(s.uri)
         await this.turnApplyToInlineDiff(s.composerId, s.uri, s.version, {
-          setOriginalModelLines: !0,
+          setOriginalModelLines: true,
         }),
           t.add(s.uri.toString()),
-          o || (await this.saveFile(s.uri, { force: !0 }))
+          o || (await this.saveFile(s.uri, { force: true }))
       }
     }
     focus(e, t) {
@@ -7349,7 +7349,7 @@ ${e.description}
       let t
       if (!e.id) return
       const s = this.parseComposerContextId(e.id)
-      s === void 0 ||
+      s === undefined ||
         s.composerId !== this.composerDataService.selectedComposerId ||
         ((t = s.bubbleId), await this.updateTokenCountOfCurrentComposer(t))
     }
@@ -7357,7 +7357,7 @@ ${e.description}
       let t
       if (!e.id) return
       const s = this.parseComposerContextId(e.id)
-      s === void 0 ||
+      s === undefined ||
         s.composerId !== this.composerDataService.selectedComposerId ||
         ((t = s.bubbleId), await this.updateTokenCountOfCurrentComposer(t))
     }
@@ -7366,7 +7366,7 @@ ${e.description}
       const t = this.composerDataService.selectedComposerId,
         s = this.composerDataService.getComposerData(t)
       if (!s) return
-      e !== void 0 && this.updateTokenCountOfCurrentComposer()
+      e !== undefined && this.updateTokenCountOfCurrentComposer()
       const r = (
         e
           ? s.conversation.slice(
@@ -7390,7 +7390,7 @@ ${e.description}
         const u = new a2i({
           modelName:
             this.reactiveStorageService.applicationUserPersistentStorage
-              .aiSettings.composerModel ?? void 0,
+              .aiSettings.composerModel ?? undefined,
           contextItems: await Promise.all(
             o.map(async (d) => {
               let g
@@ -7453,12 +7453,12 @@ ${e.description}
             o =
               r && this.repositoryService.isIndexedMainLocalRepository()
                 ? new rl(r)
-                : void 0,
+                : undefined,
             a = this.composerDataService.getComposerUnifiedMode(e),
             l = [...t.data.conversation]
               .reverse()
               .map((y) => y.conversationSummary)
-              .filter((y) => y !== void 0)[0],
+              .filter((y) => y !== undefined)[0],
             c = l?.clientShouldStartSendingFromInclusiveBubbleId
           let h = c
             ? t.data.conversation.findIndex(

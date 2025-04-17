@@ -80,7 +80,7 @@ export function createAIProjectService(params) {
     },
     RKn = class d6e extends _ {
       constructor(e) {
-        super(), (this.response = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.response = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -136,7 +136,7 @@ export function createAIProjectService(params) {
             name: "previous_messages",
             kind: "message",
             T: K9,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -155,7 +155,7 @@ export function createAIProjectService(params) {
     },
     vKi = class g6e extends _ {
       constructor(e) {
-        super(), (this.response = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.response = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -212,7 +212,7 @@ export function createAIProjectService(params) {
             name: "previous_messages",
             kind: "message",
             T: K9,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -231,7 +231,7 @@ export function createAIProjectService(params) {
     },
     yKi = class m6e extends _ {
       constructor(e) {
-        super(), (this.response = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.response = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -270,7 +270,7 @@ export function createAIProjectService(params) {
         super(),
           (this.previousMessages = []),
           (this.feedbackOrProgress = ""),
-          (this.forceMoveToNextStep = !1),
+          (this.forceMoveToNextStep = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -287,7 +287,7 @@ export function createAIProjectService(params) {
             name: "previous_messages",
             kind: "message",
             T: K9,
-            repeated: !0,
+            repeated: true,
           },
           { no: 3, name: "feedback_or_progress", kind: "scalar", T: 9 },
           { no: 4, name: "force_move_to_next_step", kind: "scalar", T: 8 },
@@ -308,7 +308,7 @@ export function createAIProjectService(params) {
     },
     FKn = class v6e extends _ {
       constructor(e) {
-        super(), (this.response = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.response = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -382,7 +382,7 @@ export function createAIProjectService(params) {
     },
     wKi = class w6e extends _ {
       constructor(e) {
-        super(), (this.response = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.response = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -455,7 +455,7 @@ export function createAIProjectService(params) {
         super(),
           (this.previousMessages = []),
           (this.feedbackOrProgress = ""),
-          (this.forceMoveToNextStep = !1),
+          (this.forceMoveToNextStep = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -472,7 +472,7 @@ export function createAIProjectService(params) {
             name: "previous_messages",
             kind: "message",
             T: K9,
-            repeated: !0,
+            repeated: true,
           },
           { no: 3, name: "feedback_or_progress", kind: "scalar", T: 9 },
           { no: 4, name: "force_move_to_next_step", kind: "scalar", T: 8 },
@@ -493,7 +493,7 @@ export function createAIProjectService(params) {
     },
     UKn = class x6e extends _ {
       constructor(e) {
-        super(), (this.response = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.response = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -558,7 +558,7 @@ export function createAIProjectService(params) {
             name: "project_breakdown",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
           { no: 5, name: "step_type", kind: "enum", T: v.getEnumType(_g) },
           { no: 6, name: "shell_type", kind: "enum", T: v.getEnumType(D$) },
@@ -580,7 +580,7 @@ export function createAIProjectService(params) {
     CKi = class E6e extends _ {
       constructor(e) {
         super(),
-          (this.response = { case: void 0 }),
+          (this.response = { case: undefined }),
           (this.stepType = _g.UNSPECIFIED),
           v.util.initPartial(e, this)
       }
@@ -718,7 +718,7 @@ export function createAIProjectService(params) {
     },
     jKn = class P6e extends _ {
       constructor(e) {
-        super(), (this.payload = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.payload = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -773,7 +773,7 @@ export function createAIProjectService(params) {
     },
     zKn = class N6e extends _ {
       constructor(e) {
-        super(), (this.payload = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.payload = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -822,7 +822,7 @@ export function createAIProjectService(params) {
     },
     GKn = class R6e extends _ {
       constructor(e) {
-        super(), (this.response = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.response = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -870,8 +870,8 @@ export function createAIProjectService(params) {
           (this.stepType = _g.UNSPECIFIED),
           (this.shellType = D$.UNSPECIFIED),
           (this.previousFeedbackMessages = []),
-          (this.forceMoveToNextStep = !1),
-          (this.feedbackPayload = { case: void 0 }),
+          (this.forceMoveToNextStep = false),
+          (this.feedbackPayload = { case: undefined }),
           v.util.initPartial(e, this)
       }
       static {
@@ -890,7 +890,7 @@ export function createAIProjectService(params) {
             name: "project_breakdown",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
           { no: 5, name: "step_type", kind: "enum", T: v.getEnumType(_g) },
           { no: 6, name: "shell_type", kind: "enum", T: v.getEnumType(D$) },
@@ -899,7 +899,7 @@ export function createAIProjectService(params) {
             name: "previous_feedback_messages",
             kind: "message",
             T: K9,
-            repeated: !0,
+            repeated: true,
           },
           { no: 8, name: "force_move_to_next_step", kind: "scalar", T: 8 },
           {
@@ -940,7 +940,7 @@ export function createAIProjectService(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "files_to_modify", kind: "scalar", T: 9, repeated: !0 },
+          { no: 1, name: "files_to_modify", kind: "scalar", T: 9, repeated: true },
           { no: 2, name: "feedback_text", kind: "scalar", T: 9 },
         ])
       }
@@ -959,7 +959,7 @@ export function createAIProjectService(params) {
     },
     YKn = class $6e extends _ {
       constructor(e) {
-        super(), (this.response = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.response = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -1000,7 +1000,7 @@ export function createAIProjectService(params) {
     },
     XKn = class F6e extends _ {
       constructor(e) {
-        super(), (this.response = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.response = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -1102,13 +1102,13 @@ export function createAIProjectService(params) {
         )
       }
       getModelDetails() {
-        let e = this.g.getModel() ?? void 0,
+        let e = this.g.getModel() ?? undefined,
           t = this.b.getApiKeyForModel(e)
         const s = this.g.getUseApiKeyForModel(e),
           n = this.b.reactivePrivacyMode(),
           r = this.f.applicationUserPersistentStorage.azureState
         return (
-          (!s || !t) && (t = void 0),
+          (!s || !t) && (t = undefined),
           new zr({
             apiKey: t,
             modelName: e,
@@ -1164,14 +1164,14 @@ export function createAIProjectService(params) {
           this.f.setNonPersistentStorage("inprogressAIGenerations", (s) =>
             s.filter((n) => n.generationUUID !== t),
           ),
-            this.q.persistSelectedChat(!0)
+            this.q.persistSelectedChat(true)
         }
       }
       async startProject(
         e,
         { currentTabId: t, userBubbleId: s, assistantBubbleId: n },
       ) {
-        if (this.a === void 0)
+        if (this.a === undefined)
           throw new Error("DEPRECATED. AiProjectServicePromise is undefined")
         const r = await this.a,
           { generationUUID: o, abortController: a } = this.s({
@@ -1201,15 +1201,15 @@ export function createAIProjectService(params) {
           "simpleDescription",
           e,
         )
-        let d = !1
+        let d = false
         try {
           for await (const g of l)
             if (g.response.case === "clarification") {
               const p = g.response.value.response
               p.case === "thought"
-                ? (d || (c(k5), (d = !0)), c(p.value))
+                ? (d || (c(k5), (d = true)), c(p.value))
                 : p.case === "output"
-                  ? (d && (c(eA), (d = !1)), c(p.value))
+                  ? (d && (c(eA), (d = false)), c(p.value))
                   : p.case === "messagePayload" &&
                     (h({
                       messageType: Ka.USER,
@@ -1221,7 +1221,7 @@ export function createAIProjectService(params) {
                     }))
             } else if (g.response.case === "repeatClarification")
               return { clarify: g.response.value }
-          return { clarify: !1 }
+          return { clarify: false }
         } finally {
           this.f.setNonPersistentStorage("inprogressAIGenerations", (g) =>
             g.filter((p) => p.generationUUID !== o),
@@ -1232,14 +1232,14 @@ export function createAIProjectService(params) {
         const n = this.q.chatData.codeInterpreterTabs.find(
           ({ tabId: o }) => o === e,
         )?.bubbles
-        if (n === void 0)
+        if (n === undefined)
           throw new Error(
             `Could not find bubbles when getting previous project messages! - ${e} - ${t}`,
           )
         const r = []
         for (const o of n) {
           if (o.id === t) break
-          ;(s !== void 0 && !s(o)) || r.push(...o.serverMessages)
+          ;(s !== undefined && !s(o)) || r.push(...o.serverMessages)
         }
         return r
       }
@@ -1247,7 +1247,7 @@ export function createAIProjectService(params) {
         e,
         { currentTabId: t, userBubbleId: s, assistantBubbleId: n },
       ) {
-        if (this.a === void 0)
+        if (this.a === undefined)
           throw new Error("DEPRECATED. AiProjectServicePromise is undefined")
         const r = this.getPreviousMessages({ currentTabId: t, lastBubbleId: s }),
           o = await this.a,
@@ -1275,14 +1275,14 @@ export function createAIProjectService(params) {
             userBubbleId: s,
             assistantBubbleId: n,
           })
-        let g = !1
+        let g = false
         for await (const p of c)
           if (p.response.case === "clarification") {
             const m = p.response.value.response
             m.case === "thought"
-              ? (g || (h(k5), (g = !0)), h(m.value))
+              ? (g || (h(k5), (g = true)), h(m.value))
               : m.case === "output"
-                ? (g && (h(eA), (g = !1)), h(m.value))
+                ? (g && (h(eA), (g = false)), h(m.value))
                 : m.case === "messagePayload" &&
                   (u({ messageType: Ka.USER, content: m.value.fullUserMessage }),
                   d({
@@ -1291,10 +1291,10 @@ export function createAIProjectService(params) {
                   }))
           } else if (p.response.case === "repeatClarification")
             return { clarify: p.response.value }
-        return { clarify: !1 }
+        return { clarify: false }
       }
       async getProjectPlan(e, t) {
-        if (this.a === void 0)
+        if (this.a === undefined)
           throw new Error("DEPRECATED. AiProjectServicePromise is undefined")
         const s = this.getPreviousMessages({ currentTabId: e, lastBubbleId: t }),
           { appendAssistant: n, replaceAssistantServer: r } = this.getHelperMods({
@@ -1315,13 +1315,13 @@ export function createAIProjectService(params) {
             a,
           )
         let h = "",
-          u = !1
+          u = false
         for await (const d of c) {
           const g = d.response
           g.case === "thought"
-            ? (u || (n(k5), (u = !0)), n(g.value))
+            ? (u || (n(k5), (u = true)), n(g.value))
             : g.case === "output"
-              ? (u && (n(eA), (u = !1)), n(g.value), (h += g.value))
+              ? (u && (n(eA), (u = false)), n(g.value), (h += g.value))
               : g.case === "messagePayload" &&
                 r(
                   { messageType: Ka.USER, content: g.value.fullUserMessage },
@@ -1346,7 +1346,7 @@ Any feedback/suggestions on the spec?
         e,
         { currentTabId: t, assistantBubbleId: s, userBubbleId: n },
       ) {
-        if (this.a === void 0)
+        if (this.a === undefined)
           throw new Error("DEPRECATED. AiProjectServicePromise is undefined")
         const r = this.getPreviousMessages({ currentTabId: t, lastBubbleId: n }),
           o = await this.a,
@@ -1365,7 +1365,7 @@ Any feedback/suggestions on the spec?
             ),
             a,
           )
-        let h = !1
+        let h = false
         const {
           appendAssistant: u,
           replaceUserServer: d,
@@ -1375,15 +1375,15 @@ Any feedback/suggestions on the spec?
           userBubbleId: n,
           assistantBubbleId: s,
         })
-        let p = !1,
+        let p = false,
           m = ""
         for await (const b of c)
           if (b.response.case === "revisedPlan") {
             const y = b.response.value.response
             y.case === "thought"
-              ? (p || (u(k5), (p = !0)), u(y.value))
+              ? (p || (u(k5), (p = true)), u(y.value))
               : y.case === "output"
-                ? (p && (u(eA), (p = !1)), u(y.value), (m += y.value))
+                ? (p && (u(eA), (p = false)), u(y.value), (m += y.value))
                 : y.case === "messagePayload" &&
                   (d({ messageType: Ka.USER, content: y.value.fullUserMessage }),
                   g({
@@ -1425,7 +1425,7 @@ Any further feedback on the revised plan?
         )
       }
       async getBreakdown(e, t) {
-        if (this.a === void 0)
+        if (this.a === undefined)
           throw new Error("DEPRECATED. AiProjectServicePromise is undefined")
         let s = 0
         const {
@@ -1456,7 +1456,7 @@ Any further feedback on the revised plan?
               (y) => y + b,
             ),
           c = this.q.chatData.codeInterpreterTabs.find(({ tabId: b }) => b === e)
-        if (c === void 0) throw new Error(`No tab details found for tab ${e}`)
+        if (c === undefined) throw new Error(`No tab details found for tab ${e}`)
         this.q.setChatData(
           "codeInterpreterTabs",
           ({ tabId: b }) => b === e,
@@ -1480,14 +1480,14 @@ Any further feedback on the revised plan?
             ),
             u,
           )
-        let p = !1,
+        let p = false,
           m = -1
         for await (const b of g) {
           const y = b.response
           y.case === "thought"
-            ? (p || (n(k5), (p = !0)), n(y.value))
+            ? (p || (n(k5), (p = true)), n(y.value))
             : y.case === "step"
-              ? (p && (n(eA), (p = !1)),
+              ? (p && (n(eA), (p = false)),
                 y.value.stepNumber !== m &&
                   (a(y.value.stepType), (m = y.value.stepNumber)),
                 l(y.value.stepDescription),
@@ -1501,7 +1501,7 @@ Any further feedback on the revised plan?
         e,
         { currentTabId: t, assistantBubbleId: s, userBubbleId: n },
       ) {
-        if (this.a === void 0)
+        if (this.a === undefined)
           throw new Error("DEPRECATED. AiProjectServicePromise is undefined")
         let r = 0
         const {
@@ -1541,7 +1541,7 @@ Any further feedback on the revised plan?
             )
         if (
           this.q.chatData.codeInterpreterTabs.find(({ tabId: x }) => x === t) ===
-          void 0
+          undefined
         )
           throw new Error(`No tab details found for tab ${t}`)
         this.q.setChatData(
@@ -1573,17 +1573,17 @@ Any further feedback on the revised plan?
             ),
             m,
           )
-        let w = !1,
-          C = !1,
+        let w = false,
+          C = false,
           S = -1
         for await (const x of y) {
           const k = x.response
           if (k.case === "revisedBreakdown") {
             const E = k.value.response
             E.case === "thought"
-              ? (C || (o(k5), (C = !0)), o(E.value))
+              ? (C || (o(k5), (C = true)), o(E.value))
               : E.case === "step"
-                ? (C && (o(eA), (C = !1)),
+                ? (C && (o(eA), (C = false)),
                   S === -1 && h(),
                   E.value.stepNumber !== S &&
                     (c(E.value.stepType), (S = E.value.stepNumber)),
@@ -1603,12 +1603,12 @@ Any further feedback on the revised plan?
         e,
         { currentTabId: t, userBubbleId: s, assistantBubbleId: n },
       ) {
-        if (this.a === void 0)
+        if (this.a === undefined)
           throw new Error("DEPRECATED. AiProjectServicePromise is undefined")
         const r = this.q.chatData.codeInterpreterTabs.find(
           ({ tabId: w }) => w === t,
         )
-        if (r === void 0) throw new Error(`No tab data found for tab ${t}`)
+        if (r === undefined) throw new Error(`No tab data found for tab ${t}`)
         const { appendAssistant: o, replaceAssistantServer: a } =
           this.getHelperMods({
             currentTabId: t,
@@ -1621,7 +1621,7 @@ Any further feedback on the revised plan?
             ?.bubbles.find(
               ({ id: w, type: C, bubbleState: S }) =>
                 w === n && C === dc.AI_CODE_INTERPRETER && S === ho.steps,
-            ) === void 0
+            ) === undefined
         )
           throw new Error(`No bubble found for bubble ${n}`)
         const c = r.additionalData.aiProjectSteps,
@@ -1665,13 +1665,13 @@ $ ${C.value}
                     : C.type === TR.endTerminal && o("\n```\n\n")
           })
         })
-        let b = !1,
-          y = !0
+        let b = false,
+          y = true
         for await (const w of p)
           if (w.response.case === "thought")
-            b || (o(k5), (b = !0)), o(w.response.value)
+            b || (o(k5), (b = true)), o(w.response.value)
           else if (w.response.case === "output")
-            b && (o(eA), (b = !1)), o(w.response.value)
+            b && (o(eA), (b = false)), o(w.response.value)
           else if (w.response.case === "messagePayload")
             a(
               new K9({
@@ -1711,7 +1711,7 @@ $ ${C.value}
                   "stepPayload",
                   (x) => {
                     let k
-                    if (x === void 0 || y)
+                    if (x === undefined || y)
                       console.log("resetting!!"),
                         (k = {
                           type: _g.CREATE_RM_FILES,
@@ -1730,7 +1730,7 @@ $ ${C.value}
                 )
               }
             }
-            y = !1
+            y = false
           }
         b && o(eA),
           o(`
@@ -1745,12 +1745,12 @@ Any feedback/suggestions on this step?
         s,
         { currentTabId: n, userBubbleId: r, assistantBubbleId: o },
       ) {
-        if (this.a === void 0)
+        if (this.a === undefined)
           throw new Error("DEPRECATED. AiProjectServicePromise is undefined")
         const a = this.q.chatData.codeInterpreterTabs.find(
           ({ tabId: x }) => x === n,
         )
-        if (a === void 0) throw new Error(`No tab data found for tab ${n}`)
+        if (a === undefined) throw new Error(`No tab data found for tab ${n}`)
         const {
             appendAssistant: l,
             replaceAssistantServer: c,
@@ -1770,7 +1770,7 @@ Any feedback/suggestions on this step?
             (x) =>
               x.bubbleState === ho.steps || x.bubbleState === ho.stepsFeedback
                 ? x.stepIndex === t
-                : !1,
+                : false,
           )
         console.log("USING CURRENT STEP", t, s)
         let m
@@ -1816,8 +1816,8 @@ $ ${k.value}
                     : k.type === TR.endTerminal && l("\n```\n\n")
           })
         })
-        let C = !1,
-          S = !0
+        let C = false,
+          S = true
         console.log("going to stream now")
         for await (const x of y)
           if (
@@ -1825,9 +1825,9 @@ $ ${k.value}
           ) {
             const k = x.response.value
             if (k.response.case === "thought")
-              C || (l(k5), (C = !0)), l(k.response.value)
+              C || (l(k5), (C = true)), l(k.response.value)
             else if (k.response.case === "output")
-              C && (l(eA), (C = !1)), l(k.response.value)
+              C && (l(eA), (C = false)), l(k.response.value)
             else if (k.response.case === "stepPayload") {
               const E = k.response.value
               if (E.payload.case !== "runTerm") {
@@ -1845,7 +1845,7 @@ $ ${k.value}
                       "stepPayload",
                       (P) => {
                         let L
-                        if (P === void 0 || S)
+                        if (P === undefined || S)
                           console.log("resetting!!"),
                             (L = {
                               type: _g.CREATE_RM_FILES,
@@ -1867,7 +1867,7 @@ $ ${k.value}
                     )
                 }
               }
-              S = !1
+              S = false
             }
           } else if (x.response.case === "repeatFeedback")
             return (
@@ -1879,19 +1879,19 @@ Any additional feedback/suggestions?
 `),
               { repeatStep: x.response.value }
             )
-        return { repeatStep: !1 }
+        return { repeatStep: false }
       }
       async nextStep(e, t, s) {
         console.log("CALLING NEXT STEP WITH", s)
         const n = this.q.chatData.codeInterpreterTabs.find(
           ({ tabId: p }) => p === e,
         )
-        if (n === void 0) throw new Error(`No tab data found for tab ${e}`)
+        if (n === undefined) throw new Error(`No tab data found for tab ${e}`)
         const r = s ?? n.additionalData.stepIndex
         console.log("RUNNING NEXT STEP")
         let o = 0
-        const a = n.bubbles.find((p, m) => (p.id === t ? ((o = m), !0) : !1))
-        if (a === void 0)
+        const a = n.bubbles.find((p, m) => (p.id === t ? ((o = m), true) : false))
+        if (a === undefined)
           throw new Error(`No bubble data found for tab ${e} and bubble ${t}`)
         this.q.setChatData(
           "codeInterpreterTabs",
@@ -1908,7 +1908,7 @@ Any additional feedback/suggestions?
           }) => {
             let C
             return (
-              w === void 0 ? (C = rt()) : (C = w),
+              w === undefined ? (C = rt()) : (C = w),
               this.q.setChatData(
                 "codeInterpreterTabs",
                 ({ tabId: S }) => S === e,
@@ -1935,7 +1935,7 @@ Any additional feedback/suggestions?
                           ? (x = { ...k, bubbleState: m, stepIndex: y })
                           : (x = { ...k, bubbleState: m })
                   } else if (p === Ka.USER)
-                    x = n6n(this.q.setChatData, e, m, b, void 0, void 0, y)
+                    x = n6n(this.q.setChatData, e, m, b, undefined, undefined, y)
                   else return S
                   return [...S, x]
                 },
@@ -1956,7 +1956,7 @@ Any additional feedback/suggestions?
             const m = this.q.chatData.codeInterpreterTabs.find(
               ({ tabId: y }) => y === e,
             )?.bubbles
-            if (m === void 0 || m.length === 0)
+            if (m === undefined || m.length === 0)
               throw new Error(`No bubbles found for tab ${e}`)
             const b = m[m.length - 1]
             this.q.setChatData(

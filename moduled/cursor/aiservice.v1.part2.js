@@ -7,7 +7,7 @@ export function createAIServiceV1Part2(params) {
   var gNn = class qOe extends _ {
     constructor(e) {
       super(),
-        (this.telemEnabled = !1),
+        (this.telemEnabled = false),
         (this.bugBotDismissedNotificationLast10TimesUnixMs = []),
         (this.bugBotViewedNotificationLast10TimesUnixMs = []),
         v.util.initPartial(e, this)
@@ -26,14 +26,14 @@ export function createAIServiceV1Part2(params) {
           name: "bug_bot_dismissed_notification_last_10_times_unix_ms",
           kind: "scalar",
           T: 1,
-          repeated: !0,
+          repeated: true,
         },
         {
           no: 3,
           name: "bug_bot_viewed_notification_last_10_times_unix_ms",
           kind: "scalar",
           T: 1,
-          repeated: !0,
+          repeated: true,
         },
       ])
     }
@@ -83,8 +83,8 @@ export function createAIServiceV1Part2(params) {
   pNn = class zOe extends _ {
     constructor(e) {
       super(),
-        (this.enabled = !1),
-        (this.tryTriggerOnSave = !1),
+        (this.enabled = false),
+        (this.tryTriggerOnSave = false),
         (this.waitBetweenTriggersMs = 0),
         v.util.initPartial(e, this)
     }
@@ -117,12 +117,12 @@ export function createAIServiceV1Part2(params) {
   NBi = class GOe extends _ {
     constructor(e) {
       super(),
-        (this.enabled = !1),
+        (this.enabled = false),
         (this.waitBetweenTriggersMs = 0),
         (this.debounceTriggersMs = 0),
         (this.keepLinesAroundChunk = 0),
         (this.preventTriggeringForFilesWithThisManyLines = 0),
-        (this.preventTriggeringWhenLints = !1),
+        (this.preventTriggeringWhenLints = false),
         v.util.initPartial(e, this)
     }
     static {
@@ -162,10 +162,10 @@ export function createAIServiceV1Part2(params) {
   mNn = class JOe extends _ {
     constructor(e) {
       super(),
-        (this.enabled = !1),
-        (this.isSubsidized = !1),
+        (this.enabled = false),
+        (this.isSubsidized = false),
         (this.backgroundCallFrequencyMs = 0),
-        (this.killSwitch = !1),
+        (this.killSwitch = false),
         (this.showIntrusiveNotificationOnlyIfLastTimeWasMoreThanMsAgo = 0),
         v.util.initPartial(e, this)
     }
@@ -192,92 +192,92 @@ export function createAIServiceV1Part2(params) {
           name: "background_diff_absolute_max_tokens",
           kind: "scalar",
           T: 5,
-          opt: !0,
+          opt: true,
         },
         {
           no: 7,
           name: "background_diff_min_min_token_threshold",
           kind: "scalar",
           T: 5,
-          opt: !0,
+          opt: true,
         },
         {
           no: 8,
           name: "background_diff_min_max_token_threshold",
           kind: "scalar",
           T: 5,
-          opt: !0,
+          opt: true,
         },
         {
           no: 9,
           name: "background_diff_last_commit_less_than_this_many_ms_ago",
           kind: "scalar",
           T: 1,
-          opt: !0,
+          opt: true,
         },
         {
           no: 15,
           name: "background_unified_context_lines",
           kind: "scalar",
           T: 5,
-          opt: !0,
+          opt: true,
         },
         {
           no: 16,
           name: "background_diff_include_uncommitted",
           kind: "scalar",
           T: 8,
-          opt: !0,
+          opt: true,
         },
         {
           no: 10,
           name: "default_diff_context_lines",
           kind: "scalar",
           T: 5,
-          opt: !0,
+          opt: true,
         },
         {
           no: 11,
           name: "diff_absolute_max_tokens",
           kind: "scalar",
           T: 5,
-          opt: !0,
+          opt: true,
         },
         {
           no: 12,
           name: "custom_instructions_max_char_length",
           kind: "scalar",
           T: 5,
-          opt: !0,
+          opt: true,
         },
         {
           no: 13,
           name: "default_fallback_iterations",
           kind: "scalar",
           T: 5,
-          opt: !0,
+          opt: true,
         },
         {
           no: 14,
           name: "threshold_for_expensive_run_modal_cents",
           kind: "scalar",
           T: 5,
-          opt: !0,
+          opt: true,
         },
-        { no: 17, name: "cheap_model_name", kind: "scalar", T: 9, opt: !0 },
+        { no: 17, name: "cheap_model_name", kind: "scalar", T: 9, opt: true },
         {
           no: 18,
           name: "cheap_absolute_max_tokens",
           kind: "scalar",
           T: 5,
-          opt: !0,
+          opt: true,
         },
         {
           no: 19,
           name: "expensive_absolute_max_tokens",
           kind: "scalar",
           T: 5,
-          opt: !0,
+          opt: true,
         },
       ])
     }
@@ -299,7 +299,7 @@ export function createAIServiceV1Part2(params) {
       super(),
         (this.activeFile = ""),
         (this.cursorLineNumberOneIndexed = 0),
-        (this.telemEnabled = !1),
+        (this.telemEnabled = false),
         v.util.initPartial(e, this)
     }
     static {
@@ -313,7 +313,7 @@ export function createAIServiceV1Part2(params) {
         { no: 1, name: "git_diff", kind: "message", T: FT },
         { no: 2, name: "active_file", kind: "scalar", T: 9 },
         { no: 3, name: "cursor_line_number_one_indexed", kind: "scalar", T: 5 },
-        { no: 4, name: "session_id", kind: "scalar", T: 9, opt: !0 },
+        { no: 4, name: "session_id", kind: "scalar", T: 9, opt: true },
         { no: 5, name: "telem_enabled", kind: "scalar", T: 8 },
       ])
     }
@@ -342,7 +342,7 @@ export function createAIServiceV1Part2(params) {
     }
     static {
       this.fields = v.util.newFieldList(() => [
-        { no: 1, name: "bugs", kind: "message", T: Toe, repeated: !0 },
+        { no: 1, name: "bugs", kind: "message", T: Toe, repeated: true },
       ])
     }
     static fromBinary(e, t) {
@@ -408,10 +408,10 @@ export function createAIServiceV1Part2(params) {
     }
     static {
       this.fields = v.util.newFieldList(() => [
-        { no: 1, name: "file_diffs", kind: "message", T: ABi, repeated: !0 },
-        { no: 2, name: "linter_rules", kind: "scalar", T: 9, opt: !0 },
-        { no: 3, name: "also_find_hard_bugs", kind: "scalar", T: 8, opt: !0 },
-        { no: 4, name: "save_request_as", kind: "scalar", T: 9, opt: !0 },
+        { no: 1, name: "file_diffs", kind: "message", T: ABi, repeated: true },
+        { no: 2, name: "linter_rules", kind: "scalar", T: 9, opt: true },
+        { no: 3, name: "also_find_hard_bugs", kind: "scalar", T: 8, opt: true },
+        { no: 4, name: "save_request_as", kind: "scalar", T: 9, opt: true },
       ])
     }
     static fromBinary(e, t) {
@@ -440,7 +440,7 @@ export function createAIServiceV1Part2(params) {
     static {
       this.fields = v.util.newFieldList(() => [
         { no: 1, name: "file", kind: "message", T: AC },
-        { no: 2, name: "chunk_diffs", kind: "message", T: vNn, repeated: !0 },
+        { no: 2, name: "chunk_diffs", kind: "message", T: vNn, repeated: true },
       ])
     }
     static fromBinary(e, t) {
@@ -550,8 +550,8 @@ export function createAIServiceV1Part2(params) {
       this.fields = v.util.newFieldList(() => [
         { no: 1, name: "file", kind: "message", T: AC },
         { no: 2, name: "bug", kind: "message", T: MBi },
-        { no: 3, name: "linter_rules", kind: "scalar", T: 9, opt: !0 },
-        { no: 4, name: "messages", kind: "message", T: U$i, repeated: !0 },
+        { no: 3, name: "linter_rules", kind: "scalar", T: 9, opt: true },
+        { no: 4, name: "messages", kind: "message", T: U$i, repeated: true },
       ])
     }
     static fromBinary(e, t) {
@@ -607,7 +607,7 @@ export function createAIServiceV1Part2(params) {
     }
     static {
       this.fields = v.util.newFieldList(() => [
-        { no: 1, name: "bugs", kind: "message", T: CNn, repeated: !0 },
+        { no: 1, name: "bugs", kind: "message", T: CNn, repeated: true },
       ])
     }
     static fromBinary(e, t) {
@@ -646,7 +646,7 @@ export function createAIServiceV1Part2(params) {
         { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
         { no: 2, name: "start_line", kind: "scalar", T: 5 },
         { no: 3, name: "end_line_inclusive", kind: "scalar", T: 5 },
-        { no: 4, name: "code_lines", kind: "scalar", T: 9, repeated: !0 },
+        { no: 4, name: "code_lines", kind: "scalar", T: 9, repeated: true },
         { no: 5, name: "severity", kind: "scalar", T: 1 },
         { no: 6, name: "confidence", kind: "scalar", T: 1 },
         { no: 7, name: "description", kind: "scalar", T: 9 },
@@ -677,7 +677,7 @@ export function createAIServiceV1Part2(params) {
     }
     static {
       this.fields = v.util.newFieldList(() => [
-        { no: 1, name: "file_diffs", kind: "message", T: xNn, repeated: !0 },
+        { no: 1, name: "file_diffs", kind: "message", T: xNn, repeated: true },
       ])
     }
     static fromBinary(e, t) {
@@ -699,7 +699,7 @@ export function createAIServiceV1Part2(params) {
         (this.relativeWorkspacePath = ""),
         (this.lines = []),
         (this.hunks = []),
-        (this.notTruncated = !1),
+        (this.notTruncated = false),
         v.util.initPartial(e, this)
     }
     static {
@@ -711,14 +711,14 @@ export function createAIServiceV1Part2(params) {
     static {
       this.fields = v.util.newFieldList(() => [
         { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
-        { no: 2, name: "lines", kind: "message", T: ENn, repeated: !0 },
-        { no: 3, name: "hunks", kind: "message", T: kNn, repeated: !0 },
+        { no: 2, name: "lines", kind: "message", T: ENn, repeated: true },
+        { no: 3, name: "hunks", kind: "message", T: kNn, repeated: true },
         {
           no: 4,
           name: "old_relative_workspace_path",
           kind: "scalar",
           T: 9,
-          opt: !0,
+          opt: true,
         },
         { no: 5, name: "not_truncated", kind: "scalar", T: 8 },
       ])
@@ -755,8 +755,8 @@ export function createAIServiceV1Part2(params) {
       this.fields = v.util.newFieldList(() => [
         { no: 1, name: "old_start_one_indexed", kind: "scalar", T: 5 },
         { no: 2, name: "new_start_one_indexed", kind: "scalar", T: 5 },
-        { no: 3, name: "old_lines", kind: "scalar", T: 9, repeated: !0 },
-        { no: 4, name: "new_lines", kind: "scalar", T: 9, repeated: !0 },
+        { no: 3, name: "old_lines", kind: "scalar", T: 9, repeated: true },
+        { no: 4, name: "new_lines", kind: "scalar", T: 9, repeated: true },
       ])
     }
     static fromBinary(e, t) {
@@ -885,7 +885,7 @@ export function createAIServiceV1Part2(params) {
   DNn = class d4e extends _ {
     constructor(e) {
       super(),
-        (this.disableUnification = !1),
+        (this.disableUnification = false),
         (this.fullContextTokenLimit = 0),
         v.util.initPartial(e, this)
     }
@@ -917,7 +917,7 @@ export function createAIServiceV1Part2(params) {
   TNn = class f4e extends _ {
     constructor(e) {
       super(),
-        (this.telemEnabled = !1),
+        (this.telemEnabled = false),
         (this.bugBotDismissedNotificationLast10TimesUnixMs = []),
         (this.bugBotViewedNotificationLast10TimesUnixMs = []),
         v.util.initPartial(e, this)
@@ -936,14 +936,14 @@ export function createAIServiceV1Part2(params) {
           name: "bug_bot_dismissed_notification_last_10_times_unix_ms",
           kind: "scalar",
           T: 1,
-          repeated: !0,
+          repeated: true,
         },
         {
           no: 3,
           name: "bug_bot_viewed_notification_last_10_times_unix_ms",
           kind: "scalar",
           T: 1,
-          repeated: !0,
+          repeated: true,
         },
       ])
     }
@@ -963,7 +963,7 @@ export function createAIServiceV1Part2(params) {
   eqe = class g4e extends _ {
     constructor(e) {
       super(),
-        (this.isDevDoNotUseForSecretThingsBecauseCanBeSpoofedByUsers = !1),
+        (this.isDevDoNotUseForSecretThingsBecauseCanBeSpoofedByUsers = false),
         v.util.initPartial(e, this)
     }
     static {

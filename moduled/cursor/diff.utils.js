@@ -191,10 +191,10 @@ export function createDiffUtils(params) {
       oldLinesLength > 0 && newLinesLength > 0 && oldLines[oldLinesLength - 1] === newLines[newLinesLength - 1]
         ? (diffs.unshift({ value: oldLines[oldLinesLength - 1] }), oldLinesLength--, newLinesLength--)
         : newLinesLength > 0 && (oldLinesLength === 0 || lcsMatrix[oldLinesLength][newLinesLength - 1] >= lcsMatrix[oldLinesLength - 1][newLinesLength])
-          ? (diffs.unshift({ added: !0, value: newLines[newLinesLength - 1] }), newLinesLength--)
+          ? (diffs.unshift({ added: true, value: newLines[newLinesLength - 1] }), newLinesLength--)
           : oldLinesLength > 0 &&
             (newLinesLength === 0 || lcsMatrix[oldLinesLength][newLinesLength - 1] < lcsMatrix[oldLinesLength - 1][newLinesLength]) &&
-            (diffs.unshift({ removed: !0, value: oldLines[oldLinesLength - 1] }), oldLinesLength--)
+            (diffs.unshift({ removed: true, value: oldLines[oldLinesLength - 1] }), oldLinesLength--)
     return diffs
   }
   function groupConsecutiveDiffs(diffs) {

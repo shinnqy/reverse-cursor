@@ -100,7 +100,7 @@ export function createAIService(params) {
         (this.u = this.kb.createInstance(fu, { service: _Tt })),
         this.z.createImplicitEffect(() => {
           this.cb.workspaceUserPersistentStorage.exampleCodebaseQuestions ===
-            void 0 &&
+            undefined &&
             this.cb.applicationUserPersistentStorage.bubbleTimesLeft > 0 &&
             this.cb.nonPersistentStorage.repositoryIndexingStatus?.case ===
               "synced" &&
@@ -171,8 +171,8 @@ export function createAIService(params) {
           ...n,
           {
             generationUUID: t,
-            metadata: e.metadata ?? { type: void 0 },
-            queuePositionResponse: void 0,
+            metadata: e.metadata ?? { type: undefined },
+            queuePositionResponse: undefined,
           },
         ]),
         this.F.set(t, {
@@ -180,9 +180,9 @@ export function createAIService(params) {
           generationUUID: t,
           type: e.metadata?.type,
           textDescription:
-            e.metadata !== void 0 && "textDescription" in e.metadata
+            e.metadata !== undefined && "textDescription" in e.metadata
               ? e.metadata.textDescription
-              : void 0,
+              : undefined,
         }),
         this.I(),
         [t, s]
@@ -206,9 +206,9 @@ export function createAIService(params) {
           ).models
         this.cb.setApplicationUserPersistentStorage("availableDefaultModels2", n),
           this.cb.applicationUserPersistentStorage.oneTimeSettings
-            .shouldMigrateFromGpt4ToGpt4o === !0 && this.migrateFromGpt4ToGpt4o(),
+            .shouldMigrateFromGpt4ToGpt4o === true && this.migrateFromGpt4ToGpt4o(),
           this.cb.applicationUserPersistentStorage.oneTimeSettings
-            .shouldMigrateFromGpt4oToClaudeSonnet === !0 &&
+            .shouldMigrateFromGpt4oToClaudeSonnet === true &&
             this.migrateFromGpt4oToClaudeSonnet(),
           this.maybeMigrateBackToGpt4oIfUsingOpenAIApiKey()
       } catch (e) {
@@ -219,13 +219,13 @@ export function createAIService(params) {
     migrateFromGpt4ToGpt4o() {
       if (
         this.cb.applicationUserPersistentStorage.oneTimeSettings
-          .shouldMigrateFromGpt4ToGpt4o === !1
+          .shouldMigrateFromGpt4ToGpt4o === false
       )
         return
       this.cb.setApplicationUserPersistentStorage(
         "oneTimeSettings",
         "shouldMigrateFromGpt4ToGpt4o",
-        !1,
+        false,
       ),
         this.Z.enableModel("gpt-4o")
       const e = this.cb.applicationUserPersistentStorage.aiSettings.openAIModel,
@@ -261,14 +261,14 @@ export function createAIService(params) {
     migrateFromGpt4oToClaudeSonnet() {
       if (
         this.cb.applicationUserPersistentStorage.oneTimeSettings
-          .shouldMigrateFromGpt4oToClaudeSonnet === !1 ||
-        this.Z.getUseOpenAIKey() === !0
+          .shouldMigrateFromGpt4oToClaudeSonnet === false ||
+        this.Z.getUseOpenAIKey() === true
       )
         return
       this.cb.setApplicationUserPersistentStorage(
         "oneTimeSettings",
         "shouldMigrateFromGpt4oToClaudeSonnet",
-        !1,
+        false,
       ),
         this.Z.enableModel("claude-3.5-sonnet")
       const e = this.cb.applicationUserPersistentStorage.aiSettings.openAIModel,
@@ -285,7 +285,7 @@ export function createAIService(params) {
           (this.cb.setApplicationUserPersistentStorage(
             "oneTimeSettings",
             "didMigrateFromGpt4oToClaudeSonnet",
-            !0,
+            true,
           ),
           this.cb.setApplicationUserPersistentStorage(
             "aiSettings",
@@ -306,7 +306,7 @@ export function createAIService(params) {
           )
     }
     maybeMigrateBackToGpt4oIfUsingOpenAIApiKey() {
-      this.Z.getUseOpenAIKey() === !0 &&
+      this.Z.getUseOpenAIKey() === true &&
         this.maybeMigrateBackFromClaudeSonnetToGpt4o()
     }
     maybeMigrateBackFromClaudeSonnetToGpt4o() {
@@ -320,7 +320,7 @@ export function createAIService(params) {
       this.cb.setApplicationUserPersistentStorage(
         "oneTimeSettings",
         "didMigrateBackFromClaudeSonnetToGpt4o",
-        !0,
+        true,
       )
       const e = this.cb.applicationUserPersistentStorage.aiSettings.openAIModel,
         t = this.cb.applicationUserPersistentStorage.aiSettings.regularChatModel,
@@ -361,7 +361,7 @@ export function createAIService(params) {
     getPreviousPrompts(e) {
       return [
         ...this.f
-          .filter((t) => e === void 0 || t.commandType === e)
+          .filter((t) => e === undefined || t.commandType === e)
           .map((t) => t.text),
       ].concat(this.C != null ? [this.C] : [])
     }
@@ -389,12 +389,12 @@ export function createAIService(params) {
               : t === "composer"
                 ? this.Z.getComposerModel()
                 : this.Z.getModel()
-      s = s ?? void 0
+      s = s ?? undefined
       let n = this.Y.getApiKeyForModel(s)
       const r = this.Z.getUseApiKeyForModel(s),
         o = this.cb.applicationUserPersistentStorage.azureState
       return (
-        (!r || !n) && (n = void 0),
+        (!r || !n) && (n = undefined),
         new zr({
           apiKey: n,
           modelName: s,
@@ -411,16 +411,16 @@ export function createAIService(params) {
       generationUUID: n,
       rethrowCancellation: r,
       rerun: o,
-      failSilently: a = !1,
+      failSilently: a = false,
       source: l = "other",
       startTime: c,
     }) {
       const h = await this.aiClient()
-      let u = !0,
+      let u = true,
         d
       const g = () => {
         !u ||
-          e === void 0 ||
+          e === undefined ||
           h
             .checkQueuePosition(new Y$i({ origRequestId: n, modelDetails: e }))
             .then((p) => {
@@ -442,16 +442,16 @@ export function createAIService(params) {
               yield m,
               u &&
                 (m instanceof s7
-                  ? m.response.case === "editStream" && (u = !1)
+                  ? m.response.case === "editStream" && (u = false)
                   : typeof m != "object" || m === null
-                    ? (u = !1)
+                    ? (u = false)
                     : "text" in m
-                      ? m.text !== "" && (u = !1)
-                      : (u = !1))
+                      ? m.text !== "" && (u = false)
+                      : (u = false))
           this.streamingAbortControllers.delete(n)
         } catch (p) {
           if (
-            ((u = !1),
+            ((u = false),
             p.code !== Tg.Canceled && console.error(p),
             !(p instanceof du) ||
               (p.code === Tg.Canceled ||
@@ -462,7 +462,7 @@ export function createAIService(params) {
             throw p
         }
       } finally {
-        ;(u = !1),
+        ;(u = false),
           this.cb.setNonPersistentStorage("inprogressAIGenerations", (p) =>
             p.filter((m) => m.generationUUID !== n),
           )
@@ -578,7 +578,7 @@ export function createAIService(params) {
           ))
       }
       const l = ao(this.L.activeEditorPane)
-      if (l && r !== void 0) {
+      if (l && r !== undefined) {
         const c = l.getCellsInRange()
         let h = c.findIndex((w) => w.id === r)
         const u = c.map((w) => w.getText()),
@@ -613,9 +613,9 @@ export function createAIService(params) {
                 : C
             }),
           p = u.map((w, C) => {
-            if (w === "" || w === void 0) return ""
+            if (w === "" || w === undefined) return ""
             const S = `in[${C}]: ${w}`
-            if (g[C] === "" || g[C] === void 0) return S
+            if (g[C] === "" || g[C] === undefined) return S
             const x = `out[${C}]: ${g[C]}`
             return `${S}
 
@@ -671,7 +671,7 @@ export function createAIService(params) {
       return await this.ab.getCurrentFileInfo(e, t)
     }
     async getCursorRulesFile() {
-      if (this.cb.workspaceUserPersistentStorage.ignoreCursorRules === !0) return
+      if (this.cb.workspaceUserPersistentStorage.ignoreCursorRules === true) return
       const e = performance.now()
       let t
       try {
@@ -688,7 +688,7 @@ export function createAIService(params) {
       }
     }
     async getExplicitContext() {
-      const e = await this.ob.getRules({ requireDescription: !0 })
+      const e = await this.ob.getRules({ requireDescription: true })
       return new Sf({
         context: this.getPersonalContext(),
         repoContext: await this.getCursorRulesFile(),
@@ -721,7 +721,7 @@ export function createAIService(params) {
           o !== null &&
             typeof o == "object" &&
             "docsReference" in o &&
-            o.docsReference !== void 0 &&
+            o.docsReference !== undefined &&
             n(o.docsReference),
             yield o
       })()
@@ -736,12 +736,12 @@ export function createAIService(params) {
               l !== null &&
               typeof l == "object" &&
               "statusUpdates" in l &&
-              l.statusUpdates !== void 0 &&
+              l.statusUpdates !== undefined &&
               l.statusUpdates !== null
             ) {
               console.log("[Status Updates]", l.statusUpdates)
               const c = l.statusUpdates.updates.at(0)
-              if (c !== void 0 && c.message.startsWith("Opening commits: ")) {
+              if (c !== undefined && c.message.startsWith("Opening commits: ")) {
                 const u = c.message
                   .split("Opening commits: ")[1]
                   .split(",")
@@ -765,7 +765,7 @@ export function createAIService(params) {
                 }
                 const p = u
                   .map((b, y) => new T$i({ commitHash: b, diff: d[y] }))
-                  .filter((b) => b.diff !== void 0)
+                  .filter((b) => b.diff !== undefined)
                 ;(await o).continueChatRequestWithCommits({
                   requestId: n,
                   commits: p,
@@ -808,13 +808,13 @@ export function createAIService(params) {
           a !== null &&
             typeof a == "object" &&
             "webCitation" in a &&
-            a.webCitation !== void 0 &&
+            a.webCitation !== undefined &&
             a.webCitation !== null &&
             n(a.webCitation),
             a !== null &&
               typeof a == "object" &&
               "statusUpdates" in a &&
-              a.statusUpdates !== void 0 &&
+              a.statusUpdates !== undefined &&
               a.statusUpdates !== null &&
               r(a.statusUpdates),
             yield a
@@ -855,7 +855,7 @@ export function createAIService(params) {
           this.cb.workspaceUserPersistentStorage.persistentChatMetadata.find(
             (w) => w.bubbleId === t && w.tabId === s,
           )
-        if (d === void 0) return
+        if (d === undefined) return
         let g = d.intermediateChunks ?? []
         const p = (w, C) =>
           w.startLine === C.startLine && w.fileName === C.fileName
@@ -885,13 +885,13 @@ export function createAIService(params) {
             l !== null &&
               typeof l == "object" &&
               "chunkIdentity" in l &&
-              l.chunkIdentity !== void 0 &&
+              l.chunkIdentity !== undefined &&
               o(l.intermediateText ?? "", l.chunkIdentity),
             yield l
       })()
     }
     updateRepoQueryWithStreamedResults(e, t) {
-      return ({ response: s, removeHyde: n = !1 }) => {
+      return ({ response: s, removeHyde: n = false }) => {
         this.lb.setChatData(
           "tabs",
           (r, o) => r.tabId === e,
@@ -901,16 +901,16 @@ export function createAIService(params) {
             if (r.type === dc.USER_CHAT) return r
             let o
             if (
-              (r?.contextData?.hydeResults !== void 0
+              (r?.contextData?.hydeResults !== undefined
                 ? (o = JSON.parse(JSON.stringify(r.contextData.hydeResults)))
                 : (o = { reasoning: "", queries: [] }),
               n)
             )
               return {
                 ...r,
-                contextData: { ...r.contextData, hydeResults: void 0 },
+                contextData: { ...r.contextData, hydeResults: undefined },
               }
-            if (s === void 0)
+            if (s === undefined)
               return {
                 ...r,
                 contextData: {
@@ -936,7 +936,7 @@ export function createAIService(params) {
       }
     }
     getLongContextTokenLimit(e, t) {
-      return e ?? (t === "cursor-long-context" ? 14e4 : void 0)
+      return e ?? (t === "cursor-long-context" ? 14e4 : undefined)
     }
     async reportGenerationFeedback(e, t, s) {
       await (
@@ -948,9 +948,9 @@ export function createAIService(params) {
         metadata: t,
         generationUUID: s,
       })
-      let l = !1
+      let l = false
       a.signal.addEventListener("abort", () => {
-        l = !0
+        l = true
       })
       const c = await this.getCurrentFileInfo()
       this.cb.setWorkspaceUserPersistentStorage(
@@ -963,9 +963,9 @@ export function createAIService(params) {
               usedDocs: [],
               usedCodebase: {},
               usedCurrentFile:
-                c && n?.removeAllContext !== !0
+                c && n?.removeAllContext !== true
                   ? { relativeFilePath: c.relativeWorkspacePath }
-                  : void 0,
+                  : undefined,
             }),
             we
           )
@@ -991,7 +991,7 @@ export function createAIService(params) {
           b = e[at].text
           break
         }
-      if (b === void 0) {
+      if (b === undefined) {
         const at = this.cb
         return (async function* () {
           yield "You don't seem to have provided any request in your last message. Please type something and try again.",
@@ -1021,7 +1021,7 @@ export function createAIService(params) {
         E = []
       this.decrementBubbleTimesLeft()
       const D =
-        y.modelName === "cursor-long-context" || (t.longContextModeEnabled ?? !1)
+        y.modelName === "cursor-long-context" || (t.longContextModeEnabled ?? false)
       if (
         (console.info("Time to get model details", performance.now() - d),
         (d = performance.now()),
@@ -1038,13 +1038,13 @@ export function createAIService(params) {
             at({ response: lt })
           }
         } catch (lt) {
-          throw (at({ removeHyde: !0 }), lt)
+          throw (at({ removeHyde: true }), lt)
         }
         const vt = this.lb.chatData.tabs
           .find(({ tabId: lt }) => lt === t.tabId)
           ?.bubbles.find(({ id: lt }) => lt === t.aiBubbleId)
           ?.contextData?.hydeResults
-        vt?.queries !== void 0 &&
+        vt?.queries !== undefined &&
           vt?.queries.length > 0 &&
           (x = vt.queries.map((lt) => ({ ...lt, text: lt.text.trim() })))
       }
@@ -1057,7 +1057,7 @@ export function createAIService(params) {
       u(ov.SearchingFiles)
       let P = []
       ew.vector
-      const L = !1
+      const L = false
       this.N.publicLogCapture("Context Chat - Vector Search")
       const A = D
           ? { topK: 1e3, minK: 80, finalK: 1e3 }
@@ -1073,14 +1073,14 @@ export function createAIService(params) {
                 .map((at) => `${at}`)
                 .join(",") +
               "}"
-            : void 0,
+            : undefined,
         B = await this.eb.searchMultipleQueries(x, A, {
           newlineSepGlobFilter: n?.globFilter ?? H,
         })
       if (l) throw new Error("Aborted")
       if (
         ((P = B.map((at) => at.codeBlock).filter(
-          (at) => at !== void 0 && at.contents.length < 2e4,
+          (at) => at !== undefined && at.contents.length < 2e4,
         )),
         (E = D ? await this.getLongContextFileSearchResults(B, e) : gPt(B)),
         l)
@@ -1101,12 +1101,12 @@ export function createAIService(params) {
           : { contextResults: z, conversationHistory: e }
       if (
         ((k = new RVe({
-          canHandleFilenamesAfterLanguageIds: !0,
+          canHandleFilenamesAfterLanguageIds: true,
           workspaceRootPath: this.J.getWorkspaceRootPath(),
           conversation: he,
           modelDetails: y,
           explicitContext: await this.getExplicitContext(),
-          rerankResults: !0,
+          rerankResults: true,
           rerankResultsV2:
             this.cb.workspaceUserPersistentStorage.shouldRerankByDefault,
           contextResults: se,
@@ -1115,7 +1115,7 @@ export function createAIService(params) {
           isEval: t.isEval,
           runnableCodeBlocks:
             this.cb.applicationUserPersistentStorage.runnableCodeBlocksEnabled ??
-            !1,
+            false,
           requestId: s,
         })),
         console.info("Time to search", performance.now() - d),
@@ -1126,12 +1126,12 @@ export function createAIService(params) {
         console.info("Time to set file results", performance.now() - d),
         (d = performance.now()),
         this.cb.applicationUserPersistentStorage.checklistState
-          ?.doneCommandEnter !== !0)
+          ?.doneCommandEnter !== true)
       ) {
         const at = this.cb.applicationUserPersistentStorage.checklistState
         this.cb.setApplicationUserPersistentStorage("checklistState", (we) => ({
           ...(we ?? {}),
-          doneCommandEnter: !0,
+          doneCommandEnter: true,
         }))
       }
       if (l) throw new Error("Aborted")
@@ -1166,7 +1166,7 @@ export function createAIService(params) {
           t.bubbleId,
           t.tabId,
         ),
-        rethrowCancellation: !0,
+        rethrowCancellation: true,
         rerun: n?.rerun,
         streamerURL: Ee,
       })
@@ -1244,13 +1244,13 @@ export function createAIService(params) {
       rethrowCancellation: n,
       rerun: r,
       streamerURL: o,
-      failSilently: a = !1,
+      failSilently: a = false,
     }) {
       let l = []
       try {
         const c = await t.next().then((d) => d.value),
-          h = "usedCode" in c ? c.usedCode : void 0
-        h !== void 0 && (l = h.codeResults),
+          h = "usedCode" in c ? c.usedCode : undefined
+        h !== undefined && (l = h.codeResults),
           yield* this.streamResponseText({
             streamer: t,
             streamerURL: o,
@@ -1283,7 +1283,7 @@ export function createAIService(params) {
           n = e[d].text
           break
         }
-      if (n === void 0)
+      if (n === undefined)
         return (async function* () {
           yield "You don't seem to have provided any request in your last message. Please type something and try again."
         })()
@@ -1307,7 +1307,7 @@ export function createAIService(params) {
         generationUUID: o,
         streamer: N1(h),
         streamerURL: u,
-        rethrowCancellation: !0,
+        rethrowCancellation: true,
         rerun: s?.rerun,
         source: "chat",
       })
@@ -1327,7 +1327,7 @@ export function createAIService(params) {
         modelDetails: this.getModelDetails({
           specificModelField: "regular-chat",
         }),
-        rethrowCancellation: !0,
+        rethrowCancellation: true,
       })
     }
     async addAdditionalContext(e) {
@@ -1340,11 +1340,11 @@ export function createAIService(params) {
         r = this.lb.getBubbleData(e.tabId, e.bubbleId),
         o = {}
       if (
-        ((s === void 0 && n === void 0) ||
+        ((s === undefined && n === undefined) ||
           (s?.usedCurrentFile || n?.usedCurrentFile,
           s?.usedDocs &&
             (o.documentationIdentifiers = s.usedDocs.map((l) => l.docId))),
-        n !== void 0 && n.usedDocs)
+        n !== undefined && n.usedDocs)
       ) {
         const l = new Set([
           ...(o.documentationIdentifiers || []),
@@ -1362,7 +1362,7 @@ export function createAIService(params) {
         (o.codeBlocks = e.codeBlocks),
         (o.isBash = e.isBash),
         (o.conversationId = e.tabId),
-        (o.canHandleFilenamesAfterLanguageIds = !0),
+        (o.canHandleFilenamesAfterLanguageIds = true),
         o
       )
     }
@@ -1404,7 +1404,7 @@ export function createAIService(params) {
       const s =
           e.options?.overrideModelDetails ||
           this.getModelDetails({ specificModelField: "regular-chat" }),
-        r = !0 && e.options?.useWeb ? "full_search" : void 0,
+        r = true && e.options?.useWeb ? "full_search" : undefined,
         { chatType: o } = e.generationMetadata,
         a =
           e.generationMetadata.longContextModeEnabled &&
@@ -1448,8 +1448,8 @@ export function createAIService(params) {
         modelDetails: s,
         explicitContext: await this.getExplicitContext(),
         requestId: e.generationUUID,
-        allowLongFileScan: e.options?.allowLongFileScan ?? !1,
-        canHandleFilenamesAfterLanguageIds: !0,
+        allowLongFileScan: e.options?.allowLongFileScan ?? false,
+        canHandleFilenamesAfterLanguageIds: true,
         ...p,
         useWeb: r,
         debugInfo: e.generationMetadata.debugInfo,
@@ -1460,7 +1460,7 @@ export function createAIService(params) {
         isEval: e.generationMetadata.isEval,
         runnableCodeBlocks:
           this.cb.applicationUserPersistentStorage.runnableCodeBlocksEnabled ??
-          !1,
+          false,
         shouldCache: e.generationMetadata.shouldCache,
       })
     }
@@ -1497,7 +1497,7 @@ export function createAIService(params) {
               }
             }
             const a = o.match(/^\s*/)?.[0] ?? "",
-              l = o.endsWith("{") ? `${a}}` : void 0
+              l = o.endsWith("{") ? `${a}}` : undefined
             return {
               ...r,
               children: this.getFilteredOutline(r.children ?? [], t, s),
@@ -1506,7 +1506,7 @@ export function createAIService(params) {
             }
           }
         })
-        .filter((r) => r !== void 0)
+        .filter((r) => r !== undefined)
     }
     async _streamChat(e) {
       const [t, s] = this.registerNewGeneration({
@@ -1538,7 +1538,7 @@ export function createAIService(params) {
         },
         l = await this.makeStreamChatRequest(
           { ...e, generationMetadata: a },
-          { isForActualRequestSoCanBeSlow: !0 },
+          { isForActualRequestSoCanBeSlow: true },
         )
       if (l === "wouldBeTooSlow") throw new Error("should never happen!!")
       this.addToPromptHistory({ prompt: n, commandType: JC.CHAT }),
@@ -1592,7 +1592,7 @@ export function createAIService(params) {
             e.generationMetadata.tabId,
           ),
           streamerURL: u,
-          rethrowCancellation: !0,
+          rethrowCancellation: true,
           rerun: e.options?.rerun,
           failSilently: e.options?.failSilently,
         }),
@@ -1640,12 +1640,12 @@ export function createAIService(params) {
           n?.overrideModelDetails ||
           this.getModelDetails({ specificModelField: "cmd-k" }),
         [l, c] = this.registerNewGeneration({
-          metadata: { type: void 0 },
+          metadata: { type: undefined },
           generationUUID: s,
         })
       let h = await this.ib.getFilteredRecentChunks(10)
       const u = new W3i({
-        currentFile: n?.removeAllContext !== !0 ? o : void 0,
+        currentFile: n?.removeAllContext !== true ? o : undefined,
         contextBlocks:
           h.length === 0
             ? []
@@ -1669,7 +1669,7 @@ export function createAIService(params) {
           generationUUID: s,
           source: "other",
           modelDetails: a,
-          rethrowCancellation: !0,
+          rethrowCancellation: true,
         })
       return this.splitStreamSeparateNewLineChars(m)
     }
@@ -1680,7 +1680,7 @@ export function createAIService(params) {
         this.getModelDetails({ specificModelField: "cmd-k" })
       this.N.publicLogCapture("submitted.backgroundedit", { model: a.modelName })
       const [l, c] = this.registerNewGeneration({
-          metadata: { type: void 0 },
+          metadata: { type: undefined },
           generationUUID: r,
         }),
         h = new K$i({
@@ -1703,8 +1703,8 @@ export function createAIService(params) {
           generationUUID: r,
           modelDetails: a,
           source: "other",
-          rethrowCancellation: !0,
-          failSilently: !0,
+          rethrowCancellation: true,
+          failSilently: true,
         })
       return this.streamLines(p)
     }
@@ -1714,7 +1714,7 @@ export function createAIService(params) {
         n = await this.aiClient(),
         r = rt(),
         [o, a] = this.registerNewGeneration({
-          metadata: void 0,
+          metadata: undefined,
           generationUUID: r,
         }),
         l = n.streamNewLintRule(s, { signal: a.signal, headers: wn(r) }),
@@ -1723,9 +1723,9 @@ export function createAIService(params) {
         streamer: N1(l),
         streamerURL: c,
         generationUUID: r,
-        rethrowCancellation: !0,
+        rethrowCancellation: true,
         source: "other",
-        failSilently: !0,
+        failSilently: true,
       })
     }
     async streamLint(e, t, s, n, r) {
@@ -1734,7 +1734,7 @@ export function createAIService(params) {
         this.getModelDetails({ specificModelField: "cmd-k" })
       this.N.publicLogCapture("submitted.lint", { model: o.modelName })
       const [a, l] = this.registerNewGeneration({
-          metadata: void 0,
+          metadata: undefined,
           generationUUID: n,
         }),
         c = new r2i({
@@ -1755,9 +1755,9 @@ export function createAIService(params) {
         streamerURL: d,
         generationUUID: n,
         modelDetails: o,
-        rethrowCancellation: !0,
+        rethrowCancellation: true,
         source: "other",
-        failSilently: !0,
+        failSilently: true,
       })
     }
     async streamAiPreviewSummary({ realContext: e, isDetailed: t }) {
@@ -1775,7 +1775,7 @@ export function createAIService(params) {
           isDetailed: t,
         }),
         [a, l] = this.registerNewGeneration({
-          metadata: void 0,
+          metadata: undefined,
           generationUUID: r,
         }),
         h = (await this.aiClient()).streamAiPreviews(o, {
@@ -1789,7 +1789,7 @@ export function createAIService(params) {
         generationUUID: r,
         modelDetails: s,
         source: "other",
-        rethrowCancellation: !0,
+        rethrowCancellation: true,
       })
     }
     async *streamLines(e) {
@@ -1849,7 +1849,7 @@ export function createAIService(params) {
           this.getModelDetails({ specificModelField: "cmd-k" })
       this.N.publicLogCapture("submitted.gpt4edit", { model: c.modelName })
       const [h, u] = this.registerNewGeneration({
-        metadata: void 0,
+        metadata: undefined,
         generationUUID: t,
       })
       e =
@@ -1880,7 +1880,7 @@ ${y.rawText}
           generationUUID: t,
           modelDetails: c,
           source: "other",
-          rethrowCancellation: !0,
+          rethrowCancellation: true,
         })
       return this.streamLines(b)
     }
@@ -1891,8 +1891,8 @@ ${y.rawText}
           return {
             next() {
               return t < 3
-                ? Promise.resolve({ value: { newLine: "hi" + t }, done: !1 })
-                : Promise.resolve({ value: { newLine: "hi done" }, done: !0 })
+                ? Promise.resolve({ value: { newLine: "hi" + t }, done: false })
+                : Promise.resolve({ value: { newLine: "hi done" }, done: true })
             },
           }
         },
@@ -1917,11 +1917,11 @@ ${y.rawText}
       const n = t.getActiveCell()
       if (n) {
         const r = t.getCellIndex(n)
-        s = PI(this.M, t, r, ks.Code, "below", e, !0)
+        s = PI(this.M, t, r, ks.Code, "below", e, true)
       } else {
         const r = t.getFocus(),
           o = Math.max(r.end - 1, 0)
-        s = PI(this.M, t, o, ks.Code, "below", e, !0)
+        s = PI(this.M, t, o, ks.Code, "below", e, true)
       }
       s &&
         (await t.focusNotebookCell(s, "container"),
@@ -1951,13 +1951,13 @@ ${y.rawText}
           const a = { ...o }
           ;(a.predictedContext = { usedDocs: [] }),
             r.usesCodebase && (a.predictedContext.usedCodebase = {}),
-            t?.removeAllContext !== !0 &&
-              s !== void 0 &&
+            t?.removeAllContext !== true &&
+              s !== undefined &&
               (a.predictedContext.usedCurrentFile = {
                 relativeFilePath: s.relativeWorkspacePath,
               })
           const l = r.selectedDocs
-          return l !== void 0 && (a.predictedContext.usedDocs = l), a
+          return l !== undefined && (a.predictedContext.usedDocs = l), a
         },
       ),
         this.db.setIntentDetermined(e.bubbleId, e.tabId)
@@ -1982,7 +1982,7 @@ ${y.rawText}
           generationUUID: s,
           options: n,
         },
-        { isForActualRequestSoCanBeSlow: !1 },
+        { isForActualRequestSoCanBeSlow: false },
       )
       if (r === "wouldBeTooSlow") return
       await (
@@ -2033,15 +2033,15 @@ ${y.rawText}
           )
         if (o.length < 3) return []
         const a = new RVe({
-            canHandleFilenamesAfterLanguageIds: !0,
+            canHandleFilenamesAfterLanguageIds: true,
             workspaceRootPath: this.J.getWorkspaceRootPath(),
             conversation: [new Ha({ text: e, type: fs.HUMAN })],
             modelDetails: this.getModelDetails({
               specificModelField: "regular-chat",
             }),
             explicitContext: await this.getExplicitContext(),
-            rerankResults: !1,
-            rerankResultsV2: !1,
+            rerankResults: false,
+            rerankResultsV2: false,
             contextResults: { case: "codeSearchResults", value: { results: o } },
           }),
           c = (await this.aiClient()).streamChatContext(a, { headers: wn(rt()) })
@@ -2074,7 +2074,7 @@ ${y.rawText}
           conversation: e,
           workspaceRootPath: this.J.getWorkspaceRootPath(),
           modelDetails: o,
-          fasterAndStupider: !1,
+          fasterAndStupider: false,
           useGlobs: s,
           queryType: t === ew.keyword ? M$.KEYWORDS : M$.EMBEDDINGS,
         }),
@@ -2085,7 +2085,7 @@ ${y.rawText}
         modelDetails: o,
         streamerURL: g,
         generationUUID: a,
-        rethrowCancellation: !0,
+        rethrowCancellation: true,
         source: "chat",
       })
     }
@@ -2110,7 +2110,7 @@ ${y.rawText}
           queryType: t === ew.keyword ? M$.KEYWORDS : M$.EMBEDDINGS,
         }),
         [l, c] = this.registerNewGeneration({
-          metadata: void 0,
+          metadata: undefined,
           generationUUID: r,
         })
       return (await s.modelQuery(a, { signal: c.signal, headers: wn(r) })).queries

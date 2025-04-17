@@ -43,7 +43,7 @@ export function createCppBadHeuristics(params) {
       let newTextLines = modelOutputText.split(eol),
         oldTextLines = model.getValue().split(eol)
       const heuristics = this.a.applicationUserPersistentStorage.cppConfig?.heuristics
-      if (heuristics === void 0) return { valid: !0, modelOutputText: modelOutputText }
+      if (heuristics === undefined) return { valid: true, modelOutputText: modelOutputText }
       if (heuristics.includes(VB.REVERTING_USER_CHANGE)) {
         const modifiedTexts = generateModifiedText(model, startingRange, modelOutputText, eol, notebookInfo),
           relativePath = this.b.asRelativePath(model.uri)
@@ -70,8 +70,8 @@ export function createCppBadHeuristics(params) {
           i++
         )
           if (
-            newTextLines[i] === void 0 ||
-            oldTextLines[i] === void 0 ||
+            newTextLines[i] === undefined ||
+            oldTextLines[i] === undefined ||
             newTextLines[i].trim() !== oldTextLines[i].trim()
           ) {
             isAllSame = false
@@ -91,7 +91,7 @@ export function createCppBadHeuristics(params) {
           recentlyRejectedThresholds =
             this.a.applicationUserPersistentStorage.cppConfig
               ?.recentlyRejectedEditThresholds
-        if (recentlyRejectedThresholds !== void 0) {
+        if (recentlyRejectedThresholds !== undefined) {
           for (const modifiedText of modifiedTexts)
             if (
               await this.c.onlyLocalProvider?.runCommand(

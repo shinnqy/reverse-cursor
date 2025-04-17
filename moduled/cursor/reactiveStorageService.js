@@ -20,9 +20,9 @@ export function createReactiveStorageService(params) {
           (this.c = e),
           (this.f = t),
           (this.g = s),
-          (this.DEV_ONLY_serverApplicationUserPersistentStorage = void 0),
-          (this.set_DEV_ONLY_ServerApplicationUserPersistentStorage = void 0),
-          (this.b = void 0),
+          (this.DEV_ONLY_serverApplicationUserPersistentStorage = undefined),
+          (this.set_DEV_ONLY_ServerApplicationUserPersistentStorage = undefined),
+          (this.b = undefined),
           (this.n = new LRUCache(10)),
           (this.y = this.D(new R())),
           (this.z = this.y.event),
@@ -131,7 +131,7 @@ export function createReactiveStorageService(params) {
           ))
       }
       m() {
-        return createObserver(nonPersistentStorageState, void 0)
+        return createObserver(nonPersistentStorageState, undefined)
       }
       manuallyDisposedWrapper(e) {
         const t = new kkt(this)
@@ -167,23 +167,23 @@ export function createReactiveStorageService(params) {
       }
       static stringifyStorage(e, t, s, n) {
         const r = (a, l) => {
-            if (a === void 0) return
+            if (a === undefined) return
             if (typeof a != "object" || a === null) return a
             const c = l.filter((u) => u.length > 0),
               h = c.filter((u) => u.length === 1)
             if (Array.isArray(a))
-              return h.some((g) => g[0] === !0)
+              return h.some((g) => g[0] === true)
                 ? []
                 : (h.length > 0 &&
                     s(
                       `there is a path that ends in the wrong type! expected true because we are at an array, but got ${h[0][0]}`,
                     ),
                   a.flatMap((g) => {
-                    const p = c.filter((m) => m[0] === !0)
+                    const p = c.filter((m) => m[0] === true)
                     return typeof g == "object" &&
                       g &&
                       "SPECIAL_KEY_doNotPersist" in g &&
-                      g.SPECIAL_KEY_doNotPersist === !0
+                      g.SPECIAL_KEY_doNotPersist === true
                       ? []
                       : [
                           r(
@@ -196,7 +196,7 @@ export function createReactiveStorageService(params) {
               const u = a
               if (
                 "SPECIAL_KEY_doNotPersist" in u &&
-                u.SPECIAL_KEY_doNotPersist === !0
+                u.SPECIAL_KEY_doNotPersist === true
               )
                 return
               const d = {}
@@ -221,11 +221,11 @@ export function createReactiveStorageService(params) {
       r(e, t, s, n, r, o, a, l) {
         if (
           o.scope === s &&
-          (o.target === void 0 || o.target === n) &&
+          (o.target === undefined || o.target === n) &&
           o.key === r
         )
           try {
-            const h = this.t(s, r, a, t, l, { throwIfSavedObjectIsTheSame: !0 })
+            const h = this.t(s, r, a, t, l, { throwIfSavedObjectIsTheSame: true })
             if (
               "SPECIAL_KEY_lastUpdatedTimeInUnixSeconds" in h &&
               "SPECIAL_KEY_lastUpdatedTimeInUnixSeconds" in t &&
@@ -255,7 +255,7 @@ export function createReactiveStorageService(params) {
                   typeof c == "object" &&
                     c !== null &&
                     "SPECIAL_KEY_doNotPersist" in c &&
-                    c.SPECIAL_KEY_doNotPersist === !0 &&
+                    c.SPECIAL_KEY_doNotPersist === true &&
                     o[l].push(c)
             } else typeof a[l] == "object" && a[l] !== null && r(o[l], a[l])
         }
@@ -268,7 +268,7 @@ export function createReactiveStorageService(params) {
           a && (l = JSON.parse(a))
         } catch {}
         if (
-          o.throwIfSavedObjectIsTheSame === !0 &&
+          o.throwIfSavedObjectIsTheSame === true &&
           typeof l == "object" &&
           "SPECIAL_KEY_id" in l &&
           this.n.get(`${t}${e}`) === l.SPECIAL_KEY_id
@@ -285,12 +285,12 @@ export function createReactiveStorageService(params) {
       }
       u(e, t, s, n, r, o) {
         return createObserver(
-          this.t(e, s, n, r, o, { throwIfSavedObjectIsTheSame: !1 }),
-          void 0,
+          this.t(e, s, n, r, o, { throwIfSavedObjectIsTheSame: false }),
+          undefined,
         )
       }
       w(e, t, s, n) {
-        if (this.b === void 0) return t
+        if (this.b === undefined) return t
         const r = "server",
           o = this.b.syncGetOnlyWorksForRegisteredKeys(e)
         let a = {}
@@ -298,7 +298,7 @@ export function createReactiveStorageService(params) {
           o && (a = JSON.parse(o))
         } catch {}
         if (
-          n.throwIfSavedObjectIsTheSame === !0 &&
+          n.throwIfSavedObjectIsTheSame === true &&
           typeof a == "object" &&
           "SPECIAL_KEY_id" in a &&
           this.n.get(`${e}${r}`) === a.SPECIAL_KEY_id
@@ -309,22 +309,22 @@ export function createReactiveStorageService(params) {
         return QF.hydrateOldValue(t, a, s, (l) => this.g.warn(l))
       }
       C(e, t, s, n, r, o) {
-        const a = this.w(s, r, o, { throwIfSavedObjectIsTheSame: !1 }),
-          l = createObserver(a, void 0),
+        const a = this.w(s, r, o, { throwIfSavedObjectIsTheSame: false }),
+          l = createObserver(a, undefined),
           c = l[0],
           h = l[1]
         return [
           c,
           (...d) => {
             const g = h(...d)
-            return this.y.fire(!0), g
+            return this.y.fire(true), g
           },
         ]
       }
       F(e, t, s, n, r) {
-        if (!(r === void 0 || n === void 0 || !(t.key === e)))
+        if (!(r === undefined || n === undefined || !(t.key === e)))
           try {
-            const a = this.w(e, r, s, { throwIfSavedObjectIsTheSame: !0 })
+            const a = this.w(e, r, s, { throwIfSavedObjectIsTheSame: true })
             if (
               "SPECIAL_KEY_lastUpdatedTimeInUnixSeconds" in a &&
               "SPECIAL_KEY_lastUpdatedTimeInUnixSeconds" in r &&
@@ -340,7 +340,7 @@ export function createReactiveStorageService(params) {
       G(e, t, s) {
         const n = rt()
         this.n.set(`${t}server`, n),
-          this.b !== void 0 &&
+          this.b !== undefined &&
             this.b.store(
               t,
               QF.stringifyStorage(e, s, (o) => this.g.warn(o), n),

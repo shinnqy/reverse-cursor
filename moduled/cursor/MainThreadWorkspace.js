@@ -49,7 +49,7 @@ export function createMainThreadWorkspace(params) {
       const r = n.map((o) => ({ uri: U.revive(o.uri), name: o.name }))
       return (
         this.l.status(this.A(e, r.length, s), { hideAfter: 10 * 1e3 }),
-        this.k.updateFolders(t, s, r, !0)
+        this.k.updateFolders(t, s, r, true)
       )
     }
     A(e, t, s) {
@@ -76,8 +76,8 @@ export function createMainThreadWorkspace(params) {
       return this.g.getWorkbenchState() === 1
         ? null
         : {
-            configuration: e.configuration || void 0,
-            isUntitled: e.configuration ? dB(e.configuration, this.r) : !1,
+            configuration: e.configuration || undefined,
+            isUntitled: e.configuration ? dB(e.configuration, this.r) : false,
             folders: e.folders,
             id: e.id,
             name: this.q.getWorkspaceLabel(e),
@@ -184,7 +184,7 @@ export function createMainThreadWorkspace(params) {
                     })),
                     fullDiffText: a.fullDiffText,
                   }
-                : void 0,
+                : undefined,
             )
         this.v.registerDiffProvider({ getFullDiff: n })
       } else if (t === "cursor-retrieval") {

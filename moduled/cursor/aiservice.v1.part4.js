@@ -101,7 +101,7 @@ var l5n = class l5e extends _ {
         (this.scoredCodebaseContext = []),
         (this.conversationUuid = ""),
         (this.quotes = []),
-        (this.supportsShellTool = !1),
+        (this.supportsShellTool = false),
         (this.globalDescription = ""),
         (this.terminalCwd = ""),
         v.util.initPartial(e, this)
@@ -114,8 +114,8 @@ var l5n = class l5e extends _ {
     }
     static {
       this.fields = v.util.newFieldList(() => [
-        { no: 1, name: "open_files", kind: "message", T: c5n, repeated: !0 },
-        { no: 2, name: "conversation", kind: "message", T: Ha, repeated: !0 },
+        { no: 1, name: "open_files", kind: "message", T: c5n, repeated: true },
+        { no: 2, name: "conversation", kind: "message", T: Ha, repeated: true },
         { no: 4, name: "explicit_context", kind: "message", T: Sf },
         { no: 7, name: "model_details", kind: "message", T: zr },
         {
@@ -123,41 +123,41 @@ var l5n = class l5e extends _ {
           name: "documentation_identifiers",
           kind: "scalar",
           T: 9,
-          repeated: !0,
+          repeated: true,
         },
-        { no: 11, name: "summary", kind: "scalar", T: 9, opt: !0 },
+        { no: 11, name: "summary", kind: "scalar", T: 9, opt: true },
         {
           no: 12,
           name: "summary_up_until_index",
           kind: "scalar",
           T: 5,
-          opt: !0,
+          opt: true,
         },
-        { no: 13, name: "retry_instructions", kind: "scalar", T: 9, opt: !0 },
+        { no: 13, name: "retry_instructions", kind: "scalar", T: 9, opt: true },
         {
           no: 14,
           name: "retry_previous_attempt",
           kind: "scalar",
           T: 9,
-          opt: !0,
+          opt: true,
         },
         {
           no: 15,
           name: "scored_codebase_context",
           kind: "message",
           T: im,
-          repeated: !0,
+          repeated: true,
         },
         {
           no: 16,
           name: "high_level_folder_description",
           kind: "scalar",
           T: 9,
-          opt: !0,
+          opt: true,
         },
         { no: 17, name: "conversation_uuid", kind: "scalar", T: 9 },
         { no: 18, name: "cmd_k_debug_info", kind: "message", T: hI },
-        { no: 19, name: "quotes", kind: "message", T: eVe, repeated: !0 },
+        { no: 19, name: "quotes", kind: "message", T: eVe, repeated: true },
         { no: 20, name: "supports_shell_tool", kind: "scalar", T: 8 },
         { no: 21, name: "global_description", kind: "scalar", T: 9 },
         { no: 22, name: "terminal_cwd", kind: "scalar", T: 9 },
@@ -408,7 +408,7 @@ var l5n = class l5e extends _ {
     }
     static {
       this.fields = v.util.newFieldList(() => [
-        { no: 1, name: "paths", kind: "message", T: b5n, repeated: !0 },
+        { no: 1, name: "paths", kind: "message", T: b5n, repeated: true },
       ])
     }
     static fromBinary(e, t) {
@@ -445,7 +445,7 @@ var l5n = class l5e extends _ {
           name: "interesting_lines",
           kind: "scalar",
           T: 5,
-          repeated: !0,
+          repeated: true,
         },
       ])
     }
@@ -489,8 +489,8 @@ var l5n = class l5e extends _ {
         { no: 4, name: "branch_notes", kind: "scalar", T: 9 },
         { no: 5, name: "branch_name", kind: "scalar", T: 9 },
         { no: 6, name: "high_level_ai_answer", kind: "scalar", T: 9 },
-        { no: 7, name: "override_model", kind: "scalar", T: 9, opt: !0 },
-        { no: 8, name: "override_token_limit", kind: "scalar", T: 5, opt: !0 },
+        { no: 7, name: "override_model", kind: "scalar", T: 9, opt: true },
+        { no: 8, name: "override_token_limit", kind: "scalar", T: 5, opt: true },
         { no: 10, name: "lints", kind: "message", T: _B },
       ])
     }
@@ -607,7 +607,7 @@ var l5n = class l5e extends _ {
           name: "codebase_questions",
           kind: "scalar",
           T: 9,
-          repeated: !0,
+          repeated: true,
         },
       ])
     }
@@ -626,7 +626,7 @@ var l5n = class l5e extends _ {
   },
   x5n = class k5e extends _ {
     constructor(e) {
-      super(), (this.decision = { case: void 0 }), v.util.initPartial(e, this)
+      super(), (this.decision = { case: undefined }), v.util.initPartial(e, this)
     }
     static {
       this.runtime = v
@@ -752,21 +752,21 @@ var l5n = class l5e extends _ {
         { no: 4, name: "branch_name", kind: "scalar", T: 9 },
         { no: 5, name: "high_level_ai_answer", kind: "scalar", T: 9 },
         { no: 9, name: "originating_reflection", kind: "scalar", T: 9 },
-        { no: 6, name: "override_model", kind: "scalar", T: 9, opt: !0 },
-        { no: 7, name: "override_token_limit", kind: "scalar", T: 5, opt: !0 },
+        { no: 6, name: "override_model", kind: "scalar", T: 9, opt: true },
+        { no: 7, name: "override_token_limit", kind: "scalar", T: 5, opt: true },
         {
           no: 15,
           name: "scored_codebase_context",
           kind: "message",
           T: im,
-          repeated: !0,
+          repeated: true,
         },
         {
           no: 8,
           name: "codebase_information",
           kind: "message",
           T: D5n,
-          opt: !0,
+          opt: true,
         },
       ])
     }
@@ -795,8 +795,8 @@ var l5n = class l5e extends _ {
     }
     static {
       this.fields = v.util.newFieldList(() => [
-        { no: 1, name: "files", kind: "message", T: T5n, repeated: !0 },
-        { no: 2, name: "qa", kind: "message", T: P5n, repeated: !0 },
+        { no: 1, name: "files", kind: "message", T: T5n, repeated: true },
+        { no: 2, name: "qa", kind: "message", T: P5n, repeated: true },
       ])
     }
     static fromBinary(e, t) {
@@ -836,7 +836,7 @@ var l5n = class l5e extends _ {
           name: "interesting_lines",
           kind: "scalar",
           T: 5,
-          repeated: !0,
+          repeated: true,
         },
       ])
     }
@@ -974,7 +974,7 @@ var l5n = class l5e extends _ {
         { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
         { no: 2, name: "start_line", kind: "scalar", T: 5 },
         { no: 3, name: "text", kind: "scalar", T: 9 },
-        { no: 4, name: "score", kind: "scalar", T: 1, opt: !0 },
+        { no: 4, name: "score", kind: "scalar", T: 1, opt: true },
       ])
     }
     static fromBinary(e, t) {
@@ -1085,7 +1085,7 @@ var l5n = class l5e extends _ {
         { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
         { no: 2, name: "file_contents", kind: "scalar", T: 9 },
         { no: 3, name: "query_range", kind: "message", T: M5n },
-        { no: 4, name: "useful_types", kind: "message", T: BTt, repeated: !0 },
+        { no: 4, name: "useful_types", kind: "message", T: BTt, repeated: true },
       ])
     }
     static fromBinary(e, t) {
@@ -1149,7 +1149,7 @@ var l5n = class l5e extends _ {
     }
     static {
       this.fields = v.util.newFieldList(() => [
-        { no: 1, name: "useful_types", kind: "message", T: BTt, repeated: !0 },
+        { no: 1, name: "useful_types", kind: "message", T: BTt, repeated: true },
       ])
     }
     static fromBinary(e, t) {
@@ -1206,9 +1206,9 @@ var l5n = class l5e extends _ {
           name: "new_implementation_lines",
           kind: "scalar",
           T: 9,
-          repeated: !0,
+          repeated: true,
         },
-        { no: 6, name: "call_site_lines", kind: "scalar", T: 5, repeated: !0 },
+        { no: 6, name: "call_site_lines", kind: "scalar", T: 5, repeated: true },
         { no: 7, name: "function_name", kind: "scalar", T: 9 },
         { no: 8, name: "branch_notes", kind: "scalar", T: 9 },
         { no: 9, name: "branch_name", kind: "scalar", T: 9 },
@@ -1328,7 +1328,7 @@ var l5n = class l5e extends _ {
           name: "codebase_questions",
           kind: "scalar",
           T: 9,
-          repeated: !0,
+          repeated: true,
         },
       ])
     }
@@ -1347,7 +1347,7 @@ var l5n = class l5e extends _ {
   },
   H5n = class W5e extends _ {
     constructor(e) {
-      super(), (this.decision = { case: void 0 }), v.util.initPartial(e, this)
+      super(), (this.decision = { case: undefined }), v.util.initPartial(e, this)
     }
     static {
       this.runtime = v
@@ -1422,10 +1422,10 @@ var l5n = class l5e extends _ {
           kind: "scalar",
           T: 5,
         },
-        { no: 5, name: "diff_history", kind: "message", T: $C, repeated: !0 },
-        { no: 6, name: "call_site_lines", kind: "scalar", T: 5, repeated: !0 },
+        { no: 5, name: "diff_history", kind: "message", T: $C, repeated: true },
+        { no: 6, name: "call_site_lines", kind: "scalar", T: 5, repeated: true },
         { no: 7, name: "function_name", kind: "scalar", T: 9 },
-        { no: 8, name: "useful_types", kind: "message", T: BTt, repeated: !0 },
+        { no: 8, name: "useful_types", kind: "message", T: BTt, repeated: true },
         { no: 10, name: "prompt", kind: "message", T: R9i },
         { no: 9, name: "debug_info", kind: "message", T: hI },
       ])
@@ -1487,7 +1487,7 @@ var l5n = class l5e extends _ {
     static {
       this.fields = v.util.newFieldList(() => [
         { no: 1, name: "text", kind: "scalar", T: 9 },
-        { no: 2, name: "context_items", kind: "message", T: t7, repeated: !0 },
+        { no: 2, name: "context_items", kind: "message", T: t7, repeated: true },
       ])
     }
     static fromBinary(e, t) {
@@ -1543,8 +1543,8 @@ var l5n = class l5e extends _ {
           kind: "scalar",
           T: 5,
         },
-        { no: 5, name: "diff_history", kind: "message", T: $C, repeated: !0 },
-        { no: 6, name: "call_site_lines", kind: "scalar", T: 5, repeated: !0 },
+        { no: 5, name: "diff_history", kind: "message", T: $C, repeated: true },
+        { no: 6, name: "call_site_lines", kind: "scalar", T: 5, repeated: true },
         { no: 7, name: "function_name", kind: "scalar", T: 9 },
         { no: 9, name: "debug_info", kind: "message", T: hI },
         { no: 20, name: "prompt", kind: "message", T: R9i },
@@ -1555,7 +1555,7 @@ var l5n = class l5e extends _ {
           name: "scored_codebase_context",
           kind: "message",
           T: im,
-          repeated: !0,
+          repeated: true,
         },
         { no: 13, name: "diff_to_base_branch", kind: "message", T: q5n },
         {
@@ -1563,21 +1563,21 @@ var l5n = class l5e extends _ {
           name: "branch_diff_files",
           kind: "message",
           T: M9i,
-          repeated: !0,
+          repeated: true,
         },
         {
           no: 14,
           name: "diff_history_files",
           kind: "message",
           T: M9i,
-          repeated: !0,
+          repeated: true,
         },
         {
           no: 8,
           name: "codebase_information",
           kind: "message",
           T: z5n,
-          opt: !0,
+          opt: true,
         },
         { no: 15, name: "plan_version", kind: "enum", T: v.getEnumType(Yle) },
         { no: 17, name: "context_ast", kind: "message", T: f$i },
@@ -1623,8 +1623,8 @@ var q5n = class J5e extends _ {
     }
     static {
       this.fields = v.util.newFieldList(() => [
-        { no: 1, name: "file_diffs", kind: "message", T: j5n, repeated: !0 },
-        { no: 2, name: "commits", kind: "message", T: XN, repeated: !0 },
+        { no: 1, name: "file_diffs", kind: "message", T: j5n, repeated: true },
+        { no: 2, name: "commits", kind: "message", T: XN, repeated: true },
       ])
     }
     static fromBinary(e, t) {
@@ -1645,7 +1645,7 @@ var q5n = class J5e extends _ {
       super(),
         (this.fileName = ""),
         (this.diff = ""),
-        (this.tooBig = !1),
+        (this.tooBig = false),
         v.util.initPartial(e, this)
     }
     static {
@@ -1718,8 +1718,8 @@ var q5n = class J5e extends _ {
     }
     static {
       this.fields = v.util.newFieldList(() => [
-        { no: 1, name: "files", kind: "message", T: G5n, repeated: !0 },
-        { no: 2, name: "qa", kind: "message", T: J5n, repeated: !0 },
+        { no: 1, name: "files", kind: "message", T: G5n, repeated: true },
+        { no: 2, name: "qa", kind: "message", T: J5n, repeated: true },
       ])
     }
     static fromBinary(e, t) {
@@ -1759,7 +1759,7 @@ var q5n = class J5e extends _ {
           name: "interesting_lines",
           kind: "scalar",
           T: 5,
-          repeated: !0,
+          repeated: true,
         },
       ])
     }
@@ -1871,7 +1871,7 @@ var q5n = class J5e extends _ {
         (this.examples = []),
         (this.tokenLimit = 0),
         (this.tokenizer = ""),
-        (this.chainOfThought = !1),
+        (this.chainOfThought = false),
         v.util.initPartial(e, this)
     }
     static {
@@ -1883,7 +1883,7 @@ var q5n = class J5e extends _ {
     }
     static {
       this.fields = v.util.newFieldList(() => [
-        { no: 1, name: "examples", kind: "message", T: Y5n, repeated: !0 },
+        { no: 1, name: "examples", kind: "message", T: Y5n, repeated: true },
         { no: 2, name: "current", kind: "message", T: $9i },
         { no: 8, name: "token_limit", kind: "scalar", T: 5 },
         { no: 9, name: "tokenizer", kind: "scalar", T: 9 },
@@ -1965,7 +1965,7 @@ var q5n = class J5e extends _ {
           name: "current_file_lines",
           kind: "scalar",
           T: 9,
-          repeated: !0,
+          repeated: true,
         },
         {
           no: 3,
@@ -1979,15 +1979,15 @@ var q5n = class J5e extends _ {
           name: "ground_truth_lines",
           kind: "scalar",
           T: 9,
-          repeated: !0,
+          repeated: true,
         },
-        { no: 6, name: "pr_history", kind: "message", T: F9i, repeated: !0 },
+        { no: 6, name: "pr_history", kind: "message", T: F9i, repeated: true },
         {
           no: 7,
           name: "scored_codebase_context",
           kind: "message",
           T: im,
-          repeated: !0,
+          repeated: true,
         },
         { no: 8, name: "token_limit", kind: "scalar", T: 5 },
         { no: 9, name: "tokenizer", kind: "scalar", T: 9 },
@@ -2023,7 +2023,7 @@ var q5n = class J5e extends _ {
           name: "codebase_context",
           kind: "message",
           T: im,
-          repeated: !0,
+          repeated: true,
         },
       ])
     }
@@ -2058,8 +2058,8 @@ var q5n = class J5e extends _ {
     static {
       this.fields = v.util.newFieldList(() => [
         { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
-        { no: 2, name: "original_lines", kind: "scalar", T: 9, repeated: !0 },
-        { no: 4, name: "new_lines", kind: "scalar", T: 9, repeated: !0 },
+        { no: 2, name: "original_lines", kind: "scalar", T: 9, repeated: true },
+        { no: 4, name: "new_lines", kind: "scalar", T: 9, repeated: true },
         { no: 5, name: "start_line_one_indexed", kind: "scalar", T: 5 },
       ])
     }
@@ -2104,7 +2104,7 @@ var q5n = class J5e extends _ {
           name: "current_file_lines",
           kind: "scalar",
           T: 9,
-          repeated: !0,
+          repeated: true,
         },
         {
           no: 3,
@@ -2114,13 +2114,13 @@ var q5n = class J5e extends _ {
         },
         { no: 4, name: "end_line_one_indexed_exclusive", kind: "scalar", T: 5 },
         { no: 5, name: "instruction", kind: "scalar", T: 9 },
-        { no: 6, name: "pr_history", kind: "message", T: F9i, repeated: !0 },
+        { no: 6, name: "pr_history", kind: "message", T: F9i, repeated: true },
         {
           no: 7,
           name: "scored_codebase_context",
           kind: "message",
           T: im,
-          repeated: !0,
+          repeated: true,
         },
         { no: 8, name: "token_limit", kind: "scalar", T: 5 },
         { no: 9, name: "tokenizer", kind: "scalar", T: 9 },
@@ -2152,7 +2152,7 @@ var q5n = class J5e extends _ {
     static {
       this.fields = v.util.newFieldList(() => [
         { no: 1, name: "request", kind: "message", T: A9i },
-        { no: 2, name: "plan", kind: "scalar", T: 9, opt: !0 },
+        { no: 2, name: "plan", kind: "scalar", T: 9, opt: true },
       ])
     }
     static fromBinary(e, t) {

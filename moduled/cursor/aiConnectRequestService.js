@@ -28,10 +28,10 @@ export function createAIConnectRequestService(params) {
     return t
   }
   function ANn(i, e) {
-    if (i === e) return !0
-    if (i.byteLength !== e.byteLength) return !1
-    for (let t = 0; t < i.byteLength; t++) if (i[t] !== e[t]) return !1
-    return !0
+    if (i === e) return true
+    if (i.byteLength !== e.byteLength) return false
+    for (let t = 0; t < i.byteLength; t++) if (i[t] !== e[t]) return false
+    return true
   }
   var WBi,
     qBi = Symbol.for("@achingbrain/uint8arraylist")
@@ -50,7 +50,7 @@ export function createAIConnectRequestService(params) {
   }
   var l1o = class Gft {
     constructor(...e) {
-      ;(this[WBi] = !0),
+      ;(this[WBi] = true),
         (this.bufs = []),
         (this.length = 0),
         e.length > 0 && this.appendAll(e)
@@ -316,10 +316,10 @@ export function createAIConnectRequestService(params) {
     }
     equals(e) {
       if (e == null || !(e instanceof Gft) || e.bufs.length !== this.bufs.length)
-        return !1
+        return false
       for (let t = 0; t < this.bufs.length; t++)
-        if (!ANn(this.bufs[t], e.bufs[t])) return !1
-      return !0
+        if (!ANn(this.bufs[t], e.bufs[t])) return false
+      return true
     }
     static fromUint8Arrays(e, t) {
       const s = new Gft()
@@ -441,7 +441,7 @@ export function createAIConnectRequestService(params) {
       this.fields = v.util.newFieldList(() => [
         { no: 1, name: "code", kind: "scalar", T: 5 },
         { no: 2, name: "message", kind: "scalar", T: 9 },
-        { no: 3, name: "details", kind: "message", T: LSt, repeated: !0 },
+        { no: 3, name: "details", kind: "message", T: LSt, repeated: true },
       ])
     }
     static fromBinary(e, t) {
@@ -484,7 +484,7 @@ export function createAIConnectRequestService(params) {
         (this.c = e),
         (this.f = t),
         (this.g = s),
-        (this.b = !1),
+        (this.b = false),
         (this.a = this.D(this.f.createScoped(this))),
         this.D(
           this.g.onDidChangeTransport(() => {
@@ -494,9 +494,9 @@ export function createAIConnectRequestService(params) {
     }
     async get() {
       const e = this.h
-      ;(!this.b || e === void 0) && (this.createServer(), (this.b = !0))
+      ;(!this.b || e === undefined) && (this.createServer(), (this.b = true))
       const t = await this.h
-      if (t === void 0)
+      if (t === undefined)
         throw new Error("Invariant violated! server did not get created.")
       return t
     }

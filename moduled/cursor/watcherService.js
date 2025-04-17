@@ -102,7 +102,7 @@ export function createWatcherService(params) {
       this.M.forEach((e) => e.forEach((t) => t.dispose())), this.M.clear()
     }
     async startBackgroundWatch() {
-      this.j.applicationUserPersistentStorage.watcherEnabled === !0 &&
+      this.j.applicationUserPersistentStorage.watcherEnabled === true &&
         (this.N(), this.O())
     }
     O() {
@@ -155,7 +155,7 @@ export function createWatcherService(params) {
       if (s)
         for (const [n, r] of Object.entries(this.notificationHandlers)) {
           const o = r.getMarker()
-          o !== void 0 &&
+          o !== undefined &&
             o.resource.toString() === t.uri.toString() &&
             this.P(
               new G(
@@ -218,7 +218,7 @@ export function createWatcherService(params) {
           this.j.setNonPersistentStorage("lintState", "lastLintResult", zB.NONE)
         const a = this.g.getModelDetails(),
           [l, c] = this.g.registerNewGeneration({
-            metadata: void 0,
+            metadata: undefined,
             generationUUID: o,
           }),
           h = await this.J.getPartialCppRequest({
@@ -228,7 +228,7 @@ export function createWatcherService(params) {
             modelVersion: t.getVersionId(),
             position: n,
             source: CppIntent.Unknown,
-            shouldRelyOnFileSyncForFile: !1,
+            shouldRelyOnFileSyncForFile: false,
           }),
           u = h.currentFile?.contents
         if (!u) throw new Error("Contents are undefined")
@@ -252,7 +252,7 @@ export function createWatcherService(params) {
           ),
           { bug: C } = w
         if (
-          C !== void 0 &&
+          C !== undefined &&
           C.confidence >=
             this.j.applicationUserPersistentStorage.lintSettings.watcherThreshold
         ) {
@@ -372,7 +372,7 @@ export function createWatcherService(params) {
           this.j.setNonPersistentStorage("lintState", "lastLintResult", zB.NONE)
         const o = this.g.getModelDetails(),
           [a, l] = this.g.registerNewGeneration({
-            metadata: void 0,
+            metadata: undefined,
             generationUUID: r,
           }),
           c = []
@@ -383,7 +383,7 @@ export function createWatcherService(params) {
             ;(C = S), n.add(S)
             const x =
                 y ??
-                (w ? [S.object.textEditorModel.getFullModelRange()] : void 0),
+                (w ? [S.object.textEditorModel.getFullModelRange()] : undefined),
               k = await this.getRanges(S.object.textEditorModel, t, x, s)
             if (k.length > 0) {
               const E = new SYe(S, k)
@@ -581,7 +581,7 @@ export function createWatcherService(params) {
                       endLineNumberInclusive: S.endLineNumber,
                       endColumn: S.endColumn,
                     })
-                  : void 0)
+                  : undefined)
               const x = w.model.getValueInRange(C),
                 k = y.replaceInitialText
               if (
@@ -640,13 +640,13 @@ export function createWatcherService(params) {
     async getRanges(e, t, s, n) {
       const r = e.uri
       if (
-        ((s === void 0 && !this.fileStates[r.toString()]) ||
+        ((s === undefined && !this.fileStates[r.toString()]) ||
           e.getValue().split(`
 `).length > 1e4 ||
-          (this.fileStates[r.toString()] !== void 0 &&
+          (this.fileStates[r.toString()] !== undefined &&
             this.fileStates[r.toString()].split(`
 `).length > 1e4)) &&
-        ((this.fileStates[r.toString()] = e.getValue()), n !== !0)
+        ((this.fileStates[r.toString()] = e.getValue()), n !== true)
       )
         return []
       let o = s ?? (await IKn(this.fileStates[r.toString()], e.getValue()))
@@ -654,7 +654,7 @@ export function createWatcherService(params) {
         c =
           a?.getModel()?.uri.toString() === r.toString()
             ? a?.getPosition()
-            : void 0
+            : undefined
       c != null && t && (o = o.filter((d) => !d.containsPosition(c)))
       const h = o.map((d) => {
           const g = Math.max(1, d.startLineNumber - 15),
@@ -697,7 +697,7 @@ export function createWatcherService(params) {
     }
     findClosestBug(e) {
       let t
-      if (e !== void 0)
+      if (e !== undefined)
         t = this.j.nonPersistentStorage.lintState.bugs.filter(
           (s) => s.bug.uuid === e,
         )[0]
@@ -739,7 +739,7 @@ export function createWatcherService(params) {
             text: t.bug.replaceText,
           },
         ],
-        r = s.modelRef.object.textEditorModel.applyEdits(n, !0),
+        r = s.modelRef.object.textEditorModel.applyEdits(n, true),
         o = s.modelRef.object.textEditorModel
       this.j.setNonPersistentStorage("lintState", "bugs", (a) =>
         a.filter((l) => l.bug.uuid !== t.bug.uuid),
@@ -750,14 +750,14 @@ export function createWatcherService(params) {
           label: "Undo apply lint fix",
           code: "aiWatchService.undo.applyLint",
           undo: () => {
-            o.applyEdits(r, !1),
+            o.applyEdits(r, false),
               this.j.setNonPersistentStorage("lintState", "bugs", (a) => [
                 ...a,
                 t,
               ])
           },
           redo: () => {
-            o.applyEdits(n, !1),
+            o.applyEdits(n, false),
               this.j.setNonPersistentStorage("lintState", "bugs", (a) =>
                 a.filter((l) => l.bug.uuid !== t.bug.uuid),
               )
@@ -773,7 +773,7 @@ export function createWatcherService(params) {
         .filter((n) => n.aiLintBugData?.bugUuid === t.bug.uuid)[0]
       s && this.C.executeCommand("aichat.fixspecificerrormessage", { marker: s })
     }
-    dismissLint(e, t = !1) {
+    dismissLint(e, t = false) {
       const s = this.findClosestBug(e)
       if (!s) return
       const n = s
@@ -812,15 +812,15 @@ export function createWatcherService(params) {
     async dismissLintAndBanSimilar(e) {
       const t = this.findClosestBug(e)
       if (!t) return
-      const s = this.dismissLint(e, !0),
-        n = { hasBeenUndone: !1, undo: () => {} }
+      const s = this.dismissLint(e, true),
+        n = { hasBeenUndone: false, undo: () => {} }
       this.F.pushElement({
         type: 0,
         resource: t.uri,
         label: "Undo ban similar lints",
         code: "aiWatchService.undo.banSimilarLints",
         undo: () => {
-          s?.undo(), n.hasBeenUndone || (n.undo(), (n.hasBeenUndone = !0))
+          s?.undo(), n.hasBeenUndone || (n.undo(), (n.hasBeenUndone = true))
         },
         redo: () => {
           s?.redo()

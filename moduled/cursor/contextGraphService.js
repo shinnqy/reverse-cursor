@@ -78,7 +78,7 @@ export function createContextGraphService(params) {
         lineOrSelection: s,
         useLocal: n,
       }) {
-        if (n && s !== void 0)
+        if (n && s !== undefined)
           if (s instanceof Ui) {
             const r = await this.n.provider?.runCommand(
               mG.GetRelatedFilesForRange,
@@ -196,7 +196,7 @@ export function createContextGraphService(params) {
               (s.preventDefault(),
               s.stopImmediatePropagation(),
               this.z.open(this.q.resolveRelativePath(o.relativePath), {
-                editorOptions: { pinned: !1, revealIfOpened: !0 },
+                editorOptions: { pinned: false, revealIfOpened: true },
               }))
           },
           t = VS()

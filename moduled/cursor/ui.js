@@ -21,7 +21,7 @@ export function createUI(params) {
         s = XI()
       return (
         De(() => {
-          if (i.show === !1) return
+          if (i.show === false) return
           t(1)
           const n = s.window.setInterval(
             () => {
@@ -40,7 +40,7 @@ export function createUI(params) {
               n,
               I(te, {
                 get when() {
-                  return i.show !== !1
+                  return i.show !== false
                 },
                 get fallback() {
                   return "\xA0"
@@ -66,7 +66,7 @@ export function createUI(params) {
     }
   function uer() {
     const i = dt(),
-      [e, t] = le(!1)
+      [e, t] = le(false)
     return I(te, {
       get when() {
         return !e()
@@ -91,7 +91,7 @@ export function createUI(params) {
           o.style.setProperty("color", "var(--vscode-textLink-foreground)"),
           o.style.setProperty("cursor", "pointer"),
           a.addEventListener("click", (c) => {
-            c.preventDefault(), t(!0)
+            c.preventDefault(), t(true)
           }),
           a.style.setProperty("font-size", "0.75rem"),
           a.style.setProperty("color", "var(--vscode-textLink-foreground)"),
@@ -127,13 +127,13 @@ export function createUI(params) {
         s(o())
       })
     const c = async () => {
-      if ((r("loading"), l !== void 0))
+      if ((r("loading"), l !== undefined))
         try {
           await l.updateFastRequests(new Y3i({ requestQuota: t() })),
             r("done"),
             a(t()),
             setTimeout(() => {
-              i.setIsUpsellFastRequestsShowing(!1)
+              i.setIsUpsellFastRequestsShowing(false)
             }, 2e3)
         } catch (h) {
           console.error("Error in handleUpgrade:", h), r("error")
@@ -452,17 +452,17 @@ export function createUI(params) {
     oXe = (i) => {
       const e = dt(),
         t = e.cursorAuthenticationService.membershipType(),
-        s = Y(() => !(i.hideDotsLoading ?? !1)),
-        [n, r] = le(!1),
+        s = Y(() => !(i.hideDotsLoading ?? false)),
+        [n, r] = le(false),
         o = Y(
           () =>
-            i.queuePositionResponse !== void 0 &&
+            i.queuePositionResponse !== undefined &&
             (i.queuePositionResponse.position !== -1 ||
-              i.queuePositionResponse.secondsLeftToWait !== void 0 ||
-              i.queuePositionResponse.newQueuePosition !== void 0),
+              i.queuePositionResponse.secondsLeftToWait !== undefined ||
+              i.queuePositionResponse.newQueuePosition !== undefined),
         )
       let a
-      const l = Y(() => i.queuePositionResponse !== void 0)
+      const l = Y(() => i.queuePositionResponse !== undefined)
       De(() => {
         const u = l()
         pXi(e)
@@ -483,10 +483,10 @@ export function createUI(params) {
           })
       })
       const c = () => {
-          i.setIsUpsellingUsageBasedPricing?.(!0)
+          i.setIsUpsellingUsageBasedPricing?.(true)
         },
         h = async () => {
-          i.setIsUpsellingHardLimit?.(!0)
+          i.setIsUpsellingHardLimit?.(true)
         }
       return I(te, {
         get when() {
@@ -520,7 +520,7 @@ export function createUI(params) {
                   }),
                   null,
                 ),
-                M(u, I(nf, { show: !0 }), null),
+                M(u, I(nf, { show: true }), null),
                 u
               )
             },
@@ -533,8 +533,8 @@ export function createUI(params) {
                 I(Pi, {
                   get when() {
                     return (
-                      i.queuePositionResponse?.secondsLeftToWait !== void 0 ||
-                      i.queuePositionResponse?.newQueuePosition !== void 0
+                      i.queuePositionResponse?.secondsLeftToWait !== undefined ||
+                      i.queuePositionResponse?.newQueuePosition !== undefined
                     )
                   },
                   get children() {
@@ -577,7 +577,7 @@ export function createUI(params) {
                                       C,
                                       I(te, {
                                         get when() {
-                                          return i.spaceBelow !== !1
+                                          return i.spaceBelow !== false
                                         },
                                         get fallback() {
                                           return "Consider upgrading to get fast access."
@@ -605,7 +605,7 @@ export function createUI(params) {
                                       C,
                                       I(te, {
                                         get when() {
-                                          return i.spaceBelow !== !1
+                                          return i.spaceBelow !== false
                                         },
                                         get fallback() {
                                           return "You have reached your included limit."
@@ -657,7 +657,7 @@ export function createUI(params) {
                                       get when() {
                                         return (
                                           i.queuePositionResponse
-                                            ?.secondsLeftToWait !== void 0
+                                            ?.secondsLeftToWait !== undefined
                                         )
                                       },
                                       get children() {
@@ -673,7 +673,7 @@ export function createUI(params) {
                                           "second",
                                           Y(() =>
                                             i.queuePositionResponse
-                                              ?.secondsLeftToWait !== void 0 &&
+                                              ?.secondsLeftToWait !== undefined &&
                                             i.queuePositionResponse
                                               ?.secondsLeftToWait !== 1
                                               ? "s"
@@ -688,7 +688,7 @@ export function createUI(params) {
                                       get when() {
                                         return (
                                           i.queuePositionResponse
-                                            ?.newQueuePosition !== void 0
+                                            ?.newQueuePosition !== undefined
                                         )
                                       },
                                       get children() {
@@ -790,7 +790,7 @@ export function createUI(params) {
                                               try {
                                                 let x = U.parse(C().address)
                                                 e.openerService.open(x, {
-                                                  fromUserGesture: !0,
+                                                  fromUserGesture: true,
                                                 })
                                               } catch (x) {
                                                 console.error(
@@ -822,7 +822,7 @@ export function createUI(params) {
                             ),
                             xe(
                               (C) => {
-                                var S = i.spaceBelow === !1 ? "nowrap" : void 0,
+                                var S = i.spaceBelow === false ? "nowrap" : undefined,
                                   x = ie.asClassName($.info)
                                 return (
                                   S !== C.e &&
@@ -833,7 +833,7 @@ export function createUI(params) {
                                   C
                                 )
                               },
-                              { e: void 0, t: void 0 },
+                              { e: undefined, t: undefined },
                             ),
                             u
                           )
@@ -858,7 +858,7 @@ export function createUI(params) {
                             u.style.setProperty("flex-direction", "column"),
                             p.style.setProperty("width", "15px"),
                             p.style.setProperty("display", "inline-block"),
-                            M(p, I(nf, { show: !0 })),
+                            M(p, I(nf, { show: true })),
                             m.style.setProperty("display", "inline-block"),
                             M(
                               m,
@@ -894,7 +894,7 @@ export function createUI(params) {
                   },
                 }),
                 I(Pi, {
-                  when: !0,
+                  when: true,
                   get children() {
                     var u = fXi()
                     return (
@@ -930,7 +930,7 @@ export function createUI(params) {
                                             p,
                                             I(te, {
                                               get when() {
-                                                return i.spaceBelow !== !1
+                                                return i.spaceBelow !== false
                                               },
                                               get fallback() {
                                                 return "Consider upgrading to get fast access."
@@ -958,7 +958,7 @@ export function createUI(params) {
                                             p,
                                             I(te, {
                                               get when() {
-                                                return i.spaceBelow !== !1
+                                                return i.spaceBelow !== false
                                               },
                                               get fallback() {
                                                 return "Your account is above its fast premium model access quota for the month."
@@ -976,7 +976,7 @@ export function createUI(params) {
                                   xe(
                                     (p) => {
                                       var m =
-                                          i.spaceBelow === !1 ? "nowrap" : void 0,
+                                          i.spaceBelow === false ? "nowrap" : undefined,
                                         b = ie.asClassName($.info)
                                       return (
                                         m !== p.e &&
@@ -992,7 +992,7 @@ export function createUI(params) {
                                         p
                                       )
                                     },
-                                    { e: void 0, t: void 0 },
+                                    { e: undefined, t: undefined },
                                   ),
                                   d
                                 )
@@ -1165,7 +1165,7 @@ export function createUI(params) {
                                                     "click",
                                                     () => {
                                                       i.setIsUpsellFastRequestsShowing(
-                                                        !0,
+                                                        true,
                                                       )
                                                     },
                                                   ),
@@ -1370,7 +1370,7 @@ export function createUI(params) {
                                             return (
                                               m.addEventListener("click", () => {
                                                 i.setIsUpsellFastRequestsShowing(
-                                                  !0,
+                                                  true,
                                                 )
                                               }),
                                               m.style.setProperty(
@@ -1428,7 +1428,7 @@ export function createUI(params) {
                                 }),
                                 null,
                               ),
-                              M(d, I(nf, { show: !0 }), null),
+                              M(d, I(nf, { show: true }), null),
                               d
                             )
                           },
@@ -1463,12 +1463,12 @@ export function createUI(params) {
         return (
           await aXe(i),
           {
-            usageBasedPremiumRequestsEnabled: !0,
+            usageBasedPremiumRequestsEnabled: true,
             isUsagePricingEnabled: s.usageBasedPremiumRequests,
           }
         )
       } catch {
-        return { usageBasedPremiumRequestsEnabled: !1, isUsagePricingEnabled: !1 }
+        return { usageBasedPremiumRequestsEnabled: false, isUsagePricingEnabled: false }
       }
     },
     aXe = async (i) => {
@@ -1505,20 +1505,20 @@ export function createUI(params) {
           await n.setHardLimit({
             teamId: r?.at(0),
             hardLimit: 20,
-            noUsageBasedAllowed: !1,
+            noUsageBasedAllowed: false,
           }),
             await Ser(e),
             e.notificationService.info(
               "Usage-based pricing enabled successfully. You can manage this setting at cursor.com/settings",
             ),
-            i.setIsUpsellingUsageBasedPricing(!1)
+            i.setIsUpsellingUsageBasedPricing(false)
         } catch (n) {
           let r = "Failed to enable usage-based pricing. Please try again."
           if (n instanceof du) {
             const o = dP(n)
             o?.details && (r = `${o.details.title} ${o.details.detail}`)
           }
-          e.notificationService.error(r), i.setIsUpsellingUsageBasedPricing(!1)
+          e.notificationService.error(r), i.setIsUpsellingUsageBasedPricing(false)
         }
       },
       s = Y(() =>
@@ -1532,7 +1532,7 @@ export function createUI(params) {
         M(
           o,
           I(as, {
-            onClick: () => i.setIsUpsellingUsageBasedPricing(!1),
+            onClick: () => i.setIsUpsellingUsageBasedPricing(false),
             title: "Cancel",
             type: "secondary",
             get style() {
@@ -1585,7 +1585,7 @@ export function createUI(params) {
               a
             )
           },
-          { e: void 0, t: void 0, a: void 0 },
+          { e: undefined, t: undefined, a: undefined },
         ),
         n
       )
@@ -1610,7 +1610,7 @@ export function createUI(params) {
             await o.setHardLimit({
               teamId: a?.at(0),
               hardLimit: r * 2,
-              noUsageBasedAllowed: !1,
+              noUsageBasedAllowed: false,
             }),
               e.notificationService.info(
                 `Monthly limit increased to $${r * 2}. You can manage this setting at cursor.com/settings`,
@@ -1620,20 +1620,20 @@ export function createUI(params) {
             await o.setHardLimit({
               teamId: a?.at(0),
               hardLimit: l + 20,
-              noUsageBasedAllowed: !1,
+              noUsageBasedAllowed: false,
             }),
               e.notificationService.info(
                 "Monthly limit increased by $20. You can manage this setting at cursor.com/settings",
               )
           }
-          i.setIsUpsellingHardLimit(!1)
+          i.setIsUpsellingHardLimit(false)
         } catch (o) {
           let a = "Failed to increase usage limit. Please try again."
           if (o instanceof du) {
             const l = dP(o)
             l?.details && (a = `${l.details.title} ${l.details.detail}`)
           }
-          e.notificationService.error(a), i.setIsUpsellingHardLimit(!1)
+          e.notificationService.error(a), i.setIsUpsellingHardLimit(false)
         } finally {
           aXe(e)
         }
@@ -1674,14 +1674,14 @@ export function createUI(params) {
           a,
         ),
         l.addEventListener("click", () => {
-          e.commandService.executeCommand(qDi), i.setIsUpsellingHardLimit(!1)
+          e.commandService.executeCommand(qDi), i.setIsUpsellingHardLimit(false)
         }),
         l.style.setProperty("color", "var(--vscode-textLink-foreground)"),
         l.style.setProperty("cursor", "pointer"),
         M(
           c,
           I(as, {
-            onClick: () => i.setIsUpsellingHardLimit(!1),
+            onClick: () => i.setIsUpsellingHardLimit(false),
             title: "Cancel",
             type: "secondary",
             get style() {
@@ -1734,7 +1734,7 @@ export function createUI(params) {
               h
             )
           },
-          { e: void 0, t: void 0, a: void 0 },
+          { e: undefined, t: undefined, a: undefined },
         ),
         r
       )
@@ -1763,19 +1763,19 @@ export function createUI(params) {
       },
     ]
   }
-  function mXi(i, e, t = 100, s = () => !1) {
+  function mXi(i, e, t = 100, s = () => false) {
     const n = dt()
     let r,
-      o = !1
+      o = false
     const a = (c) => {
         const h = i()
         h && (h.contains(c.target) || e(c))
       },
       l = () => {
-        r !== void 0 && (clearTimeout(r), (r = void 0)),
+        r !== undefined && (clearTimeout(r), (r = undefined)),
           o &&
             n.window?.document &&
-            (n.window.document.removeEventListener("mouseup", a), (o = !1))
+            (n.window.document.removeEventListener("mouseup", a), (o = false))
       }
     return (
       De(() => {
@@ -1785,7 +1785,7 @@ export function createUI(params) {
         }
         const c = () => {
           n.window?.document &&
-            (n.window.document.addEventListener("mouseup", a), (o = !0))
+            (n.window.document.addEventListener("mouseup", a), (o = true))
         }
         l(),
           nr(() => {
@@ -1802,13 +1802,13 @@ export function createUI(params) {
     const e = dt()
     let t
     const [s, n] = qk()
-    let r = !1
+    let r = false
     De(() => {
       i.reactiveCloser && r && i.close()
     }),
       De(() => {
         nr(() => {
-          r = !0
+          r = true
         })
       }),
       De(() => {
@@ -1819,9 +1819,9 @@ export function createUI(params) {
         h = i.marginToOverflowRoot ?? 2,
         u = i.marginToNonBlockingRoot ?? 2,
         d = i.anchor ?? "top-left",
-        g = i.isRelative ?? !1,
+        g = i.isRelative ?? false,
         p = i.nonBlockingDirection ?? "horizontal",
-        m = i.preventOverflow ?? !0,
+        m = i.preventOverflow ?? true,
         b = i.overflowRoot ?? c.document.body
       if (!m) {
         n(i.position)
@@ -1904,7 +1904,7 @@ export function createUI(params) {
             e.window.document
               .querySelector(i.nonBlockingRoot)
               ?.contains(c.target) ||
-            i.close(!0)
+            i.close(true)
         },
         300,
       )
@@ -1954,8 +1954,8 @@ export function createUI(params) {
                 }
               },
             }),
-            !1,
-            !0,
+            false,
+            true,
           ),
           M(c, () => i.children),
           c
@@ -1964,7 +1964,7 @@ export function createUI(params) {
     return [
       I(te, {
         get when() {
-          return i.shouldUseBackdrop ?? !1
+          return i.shouldUseBackdrop ?? false
         },
         get children() {
           var c = bXi()
@@ -2040,7 +2040,7 @@ export function createUI(params) {
             i.supportIcons ? a.push(...al(d)) : a.push(d), (l = c.start)
           }
           const h = r.substring(l, c.end),
-            u = q("span.highlight", void 0, ...(i.supportIcons ? al(h) : [h]))
+            u = q("span.highlight", undefined, ...(i.supportIcons ? al(h) : [h]))
           a.push(u), (l = c.end)
         }
         if (l < r.length) {
@@ -2078,7 +2078,7 @@ export function createUI(params) {
       showHover: (n, r) => {
         e({
           target: n.currentTarget,
-          appearance: { compact: !0, showPointer: !0 },
+          appearance: { compact: true, showPointer: true },
           content: r,
           position: { hoverPosition: i },
           additionalClasses: ["chat-hover-tooltip"],
@@ -2114,8 +2114,8 @@ export function createUI(params) {
             return i.items.map((E) => ({
               ...E,
               score: 1,
-              labelMatch: void 0,
-              descriptionMatch: void 0,
+              labelMatch: undefined,
+              descriptionMatch: undefined,
             }))
           const k = vm(x)
           return i.items
@@ -2123,7 +2123,7 @@ export function createUI(params) {
               const { score: D, labelMatch: P } = hb(
                   { label: E.label },
                   k,
-                  !0,
+                  true,
                   Zb,
                   {},
                 ),
@@ -2131,15 +2131,15 @@ export function createUI(params) {
                   ? hb(
                       { label: E.label, description: E.description },
                       k,
-                      !0,
+                      true,
                       Zb,
                       {},
                     )
-                  : { score: 0, descriptionMatch: void 0 },
+                  : { score: 0, descriptionMatch: undefined },
                 F = E.keywords
                   ? Math.max(
                       ...E.keywords.map(
-                        (B) => hb({ label: B }, k, !0, Zb, {}).score,
+                        (B) => hb({ label: B }, k, true, Zb, {}).score,
                       ),
                     )
                   : 0,
@@ -2219,13 +2219,13 @@ export function createUI(params) {
           E = c
         typeof E == "function" ? Rs(E, x) : (c = x),
           k.addEventListener("click", (P) => {
-            if (i.cannotToggle === !0) return
+            if (i.cannotToggle === true) return
             if (n()) {
               d()
               return
             }
             const L = P.currentTarget.getBoundingClientRect(),
-              A = i.isRelative === void 0 ? !0 : i.isRelative
+              A = i.isRelative === undefined ? true : i.isRelative
             P.stopImmediatePropagation(),
               u(
                 A
@@ -2262,10 +2262,10 @@ export function createUI(params) {
                     gap: "2px",
                     "user-select": "none",
                     "align-items": "center",
-                    cursor: i.cannotToggle === !0 ? "default" : "pointer",
+                    cursor: i.cannotToggle === true ? "default" : "pointer",
                     width: "100%",
                     "min-width": 0,
-                    opacity: n() ? 1 : void 0,
+                    opacity: n() ? 1 : undefined,
                     ...i.buttonStyle,
                   }
                 },
@@ -2275,14 +2275,14 @@ export function createUI(params) {
                   ? { onMouseEnter: (P) => a(P, i.buttonHint), onMouseLeave: l }
                   : {},
             ),
-            !1,
-            !0,
+            false,
+            true,
           ),
           M(
             k,
             I(te, {
               get when() {
-                return i.chevronRight === !0
+                return i.chevronRight === true
               },
               get children() {
                 var P = Lue()
@@ -2295,7 +2295,7 @@ export function createUI(params) {
             k,
             I(te, {
               get when() {
-                return i.cannotToggle !== !0
+                return i.cannotToggle !== true
               },
               get children() {
                 var P = Lue()
@@ -2304,7 +2304,7 @@ export function createUI(params) {
                     (L) => {
                       var A = {
                           "font-size": "10px",
-                          "padding-left": i.chevronRight ? "2px" : void 0,
+                          "padding-left": i.chevronRight ? "2px" : undefined,
                           "flex-shrink": 0,
                           ...i.labelStyle,
                         },
@@ -2319,7 +2319,7 @@ export function createUI(params) {
                         (L.e = Bi(P, A, L.e)), F !== L.t && tt(P, (L.t = F)), L
                       )
                     },
-                    { e: void 0, t: void 0 },
+                    { e: undefined, t: undefined },
                   ),
                   P
                 )
@@ -2331,7 +2331,7 @@ export function createUI(params) {
             k,
             I(te, {
               get when() {
-                return i.chevronRight !== !0
+                return i.chevronRight !== true
               },
               get children() {
                 var P = Lue()
@@ -2347,7 +2347,7 @@ export function createUI(params) {
                 return n()
               },
               children: (P) => {
-                const L = Y(() => (i.isRelative === void 0 ? !0 : i.isRelative))
+                const L = Y(() => (i.isRelative === undefined ? true : i.isRelative))
                 return I(eD, {
                   get shouldMountInPortal() {
                     return !L()
@@ -2459,7 +2459,7 @@ export function createUI(params) {
                                         : "10px",
                                       "line-height": A.description
                                         ? "18px"
-                                        : void 0,
+                                        : undefined,
                                     }
                                   },
                                 }),
@@ -2524,7 +2524,7 @@ export function createUI(params) {
                                             K
                                           )
                                         },
-                                        { e: void 0, t: void 0 },
+                                        { e: undefined, t: undefined },
                                       ),
                                       z
                                     )
@@ -2540,11 +2540,11 @@ export function createUI(params) {
                                     "background-color":
                                       F() === b()
                                         ? "var(--vscode-list-activeSelectionBackground)"
-                                        : void 0,
+                                        : undefined,
                                     color:
                                       F() === b()
                                         ? "var(--vscode-list-activeSelectionForeground)"
-                                        : void 0,
+                                        : undefined,
                                     display: "flex",
                                     "align-items": "center",
                                     gap: "4px",
@@ -2641,7 +2641,7 @@ export function createUI(params) {
       }),
       n = (r) => (r === "gpt-3.5-turbo" ? "gpt-3.5" : r)
     return I(wXi, {
-      isRelative: !1,
+      isRelative: false,
       get buttonHint() {
         return i.buttonHint
       },
@@ -2737,13 +2737,13 @@ export function createUI(params) {
     const e = dt(),
       t = Y(() =>
         e.aiSettingsService.getAvailableModelsReactive({
-          isLongContextOrDebuggerMode: !1,
-          isChat: !1,
+          isLongContextOrDebuggerMode: false,
+          isChat: false,
         }),
       ),
       s = (n) => (n === "gpt-3.5-turbo" ? "gpt-3.5" : n)
     return I(wXi, {
-      isRelative: !1,
+      isRelative: false,
       get buttonHint() {
         return i.buttonHint
       },
@@ -2825,9 +2825,9 @@ export function createUI(params) {
             .openAIModel ??
           W$,
       ),
-      [r, o] = le(!1),
-      [a, l] = le(!1),
-      [c, h] = le(!1),
+      [r, o] = le(false),
+      [a, l] = le(false),
+      [c, h] = le(false),
       u = (() => {
         var d = Mer(),
           g = d.firstChild
@@ -2843,7 +2843,7 @@ export function createUI(params) {
                 return [
                   I(Pi, {
                     get when() {
-                      return Y(() => !i.generating)() && s() === void 0
+                      return Y(() => !i.generating)() && s() === undefined
                     },
                     get children() {
                       return I(te, {
@@ -2862,7 +2862,7 @@ export function createUI(params) {
                                 return (
                                   e.reactiveStorageService
                                     .applicationUserPersistentStorage
-                                    .hallucinatedFunctionsEnabled === !0
+                                    .hallucinatedFunctionsEnabled === true
                                 )
                               },
                               get children() {
@@ -2914,11 +2914,11 @@ export function createUI(params) {
                                       get queuePositionResponse() {
                                         return i.queuePositionResponse
                                       },
-                                      hideDotsLoading: !1,
-                                      isLoading: !0,
-                                      spaceBelow: !0,
-                                      statusMessages: void 0,
-                                      conciseMessage: !0,
+                                      hideDotsLoading: false,
+                                      isLoading: true,
+                                      spaceBelow: true,
+                                      statusMessages: undefined,
+                                      conciseMessage: true,
                                       setIsUpsellFastRequestsShowing: o,
                                       setIsUpsellingUsageBasedPricing: l,
                                       setIsUpsellingHardLimit: h,
@@ -2930,7 +2930,7 @@ export function createUI(params) {
                                       get children() {
                                         return I(nXe, {
                                           setIsUpsellFastRequestsShowing: o,
-                                          conciseMessage: !0,
+                                          conciseMessage: true,
                                         })
                                       },
                                     }),
@@ -2954,7 +2954,7 @@ export function createUI(params) {
                                           () => i.statusUpdateMessages[0],
                                           null,
                                         ),
-                                        M(m, I(nf, { show: !0 }), null),
+                                        M(m, I(nf, { show: true }), null),
                                         m
                                       )
                                     },
@@ -3045,7 +3045,7 @@ export function createUI(params) {
             tt(
               d,
               "inline-prompt-button-area" +
-                (s() !== void 0 || i.plainText.length > 0
+                (s() !== undefined || i.plainText.length > 0
                   ? " inline-prompt-button-area-with-primary"
                   : ""),
             ),
@@ -3073,7 +3073,7 @@ export function createUI(params) {
                 get children() {
                   return I(lXe, {
                     setIsUpsellingUsageBasedPricing: l,
-                    isCompact: !0,
+                    isCompact: true,
                   })
                 },
               }),
@@ -3086,7 +3086,7 @@ export function createUI(params) {
                   return c()
                 },
                 get children() {
-                  return I(cXe, { setIsUpsellingHardLimit: h, isCompact: !0 })
+                  return I(cXe, { setIsUpsellingHardLimit: h, isCompact: true })
                 },
               }),
               null,
@@ -3116,7 +3116,7 @@ export function createUI(params) {
             (i.isEdit ? "Submit Edit" : "Generate")
           )
         },
-        onClick: () => i.onSubmit({ fastMode: !1, chatMode: !1 }),
+        onClick: () => i.onSubmit({ fastMode: false, chatMode: false }),
         type: "primary",
         get disabled() {
           return i.plainText.length === 0
@@ -3128,7 +3128,7 @@ export function createUI(params) {
         get title() {
           return (i.isFocused ? "\u23CE " : "") + "Submit Edit"
         },
-        onClick: () => i.onSubmit({ fastMode: !1, chatMode: !1 }),
+        onClick: () => i.onSubmit({ fastMode: false, chatMode: false }),
         type: "primary",
         extras: { style: { "margin-left": "4px" } },
       }),
@@ -3140,7 +3140,7 @@ export function createUI(params) {
           )
         },
         onClick: () => {
-          i.onSubmit({ fastMode: !1, chatMode: !0 })
+          i.onSubmit({ fastMode: false, chatMode: true })
         },
         type: "secondary",
         get disabled() {
@@ -3153,7 +3153,7 @@ export function createUI(params) {
         get title() {
           return (i.isFocused ? "\u2325\u23CE " : "") + (i.isEdit, "fast mode")
         },
-        onClick: () => i.onSubmit({ fastMode: !0, chatMode: !1 }),
+        onClick: () => i.onSubmit({ fastMode: true, chatMode: false }),
         type: "secondary",
         get disabled() {
           return i.plainText.length === 0
@@ -3208,7 +3208,7 @@ export function createUI(params) {
       })
     },
     Ver = (i) => {
-      const e = ud(GYe, { useDefaultKeybindingEvenIfNotActive: !0 })
+      const e = ud(GYe, { useDefaultKeybindingEvenIfNotActive: true })
       return I(as, {
         get title() {
           return Y(() => !!e())() ? `${e()} Reject` : "Reject"
@@ -3228,7 +3228,7 @@ export function createUI(params) {
               ?.getLabel() + " to toggle"
           )
         },
-        isNotClickable: !0,
+        isNotClickable: true,
         type: "secondary",
       }),
     qer = (i) =>
@@ -3253,16 +3253,16 @@ export function createUI(params) {
     })
     let t,
       s,
-      n = { value: void 0 }
+      n = { value: undefined }
     const r = ss()?.ResizeObserver
     let o = 0
-    const [a, l] = le(void 0)
+    const [a, l] = le(undefined)
     De(() => {
       i.scrollingDirection === "vertical"
         ? l({ width: "100%", "min-height": "100%" })
         : i.scrollingDirection === "horizontal"
           ? l({ height: "100%", "min-width": "100%" })
-          : l(void 0)
+          : l(undefined)
     })
     const c = i.triggerOnHeightChange,
       h = Y(() => {
@@ -3270,11 +3270,11 @@ export function createUI(params) {
         return () => {
           if (!t) return
           const S = t.getBoundingClientRect().height
-          let x = !0
-          S !== o ? ((o = S), (x = c ?? !1)) : g(), x && C && C()
+          let x = true
+          S !== o ? ((o = S), (x = c ?? false)) : g(), x && C && C()
         }
       }),
-      [u, d] = le(!1),
+      [u, d] = le(false),
       g = () => {
         if (!n.value) return
         const C = n.value.getBoundingClientRect(),
@@ -3295,7 +3295,7 @@ export function createUI(params) {
       _l(
         () => i.scrollToBottomTrigger,
         (C) => {
-          C !== void 0 &&
+          C !== undefined &&
             setTimeout(() => {
               i.autoScrollToBottom ? p() : m()
             }, 0)
@@ -3327,7 +3327,7 @@ export function createUI(params) {
             S &&
               e.setScrollDimensions(
                 { scrollWidth: S.width, scrollHeight: S.height },
-                !0,
+                true,
               )
           },
         ),
@@ -3336,7 +3336,7 @@ export function createUI(params) {
         const C = new r((S) => {
           for (const x of S) {
             const { width: k, height: E } = x.contentRect
-            e.setScrollDimensions({ scrollWidth: k, scrollHeight: E }, !0)
+            e.setScrollDimensions({ scrollWidth: k, scrollHeight: E }, true)
           }
         })
         t && C.observe(t),
@@ -3348,7 +3348,7 @@ export function createUI(params) {
         const C = new r((S) => {
           for (const x of S) {
             const { width: k, height: E } = x.contentRect
-            e.setScrollDimensions({ width: k, height: E }, !0),
+            e.setScrollDimensions({ width: k, height: E }, true),
               n.value &&
                 (i.scrollingDirection === "horizontal"
                   ? (n.value.style.width = `${k}px`)
@@ -3395,8 +3395,8 @@ export function createUI(params) {
                 },
                 () => i.innerContainerDivProps,
               ),
-              !1,
-              !0,
+              false,
+              true,
             )
           var x = t
           return (
@@ -3412,7 +3412,7 @@ export function createUI(params) {
                   D = i.innerContainerClass
                 return (k.e = Bi(S, E, k.e)), D !== k.t && tt(S, (k.t = D)), k
               },
-              { e: void 0, t: void 0 },
+              { e: undefined, t: undefined },
             ),
             C
           )
@@ -3420,7 +3420,7 @@ export function createUI(params) {
       )(),
       w = new Zen(
         y,
-        { mouseWheelSmoothScroll: !1, ...(i.nonReactiveElementOptions ?? {}) },
+        { mouseWheelSmoothScroll: false, ...(i.nonReactiveElementOptions ?? {}) },
         e,
       )
     if (i.childStyle)
@@ -3431,19 +3431,19 @@ export function createUI(params) {
     return (
       De(() => {
         i.disableScroll
-          ? w.updateOptions({ horizontal: 2, vertical: 2, handleMouseWheel: !1 })
+          ? w.updateOptions({ horizontal: 2, vertical: 2, handleMouseWheel: false })
           : w.updateOptions({
               horizontal:
                 i.scrollingDirection === "horizontal" ||
                 i.scrollingDirection === "both"
                   ? 1
-                  : void 0,
+                  : undefined,
               vertical:
                 i.scrollingDirection === "vertical" ||
                 i.scrollingDirection === "both"
                   ? 1
-                  : void 0,
-              handleMouseWheel: !0,
+                  : undefined,
+              handleMouseWheel: true,
             })
       }),
       De(() => {
@@ -3471,7 +3471,7 @@ export function createUI(params) {
                 E = { ...i.style }
               return k !== x.e && tt(C, (x.e = k)), (x.t = Bi(C, E, x.t)), x
             },
-            { e: void 0, t: void 0 },
+            { e: undefined, t: undefined },
           ),
           C
         )
@@ -3481,10 +3481,10 @@ export function createUI(params) {
   function kXi(i) {
     const e = XI()
     return {
-      forceIntegerValues: !1,
+      forceIntegerValues: false,
       smoothScrollDuration: 0,
       scheduleAtNextAnimationFrame: (t) => Oa(e.window, t),
-      stickyScrollVertical: i ? "down" : void 0,
+      stickyScrollVertical: i ? "down" : undefined,
     }
   }
   function zk(i) {
@@ -3543,7 +3543,7 @@ export function createUI(params) {
             c.case === "file" ? (y = `@${li(h)}`) : (y = `@${b[0].name}`),
               (a[y] = [])
             for (const w of l.items.filter(
-              (C) => C.status?.shownToTheModel === !0,
+              (C) => C.status?.shownToTheModel === true,
             )) {
               const C = w.item.item.value
               b.forEach((S) => {

@@ -163,9 +163,9 @@ export function createInlineDiffService(params) {
             () => this.z.nonPersistentStorage.promptBars.map((m) => m.diffId),
           ],
           onChange: () => {
-            let m = !1
+            let m = false
             for (const b of this.z.nonPersistentStorage.promptBars)
-              if (b.diffId !== void 0) {
+              if (b.diffId !== undefined) {
                 const y = this.c.get(b.diffId)
                 if (
                   y?.inlineDiff.generationUUID &&
@@ -173,7 +173,7 @@ export function createInlineDiffService(params) {
                     (w) => w.generationUUID === y?.inlineDiff.generationUUID,
                   )
                 ) {
-                  m = !0
+                  m = true
                   break
                 }
               }
@@ -189,9 +189,9 @@ export function createInlineDiffService(params) {
       const t = this.c.get(e)
       if (!t) return
       const s = this.H.activeEditorPane
-      if (s === void 0) return
+      if (s === undefined) return
       const n = s.getControl()
-      n !== void 0 &&
+      n !== undefined &&
         Pn(n) &&
         this.I.extUri.isEqual(n.getModel()?.uri, t.inlineDiff.uri) &&
         n.revealRangeInCenter({
@@ -210,7 +210,7 @@ export function createInlineDiffService(params) {
           "promptBars",
           (s) => s.id === t.id,
           "diffId",
-          void 0,
+          undefined,
         ),
         this.c.delete(e.id),
         e.remove(),
@@ -251,12 +251,12 @@ export function createInlineDiffService(params) {
                   diffId: e,
                   composerMetadata: l.composerMetadata,
                 },
-                accepted: s ?? !1,
+                accepted: s ?? false,
               }))
           },
         )
         this.pushUndoElement(a, {}),
-          (t ?? !1) &&
+          (t ?? false) &&
             n.promptBarId &&
             this.Q(n.promptBarId)?.diffId === e &&
             this.U(n.promptBarId)
@@ -280,9 +280,9 @@ export function createInlineDiffService(params) {
     }
     U(e) {
       const t = this.Q(e)
-      if (t?.uri === void 0) return
+      if (t?.uri === undefined) return
       this.S(e)
-      const s = { current: void 0 }
+      const s = { current: undefined }
       let n
       if (
         (this.w
@@ -298,7 +298,7 @@ export function createInlineDiffService(params) {
           .finally(() => {
             n?.dispose()
           }),
-        t?.diffId === void 0)
+        t?.diffId === undefined)
       ) {
         let r
         this.w
@@ -360,7 +360,7 @@ export function createInlineDiffService(params) {
                         },
                         options: {
                           description: "promptBar-tracking-range",
-                          isWholeLine: !0,
+                          isWholeLine: true,
                         },
                       },
                     ],
@@ -438,7 +438,7 @@ export function createInlineDiffService(params) {
                     },
                     options: {
                       description: "promptBar-tracking-range",
-                      isWholeLine: !0,
+                      isWholeLine: true,
                     },
                   },
                 ],
@@ -488,7 +488,7 @@ export function createInlineDiffService(params) {
           r.applyEdits(t),
           s.forEach((a) => {
             const l = this.c.get(a.id)
-            l && (l.active = o.get(a.id) || !1)
+            l && (l.active = o.get(a.id) || false)
           })
       } finally {
         n?.dispose()
@@ -517,13 +517,13 @@ export function createInlineDiffService(params) {
           n.undo,
           n.redo,
         )
-        this.pushUndoElement(l, { breakConsolidation: !0 })
+        this.pushUndoElement(l, { breakConsolidation: true })
       }
       if (!s) {
         let l = pp(o.inlineDiff),
           c,
-          h = !1,
-          u = t ? this.Q(t) : void 0
+          h = false,
+          u = t ? this.Q(t) : undefined
         const d = new cb(
           "Undo Create Diff",
           "undo-create-diff",
@@ -534,8 +534,8 @@ export function createInlineDiffService(params) {
             g &&
               ((l = pp(g.inlineDiff)),
               this.cancelInUndo(a),
-              (u = t ? this.Q(t) : void 0),
-              u?.diffId === g.id && (h = !0),
+              (u = t ? this.Q(t) : undefined),
+              u?.diffId === g.id && (h = true),
               this._remove(g),
               this.q.fire({
                 diffInfo: {
@@ -543,7 +543,7 @@ export function createInlineDiffService(params) {
                   diffId: a,
                   composerMetadata: g.composerMetadata,
                 },
-                accepted: !1,
+                accepted: false,
               }))
           },
           async () => {
@@ -588,7 +588,7 @@ export function createInlineDiffService(params) {
     }
     acceptPartialDiff(e, t) {
       const s = this.c.get(e)
-      if (!s) return !1
+      if (!s) return false
       s.inlineDiff.isHidden ||
         this.J.publicLogCapture("inlineDiffAcceptPartial", {
           generationUUID: s.inlineDiff.generationUUID,
@@ -602,7 +602,7 @@ export function createInlineDiffService(params) {
             () => {},
             () => {},
           ),
-          { breakConsolidation: !0 },
+          { breakConsolidation: true },
         )
       let n = [],
         r = []
@@ -616,7 +616,7 @@ export function createInlineDiffService(params) {
       }
       const o = s.acceptPartialDiff(t)
       return (
-        o && this.remove(e, !0, !0),
+        o && this.remove(e, true, true),
         this.s.fire({
           diffInfo: {
             diffId: e,
@@ -631,7 +631,7 @@ export function createInlineDiffService(params) {
     }
     rejectPartialDiff(e, t) {
       const s = this.c.get(e)
-      if (!s) return !1
+      if (!s) return false
       s.inlineDiff.isHidden ||
         this.J.publicLogCapture("inlineDiffRejectPartial", {
           generationUUID: s.inlineDiff.generationUUID,
@@ -645,7 +645,7 @@ export function createInlineDiffService(params) {
             () => {},
             () => {},
           ),
-          { breakConsolidation: !0 },
+          { breakConsolidation: true },
         )
       let n = [],
         r = []
@@ -659,7 +659,7 @@ export function createInlineDiffService(params) {
       }
       const o = s.rejectPartialDiff(t)
       return (
-        o && this.remove(e, void 0, !1),
+        o && this.remove(e, undefined, false),
         this.t.fire({
           diffInfo: {
             diffId: e,
@@ -690,13 +690,13 @@ export function createInlineDiffService(params) {
           ),
           {
             breakConsolidation:
-              t?.dontBreakConsolidation !== void 0
+              t?.dontBreakConsolidation !== undefined
                 ? !t.dontBreakConsolidation
-                : !0,
+                : true,
           },
         ),
         s.inlineDiff.isHidden ? s.reject() : s.accept(),
-        this.remove(e, !0, !0),
+        this.remove(e, true, true),
         this.j.fire({
           diffId: e,
           uri: s.inlineDiff.uri,
@@ -727,14 +727,14 @@ export function createInlineDiffService(params) {
           ),
           {
             breakConsolidation:
-              t?.dontBreakConsolidation !== void 0
+              t?.dontBreakConsolidation !== undefined
                 ? !t.dontBreakConsolidation
-                : !0,
+                : true,
           },
         ),
         s.inlineDiff.isHidden ? s.accept() : s.reject(),
         s.callRejectCallback(),
-        this.remove(e, t?.close, !1),
+        this.remove(e, t?.close, false),
         t?.rejectSilently ||
           this.m.fire({
             diffId: e,
@@ -765,7 +765,7 @@ export function createInlineDiffService(params) {
       extraContextLinesBelow: c,
       prompt: h,
       undoRedo: u,
-      isHidden: d = !1,
+      isHidden: d = false,
       diffIdCallback: g,
       doneCallback: p,
       cancelGenerationWithNoChangesCallback: m,
@@ -782,23 +782,23 @@ export function createInlineDiffService(params) {
           prompt: h,
           isHidden: d,
           hideDeletionViewZones: s,
-          attachedToPromptBar: g !== void 0,
+          attachedToPromptBar: g !== undefined,
           extraContextLinesAbove: l,
           extraContextLinesBelow: c,
           composerId: w,
         },
         S = await this.addDiff(C, y, d, u)
-      S.activate(p, m, b), g !== void 0 && g(S.id)
-      let x = !1
+      S.activate(p, m, b), g !== undefined && g(S.id)
+      let x = false
       try {
         for await (const k of r) S.addLinesToDiff([k])
       } catch {
-        x = !0
+        x = true
       }
       x ? S.finishFailure() : S.finishSuccess()
     }
     pushUndoElement(e, t) {
-      if (t.breakConsolidation === !0) {
+      if (t.breakConsolidation === true) {
         this.F.pushElement(e)
         return
       }
@@ -813,7 +813,7 @@ export function createInlineDiffService(params) {
     getGroupedChanges({ diffId: e, mergeRadius: t = 15 }) {
       const s = [],
         n = this.z.nonPersistentStorage.inlineDiffs.find((l) => l.id === e)
-      if (n === void 0) return s
+      if (n === undefined) return s
       const r = n.changes.sort(
         (l, c) => l.addedRange.startLineNumber - c.addedRange.startLineNumber,
       )
@@ -823,12 +823,12 @@ export function createInlineDiffService(params) {
         const c = r[l],
           h = o.at(-1)
         extUri.isEqual(a, n.uri) &&
-        h !== void 0 &&
+        h !== undefined &&
         h.addedRange.endLineNumberExclusive + t >= c.addedRange.startLineNumber
           ? o.push(c)
           : (o.length > 0 && s.push(o), (o = [c]), (a = n.uri))
       }
-      return a !== void 0 && o.length > 0 && s.push(o), s
+      return a !== undefined && o.length > 0 && s.push(o), s
     }
     async applyNewModelLinesToFile(e) {
       const { uri: t, newModelLines: s } = e,
@@ -839,7 +839,7 @@ export function createInlineDiffService(params) {
       const r = await this.w.createModelReference(t),
         o = r.object.textEditorModel,
         a = o.getLinesContent(),
-        l = rLt(a, s, !0, !1)
+        l = rLt(a, s, true, false)
       this.P.write(t, l.newFullRangeTextLines.join(o.getEOL())), r.dispose()
     }
   }
@@ -864,7 +864,7 @@ export function createInlineDiffService(params) {
       dLt,
     )),
     Ve(oy, dLt, 1)
-  var _Ui = (i) => (i === void 0 ? [""] : i.newTextLines),
+  var _Ui = (i) => (i === undefined ? [""] : i.newTextLines),
     f2 = class extends V {
       get id() {
         return this.inlineDiff.id
@@ -883,11 +883,11 @@ export function createInlineDiffService(params) {
           (this.f = MI.getDefault()),
           (this.g = MI.getLegacy()),
           (this.h = []),
-          (this.j = !1),
+          (this.j = false),
           (this.m = 0),
           (this.n = 0),
-          (this.q = !1),
-          (this.active = !1),
+          (this.q = false),
+          (this.active = false),
           (this.H = []),
           (this.lastUndoEdits = null),
           (this.c = e),
@@ -896,7 +896,7 @@ export function createInlineDiffService(params) {
           (this.inlineDiff = {
             id: rt(),
             changes: [],
-            activeLine: void 0,
+            activeLine: undefined,
             pendingRange: {
               startLineNumber: 1,
               endLineNumberExclusive:
@@ -905,11 +905,11 @@ export function createInlineDiffService(params) {
                 1,
             },
             newTextLines: t.newTextLines ?? [],
-            isHidden: !1,
-            onAccept: void 0,
-            onReject: void 0,
-            canUndoUpdates: !0,
-            showNativeAcceptReject: !1,
+            isHidden: false,
+            onAccept: undefined,
+            onReject: undefined,
+            canUndoUpdates: true,
+            showNativeAcceptReject: false,
             ...t,
           })
         const g = u.onDidChangeConfiguration((p) => {
@@ -934,7 +934,7 @@ export function createInlineDiffService(params) {
                   },
                   options: {
                     description: "promptBar-tracking-range",
-                    isWholeLine: !0,
+                    isWholeLine: true,
                   },
                 },
               ],
@@ -957,16 +957,16 @@ export function createInlineDiffService(params) {
               diffId: t.id,
               height: 0,
               contextSessionUuid: this.y.createContextSession(mze()).uuid,
-              queryHistory: void 0,
-              chatResponse: void 0,
+              queryHistory: undefined,
+              chatResponse: undefined,
               currentRangeDecorationId: m,
-              inlineChatHistory: void 0,
+              inlineChatHistory: undefined,
               previousStructuredTextsNewestFirst: [],
               modifyTextModelPrePromptBarBackwardEdit: [],
               modifyTextModelPrePromptBarForwardEdit: [],
-              generating: !1,
+              generating: false,
               forceRerenderInputBox: 0,
-              prePromptBarCursorPosition: void 0,
+              prePromptBarCursorPosition: undefined,
               createdAt: Date.now(),
             }
           }
@@ -1077,7 +1077,7 @@ export function createInlineDiffService(params) {
             e.range.endLineNumber -
             this.inlineDiff.currentRange.startLineNumber +
             1,
-          h = !1
+          h = false
         c > this.inlineDiff.newTextLines.length &&
           ((c = this.inlineDiff.newTextLines.length),
           (o = this.inlineDiff.newTextLines[c - 1].length + 1),
@@ -1086,7 +1086,7 @@ export function createInlineDiffService(params) {
             : (console.warn(
                 "We technically have a bug here if the line is not at the start... To fix it we'd need some magic tho like remembering the entire state of the document... so we'll ignore it for now",
               ),
-              (h = !0)))
+              (h = true)))
         const d = (
             this.inlineDiff.newTextLines[l - 1].slice(0, r - 1) +
             n +
@@ -1100,7 +1100,7 @@ export function createInlineDiffService(params) {
         h && g.length > 0 && g[g.length - 1] === "" && g.pop()
         const p = new Es(a, a + g.length)
         ;(this.inlineDiff.currentRange = p), (this.inlineDiff.newTextLines = g)
-        const m = this.getDiffState(!0)
+        const m = this.getDiffState(true)
         ;(this.inlineDiff.changes = m.changes),
           this.s.setNonPersistentStorage("inlineDiffs", (b) => [
             ...b.filter((y) => y.id !== this.inlineDiff.id),
@@ -1110,13 +1110,13 @@ export function createInlineDiffService(params) {
       }
       finishFailure() {
         if (!this.active) return
-        let e = !0
+        let e = true
         for (let n = 0; n < this.inlineDiff.newTextLines.length; n++)
           if (
             this.inlineDiff.newTextLines[n] !==
             this.inlineDiff.originalTextLines[n]
           ) {
-            e = !1
+            e = false
             break
           }
         if (e) {
@@ -1124,7 +1124,7 @@ export function createInlineDiffService(params) {
           return
         }
         const t = pp(this.inlineDiff),
-          s = this.getDiffState(!1)
+          s = this.getDiffState(false)
         ;(this.inlineDiff.newTextLines = s.newFullRangeTextLines),
           this.handleDiffState(s, t),
           this.I(),
@@ -1133,7 +1133,7 @@ export function createInlineDiffService(params) {
       finishSuccess() {
         if (!this.active) return
         const e = pp(this.inlineDiff),
-          t = this.getDiffState(!0)
+          t = this.getDiffState(true)
         this.handleDiffState(t, e), this.I(), this.J()
       }
       reject() {
@@ -1141,13 +1141,13 @@ export function createInlineDiffService(params) {
         this.s.setNonPersistentStorage(
           "cppState",
           "shouldNotTriggerFromInlineDiffReject",
-          !0,
+          true,
         ),
           setTimeout(() => {
             this.s.setNonPersistentStorage(
               "cppState",
               "shouldNotTriggerFromInlineDiffReject",
-              !1,
+              false,
             )
           }, 1e3)
         for (const c of this.inlineDiff.changes) {
@@ -1186,7 +1186,7 @@ export function createInlineDiffService(params) {
             h,
             U.parse(`inline-diff-reject-anysphere://${Q8n()}`),
           )),
-            o.push(...a.applyEdits(e, !0))
+            o.push(...a.applyEdits(e, true))
           for (let u = e.length - 1; u >= 0; u--)
             this.c.object.textEditorModel.applyEdits([e[u]])
         } catch (c) {
@@ -1308,7 +1308,7 @@ export function createInlineDiffService(params) {
               ? this.c.object.textEditorModel.getEOL()
               : "",
           o = t.removedTextLines.join(this.c.object.textEditorModel.getEOL()) + r,
-          a = { range: n, text: o, forceMoveMarkers: !0 }
+          a = { range: n, text: o, forceMoveMarkers: true }
         this.u.recordPartialRejectEvent({
           model: this.c.object.textEditorModel,
           requestId: this.inlineDiff.generationUUID,
@@ -1325,7 +1325,7 @@ export function createInlineDiffService(params) {
           u = this.inlineDiff.uri,
           d = []
         try {
-          d.push(...this.c.object.textEditorModel.applyEdits([a], !0))
+          d.push(...this.c.object.textEditorModel.applyEdits([a], true))
         } catch (p) {
           console.warn(
             "Weird undo edit bug that I don't like... But if it for the cursor state only then it is probably fine?",
@@ -1365,9 +1365,9 @@ export function createInlineDiffService(params) {
                 this.c.object.textEditorModel,
               ))
           }
-          return this.remove(), !0
+          return this.remove(), true
         }
-        return !1
+        return false
       }
       findClosestChange(e) {
         const t = e.lineNumber - this.inlineDiff.currentRange.startLineNumber + 1
@@ -1431,7 +1431,7 @@ export function createInlineDiffService(params) {
         }),
           (this.inlineDiff.currentRange = n),
           (this.inlineDiff.originalTextLines = s)
-        const u = this.getDiffState(!0)
+        const u = this.getDiffState(true)
         ;(this.inlineDiff.changes = u.changes),
           this.s.setNonPersistentStorage("inlineDiffs", (g) => [
             ...g.filter((p) => p.id !== this.inlineDiff.id),
@@ -1462,8 +1462,8 @@ export function createInlineDiffService(params) {
               numUnresolved: 0,
             }),
             this.remove(),
-            !0)
-          : !1
+            true)
+          : false
       }
       accept() {
         this.u.recordAcceptEvent({
@@ -1485,7 +1485,7 @@ export function createInlineDiffService(params) {
         ;(this.h = []), e.deltaDecorations(t, [])
       }
       getShouldIgnoreTrimWhitespace() {
-        return !1
+        return false
       }
       getDiffState(e) {
         return rLt(
@@ -1496,7 +1496,7 @@ export function createInlineDiffService(params) {
           this.getShouldIgnoreTrimWhitespace(),
         )
       }
-      addLinesToDiff(e, t = !1) {
+      addLinesToDiff(e, t = false) {
         if (!this.active) return
         const s = []
         for (const o of e) {
@@ -1511,7 +1511,7 @@ export function createInlineDiffService(params) {
         }
         const n = pp(this.inlineDiff)
         this.inlineDiff.newTextLines.push(...s)
-        const r = this.getDiffState(!1)
+        const r = this.getDiffState(false)
         this.handleDiffState(r, n, t), this.I()
       }
       I() {
@@ -1563,7 +1563,7 @@ export function createInlineDiffService(params) {
               },
             }
           t.push(l)
-          let c = !1
+          let c = false
           if (
             r.relativeInnerChanges &&
             !this.inlineDiff.isHidden &&
@@ -1572,7 +1572,7 @@ export function createInlineDiffService(params) {
             const b = {
                 className: "inline-diff-inner-change-added",
                 description: "inline-diff-inner-change-added",
-                shouldFillLineOnLineBreak: !0,
+                shouldFillLineOnLineBreak: true,
               },
               y = {
                 className:
@@ -1581,7 +1581,7 @@ export function createInlineDiffService(params) {
                   "inline-diff-inner-change-addedinline-diff-inner-empty",
               }
             for (const w of r.relativeInnerChanges) {
-              c = !0
+              c = true
               const C = new G(
                   o + w.modifiedRange.startLineNumber - 1,
                   w.modifiedRange.startColumn,
@@ -1645,7 +1645,7 @@ export function createInlineDiffService(params) {
                   description: h,
                   className: h,
                   inlineClassName: u,
-                  isWholeLine: !0,
+                  isWholeLine: true,
                   ...(this.inlineDiff.isHidden
                     ? {}
                     : {
@@ -1663,7 +1663,7 @@ export function createInlineDiffService(params) {
                   description: h,
                   className: h,
                   inlineClassName: u,
-                  isWholeLine: !0,
+                  isWholeLine: true,
                   ...(this.inlineDiff.isHidden
                     ? {}
                     : {
@@ -1681,7 +1681,7 @@ export function createInlineDiffService(params) {
                 className: e
                   ? "inline-diff-indented-subset"
                   : "inline-diff-indented-subset-unthemed",
-                isWholeLine: !0,
+                isWholeLine: true,
               },
             }
             t.push(b)
@@ -1692,7 +1692,7 @@ export function createInlineDiffService(params) {
                 description: h,
                 className: h,
                 inlineClassName: u,
-                isWholeLine: !0,
+                isWholeLine: true,
                 ...(this.inlineDiff.isHidden
                   ? {}
                   : {
@@ -1725,7 +1725,7 @@ export function createInlineDiffService(params) {
               options: {
                 description: "inline-diff-current",
                 className: "inline-diff-current",
-                isWholeLine: !0,
+                isWholeLine: true,
               },
             })
           }
@@ -1749,14 +1749,14 @@ export function createInlineDiffService(params) {
               options: {
                 description: "inline-diff-pending",
                 className: "inline-diff-pending",
-                isWholeLine: !0,
+                isWholeLine: true,
               },
             })
           }
         }
         this.h = this.c.object.textEditorModel.deltaDecorations(this.h, t)
       }
-      handleDiffState(e, t, s = !1, n = !1) {
+      handleDiffState(e, t, s = false, n = false) {
         !this.active &&
           !n &&
           console.error(
@@ -1771,7 +1771,7 @@ export function createInlineDiffService(params) {
           )
         this.H = o
         let a = []
-        this.inlineDiff.isHidden || (a = r.applyEdits(o, !0)),
+        this.inlineDiff.isHidden || (a = r.applyEdits(o, true)),
           this.inlineDiff.isHidden ||
             (this.inlineDiff.currentRange = new Es(
               this.inlineDiff.currentRange.startLineNumber,
@@ -1814,8 +1814,8 @@ export function createInlineDiffService(params) {
           this.s.setNonPersistentStorage("inprogressAIGenerations", (e) =>
             e.filter((t) => t.generationUUID !== this.inlineDiff.generationUUID),
           ),
-          (this.active = !1),
-          (this.j = !0)
+          (this.active = false),
+          (this.j = true)
       }
       setDiff(e) {
         ;(this.inlineDiff = e),
@@ -1826,13 +1826,13 @@ export function createInlineDiffService(params) {
           this.I()
       }
       activate(e, t, s) {
-        ;(this.active = !0),
+        ;(this.active = true),
           (this.doneCallback = e),
           (this.cancelGenerationWithNoChangesCallback = t),
           (this.rejectCallback = s)
       }
       J() {
-        ;(this.active = !1),
+        ;(this.active = false),
           this.doneCallback &&
             this.doneCallback({
               generationUUID: this.inlineDiff.generationUUID,

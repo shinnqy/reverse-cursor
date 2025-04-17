@@ -159,8 +159,8 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "original", kind: "scalar", T: 9, repeated: !0 },
-          { no: 2, name: "modified", kind: "scalar", T: 9, repeated: !0 },
+          { no: 1, name: "original", kind: "scalar", T: 9, repeated: true },
+          { no: 2, name: "modified", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -191,7 +191,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "diffs", kind: "message", T: J9, repeated: !0 },
+          { no: 1, name: "diffs", kind: "message", T: J9, repeated: true },
           { no: 2, name: "diff_type", kind: "enum", T: v.getEnumType(cI) },
         ])
       }
@@ -237,7 +237,7 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "from", kind: "scalar", T: 9 },
           { no: 2, name: "to", kind: "scalar", T: 9 },
-          { no: 3, name: "chunks", kind: "message", T: eoe, repeated: !0 },
+          { no: 3, name: "chunks", kind: "message", T: eoe, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -273,7 +273,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "content", kind: "scalar", T: 9 },
-          { no: 2, name: "lines", kind: "scalar", T: 9, repeated: !0 },
+          { no: 2, name: "lines", kind: "scalar", T: 9, repeated: true },
           { no: 3, name: "old_start", kind: "scalar", T: 5 },
           { no: 4, name: "old_lines", kind: "scalar", T: 5 },
           { no: 5, name: "new_start", kind: "scalar", T: 5 },
@@ -392,15 +392,15 @@ export function createAIServiceV1(params) {
           { no: 1, name: "remote_url", kind: "scalar", T: 9 },
           { no: 2, name: "commit_id", kind: "scalar", T: 9 },
           { no: 3, name: "git_patch", kind: "scalar", T: 9 },
-          { no: 4, name: "unsaved_files", kind: "message", T: Pgn, repeated: !0 },
+          { no: 4, name: "unsaved_files", kind: "message", T: Pgn, repeated: true },
           { no: 5, name: "unix_timestamp_ms", kind: "scalar", T: 1 },
-          { no: 6, name: "open_editors", kind: "message", T: Lgn, repeated: !0 },
+          { no: 6, name: "open_editors", kind: "message", T: Lgn, repeated: true },
           {
             no: 7,
             name: "file_diff_histories",
             kind: "message",
             T: Ngn,
-            repeated: !0,
+            repeated: true,
           },
           { no: 8, name: "branch_name", kind: "scalar", T: 9 },
           { no: 9, name: "branch_notes", kind: "scalar", T: 9 },
@@ -411,7 +411,7 @@ export function createAIServiceV1(params) {
             name: "past_thoughts",
             kind: "message",
             T: Rgn,
-            repeated: !0,
+            repeated: true,
           },
           { no: 13, name: "base_branch_name", kind: "scalar", T: 9 },
           { no: 14, name: "base_branch_commit_id", kind: "scalar", T: 9 },
@@ -468,7 +468,7 @@ export function createAIServiceV1(params) {
           (this.relativeWorkspacePath = ""),
           (this.editorGroupIndex = 0),
           (this.editorGroupId = 0),
-          (this.isActive = !1),
+          (this.isActive = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -514,7 +514,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "file_name", kind: "scalar", T: 9 },
-          { no: 2, name: "diff_history", kind: "scalar", T: 9, repeated: !0 },
+          { no: 2, name: "diff_history", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -628,7 +628,7 @@ export function createAIServiceV1(params) {
         super(),
           (this.text = ""),
           (this.lineNumber = 0),
-          (this.isSignature = !1),
+          (this.isSignature = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -674,19 +674,19 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
-          { no: 2, name: "file_contents", kind: "scalar", T: 9, opt: !0 },
-          { no: 9, name: "file_contents_length", kind: "scalar", T: 5, opt: !0 },
+          { no: 2, name: "file_contents", kind: "scalar", T: 9, opt: true },
+          { no: 9, name: "file_contents_length", kind: "scalar", T: 5, opt: true },
           { no: 3, name: "range", kind: "message", T: RC },
           { no: 4, name: "contents", kind: "scalar", T: 9 },
           { no: 5, name: "signatures", kind: "message", T: Agn },
-          { no: 6, name: "override_contents", kind: "scalar", T: 9, opt: !0 },
-          { no: 7, name: "original_contents", kind: "scalar", T: 9, opt: !0 },
+          { no: 6, name: "override_contents", kind: "scalar", T: 9, opt: true },
+          { no: 7, name: "original_contents", kind: "scalar", T: 9, opt: true },
           {
             no: 8,
             name: "detailed_lines",
             kind: "message",
             T: ASt,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -715,7 +715,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "ranges", kind: "message", T: RC, repeated: !0 },
+          { no: 1, name: "ranges", kind: "message", T: RC, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -787,7 +787,7 @@ export function createAIServiceV1(params) {
             name: "related_information",
             kind: "message",
             T: MSt,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -921,7 +921,7 @@ export function createAIServiceV1(params) {
         super(),
           (this.relativeWorkspacePath = ""),
           (this.contents = ""),
-          (this.relyOnFilesync = !1),
+          (this.relyOnFilesync = false),
           (this.cells = []),
           (this.topChunks = []),
           (this.contentsStartAtLine = 0),
@@ -944,12 +944,12 @@ export function createAIServiceV1(params) {
           { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
           { no: 2, name: "contents", kind: "scalar", T: 9 },
           { no: 18, name: "rely_on_filesync", kind: "scalar", T: 8 },
-          { no: 17, name: "sha_256_hash", kind: "scalar", T: 9, opt: !0 },
-          { no: 16, name: "cells", kind: "message", T: Fgn, repeated: !0 },
-          { no: 10, name: "top_chunks", kind: "message", T: $gn, repeated: !0 },
+          { no: 17, name: "sha_256_hash", kind: "scalar", T: 9, opt: true },
+          { no: 16, name: "cells", kind: "message", T: Fgn, repeated: true },
+          { no: 10, name: "top_chunks", kind: "message", T: $gn, repeated: true },
           { no: 9, name: "contents_start_at_line", kind: "scalar", T: 5 },
           { no: 3, name: "cursor_position", kind: "message", T: Qm },
-          { no: 4, name: "dataframes", kind: "message", T: $St, repeated: !0 },
+          { no: 4, name: "dataframes", kind: "message", T: $St, repeated: true },
           { no: 8, name: "total_number_of_lines", kind: "scalar", T: 5 },
           { no: 5, name: "language_id", kind: "scalar", T: 9 },
           { no: 6, name: "selection", kind: "message", T: RC },
@@ -958,16 +958,16 @@ export function createAIServiceV1(params) {
             name: "alternative_version_id",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
-          { no: 7, name: "diagnostics", kind: "message", T: qRi, repeated: !0 },
-          { no: 14, name: "file_version", kind: "scalar", T: 5, opt: !0 },
+          { no: 7, name: "diagnostics", kind: "message", T: qRi, repeated: true },
+          { no: 14, name: "file_version", kind: "scalar", T: 5, opt: true },
           {
             no: 15,
             name: "cell_start_lines",
             kind: "scalar",
             T: 5,
-            repeated: !0,
+            repeated: true,
           },
           { no: 19, name: "workspace_root_path", kind: "scalar", T: 9 },
         ])
@@ -1017,7 +1017,7 @@ export function createAIServiceV1(params) {
           (this.apiKey = ""),
           (this.baseUrl = ""),
           (this.deployment = ""),
-          (this.useAzure = !1),
+          (this.useAzure = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -1059,12 +1059,12 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "model_name", kind: "scalar", T: 9, opt: !0 },
-          { no: 2, name: "api_key", kind: "scalar", T: 9, opt: !0 },
-          { no: 3, name: "enable_ghost_mode", kind: "scalar", T: 8, opt: !0 },
-          { no: 4, name: "azure_state", kind: "message", T: Ogn, opt: !0 },
-          { no: 5, name: "enable_slow_pool", kind: "scalar", T: 8, opt: !0 },
-          { no: 6, name: "openai_api_base_url", kind: "scalar", T: 9, opt: !0 },
+          { no: 1, name: "model_name", kind: "scalar", T: 9, opt: true },
+          { no: 2, name: "api_key", kind: "scalar", T: 9, opt: true },
+          { no: 3, name: "enable_ghost_mode", kind: "scalar", T: 8, opt: true },
+          { no: 4, name: "azure_state", kind: "message", T: Ogn, opt: true },
+          { no: 5, name: "enable_slow_pool", kind: "scalar", T: 8, opt: true },
+          { no: 6, name: "openai_api_base_url", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -1102,7 +1102,7 @@ export function createAIServiceV1(params) {
           { no: 1, name: "name", kind: "scalar", T: 9 },
           { no: 2, name: "shape", kind: "scalar", T: 9 },
           { no: 3, name: "data_dimensionality", kind: "scalar", T: 5 },
-          { no: 6, name: "columns", kind: "message", T: jRi, repeated: !0 },
+          { no: 6, name: "columns", kind: "message", T: jRi, repeated: true },
           { no: 7, name: "row_count", kind: "scalar", T: 5 },
           { no: 8, name: "index_column", kind: "scalar", T: 9 },
         ])
@@ -1166,20 +1166,20 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "message", kind: "scalar", T: 9 },
           { no: 2, name: "range", kind: "message", T: RC },
-          { no: 3, name: "source", kind: "scalar", T: 9, opt: !0 },
+          { no: 3, name: "source", kind: "scalar", T: 9, opt: true },
           {
             no: 4,
             name: "related_information",
             kind: "message",
             T: MSt,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 5,
             name: "severity",
             kind: "enum",
             T: v.getEnumType(uI),
-            opt: !0,
+            opt: true,
           },
         ])
       }
@@ -1213,7 +1213,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
-          { no: 2, name: "errors", kind: "message", T: k$, repeated: !0 },
+          { no: 2, name: "errors", kind: "message", T: k$, repeated: true },
           { no: 3, name: "file_contents", kind: "scalar", T: 9 },
         ])
       }
@@ -1246,7 +1246,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
-          { no: 2, name: "errors", kind: "message", T: k$, repeated: !0 },
+          { no: 2, name: "errors", kind: "message", T: k$, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -1279,8 +1279,8 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "name", kind: "scalar", T: 9 },
           { no: 2, name: "description", kind: "scalar", T: 9 },
-          { no: 3, name: "body", kind: "scalar", T: 9, opt: !0 },
-          { no: 4, name: "is_from_glob", kind: "scalar", T: 8, opt: !0 },
+          { no: 3, name: "body", kind: "scalar", T: 9, opt: true },
+          { no: 4, name: "is_from_glob", kind: "scalar", T: 8, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -1312,8 +1312,8 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "context", kind: "scalar", T: 9 },
-          { no: 2, name: "repo_context", kind: "scalar", T: 9, opt: !0 },
-          { no: 3, name: "rules", kind: "message", T: iG, repeated: !0 },
+          { no: 2, name: "repo_context", kind: "scalar", T: 9, opt: true },
+          { no: 3, name: "rules", kind: "message", T: iG, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -1398,7 +1398,7 @@ export function createAIServiceV1(params) {
           { no: 5, name: "container_name", kind: "scalar", T: 9 },
           { no: 6, name: "range", kind: "message", T: GRi },
           { no: 7, name: "selection_range", kind: "message", T: GRi },
-          { no: 8, name: "children", kind: "message", T: Tte, repeated: !0 },
+          { no: 8, name: "children", kind: "message", T: Tte, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -1525,7 +1525,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "code_details", kind: "scalar", T: 9 },
-          { no: 2, name: "markdown_blocks", kind: "scalar", T: 9, repeated: !0 },
+          { no: 2, name: "markdown_blocks", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -1554,10 +1554,10 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "scheme", kind: "scalar", T: 9 },
-          { no: 2, name: "authority", kind: "scalar", T: 9, opt: !0 },
-          { no: 3, name: "path", kind: "scalar", T: 9, opt: !0 },
-          { no: 4, name: "query", kind: "scalar", T: 9, opt: !0 },
-          { no: 5, name: "fragment", kind: "scalar", T: 9, opt: !0 },
+          { no: 2, name: "authority", kind: "scalar", T: 9, opt: true },
+          { no: 3, name: "path", kind: "scalar", T: 9, opt: true },
+          { no: 4, name: "query", kind: "scalar", T: 9, opt: true },
+          { no: 5, name: "fragment", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -1621,7 +1621,7 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "error", kind: "enum", T: v.getEnumType(Er) },
           { no: 2, name: "details", kind: "message", T: KRi },
-          { no: 3, name: "is_expected", kind: "scalar", T: 8, opt: !0 },
+          { no: 3, name: "is_expected", kind: "scalar", T: 8, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -1756,16 +1756,16 @@ export function createAIServiceV1(params) {
             name: "allow_command_links_potentially_unsafe_please_only_use_for_handwritten_trusted_markdown",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
-          { no: 4, name: "is_retryable", kind: "scalar", T: 8, opt: !0 },
-          { no: 5, name: "show_request_id", kind: "scalar", T: 8, opt: !0 },
+          { no: 4, name: "is_retryable", kind: "scalar", T: 8, opt: true },
+          { no: 5, name: "show_request_id", kind: "scalar", T: 8, opt: true },
           {
             no: 6,
             name: "should_show_immediate_error",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
         ])
       }
@@ -2011,7 +2011,7 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "note", kind: "scalar", T: 9 },
           { no: 2, name: "commit_hash", kind: "scalar", T: 9 },
-          { no: 3, name: "embeddings", kind: "scalar", T: 1, repeated: !0 },
+          { no: 3, name: "embeddings", kind: "scalar", T: 1, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -2072,7 +2072,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "notes", kind: "message", T: BSt, repeated: !0 },
+          { no: 1, name: "notes", kind: "message", T: BSt, repeated: true },
           { no: 2, name: "commit_hash", kind: "scalar", T: 9 },
           { no: 3, name: "repo_url", kind: "scalar", T: 9 },
           { no: 4, name: "files_changed_relative_path", kind: "scalar", T: 9 },
@@ -2132,7 +2132,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "headers", kind: "message", T: Wgn, repeated: !0 },
+          { no: 1, name: "headers", kind: "message", T: Wgn, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -2152,7 +2152,7 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.message = new Uint8Array(0)),
-          (this.isError = !1),
+          (this.isError = false),
           (this.connectError = ""),
           v.util.initPartial(e, this)
       }
@@ -2203,18 +2203,18 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
           { no: 2, name: "start_line_number", kind: "scalar", T: 5 },
-          { no: 3, name: "lines", kind: "scalar", T: 9, repeated: !0 },
+          { no: 3, name: "lines", kind: "scalar", T: 9, repeated: true },
           {
             no: 4,
             name: "summarization_strategy",
             kind: "enum",
             T: v.getEnumType(iVe),
-            opt: !0,
+            opt: true,
           },
           { no: 5, name: "language_identifier", kind: "scalar", T: 9 },
-          { no: 6, name: "intent", kind: "enum", T: v.getEnumType(tVe), opt: !0 },
-          { no: 7, name: "is_final_version", kind: "scalar", T: 8, opt: !0 },
-          { no: 8, name: "is_first_version", kind: "scalar", T: 8, opt: !0 },
+          { no: 6, name: "intent", kind: "enum", T: v.getEnumType(tVe), opt: true },
+          { no: 7, name: "is_final_version", kind: "scalar", T: 8, opt: true },
+          { no: 8, name: "is_first_version", kind: "scalar", T: 8, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -2268,7 +2268,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "files", kind: "scalar", T: 9, repeated: !0 },
+          { no: 1, name: "files", kind: "scalar", T: 9, repeated: true },
           { no: 2, name: "target_dir", kind: "scalar", T: 9 },
           { no: 3, name: "repo", kind: "scalar", T: 9 },
         ])
@@ -2358,7 +2358,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "index_id", kind: "scalar", T: 9 },
-          { no: 2, name: "files", kind: "message", T: oAi, repeated: !0 },
+          { no: 2, name: "files", kind: "message", T: oAi, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -2406,7 +2406,7 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.indexId = ""),
-          (this.item = { case: void 0 }),
+          (this.item = { case: undefined }),
           v.util.initPartial(e, this)
       }
       static {
@@ -2563,7 +2563,7 @@ export function createAIServiceV1(params) {
         super(),
           (this.message = ""),
           (this.statusCode = 0),
-          (this.request = { case: void 0 }),
+          (this.request = { case: undefined }),
           (this.reqUuid = ""),
           v.util.initPartial(e, this)
       }
@@ -2615,7 +2615,7 @@ export function createAIServiceV1(params) {
           { no: 1, name: "index_id", kind: "scalar", T: 9 },
           { no: 2, name: "workspace_relative_path", kind: "scalar", T: 9 },
           { no: 3, name: "root_context_node", kind: "message", T: lAi },
-          { no: 4, name: "content", kind: "scalar", T: 9, repeated: !0 },
+          { no: 4, name: "content", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -2654,7 +2654,7 @@ export function createAIServiceV1(params) {
             name: "dependency_resolution_attempts",
             kind: "message",
             T: cAi,
-            repeated: !0,
+            repeated: true,
           },
           { no: 4, name: "file_data", kind: "message", T: oAi },
         ])
@@ -2695,7 +2695,7 @@ export function createAIServiceV1(params) {
             name: "dependency_resolution_results",
             kind: "message",
             T: hAi,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -2796,8 +2796,8 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.indexId = ""),
-          (this.request = { case: void 0 }),
-          (this.recompute = !1),
+          (this.request = { case: undefined }),
+          (this.recompute = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -2885,7 +2885,7 @@ export function createAIServiceV1(params) {
     },
     ipn = class T0e extends _ {
       constructor(e) {
-        super(), (this.response = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.response = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -2917,7 +2917,7 @@ export function createAIServiceV1(params) {
         super(),
           (this.nodeId = ""),
           (this.actions = []),
-          (this.skipped = !1),
+          (this.skipped = false),
           (this.dependencies = []),
           v.util.initPartial(e, this)
       }
@@ -2930,9 +2930,9 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "node_id", kind: "scalar", T: 9 },
-          { no: 2, name: "actions", kind: "message", T: oVe, repeated: !0 },
+          { no: 2, name: "actions", kind: "message", T: oVe, repeated: true },
           { no: 3, name: "skipped", kind: "scalar", T: 8 },
-          { no: 4, name: "dependencies", kind: "scalar", T: 9, repeated: !0 },
+          { no: 4, name: "dependencies", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -2969,7 +2969,7 @@ export function createAIServiceV1(params) {
             name: "node_responses",
             kind: "message",
             T: nAi,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -3002,7 +3002,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "node_id", kind: "scalar", T: 9 },
-          { no: 2, name: "references", kind: "message", T: uAi, repeated: !0 },
+          { no: 2, name: "references", kind: "message", T: uAi, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -3030,7 +3030,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "dependencies", kind: "scalar", T: 9, repeated: !0 },
+          { no: 1, name: "dependencies", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -3051,7 +3051,7 @@ export function createAIServiceV1(params) {
         super(),
           (this.indexId = ""),
           (this.nodeId = ""),
-          (this.recompute = !1),
+          (this.recompute = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -3083,7 +3083,7 @@ export function createAIServiceV1(params) {
     rpn = class M0e extends _ {
       constructor(e) {
         super(),
-          (this.response = { case: void 0 }),
+          (this.response = { case: undefined }),
           (this.nodeId = ""),
           v.util.initPartial(e, this)
       }
@@ -3159,7 +3159,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 2, name: "nodes", kind: "scalar", T: 9, repeated: !0 },
+          { no: 2, name: "nodes", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -3259,7 +3259,7 @@ export function createAIServiceV1(params) {
           { no: 2, name: "workspace_relative_path", kind: "scalar", T: 9 },
           { no: 3, name: "stage", kind: "scalar", T: 9 },
           { no: 4, name: "order", kind: "scalar", T: 5 },
-          { no: 5, name: "nodes", kind: "message", T: aAi, repeated: !0 },
+          { no: 5, name: "nodes", kind: "message", T: aAi, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -3331,7 +3331,7 @@ export function createAIServiceV1(params) {
           { no: 1, name: "workspace_relative_path", kind: "scalar", T: 9 },
           { no: 2, name: "start_line_number", kind: "scalar", T: 5 },
           { no: 3, name: "end_line_number", kind: "scalar", T: 5 },
-          { no: 4, name: "children", kind: "message", T: Pte, repeated: !0 },
+          { no: 4, name: "children", kind: "message", T: Pte, repeated: true },
           { no: 5, name: "node_snippets", kind: "message", T: ioe },
         ])
       }
@@ -3394,7 +3394,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "request", kind: "message", T: cAi },
-          { no: 2, name: "resolved_paths", kind: "scalar", T: 9, repeated: !0 },
+          { no: 2, name: "resolved_paths", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -3450,7 +3450,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "paths", kind: "message", T: oVe, repeated: !0 },
+          { no: 1, name: "paths", kind: "message", T: oVe, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -3479,7 +3479,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "action", kind: "message", T: oVe },
-          { no: 2, name: "references", kind: "message", T: HSt, repeated: !0 },
+          { no: 2, name: "references", kind: "message", T: HSt, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -3542,7 +3542,7 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
           { no: 2, name: "total_lines", kind: "scalar", T: 5 },
-          { no: 3, name: "snippets", kind: "message", T: VSt, repeated: !0 },
+          { no: 3, name: "snippets", kind: "message", T: VSt, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -3576,7 +3576,7 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "start_line_number", kind: "scalar", T: 5 },
           { no: 2, name: "end_line_number", kind: "scalar", T: 5 },
-          { no: 3, name: "lines", kind: "scalar", T: 9, repeated: !0 },
+          { no: 3, name: "lines", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -3715,13 +3715,13 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "readmes", kind: "message", T: dpn, repeated: !0 },
+          { no: 1, name: "readmes", kind: "message", T: dpn, repeated: true },
           {
             no: 2,
             name: "top_level_relative_workspace_paths",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
           { no: 4, name: "workspace_root_path", kind: "scalar", T: 9 },
         ])
@@ -4055,7 +4055,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "status", kind: "enum", T: v.getEnumType(roe) },
-          { no: 2, name: "codebases", kind: "message", T: ypn, repeated: !0 },
+          { no: 2, name: "codebases", kind: "message", T: ypn, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -4141,7 +4141,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "codebases", kind: "message", T: Cpn, repeated: !0 },
+          { no: 1, name: "codebases", kind: "message", T: Cpn, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -4214,7 +4214,7 @@ export function createAIServiceV1(params) {
     },
     Epn = class uCe extends _ {
       constructor(e) {
-        super(), (this.result = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.result = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -4253,7 +4253,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "children", kind: "message", T: MB, repeated: !0 },
+          { no: 1, name: "children", kind: "message", T: MB, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -4329,7 +4329,7 @@ export function createAIServiceV1(params) {
     },
     Tpn = class pCe extends _ {
       constructor(e) {
-        super(), (this.result = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.result = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -4368,7 +4368,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "children", kind: "message", T: MB, repeated: !0 },
+          { no: 1, name: "children", kind: "message", T: MB, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -4387,7 +4387,7 @@ export function createAIServiceV1(params) {
     Lpn = class bCe extends _ {
       constructor(e) {
         super(),
-          (this.partialPath = { case: void 0 }),
+          (this.partialPath = { case: undefined }),
           (this.ancestorSpline = []),
           (this.updateType = aoe.UNSPECIFIED),
           v.util.initPartial(e, this)
@@ -4420,7 +4420,7 @@ export function createAIServiceV1(params) {
             name: "ancestor_spline",
             kind: "message",
             T: MB,
-            repeated: !0,
+            repeated: true,
           },
           { no: 5, name: "update_type", kind: "enum", T: v.getEnumType(aoe) },
         ])
@@ -4534,7 +4534,7 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.codebaseId = ""),
-          (this.partialPath = { case: void 0 }),
+          (this.partialPath = { case: undefined }),
           (this.ancestorSpline = []),
           (this.updateType = coe.UNSPECIFIED),
           v.util.initPartial(e, this)
@@ -4568,7 +4568,7 @@ export function createAIServiceV1(params) {
             name: "ancestor_spline",
             kind: "message",
             T: MB,
-            repeated: !0,
+            repeated: true,
           },
           { no: 6, name: "update_type", kind: "enum", T: v.getEnumType(coe) },
         ])
@@ -4690,7 +4690,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "repository", kind: "message", T: rl, opt: !0 },
+          { no: 1, name: "repository", kind: "message", T: rl, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -4839,7 +4839,7 @@ export function createAIServiceV1(params) {
             name: "chunking_strategies",
             kind: "enum",
             T: v.getEnumType(aVe),
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -4868,7 +4868,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "texts", kind: "scalar", T: 9, repeated: !0 },
+          { no: 1, name: "texts", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -4896,7 +4896,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 2, name: "embeddings", kind: "message", T: qpn, repeated: !0 },
+          { no: 2, name: "embeddings", kind: "message", T: qpn, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -4924,7 +4924,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "embedding", kind: "scalar", T: 2, repeated: !0 },
+          { no: 1, name: "embedding", kind: "scalar", T: 2, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -5092,7 +5092,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "status", kind: "enum", T: v.getEnumType(uoe) },
-          { no: 2, name: "seen_files", kind: "scalar", T: 9, repeated: !0 },
+          { no: 2, name: "seen_files", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -5353,7 +5353,7 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "repository", kind: "message", T: rl },
           { no: 2, name: "added_file", kind: "message", T: AC },
-          { no: 3, name: "deleted_file_path", kind: "scalar", T: 9, opt: !0 },
+          { no: 3, name: "deleted_file_path", kind: "scalar", T: 9, opt: true },
           { no: 4, name: "commit_sha", kind: "scalar", T: 9 },
           { no: 5, name: "queue_id", kind: "scalar", T: 9 },
         ])
@@ -5493,7 +5493,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "requests", kind: "message", T: Jpn, repeated: !0 },
+          { no: 1, name: "requests", kind: "message", T: Jpn, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -5521,7 +5521,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "responses", kind: "message", T: Kpn, repeated: !0 },
+          { no: 1, name: "responses", kind: "message", T: Kpn, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -5820,7 +5820,7 @@ export function createAIServiceV1(params) {
         super(),
           (this.query = ""),
           (this.topK = 0),
-          (this.rerank = !1),
+          (this.rerank = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -5836,10 +5836,10 @@ export function createAIServiceV1(params) {
           { no: 3, name: "top_k", kind: "scalar", T: 5 },
           { no: 4, name: "model_details", kind: "message", T: zr },
           { no: 5, name: "rerank", kind: "scalar", T: 8 },
-          { no: 6, name: "context_cache_request", kind: "scalar", T: 8, opt: !0 },
-          { no: 7, name: "glob_filter", kind: "scalar", T: 9, opt: !0 },
-          { no: 8, name: "not_glob_filter", kind: "scalar", T: 9, opt: !0 },
-          { no: 9, name: "race_n_requests", kind: "scalar", T: 5, opt: !0 },
+          { no: 6, name: "context_cache_request", kind: "scalar", T: 8, opt: true },
+          { no: 7, name: "glob_filter", kind: "scalar", T: 9, opt: true },
+          { no: 8, name: "not_glob_filter", kind: "scalar", T: 9, opt: true },
+          { no: 9, name: "race_n_requests", kind: "scalar", T: 5, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -5925,7 +5925,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "code_results", kind: "message", T: im, repeated: !0 },
+          { no: 1, name: "code_results", kind: "message", T: im, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -5987,7 +5987,7 @@ export function createAIServiceV1(params) {
             name: "line_number_classification",
             kind: "message",
             T: zpn,
-            opt: !0,
+            opt: true,
           },
         ])
       }
@@ -6022,7 +6022,7 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "detailed_line", kind: "message", T: ASt },
           { no: 2, name: "query_computed_for", kind: "scalar", T: 9 },
-          { no: 3, name: "matched_strings", kind: "scalar", T: 9, repeated: !0 },
+          { no: 3, name: "matched_strings", kind: "scalar", T: 9, repeated: true },
           { no: 4, name: "highlight_range", kind: "message", T: Hu },
         ])
       }
@@ -6052,8 +6052,8 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "response", kind: "message", T: pAi },
-          { no: 2, name: "metadata", kind: "message", T: Gpn, opt: !0 },
-          { no: 3, name: "code_results", kind: "message", T: bAi, repeated: !0 },
+          { no: 2, name: "metadata", kind: "message", T: Gpn, opt: true },
+          { no: 3, name: "code_results", kind: "message", T: bAi, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -6081,16 +6081,16 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "query_embedding_model", kind: "scalar", T: 9, opt: !0 },
+          { no: 1, name: "query_embedding_model", kind: "scalar", T: 9, opt: true },
           {
             no: 2,
             name: "server_side_latency_ms",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
-          { no: 3, name: "embed_latency_ms", kind: "scalar", T: 5, opt: !0 },
-          { no: 4, name: "knn_latency_ms", kind: "scalar", T: 5, opt: !0 },
+          { no: 3, name: "embed_latency_ms", kind: "scalar", T: 5, opt: true },
+          { no: 4, name: "knn_latency_ms", kind: "scalar", T: 5, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -6188,7 +6188,7 @@ export function createAIServiceV1(params) {
     },
     rCo = class mSe extends _ {
       constructor(e) {
-        super(), (this.loggedIn = !1), v.util.initPartial(e, this)
+        super(), (this.loggedIn = false), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -6293,7 +6293,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 2, name: "scopes", kind: "scalar", T: 9, repeated: !0 },
+          { no: 2, name: "scopes", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -6386,7 +6386,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "repositories", kind: "message", T: rl, repeated: !0 },
+          { no: 1, name: "repositories", kind: "message", T: rl, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -6503,7 +6503,7 @@ export function createAIServiceV1(params) {
     },
     Kpn = class ISe extends _ {
       constructor(e) {
-        super(), (this.status = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.status = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -6553,7 +6553,7 @@ export function createAIServiceV1(params) {
             T: yAi,
             oneof: "status",
           },
-          { no: 9, name: "is_owner", kind: "scalar", T: 8, opt: !0 },
+          { no: 9, name: "is_owner", kind: "scalar", T: 8, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -6832,8 +6832,8 @@ export function createAIServiceV1(params) {
           (this.remoteNames = []),
           (this.repoName = ""),
           (this.repoOwner = ""),
-          (this.isTracked = !1),
-          (this.isLocal = !1),
+          (this.isTracked = false),
+          (this.isLocal = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -6845,26 +6845,26 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
-          { no: 2, name: "remote_urls", kind: "scalar", T: 9, repeated: !0 },
-          { no: 3, name: "remote_names", kind: "scalar", T: 9, repeated: !0 },
+          { no: 2, name: "remote_urls", kind: "scalar", T: 9, repeated: true },
+          { no: 3, name: "remote_names", kind: "scalar", T: 9, repeated: true },
           { no: 4, name: "repo_name", kind: "scalar", T: 9 },
           { no: 5, name: "repo_owner", kind: "scalar", T: 9 },
           { no: 6, name: "is_tracked", kind: "scalar", T: 8 },
           { no: 7, name: "is_local", kind: "scalar", T: 8 },
-          { no: 8, name: "num_files", kind: "scalar", T: 5, opt: !0 },
+          { no: 8, name: "num_files", kind: "scalar", T: 5, opt: true },
           {
             no: 9,
             name: "orthogonal_transform_seed",
             kind: "scalar",
             T: 1,
-            opt: !0,
+            opt: true,
           },
           {
             no: 10,
             name: "preferred_embedding_model",
             kind: "enum",
             T: v.getEnumType(x$),
-            opt: !0,
+            opt: true,
           },
         ])
       }
@@ -6888,8 +6888,8 @@ export function createAIServiceV1(params) {
           (this.topK = 0),
           (this.topReflectionsK = 0),
           (this.indexIds = []),
-          (this.useModelOnFiles = !1),
-          (this.useReflections = !1),
+          (this.useModelOnFiles = false),
+          (this.useReflections = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -6903,7 +6903,7 @@ export function createAIServiceV1(params) {
           { no: 1, name: "query", kind: "scalar", T: 9 },
           { no: 2, name: "top_k", kind: "scalar", T: 5 },
           { no: 3, name: "top_reflections_k", kind: "scalar", T: 5 },
-          { no: 4, name: "index_ids", kind: "scalar", T: 9, repeated: !0 },
+          { no: 4, name: "index_ids", kind: "scalar", T: 9, repeated: true },
           { no: 5, name: "use_model_on_files", kind: "scalar", T: 8 },
           { no: 6, name: "use_reflections", kind: "scalar", T: 8 },
         ])
@@ -6996,8 +6996,8 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "top_nodes", kind: "message", T: nmn, repeated: !0 },
-          { no: 2, name: "reflections", kind: "message", T: rmn, repeated: !0 },
+          { no: 1, name: "top_nodes", kind: "message", T: nmn, repeated: true },
+          { no: 2, name: "reflections", kind: "message", T: rmn, repeated: true },
           { no: 3, name: "index_id", kind: "scalar", T: 9 },
         ])
       }
@@ -7030,7 +7030,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "query", kind: "scalar", T: 9 },
-          { no: 2, name: "code_results", kind: "message", T: im, repeated: !0 },
+          { no: 2, name: "code_results", kind: "message", T: im, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -7229,8 +7229,8 @@ export function createAIServiceV1(params) {
     qSt = class qSe extends _ {
       constructor(e) {
         super(),
-          (this.isApplied = !1),
-          (this.applyFailed = !1),
+          (this.isApplied = false),
+          (this.applyFailed = false),
           (this.linterErrors = []),
           v.util.initPartial(e, this)
       }
@@ -7245,7 +7245,7 @@ export function createAIServiceV1(params) {
           { no: 1, name: "diff", kind: "message", T: nG },
           { no: 2, name: "is_applied", kind: "scalar", T: 8 },
           { no: 3, name: "apply_failed", kind: "scalar", T: 8 },
-          { no: 4, name: "linter_errors", kind: "message", T: k$, repeated: !0 },
+          { no: 4, name: "linter_errors", kind: "message", T: k$, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -7273,7 +7273,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "rule_names", kind: "scalar", T: 9, repeated: !0 },
+          { no: 1, name: "rule_names", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -7301,7 +7301,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "rules", kind: "message", T: iG, repeated: !0 },
+          { no: 1, name: "rules", kind: "message", T: iG, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -7330,7 +7330,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "instruction", kind: "scalar", T: 9 },
-          { no: 2, name: "plan", kind: "scalar", T: 9, opt: !0 },
+          { no: 2, name: "plan", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -7386,7 +7386,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "target_files", kind: "scalar", T: 9, repeated: !0 },
+          { no: 1, name: "target_files", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -7414,7 +7414,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "files", kind: "message", T: cmn, repeated: !0 },
+          { no: 1, name: "files", kind: "message", T: cmn, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -7539,7 +7539,7 @@ export function createAIServiceV1(params) {
             name: "target_directories",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
           { no: 3, name: "explanation", kind: "scalar", T: 9 },
         ])
@@ -7579,7 +7579,7 @@ export function createAIServiceV1(params) {
             name: "actual_error_message_only_send_from_client_to_server_never_the_other_way_around_because_that_may_be_a_security_risk",
             kind: "scalar",
             T: 9,
-            opt: !0,
+            opt: true,
           },
         ])
       }
@@ -7600,12 +7600,12 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.tool = jt.UNSPECIFIED),
-          (this.params = { case: void 0 }),
+          (this.params = { case: undefined }),
           (this.toolCallId = ""),
           (this.name = ""),
           (this.rawArgs = ""),
-          (this.isStreaming = !1),
-          (this.isLastMessage = !1),
+          (this.isStreaming = false),
+          (this.isLastMessage = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -7765,7 +7765,7 @@ export function createAIServiceV1(params) {
             oneof: "params",
           },
           { no: 3, name: "tool_call_id", kind: "scalar", T: 9 },
-          { no: 6, name: "timeout_ms", kind: "scalar", T: 1, opt: !0 },
+          { no: 6, name: "timeout_ms", kind: "scalar", T: 1, opt: true },
           { no: 9, name: "name", kind: "scalar", T: 9 },
           { no: 10, name: "raw_args", kind: "scalar", T: 9 },
           { no: 14, name: "is_streaming", kind: "scalar", T: 8 },
@@ -7789,7 +7789,7 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.tool = jt.UNSPECIFIED),
-          (this.result = { case: void 0 }),
+          (this.result = { case: undefined }),
           v.util.initPartial(e, this)
       }
       static {
@@ -7948,7 +7948,7 @@ export function createAIServiceV1(params) {
             T: f1t,
             oneof: "result",
           },
-          { no: 8, name: "error", kind: "message", T: cVe, opt: !0 },
+          { no: 8, name: "error", kind: "message", T: cVe, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -8003,7 +8003,7 @@ export function createAIServiceV1(params) {
         super(),
           (this.tool = jt.UNSPECIFIED),
           (this.toolCallId = ""),
-          (this.params = { case: void 0 }),
+          (this.params = { case: undefined }),
           (this.name = ""),
           (this.rawArgs = ""),
           v.util.initPartial(e, this)
@@ -8167,7 +8167,7 @@ export function createAIServiceV1(params) {
           },
           { no: 8, name: "name", kind: "scalar", T: 9 },
           { no: 9, name: "raw_args", kind: "scalar", T: 9 },
-          { no: 10, name: "error", kind: "message", T: cVe, opt: !0 },
+          { no: 10, name: "error", kind: "message", T: cVe, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -8189,7 +8189,7 @@ export function createAIServiceV1(params) {
           (this.relativeWorkspacePath = ""),
           (this.language = ""),
           (this.contents = ""),
-          (this.blocking = !1),
+          (this.blocking = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -8204,7 +8204,7 @@ export function createAIServiceV1(params) {
           { no: 2, name: "language", kind: "scalar", T: 9 },
           { no: 3, name: "contents", kind: "scalar", T: 9 },
           { no: 4, name: "blocking", kind: "scalar", T: 8 },
-          { no: 5, name: "instructions", kind: "scalar", T: 9, opt: !0 },
+          { no: 5, name: "instructions", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -8223,8 +8223,8 @@ export function createAIServiceV1(params) {
     koe = class a1e extends _ {
       constructor(e) {
         super(),
-          (this.isApplied = !1),
-          (this.applyFailed = !1),
+          (this.isApplied = false),
+          (this.applyFailed = false),
           (this.linterErrors = []),
           v.util.initPartial(e, this)
       }
@@ -8239,7 +8239,7 @@ export function createAIServiceV1(params) {
           { no: 1, name: "diff", kind: "message", T: nG },
           { no: 2, name: "is_applied", kind: "scalar", T: 8 },
           { no: 3, name: "apply_failed", kind: "scalar", T: 8 },
-          { no: 4, name: "linter_errors", kind: "message", T: k$, repeated: !0 },
+          { no: 4, name: "linter_errors", kind: "message", T: k$, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -8260,7 +8260,7 @@ export function createAIServiceV1(params) {
         super(),
           (this.chunks = []),
           (this.editor = Eoe.UNSPECIFIED),
-          (this.hitTimeout = !1),
+          (this.hitTimeout = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -8271,7 +8271,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "chunks", kind: "message", T: fmn, repeated: !0 },
+          { no: 1, name: "chunks", kind: "message", T: fmn, repeated: true },
           { no: 2, name: "editor", kind: "enum", T: v.getEnumType(Eoe) },
           { no: 3, name: "hit_timeout", kind: "scalar", T: 8 },
         ])
@@ -8408,7 +8408,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "target_files", kind: "scalar", T: 9, repeated: !0 },
+          { no: 1, name: "target_files", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -8467,8 +8467,8 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "files", kind: "message", T: mmn, repeated: !0 },
-          { no: 2, name: "limit_hit", kind: "scalar", T: 8, opt: !0 },
+          { no: 1, name: "files", kind: "message", T: mmn, repeated: true },
+          { no: 2, name: "limit_hit", kind: "scalar", T: 8, opt: true },
           { no: 3, name: "num_results", kind: "scalar", T: 5 },
         ])
       }
@@ -8556,7 +8556,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "files", kind: "message", T: bmn, repeated: !0 },
+          { no: 1, name: "files", kind: "message", T: bmn, repeated: true },
           {
             no: 2,
             name: "directory_relative_workspace_path",
@@ -8582,7 +8582,7 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.name = ""),
-          (this.isDirectory = !1),
+          (this.isDirectory = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -8595,10 +8595,10 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "name", kind: "scalar", T: 9 },
           { no: 2, name: "is_directory", kind: "scalar", T: 8 },
-          { no: 3, name: "size", kind: "scalar", T: 3, opt: !0 },
-          { no: 4, name: "last_modified", kind: "message", T: PSt, opt: !0 },
-          { no: 5, name: "num_children", kind: "scalar", T: 5, opt: !0 },
-          { no: 6, name: "num_lines", kind: "scalar", T: 5, opt: !0 },
+          { no: 3, name: "size", kind: "scalar", T: 3, opt: true },
+          { no: 4, name: "last_modified", kind: "message", T: PSt, opt: true },
+          { no: 5, name: "num_children", kind: "scalar", T: 5, opt: true },
+          { no: 6, name: "num_lines", kind: "scalar", T: 5, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -8644,8 +8644,8 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.relativeWorkspacePath = ""),
-          (this.readEntireFile = !1),
-          (this.fileIsAllowedToBeReadEntirely = !1),
+          (this.readEntireFile = false),
+          (this.fileIsAllowedToBeReadEntirely = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -8663,14 +8663,14 @@ export function createAIServiceV1(params) {
             name: "start_line_one_indexed",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
           {
             no: 4,
             name: "end_line_one_indexed_inclusive",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
           {
             no: 5,
@@ -8697,11 +8697,11 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.contents = ""),
-          (this.didDowngradeToLineRange = !1),
-          (this.didShortenLineRange = !1),
-          (this.didSetDefaultLineRange = !1),
+          (this.didDowngradeToLineRange = false),
+          (this.didShortenLineRange = false),
+          (this.didSetDefaultLineRange = false),
           (this.relativeWorkspacePath = ""),
-          (this.didShortenCharRange = !1),
+          (this.didShortenCharRange = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -8716,21 +8716,21 @@ export function createAIServiceV1(params) {
           { no: 2, name: "did_downgrade_to_line_range", kind: "scalar", T: 8 },
           { no: 3, name: "did_shorten_line_range", kind: "scalar", T: 8 },
           { no: 4, name: "did_set_default_line_range", kind: "scalar", T: 8 },
-          { no: 5, name: "full_file_contents", kind: "scalar", T: 9, opt: !0 },
-          { no: 6, name: "outline", kind: "scalar", T: 9, opt: !0 },
+          { no: 5, name: "full_file_contents", kind: "scalar", T: 9, opt: true },
+          { no: 6, name: "outline", kind: "scalar", T: 9, opt: true },
           {
             no: 7,
             name: "start_line_one_indexed",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
           {
             no: 8,
             name: "end_line_one_indexed_inclusive",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
           { no: 9, name: "relative_workspace_path", kind: "scalar", T: 9 },
           { no: 10, name: "did_shorten_char_range", kind: "scalar", T: 8 },
@@ -8817,12 +8817,12 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "pattern", kind: "scalar", T: 9 },
-          { no: 2, name: "is_reg_exp", kind: "scalar", T: 8, opt: !0 },
-          { no: 3, name: "is_word_match", kind: "scalar", T: 8, opt: !0 },
-          { no: 4, name: "word_separators", kind: "scalar", T: 9, opt: !0 },
-          { no: 5, name: "is_multiline", kind: "scalar", T: 8, opt: !0 },
-          { no: 6, name: "is_unicode", kind: "scalar", T: 8, opt: !0 },
-          { no: 7, name: "is_case_sensitive", kind: "scalar", T: 8, opt: !0 },
+          { no: 2, name: "is_reg_exp", kind: "scalar", T: 8, opt: true },
+          { no: 3, name: "is_word_match", kind: "scalar", T: 8, opt: true },
+          { no: 4, name: "word_separators", kind: "scalar", T: 9, opt: true },
+          { no: 5, name: "is_multiline", kind: "scalar", T: 8, opt: true },
+          { no: 6, name: "is_unicode", kind: "scalar", T: 8, opt: true },
+          { no: 7, name: "is_case_sensitive", kind: "scalar", T: 8, opt: true },
           { no: 8, name: "notebook_info", kind: "message", T: Cmn },
         ])
       }
@@ -8857,28 +8857,28 @@ export function createAIServiceV1(params) {
             name: "is_in_notebook_markdown_input",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
           {
             no: 2,
             name: "is_in_notebook_markdown_preview",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
           {
             no: 3,
             name: "is_in_notebook_cell_input",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
           {
             no: 4,
             name: "is_in_notebook_cell_output",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
         ])
       }
@@ -8909,54 +8909,54 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "preview_options", kind: "message", T: Imn },
-          { no: 2, name: "file_encoding", kind: "scalar", T: 9, opt: !0 },
-          { no: 3, name: "surrounding_context", kind: "scalar", T: 5, opt: !0 },
-          { no: 4, name: "is_smart_case", kind: "scalar", T: 8, opt: !0 },
+          { no: 2, name: "file_encoding", kind: "scalar", T: 9, opt: true },
+          { no: 3, name: "surrounding_context", kind: "scalar", T: 5, opt: true },
+          { no: 4, name: "is_smart_case", kind: "scalar", T: 8, opt: true },
           { no: 5, name: "notebook_search_config", kind: "message", T: Dmn },
           { no: 6, name: "exclude_pattern", kind: "message", T: kmn },
           { no: 7, name: "include_pattern", kind: "message", T: NAi },
-          { no: 8, name: "expand_patterns", kind: "scalar", T: 8, opt: !0 },
-          { no: 9, name: "max_results", kind: "scalar", T: 5, opt: !0 },
-          { no: 10, name: "max_file_size", kind: "scalar", T: 5, opt: !0 },
+          { no: 8, name: "expand_patterns", kind: "scalar", T: 8, opt: true },
+          { no: 9, name: "max_results", kind: "scalar", T: 5, opt: true },
+          { no: 10, name: "max_file_size", kind: "scalar", T: 5, opt: true },
           {
             no: 11,
             name: "disregard_ignore_files",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
           {
             no: 12,
             name: "disregard_global_ignore_files",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
           {
             no: 13,
             name: "disregard_parent_ignore_files",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
           {
             no: 14,
             name: "disregard_exclude_settings",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
           {
             no: 15,
             name: "disregard_search_exclude_settings",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
-          { no: 16, name: "ignore_symlinks", kind: "scalar", T: 8, opt: !0 },
-          { no: 17, name: "only_open_editors", kind: "scalar", T: 8, opt: !0 },
-          { no: 18, name: "only_file_scheme", kind: "scalar", T: 8, opt: !0 },
-          { no: 19, name: "reason", kind: "scalar", T: 9, opt: !0 },
+          { no: 16, name: "ignore_symlinks", kind: "scalar", T: 8, opt: true },
+          { no: 17, name: "only_open_editors", kind: "scalar", T: 8, opt: true },
+          { no: 18, name: "only_file_scheme", kind: "scalar", T: 8, opt: true },
+          { no: 19, name: "reason", kind: "scalar", T: 9, opt: true },
           { no: 20, name: "extra_file_resources", kind: "message", T: xmn },
         ])
       }
@@ -8991,7 +8991,7 @@ export function createAIServiceV1(params) {
             name: "extra_file_resources",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -9026,7 +9026,7 @@ export function createAIServiceV1(params) {
             name: "exclude_pattern",
             kind: "message",
             T: Emn,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -9056,7 +9056,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "uri", kind: "scalar", T: 9, opt: !0 },
+          { no: 1, name: "uri", kind: "scalar", T: 9, opt: true },
           { no: 2, name: "pattern", kind: "message", T: NAi },
         ])
       }
@@ -9086,8 +9086,8 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "pattern", kind: "scalar", T: 9, opt: !0 },
-          { no: 2, name: "patterns", kind: "scalar", T: 9, repeated: !0 },
+          { no: 1, name: "pattern", kind: "scalar", T: 9, opt: true },
+          { no: 2, name: "patterns", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -9139,10 +9139,10 @@ export function createAIServiceV1(params) {
     Dmn = class R1e extends _ {
       constructor(e) {
         super(),
-          (this.includeMarkupInput = !1),
-          (this.includeMarkupPreview = !1),
-          (this.includeCodeInput = !1),
-          (this.includeOutput = !1),
+          (this.includeMarkupInput = false),
+          (this.includeMarkupPreview = false),
+          (this.includeCodeInput = false),
+          (this.includeOutput = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -9206,7 +9206,7 @@ export function createAIServiceV1(params) {
         super(),
           (this.results = []),
           (this.messages = []),
-          (this.stats = { case: void 0 }),
+          (this.stats = { case: undefined }),
           v.util.initPartial(e, this)
       }
       static {
@@ -9217,10 +9217,10 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "results", kind: "message", T: AAi, repeated: !0 },
-          { no: 2, name: "exit", kind: "enum", T: v.getEnumType(Y9), opt: !0 },
-          { no: 3, name: "limit_hit", kind: "scalar", T: 8, opt: !0 },
-          { no: 4, name: "messages", kind: "message", T: Pmn, repeated: !0 },
+          { no: 1, name: "results", kind: "message", T: AAi, repeated: true },
+          { no: 2, name: "exit", kind: "enum", T: v.getEnumType(Y9), opt: true },
+          { no: 3, name: "limit_hit", kind: "scalar", T: 8, opt: true },
+          { no: 4, name: "messages", kind: "message", T: Pmn, repeated: true },
           {
             no: 5,
             name: "file_search_stats",
@@ -9296,7 +9296,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "resource", kind: "scalar", T: 9 },
-          { no: 2, name: "results", kind: "message", T: JSt, repeated: !0 },
+          { no: 2, name: "results", kind: "message", T: JSt, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -9314,7 +9314,7 @@ export function createAIServiceV1(params) {
     },
     JSt = class F1e extends _ {
       constructor(e) {
-        super(), (this.result = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.result = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -9357,17 +9357,17 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "uri", kind: "scalar", T: 9, opt: !0 },
+          { no: 1, name: "uri", kind: "scalar", T: 9, opt: true },
           {
             no: 2,
             name: "range_locations",
             kind: "message",
             T: Tmn,
-            repeated: !0,
+            repeated: true,
           },
           { no: 3, name: "preview_text", kind: "scalar", T: 9 },
-          { no: 4, name: "webview_index", kind: "scalar", T: 5, opt: !0 },
-          { no: 5, name: "cell_fragment", kind: "scalar", T: 9, opt: !0 },
+          { no: 4, name: "webview_index", kind: "scalar", T: 5, opt: true },
+          { no: 5, name: "cell_fragment", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -9399,7 +9399,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "uri", kind: "scalar", T: 9, opt: !0 },
+          { no: 1, name: "uri", kind: "scalar", T: 9, opt: true },
           { no: 2, name: "text", kind: "scalar", T: 9 },
           { no: 3, name: "line_number", kind: "scalar", T: 5 },
         ])
@@ -9501,7 +9501,7 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "text", kind: "scalar", T: 9 },
           { no: 2, name: "type", kind: "enum", T: v.getEnumType($B) },
-          { no: 3, name: "trusted", kind: "scalar", T: 8, opt: !0 },
+          { no: 3, name: "trusted", kind: "scalar", T: 8, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -9520,8 +9520,8 @@ export function createAIServiceV1(params) {
     FAi = class V1e extends _ {
       constructor(e) {
         super(),
-          (this.fromCache = !1),
-          (this.detailStats = { case: void 0 }),
+          (this.fromCache = false),
+          (this.detailStats = { case: undefined }),
           (this.resultCount = 0),
           (this.type = FB.UNSPECIFIED),
           v.util.initPartial(e, this)
@@ -9558,7 +9558,7 @@ export function createAIServiceV1(params) {
           },
           { no: 5, name: "result_count", kind: "scalar", T: 5 },
           { no: 6, name: "type", kind: "enum", T: v.getEnumType(FB) },
-          { no: 7, name: "sorting_time", kind: "scalar", T: 5, opt: !0 },
+          { no: 7, name: "sorting_time", kind: "scalar", T: 5, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -9656,7 +9656,7 @@ export function createAIServiceV1(params) {
           { no: 2, name: "directories_walked", kind: "scalar", T: 5 },
           { no: 3, name: "files_walked", kind: "scalar", T: 5 },
           { no: 4, name: "cmd_time", kind: "scalar", T: 5 },
-          { no: 5, name: "cmd_result_count", kind: "scalar", T: 5, opt: !0 },
+          { no: 5, name: "cmd_result_count", kind: "scalar", T: 5, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -9675,7 +9675,7 @@ export function createAIServiceV1(params) {
     BAi = class j1e extends _ {
       constructor(e) {
         super(),
-          (this.cacheWasResolved = !1),
+          (this.cacheWasResolved = false),
           (this.cacheLookupTime = 0),
           (this.cacheFilterTime = 0),
           (this.cacheEntryCount = 0),
@@ -9786,7 +9786,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "repository_info", kind: "message", T: rl },
-          { no: 2, name: "code_results", kind: "message", T: im, repeated: !0 },
+          { no: 2, name: "code_results", kind: "message", T: im, repeated: true },
           { no: 3, name: "query", kind: "scalar", T: 9 },
         ])
       }
@@ -9820,7 +9820,7 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
           { no: 2, name: "missing_reason", kind: "enum", T: v.getEnumType(OB) },
-          { no: 3, name: "num_lines", kind: "scalar", T: 5, opt: !0 },
+          { no: 3, name: "num_lines", kind: "scalar", T: 5, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -9863,9 +9863,9 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "code_results", kind: "message", T: im, repeated: !0 },
-          { no: 2, name: "all_files", kind: "message", T: AC, repeated: !0 },
-          { no: 3, name: "missing_files", kind: "message", T: UAi, repeated: !0 },
+          { no: 1, name: "code_results", kind: "message", T: im, repeated: true },
+          { no: 2, name: "all_files", kind: "message", T: AC, repeated: true },
+          { no: 3, name: "missing_files", kind: "message", T: UAi, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -9921,7 +9921,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "target_files", kind: "scalar", T: 9, repeated: !0 },
+          { no: 1, name: "target_files", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -9951,8 +9951,8 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "repository_info", kind: "message", T: rl },
           { no: 2, name: "query", kind: "scalar", T: 9 },
-          { no: 3, name: "include_pattern", kind: "scalar", T: 9, opt: !0 },
-          { no: 4, name: "exclude_pattern", kind: "scalar", T: 9, opt: !0 },
+          { no: 3, name: "include_pattern", kind: "scalar", T: 9, opt: true },
+          { no: 4, name: "exclude_pattern", kind: "scalar", T: 9, opt: true },
           { no: 5, name: "top_k", kind: "scalar", T: 5 },
         ])
       }
@@ -9985,9 +9985,9 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "code_results", kind: "message", T: im, repeated: !0 },
-          { no: 2, name: "all_files", kind: "message", T: AC, repeated: !0 },
-          { no: 3, name: "missing_files", kind: "message", T: UAi, repeated: !0 },
+          { no: 1, name: "code_results", kind: "message", T: im, repeated: true },
+          { no: 2, name: "all_files", kind: "message", T: AC, repeated: true },
+          { no: 3, name: "missing_files", kind: "message", T: UAi, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -10174,8 +10174,8 @@ export function createAIServiceV1(params) {
     Doe = class axe extends _ {
       constructor(e) {
         super(),
-          (this.fileCreatedSuccessfully = !1),
-          (this.fileAlreadyExists = !1),
+          (this.fileCreatedSuccessfully = false),
+          (this.fileAlreadyExists = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -10234,9 +10234,9 @@ export function createAIServiceV1(params) {
     X9 = class cxe extends _ {
       constructor(e) {
         super(),
-          (this.rejected = !1),
-          (this.fileNonExistent = !1),
-          (this.fileDeletedSuccessfully = !1),
+          (this.rejected = false),
+          (this.fileNonExistent = false),
+          (this.fileDeletedSuccessfully = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -10297,7 +10297,7 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.command = ""),
-          (this.requireUserApproval = !1),
+          (this.requireUserApproval = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -10309,10 +10309,10 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "command", kind: "scalar", T: 9 },
-          { no: 2, name: "cwd", kind: "scalar", T: 9, opt: !0 },
-          { no: 3, name: "new_session", kind: "scalar", T: 8, opt: !0 },
+          { no: 2, name: "cwd", kind: "scalar", T: 9, opt: true },
+          { no: 3, name: "new_session", kind: "scalar", T: 8, opt: true },
           { no: 5, name: "require_user_approval", kind: "scalar", T: 8 },
-          { no: 4, name: "options", kind: "message", T: Omn, opt: !0 },
+          { no: 4, name: "options", kind: "message", T: Omn, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -10340,37 +10340,37 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "timeout", kind: "scalar", T: 5, opt: !0 },
-          { no: 2, name: "skip_ai_check", kind: "scalar", T: 8, opt: !0 },
+          { no: 1, name: "timeout", kind: "scalar", T: 5, opt: true },
+          { no: 2, name: "skip_ai_check", kind: "scalar", T: 8, opt: true },
           {
             no: 3,
             name: "command_run_timeout_ms",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
           {
             no: 4,
             name: "command_change_check_interval_ms",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
           {
             no: 5,
             name: "ai_finish_check_max_attempts",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
           {
             no: 6,
             name: "ai_finish_check_interval_ms",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
-          { no: 7, name: "delayer_interval_ms", kind: "scalar", T: 5, opt: !0 },
+          { no: 7, name: "delayer_interval_ms", kind: "scalar", T: 5, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -10391,7 +10391,7 @@ export function createAIServiceV1(params) {
         super(),
           (this.output = ""),
           (this.exitCode = 0),
-          (this.poppedOutIntoBackground = !1),
+          (this.poppedOutIntoBackground = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -10404,7 +10404,7 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "output", kind: "scalar", T: 9 },
           { no: 2, name: "exit_code", kind: "scalar", T: 5 },
-          { no: 3, name: "rejected", kind: "scalar", T: 8, opt: !0 },
+          { no: 3, name: "rejected", kind: "scalar", T: 8, opt: true },
           { no: 4, name: "popped_out_into_background", kind: "scalar", T: 8 },
         ])
       }
@@ -10453,7 +10453,7 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.tool = xf.UNSPECIFIED),
-          (this.params = { case: void 0 }),
+          (this.params = { case: undefined }),
           v.util.initPartial(e, this)
       }
       static {
@@ -10627,7 +10627,7 @@ export function createAIServiceV1(params) {
             T: t1t,
             oneof: "params",
           },
-          { no: 22, name: "tool_call_id", kind: "scalar", T: 9, opt: !0 },
+          { no: 22, name: "tool_call_id", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -10647,7 +10647,7 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.tool = xf.UNSPECIFIED),
-          (this.result = { case: void 0 }),
+          (this.result = { case: undefined }),
           v.util.initPartial(e, this)
       }
       static {
@@ -10833,7 +10833,7 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.conversationId = ""),
-          (this.step = { case: void 0 }),
+          (this.step = { case: undefined }),
           v.util.initPartial(e, this)
       }
       static {
@@ -10912,7 +10912,7 @@ export function createAIServiceV1(params) {
             name: "search_results",
             kind: "message",
             T: Hmn,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -10983,7 +10983,7 @@ export function createAIServiceV1(params) {
     },
     jAi = class Sxe extends _ {
       constructor(e) {
-        super(), (this.toolCall = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.toolCall = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -11024,7 +11024,7 @@ export function createAIServiceV1(params) {
     },
     BB = class xxe extends _ {
       constructor(e) {
-        super(), (this.toolResult = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.toolResult = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -11114,7 +11114,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "contents", kind: "scalar", T: 9 },
-          { no: 2, name: "diagnostics", kind: "message", T: qRi, repeated: !0 },
+          { no: 2, name: "diagnostics", kind: "message", T: qRi, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -11145,7 +11145,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "commands", kind: "scalar", T: 9, repeated: !0 },
+          { no: 1, name: "commands", kind: "scalar", T: 9, repeated: true },
           { no: 2, name: "commands_uuid", kind: "scalar", T: 9 },
         ])
       }
@@ -11174,7 +11174,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "outputs", kind: "scalar", T: 9, repeated: !0 },
+          { no: 1, name: "outputs", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -11211,21 +11211,21 @@ export function createAIServiceV1(params) {
             name: "removed_file_paths",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 2,
             name: "created_file_paths",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 3,
             name: "created_directory_paths",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -11262,14 +11262,14 @@ export function createAIServiceV1(params) {
             name: "created_file_paths",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 2,
             name: "removed_file_paths",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -11327,7 +11327,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "files", kind: "message", T: Ymn, repeated: !0 },
+          { no: 1, name: "files", kind: "message", T: Ymn, repeated: true },
           { no: 2, name: "root_workspace_path", kind: "scalar", T: 9 },
         ])
       }
@@ -11409,7 +11409,7 @@ export function createAIServiceV1(params) {
         super(),
           (this.query = ""),
           (this.topK = 0),
-          (this.grabWholeFile = !1),
+          (this.grabWholeFile = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -11421,10 +11421,10 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "query", kind: "scalar", T: 9 },
-          { no: 2, name: "include_pattern", kind: "scalar", T: 9, opt: !0 },
-          { no: 3, name: "exclude_pattern", kind: "scalar", T: 9, opt: !0 },
+          { no: 2, name: "include_pattern", kind: "scalar", T: 9, opt: true },
+          { no: 3, name: "exclude_pattern", kind: "scalar", T: 9, opt: true },
           { no: 4, name: "top_k", kind: "scalar", T: 5 },
-          { no: 5, name: "index_id", kind: "scalar", T: 9, opt: !0 },
+          { no: 5, name: "index_id", kind: "scalar", T: 9, opt: true },
           { no: 6, name: "grab_whole_file", kind: "scalar", T: 8 },
         ])
       }
@@ -11456,7 +11456,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "results", kind: "message", T: JAi, repeated: !0 },
+          { no: 1, name: "results", kind: "message", T: JAi, repeated: true },
           {
             no: 2,
             name: "files",
@@ -11500,13 +11500,13 @@ export function createAIServiceV1(params) {
           { no: 2, name: "score", kind: "scalar", T: 2 },
           { no: 3, name: "content", kind: "scalar", T: 9 },
           { no: 4, name: "range", kind: "message", T: Hu },
-          { no: 5, name: "original_content", kind: "scalar", T: 9, opt: !0 },
+          { no: 5, name: "original_content", kind: "scalar", T: 9, opt: true },
           {
             no: 6,
             name: "detailed_lines",
             kind: "message",
             T: ASt,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -11527,10 +11527,10 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.query = ""),
-          (this.regex = !1),
+          (this.regex = false),
           (this.includePattern = ""),
           (this.excludePattern = ""),
-          (this.filenameSearch = !1),
+          (this.filenameSearch = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -11567,7 +11567,7 @@ export function createAIServiceV1(params) {
           (this.relativeWorkspacePath = ""),
           (this.numMatches = 0),
           (this.potentiallyRelevantLines = []),
-          (this.cropped = !1),
+          (this.cropped = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -11585,7 +11585,7 @@ export function createAIServiceV1(params) {
             name: "potentially_relevant_lines",
             kind: "message",
             T: KAi,
-            repeated: !0,
+            repeated: true,
           },
           { no: 4, name: "cropped", kind: "scalar", T: 8 },
         ])
@@ -11641,8 +11641,8 @@ export function createAIServiceV1(params) {
           (this.fileResults = []),
           (this.numTotalMatches = 0),
           (this.numTotalMatchedFiles = 0),
-          (this.numTotalMayBeIncomplete = !1),
-          (this.filesOnly = !1),
+          (this.numTotalMayBeIncomplete = false),
+          (this.filesOnly = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -11653,7 +11653,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "file_results", kind: "message", T: n1t, repeated: !0 },
+          { no: 1, name: "file_results", kind: "message", T: n1t, repeated: true },
           { no: 2, name: "num_total_matches", kind: "scalar", T: 5 },
           { no: 3, name: "num_total_matched_files", kind: "scalar", T: 5 },
           { no: 4, name: "num_total_may_be_incomplete", kind: "scalar", T: 8 },
@@ -11690,7 +11690,7 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
           { no: 2, name: "start_line_number", kind: "scalar", T: 5 },
-          { no: 3, name: "num_lines", kind: "scalar", T: 5, opt: !0 },
+          { no: 3, name: "num_lines", kind: "scalar", T: 5, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -11713,7 +11713,7 @@ export function createAIServiceV1(params) {
           (this.startLineNumber = 0),
           (this.lines = []),
           (this.totalNumLines = 0),
-          (this.cropped = !1),
+          (this.cropped = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -11726,7 +11726,7 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
           { no: 2, name: "start_line_number", kind: "scalar", T: 5 },
-          { no: 3, name: "lines", kind: "scalar", T: 9, repeated: !0 },
+          { no: 3, name: "lines", kind: "scalar", T: 9, repeated: true },
           { no: 4, name: "total_num_lines", kind: "scalar", T: 5 },
           { no: 5, name: "cropped", kind: "scalar", T: 8 },
         ])
@@ -11847,10 +11847,10 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "feedback", kind: "scalar", T: 9, repeated: !0 },
+          { no: 1, name: "feedback", kind: "scalar", T: 9, repeated: true },
           { no: 4, name: "relative_workspace_path", kind: "scalar", T: 9 },
           { no: 2, name: "context_start_line_number", kind: "scalar", T: 5 },
-          { no: 3, name: "context_lines", kind: "scalar", T: 9, repeated: !0 },
+          { no: 3, name: "context_lines", kind: "scalar", T: 9, repeated: true },
           { no: 5, name: "context_total_num_lines", kind: "scalar", T: 5 },
           { no: 6, name: "file_total_lines", kind: "scalar", T: 5 },
         ])
@@ -12039,7 +12039,7 @@ export function createAIServiceV1(params) {
             name: "potentially_relevant_lines",
             kind: "message",
             T: tMi,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -12100,7 +12100,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "results", kind: "message", T: eMi, repeated: !0 },
+          { no: 1, name: "results", kind: "message", T: eMi, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -12150,7 +12150,7 @@ export function createAIServiceV1(params) {
           (this.relativeWorkspacePath = ""),
           (this.text = ""),
           (this.editId = ""),
-          (this.firstEdit = !1),
+          (this.firstEdit = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -12162,8 +12162,8 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
-          { no: 2, name: "start_line_number", kind: "scalar", T: 5, opt: !0 },
-          { no: 3, name: "end_line_number", kind: "scalar", T: 5, opt: !0 },
+          { no: 2, name: "start_line_number", kind: "scalar", T: 5, opt: true },
+          { no: 3, name: "end_line_number", kind: "scalar", T: 5, opt: true },
           { no: 4, name: "text", kind: "scalar", T: 9 },
           { no: 5, name: "edit_id", kind: "scalar", T: 9 },
           { no: 6, name: "first_edit", kind: "scalar", T: 8 },
@@ -12227,10 +12227,10 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
-          { no: 2, name: "line_number", kind: "scalar", T: 5, opt: !0 },
+          { no: 2, name: "line_number", kind: "scalar", T: 5, opt: true },
           { no: 3, name: "replace_num_lines", kind: "scalar", T: 5 },
-          { no: 4, name: "new_lines", kind: "scalar", T: 9, repeated: !0 },
-          { no: 7, name: "replace_whole_file", kind: "scalar", T: 8, opt: !0 },
+          { no: 4, name: "new_lines", kind: "scalar", T: 9, repeated: true },
+          { no: 7, name: "replace_whole_file", kind: "scalar", T: 8, opt: true },
           { no: 5, name: "edit_id", kind: "scalar", T: 9 },
           {
             no: 6,
@@ -12243,7 +12243,7 @@ export function createAIServiceV1(params) {
             name: "auto_fix_all_linter_errors_in_file",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
         ])
       }
@@ -12290,9 +12290,9 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "feedback", kind: "scalar", T: 9, repeated: !0 },
+          { no: 1, name: "feedback", kind: "scalar", T: 9, repeated: true },
           { no: 2, name: "context_start_line_number", kind: "scalar", T: 5 },
-          { no: 3, name: "context_lines", kind: "scalar", T: 9, repeated: !0 },
+          { no: 3, name: "context_lines", kind: "scalar", T: 9, repeated: true },
           { no: 4, name: "file", kind: "scalar", T: 9 },
           { no: 5, name: "file_total_lines", kind: "scalar", T: 5 },
           {
@@ -12300,7 +12300,7 @@ export function createAIServiceV1(params) {
             name: "structured_feedback",
             kind: "message",
             T: rMi,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -12380,7 +12380,7 @@ export function createAIServiceV1(params) {
             name: "related_information",
             kind: "message",
             T: nMi,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -12443,7 +12443,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "feedback", kind: "message", T: lMi, repeated: !0 },
+          { no: 1, name: "feedback", kind: "message", T: lMi, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -12522,7 +12522,7 @@ export function createAIServiceV1(params) {
             name: "related_information",
             kind: "message",
             T: aMi,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -12552,7 +12552,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
-          { no: 2, name: "test_name", kind: "scalar", T: 9, opt: !0 },
+          { no: 2, name: "test_name", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -12636,7 +12636,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "tests", kind: "message", T: ubn, repeated: !0 },
+          { no: 1, name: "tests", kind: "message", T: ubn, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -12665,7 +12665,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "name", kind: "scalar", T: 9 },
-          { no: 2, name: "lines", kind: "scalar", T: 9, repeated: !0 },
+          { no: 2, name: "lines", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -12694,7 +12694,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
-          { no: 2, name: "test_name", kind: "scalar", T: 9, opt: !0 },
+          { no: 2, name: "test_name", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -12794,7 +12794,7 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.relativeWorkspacePath = ""),
-          (this.includeChildren = !1),
+          (this.includeChildren = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -12806,7 +12806,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
-          { no: 2, name: "line_range", kind: "message", T: pbn, opt: !0 },
+          { no: 2, name: "line_range", kind: "message", T: pbn, opt: true },
           { no: 3, name: "include_children", kind: "scalar", T: 8 },
         ])
       }
@@ -12867,7 +12867,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "symbols", kind: "message", T: toe, repeated: !0 },
+          { no: 1, name: "symbols", kind: "message", T: toe, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -12899,7 +12899,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "edit_plan", kind: "scalar", T: 9 },
-          { no: 2, name: "file_regions", kind: "message", T: mbn, repeated: !0 },
+          { no: 2, name: "file_regions", kind: "message", T: mbn, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -12956,8 +12956,8 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "file_results", kind: "message", T: fVe, repeated: !0 },
-          { no: 2, name: "error", kind: "scalar", T: 9, opt: !0 },
+          { no: 1, name: "file_results", kind: "message", T: fVe, repeated: true },
+          { no: 2, name: "error", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -12977,8 +12977,8 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.filePath = ""),
-          (this.isApplied = !1),
-          (this.applyFailed = !1),
+          (this.isApplied = false),
+          (this.applyFailed = false),
           (this.linterErrors = []),
           v.util.initPartial(e, this)
       }
@@ -12994,8 +12994,8 @@ export function createAIServiceV1(params) {
           { no: 2, name: "diff", kind: "message", T: nG },
           { no: 3, name: "is_applied", kind: "scalar", T: 8 },
           { no: 4, name: "apply_failed", kind: "scalar", T: 8 },
-          { no: 5, name: "error", kind: "scalar", T: 9, opt: !0 },
-          { no: 6, name: "linter_errors", kind: "message", T: k$, repeated: !0 },
+          { no: 5, name: "error", kind: "scalar", T: 9, opt: true },
+          { no: 6, name: "linter_errors", kind: "message", T: k$, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -13041,8 +13041,8 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.command = ""),
-          (this.isBackground = !1),
-          (this.requireUserApproval = !1),
+          (this.isBackground = false),
+          (this.requireUserApproval = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -13054,9 +13054,9 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "command", kind: "scalar", T: 9 },
-          { no: 2, name: "cwd", kind: "scalar", T: 9, opt: !0 },
-          { no: 3, name: "new_session", kind: "scalar", T: 8, opt: !0 },
-          { no: 4, name: "options", kind: "message", T: vbn, opt: !0 },
+          { no: 2, name: "cwd", kind: "scalar", T: 9, opt: true },
+          { no: 3, name: "new_session", kind: "scalar", T: 8, opt: true },
+          { no: 4, name: "options", kind: "message", T: vbn, opt: true },
           { no: 5, name: "is_background", kind: "scalar", T: 8 },
           { no: 6, name: "require_user_approval", kind: "scalar", T: 8 },
         ])
@@ -13086,37 +13086,37 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "timeout", kind: "scalar", T: 5, opt: !0 },
-          { no: 2, name: "skip_ai_check", kind: "scalar", T: 8, opt: !0 },
+          { no: 1, name: "timeout", kind: "scalar", T: 5, opt: true },
+          { no: 2, name: "skip_ai_check", kind: "scalar", T: 8, opt: true },
           {
             no: 3,
             name: "command_run_timeout_ms",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
           {
             no: 4,
             name: "command_change_check_interval_ms",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
           {
             no: 5,
             name: "ai_finish_check_max_attempts",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
           {
             no: 6,
             name: "ai_finish_check_interval_ms",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
-          { no: 7, name: "delayer_interval_ms", kind: "scalar", T: 5, opt: !0 },
+          { no: 7, name: "delayer_interval_ms", kind: "scalar", T: 5, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -13137,11 +13137,11 @@ export function createAIServiceV1(params) {
         super(),
           (this.output = ""),
           (this.exitCode = 0),
-          (this.poppedOutIntoBackground = !1),
-          (this.isRunningInBackground = !1),
-          (this.notInterrupted = !1),
+          (this.poppedOutIntoBackground = false),
+          (this.isRunningInBackground = false),
+          (this.notInterrupted = false),
           (this.resultingWorkingDirectory = ""),
-          (this.didUserChange = !1),
+          (this.didUserChange = false),
           (this.endedReason = BT.UNSPECIFIED),
           v.util.initPartial(e, this)
       }
@@ -13155,14 +13155,14 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "output", kind: "scalar", T: 9 },
           { no: 2, name: "exit_code", kind: "scalar", T: 5 },
-          { no: 3, name: "rejected", kind: "scalar", T: 8, opt: !0 },
+          { no: 3, name: "rejected", kind: "scalar", T: 8, opt: true },
           { no: 4, name: "popped_out_into_background", kind: "scalar", T: 8 },
           { no: 5, name: "is_running_in_background", kind: "scalar", T: 8 },
           { no: 6, name: "not_interrupted", kind: "scalar", T: 8 },
           { no: 7, name: "resulting_working_directory", kind: "scalar", T: 9 },
           { no: 8, name: "did_user_change", kind: "scalar", T: 8 },
           { no: 9, name: "ended_reason", kind: "enum", T: v.getEnumType(BT) },
-          { no: 10, name: "exit_code_v2", kind: "scalar", T: 5, opt: !0 },
+          { no: 10, name: "exit_code_v2", kind: "scalar", T: 5, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -13182,7 +13182,7 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.command = ""),
-          (this.isBackground = !1),
+          (this.isBackground = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -13222,7 +13222,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "rule_names", kind: "scalar", T: 9, repeated: !0 },
+          { no: 1, name: "rule_names", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -13251,7 +13251,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "instruction", kind: "scalar", T: 9 },
-          { no: 2, name: "plan", kind: "scalar", T: 9, opt: !0 },
+          { no: 2, name: "plan", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -13307,7 +13307,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "references", kind: "message", T: Sbn, repeated: !0 },
+          { no: 1, name: "references", kind: "message", T: Sbn, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -13480,7 +13480,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "tools", kind: "message", T: u1t, repeated: !0 },
+          { no: 1, name: "tools", kind: "message", T: u1t, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -13574,7 +13574,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "tools", kind: "message", T: u1t, repeated: !0 },
+          { no: 1, name: "tools", kind: "message", T: u1t, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -13633,7 +13633,7 @@ export function createAIServiceV1(params) {
             name: "human_changes",
             kind: "message",
             T: yMi,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -13676,16 +13676,16 @@ export function createAIServiceV1(params) {
             name: "before_context_lines",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 4, name: "removed_lines", kind: "scalar", T: 9, repeated: !0 },
-          { no: 5, name: "added_lines", kind: "scalar", T: 9, repeated: !0 },
+          { no: 4, name: "removed_lines", kind: "scalar", T: 9, repeated: true },
+          { no: 5, name: "added_lines", kind: "scalar", T: 9, repeated: true },
           {
             no: 6,
             name: "after_context_lines",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -13723,7 +13723,7 @@ export function createAIServiceV1(params) {
             name: "rendered_diffs",
             kind: "message",
             T: Ibn,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -13786,7 +13786,7 @@ export function createAIServiceV1(params) {
           { no: 1, name: "file", kind: "scalar", T: 9 },
           { no: 2, name: "start_line", kind: "scalar", T: 5 },
           { no: 3, name: "end_line", kind: "scalar", T: 5 },
-          { no: 4, name: "code_lines", kind: "scalar", T: 9, repeated: !0 },
+          { no: 4, name: "code_lines", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -13818,10 +13818,10 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "locations", kind: "message", T: g1t, repeated: !0 },
+          { no: 1, name: "locations", kind: "message", T: g1t, repeated: true },
           { no: 2, name: "id", kind: "scalar", T: 9 },
           { no: 3, name: "description", kind: "scalar", T: 9 },
-          { no: 4, name: "confidence", kind: "scalar", T: 2, opt: !0 },
+          { no: 4, name: "confidence", kind: "scalar", T: 2, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -13849,7 +13849,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "bug_reports", kind: "message", T: Toe, repeated: !0 },
+          { no: 1, name: "bug_reports", kind: "message", T: Toe, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -13868,8 +13868,8 @@ export function createAIServiceV1(params) {
     p1t = class eEe extends _ {
       constructor(e) {
         super(),
-          (this.inBackgroundSubsidized = !1),
-          (this.hasTelemetry = !1),
+          (this.inBackgroundSubsidized = false),
+          (this.hasTelemetry = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -13882,33 +13882,33 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "git_diff", kind: "message", T: FT },
           { no: 2, name: "model_details", kind: "message", T: zr },
-          { no: 3, name: "user_instructions", kind: "scalar", T: 9, opt: !0 },
+          { no: 3, name: "user_instructions", kind: "scalar", T: 9, opt: true },
           {
             no: 4,
             name: "bug_detection_guidelines",
             kind: "scalar",
             T: 9,
-            opt: !0,
+            opt: true,
           },
-          { no: 5, name: "iterations", kind: "scalar", T: 5, opt: !0 },
+          { no: 5, name: "iterations", kind: "scalar", T: 5, opt: true },
           {
             no: 12,
             name: "unified_context_lines",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
           { no: 6, name: "in_background_subsidized", kind: "scalar", T: 8 },
-          { no: 7, name: "session_id", kind: "scalar", T: 9, opt: !0 },
-          { no: 8, name: "price_id", kind: "scalar", T: 9, opt: !0 },
+          { no: 7, name: "session_id", kind: "scalar", T: 9, opt: true },
+          { no: 8, name: "price_id", kind: "scalar", T: 9, opt: true },
           { no: 9, name: "has_telemetry", kind: "scalar", T: 8 },
-          { no: 10, name: "constrain_to_file", kind: "scalar", T: 9, opt: !0 },
+          { no: 10, name: "constrain_to_file", kind: "scalar", T: 9, opt: true },
           {
             no: 11,
             name: "constrain_to_range",
             kind: "message",
             T: Tbn,
-            opt: !0,
+            opt: true,
           },
         ])
       }
@@ -14020,7 +14020,7 @@ export function createAIServiceV1(params) {
     },
     CCo = class nEe extends _ {
       constructor(e) {
-        super(), (this.isRealBug = !1), v.util.initPartial(e, this)
+        super(), (this.isRealBug = false), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -14052,9 +14052,9 @@ export function createAIServiceV1(params) {
         super(),
           (this.prefixUrl = ""),
           (this.docName = ""),
-          (this.isDifferentPrefixOrigin = !1),
+          (this.isDifferentPrefixOrigin = false),
           (this.truePrefixUrl = ""),
-          (this.public = !1),
+          (this.public = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -14070,7 +14070,7 @@ export function createAIServiceV1(params) {
           { no: 3, name: "is_different_prefix_origin", kind: "scalar", T: 8 },
           { no: 4, name: "true_prefix_url", kind: "scalar", T: 9 },
           { no: 5, name: "public", kind: "scalar", T: 8 },
-          { no: 6, name: "team_id", kind: "scalar", T: 5, opt: !0 },
+          { no: 6, name: "team_id", kind: "scalar", T: 5, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -14130,7 +14130,7 @@ export function createAIServiceV1(params) {
           (this.docIdentifier = ""),
           (this.query = ""),
           (this.topK = 0),
-          (this.rerankResults = !1),
+          (this.rerankResults = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -14179,7 +14179,7 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "doc_identifier", kind: "scalar", T: 9 },
           { no: 2, name: "doc_name", kind: "scalar", T: 9 },
-          { no: 3, name: "doc_chunks", kind: "message", T: SMi, repeated: !0 },
+          { no: 3, name: "doc_chunks", kind: "message", T: SMi, repeated: true },
           { no: 4, name: "status", kind: "enum", T: v.getEnumType(Poe) },
         ])
       }
@@ -14213,7 +14213,7 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.type = ls.UNSPECIFIED),
-          (this.data = { case: void 0 }),
+          (this.data = { case: undefined }),
           v.util.initPartial(e, this)
       }
       static {
@@ -14387,7 +14387,7 @@ export function createAIServiceV1(params) {
             K: 9,
             V: { kind: "message", T: Rbn },
           },
-          { no: 4, name: "required", kind: "scalar", T: 9, repeated: !0 },
+          { no: 4, name: "required", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -14416,7 +14416,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "type", kind: "scalar", T: 9 },
-          { no: 2, name: "description", kind: "scalar", T: 9, opt: !0 },
+          { no: 2, name: "description", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -14445,8 +14445,8 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "linter_errors", kind: "message", T: Cf, repeated: !0 },
-          { no: 2, name: "custom_instructions", kind: "scalar", T: 9, opt: !0 },
+          { no: 1, name: "linter_errors", kind: "message", T: Cf, repeated: true },
+          { no: 2, name: "custom_instructions", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -14475,8 +14475,8 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "test_names", kind: "scalar", T: 9, repeated: !0 },
-          { no: 2, name: "custom_instructions", kind: "scalar", T: 9, opt: !0 },
+          { no: 1, name: "test_names", kind: "scalar", T: 9, repeated: true },
+          { no: 2, name: "custom_instructions", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -14505,7 +14505,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "custom_instructions", kind: "scalar", T: 9, opt: !0 },
+          { no: 1, name: "custom_instructions", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -14535,9 +14535,9 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "command", kind: "scalar", T: 9 },
-          { no: 2, name: "custom_instructions", kind: "scalar", T: 9, opt: !0 },
-          { no: 3, name: "output", kind: "scalar", T: 9, opt: !0 },
-          { no: 4, name: "exit_code", kind: "scalar", T: 5, opt: !0 },
+          { no: 2, name: "custom_instructions", kind: "scalar", T: 9, opt: true },
+          { no: 3, name: "output", kind: "scalar", T: 9, opt: true },
+          { no: 4, name: "exit_code", kind: "scalar", T: 5, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -14570,16 +14570,16 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "custom_instructions", kind: "scalar", T: 9, opt: !0 },
-          { no: 2, name: "tool_schemas", kind: "message", T: xMi, repeated: !0 },
-          { no: 3, name: "relevant_files", kind: "scalar", T: 9, repeated: !0 },
-          { no: 4, name: "files_in_context", kind: "scalar", T: 9, repeated: !0 },
+          { no: 1, name: "custom_instructions", kind: "scalar", T: 9, opt: true },
+          { no: 2, name: "tool_schemas", kind: "message", T: xMi, repeated: true },
+          { no: 3, name: "relevant_files", kind: "scalar", T: 9, repeated: true },
+          { no: 4, name: "files_in_context", kind: "scalar", T: 9, repeated: true },
           {
             no: 5,
             name: "semantic_search_files",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -14609,8 +14609,8 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "custom_instructions", kind: "scalar", T: 9, opt: !0 },
-          { no: 2, name: "diffs", kind: "message", T: kMi, repeated: !0 },
+          { no: 1, name: "custom_instructions", kind: "scalar", T: 9, opt: true },
+          { no: 2, name: "diffs", kind: "message", T: kMi, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -14643,7 +14643,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
-          { no: 3, name: "chunks", kind: "message", T: EMi, repeated: !0 },
+          { no: 3, name: "chunks", kind: "message", T: EMi, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -14675,8 +14675,8 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "old_lines", kind: "scalar", T: 9, repeated: !0 },
-          { no: 2, name: "new_lines", kind: "scalar", T: 9, repeated: !0 },
+          { no: 1, name: "old_lines", kind: "scalar", T: 9, repeated: true },
+          { no: 2, name: "new_lines", kind: "scalar", T: 9, repeated: true },
           { no: 3, name: "old_range", kind: "message", T: Kf },
           { no: 4, name: "new_range", kind: "message", T: Kf },
         ])
@@ -14707,7 +14707,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "custom_instructions", kind: "scalar", T: 9, opt: !0 },
+          { no: 1, name: "custom_instructions", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -14740,22 +14740,22 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "custom_instructions", kind: "scalar", T: 9, opt: !0 },
+          { no: 1, name: "custom_instructions", kind: "scalar", T: 9, opt: true },
           {
             no: 2,
             name: "potential_context_files",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 3,
             name: "potential_context_code_chunks",
             kind: "message",
             T: QRi,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 4, name: "files_in_context", kind: "scalar", T: 9, repeated: !0 },
+          { no: 4, name: "files_in_context", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -14784,7 +14784,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "custom_instructions", kind: "scalar", T: 9, opt: !0 },
+          { no: 1, name: "custom_instructions", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -14813,8 +14813,8 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "custom_instructions", kind: "scalar", T: 9, opt: !0 },
-          { no: 2, name: "additional_files", kind: "scalar", T: 9, repeated: !0 },
+          { no: 1, name: "custom_instructions", kind: "scalar", T: 9, opt: true },
+          { no: 2, name: "additional_files", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -14843,13 +14843,13 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "custom_instructions", kind: "scalar", T: 9, opt: !0 },
+          { no: 1, name: "custom_instructions", kind: "scalar", T: 9, opt: true },
           {
             no: 2,
             name: "attached_code_chunks",
             kind: "message",
             T: QRi,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -14879,7 +14879,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "custom_instructions", kind: "scalar", T: 9, opt: !0 },
+          { no: 1, name: "custom_instructions", kind: "scalar", T: 9, opt: true },
           { no: 2, name: "memory", kind: "scalar", T: 9 },
         ])
       }
@@ -14909,7 +14909,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "custom_instructions", kind: "scalar", T: 9, opt: !0 },
+          { no: 1, name: "custom_instructions", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -14981,9 +14981,9 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.files = []),
-          (this.includeQuickFixes = !1),
+          (this.includeQuickFixes = false),
           (this.doNotUseInProdNewFilesShouldBeTemporarilyCreatedForIncreasedAccuracy =
-            !1),
+            false),
           v.util.initPartial(e, this)
       }
       static {
@@ -14994,7 +14994,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "files", kind: "message", T: zbn, repeated: !0 },
+          { no: 1, name: "files", kind: "message", T: zbn, repeated: true },
           { no: 2, name: "include_quick_fixes", kind: "scalar", T: 8 },
           {
             no: 3,
@@ -15041,7 +15041,7 @@ export function createAIServiceV1(params) {
             name: "get_all_lints_not_just_delta_lints_for_ranges_in_final_model",
             kind: "message",
             T: Gbn,
-            opt: !0,
+            opt: true,
           },
         ])
       }
@@ -15071,7 +15071,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "ranges", kind: "message", T: Jbn, repeated: !0 },
+          { no: 1, name: "ranges", kind: "message", T: Jbn, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -15135,7 +15135,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "lints", kind: "message", T: pVe, repeated: !0 },
+          { no: 1, name: "lints", kind: "message", T: pVe, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -15184,7 +15184,7 @@ export function createAIServiceV1(params) {
             T: 5,
           },
           { no: 7, name: "end_column_one_indexed", kind: "scalar", T: 5 },
-          { no: 9, name: "quick_fixes", kind: "message", T: TMi, repeated: !0 },
+          { no: 9, name: "quick_fixes", kind: "message", T: TMi, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -15205,7 +15205,7 @@ export function createAIServiceV1(params) {
         super(),
           (this.message = ""),
           (this.kind = ""),
-          (this.isPreferred = !1),
+          (this.isPreferred = false),
           (this.edits = []),
           v.util.initPartial(e, this)
       }
@@ -15220,7 +15220,7 @@ export function createAIServiceV1(params) {
           { no: 1, name: "message", kind: "scalar", T: 9 },
           { no: 2, name: "kind", kind: "scalar", T: 9 },
           { no: 3, name: "is_preferred", kind: "scalar", T: 8 },
-          { no: 4, name: "edits", kind: "message", T: PMi, repeated: !0 },
+          { no: 4, name: "edits", kind: "message", T: PMi, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -15354,7 +15354,7 @@ export function createAIServiceV1(params) {
     },
     Q9 = class _Ee extends _ {
       constructor(e) {
-        super(), (this.request = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.request = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -15395,7 +15395,7 @@ export function createAIServiceV1(params) {
     },
     Xbn = class UEe extends _ {
       constructor(e) {
-        super(), (this.response = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.response = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -15443,7 +15443,7 @@ export function createAIServiceV1(params) {
     },
     SCo = class HEe extends _ {
       constructor(e) {
-        super(), (this.strategy = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.strategy = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -15521,7 +15521,7 @@ export function createAIServiceV1(params) {
           (this.truncationLastBubbleIdInclusive = ""),
           (this.clientShouldStartSendingFromInclusiveBubbleId = ""),
           (this.previousConversationSummaryBubbleId = ""),
-          (this.includesToolResults = !1),
+          (this.includesToolResults = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -15584,8 +15584,8 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
           { no: 2, name: "contents", kind: "scalar", T: 9 },
-          { no: 3, name: "line_range", kind: "message", T: Kf, opt: !0 },
-          { no: 4, name: "code_block", kind: "message", T: ed, opt: !0 },
+          { no: 3, name: "line_range", kind: "message", T: Kf, opt: true },
+          { no: 4, name: "code_block", kind: "message", T: ed, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -15642,7 +15642,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "chunks", kind: "message", T: SMi, repeated: !0 },
+          { no: 1, name: "chunks", kind: "message", T: SMi, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -15670,7 +15670,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "references", kind: "message", T: NMi, repeated: !0 },
+          { no: 1, name: "references", kind: "message", T: NMi, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -15769,7 +15769,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "message", kind: "scalar", T: 9 },
-          { no: 2, name: "metadata", kind: "scalar", T: 9, opt: !0 },
+          { no: 2, name: "metadata", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -15797,7 +15797,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "updates", kind: "message", T: Zbn, repeated: !0 },
+          { no: 1, name: "updates", kind: "message", T: Zbn, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -15829,7 +15829,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "query", kind: "scalar", T: 9 },
-          { no: 2, name: "documents", kind: "message", T: ivn, repeated: !0 },
+          { no: 2, name: "documents", kind: "message", T: ivn, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -15857,7 +15857,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "documents", kind: "message", T: svn, repeated: !0 },
+          { no: 1, name: "documents", kind: "message", T: svn, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -15951,13 +15951,13 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "file_name", kind: "scalar", T: 9 },
-          { no: 2, name: "diff_history", kind: "scalar", T: 9, repeated: !0 },
+          { no: 2, name: "diff_history", kind: "scalar", T: 9, repeated: true },
           {
             no: 3,
             name: "diff_history_timestamps",
             kind: "scalar",
             T: 1,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -15986,12 +15986,12 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "exthost_platform", kind: "scalar", T: 9, opt: !0 },
-          { no: 2, name: "exthost_arch", kind: "scalar", T: 9, opt: !0 },
-          { no: 3, name: "exthost_release", kind: "scalar", T: 9, opt: !0 },
-          { no: 4, name: "exthost_shell", kind: "scalar", T: 9, opt: !0 },
-          { no: 5, name: "local_timestamp", kind: "scalar", T: 9, opt: !0 },
-          { no: 6, name: "workspace_uris", kind: "scalar", T: 9, repeated: !0 },
+          { no: 1, name: "exthost_platform", kind: "scalar", T: 9, opt: true },
+          { no: 2, name: "exthost_arch", kind: "scalar", T: 9, opt: true },
+          { no: 3, name: "exthost_release", kind: "scalar", T: 9, opt: true },
+          { no: 4, name: "exthost_shell", kind: "scalar", T: 9, opt: true },
+          { no: 5, name: "local_timestamp", kind: "scalar", T: 9, opt: true },
+          { no: 6, name: "workspace_uris", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -16019,14 +16019,14 @@ export function createAIServiceV1(params) {
           (this.fileDiffHistories = []),
           (this.quotes = []),
           (this.additionalRankedContext = []),
-          (this.isChat = !1),
+          (this.isChat = false),
           (this.conversationId = ""),
-          (this.repositoryInfoShouldQueryStaging = !1),
-          (this.isAgentic = !1),
+          (this.repositoryInfoShouldQueryStaging = false),
+          (this.isAgentic = false),
           (this.supportedTools = []),
-          (this.enableYoloMode = !1),
+          (this.enableYoloMode = false),
           (this.yoloPrompt = ""),
-          (this.useUnifiedChatPrompt = !1),
+          (this.useUnifiedChatPrompt = false),
           (this.mcpTools = []),
           v.util.initPartial(e, this)
       }
@@ -16038,22 +16038,22 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "conversation", kind: "message", T: Ha, repeated: !0 },
+          { no: 1, name: "conversation", kind: "message", T: Ha, repeated: true },
           {
             no: 30,
             name: "full_conversation_headers_only",
             kind: "message",
             T: dvn,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 2, name: "allow_long_file_scan", kind: "scalar", T: 8, opt: !0 },
+          { no: 2, name: "allow_long_file_scan", kind: "scalar", T: 8, opt: true },
           { no: 3, name: "explicit_context", kind: "message", T: Sf },
           {
             no: 4,
             name: "can_handle_filenames_after_language_ids",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
           { no: 5, name: "model_details", kind: "message", T: zr },
           { no: 6, name: "linter_errors", kind: "message", T: Cf },
@@ -16062,63 +16062,63 @@ export function createAIServiceV1(params) {
             name: "documentation_identifiers",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 8, name: "use_web", kind: "scalar", T: 9, opt: !0 },
+          { no: 8, name: "use_web", kind: "scalar", T: 9, opt: true },
           {
             no: 9,
             name: "external_links",
             kind: "message",
             T: FSt,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 10, name: "project_context", kind: "message", T: Ha, opt: !0 },
+          { no: 10, name: "project_context", kind: "message", T: Ha, opt: true },
           {
             no: 11,
             name: "diffs_for_compressing_files",
             kind: "message",
             T: rvn,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 12, name: "compress_edits", kind: "scalar", T: 8, opt: !0 },
-          { no: 13, name: "should_cache", kind: "scalar", T: 8, opt: !0 },
+          { no: 12, name: "compress_edits", kind: "scalar", T: 8, opt: true },
+          { no: 13, name: "should_cache", kind: "scalar", T: 8, opt: true },
           {
             no: 14,
             name: "multi_file_linter_errors",
             kind: "message",
             T: Cf,
-            repeated: !0,
+            repeated: true,
           },
           { no: 15, name: "current_file", kind: "message", T: Ho },
-          { no: 16, name: "recent_edits", kind: "message", T: ovn, opt: !0 },
+          { no: 16, name: "recent_edits", kind: "message", T: ovn, opt: true },
           {
             no: 17,
             name: "use_reference_composer_diff_prompt",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
           {
             no: 18,
             name: "file_diff_histories",
             kind: "message",
             T: v1t,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 19,
             name: "use_new_compression_scheme",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
-          { no: 21, name: "quotes", kind: "message", T: eVe, repeated: !0 },
+          { no: 21, name: "quotes", kind: "message", T: eVe, repeated: true },
           {
             no: 20,
             name: "additional_ranked_context",
             kind: "message",
             T: m1t,
-            repeated: !0,
+            repeated: true,
           },
           { no: 22, name: "is_chat", kind: "scalar", T: 8 },
           { no: 23, name: "conversation_id", kind: "scalar", T: 9 },
@@ -16136,40 +16136,40 @@ export function createAIServiceV1(params) {
             name: "conversation_summary",
             kind: "message",
             T: L$,
-            opt: !0,
+            opt: true,
           },
           {
             no: 29,
             name: "supported_tools",
             kind: "enum",
             T: v.getEnumType(jt),
-            repeated: !0,
+            repeated: true,
           },
           { no: 31, name: "enable_yolo_mode", kind: "scalar", T: 8 },
           { no: 32, name: "yolo_prompt", kind: "scalar", T: 9 },
           { no: 33, name: "use_unified_chat_prompt", kind: "scalar", T: 8 },
-          { no: 34, name: "mcp_tools", kind: "message", T: u1t, repeated: !0 },
+          { no: 34, name: "mcp_tools", kind: "message", T: u1t, repeated: true },
           {
             no: 35,
             name: "use_full_inputs_context",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
-          { no: 36, name: "is_resume", kind: "scalar", T: 8, opt: !0 },
+          { no: 36, name: "is_resume", kind: "scalar", T: 8, opt: true },
           {
             no: 37,
             name: "allow_model_fallbacks",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
           {
             no: 38,
             name: "number_of_times_shown_fallback_model_warning",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
         ])
       }
@@ -16205,13 +16205,13 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
-          { no: 2, name: "red_ranges", kind: "message", T: ck, repeated: !0 },
+          { no: 2, name: "red_ranges", kind: "message", T: ck, repeated: true },
           {
             no: 3,
             name: "red_ranges_reversed",
             kind: "message",
             T: ck,
-            repeated: !0,
+            repeated: true,
           },
           { no: 4, name: "start_hash", kind: "scalar", T: 9 },
           { no: 5, name: "end_hash", kind: "scalar", T: 9 },
@@ -16250,21 +16250,21 @@ export function createAIServiceV1(params) {
             name: "code_block_info",
             kind: "message",
             T: avn,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 2,
             name: "final_file_values",
             kind: "message",
             T: lvn,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 3,
             name: "edits_belong_to_composer_generation_uuid",
             kind: "scalar",
             T: 9,
-            opt: !0,
+            opt: true,
           },
         ])
       }
@@ -16295,10 +16295,10 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
-          { no: 2, name: "content_before", kind: "scalar", T: 9, opt: !0 },
-          { no: 3, name: "content_after", kind: "scalar", T: 9, opt: !0 },
-          { no: 4, name: "generation_uuid", kind: "scalar", T: 9, opt: !0 },
-          { no: 5, name: "version", kind: "scalar", T: 5, opt: !0 },
+          { no: 2, name: "content_before", kind: "scalar", T: 9, opt: true },
+          { no: 3, name: "content_after", kind: "scalar", T: 9, opt: true },
+          { no: 4, name: "generation_uuid", kind: "scalar", T: 9, opt: true },
+          { no: 5, name: "version", kind: "scalar", T: 5, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -16360,68 +16360,68 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "text", kind: "scalar", T: 9 },
-          { no: 22, name: "server_bubble_id", kind: "scalar", T: 9, opt: !0 },
+          { no: 22, name: "server_bubble_id", kind: "scalar", T: 9, opt: true },
           {
             no: 2,
             name: "debugging_only_chat_prompt",
             kind: "scalar",
             T: 9,
-            opt: !0,
+            opt: true,
           },
           {
             no: 3,
             name: "debugging_only_token_count",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
           { no: 4, name: "document_citation", kind: "message", T: b1t },
-          { no: 5, name: "filled_prompt", kind: "scalar", T: 9, opt: !0 },
-          { no: 6, name: "is_big_file", kind: "scalar", T: 8, opt: !0 },
-          { no: 7, name: "intermediate_text", kind: "scalar", T: 9, opt: !0 },
+          { no: 5, name: "filled_prompt", kind: "scalar", T: 9, opt: true },
+          { no: 6, name: "is_big_file", kind: "scalar", T: 8, opt: true },
+          { no: 7, name: "intermediate_text", kind: "scalar", T: 9, opt: true },
           {
             no: 10,
             name: "is_using_slow_request",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
-          { no: 8, name: "chunk_identity", kind: "message", T: cvn, opt: !0 },
-          { no: 9, name: "docs_reference", kind: "message", T: bVe, opt: !0 },
-          { no: 11, name: "web_citation", kind: "message", T: LMi, opt: !0 },
-          { no: 12, name: "status_updates", kind: "message", T: RMi, opt: !0 },
-          { no: 13, name: "tool_call", kind: "message", T: dmn, opt: !0 },
+          { no: 8, name: "chunk_identity", kind: "message", T: cvn, opt: true },
+          { no: 9, name: "docs_reference", kind: "message", T: bVe, opt: true },
+          { no: 11, name: "web_citation", kind: "message", T: LMi, opt: true },
+          { no: 12, name: "status_updates", kind: "message", T: RMi, opt: true },
+          { no: 13, name: "tool_call", kind: "message", T: dmn, opt: true },
           {
             no: 14,
             name: "should_break_ai_message",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
-          { no: 15, name: "partial_tool_call", kind: "message", T: umn, opt: !0 },
-          { no: 16, name: "final_tool_result", kind: "message", T: hvn, opt: !0 },
-          { no: 17, name: "symbol_link", kind: "message", T: yVe, opt: !0 },
-          { no: 19, name: "file_link", kind: "message", T: y1t, opt: !0 },
+          { no: 15, name: "partial_tool_call", kind: "message", T: umn, opt: true },
+          { no: 16, name: "final_tool_result", kind: "message", T: hvn, opt: true },
+          { no: 17, name: "symbol_link", kind: "message", T: yVe, opt: true },
+          { no: 19, name: "file_link", kind: "message", T: y1t, opt: true },
           {
             no: 18,
             name: "conversation_summary",
             kind: "message",
             T: L$,
-            opt: !0,
+            opt: true,
           },
           {
             no: 20,
             name: "service_status_update",
             kind: "message",
             T: MMi,
-            opt: !0,
+            opt: true,
           },
           {
             no: 21,
             name: "viewable_git_context",
             kind: "message",
             T: $Mi,
-            opt: !0,
+            opt: true,
           },
         ])
       }
@@ -16527,14 +16527,14 @@ export function createAIServiceV1(params) {
             name: "allow_command_links_potentially_unsafe_please_only_use_for_handwritten_trusted_markdown",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
           {
             no: 4,
             name: "action_to_run_on_status_update",
             kind: "scalar",
             T: 9,
-            opt: !0,
+            opt: true,
           },
         ])
       }
@@ -16638,13 +16638,13 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
-          { no: 2, name: "red_ranges", kind: "message", T: ck, repeated: !0 },
+          { no: 2, name: "red_ranges", kind: "message", T: ck, repeated: true },
           {
             no: 3,
             name: "red_ranges_reversed",
             kind: "message",
             T: ck,
-            repeated: !0,
+            repeated: true,
           },
           { no: 4, name: "start_hash", kind: "scalar", T: 9 },
           { no: 5, name: "end_hash", kind: "scalar", T: 9 },
@@ -16679,7 +16679,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "bubble_id", kind: "scalar", T: 9 },
-          { no: 2, name: "server_bubble_id", kind: "scalar", T: 9, opt: !0 },
+          { no: 2, name: "server_bubble_id", kind: "scalar", T: 9, opt: true },
           { no: 3, name: "type", kind: "enum", T: v.getEnumType(fs) },
         ])
       }
@@ -16746,7 +16746,7 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "description", kind: "scalar", T: 9 },
           { no: 2, name: "message", kind: "scalar", T: 9 },
-          { no: 3, name: "files", kind: "message", T: w1t, repeated: !0 },
+          { no: 3, name: "files", kind: "message", T: w1t, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -16780,7 +16780,7 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "title", kind: "scalar", T: 9 },
           { no: 2, name: "body", kind: "scalar", T: 9 },
-          { no: 3, name: "files", kind: "message", T: w1t, repeated: !0 },
+          { no: 3, name: "files", kind: "message", T: w1t, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -16811,7 +16811,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "files", kind: "message", T: w1t, repeated: !0 },
+          { no: 1, name: "files", kind: "message", T: w1t, repeated: true },
           { no: 2, name: "diff_preface", kind: "scalar", T: 9 },
         ])
       }
@@ -16840,9 +16840,9 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "commit_data", kind: "message", T: fvn, opt: !0 },
-          { no: 2, name: "pull_request_data", kind: "message", T: gvn, opt: !0 },
-          { no: 3, name: "diff_data", kind: "message", T: pvn, repeated: !0 },
+          { no: 1, name: "commit_data", kind: "message", T: fvn, opt: true },
+          { no: 2, name: "pull_request_data", kind: "message", T: gvn, opt: true },
+          { no: 3, name: "diff_data", kind: "message", T: pvn, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -16888,15 +16888,15 @@ export function createAIServiceV1(params) {
           (this.diffHistories = []),
           (this.recentlyViewedFiles = []),
           (this.recentLocationsHistory = []),
-          (this.isAgentic = !1),
+          (this.isAgentic = false),
           (this.fileDiffTrajectories = []),
-          (this.existedSubsequentTerminalCommand = !1),
-          (this.existedPreviousTerminalCommand = !1),
+          (this.existedSubsequentTerminalCommand = false),
+          (this.existedPreviousTerminalCommand = false),
           (this.docsReferences = []),
           (this.webReferences = []),
           (this.attachedFoldersListDirResults = []),
           (this.humanChanges = []),
-          (this.attachedHumanChanges = !1),
+          (this.attachedHumanChanges = false),
           (this.summarizedComposers = []),
           (this.cursorRules = []),
           v.util.initPartial(e, this)
@@ -16916,123 +16916,123 @@ export function createAIServiceV1(params) {
             name: "attached_code_chunks",
             kind: "message",
             T: _T,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 4,
             name: "codebase_context_chunks",
             kind: "message",
             T: ed,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 5, name: "commits", kind: "message", T: XN, repeated: !0 },
-          { no: 6, name: "pull_requests", kind: "message", T: k1t, repeated: !0 },
-          { no: 7, name: "git_diffs", kind: "message", T: FT, repeated: !0 },
+          { no: 5, name: "commits", kind: "message", T: XN, repeated: true },
+          { no: 6, name: "pull_requests", kind: "message", T: k1t, repeated: true },
+          { no: 7, name: "git_diffs", kind: "message", T: FT, repeated: true },
           {
             no: 8,
             name: "assistant_suggested_diffs",
             kind: "message",
             T: aG,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 9,
             name: "interpreter_results",
             kind: "message",
             T: _Mi,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 10, name: "images", kind: "message", T: OT, repeated: !0 },
+          { no: 10, name: "images", kind: "message", T: OT, repeated: true },
           {
             no: 11,
             name: "attached_folders",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 12,
             name: "approximate_lint_errors",
             kind: "message",
             T: wvn,
-            repeated: !0,
+            repeated: true,
           },
           { no: 13, name: "bubble_id", kind: "scalar", T: 9 },
-          { no: 32, name: "server_bubble_id", kind: "scalar", T: 9, opt: !0 },
+          { no: 32, name: "server_bubble_id", kind: "scalar", T: 9, opt: true },
           {
             no: 14,
             name: "attached_folders_new",
             kind: "message",
             T: S1t,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 15, name: "lints", kind: "message", T: OMi, repeated: !0 },
+          { no: 15, name: "lints", kind: "message", T: OMi, repeated: true },
           {
             no: 16,
             name: "user_responses_to_suggested_code_blocks",
             kind: "message",
             T: Ivn,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 17, name: "relevant_files", kind: "scalar", T: 9, repeated: !0 },
-          { no: 18, name: "tool_results", kind: "message", T: FMi, repeated: !0 },
-          { no: 19, name: "notepads", kind: "message", T: bvn, repeated: !0 },
+          { no: 17, name: "relevant_files", kind: "scalar", T: 9, repeated: true },
+          { no: 18, name: "tool_results", kind: "message", T: FMi, repeated: true },
+          { no: 19, name: "notepads", kind: "message", T: bvn, repeated: true },
           {
             no: 20,
             name: "is_capability_iteration",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
-          { no: 21, name: "capabilities", kind: "message", T: oG, repeated: !0 },
+          { no: 21, name: "capabilities", kind: "message", T: oG, repeated: true },
           {
             no: 22,
             name: "edit_trail_contexts",
             kind: "message",
             T: yvn,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 23,
             name: "suggested_code_blocks",
             kind: "message",
             T: Evn,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 24,
             name: "diffs_for_compressing_files",
             kind: "message",
             T: uvn,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 25,
             name: "multi_file_linter_errors",
             kind: "message",
             T: zRi,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 26,
             name: "diff_histories",
             kind: "message",
             T: E1t,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 27,
             name: "recently_viewed_files",
             kind: "message",
             T: _T,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 28,
             name: "recent_locations_history",
             kind: "message",
             T: BMi,
-            repeated: !0,
+            repeated: true,
           },
           { no: 29, name: "is_agentic", kind: "scalar", T: 8 },
           {
@@ -17040,14 +17040,14 @@ export function createAIServiceV1(params) {
             name: "file_diff_trajectories",
             kind: "message",
             T: v1t,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 31,
             name: "conversation_summary",
             kind: "message",
             T: L$,
-            opt: !0,
+            opt: true,
           },
           {
             no: 33,
@@ -17066,36 +17066,36 @@ export function createAIServiceV1(params) {
             name: "docs_references",
             kind: "message",
             T: bVe,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 36,
             name: "web_references",
             kind: "message",
             T: NMi,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 37, name: "git_context", kind: "message", T: $Mi, opt: !0 },
+          { no: 37, name: "git_context", kind: "message", T: $Mi, opt: true },
           {
             no: 38,
             name: "attached_folders_list_dir_results",
             kind: "message",
             T: Ioe,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 39,
             name: "cached_conversation_summary",
             kind: "message",
             T: L$,
-            opt: !0,
+            opt: true,
           },
           {
             no: 40,
             name: "human_changes",
             kind: "message",
             T: Svn,
-            repeated: !0,
+            repeated: true,
           },
           { no: 41, name: "attached_human_changes", kind: "scalar", T: 8 },
           {
@@ -17103,9 +17103,9 @@ export function createAIServiceV1(params) {
             name: "summarized_composers",
             kind: "message",
             T: C1t,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 43, name: "cursor_rules", kind: "message", T: iG, repeated: !0 },
+          { no: 43, name: "cursor_rules", kind: "message", T: iG, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -17151,19 +17151,19 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
           { no: 2, name: "start_line_number", kind: "scalar", T: 5 },
-          { no: 3, name: "lines", kind: "scalar", T: 9, repeated: !0 },
+          { no: 3, name: "lines", kind: "scalar", T: 9, repeated: true },
           {
             no: 4,
             name: "summarization_strategy",
             kind: "enum",
             T: v.getEnumType(N$),
-            opt: !0,
+            opt: true,
           },
           { no: 5, name: "language_identifier", kind: "scalar", T: 9 },
-          { no: 6, name: "intent", kind: "enum", T: v.getEnumType(ev), opt: !0 },
-          { no: 7, name: "is_final_version", kind: "scalar", T: 8, opt: !0 },
-          { no: 8, name: "is_first_version", kind: "scalar", T: 8, opt: !0 },
-          { no: 9, name: "contents_are_missing", kind: "scalar", T: 8, opt: !0 },
+          { no: 6, name: "intent", kind: "enum", T: v.getEnumType(ev), opt: true },
+          { no: 7, name: "is_final_version", kind: "scalar", T: 8, opt: true },
+          { no: 8, name: "is_first_version", kind: "scalar", T: 8, opt: true },
+          { no: 9, name: "contents_are_missing", kind: "scalar", T: 8, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -17243,12 +17243,12 @@ export function createAIServiceV1(params) {
             name: "attached_code_chunks",
             kind: "message",
             T: _T,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 7, name: "content", kind: "scalar", T: 9, opt: !0 },
+          { no: 7, name: "content", kind: "scalar", T: 9, opt: true },
           { no: 8, name: "result", kind: "message", T: Zc },
-          { no: 9, name: "error", kind: "message", T: cVe, opt: !0 },
-          { no: 10, name: "images", kind: "message", T: OT, repeated: !0 },
+          { no: 9, name: "error", kind: "message", T: cVe, opt: true },
+          { no: 10, name: "images", kind: "message", T: OT, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -17280,7 +17280,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "ranges", kind: "message", T: mvn, repeated: !0 },
+          { no: 1, name: "ranges", kind: "message", T: mvn, repeated: true },
           { no: 2, name: "content", kind: "scalar", T: 9 },
           { no: 3, name: "relative_workspace_path", kind: "scalar", T: 9 },
         ])
@@ -17356,13 +17356,13 @@ export function createAIServiceV1(params) {
             name: "attached_code_chunks",
             kind: "message",
             T: _T,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 4, name: "attached_folders", kind: "scalar", T: 9, repeated: !0 },
-          { no: 5, name: "commits", kind: "message", T: XN, repeated: !0 },
-          { no: 6, name: "pull_requests", kind: "message", T: k1t, repeated: !0 },
-          { no: 7, name: "git_diffs", kind: "message", T: FT, repeated: !0 },
-          { no: 8, name: "images", kind: "message", T: OT, repeated: !0 },
+          { no: 4, name: "attached_folders", kind: "scalar", T: 9, repeated: true },
+          { no: 5, name: "commits", kind: "message", T: XN, repeated: true },
+          { no: 6, name: "pull_requests", kind: "message", T: k1t, repeated: true },
+          { no: 7, name: "git_diffs", kind: "message", T: FT, repeated: true },
+          { no: 8, name: "images", kind: "message", T: OT, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -17465,7 +17465,7 @@ export function createAIServiceV1(params) {
             name: "edit_trail_sorted",
             kind: "message",
             T: vvn,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -17609,16 +17609,16 @@ export function createAIServiceV1(params) {
             name: "before_context_lines",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 4, name: "removed_lines", kind: "scalar", T: 9, repeated: !0 },
-          { no: 5, name: "added_lines", kind: "scalar", T: 9, repeated: !0 },
+          { no: 4, name: "removed_lines", kind: "scalar", T: 9, repeated: true },
+          { no: 5, name: "added_lines", kind: "scalar", T: 9, repeated: true },
           {
             no: 6,
             name: "after_context_lines",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -17656,7 +17656,7 @@ export function createAIServiceV1(params) {
             name: "rendered_diffs",
             kind: "message",
             T: Cvn,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -17686,7 +17686,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "query", kind: "scalar", T: 9 },
-          { no: 2, name: "files", kind: "message", T: xvn, repeated: !0 },
+          { no: 2, name: "files", kind: "message", T: xvn, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -17750,7 +17750,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "relative_path", kind: "scalar", T: 9 },
-          { no: 2, name: "files", kind: "message", T: kvn, repeated: !0 },
+          { no: 2, name: "files", kind: "message", T: kvn, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -17771,7 +17771,7 @@ export function createAIServiceV1(params) {
         super(),
           (this.relativePath = ""),
           (this.content = ""),
-          (this.truncated = !1),
+          (this.truncated = false),
           (this.score = 0),
           v.util.initPartial(e, this)
       }
@@ -17806,7 +17806,7 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.output = ""),
-          (this.success = !1),
+          (this.success = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -17850,7 +17850,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
-          { no: 3, name: "chunks", kind: "message", T: x1t, repeated: !0 },
+          { no: 3, name: "chunks", kind: "message", T: x1t, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -17881,8 +17881,8 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "old_lines", kind: "scalar", T: 9, repeated: !0 },
-          { no: 2, name: "new_lines", kind: "scalar", T: 9, repeated: !0 },
+          { no: 1, name: "old_lines", kind: "scalar", T: 9, repeated: true },
+          { no: 2, name: "new_lines", kind: "scalar", T: 9, repeated: true },
           { no: 3, name: "old_range", kind: "message", T: Kf },
           { no: 4, name: "new_range", kind: "message", T: Kf },
         ])
@@ -17922,7 +17922,7 @@ export function createAIServiceV1(params) {
           { no: 1, name: "sha", kind: "scalar", T: 9 },
           { no: 2, name: "message", kind: "scalar", T: 9 },
           { no: 3, name: "description", kind: "scalar", T: 9 },
-          { no: 4, name: "diff", kind: "message", T: J9, repeated: !0 },
+          { no: 4, name: "diff", kind: "message", T: J9, repeated: true },
           { no: 5, name: "author", kind: "scalar", T: 9 },
           { no: 6, name: "date", kind: "scalar", T: 9 },
         ])
@@ -17958,7 +17958,7 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "title", kind: "scalar", T: 9 },
           { no: 2, name: "body", kind: "scalar", T: 9 },
-          { no: 3, name: "diff", kind: "message", T: J9, repeated: !0 },
+          { no: 3, name: "diff", kind: "message", T: J9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -18029,7 +18029,7 @@ export function createAIServiceV1(params) {
             name: "user_modifications_to_suggested_code_blocks",
             kind: "message",
             T: J9,
-            opt: !0,
+            opt: true,
           },
         ])
       }
@@ -18100,7 +18100,7 @@ export function createAIServiceV1(params) {
         super(),
           (this.chunks = []),
           (this.editor = UB.UNSPECIFIED),
-          (this.hitTimeout = !1),
+          (this.hitTimeout = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -18111,7 +18111,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "chunks", kind: "message", T: wVe, repeated: !0 },
+          { no: 1, name: "chunks", kind: "message", T: wVe, repeated: true },
           { no: 2, name: "editor", kind: "enum", T: v.getEnumType(UB) },
           { no: 3, name: "hit_timeout", kind: "scalar", T: 8 },
         ])
@@ -18200,7 +18200,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
-          { no: 2, name: "diffs", kind: "message", T: lG, repeated: !0 },
+          { no: 2, name: "diffs", kind: "message", T: lG, repeated: true },
           { no: 3, name: "timestamp", kind: "scalar", T: 1 },
           { no: 4, name: "unique_id", kind: "scalar", T: 9 },
           { no: 5, name: "start_to_end_diff", kind: "message", T: lG },
@@ -18302,10 +18302,10 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "uri", kind: "scalar", T: 9, opt: !0 },
+          { no: 1, name: "uri", kind: "scalar", T: 9, opt: true },
           { no: 2, name: "type", kind: "scalar", T: 9 },
           { no: 3, name: "content", kind: "scalar", T: 9 },
-          { no: 4, name: "range", kind: "message", T: Pvn, opt: !0 },
+          { no: 4, name: "range", kind: "message", T: Pvn, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -18341,8 +18341,8 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "uri", kind: "scalar", T: 9 },
           { no: 2, name: "symbol_name", kind: "scalar", T: 9 },
-          { no: 3, name: "positions", kind: "message", T: Tvn, repeated: !0 },
-          { no: 4, name: "context_items", kind: "message", T: Lvn, repeated: !0 },
+          { no: 3, name: "positions", kind: "message", T: Tvn, repeated: true },
+          { no: 4, name: "context_items", kind: "message", T: Lvn, repeated: true },
           { no: 5, name: "score", kind: "scalar", T: 2 },
         ])
       }
@@ -18408,7 +18408,7 @@ export function createAIServiceV1(params) {
           { no: 2, name: "relative_workspace_path", kind: "scalar", T: 9 },
           { no: 3, name: "contents", kind: "scalar", T: 9 },
           { no: 4, name: "model_version", kind: "scalar", T: 5 },
-          { no: 5, name: "sha256_hash", kind: "scalar", T: 9, opt: !0 },
+          { no: 5, name: "sha256_hash", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -18473,7 +18473,7 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "model_version", kind: "scalar", T: 5 },
           { no: 2, name: "relative_workspace_path", kind: "scalar", T: 9 },
-          { no: 3, name: "updates", kind: "message", T: Nvn, repeated: !0 },
+          { no: 3, name: "updates", kind: "message", T: Nvn, repeated: true },
           { no: 4, name: "expected_file_length", kind: "scalar", T: 5 },
         ])
       }
@@ -18553,7 +18553,7 @@ export function createAIServiceV1(params) {
             name: "filesync_updates",
             kind: "message",
             T: cG,
-            repeated: !0,
+            repeated: true,
           },
           { no: 5, name: "sha256_hash", kind: "scalar", T: 9 },
         ])
@@ -18631,7 +18631,7 @@ export function createAIServiceV1(params) {
     },
     LCo = class lDe extends _ {
       constructor(e) {
-        super(), (this.enabled = !1), v.util.initPartial(e, this)
+        super(), (this.enabled = false), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -18684,9 +18684,9 @@ export function createAIServiceV1(params) {
             name: "filesync_updates",
             kind: "message",
             T: cG,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 6, name: "sha256_hash", kind: "scalar", T: 9, opt: !0 },
+          { no: 6, name: "sha256_hash", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -18715,7 +18715,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "contents", kind: "scalar", T: 9 },
-          { no: 2, name: "sha256_hash", kind: "scalar", T: 9, opt: !0 },
+          { no: 2, name: "sha256_hash", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -18735,7 +18735,7 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.relativeWorkspacePath = ""),
-          (this.required = !1),
+          (this.required = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -18747,8 +18747,8 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
-          { no: 2, name: "requested_version", kind: "scalar", T: 5, opt: !0 },
-          { no: 3, name: "sha256_hash", kind: "scalar", T: 9, opt: !0 },
+          { no: 2, name: "requested_version", kind: "scalar", T: 5, opt: true },
+          { no: 3, name: "sha256_hash", kind: "scalar", T: 9, opt: true },
           { no: 4, name: "required", kind: "scalar", T: 8 },
         ])
       }
@@ -18771,7 +18771,7 @@ export function createAIServiceV1(params) {
           (this.authId = ""),
           (this.filesyncUpdates = []),
           (this.fileRequests = []),
-          (this.getAllRecentFiles = !1),
+          (this.getAllRecentFiles = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -18788,9 +18788,9 @@ export function createAIServiceV1(params) {
             name: "filesync_updates",
             kind: "message",
             T: cG,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 3, name: "file_requests", kind: "message", T: Rvn, repeated: !0 },
+          { no: 3, name: "file_requests", kind: "message", T: Rvn, repeated: true },
           { no: 4, name: "get_all_recent_files", kind: "scalar", T: 8 },
         ])
       }
@@ -18854,7 +18854,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "files", kind: "message", T: Avn, repeated: !0 },
+          { no: 1, name: "files", kind: "message", T: Avn, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -18882,7 +18882,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "from_server", kind: "scalar", T: 8, opt: !0 },
+          { no: 1, name: "from_server", kind: "scalar", T: 8, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -18900,7 +18900,7 @@ export function createAIServiceV1(params) {
     },
     FCo = class mDe extends _ {
       constructor(e) {
-        super(), (this.success = !1), v.util.initPartial(e, this)
+        super(), (this.success = false), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -18970,107 +18970,107 @@ export function createAIServiceV1(params) {
             name: "rate_limiter_breaker_reset_time_ms",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
-          { no: 3, name: "rate_limiter_rps", kind: "scalar", T: 5, opt: !0 },
+          { no: 3, name: "rate_limiter_rps", kind: "scalar", T: 5, opt: true },
           {
             no: 4,
             name: "rate_limiter_burst_capacity",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
           {
             no: 5,
             name: "max_recent_updates_stored",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
           {
             no: 6,
             name: "max_model_version_cache_size",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
           {
             no: 7,
             name: "max_file_size_to_sync_bytes",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
           {
             no: 8,
             name: "sync_retry_max_attempts",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
           {
             no: 9,
             name: "sync_retry_initial_delay_ms",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
           {
             no: 10,
             name: "sync_retry_time_multiplier",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
           {
             no: 11,
             name: "file_sync_status_max_cache_size",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
           {
             no: 12,
             name: "successive_syncs_required_for_reliance",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
           {
             no: 13,
             name: "extra_successful_syncs_needed_after_errors",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
           {
             no: 14,
             name: "big_change_stripping_threshold_bytes",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
           {
             no: 15,
             name: "last_n_updates_to_send",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
           {
             no: 16,
             name: "file_sync_status_ttl_ms",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
-          { no: 17, name: "sync_debounce_ms", kind: "scalar", T: 5, opt: !0 },
+          { no: 17, name: "sync_debounce_ms", kind: "scalar", T: 5, opt: true },
           {
             no: 18,
             name: "sync_update_threshold",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
         ])
       }
@@ -19193,7 +19193,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "suggestions", kind: "message", T: Mvn, repeated: !0 },
+          { no: 1, name: "suggestions", kind: "message", T: Mvn, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -19238,7 +19238,7 @@ export function createAIServiceV1(params) {
     Ovn = class xDe extends _ {
       constructor(e) {
         super(),
-          (this.shouldTurnOnCppOnboarding = !1),
+          (this.shouldTurnOnCppOnboarding = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -19291,80 +19291,80 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "current_file", kind: "message", T: Ho },
-          { no: 2, name: "diff_history", kind: "scalar", T: 9, repeated: !0 },
-          { no: 3, name: "model_name", kind: "scalar", T: 9, opt: !0 },
-          { no: 4, name: "linter_errors", kind: "message", T: Cf, opt: !0 },
+          { no: 2, name: "diff_history", kind: "scalar", T: 9, repeated: true },
+          { no: 3, name: "model_name", kind: "scalar", T: 9, opt: true },
+          { no: 4, name: "linter_errors", kind: "message", T: Cf, opt: true },
           {
             no: 13,
             name: "context_items",
             kind: "message",
             T: N1t,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 5,
             name: "diff_history_keys",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 6, name: "give_debug_output", kind: "scalar", T: 8, opt: !0 },
+          { no: 6, name: "give_debug_output", kind: "scalar", T: 8, opt: true },
           {
             no: 7,
             name: "file_diff_histories",
             kind: "message",
             T: $C,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 8,
             name: "merged_diff_histories",
             kind: "message",
             T: $C,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 9,
             name: "block_diff_patches",
             kind: "message",
             T: $1t,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 10, name: "is_nightly", kind: "scalar", T: 8, opt: !0 },
-          { no: 11, name: "is_debug", kind: "scalar", T: 8, opt: !0 },
-          { no: 12, name: "immediately_ack", kind: "scalar", T: 8, opt: !0 },
-          { no: 17, name: "enable_more_context", kind: "scalar", T: 8, opt: !0 },
+          { no: 10, name: "is_nightly", kind: "scalar", T: 8, opt: true },
+          { no: 11, name: "is_debug", kind: "scalar", T: 8, opt: true },
+          { no: 12, name: "immediately_ack", kind: "scalar", T: 8, opt: true },
+          { no: 17, name: "enable_more_context", kind: "scalar", T: 8, opt: true },
           {
             no: 14,
             name: "parameter_hints",
             kind: "message",
             T: WMi,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 15, name: "lsp_contexts", kind: "message", T: I1t, repeated: !0 },
-          { no: 16, name: "cpp_intent_info", kind: "message", T: UMi, opt: !0 },
-          { no: 18, name: "workspace_id", kind: "scalar", T: 9, opt: !0 },
+          { no: 15, name: "lsp_contexts", kind: "message", T: I1t, repeated: true },
+          { no: 16, name: "cpp_intent_info", kind: "message", T: UMi, opt: true },
+          { no: 18, name: "workspace_id", kind: "scalar", T: 9, opt: true },
           {
             no: 19,
             name: "additional_files",
             kind: "message",
             T: Jvn,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 20,
             name: "control_token",
             kind: "enum",
             T: v.getEnumType(hG),
-            opt: !0,
+            opt: true,
           },
-          { no: 21, name: "client_time", kind: "scalar", T: 1, opt: !0 },
+          { no: 21, name: "client_time", kind: "scalar", T: 1, opt: true },
           {
             no: 22,
             name: "filesync_updates",
             kind: "message",
             T: cG,
-            repeated: !0,
+            repeated: true,
           },
           { no: 23, name: "time_since_request_start", kind: "scalar", T: 1 },
           { no: 24, name: "time_at_request_send", kind: "scalar", T: 1 },
@@ -19373,14 +19373,14 @@ export function createAIServiceV1(params) {
             name: "client_timezone_offset",
             kind: "scalar",
             T: 1,
-            opt: !0,
+            opt: true,
           },
           {
             no: 26,
             name: "lsp_suggested_items",
             kind: "message",
             T: $vn,
-            opt: !0,
+            opt: true,
           },
         ])
       }
@@ -19423,25 +19423,25 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "text", kind: "scalar", T: 9 },
-          { no: 2, name: "suggestion_start_line", kind: "scalar", T: 5, opt: !0 },
-          { no: 3, name: "suggestion_confidence", kind: "scalar", T: 5, opt: !0 },
-          { no: 4, name: "done_stream", kind: "scalar", T: 8, opt: !0 },
-          { no: 5, name: "debug_model_output", kind: "scalar", T: 9, opt: !0 },
-          { no: 6, name: "debug_model_input", kind: "scalar", T: 9, opt: !0 },
-          { no: 7, name: "debug_stream_time", kind: "scalar", T: 9, opt: !0 },
-          { no: 8, name: "debug_total_time", kind: "scalar", T: 9, opt: !0 },
-          { no: 9, name: "debug_ttft_time", kind: "scalar", T: 9, opt: !0 },
-          { no: 10, name: "debug_server_timing", kind: "scalar", T: 9, opt: !0 },
-          { no: 11, name: "range_to_replace", kind: "message", T: Kf, opt: !0 },
+          { no: 2, name: "suggestion_start_line", kind: "scalar", T: 5, opt: true },
+          { no: 3, name: "suggestion_confidence", kind: "scalar", T: 5, opt: true },
+          { no: 4, name: "done_stream", kind: "scalar", T: 8, opt: true },
+          { no: 5, name: "debug_model_output", kind: "scalar", T: 9, opt: true },
+          { no: 6, name: "debug_model_input", kind: "scalar", T: 9, opt: true },
+          { no: 7, name: "debug_stream_time", kind: "scalar", T: 9, opt: true },
+          { no: 8, name: "debug_total_time", kind: "scalar", T: 9, opt: true },
+          { no: 9, name: "debug_ttft_time", kind: "scalar", T: 9, opt: true },
+          { no: 10, name: "debug_server_timing", kind: "scalar", T: 9, opt: true },
+          { no: 11, name: "range_to_replace", kind: "message", T: Kf, opt: true },
           {
             no: 12,
             name: "cursor_prediction_target",
             kind: "message",
             T: _vn,
-            opt: !0,
+            opt: true,
           },
-          { no: 13, name: "done_edit", kind: "scalar", T: 8, opt: !0 },
-          { no: 14, name: "model_info", kind: "message", T: Uvn, opt: !0 },
+          { no: 13, name: "done_edit", kind: "scalar", T: 8, opt: true },
+          { no: 14, name: "model_info", kind: "message", T: Uvn, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -19463,7 +19463,7 @@ export function createAIServiceV1(params) {
           (this.relativePath = ""),
           (this.lineNumberOneIndexed = 0),
           (this.expectedContent = ""),
-          (this.shouldRetriggerCpp = !1),
+          (this.shouldRetriggerCpp = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -19496,7 +19496,7 @@ export function createAIServiceV1(params) {
     Uvn = class DDe extends _ {
       constructor(e) {
         super(),
-          (this.isFusedCursorPredictionModel = !1),
+          (this.isFusedCursorPredictionModel = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -19540,7 +19540,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "is_nightly", kind: "scalar", T: 8, opt: !0 },
+          { no: 1, name: "is_nightly", kind: "scalar", T: 8, opt: true },
           { no: 2, name: "model", kind: "scalar", T: 9 },
         ])
       }
@@ -19562,17 +19562,17 @@ export function createAIServiceV1(params) {
         super(),
           (this.heuristics = []),
           (this.excludeRecentlyViewedFilesPatterns = []),
-          (this.enableRvfTracking = !1),
+          (this.enableRvfTracking = false),
           (this.globalDebounceDurationMillis = 0),
           (this.clientDebounceDurationMillis = 0),
           (this.cppUrl = ""),
-          (this.useWhitespaceDiffHistory = !1),
-          (this.enableFilesyncDebounceSkipping = !1),
+          (this.useWhitespaceDiffHistory = false),
+          (this.enableFilesyncDebounceSkipping = false),
           (this.checkFilesyncHashPercent = 0),
           (this.geoCppBackendUrl = ""),
-          (this.isFusedCursorPredictionModel = !1),
-          (this.includeUnchangedLines = !1),
-          (this.shouldFetchRvfText = !1),
+          (this.isFusedCursorPredictionModel = false),
+          (this.includeUnchangedLines = false),
+          (this.shouldFetchRvfText = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -19583,31 +19583,31 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "above_radius", kind: "scalar", T: 5, opt: !0 },
-          { no: 2, name: "below_radius", kind: "scalar", T: 5, opt: !0 },
-          { no: 4, name: "merge_behavior", kind: "message", T: Wvn, opt: !0 },
-          { no: 5, name: "is_on", kind: "scalar", T: 8, opt: !0 },
-          { no: 6, name: "is_ghost_text", kind: "scalar", T: 8, opt: !0 },
+          { no: 1, name: "above_radius", kind: "scalar", T: 5, opt: true },
+          { no: 2, name: "below_radius", kind: "scalar", T: 5, opt: true },
+          { no: 4, name: "merge_behavior", kind: "message", T: Wvn, opt: true },
+          { no: 5, name: "is_on", kind: "scalar", T: 8, opt: true },
+          { no: 6, name: "is_ghost_text", kind: "scalar", T: 8, opt: true },
           {
             no: 7,
             name: "should_let_user_enable_cpp_even_if_not_pro",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
           {
             no: 8,
             name: "heuristics",
             kind: "enum",
             T: v.getEnumType(VB),
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 9,
             name: "exclude_recently_viewed_files_patterns",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
           { no: 10, name: "enable_rvf_tracking", kind: "scalar", T: 8 },
           {
@@ -19638,7 +19638,7 @@ export function createAIServiceV1(params) {
             name: "recently_rejected_edit_thresholds",
             kind: "message",
             T: qvn,
-            opt: !0,
+            opt: true,
           },
           {
             no: 20,
@@ -19653,14 +19653,14 @@ export function createAIServiceV1(params) {
             name: "max_number_of_cleared_suggestions_since_last_accept",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
           {
             no: 24,
             name: "suggestion_hint_config",
             kind: "message",
             T: jvn,
-            opt: !0,
+            opt: true,
           },
         ])
       }
@@ -19703,9 +19703,9 @@ export function createAIServiceV1(params) {
   var Vvn = class LDe extends _ {
       constructor(e) {
         super(),
-          (this.isDisabledByBackend = !1),
-          (this.shouldTurnOnAutomatically = !1),
-          (this.pythonEnabled = !1),
+          (this.isDisabledByBackend = false),
+          (this.shouldTurnOnAutomatically = false),
+          (this.pythonEnabled = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -19747,8 +19747,8 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "type", kind: "scalar", T: 9 },
-          { no: 2, name: "limit", kind: "scalar", T: 5, opt: !0 },
-          { no: 3, name: "radius", kind: "scalar", T: 5, opt: !0 },
+          { no: 2, name: "limit", kind: "scalar", T: 5, opt: true },
+          { no: 3, name: "radius", kind: "scalar", T: 5, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -19817,14 +19817,14 @@ export function createAIServiceV1(params) {
             name: "important_lsp_extensions",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 2,
             name: "enabled_for_path_extensions",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -19874,7 +19874,7 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.suggestedEdits = []),
-          (this.markerTouchesGreen = !1),
+          (this.markerTouchesGreen = false),
           (this.currentFileContentsForLinterErrors = ""),
           v.util.initPartial(e, this)
       }
@@ -19892,7 +19892,7 @@ export function createAIServiceV1(params) {
             name: "suggested_edits",
             kind: "message",
             T: P1t,
-            repeated: !0,
+            repeated: true,
           },
           { no: 26, name: "marker_touches_green", kind: "scalar", T: 8 },
           {
@@ -19928,9 +19928,9 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "scored_edits", kind: "message", T: L1t, repeated: !0 },
+          { no: 1, name: "scored_edits", kind: "message", T: L1t, repeated: true },
           { no: 2, name: "noop_edit", kind: "message", T: L1t },
-          { no: 3, name: "should_noop", kind: "scalar", T: 8, opt: !0 },
+          { no: 3, name: "should_noop", kind: "scalar", T: 8, opt: true },
           { no: 4, name: "generation_edit", kind: "message", T: L1t },
         ])
       }
@@ -19962,8 +19962,8 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "tokens", kind: "scalar", T: 9, repeated: !0 },
-          { no: 2, name: "token_logprobs", kind: "scalar", T: 1, repeated: !0 },
+          { no: 1, name: "tokens", kind: "scalar", T: 9, repeated: true },
+          { no: 2, name: "token_logprobs", kind: "scalar", T: 1, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -20012,7 +20012,7 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.relativeWorkspacePath = ""),
-          (this.isOpen = !1),
+          (this.isOpen = false),
           (this.visibleRangeContent = []),
           (this.startLineNumberOneIndexed = []),
           (this.visibleRanges = []),
@@ -20033,17 +20033,17 @@ export function createAIServiceV1(params) {
             name: "visible_range_content",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 4, name: "last_viewed_at", kind: "scalar", T: 1, opt: !0 },
+          { no: 4, name: "last_viewed_at", kind: "scalar", T: 1, opt: true },
           {
             no: 5,
             name: "start_line_number_one_indexed",
             kind: "scalar",
             T: 5,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 6, name: "visible_ranges", kind: "message", T: Kf, repeated: !0 },
+          { no: 6, name: "visible_ranges", kind: "message", T: Kf, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -20159,8 +20159,8 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "models", kind: "scalar", T: 9, repeated: !0 },
-          { no: 2, name: "default_model", kind: "scalar", T: 9, opt: !0 },
+          { no: 1, name: "models", kind: "scalar", T: 9, repeated: true },
+          { no: 2, name: "default_model", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -20194,34 +20194,34 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "current_file", kind: "message", T: Ho },
-          { no: 4, name: "linter_errors", kind: "message", T: Cf, opt: !0 },
+          { no: 4, name: "linter_errors", kind: "message", T: Cf, opt: true },
           {
             no: 13,
             name: "context_items",
             kind: "message",
             T: N1t,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 7,
             name: "file_diff_histories",
             kind: "message",
             T: $C,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 8,
             name: "merged_diff_histories",
             kind: "message",
             T: $C,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 9,
             name: "block_diff_patches",
             kind: "message",
             T: $1t,
-            repeated: !0,
+            repeated: true,
           },
           { no: 10, name: "model_details", kind: "message", T: zr },
         ])
@@ -20284,13 +20284,13 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "file_name", kind: "scalar", T: 9 },
-          { no: 2, name: "diff_history", kind: "scalar", T: 9, repeated: !0 },
+          { no: 2, name: "diff_history", kind: "scalar", T: 9, repeated: true },
           {
             no: 3,
             name: "diff_history_timestamps",
             kind: "scalar",
             T: 1,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -20324,7 +20324,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "contents", kind: "scalar", T: 9 },
-          { no: 2, name: "symbol", kind: "scalar", T: 9, opt: !0 },
+          { no: 2, name: "symbol", kind: "scalar", T: 9, opt: true },
           { no: 3, name: "relative_workspace_path", kind: "scalar", T: 9 },
           { no: 4, name: "score", kind: "scalar", T: 2 },
         ])
@@ -20365,7 +20365,7 @@ export function createAIServiceV1(params) {
           { no: 1, name: "request_id", kind: "scalar", T: 9 },
           { no: 2, name: "session_id", kind: "scalar", T: 9 },
           { no: 3, name: "response_type", kind: "enum", T: v.getEnumType(Roe) },
-          { no: 4, name: "desired_completion", kind: "scalar", T: 9, opt: !0 },
+          { no: 4, name: "desired_completion", kind: "scalar", T: 9, opt: true },
           { no: 5, name: "range_transformation", kind: "message", T: tyn },
           { no: 10, name: "model_code_name", kind: "scalar", T: 9 },
           { no: 11, name: "model_openai_name", kind: "scalar", T: 9 },
@@ -20463,7 +20463,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "label", kind: "scalar", T: 9 },
-          { no: 2, name: "documentation", kind: "scalar", T: 9, opt: !0 },
+          { no: 2, name: "documentation", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -20613,8 +20613,8 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.text = ""),
-          (this.modelIsAttachedToEditor = !1),
-          (this.modelIsAttachedToTheActiveEditor = !1),
+          (this.modelIsAttachedToEditor = false),
+          (this.modelIsAttachedToTheActiveEditor = false),
           (this.cursorSelections = []),
           (this.modelVersionAtMetadataRetrievalTime = 0),
           v.util.initPartial(e, this)
@@ -20629,23 +20629,23 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "text", kind: "scalar", T: 9 },
           { no: 2, name: "range", kind: "message", T: uk },
-          { no: 3, name: "final_model_hash", kind: "scalar", T: 9, opt: !0 },
+          { no: 3, name: "final_model_hash", kind: "scalar", T: 9, opt: true },
           {
             no: 4,
             name: "model_version_immediately_after_this_change",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
           {
             no: 5,
             name: "performance_now_timestamp",
             kind: "scalar",
             T: 1,
-            opt: !0,
+            opt: true,
           },
-          { no: 7, name: "is_undoing", kind: "scalar", T: 8, opt: !0 },
-          { no: 8, name: "is_redoing", kind: "scalar", T: 8, opt: !0 },
+          { no: 7, name: "is_undoing", kind: "scalar", T: 8, opt: true },
+          { no: 8, name: "is_redoing", kind: "scalar", T: 8, opt: true },
           { no: 9, name: "model_is_attached_to_editor", kind: "scalar", T: 8 },
           {
             no: 10,
@@ -20658,7 +20658,7 @@ export function createAIServiceV1(params) {
             name: "cursor_selections",
             kind: "message",
             T: syn,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 12,
@@ -20711,7 +20711,7 @@ export function createAIServiceV1(params) {
             name: "range_of_suggestion_in_current_model",
             kind: "message",
             T: uk,
-            opt: !0,
+            opt: true,
           },
           { no: 5, name: "original_text", kind: "scalar", T: 9 },
         ])
@@ -21133,7 +21133,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "model_uuid", kind: "scalar", T: 9, opt: !0 },
+          { no: 1, name: "model_uuid", kind: "scalar", T: 9, opt: true },
           { no: 2, name: "model_version", kind: "scalar", T: 5 },
           { no: 3, name: "relative_path", kind: "scalar", T: 9 },
           { no: 4, name: "model_id", kind: "scalar", T: 9 },
@@ -21289,9 +21289,9 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "point_in_time_model", kind: "message", T: sm },
-          { no: 2, name: "added_errors", kind: "message", T: k$, repeated: !0 },
-          { no: 3, name: "removed_errors", kind: "message", T: k$, repeated: !0 },
-          { no: 4, name: "errors", kind: "message", T: k$, repeated: !0 },
+          { no: 2, name: "added_errors", kind: "message", T: k$, repeated: true },
+          { no: 3, name: "removed_errors", kind: "message", T: k$, repeated: true },
+          { no: 4, name: "errors", kind: "message", T: k$, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -21353,7 +21353,7 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "point_in_time_model", kind: "message", T: sm },
           { no: 2, name: "cursor_position", kind: "message", T: Aoe },
-          { no: 3, name: "visible_ranges", kind: "message", T: uk, repeated: !0 },
+          { no: 3, name: "visible_ranges", kind: "message", T: uk, repeated: true },
           { no: 4, name: "editor_id", kind: "scalar", T: 9 },
         ])
       }
@@ -21416,7 +21416,7 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "title", kind: "scalar", T: 9 },
           { no: 2, name: "id", kind: "scalar", T: 9 },
-          { no: 3, name: "arguments", kind: "scalar", T: 9, repeated: !0 },
+          { no: 3, name: "arguments", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -21445,8 +21445,8 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "title", kind: "scalar", T: 9 },
-          { no: 2, name: "edits", kind: "message", T: wyn, repeated: !0 },
-          { no: 3, name: "is_preferred", kind: "scalar", T: 8, opt: !0 },
+          { no: 2, name: "edits", kind: "message", T: wyn, repeated: true },
+          { no: 3, name: "is_preferred", kind: "scalar", T: 8, opt: true },
           { no: 4, name: "command", kind: "message", T: zMi },
         ])
       }
@@ -21509,9 +21509,9 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "point_in_time_model", kind: "message", T: sm },
-          { no: 2, name: "added", kind: "message", T: SVe, repeated: !0 },
-          { no: 3, name: "removed", kind: "message", T: SVe, repeated: !0 },
-          { no: 4, name: "actions", kind: "message", T: SVe, repeated: !0 },
+          { no: 2, name: "added", kind: "message", T: SVe, repeated: true },
+          { no: 3, name: "removed", kind: "message", T: SVe, repeated: true },
+          { no: 4, name: "actions", kind: "message", T: SVe, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -21530,7 +21530,7 @@ export function createAIServiceV1(params) {
     Syn = class DTe extends _ {
       constructor(e) {
         super(),
-          (this.actionIdentifier = { case: void 0 }),
+          (this.actionIdentifier = { case: undefined }),
           v.util.initPartial(e, this)
       }
       static {
@@ -21576,7 +21576,7 @@ export function createAIServiceV1(params) {
         super(),
           (this.terminalId = 0),
           (this.terminalPath = ""),
-          (this.event = { case: void 0 }),
+          (this.event = { case: undefined }),
           v.util.initPartial(e, this)
       }
       static {
@@ -21589,7 +21589,7 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "terminal_id", kind: "scalar", T: 5 },
           { no: 2, name: "terminal_path", kind: "scalar", T: 9 },
-          { no: 6, name: "terminal_cwd", kind: "scalar", T: 9, opt: !0 },
+          { no: 6, name: "terminal_cwd", kind: "scalar", T: 9, opt: true },
           {
             no: 3,
             name: "terminal_input",
@@ -21643,7 +21643,7 @@ export function createAIServiceV1(params) {
             name: "buffered_keypresses",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -21665,7 +21665,7 @@ export function createAIServiceV1(params) {
         super(),
           (this.command = ""),
           (this.startedTimestampUnixMs = 0),
-          (this.commandWasTrimmed = !1),
+          (this.commandWasTrimmed = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -21700,8 +21700,8 @@ export function createAIServiceV1(params) {
           (this.command = ""),
           (this.output = ""),
           (this.finishedTimestampUnixMs = 0),
-          (this.commandWasTrimmed = !1),
-          (this.outputWasTrimmed = !1),
+          (this.commandWasTrimmed = false),
+          (this.outputWasTrimmed = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -21713,7 +21713,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "command", kind: "scalar", T: 9 },
-          { no: 2, name: "exit_code", kind: "scalar", T: 5, opt: !0 },
+          { no: 2, name: "exit_code", kind: "scalar", T: 5, opt: true },
           { no: 3, name: "output", kind: "scalar", T: 9 },
           { no: 4, name: "finished_timestamp_unix_ms", kind: "scalar", T: 1 },
           { no: 5, name: "command_was_trimmed", kind: "scalar", T: 8 },
@@ -21737,7 +21737,7 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.requestId = ""),
-          (this.eventType = { case: void 0 }),
+          (this.eventType = { case: undefined }),
           v.util.initPartial(e, this)
       }
       static {
@@ -21750,7 +21750,7 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "point_in_time_model", kind: "message", T: sm },
           { no: 2, name: "request_id", kind: "scalar", T: 9 },
-          { no: 20, name: "prompt_bar_id", kind: "scalar", T: 9, opt: !0 },
+          { no: 20, name: "prompt_bar_id", kind: "scalar", T: 9, opt: true },
           {
             no: 3,
             name: "submit_prompt",
@@ -21968,8 +21968,8 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "green_range", kind: "message", T: uk },
-          { no: 2, name: "green_lines", kind: "scalar", T: 9, repeated: !0 },
-          { no: 3, name: "red_lines", kind: "scalar", T: 9, repeated: !0 },
+          { no: 2, name: "green_lines", kind: "scalar", T: 9, repeated: true },
+          { no: 3, name: "red_lines", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -22001,8 +22001,8 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "green_range", kind: "message", T: uk },
-          { no: 2, name: "green_lines", kind: "scalar", T: 9, repeated: !0 },
-          { no: 3, name: "red_lines", kind: "scalar", T: 9, repeated: !0 },
+          { no: 2, name: "green_lines", kind: "scalar", T: 9, repeated: true },
+          { no: 3, name: "red_lines", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -22022,7 +22022,7 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.requestId = ""),
-          (this.eventType = { case: void 0 }),
+          (this.eventType = { case: undefined }),
           v.util.initPartial(e, this)
       }
       static {
@@ -22154,7 +22154,7 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.requestId = ""),
-          (this.eventType = { case: void 0 }),
+          (this.eventType = { case: undefined }),
           v.util.initPartial(e, this)
       }
       static {
@@ -22448,7 +22448,7 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.requestId = ""),
-          (this.eventType = { case: void 0 }),
+          (this.eventType = { case: undefined }),
           v.util.initPartial(e, this)
       }
       static {
@@ -22758,7 +22758,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "seconds_viewed", kind: "scalar", T: 5 },
-          { no: 2, name: "report_views", kind: "message", T: GMi, repeated: !0 },
+          { no: 2, name: "report_views", kind: "message", T: GMi, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -22868,7 +22868,7 @@ export function createAIServiceV1(params) {
     },
     iwn = class lPe extends _ {
       constructor(e) {
-        super(), (this.success = !1), v.util.initPartial(e, this)
+        super(), (this.success = false), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -23033,7 +23033,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 2, name: "files", kind: "message", T: lwn, repeated: !0 },
+          { no: 2, name: "files", kind: "message", T: lwn, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -23101,7 +23101,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "point_in_time_model", kind: "message", T: sm },
-          { no: 2, name: "visible_ranges", kind: "message", T: uk, repeated: !0 },
+          { no: 2, name: "visible_ranges", kind: "message", T: uk, repeated: true },
           { no: 3, name: "editor_id", kind: "scalar", T: 9 },
         ])
       }
@@ -23180,9 +23180,9 @@ export function createAIServiceV1(params) {
           (this.fullUri = ""),
           (this.modelId = ""),
           (this.uriScheme = ""),
-          (this.isTooLargeForSyncing = !1),
-          (this.isTooLargeForTokenization = !1),
-          (this.isTooLargeForHeapOperation = !1),
+          (this.isTooLargeForSyncing = false),
+          (this.isTooLargeForTokenization = false),
+          (this.isTooLargeForHeapOperation = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -23243,19 +23243,19 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
           { no: 2, name: "root_fs_path", kind: "scalar", T: 9 },
-          { no: 3, name: "head", kind: "message", T: gwn, opt: !0 },
-          { no: 4, name: "refs", kind: "message", T: mwn, repeated: !0 },
-          { no: 5, name: "remotes", kind: "message", T: bwn, repeated: !0 },
-          { no: 6, name: "submodules", kind: "message", T: vwn, repeated: !0 },
-          { no: 7, name: "rebase_commit", kind: "message", T: ywn, opt: !0 },
-          { no: 8, name: "merge_changes", kind: "message", T: A1t, repeated: !0 },
-          { no: 9, name: "index_changes", kind: "message", T: A1t, repeated: !0 },
+          { no: 3, name: "head", kind: "message", T: gwn, opt: true },
+          { no: 4, name: "refs", kind: "message", T: mwn, repeated: true },
+          { no: 5, name: "remotes", kind: "message", T: bwn, repeated: true },
+          { no: 6, name: "submodules", kind: "message", T: vwn, repeated: true },
+          { no: 7, name: "rebase_commit", kind: "message", T: ywn, opt: true },
+          { no: 8, name: "merge_changes", kind: "message", T: A1t, repeated: true },
+          { no: 9, name: "index_changes", kind: "message", T: A1t, repeated: true },
           {
             no: 10,
             name: "working_tree_changes",
             kind: "message",
             T: A1t,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -23285,12 +23285,12 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "type", kind: "scalar", T: 9 },
-          { no: 2, name: "name", kind: "scalar", T: 9, opt: !0 },
-          { no: 3, name: "commit", kind: "scalar", T: 9, opt: !0 },
-          { no: 4, name: "remote", kind: "scalar", T: 9, opt: !0 },
-          { no: 5, name: "upstream_ref", kind: "message", T: pwn, opt: !0 },
-          { no: 6, name: "ahead", kind: "scalar", T: 5, opt: !0 },
-          { no: 7, name: "behind", kind: "scalar", T: 5, opt: !0 },
+          { no: 2, name: "name", kind: "scalar", T: 9, opt: true },
+          { no: 3, name: "commit", kind: "scalar", T: 9, opt: true },
+          { no: 4, name: "remote", kind: "scalar", T: 9, opt: true },
+          { no: 5, name: "upstream_ref", kind: "message", T: pwn, opt: true },
+          { no: 6, name: "ahead", kind: "scalar", T: 5, opt: true },
+          { no: 7, name: "behind", kind: "scalar", T: 5, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -23320,7 +23320,7 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "remote", kind: "scalar", T: 9 },
           { no: 2, name: "name", kind: "scalar", T: 9 },
-          { no: 3, name: "commit", kind: "scalar", T: 9, opt: !0 },
+          { no: 3, name: "commit", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -23349,9 +23349,9 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "type", kind: "scalar", T: 9 },
-          { no: 2, name: "name", kind: "scalar", T: 9, opt: !0 },
-          { no: 3, name: "commit", kind: "scalar", T: 9, opt: !0 },
-          { no: 4, name: "remote", kind: "scalar", T: 9, opt: !0 },
+          { no: 2, name: "name", kind: "scalar", T: 9, opt: true },
+          { no: 3, name: "commit", kind: "scalar", T: 9, opt: true },
+          { no: 4, name: "remote", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -23371,7 +23371,7 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.name = ""),
-          (this.isReadOnly = !1),
+          (this.isReadOnly = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -23383,8 +23383,8 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "name", kind: "scalar", T: 9 },
-          { no: 2, name: "fetch_url", kind: "scalar", T: 9, opt: !0 },
-          { no: 3, name: "push_url", kind: "scalar", T: 9, opt: !0 },
+          { no: 2, name: "fetch_url", kind: "scalar", T: 9, opt: true },
+          { no: 3, name: "push_url", kind: "scalar", T: 9, opt: true },
           { no: 4, name: "is_read_only", kind: "scalar", T: 8 },
         ])
       }
@@ -23453,12 +23453,12 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "hash", kind: "scalar", T: 9 },
           { no: 2, name: "message", kind: "scalar", T: 9 },
-          { no: 3, name: "parents", kind: "scalar", T: 9, repeated: !0 },
-          { no: 4, name: "author_date", kind: "scalar", T: 9, opt: !0 },
-          { no: 5, name: "author_name", kind: "scalar", T: 9, opt: !0 },
-          { no: 6, name: "author_email", kind: "scalar", T: 9, opt: !0 },
-          { no: 7, name: "commit_date", kind: "scalar", T: 9, opt: !0 },
-          { no: 8, name: "short_stat", kind: "message", T: wwn, opt: !0 },
+          { no: 3, name: "parents", kind: "scalar", T: 9, repeated: true },
+          { no: 4, name: "author_date", kind: "scalar", T: 9, opt: true },
+          { no: 5, name: "author_name", kind: "scalar", T: 9, opt: true },
+          { no: 6, name: "author_email", kind: "scalar", T: 9, opt: true },
+          { no: 7, name: "commit_date", kind: "scalar", T: 9, opt: true },
+          { no: 8, name: "short_stat", kind: "message", T: wwn, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -23526,7 +23526,7 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "uri", kind: "scalar", T: 9 },
           { no: 2, name: "original_uri", kind: "scalar", T: 9 },
-          { no: 3, name: "rename_uri", kind: "scalar", T: 9, opt: !0 },
+          { no: 3, name: "rename_uri", kind: "scalar", T: 9, opt: true },
           { no: 4, name: "status", kind: "scalar", T: 9 },
         ])
       }
@@ -23545,7 +23545,7 @@ export function createAIServiceV1(params) {
     },
     Cwn = class TPe extends _ {
       constructor(e) {
-        super(), (this.item = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.item = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -23584,9 +23584,9 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "model", kind: "message", T: sm, opt: !0 },
-          { no: 2, name: "range", kind: "message", T: uk, opt: !0 },
-          { no: 3, name: "uri", kind: "scalar", T: 9, opt: !0 },
+          { no: 1, name: "model", kind: "message", T: sm, opt: true },
+          { no: 2, name: "range", kind: "message", T: uk, opt: true },
+          { no: 3, name: "uri", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -23619,8 +23619,8 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "query", kind: "scalar", T: 9 },
-          { no: 2, name: "items", kind: "message", T: Cwn, repeated: !0 },
-          { no: 3, name: "selected_indices", kind: "scalar", T: 5, repeated: !0 },
+          { no: 2, name: "items", kind: "message", T: Cwn, repeated: true },
+          { no: 3, name: "selected_indices", kind: "scalar", T: 5, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -23648,9 +23648,9 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "suggestions", kind: "scalar", T: 9, repeated: !0 },
-          { no: 2, name: "request_id", kind: "scalar", T: 9, opt: !0 },
-          { no: 3, name: "editor_id", kind: "scalar", T: 9, opt: !0 },
+          { no: 1, name: "suggestions", kind: "scalar", T: 9, repeated: true },
+          { no: 2, name: "request_id", kind: "scalar", T: 9, opt: true },
+          { no: 3, name: "editor_id", kind: "scalar", T: 9, opt: true },
           { no: 4, name: "point_in_time_model", kind: "message", T: sm },
         ])
       }
@@ -23670,7 +23670,7 @@ export function createAIServiceV1(params) {
     M1t = class RPe extends _ {
       constructor(e) {
         super(),
-          (this.event = { case: void 0 }),
+          (this.event = { case: undefined }),
           (this.performanceNowTimestamp = 0),
           v.util.initPartial(e, this)
       }
@@ -23894,7 +23894,7 @@ export function createAIServiceV1(params) {
             name: "performance_time_origin",
             kind: "scalar",
             T: 1,
-            opt: !0,
+            opt: true,
           },
         ])
       }
@@ -23941,7 +23941,7 @@ export function createAIServiceV1(params) {
     },
     Iwn = class MPe extends _ {
       constructor(e) {
-        super(), (this.success = !1), v.util.initPartial(e, this)
+        super(), (this.success = false), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -23977,7 +23977,7 @@ export function createAIServiceV1(params) {
           (this.clientVersion = ""),
           (this.changes = []),
           (this.sessionEvents = []),
-          (this.modelChangesMayBeOutOfOrder = !1),
+          (this.modelChangesMayBeOutOfOrder = false),
           (this.privacyModeStatus = R$.UNSPECIFIED),
           (this.events = []),
           (this.timeOrigin = 0),
@@ -23993,25 +23993,25 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "session_id", kind: "scalar", T: 9 },
           { no: 2, name: "model_uuid", kind: "scalar", T: 9 },
-          { no: 3, name: "starting_model_value", kind: "scalar", T: 9, opt: !0 },
+          { no: 3, name: "starting_model_value", kind: "scalar", T: 9, opt: true },
           {
             no: 10,
             name: "starting_model_version",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
           { no: 5, name: "relative_path", kind: "scalar", T: 9 },
           { no: 14, name: "uri", kind: "scalar", T: 9 },
           { no: 6, name: "client_version", kind: "scalar", T: 9 },
-          { no: 8, name: "client_commit", kind: "scalar", T: 9, opt: !0 },
-          { no: 4, name: "changes", kind: "message", T: uG, repeated: !0 },
+          { no: 8, name: "client_commit", kind: "scalar", T: 9, opt: true },
+          { no: 4, name: "changes", kind: "message", T: uG, repeated: true },
           {
             no: 9,
             name: "session_events",
             kind: "message",
             T: M1t,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 11,
@@ -24025,7 +24025,7 @@ export function createAIServiceV1(params) {
             kind: "enum",
             T: v.getEnumType(R$),
           },
-          { no: 7, name: "events", kind: "message", T: Nwn, repeated: !0 },
+          { no: 7, name: "events", kind: "message", T: Nwn, repeated: true },
           { no: 13, name: "time_origin", kind: "scalar", T: 2 },
         ])
       }
@@ -24061,7 +24061,7 @@ export function createAIServiceV1(params) {
     )
   var Dwn = class FPe extends _ {
       constructor(e) {
-        super(), (this.success = !1), v.util.initPartial(e, this)
+        super(), (this.success = false), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -24116,8 +24116,8 @@ export function createAIServiceV1(params) {
     YMi = class BPe extends _ {
       constructor(e) {
         super(),
-          (this.on = !1),
-          (this.onlyIfExplicit = !1),
+          (this.on = false),
+          (this.onlyIfExplicit = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -24172,17 +24172,17 @@ export function createAIServiceV1(params) {
             name: "starting_model_version",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
           {
             no: 4,
             name: "before_start_model_changes",
             kind: "message",
             T: uG,
-            repeated: !0,
+            repeated: true,
           },
           { no: 5, name: "client_version", kind: "scalar", T: 9 },
-          { no: 6, name: "client_commit", kind: "scalar", T: 9, opt: !0 },
+          { no: 6, name: "client_commit", kind: "scalar", T: 9, opt: true },
           { no: 7, name: "model_uuid", kind: "scalar", T: 9 },
           { no: 8, name: "session_id", kind: "scalar", T: 9 },
           { no: 9, name: "uri", kind: "scalar", T: 9 },
@@ -24219,7 +24219,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "start_model_window", kind: "message", T: Lwn },
-          { no: 3, name: "changes", kind: "message", T: Pwn, repeated: !0 },
+          { no: 3, name: "changes", kind: "message", T: Pwn, repeated: true },
           { no: 4, name: "relative_path", kind: "scalar", T: 9 },
           { no: 7, name: "model_uuid", kind: "scalar", T: 9 },
           { no: 5, name: "start_from_change_index", kind: "scalar", T: 5 },
@@ -24283,7 +24283,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "lines", kind: "scalar", T: 9, repeated: !0 },
+          { no: 1, name: "lines", kind: "scalar", T: 9, repeated: true },
           { no: 2, name: "start_line_number", kind: "scalar", T: 5 },
           { no: 3, name: "end_line_number", kind: "scalar", T: 5 },
         ])
@@ -24303,7 +24303,7 @@ export function createAIServiceV1(params) {
     },
     Nwn = class WPe extends _ {
       constructor(e) {
-        super(), (this.event = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.event = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -24335,7 +24335,7 @@ export function createAIServiceV1(params) {
             T: Rwn,
             oneof: "event",
           },
-          { no: 10, name: "final_model_hash", kind: "scalar", T: 9, opt: !0 },
+          { no: 10, name: "final_model_hash", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -24439,7 +24439,7 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.suggestionText = ""),
-          (this.seen = !1),
+          (this.seen = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -24492,7 +24492,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "changes", kind: "message", T: uG, repeated: !0 },
+          { no: 1, name: "changes", kind: "message", T: uG, repeated: true },
           { no: 2, name: "model_uuid", kind: "scalar", T: 9 },
           { no: 3, name: "starting_model", kind: "message", T: Twn },
           { no: 4, name: "num_correct_changes", kind: "scalar", T: 5 },
@@ -24517,7 +24517,7 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.timestamp = 0),
-          (this.v = { case: void 0 }),
+          (this.v = { case: undefined }),
           v.util.initPartial(e, this)
       }
       static {
@@ -24596,7 +24596,7 @@ export function createAIServiceV1(params) {
     ])
   var t7 = class XPe extends _ {
       constructor(e) {
-        super(), (this.item = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.item = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -24646,7 +24646,7 @@ export function createAIServiceV1(params) {
             name: "context_item_statuses",
             kind: "message",
             T: Fwn,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -24680,7 +24680,7 @@ export function createAIServiceV1(params) {
             name: "missing_context_item_hashes",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -24701,7 +24701,7 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.contextItemHash = ""),
-          (this.shownToTheModel = !1),
+          (this.shownToTheModel = false),
           (this.score = 0),
           (this.percentageOfAvailableSpace = 0),
           (this.postGenerationEvaluation = $oe.UNSPECIFIED),
@@ -24757,7 +24757,7 @@ export function createAIServiceV1(params) {
     )
   var EVe = class tLe extends _ {
       constructor(e) {
-        super(), (this.item = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.item = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -24956,9 +24956,9 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
-          { no: 2, name: "lines", kind: "message", T: Bwn, repeated: !0 },
+          { no: 2, name: "lines", kind: "message", T: Bwn, repeated: true },
           { no: 3, name: "total_number_of_lines_in_file", kind: "scalar", T: 5 },
-          { no: 4, name: "cell_number", kind: "scalar", T: 5, opt: !0 },
+          { no: 4, name: "cell_number", kind: "scalar", T: 5, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -25054,7 +25054,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "lines", kind: "scalar", T: 9, repeated: !0 },
+          { no: 1, name: "lines", kind: "scalar", T: 9, repeated: true },
           { no: 2, name: "start_line_number", kind: "scalar", T: 5 },
         ])
       }
@@ -25075,7 +25075,7 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.howManyDiffsAgo = 0),
-          (this.isVeryRecent = !1),
+          (this.isVeryRecent = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -25121,9 +25121,9 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
-          { no: 2, name: "lines", kind: "message", T: Hwn, repeated: !0 },
+          { no: 2, name: "lines", kind: "message", T: Hwn, repeated: true },
           { no: 3, name: "total_number_of_lines_in_file", kind: "scalar", T: 5 },
-          { no: 4, name: "cell_number", kind: "scalar", T: 5, opt: !0 },
+          { no: 4, name: "cell_number", kind: "scalar", T: 5, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -25249,7 +25249,7 @@ export function createAIServiceV1(params) {
             name: "context_item_hashes",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
           { no: 6, name: "suggested_command", kind: "scalar", T: 9 },
         ])
@@ -25288,10 +25288,10 @@ export function createAIServiceV1(params) {
             name: "context_item_hashes",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 6, name: "timestamp", kind: "scalar", T: 3, opt: !0 },
-          { no: 7, name: "timestamp_double", kind: "scalar", T: 1, opt: !0 },
+          { no: 6, name: "timestamp", kind: "scalar", T: 3, opt: true },
+          { no: 7, name: "timestamp_double", kind: "scalar", T: 1, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -25327,7 +25327,7 @@ export function createAIServiceV1(params) {
             name: "past_cmdk_queries",
             kind: "message",
             T: jwn,
-            repeated: !0,
+            repeated: true,
           },
           { no: 3, name: "curr_timestamp_double", kind: "scalar", T: 1 },
         ])
@@ -25363,16 +25363,16 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "query", kind: "message", T: O1t },
           { no: 2, name: "relative_workspace_path", kind: "scalar", T: 9 },
-          { no: 5, name: "cmdk_was_accepted", kind: "scalar", T: 8, opt: !0 },
+          { no: 5, name: "cmdk_was_accepted", kind: "scalar", T: 8, opt: true },
           { no: 6, name: "timestamp_double", kind: "scalar", T: 1 },
           {
             no: 7,
             name: "timestamp_for_diff_interleaving",
             kind: "scalar",
             T: 1,
-            opt: !0,
+            opt: true,
           },
-          { no: 8, name: "request_id", kind: "scalar", T: 9, opt: !0 },
+          { no: 8, name: "request_id", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -25393,7 +25393,7 @@ export function createAIServiceV1(params) {
         super(),
           (this.userMessage = ""),
           (this.assistantResponse = ""),
-          (this.activeForCmdK = !1),
+          (this.activeForCmdK = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -25408,8 +25408,8 @@ export function createAIServiceV1(params) {
           { no: 2, name: "assistant_response", kind: "scalar", T: 9 },
           { no: 3, name: "chat_history", kind: "message", T: Rte },
           { no: 4, name: "active_for_cmd_k", kind: "scalar", T: 8 },
-          { no: 5, name: "timestamp", kind: "scalar", T: 3, opt: !0 },
-          { no: 6, name: "timestamp_double", kind: "scalar", T: 1, opt: !0 },
+          { no: 5, name: "timestamp", kind: "scalar", T: 3, opt: true },
+          { no: 6, name: "timestamp_double", kind: "scalar", T: 1, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -25431,7 +25431,7 @@ export function createAIServiceV1(params) {
           (this.history = ""),
           (this.cwdFull = ""),
           (this.cwdRelativeWorkspacePath = ""),
-          (this.activeForCmdK = !1),
+          (this.activeForCmdK = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -25446,8 +25446,8 @@ export function createAIServiceV1(params) {
           { no: 5, name: "cwd_full", kind: "scalar", T: 9 },
           { no: 6, name: "cwd_relative_workspace_path", kind: "scalar", T: 9 },
           { no: 4, name: "active_for_cmd_k", kind: "scalar", T: 8 },
-          { no: 7, name: "timestamp", kind: "scalar", T: 3, opt: !0 },
-          { no: 8, name: "timestamp_double", kind: "scalar", T: 1, opt: !0 },
+          { no: 7, name: "timestamp", kind: "scalar", T: 3, opt: true },
+          { no: 8, name: "timestamp_double", kind: "scalar", T: 1, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -25581,8 +25581,8 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
-          { no: 2, name: "lints", kind: "message", T: Mgn, repeated: !0 },
-          { no: 3, name: "context_lines", kind: "message", T: Xwn, repeated: !0 },
+          { no: 2, name: "lints", kind: "message", T: Mgn, repeated: true },
+          { no: 3, name: "context_lines", kind: "message", T: Xwn, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -25725,7 +25725,7 @@ export function createAIServiceV1(params) {
         super(),
           (this.type = lc.UNSPECIFIED),
           (this.uuid = ""),
-          (this.intent = { case: void 0 }),
+          (this.intent = { case: undefined }),
           v.util.initPartial(e, this)
       }
       static {
@@ -26040,7 +26040,7 @@ export function createAIServiceV1(params) {
     r0n = class PLe extends _ {
       constructor(e) {
         super(),
-          (this.scope = { case: void 0 }),
+          (this.scope = { case: undefined }),
           (this.filterToSeverities = []),
           v.util.initPartial(e, this)
       }
@@ -26059,7 +26059,7 @@ export function createAIServiceV1(params) {
             name: "filter_to_severities",
             kind: "enum",
             T: v.getEnumType(lk),
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -26115,7 +26115,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
-          { no: 2, name: "filter_range", kind: "message", T: Kf, opt: !0 },
+          { no: 2, name: "filter_range", kind: "message", T: Kf, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -26143,7 +26143,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 2, name: "timestamp", kind: "scalar", T: 1, opt: !0 },
+          { no: 2, name: "timestamp", kind: "scalar", T: 1, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -26424,7 +26424,7 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.instanceId = 0),
-          (this.activeForCmdK = !1),
+          (this.activeForCmdK = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -26442,7 +26442,7 @@ export function createAIServiceV1(params) {
             name: "use_active_instance_as_fallback",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
         ])
       }
@@ -26497,7 +26497,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "context_items", kind: "message", T: t7, repeated: !0 },
+          { no: 1, name: "context_items", kind: "message", T: t7, repeated: true },
           { no: 3, name: "legacy_context", kind: "message", T: A$ },
           { no: 2, name: "cmd_k_options", kind: "message", T: IVe },
         ])
@@ -26517,7 +26517,7 @@ export function createAIServiceV1(params) {
     },
     w0n = class zLe extends _ {
       constructor(e) {
-        super(), (this.response = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.response = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -26541,7 +26541,7 @@ export function createAIServiceV1(params) {
             T: kVe,
             oneof: "response",
           },
-          { no: 3, name: "did_call", kind: "scalar", T: 8, opt: !0 },
+          { no: 3, name: "did_call", kind: "scalar", T: 8, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -26569,7 +26569,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "context_items", kind: "message", T: t7, repeated: !0 },
+          { no: 1, name: "context_items", kind: "message", T: t7, repeated: true },
           { no: 2, name: "cmd_k_options", kind: "message", T: i$i },
         ])
       }
@@ -26588,7 +26588,7 @@ export function createAIServiceV1(params) {
     },
     S0n = class JLe extends _ {
       constructor(e) {
-        super(), (this.response = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.response = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -26630,8 +26630,8 @@ export function createAIServiceV1(params) {
     i$i = class KLe extends _ {
       constructor(e) {
         super(),
-          (this.chatMode = !1),
-          (this.adaCmdKContext = !1),
+          (this.chatMode = false),
+          (this.adaCmdKContext = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -26645,7 +26645,7 @@ export function createAIServiceV1(params) {
           { no: 3, name: "model_details", kind: "message", T: zr },
           { no: 1, name: "chat_mode", kind: "scalar", T: 8 },
           { no: 2, name: "ada_cmd_k_context", kind: "scalar", T: 8 },
-          { no: 4, name: "use_web", kind: "scalar", T: 8, opt: !0 },
+          { no: 4, name: "use_web", kind: "scalar", T: 8, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -26664,8 +26664,8 @@ export function createAIServiceV1(params) {
     IVe = class YLe extends _ {
       constructor(e) {
         super(),
-          (this.chatMode = !1),
-          (this.adaCmdKContext = !1),
+          (this.chatMode = false),
+          (this.adaCmdKContext = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -26679,14 +26679,14 @@ export function createAIServiceV1(params) {
           { no: 3, name: "model_details", kind: "message", T: zr },
           { no: 1, name: "chat_mode", kind: "scalar", T: 8 },
           { no: 2, name: "ada_cmd_k_context", kind: "scalar", T: 8 },
-          { no: 4, name: "use_reranker", kind: "scalar", T: 8, opt: !0 },
-          { no: 5, name: "use_web", kind: "scalar", T: 8, opt: !0 },
+          { no: 4, name: "use_reranker", kind: "scalar", T: 8, opt: true },
+          { no: 5, name: "use_web", kind: "scalar", T: 8, opt: true },
           {
             no: 6,
             name: "request_is_for_caching",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
         ])
       }
@@ -26720,21 +26720,21 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "original_lines", kind: "scalar", T: 9, repeated: !0 },
+          { no: 1, name: "original_lines", kind: "scalar", T: 9, repeated: true },
           { no: 3, name: "relative_path", kind: "scalar", T: 9 },
           {
             no: 4,
             name: "extra_context_above",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 5,
             name: "extra_context_below",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -26769,22 +26769,22 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "original_lines", kind: "scalar", T: 9, repeated: !0 },
-          { no: 2, name: "new_lines", kind: "scalar", T: 9, repeated: !0 },
+          { no: 1, name: "original_lines", kind: "scalar", T: 9, repeated: true },
+          { no: 2, name: "new_lines", kind: "scalar", T: 9, repeated: true },
           { no: 3, name: "relative_path", kind: "scalar", T: 9 },
           {
             no: 4,
             name: "extra_context_above",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 5,
             name: "extra_context_below",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -26821,38 +26821,38 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "context_items", kind: "message", T: t7, repeated: !0 },
+          { no: 1, name: "context_items", kind: "message", T: t7, repeated: true },
           { no: 2, name: "cmd_k_options", kind: "message", T: IVe },
           { no: 4, name: "cmd_k_debug_info", kind: "message", T: hI },
           { no: 6, name: "session_id", kind: "scalar", T: 9 },
           { no: 5, name: "legacy_context", kind: "message", T: A$ },
-          { no: 7, name: "previous_edit", kind: "message", T: Foe, opt: !0 },
+          { no: 7, name: "previous_edit", kind: "message", T: Foe, opt: true },
           {
             no: 8,
             name: "previous_edits",
             kind: "message",
             T: Foe,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 12,
             name: "upcoming_edits",
             kind: "message",
             T: DVe,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 9,
             name: "use_big_cmdk_for_multi_file_edit",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
-          { no: 10, name: "images", kind: "message", T: OT, repeated: !0 },
-          { no: 11, name: "links", kind: "message", T: OSt, repeated: !0 },
-          { no: 13, name: "diff_history", kind: "message", T: $C, repeated: !0 },
-          { no: 14, name: "hyper_model", kind: "scalar", T: 9, opt: !0 },
-          { no: 15, name: "timing_info", kind: "message", T: r$i, opt: !0 },
+          { no: 10, name: "images", kind: "message", T: OT, repeated: true },
+          { no: 11, name: "links", kind: "message", T: OSt, repeated: true },
+          { no: 13, name: "diff_history", kind: "message", T: $C, repeated: true },
+          { no: 14, name: "hyper_model", kind: "scalar", T: 9, opt: true },
+          { no: 15, name: "timing_info", kind: "message", T: r$i, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -26888,44 +26888,44 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "context_items", kind: "message", T: t7, repeated: !0 },
+          { no: 1, name: "context_items", kind: "message", T: t7, repeated: true },
           { no: 2, name: "cmd_k_options", kind: "message", T: IVe },
           { no: 4, name: "cmd_k_debug_info", kind: "message", T: hI },
           { no: 6, name: "session_id", kind: "scalar", T: 9 },
           { no: 5, name: "legacy_context", kind: "message", T: A$ },
-          { no: 7, name: "previous_edit", kind: "message", T: Foe, opt: !0 },
+          { no: 7, name: "previous_edit", kind: "message", T: Foe, opt: true },
           {
             no: 8,
             name: "previous_edits",
             kind: "message",
             T: Foe,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 12,
             name: "upcoming_edits",
             kind: "message",
             T: DVe,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 9,
             name: "use_big_cmdk_for_multi_file_edit",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
-          { no: 10, name: "images", kind: "message", T: OT, repeated: !0 },
-          { no: 11, name: "links", kind: "message", T: OSt, repeated: !0 },
-          { no: 13, name: "diff_history", kind: "message", T: $C, repeated: !0 },
+          { no: 10, name: "images", kind: "message", T: OT, repeated: true },
+          { no: 11, name: "links", kind: "message", T: OSt, repeated: true },
+          { no: 13, name: "diff_history", kind: "message", T: $C, repeated: true },
           {
             no: 14,
             name: "diff_to_base_branch",
             kind: "message",
             T: x0n,
-            opt: !0,
+            opt: true,
           },
-          { no: 15, name: "timing_info", kind: "message", T: r$i, opt: !0 },
+          { no: 15, name: "timing_info", kind: "message", T: r$i, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -26956,8 +26956,8 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "file_diffs", kind: "message", T: k0n, repeated: !0 },
-          { no: 2, name: "commits", kind: "message", T: XN, repeated: !0 },
+          { no: 1, name: "file_diffs", kind: "message", T: k0n, repeated: true },
+          { no: 2, name: "commits", kind: "message", T: XN, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -26978,7 +26978,7 @@ export function createAIServiceV1(params) {
         super(),
           (this.fileName = ""),
           (this.diff = ""),
-          (this.tooBig = !1),
+          (this.tooBig = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -27054,7 +27054,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "context_items", kind: "message", T: t7, repeated: !0 },
+          { no: 1, name: "context_items", kind: "message", T: t7, repeated: true },
           { no: 2, name: "cmd_k_options", kind: "message", T: i$i },
           { no: 6, name: "session_id", kind: "scalar", T: 9 },
           { no: 5, name: "legacy_context", kind: "message", T: A$ },
@@ -27094,14 +27094,14 @@ export function createAIServiceV1(params) {
             name: "prompt_code_blocks",
             kind: "message",
             T: ed,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 10,
             name: "documentation_identifiers",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -27120,7 +27120,7 @@ export function createAIServiceV1(params) {
     },
     a$i = class oNe extends _ {
       constructor(e) {
-        super(), (this.response = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.response = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -27168,7 +27168,7 @@ export function createAIServiceV1(params) {
     },
     E0n = class aNe extends _ {
       constructor(e) {
-        super(), (this.response = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.response = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -27216,7 +27216,7 @@ export function createAIServiceV1(params) {
     },
     I0n = class lNe extends _ {
       constructor(e) {
-        super(), (this.response = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.response = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -27324,7 +27324,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "messages", kind: "scalar", T: 9, repeated: !0 },
+          { no: 1, name: "messages", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -27342,7 +27342,7 @@ export function createAIServiceV1(params) {
     },
     s7 = class dNe extends _ {
       constructor(e) {
-        super(), (this.response = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.response = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -27412,9 +27412,9 @@ export function createAIServiceV1(params) {
             name: "max_end_line_number_exclusive",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
-          { no: 4, name: "file_path", kind: "scalar", T: 9, opt: !0 },
+          { no: 4, name: "file_path", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -27444,7 +27444,7 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "text", kind: "scalar", T: 9 },
           { no: 2, name: "edit_id", kind: "scalar", T: 5 },
-          { no: 3, name: "file_path", kind: "scalar", T: 9, opt: !0 },
+          { no: 3, name: "file_path", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -27477,7 +27477,7 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "end_line_number_exclusive", kind: "scalar", T: 5 },
           { no: 2, name: "edit_id", kind: "scalar", T: 5 },
-          { no: 3, name: "file_path", kind: "scalar", T: 9, opt: !0 },
+          { no: 3, name: "file_path", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -27533,7 +27533,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "messages", kind: "scalar", T: 9, repeated: !0 },
+          { no: 1, name: "messages", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -27565,9 +27565,9 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "code_blocks", kind: "message", T: ed, repeated: !0 },
+          { no: 1, name: "code_blocks", kind: "message", T: ed, repeated: true },
           { no: 2, name: "cmd_k_options", kind: "message", T: IVe },
-          { no: 3, name: "context_items", kind: "message", T: t7, repeated: !0 },
+          { no: 3, name: "context_items", kind: "message", T: t7, repeated: true },
           { no: 4, name: "session_id", kind: "scalar", T: 9 },
           { no: 5, name: "legacy_context", kind: "message", T: A$ },
         ])
@@ -27587,7 +27587,7 @@ export function createAIServiceV1(params) {
     },
     A0n = class yNe extends _ {
       constructor(e) {
-        super(), (this.response = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.response = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -27622,7 +27622,7 @@ export function createAIServiceV1(params) {
     },
     M0n = class wNe extends _ {
       constructor(e) {
-        super(), (this.response = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.response = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -27702,7 +27702,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "code_blocks", kind: "message", T: ed, repeated: !0 },
+          { no: 1, name: "code_blocks", kind: "message", T: ed, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -27759,20 +27759,20 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "request_id", kind: "scalar", T: 9 },
-          { no: 2, name: "fate", kind: "enum", T: v.getEnumType(UT), opt: !0 },
+          { no: 2, name: "fate", kind: "enum", T: v.getEnumType(UT), opt: true },
           {
             no: 3,
             name: "num_accepted_partial_diffs",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
           {
             no: 4,
             name: "num_rejected_partial_diffs",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
         ])
       }
@@ -27820,7 +27820,7 @@ export function createAIServiceV1(params) {
         super(),
           (this.conversation = []),
           (this.source = nm.UNSPECIFIED),
-          (this.willingToPayExtraForSpeed = !1),
+          (this.willingToPayExtraForSpeed = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -27832,7 +27832,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 2, name: "current_file", kind: "message", T: Ho },
-          { no: 3, name: "conversation", kind: "message", T: Ha, repeated: !0 },
+          { no: 3, name: "conversation", kind: "message", T: Ha, repeated: true },
           { no: 4, name: "explicit_context", kind: "message", T: Sf },
           { no: 5, name: "source", kind: "enum", T: v.getEnumType(nm) },
           { no: 6, name: "willing_to_pay_extra_for_speed", kind: "scalar", T: 8 },
@@ -28073,7 +28073,7 @@ export function createAIServiceV1(params) {
             name: "use_speculative_linter",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
         ])
       }
@@ -28102,7 +28102,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "chunk_tokens", kind: "message", T: _1t, repeated: !0 },
+          { no: 1, name: "chunk_tokens", kind: "message", T: _1t, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -28166,7 +28166,7 @@ export function createAIServiceV1(params) {
             name: "middle_chunk_tokens",
             kind: "message",
             T: _1t,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -28267,7 +28267,7 @@ export function createAIServiceV1(params) {
             name: "tokens_with_logprobs",
             kind: "message",
             T: J0n,
-            repeated: !0,
+            repeated: true,
           },
           { no: 2, name: "actual_token", kind: "scalar", T: 9 },
         ])
@@ -28297,7 +28297,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "tokens", kind: "message", T: _1t, repeated: !0 },
+          { no: 1, name: "tokens", kind: "message", T: _1t, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -28317,7 +28317,7 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.discriminator = n7.UNSPECIFIED),
-          (this.allow = !1),
+          (this.allow = false),
           (this.reasoning = ""),
           v.util.initPartial(e, this)
       }
@@ -28382,7 +28382,7 @@ export function createAIServiceV1(params) {
             name: "discriminator_results",
             kind: "message",
             T: Y0n,
-            repeated: !0,
+            repeated: true,
           },
           { no: 11, name: "logprobs_payload", kind: "message", T: X0n },
         ])
@@ -28553,7 +28553,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "files", kind: "message", T: Q0n, repeated: !0 },
+          { no: 1, name: "files", kind: "message", T: Q0n, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -28585,7 +28585,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
-          { no: 2, name: "nodes", kind: "message", T: g$i, repeated: !0 },
+          { no: 2, name: "nodes", kind: "message", T: g$i, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -28603,7 +28603,7 @@ export function createAIServiceV1(params) {
     },
     g$i = class GNe extends _ {
       constructor(e) {
-        super(), (this.node = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.node = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -28650,7 +28650,7 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "doc_string", kind: "scalar", T: 9 },
           { no: 2, name: "value", kind: "scalar", T: 9 },
-          { no: 6, name: "references", kind: "message", T: p$i, repeated: !0 },
+          { no: 6, name: "references", kind: "message", T: p$i, repeated: true },
           { no: 7, name: "score", kind: "scalar", T: 1 },
         ])
       }
@@ -28689,8 +28689,8 @@ export function createAIServiceV1(params) {
           { no: 1, name: "doc_string", kind: "scalar", T: 9 },
           { no: 2, name: "header", kind: "scalar", T: 9 },
           { no: 3, name: "trailer", kind: "scalar", T: 9 },
-          { no: 5, name: "children", kind: "message", T: g$i, repeated: !0 },
-          { no: 6, name: "references", kind: "message", T: p$i, repeated: !0 },
+          { no: 5, name: "children", kind: "message", T: g$i, repeated: true },
+          { no: 6, name: "references", kind: "message", T: p$i, repeated: true },
           { no: 7, name: "score", kind: "scalar", T: 1 },
         ])
       }
@@ -28719,7 +28719,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "value", kind: "scalar", T: 9, opt: !0 },
+          { no: 1, name: "value", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -28769,7 +28769,7 @@ export function createAIServiceV1(params) {
     },
     U1t = class QNe extends _ {
       constructor(e) {
-        super(), (this.feature = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.feature = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -28850,7 +28850,7 @@ export function createAIServiceV1(params) {
             name: "override_num_requests_counted",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
         ])
       }
@@ -28870,9 +28870,9 @@ export function createAIServiceV1(params) {
     iCn = class ZNe extends _ {
       constructor(e) {
         super(),
-          (this.inBackgroundSubsidized = !1),
+          (this.inBackgroundSubsidized = false),
           (this.costCents = 0),
-          (this.isFast = !1),
+          (this.isFast = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -28932,8 +28932,8 @@ export function createAIServiceV1(params) {
     nCn = class tRe extends _ {
       constructor(e) {
         super(),
-          (this.isOptimistic = !1),
-          (this.willingToPayExtraForSpeed = !1),
+          (this.isOptimistic = false),
+          (this.willingToPayExtraForSpeed = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -29215,7 +29215,7 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.timestamp = Jf.zero),
-          (this.isSlow = !1),
+          (this.isSlow = false),
           (this.status = ""),
           v.util.initPartial(e, this)
       }
@@ -29234,9 +29234,9 @@ export function createAIServiceV1(params) {
             name: "subscription_product_id",
             kind: "scalar",
             T: 9,
-            opt: !0,
+            opt: true,
           },
-          { no: 4, name: "usage_price_id", kind: "scalar", T: 9, opt: !0 },
+          { no: 4, name: "usage_price_id", kind: "scalar", T: 9, opt: true },
           { no: 5, name: "is_slow", kind: "scalar", T: 8 },
           { no: 6, name: "status", kind: "scalar", T: 9 },
         ])
@@ -29279,28 +29279,28 @@ export function createAIServiceV1(params) {
             kind: "scalar",
             T: 9,
           },
-          { no: 4, name: "interface_lines", kind: "scalar", T: 9, repeated: !0 },
+          { no: 4, name: "interface_lines", kind: "scalar", T: 9, repeated: true },
           {
             no: 5,
             name: "test_relative_workspace_path",
             kind: "scalar",
             T: 9,
-            opt: !0,
+            opt: true,
           },
-          { no: 10, name: "test_lines", kind: "scalar", T: 9, repeated: !0 },
+          { no: 10, name: "test_lines", kind: "scalar", T: 9, repeated: true },
           {
             no: 6,
             name: "implementation_relative_workspace_path",
             kind: "scalar",
             T: 9,
-            opt: !0,
+            opt: true,
           },
           {
             no: 7,
             name: "implementation_lines",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
           { no: 8, name: "language", kind: "scalar", T: 9 },
           { no: 9, name: "testing_framework", kind: "scalar", T: 9 },
@@ -29464,7 +29464,7 @@ export function createAIServiceV1(params) {
     },
     pCn = class pRe extends _ {
       constructor(e) {
-        super(), (this.isFinished = !1), v.util.initPartial(e, this)
+        super(), (this.isFinished = false), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -29475,7 +29475,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "is_finished", kind: "scalar", T: 8 },
-          { no: 2, name: "reason", kind: "scalar", T: 9, opt: !0 },
+          { no: 2, name: "reason", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -29493,7 +29493,7 @@ export function createAIServiceV1(params) {
     },
     mCn = class mRe extends _ {
       constructor(e) {
-        super(), (this.isFinished = !1), v.util.initPartial(e, this)
+        super(), (this.isFinished = false), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -29509,9 +29509,9 @@ export function createAIServiceV1(params) {
             name: "ended_reason",
             kind: "enum",
             T: v.getEnumType(BT),
-            opt: !0,
+            opt: true,
           },
-          { no: 3, name: "exit_code", kind: "scalar", T: 5, opt: !0 },
+          { no: 3, name: "exit_code", kind: "scalar", T: 5, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -29636,7 +29636,7 @@ export function createAIServiceV1(params) {
             name: "candidate_files",
             kind: "message",
             T: yCn,
-            repeated: !0,
+            repeated: true,
           },
           { no: 3, name: "model_details", kind: "message", T: zr },
         ])
@@ -29698,7 +29698,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "ranked_files", kind: "message", T: CCn, repeated: !0 },
+          { no: 1, name: "ranked_files", kind: "message", T: CCn, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -29732,7 +29732,7 @@ export function createAIServiceV1(params) {
           { no: 1, name: "diff_char_len", kind: "scalar", T: 5 },
           { no: 2, name: "iterations", kind: "scalar", T: 5 },
           { no: 3, name: "model_details", kind: "message", T: zr },
-          { no: 4, name: "session_id", kind: "scalar", T: 9, opt: !0 },
+          { no: 4, name: "session_id", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -29807,7 +29807,7 @@ export function createAIServiceV1(params) {
     },
     ICn = class IRe extends _ {
       constructor(e) {
-        super(), (this.isHealthy = !1), v.util.initPartial(e, this)
+        super(), (this.isHealthy = false), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -29907,13 +29907,13 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "status", kind: "enum", T: v.getEnumType(dG) },
           { no: 2, name: "message", kind: "scalar", T: 9 },
-          { no: 3, name: "iterations_completed", kind: "scalar", T: 5, opt: !0 },
-          { no: 4, name: "total_iterations", kind: "scalar", T: 5, opt: !0 },
-          { no: 5, name: "total_tokens", kind: "scalar", T: 5, opt: !0 },
-          { no: 6, name: "processed_tokens", kind: "scalar", T: 5, opt: !0 },
-          { no: 7, name: "processed_cost", kind: "scalar", T: 2, opt: !0 },
-          { no: 8, name: "thinking_tokens", kind: "scalar", T: 5, opt: !0 },
-          { no: 9, name: "thinking_cost", kind: "scalar", T: 2, opt: !0 },
+          { no: 3, name: "iterations_completed", kind: "scalar", T: 5, opt: true },
+          { no: 4, name: "total_iterations", kind: "scalar", T: 5, opt: true },
+          { no: 5, name: "total_tokens", kind: "scalar", T: 5, opt: true },
+          { no: 6, name: "processed_tokens", kind: "scalar", T: 5, opt: true },
+          { no: 7, name: "processed_cost", kind: "scalar", T: 2, opt: true },
+          { no: 8, name: "thinking_tokens", kind: "scalar", T: 5, opt: true },
+          { no: 9, name: "thinking_cost", kind: "scalar", T: 2, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -29954,7 +29954,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "bug_reports", kind: "message", T: wMi, opt: !0 },
+          { no: 1, name: "bug_reports", kind: "message", T: wMi, opt: true },
           { no: 2, name: "status", kind: "message", T: PCn },
         ])
       }
@@ -29987,27 +29987,27 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "current_file", kind: "message", T: Ho, opt: !0 },
+          { no: 1, name: "current_file", kind: "message", T: Ho, opt: true },
           {
             no: 2,
             name: "chat_conversation_history",
             kind: "message",
             T: Ha,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 3,
             name: "cpp_diff_trajectories",
             kind: "message",
             T: $C,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 4,
             name: "candidate_files",
             kind: "message",
             T: Dvn,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -30036,7 +30036,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "reranking_scores", kind: "scalar", T: 2, repeated: !0 },
+          { no: 1, name: "reranking_scores", kind: "scalar", T: 2, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -30064,7 +30064,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "messages", kind: "message", T: Ha, repeated: !0 },
+          { no: 1, name: "messages", kind: "message", T: Ha, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -30247,8 +30247,8 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "count", kind: "scalar", T: 5, opt: !0 },
-          { no: 2, name: "page", kind: "scalar", T: 5, opt: !0 },
+          { no: 1, name: "count", kind: "scalar", T: 5, opt: true },
+          { no: 2, name: "page", kind: "scalar", T: 5, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -30315,7 +30315,7 @@ export function createAIServiceV1(params) {
         super(),
           (this.pastRequests = []),
           (this.totalCount = 0),
-          (this.hasMore = !1),
+          (this.hasMore = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -30326,7 +30326,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "past_requests", kind: "message", T: UCn, repeated: !0 },
+          { no: 1, name: "past_requests", kind: "message", T: UCn, repeated: true },
           { no: 10, name: "total_count", kind: "scalar", T: 5 },
           { no: 11, name: "has_more", kind: "scalar", T: 8 },
         ])
@@ -30362,7 +30362,7 @@ export function createAIServiceV1(params) {
             name: "context_to_rank",
             kind: "message",
             T: mVe,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -30396,7 +30396,7 @@ export function createAIServiceV1(params) {
             name: "ranked_context",
             kind: "message",
             T: m1t,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -30425,7 +30425,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "questions", kind: "scalar", T: 9, repeated: !0 },
+          { no: 1, name: "questions", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -30529,14 +30529,14 @@ export function createAIServiceV1(params) {
             name: "at_symbol_dependencies",
             kind: "message",
             T: V1t,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 3,
             name: "at_symbol_options",
             kind: "message",
             T: qCn,
-            repeated: !0,
+            repeated: true,
           },
           { no: 4, name: "user_query", kind: "scalar", T: 9 },
           { no: 5, name: "model_details", kind: "message", T: zr },
@@ -30570,7 +30570,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "indices", kind: "scalar", T: 5, repeated: !0 },
+          { no: 1, name: "indices", kind: "scalar", T: 5, repeated: true },
           { no: 2, name: "explanation", kind: "scalar", T: 9 },
         ])
       }
@@ -30591,7 +30591,7 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.name = ""),
-          (this.isFolder = !1),
+          (this.isFolder = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -30642,18 +30642,18 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "current_command", kind: "scalar", T: 9 },
-          { no: 2, name: "command_history", kind: "scalar", T: 9, repeated: !0 },
-          { no: 3, name: "model_name", kind: "scalar", T: 9, opt: !0 },
+          { no: 2, name: "command_history", kind: "scalar", T: 9, repeated: true },
+          { no: 3, name: "model_name", kind: "scalar", T: 9, opt: true },
           {
             no: 4,
             name: "file_diff_histories",
             kind: "message",
             T: $C,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 5, name: "git_diff", kind: "scalar", T: 9, opt: !0 },
-          { no: 6, name: "commit_history", kind: "scalar", T: 9, repeated: !0 },
-          { no: 7, name: "past_results", kind: "scalar", T: 9, repeated: !0 },
+          { no: 5, name: "git_diff", kind: "scalar", T: 9, opt: true },
+          { no: 6, name: "commit_history", kind: "scalar", T: 9, repeated: true },
+          { no: 7, name: "past_results", kind: "scalar", T: 9, repeated: true },
           { no: 8, name: "model_details", kind: "message", T: zr },
           { no: 9, name: "user_platform", kind: "scalar", T: 9 },
           { no: 10, name: "current_folder", kind: "scalar", T: 9 },
@@ -30662,14 +30662,14 @@ export function createAIServiceV1(params) {
             name: "current_folder_structure",
             kind: "message",
             T: zCn,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 12,
             name: "relevant_files",
             kind: "message",
             T: AC,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -30786,7 +30786,7 @@ export function createAIServiceV1(params) {
             name: "heuristics_selections",
             kind: "message",
             T: w$i,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -30855,7 +30855,7 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "start_line", kind: "scalar", T: 5 },
           { no: 2, name: "end_line", kind: "scalar", T: 5 },
-          { no: 3, name: "instructions", kind: "message", T: KCn, repeated: !0 },
+          { no: 3, name: "instructions", kind: "message", T: KCn, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -30883,7 +30883,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "results", kind: "message", T: YCn, repeated: !0 },
+          { no: 1, name: "results", kind: "message", T: YCn, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -30989,27 +30989,27 @@ export function createAIServiceV1(params) {
             name: "proposed_change_history",
             kind: "message",
             T: k$i,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 6,
             name: "related_code_blocks",
             kind: "message",
             T: ed,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 7, name: "diff_history", kind: "message", T: $C, repeated: !0 },
-          { no: 8, name: "linter_errors", kind: "message", T: x$i, repeated: !0 },
-          { no: 9, name: "useful_types", kind: "message", T: tSn, repeated: !0 },
+          { no: 7, name: "diff_history", kind: "message", T: $C, repeated: true },
+          { no: 8, name: "linter_errors", kind: "message", T: x$i, repeated: true },
+          { no: 9, name: "useful_types", kind: "message", T: tSn, repeated: true },
           {
             no: 10,
             name: "recently_viewed_files",
             kind: "message",
             T: E$i,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 11, name: "recent_diffs", kind: "message", T: D$i, repeated: !0 },
-          { no: 12, name: "multiple_completions", kind: "scalar", T: 8, opt: !0 },
+          { no: 11, name: "recent_diffs", kind: "message", T: D$i, repeated: true },
+          { no: 12, name: "multiple_completions", kind: "scalar", T: 8, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -31086,7 +31086,7 @@ export function createAIServiceV1(params) {
             T: 5,
           },
           { no: 7, name: "end_column_one_indexed", kind: "scalar", T: 5 },
-          { no: 9, name: "quick_fixes", kind: "message", T: ZCn, repeated: !0 },
+          { no: 9, name: "quick_fixes", kind: "message", T: ZCn, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -31107,7 +31107,7 @@ export function createAIServiceV1(params) {
         super(),
           (this.message = ""),
           (this.kind = ""),
-          (this.isPreferred = !1),
+          (this.isPreferred = false),
           (this.edits = []),
           v.util.initPartial(e, this)
       }
@@ -31122,7 +31122,7 @@ export function createAIServiceV1(params) {
           { no: 1, name: "message", kind: "scalar", T: 9 },
           { no: 2, name: "kind", kind: "scalar", T: 9 },
           { no: 3, name: "is_preferred", kind: "scalar", T: 8 },
-          { no: 4, name: "edits", kind: "message", T: eSn, repeated: !0 },
+          { no: 4, name: "edits", kind: "message", T: eSn, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -31199,7 +31199,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "change", kind: "scalar", T: 9 },
-          { no: 2, name: "linter_errors", kind: "message", T: x$i, repeated: !0 },
+          { no: 2, name: "linter_errors", kind: "message", T: x$i, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -31234,7 +31234,7 @@ export function createAIServiceV1(params) {
           { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
           { no: 2, name: "start_line", kind: "scalar", T: 5 },
           { no: 3, name: "text", kind: "scalar", T: 9 },
-          { no: 4, name: "score", kind: "scalar", T: 1, opt: !0 },
+          { no: 4, name: "score", kind: "scalar", T: 1, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -31273,7 +31273,7 @@ export function createAIServiceV1(params) {
             name: "visible_ranges",
             kind: "message",
             T: I$i,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -31308,13 +31308,13 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "start_line_number_inclusive", kind: "scalar", T: 5 },
           { no: 2, name: "end_line_number_exclusive", kind: "scalar", T: 5 },
-          { no: 3, name: "viewed_at", kind: "scalar", T: 5, opt: !0 },
+          { no: 3, name: "viewed_at", kind: "scalar", T: 5, opt: true },
           {
             no: 4,
             name: "global_order_descending",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
         ])
       }
@@ -31397,7 +31397,7 @@ export function createAIServiceV1(params) {
           (this.instruction = ""),
           (this.groundTruth = ""),
           (this.experiment = _oe.UNSPECIFIED),
-          (this.runAutomatedEval = !1),
+          (this.runAutomatedEval = false),
           (this.proposedChangeHistory = []),
           (this.commitNotes = []),
           (this.relatedCodeBlocks = []),
@@ -31422,15 +31422,15 @@ export function createAIServiceV1(params) {
             name: "proposed_change_history",
             kind: "message",
             T: aSn,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 8, name: "commit_notes", kind: "message", T: BSt, repeated: !0 },
+          { no: 8, name: "commit_notes", kind: "message", T: BSt, repeated: true },
           {
             no: 9,
             name: "related_code_blocks",
             kind: "message",
             T: ed,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -31507,7 +31507,7 @@ export function createAIServiceV1(params) {
             T: 5,
           },
           { no: 7, name: "end_column_one_indexed", kind: "scalar", T: 5 },
-          { no: 9, name: "quick_fixes", kind: "message", T: rSn, repeated: !0 },
+          { no: 9, name: "quick_fixes", kind: "message", T: rSn, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -31528,7 +31528,7 @@ export function createAIServiceV1(params) {
         super(),
           (this.message = ""),
           (this.kind = ""),
-          (this.isPreferred = !1),
+          (this.isPreferred = false),
           (this.edits = []),
           v.util.initPartial(e, this)
       }
@@ -31543,7 +31543,7 @@ export function createAIServiceV1(params) {
           { no: 1, name: "message", kind: "scalar", T: 9 },
           { no: 2, name: "kind", kind: "scalar", T: 9 },
           { no: 3, name: "is_preferred", kind: "scalar", T: 8 },
-          { no: 4, name: "edits", kind: "message", T: oSn, repeated: !0 },
+          { no: 4, name: "edits", kind: "message", T: oSn, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -31620,7 +31620,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "change", kind: "scalar", T: 9 },
-          { no: 2, name: "linter_errors", kind: "message", T: nSn, repeated: !0 },
+          { no: 2, name: "linter_errors", kind: "message", T: nSn, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -31767,7 +31767,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "texts", kind: "scalar", T: 9, repeated: !0 },
+          { no: 1, name: "texts", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -31795,7 +31795,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "embeddings", kind: "message", T: gSn, repeated: !0 },
+          { no: 1, name: "embeddings", kind: "message", T: gSn, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -31823,7 +31823,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "embedding", kind: "scalar", T: 1, repeated: !0 },
+          { no: 1, name: "embedding", kind: "scalar", T: 1, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -31880,7 +31880,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "notes", kind: "message", T: Hgn, repeated: !0 },
+          { no: 1, name: "notes", kind: "message", T: Hgn, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -31913,7 +31913,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "session_id", kind: "scalar", T: 9 },
-          { no: 2, name: "commits", kind: "message", T: T$i, repeated: !0 },
+          { no: 2, name: "commits", kind: "message", T: T$i, repeated: true },
           { no: 3, name: "request_id", kind: "scalar", T: 9 },
         ])
       }
@@ -31975,8 +31975,8 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "ai_response", kind: "scalar", T: 9 },
-          { no: 2, name: "override_model", kind: "scalar", T: 9, opt: !0 },
-          { no: 3, name: "override_token_limit", kind: "scalar", T: 5, opt: !0 },
+          { no: 2, name: "override_model", kind: "scalar", T: 9, opt: true },
+          { no: 3, name: "override_token_limit", kind: "scalar", T: 5, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -32009,7 +32009,7 @@ export function createAIServiceV1(params) {
             name: "file_instructions",
             kind: "message",
             T: wSn,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -32083,32 +32083,32 @@ export function createAIServiceV1(params) {
           { no: 1, name: "branch_name", kind: "scalar", T: 9 },
           { no: 2, name: "branch_notes", kind: "scalar", T: 9 },
           { no: 3, name: "global_notes", kind: "scalar", T: 9 },
-          { no: 4, name: "past_thoughts", kind: "message", T: kSn, repeated: !0 },
+          { no: 4, name: "past_thoughts", kind: "message", T: kSn, repeated: true },
           { no: 5, name: "diff_to_base_branch", kind: "message", T: SSn },
           {
             no: 6,
             name: "potentially_relevant_commits",
             kind: "message",
             T: XN,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 7, name: "files", kind: "message", T: P$i, repeated: !0 },
+          { no: 7, name: "files", kind: "message", T: P$i, repeated: true },
           {
             no: 8,
             name: "context_graph_files",
             kind: "message",
             T: ESn,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 12,
             name: "crucial_files",
             kind: "message",
             T: P$i,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 9, name: "override_model", kind: "scalar", T: 9, opt: !0 },
-          { no: 10, name: "override_token_limit", kind: "scalar", T: 5, opt: !0 },
+          { no: 9, name: "override_model", kind: "scalar", T: 9, opt: true },
+          { no: 10, name: "override_token_limit", kind: "scalar", T: 5, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -32139,8 +32139,8 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "file_diffs", kind: "message", T: xSn, repeated: !0 },
-          { no: 2, name: "commits", kind: "message", T: XN, repeated: !0 },
+          { no: 1, name: "file_diffs", kind: "message", T: xSn, repeated: true },
+          { no: 2, name: "commits", kind: "message", T: XN, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -32161,7 +32161,7 @@ export function createAIServiceV1(params) {
         super(),
           (this.fileName = ""),
           (this.diff = ""),
-          (this.tooBig = !1),
+          (this.tooBig = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -32302,7 +32302,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "text", kind: "scalar", T: 9 },
-          { no: 2, name: "cached_prompt", kind: "scalar", T: 9, opt: !0 },
+          { no: 2, name: "cached_prompt", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -32346,7 +32346,7 @@ export function createAIServiceV1(params) {
     },
     TSn = class VAe extends _ {
       constructor(e) {
-        super(), (this.enabled = !1), v.util.initPartial(e, this)
+        super(), (this.enabled = false), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -32396,72 +32396,72 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "current_file", kind: "message", T: Ho },
-          { no: 2, name: "diff_history", kind: "scalar", T: 9, repeated: !0 },
-          { no: 3, name: "model_name", kind: "scalar", T: 9, opt: !0 },
-          { no: 4, name: "linter_errors", kind: "message", T: Cf, opt: !0 },
+          { no: 2, name: "diff_history", kind: "scalar", T: 9, repeated: true },
+          { no: 3, name: "model_name", kind: "scalar", T: 9, opt: true },
+          { no: 4, name: "linter_errors", kind: "message", T: Cf, opt: true },
           {
             no: 13,
             name: "context_items",
             kind: "message",
             T: N1t,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 5,
             name: "diff_history_keys",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 6, name: "give_debug_output", kind: "scalar", T: 8, opt: !0 },
+          { no: 6, name: "give_debug_output", kind: "scalar", T: 8, opt: true },
           {
             no: 7,
             name: "file_diff_histories",
             kind: "message",
             T: $C,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 8,
             name: "merged_diff_histories",
             kind: "message",
             T: $C,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 9,
             name: "block_diff_patches",
             kind: "message",
             T: $1t,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 10, name: "is_nightly", kind: "scalar", T: 8, opt: !0 },
-          { no: 11, name: "is_debug", kind: "scalar", T: 8, opt: !0 },
-          { no: 12, name: "immediately_ack", kind: "scalar", T: 8, opt: !0 },
-          { no: 17, name: "enable_more_context", kind: "scalar", T: 8, opt: !0 },
+          { no: 10, name: "is_nightly", kind: "scalar", T: 8, opt: true },
+          { no: 11, name: "is_debug", kind: "scalar", T: 8, opt: true },
+          { no: 12, name: "immediately_ack", kind: "scalar", T: 8, opt: true },
+          { no: 17, name: "enable_more_context", kind: "scalar", T: 8, opt: true },
           {
             no: 14,
             name: "parameter_hints",
             kind: "message",
             T: WMi,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 15, name: "lsp_contexts", kind: "message", T: I1t, repeated: !0 },
-          { no: 16, name: "cpp_intent_info", kind: "message", T: UMi, opt: !0 },
-          { no: 18, name: "workspace_id", kind: "scalar", T: 9, opt: !0 },
+          { no: 15, name: "lsp_contexts", kind: "message", T: I1t, repeated: true },
+          { no: 16, name: "cpp_intent_info", kind: "message", T: UMi, opt: true },
+          { no: 18, name: "workspace_id", kind: "scalar", T: 9, opt: true },
           {
             no: 19,
             name: "file_sync_updates",
             kind: "message",
             T: cG,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 20,
             name: "file_visible_ranges",
             kind: "message",
             T: N$i,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -32533,7 +32533,7 @@ export function createAIServiceV1(params) {
             name: "visible_ranges",
             kind: "message",
             T: L$i,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -32552,7 +32552,7 @@ export function createAIServiceV1(params) {
     },
     LSn = class zAe extends _ {
       constructor(e) {
-        super(), (this.response = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.response = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -32609,7 +32609,7 @@ export function createAIServiceV1(params) {
           { no: 3, name: "prompt", kind: "scalar", T: 9 },
           { no: 4, name: "selection_range", kind: "message", T: Kf },
           { no: 5, name: "model_details", kind: "message", T: zr },
-          { no: 10, name: "images", kind: "message", T: OT, repeated: !0 },
+          { no: 10, name: "images", kind: "message", T: OT, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -32674,7 +32674,7 @@ export function createAIServiceV1(params) {
             name: "method_signatures",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -32703,7 +32703,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "scores", kind: "scalar", T: 2, repeated: !0 },
+          { no: 1, name: "scores", kind: "scalar", T: 2, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -32736,7 +32736,7 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "feedback_type", kind: "enum", T: v.getEnumType(r0) },
           { no: 2, name: "request_id", kind: "scalar", T: 9 },
-          { no: 3, name: "comment", kind: "scalar", T: 9, opt: !0 },
+          { no: 3, name: "comment", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -32833,7 +32833,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "enable_cards", kind: "scalar", T: 9, repeated: !0 },
+          { no: 1, name: "enable_cards", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -32967,7 +32967,7 @@ export function createAIServiceV1(params) {
         super(),
           (this.promptProps = ""),
           (this.promptPropsTypeName = ""),
-          (this.skipLoginCheck = !1),
+          (this.skipLoginCheck = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -33111,7 +33111,7 @@ export function createAIServiceV1(params) {
     },
     jSn = class hMe extends _ {
       constructor(e) {
-        super(), (this.enabled = !1), v.util.initPartial(e, this)
+        super(), (this.enabled = false), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -33205,7 +33205,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "messages", kind: "message", T: Ha, repeated: !0 },
+          { no: 1, name: "messages", kind: "message", T: Ha, repeated: true },
           { no: 2, name: "context_options", kind: "message", T: ZSn },
           { no: 3, name: "model_details", kind: "message", T: zr },
         ])
@@ -33226,8 +33226,8 @@ export function createAIServiceV1(params) {
     KSn = class gMe extends _ {
       constructor(e) {
         super(),
-          (this.useGlobalContext = !1),
-          (this.useWithFolderContext = !1),
+          (this.useGlobalContext = false),
+          (this.useWithFolderContext = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -33274,9 +33274,9 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "doc_indices", kind: "scalar", T: 5, repeated: !0 },
-          { no: 2, name: "doc_identifiers", kind: "scalar", T: 9, repeated: !0 },
-          { no: 3, name: "doc_names", kind: "scalar", T: 9, repeated: !0 },
+          { no: 1, name: "doc_indices", kind: "scalar", T: 5, repeated: true },
+          { no: 2, name: "doc_identifiers", kind: "scalar", T: 9, repeated: true },
+          { no: 3, name: "doc_names", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -33336,7 +33336,7 @@ export function createAIServiceV1(params) {
             name: "diagnostic_indices",
             kind: "scalar",
             T: 5,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -33401,7 +33401,7 @@ export function createAIServiceV1(params) {
             name: "available_docs",
             kind: "message",
             T: t1n,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -33473,7 +33473,7 @@ export function createAIServiceV1(params) {
           { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
           { no: 2, name: "contents", kind: "scalar", T: 9 },
           { no: 3, name: "cursor_position", kind: "message", T: Qm },
-          { no: 4, name: "dataframes", kind: "message", T: $St, repeated: !0 },
+          { no: 4, name: "dataframes", kind: "message", T: $St, repeated: true },
           { no: 5, name: "language_id", kind: "scalar", T: 9 },
           { no: 6, name: "selection", kind: "message", T: RC },
         ])
@@ -33509,7 +33509,7 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
           { no: 2, name: "contents", kind: "scalar", T: 9 },
-          { no: 3, name: "diagnostics", kind: "message", T: TVe, repeated: !0 },
+          { no: 3, name: "diagnostics", kind: "message", T: TVe, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -33598,7 +33598,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "conversation", kind: "message", T: Ha, repeated: !0 },
+          { no: 1, name: "conversation", kind: "message", T: Ha, repeated: true },
           { no: 2, name: "model_details", kind: "message", T: zr },
         ])
       }
@@ -33650,8 +33650,8 @@ export function createAIServiceV1(params) {
           (this.repositories = []),
           (this.codeBlocks = []),
           (this.queryType = M$.UNSPECIFIED),
-          (this.fasterAndStupider = !1),
-          (this.useGlobs = !1),
+          (this.fasterAndStupider = false),
+          (this.useGlobs = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -33663,11 +33663,11 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "current_file", kind: "message", T: Ho },
-          { no: 2, name: "conversation", kind: "message", T: Ha, repeated: !0 },
-          { no: 3, name: "repositories", kind: "message", T: rl, repeated: !0 },
+          { no: 2, name: "conversation", kind: "message", T: Ha, repeated: true },
+          { no: 3, name: "repositories", kind: "message", T: rl, repeated: true },
           { no: 4, name: "explicit_context", kind: "message", T: Sf },
-          { no: 5, name: "workspace_root_path", kind: "scalar", T: 9, opt: !0 },
-          { no: 6, name: "code_blocks", kind: "message", T: ed, repeated: !0 },
+          { no: 5, name: "workspace_root_path", kind: "scalar", T: 9, opt: true },
+          { no: 6, name: "code_blocks", kind: "message", T: ed, repeated: true },
           { no: 7, name: "model_details", kind: "message", T: zr },
           { no: 8, name: "query_type", kind: "enum", T: v.getEnumType(M$) },
           { no: 9, name: "repository_info", kind: "message", T: rl },
@@ -33711,7 +33711,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "queries", kind: "message", T: a1n, repeated: !0 },
+          { no: 1, name: "queries", kind: "message", T: a1n, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -33731,7 +33731,7 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.query = ""),
-          (this.successfulParse = !1),
+          (this.successfulParse = false),
           (this.goodFileExtensions = []),
           (this.badFileExtensions = []),
           (this.goodPaths = []),
@@ -33753,17 +33753,17 @@ export function createAIServiceV1(params) {
             name: "good_file_extensions",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 4,
             name: "bad_file_extensions",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 5, name: "good_paths", kind: "scalar", T: 9, repeated: !0 },
-          { no: 6, name: "bad_paths", kind: "scalar", T: 9, repeated: !0 },
+          { no: 5, name: "good_paths", kind: "scalar", T: 9, repeated: true },
+          { no: 6, name: "bad_paths", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -33782,7 +33782,7 @@ export function createAIServiceV1(params) {
     l1n = class LMe extends _ {
       constructor(e) {
         super(),
-          (this.queryOrReasoning = { case: void 0 }),
+          (this.queryOrReasoning = { case: undefined }),
           v.util.initPartial(e, this)
       }
       static {
@@ -33825,7 +33825,7 @@ export function createAIServiceV1(params) {
     c1n = class NMe extends _ {
       constructor(e) {
         super(),
-          (this.partialQuery = { case: void 0 }),
+          (this.partialQuery = { case: undefined }),
           (this.index = 0),
           v.util.initPartial(e, this)
       }
@@ -33868,7 +33868,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "api_key", kind: "scalar", T: 9 },
-          { no: 2, name: "enable_ghost_mode", kind: "scalar", T: 8, opt: !0 },
+          { no: 2, name: "enable_ghost_mode", kind: "scalar", T: 8, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -33896,7 +33896,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "results", kind: "message", T: WSt, repeated: !0 },
+          { no: 1, name: "results", kind: "message", T: WSt, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -33927,8 +33927,8 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "results", kind: "message", T: im, repeated: !0 },
-          { no: 2, name: "all_files", kind: "message", T: AC, repeated: !0 },
+          { no: 1, name: "results", kind: "message", T: im, repeated: true },
+          { no: 2, name: "all_files", kind: "message", T: AC, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -33951,7 +33951,7 @@ export function createAIServiceV1(params) {
           (this.query = ""),
           (this.numBlocks = 0),
           (this.conversation = []),
-          (this.contextResults = { case: void 0 }),
+          (this.contextResults = { case: undefined }),
           v.util.initPartial(e, this)
       }
       static {
@@ -33962,11 +33962,11 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "code_results", kind: "message", T: im, repeated: !0 },
+          { no: 1, name: "code_results", kind: "message", T: im, repeated: true },
           { no: 2, name: "query", kind: "scalar", T: 9 },
           { no: 3, name: "num_blocks", kind: "scalar", T: 5 },
           { no: 4, name: "current_file", kind: "message", T: Ho },
-          { no: 5, name: "conversation", kind: "message", T: Ha, repeated: !0 },
+          { no: 5, name: "conversation", kind: "message", T: Ha, repeated: true },
           { no: 6, name: "api_details", kind: "message", T: h1n },
           {
             no: 7,
@@ -34009,7 +34009,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "results", kind: "message", T: im, repeated: !0 },
+          { no: 1, name: "results", kind: "message", T: im, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -34101,24 +34101,24 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "current_file", kind: "message", T: Ho },
-          { no: 2, name: "conversation", kind: "message", T: Ha, repeated: !0 },
-          { no: 3, name: "repositories", kind: "message", T: rl, repeated: !0 },
+          { no: 2, name: "conversation", kind: "message", T: Ha, repeated: true },
+          { no: 3, name: "repositories", kind: "message", T: rl, repeated: true },
           { no: 4, name: "explicit_context", kind: "message", T: Sf },
-          { no: 5, name: "workspace_root_path", kind: "scalar", T: 9, opt: !0 },
-          { no: 6, name: "code_blocks", kind: "message", T: ed, repeated: !0 },
+          { no: 5, name: "workspace_root_path", kind: "scalar", T: 9, opt: true },
+          { no: 6, name: "code_blocks", kind: "message", T: ed, repeated: true },
           { no: 7, name: "model_details", kind: "message", T: zr },
           {
             no: 8,
             name: "documentation_identifiers",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
           { no: 14, name: "linter_errors", kind: "message", T: Cf },
           { no: 15, name: "advanced_codebase_context", kind: "message", T: p1n },
-          { no: 16, name: "is_eval", kind: "scalar", T: 8, opt: !0 },
+          { no: 16, name: "is_eval", kind: "scalar", T: 8, opt: true },
           { no: 17, name: "request_id", kind: "scalar", T: 9 },
-          { no: 18, name: "desired_token_limit", kind: "scalar", T: 5, opt: !0 },
+          { no: 18, name: "desired_token_limit", kind: "scalar", T: 5, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -34139,7 +34139,7 @@ export function createAIServiceV1(params) {
         super(),
           (this.numResultsPerSearch = 0),
           (this.reranker = ro.UNSPECIFIED),
-          (this.reasoningStep = !1),
+          (this.reasoningStep = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -34151,17 +34151,17 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "num_results_per_search", kind: "scalar", T: 5 },
-          { no: 2, name: "include_pattern", kind: "scalar", T: 9, opt: !0 },
-          { no: 3, name: "exclude_pattern", kind: "scalar", T: 9, opt: !0 },
+          { no: 2, name: "include_pattern", kind: "scalar", T: 9, opt: true },
+          { no: 3, name: "exclude_pattern", kind: "scalar", T: 9, opt: true },
           { no: 4, name: "reranker", kind: "enum", T: v.getEnumType(ro) },
-          { no: 5, name: "index_id", kind: "scalar", T: 9, opt: !0 },
+          { no: 5, name: "index_id", kind: "scalar", T: 9, opt: true },
           { no: 6, name: "reasoning_step", kind: "scalar", T: 8 },
           {
             no: 7,
             name: "rechunker",
             kind: "enum",
             T: v.getEnumType(I$),
-            opt: !0,
+            opt: true,
           },
         ])
       }
@@ -34180,7 +34180,7 @@ export function createAIServiceV1(params) {
     },
     m1n = class HMe extends _ {
       constructor(e) {
-        super(), (this.response = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.response = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -34379,7 +34379,7 @@ export function createAIServiceV1(params) {
         super(),
           (this.relativeWorkspacePath = ""),
           (this.reason = ""),
-          (this.failed = !1),
+          (this.failed = false),
           (this.score = 0),
           (this.stepIndex = 0),
           v.util.initPartial(e, this)
@@ -34477,7 +34477,7 @@ export function createAIServiceV1(params) {
     },
     k1n = class KMe extends _ {
       constructor(e) {
-        super(), (this.response = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.response = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -34524,13 +34524,13 @@ export function createAIServiceV1(params) {
           (this.codeBlocks = []),
           (this.documentationIdentifiers = []),
           (this.query = ""),
-          (this.rerankResults = !1),
-          (this.contextResults = { case: void 0 }),
-          (this.rerankResultsV2 = !1),
+          (this.rerankResults = false),
+          (this.contextResults = { case: undefined }),
+          (this.rerankResultsV2 = false),
           (this.conversationId = ""),
-          (this.canHandleFilenamesAfterLanguageIds = !1),
-          (this.longContextMode = !1),
-          (this.isEval = !1),
+          (this.canHandleFilenamesAfterLanguageIds = false),
+          (this.longContextMode = false),
+          (this.isEval = false),
           (this.requestId = ""),
           v.util.initPartial(e, this)
       }
@@ -34543,18 +34543,18 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "current_file", kind: "message", T: Ho },
-          { no: 2, name: "conversation", kind: "message", T: Ha, repeated: !0 },
-          { no: 3, name: "repositories", kind: "message", T: rl, repeated: !0 },
+          { no: 2, name: "conversation", kind: "message", T: Ha, repeated: true },
+          { no: 3, name: "repositories", kind: "message", T: rl, repeated: true },
           { no: 4, name: "explicit_context", kind: "message", T: Sf },
-          { no: 5, name: "workspace_root_path", kind: "scalar", T: 9, opt: !0 },
-          { no: 6, name: "code_blocks", kind: "message", T: ed, repeated: !0 },
+          { no: 5, name: "workspace_root_path", kind: "scalar", T: 9, opt: true },
+          { no: 6, name: "code_blocks", kind: "message", T: ed, repeated: true },
           { no: 7, name: "model_details", kind: "message", T: zr },
           {
             no: 8,
             name: "documentation_identifiers",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
           { no: 9, name: "query", kind: "scalar", T: 9 },
           { no: 10, name: "code_context", kind: "message", T: E1n },
@@ -34574,7 +34574,7 @@ export function createAIServiceV1(params) {
             oneof: "context_results",
           },
           { no: 14, name: "linter_errors", kind: "message", T: Cf },
-          { no: 15, name: "is_bash", kind: "scalar", T: 8, opt: !0 },
+          { no: 15, name: "is_bash", kind: "scalar", T: 8, opt: true },
           { no: 16, name: "rerank_results_v2", kind: "scalar", T: 8 },
           { no: 17, name: "conversation_id", kind: "scalar", T: 9 },
           {
@@ -34586,8 +34586,8 @@ export function createAIServiceV1(params) {
           { no: 19, name: "long_context_mode", kind: "scalar", T: 8 },
           { no: 20, name: "is_eval", kind: "scalar", T: 8 },
           { no: 21, name: "request_id", kind: "scalar", T: 9 },
-          { no: 22, name: "desired_max_tokens", kind: "scalar", T: 5, opt: !0 },
-          { no: 23, name: "runnable_code_blocks", kind: "scalar", T: 8, opt: !0 },
+          { no: 22, name: "desired_max_tokens", kind: "scalar", T: 5, opt: true },
+          { no: 23, name: "runnable_code_blocks", kind: "scalar", T: 8, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -34618,8 +34618,8 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "chunks", kind: "message", T: ed, repeated: !0 },
-          { no: 2, name: "scored_chunks", kind: "message", T: im, repeated: !0 },
+          { no: 1, name: "chunks", kind: "message", T: ed, repeated: true },
+          { no: 2, name: "scored_chunks", kind: "message", T: im, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -34653,23 +34653,23 @@ export function createAIServiceV1(params) {
             name: "debugging_only_chat_prompt",
             kind: "scalar",
             T: 9,
-            opt: !0,
+            opt: true,
           },
           {
             no: 3,
             name: "debugging_only_token_count",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
           { no: 4, name: "document_citation", kind: "message", T: b1t },
-          { no: 5, name: "filled_prompt", kind: "scalar", T: 9, opt: !0 },
+          { no: 5, name: "filled_prompt", kind: "scalar", T: 9, opt: true },
           { no: 6, name: "used_code", kind: "message", T: I1n },
           { no: 7, name: "code_link", kind: "message", T: D1n },
-          { no: 8, name: "chunk_identity", kind: "message", T: T1n, opt: !0 },
-          { no: 9, name: "docs_reference", kind: "message", T: bVe, opt: !0 },
-          { no: 10, name: "symbol_link", kind: "message", T: yVe, opt: !0 },
-          { no: 11, name: "file_link", kind: "message", T: y1t, opt: !0 },
+          { no: 8, name: "chunk_identity", kind: "message", T: T1n, opt: true },
+          { no: 9, name: "docs_reference", kind: "message", T: bVe, opt: true },
+          { no: 10, name: "symbol_link", kind: "message", T: yVe, opt: true },
+          { no: 11, name: "file_link", kind: "message", T: y1t, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -34697,7 +34697,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "code_results", kind: "message", T: im, repeated: !0 },
+          { no: 1, name: "code_results", kind: "message", T: im, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -34789,7 +34789,7 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.conversation = []),
-          (this.rerankResults = !1),
+          (this.rerankResults = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -34800,7 +34800,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "conversation", kind: "message", T: Ha, repeated: !0 },
+          { no: 1, name: "conversation", kind: "message", T: Ha, repeated: true },
           { no: 2, name: "explicit_context", kind: "message", T: Sf },
           { no: 3, name: "model_details", kind: "message", T: zr },
           { no: 4, name: "context_results", kind: "message", T: omn },
@@ -34880,7 +34880,7 @@ export function createAIServiceV1(params) {
     R1n = class r$e extends _ {
       constructor(e) {
         super(),
-          (this.partialDoc = { case: void 0 }),
+          (this.partialDoc = { case: undefined }),
           (this.additionalDocIdentifiers = []),
           v.util.initPartial(e, this)
       }
@@ -34912,7 +34912,7 @@ export function createAIServiceV1(params) {
             name: "additional_doc_identifiers",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -34941,7 +34941,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "docs", kind: "message", T: N1n, repeated: !0 },
+          { no: 1, name: "docs", kind: "message", T: N1n, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -35014,8 +35014,8 @@ export function createAIServiceV1(params) {
     B$i = class c$e extends _ {
       constructor(e) {
         super(),
-          (this.isNightly = !1),
-          (this.includeLongContextModels = !1),
+          (this.isNightly = false),
+          (this.includeLongContextModels = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -35058,8 +35058,8 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 2, name: "models", kind: "message", T: O1n, repeated: !0 },
-          { no: 1, name: "model_names", kind: "scalar", T: 9, repeated: !0 },
+          { no: 2, name: "models", kind: "message", T: O1n, repeated: true },
+          { no: 1, name: "model_names", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -35079,7 +35079,7 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.name = ""),
-          (this.defaultOn = !1),
+          (this.defaultOn = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -35092,8 +35092,8 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "name", kind: "scalar", T: 9 },
           { no: 2, name: "default_on", kind: "scalar", T: 8 },
-          { no: 3, name: "is_long_context_only", kind: "scalar", T: 8, opt: !0 },
-          { no: 4, name: "is_chat_only", kind: "scalar", T: 8, opt: !0 },
+          { no: 3, name: "is_long_context_only", kind: "scalar", T: 8, opt: true },
+          { no: 4, name: "is_chat_only", kind: "scalar", T: 8, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -35200,8 +35200,8 @@ export function createAIServiceV1(params) {
     U1n = class p$e extends _ {
       constructor(e) {
         super(),
-          (this.isOnPrivacyPod = !1),
-          (this.isGhostModeOn = !1),
+          (this.isOnPrivacyPod = false),
+          (this.isGhostModeOn = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -35267,7 +35267,7 @@ export function createAIServiceV1(params) {
           (this.documentationIdentifiers = []),
           (this.promptCodeBlocks = []),
           (this.sessionId = ""),
-          (this.fastMode = !1),
+          (this.fastMode = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -35279,19 +35279,19 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "current_file", kind: "message", T: Ho },
-          { no: 2, name: "conversation", kind: "message", T: Ha, repeated: !0 },
-          { no: 3, name: "repositories", kind: "message", T: rl, repeated: !0 },
+          { no: 2, name: "conversation", kind: "message", T: Ha, repeated: true },
+          { no: 3, name: "repositories", kind: "message", T: rl, repeated: true },
           { no: 4, name: "explicit_context", kind: "message", T: Sf },
-          { no: 5, name: "workspace_root_path", kind: "scalar", T: 9, opt: !0 },
+          { no: 5, name: "workspace_root_path", kind: "scalar", T: 9, opt: true },
           { no: 6, name: "query", kind: "scalar", T: 9 },
-          { no: 7, name: "code_blocks", kind: "message", T: ed, repeated: !0 },
+          { no: 7, name: "code_blocks", kind: "message", T: ed, repeated: true },
           { no: 9, name: "model_details", kind: "message", T: zr },
           {
             no: 10,
             name: "documentation_identifiers",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
           { no: 11, name: "linter_errors", kind: "message", T: Cf },
           {
@@ -35299,7 +35299,7 @@ export function createAIServiceV1(params) {
             name: "prompt_code_blocks",
             kind: "message",
             T: ed,
-            repeated: !0,
+            repeated: true,
           },
           { no: 14, name: "session_id", kind: "scalar", T: 9 },
           { no: 13, name: "cmd_k_debug_info", kind: "message", T: hI },
@@ -35338,8 +35338,8 @@ export function createAIServiceV1(params) {
           { no: 1, name: "chunk", kind: "scalar", T: 9 },
           { no: 2, name: "file_context", kind: "scalar", T: 9 },
           { no: 3, name: "chunk_range", kind: "message", T: Kf },
-          { no: 4, name: "diff_string", kind: "scalar", T: 9, opt: !0 },
-          { no: 5, name: "custom_instructions", kind: "scalar", T: 9, opt: !0 },
+          { no: 4, name: "diff_string", kind: "scalar", T: 9, opt: true },
+          { no: 5, name: "custom_instructions", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -35421,7 +35421,7 @@ export function createAIServiceV1(params) {
           { no: 1, name: "chunk", kind: "scalar", T: 9 },
           { no: 2, name: "file_context", kind: "scalar", T: 9 },
           { no: 3, name: "chunk_range", kind: "message", T: Kf },
-          { no: 4, name: "messages", kind: "message", T: U$i, repeated: !0 },
+          { no: 4, name: "messages", kind: "message", T: U$i, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -35450,7 +35450,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "text", kind: "scalar", T: 9 },
-          { no: 2, name: "should_resolve", kind: "scalar", T: 8, opt: !0 },
+          { no: 2, name: "should_resolve", kind: "scalar", T: 8, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -35479,11 +35479,11 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "id", kind: "scalar", T: 9 },
-          { no: 2, name: "start_line", kind: "scalar", T: 5, opt: !0 },
-          { no: 3, name: "end_line", kind: "scalar", T: 5, opt: !0 },
-          { no: 4, name: "description", kind: "scalar", T: 9, opt: !0 },
-          { no: 5, name: "severity", kind: "scalar", T: 5, opt: !0 },
-          { no: 6, name: "tldr", kind: "scalar", T: 9, opt: !0 },
+          { no: 2, name: "start_line", kind: "scalar", T: 5, opt: true },
+          { no: 3, name: "end_line", kind: "scalar", T: 5, opt: true },
+          { no: 4, name: "description", kind: "scalar", T: 9, opt: true },
+          { no: 5, name: "severity", kind: "scalar", T: 5, opt: true },
+          { no: 6, name: "tldr", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -35512,10 +35512,10 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "text", kind: "scalar", T: 9 },
-          { no: 2, name: "prompt", kind: "scalar", T: 9, opt: !0 },
-          { no: 3, name: "tldr", kind: "scalar", T: 9, opt: !0 },
-          { no: 4, name: "is_bug", kind: "scalar", T: 8, opt: !0 },
-          { no: 5, name: "bugs", kind: "message", T: z1n, repeated: !0 },
+          { no: 2, name: "prompt", kind: "scalar", T: 9, opt: true },
+          { no: 3, name: "tldr", kind: "scalar", T: 9, opt: true },
+          { no: 4, name: "is_bug", kind: "scalar", T: 8, opt: true },
+          { no: 5, name: "bugs", kind: "message", T: z1n, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -35535,9 +35535,9 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.conversation = []),
-          (this.isCmdI = !1),
+          (this.isCmdI = false),
           (this.files = []),
-          (this.useFastApply = !1),
+          (this.useFastApply = false),
           (this.fastApplyModelType = F$.UNSPECIFIED),
           v.util.initPartial(e, this)
       }
@@ -35550,47 +35550,47 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 2, name: "current_file", kind: "message", T: Ho },
-          { no: 3, name: "conversation", kind: "message", T: Ha, repeated: !0 },
+          { no: 3, name: "conversation", kind: "message", T: Ha, repeated: true },
           { no: 4, name: "explicit_context", kind: "message", T: Sf },
           { no: 7, name: "model_details", kind: "message", T: zr },
           { no: 8, name: "is_cmd_i", kind: "scalar", T: 8 },
-          { no: 11, name: "summary", kind: "scalar", T: 9, opt: !0 },
+          { no: 11, name: "summary", kind: "scalar", T: 9, opt: true },
           {
             no: 12,
             name: "summary_up_until_index",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
           {
             no: 13,
             name: "should_use_turbo_debug_prompt",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
-          { no: 14, name: "edit_selection", kind: "message", T: Kf, opt: !0 },
-          { no: 15, name: "files", kind: "message", T: Ho, repeated: !0 },
+          { no: 14, name: "edit_selection", kind: "message", T: Kf, opt: true },
+          { no: 15, name: "files", kind: "message", T: Ho, repeated: true },
           {
             no: 16,
             name: "clicked_code_block_contents",
             kind: "scalar",
             T: 9,
-            opt: !0,
+            opt: true,
           },
           {
             no: 17,
             name: "is_an_optimistic_request_for_caching_and_linting",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
           {
             no: 18,
             name: "specific_instructions",
             kind: "scalar",
             T: 9,
-            opt: !0,
+            opt: true,
           },
           { no: 19, name: "use_fast_apply", kind: "scalar", T: 8 },
           {
@@ -35604,17 +35604,17 @@ export function createAIServiceV1(params) {
             name: "use_chunk_speculation_for_long_files",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
-          { no: 26, name: "parent_request_id", kind: "scalar", T: 9, opt: !0 },
-          { no: 27, name: "source", kind: "enum", T: v.getEnumType(nm), opt: !0 },
-          { no: 28, name: "is_reapply", kind: "scalar", T: 8, opt: !0 },
+          { no: 26, name: "parent_request_id", kind: "scalar", T: 9, opt: true },
+          { no: 27, name: "source", kind: "enum", T: v.getEnumType(nm), opt: true },
+          { no: 28, name: "is_reapply", kind: "scalar", T: 8, opt: true },
           {
             no: 29,
             name: "willing_to_pay_extra_for_speed",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
         ])
       }
@@ -35730,8 +35730,8 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "original_lines", kind: "scalar", T: 9, repeated: !0 },
-          { no: 2, name: "new_lines", kind: "scalar", T: 9, repeated: !0 },
+          { no: 1, name: "original_lines", kind: "scalar", T: 9, repeated: true },
+          { no: 2, name: "new_lines", kind: "scalar", T: 9, repeated: true },
           { no: 3, name: "relative_workspace_path", kind: "scalar", T: 9 },
           { no: 4, name: "range", kind: "message", T: Kf },
         ])
@@ -35764,14 +35764,14 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "conversation", kind: "message", T: Ha, repeated: !0 },
+          { no: 1, name: "conversation", kind: "message", T: Ha, repeated: true },
           { no: 2, name: "model_details", kind: "message", T: zr },
           {
             no: 3,
             name: "previous_edits",
             kind: "message",
             T: H$i,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -35790,7 +35790,7 @@ export function createAIServiceV1(params) {
     },
     Y1n = class D$e extends _ {
       constructor(e) {
-        super(), (this.response = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.response = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -35871,7 +35871,7 @@ export function createAIServiceV1(params) {
             name: "previous_edits",
             kind: "message",
             T: H$i,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -35906,18 +35906,18 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "current_file", kind: "message", T: Ho },
-          { no: 3, name: "repositories", kind: "message", T: rl, repeated: !0 },
+          { no: 3, name: "repositories", kind: "message", T: rl, repeated: true },
           { no: 4, name: "explicit_context", kind: "message", T: Sf },
-          { no: 5, name: "workspace_root_path", kind: "scalar", T: 9, opt: !0 },
+          { no: 5, name: "workspace_root_path", kind: "scalar", T: 9, opt: true },
           { no: 6, name: "query", kind: "scalar", T: 9 },
-          { no: 7, name: "code_blocks", kind: "message", T: ed, repeated: !0 },
+          { no: 7, name: "code_blocks", kind: "message", T: ed, repeated: true },
           { no: 9, name: "model_details", kind: "message", T: zr },
           {
             no: 10,
             name: "documentation_identifiers",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
           { no: 11, name: "linter_errors", kind: "message", T: Cf },
         ])
@@ -35941,7 +35941,7 @@ export function createAIServiceV1(params) {
           (this.lineNumber = 0),
           (this.replaceNumLines = 0),
           (this.editUuid = ""),
-          (this.resetNewLines = !1),
+          (this.resetNewLines = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -35955,8 +35955,8 @@ export function createAIServiceV1(params) {
           { no: 2, name: "line_number", kind: "scalar", T: 5 },
           { no: 3, name: "replace_num_lines", kind: "scalar", T: 5 },
           { no: 5, name: "edit_uuid", kind: "scalar", T: 9 },
-          { no: 4, name: "done", kind: "scalar", T: 8, opt: !0 },
-          { no: 6, name: "new_line", kind: "scalar", T: 9, opt: !0 },
+          { no: 4, name: "done", kind: "scalar", T: 8, opt: true },
+          { no: 6, name: "new_line", kind: "scalar", T: 9, opt: true },
           { no: 7, name: "reset_new_lines", kind: "scalar", T: 8 },
         ])
       }
@@ -35983,7 +35983,7 @@ export function createAIServiceV1(params) {
           (this.documentationIdentifiers = []),
           (this.promptCodeBlocks = []),
           (this.sessionId = ""),
-          (this.fastMode = !1),
+          (this.fastMode = false),
           (this.images = []),
           (this.links = []),
           v.util.initPartial(e, this)
@@ -35997,19 +35997,19 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "current_file", kind: "message", T: Ho },
-          { no: 2, name: "conversation", kind: "message", T: Ha, repeated: !0 },
-          { no: 3, name: "repositories", kind: "message", T: rl, repeated: !0 },
+          { no: 2, name: "conversation", kind: "message", T: Ha, repeated: true },
+          { no: 3, name: "repositories", kind: "message", T: rl, repeated: true },
           { no: 4, name: "explicit_context", kind: "message", T: Sf },
-          { no: 5, name: "workspace_root_path", kind: "scalar", T: 9, opt: !0 },
+          { no: 5, name: "workspace_root_path", kind: "scalar", T: 9, opt: true },
           { no: 6, name: "query", kind: "scalar", T: 9 },
-          { no: 7, name: "code_blocks", kind: "message", T: ed, repeated: !0 },
+          { no: 7, name: "code_blocks", kind: "message", T: ed, repeated: true },
           { no: 9, name: "model_details", kind: "message", T: zr },
           {
             no: 10,
             name: "documentation_identifiers",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
           { no: 11, name: "linter_errors", kind: "message", T: Cf },
           {
@@ -36017,14 +36017,14 @@ export function createAIServiceV1(params) {
             name: "prompt_code_blocks",
             kind: "message",
             T: ed,
-            repeated: !0,
+            repeated: true,
           },
           { no: 14, name: "session_id", kind: "scalar", T: 9 },
           { no: 13, name: "cmd_k_debug_info", kind: "message", T: hI },
           { no: 15, name: "fast_mode", kind: "scalar", T: 8 },
           { no: 16, name: "original_request", kind: "message", T: Mte },
-          { no: 17, name: "images", kind: "message", T: OT, repeated: !0 },
-          { no: 18, name: "links", kind: "message", T: OSt, repeated: !0 },
+          { no: 17, name: "images", kind: "message", T: OT, repeated: true },
+          { no: 18, name: "links", kind: "message", T: OSt, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -36107,7 +36107,7 @@ export function createAIServiceV1(params) {
           (this.forceEnableGenerators = []),
           (this.forceDisableGenerators = []),
           (this.version = 0),
-          (this.debugMode = !1),
+          (this.debugMode = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -36123,48 +36123,48 @@ export function createAIServiceV1(params) {
             name: "chunks_to_analyze",
             kind: "message",
             T: W1t,
-            repeated: !0,
+            repeated: true,
           },
           { no: 4, name: "explicit_context", kind: "message", T: Sf },
-          { no: 5, name: "workspace_root_path", kind: "scalar", T: 9, opt: !0 },
+          { no: 5, name: "workspace_root_path", kind: "scalar", T: 9, opt: true },
           { no: 9, name: "model_details", kind: "message", T: zr },
           {
             no: 10,
             name: "dismissed_bugs",
             kind: "message",
             T: Boe,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 11, name: "active_bugs", kind: "message", T: Boe, repeated: !0 },
-          { no: 12, name: "lint_rules", kind: "message", T: d$i, repeated: !0 },
-          { no: 14, name: "clients", kind: "message", T: j$i, repeated: !0 },
+          { no: 11, name: "active_bugs", kind: "message", T: Boe, repeated: true },
+          { no: 12, name: "lint_rules", kind: "message", T: d$i, repeated: true },
+          { no: 14, name: "clients", kind: "message", T: j$i, repeated: true },
           {
             no: 17,
             name: "force_enable_discriminators",
             kind: "enum",
             T: v.getEnumType(n7),
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 18,
             name: "force_disable_discriminators",
             kind: "enum",
             T: v.getEnumType(n7),
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 19,
             name: "force_enable_generators",
             kind: "enum",
             T: v.getEnumType(r7),
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 20,
             name: "force_disable_generators",
             kind: "enum",
             T: v.getEnumType(r7),
-            repeated: !0,
+            repeated: true,
           },
           { no: 21, name: "version", kind: "scalar", T: 5 },
           {
@@ -36172,7 +36172,7 @@ export function createAIServiceV1(params) {
             name: "discriminator_options",
             kind: "message",
             T: ixn,
-            opt: !0,
+            opt: true,
           },
           { no: 16, name: "debug_mode", kind: "scalar", T: 8 },
         ])
@@ -36210,20 +36210,20 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
           { no: 2, name: "start_line_number", kind: "scalar", T: 5 },
-          { no: 3, name: "lines", kind: "scalar", T: 9, repeated: !0 },
+          { no: 3, name: "lines", kind: "scalar", T: 9, repeated: true },
           {
             no: 4,
             name: "context_lines_before",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 5,
             name: "context_lines_after",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -36256,20 +36256,20 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 13, name: "chunks", kind: "message", T: W1t, repeated: !0 },
+          { no: 13, name: "chunks", kind: "message", T: W1t, repeated: true },
           {
             no: 14,
             name: "referred_start_lines",
             kind: "scalar",
             T: 5,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 15,
             name: "referred_end_lines",
             kind: "scalar",
             T: 5,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -36289,12 +36289,12 @@ export function createAIServiceV1(params) {
     ixn = class O$e extends _ {
       constructor(e) {
         super(),
-          (this.specificRules = !1),
-          (this.compileErrors = !1),
-          (this.changeBehavior = !1),
-          (this.matchCode = !1),
-          (this.relevance = !1),
-          (this.userAwareness = !1),
+          (this.specificRules = false),
+          (this.compileErrors = false),
+          (this.changeBehavior = false),
+          (this.matchCode = false),
+          (this.relevance = false),
+          (this.userAwareness = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -36328,7 +36328,7 @@ export function createAIServiceV1(params) {
     },
     sxn = class B$e extends _ {
       constructor(e) {
-        super(), (this.response = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.response = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -36366,7 +36366,7 @@ export function createAIServiceV1(params) {
         super(),
           (this.uuid = ""),
           (this.userAction = ""),
-          (this.debugMode = !1),
+          (this.debugMode = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -36539,7 +36539,7 @@ export function createAIServiceV1(params) {
           (this.sessionId = ""),
           (this.documentationIdentifiers = []),
           (this.promptCodeBlocks = []),
-          (this.fastMode = !1),
+          (this.fastMode = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -36551,12 +36551,12 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "current_file", kind: "message", T: Ho },
-          { no: 2, name: "conversation", kind: "message", T: Ha, repeated: !0 },
-          { no: 3, name: "repositories", kind: "message", T: rl, repeated: !0 },
+          { no: 2, name: "conversation", kind: "message", T: Ha, repeated: true },
+          { no: 3, name: "repositories", kind: "message", T: rl, repeated: true },
           { no: 4, name: "explicit_context", kind: "message", T: Sf },
-          { no: 5, name: "workspace_root_path", kind: "scalar", T: 9, opt: !0 },
+          { no: 5, name: "workspace_root_path", kind: "scalar", T: 9, opt: true },
           { no: 6, name: "query", kind: "scalar", T: 9 },
-          { no: 7, name: "code_blocks", kind: "message", T: ed, repeated: !0 },
+          { no: 7, name: "code_blocks", kind: "message", T: ed, repeated: true },
           { no: 14, name: "session_id", kind: "scalar", T: 9 },
           { no: 9, name: "model_details", kind: "message", T: zr },
           {
@@ -36564,7 +36564,7 @@ export function createAIServiceV1(params) {
             name: "documentation_identifiers",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
           { no: 11, name: "linter_errors", kind: "message", T: Cf },
           {
@@ -36572,7 +36572,7 @@ export function createAIServiceV1(params) {
             name: "prompt_code_blocks",
             kind: "message",
             T: ed,
-            repeated: !0,
+            repeated: true,
           },
           { no: 13, name: "fast_mode", kind: "scalar", T: 8 },
         ])
@@ -36639,7 +36639,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "messages", kind: "message", T: lxn, repeated: !0 },
+          { no: 1, name: "messages", kind: "message", T: lxn, repeated: true },
           { no: 2, name: "user_os", kind: "scalar", T: 9 },
           { no: 3, name: "model_details", kind: "message", T: zr },
         ])
@@ -36673,7 +36673,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "text", kind: "scalar", T: 9 },
-          { no: 2, name: "actions", kind: "scalar", T: 9, repeated: !0 },
+          { no: 2, name: "actions", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -36708,18 +36708,18 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "current_command", kind: "scalar", T: 9 },
-          { no: 2, name: "command_history", kind: "scalar", T: 9, repeated: !0 },
-          { no: 3, name: "model_name", kind: "scalar", T: 9, opt: !0 },
+          { no: 2, name: "command_history", kind: "scalar", T: 9, repeated: true },
+          { no: 3, name: "model_name", kind: "scalar", T: 9, opt: true },
           {
             no: 4,
             name: "file_diff_histories",
             kind: "message",
             T: $C,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 5, name: "git_diff", kind: "scalar", T: 9, opt: !0 },
-          { no: 6, name: "commit_history", kind: "scalar", T: 9, repeated: !0 },
-          { no: 7, name: "past_results", kind: "scalar", T: 9, repeated: !0 },
+          { no: 5, name: "git_diff", kind: "scalar", T: 9, opt: true },
+          { no: 6, name: "commit_history", kind: "scalar", T: 9, repeated: true },
+          { no: 7, name: "past_results", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -36891,7 +36891,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "text", kind: "scalar", T: 9 },
-          { no: 2, name: "done_stream", kind: "scalar", T: 8, opt: !0 },
+          { no: 2, name: "done_stream", kind: "scalar", T: 8, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -36927,11 +36927,11 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "current_file", kind: "message", T: Ho },
-          { no: 2, name: "repositories", kind: "message", T: rl, repeated: !0 },
+          { no: 2, name: "repositories", kind: "message", T: rl, repeated: true },
           { no: 3, name: "explicit_context", kind: "message", T: Sf },
-          { no: 4, name: "workspace_root_path", kind: "scalar", T: 9, opt: !0 },
+          { no: 4, name: "workspace_root_path", kind: "scalar", T: 9, opt: true },
           { no: 5, name: "git_diff", kind: "scalar", T: 9 },
-          { no: 6, name: "conversation", kind: "message", T: Ha, repeated: !0 },
+          { no: 6, name: "conversation", kind: "message", T: Ha, repeated: true },
           { no: 7, name: "query", kind: "scalar", T: 9 },
           { no: 8, name: "model_details", kind: "message", T: zr },
           { no: 9, name: "stop", kind: "scalar", T: 9 },
@@ -36967,8 +36967,8 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "breakpoint", kind: "message", T: Cxn },
-          { no: 2, name: "call_stack", kind: "message", T: wxn, repeated: !0 },
-          { no: 3, name: "history", kind: "message", T: ed, repeated: !0 },
+          { no: 2, name: "call_stack", kind: "message", T: wxn, repeated: true },
+          { no: 3, name: "history", kind: "message", T: ed, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -36998,7 +36998,7 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "name", kind: "scalar", T: 9 },
           { no: 2, name: "value", kind: "scalar", T: 9 },
-          { no: 3, name: "type", kind: "scalar", T: 9, opt: !0 },
+          { no: 3, name: "type", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -37030,7 +37030,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "name", kind: "scalar", T: 9 },
-          { no: 2, name: "variables", kind: "message", T: vxn, repeated: !0 },
+          { no: 2, name: "variables", kind: "message", T: vxn, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -37066,7 +37066,7 @@ export function createAIServiceV1(params) {
           { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
           { no: 2, name: "line_number", kind: "scalar", T: 5 },
           { no: 3, name: "function_name", kind: "scalar", T: 9 },
-          { no: 4, name: "scopes", kind: "message", T: yxn, repeated: !0 },
+          { no: 4, name: "scopes", kind: "message", T: yxn, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -37106,16 +37106,16 @@ export function createAIServiceV1(params) {
             name: "lines_before_breakpoint",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 4,
             name: "lines_after_breakpoint",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 5, name: "exception_info", kind: "scalar", T: 9, opt: !0 },
+          { no: 5, name: "exception_info", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -37154,71 +37154,71 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "current_file", kind: "message", T: Ho },
-          { no: 2, name: "conversation", kind: "message", T: Ha, repeated: !0 },
-          { no: 3, name: "repositories", kind: "message", T: rl, repeated: !0 },
+          { no: 2, name: "conversation", kind: "message", T: Ha, repeated: true },
+          { no: 3, name: "repositories", kind: "message", T: rl, repeated: true },
           { no: 4, name: "explicit_context", kind: "message", T: Sf },
-          { no: 5, name: "workspace_root_path", kind: "scalar", T: 9, opt: !0 },
-          { no: 6, name: "code_blocks", kind: "message", T: ed, repeated: !0 },
+          { no: 5, name: "workspace_root_path", kind: "scalar", T: 9, opt: true },
+          { no: 6, name: "code_blocks", kind: "message", T: ed, repeated: true },
           { no: 7, name: "model_details", kind: "message", T: zr },
           {
             no: 8,
             name: "documentation_identifiers",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
           { no: 9, name: "request_id", kind: "scalar", T: 9 },
           { no: 10, name: "linter_errors", kind: "message", T: Cf },
-          { no: 11, name: "summary", kind: "scalar", T: 9, opt: !0 },
+          { no: 11, name: "summary", kind: "scalar", T: 9, opt: true },
           {
             no: 12,
             name: "summary_up_until_index",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
-          { no: 13, name: "allow_long_file_scan", kind: "scalar", T: 8, opt: !0 },
-          { no: 14, name: "is_bash", kind: "scalar", T: 8, opt: !0 },
+          { no: 13, name: "allow_long_file_scan", kind: "scalar", T: 8, opt: true },
+          { no: 14, name: "is_bash", kind: "scalar", T: 8, opt: true },
           { no: 15, name: "conversation_id", kind: "scalar", T: 9 },
           {
             no: 16,
             name: "can_handle_filenames_after_language_ids",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
-          { no: 17, name: "use_web", kind: "scalar", T: 9, opt: !0 },
-          { no: 18, name: "quotes", kind: "message", T: eVe, repeated: !0 },
-          { no: 19, name: "debug_info", kind: "message", T: bxn, opt: !0 },
-          { no: 20, name: "workspace_id", kind: "scalar", T: 9, opt: !0 },
+          { no: 17, name: "use_web", kind: "scalar", T: 9, opt: true },
+          { no: 18, name: "quotes", kind: "message", T: eVe, repeated: true },
+          { no: 19, name: "debug_info", kind: "message", T: bxn, opt: true },
+          { no: 20, name: "workspace_id", kind: "scalar", T: 9, opt: true },
           {
             no: 21,
             name: "external_links",
             kind: "message",
             T: Ugn,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 23, name: "commit_notes", kind: "message", T: BSt, repeated: !0 },
-          { no: 22, name: "long_context_mode", kind: "scalar", T: 8, opt: !0 },
-          { no: 24, name: "is_eval", kind: "scalar", T: 8, opt: !0 },
-          { no: 26, name: "desired_max_tokens", kind: "scalar", T: 5, opt: !0 },
+          { no: 23, name: "commit_notes", kind: "message", T: BSt, repeated: true },
+          { no: 22, name: "long_context_mode", kind: "scalar", T: 8, opt: true },
+          { no: 24, name: "is_eval", kind: "scalar", T: 8, opt: true },
+          { no: 26, name: "desired_max_tokens", kind: "scalar", T: 5, opt: true },
           { no: 25, name: "context_ast", kind: "message", T: f$i },
-          { no: 27, name: "is_composer", kind: "scalar", T: 8, opt: !0 },
-          { no: 28, name: "runnable_code_blocks", kind: "scalar", T: 8, opt: !0 },
-          { no: 29, name: "should_cache", kind: "scalar", T: 8, opt: !0 },
+          { no: 27, name: "is_composer", kind: "scalar", T: 8, opt: true },
+          { no: 28, name: "runnable_code_blocks", kind: "scalar", T: 8, opt: true },
+          { no: 29, name: "should_cache", kind: "scalar", T: 8, opt: true },
           {
             no: 30,
             name: "allow_model_fallbacks",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
           {
             no: 31,
             name: "number_of_times_shown_fallback_model_warning",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
         ])
       }
@@ -37251,15 +37251,15 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "conversation", kind: "message", T: Ha, repeated: !0 },
-          { no: 2, name: "allow_long_file_scan", kind: "scalar", T: 8, opt: !0 },
+          { no: 1, name: "conversation", kind: "message", T: Ha, repeated: true },
+          { no: 2, name: "allow_long_file_scan", kind: "scalar", T: 8, opt: true },
           { no: 3, name: "explicit_context", kind: "message", T: Sf },
           {
             no: 4,
             name: "can_handle_filenames_after_language_ids",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
           { no: 5, name: "model_details", kind: "message", T: zr },
           { no: 6, name: "linter_errors", kind: "message", T: Cf },
@@ -37268,17 +37268,17 @@ export function createAIServiceV1(params) {
             name: "documentation_identifiers",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 8, name: "use_web", kind: "scalar", T: 9, opt: !0 },
+          { no: 8, name: "use_web", kind: "scalar", T: 9, opt: true },
           {
             no: 9,
             name: "external_links",
             kind: "message",
             T: FSt,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 10, name: "project_context", kind: "message", T: Ha, opt: !0 },
+          { no: 10, name: "project_context", kind: "message", T: Ha, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -37367,7 +37367,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "file", kind: "scalar", T: 9 },
-          { no: 2, name: "ranges", kind: "message", T: ck, repeated: !0 },
+          { no: 2, name: "ranges", kind: "message", T: ck, repeated: true },
           { no: 3, name: "query", kind: "scalar", T: 9 },
         ])
       }
@@ -37490,15 +37490,15 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "conversation", kind: "message", T: Ha, repeated: !0 },
-          { no: 2, name: "allow_long_file_scan", kind: "scalar", T: 8, opt: !0 },
+          { no: 1, name: "conversation", kind: "message", T: Ha, repeated: true },
+          { no: 2, name: "allow_long_file_scan", kind: "scalar", T: 8, opt: true },
           { no: 3, name: "explicit_context", kind: "message", T: Sf },
           {
             no: 4,
             name: "can_handle_filenames_after_language_ids",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
           { no: 5, name: "model_details", kind: "message", T: zr },
           { no: 6, name: "linter_errors", kind: "message", T: Cf },
@@ -37507,70 +37507,70 @@ export function createAIServiceV1(params) {
             name: "documentation_identifiers",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 8, name: "use_web", kind: "scalar", T: 9, opt: !0 },
+          { no: 8, name: "use_web", kind: "scalar", T: 9, opt: true },
           {
             no: 9,
             name: "external_links",
             kind: "message",
             T: FSt,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 10, name: "project_context", kind: "message", T: Ha, opt: !0 },
+          { no: 10, name: "project_context", kind: "message", T: Ha, opt: true },
           {
             no: 11,
             name: "diffs_for_compressing_files",
             kind: "message",
             T: Pxn,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 12, name: "compress_edits", kind: "scalar", T: 8, opt: !0 },
-          { no: 13, name: "should_cache", kind: "scalar", T: 8, opt: !0 },
+          { no: 12, name: "compress_edits", kind: "scalar", T: 8, opt: true },
+          { no: 13, name: "should_cache", kind: "scalar", T: 8, opt: true },
           {
             no: 14,
             name: "multi_file_linter_errors",
             kind: "message",
             T: Cf,
-            repeated: !0,
+            repeated: true,
           },
           { no: 15, name: "current_file", kind: "message", T: Ho },
-          { no: 16, name: "recent_edits", kind: "message", T: Lxn, opt: !0 },
+          { no: 16, name: "recent_edits", kind: "message", T: Lxn, opt: true },
           {
             no: 17,
             name: "use_reference_composer_diff_prompt",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
           {
             no: 18,
             name: "file_diff_histories",
             kind: "message",
             T: v1t,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 19,
             name: "use_new_compression_scheme",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
           {
             no: 20,
             name: "additional_ranked_context",
             kind: "message",
             T: m1t,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 21, name: "quotes", kind: "message", T: eVe, repeated: !0 },
+          { no: 21, name: "quotes", kind: "message", T: eVe, repeated: true },
           {
             no: 22,
             name: "willing_to_pay_extra_for_speed",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
           { no: 23, name: "conversation_id", kind: "scalar", T: 9 },
           {
@@ -37578,16 +37578,16 @@ export function createAIServiceV1(params) {
             name: "use_unified_chat_prompt",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
           {
             no: 25,
             name: "use_full_inputs_context",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
-          { no: 26, name: "is_resume", kind: "scalar", T: 8, opt: !0 },
+          { no: 26, name: "is_resume", kind: "scalar", T: 8, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -37622,13 +37622,13 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
-          { no: 2, name: "red_ranges", kind: "message", T: ck, repeated: !0 },
+          { no: 2, name: "red_ranges", kind: "message", T: ck, repeated: true },
           {
             no: 3,
             name: "red_ranges_reversed",
             kind: "message",
             T: ck,
-            repeated: !0,
+            repeated: true,
           },
           { no: 4, name: "start_hash", kind: "scalar", T: 9 },
           { no: 5, name: "end_hash", kind: "scalar", T: 9 },
@@ -37667,21 +37667,21 @@ export function createAIServiceV1(params) {
             name: "code_block_info",
             kind: "message",
             T: Nxn,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 2,
             name: "final_file_values",
             kind: "message",
             T: Rxn,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 3,
             name: "edits_belong_to_composer_generation_uuid",
             kind: "scalar",
             T: 9,
-            opt: !0,
+            opt: true,
           },
         ])
       }
@@ -37712,10 +37712,10 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
-          { no: 2, name: "content_before", kind: "scalar", T: 9, opt: !0 },
-          { no: 3, name: "content_after", kind: "scalar", T: 9, opt: !0 },
-          { no: 4, name: "generation_uuid", kind: "scalar", T: 9, opt: !0 },
-          { no: 5, name: "version", kind: "scalar", T: 5, opt: !0 },
+          { no: 2, name: "content_before", kind: "scalar", T: 9, opt: true },
+          { no: 3, name: "content_after", kind: "scalar", T: 9, opt: true },
+          { no: 4, name: "generation_uuid", kind: "scalar", T: 9, opt: true },
+          { no: 5, name: "version", kind: "scalar", T: 5, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -37771,13 +37771,13 @@ export function createAIServiceV1(params) {
           (this.codeBlocks = []),
           (this.documentationIdentifiers = []),
           (this.query = ""),
-          (this.rerankResults = !1),
-          (this.contextResults = { case: void 0 }),
-          (this.rerankResultsV2 = !1),
+          (this.rerankResults = false),
+          (this.contextResults = { case: undefined }),
+          (this.rerankResultsV2 = false),
           (this.conversationId = ""),
-          (this.canHandleFilenamesAfterLanguageIds = !1),
-          (this.longContextMode = !1),
-          (this.isEval = !1),
+          (this.canHandleFilenamesAfterLanguageIds = false),
+          (this.longContextMode = false),
+          (this.isEval = false),
           (this.requestId = ""),
           v.util.initPartial(e, this)
       }
@@ -37790,18 +37790,18 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "current_file", kind: "message", T: Ho },
-          { no: 2, name: "conversation", kind: "message", T: Ha, repeated: !0 },
-          { no: 3, name: "repositories", kind: "message", T: rl, repeated: !0 },
+          { no: 2, name: "conversation", kind: "message", T: Ha, repeated: true },
+          { no: 3, name: "repositories", kind: "message", T: rl, repeated: true },
           { no: 4, name: "explicit_context", kind: "message", T: Sf },
-          { no: 5, name: "workspace_root_path", kind: "scalar", T: 9, opt: !0 },
-          { no: 6, name: "code_blocks", kind: "message", T: ed, repeated: !0 },
+          { no: 5, name: "workspace_root_path", kind: "scalar", T: 9, opt: true },
+          { no: 6, name: "code_blocks", kind: "message", T: ed, repeated: true },
           { no: 7, name: "model_details", kind: "message", T: zr },
           {
             no: 8,
             name: "documentation_identifiers",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
           { no: 9, name: "query", kind: "scalar", T: 9 },
           { no: 10, name: "code_context", kind: "message", T: Axn },
@@ -37821,7 +37821,7 @@ export function createAIServiceV1(params) {
             oneof: "context_results",
           },
           { no: 14, name: "linter_errors", kind: "message", T: Cf },
-          { no: 15, name: "is_bash", kind: "scalar", T: 8, opt: !0 },
+          { no: 15, name: "is_bash", kind: "scalar", T: 8, opt: true },
           { no: 16, name: "rerank_results_v2", kind: "scalar", T: 8 },
           { no: 17, name: "conversation_id", kind: "scalar", T: 9 },
           {
@@ -37833,8 +37833,8 @@ export function createAIServiceV1(params) {
           { no: 19, name: "long_context_mode", kind: "scalar", T: 8 },
           { no: 20, name: "is_eval", kind: "scalar", T: 8 },
           { no: 21, name: "request_id", kind: "scalar", T: 9 },
-          { no: 22, name: "desired_max_tokens", kind: "scalar", T: 5, opt: !0 },
-          { no: 23, name: "runnable_code_blocks", kind: "scalar", T: 8, opt: !0 },
+          { no: 22, name: "desired_max_tokens", kind: "scalar", T: 5, opt: true },
+          { no: 23, name: "runnable_code_blocks", kind: "scalar", T: 8, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -37865,8 +37865,8 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "chunks", kind: "message", T: ed, repeated: !0 },
-          { no: 2, name: "scored_chunks", kind: "message", T: im, repeated: !0 },
+          { no: 1, name: "chunks", kind: "message", T: ed, repeated: true },
+          { no: 2, name: "scored_chunks", kind: "message", T: im, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -37981,8 +37981,8 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.position = 0),
-          (this.hitHardLimit = !1),
-          (this.couldEnableUsageBasedPricingToSkip = !1),
+          (this.hitHardLimit = false),
+          (this.couldEnableUsageBasedPricingToSkip = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -37994,8 +37994,8 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "position", kind: "scalar", T: 5 },
-          { no: 2, name: "seconds_left_to_wait", kind: "scalar", T: 5, opt: !0 },
-          { no: 7, name: "new_queue_position", kind: "scalar", T: 5, opt: !0 },
+          { no: 2, name: "seconds_left_to_wait", kind: "scalar", T: 5, opt: true },
+          { no: 7, name: "new_queue_position", kind: "scalar", T: 5, opt: true },
           { no: 3, name: "hit_hard_limit", kind: "scalar", T: 8 },
           {
             no: 4,
@@ -38098,7 +38098,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "items", kind: "message", T: Uxn, repeated: !0 },
+          { no: 1, name: "items", kind: "message", T: Uxn, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -38158,8 +38158,8 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "symbol_name", kind: "scalar", T: 9 },
-          { no: 2, name: "start_position", kind: "message", T: X$i, opt: !0 },
-          { no: 3, name: "end_position", kind: "message", T: X$i, opt: !0 },
+          { no: 2, name: "start_position", kind: "message", T: X$i, opt: true },
+          { no: 3, name: "end_position", kind: "message", T: X$i, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -38237,7 +38237,7 @@ export function createAIServiceV1(params) {
     },
     Vxn = class A2e extends _ {
       constructor(e) {
-        super(), (this.didFit = !1), v.util.initPartial(e, this)
+        super(), (this.didFit = false), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -38390,7 +38390,7 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "current_file", kind: "message", T: Ho },
           { no: 2, name: "prompt", kind: "scalar", T: 9 },
-          { no: 3, name: "repositories", kind: "message", T: rl, repeated: !0 },
+          { no: 3, name: "repositories", kind: "message", T: rl, repeated: true },
           { no: 4, name: "explicit_context", kind: "message", T: Sf },
         ])
       }
@@ -38420,13 +38420,13 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "line", kind: "scalar", T: 9 },
-          { no: 2, name: "debugging_only_prompt", kind: "scalar", T: 9, opt: !0 },
+          { no: 2, name: "debugging_only_prompt", kind: "scalar", T: 9, opt: true },
           {
             no: 3,
             name: "debugging_only_token_count",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
         ])
       }
@@ -38446,7 +38446,7 @@ export function createAIServiceV1(params) {
     Gxn = class B2e extends _ {
       constructor(e) {
         super(),
-          (this.didSummarize = !1),
+          (this.didSummarize = false),
           (this.upUntilIndex = 0),
           (this.summary = ""),
           v.util.initPartial(e, this)
@@ -38489,7 +38489,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 2, name: "conversation", kind: "message", T: Ha, repeated: !0 },
+          { no: 2, name: "conversation", kind: "message", T: Ha, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -38614,52 +38614,52 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "text", kind: "scalar", T: 9 },
-          { no: 22, name: "server_bubble_id", kind: "scalar", T: 9, opt: !0 },
+          { no: 22, name: "server_bubble_id", kind: "scalar", T: 9, opt: true },
           {
             no: 2,
             name: "debugging_only_chat_prompt",
             kind: "scalar",
             T: 9,
-            opt: !0,
+            opt: true,
           },
           {
             no: 3,
             name: "debugging_only_token_count",
             kind: "scalar",
             T: 5,
-            opt: !0,
+            opt: true,
           },
           { no: 4, name: "document_citation", kind: "message", T: b1t },
-          { no: 5, name: "filled_prompt", kind: "scalar", T: 9, opt: !0 },
-          { no: 6, name: "is_big_file", kind: "scalar", T: 8, opt: !0 },
-          { no: 7, name: "intermediate_text", kind: "scalar", T: 9, opt: !0 },
+          { no: 5, name: "filled_prompt", kind: "scalar", T: 9, opt: true },
+          { no: 6, name: "is_big_file", kind: "scalar", T: 8, opt: true },
+          { no: 7, name: "intermediate_text", kind: "scalar", T: 9, opt: true },
           {
             no: 10,
             name: "is_using_slow_request",
             kind: "scalar",
             T: 8,
-            opt: !0,
+            opt: true,
           },
-          { no: 8, name: "chunk_identity", kind: "message", T: Xxn, opt: !0 },
-          { no: 9, name: "docs_reference", kind: "message", T: bVe, opt: !0 },
-          { no: 11, name: "web_citation", kind: "message", T: LMi, opt: !0 },
-          { no: 12, name: "status_updates", kind: "message", T: RMi, opt: !0 },
-          { no: 13, name: "timing_info", kind: "message", T: Yxn, opt: !0 },
-          { no: 14, name: "symbol_link", kind: "message", T: yVe, opt: !0 },
-          { no: 15, name: "file_link", kind: "message", T: y1t, opt: !0 },
+          { no: 8, name: "chunk_identity", kind: "message", T: Xxn, opt: true },
+          { no: 9, name: "docs_reference", kind: "message", T: bVe, opt: true },
+          { no: 11, name: "web_citation", kind: "message", T: LMi, opt: true },
+          { no: 12, name: "status_updates", kind: "message", T: RMi, opt: true },
+          { no: 13, name: "timing_info", kind: "message", T: Yxn, opt: true },
+          { no: 14, name: "symbol_link", kind: "message", T: yVe, opt: true },
+          { no: 15, name: "file_link", kind: "message", T: y1t, opt: true },
           {
             no: 16,
             name: "conversation_summary",
             kind: "message",
             T: L$,
-            opt: !0,
+            opt: true,
           },
           {
             no: 17,
             name: "service_status_update",
             kind: "message",
             T: MMi,
-            opt: !0,
+            opt: true,
           },
         ])
       }
@@ -38716,7 +38716,7 @@ export function createAIServiceV1(params) {
     },
     Qxn = class j2e extends _ {
       constructor(e) {
-        super(), (this.didWarmCache = !1), v.util.initPartial(e, this)
+        super(), (this.didWarmCache = false), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -38772,7 +38772,7 @@ export function createAIServiceV1(params) {
     },
     Zxn = class G2e extends _ {
       constructor(e) {
-        super(), (this.didWarmCache = !1), v.util.initPartial(e, this)
+        super(), (this.didWarmCache = false), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -38814,7 +38814,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "start_line", kind: "scalar", T: 5 },
-          { no: 2, name: "lines", kind: "scalar", T: 9, repeated: !0 },
+          { no: 2, name: "lines", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -38851,7 +38851,7 @@ export function createAIServiceV1(params) {
             name: "suggestions_from_editor",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -38890,7 +38890,7 @@ export function createAIServiceV1(params) {
             name: "debugging_only_completion_prompt",
             kind: "scalar",
             T: 9,
-            opt: !0,
+            opt: true,
           },
         ])
       }
@@ -38925,14 +38925,14 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "query", kind: "scalar", T: 9 },
-          { no: 2, name: "repositories", kind: "message", T: rl, repeated: !0 },
+          { no: 2, name: "repositories", kind: "message", T: rl, repeated: true },
           { no: 3, name: "top_k", kind: "scalar", T: 5 },
           {
             no: 4,
             name: "restrict_to_buckets",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -39002,7 +39002,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "results", kind: "message", T: nkn, repeated: !0 },
+          { no: 1, name: "results", kind: "message", T: nkn, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -39035,7 +39035,7 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "project_uuid", kind: "scalar", T: 9 },
           { no: 2, name: "relative_path", kind: "scalar", T: 9 },
-          { no: 3, name: "language_id", kind: "scalar", T: 9, opt: !0 },
+          { no: 3, name: "language_id", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -39155,7 +39155,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "bucket_id", kind: "scalar", T: 9 },
-          { no: 2, name: "commit", kind: "scalar", T: 9, opt: !0 },
+          { no: 2, name: "commit", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -39232,7 +39232,7 @@ export function createAIServiceV1(params) {
     e2i = class aFe extends _ {
       constructor(e) {
         super(),
-          (this.action = { case: void 0 }),
+          (this.action = { case: undefined }),
           (this.reasoning = ""),
           v.util.initPartial(e, this)
       }
@@ -39427,7 +39427,7 @@ export function createAIServiceV1(params) {
     },
     vkn = class fFe extends _ {
       constructor(e) {
-        super(), (this.event = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.event = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -39489,7 +39489,7 @@ export function createAIServiceV1(params) {
     },
     wkn = class pFe extends _ {
       constructor(e) {
-        super(), (this.response = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.response = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -39560,7 +39560,7 @@ export function createAIServiceV1(params) {
     t2i = class bFe extends _ {
       constructor(e) {
         super(),
-          (this.responseType = { case: void 0 }),
+          (this.responseType = { case: undefined }),
           v.util.initPartial(e, this)
       }
       static {
@@ -39571,7 +39571,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "toolformer_session_id", kind: "scalar", T: 9, opt: !0 },
+          { no: 1, name: "toolformer_session_id", kind: "scalar", T: 9, opt: true },
           {
             no: 2,
             name: "output",
@@ -39669,7 +39669,7 @@ export function createAIServiceV1(params) {
         super(),
           (this.userFacingText = ""),
           (this.rawModelOutput = ""),
-          (this.moreToCome = !1),
+          (this.moreToCome = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -39721,10 +39721,10 @@ export function createAIServiceV1(params) {
             name: "attached_code_chunks",
             kind: "message",
             T: Ekn,
-            repeated: !0,
+            repeated: true,
           },
           { no: 3, name: "current_file", kind: "message", T: Ho },
-          { no: 4, name: "repositories", kind: "message", T: rl, repeated: !0 },
+          { no: 4, name: "repositories", kind: "message", T: rl, repeated: true },
           { no: 5, name: "explicit_context", kind: "message", T: Sf },
         ])
       }
@@ -39759,7 +39759,7 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
           { no: 2, name: "start_line_number", kind: "scalar", T: 5 },
-          { no: 3, name: "lines", kind: "scalar", T: 9, repeated: !0 },
+          { no: 3, name: "lines", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -39796,7 +39796,7 @@ export function createAIServiceV1(params) {
             name: "attached_code_chunks",
             kind: "message",
             T: Ikn,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -39831,7 +39831,7 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
           { no: 2, name: "start_line_number", kind: "scalar", T: 5 },
-          { no: 3, name: "lines", kind: "scalar", T: 9, repeated: !0 },
+          { no: 3, name: "lines", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -39851,7 +39851,7 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.thought = ""),
-          (this.automated = !1),
+          (this.automated = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -39865,7 +39865,7 @@ export function createAIServiceV1(params) {
           { no: 1, name: "thought", kind: "scalar", T: 9 },
           { no: 2, name: "cmd_k_debug_info", kind: "message", T: hI },
           { no: 3, name: "automated", kind: "scalar", T: 8 },
-          { no: 4, name: "metadata", kind: "message", T: Tkn, opt: !0 },
+          { no: 4, name: "metadata", kind: "message", T: Tkn, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -39883,7 +39883,7 @@ export function createAIServiceV1(params) {
     },
     Tkn = class IFe extends _ {
       constructor(e) {
-        super(), (this.event = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.event = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -40015,7 +40015,7 @@ export function createAIServiceV1(params) {
     },
     Rkn = class LFe extends _ {
       constructor(e) {
-        super(), (this.doableAsTask = !1), v.util.initPartial(e, this)
+        super(), (this.doableAsTask = false), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -40043,7 +40043,7 @@ export function createAIServiceV1(params) {
     },
     q1t = class NFe extends _ {
       constructor(e) {
-        super(), (this.debuggingOnlyLiveMode = !1), v.util.initPartial(e, this)
+        super(), (this.debuggingOnlyLiveMode = false), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -40227,7 +40227,7 @@ export function createAIServiceV1(params) {
     },
     Fkn = class OFe extends _ {
       constructor(e) {
-        super(), (this.response = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.response = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -40268,7 +40268,7 @@ export function createAIServiceV1(params) {
     },
     Okn = class BFe extends _ {
       constructor(e) {
-        super(), (this.debuggingOnlyLiveMode = !1), v.util.initPartial(e, this)
+        super(), (this.debuggingOnlyLiveMode = false), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -40281,7 +40281,7 @@ export function createAIServiceV1(params) {
           { no: 1, name: "instruction", kind: "message", T: MVe },
           { no: 2, name: "model_details", kind: "message", T: zr },
           { no: 3, name: "debugging_only_live_mode", kind: "scalar", T: 8 },
-          { no: 4, name: "engine_id", kind: "scalar", T: 9, opt: !0 },
+          { no: 4, name: "engine_id", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -40483,8 +40483,8 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.sequenceNumber = 0),
-          (this.isNotDone = !1),
-          (this.logItem = { case: void 0 }),
+          (this.isNotDone = false),
+          (this.logItem = { case: undefined }),
           v.util.initPartial(e, this)
       }
       static {
@@ -40660,7 +40660,7 @@ export function createAIServiceV1(params) {
     },
     Jkn = class YFe extends _ {
       constructor(e) {
-        super(), (this.response = { case: void 0 }), v.util.initPartial(e, this)
+        super(), (this.response = { case: undefined }), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -40718,13 +40718,13 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "human_readable_title", kind: "scalar", T: 9, opt: !0 },
+          { no: 1, name: "human_readable_title", kind: "scalar", T: 9, opt: true },
           {
             no: 2,
             name: "task_status",
             kind: "enum",
             T: v.getEnumType(Yv),
-            opt: !0,
+            opt: true,
           },
         ])
       }
@@ -40804,7 +40804,7 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.taskUuid = ""),
-          (this.wantsAttentionRightNow = !1),
+          (this.wantsAttentionRightNow = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -40982,10 +40982,10 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "screenshots", kind: "scalar", T: 9, repeated: !0 },
+          { no: 1, name: "screenshots", kind: "scalar", T: 9, repeated: true },
           { no: 2, name: "current_file", kind: "message", T: Ho },
-          { no: 3, name: "conversation", kind: "message", T: Ha, repeated: !0 },
-          { no: 4, name: "logs", kind: "message", T: iEn, repeated: !0 },
+          { no: 3, name: "conversation", kind: "message", T: Ha, repeated: true },
+          { no: 4, name: "logs", kind: "message", T: iEn, repeated: true },
           { no: 5, name: "console_logs", kind: "scalar", T: 9 },
           { no: 6, name: "cursor_version", kind: "scalar", T: 9 },
           { no: 7, name: "os", kind: "scalar", T: 9 },
@@ -40993,16 +40993,16 @@ export function createAIServiceV1(params) {
           { no: 9, name: "failing_requst_id", kind: "scalar", T: 9 },
           { no: 10, name: "connection_error_raw", kind: "scalar", T: 9 },
           { no: 12, name: "debug_info", kind: "message", T: hI },
-          { no: 13, name: "connect_error_code", kind: "scalar", T: 5, opt: !0 },
+          { no: 13, name: "connect_error_code", kind: "scalar", T: 5, opt: true },
           {
             no: 14,
             name: "error_detail_code",
             kind: "enum",
             T: v.getEnumType(Er),
-            opt: !0,
+            opt: true,
           },
-          { no: 15, name: "error_detail_title", kind: "scalar", T: 9, opt: !0 },
-          { no: 16, name: "error_detail_detail", kind: "scalar", T: 9, opt: !0 },
+          { no: 15, name: "error_detail_title", kind: "scalar", T: 9, opt: true },
+          { no: 16, name: "error_detail_detail", kind: "scalar", T: 9, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -41117,7 +41117,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "markers", kind: "message", T: aEn, repeated: !0 },
+          { no: 1, name: "markers", kind: "message", T: aEn, repeated: true },
           { no: 2, name: "model_details", kind: "message", T: zr },
           { no: 3, name: "iteration_number", kind: "scalar", T: 5 },
           { no: 4, name: "sequence_id", kind: "scalar", T: 9 },
@@ -41165,7 +41165,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "lines", kind: "scalar", T: 9, repeated: !0 },
+          { no: 1, name: "lines", kind: "scalar", T: 9, repeated: true },
           { no: 2, name: "start_line", kind: "scalar", T: 5 },
           { no: 3, name: "end_line_inclusive", kind: "scalar", T: 5 },
           { no: 4, name: "message", kind: "scalar", T: 9 },
@@ -41175,30 +41175,30 @@ export function createAIServiceV1(params) {
             name: "related_information",
             kind: "message",
             T: lEn,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 7,
             name: "context_ranges",
             kind: "message",
             T: cEn,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 8,
             name: "ancestor_type_definitions",
             kind: "message",
             T: hEn,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 9,
             name: "inserted_symbol_types",
             kind: "message",
             T: uEn,
-            repeated: !0,
+            repeated: true,
           },
-          { no: 10, name: "quick_fixes", kind: "message", T: dEn, repeated: !0 },
+          { no: 10, name: "quick_fixes", kind: "message", T: dEn, repeated: true },
           { no: 11, name: "start_column", kind: "scalar", T: 5 },
           { no: 12, name: "end_column_inclusive", kind: "scalar", T: 5 },
           {
@@ -41206,14 +41206,14 @@ export function createAIServiceV1(params) {
             name: "class_information",
             kind: "message",
             T: gEn,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 14,
             name: "function_signatures",
             kind: "message",
             T: mEn,
-            repeated: !0,
+            repeated: true,
           },
           { no: 15, name: "snapshot", kind: "scalar", T: 5 },
         ])
@@ -41250,7 +41250,7 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "message", kind: "scalar", T: 9 },
           { no: 2, name: "relative_workspace_path", kind: "scalar", T: 9 },
-          { no: 3, name: "relevant_lines", kind: "scalar", T: 9, repeated: !0 },
+          { no: 3, name: "relevant_lines", kind: "scalar", T: 9, repeated: true },
           { no: 4, name: "start_line", kind: "scalar", T: 5 },
         ])
       }
@@ -41320,7 +41320,7 @@ export function createAIServiceV1(params) {
           { no: 1, name: "name", kind: "scalar", T: 9 },
           { no: 2, name: "relative_workspace_path", kind: "scalar", T: 9 },
           { no: 3, name: "start_line", kind: "scalar", T: 5 },
-          { no: 4, name: "lines", kind: "scalar", T: 9, repeated: !0 },
+          { no: 4, name: "lines", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -41377,7 +41377,7 @@ export function createAIServiceV1(params) {
         super(),
           (this.message = ""),
           (this.kind = ""),
-          (this.isPreferred = !1),
+          (this.isPreferred = false),
           (this.edits = []),
           v.util.initPartial(e, this)
       }
@@ -41392,7 +41392,7 @@ export function createAIServiceV1(params) {
           { no: 1, name: "message", kind: "scalar", T: 9 },
           { no: 2, name: "kind", kind: "scalar", T: 9 },
           { no: 3, name: "is_preferred", kind: "scalar", T: 8 },
-          { no: 4, name: "edits", kind: "message", T: fEn, repeated: !0 },
+          { no: 4, name: "edits", kind: "message", T: fEn, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -41430,8 +41430,8 @@ export function createAIServiceV1(params) {
           { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
           { no: 2, name: "start_line", kind: "scalar", T: 5 },
           { no: 3, name: "end_line_inclusive", kind: "scalar", T: 5 },
-          { no: 4, name: "deleted_lines", kind: "scalar", T: 9, repeated: !0 },
-          { no: 5, name: "add_lines", kind: "scalar", T: 9, repeated: !0 },
+          { no: 4, name: "deleted_lines", kind: "scalar", T: 9, repeated: true },
+          { no: 5, name: "add_lines", kind: "scalar", T: 9, repeated: true },
           { no: 6, name: "snapshot", kind: "scalar", T: 5 },
         ])
       }
@@ -41469,9 +41469,9 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "class_name", kind: "scalar", T: 9 },
           { no: 2, name: "start_line", kind: "scalar", T: 5 },
-          { no: 3, name: "top_level_lines", kind: "scalar", T: 5, repeated: !0 },
-          { no: 4, name: "lines", kind: "scalar", T: 9, repeated: !0 },
-          { no: 5, name: "constructors", kind: "message", T: pEn, repeated: !0 },
+          { no: 3, name: "top_level_lines", kind: "scalar", T: 5, repeated: true },
+          { no: 4, name: "lines", kind: "scalar", T: 9, repeated: true },
+          { no: 5, name: "constructors", kind: "message", T: pEn, repeated: true },
           { no: 6, name: "detail", kind: "scalar", T: 9 },
         ])
       }
@@ -41539,7 +41539,7 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "label", kind: "scalar", T: 9 },
           { no: 2, name: "documentation", kind: "scalar", T: 9 },
-          { no: 3, name: "parameters", kind: "message", T: bEn, repeated: !0 },
+          { no: 3, name: "parameters", kind: "message", T: bEn, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -41593,7 +41593,7 @@ export function createAIServiceV1(params) {
         super(),
           (this.relativeWorkspacePath = ""),
           (this.changes = []),
-          (this.success = !1),
+          (this.success = false),
           (this.iterationNumber = 0),
           v.util.initPartial(e, this)
       }
@@ -41606,7 +41606,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
-          { no: 2, name: "changes", kind: "message", T: yEn, repeated: !0 },
+          { no: 2, name: "changes", kind: "message", T: yEn, repeated: true },
           { no: 3, name: "success", kind: "scalar", T: 8 },
           { no: 4, name: "iteration_number", kind: "scalar", T: 5 },
         ])
@@ -41643,8 +41643,8 @@ export function createAIServiceV1(params) {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "start_line", kind: "scalar", T: 5 },
           { no: 2, name: "end_line_exclusive", kind: "scalar", T: 5 },
-          { no: 3, name: "deleted_lines", kind: "scalar", T: 9, repeated: !0 },
-          { no: 4, name: "add_lines", kind: "scalar", T: 9, repeated: !0 },
+          { no: 3, name: "deleted_lines", kind: "scalar", T: 9, repeated: true },
+          { no: 4, name: "add_lines", kind: "scalar", T: 9, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -41681,26 +41681,26 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "current_file", kind: "message", T: Ho },
-          { no: 2, name: "conversation", kind: "message", T: Ha, repeated: !0 },
-          { no: 3, name: "repositories", kind: "message", T: rl, repeated: !0 },
+          { no: 2, name: "conversation", kind: "message", T: Ha, repeated: true },
+          { no: 3, name: "repositories", kind: "message", T: rl, repeated: true },
           { no: 4, name: "explicit_context", kind: "message", T: Sf },
-          { no: 5, name: "workspace_root_path", kind: "scalar", T: 9, opt: !0 },
+          { no: 5, name: "workspace_root_path", kind: "scalar", T: 9, opt: true },
           { no: 6, name: "query", kind: "scalar", T: 9 },
-          { no: 7, name: "code_blocks", kind: "message", T: ed, repeated: !0 },
+          { no: 7, name: "code_blocks", kind: "message", T: ed, repeated: true },
           { no: 9, name: "model_details", kind: "message", T: zr },
           {
             no: 10,
             name: "documentation_identifiers",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
           {
             no: 11,
             name: "bad_notifications",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
           { no: 12, name: "lint_rules", kind: "scalar", T: 9 },
         ])
@@ -41893,7 +41893,7 @@ export function createAIServiceV1(params) {
         super(),
           (this.conversation = []),
           (this.files = []),
-          (this.contextResults = { case: void 0 }),
+          (this.contextResults = { case: undefined }),
           v.util.initPartial(e, this)
       }
       static {
@@ -41904,9 +41904,9 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "conversation", kind: "message", T: Ha, repeated: !0 },
-          { no: 2, name: "files", kind: "message", T: Ho, repeated: !0 },
-          { no: 3, name: "rerank_results", kind: "scalar", T: 8, opt: !0 },
+          { no: 1, name: "conversation", kind: "message", T: Ha, repeated: true },
+          { no: 2, name: "files", kind: "message", T: Ho, repeated: true },
+          { no: 3, name: "rerank_results", kind: "scalar", T: 8, opt: true },
           {
             no: 4,
             name: "file_search_results",
@@ -41921,10 +41921,10 @@ export function createAIServiceV1(params) {
             T: NVe,
             oneof: "context_results",
           },
-          { no: 6, name: "rerank_results_v2", kind: "scalar", T: 8, opt: !0 },
-          { no: 7, name: "long_context_mode", kind: "scalar", T: 8, opt: !0 },
-          { no: 8, name: "is_eval", kind: "scalar", T: 8, opt: !0 },
-          { no: 9, name: "request_id", kind: "scalar", T: 9, opt: !0 },
+          { no: 6, name: "rerank_results_v2", kind: "scalar", T: 8, opt: true },
+          { no: 7, name: "long_context_mode", kind: "scalar", T: 8, opt: true },
+          { no: 8, name: "is_eval", kind: "scalar", T: 8, opt: true },
+          { no: 9, name: "request_id", kind: "scalar", T: 9, opt: true },
           { no: 10, name: "model_details", kind: "message", T: zr },
         ])
       }
@@ -41958,7 +41958,7 @@ export function createAIServiceV1(params) {
             name: "relative_workspace_paths",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -42016,7 +42016,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "bug", kind: "message", T: DEn, opt: !0 },
+          { no: 1, name: "bug", kind: "message", T: DEn, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -42081,13 +42081,13 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "diffs", kind: "scalar", T: 9, repeated: !0 },
+          { no: 1, name: "diffs", kind: "scalar", T: 9, repeated: true },
           {
             no: 2,
             name: "previous_commit_messages",
             kind: "scalar",
             T: 9,
-            repeated: !0,
+            repeated: true,
           },
         ])
       }
@@ -42136,7 +42136,7 @@ export function createAIServiceV1(params) {
       constructor(e) {
         super(),
           (this.requestId = ""),
-          (this.isComposerVisible = !1),
+          (this.isComposerVisible = false),
           v.util.initPartial(e, this)
       }
       static {
@@ -42167,7 +42167,7 @@ export function createAIServiceV1(params) {
     },
     NEn = class FOe extends _ {
       constructor(e) {
-        super(), (this.didKeepWarm = !1), v.util.initPartial(e, this)
+        super(), (this.didKeepWarm = false), v.util.initPartial(e, this)
       }
       static {
         this.runtime = v
@@ -42205,9 +42205,9 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "diffs", kind: "message", T: AEn, repeated: !0 },
-          { no: 2, name: "custom_instructions", kind: "scalar", T: 9, opt: !0 },
-          { no: 3, name: "use_premium_model", kind: "scalar", T: 8, opt: !0 },
+          { no: 1, name: "diffs", kind: "message", T: AEn, repeated: true },
+          { no: 2, name: "custom_instructions", kind: "scalar", T: 9, opt: true },
+          { no: 3, name: "use_premium_model", kind: "scalar", T: 8, opt: true },
         ])
       }
       static fromBinary(e, t) {
@@ -42239,7 +42239,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "relative_workspace_path", kind: "scalar", T: 9 },
-          { no: 2, name: "chunks", kind: "message", T: MEn, repeated: !0 },
+          { no: 2, name: "chunks", kind: "message", T: MEn, repeated: true },
         ])
       }
       static fromBinary(e, t) {
@@ -42270,8 +42270,8 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "old_lines", kind: "scalar", T: 9, repeated: !0 },
-          { no: 2, name: "new_lines", kind: "scalar", T: 9, repeated: !0 },
+          { no: 1, name: "old_lines", kind: "scalar", T: 9, repeated: true },
+          { no: 2, name: "new_lines", kind: "scalar", T: 9, repeated: true },
           { no: 3, name: "old_range", kind: "message", T: Kf },
           { no: 4, name: "new_range", kind: "message", T: Kf },
         ])
@@ -42332,7 +42332,7 @@ export function createAIServiceV1(params) {
       }
       static {
         this.fields = v.util.newFieldList(() => [
-          { no: 1, name: "context_items", kind: "message", T: EVe, repeated: !0 },
+          { no: 1, name: "context_items", kind: "message", T: EVe, repeated: true },
           { no: 2, name: "model_name", kind: "scalar", T: 9 },
         ])
       }
@@ -42399,7 +42399,7 @@ export function createAIServiceV1(params) {
       static {
         this.fields = v.util.newFieldList(() => [
           { no: 1, name: "count", kind: "scalar", T: 5 },
-          { no: 2, name: "token_details", kind: "message", T: FEn, repeated: !0 },
+          { no: 2, name: "token_details", kind: "message", T: FEn, repeated: true },
         ])
       }
       static fromBinary(e, t) {

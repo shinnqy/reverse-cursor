@@ -32,19 +32,19 @@ export function createRequestDebouncer(params) {
         requestIdsToCancel: t,
       }
     }
-    async shouldDebounce(i, e = !1) {
+    async shouldDebounce(i, e = false) {
       const t = [...this.a]
       let s = -1
       for (const [l, c] of t.entries()) c.requestId === i && (s = l)
-      if (s === -1) return !1
+      if (s === -1) return false
       const n = performance.now() + performance.timeOrigin,
         r = t[s],
         o = n - r.startTime
       return o < this.b && !e
         ? (await new Promise((l) => setTimeout(l, this.b - o)),
-          await this.shouldDebounce(i, !0))
+          await this.shouldDebounce(i, true))
         : s === t.length - 1
-          ? !1
+          ? false
           : t[s + 1].startTime - r.startTime < this.b
     }
   }

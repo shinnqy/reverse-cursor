@@ -6,15 +6,15 @@ export function createCmdKService2(params) {
   var ZR = Re("cmdKService2")
   function bKi(i) {
     const e = []
-    let t = !0
+    let t = true
     return (
       (async () => {
         for await (const n of i) {
-          const r = { value: n, done: !1 }
+          const r = { value: n, done: false }
           e.forEach((o) => o(r))
         }
-        const s = { value: void 0, done: !0 }
-        e.forEach((n) => n(s)), (t = !1)
+        const s = { value: undefined, done: true }
+        e.forEach((n) => n(s)), (t = false)
       })(),
       function () {
         let n = [],
@@ -100,7 +100,7 @@ export function createCmdKService2(params) {
     async preloadEditWithSelection(e, t, s, n) {
       const r = await this.w.getPreparedEditRequest({
         query: "",
-        fastMode: !0,
+        fastMode: true,
         lineRange: t,
         codeBlocks: [],
         docs: [],
@@ -159,21 +159,21 @@ export function createCmdKService2(params) {
         )
     }
     removeTerminalFollowup({ data: e, setData: t }) {
-      t("chatResponse", void 0)
+      t("chatResponse", undefined)
       const s = e.queryHistory
-      if (s === void 0) return
+      if (s === undefined) return
       const n = { case: "terminalCmdKQueryHistory", queryHistory: s.current },
         o = [...e.previousStructuredTextsNewestFirst],
         a = nLt({
           req: n,
           previousStructuredTextsNewestFirst: o,
-          options: { structured: !0 },
+          options: { structured: true },
         })
       t("plainText", a),
         t("richText", a),
         t("delegate", new SN()),
         t("inputBoxDelegate", new am()),
-        t("queryHistory", void 0),
+        t("queryHistory", undefined),
         t("previousStructuredTextsNewestFirst", []),
         t("forceRerenderInputBox", (l) => l + 1),
         setTimeout(() => {
@@ -183,7 +183,7 @@ export function createCmdKService2(params) {
     addTerminalFollowup({ req: e, structuredQuery: t, data: s, setData: n }) {
       if (
         this.z.nonPersistentStorage.promptBars.find((o) => o.id === s.uuid)
-          ?.preventFollowupFromBeingAdded === !0
+          ?.preventFollowupFromBeingAdded === true
       )
         return
       e.case === "chatHistory"
@@ -205,7 +205,7 @@ export function createCmdKService2(params) {
     }
     addFollowup({ promptBarId: e, req: t, options: s, structuredQuery: n }) {
       const r = this.z.nonPersistentStorage.promptBars.find((d) => d.id === e)
-      if (r?.preventFollowupFromBeingAdded === !0) return
+      if (r?.preventFollowupFromBeingAdded === true) return
       const o = r?.originalRequest,
         a = r?.queryHistory
       t.case === "originalRequest"
@@ -280,7 +280,7 @@ export function createCmdKService2(params) {
         return
       const u = r?.uri
       u &&
-        s?.pushUndoRedo !== !1 &&
+        s?.pushUndoRedo !== false &&
         this.u.pushUndoElement(
           new cb(
             "Undo Add Followup",
@@ -339,11 +339,11 @@ export function createCmdKService2(params) {
                 promptBarId: e,
                 req: t,
                 structuredQuery: n,
-                options: { pushUndoRedo: !1 },
+                options: { pushUndoRedo: false },
               })
             },
           ),
-          { breakConsolidation: !1 },
+          { breakConsolidation: false },
         )
     }
     removeFollowup(e, t) {
@@ -351,28 +351,28 @@ export function createCmdKService2(params) {
         "promptBars",
         (u) => u.id === e,
         "chatResponse",
-        void 0,
+        undefined,
       ),
         this.z.setNonPersistentStorage(
           "promptBars",
           (u) => u.id === e,
           "errorDetails",
-          void 0,
+          undefined,
         )
       const s = this.z.nonPersistentStorage.promptBars.find((u) => u.id === e),
         n = s?.originalRequest,
         r = s?.queryHistory
-      if (n === void 0 && r === void 0) return
+      if (n === undefined && r === undefined) return
       const o = n
           ? { case: "originalRequest", req: n.current }
           : { case: "cmdKQueryHistory", queryHistory: r.current },
         a = s?.previousStructuredTextsNewestFirst
-      if (a === void 0) return
+      if (a === undefined) return
       const l = [...a],
         c = nLt({
           req: o,
           previousStructuredTextsNewestFirst: l,
-          options: { structured: !0 },
+          options: { structured: true },
         })
       this.z.setNonPersistentStorage(
         "promptBars",
@@ -399,13 +399,13 @@ export function createCmdKService2(params) {
           "promptBars",
           (u) => u.id === e,
           "originalRequest",
-          void 0,
+          undefined,
         ),
         this.z.setNonPersistentStorage(
           "promptBars",
           (u) => u.id === e,
           "queryHistory",
-          void 0,
+          undefined,
         ),
         this.z.setNonPersistentStorage(
           "promptBars",
@@ -425,7 +425,7 @@ export function createCmdKService2(params) {
         }, 10)
       const h = s?.uri
       h &&
-        t?.pushUndoRedo !== !1 &&
+        t?.pushUndoRedo !== false &&
         this.u.pushUndoElement(
           new cb(
             "Undo Remove Followup",
@@ -437,14 +437,14 @@ export function createCmdKService2(params) {
                 promptBarId: e,
                 req: o,
                 structuredQuery: l,
-                options: { pushUndoRedo: !1 },
+                options: { pushUndoRedo: false },
               })
             },
             () => {
-              this.removeFollowup(e, { pushUndoRedo: !1 })
+              this.removeFollowup(e, { pushUndoRedo: false })
             },
           ),
-          { breakConsolidation: !1 },
+          { breakConsolidation: false },
         )
     }
     async getPromptBarCurrentRange(e) {
@@ -452,7 +452,7 @@ export function createCmdKService2(params) {
       try {
         t = await this.J.createModelReference(e.uri)
         const s = t.object.textEditorModel
-        return s === void 0 ? void 0 : this.w.getPromptBarCurrentRange(e, s)
+        return s === undefined ? undefined : this.w.getPromptBarCurrentRange(e, s)
       } finally {
         t?.dispose()
       }
@@ -492,13 +492,13 @@ export function createCmdKService2(params) {
               "promptBars",
               (Q) => Q.id === t,
               "chatResponse",
-              void 0,
+              undefined,
             ),
             this.z.setNonPersistentStorage(
               "promptBars",
               (Q) => Q.id === t,
               "errorDetails",
-              void 0,
+              undefined,
             )
           const P = this.q.getActiveCodeEditor()
           if (!P) return
@@ -543,7 +543,7 @@ export function createCmdKService2(params) {
               se = await this.c.cmdKClient(),
               he = await this.w.getPreparedEditRequest({
                 query: s,
-                fastMode: !1,
+                fastMode: false,
                 lineRange: r,
                 codeBlocks: o,
                 docs: a,
@@ -564,7 +564,7 @@ export function createCmdKService2(params) {
             let de = this.z.nonPersistentStorage.promptBars.find(
               (Ie) => Ie.id === t,
             )
-            if (de === void 0) return
+            if (de === undefined) return
             let Ee = []
             await Promise.all(
               this.z.nonPersistentStorage.promptBars
@@ -574,10 +574,10 @@ export function createCmdKService2(params) {
                     const Dt = this.z.nonPersistentStorage.inlineDiffs.find(
                       (Mt) => Mt.id === Ie.diffId,
                     )
-                    if (Dt !== void 0)
+                    if (Dt !== undefined)
                       Ee.push(
                         new DVe({
-                          relativePath: this.g.asRelativePath(Ie.uri, !1),
+                          relativePath: this.g.asRelativePath(Ie.uri, false),
                           originalLines: Dt.originalTextLines,
                           extraContextAbove: Dt.extraContextLinesAbove,
                           extraContextBelow: Dt.extraContextLinesBelow,
@@ -618,7 +618,7 @@ export function createCmdKService2(params) {
                             Mn = Yi.trim() === "" ? [] : Yi.split(Ii.getEOL())
                           Ee.push(
                             new DVe({
-                              relativePath: this.g.asRelativePath(Ie.uri, !1),
+                              relativePath: this.g.asRelativePath(Ie.uri, false),
                               originalLines: Ji,
                               extraContextAbove: Us,
                               extraContextBelow: Mn,
@@ -646,7 +646,7 @@ export function createCmdKService2(params) {
                   ),
                 )
                 .forEach((Mt) => {
-                  Mt !== void 0 &&
+                  Mt !== undefined &&
                     ke.push(
                       new Foe({
                         relativePath: this.g.asRelativePath(Mt.uri),
@@ -659,15 +659,15 @@ export function createCmdKService2(params) {
                 })
             let Ae = [],
               Pe
-            const ze = e.isHyperMode ?? !1
+            const ze = e.isHyperMode ?? false
             if (
               this.z.applicationUserPersistentStorage.checklistState
-                ?.doneCommandK !== !0
+                ?.doneCommandK !== true
             ) {
               const Ie = this.z.applicationUserPersistentStorage.checklistState
               this.z.setApplicationUserPersistentStorage(
                 "checklistState",
-                (Dt) => ({ ...(Dt ?? {}), doneCommandK: !0 }),
+                (Dt) => ({ ...(Dt ?? {}), doneCommandK: true }),
               )
             }
             const at = await this.F.streamRequestWithContextWrapped(x, {
@@ -675,7 +675,7 @@ export function createCmdKService2(params) {
                 cmdKOptions: {
                   modelDetails: H,
                   chatMode: e.chatMode,
-                  adaCmdKContext: !1,
+                  adaCmdKContext: false,
                   useReranker: e.useReranker,
                   useWeb: e.useWeb,
                 },
@@ -686,12 +686,12 @@ export function createCmdKService2(params) {
                 upcomingEdits: Ee ?? [],
                 images: he.images,
                 links: he.links,
-                hyperModel: ze ? e.hyperModel : void 0,
+                hyperModel: ze ? e.hyperModel : undefined,
                 diffHistory: Ae,
                 diffToBaseBranch: Pe,
                 timingInfo:
-                  S === void 0
-                    ? void 0
+                  S === undefined
+                    ? undefined
                     : { userInputTime: S, streamCmdkTime: Date.now() },
               },
               finalInput: {
@@ -717,7 +717,7 @@ export function createCmdKService2(params) {
                 streamer: at.v,
                 generationUUID: k,
                 streamerURL: we,
-                rethrowCancellation: !0,
+                rethrowCancellation: true,
                 rerun: w,
                 source: ze ? "other" : "cmd-k",
               }),
@@ -738,7 +738,7 @@ export function createCmdKService2(params) {
                         generationUUID: k,
                         error: Dt,
                         message: Ie?.rawMessage,
-                        rerun: void 0,
+                        rerun: undefined,
                       },
                     )
                   }
@@ -775,7 +775,7 @@ export function createCmdKService2(params) {
                 ?.items.find((Ie) => Ie.item.item.case === "cmdKQueryHistory")
                 ?.item.item.value
             let Be = qe
-            for (; Be !== void 0; )
+            for (; Be !== undefined; )
               (Ue = Be.selection?.lines ?? []), (Be = Be.queryHistory)
             const Ge = {
                 query: Ke,
@@ -789,7 +789,7 @@ export function createCmdKService2(params) {
               Et = () => {
                 E.abort()
                 const Ie =
-                    e.chatMode === !0
+                    e.chatMode === true
                       ? (() => {
                           const Ii = this.z.nonPersistentStorage.promptBars.find(
                             (jr) => jr.id === t,
@@ -800,7 +800,7 @@ export function createCmdKService2(params) {
                               userMessage: s,
                               assistantResponse: Ii ?? "",
                               chatHistory: Mi,
-                              activeForCmdK: !1,
+                              activeForCmdK: false,
                             },
                           }
                         })()
@@ -814,7 +814,7 @@ export function createCmdKService2(params) {
                 this.addFollowup({ promptBarId: t, req: Ie, structuredQuery: n }),
                   d?.()
               }
-            if (e.chatMode === !0) {
+            if (e.chatMode === true) {
               await this.handleChatResponse({
                 promptBarId: t,
                 stream: Oe,
@@ -871,7 +871,7 @@ export function createCmdKService2(params) {
             )
               Q.tokenization.forceTokenization(Ie),
                 St.push(Q.tokenization.getLineTokens(Ie).extractObject())
-            if (e.isHeadless_onlyAvailableWithUseContextSession === !0) {
+            if (e.isHeadless_onlyAvailableWithUseContextSession === true) {
               let Ie = []
               for await (const Dt of ni) Ie.push(Dt)
               return Ie.join(Bt)
@@ -895,7 +895,7 @@ export function createCmdKService2(params) {
               extraContextLinesAbove: yt,
               extraContextLinesBelow: je,
               hideDeletionViewZones: ri,
-              isHidden: !1,
+              isHidden: false,
               undoRedo: {
                 undo: () => {
                   h()
@@ -933,7 +933,7 @@ export function createCmdKService2(params) {
     async submitTerminalCmdK(e, t, s, n) {
       this.m.publicLogCapture("Submitted cmd-k in terminal"),
         this.m.publicLogCapture("Submitted Prompt"),
-        t("chatResponse", void 0)
+        t("chatResponse", undefined)
       const r = this.c.getModelDetails({ specificModelField: "terminal-cmd-k" })
       this.m.publicLogCapture("submitted.cmd-k-terminal", { model: r.modelName })
       const [o, a] = this.c.registerNewGeneration({
@@ -953,7 +953,7 @@ export function createCmdKService2(params) {
               cmdKOptions: {
                 modelDetails: r,
                 chatMode: n.chatMode,
-                adaCmdKContext: !1,
+                adaCmdKContext: false,
                 useWeb: !!e.useWeb,
               },
               legacyContext: u,
@@ -977,7 +977,7 @@ export function createCmdKService2(params) {
             modelDetails: r,
             streamer: d.v,
             generationUUID: s,
-            rethrowCancellation: !0,
+            rethrowCancellation: true,
             streamerURL: g,
             rerun: () => {},
             source: "other",
@@ -1000,7 +1000,7 @@ export function createCmdKService2(params) {
           C = () => {
             a.abort()
             const S =
-              n.chatMode === !0
+              n.chatMode === true
                 ? (() => {
                     const x = e.chatResponse
                     return {
@@ -1009,7 +1009,7 @@ export function createCmdKService2(params) {
                         userMessage: h,
                         assistantResponse: x ?? "",
                         chatHistory: y,
-                        activeForCmdK: !1,
+                        activeForCmdK: false,
                       },
                     }
                   })()
@@ -1034,13 +1034,13 @@ export function createCmdKService2(params) {
               data: e,
             })
           }
-        if ((n.chatMode !== !0 && t("suggestedCommand", ""), a.signal.aborted))
+        if ((n.chatMode !== true && t("suggestedCommand", ""), a.signal.aborted))
           return s
         try {
           for await (const S of p)
             if (S.response.case === "chat") {
               const x = S.response.value.text
-              t("chatResponse", (k) => (k === void 0 ? x : k + x))
+              t("chatResponse", (k) => (k === undefined ? x : k + x))
             } else if (S.response.case === "terminalCommand") {
               const x = S.response.value.partialCommand
               t("suggestedCommand", (k) => k + x)
@@ -1048,7 +1048,7 @@ export function createCmdKService2(params) {
               const x =
                 S.response.value.messages.length > 0
                   ? S.response.value.messages[0]
-                  : void 0
+                  : undefined
               t("statusUpdate", x)
             }
         } finally {
@@ -1058,7 +1058,7 @@ export function createCmdKService2(params) {
             )
         }
       } catch (l) {
-        t("abortController", void 0),
+        t("abortController", undefined),
           console.error(l),
           this.z.setNonPersistentStorage("inprogressAIGenerations", (c) =>
             c.filter((h) => h.generationUUID !== s),
@@ -1068,7 +1068,7 @@ export function createCmdKService2(params) {
     }
     submitEditWithSelection(e) {
       try {
-        if (e.options.useContextSession === !0)
+        if (e.options.useContextSession === true)
           return this.submitContextSessionEdit(
             e.options,
             e.promptBarId,
@@ -1133,11 +1133,11 @@ export function createCmdKService2(params) {
                   ? {
                       ...e.options.preloadedRequest,
                       query: e.query,
-                      fastMode: !0,
+                      fastMode: true,
                     }
                   : await this.w.getPreparedEditRequest({
                       query: e.query,
-                      fastMode: !1,
+                      fastMode: false,
                       lineRange: e.lineRange,
                       codeBlocks: e.codeBlocks,
                       docs: e.docs,
@@ -1179,8 +1179,8 @@ export function createCmdKService2(params) {
                 prompt: e.query,
                 originalTextLines: w,
                 originalLineTokens: P,
-                isHidden: !1,
-                hideDeletionViewZones: !1,
+                isHidden: false,
+                hideDeletionViewZones: false,
                 undoRedo: {
                   undo: () => {
                     e.focusEditor()
@@ -1231,7 +1231,7 @@ export function createCmdKService2(params) {
               "promptBars",
               (a) => a.id === e,
               "chatResponse",
-              (a) => (a === void 0 ? o : a + o),
+              (a) => (a === undefined ? o : a + o),
             )
           } else
             r.response.case === "statusUpdate"

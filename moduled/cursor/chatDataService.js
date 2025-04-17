@@ -45,8 +45,8 @@ export function createChatDataService(params) {
           this.sortTabs,
           this.resetTabs,
         ] = c6n(this.f, this.n, this.F, this.g, this.chatDataStorageID, {
-          isNotebook: !1,
-          hasNonemptySelection: !1,
+          isNotebook: false,
+          hasNonemptySelection: false,
         }))
       for (const w of cPt.registeredActions) w(this.n, this)
     }
@@ -64,7 +64,7 @@ export function createChatDataService(params) {
       const e = this.chatData.tabs.find(
         (t) => t.tabId === this.chatData.selectedTabId,
       )
-      return e === void 0
+      return e === undefined
         ? (console.log(
             "[aichat] selectedTab is undefined, this should not happen",
           ),
@@ -144,23 +144,23 @@ export function createChatDataService(params) {
     isTabGenerating(e, t) {
       const s = this.n.nonPersistentStorage.inprogressAIGenerations.find(
         (n) =>
-          n.metadata !== void 0 &&
+          n.metadata !== undefined &&
           (n.metadata.type === "chat" ||
             n.metadata.type === "codeInterpreter" ||
-            (t?.includeExecuting === !0 &&
+            (t?.includeExecuting === true &&
               n.metadata.type === "interpreterExecution")) &&
           n.metadata.tabId === e,
       )
-      return s === void 0
-        ? { isGenerating: !1 }
+      return s === undefined
+        ? { isGenerating: false }
         : {
-            isGenerating: !0,
+            isGenerating: true,
             cancel: () => {
               this.n.setNonPersistentStorage("inprogressAIGenerations", (r) =>
                 r.filter(
                   (o) =>
                     !(
-                      o.metadata !== void 0 &&
+                      o.metadata !== undefined &&
                       (o.metadata.type === "chat" ||
                         o.metadata.type === "codeInterpreter" ||
                         o.metadata.type === "interpreterExecution") &&
@@ -177,8 +177,8 @@ export function createChatDataService(params) {
     }
     getReactiveCurrentChat() {
       const e = this.chatData.selectedTabId ?? this.chatData.tabs[0]?.tabId
-      return e === void 0
-        ? void 0
+      return e === undefined
+        ? undefined
         : this.chatData.tabs.find((s) => s.tabId === e)
     }
     async searchFiles(e, t) {
@@ -216,7 +216,7 @@ export function createChatDataService(params) {
       s,
       n,
     ) {
-      if (s === void 0) return { conversationHistory: e, contextResults: t }
+      if (s === undefined) return { conversationHistory: e, contextResults: t }
       const r = s * 3,
         o = await Promise.all(
           e.flatMap((k) =>
@@ -236,7 +236,7 @@ export function createChatDataService(params) {
                 .map((k, E) => ({
                   relativePath: k.file?.relativeWorkspacePath,
                   sizeBytes: k.file?.contents.length,
-                  truncated: !1,
+                  truncated: false,
                   score: k.score,
                 }))
                 .filter(
@@ -252,7 +252,7 @@ export function createChatDataService(params) {
             k +
             E.reduce(
               (D, P) =>
-                P.truncated && P.sizeBytes !== void 0 ? D : D + P.sizeBytes,
+                P.truncated && P.sizeBytes !== undefined ? D : D + P.sizeBytes,
               0,
             ),
           0,
@@ -339,9 +339,9 @@ export function createChatDataService(params) {
                 value: {
                   results: t.value.results.filter(
                     (k) =>
-                      k.file?.relativeWorkspacePath !== void 0 &&
+                      k.file?.relativeWorkspacePath !== undefined &&
                       S.has(k.file.relativeWorkspacePath) &&
-                      C.get(k.file.relativeWorkspacePath)?.truncated === !1,
+                      C.get(k.file.relativeWorkspacePath)?.truncated === false,
                   ),
                 },
               }
@@ -362,17 +362,17 @@ export function createChatDataService(params) {
       if (!e) return
       const t = Ln.getOriginalUri(e.input)
       if (t && this.isCompatibleScheme(t.scheme))
-        return { uri: t, isCurrentFile: !0 }
+        return { uri: t, isCurrentFile: true }
     }
     async getConversationHistory({ tab: e, upUntil: t }) {
       const s = []
       try {
         const n = this.chatData.pinnedContexts,
           r = e.bubbles.filter((c) => c.type === "user"),
-          o = r.length > 0 ? r[r.length - 1] : void 0
+          o = r.length > 0 ? r[r.length - 1] : undefined
         if (!o) throw new Error("No user bubbles found")
         const a = this.getCurrentFile(),
-          l = a ? this.g.asRelativePath(U.revive(a.uri)) : void 0
+          l = a ? this.g.asRelativePath(U.revive(a.uri)) : undefined
         for (let c = 0; c < e.bubbles.length; c++) {
           const h = e.bubbles[c]
           if (h.type === "user") {
@@ -396,7 +396,7 @@ export function createChatDataService(params) {
               ),
               (C = C.filter((ke) => !(a && ke.relativePath === l))))
             let S = [],
-              x = !1,
+              x = false,
               k = n?.fileSelections ?? []
             const E = [
                 ...(h.fileSelections ?? []),
@@ -407,22 +407,22 @@ export function createChatDataService(params) {
             D.length > 0 && (u = this.H.getCodeChunksFromFileSelections(D))
             const { folderSelections: P } = h
             P && P.length > 0 && (b = P.map((ke) => ke.relativePath)),
-              h.selectedCommits !== void 0 &&
+              h.selectedCommits !== undefined &&
                 h.selectedCommits.length > 0 &&
                 (d = this.H.getCommitDetailsFromPartialCommits(
                   h.selectedCommits,
                 )),
-              h.selectedPullRequests !== void 0 &&
+              h.selectedPullRequests !== undefined &&
                 h.selectedPullRequests.length > 0 &&
                 (g = this.H.getPullRequestDetailsFromPartialPullRequests(
                   h.selectedPullRequests,
                 )),
-              (h.gitDiff !== void 0 ||
-                h.gitDiffFromBranchToMain !== void 0 ||
+              (h.gitDiff !== undefined ||
+                h.gitDiffFromBranchToMain !== undefined ||
                 x) &&
                 (p = this.H.getDiffDetailsFromGitDiff({
-                  gitDiff: h.gitDiff ?? x ?? !1,
-                  gitDiffFromBranchToMain: h.gitDiffFromBranchToMain ?? !1,
+                  gitDiff: h.gitDiff ?? x ?? false,
+                  gitDiffFromBranchToMain: h.gitDiffFromBranchToMain ?? false,
                 })),
               h.selectedImages &&
                 h.selectedImages.length > 0 &&
@@ -441,7 +441,7 @@ export function createChatDataService(params) {
               h.notepads &&
                 h.notepads.length > 0 &&
                 this.n.applicationUserPersistentStorage.notepadState
-                  .isNotepadEnabled !== !1 &&
+                  .isNotepadEnabled !== false &&
                 (m = this.H.getNotepadsContext(h))
             const [L, A, F, H, B, z] = await Promise.all([u, d, g, p, w, m])
             let K = n?.codeSelections ?? []
@@ -455,7 +455,7 @@ export function createChatDataService(params) {
               const ke = await Promise.all(
                 se
                   .map((Ae) => this.H.getCodeChunksFromCodeSelection(Ae))
-                  .filter((Ae) => Ae !== void 0),
+                  .filter((Ae) => Ae !== undefined),
               )
               L.push(...ke)
             }
@@ -479,7 +479,7 @@ export function createChatDataService(params) {
                   ({ bubbleId: ke, tabId: Ae }) =>
                     ke === h.id && Ae === e.tabId,
                 )?.intermediateChunks
-            Ee !== void 0 &&
+            Ee !== undefined &&
               (ae = Ee.map((ke) => {
                 const Ae = de.get(
                   JSON.stringify({
@@ -503,7 +503,7 @@ export function createChatDataService(params) {
                       .map((Pe, ze) => ({
                         text: Pe,
                         lineNumber: ze + ke.chunkIdentity.startLine + 1,
-                        isSignature: !1,
+                        isSignature: false,
                       })),
                 }
               })),
@@ -542,12 +542,12 @@ export function createChatDataService(params) {
               p = g?.approximateLintErrors ?? [],
               m =
                 g?.lints?.filter(
-                  (w) => w.codeBlockUri !== void 0 && w.lints.lints.length > 0,
+                  (w) => w.codeBlockUri !== undefined && w.lints.lints.length > 0,
                 ) ?? [],
               b = (
                 await Promise.all(
                   m.map(async (w) => {
-                    if (w.codeBlockUri === void 0) return []
+                    if (w.codeBlockUri === undefined) return []
                     let C
                     try {
                       C = this.z
@@ -568,7 +568,7 @@ export function createChatDataService(params) {
                         []
                       )
                     }
-                    return C === void 0
+                    return C === undefined
                       ? []
                       : [
                           new OMi({
