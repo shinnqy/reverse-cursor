@@ -1,7 +1,113 @@
 // @ts-check
 
 export function createCppWidget(params) {
-  const { V, oR, N, zT, Ye, f_, g_, p_, G, q, W, Yy, U, hu, __decorate, __param, Pt, ve, Z, ei, si, qi, Hi, Ds, Ce, Me, DKi, eI, ge, R, rt, Jl, pl, Ic, a0, oT, f3, b4, np, K3, J3, B4, bf, _v, OFt, CppIntent, k7, f, ss, aiFeatureStatusService, ue, cppService, st, cursorPredictionService, importPredictionService, Ai, Jon, Zt, so, me, Tn, calculateInlineChanges, computeDiffs } = params;
+  const { V, CYe, FFt, KS, oR, N, zT, Ye, f_, g_, p_, G, q, W, Yy, U, hu, __decorate, __param, Pt, ve, Z: instantiationService, ei: reactiveStorageService, si, qi, Hi, Ds, Ce: contextKeyService, Me, DKi, eI, ge, R, rt, Jl, pl, Ic, a0, oT, f3, b4, np, K3, J3, B4, bf, _v, OFt, CppIntent, k7, f, ss, aiFeatureStatusService, ue, cppService, st, cursorPredictionService, importPredictionService, Ai, Jon, Zt, so, me, Tn, calculateInlineChanges, computeDiffs } = params;
+
+  // var Acr = new CYe()
+  // function WBt(i, e, t) {
+  //   return i.length > 2e3 || e.length > 2e3
+  //     ? (console.error(
+  //         "BAD BAD BAD BAD BAD. THIS SHOULD NOT HAPPEN. PLEASE FIX THE CPP BUG. diffChars received strings that were too long. Returning the trivial diff.",
+  //         i.length,
+  //         e.length,
+  //       ),
+  //       [
+  //         { value: i, removed: true },
+  //         { value: e, added: true },
+  //       ])
+  //     : Acr.diff(i, e, t)
+  // }
+  // function Mcr(i) {
+  //   let e = "",
+  //     t = "",
+  //     s = "",
+  //     n = 0
+  //   const r = [],
+  //     o = [],
+  //     a = (l) => {
+  //       let c = s.split(`
+  // `),
+  //         h =
+  //           e.split(`
+  // `).length - 1
+  //       if (
+  //         l !== "" &&
+  //         !l.startsWith(`
+  // `) &&
+  //         c.length > 0
+  //       ) {
+  //         const u = c.pop()
+  //         let d
+  //         c.length > 0
+  //           ? (d = 1)
+  //           : (d =
+  //               (e
+  //                 .split(
+  //                   `
+  // `,
+  //                 )
+  //                 .at(-1)?.length ?? 0) + 1),
+  //           u !== undefined &&
+  //             u !== "" &&
+  //             r.push({ lineNumber: h, column: d, value: u }),
+  //           (h -= 1)
+  //       } else {
+  //         const u = c.shift()
+  //         if (u !== undefined && u !== "") {
+  //           const g =
+  //             e
+  //               .split(
+  //                 `
+  // `,
+  //               )
+  //               .at(-1)?.length ?? 0
+  //           r.push({ lineNumber: h, column: g + 1, value: u })
+  //         }
+  //       }
+  //       if (c.length > 0)
+  //         for (const u of c)
+  //           o.push({
+  //             beforeLineNumber: h,
+  //             indexInMultilineAddition: n++,
+  //             value: u,
+  //           })
+  //     }
+  //   for (const l of i)
+  //     l.added
+  //       ? (s += l.value)
+  //       : (s !== "" && (a(l.value), (t += s), (s = "")),
+  //         (e += l.value),
+  //         (t += l.value))
+  //   return s !== "" && a(""), { inlineModifications: r, fullLineModifications: o }
+  // }
+  // function $cr(i, e) {
+  //   return !!(
+  //     i.fullLineModifications.some((s) => s.beforeLineNumber < e.lineNumber) ||
+  //     i.inlineModifications
+  //       .filter((s) => s.lineNumber === e.lineNumber)
+  //       .some((s) => s.startColumn < e.column)
+  //   )
+  // }
+  // function Fcr(i, e, t, s, n) {
+  //   const { inlineModifications: r, fullLineModifications: o } = Mcr(i),
+  //     a = []
+  //   for (const c of o)
+  //     a.push({
+  //       beforeLineNumber: c.beforeLineNumber + e,
+  //       indexInMultilineAddition: c.indexInMultilineAddition,
+  //       content: c.value,
+  //       decorations: [new KS(1, c.value.length + 1, "ghost-text", 0)],
+  //     })
+  //   const l = r.map((c) => ({
+  //     lineNumber: c.lineNumber + e,
+  //     startColumn: c.column,
+  //     newValue: c.value,
+  //     oldValue: "",
+  //   }))
+  //   return $cr({ inlineModifications: l, fullLineModifications: a }, t)
+  //     ? { success: false, inlineModifications: l, fullLineModifications: a }
+  //     : { success: true, inlineModifications: l, fullLineModifications: a }
+  // }
 
   var qBt,
     Wcr = 10
@@ -154,13 +260,13 @@ export function createCppWidget(params) {
     [
       __param(4, Pt),
       __param(5, ve),
-      __param(6, Z),
-      __param(7, ei),
+      __param(6, instantiationService),
+      __param(7, reactiveStorageService),
       __param(8, si),
       __param(9, qi),
       __param(10, Hi),
       __param(11, Ds),
-      __param(12, Ce),
+      __param(12, contextKeyService),
     ],
     CppDiffPeekViewWidget,
   )
@@ -471,7 +577,7 @@ export function createCppWidget(params) {
     }
     i.Showing = t
   })(zY || (zY = {}))
-  var iQe = class extends V {
+  var GhostTextWidget = class extends V {
     createActionButtons(e) {
       const t = W(e, q("div"))
       ;(t.style.display = "flex"),
@@ -1475,12 +1581,12 @@ export function createCppWidget(params) {
       return t.column + o > s
     }
   }
-  iQe = __decorate(
+  GhostTextWidget = __decorate(
     [
-      __param(1, ei),
+      __param(1, reactiveStorageService),
       __param(2, Hi),
       __param(3, aiFeatureStatusService),
-      __param(4, Z),
+      __param(4, instantiationService),
       __param(5, ue),
       __param(6, qi),
       __param(7, cppService),
@@ -1488,7 +1594,7 @@ export function createCppWidget(params) {
       __param(9, cursorPredictionService),
       __param(10, importPredictionService),
     ],
-    iQe,
+    GhostTextWidget,
   )
   function _es(i, e) {
     const t = i
@@ -1588,42 +1694,42 @@ export function createCppWidget(params) {
     }
     constructor(e, t, s, n) {
       super(),
-        (this.n = s),
-        (this.q = n),
+        (this.n = s), (this.instantiationService = this.n),
+        (this.q = n), (this.reactiveStorageService = this.q),
         (this.f = false),
         (this.g = false),
         (this.j = false),
         (this.m = false),
-        (this.a = e),
+        (this.a = e), (this.editor = this.a),
         this.D(
-          this.a.onDidChangeModel(() => {
+          this.editor.onDidChangeModel(() => {
             this.update()
           }),
         ),
-        this.D(this.a.onDidChangeModelLanguage(() => this.update())),
-        this.D(this.a.onDidChangeCursorPosition(() => this.update())),
+        this.D(this.editor.onDidChangeModelLanguage(() => this.update())),
+        this.D(this.editor.onDidChangeCursorPosition(() => this.update())),
         this.D(
-          this.a.onMouseDown(() => {
+          this.editor.onMouseDown(() => {
             ;(this.g = true), this.update()
           }),
         ),
         this.D(
-          this.a.onMouseUp(() => {
+          this.editor.onMouseUp(() => {
             ;(this.g = false), this.update()
           }),
         ),
-        (this.b = new so(() => this.D(s.createInstance(iQe, this.a)))),
-        (this.c = []),
+        (this.b = new so(() => this.D(s.createInstance(GhostTextWidget, this.editor)))), (this.mainGhostTextWidget = this.b),
+        (this.c = []), (this.additionalGhostTexts = this.c),
         this.D(
           t.onDidChangeContext((r) => {
             r.affectsSome(new Set([me.hasActivelyGeneratingDiff.key])) &&
               me.hasActivelyGeneratingDiff.getValue(t)
           }),
         ),
-        (this.reactiveStorageRoot = this.D(this.q.createScoped(this))),
+        (this.reactiveStorageRoot = this.D(this.reactiveStorageService.createScoped(this))),
         this.reactiveStorageRoot.onChangeEffect({
           deps: [
-            () => this.q.applicationUserPersistentStorage.hideChatEditTooltip,
+            () => this.reactiveStorageService.applicationUserPersistentStorage.hideChatEditTooltip,
           ],
           onChange: () => {
             this.update()
@@ -1631,9 +1737,9 @@ export function createCppWidget(params) {
         }),
         this.reactiveStorageRoot.onChangeEffect({
           deps: [
-            () => this.q.nonPersistentStorage.cppState,
-            () => this.q.nonPersistentStorage.cppState?.suggestion,
-            () => this.q.nonPersistentStorage.cppState?.additionalSuggestions,
+            () => this.reactiveStorageService.nonPersistentStorage.cppState,
+            () => this.reactiveStorageService.nonPersistentStorage.cppState?.suggestion,
+            () => this.reactiveStorageService.nonPersistentStorage.cppState?.additionalSuggestions,
           ],
           onChange: () => {
             this.refreshAdditionalWidgets(), this.update()
@@ -1652,59 +1758,59 @@ export function createCppWidget(params) {
       this.h && (this.h.dispose(), (this.h = undefined))
     }
     shouldShowHoverAt(e) {
-      const t = this.a.getModel()
-      return t
-        ? this.b.value.ghostTextDecorations.some((s) => {
-            const n = t.getDecorationRange(s)
-            return n && n.intersectRanges(e)
+      const model = this.editor.getModel()
+      return model
+        ? this.mainGhostTextWidget.value.ghostTextDecorations.some((decorationId) => {
+            const decorationRange = model.getDecorationRange(decorationId)
+            return decorationRange && decorationRange.intersectRanges(e)
           })
         : false
     }
     r() {
-      if (!this.a.hasModel()) return
-      const e = this.a.getModel(),
-        t = this.a.getSelection()
-      if (t.isEmpty()) {
-        const { lineNumber: s, column: n } = t.getPosition(),
-          r = e.getLineContent(s)
-        if (r.length === 0) return
-        if (n === 1) {
-          if (/\s/.test(r[0])) return
-        } else if (n === e.getLineMaxColumn(s)) {
-          if (/\s/.test(r[r.length - 1])) return
-        } else if (/\s/.test(r[n - 2]) && /\s/.test(r[n - 1])) return
+      if (!this.editor.hasModel()) return
+      const model = this.editor.getModel(),
+        selection = this.editor.getSelection()
+      if (selection.isEmpty()) {
+        const { lineNumber, column } = selection.getPosition(),
+          lineContent = model.getLineContent(lineNumber)
+        if (lineContent.length === 0) return
+        if (column === 1) {
+          if (/\s/.test(lineContent[0])) return
+        } else if (column === model.getLineMaxColumn(lineNumber)) {
+          if (/\s/.test(lineContent[lineContent.length - 1])) return
+        } else if (/\s/.test(lineContent[column - 2]) && /\s/.test(lineContent[column - 1])) return
       }
-      return t
+      return selection
     }
     s(e) {
       return e.startLineNumber !== e.endLineNumber
     }
     refreshAdditionalWidgets() {
-      for (const e of this.c) e.value.dispose()
-      this.c = []
-      for (const e of this.q.nonPersistentStorage.cppState
+      for (const widget of this.additionalGhostTexts) widget.value.dispose()
+      this.c = []; this.additionalGhostTexts = this.c;
+      for (const suggestion of this.reactiveStorageService.nonPersistentStorage.cppState
         ?.additionalSuggestions || []) {
-        const t = new so(() => {
-          const s = this.D(this.n.createInstance(iQe, this.a))
-          return this.D(s.onClick((n) => {})), s
+        const widget = new so(() => {
+          const ghostTextWidget = this.D(this.instantiationService.createInstance(GhostTextWidget, this.editor))
+          return this.D(ghostTextWidget.onClick((n) => {})), ghostTextWidget
         })
-        this.c.push(t),
-          t.value.update(e, {
-            avoidEditorWideRemovals: e !== undefined,
+        this.additionalGhostTexts.push(widget),
+          widget.value.update(suggestion, {
+            avoidEditorWideRemovals: suggestion !== undefined,
             forceDiffBox: true,
           })
       }
     }
     update() {
-      const e = this.q.nonPersistentStorage.cppState?.suggestion
-      if (this.j) return
-      const t = this.a.getPosition()
-      if (t !== null && e !== undefined && e.source !== CppIntent.CursorPrediction) {
-        const s = this.a.getModel()?.getDecorationRange(e.decorationId)
-        if (s == null) return
+      const suggestion = this.reactiveStorageService.nonPersistentStorage.cppState?.suggestion
+      if (this.j) return // this.j => this.updating
+      const range = this.editor.getPosition()
+      if (range !== null && suggestion !== undefined && suggestion.source !== CppIntent.CursorPrediction) {
+        const decorationRange = this.editor.getModel()?.getDecorationRange(suggestion.decorationId)
+        if (decorationRange == null) return
         if (
-          t.lineNumber < e.startingSuggestionRange.startLineNumber ||
-          t.lineNumber > s.endLineNumber
+          range.lineNumber < suggestion.startingSuggestionRange.startLineNumber ||
+          range.lineNumber > decorationRange.endLineNumber
         ) {
           console.log(
             "[Cpp] Bad Case: Cursor is not in the range of the suggestion",
@@ -1712,55 +1818,56 @@ export function createCppWidget(params) {
           return
         }
       }
-      this.j = true
+      this.j = true // this.j => this.updating
       try {
-        this.b.value.update(e, { changesSinceLastUpdate: this.m })
-      } catch (s) {
-        console.error("[Cpp] Error updating ghost text", s)
+        this.mainGhostTextWidget.value.update(suggestion, { changesSinceLastUpdate: this.m })
+      } catch (error) {
+        console.error("[Cpp] Error updating ghost text", error)
       } finally {
-        ;(this.j = false), e !== undefined && (this.m = false)
+        // this.j => this.updating
+        ;(this.j = false), suggestion !== undefined && (this.m = false) // this.m => this.hasChanges
       }
-      if (this.c.length > 0) {
-        let s
-        if (e !== undefined) {
-          const n =
-            this.a.getModel()?.getDecorationRange(e.decorationId) ?? undefined
-          n &&
-            (s = new G(
-              Math.max(n.startLineNumber - 2, 1),
-              n.startColumn,
+      if (this.additionalGhostTexts.length > 0) {
+        let visibleRange
+        if (suggestion !== undefined) {
+          const mainRange =
+            this.editor.getModel()?.getDecorationRange(suggestion.decorationId) ?? undefined
+          mainRange &&
+            (visibleRange = new G(
+              Math.max(mainRange.startLineNumber - 2, 1),
+              mainRange.startColumn,
               Math.min(
-                n.endLineNumber + 2,
-                this.a.getModel()?.getLineCount() ?? 1,
+                mainRange.endLineNumber + 2,
+                this.editor.getModel()?.getLineCount() ?? 1,
               ),
-              n.endColumn,
+              mainRange.endColumn,
             ))
         }
-        for (let n = this.c.length - 1; n >= 0; n--) {
-          const r = this.q.nonPersistentStorage.cppState?.additionalSuggestions[n]
+        for (let i = this.additionalGhostTexts.length - 1; i >= 0; i--) {
+          const additionalSuggestion = this.reactiveStorageService.nonPersistentStorage.cppState?.additionalSuggestions[i]
           ;(() => {
-            if (s !== undefined && r !== undefined) {
-              const a = this.a.getModel()?.getDecorationRange(r.decorationId)
-              return !a || !s || !s.intersectRanges(a)
+            if (visibleRange !== undefined && additionalSuggestion !== undefined) {
+              const suggestionRange = this.editor.getModel()?.getDecorationRange(additionalSuggestion.decorationId)
+              return !suggestionRange || !visibleRange || !visibleRange.intersectRanges(suggestionRange)
             }
             return true
           })()
-            ? this.c[n].value.updatePosition(r)
-            : (this.c[n].value.dispose(), this.c.splice(n, 1))
+            ? this.additionalGhostTexts[i].value.updatePosition(additionalSuggestion)
+            : (this.additionalGhostTexts[i].value.dispose(), this.additionalGhostTexts.splice(i, 1))
         }
       }
     }
     updatePositions() {
-      for (let e = 0; e < this.c.length; e++)
-        this.c[e].value.updatePosition(
-          this.q.nonPersistentStorage.cppState?.additionalSuggestions[e],
+      for (let i = 0; i < this.additionalGhostTexts.length; i++)
+        this.additionalGhostTexts[i].value.updatePosition(
+          this.reactiveStorageService.nonPersistentStorage.cppState?.additionalSuggestions[i],
         )
     }
-    setChangesSinceLastUpdate(e) {
-      this.m = e
+    setChangesSinceLastUpdate(hasChanges) {
+      this.m = hasChanges // this.m => this.hasChanges
     }
   }
-  ;(GhostTextController = GBt = __decorate([__param(1, Ce), __param(2, Z), __param(3, ei)], GhostTextController)),
+  ;(GhostTextController = GBt = __decorate([__param(1, contextKeyService), __param(2, instantiationService), __param(3, reactiveStorageService)], GhostTextController)),
     Tn(GhostTextController.ID, GhostTextController, 3);
 
   return {
