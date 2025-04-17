@@ -478,7 +478,7 @@ export function createProtoBuf() {
             case "=":
               n = 0
             case `
-  `:
+`:
             case "\r":
             case "	":
             case " ":

@@ -1001,7 +1001,7 @@ export function createAIServiceSet(params) {
               y.originalRange.endLineNumberExclusive - 1,
             )
           ;(a = this.P(w, y.diff).join(`
-  `)),
+`)),
             (l = o.object.textEditorModel.getValue()),
             (h = await this.X(e, l, a))
         } else {
@@ -1126,9 +1126,9 @@ export function createAIServiceSet(params) {
         },
         a = (u, d) => u.trim().startsWith(d),
         l = e.split(`
-  `),
+`),
         c = t.getValue().split(`
-  `),
+`),
         h = s.lints
           .map((u) => {
             const d = l[u.startLineNumberOneIndexed - 1]
@@ -1355,7 +1355,7 @@ export function createAIServiceSet(params) {
         ? r
             .map((a) => {
               const l = a.value.split(`
-  `)
+`)
               return l
                 .map((h, u) =>
                   u < l.length - 1
@@ -1363,7 +1363,7 @@ export function createAIServiceSet(params) {
                         { value: h, added: a.added, removed: a.removed },
                         {
                           value: `
-  `,
+`,
                           added: a.added,
                           removed: a.removed,
                         },
@@ -1423,7 +1423,7 @@ export function createAIServiceSet(params) {
             r - 1,
             a - r + 1,
             ...(h + n + d).split(`
-  `),
+`),
           )
     } catch (s) {
       throw s
@@ -1431,11 +1431,11 @@ export function createAIServiceSet(params) {
   }
   function DKi(i, e) {
     const t = i.split(`
-  `)
+`)
     return (
       tYn(t, e, { noNeedToMakeSureLinesAreLines: !0 }),
       t.join(`
-  `)
+`)
     )
   }
   var iYn = "cursorhashversionC7wtBsDmlFaPg4ToTvIlm"
@@ -1463,13 +1463,13 @@ export function createAIServiceSet(params) {
       else if (!c.removed) break
     const o = r
       ? n.split(`
-  `).length
+`).length
       : 0
     let a = 1,
       l = 1
     for (const c of i) {
       const h = c.value.split(`
-  `),
+`),
         u = a + h.length - 1,
         d = h.length > 1 ? h[h.length - 1].length + 1 : l + c.value.length
       if (c.added === !0) {
@@ -1764,7 +1764,7 @@ export function createAIServiceSet(params) {
         const t = this.n.getDecorationRange(this.a)
         if (!t) return
         const s = e.split(`
-  `),
+`),
           n = s.at(-1)
         if (n === void 0) return
         const r = n.length,
@@ -1805,7 +1805,7 @@ export function createAIServiceSet(params) {
           r = []
         for (const o of e) {
           const a = o.value.split(`
-  `),
+`),
             l = s + a.length - 1,
             c = a.length > 1 ? a[a.length - 1].length + 1 : n + o.value.length
           o.added === !0
@@ -3311,7 +3311,7 @@ export function createAIServiceSet(params) {
         }
         const n = {},
           r = e.split(`
-  `)
+`)
         let o = n,
           a = null,
           l = ""
@@ -3336,10 +3336,10 @@ export function createAIServiceSet(params) {
                 for (; !r[++h].trim().endsWith('"'); )
                   p +=
                     `
-  ` + r[h]
+` + r[h]
                 p +=
                   `
-  ` + r[h].trim()
+` + r[h].trim()
               }
               if (p.startsWith("{") && !p.endsWith("}")) {
                 for (; !r[++h].trim().endsWith("}"); ) p += r[h]
@@ -3576,7 +3576,7 @@ export function createAIServiceSet(params) {
                   )
                   const m = g.object.textEditorModel.getValue()
                   return m.split(`
-  `).length > vYn
+`).length > vYn
                     ? void 0
                     : new mVe({ relativeWorkspacePath: d, contents: m })
                 } catch (p) {
@@ -3595,7 +3595,7 @@ export function createAIServiceSet(params) {
             (u.push(d),
             (h +=
               d.contents.split(`
-  `).length / bYn),
+`).length / bYn),
             h > mYn)
           )
             break
@@ -3650,7 +3650,7 @@ export function createAIServiceSet(params) {
                 .filter((u) => !u.isSignature)
                 .sort((u, d) => u.lineNumber - d.lineNumber)
                 .map((u) => u.text).join(`
-  `)
+`)
               a.includes(h) && s.push(c.context)
             }
           } catch (o) {
@@ -3985,7 +3985,7 @@ export function createAIServiceSet(params) {
         n !== void 0 &&
           (r += `${n}
 
-  `)
+`)
         let o
         try {
           o = this._workspaceContextService.asRelativePath(t.uri)
@@ -4147,7 +4147,7 @@ export function createAIServiceSet(params) {
                 n.attachedCodeChunks.forEach((o) => {
                   const { relativeWorkspacePath: a, contentsAreMissing: l } = o,
                     c = o.lines.join(`
-  `)
+`)
                   !t.has(a) &&
                     this.codeChunkHasFullFileIntent(o) &&
                     !l &&
@@ -4170,7 +4170,7 @@ export function createAIServiceSet(params) {
                         if (h === void 0 || h.messageIndex >= r) return
                         const { content: u } = h,
                           d = l.lines.join(`
-  `),
+`),
                           g = o.find(
                             (w) =>
                               w.relativeWorkspacePath === l.relativeWorkspacePath,
@@ -4253,9 +4253,9 @@ export function createAIServiceSet(params) {
                   relativeWorkspacePath:
                     this._workspaceContextService.asRelativePath(h.uri),
                   contentBefore: u?.join(`
-  `),
+`),
                   contentAfter: d?.join(`
-  `),
+`),
                   generationUuid: h.latestApplyGenerationUUID,
                   version: h.version,
                 }
@@ -5087,7 +5087,7 @@ export function createAIServiceSet(params) {
       }
       addContinuationPromptToConversation(e, t, s) {
         const n = t.text.split(`
-  `),
+`),
           r = n[n.length - 1] || "",
           o = r.trim()
             ? `Continue writing exactly where you left off. Do not repeat yourself. Start your response with: ${r}`
@@ -5102,10 +5102,10 @@ export function createAIServiceSet(params) {
           l = t.text
             .split(
               `
-  `,
+`,
             )
             .slice(0, -1).join(`
-  `)
+`)
         return (
           this._composerDataService.updateComposerDataSetStore(s, (c) =>
             c("conversation", (h) => h.bubbleId === t.bubbleId, "text", l),
@@ -5507,7 +5507,7 @@ export function createAIServiceSet(params) {
             const c = e
                 .split(
                   `
-  `,
+`,
                 )
                 .slice(
                   l.original.startLineNumber - 1,
@@ -5517,7 +5517,7 @@ export function createAIServiceSet(params) {
               h = t
                 .split(
                   `
-  `,
+`,
                 )
                 .slice(
                   l.modified.startLineNumber - 1,
@@ -5526,7 +5526,7 @@ export function createAIServiceSet(params) {
                 .map((u) => "+ " + u)
             return new wVe({
               diffString: [...c, ...h].join(`
-  `),
+`),
               oldStart: l.original.startLineNumber,
               newStart: l.modified.startLineNumber,
               oldLines:
@@ -5557,13 +5557,13 @@ export function createAIServiceSet(params) {
           const n = await s9e(
               Array.isArray(e)
                 ? e.join(`
-  `)
+`)
                 : e,
             ),
             r = await s9e(
               Array.isArray(t)
                 ? t.join(`
-  `)
+`)
                 : t,
             ),
             o = JSON.stringify({ firstSha1: n, secondSha1: r }),
@@ -5573,11 +5573,11 @@ export function createAIServiceSet(params) {
             Array.isArray(e)
               ? e
               : e.split(`
-  `),
+`),
             Array.isArray(t)
               ? t
               : t.split(`
-  `),
+`),
             s,
           )
           return this._composerDiffCache.set(o, l), l
@@ -5590,7 +5590,7 @@ export function createAIServiceSet(params) {
         const r = n
           .split(
             `
-  `,
+`,
           )
           .slice(e.newStart + e.newLines - 1, t.newStart - 1)
           .map((o) => "  " + o)
@@ -5599,13 +5599,13 @@ export function createAIServiceSet(params) {
             e.diffString +
             (r.length > 0
               ? `
-  ` +
+` +
                 r.join(`
-  `) +
+`) +
                 `
-  `
+`
               : `
-  `) +
+`) +
             t.diffString,
           oldStart: e.oldStart,
           newStart: e.newStart,
@@ -5617,9 +5617,9 @@ export function createAIServiceSet(params) {
       }
       growChunk(e, t, s) {
         const n = t.split(`
-  `),
+`),
           r = s.split(`
-  `),
+`),
           o = Math.max(1, e.newStart - TYe),
           a = Math.min(r.length + 1, e.newStart + e.newLines + TYe),
           l = Math.max(1, e.oldStart - TYe),
@@ -5627,10 +5627,10 @@ export function createAIServiceSet(params) {
           h = r.slice(o - 1, e.newStart - 1).map((g) => "  " + g),
           u = r.slice(e.newStart + e.newLines - 1, a - 1).map((g) => "  " + g),
           d = e.diffString.split(`
-  `)
+`)
         return new wVe({
           diffString: [...h, ...d, ...u].join(`
-  `),
+`),
           oldStart: l,
           newStart: o,
           oldLines: c - l,
@@ -5661,7 +5661,7 @@ export function createAIServiceSet(params) {
               (l ? "\u2514\u2500\u2500 " : "\u251C\u2500\u2500 ") +
               c.name +
               `
-  `
+`
             if (c.isDirectory && c.children) {
               const d = c.children.sort((g, p) =>
                 g.isDirectory === p.isDirectory
@@ -5709,7 +5709,7 @@ export function createAIServiceSet(params) {
               (g ? "\u2514\u2500\u2500 " : "\u251C\u2500\u2500 ") +
               p.name +
               `
-  `
+`
             if (u > 0 && p.isDirectory && p.children) {
               const y = p.children.sort((w, C) =>
                 w.isDirectory === C.isDirectory
@@ -5771,9 +5771,9 @@ export function createAIServiceSet(params) {
         const o = (
             await new eYn().diffLines(
               t.join(`
-  `),
+`),
               e.join(`
-  `),
+`),
               !1,
               { ignoreWhitespace: !0 },
             )
@@ -5781,7 +5781,7 @@ export function createAIServiceSet(params) {
             g.value
               .split(
                 `
-  `,
+`,
               )
               .map((p) => ({ added: g.added, removed: g.removed, value: p })),
           ),
@@ -6171,10 +6171,10 @@ export function createAIServiceSet(params) {
                   o = this.getCodeBlockNewModelLines(e, n.uri, n.version),
                   a =
                     r?.join(`
-  `) ?? "",
+`) ?? "",
                   l =
                     o?.join(`
-  `) ?? ""
+`) ?? ""
                 return {
                   original: {
                     resource: n.uri.with({ fragment: "original" }),

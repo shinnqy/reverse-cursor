@@ -465,13 +465,13 @@ export function createUI2(params) {
         p = a
           .split(
             `
-  `,
+`,
           )
           .slice(1, -1),
         m = p.length > n,
         b = e.modelService.createModel(
           p.join(`
-  `),
+`),
           d,
           g,
           !1,
@@ -4185,7 +4185,7 @@ export function createUI2(params) {
         (a = d.toString().length)
     }
     const c = i.innerText.substring(0, a + 1).includes(`
-  `),
+`),
       h = i.innerText.trim() === ""
     return r <= o && (!c || h)
   }
@@ -4207,7 +4207,7 @@ export function createUI2(params) {
         (a = d.toString().length)
     }
     const c = i.innerText.substring(a).includes(`
-  `),
+`),
       h = i.innerText.trim() === ""
     return r <= o && (!c || h)
   }
@@ -4416,7 +4416,7 @@ export function createUI2(params) {
             t.reactiveStorageService.nonPersistentStorage.lastCopy.text === h &&
             h !== void 0 &&
             h.includes(`
-  `) &&
+`) &&
             !i.disableSelectionCopyPaste
           ) {
             c.preventDefault()
@@ -4954,7 +4954,7 @@ export function createUI2(params) {
       ])
     } else {
       const t = e.split(`
-  `),
+`),
         s = document.createDocumentFragment()
       t.forEach((n, r) => {
         const o = document.createElement("span")
@@ -5223,7 +5223,7 @@ export function createUI2(params) {
                         endLineNumber: C,
                         endColumn: b.getLineMaxColumn(C),
                       }).split(`
-  `),
+`),
                       x = Math.floor(S.length / 2)
                     for (let k = 0; k < S.length; k++) {
                       let E = x

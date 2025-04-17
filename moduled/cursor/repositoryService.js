@@ -282,7 +282,7 @@ export function createRepositoryService(params) {
         for (const [g, p] of h
           .split(
             `
-  `,
+`,
           )
           .entries())
           u.push({
@@ -316,7 +316,7 @@ export function createRepositoryService(params) {
                 for (const [S, x] of b
                   .split(
                     `
-  `,
+`,
                   )
                   .entries())
                   u.push({
@@ -335,10 +335,10 @@ export function createRepositoryService(params) {
               w ? (C = w[0]) : (C = ""),
                 (g +=
                   `
-  ` +
+` +
                   C +
                   `...
-  ` +
+` +
                   b),
                 u.push({ lineNumber: y - 0.5, text: C + "...", isSignature: !0 })
             }
