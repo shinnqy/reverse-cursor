@@ -1,113 +1,7 @@
 // @ts-check
 
 export function createCppWidget(params) {
-  const { V, CYe, FFt, KS, oR, N, zT, Ye, f_, g_, p_, G: Range, q, W: createElement, Yy, U: URI, hu, __decorate, __param, Pt, ve, Z: instantiationService, ei: reactiveStorageService, si, qi, Hi, Ds, Ce: contextKeyService, Me, DKi, eI, ge, R, rt, Jl, pl, Ic, a0, oT: StringBuilder, f3, b4, np, K3: renderLine, J3: RenderLineInput, B4, bf, _v, OFt: calculateGreenRanges, CppIntent, k7, f: getMessage, ss: getWindow, aiFeatureStatusService, ue, cppService, st, cursorPredictionService, importPredictionService, Ai, Jon, Zt, so, me, Tn, Fcr: calculateInlineChanges, computeDiffs } = params;
-
-  // var Acr = new CYe()
-  // function WBt(i, e, t) {
-  //   return i.length > 2e3 || e.length > 2e3
-  //     ? (console.error(
-  //         "BAD BAD BAD BAD BAD. THIS SHOULD NOT HAPPEN. PLEASE FIX THE CPP BUG. diffChars received strings that were too long. Returning the trivial diff.",
-  //         i.length,
-  //         e.length,
-  //       ),
-  //       [
-  //         { value: i, removed: true },
-  //         { value: e, added: true },
-  //       ])
-  //     : Acr.diff(i, e, t)
-  // }
-  // function Mcr(i) {
-  //   let e = "",
-  //     t = "",
-  //     s = "",
-  //     n = 0
-  //   const r = [],
-  //     o = [],
-  //     a = (l) => {
-  //       let c = s.split(`
-  // `),
-  //         h =
-  //           e.split(`
-  // `).length - 1
-  //       if (
-  //         l !== "" &&
-  //         !l.startsWith(`
-  // `) &&
-  //         c.length > 0
-  //       ) {
-  //         const u = c.pop()
-  //         let d
-  //         c.length > 0
-  //           ? (d = 1)
-  //           : (d =
-  //               (e
-  //                 .split(
-  //                   `
-  // `,
-  //                 )
-  //                 .at(-1)?.length ?? 0) + 1),
-  //           u !== undefined &&
-  //             u !== "" &&
-  //             r.push({ lineNumber: h, column: d, value: u }),
-  //           (h -= 1)
-  //       } else {
-  //         const u = c.shift()
-  //         if (u !== undefined && u !== "") {
-  //           const g =
-  //             e
-  //               .split(
-  //                 `
-  // `,
-  //               )
-  //               .at(-1)?.length ?? 0
-  //           r.push({ lineNumber: h, column: g + 1, value: u })
-  //         }
-  //       }
-  //       if (c.length > 0)
-  //         for (const u of c)
-  //           o.push({
-  //             beforeLineNumber: h,
-  //             indexInMultilineAddition: n++,
-  //             value: u,
-  //           })
-  //     }
-  //   for (const l of i)
-  //     l.added
-  //       ? (s += l.value)
-  //       : (s !== "" && (a(l.value), (t += s), (s = "")),
-  //         (e += l.value),
-  //         (t += l.value))
-  //   return s !== "" && a(""), { inlineModifications: r, fullLineModifications: o }
-  // }
-  // function $cr(i, e) {
-  //   return !!(
-  //     i.fullLineModifications.some((s) => s.beforeLineNumber < e.lineNumber) ||
-  //     i.inlineModifications
-  //       .filter((s) => s.lineNumber === e.lineNumber)
-  //       .some((s) => s.startColumn < e.column)
-  //   )
-  // }
-  // function Fcr(i, e, t, s, n) {
-  //   const { inlineModifications: r, fullLineModifications: o } = Mcr(i),
-  //     a = []
-  //   for (const c of o)
-  //     a.push({
-  //       beforeLineNumber: c.beforeLineNumber + e,
-  //       indexInMultilineAddition: c.indexInMultilineAddition,
-  //       content: c.value,
-  //       decorations: [new KS(1, c.value.length + 1, "ghost-text", 0)],
-  //     })
-  //   const l = r.map((c) => ({
-  //     lineNumber: c.lineNumber + e,
-  //     startColumn: c.column,
-  //     newValue: c.value,
-  //     oldValue: "",
-  //   }))
-  //   return $cr({ inlineModifications: l, fullLineModifications: a }, t)
-  //     ? { success: false, inlineModifications: l, fullLineModifications: a }
-  //     : { success: true, inlineModifications: l, fullLineModifications: a }
-  // }
+  const { V, oR, N, zT, Ye, f_, g_, p_, G: Range, q, W: createElement, Yy, U: URI, hu, __decorate, __param, Pt, ve, Z: instantiationService, ei: reactiveStorageService, si, qi, Hi, Ds, Ce: contextKeyService, Me, DKi, eI, ge, R, rt, Jl, pl, Ic, a0, oT: StringBuilder, f3, b4, np, K3: renderLine, J3: RenderLineInput, B4, bf, _v, OFt: calculateGreenRanges, CppIntent, SUGGESTION_DISPLAY_TYPE, f: getMessage, ss: getWindow, aiFeatureStatusService, ue, cppService, st, cursorPredictionService, importPredictionService, Ai, Jon, Zt, so, me, Tn, calculateInlineChanges, computeDiffs } = params;
 
   var qBt,
     Wcr = 10
@@ -1376,7 +1270,7 @@ export function createCppWidget(params) {
         )
         if (!success)
           this.showChangesOnTheRightAndMaybeShowReds(wordChanges, editorModel, eol, decorationRange, updateInfo),
-            this.cppService.setSuggestionType(decorationId, k7.PreviewBox)
+            this.cppService.setSuggestionType(decorationId, SUGGESTION_DISPLAY_TYPE.PreviewBox)
         else {
           if (inlineModifications) {
             let lineWidthChanges = {}
@@ -1388,11 +1282,11 @@ export function createCppWidget(params) {
             this.cursorPredictionService.updateHintLineWidgetMarginLeft(lineWidthChanges)
           }
           ;((fullLineModifications && fullLineModifications.length > 0) || (inlineModifications && inlineModifications.length > 0)) &&
-            this.cppService.setSuggestionType(decorationId, k7.GhostText)
+            this.cppService.setSuggestionType(decorationId, SUGGESTION_DISPLAY_TYPE.GhostText)
         }
       } else
         this.showChangesOnTheRightAndMaybeShowReds(wordChanges, editorModel, eol, decorationRange, updateInfo),
-          this.cppService.setSuggestionType(decorationId, k7.PreviewBox)
+          this.cppService.setSuggestionType(decorationId, SUGGESTION_DISPLAY_TYPE.PreviewBox)
     }
     update(suggestion, options) {
       options?.avoidEditorWideRemovals !== true && this.removeAllInEditorNotModel()
