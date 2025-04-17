@@ -1,7 +1,7 @@
 // @ts-check
 
 export function createCppBadHeuristics(params) {
-  const {replaceTextInRange, ZXe, VB, generateModifiedText, EditHistoryDiffFormatter} = params;
+  const {replaceTextInRange, computeDiffs, VB, generateModifiedText, EditHistoryDiffFormatter} = params;
 
   const adi = class {
     constructor(applicationStorage, fileSystem, commandRunner) {
@@ -25,7 +25,7 @@ export function createCppBadHeuristics(params) {
             endLineNumber: startingRange.endLineNumberInclusive,
             endColumn: startingRange.endColumn,
           }),
-          { charDiffs: charDiffs } = ZXe(oldText, modelOutputText, eol)
+          { charDiffs: charDiffs } = computeDiffs(oldText, modelOutputText, eol)
         let isWhitespaceOnly = true
         for (const diff of charDiffs)
           if ((diff.added === true || diff.removed === true) && diff.value.trim() !== "") {
