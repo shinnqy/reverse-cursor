@@ -2,7 +2,7 @@
 
 // 245900
 export function createAIServiceSet(params) {
-  const {Re, V, Ve, __decorate, DiffAlgorithm, __param, _, bt: window, mUe, ms, U, IMi, ue, it, Ls, fr, LRUCache, Yt, va, rt, extUri, J, Es, GJ, nm, Ze, Y1t, OP, Qc, Ri, gVe, _B, pVe, _n, Lg, Xt, everythingProviderService, st, Ci, hw, ei, aiFeatureStatusService, oy, ve, si, mo, nt, $h, x5, mergeOptions, xFt, fz, G, yi, nl, Z, ize, wn, Va, N1, SN, am, Br, fn, v, Qm, Tgn, gt, fu, Me, ce, oi, Ti, cursorCredsService, T1, le, co, R, cF, vm, ResourceMap, V1t, y$i, M_, jB, fs, v$i, mVe, tK, Md, selectedContextService, Wr, Xn, Vu, ss, Ioe, UE, PSt, ls, jt, Mae, Ha, dC, $I, ev, _T, N$, s9e, bn, BMi, hk, iG, L1, Zc, FMi, HC, QWe, uNn, __addDisposableResource, gl, __disposeResources, JJ, lG, wVe, wJi, eoe, j9i, J9, Qb, At, Na, g2, Ll, lU, tqe, op, oTi, wf, et, DEt, $Bi, FBi, yNn, gNn, $ae, bNn, RBi, SNn, wNn, FT, un, Sg, Toe, WB, rc, ft, zi, Zi, mI, Cp, YC, Y$, cppEventLoggerService, a7, KNi, pt, bi, B_, eg, An, lb, fP, Pa, Ft, Hi, Sk, ZR, qi, Fo, R1, Pt, Ks, gze, ZUi, rU, Ag, uP, cv, Oc, uc, jM, UUi, HUi, Ht, cppService, es, ua, lv, u0, cl, Vo, wYe, bY, Ac, pKi, NI, p0, Gi, ko, Wi, SKi, uEt, Ce, Vr, H4i, pFt, qv, cursorPredictionService, nPt, importPredictionService, _c, g0, m2, c5, yYe, dEt, Qi, yc, DR, ZJ, fEt, Tk, Ck, _C, f5, vk, Pl, Xp, RHe, jIi, I, Ct } = params;
+  const {Re, V, Ve, __decorate, DiffAlgorithm, __param, _, bt: window, mUe, ms, U, IMi, ue, it, Ls, fr, LRUCache, Yt, va, rt, extUri, J, Es, GJ, nm, Ze, Y1t, OP, Qc, Ri, gVe, _B, pVe, _n, Lg, Xt, everythingProviderService, st, Ci, hw, ei, aiFeatureStatusService, oy, ve, si, mo, nt, $h, x5, mergeOptions, xFt, fz, G, yi, nl, Z: instantiationService, ize, wn, Va, N1, SN, am, Br, fn, v, Qm, Tgn, gt, fu, Me, ce, oi, Ti, cursorCredsService, T1, le, co, R, cF, vm, ResourceMap, V1t, y$i, M_, jB, fs, v$i, mVe, tK, Md, selectedContextService, Wr, Xn, Vu, ss: getServerDocument, Ioe, UE, PSt, ls, jt, Mae, Ha, dC, $I, ev, _T, N$, s9e, bn, BMi, hk, iG, L1, Zc, FMi, HC, QWe, uNn, __addDisposableResource, gl, __disposeResources, JJ, lG, wVe, wJi, eoe, j9i, J9, Qb, At, Na, g2, Ll, lU, tqe, op, oTi, wf, et, DEt, $Bi, FBi, yNn, gNn, $ae, bNn, RBi, SNn, wNn, FT, un, Sg, Toe, WB, rc, ft, zi, Zi, mI, Cp, YC, Y$, cppEventLoggerService, a7, KNi, pt, bi, B_, eg, An, lb, fP, Pa, Ft, Hi, Sk, ZR, qi, Fo, R1, Pt, Ks, gze, ZUi, rU, Ag, uP, cv, Oc, uc, jM, UUi, HUi, Ht, cppService, es, ua, lv, u0, cl, Vo, wYe, bY, Ac, pKi, NI, p0, Gi, ko, Wi, SKi, uEt, Ce, Vr, H4i, pFt, qv, cursorPredictionService, nPt, importPredictionService, _c, g0, m2, c5, yYe, dEt, Qi, yc, DR, ZJ, fEt, Tk, Ck, _C, f5, vk, Pl, Xp, RHe: mountComponent, jIi: createSolidComponent, I: createContextProvider, Ct: getCurrentWindow } = params;
 
   var vY = Re("interpreterService"),
     metricsService = Re("metricsService"),
@@ -66,7 +66,7 @@ export function createAIServiceSet(params) {
     }
   Ve(metricsService, MetricsService, 1)
   var diffingService = Re("diffingService"),
-    ZKn = class extends V {
+    DiffingService = class extends V {
       constructor() {
         super(), (this.a = undefined)
       }
@@ -88,9 +88,9 @@ export function createAIServiceSet(params) {
         this.a = undefined
       }
     }
-  Ve(diffingService, ZKn, 1)
-  var hF = new Map()
-  function RFt() {
+  Ve(diffingService, DiffingService, 1)
+  var portalCache = new Map()
+  function createPortalContainer() {
     const i = document.createElement("div")
     return (
       (i.style.position = "absolute"),
@@ -1917,7 +1917,7 @@ export function createAIServiceSet(params) {
         return this.a.createInstance(BFt, e, t, s, n)
       }
     }
-  ;(UFt = __decorate([__param(0, Z)], UFt)), Ve(_Ft, UFt, 1)
+  ;(UFt = __decorate([__param(0, instantiationService)], UFt)), Ve(_Ft, UFt, 1)
   var HFt = Re("aiWebCmdKService"),
     VFt = class extends V {
       constructor(e, t, s, n, r, o, a, l) {
@@ -2419,7 +2419,7 @@ export function createAIServiceSet(params) {
       __param(5, ve),
       __param(6, cursorCredsService),
       __param(7, T1),
-      __param(8, Z),
+      __param(8, instantiationService),
     ],
     jFt,
   )),
@@ -3369,7 +3369,7 @@ export function createAIServiceSet(params) {
     }
   ;(XFt = __decorate(
     [
-      __param(0, Z),
+      __param(0, instantiationService),
       __param(1, yi),
       __param(2, nt),
       __param(3, Br),
@@ -3702,7 +3702,7 @@ export function createAIServiceSet(params) {
       return true
     })
   }
-  var due = () => window.vscodeWindowId !== ss()?.vscodeWindowId,
+  var isServerSide = () => window.vscodeWindowId !== getServerDocument()?.vscodeWindowId,
     yYn = async (i) => {
       const e = await i.getInstalled()
       for (const t of e) if (t.identifier.id === "vscodevim.vim") return true
@@ -3849,8 +3849,8 @@ export function createAIServiceSet(params) {
   var zKi = { shouldGracefullyFallBackOnTimeout: true },
     EYn = 5,
     TYe = 2,
-    q1 = Re("composerUtilsService"),
-    Xa = class extends V {
+    composerUtilsService = Re("composerUtilsService"),
+    ComposerUtilsService = class extends V {
       constructor(e, t, s, n, r, o, a, l, c, h, u, d, g, p, m, b, y, w) {
         super(),
           (this._composerDataService = e),
@@ -6258,257 +6258,257 @@ export function createAIServiceSet(params) {
     }
   __decorate(
     [At("ComposerUtilsService.ensureCapabilitiesAreLoaded")],
-    Xa.prototype,
+    ComposerUtilsService.prototype,
     "ensureCapabilitiesAreLoaded",
     null,
   ),
     __decorate(
       [At("ComposerUtilsService.getShouldChatUseTools")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "getShouldChatUseTools",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.getShouldAutoSaveAgenticEdits")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "getShouldAutoSaveAgenticEdits",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.replacedBubbleForFastEdit")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "replacedBubbleForFastEdit",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.processConversationForFastEdit")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "processConversationForFastEdit",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.populateCodeChunksInConversation")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "populateCodeChunksInConversation",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.populateRedDiffsInConversation")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "populateRedDiffsInConversation",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.getRecentEdits")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "getRecentEdits",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.getRecentlyViewedFileInfo")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "getRecentlyViewedFileInfo",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.handleStreamComposer")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "handleStreamComposer",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.intermediateChunkMiddleware")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "intermediateChunkMiddleware",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.getAutoContextFiles")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "getAutoContextFiles",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.readFileContents")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "readFileContents",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.populateConversationWithExtraContext")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "populateConversationWithExtraContext",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.addContinuationPromptToConversation")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "addContinuationPromptToConversation",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.getUrisForCheckpoints")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "getUrisForCheckpoints",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.createCurrentCheckpoint")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "createCurrentCheckpoint",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.getCodeBlockDataFromBubbleId")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "getCodeBlockDataFromBubbleId",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.removeMessagesAfterBubble")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "removeMessagesAfterBubble",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.runCapabilitiesForProcess")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "runCapabilitiesForProcess",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.selectNextComposer")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "selectNextComposer",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.selectPrevComposer")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "selectPrevComposer",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.selectNextComposerChat")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "selectNextComposerChat",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.selectPrevComposerChat")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "selectPrevComposerChat",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.computeDiff")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "computeDiff",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.growChunk")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "growChunk",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.getRootFolderFileTreeWithDistance")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "getRootFolderFileTreeWithDistance",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.getGitIgnoreFile")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "getGitIgnoreFile",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.initializeGitIgnoreFile")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "initializeGitIgnoreFile",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.getFileDiff")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "getFileDiff",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.shouldShowCancel")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "shouldShowCancel",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.changeCodeBlockUri")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "changeCodeBlockUri",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.getFilesToRevertForCheckpoint")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "getFilesToRevertForCheckpoint",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.isCheckpointSameAsCurrent")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "isCheckpointSameAsCurrent",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.areContentsEqual")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "areContentsEqual",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.computeLineDiffs")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "computeLineDiffs",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.getCodeBlockLinesByDiff")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "getCodeBlockLinesByDiff",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.getCodeBlockV0ModelLines")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "getCodeBlockV0ModelLines",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.getCodeBlockOriginalModelLines")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "getCodeBlockOriginalModelLines",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.getCodeBlockNewModelLines")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "getCodeBlockNewModelLines",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.constructDiffResources")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "constructDiffResources",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.addHumanMessageBeforeAiBubble")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "addHumanMessageBeforeAiBubble",
       null,
     ),
-    (Xa = __decorate(
+    (ComposerUtilsService = __decorate(
       [
         __param(0, Na),
         __param(1, Br),
@@ -6525,13 +6525,13 @@ export function createAIServiceSet(params) {
         __param(12, g2),
         __param(13, Ll),
         __param(14, aiFeatureStatusService),
-        __param(15, Z),
+        __param(15, instantiationService),
         __param(16, st),
         __param(17, lU),
       ],
-      Xa,
+      ComposerUtilsService,
     )),
-    Ve(q1, Xa, 1)
+    Ve(composerUtilsService, ComposerUtilsService, 1)
   var PYe = Re("bugbotService")
   function iOt(i) {
     return {
@@ -7227,7 +7227,7 @@ export function createAIServiceSet(params) {
     }
   ;(nOt = __decorate(
     [
-      __param(0, Z),
+      __param(0, instantiationService),
       __param(1, ei),
       __param(2, ft),
       __param(3, Xt),
@@ -7599,7 +7599,7 @@ export function createAIServiceSet(params) {
   function LYn(i) {
     return !PYn.includes(i)
   }
-  var oOt = {
+  var serviceRegistry = {
       aiService: Br,
       contextMenuService: bi,
       inlineDiffService: oy,
@@ -7616,13 +7616,13 @@ export function createAIServiceSet(params) {
       aiFeatureStatusService: aiFeatureStatusService,
       webCmdKService: HFt,
       workspacesService: lb,
-      instantiationService: Z,
+      instantiationService: instantiationService,
       aiContextSessionService: fP,
       composerService: Pa,
       composerDataService: Na,
       bugBotLinterService: CY,
       composerViewsService: cS,
-      composerUtilsService: q1,
+      composerUtilsService: composerUtilsService,
       keybindingService: Ft,
       languageService: Hi,
       languageFeaturesService: zi,
@@ -7733,72 +7733,72 @@ export function createAIServiceSet(params) {
       composerUnificationService: vk,
       pathService: Pl,
     },
-    aOt = Xp(),
-    GKi = Xp(),
+    PortalContext = Xp(),
+    ServiceContext = Xp(),
     yAo = Xp()
-  function Wa(i, e, t, s) {
-    const n = window.document.createElement("div")
+  function createPortalComponent(component, targetWindow, serviceContainer, options) {
+    const container = window.document.createElement("div")
     return (
-      (n.style.height = "100%"),
-      (n.style.width = "100%"),
-      s?.additionalStyles && Object.assign(n.style, s.additionalStyles),
-      t.invokeFunction((r) => {
-        const o = s?.restrictToServices ?? Object.keys(oOt),
-          a = RHe(
+      (container.style.height = "100%"),
+      (container.style.width = "100%"),
+      options?.additionalStyles && Object.assign(container.style, options.additionalStyles),
+      serviceContainer.invokeFunction((serviceResolver) => {
+        const allowedServices = options?.restrictToServices ?? Object.keys(serviceRegistry),
+          renderComponent = mountComponent(
             () =>
-              jIi(
+              createSolidComponent(
                 () =>
-                  I(GKi.Provider, {
+                  createContextProvider(ServiceContext.Provider, {
                     get value() {
-                      return { close: s?.onClose }
+                      return { close: options?.onClose }
                     },
                     get children() {
-                      return I(aOt.Provider, {
+                      return createContextProvider(PortalContext.Provider, {
                         get value() {
                           return {
                             get window() {
-                              return Ct(e)
+                              return getCurrentWindow(targetWindow)
                             },
                             get portalElement() {
-                              if (due()) {
-                                const d = ss()
+                              if (isServerSide()) {
+                                const serverDocument = getServerDocument()
                                 return (
-                                  hF.has(d) || hF.set(d, RFt()),
-                                  hF.get(d) ?? d.document.body
+                                  portalCache.has(serverDocument) || portalCache.set(serverDocument, createPortalContainer()),
+                                  portalCache.get(serverDocument) ?? serverDocument.document.body
                                 )
                               }
-                              const u = Ct(e)
-                              return hF.get(u) ?? u.document.body
+                              const currentWindow = getCurrentWindow(targetWindow)
+                              return portalCache.get(currentWindow) ?? currentWindow.document.body
                             },
-                            ...o
-                              .map((h) =>
-                                LYn(h)
-                                  ? { [h]: r.get(oOt[h]) }
-                                  : { [h]: oOt[h](r.get(Z)) },
+                            ...allowedServices
+                              .map((serviceName) =>
+                                LYn(serviceName)
+                                  ? { [serviceName]: serviceResolver.get(serviceRegistry[serviceName]) }
+                                  : { [serviceName]: serviceRegistry[serviceName](serviceResolver.get(instantiationService)) },
                               )
-                              .reduce((h, u) => ({ ...h, ...u }), {}),
+                              .reduce((total, curr) => ({ ...total, ...curr }), {}),
                           }
                         },
                         get children() {
-                          return i()
+                          return component()
                         },
                       })
                     },
                   }),
-                (h) => {
-                  console.error("ERROR WHEN RENDERING SOLID COMPONENT", h)
+                (error) => {
+                  console.error("ERROR WHEN RENDERING SOLID COMPONENT", error)
                 },
               ),
-            n,
+            container,
           )
         return (
-          e.appendChild(n),
+          targetWindow.appendChild(container),
           {
             dispose: () => {
-              a(), n.remove()
+              renderComponent(), container.remove()
             },
             focus: () => {
-              n.focus()
+              container.focus()
             },
           }
         )
@@ -7810,8 +7810,8 @@ export function createAIServiceSet(params) {
     vY,
     metricsService,
     diffingService,
-    hF,
-    RFt,
+    hF: portalCache,
+    RFt: createPortalContainer,
     yY,
     kYe,
     BP,
@@ -7833,7 +7833,7 @@ export function createAIServiceSet(params) {
     KFt,
     uue,
     WKi,
-    due,
+    due: isServerSide,
     yYn,
     wYn,
     eOt,
@@ -7842,15 +7842,15 @@ export function createAIServiceSet(params) {
     DYe,
     tOt,
     jKi,
-    q1,
+    composerUtilsService,
     PYe,
     iOt,
     LYe,
     NYe,
     CY,
     RYe,
-    aOt,
-    GKi,
-    Wa,
+    aOt: PortalContext,
+    GKi: ServiceContext,
+    Wa: createPortalComponent,
   }
 }
