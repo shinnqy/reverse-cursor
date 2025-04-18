@@ -1219,7 +1219,7 @@ export function createCppWidget(params) {
           charChanges,
           wordChanges,
           isOnlyAddingToEachChar,
-        } = renderHighlightedResults(originalText, replacementText, decorationRange.startLineNumber, eol),
+        } = calculateAllKindsDiff(originalText, replacementText, decorationRange.startLineNumber, eol),
         isOnlyAddingText = singleLineCharChanges.every((D) => D.removed !== true)
       if (isAborted) {
         this._clearAllViewZones()
@@ -1602,7 +1602,7 @@ export function createCppWidget(params) {
    * @param {Object} eol - 配置选项
    * @returns {Object} 差异结果对象
    */
-  function renderHighlightedResults(oldText, newText, startLineNumber, eol) {
+  function calculateAllKindsDiff(oldText, newText, startLineNumber, eol) {
     let { wordDiffs, charDiffs } = computeDiffs(oldText, newText, eol)
     const enhancedWordDiffs = enhanceSplitDiffs(wordDiffs, eol)
     let isOnlyAddingToEachWord = true
