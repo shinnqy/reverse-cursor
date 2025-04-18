@@ -1309,26 +1309,31 @@ export function createAIServiceSet(params) {
     ],
     $Ft,
   )),
-    Ve(kYe, $Ft, 1)
-  var EKi =
+    Ve(kYe, $Ft, 1);
+
+// ============ diff ============
+  var letterRegex =
       /^[a-zA-Z\u{C0}-\u{FF}\u{D8}-\u{F6}\u{F8}-\u{2C6}\u{2C8}-\u{2D7}\u{2DE}-\u{2FF}\u{1E00}-\u{1EFF}]+$/u,
-    IKi = /\S/,
+    nonWhitespaceRegex = /\S/,
     wordDiffer = new DiffAlgorithm()
-  ;(wordDiffer.equals = function (i, e) {
+  // 重写equals方法：定义比较两个token是否相等的规则
+  ;(wordDiffer.equals = function (token1, token2) {
     return (
-      this.options.ignoreCase && ((i = i.toLowerCase()), (e = e.toLowerCase())),
-      i === e || (this.options.ignoreWhitespace && !IKi.test(i) && !IKi.test(e))
+      this.options.ignoreCase && ((token1 = token1.toLowerCase()), (token2 = token2.toLowerCase())),
+      token1 === token2 || (this.options.ignoreWhitespace && !nonWhitespaceRegex.test(token1) && !nonWhitespaceRegex.test(token2))
     )
   }),
-    (wordDiffer.tokenize = function (i) {
-      let e = i.split(/([^\S\r\n]+|[()[\]{}'"\r\n]|\b)/)
-      for (let t = 0; t < e.length - 1; t++)
-        !e[t + 1] &&
-          e[t + 2] &&
-          EKi.test(e[t]) &&
-          EKi.test(e[t + 2]) &&
-          ((e[t] += e[t + 2]), e.splice(t + 1, 2), t--)
-      return e
+    // 重写tokenize方法：定义如何将字符串分割成token
+    (wordDiffer.tokenize = function (text) {
+      // 按空白/标点/换行/单词边界分割字符串
+      let tokens = text.split(/([^\S\r\n]+|[()[\]{}'"\r\n]|\b)/)
+      for (let i = 0; i < tokens.length - 1; i++)
+        !tokens[i + 1] &&
+          tokens[i + 2] &&
+          letterRegex.test(tokens[i]) &&
+          letterRegex.test(tokens[i + 2]) &&
+          ((tokens[i] += tokens[i + 2]), tokens.splice(i + 1, 2), i--)
+      return tokens
     })
   function computeWordLevelDiffs(oldText, newText, options = {}, ignoreWhitespace = true) {
     return oldText.length > 2e4 ||
@@ -1347,7 +1352,9 @@ export function createAIServiceSet(params) {
         ])
       : ((options = mergeOptions(options, { ignoreWhitespace })), wordDiffer.diff(oldText, newText, options))
   }
-  var eYn = class {
+  // 定义一个差异比较工具类
+  // 【目前仅composer用】
+  var DiffComparator = class {
     async diffLines(i, e, t, s) {
       const n = { ...s }
       delete n.singleLineChanges
@@ -5770,7 +5777,7 @@ export function createAIServiceSet(params) {
       }
       async getFileDiff(e, t, s) {
         const o = (
-            await new eYn().diffLines(
+            await new DiffComparator().diffLines(
               t.join(`
 `),
               e.join(`
