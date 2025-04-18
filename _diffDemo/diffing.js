@@ -202,6 +202,7 @@ function normalizeDiffs(diffs) {
 }
 
 // ================================
+// 实现了Myers差异算法的变体，这是一种高效的差异比较算法
 class DiffAlgorithm {
   diff(oldText, newText, options = {}) {
     let callback = options.callback
@@ -365,13 +366,13 @@ function buildResults(diffInstance, lastComponent, newText, oldText, useLongestT
       ;(newPos += component.count), component.added || (oldPos += component.count)
     }
   }
-  let lastComponent = components[componentsLength - 1]
+  let finalComponent = components[componentsLength - 1]
   return (
     componentsLength > 1 &&
-      typeof lastComponent.value == "string" &&
-      (lastComponent.added || lastComponent.removed) &&
-      diffInstance.equals("", lastComponent.value) &&
-      ((components[componentsLength - 2].value += lastComponent.value), components.pop()),
+      typeof finalComponent.value == "string" &&
+      (finalComponent.added || finalComponent.removed) &&
+      diffInstance.equals("", finalComponent.value) &&
+      ((components[componentsLength - 2].value += finalComponent.value), components.pop()),
     components
   )
 }
