@@ -66,7 +66,7 @@ export function createAIServiceSet(params) {
     }
   Ve(metricsService, MetricsService, 1)
   var diffingService = Re("diffingService"),
-    ZKn = class extends V {
+    DiffingService = class extends V {
       constructor() {
         super(), (this.a = undefined)
       }
@@ -88,7 +88,7 @@ export function createAIServiceSet(params) {
         this.a = undefined
       }
     }
-  Ve(diffingService, ZKn, 1)
+  Ve(diffingService, DiffingService, 1)
   var hF = new Map()
   function RFt() {
     const i = document.createElement("div")
@@ -3849,8 +3849,8 @@ export function createAIServiceSet(params) {
   var zKi = { shouldGracefullyFallBackOnTimeout: true },
     EYn = 5,
     TYe = 2,
-    q1 = Re("composerUtilsService"),
-    Xa = class extends V {
+    composerUtilsService = Re("composerUtilsService"),
+    ComposerUtilsService = class extends V {
       constructor(e, t, s, n, r, o, a, l, c, h, u, d, g, p, m, b, y, w) {
         super(),
           (this._composerDataService = e),
@@ -6258,257 +6258,257 @@ export function createAIServiceSet(params) {
     }
   __decorate(
     [At("ComposerUtilsService.ensureCapabilitiesAreLoaded")],
-    Xa.prototype,
+    ComposerUtilsService.prototype,
     "ensureCapabilitiesAreLoaded",
     null,
   ),
     __decorate(
       [At("ComposerUtilsService.getShouldChatUseTools")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "getShouldChatUseTools",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.getShouldAutoSaveAgenticEdits")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "getShouldAutoSaveAgenticEdits",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.replacedBubbleForFastEdit")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "replacedBubbleForFastEdit",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.processConversationForFastEdit")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "processConversationForFastEdit",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.populateCodeChunksInConversation")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "populateCodeChunksInConversation",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.populateRedDiffsInConversation")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "populateRedDiffsInConversation",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.getRecentEdits")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "getRecentEdits",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.getRecentlyViewedFileInfo")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "getRecentlyViewedFileInfo",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.handleStreamComposer")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "handleStreamComposer",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.intermediateChunkMiddleware")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "intermediateChunkMiddleware",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.getAutoContextFiles")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "getAutoContextFiles",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.readFileContents")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "readFileContents",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.populateConversationWithExtraContext")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "populateConversationWithExtraContext",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.addContinuationPromptToConversation")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "addContinuationPromptToConversation",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.getUrisForCheckpoints")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "getUrisForCheckpoints",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.createCurrentCheckpoint")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "createCurrentCheckpoint",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.getCodeBlockDataFromBubbleId")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "getCodeBlockDataFromBubbleId",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.removeMessagesAfterBubble")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "removeMessagesAfterBubble",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.runCapabilitiesForProcess")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "runCapabilitiesForProcess",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.selectNextComposer")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "selectNextComposer",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.selectPrevComposer")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "selectPrevComposer",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.selectNextComposerChat")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "selectNextComposerChat",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.selectPrevComposerChat")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "selectPrevComposerChat",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.computeDiff")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "computeDiff",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.growChunk")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "growChunk",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.getRootFolderFileTreeWithDistance")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "getRootFolderFileTreeWithDistance",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.getGitIgnoreFile")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "getGitIgnoreFile",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.initializeGitIgnoreFile")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "initializeGitIgnoreFile",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.getFileDiff")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "getFileDiff",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.shouldShowCancel")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "shouldShowCancel",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.changeCodeBlockUri")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "changeCodeBlockUri",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.getFilesToRevertForCheckpoint")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "getFilesToRevertForCheckpoint",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.isCheckpointSameAsCurrent")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "isCheckpointSameAsCurrent",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.areContentsEqual")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "areContentsEqual",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.computeLineDiffs")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "computeLineDiffs",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.getCodeBlockLinesByDiff")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "getCodeBlockLinesByDiff",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.getCodeBlockV0ModelLines")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "getCodeBlockV0ModelLines",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.getCodeBlockOriginalModelLines")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "getCodeBlockOriginalModelLines",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.getCodeBlockNewModelLines")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "getCodeBlockNewModelLines",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.constructDiffResources")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "constructDiffResources",
       null,
     ),
     __decorate(
       [At("ComposerUtilsService.addHumanMessageBeforeAiBubble")],
-      Xa.prototype,
+      ComposerUtilsService.prototype,
       "addHumanMessageBeforeAiBubble",
       null,
     ),
-    (Xa = __decorate(
+    (ComposerUtilsService = __decorate(
       [
         __param(0, Na),
         __param(1, Br),
@@ -6529,9 +6529,9 @@ export function createAIServiceSet(params) {
         __param(16, st),
         __param(17, lU),
       ],
-      Xa,
+      ComposerUtilsService,
     )),
-    Ve(q1, Xa, 1)
+    Ve(composerUtilsService, ComposerUtilsService, 1)
   var PYe = Re("bugbotService")
   function iOt(i) {
     return {
@@ -7622,7 +7622,7 @@ export function createAIServiceSet(params) {
       composerDataService: Na,
       bugBotLinterService: CY,
       composerViewsService: cS,
-      composerUtilsService: q1,
+      composerUtilsService: composerUtilsService,
       keybindingService: Ft,
       languageService: Hi,
       languageFeaturesService: zi,
@@ -7842,7 +7842,7 @@ export function createAIServiceSet(params) {
     DYe,
     tOt,
     jKi,
-    q1,
+    composerUtilsService,
     PYe,
     iOt,
     LYe,
