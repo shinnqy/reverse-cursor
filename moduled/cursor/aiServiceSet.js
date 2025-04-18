@@ -2,7 +2,7 @@
 
 // 245900
 export function createAIServiceSet(params) {
-  const {Re, V, Ve, __decorate, CYe, __param, _, bt: window, mUe, ms, U, IMi, ue, it, Ls, fr, LRUCache, Yt, va, rt, extUri, J, Es, GJ, nm, Ze, Y1t, OP, Qc, Ri, gVe, _B, pVe, _n, Lg, Xt, everythingProviderService, st, Ci, hw, ei, aiFeatureStatusService, oy, ve, si, mo, nt, $h, x5, EKn, xFt, fz, G, yi, nl, Z, ize, wn, Va, N1, SN, am, Br, fn, v, Qm, Tgn, gt, fu, Me, ce, oi, Ti, cursorCredsService, T1, le, co, R, cF, vm, ResourceMap, V1t, y$i, M_, jB, fs, v$i, mVe, tK, Md, selectedContextService, Wr, Xn, Vu, ss, Ioe, UE, PSt, ls, jt, Mae, Ha, dC, $I, ev, _T, N$, s9e, bn, BMi, hk, iG, L1, Zc, FMi, HC, QWe, uNn, __addDisposableResource, gl, __disposeResources, JJ, lG, wVe, wJi, eoe, j9i, J9, Qb, At, Na, g2, Ll, lU, tqe, op, oTi, wf, et, DEt, $Bi, FBi, yNn, gNn, $ae, bNn, RBi, SNn, wNn, FT, un, Sg, Toe, WB, rc, ft, zi, Zi, mI, Cp, YC, Y$, cppEventLoggerService, a7, KNi, pt, bi, B_, eg, An, lb, fP, Pa, Ft, Hi, Sk, ZR, qi, Fo, R1, Pt, Ks, gze, ZUi, rU, Ag, uP, cv, Oc, uc, jM, UUi, HUi, Ht, cppService, es, ua, lv, u0, cl, Vo, wYe, bY, Ac, pKi, NI, p0, Gi, ko, Wi, SKi, uEt, Ce, Vr, H4i, pFt, qv, cursorPredictionService, nPt, importPredictionService, _c, g0, m2, c5, yYe, dEt, Qi, yc, DR, ZJ, fEt, Tk, Ck, _C, f5, vk, Pl, Xp, RHe, jIi, I, Ct } = params;
+  const {Re, V, Ve, __decorate, DiffAlgorithm, __param, _, bt: window, mUe, ms, U, IMi, ue, it, Ls, fr, LRUCache, Yt, va, rt, extUri, J, Es, GJ, nm, Ze, Y1t, OP, Qc, Ri, gVe, _B, pVe, _n, Lg, Xt, everythingProviderService, st, Ci, hw, ei, aiFeatureStatusService, oy, ve, si, mo, nt, $h, x5, mergeOptions, xFt, fz, G, yi, nl, Z, ize, wn, Va, N1, SN, am, Br, fn, v, Qm, Tgn, gt, fu, Me, ce, oi, Ti, cursorCredsService, T1, le, co, R, cF, vm, ResourceMap, V1t, y$i, M_, jB, fs, v$i, mVe, tK, Md, selectedContextService, Wr, Xn, Vu, ss, Ioe, UE, PSt, ls, jt, Mae, Ha, dC, $I, ev, _T, N$, s9e, bn, BMi, hk, iG, L1, Zc, FMi, HC, QWe, uNn, __addDisposableResource, gl, __disposeResources, JJ, lG, wVe, wJi, eoe, j9i, J9, Qb, At, Na, g2, Ll, lU, tqe, op, oTi, wf, et, DEt, $Bi, FBi, yNn, gNn, $ae, bNn, RBi, SNn, wNn, FT, un, Sg, Toe, WB, rc, ft, zi, Zi, mI, Cp, YC, Y$, cppEventLoggerService, a7, KNi, pt, bi, B_, eg, An, lb, fP, Pa, Ft, Hi, Sk, ZR, qi, Fo, R1, Pt, Ks, gze, ZUi, rU, Ag, uP, cv, Oc, uc, jM, UUi, HUi, Ht, cppService, es, ua, lv, u0, cl, Vo, wYe, bY, Ac, pKi, NI, p0, Gi, ko, Wi, SKi, uEt, Ce, Vr, H4i, pFt, qv, cursorPredictionService, nPt, importPredictionService, _c, g0, m2, c5, yYe, dEt, Qi, yc, DR, ZJ, fEt, Tk, Ck, _C, f5, vk, Pl, Xp, RHe, jIi, I, Ct } = params;
 
   var vY = Re("interpreterService"),
     metricsService = Re("metricsService"),
@@ -1309,44 +1309,52 @@ export function createAIServiceSet(params) {
     ],
     $Ft,
   )),
-    Ve(kYe, $Ft, 1)
-  var EKi =
+    Ve(kYe, $Ft, 1);
+
+// ============ diff ============
+  var letterRegex =
       /^[a-zA-Z\u{C0}-\u{FF}\u{D8}-\u{F6}\u{F8}-\u{2C6}\u{2C8}-\u{2D7}\u{2DE}-\u{2FF}\u{1E00}-\u{1EFF}]+$/u,
-    IKi = /\S/,
-    cue = new CYe()
-  ;(cue.equals = function (i, e) {
+    nonWhitespaceRegex = /\S/,
+    wordDiffer = new DiffAlgorithm()
+  // 重写equals方法：定义比较两个token是否相等的规则
+  ;(wordDiffer.equals = function (token1, token2) {
     return (
-      this.options.ignoreCase && ((i = i.toLowerCase()), (e = e.toLowerCase())),
-      i === e || (this.options.ignoreWhitespace && !IKi.test(i) && !IKi.test(e))
+      this.options.ignoreCase && ((token1 = token1.toLowerCase()), (token2 = token2.toLowerCase())),
+      token1 === token2 || (this.options.ignoreWhitespace && !nonWhitespaceRegex.test(token1) && !nonWhitespaceRegex.test(token2))
     )
   }),
-    (cue.tokenize = function (i) {
-      let e = i.split(/([^\S\r\n]+|[()[\]{}'"\r\n]|\b)/)
-      for (let t = 0; t < e.length - 1; t++)
-        !e[t + 1] &&
-          e[t + 2] &&
-          EKi.test(e[t]) &&
-          EKi.test(e[t + 2]) &&
-          ((e[t] += e[t + 2]), e.splice(t + 1, 2), t--)
-      return e
+    // 重写tokenize方法：定义如何将字符串分割成token
+    (wordDiffer.tokenize = function (text) {
+      // 按空白/标点/换行/单词边界分割字符串
+      let tokens = text.split(/([^\S\r\n]+|[()[\]{}'"\r\n]|\b)/)
+      for (let i = 0; i < tokens.length - 1; i++)
+        !tokens[i + 1] &&
+          tokens[i + 2] &&
+          letterRegex.test(tokens[i]) &&
+          letterRegex.test(tokens[i + 2]) &&
+          ((tokens[i] += tokens[i + 2]), tokens.splice(i + 1, 2), i--)
+      return tokens
     })
-  function FFt(i, e, t = {}, s = true) {
-    return i.length > 2e4 ||
-      e.length > 2e4 ||
-      cue.tokenize(i).length > 2e3 ||
-      cue.tokenize(e).length > 2e3
+  function computeWordLevelDiffs(oldText, newText, options = {}, ignoreWhitespace = true) {
+    return oldText.length > 2e4 ||
+      newText.length > 2e4
+      ||
+      wordDiffer.tokenize(oldText).length > 2e3 ||
+      wordDiffer.tokenize(newText).length > 2e3
       ? (console.error(
           "BAD BAD BAD BAD BAD. THIS SHOULD NOT HAPPEN. PLEASE FIX THE CPP BUG. diffWords received strings that were too long. Returning the trivial diff.",
-          i.length,
-          e.length,
+          oldText.length,
+          newText.length,
         ),
         [
-          { value: i, removed: true },
-          { value: e, added: true },
+          { value: oldText, removed: true },
+          { value: newText, added: true },
         ])
-      : ((t = EKn(t, { ignoreWhitespace: s })), cue.diff(i, e, t))
+      : ((options = mergeOptions(options, { ignoreWhitespace })), wordDiffer.diff(oldText, newText, options))
   }
-  var eYn = class {
+  // 定义一个差异比较工具类
+  // 【目前仅composer用】
+  var DiffComparator = class {
     async diffLines(i, e, t, s) {
       const n = { ...s }
       delete n.singleLineChanges
@@ -1379,7 +1387,7 @@ export function createAIServiceSet(params) {
     async diffWords(i, e, t) {
       const s = { ...t }
       delete s.singleLineChanges
-      const n = FFt(e, i, s)
+      const n = computeWordLevelDiffs(e, i, s)
       return t?.singleLineChanges
         ? n
             .map((o) => {
@@ -5769,7 +5777,7 @@ export function createAIServiceSet(params) {
       }
       async getFileDiff(e, t, s) {
         const o = (
-            await new eYn().diffLines(
+            await new DiffComparator().diffLines(
               t.join(`
 `),
               e.join(`
@@ -7807,7 +7815,7 @@ export function createAIServiceSet(params) {
     yY,
     kYe,
     BP,
-    FFt,
+    computeWordLevelDiffs,
     DKi,
     TKi,
     OFt,

@@ -1,22 +1,21 @@
 // @ts-check
 
 export function createDiffUtils(params) {
-  // FFt: computeWordLevelDiffs, WBt: computeCharLevelDiffs
-  const { FFt, CYe, KS } = params;
+  const { computeWordLevelDiffs, DiffAlgorithm, KS } = params;
 
-  var Acr = new CYe()
-  function WBt(i, e, t) {
-    return i.length > 2e3 || e.length > 2e3
+  var charDiffer = new DiffAlgorithm()
+  function computeCharLevelDiffs(oldText, newText, options) {
+    return oldText.length > 2e3 || newText.length > 2e3
       ? (console.error(
           "BAD BAD BAD BAD BAD. THIS SHOULD NOT HAPPEN. PLEASE FIX THE CPP BUG. diffChars received strings that were too long. Returning the trivial diff.",
-          i.length,
-          e.length,
+          oldText.length,
+          newText.length,
         ),
         [
-          { value: i, removed: true },
-          { value: e, added: true },
+          { value: oldText, removed: true },
+          { value: newText, added: true },
         ])
-      : Acr.diff(i, e, t)
+      : charDiffer.diff(oldText, newText, options)
   }
   /**
    * 分析差异并提取修改信息
@@ -252,8 +251,8 @@ export function createDiffUtils(params) {
             .filter((d) => d.added)
             .map((d) => d.value)
             .join(""),
-          wordLevelDiffs = FFt(removedText, addedText, {}, false),
-          charLevelDiffs = WBt(removedText, addedText, {})
+          wordLevelDiffs = computeWordLevelDiffs(removedText, addedText, {}, false),
+          charLevelDiffs = computeCharLevelDiffs(removedText, addedText, {})
         wordDiffs.push(...wordLevelDiffs), charDiffs.push(...charLevelDiffs), (currentGroup = [])
       }
     }
@@ -263,7 +262,7 @@ export function createDiffUtils(params) {
   }
 
   return {
-    WBt,
+    computeCharLevelDiffs,
     calculateInlineChanges,
     computeDiffs,
   };
