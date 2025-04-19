@@ -2,7 +2,7 @@
 
 // 245900
 export function createAIServiceSet(params) {
-  const {Re, V, Ve, __decorate, DiffAlgorithm, __param, _, bt: window, mUe, ms, U, IMi, ue, it, Ls, fr, LRUCache, Yt, va, rt, extUri, J, Es, GJ, nm, Ze, Y1t, OP, Qc, Ri, gVe, _B, pVe, _n, Lg, Xt, everythingProviderService, st, Ci, hw, ei, aiFeatureStatusService, oy, ve, si, mo, nt, $h, x5, mergeOptions, xFt, fz, G, yi, nl, Z: instantiationService, ize, wn, Va, N1, SN, am, Br, fn, v, Qm, Tgn, gt, fu, Me, ce, oi, Ti, cursorCredsService, T1, le, co, R, cF, vm, ResourceMap, V1t, y$i, M_, jB, fs, v$i, mVe, tK, Md, selectedContextService, Wr, Xn, Vu, ss: getServerDocument, Ioe, UE, PSt, ls, jt, Mae, Ha, dC, $I, ev, _T, N$, s9e, bn, BMi, hk, iG, L1, Zc, FMi, HC, QWe, uNn, __addDisposableResource, gl, __disposeResources, JJ, lG, wVe, wJi, eoe, j9i, J9, Qb, At, Na, g2, Ll, lU, tqe, op, oTi, wf, et, DEt, $Bi, FBi, yNn, gNn, $ae, bNn, RBi, SNn, wNn, FT, un, Sg, Toe, WB, rc, ft, zi, Zi, mI, Cp, YC, Y$, cppEventLoggerService, a7, KNi, pt, bi, B_, eg, An, lb, fP, Pa, Ft, Hi, Sk, ZR, qi, Fo, R1, Pt, Ks, gze, ZUi, rU, Ag, uP, cv, Oc, uc, jM, UUi, HUi, Ht, cppService, es, ua, lv, u0, cl, Vo, wYe, bY, Ac, pKi, NI, p0, Gi, ko, Wi, SKi, uEt, Ce, Vr, H4i, pFt, qv, cursorPredictionService, nPt, importPredictionService, _c, g0, m2, c5, yYe, dEt, Qi, yc, DR, ZJ, fEt, Tk, Ck, _C, f5, vk, Pl, Xp, RHe: mountComponent, jIi: createSolidComponent, I: createContextProvider, Ct: getCurrentWindow } = params;
+  const {Re, V, Ve, __decorate, DiffAlgorithm, __param, _, bt: window, mUe, ms, U, IMi, ue, it, Ls, fr, LRUCache, Yt, va, rt, extUri, J, Es, GJ, nm, Ze, Y1t, OP, Qc, Ri, gVe, _B, pVe, _n, Lg, Xt, everythingProviderService, st, Ci, hw, ei, aiFeatureStatusService, oy, ve, si, mo, nt, $h, x5, mergeOptions, xFt, fz, G, yi, nl, Z: instantiationService, ize, wn, Va, N1, SN, am, Br, fn, v, Qm, Tgn, gt, fu, Me, ce, oi, Ti, cursorCredsService, T1, le, co, R, cF, vm, ResourceMap, V1t, y$i, M_, jB, fs, v$i, mVe, tK, Md, selectedContextService, Wr, Xn, Vu, ss: getServerDocument, Ioe, UE, PSt, ls, jt, Mae, Ha, dC, $I, ev, _T, N$, s9e, bn, BMi, hk, iG, L1, Zc, FMi, HC, QWe, uNn, __addDisposableResource, gl, __disposeResources, JJ, lG, wVe, wJi, eoe, j9i, J9, Qb, At, Na, g2, Ll, lU, tqe, op, oTi, wf, et, DEt, $Bi, FBi, yNn, gNn, $ae, bNn, RBi, SNn, wNn, FT, un, Sg, Toe, WB, rc, ft, zi, Zi, mI, Cp, YC, Y$, cppEventLoggerService, a7, KNi, pt, bi, B_, eg, An, lb, fP, composerService, Ft, Hi, Sk, ZR, qi, Fo, R1, Pt, Ks, gze, ZUi, rU, Ag, uP, cv, Oc, uc, jM, UUi, HUi, Ht, cppService, es, ua, lv, u0, cl, Vo, wYe, bY, Ac, pKi, NI, p0, Gi, ko, Wi, SKi, uEt, Ce, Vr, aiPreviewService, pFt, qv, cursorPredictionService, nPt, importPredictionService, _c, g0, m2, c5, yYe, dEt, Qi, yc, DR, ZJ, fEt, Tk, Ck, _C, f5, vk, Pl, Xp, RHe: mountComponent, jIi: createSolidComponent, I: createContextProvider, Ct: getCurrentWindow } = params;
 
   var vY = Re("interpreterService"),
     metricsService = Re("metricsService"),
@@ -7618,7 +7618,7 @@ export function createAIServiceSet(params) {
       workspacesService: lb,
       instantiationService: instantiationService,
       aiContextSessionService: fP,
-      composerService: Pa,
+      composerService: composerService,
       composerDataService: Na,
       bugBotLinterService: CY,
       composerViewsService: cS,
@@ -7693,7 +7693,7 @@ export function createAIServiceSet(params) {
       contextKeyService: Ce,
       environmentService: Vr,
       diffingService: diffingService,
-      aiPreviewService: H4i,
+      aiPreviewService: aiPreviewService,
       aiReaderService: hue,
       everythingProviderService: everythingProviderService,
       fastSemSearchService: FKi,

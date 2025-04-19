@@ -2,7 +2,7 @@
 
 // 391749
 export function createComposerService(params) {
-  const {V, __decorate, __param, __disposeResources, __addDisposableResource, R, At, Ve, Pa, ei, Z, it, Br, Xt, u0, x5, oy, nt, ve, cursorCredsService, si, Ce, Ci, Md, Gi, Na, sh, $h, nl, Vo, M_, NI, selectedContextService, aiFeatureStatusService, everythingProviderService, aiAssertService, YC, fr, ue, qi, Hi, cS, es, uue, composerUtilsService, yi, QJ, qgs, _C, mo, kYe, wY, f5, xHt, Ul, fn, vk, RYe, UE, gl, GHt, fu, Det, Zm, eoe, J9, U, Hk, D7, Yt, wf, Dle, $Ui, cm, Dg, vp, T7, Mae, yI, rt, fs, u2, RUi, $I, bs, HC, zRi, v2i, dP, LBi, ls, jt, _n, sG, Er, Cf, rl, ev, J9i, du, vVe, wn, _cs, Q9, N1, jB, Va, Tg, nm, bn, Nh, QWe, One, B4i, BP, f1r, _4i, l7, G, Ggs, zgs, cb, OP, Es, Qb, J1t, ce, cEt, xEt, extUri, ice, B5i, vBi, Ln, _5i, vI, zr, Jgs, EditHistoryDiffFormatter, V1r, Kgs, Mit, x2, U1, fy, DBi, rI, LC, l2i, a2i } = params;
+  const {V, __decorate, __param, __disposeResources, __addDisposableResource, R, At, Ve, composerService, ei, Z, it, Br, Xt, u0, x5, oy, nt, ve, cursorCredsService, si, Ce, Ci, Md, Gi, Na, sh, $h, nl, Vo, M_, NI, selectedContextService, aiFeatureStatusService, everythingProviderService, aiAssertService, YC, fr, ue, qi, Hi, cS, es, uue, composerUtilsService, yi, QJ, qgs, _C, mo, kYe, wY, f5, xHt, Ul, fn, vk, RYe, UE, gl, GHt, fu, Det, Zm, eoe, J9, U, Hk, D7, Yt, wf, Dle, $Ui, cm, Dg, vp, T7, Mae, yI, rt, fs, u2, RUi, $I, bs, HC, zRi, v2i, dP, LBi, ls, jt, _n, sG, Er, Cf, rl, ev, J9i, du, vVe, wn, _cs, Q9, N1, jB, Va, Tg, nm, bn, Nh, QWe, One, B4i, BP, f1r, _4i, l7, G, Ggs, zgs, cb, OP, Es, Qb, J1t, ce, cEt, xEt, extUri, ice, B5i, vBi, Ln, _5i, vI, zr, Jgs, EditHistoryDiffFormatter, V1r, Kgs, Mit, x2, U1, fy, DBi, rI, LC, l2i, a2i } = params;
 
   var G1r = {
     id: "01_jsxLanguageTest",
@@ -8059,5 +8059,5 @@ __decorate(
     ],
     Sn,
   )),
-  Ve(Pa, Sn, 1)
+  Ve(composerService, Sn, 1)
 }
