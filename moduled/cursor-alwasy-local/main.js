@@ -14858,38 +14858,8 @@
       },
       1490: (e, t, n) => {
         "use strict"
-        Object.defineProperty(t, "__esModule", { value: !0 }),
-          (t.ModelLockManager = t.Lock = void 0)
-        const r = n(7527)
-        class s {
-          constructor() {
-            ;(this.isLocked = !1), (this.queue = [])
-          }
-          async acquire() {
-            return new Promise((e) => {
-              this.isLocked
-                ? this.queue.push(() => {
-                    ;(this.isLocked = !0), e(this.release.bind(this))
-                  })
-                : ((this.isLocked = !0), e(this.release.bind(this)))
-            })
-          }
-          release() {
-            this.isLocked = !1
-            const e = this.queue.shift()
-            e && e()
-          }
-        }
-        ;(t.Lock = s),
-          (t.ModelLockManager = class {
-            constructor(e = 100) {
-              this.locks = new r.LRUCache(e)
-            }
-            async acquireLock(e) {
-              let t = this.locks.get(e)
-              return t || ((t = new s()), this.locks.set(e, t)), t.acquire()
-            }
-          })
+        const {createModelLockManagerModule} = require('./extract/modelLockManagerModule');
+        createModelLockManagerModule(e, t, n);
       },
       65: (e, t, n) => {
         "use strict"
