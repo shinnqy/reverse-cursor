@@ -4,742 +4,774 @@ module.exports = {
   createEditHistoryModule,
 }
 
-function createEditHistoryModule(e, t, n) {
-  Object.defineProperty(t, "__esModule", { value: !0 }),
-    (t.getJoinedDiffRange =
-      t.computePatchString =
-      t.EditHistoryFormatter =
+function createEditHistoryModule(module, exports, require) {
+  Object.defineProperty(exports, "__esModule", { value: !0 }),
+    (exports.getJoinedDiffRange =
+      exports.computePatchString =
+      exports.EditHistoryFormatter =
         void 0)
-  const r = n(7520),
-    s = n(1242),
-    i = n(3282),
-    o = n(1490),
-    a = n(65);
+  const AIServerModule = require(7520),
+    diffModule = require(1242),
+    positionModule = require(3282),
+    modelLockManagerModule = require(1490),
+    diffProviderModule = require(65);
 
-  class l {
-    constructor(e) {
-      ;(this.diffHistorySizeLimit = 90),
-        (this.patchStringSizeLimit = 40),
-        (this.whitespacePatchStringSizeLimit = 5),
-        (this.keepRecentModelHashCount = 20),
-        (this.keepRecentlyRejectedEditModelHashCount = 5),
-        (this.timeoutCount = 0),
-        (this.useFullFileDiffsTilUnmerged = !1),
-        (this.includeUnchangedLines = !0),
-        (this.previousCompiledGlobalDiffTrajectories = []),
-        (this.latestCompiledGlobalDiffTrajectoriesVersion = void 0),
-        (this.version = void 0),
-        (this._diffStateByIdentifier = {}),
-        (this.latestRangeByIdentifier = {}),
-        (this.processModelChangeLoopRunning = !1),
-        (this.changesToProcessArgs = []),
-        (this.MAX_LOOP_DURATION_MS = 5e3),
-        (this.lock = new o.Lock()),
-        (this.numModelChangesToSave = e.numModelChangesToSave),
-        (this.diffHistorySizeLimit =
-          e.diffHistorySizeLimit ?? this.diffHistorySizeLimit),
-        (this.patchStringSizeLimit =
-          e.patchStringSizeLimit ?? this.patchStringSizeLimit),
-        (this.recentModelHashes = e.skipModelHash ? void 0 : {}),
-        (this.recentlyRejectedEditModelHashes = e.skipModelHash
-          ? void 0
-          : {}),
-        (this.saveOneBeforeLastModelValue =
-          e.saveOneBeforeLastModelValue ?? !1),
-        (this.keepWhitespaceOnlyChanges =
-          e.keepWhitespaceOnlyChanges ?? !1),
-        (this.alwaysUseFullFileDiff = e.alwaysUseFullFileDiff ?? !1),
-        (this.gitDiffExtraContextRadius =
-          e.gitDiffExtraContextRadius ?? 0),
-        (this.mergingBehavior = e.mergingBehavior),
-        (this.changeIndex = 0),
-        (this.includeUnchangedLines = e.includeUnchangedLines ?? !0),
-        (this.modelLockManager = new o.ModelLockManager(10))
-    }
-    async holdFileLock(e) {
-      return this.modelLockManager.acquireLock(e)
-    }
-    initModel(e, t, n) {
-      var r
-      void 0 !== this.recentModelHashes &&
-        ((r = this.recentModelHashes)[e] ?? (r[e] = []),
-        this.recentModelHashes[e].push((0, a.cppModelHash)(t, 1)),
-        (this.recentModelHashes[e] = this.recentModelHashes[e].slice(
-          -this.keepRecentModelHashCount,
-        ))),
-        (this._diffStateByIdentifier[e] = {
-          oneBeforeLastModel: this.saveOneBeforeLastModelValue
-            ? t
-            : void 0,
-          oldestModel: t,
-          newModel: t,
-          diffHistory: [],
-          lastEditTime: ++this.changeIndex,
-          modelVersion: n,
-        })
-    }
-    getOneBeforeLastModelValue(e) {
-      return this._diffStateByIdentifier[e]?.oneBeforeLastModel
-    }
-    getModelValue(e) {
-      return this._diffStateByIdentifier[e]?.newModel
-    }
-    getModelVersion(e) {
-      return this._diffStateByIdentifier[e]?.modelVersion
-    }
-    updateModelVersion(e, t) {
-      const n = this._diffStateByIdentifier[e]
-      void 0 !== n && (n.modelVersion = t)
-    }
-    getTimeoutCount() {
-      return this.timeoutCount
-    }
-    filterPatch(e) {
-      const t = e?.string.split("\n").length ?? 0
-      return (
-        void 0 !== e &&
-        "" !== e.string.trim() &&
-        t <= this.patchStringSizeLimit &&
-        (!e.isWhitespaceChange ||
-          t <= this.whitespacePatchStringSizeLimit)
-      )
-    }
-    closeCurrentPatch() {
-      return (
-        this.changeIndex++,
-        (this._diffStateByIdentifier["<close-patch>"] = {
-          oneBeforeLastModel: "",
-          oldestModel: "",
-          newModel: "",
-          diffHistory: [],
-          lastEditTime: this.changeIndex,
-        }),
-        this.changeIndex
-      )
-    }
-    async compileGlobalDiffTrajectories(e, t) {
-      if (
-        void 0 !== this.version &&
-        this.latestCompiledGlobalDiffTrajectoriesVersion === this.version
-      )
-        return this.previousCompiledGlobalDiffTrajectories
-      const n = e ?? {}
-      let s = []
-      for (const e in this._diffStateByIdentifier) {
-        const n = this._diffStateByIdentifier[e].diffHistory
-        s = s.concat(n.map((t) => ({ ...t, modelIdentifier: e })))
-        const r =
-            this._diffStateByIdentifier[e].addedRangeInNewModelOneIndexed,
-          i = this._diffStateByIdentifier[e].lastEditTime
-        if (void 0 !== r && void 0 !== i)
-          try {
-            const n = await this.getPatchOfActiveDiff(e, t, !0)
-            s.push({ modelIdentifier: e, lastEditTime: i, patch: n })
-          } catch (t) {
-            if (
-              (this.updateOldestModel(
-                e,
-                this._diffStateByIdentifier[e].newModel,
-              ),
-              !(
-                t instanceof Error &&
-                t.message.toLowerCase().includes("timeout")
-              ))
-            )
-              throw t
-            this.timeoutCount++
-          }
+    class EditHistoryFormatter {
+      constructor(options) {
+        ;(this.diffHistorySizeLimit = 90),
+          (this.patchStringSizeLimit = 40),
+          (this.whitespacePatchStringSizeLimit = 5),
+          (this.keepRecentModelHashCount = 20),
+          (this.keepRecentlyRejectedEditModelHashCount = 5),
+          (this.timeoutCount = 0),
+          (this.useFullFileDiffsTilUnmerged = !1),
+          (this.includeUnchangedLines = !0),
+          (this.previousCompiledGlobalDiffTrajectories = []),
+          (this.latestCompiledGlobalDiffTrajectoriesVersion = void 0),
+          (this.version = void 0),
+          (this._diffStateByIdentifier = {}),
+          (this.latestRangeByIdentifier = {}),
+          (this.processModelChangeLoopRunning = !1),
+          (this.changesToProcessArgs = []),
+          (this.MAX_LOOP_DURATION_MS = 5e3),
+          (this.lock = new modelLockManagerModule.Lock()),
+          (this.numModelChangesToSave = options.numModelChangesToSave),
+          (this.diffHistorySizeLimit =
+            options.diffHistorySizeLimit ?? this.diffHistorySizeLimit),
+          (this.patchStringSizeLimit =
+            options.patchStringSizeLimit ?? this.patchStringSizeLimit),
+          (this.recentModelHashes = options.skipModelHash ? void 0 : {}),
+          (this.recentlyRejectedEditModelHashes = options.skipModelHash
+            ? void 0
+            : {}),
+          (this.saveOneBeforeLastModelValue =
+            options.saveOneBeforeLastModelValue ?? !1),
+          (this.keepWhitespaceOnlyChanges =
+            options.keepWhitespaceOnlyChanges ?? !1),
+          (this.alwaysUseFullFileDiff = options.alwaysUseFullFileDiff ?? !1),
+          (this.gitDiffExtraContextRadius =
+            options.gitDiffExtraContextRadius ?? 0),
+          (this.mergingBehavior = options.mergingBehavior),
+          (this.changeIndex = 0),
+          (this.includeUnchangedLines = options.includeUnchangedLines ?? !0),
+          (this.modelLockManager = new modelLockManagerModule.ModelLockManager(10))
       }
-      s.sort((e, t) => e.lastEditTime - t.lastEditTime)
-      const i = s
-        .filter((e) => this.filterPatch(e.patch))
-        .slice(-this.diffHistorySizeLimit)
-        .map(
-          (e, t) =>
-            new r.CppFileDiffHistory({
-              fileName: n[e.modelIdentifier] ?? e.modelIdentifier,
-              diffHistory: [e.patch.string],
-              diffHistoryTimestamps: [],
-            }),
+      async holdFileLock(identifier) {
+        return this.modelLockManager.acquireLock(identifier)
+      }
+      initModel(identifier, modelValue, modelVersion) {
+        var recentModelHashes
+        void 0 !== this.recentModelHashes &&
+          ((recentModelHashes = this.recentModelHashes)[identifier] ?? (recentModelHashes[identifier] = []),
+          this.recentModelHashes[identifier].push((0, diffProviderModule.cppModelHash)(modelValue, 1)),
+          (this.recentModelHashes[identifier] = this.recentModelHashes[identifier].slice(
+            -this.keepRecentModelHashCount,
+          ))),
+          (this._diffStateByIdentifier[identifier] = {
+            oneBeforeLastModel: this.saveOneBeforeLastModelValue
+              ? modelValue
+              : void 0,
+            oldestModel: modelValue,
+            newModel: modelValue,
+            diffHistory: [],
+            lastEditTime: ++this.changeIndex,
+            modelVersion: modelVersion,
+          })
+      }
+      getOneBeforeLastModelValue(identifier) {
+        return this._diffStateByIdentifier[identifier]?.oneBeforeLastModel
+      }
+      getModelValue(identifier) {
+        return this._diffStateByIdentifier[identifier]?.newModel
+      }
+      getModelVersion(identifier) {
+        return this._diffStateByIdentifier[identifier]?.modelVersion
+      }
+      updateModelVersion(identifier, modelVersion) {
+        const diffState = this._diffStateByIdentifier[identifier]
+        void 0 !== diffState && (diffState.modelVersion = modelVersion)
+      }
+      getTimeoutCount() {
+        return this.timeoutCount
+      }
+      filterPatch(patch) {
+        const patchLineCount = patch?.string.split("\n").length ?? 0
+        return (
+          void 0 !== patch &&
+          "" !== patch.string.trim() &&
+          patchLineCount <= this.patchStringSizeLimit &&
+          (!patch.isWhitespaceChange ||
+            patchLineCount <= this.whitespacePatchStringSizeLimit)
         )
-        .reduce((e, t) => {
-          if (0 === e.length) return [t]
-          const n = e[e.length - 1]
-          return (
-            n.fileName === t.fileName
-              ? (n.diffHistory.push(...t.diffHistory),
-                n.diffHistoryTimestamps.push(...t.diffHistoryTimestamps))
-              : e.push(t),
-            e
-          )
-        }, [])
-      return (
-        (this.latestCompiledGlobalDiffTrajectoriesVersion = this.version),
-        (this.previousCompiledGlobalDiffTrajectories = i),
-        i
-      )
-    }
-    isRevertingToRecentModel(e, t) {
-      if (null == this.recentModelHashes)
-        throw new Error("Model history tracking is disabled")
-      return (
-        this.recentModelHashes[e]?.includes((0, a.cppModelHash)(t, 1)) ??
-        !1
-      )
-    }
-    isSuggestingRecentlyRejectedEdit(e, t, n, r) {
-      if (null == this.recentlyRejectedEditModelHashes)
-        throw new Error("Model history tracking is disabled")
-      const s = this.recentlyRejectedEditModelHashes[e] ?? [],
-        i = (0, a.cppModelHash)(t, 1),
-        o = s.find((e) => e.modelHash === i)
-      return (
-        (void 0 !== o?.numberOfTimesSoftRejected &&
-          o.numberOfTimesSoftRejected >= n) ||
-        (void 0 !== o?.numberOfTimesHardRejected &&
-          o.numberOfTimesHardRejected >= r)
-      )
-    }
-    recordRejectedEdit(e, t, n) {
-      var r
-      if (null == this.recentlyRejectedEditModelHashes) return
-      ;(r = this.recentlyRejectedEditModelHashes)[e] ?? (r[e] = [])
-      const s = (0, a.cppModelHash)(t, 1),
-        i = this.recentlyRejectedEditModelHashes[e].find(
-          (e) => e.modelHash === s,
-        )
-      i
-        ? (i.numberOfTimesSoftRejected++,
-          n || i.numberOfTimesHardRejected++)
-        : this.recentlyRejectedEditModelHashes[e].push({
-            modelHash: s,
-            numberOfTimesSoftRejected: 1,
-            numberOfTimesHardRejected: n ? 0 : 1,
+      }
+      closeCurrentPatch() {
+        return (
+          this.changeIndex++,
+          (this._diffStateByIdentifier["<close-patch>"] = {
+            oneBeforeLastModel: "",
+            oldestModel: "",
+            newModel: "",
+            diffHistory: [],
+            lastEditTime: this.changeIndex,
           }),
-        this.recentlyRejectedEditModelHashes[e].length >
-          this.keepRecentlyRejectedEditModelHashCount &&
-          this.recentlyRejectedEditModelHashes[e].shift()
-    }
-    async processModelChangesLoopWithTimeout() {
-      if (this.processModelChangeLoopRunning) return
-      let e
-      const t = new Promise((t) => {
-        e = setTimeout(() => {
-          console.warn("processModelChangesLoop timed out"), t()
-        }, this.MAX_LOOP_DURATION_MS)
-      })
-      try {
-        ;(this.processModelChangeLoopRunning = !0),
-          await Promise.race([
-            this.processModelChangesLoop().then(() => clearTimeout(e)),
-            t,
-          ])
-      } catch (e) {
-        console.error("Error in processModelChangesLoop:", e)
-      } finally {
-        this.processModelChangeLoopRunning = !1
-      }
-    }
-    async processModelChangesLoop() {
-      for (; this.changesToProcessArgs.length > 0; ) {
-        const e = this.changesToProcessArgs.shift()
-        if (void 0 === e) break
-        const {
-          useFullFileDiffForThisCall: t,
-          uniqueModelIdentifier: n,
-          newModelValue: r,
-          addedRangeInNewModelOneIndexed: s,
-          deletedRangeInOldModelOneIndexed: i,
-        } = e
-        if (
-          (t && (this.useFullFileDiffsTilUnmerged = !0),
-          void 0 === this._diffStateByIdentifier[n])
+          this.changeIndex
         )
-          return void this.initModel(n, r)
-        const {
-          addedRangeInNewModelOneIndexed: o,
-          newModel: l,
-          lastEditTime: u,
-        } = this._diffStateByIdentifier[n]
-        if (void 0 === o || void 0 === u)
-          t || (this.useFullFileDiffsTilUnmerged = !1),
-            (this._diffStateByIdentifier[
-              n
-            ].addedRangeInNewModelOneIndexed = s),
-            (this._diffStateByIdentifier[n].rangesOfAccumulatedChanges = {
-              currentRange: s,
-              pastRange: i,
-            })
-        else {
-          const e = this.shouldMerge({
-              lastDiffRange: o,
-              replacedChangeRange: i,
-              uniqueModelIdentifier: n,
-            }),
-            r = this._diffStateByIdentifier[n].rangesOfAccumulatedChanges
-          if (e && this.newestModelIdentifier() === n) {
-            const { startLineNumber: e, endLineNumberExclusive: t } = (0,
-            a.applyChangeToRange)(o, i, s)
-            if (
-              ((this._diffStateByIdentifier[
-                n
-              ].addedRangeInNewModelOneIndexed = {
-                startLineNumber: e,
-                endLineNumberExclusive: t,
-              }),
-              void 0 === r)
-            );
-            else {
-              const e = c({
-                firstAddedRange: r.currentRange,
-                firstRemovedRange: r.pastRange,
-                secondAddedRange: s,
-                secondRemovedRange: i,
-              })
-              this._diffStateByIdentifier[n].rangesOfAccumulatedChanges =
-                e
-            }
-          } else {
+      }
+      // 编译全局差异轨迹
+      async compileGlobalDiffTrajectories(fileNameMap, useFullFileDiff) {
+        if (
+          void 0 !== this.version &&
+          this.latestCompiledGlobalDiffTrajectoriesVersion === this.version
+        )
+          return this.previousCompiledGlobalDiffTrajectories
+        const fileNameMapping = fileNameMap ?? {}
+        let diffTrajectories = []
+        for (const identifier in this._diffStateByIdentifier) {
+          const diffHistory = this._diffStateByIdentifier[identifier].diffHistory
+          diffTrajectories = diffTrajectories.concat(diffHistory.map((t) => ({ ...t, modelIdentifier: identifier })))
+          const addedRange =
+              this._diffStateByIdentifier[identifier].addedRangeInNewModelOneIndexed,
+            lastEditTime = this._diffStateByIdentifier[identifier].lastEditTime
+          if (void 0 !== addedRange && void 0 !== lastEditTime)
             try {
-              const e = await this.getPatchOfActiveDiff(n, t, !1)
-              this._diffStateByIdentifier[n].diffHistory.push({
-                patch: e,
-                lastEditTime: u,
-              }),
-                this.cleanDiffTrajectories()
-            } catch (e) {
+              const patch = await this.getPatchOfActiveDiff(identifier, useFullFileDiff, !0)
+              diffTrajectories.push({ modelIdentifier: identifier, lastEditTime: lastEditTime, patch: patch })
+            } catch (error) {
               if (
+                (this.updateOldestModel(
+                  identifier,
+                  this._diffStateByIdentifier[identifier].newModel,
+                ),
                 !(
-                  e instanceof Error &&
-                  e.message.toLowerCase().includes("timeout")
-                )
+                  error instanceof Error &&
+                  error.message.toLowerCase().includes("timeout")
+                ))
               )
-                throw e
+                throw error
               this.timeoutCount++
             }
-            this.updateOldestModel(n, l),
+        }
+        diffTrajectories.sort((a, b) => a.lastEditTime - b.lastEditTime)
+        const filteredDiffTrajectories = diffTrajectories
+          .filter((diff) => this.filterPatch(diff.patch))
+          .slice(-this.diffHistorySizeLimit)
+          .map(
+            (diff, index) =>
+              new AIServerModule.CppFileDiffHistory({
+                fileName: fileNameMapping[diff.modelIdentifier] ?? diff.modelIdentifier,
+                diffHistory: [diff.patch.string],
+                diffHistoryTimestamps: [],
+              }),
+          )
+          .reduce((total, diff) => {
+            if (0 === total.length) return [diff]
+            const lastDiff = total[total.length - 1]
+            return (
+              lastDiff.fileName === diff.fileName
+                ? (lastDiff.diffHistory.push(...diff.diffHistory),
+                  lastDiff.diffHistoryTimestamps.push(...diff.diffHistoryTimestamps))
+                : total.push(diff),
+              total
+            )
+          }, [])
+        return (
+          (this.latestCompiledGlobalDiffTrajectoriesVersion = this.version),
+          (this.previousCompiledGlobalDiffTrajectories = filteredDiffTrajectories),
+          filteredDiffTrajectories
+        )
+      }
+      // 检查是否恢复到最近的模型
+      isRevertingToRecentModel(identifier, modelValue) {
+        if (null == this.recentModelHashes)
+          throw new Error("Model history tracking is disabled")
+        return (
+          this.recentModelHashes[identifier]?.includes((0, diffProviderModule.cppModelHash)(modelValue, 1)) ??
+          !1
+        )
+      }
+      // 检查是否建议最近被拒绝的编辑
+      isSuggestingRecentlyRejectedEdit(identifier, modelValue, softRejectThreshold, hardRejectThreshold) {
+        if (null == this.recentlyRejectedEditModelHashes)
+          throw new Error("Model history tracking is disabled")
+        const rejectedEdits = this.recentlyRejectedEditModelHashes[identifier] ?? [],
+          modelHash = (0, diffProviderModule.cppModelHash)(modelValue, 1),
+          rejectedEdit = rejectedEdits.find((edit) => edit.modelHash === modelHash)
+        return (
+          (void 0 !== rejectedEdit?.numberOfTimesSoftRejected &&
+            rejectedEdit.numberOfTimesSoftRejected >= softRejectThreshold) ||
+          (void 0 !== rejectedEdit?.numberOfTimesHardRejected &&
+            rejectedEdit.numberOfTimesHardRejected >= hardRejectThreshold)
+        )
+      }
+      // 记录被拒绝的编辑
+      recordRejectedEdit(identifier, modelValue, isSoftReject) {
+        var recentlyRejectedEditModelHashes
+        if (null == this.recentlyRejectedEditModelHashes) return
+        ;(recentlyRejectedEditModelHashes = this.recentlyRejectedEditModelHashes)[identifier] ?? (recentlyRejectedEditModelHashes[identifier] = [])
+        const modelHash = (0, diffProviderModule.cppModelHash)(modelValue, 1),
+          existingRejectedEdit = this.recentlyRejectedEditModelHashes[identifier].find(
+            (edit) => edit.modelHash === modelHash,
+          )
+        existingRejectedEdit
+          ? (existingRejectedEdit.numberOfTimesSoftRejected++,
+            isSoftReject || existingRejectedEdit.numberOfTimesHardRejected++)
+          : this.recentlyRejectedEditModelHashes[identifier].push({
+              modelHash: modelHash,
+              numberOfTimesSoftRejected: 1,
+              numberOfTimesHardRejected: isSoftReject ? 0 : 1,
+            }),
+          this.recentlyRejectedEditModelHashes[identifier].length >
+            this.keepRecentlyRejectedEditModelHashCount &&
+            this.recentlyRejectedEditModelHashes[identifier].shift()
+      }
+      // 带超时的模型变化处理循环
+      async processModelChangesLoopWithTimeout() {
+        if (this.processModelChangeLoopRunning) return
+        let timeoutId
+        const timeoutPromise = new Promise((resolve) => {
+          timeoutId = setTimeout(() => {
+            console.warn("processModelChangesLoop timed out"), resolve()
+          }, this.MAX_LOOP_DURATION_MS)
+        })
+        try {
+          ;(this.processModelChangeLoopRunning = !0),
+            await Promise.race([
+              this.processModelChangesLoop().then(() => clearTimeout(timeoutId)),
+              timeoutPromise,
+            ])
+        } catch (error) {
+          console.error("Error in processModelChangesLoop:", error)
+        } finally {
+          this.processModelChangeLoopRunning = !1
+        }
+      }
+      // 处理模型变化的循环
+      async processModelChangesLoop() {
+        for (; this.changesToProcessArgs.length > 0; ) {
+          const changeArgs = this.changesToProcessArgs.shift()
+          if (void 0 === changeArgs) break
+          const {
+            useFullFileDiffForThisCall: useFullFileDiff,
+            uniqueModelIdentifier: identifier,
+            newModelValue: newModelValue,
+            addedRangeInNewModelOneIndexed: addedRange,
+            deletedRangeInOldModelOneIndexed: deletedRange,
+          } = changeArgs
+          if (
+            (useFullFileDiff && (this.useFullFileDiffsTilUnmerged = !0),
+            void 0 === this._diffStateByIdentifier[identifier])
+          )
+            return void this.initModel(identifier, newModelValue)
+          const {
+            addedRangeInNewModelOneIndexed: lastAddedRange,
+            newModel: currentModelValue,
+            lastEditTime: lastEditTime,
+          } = this._diffStateByIdentifier[identifier]
+          if (void 0 === lastAddedRange || void 0 === lastEditTime)
+            useFullFileDiff || (this.useFullFileDiffsTilUnmerged = !1),
               (this._diffStateByIdentifier[
-                n
-              ].addedRangeInNewModelOneIndexed = s),
-              t || (this.useFullFileDiffsTilUnmerged = !1),
-              (this._diffStateByIdentifier[n].rangesOfAccumulatedChanges =
-                { currentRange: s, pastRange: i })
+                identifier
+              ].addedRangeInNewModelOneIndexed = addedRange),
+              (this._diffStateByIdentifier[identifier].rangesOfAccumulatedChanges = {
+                currentRange: addedRange,
+                pastRange: deletedRange,
+              })
+          else {
+            const shouldMerge = this.shouldMerge({
+                lastDiffRange: lastAddedRange,
+                replacedChangeRange: deletedRange,
+                uniqueModelIdentifier: identifier,
+              }),
+              accumulatedRanges = this._diffStateByIdentifier[identifier].rangesOfAccumulatedChanges
+            if (shouldMerge && this.newestModelIdentifier() === identifier) {
+              const { startLineNumber: mergedStartLine, endLineNumberExclusive: mergedEndLine } = (0,
+                diffProviderModule.applyChangeToRange)(lastAddedRange, deletedRange, addedRange)
+              if (
+                ((this._diffStateByIdentifier[
+                  identifier
+                ].addedRangeInNewModelOneIndexed = {
+                  startLineNumber: mergedStartLine,
+                  endLineNumberExclusive: mergedEndLine,
+                }),
+                void 0 === accumulatedRanges)
+              );
+              else {
+                const mergedRange = getJoinedDiffRange({
+                  firstAddedRange: accumulatedRanges.currentRange,
+                  firstRemovedRange: accumulatedRanges.pastRange,
+                  secondAddedRange: addedRange,
+                  secondRemovedRange: deletedRange,
+                })
+                this._diffStateByIdentifier[identifier].rangesOfAccumulatedChanges =
+                  mergedRange
+              }
+            } else {
+              try {
+                const patch = await this.getPatchOfActiveDiff(identifier, useFullFileDiff, !1)
+                this._diffStateByIdentifier[identifier].diffHistory.push({
+                  patch: patch,
+                  lastEditTime: lastEditTime,
+                }),
+                  this.cleanDiffTrajectories()
+              } catch (error) {
+                if (
+                  !(
+                    error instanceof Error &&
+                    error.message.toLowerCase().includes("timeout")
+                  )
+                )
+                  throw error
+                this.timeoutCount++
+              }
+              this.updateOldestModel(identifier, currentModelValue),
+                (this._diffStateByIdentifier[
+                  identifier
+                ].addedRangeInNewModelOneIndexed = addedRange),
+                useFullFileDiff || (this.useFullFileDiffsTilUnmerged = !1),
+                (this._diffStateByIdentifier[identifier].rangesOfAccumulatedChanges =
+                  { currentRange: addedRange, pastRange: deletedRange })
+            }
+          }
+          ;(this._diffStateByIdentifier[identifier].lastEditTime = ++this
+            .changeIndex),
+            this.updateNewModel(identifier, newModelValue),
+            changeArgs.callback && changeArgs.callback()
+        }
+      }
+      // 获取锁
+      async acquireLock() {
+        return this.lock.acquire()
+      }
+      // 处理模型变化
+      async processModelChange(changeArgs) {
+        var recentModelHashes, identifier
+        this.changesToProcessArgs.push(changeArgs),
+          void 0 !== this.recentModelHashes &&
+            ((recentModelHashes = this.recentModelHashes)[(identifier = changeArgs.uniqueModelIdentifier)] ??
+              (recentModelHashes[identifier] = []),
+            this.recentModelHashes[changeArgs.uniqueModelIdentifier].push(
+              (0, diffProviderModule.cppModelHash)(changeArgs.newModelValue, 1),
+            ),
+            (this.recentModelHashes[changeArgs.uniqueModelIdentifier] =
+              this.recentModelHashes[changeArgs.uniqueModelIdentifier].slice(
+                -this.keepRecentModelHashCount,
+              ))),
+          await this.processModelChangesLoopWithTimeout()
+      }
+      // 移除最旧的差异轨迹
+      removeOldestDiffTrajectory() {
+        let oldestEditTime = 1 / 0,
+          oldestIdentifier = null
+        for (const identifier in this._diffStateByIdentifier) {
+          const diffHistory = this._diffStateByIdentifier[identifier].diffHistory
+          if (diffHistory.length > 0) {
+            const editTime = diffHistory[0].lastEditTime
+            editTime < oldestEditTime && ((oldestEditTime = editTime), (oldestIdentifier = identifier))
           }
         }
-        ;(this._diffStateByIdentifier[n].lastEditTime = ++this
-          .changeIndex),
-          this.updateNewModel(n, r),
-          e.callback && e.callback()
+        null !== oldestIdentifier && this._diffStateByIdentifier[oldestIdentifier].diffHistory.shift()
       }
-    }
-    async acquireLock() {
-      return this.lock.acquire()
-    }
-    async processModelChange(e) {
-      var t, n
-      this.changesToProcessArgs.push(e),
-        void 0 !== this.recentModelHashes &&
-          ((t = this.recentModelHashes)[(n = e.uniqueModelIdentifier)] ??
-            (t[n] = []),
-          this.recentModelHashes[e.uniqueModelIdentifier].push(
-            (0, a.cppModelHash)(e.newModelValue, 1),
-          ),
-          (this.recentModelHashes[e.uniqueModelIdentifier] =
-            this.recentModelHashes[e.uniqueModelIdentifier].slice(
-              -this.keepRecentModelHashCount,
-            ))),
-        await this.processModelChangesLoopWithTimeout()
-    }
-    removeOldestDiffTrajectory() {
-      let e = 1 / 0,
-        t = null
-      for (const n in this._diffStateByIdentifier) {
-        const r = this._diffStateByIdentifier[n].diffHistory
-        if (r.length > 0) {
-          const s = r[0].lastEditTime
-          s < e && ((e = s), (t = n))
-        }
+      // 检查差异历史是否为空
+      isEmptyHistory() {
+        for (const identifier in this._diffStateByIdentifier)
+          if (this._diffStateByIdentifier[identifier].diffHistory.length > 0)
+            return !1
+        return !0
       }
-      null !== t && this._diffStateByIdentifier[t].diffHistory.shift()
-    }
-    isEmptyHistory() {
-      for (const e in this._diffStateByIdentifier)
-        if (this._diffStateByIdentifier[e].diffHistory.length > 0)
-          return !1
-      return !0
-    }
-    copyAtPointInTime(e) {
-      const t = new l({
-        numModelChangesToSave: this.numModelChangesToSave,
-        diffHistorySizeLimit: this.diffHistorySizeLimit,
-        patchStringSizeLimit: this.patchStringSizeLimit,
-        gitDiffExtraContextRadius: this.gitDiffExtraContextRadius,
-      })
-      for (const n in this._diffStateByIdentifier)
-        if (e) {
-          const e = this._diffStateByIdentifier[n].newModel
-          t.initModel(n, e)
-        } else {
-          const e = this._diffStateByIdentifier[n],
-            r = {
-              ...e,
-              oneBeforeLastModel: e.oneBeforeLastModel
-                ? e.oneBeforeLastModel
-                : void 0,
-              newModel: e.newModel,
-              oldestModel: e.oldestModel,
-              rangesOfAccumulatedChanges: e.rangesOfAccumulatedChanges
-                ? {
-                    currentRange:
-                      e.rangesOfAccumulatedChanges.currentRange,
-                    pastRange: e.rangesOfAccumulatedChanges.pastRange,
-                  }
-                : void 0,
-              addedRangeInNewModelOneIndexed:
-                e.addedRangeInNewModelOneIndexed
-                  ? { ...e.addedRangeInNewModelOneIndexed }
-                  : void 0,
-              cachedPatchString: e.cachedPatchString
-                ? { ...e.cachedPatchString }
-                : void 0,
-              lastEditTime: e.lastEditTime,
-              modelVersion: e.modelVersion,
-              diffHistory: e.diffHistory.map((e) => ({ ...e })),
-            }
-          ;(t._diffStateByIdentifier[n] = r),
-            (t.latestRangeByIdentifier[n] =
-              this.latestRangeByIdentifier[n])
-        }
-      return t
-    }
-    rangesIntersect(e, t) {
-      return (
-        e.startLineNumber <= t.endLineNumberExclusive &&
-        e.endLineNumberExclusive >= t.startLineNumber
-      )
-    }
-    shouldMerge({
-      lastDiffRange: e,
-      replacedChangeRange: t,
-      uniqueModelIdentifier: n,
-    }) {
-      const r =
-          t.startLineNumber === e.startLineNumber &&
-          t.endLineNumberExclusive === e.endLineNumberExclusive,
-        s = t.endLineNumberExclusive - t.startLineNumber == 1,
-        o = this.mergingBehavior
-      if (void 0 === o || "single line" === o.type)
-        return (s && e.startLineNumber === t.endLineNumberExclusive) || r
-      if ("whitespace compatible" === o.type)
-        return (
-          r ||
-          (s && e.startLineNumber === t.endLineNumberExclusive) ||
-          (s && e.endLineNumberExclusive == t.startLineNumber) ||
-          (t.endLineNumberExclusive - t.startLineNumber <= 2 &&
-            e.endLineNumberExclusive == t.endLineNumberExclusive)
-        )
-      if ("merged diff history" === o.type) {
-        const r =
-            this.latestRangeByIdentifier[n] ??
-            new i.Range(
-              e.startLineNumber,
-              0,
-              e.endLineNumberExclusive - 1,
-              1e4,
-            ),
-          s = new i.Range(
-            t.startLineNumber,
-            0,
-            t.endLineNumberExclusive - 1,
-            1e4,
-          )
-        if (
-          i.Range.getRangeExpandedByLines(
-            r,
-            o.radius,
-            o.radius,
-          ).getOverlap(s) !== i.OverlapBehaviour.None
-        ) {
-          const e = i.Range.merge(r, s)
-          return (this.latestRangeByIdentifier[n] = e), !0
-        }
-        return (this.latestRangeByIdentifier[n] = s), !1
-      }
-      {
-        const n = this.rangesIntersect(e, t),
-          r = Math.min(
-            Math.abs(e.startLineNumber - t.startLineNumber),
-            Math.abs(e.endLineNumberExclusive - t.endLineNumberExclusive),
-            Math.abs(e.startLineNumber - t.endLineNumberExclusive),
-            Math.abs(e.endLineNumberExclusive - t.startLineNumber),
-          ),
-          s = n || r <= o.radius
-        if ("include if in radius with upper limit" === o.type) {
-          const n =
-              Math.max(
-                e.endLineNumberExclusive,
-                t.endLineNumberExclusive,
-              ) - Math.min(e.startLineNumber, t.startLineNumber),
-            r = t.endLineNumberExclusive - t.startLineNumber
-          return s && (n === r || n <= o.limit)
-        }
-        return s
-      }
-    }
-    cleanDiffTrajectories() {
-      let e = 0
-      for (const t in this._diffStateByIdentifier)
-        (this._diffStateByIdentifier[t].diffHistory =
-          this._diffStateByIdentifier[t].diffHistory.filter((e) =>
-            this.filterPatch(e.patch),
-          )),
-          (e += this._diffStateByIdentifier[t].diffHistory.length)
-      for (let t = e; t > this.diffHistorySizeLimit; t--)
-        this.removeOldestDiffTrajectory()
-    }
-    async getPatchOfActiveDiff(e, t, n) {
-      const {
-        oldestModel: r,
-        newModel: s,
-        cachedPatchString: i,
-        rangesOfAccumulatedChanges: o,
-      } = this._diffStateByIdentifier[e]
-      if (void 0 !== i) return i
-      const a =
-          this.alwaysUseFullFileDiff ||
-          t ||
-          this.useFullFileDiffsTilUnmerged
-            ? void 0
-            : o,
-        l = await u({
-          past: r,
-          current: s,
-          radius: this.gitDiffExtraContextRadius,
-          keepWhitespaceChanges: this.keepWhitespaceOnlyChanges && n,
-          rangesOfPastAndCurrent: a,
-          includeUnchangedLines: this.includeUnchangedLines,
+      // 在某个时间点复制当前状态
+      copyAtPointInTime(shouldCopyHistory) {
+        const copy = new EditHistoryFormatter({
+          numModelChangesToSave: this.numModelChangesToSave,
+          diffHistorySizeLimit: this.diffHistorySizeLimit,
+          patchStringSizeLimit: this.patchStringSizeLimit,
+          gitDiffExtraContextRadius: this.gitDiffExtraContextRadius,
         })
-      return (
-        (!1 !== n && !1 !== l?.isWhitespaceChange) ||
-          (this._diffStateByIdentifier[e].cachedPatchString = l),
-        l
-      )
-    }
-    newestModelIdentifier() {
-      let e = null,
-        t = -1 / 0
-      for (const n in this._diffStateByIdentifier) {
-        const r = this._diffStateByIdentifier[n].lastEditTime
-        r > t && ((e = n), (t = r))
+        for (const identifier in this._diffStateByIdentifier)
+          if (shouldCopyHistory) {
+            const modelValue = this._diffStateByIdentifier[identifier].newModel
+            copy.initModel(identifier, modelValue)
+          } else {
+            const diffState = this._diffStateByIdentifier[identifier],
+              copiedDiffState = {
+                ...diffState,
+                oneBeforeLastModel: diffState.oneBeforeLastModel
+                  ? diffState.oneBeforeLastModel
+                  : void 0,
+                newModel: diffState.newModel,
+                oldestModel: diffState.oldestModel,
+                rangesOfAccumulatedChanges: diffState.rangesOfAccumulatedChanges
+                  ? {
+                      currentRange:
+                        diffState.rangesOfAccumulatedChanges.currentRange,
+                      pastRange: diffState.rangesOfAccumulatedChanges.pastRange,
+                    }
+                  : void 0,
+                addedRangeInNewModelOneIndexed:
+                  diffState.addedRangeInNewModelOneIndexed
+                    ? { ...diffState.addedRangeInNewModelOneIndexed }
+                    : void 0,
+                cachedPatchString: diffState.cachedPatchString
+                  ? { ...diffState.cachedPatchString }
+                  : void 0,
+                lastEditTime: diffState.lastEditTime,
+                modelVersion: diffState.modelVersion,
+                diffHistory: diffState.diffHistory.map((diff) => ({ ...diff })),
+              }
+            ;(copy._diffStateByIdentifier[identifier] = copiedDiffState),
+              (copy.latestRangeByIdentifier[identifier] =
+                this.latestRangeByIdentifier[identifier])
+          }
+        return copy
       }
-      return e
-    }
-    updateNewModel(e, t) {
-      this.saveOneBeforeLastModelValue &&
-        (this._diffStateByIdentifier[e].oneBeforeLastModel =
-          this._diffStateByIdentifier[e].newModel),
-        (this._diffStateByIdentifier[e].newModel = t),
-        delete this._diffStateByIdentifier[e].cachedPatchString
-    }
-    updateOldestModel(e, t) {
-      ;(this._diffStateByIdentifier[e].oldestModel = t),
-        delete this._diffStateByIdentifier[e].cachedPatchString
-    }
-    setKeepWhitespaceOnlyChanges(e) {
-      this.keepWhitespaceOnlyChanges = e
-    }
-    setIncludeUnchangedLines(e) {
-      this.includeUnchangedLines = e
-    }
-    setMergingBehavior(e) {
-      this.mergingBehavior = e
-    }
-    compareEditTimes(e) {
-      if (e.firstModelIdentifier === e.secondModelIdentifier) return 0
-      const t =
-          this._diffStateByIdentifier[e.firstModelIdentifier]
-            ?.lastEditTime,
-        n =
-          this._diffStateByIdentifier[e.secondModelIdentifier]
-            ?.lastEditTime
-      if (void 0 === t || void 0 === n)
-        throw new Error(
-          `Edit time is undefined for model identifier: ${e.firstModelIdentifier} or ${e.secondModelIdentifier}`,
+      // 检查两个范围是否相交
+      rangesIntersect(range1, range2) {
+        return (
+          range1.startLineNumber <= range2.endLineNumberExclusive &&
+          range1.endLineNumberExclusive >= range2.startLineNumber
         )
-      return t - n
+      }
+      // 判断是否应该合并两个差异范围
+      shouldMerge({
+        lastDiffRange: lastRange,
+        replacedChangeRange: newRange,
+        uniqueModelIdentifier: uniqueModelIdentifier,
+      }) {
+        const isExactMatch =
+            newRange.startLineNumber === lastRange.startLineNumber &&
+            newRange.endLineNumberExclusive === lastRange.endLineNumberExclusive,
+          isSingleLine = newRange.endLineNumberExclusive - newRange.startLineNumber == 1,
+          mergingBehavior = this.mergingBehavior
+        if (void 0 === mergingBehavior || "single line" === mergingBehavior.type)
+          return (isSingleLine && lastRange.startLineNumber === newRange.endLineNumberExclusive) || isExactMatch
+        if ("whitespace compatible" === mergingBehavior.type)
+          return (
+            isExactMatch ||
+            (isSingleLine && lastRange.startLineNumber === newRange.endLineNumberExclusive) ||
+            (isSingleLine && lastRange.endLineNumberExclusive == newRange.startLineNumber) ||
+            (newRange.endLineNumberExclusive - newRange.startLineNumber <= 2 &&
+              lastRange.endLineNumberExclusive == newRange.endLineNumberExclusive)
+          )
+        if ("merged diff history" === mergingBehavior.type) {
+          const lastRangeExpanded =
+              this.latestRangeByIdentifier[uniqueModelIdentifier] ??
+              new positionModule.Range(
+                lastRange.startLineNumber,
+                0,
+                lastRange.endLineNumberExclusive - 1,
+                1e4,
+              ),
+            newRangeExpanded = new positionModule.Range(
+              newRange.startLineNumber,
+              0,
+              newRange.endLineNumberExclusive - 1,
+              1e4,
+            )
+          if (
+            positionModule.Range.getRangeExpandedByLines(
+              lastRangeExpanded,
+              mergingBehavior.radius,
+              mergingBehavior.radius,
+            ).getOverlap(newRangeExpanded) !== positionModule.OverlapBehaviour.None
+          ) {
+            const mergedRange = positionModule.Range.merge(lastRangeExpanded, newRangeExpanded)
+            return (this.latestRangeByIdentifier[uniqueModelIdentifier] = mergedRange), !0
+          }
+          return (this.latestRangeByIdentifier[uniqueModelIdentifier] = newRangeExpanded), !1
+        }
+        {
+          const rangesOverlap = this.rangesIntersect(lastRange, newRange),
+            minDistance = Math.min(
+              Math.abs(lastRange.startLineNumber - newRange.startLineNumber),
+              Math.abs(lastRange.endLineNumberExclusive - newRange.endLineNumberExclusive),
+              Math.abs(lastRange.startLineNumber - newRange.endLineNumberExclusive),
+              Math.abs(lastRange.endLineNumberExclusive - newRange.startLineNumber),
+            ),
+            shouldMerge = rangesOverlap || minDistance <= mergingBehavior.radius
+          if ("include if in radius with upper limit" === mergingBehavior.type) {
+            const n =
+                Math.max(
+                  lastRange.endLineNumberExclusive,
+                  newRange.endLineNumberExclusive,
+                ) - Math.min(lastRange.startLineNumber, newRange.startLineNumber),
+              r = newRange.endLineNumberExclusive - newRange.startLineNumber
+            return shouldMerge && (n === r || n <= mergingBehavior.limit)
+          }
+          return shouldMerge
+        }
+      }
+      // 清理差异轨迹
+      cleanDiffTrajectories() {
+        let totalDiffCount = 0
+        for (const identifier in this._diffStateByIdentifier)
+          (this._diffStateByIdentifier[identifier].diffHistory =
+            this._diffStateByIdentifier[identifier].diffHistory.filter((diff) =>
+              this.filterPatch(diff.patch),
+            )),
+            (totalDiffCount += this._diffStateByIdentifier[identifier].diffHistory.length)
+        for (let i = totalDiffCount; i > this.diffHistorySizeLimit; i--)
+          this.removeOldestDiffTrajectory()
+      }
+      // 获取当前差异的补丁
+      async getPatchOfActiveDiff(identifier, useFullFileDiff, isWhitespaceCheck) {
+        const {
+          oldestModel: oldModel,
+          newModel: newModel,
+          cachedPatchString: cachedPatch,
+          rangesOfAccumulatedChanges: accumulatedRanges,
+        } = this._diffStateByIdentifier[identifier]
+        if (void 0 !== cachedPatch) return cachedPatch
+        const rangesToUse =
+            this.alwaysUseFullFileDiff ||
+            useFullFileDiff ||
+            this.useFullFileDiffsTilUnmerged
+              ? void 0
+              : accumulatedRanges,
+          patch = await computePatchString({
+            past: oldModel,
+            current: newModel,
+            radius: this.gitDiffExtraContextRadius,
+            keepWhitespaceChanges: this.keepWhitespaceOnlyChanges && isWhitespaceCheck,
+            rangesOfPastAndCurrent: rangesToUse,
+            includeUnchangedLines: this.includeUnchangedLines,
+          })
+        return (
+          (!1 !== isWhitespaceCheck && !1 !== patch?.isWhitespaceChange) ||
+            (this._diffStateByIdentifier[identifier].cachedPatchString = patch),
+          patch
+        )
+      }
+      // 获取最新模型的标识符
+      newestModelIdentifier() {
+        let newestIdentifier = null,
+          latestEditTime = -1 / 0
+        for (const identifier in this._diffStateByIdentifier) {
+          const editTime = this._diffStateByIdentifier[identifier].lastEditTime
+          editTime > latestEditTime && ((newestIdentifier = identifier), (latestEditTime = editTime))
+        }
+        return newestIdentifier
+      }
+      // 更新新模型
+      updateNewModel(identifier, newModelValue) {
+        this.saveOneBeforeLastModelValue &&
+          (this._diffStateByIdentifier[identifier].oneBeforeLastModel =
+            this._diffStateByIdentifier[identifier].newModel),
+          (this._diffStateByIdentifier[identifier].newModel = newModelValue),
+          delete this._diffStateByIdentifier[identifier].cachedPatchString
+      }
+      // 更新旧模型
+      updateOldestModel(identifier, oldModelValue) {
+        ;(this._diffStateByIdentifier[identifier].oldestModel = oldModelValue),
+          delete this._diffStateByIdentifier[identifier].cachedPatchString
+      }
+      // 设置是否保留仅空白字符的变化
+      setKeepWhitespaceOnlyChanges(shouldKeep) {
+        this.keepWhitespaceOnlyChanges = shouldKeep;
+      }
+      // 设置是否包含未变化的行
+      setIncludeUnchangedLines(shouldInclude) {
+        this.includeUnchangedLines = shouldInclude;
+      }
+      // 设置合并行为
+      setMergingBehavior(behavior) {
+        this.mergingBehavior = behavior;
+      }
+      // 比较两个模型的编辑时间
+      compareEditTimes(compareObject) {
+        if (compareObject.firstModelIdentifier === compareObject.secondModelIdentifier) return 0
+        const firstEditTime =
+            this._diffStateByIdentifier[compareObject.firstModelIdentifier]
+              ?.lastEditTime,
+          secondEditTime =
+            this._diffStateByIdentifier[compareObject.secondModelIdentifier]
+              ?.lastEditTime
+        if (void 0 === firstEditTime || void 0 === secondEditTime)
+          throw new Error(
+            `Edit time is undefined for model identifier: ${compareObject.firstModelIdentifier} or ${compareObject.secondModelIdentifier}`,
+          )
+        return firstEditTime - secondEditTime
+      }
     }
-  }
-  async function u({
-    past: e,
-    current: t,
-    radius: n,
-    keepWhitespaceChanges: r,
-    rangesOfPastAndCurrent: i,
-    includeUnchangedLines: o = !0,
-    timeout: a = 2e3,
+  async function computePatchString({
+    past: pastContent,
+    current: currentContent,
+    radius,
+    keepWhitespaceChanges, // 是否保留空白字符变化
+    rangesOfPastAndCurrent, // 新旧文本的范围信息
+    includeUnchangedLines: includeUnchangedLines = !0, // 是否包含未变化的行
+    timeout: timeout = 2000, // diff操作超时时间
   }) {
     const {
-      past: l,
-      current: u,
-      currentOffsetLineNumber: c,
-      pastOffsetLineNumber: A,
+      past: trimmedPast,
+      current: trimmedCurrent,
+      currentOffsetLineNumber,
+      pastOffsetLineNumber,
     } = (function ({
-      origPast: e,
-      origCurrent: t,
-      rangesOfPastAndCurrent: n,
+      origPast: pastContent,
+      origCurrent: currentContent,
+      rangesOfPastAndCurrent,
     }) {
-      if (void 0 === n)
+      if (void 0 === rangesOfPastAndCurrent)
         return {
-          past: e,
-          current: t,
+          past: pastContent,
+          current: currentContent,
           currentOffsetLineNumber: 0,
           pastOffsetLineNumber: 0,
         }
-      const { pastRange: r, currentRange: s } = n,
-        i = { ...s },
-        o = { ...r },
-        a = t.split("\n"),
-        l = e.split("\n")
-      i.endLineNumberExclusive < a.length &&
-        o.endLineNumberExclusive < l.length &&
-        ((i.endLineNumberExclusive += 1),
-        (o.endLineNumberExclusive += 1)),
-        i.startLineNumber > 1 &&
-          o.startLineNumber > 1 &&
-          ((i.startLineNumber -= 1), (o.startLineNumber -= 1))
-      const u = Math.max(
-          Math.min(i.startLineNumber - 1, o.startLineNumber - 1, 25),
+      const { pastRange, currentRange } = rangesOfPastAndCurrent,
+        adjustedCurrentRange = { ...currentRange },
+        adjustedPastRange = { ...pastRange },
+        currentLines = currentContent.split("\n"),
+        pastLines = pastContent.split("\n")
+      adjustedCurrentRange.endLineNumberExclusive < currentLines.length &&
+        adjustedPastRange.endLineNumberExclusive < pastLines.length &&
+        ((adjustedCurrentRange.endLineNumberExclusive += 1),
+        (adjustedPastRange.endLineNumberExclusive += 1)),
+        adjustedCurrentRange.startLineNumber > 1 &&
+          adjustedPastRange.startLineNumber > 1 &&
+          ((adjustedCurrentRange.startLineNumber -= 1), (adjustedPastRange.startLineNumber -= 1))
+      const contextBefore = Math.max(
+          Math.min(adjustedCurrentRange.startLineNumber - 1, adjustedPastRange.startLineNumber - 1, 25),
           0,
         ),
-        c = Math.max(
+        contextAfter = Math.max(
           Math.min(
-            a.length + 1 - i.endLineNumberExclusive,
-            l.length + 1 - o.endLineNumberExclusive,
+            currentLines.length + 1 - adjustedCurrentRange.endLineNumberExclusive,
+            pastLines.length + 1 - adjustedPastRange.endLineNumberExclusive,
             25,
           ),
           0,
         )
-      ;(i.startLineNumber -= u),
-        (o.startLineNumber -= u),
-        (i.endLineNumberExclusive += c),
-        (o.endLineNumberExclusive += c)
-      const A = a
-        .slice(i.startLineNumber - 1, i.endLineNumberExclusive - 1)
+      ;(adjustedCurrentRange.startLineNumber -= contextBefore),
+        (adjustedPastRange.startLineNumber -= contextBefore),
+        (adjustedCurrentRange.endLineNumberExclusive += contextAfter),
+        (adjustedPastRange.endLineNumberExclusive += contextAfter)
+      const trimmedCurrentContent = currentLines
+        .slice(adjustedCurrentRange.startLineNumber - 1, adjustedCurrentRange.endLineNumberExclusive - 1)
         .join("\n")
       return {
-        past: l
-          .slice(o.startLineNumber - 1, o.endLineNumberExclusive - 1)
+        past: pastLines
+          .slice(adjustedPastRange.startLineNumber - 1, adjustedPastRange.endLineNumberExclusive - 1)
           .join("\n"),
-        current: A,
-        currentOffsetLineNumber: i.startLineNumber - 1,
-        pastOffsetLineNumber: o.startLineNumber - 1,
+        current: trimmedCurrentContent,
+        currentOffsetLineNumber: adjustedCurrentRange.startLineNumber - 1,
+        pastOffsetLineNumber: adjustedPastRange.startLineNumber - 1,
       }
-    })({ origPast: e, origCurrent: t, rangesOfPastAndCurrent: i })
-    let m
-    m =
-      l.split("\n").length > 100 || u.split("\n").length > 100
-        ? await new Promise((e, t) => {
-            ;(0, s.diffLines)(l, u, {
-              callback: (n, r) => {
-                void 0 !== r ? e(r) : t(new Error("Timeout exceeded"))
+    })({ origPast: pastContent, origCurrent: currentContent, rangesOfPastAndCurrent: rangesOfPastAndCurrent })
+    let diffResult
+    // 如果内容较大，使用异步diff操作
+    diffResult =
+      trimmedPast.split("\n").length > 100 || trimmedCurrent.split("\n").length > 100
+        ? await new Promise((resolve, reject) => {
+            ;(0, diffModule.diffLines)(trimmedPast, trimmedCurrent, {
+              callback: (error, result) => {
+                void 0 !== result ? resolve(result) : reject(new Error("Timeout exceeded"))
               },
-              timeout: a,
+              timeout: timeout,
             })
           })
-        : (0, s.diffLines)(l, u)
-    let d = 1 / 0,
-      p = -1 / 0,
-      g = -1 / 0,
-      h = 1
+        : (0, diffModule.diffLines)(trimmedPast, trimmedCurrent)
+    let firstChangeLine = 1 / 0,
+      lastNonEmptyChangeLine = -1 / 0,
+      lastChangeLine = -1 / 0,
+      currentLine = 1
     if (
-      (m.forEach((e) => {
-        ;(!0 !== e.added && !0 !== e.removed) ||
-          ((d = Math.min(d, h)),
-          "" !== e.value.trim() && (p = Math.max(p, h + e.count - 1)),
-          (g = Math.max(g, h + e.count - 1))),
-          (h += e.count)
+      (diffResult.forEach((change) => {
+        ;(!0 !== change.added && !0 !== change.removed) ||
+          ((firstChangeLine = Math.min(firstChangeLine, currentLine)),
+          "" !== change.value.trim() && (lastNonEmptyChangeLine = Math.max(lastNonEmptyChangeLine, currentLine + change.count - 1)),
+          (lastChangeLine = Math.max(lastChangeLine, currentLine + change.count - 1))),
+          (currentLine += change.count)
       }),
-      (d = Math.max(0, d - n)),
-      p === -1 / 0 && (p = g),
-      (p += n),
-      d === 1 / 0 || p === -1 / 0)
+      (firstChangeLine = Math.max(0, firstChangeLine - radius)),
+      lastNonEmptyChangeLine === -1 / 0 && (lastNonEmptyChangeLine = lastChangeLine),
+      (lastNonEmptyChangeLine += radius),
+      firstChangeLine === 1 / 0 || lastNonEmptyChangeLine === -1 / 0)
     )
       return
-    const f = l.replace(/\s/g, "") === u.replace(/\s/g, "")
-    if (f && !0 !== r) return
-    let E = "",
-      C = d - 1,
-      y = d - 1
-    for (let e = d; e <= p; e++) {
-      h = 1
-      const t = m.find((t, n) => {
-        const r = h + t.count,
-          s = h <= e && e < r
-        return (h = r), s
+    const isWhitespaceOnlyChange = trimmedPast.replace(/\s/g, "") === trimmedCurrent.replace(/\s/g, "")
+    if (isWhitespaceOnlyChange && !0 !== keepWhitespaceChanges) return
+    let patchString = "",
+      pastLineNumber = firstChangeLine - 1,
+      currentLineNumber = firstChangeLine - 1
+    for (let line = firstChangeLine; line <= lastNonEmptyChangeLine; line++) {
+      currentLine = 1
+      const change = diffResult.find((change, index) => {
+        const endLine = currentLine + change.count,
+          isInRange = currentLine <= line && line < endLine
+        return (currentLine = endLine), isInRange
       })
-      if (void 0 !== t) {
-        const n = e - (h - t.count)
-        !0 === t.added
-          ? (y++,
-            (E +=
-              `${(y + c).toString().padStart(0, " ")}+|` +
-              t.value.split("\n")[n] +
+      if (void 0 !== change) {
+        const lineInChange = line - (currentLine - change.count)
+        !0 === change.added
+          ? (currentLineNumber++,
+            (patchString +=
+              `${(currentLineNumber + currentOffsetLineNumber).toString().padStart(0, " ")}+|` +
+              change.value.split("\n")[lineInChange] +
               "\n"))
-          : !0 === t.removed
-            ? (C++,
-              (E +=
-                `${(C + A).toString().padStart(0, " ")}-|` +
-                t.value.split("\n")[n] +
+          : !0 === change.removed
+            ? (pastLineNumber++,
+              (patchString +=
+                `${(pastLineNumber + pastOffsetLineNumber).toString().padStart(0, " ")}-|` +
+                change.value.split("\n")[lineInChange] +
                 "\n"))
-            : o
-              ? (C++,
-                y++,
-                (E +=
-                  `${(y + c).toString().padStart(0, " ")} |` +
-                  t.value.split("\n")[n] +
+            : includeUnchangedLines
+              ? (pastLineNumber++,
+                currentLineNumber++,
+                (patchString +=
+                  `${(currentLineNumber + currentOffsetLineNumber).toString().padStart(0, " ")} |` +
+                  change.value.split("\n")[lineInChange] +
                   "\n"))
-              : (C++, y++)
+              : (pastLineNumber++, currentLineNumber++)
       }
     }
-    return { string: E, isWhitespaceChange: f }
+    return { string: patchString, isWhitespaceChange: isWhitespaceOnlyChange }
   }
-  function c({
-    firstAddedRange: e,
-    secondAddedRange: t,
-    firstRemovedRange: n,
-    secondRemovedRange: r,
+  function getJoinedDiffRange({
+    firstAddedRange, // 第一个添加的范围
+    secondAddedRange, // 第二个添加的范围
+    firstRemovedRange, // 第一个删除的范围
+    secondRemovedRange, // 第二个删除的范围
   }) {
-    if (n.startLineNumber !== e.startLineNumber)
+    // 检查第一个删除和添加范围的起始行是否一致
+    if (firstRemovedRange.startLineNumber !== firstAddedRange.startLineNumber)
       throw new Error(
         "firstRemovedRange.startLineNumber !== firstAddedRange.startLineNumber",
       )
-    if (r.startLineNumber !== t.startLineNumber)
+    // 检查第二个删除和添加范围的起始行是否一致
+    if (secondRemovedRange.startLineNumber !== secondAddedRange.startLineNumber)
       throw new Error(
         "secondRemovedRange.startLineNumber !== secondAddedRange.startLineNumber",
       )
-    const s = Math.min(n.startLineNumber, r.startLineNumber),
-      i = Math.max(
+    // 计算合并后的起始行号
+    const startLineNumber = Math.min(firstRemovedRange.startLineNumber, secondRemovedRange.startLineNumber),
+      // 计算第二个删除范围与第一个添加范围之间的行数差异
+      lineDifference = Math.max(
         0,
-        r.endLineNumberExclusive - e.endLineNumberExclusive,
+        secondRemovedRange.endLineNumberExclusive - firstAddedRange.endLineNumberExclusive,
       ),
-      o = {
-        startLineNumber: s,
-        endLineNumberExclusive: n.endLineNumberExclusive + i,
+      // 生成合并后的过去范围
+      pastRange = {
+        startLineNumber,
+        endLineNumberExclusive: firstRemovedRange.endLineNumberExclusive + lineDifference,
       },
-      l = s,
-      u = (0, a.numIntersectingLines)(r, { ...e, startLineNumber: 1 }),
-      c = (0, a.numIntersectingLines)(t, { ...e, startLineNumber: 1 }) - u
+      // 当前范围的起始行号与过去范围一致
+      currentStartLineNumber = startLineNumber,
+      // 计算第二个删除范围与第一个添加范围的重叠行数
+      overlappingRemovedLines = (0, diffProviderModule.numIntersectingLines)(secondRemovedRange, { ...firstAddedRange, startLineNumber: 1 }),
+      // 计算第二个添加范围与第一个添加范围的重叠行数，并减去删除的重叠行数
+      additionalLines = (0, diffProviderModule.numIntersectingLines)(secondAddedRange, { ...firstAddedRange, startLineNumber: 1 }) - overlappingRemovedLines
+    // 返回合并后的范围
     return {
-      pastRange: o,
+      pastRange,
       currentRange: {
-        startLineNumber: l,
+        startLineNumber: currentStartLineNumber,
         endLineNumberExclusive:
-          Math.max(e.endLineNumberExclusive, t.endLineNumberExclusive) +
-          c,
+          Math.max(firstAddedRange.endLineNumberExclusive, secondAddedRange.endLineNumberExclusive) +
+          additionalLines,
       },
     }
   }
-  ;(t.EditHistoryFormatter = l),
-    (t.computePatchString = u),
-    (t.getJoinedDiffRange = c)
+  ;(exports.EditHistoryFormatter = EditHistoryFormatter),
+    (exports.computePatchString = computePatchString),
+    (exports.getJoinedDiffRange = getJoinedDiffRange)
 }
