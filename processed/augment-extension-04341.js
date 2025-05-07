@@ -105244,7 +105244,7 @@ function tSe(e, t) {
     return s instanceof Promise ? s.then(i) : i(s)
   }
 }
-var FQ = class {
+var CompletionsModel = class {
   constructor(t, r, n) {
     this._extension = t
     this._configListener = r
@@ -112392,47 +112392,47 @@ function ZCt(e, t) {
 var oIe = q(_s()),
   Us = q(require("vscode"))
 var yw = q(require("vscode"))
-var zm = class extends DisposableContainer {
+var DocumentContextValue = class extends DisposableContainer {
   _document
   _lastSetAt
   _observable
-  constructor(t = void 0, r = 1) {
-    super(), (this._observable = this.addDisposable(new ga(t)))
-    let n = (i) => {
+  constructor(initialValue = void 0, clearDelayMs = 1) {
+    super(), (this._observable = this.addDisposable(new ga(initialValue)))
+    let checkAndClearIfNeeded = (document) => {
       this.value === void 0 ||
-        (i && this._document && i !== this._document) ||
-        (this._lastSetAt && Date.now() - this._lastSetAt < r) ||
+        (document && this._document && document !== this._document) ||
+        (this._lastSetAt && Date.now() - this._lastSetAt < clearDelayMs) ||
         this.clear()
     }
     this.addDisposable(
       yw.window.onDidChangeActiveTextEditor(() => {
-        n()
+        checkAndClearIfNeeded()
       }),
     ),
       this.addDisposable(
-        yw.window.onDidChangeTextEditorSelection((i) => {
-          n(i.textEditor.document)
+        yw.window.onDidChangeTextEditorSelection((event) => {
+          checkAndClearIfNeeded(event.textEditor.document)
         }),
       ),
       this.addDisposable(
-        yw.workspace.onDidChangeTextDocument((i) => {
-          n(i.document)
+        yw.workspace.onDidChangeTextDocument((event) => {
+          checkAndClearIfNeeded(event.document)
         }),
       )
   }
   get value() {
     return this._observable.value
   }
-  listen(t, r = !1) {
-    return this._observable.listen(t, r)
+  listen(callback, runImmediately = !1) {
+    return this._observable.listen(callback, runImmediately)
   }
-  waitUntil(t, r) {
-    return this._observable.waitUntil(t, r)
+  waitUntil(predicate, timeoutMs) {
+    return this._observable.waitUntil(predicate, timeoutMs)
   }
-  set(t, r) {
+  set(value, document) {
     ;(this._lastSetAt = Date.now()),
-      (this._document = r),
-      (this._observable.value = t)
+      (this._document = document),
+      (this._observable.value = value)
   }
   clear() {
     ;(this._document = void 0), (this._observable.value = void 0)
@@ -112541,8 +112541,8 @@ var SuggestionManager = class extends DisposableContainer {
     this._workspaceManager = workspaceManager
     this._nextEditSessionEventReporter = nextEditSessionEventReporter
     this.defaultRejectionDurationMs = defaultRejectionDurationMs
-    ;(this.suggestionWasJustAccepted = new zm()),
-      (this.suggestionWasJustUndone = new zm()),
+    ;(this.suggestionWasJustAccepted = new DocumentContextValue()),
+      (this.suggestionWasJustUndone = new DocumentContextValue()),
       this.addDisposable(this.suggestionWasJustAccepted),
       this.addDisposable(this.suggestionWasJustUndone),
       this.addDisposable(new Us.Disposable(() => this.clear(!0))),
@@ -121649,7 +121649,7 @@ var Wm = class e extends DisposableContainer {
       (this._toolUseRequestEventReporter = new fI()),
       this.disposeOnDisable.push(this.guidelinesWatcher),
       this.addDisposable(new Ye.Disposable(() => this.disable())),
-      (this._completionsModel = new FQ(
+      (this._completionsModel = new CompletionsModel(
         this,
         this._augmentConfigListener,
         this._clientMetricsReporter,
@@ -121924,7 +121924,7 @@ var Wm = class e extends DisposableContainer {
       this.disposeOnDisable.push(this._diagnosticsManager)
     let u = new $m(this._statusBar)
     this.disposeOnDisable.push(u)
-    let f = new zm()
+    let f = new DocumentContextValue()
     this.disposeOnDisable.push(
       Hwe((Y) => {
         Y.acceptedIdx >= 0 && f.set(!0, Y.document)
