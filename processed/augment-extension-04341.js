@@ -108190,7 +108190,7 @@ function DSe(e, t) {
             e.timeout === t.timeout
           : !1
 }
-var pN = class {
+var CodeLensProvider = class {
   constructor(t, r) {
     this._state = t
     this._keybindingWatcher = r
@@ -108819,7 +108819,7 @@ var OSe = { border: 0, background: 1, line: 2 },
           ?.push(new ru.Range(r, 0, r, 0))
     }
   }
-var wN = class e extends _N {
+var DecorationManager = class e extends _N {
   constructor(r, n, i, s, o, a, l) {
     super()
     this._context = r
@@ -109784,7 +109784,7 @@ function PCt(e, t, r) {
   return s
 }
 var IN = q(require("vscode"))
-var SN = class {
+var CodeActionProvider = class {
   constructor(t, r, n) {
     this._suggestionManager = t
     this._configListener = r
@@ -110141,7 +110141,7 @@ function YSe(e) {
   return `<a href="${e.href}" title="${e.tooltip}">${e.text}${e.keybindingIcons ? `&nbsp;${e.keybindingIcons}` : ""}</a>`
 }
 var WCt = 38,
-  BN = class e extends DisposableContainer {
+  HoverProvider = class e extends DisposableContainer {
     constructor(r, n, i, s, o, a, l, c, u) {
       super()
       this._keybindingWatcher = r
@@ -110473,50 +110473,50 @@ var GCt = new Map([
       i && Vc(i, n)
     }
   }
-var DN = class e extends DisposableContainer {
-  constructor(r, n, i, s, o, a, l, c, u, f, p = (g) => {}) {
+var NextEditManager = class NextEditManager extends DisposableContainer {
+  constructor(editor, workspaceManager, sessionEventReporter, documentManager, configListener, suggestionManager, requestManager, globalState, configManager, completionVisibilityWatcher, onCursorWithinSuggestion = (suggestion) => {}) {
     super()
-    this.workspaceManager = n
-    this._nextEditSessionEventReporter = i
-    this._configListener = o
-    this._suggestionManager = a
-    this._requestManager = l
-    this._globalState = c
-    this._nextEditConfigManager = u
-    this._completionVisibilityWatcher = f
-    this._onCursorWithinSuggestion = p
+    this.workspaceManager = workspaceManager
+    this._nextEditSessionEventReporter = sessionEventReporter
+    this._configListener = configListener
+    this._suggestionManager = suggestionManager
+    this._requestManager = requestManager
+    this._globalState = globalState
+    this._nextEditConfigManager = configManager
+    this._completionVisibilityWatcher = completionVisibilityWatcher
+    this._onCursorWithinSuggestion = onCursorWithinSuggestion
     ;(this._state = new ga(new NoSuggestionsState(), DSe)),
-      (this._decorationManager = new wN(
-        r,
-        n,
-        s,
-        o,
-        i,
+      (this._decorationManager = new DecorationManager(
+        editor,
+        workspaceManager,
+        documentManager,
+        configListener,
+        sessionEventReporter,
         this.isInlineCompletionVisible,
         this.isShowAllHighlightsEnabled,
       )),
       this.addDisposable(this._decorationManager),
-      (this._codeActionProvider = new SN(
+      (this._codeActionProvider = new CodeActionProvider(
         this._suggestionManager,
         this._configListener,
-        i,
+        sessionEventReporter,
       )),
       (this._keybindingStatus = this.addDisposable(new RN(this._state))),
-      (this._hoverProvider = new BN(
-        s,
-        i,
+      (this._hoverProvider = new HoverProvider(
+        documentManager,
+        sessionEventReporter,
         this._suggestionManager,
         this._state,
         this._configListener,
         this.isInlineCompletionVisible,
         () =>
           (this._globalState.get("nextEditKeybindingUsageCount") ?? 0) <
-          e.maxKeybindingUsageCount,
+          NextEditManager.maxKeybindingUsageCount,
         this._keybindingStatus,
         this._nextEditConfigManager,
       )),
       this.addDisposable(this._hoverProvider),
-      (this._codeLensProvider = new pN(this._state, s)),
+      (this._codeLensProvider = new CodeLensProvider(this._state, documentManager)),
       this.addDisposable(
         new Se.Disposable(() => {
           ;(this._state.value = new NoSuggestionsState()),
@@ -110541,70 +110541,70 @@ var DN = class e extends DisposableContainer {
       ),
       this.addDisposable(
         new Se.Disposable(
-          this._requestManager.lastResponse.listen((g) => {
-            g && this._suggestionManager.add([EditSuggestion.from(g)], g.mode === "FORCED")
+          this._requestManager.lastResponse.listen((response) => {
+            response && this._suggestionManager.add([EditSuggestion.from(response)], response.mode === "FORCED")
           }),
         ),
       ),
       this.addDisposable(
-        this._suggestionManager.onSuggestionsChanged((g) => {
-          this._handleSuggestionsChanged(g)
+        this._suggestionManager.onSuggestionsChanged((event) => {
+          this._handleSuggestionsChanged(event)
         }),
       ),
       this.addDisposable(
-        Se.window.onDidChangeTextEditorVisibleRanges((g) => {
+        Se.window.onDidChangeTextEditorVisibleRanges((event) => {
           this.workspaceManager.safeResolvePathName(
-            g.textEditor.document.uri,
+            event.textEditor.document.uri,
           ) &&
-            g.textEditor === Se.window.activeTextEditor &&
+            event.textEditor === Se.window.activeTextEditor &&
             !Vv() &&
             (!this._lastVisibleRanges ||
               this._lastVisibleRanges.uri.fsPath !==
-                g.textEditor.document.uri.fsPath ||
+                event.textEditor.document.uri.fsPath ||
               this._lastVisibleRanges.visibleRanges.length !==
-                g.visibleRanges.length ||
+                event.visibleRanges.length ||
               this._lastVisibleRanges.visibleRanges.some(
-                (m, y) => !m.equals(od(g.visibleRanges[y])),
+                (range, index) => !range.equals(od(event.visibleRanges[index])),
               )) &&
             (this._drawDecorations(),
             this._configListener.config.nextEdit.useCursorDecorations ||
               ((this._decorationManager.shouldDrawBottomDecorations.value = !1),
               this._debouncedSetBottomDecorations()),
             (this._lastVisibleRanges = {
-              uri: g.textEditor.document.uri,
-              visibleRanges: g.visibleRanges.map((m) => od(m)),
+              uri: event.textEditor.document.uri,
+              visibleRanges: event.visibleRanges.map((range) => od(range)),
             }))
         }),
       ),
       this.addDisposable(
         new Se.Disposable(
-          this._suggestionManager.suggestionWasJustAccepted.listen((g) => {
-            g &&
+          this._suggestionManager.suggestionWasJustAccepted.listen((accepted) => {
+            accepted &&
               (this._debouncedSetBottomDecorations.flush(),
               this._drawDecorations())
           }),
         ),
       ),
       this._configListener.addDisposable(
-        this._configListener.onDidChange((g) => {
-          !!g.newConfig.nextEdit.highlightSuggestionsInTheEditor !=
-            !!g.previousConfig.nextEdit.highlightSuggestionsInTheEditor &&
+        this._configListener.onDidChange((change) => {
+          !!change.newConfig.nextEdit.highlightSuggestionsInTheEditor !=
+            !!change.previousConfig.nextEdit.highlightSuggestionsInTheEditor &&
             this._drawDecorations()
         }),
       ),
       this.addDisposable(
-        this.workspaceManager.onDidChangeSourceFolderContents((g) => {
-          let m = new Map(),
-            y = this._suggestionManager.getAllSuggestions().filter((v) => {
-              if (v.qualifiedPathName.rootPath !== g) return !1
-              let C = v.qualifiedPathName.relPath
+        this.workspaceManager.onDidChangeSourceFolderContents((rootPath) => {
+          let fileExistsCache = new Map(),
+            suggestionsToRemove = this._suggestionManager.getAllSuggestions().filter((suggestion) => {
+              if (suggestion.qualifiedPathName.rootPath !== rootPath) return !1
+              let relPath = suggestion.qualifiedPathName.relPath
               return (
-                m.get(C) ||
-                  m.set(C, this.workspaceManager.hasFile(v.qualifiedPathName)),
-                !m.get(C)
+                fileExistsCache.get(relPath) ||
+                  fileExistsCache.set(relPath, this.workspaceManager.hasFile(suggestion.qualifiedPathName)),
+                !fileExistsCache.get(relPath)
               )
             })
-          this._suggestionManager.remove(y)
+          this._suggestionManager.remove(suggestionsToRemove)
         }),
       ),
       this.addDisposable(
@@ -110634,22 +110634,22 @@ var DN = class e extends DisposableContainer {
       ),
       this.addDisposable(
         new Se.Disposable(
-          this._state.listen((g) => {
-            let m
-            g instanceof NoSuggestionsState
-              ? (m = "state-transitioned-to-no-suggestions")
-              : g instanceof HintingState
-                ? (m = "state-transitioned-to-hinting")
-                : g instanceof BeforePreviewState
-                  ? (m = "state-transitioned-to-before-preview")
-                  : g instanceof AfterPreviewState
-                    ? (m = "state-transitioned-to-after-preview")
-                    : g instanceof AnimatingState &&
-                      (m = "state-transitioned-to-animating"),
-              m !== void 0 &&
+          this._state.listen((state) => {
+            let eventName
+            state instanceof NoSuggestionsState
+              ? (eventName = "state-transitioned-to-no-suggestions")
+              : state instanceof HintingState
+                ? (eventName = "state-transitioned-to-hinting")
+                : state instanceof BeforePreviewState
+                  ? (eventName = "state-transitioned-to-before-preview")
+                  : state instanceof AfterPreviewState
+                    ? (eventName = "state-transitioned-to-after-preview")
+                    : state instanceof AnimatingState &&
+                      (eventName = "state-transitioned-to-animating"),
+              eventName !== void 0 &&
                 this._nextEditSessionEventReporter.reportEventFromSuggestion(
-                  g.suggestion,
-                  m,
+                  state.suggestion,
+                  eventName,
                   "unknown",
                 )
           }),
@@ -110702,51 +110702,51 @@ var DN = class e extends DisposableContainer {
   _debouncedSetBottomDecorations = (0, ZSe.debounce)(() => {
     ;(this._decorationManager.shouldDrawBottomDecorations.value = !0),
       this._drawDecorations()
-  }, e._postScrollRenderDelayMs)
+  }, NextEditManager._postScrollRenderDelayMs)
   static get _smoothScrollDelayMs() {
     return (Se.workspace.getConfiguration("editor").smoothScrolling ?? !1)
       ? 150
       : 0
   }
-  dismiss(r, n = !1, i = !0) {
+  dismiss(source, hideHover = !1, clearJustAccepted = !0) {
     this._state.value instanceof BeforePreviewState || this._state.value instanceof AnimatingState
       ? ((this._state.value = new HintingState(this._state.value.suggestion, !0)),
-        i && this._suggestionManager.clearJustAcceptedSuggestions(),
+        clearJustAccepted && this._suggestionManager.clearJustAcceptedSuggestions(),
         this._nextEditSessionEventReporter.reportEventWithoutIds(
           "preview-decoration-dismissed",
-          r ?? "command",
+          source ?? "command",
         ))
       : this._state.value instanceof AfterPreviewState &&
         ((this._state.value = this._getHintedState()),
-        i && this._suggestionManager.clearJustAcceptedSuggestions(),
+        clearJustAccepted && this._suggestionManager.clearJustAcceptedSuggestions(),
         this._nextEditSessionEventReporter.reportEventWithoutIds(
           "reverse-decoration-dismissed",
-          r ?? "command",
+          source ?? "command",
         )),
-      n && this._hoverProvider.hideHover()
+      hideHover && this._hoverProvider.hideHover()
   }
-  async dismissOrReject(r) {
-    let n = Se.window.activeTextEditor
+  async dismissOrReject(source) {
+    let editor = Se.window.activeTextEditor
     this._state.value instanceof AfterPreviewState
       ? (await this._undoSuggestions(this._state.value.suggestion),
-        this.dismiss(r, !0))
+        this.dismiss(source, !0))
       : this._state.value instanceof BeforePreviewState || this._state.value instanceof AnimatingState
-        ? this.dismiss(r)
-        : n &&
+        ? this.dismiss(source)
+        : editor &&
             this._state.value instanceof HintingState &&
             this._hoverProvider.hoverContactCondition(
               this._state.value.suggestion,
-              n.selection.active,
-              n.document,
+              editor.selection.active,
+              editor.document,
             )
-          ? this.reject(r, this._state.value.suggestion.result.suggestionId)
-          : this.reject(r)
+          ? this.reject(source, this._state.value.suggestion.result.suggestionId)
+          : this.reject(source)
   }
   isInlineCompletionVisible = () =>
     this._completionVisibilityWatcher.maybeInlineCompletionVisible
   isShowAllHighlightsEnabled = () =>
     this._configListener.config.nextEdit.highlightSuggestionsInTheEditor
-  nextAvailableSuggestion = (r = !0, n = !1) =>
+  nextAvailableSuggestion = (preferVisible = !0, preferCursor = !1) =>
     jSe(
       this._suggestionManager.getActiveSuggestions().filter(isFreshNonNoopSuggestion),
       this._state.value instanceof BeforePreviewState ||
@@ -110754,29 +110754,29 @@ var DN = class e extends DisposableContainer {
         this._state.value instanceof AnimatingState
         ? this._state.value.suggestion
         : void 0,
-      !r,
-      n,
+      !preferVisible,
+      preferCursor,
       this._configListener.config.nextEdit.enableGlobalBackgroundSuggestions,
     )
-  _handleSuggestionsChanged = async (r) => {
-    this._updateSuggestions(r.newSuggestions, !0)
-    let n = Se.window.activeTextEditor,
-      i =
-        n &&
-        r.undone.find(
-          (s) =>
-            s.lineRange.contains(n.selection.active.line) ||
-            s.lineRange.touches(n.selection.active.line),
+  _handleSuggestionsChanged = async (event) => {
+    this._updateSuggestions(event.newSuggestions, !0)
+    let editor = Se.window.activeTextEditor,
+      undoneAtCursor =
+        editor &&
+        event.undone.find(
+          (suggestion) =>
+            suggestion.lineRange.contains(editor.selection.active.line) ||
+          suggestion.lineRange.touches(editor.selection.active.line),
         )
-    if (i && this._state.value instanceof AfterPreviewState) {
+    if (undoneAtCursor && this._state.value instanceof AfterPreviewState) {
       await this._suggestionManager.suggestionWasJustUndone.waitUntil(
-        (o) => o === !0,
-        e._waitForAcceptTimeoutMs,
+        (undone) => undone === !0,
+        NextEditManager._waitForAcceptTimeoutMs,
       )
-      let s = this._getSuggestionSelection(i)
-      s.isEqual(n.selection) ||
-        ((this._ignoreSelectionChangeEvents = !0), (n.selection = s)),
-        (this._state.value = new BeforePreviewState(i)),
+      let selection = this._getSuggestionSelection(undoneAtCursor)
+      selection.isEqual(editor.selection) ||
+        ((this._ignoreSelectionChangeEvents = !0), (editor.selection = selection)),
+        (this._state.value = new BeforePreviewState(undoneAtCursor)),
         this._nextEditSessionEventReporter.reportEventFromSuggestion(
           this._state.value.suggestion,
           "undid-accepted-suggestion",
@@ -110785,30 +110785,30 @@ var DN = class e extends DisposableContainer {
         this._hoverProvider.showHover()
     }
     if (
-      n &&
-      r.accepted.length > 0 &&
+      editor &&
+      event.accepted.length > 0 &&
       (this._state.value instanceof BeforePreviewState || this._state.value instanceof AnimatingState)
     ) {
       await this._suggestionManager.suggestionWasJustAccepted.waitUntil(
-        (a) => a === !0,
-        e._waitForAcceptTimeoutMs,
+        (accepted) => accepted === !0,
+        NextEditManager._waitForAcceptTimeoutMs,
       )
-      let s = r.accepted[r.accepted.length - 1],
-        o = this._getSuggestionSelection(s)
-      o.isEqual(n.selection) ||
-        ((this._ignoreSelectionChangeEvents = !0), (n.selection = o)),
-        (this._state.value = new AfterPreviewState(s)),
+      let acceptedSuggestion = event.accepted[event.accepted.length - 1],
+        selection = this._getSuggestionSelection(acceptedSuggestion)
+      selection.isEqual(editor.selection) ||
+        ((this._ignoreSelectionChangeEvents = !0), (editor.selection = selection)),
+        (this._state.value = new AfterPreviewState(acceptedSuggestion)),
         this._hoverProvider.showHover()
-    } else r.accepted.length > 0 && (this._ignoreSelectionChangeEvents = !0)
+    } else event.accepted.length > 0 && (this._ignoreSelectionChangeEvents = !0)
   }
-  _updateSuggestions(r, n) {
+  _updateSuggestions(suggestions, shouldUpdateState) {
     if (Vv()) return
-    let i = r.filter(isFreshNonNoopSuggestion)
+    let activeSuggestions = suggestions.filter(isFreshNonNoopSuggestion)
     if (
       (this._configListener.config.nextEdit.enableGlobalBackgroundSuggestions
-        ? i
-        : i.filter((o) =>
-            o.qualifiedPathName.equals(
+        ? activeSuggestions
+        : activeSuggestions.filter((suggestion) =>
+            suggestion.qualifiedPathName.equals(
               Se.window.activeTextEditor?.document.uri,
             ),
           )
@@ -110818,7 +110818,7 @@ var DN = class e extends DisposableContainer {
       ;(this._state.value = new NoSuggestionsState()), this._onCursorWithinSuggestion(void 0)
       return
     }
-    n &&
+    shouldUpdateState &&
       (this._state.value instanceof NoSuggestionsState || this._state.value instanceof HintingState) &&
       (this._state.value = this._getHintedState()),
       this._drawDecorations()
@@ -110834,14 +110834,14 @@ var DN = class e extends DisposableContainer {
       this._decorationManager.decorate([], {})
       return
     }
-    let r = this._suggestionManager.getActiveSuggestions().filter(isFreshNonNoopSuggestion),
-      n = this._suggestionManager.getJustAcceptedSuggestions(),
-      i =
+    let activeSuggestions = this._suggestionManager.getActiveSuggestions().filter(isFreshNonNoopSuggestion),
+      acceptedSuggestions = this._suggestionManager.getJustAcceptedSuggestions(),
+      hintingState =
         this._state.value instanceof HintingState
           ? this._state.value
           : this._getHintedState()
-    this._decorationManager.decorate(r.concat(n), {
-      hintSuggestion: i instanceof HintingState ? i.hintedSuggestion : void 0,
+    this._decorationManager.decorate(activeSuggestions.concat(acceptedSuggestions), {
+      hintSuggestion: hintingState instanceof HintingState ? hintingState.hintedSuggestion : void 0,
       activeSuggestion:
         this._state.value instanceof BeforePreviewState ||
         this._state.value instanceof AfterPreviewState ||
@@ -110851,13 +110851,13 @@ var DN = class e extends DisposableContainer {
       isAnimating: this._state.value instanceof AnimatingState,
     })
   }
-  _handleTextDocumentChanged = (r) => {
-    if (r.contentChanges.length === 0) return
-    let n = this.workspaceManager.safeResolvePathName(r.document.uri)
-    if (this._isDebugging || To(r.document.uri) || !n) return
-    let i = Se.window.activeTextEditor
-    !i ||
-      r.document !== i.document ||
+  _handleTextDocumentChanged = (event) => {
+    if (event.contentChanges.length === 0) return
+    let pathName = this.workspaceManager.safeResolvePathName(event.document.uri)
+    if (this._isDebugging || To(event.document.uri) || !pathName) return
+    let editor = Se.window.activeTextEditor
+    !editor ||
+      event.document !== editor.document ||
       (this._clearAnimatedApply(),
       (this._state.value instanceof AfterPreviewState || this._state.value instanceof AnimatingState) &&
         ((this._state.value = new NoSuggestionsState()),
@@ -110866,82 +110866,82 @@ var DN = class e extends DisposableContainer {
           "document-changed",
         )))
   }
-  _handleTextEditorSelectionChanged = (r) => {
-    let n = Se.window.activeTextEditor
+  _handleTextEditorSelectionChanged = (event) => {
+    let editor = Se.window.activeTextEditor
     if (
-      !n ||
-      r.textEditor.document !== n.document ||
+      !editor ||
+      event.textEditor.document !== editor.document ||
       Vv() ||
       this._isDebugging ||
-      To(n.document.uri) ||
-      !this.workspaceManager.safeResolvePathName(r.textEditor.document.uri)
+      To(editor.document.uri) ||
+      !this.workspaceManager.safeResolvePathName(event.textEditor.document.uri)
     )
       return
-    this._clearAnimatedApply(n.selection)
-    let s =
+    this._clearAnimatedApply(editor.selection)
+    let isIgnoredSelectionChange =
       !(
-        r.kind === Se.TextEditorSelectionChangeKind.Keyboard ||
-        r.kind === Se.TextEditorSelectionChangeKind.Mouse
+        event.kind === Se.TextEditorSelectionChangeKind.Keyboard ||
+        event.kind === Se.TextEditorSelectionChangeKind.Mouse
       ) && this._ignoreSelectionChangeEvents
     ;(this._ignoreSelectionChangeEvents = !1),
       (this._state.value instanceof BeforePreviewState ||
         this._state.value instanceof AnimatingState ||
         this._state.value instanceof AfterPreviewState) &&
-      !s
+      !isIgnoredSelectionChange
         ? this.dismiss("editor-selection-changed")
-        : s || this._suggestionManager.clearJustAcceptedSuggestions(),
+        : isIgnoredSelectionChange || this._suggestionManager.clearJustAcceptedSuggestions(),
       (this._state.value instanceof NoSuggestionsState ||
         this._state.value instanceof HintingState ||
         (this._state.value instanceof AnimatingState &&
           !this._getSuggestionSelection(this._state.value.suggestion).isEqual(
-            n.selection,
+            editor.selection,
           ))) &&
         (this._state.value = this._getHintedState()),
       this._drawDecorations()
-    let o = this._state.value.suggestion
+    let currentSuggestion = this._state.value.suggestion
     if (
-      o &&
-      n.selection.isEmpty &&
+      currentSuggestion &&
+      editor.selection.isEmpty &&
       this._hoverProvider.hoverContactCondition(
-        o,
-        n.selection.active,
-        n.document,
+        currentSuggestion,
+        editor.selection.active,
+        editor.document,
       )
     ) {
-      let l = "unknown"
-      r.kind === Se.TextEditorSelectionChangeKind.Keyboard
-        ? (l = "keyboard")
-        : r.kind === Se.TextEditorSelectionChangeKind.Mouse
-          ? (l = "click")
-          : r.kind === Se.TextEditorSelectionChangeKind.Command &&
-            (l = "command"),
+      let selectionSource = "unknown"
+      event.kind === Se.TextEditorSelectionChangeKind.Keyboard
+        ? (selectionSource = "keyboard")
+        : event.kind === Se.TextEditorSelectionChangeKind.Mouse
+          ? (selectionSource = "click")
+          : event.kind === Se.TextEditorSelectionChangeKind.Command &&
+            (selectionSource = "command"),
         this._nextEditSessionEventReporter.reportEventFromSuggestion(
-          o,
+          currentSuggestion,
           "cursor-inside-suggestion",
-          l,
+          selectionSource,
         ),
-        this._onCursorWithinSuggestion(o)
+        this._onCursorWithinSuggestion(currentSuggestion)
     } else this._onCursorWithinSuggestion(void 0)
   }
-  _handleEditorChange = (r) => {
+  _handleEditorChange = (editor) => {
     this.dismiss("active-editor-changed"),
-      r &&
+      editor &&
         this._updateSuggestions(
           this._suggestionManager.getActiveSuggestions(),
           !1,
         )
   }
-  async accept(r, n = !0, i, s) {
-    let o
-    if (i) {
-      if (((o = this._suggestionManager.findSuggestionById(i)), o))
+  async accept(eventSource, shouldHideHover = !0, suggestionId, preserveFocus) {
+    let suggestion
+    if (suggestionId) {
+      if (((suggestion = this._suggestionManager.findSuggestionById(suggestionId)), suggestion))
         return (
           this._hoverProvider.hideHover(),
-          await this.open(o, {
+          await this.open(suggestion, {
             shouldAutoApply: !0,
-            animationDelayMs: e._applySuggestionDelayMs.fromHover,
-            preserveFocus: s,
-            eventSource: r,
+            animationDelayMs: NextEditManager._applySuggestionDelayMs.fromHover,
+            preserveFocus: preserveFocus,
+            eventSource: eventSource,
           }),
           !0
         )
@@ -110949,254 +110949,254 @@ var DN = class e extends DisposableContainer {
       (this._state.value instanceof BeforePreviewState ||
         this._state.value instanceof AnimatingState ||
         this._state.value instanceof AfterPreviewState) &&
-        (o = this._state.value.suggestion)
-    return this.acceptSuggestion(o, r, n, s)
+        (suggestion = this._state.value.suggestion)
+    return this.acceptSuggestion(suggestion, eventSource, shouldHideHover, preserveFocus)
   }
-  async acceptSuggestion(r, n, i = !0, s = !1) {
-    if (!r)
+  async acceptSuggestion(suggestion, eventSource, shouldHideHover = !0, preserveFocus = !1) {
+    if (!suggestion)
       return (
         Se.window.showInformationMessage("No Next Edit to accept."),
         this._nextEditSessionEventReporter.reportEventWithoutIds(
           "error-no-suggestion-to-accept",
-          n ?? "command",
+          eventSource ?? "command",
         ),
         !1
       )
     if (
       this._state.value instanceof AfterPreviewState &&
-      this._state.value.suggestion?.equals(r)
+      this._state.value.suggestion?.equals(suggestion)
     )
-      return this.dismiss(n), !1
+      return this.dismiss(eventSource), !1
     if (
-      (i && this._hoverProvider.hideHover(n ?? "command"),
-      await this.gotoSuggestion(r, void 0, s),
+      (shouldHideHover && this._hoverProvider.hideHover(eventSource ?? "command"),
+      await this.gotoSuggestion(suggestion, void 0, preserveFocus),
       Se.window.activeTextEditor &&
-        !r.qualifiedPathName.equals(Se.window.activeTextEditor.document.uri))
+        !suggestion.qualifiedPathName.equals(Se.window.activeTextEditor.document.uri))
     )
       return (
         this._logger.debug(
-          `Current suggestion ${r.qualifiedPathName.relPath} does not match active document ${Se.window.activeTextEditor?.document.uri.toString()}`,
+          `Current suggestion ${suggestion.qualifiedPathName.relPath} does not match active document ${Se.window.activeTextEditor?.document.uri.toString()}`,
         ),
         this._nextEditSessionEventReporter.reportEventFromSuggestion(
-          r,
+          suggestion,
           "error-accept-suggestion-wrong-document",
-          n ?? "command",
+          eventSource ?? "command",
         ),
         !1
       )
     this._nextEditSessionEventReporter.reportEventFromSuggestion(
-      r,
+      suggestion,
       "accept",
-      n ?? "command",
+      eventSource ?? "command",
     ),
-      this._state.value instanceof BeforePreviewState || (this._state.value = new BeforePreviewState(r)),
+      this._state.value instanceof BeforePreviewState || (this._state.value = new BeforePreviewState(suggestion)),
       JSe(),
-      this._suggestionManager.accept([r])
+      this._suggestionManager.accept([suggestion])
     try {
       await this._suggestionManager.suggestionWasJustAccepted.waitUntil(
-        (o) => o === !0,
-        e._waitForAcceptTimeoutMs,
+        (accepted) => accepted === !0,
+        NextEditManager._waitForAcceptTimeoutMs,
       )
     } catch {
       return (
         this._logger.debug("Error waiting for suggestion to be accepted."), !1
       )
     }
-    return this.incrementKeybindingUsageCount(n), !0
+    return this.incrementKeybindingUsageCount(eventSource), !0
   }
-  _acceptSuggestions(r, n) {
-    if (r.length === 0) {
+  _acceptSuggestions(suggestions, eventSource) {
+    if (suggestions.length === 0) {
       Se.window.showInformationMessage("No Next Edits to accept.")
       return
     }
     ;(this._state.value = new NoSuggestionsState()),
       JSe(),
       this._hoverProvider.hideHover("command")
-    for (let i of r)
+    for (let suggestion of suggestions)
       this._nextEditSessionEventReporter.reportEventFromSuggestion(
-        i,
+        suggestion,
         "accept",
-        n ?? "command",
+        eventSource ?? "command",
       )
-    this._suggestionManager.accept(r)
+    this._suggestionManager.accept(suggestions)
   }
-  acceptAllSuggestionsInFile(r, n) {
-    let i = Ns(r),
-      s = this._suggestionManager
+  acceptAllSuggestionsInFile(uri, eventSource) {
+    let filePath = Ns(uri),
+      suggestionsInFile = this._suggestionManager
         .getActiveSuggestions()
         .filter(isFreshNonNoopSuggestion)
-        .filter((o) => i === o.qualifiedPathName.absPath)
-    this._acceptSuggestions(s, n),
+        .filter((o) => filePath === o.qualifiedPathName.absPath)
+    this._acceptSuggestions(suggestionsInFile, eventSource),
       this._nextEditSessionEventReporter.reportEventWithoutIds(
         "accept-all-in-file",
-        n ?? "command",
+        eventSource ?? "command",
       )
   }
-  acceptAllSuggestions(r) {
-    let n = this._suggestionManager.getActiveSuggestions().filter(isFreshNonNoopSuggestion)
-    this._acceptSuggestions(n, r),
+  acceptAllSuggestions(eventSource) {
+    let allSuggestions = this._suggestionManager.getActiveSuggestions().filter(isFreshNonNoopSuggestion)
+    this._acceptSuggestions(allSuggestions, eventSource),
       this._nextEditSessionEventReporter.reportEventWithoutIds(
         "accept-all",
-        r ?? "command",
+        eventSource ?? "command",
       )
   }
-  reject(r, n) {
-    let i
+  reject(eventSource, suggestionId) {
+    let suggestion
     return (
-      n
-        ? (i = this._suggestionManager.findSuggestionById(n))
+      suggestionId
+        ? (suggestion = this._suggestionManager.findSuggestionById(suggestionId))
         : (this._state.value instanceof BeforePreviewState ||
             this._state.value instanceof AfterPreviewState ||
             this._state.value instanceof AnimatingState) &&
-          (i = this._state.value.suggestion),
-      this.rejectSuggestion(i, r)
+          (suggestion = this._state.value.suggestion),
+      this.rejectSuggestion(suggestion, eventSource)
     )
   }
-  rejectSuggestion(r, n) {
-    this._hoverProvider.hideHover(n ?? "command"),
-      r &&
+  rejectSuggestion(suggestion, eventSource) {
+    this._hoverProvider.hideHover(eventSource ?? "command"),
+      suggestion &&
         Se.window.activeTextEditor &&
-        !r.qualifiedPathName.equals(Se.window.activeTextEditor.document.uri) &&
+        !suggestion.qualifiedPathName.equals(Se.window.activeTextEditor.document.uri) &&
         this._logger.debug(
-          `Current suggestion ${r.qualifiedPathName.relPath} does not match active document ${Se.window.activeTextEditor?.document.uri.toString()}`,
+          `Current suggestion ${suggestion.qualifiedPathName.relPath} does not match active document ${Se.window.activeTextEditor?.document.uri.toString()}`,
         )
-    let i = this._state.value
+    let previousState = this._state.value
     this._state.value instanceof AnimatingState
       ? (this._clearAnimatedApply(), (this._state.value = new NoSuggestionsState()))
       : (this._state.value = new NoSuggestionsState())
-    let s,
-      o,
-      a = !1
-    r
-      ? ((s = [r]),
-        this._suggestionManager.reject(s),
-        (o = "reject"),
-        (a = r.state === "accepted"))
-      : ((s = this._suggestionManager.getActiveSuggestions().filter(isFreshNonNoopSuggestion)),
-        this._suggestionManager.reject(s),
-        (o = "reject-all")),
+    let suggestionsToReject,
+      eventName,
+      wasAccepted = !1
+    suggestion
+      ? ((suggestionsToReject = [suggestion]),
+        this._suggestionManager.reject(suggestionsToReject),
+        (eventName = "reject"),
+        (wasAccepted = suggestion.state === "accepted"))
+      : ((suggestionsToReject = this._suggestionManager.getActiveSuggestions().filter(isFreshNonNoopSuggestion)),
+        this._suggestionManager.reject(suggestionsToReject),
+        (eventName = "reject-all")),
       this._drawDecorations(),
       this._requestManager?.clearCompletedRequests("FORCED")
-    for (let l of s)
+    for (let rejectedSuggestion of suggestionsToReject)
       this._nextEditSessionEventReporter.reportEventFromSuggestion(
-        l,
-        o,
-        n ?? "command",
+        rejectedSuggestion,
+        eventName,
+        eventSource ?? "command",
       )
-    i instanceof AfterPreviewState
-      ? this._undoSuggestions(i.suggestion)
-      : r && a && this._undoSuggestions(r)
+    previousState instanceof AfterPreviewState
+      ? this._undoSuggestions(previousState.suggestion)
+      : suggestion && wasAccepted && this._undoSuggestions(suggestion)
   }
-  _rejectSuggestions(r, n) {
+  _rejectSuggestions(suggestions, eventSource) {
     if (
       (this._nextEditSessionEventReporter.reportEventWithoutIds(
         "reject-all",
-        n ?? "command",
+        eventSource ?? "command",
       ),
-      this._suggestionManager.reject(r),
-      r.length === 0)
+      this._suggestionManager.reject(suggestions),
+      suggestions.length === 0)
     ) {
       Se.window.showInformationMessage("No Next Edits to reject.")
       return
     }
     ;(this._state.value = new NoSuggestionsState()),
       this._hoverProvider.hideHover("command"),
-      this._suggestionManager.reject(r),
+      this._suggestionManager.reject(suggestions),
       this._requestManager?.clearCompletedRequests("FORCED")
-    for (let i of r)
+    for (let suggestion of suggestions)
       this._nextEditSessionEventReporter.reportEventFromSuggestion(
-        i,
+        suggestion,
         "reject",
-        n ?? "command",
+        eventSource ?? "command",
       )
   }
-  rejectAllSuggestionsInFile(r, n) {
-    let i = Ns(r),
-      s = this._suggestionManager
+  rejectAllSuggestionsInFile(uri, eventSource) {
+    let filePath = Ns(uri),
+      acceptedSuggestionsInFile = this._suggestionManager
         .getJustAcceptedSuggestions()
-        .filter((a) => i === a.qualifiedPathName.absPath),
-      o = this._suggestionManager
+        .filter((a) => filePath === a.qualifiedPathName.absPath),
+      allSuggestionsInFile = this._suggestionManager
         .getActiveSuggestions()
         .filter(isFreshNonNoopSuggestion)
-        .filter((a) => i === a.qualifiedPathName.absPath)
-        .concat(s)
-    this._rejectSuggestions(o, n),
-      this._undoSuggestions(s),
+        .filter((a) => filePath === a.qualifiedPathName.absPath)
+        .concat(acceptedSuggestionsInFile)
+    this._rejectSuggestions(allSuggestionsInFile, eventSource),
+      this._undoSuggestions(acceptedSuggestionsInFile),
       this._nextEditSessionEventReporter.reportEventWithoutIds(
         "reject-all-in-file",
-        n ?? "command",
+        eventSource ?? "command",
       )
   }
-  rejectAllSuggestions(r) {
-    let n = this._suggestionManager.getJustAcceptedSuggestions(),
-      i = this._suggestionManager.getActiveSuggestions().filter(isFreshNonNoopSuggestion).concat(n)
-    this._rejectSuggestions(i, r),
-      this._undoSuggestions(n),
+  rejectAllSuggestions(eventSource) {
+    let acceptedSuggestions = this._suggestionManager.getJustAcceptedSuggestions(),
+      allSuggestions = this._suggestionManager.getActiveSuggestions().filter(isFreshNonNoopSuggestion).concat(acceptedSuggestions)
+    this._rejectSuggestions(allSuggestions, eventSource),
+      this._undoSuggestions(acceptedSuggestions),
       this._nextEditSessionEventReporter.reportEventWithoutIds(
         "reject-all",
-        r ?? "command",
+        eventSource ?? "command",
       )
   }
-  _undoSuggestions(r) {
-    Array.isArray(r) || (r = [r])
-    let n = new Se.WorkspaceEdit()
-    for (let i of r)
-      n.replace(
-        Se.Uri.from({ scheme: i.uriScheme, path: i.qualifiedPathName.absPath }),
+  _undoSuggestions(suggestions) {
+    Array.isArray(suggestions) || (suggestions = [suggestions])
+    let workspaceEdit = new Se.WorkspaceEdit()
+    for (let suggestion of suggestions)
+      workspaceEdit.replace(
+        Se.Uri.from({ scheme: suggestion.uriScheme, path: suggestion.qualifiedPathName.absPath }),
         new Se.Range(
-          new Se.Position(i.afterLineRange().start, 0),
-          new Se.Position(i.afterLineRange().stop, 0),
+          new Se.Position(suggestion.afterLineRange().start, 0),
+          new Se.Position(suggestion.afterLineRange().stop, 0),
         ),
-        i.result.existingCode,
+        suggestion.result.existingCode,
       )
-    return Se.workspace.applyEdit(n)
+    return Se.workspace.applyEdit(workspaceEdit)
   }
-  gotoNextSmart(r) {
-    this.incrementKeybindingUsageCount(r)
-    let n = this._getHintedState().suggestion
+  gotoNextSmart(eventSource) {
+    this.incrementKeybindingUsageCount(eventSource)
+    let hintedSuggestion = this._getHintedState().suggestion
     if (this._state.value instanceof NoSuggestionsState) {
       Se.window.showInformationMessage("No more suggestions right now."),
-        this._hoverProvider.hideHover(r ?? "command")
+        this._hoverProvider.hideHover(eventSource ?? "command")
       return
     } else {
-      if (this._state.value instanceof AfterPreviewState && !n) return this.dismiss(r)
+      if (this._state.value instanceof AfterPreviewState && !hintedSuggestion) return this.dismiss(eventSource)
       if (this._state.value instanceof AnimatingState)
         return this._clearAnimatedApply(), this.accept()
-      if (n)
+      if (hintedSuggestion)
         return (
           this._nextEditSessionEventReporter.reportEventFromSuggestion(
             this._state.value instanceof BeforePreviewState || this._state.value instanceof AfterPreviewState
               ? this._state.value.suggestion
               : void 0,
             "goto-hinting-triggered-from",
-            r ?? "command",
+            eventSource ?? "command",
           ),
           this._nextEditSessionEventReporter.reportEventFromSuggestion(
-            n,
+            hintedSuggestion,
             "goto-hinting-triggered-to",
-            r ?? "command",
+            eventSource ?? "command",
           ),
-          this.open(n, { eventSource: r })
+          this.open(hintedSuggestion, { eventSource: eventSource })
         )
       this._logger.debug("Could not goto hinting.")
     }
   }
-  next(r) {
-    return this._nextOrPrevious(!0, r)
+  next(eventSource) {
+    return this._nextOrPrevious(!0, eventSource)
   }
-  previous(r) {
-    return this._nextOrPrevious(!1, r)
+  previous(eventSource) {
+    return this._nextOrPrevious(!1, eventSource)
   }
-  _nextOrPrevious(r, n, i = !0) {
-    let s = this._suggestionManager.getActiveSuggestions().filter(isFreshNonNoopSuggestion),
-      o = jSe(
-        s,
+  _nextOrPrevious(isNext, eventSource, showMessage = !0) {
+    let activeSuggestions = this._suggestionManager.getActiveSuggestions().filter(isFreshNonNoopSuggestion),
+      nextSuggestion = jSe(
+        activeSuggestions,
         this._state.value instanceof BeforePreviewState ||
           this._state.value instanceof AfterPreviewState ||
           this._state.value instanceof AnimatingState
           ? this._state.value.suggestion
           : void 0,
-        !r,
+        !isNext,
         !1,
         this._configListener.config.nextEdit.enableGlobalBackgroundSuggestions,
       )
@@ -111205,18 +111205,18 @@ var DN = class e extends DisposableContainer {
         this._state.value instanceof BeforePreviewState || this._state.value instanceof AfterPreviewState
           ? this._state.value.suggestion
           : void 0,
-        r ? "next-triggered-from" : "previous-triggered-from",
-        n ?? "command",
+        isNext ? "next-triggered-from" : "previous-triggered-from",
+        eventSource ?? "command",
       ),
       this._nextEditSessionEventReporter.reportEventFromSuggestion(
-        o,
-        r ? "next-triggered-to" : "previous-triggered-to",
-        n ?? "command",
+        nextSuggestion,
+        isNext ? "next-triggered-to" : "previous-triggered-to",
+        eventSource ?? "command",
       ),
-      !o)
+      !nextSuggestion)
     ) {
-      i && Se.window.showInformationMessage("No more suggestions right now."),
-        this._hoverProvider.hideHover(n ?? "command")
+      showMessage && Se.window.showInformationMessage("No more suggestions right now."),
+        this._hoverProvider.hideHover(eventSource ?? "command")
       return
     }
     return (
@@ -111228,213 +111228,213 @@ var DN = class e extends DisposableContainer {
           ),
           this._clearAnimatedApply(),
           this.accept())
-        : (this.incrementKeybindingUsageCount(n),
-          this.open(o, { eventSource: n }))
+        : (this.incrementKeybindingUsageCount(eventSource),
+          this.open(nextSuggestion, { eventSource: eventSource }))
     )
   }
-  undoAcceptSuggestion(r, n) {
-    ;(r ??=
+  undoAcceptSuggestion(suggestion, eventSource) {
+    ;(suggestion ??=
       this._state.value instanceof AfterPreviewState ? this._state.value.suggestion : void 0),
-      r && r.state === "accepted"
-        ? this._undoSuggestions(r)
+      suggestion && suggestion.state === "accepted"
+        ? this._undoSuggestions(suggestion)
         : Se.commands.executeCommand("undo"),
-      this._hoverProvider.hideHover(n ?? "command"),
+      this._hoverProvider.hideHover(eventSource ?? "command"),
       this._nextEditSessionEventReporter.reportEventWithoutIds(
         "undo-accept",
-        n ?? "command",
+        eventSource ?? "command",
       )
   }
-  undoAllSuggestionsInFile(r, n) {
-    let i = Ns(r),
-      s = this._suggestionManager
+  undoAllSuggestionsInFile(uri, eventSource) {
+    let filePath = Ns(uri),
+      acceptedSuggestionsInFile = this._suggestionManager
         .getActiveSuggestions()
         .filter(isSuggestionAccepted)
-        .filter((o) => i === o.qualifiedPathName.absPath)
-    if (s.length === 0) {
+        .filter((o) => filePath === o.qualifiedPathName.absPath)
+    if (acceptedSuggestionsInFile.length === 0) {
       Se.window.showInformationMessage("No Next Edits to undo.")
       return
     }
     this._nextEditSessionEventReporter.reportEventWithoutIds(
       "undo-all-in-file",
-      n ?? "command",
+      eventSource ?? "command",
     ),
-      this._undoSuggestions(s),
-      this._hoverProvider.hideHover(n ?? "command")
+      this._undoSuggestions(acceptedSuggestionsInFile),
+      this._hoverProvider.hideHover(eventSource ?? "command")
   }
-  async toggleHoverDiff(r, n) {
+  async toggleHoverDiff(eventSource, suggestionId) {
     if (
-      (await this._nextEditConfigManager.toggleSetting("showDiffInHover"), n)
+      (await this._nextEditConfigManager.toggleSetting("showDiffInHover"), suggestionId)
     ) {
-      let i = this._suggestionManager.findSuggestionById(n),
-        s = Se.window.activeTextEditor
-      if (i && s) {
-        this._hoverProvider.hideHover(r ?? "command")
-        let o = s.selection,
-          a = this._getSuggestionSelection(i)
+      let suggestion = this._suggestionManager.findSuggestionById(suggestionId),
+        activeEditor = Se.window.activeTextEditor
+      if (suggestion && activeEditor) {
+        this._hoverProvider.hideHover(eventSource ?? "command")
+        let currentSelection = activeEditor.selection,
+          suggestionSelection = this._getSuggestionSelection(suggestion)
         ;(!this._hoverProvider.hoverContactCondition(
-          i,
-          s.selection.active,
-          s.document,
+          suggestion,
+          activeEditor.selection.active,
+          activeEditor.document,
         ) ||
-          !s.selection.isEqual(a)) &&
-          ((this._ignoreSelectionChangeEvents = !0), (s.selection = a)),
+          !activeEditor.selection.isEqual(suggestionSelection)) &&
+          ((this._ignoreSelectionChangeEvents = !0), (activeEditor.selection = suggestionSelection)),
           this._hoverProvider.showHover(),
-          (s.selection = o)
+          (activeEditor.selection = currentSelection)
       }
     } else
-      this._hoverProvider.hideHover(r ?? "command"),
+      this._hoverProvider.hideHover(eventSource ?? "command"),
         this._hoverProvider.showHover()
   }
-  _clearAnimatedApply(r) {
+  _clearAnimatedApply(selection) {
     this._state.value instanceof AnimatingState &&
-      (!r || !r.isEqual(this._state.value.selection)) &&
+      (!selection || !selection.isEqual(this._state.value.selection)) &&
       clearTimeout(this._state.value.timeout)
   }
-  async gotoSuggestion(r, n = void 0, i = !1) {
+  async gotoSuggestion(suggestion, animationDelayMs = void 0, preserveFocus = !1) {
     this._completionVisibilityWatcher.maybeInlineCompletionVisible &&
       (this._logger.debug(
         "Clearing inline completion before opening next edit suggestion.",
       ),
       await Se.commands.executeCommand("editor.action.inlineSuggest.hide"))
-    let s = !1
-    if (r.qualifiedPathName.equals(Se.window.activeTextEditor?.document.uri))
-      i ||
+    let isGlobalSuggestion = !1
+    if (suggestion.qualifiedPathName.equals(Se.window.activeTextEditor?.document.uri))
+      preserveFocus ||
         (await Se.commands.executeCommand(
           "workbench.action.focusActiveEditorGroup",
         ))
     else {
-      ;(s = !0),
+      ;(isGlobalSuggestion = !0),
         this._nextEditSessionEventReporter.reportEventFromSuggestion(
-          r,
+          suggestion,
           "suggestion-global-offset-text-triggered",
           "command",
         )
-      let l = Se.window.visibleTextEditors.find((c) =>
-        r.qualifiedPathName.equals(c.document.uri),
+      let visibleEditor = Se.window.visibleTextEditors.find((editor) =>
+        suggestion.qualifiedPathName.equals(editor.document.uri),
       )
-      if (l)
-        await Se.window.showTextDocument(l.document, {
-          selection: this._getSuggestionSelection(r),
-          preserveFocus: i,
+      if (visibleEditor)
+        await Se.window.showTextDocument(visibleEditor.document, {
+          selection: this._getSuggestionSelection(suggestion),
+          preserveFocus: preserveFocus,
         })
       else {
-        if (!Vr(r.qualifiedPathName.absPath)) {
+        if (!Vr(suggestion.qualifiedPathName.absPath)) {
           Se.window.showInformationMessage(
-            `Suggestion for ${r.qualifiedPathName.relPath} is no longer relevant.`,
+            `Suggestion for ${suggestion.qualifiedPathName.relPath} is no longer relevant.`,
           ),
             this._suggestionManager.remove(
               this._suggestionManager
                 .getActiveSuggestions()
-                .filter((c) => c.qualifiedPathName.equals(r.qualifiedPathName)),
+                .filter((suggestion) => suggestion.qualifiedPathName.equals(suggestion.qualifiedPathName)),
             )
           return
         }
         await Se.window.showTextDocument(
-          Se.Uri.file(r.qualifiedPathName.absPath),
-          { selection: this._getSuggestionSelection(r), preserveFocus: i },
+          Se.Uri.file(suggestion.qualifiedPathName.absPath),
+          { selection: this._getSuggestionSelection(suggestion), preserveFocus: preserveFocus },
         )
       }
     }
-    let o = Se.window.activeTextEditor
-    if (!o || !r.qualifiedPathName.equals(o.document.uri)) {
+    let activeEditor = Se.window.activeTextEditor
+    if (!activeEditor || !suggestion.qualifiedPathName.equals(activeEditor.document.uri)) {
       this._logger.debug(
-        `Unable to go to suggestion in ${r.qualifiedPathName.absPath}.`,
+        `Unable to go to suggestion in ${suggestion.qualifiedPathName.absPath}.`,
       )
       return
     }
     if (
-      (r.lineRange.start >= o.document.lineCount &&
+      (suggestion.lineRange.start >= activeEditor.document.lineCount &&
         (this._logger.warn("Trying to move to a line that doesn't exist."),
         this._nextEditSessionEventReporter.reportEventFromSuggestion(
-          r,
+          suggestion,
           "error-moving-to-line-that-doesnt-exist",
           "unknown",
         )),
-      o.visibleRanges.some((l) => l.contains(Ls(r.lineRange))) ||
-        (o.revealRange(
-          new Se.Range(r.lineRange.start, 0, r.lineRange.stop, 0),
+      activeEditor.visibleRanges.some((range) => range.contains(Ls(suggestion.lineRange))) ||
+        (activeEditor.revealRange(
+          new Se.Range(suggestion.lineRange.start, 0, suggestion.lineRange.stop, 0),
           Se.TextEditorRevealType.InCenterIfOutsideViewport,
         ),
-        await go(e._smoothScrollDelayMs)),
-      n === void 0)
+        await go(NextEditManager._smoothScrollDelayMs)),
+      animationDelayMs === void 0)
     ) {
-      let l = !s && r.highlightRange.contains(o.selection.active.line),
-        c = !s && o.visibleRanges.some((u) => u.contains(Ls(r.lineRange)))
-      ;(n = l
-        ? e._applySuggestionDelayMs.atCursor
-        : c
-          ? e._applySuggestionDelayMs.onScreen
-          : e._applySuggestionDelayMs.offScreen),
-        r.lineRange.length > e._largeChangeLineCountThreshold &&
-          (n += e._applySuggestionDelayMs.largeBonus)
+      let isCursorInSuggestion = !isGlobalSuggestion && suggestion.highlightRange.contains(activeEditor.selection.active.line),
+        isSuggestionVisible = !isGlobalSuggestion && activeEditor.visibleRanges.some((u) => u.contains(Ls(suggestion.lineRange)))
+      ;(animationDelayMs = isCursorInSuggestion
+        ? NextEditManager._applySuggestionDelayMs.atCursor
+        : isSuggestionVisible
+          ? NextEditManager._applySuggestionDelayMs.onScreen
+          : NextEditManager._applySuggestionDelayMs.offScreen),
+        suggestion.lineRange.length > NextEditManager._largeChangeLineCountThreshold &&
+          (animationDelayMs += NextEditManager._applySuggestionDelayMs.largeBonus)
     }
-    let a = this._getSuggestionSelection(r)
+    let suggestionSelection = this._getSuggestionSelection(suggestion)
     return (
       (!this._hoverProvider.hoverContactCondition(
-        r,
-        o.selection.active,
-        o.document,
+        suggestion,
+        activeEditor.selection.active,
+        activeEditor.document,
       ) ||
-        !o.selection.isEqual(a)) &&
-        ((this._ignoreSelectionChangeEvents = !0), (o.selection = a)),
-      n
+        !activeEditor.selection.isEqual(suggestionSelection)) &&
+        ((this._ignoreSelectionChangeEvents = !0), (activeEditor.selection = suggestionSelection)),
+      animationDelayMs
     )
   }
-  async open(r, n = {}) {
-    if (r.state === "stale") {
+  async open(suggestion, options = {}) {
+    if (suggestion.state === "stale") {
       this._logger.debug(
-        `Tried to open stale suggestion. ${r.result.suggestionId}`,
+        `Tried to open stale suggestion. ${suggestion.result.suggestionId}`,
       )
       return
     }
-    let i = await this.gotoSuggestion(r, n.animationDelayMs, n.preserveFocus)
-    if (i === void 0) return
-    let s = Se.window.activeTextEditor
-    if (!s) {
+    let delayMs = await this.gotoSuggestion(suggestion, options.animationDelayMs, options.preserveFocus)
+    if (delayMs === void 0) return
+    let activeEditor = Se.window.activeTextEditor
+    if (!activeEditor) {
       this._logger.debug(
-        `Unable to open suggestion in ${r.qualifiedPathName.absPath}.`,
+        `Unable to open suggestion in ${suggestion.qualifiedPathName.absPath}.`,
       )
       return
     }
     ;(this._state.value instanceof BeforePreviewState || this._state.value instanceof AfterPreviewState) &&
-      !r.equals(this._state.value.suggestion) &&
-      (await this._hoverProvider.hideHoverAsync(n.eventSource ?? "command")),
-      r.state === "accepted"
-        ? (this._state.value = new AfterPreviewState(r))
-        : (this._state.value = new BeforePreviewState(r)),
+      !suggestion.equals(this._state.value.suggestion) &&
+      (await this._hoverProvider.hideHoverAsync(options.eventSource ?? "command")),
+      suggestion.state === "accepted"
+        ? (this._state.value = new AfterPreviewState(suggestion))
+        : (this._state.value = new BeforePreviewState(suggestion)),
       this._state.value instanceof BeforePreviewState &&
-      (n.shouldAutoApply ?? this.nextEditConfig.enableAutoApply)
+      (options.shouldAutoApply ?? this.nextEditConfig.enableAutoApply)
         ? (this._clearAnimatedApply(),
           (this._state.value = new AnimatingState(
-            r,
-            s.selection,
+            suggestion,
+            activeEditor.selection,
             setTimeout(() => {
-              this.accept(void 0, !1, void 0, n.preserveFocus)
-            }, i),
+              this.accept(void 0, !1, void 0, options.preserveFocus)
+            }, delayMs),
           )))
         : this._hoverProvider.showHover()
   }
-  openSuggestionAt(r, n) {
-    let i = this._suggestionManager
+  openSuggestionAt(uri, lineNumber) {
+    let matchingSuggestion = this._suggestionManager
       .getActiveSuggestions()
       .find(
-        (s) =>
-          isFreshNonNoopSuggestion(s) &&
-          s.qualifiedPathName.equals(r) &&
-          (s.lineRange.contains(n) || s.lineRange.touches(n)),
+        (suggestion) =>
+          isFreshNonNoopSuggestion(suggestion) &&
+          suggestion.qualifiedPathName.equals(uri) &&
+          (suggestion.lineRange.contains(lineNumber) || suggestion.lineRange.touches(lineNumber)),
       )
-    i
+    matchingSuggestion
       ? (this._nextEditSessionEventReporter.reportEventFromSuggestion(
-          i,
+          matchingSuggestion,
           "suggestion-opened",
           "gutter-click",
         ),
-        this.open(i, {
-          animationDelayMs: e._applySuggestionDelayMs.atCursor,
+        this.open(matchingSuggestion, {
+          animationDelayMs: NextEditManager._applySuggestionDelayMs.atCursor,
           eventSource: "gutter-click",
         }))
       : (this._logger.error(
-          `No suggestion found for ${r.toString()} at line ${n}.`,
+          `No suggestion found for ${uri.toString()} at line ${lineNumber}.`,
         ),
         Se.window.showInformationMessage("No suggestion found."),
         this._nextEditSessionEventReporter.reportEventWithoutIds(
@@ -111443,33 +111443,33 @@ var DN = class e extends DisposableContainer {
         ))
   }
   _getHintedState() {
-    let r = Se.window.activeTextEditor
-    if (!r) return new NoSuggestionsState()
-    let n = this.nextAvailableSuggestion(!0)
-    if (!n) return new NoSuggestionsState()
-    let i = this.nextAvailableSuggestion(!1)
-    return i
-      ? r.visibleRanges.some((s) => s.contains(Ls(i.highlightRange))) &&
-        !r.visibleRanges.some((s) => s.contains(Ls(n.highlightRange)))
-        ? new HintingState(i, !1)
-        : new HintingState(n, !0)
-      : new HintingState(n, !0)
+    let activeEditor = Se.window.activeTextEditor
+    if (!activeEditor) return new NoSuggestionsState()
+    let nextSuggestion = this.nextAvailableSuggestion(!0)
+    if (!nextSuggestion) return new NoSuggestionsState()
+    let previousSuggestion = this.nextAvailableSuggestion(!1)
+    return previousSuggestion
+      ? activeEditor.visibleRanges.some((range) => range.contains(Ls(previousSuggestion.highlightRange))) &&
+        !activeEditor.visibleRanges.some((range) => range.contains(Ls(nextSuggestion.highlightRange)))
+        ? new HintingState(previousSuggestion, !1)
+        : new HintingState(nextSuggestion, !0)
+      : new HintingState(nextSuggestion, !0)
   }
   get state() {
     return this._state.value
   }
-  addStateListener(r) {
-    return this._state.listen(r)
+  addStateListener(listener) {
+    return this._state.listen(listener)
   }
-  _getSuggestionSelection(r) {
-    let n = r.previewTargetCursorLine
-    return new Se.Selection(n, 0, n, 0)
+  _getSuggestionSelection(suggestion) {
+    let targetLine = suggestion.previewTargetCursorLine
+    return new Se.Selection(targetLine, 0, targetLine, 0)
   }
-  async incrementKeybindingUsageCount(r) {
-    if (r !== "keybinding") return
-    let n = this._globalState.get("nextEditKeybindingUsageCount") ?? 0
-    if (!(n >= e.maxKeybindingUsageCount))
-      return this._globalState.update("nextEditKeybindingUsageCount", n + 1)
+  async incrementKeybindingUsageCount(eventSource) {
+    if (eventSource !== "keybinding") return
+    let currentCount = this._globalState.get("nextEditKeybindingUsageCount") ?? 0
+    if (!(currentCount >= NextEditManager.maxKeybindingUsageCount))
+      return this._globalState.update("nextEditKeybindingUsageCount", currentCount + 1)
   }
   get nextEditConfig() {
     return this._nextEditConfigManager.config
@@ -121953,7 +121953,7 @@ var Wm = class e extends DisposableContainer {
         this.featureFlagManager,
       )),
       this.disposeOnDisable.push(this._nextEditRequestManager),
-      (this._editorNextEdit = new DN(
+      (this._editorNextEdit = new NextEditManager(
         this._extensionContext,
         this.workspaceManager,
         this._nextEditSessionEventReporter,
