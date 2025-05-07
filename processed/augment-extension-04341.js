@@ -65215,7 +65215,7 @@ var SIe = _((ler, wIe) => {
 })
 var sEt = {}
 lL(sEt, {
-  AugmentExtension: () => Wm,
+  AugmentExtension: () => AugmentExtension,
   _exportedForTesting: () => iEt,
   activate: () => nEt,
   getSessionId: () => eBe,
@@ -103662,7 +103662,7 @@ var dQ = class extends Zc {
   static commandID = "vscode-augment.extensionStatus"
   async run() {
     this._extension.updateStatusTrace()
-    let r = await fQ.workspace.openTextDocument(Wm.displayStatusUri)
+    let r = await fQ.workspace.openTextDocument(AugmentExtension.displayStatusUri)
     await fQ.window.showTextDocument(r)
   }
 }
@@ -121594,30 +121594,30 @@ var H2 = class extends DisposableContainer {
     this.actionsModel.setSystemStateStatus("workspaceSelected", "incomplete")
   }
 }
-var Wm = class e extends DisposableContainer {
-  constructor(r, n, i, s, o, a, l, c, u, f, p, g, m, y, v, C, E, w) {
+var AugmentExtension = class e extends DisposableContainer {
+  constructor(extensionContext, globalState, augmentConfigListener, apiServer, auth, recentCompletions, recentInstructions, recentNextEditResults, recentChats, nextEditWebViewEvent, onExtensionUpdateEvent, mainPanelProvider, changeWebviewAppEvent, actionsModel, syncingEnabledTracker, chatExtensionEvent, onboardingSessionEventReporter, assetManager) {
     super()
-    this._extensionContext = r
-    this._globalState = n
-    this._augmentConfigListener = i
-    this._apiServer = s
-    this._auth = o
-    this._recentCompletions = a
-    this._recentInstructions = l
-    this._recentNextEditResults = c
-    this._recentChats = u
-    this._nextEditWebViewEvent = f
-    this._onExtensionUpdateEvent = p
-    this._mainPanelProvider = g
-    this._changeWebviewAppEvent = m
-    this._actionsModel = y
-    this._syncingEnabledTracker = v
-    this._chatExtensionEvent = C
-    this._onboardingSessionEventReporter = E
-    this._assetManager = w
+    this._extensionContext = extensionContext
+    this._globalState = globalState
+    this._augmentConfigListener = augmentConfigListener
+    this._apiServer = apiServer
+    this._auth = auth
+    this._recentCompletions = recentCompletions
+    this._recentInstructions = recentInstructions
+    this._recentNextEditResults = recentNextEditResults
+    this._recentChats = recentChats
+    this._nextEditWebViewEvent = nextEditWebViewEvent
+    this._onExtensionUpdateEvent = onExtensionUpdateEvent
+    this._mainPanelProvider = mainPanelProvider
+    this._changeWebviewAppEvent = changeWebviewAppEvent
+    this._actionsModel = actionsModel
+    this._syncingEnabledTracker = syncingEnabledTracker
+    this._chatExtensionEvent = chatExtensionEvent
+    this._onboardingSessionEventReporter = onboardingSessionEventReporter
+    this._assetManager = assetManager
     if (
       ((this._statusBar = new VN()),
-      r.subscriptions.push(this._statusBar),
+      extensionContext.subscriptions.push(this._statusBar),
       (this.workTimer = new lN()),
       (this.featureFlagManager = new jk(
         {
@@ -121627,20 +121627,20 @@ var Wm = class e extends DisposableContainer {
         this._augmentConfigListener,
       )),
       (this._completionAcceptanceReporter = new eN(
-        s,
+        apiServer,
         this._onboardingSessionEventReporter,
       )),
-      (this._codeEditReporter = new XQ(s)),
-      (this._nextEditResolutionReporter = new iN(s)),
-      (this._nextEditSessionEventReporter = new sN(s)),
+      (this._codeEditReporter = new XQ(apiServer)),
+      (this._nextEditResolutionReporter = new iN(apiServer)),
+      (this._nextEditSessionEventReporter = new sN(apiServer)),
       (this.nextEditConfigManager = new k1(
         this._augmentConfigListener,
         this.featureFlagManager,
         this._globalState,
       )),
-      (this._clientMetricsReporter = new ZQ(s)),
-      (this._completionTimelineReporter = new tN(s)),
-      (this._extensionEventReporter = new nN(s)),
+      (this._clientMetricsReporter = new ZQ(apiServer)),
+      (this._completionTimelineReporter = new tN(apiServer)),
+      (this._extensionEventReporter = new nN(apiServer)),
       (this.guidelinesWatcher = new ig(
         this._augmentConfigListener,
         this.featureFlagManager,
@@ -121760,38 +121760,38 @@ var Wm = class e extends DisposableContainer {
   }
   async enable() {
     if (this.enabled || this.enableInProgress) return
-    let r = new Ye.CancellationTokenSource()
-    this._enableCancel = r
+    let cancellationTokenSource = new Ye.CancellationTokenSource()
+    this._enableCancel = cancellationTokenSource
     try {
-      await this._enable(r.token)
-    } catch (n) {
+      await this._enable(cancellationTokenSource.token)
+    } catch (error) {
       if (
-        (this._logger.info(`Unable to enable extension: ${He(n)}`),
+        (this._logger.info(`Unable to enable extension: ${He(error)}`),
         process.env.JEST_WORKER_ID)
       )
-        throw n
+        throw error
     } finally {
-      r.dispose(), (this._enableCancel = void 0)
+      cancellationTokenSource.dispose(), (this._enableCancel = void 0)
     }
   }
   _syncLastEnabledExtensionVersion() {
     if (this._extensionContext.extensionMode === Ye.ExtensionMode.Development)
       return !1
-    let r = this._extensionContext.extension.packageJSON.version
-    return this._extensionVersion === r
+    let currentVersion = this._extensionContext.extension.packageJSON.version
+    return this._extensionVersion === currentVersion
       ? !1
-      : (this._globalState.update("lastEnabledExtensionVersion", r),
+      : (this._globalState.update("lastEnabledExtensionVersion", currentVersion),
         this._onExtensionUpdateEvent.fire(),
         !0)
   }
   get _extensionVersion() {
     return this._globalState.get("lastEnabledExtensionVersion") || ""
   }
-  async _enable(r) {
+  async _enable(cancellationToken) {
     ;(0, JIe.assert)(!this.enabled),
       this._initState?.dispose(),
       this._enableState?.dispose()
-    let n = Date.now()
+    let startTime = Date.now()
     if (
       (this.disposeOnDisable.push(
         new aN(this._clientMetricsReporter, this.workTimer, {
@@ -121818,72 +121818,72 @@ var Wm = class e extends DisposableContainer {
         return
       }
     }
-    let i = this._statusBar.setState(lSe),
-      s,
-      o = new Map()
+    let loadingStatus = this._statusBar.setState(lSe),
+      modelConfig,
+      modelsByName = new Map()
     try {
-      if (((s = await this._getModelConfig(r)), s.models.length === 0))
+      if (((modelConfig = await this._getModelConfig(cancellationToken)), modelConfig.models.length === 0))
         throw new MQ()
-      ;(this.userTier = s.userTier),
+      ;(this.userTier = modelConfig.userTier),
         Ye.commands.executeCommand(
           "setContext",
           "augment.userTier",
           this.userTier,
         ),
-        (this._defaultModel = s.defaultModel),
-        (this._languages = s.languages),
-        (this._availableModels = s.models.map(
-          (ce) => `${ce.name} - ${ce.internalName}`,
+        (this._defaultModel = modelConfig.defaultModel),
+        (this._languages = modelConfig.languages),
+        (this._availableModels = modelConfig.models.map(
+          (model) => `${model.name} - ${model.internalName}`,
         ))
-      let U = this._augmentConfigListener.config.modelName || s.defaultModel
+      let selectedModelName = this._augmentConfigListener.config.modelName || modelConfig.defaultModel
       if (
-        ((this._modelInfo = s.models.find(
-          (ce) =>
-            [ce.name, ce.internalName].includes(U) ||
-            ce.name === (0, jIe.createHash)("sha256").update(U).digest("hex"),
+        ((this._modelInfo = modelConfig.models.find(
+          (model) =>
+            [model.name, model.internalName].includes(selectedModelName) ||
+            model.name === (0, jIe.createHash)("sha256").update(selectedModelName).digest("hex"),
         )),
         this._modelInfo === void 0)
       )
-        throw new cw(U)
-      this.featureFlagManager.update(s.featureFlags)
-      for (let ce of s.models) o.set(ce.name, ce)
+        throw new cw(selectedModelName)
+      this.featureFlagManager.update(modelConfig.featureFlags)
+      for (let model of modelConfig.models) modelsByName.set(model.name, model)
       this._initState?.dispose()
-    } catch (Y) {
-      if (Sr.isAPIErrorWithStatus(Y, $e.unauthenticated)) {
+    } catch (error) {
+      if (Sr.isAPIErrorWithStatus(error, $e.unauthenticated)) {
         this._auth.useOAuth
           ? (this._enableState = this._statusBar.setState(cSe))
           : (this._enableState = this._statusBar.setState(uSe))
         return
-      } else if (Y instanceof Rd) {
+      } else if (error instanceof Rd) {
         this._enableState = this._statusBar.setState(dSe)
         return
-      } else if (Y instanceof Ye.CancellationError) return
-      let U = He(Y)
+      } else if (error instanceof Ye.CancellationError) return
+      let errorMessage = He(error)
       throw (
-        (this._logger.error(`Failed to get model config: ${U}`),
+        (this._logger.error(`Failed to get model config: ${errorMessage}`),
         (this._initState = this._statusBar.setState(g6)),
-        Y)
+        error)
       )
     } finally {
-      i.dispose()
+      loadingStatus.dispose()
     }
     this.featureFlagManager.currentFlags.enableViewTextDocument &&
       (this._logger.debug("Enabling viewTextDocument background file scheme"),
       this.disposeOnDisable.push(uye()))
-    let a = new t2(this._extensionContext.workspaceState)
-    this.disposeOnDisable.push(a),
+    let recentCompletionsTracker = new t2(this._extensionContext.workspaceState)
+    this.disposeOnDisable.push(recentCompletionsTracker),
       (this._completionServer = new DQ(
         this._apiServer,
         this._modelInfo.completionTimeoutMs,
         this._modelInfo.suggestedPrefixCharCount,
         this._modelInfo.suggestedSuffixCharCount,
       ))
-    let l = this.featureFlagManager.currentFlags.maxUploadSizeBytes
-    ;(this._blobNameCalculator = new lh(l)),
+    let maxUploadSizeBytes = this.featureFlagManager.currentFlags.maxUploadSizeBytes
+    ;(this._blobNameCalculator = new lh(maxUploadSizeBytes)),
       (this.workspaceManager = new V2(
         this._actionsModel,
         new KN(this._extensionContext.workspaceState),
-        a,
+        recentCompletionsTracker,
         this._extensionContext,
         this._apiServer,
         this._augmentConfigListener,
@@ -121891,21 +121891,21 @@ var Wm = class e extends DisposableContainer {
         this._clientMetricsReporter,
         this._completionServer,
         this._blobNameCalculator,
-        l,
+        maxUploadSizeBytes,
         this._syncingEnabledTracker,
         this._onboardingSessionEventReporter,
-        s.languages,
+        modelConfig.languages,
       )),
       this.disposeOnDisable.push(this.workspaceManager)
-    let c = (0, ZIe.debounce)(() => {
-      let Y = this.workspaceManager?.getSourceFoldersReportDetails()
-      Y !== void 0 && this._extensionEventReporter.reportSourceFolders(Y)
+    let reportSourceFoldersDebounced = (0, ZIe.debounce)(() => {
+      let sourceFoldersReport = this.workspaceManager?.getSourceFoldersReportDetails()
+      sourceFoldersReport !== void 0 && this._extensionEventReporter.reportSourceFolders(sourceFoldersReport)
     }, 5e3)
     this.disposeOnDisable.push(
-      this.workspaceManager.onDidEnumerateFolder(() => c()),
+      this.workspaceManager.onDidEnumerateFolder(() => reportSourceFoldersDebounced()),
     ),
       this.disposeOnDisable.push(
-        this.workspaceManager.onDidChangeSourceFolders(() => c()),
+        this.workspaceManager.onDidChangeSourceFolders(() => reportSourceFoldersDebounced()),
       ),
       (this.syncingStatusReporter = new r2(
         this.featureFlagManager,
@@ -121922,17 +121922,17 @@ var Wm = class e extends DisposableContainer {
       this.disposeOnDisable.push(this.keybindingWatcher),
       (this._diagnosticsManager = new WQ()),
       this.disposeOnDisable.push(this._diagnosticsManager)
-    let u = new $m(this._statusBar)
-    this.disposeOnDisable.push(u)
-    let f = new DocumentContextValue()
+    let nextEditStatusReporter = new $m(this._statusBar)
+    this.disposeOnDisable.push(nextEditStatusReporter)
+    let documentContextTracker = new DocumentContextValue()
     this.disposeOnDisable.push(
-      Hwe((Y) => {
-        Y.acceptedIdx >= 0 && f.set(!0, Y.document)
+      Hwe((event) => {
+        event.acceptedIdx >= 0 && documentContextTracker.set(!0, event.document)
       }),
     ),
-      this.disposeOnDisable.push(f)
-    let p = new gN()
-    this.disposeOnDisable.push(p),
+      this.disposeOnDisable.push(documentContextTracker)
+    let nextEditEventEmitter = new gN()
+    this.disposeOnDisable.push(nextEditEventEmitter),
       (this._suggestionManager = new SuggestionManager(
         this.workspaceManager,
         this._nextEditSessionEventReporter,
@@ -121948,8 +121948,8 @@ var Wm = class e extends DisposableContainer {
         this._blobNameCalculator,
         this._suggestionManager,
         this._recentNextEditResults,
-        u,
-        f,
+        nextEditStatusReporter,
+        documentContextTracker,
         this.featureFlagManager,
       )),
       this.disposeOnDisable.push(this._nextEditRequestManager),
@@ -121963,11 +121963,11 @@ var Wm = class e extends DisposableContainer {
         this._nextEditRequestManager,
         this._globalState,
         this.nextEditConfigManager,
-        p,
-        (Y) => {
+        nextEditEventEmitter,
+        (suggestion) => {
           this._nextEditWebViewEvent.fire({
             type: "next-edit-active-suggestion",
-            data: Y,
+            data: suggestion,
           })
         },
       )),
@@ -121980,7 +121980,7 @@ var Wm = class e extends DisposableContainer {
         this._nextEditSessionEventReporter,
       )),
       this.disposeOnDisable.push(this._globalNextEdit)
-    let g = [
+    let chatHintButtons = [
       {
         text: this.featureFlagManager.currentFlags.enableInstructions
           ? "Chat"
@@ -121989,13 +121989,13 @@ var Wm = class e extends DisposableContainer {
       },
     ]
     this.featureFlagManager.currentFlags.enableInstructions &&
-      g.push({ text: "Instruct", keyBindingId: dv.commandID }),
+      chatHintButtons.push({ text: "Instruct", keyBindingId: dv.commandID }),
       (this._openChatHintManager = new cC(
         this._augmentConfigListener,
         this._extensionContext,
         this.keybindingWatcher,
         this.featureFlagManager,
-        g,
+        chatHintButtons,
       )),
       this._openChatHintManager.enable(),
       this.disposeOnDisable.push(this._openChatHintManager),
@@ -122013,9 +122013,9 @@ var Wm = class e extends DisposableContainer {
       this.disposeOnDisable.push(this.fuzzyFsSearcher),
       this.disposeOnDisable.push(this.fuzzySymbolSearcher),
       await gye(this._extensionContext.storageUri, this._logger)
-    let m = () => {
-      let Y = this._extensionContext.storageUri
-      if (Y) return Ye.Uri.joinPath(Y, "Augment-Memories").fsPath
+    let getMemoriesDirectoryPath = () => {
+      let storageUri = this._extensionContext.storageUri
+      if (storageUri) return Ye.Uri.joinPath(storageUri, "Augment-Memories").fsPath
     }
     OY(new TF(this.workspaceManager)),
       this.disposeOnDisable.push(new Ye.Disposable(() => qY())),
@@ -122041,43 +122041,43 @@ var Wm = class e extends DisposableContainer {
       this.disposeOnDisable.push(new Ye.Disposable(() => TK())),
       (this._agentCheckpointManager = new aI(
         new zS(),
-        m,
-        (Y) =>
-          Ye.workspace.onDidChangeTextDocument((U) => {
-            let ce = this.workspaceManager?.safeResolvePathName(U.document.uri)
-            if (!ce) return
-            let Ie = {
+        getMemoriesDirectoryPath,
+        (listener) =>
+          Ye.workspace.onDidChangeTextDocument((event) => {
+            let qualifiedPathName = this.workspaceManager?.safeResolvePathName(event.document.uri)
+            if (!qualifiedPathName) return
+            let documentChangeEvent = {
               document: {
-                qualifiedPathName: ce,
-                getText: () => U.document.getText(),
+                qualifiedPathName: qualifiedPathName,
+                getText: () => event.document.getText(),
               },
-              contentChanges: U.contentChanges.map((Q) => ({
-                text: Q.text,
-                range: Q.range
+              contentChanges: event.contentChanges.map((change) => ({
+                text: change.text,
+                range: change.range
                   ? {
                       start: {
-                        line: Q.range.start.line,
-                        character: Q.range.start.character,
+                        line: change.range.start.line,
+                        character: change.range.start.character,
                       },
                       end: {
-                        line: Q.range.end.line,
-                        character: Q.range.end.character,
+                        line: change.range.end.line,
+                        character: change.range.end.character,
                       },
                     }
                   : void 0,
               })),
             }
-            Y(Ie)
+            listener(documentChangeEvent)
           }),
         this.workspaceManager.onFileDeleted,
         this.workspaceManager.onFileDidMove,
       )),
       this.disposeOnDisable.push(this._agentCheckpointManager),
       this.disposeOnDisable.push(
-        this.syncingStatusReporter.onDidChangeSyncingStatus((Y) => {
-          Y.prevStatus !== void 0 &&
-            Y.prevStatus !== "done" &&
-            Y.status === "done" &&
+        this.syncingStatusReporter.onDidChangeSyncingStatus((syncStatus) => {
+          syncStatus.prevStatus !== void 0 &&
+            syncStatus.prevStatus !== "done" &&
+            syncStatus.status === "done" &&
             this.featureFlagManager.currentFlags.memoriesParams
               .enable_initial_orientation &&
             setTimeout(() => {
@@ -122104,18 +122104,18 @@ var Wm = class e extends DisposableContainer {
           this.featureFlagManager,
           this._extensionContext.extensionUri,
           this._globalState,
-          n,
+          startTime,
         ),
         new tF(this._apiServer, this._augmentConfigListener),
-        (Y) => {
+        (error) => {
           Ye.window.showErrorMessage(
-            "Failed to start the MCP server. " + JSON.stringify(Y),
+            "Failed to start the MCP server. " + JSON.stringify(error),
           )
         },
         new kx(this.featureFlagManager),
         this._agentCheckpointManager,
-        () => SM(m),
-        m,
+        () => SM(getMemoriesDirectoryPath),
+        getMemoriesDirectoryPath,
         () => this._toolUseRequestEventReporter,
         {
           userAgent: "Augment-VSCode/1.0",
@@ -122135,40 +122135,40 @@ var Wm = class e extends DisposableContainer {
         }),
       ),
       this._toolConfigStore.updateSidecarMCPServers(),
-      (async (Y) => {
-        let U = Y.memoriesAbsPath
-        if (U) {
-          let ce = Ye.Uri.file(U)
+      (async (toolsModel) => {
+        let memoriesPath = toolsModel.memoriesAbsPath
+        if (memoriesPath) {
+          let memoriesUri = Ye.Uri.file(memoriesPath)
           try {
-            await ev(ce.fsPath)
+            await ev(memoriesUri.fsPath)
           } catch {
-            let Ie = Ha(ce.fsPath)
-            ;(await Vl(Ie)) || (await Hl(Ie)), await oa(ce.fsPath, "")
+            let directoryPath = Ha(memoriesUri.fsPath)
+            ;(await Vl(directoryPath)) || (await Hl(directoryPath)), await oa(memoriesUri.fsPath, "")
           }
         }
         this.addDisposable(
-          Ye.window.onDidChangeActiveTextEditor(async (ce) => {
-            await Aye(ce, m, this._globalState),
-              await QG(ce, m, this._globalState)
+          Ye.window.onDidChangeActiveTextEditor(async (editor) => {
+            await Aye(editor, getMemoriesDirectoryPath, this._globalState),
+              await QG(editor, getMemoriesDirectoryPath, this._globalState)
           }),
         ),
           this.addDisposable(
-            Ye.workspace.onDidChangeTextDocument((ce) => {
-              vye(ce, Ye.window.activeTextEditor, m, this._globalState, Y)
+            Ye.workspace.onDidChangeTextDocument((event) => {
+              vye(event, Ye.window.activeTextEditor, getMemoriesDirectoryPath, this._globalState, toolsModel)
             }),
           ),
           this.addDisposable(mye())
       })(this._toolsModel),
       this.addDisposable(
         this._augmentConfigListener.onDidChange(
-          ({ newConfig: Y, previousConfig: U }) => {
+          ({ newConfig: newConfig, previousConfig: previousConfig }) => {
             this._toolsModel &&
-              ((0, F9.default)(Y.mcpServers, U.mcpServers) ||
+              ((0, F9.default)(newConfig.mcpServers, previousConfig.mcpServers) ||
                 this._toolConfigStore?.updateSidecarMCPServers())
           },
         ),
       )
-    let v = new ov(
+    let chatModel = new ov(
       this._globalState,
       this._apiServer,
       this.workspaceManager,
@@ -122178,12 +122178,12 @@ var Wm = class e extends DisposableContainer {
       this.featureFlagManager,
       this._agentCheckpointManager,
     )
-    this._chatModel = v
-    let C = new zN(this._globalState, this.syncingStatusReporter),
-      E = new LN(),
-      w = new jx(
-        v,
-        o,
+    this._chatModel = chatModel
+    let chatHistoryManager = new zN(this._globalState, this.syncingStatusReporter),
+      chatEventEmitter = new LN(),
+      chatWebviewApp = new jx(
+        chatModel,
+        modelsByName,
         this._apiServer,
         this.workspaceManager,
         this.keybindingWatcher,
@@ -122193,13 +122193,13 @@ var Wm = class e extends DisposableContainer {
         this._clientMetricsReporter,
         this._actionsModel,
         this._syncingEnabledTracker,
-        C,
+        chatHistoryManager,
         this.syncingStatusReporter,
         this._onboardingSessionEventReporter,
         this.fuzzyFsSearcher,
         this.fuzzySymbolSearcher,
         this._toolsModel,
-        E,
+        chatEventEmitter,
         this._agentCheckpointManager,
         this.guidelinesWatcher,
         this._assetManager,
@@ -122207,44 +122207,44 @@ var Wm = class e extends DisposableContainer {
         this.workTimer,
       )
     ;(this._currentChatExtensionEventDisposable =
-      this._chatExtensionEvent.event(w.onChatExtensionMessage)),
+      this._chatExtensionEvent.event(chatWebviewApp.onChatExtensionMessage)),
       this.disposeOnDisable.push(this._currentChatExtensionEventDisposable),
-      this._mainPanelProvider.changeApp(w)
-    let B = this.workspaceManager,
-      T = this.keybindingWatcher
+      this._mainPanelProvider.changeApp(chatWebviewApp)
+    let workspaceManagerRef = this.workspaceManager,
+      keybindingWatcherRef = this.keybindingWatcher
     this.disposeOnDisable.push(
-      this._changeWebviewAppEvent.event((Y) => {
-        let U, ce
-        switch ((this._currentChatExtensionEventDisposable?.dispose(), Y)) {
+      this._changeWebviewAppEvent.event((appType) => {
+        let newApp, newChatExtensionEventDisposable
+        switch ((this._currentChatExtensionEventDisposable?.dispose(), appType)) {
           case "chat":
-            ;(U = new jx(
-              v,
-              o,
+            ;(newApp = new jx(
+              chatModel,
+              modelsByName,
               this._apiServer,
-              B,
-              T,
+              workspaceManagerRef,
+              keybindingWatcherRef,
               this._augmentConfigListener,
               this._extensionContext.extensionUri,
               this.featureFlagManager,
               this._clientMetricsReporter,
               this._actionsModel,
               this._syncingEnabledTracker,
-              C,
+              chatHistoryManager,
               this.syncingStatusReporter,
               this._onboardingSessionEventReporter,
               this.fuzzyFsSearcher,
               this.fuzzySymbolSearcher,
               this._toolsModel,
-              E,
+              chatEventEmitter,
               this._agentCheckpointManager,
               this.guidelinesWatcher,
               this._assetManager,
               this._globalState,
               this.workTimer,
             )),
-              this._mainPanelProvider.changeApp(U),
-              (ce = this._chatExtensionEvent.event(U.onChatExtensionMessage)),
-              (this._currentChatExtensionEventDisposable = ce),
+              this._mainPanelProvider.changeApp(newApp),
+              (newChatExtensionEventDisposable = this._chatExtensionEvent.event(newApp.onChatExtensionMessage)),
+              (this._currentChatExtensionEventDisposable = newChatExtensionEventDisposable),
               this.disposeOnDisable.push(
                 this._currentChatExtensionEventDisposable,
               )
@@ -122253,7 +122253,7 @@ var Wm = class e extends DisposableContainer {
             break
           case "workspace-context":
             this._mainPanelProvider.changeApp(
-              new jQ(B, this.featureFlagManager, this.workTimer),
+              new jQ(workspaceManagerRef, this.featureFlagManager, this.workTimer),
             )
             break
           case "awaiting-syncing-permission":
@@ -122265,7 +122265,7 @@ var Wm = class e extends DisposableContainer {
                 this._syncingEnabledTracker,
                 this._changeWebviewAppEvent,
                 this.featureFlagManager,
-                s.userTier,
+                modelConfig.userTier,
               ),
             )
             break
@@ -122275,8 +122275,8 @@ var Wm = class e extends DisposableContainer {
             )
             break
           default: {
-            let Ie = Y
-            throw new Error(`Unhandled app case: ${Ie}`)
+            let unknownAppType = appType
+            throw new Error(`Unhandled app case: ${unknownAppType}`)
           }
         }
       }),
@@ -122291,46 +122291,46 @@ var Wm = class e extends DisposableContainer {
         new Ye.Disposable(() => this._disableInlineCompletions.bind(this)),
       )
     {
-      let Y,
-        U,
-        ce,
-        Ie,
-        Q,
-        se,
-        J,
-        ie = (Ue, At) => {
-          Y?.dispose(),
-            U?.dispose(),
-            ce?.dispose(),
-            Q?.dispose(),
-            Ie?.dispose(),
-            se?.dispose(),
-            J?.dispose(),
-            Ue.completions.enableAutomaticCompletions ||
-              (U = this._statusBar.setState(fSe)),
-            Ue.enableDebugFeatures && this.keybindingWatcher
-              ? ((Q = new $Q(
+      let uploadStatusDisposable,
+        automaticCompletionsStatusDisposable,
+        debugFeaturesDisposable,
+        automaticCompletionsKeyBindingDisposable,
+        debugKeyBindingDisposable,
+        codeActionsProviderDisposable,
+        dataCollectionStatusDisposable,
+        configChangeHandler = (newConfig, previousConfig) => {
+          uploadStatusDisposable?.dispose(),
+            automaticCompletionsStatusDisposable?.dispose(),
+            debugFeaturesDisposable?.dispose(),
+            debugKeyBindingDisposable?.dispose(),
+            automaticCompletionsKeyBindingDisposable?.dispose(),
+            codeActionsProviderDisposable?.dispose(),
+            dataCollectionStatusDisposable?.dispose(),
+            newConfig.completions.enableAutomaticCompletions ||
+              (automaticCompletionsStatusDisposable = this._statusBar.setState(fSe)),
+            newConfig.enableDebugFeatures && this.keybindingWatcher
+              ? ((debugKeyBindingDisposable = new $Q(
                   this.keybindingWatcher,
                   this._inlineCompletionProvider,
                 )),
-                this.disposeOnDisable.push(Q))
-              : Ue.completions.enableAutomaticCompletions &&
+                this.disposeOnDisable.push(debugKeyBindingDisposable))
+              : newConfig.completions.enableAutomaticCompletions &&
                 this.keybindingWatcher &&
-                ((Ie = new GQ(
+                ((automaticCompletionsKeyBindingDisposable = new GQ(
                   this.keybindingWatcher,
                   this._inlineCompletionProvider,
                 )),
-                this.disposeOnDisable.push(Ie)),
-            (se = Ye.languages.registerCodeActionsProvider("*", new B1())),
-            this.disposeOnDisable.push(se),
-            Ue.enableUpload || (Y = this._statusBar.setState(hSe))
-          let ve = Ue.enableDataCollection || s.featureFlags.enableHindsight
-          this._dataCollector && !ve
+                this.disposeOnDisable.push(automaticCompletionsKeyBindingDisposable)),
+            (codeActionsProviderDisposable = Ye.languages.registerCodeActionsProvider("*", new B1())),
+            this.disposeOnDisable.push(codeActionsProviderDisposable),
+            newConfig.enableUpload || (uploadStatusDisposable = this._statusBar.setState(hSe))
+          let isDataCollectionEnabled = newConfig.enableDataCollection || modelConfig.featureFlags.enableHindsight
+          this._dataCollector && !isDataCollectionEnabled
             ? (this._logger.debug("Disabling Hindsight Data"),
               this._dataCollector.dispose(),
               (this._dataCollector = void 0))
             : !this._dataCollector &&
-              ve &&
+              isDataCollectionEnabled &&
               this.workspaceManager !== void 0 &&
               (this._logger.debug("Enabling Hindsight Data"),
               (this._dataCollector = new VQ(
@@ -122340,17 +122340,17 @@ var Wm = class e extends DisposableContainer {
                 this._recentCompletions,
                 this._recentNextEditResults,
               )))
-          let Mt = iw(
-              Ue,
+          let isNextEditEnabled = iw(
+              newConfig,
               this.featureFlagManager.currentFlags.vscodeNextEditMinVersion,
             ),
-            Xt =
-              At &&
+            wasNextEditEnabled =
+              previousConfig &&
               iw(
-                At,
+                previousConfig,
                 this.featureFlagManager.currentFlags.vscodeNextEditMinVersion,
               )
-          if (Mt && !Xt)
+          if (isNextEditEnabled && !wasNextEditEnabled)
             if (
               this.workspaceManager &&
               this.keybindingWatcher &&
@@ -122367,17 +122367,17 @@ var Wm = class e extends DisposableContainer {
                   this._nextEditRequestManager,
                   this._globalState,
                   this.nextEditConfigManager,
-                  p,
+                  nextEditEventEmitter,
                 )),
                   this.disposeOnDisable.push(this._backgroundNextEdit),
                   this._nextEditSessionEventReporter.reportEventWithoutIds(
                     "initialization-success",
                     "validation-expected",
                   )
-              } catch (ue) {
+              } catch (error) {
                 this._logger.error(
                   "Error initializing background next edit: ",
-                  ue,
+                  error,
                 ),
                   this._nextEditSessionEventReporter.reportEventWithoutIds(
                     "initialization-failure",
@@ -122386,7 +122386,7 @@ var Wm = class e extends DisposableContainer {
                   this._apiServer.reportError(
                     null,
                     "background_next_edit_initialization_failure",
-                    ue instanceof Error ? ue.stack || ue.message : String(ue),
+                    error instanceof Error ? error.stack || error.message : String(error),
                     [],
                   )
               }
@@ -122398,69 +122398,69 @@ var Wm = class e extends DisposableContainer {
                   "initialization-skip",
                   "validation-unexpected",
                 )
-              let ue = [
+              let missingDependencies = [
                 ["this.workspaceManager", this.workspaceManager],
                 ["this.keybindingWatcher", this.keybindingWatcher],
                 ["this._suggestionManager", this._suggestionManager],
                 ["this._nextEditRequestManager", this._nextEditRequestManager],
               ]
-                .map((wr) => wr.join("="))
+                .map((dependency) => dependency.join("="))
                 .join(", ")
               this._apiServer.reportError(
                 null,
                 "background_next_edit_initialization_failure",
-                `Background next edit initialization failed because ${ue}`,
+                `Background next edit initialization failed because ${missingDependencies}`,
                 [],
               )
             }
           else
-            this._backgroundNextEdit && !Mt
+            this._backgroundNextEdit && !isNextEditEnabled
               ? (this._backgroundNextEdit.dispose(),
                 (this._backgroundNextEdit = void 0),
                 this._nextEditSessionEventReporter.reportEventWithoutIds(
                   "disposed",
                   "validation-expected",
                 ))
-              : !Mt &&
-                !Xt &&
+              : !isNextEditEnabled &&
+                !wasNextEditEnabled &&
                 this._nextEditSessionEventReporter.reportEventWithoutIds(
                   "initialization-skip",
                   "validation-expected",
                 )
-          let rr = isVersionSupported(
-            Ue,
+          let isNextEditSupported = isVersionSupported(
+            newConfig,
             this.featureFlagManager.currentFlags.vscodeNextEditMinVersion ?? "",
           )
-          rr &&
-            At &&
-            Ue.nextEdit.enableBackgroundSuggestions !==
-              At.nextEdit.enableBackgroundSuggestions &&
+          isNextEditSupported &&
+            previousConfig &&
+            newConfig.nextEdit.enableBackgroundSuggestions !==
+              previousConfig.nextEdit.enableBackgroundSuggestions &&
             this._nextEditSessionEventReporter.reportEventWithoutIds(
-              Ue.nextEdit.enableBackgroundSuggestions
+              newConfig.nextEdit.enableBackgroundSuggestions
                 ? "background-suggestions-enabled"
                 : "background-suggestions-disabled",
               "unknown",
             ),
-            rr &&
-              At &&
-              Ue.nextEdit.highlightSuggestionsInTheEditor !==
-                At.nextEdit.highlightSuggestionsInTheEditor &&
+            isNextEditSupported &&
+              previousConfig &&
+              newConfig.nextEdit.highlightSuggestionsInTheEditor !==
+                previousConfig.nextEdit.highlightSuggestionsInTheEditor &&
               this._nextEditSessionEventReporter.reportEventWithoutIds(
-                Ue.nextEdit.highlightSuggestionsInTheEditor
+                newConfig.nextEdit.highlightSuggestionsInTheEditor
                   ? "highlights-enabled"
                   : "highlights-disabled",
                 "unknown",
               )
         }
       this.disposeOnDisable.push(
-        this._augmentConfigListener.onDidChange((Ue) => {
-          ie(Ue.newConfig, Ue.previousConfig)
+        this._augmentConfigListener.onDidChange((configChange) => {
+          configChangeHandler(configChange.newConfig, configChange.previousConfig)
         }),
       ),
-        ie(this._augmentConfigListener.config)
+        configChangeHandler(this._augmentConfigListener.config)
     }
     {
-      let Y = [
+      let reporters = [
         this._completionAcceptanceReporter,
         this._codeEditReporter,
         this._nextEditResolutionReporter,
@@ -122471,7 +122471,7 @@ var Wm = class e extends DisposableContainer {
         this._extensionEventReporter,
         this._toolUseRequestEventReporter,
       ]
-      for (let U of Y) U.enableUpload(), this.disposeOnDisable.push(U)
+      for (let reporter of reporters) reporter.enableUpload(), this.disposeOnDisable.push(reporter)
       this.disposeOnDisable.push(
         new Ye.Disposable(() => {
           GK(), WK()
@@ -122484,16 +122484,16 @@ var Wm = class e extends DisposableContainer {
         new NextEditWebviewProvider(
           this._augmentConfigListener,
           this.featureFlagManager,
-          (Y) =>
+          (webviewView) =>
             new NextEditSuggestionsPanel(
               this._extensionContext.extensionUri,
-              Y,
-              Y.webview,
+              webviewView,
+              webviewView.webview,
               this._suggestionManager,
               this._globalNextEdit,
               this._editorNextEdit,
               this._nextEditSessionEventReporter,
-              E,
+              chatEventEmitter,
               this._nextEditVSCodeToWebviewMessage,
               this.workTimer,
             ),
@@ -122512,70 +122512,70 @@ var Wm = class e extends DisposableContainer {
       this.disposeOnDisable.push(
         new ZN(this._statusBar, this._syncingEnabledTracker),
       )
-    let N = new Im(this._augmentConfigListener, this._actionsModel)
-    this.addDisposable(N), N.checkAndUpdateState()
-    let W = new H2(this._actionsModel, this.workspaceManager)
-    this.disposeOnDisable.push(W), this._syncLastEnabledExtensionVersion()
-    let Z = this._extensionContext.extension.packageJSON,
-      te = "preRelease" in Z && Z.preRelease === !0
-    this._logger.debug(`Is the extension in pre-release? ${te}`),
+    let updateChecker = new Im(this._augmentConfigListener, this._actionsModel)
+    this.addDisposable(updateChecker), updateChecker.checkAndUpdateState()
+    let workspaceStateManager = new H2(this._actionsModel, this.workspaceManager)
+    this.disposeOnDisable.push(workspaceStateManager), this._syncLastEnabledExtensionVersion()
+    let packageJson = this._extensionContext.extension.packageJSON,
+      isPreRelease = "preRelease" in packageJson && packageJson.preRelease === !0
+    this._logger.debug(`Is the extension in pre-release? ${isPreRelease}`),
       this._extensionEventReporter.reportConfiguration(
         "configuration-snapshot",
         this._augmentConfigListener.config,
         this.featureFlagManager.currentFlags,
       )
   }
-  async _fetchFeatureFlags(r) {
+  async _fetchFeatureFlags(cancellationToken) {
     try {
-      return (await this._getModelConfig(r)).featureFlags
-    } catch (n) {
-      this._logger.error("Failed to fetch feature flags: ", n)
+      return (await this._getModelConfig(cancellationToken)).featureFlags
+    } catch (error) {
+      this._logger.error("Failed to fetch feature flags: ", error)
       return
     }
   }
-  updateModelInfo(r) {
+  updateModelInfo(modelInfoUpdate) {
     if (!this._modelInfo) throw new Error("Model info not set")
-    r.suggestedPrefixCharCount !== void 0 &&
-      (this._modelInfo.suggestedPrefixCharCount = r.suggestedPrefixCharCount),
-      r.suggestedSuffixCharCount !== void 0 &&
-        (this._modelInfo.suggestedSuffixCharCount = r.suggestedSuffixCharCount),
-      (this._modelInfo.completionTimeoutMs = r.completionTimeoutMs)
+    modelInfoUpdate.suggestedPrefixCharCount !== void 0 &&
+      (this._modelInfo.suggestedPrefixCharCount = modelInfoUpdate.suggestedPrefixCharCount),
+      modelInfoUpdate.suggestedSuffixCharCount !== void 0 &&
+        (this._modelInfo.suggestedSuffixCharCount = modelInfoUpdate.suggestedSuffixCharCount),
+      (this._modelInfo.completionTimeoutMs = modelInfoUpdate.completionTimeoutMs)
   }
-  async _getModelConfig(r) {
-    let n = 1e3,
-      i,
-      s = 0,
-      o = 6,
-      a = new $m(this._statusBar)
+  async _getModelConfig(cancellationToken) {
+    let backoffTimeMs = 1e3,
+      modelConfig,
+      retryCount = 0,
+      maxRetries = 6,
+      statusBarItem = new $m(this._statusBar)
     try {
       for (;;) {
-        if (r.isCancellationRequested) throw new Ye.CancellationError()
+        if (cancellationToken.isCancellationRequested) throw new Ye.CancellationError()
         try {
           this._logger.info("Retrieving model config"),
-            (i = await this._apiServer.getModelConfig()),
+            (modelConfig = await this._apiServer.getModelConfig()),
             this._logger.info("Retrieved model config")
-        } catch (l) {
+        } catch (error) {
           if (
-            (this._logger.error("Failed to retrieve model config: ", l),
-            Sr.isAPIErrorWithStatus(l, $e.unauthenticated))
+            (this._logger.error("Failed to retrieve model config: ", error),
+            Sr.isAPIErrorWithStatus(error, $e.unauthenticated))
           )
-            throw l
-          if (l instanceof Rd) throw l
-          s++
+            throw error
+          if (error instanceof Rd) throw error
+          retryCount++
         }
-        if (r.isCancellationRequested)
+        if (cancellationToken.isCancellationRequested)
           throw (
             (this._logger.info("Model config retrieval cancelled"),
             new Ye.CancellationError())
           )
-        if (i !== void 0) return this._logger.info("Returning model config"), i
-        s >= o && a.setState(g6),
-          this._logger.info(`Retrying model config retrieval in ${n} msec`),
-          await go(n),
-          (n = Math.min(n * 2, e.modelConfigBackoffMsecMax))
+        if (modelConfig !== void 0) return this._logger.info("Returning model config"), modelConfig
+        retryCount >= maxRetries && statusBarItem.setState(g6),
+          this._logger.info(`Retrying model config retrieval in ${backoffTimeMs} msec`),
+          await go(backoffTimeMs),
+          (backoffTimeMs = Math.min(backoffTimeMs * 2, e.modelConfigBackoffMsecMax))
       }
     } finally {
-      a.dispose()
+      statusBarItem.dispose()
     }
   }
   disable() {
@@ -122592,10 +122592,10 @@ var Wm = class e extends DisposableContainer {
       (this.workspaceManager = void 0),
       this._disableDataCollection()
   }
-  _checkInlineCompletionsEnabled(r) {
-    ;(r &&
-      r.previousConfig.completions.addIntelliSenseSuggestions ===
-        r.newConfig.completions.addIntelliSenseSuggestions) ||
+  _checkInlineCompletionsEnabled(configChange) {
+    ;(configChange &&
+      configChange.previousConfig.completions.addIntelliSenseSuggestions ===
+        configChange.newConfig.completions.addIntelliSenseSuggestions) ||
       this._enableInlineCompletions()
   }
   _enableInlineCompletions() {
@@ -122610,8 +122610,8 @@ var Wm = class e extends DisposableContainer {
         this._completionTimelineReporter,
       )),
       this._completionDisposables.push(this._inlineCompletionProvider),
-      Xc((r) => {
-        r && this._recentCompletions.addItem(r)
+      Xc((completionEvent) => {
+        completionEvent && this._recentCompletions.addItem(completionEvent)
       }),
       this._completionDisposables.push(
         Ye.languages.registerInlineCompletionItemProvider(
@@ -122622,53 +122622,53 @@ var Wm = class e extends DisposableContainer {
       this._augmentConfigListener.config.completions.addIntelliSenseSuggestions)
     ) {
       this._logger.debug("Registering completion items provider.")
-      let r = new Kv(this._augmentConfigListener)
+      let completionItemsProvider = new Kv(this._augmentConfigListener)
       this._completionDisposables.push(
         Ye.languages.registerCompletionItemProvider(
           Kv.languageSelector,
-          r,
+          completionItemsProvider,
           ...Kv.triggerCharacters,
         ),
       )
     }
   }
   _disableInlineCompletions() {
-    for (let r of this._completionDisposables) r.dispose()
+    for (let disposable of this._completionDisposables) disposable.dispose()
     this._completionDisposables = []
   }
   _disableDataCollection() {
     this._dataCollector?.dispose(), (this._dataCollector = void 0)
   }
   getRecencyInfo() {
-    let r = {},
-      n = this.workspaceManager.getTabSwitchEvents()
+    let recencyInfo = {},
+      tabSwitchEvents = this.workspaceManager.getTabSwitchEvents()
     return (
-      n !== void 0 &&
-        (r.tab_switch_events = n.map((i) => ({
-          path: i.relPathName,
-          file_blob_name: i.blobName,
+      tabSwitchEvents !== void 0 &&
+        (recencyInfo.tab_switch_events = tabSwitchEvents.map((event) => ({
+          path: event.relPathName,
+          file_blob_name: event.blobName,
         }))),
-      r
+      recencyInfo
     )
   }
-  forceNextEditSuggestion(r) {
-    let n = Ye.window.activeTextEditor
-    if (!n || !this.workspaceManager) return
-    let i = this.workspaceManager.safeResolvePathName(n.document.uri)
-    i &&
+  forceNextEditSuggestion(source) {
+    let activeEditor = Ye.window.activeTextEditor
+    if (!activeEditor || !this.workspaceManager) return
+    let pathName = this.workspaceManager.safeResolvePathName(activeEditor.document.uri)
+    pathName &&
       (this._nextEditSessionEventReporter.reportEventWithoutIds(
         "suggestion-forced",
-        r ?? "command",
+        source ?? "command",
       ),
       this._nextEditRequestManager?.enqueueRequest(
-        i,
+        pathName,
         "FORCED",
         "CURSOR",
-        od(n.selection),
+        od(activeEditor.selection),
       ))
   }
-  nextEditUpdate(r) {
-    this._globalNextEdit?.startGlobalQuery(r)
+  nextEditUpdate(query) {
+    this._globalNextEdit?.startGlobalQuery(query)
   }
   nextEditBackgroundSuggestionsEnabled() {
     return iw(
@@ -122682,29 +122682,29 @@ var Wm = class e extends DisposableContainer {
       "command",
     )
   }
-  nextEditTogglePanelHorizontalSplit(r) {
+  nextEditTogglePanelHorizontalSplit(source) {
     this._nextEditVSCodeToWebviewMessage.fire({
       type: "next-edit-toggle-suggestion-tree",
     }),
       this._nextEditSessionEventReporter.reportEventWithoutIds(
         "toggle-panel-horizontal-split",
-        r ?? "command",
+        source ?? "command",
       )
   }
-  openNextEditPanel(r) {
+  openNextEditPanel(source) {
     this._nextEditSessionEventReporter.reportEventWithoutIds(
       "panel-focus-executed",
-      r ?? "command",
+      source ?? "command",
     ),
       Ye.commands.executeCommand("augment-next-edit.focus"),
       this._nextEditVSCodeToWebviewMessage.fire({
         type: "next-edit-panel-focus",
       })
   }
-  nextEditLearnMore(r) {
+  nextEditLearnMore(source) {
     this._nextEditSessionEventReporter.reportEventWithoutIds(
       "learn-more-clicked",
-      r ?? "command",
+      source ?? "command",
     ),
       Ye.env.openExternal(
         Ye.Uri.parse("https://docs.augmentcode.com/using-augment/next-edit"),
@@ -122712,107 +122712,107 @@ var Wm = class e extends DisposableContainer {
   }
   async updateStatusTrace() {
     this._statusTrace?.dispose()
-    let r = new UN(() => this._onTextDocumentDidChange.fire(e.displayStatusUri))
-    this._statusTrace = r
-    let n = 0
+    let statusTraceBuilder = new UN(() => this._onTextDocumentDidChange.fire(e.displayStatusUri))
+    this._statusTrace = statusTraceBuilder
+    let savePointIndex = 0
     if (this.enableInProgress) {
-      r.addLine("Augment extension is initializing"), r.publish()
+      statusTraceBuilder.addLine("Augment extension is initializing"), statusTraceBuilder.publish()
       return
     }
     if (!this.enabled) {
-      r.addLine("Augment is not enabled in this workspace"), r.publish()
+      statusTraceBuilder.addLine("Augment is not enabled in this workspace"), statusTraceBuilder.publish()
       return
     }
-    r.addSection("Extension version")
-    let i = Ye.extensions.getExtension("augment.vscode-augment")
-    i
-      ? r.addValue("Extension version", i.packageJSON.version)
-      : r.addLine("Cannot retrieve extension version"),
-      r.addSection("Session ID"),
-      r.addValue("Session ID", this._apiServer.sessionId),
-      r.addSection("Recent Completion Requests (oldest to newest)")
-    let s = this._recentCompletions.items
-      .sort((l, c) => l.occuredAt.getTime() - c.occuredAt.getTime())
+    statusTraceBuilder.addSection("Extension version")
+    let extension = Ye.extensions.getExtension("augment.vscode-augment")
+    extension
+      ? statusTraceBuilder.addValue("Extension version", extension.packageJSON.version)
+      : statusTraceBuilder.addLine("Cannot retrieve extension version"),
+      statusTraceBuilder.addSection("Session ID"),
+      statusTraceBuilder.addValue("Session ID", this._apiServer.sessionId),
+      statusTraceBuilder.addSection("Recent Completion Requests (oldest to newest)")
+    let sortedCompletions = this._recentCompletions.items
+      .sort((a, b) => a.occuredAt.getTime() - b.occuredAt.getTime())
       .slice(0, 10)
-    for (let { requestId: l } of s) r.addLine(`${l}`)
-    s.length === 0 && r.addLine("No recent completion requests"),
-      r.addSection("Recent Instruction Requests (oldest to newest)")
-    for (let { requestId: l } of this._recentInstructions.items)
-      r.addLine(`${l}`)
+    for (let { requestId } of sortedCompletions) statusTraceBuilder.addLine(`${requestId}`)
+    sortedCompletions.length === 0 && statusTraceBuilder.addLine("No recent completion requests"),
+      statusTraceBuilder.addSection("Recent Instruction Requests (oldest to newest)")
+    for (let { requestId } of this._recentInstructions.items)
+      statusTraceBuilder.addLine(`${requestId}`)
     this._recentInstructions.items.length === 0 &&
-      r.addLine("No recent instruction requests"),
-      r.addSection("Recent Chat Requests (oldest to newest)")
-    for (let { requestId: l } of this._recentChats.items) r.addLine(`${l}`)
+      statusTraceBuilder.addLine("No recent instruction requests"),
+      statusTraceBuilder.addSection("Recent Chat Requests (oldest to newest)")
+    for (let { requestId } of this._recentChats.items) statusTraceBuilder.addLine(`${requestId}`)
     this._recentChats.items.length === 0 &&
-      r.addLine("No recent chat requests"),
-      r.addSection("Extension configuration")
-    let o = this._augmentConfigListener.config
-    r.addObject(o), r.addValue("Using API token", !this._auth.useOAuth)
-    let a = ""
+      statusTraceBuilder.addLine("No recent chat requests"),
+      statusTraceBuilder.addSection("Extension configuration")
+    let config = this._augmentConfigListener.config
+    statusTraceBuilder.addObject(config), statusTraceBuilder.addValue("Using API token", !this._auth.useOAuth)
+    let completionUrl = ""
     if (this._auth.useOAuth) {
-      let l = await this._auth.getSession()
-      r.addValue("Tenant URL", l?.tenantURL), (a = l?.tenantURL || "")
-    } else a = o.completionURL
+      let session = await this._auth.getSession()
+      statusTraceBuilder.addValue("Tenant URL", session?.tenantURL), (completionUrl = session?.tenantURL || "")
+    } else completionUrl = config.completionURL
     if (!this.ready) {
-      r.addLine("Augment extension is initializing"), r.publish()
+      statusTraceBuilder.addLine("Augment extension is initializing"), statusTraceBuilder.publish()
       return
     }
-    r.addSection("Back-end Configuration"),
-      r.addValue(
+    statusTraceBuilder.addSection("Back-end Configuration"),
+      statusTraceBuilder.addValue(
         "MaxUploadSizeBytes",
         this.featureFlagManager.currentFlags.maxUploadSizeBytes,
       ),
-      r.addValue(
+      statusTraceBuilder.addValue(
         "enableCompletionFileEditEvents",
         this.featureFlagManager.currentFlags.enableCompletionFileEditEvents,
       ),
-      r.addSection("Supported languages (Augment name / VSCode name):")
-    for (let l of this._languages) r.addLine(`${l.name} / ${l.vscodeName}`)
-    r.addSection("Available Models")
-    for (let l of this._availableModels) {
-      let c = this._defaultModel && l.startsWith(this._defaultModel),
-        u = (!o.modelName && c) || l === o.modelName,
-        f = l + (c ? " (default)" : "") + (u ? " (current)" : "")
-      r.addLine(f)
+      statusTraceBuilder.addSection("Supported languages (Augment name / VSCode name):")
+    for (let language of this._languages) statusTraceBuilder.addLine(`${language.name} / ${language.vscodeName}`)
+    statusTraceBuilder.addSection("Available Models")
+    for (let model of this._availableModels) {
+      let isDefault = this._defaultModel && model.startsWith(this._defaultModel),
+        isCurrent = (!config.modelName && isDefault) || model === config.modelName,
+        modelDisplay = model + (isDefault ? " (default)" : "") + (isCurrent ? " (current)" : "")
+      statusTraceBuilder.addLine(modelDisplay)
     }
-    this._availableModels.length === 0 && r.addLine("No models available"),
-      r.addSection("Current Model"),
-      (n = r.savePoint()),
-      r.addLine("Querying current model"),
-      r.addLine("(in progress...)")
+    this._availableModels.length === 0 && statusTraceBuilder.addLine("No models available"),
+      statusTraceBuilder.addSection("Current Model"),
+      (savePointIndex = statusTraceBuilder.savePoint()),
+      statusTraceBuilder.addLine("Querying current model"),
+      statusTraceBuilder.addLine("(in progress...)")
     try {
-      r.publish(),
-        r.rollback(n),
-        o.modelName || r.addLine("(Using default model)"),
-        r.addObject(this.modelInfo)
-    } catch (l) {
-      r.rollback(n),
-        l instanceof cw
-          ? r.addLine(`Model "${o.modelName}" not known.`)
-          : r.addError(
-              `Unable to query info about model "${o.modelName}": ${He(l)}`,
+      statusTraceBuilder.publish(),
+        statusTraceBuilder.rollback(savePointIndex),
+        config.modelName || statusTraceBuilder.addLine("(Using default model)"),
+        statusTraceBuilder.addObject(this.modelInfo)
+    } catch (error) {
+      statusTraceBuilder.rollback(savePointIndex),
+        error instanceof cw
+          ? statusTraceBuilder.addLine(`Model "${config.modelName}" not known.`)
+          : statusTraceBuilder.addError(
+              `Unable to query info about model "${config.modelName}": ${He(error)}`,
             )
     }
     if (
-      (r.addSection("Blob upload"),
-      o.enableUpload
-        ? r.addLine("Blob upload enabled in configuration settings")
-        : r.addLine("Blob upload disabled in configuration settings"),
+      (statusTraceBuilder.addSection("Blob upload"),
+      config.enableUpload
+        ? statusTraceBuilder.addLine("Blob upload enabled in configuration settings")
+        : statusTraceBuilder.addLine("Blob upload disabled in configuration settings"),
       this.workspaceManager !== void 0 &&
-        (await this.workspaceManager.updateStatusTrace(r)),
-      a !== "")
+        (await this.workspaceManager.updateStatusTrace(statusTraceBuilder)),
+      completionUrl !== "")
     ) {
-      r.addSection("Completion status"),
-        r.addLine(`Attempting completion from ${a}`)
-      let l = this._apiServer.createRequestId()
-      r.addValue("Request ID", l),
-        (n = r.savePoint()),
-        r.addLine("(in progress...)")
+      statusTraceBuilder.addSection("Completion status"),
+        statusTraceBuilder.addLine(`Attempting completion from ${completionUrl}`)
+      let requestId = this._apiServer.createRequestId()
+      statusTraceBuilder.addValue("Request ID", requestId),
+        (savePointIndex = statusTraceBuilder.savePoint()),
+        statusTraceBuilder.addLine("(in progress...)")
       try {
-        r.publish()
-        let c = Date.now(),
-          u = await this._apiServer.complete(
-            l,
+        statusTraceBuilder.publish()
+        let startTime = Date.now(),
+          completionResponse = await this._apiServer.complete(
+            requestId,
             "this is the prefix",
             "this is the suffix",
             "/this/is/the/path",
@@ -122822,21 +122822,21 @@ var Wm = class e extends DisposableContainer {
             { checkpointId: void 0, addedBlobs: [], deletedBlobs: [] },
             [],
           )
-        r.rollback(n),
-          r.addLine(`Response received in ${Date.now() - c} ms`),
-          u.completionItems.length === 0
-            ? r.addLine("No completion received")
-            : r.addLine(`${u.completionItems.length} completion(s) received`)
-      } catch (c) {
-        r.rollback(n), r.addError(`Completion request failed: ${c}`)
+        statusTraceBuilder.rollback(savePointIndex),
+          statusTraceBuilder.addLine(`Response received in ${Date.now() - startTime} ms`),
+          completionResponse.completionItems.length === 0
+            ? statusTraceBuilder.addLine("No completion received")
+            : statusTraceBuilder.addLine(`${completionResponse.completionItems.length} completion(s) received`)
+      } catch (error) {
+        statusTraceBuilder.rollback(savePointIndex), statusTraceBuilder.addError(`Completion request failed: ${error}`)
       }
     }
-    r.addSection("Feature Flags"),
-      r.addObject(this.featureFlagManager.currentFlags),
-      r.publish()
+    statusTraceBuilder.addSection("Feature Flags"),
+      statusTraceBuilder.addObject(this.featureFlagManager.currentFlags),
+      statusTraceBuilder.publish()
   }
-  async provideTextDocumentContent(r) {
-    return r.toString() === e.displayStatusUri.toString()
+  async provideTextDocumentContent(uri) {
+    return uri.toString() === e.displayStatusUri.toString()
       ? this._statusTrace === void 0
         ? "Internal error. Cannot get Augment extension status."
         : this._statusTrace.content
@@ -122960,7 +122960,7 @@ function nEt(e) {
         webviewOptions: { retainContextWhenHidden: !0 },
       }),
     ),
-    (r = new Wm(e, c, f, m, p, y, v, E, C, w, N, Z, T, te, g, B, Y, W))
+    (r = new AugmentExtension(e, c, f, m, p, y, v, E, C, w, N, Z, T, te, g, B, Y, W))
   function Q() {
     Z.isVisible() || Ye.commands.executeCommand(Ji.commandID)
   }
@@ -122982,7 +122982,7 @@ function nEt(e) {
       }),
     ),
     e.subscriptions.push(
-      Ye.workspace.registerTextDocumentContentProvider(Wm.contentScheme, r),
+      Ye.workspace.registerTextDocumentContentProvider(AugmentExtension.contentScheme, r),
     ),
     nEe(e),
     tBe(r, f, e)
