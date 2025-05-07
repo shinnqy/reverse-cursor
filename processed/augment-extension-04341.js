@@ -83316,7 +83316,7 @@ var fye = q(V0e()),
   hye = require("vscode")
 var Xh = q(require("vscode"))
 var X0e = q(require("crypto")),
-  tv = q(require("fs")),
+  fs = q(require("fs")),
   fn = q(require("fs/promises")),
   eye = q(require("os")),
   pM = q(require("vscode"))
@@ -83486,12 +83486,12 @@ function tye(e) {
 function Oft(e) {
   return e.isFile() ? "File" : e.isDirectory() ? "Directory" : "Other"
 }
-function rye(e) {
-  return { size: e.size, type: Oft(e), mtime: Math.floor(e.mtimeMs) }
+function convertFileStats(stats) {
+  return { size: stats.size, type: Oft(stats), mtime: Math.floor(stats.mtimeMs) }
 }
 async function ev(e) {
   let t = await fn.lstat(e)
-  return rye(t)
+  return convertFileStats(t)
 }
 async function nye(e) {
   try {
@@ -83500,16 +83500,16 @@ async function nye(e) {
     return !1
   }
 }
-function Vr(e) {
+function fileExists(filePath) {
   try {
-    return cf(e).type === "File"
+    return getFileStats(filePath).type === "File"
   } catch {
     return !1
   }
 }
 function mM(e) {
   try {
-    return cf(e).type === "Directory"
+    return getFileStats(e).type === "Directory"
   } catch {
     return !1
   }
@@ -83521,9 +83521,9 @@ async function Vl(e) {
     return !1
   }
 }
-function cf(e) {
-  let t = tv.lstatSync(e)
-  return rye(t)
+function getFileStats(filePath) {
+  let stats = fs.lstatSync(filePath)
+  return convertFileStats(stats)
 }
 async function ax(e) {
   let t = [],
@@ -83533,7 +83533,7 @@ async function ax(e) {
 }
 function hm(e) {
   let t = [],
-    r = tv.readdirSync(e, { withFileTypes: !0 })
+    r = fs.readdirSync(e, { withFileTypes: !0 })
   for (let n of r) t.push([n.name, tye(n)])
   return t
 }
@@ -83561,7 +83561,7 @@ async function oa(e, t) {
   return await fn.writeFile(e, t, { encoding: "utf8" })
 }
 function sye(e, t) {
-  return tv.writeFileSync(e, t, { encoding: "utf8" })
+  return fs.writeFileSync(e, t, { encoding: "utf8" })
 }
 async function oye(e) {
   return await fn.unlink(e)
@@ -83600,8 +83600,8 @@ function vM() {
   if (pM.workspace.workspaceFolders && pM.workspace.workspaceFolders.length > 0)
     return pM.workspace.workspaceFolders[0].uri.fsPath
 }
-function Vc(e, t) {
-  Xh.commands.executeCommand("setContext", e, t)
+function setVSCodeContext(contextKey, contextValue) {
+  Xh.commands.executeCommand("setContext", contextKey, contextValue)
 }
 var CM = class e extends DisposableContainer {
   constructor(r) {
@@ -83816,15 +83816,15 @@ async function bM(e, t) {
 }
 async function SM(e) {
   let t = e()
-  return !t || !Vr(t) ? void 0 : (await readTextFile(t)).replace(/^\s+/, "")
+  return !t || !fileExists(t) ? void 0 : (await readTextFile(t)).replace(/^\s+/, "")
 }
 async function gye(e, t) {
   if (!e) return
   let r = gi.Uri.joinPath(e, "Augment-Memories").fsPath,
     n = gi.Uri.joinPath(e, "Agent-Memories").fsPath
-  if (Vr(n))
+  if (fileExists(n))
     try {
-      if (!Vr(r)) {
+      if (!fileExists(r)) {
         let i = await readTextFile(n)
         if (i.trim() === "") return
         await oa(r, i),
@@ -84258,7 +84258,7 @@ var kG = 20,
           let n = r.file_path,
             i = $u(n, this.workspaceManager)?.absPath
           if (i === void 0) return at(`Failed to read file: ${n}`)
-          if (!Vr(i)) return at(`File does not exist: ${n}`)
+          if (!fileExists(i)) return at(`File does not exist: ${n}`)
           let s = await readTextFile(i)
           return s === void 0
             ? (this.logger.error(`Failed to read file: ${n}`),
@@ -84349,7 +84349,7 @@ var kG = 20,
       let n = rv.default.join(r, ".augment-guidelines"),
         i = ""
       try {
-        Vr(n) && (i = await readTextFile(n))
+        fileExists(n) && (i = await readTextFile(n))
       } catch (l) {
         this.trace.setFlag(Nt.failedToReadGuidelines),
           this.logger.error(`Failed to read existing guidelines: ${l}`)
@@ -84795,7 +84795,7 @@ async function Eye(e, t, r, n, i) {
     let o = t.getBestFolderRoot()
     if (!o) throw Error("Root of the project is `undefined`.")
     let a = rv.default.join(o, ".augment-guidelines")
-    if (Vr(a)) {
+    if (fileExists(a)) {
       let l = await readTextFile(a)
       if (l && l.includes(_M)) return
     }
@@ -85249,19 +85249,19 @@ function ECe() {
     t && i4.default.existsSync(t) ? t : null
   )
 }
-var n4
-function vm() {
+var extensionPackageCache
+function getVSCodeAPI() {
   return (
-    n4 === void 0 &&
-      (n4 =
+    extensionPackageCache === void 0 &&
+      (extensionPackageCache =
         Cx.extensions.getExtension("Augment.vscode-augment")?.packageJSON ??
         null),
-    n4
+    extensionPackageCache
   )
 }
-var _Ce = "0.0.3141592"
-function Tt(e, t = vm()?.version) {
-  return !t || e === "" ? !1 : LM.default.gte(t, e) || t === _Ce
+var DEVELOPMENT_VERSION = "0.0.3141592"
+function isMinVersionMet(minRequiredVersion, currentVersion = getVSCodeAPI()?.version) {
+  return !currentVersion || minRequiredVersion === "" ? !1 : LM.default.gte(currentVersion, minRequiredVersion) || currentVersion === DEVELOPMENT_VERSION
 }
 function eo(e) {
   try {
@@ -85270,10 +85270,10 @@ function eo(e) {
     return $pt.error(`Failed to parse vscode version: ${Cx.version}`), !1
   }
 }
-function Ypt(e = vm()?.version) {
-  return e === _Ce
+function Ypt(e = getVSCodeAPI()?.version) {
+  return e === DEVELOPMENT_VERSION
 }
-function UM(e = vm()?.version) {
+function UM(e = getVSCodeAPI()?.version) {
   return !e || Ypt(e) ? 0 : (LM.default.parse(e)?.patch ?? 0)
 }
 function Kpt(e, t, r, n, i, s, o) {
@@ -87131,7 +87131,7 @@ var Sx = class {
         }),
       )
     limitChatHistory = (r) =>
-      Tt(
+      isMinVersionMet(
         this._featureFlagManager.currentFlags
           .vscodeChatStablePrefixTruncationMinVersion,
       )
@@ -88655,7 +88655,7 @@ Please wait until this process is complete (you can use a tool for this purpose)
       let i = r
       return (
         i || (i = this._findGitBashPath()),
-        !i || !Vr(i)
+        !i || !fileExists(i)
           ? void 0
           : {
               name: "bash",
@@ -88677,7 +88677,7 @@ Please wait until this process is complete (you can use a tool for this purpose)
           bm.default.join(n, "Git", "bin", "bash.exe"),
           bm.default.join(n, "Git", "usr", "bin", "bash.exe"),
         ]
-        for (let s of i) if (Vr(s)) return s
+        for (let s of i) if (fileExists(s)) return s
       }
     }
     _findPowerShellPath() {
@@ -88694,7 +88694,7 @@ Please wait until this process is complete (you can use a tool for this purpose)
           for (let [l, c] of hm(a))
             if (c === "Directory" && l.match(/^\d+$/)) {
               let u = bm.default.join(a, l, "pwsh.exe")
-              Vr(u) && (!n || l > n) && ((n = l), (i = u))
+              fileExists(u) && (!n || l > n) && ((n = l), (i = u))
             }
         }
       }
@@ -88708,7 +88708,7 @@ Please wait until this process is complete (you can use a tool for this purpose)
           "v1.0",
           "powershell.exe",
         )
-        if (Vr(a)) return a
+        if (fileExists(a)) return a
       }
     }
     get shellName() {
@@ -89227,7 +89227,7 @@ var rbe = {
       let r = this._shellInfo.path ?? this._shellInfo.name
       try {
         return this._shellInfo.path && af(this._shellInfo.path)
-          ? Vr(this._shellInfo.path)
+          ? fileExists(this._shellInfo.path)
           : new Promise((n) => {
               try {
                 let i = (0, ibe.spawn)(r, [], { shell: !1, stdio: "ignore" })
@@ -89416,7 +89416,7 @@ var obe = (e, t, r, n, i, s, o) => (a) => new I4(a, t, e, r, n, i, s, o),
           c = (await pm(s, this._workspaceManager)) ?? "",
           u = $u(s, this._workspaceManager)
         if (u === void 0) return at(`Cannot resolve path: ${s}`)
-        if (Vr(u.absPath)) return at(`File already exists: ${u.absPath}`)
+        if (fileExists(u.absPath)) return at(`File already exists: ${u.absPath}`)
         let f = new un(u, void 0, l, {})
         if (c === l) return f.dispose(), cr(`No changes made to file {${s}}`)
         let p =
@@ -90865,7 +90865,7 @@ var AF = class extends DisposableContainer {
   }
   _onDiffViewFocusChange = (r) => {
     let n = r.data
-    return Vc("vscode-augment.internal-dv.panel-focused", n), { type: "empty" }
+    return setVSCodeContext("vscode-augment.internal-dv.panel-focused", n), { type: "empty" }
   }
   async _onUserSendInstruction(r) {
     if (
@@ -91730,14 +91730,14 @@ var kx = class {
   }
   get flags() {
     return {
-      enableAgentMode: Tt(
+      enableAgentMode: isMinVersionMet(
         UM() === 0
           ? (this._featureFlagManager.currentFlags.vscodeAgentModeMinVersion ??
               "")
           : (this._featureFlagManager.currentFlags
               .vscodeAgentModeMinStableVersion ?? ""),
       ),
-      enableChatWithTools: Tt(
+      enableChatWithTools: isMinVersionMet(
         this._featureFlagManager.currentFlags.vscodeChatWithToolsMinVersion ??
           "",
       ),
@@ -91776,7 +91776,7 @@ var TF = class {
       await n.save()
   }
   async deleteFile(t) {
-    if (Vr(t.absPath))
+    if (fileExists(t.absPath))
       try {
         let r = Ja.Uri.file(t.absPath)
         await Ja.workspace.fs.delete(r)
@@ -91795,7 +91795,7 @@ async function Xmt(e, t) {
   try {
     let r
     if (ube(e)) r = oF(e)
-    else if (Vr(e.absPath)) r = await Ja.workspace.openTextDocument(e.absPath)
+    else if (fileExists(e.absPath)) r = await Ja.workspace.openTextDocument(e.absPath)
     else {
       let n = Ja.Uri.file(e.absPath)
       await Ja.workspace.fs.writeFile(n, Buffer.from(t ?? "")),
@@ -93067,7 +93067,7 @@ var wm = class e extends DisposableContainer {
     return (
       r || (r = this._featureFlagManager.currentFlags),
       this._configListener.config.enableDebugFeatures &&
-        Tt(r.vscodeBackgroundAgentsMinVersion ?? "")
+        isMinVersionMet(r.vscodeBackgroundAgentsMinVersion ?? "")
     )
   }
   async startDetection() {
@@ -99956,7 +99956,7 @@ var jx = class extends DisposableContainer {
             useRichTextHistory: this._config.config.chat.useRichTextHistory,
             modelDisplayNameToId: this.getMergedAdditionalChatModels(),
             fullFeatured: !0,
-            enableExternalSourcesInChat: Tt(
+            enableExternalSourcesInChat: isMinVersionMet(
               this._featureFlagManager.currentFlags
                 .vscodeExternalSourcesInChatMinVersion ?? "",
             ),
@@ -99964,30 +99964,30 @@ var jx = class extends DisposableContainer {
               this._featureFlagManager.currentFlags.smallSyncThreshold,
             bigSyncThreshold:
               this._featureFlagManager.currentFlags.bigSyncThreshold,
-            enableSmartPaste: Tt(
+            enableSmartPaste: isMinVersionMet(
               this._featureFlagManager.currentFlags
                 .enableSmartPasteMinVersion ?? "",
             ),
-            enableDirectApply: Tt(
+            enableDirectApply: isMinVersionMet(
               this._featureFlagManager.currentFlags
                 .vscodeDirectApplyMinVersion ?? "",
             ),
             summaryTitles:
               this._featureFlagManager.currentFlags.enableSummaryTitles,
-            suggestedEditsAvailable: Tt(
+            suggestedEditsAvailable: isMinVersionMet(
               this._featureFlagManager.currentFlags.vscodeNextEditMinVersion ??
                 "",
             ),
-            enableShareService: Tt(
+            enableShareService: isMinVersionMet(
               this._featureFlagManager.currentFlags.vscodeShareMinVersion ?? "",
             ),
             maxTrackableFileCount:
               this._featureFlagManager.currentFlags.maxTrackableFileCount,
-            enableDesignSystemRichTextEditor: Tt(
+            enableDesignSystemRichTextEditor: isMinVersionMet(
               this._featureFlagManager.currentFlags
                 .vscodeDesignSystemRichTextEditorMinVersion ?? "",
             ),
-            enableSources: Tt(
+            enableSources: isMinVersionMet(
               this._featureFlagManager.currentFlags.vscodeSourcesMinVersion ??
                 "",
             ),
@@ -99995,30 +99995,30 @@ var jx = class extends DisposableContainer {
               this._featureFlagManager.currentFlags.enableChatMermaidDiagrams,
             smartPastePrecomputeMode:
               this._featureFlagManager.currentFlags.smartPastePrecomputeMode,
-            useNewThreadsMenu: Tt(
+            useNewThreadsMenu: isMinVersionMet(
               this._featureFlagManager.currentFlags
                 .vscodeNewThreadsMenuMinVersion ?? "",
             ),
-            enableEditableHistory: Tt(
+            enableEditableHistory: isMinVersionMet(
               this._featureFlagManager.currentFlags
                 .vscodeEditableHistoryMinVersion ?? "",
             ),
-            enableChatMermaidDiagramsMinVersion: Tt(
+            enableChatMermaidDiagramsMinVersion: isMinVersionMet(
               this._featureFlagManager.currentFlags
                 .vscodeEnableChatMermaidDiagramsMinVersion ?? "",
             ),
-            enableChatMultimodal: Tt(
+            enableChatMultimodal: isMinVersionMet(
               this._featureFlagManager.currentFlags
                 .vscodeChatMultimodalMinVersion ?? "",
             ),
-            enableAgentMode: Tt(
+            enableAgentMode: isMinVersionMet(
               UM() === 0
                 ? (this._featureFlagManager.currentFlags
                     .vscodeAgentModeMinVersion ?? "")
                 : (this._featureFlagManager.currentFlags
                     .vscodeAgentModeMinStableVersion ?? ""),
             ),
-            enableRichCheckpointInfo: Tt(
+            enableRichCheckpointInfo: isMinVersionMet(
               this._featureFlagManager.currentFlags
                 .vscodeRichCheckpointInfoMinVersion ?? "",
             ),
@@ -100027,7 +100027,7 @@ var jx = class extends DisposableContainer {
               "WorkspaceNotPopulated",
             ),
             truncateChatHistory: !1,
-            enableVirtualizedMessageList: Tt(
+            enableVirtualizedMessageList: isMinVersionMet(
               this._featureFlagManager.currentFlags
                 .vscodeVirtualizedMessageListMinVersion ?? "",
             ),
@@ -100043,18 +100043,18 @@ var jx = class extends DisposableContainer {
               reviewer:
                 this._config.config.advanced.personalityPrompts?.reviewer ?? "",
             },
-            enablePersonalities: Tt(
+            enablePersonalities: isMinVersionMet(
               this._featureFlagManager.currentFlags
                 .vscodePersonalitiesMinVersion ?? "",
             ),
-            enableBackgroundAgents: Tt(
+            enableBackgroundAgents: isMinVersionMet(
               this._featureFlagManager.currentFlags
                 .vscodeBackgroundAgentsMinVersion ?? "",
             ),
             memoryClassificationOnFirstToken:
               this._featureFlagManager.currentFlags
                 .memoryClassificationOnFirstToken ?? !1,
-            enableGenerateCommitMessage: Tt(
+            enableGenerateCommitMessage: isMinVersionMet(
               this._featureFlagManager.currentFlags
                 .vscodeGenerateCommitMessageMinVersion ?? "",
             ),
@@ -100689,7 +100689,7 @@ ${p.stack}`
   }
   onExternalSourceSearch = async (r) => {
     if (
-      !Tt(
+      !isMinVersionMet(
         this._featureFlagManager.currentFlags
           .vscodeExternalSourcesInChatMinVersion,
       )
@@ -102096,7 +102096,7 @@ function fCt(e, t) {
     showDiffInHover: e.nextEdit.showDiffInHover,
     enablePanel:
       e.nextEdit.enableBottomPanel ??
-      Tt(t.currentFlags.vscodeNextEditBottomPanelMinVersion) ??
+      isMinVersionMet(t.currentFlags.vscodeNextEditBottomPanelMinVersion) ??
       !1,
   }
 }
@@ -102115,7 +102115,7 @@ var an = class extends la {
       return (
         super.canRun() &&
         this._extension.ready &&
-        jl(
+        isVersionSupported(
           this._configListener.config,
           this._extension.featureFlagManager.currentFlags
             .vscodeNextEditMinVersion,
@@ -103392,7 +103392,7 @@ var nQ = class {
           : "linux"
     }
     getDefaultKeybindings() {
-      let r = vm()
+      let r = getVSCodeAPI()
       if (r && r.contributes && r.contributes.keybindings) {
         let { keybindings: n } = r.contributes
         return Object.fromEntries(n.map((i) => [i.command, i]))
@@ -103461,14 +103461,14 @@ var nQ = class {
       return r.indexOf("Unknown") !== -1 ? "" : r.join(" ").trim()
     }
   }
-function jl(e, t) {
-  return e.nextEdit.enabled ?? Tt(t)
+function isVersionSupported(config, minVersion) {
+  return config.nextEdit.enabled ?? isMinVersionMet(minVersion)
 }
 function iw(e, t) {
   return (
     e.nextEdit.enableBackgroundSuggestions &&
     e.nextEdit.backgroundEnabled &&
-    jl(e, t)
+    isVersionSupported(e, t)
   )
 }
 function Vv() {
@@ -103532,7 +103532,7 @@ var sQ = class e extends mt {
     return (
       super.canRun() &&
       this._extension.ready &&
-      jl(
+      isVersionSupported(
         this._configListener.config,
         this._extension.featureFlagManager.currentFlags
           .vscodeNextEditMinVersion,
@@ -103680,7 +103680,7 @@ var gQ = class extends mt {
       (this.commitMessagePromptPreparer = new Dv())
   }
   canRun() {
-    return Tt(
+    return isMinVersionMet(
       this.extension.featureFlagManager.currentFlags
         .vscodeGenerateCommitMessageMinVersion,
     )
@@ -104770,7 +104770,7 @@ var SQ = class e extends PanelWebview {
     }
   }
   _getEnableAgentMode() {
-    return Tt(
+    return isMinVersionMet(
       this._featureFlagManager.currentFlags.vscodeAgentModeMinVersion ?? "",
     )
   }
@@ -108392,7 +108392,7 @@ function NSe(e, t) {
   let r = QSe(e, t)
   if (r == null) return null
   let i =
-    vm()?.contributes.icons[`augment-kb-${r}`].default.fontCharacter?.replace(
+    getVSCodeAPI()?.contributes.icons[`augment-kb-${r}`].default.fontCharacter?.replace(
       "\\",
       "",
     ) ?? null
@@ -110470,7 +110470,7 @@ var GCt = new Map([
     _set(r, n) {
       this._status.set(r, n)
       let i = GCt.get(r)
-      i && Vc(i, n)
+      i && setVSCodeContext(i, n)
     }
   }
 var NextEditManager = class NextEditManager extends DisposableContainer {
@@ -111318,7 +111318,7 @@ var NextEditManager = class NextEditManager extends DisposableContainer {
           preserveFocus: preserveFocus,
         })
       else {
-        if (!Vr(suggestion.qualifiedPathName.absPath)) {
+        if (!fileExists(suggestion.qualifiedPathName.absPath)) {
           Se.window.showInformationMessage(
             `Suggestion for ${suggestion.qualifiedPathName.relPath} is no longer relevant.`,
           ),
@@ -111528,7 +111528,7 @@ async function* eIe(e) {
   ;(0, TN.default)(e.pathName)
   let t = await sC.workspace.openTextDocument(QualifiedPathName.from(e.pathName).absPath),
     r = kN(e.pathName)
-  ;(0, TN.default)(Vr(r))
+  ;(0, TN.default)(fileExists(r))
   let n = XSe.default.parse((await sC.workspace.openTextDocument(r)).getText()),
     i = t.getText(),
     s = 0
@@ -111585,9 +111585,9 @@ function tIe(e, t) {
     ? e.getFolderRoot(QualifiedPathName.from(t).absPath)
     : e.getMostRecentlyChangedFolderRoot()
 }
-function B6(e, t, r, n) {
-  let i = !!t.config.nextEdit.useMockResults && !!r && Vr(kN(r))
-  return (n ?? e.getFileEditEvents(tIe(e, r))).length !== 0 || i
+function checkCanUpdateGlobal(workspaceManager, configListener, activePath, fileEditEvents) {
+  let useMockResultsForCurrentFile = !!configListener.config.nextEdit.useMockResults && !!activePath && fileExists(kN(activePath))
+  return (fileEditEvents ?? workspaceManager.getFileEditEvents(tIe(workspaceManager, activePath))).length !== 0 || useMockResultsForCurrentFile
 }
 async function* rIe(e, t, r, n, i, s, o, a) {
   let l = z("queryNextEditStream")
@@ -111596,11 +111596,11 @@ async function* rIe(e, t, r, n, i, s, o, a) {
       yield { status: $e.cancelled }
     return
   }
-  if (!B6(t, s, e.pathName, e.fileEditEvents)) {
+  if (!checkCanUpdateGlobal(t, s, e.pathName, e.fileEditEvents)) {
     l.debug("Skipping Next Edit with no changes."), yield { status: $e.ok }
     return
   }
-  let u = s.config.nextEdit.useMockResults && e.pathName && Vr(kN(e.pathName)),
+  let u = s.config.nextEdit.useMockResults && e.pathName && fileExists(kN(e.pathName)),
     f = tIe(t, e.pathName),
     p = e.fileEditEvents ?? t.getFileEditEvents(f),
     g = f ? t.getRepoRootForFolderRoot(f) : void 0,
@@ -111669,7 +111669,7 @@ async function* rIe(e, t, r, n, i, s, o, a) {
           )
         continue
       }
-      if (T?.uri.scheme === "file" && !Vr(N.absPath)) {
+      if (T?.uri.scheme === "file" && !fileExists(N.absPath)) {
         l.warn(`${B} Response path ${N.relPath} does not exist.`),
           a.reportEvent(
             e.requestId,
@@ -111881,14 +111881,14 @@ async function JCt(e, t, r, n) {
     )
   ).filter((a) => a !== void 0)
 }
-var MN = class extends DisposableContainer {
-  constructor(r, n, i, s, o) {
+var GlobalNextEditManager = class extends DisposableContainer {
+  constructor(workspaceManager, nextEditRequestManager, suggestionManager, configListener, nextEditSessionEventReporter) {
     super()
-    this._workspaceManager = r
-    this._nextEditRequestManager = n
-    this._suggestionManager = i
-    this._configListener = s
-    this._nextEditSessionEventReporter = o
+    this._workspaceManager = workspaceManager
+    this._nextEditRequestManager = nextEditRequestManager
+    this._suggestionManager = suggestionManager
+    this._configListener = configListener
+    this._nextEditSessionEventReporter = nextEditSessionEventReporter
     this.addDisposable(
       Xl.workspace.onDidChangeTextDocument(this.handleWorkspaceEditsAvailable),
     ),
@@ -111907,7 +111907,7 @@ var MN = class extends DisposableContainer {
   }
   timeoutMs = 1e3 * 30
   _logger = z("GlobalNextEdits")
-  async startGlobalQuery(r) {
+  async startGlobalQuery(eventSource) {
     Xl.commands.executeCommand(
       "setContext",
       "vscode-augment.nextEdit.global.updating",
@@ -111916,34 +111916,34 @@ var MN = class extends DisposableContainer {
     try {
       this._nextEditSessionEventReporter.reportEventWithoutIds(
         "global-mode-refreshed",
-        r ?? "command",
+        eventSource ?? "command",
       )
-      let n = Xl.window.activeTextEditor,
-        i = n
-          ? this._workspaceManager.safeResolvePathName(n.document.uri)
+      let activeEditor = Xl.window.activeTextEditor,
+        activePath = activeEditor
+          ? this._workspaceManager.safeResolvePathName(activeEditor.document.uri)
           : void 0,
-        s = this._nextEditRequestManager.enqueueRequest(
-          i,
+        requestId = this._nextEditRequestManager.enqueueRequest(
+          activePath,
           "FOREGROUND",
           "WORKSPACE",
         )
-      if (!s) return
+      if (!requestId) return
       await this._nextEditRequestManager.lastFinishedRequest
-        .waitUntil((a) => a !== void 0 && a.requestId === s, this.timeoutMs)
-        .catch((a) => {
-          this._logger.error(`Global next edit failed: ${a}`),
+        .waitUntil((request) => request !== void 0 && request.requestId === requestId, this.timeoutMs)
+        .catch((error) => {
+          this._logger.error(`Global next edit failed: ${error}`),
             this._nextEditSessionEventReporter.reportEvent(
-              s,
+              requestId,
               void 0,
               Date.now(),
               "error-global-mode-error",
               "command",
             )
         })
-      let o = this._suggestionManager
+      let invalidSuggestions = this._suggestionManager
         .getActiveSuggestions()
-        .filter((a) => !Vr(a.qualifiedPathName.absPath))
-      this._suggestionManager.remove(o)
+        .filter((suggestion) => !fileExists(suggestion.qualifiedPathName.absPath))
+      this._suggestionManager.remove(invalidSuggestions)
     } finally {
       Xl.commands.executeCommand(
         "setContext",
@@ -111960,24 +111960,24 @@ var MN = class extends DisposableContainer {
       )
   }
   handleWorkspaceEditsAvailable = () => {
-    let { activeTextEditor: r } = Xl.window,
-      n = r
-        ? this._workspaceManager.safeResolvePathName(r?.document.uri)
+    let { activeTextEditor: activeTextEditor } = Xl.window,
+      activePath = activeTextEditor
+        ? this._workspaceManager.safeResolvePathName(activeTextEditor?.document.uri)
         : void 0,
-      i = B6(this._workspaceManager, this._configListener, n)
-    Vc("vscode-augment.nextEdit.global.canUpdate", i)
+      canUpdate = checkCanUpdateGlobal(this._workspaceManager, this._configListener, activePath)
+    setVSCodeContext("vscode-augment.nextEdit.global.canUpdate", canUpdate)
   }
   _handleWorkspaceEditsCached() {
-    let { activeTextEditor: r } = Xl.window,
-      n = r
-        ? this._workspaceManager.safeResolvePathName(r?.document.uri)
+    let { activeTextEditor: activeTextEditor } = Xl.window,
+      activePath = activeTextEditor
+        ? this._workspaceManager.safeResolvePathName(activeTextEditor?.document.uri)
         : void 0,
-      i = this._nextEditRequestManager.shouldNotEnqueueRequestReason(
-        n,
+      shouldNotEnqueueReason = this._nextEditRequestManager.shouldNotEnqueueRequestReason(
+        activePath,
         "FOREGROUND",
         "WORKSPACE",
       )
-    Vc("vscode-augment.nextEdit.global.updateCached", i)
+    setVSCodeContext("vscode-augment.nextEdit.global.updateCached", shouldNotEnqueueReason)
   }
 }
 var nIe = q(_s()),
@@ -112010,7 +112010,7 @@ var FN = class e extends DisposableContainer {
         this.addDisposable(
           new ec.Disposable(
             this.state.listen((y) => {
-              Vc("vscode-augment.nextEdit.loading", y === "inflight")
+              setVSCodeContext("vscode-augment.nextEdit.loading", y === "inflight")
             }),
           ),
         )
@@ -112535,20 +112535,20 @@ function iIe(e, t) {
 `) || r.equals(t)
       : !1
 }
-var NN = class extends DisposableContainer {
-  constructor(r, n, i = 1e3 * 60 * 10) {
+var SuggestionManager = class extends DisposableContainer {
+  constructor(workspaceManager, nextEditSessionEventReporter, defaultRejectionDurationMs = 1e3 * 60 * 10) {
     super()
-    this._workspaceManager = r
-    this._nextEditSessionEventReporter = n
-    this.defaultRejectionDurationMs = i
+    this._workspaceManager = workspaceManager
+    this._nextEditSessionEventReporter = nextEditSessionEventReporter
+    this.defaultRejectionDurationMs = defaultRejectionDurationMs
     ;(this.suggestionWasJustAccepted = new zm()),
       (this.suggestionWasJustUndone = new zm()),
       this.addDisposable(this.suggestionWasJustAccepted),
       this.addDisposable(this.suggestionWasJustUndone),
       this.addDisposable(new Us.Disposable(() => this.clear(!0))),
       this.addDisposable(
-        Us.workspace.onDidChangeTextDocument((s) => {
-          this.handleChangeEvent(s)
+        Us.workspace.onDidChangeTextDocument((event) => {
+          this.handleChangeEvent(event)
         }),
       )
   }
@@ -112559,54 +112559,54 @@ var NN = class extends DisposableContainer {
   suggestionWasJustAccepted
   suggestionWasJustUndone
   _logger = z("SuggestionManagerImpl")
-  onSuggestionsChanged(r) {
+  onSuggestionsChanged(listener) {
     return (
-      this._suggestionsChangedListeners.push(r),
+      this._suggestionsChangedListeners.push(listener),
       new Us.Disposable(() => {
         this._suggestionsChangedListeners =
-          this._suggestionsChangedListeners.filter((n) => n !== r)
+          this._suggestionsChangedListeners.filter((item) => item !== listener)
       })
     )
   }
-  dispatchSuggestionsChangedEvent(r) {
-    let n = {
-      ...r,
-      newSuggestions: r.newSuggestions,
-      oldSuggestions: r.oldSuggestions,
+  dispatchSuggestionsChangedEvent(event) {
+    let eventCopy = {
+      ...event,
+      newSuggestions: event.newSuggestions,
+      oldSuggestions: event.oldSuggestions,
     }
-    this._suggestionsChangedListeners.forEach((i) => void i(n))
+    this._suggestionsChangedListeners.forEach((listener) => void listener(eventCopy))
   }
-  add(r, n) {
+  add(suggestions, overrideRejections) {
     if (
-      ((this._rejectedSuggestions = this._getCurrentRejectedSuggestions()), n)
+      ((this._rejectedSuggestions = this._getCurrentRejectedSuggestions()), overrideRejections)
     ) {
-      let s = this._rejectedSuggestions.length
+      let oldRejectionCount = this._rejectedSuggestions.length
       ;(this._rejectedSuggestions = this._rejectedSuggestions.filter(
-        ([o, a]) => !r.some((l) => o.intersects(l)),
+        ([rejectedSuggestion, expiryTime]) => !suggestions.some((suggestion) => rejectedSuggestion.intersects(suggestion)),
       )),
-        s !== this._rejectedSuggestions.length &&
+        oldRejectionCount !== this._rejectedSuggestions.length &&
           this._logger.debug(
-            `Clearing ${s - this._rejectedSuggestions.length} old rejections.`,
+            `Clearing ${oldRejectionCount - this._rejectedSuggestions.length} old rejections.`,
           )
     } else {
-      let s = r.length
-      ;(r = r.filter(
-        (o) => !this._rejectedSuggestions.some(([a, l]) => a.intersects(o)),
+      let originalCount = suggestions.length
+      ;(suggestions = suggestions.filter(
+        (suggestion) => !this._rejectedSuggestions.some(([rejectedSuggestion, expiryTime]) => rejectedSuggestion.intersects(suggestion)),
       )),
-        s !== r.length &&
+        originalCount !== suggestions.length &&
           this._logger.debug(
-            `Dropping ${s - r.length} suggestions that overlap with rejected suggestions.`,
+            `Dropping ${originalCount - suggestions.length} suggestions that overlap with rejected suggestions.`,
           )
     }
-    if (!r.length) return !1
-    let i = this._suggestions
-    this._filterSuggestions((s) => !r.some((o) => s.intersects(o)))
-    for (let s of r) this._reportNonemptyEvent(s, "nonempty-suggestion-added")
+    if (!suggestions.length) return !1
+    let oldSuggestions = this._suggestions
+    this._filterSuggestions((suggestion) => !suggestions.some((newSuggestion) => suggestion.intersects(newSuggestion)))
+    for (let suggestion of suggestions) this._reportNonemptyEvent(suggestion, "nonempty-suggestion-added")
     return (
-      this._suggestions.push(...r),
+      this._suggestions.push(...suggestions),
       this.checkValidity(this._suggestions),
       this.dispatchSuggestionsChangedEvent({
-        oldSuggestions: i,
+        oldSuggestions: oldSuggestions,
         newSuggestions: this._suggestions,
         accepted: this._justAcceptedSuggestions,
         rejected: [],
@@ -112615,40 +112615,40 @@ var NN = class extends DisposableContainer {
       !0
     )
   }
-  remove(r) {
-    if (!r.length) return !1
-    let n = this._suggestions,
-      i = this._rejectedSuggestions
+  remove(suggestionsToRemove) {
+    if (!suggestionsToRemove.length) return !1
+    let oldSuggestions = this._suggestions,
+      oldRejectedSuggestions = this._rejectedSuggestions
     return (
-      this._filterSuggestions((s) => !r.some((o) => o.equals(s))),
+      this._filterSuggestions((suggestion) => !suggestionsToRemove.some((toRemove) => toRemove.equals(suggestion))),
       (this._rejectedSuggestions = this._getCurrentRejectedSuggestions().filter(
-        ([s, o]) => !r.some((a) => a.equals(s)),
+        ([rejectedSuggestion, o]) => !suggestionsToRemove.some((toRemove) => toRemove.equals(rejectedSuggestion)),
       )),
       this._logger.debug(
-        `Removing ${n.length - this._suggestions.length} suggestions and ${i.length - this._rejectedSuggestions.length} rejections from the manager.`,
+        `Removing ${oldSuggestions.length - this._suggestions.length} suggestions and ${oldRejectedSuggestions.length - this._rejectedSuggestions.length} rejections from the manager.`,
       ),
-      n.length !== this._suggestions.length
+      oldSuggestions.length !== this._suggestions.length
         ? (this.dispatchSuggestionsChangedEvent({
-            oldSuggestions: n,
+            oldSuggestions: oldSuggestions,
             newSuggestions: this._suggestions,
             accepted: this._justAcceptedSuggestions,
             rejected: [],
             undone: [],
           }),
           !0)
-        : i.length !== this._rejectedSuggestions.length
+        : oldRejectedSuggestions.length !== this._rejectedSuggestions.length
     )
   }
-  clear(r, n) {
-    let i = this._suggestions
-    for (let s of i) this._reportNonemptyEvent(s, "nonempty-suggestion-cleared")
-    n
-      ? (this._suggestions = this._suggestions.filter((s) => s.mode !== n))
+  clear(clearRejections, mode) {
+    let oldSuggestions = this._suggestions
+    for (let suggestion of oldSuggestions) this._reportNonemptyEvent(suggestion, "nonempty-suggestion-cleared")
+    mode
+      ? (this._suggestions = this._suggestions.filter((suggestion) => suggestion.mode !== mode))
       : (this._suggestions = []),
-      r && (this._rejectedSuggestions = []),
+      clearRejections && (this._rejectedSuggestions = []),
       (this._justAcceptedSuggestions = []),
       this.dispatchSuggestionsChangedEvent({
-        oldSuggestions: i,
+        oldSuggestions: oldSuggestions,
         newSuggestions: [],
         accepted: this._justAcceptedSuggestions,
         rejected: [],
@@ -112672,166 +112672,166 @@ var NN = class extends DisposableContainer {
         undone: [],
       }))
   }
-  findSuggestionById(r) {
-    return this._suggestions.find((n) => n.result.suggestionId === r)
+  findSuggestionById(id) {
+    return this._suggestions.find((suggestion) => suggestion.result.suggestionId === id)
   }
   _getCurrentRejectedSuggestions() {
-    let r = Date.now(),
-      n = this._rejectedSuggestions.filter(([i, s]) => r < s)
+    let currentTime = Date.now(),
+      validRejections = this._rejectedSuggestions.filter(([suggestion, expiryTime]) => currentTime < expiryTime)
     return (
-      n.length !== this._rejectedSuggestions.length &&
+      validRejections.length !== this._rejectedSuggestions.length &&
         this._logger.debug(
-          `Filtering out ${this._rejectedSuggestions.length - n.length} expired rejections.`,
+          `Filtering out ${this._rejectedSuggestions.length - validRejections.length} expired rejections.`,
         ),
-      n
+      validRejections
     )
   }
   getRejectedSuggestions() {
     return (
       (this._rejectedSuggestions = this._getCurrentRejectedSuggestions()),
-      this._rejectedSuggestions.map(([r, n]) => r)
+      this._rejectedSuggestions.map(([suggestion, expiryTime]) => suggestion)
     )
   }
   getAllSuggestions() {
     return [...this.getActiveSuggestions(), ...this.getRejectedSuggestions()]
   }
-  accept(r) {
-    if (r.length === 0) return
-    let n = new Us.WorkspaceEdit()
-    for (let i of r)
-      n.replace(
-        Us.Uri.from({ scheme: i.uriScheme, path: i.qualifiedPathName.absPath }),
+  accept(suggestionsToAccept) {
+    if (suggestionsToAccept.length === 0) return
+    let workspaceEdit = new Us.WorkspaceEdit()
+    for (let suggestion of suggestionsToAccept)
+      workspaceEdit.replace(
+        Us.Uri.from({ scheme: suggestion.uriScheme, path: suggestion.qualifiedPathName.absPath }),
         new Us.Range(
-          new Us.Position(i.lineRange.start, 0),
-          new Us.Position(i.lineRange.stop, 0),
+          new Us.Position(suggestion.lineRange.start, 0),
+          new Us.Position(suggestion.lineRange.stop, 0),
         ),
-        i.result.suggestedCode,
+        suggestion.result.suggestedCode,
       )
-    Us.workspace.applyEdit(n)
+    Us.workspace.applyEdit(workspaceEdit)
   }
-  reject(r, n = this.defaultRejectionDurationMs) {
-    if (r.length === 0) return
-    this._logger.debug(`Rejecting ${r.length} suggestions.`),
+  reject(suggestionsToReject, rejectionDurationMs = this.defaultRejectionDurationMs) {
+    if (suggestionsToReject.length === 0) return
+    this._logger.debug(`Rejecting ${suggestionsToReject.length} suggestions.`),
       (this._justAcceptedSuggestions = this._justAcceptedSuggestions.filter(
-        (a) => !r.some((l) => l.equals(a)),
+        (acceptedSuggestion) => !suggestionsToReject.some((rejectedSuggestion) => rejectedSuggestion.equals(acceptedSuggestion)),
       ))
-    let i = this._suggestions
-    this._filterSuggestions((a) => !r.some((l) => l.equals(a)))
-    let s = Date.now() + n,
-      o = r.map((a) => [a, s])
+    let oldSuggestions = this._suggestions
+    this._filterSuggestions((suggestion) => !suggestionsToReject.some((rejectedSuggestion) => rejectedSuggestion.equals(suggestion)))
+    let expiryTime = Date.now() + rejectionDurationMs,
+      newRejections = suggestionsToReject.map((suggestion) => [suggestion, expiryTime])
     ;(this._rejectedSuggestions =
-      this._getCurrentRejectedSuggestions().concat(o)),
+      this._getCurrentRejectedSuggestions().concat(newRejections)),
       this.dispatchSuggestionsChangedEvent({
-        oldSuggestions: i,
+        oldSuggestions: oldSuggestions,
         newSuggestions: this._suggestions,
         accepted: this._justAcceptedSuggestions,
-        rejected: r,
+        rejected: suggestionsToReject,
         undone: [],
       })
   }
-  handleChangeEvent(r) {
-    if (r.contentChanges.length === 0) return !1
-    let n = this._workspaceManager.safeResolvePathName(r.document.uri)
-    if (n === void 0) return !1
-    let i = this._suggestions,
-      [s, o] = (0, oIe.partition)(this._suggestions, (w) =>
-        n.equals(w.qualifiedPathName),
+  handleChangeEvent(event) {
+    if (event.contentChanges.length === 0) return !1
+    let documentPath = this._workspaceManager.safeResolvePathName(event.document.uri)
+    if (documentPath === void 0) return !1
+    let oldSuggestions = this._suggestions,
+      [affectedSuggestions, unaffectedSuggestions] = (0, oIe.partition)(this._suggestions, (suggestion) =>
+        documentPath.equals(suggestion.qualifiedPathName),
       ),
-      a = s.map((w) => QN(w, r)),
-      l = this._justAcceptedSuggestions.map((w) => QN(w, r)),
-      c = this._getCurrentRejectedSuggestions().map(([w, B]) => QN(w, r)),
-      u = Eg(a, vw),
-      f = Eg(a, aC),
-      p = Eg(l, lC),
-      g = Eg(c, lC)
-    this._justAcceptedSuggestions = Eg(l, Jm).concat(Eg(l, oC))
-    let m = p.concat(g),
-      y = f.filter((w) =>
-        m.some(
-          (B) =>
-            B.lineRange.equals(w.afterLineRange(r.document)) ||
-            B.lineRange.intersects(w.afterLineRange(r.document)),
+      updatedSuggestions = affectedSuggestions.map((suggestion) => QN(suggestion, event)),
+      updatedAcceptedSuggestions = this._justAcceptedSuggestions.map((suggestion) => QN(suggestion, event)),
+      updatedRejectedSuggestions = this._getCurrentRejectedSuggestions().map(([suggestion, expiryTime]) => QN(suggestion, event)),
+      acceptedSuggestions = Eg(updatedSuggestions, vw),
+      invalidatedSuggestions = Eg(updatedSuggestions, aC),
+      undoneSuggestions = Eg(updatedAcceptedSuggestions, lC),
+      undoneRejectedSuggestions = Eg(updatedRejectedSuggestions, lC)
+    this._justAcceptedSuggestions = Eg(updatedAcceptedSuggestions, Jm).concat(Eg(updatedAcceptedSuggestions, oC))
+    let allUndoneSuggestions = undoneSuggestions.concat(undoneRejectedSuggestions),
+      invalidatedDueToUndo = invalidatedSuggestions.filter((suggestion) =>
+        allUndoneSuggestions.some(
+          (undoneSuggestion) =>
+            undoneSuggestion.lineRange.equals(suggestion.afterLineRange(event.document)) ||
+            undoneSuggestion.lineRange.intersects(suggestion.afterLineRange(event.document)),
         ),
       )
-    ;(u.length > 0 || f.length > 0 || m.length > 0) &&
+    ;(acceptedSuggestions.length > 0 || invalidatedSuggestions.length > 0 || allUndoneSuggestions.length > 0) &&
       this._logger.debug(
-        `Accepting ${u.length} suggestions and invalidating ${f.length} suggestions (of which ${y.length} were invalidated due to undo) and undoing ${m.length} suggestions.`,
+        `Accepting ${acceptedSuggestions.length} suggestions and invalidating ${invalidatedSuggestions.length} suggestions (of which ${invalidatedDueToUndo.length} were invalidated due to undo) and undoing ${allUndoneSuggestions.length} suggestions.`,
       )
-    let v = u.length === 0 && m.length === 0 && f.length > y.length,
-      C = [...Eg(a, Jm), ...Eg(a, oC)].map((w) =>
-        this._markStaleIfNeeded(w, v, "document-changed"),
+    let shouldMarkStale = acceptedSuggestions.length === 0 && allUndoneSuggestions.length === 0 && invalidatedSuggestions.length > invalidatedDueToUndo.length,
+      updatedUnchangedSuggestions = [...Eg(updatedSuggestions, Jm), ...Eg(updatedSuggestions, oC)].map((suggestion) =>
+        this._markStaleIfNeeded(suggestion, shouldMarkStale, "document-changed"),
       ),
-      E = o.map((w) => this._markStaleIfNeeded(w, v, "document-changed"))
-    for (let w of u)
+      updatedUnaffectedSuggestions = unaffectedSuggestions.map((suggestion) => this._markStaleIfNeeded(suggestion, shouldMarkStale, "document-changed"))
+    for (let suggestion of acceptedSuggestions)
       this._reportNonemptyEvent(
-        w,
-        r.reason === Us.TextDocumentChangeReason.Redo
+        suggestion,
+        event.reason === Us.TextDocumentChangeReason.Redo
           ? "nonempty-suggestion-redone"
           : "nonempty-suggestion-accepted",
         "document-changed",
       )
-    for (let w of f)
+    for (let suggestion of invalidatedSuggestions)
       this._reportNonemptyEvent(
-        w,
+        suggestion,
         "nonempty-suggestion-invalidated",
         "document-changed",
       )
-    for (let w of m)
+    for (let suggestion of allUndoneSuggestions)
       this._reportNonemptyEvent(
-        w,
+        suggestion,
         "nonempty-suggestion-undone",
         "document-changed",
       )
     return (
-      (this._suggestions = E.concat(C, p)),
+      (this._suggestions = updatedUnaffectedSuggestions.concat(updatedUnchangedSuggestions, undoneSuggestions)),
       this.checkValidity(this._suggestions),
       (this._justAcceptedSuggestions = (
-        v ? [] : this._justAcceptedSuggestions
-      ).concat(u)),
-      u.length > 0 && this.suggestionWasJustAccepted.set(!0),
-      p.length > 0 && this.suggestionWasJustUndone.set(!0),
+        shouldMarkStale ? [] : this._justAcceptedSuggestions
+      ).concat(acceptedSuggestions)),
+      acceptedSuggestions.length > 0 && this.suggestionWasJustAccepted.set(!0),
+      undoneSuggestions.length > 0 && this.suggestionWasJustUndone.set(!0),
       this.dispatchSuggestionsChangedEvent({
-        oldSuggestions: i,
+        oldSuggestions: oldSuggestions,
         newSuggestions: this._suggestions,
         accepted: this._justAcceptedSuggestions,
         rejected: [],
-        undone: p,
+        undone: undoneSuggestions,
       }),
-      u.length > 0
+      acceptedSuggestions.length > 0
     )
   }
-  _filterSuggestions(r) {
-    ;(this._suggestions = this._suggestions.filter((n) => {
-      let i = r(n)
-      return i || this._reportNonemptyEvent(n, "nonempty-suggestion-dropped"), i
+  _filterSuggestions(predicate) {
+    ;(this._suggestions = this._suggestions.filter((suggestion) => {
+      let shouldKeep = predicate(suggestion)
+      return shouldKeep || this._reportNonemptyEvent(suggestion, "nonempty-suggestion-dropped"), shouldKeep
     })),
       this.checkValidity(this._suggestions)
   }
-  _markStaleIfNeeded(r, n, i) {
-    return n
-      ? (this._reportNonemptyEvent(r, "nonempty-suggestion-becomes-stale", i),
-        r.with({ state: "stale" }))
-      : r
+  _markStaleIfNeeded(suggestion, shouldMarkStale, eventSource) {
+    return shouldMarkStale
+      ? (this._reportNonemptyEvent(suggestion, "nonempty-suggestion-becomes-stale", eventSource),
+        suggestion.with({ state: "stale" }))
+      : suggestion
   }
-  checkValidity(r) {
-    if (r.length < 2) return !0
-    let n = [...r]
-    n.sort(
-      (s, o) =>
-        s.qualifiedPathName.relPath.localeCompare(
-          o.qualifiedPathName.relPath,
-        ) || s.lineRange.compareTo(o.lineRange),
+  checkValidity(suggestions) {
+    if (suggestions.length < 2) return !0
+    let sortedSuggestions = [...suggestions]
+    sortedSuggestions.sort(
+      (a, b) =>
+        a.qualifiedPathName.relPath.localeCompare(
+          b.qualifiedPathName.relPath,
+        ) || a.lineRange.compareTo(b.lineRange),
     )
-    let i = n[0]
-    for (let s = 1; s < n.length; s++) {
-      let o = n[s]
-      if (i.intersects(o))
+    let previousSuggestion = sortedSuggestions[0]
+    for (let i = 1; i < sortedSuggestions.length; i++) {
+      let currentSuggestion = sortedSuggestions[i]
+      if (previousSuggestion.intersects(currentSuggestion))
         return (
           this._logger.error(
-            `Found intersecting suggestions, ${i.toString()} and ${o.toString()}`,
+            `Found intersecting suggestions, ${previousSuggestion.toString()} and ${currentSuggestion.toString()}`,
           ),
           this._nextEditSessionEventReporter.reportEventFromSuggestion(
-            o,
+            currentSuggestion,
             "error-intersecting-suggestions",
             "unknown",
           ),
@@ -112840,12 +112840,12 @@ var NN = class extends DisposableContainer {
     }
     return !0
   }
-  _reportNonemptyEvent(r, n, i) {
-    r.changeType !== "noop" &&
+  _reportNonemptyEvent(suggestion, eventName, eventSource) {
+    suggestion.changeType !== "noop" &&
       this._nextEditSessionEventReporter.reportEventFromSuggestion(
-        r,
-        n,
-        i ?? "unknown",
+        suggestion,
+        eventName,
+        eventSource ?? "unknown",
       )
   }
 }
@@ -112885,7 +112885,7 @@ var ebt = 2,
     enable() {
       this.dispose(),
         (this._configListener.config.enableDebugFeatures ||
-          Tt(
+          isMinVersionMet(
             this._featureFlagManager.currentFlags
               .vscodeChatHintDecorationMinVersion,
           )) &&
@@ -113593,7 +113593,7 @@ var GN = class extends PanelWebview {
     ;(this._currentApp = t),
       this._currentApp &&
         (this._currentApp.register(this._webview),
-        Vc("vscode-augment.mainPanel.app", this._currentApp.appType())),
+        setVSCodeContext("vscode-augment.mainPanel.app", this._currentApp.appType())),
       this._postAppTypeMsg()
   }
   onDidReceiveMessage(t) {
@@ -113657,19 +113657,19 @@ var $N = class extends DisposableContainer {
       await this._mainPanelWebview.loadHTML(this._extensionUri)
   }
 }
-var YN = class extends DisposableContainer {
-  constructor(r, n, i) {
+var NextEditWebviewProvider = class extends DisposableContainer {
+  constructor(configListener, featureFlagsManager, onWebviewCreated) {
     super()
-    this._config = r
-    this._featureFlagsManager = n
-    this.onWebviewCreated = i
+    this._config = configListener
+    this._featureFlagsManager = featureFlagsManager
+    this.onWebviewCreated = onWebviewCreated
     this.maybeRegisterWebview()
   }
   webviewView = void 0
   nextEditWebview = void 0
   maybeRegisterWebview = () => {
     !this.webviewView ||
-      !jl(
+      !isVersionSupported(
         this._config.config,
         this._featureFlagsManager.currentFlags.vscodeNextEditMinVersion,
       ) ||
@@ -113677,8 +113677,8 @@ var YN = class extends DisposableContainer {
       (this.nextEditWebview = this.onWebviewCreated(this.webviewView)),
       this.addDisposable(this.nextEditWebview))
   }
-  resolveWebviewView(r, n, i) {
-    ;(this.webviewView = r), this.maybeRegisterWebview()
+  resolveWebviewView(webviewView, context, token) {
+    ;(this.webviewView = webviewView), this.maybeRegisterWebview()
   }
 }
 var k6 = class extends Error {
@@ -114184,7 +114184,7 @@ var M6 = class {
   }
   stat(t) {
     try {
-      return cf(t)
+      return getFileStats(t)
     } catch {
       return
     }
@@ -114221,7 +114221,7 @@ var lbt = "file-edit-events.json",
     async load() {
       this._logger.debug(`Loading events from ${this._storeFile}`)
       try {
-        if (!Vr(this._storeFile))
+        if (!fileExists(this._storeFile))
           return (
             this._logger.debug(
               `File ${this._storeFile} does not exist. Not loading events.`,
@@ -117908,7 +117908,7 @@ function Gbt(e) {
 }
 function T2(e) {
   let t = Gbt(e)
-  return Vr(t)
+  return fileExists(t)
 }
 async function LIe(e, t) {
   let r = Qt(e, Df.cacheFileName),
@@ -119327,7 +119327,7 @@ var D9 = class extends xg {
       if (i === void 0) return
       let s, o
       try {
-        ;(s = cf(ms(r)).type), (o = this._pathFilter.getPathInfo(i, s))
+        ;(s = getFileStats(ms(r)).type), (o = this._pathFilter.getPathInfo(i, s))
       } catch (l) {
         ;(s = "Other"), (o = new D9(He(l)))
       }
@@ -119768,7 +119768,7 @@ var V2 = class e extends DisposableContainer {
         this._featureFlagManager.currentFlags.refuseToSyncHomeDirectories),
       (this._useCheckpointManagerContext =
         v?.useCheckpointManagerContext ??
-        Tt(
+        isMinVersionMet(
           this._featureFlagManager.currentFlags
             .useCheckpointManagerContextMinVersion,
         )),
@@ -120090,7 +120090,7 @@ var V2 = class e extends DisposableContainer {
             this._configListener,
           ))
         : this._disposeVCSWatcher(),
-      jl(
+      isVersionSupported(
         this._configListener.config,
         this._featureFlagManager.currentFlags.vscodeNextEditMinVersion,
       ) || this.getEnableCompletionFileEditEvents()
@@ -120248,7 +120248,7 @@ var V2 = class e extends DisposableContainer {
     if (n === void 0) throw new OF()
     if (this._registeredSourceFolders.has(n)) throw new HF()
     try {
-      if (cf(n).type !== "Directory") throw new VF()
+      if (getFileStats(n).type !== "Directory") throw new VF()
     } catch (i) {
       throw new qF(He(i))
     }
@@ -121123,7 +121123,7 @@ var V2 = class e extends DisposableContainer {
         folderId: o.folderId,
         oldRelPath: a,
         newRelPath: c,
-        type: cf(n.oldUri.fsPath).type,
+        type: getFileStats(n.oldUri.fsPath).type,
       })
     })
   }
@@ -121933,7 +121933,7 @@ var Wm = class e extends DisposableContainer {
       this.disposeOnDisable.push(f)
     let p = new gN()
     this.disposeOnDisable.push(p),
-      (this._suggestionManager = new NN(
+      (this._suggestionManager = new SuggestionManager(
         this.workspaceManager,
         this._nextEditSessionEventReporter,
       )),
@@ -121972,7 +121972,7 @@ var Wm = class e extends DisposableContainer {
         },
       )),
       this.disposeOnDisable.push(this._editorNextEdit),
-      (this._globalNextEdit = new MN(
+      (this._globalNextEdit = new GlobalNextEditManager(
         this.workspaceManager,
         this._nextEditRequestManager,
         this._suggestionManager,
@@ -122427,7 +122427,7 @@ var Wm = class e extends DisposableContainer {
                   "initialization-skip",
                   "validation-expected",
                 )
-          let rr = jl(
+          let rr = isVersionSupported(
             Ue,
             this.featureFlagManager.currentFlags.vscodeNextEditMinVersion ?? "",
           )
@@ -122481,7 +122481,7 @@ var Wm = class e extends DisposableContainer {
     this.disposeOnDisable.push(
       Ye.window.registerWebviewViewProvider(
         "augment-next-edit",
-        new YN(
+        new NextEditWebviewProvider(
           this._augmentConfigListener,
           this.featureFlagManager,
           (Y) =>
@@ -122999,7 +122999,7 @@ function tBe(e, t, r) {
     zIe({
       "vscode-augment.enableDebugFeatures": o.enableDebugFeatures,
       "vscode-augment.enableReviewerWorkflows": o.enableReviewerWorkflows,
-      "vscode-augment.enableNextEdit": jl(
+      "vscode-augment.enableNextEdit": isVersionSupported(
         t.config,
         e?.featureFlagManager.currentFlags.vscodeNextEditMinVersion ?? "",
       ),
@@ -123007,7 +123007,7 @@ function tBe(e, t, r) {
         t.config,
         e?.featureFlagManager.currentFlags.vscodeNextEditMinVersion ?? "",
       ),
-      "vscode-augment.enableGenerateCommitMessage": Tt(
+      "vscode-augment.enableGenerateCommitMessage": isMinVersionMet(
         e?.featureFlagManager.currentFlags
           .vscodeGenerateCommitMessageMinVersion ?? "",
       ),
@@ -123036,13 +123036,13 @@ function tBe(e, t, r) {
         "vscode-augment.internal-new-instructions.enabled":
           o.enableInstructions,
         "vscode-augment.internal-dv.enabled":
-          Tt(o.enableSmartPasteMinVersion) || o.enableInstructions,
-        "vscode-augment.sources-enabled": Tt(o.vscodeSourcesMinVersion) ?? !1,
+          isMinVersionMet(o.enableSmartPasteMinVersion) || o.enableInstructions,
+        "vscode-augment.sources-enabled": isMinVersionMet(o.vscodeSourcesMinVersion) ?? !1,
         "vscode-augment.chat-hint.decoration":
-          Tt(o.vscodeChatHintDecorationMinVersion) ?? !1,
+          isMinVersionMet(o.vscodeChatHintDecorationMinVersion) ?? !1,
         "vscode-augment.cpu-profile.enabled": o.vscodeEnableCpuProfile,
         "vscode-augment.enableGenerateCommitMessage":
-          Tt(o.vscodeGenerateCommitMessageMinVersion) ?? !1,
+          isMinVersionMet(o.vscodeGenerateCommitMessageMinVersion) ?? !1,
         "vscode-augment.nextEdit.enablePanel":
           e.nextEditConfigManager.config.enablePanel,
       })
