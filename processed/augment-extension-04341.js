@@ -108045,65 +108045,65 @@ var hN = class e extends DisposableContainer {
     }
   }
 }
-var ga = class e {
-  constructor(t, r = (i, s) => i === s, n = []) {
-    this._value = t
-    this._equalityFn = r
-    this._listeners = n
+var Observable = class Observable {
+  constructor(initialValue, equalityFunction = (newValue, oldValue) => newValue === oldValue, initialListeners = []) {
+    this._value = initialValue
+    this._equalityFn = equalityFunction
+    this._listeners = initialListeners
   }
-  static watch(t, ...r) {
-    let n = () => t(...r.map((a) => a.value)),
-      i = new e(n()),
-      s = r.map((a) =>
-        a.listen(() => {
-          i.value = n()
+  static watch(computeFunction, ...observables) {
+    let computeValue = () => computeFunction(...observables.map((observable) => observable.value)),
+      derivedObservable = new Observable(computeValue()),
+      subscriptions = observables.map((observable) =>
+        observable.listen(() => {
+          derivedObservable.value = computeValue()
         }),
       ),
-      o = i.dispose
+      originalDispose = derivedObservable.dispose
     return (
-      (i.dispose = () => {
-        o(), s.forEach((a) => a())
+      (derivedObservable.dispose = () => {
+        originalDispose(), subscriptions.forEach((unsubscribe) => unsubscribe())
       }),
-      i
+      derivedObservable
     )
   }
   dispose = () => {
     this._listeners = []
   }
-  listen(t, r = !1) {
+  listen(callback, invokeImmediately = !1) {
     return (
-      r && t(this._value, this._value),
-      this._listeners.push(t),
+      invokeImmediately && callback(this._value, this._value),
+      this._listeners.push(callback),
       () => {
-        this._listeners = this._listeners.filter((n) => n !== t)
+        this._listeners = this._listeners.filter((listener) => listener !== callback)
       }
     )
   }
   get value() {
     return this._value
   }
-  set value(t) {
-    if (this._equalityFn(t, this._value)) return
-    let r = this._value
-    this._value = t
-    for (let n of this._listeners) n(t, r)
+  set value(newValue) {
+    if (this._equalityFn(newValue, this._value)) return
+    let oldValue = this._value
+    this._value = newValue
+    for (let listener of this._listeners) listener(newValue, oldValue)
   }
-  waitUntil(t, r) {
-    return new Promise((n, i) => {
-      let s,
-        o =
-          r !== void 0 &&
+  waitUntil(predicate, timeoutMs) {
+    return new Promise((resolve, reject) => {
+      let unsubscribe,
+        timeoutId =
+          timeoutMs !== void 0 &&
           setTimeout(() => {
-            s?.(), i(new Error("Timeout exceeded."))
-          }, r)
-      s = this.listen((a) => {
-        t(a) && (o && clearTimeout(o), s?.(), n(a))
+            unsubscribe?.(), reject(new Error("Timeout exceeded."))
+          }, timeoutMs)
+      unsubscribe = this.listen((value) => {
+        predicate(value) && (timeoutId && clearTimeout(timeoutId), unsubscribe?.(), resolve(value))
       }, !0)
     })
   }
 }
 var gN = class extends DisposableContainer {
-  _maybeInlineCompletionVisible = new ga(!1)
+  _maybeInlineCompletionVisible = new Observable(!1)
   constructor() {
     super(),
       this.addDisposable(
@@ -109349,7 +109349,7 @@ var DecorationManager = class e extends _N {
   _activeChangeDecorationMiddle
   _activeChangeDecorationBottom
   _zeroHeightDiffLineBuilder
-  shouldDrawBottomDecorations = new ga(!0)
+  shouldDrawBottomDecorations = new Observable(!0)
   babyGlobalHintRange
   bottomBoxRange
   cursorHintRange
@@ -110485,7 +110485,7 @@ var NextEditManager = class NextEditManager extends DisposableContainer {
     this._nextEditConfigManager = configManager
     this._completionVisibilityWatcher = completionVisibilityWatcher
     this._onCursorWithinSuggestion = onCursorWithinSuggestion
-    ;(this._state = new ga(new NoSuggestionsState(), DSe)),
+    ;(this._state = new Observable(new NoSuggestionsState(), DSe)),
       (this._decorationManager = new DecorationManager(
         editor,
         workspaceManager,
@@ -112055,9 +112055,9 @@ var NextEditRequestManager = class e extends DisposableContainer {
   static _statusClearTimeoutMs = 2e3
   _pendingRequests = []
   _inflightRequest
-  lastFinishedRequest = new ga(void 0)
-  lastResponse = new ga(void 0)
-  state = new ga("ready")
+  lastFinishedRequest = new Observable(void 0)
+  lastResponse = new Observable(void 0)
+  state = new Observable("ready")
   _processPendingRequestsDebounced
   _freshCompletedRequests = []
   get hasInflightRequest() {
@@ -112397,7 +112397,7 @@ var DocumentContextValue = class extends DisposableContainer {
   _lastSetAt
   _observable
   constructor(initialValue = void 0, clearDelayMs = 1) {
-    super(), (this._observable = this.addDisposable(new ga(initialValue)))
+    super(), (this._observable = this.addDisposable(new Observable(initialValue)))
     let checkAndClearIfNeeded = (document) => {
       this.value === void 0 ||
         (document && this._document && document !== this._document) ||
