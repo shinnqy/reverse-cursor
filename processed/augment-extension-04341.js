@@ -60892,7 +60892,7 @@ var S0e = _((In) => {
   ])
   X_.forProperties(In, "deprecated", ["emitErrs", "levelLength"])
 })
-var D0e = _((sQt, lft) => {
+var getLanguageDefinitions = _((sQt, lft) => {
   lft.exports = [
     {
       name: "C",
@@ -65231,7 +65231,7 @@ function IY(e) {
   }
   XC = e
 }
-function ot(e) {
+function getLogger(e) {
   if (!XC)
     throw new Error(
       "Logger not initialized. Call setLibraryLogger() before using getLogger().",
@@ -65242,7 +65242,7 @@ var eb = class {
     static _instance = undefined
     static setPluginFileStore(t) {
       if (this._instance !== undefined) {
-        ot("PluginFileStore").warn(
+        getLogger("PluginFileStore").warn(
           "Attempting to initialize client workspaces when one is already configured. Keeping existing client workspaces.",
         )
         return
@@ -65261,7 +65261,7 @@ var eb = class {
   Og = () => eb.getPluginFileStore(),
   RY = () => eb.reset()
 var zS = class e {
-    _logger = ot("AgentShardStorage")
+    _logger = getLogger("AgentShardStorage")
     static storagePathKeyPrefix = "agent-edit-shard-storage"
     static manifestKey = "manifest"
     static serializedStoreKey = "serialized-store"
@@ -66630,7 +66630,7 @@ function MFe(e) {
   return { path: { rootPath: e.rootPath, relPath: e.relPath } }
 }
 async function LY(e, t) {
-  let r = ot("CheckpointHydration")
+  let r = getLogger("CheckpointHydration")
   try {
     if (xA(e)) return FFe(e, t, r)
     if (wA(e)) return await QFe(e, r)
@@ -66709,7 +66709,7 @@ function PFe(e) {
   }
 }
 async function UY(e, t = false) {
-  let r = ot("CheckpointHydration"),
+  let r = getLogger("CheckpointHydration"),
     n = MFe(e.document.filePath)
   return (
     t && (await LFe(e, n, r)),
@@ -66767,7 +66767,7 @@ var nb = class e {
           if (xA(o)) a = QualifiedPathName.from(o.document.path)
           else if (wA(o)) a = QualifiedPathName.from(o.documentMetadata.path)
           else {
-            ot("ShardData").warn(
+            getLogger("ShardData").warn(
               `Unknown checkpoint format: ${JSON.stringify(o)}`,
             )
             continue
@@ -66960,7 +66960,7 @@ var ib = class {
     static _instance = undefined
     static setClientWorkspaces(t) {
       if (this._instance !== undefined) {
-        ot("ClientWorkspaces").warn(
+        getLogger("ClientWorkspaces").warn(
           "Attempting to initialize client workspaces when one is already configured. Keeping existing client workspaces.",
         )
         return
@@ -66999,7 +66999,7 @@ var jS = class e extends DisposableContainer_2 {
       (this._options = n),
       (this._checkpointDocumentIdFn = (i) =>
         `${i.conversationId}:${i.path.absPath}`),
-      (this._logger = this._options.logger ?? ot("ShardManager")),
+      (this._logger = this._options.logger ?? getLogger("ShardManager")),
       (this._flushThrottled = (0, AK.default)(
         () => this._flush(),
         this._options.flushIntervalMs ?? e.DEFAULT_FLUSH_INTERVAL_MS,
@@ -68056,7 +68056,7 @@ var aI = class extends DisposableContainer_2 {
   shardManager
   _shardFunction = (t) => `shard-${t.conversationId}`
   _currentConversationId
-  _logger = ot("AggregateCheckpointManager")
+  _logger = getLogger("AggregateCheckpointManager")
   _agentEditListHasUpdatesCallbacks = new Set()
   constructor(t, r, n, i, s) {
     super(),
@@ -68364,7 +68364,7 @@ function IL(e) {
     n = t.filter((i) => i.removed).reduce((i, s) => i + (s.count ?? 0), 0)
   return { totalAddedLines: r, totalRemovedLines: n, changes: t }
 }
-var Rd = class extends Error {
+var InvalidCompletionUrlError = class extends Error {
   constructor() {
     super("The completion URL setting is invalid")
   }
@@ -68373,7 +68373,7 @@ var cb = class {
     static _instance = undefined
     static setAPIClient(t) {
       if (this._instance !== undefined) {
-        ot("APICLient").warn(
+        getLogger("APICLient").warn(
           "Attempting to initialize API clientwhen one is already configured. Keeping existing client workspaces.",
         )
         return
@@ -68395,7 +68395,7 @@ var ub = class {
     static _instance = undefined
     static setClientActions(t) {
       if (this._instance !== undefined) {
-        ot("ClientActions").warn(
+        getLogger("ClientActions").warn(
           "Attempting to initialize client actions when one is already configured. Keeping existing client actions.",
         )
         return
@@ -68413,11 +68413,11 @@ var ub = class {
   RK = (e) => ub.setClientActions(e),
   DK = () => ub.getClientActions(),
   TK = () => ub.reset()
-var lI = class {
+var ClientAuthSingleton = class {
     static _instance = undefined
     static setClientAuth(t) {
       if (this._instance !== undefined) {
-        ot("ClientAuth").warn(
+        getLogger("ClientAuth").warn(
           "Attempting to initialize client auth when one is already configured. Keeping existing client auth.",
         )
         return
@@ -68432,13 +68432,13 @@ var lI = class {
       this._instance = undefined
     }
   },
-  kK = (e) => lI.setClientAuth(e),
-  MK = () => lI.getClientAuth()
-var cI = class {
+  setClientAuth = (e) => ClientAuthSingleton.setClientAuth(e),
+  getClientAuth = () => ClientAuthSingleton.getClientAuth()
+var ClientConfigSingleton = class {
     static _instance = undefined
     static setClientConfig(t) {
       if (this._instance !== undefined) {
-        ot("ClientConfig").warn(
+        getLogger("ClientConfig").warn(
           "Attempting to initialize client config when one is already configured. Keeping existing client config.",
         )
         return
@@ -68453,13 +68453,13 @@ var cI = class {
       this._instance = undefined
     }
   },
-  FK = (e) => cI.setClientConfig(e),
-  QK = () => cI.getClientConfig()
+  setClientConfig = (e) => ClientConfigSingleton.setClientConfig(e),
+  getClientConfig = () => ClientConfigSingleton.getClientConfig()
 var db = class {
     static _instance = undefined
     static setClientFeatureFlags(t) {
       if (this._instance !== undefined) {
-        ot("ClientFeatureFlags").warn(
+        getLogger("ClientFeatureFlags").warn(
           "Attempting to initialize client feature flags when one is already configured. Keeping existing client feature flags.",
         )
         return
@@ -68490,7 +68490,7 @@ var fb = class {
     static _instance = undefined
     static setStateForSidecar(t) {
       if (this._instance !== undefined) {
-        ot("PluginStateForSidecarSingleton").warn(
+        getLogger("PluginStateForSidecarSingleton").warn(
           "Attempting to initialize plugin state when one is already configured. Keeping existing plugin state.",
         )
         return
@@ -68513,7 +68513,7 @@ var hb = class {
     static _instance = undefined
     static setWebviewMessagingClient(t) {
       if (this._instance !== undefined) {
-        ot("WebviewMessages").warn(
+        getLogger("WebviewMessages").warn(
           "Attempting to initialize webview messages when one is already configured. Keeping existing webview message client.",
         )
         return
@@ -68549,26 +68549,26 @@ var RequestStatus
     (e[(e.deadlineExceeded = 9)] = "deadlineExceeded"),
     (e[(e.augmentTooLarge = 10)] = "augmentTooLarge")
 })(RequestStatus || (RequestStatus = {}))
-var Sr = class e extends Error {
+var ApiError = class ApiError extends Error {
   status
-  constructor(t, r) {
-    super(r), (this.status = t)
+  constructor(statusCode, message) {
+    super(message), (this.status = statusCode)
   }
-  static transientIssue(t) {
-    return new e(RequestStatus.unavailable, t)
+  static transientIssue(message) {
+    return new ApiError(RequestStatus.unavailable, message)
   }
-  static fromResponse(t) {
-    return new e(Y1e(t.status), `HTTP error: ${t.status} ${t.statusText}`)
+  static fromResponse(response) {
+    return new ApiError(mapHttpStatusToRequestStatus(response.status), `HTTP error: ${response.status} ${response.statusText}`)
   }
-  static isAPIErrorWithStatus(t, r) {
-    return t instanceof e ? t.status === r : false
+  static isAPIErrorWithStatus(error, statusCode) {
+    return error instanceof ApiError ? error.status === statusCode : false
   }
-  static isRetriableAPIError(t) {
-    return t instanceof e ? K1e.has(t.status) : false
+  static isRetriableAPIError(error) {
+    return error instanceof ApiError ? retriableStatusCodes.has(error.status) : false
   }
 }
-function Y1e(e) {
-  switch (e) {
+function mapHttpStatusToRequestStatus(httpStatusCode) {
+  switch (httpStatusCode) {
     case 200:
       return RequestStatus.ok
     case 400:
@@ -68588,9 +68588,9 @@ function Y1e(e) {
     case 504:
       return RequestStatus.deadlineExceeded
   }
-  return e >= 500 && e < 600 ? RequestStatus.unavailable : RequestStatus.unknown
+  return httpStatusCode >= 500 && httpStatusCode < 600 ? RequestStatus.unavailable : RequestStatus.unknown
 }
-var K1e = new Set([RequestStatus.unavailable, RequestStatus.cancelled])
+var retriableStatusCodes = new Set([RequestStatus.unavailable, RequestStatus.cancelled])
 function z1e(e) {
   return e.cause instanceof String
     ? String(e.cause)
@@ -68598,15 +68598,15 @@ function z1e(e) {
       ? JSON.stringify(e.cause)
       : ""
 }
-function He(e, t = false) {
-  if (e instanceof Error) {
-    if (t) {
-      let r = z1e(e)
-      if (r !== "") return `${e.message} (due to ${r})`
+function getErrorMessage(error, includeCause = false) {
+  if (error instanceof Error) {
+    if (includeCause) {
+      let causeString = z1e(error)
+      if (causeString !== "") return `${error.message} (due to ${causeString})`
     }
-    return e.message
+    return error.message
   }
-  return String(e)
+  return String(error)
 }
 var fu = class {
   _maxItems
@@ -68670,47 +68670,47 @@ var fu = class {
   }
 }
 var J1e = { initialMS: 100, mult: 2, maxMS: 3e4 }
-function go(e) {
-  return e === 0
+function sleep(milliseconds) {
+  return milliseconds === 0
     ? Promise.resolve()
-    : new Promise((t) => {
-        setTimeout(t, e)
+    : new Promise((resolve) => {
+        setTimeout(resolve, milliseconds)
       })
 }
-async function Ri(e, t, r = J1e) {
-  let n = 0,
-    i = r.maxTotalMs !== undefined ? Date.now() : undefined,
-    s = r.canRetry ? r.canRetry : (o) => Sr.isRetriableAPIError(o)
-  for (let o = 0; ; o++)
+async function retryOperation(operation, logger, options = J1e) {
+  let delayMs = 0,
+    startTime = options.maxTotalMs !== undefined ? Date.now() : undefined,
+    isRetriableError = options.canRetry ? options.canRetry : (error) => ApiError.isRetriableAPIError(error)
+  for (let retryCount = 0; ; retryCount++)
     try {
-      let a = await e()
+      let result = await operation()
       return (
-        o > 0 && t.info(`Operation succeeded after ${o} transient failures`), a
+        retryCount > 0 && logger.info(`Operation succeeded after ${retryCount} transient failures`), result
       )
-    } catch (a) {
-      if (!s(a)) throw a
-      let l = o + 1
+    } catch (error) {
+      if (!isRetriableError(error)) throw error
+      let attemptNumber = retryCount + 1
       if (
-        (r.maxTries !== undefined && l >= r.maxTries) ||
-        (n === 0 ? (n = r.initialMS) : (n = Math.min(n * r.mult, r.maxMS)),
-        t.info(
-          `Operation failed with error ${a}, retrying in ${n} ms; retries = ${o}`,
+        (options.maxTries !== undefined && attemptNumber >= options.maxTries) ||
+        (delayMs === 0 ? (delayMs = options.initialMS) : (delayMs = Math.min(delayMs * options.mult, options.maxMS)),
+        logger.info(
+          `Operation failed with error ${error}, retrying in ${delayMs} ms; retries = ${retryCount}`,
         ),
-        r.maxTotalMs !== undefined &&
-          i !== undefined &&
-          Date.now() - i + n > r.maxTotalMs)
+        options.maxTotalMs !== undefined &&
+          startTime !== undefined &&
+          Date.now() - startTime + delayMs > options.maxTotalMs)
       )
-        throw a
-      await go(n)
+        throw error
+      await sleep(delayMs)
     }
 }
-async function TA(e, t) {
-  let r = new Promise((n, i) => {
+async function executeWithTimeout(operation, timeoutMs) {
+  let timeoutPromise = new Promise((resolve, reject) => {
     setTimeout(() => {
-      i(new Error("Execution aborted due to timeout."))
-    }, t)
+      reject(new Error("Execution aborted due to timeout."))
+    }, timeoutMs)
   })
-  return await Promise.race([e, r])
+  return await Promise.race([operation, timeoutPromise])
 }
 var ii = class {
   _uploadMsec
@@ -68723,7 +68723,7 @@ var ii = class {
     ;(this._uploadMsec = n),
       (this._uploadBatchSize = i),
       (this._store = new fu(r)),
-      (this._logger = ot(t))
+      (this._logger = getLogger(t))
   }
   report(t) {
     this._store.addItem(t)
@@ -68754,7 +68754,7 @@ var ii = class {
     this._store.clear()
     for (let r = 0; r < t.length; r += this._uploadBatchSize) {
       let n = t.slice(r, r + this._uploadBatchSize)
-      await Ri(async () => {
+      await retryOperation(async () => {
         if (this.uploadEnabled)
           try {
             return (
@@ -73248,7 +73248,7 @@ function JNe() {
   return "type" in Cb.default
 }
 var Cz = q(_s())
-var Wi
+var ToolType
 ;(function (e) {
   ;(e.readFile = "read-file"),
     (e.saveFile = "save-file"),
@@ -73265,25 +73265,25 @@ var Wi
     (e.strReplaceEditor = "str-replace-editor"),
     (e.diagnostics = "diagnostics"),
     (e.setupScript = "setup-script")
-})(Wi || (Wi = {}))
-var Gi
+})(ToolType || (ToolType = {}))
+var ToolHostType
 ;(function (e) {
   ;(e.remoteToolHost = "remoteToolHost"),
     (e.localToolHost = "localToolHost"),
     (e.sidecarToolHost = "sidecarToolHost"),
     (e.mcpHost = "mcpHost")
-})(Gi || (Gi = {}))
-var Zf
+})(ToolHostType || (ToolHostType = {}))
+var ContentType
 ;(function (e) {
   ;(e[(e.ContentText = 0)] = "ContentText"),
     (e[(e.ContentImage = 1)] = "ContentImage")
-})(Zf || (Zf = {}))
-var Wt
+})(ContentType || (ContentType = {}))
+var ToolSafetyLevel
 ;(function (e) {
   ;(e[(e.Unsafe = 0)] = "Unsafe"),
     (e[(e.Safe = 1)] = "Safe"),
     (e[(e.Check = 2)] = "Check")
-})(Wt || (Wt = {}))
+})(ToolSafetyLevel || (ToolSafetyLevel = {}))
 var En = class {
     name
     toolSafety
@@ -73292,7 +73292,7 @@ var En = class {
     }
     version = 1
   },
-  Yn
+  IntegrationServiceType
 ;(function (e) {
   ;(e[(e.Unknown = 0)] = "Unknown"),
     (e[(e.WebSearch = 1)] = "WebSearch"),
@@ -73303,13 +73303,13 @@ var En = class {
     (e[(e.Notion = 15)] = "Notion"),
     (e[(e.Supabase = 16)] = "Supabase"),
     (e[(e.Glean = 17)] = "Glean")
-})(Yn || (Yn = {}))
-var HA
+})(IntegrationServiceType || (IntegrationServiceType = {}))
+var IntegrationServiceStatus
 ;(function (e) {
   ;(e[(e.UnknownStatus = 0)] = "UnknownStatus"),
     (e[(e.Available = 1)] = "Available"),
     (e[(e.UserConfigRequired = 2)] = "UserConfigRequired")
-})(HA || (HA = {}))
+})(IntegrationServiceStatus || (IntegrationServiceStatus = {}))
 var bz = require("child_process")
 function cr(e, t) {
   return { text: e, isError: false, requestId: t }
@@ -73321,7 +73321,7 @@ function vz(e, t = false, r) {
   if (e.length === 0) return t ? at("No content provided", r) : cr("", r)
   let n = ""
   for (let i of e)
-    if (i.type === Zf.ContentText && i.text_content) {
+    if (i.type === ContentType.ContentText && i.text_content) {
       n = i.text_content
       break
     }
@@ -73340,7 +73340,7 @@ var Eb = class e {
   _stdErrGenerator = undefined
   static maxTimeoutMs = 2147483647
   static defaultTimeoutMs = 2e9
-  _logger = ot("McpHost")
+  _logger = getLogger("McpHost")
   constructor(t, r = undefined, n) {
     ;(this._config = t),
       (this._onStartupError = n),
@@ -73383,14 +73383,14 @@ var Eb = class e {
                   name: c,
                   description: l.description ?? "",
                   input_schema_json: JSON.stringify(l.inputSchema),
-                  tool_safety: Wt.Unsafe,
+                  tool_safety: ToolSafetyLevel.Unsafe,
                   mcp_server_name: this._serverName,
                   mcp_tool_name: l.name,
                 },
-                identifier: { hostName: Gi.mcpHost, toolId: c },
+                identifier: { hostName: ToolHostType.mcpHost, toolId: c },
                 isConfigured: true,
                 enabled: true,
-                toolSafety: Wt.Unsafe,
+                toolSafety: ToolSafetyLevel.Unsafe,
               }
             }) ?? [])
       })()
@@ -73459,7 +73459,7 @@ var Eb = class e {
   }
   getTool(t) {}
   getName() {
-    return Gi.mcpHost
+    return ToolHostType.mcpHost
   }
   async callTool(t, r, n, i, s) {
     let o = await this.getClient()
@@ -73487,7 +73487,7 @@ var Eb = class e {
         typeof f.data == "string" &&
         typeof f.mimeType == "string"
           ? u.push({
-              type: Zf.ContentImage,
+              type: ContentType.ContentImage,
               image_content: {
                 media_type: String(f.mimeType),
                 image_data: String(f.data),
@@ -73495,14 +73495,14 @@ var Eb = class e {
             })
           : f.type === "text" &&
             typeof f.text == "string" &&
-            u.push({ type: Zf.ContentText, text_content: String(f.text) }))
+            u.push({ type: ContentType.ContentText, text_content: String(f.text) }))
     if (u.length === 0) {
       let f = c ? "No result" : ""
       return c ? at(f) : cr(f)
     }
     if (u.length === 1) {
       let f = u[0]
-      if (f.type === Zf.ContentText)
+      if (f.type === ContentType.ContentText)
         return c ? at(f.text_content || "", t) : cr(f.text_content || "", t)
     }
     return vz(u, c, t)
@@ -73581,7 +73581,7 @@ async function WA(e, t) {
   }
 }
 var FI = class {
-  toolId = Yn.GitHubApi
+  toolId = IntegrationServiceType.GitHubApi
   constructor() {}
   async transform(t) {
     let r = await this.getGitInfo()
@@ -73637,7 +73637,7 @@ var QI = class e {
     _remoteInfoSource
     _abortController = undefined
     _toolMap = new Map()
-    _logger = ot("RemoteToolHost")
+    _logger = getLogger("RemoteToolHost")
     _transformationMap
     _cachedToolDefinitions = null
     _lastCacheUpdateTime = 0
@@ -73662,7 +73662,7 @@ var QI = class e {
     }
     getTool(t) {}
     getName() {
-      return Gi.remoteToolHost
+      return ToolHostType.remoteToolHost
     }
     async _getToolDefinitions(t = true) {
       if (
@@ -73673,16 +73673,16 @@ var QI = class e {
         return this._cachedToolDefinitions
       this._logger.debug("Fetching remote tool definitions from backend")
       try {
-        let r = Ez(Yn),
+        let r = Ez(IntegrationServiceType),
           n = await this._remoteInfoSource.retrieveRemoteTools(r),
           i = n
-            .filter((c) => c.availabilityStatus === HA.UserConfigRequired)
+            .filter((c) => c.availabilityStatus === IntegrationServiceStatus.UserConfigRequired)
             .map((c) => c.remoteToolId),
           s = await this._remoteInfoSource.filterToolsWithExtraInput(i),
           o = (c) =>
-            c.availabilityStatus === HA.Available
+            c.availabilityStatus === IntegrationServiceStatus.Available
               ? true
-              : c.availabilityStatus === HA.UserConfigRequired
+              : c.availabilityStatus === IntegrationServiceStatus.UserConfigRequired
                 ? s.has(c.remoteToolId)
                 : false,
           l = (
@@ -73701,7 +73701,7 @@ var QI = class e {
             )
           ).map((c) => ({
             definition: c.toolDefinition,
-            identifier: { hostName: Gi.remoteToolHost, toolId: c.remoteToolId },
+            identifier: { hostName: ToolHostType.remoteToolHost, toolId: c.remoteToolId },
             isConfigured: o(c),
             enabled: true,
             toolSafety: c.toolSafety,
@@ -73727,7 +73727,7 @@ var QI = class e {
     findToolIdByName(t) {
       for (let [r, n] of this._toolMap.entries())
         if (n.definition.name.toString() === t) return r
-      return Yn.Unknown
+      return IntegrationServiceType.Unknown
     }
     async callTool(t, r, n, i, s) {
       try {
@@ -73769,9 +73769,9 @@ var QI = class e {
     checkToolCallSafe(t, r) {
       let n = this.findToolIdByName(t),
         i = this._toolMap.get(n)
-      return i?.toolSafety === Wt.Check
+      return i?.toolSafety === ToolSafetyLevel.Check
         ? yl().checkToolSafety(n, JSON.stringify(r))
-        : Promise.resolve(i?.toolSafety === Wt.Safe)
+        : Promise.resolve(i?.toolSafety === ToolSafetyLevel.Safe)
     }
     isRequestActive(t, r) {
       return this._abortController !== undefined
@@ -73900,7 +73900,7 @@ function NI(e, t) {
 var xb = class extends En {
   _maxRetrievalSize = 2e4
   constructor() {
-    super(Hi.codebaseRetrieval, Wt.Safe)
+    super(Hi.codebaseRetrieval, ToolSafetyLevel.Safe)
   }
   description = `This tool is Augment's context engine, the world's best codebase context engine. It:
 1. Takes in a natural language description of the code you are looking for;
@@ -73946,7 +73946,7 @@ var xb = class extends En {
 var wb = class extends En {
   _checkpointManager
   constructor(t) {
-    super(Hi.removeFiles, Wt.Safe), (this._checkpointManager = t)
+    super(Hi.removeFiles, ToolSafetyLevel.Safe), (this._checkpointManager = t)
   }
   description =
     "Remove files. ONLY use this tool to delete files in the user's workspace. This is the only safe tool to delete files in a way that the user can undo the change. Do NOT use the shell or launch-process tools to remove files."
@@ -74570,7 +74570,7 @@ function Qz(e) {
 var qI = class {
   _logger
   constructor() {
-    this._logger = ot("StrReplaceEditorToolDefinitionFlat")
+    this._logger = getLogger("StrReplaceEditorToolDefinitionFlat")
   }
   extractStrReplaceEntries(t) {
     let r = Fz(t)
@@ -74650,7 +74650,7 @@ var qI = class {
 var VI = class {
   _logger
   constructor() {
-    this._logger = ot("StrReplaceEditorToolDefinitionNested")
+    this._logger = getLogger("StrReplaceEditorToolDefinitionNested")
   }
   extractStrReplaceEntries(t) {
     let r = UI(t.str_replace_entries)
@@ -74749,7 +74749,7 @@ var zL = 4,
     _logger
     _toolDefinition
     constructor(t, r = 0.2, n = 1e3, i) {
-      super(Hi.strReplaceEditor, Wt.Safe),
+      super(Hi.strReplaceEditor, ToolSafetyLevel.Safe),
         (this._checkpointManager = t),
         (this._lineNumberErrorTolerance = r),
         (this._waitForAutoFormatMs = n),
@@ -74761,7 +74761,7 @@ var zL = 4,
             : (this._toolDefinition = new VI()),
         (this.description = this._toolDefinition.description),
         (this.inputSchemaJson = this._toolDefinition.inputSchemaJson),
-        (this._logger = ot("StrReplaceEditorTool")),
+        (this._logger = getLogger("StrReplaceEditorTool")),
         this._logger.debug(
           `Initialized with params: lineNumberErrorTolerance=${r}, waitForAutoFormatSec=${n}`,
         )
@@ -74900,7 +74900,7 @@ var zL = 4,
           "Content changed, creating checkpoint and waiting for auto-formatting",
         ),
           await this.createCheckpoint(r.filepath, c, u, o),
-          await go(this._waitForAutoFormatMs)
+          await sleep(this._waitForAutoFormatMs)
         let v = (await this.readFile(t)).contents,
           C = v !== u
         C && this._logger.debug("File was auto-formatted after edit"),
@@ -75285,7 +75285,7 @@ var X7 = q(Z7()),
     _turndownService
     _userAgent
     constructor(t) {
-      super(Hi.webFetch, Wt.Unsafe)
+      super(Hi.webFetch, ToolSafetyLevel.Unsafe)
       let r = new X7.default()
       r.addRule("removeStyleAndScriptTags", {
         filter: ["style", "script"],
@@ -75656,7 +75656,7 @@ var kB = class extends En {
   memoryRingBuffer
   maxMemoryBufferSize = 1e3
   constructor(t, r, n) {
-    super(Hi.remember, Wt.Safe),
+    super(Hi.remember, ToolSafetyLevel.Safe),
       (this._getAgentMemories = t),
       (this._getAgentMemoriesAbsPath = r),
       (this._memoryUpdateManager = n),
@@ -79053,7 +79053,7 @@ var g0 = class extends En {
   execPromise = (0, JZ.promisify)(jZ.exec)
   _allowlist
   constructor(t, r, n) {
-    super(Hi.shell, Wt.Check),
+    super(Hi.shell, ToolSafetyLevel.Check),
       (this._chatMode = t),
       (this._platform = r),
       (this._shellName = n),
@@ -79139,7 +79139,7 @@ var jb = class e extends GA {
         t === Fr.agent &&
           r.flags.agentEditTool === hI.strReplaceEditor &&
           c.push(new op(n))),
-      super(c, Gi.sidecarToolHost, o),
+      super(c, ToolHostType.sidecarToolHost, o),
       (this._chatMode = t),
       (this._clientFeatureFlags = r),
       (this._checkpointManager = n),
@@ -79220,7 +79220,7 @@ var WB = class e {
   _hosts = []
   _allToolHosts = []
   _chatMode
-  _logger = ot("ToolsModel")
+  _logger = getLogger("ToolsModel")
   _memorySnapshotManager
   _onRestartHostsEmitter = new ZZ.EventEmitter()
   onRestartHosts = (t) => (
@@ -79366,7 +79366,7 @@ var WB = class e {
   }
   restartHosts(t = false) {
     let r = this._allToolHosts
-    t && (r = this._allToolHosts.filter((u) => u.getName() === Gi.mcpHost))
+    t && (r = this._allToolHosts.filter((u) => u.getName() === ToolHostType.mcpHost))
     let n = r.map((u) => u.close()),
       i = Promise.all(n).then(() => {}),
       s = this._mcpServers.map(
@@ -79376,9 +79376,9 @@ var WB = class e {
       a,
       l
     t &&
-      ((o = this._allToolHosts.find((u) => u.getName() === Gi.remoteToolHost)),
-      (a = this._allToolHosts.find((u) => u.getName() === Gi.localToolHost)),
-      (l = this._allToolHosts.find((u) => u.getName() === Gi.sidecarToolHost))),
+      ((o = this._allToolHosts.find((u) => u.getName() === ToolHostType.remoteToolHost)),
+      (a = this._allToolHosts.find((u) => u.getName() === ToolHostType.localToolHost)),
+      (l = this._allToolHosts.find((u) => u.getName() === ToolHostType.sidecarToolHost))),
       (o = o ?? new QI(this._remoteInfoSource)),
       (a = a ?? this._clientToolHostFactory(this.chatMode)),
       (l =
@@ -79469,7 +79469,7 @@ var oh
 })(oh || (oh = {}))
 var GB = class {
   _checkpointManager
-  _logger = ot("AgentWebviewMessageHandler")
+  _logger = getLogger("AgentWebviewMessageHandler")
   supportedTypes = Ei
   constructor(t) {
     this._checkpointManager = t
@@ -79611,7 +79611,7 @@ var ah
 })(ah || (ah = {}))
 var $B = class {
   _toolsModel
-  _logger = ot("ToolsWebviewMessageHandler")
+  _logger = getLogger("ToolsWebviewMessageHandler")
   supportedTypes = ah
   constructor(t) {
     this._toolsModel = t
@@ -79650,7 +79650,7 @@ var $B = class {
 }
 var YB = class {
   _handlers = new Map()
-  _logger = ot("WebviewMessageBroker")
+  _logger = getLogger("WebviewMessageBroker")
   registerHandler(t) {
     let r = Object.values(t.supportedTypes)
     for (let n of r) this._handlers.set(n, (i, s) => t.handle(i, s))
@@ -79774,69 +79774,69 @@ function Yrt(e, t, r) {
 }
 var Oh = Yrt
 var Ye = q(require("vscode"))
-function Dy(e, t, r) {
-  if (!Array.isArray(r)) throw new Error(`Value of ${e}.${t} is not Array`)
+function validateIsArray(objectName, propertyName, value) {
+  if (!Array.isArray(value)) throw new Error(`Value of ${objectName}.${propertyName} is not Array`)
 }
-function Fi(e, t, r) {
-  let n = typeof r
-  if (n !== "number")
+function validateAndReturnNumber(objectName, propertyName, value) {
+  let valueType = typeof value
+  if (valueType !== "number")
     throw new Error(
-      `Value of ${e}.${t} has unexpected type. Expected number, received ${n}`,
+      `Value of ${objectName}.${propertyName} has unexpected type. Expected number, received ${valueType}`,
     )
-  return r
+  return value
 }
-function di(e, t, r) {
-  let n = typeof r
-  if (n !== "string")
+function validateAndReturnString(objectName, propertyName, value) {
+  let valueType = typeof value
+  if (valueType !== "string")
     throw new Error(
-      `Value of ${e}.${t} has unexpected type. Expected string, received ${n}`,
+      `Value of ${objectName}.${propertyName} has unexpected type. Expected string, received ${valueType}`,
     )
-  return r
+  return value
 }
-function La(e, t, r) {
-  Dy(e, t, r)
-  let n = []
-  for (let i of r) n.push(di(e, t, i))
-  return n
+function validateAndReturnStringArray(objectName, propertyName, value) {
+  validateIsArray(objectName, propertyName, value)
+  let stringArray = []
+  for (let item of value) stringArray.push(validateAndReturnString(objectName, propertyName, item))
+  return stringArray
 }
-function Qc(e, t, r, n = false) {
-  if (r === null) return n
-  let i = typeof r
-  if (i !== "boolean")
+function validateAndReturnBoolean(objectName, propertyName, value, defaultValue = false) {
+  if (value === null) return defaultValue
+  let valueType = typeof value
+  if (valueType !== "boolean")
     throw new Error(
-      `Value of ${e}.${t} has unexpected type. Expected boolean, received ${i}`,
+      `Value of ${objectName}.${propertyName} has unexpected type. Expected boolean, received ${valueType}`,
     )
-  return r
+  return value
 }
-function Ua(e) {
+function processBlobs(blobsData) {
   return {
-    checkpoint_id: e.checkpointId,
-    added_blobs: e.addedBlobs.sort(),
-    deleted_blobs: e.deletedBlobs.sort(),
+    checkpoint_id: blobsData.checkpointId,
+    added_blobs: blobsData.addedBlobs.sort(),
+    deleted_blobs: blobsData.deletedBlobs.sort(),
   }
 }
-function Zp(e) {
+function processVcsChanges(vcsChanges) {
   return {
-    working_directory_changes: e.workingDirectory.map((t) => ({
-      before_path: t.beforePath,
-      after_path: t.afterPath,
-      change_type: t.changeType,
-      head_blob_name: t.headBlobName,
-      indexed_blob_name: t.indexedBlobName,
-      current_blob_name: t.currentBlobName,
+    working_directory_changes: vcsChanges.workingDirectory.map((change) => ({
+      before_path: change.beforePath,
+      after_path: change.afterPath,
+      change_type: change.changeType,
+      head_blob_name: change.headBlobName,
+      indexed_blob_name: change.indexedBlobName,
+      current_blob_name: change.currentBlobName,
     })),
   }
 }
 function PT(e) {
-  let t = di("BackChatResult", "text", e.text),
+  let t = validateAndReturnString("BackChatResult", "text", e.text),
     r =
       e.unknown_blob_names === undefined
         ? []
-        : La("BackChatResult", "unknown_blob_names", e.unknown_blob_names),
+        : validateAndReturnStringArray("BackChatResult", "unknown_blob_names", e.unknown_blob_names),
     n =
       e.checkpoint_not_found === undefined
         ? false
-        : Qc(
+        : validateAndReturnBoolean(
             "BackChatResult",
             "checkpoint_not_found",
             e.checkpoint_not_found,
@@ -79846,9 +79846,9 @@ function PT(e) {
       e.workspace_file_chunks === undefined
         ? []
         : e.workspace_file_chunks.map((o) => ({
-            charStart: Fi("BackWorkspaceFileChunk", "char_start", o.char_start),
-            charEnd: Fi("BackWorkspaceFileChunk", "char_end", o.char_end),
-            blobName: di("BackWorkspaceFileChunk", "blob_name", o.blob_name),
+            charStart: validateAndReturnNumber("BackWorkspaceFileChunk", "char_start", o.char_start),
+            charEnd: validateAndReturnNumber("BackWorkspaceFileChunk", "char_end", o.char_end),
+            blobName: validateAndReturnString("BackWorkspaceFileChunk", "blob_name", o.blob_name),
           })),
     s = e.nodes
   return {
@@ -79859,192 +79859,192 @@ function PT(e) {
     nodes: s,
   }
 }
-function Xp(e, t = "") {
-  let r = []
-  if (typeof e != "object" || e === null) return pfe(e)
-  for (let [n, i] of Object.entries(e))
-    if (Array.isArray(i)) {
-      r.push(
-        `${t}${n}: (array) ${i.length} (array length) ${JSON.stringify(i).length} (char length)`,
+function formatObjectSizeInfo(obj, indent = "") {
+  let lines = []
+  if (typeof obj != "object" || obj === null) return formatPrimitiveSize(obj)
+  for (let [key, value] of Object.entries(obj))
+    if (Array.isArray(value)) {
+      lines.push(
+        `${indent}${key}: (array) ${value.length} (array length) ${JSON.stringify(value).length} (char length)`,
       )
-      let s = 20
-      i.slice(0, s).forEach((o, a) => {
-        r.push(`${t}  [${a}]: ${Xp(o, t + "  ")}`)
+      let maxItems = 20
+      value.slice(0, maxItems).forEach((item, index) => {
+        lines.push(`${indent}  [${index}]: ${formatObjectSizeInfo(item, indent + "  ")}`)
       }),
-        i.length > s && r.push(`${t}  ${i.length - s} more items...`)
+        value.length > maxItems && lines.push(`${indent}  ${value.length - maxItems} more items...`)
     } else
-      typeof i == "object" && i !== null
-        ? (r.push(
-            `${t}${n}: (object) ${Object.keys(i).length} (object size) ${JSON.stringify(i).length} (char length)`,
+      typeof value == "object" && value !== null
+        ? (lines.push(
+            `${indent}${key}: (object) ${Object.keys(value).length} (object size) ${JSON.stringify(value).length} (char length)`,
           ),
-          r.push(Xp(i, t + "  ")))
-        : r.push(`${t}${n}: ${pfe(i)}`)
-  return r.join(`
+          lines.push(formatObjectSizeInfo(value, indent + "  ")))
+        : lines.push(`${indent}${key}: ${formatPrimitiveSize(value)}`)
+  return lines.join(`
 `)
 }
-function pfe(e) {
-  return typeof e == "string"
-    ? `${e.length} (string length)`
-    : typeof e == "boolean" || e === null || typeof e == "number"
+function formatPrimitiveSize(value) {
+  return typeof value == "string"
+    ? `${value.length} (string length)`
+    : typeof value == "boolean" || value === null || typeof value == "number"
       ? "1"
       : "N/A"
 }
-var LT = class e {
+var AugmentExtensionSidecar = class e {
   sessionId
   userAgent
   fetchFunction
   static defaultRequestTimeoutMs = 3e4
-  logger = ot("AugmentExtensionSidecar")
-  clientConfig = QK()
-  clientAuth = MK()
-  constructor(t, r, n) {
-    ;(this.sessionId = t), (this.userAgent = r), (this.fetchFunction = n)
+  logger = getLogger("AugmentExtensionSidecar")
+  clientConfig = getClientConfig()
+  clientAuth = getClientAuth()
+  constructor(sessionId, userAgent, fetchFunction) {
+    ;(this.sessionId = sessionId), (this.userAgent = userAgent), (this.fetchFunction = fetchFunction)
   }
   async chatStream(
-    t,
-    r,
-    n,
-    i,
-    s,
-    o,
-    a,
-    l,
-    c,
-    u,
-    f,
-    p,
-    g,
-    m,
-    y,
-    v,
-    C,
-    E,
-    w,
-    B,
-    T,
-    N,
-    W,
-    Z,
+    requestId,
+    message,
+    chatHistory,
+    codeBlobs,
+    userGuidedBlobs,
+    externalSourceIds,
+    model,
+    vcsChange,
+    recentChanges,
+    contextCodeExchangeRequestId,
+    selectedCode,
+    prefix,
+    suffix,
+    filePath,
+    language,
+    overrideSessionId,
+    disableAutoExternalSources,
+    userGuidelines,
+    workspaceGuidelines,
+    toolDefinitions,
+    nodes,
+    mode,
+    agentMemories,
+    personaType,
   ) {
-    let te = await this.clientConfig.getConfig(),
-      Y = {
-        model: a ?? te.chat.model,
-        path: m,
-        prefix: p,
-        selected_code: f,
-        suffix: g,
-        message: r,
-        chat_history: n,
-        lang: y,
-        blobs: Ua(i),
-        user_guided_blobs: s,
-        context_code_exchange_request_id: u,
-        vcs_change: Zp(l),
-        recency_info_recent_changes: c,
-        external_source_ids: o,
-        disable_auto_external_sources: C,
-        user_guidelines: E,
-        workspace_guidelines: w,
+    let config = await this.clientConfig.getConfig(),
+      requestBody = {
+        model: model ?? config.chat.model,
+        path: filePath,
+        prefix: prefix,
+        selected_code: selectedCode,
+        suffix: suffix,
+        message: message,
+        chat_history: chatHistory,
+        lang: language,
+        blobs: processBlobs(codeBlobs),
+        user_guided_blobs: userGuidedBlobs,
+        context_code_exchange_request_id: contextCodeExchangeRequestId,
+        vcs_change: processVcsChanges(vcsChange),
+        recency_info_recent_changes: recentChanges,
+        external_source_ids: externalSourceIds,
+        disable_auto_external_sources: disableAutoExternalSources,
+        user_guidelines: userGuidelines,
+        workspace_guidelines: workspaceGuidelines,
         feature_detection_flags: { support_raw_output: true },
-        tool_definitions: B ?? [],
-        nodes: T ?? [],
-        mode: N ?? Fr.chat,
-        agent_memories: W,
-        persona_type: Z,
+        tool_definitions: toolDefinitions ?? [],
+        nodes: nodes ?? [],
+        mode: mode ?? Fr.chat,
+        agent_memories: agentMemories,
+        persona_type: personaType,
       }
-    return await Ri(
+    return await retryOperation(
       () =>
-        this.callApiStream(t, te, "chat-stream", Y, PT, te.chat.url, 3e5, v),
+        this.callApiStream(requestId, config, "chat-stream", requestBody, PT, config.chat.url, 300000, overrideSessionId),
       this.logger,
-      { initialMS: 250, mult: 2, maxMS: 5e3, maxTries: 5, maxTotalMs: 5e3 },
+      { initialMS: 250, mult: 2, maxMS: 5000, maxTries: 5, maxTotalMs: 5000 },
     )
   }
-  async callApiStream(t, r, n, i, s = (c) => c, o, a, l) {
-    let c = await this.clientAuth.getAPIToken()
-    if (((o = o ?? (await this.clientAuth.getCompletionURL())), !o))
+  async callApiStream(requestId, config, endpoint, requestBody, responseProcessor = (response) => response, apiUrl, timeoutMs, overrideSessionId) {
+    let apiToken = await this.clientAuth.getAPIToken()
+    if (((apiUrl = apiUrl ?? (await this.clientAuth.getCompletionURL())), !apiUrl))
       throw new Error("Please configure Augment API URL")
-    let u
+    let url
     try {
-      u = new URL(n, o)
-    } catch (w) {
-      throw (this.logger.error("Augment API URL is invalid:", w), new Rd())
+      url = new URL(endpoint, apiUrl)
+    } catch (error) {
+      throw (this.logger.error("Augment API URL is invalid:", error), new InvalidCompletionUrlError())
     }
-    if (!u.protocol.startsWith("http"))
+    if (!url.protocol.startsWith("http"))
       throw new Error("Augment API URL must start with 'http://' or 'https://'")
-    let f = JSON.stringify(i, (w, B) => (B === undefined ? null : B)),
-      p = a ?? e.defaultRequestTimeoutMs,
-      g = AbortSignal.timeout(p),
-      m = "POST",
-      y
+    let requestBodyJson = JSON.stringify(requestBody, (key, value) => (value === undefined ? null : value)),
+      timeout = timeoutMs ?? e.defaultRequestTimeoutMs,
+      abortSignal = AbortSignal.timeout(timeout),
+      method = "POST",
+      response
     try {
-      let w = {
+      let headers = {
         "Content-Type": "application/json",
         "User-Agent": this.userAgent,
-        "x-request-id": `${t}`,
-        "x-request-session-id": `${l ?? this.sessionId}`,
+        "x-request-id": `${requestId}`,
+        "x-request-session-id": `${overrideSessionId ?? this.sessionId}`,
       }
-      c && (w.Authorization = `Bearer ${c}`),
-        (y = await TA(
-          this.fetchFunction(u.toString(), {
-            method: m,
-            headers: w,
-            body: f,
-            signal: g,
+      apiToken && (headers.Authorization = `Bearer ${apiToken}`),
+        (response = await executeWithTimeout(
+          this.fetchFunction(url.toString(), {
+            method: method,
+            headers: headers,
+            body: requestBodyJson,
+            signal: abortSignal,
           }),
-          p,
+          timeout,
         ))
-    } catch (w) {
-      throw w instanceof Error
+    } catch (error) {
+      throw error instanceof Error
         ? (this.logger.error(
-            `API request ${t} to ${u.toString()} failed: ${He(w, true)}`,
+            `API request ${requestId} to ${url.toString()} failed: ${getErrorMessage(error, true)}`,
           ),
-          w.stack && this.logger.error(w.stack),
-          Sr.transientIssue(w.message))
-        : w
+          error.stack && this.logger.error(error.stack),
+          ApiError.transientIssue(error.message))
+        : error
     }
-    if (!y.ok)
-      throw y.status === 499
-        ? Sr.fromResponse(y)
-        : (y.status === 401 && this.clientAuth.removeAuthSession(),
-          y.status === 400 &&
-            r.enableDebugFeatures &&
+    if (!response.ok)
+      throw response.status === 499
+        ? ApiError.fromResponse(response)
+        : (response.status === 401 && this.clientAuth.removeAuthSession(),
+          response.status === 400 &&
+            config.enableDebugFeatures &&
             this.logger.error(
-              `API request ${t} to ${u.toString()} failed: ${await y.text()}`,
+              `API request ${requestId} to ${url.toString()} failed: ${await response.text()}`,
             ),
           this.logger.error(
-            `API request ${t} to ${u.toString()} response ${y.status}: ${y.statusText}`,
+            `API request ${requestId} to ${url.toString()} response ${response.status}: ${response.statusText}`,
           ),
-          Sr.fromResponse(y).status === RequestStatus.augmentTooLarge &&
-            this.logger.debug(`object size is ${i ? Xp(i) : 0} `),
-          Sr.fromResponse(y))
-    let v = y.body.getReader(),
-      C = this.logger
-    async function* E(w) {
-      let B = new TextDecoder(),
-        T = ""
+          ApiError.fromResponse(response).status === RequestStatus.augmentTooLarge &&
+            this.logger.debug(`object size is ${requestBody ? formatObjectSizeInfo(requestBody) : 0} `),
+          ApiError.fromResponse(response))
+    let reader = response.body.getReader(),
+      logger = this.logger
+    async function* streamProcessor(streamReader) {
+      let textDecoder = new TextDecoder(),
+        buffer = ""
       for (;;) {
-        let { value: N, done: W } = await w.read(new Uint8Array())
-        if (W) return
+        let { value, done } = await streamReader.read(new Uint8Array())
+        if (done) return
         for (
-          T += B.decode(N, { stream: true });
-          T.includes(`
+          buffer += textDecoder.decode(value, { stream: true });
+          buffer.includes(`
 `);
 
         ) {
-          let Z = T.indexOf(`
+          let newlineIndex = buffer.indexOf(`
 `),
-            te = T.substring(0, Z)
-          T = T.substring(Z + 1)
+            line = buffer.substring(0, newlineIndex)
+          buffer = buffer.substring(newlineIndex + 1)
           try {
-            let Y = JSON.parse(te)
-            yield s(Y)
-          } catch (Y) {
-            C.error(`JSON parse failed for ${te}: ${He(Y)}`)
+            let parsedJson = JSON.parse(line)
+            yield responseProcessor(parsedJson)
+          } catch (error) {
+            logger.error(`JSON parse failed for ${line}: ${getErrorMessage(error)}`)
           }
         }
       }
     }
-    return E(v)
+    return streamProcessor(reader)
   }
 }
 var Jk = q(Fhe()),
@@ -80089,7 +80089,7 @@ var $y = (0, Jh.createLogger)({
 })
 IY($y)
 function z(e) {
-  return ot(e)
+  return getLogger(e)
 }
 var ex = q(_s()),
   Yy = class {
@@ -80182,8 +80182,8 @@ var DisposableCollection = class {
       this._priorityDisposables.dispose(), this._disposables.dispose()
     }
   }
-var aft = 128 * 1024,
-  fm = {
+var MAX_UPLOAD_SIZE_BYTES = 128 * 1024,
+  defaultFeatureFlags = {
     gitDiff: false,
     gitDiffPollingFrequencyMSec: 0,
     additionalChatModels: "",
@@ -80196,7 +80196,7 @@ var aft = 128 * 1024,
     enableViewTextDocument: false,
     bypassLanguageFilter: false,
     enableHindsight: false,
-    maxUploadSizeBytes: aft,
+    maxUploadSizeBytes: MAX_UPLOAD_SIZE_BYTES,
     vscodeNextEditBottomPanelMinVersion: "",
     vscodeNextEditMinVersion: "",
     vscodeNextEditUx1MaxVersion: "",
@@ -80288,7 +80288,7 @@ var aft = 128 * 1024,
     constructor(t, r) {
       super(),
         (this._flags = new Yy("feature flags", this._logger, r)),
-        this._flags.update(t?.initialFlags ?? fm),
+        this._flags.update(t?.initialFlags ?? defaultFeatureFlags),
         this._setupRefreshTimer(t),
         this.addDisposable(
           tx.workspace.onDidChangeConfiguration(() => {
@@ -80313,16 +80313,16 @@ var aft = 128 * 1024,
         n = {}
       if (typeof r == "object")
         for (let i of Object.keys(r))
-          fm[i] === undefined
+          defaultFeatureFlags[i] === undefined
             ? z("AugmentConfigListener").warn(
                 `Feature flag override for ${i} is not a valid feature flag.`,
               )
-            : typeof r[i] != typeof fm[i]
+            : typeof r[i] != typeof defaultFeatureFlags[i]
               ? z("AugmentConfigListener").warn(
-                  `Feature flag override for ${i} is does not match default type ${typeof fm[i]}.`,
+                  `Feature flag override for ${i} is does not match default type ${typeof defaultFeatureFlags[i]}.`,
                 )
               : r[i] !== undefined &&
-                fm[i] !== undefined &&
+                defaultFeatureFlags[i] !== undefined &&
                 Object.assign(n, { [i]: r[i] })
       return n
     }
@@ -80363,12 +80363,12 @@ var aft = 128 * 1024,
         (this._disposed = true))
     }
   }
-var cft = D0e(),
-  pG = [],
-  uft = new Set()
-for (let e of cft) {
-  pG.push({ name: e.name, vscodeName: e.vscodeName, extensions: e.extensions })
-  for (let t of e.extensions) uft.add(t)
+var languageDefinitions = getLanguageDefinitions(),
+  supportedLanguages = [],
+  supportedExtensions = new Set()
+for (let language of languageDefinitions) {
+  supportedLanguages.push({ name: language.name, vscodeName: language.vscodeName, extensions: language.extensions })
+  for (let extension of language.extensions) supportedExtensions.add(extension)
 }
 var Fs = ((se) => (
     (se.Unknown = "unknown"),
@@ -80443,7 +80443,7 @@ function eM(e, t) {
 function jn(e) {
   return e == null
 }
-function T0e(e) {
+function combineAbortSignals(e) {
   if (eM(AbortSignal, "any") && typeof AbortSignal.any == "function")
     return AbortSignal.any(e)
   let t = new AbortController()
@@ -80563,9 +80563,9 @@ var sa = class extends yG {
       this._intervalId !== undefined && clearInterval(this._intervalId)
     }
   },
-  tM = class {
-    constructor(t) {
-      this._processItem = t
+  PromiseQueue = class {
+    constructor(processor) {
+      this._processItem = processor
     }
     _items = []
     _inProgress = false
@@ -80576,14 +80576,14 @@ var sa = class extends yG {
     dispose() {
       this._stopping = true
     }
-    insert(t) {
-      return new Promise((r, n) => {
-        this._items.push({ itemArg: t, resolve: r, reject: n })
+    insert(item) {
+      return new Promise((resolve, reject) => {
+        this._items.push({ itemArg: item, resolve, reject })
       })
     }
-    insertAndKick(t) {
-      let r = this.insert(t)
-      return this.kick(), r
+    insertAndKick(item) {
+      let promise = this.insert(item)
+      return this.kick(), promise
     }
     async kick() {
       if (!(this._inProgress || this._stopping)) {
@@ -80592,12 +80592,12 @@ var sa = class extends yG {
           this._items.length > 0 && !this._stopping;
 
         ) {
-          let t = this._items.pop()
+          let queueItem = this._items.pop()
           try {
-            let r = await this._processItem(t.itemArg)
-            t.resolve(r)
-          } catch (r) {
-            t.reject(r)
+            let result = await this._processItem(queueItem.itemArg)
+            queueItem.resolve(result)
+          } catch (error) {
+            queueItem.reject(error)
           }
         }
         ;(this._inProgress = false), await this._processItem(undefined)
@@ -80613,21 +80613,21 @@ var iM = ((o) => (
   (o[(o.Failed = 5)] = "Failed"),
   o
 ))(iM || {})
-var rM = class extends Error {
-    constructor(t, r) {
-      super(`Conversion failure: ${t}. Response = ${r}`)
+var ConversionError = class extends Error {
+    constructor(errorMessage, responseData) {
+      super(`Conversion failure: ${errorMessage}. Response = ${responseData}`)
     }
   },
-  vG = class e extends LT {
-    constructor(r, n, i, s, o) {
-      super(i, s, o)
-      this._configListener = r
-      this._auth = n
-      this.sessionId = i
-      this._userAgent = s
-      this._fetchFunction = o
+  APIServerImpl = class APIServerImpl extends AugmentExtensionSidecar {
+    constructor(configListener, auth, sessionId, userAgent, fetchFunction) {
+      super(sessionId, userAgent, fetchFunction);
+      this._configListener = configListener;
+      this._auth = auth;
+      this.sessionId = sessionId;
+      this._userAgent = userAgent;
+      this._fetchFunction = fetchFunction;
     }
-    _sequenceId = new CG()
+    _sequenceId = new SequenceGenerator()
     _logger = z("AugmentExtension")
     getSessionId() {
       return this.sessionId
@@ -80635,1191 +80635,1191 @@ var rM = class extends Error {
     createRequestId() {
       return Oh()
     }
-    async callApi(r, n, i, s, o, a, l, c, u) {
-      let f = n.apiToken,
-        p = false
+    async callApi(requestId, config, endpoint, requestData, responseTransformer, baseUrl, timeoutMs, metrics, abortSignal) {
+      let apiToken = config.apiToken,
+        usingOAuth = false
       if (this._auth.useOAuth) {
-        let N = await this._auth.getSession()
-        N && ((f = N.accessToken), (p = true), a || (a = N.tenantURL))
-      } else a || (a = n.completionURL)
-      if (!a) throw new Error("Please configure Augment API URL")
-      let g
+        let session = await this._auth.getSession()
+        session && ((apiToken = session.accessToken), (usingOAuth = true), baseUrl || (baseUrl = session.tenantURL))
+      } else baseUrl || (baseUrl = config.completionURL)
+      if (!baseUrl) throw new Error("Please configure Augment API URL")
+      let url
       try {
-        g = new URL(i, a)
-      } catch (N) {
-        throw (this._logger.error("Augment API URL is invalid:", N), new Rd())
+        url = new URL(endpoint, baseUrl)
+      } catch (error) {
+        throw (this._logger.error("Augment API URL is invalid:", error), new InvalidCompletionUrlError())
       }
-      if (!g.protocol.startsWith("http"))
+      if (!url.protocol.startsWith("http"))
         throw new Error(
           "Augment API URL must start with 'http://' or 'https://'",
         )
-      let m = JSON.stringify(s, (N, W) => (W === undefined ? null : W)),
-        y = l ?? e.defaultRequestTimeoutMs,
-        v = AbortSignal.timeout(y),
-        C = "POST",
-        E,
-        w,
-        B
+      let body = JSON.stringify(requestData, (key, value) => (value === undefined ? null : value)),
+        timeout = timeoutMs ?? APIServerImpl.defaultRequestTimeoutMs,
+        timeoutSignal = AbortSignal.timeout(timeout),
+        method = "POST",
+        response,
+        requestStartTime,
+        requestEndTime
       try {
-        let N = {
+        let headers = {
           "Content-Type": "application/json",
           "User-Agent": this._userAgent,
-          "x-request-id": `${r}`,
+          "x-request-id": `${requestId}`,
           "x-request-session-id": `${this.sessionId}`,
           "x-api-version": "2",
         }
-        f && (N.Authorization = `Bearer ${f}`),
-          (w = Date.now()),
-          (E = await TA(
-            this._fetchFunction(g.toString(), {
-              method: C,
-              headers: N,
-              body: m,
-              signal: T0e([v].concat(u ? [u] : [])),
+        apiToken && (headers.Authorization = `Bearer ${apiToken}`),
+          (requestStartTime = Date.now()),
+          (response = await executeWithTimeout(
+            this._fetchFunction(url.toString(), {
+              method: method,
+              headers: headers,
+              body: body,
+              signal: combineAbortSignals([timeoutSignal].concat(abortSignal ? [abortSignal] : [])),
             }),
-            y,
+            timeout,
           )),
-          (B = Date.now())
-      } catch (N) {
-        throw N instanceof Error
+          (requestEndTime = Date.now())
+      } catch (error) {
+        throw error instanceof Error
           ? (this._logger.error(
-              `API request ${r} to ${g.toString()} failed: ${He(N, true)}`,
+              `API request ${requestId} to ${url.toString()} failed: ${getErrorMessage(error, true)}`,
             ),
-            Sr.transientIssue(N.message))
-          : (this._logger.debug(`API request ${r} to ${g.toString()} failed`),
-            N)
+            ApiError.transientIssue(error.message))
+          : (this._logger.debug(`API request ${requestId} to ${url.toString()} failed`),
+            error)
       }
-      if ((c && ((c.rpcStart = w), (c.rpcEnd = B)), !E.ok))
-        throw E.status === 499
-          ? Sr.fromResponse(E)
-          : (E.status === 401 && p && this._auth.removeSession(),
-            E.status === 400 &&
-              n.enableDebugFeatures &&
+      if ((metrics && ((metrics.rpcStart = requestStartTime), (metrics.rpcEnd = requestEndTime)), !response.ok))
+        throw response.status === 499
+          ? ApiError.fromResponse(response)
+          : (response.status === 401 && usingOAuth && this._auth.removeSession(),
+            response.status === 400 &&
+              config.enableDebugFeatures &&
               this._logger.error(
-                `API request ${r} to ${g.toString()} failed: ${await E.text()}`,
+                `API request ${requestId} to ${url.toString()} failed: ${await response.text()}`,
               ),
             this._logger.error(
-              `API request ${r} to ${g.toString()} response ${E.status}: ${E.statusText}`,
+              `API request ${requestId} to ${url.toString()} response ${response.status}: ${response.statusText}`,
             ),
-            Sr.fromResponse(E).status === RequestStatus.augmentTooLarge &&
-              this._logger.debug(`object size is ${Xp(s)} `),
-            Sr.fromResponse(E))
-      let T
+            ApiError.fromResponse(response).status === RequestStatus.augmentTooLarge &&
+              this._logger.debug(`object size is ${formatObjectSizeInfo(requestData)} `),
+            ApiError.fromResponse(response))
+      let responseData
       try {
-        if (E.headers.get("content-length") === "0") return
-        T = await E.json()
-      } catch (N) {
+        if (response.headers.get("content-length") === "0") return
+        responseData = await response.json()
+      } catch (error) {
         throw (
           (this._logger.error(
-            `API request ${r} to ${g.toString()} failed to convert response to json: ${N.message}`,
+            `API request ${requestId} to ${url.toString()} failed to convert response to json: ${error.message}`,
           ),
-          N)
+          error)
         )
       }
       try {
-        return o ? o(T) : T
-      } catch (N) {
-        throw new rM(He(N), JSON.stringify(T))
+        return responseTransformer ? responseTransformer(responseData) : responseData
+      } catch (error) {
+        throw new ConversionError(getErrorMessage(error), JSON.stringify(responseData))
       }
     }
-    _toCompletionItem(r) {
-      if (typeof r.text != "string")
+    _toCompletionItem(result) {
+      if (typeof result.text != "string")
         throw new Error(
-          `Completion item text is not a string: ${JSON.stringify(r)}`,
+          `Completion item text is not a string: ${JSON.stringify(result)}`,
         )
-      if (r.skipped_suffix !== undefined && typeof r.skipped_suffix != "string")
+      if (result.skipped_suffix !== undefined && typeof result.skipped_suffix != "string")
         throw new Error(
-          `Completion item skipped suffix is not a string: ${JSON.stringify(r)}`,
+          `Completion item skipped suffix is not a string: ${JSON.stringify(result)}`,
         )
       if (
-        r.suffix_replacement_text !== undefined &&
-        typeof r.suffix_replacement_text != "string"
+        result.suffix_replacement_text !== undefined &&
+        typeof result.suffix_replacement_text != "string"
       )
         throw new Error(
-          `Completion item suffix replacement text is not a string: ${JSON.stringify(r)}`,
+          `Completion item suffix replacement text is not a string: ${JSON.stringify(result)}`,
         )
       return {
-        text: r.text,
-        suffixReplacementText: r.suffix_replacement_text ?? "",
-        skippedSuffix: r.skipped_suffix ?? "",
-        filterScore: r.filter_score ?? undefined,
+        text: result.text,
+        suffixReplacementText: result.suffix_replacement_text ?? "",
+        skippedSuffix: result.skipped_suffix ?? "",
+        filterScore: result.filter_score ?? undefined,
       }
     }
-    _extractCompletions(r) {
-      return Array.isArray(r.completion_items)
-        ? r.completion_items.map((n) => this._toCompletionItem(n))
-        : Array.isArray(r.completions)
-          ? La("BackCompletionResult", "completions", r.completions).map(
-              (i) => ({
-                text: i,
+    _extractCompletions(result) {
+      return Array.isArray(result.completion_items)
+        ? result.completion_items.map((n) => this._toCompletionItem(n))
+        : Array.isArray(result.completions)
+          ? validateAndReturnStringArray("BackCompletionResult", "completions", result.completions).map(
+              (text) => ({
+                text: text,
                 suffixReplacementText: "",
                 skippedSuffix: "",
               }),
             )
           : [
               {
-                text: di("BackCompletionResult", "text", r.text),
+                text: validateAndReturnString("BackCompletionResult", "text", result.text),
                 suffixReplacementText: "",
                 skippedSuffix: "",
               },
             ]
     }
-    toCompleteResult(r) {
-      let n = this._extractCompletions(r),
-        i = La(
+    toCompleteResult(result) {
+      let completionItems = this._extractCompletions(result),
+        unknownBlobNames = validateAndReturnStringArray(
           "BackCompletionResult",
           "unknown_blob_names/unknown_memory_names",
-          r.unknown_blob_names ?? r.unknown_memory_names,
+          result.unknown_blob_names ?? result.unknown_memory_names,
         ),
-        s =
-          r.checkpoint_not_found === undefined
+        checkpointNotFound =
+          result.checkpoint_not_found === undefined
             ? false
-            : Qc(
+            : validateAndReturnBoolean(
                 "BackCompletionResult",
                 "checkpoint_not_found",
-                r.checkpoint_not_found,
+                result.checkpoint_not_found,
                 false,
               )
       return {
-        completionItems: n,
-        unknownBlobNames: i,
-        checkpointNotFound: s,
-        suggestedPrefixCharCount: r.suggested_prefix_char_count,
-        suggestedSuffixCharCount: r.suggested_suffix_char_count,
-        completionTimeoutMs: r.completion_timeout_ms,
+        completionItems: completionItems,
+        unknownBlobNames: unknownBlobNames,
+        checkpointNotFound: checkpointNotFound,
+        suggestedPrefixCharCount: result.suggested_prefix_char_count,
+        suggestedSuffixCharCount: result.suggested_suffix_char_count,
+        completionTimeoutMs: result.completion_timeout_ms,
       }
     }
-    toCheckpointBlobsResult(r) {
+    toCheckpointBlobsResult(result) {
       return {
-        newCheckpointId: di(
+        newCheckpointId: validateAndReturnString(
           "BackCheckpointBlobsResult",
           "new_checkpoint_id",
-          r.new_checkpoint_id,
+          result.new_checkpoint_id,
         ),
       }
     }
-    async complete(r, n, i, s, o, a, l, c, u, f, p, g, m) {
-      let y = this._configListener.config,
-        v = { recent_changes: u },
-        C = {
-          model: y.modelName,
-          prompt: n,
-          suffix: i,
-          path: s,
-          blob_name: o,
-          prefix_begin: a?.prefixBegin,
-          cursor_position: a?.cursorPosition,
-          suffix_end: a?.suffixEnd,
-          lang: l,
-          blobs: Ua(c),
-          recency_info: v,
-          probe_only: g,
+    async complete(requestId, prompt, suffix, path, blobName, positions, language, blobs, recentChanges, fileEdits, timeoutMs, probeOnly, metrics) {
+      let config = this._configListener.config,
+        recencyInfo = { recent_changes: recentChanges },
+        requestData = {
+          model: config.modelName,
+          prompt: prompt,
+          suffix: suffix,
+          path: path,
+          blob_name: blobName,
+          prefix_begin: positions?.prefixBegin,
+          cursor_position: positions?.cursorPosition,
+          suffix_end: positions?.suffixEnd,
+          lang: language,
+          blobs: processBlobs(blobs),
+          recency_info: recencyInfo,
+          probe_only: probeOnly,
           sequence_id: this._sequenceId.next(),
-          filter_threshold: y.completions.filterThreshold,
-          edit_events: this.toFileDiffsPayload(f ?? []),
+          filter_threshold: config.completions.filterThreshold,
+          edit_events: this.toFileDiffsPayload(fileEdits ?? []),
         }
       return await this.callApi(
-        r,
-        y,
+        requestId,
+        config,
         "completion",
-        C,
-        (E) => this.toCompleteResult(E),
+        requestData,
+        (response) => this.toCompleteResult(response),
         undefined,
-        p,
-        m,
+        timeoutMs,
+        metrics,
       )
     }
-    async checkpointBlobs(r) {
-      let n = this.createRequestId(),
-        i = this._configListener.config,
-        s = { blobs: Ua(r) },
-        o = await this.callApi(n, i, "checkpoint-blobs", s, (a) =>
-          this.toCheckpointBlobsResult(a),
+    async checkpointBlobs(blobs) {
+      let requestId = this.createRequestId(),
+        config = this._configListener.config,
+        requestData = { blobs: processBlobs(blobs) },
+        result = await this.callApi(requestId, config, "checkpoint-blobs", requestData, (response) =>
+          this.toCheckpointBlobsResult(response),
         )
-      for (let a of this.getUniqueExtraURLs())
+      for (let extraUrl of this.getUniqueExtraURLs())
         (
           await this.callApi(
-            n,
-            i,
+            requestId,
+            config,
             "checkpoint-blobs",
-            s,
-            (c) => this.toCheckpointBlobsResult(c),
-            a,
+            requestData,
+            (response) => this.toCheckpointBlobsResult(response),
+            extraUrl,
           )
-        ).newCheckpointId !== o.newCheckpointId &&
+        ).newCheckpointId !== result.newCheckpointId &&
           this._logger.error(
-            `Checkpoint blobs API returned different checkpoint IDs for ${a}`,
+            `Checkpoint blobs API returned different checkpoint IDs for ${extraUrl}`,
           )
-      return o
+      return result
     }
-    convertToCodeEditResult(r) {
-      let n =
-          r.unknown_blob_names === undefined
+    convertToCodeEditResult(result) {
+      let unknownBlobNames =
+          result.unknown_blob_names === undefined
             ? []
-            : La(
+            : validateAndReturnStringArray(
                 "BackCodeEditResult",
                 "unknown_blob_names",
-                r.unknown_blob_names,
+                result.unknown_blob_names,
               ),
-        i =
-          r.checkpoint_not_found === undefined
+        checkpointNotFound =
+          result.checkpoint_not_found === undefined
             ? false
-            : Qc(
+            : validateAndReturnBoolean(
                 "BackCodeEditResult",
                 "checkpoint_not_found",
-                r.checkpoint_not_found,
+                result.checkpoint_not_found,
                 false,
               )
       return {
-        unknownBlobNames: n,
-        checkpointNotFound: i,
-        modifiedCode: r.text,
+        unknownBlobNames: unknownBlobNames,
+        checkpointNotFound: checkpointNotFound,
+        modifiedCode: result.text,
       }
     }
-    async editCode(r, n, i, s, o, a, l, c, u, f, p) {
-      let g = this._configListener.config,
-        y = {
-          model: g.codeInstruction.model,
-          instruction: n,
-          prefix: s,
-          selected_text: i,
-          suffix: o,
-          blob_name: l,
-          prefix_begin: c,
-          suffix_end: u,
-          lang: f,
-          path: a,
-          blobs: Ua(p),
+    async editCode(requestId, instruction, selectedText, prefix, suffix, path, blobName, prefixBegin, suffixEnd, language, blobs) {
+      let config = this._configListener.config,
+        requestData = {
+          model: config.codeInstruction.model,
+          instruction: instruction,
+          prefix: prefix,
+          selected_text: selectedText,
+          suffix: suffix,
+          blob_name: blobName,
+          prefix_begin: prefixBegin,
+          suffix_end: suffixEnd,
+          lang: language,
+          path: path,
+          blobs: processBlobs(blobs),
           sequence_id: this._sequenceId.next(),
         }
       return await this.callApi(
-        r,
-        g,
+        requestId,
+        config,
         "edit",
-        y,
-        (v) => this.convertToCodeEditResult(v),
+        requestData,
+        (response) => this.convertToCodeEditResult(response),
         undefined,
         12e4,
       )
     }
     async chat(
-      r,
-      n,
-      i,
-      s,
-      o,
-      a,
-      l,
-      c,
-      u,
-      f,
-      p,
-      g,
-      m,
-      y,
-      v,
+      requestId,
+      message,
+      chatHistory,
+      blobs,
+      userGuidedBlobs,
+      externalSourceIds,
+      modelOverride,
+      vcsChange,
+      recentChanges,
+      contextCodeExchangeRequestId,
+      selectedCode,
+      prefix,
+      suffix,
+      path,
+      language,
       C,
-      E,
-      w,
-      B,
-      T,
-      N,
-      W,
-      Z,
-      te,
+      disableAutoExternalSources,
+      userGuidelines,
+      workspaceGuidelines,
+      toolDefinitions,
+      nodes,
+      mode,
+      agentMemories,
+      personaType,
     ) {
-      let Y = this._configListener.config,
-        U = {
-          model: l ?? Y.chat.model,
-          path: y,
-          prefix: g,
-          selected_code: p,
-          suffix: m,
-          message: n,
-          chat_history: i,
-          lang: v,
-          blobs: Ua(s),
-          user_guided_blobs: o,
-          external_source_ids: a,
-          enable_preference_collection: Y.preferenceCollection.enable,
-          context_code_exchange_request_id: f,
-          vcs_change: Zp(c),
-          recency_info_recent_changes: u,
+      let config = this._configListener.config,
+        requestData = {
+          model: modelOverride ?? config.chat.model,
+          path: path,
+          prefix: prefix,
+          selected_code: selectedCode,
+          suffix: suffix,
+          message: message,
+          chat_history: chatHistory,
+          lang: language,
+          blobs: processBlobs(blobs),
+          user_guided_blobs: userGuidedBlobs,
+          external_source_ids: externalSourceIds,
+          enable_preference_collection: config.preferenceCollection.enable,
+          context_code_exchange_request_id: contextCodeExchangeRequestId,
+          vcs_change: processVcsChanges(vcsChange),
+          recency_info_recent_changes: recentChanges,
           feature_detection_flags: { support_raw_output: true },
-          disable_auto_external_sources: E,
-          user_guidelines: w,
-          workspace_guidelines: B,
-          tool_definitions: T ?? [],
-          nodes: N ?? [],
-          mode: W ?? Fr.chat,
-          agent_memories: Z,
-          persona_type: te,
+          disable_auto_external_sources: disableAutoExternalSources,
+          user_guidelines: userGuidelines,
+          workspace_guidelines: workspaceGuidelines,
+          tool_definitions: toolDefinitions ?? [],
+          nodes: nodes ?? [],
+          mode: mode ?? Fr.chat,
+          agent_memories: agentMemories,
+          persona_type: personaType,
         }
       return await this.callApi(
-        r,
-        Y,
+        requestId,
+        config,
         "chat",
-        U,
-        (ce) => PT(ce),
-        Y.chat.url,
-        3e5,
+        requestData,
+        (response) => PT(response),
+        config.chat.url,
+        300000, // 5 minutes timeout
       )
     }
-    toChatInstructionStreamResult(r) {
-      let n =
-          r.unknown_blob_names === undefined
+    toChatInstructionStreamResult(result) {
+      let unknownBlobNames =
+          result.unknown_blob_names === undefined
             ? []
-            : La(
+            : validateAndReturnStringArray(
                 "BackChatInstructionStreamResult",
                 "unknown_blob_names",
-                r.unknown_blob_names,
+                result.unknown_blob_names,
               ),
-        i =
-          r.checkpoint_not_found === undefined
+        checkpointNotFound =
+          result.checkpoint_not_found === undefined
             ? false
-            : Qc(
+            : validateAndReturnBoolean(
                 "BackChatInstructionStreamResult",
                 "checkpoint_not_found",
-                r.checkpoint_not_found,
+                result.checkpoint_not_found,
                 false,
               )
       return {
-        text: r.text,
-        unknownBlobNames: n,
-        checkpointNotFound: i,
-        replacementText: r.replacement_text,
-        replacementOldText: r.replacement_old_text,
-        replacementStartLine: r.replacement_start_line,
-        replacementEndLine: r.replacement_end_line,
+        text: result.text,
+        unknownBlobNames: unknownBlobNames,
+        checkpointNotFound: checkpointNotFound,
+        replacementText: result.replacement_text,
+        replacementOldText: result.replacement_old_text,
+        replacementStartLine: result.replacement_start_line,
+        replacementEndLine: result.replacement_end_line,
       }
     }
     async chatInstructionStream(
-      r,
-      n,
-      i,
-      s,
-      o = "",
-      a = "",
-      l = "",
-      c = "",
-      u = "",
-      f = undefined,
-      p = undefined,
-      g = "",
-      m,
-      y,
-      v,
+      requestId,
+      instruction,
+      blobs,
+      chatHistory,
+      selectedText = "",
+      prefix = "",
+      suffix = "",
+      path = "",
+      blobName = "",
+      prefixBegin = undefined,
+      suffixEnd = undefined,
+      language = "",
+      userGuidelines,
+      workspaceGuidelines,
+      contextCodeExchangeRequestId,
     ) {
-      let C = this._configListener.config,
-        E = n.length === 0,
-        w,
-        B
-      E
-        ? ((w = C.smartPaste.url ?? C.chat.url), (B = C.smartPaste.model))
-        : ((w = C.chat.url), (B = C.instructions.model))
-      let T = {
-        model: B,
-        prefix: a,
-        selected_text: o,
-        suffix: l,
-        path: c,
-        instruction: n,
-        lang: g,
-        blob_name: u,
-        prefix_begin: f,
-        suffix_end: p,
-        blobs: Ua(i),
-        chat_history: s,
-        context_code_exchange_request_id: v,
-        user_guidelines: m,
-        workspace_guidelines: y,
+      let config = this._configListener.config,
+        isEmptyInstruction = instruction.length === 0,
+        apiUrl,
+        modelName
+      isEmptyInstruction
+        ? ((apiUrl = config.smartPaste.url ?? config.chat.url), (modelName = config.smartPaste.model))
+        : ((apiUrl = config.chat.url), (modelName = config.instructions.model))
+      let requestData = {
+        model: modelName,
+        prefix: prefix,
+        selected_text: selectedText,
+        suffix: suffix,
+        path: path,
+        instruction: instruction,
+        lang: language,
+        blob_name: blobName,
+        prefix_begin: prefixBegin,
+        suffix_end: suffixEnd,
+        blobs: processBlobs(blobs),
+        chat_history: chatHistory,
+        context_code_exchange_request_id: contextCodeExchangeRequestId,
+        user_guidelines: userGuidelines,
+        workspace_guidelines: workspaceGuidelines,
       }
       return await this.callApiStream(
-        r,
-        C,
+        requestId,
+        config,
         "instruction-stream",
-        T,
+        requestData,
         this.toChatInstructionStreamResult.bind(this),
-        w,
-        12e4,
+        apiUrl,
+        120000, // 2 minutes timeout
       )
     }
-    _smartPasteQueue = new tM(this._processSingleSmartPasteRequest.bind(this))
+    _smartPasteQueue = new PromiseQueue(this._processSingleSmartPasteRequest.bind(this))
     async smartPasteStream(
-      r,
-      n,
-      i,
-      s,
-      o = "",
-      a = "",
-      l = "",
-      c = "",
-      u = "",
-      f = undefined,
-      p = undefined,
-      g = "",
-      m = "",
-      y = "",
-      v = "",
-      C,
+      requestId,
+      instruction,
+      blobs,
+      chatHistory,
+      selectedText = "",
+      prefix = "",
+      suffix = "",
+      pathName = "",
+      blobName = "",
+      prefixBegin = undefined,
+      suffixEnd = undefined,
+      language = "",
+      codeBlock = "",
+      targetFilePath = "",
+      targetFileContent = "",
+      contextCodeExchangeRequestId,
     ) {
-      let E = {
-        requestId: r,
-        instruction: n,
-        blobs: i,
-        chatHistory: s,
-        selectedText: o,
-        prefix: a,
-        suffix: l,
-        pathName: c,
-        blobName: u,
-        prefixBegin: f,
-        suffixEnd: p,
-        language: g,
-        codeBlock: m,
-        targetFilePath: y,
-        targetFileContent: v,
-        contextCodeExchangeRequestId: C,
+      let request = {
+        requestId: requestId,
+        instruction: instruction,
+        blobs: blobs,
+        chatHistory: chatHistory,
+        selectedText: selectedText,
+        prefix: prefix,
+        suffix: suffix,
+        pathName: pathName,
+        blobName: blobName,
+        prefixBegin: prefixBegin,
+        suffixEnd: suffixEnd,
+        language: language,
+        codeBlock: codeBlock,
+        targetFilePath: targetFilePath,
+        targetFileContent: targetFileContent,
+        contextCodeExchangeRequestId: contextCodeExchangeRequestId,
       }
-      return this._smartPasteQueue.insertAndKick(E)
+      return this._smartPasteQueue.insertAndKick(request)
     }
-    async _processSingleSmartPasteRequest(r) {
-      if (r === undefined) return
-      if (r.requestServicedSignal !== undefined)
-        return await r.requestServicedSignal
-      let n = this._configListener.config,
-        i = r.instruction.length === 0,
-        s,
-        o
-      i
-        ? ((s = n.smartPaste.url ?? n.chat.url), (o = n.smartPaste.model))
-        : (s = n.chat.url)
-      let a = {
-          model: o,
-          prefix: r.prefix,
-          selected_text: r.selectedText,
-          suffix: r.suffix,
-          path: r.pathName,
-          instruction: r.instruction,
-          lang: r.language,
-          blob_name: r.blobName,
-          prefix_begin: r.prefixBegin,
-          suffix_end: r.suffixEnd,
-          blobs: Ua(r.blobs),
-          chat_history: r.chatHistory,
-          code_block: r.codeBlock,
-          target_file_path: r.targetFilePath,
-          target_file_content: r.targetFileContent,
-          context_code_exchange_request_id: r.contextCodeExchangeRequestId,
+    async _processSingleSmartPasteRequest(request) {
+      if (request === undefined) return
+      if (request.requestServicedSignal !== undefined)
+        return await request.requestServicedSignal
+      let config = this._configListener.config,
+        isEmptyInstruction = request.instruction.length === 0,
+        apiUrl,
+        modelName
+      isEmptyInstruction
+        ? ((apiUrl = config.smartPaste.url ?? config.chat.url), (modelName = config.smartPaste.model))
+        : (apiUrl = config.chat.url)
+      let requestData = {
+          model: modelName,
+          prefix: request.prefix,
+          selected_text: request.selectedText,
+          suffix: request.suffix,
+          path: request.pathName,
+          instruction: request.instruction,
+          lang: request.language,
+          blob_name: request.blobName,
+          prefix_begin: request.prefixBegin,
+          suffix_end: request.suffixEnd,
+          blobs: processBlobs(request.blobs),
+          chat_history: request.chatHistory,
+          code_block: request.codeBlock,
+          target_file_path: request.targetFilePath,
+          target_file_content: request.targetFileContent,
+          context_code_exchange_request_id: request.contextCodeExchangeRequestId,
         },
-        l
+        resolveRequestServiced
       return (
-        (r.requestServicedSignal = new Promise((u) => {
-          l = u
+        (request.requestServicedSignal = new Promise((resolve) => {
+          resolveRequestServiced = resolve
         })),
-        this._smartPasteQueue.insertAndKick(r),
+        this._smartPasteQueue.insertAndKick(request),
         async function* () {
           try {
             yield* await this.callApiStream(
-              r.requestId,
-              n,
+              request.requestId,
+              config,
               "smart-paste-stream",
-              a,
+              requestData,
               this.toChatInstructionStreamResult.bind(this),
-              s,
+              apiUrl,
               12e4,
             )
           } finally {
-            l()
+            resolveRequestServiced()
           }
         }.bind(this)()
       )
     }
-    toGenerateCommitMessageResult(r) {
-      return { text: r.text }
+    toGenerateCommitMessageResult(result) {
+      return { text: result.text }
     }
-    async generateCommitMessageStream(r, n) {
-      let i = this._configListener.config,
-        s = {
-          changed_file_stats: n.changedFileStats,
-          diff: n.diff,
+    async generateCommitMessageStream(requestId, commitData) {
+      let config = this._configListener.config,
+        requestData = {
+          changed_file_stats: commitData.changedFileStats,
+          diff: commitData.diff,
           relevant_commit_messages:
-            n.generatedCommitMessageSubrequest.relevant_commit_messages,
+            commitData.generatedCommitMessageSubrequest.relevant_commit_messages,
           example_commit_messages:
-            n.generatedCommitMessageSubrequest.example_commit_messages,
+            commitData.generatedCommitMessageSubrequest.example_commit_messages,
         }
       return await this.callApiStream(
-        r,
-        i,
+        requestId,
+        config,
         "generate-commit-message-stream",
-        s,
+        requestData,
         this.toGenerateCommitMessageResult.bind(this),
         undefined,
         12e4,
       )
     }
-    async createRemoteAgent(r, n, i, s, o) {
-      let a = this.createRequestId(),
-        l = this._configListener.config,
-        c = {
-          workspace_setup: r,
+    async createRemoteAgent(workspaceSetup, initialRequestDetails, modelName, setupScript, isSetupScriptAgent) {
+      let requestId = this.createRequestId(),
+        config = this._configListener.config,
+        requestData = {
+          workspace_setup: workspaceSetup,
           initial_request_details: {
-            request_nodes: n.request_nodes,
-            user_guidelines: n.user_guidelines ?? l.chat.userGuidelines,
-            workspace_guidelines: n.workspace_guidelines ?? "",
-            agent_memories: n.agent_memories ?? "",
+            request_nodes: initialRequestDetails.request_nodes,
+            user_guidelines: initialRequestDetails.user_guidelines ?? config.chat.userGuidelines,
+            workspace_guidelines: initialRequestDetails.workspace_guidelines ?? "",
+            agent_memories: initialRequestDetails.agent_memories ?? "",
           },
-          model: i ?? l.modelName,
-          setup_script: s,
-          is_setup_script_agent: o || false,
+          model: modelName ?? config.modelName,
+          setup_script: setupScript,
+          is_setup_script_agent: isSetupScriptAgent || false,
         }
       if (this._auth.useOAuth) {
-        let u = await this._auth.getSession()
-        u && (c.token = u.accessToken)
+        let session = await this._auth.getSession()
+        session && (requestData.token = session.accessToken)
       }
       return (
-        console.log("Calling /remote-agents/create with payload: ", c),
-        await this.callApi(a, l, "remote-agents/create", c)
+        console.log("Calling /remote-agents/create with payload: ", requestData),
+        await this.callApi(requestId, config, "remote-agents/create", requestData)
       )
     }
-    async remoteAgentChat(r, n) {
-      let i = this.createRequestId(),
-        s = this._configListener.config,
-        o = {
-          remote_agent_id: r,
+    async remoteAgentChat(remoteAgentId, requestDetails) {
+      let requestId = this.createRequestId(),
+        config = this._configListener.config,
+        requestData = {
+          remote_agent_id: remoteAgentId,
           request_details: {
-            request_nodes: n.request_nodes,
-            user_guidelines: n.user_guidelines ?? s.chat.userGuidelines,
-            workspace_guidelines: n.workspace_guidelines ?? "",
-            agent_memories: n.agent_memories ?? "",
+            request_nodes: requestDetails.request_nodes,
+            user_guidelines: requestDetails.user_guidelines ?? config.chat.userGuidelines,
+            workspace_guidelines: requestDetails.workspace_guidelines ?? "",
+            agent_memories: requestDetails.agent_memories ?? "",
           },
         },
-        a = await this.callApi(i, s, "remote-agents/chat", o)
-      return { remoteAgentId: a.remote_agent_id, nodes: a.nodes }
+        response = await this.callApi(requestId, config, "remote-agents/chat", requestData)
+      return { remoteAgentId: response.remote_agent_id, nodes: response.nodes }
     }
-    async deleteRemoteAgent(r) {
-      let n = this.createRequestId(),
-        i = this._configListener.config,
-        s = { remote_agent_id: r }
-      return await this.callApi(n, i, "remote-agents/delete", s)
+    async deleteRemoteAgent(remoteAgentId) {
+      let requestId = this.createRequestId(),
+        config = this._configListener.config,
+        requestData = { remote_agent_id: remoteAgentId }
+      return await this.callApi(requestId, config, "remote-agents/delete", requestData)
     }
-    async interruptRemoteAgent(r) {
-      let n = this.createRequestId(),
-        i = this._configListener.config,
-        s = { remote_agent_id: r }
-      return await this.callApi(n, i, "remote-agents/interrupt", s)
+    async interruptRemoteAgent(remoteAgentId) {
+      let requestId = this.createRequestId(),
+        config = this._configListener.config,
+        requestData = { remote_agent_id: remoteAgentId }
+      return await this.callApi( requestId, config, "remote-agents/interrupt", requestData)
     }
     async listRemoteAgents() {
-      let r = this.createRequestId(),
-        n = this._configListener.config
-      return await this.callApi(r, n, "remote-agents/list", {})
+      let requestId = this.createRequestId(),
+        config = this._configListener.config
+      return await this.callApi(requestId, config, "remote-agents/list", {})
     }
-    async getRemoteAgentChatHistory(r, n) {
-      let i = this.createRequestId(),
-        s = this._configListener.config,
-        o = { remote_agent_id: r, last_processed_sequence_id: n }
-      return await this.callApi(i, s, "remote-agents/get-chat-history", o)
+    async getRemoteAgentChatHistory(remoteAgentId, n) {
+      let requestId = this.createRequestId(),
+        config = this._configListener.config,
+        requestData = { remote_agent_id: remoteAgentId, last_processed_sequence_id: n }
+      return await this.callApi(requestId, config, "remote-agents/get-chat-history", requestData)
     }
-    async remoteAgentAddSSHKey(r, n) {
-      let i = this.createRequestId(),
-        s = this._configListener.config,
-        o = { remote_agent_id: r, public_keys: n }
-      return await this.callApi(i, s, "remote-agents/add-ssh-key", o)
+    async remoteAgentAddSSHKey(remoteAgentId, publicKeys) {
+      let requestId = this.createRequestId(),
+        config = this._configListener.config,
+        requestData = { remote_agent_id: remoteAgentId, public_keys: publicKeys }
+      return await this.callApi(requestId, config, "remote-agents/add-ssh-key", requestData)
     }
-    async getRemoteAgentWorkspaceLogs(r) {
-      let n = this.createRequestId(),
-        i = this._configListener.config,
-        s = { remote_agent_id: r }
-      return await this.callApi(n, i, "remote-agents/logs", s)
+    async getRemoteAgentWorkspaceLogs(remoteAgentId) {
+      let requestId = this.createRequestId(),
+        config = this._configListener.config,
+        requestData = { remote_agent_id: remoteAgentId }
+      return await this.callApi(requestId, config, "remote-agents/logs", requestData)
     }
     async listGithubReposForAuthenticatedUser() {
-      let r = this.createRequestId(),
-        n = this._configListener.config
-      return await this.callApi(r, n, "github/list-repos", {})
+      let requestId = this.createRequestId(),
+        config = this._configListener.config
+      return await this.callApi(requestId, config, "github/list-repos", {})
     }
-    async listGithubRepoBranches(r) {
-      let n = this.createRequestId(),
-        i = this._configListener.config,
-        s = { repo: { owner: r.owner, name: r.name } }
-      return await this.callApi(n, i, "github/list-branches", s)
+    async listGithubRepoBranches(repo) {
+      let requestId = this.createRequestId(),
+        config = this._configListener.config,
+        requestData = { repo: { owner: repo.owner, name: repo.name } }
+      return await this.callApi(requestId, config, "github/list-branches", requestData)
     }
     async isUserGithubConfigured() {
-      let r = this.createRequestId(),
-        n = this._configListener.config
-      return await this.callApi(r, n, "github/is-user-configured", {})
+      let requestId = this.createRequestId(),
+        config = this._configListener.config
+      return await this.callApi(requestId, config, "github/is-user-configured", {})
     }
-    toAutofixCommandPayload(r) {
-      return { input: r.input, output: r.output, exit_code: r.exitCode }
+    toAutofixCommandPayload(command) {
+      return { input: command.input, output: command.output, exit_code: command.exitCode }
     }
-    toBackTextReplacement(r) {
+    toBackTextReplacement(replacement) {
       return {
-        description: r.description,
-        path: r.path,
-        text: r.text,
-        old_text: r.oldText,
-        start_line: r.startLine,
-        end_line: r.endLine,
-        sequence_id: r.sequenceId,
-        old_blob_name: r.oldBlobName,
+        description: replacement.description,
+        path: replacement.path,
+        text: replacement.text,
+        old_text: replacement.oldText,
+        start_line: replacement.startLine,
+        end_line: replacement.endLine,
+        sequence_id: replacement.sequenceId,
+        old_blob_name: replacement.oldBlobName,
       }
     }
-    toFileDiffsPayload(r) {
-      return r.map((n) => ({
-        path: n.path,
-        before_blob_name: n.beforeBlobName,
-        after_blob_name: n.afterBlobName,
-        edits: n.edits.map((i) => ({
-          before_start: i.beforeStart,
-          after_start: i.afterStart,
-          before_text: i.beforeText,
-          after_text: i.afterText,
+    toFileDiffsPayload(diffs) {
+      return diffs.map((diff) => ({
+        path: diff.path,
+        before_blob_name: diff.beforeBlobName,
+        after_blob_name: diff.afterBlobName,
+        edits: diff.edits.map((edit) => ({
+          before_start: edit.beforeStart,
+          after_start: edit.afterStart,
+          before_text: edit.beforeText,
+          after_text: edit.afterText,
         })),
       }))
     }
-    toFileCharRangePayload(r) {
-      return r
-        .filter((n) => n.charStart !== undefined && n.charStop !== undefined)
-        .map((n) => ({
-          path: n.path,
-          char_start: n.charStart,
-          char_end: n.charStop,
+    toFileCharRangePayload(ranges) {
+      return ranges
+        .filter((range) => range.charStart !== undefined && range.charStop !== undefined)
+        .map((range) => ({
+          path: range.path,
+          char_start: range.charStart,
+          char_end: range.charStop,
         }))
     }
-    toNextEditLocationResult(r) {
-      Dy(
+    toNextEditLocationResult(result) {
+      validateIsArray(
         "BackNextEditLocationResult",
         "candidate_locations",
-        r.candidate_locations,
+        result.candidate_locations,
       )
-      let n =
-          r.unknown_blob_names === undefined
+      let unknownBlobNames =
+          result.unknown_blob_names === undefined
             ? []
-            : La(
+            : validateAndReturnStringArray(
                 "BackNextEditLocationResult",
                 "unknown_blob_names",
-                r.unknown_blob_names,
+                result.unknown_blob_names,
               ),
-        i =
-          r.checkpoint_not_found === undefined
+        checkpointNotFound =
+          result.checkpoint_not_found === undefined
             ? false
-            : Qc(
+            : validateAndReturnBoolean(
                 "BackNextEditResult",
                 "checkpoint_not_found",
-                r.checkpoint_not_found,
+                result.checkpoint_not_found,
                 false,
               ),
-        s =
-          r.critical_errors === undefined || r.critical_errors === null
+        criticalErrors =
+          result.critical_errors === undefined || result.critical_errors === null
             ? []
-            : La("BackNextEditResult", "critical_errors", r.critical_errors),
-        o = []
-      for (let a of r.candidate_locations) {
-        let l = {
-            start: Fi("BackLineRange", "start", a.item.range.start),
-            stop: Fi("BackLineRange", "stop", a.item.range.stop),
+            : validateAndReturnStringArray("BackNextEditResult", "critical_errors", result.critical_errors),
+        candidateLocations = []
+      for (let location of result.candidate_locations) {
+        let range = {
+            start: validateAndReturnNumber("BackLineRange", "start", location.item.range.start),
+            stop: validateAndReturnNumber("BackLineRange", "stop", location.item.range.stop),
           },
-          u = {
-            item: { path: di("BackLocation", "path", a.item.path), range: l },
-            score: Fi("BackScored", "score", a.score),
-            debugInfo: a.debug_info,
+          scoredLocation = {
+            item: { path: validateAndReturnString("BackLocation", "path", location.item.path), range: range },
+            score: validateAndReturnNumber("BackScored", "score", location.score),
+            debugInfo: location.debug_info,
           }
-        o.push(u)
+        candidateLocations.push(scoredLocation)
       }
       return {
-        candidateLocations: o,
-        unknownBlobNames: n,
-        checkpointNotFound: i,
-        criticalErrors: s,
+        candidateLocations: candidateLocations,
+        unknownBlobNames: unknownBlobNames,
+        checkpointNotFound: checkpointNotFound,
+        criticalErrors: criticalErrors,
       }
     }
-    async nextEditLocation(r, n, i, s, o, a, l, c, u, f) {
-      let p = this._configListener.config,
-        g = {
-          instruction: n,
-          path: i,
-          vcs_change: Zp(s),
-          edit_events: this.toFileDiffsPayload(o),
-          blobs: Ua(a),
-          recent_changes: l,
-          diagnostics: c,
-          num_results: u,
-          is_single_file: f,
+    async nextEditLocation(requestId, instruction, path, vcsChanges, editEvents, blobs, recentChanges, diagnostics, numResults, isSingleFile) {
+      let config = this._configListener.config,
+        requestData = {
+          instruction: instruction,
+          path: path,
+          vcs_change: processVcsChanges(vcsChanges),
+          edit_events: this.toFileDiffsPayload(editEvents),
+          blobs: processBlobs(blobs),
+          recent_changes: recentChanges,
+          diagnostics: diagnostics,
+          num_results: numResults,
+          is_single_file: isSingleFile,
         }
       return await this.callApi(
-        r,
-        p,
+        requestId,
+        config,
         "next_edit_loc",
-        g,
-        (m) => this.toNextEditLocationResult(m),
-        p.nextEdit.locationUrl,
-        12e4,
+        requestData,
+        (response) => this.toNextEditLocationResult(response),
+        config.nextEdit.locationUrl,
+        120000, // 2 minutes timeout
       )
     }
-    convertToAutofixCheckResponse(r) {
+    convertToAutofixCheckResponse(response) {
       return {
-        containsFailure: Qc(
+        containsFailure: validateAndReturnBoolean(
           "BackAutofixCheckResponse",
           "contains_failure",
-          r.contains_failure,
+          response.contains_failure,
           false,
         ),
-        isCodeRelated: Qc(
+        isCodeRelated: validateAndReturnBoolean(
           "BackAutofixCheckResponse",
           "is_code_related",
-          r.is_code_related,
+          response.is_code_related,
           false,
         ),
       }
     }
-    convertToAutofixPlanResponse(r) {
+    convertToAutofixPlanResponse(response) {
       return {
-        unknownBlobNames: La(
+        unknownBlobNames: validateAndReturnStringArray(
           "BackAutofixPlanResponse",
           "unknown_blob_names",
-          r.unknown_blob_names,
+          response.unknown_blob_names,
         ),
-        checkpointNotFound: Qc(
+        checkpointNotFound: validateAndReturnBoolean(
           "BackAutofixPlanResponse",
           "checkpoint_not_found",
-          r.checkpoint_not_found,
+          response.checkpoint_not_found,
           false,
         ),
-        summary: r.summary,
-        replacements: r.replacements.map((n) => ({
-          description: n.description,
-          path: n.path,
-          text: n.text,
-          oldText: n.old_text,
-          startLine: n.start_line,
-          endLine: n.end_line,
-          sequenceId: n.sequence_id,
-          oldBlobName: n.old_blob_name,
+        summary: response.summary,
+        replacements: response.replacements.map((replacement) => ({
+          description: replacement.description,
+          path: replacement.path,
+          text: replacement.text,
+          oldText: replacement.old_text,
+          startLine: replacement.start_line,
+          endLine: replacement.end_line,
+          sequenceId: replacement.sequence_id,
+          oldBlobName: replacement.old_blob_name,
         })),
       }
     }
-    convertToNextEditGenerationResult(r) {
-      let n =
-          r.unknown_blob_names === undefined
+    convertToNextEditGenerationResult(result) {
+      let unknownBlobNames =
+          result.unknown_blob_names === undefined
             ? []
-            : La(
+            : validateAndReturnStringArray(
                 "BackNextEditGenerationResult",
                 "unknown_blob_names",
-                r.unknown_blob_names,
+                result.unknown_blob_names,
               ),
-        i =
-          r.checkpoint_not_found === undefined
+        checkpointNotFound =
+          result.checkpoint_not_found === undefined
             ? false
-            : Qc(
+            : validateAndReturnBoolean(
                 "BackNextEditResult",
                 "checkpoint_not_found",
-                r.checkpoint_not_found,
+                result.checkpoint_not_found,
                 false,
               )
       return {
-        result: this.convertToNextEditResult(r.next_edit),
-        unknownBlobNames: n,
-        checkpointNotFound: i,
+        result: this.convertToNextEditResult(result.next_edit),
+        unknownBlobNames: unknownBlobNames,
+        checkpointNotFound: checkpointNotFound,
       }
     }
-    convertToNextEditResult(r) {
-      let n = di("BackNextEditResult", "suggestion_id", r.suggestion_id),
-        i = di("BackNextEditResult", "path", r.path),
-        s = di("BackNextEditResult", "blob_name", r.blob_name),
-        o = Fi("BackNextEditResult", "char_start", r.char_start),
-        a = Fi("BackNextEditResult", "char_end", r.char_end),
-        l = di("BackNextEditResult", "existing_code", r.existing_code),
-        c = di("BackNextEditResult", "suggested_code", r.suggested_code),
-        u =
-          r.truncation_char === undefined || r.truncation_char === null
+    convertToNextEditResult(result) {
+      let suggestionId = validateAndReturnString("BackNextEditResult", "suggestion_id", result.suggestion_id),
+        path = validateAndReturnString("BackNextEditResult", "path", result.path),
+        blobName = validateAndReturnString("BackNextEditResult", "blob_name", result.blob_name),
+        charStart = validateAndReturnNumber("BackNextEditResult", "char_start", result.char_start),
+        charEnd = validateAndReturnNumber("BackNextEditResult", "char_end", result.char_end),
+        existingCode = validateAndReturnString("BackNextEditResult", "existing_code", result.existing_code),
+        suggestedCode = validateAndReturnString("BackNextEditResult", "suggested_code", result.suggested_code),
+        truncationChar =
+          result.truncation_char === undefined || result.truncation_char === null
             ? undefined
-            : Fi("BackNextEditResult", "truncation_char", r.truncation_char),
-        f =
-          r.change_description === undefined
+            : validateAndReturnNumber("BackNextEditResult", "truncation_char", result.truncation_char),
+        changeDescription =
+          result.change_description === undefined
             ? ""
-            : di(
+            : validateAndReturnString(
                 "BackNextEditResult",
                 "change_description",
-                r.change_description,
+                result.change_description,
               ),
-        p = r.diff_spans?.map((v) => ({
+        diffSpans = result.diff_spans?.map((v) => ({
           original: {
-            start: Fi("BackCharRange", "start", v.original.start),
-            stop: Fi("BackCharRange", "stop", v.original.stop),
+            start: validateAndReturnNumber("BackCharRange", "start", v.original.start),
+            stop: validateAndReturnNumber("BackCharRange", "stop", v.original.stop),
           },
           updated: {
-            start: Fi("BackCharRange", "start", v.updated.start),
-            stop: Fi("BackCharRange", "stop", v.updated.stop),
+            start: validateAndReturnNumber("BackCharRange", "start", v.updated.start),
+            stop: validateAndReturnNumber("BackCharRange", "stop", v.updated.stop),
           },
         })),
-        g = Fi("BackNextEditResult", "editing_score", r.editing_score),
-        m = Fi(
+        editingScore = validateAndReturnNumber("BackNextEditResult", "editing_score", result.editing_score),
+        localizationScore = validateAndReturnNumber(
           "BackNextEditResult",
           "localization_score",
-          r.localization_score,
+          result.localization_score,
         ),
-        y =
-          r.editing_score_threshold === undefined
+        editingScoreThreshold =
+          result.editing_score_threshold === undefined
             ? 1
-            : Fi(
+            : validateAndReturnNumber(
                 "BackNextEditResult",
                 "editing_score_threshold",
-                r.editing_score_threshold,
+                result.editing_score_threshold,
               )
       return {
-        suggestionId: n,
-        path: i,
-        blobName: s,
-        charStart: o,
-        charEnd: a,
-        existingCode: l,
-        suggestedCode: c,
-        truncationChar: u,
-        changeDescription: f,
-        diffSpans: p,
-        editingScore: g,
-        localizationScore: m,
-        editingScoreThreshold: y,
+        suggestionId: suggestionId,
+        path: path,
+        blobName: blobName,
+        charStart: charStart,
+        charEnd: charEnd,
+        existingCode: existingCode,
+        suggestedCode: suggestedCode,
+        truncationChar: truncationChar,
+        changeDescription: changeDescription,
+        diffSpans: diffSpans,
+        editingScore: editingScore,
+        localizationScore: localizationScore,
+        editingScoreThreshold: editingScoreThreshold,
       }
     }
-    async nextEditStream(r) {
-      let n = this._configListener.config,
-        i = n.nextEdit.model,
-        s = r.prefix ? getTextLength(r.prefix) : undefined,
-        o = {
-          model: i,
-          instruction: r.instruction ?? "",
-          prefix: r.prefix,
-          selected_text: r.selectedCode,
-          suffix: r.suffix,
-          selection_begin_char: s,
+    async nextEditStream(request) {
+      let config = this._configListener.config,
+        modelName = config.nextEdit.model,
+        selectionBeginChar = request.prefix ? getTextLength(request.prefix) : undefined,
+        requestData = {
+          model: modelName,
+          instruction: request.instruction ?? "",
+          prefix: request.prefix,
+          selected_text: request.selectedCode,
+          suffix: request.suffix,
+          selection_begin_char: selectionBeginChar,
           selection_end_char:
-            r.prefix !== undefined && r.selectedCode !== undefined
-              ? s + getTextLength(r.selectedCode)
+            request.prefix !== undefined && request.selectedCode !== undefined
+              ? selectionBeginChar + getTextLength(request.selectedCode)
               : undefined,
-          blob_name: r.blobName,
-          lang: r.language,
-          path: r.pathName?.relPath,
-          blobs: (r.blobs && Ua(r.blobs)) ?? {
+          blob_name: request.blobName,
+          lang: request.language,
+          path: request.pathName?.relPath,
+          blobs: (request.blobs && processBlobs(request.blobs)) ?? {
             checkpoint_id: undefined,
             added_blobs: [],
             deleted_blobs: [],
           },
-          recent_changes: r.recentChanges,
-          diagnostics: r.diagnostics,
-          vcs_change: Zp({ workingDirectory: [], commits: [] }),
-          edit_events: this.toFileDiffsPayload(r.fileEditEvents ?? []),
+          recent_changes: request.recentChanges,
+          diagnostics: request.diagnostics,
+          vcs_change: processVcsChanges({ workingDirectory: [], commits: [] }),
+          edit_events: this.toFileDiffsPayload(request.fileEditEvents ?? []),
           blocked_locations: this.toFileCharRangePayload(
-            r.blockedLocations ?? [],
+            request.blockedLocations ?? [],
           ),
-          mode: r.mode,
-          scope: r.scope,
+          mode: request.mode,
+          scope: request.scope,
           api_version: 3,
           sequence_id: this._sequenceId.next(),
-          client_created_at: r.clientCreatedAt,
-          unindexed_edit_events: this.toFileDiffsPayload(r.unindexedEditEvents),
+          client_created_at: request.clientCreatedAt,
+          unindexed_edit_events: this.toFileDiffsPayload(request.unindexedEditEvents),
           unindexed_edit_events_base_blob_names:
-            r.unindexedEditEventsBaseBlobNames,
+            request.unindexedEditEventsBaseBlobNames,
         }
       return await this.callApiStream(
-        r.requestId,
-        n,
+        request.requestId,
+        config,
         "next-edit-stream",
-        o,
+        requestData,
         this.convertToNextEditGenerationResult.bind(this),
-        n.nextEdit.generationUrl,
-        12e4,
+        config.nextEdit.generationUrl,
+        120000, // 2 minutes timeout
       )
     }
     getUniqueExtraURLs() {
-      let r = this._configListener.config,
-        n = new Set()
+      let config = this._configListener.config,
+        uniqueUrls = new Set()
       return (
-        r.nextEdit.url && n.add(r.nextEdit.url),
-        r.nextEdit.locationUrl && n.add(r.nextEdit.locationUrl),
-        r.nextEdit.generationUrl && n.add(r.nextEdit.generationUrl),
-        r.chat.url && n.add(r.chat.url),
-        n
+        config.nextEdit.url && uniqueUrls.add(config.nextEdit.url),
+        config.nextEdit.locationUrl && uniqueUrls.add(config.nextEdit.locationUrl),
+        config.nextEdit.generationUrl && uniqueUrls.add(config.nextEdit.generationUrl),
+        config.chat.url && uniqueUrls.add(config.chat.url),
+        uniqueUrls
       )
     }
-    toMemorizeResult(r) {
+    toMemorizeResult(result) {
       return {
         blobName:
-          r.blob_name !== undefined
-            ? di("BackMemorizeResult", "blob_name", r.blob_name)
-            : di("BackMemorizeResult", "mem_object_name", r.mem_object_name),
+          result.blob_name !== undefined
+            ? validateAndReturnString("BackMemorizeResult", "blob_name", result.blob_name)
+            : validateAndReturnString("BackMemorizeResult", "mem_object_name", result.mem_object_name),
       }
     }
-    async memorize(r, n, i, s, o) {
-      let a = this.createRequestId(),
-        l = this._configListener.config,
-        c = await this.callApi(
-          a,
-          l,
+    async memorize(path, text, blobName, metadata, timeoutMs) {
+      let requestId = this.createRequestId(),
+        config = this._configListener.config,
+        result = await this.callApi(
+          requestId,
+          config,
           "memorize",
           {
-            model: l.modelName,
-            path: r,
-            t: n,
-            blob_name: i,
-            metadata: s,
-            timeout_ms: o,
+            model: config.modelName,
+            path: path,
+            t: text,
+            blob_name: blobName,
+            metadata: metadata,
+            timeout_ms: timeoutMs,
           },
-          (u) => this.toMemorizeResult(u),
+          (response) => this.toMemorizeResult(response),
         )
-      for (let u of this.getUniqueExtraURLs())
+      for (let extraUrl of this.getUniqueExtraURLs())
         await this.callApi(
-          a,
-          l,
+          requestId,
+          config,
           "memorize",
-          { model: l.modelName, path: r, t: n, blob_name: i, metadata: s },
-          (f) => this.toMemorizeResult(f),
-          u,
+          { model: config.modelName, path: path, t: text, blob_name: blobName, metadata: metadata },
+          (response) => this.toMemorizeResult(response),
+          extraUrl,
         )
-      return c
+      return result
     }
-    toBatchUploadResult(r) {
-      return { blobNames: r.blob_names }
+    toBatchUploadResult(result) {
+      return { blobNames: result.blob_names }
     }
-    async batchUpload(r) {
-      let n = this.createRequestId(),
-        i = this._configListener.config
+    async batchUpload(blobs) {
+      let requestId = this.createRequestId(),
+        config = this._configListener.config
       try {
-        let s = await this.callApi(
-          n,
-          i,
+        let result = await this.callApi(
+          requestId,
+          config,
           "batch-upload",
           {
-            blobs: r.map((o) => ({
-              blob_name: o.blobName,
-              path: o.pathName,
-              content: o.text,
+            blobs: blobs.map((blob) => ({
+              blob_name: blob.blobName,
+              path: blob.pathName,
+              content: blob.text,
             })),
           },
           this.toBatchUploadResult.bind(this),
         )
-        for (let o of this.getUniqueExtraURLs())
+        for (let extraUrl of this.getUniqueExtraURLs())
           await this.callApi(
-            n,
-            i,
+            requestId,
+            config,
             "batch-upload",
             {
-              blobs: r.map((a) => ({
-                blob_name: a.blobName,
-                path: a.pathName,
-                content: a.text,
+              blobs: blobs.map((blob) => ({
+                blob_name: blob.blobName,
+                path: blob.pathName,
+                content: blob.text,
               })),
             },
             this.toBatchUploadResult.bind(this),
-            o,
+            extraUrl,
           )
-        return s
-      } catch (s) {
-        if (!Sr.isAPIErrorWithStatus(s, RequestStatus.unimplemented)) throw s
-        let o = []
-        for (let a of r) {
-          let l = await this.memorize(
-            a.pathName,
-            a.text,
-            a.blobName,
-            a.metadata,
+        return result
+      } catch (error) {
+        if (!ApiError.isAPIErrorWithStatus(error, RequestStatus.unimplemented)) throw error
+        let blobNames = []
+        for (let blob of blobs) {
+          let result = await this.memorize(
+            blob.pathName,
+            blob.text,
+            blob.blobName,
+            blob.metadata,
           )
-          o.push(l.blobName)
+          blobNames.push(result.blobName)
         }
-        return { blobNames: o }
+        return { blobNames: blobNames }
       }
     }
-    toFindMissingResult(r) {
+    toFindMissingResult(result) {
       return {
-        unknownBlobNames: La(
+        unknownBlobNames: validateAndReturnStringArray(
           "BackFindMissingResult",
           "unknown_memory_names",
-          r.unknown_memory_names,
+          result.unknown_memory_names,
         ),
-        nonindexedBlobNames: La(
+        nonindexedBlobNames: validateAndReturnStringArray(
           "BackFindMissingResult",
           "nonindexed_blob_names",
-          r.nonindexed_blob_names,
+          result.nonindexed_blob_names,
         ),
       }
     }
-    async findMissing(r) {
-      let n = this._configListener.config,
-        i = this.createRequestId(),
-        s = n.modelName,
-        o = [...r].sort(),
-        a = await this.callApi(
-          i,
-          n,
+    async findMissing(blobNames) {
+      let config = this._configListener.config,
+        requestId = this.createRequestId(),
+        modelName = config.modelName,
+        sortedBlobNames = [...blobNames].sort(),
+        result = await this.callApi(
+          requestId,
+          config,
           "find-missing",
-          { model: s, mem_object_names: o },
-          (l) => this.toFindMissingResult(l),
+          { model: modelName, mem_object_names: sortedBlobNames },
+          (response) => this.toFindMissingResult(response),
         )
-      for (let l of this.getUniqueExtraURLs()) {
-        let c = await this.callApi(
-          i,
-          n,
+      for (let extraUrl of this.getUniqueExtraURLs()) {
+        let extraResult = await this.callApi(
+          requestId,
+          config,
           "find-missing",
-          { model: s, mem_object_names: o },
-          (u) => this.toFindMissingResult(u),
-          l,
+          { model: modelName, mem_object_names: sortedBlobNames },
+          (response) => this.toFindMissingResult(response),
+          extraUrl,
         )
-        ;(a.unknownBlobNames = a.unknownBlobNames.concat(c.unknownBlobNames)),
-          (a.nonindexedBlobNames = a.nonindexedBlobNames.concat(
-            c.nonindexedBlobNames,
+        ;(result.unknownBlobNames = result.unknownBlobNames.concat(extraResult.unknownBlobNames)),
+          (result.nonindexedBlobNames = result.nonindexedBlobNames.concat(
+            extraResult.nonindexedBlobNames,
           ))
       }
-      return a
+      return result
     }
-    async resolveCompletions(r) {
-      let n = this.createRequestId(),
-        i = this._configListener.config
-      return await this.callApi(n, i, "resolve-completions", {
+    async resolveCompletions(resolutions) {
+      let requestId = this.createRequestId(),
+        config = this._configListener.config
+      return await this.callApi(requestId, config, "resolve-completions", {
         client_name: "vscode-extension",
-        resolutions: r,
+        resolutions: resolutions,
       })
     }
-    async logCodeEditResolution(r) {
-      let n = this.createRequestId(),
-        i = this._configListener.config
-      return await this.callApi(n, i, "resolve-edit", {
+    async logCodeEditResolution(resolution) {
+      let requestId = this.createRequestId(),
+        config = this._configListener.config
+      return await this.callApi(requestId, config, "resolve-edit", {
         client_name: "vscode-extension",
-        ...r,
+        ...resolution,
       })
     }
-    async logSmartPasteResolution(r) {
-      let n = this.createRequestId(),
-        i = this._configListener.config
-      return await this.callApi(n, i, "resolve-smart-paste", {
+    async logSmartPasteResolution(resolution) {
+      let requestId = this.createRequestId(),
+        config = this._configListener.config
+      return await this.callApi(requestId, config, "resolve-smart-paste", {
         client_name: "vscode-extension",
-        ...r,
+        ...resolution,
       })
     }
-    async logInstructionResolution(r) {
-      let n = this.createRequestId(),
-        i = this._configListener.config
-      return await this.callApi(n, i, "resolve-instruction", {
+    async logInstructionResolution(resolution) {
+      let requestId = this.createRequestId(),
+        config = this._configListener.config
+      return await this.callApi(requestId, config, "resolve-instruction", {
         client_name: "vscode-extension",
-        ...r,
+        ...resolution,
       })
     }
-    async resolveNextEdits(r) {
-      let n = this.createRequestId(),
-        i = this._configListener.config
+    async resolveNextEdits(resolution) {
+      let requestId = this.createRequestId(),
+        config = this._configListener.config
       return await this.callApi(
-        n,
-        i,
+        requestId,
+        config,
         "resolve-next-edit",
-        { client_name: "vscode-extension", resolutions: r },
+        { client_name: "vscode-extension", resolutions: resolution },
         undefined,
-        i.nextEdit.url,
+        config.nextEdit.url,
       )
     }
-    async logNextEditSessionEvent(r) {
-      let n = this.createRequestId(),
-        i = this._configListener.config
+    async logNextEditSessionEvent(events) {
+      let requestId = this.createRequestId(),
+        config = this._configListener.config
       return await this.callApi(
-        n,
-        i,
+        requestId,
+        config,
         "record-session-events",
         {
           client_name: "vscode-extension",
-          events: r.map((s) => ({
+          events: events.map((event) => ({
             time: new Date(
-              s.event_time_sec * 1e3 + s.event_time_nsec / 1e6,
+              event.event_time_sec * 1e3 + event.event_time_nsec / 1e6,
             ).toISOString(),
             event: {
-              next_edit_session_event: { ...s, user_agent: this._userAgent },
+              next_edit_session_event: { ...event, user_agent: this._userAgent },
             },
           })),
         },
         undefined,
-        i.nextEdit.url,
+        config.nextEdit.url,
       )
     }
-    async logOnboardingSessionEvent(r) {
-      let n = this.createRequestId(),
-        i = this._configListener.config
+    async logOnboardingSessionEvent(events) {
+      let requestId = this.createRequestId(),
+        config = this._configListener.config
       return await this.callApi(
-        n,
-        i,
+        requestId,
+        config,
         "record-session-events",
         {
           client_name: "vscode-extension",
-          events: r.map((s) => ({
+          events: events.map((event) => ({
             time: new Date(
-              s.event_time_sec * 1e3 + s.event_time_nsec / 1e6,
+              event.event_time_sec * 1e3 + event.event_time_nsec / 1e6,
             ).toISOString(),
             event: {
-              onboarding_session_event: { ...s, user_agent: this._userAgent },
-            },
-          })),
-        },
-        undefined,
-      )
-    }
-    async logAgentSessionEvent(r) {
-      let n = this.createRequestId(),
-        i = this._configListener.config
-      return await this.callApi(
-        n,
-        i,
-        "record-session-events",
-        {
-          client_name: "vscode-extension",
-          events: r.map((s) => ({
-            time: new Date(
-              s.event_time_sec * 1e3 + s.event_time_nsec / 1e6,
-            ).toISOString(),
-            event: {
-              agent_session_event: { ...s, user_agent: this._userAgent },
+              onboarding_session_event: { ...event, user_agent: this._userAgent },
             },
           })),
         },
         undefined,
       )
     }
-    async logRemoteAgentSessionEvent(r) {
-      let n = this.createRequestId(),
-        i = this._configListener.config
+    async logAgentSessionEvent(events) {
+      let requestId = this.createRequestId(),
+        config = this._configListener.config
       return await this.callApi(
-        n,
-        i,
+        requestId,
+        config,
         "record-session-events",
         {
           client_name: "vscode-extension",
-          events: r.map((s) => ({
+          events: events.map((event) => ({
             time: new Date(
-              s.event_time_sec * 1e3 + s.event_time_nsec / 1e6,
+              event.event_time_sec * 1e3 + event.event_time_nsec / 1e6,
             ).toISOString(),
             event: {
-              remote_agent_session_event: { ...s, user_agent: this._userAgent },
+              agent_session_event: { ...event, user_agent: this._userAgent },
             },
           })),
         },
         undefined,
       )
     }
-    async logAgentRequestEvent(r) {
-      let n = new Map()
-      for (let i of r) {
-        let s = n.get(i.request_id) || []
-        n.has(i.request_id) || n.set(i.request_id, s)
-        let { request_id: o, ...a } = i
-        s.push(a)
+    async logRemoteAgentSessionEvent(events) {
+      let requestId = this.createRequestId(),
+        config = this._configListener.config
+      return await this.callApi(
+        requestId,
+        config,
+        "record-session-events",
+        {
+          client_name: "vscode-extension",
+          events: events.map((event) => ({
+            time: new Date(
+              event.event_time_sec * 1e3 + event.event_time_nsec / 1e6,
+            ).toISOString(),
+            event: {
+              remote_agent_session_event: { ...event, user_agent: this._userAgent },
+            },
+          })),
+        },
+        undefined,
+      )
+    }
+    async logAgentRequestEvent(events) {
+      let requestIdToEvents = new Map()
+      for (let event of events) {
+        let eventList = requestIdToEvents.get(event.request_id) || []
+        requestIdToEvents.has(event.request_id) || requestIdToEvents.set(event.request_id, eventList)
+        let { request_id: o, ...eventWithoutRequestId } = event
+        eventList.push(eventWithoutRequestId)
       }
-      for (let [i, s] of n) {
-        let o = this._configListener.config
+      for (let [requestId, requestEvents] of requestIdToEvents) {
+        let config = this._configListener.config
         await this.callApi(
-          i,
-          o,
+          requestId,
+          config,
           "record-request-events",
           {
-            events: s.map((a) => ({
+            events: requestEvents.map((event) => ({
               time: new Date(
-                a.event_time_sec * 1e3 + a.event_time_nsec / 1e6,
+                event.event_time_sec * 1e3 + event.event_time_nsec / 1e6,
               ).toISOString(),
               event: {
-                agent_request_event: { ...a, user_agent: this._userAgent },
+                agent_request_event: { ...event, user_agent: this._userAgent },
               },
             })),
           },
@@ -81827,55 +81827,55 @@ var rM = class extends Error {
         )
       }
     }
-    async logExtensionSessionEvent(r) {
-      let n = this.createRequestId(),
-        i = this._configListener.config
+    async logExtensionSessionEvent(events) {
+      let requestId = this.createRequestId(),
+        config = this._configListener.config
       return await this.callApi(
-        n,
-        i,
+        requestId,
+        config,
         "record-session-events",
         {
           client_name: "vscode-extension",
-          events: r.map((s) => ({
-            time: s.time_iso,
+          events: events.map((event) => ({
+            time: event.time_iso,
             event: {
-              extension_session_event: { ...s, user_agent: this._userAgent },
+              extension_session_event: { ...event, user_agent: this._userAgent },
             },
           })),
         },
         undefined,
       )
     }
-    async logToolUseRequestEvent(r) {
-      let n = new Map()
-      for (let i of r) {
-        let s = n.get(i.requestId)
-        s === undefined ? n.set(i.requestId, [i]) : s.push(i)
+    async logToolUseRequestEvent(events) {
+      let requestIdMap = new Map()
+      for (let event of events) {
+        let eventList = requestIdMap.get(event.requestId)
+        eventList === undefined ? requestIdMap.set(event.requestId, [event]) : eventList.push(event)
       }
-      for (let [i, s] of n) {
-        let o = this._configListener.config
+      for (let [requestId, requestEvents] of requestIdMap) {
+        let config = this._configListener.config
         await this.callApi(
-          i,
-          o,
+          requestId,
+          config,
           "record-request-events",
           {
-            events: s.map((a) => {
-              let l = {
-                tool_name: a.toolName,
-                tool_use_id: a.toolUseId,
-                tool_output_is_error: a.toolOutputIsError,
-                tool_run_duration_ms: a.toolRunDurationMs,
-                tool_input: JSON.stringify(a.toolInput),
-                is_mcp_tool: a.isMcpTool,
-                conversation_id: a.conversationId,
-                chat_history_length: a.chatHistoryLength,
-                tool_request_id: a.toolRequestId,
+            events: requestEvents.map((event) => {
+              let toolData = {
+                tool_name: event.toolName,
+                tool_use_id: event.toolUseId,
+                tool_output_is_error: event.toolOutputIsError,
+                tool_run_duration_ms: event.toolRunDurationMs,
+                tool_input: JSON.stringify(event.toolInput),
+                is_mcp_tool: event.isMcpTool,
+                conversation_id: event.conversationId,
+                chat_history_length: event.chatHistoryLength,
+                tool_request_id: event.toolRequestId,
               }
               return {
                 time: new Date(
-                  a.eventTimeSec * 1e3 + a.eventTimeNsec / 1e6,
+                  event.eventTimeSec * 1e3 + event.eventTimeNsec / 1e6,
                 ).toISOString(),
-                event: { tool_use_data: l },
+                event: { tool_use_data: toolData },
               }
             }),
           },
@@ -81883,743 +81883,743 @@ var rM = class extends Error {
         )
       }
     }
-    async recordPreferenceSample(r) {
-      let n = this.createRequestId(),
-        i = this._configListener.config
-      return await this.callApi(n, i, "record-preference-sample", {
+    async recordPreferenceSample(sample) {
+      let requestId = this.createRequestId(),
+        config = this._configListener.config
+      return await this.callApi(requestId, config, "record-preference-sample", {
         client_name: "vscode-extension",
-        ...r,
+        ...sample,
       })
     }
-    toModel(r) {
-      let n =
-        r.completion_timeout_ms !== undefined
-          ? Fi(
+    toModel(modelInfo) {
+      let completionTimeoutMs =
+        modelInfo.completion_timeout_ms !== undefined
+          ? validateAndReturnNumber(
               "BackModelInfo",
               "completion_timeout_ms",
-              r.completion_timeout_ms,
+              modelInfo.completion_timeout_ms,
             )
           : undefined
       return {
-        name: di("BackModelInfo", "name", r.name),
-        suggestedPrefixCharCount: Fi(
+        name: validateAndReturnString("BackModelInfo", "name", modelInfo.name),
+        suggestedPrefixCharCount: validateAndReturnNumber(
           "BackModelInfo",
           "suggested_prefix_char_count",
-          r.suggested_prefix_char_count,
+          modelInfo.suggested_prefix_char_count,
         ),
-        suggestedSuffixCharCount: Fi(
+        suggestedSuffixCharCount: validateAndReturnNumber(
           "BackModelInfo",
           "suggested_suffix_char_count",
-          r.suggested_suffix_char_count,
+          modelInfo.suggested_suffix_char_count,
         ),
-        completionTimeoutMs: n,
+        completionTimeoutMs: completionTimeoutMs,
         internalName:
-          r.internal_name &&
-          di("BackModelInfo", "internal_name", r.internal_name),
+          modelInfo.internal_name &&
+          validateAndReturnString("BackModelInfo", "internal_name", modelInfo.internal_name),
       }
     }
-    toLanguage(r) {
-      let n = di("BackLanguageInfo", "name", r.name),
-        i = di("BackLanguageInfo", "vscodeName", r.vscode_name)
-      Dy("BackLanguageInfo", "extensions", r.extensions)
-      let s = []
-      for (let o of r.extensions)
-        s.push(di("BackLanguageInfo", "extensions", o))
-      return { name: n, vscodeName: i, extensions: s }
+    toLanguage(languageInfo) {
+      let name = validateAndReturnString("BackLanguageInfo", "name", languageInfo.name),
+        vscodeName = validateAndReturnString("BackLanguageInfo", "vscodeName", languageInfo.vscode_name)
+      validateIsArray("BackLanguageInfo", "extensions", languageInfo.extensions)
+      let extensions = []
+      for (let extension of languageInfo.extensions)
+        extensions.push(validateAndReturnString("BackLanguageInfo", "extensions", extension))
+      return { name: name, vscodeName: vscodeName, extensions: extensions }
     }
-    toGetModelsResult(r) {
-      let n = di("BackGetModelsResult", "default_model", r.default_model)
-      Dy("BackGetModelsResult", "models", r.models)
-      let i = []
-      for (let l of r.models) i.push(this.toModel(l))
-      let s = fm
-      if (r.feature_flags !== undefined) {
-        let l = r.feature_flags.git_diff_polling_freq_msec
+    toGetModelsResult(result) {
+      let defaultModel = validateAndReturnString("BackGetModelsResult", "default_model", result.default_model)
+      validateIsArray("BackGetModelsResult", "models", result.models)
+      let models = []
+      for (let modelInfo of result.models) models.push(this.toModel(modelInfo))
+      let featureFlags = defaultFeatureFlags
+      if (result.feature_flags !== undefined) {
+        let gitDiffPollingFreqMsec = result.feature_flags.git_diff_polling_freq_msec
         if (
-          (l !== undefined &&
-            l > 0 &&
-            ((s.gitDiff = true), (s.gitDiffPollingFrequencyMSec = l)),
-          r.feature_flags.small_sync_threshold !== undefined &&
-            (s.smallSyncThreshold = r.feature_flags.small_sync_threshold),
-          r.feature_flags.big_sync_threshold !== undefined &&
-            (s.bigSyncThreshold = r.feature_flags.big_sync_threshold),
-          r.feature_flags.enable_workspace_manager_ui_launch !== undefined &&
-            (s.enableWorkspaceManagerUi =
-              r.feature_flags.enable_workspace_manager_ui_launch),
-          r.feature_flags.enable_instructions !== undefined &&
-            (s.enableInstructions = r.feature_flags.enable_instructions),
-          r.feature_flags.enable_smart_paste !== undefined &&
-            (s.enableSmartPaste = r.feature_flags.enable_smart_paste),
-          r.feature_flags.enable_smart_paste_min_version !== undefined &&
-            (s.enableSmartPasteMinVersion =
-              r.feature_flags.enable_smart_paste_min_version),
-          r.feature_flags.enable_view_text_document !== undefined &&
-            (s.enableViewTextDocument =
-              r.feature_flags.enable_view_text_document),
-          r.feature_flags.bypass_language_filter !== undefined &&
-            (s.bypassLanguageFilter = r.feature_flags.bypass_language_filter),
-          r.feature_flags.additional_chat_models !== undefined &&
-            (s.additionalChatModels = r.feature_flags.additional_chat_models),
-          r.feature_flags.enable_hindsight !== undefined &&
-            (s.enableHindsight = r.feature_flags.enable_hindsight),
-          r.feature_flags.max_upload_size_bytes !== undefined &&
-            (s.maxUploadSizeBytes = r.feature_flags.max_upload_size_bytes),
-          r.feature_flags.vscode_next_edit_min_version !== undefined &&
-            (s.vscodeNextEditMinVersion =
-              r.feature_flags.vscode_next_edit_min_version),
-          r.feature_flags.vscode_flywheel_min_version !== undefined &&
-            (s.vscodeFlywheelMinVersion =
-              r.feature_flags.vscode_flywheel_min_version),
-          r.feature_flags.vscode_external_sources_in_chat_min_version !==
+          (gitDiffPollingFreqMsec !== undefined &&
+            gitDiffPollingFreqMsec > 0 &&
+            ((featureFlags.gitDiff = true), (featureFlags.gitDiffPollingFrequencyMSec = gitDiffPollingFreqMsec)),
+          result.feature_flags.small_sync_threshold !== undefined &&
+            (featureFlags.smallSyncThreshold = result.feature_flags.small_sync_threshold),
+          result.feature_flags.big_sync_threshold !== undefined &&
+            (featureFlags.bigSyncThreshold = result.feature_flags.big_sync_threshold),
+          result.feature_flags.enable_workspace_manager_ui_launch !== undefined &&
+            (featureFlags.enableWorkspaceManagerUi =
+              result.feature_flags.enable_workspace_manager_ui_launch),
+          result.feature_flags.enable_instructions !== undefined &&
+            (featureFlags.enableInstructions = result.feature_flags.enable_instructions),
+          result.feature_flags.enable_smart_paste !== undefined &&
+            (featureFlags.enableSmartPaste = result.feature_flags.enable_smart_paste),
+          result.feature_flags.enable_smart_paste_min_version !== undefined &&
+            (featureFlags.enableSmartPasteMinVersion =
+              result.feature_flags.enable_smart_paste_min_version),
+          result.feature_flags.enable_view_text_document !== undefined &&
+            (featureFlags.enableViewTextDocument =
+              result.feature_flags.enable_view_text_document),
+          result.feature_flags.bypass_language_filter !== undefined &&
+            (featureFlags.bypassLanguageFilter = result.feature_flags.bypass_language_filter),
+          result.feature_flags.additional_chat_models !== undefined &&
+            (featureFlags.additionalChatModels = result.feature_flags.additional_chat_models),
+          result.feature_flags.enable_hindsight !== undefined &&
+            (featureFlags.enableHindsight = result.feature_flags.enable_hindsight),
+          result.feature_flags.max_upload_size_bytes !== undefined &&
+            (featureFlags.maxUploadSizeBytes = result.feature_flags.max_upload_size_bytes),
+          result.feature_flags.vscode_next_edit_min_version !== undefined &&
+            (featureFlags.vscodeNextEditMinVersion =
+              result.feature_flags.vscode_next_edit_min_version),
+          result.feature_flags.vscode_flywheel_min_version !== undefined &&
+            (featureFlags.vscodeFlywheelMinVersion =
+              result.feature_flags.vscode_flywheel_min_version),
+          result.feature_flags.vscode_external_sources_in_chat_min_version !==
             undefined &&
-            (s.vscodeExternalSourcesInChatMinVersion =
-              r.feature_flags.vscode_external_sources_in_chat_min_version),
-          r.feature_flags.vscode_share_min_version !== undefined &&
-            (s.vscodeShareMinVersion =
-              r.feature_flags.vscode_share_min_version),
-          r.feature_flags.max_trackable_file_count !== undefined &&
-            (s.maxTrackableFileCount =
-              r.feature_flags.max_trackable_file_count),
-          r.feature_flags.max_trackable_file_count_without_permission !==
+            (featureFlags.vscodeExternalSourcesInChatMinVersion =
+              result.feature_flags.vscode_external_sources_in_chat_min_version),
+          result.feature_flags.vscode_share_min_version !== undefined &&
+            (featureFlags.vscodeShareMinVersion =
+              result.feature_flags.vscode_share_min_version),
+          result.feature_flags.max_trackable_file_count !== undefined &&
+            (featureFlags.maxTrackableFileCount =
+              result.feature_flags.max_trackable_file_count),
+          result.feature_flags.max_trackable_file_count_without_permission !==
             undefined &&
-            (s.maxTrackableFileCountWithoutPermission =
-              r.feature_flags.max_trackable_file_count_without_permission),
-          r.feature_flags.min_uploaded_percentage_without_permission !==
+            (featureFlags.maxTrackableFileCountWithoutPermission =
+              result.feature_flags.max_trackable_file_count_without_permission),
+          result.feature_flags.min_uploaded_percentage_without_permission !==
             undefined &&
-            (s.minUploadedPercentageWithoutPermission =
-              r.feature_flags.min_uploaded_percentage_without_permission),
-          r.feature_flags.vscode_sources_min_version !== undefined &&
-            (s.vscodeSourcesMinVersion =
-              r.feature_flags.vscode_sources_min_version),
-          r.feature_flags.vscode_chat_hint_decoration_min_version !== undefined &&
-            (s.vscodeChatHintDecorationMinVersion =
-              r.feature_flags.vscode_chat_hint_decoration_min_version),
-          r.feature_flags.next_edit_debounce_ms !== undefined &&
-            (s.nextEditDebounceMs = r.feature_flags.next_edit_debounce_ms),
-          r.feature_flags.enable_completion_file_edit_events !== undefined &&
-            (s.enableCompletionFileEditEvents =
-              r.feature_flags.enable_completion_file_edit_events),
-          r.feature_flags.vscode_enable_cpu_profile !== undefined &&
-            (s.vscodeEnableCpuProfile =
-              r.feature_flags.vscode_enable_cpu_profile),
-          r.feature_flags.verify_folder_is_source_repo !== undefined &&
-            (s.verifyFolderIsSourceRepo =
-              r.feature_flags.verify_folder_is_source_repo),
-          r.feature_flags.refuse_to_sync_home_directories !== undefined &&
-            (s.refuseToSyncHomeDirectories =
-              r.feature_flags.refuse_to_sync_home_directories),
-          r.feature_flags.enable_file_limits_for_syncing_permission !==
+            (featureFlags.minUploadedPercentageWithoutPermission =
+              result.feature_flags.min_uploaded_percentage_without_permission),
+          result.feature_flags.vscode_sources_min_version !== undefined &&
+            (featureFlags.vscodeSourcesMinVersion =
+              result.feature_flags.vscode_sources_min_version),
+          result.feature_flags.vscode_chat_hint_decoration_min_version !== undefined &&
+            (featureFlags.vscodeChatHintDecorationMinVersion =
+              result.feature_flags.vscode_chat_hint_decoration_min_version),
+          result.feature_flags.next_edit_debounce_ms !== undefined &&
+            (featureFlags.nextEditDebounceMs = result.feature_flags.next_edit_debounce_ms),
+          result.feature_flags.enable_completion_file_edit_events !== undefined &&
+            (featureFlags.enableCompletionFileEditEvents =
+              result.feature_flags.enable_completion_file_edit_events),
+          result.feature_flags.vscode_enable_cpu_profile !== undefined &&
+            (featureFlags.vscodeEnableCpuProfile =
+              result.feature_flags.vscode_enable_cpu_profile),
+          result.feature_flags.verify_folder_is_source_repo !== undefined &&
+            (featureFlags.verifyFolderIsSourceRepo =
+              result.feature_flags.verify_folder_is_source_repo),
+          result.feature_flags.refuse_to_sync_home_directories !== undefined &&
+            (featureFlags.refuseToSyncHomeDirectories =
+              result.feature_flags.refuse_to_sync_home_directories),
+          result.feature_flags.enable_file_limits_for_syncing_permission !==
             undefined &&
-            (s.enableFileLimitsForSyncingPermission =
-              r.feature_flags.enable_file_limits_for_syncing_permission),
-          r.feature_flags.enable_chat_mermaid_diagrams !== undefined &&
-            (s.enableChatMermaidDiagrams =
-              r.feature_flags.enable_chat_mermaid_diagrams),
-          r.feature_flags.enable_summary_titles !== undefined &&
-            (s.enableSummaryTitles = r.feature_flags.enable_summary_titles),
-          r.feature_flags.smart_paste_precompute_mode !== undefined &&
-            (s.smartPastePrecomputeMode =
-              r.feature_flags.smart_paste_precompute_mode),
-          r.feature_flags.vscode_new_threads_menu_min_version !== undefined &&
-            (s.vscodeNewThreadsMenuMinVersion =
-              r.feature_flags.vscode_new_threads_menu_min_version),
-          r.feature_flags.vscode_editable_history_min_version !== undefined &&
-            (s.vscodeEditableHistoryMinVersion =
-              r.feature_flags.vscode_editable_history_min_version),
-          r.feature_flags.vscode_enable_chat_mermaid_diagrams_min_version !==
+            (featureFlags.enableFileLimitsForSyncingPermission =
+              result.feature_flags.enable_file_limits_for_syncing_permission),
+          result.feature_flags.enable_chat_mermaid_diagrams !== undefined &&
+            (featureFlags.enableChatMermaidDiagrams =
+              result.feature_flags.enable_chat_mermaid_diagrams),
+          result.feature_flags.enable_summary_titles !== undefined &&
+            (featureFlags.enableSummaryTitles = result.feature_flags.enable_summary_titles),
+          result.feature_flags.smart_paste_precompute_mode !== undefined &&
+            (featureFlags.smartPastePrecomputeMode =
+              result.feature_flags.smart_paste_precompute_mode),
+          result.feature_flags.vscode_new_threads_menu_min_version !== undefined &&
+            (featureFlags.vscodeNewThreadsMenuMinVersion =
+              result.feature_flags.vscode_new_threads_menu_min_version),
+          result.feature_flags.vscode_editable_history_min_version !== undefined &&
+            (featureFlags.vscodeEditableHistoryMinVersion =
+              result.feature_flags.vscode_editable_history_min_version),
+          result.feature_flags.vscode_enable_chat_mermaid_diagrams_min_version !==
             undefined &&
-            (s.vscodeEnableChatMermaidDiagramsMinVersion =
-              r.feature_flags.vscode_enable_chat_mermaid_diagrams_min_version),
-          r.feature_flags.enable_guidelines !== undefined &&
-            (s.enableGuidelines = r.feature_flags.enable_guidelines),
-          r.feature_flags.vscode_use_checkpoint_manager_context_min_version !==
+            (featureFlags.vscodeEnableChatMermaidDiagramsMinVersion =
+              result.feature_flags.vscode_enable_chat_mermaid_diagrams_min_version),
+          result.feature_flags.enable_guidelines !== undefined &&
+            (featureFlags.enableGuidelines = result.feature_flags.enable_guidelines),
+          result.feature_flags.vscode_use_checkpoint_manager_context_min_version !==
             undefined &&
-            (s.useCheckpointManagerContextMinVersion =
-              r.feature_flags.vscode_use_checkpoint_manager_context_min_version),
-          r.feature_flags.vscode_validate_checkpoint_manager_context !==
+            (featureFlags.useCheckpointManagerContextMinVersion =
+              result.feature_flags.vscode_use_checkpoint_manager_context_min_version),
+          result.feature_flags.vscode_validate_checkpoint_manager_context !==
             undefined &&
-            (s.validateCheckpointManagerContext =
-              r.feature_flags.vscode_validate_checkpoint_manager_context),
-          r.feature_flags.vscode_design_system_rich_text_editor_min_version !==
+            (featureFlags.validateCheckpointManagerContext =
+              result.feature_flags.vscode_validate_checkpoint_manager_context),
+          result.feature_flags.vscode_design_system_rich_text_editor_min_version !==
             undefined &&
-            (s.vscodeDesignSystemRichTextEditorMinVersion =
-              r.feature_flags.vscode_design_system_rich_text_editor_min_version),
-          r.feature_flags.allow_client_feature_flag_overrides !== undefined &&
-            (s.allowClientFeatureFlagOverrides =
-              r.feature_flags.allow_client_feature_flag_overrides),
-          r.feature_flags.vscode_chat_with_tools_min_version !== undefined &&
-            (s.vscodeChatWithToolsMinVersion =
-              r.feature_flags.vscode_chat_with_tools_min_version),
-          r.feature_flags.vscode_agent_mode_min_version !== undefined &&
-            (s.vscodeAgentModeMinVersion =
-              r.feature_flags.vscode_agent_mode_min_version),
-          r.feature_flags.vscode_agent_mode_min_stable_version !== undefined &&
-            (s.vscodeAgentModeMinStableVersion =
-              r.feature_flags.vscode_agent_mode_min_stable_version),
-          r.feature_flags.vscode_background_agents_min_version !== undefined &&
-            (s.vscodeBackgroundAgentsMinVersion =
-              r.feature_flags.vscode_background_agents_min_version),
-          r.feature_flags.vscode_agent_edit_tool !== undefined &&
-            (s.vscodeAgentEditTool = r.feature_flags.vscode_agent_edit_tool),
-          r.feature_flags.memories_params !== undefined)
+            (featureFlags.vscodeDesignSystemRichTextEditorMinVersion =
+              result.feature_flags.vscode_design_system_rich_text_editor_min_version),
+          result.feature_flags.allow_client_feature_flag_overrides !== undefined &&
+            (featureFlags.allowClientFeatureFlagOverrides =
+              result.feature_flags.allow_client_feature_flag_overrides),
+          result.feature_flags.vscode_chat_with_tools_min_version !== undefined &&
+            (featureFlags.vscodeChatWithToolsMinVersion =
+              result.feature_flags.vscode_chat_with_tools_min_version),
+          result.feature_flags.vscode_agent_mode_min_version !== undefined &&
+            (featureFlags.vscodeAgentModeMinVersion =
+              result.feature_flags.vscode_agent_mode_min_version),
+          result.feature_flags.vscode_agent_mode_min_stable_version !== undefined &&
+            (featureFlags.vscodeAgentModeMinStableVersion =
+              result.feature_flags.vscode_agent_mode_min_stable_version),
+          result.feature_flags.vscode_background_agents_min_version !== undefined &&
+            (featureFlags.vscodeBackgroundAgentsMinVersion =
+              result.feature_flags.vscode_background_agents_min_version),
+          result.feature_flags.vscode_agent_edit_tool !== undefined &&
+            (featureFlags.vscodeAgentEditTool = result.feature_flags.vscode_agent_edit_tool),
+          result.feature_flags.memories_params !== undefined)
         )
           try {
-            s.memoriesParams = JSON.parse(r.feature_flags.memories_params)
+            featureFlags.memoriesParams = JSON.parse(result.feature_flags.memories_params)
           } catch {
             this._logger.error('Parsing of "memories_params" failed.')
           }
-        if (r.feature_flags.elo_model_configuration !== undefined)
+        if (result.feature_flags.elo_model_configuration !== undefined)
           try {
-            s.eloModelConfiguration = JSON.parse(
-              r.feature_flags.elo_model_configuration,
+            featureFlags.eloModelConfiguration = JSON.parse(
+              result.feature_flags.elo_model_configuration,
             )
           } catch {
             this._logger.error('Parsing of "elo_model_configuration" failed.')
           }
-        r.feature_flags.vscode_chat_stable_prefix_truncation_min_version !==
+        result.feature_flags.vscode_chat_stable_prefix_truncation_min_version !==
           undefined &&
-          (s.vscodeChatStablePrefixTruncationMinVersion =
-            r.feature_flags.vscode_chat_stable_prefix_truncation_min_version),
-          r.feature_flags.vscode_direct_apply_min_version !== undefined &&
-            (s.vscodeDirectApplyMinVersion =
-              r.feature_flags.vscode_direct_apply_min_version),
-          r.feature_flags.vscode_next_edit_bottom_panel_min_version !==
+          (featureFlags.vscodeChatStablePrefixTruncationMinVersion =
+            result.feature_flags.vscode_chat_stable_prefix_truncation_min_version),
+          result.feature_flags.vscode_direct_apply_min_version !== undefined &&
+            (featureFlags.vscodeDirectApplyMinVersion =
+              result.feature_flags.vscode_direct_apply_min_version),
+          result.feature_flags.vscode_next_edit_bottom_panel_min_version !==
             undefined &&
-            (s.vscodeNextEditBottomPanelMinVersion =
-              r.feature_flags.vscode_next_edit_bottom_panel_min_version),
-          r.feature_flags.vscode_chat_multimodal_min_version !== undefined &&
-            (s.vscodeChatMultimodalMinVersion =
-              r.feature_flags.vscode_chat_multimodal_min_version),
-          r.feature_flags.workspace_guidelines_length_limit !== undefined &&
-            (s.workspaceGuidelinesLengthLimit =
-              r.feature_flags.workspace_guidelines_length_limit),
-          r.feature_flags.user_guidelines_length_limit !== undefined &&
-            (s.userGuidelinesLengthLimit =
-              r.feature_flags.user_guidelines_length_limit),
-          r.feature_flags.vscode_rich_checkpoint_info_min_version !== undefined &&
-            (s.vscodeRichCheckpointInfoMinVersion =
-              r.feature_flags.vscode_rich_checkpoint_info_min_version),
-          r.feature_flags.vscode_virtualized_message_list_min_version !==
+            (featureFlags.vscodeNextEditBottomPanelMinVersion =
+              result.feature_flags.vscode_next_edit_bottom_panel_min_version),
+          result.feature_flags.vscode_chat_multimodal_min_version !== undefined &&
+            (featureFlags.vscodeChatMultimodalMinVersion =
+              result.feature_flags.vscode_chat_multimodal_min_version),
+          result.feature_flags.workspace_guidelines_length_limit !== undefined &&
+            (featureFlags.workspaceGuidelinesLengthLimit =
+              result.feature_flags.workspace_guidelines_length_limit),
+          result.feature_flags.user_guidelines_length_limit !== undefined &&
+            (featureFlags.userGuidelinesLengthLimit =
+              result.feature_flags.user_guidelines_length_limit),
+          result.feature_flags.vscode_rich_checkpoint_info_min_version !== undefined &&
+            (featureFlags.vscodeRichCheckpointInfoMinVersion =
+              result.feature_flags.vscode_rich_checkpoint_info_min_version),
+          result.feature_flags.vscode_virtualized_message_list_min_version !==
             undefined &&
-            (s.vscodeVirtualizedMessageListMinVersion =
-              r.feature_flags.vscode_virtualized_message_list_min_version),
-          r.feature_flags.agent_edit_tool_min_view_size !== undefined &&
-            (s.agentEditToolMinViewSize =
-              r.feature_flags.agent_edit_tool_min_view_size),
-          r.feature_flags.agent_edit_tool_schema_type !== undefined &&
-            (s.agentEditToolSchemaType =
-              r.feature_flags.agent_edit_tool_schema_type),
-          r.feature_flags.vscode_personalities_min_version !== undefined &&
-            (s.vscodePersonalitiesMinVersion =
-              r.feature_flags.vscode_personalities_min_version),
-          r.feature_flags.memory_classification_on_first_token !== undefined &&
-            (s.memoryClassificationOnFirstToken =
-              r.feature_flags.memory_classification_on_first_token),
-          r.feature_flags.agent_save_file_tool_instructions_reminder !==
+            (featureFlags.vscodeVirtualizedMessageListMinVersion =
+              result.feature_flags.vscode_virtualized_message_list_min_version),
+          result.feature_flags.agent_edit_tool_min_view_size !== undefined &&
+            (featureFlags.agentEditToolMinViewSize =
+              result.feature_flags.agent_edit_tool_min_view_size),
+          result.feature_flags.agent_edit_tool_schema_type !== undefined &&
+            (featureFlags.agentEditToolSchemaType =
+              result.feature_flags.agent_edit_tool_schema_type),
+          result.feature_flags.vscode_personalities_min_version !== undefined &&
+            (featureFlags.vscodePersonalitiesMinVersion =
+              result.feature_flags.vscode_personalities_min_version),
+          result.feature_flags.memory_classification_on_first_token !== undefined &&
+            (featureFlags.memoryClassificationOnFirstToken =
+              result.feature_flags.memory_classification_on_first_token),
+          result.feature_flags.agent_save_file_tool_instructions_reminder !==
             undefined &&
-            (s.agentSaveFileToolInstructionsReminder =
-              r.feature_flags.agent_save_file_tool_instructions_reminder),
-          r.feature_flags.use_memory_snapshot_manager !== undefined &&
-            (s.useMemorySnapshotManager =
-              r.feature_flags.use_memory_snapshot_manager),
-          r.feature_flags.vscode_generate_commit_message_min_version !==
+            (featureFlags.agentSaveFileToolInstructionsReminder =
+              result.feature_flags.agent_save_file_tool_instructions_reminder),
+          result.feature_flags.use_memory_snapshot_manager !== undefined &&
+            (featureFlags.useMemorySnapshotManager =
+              result.feature_flags.use_memory_snapshot_manager),
+          result.feature_flags.vscode_generate_commit_message_min_version !==
             undefined &&
-            (s.vscodeGenerateCommitMessageMinVersion =
-              r.feature_flags.vscode_generate_commit_message_min_version)
+            (featureFlags.vscodeGenerateCommitMessageMinVersion =
+              result.feature_flags.vscode_generate_commit_message_min_version)
       }
-      let o = []
-      if (r.languages === undefined) o = pG
+      let languages = []
+      if (result.languages === undefined) languages = supportedLanguages
       else {
-        Dy("BackGetModelsResult", "languages", r.languages), (o = [])
-        for (let l of r.languages) o.push(this.toLanguage(l))
+        validateIsArray("BackGetModelsResult", "languages", result.languages), (languages = [])
+        for (let languageInfo of result.languages) languages.push(this.toLanguage(languageInfo))
       }
-      let a = r.user_tier?.toLowerCase().replace("_tier", "") ?? "unknown"
+      let userTier = result.user_tier?.toLowerCase().replace("_tier", "") ?? "unknown"
       return {
-        defaultModel: n,
-        models: i,
-        languages: o,
-        featureFlags: s,
-        userTier: a,
+        defaultModel: defaultModel,
+        models: models,
+        languages: languages,
+        featureFlags: featureFlags,
+        userTier: userTier,
       }
     }
     async getModelConfig() {
-      let r = this._configListener.config,
-        n = this.createRequestId()
-      return await this.callApi(n, r, "get-models", {}, (s) =>
-        this.toGetModelsResult(s),
+      let config = this._configListener.config,
+        requestId = this.createRequestId()
+      return await this.callApi(requestId, config, "get-models", {}, (response) =>
+        this.toGetModelsResult(response),
       )
     }
-    async completionFeedback(r) {
-      let n = this._configListener.config,
-        i = this.createRequestId()
+    async completionFeedback(feedback) {
+      let config = this._configListener.config,
+        requestId = this.createRequestId()
       await this.callApi(
-        i,
-        n,
+        requestId,
+        config,
         "completion-feedback",
-        { request_id: r.requestId, rating: r.rating, note: r.note },
+        { request_id: feedback.requestId, rating: feedback.rating, note: feedback.note },
         undefined,
       )
     }
-    async chatFeedback(r) {
-      let n = this._configListener.config,
-        i = this.createRequestId()
+    async chatFeedback(feedback) {
+      let config = this._configListener.config,
+        requestId = this.createRequestId()
       await this.callApi(
-        i,
-        n,
+        requestId,
+        config,
         "chat-feedback",
         {
-          request_id: r.requestId,
-          rating: r.rating,
-          note: r.note,
-          mode: r.mode,
+          request_id: feedback.requestId,
+          rating: feedback.rating,
+          note: feedback.note,
+          mode: feedback.mode,
         },
         undefined,
       )
     }
-    async nextEditFeedback(r) {
-      let n = this._configListener.config,
-        i = this.createRequestId()
+    async nextEditFeedback(feedback) {
+      let config = this._configListener.config,
+        requestId = this.createRequestId()
       await this.callApi(
-        i,
-        n,
+        requestId,
+        config,
         "next-edit-feedback",
-        { request_id: r.requestId, rating: r.rating, note: r.note },
+        { request_id: feedback.requestId, rating: feedback.rating, note: feedback.note },
         undefined,
-        n.nextEdit.url,
+        config.nextEdit.url,
       )
     }
-    async getAccessToken(r, n, i, s) {
-      let o = this._configListener.config,
-        a = this.createRequestId(),
-        l = {
+    async getAccessToken(redirectUri, tokenUrl, codeVerifier, code) {
+      let config = this._configListener.config,
+        requestId = this.createRequestId(),
+        params = {
           grant_type: "authorization_code",
-          client_id: o.oauth.clientID,
-          code_verifier: i,
-          redirect_uri: r,
-          code: s,
+          client_id: config.oauth.clientID,
+          code_verifier: codeVerifier,
+          redirect_uri: redirectUri,
+          code: code,
         }
-      return await this.callApi(a, o, "token", l, (c) => c.access_token, n)
+      return await this.callApi(requestId, config, "token", params, (response) => response.access_token, tokenUrl)
     }
-    async uploadUserEvents(r) {
-      let n = this.createRequestId()
+    async uploadUserEvents(events) {
+      let requestId = this.createRequestId()
       return await this.callApi(
-        n,
+        requestId,
         this._configListener.config,
         "record-user-events",
-        { extension_data: r },
+        { extension_data: events },
       )
     }
-    async clientMetrics(r) {
-      let n = this._configListener.config,
-        i = this.createRequestId()
+    async clientMetrics(metrics) {
+      let config = this._configListener.config,
+        requestId = this.createRequestId()
       await this.callApi(
-        i,
-        n,
+        requestId,
+        config,
         "client-metrics",
-        { metrics: r },
+        { metrics: metrics },
         undefined,
         undefined,
-        e.defaultRequestTimeoutMs,
+        APIServerImpl.defaultRequestTimeoutMs,
       )
     }
-    async searchExternalSources(r, n) {
-      let i = this._configListener.config,
-        s = this.createRequestId()
+    async searchExternalSources(query, sourceTypes) {
+      let config = this._configListener.config,
+        requestId = this.createRequestId()
       return await this.callApi(
-        s,
-        i,
+        requestId,
+        config,
         "search-external-sources",
-        { query: r, source_types: n },
-        (o) => o,
+        { query: query, source_types: sourceTypes },
+        (response) => response,
       )
     }
-    async getImplicitExternalSources(r) {
-      let n = this._configListener.config,
-        i = this.createRequestId()
+    async getImplicitExternalSources(message) {
+      let config = this._configListener.config,
+        requestId = this.createRequestId()
       return await this.callApi(
-        i,
-        n,
+        requestId,
+        config,
         "get-implicit-external-sources",
-        { message: r },
-        (s) => s,
+        { message: message },
+        (response) => response,
       )
     }
-    convertToAgentCodebaseRetrievalResult(r) {
-      return { formattedRetrieval: r.formatted_retrieval }
+    convertToAgentCodebaseRetrievalResult(result) {
+      return { formattedRetrieval: result.formatted_retrieval }
     }
-    async agentCodebaseRetrieval(r, n, i, s, o, a) {
-      let l = this._configListener.config
+    async agentCodebaseRetrieval(requestId, informationRequest, blobs, dialog, maxOutputLength, abortSignal) {
+      let config = this._configListener.config
       return await this.callApi(
-        r,
-        l,
+        requestId,
+        config,
         "agents/codebase-retrieval",
         {
-          information_request: n,
-          blobs: Ua(i),
-          dialog: s,
-          max_output_length: o,
+          information_request: informationRequest,
+          blobs: processBlobs(blobs),
+          dialog: dialog,
+          max_output_length: maxOutputLength,
         },
-        (c) => this.convertToAgentCodebaseRetrievalResult(c),
-        l.chat.url,
-        12e4,
+        (response) => this.convertToAgentCodebaseRetrievalResult(response),
+        config.chat.url,
+        120000,
         undefined,
-        a,
+        abortSignal,
       )
     }
-    convertToAgentEditFileResult(r) {
+    convertToAgentEditFileResult(result) {
       return {
-        modifiedFileContents: r.modified_file_contents,
-        isError: r.is_error,
+        modifiedFileContents: result.modified_file_contents,
+        isError: result.is_error,
       }
     }
-    async agentEditFile(r, n, i, s, o, a) {
-      let l = this._configListener.config
+    async agentEditFile(requestId, filePath, editSummary, detailedEditDescription, fileContents, abortSignal) {
+      let config = this._configListener.config
       return await this.callApi(
-        r,
-        l,
+        requestId,
+        config,
         "agents/edit-file",
         {
-          file_path: n,
-          edit_summary: i,
-          detailed_edit_description: s,
-          file_contents: o,
+          file_path: filePath,
+          edit_summary: editSummary,
+          detailed_edit_description: detailedEditDescription,
+          file_contents: fileContents,
         },
-        (c) => this.convertToAgentEditFileResult(c),
-        l.chat.url,
-        12e4,
+        (response) => this.convertToAgentEditFileResult(response),
+        config.chat.url,
+        120000,
         undefined,
-        a,
+        abortSignal,
       )
     }
-    convertToToolSafety(r) {
-      switch (r) {
+    convertToToolSafety(toolSafetyValue) {
+      switch (toolSafetyValue) {
         case 0:
-          return Wt.Unsafe
+          return ToolSafetyLevel.Unsafe
         case 1:
-          return Wt.Safe
+          return ToolSafetyLevel.Safe
         case 2:
-          return Wt.Check
+          return ToolSafetyLevel.Check
         default:
-          return Wt.Unsafe
+          return ToolSafetyLevel.Unsafe
       }
     }
-    convertToListRemoteToolsResult(r) {
+    convertToListRemoteToolsResult(result) {
       return {
-        tools: r.tools.map((n) => ({
-          toolDefinition: n.tool_definition,
-          remoteToolId: n.remote_tool_id,
-          availabilityStatus: n.availability_status,
-          toolSafety: this.convertToToolSafety(n.tool_safety),
-          oauthUrl: n.oauth_url,
+        tools: result.tools.map((tool) => ({
+          toolDefinition: tool.tool_definition,
+          remoteToolId: tool.remote_tool_id,
+          availabilityStatus: tool.availability_status,
+          toolSafety: this.convertToToolSafety(tool.tool_safety),
+          oauthUrl: tool.oauth_url,
         })),
       }
     }
-    async listRemoteTools(r) {
-      let n = this.createRequestId(),
-        i = this._configListener.config
+    async listRemoteTools(toolIds) {
+      let requestId = this.createRequestId(),
+        config = this._configListener.config
       return await this.callApi(
-        n,
-        i,
+        requestId,
+        config,
         "agents/list-remote-tools",
-        { tool_id_list: { tool_ids: r } },
-        (s) => this.convertToListRemoteToolsResult(s),
-        i.chat.url,
-        12e4,
+        { tool_id_list: { tool_ids: toolIds } },
+        (response) => this.convertToListRemoteToolsResult(response),
+        config.chat.url,
+        120000,
       )
     }
-    convertToCheckToolSafetyResult(r) {
-      return r.is_safe
+    convertToCheckToolSafetyResult(result) {
+      return result.is_safe
     }
-    async checkToolSafety(r, n) {
-      let i = this.createRequestId(),
-        s = this._configListener.config
+    async checkToolSafety(toolId, toolInputJson) {
+      let requestId = this.createRequestId(),
+        config = this._configListener.config
       return await this.callApi(
-        i,
-        s,
+        requestId,
+        config,
         "agents/check-tool-safety",
-        { tool_id: r, tool_input_json: n },
-        (o) => this.convertToCheckToolSafetyResult(o),
-        s.chat.url,
-        12e4,
+        { tool_id: toolId, tool_input_json: toolInputJson },
+        (response) => this.convertToCheckToolSafetyResult(response),
+        config.chat.url,
+        120000,
       )
     }
-    convertToRunRemoteToolResult(r) {
+    convertToRunRemoteToolResult(result) {
       return {
-        toolOutput: r.tool_output,
-        toolResultMessage: r.tool_result_message,
-        status: r.status,
+        toolOutput: result.tool_output,
+        toolResultMessage: result.tool_result_message,
+        status: result.status,
       }
     }
-    async runRemoteTool(r, n, i, s, o, a) {
-      let l = this._configListener.config,
-        c = {}
-      if (o)
-        if (s === Yn.Jira || s === Yn.Confluence) {
-          let u = o
-          c = {
+    async runRemoteTool(requestId, toolName, toolInputJson, toolId, extraToolInput, abortSignal) {
+      let config = this._configListener.config,
+        extraToolParams = {}
+      if (extraToolInput)
+        if (toolId === IntegrationServiceType.Jira || toolId === IntegrationServiceType.Confluence) {
+          let atlassianInput = extraToolInput
+          extraToolParams = {
             extra_tool_input: {
               atlassian_tool_extra_input: {
-                server_url: u.serverUrl,
-                personal_api_token: u.personalApiToken,
-                username: u.username,
+                server_url: atlassianInput.serverUrl,
+                personal_api_token: atlassianInput.personalApiToken,
+                username: atlassianInput.username,
               },
             },
           }
         } else
-          s === Yn.Notion
-            ? (c = {
+          toolId === IntegrationServiceType.Notion
+            ? (extraToolParams = {
                 extra_tool_input: {
-                  notion_tool_extra_input: { api_token: o.apiToken },
+                  notion_tool_extra_input: { api_token: extraToolInput.apiToken },
                 },
               })
-            : s === Yn.Linear
-              ? (c = {
+            : toolId === IntegrationServiceType.Linear
+              ? (extraToolParams = {
                   extra_tool_input: {
-                    linear_tool_extra_input: { api_token: o.apiToken },
+                    linear_tool_extra_input: { api_token: extraToolInput.apiToken },
                   },
                 })
-              : s === Yn.GitHubApi &&
-                (c = {
+              : toolId === IntegrationServiceType.GitHubApi &&
+                (extraToolParams = {
                   extra_tool_input: {
-                    github_tool_extra_input: { api_token: o.apiToken },
+                    github_tool_extra_input: { api_token: extraToolInput.apiToken },
                   },
                 })
       return await this.callApi(
-        r,
-        l,
+        requestId,
+        config,
         "agents/run-remote-tool",
-        { tool_name: n, tool_input_json: i, tool_id: s, ...c },
-        (u) => this.convertToRunRemoteToolResult(u),
-        l.chat.url,
-        12e4,
+        { tool_name: toolName, tool_input_json: toolInputJson, tool_id: toolId, ...extraToolParams },
+        (response) => this.convertToRunRemoteToolResult(response),
+        config.chat.url,
+        120000,
         undefined,
-        a,
+        abortSignal,
       )
     }
-    convertToRevokeToolAccessResult(r) {
-      return { status: r.status }
+    convertToRevokeToolAccessResult(result) {
+      return { status: result.status }
     }
-    async revokeToolAccess(r) {
-      let n = this.createRequestId(),
-        i = this._configListener.config
+    async revokeToolAccess(toolId) {
+      let requestId = this.createRequestId(),
+        config = this._configListener.config
       return await this.callApi(
-        n,
-        i,
+        requestId,
+        config,
         "agents/revoke-tool-access",
-        { tool_id: r },
-        (s) => this.convertToRevokeToolAccessResult(s),
-        i.chat.url,
+        { tool_id: toolId },
+        (response) => this.convertToRevokeToolAccessResult(response),
+        config.chat.url,
       )
     }
-    reportError(r, n, i, s) {
+    reportError(errorType, errorMessage, errorStack, requestId) {
       return Promise.reject(
         new Error(
           "reportError should only be used via APIServerImplWithErrorReporting",
         ),
       )
     }
-    async reportClientCompletionTimelines(r) {
-      let n = this._configListener.config,
-        i = this.createRequestId()
+    async reportClientCompletionTimelines(timelines) {
+      let config = this._configListener.config,
+        requestId = this.createRequestId()
       await this.callApi(
-        i,
-        n,
+        requestId,
+        config,
         "/client-completion-timelines",
-        { timelines: r },
+        { timelines: timelines },
         undefined,
         undefined,
-        e.defaultRequestTimeoutMs,
+        APIServerImpl.defaultRequestTimeoutMs,
       )
     }
-    async checkCommand(r, n, i) {
-      let s = this._configListener.config,
-        o = { command: r, output: n }
+    async checkCommand(command, output, requestId) {
+      let config = this._configListener.config,
+        params = { command, output }
       return await this.callApi(
-        i,
-        s,
+        requestId,
+        config,
         "check_command",
-        o,
-        (a) => a,
-        s.autofix.autofixUrl,
-        1e4,
+        params,
+        (response) => response,
+        config.autofix.autofixUrl,
+        10000,
       )
     }
-    async containErrors(r, n, i) {
-      let s = this._configListener.config,
-        o = { command: r, output: n }
+    async containErrors(command, output, requestId) {
+      let config = this._configListener.config,
+        params = { command, output }
       return await this.callApi(
-        i,
-        s,
+        requestId,
+        config,
         "contain_errors",
-        o,
-        (a) => a,
-        s.autofix.autofixUrl,
-        1e4,
+        params,
+        (response) => response,
+        config.autofix.autofixUrl,
+        10000,
       )
     }
-    async createFixPlan(r, n, i, s, o) {
-      let a = this._configListener.config,
-        l = {
-          output: { command: n, output: i },
-          git_diff: r,
-          edit_locations: s,
+    async createFixPlan(gitDiff, command, output, editLocations, requestId) {
+      let config = this._configListener.config,
+        params = {
+          output: { command: command, output: output },
+          git_diff: gitDiff,
+          edit_locations: editLocations,
         }
       return await this.callApi(
-        o,
-        a,
+        requestId,
+        config,
         "create_fix_plan",
-        l,
-        (c) => c,
-        a.autofix.autofixUrl,
-        3e4,
+        params,
+        (response) => response,
+        config.autofix.autofixUrl,
+        30000,
       )
     }
-    async applyFileFix(r, n, i) {
-      let s = this._configListener.config,
-        o = { file_fix: r, source_content: n }
+    async applyFileFix(fileFix, sourceContent, requestId) {
+      let config = this._configListener.config,
+        params = { file_fix: fileFix, source_content: sourceContent }
       return await this.callApi(
-        i,
-        s,
+        requestId,
+        config,
         "apply_file_fix",
-        o,
-        (a) => a,
-        s.autofix.autofixUrl,
-        3e4,
+        params,
+        (response) => response,
+        config.autofix.autofixUrl,
+        30000,
       )
     }
-    async autofixCheck(r) {
-      let n = this._configListener.config,
-        i = this.createRequestId()
+    async autofixCheck(command) {
+      let config = this._configListener.config,
+        requestId = this.createRequestId()
       return await this.callApi(
-        i,
-        n,
+        requestId,
+        config,
         "/autofix/check",
-        { command: this.toAutofixCommandPayload(r) },
-        (s) => this.convertToAutofixCheckResponse(s),
-        n.autofix.autofixUrl,
-        1e4,
+        { command: this.toAutofixCommandPayload(command) },
+        (response) => this.convertToAutofixCheckResponse(response),
+        config.autofix.autofixUrl,
+        10000,
       )
     }
-    async autofixPlan(r, n, i, s) {
-      let o = this._configListener.config,
-        a = this.createRequestId()
+    async autofixPlan(command, vcsChanges, blobs, steeringHistory) {
+      let config = this._configListener.config,
+        requestId = this.createRequestId()
       return await this.callApi(
-        a,
-        o,
+        requestId,
+        config,
         "/autofix/plan",
         {
-          command: this.toAutofixCommandPayload(r),
-          vcs_change: Zp(n),
-          blobs: Ua(i),
-          steering_history: (s || []).map((l) => ({
-            request_message: l.requestMessage,
-            summary: l.summary,
-            replacements: l.replacements.map((c) =>
-              this.toBackTextReplacement(c),
+          command: this.toAutofixCommandPayload(command),
+          vcs_change: processVcsChanges(vcsChanges),
+          blobs: processBlobs(blobs),
+          steering_history: (steeringHistory || []).map((item) => ({
+            request_message: item.requestMessage,
+            summary: item.summary,
+            replacements: item.replacements.map((replacement) =>
+              this.toBackTextReplacement(replacement),
             ),
-            request_id: l.requestId,
+            request_id: item.requestId,
           })),
         },
-        (l) => this.convertToAutofixPlanResponse(l),
-        o.autofix.autofixUrl,
-        6e4,
+        (response) => this.convertToAutofixPlanResponse(response),
+        config.autofix.autofixUrl,
+        60000,
       )
     }
-    async saveChat(r, n, i) {
-      let s = this._configListener.config,
-        o = this.createRequestId(),
-        a = {
-          conversation_id: r,
-          chat: n.map((c) => ({
-            request_message: c.request_message,
-            response_text: c.response_text,
-            request_id: c.request_id,
+    async saveChat(conversationId, chat, title) {
+      let config = this._configListener.config,
+        requestId = this.createRequestId(),
+        params = {
+          conversation_id: conversationId,
+          chat: chat.map((message) => ({
+            request_message: message.request_message,
+            response_text: message.response_text,
+            request_id: message.request_id,
           })),
-          title: i,
+          title: title,
         }
       return await this.callApi(
-        o,
-        s,
+        requestId,
+        config,
         "/save-chat",
-        a,
-        (c) => c,
-        s.chat.url,
-        e.defaultRequestTimeoutMs,
+        params,
+        (response) => response,
+        config.chat.url,
+        APIServerImpl.defaultRequestTimeoutMs,
       )
     }
   },
-  nM = class extends vG {
-    constructor(t, r, n, i, s) {
-      super(t, r, n, i, s)
+  APIServer = class extends APIServerImpl {
+    constructor(logger, configListener, requestIdGenerator, uniqueExtraURLs, telemetryServic) {
+      super(logger, configListener, requestIdGenerator, uniqueExtraURLs, telemetryServic)
     }
-    async callApi(t, r, n, i, s = (u) => u, o, a, l, c) {
-      let u = Date.now()
+    async callApi(requestId, config, endpoint, params, responseConverter = (response) => response, baseUrl, timeoutMs, headers, abortSignal) {
+      let startTime = Date.now()
       try {
-        return await super.callApi(t, r, n, i, s, o, a, l, c)
-      } catch (f) {
-        throw (await this.handleError(f, n, i, o ?? "", t, u), f)
+        return await super.callApi(requestId, config, endpoint, params, responseConverter, baseUrl, timeoutMs, headers, abortSignal)
+      } catch (error) {
+        throw (await this.handleError(error, endpoint, params, baseUrl ?? "", requestId, startTime), error)
       }
     }
-    async handleError(t, r, n, i, s, o) {
-      if (Sr.isAPIErrorWithStatus(t, RequestStatus.cancelled)) throw t
-      let l = [
+    async handleError(error, endpoint, params, baseUrl, requestId, startTime) {
+      if (ApiError.isAPIErrorWithStatus(error, RequestStatus.cancelled)) throw error
+      let diagnostics = [
           {
             key: "body_length",
-            value: `${JSON.stringify(n, (p, g) => (g === undefined ? null : g)).length}`,
+            value: `${JSON.stringify(params, (key, value) => (value === undefined ? null : value)).length}`,
           },
-          { key: "start_time", value: `${o}` },
+          { key: "start_time", value: `${startTime}` },
           { key: "end_time", value: `${Date.now()}` },
-          { key: "message", value: He(t) },
+          { key: "message", value: getErrorMessage(error) },
         ],
-        c = t instanceof Error ? t.stack : undefined
-      t instanceof Sr &&
-        t.status === RequestStatus.augmentTooLarge &&
-        l.push({ key: "object_size_breakdown", value: `${Xp(n)}` })
-      let u = t instanceof Sr ? t.status : RequestStatus.unknown,
-        f = `${r} call failed with APIStatus ${RequestStatus[u]}`
+        stackTrace = error instanceof Error ? error.stack : undefined
+      error instanceof ApiError &&
+        error.status === RequestStatus.augmentTooLarge &&
+        diagnostics.push({ key: "object_size_breakdown", value: `${formatObjectSizeInfo(params)}` })
+      let errorStatus = error instanceof ApiError ? error.status : RequestStatus.unknown,
+        errorMessage = `${endpoint} call failed with APIStatus ${RequestStatus[errorStatus]}`
       throw (
-        (t instanceof rM && (f = `converting ${r} response failed`),
-        i && this.getUniqueExtraURLs().has(i)
-          ? this._logger.error(`API error ${r} to ${i}: ${f}`)
-          : await this.reportError(s, f, c ?? "", l),
-        t)
+        (error instanceof ConversionError && (errorMessage = `converting ${endpoint} response failed`),
+        baseUrl && this.getUniqueExtraURLs().has(baseUrl)
+          ? this._logger.error(`API error ${endpoint} to ${baseUrl}: ${errorMessage}`)
+          : await this.reportError(requestId, errorMessage, stackTrace ?? "", diagnostics),
+        error)
       )
     }
-    async callApiStream(t, r, n, i, s, o, a, l) {
-      let c = Date.now()
+    async callApiStream(requestId, config, endpoint, params, responseConverter, baseUrl, timeoutMs, abortSignal) {
+      let startTime = Date.now()
       try {
-        return await super.callApiStream(t, r, n, i, s, o, a, l)
-      } catch (u) {
-        throw (await this.handleError(u, n, i, o ?? "", t, c), u)
+        return await super.callApiStream(requestId, config, endpoint, params, responseConverter, baseUrl, timeoutMs, abortSignal)
+      } catch (error) {
+        throw (await this.handleError(error, endpoint, params, baseUrl ?? "", requestId, startTime), error)
       }
     }
-    async reportError(t, r, n, i) {
-      let s = this._configListener.config,
-        o = this.createRequestId(),
-        a = n.replace(/ \(\/[^()]+\)/g, "")
+    async reportError(requestId, errorMessage, stackTrace, diagnostics) {
+      let config = this._configListener.config,
+        newRequestId = this.createRequestId(),
+        sanitizedStackTrace = stackTrace.replace(/ \(\/[^()]+\)/g, "")
       try {
         return await super.callApi(
-          o,
-          s,
+          newRequestId,
+          config,
           "report-error",
           {
-            original_request_id: t,
-            sanitized_message: r,
-            stack_trace: a,
-            diagnostics: i,
+            original_request_id: requestId,
+            sanitized_message: errorMessage,
+            stack_trace: sanitizedStackTrace,
+            diagnostics: diagnostics,
           },
           undefined,
           undefined,
           500,
         )
-      } catch (l) {
+      } catch (error) {
         this._logger.error(
-          `Dropping error report "${r}" due to error: ${He(l)}`,
+          `Dropping error report "${errorMessage}" due to error: ${getErrorMessage(error)}`,
         )
       }
     }
   },
-  CG = class {
+  SequenceGenerator = class {
     _sequenceId = 0
     next() {
       return this._sequenceId++
@@ -83161,7 +83161,7 @@ var cM = "augment.oauth-state",
           this._logger.info(`Created session ${r.tenantURL}`),
           this._onboardingSessionEventReporter.reportEvent("signed-in")
       } catch (r) {
-        throw (wo.window.showErrorMessage(`Sign in failed. ${He(r)}`), r)
+        throw (wo.window.showErrorMessage(`Sign in failed. ${getErrorMessage(r)}`), r)
       }
     }
     async createOAuthState() {
@@ -83283,7 +83283,7 @@ var cM = "augment.oauth-state",
         await this._authSession.saveSession(l, a)
       } catch (l) {
         throw (
-          (this._logger.error(`Failed to get and save access token: ${He(l)}`),
+          (this._logger.error(`Failed to get and save access token: ${getErrorMessage(l)}`),
           new Error(
             `If you have a firewall, please add "${a}" to your allowlist.`,
           ))
@@ -83295,7 +83295,7 @@ var cM = "augment.oauth-state",
         await this.processAuthRedirect(t)
       } catch (r) {
         this._logger.warn("Failed to process auth request:", r),
-          this._programmaticCancellation.fire(He(r))
+          this._programmaticCancellation.fire(getErrorMessage(r))
       }
     }
   }
@@ -84160,7 +84160,7 @@ var MIN_CODE_FILES_REQUIRED = 20,
           },
           required: ["folder"],
         }),
-        tool_safety: Wt.Safe,
+        tool_safety: ToolSafetyLevel.Safe,
       },
       {
         name: "read-file",
@@ -84175,7 +84175,7 @@ var MIN_CODE_FILES_REQUIRED = 20,
           },
           required: ["file_path"],
         }),
-        tool_safety: Wt.Safe,
+        tool_safety: ToolSafetyLevel.Safe,
       },
       {
         name: "complete",
@@ -84191,7 +84191,7 @@ var MIN_CODE_FILES_REQUIRED = 20,
           },
           required: ["response"],
         }),
-        tool_safety: Wt.Safe,
+        tool_safety: ToolSafetyLevel.Safe,
       },
       {
         name: "codebase-retrieval",
@@ -84207,7 +84207,7 @@ var MIN_CODE_FILES_REQUIRED = 20,
           },
           required: ["information_request"],
         }),
-        tool_safety: Wt.Safe,
+        tool_safety: ToolSafetyLevel.Safe,
       },
     ]
     getToolDefinitions() {
@@ -84936,7 +84936,7 @@ async function executeOrientation(apiServer, workspaceManager, featureFlagManage
         "Augment Agent completed orientation process. Workspace guidelines were updated!",
       )
   } catch (error) {
-    if (concurrencyLevel > 1 && Sr.isAPIErrorWithStatus(error, RequestStatus.resourceExhausted)) {
+    if (concurrencyLevel > 1 && ApiError.isAPIErrorWithStatus(error, RequestStatus.resourceExhausted)) {
       telemetryData.setFlag(TelemetryFlags.retryWithLowerConcurrencyLevel),
         gi.window.showErrorMessage(
           "Augment agent orientation process failed: Rate limit exceeded. Retrying...",
@@ -87611,7 +87611,7 @@ var x4 = ((u) => (
     (u.mcp = "mcp"),
     u
   ))(x4 || {}),
-  Umt = new Set(Wi ? Object.values(Wi) : [])
+  Umt = new Set(ToolType ? Object.values(ToolType) : [])
 var Omt = new Set(x4 ? Object.values(x4) : [])
 var qmt = new Set(Hi ? Object.values(Hi) : [])
 var hUt = new Set([...Umt, ...Omt, ...qmt])
@@ -87706,7 +87706,7 @@ ${a}`)
     for (; Date.now() - n < this._maxDiagnosticDelayMs; ) {
       let i = this._getDiagnostics()
       if (this._hasDifferentDiagnostics(i, r)) return i
-      await go(1e3)
+      await sleep(1e3)
     }
     return this._getDiagnostics()
   }
@@ -87781,7 +87781,7 @@ var zM = class e extends DisposableContainer {
                     (l.exitCode = o.exitCode ?? null),
                     l.readStream && o.execution.commandLine.value === l.command)
                   ) {
-                    await go(10),
+                    await sleep(10),
                       this._logger.debug(
                         `Reading exact output for process ${a}`,
                       )
@@ -87923,7 +87923,7 @@ Please wait until this process is complete (you can use a tool for this purpose)
             : l.sendText(f)
         let p = null,
           g = false
-        await TA(
+        await executeWithTimeout(
           new Promise((m) => {
             p = setInterval(() => {
               g ||
@@ -88044,7 +88044,7 @@ Please wait until this process is complete (you can use a tool for this purpose)
                 this._terminalSettings.startupScript,
               )
             : s.sendText(this._terminalSettings.startupScript),
-          await go(100)),
+          await sleep(100)),
         s
       )
     }
@@ -88499,7 +88499,7 @@ Please wait until this process is complete (you can use a tool for this purpose)
         (this._logger.debug(
           "First terminal initialization since VSCode startup, delaying shell capability checks",
         ),
-        await go(5e3 - i))
+        await sleep(5e3 - i))
       for (let s of n) {
         if (!MO(s.name) && !s.name.includes("powershell")) {
           this._logger.debug(`Skipping unsupported shell: ${s.name}`)
@@ -88729,7 +88729,7 @@ Please wait until this process is complete (you can use a tool for this purpose)
   },
   cv = class extends En {
     constructor(r, n) {
-      super(Wi.launchProcess, Wt.Check)
+      super(ToolType.launchProcess, ToolSafetyLevel.Check)
       this._workspaceManager = r
       this.processTools = n
     }
@@ -88829,7 +88829,7 @@ ${f}`,
   },
   JM = class extends En {
     constructor(r) {
-      super(Wi.killProcess, Wt.Safe)
+      super(ToolType.killProcess, ToolSafetyLevel.Safe)
       this._processTools = r
     }
     description = "Kill a process by its terminal ID."
@@ -88854,7 +88854,7 @@ ${f}`,
   },
   jM = class extends En {
     constructor(r, n) {
-      super(Wi.readProcess, Wt.Safe)
+      super(ToolType.readProcess, ToolSafetyLevel.Safe)
       this._processTools = r
       this._workspaceManager = n
     }
@@ -88907,7 +88907,7 @@ ${l.returnCode}
   },
   ZM = class extends En {
     constructor(r) {
-      super(Wi.writeProcess, Wt.Safe)
+      super(ToolType.writeProcess, ToolSafetyLevel.Safe)
       this._processTools = r
     }
     description = "Write input to a terminal."
@@ -88938,7 +88938,7 @@ ${l.returnCode}
   },
   XM = class extends En {
     constructor(r) {
-      super(Wi.listProcesses, Wt.Safe)
+      super(ToolType.listProcesses, ToolSafetyLevel.Safe)
       this._processTools = r
     }
     description = "List all known terminals and their states."
@@ -89274,7 +89274,7 @@ var obe = (e, t, r, n, i, s, o) => (a) => new I4(a, t, e, r, n, i, s, o),
           u.push(new ZM(f)),
           u.push(new XM(f)))
         : u.push(new eF(n))
-      super(u, Gi.localToolHost)
+      super(u, ToolHostType.localToolHost)
       this._chatMode = r
       this._workspaceManager = n
       this._apiServer = i
@@ -89313,7 +89313,7 @@ var obe = (e, t, r, n, i, s, o) => (a) => new I4(a, t, e, r, n, i, s, o),
   },
   eF = class extends En {
     constructor(r) {
-      super(Wi.readFile, Wt.Safe)
+      super(ToolType.readFile, ToolSafetyLevel.Safe)
       this._workspaceManager = r
     }
     description = "Read a file."
@@ -89342,7 +89342,7 @@ var obe = (e, t, r, n, i, s, o) => (a) => new I4(a, t, e, r, n, i, s, o),
   },
   B4 = class extends En {
     constructor(r, n, i, s) {
-      super(Wi.saveFile, Wt.Safe)
+      super(ToolType.saveFile, ToolSafetyLevel.Safe)
       this._workspaceManager = r
       this._checkpointManager = n
       this._requestIdCreator = i
@@ -89441,7 +89441,7 @@ var obe = (e, t, r, n, i, s, o) => (a) => new I4(a, t, e, r, n, i, s, o),
   },
   R4 = class extends En {
     constructor(r, n, i) {
-      super(Wi.editFile, Wt.Safe)
+      super(ToolType.editFile, ToolSafetyLevel.Safe)
       this._workspaceManager = r
       this._apiServer = n
       this._checkpointManager = i
@@ -89588,7 +89588,7 @@ ${T}`,
           o = this._filterDiagnosticsMap(s, r)
         if (this._hasDifferentDiagnostics(o, this._filterDiagnosticsMap(i, r)))
           return s
-        ;(i = s), await go(1e3)
+        ;(i = s), await sleep(1e3)
       }
       return i
     }
@@ -89614,7 +89614,7 @@ ${T}`,
   },
   D4 = class extends En {
     constructor() {
-      super(Wi.openBrowser, Wt.Safe)
+      super(ToolType.openBrowser, ToolSafetyLevel.Safe)
     }
     description =
       "Open a URL in the default browser.\n\n1. The tool takes in a URL and opens it in the default browser.\n2. The tool does not return any content. It is intended for the user to visually inspect and interact with the page. You will not have access to it.\n3. You should not use `open-browser` on a URL that you have called the tool on before in the conversation history, because the page is already open in the user's browser and the user can see it and refresh it themselves. Each time you call `open-browser`, it will jump the user to the browser window, which is highly annoying to the user."
@@ -89642,7 +89642,7 @@ ${T}`,
   },
   T4 = class extends En {
     constructor(r) {
-      super(Wi.diagnostics, Wt.Safe)
+      super(ToolType.diagnostics, ToolSafetyLevel.Safe)
       this._workspaceManager = r
     }
     description = "Get issues (errors, warnings, etc.) from the IDE."
@@ -89720,14 +89720,14 @@ var tF = class {
   }
   _getExtraToolInput(t) {
     switch (t) {
-      case Yn.Jira:
-      case Yn.Confluence:
+      case IntegrationServiceType.Jira:
+      case IntegrationServiceType.Confluence:
         return this._configListener.config.integrations.atlassian
-      case Yn.Notion:
+      case IntegrationServiceType.Notion:
         return this._configListener.config.integrations.notion
-      case Yn.Linear:
+      case IntegrationServiceType.Linear:
         return this._configListener.config.integrations.linear
-      case Yn.GitHubApi:
+      case IntegrationServiceType.GitHubApi:
         return this._configListener.config.integrations.github
       default:
         return
@@ -90939,7 +90939,7 @@ var AF = class extends DisposableContainer {
       for await (let E of C) yield E
     } catch (y) {
       throw (
-        (this._deps.logger.error(`Error in runChatInstructionStream: ${He(y)}`),
+        (this._deps.logger.error(`Error in runChatInstructionStream: ${getErrorMessage(y)}`),
         y)
       )
     }
@@ -92110,8 +92110,8 @@ var vv = q(require("vscode")),
     async handleAuthenticateGithubRequest(t) {
       try {
         let n = (
-          await this._apiServer.listRemoteTools([Yn.GitHubApi])
-        ).tools.find((o) => o.remoteToolId === Yn.GitHubApi)
+          await this._apiServer.listRemoteTools([IntegrationServiceType.GitHubApi])
+        ).tools.find((o) => o.remoteToolId === IntegrationServiceType.GitHubApi)
         if (!n || !n.oauthUrl)
           return {
             type: "authenticate-github-response",
@@ -92143,7 +92143,7 @@ var vv = q(require("vscode")),
     }
     async handleRevokeGithubAccessRequest(t) {
       try {
-        let r = await this._apiServer.revokeToolAccess(Yn.GitHubApi)
+        let r = await this._apiServer.revokeToolAccess(IntegrationServiceType.GitHubApi)
         return r.status === 3
           ? {
               type: "revoke-github-access-response",
@@ -99605,7 +99605,7 @@ USER_SPECIFIED_EXTERNAL_SOURCES_START_LABEL
 ${this._userSpecifiedExternalSources?.join(", ") ?? ""}
 USER_SPECIFIED_EXTERNAL_SOURCES_END_LABEL
 `
-    await Ri(async () => {
+    await retryOperation(async () => {
       try {
         return await n.recordPreferenceSample({
           request_ids: [r.a, r.b],
@@ -100435,7 +100435,7 @@ ${p.stack}`
               : ""
           }`,
         ),
-        p instanceof Sr && p.status === RequestStatus.augmentTooLarge)
+        p instanceof ApiError && p.status === RequestStatus.augmentTooLarge)
       )
         return yield {
           type: "chat-model-reply",
@@ -100450,7 +100450,7 @@ ${p.stack}`
           },
         }
       if (
-        p instanceof Sr &&
+        p instanceof ApiError &&
         (p.status === RequestStatus.resourceExhausted || p.status === RequestStatus.unavailable)
       )
         return yield {
@@ -100784,7 +100784,7 @@ ${p.stack}`
     } catch (f) {
       throw (
         (this._logger.error(
-          `Error in _smartPasteWithChatInstruction: ${He(f)}`,
+          `Error in _smartPasteWithChatInstruction: ${getErrorMessage(f)}`,
         ),
         f)
       )
@@ -101101,7 +101101,7 @@ ${p.stack}`
             kt.env.openExternal(i)
           }
         } catch (n) {
-          this._logger.error(`Failed to open URL: ${He(n)}`)
+          this._logger.error(`Failed to open URL: ${getErrorMessage(n)}`)
         }
         break
       }
@@ -101301,7 +101301,7 @@ ${p.stack}`
             this._workspaceManager.getRepoRootForFolderRoot(l.folderRoot) ??
             l.folderRoot,
         })),
-      o = this._toolsModel.getTool(Wi.launchProcess),
+      o = this._toolsModel.getTool(ToolType.launchProcess),
       a
     return (
       o && o instanceof cv && (a = o.processTools.getLongRunningTerminalInfo()),
@@ -101410,7 +101410,7 @@ async function showAugmentPanel(featureName) {
   } catch (error) {
     error instanceof Error &&
       pwe.window.showErrorMessage(
-        `Sorry, Augment ${featureName} encountered an unexpected error: ${He(error)}`,
+        `Sorry, Augment ${featureName} encountered an unexpected error: ${getErrorMessage(error)}`,
       )
   }
 }
@@ -104527,7 +104527,7 @@ var SQ = class e extends PanelWebview {
   _handleError(r) {
     r instanceof rl
       ? gs.window.showErrorMessage(r.message)
-      : gs.window.showErrorMessage(`Unexpected error: ${He(r)}`)
+      : gs.window.showErrorMessage(`Unexpected error: ${getErrorMessage(r)}`)
   }
   async _handleMessage(r) {
     switch (r.type) {
@@ -104631,8 +104631,8 @@ var SQ = class e extends PanelWebview {
         i = JSON.parse(r.toolConfig)
       } catch (a) {
         throw (
-          (this._log.error(`Failed to parse tool config: ${He(a)}`),
-          new aw(He(a)))
+          (this._log.error(`Failed to parse tool config: ${getErrorMessage(a)}`),
+          new aw(getErrorMessage(a)))
         )
       }
       let s = { config: i, isConfigured: r.isConfigured, name: r.toolName },
@@ -104640,8 +104640,8 @@ var SQ = class e extends PanelWebview {
       o >= 0 ? (n.tools[o] = s) : n.tools.push(s), await this._store.save(n)
     } catch (n) {
       throw (
-        (this._log.error(`Error saving tool configuration: ${He(n)}`),
-        new aw(He(n)))
+        (this._log.error(`Error saving tool configuration: ${getErrorMessage(n)}`),
+        new aw(getErrorMessage(n)))
       )
     }
   }
@@ -104665,7 +104665,7 @@ var SQ = class e extends PanelWebview {
       ;(n = await gs.env.openExternal(s)),
         n || this._log.warn(`Failed to open URL: ${i}`)
     } catch (i) {
-      this._log.error(`Error opening URL: ${He(i)}`)
+      this._log.error(`Error opening URL: ${getErrorMessage(i)}`)
     } finally {
       await this._postMessage({
         type: "tool-config-start-oauth-response",
@@ -104683,7 +104683,7 @@ var SQ = class e extends PanelWebview {
           s.identifier.hostName === r.toolId.hostName &&
           s.identifier.toolId === r.toolId.toolId,
       )
-      if (i && i.identifier.hostName === Gi.remoteToolHost) {
+      if (i && i.identifier.hostName === ToolHostType.remoteToolHost) {
         let s = i.identifier.toolId
         this._log.info(
           `Revoking access for remote tool: ${i.definition.name} (${s})`,
@@ -104692,8 +104692,8 @@ var SQ = class e extends PanelWebview {
         try {
           o = await this._apiServer.revokeToolAccess(s)
         } catch (a) {
-          this._log.error(`API error revoking access: ${He(a)}`),
-            gs.window.showErrorMessage(`Error revoking access: ${He(a)}`)
+          this._log.error(`API error revoking access: ${getErrorMessage(a)}`),
+            gs.window.showErrorMessage(`Error revoking access: ${getErrorMessage(a)}`)
           return
         }
         switch (o.status) {
@@ -104731,7 +104731,7 @@ var SQ = class e extends PanelWebview {
       } else
         throw new rl(`Tool not found: ${r.toolId.hostName} ${r.toolId.toolId}`)
     } catch (n) {
-      this._log.error(`Error revoking access: ${He(n)}`), this._handleError(n)
+      this._log.error(`Error revoking access: ${getErrorMessage(n)}`), this._handleError(n)
     }
   }
   async _handleGetStorageValue() {
@@ -104742,7 +104742,7 @@ var SQ = class e extends PanelWebview {
         data: r,
       })
     } catch (r) {
-      this._log.error(`Error getting storage value: ${He(r)}`),
+      this._log.error(`Error getting storage value: ${getErrorMessage(r)}`),
         this._handleError(r)
     }
   }
@@ -104750,7 +104750,7 @@ var SQ = class e extends PanelWebview {
     try {
       await this._store.saveMCPServers(r)
     } catch (n) {
-      this._log.error(`Error setting storage value: ${He(n)}`),
+      this._log.error(`Error setting storage value: ${getErrorMessage(n)}`),
         this._handleError(n)
     }
   }
@@ -104758,14 +104758,14 @@ var SQ = class e extends PanelWebview {
     try {
       return await this._panel.webview.postMessage(r), true
     } catch (n) {
-      return this._log.error(`Failed to post message to webview: ${He(n)}`), false
+      return this._log.error(`Failed to post message to webview: ${getErrorMessage(n)}`), false
     }
   }
   async _handleExecuteInitialOrientation() {
     try {
       await gs.commands.executeCommand(RunAgentInitialOrientationCommand.commandID)
     } catch (r) {
-      this._log.error(`Failed to execute initial orientation: ${He(r)}`),
+      this._log.error(`Failed to execute initial orientation: ${getErrorMessage(r)}`),
         this._handleError(r)
     }
   }
@@ -104778,7 +104778,7 @@ var SQ = class e extends PanelWebview {
     try {
       notifyOrientationStateChanged()
     } catch (r) {
-      this._log.error(`Failed to get orientation status: ${He(r)}`),
+      this._log.error(`Failed to get orientation status: ${getErrorMessage(r)}`),
         this._handleError(r)
     }
   }
@@ -104787,7 +104787,7 @@ var SQ = class e extends PanelWebview {
       let r = await this._store.getTerminalSettings()
       await this._postMessage({ type: "terminal-settings-response", data: r })
     } catch (r) {
-      this._log.error(`Failed to get terminal settings: ${He(r)}`),
+      this._log.error(`Failed to get terminal settings: ${getErrorMessage(r)}`),
         this._handleError(r)
     }
   }
@@ -104800,7 +104800,7 @@ var SQ = class e extends PanelWebview {
       let n = await this._store.getTerminalSettings()
       await this._postMessage({ type: "terminal-settings-response", data: n })
     } catch (n) {
-      this._log.error(`Failed to update terminal settings: ${He(n)}`),
+      this._log.error(`Failed to update terminal settings: ${getErrorMessage(n)}`),
         this._handleError(n)
     }
   }
@@ -105369,21 +105369,21 @@ var CompletionsModel = class {
         B
       )
     } catch (B) {
-      if (Sr.isAPIErrorWithStatus(B, RequestStatus.cancelled))
+      if (ApiError.isAPIErrorWithStatus(B, RequestStatus.cancelled))
         throw (
           (this._logger.debug(
             `Completion #${p} cancelled in back end; requestId ${n}`,
           ),
           new mg("Cancelled in back end"))
         )
-      if (Sr.isRetriableAPIError(B))
+      if (ApiError.isRetriableAPIError(B))
         throw (
           (this._logger.debug(
             `Completion #${p} retriable error on back end; requestId ${n}`,
           ),
           new mg("Retriable error on back end"))
         )
-      let T = He(B)
+      let T = getErrorMessage(B)
       throw (
         (this._logger.warn(`Completion #${p} failed: ${T}; requestId ${n}`), B)
       )
@@ -107333,7 +107333,7 @@ var XQ = class {
         is_accepted: i,
         annotated_text: s,
       }
-    await Ri(async () => {
+    await retryOperation(async () => {
       if (this.uploadEnabled)
         try {
           return await this._apiServer.logCodeEditResolution(u)
@@ -111355,7 +111355,7 @@ var EditorNextEdit = class EditorNextEdit extends DisposableContainer {
           new Se.Range(suggestion.lineRange.start, 0, suggestion.lineRange.stop, 0),
           Se.TextEditorRevealType.InCenterIfOutsideViewport,
         ),
-        await go(EditorNextEdit._smoothScrollDelayMs)),
+        await sleep(EditorNextEdit._smoothScrollDelayMs)),
       animationDelayMs === undefined)
     ) {
       let isCursorInSuggestion = !isGlobalSuggestion && suggestion.highlightRange.contains(activeEditor.selection.active.line),
@@ -111774,7 +111774,7 @@ async function* createNextEditSuggestionStream(request, workspaceManager, diagno
     }
     logger.debug(`[${request.requestId}] Request completed.`)
   } catch (error) {
-    if (Sr.isAPIErrorWithStatus(error, RequestStatus.cancelled)) {
+    if (ApiError.isAPIErrorWithStatus(error, RequestStatus.cancelled)) {
       logger.debug(`[${request.requestId}] Cancelled by the server.`),
         yield { status: RequestStatus.cancelled }
       return
@@ -113501,7 +113501,7 @@ var WN = class {
       )
     } catch (t) {
       return (
-        this.logger.error(`Failed to load tool configurations: ${He(t)}`),
+        this.logger.error(`Failed to load tool configurations: ${getErrorMessage(t)}`),
         { version: u6, tools: [] }
       )
     }
@@ -113510,7 +113510,7 @@ var WN = class {
     try {
       await this.storage.save("toolsConfiguration", t)
     } catch (r) {
-      let n = `Failed to save tool configurations: ${He(r)}`
+      let n = `Failed to save tool configurations: ${getErrorMessage(r)}`
       throw (this.logger.error(n), new rl(n))
     }
   }
@@ -113519,7 +113519,7 @@ var WN = class {
       let t = await this.storage.load("mcpServers")
       return Array.isArray(t) ? t : []
     } catch (t) {
-      return this.logger.error(`Failed to load MCP servers: ${He(t)}`), []
+      return this.logger.error(`Failed to load MCP servers: ${getErrorMessage(t)}`), []
     }
   }
   async saveMCPServers(t) {
@@ -113527,7 +113527,7 @@ var WN = class {
       await this.storage.save("mcpServers", t),
         await this.updateSidecarMCPServers()
     } catch (r) {
-      let n = `Failed to save MCP servers: ${He(r)}`
+      let n = `Failed to save MCP servers: ${getErrorMessage(r)}`
       throw (this.logger.error(n), new rl(n))
     }
   }
@@ -113545,7 +113545,7 @@ var WN = class {
       n && n.length > 0 && i.push(...n),
         this.toolsModel && this.toolsModel.setMcpServers(i)
     } catch (t) {
-      this.logger.error(`Failed to update sidecar MCP servers: ${He(t)}`)
+      this.logger.error(`Failed to update sidecar MCP servers: ${getErrorMessage(t)}`)
     }
   }
   async getTerminalSettings() {
@@ -113558,7 +113558,7 @@ var WN = class {
       )
     } catch (t) {
       return (
-        this.logger.error(`Failed to load terminal settings: ${He(t)}`),
+        this.logger.error(`Failed to load terminal settings: ${getErrorMessage(t)}`),
         { supportedShells: [], selectedShell: undefined }
       )
     }
@@ -113567,7 +113567,7 @@ var WN = class {
     try {
       await this.storage.save("terminalSettings", t)
     } catch (r) {
-      let n = `Failed to save terminal settings: ${He(r)}`
+      let n = `Failed to save terminal settings: ${getErrorMessage(r)}`
       throw (this.logger.error(n), new rl(n))
     }
   }
@@ -116313,7 +116313,7 @@ var d9 = class extends Iw {
       this._logger.verbose(`FindMissingProcess started: for [${r.size}] items`)
       let i
       try {
-        i = await Ri(() => this._apiServer.findMissing([...r]), this._logger)
+        i = await retryOperation(() => this._apiServer.findMissing([...r]), this._logger)
       } catch {
         this._logger.debug(
           `[ERROR] FindMissingProcess failed: for [${r.size}] items`,
@@ -116366,7 +116366,7 @@ var d9 = class extends Iw {
       let n = Date.now(),
         i
       this._logger.verbose(`Upload started [${n}]: for [${r.length}] items`),
-        (i = await Ri(() => this._apiServer.batchUpload(r), this._logger)),
+        (i = await retryOperation(() => this._apiServer.batchUpload(r), this._logger)),
         this._logger.debug(
           `Upload complete [${n}]: for [${i.blobNames.length} / ${r.length}] items`,
         )
@@ -117313,8 +117313,8 @@ var B2 = class e extends DisposableContainer {
     } catch (a) {
       let l = a instanceof Error ? a.message : `${a}`,
         c = this._checkpointId ? this._checkpointId : "{initial}"
-      Sr.isAPIErrorWithStatus(a, RequestStatus.invalidArgument) ||
-      Sr.isAPIErrorWithStatus(a, RequestStatus.unimplemented)
+      ApiError.isAPIErrorWithStatus(a, RequestStatus.invalidArgument) ||
+      ApiError.isAPIErrorWithStatus(a, RequestStatus.unimplemented)
         ? (this._logger.warn(
             `checkpoint-blobs from ${c} failed with invalid argument: ${l}. Recreating checkpoint.`,
           ),
@@ -117590,7 +117590,7 @@ var _9 = class {
           this._pathMapInvalidate(i, r, s, a)
         } else
           this._blobNameCalculationFails.increment(),
-            this._pathMapInvalidate(i, r, s, He(o))
+            this._pathMapInvalidate(i, r, s, getErrorMessage(o))
         return
       }
     }
@@ -117662,7 +117662,7 @@ var _9 = class {
         this._probeMs.start()
       let s
       try {
-        s = await Ri(
+        s = await retryOperation(
           async () => this._apiServer.findMissing([...i]),
           this._logger,
         )
@@ -117719,7 +117719,7 @@ var _9 = class {
         try {
           m = this._textDecoder.decode(p)
         } catch (v) {
-          this._pathMapInvalidate(c, u, l, He(v)),
+          this._pathMapInvalidate(c, u, l, getErrorMessage(v)),
             this._encodingErrors.increment()
           return
         }
@@ -117776,12 +117776,12 @@ var _9 = class {
         )
       let n
       try {
-        n = await Ri(
+        n = await retryOperation(
           async () => await this._apiServer.batchUpload(r),
           this._logger,
         )
       } catch (s) {
-        this._logger.error(`batch upload failed: ${He(s)}`)
+        this._logger.error(`batch upload failed: ${getErrorMessage(s)}`)
       }
       let i = new Map()
       if (n !== undefined)
@@ -117798,7 +117798,7 @@ var _9 = class {
           this._logger.verbose(
             `sequential upload of ${o.pathName} -> ${o.blobName}`,
           )
-          let a = await Ri(
+          let a = await retryOperation(
             async () =>
               this._apiServer.memorize(o.pathName, o.text, o.blobName, []),
             this._logger,
@@ -117933,7 +117933,7 @@ async function UIe(e, t) {
       }
     n.info(`read ${s} entries from ${i}`)
   } catch (s) {
-    let o = He(s)
+    let o = getErrorMessage(s)
     s instanceof Error && "code" in s && s.code === "ENOENT"
       ? n.info(
           `no blob name cache found at ${i} (probably new source folder); error = ${o}`,
@@ -118659,14 +118659,14 @@ var M2 = class e extends DisposableContainer {
     try {
       this._logger.verbose(`upload: begin; ${n}:${i}, ${l}`)
       let g = Date.now()
-      f = await Ri(async () => {
+      f = await retryOperation(async () => {
         if (!(Date.now() - g > Jbt) && this._validateInProgressUpload(n, i, s))
           return this._apiServer.memorize(i, a, l, [])
       }, this._logger)
     } catch (g) {
       return (
-        this._logger.verbose(`upload: failed; ${n}:${i}, ${l}; ${He(g)};`),
-        this._embargo(n, i, o, `upload encountered permanent error: ${He(g)}`)
+        this._logger.verbose(`upload: failed; ${n}:${i}, ${l}; ${getErrorMessage(g)};`),
+        this._embargo(n, i, o, `upload encountered permanent error: ${getErrorMessage(g)}`)
       )
     }
     if (!this._validateInProgressUpload(n, i, s))
@@ -118748,7 +118748,7 @@ var M2 = class e extends DisposableContainer {
     let s
     try {
       let o = Date.now()
-      s = await Ri(async () => {
+      s = await retryOperation(async () => {
         if (!(Date.now() - o > jbt)) return this._apiServer.findMissing(i)
       }, this._logger)
     } catch {}
@@ -119329,7 +119329,7 @@ var D9 = class extends xg {
       try {
         ;(s = getFileStats(getPathFromUri(r)).type), (o = this._pathFilter.getPathInfo(i, s))
       } catch (l) {
-        ;(s = "Other"), (o = new D9(He(l)))
+        ;(s = "Other"), (o = new D9(getErrorMessage(l)))
       }
       let a = n ? "created" : "changed"
       this._logger.verbose(`${s} ${a}: ${i}, acceptance = ${o.format()}`),
@@ -119560,7 +119560,7 @@ var q2 = class e extends DisposableContainer {
     let i = [...n.keys()],
       s
     try {
-      s = await Ri(async () => this._apiServer.findMissing(i), this._logger)
+      s = await retryOperation(async () => this._apiServer.findMissing(i), this._logger)
     } catch {}
     if (s === undefined) for (let [o, a] of n) this._addRetryWaiter(o, a)
     else {
@@ -120250,7 +120250,7 @@ var V2 = class e extends DisposableContainer {
     try {
       if (getFileStats(n).type !== "Directory") throw new VF()
     } catch (i) {
-      throw new qF(He(i))
+      throw new qF(getErrorMessage(i))
     }
     if (this._isHomeDir(n)) throw new WF()
     this._logger.info(`Adding external source folder ${getUriPath(r)}`),
@@ -120579,7 +120579,7 @@ var V2 = class e extends DisposableContainer {
         await LIe(s, i)
     } catch (o) {
       n.logger.error(
-        `Failed to migrate mtime cache for ${n.folderName} from "${s}" to "${i}": ${He(o)}`,
+        `Failed to migrate mtime cache for ${n.folderName} from "${s}" to "${i}": ${getErrorMessage(o)}`,
       )
     }
     return i
@@ -120606,7 +120606,7 @@ var V2 = class e extends DisposableContainer {
       await Promise.allSettled(r)
     } catch (n) {
       this._logger.info(
-        `One or more source folders failed to refresh: ${He(n)}`,
+        `One or more source folders failed to refresh: ${getErrorMessage(n)}`,
       )
     }
   }
@@ -120617,7 +120617,7 @@ var V2 = class e extends DisposableContainer {
       r.setTracker(i)
     } catch (l) {
       r.logger.info(
-        `Failed to install SourceFolderTracker for ${r.folderName}: ${He(l)}`,
+        `Failed to install SourceFolderTracker for ${r.folderName}: ${getErrorMessage(l)}`,
       ),
         i.dispose()
       return
@@ -121766,7 +121766,7 @@ var AugmentExtension = class e extends DisposableContainer {
       await this._enable(cancellationTokenSource.token)
     } catch (error) {
       if (
-        (this._logger.info(`Unable to enable extension: ${He(error)}`),
+        (this._logger.info(`Unable to enable extension: ${getErrorMessage(error)}`),
         process.env.JEST_WORKER_ID)
       )
         throw error
@@ -121849,16 +121849,16 @@ var AugmentExtension = class e extends DisposableContainer {
       for (let model of modelConfig.models) modelsByName.set(model.name, model)
       this._initState?.dispose()
     } catch (error) {
-      if (Sr.isAPIErrorWithStatus(error, RequestStatus.unauthenticated)) {
+      if (ApiError.isAPIErrorWithStatus(error, RequestStatus.unauthenticated)) {
         this._auth.useOAuth
           ? (this._enableState = this._statusBar.setState(cSe))
           : (this._enableState = this._statusBar.setState(uSe))
         return
-      } else if (error instanceof Rd) {
+      } else if (error instanceof InvalidCompletionUrlError) {
         this._enableState = this._statusBar.setState(dSe)
         return
       } else if (error instanceof Ye.CancellationError) return
-      let errorMessage = He(error)
+      let errorMessage = getErrorMessage(error)
       throw (
         (this._logger.error(`Failed to get model config: ${errorMessage}`),
         (this._initState = this._statusBar.setState(g6)),
@@ -122557,10 +122557,10 @@ var AugmentExtension = class e extends DisposableContainer {
         } catch (error) {
           if (
             (this._logger.error("Failed to retrieve model config: ", error),
-            Sr.isAPIErrorWithStatus(error, RequestStatus.unauthenticated))
+            ApiError.isAPIErrorWithStatus(error, RequestStatus.unauthenticated))
           )
             throw error
-          if (error instanceof Rd) throw error
+          if (error instanceof InvalidCompletionUrlError) throw error
           retryCount++
         }
         if (cancellationToken.isCancellationRequested)
@@ -122571,7 +122571,7 @@ var AugmentExtension = class e extends DisposableContainer {
         if (modelConfig !== undefined) return this._logger.info("Returning model config"), modelConfig
         retryCount >= maxRetries && statusBarItem.setState(g6),
           this._logger.info(`Retrying model config retrieval in ${backoffTimeMs} msec`),
-          await go(backoffTimeMs),
+          await sleep(backoffTimeMs),
           (backoffTimeMs = Math.min(backoffTimeMs * 2, e.modelConfigBackoffMsecMax))
       }
     } finally {
@@ -122790,7 +122790,7 @@ var AugmentExtension = class e extends DisposableContainer {
         error instanceof cw
           ? statusTraceBuilder.addLine(`Model "${config.modelName}" not known.`)
           : statusTraceBuilder.addError(
-              `Unable to query info about model "${config.modelName}": ${He(error)}`,
+              `Unable to query info about model "${config.modelName}": ${getErrorMessage(error)}`,
             )
     }
     if (
@@ -122904,8 +122904,8 @@ function activate(e) {
   let p = new lM(e, f)
   e.subscriptions.push(p)
   let g = new XN()
-  e.subscriptions.push(g), FK(new DF(f)), kK(new RF(p, f))
-  let m = new nM(f, p, u, l, global.fetch),
+  e.subscriptions.push(g), setClientConfig(new DF(f)), setClientAuth(new RF(p, f))
+  let m = new APIServer(f, p, u, l, global.fetch),
     y = new qQ(),
     v = new yg(10),
     C = new yg(10),
