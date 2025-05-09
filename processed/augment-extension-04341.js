@@ -65217,7 +65217,7 @@ var sEt = {}
 lL(sEt, {
   AugmentExtension: () => AugmentExtension,
   _exportedForTesting: () => iEt,
-  activate: () => nEt,
+  activate: () => activate,
   getSessionId: () => eBe,
 })
 module.exports = cL(sEt)
@@ -80404,18 +80404,18 @@ var Fs = ((se) => (
     (se.FreshSuggestions = "fresh-suggestions"),
     se
   ))(Fs || {}),
-  mG = class {
-    constructor(t, r, n, i, s) {
-      this.path = t
-      this.range = r
-      this.charStart = n
-      this.charStop = i
-      this.header = s
+  BlockedLocation = class {
+    constructor(path, range, charStart, charStop, header) {
+      this.path = path
+      this.range = range
+      this.charStart = charStart
+      this.charStop = charStop
+      this.header = header
     }
   },
-  Zk = class extends mG {
-    constructor(t, r, n, i, s) {
-      super(t, r, n, i, s)
+  RejectedLocation = class extends BlockedLocation {
+    constructor(path, range, charStart, charStop, header) {
+      super(path, range, charStart, charStop, header)
     }
   }
 var Ul = ((i) => (
@@ -80425,15 +80425,15 @@ var Ul = ((i) => (
     (i.accepted = "accepted"),
     i
   ))(Ul || {}),
-  Xk = class {
-    constructor(t, r, n, i, s, o, a) {
-      this.requestId = t
-      this.mode = r
-      this.scope = n
-      this.qualifiedPathName = i
-      this.apiResult = s
-      this.suggestions = o
-      this.requestTime = a
+  NextEditRequest = class {
+    constructor(requestId, mode, scope, qualifiedPathName, apiResult, suggestions, requestTime) {
+      this.requestId = requestId
+      this.mode = mode
+      this.scope = scope
+      this.qualifiedPathName = qualifiedPathName
+      this.apiResult = apiResult
+      this.suggestions = suggestions
+      this.requestTime = requestTime
     }
     occurredAt = new Date()
   }
@@ -102063,40 +102063,40 @@ var Zx = ((n) => (
     (n.enableAutoApply = "enableAutoApply"),
     n
   ))(Zx || {}),
-  k1 = class extends DisposableContainer {
-    constructor(r, n, i) {
+  NextEditConfigManager = class extends DisposableContainer {
+    constructor(configListener, featureFlagManager, augmentGlobalState) {
       super()
-      this.configListener = r
-      this.featureFlagManager = n
-      this.augmentGlobalState = i
-      i.update("nextEditUxMigrationStatus", void 0)
+      this.configListener = configListener
+      this.featureFlagManager = featureFlagManager
+      this.augmentGlobalState = augmentGlobalState
+      augmentGlobalState.update("nextEditUxMigrationStatus", void 0)
     }
     get config() {
-      return fCt(this.configListener.config, this.featureFlagManager)
+      return getNextEditConfig(this.configListener.config, this.featureFlagManager)
     }
-    async toggleSetting(r) {
-      let n = Qm.workspace.getConfiguration("augment"),
-        i = "nextEdit." + Zx[r],
-        s = n.inspect(i),
-        o = Qm.ConfigurationTarget.Global
+    async toggleSetting(settingName) {
+      let configuration = Qm.workspace.getConfiguration("augment"),
+        configPath = "nextEdit." + Zx[settingName],
+        inspectedConfig = configuration.inspect(configPath),
+        targetScope = Qm.ConfigurationTarget.Global
       return (
-        s?.workspaceValue !== void 0 && (o = Qm.ConfigurationTarget.Workspace),
-        n.update(i, !this.configListener.config.nextEdit[r], o)
+        inspectedConfig?.workspaceValue !== void 0 && (targetScope = Qm.ConfigurationTarget.Workspace),
+        configuration.update(configPath, !this.configListener.config.nextEdit[settingName], targetScope)
       )
     }
-    async setGlobalBooleanSetting(r, n) {
-      let i = Qm.workspace.getConfiguration("augment"),
-        s = "nextEdit." + Zx[r]
-      return i.update(s, n, Qm.ConfigurationTarget.Global)
+    async setGlobalBooleanSetting(settingName, value) {
+      let configuration = Qm.workspace.getConfiguration("augment"),
+        configPath = "nextEdit." + Zx[settingName]
+      return configuration.update(configPath, value, Qm.ConfigurationTarget.Global)
     }
   }
-function fCt(e, t) {
+function getNextEditConfig(config, featureFlagManager) {
   return {
-    enableAutoApply: e.nextEdit.enableAutoApply,
-    showDiffInHover: e.nextEdit.showDiffInHover,
+    enableAutoApply: config.nextEdit.enableAutoApply,
+    showDiffInHover: config.nextEdit.showDiffInHover,
     enablePanel:
-      e.nextEdit.enableBottomPanel ??
-      isMinVersionMet(t.currentFlags.vscodeNextEditBottomPanelMinVersion) ??
+      config.nextEdit.enableBottomPanel ??
+      isMinVersionMet(featureFlagManager.currentFlags.vscodeNextEditBottomPanelMinVersion) ??
       !1,
   }
 }
@@ -107643,13 +107643,13 @@ var lN = class e {
 var nl = q(require("vscode"))
 var C6 = q(require("vscode"))
 var kCt = z("RangesVSCode")
-function Ls(e, t) {
-  return t && t.lineCount < e.stop
+function createRange(lineRange, document) {
+  return document && document.lineCount < lineRange.stop
     ? (kCt.warn(
-        `LineRange[${e.start}, ${e.stop}) is out of bounds for document ${t.uri.path}.`,
+        `LineRange[${lineRange.start}, ${lineRange.stop}) is out of bounds for document ${document.uri.path}.`,
       ),
-      new C6.Range(e.start, 0, t.lineCount, 0))
-    : new C6.Range(e.start, 0, e.stop, 0)
+      new C6.Range(lineRange.start, 0, document.lineCount, 0))
+    : new C6.Range(lineRange.start, 0, lineRange.stop, 0)
 }
 function od(e) {
   return new LineRange(e.start.line, e.end.line + (e.end.character > 0 ? 1 : 0))
@@ -109472,7 +109472,7 @@ var DecorationManager = class e extends _N {
       return r
     let C = o,
       E = this._showAllLineHighlights() && !C && !l,
-      w = Ls(f)
+      w = createRange(f)
     if (E && !o)
       if (i.changeType === "insertion")
         this._zeroHeightDiffLineBuilder.addSimpleInsertionDecoration(
@@ -109529,7 +109529,7 @@ var DecorationManager = class e extends _N {
     }
     let B = i.result.changeDescription,
       T = n.selection,
-      N = n.visibleRanges.some((Y) => Y.contains(Ls(f))),
+      N = n.visibleRanges.some((Y) => Y.contains(createRange(f))),
       W = this._configListener.config.nextEdit.useCursorDecorations,
       Z = T.active.line - f.start,
       te = !W || Math.abs(Z) <= e.suppressGhostTextLineThreshold
@@ -109613,11 +109613,11 @@ var DecorationManager = class e extends _N {
             : (f = new LineRange(a.lineRange.start - 1, a.lineRange.stop - 1)),
         l)
       ) {
-        let p = u.intersection(Ls(f)),
+        let p = u.intersection(createRange(f)),
           g = u.start.line - f.start,
           m =
             Math.abs(g) > e.suppressGhostTextLineThreshold ||
-            !n.visibleRanges.some((v) => v.contains(Ls(f))),
+            !n.visibleRanges.some((v) => v.contains(createRange(f))),
           y = ""
         !p && m && (y = `${g > 0 ? "\u2191" : "\u2193"}${Math.abs(g)} lines: `),
           (y || p) &&
@@ -109630,7 +109630,7 @@ var DecorationManager = class e extends _N {
               "background",
             ))
       } else {
-        if (n.visibleRanges.some((g) => g.contains(Ls(a.highlightRange))))
+        if (n.visibleRanges.some((g) => g.contains(createRange(a.highlightRange))))
           return r
         let p = f.start < b6(n)[0].start.line ? "\u2191" : "\u2193"
         this.addBottomDecoration(r, n, `${p} ${c}`),
@@ -110194,7 +110194,7 @@ var WCt = 38,
           this._state.value instanceof AfterPreviewState ||
           this._state.value instanceof AnimatingState) &&
         i.qualifiedPathName.equals(n.uri) &&
-        r.visibleRanges.some((s) => s.contains(Ls(i.highlightRange))) &&
+        r.visibleRanges.some((s) => s.contains(createRange(i.highlightRange))) &&
         this.showHover()
     }
     _register(r) {
@@ -111350,7 +111350,7 @@ var NextEditManager = class NextEditManager extends DisposableContainer {
           "error-moving-to-line-that-doesnt-exist",
           "unknown",
         )),
-      activeEditor.visibleRanges.some((range) => range.contains(Ls(suggestion.lineRange))) ||
+      activeEditor.visibleRanges.some((range) => range.contains(createRange(suggestion.lineRange))) ||
         (activeEditor.revealRange(
           new Se.Range(suggestion.lineRange.start, 0, suggestion.lineRange.stop, 0),
           Se.TextEditorRevealType.InCenterIfOutsideViewport,
@@ -111359,7 +111359,7 @@ var NextEditManager = class NextEditManager extends DisposableContainer {
       animationDelayMs === void 0)
     ) {
       let isCursorInSuggestion = !isGlobalSuggestion && suggestion.highlightRange.contains(activeEditor.selection.active.line),
-        isSuggestionVisible = !isGlobalSuggestion && activeEditor.visibleRanges.some((u) => u.contains(Ls(suggestion.lineRange)))
+        isSuggestionVisible = !isGlobalSuggestion && activeEditor.visibleRanges.some((u) => u.contains(createRange(suggestion.lineRange)))
       ;(animationDelayMs = isCursorInSuggestion
         ? NextEditManager._applySuggestionDelayMs.atCursor
         : isSuggestionVisible
@@ -111449,8 +111449,8 @@ var NextEditManager = class NextEditManager extends DisposableContainer {
     if (!nextSuggestion) return new NoSuggestionsState()
     let previousSuggestion = this.nextAvailableSuggestion(!1)
     return previousSuggestion
-      ? activeEditor.visibleRanges.some((range) => range.contains(Ls(previousSuggestion.highlightRange))) &&
-        !activeEditor.visibleRanges.some((range) => range.contains(Ls(nextSuggestion.highlightRange)))
+      ? activeEditor.visibleRanges.some((range) => range.contains(createRange(previousSuggestion.highlightRange))) &&
+        !activeEditor.visibleRanges.some((range) => range.contains(createRange(nextSuggestion.highlightRange)))
         ? new HintingState(previousSuggestion, !1)
         : new HintingState(nextSuggestion, !0)
       : new HintingState(nextSuggestion, !0)
@@ -111589,7 +111589,7 @@ function checkCanUpdateGlobal(workspaceManager, configListener, activePath, file
   let useMockResultsForCurrentFile = !!configListener.config.nextEdit.useMockResults && !!activePath && fileExists(kN(activePath))
   return (fileEditEvents ?? workspaceManager.getFileEditEvents(tIe(workspaceManager, activePath))).length !== 0 || useMockResultsForCurrentFile
 }
-async function* rIe(e, t, r, n, i, s, o, a) {
+async function* createNextEditSuggestionStream(e, t, r, n, i, s, o, a) {
   let l = z("queryNextEditStream")
   if (o.isCancellationRequested) {
     l.debug("Skipping Next Edit with cancelled token."),
@@ -111982,412 +111982,412 @@ var GlobalNextEditManager = class extends DisposableContainer {
 }
 var nIe = q(_s()),
   ec = q(require("vscode"))
-var FN = class e extends DisposableContainer {
-    constructor(r, n, i, s, o, a, l, c, u, f, p, g) {
-      super()
-      this._apiServer = r
-      this._configListener = n
-      this._workspaceManager = i
-      this._diagnosticsManager = s
-      this._nextEditSessionEventReporter = o
-      this._clientMetricsReporter = a
-      this._blobNameCalculator = l
-      this._suggestionManager = c
-      this._recentSuggestions = u
-      this._stateController = f
-      this._completionJustAccepted = p
-      this._featureFlagManager = g
+var NextEditRequestManager = class e extends DisposableContainer {
+  constructor(apiServer, configListener, workspaceManager, diagnosticsManager, nextEditSessionEventReporter, clientMetricsReporter, blobNameCalculator, suggestionManager, recentSuggestions, stateController, completionJustAccepted, featureFlagManager) {
+    super()
+    this._apiServer = apiServer
+    this._configListener = configListener
+    this._workspaceManager = workspaceManager
+    this._diagnosticsManager = diagnosticsManager
+    this._nextEditSessionEventReporter = nextEditSessionEventReporter
+    this._clientMetricsReporter = clientMetricsReporter
+    this._blobNameCalculator = blobNameCalculator
+    this._suggestionManager = suggestionManager
+    this._recentSuggestions = recentSuggestions
+    this._stateController = stateController
+    this._completionJustAccepted = completionJustAccepted
+    this._featureFlagManager = featureFlagManager
+    this.addDisposable(
+      new ec.Disposable(() => {
+        this._inflightRequest?.cancelTokenSource?.cancel(),
+          this._inflightRequest?.cancelTokenSource?.dispose(),
+          (this._inflightRequest = void 0),
+          this.lastFinishedRequest.dispose(),
+          this.lastResponse.dispose(),
+          this.state.dispose()
+      }),
+    ),
       this.addDisposable(
-        new ec.Disposable(() => {
-          this._inflightRequest?.cancelTokenSource?.cancel(),
-            this._inflightRequest?.cancelTokenSource?.dispose(),
-            (this._inflightRequest = void 0),
-            this.lastFinishedRequest.dispose(),
-            this.lastResponse.dispose(),
-            this.state.dispose()
+        new ec.Disposable(
+          this.state.listen((y) => {
+            setVSCodeContext("vscode-augment.nextEdit.loading", y === "inflight")
+          }),
+        ),
+      )
+    let setupDebounce = (debounceMs) => {
+      let value = debounceMs ?? this._featureFlagManager.currentFlags.nextEditDebounceMs
+      this._processPendingRequestsDebounced &&
+        this._processPendingRequestsDebounced.cancel(),
+        (this._processPendingRequestsDebounced = (0, nIe.debounce)(
+          () => void this._processPendingRequests(),
+          value,
+        ))
+    }
+    setupDebounce(this._configListener.config.nextEdit.useDebounceMs),
+      this.addDisposable(
+        this._configListener.onDidChange((configChange) => {
+          configChange.newConfig.nextEdit.useDebounceMs !==
+            configChange.previousConfig.nextEdit.useDebounceMs &&
+            setupDebounce(configChange.newConfig.nextEdit.useDebounceMs)
         }),
       ),
-        this.addDisposable(
-          new ec.Disposable(
-            this.state.listen((y) => {
-              setVSCodeContext("vscode-augment.nextEdit.loading", y === "inflight")
-            }),
-          ),
-        )
-      let m = (y) => {
-        let v = y ?? this._featureFlagManager.currentFlags.nextEditDebounceMs
-        this._processPendingRequestsDebounced &&
-          this._processPendingRequestsDebounced.cancel(),
-          (this._processPendingRequestsDebounced = (0, nIe.debounce)(
-            () => void this._processPendingRequests(),
-            v,
-          ))
-      }
-      m(this._configListener.config.nextEdit.useDebounceMs),
-        this.addDisposable(
-          this._configListener.onDidChange((y) => {
-            y.newConfig.nextEdit.useDebounceMs !==
-              y.previousConfig.nextEdit.useDebounceMs &&
-              m(y.newConfig.nextEdit.useDebounceMs)
-          }),
-        ),
-        this.addDisposable(
-          ec.workspace.onDidChangeTextDocument((y) => {
-            y.contentChanges.length > 0 &&
-              this._workspaceManager.safeResolvePathName(y.document.uri) &&
-              (this._freshCompletedRequests = []),
-              !(
-                !QualifiedPathName.equals(
-                  this._inflightRequest?.qualifiedPathName,
-                  y.document.uri,
-                ) &&
-                !this._pendingRequests.some((v) =>
-                  QualifiedPathName.equals(v.qualifiedPathName, y.document.uri),
-                )
+      this.addDisposable(
+        ec.workspace.onDidChangeTextDocument((event) => {
+          event.contentChanges.length > 0 &&
+            this._workspaceManager.safeResolvePathName(event.document.uri) &&
+            (this._freshCompletedRequests = []),
+            !(
+              !QualifiedPathName.equals(
+                this._inflightRequest?.qualifiedPathName,
+                event.document.uri,
               ) &&
-                y.contentChanges.length > 0 &&
-                !this._suggestionManager.suggestionWasJustAccepted.value &&
-                this.cancelAll()
-          }),
-        )
-    }
-    _logger = z("NextEditRequestManager")
-    static _statusClearTimeoutMs = 2e3
-    _pendingRequests = []
-    _inflightRequest
-    lastFinishedRequest = new ga(void 0)
-    lastResponse = new ga(void 0)
-    state = new ga("ready")
-    _processPendingRequestsDebounced
-    _freshCompletedRequests = []
-    get hasInflightRequest() {
-      return !!this._inflightRequest
-    }
-    get pendingQueueLength() {
-      return this._pendingRequests.length
-    }
-    shouldNotEnqueueRequestReason(r, n, i, s) {
-      let o = this._resolvePath(r),
-        a = {
-          mode: n,
-          scope: i,
-          selection: s ?? o?.selection,
-          requestBlobName: o?.blobName,
-          qualifiedPathName: r,
-        },
-        l = this._inflightRequest || this._pendingRequests[0]
-      if (l && R6(a, l))
-        return `Skipping ${n}/${i} request because it is subsumed by inflight request ${l.id}.`
-      let c = this._freshCompletedRequests.find((f) => R6(a, f)),
-        u = `${r?.relPath}@${a.selection?.toString()}`
-      if (c)
-        return `Skipping ${n}/${i} request at ${u} because it is subsumed by ${c.id}, which was recently completed.`
-    }
-    enqueueRequest(r, n, i, s) {
-      let o = this.shouldNotEnqueueRequestReason(r, n, i, s)
-      if (o) {
-        this._logger.debug(o)
-        return
-      }
-      let a = this._resolvePath(r)
-      s = s ?? a?.selection
-      let l = `${r?.relPath}@${s?.toString()}`,
-        c = {
-          id: this._apiServer.createRequestId(),
-          qualifiedPathName: r,
-          mode: n,
-          scope: i,
-          enqueuedAt: Date.now(),
-        }
-      this._logger.debug(
-        `Starting enqueuing ${n}/${i} request ${c.id} at ${l}.`,
+              !this._pendingRequests.some((v) =>
+                QualifiedPathName.equals(v.qualifiedPathName, event.document.uri),
+              )
+            ) &&
+              event.contentChanges.length > 0 &&
+              !this._suggestionManager.suggestionWasJustAccepted.value &&
+              this.cancelAll()
+        }),
       )
-      let u = this._inflightRequest || this._pendingRequests[0]
-      u &&
-        (c.mode === "FOREGROUND" || c.mode === "FORCED"
+  }
+  _logger = z("NextEditRequestManager")
+  static _statusClearTimeoutMs = 2e3
+  _pendingRequests = []
+  _inflightRequest
+  lastFinishedRequest = new ga(void 0)
+  lastResponse = new ga(void 0)
+  state = new ga("ready")
+  _processPendingRequestsDebounced
+  _freshCompletedRequests = []
+  get hasInflightRequest() {
+    return !!this._inflightRequest
+  }
+  get pendingQueueLength() {
+    return this._pendingRequests.length
+  }
+  shouldNotEnqueueRequestReason(qualifiedPathName, mode, scope, selection) {
+    let resolvedPath = this._resolvePath(qualifiedPathName),
+      requestInfo = {
+        mode: mode,
+        scope: scope,
+        selection: selection ?? resolvedPath?.selection,
+        requestBlobName: resolvedPath?.blobName,
+        qualifiedPathName: qualifiedPathName,
+      },
+      activeRequest = this._inflightRequest || this._pendingRequests[0]
+    if (activeRequest && isRequestSubsumed(requestInfo, activeRequest))
+      return `Skipping ${mode}/${scope} request because it is subsumed by inflight request ${activeRequest.id}.`
+    let recentlyCompletedRequest = this._freshCompletedRequests.find((req) => isRequestSubsumed(requestInfo, req)),
+      locationString = `${qualifiedPathName?.relPath}@${requestInfo.selection?.toString()}`
+    if (recentlyCompletedRequest)
+      return `Skipping ${mode}/${scope} request at ${locationString} because it is subsumed by ${recentlyCompletedRequest.id}, which was recently completed.`
+  }
+  enqueueRequest(qualifiedPathName, mode, scope, selection) {
+    let skipReason = this.shouldNotEnqueueRequestReason(qualifiedPathName, mode, scope, selection)
+    if (skipReason) {
+      this._logger.debug(skipReason)
+      return
+    }
+    let resolvedPath = this._resolvePath(qualifiedPathName)
+    selection = selection ?? resolvedPath?.selection
+    let locationString = `${qualifiedPathName?.relPath}@${selection?.toString()}`,
+      request = {
+        id: this._apiServer.createRequestId(),
+        qualifiedPathName: qualifiedPathName,
+        mode: mode,
+        scope: scope,
+        enqueuedAt: Date.now(),
+      }
+    this._logger.debug(
+      `Starting enqueuing ${mode}/${scope} request ${request.id} at ${locationString}.`,
+    )
+    let activeRequest = this._inflightRequest || this._pendingRequests[0]
+    activeRequest &&
+      (request.mode === "FOREGROUND" || request.mode === "FORCED"
+        ? (this._logger.debug(
+            `Clearing requests for foreground request @ ${locationString}.`,
+          ),
+          this.cancelAll())
+        : request.mode === "BACKGROUND" &&
+            activeRequest.mode === "BACKGROUND" &&
+            !QualifiedPathName.equals(activeRequest.qualifiedPathName, request.qualifiedPathName)
           ? (this._logger.debug(
-              `Clearing requests for foreground request @ ${l}.`,
+              `Clearing requests for background request @ ${locationString}.`,
             ),
             this.cancelAll())
-          : c.mode === "BACKGROUND" &&
-              u.mode === "BACKGROUND" &&
-              !QualifiedPathName.equals(u.qualifiedPathName, c.qualifiedPathName)
-            ? (this._logger.debug(
-                `Clearing requests for background request @ ${l}.`,
-              ),
-              this.cancelAll())
-            : c.mode === "BACKGROUND" &&
-              u.mode === "BACKGROUND" &&
-              u.scope === "WORKSPACE" &&
-              c.scope === "FILE" &&
-              (this._logger.debug(
-                `Clearing background workspace requests for background file request @ ${l}.`,
-              ),
-              this.cancelAll()))
-      let f = this._pendingRequests.find((p) => R6(c, p))
-      return (
-        f
-          ? this._logger.debug(
-              `Skipping enqueueing request ${c.id} at ${l} because it is subsumed by ${f.id}, which is already pending.`,
-            )
-          : this._pendingRequests.push(c),
-        (this.state.value = this._inflightRequest ? "inflight" : "pending"),
-        this._processPendingRequestsDebounced(),
-        (c.mode === "FOREGROUND" ||
-          c.mode === "FORCED" ||
-          this._suggestionManager.suggestionWasJustAccepted.value ||
-          this._completionJustAccepted.value) &&
-          this._processPendingRequestsDebounced.flush(),
-        c.id
-      )
-    }
-    cancelAll() {
-      this._inflightRequest &&
+          : request.mode === "BACKGROUND" &&
+            activeRequest.mode === "BACKGROUND" &&
+            activeRequest.scope === "WORKSPACE" &&
+            request.scope === "FILE" &&
+            (this._logger.debug(
+              `Clearing background workspace requests for background file request @ ${locationString}.`,
+            ),
+            this.cancelAll()))
+    let existingRequest = this._pendingRequests.find((req) => isRequestSubsumed(request, req))
+    return (
+      existingRequest
+        ? this._logger.debug(
+            `Skipping enqueueing request ${request.id} at ${locationString} because it is subsumed by ${existingRequest.id}, which is already pending.`,
+          )
+        : this._pendingRequests.push(request),
+      (this.state.value = this._inflightRequest ? "inflight" : "pending"),
+      this._processPendingRequestsDebounced(),
+      (request.mode === "FOREGROUND" ||
+        request.mode === "FORCED" ||
+        this._suggestionManager.suggestionWasJustAccepted.value ||
+        this._completionJustAccepted.value) &&
+        this._processPendingRequestsDebounced.flush(),
+      request.id
+    )
+  }
+  cancelAll() {
+    this._inflightRequest &&
+      (this._logger.debug(
+        `Cancelling inflight request ${this._inflightRequest.id}.`,
+      ),
+      this._inflightRequest.cancelTokenSource?.cancel(),
+      this._inflightRequest.cancelTokenSource?.dispose(),
+      (this._inflightRequest = void 0)),
+      this._pendingRequests.length > 0 &&
         (this._logger.debug(
-          `Cancelling inflight request ${this._inflightRequest.id}.`,
+          `Cancelling ${this._pendingRequests.length} pending requests: ${this._pendingRequests.map((req) => req.id).toString()}.`,
         ),
-        this._inflightRequest.cancelTokenSource?.cancel(),
-        this._inflightRequest.cancelTokenSource?.dispose(),
-        (this._inflightRequest = void 0)),
-        this._pendingRequests.length > 0 &&
-          (this._logger.debug(
-            `Cancelling ${this._pendingRequests.length} pending requests: ${this._pendingRequests.map((r) => r.id).toString()}.`,
-          ),
-          (this._pendingRequests = []),
-          this._processPendingRequestsDebounced.cancel())
+        (this._pendingRequests = []),
+        this._processPendingRequestsDebounced.cancel())
+  }
+  async _processPendingRequests() {
+    if (this._inflightRequest) {
+      this._logger.debug("Waiting for inflight request to complete.")
+      return
+    } else if (!this._pendingRequests.length) {
+      this._logger.debug("Waiting for a request to be enqueued.")
+      return
     }
-    async _processPendingRequests() {
-      if (this._inflightRequest) {
-        this._logger.debug("Waiting for inflight request to complete.")
-        return
-      } else if (!this._pendingRequests.length) {
-        this._logger.debug("Waiting for a request to be enqueued.")
-        return
+    let [request] = this._pendingRequests.splice(0, 1),
+      resolvedPath = this._resolvePath(request.qualifiedPathName),
+      queueTime = Date.now() - request.enqueuedAt
+    this._logger.debug(`Starting to process ${request.id} after ${queueTime} ms.`)
+    let blobName = resolvedPath?.blobName,
+      qualifiedPathName = request.qualifiedPathName,
+      document = resolvedPath?.document,
+      selection = resolvedPath?.selection,
+      mode = request.mode,
+      scope = request.scope,
+      blockedLocations = this._suggestionManager
+        .getRejectedSuggestions()
+        .filter(
+          (suggestion) =>
+            suggestion.changeType !== "noop" &&
+            (scope === "WORKSPACE" ||
+              qualifiedPathName === void 0 ||
+              suggestion.qualifiedPathName.equals(qualifiedPathName)),
+        )
+        .map(
+          (suggestion) =>
+            new RejectedLocation(
+              suggestion.qualifiedPathName.relPath,
+              suggestion.lineRange,
+              suggestion.result.charStart,
+              suggestion.result.charEnd,
+            ),
+        ),
+      requestId = request.id,
+      inflightRequest = (this._inflightRequest = {
+        ...request,
+        requestBlobName: blobName,
+        selection: selection,
+        cancelTokenSource: new ec.CancellationTokenSource(),
+      })
+    this.state.value = "inflight"
+    let stateToken = this._stateController.setState(ySe),
+      requestStatus = $e.ok,
+      suggestions = [],
+      startTime = new Date()
+    try {
+      let processingStartTime = Date.now(),
+        suggestionStream = createNextEditSuggestionStream(
+          {
+            requestId: requestId,
+            clientCreatedAt: new Date(),
+            instruction: "",
+            selectedCode: document?.getText(selection && createRange(selection, document)),
+            prefix: selection && document?.getText(createRange({ start: 0, stop: selection.start }, document)),
+            suffix:
+              selection && document?.getText(createRange({ start: selection.stop, stop: document.lineCount }, document)),
+            language: document?.languageId,
+            pathName: qualifiedPathName,
+            mode: mode,
+            scope: scope,
+            blockedLocations: blockedLocations,
+            unindexedEditEvents: [],
+            unindexedEditEventsBaseBlobNames: [],
+          },
+          this._workspaceManager,
+          this._diagnosticsManager,
+          this._apiServer,
+          this._blobNameCalculator,
+          this._configListener,
+          inflightRequest.cancelTokenSource.token,
+          this._nextEditSessionEventReporter,
+        ),
+        preprocessingEndTime = Date.now(),
+        firstChangeLatency = 0,
+        sufficientNoopsLatency = 0,
+        suggestionCount = 0,
+        queueLatency = processingStartTime - inflightRequest.enqueuedAt
+      this._logger.debug(`[${inflightRequest.id}] queued for ${queueLatency} ms.`)
+      for await (let response of suggestionStream) {
+        if (((requestStatus = response.status), !response.suggestion)) break
+        suggestionCount++
+        let totalLatency = Date.now() - inflightRequest.enqueuedAt
+        this._logger.debug(
+          `[${response.suggestion?.requestId}/${response.suggestion?.result.suggestionId}] ${response.suggestion?.changeType?.toString()} took ${totalLatency} ms since enqueue.`,
+        ),
+          firstChangeLatency === 0 &&
+            response.suggestion !== void 0 &&
+            response.suggestion.changeType !== "noop" &&
+            (firstChangeLatency = totalLatency),
+          suggestionCount === 4 && firstChangeLatency === 0 && (sufficientNoopsLatency = totalLatency),
+          (this.lastResponse.value = response.suggestion),
+          response.suggestion && suggestions.push(response.suggestion)
       }
-      let [r] = this._pendingRequests.splice(0, 1),
-        n = this._resolvePath(r.qualifiedPathName),
-        i = Date.now() - r.enqueuedAt
-      this._logger.debug(`Starting to process ${r.id} after ${i} ms.`)
-      let s = n?.blobName,
-        o = r.qualifiedPathName,
-        a = n?.document,
-        l = n?.selection,
-        c = r.mode,
-        u = r.scope,
-        f = this._suggestionManager
-          .getRejectedSuggestions()
-          .filter(
-            (E) =>
-              E.changeType !== "noop" &&
-              (u === "WORKSPACE" ||
-                o === void 0 ||
-                E.qualifiedPathName.equals(o)),
-          )
-          .map(
-            (E) =>
-              new Zk(
-                E.qualifiedPathName.relPath,
-                E.lineRange,
-                E.result.charStart,
-                E.result.charEnd,
-              ),
-          ),
-        p = r.id,
-        g = (this._inflightRequest = {
-          ...r,
-          requestBlobName: s,
-          selection: l,
-          cancelTokenSource: new ec.CancellationTokenSource(),
+      let noSuggestions = requestStatus === $e.ok && suggestions.length === 0
+      if (
+        (requestStatus === $e.ok && !noSuggestions && this._freshCompletedRequests.push(inflightRequest),
+        !noSuggestions && inflightRequest.mode === "BACKGROUND")
+      ) {
+        this._clientMetricsReporter.report({
+          client_metric: "next_edit_bg_stream_preprocessing_latency_ms",
+          value: preprocessingEndTime - processingStartTime,
         })
-      this.state.value = "inflight"
-      let m = this._stateController.setState(ySe),
-        y = $e.ok,
-        v = [],
-        C = new Date()
-      try {
-        let E = Date.now(),
-          w = rIe(
-            {
-              requestId: p,
-              clientCreatedAt: new Date(),
-              instruction: "",
-              selectedCode: a?.getText(l && Ls(l, a)),
-              prefix: l && a?.getText(Ls({ start: 0, stop: l.start }, a)),
-              suffix:
-                l && a?.getText(Ls({ start: l.stop, stop: a.lineCount }, a)),
-              language: a?.languageId,
-              pathName: o,
-              mode: c,
-              scope: u,
-              blockedLocations: f,
-              unindexedEditEvents: [],
-              unindexedEditEventsBaseBlobNames: [],
-            },
-            this._workspaceManager,
-            this._diagnosticsManager,
-            this._apiServer,
-            this._blobNameCalculator,
-            this._configListener,
-            g.cancelTokenSource.token,
-            this._nextEditSessionEventReporter,
-          ),
-          B = Date.now(),
-          T = 0,
-          N = 0,
-          W = 0,
-          Z = E - g.enqueuedAt
-        this._logger.debug(`[${g.id}] queued for ${Z} ms.`)
-        for await (let Y of w) {
-          if (((y = Y.status), !Y.suggestion)) break
-          W++
-          let ce = Date.now() - g.enqueuedAt
-          this._logger.debug(
-            `[${Y.suggestion?.requestId}/${Y.suggestion?.result.suggestionId}] ${Y.suggestion?.changeType?.toString()} took ${ce} ms since enqueue.`,
-          ),
-            T === 0 &&
-              Y.suggestion !== void 0 &&
-              Y.suggestion.changeType !== "noop" &&
-              (T = ce),
-            W === 4 && T === 0 && (N = ce),
-            (this.lastResponse.value = Y.suggestion),
-            Y.suggestion && v.push(Y.suggestion)
-        }
-        let te = y === $e.ok && v.length === 0
-        if (
-          (y === $e.ok && !te && this._freshCompletedRequests.push(g),
-          !te && g.mode === "BACKGROUND")
-        ) {
-          this._clientMetricsReporter.report({
-            client_metric: "next_edit_bg_stream_preprocessing_latency_ms",
-            value: B - E,
-          })
-          let Y = Date.now() - g.enqueuedAt
-          y === $e.ok
+        let totalLatency = Date.now() - inflightRequest.enqueuedAt
+        requestStatus === $e.ok
+          ? this._clientMetricsReporter.report({
+              client_metric: "next_edit_bg_stream_finish_latency_ms",
+              value: totalLatency,
+            })
+          : firstChangeLatency > 0 || sufficientNoopsLatency > 0
             ? this._clientMetricsReporter.report({
-                client_metric: "next_edit_bg_stream_finish_latency_ms",
-                value: Y,
+                client_metric: "next_edit_bg_stream_partial_latency_ms",
+                value: totalLatency,
               })
-            : T > 0 || N > 0
+            : requestStatus === $e.cancelled
               ? this._clientMetricsReporter.report({
-                  client_metric: "next_edit_bg_stream_partial_latency_ms",
-                  value: Y,
+                  client_metric: "next_edit_bg_stream_cancel_latency_ms",
+                  value: totalLatency,
                 })
-              : y === $e.cancelled
-                ? this._clientMetricsReporter.report({
-                    client_metric: "next_edit_bg_stream_cancel_latency_ms",
-                    value: Y,
-                  })
-                : this._clientMetricsReporter.report({
-                    client_metric: "next_edit_bg_stream_error_latency_ms",
-                    value: Y,
-                  }),
-            T > 0
+              : this._clientMetricsReporter.report({
+                  client_metric: "next_edit_bg_stream_error_latency_ms",
+                  value: totalLatency,
+                }),
+          firstChangeLatency > 0
+            ? this._clientMetricsReporter.report({
+                client_metric: "next_edit_bg_first_change_latency_ms",
+                value: firstChangeLatency,
+              })
+            : sufficientNoopsLatency > 0
               ? this._clientMetricsReporter.report({
-                  client_metric: "next_edit_bg_first_change_latency_ms",
-                  value: T,
+                  client_metric: "next_edit_bg_sufficient_noops_latency_ms",
+                  value: sufficientNoopsLatency,
                 })
-              : N > 0
-                ? this._clientMetricsReporter.report({
-                    client_metric: "next_edit_bg_sufficient_noops_latency_ms",
-                    value: N,
-                  })
-                : W < 4 &&
-                  y === $e.ok &&
-                  this._clientMetricsReporter.report({
-                    client_metric: "next_edit_bg_sufficient_noops_latency_ms",
-                    value: Y,
-                  })
-        }
-      } catch (E) {
-        this._logger.warn(`[${p}] Next edit failed: ${E}.`),
-          this._nextEditSessionEventReporter.reportEvent(
-            p,
-            void 0,
-            Date.now(),
-            "error-api-error",
-            "unknown",
-          )
-      } finally {
-        g === this._inflightRequest &&
-          ((this._inflightRequest = void 0),
-          this._pendingRequests.length > 0
-            ? (this._processPendingRequestsDebounced(),
-              this._processPendingRequestsDebounced.flush())
-            : (this._logger.debug("No more pending requests."),
-              (this.state.value = "ready"),
-              y === $e.ok &&
-              !this._suggestionManager
-                .getActiveSuggestions()
-                .some((w) => w.state === "fresh" && w.changeType !== "noop")
-                ? ZCt(
-                    this._stateController.setState(vSe),
-                    e._statusClearTimeoutMs,
-                  )
-                : y !== $e.cancelled &&
-                  y !== $e.ok &&
-                  (this._stateController.setState(ASe),
-                  this._logger.debug(
-                    `Request ${p} failed with status: ${y}.`,
-                  ))))
-        let E = new Xk(p, c, u, o, y, v, C)
-        this._recentSuggestions.addItem(E),
-          (this.lastFinishedRequest.value = E),
-          m.dispose(),
-          g.cancelTokenSource.dispose()
+              : suggestionCount < 4 &&
+                requestStatus === $e.ok &&
+                this._clientMetricsReporter.report({
+                  client_metric: "next_edit_bg_sufficient_noops_latency_ms",
+                  value: totalLatency,
+                })
       }
+    } catch (error) {
+      this._logger.warn(`[${requestId}] Next edit failed: ${error}.`),
+        this._nextEditSessionEventReporter.reportEvent(
+          requestId,
+          void 0,
+          Date.now(),
+          "error-api-error",
+          "unknown",
+        )
+    } finally {
+      inflightRequest === this._inflightRequest &&
+        ((this._inflightRequest = void 0),
+        this._pendingRequests.length > 0
+          ? (this._processPendingRequestsDebounced(),
+            this._processPendingRequestsDebounced.flush())
+          : (this._logger.debug("No more pending requests."),
+            (this.state.value = "ready"),
+            requestStatus === $e.ok &&
+            !this._suggestionManager
+              .getActiveSuggestions()
+              .some((suggestion) => suggestion.state === "fresh" && suggestion.changeType !== "noop")
+              ? disposeAfterDelay(
+                  this._stateController.setState(vSe),
+                  e._statusClearTimeoutMs,
+                )
+              : requestStatus !== $e.cancelled &&
+                requestStatus !== $e.ok &&
+                (this._stateController.setState(ASe),
+                this._logger.debug(
+                  `Request ${requestId} failed with status: ${requestStatus}.`,
+                ))))
+      let finishedRequest = new NextEditRequest(requestId, mode, scope, qualifiedPathName, requestStatus, suggestions, startTime)
+      this._recentSuggestions.addItem(finishedRequest),
+        (this.lastFinishedRequest.value = finishedRequest),
+        stateToken.dispose(),
+        inflightRequest.cancelTokenSource.dispose()
     }
-    clearCompletedRequests(r) {
-      this._freshCompletedRequests = this._freshCompletedRequests.filter(
-        (n) => r !== void 0 && n.mode !== r,
-      )
-    }
-    _resolvePath(r) {
-      let n = r && QualifiedPathName.from(r),
-        i = n && this._findEditorForPath(n),
-        s = i && i.document,
-        o = s && this._blobNameCalculator.calculate(n.relPath, s.getText()),
-        a = i && new LineRange(i.selection.start.line, i.selection.end.line)
-      return { blobName: o, document: s, selection: a }
-    }
-    _findEditorForPath(r) {
-      let n = QualifiedPathName.from(r)
-      return ec.window.activeTextEditor &&
-        this._workspaceManager
-          .safeResolvePathName(ec.window.activeTextEditor.document.uri)
-          ?.equals(n)
-        ? ec.window.activeTextEditor
-        : ec.window.visibleTextEditors.find((i) =>
-            this._workspaceManager
-              .safeResolvePathName(i.document.uri)
-              ?.equals(n),
-          )
-    }
-  },
-  jCt = 15
-function R6(e, t) {
+  }
+  clearCompletedRequests(mode) {
+    this._freshCompletedRequests = this._freshCompletedRequests.filter(
+      (request) => mode !== void 0 && request.mode !== mode,
+    )
+  }
+  _resolvePath(qualifiedPathName) {
+    let pathName = qualifiedPathName && QualifiedPathName.from(qualifiedPathName),
+      editor = pathName && this._findEditorForPath(pathName),
+      document = editor && editor.document,
+      blobName = document && this._blobNameCalculator.calculate(pathName.relPath, document.getText()),
+      selection = editor && new LineRange(editor.selection.start.line, editor.selection.end.line)
+    return { blobName: blobName, document: document, selection: selection }
+  }
+  _findEditorForPath(qualifiedPathName) {
+    let pathName = QualifiedPathName.from(qualifiedPathName)
+    return ec.window.activeTextEditor &&
+      this._workspaceManager
+        .safeResolvePathName(ec.window.activeTextEditor.document.uri)
+        ?.equals(pathName)
+      ? ec.window.activeTextEditor
+      : ec.window.visibleTextEditors.find((i) =>
+          this._workspaceManager
+            .safeResolvePathName(i.document.uri)
+            ?.equals(pathName),
+        )
+  }
+},
+  MAX_CURSOR_LINE_DISTANCE = 15
+function isRequestSubsumed(request, otherRequest) {
   return (
-    e.mode === t.mode &&
-    (e.scope === t.scope || (e.scope === "CURSOR" && t.scope === "FILE")) &&
-    (e.scope === "WORKSPACE" ||
-      QualifiedPathName.equals(e.qualifiedPathName, t.qualifiedPathName)) &&
+    request.mode === otherRequest.mode &&
+    (request.scope === otherRequest.scope || (request.scope === "CURSOR" && otherRequest.scope === "FILE")) &&
+    (request.scope === "WORKSPACE" ||
+      QualifiedPathName.equals(request.qualifiedPathName, otherRequest.qualifiedPathName)) &&
     !(
-      e.scope !== "WORKSPACE" &&
-      e.requestBlobName &&
-      t.requestBlobName &&
-      e.requestBlobName !== t.requestBlobName
+      request.scope !== "WORKSPACE" &&
+      request.requestBlobName &&
+      otherRequest.requestBlobName &&
+      request.requestBlobName !== otherRequest.requestBlobName
     ) &&
     !(
-      e.scope === "CURSOR" &&
-      e.selection?.start != null &&
-      t.selection?.start != null &&
-      Math.abs(e.selection.start - t.selection.start) > jCt
+      request.scope === "CURSOR" &&
+      request.selection?.start != null &&
+      otherRequest.selection?.start != null &&
+      Math.abs(request.selection.start - otherRequest.selection.start) > MAX_CURSOR_LINE_DISTANCE
     )
   )
 }
-function ZCt(e, t) {
+function disposeAfterDelay(disposable, delayMs) {
   setTimeout(() => {
-    e.dispose()
-  }, t)
+    disposable.dispose()
+  }, delayMs)
 }
 var oIe = q(_s()),
   Us = q(require("vscode"))
@@ -112439,88 +112439,88 @@ var DocumentContextValue = class extends DisposableContainer {
   }
 }
 var sIe = q(require("vscode"))
-var Jm = class {
-    constructor(t) {
-      this.suggestion = t
+var UnchangedSuggestion = class {
+    constructor(suggestion) {
+      this.suggestion = suggestion
     }
   },
-  oC = class {
-    constructor(t) {
-      this.suggestion = t
+  AdjustedSuggestion = class {
+    constructor(suggestion) {
+      this.suggestion = suggestion
     }
   },
-  vw = class {
-    constructor(t) {
-      this.suggestion = t
+  AcceptedSuggestion = class {
+    constructor(suggestion) {
+      this.suggestion = suggestion
     }
   },
-  aC = class {
-    constructor(t) {
-      this.suggestion = t
+  InvalidatedSuggestion = class {
+    constructor(suggestion) {
+      this.suggestion = suggestion
     }
   },
-  lC = class {
-    constructor(t) {
-      this.suggestion = t
+  RevertedSuggestion = class {
+    constructor(suggestion) {
+      this.suggestion = suggestion
     }
   }
-function QN(e, t) {
+function updateSuggestionState(suggestion, changeEvent) {
   if (
-    t.contentChanges.length === 0 ||
-    t.document.uri.fsPath !== e.qualifiedPathName.absPath
+    changeEvent.contentChanges.length === 0 ||
+    changeEvent.document.uri.fsPath !== suggestion.qualifiedPathName.absPath
   )
-    return new Jm(e)
-  let r = e.state === "accepted",
-    n = t.document,
-    i = r ? e.afterLineRange() : e.lineRange,
-    s = t.contentChanges.filter(
-      (g) => g.range.end.line <= i.start && !iIe(g, i),
+    return new UnchangedSuggestion(suggestion)
+  let isAccepted = suggestion.state === "accepted",
+    document = changeEvent.document,
+    targetLineRange = isAccepted ? suggestion.afterLineRange() : suggestion.lineRange,
+    changesBeforeRange = changeEvent.contentChanges.filter(
+      (change) => change.range.end.line <= targetLineRange.start && !iIe(change, targetLineRange),
     ),
-    o = s
-      .map((g) => {
-        let m = g.text.match(/\n/g)?.length ?? 0,
-          y = g.range.end.line - g.range.start.line
-        return m - y
+    lineOffset = changesBeforeRange
+      .map((change) => {
+        let newLineCount = change.text.match(/\n/g)?.length ?? 0,
+          oldLineCount = change.range.end.line - change.range.start.line
+        return newLineCount - oldLineCount
       })
-      .reduce((g, m) => g + m, 0),
-    a = new LineRange(e.lineRange.start + o, e.lineRange.stop + o),
-    l = s.map((g) => g.text.length - g.rangeLength).reduce((g, m) => g + m, 0),
-    c = n.offsetAt(new sIe.Position(a.start, 0)) - l,
-    u = e.with({
+      .reduce((sum, diff) => sum + diff, 0),
+    adjustedLineRange = new LineRange(suggestion.lineRange.start + lineOffset, suggestion.lineRange.stop + lineOffset),
+    charOffset = changesBeforeRange.map((change) => change.text.length - change.rangeLength).reduce((sum, diff) => sum + diff, 0),
+    rangeStartOffset = document.offsetAt(new sIe.Position(adjustedLineRange.start, 0)) - charOffset,
+    updatedSuggestion = suggestion.with({
       result: {
-        ...e.result,
-        charStart: e.result.charStart + l,
-        charEnd: e.result.charEnd + l,
+        ...suggestion.result,
+        charStart: suggestion.result.charStart + charOffset,
+        charEnd: suggestion.result.charEnd + charOffset,
       },
-      lineRange: a,
+      lineRange: adjustedLineRange,
     }),
-    f = t.contentChanges
-      .filter((g) => iIe(g, i))
-      .map((g) => ({
-        rangeOffset: g.rangeOffset - c,
-        rangeLength: g.rangeLength,
-        text: g.text,
+    changesInRange = changeEvent.contentChanges
+      .filter((change) => iIe(change, targetLineRange))
+      .map((change) => ({
+        rangeOffset: change.rangeOffset - rangeStartOffset,
+        rangeLength: change.rangeLength,
+        text: change.text,
       }))
-      .sort((g, m) => g.rangeOffset - m.rangeOffset)
-  if (f.length === 0) return l === 0 ? new Jm(u) : new oC(u)
-  let p = 0
-  for (let g of f) {
+      .sort((a, b) => a.rangeOffset - b.rangeOffset)
+  if (changesInRange.length === 0) return charOffset === 0 ? new UnchangedSuggestion(updatedSuggestion) : new AdjustedSuggestion(updatedSuggestion)
+  let totalDiff = 0
+  for (let change of changesInRange) {
     if (
-      (r ? e.result.existingCode : e.result.suggestedCode).slice(
-        p + g.rangeOffset,
-        p + g.rangeOffset + g.text.length,
-      ) !== g.text
+      (isAccepted ? suggestion.result.existingCode : suggestion.result.suggestedCode).slice(
+        totalDiff + change.rangeOffset,
+        totalDiff + change.rangeOffset + change.text.length,
+      ) !== change.text
     )
-      return new aC(e)
-    p += g.text.length - g.rangeLength
+      return new InvalidatedSuggestion(suggestion)
+    totalDiff += change.text.length - change.rangeLength
   }
   return (
-    r && (p *= -1),
-    p !== e.result.suggestedCode.length - e.result.existingCode.length
-      ? new aC(e)
-      : r
-        ? new lC(u.with({ state: "fresh" }))
-        : new vw(u.with({ state: "accepted" }))
+    isAccepted && (totalDiff *= -1),
+    totalDiff !== suggestion.result.suggestedCode.length - suggestion.result.existingCode.length
+      ? new InvalidatedSuggestion(suggestion)
+      : isAccepted
+        ? new RevertedSuggestion(updatedSuggestion.with({ state: "fresh" }))
+        : new AcceptedSuggestion(updatedSuggestion.with({ state: "accepted" }))
   )
 }
 function XCt(e) {
@@ -112737,14 +112737,14 @@ var SuggestionManager = class extends DisposableContainer {
       [affectedSuggestions, unaffectedSuggestions] = (0, oIe.partition)(this._suggestions, (suggestion) =>
         documentPath.equals(suggestion.qualifiedPathName),
       ),
-      updatedSuggestions = affectedSuggestions.map((suggestion) => QN(suggestion, event)),
-      updatedAcceptedSuggestions = this._justAcceptedSuggestions.map((suggestion) => QN(suggestion, event)),
-      updatedRejectedSuggestions = this._getCurrentRejectedSuggestions().map(([suggestion, expiryTime]) => QN(suggestion, event)),
-      acceptedSuggestions = Eg(updatedSuggestions, vw),
-      invalidatedSuggestions = Eg(updatedSuggestions, aC),
-      undoneSuggestions = Eg(updatedAcceptedSuggestions, lC),
-      undoneRejectedSuggestions = Eg(updatedRejectedSuggestions, lC)
-    this._justAcceptedSuggestions = Eg(updatedAcceptedSuggestions, Jm).concat(Eg(updatedAcceptedSuggestions, oC))
+      updatedSuggestions = affectedSuggestions.map((suggestion) => updateSuggestionState(suggestion, event)),
+      updatedAcceptedSuggestions = this._justAcceptedSuggestions.map((suggestion) => updateSuggestionState(suggestion, event)),
+      updatedRejectedSuggestions = this._getCurrentRejectedSuggestions().map(([suggestion, expiryTime]) => updateSuggestionState(suggestion, event)),
+      acceptedSuggestions = filterSuggestionsByType(updatedSuggestions, AcceptedSuggestion),
+      invalidatedSuggestions = filterSuggestionsByType(updatedSuggestions, InvalidatedSuggestion),
+      undoneSuggestions = filterSuggestionsByType(updatedAcceptedSuggestions, RevertedSuggestion),
+      undoneRejectedSuggestions = filterSuggestionsByType(updatedRejectedSuggestions, RevertedSuggestion)
+    this._justAcceptedSuggestions = filterSuggestionsByType(updatedAcceptedSuggestions, UnchangedSuggestion).concat(filterSuggestionsByType(updatedAcceptedSuggestions, AdjustedSuggestion))
     let allUndoneSuggestions = undoneSuggestions.concat(undoneRejectedSuggestions),
       invalidatedDueToUndo = invalidatedSuggestions.filter((suggestion) =>
         allUndoneSuggestions.some(
@@ -112758,7 +112758,7 @@ var SuggestionManager = class extends DisposableContainer {
         `Accepting ${acceptedSuggestions.length} suggestions and invalidating ${invalidatedSuggestions.length} suggestions (of which ${invalidatedDueToUndo.length} were invalidated due to undo) and undoing ${allUndoneSuggestions.length} suggestions.`,
       )
     let shouldMarkStale = acceptedSuggestions.length === 0 && allUndoneSuggestions.length === 0 && invalidatedSuggestions.length > invalidatedDueToUndo.length,
-      updatedUnchangedSuggestions = [...Eg(updatedSuggestions, Jm), ...Eg(updatedSuggestions, oC)].map((suggestion) =>
+      updatedUnchangedSuggestions = [...filterSuggestionsByType(updatedSuggestions, UnchangedSuggestion), ...filterSuggestionsByType(updatedSuggestions, AdjustedSuggestion)].map((suggestion) =>
         this._markStaleIfNeeded(suggestion, shouldMarkStale, "document-changed"),
       ),
       updatedUnaffectedSuggestions = unaffectedSuggestions.map((suggestion) => this._markStaleIfNeeded(suggestion, shouldMarkStale, "document-changed"))
@@ -112849,8 +112849,8 @@ var SuggestionManager = class extends DisposableContainer {
       )
   }
 }
-function Eg(e, t) {
-  return e.filter((r) => r instanceof t).map((r) => r.suggestion)
+function filterSuggestionsByType(suggestions, suggestionType) {
+  return suggestions.filter((suggestion) => suggestion instanceof suggestionType).map((suggestion) => suggestion.suggestion)
 }
 var PN = q(_s()),
   io = q(require("vscode"))
@@ -121633,7 +121633,7 @@ var AugmentExtension = class e extends DisposableContainer {
       (this._codeEditReporter = new XQ(apiServer)),
       (this._nextEditResolutionReporter = new iN(apiServer)),
       (this._nextEditSessionEventReporter = new sN(apiServer)),
-      (this.nextEditConfigManager = new k1(
+      (this.nextEditConfigManager = new NextEditConfigManager(
         this._augmentConfigListener,
         this.featureFlagManager,
         this._globalState,
@@ -121938,7 +121938,7 @@ var AugmentExtension = class e extends DisposableContainer {
         this._nextEditSessionEventReporter,
       )),
       this.disposeOnDisable.push(this._suggestionManager),
-      (this._nextEditRequestManager = new FN(
+      (this._nextEditRequestManager = new NextEditRequestManager(
         this._apiServer,
         this._augmentConfigListener,
         this.workspaceManager,
@@ -122853,7 +122853,7 @@ function eBe(e) {
   let t = e.get("sessionId")
   return (t === void 0 || !I5(t)) && ((t = Oh()), e.update("sessionId", t)), t
 }
-function nEt(e) {
+function activate(e) {
   let t = z("activate()")
   t.debug("======== Activating extension ========")
   let r
