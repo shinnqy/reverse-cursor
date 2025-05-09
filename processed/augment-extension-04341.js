@@ -90004,15 +90004,15 @@ var _m = q(require("vscode")),
   Ix = `
 
 `
-function To(e) {
-  return e.scheme === "vscode-notebook-cell"
+function isNotebookCell(uri) {
+  return uri.scheme === "vscode-notebook-cell"
 }
 function fbe(e) {
   let t = _m.window.activeNotebookEditor?.notebook
   return t ? (Hmt(e, t) ? [k4(t), Wmt(t, e)] : [undefined, 0]) : [undefined, 0]
 }
 function hbe(e) {
-  if (To(e.uri)) {
+  if (isNotebookCell(e.uri)) {
     for (let t of _m.workspace.notebookDocuments)
       for (let r of t.getCells()) if (r.document === e) return t
   }
@@ -90038,8 +90038,8 @@ function uv(e) {
     .map((n) => n.document.getText())
     .join(Ix)
 }
-function hf(e) {
-  return e.getCells !== undefined
+function isNotebook(document) {
+  return document.getCells !== undefined
 }
 var aF = class extends mt {
     constructor(r, n, i) {
@@ -90099,7 +90099,7 @@ var aF = class extends mt {
         gf.window.showInformationMessage("No active editor.")
         return
       }
-      if (To(n.document.uri)) {
+      if (isNotebookCell(n.document.uri)) {
         gf.window.showInformationMessage(
           "Code instructions are not supported in notebooks.",
         )
@@ -90137,7 +90137,7 @@ var aF = class extends mt {
     canRun() {
       let r = this._extension.featureFlagManager.currentFlags,
         n = gf.window.activeTextEditor
-      return !!(r.enableInstructions && n && !To(n.document.uri))
+      return !!(r.enableInstructions && n && !isNotebookCell(n.document.uri))
     }
   },
   fv = class extends mt {
@@ -102139,7 +102139,7 @@ var an = class extends la {
             : "command"
     }
   },
-  M1 = class extends an {
+  ForceNextEditCommand = class extends an {
     type = "public"
     static commandID = "vscode-augment.next-edit.force"
     constructor(t, r, n) {
@@ -102152,7 +102152,7 @@ var an = class extends la {
       this._extension.forceNextEditSuggestion(this._getEventSource(t))
     }
   },
-  F1 = class extends an {
+  UpdateNextEditCommand = class extends an {
     type = "public"
     static commandID = "vscode-augment.next-edit.update"
     constructor(t, r, n) {
@@ -102162,7 +102162,7 @@ var an = class extends la {
       this._extension.nextEditUpdate(this._getEventSource(t))
     }
   },
-  Q1 = class extends an {
+  UpdateNextEditLoadingCommand = class extends an {
     type = "private"
     static commandID = "_vscode-augment.next-edit.update.loading"
     constructor(t, r, n) {
@@ -102172,7 +102172,7 @@ var an = class extends la {
       this._extension.noopClicked()
     }
   },
-  N1 = class extends an {
+  UpdateNextEditDisabledNoChangesCommand = class extends an {
     type = "private"
     static commandID = "_vscode-augment.next-edit.update.disabled-no-changes"
     constructor(t, r, n) {
@@ -102182,7 +102182,7 @@ var an = class extends la {
       this._extension.noopClicked()
     }
   },
-  P1 = class extends an {
+  UpdateNextEditDisabledCachedCommand = class extends an {
     type = "private"
     static commandID = "_vscode-augment.next-edit.update.disabled-cached"
     constructor(t, r, n) {
@@ -102192,7 +102192,7 @@ var an = class extends la {
       this._extension.noopClicked()
     }
   },
-  Kc = class extends an {
+  AcceptNextEditCommand = class extends an {
     type = "public"
     static commandID = "vscode-augment.next-edit.background.accept"
     constructor(t, r, n) {
@@ -102209,7 +102209,7 @@ var an = class extends la {
       )
     }
   },
-  Nm = class extends an {
+  AcceptAllNextEditCommand = class extends an {
     type = "public"
     static commandID = "vscode-augment.next-edit.background.accept-all"
     constructor(t, r, n) {
@@ -102221,7 +102221,7 @@ var an = class extends la {
       )
     }
   },
-  Cf = class extends an {
+  AcceptNextEditCodeActionCommand = class extends an {
     type = "private"
     static commandID = "_vscode-augment.next-edit.background.accept-code-action"
     constructor(t, r, n) {
@@ -102231,7 +102231,7 @@ var an = class extends la {
       this._extension.editorNextEdit?.acceptSuggestion(t, "code-action")
     }
   },
-  zc = class extends an {
+  RejectNextEditCommand = class extends an {
     type = "public"
     static commandID = "vscode-augment.next-edit.background.reject"
     constructor(t, r, n) {
@@ -102247,7 +102247,7 @@ var an = class extends la {
       )
     }
   },
-  Pm = class extends an {
+  RejectAllNextEditCommand = class extends an {
     type = "public"
     static commandID = "vscode-augment.next-edit.background.reject-all"
     constructor(t, r, n) {
@@ -102259,7 +102259,7 @@ var an = class extends la {
       )
     }
   },
-  rd = class extends an {
+  DismissNextEditCommand = class extends an {
     type = "public"
     static commandID = "vscode-augment.next-edit.background.dismiss"
     constructor(t, r, n) {
@@ -102269,7 +102269,7 @@ var an = class extends la {
       this._extension.editorNextEdit?.dismissOrReject(this._getEventSource(t))
     }
   },
-  fa = class extends an {
+  NextEditNavigateCommand = class extends an {
     type = "public"
     static commandID = "vscode-augment.next-edit.background.next"
     constructor(t, r, n) {
@@ -102279,7 +102279,7 @@ var an = class extends la {
       this._extension.editorNextEdit?.gotoNextSmart(this._getEventSource(t))
     }
   },
-  Lm = class extends an {
+  NextEditForwardCommand = class extends an {
     type = "public"
     static commandID = "vscode-augment.next-edit.background.next-forward"
     constructor(t, r, n) {
@@ -102289,7 +102289,7 @@ var an = class extends la {
       this._extension.editorNextEdit?.next(this._getEventSource(t))
     }
   },
-  Um = class extends an {
+  NextEditPreviousCommand = class extends an {
     type = "public"
     static commandID = "vscode-augment.next-edit.background.previous"
     constructor(t, r, n) {
@@ -102299,7 +102299,7 @@ var an = class extends la {
       this._extension.editorNextEdit?.previous(this._getEventSource(t))
     }
   },
-  L1 = class extends an {
+  OpenNextEditCommand = class extends an {
     type = "private"
     static commandID = "_vscode-augment.next-edit.background.open"
     constructor(t, r, n) {
@@ -102310,7 +102310,7 @@ var an = class extends la {
       this._extension.editorNextEdit?.openSuggestionAt(r.uri, r.lineNumber - 1)
     }
   },
-  U1 = class extends an {
+  ToggleNextEditPanelSplitCommand = class extends an {
     type = "public"
     static commandID = "vscode-augment.next-edit.toggle-panel-horizontal-split"
     constructor(t, r, n) {
@@ -102322,7 +102322,7 @@ var an = class extends la {
       )
     }
   },
-  fg = class extends an {
+  LearnMoreNextEditCommand = class extends an {
     type = "public"
     static commandID = "vscode-augment.next-edit.learn-more"
     constructor(t, r, n) {
@@ -102335,7 +102335,7 @@ var an = class extends la {
       this._extension.nextEditLearnMore(this._getEventSource(t))
     }
   },
-  O1 = class extends an {
+  NextForwardDisabledCommand = class extends an {
     type = "private"
     static commandID =
       "_vscode-augment.next-edit.background.next-forward.disabled"
@@ -102346,7 +102346,7 @@ var an = class extends la {
       this._extension.noopClicked()
     }
   },
-  q1 = class extends an {
+  PreviousDisabledCommand = class extends an {
     type = "private"
     static commandID = "_vscode-augment.next-edit.background.previous.disabled"
     constructor(t, r, n) {
@@ -102356,7 +102356,7 @@ var an = class extends la {
       this._extension.noopClicked()
     }
   },
-  nd = class extends an {
+  OpenNextEditPanelCommand = class extends an {
     constructor(r, n, i) {
       super(r, n, i, undefined, r.nextEditConfigManager.config.enablePanel)
       this.extension = r
@@ -102373,7 +102373,7 @@ var an = class extends la {
       this._extension.openNextEditPanel(this._getEventSource(r))
     }
   },
-  Mo = class extends an {
+  UndoAcceptSuggestionCommand = class extends an {
     type = "private"
     static commandID = "_vscode-augment.next-edit.undo-accept-suggestion"
     constructor(t, r, n) {
@@ -102389,7 +102389,7 @@ var an = class extends la {
       )
     }
   },
-  Ov = class extends an {
+  ToggleHoverDiffCommand = class extends an {
     type = "private"
     static commandID = "_vscode-augment.next-edit.toggle-hover-diff"
     constructor(t, r, n) {
@@ -102405,7 +102405,7 @@ var an = class extends la {
       )
     }
   },
-  V1 = class e extends an {
+  ToggleBackgroundSuggestionsCommand = class e extends an {
     type = "public"
     static commandID = "vscode-augment.next-edit.toggle-bg"
     static backgroundSuggestionsConfigKey =
@@ -102456,7 +102456,7 @@ var an = class extends la {
       await n.update(e.backgroundSuggestionsConfigKey, o, s)
     }
   },
-  H1 = class extends an {
+  ToggleHighlightsCommand = class extends an {
     type = "public"
     static commandID = "vscode-augment.next-edit.toggle-all-highlights"
     constructor(t, r, n) {
@@ -102475,7 +102475,7 @@ var an = class extends la {
       )
     }
   },
-  Xx = class e extends an {
+  EnableBackgroundSuggestionsCommand = class e extends an {
     type = "public"
     static commandID = "vscode-augment.next-edit.enable-bg"
     static backgroundSuggestionsConfigKey =
@@ -102499,7 +102499,7 @@ var an = class extends la {
         await t.update(e.backgroundSuggestionsConfigKey, true, n)
     }
   },
-  W1 = class e extends an {
+  DisableBackgroundSuggestionsCommand = class e extends an {
     type = "public"
     static commandID = "vscode-augment.next-edit.disable-bg"
     static backgroundSuggestionsConfigKey =
@@ -102516,14 +102516,14 @@ var an = class extends la {
     }
     async run() {
       let t = Pi.workspace.getConfiguration("augment")
-      if (!t.get(Xx.backgroundSuggestionsConfigKey)) return
+      if (!t.get(EnableBackgroundSuggestionsCommand.backgroundSuggestionsConfigKey)) return
       let r = t.inspect(e.backgroundSuggestionsConfigKey),
         n = Pi.ConfigurationTarget.Global
       r?.workspaceValue !== undefined && (n = Pi.ConfigurationTarget.Workspace),
         await t.update(e.backgroundSuggestionsConfigKey, false, n)
     }
   },
-  G1 = class e extends an {
+  ResetNextEditOnboardingCommand = class e extends an {
     constructor(r, n, i, s) {
       super(r, n, i, e.title)
       this._globalState = s
@@ -102541,7 +102541,7 @@ var an = class extends la {
         await this._globalState.update("nextEditUxMigrationStatus", undefined)
     }
   },
-  $1 = class extends an {
+  OpenNextEditSettingsCommand = class extends an {
     static commandID = "vscode-augment.next-edit.settings"
     type = "public"
     constructor(t, r, n) {
@@ -103471,14 +103471,14 @@ function iw(e, t) {
     isVersionSupported(e, t)
   )
 }
-function Vv() {
-  let e = iQ.window.tabGroups.activeTabGroup?.activeTab?.input
+function isDiffEditor() {
+  let activeInput = iQ.window.tabGroups.activeTabGroup?.activeTab?.input
   return (
-    e instanceof iQ.TabInputTextDiff ||
-    (e != null &&
-      Object.hasOwn(e, "base") &&
-      Object.hasOwn(e, "input1") &&
-      Object.hasOwn(e, "input2"))
+    activeInput instanceof iQ.TabInputTextDiff ||
+    (activeInput != null &&
+      Object.hasOwn(activeInput, "base") &&
+      Object.hasOwn(activeInput, "input1") &&
+      Object.hasOwn(activeInput, "input2"))
   )
 }
 var filterValidSuggestions = (e) => {
@@ -103490,33 +103490,33 @@ var filterValidSuggestions = (e) => {
     (...e) =>
     (t) =>
       e.some((r) => r(t))
-function isSuggestionAccepted(e) {
-  return e?.state === "accepted"
+function isSuggestionAccepted(suggestion) {
+  return suggestion?.state === "accepted"
 }
-function isFreshNonNoopSuggestion(e) {
-  return e?.state === "fresh" && e.changeType !== "noop"
+function isFreshNonNoopSuggestion(suggestion) {
+  return suggestion?.state === "fresh" && suggestion.changeType !== "noop"
 }
-function Lwe(e) {
-  return e?.state === "fresh"
+function isFreshSuggestion(suggestion) {
+  return suggestion?.state === "fresh"
 }
-function id(e, t, r = false) {
-  let n = e.getKeybindingForCommand(t, r)
+function getKeybindingLabel(keybindingWatcher, commandId, formatForDisplay = false) {
+  let keybinding = keybindingWatcher.getKeybindingForCommand(commandId, formatForDisplay)
   return (
-    n ||
-    (t === Mo.commandID
-      ? (e.getSimplifiedPlatform() === "darwin"
-          ? (n = "Cmd+Z")
-          : (n = "Ctrl+Z"),
-        r ? jc.formatKeyboardShortcut(n, e.getSimplifiedPlatform()) : n)
-      : t === "redo"
-        ? (e.getSimplifiedPlatform() === "darwin"
-            ? (n = "Cmd+Shift+Z")
-            : (n = "Ctrl+Y"),
-          r ? jc.formatKeyboardShortcut(n, e.getSimplifiedPlatform()) : n)
-        : n)
+    keybinding ||
+    (commandId === UndoAcceptSuggestionCommand.commandID
+      ? (keybindingWatcher.getSimplifiedPlatform() === "darwin"
+          ? (keybinding = "Cmd+Z")
+          : (keybinding = "Ctrl+Z"),
+        formatForDisplay ? jc.formatKeyboardShortcut(keybinding, keybindingWatcher.getSimplifiedPlatform()) : keybinding)
+      : commandId === "redo"
+        ? (keybindingWatcher.getSimplifiedPlatform() === "darwin"
+            ? (keybinding = "Cmd+Shift+Z")
+            : (keybinding = "Ctrl+Y"),
+          formatForDisplay ? jc.formatKeyboardShortcut(keybinding, keybindingWatcher.getSimplifiedPlatform()) : keybinding)
+        : keybinding)
   )
 }
-var sQ = class e extends mt {
+var ClearRecentEditingHistoryCommand = class e extends mt {
   constructor(r, n) {
     super(e.title)
     this._extension = r
@@ -104883,7 +104883,7 @@ var RQ = class e extends la {
     return super.canRun()
   }
 }
-function jwe(e, t, r, n, i, s, o, a, l, c, u, f, p, g) {
+function registerCommands(e, t, r, n, i, s, o, a, l, c, u, f, p, g) {
   let m = new nF(r)
   return (
     m.registerGroup("", [
@@ -104906,33 +104906,33 @@ function jwe(e, t, r, n, i, s, o, a, l, c, u, f, p, g) {
       new IQ(e.extensionUri, t, s, r, t.guidelinesWatcher),
     ]),
     m.registerGroup("Next Edit Suggestions", [
-      new Kc(t, r, f),
-      new zc(t, r, f),
-      new Nm(t, r, f),
-      new Pm(t, r, f),
-      new rd(t, r, f),
-      new Um(t, r, f),
-      new Lm(t, r, f),
-      new fa(t, r, f),
-      new M1(t, r, f),
-      new U1(t, r, f),
-      new F1(t, r, f),
-      new fg(t, r, f),
-      new Xx(t, r, f),
-      new W1(t, r, f),
-      new H1(t, r, f),
-      new G1(t, r, f, p),
-      new sQ(t, r),
-      new Q1(t, r, f),
-      new N1(t, r, f),
-      new P1(t, r, f),
-      new Cf(t, r, f),
-      new L1(t, r, f),
-      new nd(t, r, f),
-      new q1(t, r, f),
-      new O1(t, r, f),
-      new Mo(t, r, f),
-      new Ov(t, r, f),
+      new AcceptNextEditCommand(t, r, f),
+      new RejectNextEditCommand(t, r, f),
+      new AcceptAllNextEditCommand(t, r, f),
+      new RejectAllNextEditCommand(t, r, f),
+      new DismissNextEditCommand(t, r, f),
+      new NextEditPreviousCommand(t, r, f),
+      new NextEditForwardCommand(t, r, f),
+      new NextEditNavigateCommand(t, r, f),
+      new ForceNextEditCommand(t, r, f),
+      new ToggleNextEditPanelSplitCommand(t, r, f),
+      new UpdateNextEditCommand(t, r, f),
+      new LearnMoreNextEditCommand(t, r, f),
+      new EnableBackgroundSuggestionsCommand(t, r, f),
+      new DisableBackgroundSuggestionsCommand(t, r, f),
+      new ToggleHighlightsCommand(t, r, f),
+      new ResetNextEditOnboardingCommand(t, r, f, p),
+      new ClearRecentEditingHistoryCommand(t, r),
+      new UpdateNextEditLoadingCommand(t, r, f),
+      new UpdateNextEditDisabledNoChangesCommand(t, r, f),
+      new UpdateNextEditDisabledCachedCommand(t, r, f),
+      new AcceptNextEditCodeActionCommand(t, r, f),
+      new OpenNextEditCommand(t, r, f),
+      new OpenNextEditPanelCommand(t, r, f),
+      new PreviousDisabledCommand(t, r, f),
+      new NextForwardDisabledCommand(t, r, f),
+      new UndoAcceptSuggestionCommand(t, r, f),
+      new ToggleHoverDiffCommand(t, r, f),
     ]),
     m.registerGroup("Debug", [
       new dQ(t, r),
@@ -104952,14 +104952,14 @@ function jwe(e, t, r, n, i, s, o, a, l, c, u, f, p, g) {
       new wf(t, wf.commandIDProfessional),
       new wf(t, wf.commandIDEnterprise),
       new Mm(n, i, Mm.signOutCommandID, "$(sign-out) Sign Out"),
-      new $1(t, r, f),
+      new OpenNextEditSettingsCommand(t, r, f),
     ]),
     r.config.autofix.enabled &&
       r.config.autofix.autofixUrl &&
       m.register([new T1(t, s)]),
     m.register([
       new xQ(t, e, m),
-      new V1(t, r, f),
+      new ToggleBackgroundSuggestionsCommand(t, r, f),
       new Mv(t.featureFlagManager, c),
       new gQ(t, s),
       new aF(t, e.extensionUri, s),
@@ -105877,7 +105877,7 @@ var UQ = class extends DisposableContainer {
   }
   _onTextDocumentChange(t) {
     if (
-      (t.document.uri.scheme !== "file" && !To(t.document.uri)) ||
+      (t.document.uri.scheme !== "file" && !isNotebookCell(t.document.uri)) ||
       t.contentChanges.length === 0
     )
       return
@@ -106433,7 +106433,7 @@ var WQ = class e extends DisposableContainer {
         Zv.languages.onDidChangeDiagnostics((t) => {
           let r = new Date()
           for (let n of t.uris) {
-            if (To(n)) continue
+            if (isNotebookCell(n)) continue
             let i = this._diagnostics.get(n.path),
               s = Zv.languages
                 .getDiagnostics(n)
@@ -107663,118 +107663,118 @@ function formatPositionToString(position) {
 function b6(e) {
   return [...e.visibleRanges].sort((t, r) => t.start.line - r.start.line)
 }
-function ms(e) {
-  return Zy(e.fsPath)
+function getPathFromUri(uri) {
+  return Zy(uri.fsPath)
 }
-function cN(e) {
-  return e.fsPath
+function getUriPath(uri) {
+  return uri.fsPath
 }
-function Bf(e) {
-  if (e.scheme === "file" || e.scheme === "untitled" || To(e)) return ms(e)
+function getPathIfSupported(uri) {
+  if (uri.scheme === "file" || uri.scheme === "untitled" || isNotebookCell(uri)) return getPathFromUri(uri)
 }
-function RSe(e) {
-  if (e.scheme === "file") return ms(e)
+function getPathIfFile(uri) {
+  if (uri.scheme === "file") return getPathFromUri(uri)
 }
 var fN = q(require("vscode"))
-var Xv = class {
-    constructor(t, r) {
-      this.title = t
-      this.action = r
-      ;(this.title = t), (this.action = r)
+var TutorialAction = class {
+    constructor(title, action) {
+      this.title = title
+      this.action = action
+      ;(this.title = title), (this.action = action)
     }
   },
-  dN = class extends DisposableContainer {
-    constructor(r, n, i, s, o, a, l) {
+  NextEditTutorialManager = class extends DisposableContainer {
+    constructor(configListener, suggestionManager, keybindingWatcher, globalState, nextEditSessionEventReporter, nextEditConfigManager, completionVisibilityWatcher) {
       super()
-      this._configListener = r
-      this._suggestionManager = n
-      this._keybindingWatcher = i
-      this._globalState = s
-      this._nextEditSessionEventReporter = o
-      this._nextEditConfigManager = a
-      this._completionVisibilityWatcher = l
+      this._configListener = configListener
+      this._suggestionManager = suggestionManager
+      this._keybindingWatcher = keybindingWatcher
+      this._globalState = globalState
+      this._nextEditSessionEventReporter = nextEditSessionEventReporter
+      this._nextEditConfigManager = nextEditConfigManager
+      this._completionVisibilityWatcher = completionVisibilityWatcher
       this._addInitialTutorial(), this._addSecondTutorial()
     }
     _addInitialTutorial() {
-      let r = this._nextEditConfigManager.config.enableAutoApply,
-        n = id(this._keybindingWatcher, fa.commandID, true),
-        i = id(this._keybindingWatcher, rd.commandID, true)
+      let enableAutoApply = this._nextEditConfigManager.config.enableAutoApply,
+        previewKeybinding = getKeybindingLabel(this._keybindingWatcher, NextEditNavigateCommand.commandID, true),
+        dismissKeybinding = getKeybindingLabel(this._keybindingWatcher, DismissNextEditCommand.commandID, true)
       this._addTutorial(
         "nextEditSuggestionSeen",
-        (s) => s.newSuggestions,
+        (suggestions) => suggestions.newSuggestions,
         isFreshNonNoopSuggestion,
         "You have a Next Edit suggestion available. Next Edit helps you complete your train of thought by suggesting changes that continue your recent work.",
         [
-          new Xv(
-            r ? `Preview & Apply (${n})` : `Preview (${n})`,
-            uN(fa.commandID),
+          new TutorialAction(
+            enableAutoApply ? `Preview & Apply (${previewKeybinding})` : `Preview (${previewKeybinding})`,
+            createCommandExecutor(NextEditNavigateCommand.commandID),
           ),
-          new Xv(`Dismiss All (${i})`, uN(rd.commandID)),
+          new TutorialAction(`Dismiss All (${dismissKeybinding})`, createCommandExecutor(DismissNextEditCommand.commandID)),
         ],
         "tutorial-initial-shown",
       )
     }
     _addSecondTutorial() {
-      let r = id(this._keybindingWatcher, Mo.commandID, true),
-        n = id(this._keybindingWatcher, "redo", true),
-        i = id(this._keybindingWatcher, nd.commandID, true),
-        s = [new Xv("Learn More", uN(fg.commandID))].concat(
+      let undoKeybinding = getKeybindingLabel(this._keybindingWatcher, UndoAcceptSuggestionCommand.commandID, true),
+        redoKeybinding = getKeybindingLabel(this._keybindingWatcher, "redo", true),
+        viewPanelKeybinding = getKeybindingLabel(this._keybindingWatcher, OpenNextEditPanelCommand.commandID, true),
+        actions = [new TutorialAction("Learn More", createCommandExecutor(LearnMoreNextEditCommand.commandID))].concat(
           this._nextEditConfigManager.config.enablePanel
-            ? [new Xv(`View All in Panel (${i})`, uN(nd.commandID))]
+            ? [new TutorialAction(`View All in Panel (${viewPanelKeybinding})`, createCommandExecutor(OpenNextEditPanelCommand.commandID))]
             : [],
         )
       this._addTutorial(
         "nextEditSuggestionAccepted",
-        (o) => o.accepted,
+        (suggestions) => suggestions.accepted,
         undefined,
-        `You just applied a Next Edit suggestion! Use Undo (${r}) and Redo (${n}) to go back and forth between the original and suggested code.`,
-        s,
+        `You just applied a Next Edit suggestion! Use Undo (${undoKeybinding}) and Redo (${redoKeybinding}) to go back and forth between the original and suggested code.`,
+        actions,
         "tutorial-after-accept-shown",
       )
     }
-    _addTutorial(r, n, i, s, o, a) {
-      this._globalState.get(r) !== true &&
+    _addTutorial(storageKey, suggestionsSelector, suggestionFilter, message, actions, eventName) {
+      this._globalState.get(storageKey) !== true &&
         this.addDisposable(
-          this._suggestionManager.onSuggestionsChanged(async (l) => {
+          this._suggestionManager.onSuggestionsChanged(async (changedSuggestions) => {
             if (
-              !this._shouldShowTutorial(r, n(l), i) ||
+              !this._shouldShowTutorial(storageKey, suggestionsSelector(changedSuggestions), suggestionFilter) ||
               this._completionVisibilityWatcher.maybeInlineCompletionVisible
             )
               return
-            this._globalState.update(r, true),
+            this._globalState.update(storageKey, true),
               this._nextEditSessionEventReporter.reportEventWithoutIds(
-                a,
+                eventName,
                 "unknown",
               )
-            let c = await fN.window.showInformationMessage(s, ...o)
-            c?.action(),
+            let selectedAction = await fN.window.showInformationMessage(message, ...actions)
+            selectedAction?.action(),
               this._nextEditSessionEventReporter.reportEventWithoutIds(
-                c ? "tutorial-nonempty-response" : "tutorial-empty-response",
+                selectedAction ? "tutorial-nonempty-response" : "tutorial-empty-response",
                 "unknown",
               )
           }),
         )
     }
-    _shouldShowTutorial(r, n, i = undefined) {
+    _shouldShowTutorial(storageKey, suggestions, suggestionFilter = undefined) {
       return (
-        i && (n = n.filter(i)),
-        !(n.length === 0 || this._globalState.get(r) === true)
+        suggestionFilter && (suggestions = suggestions.filter(suggestionFilter)),
+        !(suggestions.length === 0 || this._globalState.get(storageKey) === true)
       )
     }
   }
-function uN(e) {
-  return () => void fN.commands.executeCommand(e, "tutorial")
+function createCommandExecutor(commandId) {
+  return () => void fN.commands.executeCommand(commandId, "tutorial")
 }
-var hN = class e extends DisposableContainer {
-  constructor(r, n, i, s, o, a, l, c, u) {
+var BackgroundNextEdit = class BackgroundNextEdit extends DisposableContainer {
+  constructor(workspaceManager, nextEditSessionEventReporter, context, configListener, suggestionManager, requestManager, webviewManager, nextEditConfigManager, completionVisibilityWatcher) {
     super()
-    this.workspaceManager = r
-    this._nextEditSessionEventReporter = n
-    this._configListener = s
-    this._suggestionManager = o
-    this._requestManager = a
-    this._nextEditConfigManager = c
-    this._completionVisibilityWatcher = u
+    this.workspaceManager = workspaceManager
+    this._nextEditSessionEventReporter = nextEditSessionEventReporter
+    this._configListener = configListener
+    this._suggestionManager = suggestionManager
+    this._requestManager = requestManager
+    this._nextEditConfigManager = nextEditConfigManager
+    this._completionVisibilityWatcher = completionVisibilityWatcher
     this.addDisposable(
       new nl.Disposable(() => {
         this._requestManager?.clearCompletedRequests(),
@@ -107796,45 +107796,45 @@ var hN = class e extends DisposableContainer {
       ),
       this.addDisposable(
         new nl.Disposable(
-          this._requestManager.lastFinishedRequest.listen((g) => {
-            if (!g || g.apiResult !== RequestStatus.ok || g.mode !== "BACKGROUND") return
-            let m = nl.window.activeTextEditor,
-              y = m && this.workspaceManager.safeResolvePathName(m.document.uri)
-            if (g.suggestions.length === 0) {
+          this._requestManager.lastFinishedRequest.listen((request) => {
+            if (!request || request.apiResult !== RequestStatus.ok || request.mode !== "BACKGROUND") return
+            let activeEditor = nl.window.activeTextEditor,
+              currentPath = activeEditor && this.workspaceManager.safeResolvePathName(activeEditor.document.uri)
+            if (request.suggestions.length === 0) {
               this._logRequestCaching(
-                `Request (scope=${g.scope}) returned no suggestions.`,
+                `Request (scope=${request.scope}) returned no suggestions.`,
               )
               return
             }
-            if (g.scope === "CURSOR") {
-              let v = g.suggestions.filter(isFreshNonNoopSuggestion)
-              v.length === 0
+            if (request.scope === "CURSOR") {
+              let freshSuggestions = request.suggestions.filter(isFreshNonNoopSuggestion)
+              freshSuggestions.length === 0
                 ? (this._logRequestCaching(
                     "CURSOR request returned no results, falling back to FILE request immediately",
                   ),
-                  this._requestManager.enqueueRequest(y, "BACKGROUND", "FILE"))
+                  this._requestManager.enqueueRequest(currentPath, "BACKGROUND", "FILE"))
                 : (this._logRequestCaching(
-                    `CURSOR request returned ${v.length} suggestions, scheduling delayed FILE request in ${e._fileRequestDelayMs}ms`,
+                    `CURSOR request returned ${freshSuggestions.length} suggestions, scheduling delayed FILE request in ${BackgroundNextEdit._fileRequestDelayMs}ms`,
                   ),
                   (this._delayedFileRequestTimer = setTimeout(() => {
                     this._logRequestCaching("Enqueuing delayed FILE request"),
                       this._requestManager.enqueueRequest(
-                        y,
+                        currentPath,
                         "BACKGROUND",
                         "FILE",
                       ),
                       (this._delayedFileRequestTimer = null)
-                  }, e._fileRequestDelayMs)))
+                  }, BackgroundNextEdit._fileRequestDelayMs)))
             } else
-              g.scope === "FILE" &&
-                g.suggestions.filter(isFreshNonNoopSuggestion).length === 0 &&
+              request.scope === "FILE" &&
+                request.suggestions.filter(isFreshNonNoopSuggestion).length === 0 &&
                 this._configListener.config.nextEdit
                   .enableGlobalBackgroundSuggestions &&
                 (this._logRequestCaching(
                   "FILE request returned no results, falling back to WORKSPACE request",
                 ),
                 this._requestManager.enqueueRequest(
-                  y,
+                  currentPath,
                   "BACKGROUND",
                   "WORKSPACE",
                 ))
@@ -107842,47 +107842,47 @@ var hN = class e extends DisposableContainer {
         ),
       ),
       this.addDisposable(
-        this._suggestionManager.onSuggestionsChanged((g) => {
-          for (let v of g.accepted.filter(
-            (C) => C.result.truncationChar !== undefined,
+        this._suggestionManager.onSuggestionsChanged((changedSuggestions) => {
+          for (let suggestion of changedSuggestions.accepted.filter(
+            (item) => item.result.truncationChar !== undefined,
           ))
             this._requestManager.enqueueRequest(
-              v.qualifiedPathName,
+              suggestion.qualifiedPathName,
               "BACKGROUND",
               "CURSOR",
-              v.lineRange,
+              suggestion.lineRange,
             )
-          let y = g.accepted
-            .map((v) => v.requestId)
-            .map((v) =>
-              g.newSuggestions.filter((C) => isFreshNonNoopSuggestion(C) && C.requestId === v),
+          let requestGroups = changedSuggestions.accepted
+            .map((suggestion) => suggestion.requestId)
+            .map((requestId) =>
+              changedSuggestions.newSuggestions.filter((item) => isFreshNonNoopSuggestion(item) && item.requestId === requestId),
             )
-          for (let v of y)
-            if (!v.some((C) => C.result.truncationChar === undefined))
-              for (let C of v)
+          for (let group of requestGroups)
+            if (!group.some((item) => item.result.truncationChar === undefined))
+              for (let suggestion of group)
                 this._requestManager.enqueueRequest(
-                  C.qualifiedPathName,
+                  suggestion.qualifiedPathName,
                   "BACKGROUND",
                   "CURSOR",
-                  C.lineRange,
+                  suggestion.lineRange,
                 )
         }),
       ),
       this.addDisposable(
-        new dN(
+        new NextEditTutorialManager(
           this._configListener,
           this._suggestionManager,
-          i,
-          l,
-          n,
+          context,
+          webviewManager,
+          nextEditSessionEventReporter,
           this._nextEditConfigManager,
           this._completionVisibilityWatcher,
         ),
       )
-    let f = nl.window.activeTextEditor
-    if (!f) return
-    let p = this.workspaceManager.safeResolvePathName(f.document.uri)
-    p && this._requestManager.enqueueRequest(p, "BACKGROUND", "CURSOR")
+    let activeEditor = nl.window.activeTextEditor
+    if (!activeEditor) return
+    let currentPath = this.workspaceManager.safeResolvePathName(activeEditor.document.uri)
+    currentPath && this._requestManager.enqueueRequest(currentPath, "BACKGROUND", "CURSOR")
   }
   _logger = z("BackgroundNextEdits")
   _noopSources = new Set()
@@ -107891,10 +107891,10 @@ var hN = class e extends DisposableContainer {
   _debugRequestCaching = true
   _delayedFileRequestTimer = null
   static _fileRequestDelayMs = 4e3
-  _logRequestCaching(r) {
+  _logRequestCaching(message) {
     if (this._debugRequestCaching) {
-      let n = typeof r == "string" ? r : r()
-      this._logger.debug(n)
+      let logMessage = typeof message == "string" ? message : message()
+      this._logger.debug(logMessage)
     }
   }
   _cancelDelayedFileRequest() {
@@ -107918,16 +107918,16 @@ var hN = class e extends DisposableContainer {
   }
   _reportNoopSources() {
     if (this._noopSources.size !== 0) {
-      for (let r of this._noopSources.values())
+      for (let source of this._noopSources.values())
         this._nextEditSessionEventReporter.reportEventWithoutIds(
           "background-noop",
-          r,
+          source,
         )
       this._noopSources.clear()
     }
   }
-  _handleTextDocumentChanged = (r) => {
-    if (r.contentChanges.length === 0) {
+  _handleTextDocumentChanged = (event) => {
+    if (event.contentChanges.length === 0) {
       this._noopSources.add("no-content-changes")
       return
     }
@@ -107935,26 +107935,26 @@ var hN = class e extends DisposableContainer {
       this._noopSources.add("debug-session")
       return
     }
-    if (hf(r.document)) {
+    if (isNotebook(event.document)) {
       this._noopSources.add("notebook-document")
       return
     }
-    if (!RSe(r.document.uri)) {
+    if (!getPathIfFile(event.document.uri)) {
       this._noopSources.add("unsupported-uri")
       return
     }
-    let n = this.workspaceManager.safeResolvePathName(r.document.uri)
-    if (!n) {
+    let currentPath = this.workspaceManager.safeResolvePathName(event.document.uri)
+    if (!currentPath) {
       this._noopSources.add("missing-path-name")
       return
     }
-    let i = nl.window.activeTextEditor
-    if (!i || r.document !== i.document) {
+    let activeEditor = nl.window.activeTextEditor
+    if (!activeEditor || event.document !== activeEditor.document) {
       this._noopSources.add("not-active-editor")
       return
     }
     if (
-      (this._logger.debug(`Received TextDocumentChangeEvent for ${n.relPath}`),
+      (this._logger.debug(`Received TextDocumentChangeEvent for ${currentPath.relPath}`),
       this._cancelDelayedFileRequest(),
       this._logRequestCaching(
         "Canceled delayed FILE request due to document change.",
@@ -107962,66 +107962,66 @@ var hN = class e extends DisposableContainer {
       this._suggestionManager
         .getActiveSuggestions()
         .filter(
-          (o) =>
-            o.qualifiedPathName.equals(n) &&
-            isFreshNonNoopSuggestion(o) &&
-            o.result.truncationChar === undefined,
+          (suggestion) =>
+            suggestion.qualifiedPathName.equals(currentPath) &&
+            isFreshNonNoopSuggestion(suggestion) &&
+            suggestion.result.truncationChar === undefined,
         ).length > 0)
     ) {
       this._noopSources.add("fresh-suggestions"),
         this._logRequestCaching("Continuing with remaining fresh suggestions.")
       return
     }
-    this._requestManager.enqueueRequest(n, "BACKGROUND", "CURSOR")
+    this._requestManager.enqueueRequest(currentPath, "BACKGROUND", "CURSOR")
   }
-  _handleTextEditorSelectionChanged = (r) => {
-    let n = nl.window.activeTextEditor
+  _handleTextEditorSelectionChanged = (event) => {
+    let activeEditor = nl.window.activeTextEditor
     if (
-      !n ||
-      r.textEditor.document !== n.document ||
-      Vv() ||
+      !activeEditor ||
+      event.textEditor.document !== activeEditor.document ||
+      isDiffEditor() ||
       this._isDebugging ||
-      To(n.document.uri)
+      isNotebookCell(activeEditor.document.uri)
     )
       return
-    let i = this.workspaceManager.safeResolvePathName(r.textEditor.document.uri)
-    if (!i) return
-    let s = this._suggestionManager
+    let currentPath = this.workspaceManager.safeResolvePathName(event.textEditor.document.uri)
+    if (!currentPath) return
+    let freshSuggestions = this._suggestionManager
       .getActiveSuggestions()
       .filter(
-        (c) =>
-          c.qualifiedPathName.equals(i) &&
-          Lwe(c) &&
-          c.result.truncationChar === undefined,
+        (suggestion) =>
+          suggestion.qualifiedPathName.equals(currentPath) &&
+          isFreshSuggestion(suggestion) &&
+          suggestion.result.truncationChar === undefined,
       )
-      .sort((c, u) => {
-        let f =
-            c.state === "accepted" ? c.afterLineRange(n.document) : c.lineRange,
-          p =
-            u.state === "accepted" ? u.afterLineRange(n.document) : u.lineRange
-        return f.start - p.start
+      .sort((a, b) => {
+        let rangeA =
+            a.state === "accepted" ? a.afterLineRange(activeEditor.document) : a.lineRange,
+          rangeB =
+            b.state === "accepted" ? b.afterLineRange(activeEditor.document) : b.lineRange
+        return rangeA.start - rangeB.start
       })
     this._logRequestCaching(
       () =>
-        `Found ${s.length} fresh suggestions in current file: ${s
-          .map((c) => {
-            let u =
-                c.state === "accepted"
-                  ? c.afterLineRange(n.document)
-                  : c.lineRange,
-              f = c.changeType === "noop" ? "no-op" : "change"
-            return `[${u.toString()}, ${f}]`
+        `Found ${freshSuggestions.length} fresh suggestions in current file: ${freshSuggestions
+          .map((suggestion) => {
+            let range =
+                suggestion.state === "accepted"
+                  ? suggestion.afterLineRange(activeEditor.document)
+                  : suggestion.lineRange,
+              type = suggestion.changeType === "noop" ? "no-op" : "change"
+            return `[${range.toString()}, ${type}]`
           })
           .join(", ")}`,
     )
-    let o = rangeToLineRange(n.selection)
-    this._logRequestCaching(`Cursor moved to line range: ${o.toString()}`)
-    let a = s.filter((c) => {
-      let u =
-        c.state === "accepted" ? c.afterLineRange(n.document) : c.lineRange
-      return u.intersects(o) || u.touches(o)
+    let selectionRange = rangeToLineRange(activeEditor.selection)
+    this._logRequestCaching(`Cursor moved to line range: ${selectionRange.toString()}`)
+    let intersectingSuggestions = freshSuggestions.filter((suggestion) => {
+      let range =
+        suggestion.state === "accepted" ? suggestion.afterLineRange(activeEditor.document) : suggestion.lineRange
+      return range.intersects(selectionRange) || range.touches(selectionRange)
     })
-    if (!(a.length > 0))
+    if (!(intersectingSuggestions.length > 0))
       this._logRequestCaching(
         "Cursor not in any fresh suggestion region, sending new CURSOR request",
       ),
@@ -108029,14 +108029,14 @@ var hN = class e extends DisposableContainer {
         this._logRequestCaching(
           "Canceled delayed FILE request due to cursor movement.",
         ),
-        this._requestManager.enqueueRequest(i, "BACKGROUND", "CURSOR")
+        this._requestManager.enqueueRequest(currentPath, "BACKGROUND", "CURSOR")
     else {
-      for (let c of a) {
-        let u =
-            c.state === "accepted" ? c.afterLineRange(n.document) : c.lineRange,
-          f = c.changeType === "noop" ? "no-op" : "change"
+      for (let suggestion of intersectingSuggestions) {
+        let range =
+            suggestion.state === "accepted" ? suggestion.afterLineRange(activeEditor.document) : suggestion.lineRange,
+          type = suggestion.changeType === "noop" ? "no-op" : "change"
         this._logRequestCaching(
-          `Cursor is in fresh suggestion at lines ${u.toString()}, suggestion ID: ${c.requestId}, state: ${Ul[c.state]}, type: ${f}`,
+          `Cursor is in fresh suggestion at lines ${range.toString()}, suggestion ID: ${suggestion.requestId}, state: ${Ul[suggestion.state]}, type: ${type}`,
         )
       }
       this._logRequestCaching(
@@ -108216,7 +108216,7 @@ var CodeLensProvider = class {
     })
   }
   _getKeybindingForCommand(t, r = false) {
-    return id(this._keybindingWatcher, t, r)?.replace("Escape", "esc")
+    return getKeybindingLabel(this._keybindingWatcher, t, r)?.replace("Escape", "esc")
   }
   provideCodeLenses(t, r) {
     let n = this._activeSuggestion
@@ -108235,9 +108235,9 @@ var CodeLensProvider = class {
         }),
       ),
       this._state.value instanceof AfterPreviewState || this._state.value instanceof AnimatingState
-        ? i.push(this._buildCodeLens("Undo", Mo.commandID, s))
-        : i.push(this._buildCodeLens("Apply", Kc.commandID, s)),
-      i.push(this._buildCodeLens("Reject", zc.commandID, s)),
+        ? i.push(this._buildCodeLens("Undo", UndoAcceptSuggestionCommand.commandID, s))
+        : i.push(this._buildCodeLens("Apply", AcceptNextEditCommand.commandID, s)),
+      i.push(this._buildCodeLens("Reject", RejectNextEditCommand.commandID, s)),
       i
     )
   }
@@ -109538,7 +109538,7 @@ var DecorationManager = class e extends _N {
         N &&
         !l &&
         !o &&
-        (te && this.addKeybindingDecor(f.start, r, n, fa.commandID),
+        (te && this.addKeybindingDecor(f.start, r, n, NextEditNavigateCommand.commandID),
         this.addGrayText(`${B}`, f.start, r, n),
         this._nextEditSessionEventReporter.reportEventFromSuggestion(
           i,
@@ -109574,7 +109574,7 @@ var DecorationManager = class e extends _N {
           .get(this._zeroWidthChangeDecorationsRight.get(s))
           .push(new We.Range(i.start.translate(0, -1), i.start))
   }
-  addKeybindingDecor(r, n, i, s = fa.commandID) {
+  addKeybindingDecor(r, n, i, s = NextEditNavigateCommand.commandID) {
     pw(s, this._keybindingWatcher, this._context).map((o, a) => {
       n.get(this._rightKeybindingDecorationTypes[a])?.push({
         range: bg(i, r),
@@ -109621,7 +109621,7 @@ var DecorationManager = class e extends _N {
           y = ""
         !p && m && (y = `${g > 0 ? "\u2191" : "\u2193"}${Math.abs(g)} lines: `),
           (y || p) &&
-            (this.addKeybindingDecor(u.start.line, r, n, fa.commandID),
+            (this.addKeybindingDecor(u.start.line, r, n, NextEditNavigateCommand.commandID),
             this.addGrayText(`${y}${c}`, u.start.line, r, n),
             (this.cursorHintRange = bg(n, u.start.line)),
             this._nextEditSessionEventReporter.reportEventFromSuggestion(
@@ -109803,7 +109803,7 @@ var CodeActionProvider = class {
     let a = o.result.changeDescription || "Augment: Accept suggestion",
       l = new IN.CodeAction(a, IN.CodeActionKind.QuickFix)
     return (
-      (l.command = { command: Cf.commandID, title: a, arguments: [o] }),
+      (l.command = { command: AcceptNextEditCodeActionCommand.commandID, title: a, arguments: [o] }),
       this._nextEditSessionEventReporter.reportEventFromSuggestion(
         o,
         "code-action-shown",
@@ -110249,7 +110249,7 @@ var WCt = 38,
       }
     }
     _keybindingWillWork(r, n) {
-      return r === nd
+      return r === OpenNextEditPanelCommand
         ? this._nextEditConfigManager.config.enablePanel
         : n && !n.equals(this._state.value.suggestion)
           ? false
@@ -110282,11 +110282,11 @@ var WCt = 38,
                 : null,
           }
         },
-        u = c(zc, "Reject", "Reject Suggestion"),
-        f = c(nd, "$(layout-panel)", "Open Suggestions Panel")
+        u = c(RejectNextEditCommand, "Reject", "Reject Suggestion"),
+        f = c(OpenNextEditPanelCommand, "$(layout-panel)", "Open Suggestions Panel")
       f.keybindingIcons = null
       let p = c(
-        Ov,
+        ToggleHoverDiffCommand,
         "$(diff-single)",
         this._showDiffInDifflessHover ? "Hide Diff" : "Show Diff",
       )
@@ -110297,7 +110297,7 @@ var WCt = 38,
           tooltip: "Open Settings",
           noLeftMargin: true,
         },
-        m = c(fg, "Learn More", "Learn More")
+        m = c(LearnMoreNextEditCommand, "Learn More", "Learn More")
       if (
         ((((this._state.value instanceof BeforePreviewState ||
           this._state.value instanceof AfterPreviewState) &&
@@ -110307,7 +110307,7 @@ var WCt = 38,
           i) &&
           ((s = i || this._state.value.suggestion),
           (o = [
-            c(Kc, "Apply", "Apply Suggestion"),
+            c(AcceptNextEditCommand, "Apply", "Apply Suggestion"),
             u,
             ...(this._showKeybindingsOnButtons() ? [m] : []),
             ...(this._nextEditConfigManager.config.enablePanel ? [f] : []),
@@ -110322,7 +110322,7 @@ var WCt = 38,
             y?.touches(n.line))) &&
           ((s = this._state.value.suggestion),
           (o = [
-            c(Mo, "Undo", "Undo Suggestion"),
+            c(UndoAcceptSuggestionCommand, "Undo", "Undo Suggestion"),
             u,
             ...(this._showKeybindingsOnButtons() ? [m] : []),
             ...(this._nextEditConfigManager.config.enablePanel ? [f] : []),
@@ -110349,7 +110349,7 @@ var WCt = 38,
       return PSe(n, this._keybindingWatcher.getSimplifiedPlatform())
     }
     getKeybindingsForCommands(r, n = false) {
-      let i = r.map((s) => id(this._keybindingWatcher, s, n))
+      let i = r.map((s) => getKeybindingLabel(this._keybindingWatcher, s, n))
       return i.includes(null) ? "" : i.join(" ")
     }
     getHoverDiff(r, n, i) {
@@ -110424,16 +110424,16 @@ var WCt = 38,
   }
 var zSe = q(require("vscode"))
 var GCt = new Map([
-    [fa, "vscode-augment.nextEdit.canNextSmart"],
-    [Lm, "vscode-augment.nextEdit.canNext"],
-    [Um, "vscode-augment.nextEdit.canPrevious"],
-    [Kc, "vscode-augment.nextEdit.canAccept"],
-    [zc, "vscode-augment.nextEdit.canReject"],
-    [rd, "vscode-augment.nextEdit.canDismiss"],
-    [Cf, "vscode-augment.nextEdit.canAcceptCodeAction"],
-    [Nm, "vscode-augment.nextEdit.canAcceptAll"],
-    [Pm, "vscode-augment.nextEdit.canRejectAll"],
-    [Mo, "vscode-augment.nextEdit.canUndoAcceptSuggestion"],
+    [NextEditNavigateCommand, "vscode-augment.nextEdit.canNextSmart"],
+    [NextEditForwardCommand, "vscode-augment.nextEdit.canNext"],
+    [NextEditPreviousCommand, "vscode-augment.nextEdit.canPrevious"],
+    [AcceptNextEditCommand, "vscode-augment.nextEdit.canAccept"],
+    [RejectNextEditCommand, "vscode-augment.nextEdit.canReject"],
+    [DismissNextEditCommand, "vscode-augment.nextEdit.canDismiss"],
+    [AcceptNextEditCodeActionCommand, "vscode-augment.nextEdit.canAcceptCodeAction"],
+    [AcceptAllNextEditCommand, "vscode-augment.nextEdit.canAcceptAll"],
+    [RejectAllNextEditCommand, "vscode-augment.nextEdit.canRejectAll"],
+    [UndoAcceptSuggestionCommand, "vscode-augment.nextEdit.canUndoAcceptSuggestion"],
   ]),
   RN = class extends DisposableContainer {
     constructor(r) {
@@ -110443,22 +110443,22 @@ var GCt = new Map([
         new zSe.Disposable(
           this._state.listen((n) => {
             let i = !(n instanceof NoSuggestionsState)
-            this._set(fa, i),
-              this._set(Lm, i),
-              this._set(Um, i),
+            this._set(NextEditNavigateCommand, i),
+              this._set(NextEditForwardCommand, i),
+              this._set(NextEditPreviousCommand, i),
               this._set(
-                Kc,
+                AcceptNextEditCommand,
                 n instanceof BeforePreviewState || n instanceof AnimatingState || n instanceof AfterPreviewState,
               ),
               this._set(
-                zc,
+                RejectNextEditCommand,
                 n instanceof BeforePreviewState || n instanceof AnimatingState || n instanceof AfterPreviewState,
               ),
-              this._set(Mo, n instanceof AfterPreviewState),
-              this._set(rd, i),
-              this._set(Cf, n instanceof AfterPreviewState),
-              this._set(Nm, i),
-              this._set(Pm, i)
+              this._set(UndoAcceptSuggestionCommand, n instanceof AfterPreviewState),
+              this._set(DismissNextEditCommand, i),
+              this._set(AcceptNextEditCodeActionCommand, n instanceof AfterPreviewState),
+              this._set(AcceptAllNextEditCommand, i),
+              this._set(RejectAllNextEditCommand, i)
           }, true),
         ),
       )
@@ -110473,7 +110473,7 @@ var GCt = new Map([
       i && setVSCodeContext(i, n)
     }
   }
-var NextEditManager = class NextEditManager extends DisposableContainer {
+var EditorNextEdit = class EditorNextEdit extends DisposableContainer {
   constructor(editor, workspaceManager, sessionEventReporter, documentManager, configListener, suggestionManager, requestManager, globalState, configManager, completionVisibilityWatcher, onCursorWithinSuggestion = (suggestion) => {}) {
     super()
     this.workspaceManager = workspaceManager
@@ -110511,7 +110511,7 @@ var NextEditManager = class NextEditManager extends DisposableContainer {
         this.isInlineCompletionVisible,
         () =>
           (this._globalState.get("nextEditKeybindingUsageCount") ?? 0) <
-          NextEditManager.maxKeybindingUsageCount,
+          EditorNextEdit.maxKeybindingUsageCount,
         this._keybindingStatus,
         this._nextEditConfigManager,
       )),
@@ -110557,7 +110557,7 @@ var NextEditManager = class NextEditManager extends DisposableContainer {
             event.textEditor.document.uri,
           ) &&
             event.textEditor === Se.window.activeTextEditor &&
-            !Vv() &&
+            !isDiffEditor() &&
             (!this._lastVisibleRanges ||
               this._lastVisibleRanges.uri.fsPath !==
                 event.textEditor.document.uri.fsPath ||
@@ -110702,7 +110702,7 @@ var NextEditManager = class NextEditManager extends DisposableContainer {
   _debouncedSetBottomDecorations = (0, ZSe.debounce)(() => {
     ;(this._decorationManager.shouldDrawBottomDecorations.value = true),
       this._drawDecorations()
-  }, NextEditManager._postScrollRenderDelayMs)
+  }, EditorNextEdit._postScrollRenderDelayMs)
   static get _smoothScrollDelayMs() {
     return (Se.workspace.getConfiguration("editor").smoothScrolling ?? false)
       ? 150
@@ -110771,7 +110771,7 @@ var NextEditManager = class NextEditManager extends DisposableContainer {
     if (undoneAtCursor && this._state.value instanceof AfterPreviewState) {
       await this._suggestionManager.suggestionWasJustUndone.waitUntil(
         (undone) => undone === true,
-        NextEditManager._waitForAcceptTimeoutMs,
+        EditorNextEdit._waitForAcceptTimeoutMs,
       )
       let selection = this._getSuggestionSelection(undoneAtCursor)
       selection.isEqual(editor.selection) ||
@@ -110791,7 +110791,7 @@ var NextEditManager = class NextEditManager extends DisposableContainer {
     ) {
       await this._suggestionManager.suggestionWasJustAccepted.waitUntil(
         (accepted) => accepted === true,
-        NextEditManager._waitForAcceptTimeoutMs,
+        EditorNextEdit._waitForAcceptTimeoutMs,
       )
       let acceptedSuggestion = event.accepted[event.accepted.length - 1],
         selection = this._getSuggestionSelection(acceptedSuggestion)
@@ -110802,7 +110802,7 @@ var NextEditManager = class NextEditManager extends DisposableContainer {
     } else event.accepted.length > 0 && (this._ignoreSelectionChangeEvents = true)
   }
   _updateSuggestions(suggestions, shouldUpdateState) {
-    if (Vv()) return
+    if (isDiffEditor()) return
     let activeSuggestions = suggestions.filter(isFreshNonNoopSuggestion)
     if (
       (this._configListener.config.nextEdit.enableGlobalBackgroundSuggestions
@@ -110854,7 +110854,7 @@ var NextEditManager = class NextEditManager extends DisposableContainer {
   _handleTextDocumentChanged = (event) => {
     if (event.contentChanges.length === 0) return
     let pathName = this.workspaceManager.safeResolvePathName(event.document.uri)
-    if (this._isDebugging || To(event.document.uri) || !pathName) return
+    if (this._isDebugging || isNotebookCell(event.document.uri) || !pathName) return
     let editor = Se.window.activeTextEditor
     !editor ||
       event.document !== editor.document ||
@@ -110871,9 +110871,9 @@ var NextEditManager = class NextEditManager extends DisposableContainer {
     if (
       !editor ||
       event.textEditor.document !== editor.document ||
-      Vv() ||
+      isDiffEditor() ||
       this._isDebugging ||
-      To(editor.document.uri) ||
+      isNotebookCell(editor.document.uri) ||
       !this.workspaceManager.safeResolvePathName(event.textEditor.document.uri)
     )
       return
@@ -110939,7 +110939,7 @@ var NextEditManager = class NextEditManager extends DisposableContainer {
           this._hoverProvider.hideHover(),
           await this.open(suggestion, {
             shouldAutoApply: true,
-            animationDelayMs: NextEditManager._applySuggestionDelayMs.fromHover,
+            animationDelayMs: EditorNextEdit._applySuggestionDelayMs.fromHover,
             preserveFocus: preserveFocus,
             eventSource: eventSource,
           }),
@@ -110995,7 +110995,7 @@ var NextEditManager = class NextEditManager extends DisposableContainer {
     try {
       await this._suggestionManager.suggestionWasJustAccepted.waitUntil(
         (accepted) => accepted === true,
-        NextEditManager._waitForAcceptTimeoutMs,
+        EditorNextEdit._waitForAcceptTimeoutMs,
       )
     } catch {
       return (
@@ -111355,18 +111355,18 @@ var NextEditManager = class NextEditManager extends DisposableContainer {
           new Se.Range(suggestion.lineRange.start, 0, suggestion.lineRange.stop, 0),
           Se.TextEditorRevealType.InCenterIfOutsideViewport,
         ),
-        await go(NextEditManager._smoothScrollDelayMs)),
+        await go(EditorNextEdit._smoothScrollDelayMs)),
       animationDelayMs === undefined)
     ) {
       let isCursorInSuggestion = !isGlobalSuggestion && suggestion.highlightRange.contains(activeEditor.selection.active.line),
         isSuggestionVisible = !isGlobalSuggestion && activeEditor.visibleRanges.some((u) => u.contains(createRange(suggestion.lineRange)))
       ;(animationDelayMs = isCursorInSuggestion
-        ? NextEditManager._applySuggestionDelayMs.atCursor
+        ? EditorNextEdit._applySuggestionDelayMs.atCursor
         : isSuggestionVisible
-          ? NextEditManager._applySuggestionDelayMs.onScreen
-          : NextEditManager._applySuggestionDelayMs.offScreen),
-        suggestion.lineRange.length > NextEditManager._largeChangeLineCountThreshold &&
-          (animationDelayMs += NextEditManager._applySuggestionDelayMs.largeBonus)
+          ? EditorNextEdit._applySuggestionDelayMs.onScreen
+          : EditorNextEdit._applySuggestionDelayMs.offScreen),
+        suggestion.lineRange.length > EditorNextEdit._largeChangeLineCountThreshold &&
+          (animationDelayMs += EditorNextEdit._applySuggestionDelayMs.largeBonus)
     }
     let suggestionSelection = this._getSuggestionSelection(suggestion)
     return (
@@ -111430,7 +111430,7 @@ var NextEditManager = class NextEditManager extends DisposableContainer {
           "gutter-click",
         ),
         this.open(matchingSuggestion, {
-          animationDelayMs: NextEditManager._applySuggestionDelayMs.atCursor,
+          animationDelayMs: EditorNextEdit._applySuggestionDelayMs.atCursor,
           eventSource: "gutter-click",
         }))
       : (this._logger.error(
@@ -111468,7 +111468,7 @@ var NextEditManager = class NextEditManager extends DisposableContainer {
   async incrementKeybindingUsageCount(eventSource) {
     if (eventSource !== "keybinding") return
     let currentCount = this._globalState.get("nextEditKeybindingUsageCount") ?? 0
-    if (!(currentCount >= NextEditManager.maxKeybindingUsageCount))
+    if (!(currentCount >= EditorNextEdit.maxKeybindingUsageCount))
       return this._globalState.update("nextEditKeybindingUsageCount", currentCount + 1)
   }
   get nextEditConfig() {
@@ -111881,7 +111881,7 @@ async function getDiagnosticsForNextEdit(diagnosticsManager, rootPath, blobNameC
     )
   ).filter((result) => result !== undefined)
 }
-var GlobalNextEditManager = class extends DisposableContainer {
+var GlobalNextEdit = class extends DisposableContainer {
   constructor(workspaceManager, nextEditRequestManager, suggestionManager, configListener, nextEditSessionEventReporter) {
     super()
     this._workspaceManager = workspaceManager
@@ -114960,7 +114960,7 @@ var fC = class {
       this.filename = t
     }
     getName(t) {
-      return cN(xw.Uri.joinPath(t, this.filename))
+      return getUriPath(xw.Uri.joinPath(t, this.filename))
     }
     async getRules(t, r) {
       if (
@@ -114981,7 +114981,7 @@ var fC = class {
     }
     getRules(t) {
       return new Promise((r) => {
-        if (ms(t) !== this._sourceFolderRootPath) r(undefined)
+        if (getPathFromUri(t) !== this._sourceFolderRootPath) r(undefined)
         else {
           let n = (0, G6.default)({ ignorecase: false })
           n.add([
@@ -115151,9 +115151,9 @@ var gC = class {
         throw new Error(
           `PathIterator[${this._name}]: rootUri ${n.toString()} must contain an absolute pathname`,
         )
-      if (!Qs(ms(n), ms(r)))
+      if (!Qs(getPathFromUri(n), getPathFromUri(r)))
         throw new Error(
-          `PathIterator[${this._name}]: startUri ${ms(this._startUri)} must be inside rootUri ${ms(this._rootUri)}`,
+          `PathIterator[${this._name}]: startUri ${getPathFromUri(this._startUri)} must be inside rootUri ${getPathFromUri(this._rootUri)}`,
         )
       this._logger.verbose(
         `Created PathIterator for startUri ${this._startUri.fsPath}, rootUri ${this._rootUri.fsPath}`,
@@ -115887,7 +115887,7 @@ var y2 = class {
       this.isV2Enabled && this._openFileManagerV2.stopTracking(t, r)
   }
   handleClosedDocument(t) {
-    let r = hf(t.document)
+    let r = isNotebook(t.document)
     this._openFileManagerV1.stopTracking(t.folderId, t.relPath, r ? 1 : 0),
       this.isV2Enabled && this._openFileManagerV2.handleClosedDocument(t)
   }
@@ -116535,7 +116535,7 @@ var h9 = class {
     _logger = z("OpenDocumentSnapshotCache")
     _lastKnownText = new Map()
     handleDocumentOpened(t) {
-      hf(t.document) || this._lastKnownText.set(t.relPath, t.document.getText())
+      isNotebook(t.document) || this._lastKnownText.set(t.relPath, t.document.getText())
     }
     handleDocumentClosed(t) {
       this._lastKnownText.delete(t.relPath)
@@ -116672,7 +116672,7 @@ var p9 = class {
   }
 }
 function QIe(e) {
-  return hf(e)
+  return isNotebook(e)
     ? e.getCells().map((t) => t.document.getText()).join(`
 `)
     : e.getText()
@@ -116773,7 +116773,7 @@ var w2 = class extends DisposableContainer {
     if (i === undefined)
       throw new Error(`Source folder [${r.folderId}] is not open`)
     let s = i.workspaceName
-    hf(r.document) &&
+    isNotebook(r.document) &&
       this._logger.info(`TODO [${s}] Ignoring notebook document ${r.relPath}`)
     let o = QIe(r.document),
       a = this._blobNameCalculator.calculate(r.relPath, o)
@@ -119327,7 +119327,7 @@ var D9 = class extends xg {
       if (i === undefined) return
       let s, o
       try {
-        ;(s = getFileStats(ms(r)).type), (o = this._pathFilter.getPathInfo(i, s))
+        ;(s = getFileStats(getPathFromUri(r)).type), (o = this._pathFilter.getPathInfo(i, s))
       } catch (l) {
         ;(s = "Other"), (o = new D9(He(l)))
       }
@@ -119356,7 +119356,7 @@ var D9 = class extends xg {
     }
     _getRelPath(r) {
       if (this._stopping) return
-      let n = Bf(r)
+      let n = getPathIfSupported(r)
       if (n !== undefined) return Zh(this.repoRoot, n)
     }
     _createFilesystemWatcher(r) {
@@ -119373,8 +119373,8 @@ var D9 = class extends xg {
   }
 var Mw = q(require("vscode"))
 async function GIe(e, t, r, n) {
-  let i = ms(e),
-    s = ms(t),
+  let i = getPathFromUri(e),
+    s = getPathFromUri(t),
     o = new Array()
   o.push(i)
   let a = new Array(),
@@ -119623,7 +119623,7 @@ var yC = class e {
   }
 }
 function T9(e) {
-  return Zy(ms(e))
+  return Zy(getPathFromUri(e))
 }
 function Fw(e) {
   if (e.scheme === "file") return T9(e)
@@ -120253,7 +120253,7 @@ var V2 = class e extends DisposableContainer {
       throw new qF(He(i))
     }
     if (this._isHomeDir(n)) throw new WF()
-    this._logger.info(`Adding external source folder ${cN(r)}`),
+    this._logger.info(`Adding external source folder ${getUriPath(r)}`),
       this._registeredSourceFolders.set(n, {
         folderName: K0e(n),
         isHomeDir: false,
@@ -120588,7 +120588,7 @@ var V2 = class e extends DisposableContainer {
     return e.computeCacheDirPath(r, this._storageUriProvider.storageUri)
   }
   static computeCacheDirPath(r, n) {
-    let i = ms(n),
+    let i = getPathFromUri(n),
       s = Jv(e._textEncoder.encode(r))
     return joinPaths(i, s)
   }
@@ -120722,7 +120722,7 @@ var V2 = class e extends DisposableContainer {
     }
     if (!Xy(T9(i.root), r.repoRoot)) {
       r.logger.info(
-        `Not creating VCSRepoWatcher: vcs root ${ms(i.root)} !== repo root ${r.repoRoot}`,
+        `Not creating VCSRepoWatcher: vcs root ${getPathFromUri(i.root)} !== repo root ${r.repoRoot}`,
       )
       return
     }
@@ -120767,7 +120767,7 @@ var V2 = class e extends DisposableContainer {
       })
   }
   _trackDocument(r, n) {
-    let i = Bf(n.uri)
+    let i = getPathIfSupported(n.uri)
     if (i === undefined) return
     let s = r.relativePathName(i)
     if (s === undefined || !r.acceptsPath(s)) return
@@ -120919,7 +120919,7 @@ var V2 = class e extends DisposableContainer {
     return this._trackedSourceFolders.get(r)?.sourceFolder
   }
   resolvePathName(r) {
-    let n = typeof r == "string" ? r : Bf(r)
+    let n = typeof r == "string" ? r : getPathIfSupported(r)
     if (n === undefined) return
     let i = this._resolveAbsPath(n)
     if (i === undefined) return
@@ -120927,7 +120927,7 @@ var V2 = class e extends DisposableContainer {
     return new QualifiedPathName(s.repoRoot, o)
   }
   getFolderRoot(r) {
-    let n = typeof r == "string" ? r : Bf(r)
+    let n = typeof r == "string" ? r : getPathIfSupported(r)
     if (n === undefined) return
     let i = this._resolveAbsPath(n)
     if (i === undefined) return
@@ -120935,7 +120935,7 @@ var V2 = class e extends DisposableContainer {
     return s.folderRoot
   }
   safeResolvePathName(r) {
-    let n = typeof r == "string" ? r : Bf(r)
+    let n = typeof r == "string" ? r : getPathIfSupported(r)
     if (n === undefined) return
     let i = this._resolveAbsPath(n)
     if (i === undefined) return new QualifiedPathName("", n)
@@ -121099,7 +121099,7 @@ var V2 = class e extends DisposableContainer {
   }
   _uriToPathInfo(r) {
     if (r === undefined) return
-    let n = Bf(r)
+    let n = getPathIfSupported(r)
     if (n === undefined) return
     let i = this._resolveAbsPath(n)
     if (i === undefined) return
@@ -121144,7 +121144,7 @@ var V2 = class e extends DisposableContainer {
   }
   _notifyDocumentClosed(r) {
     let n = r.uri,
-      i = Bf(n)
+      i = getPathIfSupported(n)
     if (i === undefined) return
     let s = this._resolveAbsPath(i)
     if (s === undefined) return
@@ -121953,7 +121953,7 @@ var AugmentExtension = class e extends DisposableContainer {
         this.featureFlagManager,
       )),
       this.disposeOnDisable.push(this._nextEditRequestManager),
-      (this._editorNextEdit = new NextEditManager(
+      (this._editorNextEdit = new EditorNextEdit(
         this._extensionContext,
         this.workspaceManager,
         this._nextEditSessionEventReporter,
@@ -121972,7 +121972,7 @@ var AugmentExtension = class e extends DisposableContainer {
         },
       )),
       this.disposeOnDisable.push(this._editorNextEdit),
-      (this._globalNextEdit = new GlobalNextEditManager(
+      (this._globalNextEdit = new GlobalNextEdit(
         this.workspaceManager,
         this._nextEditRequestManager,
         this._suggestionManager,
@@ -122358,7 +122358,7 @@ var AugmentExtension = class e extends DisposableContainer {
               this._nextEditRequestManager
             )
               try {
-                ;(this._backgroundNextEdit = new hN(
+                ;(this._backgroundNextEdit = new BackgroundNextEdit(
                   this.workspaceManager,
                   this._nextEditSessionEventReporter,
                   this.keybindingWatcher,
@@ -122986,7 +122986,7 @@ function activate(e) {
     ),
     nEe(e),
     tBe(r, f, e)
-  let se = jwe(e, r, f, p, U, m, y, v, E, T, B, g, c, e.workspaceState)
+  let se = registerCommands(e, r, f, p, U, m, y, v, E, T, B, g, c, e.workspaceState)
   e.subscriptions.push(se), e.subscriptions.push(N), n(r)
 }
 function zIe(e) {
