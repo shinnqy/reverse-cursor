@@ -65311,9 +65311,9 @@ var zS = class e {
     (e.serializedStore = "serialized-store")
 })(Id || (Id = {}))
 var tb = require("path")
-function Qt(e, t, r = !1) {
-  let n = (0, tb.join)(e, t)
-  return r && !n.endsWith(tb.sep) && (n += tb.sep), n
+function joinPaths(basePath, relativePath, ensureTrailingSlash = !1) {
+  let fullPath = (0, tb.join)(basePath, relativePath)
+  return ensureTrailingSlash && !fullPath.endsWith(tb.sep) && (fullPath += tb.sep), fullPath
 }
 var QualifiedPathName = class e {
   rootPath
@@ -65325,7 +65325,7 @@ var QualifiedPathName = class e {
     return new e(t.rootPath, t.relPath)
   }
   get absPath() {
-    return Qt(this.rootPath, this.relPath)
+    return joinPaths(this.rootPath, this.relPath)
   }
   equals(t) {
     return e.equals(this, t)
@@ -65333,8 +65333,8 @@ var QualifiedPathName = class e {
   static equals(t, r) {
     if (t === r) return !0
     if (t == null || r == null) return !1
-    let n = DY(t) ? Qt(t.rootPath, t.relPath) : t.fsPath,
-      i = DY(r) ? Qt(r.rootPath, r.relPath) : r.fsPath
+    let n = DY(t) ? joinPaths(t.rootPath, t.relPath) : t.fsPath,
+      i = DY(r) ? joinPaths(r.rootPath, r.relPath) : r.fsPath
     return n === i
   }
 }
@@ -68535,7 +68535,7 @@ var hb = class {
 function VK(e, t) {
   $1e().onMessage(e, t)
 }
-var $e
+var RequestStatus
 ;(function (e) {
   ;(e[(e.ok = 0)] = "ok"),
     (e[(e.cancelled = 1)] = "cancelled"),
@@ -68548,14 +68548,14 @@ var $e
     (e[(e.permissionDenied = 8)] = "permissionDenied"),
     (e[(e.deadlineExceeded = 9)] = "deadlineExceeded"),
     (e[(e.augmentTooLarge = 10)] = "augmentTooLarge")
-})($e || ($e = {}))
+})(RequestStatus || (RequestStatus = {}))
 var Sr = class e extends Error {
   status
   constructor(t, r) {
     super(r), (this.status = t)
   }
   static transientIssue(t) {
-    return new e($e.unavailable, t)
+    return new e(RequestStatus.unavailable, t)
   }
   static fromResponse(t) {
     return new e(Y1e(t.status), `HTTP error: ${t.status} ${t.statusText}`)
@@ -68570,27 +68570,27 @@ var Sr = class e extends Error {
 function Y1e(e) {
   switch (e) {
     case 200:
-      return $e.ok
+      return RequestStatus.ok
     case 400:
-      return $e.invalidArgument
+      return RequestStatus.invalidArgument
     case 401:
-      return $e.unauthenticated
+      return RequestStatus.unauthenticated
     case 403:
-      return $e.permissionDenied
+      return RequestStatus.permissionDenied
     case 404:
-      return $e.unimplemented
+      return RequestStatus.unimplemented
     case 413:
-      return $e.augmentTooLarge
+      return RequestStatus.augmentTooLarge
     case 429:
-      return $e.resourceExhausted
+      return RequestStatus.resourceExhausted
     case 499:
-      return $e.cancelled
+      return RequestStatus.cancelled
     case 504:
-      return $e.deadlineExceeded
+      return RequestStatus.deadlineExceeded
   }
-  return e >= 500 && e < 600 ? $e.unavailable : $e.unknown
+  return e >= 500 && e < 600 ? RequestStatus.unavailable : RequestStatus.unknown
 }
-var K1e = new Set([$e.unavailable, $e.cancelled])
+var K1e = new Set([RequestStatus.unavailable, RequestStatus.cancelled])
 function z1e(e) {
   return e.cause instanceof String
     ? String(e.cause)
@@ -80014,7 +80014,7 @@ var LT = class e {
           this.logger.error(
             `API request ${t} to ${u.toString()} response ${y.status}: ${y.statusText}`,
           ),
-          Sr.fromResponse(y).status === $e.augmentTooLarge &&
+          Sr.fromResponse(y).status === RequestStatus.augmentTooLarge &&
             this.logger.debug(`object size is ${i ? Xp(i) : 0} `),
           Sr.fromResponse(y))
     let v = y.body.getReader(),
@@ -80460,8 +80460,8 @@ function T0e(e) {
 function getTextLength(e) {
   return [...e].length
 }
-function AG(e, t) {
-  return [...e].slice(0, t).join("").length
+function getByteOffsetFromCodePointIndex(text, codePointIndex) {
+  return [...text].slice(0, codePointIndex).join("").length
 }
 var yG = class {
   _items = new Map()
@@ -80701,7 +80701,7 @@ var rM = class extends Error {
             this._logger.error(
               `API request ${r} to ${g.toString()} response ${E.status}: ${E.statusText}`,
             ),
-            Sr.fromResponse(E).status === $e.augmentTooLarge &&
+            Sr.fromResponse(E).status === RequestStatus.augmentTooLarge &&
               this._logger.debug(`object size is ${Xp(s)} `),
             Sr.fromResponse(E))
       let T
@@ -81614,7 +81614,7 @@ var rM = class extends Error {
           )
         return s
       } catch (s) {
-        if (!Sr.isAPIErrorWithStatus(s, $e.unimplemented)) throw s
+        if (!Sr.isAPIErrorWithStatus(s, RequestStatus.unimplemented)) throw s
         let o = []
         for (let a of r) {
           let l = await this.memorize(
@@ -82561,7 +82561,7 @@ var rM = class extends Error {
       }
     }
     async handleError(t, r, n, i, s, o) {
-      if (Sr.isAPIErrorWithStatus(t, $e.cancelled)) throw t
+      if (Sr.isAPIErrorWithStatus(t, RequestStatus.cancelled)) throw t
       let l = [
           {
             key: "body_length",
@@ -82573,10 +82573,10 @@ var rM = class extends Error {
         ],
         c = t instanceof Error ? t.stack : void 0
       t instanceof Sr &&
-        t.status === $e.augmentTooLarge &&
+        t.status === RequestStatus.augmentTooLarge &&
         l.push({ key: "object_size_breakdown", value: `${Xp(n)}` })
-      let u = t instanceof Sr ? t.status : $e.unknown,
-        f = `${r} call failed with APIStatus ${$e[u]}`
+      let u = t instanceof Sr ? t.status : RequestStatus.unknown,
+        f = `${r} call failed with APIStatus ${RequestStatus[u]}`
       throw (
         (t instanceof rM && (f = `converting ${r} response failed`),
         i && this.getUniqueExtraURLs().has(i)
@@ -83570,13 +83570,13 @@ async function yM(e) {
   if (!(await Vl(e))) return
   let t = await fn.readdir(e)
   for (let r of t) {
-    let n = Qt(e, r)
+    let n = joinPaths(e, r)
     ;(await fn.stat(n)).isDirectory() ? await yM(n) : await fn.unlink(n)
   }
   await fn.rmdir(e)
 }
 async function aye(e) {
-  let t = Qt(eye.tmpdir(), e)
+  let t = joinPaths(eye.tmpdir(), e)
   return await fn.mkdtemp(t)
 }
 async function lx() {
@@ -84936,7 +84936,7 @@ async function _ye(e, t, r, n, i, s, o, a) {
         "Augment Agent completed orientation process. Workspace guidelines were updated!",
       )
   } catch (l) {
-    if (s > 1 && Sr.isAPIErrorWithStatus(l, $e.resourceExhausted)) {
+    if (s > 1 && Sr.isAPIErrorWithStatus(l, RequestStatus.resourceExhausted)) {
       a.setFlag(Nt.retryWithLowerConcurrencyLevel),
         gi.window.showErrorMessage(
           "Augment agent orientation process failed: Rate limit exceeded. Retrying...",
@@ -89761,14 +89761,14 @@ var rF = class e {
     let r =
         this._extensionContext.storageUri ??
         this._extensionContext.globalStorageUri,
-      n = Qt(r.fsPath, e.assetSubdirectory)
+      n = joinPaths(r.fsPath, e.assetSubdirectory)
     ;(await Vl(n)) || (await Hl(n))
     let i = Ha(t)
     if (i) {
-      let s = Qt(n, i)
+      let s = joinPaths(n, i)
       ;(await Vl(s)) || (await Hl(s))
     }
-    return abe.Uri.file(Qt(n, t))
+    return abe.Uri.file(joinPaths(n, t))
   }
 }
 var Pbe = q(require("vscode"))
@@ -100435,7 +100435,7 @@ ${p.stack}`
               : ""
           }`,
         ),
-        p instanceof Sr && p.status === $e.augmentTooLarge)
+        p instanceof Sr && p.status === RequestStatus.augmentTooLarge)
       )
         return yield {
           type: "chat-model-reply",
@@ -100451,7 +100451,7 @@ ${p.stack}`
         }
       if (
         p instanceof Sr &&
-        (p.status === $e.resourceExhausted || p.status === $e.unavailable)
+        (p.status === RequestStatus.resourceExhausted || p.status === RequestStatus.unavailable)
       )
         return yield {
           type: "chat-model-reply",
@@ -105369,7 +105369,7 @@ var CompletionsModel = class {
         B
       )
     } catch (B) {
-      if (Sr.isAPIErrorWithStatus(B, $e.cancelled))
+      if (Sr.isAPIErrorWithStatus(B, RequestStatus.cancelled))
         throw (
           (this._logger.debug(
             `Completion #${p} cancelled in back end; requestId ${n}`,
@@ -107651,14 +107651,14 @@ function createRange(lineRange, document) {
       new C6.Range(lineRange.start, 0, document.lineCount, 0))
     : new C6.Range(lineRange.start, 0, lineRange.stop, 0)
 }
-function od(e) {
-  return new LineRange(e.start.line, e.end.line + (e.end.character > 0 ? 1 : 0))
+function rangeToLineRange(range) {
+  return new LineRange(range.start.line, range.end.line + (range.end.character > 0 ? 1 : 0))
 }
-function BSe(e) {
-  return `[${ISe(e.start)},${ISe(e.end)})`
+function formatRangeToString(range) {
+  return `[${formatPositionToString(range.start)},${formatPositionToString(range.end)})`
 }
-function ISe(e) {
-  return `${e.line}:${e.character}`
+function formatPositionToString(position) {
+  return `${position.line}:${position.character}`
 }
 function b6(e) {
   return [...e.visibleRanges].sort((t, r) => t.start.line - r.start.line)
@@ -107797,7 +107797,7 @@ var hN = class e extends DisposableContainer {
       this.addDisposable(
         new nl.Disposable(
           this._requestManager.lastFinishedRequest.listen((g) => {
-            if (!g || g.apiResult !== $e.ok || g.mode !== "BACKGROUND") return
+            if (!g || g.apiResult !== RequestStatus.ok || g.mode !== "BACKGROUND") return
             let m = nl.window.activeTextEditor,
               y = m && this.workspaceManager.safeResolvePathName(m.document.uri)
             if (g.suggestions.length === 0) {
@@ -108014,7 +108014,7 @@ var hN = class e extends DisposableContainer {
           })
           .join(", ")}`,
     )
-    let o = od(n.selection)
+    let o = rangeToLineRange(n.selection)
     this._logRequestCaching(`Cursor moved to line range: ${o.toString()}`)
     let a = s.filter((c) => {
       let u =
@@ -110564,7 +110564,7 @@ var NextEditManager = class NextEditManager extends DisposableContainer {
               this._lastVisibleRanges.visibleRanges.length !==
                 event.visibleRanges.length ||
               this._lastVisibleRanges.visibleRanges.some(
-                (range, index) => !range.equals(od(event.visibleRanges[index])),
+                (range, index) => !range.equals(rangeToLineRange(event.visibleRanges[index])),
               )) &&
             (this._drawDecorations(),
             this._configListener.config.nextEdit.useCursorDecorations ||
@@ -110572,7 +110572,7 @@ var NextEditManager = class NextEditManager extends DisposableContainer {
               this._debouncedSetBottomDecorations()),
             (this._lastVisibleRanges = {
               uri: event.textEditor.document.uri,
-              visibleRanges: event.visibleRanges.map((range) => od(range)),
+              visibleRanges: event.visibleRanges.map((range) => rangeToLineRange(range)),
             }))
         }),
       ),
@@ -111489,7 +111489,7 @@ function jSe(e, t, r, n, i) {
   if (!o) return
   let a = o.selection
   if (!a) return
-  let l = od(a),
+  let l = rangeToLineRange(a),
     c = e.filter(
       (f) => f.qualifiedPathName.equals(o.document.uri) && (!n || !f.equals(t)),
     )
@@ -111521,46 +111521,46 @@ var no = q(require("vscode"))
 var TN = q(require("assert")),
   XSe = q(e6()),
   sC = q(require("vscode"))
-function kN(e) {
-  return Qt(e.rootPath, e.relPath + ".next-edit-results.json5")
+function getNextEditResultsPath(qualifiedPath) {
+  return joinPaths(qualifiedPath.rootPath, qualifiedPath.relPath + ".next-edit-results.json5")
 }
-async function* eIe(e) {
-  ;(0, TN.default)(e.pathName)
-  let t = await sC.workspace.openTextDocument(QualifiedPathName.from(e.pathName).absPath),
-    r = kN(e.pathName)
-  ;(0, TN.default)(fileExists(r))
-  let n = XSe.default.parse((await sC.workspace.openTextDocument(r)).getText()),
-    i = t.getText(),
-    s = 0
-  for await (let o of n)
-    (o.path = o.path ?? e.pathName?.relPath),
-      (o.blobName = e.blobName ?? ""),
-      (o.suggestionId =
-        o.suggestionId ?? `mock-suggestion-${o.blobName}-${s++}`),
-      (o.charStart =
-        o.charStart ?? t.offsetAt(new sC.Position(o.lineStart, 0))),
-      (o.charEnd = o.charEnd ?? t.offsetAt(new sC.Position(o.lineEnd, 0))),
-      (o.diffSpans =
-        o.diffSpans ??
-        (o.existingCode != null && o.suggestedCode != null
-          ? $Ct(o.existingCode, o.suggestedCode)
+async function* createMockNextEditResultsStream(requestParams) {
+  ;(0, TN.default)(requestParams.pathName)
+  let document = await sC.workspace.openTextDocument(QualifiedPathName.from(requestParams.pathName).absPath),
+    resultsFilePath = getNextEditResultsPath(requestParams.pathName)
+  ;(0, TN.default)(fileExists(resultsFilePath))
+  let mockResults = XSe.default.parse((await sC.workspace.openTextDocument(resultsFilePath)).getText()),
+    documentText = document.getText(),
+    suggestionCounter = 0
+  for await (let mockResult of mockResults)
+    (mockResult.path = mockResult.path ?? requestParams.pathName?.relPath),
+      (mockResult.blobName = requestParams.blobName ?? ""),
+      (mockResult.suggestionId =
+        mockResult.suggestionId ?? `mock-suggestion-${mockResult.blobName}-${suggestionCounter++}`),
+      (mockResult.charStart =
+        mockResult.charStart ?? document.offsetAt(new sC.Position(mockResult.lineStart, 0))),
+      (mockResult.charEnd = mockResult.charEnd ?? document.offsetAt(new sC.Position(mockResult.lineEnd, 0))),
+      (mockResult.diffSpans =
+        mockResult.diffSpans ??
+        (mockResult.existingCode != null && mockResult.suggestedCode != null
+          ? $Ct(mockResult.existingCode, mockResult.suggestedCode)
           : [
               {
-                original: { start: o.charStart, stop: o.charEnd },
-                updated: { start: o.charStart, stop: o.charEnd },
+                original: { start: mockResult.charStart, stop: mockResult.charEnd },
+                updated: { start: mockResult.charStart, stop: mockResult.charEnd },
               },
             ])),
-      (o.existingCode =
-        o.existingCode?.replaceAll("|", "") ??
-        i.substring(o.charStart, o.charEnd)),
-      (o.suggestedCode =
-        o.suggestedCode?.replaceAll("|", "") ??
-        i.substring(o.charStart, o.charEnd)),
-      (o.changeDescription = o.changeDescription ?? ""),
-      (o.editingScore = o.editingScore ?? 1),
-      (o.localizationScore = o.localizationScore ?? 1),
-      (o.editingScoreThreshold = o.editingScoreThreshold ?? 1),
-      yield { result: o, unknownBlobNames: [], checkpointNotFound: !1 }
+      (mockResult.existingCode =
+        mockResult.existingCode?.replaceAll("|", "") ??
+        documentText.substring(mockResult.charStart, mockResult.charEnd)),
+      (mockResult.suggestedCode =
+        mockResult.suggestedCode?.replaceAll("|", "") ??
+        documentText.substring(mockResult.charStart, mockResult.charEnd)),
+      (mockResult.changeDescription = mockResult.changeDescription ?? ""),
+      (mockResult.editingScore = mockResult.editingScore ?? 1),
+      (mockResult.localizationScore = mockResult.localizationScore ?? 1),
+      (mockResult.editingScoreThreshold = mockResult.editingScoreThreshold ?? 1),
+      yield { result: mockResult, unknownBlobNames: [], checkpointNotFound: !1 }
 }
 function $Ct(e, t) {
   let r = [],
@@ -111578,308 +111578,308 @@ function $Ct(e, t) {
       (o += i[a].length)
   return r
 }
-var YCt = 10,
-  KCt = 3
-function tIe(e, t) {
-  return t
-    ? e.getFolderRoot(QualifiedPathName.from(t).absPath)
-    : e.getMostRecentlyChangedFolderRoot()
+var MAX_DIAGNOSTICS = 10,
+  MAX_AGE_MS = 3
+function getFolderRoot(workspaceManager, pathName) {
+  return pathName
+    ? workspaceManager.getFolderRoot(QualifiedPathName.from(pathName).absPath)
+    : workspaceManager.getMostRecentlyChangedFolderRoot()
 }
 function checkCanUpdateGlobal(workspaceManager, configListener, activePath, fileEditEvents) {
-  let useMockResultsForCurrentFile = !!configListener.config.nextEdit.useMockResults && !!activePath && fileExists(kN(activePath))
-  return (fileEditEvents ?? workspaceManager.getFileEditEvents(tIe(workspaceManager, activePath))).length !== 0 || useMockResultsForCurrentFile
+  let useMockResultsForCurrentFile = !!configListener.config.nextEdit.useMockResults && !!activePath && fileExists(getNextEditResultsPath(activePath))
+  return (fileEditEvents ?? workspaceManager.getFileEditEvents(getFolderRoot(workspaceManager, activePath))).length !== 0 || useMockResultsForCurrentFile
 }
-async function* createNextEditSuggestionStream(e, t, r, n, i, s, o, a) {
-  let l = z("queryNextEditStream")
-  if (o.isCancellationRequested) {
-    l.debug("Skipping Next Edit with cancelled token."),
-      yield { status: $e.cancelled }
+async function* createNextEditSuggestionStream(request, workspaceManager, diagnosticsManager, apiServer, blobNameCalculator, configListener, cancellationToken, eventReporter) {
+  let logger = z("queryNextEditStream")
+  if (cancellationToken.isCancellationRequested) {
+    logger.debug("Skipping Next Edit with cancelled token."),
+      yield { status: RequestStatus.cancelled }
     return
   }
-  if (!checkCanUpdateGlobal(t, s, e.pathName, e.fileEditEvents)) {
-    l.debug("Skipping Next Edit with no changes."), yield { status: $e.ok }
+  if (!checkCanUpdateGlobal(workspaceManager, configListener, request.pathName, request.fileEditEvents)) {
+    logger.debug("Skipping Next Edit with no changes."), yield { status: RequestStatus.ok }
     return
   }
-  let u = s.config.nextEdit.useMockResults && e.pathName && fileExists(kN(e.pathName)),
-    f = tIe(t, e.pathName),
-    p = e.fileEditEvents ?? t.getFileEditEvents(f),
-    g = f ? t.getRepoRootForFolderRoot(f) : void 0,
-    m = e.pathName && QualifiedPathName.from(e.pathName),
-    y = m?.rootPath ?? g,
-    v = t.getContext()
-  e = {
-    ...e,
-    blobName: e.blobName ?? (m && t.getBlobName(m)),
-    blobs: e.blobs ?? v.blobs,
+  let useMockResults = configListener.config.nextEdit.useMockResults && request.pathName && fileExists(getNextEditResultsPath(request.pathName)),
+    folderRoot = getFolderRoot(workspaceManager, request.pathName),
+    fileEditEvents = request.fileEditEvents ?? workspaceManager.getFileEditEvents(folderRoot),
+    repoRoot = folderRoot ? workspaceManager.getRepoRootForFolderRoot(folderRoot) : void 0,
+    qualifiedPathName = request.pathName && QualifiedPathName.from(request.pathName),
+    rootPath = qualifiedPathName?.rootPath ?? repoRoot,
+    workspaceContext = workspaceManager.getContext()
+  request = {
+    ...request,
+    blobName: request.blobName ?? (qualifiedPathName && workspaceManager.getBlobName(qualifiedPathName)),
+    blobs: request.blobs ?? workspaceContext.blobs,
     recentChanges:
-      e.recentChanges ?? sv(v.recentChunks.filter((E) => !E.uploaded)),
-    fileEditEvents: p,
+      request.recentChanges ?? sv(workspaceContext.recentChunks.filter((chunk) => !chunk.uploaded)),
+    fileEditEvents: fileEditEvents,
     unindexedEditEvents:
-      e.unindexedEditEvents.length > 0
-        ? e.unindexedEditEvents
-        : v.unindexedEditEvents,
+      request.unindexedEditEvents.length > 0
+        ? request.unindexedEditEvents
+        : workspaceContext.unindexedEditEvents,
     unindexedEditEventsBaseBlobNames:
-      e.unindexedEditEventsBaseBlobNames.length > 0
-        ? e.unindexedEditEventsBaseBlobNames
-        : v.unindexedEditEventsBaseBlobNames,
-    diagnostics: await JCt(r, y, i, t),
+      request.unindexedEditEventsBaseBlobNames.length > 0
+        ? request.unindexedEditEventsBaseBlobNames
+        : workspaceContext.unindexedEditEventsBaseBlobNames,
+    diagnostics: await getDiagnosticsForNextEdit(diagnosticsManager, rootPath, blobNameCalculator, workspaceManager),
   }
-  let C = new I6(e.requestId, t)
-  l.debug(
-    `[${e.requestId}] Starting request for ${m?.relPath} (mode=${e.mode}, scope=${e.scope}).`,
+  let pendingEditsTracker = new PendingEditsTracker(request.requestId, workspaceManager)
+  logger.debug(
+    `[${request.requestId}] Starting request for ${qualifiedPathName?.relPath} (mode=${request.mode}, scope=${request.scope}).`,
   )
   try {
-    let E
+    let suggestionStream
     if (
-      (u ? (E = eIe(e)) : (E = await n.nextEditStream(e)),
-      o.isCancellationRequested)
+      (useMockResults ? (suggestionStream = createMockNextEditResultsStream(request)) : (suggestionStream = await apiServer.nextEditStream(request)),
+      cancellationToken.isCancellationRequested)
     ) {
-      l.debug(`[${e.requestId}] Skipping next edit with cancelled token.`),
-        yield { status: $e.cancelled }
+      logger.debug(`[${request.requestId}] Skipping next edit with cancelled token.`),
+        yield { status: RequestStatus.cancelled }
       return
     }
-    for await (let w of E) {
-      let B = `[${e.requestId}/${w.result.suggestionId}]`
+    for await (let suggestionResponse of suggestionStream) {
+      let logPrefix = `[${request.requestId}/${suggestionResponse.result.suggestionId}]`
       if (
-        (w.unknownBlobNames.length > 0 &&
-          (t.handleUnknownBlobs(v, w.unknownBlobNames),
-          l.warn(`${B} Found ${w.unknownBlobNames.length} unknown blobs.`)),
-        w.checkpointNotFound &&
-          (t.handleUnknownCheckpoint(e.requestId, e.blobs.checkpointId),
-          l.warn(`${B} Checkpoint was not found.`)),
-        o.isCancellationRequested)
+        (suggestionResponse.unknownBlobNames.length > 0 &&
+          (workspaceManager.handleUnknownBlobs(workspaceContext, suggestionResponse.unknownBlobNames),
+          logger.warn(`${logPrefix} Found ${suggestionResponse.unknownBlobNames.length} unknown blobs.`)),
+        suggestionResponse.checkpointNotFound &&
+          (workspaceManager.handleUnknownCheckpoint(request.requestId, request.blobs.checkpointId),
+          logger.warn(`${logPrefix} Checkpoint was not found.`)),
+        cancellationToken.isCancellationRequested)
       ) {
-        l.debug(`${B} Cancelled by the client.`), yield { status: $e.cancelled }
+        logger.debug(`${logPrefix} Cancelled by the client.`), yield { status: RequestStatus.cancelled }
         return
       }
-      let T = await zCt(w.result.path, y, t),
-        N = T && t.safeResolvePathName(T.uri)
-      if (o.isCancellationRequested) {
-        l.debug(`${B} Cancelled by the client.`), yield { status: $e.cancelled }
+      let document = await resolveDocumentFromPath(suggestionResponse.result.path, rootPath, workspaceManager),
+        resolvedPathName = document && workspaceManager.safeResolvePathName(document.uri)
+      if (cancellationToken.isCancellationRequested) {
+        logger.debug(`${logPrefix} Cancelled by the client.`), yield { status: RequestStatus.cancelled }
         return
       }
-      if (!N) {
-        l.warn(`${B} Response path ${w.result.path} has no document.`),
-          a.reportEvent(
-            e.requestId,
-            w.result.suggestionId,
+      if (!resolvedPathName) {
+        logger.warn(`${logPrefix} Response path ${suggestionResponse.result.path} has no document.`),
+          eventReporter.reportEvent(
+            request.requestId,
+            suggestionResponse.result.suggestionId,
             Date.now(),
             "error-no-document-for-response",
             "unknown",
           )
         continue
       }
-      if (T?.uri.scheme === "file" && !fileExists(N.absPath)) {
-        l.warn(`${B} Response path ${N.relPath} does not exist.`),
-          a.reportEvent(
-            e.requestId,
-            w.result.suggestionId,
+      if (document?.uri.scheme === "file" && !fileExists(resolvedPathName.absPath)) {
+        logger.warn(`${logPrefix} Response path ${resolvedPathName.relPath} does not exist.`),
+          eventReporter.reportEvent(
+            request.requestId,
+            suggestionResponse.result.suggestionId,
             Date.now(),
             "error-response-file-is-deleted",
             "unknown",
           )
         continue
       }
-      let W = T.getText(),
-        Z = AG(W, w.result.charStart),
-        te = AG(W, w.result.charEnd),
-        Y = C.updateWithPendingEdits(N, new CharRange(Z, te))
-      if (!Y) {
-        l.debug(`${B} Response was invalidated by pending edits.`),
-          yield { status: $e.invalidArgument }
+      let documentText = document.getText(),
+        adjustedStartChar = getByteOffsetFromCodePointIndex(documentText, suggestionResponse.result.charStart),
+        adjustedEndChar = getByteOffsetFromCodePointIndex(documentText, suggestionResponse.result.charEnd),
+        adjustedRange = pendingEditsTracker.updateWithPendingEdits(resolvedPathName, new CharRange(adjustedStartChar, adjustedEndChar))
+      if (!adjustedRange) {
+        logger.debug(`${logPrefix} Response was invalidated by pending edits.`),
+          yield { status: RequestStatus.invalidArgument }
         return
       }
-      let U = new no.Range(T.positionAt(Y.start), T.positionAt(Y.stop)),
-        ce = T.lineAt(U.end.line)
+      let vscodeRange = new no.Range(document.positionAt(adjustedRange.start), document.positionAt(adjustedRange.stop)),
+        endLine = document.lineAt(vscodeRange.end.line)
       if (
-        (ce.range.isEqual(ce.rangeIncludingLineBreak) &&
-          U.end.line === T.lineCount - 1 &&
-          U.end.character === ce.range.end.character &&
-          !U.isEmpty &&
-          (U = U.with({ end: new no.Position(U.end.line + 1, 0) })),
-        U.start.character !== 0 || U.end.character !== 0)
+        (endLine.range.isEqual(endLine.rangeIncludingLineBreak) &&
+          vscodeRange.end.line === document.lineCount - 1 &&
+          vscodeRange.end.character === endLine.range.end.character &&
+          !vscodeRange.isEmpty &&
+          (vscodeRange = vscodeRange.with({ end: new no.Position(vscodeRange.end.line + 1, 0) })),
+        vscodeRange.start.character !== 0 || vscodeRange.end.character !== 0)
       ) {
         if (
-          (l.warn(`${B} Response was not line-aligned ${BSe(U)}.`),
-          l.debug(
-            `${B} Converting char range ${w.result.charStart}-${w.result.charEnd} to ${Z}-${te}.`,
+          (logger.warn(`${logPrefix} Response was not line-aligned ${formatRangeToString(vscodeRange)}.`),
+          logger.debug(
+            `${logPrefix} Converting char range ${suggestionResponse.result.charStart}-${suggestionResponse.result.charEnd} to ${adjustedStartChar}-${adjustedEndChar}.`,
           ),
-          l.debug(`${B} Updated char range to ${Y?.start}-${Y?.stop}.`),
-          l.debug(
-            `${B} The bad line is: "${T.lineAt(U.end.character !== 0 ? U.end.line : U.start.line).text}".`,
+          logger.debug(`${logPrefix} Updated char range to ${adjustedRange?.start}-${adjustedRange?.stop}.`),
+          logger.debug(
+            `${logPrefix} The bad line is: "${document.lineAt(vscodeRange.end.character !== 0 ? vscodeRange.end.line : vscodeRange.start.line).text}".`,
           ),
-          a.reportEvent(
-            e.requestId,
-            w.result.suggestionId,
+          eventReporter.reportEvent(
+            request.requestId,
+            suggestionResponse.result.suggestionId,
             Date.now(),
             "error-response-not-line-aligned",
             "unknown",
           ),
-          N.relPath !== e.pathName?.relPath)
+          resolvedPathName.relPath !== request.pathName?.relPath)
         )
           continue
-        a.reportEvent(
-          e.requestId,
-          w.result.suggestionId,
+        eventReporter.reportEvent(
+          request.requestId,
+          suggestionResponse.result.suggestionId,
           Date.now(),
           "error-response-not-line-aligned-for-current-file",
           "unknown",
         ),
-          yield { status: $e.invalidArgument }
+          yield { status: RequestStatus.invalidArgument }
         return
       }
-      if (T.getText(U) !== w.result.existingCode) {
+      if (document.getText(vscodeRange) !== suggestionResponse.result.existingCode) {
         if (
-          (l.warn(`${B} Code in buffer doesn't match code in response.`),
-          l.debug(
-            `${B} Converting char range ${w.result.charStart}-${w.result.charEnd} to ${Z}-${te}.`,
+          (logger.warn(`${logPrefix} Code in buffer doesn't match code in response.`),
+          logger.debug(
+            `${logPrefix} Converting char range ${suggestionResponse.result.charStart}-${suggestionResponse.result.charEnd} to ${adjustedStartChar}-${adjustedEndChar}.`,
           ),
-          l.debug(`${B} Updated char range to ${Y?.start}-${Y?.stop}.`),
-          l.debug(
-            `${B} Buffer code: "${T.getText(U)}", response code: "${w.result.existingCode}".`,
+          logger.debug(`${logPrefix} Updated char range to ${adjustedRange?.start}-${adjustedRange?.stop}.`),
+          logger.debug(
+            `${logPrefix} Buffer code: "${document.getText(vscodeRange)}", response code: "${suggestionResponse.result.existingCode}".`,
           ),
-          a.reportEvent(
-            e.requestId,
-            w.result.suggestionId,
+          eventReporter.reportEvent(
+            request.requestId,
+            suggestionResponse.result.suggestionId,
             Date.now(),
             "error-code-in-buffer-doesnt-match-code-in-response",
             "unknown",
           ),
-          N.relPath !== e.pathName?.relPath)
+          resolvedPathName.relPath !== request.pathName?.relPath)
         )
           continue
-        a.reportEvent(
-          e.requestId,
-          w.result.suggestionId,
+        eventReporter.reportEvent(
+          request.requestId,
+          suggestionResponse.result.suggestionId,
           Date.now(),
           "error-code-in-buffer-doesnt-match-code-in-response-for-current-file",
           "unknown",
         ),
-          yield { status: $e.invalidArgument }
+          yield { status: RequestStatus.invalidArgument }
         return
       }
-      let Ie = new EditSuggestion(
-        e.requestId,
-        e.mode,
-        e.scope,
-        { ...w.result, charStart: Y.start, charEnd: Y.stop },
-        N,
-        od(U),
-        T.uri.scheme,
+      let suggestion = new EditSuggestion(
+        request.requestId,
+        request.mode,
+        request.scope,
+        { ...suggestionResponse.result, charStart: adjustedRange.start, charEnd: adjustedRange.stop },
+        resolvedPathName,
+        rangeToLineRange(vscodeRange),
+        document.uri.scheme,
       )
-      l.debug(
-        `${B} Returning ${Ie.changeType} suggestion for ${N.relPath}@${Ie.lineRange.toString()}.`,
+      logger.debug(
+        `${logPrefix} Returning ${suggestion.changeType} suggestion for ${resolvedPathName.relPath}@${suggestion.lineRange.toString()}.`,
       ),
-        yield { status: $e.ok, suggestion: Ie }
+        yield { status: RequestStatus.ok, suggestion: suggestion }
     }
-    l.debug(`[${e.requestId}] Request completed.`)
-  } catch (E) {
-    if (Sr.isAPIErrorWithStatus(E, $e.cancelled)) {
-      l.debug(`[${e.requestId}] Cancelled by the server.`),
-        yield { status: $e.cancelled }
+    logger.debug(`[${request.requestId}] Request completed.`)
+  } catch (error) {
+    if (Sr.isAPIErrorWithStatus(error, RequestStatus.cancelled)) {
+      logger.debug(`[${request.requestId}] Cancelled by the server.`),
+        yield { status: RequestStatus.cancelled }
       return
     }
-    l.warn(`[${e.requestId}] Next edit failed: ${E}.`),
-      a.reportEvent(
-        e.requestId,
+    logger.warn(`[${request.requestId}] Next edit failed: ${error}.`),
+      eventReporter.reportEvent(
+        request.requestId,
         void 0,
         Date.now(),
         "error-api-error",
         "unknown",
       ),
-      yield { status: $e.unknown }
+      yield { status: RequestStatus.unknown }
     return
   } finally {
-    C.dispose()
+    pendingEditsTracker.dispose()
   }
 }
-var I6 = class extends DisposableContainer {
-  constructor(r, n) {
+var PendingEditsTracker = class extends DisposableContainer {
+  constructor(requestId, workspaceManager) {
     super()
-    this.requestId = r
-    this.workspaceManager = n
+    this.requestId = requestId
+    this.workspaceManager = workspaceManager
     this.addDisposable(
-      no.workspace.onDidChangeTextDocument((i) => {
-        if (i.contentChanges.length === 0) return
-        let s = this.workspaceManager.safeResolvePathName(i.document.uri)
-        if (!s) return
-        let o = this._pendingEdits.get(s.absPath) ?? []
-        o.push(...i.contentChanges), this._pendingEdits.set(s.absPath, o)
+      no.workspace.onDidChangeTextDocument((event) => {
+        if (event.contentChanges.length === 0) return
+        let pathName = this.workspaceManager.safeResolvePathName(event.document.uri)
+        if (!pathName) return
+        let pendingChanges = this._pendingEdits.get(pathName.absPath) ?? []
+        pendingChanges.push(...event.contentChanges), this._pendingEdits.set(pathName.absPath, pendingChanges)
       }),
     )
   }
   _pendingEdits = new Map()
-  updateWithPendingEdits(r, n) {
-    let i = this._pendingEdits.get(r.absPath) ?? []
-    for (let s of i) {
-      let o = s.text.length - s.rangeLength
-      if (s.rangeOffset + s.rangeLength < n.start) (n.start += o), (n.stop += o)
-      else if (s.rangeOffset <= n.stop) return
+  updateWithPendingEdits(pathName, charRange) {
+    let pendingChanges = this._pendingEdits.get(pathName.absPath) ?? []
+    for (let change of pendingChanges) {
+      let offsetDelta = change.text.length - change.rangeLength
+      if (change.rangeOffset + change.rangeLength < charRange.start) (charRange.start += offsetDelta), (charRange.stop += offsetDelta)
+      else if (change.rangeOffset <= charRange.stop) return
     }
-    return n
+    return charRange
   }
 }
-async function zCt(e, t, r) {
-  if (!t) {
-    let n = r.getAllQualifiedPathNames(e)
-    n.length === 1 && (t = n[0].rootPath)
+async function resolveDocumentFromPath(relativePath, rootPath, workspaceManager) {
+  if (!rootPath) {
+    let qualifiedPaths = workspaceManager.getAllQualifiedPathNames(relativePath)
+    qualifiedPaths.length === 1 && (rootPath = qualifiedPaths[0].rootPath)
   }
-  if (t) {
-    let n = no.Uri.file(Qt(t, e)),
-      i = await no.workspace.openTextDocument(n)
-    if (i) return i
+  if (rootPath) {
+    let documentUri = no.Uri.file(joinPaths(rootPath, relativePath)),
+      document = await no.workspace.openTextDocument(documentUri)
+    if (document) return document
   }
-  return no.window.visibleTextEditors.find((n) => n.document.uri.fsPath === e)
+  return no.window.visibleTextEditors.find((editor) => editor.document.uri.fsPath === relativePath)
     ?.document
 }
-async function JCt(e, t, r, n) {
-  let i = await e.getMostRecentDiagnostics(YCt, KCt, t),
-    s = new Map()
+async function getDiagnosticsForNextEdit(diagnosticsManager, rootPath, blobNameCalculator, workspaceManager) {
+  let diagnostics = await diagnosticsManager.getMostRecentDiagnostics(MAX_DIAGNOSTICS, MAX_AGE_MS, rootPath),
+    blobNameCache = new Map()
   return (
     await Promise.all(
-      i.map(async (a) => {
-        let l = a.uri.path
-        t && l.startsWith(t) && (l = l.substring(t.length))
-        let c
-        switch (a.diagnostic.severity) {
+      diagnostics.map(async (diagnostic) => {
+        let relativePath = diagnostic.uri.path
+        rootPath && relativePath.startsWith(rootPath) && (relativePath = relativePath.substring(rootPath.length))
+        let severityString
+        switch (diagnostic.diagnostic.severity) {
           case no.DiagnosticSeverity.Error:
-            c = "ERROR"
+            severityString = "ERROR"
             break
           case no.DiagnosticSeverity.Warning:
-            c = "WARNING"
+            severityString = "WARNING"
             break
           case no.DiagnosticSeverity.Information:
-            c = "INFORMATION"
+            severityString = "INFORMATION"
             break
           case no.DiagnosticSeverity.Hint:
-            c = "HINT"
+            severityString = "HINT"
             break
         }
-        s.has(l) ||
-          s.set(l, r.calculateNoThrow(l, (await Io(a.uri.fsPath)).getText()))
-        let u = s.get(l)
-        if (!u) return
-        let f = n.safeResolvePathName(a.uri)
-        if (!f) return
-        let p = n.getBlobName(f)
-        return p
+        blobNameCache.has(relativePath) ||
+          blobNameCache.set(relativePath, blobNameCalculator.calculateNoThrow(relativePath, (await Io(diagnostic.uri.fsPath)).getText()))
+        let currentBlobName = blobNameCache.get(relativePath)
+        if (!currentBlobName) return
+        let qualifiedPath = workspaceManager.safeResolvePathName(diagnostic.uri)
+        if (!qualifiedPath) return
+        let blobName = workspaceManager.getBlobName(qualifiedPath)
+        return blobName
           ? {
               location: {
-                path: l,
-                line_start: a.diagnostic.range.start.line,
-                line_end: a.diagnostic.range.end.line,
+                path: relativePath,
+                line_start: diagnostic.diagnostic.range.start.line,
+                line_end: diagnostic.diagnostic.range.end.line,
               },
-              message: a.diagnostic.message,
-              severity: c,
-              current_blob_name: u,
-              blob_name: p,
-              char_start: a.charStart,
-              char_end: a.charEnd,
+              message: diagnostic.diagnostic.message,
+              severity: severityString,
+              current_blob_name: currentBlobName,
+              blob_name: blobName,
+              char_start: diagnostic.charStart,
+              char_end: diagnostic.charEnd,
             }
           : void 0
       }),
     )
-  ).filter((a) => a !== void 0)
+  ).filter((result) => result !== void 0)
 }
 var GlobalNextEditManager = class extends DisposableContainer {
   constructor(workspaceManager, nextEditRequestManager, suggestionManager, configListener, nextEditSessionEventReporter) {
@@ -112201,7 +112201,7 @@ var NextEditRequestManager = class e extends DisposableContainer {
       })
     this.state.value = "inflight"
     let stateToken = this._stateController.setState(ySe),
-      requestStatus = $e.ok,
+      requestStatus = RequestStatus.ok,
       suggestions = [],
       startTime = new Date()
     try {
@@ -112252,9 +112252,9 @@ var NextEditRequestManager = class e extends DisposableContainer {
           (this.lastResponse.value = response.suggestion),
           response.suggestion && suggestions.push(response.suggestion)
       }
-      let noSuggestions = requestStatus === $e.ok && suggestions.length === 0
+      let noSuggestions = requestStatus === RequestStatus.ok && suggestions.length === 0
       if (
-        (requestStatus === $e.ok && !noSuggestions && this._freshCompletedRequests.push(inflightRequest),
+        (requestStatus === RequestStatus.ok && !noSuggestions && this._freshCompletedRequests.push(inflightRequest),
         !noSuggestions && inflightRequest.mode === "BACKGROUND")
       ) {
         this._clientMetricsReporter.report({
@@ -112262,7 +112262,7 @@ var NextEditRequestManager = class e extends DisposableContainer {
           value: preprocessingEndTime - processingStartTime,
         })
         let totalLatency = Date.now() - inflightRequest.enqueuedAt
-        requestStatus === $e.ok
+        requestStatus === RequestStatus.ok
           ? this._clientMetricsReporter.report({
               client_metric: "next_edit_bg_stream_finish_latency_ms",
               value: totalLatency,
@@ -112272,7 +112272,7 @@ var NextEditRequestManager = class e extends DisposableContainer {
                 client_metric: "next_edit_bg_stream_partial_latency_ms",
                 value: totalLatency,
               })
-            : requestStatus === $e.cancelled
+            : requestStatus === RequestStatus.cancelled
               ? this._clientMetricsReporter.report({
                   client_metric: "next_edit_bg_stream_cancel_latency_ms",
                   value: totalLatency,
@@ -112292,7 +112292,7 @@ var NextEditRequestManager = class e extends DisposableContainer {
                   value: sufficientNoopsLatency,
                 })
               : suggestionCount < 4 &&
-                requestStatus === $e.ok &&
+                requestStatus === RequestStatus.ok &&
                 this._clientMetricsReporter.report({
                   client_metric: "next_edit_bg_sufficient_noops_latency_ms",
                   value: totalLatency,
@@ -112315,7 +112315,7 @@ var NextEditRequestManager = class e extends DisposableContainer {
             this._processPendingRequestsDebounced.flush())
           : (this._logger.debug("No more pending requests."),
             (this.state.value = "ready"),
-            requestStatus === $e.ok &&
+            requestStatus === RequestStatus.ok &&
             !this._suggestionManager
               .getActiveSuggestions()
               .some((suggestion) => suggestion.state === "fresh" && suggestion.changeType !== "noop")
@@ -112323,8 +112323,8 @@ var NextEditRequestManager = class e extends DisposableContainer {
                   this._stateController.setState(vSe),
                   e._statusClearTimeoutMs,
                 )
-              : requestStatus !== $e.cancelled &&
-                requestStatus !== $e.ok &&
+              : requestStatus !== RequestStatus.cancelled &&
+                requestStatus !== RequestStatus.ok &&
                 (this._stateController.setState(ASe),
                 this._logger.debug(
                   `Request ${requestId} failed with status: ${requestStatus}.`,
@@ -114209,7 +114209,7 @@ var lbt = "file-edit-events.json",
     _storeFile
     constructor(t) {
       this._logger.debug(`Using [${t.directory}] to store events`),
-        (this._storeFile = Qt(t.directory, lbt))
+        (this._storeFile = joinPaths(t.directory, lbt))
     }
     save(t) {
       this._logger.debug(`Saving ${t.length} events to ${this._storeFile}`),
@@ -115131,7 +115131,7 @@ async function d2(e, t, r, n) {
       )
         continue
       let w = j6.Uri.joinPath(f, v),
-        B = Qt(g, v, !0)
+        B = joinPaths(g, v, !0)
       y.getPathInfo(B).accepted && l.push([w, y])
     }
   }
@@ -115193,7 +115193,7 @@ var gC = class {
             continue
           this._filterMs.start()
           let p = j6.Uri.joinPath(i, c),
-            g = Qt(o, c, u === "Directory"),
+            g = joinPaths(o, c, u === "Directory"),
             m = a.getPathInfo(g, u)
           this._filterMs.stop()
           let y = g
@@ -115311,7 +115311,7 @@ var Z6 = class {
     this._blobNameCalculator = n
   }
   async getBufferBlobName(t) {
-    let r = RIe.Uri.file(Qt(this._rootPath, t)),
+    let r = RIe.Uri.file(joinPaths(this._rootPath, t)),
       i = (await Io(r)).getText()
     return this._blobNameCalculator.calculate(t, i)
   }
@@ -117313,8 +117313,8 @@ var B2 = class e extends DisposableContainer {
     } catch (a) {
       let l = a instanceof Error ? a.message : `${a}`,
         c = this._checkpointId ? this._checkpointId : "{initial}"
-      Sr.isAPIErrorWithStatus(a, $e.invalidArgument) ||
-      Sr.isAPIErrorWithStatus(a, $e.unimplemented)
+      Sr.isAPIErrorWithStatus(a, RequestStatus.invalidArgument) ||
+      Sr.isAPIErrorWithStatus(a, RequestStatus.unimplemented)
         ? (this._logger.warn(
             `checkpoint-blobs from ${c} failed with invalid argument: ${l}. Recreating checkpoint.`,
           ),
@@ -117536,7 +117536,7 @@ var _9 = class {
     }
     _makeAbsPath(r, n) {
       let i = this._pathMap.getRepoRoot(r)
-      if (i !== void 0) return Qt(i, n)
+      if (i !== void 0) return joinPaths(i, n)
     }
     _fileTooLargeString(r) {
       return `File too large (${r} > ${this._pathHandler.maxBlobSize})`
@@ -117904,21 +117904,21 @@ function Wbt(e) {
     return { mtime: e.mtime, name: e.name }
 }
 function Gbt(e) {
-  return Qt(e, Df.cacheFileName)
+  return joinPaths(e, Df.cacheFileName)
 }
 function T2(e) {
   let t = Gbt(e)
   return fileExists(t)
 }
 async function LIe(e, t) {
-  let r = Qt(e, Df.cacheFileName),
-    n = Qt(t, Df.cacheFileName)
+  let r = joinPaths(e, Df.cacheFileName),
+    n = joinPaths(t, Df.cacheFileName)
   await Hl(t), await IG(r, n)
 }
 async function UIe(e, t) {
   let r = new Map(),
     n = z(`MtimeCache[${e}]`),
-    i = Qt(t, Df.cacheFileName)
+    i = joinPaths(t, Df.cacheFileName)
   n.info(`reading blob name cache from ${i}`)
   try {
     let s = 0,
@@ -117947,8 +117947,8 @@ var D2 = class extends Df {
     super()
     this._name = r
     this._cacheDirName = n
-    ;(this._cacheFileName = Qt(this._cacheDirName, Df.cacheFileName)),
-      (this._tmpFileName = Qt(this._cacheDirName, Df.tmpFileName))
+    ;(this._cacheFileName = joinPaths(this._cacheDirName, Df.cacheFileName)),
+      (this._tmpFileName = joinPaths(this._cacheDirName, Df.tmpFileName))
   }
   _cacheFileName
   _tmpFileName
@@ -119156,7 +119156,7 @@ var N2 = class {
       a && this._pathStatusChangedEmitter.fire({ relPath: r })
     }
     _makeAbsPath(r) {
-      return Qt(this.repoRoot, r)
+      return joinPaths(this.repoRoot, r)
     }
     _publishBlobNameChange(r, n, i) {
       n !== i &&
@@ -119394,9 +119394,9 @@ async function GIe(e, t, r, n) {
         y === "." || y === "..")
       )
         continue
-      let E = Qt(p, y, v === "Directory")
+      let E = joinPaths(p, y, v === "Directory")
       g.acceptsPath(E, v) &&
-        (v === "File" ? a.push(E) : v === "Directory" && o.push(Qt(u, y)))
+        (v === "File" ? a.push(E) : v === "Directory" && o.push(joinPaths(u, y)))
     }
   }
   return Promise.resolve(a)
@@ -119441,7 +119441,7 @@ var L2 = class e {
       let i = Math.floor(Math.random() * r.length),
         s = r[i]
       ;(r[i] = r[r.length - 1]), r.pop()
-      let o = Qt(t, s),
+      let o = joinPaths(t, s),
         a = await this._pathHandler.readText(o)
       if (a.type !== "text") continue
       let l = this._pathHandler.calculateBlobName(s, a.contents)
@@ -120590,7 +120590,7 @@ var V2 = class e extends DisposableContainer {
   static computeCacheDirPath(r, n) {
     let i = ms(n),
       s = Jv(e._textEncoder.encode(r))
-    return Qt(i, s)
+    return joinPaths(i, s)
   }
   async refreshSourceFolders() {
     this.requalifyLargeFolders()
@@ -121189,7 +121189,7 @@ var V2 = class e extends DisposableContainer {
       i = "",
       s
     for (let c of n) {
-      i = Qt(i, c)
+      i = joinPaths(i, c)
       let u = this.getAllQualifiedPathInfos(i).filter((f) => f.isAccepted)
       if (u.length === 0) break
       s = u[0]
@@ -121476,7 +121476,7 @@ var V2 = class e extends DisposableContainer {
     let s = this._trackedSourceFolders.get(r)?.sourceFolder
     if (s === void 0) throw new $F()
     if (!s.initialEnumerationComplete) throw new YF()
-    let o = Qt(r, n),
+    let o = joinPaths(r, n),
       a = ql(s.repoRoot, o),
       l = new Map(),
       c = new Map(),
@@ -121503,7 +121503,7 @@ var V2 = class e extends DisposableContainer {
       let y = {
         name: g,
         folderRoot: r,
-        relPath: Qt(n, g),
+        relPath: joinPaths(n, g),
         included: m.included,
         reason: m.reason,
       }
@@ -121849,7 +121849,7 @@ var AugmentExtension = class e extends DisposableContainer {
       for (let model of modelConfig.models) modelsByName.set(model.name, model)
       this._initState?.dispose()
     } catch (error) {
-      if (Sr.isAPIErrorWithStatus(error, $e.unauthenticated)) {
+      if (Sr.isAPIErrorWithStatus(error, RequestStatus.unauthenticated)) {
         this._auth.useOAuth
           ? (this._enableState = this._statusBar.setState(cSe))
           : (this._enableState = this._statusBar.setState(uSe))
@@ -122557,7 +122557,7 @@ var AugmentExtension = class e extends DisposableContainer {
         } catch (error) {
           if (
             (this._logger.error("Failed to retrieve model config: ", error),
-            Sr.isAPIErrorWithStatus(error, $e.unauthenticated))
+            Sr.isAPIErrorWithStatus(error, RequestStatus.unauthenticated))
           )
             throw error
           if (error instanceof Rd) throw error
@@ -122664,7 +122664,7 @@ var AugmentExtension = class e extends DisposableContainer {
         pathName,
         "FORCED",
         "CURSOR",
-        od(activeEditor.selection),
+        rangeToLineRange(activeEditor.selection),
       ))
   }
   nextEditUpdate(query) {
