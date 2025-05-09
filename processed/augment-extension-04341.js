@@ -65522,30 +65522,30 @@ function dL(e, t, r = true) {
     return r ? m : !m
   })
 }
-var qg = class {
+var DisposableCollection_2 = class {
   _disposables = []
-  add(t) {
-    if (t === undefined)
+  add(disposable) {
+    if (disposable === undefined)
       throw new Error(
         "Attempt to add undefined disposable to DisposableCollection",
       )
-    return this._disposables.push(t), t
+    return this._disposables.push(disposable), disposable
   }
-  addAll(...t) {
-    t.forEach((r) => this.add(r))
+  addAll(...disposables) {
+    disposables.forEach((disposable) => this.add(disposable))
   }
-  adopt(t) {
-    this._disposables.push(...t._disposables), (t._disposables.length = 0)
+  adopt(otherCollection) {
+    this._disposables.push(...otherCollection._disposables), (otherCollection._disposables.length = 0)
   }
   dispose() {
-    for (let t of this._disposables) t.dispose()
+    for (let disposable of this._disposables) disposable.dispose()
     this._disposables.length = 0
   }
 }
-var ml = class {
-  _disposables = new qg()
-  _priorityDisposables = new qg()
-  constructor(t = new qg(), r = new qg()) {
+var DisposableContainer_2 = class {
+  _disposables = new DisposableCollection_2()
+  _priorityDisposables = new DisposableCollection_2()
+  constructor(t = new DisposableCollection_2(), r = new DisposableCollection_2()) {
     this._disposables.adopt(t), this._priorityDisposables.adopt(r)
   }
   addDisposable(t, r = false) {
@@ -65558,7 +65558,7 @@ var ml = class {
     this._priorityDisposables.dispose(), this._disposables.dispose()
   }
 }
-var un = class e extends ml {
+var DiffViewDocument = class e extends DisposableContainer_2 {
   filePath
   _originalCode
   _modifiedCode
@@ -66642,7 +66642,7 @@ async function LY(e, t) {
 function FFe(e, t, r) {
   let n = e.document,
     i = QualifiedPathName.from(n.path),
-    s = new un(i, n.originalCode, n.modifiedCode, {})
+    s = new DiffViewDocument(i, n.originalCode, n.modifiedCode, {})
   return (
     s.filePath.absPath !== i.absPath &&
       r.warn(
@@ -66676,7 +66676,7 @@ async function QFe(e, t) {
   let s = NFe(i),
     o = (() => {
       let a = QualifiedPathName.from(s.path),
-        l = new un(a, s.originalCode, s.modifiedCode, {})
+        l = new DiffViewDocument(a, s.originalCode, s.modifiedCode, {})
       return rb.set(r, l), l
     })()
   return (
@@ -66705,7 +66705,7 @@ function PFe(e) {
     sourceToolCallRequestId: e.sourceToolCallRequestId,
     timestamp: e.timestamp,
     conversationId: e.conversationId,
-    document: un.empty(),
+    document: DiffViewDocument.empty(),
   }
 }
 async function UY(e, t = false) {
@@ -66979,7 +66979,7 @@ var ib = class {
   Vi = () => ib.getClientWorkspaces(),
   qY = () => ib.reset()
 var AK = q(Yf())
-var jS = class e extends ml {
+var jS = class e extends DisposableContainer_2 {
   _storage
   _shardFunction
   _options
@@ -67073,7 +67073,7 @@ var jS = class e extends ml {
         s.onDiskContents === s.latestCheckpoint.document.modifiedCode
       )
         continue
-      let o = new un(
+      let o = new DiffViewDocument(
         s.path,
         s.latestCheckpoint.document.modifiedCode,
         s.onDiskContents,
@@ -68047,7 +68047,7 @@ function G1e(e) {
       })
   return t ? r.pop() : r.push(r.pop().slice(0, -1)), r
 }
-var aI = class extends ml {
+var aI = class extends DisposableContainer_2 {
   _storage
   _getMemoriesAbsPath
   _onDocumentChange
@@ -68116,7 +68116,7 @@ var aI = class extends ml {
     let s = {
         sourceToolCallRequestId: ho(),
         timestamp: n.timestamp ?? Date.now(),
-        document: new un(r, i, i, { logger: this._logger }),
+        document: new DiffViewDocument(r, i, i, { logger: this._logger }),
         conversationId: t,
       },
       o = { conversationId: t, path: r }
@@ -68183,7 +68183,7 @@ var aI = class extends ml {
       (await this.addCheckpoint(n, {
         sourceToolCallRequestId: ho(),
         timestamp: Date.now(),
-        document: new un(r, i, undefined, {}),
+        document: new DiffViewDocument(r, i, undefined, {}),
         conversationId: this._currentConversationId,
       }),
       this._logger.debug(`Marked file deleted: ${r.absPath}`))
@@ -68201,7 +68201,7 @@ var aI = class extends ml {
     for (let a of s) {
       let l = {
         ...a,
-        document: new un(
+        document: new DiffViewDocument(
           n,
           a.document.originalCode,
           a.document.modifiedCode,
@@ -68223,7 +68223,7 @@ var aI = class extends ml {
     let i = { conversationId: this._currentConversationId, path: t },
       o = (await this.shardManager.getCheckpoints(i)).at(-1)
     if (o === undefined) return
-    let a = { ...o, document: new un(t, o.document.originalCode, r, {}) }
+    let a = { ...o, document: new DiffViewDocument(t, o.document.originalCode, r, {}) }
     await this.shardManager.updateCheckpoint(i, a),
       this._logger.debug(
         `Updated latest checkpoint for ${t.absPath} with ${r}`,
@@ -68257,7 +68257,7 @@ var aI = class extends ml {
         ),
         { fromTimestamp: i, toTimestamp: s, conversationId: n, files: [] }
       )
-    let l = new un(t, o, a, {})
+    let l = new DiffViewDocument(t, o, a, {})
     return {
       fromTimestamp: i,
       toTimestamp: s,
@@ -68302,7 +68302,7 @@ var aI = class extends ml {
             )
             return
           }
-          return new un(a, l, c, {})
+          return new DiffViewDocument(a, l, c, {})
         }),
       )
     return {
@@ -68333,7 +68333,7 @@ var aI = class extends ml {
         {
           sourceToolCallRequestId: ho(),
           timestamp: Date.now(),
-          document: new un(t, s ?? "", i, {}),
+          document: new DiffViewDocument(t, s ?? "", i, {}),
           conversationId: n,
         },
       ))
@@ -73977,7 +73977,7 @@ var wb = class extends En {
         }
         let c = l.filepath,
           u = l.contents,
-          f = new un(c, u, undefined, {}),
+          f = new DiffViewDocument(c, u, undefined, {}),
           p = r.at(-1)?.request_id ?? ho(),
           g = this._checkpointManager.currentConversationId ?? ""
         try {
@@ -74801,7 +74801,7 @@ var zL = 4,
     }
     async createCheckpoint(t, r, n, i) {
       this._logger.debug(`Creating checkpoint for file: ${t.absPath}`)
-      let s = new un(t, r, n, {}),
+      let s = new DiffViewDocument(t, r, n, {}),
         o = i.at(-1)?.request_id ?? ho(),
         a = this._checkpointManager.currentConversationId ?? ""
       this._logger.debug(
@@ -75429,7 +75429,7 @@ var RB = class e extends IB {
     (e.emptyMemory = "emptyMemory"),
     (e.removeUserExchangeMemoryFailed = "removeUserExchangeMemoryFailed")
 })(eZ || (eZ = {}))
-var Nr
+var MemoryEventType
 ;(function (e) {
   ;(e.openedAgentConversation = "opened-agent-conversation"),
     (e.revertCheckpoint = "revert-checkpoint"),
@@ -75481,7 +75481,7 @@ var Nr
       "vs-code-terminal-error-creating-zsh-environment"),
     (e.chatHistoryTruncated = "chat-history-truncated"),
     (e.enhancedPrompt = "enhanced-prompt")
-})(Nr || (Nr = {}))
+})(MemoryEventType || (MemoryEventType = {}))
 var tZ
 ;(function (e) {
   e.sentUserMessage = "sent-user-message"
@@ -75493,7 +75493,7 @@ var nh
     (e[(e.command = 2)] = "command"),
     (e[(e.automaticAfterIndexing = 3)] = "automaticAfterIndexing")
 })(nh || (nh = {}))
-var Nt
+var TelemetryFlags
 ;(function (e) {
   ;(e.exceptionThrown = "exceptionThrown"),
     (e.start = "start"),
@@ -75576,7 +75576,7 @@ var Nt
     (e.rememberEnded = "rememberEnded"),
     (e.failedToReadGuidelines = "failedToReadGuidelines"),
     (e.failedToWriteGuidelines = "failedToWriteGuidelines")
-})(Nt || (Nt = {}))
+})(TelemetryFlags || (TelemetryFlags = {}))
 var DB = class e extends IB {
     caller
     constructor(t) {
@@ -75636,7 +75636,7 @@ var oZ
 async function mp(e, t, r, n, i, s, o) {
   return await yl().chatStream(e, t, r, n, i, s, o)
 }
-var TB = class extends un {
+var TB = class extends DiffViewDocument {
   constructor(t, r, n, i) {
     super(t, r, n, { ...i }),
       this.addDisposable(
@@ -75699,7 +75699,7 @@ Do not use this tool for temporary information.
       c === undefined && (c = at("Failed to save memory.")),
         l.setFlag(rn.toolOutputIsError, c.isError),
         Mr().reportEvent({
-          eventName: Nr.rememberToolCall,
+          eventName: MemoryEventType.rememberToolCall,
           conversationId: "",
           eventData: { rememberToolCallData: l },
         })
@@ -75852,7 +75852,7 @@ Do not use this tool for temporary information.
   }
 }
 var aZ = q(Yf()),
-  MB = class e extends ml {
+  MB = class e extends DisposableContainer_2 {
     static THROTTLE_DELAY_MS = 500
     _memoryHasUpdatesCallbacks = new Set()
     _throttledNotifyMemoryHasUpdates
@@ -79165,7 +79165,7 @@ var jb = class e extends GA {
   }
 }
 var ZZ = require("events")
-var HB = class extends ml {
+var HB = class extends DisposableContainer_2 {
   _getMemoriesContent
   _currentSnapshot
   _currentConversationId
@@ -83119,10 +83119,10 @@ var nx = "augment.sessions",
   }
 var jy = require("crypto"),
   wo = q(require("vscode"))
-async function Gu(e) {
-  return new Promise((t) => {
-    let r = e((n) => {
-      r.dispose(), t(n)
+async function waitForEvent(eventHandler) {
+  return new Promise((resolve) => {
+    let disposable = eventHandler((eventData) => {
+      disposable.dispose(), resolve(eventData)
     })
   })
 }
@@ -83239,16 +83239,16 @@ var cM = "augment.oauth-state",
       await wo.env.openExternal(s)
     }
     async waitForSessionChange() {
-      let t = await Gu(this._authSession.onDidChangeSession)
+      let t = await waitForEvent(this._authSession.onDidChangeSession)
       if (!t) throw new Error("No session")
       return t
     }
     async waitForProgrammaticCancellation() {
-      let t = await Gu(this._programmaticCancellation.event)
+      let t = await waitForEvent(this._programmaticCancellation.event)
       throw new Error(t)
     }
     async waitForCancellation(t, r) {
-      throw (await Gu(t.onCancellationRequested), new Error(r))
+      throw (await waitForEvent(t.onCancellationRequested), new Error(r))
     }
     async processAuthRedirect(t) {
       let r = new URLSearchParams(t.query),
@@ -83333,8 +83333,8 @@ function Qft(e) {
 function Y0e(e) {
   return Qft(e)
 }
-function sx(e) {
-  return e.with({ path: Pn.dirname(e.fsPath) })
+function getWorkspaceFolder(uri) {
+  return uri.with({ path: Pn.dirname(uri.fsPath) })
 }
 function K0e(e) {
   return Pn.basename(e)
@@ -84137,7 +84137,7 @@ function vye(e, t, r, n, i) {
   )
     for (let o of e.contentChanges) o.range.start.line < TG(s) && QG(t, r, n)
 }
-var kG = 20,
+var MIN_CODE_FILES_REQUIRED = 20,
   MG = class {
     constructor(t, r, n, i) {
       this.workspaceManager = t
@@ -84286,7 +84286,7 @@ var kG = 20,
         !this.localizationPrompt)
       )
         throw (
-          (this.trace.setFlag(Nt.localizationPromptMissing),
+          (this.trace.setFlag(TelemetryFlags.localizationPromptMissing),
           new Error("Localization prompt missing"))
         )
       if (
@@ -84295,7 +84295,7 @@ var kG = 20,
         !this.detectLanguagesPrompt)
       )
         throw (
-          (this.trace.setFlag(Nt.detectLanguagesPromptMissing),
+          (this.trace.setFlag(TelemetryFlags.detectLanguagesPromptMissing),
           new Error("Detect languages prompt missing"))
         )
       if (
@@ -84304,7 +84304,7 @@ var kG = 20,
         !this.orientationCompressionPrompt)
       )
         throw (
-          (this.trace.setFlag(Nt.orientationCompressionPromptMissing),
+          (this.trace.setFlag(TelemetryFlags.orientationCompressionPromptMissing),
           new Error("Orientation compression prompt missing"))
         )
       if (
@@ -84313,7 +84313,7 @@ var kG = 20,
         !this.orientationMaxLanguages)
       )
         throw (
-          (this.trace.setFlag(Nt.orientationMaxLanguagesMissing),
+          (this.trace.setFlag(TelemetryFlags.orientationMaxLanguagesMissing),
           new Error("Orientation max languages missing"))
         )
       if (
@@ -84322,7 +84322,7 @@ var kG = 20,
         !this.buildTestQuery)
       )
         throw (
-          (this.trace.setFlag(Nt.orientationBuildTestQueryMissing),
+          (this.trace.setFlag(TelemetryFlags.orientationBuildTestQueryMissing),
           new Error("Build test prompt missing"))
         )
       ;(this.queries = [{ name: "build-test", template: this.buildTestQuery }]),
@@ -84343,7 +84343,7 @@ var kG = 20,
       let r = this.workspaceManager.getBestFolderRoot()
       if (!r)
         throw (
-          (this.trace.setFlag(Nt.noRootFolderFound),
+          (this.trace.setFlag(TelemetryFlags.noRootFolderFound),
           new Error("No root folder found"))
         )
       let n = rv.default.join(r, ".augment-guidelines"),
@@ -84351,24 +84351,24 @@ var kG = 20,
       try {
         fileExists(n) && (i = await readTextFile(n))
       } catch (l) {
-        this.trace.setFlag(Nt.failedToReadGuidelines),
+        this.trace.setFlag(TelemetryFlags.failedToReadGuidelines),
           this.logger.error(`Failed to read existing guidelines: ${l}`)
       }
       let s = "",
-        o = i.indexOf(_M),
-        a = i.indexOf(EM)
+        o = i.indexOf(ORIENTATION_RESULTS_START_MARKER),
+        a = i.indexOf(ORIENTATION_RESULTS_END_MARKER)
       if (o !== -1 && a !== -1 && a > o) {
         let l = i.substring(0, o),
-          c = i.substring(a + EM.length)
+          c = i.substring(a + ORIENTATION_RESULTS_END_MARKER.length)
         ;(s =
           l +
-          _M +
+          ORIENTATION_RESULTS_START_MARKER +
           `
 ` +
           t +
           `
 ` +
-          EM +
+          ORIENTATION_RESULTS_END_MARKER +
           c),
           this.logger.debug(
             "Replacing existing orientation results between markers",
@@ -84383,13 +84383,13 @@ var kG = 20,
         ;(s =
           i.trim() +
           l +
-          _M +
+          ORIENTATION_RESULTS_START_MARKER +
           `
 ` +
           t +
           `
 ` +
-          EM),
+          ORIENTATION_RESULTS_END_MARKER),
           this.logger.debug("Appending new orientation results with markers")
       }
       try {
@@ -84397,7 +84397,7 @@ var kG = 20,
           this.logger.debug(`Successfully updated workspace guidelines at ${n}`)
       } catch (l) {
         throw (
-          (this.trace.setFlag(Nt.failedToWriteGuidelines),
+          (this.trace.setFlag(TelemetryFlags.failedToWriteGuidelines),
           new Error(`Failed to write workspace guidelines: ${l}`))
         )
       }
@@ -84414,14 +84414,14 @@ var kG = 20,
 `)
       if (!i)
         throw (
-          (this.trace.setFlag(Nt.failedToListRootFolder),
+          (this.trace.setFlag(TelemetryFlags.failedToListRootFolder),
           new Error("Failed to list root folder"))
         )
       this.progressTracker.set(30)
       let s = (0, DG.default)(this.orientationConcurrencyLevel),
         o = Object.keys(t),
         l = 60 / o.length / this.queries.length
-      this.trace.setFlag(Nt.agenticStarted)
+      this.trace.setFlag(TelemetryFlags.agenticStarted)
       let c = o.map((v, C) =>
           s(async () => {
             this.logger.debug(`Processing language: ${v}`)
@@ -84446,31 +84446,31 @@ var kG = 20,
           }),
         ),
         u = await Promise.all(c)
-      this.trace.setFlag(Nt.agenticEnded)
+      this.trace.setFlag(TelemetryFlags.agenticEnded)
       let f = u.flat().join(`
 
 `)
-      this.trace.setStringStats(Nt.agenticModelResponseStats, f),
+      this.trace.setStringStats(TelemetryFlags.agenticModelResponseStats, f),
         this.progressTracker.set(90)
       let p = this.apiServer.createRequestId()
-      this.trace.setRequestId(Nt.compressionRequestId, p)
+      this.trace.setRequestId(TelemetryFlags.compressionRequestId, p)
       let g = await this.simpleLlmCall(
         this.orientationCompressionPrompt.replace(/{assembledKnowledge}/g, f),
         p,
       )
-      this.trace.setStringStats(Nt.compressionModelResponseStats, g)
+      this.trace.setStringStats(TelemetryFlags.compressionModelResponseStats, g)
       let m = g.match(e.agentMdPattern)
       if (!m)
         throw (
-          (this.trace.setFlag(Nt.compressionParsingFailed),
+          (this.trace.setFlag(TelemetryFlags.compressionParsingFailed),
           new Error("Failed to parse compression response"))
         )
       let y = m[1].trim()
       this.logger.debug(`Compressed knowledge: ${y}`),
         this.progressTracker.set(95),
-        this.trace.setFlag(Nt.rememberStarted),
+        this.trace.setFlag(TelemetryFlags.rememberStarted),
         await this.appendToWorkspaceGuidelines(y),
-        this.trace.setFlag(Nt.rememberEnded),
+        this.trace.setFlag(TelemetryFlags.rememberEnded),
         this.progressTracker.set(100)
     }
     async doAgenticTurn(t, r, n) {
@@ -84577,7 +84577,7 @@ var kG = 20,
       let n = {},
         i = (0, DG.default)(this.orientationConcurrencyLevel),
         o = 15 / Object.keys(r).length
-      this.trace.setFlag(Nt.localizationStarted)
+      this.trace.setFlag(TelemetryFlags.localizationStarted)
       let a = Object.entries(r).map(([c, u], f) =>
           i(async () => {
             this.logger.debug(`Localizing language: ${c} (index: ${f})`)
@@ -84606,7 +84606,7 @@ var kG = 20,
         ),
         l = await Promise.all(a)
       return (
-        this.trace.setFlag(Nt.localizationEnded),
+        this.trace.setFlag(TelemetryFlags.localizationEnded),
         l.forEach(({ language: c, locations: u }, f) => {
           let p = u.split(",").length
           this.trace.setNum(`localizationNumLocations_${f}`, p), (n[c] = u)
@@ -84688,9 +84688,9 @@ var kG = 20,
             }
         }
       await i(this.rootAbsPath),
-        this.trace.setNum(Nt.topLanguagesNumFiles, n.length)
+        this.trace.setNum(TelemetryFlags.topLanguagesNumFiles, n.length)
       let s = Object.values(r).reduce((g, m) => g + m, 0)
-      if ((this.trace.setNum(Nt.topLanguagesNumCodeFiles, s), s < kG))
+      if ((this.trace.setNum(TelemetryFlags.topLanguagesNumCodeFiles, s), s < MIN_CODE_FILES_REQUIRED))
         throw Error("Not enough code files to run orientation")
       let o = Object.entries(r)
           .sort(([, g], [, m]) => m - g)
@@ -84698,16 +84698,16 @@ var kG = 20,
           .map(([g, m]) => `${g}: ${m}`).join(`
 `),
         a = this.apiServer.createRequestId()
-      this.trace.setRequestId(Nt.topLanguagesRequestId, a)
+      this.trace.setRequestId(TelemetryFlags.topLanguagesRequestId, a)
       let l = await this.simpleLlmCall(
         this.detectLanguagesPrompt.replace(/{fileExtensionsList}/g, o),
         a,
       )
-      this.trace.setStringStats(Nt.topLanguagesModelResponseStats, l),
+      this.trace.setStringStats(TelemetryFlags.topLanguagesModelResponseStats, l),
         this.logger.debug(`Detected languages: "${l}"`)
       let c = JSON.parse(l.trim())
       this.trace.setNum(
-        Nt.topLanguagesNumDetectedLanguages,
+        TelemetryFlags.topLanguagesNumDetectedLanguages,
         Object.keys(c).length,
       )
       let u = {}
@@ -84725,7 +84725,7 @@ var kG = 20,
           `Top ${this.orientationMaxLanguages} languages: ${JSON.stringify(p)}`,
         ),
         this.trace.setNum(
-          Nt.topLanguagesNumFinalLanguages,
+          TelemetryFlags.topLanguagesNumFinalLanguages,
           Object.keys(p).length,
         ),
         { languages: p, allFiles: n }
@@ -84779,134 +84779,134 @@ function $ft(e, t) {
   }
   return n.children.size === 0 ? "" : Cye(n)
 }
-var uf = { state: "idle" },
-  bye = new hye.EventEmitter(),
-  IM = bye.event
-function Yu() {
-  bye.fire(uf)
+var orientationState = { state: "idle" },
+  orientationEventEmitter = new hye.EventEmitter(),
+  onOrientationStateChanged = orientationEventEmitter.event
+function notifyOrientationStateChanged() {
+  orientationEventEmitter.fire(orientationState)
 }
-var wM = "orientation.runCount",
-  _M = "[//]: # (AUGMENT-CODEBASE-ORIENTATION-RESULTS-START)",
-  EM = "[//]: # (AUGMENT-CODEBASE-ORIENTATION-RESULTS-END)"
-async function Eye(e, t, r, n, i) {
+var ORIENTATION_RUN_COUNT_KEY = "orientation.runCount",
+  ORIENTATION_RESULTS_START_MARKER = "[//]: # (AUGMENT-CODEBASE-ORIENTATION-RESULTS-START)",
+  ORIENTATION_RESULTS_END_MARKER = "[//]: # (AUGMENT-CODEBASE-ORIENTATION-RESULTS-END)"
+async function runAutomaticOrientation(apiServer, workspaceManager, featureFlagManager, agentCheckpointManager, workspaceStorage) {
   try {
-    let s = i.get(wM) || 0
-    if ((await i.update(wM, s + 1), s > 0)) return
-    let o = t.getBestFolderRoot()
-    if (!o) throw Error("Root of the project is `undefined`.")
-    let a = rv.default.join(o, ".augment-guidelines")
-    if (fileExists(a)) {
-      let l = await readTextFile(a)
-      if (l && l.includes(_M)) return
+    let runCount = workspaceStorage.get(ORIENTATION_RUN_COUNT_KEY) || 0
+    if ((await workspaceStorage.update(ORIENTATION_RUN_COUNT_KEY, runCount + 1), runCount > 0)) return
+    let rootFolder = workspaceManager.getBestFolderRoot()
+    if (!rootFolder) throw Error("Root of the project is `undefined`.")
+    let guidelinesPath = rv.default.join(rootFolder, ".augment-guidelines")
+    if (fileExists(guidelinesPath)) {
+      let guidelinesContent = await readTextFile(guidelinesPath)
+      if (guidelinesContent && guidelinesContent.includes(ORIENTATION_RESULTS_START_MARKER)) return
     }
-    await dx(e, t, r, n, nh.automaticAfterIndexing)
+    await runAgentInitialOrientation(apiServer, workspaceManager, featureFlagManager, agentCheckpointManager, nh.automaticAfterIndexing)
   } catch {
     z("AutomaticOrientation").error("Error running automatic orientation.")
   }
 }
-async function dx(e, t, r, n, i) {
-  if (uf.state === "in-progress") {
+async function runAgentInitialOrientation(apiServer, workspaceManager, featureFlagManager, agentCheckpointManager, orientationType) {
+  if (orientationState.state === "in-progress") {
     gi.window.showInformationMessage(
       "Augment Agent orientation is already in progress",
     )
     return
   }
-  let s = z("InitialOrientation"),
-    o = DB.create(i)
-  o.setFlag(Nt.start)
+  let logger = z("InitialOrientation"),
+    telemetryData = DB.create(orientationType)
+  telemetryData.setFlag(TelemetryFlags.start)
   try {
-    ;(uf = { state: "in-progress", progress: 0, lastRunTimestamp: Date.now() }),
-      Yu(),
-      await Yft(e, t, r, n, s, o),
-      (uf = {
+    ;(orientationState = { state: "in-progress", progress: 0, lastRunTimestamp: Date.now() }),
+      notifyOrientationStateChanged(),
+      await performOrientation(apiServer, workspaceManager, featureFlagManager, agentCheckpointManager, logger, telemetryData),
+      (orientationState = {
         state: "succeeded",
         progress: 100,
         lastRunTimestamp: Date.now(),
       }),
-      Yu()
-  } catch (a) {
-    o.setFlag(Nt.exceptionThrown), s.error(`Error in initial orientation: ${a}`)
-    let l = "",
-      c = "failed",
-      u = o.getNum(Nt.topLanguagesNumCodeFiles) ?? kG
-    u === 0
-      ? ((c = "aborted"), (l = "Code files were not found"))
-      : u < kG
-        ? ((c = "aborted"), (l = "Repository is too small"))
-        : o.getFlag(Nt.compressionParsingFailed)
-          ? (l = "Error code #1002")
-          : o.getFlag(Nt.localizationStarted) &&
-              !o.getFlag(Nt.localizationEnded)
-            ? (l = "Error code #1003")
-            : o.getFlag(Nt.agenticStarted) && !o.getFlag(Nt.agenticEnded)
-              ? (l = "Error code #1004")
-              : o.getFlag(Nt.rememberStarted) &&
-                !o.getFlag(Nt.rememberEnded) &&
-                (l = "Error code #1005"),
-      (uf = {
-        state: c,
+      notifyOrientationStateChanged()
+  } catch (error) {
+    telemetryData.setFlag(TelemetryFlags.exceptionThrown), logger.error(`Error in initial orientation: ${error}`)
+    let errorMessage = "",
+      stateType = "failed",
+      numCodeFiles = telemetryData.getNum(TelemetryFlags.topLanguagesNumCodeFiles) ?? MIN_CODE_FILES_REQUIRED
+    numCodeFiles === 0
+      ? ((stateType = "aborted"), (errorMessage = "Code files were not found"))
+      : numCodeFiles < MIN_CODE_FILES_REQUIRED
+        ? ((stateType = "aborted"), (errorMessage = "Repository is too small"))
+        : telemetryData.getFlag(TelemetryFlags.compressionParsingFailed)
+          ? (errorMessage = "Error code #1002")
+          : telemetryData.getFlag(TelemetryFlags.localizationStarted) &&
+              !telemetryData.getFlag(TelemetryFlags.localizationEnded)
+            ? (errorMessage = "Error code #1003")
+            : telemetryData.getFlag(TelemetryFlags.agenticStarted) && !telemetryData.getFlag(TelemetryFlags.agenticEnded)
+              ? (errorMessage = "Error code #1004")
+              : telemetryData.getFlag(TelemetryFlags.rememberStarted) &&
+                !telemetryData.getFlag(TelemetryFlags.rememberEnded) &&
+                (errorMessage = "Error code #1005"),
+      (orientationState = {
+        state: stateType,
         progress: 0,
         lastRunTimestamp: Date.now(),
-        errorMessage: l,
+        errorMessage: errorMessage,
       }),
-      Yu()
+      notifyOrientationStateChanged()
   } finally {
-    o.setFlag(Nt.end),
+    telemetryData.setFlag(TelemetryFlags.end),
       Mr().reportEvent({
-        eventName: Nr.initialOrientation,
+        eventName: MemoryEventType.initialOrientation,
         conversationId: "",
-        eventData: { initialOrientationData: o },
+        eventData: { initialOrientationData: telemetryData },
       })
   }
 }
-async function Yft(e, t, r, n, i, s) {
-  i.debug("Starting initial orientation process.")
-  let o = r.currentFlags.memoriesParams?.orientation_concurrency_level
-  if (!o)
+async function performOrientation(apiServer, workspaceManager, featureFlagManager, agentCheckpointManager, logger, telemetryData) {
+  logger.debug("Starting initial orientation process.")
+  let concurrencyLevel = featureFlagManager.currentFlags.memoriesParams?.orientation_concurrency_level
+  if (!concurrencyLevel)
     throw (
-      (s.setFlag(Nt.concurrencyLevelMissing),
+      (telemetryData.setFlag(TelemetryFlags.concurrencyLevelMissing),
       Error("Failed to get concurrency level for initial orientation."))
     )
-  if (!r.currentFlags.memoriesParams?.enable_initial_orientation)
+  if (!featureFlagManager.currentFlags.memoriesParams?.enable_initial_orientation)
     throw (
-      (s.setFlag(Nt.initialOrientationDisabled),
+      (telemetryData.setFlag(TelemetryFlags.initialOrientationDisabled),
       Error("Initial orientation is not enabled."))
     )
-  let a = (l) => {
-    let c = 0
+  let createProgressTracker = (progress) => {
+    let currentProgress = 0
     return {
-      inc: (u) => {
-        uf.state !== "failed" &&
-          ((c = Math.min(c + u, 100)),
-          l.report({ increment: 0, message: `${Math.round(c)}%` }),
-          (uf = {
+      inc: (increment) => {
+        orientationState.state !== "failed" &&
+          ((currentProgress = Math.min(currentProgress + increment, 100)),
+          progress.report({ increment: 0, message: `${Math.round(currentProgress)}%` }),
+          (orientationState = {
             state: "in-progress",
-            progress: Math.round(c),
+            progress: Math.round(currentProgress),
             lastRunTimestamp: Date.now(),
           }),
-          Yu())
+          notifyOrientationStateChanged())
       },
-      set: (u) => {
-        u <= c ||
-          ((u = Math.min(u, 100)),
-          (c = u),
-          l.report({ increment: 0, message: `${Math.round(c)}%` }),
-          (uf = {
+      set: (value) => {
+        value <= currentProgress ||
+          ((value = Math.min(value, 100)),
+          (currentProgress = value),
+          progress.report({ increment: 0, message: `${Math.round(currentProgress)}%` }),
+          (orientationState = {
             state: "in-progress",
-            progress: Math.round(c),
+            progress: Math.round(currentProgress),
             lastRunTimestamp: Date.now(),
           }),
-          Yu())
+          notifyOrientationStateChanged())
       },
       reset: () => {
-        l.report({ increment: 0, message: "0%" }),
-          (c = 0),
-          (uf = {
+        progress.report({ increment: 0, message: "0%" }),
+          (currentProgress = 0),
+          (orientationState = {
             state: "in-progress",
             progress: 0,
             lastRunTimestamp: Date.now(),
           }),
-          Yu()
+          notifyOrientationStateChanged()
       },
     }
   }
@@ -84915,39 +84915,39 @@ async function Yft(e, t, r, n, i, s) {
       location: gi.ProgressLocation.Window,
       title: "Augment Codebase Orientation",
     },
-    async (l, c) => {
-      let u = a(l)
-      u.reset(), await _ye(e, t, r, n, i, o, u, s)
+    async (progress, token) => {
+      let progressTracker = createProgressTracker(progress)
+      progressTracker.reset(), await executeOrientation(apiServer, workspaceManager, featureFlagManager, agentCheckpointManager, logger, concurrencyLevel, progressTracker, telemetryData)
     },
   )
 }
-async function _ye(e, t, r, n, i, s, o, a) {
-  o.set(1)
+async function executeOrientation(apiServer, workspaceManager, featureFlagManager, agentCheckpointManager, logger, concurrencyLevel, progressTracker, telemetryData) {
+  progressTracker.set(1)
   try {
-    let l = t.getBestFolderRoot()
-    if (!l)
-      throw (a.setFlag(Nt.noRootFolderFound), new Error("No root folder found"))
-    i.debug(`Root folder: ${l}.`), o.set(2), o.set(3)
-    let c = new FG(l, e, t, r, i, s, o, a)
-    o.set(5),
-      await c.run(),
-      o.set(100),
+    let rootFolder = workspaceManager.getBestFolderRoot()
+    if (!rootFolder)
+      throw (telemetryData.setFlag(TelemetryFlags.noRootFolderFound), new Error("No root folder found"))
+    logger.debug(`Root folder: ${rootFolder}.`), progressTracker.set(2), progressTracker.set(3)
+    let orientationProcessor = new FG(rootFolder, apiServer, workspaceManager, featureFlagManager, logger, concurrencyLevel, progressTracker, telemetryData)
+    progressTracker.set(5),
+      await orientationProcessor.run(),
+      progressTracker.set(100),
       gi.window.showInformationMessage(
         "Augment Agent completed orientation process. Workspace guidelines were updated!",
       )
-  } catch (l) {
-    if (s > 1 && Sr.isAPIErrorWithStatus(l, RequestStatus.resourceExhausted)) {
-      a.setFlag(Nt.retryWithLowerConcurrencyLevel),
+  } catch (error) {
+    if (concurrencyLevel > 1 && Sr.isAPIErrorWithStatus(error, RequestStatus.resourceExhausted)) {
+      telemetryData.setFlag(TelemetryFlags.retryWithLowerConcurrencyLevel),
         gi.window.showErrorMessage(
           "Augment agent orientation process failed: Rate limit exceeded. Retrying...",
         ),
-        i.error("Retrying initial orientation with concurrency level 1."),
-        await new Promise((c) => setTimeout(c, 5e3)),
-        o.reset(),
-        await _ye(e, t, r, n, i, 1, o, a)
+        logger.error("Retrying initial orientation with concurrency level 1."),
+        await new Promise((resolve) => setTimeout(resolve, 5e3)),
+        progressTracker.reset(),
+        await executeOrientation(apiServer, workspaceManager, featureFlagManager, agentCheckpointManager, logger, 1, progressTracker, telemetryData)
       return
     }
-    throw l
+    throw error
   }
 }
 var xye = (e) => {
@@ -87735,7 +87735,7 @@ var zM = class e extends DisposableContainer {
           ;(this._terminalSettings = o.value),
             this._logger.verbose("Terminal settings changed"),
             Mr().reportEvent({
-              eventName: Nr.vsCodeTerminalSettingsChanged,
+              eventName: MemoryEventType.vsCodeTerminalSettingsChanged,
               conversationId: "",
             }),
             this._checkAndUpdateShell()
@@ -87753,7 +87753,7 @@ var zM = class e extends DisposableContainer {
               `Error loading initial terminal settings: ${o.message}`,
             ),
               Mr().reportEvent({
-                eventName: Nr.vsCodeTerminalErrorLoadingSettings,
+                eventName: MemoryEventType.vsCodeTerminalErrorLoadingSettings,
                 conversationId: "",
               }),
               (this._terminalSettings = { supportedShells: [] })
@@ -87792,7 +87792,7 @@ var zM = class e extends DisposableContainer {
                           `Buggy output detected for process ${a}. Please upgrade VSCode.`,
                         ),
                         Mr().reportEvent({
-                          eventName: Nr.vsCodeTerminalBuggyOutput,
+                          eventName: MemoryEventType.vsCodeTerminalBuggyOutput,
                           conversationId: "",
                         }),
                         (l.output = await this._getOutputFromClipboard(a)))
@@ -87803,7 +87803,7 @@ var zM = class e extends DisposableContainer {
                         `Command line for process ${a} does not match. Expected ${l.command} but got ${o.execution.commandLine.value}`,
                       ),
                       Mr().reportEvent({
-                        eventName: Nr.vsCodeTerminalBuggyExecutionEvents,
+                        eventName: MemoryEventType.vsCodeTerminalBuggyExecutionEvents,
                         conversationId: "",
                       })),
                       (l.output = await this._getOutputFromClipboard(a))
@@ -87816,7 +87816,7 @@ var zM = class e extends DisposableContainer {
             },
           )))
         : Mr().reportEvent({
-            eventName: Nr.vsCodeTerminalShellIntegrationNotAvailable,
+            eventName: MemoryEventType.vsCodeTerminalShellIntegrationNotAvailable,
             conversationId: "",
           }),
         this.addDisposable(
@@ -87868,7 +87868,7 @@ var zM = class e extends DisposableContainer {
       } catch (r) {
         this._logger.debug(`Error checking for shell updates: ${r.message}`),
           Mr().reportEvent({
-            eventName: Nr.vsCodeTerminalErrorCheckingForShellUpdates,
+            eventName: MemoryEventType.vsCodeTerminalErrorCheckingForShellUpdates,
             conversationId: "",
           })
       }
@@ -87951,7 +87951,7 @@ Please wait until this process is complete (you can use a tool for this purpose)
               "Timed out waiting for noop command to complete",
             ),
               Mr().reportEvent({
-                eventName: Nr.vsCodeTerminalTimedOutWaitingForNoopCommand,
+                eventName: MemoryEventType.vsCodeTerminalTimedOutWaitingForNoopCommand,
                 conversationId: "",
               })
           })
@@ -87994,7 +87994,7 @@ Please wait until this process is complete (you can use a tool for this purpose)
                 `Failed to use shell integration for command: ${r}`,
               ),
               Mr().reportEvent({
-                eventName: Nr.vsCodeTerminalFailedToUseShellIntegration,
+                eventName: MemoryEventType.vsCodeTerminalFailedToUseShellIntegration,
                 conversationId: "",
               })),
               f && (f.dispose(), (f = undefined))
@@ -88107,7 +88107,7 @@ Please wait until this process is complete (you can use a tool for this purpose)
               `Process ${r} still running after ${n} seconds.  Timing out.`,
             ),
               Mr().reportEvent({
-                eventName: Nr.vsCodeTerminalWaitTimeout,
+                eventName: MemoryEventType.vsCodeTerminalWaitTimeout,
                 conversationId: "",
               }),
               this._waitResolvers.delete(r),
@@ -88126,7 +88126,7 @@ Please wait until this process is complete (you can use a tool for this purpose)
           ) {
             this._logger.debug("Last command is the same as the current one."),
               Mr().reportEvent({
-                eventName: Nr.vsCodeTerminalLastCommandIsSameAsCurrent,
+                eventName: MemoryEventType.vsCodeTerminalLastCommandIsSameAsCurrent,
                 conversationId: "",
               })
             let c = await this.readOutput(r)
@@ -88134,7 +88134,7 @@ Please wait until this process is complete (you can use a tool for this purpose)
               ? s(c)
               : (this._logger.debug(`Failed to read output for process ${r}`),
                 Mr().reportEvent({
-                  eventName: Nr.vsCodeTerminalFailedToReadOutput,
+                  eventName: MemoryEventType.vsCodeTerminalFailedToReadOutput,
                   conversationId: "",
                 }),
                 s({ output: "", returnCode: null }))
@@ -88155,7 +88155,7 @@ Please wait until this process is complete (you can use a tool for this purpose)
                     ),
                       Mr().reportEvent({
                         eventName:
-                          Nr.vsCodeTerminalPollingDeterminedProcessIsDone,
+                          MemoryEventType.vsCodeTerminalPollingDeterminedProcessIsDone,
                         conversationId: "",
                       }),
                       clearTimeout(a),
@@ -88171,7 +88171,7 @@ Please wait until this process is complete (you can use a tool for this purpose)
                             `Failed to read output for process ${r}`,
                           ),
                           Mr().reportEvent({
-                            eventName: Nr.vsCodeTerminalFailedToReadOutput,
+                            eventName: MemoryEventType.vsCodeTerminalFailedToReadOutput,
                             conversationId: "",
                           }),
                           s({ output: "", returnCode: null }))
@@ -88216,7 +88216,7 @@ Please wait until this process is complete (you can use a tool for this purpose)
             `Error reading stream for process ${n}: ${s.message ?? ""}`,
           ),
             Mr().reportEvent({
-              eventName: Nr.vsCodeTerminalFailedToReadOutput,
+              eventName: MemoryEventType.vsCodeTerminalFailedToReadOutput,
               conversationId: "",
             })
         }
@@ -88236,7 +88236,7 @@ Please wait until this process is complete (you can use a tool for this purpose)
       )
         return (await this._getLastCommandAndOutputFallback()).output
       Mr().reportEvent({
-        eventName: Nr.vsCodeTerminalReadingApproximateOutput,
+        eventName: MemoryEventType.vsCodeTerminalReadingApproximateOutput,
         conversationId: "",
       })
       let i = await Ut.env.clipboard.readText()
@@ -88356,7 +88356,7 @@ Please wait until this process is complete (you can use a tool for this purpose)
               `Error cleaning up temporary directory: ${n.message}`,
             ),
               Mr().reportEvent({
-                eventName: Nr.vsCodeTerminalErrorCleaningUpTempDir,
+                eventName: MemoryEventType.vsCodeTerminalErrorCleaningUpTempDir,
                 conversationId: "",
               })
           }
@@ -88368,7 +88368,7 @@ Please wait until this process is complete (you can use a tool for this purpose)
             `Error cleaning up current shell temporary directory: ${r.message}`,
           ),
             Mr().reportEvent({
-              eventName: Nr.vsCodeTerminalErrorCleaningUpTempDir,
+              eventName: MemoryEventType.vsCodeTerminalErrorCleaningUpTempDir,
               conversationId: "",
             })
         }
@@ -88463,7 +88463,7 @@ Please wait until this process is complete (you can use a tool for this purpose)
               `Shell initialization complete. No supported shells found, using default: ${e._shellInfo.friendlyName}`,
             ),
             Mr().reportEvent({
-              eventName: Nr.vsCodeTerminalNoSupportedShellsFound,
+              eventName: MemoryEventType.vsCodeTerminalNoSupportedShellsFound,
               conversationId: "",
             })
       } catch (n) {
@@ -88473,7 +88473,7 @@ Please wait until this process is complete (you can use a tool for this purpose)
             `Shell initialization complete with errors. Using default shell: ${e._shellInfo.friendlyName}`,
           ),
           Mr().reportEvent({
-            eventName: Nr.vsCodeTerminalErrorInitializingShells,
+            eventName: MemoryEventType.vsCodeTerminalErrorInitializingShells,
             conversationId: "",
           })
       }
@@ -88521,7 +88521,7 @@ Please wait until this process is complete (you can use a tool for this purpose)
             `Error checking capabilities for shell ${s.name}: ${o.message}`,
           ),
             Mr().reportEvent({
-              eventName: Nr.vsCodeTerminalErrorCheckingShellCapability,
+              eventName: MemoryEventType.vsCodeTerminalErrorCheckingShellCapability,
               conversationId: "",
             })
         }
@@ -88558,7 +88558,7 @@ Please wait until this process is complete (you can use a tool for this purpose)
             `Failed to create temporary zsh environment: ${i.message}`,
           ),
             Mr().reportEvent({
-              eventName: Nr.vsCodeTerminalErrorCreatingZshEnvironment,
+              eventName: MemoryEventType.vsCodeTerminalErrorCreatingZshEnvironment,
               conversationId: "",
             })
           return
@@ -88589,7 +88589,7 @@ Please wait until this process is complete (you can use a tool for this purpose)
           n &&
             (this._logger.debug("Failed to find/use Git Bash path"),
             Mr().reportEvent({
-              eventName: Nr.vsCodeTerminalFailedToFindGitBash,
+              eventName: MemoryEventType.vsCodeTerminalFailedToFindGitBash,
               conversationId: "",
             }))
           return
@@ -88602,7 +88602,7 @@ Please wait until this process is complete (you can use a tool for this purpose)
           n &&
             (this._logger.debug("Failed to find PowerShell path"),
             Mr().reportEvent({
-              eventName: Nr.vsCodeTerminalFailedToFindPowerShell,
+              eventName: MemoryEventType.vsCodeTerminalFailedToFindPowerShell,
               conversationId: "",
             }))
           return
@@ -88614,7 +88614,7 @@ Please wait until this process is complete (you can use a tool for this purpose)
         n &&
           (this._logger.debug(`Unsupported shell: ${r.name}`),
           Mr().reportEvent({
-            eventName: Nr.vsCodeTerminalUnsupportedVSCodeShell,
+            eventName: MemoryEventType.vsCodeTerminalUnsupportedVSCodeShell,
             conversationId: "",
           }))
         return
@@ -89044,7 +89044,7 @@ var rbe = {
           `Error during initial terminal capability check: ${r.message}`,
         ),
           Mr().reportEvent({
-            eventName: Nr.vsCodeTerminalErrorCheckingShellCapability,
+            eventName: MemoryEventType.vsCodeTerminalErrorCheckingShellCapability,
             conversationId: "",
           })
       }
@@ -89111,7 +89111,7 @@ var rbe = {
         return (
           this._logger.debug(`Terminal capability check failed: ${s.message}`),
           Mr().reportEvent({
-            eventName: Nr.vsCodeTerminalErrorCheckingShellCapability,
+            eventName: MemoryEventType.vsCodeTerminalErrorCheckingShellCapability,
             conversationId: "",
           }),
           { capability: 1, details: `Check failed with error: ${s.message}` }
@@ -89417,7 +89417,7 @@ var obe = (e, t, r, n, i, s, o) => (a) => new I4(a, t, e, r, n, i, s, o),
           u = $u(s, this._workspaceManager)
         if (u === undefined) return at(`Cannot resolve path: ${s}`)
         if (fileExists(u.absPath)) return at(`File already exists: ${u.absPath}`)
-        let f = new un(u, undefined, l, {})
+        let f = new DiffViewDocument(u, undefined, l, {})
         if (c === l) return f.dispose(), cr(`No changes made to file {${s}}`)
         let p =
             n.at(-1)?.request_id ?? this._requestIdCreator.createRequestId(),
@@ -89508,7 +89508,7 @@ Prefer to use this tool when editing parts of a file.
         o = this._apiServer.createRequestId()
         let p = await this._apiServer.agentEditFile(o, s, a, l, c, i)
         if (p.isError) return at(`Failed to edit file: ${s}`, o)
-        let g = new un(u, c, p.modifiedFileContents, {})
+        let g = new DiffViewDocument(u, c, p.modifiedFileContents, {})
         if (c === p.modifiedFileContents)
           return g.dispose(), cr(`No changes made to file {${s}}`, o)
         let m = n.at(-1)?.request_id ?? o,
@@ -89778,67 +89778,67 @@ var Yl = q(require("vscode"))
 var gf = q(require("vscode"))
 var lbe = q(require("assert")),
   iF = q(require("vscode"))
-var nF = class extends DisposableContainer {
-    constructor(r) {
-      super()
-      this._config = r
-      ;(this._logger = z("CommandManager")),
-        this.addDisposable(
-          new iF.Disposable(() => {
-            this._commands.forEach((n, i) => {
-              n.unregister(), this._commands.delete(i)
-            })
-          }),
-        ),
-        this.addDisposable(
-          this._config.onDidChange(() => {
-            this.register(this.allCommands)
-          }),
-        )
-    }
-    _commands = new Map()
-    _groups = []
-    _logger
-    register(r) {
-      for (let n of r) {
-        if (this._commands.has(n.commandID)) {
-          this._commands.get(n.commandID)?.update(this._config)
-          continue
-        }
-        n.register(this._config), this._commands.set(n.commandID, n)
-      }
-    }
-    registerGroup(r, n) {
-      this._logger.debug(`Registering group '${r}' with ${n.length} commands.`),
-        this._groups.push({ name: r, commands: n }),
-        this.register(n)
-    }
-    get availableCommands() {
-      return Array.from(this._commands.values()).filter(
-        (r) => r.isRegistered && r.canRun(),
+var CommandRegistry = class extends DisposableContainer {
+  constructor(configListener) {
+    super()
+    this._config = configListener
+    ;(this._logger = z("CommandManager")),
+      this.addDisposable(
+        new iF.Disposable(() => {
+          this._commands.forEach((command, commandId) => {
+            command.unregister(), this._commands.delete(commandId)
+          })
+        }),
+      ),
+      this.addDisposable(
+        this._config.onDidChange(() => {
+          this.register(this.allCommands)
+        }),
       )
-    }
-    get availableCommandGroups() {
-      let r = []
-      for (let n = 0; n < this._groups.length; n++) {
-        let { name: i, commands: s } = this._groups[n],
-          o = s.filter((a) => a.isRegistered && a.canRun())
-        o.length !== 0 &&
-          (r.length > 0 && r[r.length - 1].name === i
-            ? r[r.length - 1].commands.push(...o)
-            : r.push({ name: i, commands: o }))
+  }
+  _commands = new Map()
+  _groups = []
+  _logger
+  register(commands) {
+    for (let command of commands) {
+      if (this._commands.has(command.commandID)) {
+        this._commands.get(command.commandID)?.update(this._config)
+        continue
       }
-      return r
+      command.register(this._config), this._commands.set(command.commandID, command)
     }
-    get allCommands() {
-      return Array.from(this._commands.values())
+  }
+  registerGroup(groupName, commands) {
+    this._logger.debug(`Registering group '${groupName}' with ${commands.length} commands.`),
+      this._groups.push({ name: groupName, commands: commands }),
+      this.register(commands)
+  }
+  get availableCommands() {
+    return Array.from(this._commands.values()).filter(
+      (command) => command.isRegistered && command.canRun(),
+    )
+  }
+  get availableCommandGroups() {
+    let groups = []
+    for (let i = 0; i < this._groups.length; i++) {
+      let { name, commands } = this._groups[i],
+        availableCommands = commands.filter((cmd) => cmd.isRegistered && cmd.canRun())
+      availableCommands.length !== 0 &&
+        (groups.length > 0 && groups[groups.length - 1].name === name
+          ? groups[groups.length - 1].commands.push(...availableCommands)
+          : groups.push({ name: name, commands: availableCommands }))
     }
-  },
-  mt = class extends DisposableContainer {
-    constructor(r = undefined, n = true) {
+    return groups
+  }
+  get allCommands() {
+    return Array.from(this._commands.values())
+  }
+},
+  AugmentCommand = class extends DisposableContainer {
+    constructor(title = undefined, showInActionPanel = true) {
       super()
-      this._title = r
-      this._showInActionPanel = n
+      this._title = title
+      this._showInActionPanel = showInActionPanel
       let i = this.constructor
       typeof i.commandID == "string" && (this._commandID = i.commandID),
         this.addDisposable({ dispose: () => this.unregister() })
@@ -89869,34 +89869,34 @@ var nF = class extends DisposableContainer {
     canRun() {
       return true
     }
-    register(r) {
+    register(configListener) {
       this._registration === undefined &&
-        ((this.type === "debug" && !r.config.enableDebugFeatures) ||
+        ((this.type === "debug" && !configListener.config.enableDebugFeatures) ||
           (this._registration = iF.commands.registerCommand(
             this.commandID,
-            (...n) => {
+            (...args) => {
               if (!this.canRun()) {
                 this._logger.debug(
                   `Not running '${this.commandID}' command with type ${this.type}.`,
                 )
                 return
               }
-              this.run(...n)
+              this.run(...args)
             },
           )))
     }
-    update(r) {
+    update(configListener) {
       this.type === "debug" &&
-        (r.config.enableDebugFeatures ? this.register(r) : this.dispose())
+        (configListener.config.enableDebugFeatures ? this.register(configListener) : this.dispose())
     }
     unregister() {
       this._registration?.dispose(), (this._registration = undefined)
     }
   }
-var la = class extends mt {
-  constructor(r, n = undefined, i = true) {
-    super(n, i)
-    this._syncingEnabledTracker = r
+var SyncingEnabledCommand = class extends AugmentCommand {
+  constructor(syncingEnabledTracker, title = undefined, showInActionPanel = true) {
+    super(title, showInActionPanel)
+    this._syncingEnabledTracker = syncingEnabledTracker
   }
   _syncingEnabled() {
     return (
@@ -89914,28 +89914,28 @@ var cbe = q(require("vscode"))
 function ube(e) {
   return e.absPath.startsWith("Untitled-")
 }
-function oF(e) {
+function findUntitledDocument(e) {
   return cbe.workspace.textDocuments.find(
     (r) => r.isUntitled && r.uri.path === e.absPath,
   )
 }
-var ju = class e extends un {
+var VsCodeDiffDocument = class VsCodeDiffDocument extends DiffViewDocument {
   _instance = crypto.randomUUID()
-  constructor(t, r, n, i) {
-    let s = dbe.default.EOL
-    n !== undefined && (n = n.endsWith(s) ? n : n + s),
-      r !== undefined && (r = r.endsWith(s) ? r : r + s),
-      super(t, r, n, { ...i }),
+  constructor(filePath, originalCode, modifiedCode, options) {
+    let eolMarker = dbe.default.EOL
+    modifiedCode !== undefined && (modifiedCode = modifiedCode.endsWith(eolMarker) ? modifiedCode : modifiedCode + eolMarker),
+      originalCode !== undefined && (originalCode = originalCode.endsWith(eolMarker) ? originalCode : originalCode + eolMarker),
+      super(filePath, originalCode, modifiedCode, { ...options }),
       this.addDisposable(
         za.workspace.onDidChangeTextDocument(this._onBaseDocUpdated),
       ),
       this.addDisposable(this.onOriginalUpdated(() => void this._write()))
   }
-  static fromPathName = async (t, r, n) => {
-    let i = new e(t, "", "", { logger: n }),
-      s = await i._read(),
-      o = s === "" && !(await i._fileExists()) ? undefined : s
-    return i.updateCodeVersions(o, r ?? o), i
+  static fromPathName = async (filePath, modifiedCode, logger) => {
+    let document = new VsCodeDiffDocument(filePath, "", "", { logger: logger }),
+      fileContent = await document._read(),
+      originalCode = fileContent === "" && !(await document._fileExists()) ? undefined : fileContent
+    return document.updateCodeVersions(originalCode, modifiedCode ?? originalCode), document
   }
   _fileExists = async () => {
     try {
@@ -89945,58 +89945,58 @@ var ju = class e extends un {
     }
   }
   _read = async () => {
-    let t = await this._getVsCodeTextDocument()
-    return t ? t.getText() : ""
+    let document = await this._getVsCodeTextDocument()
+    return document ? document.getText() : ""
   }
   _write = async () => {
     if (this.originalCode === undefined)
       try {
-        let r = za.Uri.file(this.filePath.absPath)
+        let fileUri = za.Uri.file(this.filePath.absPath)
         ;(await this._fileExists()) &&
           (this._opts.logger?.debug(`Deleting file ${this.filePath.absPath}`),
-          await za.workspace.fs.delete(r))
+          await za.workspace.fs.delete(fileUri))
         return
-      } catch (r) {
+      } catch (error) {
         this._opts.logger?.error(
-          `Failed to delete file ${this.filePath.absPath}: ${String(r)}`,
+          `Failed to delete file ${this.filePath.absPath}: ${String(error)}`,
         )
         return
       }
-    let t = await this._getVsCodeTextDocument()
-    if (t && t.getText() !== this.originalCode) {
+    let document = await this._getVsCodeTextDocument()
+    if (document && document.getText() !== this.originalCode) {
       this._opts.logger?.debug(`Writing to doc ${this._instance}`)
-      let r = new za.WorkspaceEdit()
-      r.replace(
-        t.uri,
+      let edit = new za.WorkspaceEdit()
+      edit.replace(
+        document.uri,
         new za.Range(0, 0, Number.MAX_SAFE_INTEGER, 0),
         this.originalCode,
       ),
-        await za.workspace.applyEdit(r)
+        await za.workspace.applyEdit(edit)
     }
   }
   _getVsCodeTextDocument = async () => {
     try {
-      let t
+      let document
       if (
         (this.isUntitled
-          ? (t = oF(this.filePath))
-          : (t = await za.workspace.openTextDocument(this.filePath.absPath)),
-        t === undefined)
+          ? (document = findUntitledDocument(this.filePath))
+          : (document = await za.workspace.openTextDocument(this.filePath.absPath)),
+        document === undefined)
       )
         throw new Error(`Failed to open document ${this.filePath.absPath}`)
-      return t
-    } catch (t) {
+      return document
+    } catch (error) {
       this._opts.logger?.error(
-        `Failed to read file ${this.filePath.absPath}: ${String(t)}`,
+        `Failed to read file ${this.filePath.absPath}: ${String(error)}`,
       )
       return
     }
   }
-  _onBaseDocUpdated = (t) => {
-    if (t.document.uri.fsPath === this.absPath) {
-      let r = t.document.getText()
-      if (r === this.originalCode) return
-      this.updateOriginal(r)
+  _onBaseDocUpdated = (event) => {
+    if (event.document.uri.fsPath === this.absPath) {
+      let content = event.document.getText()
+      if (content === this.originalCode) return
+      this.updateOriginal(content)
     }
   }
 }
@@ -90041,28 +90041,28 @@ function uv(e) {
 function isNotebook(document) {
   return document.getCells !== undefined
 }
-var aF = class extends mt {
-    constructor(r, n, i) {
+var OpenDiffViewCommand = class extends AugmentCommand {
+    constructor(extension, extensionUri, apiServer) {
       super()
-      this._extension = r
-      this._extensionUri = n
-      this._apiServer = i
+      this._extension = extension
+      this._extensionUri = extensionUri
+      this._apiServer = apiServer
     }
     static commandID = "vscode-augment.internal-dv.o"
     type = "public"
-    run = async (...r) => {
+    run = async (...args) => {
       if (!this._extension.workspaceManager)
         throw new Error("No workspace manager")
       if (!this._extension.keybindingWatcher)
         throw new Error("No keybinding watcher")
-      let [n, i, s] = r,
-        o = gbe(n)
-      if (o === undefined) return
-      if (o === null) return
-      let a = sx(o),
-        l = o.fsPath.replace(a.fsPath, ""),
-        c = new QualifiedPathName(a.fsPath, l)
-      bn.createOrShow(
+      let [uri, modifiedCode, options] = args,
+        resolvedUri = resolveUri(uri)
+      if (resolvedUri === undefined) return
+      if (resolvedUri === null) return
+      let workspaceFolder = getWorkspaceFolder(resolvedUri),
+        relativePath = resolvedUri.fsPath.replace(workspaceFolder.fsPath, ""),
+        qualifiedPath = new QualifiedPathName(workspaceFolder.fsPath, relativePath)
+      DiffViewPanel.createOrShow(
         {
           extensionUri: this._extensionUri,
           workspaceManager: this._extension.workspaceManager,
@@ -90072,56 +90072,56 @@ var aF = class extends mt {
           fuzzySymbolSearcher: this._extension.fuzzySymbolSearcher,
           workTimer: this._extension.workTimer,
         },
-        { document: await ju.fromPathName(c, i), ...s },
+        { document: await VsCodeDiffDocument.fromPathName(qualifiedPath, modifiedCode), ...options },
       )
     }
     canRun() {
       return true
     }
   },
-  dv = class extends la {
-    constructor(r, n, i, s, o) {
-      super(o)
-      this._extension = r
-      this._extensionUri = n
-      this._apiServer = i
-      this._guidelinesWatcher = s
+  InstructionCommand = class extends SyncingEnabledCommand {
+    constructor(extension, extensionUri, apiServer, guidelinesWatcher, syncingEnabledTracker) {
+      super(syncingEnabledTracker)
+      this._extension = extension
+      this._extensionUri = extensionUri
+      this._apiServer = apiServer
+      this._guidelinesWatcher = guidelinesWatcher
     }
     static commandID = "vscode-augment.internal-dv.i"
     type = "public"
-    run = async (...r) => {
+    run = async (...args) => {
       if (!this._extension.workspaceManager)
         throw new Error("No workspace manager")
       if (!this._extension.keybindingWatcher)
         throw new Error("No keybinding watcher")
-      let n = gf.window.activeTextEditor
-      if (!n) {
+      let editor = gf.window.activeTextEditor
+      if (!editor) {
         gf.window.showInformationMessage("No active editor.")
         return
       }
-      if (isNotebookCell(n.document.uri)) {
+      if (isNotebookCell(editor.document.uri)) {
         gf.window.showInformationMessage(
           "Code instructions are not supported in notebooks.",
         )
         return
       }
-      let [i, s, o] = r,
-        a = gbe(i)
-      if (a === undefined) return
-      if (a === null) return
-      let l = sx(a),
-        c = a.fsPath.replace(l.fsPath, ""),
-        u = new QualifiedPathName(l.fsPath, c),
-        f = await ju.fromPathName(u, s),
-        p = { ...o, document: f, guidelinesWatcher: this._guidelinesWatcher },
-        g = n.selection
-      ;(p.instruction = {
+      let [uri, content, options] = args,
+        resolvedUri = resolveUri(uri)
+      if (resolvedUri === undefined) return
+      if (resolvedUri === null) return
+      let workspaceFolder = getWorkspaceFolder(resolvedUri),
+        relativePath = resolvedUri.fsPath.replace(workspaceFolder.fsPath, ""),
+        qualifiedPath = new QualifiedPathName(workspaceFolder.fsPath, relativePath),
+        document = await VsCodeDiffDocument.fromPathName(qualifiedPath, content),
+        panelOptions = { ...options, document: document, guidelinesWatcher: this._guidelinesWatcher },
+        selection = editor.selection
+      ;(panelOptions.instruction = {
         selection: {
-          start: { line: g.start.line, character: g.start.character },
-          end: { line: g.end.line, character: g.end.character },
+          start: { line: selection.start.line, character: selection.start.character },
+          end: { line: selection.end.line, character: selection.end.character },
         },
       }),
-        bn.createOrShow(
+        DiffViewPanel.createOrShow(
           {
             extensionUri: this._extensionUri,
             workspaceManager: this._extension.workspaceManager,
@@ -90131,104 +90131,104 @@ var aF = class extends mt {
             fuzzySymbolSearcher: this._extension.fuzzySymbolSearcher,
             workTimer: this._extension.workTimer,
           },
-          p,
+          panelOptions,
         )
     }
     canRun() {
-      let r = this._extension.featureFlagManager.currentFlags,
-        n = gf.window.activeTextEditor
-      return !!(r.enableInstructions && n && !isNotebookCell(n.document.uri))
+      let featureFlags = this._extension.featureFlagManager.currentFlags,
+        editor = gf.window.activeTextEditor
+      return !!(featureFlags.enableInstructions && editor && !isNotebookCell(editor.document.uri))
     }
   },
-  fv = class extends mt {
+  AcceptAllChunksCommand = class extends AugmentCommand {
     static commandID = "vscode-augment.internal-dv.aac"
     type = "public"
     constructor() {
       super()
     }
     run() {
-      bn.currentPanel && bn.controller?.diffViewMessageHandler.acceptAllChunks()
+      DiffViewPanel.currentPanel && DiffViewPanel.controller?.diffViewMessageHandler.acceptAllChunks()
     }
     canRun() {
       return true
     }
   },
-  hv = class extends mt {
+  AcceptFocusedChunkCommand = class extends AugmentCommand {
     static commandID = "vscode-augment.internal-dv.afc"
     type = "public"
     constructor() {
       super()
     }
     run() {
-      bn.currentPanel &&
-        bn.controller?.diffViewMessageHandler.acceptFocusedChunk()
+      DiffViewPanel.currentPanel &&
+        DiffViewPanel.controller?.diffViewMessageHandler.acceptFocusedChunk()
     }
     canRun() {
       return true
     }
   },
-  gv = class extends mt {
+  RejectFocusedChunkCommand = class extends AugmentCommand {
     static commandID = "vscode-augment.internal-dv.rfc"
     type = "public"
     constructor() {
       super()
     }
     run() {
-      bn.currentPanel &&
-        bn.controller?.diffViewMessageHandler.rejectFocusedChunk()
+      DiffViewPanel.currentPanel &&
+        DiffViewPanel.controller?.diffViewMessageHandler.rejectFocusedChunk()
     }
     canRun() {
       return true
     }
   },
-  pv = class extends mt {
+  FocusPreviousChunkCommand = class extends AugmentCommand {
     static commandID = "vscode-augment.internal-dv.fpc"
     type = "public"
     constructor() {
       super()
     }
     run() {
-      bn.currentPanel &&
-        bn.controller?.diffViewMessageHandler.focusPreviousChunk()
+      DiffViewPanel.currentPanel &&
+        DiffViewPanel.controller?.diffViewMessageHandler.focusPreviousChunk()
     }
     canRun() {
       return true
     }
   },
-  mv = class extends mt {
+  FocusNextChunkCommand = class extends AugmentCommand {
     static commandID = "vscode-augment.internal-dv.fnc"
     type = "public"
     constructor() {
       super()
     }
     run() {
-      bn.currentPanel && bn.controller?.diffViewMessageHandler.focusNextChunk()
+      DiffViewPanel.currentPanel && DiffViewPanel.controller?.diffViewMessageHandler.focusNextChunk()
     }
     canRun() {
       return true
     }
   },
-  Av = class extends mt {
+  CloseDiffViewCommand = class extends AugmentCommand {
     static commandID = "vscode-augment.internal-dv.c"
     type = "public"
     constructor() {
       super()
     }
     run() {
-      bn.currentPanel && bn.currentPanel.dispose()
+      DiffViewPanel.currentPanel && DiffViewPanel.currentPanel.dispose()
     }
     canRun() {
       return true
     }
   }
-function gbe(e) {
-  return e === undefined
+function resolveUri(uriOrString) {
+  return uriOrString === undefined
     ? gf.window.activeTextEditor?.document.uri
-    : e === null
+    : uriOrString === null
       ? null
-      : e instanceof gf.Uri
-        ? e
-        : gf.Uri.parse(e)
+      : uriOrString instanceof gf.Uri
+        ? uriOrString
+        : gf.Uri.parse(uriOrString)
 }
 var yF = q(require("vscode"))
 function lF() {
@@ -90308,7 +90308,7 @@ function bbe(e, t) {
     e
   )
 }
-async function* Ebe(e, t) {
+async function* processCodeStream(e, t) {
   let r = [],
     n = lF(),
     i = e.split(`
@@ -90879,12 +90879,12 @@ var AF = class extends DisposableContainer {
     let n = this._deps.apiServer.createRequestId()
     try {
       let i = this._runChatInstructionStream(r, n)
-      bn.createOrShow(this._deps, {
+      DiffViewPanel.createOrShow(this._deps, {
         ...this._opts,
         viewOptions: yF.ViewColumn.Active,
-        document: await ju.fromPathName(this._opts.document.filePath),
+        document: await VsCodeDiffDocument.fromPathName(this._opts.document.filePath),
       }),
-        bn.startStream(
+        DiffViewPanel.startStream(
           hF(this._opts.document.originalCode ?? "", i),
           n,
           "instruction",
@@ -91141,32 +91141,32 @@ var CF = class extends DisposableContainer {
     return {
       acceptAllChunks:
         this._deps.keybindingWatcher.getKeybindingForCommand(
-          fv.commandID,
+          AcceptAllChunksCommand.commandID,
           true,
         ) ?? "",
       rejectAllChunks:
         this._deps.keybindingWatcher.getKeybindingForCommand(
-          Av.commandID,
+          CloseDiffViewCommand.commandID,
           true,
         ) ?? "",
       acceptFocusedChunk:
         this._deps.keybindingWatcher.getKeybindingForCommand(
-          hv.commandID,
+          AcceptFocusedChunkCommand.commandID,
           true,
         ) ?? "",
       rejectFocusedChunk:
         this._deps.keybindingWatcher.getKeybindingForCommand(
-          gv.commandID,
+          RejectFocusedChunkCommand.commandID,
           true,
         ) ?? "",
       focusPrevChunk:
         this._deps.keybindingWatcher.getKeybindingForCommand(
-          pv.commandID,
+          FocusPreviousChunkCommand.commandID,
           true,
         ) ?? "",
       focusNextChunk:
         this._deps.keybindingWatcher.getKeybindingForCommand(
-          mv.commandID,
+          FocusNextChunkCommand.commandID,
           true,
         ) ?? "",
     }
@@ -91202,7 +91202,7 @@ function Zmt() {
     },
   }
 }
-function Ibe(e, t, r, n) {
+function createEditorDecorations(e, t, r, n) {
   let i = Zmt(),
     s = mi.window.createTextEditorDecorationType({
       backgroundColor: i.added.background,
@@ -91292,7 +91292,7 @@ function Ibe(e, t, r, n) {
     [s, o]
   )
 }
-function Bbe(e, t) {
+function scheduleDecorationCleanup(e, t) {
   let n = 1e4 * (Math.log(e.length + 1) / Math.log(4)),
     { minDelayMs: i = 1e4, maxDelayMs: s = 3e4 } = t,
     o = Math.min(Math.max(n, i), s)
@@ -91300,7 +91300,7 @@ function Bbe(e, t) {
     e.forEach((a) => a.dispose())
   }, o)
 }
-function Rbe(e, t) {
+function highlightChanges(e, t) {
   let r = [],
     n = mi.workspace.onDidChangeTextDocument((i) => {
       i.document.uri.toString() === e.document.uri.toString() &&
@@ -91527,21 +91527,21 @@ var PanelWebview = class extends DisposableContainer {
     }
   }
 }
-var bn = class e extends PanelWebview {
+var DiffViewPanel = class DiffViewPanel extends PanelWebview {
   constructor(
-    r,
-    n,
-    i = zi.window.createWebviewPanel(
-      e.viewType,
+    dependencies,
+    options,
+    panel = zi.window.createWebviewPanel(
+      DiffViewPanel.viewType,
       "Augment",
-      n.viewOptions ?? zi.ViewColumn.Active,
+      options.viewOptions ?? zi.ViewColumn.Active,
       { retainContextWhenHidden: true, enableScripts: true },
     ),
   ) {
-    super("diff-view.html", i.webview)
-    this._deps = r
-    this._opts = n
-    this._panel = i
+    super("diff-view.html", panel.webview)
+    this._deps = dependencies
+    this._opts = options
+    this._panel = panel
     ;(this._panel.iconPath = {
       light: zi.Uri.joinPath(
         this._deps.extensionUri,
@@ -91562,10 +91562,10 @@ var bn = class e extends PanelWebview {
         this._controller,
         this._panel,
         new zi.Disposable(() => {
-          e.currentPanel = undefined
+          DiffViewPanel.currentPanel = undefined
         }),
       ),
-      this.loadHTML(r.extensionUri)
+      this.loadHTML(dependencies.extensionUri)
   }
   static viewType = "augmentDiffView"
   logger = z("DiffViewWebviewPanel")
@@ -91578,11 +91578,11 @@ var bn = class e extends PanelWebview {
     this._opts.onDispose?.(),
       this._controller.dispose(),
       this._panel.dispose(),
-      (e.currentPanel = undefined),
+      (DiffViewPanel.currentPanel = undefined),
       super.dispose()
   }
-  _updateOpts = (r) => (
-    (this._opts = r),
+  _updateOpts = (options) => (
+    (this._opts = options),
     this._controller?.dispose(),
     (this._controller = new CF(
       this._panel,
@@ -91601,60 +91601,60 @@ var bn = class e extends PanelWebview {
   static get isVisible() {
     return this.currentPanel?._panel.visible
   }
-  static startStream = (r, n, i) => {
-    this.currentPanel?.diffViewController.startStream(r, n, i)
+  static startStream = (requestId, prompt, options) => {
+    this.currentPanel?.diffViewController.startStream(requestId, prompt, options)
   }
-  static async instantApply(r, n, i) {
-    let s = n.document,
-      o = s.originalCode,
-      a = i,
-      l = s.absPath,
-      c = ""
-    for await (let C of Ebe(o ?? "", a)) c = C
-    let u = await zi.workspace.openTextDocument(l),
-      f = new zi.WorkspaceEdit()
-    f.replace(u.uri, new zi.Range(0, 0, u.lineCount, 0), c),
-      await zi.workspace.applyEdit(f)
-    let p = await zi.window.showTextDocument(u),
-      g = Ibe(p, o ?? "", c, {
+  static async instantApply(dependencies, options, modifiedCode) {
+    let document = options.document,
+      originalCode = document.originalCode,
+      newCode = modifiedCode,
+      filePath = document.absPath,
+      finalCode = ""
+    for await (let chunk of processCodeStream(originalCode ?? "", newCode)) finalCode = chunk
+    let vsDocument = await zi.workspace.openTextDocument(filePath),
+      edit = new zi.WorkspaceEdit()
+    edit.replace(vsDocument.uri, new zi.Range(0, 0, vsDocument.lineCount, 0), finalCode),
+      await zi.workspace.applyEdit(edit)
+    let editor = await zi.window.showTextDocument(vsDocument),
+      decorations = createEditorDecorations(editor, originalCode ?? "", finalCode, {
         scrollToFirstDecoration: true,
         revealType: zi.TextEditorRevealType.InCenterIfOutsideViewport,
       })
-    Bbe(g, { minDelayMs: 3e4 }), Rbe(p, g)
-    let y = Kf(o ?? "", c).map((C) => ({
-        repoRoot: s.filePath.rootPath,
-        pathName: s.filePath.relPath,
-        originalCode: C.removed ? C.value : "",
-        modifiedCode: C.added ? C.value : "",
+    scheduleDecorationCleanup(decorations, { minDelayMs: 3e4 }), highlightChanges(editor, decorations)
+    let changes = Kf(originalCode ?? "", finalCode).map((diff) => ({
+        repoRoot: document.filePath.rootPath,
+        pathName: document.filePath.relPath,
+        originalCode: diff.removed ? diff.value : "",
+        modifiedCode: diff.added ? diff.value : "",
       })),
-      v = {
+      resolutionData = {
         file: {
-          repoRoot: s.filePath.rootPath,
-          pathName: s.filePath.relPath,
-          originalCode: o ?? "",
-          modifiedCode: c,
+          repoRoot: document.filePath.rootPath,
+          pathName: document.filePath.relPath,
+          originalCode: originalCode ?? "",
+          modifiedCode: finalCode,
         },
-        changes: y,
+        changes: changes,
         resolveType: "accept",
         shouldApplyToAll: true,
       }
     return (
       this.controller?.sessionReporter.reportResolution({
         type: "diff-view-resolve-chunk",
-        data: v,
+        data: resolutionData,
       }),
-      c
+      finalCode
     )
   }
-  static createOrShow(r, n) {
-    if (n.document.isEmptyDocument) return
-    e.currentPanel
-      ? e.currentPanel._updateOpts(n)
-      : (e.currentPanel = new e(r, n))
-    let i = e.currentPanel,
-      s = n.document.filePath,
-      o = Nbe.default.basename(s.absPath)
-    ;(i._panel.title = `Augment Diff - ${o}`), i._panel.reveal()
+  static createOrShow(dependencies, options) {
+    if (options.document.isEmptyDocument) return
+    DiffViewPanel.currentPanel
+      ? DiffViewPanel.currentPanel._updateOpts(options)
+      : (DiffViewPanel.currentPanel = new DiffViewPanel(dependencies, options))
+    let panel = DiffViewPanel.currentPanel,
+      filePath = options.document.filePath,
+      fileName = Nbe.default.basename(filePath.absPath)
+    ;(panel._panel.title = `Augment Diff - ${fileName}`), panel._panel.reveal()
   }
 }
 var BF = class {
@@ -91668,18 +91668,18 @@ var BF = class {
     this._workTimer = a
   }
   showDiffView(t, r, n, i) {
-    let s = bn.isVisible ?? false
+    let s = DiffViewPanel.isVisible ?? false
     if (i.retainFocus && !s) return Promise.resolve()
     let o = {
       editable: false,
       disableResolution: true,
-      document: new un(new QualifiedPathName(t.rootPath, t.relPath), r, n, {}),
+      document: new DiffViewDocument(new QualifiedPathName(t.rootPath, t.relPath), r, n, {}),
       viewOptions: { preserveFocus: true, viewColumn: Pbe.ViewColumn.Active },
     }
     return this._createOrShowDiffView(o), Promise.resolve()
   }
   _createOrShowDiffView(t) {
-    bn.createOrShow(
+    DiffViewPanel.createOrShow(
       {
         extensionUri: this._extensionUri,
         workspaceManager: this._workspaceManager,
@@ -91794,7 +91794,7 @@ var TF = class {
 async function Xmt(e, t) {
   try {
     let r
-    if (ube(e)) r = oF(e)
+    if (ube(e)) r = findUntitledDocument(e)
     else if (fileExists(e.absPath)) r = await Ja.workspace.openTextDocument(e.absPath)
     else {
       let n = Ja.Uri.file(e.absPath)
@@ -95023,7 +95023,7 @@ function cAt(e, t, r) {
   return `${e}--${t}--${r}`
 }
 var aEe = q(require("vscode"))
-var Ji = class extends mt {
+var Separator = class extends AugmentCommand {
   static commandID = "vscode-augment.focusAugmentPanel"
   type = "public"
   constructor() {
@@ -100084,7 +100084,7 @@ var jx = class extends DisposableContainer {
                 this.sendFileSelections(undefined))
         }),
         this._syncingStatus.onDidChangeSyncingStatus(this.sendSyncStatus),
-        IM((i) => {
+        onOrientationStateChanged((i) => {
           this._webview?.postMessage({
             type: "orientation-status-update",
             data: i,
@@ -100967,7 +100967,7 @@ ${p.stack}`
           !r.data.options?.instantApply &&
           this._createOrShowDiffView({
             smartPasteContext: { applyTime: c },
-            document: new ju(l, a, r.data.generatedCode),
+            document: new VsCodeDiffDocument(l, a, r.data.generatedCode),
           })
         let u, f
         if (this._config.config.chat.smartPasteUsePrecomputation ?? true) {
@@ -101020,7 +101020,7 @@ ${p.stack}`
         }
         r.data.options?.dryRun ||
           (r.data.options?.instantApply
-            ? await bn.instantApply(
+            ? await DiffViewPanel.instantApply(
                 {
                   extensionUri: this._extensionUri,
                   workspaceManager: this._workspaceManager,
@@ -101030,10 +101030,10 @@ ${p.stack}`
                   fuzzySymbolSearcher: this._fuzzySymbolSearcher,
                   workTimer: this._workTimer,
                 },
-                { document: new ju(l, a, r.data.generatedCode) },
+                { document: new VsCodeDiffDocument(l, a, r.data.generatedCode) },
                 u,
               )
-            : bn.startStream(hF(a, u), f, "smart-paste"))
+            : DiffViewPanel.startStream(hF(a, u), f, "smart-paste"))
         break
       }
       case "open-file": {
@@ -101111,7 +101111,7 @@ ${p.stack}`
             ?.enable_initial_orientation
         )
           return
-        await dx(
+        await runAgentInitialOrientation(
           this._apiServer,
           this._workspaceManager,
           this._featureFlagManager,
@@ -101121,7 +101121,7 @@ ${p.stack}`
         break
       }
       case "get-orientation-status": {
-        Yu()
+        notifyOrientationStateChanged()
         break
       }
       case "execute-command": {
@@ -101255,7 +101255,7 @@ ${p.stack}`
     }
   }
   showAugmentPanel = async () => (
-    await kt.commands.executeCommand(Ji.commandID), { type: "empty" }
+    await kt.commands.executeCommand(Separator.commandID), { type: "empty" }
   )
   callTool = async (r) => {
     let n = r.data,
@@ -101319,7 +101319,7 @@ ${p.stack}`
     )
   }
   _createOrShowDiffView = (r) => {
-    bn.createOrShow(
+    DiffViewPanel.createOrShow(
       {
         extensionUri: this._extensionUri,
         workspaceManager: this._workspaceManager,
@@ -101390,97 +101390,97 @@ ${p.stack}`
 var H8 = q(require("vscode")),
   pwe = require("vscode")
 var gwe = require("vscode")
-var Mv = class extends mt {
-  constructor(r, n) {
+var ShowSidebarChatCommand = class extends AugmentCommand {
+  constructor(featureFlagManager, changeWebviewAppEvent) {
     super()
-    this._featureFlagManager = r
-    this._changeWebviewAppEvent = n
+    this._featureFlagManager = featureFlagManager
+    this._changeWebviewAppEvent = changeWebviewAppEvent
   }
   type = "public"
   static commandID = "_vscode-augment.showSidebarChat"
   run() {
     this._changeWebviewAppEvent.fire("chat"),
-      gwe.commands.executeCommand(Ji.commandID)
+      gwe.commands.executeCommand(Separator.commandID)
   }
 }
-async function vf(e) {
+async function showAugmentPanel(featureName) {
   try {
-    await H8.commands.executeCommand(Ji.commandID),
-      await H8.commands.executeCommand(Mv.commandID)
-  } catch (t) {
-    t instanceof Error &&
+    await H8.commands.executeCommand(Separator.commandID),
+      await H8.commands.executeCommand(ShowSidebarChatCommand.commandID)
+  } catch (error) {
+    error instanceof Error &&
       pwe.window.showErrorMessage(
-        `Sorry, Augment ${e} encountered an unexpected error: ${He(t)}`,
+        `Sorry, Augment ${featureName} encountered an unexpected error: ${He(error)}`,
       )
   }
 }
-var Fv = class extends la {
-    constructor(r, n, i, s, o, a) {
-      super(s, o, a)
-      this._extension = r
-      this._configListener = n
-      this._chatExtensionEvent = i
-      ;(this._extension = r),
-        (this._configListener = n),
-        (this._chatExtensionEvent = i)
+var BaseSlashCommand = class extends SyncingEnabledCommand {
+    constructor(extension, configListener, chatExtensionEvent, title, displayName, requiresSync) {
+      super(title, displayName, requiresSync)
+      this._extension = extension
+      this._configListener = configListener
+      this._chatExtensionEvent = chatExtensionEvent
+      ;(this._extension = extension),
+        (this._configListener = configListener),
+        (this._chatExtensionEvent = chatExtensionEvent)
     }
     type = "public"
     canRun() {
       return this._extension.ready
     }
-    updateSelectionToCoverDiagnostics(r) {
-      let n = dg.window.activeTextEditor
-      if (n) {
-        let i
-        if (r && !r.every((s) => n.selection.contains(s.range))) {
-          let s = Math.min(...r.map((c) => c.range.start.line)),
-            o = Math.max(...r.map((c) => c.range.end.line)),
-            a = new dg.Position(s, 0),
-            l = n.document.lineAt(o).range.end
-          i = new dg.Range(a, l)
+    updateSelectionToCoverDiagnostics(diagnostics) {
+      let editor = dg.window.activeTextEditor
+      if (editor) {
+        let selectionRange
+        if (diagnostics && !diagnostics.every((diagnostic) => editor.selection.contains(diagnostic.range))) {
+          let startLine = Math.min(...diagnostics.map((diag) => diag.range.start.line)),
+            endLine = Math.max(...diagnostics.map((diag) => diag.range.end.line)),
+            startPosition = new dg.Position(startLine, 0),
+            endPosition = editor.document.lineAt(endLine).range.end
+          selectionRange = new dg.Range(startPosition, endPosition)
         } else
-          n.selection.isEmpty &&
-            (i = n.document.lineAt(n.selection.active.line).range)
-        i && (n.selection = new dg.Selection(i.start, i.end))
+          editor.selection.isEmpty &&
+            (selectionRange = editor.document.lineAt(editor.selection.active.line).range)
+        selectionRange && (editor.selection = new dg.Selection(selectionRange.start, selectionRange.end))
       }
     }
   },
-  ug = class extends Fv {
+  FixCommand = class extends BaseSlashCommand {
     static commandID = "vscode-augment.chat.slash.fix"
-    constructor(t, r, n, i) {
-      super(t, r, n, i, "Fix using Augment", false)
+    constructor(extension, configListener, chatExtensionEvent, title) {
+      super(extension, configListener, chatExtensionEvent, title, "Fix using Augment", false)
     }
-    async run(t, r) {
-      await vf("Quick Fix"),
-        r && this.updateSelectionToCoverDiagnostics(r),
+    async run(uri, diagnostics) {
+      await showAugmentPanel("Quick Fix"),
+        diagnostics && this.updateSelectionToCoverDiagnostics(diagnostics),
         this._chatExtensionEvent.fire("runSlashFix")
     }
   },
-  Qv = class extends Fv {
+  ExplainCommand = class extends BaseSlashCommand {
     static commandID = "vscode-augment.chat.slash.explain"
-    constructor(t, r, n, i) {
-      super(t, r, n, i, "Explain using Augment", false)
+    constructor(extension, configListener, chatExtensionEvent, title) {
+      super(extension, configListener, chatExtensionEvent, title, "Explain using Augment", false)
     }
     async run() {
-      await vf("Explain"), this._chatExtensionEvent.fire("runSlashExplain")
+      await showAugmentPanel("Explain"), this._chatExtensionEvent.fire("runSlashExplain")
     }
   },
-  Nv = class extends Fv {
+  TestCommand = class extends BaseSlashCommand {
     static commandID = "vscode-augment.chat.slash.test"
-    constructor(t, r, n, i) {
-      super(t, r, n, i, "Write test using Augment", false)
+    constructor(extension, configListener, chatExtensionEvent, title) {
+      super(extension, configListener, chatExtensionEvent, title, "Write test using Augment", false)
     }
     async run() {
-      await vf("Write a Test"), this._chatExtensionEvent.fire("runSlashTest")
+      await showAugmentPanel("Write a Test"), this._chatExtensionEvent.fire("runSlashTest")
     }
   },
-  Pv = class extends Fv {
+  DocumentCommand = class extends BaseSlashCommand {
     static commandID = "vscode-augment.chat.slash.document"
-    constructor(t, r, n, i) {
-      super(t, r, n, i, "Document", true)
+    constructor(extension, configListener, chatExtensionEvent, title) {
+      super(extension, configListener, chatExtensionEvent, title, "Document", true)
     }
     async run() {
-      await vf("Document"), this._chatExtensionEvent.fire("runSlashDocument")
+      await showAugmentPanel("Document"), this._chatExtensionEvent.fire("runSlashDocument")
     }
   }
 var B1 = class {
@@ -101490,7 +101490,7 @@ var B1 = class {
     let o = new R1.CodeAction("Fix using Augment", R1.CodeActionKind.QuickFix)
     return (
       (o.command = {
-        command: ug.commandID,
+        command: FixCommand.commandID,
         title: "Fix using Augment",
         arguments: [t.uri, s],
       }),
@@ -101502,27 +101502,27 @@ var B1 = class {
   }
 }
 var W8 = q(require("vscode"))
-var D1 = class extends mt {
-    constructor(r, n, i) {
+var ResetAgentOnboardingCommand = class extends AugmentCommand {
+    constructor(chatExtensionEvent, globalState, workspaceStorage) {
       super("Reset Agent Onboarding", true)
-      this._chatExtensionEvent = r
-      this._globalState = n
-      this._workspaceStorage = i
+      this._chatExtensionEvent = chatExtensionEvent
+      this._globalState = globalState
+      this._workspaceStorage = workspaceStorage
     }
     static commandID = "augment.resetAgentOnboarding"
     type = "debug"
     async run() {
-      await vf("Reset Agent Onboarding"),
+      await showAugmentPanel("Reset Agent Onboarding"),
         this._chatExtensionEvent.fire("reset-agent-onboarding"),
         await this._globalState.update("memoriesFileOpenCount", 0),
-        await this._workspaceStorage.update(wM, 0)
+        await this._workspaceStorage.update(ORIENTATION_RUN_COUNT_KEY, 0)
     }
   },
-  Lv = class extends la {
-    constructor(r, n, i) {
-      super(i, "Run Agent Initial Orientation", true)
-      this._extension = r
-      this._apiServer = n
+  RunAgentInitialOrientationCommand = class extends SyncingEnabledCommand {
+    constructor(extension, apiServer, syncingEnabledTracker) {
+      super(syncingEnabledTracker, "Run Agent Initial Orientation", true)
+      this._extension = extension
+      this._apiServer = apiServer
     }
     static commandID = "vscode-augment.runAgentInitialOrientation"
     type = "debug"
@@ -101535,7 +101535,7 @@ var D1 = class extends mt {
         W8.window.showErrorMessage("Agent checkpoint manager is not ready")
         return
       }
-      await dx(
+      await runAgentInitialOrientation(
         this._apiServer,
         this._extension.workspaceManager,
         this._extension.featureFlagManager,
@@ -101547,24 +101547,24 @@ var D1 = class extends mt {
       return super.canRun() && this._extension.ready
     }
   }
-var Mm = class e extends mt {
-  constructor(r, n, i, s) {
-    super(s)
-    this._auth = r
-    this._oauthFlow = n
-    this._commandID = i
+var AuthCommand = class AuthCommand extends AugmentCommand {
+  constructor(authService, oauthFlow, commandId, title) {
+    super(title)
+    this._auth = authService
+    this._oauthFlow = oauthFlow
+    this._commandID = commandId
   }
   static signInCommandID = "vscode-augment.signIn"
   static signOutCommandID = "vscode-augment.signOut"
   type = "public"
   async run() {
-    this.commandID === e.signInCommandID
+    this.commandID === AuthCommand.signInCommandID
       ? await this._oauthFlow.startFlow()
       : await this._auth.removeSession()
   }
   canRun() {
     return this._auth.useOAuth
-      ? this.commandID === e.signOutCommandID
+      ? this.commandID === AuthCommand.signOutCommandID
         ? this._auth.isLoggedIn === true
         : !this._auth.isLoggedIn
       : false
@@ -101583,7 +101583,7 @@ var G8 = class {
       return this.documents.get(t.toString())
     }
   },
-  T1 = class e extends mt {
+  T1 = class e extends AugmentCommand {
     constructor(r, n) {
       super()
       this._extension = r
@@ -102100,7 +102100,7 @@ function getNextEditConfig(config, featureFlagManager) {
       false,
   }
 }
-var an = class extends la {
+var an = class extends SyncingEnabledCommand {
     constructor(r, n, i, s, o = true, a = false) {
       super(i, s, o)
       this._extension = r
@@ -103516,7 +103516,7 @@ function getKeybindingLabel(keybindingWatcher, commandId, formatForDisplay = fal
         : keybinding)
   )
 }
-var ClearRecentEditingHistoryCommand = class e extends mt {
+var ClearRecentEditingHistoryCommand = class e extends AugmentCommand {
   constructor(r, n) {
     super(e.title)
     this._extension = r
@@ -103542,26 +103542,26 @@ var ClearRecentEditingHistoryCommand = class e extends mt {
 }
 var aQ = require("vscode")
 var _Ct = z("CopySessionIdPanelCommand"),
-  oQ = class extends mt {
-    constructor(r) {
+  CopySessionIdCommand = class extends AugmentCommand {
+    constructor(apiServer) {
       super()
-      this._apiServer = r
+      this._apiServer = apiServer
     }
     static commandID = "vscode-augment.copySessionId"
     type = "public"
     async run() {
       try {
-        let r = this._apiServer.sessionId
-        await aQ.env.clipboard.writeText(r),
+        let sessionId = this._apiServer.sessionId
+        await aQ.env.clipboard.writeText(sessionId),
           await aQ.window.showInformationMessage(
             "Copied session ID to clipboard",
           )
-      } catch (r) {
-        _Ct.error(`Failed to copy session ID: ${r}`)
+      } catch (error) {
+        _Ct.error(`Failed to copy session ID: ${error}`)
       }
     }
   }
-var Hm = class e extends mt {
+var StartCpuProfileCommand = class e extends AugmentCommand {
     constructor(r) {
       super("Start Extension CPU Profile")
       this._flagManager = r
@@ -103587,7 +103587,7 @@ var Hm = class e extends mt {
       e.isProfileRunning = false
     }
   },
-  lQ = class extends mt {
+  StopCpuProfileCommand = class extends AugmentCommand {
     constructor(r) {
       super("End Extension CPU Profile")
       this._flagManager = r
@@ -103595,27 +103595,27 @@ var Hm = class e extends mt {
     static commandID = "vscode-augment.cpu-profile.stop"
     type = "debug"
     run() {
-      Hm.isProfileRunning && (console.profileEnd(), Hm.markAsNotRunning())
+      StartCpuProfileCommand.isProfileRunning && (console.profileEnd(), StartCpuProfileCommand.markAsNotRunning())
     }
     canRun() {
-      return Hm.isProfileRunning
+      return StartCpuProfileCommand.isProfileRunning
     }
   }
-var Zc = class extends mt {
-  constructor(r, n, i = true) {
-    super(n, i)
-    this._config = r
+var DebugCommand = class extends AugmentCommand {
+  constructor(configListener, title, showInActionPanel = true) {
+    super(title, showInActionPanel)
+    this._config = configListener
   }
   type = "debug"
   canRun() {
     return this._config.config.enableDebugFeatures
   }
 }
-var cQ = class e extends Zc {
-    constructor(r, n, i) {
-      super(n, e.title)
-      this._syncingEnabledTracker = r
-      this._extension = i
+var EnableWorkspaceSyncingCommand = class EnableWorkspaceSyncingCommand extends DebugCommand {
+    constructor(syncingEnabledTracker, configListener, extension) {
+      super(configListener, EnableWorkspaceSyncingCommand.title)
+      this._syncingEnabledTracker = syncingEnabledTracker
+      this._extension = extension
     }
     static title = "$(sync) Enable workspace syncing"
     static commandID = "vscode-augment.enable-workspace-syncing"
@@ -103624,19 +103624,19 @@ var cQ = class e extends Zc {
         this._syncingEnabledTracker.enableSyncing()
     }
     canRun() {
-      let r = this._syncingEnabledTracker.syncingEnabledState
+      let state = this._syncingEnabledTracker.syncingEnabledState
       return (
         super.canRun() &&
         this._extension.ready &&
-        (r === "disabled" || r === "partial")
+        (state === "disabled" || state === "partial")
       )
     }
   },
-  uQ = class e extends Zc {
-    constructor(r, n, i) {
-      super(n, e.title)
-      this._syncingStateTracker = r
-      this._extension = i
+  DisableWorkspaceSyncingCommand = class DisableWorkspaceSyncingCommand extends DebugCommand {
+    constructor(syncingStateTracker, configListener, extension) {
+      super(configListener, DisableWorkspaceSyncingCommand.title)
+      this._syncingStateTracker = syncingStateTracker
+      this._extension = extension
     }
     static title = "$(circle-slash) Disable workspace syncing"
     static commandID = "vscode-augment.disable-workspace-syncing"
@@ -103645,38 +103645,38 @@ var cQ = class e extends Zc {
         this._syncingStateTracker.disableSyncing()
     }
     canRun() {
-      let r = this._syncingStateTracker.syncingEnabledState
+      let state = this._syncingStateTracker.syncingEnabledState
       return (
         super.canRun() &&
         this._extension.ready &&
-        (r === "enabled" || r === "partial")
+        (state === "enabled" || state === "partial")
       )
     }
   }
 var fQ = require("vscode")
-var dQ = class extends Zc {
-  constructor(r, n) {
-    super(n, "Show Extension Status")
-    this._extension = r
+var ShowExtensionStatusCommand = class extends DebugCommand {
+  constructor(extension, configListener) {
+    super(configListener, "Show Extension Status")
+    this._extension = extension
   }
   static commandID = "vscode-augment.extensionStatus"
   async run() {
     this._extension.updateStatusTrace()
-    let r = await fQ.workspace.openTextDocument(AugmentExtension.displayStatusUri)
-    await fQ.window.showTextDocument(r)
+    let document = await fQ.workspace.openTextDocument(AugmentExtension.displayStatusUri)
+    await fQ.window.showTextDocument(document)
   }
 }
 var hQ = q(require("vscode"))
-var gQ = class extends mt {
+var GenerateCommitMessageCommand = class extends AugmentCommand {
   type = "public"
   static commandID = "vscode-augment.generateCommitMessage"
   _apiServer
   extension
   commitMessagePromptPreparer
-  constructor(t, r) {
+  constructor(extension, apiServer) {
     super(),
-      (this._apiServer = r),
-      (this.extension = t),
+      (this._apiServer = apiServer),
+      (this.extension = extension),
       (this.commitMessagePromptPreparer = new Dv())
   }
   canRun() {
@@ -103685,39 +103685,39 @@ var gQ = class extends mt {
         .vscodeGenerateCommitMessageMinVersion,
     )
   }
-  async run(t) {
-    await this.generateCommitMessage(t)
+  async run(params) {
+    await this.generateCommitMessage(params)
   }
-  async generateCommitMessage(t) {
-    let r
+  async generateCommitMessage(params) {
+    let gitExtension
     try {
-      r = hQ.default.extensions.getExtension("vscode.git")?.exports
+      gitExtension = hQ.default.extensions.getExtension("vscode.git")?.exports
     } catch {
       hQ.default.window.showInformationMessage(
         "Cannot generate commit message: Failed to interact with git extension",
       )
       return
     }
-    let n = r?.getAPI(1)?.repositories,
-      i = t.rootUri ?? "",
-      s = n?.find((c) => c.rootUri.toString() === i.toString())
-    if (!s) {
+    let repositories = gitExtension?.getAPI(1)?.repositories,
+      repoUri = params.rootUri ?? "",
+      repository = repositories?.find((repo) => repo.rootUri.toString() === repoUri.toString())
+    if (!repository) {
       hQ.default.window.showInformationMessage(
         "Cannot generate commit message: no repo",
       )
       return
     }
     if (
-      ((s.inputBox.value = "Augment is generating..."),
+      ((repository.inputBox.value = "Augment is generating..."),
       !this.extension.workspaceManager)
     ) {
-      s.inputBox.value = "Cannot generate commit message: no workspace"
+      repository.inputBox.value = "Cannot generate commit message: no workspace"
       return
     }
-    let o
+    let promptData
     try {
-      o = await this.commitMessagePromptPreparer.getCommitMessagePromptData(
-        s.rootUri.fsPath,
+      promptData = await this.commitMessagePromptPreparer.getCommitMessagePromptData(
+        repository.rootUri.fsPath,
         {
           diffBudget: 9216,
           messageBudget: 3072,
@@ -103728,61 +103728,61 @@ var gQ = class extends mt {
         },
       )
     } catch {
-      s.inputBox.value =
+      repository.inputBox.value =
         "Cannot generate commit message: Failed to generate diff details"
       return
     }
-    if (o.diff === "") {
-      s.inputBox.value = "Cannot generate commit message: no diff"
+    if (promptData.diff === "") {
+      repository.inputBox.value = "Cannot generate commit message: no diff"
       return
     }
-    let a = this._apiServer.createRequestId(),
-      l = ""
+    let requestId = this._apiServer.createRequestId(),
+      commitMessage = ""
     try {
-      let c = await this._apiServer.generateCommitMessageStream(a, o)
-      for await (let u of c) (l += u.text), (s.inputBox.value = l)
+      let messageStream = await this._apiServer.generateCommitMessageStream(requestId, promptData)
+      for await (let chunk of messageStream) (commitMessage += chunk.text), (repository.inputBox.value = commitMessage)
     } catch {
-      s.inputBox.value = "Server error: failed to generate commit message."
+      repository.inputBox.value = "Server error: failed to generate commit message."
     }
   }
 }
 var sd = require("vscode")
 var ow = require("vscode"),
-  Uwe = new ow.EventEmitter(),
-  Owe = new ow.EventEmitter(),
-  qwe = new ow.EventEmitter(),
-  Vwe = new ow.EventEmitter(),
-  Xc = (e) => Uwe.event(e),
-  Gm = (e) => qwe.event(e),
-  Hwe = (e) => Owe.event(e),
-  Wwe = (e) => Uwe.fire(e),
-  Gwe = () => qwe.fire(),
-  a6 = (e) => Owe.fire(e),
-  $we = (e) => Vwe.event(e),
-  xf = (e) => Vwe.fire(e)
-var pQ = class extends la {
-  constructor(r, n) {
-    super(n)
-    this._extension = r
+  completionEmitter = new ow.EventEmitter(),
+  acceptEmitter = new ow.EventEmitter(),
+  cancelEmitter = new ow.EventEmitter(),
+  rejectEmitter = new ow.EventEmitter(),
+  onCompletionAvailable = (handler) => completionEmitter.event(handler),
+  onCompletionCancelled = (handler) => cancelEmitter.event(handler),
+  onCompletionAccepted = (handler) => acceptEmitter.event(handler),
+  fireCompletion = (data) => completionEmitter.fire(data),
+  fireCancel = () => cancelEmitter.fire(),
+  fireAccept = (data) => acceptEmitter.fire(data),
+  onCompletionRejected = (handler) => rejectEmitter.event(handler),
+  fireReject = (data) => rejectEmitter.fire(data)
+var InsertCompletionCommand = class extends SyncingEnabledCommand {
+  constructor(extension, syncingEnabledTracker) {
+    super(syncingEnabledTracker)
+    this._extension = extension
   }
   static commandID = "vscode-augment.insertCompletion"
   completionTimeoutMS = 1e4
   type = "public"
   async run() {
-    let r = {
+    let progressOptions = {
         location: sd.ProgressLocation.Notification,
         title: "Waiting for completion...",
         cancellable: true,
       },
-      n,
-      i = async (s, o) => {
-        n = await this.requestCompletion(o)
+      completionResult,
+      progressTask = async (progress, token) => {
+        completionResult = await this.requestCompletion(token)
       }
-    if ((await sd.window.withProgress(r, i), !n)) {
+    if ((await sd.window.withProgress(progressOptions, progressTask), !completionResult)) {
       await sd.window.showWarningMessage("Failed to request a completion")
       return
     }
-    switch (n.resultType) {
+    switch (completionResult.resultType) {
       case "timeout":
         await sd.window.showWarningMessage("Failed to request a completion")
         break
@@ -103790,36 +103790,36 @@ var pQ = class extends la {
         await sd.window.showInformationMessage("Completion request cancelled")
         break
       default:
-        n.foundCompletion ||
+        completionResult.foundCompletion ||
           (await sd.window.showInformationMessage("No completions found"))
         break
     }
   }
-  async requestCompletion(r) {
-    let n = Promise.race([
+  async requestCompletion(token) {
+    let raceResult = Promise.race([
       (async () => {
-        let i = await Gu(Xc),
-          s = false
+        let completionEvent = await waitForEvent(onCompletionAvailable),
+          found = false
         return (
-          i?.completions && i.completions.length > 0 && (s = true),
-          { foundCompletion: s, resultType: "completion" }
+          completionEvent?.completions && completionEvent.completions.length > 0 && (found = true),
+          { foundCompletion: found, resultType: "completion" }
         )
       })(),
       (async () => (
-        await Gu(Gm), { foundCompletion: false, resultType: "cancelled" }
+        await waitForEvent(onCompletionCancelled), { foundCompletion: false, resultType: "cancelled" }
       ))(),
       (async () => (
-        await Gu(r.onCancellationRequested),
+        await waitForEvent(token.onCancellationRequested),
         { foundCompletion: false, resultType: "cancelled" }
       ))(),
-      new Promise((i) => {
+      new Promise((resolve) => {
         setTimeout(() => {
-          i({ foundCompletion: false, resultType: "timeout" })
+          resolve({ foundCompletion: false, resultType: "timeout" })
         }, this.completionTimeoutMS)
       }),
     ])
     return (
-      sd.commands.executeCommand("editor.action.inlineSuggest.trigger"), await n
+      sd.commands.executeCommand("editor.action.inlineSuggest.trigger"), await raceResult
     )
   }
   canRun() {
@@ -103827,130 +103827,130 @@ var pQ = class extends la {
   }
 }
 var ha = q(require("vscode"))
-var mQ = class e extends Zc {
-  constructor(r, n) {
-    super(n, "Show Internal Context")
-    this._extension = r
+var ShowWorkspaceContextCommand = class e extends DebugCommand {
+  constructor(extension, configListener) {
+    super(configListener, "Show Internal Context")
+    this._extension = extension
   }
   static commandID = "vscode-augment.showWorkspaceContext"
   static textDocumentName = "Augment Workspace Context.txt"
   _documentUri = ha.Uri.file(e.textDocumentName).with({ scheme: "untitled" })
   async run() {
-    let r = this._formatContext(),
-      n = await ha.workspace.openTextDocument(this._documentUri)
-    await ha.window.showTextDocument(n)
-    let i = new ha.Range(
+    let contextText = this._formatContext(),
+      document = await ha.workspace.openTextDocument(this._documentUri)
+    await ha.window.showTextDocument(document)
+    let fullRange = new ha.Range(
         new ha.Position(0, 0),
-        new ha.Position(n.lineCount, 0),
+        new ha.Position(document.lineCount, 0),
       ),
-      s = new ha.WorkspaceEdit()
-    s.replace(n.uri, i, r), await ha.workspace.applyEdit(s)
+      workspaceEdit = new ha.WorkspaceEdit()
+    workspaceEdit.replace(document.uri, fullRange, contextText), await ha.workspace.applyEdit(workspaceEdit)
   }
   _formatContext() {
-    let r = this._extension.workspaceManager
-    if (r === undefined) return "no workspace manager"
-    let n = r.getContextWithBlobNames(),
-      i = `Augment workspace context
+    let workspaceManager = this._extension.workspaceManager
+    if (workspaceManager === undefined) return "no workspace manager"
+    let context = workspaceManager.getContextWithBlobNames(),
+      headerText = `Augment workspace context
 `,
-      s = this._formatBlobs(r, n),
-      o = this._formatChunks(n.recentChunks)
+      blobsText = this._formatBlobs(workspaceManager, context),
+      chunksText = this._formatChunks(context.recentChunks)
     return (
-      i +
-      s +
+      headerText +
+      blobsText +
       `
 
 
 ` +
-      o
+      chunksText
     )
   }
-  _formatBlobs(r, n) {
-    let i = new Array(),
-      s = new Set()
-    for (let [c, u] of n.trackedPaths) for (let [f, p] of u) s.add(p)
-    let o = new Map(),
-      a = new Set()
-    for (let c of n.blobNames) {
-      let u = r.getAllPathInfo(c)
-      for (let [f, p, g] of u) {
-        let m = o.get(f)
-        m === undefined && ((m = new Map()), o.set(f, m)), m.set(g, [c, u.length])
+  _formatBlobs(workspaceManager, context) {
+    let lines = new Array(),
+      trackedBlobs = new Set()
+    for (let [repoRoot, paths] of context.trackedPaths) for (let [path, blobName] of paths) trackedBlobs.add(blobName)
+    let repoPathMap = new Map(),
+      unknownBlobs = new Set()
+    for (let blobName of context.blobNames) {
+      let pathInfos = workspaceManager.getAllPathInfo(blobName)
+      for (let [repoRoot, path, relativePath] of pathInfos) {
+        let repoMap = repoPathMap.get(repoRoot)
+        repoMap === undefined && ((repoMap = new Map()), repoPathMap.set(repoRoot, repoMap)), repoMap.set(relativePath, [blobName, pathInfos.length])
       }
-      u.length === 0 && !s.has(c) && a.add(c)
+      pathInfos.length === 0 && !trackedBlobs.has(blobName) && unknownBlobs.add(blobName)
     }
-    let l = new Map()
-    for (let c of n.recentChunks) {
-      let u = c.repoRoot,
-        f = c.pathName,
-        p = l.get(u)
-      p === undefined && ((p = new Map()), l.set(u, p)),
-        p.set(f, (p.get(f) || 0) + 1)
+    let chunkCountMap = new Map()
+    for (let chunk of context.recentChunks) {
+      let repoRoot = chunk.repoRoot,
+        pathName = chunk.pathName,
+        repoMap = chunkCountMap.get(repoRoot)
+      repoMap === undefined && ((repoMap = new Map()), chunkCountMap.set(repoRoot, repoMap)),
+        repoMap.set(pathName, (repoMap.get(pathName) || 0) + 1)
     }
-    for (let [c, u] of o) {
-      let f = n.trackedPaths.get(c) || new Map(),
-        p = u.size,
-        g = f.size,
-        m = l.get(c) || new Map()
-      for (let E of m.keys())
-        f.has(E) || i.push(`    ${c}: ${E} has recent chunks but is not open`)
-      let y = `Repo root ${c}: ${p} paths (${g} open)`
-      i.push(""), i.push(y), i.push("=".repeat(y.length))
-      let v = Array.from(f.keys())
-      v.sort()
-      for (let E of v) {
-        let w = f.get(E),
-          B = m.get(E) || 0
-        i.push(`    ${w} -> ${E}: open, recent chunks: ${B}`)
+    for (let [repoRoot, pathMap] of repoPathMap) {
+      let trackedPathsMap = context.trackedPaths.get(repoRoot) || new Map(),
+        totalPaths = pathMap.size,
+        openPaths = trackedPathsMap.size,
+        recentChunksMap = chunkCountMap.get(repoRoot) || new Map()
+      for (let path of recentChunksMap.keys())
+        trackedPathsMap.has(path) || lines.push(`    ${repoRoot}: ${path} has recent chunks but is not open`)
+      let headerLine = `Repo root ${repoRoot}: ${totalPaths} paths (${openPaths} open)`
+      lines.push(""), lines.push(headerLine), lines.push("=".repeat(headerLine.length))
+      let trackedPaths = Array.from(trackedPathsMap.keys())
+      trackedPaths.sort()
+      for (let path of trackedPaths) {
+        let blobName = trackedPathsMap.get(path),
+          chunkCount = recentChunksMap.get(path) || 0
+        lines.push(`    ${blobName} -> ${path}: open, recent chunks: ${chunkCount}`)
       }
-      v.length > 0 && i.push("")
-      let C = Array.from(u.keys())
-      C.sort()
-      for (let E of C) {
-        if (f.has(E)) continue
-        let [w, B] = u.get(E),
-          T = B === 1 ? "" : ` (x ${B})`
-        i.push(`    ${w} -> ${E}${T}`)
+      trackedPaths.length > 0 && lines.push("")
+      let allPaths = Array.from(pathMap.keys())
+      allPaths.sort()
+      for (let path of allPaths) {
+        if (trackedPathsMap.has(path)) continue
+        let [blobName, count] = pathMap.get(path),
+          countSuffix = count === 1 ? "" : ` (x ${count})`
+        lines.push(`    ${blobName} -> ${path}${countSuffix}`)
       }
     }
-    if (a.size > 0) for (let c of a) i.push(`unknown blob: ${c}`)
-    return i.join(`
+    if (unknownBlobs.size > 0) for (let blobName of unknownBlobs) lines.push(`unknown blob: ${blobName}`)
+    return lines.join(`
 `)
   }
-  _formatChunks(r) {
-    let n = new Array(),
-      i = "Recent chunks"
-    if ((n.push(i), n.push("=".repeat(i.length)), r.length === 0))
+  _formatChunks(chunks) {
+    let lines = new Array(),
+      headerText = "Recent chunks"
+    if ((lines.push(headerText), lines.push("=".repeat(headerText.length)), chunks.length === 0))
       return (
-        n.push("    (no recent chunks)"),
-        n.join(`
+        lines.push("    (no recent chunks)"),
+        lines.join(`
 `)
       )
-    for (let s = 0; s < r.length; s++) {
-      let o = r[s]
-      n.push(""),
-        n.push(`Chunk ${s + 1} of ${r.length}`),
-        n.push(`    seq:      ${o.seq}`),
-        n.push(`    uploaded: ${o.uploaded}`),
-        n.push(`    repoRoot: ${o.repoRoot}`),
-        n.push(`    pathName: ${o.pathName}`),
-        n.push(`    blobName: ${o.blobName}`),
-        n.push(`    start:    ${o.origStart}`),
-        n.push(`    length:   ${o.origLength}`),
-        n.push("======== chunk begin ========"),
-        n.push(o.text),
-        n.push("-------- chunk end ----------"),
-        n.push("")
+    for (let index = 0; index < chunks.length; index++) {
+      let chunk = chunks[index]
+      lines.push(""),
+        lines.push(`Chunk ${index + 1} of ${chunks.length}`),
+        lines.push(`    seq:      ${chunk.seq}`),
+        lines.push(`    uploaded: ${chunk.uploaded}`),
+        lines.push(`    repoRoot: ${chunk.repoRoot}`),
+        lines.push(`    pathName: ${chunk.pathName}`),
+        lines.push(`    blobName: ${chunk.blobName}`),
+        lines.push(`    start:    ${chunk.origStart}`),
+        lines.push(`    length:   ${chunk.origLength}`),
+        lines.push("======== chunk begin ========"),
+        lines.push(chunk.text),
+        lines.push("-------- chunk end ----------"),
+        lines.push("")
     }
-    return n.join(`
+    return lines.join(`
 `)
   }
 }
 var AQ = q(require("vscode"))
-var wf = class e extends mt {
-  constructor(r, n) {
+var ManageAccountCommand = class ManageAccountCommand extends AugmentCommand {
+  constructor(extension, commandID) {
     super()
-    this.extension = r
-    this._commandID = n
+    this.extension = extension
+    this._commandID = commandID
   }
   static commandIDCommunity = "vscode-augment.manageAccountCommunity"
   static commandIDProfessional = "vscode-augment.manageAccountProfessional"
@@ -103960,36 +103960,36 @@ var wf = class e extends mt {
     AQ.env.openExternal(AQ.Uri.parse("https://app.augmentcode.com/account"))
   }
   canRun() {
-    let r = this.extension.userTier,
-      n =
-        this._commandID === e.commandIDCommunity
+    let userTier = this.extension.userTier,
+      commandTier =
+        this._commandID === ManageAccountCommand.commandIDCommunity
           ? "community"
-          : this._commandID === e.commandIDProfessional
+          : this._commandID === ManageAccountCommand.commandIDProfessional
             ? "professional"
             : "enterprise"
-    return super.canRun() && r === n
+    return super.canRun() && userTier === commandTier
   }
 }
 var Ywe = q(require("vscode"))
-var yQ = class extends Zc {
+var OpenSshConfigCommand = class extends DebugCommand {
   static commandID = "vscode-augment.openSshConfig"
   sshConfigManager
-  constructor(t, r) {
-    super(t, "Open Augment SSH Config"), (this.sshConfigManager = new Ev(r))
+  constructor(configListener, r) {
+    super(configListener, "Open Augment SSH Config"), (this.sshConfigManager = new Ev(r))
   }
   async run() {
     try {
-      let t = this.sshConfigManager.fileSystem,
-        r = await t.getAugmentSshConfigPath()
+      let fileSystem = this.sshConfigManager.fileSystem,
+        configPath = await fileSystem.getAugmentSshConfigPath()
       await this.sshConfigManager.ensureAugmentConfigExists(),
-        await t.openFile(r)
-    } catch (t) {
-      Ywe.window.showErrorMessage(`Error opening SSH config: ${String(t)}`)
+        await fileSystem.openFile(configPath)
+    } catch (error) {
+      Ywe.window.showErrorMessage(`Error opening SSH config: ${String(error)}`)
     }
   }
 }
 var l6 = require("vscode")
-var vQ = class extends mt {
+var OpenSettingsCommand = class extends AugmentCommand {
     static commandID = "vscode-augment.settings"
     type = "public"
     run() {
@@ -103999,7 +103999,7 @@ var vQ = class extends mt {
       )
     }
   },
-  CQ = class extends mt {
+  OpenKeyboardShortcutsCommand = class extends AugmentCommand {
     static commandID = "vscode-augment.keyboard-shortcuts"
     type = "public"
     run() {
@@ -104011,7 +104011,7 @@ var vQ = class extends mt {
   }
 var Kwe = require("vscode"),
   zwe = q(require("vscode"))
-var bQ = class extends mt {
+var ShowDocsCommand = class extends AugmentCommand {
   static commandID = "vscode-augment.showDocs"
   type = "public"
   async run() {
@@ -104192,16 +104192,16 @@ var EQ = class e extends PanelWebview {
     e.currentPanel = new e(r, n, i, Qo.ViewColumn.Beside, s, o, a, l)
   }
 }
-var _Q = class extends mt {
-  constructor(r, n, i, s, o, a, l) {
+var ShowHistoryPanelCommand = class extends AugmentCommand {
+  constructor(extensionUri, config, apiServer, recentCompletions, recentInstructions, recentNextEditResults, workTimer) {
     super()
-    this._extensionUri = r
-    this._config = n
-    this._apiServer = i
-    this._recentCompletions = s
-    this._recentInstructions = o
-    this._recentNextEditResults = a
-    this._workTimer = l
+    this._extensionUri = extensionUri
+    this._config = config
+    this._apiServer = apiServer
+    this._recentCompletions = recentCompletions
+    this._recentInstructions = recentInstructions
+    this._recentNextEditResults = recentNextEditResults
+    this._workTimer = workTimer
   }
   static commandID = "vscode-augment.showHistoryPanel"
   type = "public"
@@ -104218,51 +104218,51 @@ var _Q = class extends mt {
   }
 }
 var Wv = q(require("vscode"))
-var xQ = class extends mt {
-  constructor(r, n, i) {
+var ShowAugmentCommandsCommand = class extends AugmentCommand {
+  constructor(extension, context, commandManager) {
     super()
-    this._extension = r
-    this._context = n
-    this._commandManager = i
+    this._extension = extension
+    this._context = context
+    this._commandManager = commandManager
   }
   static commandID = "vscode-augment.showAugmentCommands"
   type = "public"
   async run() {
-    let r = this._context.extension.packageJSON?.contributes?.commands
-    if (!r) return
-    let n = Object.fromEntries(r.map(({ command: a, title: l }) => [a, l]))
-    for (let a of this._commandManager.availableCommands) {
-      let l = a.title || n[a.commandID]
-      l && (n[a.commandID] = l)
+    let packageCommands = this._context.extension.packageJSON?.contributes?.commands
+    if (!packageCommands) return
+    let commandTitles = Object.fromEntries(packageCommands.map(({ command, title }) => [command, title]))
+    for (let command of this._commandManager.availableCommands) {
+      let title = command.title || commandTitles[command.commandID]
+      title && (commandTitles[command.commandID] = title)
     }
-    let i = {}
+    let keybindings = {}
     if (this._extension.keybindingWatcher)
-      for (let a of Object.keys(n)) {
-        let l = this._extension.keybindingWatcher.getKeybindingForCommand(a, true)
-        l && (i[a] = `${l}`)
+      for (let cmdId of Object.keys(commandTitles)) {
+        let keybinding = this._extension.keybindingWatcher.getKeybindingForCommand(cmdId, true)
+        keybinding && (keybindings[cmdId] = `${keybinding}`)
       }
-    let s = this.getActions(n, i),
-      o = await Wv.window.showQuickPick(s, { title: "Augment Commands" })
-    o && o.commandID && Wv.commands.executeCommand(o.commandID)
+    let actions = this.getActions(commandTitles, keybindings),
+      selectedAction = await Wv.window.showQuickPick(actions, { title: "Augment Commands" })
+    selectedAction && selectedAction.commandID && Wv.commands.executeCommand(selectedAction.commandID)
   }
-  getActions(r, n) {
-    let i = []
-    for (let { name: s, commands: o } of this._commandManager
+  getActions(commandTitles, keybindings) {
+    let items = []
+    for (let { name, commands } of this._commandManager
       .availableCommandGroups) {
-      let a = o.filter((l) => r[l.commandID])
-      if (a.length !== 0) {
-        i.length > 0 &&
-          i.push({ label: s, kind: Wv.QuickPickItemKind.Separator })
-        for (let l of a)
-          l.showInActionPanel &&
-            i.push({
-              commandID: l.commandID,
-              label: r[l.commandID],
-              description: n[l.commandID],
+      let filteredCommands = commands.filter((cmd) => commandTitles[cmd.commandID])
+      if (filteredCommands.length !== 0) {
+        items.length > 0 &&
+          items.push({ label: name, kind: Wv.QuickPickItemKind.Separator })
+        for (let command of filteredCommands)
+          command.showInActionPanel &&
+            items.push({
+              commandID: command.commandID,
+              label: commandTitles[command.commandID],
+              description: keybindings[command.commandID],
             })
       }
     }
-    return Promise.resolve(i)
+    return Promise.resolve(items)
   }
 }
 var gs = q(require("vscode"))
@@ -104486,7 +104486,7 @@ var SQ = class e extends PanelWebview {
         new gs.Disposable(() => {
           e.currentPanel = undefined
         }),
-        IM((c) => {
+        onOrientationStateChanged((c) => {
           this._postMessage({ type: "orientation-status-update", data: c })
         }),
       ),
@@ -104763,7 +104763,7 @@ var SQ = class e extends PanelWebview {
   }
   async _handleExecuteInitialOrientation() {
     try {
-      await gs.commands.executeCommand(Lv.commandID)
+      await gs.commands.executeCommand(RunAgentInitialOrientationCommand.commandID)
     } catch (r) {
       this._log.error(`Failed to execute initial orientation: ${He(r)}`),
         this._handleError(r)
@@ -104776,7 +104776,7 @@ var SQ = class e extends PanelWebview {
   }
   _handleGetOrientationStatus() {
     try {
-      Yu()
+      notifyOrientationStateChanged()
     } catch (r) {
       this._log.error(`Failed to get orientation status: ${He(r)}`),
         this._handleError(r)
@@ -104810,42 +104810,42 @@ var SQ = class e extends PanelWebview {
       : ((e.currentPanel = new e(r, n, i, s, o, a)), e.currentPanel)
   }
 }
-var IQ = class extends mt {
-  constructor(r, n, i, s, o) {
+var ShowSettingsPanelCommand = class extends AugmentCommand {
+  constructor(extensionUri, extension, apiServer, config, guidelinesWatcher) {
     super("Show Settings Panel", true)
-    this._extensionUri = r
-    this._extension = n
-    this._apiServer = i
-    this._config = s
-    this._guidelinesWatcher = o
+    this._extensionUri = extensionUri
+    this._extension = extension
+    this._apiServer = apiServer
+    this._config = config
+    this._guidelinesWatcher = guidelinesWatcher
   }
   static commandID = "vscode-augment.showSettingsPanel"
   type = "public"
-  run(r) {
-    let n = SQ.createOrShow(
+  run(section) {
+    let panel = SQ.createOrShow(
       this._extensionUri,
       this._extension,
       this._apiServer,
       this._config,
       this._guidelinesWatcher,
-      r,
+      section,
     )
-    r && n.navigateToSection(r)
+    section && panel.navigateToSection(section)
   }
 }
-var BQ = class extends mt {
-  constructor(r) {
+var StartNewChatCommand = class extends AugmentCommand {
+  constructor(chatExtensionEvent) {
     super()
-    this._chatExtensionEvent = r
+    this._chatExtensionEvent = chatExtensionEvent
   }
   static commandID = "vscode-augment.startNewChat"
   type = "public"
   async run() {
-    await vf("Start chat command"), this._chatExtensionEvent.fire("newThread")
+    await showAugmentPanel("Start chat command"), this._chatExtensionEvent.fire("newThread")
   }
 }
 var Jwe = q(require("vscode"))
-var $v = class extends mt {
+var StatusBarClickCommand = class extends AugmentCommand {
   static commandID = "_vscode-augment.statusbarClick"
   type = "private"
   constructor() {
@@ -104856,27 +104856,27 @@ var $v = class extends mt {
   }
 }
 var lw = require("vscode")
-var RQ = class e extends la {
-  constructor(r, n) {
-    super(n, () =>
+var ToggleAutomaticCompletionCommand = class ToggleAutomaticCompletionCommand extends SyncingEnabledCommand {
+  constructor(configListener, syncingEnabledTracker) {
+    super(syncingEnabledTracker, () =>
       this._configListener.config.completions.enableAutomaticCompletions
         ? "Turn Automatic Completions Off"
         : "Turn Automatic Completions On",
     )
-    this._configListener = r
+    this._configListener = configListener
   }
   static commandID = "vscode-augment.toggleAutomaticCompletionSetting"
   static autoCompletionsConfigKey = "completions.enableAutomaticCompletions"
   type = "public"
   run() {
-    let r = lw.workspace.getConfiguration("augment"),
-      n = r.inspect(e.autoCompletionsConfigKey),
-      i = lw.ConfigurationTarget.Global
-    n?.workspaceValue !== undefined && (i = lw.ConfigurationTarget.Workspace),
-      r.update(
-        e.autoCompletionsConfigKey,
+    let config = lw.workspace.getConfiguration("augment"),
+      inspection = config.inspect(ToggleAutomaticCompletionCommand.autoCompletionsConfigKey),
+      target = lw.ConfigurationTarget.Global
+    inspection?.workspaceValue !== undefined && (target = lw.ConfigurationTarget.Workspace),
+      config.update(
+        ToggleAutomaticCompletionCommand.autoCompletionsConfigKey,
         !this._configListener.config.completions.enableAutomaticCompletions,
-        i,
+        target,
       )
   }
   canRun() {
@@ -104884,28 +104884,28 @@ var RQ = class e extends la {
   }
 }
 function registerCommands(e, t, r, n, i, s, o, a, l, c, u, f, p, g) {
-  let m = new nF(r)
+  let commandRegistry = new CommandRegistry(r)
   return (
-    m.registerGroup("", [
-      new Mm(n, i, Mm.signInCommandID, "$(sign-in) Sign In"),
-      new Ji(),
-      new cQ(f, r, t),
+    commandRegistry.registerGroup("", [
+      new AuthCommand(n, i, AuthCommand.signInCommandID, "$(sign-in) Sign In"),
+      new Separator(),
+      new EnableWorkspaceSyncingCommand(f, r, t),
     ]),
-    m.registerGroup("Completions", [new pQ(t, f), new RQ(r, f)]),
-    m.registerGroup("Code Instruction", [
-      new dv(t, e.extensionUri, s, t.guidelinesWatcher, f),
+    commandRegistry.registerGroup("Completions", [new InsertCompletionCommand(t, f), new ToggleAutomaticCompletionCommand(r, f)]),
+    commandRegistry.registerGroup("Code Instruction", [
+      new InstructionCommand(t, e.extensionUri, s, t.guidelinesWatcher, f),
     ]),
-    m.registerGroup("Chat", [
-      new ug(t, r, u, f),
-      new Qv(t, r, u, f),
-      new BQ(u),
-      new Nv(t, r, u, f),
-      new Pv(t, r, u, f),
-      new D1(u, p, g),
-      new Lv(t, s, f),
-      new IQ(e.extensionUri, t, s, r, t.guidelinesWatcher),
+    commandRegistry.registerGroup("Chat", [
+      new FixCommand(t, r, u, f),
+      new ExplainCommand(t, r, u, f),
+      new StartNewChatCommand(u),
+      new TestCommand(t, r, u, f),
+      new DocumentCommand(t, r, u, f),
+      new ResetAgentOnboardingCommand(u, p, g),
+      new RunAgentInitialOrientationCommand(t, s, f),
+      new ShowSettingsPanelCommand(e.extensionUri, t, s, r, t.guidelinesWatcher),
     ]),
-    m.registerGroup("Next Edit Suggestions", [
+    commandRegistry.registerGroup("Next Edit Suggestions", [
       new AcceptNextEditCommand(t, r, f),
       new RejectNextEditCommand(t, r, f),
       new AcceptAllNextEditCommand(t, r, f),
@@ -104934,44 +104934,44 @@ function registerCommands(e, t, r, n, i, s, o, a, l, c, u, f, p, g) {
       new UndoAcceptSuggestionCommand(t, r, f),
       new ToggleHoverDiffCommand(t, r, f),
     ]),
-    m.registerGroup("Debug", [
-      new dQ(t, r),
-      new mQ(t, r),
-      new Hm(t.featureFlagManager),
-      new lQ(t.featureFlagManager),
-      new yQ(r, p),
+    commandRegistry.registerGroup("Debug", [
+      new ShowExtensionStatusCommand(t, r),
+      new ShowWorkspaceContextCommand(t, r),
+      new StartCpuProfileCommand(t.featureFlagManager),
+      new StopCpuProfileCommand(t.featureFlagManager),
+      new OpenSshConfigCommand(r, p),
     ]),
-    m.registerGroup("", [
-      new vQ(),
-      new CQ(),
-      new uQ(f, r, t),
-      new bQ(),
-      new _Q(e.extensionUri, r, s, o, a, l, t.workTimer),
-      new oQ(s),
-      new wf(t, wf.commandIDCommunity),
-      new wf(t, wf.commandIDProfessional),
-      new wf(t, wf.commandIDEnterprise),
-      new Mm(n, i, Mm.signOutCommandID, "$(sign-out) Sign Out"),
+    commandRegistry.registerGroup("", [
+      new OpenSettingsCommand(),
+      new OpenKeyboardShortcutsCommand(),
+      new DisableWorkspaceSyncingCommand(f, r, t),
+      new ShowDocsCommand(),
+      new ShowHistoryPanelCommand(e.extensionUri, r, s, o, a, l, t.workTimer),
+      new CopySessionIdCommand(s),
+      new ManageAccountCommand(t, ManageAccountCommand.commandIDCommunity),
+      new ManageAccountCommand(t, ManageAccountCommand.commandIDProfessional),
+      new ManageAccountCommand(t, ManageAccountCommand.commandIDEnterprise),
+      new AuthCommand(n, i, AuthCommand.signOutCommandID, "$(sign-out) Sign Out"),
       new OpenNextEditSettingsCommand(t, r, f),
     ]),
     r.config.autofix.enabled &&
       r.config.autofix.autofixUrl &&
-      m.register([new T1(t, s)]),
-    m.register([
-      new xQ(t, e, m),
+      commandRegistry.register([new T1(t, s)]),
+    commandRegistry.register([
+      new ShowAugmentCommandsCommand(t, e, commandRegistry),
       new ToggleBackgroundSuggestionsCommand(t, r, f),
-      new Mv(t.featureFlagManager, c),
-      new gQ(t, s),
-      new aF(t, e.extensionUri, s),
-      new fv(),
-      new hv(),
-      new gv(),
-      new pv(),
-      new mv(),
-      new Av(),
-      new $v(),
+      new ShowSidebarChatCommand(t.featureFlagManager, c),
+      new GenerateCommitMessageCommand(t, s),
+      new OpenDiffViewCommand(t, e.extensionUri, s),
+      new AcceptAllChunksCommand(),
+      new AcceptFocusedChunkCommand(),
+      new RejectFocusedChunkCommand(),
+      new FocusPreviousChunkCommand(),
+      new FocusNextChunkCommand(),
+      new CloseDiffViewCommand(),
+      new StatusBarClickCommand(),
     ]),
-    m
+    commandRegistry
   )
 }
 var DQ = class e {
@@ -105141,7 +105141,7 @@ You can let us know about good or bad suggestions via [the History Panel](comman
             this._config.config.completions.timeoutMs,
             { maxWait: this._config.config.completions.maxWaitMs },
           )
-          ;(o = Gm(() => {
+          ;(o = onCompletionCancelled(() => {
             c()
           })),
             (s = c),
@@ -105159,7 +105159,7 @@ You can let us know about good or bad suggestions via [the History Panel](comman
     return i ? (i[0] === n ? n : i[0] + "\u2026") : "\u2026"
   }
   async _getCompletions(t, r, n) {
-    let i = await Gu(Xc)
+    let i = await waitForEvent(onCompletionAvailable)
     if (!this._config.config.completions.enableQuickSuggestions)
       return (
         this._logger.debug("Enable IntelliSense suggestion is disabled"), []
@@ -105616,7 +105616,7 @@ var LQ = class extends DisposableContainer {
       fw.window.onDidChangeWindowState(() => {
         this._rejectPendingCompletion()
       }),
-      Xc((n) => {
+      onCompletionAvailable((n) => {
         n && this._onNewCompletion(n)
       }),
     )
@@ -105822,12 +105822,12 @@ var LQ = class extends DisposableContainer {
   }
   _rejectPendingCompletion() {
     this._pendingCompletion &&
-      (a6({
+      (fireAccept({
         requestId: this._pendingCompletion.requestId,
         acceptedIdx: -1,
         document: this._pendingCompletion.document,
       }),
-      xf(false),
+      fireReject(false),
       this._logger.debug(
         `Rejecting completion: ${this._pendingCompletion.requestId}`,
       ),
@@ -105841,12 +105841,12 @@ var LQ = class extends DisposableContainer {
   }
   _acceptPendingInlineCompletion() {
     this._pendingCompletion &&
-      (a6({
+      (fireAccept({
         requestId: this._pendingCompletion.requestId,
         acceptedIdx: 0,
         document: this._pendingCompletion.document,
       }),
-      xf(false),
+      fireReject(false),
       this._logger.debug(
         `Accepting completion: ${this._pendingCompletion.requestId}`,
       ),
@@ -106005,7 +106005,7 @@ var ICt = 2e3,
         this.addDisposable(this._deletedCompletions),
         this.addDisposable(
           Ag.window.onDidChangeTextEditorSelection((a) => {
-            a.textEditor.document.uri.scheme === "file" && xf(false)
+            a.textEditor.document.uri.scheme === "file" && fireReject(false)
           }),
         )
     }
@@ -106019,7 +106019,7 @@ var ICt = 2e3,
         !this._config.config.completions.enableAutomaticCompletions &&
         i.triggerKind === Ag.InlineCompletionTriggerKind.Automatic
       )
-        return xf(false), []
+        return fireReject(false), []
       this._stateController.dispose(),
         this._logger.debug(
           `Inline Request - ${r.uri.toString()} ${pg(r, n)}${kQ(" ", i.selectedCompletionInfo?.text)}`,
@@ -106028,9 +106028,9 @@ var ICt = 2e3,
       let a = await this._getCompletions(r, n, i, o),
         l = this._deletedCompletions.processRequest(a)
       if (s.isCancellationRequested)
-        return this._logger.debug("Completion cancelled"), Gwe(), xf(false), []
-      if ((Wwe(l), !l))
-        return this._logger.debug("Returning no completions"), xf(false), []
+        return this._logger.debug("Completion cancelled"), fireCancel(), fireReject(false), []
+      if ((fireCompletion(l), !l))
+        return this._logger.debug("Returning no completions"), fireReject(false), []
       ;(o.emitTime = Date.now()),
         l.isReused ||
           this._timelineReporter.reportCompletionTimeline(l.requestId, o)
@@ -106050,7 +106050,7 @@ var ICt = 2e3,
           f
         )
       })
-      return c.length > 0 && xf(true), c
+      return c.length > 0 && fireReject(true), c
     }
     async _getCompletions(r, n, i, s) {
       let o = this._pendingCompletions.getPendingCompletion(r, n)
@@ -106535,7 +106535,7 @@ var DCt = 5,
       { leading: false, trailing: true },
     )
     createDecorationTypes() {
-      let r = this._keybindingWatcher.getKeybindingForCommand(Ji.commandID),
+      let r = this._keybindingWatcher.getKeybindingForCommand(Separator.commandID),
         n = ""
       r
         ? (n = `${r} to open Augment.`)
@@ -106559,7 +106559,7 @@ var DCt = 5,
         }),
         this._inlineCompletionProvider &&
           (r.push(
-            Xc((n) => {
+            onCompletionAvailable((n) => {
               let i = ps.window.activeTextEditor
               !i ||
                 !n ||
@@ -106570,7 +106570,7 @@ var DCt = 5,
             }),
           ),
           r.push(
-            Gm(() => {
+            onCompletionCancelled(() => {
               this.activeCompletion = false
               let n = ps.window.activeTextEditor
               !n || n.document.getText() !== "" || this.debouncedDecorations(n)
@@ -106662,7 +106662,7 @@ var DCt = 5,
         }),
         this._inlineCompletionProvider &&
           (r.push(
-            Xc((n) => {
+            onCompletionAvailable((n) => {
               let i = ps.window.activeTextEditor
               !i ||
                 !n ||
@@ -106673,7 +106673,7 @@ var DCt = 5,
             }),
           ),
           r.push(
-            Gm(() => {
+            onCompletionCancelled(() => {
               this.activeCompletion = false
               let n = ps.window.activeTextEditor
               n && this.debouncedDecorations(n)
@@ -108107,7 +108107,7 @@ var gN = class extends DisposableContainer {
   constructor() {
     super(),
       this.addDisposable(
-        $we((t) => {
+        onCompletionRejected((t) => {
           this._maybeInlineCompletionVisible.value = t
         }),
       )
@@ -113040,17 +113040,17 @@ var ebt = 2,
         let i = `
 $(augment-icon-simple)
 &nbsp;
-<a href="command:${Ji.commandID}" title="Open Augment Chat">
+<a href="command:${Separator.commandID}" title="Open Augment Chat">
     Open in Chat
 </a> |
-<a href="command:${ug.commandID}" title="Fix with Augment Chat">
+<a href="command:${FixCommand.commandID}" title="Fix with Augment Chat">
     Fix
 </a> |
-<a href="command:${Qv.commandID}" title="Explain with Augment Chat">
+<a href="command:${ExplainCommand.commandID}" title="Explain with Augment Chat">
     Explain
-</a> | <a href="command:${Nv.commandID}" title="Write a test with Augment Chat">
+</a> | <a href="command:${TestCommand.commandID}" title="Write a test with Augment Chat">
     Write a Test
-</a> | <a href="command:${Pv.commandID}" title="Document with Augment Chat">
+</a> | <a href="command:${DocumentCommand.commandID}" title="Document with Augment Chat">
     Document
 </a>
             `,
@@ -113253,7 +113253,7 @@ var obt = "Augment",
           uC.StatusBarAlignment.Right,
         )),
         (this._statusBarItem.name = "Augment"),
-        (this._statusBarItem.command = $v.commandID),
+        (this._statusBarItem.command = StatusBarClickCommand.commandID),
         this.addDisposables(
           this._statusBarItem,
           this._stateManager.onDidChangeState(() => this.updateState()),
@@ -113851,7 +113851,7 @@ var JN = class extends DisposableContainer {
         this._syncingNotificationShown ||
           (r.foldersProgress.find((i) => i.progress?.newlyTracked) &&
             ((this._syncingNotificationShown = true),
-            jN.commands.executeCommand(Ji.commandID)))
+            jN.commands.executeCommand(Separator.commandID)))
       case "running":
         this._syncingStatusBarDisposable ||
           (this._syncingStatusBarDisposable = this._statusBar.setState(sSe))
@@ -114868,7 +114868,7 @@ var wg = class extends _w {
       if (lf(n, r) !== "") {
         let o = r
         for (;;) {
-          o = sx(o)
+          o = getWorkspaceFolder(o)
           let a = lf(n, o),
             l = await t.getRules(o)
           if ((l && i.push([a, t, l]), a === "")) break
@@ -121926,7 +121926,7 @@ var AugmentExtension = class e extends DisposableContainer {
     this.disposeOnDisable.push(nextEditStatusReporter)
     let documentContextTracker = new DocumentContextValue()
     this.disposeOnDisable.push(
-      Hwe((event) => {
+      onCompletionAccepted((event) => {
         event.acceptedIdx >= 0 && documentContextTracker.set(true, event.document)
       }),
     ),
@@ -121985,11 +121985,11 @@ var AugmentExtension = class e extends DisposableContainer {
         text: this.featureFlagManager.currentFlags.enableInstructions
           ? "Chat"
           : "Open in Augment Chat",
-        keyBindingId: Ji.commandID,
+        keyBindingId: Separator.commandID,
       },
     ]
     this.featureFlagManager.currentFlags.enableInstructions &&
-      chatHintButtons.push({ text: "Instruct", keyBindingId: dv.commandID }),
+      chatHintButtons.push({ text: "Instruct", keyBindingId: InstructionCommand.commandID }),
       (this._openChatHintManager = new cC(
         this._augmentConfigListener,
         this._extensionContext,
@@ -122085,7 +122085,7 @@ var AugmentExtension = class e extends DisposableContainer {
                 throw Error("Workspace manager is undefined")
               if (this._agentCheckpointManager === undefined)
                 throw Error("Checkpoint manager is undefined")
-              Eye(
+              runAutomaticOrientation(
                 this._apiServer,
                 this.workspaceManager,
                 this.featureFlagManager,
@@ -122610,7 +122610,7 @@ var AugmentExtension = class e extends DisposableContainer {
         this._completionTimelineReporter,
       )),
       this._completionDisposables.push(this._inlineCompletionProvider),
-      Xc((completionEvent) => {
+      onCompletionAvailable((completionEvent) => {
         completionEvent && this._recentCompletions.addItem(completionEvent)
       }),
       this._completionDisposables.push(
@@ -122962,7 +122962,7 @@ function activate(e) {
     ),
     (r = new AugmentExtension(e, c, f, m, p, y, v, E, C, w, N, Z, T, te, g, B, Y, W))
   function Q() {
-    Z.isVisible() || Ye.commands.executeCommand(Ji.commandID)
+    Z.isVisible() || Ye.commands.executeCommand(Separator.commandID)
   }
   e.subscriptions.push(te.onDerivedStatesSatisfied(Ie)),
     Ie(te.satisfiedStates),
