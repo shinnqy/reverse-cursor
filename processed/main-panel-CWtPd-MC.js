@@ -169,12 +169,12 @@ import {
   u as Ts,
   o as ru,
   d as qd,
-  h as dn,
+  h as augmentHost,
   i as su,
   O as cn,
   M as kr,
 } from "./BaseButton-C5Me6mfC.js"
-import { T as wt, M as qr } from "./TextTooltipAugment-D7Lua3if.js"
+import { T as wt, M as MessageBroker } from "./TextTooltipAugment-D7Lua3if.js"
 import {
   i as lo,
   b as Wi,
@@ -301,8 +301,8 @@ import {
   N as W1,
   O as q1,
   K as G1,
-  d as Mu,
-  e as Au,
+  d as FeatureConfiguration,
+  e as ExtensionClient,
 } from "./Keybindings-Df4MuLOi.js"
 import { T as ku } from "./terminal-BGgU8uQ5.js"
 import {
@@ -5292,7 +5292,7 @@ function Vm(s, e, n) {
     { inProgress: a = !1 } = e,
     { callout: l } = e
   function u(p) {
-    dn.postMessage({ type: st.mainPanelPerformAction, data: p })
+    augmentHost.postMessage({ type: st.mainPanelPerformAction, data: p })
   }
   return (
     (s.$$set = (p) => {
@@ -35948,7 +35948,7 @@ function X6(s) {
 }
 function K6(s, e, n) {
   let t, o
-  const r = new qr(dn),
+  const r = new MessageBroker(augmentHost),
     i = Ct({ state: cn.idle })
   Ge(s, i, (g) => n(2, (o = g)))
   const c = Jt(i, (g) => g.state)
@@ -35960,7 +35960,7 @@ function K6(s, e, n) {
   }
   let l, u
   Gn(() => {
-    r.registerConsumer(a), dn.postMessage({ type: st.getOrientationStatus })
+    r.registerConsumer(a), augmentHost.postMessage({ type: st.getOrientationStatus })
   })
   let p = !1
   return (
@@ -38799,13 +38799,13 @@ function fb(s, e, n) {
   s.$$.on_destroy.push(() => re()), s.$$.on_destroy.push(() => le())
   let { initialConversation: Ee } = e,
     { initialFlags: be } = e
-  const ee = new qr(dn)
+  const ee = new MessageBroker(augmentHost)
   let Q = new h1()
   ee.registerConsumer(Q)
   let ye,
     ge = new yf()
   Ge(s, ge, (Ce) => n(5, (C = Ce))), ee.registerConsumer(ge)
-  let ae = new g1(ee, dn, Q, {
+  let ae = new g1(ee, augmentHost, Q, {
     initialConversation: Ee,
     initialFlags: be,
     onLoaded: () => {
@@ -39648,7 +39648,7 @@ function kb(s, e, n) {
     [r, o, t]
   )
 }
-class Vs extends SvelteComponent {
+class OnboardingLayout extends SvelteComponent {
   constructor(e) {
     super(), initComponent(this, e, kb, Ab, notEqual, {})
   }
@@ -39913,7 +39913,7 @@ function Db(s) {
 function Ob(s) {
   let e, n, t, o
   return (
-    (e = new Vs({
+    (e = new OnboardingLayout({
       props: { $$slots: { logo: [Db], default: [Fb] }, $$scope: { ctx: s } },
     })),
     {
@@ -39942,11 +39942,11 @@ function Ob(s) {
 function zb(s, e, n) {
   let t
   return (
-    dn.postMessage({ type: st.signInLoaded }),
+    augmentHost.postMessage({ type: st.signInLoaded }),
     [
       t,
       function () {
-        dn.postMessage({ type: st.mainPanelPerformAction, data: "sign-in" })
+        augmentHost.postMessage({ type: st.mainPanelPerformAction, data: "sign-in" })
       },
       (o) => {
         const r = o.data
@@ -40605,7 +40605,7 @@ function i8(s, e, n) {
     { inProgress: a = !1 } = e,
     { callout: l } = e
   function u(p) {
-    dn.postMessage({ type: st.mainPanelPerformAction, data: p })
+    augmentHost.postMessage({ type: st.mainPanelPerformAction, data: p })
   }
   return (
     (s.$$set = (p) => {
@@ -41592,7 +41592,7 @@ function F8(s) {
 function IndexCodebaseComponent(props) {
   let errorBoundaryComponent, isComponentVisible, hasEventListener, messageEventListener
   return (
-    (errorBoundaryComponent = new Vs({
+    (errorBoundaryComponent = new OnboardingLayout({
       props: { $$slots: { error: [F8], default: [IndexCodebaseView] }, $$scope: { ctx: props } },
     })),
     {
@@ -41621,16 +41621,16 @@ function IndexCodebaseComponent(props) {
 const Ql = "Open a folder"
 function initIndexCodebase(component, props, setState) {
   let state
-  const messageService = new qr(dn)
+  const messageService = new MessageBroker(augmentHost)
   let stateStore = new M8()
   Ge(component, stateStore, (newState) => setState(0, (state = newState))), messageService.registerConsumer(stateStore)
-  const flagsModel = new Mu(),
-    indexingService = new Au(dn, messageService, flagsModel)
+  const flagsModel = new FeatureConfiguration(),
+    indexingService = new ExtensionClient(augmentHost, messageService, flagsModel)
   let workspaceName,
     isLoading = !1,
     isDisabled = !1
   return (
-    dn.postMessage({ type: st.awaitingSyncingPermissionLoaded }),
+    augmentHost.postMessage({ type: st.awaitingSyncingPermissionLoaded }),
     (component.$$.update = () => {
       1 & component.$$.dirty &&
         setState(
@@ -42215,7 +42215,7 @@ function tx(s) {
 function nx(s) {
   let e, n
   return (
-    (e = new Vs({
+    (e = new OnboardingLayout({
       props: {
         $$slots: { error: [tx], logo: [J8], default: [Z8] },
         $$scope: { ctx: s },
@@ -42245,7 +42245,7 @@ function nx(s) {
   )
 }
 function ox(s, e, n) {
-  const t = new Au(dn, new qr(dn), new Mu())
+  const t = new ExtensionClient(augmentHost, new MessageBroker(augmentHost), new FeatureConfiguration())
   function o(u) {
     t.createProject(u)
   }
@@ -42476,7 +42476,7 @@ function createMainApp(props) {
 function initMainApp(component, props, setState) {
   let appState
   return (
-    dn.postMessage({ type: st.mainPanelLoaded }),
+    augmentHost.postMessage({ type: st.mainPanelLoaded }),
     [
       appState,
       (event) => {

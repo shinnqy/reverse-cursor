@@ -419,58 +419,58 @@ var ge = ((e) => (
     (e.partial = "partial"),
     e
   ))(Re || {})
-const L = "data-vscode-theme-kind"
-function qe() {
+const THEME_ATTRIBUTE = "data-vscode-theme-kind"
+function isVsCodeEnvironment() {
   return self.acquireVsCodeApi !== void 0
 }
-function B() {
+function updateThemeSettings() {
   Q(
     (function () {
-      const e = document.body.getAttribute(L)
-      if (e) return we[e]
+      const themeKind = document.body.getAttribute(THEME_ATTRIBUTE)
+      if (themeKind) return themeCategories[themeKind]
     })(),
   ),
     Z(
       (function () {
-        const e = document.body.getAttribute(L)
-        if (e) return be[e]
+        const themeKind = document.body.getAttribute(THEME_ATTRIBUTE)
+        if (themeKind) return themeIntensities[themeKind]
       })(),
     )
 }
-function ve() {
+function acquireVsCodeApi() {
   if (self.acquireVsCodeApi === void 0)
     throw new Error("acquireVsCodeAPI not available")
   return (
     (function () {
-      new MutationObserver(B).observe(document.body, {
-        attributeFilter: [L],
+      new MutationObserver(updateThemeSettings).observe(document.body, {
+        attributeFilter: [THEME_ATTRIBUTE],
         attributes: !0,
       }),
-        B()
+        updateThemeSettings()
     })(),
     self.acquireVsCodeApi()
   )
 }
-const we = {
+const themeCategories = {
     "vscode-dark": k.dark,
     "vscode-high-contrast": k.dark,
     "vscode-light": k.light,
     "vscode-high-contrast-light": k.light,
   },
-  be = {
+  themeIntensities = {
     "vscode-dark": P.regular,
     "vscode-light": P.regular,
     "vscode-high-contrast": P.highContrast,
     "vscode-high-contrast-light": P.highContrast,
   }
-var H
-const Ie =
-  (((H = window == null ? void 0 : window.augment) != null && H.host) ||
+var windowAugment
+const augmentHost =
+  (((windowAugment = window == null ? void 0 : window.augment) != null && windowAugment.host) ||
     ((window.augment = window.augment || {}),
     (window.augment.host = (function () {
-      var e
-      if (qe()) return ve()
-      if (!((e = window.augment) != null && e.host))
+      var existingHost
+      if (isVsCodeEnvironment()) return acquireVsCodeApi()
+      if (!((existingHost = window.augment) != null && existingHost.host))
         throw new Error("Augment host not available")
       return window.augment.host
     })())),
@@ -756,8 +756,8 @@ export {
   Re as a,
   Pe as d,
   ke as e,
-  Ie as h,
-  qe as i,
+  augmentHost as h,
+  isVsCodeEnvironment as i,
   Ee as o,
   Fe as u,
 }

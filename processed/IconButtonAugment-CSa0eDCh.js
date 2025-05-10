@@ -30,112 +30,112 @@ import {
   X as R,
   Y as S,
 } from "./SpinnerAugment-DI4IM-MA.js"
-class te {
-  constructor(e, r = 1e3) {
+class AsyncMessageSender {
+  constructor(postMessageFunction, timeoutMs = 1e3) {
     $(this, "_idToPromiseFns", new Map())
     $(
       this,
       "registerPromiseContext",
-      (e) =>
-        new Promise((r, o) => {
-          this._idToPromiseFns.set(e.requestId, { resolve: r, reject: o })
+      (message) =>
+        new Promise((resolve, reject) => {
+          this._idToPromiseFns.set(message.requestId, { resolve: resolve, reject: reject })
         }),
     )
-    $(this, "resolveAsyncMsg", (e) => {
-      if (e.type !== v.asyncWrapper) return !1
-      const r = e,
-        o = this._idToPromiseFns.get(r.requestId)
+    $(this, "resolveAsyncMsg", (message) => {
+      if (message.type !== v.asyncWrapper) return !1
+      const asyncMessage = message,
+        promiseFns = this._idToPromiseFns.get(asyncMessage.requestId)
       return (
-        !!o &&
-        (this._idToPromiseFns.delete(r.requestId),
-        r.error ? o.reject(new Error(r.error)) : o.resolve(r),
+        !!promiseFns &&
+        (this._idToPromiseFns.delete(asyncMessage.requestId),
+        asyncMessage.error ? promiseFns.reject(new Error(asyncMessage.error)) : promiseFns.resolve(asyncMessage),
         !0)
       )
     })
-    $(this, "rejectAsyncMsg", (e, r) => {
-      const o = this._idToPromiseFns.get(e.requestId)
-      o &&
-        (this._idToPromiseFns.delete(e.requestId),
-        console.debug(`AsyncMsgSender: Rejecting request, reason: ${r}`, e),
-        o.reject(r))
+    $(this, "rejectAsyncMsg", (message, error) => {
+      const promiseFns = this._idToPromiseFns.get(message.requestId)
+      promiseFns &&
+        (this._idToPromiseFns.delete(message.requestId),
+        console.debug(`AsyncMsgSender: Rejecting request, reason: ${error}`, message),
+        promiseFns.reject(error))
     })
-    $(this, "sendOrTimeout", (e, r = this._timeoutMs) => {
-      this._postMsgFn(e),
-        r > 0 &&
+    $(this, "sendOrTimeout", (message, timeout = this._timeoutMs) => {
+      this._postMsgFn(message),
+        timeout > 0 &&
           setTimeout(() => {
-            var o
+            var baseMsg
             return this.rejectAsyncMsg(
-              e,
+              message,
               new Error(
-                `Request timed out: ${(o = e == null ? void 0 : e.baseMsg) == null ? void 0 : o.type}, id: ${e == null ? void 0 : e.requestId}`,
+                `Request timed out: ${(baseMsg = message == null ? void 0 : message.baseMsg) == null ? void 0 : baseMsg.type}, id: ${message == null ? void 0 : message.requestId}`,
               ),
             )
-          }, r)
+          }, timeout)
     })
-    $(this, "send", async (e, r = this._timeoutMs) => {
-      const o = C(e),
-        n = this.registerPromiseContext(o)
-      this.sendOrTimeout(o, r)
-      const i = await n
-      if (i.error) throw new Error(i.error)
-      if (!i.baseMsg) throw new Error("No response or error message")
-      return i.baseMsg
+    $(this, "send", async (message, timeout = this._timeoutMs) => {
+      const wrappedMessage = C(message),
+        responsePromise = this.registerPromiseContext(wrappedMessage)
+      this.sendOrTimeout(wrappedMessage, timeout)
+      const response = await responsePromise
+      if (response.error) throw new Error(response.error)
+      if (!response.baseMsg) throw new Error("No response or error message")
+      return response.baseMsg
     })
-    $(this, "sendToSidecar", async (e, r = this._timeoutMs) => {
-      const o = C(e, "sidecar"),
-        n = this.registerPromiseContext(o)
-      this.sendOrTimeout(o, r)
-      const i = await n
-      if (i.error) throw new Error(i.error)
-      if (!i.baseMsg) throw new Error("No response or error message")
-      return i.baseMsg
+    $(this, "sendToSidecar", async (message, timeout = this._timeoutMs) => {
+      const wrappedMessage = C(message, "sidecar"),
+        responsePromise = this.registerPromiseContext(wrappedMessage)
+      this.sendOrTimeout(wrappedMessage, timeout)
+      const response = await responsePromise
+      if (response.error) throw new Error(response.error)
+      if (!response.baseMsg) throw new Error("No response or error message")
+      return response.baseMsg
     })
-    ;(this._postMsgFn = e),
-      (this._timeoutMs = r),
-      window.addEventListener("message", (o) => {
-        this.resolveAsyncMsg(o.data)
+    ;(this._postMsgFn = postMessageFunction),
+      (this._timeoutMs = timeoutMs),
+      window.addEventListener("message", (event) => {
+        this.resolveAsyncMsg(event.data)
       })
   }
-  async *stream(e, r = this._timeoutMs, o = this._timeoutMs) {
-    let n = C(e)
-    n.streamCtx = { streamMsgIdx: 0, streamNextRequestId: "" }
-    let i = 0,
-      l = !1
+  async *stream(message, timeout = this._timeoutMs, streamTimeout = this._timeoutMs) {
+    let wrappedMessage = C(message)
+    wrappedMessage.streamCtx = { streamMsgIdx: 0, streamNextRequestId: "" }
+    let expectedIndex = 0,
+      isCancelled = !1
     try {
-      let a = this.registerPromiseContext(n)
-      this.sendOrTimeout(n, r)
-      const u = new Promise((d, h) => {
-        o <= 0 || setTimeout(() => h(new Error("Stream timed out")), o)
+      let responsePromise = this.registerPromiseContext(wrappedMessage)
+      this.sendOrTimeout(wrappedMessage, timeout)
+      const timeoutPromise = new Promise((resolve, reject) => {
+        streamTimeout <= 0 || setTimeout(() => reject(new Error("Stream timed out")), streamTimeout)
       })
-      for (; !l; ) {
-        const d = await Promise.race([a, u])
-        if ((d == null ? void 0 : d.type) !== v.asyncWrapper)
-          throw new Error(`Received unexpected message: ${d}`)
-        if (d.error) throw new Error(d.error)
-        if (!d.streamCtx || d.streamCtx.isStreamComplete) return
-        if (!d.baseMsg) throw new Error("No response or error message")
-        if (d.streamCtx.streamMsgIdx !== i) {
-          const h = d.streamCtx.streamMsgIdx
+      for (; !isCancelled; ) {
+        const response = await Promise.race([responsePromise, timeoutPromise])
+        if ((response == null ? void 0 : response.type) !== v.asyncWrapper)
+          throw new Error(`Received unexpected message: ${response}`)
+        if (response.error) throw new Error(response.error)
+        if (!response.streamCtx || response.streamCtx.isStreamComplete) return
+        if (!response.baseMsg) throw new Error("No response or error message")
+        if (response.streamCtx.streamMsgIdx !== expectedIndex) {
+          const receivedIndex = response.streamCtx.streamMsgIdx
           throw new Error(
-            `Received out of order stream chunk. Expected ${i} but got ${h}`,
+            `Received out of order stream chunk. Expected ${expectedIndex} but got ${receivedIndex}`,
           )
         }
-        ;(i = d.streamCtx.streamMsgIdx + 1),
-          (n = {
-            ...n,
-            streamCtx: { streamMsgIdx: i, streamNextRequestId: "" },
-            requestId: d.streamCtx.streamNextRequestId,
+        ;(expectedIndex = response.streamCtx.streamMsgIdx + 1),
+          (wrappedMessage = {
+            ...wrappedMessage,
+            streamCtx: { streamMsgIdx: expectedIndex, streamNextRequestId: "" },
+            requestId: response.streamCtx.streamNextRequestId,
           }),
-          (a = this.registerPromiseContext(n)),
-          yield d.baseMsg
+          (responsePromise = this.registerPromiseContext(wrappedMessage)),
+          yield response.baseMsg
       }
     } finally {
-      if (!l) {
-        l = !0
+      if (!isCancelled) {
+        isCancelled = !0
         try {
-          this._idToPromiseFns.delete(n.requestId)
-        } catch (a) {
-          console.warn("Error sending stream cancellation message:", a)
+          this._idToPromiseFns.delete(wrappedMessage.requestId)
+        } catch (error) {
+          console.warn("Error sending stream cancellation message:", error)
         }
       }
     }
@@ -493,4 +493,4 @@ class re extends z {
       })
   }
 }
-export { te as A, Z as C, re as I }
+export { AsyncMessageSender as A, Z as C, re as I }
