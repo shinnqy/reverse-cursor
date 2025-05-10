@@ -13591,7 +13591,7 @@ var rB = x((F_t, f7) => {
       "SHcy;": 1064,
       "SOFTcy;": 1068,
       "Sacute;": 346,
-      "Sc;": 10940,
+      "DisposableCollection;": 10940,
       "Scaron;": 352,
       "Scedil;": 350,
       "Scirc;": 348,
@@ -65316,7 +65316,7 @@ function zt(e, t, r = !1) {
   let n = (0, Pv.join)(e, t)
   return r && !n.endsWith(Pv.sep) && (n += Pv.sep), n
 }
-var qe = class e {
+var QualifiedPathName = class e {
   rootPath
   relPath
   constructor(t, r) {
@@ -65443,7 +65443,7 @@ var pn = class e extends Uf {
 `)
   }
   static empty() {
-    return new e(qe.from(e.EMPTY_PATH_NAME), "", "", {})
+    return new e(QualifiedPathName.from(e.EMPTY_PATH_NAME), "", "", {})
   }
   static deleted(t) {
     return new e(t, void 0, void 0, {})
@@ -65633,7 +65633,7 @@ function zke(e) {
   }
 }
 function Jke(e) {
-  return new pn(qe.from(e.path), e.originalCode, e.modifiedCode, {})
+  return new pn(QualifiedPathName.from(e.path), e.originalCode, e.modifiedCode, {})
 }
 function jke(e) {
   return {
@@ -65674,7 +65674,7 @@ function V$(e, t, r) {
     let n = new Ug(e, r)
     for (let i of Object.entries(t.checkpoints))
       for (let s of i[1]) {
-        let o = qe.from(s.document.path),
+        let o = QualifiedPathName.from(s.document.path),
           a = { conversationId: s.conversationId, path: o }
         n.addCheckpoint(a, Zke(s))
       }
@@ -67098,13 +67098,13 @@ var LI = class extends Uf {
     return c ? c.document.originalCode : null
   }
   _handleDocumentChange = async (t) => {
-    let r = qe.from(t.document.qualifiedPathName)
+    let r = QualifiedPathName.from(t.document.qualifiedPathName)
     if (r === void 0 || this._currentConversationId === void 0) return
     let n = t.document.getText?.()
     await this.updateLatestCheckpoint(r, n)
   }
   _handleFileDeleted = async (t) => {
-    let r = qe.from(t.qualifiedPathName)
+    let r = QualifiedPathName.from(t.qualifiedPathName)
     if (r === void 0 || this._currentConversationId === void 0) return
     this._logger.debug(`Handling file deleted notification: ${r.absPath}`)
     let n = { conversationId: this._currentConversationId, path: r },
@@ -67123,8 +67123,8 @@ var LI = class extends Uf {
       this._logger.debug(`Marked file deleted: ${r.absPath}`))
   }
   _handleFileMoved = async (t) => {
-    let r = qe.from(t.oldQualifiedPathName),
-      n = qe.from(t.newQualifiedPathName)
+    let r = QualifiedPathName.from(t.oldQualifiedPathName),
+      n = QualifiedPathName.from(t.newQualifiedPathName)
     if (r === void 0 || n === void 0 || this._currentConversationId === void 0)
       return
     this._logger.debug(`File moved: ${r.absPath} -> ${n.absPath}`)
@@ -77570,7 +77570,7 @@ Do not use this tool for temporary information.
           ot("Failed to save memories: no memories file available"),
         )
       )
-    let a = new fB(new qe("", o), r, r, {}),
+    let a = new fB(new QualifiedPathName("", o), r, r, {}),
       l = a.updateBuffer(t)
     return (
       n.setFlag(Gr.setMemoriesUpdateBufferFailed, !l),
@@ -77908,7 +77908,7 @@ var AB = class {
           ? await Promise.all(
               n.data.qualifiedPathNames.map(async (i) => {
                 await this._checkpointManager.revertDocumentToTimestamp(
-                  qe.from(i),
+                  QualifiedPathName.from(i),
                   n.data.timestamp,
                 )
               }),
@@ -77975,7 +77975,7 @@ var AB = class {
       : { type: Zi.getEditChangesByRequestIdResponse, data: void 0 }
   }
   _showAgentReview = async (t) => {
-    let r = qe.from(t.data.qualifiedPathName),
+    let r = QualifiedPathName.from(t.data.qualifiedPathName),
       i = (
         await this._checkpointManager.getAggregateCheckpointForFile(r, {
           minTimestamp: t.data.fromTimestamp,
@@ -78340,30 +78340,30 @@ ${this.diff(this.value, t).map((r) => `  - ${r}`).join(`
       return t === void 0 ? "undefined" : JSON.stringify(t)
     }
   }
-var Sc = class {
+var DisposableCollection = class {
     _disposables = []
-    add(t) {
-      if (t === void 0)
+    add(disposable) {
+      if (disposable === void 0)
         throw new Error(
           "Attempt to add undefined disposable to DisposableCollection",
         )
-      return this._disposables.push(t), t
+      return this._disposables.push(disposable), disposable
     }
-    addAll(...t) {
-      t.forEach((r) => this.add(r))
+    addAll(...disposables) {
+      disposables.forEach((disposable) => this.add(disposable))
     }
-    adopt(t) {
-      this._disposables.push(...t._disposables), (t._disposables.length = 0)
+    adopt(otherCollection) {
+      this._disposables.push(...otherCollection._disposables), (otherCollection._disposables.length = 0)
     }
     dispose() {
-      for (let t of this._disposables) t.dispose()
+      for (let disposable of this._disposables) disposable.dispose()
       this._disposables.length = 0
     }
   },
-  X = class {
-    _disposables = new Sc()
-    _priorityDisposables = new Sc()
-    constructor(t = new Sc(), r = new Sc()) {
+  DisposableContainer = class {
+    _disposables = new DisposableCollection()
+    _priorityDisposables = new DisposableCollection()
+    constructor(t = new DisposableCollection(), r = new DisposableCollection()) {
       this._disposables.adopt(t), this._priorityDisposables.adopt(r)
     }
     addDisposable(t, r = !1) {
@@ -78465,7 +78465,7 @@ var but = 128 * 1024,
       this._disposed = !0
     }
   },
-  vk = class extends X {
+  vk = class extends DisposableContainer {
     _subscriptions = []
     _refreshTimer
     _disposed = !1
@@ -78636,7 +78636,7 @@ function bme(e) {
       r.push(() => i.removeEventListener("abort", n))
   return t.signal
 }
-function Tl(e) {
+function getTextLength(e) {
   return [...e].length
 }
 function _W(e, t) {
@@ -79904,7 +79904,7 @@ var wk = class extends Error {
     async nextEditStream(t) {
       let r = this._configListener.config,
         n = r.nextEdit.model,
-        i = t.prefix ? Tl(t.prefix) : void 0,
+        i = t.prefix ? getTextLength(t.prefix) : void 0,
         s = {
           model: n,
           instruction: t.instruction ?? "",
@@ -79914,7 +79914,7 @@ var wk = class extends Error {
           selection_begin_char: i,
           selection_end_char:
             t.prefix !== void 0 && t.selectedCode !== void 0
-              ? i + Tl(t.selectedCode)
+              ? i + getTextLength(t.selectedCode)
               : void 0,
           blob_name: t.blobName,
           lang: t.language,
@@ -81119,7 +81119,7 @@ var Iut = { Augment: null },
     }),
   }),
   xme = Sut.deepPartial(),
-  Sk = class e extends X {
+  Sk = class e extends DisposableContainer {
     _config
     _configChanged = new Dc.EventEmitter()
     _configMonitor
@@ -81355,7 +81355,7 @@ var Iut = { Augment: null },
         let i = n.error.issues.map(
           (l) => "[" + l.path.join(".") + "]: " + l.message,
         )
-        r.error(`Failed to parse settings: 
+        r.error(`Failed to parse settings:
 ${i.join(`
 `)}`)
         let s = n.error.issues.map((l) => l.path.join(".")),
@@ -81379,7 +81379,7 @@ function _me(e) {
   let n = Dc.workspace.workspaceFolders?.[0]?.uri
   return n && (e = e.replaceAll(t, n.fsPath)), e
 }
-var Bk = class extends X {
+var Bk = class extends DisposableContainer {
   constructor(r, n, i) {
     super()
     this._actionsModel = r
@@ -81423,7 +81423,7 @@ var Ime = V(vs()),
   Gh = V(require("vscode"))
 var Qx = "augment.sessions",
   Dk = ["email"],
-  Tk = class extends X {
+  Tk = class extends DisposableContainer {
     constructor(r, n) {
       super()
       this._context = r
@@ -81782,7 +81782,7 @@ async function Hme(e, t) {
     throw (await ui.unlink(r), n)
   }
 }
-async function rn(e) {
+async function readTextFile(e) {
   return await ui.readFile(e, { encoding: "utf8" })
 }
 async function ku(e, t) {
@@ -81817,7 +81817,7 @@ var Nk = class e {
     await this._ensureStorageUriExists(r)
     let n = this._getFileUri(t, r)
     try {
-      let i = await rn(n.fsPath)
+      let i = await readTextFile(n.fsPath)
       return JSON.parse(i)
     } catch {
       return
@@ -82021,15 +82021,15 @@ function rf(e) {
 function Fu(e, t) {
   if ($h(e)) {
     let i = t.getFolderRoot(e)
-    return i === void 0 ? void 0 : new qe(i, Fl(i, e))
+    return i === void 0 ? void 0 : new QualifiedPathName(i, Fl(i, e))
   }
   let r = t.findBestWorkspaceRootMatch(e)
   if (r) {
     let i = r.qualifiedPathName.rootPath
-    return new qe(i, e)
+    return new QualifiedPathName(i, e)
   }
   let n = rf(t)
-  if (n) return new qe(n, e)
+  if (n) return new QualifiedPathName(n, e)
 }
 async function qy(e, t) {
   let r = Fu(e, t)?.absPath
@@ -82051,7 +82051,7 @@ async function Zme(e, t) {
 }
 async function Uk(e) {
   let t = e()
-  return !t || !dn(t) ? void 0 : (await rn(t)).replace(/^\s+/, "")
+  return !t || !dn(t) ? void 0 : (await readTextFile(t)).replace(/^\s+/, "")
 }
 async function t0e(e, t) {
   if (!e) return
@@ -82060,7 +82060,7 @@ async function t0e(e, t) {
   if (dn(n))
     try {
       if (!dn(r)) {
-        let i = await rn(n)
+        let i = await readTextFile(n)
         if (i.trim() === "") return
         await ku(r, i),
           await Kn.workspace.fs.delete(Kn.Uri.file(n)),
@@ -82489,7 +82489,7 @@ var LW = class {
             i = Fu(n, this.workspaceManager)?.absPath
           if (i === void 0) return ot(`Failed to read file: ${n}`)
           if (!dn(i)) return ot(`File does not exist: ${n}`)
-          let s = await rn(i)
+          let s = await readTextFile(i)
           return s === void 0
             ? (this.logger.error(`Failed to read file: ${n}`),
               ot(`Failed to read file: ${n}`))
@@ -82594,7 +82594,7 @@ var LW = class {
       let s = Vx.default.join(i, ".augment-guidelines"),
         o = ""
       try {
-        dn(s) && (o = await rn(s))
+        dn(s) && (o = await readTextFile(s))
       } catch (u) {
         this.trace.setFlag(Ft.failedToReadGuidelines),
           this.logger.error(`Failed to read existing guidelines: ${u}`)
@@ -85443,7 +85443,7 @@ var Ngt = (e) => !bCe.has(e),
     }
   }
 var ICe = V(require("vscode"))
-var eg = class extends X {
+var eg = class extends DisposableContainer {
   constructor(r, n, i) {
     super()
     this._globalState = r
@@ -85493,7 +85493,7 @@ var eg = class extends X {
 }
 var SCe = V(um()),
   BCe = V(require("vscode"))
-var r_ = class extends X {
+var r_ = class extends DisposableContainer {
   constructor(r, n, i) {
     super()
     this._globalState = r
@@ -85611,7 +85611,7 @@ var Pu = {
     findAllMatches: !0,
     sortFn: Lgt,
   },
-  sF = class extends X {
+  sF = class extends DisposableContainer {
     constructor(r, n, i) {
       super()
       this._globalState = r
@@ -85891,7 +85891,7 @@ var QCe = 8e5,
       )
     }
   },
-  Ky = class e extends X {
+  Ky = class e extends DisposableContainer {
     constructor(r, n, i, s, o, a, l) {
       super()
       this._globalState = r
@@ -86337,7 +86337,7 @@ var RG = {
     isCaseSensitive: !0,
   },
   Hgt = 2e4,
-  oF = class extends X {
+  oF = class extends DisposableContainer {
     constructor(r, n, i, s) {
       super()
       this._globalState = r
@@ -86463,7 +86463,7 @@ var RG = {
       }
     }
     _getCurrBlobName = (r) => {
-      let n = new qe(r.repoRoot, r.pathName)
+      let n = new QualifiedPathName(r.repoRoot, r.pathName)
       return this._workspaceManager.getBlobName(n)
     }
     _getCurrFileDetails = (r) => {
@@ -86485,7 +86485,7 @@ var OCe = V(require("fs")),
   qCe = V(dm()),
   kG = V(require("path")),
   Lu = V(require("vscode"))
-var lF = class extends X {
+var lF = class extends DisposableContainer {
   constructor(r, n, i) {
     super()
     this._config = r
@@ -86791,7 +86791,7 @@ ${p}`)
   }
 var FG = V(require("path")),
   Kr = V(require("vscode"))
-var uF = class extends X {
+var uF = class extends DisposableContainer {
     constructor(r) {
       super()
       this._extensionRoot = r
@@ -88451,7 +88451,7 @@ var Nl = V(require("vscode"))
 var lf = V(require("vscode"))
 var YCe = V(require("assert")),
   vF = V(require("vscode"))
-var CF = class extends X {
+var CF = class extends DisposableContainer {
     constructor(r) {
       super()
       this._config = r
@@ -88507,7 +88507,7 @@ var CF = class extends X {
       return Array.from(this._commands.values())
     }
   },
-  ct = class extends X {
+  ct = class extends DisposableContainer {
     constructor(r = void 0, n = !0) {
       super()
       this._title = r
@@ -88734,7 +88734,7 @@ var xF = class extends ct {
       if (o === null) return
       let a = Ux(o),
         l = o.fsPath.replace(a.fsPath, ""),
-        c = new qe(a.fsPath, l)
+        c = new QualifiedPathName(a.fsPath, l)
       mn.createOrShow(
         {
           extensionUri: this._extensionUri,
@@ -88784,7 +88784,7 @@ var xF = class extends ct {
       if (a === null) return
       let l = Ux(a),
         c = a.fsPath.replace(l.fsPath, ""),
-        u = new qe(l.fsPath, c),
+        u = new QualifiedPathName(l.fsPath, c),
         f = await Uu.fromPathName(u, s),
         p = { ...o, document: f, guidelinesWatcher: this._guidelinesWatcher },
         g = n.selection
@@ -89352,7 +89352,7 @@ var TF = class {
     for (let t of this._disposers) t()
   }
 }
-function ss(e, t = void 0) {
+function createAsyncMessageHandler(e, t = void 0) {
   return new TF(
     (r) => void e.postMessage(r),
     (r) => {
@@ -89367,7 +89367,7 @@ function RF(e) {
     r = (e % 1e3) * 1e6
   return [t, r]
 }
-var kF = class extends X {
+var kF = class extends DisposableContainer {
   constructor(r) {
     super()
     this._apiServer = r
@@ -89454,7 +89454,7 @@ var kF = class extends X {
     this.reset()
   }
 }
-var FF = class extends X {
+var FF = class extends DisposableContainer {
   constructor(r, n, i, s, o) {
     super()
     this._webview = r
@@ -89463,7 +89463,7 @@ var FF = class extends X {
     this._opts = s
     this._workTimer = o
     ;(this._workspaceManager = this._deps.workspaceManager),
-      (this._asyncMsgHandler = ss(this._webview, this._workTimer)),
+      (this._asyncMsgHandler = createAsyncMessageHandler(this._webview, this._workTimer)),
       this._registerMessageHandlers(),
       this.addDisposable(this._asyncMsgHandler)
   }
@@ -89617,7 +89617,7 @@ function sC() {
     e += t.charAt(Math.floor(Math.random() * t.length))
   return e
 }
-var QF = class extends X {
+var QF = class extends DisposableContainer {
   constructor(r, n, i, s) {
     super()
     this.streamId = r
@@ -89679,7 +89679,7 @@ var QF = class extends X {
     type: "diff-view-diff-stream-ended",
   })
 }
-var NF = class extends X {
+var NF = class extends DisposableContainer {
   constructor(r, n, i, s, o) {
     super()
     this._panel = r
@@ -89979,8 +89979,8 @@ function hve(e, t) {
     }
   )
 }
-async function gve(e, t, r) {
-  if (!d_()) throw new Error("Not in HMR mode")
+async function getDevServerContent(e, t, r) {
+  if (!isDevelopment()) throw new Error("Not in HMR mode")
   let n = await fetch(`${e}/${t}`)
   if (!n.ok) throw new Error(`Failed to load ${t} from ${e}: ${n.statusText}`)
   let i = await n.text()
@@ -89988,10 +89988,10 @@ async function gve(e, t, r) {
     throw new Error(
       `Empty response when loading ${t} from ${e}: ${n.statusText}`,
     )
-  return $G(i, e, r)
+  return injectHtmlHeadTags(i, e, r)
 }
 var u_
-async function pve(e) {
+async function getDevServerUrl(e) {
   if (u_) return u_
   let t = await import("fs"),
     r = e.fsPath + "/.augment-hmr-env"
@@ -90012,13 +90012,13 @@ async function pve(e) {
     throw new Error(`Failed to load HMR url from '${r}'`)
   return u_
 }
-function $G(e, t, r) {
+function injectHtmlHeadTags(e, t, r) {
   return e.replace(
     "<head>",
     `<head><base href="${t}" /><meta http-equiv="Content-Security-Policy" content="${r}" />`,
   )
 }
-function d_() {
+function isDevelopment() {
   return (
     !!process.env.AUGMENT_IS_HMR && process.env.AUGMENT_JS_ENV !== "production"
   )
@@ -90104,7 +90104,7 @@ function LF() {
   }
 }
 function UF(e) {
-  if (!d_()) return () => {}
+  if (!isDevelopment()) return () => {}
   let t = e.replace(/^https?:/, "ws:")
   return (r) => {
     ;[
@@ -90120,7 +90120,7 @@ function UF(e) {
     })
   }
 }
-var mn = class e extends X {
+var mn = class e extends DisposableContainer {
   constructor(r, n) {
     super()
     this._deps = r
@@ -90200,7 +90200,7 @@ var mn = class e extends X {
     r.options = { enableScripts: !0, localResourceRoots: [n] }
     let i = r.asWebviewUri(Ei.Uri.joinPath(n, "/")),
       s = Ou(Vu(r), qu(), Hu(), Wu(), LF()),
-      o = await rn(YG.default.join(n.fsPath, "diff-view.html"))
+      o = await readTextFile(YG.default.join(n.fsPath, "diff-view.html"))
     ;(o = o.replace(
       /<head>/i,
       `<head>
@@ -90282,7 +90282,7 @@ var OF = class {
     let o = {
       editable: !1,
       disableResolution: !0,
-      document: new pn(new qe(t.rootPath, t.relPath), r, n, {}),
+      document: new pn(new QualifiedPathName(t.rootPath, t.relPath), r, n, {}),
       viewOptions: { preserveFocus: !0, viewColumn: mve.ViewColumn.Active },
     }
     return this._createOrShowDiffView(o), Promise.resolve()
@@ -90955,58 +90955,58 @@ var Ive = V(require("os")),
   KF = V(require("path")),
   $u = V(require("vscode")),
   rg = require("vscode")
-var wve = V(require("path")),
-  WF = V(require("vscode"))
-var ra = class extends X {
-  constructor(r, n) {
+var path = V(require("path")),
+  vscode = V(require("vscode"))
+var PanelWebview = class extends DisposableContainer {
+  constructor(filename, webview) {
     super()
-    this.filename = r
-    this._webview = n
+    this.filename = filename
+    this._webview = webview
   }
   _logger = j("PanelWebviewBase")
   generateCSPPolicy(r) {
     return Ou(Vu(this._webview), qu(), Ave(), Hu(), Wu(), r ? UF(r) : () => {})
   }
-  async loadHTML(r) {
-    if (d_())
+  async loadHTML(extensionUri) {
+    if (isDevelopment())
       try {
-        let n = await pve(r)
+        let devServerUrl = await getDevServerUrl(extensionUri)
         this._logger.debug(
           "Loading '%s' from dev server on '%s'",
           this.filename,
-          n,
+          devServerUrl,
         ),
           (this._webview.options = {
             enableScripts: !0,
-            localResourceRoots: [WF.Uri.parse(n)],
+            localResourceRoots: [vscode.Uri.parse(devServerUrl)],
           }),
-          (this._webview.html = await gve(
-            n,
+          (this._webview.html = await getDevServerContent(
+            devServerUrl,
             this.filename,
-            this.generateCSPPolicy(n),
+            this.generateCSPPolicy(devServerUrl),
           ))
         return
-      } catch (n) {
+      } catch (error) {
         this._logger.error(
-          `Failed to load '%s' from dev server: ${String(n)} `,
+          `Failed to load '%s' from dev server: ${String(error)} `,
           this.filename,
         ),
           (this._webview.html = (
-            await this._loadFile(r, "../../common/webviews/index.html")
-          ).replace("></code>", `>${String(n)}</code>`))
+            await this._loadFile(extensionUri, "../../common/webviews/index.html")
+          ).replace("></code>", `>${String(error)}</code>`))
         return
       }
-    this._webview.html = await this._loadFile(r, this.filename)
+    this._webview.html = await this._loadFile(extensionUri, this.filename)
   }
-  async _loadFile(r, n) {
-    let i = WF.Uri.joinPath(r, "common-webviews"),
-      s = this._webview.asWebviewUri(WF.Uri.joinPath(i, "/"))
-    this._webview.options = { enableScripts: !0, localResourceRoots: [i] }
-    let o = await rn(wve.join(i.fsPath, n))
+  async _loadFile(extensionUri, relativePath) {
+    let webviewRoot = vscode.Uri.joinPath(extensionUri, "common-webviews"),
+      webviewUri = this._webview.asWebviewUri(vscode.Uri.joinPath(webviewRoot, "/"))
+    this._webview.options = { enableScripts: !0, localResourceRoots: [webviewRoot] }
+    let filePath = await readTextFile(path.join(webviewRoot.fsPath, relativePath))
     try {
-      return $G(o, s.toString(), this.generateCSPPolicy())
-    } catch (a) {
-      throw (this._logger.error(`Failed to load ${n}: ${String(a)}`), a)
+      return injectHtmlHeadTags(filePath, webviewUri.toString(), this.generateCSPPolicy())
+    } catch (error) {
+      throw (this._logger.error(`Failed to load ${relativePath}: ${String(error)}`), error)
     }
   }
 }
@@ -91033,7 +91033,7 @@ var GF = class {
       })
   }
 }
-var $F = class e extends ra {
+var $F = class e extends PanelWebview {
   constructor(r, n) {
     let i = Gu.window.createWebviewPanel(
       "remote agent diff",
@@ -91059,7 +91059,7 @@ var $F = class e extends ra {
           e.currentPanel = void 0
         }),
       )
-    let o = ss(this._panel.webview, this._deps.workTimer)
+    let o = createAsyncMessageHandler(this._panel.webview, this._deps.workTimer)
     this.addDisposable(o),
       (this._diffPanelMessenger = new GF(this._panel.webview, this._opts)),
       this._diffPanelMessenger.register(o),
@@ -91344,7 +91344,7 @@ var tg = class {
       let i = Ive.homedir(),
         s = KF.join(i, r, n)
       if (YF.existsSync(s)) {
-        let o = await rn(s)
+        let o = await readTextFile(s)
         return { type: "get-setup-script-response", data: { content: o } }
       }
       if (
@@ -91376,7 +91376,7 @@ var tg = class {
             YF.existsSync(u))
           ) {
             console.log("Found git root setup script at:", u)
-            let f = await rn(u)
+            let f = await readTextFile(u)
             return { type: "get-setup-script-response", data: { content: f } }
           }
         }
@@ -91386,7 +91386,7 @@ var tg = class {
           YF.existsSync(c))
         ) {
           console.log("Found workspace setup script at:", c)
-          let u = await rn(c)
+          let u = await readTextFile(c)
           return { type: "get-setup-script-response", data: { content: u } }
         }
       }
@@ -91467,7 +91467,7 @@ var kxe = require("child_process"),
   qt = V(require("vscode"))
 var nM = V(require("vscode"))
 async function ppt(e, t, r) {
-  let i = (await rn(e)).split(`
+  let i = (await readTextFile(e)).split(`
 `),
     s = t - 1,
     o = r - 1,
@@ -91524,7 +91524,7 @@ var KG = "augment://sign-in",
     }
     occuredAt
   }
-var iM = class extends X {
+var iM = class extends DisposableContainer {
   constructor(r) {
     super()
     this._getter = r
@@ -91578,7 +91578,7 @@ var $i = class extends ct {
 var Js = V(require("vscode"))
 var mpt = "GitHub.copilot",
   ypt = "Codeium.codeium"
-var gA = class e extends X {
+var gA = class e extends DisposableContainer {
   constructor(r, n) {
     super()
     this._config = r
@@ -95891,7 +95891,7 @@ function Txe(e, t) {
   return r.join(`
 `)
 }
-var CA = class e extends X {
+var CA = class e extends DisposableContainer {
   constructor(r, n, i, s, o, a, l) {
     super()
     this._extensionUri = r
@@ -95907,7 +95907,7 @@ var CA = class e extends X {
       Fc.ViewColumn.One,
       { retainContextWhenHidden: !0, enableScripts: !0 },
     )),
-      (this._detailsPanelAsyncMsgHandler = ss(
+      (this._detailsPanelAsyncMsgHandler = createAsyncMessageHandler(
         this._panel.webview,
         this._workTimer,
       )),
@@ -95957,7 +95957,7 @@ var CA = class e extends X {
     r.options = { enableScripts: !0, localResourceRoots: [n] }
     let i = r.asWebviewUri(Fc.Uri.joinPath(n, "/")),
       s = Ou(Vu(r), qu(), Hu(), Wu(), LF()),
-      o = await rn(Rxe.default.join(n.fsPath, "autofix.html"))
+      o = await readTextFile(Rxe.default.join(n.fsPath, "autofix.html"))
     ;(o = o.replace(
       /<head>/i,
       `<head>
@@ -96008,7 +96008,7 @@ var CA = class e extends X {
     })
   }
   async _applyAutofixChanges(r, n) {
-    let i = await rn(r),
+    let i = await readTextFile(r),
       s = Txe(i, n)
     await ku(r, s)
   }
@@ -96035,7 +96035,7 @@ function K4(e) {
   else throw new Error(`Incorrect rating: ${e}`)
   return t
 }
-var hC = class e extends ra {
+var hC = class e extends PanelWebview {
   constructor(r, n, i, s, o, a, l, c) {
     super("preference.html", r.webview)
     this._extensionUri = n
@@ -96043,7 +96043,7 @@ var hC = class e extends ra {
     this.inputData = o
     this._externalSources = l
     this._userSpecifiedExternalSources = c
-    ;(this._asyncMsgHandler = ss(r.webview, a)),
+    ;(this._asyncMsgHandler = createAsyncMessageHandler(r.webview, a)),
       this.addDisposable(this._asyncMsgHandler),
       this._asyncMsgHandler.registerHandler(
         "find-file-request",
@@ -96149,7 +96149,7 @@ USER_SPECIFIED_EXTERNAL_SOURCES_END_LABEL
   }
 }
 var MM = 2e5
-var S_ = class extends X {
+var S_ = class extends DisposableContainer {
   constructor(
     r,
     n,
@@ -96246,7 +96246,7 @@ var S_ = class extends X {
   }
   register(r) {
     ;(this._webview = r),
-      (this._asyncMsgHandler = ss(this._webview, this._workTimer)),
+      (this._asyncMsgHandler = createAsyncMessageHandler(this._webview, this._workTimer)),
       this.addDisposable(this._asyncMsgHandler),
       this._asyncMsgHandler.registerHandler(
         "find-file-request",
@@ -96618,12 +96618,12 @@ var S_ = class extends X {
   isMemoriesFile(r) {
     let n = this._toolsModel.memoriesAbsPath
     if (!n) return !1
-    let i = qe.from({
+    let i = QualifiedPathName.from({
         rootPath: "rootPath" in r ? r.rootPath : r.repoRoot,
         relPath: "relPath" in r ? r.relPath : r.pathName,
       }),
-      s = qe.from({ rootPath: "", relPath: n })
-    return qe.equals(i, s)
+      s = QualifiedPathName.from({ rootPath: "", relPath: n })
+    return QualifiedPathName.equals(i, s)
   }
   filterMemoriesFromSelectedCode(r) {
     return (
@@ -97387,7 +97387,7 @@ var S_ = class extends X {
         if (!o) return
         s = Fs({ rootPath: o.repoRoot, relPath: o.pathName })
         let a = (await Co(s)).getText(),
-          l = qe.from({ rootPath: o.repoRoot, relPath: o.pathName }),
+          l = QualifiedPathName.from({ rootPath: o.repoRoot, relPath: o.pathName }),
           c
         !r.data.options?.dryRun &&
           !r.data.options?.instantApply &&
@@ -97570,7 +97570,7 @@ var S_ = class extends X {
   _getBlobNames(r) {
     let n = new Array()
     for (let i of r) {
-      let s = this._workspaceManager.getBlobName(qe.from(i))
+      let s = this._workspaceManager.getBlobName(QualifiedPathName.from(i))
       s !== void 0 && n.push(s)
     }
     return n
@@ -98457,7 +98457,7 @@ var B_ = ((n) => (
     (n.enableAutoApply = "enableAutoApply"),
     n
   ))(B_ || {}),
-  OM = class extends X {
+  OM = class extends DisposableContainer {
     constructor(r, n, i) {
       super()
       this.configListener = r
@@ -99679,7 +99679,7 @@ var d1 = class {
       this.keybindings = r
     }
   },
-  Lc = class e extends X {
+  Lc = class e extends DisposableContainer {
     constructor(r) {
       super()
       this._globalState = r
@@ -99902,19 +99902,19 @@ function _C() {
       Object.hasOwn(e, "input2"))
   )
 }
-var h8 = (e) => {
+var filterValidSuggestions = (e) => {
     let t = new Map()
     for (let r of e.filter(Boolean)) t.set(r.result.suggestionId, r)
     return Array.from(t.values())
   },
-  Q_ =
+  somePredicatesMatch =
     (...e) =>
     (t) =>
       e.some((r) => r(t))
-function wC(e) {
+function isSuggestionAccepted(e) {
   return e?.state === "accepted"
 }
-function gi(e) {
+function isFreshNonNoopSuggestion(e) {
   return e?.state === "fresh" && e.changeType !== "noop"
 }
 function Zu(e, t, r = !1) {
@@ -100385,7 +100385,7 @@ var vf = class e extends ct {
   }
 }
 var ed = V(require("vscode"))
-var w1 = class e extends ra {
+var w1 = class e extends PanelWebview {
   constructor(r, n, i) {
     let s = ed.window.createWebviewPanel(
       "agent",
@@ -100419,7 +100419,7 @@ var w1 = class e extends ra {
           e.currentPanel = void 0
         }),
       )
-    let o = ss(this._panel.webview, this._workTimer)
+    let o = createAsyncMessageHandler(this._panel.webview, this._workTimer)
     this.addDisposable(o),
       (this._remoteAgentsMessenger = new tg(
         this._api,
@@ -100493,7 +100493,7 @@ var D1 = class extends ct {
   }
 }
 var us = V(require("vscode"))
-var T1 = class e extends X {
+var T1 = class e extends DisposableContainer {
   constructor(r, n, i, s, o, a, l, c) {
     super()
     this._extensionUri = r
@@ -100578,7 +100578,7 @@ var T1 = class e extends X {
     let i = us.Uri.joinPath(r, "history.html").fsPath,
       s = sC(),
       o = Ou(Vu(n), PF(s), Hu(), Wu(), qu())
-    return (await rn(i)).replace(
+    return (await readTextFile(i)).replace(
       /<head>/i,
       `<head><base href="${n.asWebviewUri(us.Uri.joinPath(r, "/")).toString()}" /><meta http-equiv="Content-Security-Policy" content="${o}">`,
     )
@@ -100759,13 +100759,13 @@ var k1 = class extends ct {
 var ds = V(require("vscode"))
 var A8 = V(dm()),
   F1 = V(require("vscode"))
-var SC = class e extends X {
+var SC = class e extends DisposableContainer {
   constructor(r, n, i, s = void 0) {
     super()
     this._workspaceManager = r
     this._webview = n
     this._featureFlagManager = i
-    ;(this._asyncMsgHandler = ss(this._webview, s)),
+    ;(this._asyncMsgHandler = createAsyncMessageHandler(this._webview, s)),
       this.addDisposable(
         this._featureFlagManager.subscribe(
           ["enableWorkspaceManagerUi"],
@@ -100932,7 +100932,7 @@ var P_ = class extends ql {
       (this.name = "ToolConfigParseError")
   }
 }
-var M1 = class e extends ra {
+var M1 = class e extends PanelWebview {
   constructor(
     r,
     n,
@@ -102034,7 +102034,7 @@ var G1 = class extends W1 {
   }
 }
 var V_ = V(require("vscode"))
-var $1 = class extends X {
+var $1 = class extends DisposableContainer {
   constructor(r) {
     super()
     this._metricsReporter = r
@@ -102292,7 +102292,7 @@ var $1 = class extends X {
   }
 }
 var kA = V(require("vscode"))
-var Y1 = class extends X {
+var Y1 = class extends DisposableContainer {
   _logger = j("SuppressDeletedCompletions")
   _inProgressDeletion = void 0
   _prevCompletions = void 0
@@ -102425,7 +102425,7 @@ var Y1 = class extends X {
   }
 }
 var Myt = 2e3,
-  K1 = class extends X {
+  K1 = class extends DisposableContainer {
     constructor(r, n, i, s, o) {
       super()
       this._completionsModel = r
@@ -102523,7 +102523,7 @@ var Myt = 2e3,
     }
   }
 var O_e = V(require("vscode"))
-var Ag = class extends X {
+var Ag = class extends DisposableContainer {
   constructor(r = 100, n = () => !0) {
     super()
     this._itemVerifier = n
@@ -102557,7 +102557,7 @@ function kC(e) {
   let t = q_e.createHash("sha256")
   return t.update(e), t.digest("hex")
 }
-var FC = class e {
+var Range = class e {
     constructor(t, r) {
       this.start = t
       this.stop = r
@@ -102639,8 +102639,8 @@ var FC = class e {
       return n
     }
   },
-  Bo = class extends FC {},
-  Nn = class extends FC {}
+  CharRange = class extends Range {},
+  LineRange = class extends Range {}
 function Qyt(e, t) {
   let r = t.text === void 0 ? "" : t.text,
     n
@@ -102719,7 +102719,7 @@ var b8 = class {
       }
     }
   },
-  J1 = class e extends X {
+  J1 = class e extends DisposableContainer {
     constructor(
       r,
       n,
@@ -102782,9 +102782,9 @@ var b8 = class {
       let a = 500,
         l = r.document.getText().length,
         c = o
-          .map((y) => new Bo(y.range.start, y.range.end))
+          .map((y) => new CharRange(y.range.start, y.range.end))
           .map((y) => y.offset(-a, a, 0, l)),
-        u = FC.mergeTouching(c),
+        u = Range.mergeTouching(c),
         f = u.map((y) =>
           r.document.getText(
             new j1.Range(
@@ -102855,7 +102855,7 @@ function Nyt(e, t) {
     e.range.isEqual(t.range)
   )
 }
-var Z1 = class e extends X {
+var Z1 = class e extends DisposableContainer {
   static _maxDiagnosticsPerFile = 10
   _diagnostics = new Map()
   _logger = j("DiagnosticsManager")
@@ -102938,7 +102938,7 @@ var Z1 = class e extends X {
 var I8 = V(um()),
   fs = V(require("vscode"))
 var Pyt = 5,
-  X1 = class extends X {
+  X1 = class extends DisposableContainer {
     constructor(r, n) {
       super()
       this._keybindingWatcher = r
@@ -103045,7 +103045,7 @@ var Pyt = 5,
       r.setDecorations(this.emptyFileHotKeyHintDecorationType, [])
     }
   },
-  eQ = class extends X {
+  eQ = class extends DisposableContainer {
     constructor(r, n) {
       super()
       this._keybindingWatcher = r
@@ -103270,7 +103270,7 @@ var V_e = new Map([
       },
     ],
   ]),
-  tQ = class extends X {
+  tQ = class extends DisposableContainer {
     _systemStates
     _derivedStates
     _onDerivedStatesSatisfied = new W_e.EventEmitter()
@@ -103385,7 +103385,7 @@ var V_e = new Map([
   }
 var G_e = V(dm()),
   H_ = V(require("vscode"))
-var rQ = class extends X {
+var rQ = class extends DisposableContainer {
   constructor(r, n, i, s, o, a, l) {
     super()
     this._actionsModel = r
@@ -103517,7 +103517,7 @@ var rQ = class extends X {
   }
 }
 var bf = V(require("vscode"))
-var nQ = class extends X {
+var nQ = class extends DisposableContainer {
   constructor(r) {
     super()
     this._onboardingSessionEventReporter = r
@@ -103576,7 +103576,7 @@ var nQ = class extends X {
       bf.commands.executeCommand("vscode.openFolder", a)
   }
 }
-var iQ = class extends X {
+var iQ = class extends DisposableContainer {
   constructor(r, n, i, s) {
     super()
     this._apiServer = r
@@ -103603,7 +103603,7 @@ var iQ = class extends X {
           this.handleDerivedStateChange.bind(this),
         ),
       )
-    let n = ss(r)
+    let n = createAsyncMessageHandler(r)
     this.addDisposable(n),
       n.registerStreamHandler("chat-user-message", (i) =>
         this.onUserSendMessage(i),
@@ -103689,7 +103689,7 @@ var iQ = class extends X {
     }
   }
 }
-var sQ = class extends X {
+var sQ = class extends DisposableContainer {
   constructor(r, n, i) {
     super()
     this._workspaceManager = r
@@ -103999,7 +103999,7 @@ var gQ = class e extends ti {
     return this._apiServer.logOnboardingSessionEvent(r)
   }
 }
-var pQ = class extends X {
+var pQ = class extends DisposableContainer {
   constructor(r, n, i) {
     super()
     this._reporter = r
@@ -104084,7 +104084,7 @@ function Ms(e, t) {
     : new S8.Range(e.start, 0, e.stop, 0)
 }
 function td(e) {
-  return new Nn(e.start.line, e.end.line + (e.end.character > 0 ? 1 : 0))
+  return new LineRange(e.start.line, e.end.line + (e.end.character > 0 ? 1 : 0))
 }
 function Y_e(e) {
   return `[${$_e(e.start)},${$_e(e.end)})`
@@ -104115,7 +104115,7 @@ var QC = class {
       ;(this.title = t), (this.action = r)
     }
   },
-  CQ = class extends X {
+  CQ = class extends DisposableContainer {
     constructor(r, n, i, s, o, a, l) {
       super()
       this._configListener = r
@@ -104140,7 +104140,7 @@ var QC = class {
       this._addTutorial(
         "nextEditSuggestionSeen",
         (s) => s.newSuggestions,
-        gi,
+        isFreshNonNoopSuggestion,
         "You have a Next Edit suggestion available. Next Edit helps you complete your train of thought by suggesting changes that continue your recent work.",
         [
           new QC(
@@ -104207,7 +104207,7 @@ var QC = class {
 function yQ(e) {
   return () => void vQ.commands.executeCommand(e, "tutorial")
 }
-var EQ = class extends X {
+var EQ = class extends DisposableContainer {
   constructor(r, n, i, s, o, a, l, c, u) {
     super()
     this.workspaceManager = r
@@ -104245,7 +104245,7 @@ var EQ = class extends X {
               g.apiResult === We.ok &&
               g.mode === "BACKGROUND" &&
               g.scope !== "WORKSPACE" &&
-              g.suggestions.filter(gi).length === 0
+              g.suggestions.filter(isFreshNonNoopSuggestion).length === 0
             ) {
               let A = $a.window.activeTextEditor,
                 y =
@@ -104269,7 +104269,7 @@ var EQ = class extends X {
           let y = g.accepted
             .map((C) => C.requestId)
             .map((C) =>
-              g.newSuggestions.filter((v) => gi(v) && v.requestId === C),
+              g.newSuggestions.filter((v) => isFreshNonNoopSuggestion(v) && v.requestId === C),
             )
           for (let C of y)
             if (!C.some((v) => v.result.truncationChar === void 0))
@@ -104361,7 +104361,7 @@ var EQ = class extends X {
         .filter(
           (o) =>
             o.qualifiedPathName.equals(n) &&
-            gi(o) &&
+            isFreshNonNoopSuggestion(o) &&
             o.result.truncationChar === void 0,
         ).length > 0)
     ) {
@@ -104458,7 +104458,7 @@ var la = class e {
     })
   }
 }
-var bQ = class extends X {
+var bQ = class extends DisposableContainer {
   _maybeInlineCompletionVisible = new la(!1)
   constructor() {
     super(),
@@ -104478,69 +104478,69 @@ var bQ = class extends X {
 var mwe = V(vs()),
   Ie = V(require("vscode"))
 var rd = V(require("vscode"))
-var D8 = class {
-    constructor(t, r) {
-      this.suggestion = t
-      this.isNext = r
+var HintedSuggestionState = class {
+    constructor(suggestion, isNext) {
+      this.suggestion = suggestion
+      this.isNext = isNext
     }
     toString() {
       return "hinted-suggestion"
     }
   },
-  jn = class {
+  NoSuggestionsState = class {
     constructor() {}
     get suggestion() {}
     toString() {
       return "no-suggestions"
     }
   },
-  gs = class {
-    constructor(t, r) {
-      this.suggestion = t
-      this.isNext = r
+  HintingState = class {
+    constructor(suggestion, isNext) {
+      this.suggestion = suggestion
+      this.isNext = isNext
     }
     toString() {
       return "hinting"
     }
     get hintedSuggestion() {
-      return new D8(this.suggestion, this.isNext)
+      return new HintedSuggestionState(this.suggestion, this.isNext)
     }
   },
-  Ir = class {
-    constructor(t) {
-      this.suggestion = t
+  BeforePreviewState = class {
+    constructor(suggestion) {
+      this.suggestion = suggestion
     }
     toString() {
       return "before-preview"
     }
   },
-  Vt = class {
-    constructor(t) {
-      this.suggestion = t
+  AfterPreviewState = class {
+    constructor(suggestion) {
+      this.suggestion = suggestion
     }
     toString() {
       return "after-preview"
     }
   },
-  Sr = class {
-    constructor(t, r, n) {
-      this.suggestion = t
-      this.selection = r
-      this.timeout = n
+  AnimatingState = class {
+    constructor(suggestion, selection, timeout) {
+      this.suggestion = suggestion
+      this.selection = selection
+      this.timeout = timeout
     }
     toString() {
       return "animating"
     }
   }
 function z_e(e, t) {
-  return e instanceof jn && t instanceof jn
+  return e instanceof NoSuggestionsState && t instanceof NoSuggestionsState
     ? !0
-    : e instanceof gs && t instanceof gs
+    : e instanceof HintingState && t instanceof HintingState
       ? e.suggestion.equals(t.suggestion) && e.isNext === t.isNext
-      : (e instanceof Ir && t instanceof Ir) ||
-          (e instanceof Vt && t instanceof Vt)
+      : (e instanceof BeforePreviewState && t instanceof BeforePreviewState) ||
+          (e instanceof AfterPreviewState && t instanceof AfterPreviewState)
         ? e.suggestion.equals(t.suggestion)
-        : e instanceof Sr && t instanceof Sr
+        : e instanceof AnimatingState && t instanceof AnimatingState
           ? e.suggestion.equals(t.suggestion) &&
             e.selection.isEqual(t.selection) &&
             e.timeout === t.timeout
@@ -104554,9 +104554,9 @@ var xQ = class {
   _onDidChangeCodeLenses = new rd.EventEmitter()
   onDidChangeCodeLenses = this._onDidChangeCodeLenses.event
   get _activeSuggestion() {
-    return this._state.value instanceof Ir ||
-      this._state.value instanceof Vt ||
-      this._state.value instanceof Sr
+    return this._state.value instanceof BeforePreviewState ||
+      this._state.value instanceof AfterPreviewState ||
+      this._state.value instanceof AnimatingState
       ? this._state.value.suggestion
       : void 0
   }
@@ -104590,7 +104590,7 @@ var xQ = class {
           command: "",
         }),
       ),
-      this._state.value instanceof Vt || this._state.value instanceof Sr
+      this._state.value instanceof AfterPreviewState || this._state.value instanceof AnimatingState
         ? i.push(this._buildCodeLens("Undo", Io.commandID, s))
         : i.push(this._buildCodeLens("Apply", Qc.commandID, s)),
       i.push(this._buildCodeLens("Reject", Nc.commandID, s)),
@@ -104601,7 +104601,7 @@ var xQ = class {
 var NC = require("vscode")
 var J_e = new NC.EventEmitter(),
   FA = J_e.event,
-  W_ = class extends X {
+  W_ = class extends DisposableContainer {
     constructor(r, n, i) {
       super()
       this._reportId = n
@@ -104634,7 +104634,7 @@ var J_e = new NC.EventEmitter(),
 var PC = require("vscode")
 var _Q = new PC.EventEmitter(),
   IQ = _Q.event,
-  wQ = class extends X {
+  wQ = class extends DisposableContainer {
     constructor(r, n, i) {
       super()
       this._repoRoot = r
@@ -104836,7 +104836,7 @@ function Cg(e, t) {
 var iwe = V(require("assert")),
   TQ = V(require("vscode"))
 var nwe = j("DecorationManager"),
-  RQ = class extends X {
+  RQ = class extends DisposableContainer {
     previousDecorationsPerEditor = new Map()
     addExtraDecorationsForActiveEditor(t, r, n, i) {
       return t
@@ -104878,28 +104878,28 @@ var nwe = j("DecorationManager"),
       this.previousDecorationsPerEditor = n
     }
   }
-var Ya = class e {
-  constructor(t, r, n, i, s, o, a = "file", l = new Date(), c = "fresh") {
-    this.requestId = t
-    this.mode = r
-    this.scope = n
-    this.result = i
-    this.qualifiedPathName = s
-    this.lineRange = o
-    this.uriScheme = a
-    this.occurredAt = l
-    this.state = c
-    ;(this.changeType = e.determineChangeType(
+var EditSuggestion = class EditSuggestion {
+  constructor(requestId, mode, scope, result, qualifiedPathName, lineRange, uriScheme = "file", occurredAt = new Date(), state = "fresh") {
+    this.requestId = requestId
+    this.mode = mode
+    this.scope = scope
+    this.result = result
+    this.qualifiedPathName = qualifiedPathName
+    this.lineRange = lineRange
+    this.uriScheme = uriScheme
+    this.occurredAt = occurredAt
+    this.state = state
+    ;(this.changeType = EditSuggestion.determineChangeType(
       this.result.existingCode,
       this.result.suggestedCode,
     )),
       this.changeType === "modification" &&
         this.makeOneLineDiffSpans()
-          .filter((f) => f.type !== "noop")
-          .every((f) => f.type === "insertion" && f.updated.isWholeLine) &&
+          .filter((diffSpan) => diffSpan.type !== "noop")
+          .every((diffSpan) => diffSpan.type === "insertion" && diffSpan.updated.isWholeLine) &&
         (this.changeType = "insertion"),
       this.changeType === "insertion" && this.lineRange.start > 0
-        ? (this.highlightRange = new Nn(
+        ? (this.highlightRange = new LineRange(
             this.lineRange.start - 1,
             this.lineRange.stop -
               (this.lineRange.stop > this.lineRange.start &&
@@ -104911,35 +104911,35 @@ var Ya = class e {
         : this.changeType === "insertion" &&
             this.lineRange.start === 0 &&
             this.lineRange.stop === 0
-          ? (this.highlightRange = new Nn(0, 1))
+          ? (this.highlightRange = new LineRange(0, 1))
           : (this.highlightRange = this.lineRange)
   }
   changeType
   highlightRange
-  previewCursorRange(t) {
-    let r = this.previewBoxRange(t)
-    return new Nn(Math.max(0, r.start - 1), r.stop)
+  previewCursorRange(document) {
+    let boxRange = this.previewBoxRange(document)
+    return new LineRange(Math.max(0, boxRange.start - 1), boxRange.stop)
   }
-  previewBoxRange(t) {
-    let r = this.state === "accepted",
-      n = r ? this.afterLineRange(t) : this.highlightRange
+  previewBoxRange(document) {
+    let isAccepted = this.state === "accepted",
+      range = isAccepted ? this.afterLineRange(document) : this.highlightRange
     return (
-      r &&
-        (this.changeType === "deletion" && n.start > 0
-          ? (n = new Nn(
-              n.start - 1,
-              n.stop -
-                (n.stop > n.start &&
+      isAccepted &&
+        (this.changeType === "deletion" && range.start > 0
+          ? (range = new LineRange(
+              range.start - 1,
+              range.stop -
+                (range.stop > range.start &&
                 this.result.suggestedCode.indexOf(`
 `) === -1
                   ? 1
                   : 0),
             ))
           : this.changeType === "deletion" &&
-            n.start === 0 &&
-            n.stop === 0 &&
-            (n = new Nn(0, 1))),
-      n
+            range.start === 0 &&
+            range.stop === 0 &&
+            (range = new LineRange(0, 1))),
+      range
     )
   }
   get previewTargetCursorLine() {
@@ -104948,115 +104948,115 @@ var Ya = class e {
   toString() {
     return `EditSuggestion(${this.qualifiedPathName.relPath}:${this.lineRange.toString()})`
   }
-  equals(t) {
-    return this.result.suggestionId === t?.result.suggestionId
+  equals(other) {
+    return this.result.suggestionId === other?.result.suggestionId
   }
-  compareTo(t) {
-    return this.qualifiedPathName.equals(t.qualifiedPathName)
-      ? this.lineRange.compareTo(t.lineRange)
+  compareTo(other) {
+    return this.qualifiedPathName.equals(other.qualifiedPathName)
+      ? this.lineRange.compareTo(other.lineRange)
       : this.qualifiedPathName.relPath.localeCompare(
-          t.qualifiedPathName.relPath,
+          other.qualifiedPathName.relPath,
         )
   }
   makeOneLineDiffSpans() {
-    return e.makeOneLineDiffSpans(
+    return EditSuggestion.makeOneLineDiffSpans(
       this.result.diffSpans,
       this.result.existingCode,
       this.result.suggestedCode,
       this.lineRange,
     )
   }
-  static determineChangeType(t, r) {
-    return t === r
+  static determineChangeType(existingCode, suggestedCode) {
+    return existingCode === suggestedCode
       ? "noop"
-      : t === ""
+      : existingCode === ""
         ? "insertion"
-        : r === ""
+        : suggestedCode === ""
           ? "deletion"
           : "modification"
   }
-  static makeOneLineDiffSpans(t, r, n, i) {
-    if (!t) return []
-    let s = t.sort((f, p) => f.original.start - p.original.start),
-      o = [],
-      a = i.start,
-      l = i.start,
-      c = !0,
-      u = !0
-    for (let f of s) {
-      let p = r.slice(f.original.start, f.original.stop),
-        g = n.slice(f.updated.start, f.updated.stop),
-        A = e.determineChangeType(p, g),
-        y = p.split(`
+  static makeOneLineDiffSpans(diffSpans, existingCode, suggestedCode, lineRange) {
+    if (!diffSpans) return []
+    let sortedDiffSpans = diffSpans.sort((a, b) => a.original.start - b.original.start),
+      oneLineDiffSpans = [],
+      originalLine = lineRange.start,
+      updatedLine = lineRange.start,
+      isOriginalWholeLine = true,
+      isUpdatedWholeLine = true
+    for (let diffSpan of sortedDiffSpans) {
+      let originalText = existingCode.slice(diffSpan.original.start, diffSpan.original.stop),
+        updatedText = suggestedCode.slice(diffSpan.updated.start, diffSpan.updated.stop),
+        changeType = EditSuggestion.determineChangeType(originalText, updatedText),
+        originalLines = originalText.split(`
 `),
-        C = g.split(`
+        updatedLines = updatedText.split(`
 `),
-        v = Math.max(y.length, C.length),
-        b = f.original.start,
-        w = f.updated.start
-      for (let B = 0; B < v; B++) {
-        let F = y.length > B ? y[B] : "",
-          Q = C.length > B ? C[B] : ""
+        maxLines = Math.max(originalLines.length, updatedLines.length),
+        originalCharPos = diffSpan.original.start,
+        updatedCharPos = diffSpan.updated.start
+      for (let lineIndex = 0; lineIndex < maxLines; lineIndex++) {
+        let originalLineText = originalLines.length > lineIndex ? originalLines[lineIndex] : "",
+          updatedLineText = updatedLines.length > lineIndex ? updatedLines[lineIndex] : ""
         if (
-          (B < y.length - 1 &&
-            (F += `
+          (lineIndex < originalLines.length - 1 &&
+            (originalLineText += `
 `),
-          B < C.length - 1 &&
-            (Q += `
+          lineIndex < updatedLines.length - 1 &&
+            (updatedLineText += `
 `),
-          F === "" && Q === "")
+          originalLineText === "" && updatedLineText === "")
         )
           continue
-        let W = A
-        o.push({
+        let spanType = changeType
+        oneLineDiffSpans.push({
           original: {
-            text: F,
-            charRange: new Bo(b, b + F.length),
-            line: a,
+            text: originalLineText,
+            charRange: new CharRange(originalCharPos, originalCharPos + originalLineText.length),
+            line: originalLine,
             isWholeLine:
-              c &&
-              F.endsWith(`
+              isOriginalWholeLine &&
+              originalLineText.endsWith(`
 `),
           },
           updated: {
-            text: Q,
-            charRange: new Bo(w, w + Q.length),
-            line: l,
+            text: updatedLineText,
+            charRange: new CharRange(updatedCharPos, updatedCharPos + updatedLineText.length),
+            line: updatedLine,
             isWholeLine:
-              u &&
-              Q.endsWith(`
+              isUpdatedWholeLine &&
+              updatedLineText.endsWith(`
 `),
           },
-          type: W,
+          type: spanType,
         }),
-          (b += F.length),
-          (w += Q.length),
-          F.endsWith(`
+          (originalCharPos += originalLineText.length),
+          (updatedCharPos += updatedLineText.length),
+          originalLineText.endsWith(`
 `)
-            ? (a++, (c = !0))
-            : (c = !1),
-          Q.endsWith(`
+            ? (originalLine++, (isOriginalWholeLine = true))
+            : (isOriginalWholeLine = false),
+          updatedLineText.endsWith(`
 `)
-            ? (l++, (u = !0))
-            : (u = !1)
+            ? (updatedLine++, (isUpdatedWholeLine = true))
+            : (isUpdatedWholeLine = false)
       }
     }
-    return o.filter((f) => f.original.text !== "" || f.updated.text !== "")
+    return oneLineDiffSpans.filter((span) => span.original.text !== "" || span.updated.text !== "")
   }
-  afterLineRange(t) {
+  afterLineRange(document) {
     return this.state !== "accepted"
       ? this.lineRange
-      : t
-        ? this.result.charStart + Tl(this.result.suggestedCode) >
-          Tl(t.getText())
+      : document
+        ? this.result.charStart + getTextLength(this.result.suggestedCode) >
+          getTextLength(document.getText())
           ? this.lineRange
-          : new Nn(
-              t.positionAt(this.result.charStart).line,
-              t.positionAt(
-                this.result.charStart + Tl(this.result.suggestedCode),
+          : new LineRange(
+              document.positionAt(this.result.charStart).line,
+              document.positionAt(
+                this.result.charStart + getTextLength(this.result.suggestedCode),
               ).line,
             )
-        : new Nn(
+        : new LineRange(
             this.lineRange.start,
             this.lineRange.stop +
               this.result.suggestedCode.split(`
@@ -105065,43 +105065,43 @@ var Ya = class e {
 `).length,
           )
   }
-  intersects(t) {
+  intersects(other) {
     return (
-      this.qualifiedPathName.equals(t.qualifiedPathName) &&
-      (this.lineRange.equals(t.lineRange) ||
-        this.lineRange.intersects(t.lineRange))
+      this.qualifiedPathName.equals(other.qualifiedPathName) &&
+      (this.lineRange.equals(other.lineRange) ||
+        this.lineRange.intersects(other.lineRange))
     )
   }
-  with(t) {
-    return new e(
-      t.requestId ?? this.requestId,
-      t.mode ?? this.mode,
-      t.scope ?? this.scope,
-      t.result ?? this.result,
-      t.qualifiedPathName ?? this.qualifiedPathName,
-      t.lineRange ?? this.lineRange,
-      t.uriScheme ?? this.uriScheme,
-      t.occurredAt ?? this.occurredAt,
-      t.state ?? this.state,
+  with(updates) {
+    return new EditSuggestion(
+      updates.requestId ?? this.requestId,
+      updates.mode ?? this.mode,
+      updates.scope ?? this.scope,
+      updates.result ?? this.result,
+      updates.qualifiedPathName ?? this.qualifiedPathName,
+      updates.lineRange ?? this.lineRange,
+      updates.uriScheme ?? this.uriScheme,
+      updates.occurredAt ?? this.occurredAt,
+      updates.state ?? this.state,
     )
   }
-  static from(t) {
-    return new e(
-      t.requestId,
-      t.mode,
-      t.scope,
-      t.result,
-      qe.from(t.qualifiedPathName),
-      new Nn(t.lineRange.start, t.lineRange.stop),
-      t.uriScheme,
-      t.occurredAt,
-      t.state,
+  static from(data) {
+    return new EditSuggestion(
+      data.requestId,
+      data.mode,
+      data.scope,
+      data.result,
+      QualifiedPathName.from(data.qualifiedPathName),
+      new LineRange(data.lineRange.start, data.lineRange.stop),
+      data.uriScheme,
+      data.occurredAt,
+      data.state,
     )
   }
 }
 var Vc = V(require("vscode"))
 var swe = { border: 0, background: 1, line: 2 },
-  kQ = class extends X {
+  kQ = class extends DisposableContainer {
     constructor(r) {
       super()
       this._styles = r
@@ -105792,8 +105792,8 @@ var FQ = class e extends RQ {
       !(c[0] && c[0].type === "insertion" && c[0].updated.isWholeLine))
       ? (f = u)
       : n.document.lineAt(u.start - 1).text.length > 0
-        ? (f = new Nn(u.start - 1, u.stop))
-        : (f = new Nn(u.start - 1, u.stop - 1))
+        ? (f = new LineRange(u.start - 1, u.stop))
+        : (f = new LineRange(u.start - 1, u.stop - 1))
     let p = (ee) => {
         l ||
           (this._filesWithGutterIconActions.add(i.qualifiedPathName.absPath),
@@ -105975,8 +105975,8 @@ var FQ = class e extends RQ {
         (a.changeType !== "insertion" || a.lineRange.start === 0
           ? (f = a.lineRange)
           : n.document.lineAt(a.lineRange.start - 1).text.length > 0
-            ? (f = new Nn(a.lineRange.start - 1, a.lineRange.stop))
-            : (f = new Nn(a.lineRange.start - 1, a.lineRange.stop - 1)),
+            ? (f = new LineRange(a.lineRange.start - 1, a.lineRange.stop))
+            : (f = new LineRange(a.lineRange.start - 1, a.lineRange.stop - 1)),
         l)
       ) {
         let p = u.intersection(Ms(f)),
@@ -106022,7 +106022,7 @@ var FQ = class e extends RQ {
         this.addKeybindingDecor(n.selection.active.line, r, n)
         let c = "in file: "
         this.addGrayText(
-          `${c}${ac(a.qualifiedPathName.relPath, e._maxGrayTextChars - Tl(c), !0)}`,
+          `${c}${ac(a.qualifiedPathName.relPath, e._maxGrayTextChars - getTextLength(c), !0)}`,
           n.selection.active.line,
           r,
           n,
@@ -106145,7 +106145,7 @@ function Wyt(e, t, r) {
   for (let o of t.result.diffSpans) {
     let a = n.slice(o.original.start, o.original.stop),
       l = i.slice(o.updated.start, o.updated.stop),
-      c = Ya.determineChangeType(a, l),
+      c = EditSuggestion.determineChangeType(a, l),
       u = r ? o.original : o.updated,
       f = t.result.charStart + u.start,
       p = t.result.charStart + u.stop
@@ -106167,7 +106167,7 @@ var MQ = class {
   }
   provideCodeActions(t, r, n, i) {
     if (!this._configListener.config.enableDebugFeatures) return
-    let s = new Nn(r.start.line, r.end.line),
+    let s = new LineRange(r.start.line, r.end.line),
       o = this._suggestionManager
         .getActiveSuggestions()
         .find(
@@ -106488,11 +106488,11 @@ function lwe(e, t, r, n, i) {
 }
 function OC(e, t) {
   let r = e.toString()
-  return t - Tl(r) >= 0 ? " ".repeat(t - r.length) + r : r
+  return t - getTextLength(r) >= 0 ? " ".repeat(t - r.length) + r : r
 }
 function cwe(e, t) {
   let r = e.toString()
-  return t - Tl(r) >= 0 ? r + " ".repeat(t - r.length) : r
+  return t - getTextLength(r) >= 0 ? r + " ".repeat(t - r.length) : r
 }
 function Y_(e) {
   return e.endsWith(`
@@ -106516,7 +106516,7 @@ function fwe(e) {
   return `<a href="${e.href}" title="${e.tooltip}">${e.text}${e.keybindingIcons ? `&nbsp;${e.keybindingIcons}` : ""}</a>`
 }
 var jyt = 38,
-  NQ = class e extends X {
+  NQ = class e extends DisposableContainer {
     constructor(r, n, i, s, o, a, l, c, u) {
       super()
       this._keybindingWatcher = r
@@ -106565,9 +106565,9 @@ var jyt = 38,
       let n = r.textEditor.document,
         i = this._state.value.suggestion
       i &&
-        (this._state.value instanceof Ir ||
-          this._state.value instanceof Vt ||
-          this._state.value instanceof Sr) &&
+        (this._state.value instanceof BeforePreviewState ||
+          this._state.value instanceof AfterPreviewState ||
+          this._state.value instanceof AnimatingState) &&
         i.qualifiedPathName.equals(n.uri) &&
         r.visibleRanges.some((s) => s.contains(Ms(i.highlightRange))) &&
         this.showHover()
@@ -106634,7 +106634,7 @@ var jyt = 38,
       let s,
         o = []
       i =
-        this._state.value instanceof jn || this._state.value instanceof gs
+        this._state.value instanceof NoSuggestionsState || this._state.value instanceof HintingState
           ? i
           : void 0
       let a = ["hover-click", i?.result.suggestionId ?? void 0],
@@ -106674,8 +106674,8 @@ var jyt = 38,
         },
         A = c(cg, "Learn More", "Learn More")
       if (
-        ((((this._state.value instanceof Ir ||
-          this._state.value instanceof Vt) &&
+        ((((this._state.value instanceof BeforePreviewState ||
+          this._state.value instanceof AfterPreviewState) &&
           this._state.value.suggestion
             ?.previewCursorRange(r)
             .contains(n.line)) ||
@@ -106689,7 +106689,7 @@ var jyt = 38,
             p,
             g,
           ])),
-        this._state.value instanceof Vt)
+        this._state.value instanceof AfterPreviewState)
       ) {
         let y = this._state.value.suggestion.previewCursorRange(r)
         ;(y.contains(n.line) ||
@@ -106810,28 +106810,28 @@ var Zyt = new Map([
     [_A, "vscode-augment.nextEdit.canRejectAll"],
     [Io, "vscode-augment.nextEdit.canUndoAcceptSuggestion"],
   ]),
-  PQ = class extends X {
+  PQ = class extends DisposableContainer {
     constructor(r) {
       super()
       this._state = r
       this.addDisposable(
         new gwe.Disposable(
           this._state.listen((n) => {
-            let i = !(n instanceof jn)
+            let i = !(n instanceof NoSuggestionsState)
             this._set(Ga, i),
               this._set(oa, i),
               this._set(Ju, i),
               this._set(
                 Qc,
-                n instanceof Ir || n instanceof Sr || n instanceof Vt,
+                n instanceof BeforePreviewState || n instanceof AnimatingState || n instanceof AfterPreviewState,
               ),
               this._set(
                 Nc,
-                n instanceof Ir || n instanceof Sr || n instanceof Vt,
+                n instanceof BeforePreviewState || n instanceof AnimatingState || n instanceof AfterPreviewState,
               ),
-              this._set(Io, n instanceof Vt),
+              this._set(Io, n instanceof AfterPreviewState),
               this._set(zu, i),
-              this._set(gf, n instanceof Vt),
+              this._set(gf, n instanceof AfterPreviewState),
               this._set(xA, i),
               this._set(_A, i)
           }, !0),
@@ -106848,7 +106848,7 @@ var Zyt = new Map([
       i && Rc(i, n)
     }
   }
-var LQ = class e extends X {
+var LQ = class e extends DisposableContainer {
   constructor(r, n, i, s, o, a, l, c, u, f, p = (g) => {}) {
     super()
     this.workspaceManager = n
@@ -106860,7 +106860,7 @@ var LQ = class e extends X {
     this._nextEditConfigManager = u
     this._completionVisibilityWatcher = f
     this._onCursorWithinSuggestion = p
-    ;(this._state = new la(new jn(), z_e)),
+    ;(this._state = new la(new NoSuggestionsState(), z_e)),
       (this._decorationManager = new FQ(
         r,
         n,
@@ -106894,7 +106894,7 @@ var LQ = class e extends X {
       (this._codeLensProvider = new xQ(this._state, s)),
       this.addDisposable(
         new Ie.Disposable(() => {
-          ;(this._state.value = new jn()),
+          ;(this._state.value = new NoSuggestionsState()),
             this._state.dispose(),
             this._decorationManager.decorate([], {}),
             this._hoverProvider.hideHover("command")
@@ -106917,7 +106917,7 @@ var LQ = class e extends X {
       this.addDisposable(
         new Ie.Disposable(
           this._requestManager.lastResponse.listen((g) => {
-            g && this._suggestionManager.add([Ya.from(g)], g.mode === "FORCED")
+            g && this._suggestionManager.add([EditSuggestion.from(g)], g.mode === "FORCED")
           }),
         ),
       ),
@@ -107011,15 +107011,15 @@ var LQ = class e extends X {
         new Ie.Disposable(
           this._state.listen((g) => {
             let A
-            g instanceof jn
+            g instanceof NoSuggestionsState
               ? (A = "state-transitioned-to-no-suggestions")
-              : g instanceof gs
+              : g instanceof HintingState
                 ? (A = "state-transitioned-to-hinting")
-                : g instanceof Ir
+                : g instanceof BeforePreviewState
                   ? (A = "state-transitioned-to-before-preview")
-                  : g instanceof Vt
+                  : g instanceof AfterPreviewState
                     ? (A = "state-transitioned-to-after-preview")
-                    : g instanceof Sr &&
+                    : g instanceof AnimatingState &&
                       (A = "state-transitioned-to-animating"),
               A !== void 0 &&
                 this._nextEditSessionEventReporter.reportEventFromSuggestion(
@@ -107084,14 +107084,14 @@ var LQ = class e extends X {
       : 0
   }
   dismiss(r, n = !1, i = !0) {
-    this._state.value instanceof Ir || this._state.value instanceof Sr
-      ? ((this._state.value = new gs(this._state.value.suggestion, !0)),
+    this._state.value instanceof BeforePreviewState || this._state.value instanceof AnimatingState
+      ? ((this._state.value = new HintingState(this._state.value.suggestion, !0)),
         i && this._suggestionManager.clearJustAcceptedSuggestions(),
         this._nextEditSessionEventReporter.reportEventWithoutIds(
           "preview-decoration-dismissed",
           r ?? "command",
         ))
-      : this._state.value instanceof Vt &&
+      : this._state.value instanceof AfterPreviewState &&
         ((this._state.value = this._getHintedState()),
         i && this._suggestionManager.clearJustAcceptedSuggestions(),
         this._nextEditSessionEventReporter.reportEventWithoutIds(
@@ -107102,13 +107102,13 @@ var LQ = class e extends X {
   }
   async dismissOrReject(r) {
     let n = Ie.window.activeTextEditor
-    this._state.value instanceof Vt
+    this._state.value instanceof AfterPreviewState
       ? (await this._undoSuggestions(this._state.value.suggestion),
         this.dismiss(r, !0))
-      : this._state.value instanceof Ir || this._state.value instanceof Sr
+      : this._state.value instanceof BeforePreviewState || this._state.value instanceof AnimatingState
         ? this.dismiss(r)
         : n &&
-            this._state.value instanceof gs &&
+            this._state.value instanceof HintingState &&
             this._hoverProvider.hoverContactCondition(
               this._state.value.suggestion,
               n.selection.active,
@@ -107123,10 +107123,10 @@ var LQ = class e extends X {
     this._configListener.config.nextEdit.highlightSuggestionsInTheEditor
   nextAvailableSuggestion = (r = !0, n = !1) =>
     Awe(
-      this._suggestionManager.getActiveSuggestions().filter(gi),
-      this._state.value instanceof Ir ||
-        this._state.value instanceof Vt ||
-        this._state.value instanceof Sr
+      this._suggestionManager.getActiveSuggestions().filter(isFreshNonNoopSuggestion),
+      this._state.value instanceof BeforePreviewState ||
+        this._state.value instanceof AfterPreviewState ||
+        this._state.value instanceof AnimatingState
         ? this._state.value.suggestion
         : void 0,
       !r,
@@ -107143,7 +107143,7 @@ var LQ = class e extends X {
             s.lineRange.contains(n.selection.active.line) ||
             s.lineRange.touches(n.selection.active.line),
         )
-    if (i && this._state.value instanceof Vt) {
+    if (i && this._state.value instanceof AfterPreviewState) {
       await this._suggestionManager.suggestionWasJustUndone.waitUntil(
         (o) => o === !0,
         e._waitForAcceptTimeoutMs,
@@ -107151,7 +107151,7 @@ var LQ = class e extends X {
       let s = this._getSuggestionSelection(i)
       s.isEqual(n.selection) ||
         ((this._ignoreSelectionChangeEvents = !0), (n.selection = s)),
-        (this._state.value = new Ir(i)),
+        (this._state.value = new BeforePreviewState(i)),
         this._nextEditSessionEventReporter.reportEventFromSuggestion(
           this._state.value.suggestion,
           "undid-accepted-suggestion",
@@ -107162,7 +107162,7 @@ var LQ = class e extends X {
     if (
       n &&
       r.accepted.length > 0 &&
-      (this._state.value instanceof Ir || this._state.value instanceof Sr)
+      (this._state.value instanceof BeforePreviewState || this._state.value instanceof AnimatingState)
     ) {
       await this._suggestionManager.suggestionWasJustAccepted.waitUntil(
         (a) => a === !0,
@@ -107172,13 +107172,13 @@ var LQ = class e extends X {
         o = this._getSuggestionSelection(s)
       o.isEqual(n.selection) ||
         ((this._ignoreSelectionChangeEvents = !0), (n.selection = o)),
-        (this._state.value = new Vt(s)),
+        (this._state.value = new AfterPreviewState(s)),
         this._hoverProvider.showHover()
     } else r.accepted.length > 0 && (this._ignoreSelectionChangeEvents = !0)
   }
   _updateSuggestions(r, n) {
     if (_C()) return
-    let i = r.filter(gi)
+    let i = r.filter(isFreshNonNoopSuggestion)
     if (
       (this._configListener.config.nextEdit.enableGlobalBackgroundSuggestions
         ? i
@@ -107188,13 +107188,13 @@ var LQ = class e extends X {
             ),
           )
       ).length === 0 &&
-      this._state.value instanceof gs
+      this._state.value instanceof HintingState
     ) {
-      ;(this._state.value = new jn()), this._onCursorWithinSuggestion(void 0)
+      ;(this._state.value = new NoSuggestionsState()), this._onCursorWithinSuggestion(void 0)
       return
     }
     n &&
-      (this._state.value instanceof jn || this._state.value instanceof gs) &&
+      (this._state.value instanceof NoSuggestionsState || this._state.value instanceof HintingState) &&
       (this._state.value = this._getHintedState()),
       this._drawDecorations()
   }
@@ -107209,21 +107209,21 @@ var LQ = class e extends X {
       this._decorationManager.decorate([], {})
       return
     }
-    let r = this._suggestionManager.getActiveSuggestions().filter(gi),
+    let r = this._suggestionManager.getActiveSuggestions().filter(isFreshNonNoopSuggestion),
       n = this._suggestionManager.getJustAcceptedSuggestions(),
       i =
-        this._state.value instanceof gs
+        this._state.value instanceof HintingState
           ? this._state.value
           : this._getHintedState()
     this._decorationManager.decorate(r.concat(n), {
-      hintSuggestion: i instanceof gs ? i.hintedSuggestion : void 0,
+      hintSuggestion: i instanceof HintingState ? i.hintedSuggestion : void 0,
       activeSuggestion:
-        this._state.value instanceof Ir ||
-        this._state.value instanceof Vt ||
-        this._state.value instanceof Sr
+        this._state.value instanceof BeforePreviewState ||
+        this._state.value instanceof AfterPreviewState ||
+        this._state.value instanceof AnimatingState
           ? this._state.value.suggestion
           : void 0,
-      isAnimating: this._state.value instanceof Sr,
+      isAnimating: this._state.value instanceof AnimatingState,
     })
   }
   _handleTextDocumentChanged = (r) => {
@@ -107234,8 +107234,8 @@ var LQ = class e extends X {
     !i ||
       r.document !== i.document ||
       (this._clearAnimatedApply(),
-      (this._state.value instanceof Vt || this._state.value instanceof Sr) &&
-        ((this._state.value = new jn()),
+      (this._state.value instanceof AfterPreviewState || this._state.value instanceof AnimatingState) &&
+        ((this._state.value = new NoSuggestionsState()),
         this._nextEditSessionEventReporter.reportEventWithoutIds(
           "reverse-decoration-dismissed",
           "document-changed",
@@ -107259,15 +107259,15 @@ var LQ = class e extends X {
         r.kind === Ie.TextEditorSelectionChangeKind.Mouse
       ) && this._ignoreSelectionChangeEvents
     ;(this._ignoreSelectionChangeEvents = !1),
-      (this._state.value instanceof Ir ||
-        this._state.value instanceof Sr ||
-        this._state.value instanceof Vt) &&
+      (this._state.value instanceof BeforePreviewState ||
+        this._state.value instanceof AnimatingState ||
+        this._state.value instanceof AfterPreviewState) &&
       !s
         ? this.dismiss("editor-selection-changed")
         : s || this._suggestionManager.clearJustAcceptedSuggestions(),
-      (this._state.value instanceof jn ||
-        this._state.value instanceof gs ||
-        (this._state.value instanceof Sr &&
+      (this._state.value instanceof NoSuggestionsState ||
+        this._state.value instanceof HintingState ||
+        (this._state.value instanceof AnimatingState &&
           !this._getSuggestionSelection(this._state.value.suggestion).isEqual(
             n.selection,
           ))) &&
@@ -107321,9 +107321,9 @@ var LQ = class e extends X {
           !0
         )
     } else
-      (this._state.value instanceof Ir ||
-        this._state.value instanceof Sr ||
-        this._state.value instanceof Vt) &&
+      (this._state.value instanceof BeforePreviewState ||
+        this._state.value instanceof AnimatingState ||
+        this._state.value instanceof AfterPreviewState) &&
         (o = this._state.value.suggestion)
     return this.acceptSuggestion(o, r, n, s)
   }
@@ -107338,7 +107338,7 @@ var LQ = class e extends X {
         !1
       )
     if (
-      this._state.value instanceof Vt &&
+      this._state.value instanceof AfterPreviewState &&
       this._state.value.suggestion?.equals(r)
     )
       return this.dismiss(n), !1
@@ -107364,7 +107364,7 @@ var LQ = class e extends X {
       "accept",
       n ?? "command",
     ),
-      this._state.value instanceof Ir || (this._state.value = new Ir(r)),
+      this._state.value instanceof BeforePreviewState || (this._state.value = new BeforePreviewState(r)),
       pwe(),
       this._suggestionManager.accept([r])
     try {
@@ -107384,7 +107384,7 @@ var LQ = class e extends X {
       Ie.window.showInformationMessage("No Next Edits to accept.")
       return
     }
-    ;(this._state.value = new jn()),
+    ;(this._state.value = new NoSuggestionsState()),
       pwe(),
       this._hoverProvider.hideHover("command")
     for (let i of r)
@@ -107399,7 +107399,7 @@ var LQ = class e extends X {
     let i = Fs(r),
       s = this._suggestionManager
         .getActiveSuggestions()
-        .filter(gi)
+        .filter(isFreshNonNoopSuggestion)
         .filter((o) => i === o.qualifiedPathName.absPath)
     this._acceptSuggestions(s, n),
       this._nextEditSessionEventReporter.reportEventWithoutIds(
@@ -107408,7 +107408,7 @@ var LQ = class e extends X {
       )
   }
   acceptAllSuggestions(r) {
-    let n = this._suggestionManager.getActiveSuggestions().filter(gi)
+    let n = this._suggestionManager.getActiveSuggestions().filter(isFreshNonNoopSuggestion)
     this._acceptSuggestions(n, r),
       this._nextEditSessionEventReporter.reportEventWithoutIds(
         "accept-all",
@@ -107420,9 +107420,9 @@ var LQ = class e extends X {
     return (
       n
         ? (i = this._suggestionManager.findSuggestionById(n))
-        : (this._state.value instanceof Ir ||
-            this._state.value instanceof Vt ||
-            this._state.value instanceof Sr) &&
+        : (this._state.value instanceof BeforePreviewState ||
+            this._state.value instanceof AfterPreviewState ||
+            this._state.value instanceof AnimatingState) &&
           (i = this._state.value.suggestion),
       this.rejectSuggestion(i, r)
     )
@@ -107436,9 +107436,9 @@ var LQ = class e extends X {
           `Current suggestion ${r.qualifiedPathName.relPath} does not match active document ${Ie.window.activeTextEditor?.document.uri.toString()}`,
         )
     let i = this._state.value
-    this._state.value instanceof Sr
-      ? (this._clearAnimatedApply(), (this._state.value = new jn()))
-      : (this._state.value = new jn())
+    this._state.value instanceof AnimatingState
+      ? (this._clearAnimatedApply(), (this._state.value = new NoSuggestionsState()))
+      : (this._state.value = new NoSuggestionsState())
     let s,
       o,
       a = !1
@@ -107447,7 +107447,7 @@ var LQ = class e extends X {
         this._suggestionManager.reject(s),
         (o = "reject"),
         (a = r.state === "accepted"))
-      : ((s = this._suggestionManager.getActiveSuggestions().filter(gi)),
+      : ((s = this._suggestionManager.getActiveSuggestions().filter(isFreshNonNoopSuggestion)),
         this._suggestionManager.reject(s),
         (o = "reject-all")),
       this._drawDecorations(),
@@ -107458,7 +107458,7 @@ var LQ = class e extends X {
         o,
         n ?? "command",
       )
-    i instanceof Vt
+    i instanceof AfterPreviewState
       ? this._undoSuggestions(i.suggestion)
       : r && a && this._undoSuggestions(r)
   }
@@ -107474,7 +107474,7 @@ var LQ = class e extends X {
       Ie.window.showInformationMessage("No Next Edits to reject.")
       return
     }
-    ;(this._state.value = new jn()),
+    ;(this._state.value = new NoSuggestionsState()),
       this._hoverProvider.hideHover("command"),
       this._suggestionManager.reject(r),
       this._requestManager?.clearCompletedRequests("FORCED")
@@ -107492,7 +107492,7 @@ var LQ = class e extends X {
         .filter((a) => i === a.qualifiedPathName.absPath),
       o = this._suggestionManager
         .getActiveSuggestions()
-        .filter(gi)
+        .filter(isFreshNonNoopSuggestion)
         .filter((a) => i === a.qualifiedPathName.absPath)
         .concat(s)
     this._rejectSuggestions(o, n),
@@ -107504,7 +107504,7 @@ var LQ = class e extends X {
   }
   rejectAllSuggestions(r) {
     let n = this._suggestionManager.getJustAcceptedSuggestions(),
-      i = this._suggestionManager.getActiveSuggestions().filter(gi).concat(n)
+      i = this._suggestionManager.getActiveSuggestions().filter(isFreshNonNoopSuggestion).concat(n)
     this._rejectSuggestions(i, r),
       this._undoSuggestions(n),
       this._nextEditSessionEventReporter.reportEventWithoutIds(
@@ -107529,18 +107529,18 @@ var LQ = class e extends X {
   gotoHinting(r) {
     this.incrementKeybindingUsageCount(r)
     let n = this._getHintedState().suggestion
-    if (this._state.value instanceof jn) {
+    if (this._state.value instanceof NoSuggestionsState) {
       Ie.window.showInformationMessage("No more suggestions right now."),
         this._hoverProvider.hideHover(r ?? "command")
       return
     } else {
-      if (this._state.value instanceof Vt && !n) return this.dismiss(r)
-      if (this._state.value instanceof Sr)
+      if (this._state.value instanceof AfterPreviewState && !n) return this.dismiss(r)
+      if (this._state.value instanceof AnimatingState)
         return this._clearAnimatedApply(), this.accept()
       if (n)
         return (
           this._nextEditSessionEventReporter.reportEventFromSuggestion(
-            this._state.value instanceof Ir || this._state.value instanceof Vt
+            this._state.value instanceof BeforePreviewState || this._state.value instanceof AfterPreviewState
               ? this._state.value.suggestion
               : void 0,
             "goto-hinting-triggered-from",
@@ -107563,12 +107563,12 @@ var LQ = class e extends X {
     return this._nextOrPrevious(!1, r)
   }
   _nextOrPrevious(r, n, i = !0) {
-    let s = this._suggestionManager.getActiveSuggestions().filter(gi),
+    let s = this._suggestionManager.getActiveSuggestions().filter(isFreshNonNoopSuggestion),
       o = Awe(
         s,
-        this._state.value instanceof Ir ||
-          this._state.value instanceof Vt ||
-          this._state.value instanceof Sr
+        this._state.value instanceof BeforePreviewState ||
+          this._state.value instanceof AfterPreviewState ||
+          this._state.value instanceof AnimatingState
           ? this._state.value.suggestion
           : void 0,
         !r,
@@ -107577,7 +107577,7 @@ var LQ = class e extends X {
       )
     if (
       (this._nextEditSessionEventReporter.reportEventFromSuggestion(
-        this._state.value instanceof Ir || this._state.value instanceof Vt
+        this._state.value instanceof BeforePreviewState || this._state.value instanceof AfterPreviewState
           ? this._state.value.suggestion
           : void 0,
         r ? "next-triggered-from" : "previous-triggered-from",
@@ -107597,7 +107597,7 @@ var LQ = class e extends X {
     return (
       (this._decorationManager.shouldDrawBottomDecorations.value = !1),
       this._debouncedSetBottomDecorations(),
-      this._state.value instanceof Sr
+      this._state.value instanceof AnimatingState
         ? (this._logger.debug(
             "Finishing animation instead of opening suggestion.",
           ),
@@ -107609,7 +107609,7 @@ var LQ = class e extends X {
   }
   undoAcceptSuggestion(r, n) {
     ;(r ??=
-      this._state.value instanceof Vt ? this._state.value.suggestion : void 0),
+      this._state.value instanceof AfterPreviewState ? this._state.value.suggestion : void 0),
       r && r.state === "accepted"
         ? this._undoSuggestions(r)
         : Ie.commands.executeCommand("undo"),
@@ -107623,7 +107623,7 @@ var LQ = class e extends X {
     let i = Fs(r),
       s = this._suggestionManager
         .getActiveSuggestions()
-        .filter(wC)
+        .filter(isSuggestionAccepted)
         .filter((o) => i === o.qualifiedPathName.absPath)
     if (s.length === 0) {
       Ie.window.showInformationMessage("No Next Edits to undo.")
@@ -107661,7 +107661,7 @@ var LQ = class e extends X {
         this._hoverProvider.showHover()
   }
   _clearAnimatedApply(r) {
-    this._state.value instanceof Sr &&
+    this._state.value instanceof AnimatingState &&
       (!r || !r.isEqual(this._state.value.selection)) &&
       clearTimeout(this._state.value.timeout)
   }
@@ -107771,16 +107771,16 @@ var LQ = class e extends X {
       )
       return
     }
-    ;(this._state.value instanceof Ir || this._state.value instanceof Vt) &&
+    ;(this._state.value instanceof BeforePreviewState || this._state.value instanceof AfterPreviewState) &&
       !r.equals(this._state.value.suggestion) &&
       (await this._hoverProvider.hideHoverAsync(n.eventSource ?? "command")),
       r.state === "accepted"
-        ? (this._state.value = new Vt(r))
-        : (this._state.value = new Ir(r)),
-      this._state.value instanceof Ir &&
+        ? (this._state.value = new AfterPreviewState(r))
+        : (this._state.value = new BeforePreviewState(r)),
+      this._state.value instanceof BeforePreviewState &&
       (n.shouldAutoApply ?? this.nextEditConfig.enableAutoApply)
         ? (this._clearAnimatedApply(),
-          (this._state.value = new Sr(
+          (this._state.value = new AnimatingState(
             r,
             s.selection,
             setTimeout(() => {
@@ -107794,7 +107794,7 @@ var LQ = class e extends X {
       .getActiveSuggestions()
       .find(
         (s) =>
-          gi(s) &&
+          isFreshNonNoopSuggestion(s) &&
           s.qualifiedPathName.equals(r) &&
           (s.lineRange.contains(n) || s.lineRange.touches(n)),
       )
@@ -107819,16 +107819,16 @@ var LQ = class e extends X {
   }
   _getHintedState() {
     let r = Ie.window.activeTextEditor
-    if (!r) return new jn()
+    if (!r) return new NoSuggestionsState()
     let n = this.nextAvailableSuggestion(!0)
-    if (!n) return new jn()
+    if (!n) return new NoSuggestionsState()
     let i = this.nextAvailableSuggestion(!1)
     return i
       ? r.visibleRanges.some((s) => s.contains(Ms(i.highlightRange))) &&
         !r.visibleRanges.some((s) => s.contains(Ms(n.highlightRange)))
-        ? new gs(i, !1)
-        : new gs(n, !0)
-      : new gs(n, !0)
+        ? new HintingState(i, !1)
+        : new HintingState(n, !0)
+      : new HintingState(n, !0)
   }
   get state() {
     return this._state.value
@@ -107901,7 +107901,7 @@ function OQ(e) {
 }
 async function* Cwe(e) {
   ;(0, UQ.default)(e.pathName)
-  let t = await qC.workspace.openTextDocument(qe.from(e.pathName).absPath),
+  let t = await qC.workspace.openTextDocument(QualifiedPathName.from(e.pathName).absPath),
     r = OQ(e.pathName)
   ;(0, UQ.default)(dn(r))
   let n = ywe.default.parse((await qC.workspace.openTextDocument(r)).getText()),
@@ -107957,7 +107957,7 @@ var eCt = 10,
   tCt = 3
 function vwe(e, t) {
   return t
-    ? e.getFolderRoot(qe.from(t).absPath)
+    ? e.getFolderRoot(QualifiedPathName.from(t).absPath)
     : e.getMostRecentlyChangedFolderRoot()
 }
 function N8(e, t, r, n) {
@@ -107979,7 +107979,7 @@ async function* Ewe(e, t, r, n, i, s, o, a) {
     f = vwe(t, e.pathName),
     p = e.fileEditEvents ?? t.getFileEditEvents(f),
     g = f ? t.getRepoRootForFolderRoot(f) : void 0,
-    A = e.pathName && qe.from(e.pathName),
+    A = e.pathName && QualifiedPathName.from(e.pathName),
     y = A?.rootPath ?? g,
     C = t.getContext()
   e = {
@@ -108058,7 +108058,7 @@ async function* Ewe(e, t, r, n, i, s, o, a) {
       let W = F.getText(),
         Z = _W(W, w.result.charStart),
         $ = _W(W, w.result.charEnd),
-        ee = v.updateWithPendingEdits(Q, new Bo(Z, $))
+        ee = v.updateWithPendingEdits(Q, new CharRange(Z, $))
       if (!ee) {
         l.debug(`${B} Response was invalidated by pending edits.`),
           yield { status: We.invalidArgument }
@@ -108133,7 +108133,7 @@ async function* Ewe(e, t, r, n, i, s, o, a) {
           yield { status: We.invalidArgument }
         return
       }
-      let Se = new Ya(
+      let Se = new EditSuggestion(
         e.requestId,
         e.mode,
         e.scope,
@@ -108168,7 +108168,7 @@ async function* Ewe(e, t, r, n, i, s, o, a) {
     v.dispose()
   }
 }
-var Q8 = class extends X {
+var Q8 = class extends DisposableContainer {
   constructor(r, n) {
     super()
     this.requestId = r
@@ -108256,7 +108256,7 @@ async function nCt(e, t, r, n) {
     )
   ).filter((a) => a !== void 0)
 }
-var qQ = class extends X {
+var qQ = class extends DisposableContainer {
   constructor(r, n, i, s, o) {
     super()
     this._workspaceManager = r
@@ -108357,7 +108357,7 @@ var qQ = class extends X {
 }
 var bwe = V(vs()),
   Hl = V(require("vscode"))
-var VQ = class e extends X {
+var VQ = class e extends DisposableContainer {
     constructor(r, n, i, s, o, a, l, c, u, f, p, g) {
       super()
       this._apiServer = r
@@ -108412,12 +108412,12 @@ var VQ = class e extends X {
               this._workspaceManager.safeResolvePathName(y.document.uri) &&
               (this._freshCompletedRequests = []),
               !(
-                !qe.equals(
+                !QualifiedPathName.equals(
                   this._inflightRequest?.qualifiedPathName,
                   y.document.uri,
                 ) &&
                 !this._pendingRequests.some((C) =>
-                  qe.equals(C.qualifiedPathName, y.document.uri),
+                  QualifiedPathName.equals(C.qualifiedPathName, y.document.uri),
                 )
               ) &&
                 y.contentChanges.length > 0 &&
@@ -108486,7 +108486,7 @@ var VQ = class e extends X {
             this.cancelAll())
           : c.mode === "BACKGROUND" &&
               u.mode === "BACKGROUND" &&
-              !qe.equals(u.qualifiedPathName, c.qualifiedPathName)
+              !QualifiedPathName.equals(u.qualifiedPathName, c.qualifiedPathName)
             ? (this._logger.debug(
                 `Clearing requests for background request @ ${l}.`,
               ),
@@ -108717,15 +108717,15 @@ var VQ = class e extends X {
       )
     }
     _resolvePath(r) {
-      let n = r && qe.from(r),
+      let n = r && QualifiedPathName.from(r),
         i = n && this._findEditorForPath(n),
         s = i && i.document,
         o = s && this._blobNameCalculator.calculate(n.relPath, s.getText()),
-        a = i && new Nn(i.selection.start.line, i.selection.end.line)
+        a = i && new LineRange(i.selection.start.line, i.selection.end.line)
       return { blobName: o, document: s, selection: a }
     }
     _findEditorForPath(r) {
-      let n = qe.from(r)
+      let n = QualifiedPathName.from(r)
       return Hl.window.activeTextEditor &&
         this._workspaceManager
           .safeResolvePathName(Hl.window.activeTextEditor.document.uri)
@@ -108744,7 +108744,7 @@ function P8(e, t) {
     e.mode === t.mode &&
     (e.scope === t.scope || (e.scope === "CURSOR" && t.scope === "FILE")) &&
     (e.scope === "WORKSPACE" ||
-      qe.equals(e.qualifiedPathName, t.qualifiedPathName)) &&
+      QualifiedPathName.equals(e.qualifiedPathName, t.qualifiedPathName)) &&
     !(
       e.scope !== "WORKSPACE" &&
       e.requestBlobName &&
@@ -108767,7 +108767,7 @@ function sCt(e, t) {
 var wwe = V(vs()),
   Qs = V(require("vscode"))
 var K_ = V(require("vscode"))
-var MA = class extends X {
+var MA = class extends DisposableContainer {
   _document
   _lastSetAt
   _observable
@@ -108858,7 +108858,7 @@ function HQ(e, t) {
         return A - y
       })
       .reduce((g, A) => g + A, 0),
-    a = new Nn(e.lineRange.start + o, e.lineRange.stop + o),
+    a = new LineRange(e.lineRange.start + o, e.lineRange.stop + o),
     l = s.map((g) => g.text.length - g.rangeLength).reduce((g, A) => g + A, 0),
     c = n.offsetAt(new _we.Position(a.start, 0)) - l,
     u = e.with({
@@ -108899,7 +108899,7 @@ function HQ(e, t) {
   )
 }
 function oCt(e) {
-  return new Nn(e.start.line, e.end.line + (e.end.character > 0 ? 1 : 0))
+  return new LineRange(e.start.line, e.end.line + (e.end.character > 0 ? 1 : 0))
 }
 function xwe(e, t) {
   let r = oCt(e.range)
@@ -108910,7 +108910,7 @@ function xwe(e, t) {
 `) || r.equals(t)
       : !1
 }
-var WQ = class extends X {
+var WQ = class extends DisposableContainer {
   constructor(r, n, i = 1e3 * 60 * 10) {
     super()
     this._workspaceManager = r
@@ -109235,7 +109235,7 @@ var aCt = 2,
   uCt = 3,
   dCt = 3,
   fCt = 4,
-  GC = class e extends X {
+  GC = class e extends DisposableContainer {
     constructor(r, n, i, s, o) {
       super()
       this._configListener = r
@@ -109392,7 +109392,7 @@ var aCt = 2,
         }))
     }
   },
-  U8 = class extends X {
+  U8 = class extends DisposableContainer {
     _provider
     _range
     enable() {
@@ -109458,11 +109458,11 @@ var $Q = class {
     return null
   }
   async resolveFile(t) {
-    let r = qe.from(t).absPath,
+    let r = QualifiedPathName.from(t).absPath,
       n = this.getOpenDocumentText(r)
     if (n == null)
       try {
-        n = await rn(r)
+        n = await readTextFile(r)
       } catch (i) {
         this._logger.warn(`Could not read file: ${r}`, i), (n = "")
       }
@@ -109616,7 +109616,7 @@ var KQ = class {
   }
 }
 var hCt = "Augment",
-  JQ = class extends X {
+  JQ = class extends DisposableContainer {
     _statusBarItem
     _stateManager = new KQ(E_e)
     _currentState
@@ -109655,80 +109655,80 @@ var hCt = "Augment",
     }
   }
 var YC = V(require("vscode"))
-var jQ = class extends ra {
-  constructor(r, n, i, s, o, a, l, c, u, f, p = ss(i, f)) {
-    super("next-edit-suggestions.html", i)
-    this._webviewView = n
-    this._suggestionManager = s
-    this._globalNextEdit = o
-    this._editorEditManager = a
-    this._nextEditSessionEventReporter = l
-    this._resolveFileService = c
-    this._nextEditVSCodeToWebviewMessage = u
-    this._asyncMsgHandler = p
-    this.loadHTML(r),
+var NextEditSuggestionsPanel = class extends PanelWebview {
+  constructor(extensionUri, webviewView, webviewPanel, suggestionManager, globalNextEdit, editorEditManager, eventReporter, resolveFileService, vscodeToWebviewMessage, asyncMessageHandler, messageHandler = createAsyncMessageHandler(webviewPanel, asyncMessageHandler)) {
+    super("next-edit-suggestions.html", webviewPanel)
+    this._webviewView = webviewView
+    this._suggestionManager = suggestionManager
+    this._globalNextEdit = globalNextEdit
+    this._editorEditManager = editorEditManager
+    this._nextEditSessionEventReporter = eventReporter
+    this._resolveFileService = resolveFileService
+    this._nextEditVSCodeToWebviewMessage = vscodeToWebviewMessage
+    this._asyncMsgHandler = messageHandler
+    this.loadHTML(extensionUri),
       this.addDisposable(this._asyncMsgHandler),
       this._resolveFileService.register(this._asyncMsgHandler),
       this.addDisposable(
-        this._suggestionManager.onSuggestionsChanged((g) => {
-          let A = h8(
+        this._suggestionManager.onSuggestionsChanged((change) => {
+          let filteredSuggestions = filterValidSuggestions(
             [this._editorEditManager.state.suggestion]
-              .concat(g.newSuggestions)
+              .concat(change.newSuggestions)
               .concat(this._suggestionManager.getJustAcceptedSuggestions()),
-          ).filter(Q_(gi, wC))
+          ).filter(somePredicatesMatch(isFreshNonNoopSuggestion, isSuggestionAccepted))
           this.postMessage({
             type: "next-edit-suggestions-changed",
-            data: { suggestions: A },
+            data: { suggestions: filteredSuggestions },
           }),
-            (n.badge = { value: A.length, tooltip: "Next Edit Suggestions" })
+            (webviewView.badge = { value: filteredSuggestions.length, tooltip: "Next Edit Suggestions" })
         }),
       ),
       this.addDisposable(
         new YC.Disposable(
-          this._editorEditManager.addStateListener((g, A) => {
-            if (g instanceof Vt || g instanceof Ir || g instanceof Sr) {
+          this._editorEditManager.addStateListener((newState, oldState) => {
+            if (newState instanceof AfterPreviewState || newState instanceof BeforePreviewState || newState instanceof AnimatingState) {
               this.postMessage({
                 type: "next-edit-preview-active",
-                data: g.suggestion,
+                data: newState.suggestion,
               })
               return
             }
-            if (A instanceof Vt || A instanceof Ir || A instanceof Sr) {
+            if (oldState instanceof AfterPreviewState || oldState instanceof BeforePreviewState || oldState instanceof AnimatingState) {
               this.postMessage({ type: "next-edit-dismiss" })
               return
             }
             if (
-              (g.suggestion?.equals(A.suggestion) ?? A.suggestion === void 0) &&
-              !(g instanceof Vt) &&
-              !(A instanceof Vt)
+              (newState.suggestion?.equals(oldState.suggestion) ?? oldState.suggestion === undefined) &&
+              !(newState instanceof AfterPreviewState) &&
+              !(oldState instanceof AfterPreviewState)
             )
               return
-            let y = h8(
+            let currentSuggestions = filterValidSuggestions(
               [this._editorEditManager.state.suggestion]
                 .concat(this._suggestionManager.getActiveSuggestions())
                 .concat(this._suggestionManager.getJustAcceptedSuggestions()),
-            ).filter(Q_(gi, wC))
+            ).filter(somePredicatesMatch(isFreshNonNoopSuggestion, isSuggestionAccepted))
             this.postMessage({
               type: "next-edit-suggestions-changed",
-              data: { suggestions: y },
+              data: { suggestions: currentSuggestions },
             }),
               this.postMessage({
                 type: "next-edit-next-suggestion-changed",
-                data: g.suggestion,
+                data: newState.suggestion,
               })
           }),
         ),
       ),
       this.addDisposable(
-        this._nextEditVSCodeToWebviewMessage.event((g) => {
-          this.postMessage(g)
+        this._nextEditVSCodeToWebviewMessage.event((message) => {
+          this.postMessage(message)
         }),
       ),
       this.addDisposable(
         this._webview.onDidReceiveMessage(this.onDidReceiveMessage),
       ),
-      (n.badge = {
-        value: this._suggestionManager.getActiveSuggestions().filter(Q_(gi))
+      (webviewView.badge = {
+        value: this._suggestionManager.getActiveSuggestions().filter(somePredicatesMatch(isFreshNonNoopSuggestion))
           .length,
         tooltip: "Next Edit Suggestions",
       }),
@@ -109738,78 +109738,78 @@ var jQ = class extends ra {
       )
   }
   logger = j("NextEditSuggestionsPanel")
-  wrapAsyncMsg(r, n, i = null) {
+  wrapAsyncMsg(request, response, error = null) {
     return this.postMessage({
       type: "async-wrapper",
-      requestId: r.requestId,
-      error: i,
-      baseMsg: n,
+      requestId: request.requestId,
+      error: error,
+      baseMsg: response,
     })
   }
-  postMessage = async (r) => this._webview.postMessage(r)
-  onDidReceiveMessage = async (r) => {
-    switch (r.type) {
+  postMessage = async (message) => this._webview.postMessage(message)
+  onDidReceiveMessage = async (message) => {
+    switch (message.type) {
       case "next-edit-suggestions-action":
-        if ("accept" in r.data) {
+        if ("accept" in message.data) {
           await this._editorEditManager.acceptSuggestion(
-            Ya.from(r.data.accept),
+            EditSuggestion.from(message.data.accept),
             "next-edit-panel-item-click",
-            void 0,
-            !0,
+            undefined,
+            true,
           )
           return
         }
-        if ("reject" in r.data) {
+        if ("reject" in message.data) {
           this._editorEditManager.rejectSuggestion(
-            Ya.from(r.data.reject),
+            EditSuggestion.from(message.data.reject),
             "next-edit-panel-item-click",
           )
           return
         }
-        if ("undo" in r.data && r.data.undo) {
+        if ("undo" in message.data && message.data.undo) {
           this._editorEditManager.undoAcceptSuggestion(
-            Ya.from(r.data.undo),
+            EditSuggestion.from(message.data.undo),
             "next-edit-panel-item-click",
           )
           return
         }
-        if ("acceptAllInFile" in r.data) {
-          if (r.data.acceptAllInFile.length === 0) {
+        if ("acceptAllInFile" in message.data) {
+          if (message.data.acceptAllInFile.length === 0) {
             YC.window.showInformationMessage("No Next Edits to accept.")
             return
           }
           this._editorEditManager.acceptAllSuggestionsInFile(
-            r.data.acceptAllInFile[0].qualifiedPathName,
+            message.data.acceptAllInFile[0].qualifiedPathName,
             "next-edit-panel-item-click",
           )
           return
         }
-        if ("rejectAllInFile" in r.data) {
-          if (r.data.rejectAllInFile.length === 0) {
+        if ("rejectAllInFile" in message.data) {
+          if (message.data.rejectAllInFile.length === 0) {
             YC.window.showInformationMessage("No Next Edits to reject.")
             return
           }
           this._editorEditManager.rejectAllSuggestionsInFile(
-            r.data.rejectAllInFile[0].qualifiedPathName,
+            message.data.rejectAllInFile[0].qualifiedPathName,
             "next-edit-panel-item-click",
           )
           return
         }
-        if ("undoAllInFile" in r.data) {
-          if (r.data.undoAllInFile.length === 0) {
+        if ("undoAllInFile" in message.data) {
+          if (message.data.undoAllInFile.length === 0) {
             YC.window.showInformationMessage("No Next Edits to undo.")
             return
           }
           this._editorEditManager.undoAllSuggestionsInFile(
-            r.data.undoAllInFile[0].qualifiedPathName,
+            message.data.undoAllInFile[0].qualifiedPathName,
             "next-edit-panel-item-click",
           )
           return
         }
-        this.logger.error("Unknown action message: " + JSON.stringify(r))
+        this.logger.error("Unknown action message: " + JSON.stringify(message))
         return
       case "next-edit-dismiss":
-        this._editorEditManager.dismiss("next-edit-panel-item-click", !0, !1)
+        this._editorEditManager.dismiss("next-edit-panel-item-click", true, false)
         return
       case "next-edit-loaded":
         this._nextEditSessionEventReporter.reportEventWithoutIds(
@@ -109822,7 +109822,7 @@ var jQ = class extends ra {
               suggestions: this._suggestionManager
                 .getActiveSuggestions()
                 .concat(this._suggestionManager.getJustAcceptedSuggestions())
-                .filter(Q_(gi, wC)),
+                .filter(somePredicatesMatch(isFreshNonNoopSuggestion, isSuggestionAccepted)),
             },
           }),
           this.postMessage({
@@ -109832,15 +109832,15 @@ var jQ = class extends ra {
           this._globalNextEdit.handleWorkspaceEditsAvailable()
         return
       case "next-edit-open-suggestion":
-        await this._editorEditManager.open(Ya.from(r.data), {
-          shouldAutoApply: !1,
-          preserveFocus: !0,
+        await this._editorEditManager.open(EditSuggestion.from(message.data), {
+          shouldAutoApply: false,
+          preserveFocus: true,
           eventSource: "next-edit-panel-item-click",
           animationDelayMs: 0,
         }),
           this._nextEditSessionEventReporter.reportEvent(
-            r.data.requestId,
-            r.data.result.suggestionId,
+            message.data.requestId,
+            message.data.result.suggestionId,
             Date.now(),
             "panel-suggestion-clicked",
             "click",
@@ -109854,18 +109854,18 @@ var jQ = class extends ra {
         this._globalNextEdit.cancel()
         return
       case "next-edit-active-suggestion":
-        this.postMessage({ type: "next-edit-active-suggestion", data: r.data })
+        this.postMessage({ type: "next-edit-active-suggestion", data: message.data })
         return
     }
   }
-  generateCSPPolicy(r) {
+  generateCSPPolicy(devServerUrl) {
     return Ou(
       Vu(this._webview),
       qu(),
       PF(sC()),
       Hu(),
       Wu(),
-      r ? UF(r) : () => {},
+      devServerUrl ? UF(devServerUrl) : () => {},
     )
   }
 }
@@ -109934,7 +109934,7 @@ var ZQ = class {
   }
 }
 var Swe = V(require("vscode"))
-var XQ = class extends ra {
+var XQ = class extends PanelWebview {
   _currentApp
   constructor(t) {
     super("main-panel.html", t),
@@ -109963,7 +109963,7 @@ var XQ = class extends ra {
     })
   }
 }
-var eN = class extends X {
+var eN = class extends DisposableContainer {
   constructor(r) {
     super()
     this._extensionUri = r
@@ -110010,7 +110010,7 @@ var eN = class extends X {
       await this._mainPanelWebview.loadHTML(this._extensionUri)
   }
 }
-var tN = class extends X {
+var tN = class extends DisposableContainer {
   constructor(r, n, i) {
     super()
     this._config = r
@@ -110039,7 +110039,7 @@ var O8 = class extends Error {
       super("SingletonExecutor has been disposed")
     }
   },
-  nd = class e extends X {
+  nd = class e extends DisposableContainer {
     constructor(r) {
       super()
       this._execute = r
@@ -110110,7 +110110,7 @@ function Bwe(e, t) {
   return !0
 }
 var Dwe = V(require("vscode"))
-var nN = class extends X {
+var nN = class extends DisposableContainer {
   constructor(r, n) {
     super()
     this._globalState = r
@@ -110182,7 +110182,7 @@ var nN = class extends X {
   }
 }
 var sN = V(require("vscode"))
-var iN = class extends X {
+var iN = class extends DisposableContainer {
   constructor(r, n) {
     super()
     this._statusBar = r
@@ -110217,7 +110217,7 @@ var iN = class extends X {
     }
   }
 }
-var oN = class extends X {
+var oN = class extends DisposableContainer {
   constructor(r, n) {
     super()
     this._statusBarManager = r
@@ -110240,7 +110240,7 @@ var oN = class extends X {
   }
 }
 var lN = V(require("vscode"))
-var aN = class extends X {
+var aN = class extends DisposableContainer {
   _workspaceManager = void 0
   _syncingEnabledChangedEmitter = new lN.EventEmitter()
   _publishStateExecutor
@@ -110287,7 +110287,7 @@ var aN = class extends X {
       this._syncingEnabledChangedEmitter.fire(this.syncingEnabledState)
   }
 }
-var cN = class e extends X {
+var cN = class e extends DisposableContainer {
   constructor(r) {
     super()
     this._workspaceStorage = r
@@ -110453,7 +110453,7 @@ var cN = class e extends X {
   }
 }
 var Twe = V(require("vscode"))
-var uN = class extends X {
+var uN = class extends DisposableContainer {
   constructor(r, n) {
     super()
     this._featureFlagManager = r
@@ -110579,7 +110579,7 @@ var pCt = "file-edit-events.json",
             ),
             []
           )
-        let t = await rn(this._storeFile),
+        let t = await readTextFile(this._storeFile),
           r = JSON.parse(t)
         return r.version !== this._version
           ? (this._logger.debug(
@@ -110662,10 +110662,10 @@ var Wl = class e {
     return this.afterStart + this.afterText.length
   }
   get beforeCRange() {
-    return new Bo(this.beforeStart, this.beforeEnd)
+    return new CharRange(this.beforeStart, this.beforeEnd)
   }
   get afterCRange() {
-    return new Bo(this.afterStart, this.afterEnd)
+    return new CharRange(this.afterStart, this.afterEnd)
   }
   toString() {
     return `SingleEdit{before=${this.beforeStart}:${this.beforeEnd}, after=${this.afterStart}:${this.afterEnd}, beforeText=${JSON.stringify(this.beforeText)}, afterText=${JSON.stringify(this.afterText)}}`
@@ -110775,9 +110775,9 @@ var Eg = class e {
     }
     if (r.length >= 2) {
       let s = r.map((a) => a.beforeCRange)
-      if (Bo.anyOverlaps(s)) return
+      if (CharRange.anyOverlaps(s)) return
       let o = r.map((a) => a.afterCRange)
-      if (Bo.anyOverlaps(o)) return
+      if (CharRange.anyOverlaps(o)) return
     }
     return new e({
       path: this.path,
@@ -110898,7 +110898,7 @@ var NA = class {
   }
 }
 var H8 = ["file".toString(), "untitled".toString()]
-var j_ = class extends X {
+var j_ = class extends DisposableContainer {
   constructor(r, n, i, s, o = 5e3) {
     super()
     this._folderName = r
@@ -111060,7 +111060,7 @@ var j_ = class extends X {
       this._logger.debug("Disposing FileEditEventsWatcher")
   }
 }
-var Z_ = class extends X {
+var Z_ = class extends DisposableContainer {
   constructor(r, n, i, s, o, a, l, c, u = 5e3) {
     super()
     this._blobNameCalculator = r
@@ -111293,7 +111293,7 @@ var xg = class extends X_ {
 async function FCt(e, t) {
   let r = ew.Uri.joinPath(e, t)
   try {
-    let n = await rn(r.fsPath),
+    let n = await readTextFile(r.fsPath),
       i = (0, X8.default)({ ignorecase: !1 })
     return i.add(n), i
   } catch {}
@@ -111717,7 +111717,7 @@ var o6 = class {
     return this._blobNameCalculator.calculate(t, i)
   }
   getIndexedBlobName(t) {
-    return this._workspaceManager.getBlobName(new qe(this._rootPath, t))
+    return this._workspaceManager.getBlobName(new QualifiedPathName(this._rootPath, t))
   }
 }
 var bN = require("vscode")
@@ -111758,7 +111758,7 @@ var a6 = class {
   }
 }
 var zwe = require("vscode")
-var l6 = class extends X {
+var l6 = class extends DisposableContainer {
   constructor(r, n) {
     super()
     this._blobNameCalculator = r
@@ -111956,7 +111956,7 @@ var _N = class {
   }
 }
 var jwe = V(vs())
-var wN = class extends X {
+var wN = class extends DisposableContainer {
   constructor(r, n, i, s, o, a, l) {
     super()
     this._workspaceName = r
@@ -112859,7 +112859,7 @@ var C6 = class extends nw {
       newBlobNameRetryMs: 3e3,
     },
   },
-  kN = class extends X {
+  kN = class extends DisposableContainer {
     constructor(r, n, i = YCt) {
       super()
       this._blobNameCalculator = r
@@ -113084,7 +113084,7 @@ function zCt(e) {
     ? e.event.notebook
     : e.event.document
 }
-var MN = class extends X {
+var MN = class extends DisposableContainer {
   constructor(r, n) {
     super()
     this._blobUploader = r
@@ -113537,7 +113537,7 @@ function jC(e, t) {
   let r = new Set(t)
   return e.filter((n) => !r.has(n))
 }
-var PN = class e extends X {
+var PN = class e extends DisposableContainer {
   static defaultCheckpointThreshold = 1e3
   _checkpointId
   _checkpointBlobNames = new Map()
@@ -113812,7 +113812,7 @@ var R6 = class {
       this.items.set(t, r)
     }
   },
-  LN = class e extends X {
+  LN = class e extends DisposableContainer {
     constructor(r, n, i, s, o) {
       super()
       this.workspaceName = r
@@ -114323,7 +114323,7 @@ async function iIe(e, t) {
   n.info(`reading blob name cache from ${i}`)
   try {
     let s = 0,
-      o = await rn(i),
+      o = await readTextFile(i),
       a = JSON.parse(o)
     if (a.namingVersion === void 0 || a.namingVersion !== TE)
       n.info(`blob naming version ${a.namingVersion} !== ${TE}`)
@@ -114696,7 +114696,7 @@ function ovt(e) {
 function avt(e) {
   return ovt(e) ? e : ZCe(e)
 }
-var VN = class e extends X {
+var VN = class e extends DisposableContainer {
   constructor(r, n, i, s, o, a) {
     super()
     this._apiServer = r
@@ -115334,7 +115334,7 @@ var GN = class {
       let r = new Array()
       for (let n of this._sourceFolders.values()) {
         let i = n.getPathName(t)
-        i !== void 0 && r.push(new qe(n.repoRoot, i))
+        i !== void 0 && r.push(new QualifiedPathName(n.repoRoot, i))
       }
       return r
     }
@@ -115354,7 +115354,7 @@ var GN = class {
         if (i !== void 0) {
           let [s, o] = i
           r.push({
-            qualifiedPathName: new qe(n.repoRoot, t),
+            qualifiedPathName: new QualifiedPathName(n.repoRoot, t),
             fileType: s,
             isAccepted: o.accepted,
           })
@@ -115414,7 +115414,7 @@ var GN = class {
       this._sourceFolders.get(t)?.enablePersist(r, n)
     }
     _makeQualifiedPathName(t, r) {
-      return new qe(t.repoRoot, r)
+      return new QualifiedPathName(t.repoRoot, r)
     }
     trackedFileCount(t) {
       return this._sourceFolders.get(t)?.trackedFileCount ?? 0
@@ -115423,7 +115423,7 @@ var GN = class {
       return Array.from(this._sourceFolders.keys())
     }
   },
-  P6 = class extends X {
+  P6 = class extends DisposableContainer {
     constructor(r, n) {
       super()
       this.folderRoot = r
@@ -115664,7 +115664,7 @@ var L6 = class extends bg {
       return this.reason
     }
   },
-  $N = class extends X {
+  $N = class extends DisposableContainer {
     constructor(r, n, i, s, o) {
       super()
       this.folderName = r
@@ -115872,7 +115872,7 @@ var KN = class {
     return this.items.slice()
   }
 }
-var zN = class extends X {
+var zN = class extends DisposableContainer {
   constructor(r) {
     super()
     this._workspaceManager = r
@@ -115901,7 +115901,7 @@ var zN = class extends X {
     return r
   }
 }
-var JN = class e extends X {
+var JN = class e extends DisposableContainer {
   constructor(r, n) {
     super()
     this._apiServer = r
@@ -116026,7 +116026,7 @@ function U6(e) {
 function uw(e) {
   if (e.scheme === "file") return U6(e)
 }
-var O6 = class extends X {
+var O6 = class extends DisposableContainer {
     constructor(r, n, i, s, o, a, l, c, u, f, p) {
       super(u, f)
       this.folderName = r
@@ -116098,7 +116098,7 @@ var O6 = class extends X {
         (!this._initialEnumerationComplete || this._stopped || (await r()))
     }
   },
-  q6 = class extends X {
+  q6 = class extends DisposableContainer {
     constructor(r, n, i) {
       super(i)
       this.pathFilter = r
@@ -116128,7 +116128,7 @@ function Ka(e) {
               ? "qualifying"
               : "permission needed"
 }
-var jN = class e extends X {
+var jN = class e extends DisposableContainer {
   constructor(r, n, i, s, o, a, l, c, u, f, p, g, A, y = new Array(), C) {
     super()
     this._actionsModel = r
@@ -116904,7 +116904,7 @@ var jN = class e extends X {
       this._pathMap.insert(l, f, "File", e.defaultPathAccept),
         this._pathMap.update(l, f, 0, p.name, p.mtime)
     i.charge("pre-populate PathMap")
-    let u = new Sc()
+    let u = new DisposableCollection()
     try {
       ;(o._newlyTracked = c.size === 0),
         u.add({ dispose: () => (o._newlyTracked = !1) })
@@ -116948,8 +116948,8 @@ var jN = class e extends X {
   }
   async _createSourceFolder(r, n, i) {
     let s = n.folderName,
-      o = new Sc(),
-      a = new Sc(),
+      o = new DisposableCollection(),
+      a = new DisposableCollection(),
       l = n.folderSpec.folderType === 1 ? void 0 : n.folderSpec.workspaceFolder,
       [c, u] = await this._findRepoRoot(r)
     if (i.isCancellationRequested) return
@@ -117043,7 +117043,7 @@ var jN = class e extends X {
       )
   }
   async _createSourceFolderTracker(r, n) {
-    let i = new Sc(),
+    let i = new DisposableCollection(),
       s = await CN(
         wt.Uri.file(r.folderRoot),
         wt.Uri.file(r.repoRoot),
@@ -117288,7 +117288,7 @@ var jN = class e extends X {
     for (let [o, a] of r.trackedPaths)
       if (o !== void 0)
         for (let [l, c] of a)
-          i.has(c) && (s.push([c, new qe(o, l)]), i.delete(c))
+          i.has(c) && (s.push([c, new QualifiedPathName(o, l)]), i.delete(c))
     for (let o of i) {
       let a = this._pathMap.getAnyPathName(o)
       a !== void 0 && s.push([o, a])
@@ -117322,7 +117322,7 @@ var jN = class e extends X {
     let i = this._resolveAbsPath(n)
     if (i === void 0) return
     let [s, o] = i
-    return new qe(s.repoRoot, o)
+    return new QualifiedPathName(s.repoRoot, o)
   }
   getFolderRoot(r) {
     let n = typeof r == "string" ? r : xf(r)
@@ -117336,9 +117336,9 @@ var jN = class e extends X {
     let n = typeof r == "string" ? r : xf(r)
     if (n === void 0) return
     let i = this._resolveAbsPath(n)
-    if (i === void 0) return new qe("", n)
+    if (i === void 0) return new QualifiedPathName("", n)
     let [s, o] = i
-    return new qe(s.repoRoot, o)
+    return new QualifiedPathName(s.repoRoot, o)
   }
   _resolveAbsPath(r) {
     for (let [n, i] of this._trackedSourceFolders) {
@@ -117410,7 +117410,7 @@ var jN = class e extends X {
     o === "Directory"
       ? this._handleDirectoryRemoved(r, n)
       : o === "File" && this._emitFileNotification(i, n, "disk")
-    let l = new qe(r.folderRoot, n)
+    let l = new QualifiedPathName(r.folderRoot, n)
     this._fileDeletedEmitter.fire({
       folderId: i,
       relPath: n,
@@ -117532,8 +117532,8 @@ var jN = class e extends X {
       if (i === void 0 || s === void 0) return
       let [o, a] = i,
         [l, c] = s,
-        u = new qe(o.folderRoot, a),
-        f = new qe(l.folderRoot, c)
+        u = new QualifiedPathName(o.folderRoot, a),
+        f = new QualifiedPathName(l.folderRoot, c)
       this._fileDidMoveEmitter.fire({
         oldQualifiedPathName: u,
         newQualifiedPathName: f,
@@ -117597,7 +117597,7 @@ var jN = class e extends X {
       a = o ? this.getRepoRootForFolderRoot(o) : void 0
     if (a !== void 0)
       return {
-        qualifiedPathName: new qe(a, ""),
+        qualifiedPathName: new QualifiedPathName(a, ""),
         fileType: "Directory",
         isAccepted: !1,
       }
@@ -117606,7 +117606,7 @@ var jN = class e extends X {
     )
     if (l.length > 0)
       return {
-        qualifiedPathName: new qe(l[0].folderRoot, ""),
+        qualifiedPathName: new QualifiedPathName(l[0].folderRoot, ""),
         fileType: "Directory",
         isAccepted: !1,
       }
@@ -117934,7 +117934,7 @@ var jN = class e extends X {
   }
 }
 var hIe = V(require("vscode"))
-var ZN = class extends X {
+var ZN = class extends DisposableContainer {
   constructor(r, n) {
     super()
     this.actionsModel = r
@@ -117992,7 +117992,7 @@ var ZN = class extends X {
     this.actionsModel.setSystemStateStatus("workspaceSelected", "incomplete")
   }
 }
-var DA = class e extends X {
+var DA = class e extends DisposableContainer {
   constructor(r, n, i, s, o, a, l, c, u, f, p, g, A, y, C, v, b, w) {
     super()
     this._extensionContext = r
@@ -118859,7 +118859,7 @@ var DA = class e extends X {
           this._augmentConfigListener,
           this.featureFlagManager,
           ($) =>
-            new jQ(
+            new NextEditSuggestionsPanel(
               this._extensionContext.extensionUri,
               $,
               $.webview,
