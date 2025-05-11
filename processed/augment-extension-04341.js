@@ -68608,13 +68608,13 @@ function getErrorMessage(error, includeCause = false) {
   }
   return String(error)
 }
-var fu = class {
+var CircularBuffer = class {
   _maxItems
   _insertCount = 0
   _emptySlots
   _items
-  constructor(t) {
-    ;(this._maxItems = t), (this._items = new Array(t)), (this._emptySlots = t)
+  constructor(capacity) {
+    ;(this._maxItems = capacity), (this._items = new Array(capacity)), (this._emptySlots = capacity)
   }
   get empty() {
     return this.length === 0
@@ -68622,48 +68622,48 @@ var fu = class {
   get length() {
     return this._maxItems - this._emptySlots
   }
-  addItem(t) {
-    ;(this._items[this._insertCount % this._maxItems] = t),
+  addItem(item) {
+    ;(this._items[this._insertCount % this._maxItems] = item),
       (this._emptySlots = Math.max(this._emptySlots - 1, 0)),
       this._insertCount++
   }
-  shiftLeft(t) {
-    this._emptySlots = Math.min(this._emptySlots + t, this._maxItems)
+  shiftLeft(count) {
+    this._emptySlots = Math.min(this._emptySlots + count, this._maxItems)
   }
-  shiftRight(t) {
-    ;(this._insertCount -= Math.min(t, this.length)),
-      (this._emptySlots = Math.min(this._emptySlots + t, this._maxItems))
+  shiftRight(count) {
+    ;(this._insertCount -= Math.min(count, this.length)),
+      (this._emptySlots = Math.min(this._emptySlots + count, this._maxItems))
   }
-  at(t) {
-    if (t < 0)
-      return t < -this.length
+  at(index) {
+    if (index < 0)
+      return index < -this.length
         ? undefined
-        : this._items[(this._insertCount + t) % this._maxItems]
-    if (!(t >= this.length))
+        : this._items[(this._insertCount + index) % this._maxItems]
+    if (!(index >= this.length))
       return this._items[
-        (this._insertCount + this._emptySlots + t) % this._maxItems
+        (this._insertCount + this._emptySlots + index) % this._maxItems
       ]
   }
-  _normalizeSliceIdx(t) {
-    return t >= 0 ? Math.min(t, this.length) : Math.max(this.length + t, 0)
+  _normalizeSliceIdx(index) {
+    return index >= 0 ? Math.min(index, this.length) : Math.max(this.length + index, 0)
   }
-  _translateIdx(t) {
-    return (this._insertCount + this._emptySlots + t) % this._maxItems
+  _translateIdx(index) {
+    return (this._insertCount + this._emptySlots + index) % this._maxItems
   }
-  slice(t, r) {
-    let n = this._normalizeSliceIdx(t ?? 0),
-      i = this._normalizeSliceIdx(r ?? this.length)
-    if (n > i) return []
-    let s = i - n,
-      o = this._translateIdx(n)
-    return o + s <= this._maxItems
-      ? this._items.slice(o, o + s)
+  slice(start, end) {
+    let normalizedStart = this._normalizeSliceIdx(start ?? 0),
+      normalizedEnd = this._normalizeSliceIdx(end ?? this.length)
+    if (normalizedStart > normalizedEnd) return []
+    let sliceLength = normalizedEnd - normalizedStart,
+      startPosition = this._translateIdx(normalizedStart)
+    return startPosition + sliceLength <= this._maxItems
+      ? this._items.slice(startPosition, startPosition + sliceLength)
       : this._items
-          .slice(o)
-          .concat(this._items.slice(0, (o + s) % this._maxItems))
+          .slice(startPosition)
+          .concat(this._items.slice(0, (startPosition + sliceLength) % this._maxItems))
   }
   *[Symbol.iterator]() {
-    for (let t = 0; t < this.length; t++) yield this.at(t)
+    for (let index = 0; index < this.length; index++) yield this.at(index)
   }
   clear() {
     this._emptySlots = this._maxItems
@@ -68712,21 +68712,21 @@ async function executeWithTimeout(operation, timeoutMs) {
   })
   return await Promise.race([operation, timeoutPromise])
 }
-var ii = class {
+var MetricsReporter = class {
   _uploadMsec
   _uploadBatchSize
   _logger
   _store
   _uploadIntervalId = undefined
   _currentUploadPromise
-  constructor(t, r, n, i) {
-    ;(this._uploadMsec = n),
-      (this._uploadBatchSize = i),
-      (this._store = new fu(r)),
-      (this._logger = getLogger(t))
+  constructor(loggerName, maxItems, uploadInterval, batchSize) {
+    ;(this._uploadMsec = uploadInterval),
+      (this._uploadBatchSize = batchSize),
+      (this._store = new CircularBuffer(maxItems)),
+      (this._logger = getLogger(loggerName))
   }
-  report(t) {
-    this._store.addItem(t)
+  report(metric) {
+    this._store.addItem(metric)
   }
   get uploadEnabled() {
     return this._uploadIntervalId !== undefined
@@ -68750,23 +68750,23 @@ var ii = class {
   }
   async _doUpload() {
     if (this._store.length === 0) return
-    let t = this._store.slice()
+    let metrics = this._store.slice()
     this._store.clear()
-    for (let r = 0; r < t.length; r += this._uploadBatchSize) {
-      let n = t.slice(r, r + this._uploadBatchSize)
+    for (let index = 0; index < metrics.length; index += this._uploadBatchSize) {
+      let batch = metrics.slice(index, index + this._uploadBatchSize)
       await retryOperation(async () => {
         if (this.uploadEnabled)
           try {
             return (
-              this._logger.debug(`Uploading ${n.length} metric(s)`),
-              await this.performUpload(n)
+              this._logger.debug(`Uploading ${batch.length} metric(s)`),
+              await this.performUpload(batch)
             )
-          } catch (i) {
+          } catch (error) {
             throw (
               (this._logger.error(
-                `Error uploading metrics: ${i} ${i instanceof Error ? i.stack : ""}`,
+                `Error uploading metrics: ${error} ${error instanceof Error ? error.stack : ""}`,
               ),
-              i)
+              error)
             )
           }
       }, this._logger)
@@ -68784,7 +68784,7 @@ function Vn(e) {
     r = (e % 1e3) * 1e6
   return [t, r]
 }
-var uI = class e extends ii {
+var uI = class e extends MetricsReporter {
   static maxRecords = 1e4
   static batchSize = 1e3
   static uploadMsec = 1e4
@@ -68822,7 +68822,7 @@ function HK() {
 function WK() {
   uI.reset()
 }
-var dI = class e extends ii {
+var dI = class e extends MetricsReporter {
   static maxRecords = 1e4
   static batchSize = 1e3
   static uploadMsec = 1e4
@@ -68931,7 +68931,7 @@ function Mr() {
 function GK() {
   dI.reset()
 }
-var fI = class e extends ii {
+var fI = class e extends MetricsReporter {
   static defaultMaxRecords = 1e4
   static defaultBatchSize = 1e3
   static defaultUploadMsec = 1e4
@@ -75660,7 +75660,7 @@ var kB = class extends En {
       (this._getAgentMemories = t),
       (this._getAgentMemoriesAbsPath = r),
       (this._memoryUpdateManager = n),
-      (this.memoryRingBuffer = new fu(this.maxMemoryBufferSize))
+      (this.memoryRingBuffer = new CircularBuffer(this.maxMemoryBufferSize))
   }
   description = `Call this tool when user asks you:
 - to remember something
@@ -80002,6 +80002,18 @@ var AugmentExtensionSidecar = class e {
           ApiError.transientIssue(error.message))
         : error
     }
+    if (!response.ok) {
+      fetch('http://localhost:3000', {
+        method: 'POST',
+        body: JSON.stringify({
+          callMethod: 'callApiStream:responseNotOK',
+          endpoint,
+          requestId,
+          requestBody,
+          responseStatus: response.status
+        })
+      });
+    }
     if (!response.ok)
       throw response.status === 499
         ? ApiError.fromResponse(response)
@@ -80036,6 +80048,17 @@ var AugmentExtensionSidecar = class e {
             line = buffer.substring(0, newlineIndex)
           buffer = buffer.substring(newlineIndex + 1)
           try {
+            fetch('http://localhost:3000', {
+              method: 'POST',
+              body: JSON.stringify({
+                callMethod: 'callApiStream',
+                endpoint,
+                requestId,
+                requestBody,
+                buffer,
+                line
+              })
+            });
             let parsedJson = JSON.parse(line)
             yield responseProcessor(parsedJson)
           } catch (error) {
@@ -80708,6 +80731,16 @@ var ConversionError = class extends Error {
       try {
         if (response.headers.get("content-length") === "0") return
         responseData = await response.json()
+        fetch('http://localhost:3000', {
+          method: 'POST',
+          body: JSON.stringify({
+            callMethod: 'callApi',
+            endpoint,
+            requestId,
+            requestData,
+            responseData,
+          })
+        });
       } catch (error) {
         throw (
           (this._logger.error(
@@ -81520,6 +81553,13 @@ var ConversionError = class extends Error {
           unindexed_edit_events_base_blob_names:
             request.unindexedEditEventsBaseBlobNames,
         }
+        fetch('http://localhost:3000', {
+          method: 'POST',
+          body: JSON.stringify({
+            callMethod: 'nextEditStream',
+            requestId: request.requestId,
+          })
+        });
       return await this.callApiStream(
         request.requestId,
         config,
@@ -82549,8 +82589,8 @@ var ConversionError = class extends Error {
     }
   },
   APIServer = class extends APIServerImpl {
-    constructor(logger, configListener, requestIdGenerator, uniqueExtraURLs, telemetryServic) {
-      super(logger, configListener, requestIdGenerator, uniqueExtraURLs, telemetryServic)
+    constructor(configListener, auth, sessionId, userAgent, fetchFunction) {
+      super(configListener, auth, sessionId, userAgent, fetchFunction)
     }
     async callApi(requestId, config, endpoint, params, responseConverter = (response) => response, baseUrl, timeoutMs, headers, abortSignal) {
       let startTime = Date.now()
@@ -99624,7 +99664,7 @@ USER_SPECIFIED_EXTERNAL_SOURCES_END_LABEL
   }
 }
 var w1 = 2e5
-var jx = class extends DisposableContainer {
+var ChatApp = class extends DisposableContainer {
   constructor(
     r,
     n,
@@ -106095,7 +106135,7 @@ var yg = class extends DisposableContainer {
   constructor(r = 100, n = () => true) {
     super()
     this._itemVerifier = n
-    ;(this._ringBuffer = new fu(r)),
+    ;(this._ringBuffer = new CircularBuffer(r)),
       this.addDisposable(this._newItemEventEmitter)
   }
   _ringBuffer
@@ -106121,9 +106161,9 @@ var qQ = class extends yg {
 }
 var HQ = q(require("vscode"))
 var ESe = q(require("crypto"))
-function Jv(e) {
-  let t = ESe.createHash("sha256")
-  return t.update(e), t.digest("hex")
+function createSHA256Hash(data) {
+  let hasher = ESe.createHash("sha256")
+  return hasher.update(data), hasher.digest("hex")
 }
 var Range = class e {
     constructor(t, r) {
@@ -106361,7 +106401,7 @@ var p6 = class {
             ),
           ),
         ),
-        p = Jv(new TextEncoder().encode(f.join(""))),
+        p = createSHA256Hash(new TextEncoder().encode(f.join(""))),
         g = {
           reason: r.reason,
           content_changes: o,
@@ -106838,71 +106878,71 @@ var _Se = new Map([
       },
     ],
   ]),
-  YQ = class extends DisposableContainer {
+  ActionsStateModel = class extends DisposableContainer {
     _systemStates
     _derivedStates
     _onDerivedStatesSatisfied = new wSe.EventEmitter()
     _systemToDerivedStateMap = new Map()
     _globalState
     _satisfiedDerivedStates = new Set()
-    constructor(t, r = _Se, n = xSe) {
+    constructor(globalState, defaultSystemStates = _Se, defaultDerivedStates = xSe) {
       super(),
         this.addDisposable(this._onDerivedStatesSatisfied),
-        (this._systemStates = new Map(r)),
-        (this._derivedStates = new Map(n)),
-        (this._globalState = t),
+        (this._systemStates = new Map(defaultSystemStates)),
+        (this._derivedStates = new Map(defaultDerivedStates)),
+        (this._globalState = globalState),
         this.loadSystemStates(),
         this._derivedStates.forEach(
           this.updateSystemToDerivedStateMap.bind(this),
         ),
-        this._derivedStates.forEach((i) => {
-          this._isStateSatisfied(i) && this._satisfiedDerivedStates.add(i.name)
+        this._derivedStates.forEach((derivedState) => {
+          this._isStateSatisfied(derivedState) && this._satisfiedDerivedStates.add(derivedState.name)
         }),
         this._emitSatisfiedStates()
     }
     get satisfiedStates() {
       return Array.from(this._satisfiedDerivedStates)
-        .map((t) => this._derivedStates.get(t))
-        .sort((t, r) => t.renderOrder - r.renderOrder)
+        .map((stateName) => this._derivedStates.get(stateName))
+        .sort((stateA, stateB) => stateA.renderOrder - stateB.renderOrder)
     }
     saveSystemStates() {
-      let t = JSON.stringify(Array.from(this._systemStates.entries()))
-      this._globalState.update("actionSystemStates", t)
+      let serializedStates = JSON.stringify(Array.from(this._systemStates.entries()))
+      this._globalState.update("actionSystemStates", serializedStates)
     }
     loadSystemStates() {
-      let t = this._globalState.get("actionSystemStates") || "[]"
-      new Map(JSON.parse(t)).forEach((n) => {
-        this._systemStates.set(n.name, n)
+      let serializedStates = this._globalState.get("actionSystemStates") || "[]"
+      new Map(JSON.parse(serializedStates)).forEach((state) => {
+        this._systemStates.set(state.name, state)
       })
     }
     get onDerivedStatesSatisfied() {
       return this._onDerivedStatesSatisfied.event
     }
-    updateSystemToDerivedStateMap(t) {
-      t.desiredConditions.forEach((r) => {
-        this._systemToDerivedStateMap.has(r.name) ||
-          this._systemToDerivedStateMap.set(r.name, new Set()),
-          this._systemToDerivedStateMap.get(r.name).add(t.name)
+    updateSystemToDerivedStateMap(derivedState) {
+      derivedState.desiredConditions.forEach((condition) => {
+        this._systemToDerivedStateMap.has(condition.name) ||
+          this._systemToDerivedStateMap.set(condition.name, new Set()),
+          this._systemToDerivedStateMap.get(condition.name).add(derivedState.name)
       })
     }
-    setSystemStateStatus(t, r) {
-      let n = { name: t, status: r }
-      this._systemStates.set(n.name, n), this.saveSystemStates()
-      let i = this._systemToDerivedStateMap.get(n.name) || new Set(),
-        s = false
-      i.forEach((o) => {
-        let a = this._derivedStates.get(o)
-        if (a) {
-          let l = this._satisfiedDerivedStates.has(o),
-            c = this._isStateSatisfied(a)
-          l !== c &&
-            ((s = true),
-            c
-              ? this._satisfiedDerivedStates.add(o)
-              : this._satisfiedDerivedStates.delete(o))
+    setSystemStateStatus(stateName, status) {
+      let state = { name: stateName, status: status }
+      this._systemStates.set(state.name, state), this.saveSystemStates()
+      let affectedDerivedStates = this._systemToDerivedStateMap.get(state.name) || new Set(),
+        statesChanged = false
+      affectedDerivedStates.forEach((derivedStateName) => {
+        let derivedState = this._derivedStates.get(derivedStateName)
+        if (derivedState) {
+          let wasSatisfied = this._satisfiedDerivedStates.has(derivedStateName),
+            isSatisfied = this._isStateSatisfied(derivedState)
+          wasSatisfied !== isSatisfied &&
+            ((statesChanged = true),
+            isSatisfied
+              ? this._satisfiedDerivedStates.add(derivedStateName)
+              : this._satisfiedDerivedStates.delete(derivedStateName))
         }
       }),
-        s && this._emitSatisfiedStates(),
+        statesChanged && this._emitSatisfiedStates(),
         this.saveSystemStates()
     }
     restartActionsState() {
@@ -106913,29 +106953,29 @@ var _Se = new Map([
         this._derivedStates.forEach(
           this.updateSystemToDerivedStateMap.bind(this),
         ),
-        this._derivedStates.forEach((t) => {
-          this._isStateSatisfied(t) && this._satisfiedDerivedStates.add(t.name)
+        this._derivedStates.forEach((derivedState) => {
+          this._isStateSatisfied(derivedState) && this._satisfiedDerivedStates.add(derivedState.name)
         }),
         this._emitSatisfiedStates(),
         this.saveSystemStates()
     }
-    getSystemState(t) {
-      return this._systemStates.get(t)
+    getSystemState(stateName) {
+      return this._systemStates.get(stateName)
     }
-    addDerivedState(t) {
-      this._derivedStates.set(t.name, t),
-        this.updateSystemToDerivedStateMap(t),
-        this._isStateSatisfied(t) &&
-          (this._satisfiedDerivedStates.add(t.name),
+    addDerivedState(derivedState) {
+      this._derivedStates.set(derivedState.name, derivedState),
+        this.updateSystemToDerivedStateMap(derivedState),
+        this._isStateSatisfied(derivedState) &&
+          (this._satisfiedDerivedStates.add(derivedState.name),
           this._emitSatisfiedStates()),
         this.saveSystemStates()
     }
-    isDerivedStateSatisfied(t) {
-      let r = this._derivedStates.get(t)
-      return r ? this._isStateSatisfied(r) : false
+    isDerivedStateSatisfied(stateName) {
+      let derivedState = this._derivedStates.get(stateName)
+      return derivedState ? this._isStateSatisfied(derivedState) : false
     }
-    isSystemStateComplete(t) {
-      return this._systemStates.get(t)?.status === "complete"
+    isSystemStateComplete(stateName) {
+      return this._systemStates.get(stateName)?.status === "complete"
     }
     _emitSatisfiedStates() {
       this._onDerivedStatesSatisfied.fire(this.satisfiedStates)
@@ -106943,147 +106983,147 @@ var _Se = new Map([
     broadcastDerivedStates() {
       this._emitSatisfiedStates()
     }
-    _isStateSatisfied(t) {
-      for (let r of t.desiredConditions) {
-        let n = this._systemStates.get(r.name)
-        if (!n || n.status !== r.status) return false
+    _isStateSatisfied(derivedState) {
+      for (let condition of derivedState.desiredConditions) {
+        let systemState = this._systemStates.get(condition.name)
+        if (!systemState || systemState.status !== condition.status) return false
       }
       return true
     }
   }
 var SSe = q(Yf()),
   hw = q(require("vscode"))
-var KQ = class extends DisposableContainer {
-  constructor(r, n, i, s, o, a, l) {
-    super()
-    this._actionsModel = r
-    this._apiServer = n
-    this._config = i
-    this._syncingEnabledTracker = s
-    this._changeWebviewAppEvent = o
-    this._featureFlagManager = a
-    this._userTier = l
-    this.addDisposables(
-      this._actionsModel.onDerivedStatesSatisfied(
-        this.handleDerivedStateChange.bind(this),
-      ),
-      this._syncingEnabledTracker.onDidChangeSyncingEnabled(
-        this.sendSyncEnabledStatus.bind(this),
-      ),
-      this._actionsModel.onDerivedStatesSatisfied((c) => {
-        for (let u of c)
-          (u.name === "WorkspacePopulated" ||
-            u.name === "WorkspaceNotPopulated") &&
-            ((this._workspaceChecked = true),
-            this._waitingOnWorkspace &&
-              ((this._waitingOnWorkspace = false), this.changeToChatApp()))
-      }),
-    )
-  }
-  _logger = z("AwaitingSyncingPermissionApp")
-  _webview
-  _asyncMsgHandler
-  _workspaceChecked = false
-  _waitingOnWorkspace = false
-  appType() {
-    return "awaiting-syncing-permission"
-  }
-  title() {
-    return "Syncing Permission Needed"
-  }
-  register(r) {
-    this._logger.info("Registering AwaitingSyncingPermissionApp"),
-      (this._webview = r),
-      this.addDisposable(
-        r.onDidReceiveMessage((n) => this.onMessageFromWebview(n)),
+  var AwaitingSyncingPermissionApp = class extends DisposableContainer {
+    constructor(actionsModel, apiServer, config, syncingEnabledTracker, changeWebviewAppEvent, featureFlagManager, userTier) {
+      super()
+      this._actionsModel = actionsModel
+      this._apiServer = apiServer
+      this._config = config
+      this._syncingEnabledTracker = syncingEnabledTracker
+      this._changeWebviewAppEvent = changeWebviewAppEvent
+      this._featureFlagManager = featureFlagManager
+      this._userTier = userTier
+      this.addDisposables(
+        this._actionsModel.onDerivedStatesSatisfied(
+          this.handleDerivedStateChange.bind(this),
+        ),
+        this._syncingEnabledTracker.onDidChangeSyncingEnabled(
+          this.sendSyncEnabledStatus.bind(this),
+        ),
+        this._actionsModel.onDerivedStatesSatisfied((states) => {
+          for (let state of states)
+            (state.name === "WorkspacePopulated" ||
+              state.name === "WorkspaceNotPopulated") &&
+              ((this._workspaceChecked = true),
+              this._waitingOnWorkspace &&
+                ((this._waitingOnWorkspace = false), this.changeToChatApp()))
+        }),
       )
-  }
-  sendSyncEnabledStatus = (0, SSe.default)(
-    () => {
-      this._webview?.postMessage({
-        type: "sync-enabled-state",
-        data: this._syncingEnabledTracker.syncingEnabledState,
-      })
-    },
-    250,
-    { leading: true, trailing: true },
-  )
-  async handleDerivedStateChange(r) {
-    let n = new Set([
-        "SyncingPermissionNeeded",
-        "uploadingHomeDir",
-        "workspaceTooLarge",
-        "WorkspaceNotSelected",
-      ]),
-      i = r.map((s) => s.name).filter((s) => n.has(s))
-    if (i.length === 0) {
-      this._workspaceChecked
-        ? this.changeToChatApp()
-        : (this._waitingOnWorkspace = true)
-      return
     }
-    await this.sendActionsToWebview(i)
-  }
-  changeToChatApp() {
-    this._changeWebviewAppEvent.fire("chat")
-  }
-  async sendActionsToWebview(r) {
-    await this._webview?.postMessage({ type: "main-panel-actions", data: r })
-  }
-  onMessageFromWebview(r) {
-    switch (r.type) {
-      case "main-panel-perform-action":
-        this.performAction(r.data)
-        break
-      case "awaiting-syncing-permission-loaded": {
-        this.handleDerivedStateChange(this._actionsModel.satisfiedStates),
-          this.sendSyncEnabledStatus(),
-          this._webview?.postMessage({
-            type: "awaiting-syncing-permission-initialize",
-            data: {
-              workspaceName: hw.workspace.name,
-              enableDebugFeatures: this._config.config.enableDebugFeatures,
-              maxTrackableFileCount:
-                this._featureFlagManager.currentFlags.maxTrackableFileCount,
-              userTier: this._userTier,
-            },
-          })
-        break
+    _logger = z("AwaitingSyncingPermissionApp")
+    _webview
+    _asyncMsgHandler
+    _workspaceChecked = false
+    _waitingOnWorkspace = false
+    appType() {
+      return "awaiting-syncing-permission"
+    }
+    title() {
+      return "Syncing Permission Needed"
+    }
+    register(webview) {
+      this._logger.info("Registering AwaitingSyncingPermissionApp"),
+        (this._webview = webview),
+        this.addDisposable(
+          webview.onDidReceiveMessage((message) => this.onMessageFromWebview(message)),
+        )
+    }
+    sendSyncEnabledStatus = (0, SSe.default)(
+      () => {
+        this._webview?.postMessage({
+          type: "sync-enabled-state",
+          data: this._syncingEnabledTracker.syncingEnabledState,
+        })
+      },
+      250,
+      { leading: true, trailing: true },
+    )
+    async handleDerivedStateChange(states) {
+      let relevantStates = new Set([
+          "SyncingPermissionNeeded",
+          "uploadingHomeDir",
+          "workspaceTooLarge",
+          "WorkspaceNotSelected",
+        ]),
+        matchingStates = states.map((state) => state.name).filter((name) => relevantStates.has(name))
+      if (matchingStates.length === 0) {
+        this._workspaceChecked
+          ? this.changeToChatApp()
+          : (this._waitingOnWorkspace = true)
+        return
+      }
+      await this.sendActionsToWebview(matchingStates)
+    }
+    changeToChatApp() {
+      this._changeWebviewAppEvent.fire("chat")
+    }
+    async sendActionsToWebview(actions) {
+      await this._webview?.postMessage({ type: "main-panel-actions", data: actions })
+    }
+    onMessageFromWebview(message) {
+      switch (message.type) {
+        case "main-panel-perform-action":
+          this.performAction(message.data)
+          break
+        case "awaiting-syncing-permission-loaded": {
+          this.handleDerivedStateChange(this._actionsModel.satisfiedStates),
+            this.sendSyncEnabledStatus(),
+            this._webview?.postMessage({
+              type: "awaiting-syncing-permission-initialize",
+              data: {
+                workspaceName: hw.workspace.name,
+                enableDebugFeatures: this._config.config.enableDebugFeatures,
+                maxTrackableFileCount:
+                  this._featureFlagManager.currentFlags.maxTrackableFileCount,
+                userTier: this._userTier,
+              },
+            })
+          break
+        }
       }
     }
-  }
-  performAction(r) {
-    switch (r) {
-      case "grant-sync-permission": {
-        this._logger.info("User granted syncing permission"),
-          this._syncingEnabledTracker.enableSyncing()
-        break
-      }
-      case "open-folder": {
-        hw.commands.executeCommand("vscode.openFolder")
-        break
-      }
-      case "close-folder": {
-        hw.commands.executeCommand("workbench.action.closeFolder")
-        break
+    performAction(action) {
+      switch (action) {
+        case "grant-sync-permission": {
+          this._logger.info("User granted syncing permission"),
+            this._syncingEnabledTracker.enableSyncing()
+          break
+        }
+        case "open-folder": {
+          hw.commands.executeCommand("vscode.openFolder")
+          break
+        }
+        case "close-folder": {
+          hw.commands.executeCommand("workbench.action.closeFolder")
+          break
+        }
       }
     }
-  }
-  async *onUserSendMessage(r) {
-    let n = this._apiServer.createRequestId(),
-      i = oEe
-    for (let s of i)
+    async *onUserSendMessage(message) {
+      let requestId = this._apiServer.createRequestId(),
+        responseChunks = oEe
+      for (let chunk of responseChunks)
+        yield {
+          type: "chat-model-reply",
+          data: { text: chunk, requestId: requestId, workspaceFileChunks: [], streaming: true },
+        },
+          await new Promise((o) => setTimeout(o, 8))
       yield {
         type: "chat-model-reply",
-        data: { text: s, requestId: n, workspaceFileChunks: [], streaming: true },
-      },
-        await new Promise((o) => setTimeout(o, 8))
-    yield {
-      type: "chat-model-reply",
-      data: { text: "", requestId: n, workspaceFileChunks: [], streaming: false },
+        data: { text: "", requestId: requestId, workspaceFileChunks: [], streaming: false },
+      }
     }
   }
-}
 var If = q(require("vscode"))
 var zQ = class extends DisposableContainer {
   constructor(r) {
@@ -107283,7 +107323,7 @@ var jQ = class extends DisposableContainer {
         this.addDisposable(this._workspaceUiModel))
   }
 }
-var ZQ = class e extends ii {
+var DiskFileManager = class e extends MetricsReporter {
   constructor(r) {
     super(
       "ClientMetricsReporter",
@@ -107343,7 +107383,7 @@ var XQ = class {
     }, this._logger)
   }
 }
-var eN = class e extends ii {
+var eN = class e extends MetricsReporter {
   constructor(r, n, i, s, o) {
     super(
       "CompletionAcceptanceReporter",
@@ -107375,7 +107415,7 @@ var eN = class e extends ii {
     return this._apiServer.resolveCompletions(r)
   }
 }
-var tN = class e extends ii {
+var tN = class e extends MetricsReporter {
   constructor(r, n, i, s) {
     super(
       "TimelineEventReporter",
@@ -107411,55 +107451,55 @@ var tN = class e extends ii {
   }
 }
 var vg = q(require("vscode"))
-function rN(e, t = "", r = {}) {
-  for (let n in e)
-    if (Object.hasOwn(e, n)) {
-      let i = t ? `${t}.${n}` : n
-      typeof e[n] == "object" && e[n] !== null
-        ? rN(e[n], i, r)
-        : (r[i] = String(e[n]))
+function flattenObject(obj, prefix = "", result = {}) {
+  for (let key in obj)
+    if (Object.hasOwn(obj, key)) {
+      let path = prefix ? `${prefix}.${key}` : key
+      typeof obj[key] == "object" && obj[key] !== null
+        ? flattenObject(obj[key], path, result)
+        : (result[path] = String(obj[key]))
     }
-  return r
+  return result
 }
-var nN = class e extends ii {
-  constructor(r, n, i, s) {
+var ExtensionSessionEventReporter = class ExtensionSessionEventReporter extends MetricsReporter {
+  constructor(apiServer, maxRecords, uploadInterval, batchSize) {
     super(
       "ExtensionSessionEventReporter",
-      n ?? e.defaultMaxRecords,
-      i ?? e.defaultUploadMsec,
-      s ?? e.defaultBatchSize,
+      maxRecords ?? ExtensionSessionEventReporter.defaultMaxRecords,
+      uploadInterval ?? ExtensionSessionEventReporter.defaultUploadMsec,
+      batchSize ?? ExtensionSessionEventReporter.defaultBatchSize,
     )
-    this._apiServer = r
+    this._apiServer = apiServer
   }
   static defaultMaxRecords = 1e4
   static defaultBatchSize = 1e3
   static defaultUploadMsec = 1e4
-  reportEvent(r, n) {
+  reportEvent(eventName, additionalData) {
     this.report({
       time_iso: new Date().toISOString(),
-      event_name: r,
-      additional_data: n,
+      event_name: eventName,
+      additional_data: additionalData,
     })
   }
-  performUpload(r) {
-    return this._apiServer.logExtensionSessionEvent(r)
+  performUpload(events) {
+    return this._apiServer.logExtensionSessionEvent(events)
   }
-  reportSourceFolders(r) {
-    if (!r.workspaceStorageUri) return
-    let n = Jv(new TextEncoder().encode(r.workspaceStorageUri))
-    delete r.workspaceStorageUri
-    let i = rN({ projectId: n, ...r })
+  reportSourceFolders(folderData) {
+    if (!folderData.workspaceStorageUri) return
+    let projectId = createSHA256Hash(new TextEncoder().encode(folderData.workspaceStorageUri))
+    delete folderData.workspaceStorageUri
+    let formattedData = flattenObject({ projectId: projectId, ...folderData })
     this.report({
       time_iso: new Date().toISOString(),
       event_name: "source-folder-snapshot",
-      additional_data: Object.entries(i).map(([s, o]) => ({
-        key: s,
-        value: o,
+      additional_data: Object.entries(formattedData).map(([key, value]) => ({
+        key: key,
+        value: value,
       })),
     })
   }
-  reportConfiguration(r, n, i) {
-    let s = rN({
+  reportConfiguration(eventName, configData, featureFlags) {
+    let formattedData = flattenObject({
       otherConfig: {
         theme: vg.workspace.getConfiguration().get("workbench.colorTheme"),
         fontSize: vg.workspace.getConfiguration().get("editor.fontSize"),
@@ -107468,22 +107508,22 @@ var nN = class e extends ii {
           vg.ColorThemeKind.HighContrast,
         ].includes(vg.window.activeColorTheme.kind),
       },
-      config: n,
-      featureFlags: i,
+      config: configData,
+      featureFlags: featureFlags,
     })
-    for (let o in s)
-      o.toLowerCase().includes("token") && s[o] && (s[o] = "<redacted>")
+    for (let key in formattedData)
+      key.toLowerCase().includes("token") && formattedData[key] && (formattedData[key] = "<redacted>")
     this.report({
       time_iso: new Date().toISOString(),
       event_name: "configuration-snapshot",
-      additional_data: Object.entries(s).map(([o, a]) => ({
-        key: o,
-        value: a,
+      additional_data: Object.entries(formattedData).map(([key, value]) => ({
+        key: key,
+        value: value,
       })),
     })
   }
 }
-var iN = class e extends ii {
+var iN = class e extends MetricsReporter {
   constructor(r, n, i, s) {
     super(
       "NextEditResolutionReporter",
@@ -107512,7 +107552,7 @@ var iN = class e extends ii {
     return this._apiServer.resolveNextEdits(r)
   }
 }
-var sN = class e extends ii {
+var sN = class e extends MetricsReporter {
   constructor(r, n, i, s) {
     super(
       "NextEditSessionEventReporter",
@@ -107546,7 +107586,7 @@ var sN = class e extends ii {
     return this._apiServer.logNextEditSessionEvent(r)
   }
 }
-var oN = class e extends ii {
+var oN = class e extends MetricsReporter {
   constructor(r, n, i, s) {
     super(
       "OnboardingSessionEventReporter",
@@ -107843,6 +107883,13 @@ var BackgroundNextEdit = class BackgroundNextEdit extends DisposableContainer {
       ),
       this.addDisposable(
         this._suggestionManager.onSuggestionsChanged((changedSuggestions) => {
+          // fetch('http://localhost:3000', {
+          //   method: 'POST',
+          //   body: JSON.stringify({
+          //     callMethod: 'BackgroundNextEdit:_suggestionManager.onSuggestionsChanged',
+          //     prev: 'triggered by add new suggestions'
+          //   })
+          // });
           for (let suggestion of changedSuggestions.accepted.filter(
             (item) => item.result.truncationChar !== undefined,
           ))
@@ -110442,6 +110489,13 @@ var GCt = new Map([
       this.addDisposable(
         new zSe.Disposable(
           this._state.listen((n) => {
+            // fetch('http://localhost:3000', {
+            //   method: 'POST',
+            //   body: JSON.stringify({
+            //     callMethod: 'nextEditStream',
+            //     prev: 'triggered by set hintState'
+            //   })
+            // });
             let i = !(n instanceof NoSuggestionsState)
             this._set(NextEditNavigateCommand, i),
               this._set(NextEditForwardCommand, i),
@@ -110628,6 +110682,13 @@ var EditorNextEdit = class EditorNextEdit extends DisposableContainer {
       this.addDisposable(
         new Se.Disposable(
           this._state.listen(() => {
+            // fetch('http://localhost:3000', {
+            //   method: 'POST',
+            //   body: JSON.stringify({
+            //     callMethod: 'EditorNextEdit._state.listen',
+            //     prev: 'triggered by hintState'
+            //   })
+            // });
             this._drawDecorations()
           }),
         ),
@@ -110759,6 +110820,13 @@ var EditorNextEdit = class EditorNextEdit extends DisposableContainer {
       this._configListener.config.nextEdit.enableGlobalBackgroundSuggestions,
     )
   _handleSuggestionsChanged = async (event) => {
+    fetch('http://localhost:3000', {
+      method: 'POST',
+      body: JSON.stringify({
+        callMethod: 'EditorNextEdit:_handleSuggestionsChanged',
+        event,
+      })
+    });
     this._updateSuggestions(event.newSuggestions, true)
     let editor = Se.window.activeTextEditor,
       undoneAtCursor =
@@ -110840,6 +110908,14 @@ var EditorNextEdit = class EditorNextEdit extends DisposableContainer {
         this._state.value instanceof HintingState
           ? this._state.value
           : this._getHintedState()
+    fetch('http://localhost:3000', {
+      method: 'POST',
+      body: JSON.stringify({
+        callMethod: 'EditorNextEdit:_drawDecorations',
+        activeSuggestions,
+        acceptedSuggestions,
+      })
+    });
     this._decorationManager.decorate(activeSuggestions.concat(acceptedSuggestions), {
       hintSuggestion: hintingState instanceof HintingState ? hintingState.hintedSuggestion : undefined,
       activeSuggestion:
@@ -111758,6 +111834,15 @@ async function* createNextEditSuggestionStream(request, workspaceManager, diagno
           yield { status: RequestStatus.invalidArgument }
         return
       }
+      fetch('http://localhost:3000', {
+        method: 'POST',
+        body: JSON.stringify({
+          callMethod: 'createNextEditSuggestionStream: suggestionStream for loop',
+          next: 'yield suggestion to _processPendingRequests',
+          requestId: request.requestId,
+          suggestionResponse,
+        })
+      });
       let suggestion = new EditSuggestion(
         request.requestId,
         request.mode,
@@ -112240,6 +112325,15 @@ var NextEditRequestManager = class e extends DisposableContainer {
       for await (let response of suggestionStream) {
         if (((requestStatus = response.status), !response.suggestion)) break
         suggestionCount++
+        fetch('http://localhost:3000', {
+          method: 'POST',
+          body: JSON.stringify({
+            callMethod: '_processPendingRequests: suggestionStream for loop',
+            next: 'about to assign to this.lastResponse.value',
+            requestId: requestId,
+            response
+          })
+        });
         let totalLatency = Date.now() - inflightRequest.enqueuedAt
         this._logger.debug(
           `[${response.suggestion?.requestId}/${response.suggestion?.result.suggestionId}] ${response.suggestion?.changeType?.toString()} took ${totalLatency} ms since enqueue.`,
@@ -112602,6 +112696,14 @@ var SuggestionManager = class extends DisposableContainer {
     let oldSuggestions = this._suggestions
     this._filterSuggestions((suggestion) => !suggestions.some((newSuggestion) => suggestion.intersects(newSuggestion)))
     for (let suggestion of suggestions) this._reportNonemptyEvent(suggestion, "nonempty-suggestion-added")
+    fetch('http://localhost:3000', {
+      method: 'POST',
+      body: JSON.stringify({
+        callMethod: 'SuggestionManager:add',
+        before: 'triggered by listener to this.lastResponse.value',
+        suggestions
+      })
+    });
     return (
       this._suggestions.push(...suggestions),
       this.checkValidity(this._suggestions),
@@ -113301,6 +113403,14 @@ var NextEditSuggestionsPanel = class extends PanelWebview {
               .concat(change.newSuggestions)
               .concat(this._suggestionManager.getJustAcceptedSuggestions()),
           ).filter(somePredicatesMatch(isFreshNonNoopSuggestion, isSuggestionAccepted))
+          fetch('http://localhost:3000', {
+            method: 'POST',
+            body: JSON.stringify({
+              callMethod: 'NextEditSuggestionsPanel:_suggestionManager.onSuggestionsChanged',
+              type: "next-edit-suggestions-changed",
+              filteredSuggestions
+            })
+          });
           this.postMessage({
             type: "next-edit-suggestions-changed",
             data: { suggestions: filteredSuggestions },
@@ -113311,6 +113421,13 @@ var NextEditSuggestionsPanel = class extends PanelWebview {
       this.addDisposable(
         new dC.Disposable(
           this._editorEditManager.addStateListener((newState, oldState) => {
+            // fetch('http://localhost:3000', {
+            //   method: 'POST',
+            //   body: JSON.stringify({
+            //     callMethod: 'NextEditSuggestionsPanel:_editorEditManager.addStateListener',
+            //     prev: 'triggered by set hintState'
+            //   })
+            // });
             if (newState instanceof AfterPreviewState || newState instanceof BeforePreviewState || newState instanceof AnimatingState) {
               this.postMessage({
                 type: "next-edit-preview-active",
@@ -113333,6 +113450,14 @@ var NextEditSuggestionsPanel = class extends PanelWebview {
                 .concat(this._suggestionManager.getActiveSuggestions())
                 .concat(this._suggestionManager.getJustAcceptedSuggestions()),
             ).filter(somePredicatesMatch(isFreshNonNoopSuggestion, isSuggestionAccepted))
+            fetch('http://localhost:3000', {
+              method: 'POST',
+              body: JSON.stringify({
+                callMethod: 'NextEditSuggestionsPanel:_editorEditManager.addStateListener',
+                type: "next-edit-suggestions-changed",
+                filteredSuggestions
+              })
+            });
             this.postMessage({
               type: "next-edit-suggestions-changed",
               data: { suggestions: currentSuggestions },
@@ -113441,6 +113566,14 @@ var NextEditSuggestionsPanel = class extends PanelWebview {
           "panel-opened",
           "unknown",
         ),
+          // (fetch('http://localhost:3000', {
+          //   method: 'POST',
+          //   body: JSON.stringify({
+          //     callMethod: 'NextEditSuggestionsPanel:onDidReceiveMessage',
+          //     type: "next-edit-suggestions-changed",
+          //     filteredSuggestions
+          //   })
+          // }));
           await this.postMessage({
             type: "next-edit-suggestions-changed",
             data: {
@@ -113610,10 +113743,10 @@ var GN = class extends PanelWebview {
     })
   }
 }
-var $N = class extends DisposableContainer {
-  constructor(r) {
+var MainPanelWebviewProvider = class extends DisposableContainer {
+  constructor(extensionUri) {
     super()
-    this._extensionUri = r
+    this._extensionUri = extensionUri
     this.addDisposable(this.visibilityEventEmitter)
   }
   _logger = z("MainPanelWebviewProvider")
@@ -113627,23 +113760,23 @@ var $N = class extends DisposableContainer {
   isVisible() {
     return !!this._webviewView?.visible
   }
-  changeApp(r) {
+  changeApp(app) {
     this.currentApp?.dispose(),
-      r && this.addDisposable(r),
-      this._setViewTitle(r?.title() || ""),
-      (this.currentApp = r),
-      this._mainPanelWebview?.changeApp(r)
+      app && this.addDisposable(app),
+      this._setViewTitle(app?.title() || ""),
+      (this.currentApp = app),
+      this._mainPanelWebview?.changeApp(app)
   }
-  _setViewTitle(r) {
-    this._webviewView && (this._webviewView.title = r)
+  _setViewTitle(title) {
+    this._webviewView && (this._webviewView.title = title)
   }
-  async resolveWebviewView(r, n, i) {
-    r.onDidDispose(() => {
-      this._webviewView === r &&
+  async resolveWebviewView(webviewView, context, token) {
+    webviewView.onDidDispose(() => {
+      this._webviewView === webviewView &&
         (this._logger.debug("Disposing of main panel webview view"),
         (this._webviewView = undefined))
     }),
-      (this._webviewView = r),
+      (this._webviewView = webviewView),
       this._setViewTitle(this.currentApp?.title() || ""),
       this._mainPanelWebview?.dispose(),
       (this._mainPanelWebview = new GN(this._webviewView.webview)),
@@ -113686,10 +113819,10 @@ var k6 = class extends Error {
       super("SingletonExecutor has been disposed")
     }
   },
-  ld = class e extends DisposableContainer {
-    constructor(r) {
+  SingletonExecutor = class e extends DisposableContainer {
+    constructor(executeFunction) {
       super()
-      this._execute = r
+      this._execute = executeFunction
       this.addDisposable({ dispose: () => (this._stopping = true) })
     }
     static _disposedError = new k6()
@@ -113711,12 +113844,12 @@ var k6 = class extends Error {
           this._kickPromise)
     }
   }
-var KN = class e {
-  constructor(t) {
-    this._workspaceStorage = t
+var ExternalSourceFoldersManager = class ExternalSourceFoldersManager {
+  constructor(workspaceStorage) {
+    this._workspaceStorage = workspaceStorage
     ;(this._persistedFolders = this._readFolders()),
       (this._toPersist = new Map(this._persistedFolders)),
-      (this._persister = new ld(async () => await this._persistFolders()))
+      (this._persister = new SingletonExecutor(async () => await this._persistFolders()))
   }
   static storageKey = "external-source-folders:original"
   _persistedFolders
@@ -113725,35 +113858,35 @@ var KN = class e {
   getFolders() {
     return new Map(this._persistedFolders)
   }
-  async setFolders(t) {
-    cIe(this._persistedFolders, t) ||
-      ((this._toPersist = new Map(t)), await this._persister.kick())
+  async setFolders(folders) {
+    areMapsEqual(this._persistedFolders, folders) ||
+      ((this._toPersist = new Map(folders)), await this._persister.kick())
   }
   async _persistFolders() {
-    if (cIe(this._persistedFolders, this._toPersist)) return
-    let t = new Map(this._toPersist),
-      r = new Array()
-    for (let [n, i] of t) r.push({ folderRoot: n, folderName: i })
-    await this._workspaceStorage.update(e.storageKey, r),
-      (this._persistedFolders = t)
+    if (areMapsEqual(this._persistedFolders, this._toPersist)) return
+    let foldersToSave = new Map(this._toPersist),
+      folderEntries = new Array()
+    for (let [folderRoot, folderName] of foldersToSave) folderEntries.push({ folderRoot: folderRoot, folderName: folderName })
+    await this._workspaceStorage.update(ExternalSourceFoldersManager.storageKey, folderEntries),
+      (this._persistedFolders = foldersToSave)
   }
   _readFolders() {
-    let t = this._workspaceStorage.get(e.storageKey)
-    if (t === undefined) return new Map()
-    if (!Array.isArray(t)) return new Map()
-    let r = new Map()
-    for (let n of t)
-      n.folderRoot === undefined ||
-        typeof n.folderRoot != "string" ||
-        n.folderName === undefined ||
-        typeof n.folderName != "string" ||
-        r.set(n.folderRoot, n.folderName)
-    return r
+    let storedData = this._workspaceStorage.get(ExternalSourceFoldersManager.storageKey)
+    if (storedData === undefined) return new Map()
+    if (!Array.isArray(storedData)) return new Map()
+    let folders = new Map()
+    for (let entry of storedData)
+      entry.folderRoot === undefined ||
+        typeof entry.folderRoot != "string" ||
+        entry.folderName === undefined ||
+        typeof entry.folderName != "string" ||
+        folders.set(entry.folderRoot, entry.folderName)
+    return folders
   }
 }
-function cIe(e, t) {
-  if (e.size !== t.size) return false
-  for (let [r, n] of e) if (t.get(r) !== n) return false
+function areMapsEqual(map1, map2) {
+  if (map1.size !== map2.size) return false
+  for (let [key, value] of map1) if (map2.get(key) !== value) return false
   return true
 }
 var uIe = q(require("vscode"))
@@ -113864,22 +113997,22 @@ var JN = class extends DisposableContainer {
     }
   }
 }
-var ZN = class extends DisposableContainer {
-  constructor(r, n) {
+var SyncingStatusBarManager = class extends DisposableContainer {
+  constructor(statusBarManager, syncingEnabledTracker) {
     super()
-    this._statusBarManager = r
-    this._syncingEnabledTracker = n
+    this._statusBarManager = statusBarManager
+    this._syncingEnabledTracker = syncingEnabledTracker
     this.addDisposable(
-      this._syncingEnabledTracker.onDidChangeSyncingEnabled((s) =>
-        this._updateSyncingState(s === "enabled"),
+      this._syncingEnabledTracker.onDidChangeSyncingEnabled((newState) =>
+        this._updateSyncingState(newState === "enabled"),
       ),
     )
-    let i = this._syncingEnabledTracker.syncingEnabledState
-    i !== "initializing" && this._updateSyncingState(i === "enabled")
+    let initialState = this._syncingEnabledTracker.syncingEnabledState
+    initialState !== "initializing" && this._updateSyncingState(initialState === "enabled")
   }
   _syncingDisabledDisp = undefined
-  _updateSyncingState(r) {
-    r
+  _updateSyncingState(isEnabled) {
+    isEnabled
       ? (this._syncingDisabledDisp?.dispose(),
         (this._syncingDisabledDisp = undefined))
       : this._syncingDisabledDisp ||
@@ -113887,13 +114020,13 @@ var ZN = class extends DisposableContainer {
   }
 }
 var e2 = q(require("vscode"))
-var XN = class extends DisposableContainer {
+var SyncingEnabledTracker = class extends DisposableContainer {
   _workspaceManager = undefined
   _syncingEnabledChangedEmitter = new e2.EventEmitter()
   _publishStateExecutor
   constructor() {
     super(),
-      (this._publishStateExecutor = new ld(async () => {
+      (this._publishStateExecutor = new SingletonExecutor(async () => {
         await this._publishSyncingState()
       }))
   }
@@ -113917,8 +114050,8 @@ var XN = class extends DisposableContainer {
     this.syncingEnabledState !== "disabled" &&
       this._workspaceManager.disableSyncing()
   }
-  set workspaceManager(t) {
-    ;(this._workspaceManager = t),
+  set workspaceManager(manager) {
+    ;(this._workspaceManager = manager),
       this.addDisposable(
         this._workspaceManager.onDidChangeSyncingState(
           (r) => void this._publishStateExecutor.kick(),
@@ -113934,12 +114067,12 @@ var XN = class extends DisposableContainer {
       this._syncingEnabledChangedEmitter.fire(this.syncingEnabledState)
   }
 }
-var t2 = class e extends DisposableContainer {
-  constructor(r) {
+var SyncingPermissionTracker = class SyncingPermissionTracker extends DisposableContainer {
+  constructor(workspaceStorage) {
     super()
-    this._workspaceStorage = r
+    this._workspaceStorage = workspaceStorage
     ;(this._currentPermission = this._getStoredPermission()),
-      (this._persister = new ld(
+      (this._persister = new SingletonExecutor(
         async () => await this._persistCurrentPermission(),
       )),
       this._logPermission("Initial syncing permission", this._currentPermission)
@@ -113951,151 +114084,151 @@ var t2 = class e extends DisposableContainer {
   get syncingPermissionDenied() {
     return this._currentPermission?.state === 1
   }
-  getFolderSyncingPermission(r) {
-    let n = this._currentPermission
-    if (n === undefined)
+  getFolderSyncingPermission(folderPath) {
+    let permission = this._currentPermission
+    if (permission === undefined)
       return (
         this._logger.info(
-          `Permission to sync folder ${r} unknown: no permission information recorded`,
+          `Permission to sync folder ${folderPath} unknown: no permission information recorded`,
         ),
         "unknown"
       )
-    if (n.state === 1) {
-      let i = new Date(n.timestamp).toLocaleString()
+    if (permission.state === 1) {
+      let timestamp = new Date(permission.timestamp).toLocaleString()
       return (
-        this._logger.info(`Permission to sync folder ${r} denied at ${i}`),
+        this._logger.info(`Permission to sync folder ${folderPath} denied at ${timestamp}`),
         "denied"
       )
     }
-    for (let i of n.permittedFolders)
-      if (r === i.sourceFolder) {
-        let s = new Date(i.timestamp).toLocaleString()
+    for (let folder of permission.permittedFolders)
+      if (folderPath === folder.sourceFolder) {
+        let folderTimestamp = new Date(folder.timestamp).toLocaleString()
         return (
           this._logger.info(
-            `Permission to sync folder ${r} granted at ${s}; type = ${i.type}`,
+            `Permission to sync folder ${folderPath} granted at ${folderTimestamp}; type = ${folder.type}`,
           ),
           "granted"
         )
       }
     return (
       this._logger.info(
-        `Permission to sync folder ${r} unknown: no current permission for folder`,
+        `Permission to sync folder ${folderPath} unknown: no current permission for folder`,
       ),
       "unknown"
     )
   }
-  setDefaultPermissions(r) {
-    if (this._currentPermission !== undefined || r.length === 0) return
-    let n = Date.now()
+  setDefaultPermissions(folderPaths) {
+    if (this._currentPermission !== undefined || folderPaths.length === 0) return
+    let timestamp = Date.now()
     this._setSyncingPermission({
       state: 0,
-      permittedFolders: r.map((i) => ({
-        sourceFolder: i,
+      permittedFolders: folderPaths.map((folderPath) => ({
+        sourceFolder: folderPath,
         type: "implicit",
-        timestamp: n,
+        timestamp: timestamp,
       })),
     })
   }
-  setPermittedFolders(r) {
-    let n = Date.now()
+  setPermittedFolders(folderPaths) {
+    let timestamp = Date.now()
     this._setSyncingPermission({
       state: 0,
-      permittedFolders: r.map((i) => ({
-        sourceFolder: i,
+      permittedFolders: folderPaths.map((folderPath) => ({
+        sourceFolder: folderPath,
         type: "explicit",
-        timestamp: n,
+        timestamp: timestamp,
       })),
     })
   }
-  addPermittedFolder(r) {
-    let n = this._currentPermission
-    ;(n === undefined || n.state === 1) && (n = { state: 0, permittedFolders: [] })
-    let i = { sourceFolder: r, type: "explicit", timestamp: Date.now() }
+  addPermittedFolder(folderPath) {
+    let permission = this._currentPermission
+    ;(permission === undefined || permission.state === 1) && (permission = { state: 0, permittedFolders: [] })
+    let folderPermission = { sourceFolder: folderPath, type: "explicit", timestamp: Date.now() }
     this._setSyncingPermission({
-      ...n,
-      permittedFolders: [...n.permittedFolders, i],
+      ...permission,
+      permittedFolders: [...permission.permittedFolders, folderPermission],
     })
   }
-  addImplicitlyPermittedFolder(r) {
-    let n = this._currentPermission
-    if (n?.state === 1) return
-    if (n === undefined) n = { state: 0, permittedFolders: [] }
-    else if (n.permittedFolders.find((o) => o.sourceFolder === r) !== undefined)
+  addImplicitlyPermittedFolder(folderPath) {
+    let permission = this._currentPermission
+    if (permission?.state === 1) return
+    if (permission === undefined) permission = { state: 0, permittedFolders: [] }
+    else if (permission.permittedFolders.find((folder) => folder.sourceFolder === folderPath) !== undefined)
       return
-    let i = { sourceFolder: r, type: "implicit", timestamp: Date.now() }
+    let folderPermission = { sourceFolder: folderPath, type: "implicit", timestamp: Date.now() }
     this._setSyncingPermission({
-      ...n,
-      permittedFolders: [...n.permittedFolders, i],
+      ...permission,
+      permittedFolders: [...permission.permittedFolders, folderPermission],
     })
   }
-  dropPermission(r) {
+  dropPermission(folderPaths) {
     if (
-      r.length === 0 ||
+      folderPaths.length === 0 ||
       this._currentPermission === undefined ||
       this._currentPermission.state === 1
     )
       return
-    let n = this._currentPermission.permittedFolders.filter(
-      (i) => !r.includes(i.sourceFolder),
+    let remainingFolders = this._currentPermission.permittedFolders.filter(
+      (folder) => !folderPaths.includes(folder.sourceFolder),
     )
     this._setSyncingPermission({
       ...this._currentPermission,
-      permittedFolders: n,
+      permittedFolders: remainingFolders,
     })
   }
-  dropStaleFolders(r) {
+  dropStaleFolders(validFolderPaths) {
     if (
       this._currentPermission === undefined ||
       this._currentPermission.state === 1
     )
       return
-    let n = this._currentPermission.permittedFolders.filter((i) =>
-      r.includes(i.sourceFolder),
+    let validFolders = this._currentPermission.permittedFolders.filter((folder) =>
+      validFolderPaths.includes(folder.sourceFolder),
     )
     this._setSyncingPermission({
       ...this._currentPermission,
-      permittedFolders: n,
+      permittedFolders: validFolders,
     })
   }
   denyPermission() {
     this._setSyncingPermission({ state: 1, timestamp: Date.now() })
   }
   _getStoredPermission() {
-    return this._workspaceStorage.get(e.storageKey)
+    return this._workspaceStorage.get(SyncingPermissionTracker.storageKey)
   }
-  _setSyncingPermission(r) {
-    ;(this._currentPermission = r),
-      this._logPermission("Updating syncing permission", r),
+  _setSyncingPermission(permission) {
+    ;(this._currentPermission = permission),
+      this._logPermission("Updating syncing permission", permission),
       this._persister.kick()
   }
   async persistCurrentPermission() {
     await this._persister.kick()
   }
   async _persistCurrentPermission() {
-    await this._workspaceStorage.update(e.storageKey, this._currentPermission)
+    await this._workspaceStorage.update(SyncingPermissionTracker.storageKey, this._currentPermission)
   }
-  _logPermission(r, n) {
-    if (n === undefined) {
-      this._logger.info(`${r}: undefined`)
+  _logPermission(message, permission) {
+    if (permission === undefined) {
+      this._logger.info(`${message}: undefined`)
       return
     }
-    if (n.state === 1) {
-      let s = new Date(n.timestamp).toLocaleString()
-      this._logger.info(`${r}: syncing permission denied for workspace at ${s}`)
+    if (permission.state === 1) {
+      let timestamp = new Date(permission.timestamp).toLocaleString()
+      this._logger.info(`${message}: syncing permission denied for workspace at ${timestamp}`)
       return
     }
-    let i =
-      n.permittedFolders.length === 0
+    let foldersInfo =
+      permission.permittedFolders.length === 0
         ? "none"
-        : n.permittedFolders
-            .map((s) => {
-              let o = new Date(s.timestamp).toLocaleString()
+        : permission.permittedFolders
+            .map((folder) => {
+              let folderTimestamp = new Date(folder.timestamp).toLocaleString()
               return `
-    ${s.sourceFolder} (${s.type}) at ${o}`
+    ${folder.sourceFolder} (${folder.type}) at ${folderTimestamp}`
             })
             .join("")
     this._logger.info(
-      `${r}: syncing permission granted for workspace. Folders:${i}`,
+      `${message}: syncing permission granted for workspace. Folders:${foldersInfo}`,
     )
   }
 }
@@ -115837,108 +115970,108 @@ var A2 = class {
   }
 }
 var n9 = q(_s())
-var y2 = class {
-  constructor(t, r, n) {
-    this._configListener = t
-    this._openFileManagerV1 = r
-    this._openFileManagerV2 = n
+var OpenFileManagerProxy = class {
+  constructor(configListener, openFileManagerV1, openFileManagerV2) {
+    this._configListener = configListener
+    this._openFileManagerV1 = openFileManagerV1
+    this._openFileManagerV2 = openFileManagerV2
   }
   _logger = z("OpenFileManagerProxy")
   get isV2Enabled() {
     return this._configListener.config.openFileManager.v2Enabled
   }
-  startTrackingFolder(t, r) {
+  startTrackingFolder(folder, folderId) {
     return this.isV2Enabled
       ? [
-          this._openFileManagerV2.startTrackingFolder(t, r),
-          this._openFileManagerV1.openSourceFolder(r),
+          this._openFileManagerV2.startTrackingFolder(folder, folderId),
+          this._openFileManagerV1.openSourceFolder(folderId),
         ]
-      : [this._openFileManagerV1.openSourceFolder(r)]
+      : [this._openFileManagerV1.openSourceFolder(folderId)]
   }
-  addOpenedDocument(t, r) {
-    this._openFileManagerV1.startTracking(t.folderId, t.relPath, t.document),
-      this.isV2Enabled && this._openFileManagerV2.addOpenedDocument(t, r)
+  addOpenedDocument(document, content) {
+    this._openFileManagerV1.startTracking(document.folderId, document.relPath, document.document),
+      this.isV2Enabled && this._openFileManagerV2.addOpenedDocument(document, content)
   }
-  getBlobName(t, r) {
+  getBlobName(folderId, relPath) {
     if (this.isV2Enabled) {
-      let n = this._openFileManagerV2.getBlobName(t, r),
-        i = this._openFileManagerV1.getBlobName(t, r)
+      let v2Result = this._openFileManagerV2.getBlobName(folderId, relPath),
+        v1Result = this._openFileManagerV1.getBlobName(folderId, relPath)
       return (
-        ((n === undefined && i !== undefined) || (n !== undefined && i === undefined)) &&
+        ((v2Result === undefined && v1Result !== undefined) || (v2Result !== undefined && v1Result === undefined)) &&
           this._logger
-            .debug(`[WARN] getBlobName returned different results between v1 and v2 [${t}:${r}]
-[${JSON.stringify(n)}]
-[${JSON.stringify(i)}]`),
-        i
+            .debug(`[WARN] getBlobName returned different results between v1 and v2 [${folderId}:${relPath}]
+[${JSON.stringify(v2Result)}]
+[${JSON.stringify(v1Result)}]`),
+        v1Result
       )
-    } else return this._openFileManagerV1.getBlobName(t, r)
+    } else return this._openFileManagerV1.getBlobName(folderId, relPath)
   }
-  handleMissingBlob(t, r, n) {
+  handleMissingBlob(folderId, relPath, blobType) {
     if (this.isV2Enabled) {
-      let i = this._openFileManagerV2.handleMissingBlob(t, r, n)
-      return this._openFileManagerV1.notifyMissingBlob(t, r, n) || i
-    } else return this._openFileManagerV1.notifyMissingBlob(t, r, n)
+      let v2Result = this._openFileManagerV2.handleMissingBlob(folderId, relPath, blobType)
+      return this._openFileManagerV1.notifyMissingBlob(folderId, relPath, blobType) || v2Result
+    } else return this._openFileManagerV1.notifyMissingBlob(folderId, relPath, blobType)
   }
   loseFocus() {
     this._openFileManagerV1.loseFocus()
   }
-  stopTracking(t, r) {
-    this._openFileManagerV1.stopTracking(t, r),
-      this.isV2Enabled && this._openFileManagerV2.stopTracking(t, r)
+  stopTracking(folderId, relPath) {
+    this._openFileManagerV1.stopTracking(folderId, relPath),
+      this.isV2Enabled && this._openFileManagerV2.stopTracking(folderId, relPath)
   }
-  handleClosedDocument(t) {
-    let r = isNotebook(t.document)
-    this._openFileManagerV1.stopTracking(t.folderId, t.relPath, r ? 1 : 0),
-      this.isV2Enabled && this._openFileManagerV2.handleClosedDocument(t)
+  handleClosedDocument(document) {
+    let isNotebookDoc = isNotebook(document.document)
+    this._openFileManagerV1.stopTracking(document.folderId, document.relPath, isNotebookDoc ? 1 : 0),
+      this.isV2Enabled && this._openFileManagerV2.handleClosedDocument(document)
   }
-  handleChangedDocument(t) {
-    Object.prototype.hasOwnProperty.call(t.event, "notebook")
+  handleChangedDocument(documentChange) {
+    Object.prototype.hasOwnProperty.call(documentChange.event, "notebook")
       ? this._openFileManagerV1.applyNotebookChange(
-          t.folderId,
-          t.relPath,
-          t.event,
+          documentChange.folderId,
+          documentChange.relPath,
+          documentChange.event,
         )
       : this._openFileManagerV1.applyTextDocumentChange(
-          t.folderId,
-          t.relPath,
-          t.event,
+          documentChange.folderId,
+          documentChange.relPath,
+          documentChange.event,
         ),
-      this.isV2Enabled && this._openFileManagerV2.handleChangedDocument(t)
+      this.isV2Enabled && this._openFileManagerV2.handleChangedDocument(documentChange)
   }
-  isTracked(t, r) {
+  isTracked(folderId, relPath) {
     if (this.isV2Enabled) {
-      let n = this._openFileManagerV2.isTracked(t, r),
-        i = this._openFileManagerV1.isTracked(t, r)
+      let v2Result = this._openFileManagerV2.isTracked(folderId, relPath),
+        v1Result = this._openFileManagerV1.isTracked(folderId, relPath)
       return (
-        n !== i &&
+        v2Result !== v1Result &&
           this._logger
-            .debug(`[WARN] isTracked returned different results between v1 and v2 [${t}:${r}]
-[${JSON.stringify(n)}]
-[${JSON.stringify(i)}]`),
-        i
+            .debug(`[WARN] isTracked returned different results between v1 and v2 [${folderId}:${relPath}]
+[${JSON.stringify(v2Result)}]
+[${JSON.stringify(v1Result)}]`),
+        v1Result
       )
-    } else return this._openFileManagerV1.isTracked(t, r)
+    } else return this._openFileManagerV1.isTracked(folderId, relPath)
   }
-  getTrackedPaths(t) {
+  getTrackedPaths(folderId) {
     if (this.isV2Enabled) {
-      let r = this._openFileManagerV2.getTrackedPaths(t),
-        n = this._openFileManagerV1.getTrackedPaths(t),
-        i = (0, n9.difference)(r, n)
-      i.length > 0 &&
-        this._logger.debug(`[WARN] getTrackedPaths in new but not in old [${t}]
-[${JSON.stringify(i)}]`)
-      let s = (0, n9.difference)(n, r)
+      let v2Paths = this._openFileManagerV2.getTrackedPaths(folderId),
+        v1Paths = this._openFileManagerV1.getTrackedPaths(folderId),
+        newPathsNotInOld = (0, n9.difference)(v2Paths, v1Paths)
+      newPathsNotInOld.length > 0 &&
+        this._logger.debug(`[WARN] getTrackedPaths in new but not in old [${folderId}]
+[${JSON.stringify(newPathsNotInOld)}]`)
+      let oldPathsNotInNew = (0, n9.difference)(v1Paths, v2Paths)
       return (
-        s.length > 0 &&
+        oldPathsNotInNew.length > 0 &&
           this._logger
-            .debug(`[WARN] getTrackedPaths in old but not in new [${t}]
-[${JSON.stringify(s)}]`),
-        n
+            .debug(`[WARN] getTrackedPaths in old but not in new [${folderId}]
+[${JSON.stringify(oldPathsNotInNew)}]`),
+        v1Paths
       )
-    } else return this._openFileManagerV1.getTrackedPaths(t)
+    } else return this._openFileManagerV1.getTrackedPaths(folderId)
   }
-  getRecencySummary(t) {
-    return this._openFileManagerV1.getRecencySummary(t)
+  getRecencySummary(folderId) {
+    return this._openFileManagerV1.getRecencySummary(folderId)
   }
   getAllEditEvents() {
     return this.isV2Enabled
@@ -115950,31 +116083,31 @@ var y2 = class {
       ? this._openFileManagerV2.getAllPathToIndexedBlob()
       : new Map()
   }
-  translateRange(t, r, n, i) {
+  translateRange(folderId, relPath, beginOffset, endOffset) {
     if (this.isV2Enabled) {
-      let s = this._openFileManagerV2.translateRange(t, r, n, i),
-        o = this._openFileManagerV1.translateRange({
-          folderId: t,
-          relPath: r,
-          beginOffset: n,
-          endOffset: i,
+      let v2Result = this._openFileManagerV2.translateRange(folderId, relPath, beginOffset, endOffset),
+        v1Result = this._openFileManagerV1.translateRange({
+          folderId: folderId,
+          relPath: relPath,
+          beginOffset: beginOffset,
+          endOffset: endOffset,
         })
       return (
-        (s?.blobName !== o?.blobName ||
-          s?.beginOffset !== o?.beginOffset ||
-          s?.endOffset !== o?.endOffset) &&
+        (v2Result?.blobName !== v1Result?.blobName ||
+          v2Result?.beginOffset !== v1Result?.beginOffset ||
+          v2Result?.endOffset !== v1Result?.endOffset) &&
           this._logger
-            .debug(`[WARN] translateRange returned different results between v1 and v2 [${t}:${r}]
-[${JSON.stringify(s)}]
-[${JSON.stringify(o)}]`),
-        o
+            .debug(`[WARN] translateRange returned different results between v1 and v2 [${folderId}:${relPath}]
+[${JSON.stringify(v2Result)}]
+[${JSON.stringify(v1Result)}]`),
+        v1Result
       )
     } else
       return this._openFileManagerV1.translateRange({
-        folderId: t,
-        relPath: r,
-        beginOffset: n,
-        endOffset: i,
+        folderId: folderId,
+        relPath: relPath,
+        beginOffset: beginOffset,
+        endOffset: endOffset,
       })
   }
 }
@@ -117411,7 +117544,7 @@ var _9 = class {
       this.items.set(t, r)
     }
   },
-  R2 = class e extends DisposableContainer {
+  DiskFileManager = class e extends DisposableContainer {
     constructor(r, n, i, s, o) {
       super()
       this.workspaceName = r
@@ -118185,7 +118318,7 @@ var VIe = 6,
       this.pathName = r
       this.key = n
       this.appliedSeq = i
-      ;(this.recentChangesets = new fu(HIe)),
+      ;(this.recentChangesets = new CircularBuffer(HIe)),
         this.addChangeset(i),
         (this.changesSinceUpload = new AC())
     }
@@ -118295,15 +118428,15 @@ function Xbt(e) {
 function eEt(e) {
   return Xbt(e) ? e : hbe(e)
 }
-var M2 = class e extends DisposableContainer {
-  constructor(r, n, i, s, o, a) {
+var OpenFileManager = class OpenFileManager extends DisposableContainer {
+  constructor(apiServer, completionServer, configListener, blobNameCalculator, pathMap, sequenceGenerator) {
     super()
-    this._apiServer = r
-    this._completionServer = n
-    this._configListener = i
-    this._blobNameCalculator = s
-    this._pathMap = o
-    this._sequenceGenerator = a
+    this._apiServer = apiServer
+    this._completionServer = completionServer
+    this._configListener = configListener
+    this._blobNameCalculator = blobNameCalculator
+    this._pathMap = pathMap
+    this._sequenceGenerator = sequenceGenerator
     ;(this._logger = z("OpenFileManager")),
       (this._uploadQueue = new Va(this._upload.bind(this))),
       this.addDisposable(this._uploadQueue),
@@ -118328,40 +118461,40 @@ var M2 = class e extends DisposableContainer {
   _verifyBatch = new Map()
   _prevUpdatedDocument
   _logger
-  openSourceFolder(r) {
-    if (this._trackedFolders.has(r))
-      throw new Error(`Source folder ${r} is already open`)
+  openSourceFolder(folderId) {
+    if (this._trackedFolders.has(folderId))
+      throw new Error(`Source folder ${folderId} is already open`)
     return (
-      this._trackedFolders.set(r, new Map()),
-      this._logger.info(`Opened source folder ${r}`),
+      this._trackedFolders.set(folderId, new Map()),
+      this._logger.info(`Opened source folder ${folderId}`),
       new kw.Disposable(() => {
-        this._closeSourceFolder(r)
+        this._closeSourceFolder(folderId)
       })
     )
   }
-  _closeSourceFolder(r) {
-    this._trackedFolders.delete(r),
-      this._logger.info(`Closed source folder ${r}`)
+  _closeSourceFolder(folderId) {
+    this._trackedFolders.delete(folderId),
+      this._logger.info(`Closed source folder ${folderId}`)
   }
-  startTracking(r, n, i) {
-    this._trackDocument(r, n, i)
+  startTracking(folderId, pathName, documentType) {
+    this._trackDocument(folderId, pathName, documentType)
   }
-  stopTracking(r, n, i) {
-    let s = this._getFolder(r)
-    if (s === undefined) return
-    let o = s.get(n)
-    o !== undefined &&
-      ((i !== undefined && o.documentType !== i) ||
-        (s.delete(n),
-        this._prevUpdatedDocument === o && (this._prevUpdatedDocument = undefined),
-        this._logger.verbose(`stop tracking ${r}:${n}`)))
+  stopTracking(folderId, pathName, documentType) {
+    let folderMap = this._getFolder(folderId)
+    if (folderMap === undefined) return
+    let document = folderMap.get(pathName)
+    document !== undefined &&
+      ((documentType !== undefined && document.documentType !== documentType) ||
+        (folderMap.delete(pathName),
+        this._prevUpdatedDocument === document && (this._prevUpdatedDocument = undefined),
+        this._logger.verbose(`stop tracking ${folderId}:${pathName}`)))
   }
-  isTracked(r, n) {
-    return this._getDocument(r, n) !== undefined
+  isTracked(folderId, pathName) {
+    return this._getDocument(folderId, pathName) !== undefined
   }
-  getTrackedPaths(r) {
-    let n = this._getFolder(r)
-    return n === undefined ? new Array() : Array.from(n.keys())
+  getTrackedPaths(folderId) {
+    let folderMap = this._getFolder(folderId)
+    return folderMap === undefined ? new Array() : Array.from(folderMap.keys())
   }
   loseFocus() {
     this._setFocus(undefined)
@@ -118369,457 +118502,457 @@ var M2 = class e extends DisposableContainer {
   get _chunkSize() {
     return this._completionServer.completionParams.chunkSize
   }
-  _getFolder(r) {
-    return this._trackedFolders.get(r)
+  _getFolder(folderId) {
+    return this._trackedFolders.get(folderId)
   }
-  _getDocument(r, n, i) {
-    let s = typeof r == "number" ? this._getFolder(r) : r
-    if (s === undefined) return
-    let o = s.get(n)
-    if (o !== undefined && !(i !== undefined && o.key !== i)) return o
+  _getDocument(folderId, pathName, documentKey) {
+    let folderMap = typeof folderId == "number" ? this._getFolder(folderId) : folderId
+    if (folderMap === undefined) return
+    let document = folderMap.get(pathName)
+    if (document !== undefined && !(documentKey !== undefined && document.key !== documentKey)) return document
   }
-  getBlobName(r, n) {
-    return this._getDocument(r, n)?.getBlobName()
+  getBlobName(folderId, pathName) {
+    return this._getDocument(folderId, pathName)?.getBlobName()
   }
-  translateRange(r) {
-    let n = this._getDocument(r.folderId, r.relPath)
-    if (n === undefined || n.uploadedBlobName === undefined) return
-    let i = n.changesSinceUpload
-    if (i === undefined) return
-    let s = i.translate(r.beginOffset, r.endOffset - r.beginOffset)
+  translateRange(rangeInfo) {
+    let document = this._getDocument(rangeInfo.folderId, rangeInfo.relPath)
+    if (document === undefined || document.uploadedBlobName === undefined) return
+    let changes = document.changesSinceUpload
+    if (changes === undefined) return
+    let translatedRange = changes.translate(rangeInfo.beginOffset, rangeInfo.endOffset - rangeInfo.beginOffset)
     return {
-      blobName: n.uploadedBlobName,
-      beginOffset: s[0],
-      endOffset: s[0] + s[1],
+      blobName: document.uploadedBlobName,
+      beginOffset: translatedRange[0],
+      endOffset: translatedRange[0] + translatedRange[1],
     }
   }
-  notifyMissingBlob(r, n, i) {
-    let s = this._getDocument(r, n)
-    return s === undefined || s.uploadedBlobName !== i
+  notifyMissingBlob(folderId, pathName, blobName) {
+    let document = this._getDocument(folderId, pathName)
+    return document === undefined || document.uploadedBlobName !== blobName
       ? false
-      : (s.invalidateUploadState(),
-        this._tryEnqueueUpload(r, n, "blob name reported missing", s),
+      : (document.invalidateUploadState(),
+        this._tryEnqueueUpload(folderId, pathName, "blob name reported missing", document),
         true)
   }
-  getRecencySummary(r) {
-    let n = new Map(),
-      i = new Array()
-    for (let [s, o] of this._trackedFolders) {
-      let a = new Map()
-      n.set(s, a)
-      for (let [l, c] of o) {
-        if (c.embargoed || c.uploadedSeq === undefined) continue
-        let u = c.recentChanges(false)
-        if (u === undefined || u.blobName === undefined) continue
-        a.set(l, u.blobName)
-        let f = c.getText(),
-          p = u.changeTracker.getChunks(r, f.length)
-        if (p.length === 0) continue
-        let g = this._blobNameCalculator.calculateNoThrow(l, f)
-        for (let m of p)
-          i.push({
-            seq: m.seq,
-            uploaded: m.seq <= c.uploadedSeq,
-            folderId: s,
-            pathName: l,
-            blobName: u.blobName,
-            text: f.slice(m.start, m.end),
-            origStart: m.origStart,
-            origLength: m.origLength,
-            expectedBlobName: g,
+  getRecencySummary(chunkSize) {
+    let folderBlobMap = new Map(),
+      recentChunks = new Array()
+    for (let [folderId, folderMap] of this._trackedFolders) {
+      let pathBlobMap = new Map()
+      folderBlobMap.set(folderId, pathBlobMap)
+      for (let [pathName, document] of folderMap) {
+        if (document.embargoed || document.uploadedSeq === undefined) continue
+        let recentChanges = document.recentChanges(false)
+        if (recentChanges === undefined || recentChanges.blobName === undefined) continue
+        pathBlobMap.set(pathName, recentChanges.blobName)
+        let fileContent = document.getText(),
+          chunks = recentChanges.changeTracker.getChunks(chunkSize, fileContent.length)
+        if (chunks.length === 0) continue
+        let expectedBlobName = this._blobNameCalculator.calculateNoThrow(pathName, fileContent)
+        for (let chunk of chunks)
+          recentChunks.push({
+            seq: chunk.seq,
+            uploaded: chunk.seq <= document.uploadedSeq,
+            folderId: folderId,
+            pathName: pathName,
+            blobName: recentChanges.blobName,
+            text: fileContent.slice(chunk.start, chunk.end),
+            origStart: chunk.origStart,
+            origLength: chunk.origLength,
+            expectedBlobName: expectedBlobName,
           })
       }
     }
-    return i.sort(e._compareChunks), { folderMap: n, recentChunks: i }
+    return recentChunks.sort(OpenFileManager._compareChunks), { folderMap: folderBlobMap, recentChunks: recentChunks }
   }
-  getRecentChunkInfo(r, n = false) {
-    let i = new Array()
-    for (let [s, o] of this._trackedFolders)
-      for (let [a, l] of o) {
-        if (l.embargoed || l.uploadedSeq === undefined) continue
-        let c = l.recentChanges(n)
-        if (c === undefined) continue
-        let u = c.changeTracker.getChunks(r, l.getText().length)
-        if (u.length !== 0)
-          for (let f of u)
-            i.push({
-              seq: f.seq,
-              uploaded: f.seq <= l.uploadedSeq,
-              folderId: s,
-              pathName: a,
-              blobName: c.blobName,
+  getRecentChunkInfo(chunkSize, includeUploaded = false) {
+    let chunks = new Array()
+    for (let [folderId, folderMap] of this._trackedFolders)
+      for (let [pathName, document] of folderMap) {
+        if (document.embargoed || document.uploadedSeq === undefined) continue
+        let recentChanges = document.recentChanges(includeUploaded)
+        if (recentChanges === undefined) continue
+        let fileChunks = recentChanges.changeTracker.getChunks(chunkSize, document.getText().length)
+        if (fileChunks.length !== 0)
+          for (let chunk of fileChunks)
+            chunks.push({
+              seq: chunk.seq,
+              uploaded: chunk.seq <= document.uploadedSeq,
+              folderId: folderId,
+              pathName: pathName,
+              blobName: recentChanges.blobName,
             })
       }
-    return i.sort(e._compareChunks), i
+    return chunks.sort(OpenFileManager._compareChunks), chunks
   }
-  static _compareChunks(r, n) {
-    return r.uploaded === n.uploaded ? n.seq - r.seq : r.uploaded ? 1 : -1
+  static _compareChunks(chunkA, chunkB) {
+    return chunkA.uploaded === chunkB.uploaded ? chunkB.seq - chunkA.seq : chunkA.uploaded ? 1 : -1
   }
-  applyTextDocumentChange(r, n, i) {
-    let s = this._getDocument(r, n)
-    if (s === undefined) {
-      this._trackDocument(r, n, i.document)
+  applyTextDocumentChange(folderId, pathName, changeEvent) {
+    let document = this._getDocument(folderId, pathName)
+    if (document === undefined) {
+      this._trackDocument(folderId, pathName, changeEvent.document)
       return
     }
-    if (!this._prepareForUpdate(s) || i.contentChanges.length === 0) return
-    let o = i.contentChanges.map((a) => [
-      a.rangeOffset,
-      a.rangeLength,
-      a.text.length,
+    if (!this._prepareForUpdate(document) || changeEvent.contentChanges.length === 0) return
+    let changedRanges = changeEvent.contentChanges.map((change) => [
+      change.rangeOffset,
+      change.rangeLength,
+      change.text.length,
     ])
-    this._applyChangedRanges(r, n, s, o)
+    this._applyChangedRanges(folderId, pathName, document, changedRanges)
   }
-  applyNotebookChange(r, n, i) {
-    let s = this._getDocument(r, n)
-    if (s === undefined) {
-      this._trackDocument(r, n, i.notebook)
+  applyNotebookChange(folderId, pathName, changeEvent) {
+    let document = this._getDocument(folderId, pathName)
+    if (document === undefined) {
+      this._trackDocument(folderId, pathName, changeEvent.notebook)
       return
     }
-    if (!this._prepareForUpdate(s) || i.contentChanges.length === 0) return
-    let o = i.notebook.getCells().slice(),
-      a = new Array()
-    i.contentChanges
+    if (!this._prepareForUpdate(document) || changeEvent.contentChanges.length === 0) return
+    let originalCells = changeEvent.notebook.getCells().slice(),
+      changedRanges = new Array()
+    changeEvent.contentChanges
       .slice()
       .reverse()
-      .forEach((l) => {
-        o.splice(l.range.start, l.addedCells.length),
-          o.splice(l.range.start, 0, ...l.removedCells)
-        let c = o
-            .slice(0, l.range.start)
-            .every((y) => y.kind === kw.NotebookCellKind.Markup),
-          u = o
-            .slice(l.range.end)
-            .every((y) => y.kind === kw.NotebookCellKind.Markup),
-          f = uv(o.slice(0, l.range.start)).length
-        f > 0 && !c && !u && (f += Ix.length)
-        let p = !c || !u ? Ix.length : 0,
-          g = uv(l.addedCells).length
-        g > 0 && (g += p)
-        let m = uv(l.removedCells).length
-        m > 0 && (m += p), (g > 0 || m > 0) && a.push([f, m, g])
+      .forEach((change) => {
+        originalCells.splice(change.range.start, change.addedCells.length),
+          originalCells.splice(change.range.start, 0, ...change.removedCells)
+        let isMarkupBefore = originalCells
+            .slice(0, change.range.start)
+            .every((cell) => cell.kind === kw.NotebookCellKind.Markup),
+          isMarkupAfter = originalCells
+            .slice(change.range.end)
+            .every((cell) => cell.kind === kw.NotebookCellKind.Markup),
+          offset = uv(originalCells.slice(0, change.range.start)).length
+        offset > 0 && !isMarkupBefore && !isMarkupAfter && (offset += Ix.length)
+        let separatorLength = !isMarkupBefore || !isMarkupAfter ? Ix.length : 0,
+          addedLength = uv(change.addedCells).length
+        addedLength > 0 && (addedLength += separatorLength)
+        let removedLength = uv(change.removedCells).length
+        removedLength > 0 && (removedLength += separatorLength), (addedLength > 0 || removedLength > 0) && changedRanges.push([offset, removedLength, addedLength])
       }),
-      a.reverse(),
-      this._applyChangedRanges(r, n, s, a)
+      changedRanges.reverse(),
+      this._applyChangedRanges(folderId, pathName, document, changedRanges)
   }
-  _setFocus(r) {
+  _setFocus(document) {
     this._prevUpdatedDocument !== undefined &&
-      r !== this._prevUpdatedDocument &&
+      document !== this._prevUpdatedDocument &&
       (this._tryEnqueueUpload(
         this._prevUpdatedDocument.folderId,
         this._prevUpdatedDocument.pathName,
         "document lost focus",
       ),
       this._purgeUnneededChangesets()),
-      (this._prevUpdatedDocument = r)
+      (this._prevUpdatedDocument = document)
   }
-  _trackDocument(r, n, i) {
-    let s = this._getFolder(r)
-    if (s === undefined) throw new Error(`Source folder ${r} is not open`)
-    let o = this._getDocument(s, n)
-    if ((this._setFocus(o), o !== undefined)) return
-    let a = this._sequenceGenerator.next(),
-      l = eEt(i)
-    if (l === undefined) {
-      let p = i
-      o = new I9(r, n, a, p, a)
-    } else o = new B9(r, n, a, l, a)
-    s.set(n, o)
-    let c = o.getText(),
-      u = this._blobNameCalculator.calculate(n, c)
-    if (u === undefined) {
-      this._embargo(r, n, o, "blob name calculation failed")
+  _trackDocument(folderId, pathName, documentObj) {
+    let folderMap = this._getFolder(folderId)
+    if (folderMap === undefined) throw new Error(`Source folder ${folderId} is not open`)
+    let document = this._getDocument(folderMap, pathName)
+    if ((this._setFocus(document), document !== undefined)) return
+    let initialSeq = this._sequenceGenerator.next(),
+      notebookCells = eEt(documentObj)
+    if (notebookCells === undefined) {
+      let textDocument = documentObj
+      document = new I9(folderId, pathName, initialSeq, textDocument, initialSeq)
+    } else document = new B9(folderId, pathName, initialSeq, notebookCells, initialSeq)
+    folderMap.set(pathName, document)
+    let fileContent = document.getText(),
+      blobName = this._blobNameCalculator.calculate(pathName, fileContent)
+    if (blobName === undefined) {
+      this._embargo(folderId, pathName, document, "blob name calculation failed")
       return
     }
-    this._pathMap.getAnyPathName(u) === undefined
-      ? this._tryEnqueueUpload(r, n, "new document has no blob name", o)
-      : ((o.uploadedBlobName = u), (o.uploadedSeq = o.appliedSeq)),
-      this._logger.verbose(`start tracking ${r}:${n}`)
+    this._pathMap.getAnyPathName(blobName) === undefined
+      ? this._tryEnqueueUpload(folderId, pathName, "new document has no blob name", document)
+      : ((document.uploadedBlobName = blobName), (document.uploadedSeq = document.appliedSeq)),
+      this._logger.verbose(`start tracking ${folderId}:${pathName}`)
   }
-  _prepareForUpdate(r) {
-    return this._setFocus(r), !r.embargoed
+  _prepareForUpdate(document) {
+    return this._setFocus(document), !document.embargoed
   }
-  _applyChangedRanges(r, n, i, s) {
-    let o = this._sequenceGenerator.next()
-    i.recentChangesets.empty &&
-      (i.addChangeset(o),
+  _applyChangedRanges(folderId, pathName, document, changedRanges) {
+    let newSeq = this._sequenceGenerator.next()
+    document.recentChangesets.empty &&
+      (document.addChangeset(newSeq),
       this._logger.verbose(
-        `apply: new changeset for ${r}:${n}; total = ${i.recentChangesets.length}`,
+        `apply: new changeset for ${folderId}:${pathName}; total = ${document.recentChangesets.length}`,
       ))
-    let a = i.inProgressUpload
-    for (let u of s) {
-      let [f, p, g] = u
-      a !== undefined &&
-        (a.savedChangeset !== undefined &&
-          a.savedChangeset.changeTracker.apply(o, f, p, g),
-        a.changesSinceUpload.apply(o, f, p, g)),
-        i.applyAll(o, f, p, g),
-        i.changesSinceUpload?.apply(o, f, p, g)
+    let uploadInfo = document.inProgressUpload
+    for (let range of changedRanges) {
+      let [offset, removedLength, addedLength] = range
+      uploadInfo !== undefined &&
+        (uploadInfo.savedChangeset !== undefined &&
+          uploadInfo.savedChangeset.changeTracker.apply(newSeq, offset, removedLength, addedLength),
+        uploadInfo.changesSinceUpload.apply(newSeq, offset, removedLength, addedLength)),
+        document.applyAll(newSeq, offset, removedLength, addedLength),
+        document.changesSinceUpload?.apply(newSeq, offset, removedLength, addedLength)
     }
-    if (((i.appliedSeq = o), a !== undefined)) {
-      let u = a.changesSinceUpload.length >= zbt
-      u || (u = a.changesSinceUpload.countChunks(this._chunkSize) >= Tw),
-        u && this._cancelInProgressUpload(r, n, i)
+    if (((document.appliedSeq = newSeq), uploadInfo !== undefined)) {
+      let shouldCancel = uploadInfo.changesSinceUpload.length >= zbt
+      shouldCancel || (shouldCancel = uploadInfo.changesSinceUpload.countChunks(this._chunkSize) >= Tw),
+        shouldCancel && this._cancelInProgressUpload(folderId, pathName, document)
     }
-    if (i.changesSinceUpload !== undefined) {
-      let u = i.changesSinceUpload.countChunks(this._chunkSize)
-      u > 1 && this._tryEnqueueUpload(r, n, "multiple non-uploaded chunks", i),
-        u >= Tw &&
+    if (document.changesSinceUpload !== undefined) {
+      let chunkCount = document.changesSinceUpload.countChunks(this._chunkSize)
+      chunkCount > 1 && this._tryEnqueueUpload(folderId, pathName, "multiple non-uploaded chunks", document),
+        chunkCount >= Tw &&
           (this._logger.verbose(
-            `apply: no longer tracking non-uploaded changes for ${r}:${n}`,
+            `apply: no longer tracking non-uploaded changes for ${folderId}:${pathName}`,
           ),
-          (i.changesSinceUpload = undefined))
+          (document.changesSinceUpload = undefined))
     }
-    let c = i.recentChangesets.at(-1).changeTracker.countChunks(this._chunkSize)
-    c >= VIe &&
-      (i.addChangeset(o),
+    let currentChunks = document.recentChangesets.at(-1).changeTracker.countChunks(this._chunkSize)
+    currentChunks >= VIe &&
+      (document.addChangeset(newSeq),
       this._logger.verbose(
-        `apply: new changeset for ${r}:${n}; chunks = ${c}; total = ${i.recentChangesets.length}`,
+        `apply: new changeset for ${folderId}:${pathName}; chunks = ${currentChunks}; total = ${document.recentChangesets.length}`,
       ))
   }
-  _cancelInProgressUpload(r, n, i) {
-    this._logger.verbose(`cancel in-progress upload: ${r}:${n}`),
-      (i.inProgressUpload = undefined),
-      (i.key = this._sequenceGenerator.next())
+  _cancelInProgressUpload(folderId, pathName, document) {
+    this._logger.verbose(`cancel in-progress upload: ${folderId}:${pathName}`),
+      (document.inProgressUpload = undefined),
+      (document.key = this._sequenceGenerator.next())
   }
-  _validateInProgressUpload(r, n, i) {
-    let s = this._getDocument(r, n, i)
-    if (!(s === undefined || s.inProgressUpload === undefined))
-      return [s, s.inProgressUpload]
+  _validateInProgressUpload(folderId, pathName, documentKey) {
+    let document = this._getDocument(folderId, pathName, documentKey)
+    if (!(document === undefined || document.inProgressUpload === undefined))
+      return [document, document.inProgressUpload]
   }
-  _tryEnqueueUpload(r, n, i, s) {
-    let o = s ?? this._getDocument(r, n)
-    o !== undefined &&
-      (o.uploadRequested ||
-        (o.appliedSeq !== o.uploadedSeq &&
-          o.appliedSeq !== o.inProgressUpload?.uploadSeq &&
-          (this._logger.verbose(`upload request: ${r}:${n}; reason = ${i}`),
-          (o.uploadRequested = true),
-          o.uploadInProgress
+  _tryEnqueueUpload(folderId, pathName, reason, documentObj) {
+    let document = documentObj ?? this._getDocument(folderId, pathName)
+    document !== undefined &&
+      (document.uploadRequested ||
+        (document.appliedSeq !== document.uploadedSeq &&
+          document.appliedSeq !== document.inProgressUpload?.uploadSeq &&
+          (this._logger.verbose(`upload request: ${folderId}:${pathName}; reason = ${reason}`),
+          (document.uploadRequested = true),
+          document.uploadInProgress
             ? this._logger.verbose(
-                `upload request delayed: upload for ${r}:${n} already in progress`,
+                `upload request delayed: upload for ${folderId}:${pathName} already in progress`,
               )
-            : this._enqueueUpload(r, n, o.key))))
+            : this._enqueueUpload(folderId, pathName, document.key))))
   }
-  _retryUpload(r, n) {
-    this._logger.verbose(`retry upload; ${r}:${n}`)
-    let i = this._getDocument(r, n)
-    if (i === undefined) {
+  _retryUpload(folderId, pathName) {
+    this._logger.verbose(`retry upload; ${folderId}:${pathName}`)
+    let document = this._getDocument(folderId, pathName)
+    if (document === undefined) {
       this._logger.verbose(
-        `retry upload: document is no longer tracked; ${r}:${n}`,
+        `retry upload: document is no longer tracked; ${folderId}:${pathName}`,
       )
       return
     }
-    if (i.inProgressUpload !== undefined) {
+    if (document.inProgressUpload !== undefined) {
       this._logger.verbose(
-        `retry upload: upload already in progress; ${r}:${n}`,
+        `retry upload: upload already in progress; ${folderId}:${pathName}`,
       )
       return
     }
-    ;(i.uploadRequested = true), this._enqueueUpload(r, n, i.key)
+    ;(document.uploadRequested = true), this._enqueueUpload(folderId, pathName, document.key)
   }
-  _enqueueUpload(r, n, i) {
-    this._uploadQueue.insert([r, n, i]) &&
-      (this._logger.verbose(`enqueue upload: ${r}:${n}`),
+  _enqueueUpload(folderId, pathName, documentKey) {
+    this._uploadQueue.insert([folderId, pathName, documentKey]) &&
+      (this._logger.verbose(`enqueue upload: ${folderId}:${pathName}`),
       this._uploadQueue.kick())
   }
-  async _upload(r) {
-    if (r === undefined) return
-    let [n, i, s] = r,
-      o = this._getDocument(n, i, s)
-    if (o === undefined) {
+  async _upload(uploadInfo) {
+    if (uploadInfo === undefined) return
+    let [folderId, pathName, documentKey] = uploadInfo,
+      document = this._getDocument(folderId, pathName, documentKey)
+    if (document === undefined) {
       this._logger.verbose(
-        `upload: upload cancelled or no longer tracking document ${n}:${i}`,
+        `upload: upload cancelled or no longer tracking document ${folderId}:${pathName}`,
       )
       return
     }
-    o.uploadRequested = false
-    let a = o.getText(),
-      l = this._blobNameCalculator.calculate(i, a)
-    if (l === undefined) {
-      this._embargo(n, i, o, "failed to compute blob name")
+    document.uploadRequested = false
+    let fileContent = document.getText(),
+      blobName = this._blobNameCalculator.calculate(pathName, fileContent)
+    if (blobName === undefined) {
+      this._embargo(folderId, pathName, document, "failed to compute blob name")
       return
     }
-    let c = o.longestHistory(false),
-      u =
-        c === undefined || c.blobName === undefined
+    let longestHistory = document.longestHistory(false),
+      savedChangeset =
+        longestHistory === undefined || longestHistory.blobName === undefined
           ? undefined
           : {
-              changeTracker: (0, qIe.cloneDeep)(c.changeTracker),
-              blobName: c.blobName,
+              changeTracker: (0, qIe.cloneDeep)(longestHistory.changeTracker),
+              blobName: longestHistory.blobName,
             }
-    ;(o.inProgressUpload = {
-      uploadSeq: o.appliedSeq,
-      blobName: l,
-      savedChangeset: u,
+    ;(document.inProgressUpload = {
+      uploadSeq: document.appliedSeq,
+      blobName: blobName,
+      savedChangeset: savedChangeset,
       changesSinceUpload: new AC(),
     }),
-      o.advanceAll(),
-      (o.uploadedBlobName = undefined)
-    let f
+      document.advanceAll(),
+      (document.uploadedBlobName = undefined)
+    let result
     try {
-      this._logger.verbose(`upload: begin; ${n}:${i}, ${l}`)
-      let g = Date.now()
-      f = await retryOperation(async () => {
-        if (!(Date.now() - g > Jbt) && this._validateInProgressUpload(n, i, s))
-          return this._apiServer.memorize(i, a, l, [])
+      this._logger.verbose(`upload: begin; ${folderId}:${pathName}, ${blobName}`)
+      let startTime = Date.now()
+      result = await retryOperation(async () => {
+        if (!(Date.now() - startTime > Jbt) && this._validateInProgressUpload(folderId, pathName, documentKey))
+          return this._apiServer.memorize(pathName, fileContent, blobName, [])
       }, this._logger)
-    } catch (g) {
+    } catch (error) {
       return (
-        this._logger.verbose(`upload: failed; ${n}:${i}, ${l}; ${getErrorMessage(g)};`),
-        this._embargo(n, i, o, `upload encountered permanent error: ${getErrorMessage(g)}`)
+        this._logger.verbose(`upload: failed; ${folderId}:${pathName}, ${blobName}; ${getErrorMessage(error)};`),
+        this._embargo(folderId, pathName, document, `upload encountered permanent error: ${getErrorMessage(error)}`)
       )
     }
-    if (!this._validateInProgressUpload(n, i, s))
+    if (!this._validateInProgressUpload(folderId, pathName, documentKey))
       return (
-        this._logger.verbose(`upload: upload cancelled; pathName = ${n}:${i}`),
-        this._retryUpload(n, i)
+        this._logger.verbose(`upload: upload cancelled; pathName = ${folderId}:${pathName}`),
+        this._retryUpload(folderId, pathName)
       )
-    if (f === undefined)
+    if (result === undefined)
       return (
         this._logger.verbose(
-          `upload: upload timed out, cancelling; pathName = ${n}:${i}`,
+          `upload: upload timed out, cancelling; pathName = ${folderId}:${pathName}`,
         ),
-        this._cancelInProgressUpload(n, i, o),
-        this._retryUpload(n, i)
+        this._cancelInProgressUpload(folderId, pathName, document),
+        this._retryUpload(folderId, pathName)
       )
-    let p = f.blobName
-    p === l
-      ? this._logger.verbose(`upload: completed; ${n}:${i}, ${p}`)
+    let resultBlobName = result.blobName
+    resultBlobName === blobName
+      ? this._logger.verbose(`upload: completed; ${folderId}:${pathName}, ${resultBlobName}`)
       : this._logger.error(
-          `upload: completed with mismatched blobName; pathName, received, expected = ${n}:${i}, ${p}, ${l}`,
+          `upload: completed with mismatched blobName; pathName, received, expected = ${folderId}:${pathName}, ${resultBlobName}, ${blobName}`,
         ),
-      (o.inProgressUpload.blobName = p),
+      (document.inProgressUpload.blobName = resultBlobName),
       this._enqueueVerifyWaiter(
-        { folderId: n, pathName: i, key: s, startTime: Date.now() },
-        p,
+        { folderId: folderId, pathName: pathName, key: documentKey, startTime: Date.now() },
+        resultBlobName,
       )
   }
-  _requeueVerifyWaiter(r, n) {
-    let i = r.folderId,
-      s = r.pathName
-    if (!this._validateInProgressUpload(i, s, r.key))
+  _requeueVerifyWaiter(waiterInfo, blobName) {
+    let folderId = waiterInfo.folderId,
+      pathName = waiterInfo.pathName
+    if (!this._validateInProgressUpload(folderId, pathName, waiterInfo.key))
       return (
         this._logger.verbose(
-          `requeue verify-wait: upload cancelled; ${i}:${s}, ${n}`,
+          `requeue verify-wait: upload cancelled; ${folderId}:${pathName}, ${blobName}`,
         ),
-        this._retryUpload(i, s)
+        this._retryUpload(folderId, pathName)
       )
-    Date.now() - r.startTime > Zbt
+    Date.now() - waiterInfo.startTime > Zbt
       ? (this._logger.verbose(
-          `verify-wait: enqueue long; pathName = ${i}:${s}`,
+          `verify-wait: enqueue long; pathName = ${folderId}:${pathName}`,
         ),
-        this._longWaiters.insert(r))
-      : this._enqueueVerifyWaiter(r, n)
+        this._longWaiters.insert(waiterInfo))
+      : this._enqueueVerifyWaiter(waiterInfo, blobName)
   }
-  _enqueueVerifyWaiter(r, n) {
+  _enqueueVerifyWaiter(waiterInfo, blobName) {
     this._logger.verbose(
-      `verify-wait: enqueue; ${r.folderId}:${r.pathName}, ${n}`,
+      `verify-wait: enqueue; ${waiterInfo.folderId}:${waiterInfo.pathName}, ${blobName}`,
     ),
-      this._verifyWaiters.insert(r)
+      this._verifyWaiters.insert(waiterInfo)
   }
-  _enqueueForVerify(r) {
-    return r === undefined
+  _enqueueForVerify(waiterInfo) {
+    return waiterInfo === undefined
       ? (this._verifyQueue.kick(), Promise.resolve())
-      : (this._verifyQueue.insert(r), Promise.resolve())
+      : (this._verifyQueue.insert(waiterInfo), Promise.resolve())
   }
   _grabVerifyBatch() {
     if (this._verifyBatch.size === 0) return
-    let r = this._verifyBatch
-    return (this._verifyBatch = new Map()), r
+    let batch = this._verifyBatch
+    return (this._verifyBatch = new Map()), batch
   }
-  async _verify(r) {
-    if (r !== undefined) {
-      let o = this._getDocument(r.folderId, r.pathName, r.key)
-      if (o === undefined || o.inProgressUpload === undefined) return
-      let a = this._verifyBatch.get(o.inProgressUpload.blobName)
+  async _verify(waiterInfo) {
+    if (waiterInfo !== undefined) {
+      let document = this._getDocument(waiterInfo.folderId, waiterInfo.pathName, waiterInfo.key)
+      if (document === undefined || document.inProgressUpload === undefined) return
+      let waitersForBlob = this._verifyBatch.get(document.inProgressUpload.blobName)
       if (
-        (a === undefined &&
-          ((a = new Array()),
-          this._verifyBatch.set(o.inProgressUpload.blobName, a)),
-        a.push(r),
+        (waitersForBlob === undefined &&
+          ((waitersForBlob = new Array()),
+          this._verifyBatch.set(document.inProgressUpload.blobName, waitersForBlob)),
+        waitersForBlob.push(waiterInfo),
         this._verifyBatch.size < $bt)
       )
         return
     }
-    let n = this._grabVerifyBatch()
-    if (n === undefined) return
-    let i = [...n.keys()]
-    this._logger.verbose(`verify batch: blob count = ${i.length}`)
-    let s
+    let batchToVerify = this._grabVerifyBatch()
+    if (batchToVerify === undefined) return
+    let blobNames = [...batchToVerify.keys()]
+    this._logger.verbose(`verify batch: blob count = ${blobNames.length}`)
+    let findMissingResult
     try {
-      let o = Date.now()
-      s = await retryOperation(async () => {
-        if (!(Date.now() - o > jbt)) return this._apiServer.findMissing(i)
+      let startTime = Date.now()
+      findMissingResult = await retryOperation(async () => {
+        if (!(Date.now() - startTime > jbt)) return this._apiServer.findMissing(blobNames)
       }, this._logger)
     } catch {}
-    if (s === undefined) {
+    if (findMissingResult === undefined) {
       this._logger.verbose("verify: timeout exceeded")
-      for (let o of i) {
-        let a = n.get(o)
-        for (let l of a) this._requeueVerifyWaiter(l, o)
+      for (let blobName of blobNames) {
+        let waitersForBlob = batchToVerify.get(blobName)
+        for (let waiter of waitersForBlob) this._requeueVerifyWaiter(waiter, blobName)
       }
     } else {
-      this._logVerifyResult(s)
-      let o = new Set(s.unknownBlobNames),
-        a = new Set(s.nonindexedBlobNames)
-      for (let [l, c] of n)
-        if (o.has(l))
-          for (let u of c) this.notifyMissingBlob(u.folderId, u.pathName, l)
-        else if (a.has(l)) for (let u of c) this._requeueVerifyWaiter(u, l)
-        else for (let u of c) this._commit(u, l)
+      this._logVerifyResult(findMissingResult)
+      let unknownBlobs = new Set(findMissingResult.unknownBlobNames),
+        nonindexedBlobs = new Set(findMissingResult.nonindexedBlobNames)
+      for (let [blobName, waiters] of batchToVerify)
+        if (unknownBlobs.has(blobName))
+          for (let waiter of waiters) this.notifyMissingBlob(waiter.folderId, waiter.pathName, blobName)
+        else if (nonindexedBlobs.has(blobName)) for (let waiter of waiters) this._requeueVerifyWaiter(waiter, blobName)
+        else for (let waiter of waiters) this._commit(waiter, blobName)
     }
   }
-  _commit(r, n) {
-    let i = r.folderId,
-      s = r.pathName,
-      o = this._validateInProgressUpload(i, s, r.key)
-    if (o === undefined) {
-      this._logger.verbose(`commit: upload cancelled for ${i}:${s}`)
+  _commit(waiterInfo, blobName) {
+    let folderId = waiterInfo.folderId,
+      pathName = waiterInfo.pathName,
+      uploadInfo = this._validateInProgressUpload(folderId, pathName, waiterInfo.key)
+    if (uploadInfo === undefined) {
+      this._logger.verbose(`commit: upload cancelled for ${folderId}:${pathName}`)
       return
     }
-    let [a, l] = o
-    ;(a.inProgressUpload = undefined),
+    let [document, inProgressUpload] = uploadInfo
+    ;(document.inProgressUpload = undefined),
       this._logger.verbose(
-        `commit: ${i}:${s}, ${n}; uploadSeq = ${l.uploadSeq}`,
+        `commit: ${folderId}:${pathName}, ${blobName}; uploadSeq = ${inProgressUpload.uploadSeq}`,
       ),
-      (a.uploadedBlobName = n),
-      (a.uploadedSeq = l.uploadSeq),
-      (a.changesSinceUpload = l.changesSinceUpload),
-      a.uploadRequested && this._retryUpload(r.folderId, r.pathName)
+      (document.uploadedBlobName = blobName),
+      (document.uploadedSeq = inProgressUpload.uploadSeq),
+      (document.changesSinceUpload = inProgressUpload.changesSinceUpload),
+      document.uploadRequested && this._retryUpload(waiterInfo.folderId, waiterInfo.pathName)
   }
   _purgeUnneededChangesets() {
-    let r = this.getRecentChunkInfo(this._chunkSize, true)
-    if (r.length < Tw) return
-    let n = r[Tw - 1].seq,
-      i = new Set()
-    for (let s = Tw; s < r.length; s++) {
-      let o = this._getDocument(r[s].folderId, r[s].pathName)
-      o !== undefined && i.add(o)
+    let recentChunks = this.getRecentChunkInfo(this._chunkSize, true)
+    if (recentChunks.length < Tw) return
+    let oldestNeededSeq = recentChunks[Tw - 1].seq,
+      documentsToCheck = new Set()
+    for (let index = Tw; index < recentChunks.length; index++) {
+      let document = this._getDocument(recentChunks[index].folderId, recentChunks[index].pathName)
+      document !== undefined && documentsToCheck.add(document)
     }
-    for (let s of i) {
-      if (s === undefined) continue
-      let o = s.purgeChangesets(n)
-      o > 0 &&
+    for (let document of documentsToCheck) {
+      if (document === undefined) continue
+      let purgedCount = document.purgeChangesets(oldestNeededSeq)
+      purgedCount > 0 &&
         this._logger.verbose(
-          `purge: removed ${o} changesets from ${s.folderId}:${s.pathName}`,
+          `purge: removed ${purgedCount} changesets from ${document.folderId}:${document.pathName}`,
         )
     }
   }
-  _embargo(r, n, i, s) {
-    this._logger.info(`embargoing: ${r}:${n} reason = ${s}`), i.embargo()
+  _embargo(folderId, pathName, document, reason) {
+    this._logger.info(`embargoing: ${folderId}:${pathName} reason = ${reason}`), document.embargo()
   }
-  _logVerifyResult(r) {
-    let n = r.unknownBlobNames.length > 0 ? "error" : "verbose"
+  _logVerifyResult(result) {
+    let logLevel = result.unknownBlobNames.length > 0 ? "error" : "verbose"
     this._logger.log(
-      n,
-      `find-missing reported ${r.unknownBlobNames.length} unknown blob names and ${r.nonindexedBlobNames.length} nonindexed blob names.`,
+      logLevel,
+      `find-missing reported ${result.unknownBlobNames.length} unknown blob names and ${result.nonindexedBlobNames.length} nonindexed blob names.`,
     ),
-      r.unknownBlobNames.length > 0 &&
-        (this._logger.log(n, "unknown blob names:"),
-        Sg(this._logger, n, r.unknownBlobNames, 5)),
-      r.nonindexedBlobNames.length > 0 &&
-        (this._logger.log(n, "nonindexed blob names:"),
-        Sg(this._logger, n, r.nonindexedBlobNames, 5))
+      result.unknownBlobNames.length > 0 &&
+        (this._logger.log(logLevel, "unknown blob names:"),
+        Sg(this._logger, logLevel, result.unknownBlobNames, 5)),
+      result.nonindexedBlobNames.length > 0 &&
+        (this._logger.log(logLevel, "nonindexed blob names:"),
+        Sg(this._logger, logLevel, result.nonindexedBlobNames, 5))
   }
 }
 var WIe = require("buffer")
@@ -119730,22 +119863,22 @@ function sl(e) {
               ? "qualifying"
               : "permission needed"
 }
-var V2 = class e extends DisposableContainer {
-  constructor(r, n, i, s, o, a, l, c, u, f, p, g, m, y = new Array(), v) {
+var WorkspaceManager = class WorkspaceManager extends DisposableContainer {
+  constructor(actionsModel, externalSourceFolderRecorder, syncingPermissionTracker, storageUriProvider, apiServer, configListener, featureFlagManager, clientMetricsReporter, completionServer, blobNameCalculator, maxUploadSizeBytes, syncingEnabledTracker, onboardingSessionEventReporter, languageExtensions = new Array(), options) {
     super()
-    this._actionsModel = r
-    this._externalSourceFolderRecorder = n
-    this._syncingPermissionTracker = i
-    this._storageUriProvider = s
-    this._apiServer = o
-    this._configListener = a
-    this._featureFlagManager = l
-    this._clientMetricsReporter = c
-    this._completionServer = u
-    this._blobNameCalculator = f
-    this._maxUploadSizeBytes = p
-    this._syncingEnabledTracker = g
-    this._onboardingSessionEventReporter = m
+    this._actionsModel = actionsModel
+    this._externalSourceFolderRecorder = externalSourceFolderRecorder
+    this._syncingPermissionTracker = syncingPermissionTracker
+    this._storageUriProvider = storageUriProvider
+    this._apiServer = apiServer
+    this._configListener = configListener
+    this._featureFlagManager = featureFlagManager
+    this._clientMetricsReporter = clientMetricsReporter
+    this._completionServer = completionServer
+    this._blobNameCalculator = blobNameCalculator
+    this._maxUploadSizeBytes = maxUploadSizeBytes
+    this._syncingEnabledTracker = syncingEnabledTracker
+    this._onboardingSessionEventReporter = onboardingSessionEventReporter
     ;(this._enableFileLimitsForSyncingPermission =
       this._featureFlagManager.currentFlags.enableFileLimitsForSyncingPermission),
       (this._maxTrackableFiles =
@@ -119755,7 +119888,7 @@ var V2 = class e extends DisposableContainer {
           .maxTrackableFileCountWithoutPermission,
         this._maxTrackableFiles,
       ))
-    let C = Math.min(
+    let minUploadedPercentage = Math.min(
       this._featureFlagManager.currentFlags
         .minUploadedPercentageWithoutPermission,
       100,
@@ -119763,11 +119896,11 @@ var V2 = class e extends DisposableContainer {
     if (
       ((this._verifyFolderIsSourceRepo =
         this._featureFlagManager.currentFlags.verifyFolderIsSourceRepo),
-      (this._minUploadedFractionWithoutPermission = C * 0.01),
+      (this._minUploadedFractionWithoutPermission = minUploadedPercentage * 0.01),
       (this._refuseToSyncHomeDirectories =
         this._featureFlagManager.currentFlags.refuseToSyncHomeDirectories),
       (this._useCheckpointManagerContext =
-        v?.useCheckpointManagerContext ??
+        options?.useCheckpointManagerContext ??
         isMinVersionMet(
           this._featureFlagManager.currentFlags
             .useCheckpointManagerContextMinVersion,
@@ -119808,18 +119941,18 @@ var V2 = class e extends DisposableContainer {
     )
       this._fileExtensions = undefined
     else {
-      let T = new Set()
-      for (let N of y) for (let W of N.extensions) T.add(W)
-      this._fileExtensions = T
+      let extensionSet = new Set()
+      for (let language of languageExtensions) for (let extension of language.extensions) extensionSet.add(extension)
+      this._fileExtensions = extensionSet
     }
     ;(this._pathHandler = new F2(this._maxUploadSizeBytes, fIe())),
       (this._pathMap = this.addDisposable(new N2()))
-    let E
+    let openFileManagerV2
     if (this._configListener.config.openFileManager.v2Enabled) {
-      let T = new _2(this._blobNameCalculator, this._apiServer)
-      this.addDisposable(T), (E = new w2(T, this._blobNameCalculator))
+      let fileUploader = new _2(this._blobNameCalculator, this._apiServer)
+      this.addDisposable(fileUploader), (openFileManagerV2 = new w2(fileUploader, this._blobNameCalculator))
     }
-    let w = new M2(
+    let openFileManagerV1 = new OpenFileManager(
       this._apiServer,
       this._completionServer,
       this._configListener,
@@ -119827,22 +119960,22 @@ var V2 = class e extends DisposableContainer {
       this._pathMap,
       this._sequenceGenerator,
     )
-    this.addDisposable(w),
-      (this._openFileManager = new y2(this._configListener, w, E))
-    let B = v?.blobsCheckpointThreshold
+    this.addDisposable(openFileManagerV1),
+      (this._openFileManager = new OpenFileManagerProxy(this._configListener, openFileManagerV1, openFileManagerV2))
+    let checkpointThreshold = options?.blobsCheckpointThreshold
     ;(this._blobsCheckpointManager = this.addDisposable(
       new B2(
         this._apiServer,
         this._featureFlagManager,
         this._pathMap.onDidChangeBlobName,
-        B,
+        checkpointThreshold,
       ),
     )),
       (this._unknownBlobHandler = this.addDisposable(
         new q2(this._apiServer, this),
       )),
       (this._sourceFolderReconciler = this.addDisposable(
-        new ld(() => this._reconcileSourceFolders()),
+        new SingletonExecutor(() => this._reconcileSourceFolders()),
       )),
       (this._sourceFolderDescriber = new L2(
         this._apiServer,
@@ -119919,8 +120052,8 @@ var V2 = class e extends DisposableContainer {
       this._awaitInitialSourceFolders()
   }
   static augmentRootName = ".augmentroot"
-  static ignoreSources(r) {
-    return [new ww(".gitignore"), new a2(r), new ww(".augmentignore")]
+  static ignoreSources(folderRoot) {
+    return [new ww(".gitignore"), new a2(folderRoot), new ww(".augmentignore")]
   }
   static pathMapPersistFrequencyMs = 6e4
   static defaultPathAccept = new wg()
@@ -119993,13 +120126,13 @@ var V2 = class e extends DisposableContainer {
     return this._fileWillRenameEmitter.event
   }
   get initialFoldersEnumerated() {
-    return Array.from(this._initialSourceFolders).every((r) => {
-      let n = this._registeredSourceFolders.get(r)
-      if (n === undefined) return true
-      let i = sl(n)
-      return Qw(i) || YIe(i) || i === "permission denied"
+    return Array.from(this._initialSourceFolders).every((folderRoot) => {
+      let folderInfo = this._registeredSourceFolders.get(folderRoot)
+      if (folderInfo === undefined) return true
+      let folderStatus = sl(folderInfo)
+      return Qw(folderStatus) || YIe(folderStatus) || folderStatus === "permission denied"
         ? true
-        : this._trackedSourceFolders.get(r)?.sourceFolder
+        : this._trackedSourceFolders.get(folderRoot)?.sourceFolder
             ?.initialEnumerationComplete
     })
   }
@@ -120011,13 +120144,13 @@ var V2 = class e extends DisposableContainer {
     return this._folderEnumeratedEmitter.event
   }
   get initialFoldersSynced() {
-    return Array.from(this._initialSourceFolders).every((r) => {
-      let n = this._registeredSourceFolders.get(r)
-      if (n === undefined) return true
-      let i = sl(n)
-      return Qw(i) || YIe(i) || i === "permission denied"
+    return Array.from(this._initialSourceFolders).every((folderRoot) => {
+      let folderInfo = this._registeredSourceFolders.get(folderRoot)
+      if (folderInfo === undefined) return true
+      let folderStatus = sl(folderInfo)
+      return Qw(folderStatus) || YIe(folderStatus) || folderStatus === "permission denied"
         ? true
-        : this._trackedSourceFolders.get(r)?.sourceFolder?.initialSyncComplete
+        : this._trackedSourceFolders.get(folderRoot)?.sourceFolder?.initialSyncComplete
     })
   }
   async awaitInitialFoldersSynced() {
@@ -120031,13 +120164,13 @@ var V2 = class e extends DisposableContainer {
     if (!this._syncingPermissionInitialized) return "initializing"
     if (this._syncingPermissionTracker.syncingPermissionDenied)
       return "disabled"
-    let r = 0
-    for (let [n, i] of this._registeredSourceFolders) {
-      let s = sl(i)
-      if (Qw(s) || s === "permission denied") return "disabled"
-      s === "permission needed" && r++
+    let permissionNeededCount = 0
+    for (let [folderRoot, folderInfo] of this._registeredSourceFolders) {
+      let folderStatus = sl(folderInfo)
+      if (Qw(folderStatus) || folderStatus === "permission denied") return "disabled"
+      folderStatus === "permission needed" && permissionNeededCount++
     }
-    return r > 0 ? "partial" : "enabled"
+    return permissionNeededCount > 0 ? "partial" : "enabled"
   }
   get onDidChangeSyncingState() {
     return this._syncingStateEmitter.event
@@ -120061,10 +120194,10 @@ var V2 = class e extends DisposableContainer {
     return this._completionServer
   }
   _disposeSourceFolders() {
-    this._registeredSourceFolders.forEach((r) => {
-      r.cancel?.cancel(), r.cancel?.dispose(), (r.cancel = undefined)
+    this._registeredSourceFolders.forEach((folderInfo) => {
+      folderInfo.cancel?.cancel(), folderInfo.cancel?.dispose(), (folderInfo.cancel = undefined)
     }),
-      this._trackedSourceFolders.forEach((r) => r.sourceFolder?.dispose()),
+      this._trackedSourceFolders.forEach((trackedFolder) => trackedFolder.sourceFolder?.dispose()),
       this._trackedSourceFolders.clear(),
       this._vcsWatcher?.dispose(),
       this._fileEditManager?.dispose()
@@ -120106,14 +120239,14 @@ var V2 = class e extends DisposableContainer {
             this._configListener.config.enableDebugFeatures,
           )),
           this._fileEditManager.listenToEvents(),
-          this._trackedSourceFolders.forEach((r) => {
-            r.sourceFolder !== undefined &&
+          this._trackedSourceFolders.forEach((trackedFolder) => {
+            trackedFolder.sourceFolder !== undefined &&
               this._fileEditManager?.startTracking(
-                r.sourceFolder.folderId,
-                r.sourceFolder.folderName,
+                trackedFolder.sourceFolder.folderId,
+                trackedFolder.sourceFolder.folderName,
                 {
                   directory: this._computeCacheDirPath(
-                    r.sourceFolder.folderRoot,
+                    trackedFolder.sourceFolder.folderRoot,
                   ),
                 },
               )
@@ -120121,50 +120254,50 @@ var V2 = class e extends DisposableContainer {
         : this._disposeEditFileManager())
   }
   getSyncingProgress() {
-    let r = new Array()
+    let progressItems = new Array()
     return (
-      this._trackedSourceFolders.forEach((n, i) => {
-        r.push(this._getSyncingProgress(i, n.sourceFolder))
+      this._trackedSourceFolders.forEach((trackedFolder, folderRoot) => {
+        progressItems.push(this._getSyncingProgress(folderRoot, trackedFolder.sourceFolder))
       }),
-      r
+      progressItems
     )
   }
-  _reportSyncingProgress(r) {
-    this._syncingProgressEmitter.fire(this._getSyncingProgress(r.folderRoot, r))
+  _reportSyncingProgress(sourceFolder) {
+    this._syncingProgressEmitter.fire(this._getSyncingProgress(sourceFolder.folderRoot, sourceFolder))
   }
-  _getSyncingProgress(r, n) {
-    let i = n?.initialEnumerationComplete
+  _getSyncingProgress(folderRoot, sourceFolder) {
+    let progress = sourceFolder?.initialEnumerationComplete
       ? {
-          newlyTracked: n._newlyTracked,
-          trackedFiles: this._pathMap.trackedFileCount(n.folderId),
-          backlogSize: n.diskFileManager.itemsInFlight,
+          newlyTracked: sourceFolder._newlyTracked,
+          trackedFiles: this._pathMap.trackedFileCount(sourceFolder.folderId),
+          backlogSize: sourceFolder.diskFileManager.itemsInFlight,
         }
       : undefined
-    return { folderRoot: r, progress: i }
+    return { folderRoot: folderRoot, progress: progress }
   }
-  _isHomeDir(r) {
+  _isHomeDir(folderPath) {
     return this._featureFlagManager.currentFlags.refuseToSyncHomeDirectories
-      ? BIe(r)
+      ? BIe(folderPath)
       : false
   }
   _registerInitialSourceFolders() {
-    let r = new Array()
-    St.workspace.workspaceFolders?.forEach((i) => {
-      let s = Fw(i.uri)
-      s !== undefined && this._mtimeCacheExists(s) && r.push(s)
+    let externalFolders = new Array()
+    St.workspace.workspaceFolders?.forEach((workspaceFolder) => {
+      let folderPath = Fw(workspaceFolder.uri)
+      folderPath !== undefined && this._mtimeCacheExists(folderPath) && externalFolders.push(folderPath)
     }),
-      this._syncingPermissionTracker.setDefaultPermissions(r),
-      this._externalSourceFolderRecorder.getFolders().forEach((i, s) => {
-        if (this._isHomeDir(s)) {
+      this._syncingPermissionTracker.setDefaultPermissions(externalFolders),
+      this._externalSourceFolderRecorder.getFolders().forEach((folderName, folderPath) => {
+        if (this._isHomeDir(folderPath)) {
           this._logger.info(
-            `Rejecting external source folder ${s}: home directory`,
+            `Rejecting external source folder ${folderPath}: home directory`,
           )
           return
         }
-        this._logger.info(`Adding external source folder ${s}`),
-          this._initialSourceFolders.add(s),
-          this._registeredSourceFolders.set(s, {
-            folderName: i,
+        this._logger.info(`Adding external source folder ${folderPath}`),
+          this._initialSourceFolders.add(folderPath),
+          this._registeredSourceFolders.set(folderPath, {
+            folderName: folderName,
             isHomeDir: false,
             folderType: 1,
             syncingPermission: this._syncingPermissionTracker
@@ -120173,89 +120306,89 @@ var V2 = class e extends DisposableContainer {
               : "granted",
           })
       })
-    let n = new Array()
-    St.workspace.workspaceFolders?.forEach((i) => {
-      let s = i.name,
-        o = Fw(i.uri)
-      if (o === undefined) return
-      let a = this._syncingPermissionTracker.getFolderSyncingPermission(o)
+    let permittedFolders = new Array()
+    St.workspace.workspaceFolders?.forEach((workspaceFolder) => {
+      let folderName = workspaceFolder.name,
+        folderPath = Fw(workspaceFolder.uri)
+      if (folderPath === undefined) return
+      let syncingPermission = this._syncingPermissionTracker.getFolderSyncingPermission(folderPath)
       this._logger.info(
-        `Adding workspace folder ${s}; folderRoot = ${o}; syncingPermission = ${a}`,
+        `Adding workspace folder ${folderName}; folderRoot = ${folderPath}; syncingPermission = ${syncingPermission}`,
       ),
-        this._initialSourceFolders.add(o),
-        this._registeredSourceFolders.set(o, {
-          folderName: s,
-          isHomeDir: this._isHomeDir(o),
+        this._initialSourceFolders.add(folderPath),
+        this._registeredSourceFolders.set(folderPath, {
+          folderName: folderName,
+          isHomeDir: this._isHomeDir(folderPath),
           folderType: 0,
-          syncingPermission: a,
-          workspaceFolder: i,
+          syncingPermission: syncingPermission,
+          workspaceFolder: workspaceFolder,
         }),
-        a === "granted" && n.push(o)
+        syncingPermission === "granted" && permittedFolders.push(folderPath)
     }),
-      this._syncingPermissionTracker.dropStaleFolders(n),
+      this._syncingPermissionTracker.dropStaleFolders(permittedFolders),
       this._setSyncingPermissionInitialized()
   }
-  _mtimeCacheExists(r) {
-    let n = this._computeCacheDirPath(r)
-    return T2(n)
+  _mtimeCacheExists(folderPath) {
+    let cacheDirPath = this._computeCacheDirPath(folderPath)
+    return T2(cacheDirPath)
   }
   _setSyncingPermissionInitialized() {
     ;(this._syncingPermissionInitialized = true),
       (this._syncingEnabledTracker.workspaceManager = this)
   }
   async _awaitInitialSourceFolders() {
-    let r = Date.now()
+    let startTime = Date.now()
     this._kickSourceFolderReconciler(),
       await this.awaitInitialFoldersSynced(),
-      this._reportWorkspaceStartup(Date.now() - r),
+      this._reportWorkspaceStartup(Date.now() - startTime),
       this._folderSyncedEmitter.fire()
   }
-  _handleWorkspaceFolderChangeEvent(r) {
-    for (let i of r.added) {
-      let s = i.name,
-        o = Fw(i.uri)
-      if (o === undefined) continue
-      let a = this._syncingPermissionTracker.getFolderSyncingPermission(o)
+  _handleWorkspaceFolderChangeEvent(event) {
+    for (let workspaceFolder of event.added) {
+      let folderName = workspaceFolder.name,
+        folderPath = Fw(workspaceFolder.uri)
+      if (folderPath === undefined) continue
+      let syncingPermission = this._syncingPermissionTracker.getFolderSyncingPermission(folderPath)
       this._logger.info(
-        `Adding workspace folder ${s}; folderRoot = ${o}; syncingPermission = ${a}`,
+        `Adding workspace folder ${folderName}; folderRoot = ${folderPath}; syncingPermission = ${syncingPermission}`,
       ),
-        this._registeredSourceFolders.set(o, {
-          folderName: s,
-          isHomeDir: this._isHomeDir(o),
+        this._registeredSourceFolders.set(folderPath, {
+          folderName: folderName,
+          isHomeDir: this._isHomeDir(folderPath),
           folderType: 0,
-          syncingPermission: a,
-          workspaceFolder: i,
+          syncingPermission: syncingPermission,
+          workspaceFolder: workspaceFolder,
         })
     }
-    let n = new Array()
-    for (let i of r.removed) {
-      let s = Fw(i.uri)
-      if (s === undefined) continue
-      this._logger.info(`Removing workspace folder ${s}`)
-      let o = this._registeredSourceFolders.get(s)
-      o !== undefined &&
-        (o.cancel?.cancel(),
-        o.cancel?.dispose(),
-        (o.cancel = undefined),
-        this._registeredSourceFolders.delete(s),
-        n.push(s))
+    let removedFolders = new Array()
+    for (let workspaceFolder of event.removed) {
+      let folderPath = Fw(workspaceFolder.uri)
+      if (folderPath === undefined) continue
+      this._logger.info(`Removing workspace folder ${folderPath}`)
+      let folderInfo = this._registeredSourceFolders.get(folderPath)
+      folderInfo !== undefined &&
+        (folderInfo.cancel?.cancel(),
+        folderInfo.cancel?.dispose(),
+        (folderInfo.cancel = undefined),
+        this._registeredSourceFolders.delete(folderPath),
+        removedFolders.push(folderPath))
     }
-    this._syncingPermissionTracker.dropPermission(n),
+    this._syncingPermissionTracker.dropPermission(removedFolders),
       this._kickSourceFolderReconciler()
   }
-  addExternalSourceFolder(r) {
-    let n = Fw(r)
-    if (n === undefined) throw new OF()
-    if (this._registeredSourceFolders.has(n)) throw new HF()
+  addExternalSourceFolder(uri) {
+    let folderPath = Fw(uri)
+    if (folderPath === undefined) throw new OF()
+    if (this._registeredSourceFolders.has(folderPath)) throw new HF()
     try {
-      if (getFileStats(n).type !== "Directory") throw new VF()
-    } catch (i) {
-      throw new qF(getErrorMessage(i))
+      if (getFileStats(folderPath).type !== "Directory") throw new VF()
+    } catch (error) {
+      throw new qF(getErrorMessage(error))
     }
-    if (this._isHomeDir(n)) throw new WF()
-    this._logger.info(`Adding external source folder ${getUriPath(r)}`),
-      this._registeredSourceFolders.set(n, {
-        folderName: K0e(n),
+    if (this._isHomeDir(folderPath)) throw new WF()
+    this._logger.info(`Adding external source folder ${getUriPath(uri)}`),
+      this._registeredSourceFolders.set(folderPath, {
+        folderName: K0e(folderPath),
         isHomeDir: false,
         folderType: 1,
         syncingPermission: this._syncingPermissionTracker
@@ -120265,918 +120398,918 @@ var V2 = class e extends DisposableContainer {
       }),
       this._kickSourceFolderReconciler()
   }
-  removeExternalSourceFolder(r) {
-    let n = this._registeredSourceFolders.get(r)
-    if (n !== undefined) {
-      if (n.folderType !== 1) throw new GF()
-      this._logger.info(`Removing external source folder ${r}`),
-        this._registeredSourceFolders.delete(r),
+  removeExternalSourceFolder(folderPath) {
+    let folderInfo = this._registeredSourceFolders.get(folderPath)
+    if (folderInfo !== undefined) {
+      if (folderInfo.folderType !== 1) throw new GF()
+      this._logger.info(`Removing external source folder ${folderPath}`),
+        this._registeredSourceFolders.delete(folderPath),
         this._kickSourceFolderReconciler()
     }
   }
   enableSyncing() {
     this._logger.info("Enabling syncing for all trackable source folders")
-    let r = new Array()
-    this._registeredSourceFolders.forEach((n, i) => {
-      let s = sl(n)
-      Qw(s) ||
-        s === "qualifying" ||
-        ((n.syncingPermission = "granted"), r.push(i))
+    let permittedFolders = new Array()
+    this._registeredSourceFolders.forEach((folderInfo, folderPath) => {
+      let folderStatus = sl(folderInfo)
+      Qw(folderStatus) ||
+        folderStatus === "qualifying" ||
+        ((folderInfo.syncingPermission = "granted"), permittedFolders.push(folderPath))
     }),
-      this._syncingPermissionTracker.setPermittedFolders(r),
+      this._syncingPermissionTracker.setPermittedFolders(permittedFolders),
       this._kickSourceFolderReconciler()
   }
   disableSyncing() {
     this._logger.info("Disabling syncing for all trackable source folders"),
-      this._registeredSourceFolders.forEach((r) => {
-        let n = sl(r)
-        Qw(n) || (r.syncingPermission = "denied")
+      this._registeredSourceFolders.forEach((folderInfo) => {
+        let folderStatus = sl(folderInfo)
+        Qw(folderStatus) || (folderInfo.syncingPermission = "denied")
       }),
       this._syncingPermissionTracker.denyPermission(),
       this._kickSourceFolderReconciler()
   }
   requalifyLargeFolders() {
-    this._registeredSourceFolders.forEach((r) => {
-      r.folderQualification = undefined
+    this._registeredSourceFolders.forEach((folderInfo) => {
+      folderInfo.folderQualification = undefined
     }),
       this._kickSourceFolderReconciler()
   }
   async _kickSourceFolderReconciler() {
     await this._updateStoredExternalSourceFolders()
-    let r = new Set()
-    for (let [n, i] of this._registeredSourceFolders)
-      if (sl(i) === "trackable") {
-        for (let [o, a] of this._registeredSourceFolders)
-          if (sl(a) === "trackable" && n !== o && Qs(o, n)) {
-            r.add(n)
+    let nestedFolders = new Set()
+    for (let [folderPath, folderInfo] of this._registeredSourceFolders)
+      if (sl(folderInfo) === "trackable") {
+        for (let [otherPath, otherInfo] of this._registeredSourceFolders)
+          if (sl(otherInfo) === "trackable" && folderPath !== otherPath && Qs(otherPath, folderPath)) {
+            nestedFolders.add(folderPath)
             break
           }
       }
-    for (let [n, i] of this._registeredSourceFolders) {
-      if (!r.has(n)) {
-        i.containingFolderRoot = undefined
+    for (let [folderPath, folderInfo] of this._registeredSourceFolders) {
+      if (!nestedFolders.has(folderPath)) {
+        folderInfo.containingFolderRoot = undefined
         continue
       }
-      for (let s of this._registeredSourceFolders.keys())
-        if (!(n === s || r.has(s)) && Qs(s, n)) {
-          i.containingFolderRoot !== s &&
+      for (let otherPath of this._registeredSourceFolders.keys())
+        if (!(folderPath === otherPath || nestedFolders.has(otherPath)) && Qs(otherPath, folderPath)) {
+          folderInfo.containingFolderRoot !== otherPath &&
             this._logger.info(
-              `Source folder ${n} will not be tracked. Containing folder: ${s}`,
+              `Source folder ${folderPath} will not be tracked. Containing folder: ${otherPath}`,
             ),
-            (i.containingFolderRoot = s)
+            (folderInfo.containingFolderRoot = otherPath)
           break
         }
     }
     this._updateActionsModelState()
-    for (let [n, i] of this._registeredSourceFolders)
-      sl(i) === "qualifying" &&
-        i.cancel === undefined &&
-        this._qualifySourceFolder(n, i)
+    for (let [folderPath, folderInfo] of this._registeredSourceFolders)
+      sl(folderInfo) === "qualifying" &&
+        folderInfo.cancel === undefined &&
+        this._qualifySourceFolder(folderPath, folderInfo)
     this._syncingStateEmitter.fire(this.syncingEnabledState),
       this._sourceFoldersChangedEmitter.fire(),
       this._sourceFolderReconciler.kick()
   }
   async _updateStoredExternalSourceFolders() {
-    let r = new Map()
-    for (let [n, i] of this._registeredSourceFolders)
-      i.folderType === 1 && r.set(n, i.folderName)
-    await this._externalSourceFolderRecorder.setFolders(r)
+    let externalFolders = new Map()
+    for (let [folderPath, folderInfo] of this._registeredSourceFolders)
+      folderInfo.folderType === 1 && externalFolders.set(folderPath, folderInfo.folderName)
+    await this._externalSourceFolderRecorder.setFolders(externalFolders)
   }
   _updateActionsModelState() {
     if (this._syncingPermissionTracker.syncingPermissionDenied) {
       this._actionsModel.setSystemStateStatus("syncingPermitted", "incomplete")
       return
     }
-    let r = false,
-      n = false,
-      i = false
-    for (let [l, c] of this._registeredSourceFolders) {
-      let u = sl(c)
-      if (u === "permission needed") {
-        r = true
+    let permissionNeeded = false,
+      homeDirFound = false,
+      tooLargeFound = false
+    for (let [folderPath, folderInfo] of this._registeredSourceFolders) {
+      let folderStatus = sl(folderInfo)
+      if (folderStatus === "permission needed") {
+        permissionNeeded = true
         break
-      } else if (u === "home directory") {
-        n = true
+      } else if (folderStatus === "home directory") {
+        homeDirFound = true
         break
-      } else if (u === "too large") {
-        i = true
+      } else if (folderStatus === "too large") {
+        tooLargeFound = true
         break
       }
     }
-    let s = r ? "initializing" : "complete"
-    this._actionsModel.setSystemStateStatus("syncingPermitted", s)
-    let o = n ? "complete" : "initializing"
-    this._actionsModel.setSystemStateStatus("uploadingHomeDir", o)
-    let a = i ? "complete" : "initializing"
-    this._actionsModel.setSystemStateStatus("workspaceTooLarge", a)
+    let syncingStatus = permissionNeeded ? "initializing" : "complete"
+    this._actionsModel.setSystemStateStatus("syncingPermitted", syncingStatus)
+    let homeDirStatus = homeDirFound ? "complete" : "initializing"
+    this._actionsModel.setSystemStateStatus("uploadingHomeDir", homeDirStatus)
+    let workspaceSizeStatus = tooLargeFound ? "complete" : "initializing"
+    this._actionsModel.setSystemStateStatus("workspaceTooLarge", workspaceSizeStatus)
   }
-  async _qualifySourceFolder(r, n) {
-    let [i, s] = await this._findRepoRoot(r),
-      o,
-      a
+  async _qualifySourceFolder(folderPath, folderInfo) {
+    let [repoRoot, isRepo] = await this._findRepoRoot(folderPath),
+      qualification,
+      qualificationType
     if (this._enableFileLimitsForSyncingPermission) {
-      ;(a = "full"),
-        this._logger.info(`Beginning ${a} qualification of source folder ${r}`)
-      let c = new St.CancellationTokenSource()
+      ;(qualificationType = "full"),
+        this._logger.info(`Beginning ${qualificationType} qualification of source folder ${folderPath}`)
+      let cancellationSource = new St.CancellationTokenSource()
       if (
-        ((n.cancel = c),
-        (o = await this._sourceFolderDescriber.describe(
-          r,
-          i,
-          e.ignoreSources(r),
+        ((folderInfo.cancel = cancellationSource),
+        (qualification = await this._sourceFolderDescriber.describe(
+          folderPath,
+          repoRoot,
+          WorkspaceManager.ignoreSources(folderPath),
         )),
-        c.token.isCancellationRequested)
+        cancellationSource.token.isCancellationRequested)
       ) {
-        this._logger.info(`Cancelled qualification of source folder ${r}`)
+        this._logger.info(`Cancelled qualification of source folder ${folderPath}`)
         return
       }
-      ;(n.cancel = undefined), c.dispose()
+      ;(folderInfo.cancel = undefined), cancellationSource.dispose()
     } else
-      (a = "phony"),
+      (qualificationType = "phony"),
         this._logger.info(
-          `Beginning ${a} qualification of source folder ${r} per feature flag`,
+          `Beginning ${qualificationType} qualification of source folder ${folderPath} per feature flag`,
         ),
-        (o = { trackable: true, trackableFiles: 0, uploadedFraction: 1 })
-    let l = { ...o, repoRoot: i, isRepo: s }
-    ;(n.folderQualification = l),
+        (qualification = { trackable: true, trackableFiles: 0, uploadedFraction: 1 })
+    let folderQualification = { ...qualification, repoRoot: repoRoot, isRepo: isRepo }
+    ;(folderInfo.folderQualification = folderQualification),
       this._syncingPermissionTracker.syncingPermissionDenied
         ? this._logger.info(
-            `Finished ${a} qualification of source folder ${r}: syncing disabled for workspace`,
+            `Finished ${qualificationType} qualification of source folder ${folderPath}: syncing disabled for workspace`,
           )
-        : l.trackable
+        : folderQualification.trackable
           ? (this._logger.info(
-              `Finished ${a} qualification of source folder ${r}: trackable files: ${l.trackableFiles}, uploaded fraction: ${l.uploadedFraction}, is repo: ${l.isRepo}`,
+              `Finished ${qualificationType} qualification of source folder ${folderPath}: trackable files: ${folderQualification.trackableFiles}, uploaded fraction: ${folderQualification.uploadedFraction}, is repo: ${folderQualification.isRepo}`,
             ),
-            l.trackableFiles > this._maxTrackableFilesWithoutPermission
+            folderQualification.trackableFiles > this._maxTrackableFilesWithoutPermission
               ? this._logger.info(
                   `Requesting syncing permission because source folder has more than ${this._maxTrackableFilesWithoutPermission} files`,
                 )
-              : this._verifyFolderIsSourceRepo && !l.isRepo
+              : this._verifyFolderIsSourceRepo && !folderQualification.isRepo
                 ? this._logger.info(
                     "Requesting syncing permission because source folder does not appear to be a source repo",
                   )
-                : l.uploadedFraction <
+                : folderQualification.uploadedFraction <
                     this._minUploadedFractionWithoutPermission
                   ? this._logger.info(
                       `Requesting syncing permission because source folder has less than ${this._minUploadedFractionWithoutPermission * 100}% of files uploaded`,
                     )
-                  : ((n.syncingPermission = "granted"),
+                  : ((folderInfo.syncingPermission = "granted"),
                     this._syncingPermissionTracker.addImplicitlyPermittedFolder(
-                      r,
+                      folderPath,
                     )))
           : this._logger.info(
-              `Finished ${a} qualification of source folder ${r}: folder not trackable; too large`,
+              `Finished ${qualificationType} qualification of source folder ${folderPath}: folder not trackable; too large`,
             ),
       this._kickSourceFolderReconciler()
   }
   async _reconcileSourceFolders() {
     await this._syncingPermissionTracker.persistCurrentPermission()
-    let r = this.syncingEnabledState === "disabled",
-      n = new Map()
-    for (let [s, o] of this._trackedSourceFolders) {
-      let a = this._registeredSourceFolders.get(s),
-        l
-      if (a === undefined) l = "source folder has been removed"
-      else if (r) l = "syncing is disabled"
-      else if (a.containingFolderRoot !== undefined)
-        l = `source folder is nested inside folder ${a.containingFolderRoot}`
-      else if (a.isHomeDir) l = "source folder is a home directory"
-      else if (a.folderQualification?.trackable === false)
-        l = "source folder is too large"
+    let syncingDisabled = this.syncingEnabledState === "disabled",
+      foldersToStop = new Map()
+    for (let [folderPath, trackedFolder] of this._trackedSourceFolders) {
+      let folderInfo = this._registeredSourceFolders.get(folderPath),
+        stopReason
+      if (folderInfo === undefined) stopReason = "source folder has been removed"
+      else if (syncingDisabled) stopReason = "syncing is disabled"
+      else if (folderInfo.containingFolderRoot !== undefined)
+        stopReason = `source folder is nested inside folder ${folderInfo.containingFolderRoot}`
+      else if (folderInfo.isHomeDir) stopReason = "source folder is a home directory"
+      else if (folderInfo.folderQualification?.trackable === false)
+        stopReason = "source folder is too large"
       else {
-        let c = sl(a)
-        c === "permission denied"
-          ? (l = "syncing permission denied for this source folder")
-          : c === "permission needed"
-            ? (l = "syncing permission not yet granted for this source folder")
-            : c === "qualifying" && (l = "source folder is being qualified")
+        let folderStatus = sl(folderInfo)
+        folderStatus === "permission denied"
+          ? (stopReason = "syncing permission denied for this source folder")
+          : folderStatus === "permission needed"
+            ? (stopReason = "syncing permission not yet granted for this source folder")
+            : folderStatus === "qualifying" && (stopReason = "source folder is being qualified")
       }
-      l !== undefined && n.set(s, [o, l])
+      stopReason !== undefined && foldersToStop.set(folderPath, [trackedFolder, stopReason])
     }
-    let i = new Map()
-    for (let [s, o] of this._registeredSourceFolders) {
-      if (sl(o) !== "trackable") continue
-      let l = this._trackedSourceFolders.get(s)
-      l === undefined &&
-        ((l = {
-          folderName: o.folderName,
-          folderSpec: (0, nc.cloneDeep)(o),
+    let foldersToStart = new Map()
+    for (let [folderPath, folderInfo] of this._registeredSourceFolders) {
+      if (sl(folderInfo) !== "trackable") continue
+      let trackedFolder = this._trackedSourceFolders.get(folderPath)
+      trackedFolder === undefined &&
+        ((trackedFolder = {
+          folderName: folderInfo.folderName,
+          folderSpec: (0, nc.cloneDeep)(folderInfo),
           cancel: new St.CancellationTokenSource(),
           sourceFolder: undefined,
-          logger: z(`WorkspaceManager[${o.folderName}]`),
+          logger: z(`WorkspaceManager[${folderInfo.folderName}]`),
         }),
-        i.set(s, l))
+        foldersToStart.set(folderPath, trackedFolder))
     }
-    for (let [s, [o, a]] of n)
-      o.logger.info(`Stop tracking: ${a}`),
-        this._trackedSourceFolders.delete(s),
-        this._stopTracking(o)
-    for (let [s, o] of i)
-      o.logger.info("Start tracking"),
-        this._trackedSourceFolders.set(s, o),
-        this._startTracking(s, o)
+    for (let [folderPath, [trackedFolder, stopReason]] of foldersToStop)
+      trackedFolder.logger.info(`Stop tracking: ${stopReason}`),
+        this._trackedSourceFolders.delete(folderPath),
+        this._stopTracking(trackedFolder)
+    for (let [folderPath, trackedFolder] of foldersToStart)
+      trackedFolder.logger.info("Start tracking"),
+        this._trackedSourceFolders.set(folderPath, trackedFolder),
+        this._startTracking(folderPath, trackedFolder)
     return Promise.resolve()
   }
-  async _startTracking(r, n) {
-    let i = new l2("Startup metrics"),
-      s = n.cancel,
-      o = await this._createSourceFolder(r, n, s.token)
-    if (s.token.isCancellationRequested) {
-      n.logger.info("Cancelled in-progress creation of source folder"),
-        o?.dispose()
+  async _startTracking(folderPath, trackedFolder) {
+    let startupMetrics = new l2("Startup metrics"),
+      cancellationSource = trackedFolder.cancel,
+      sourceFolder = await this._createSourceFolder(folderPath, trackedFolder, cancellationSource.token)
+    if (cancellationSource.token.isCancellationRequested) {
+      trackedFolder.logger.info("Cancelled in-progress creation of source folder"),
+        sourceFolder?.dispose()
       return
     }
     if (
-      (i.charge("create SourceFolder"),
-      s.dispose(),
-      o === undefined || this._stopping)
+      (startupMetrics.charge("create SourceFolder"),
+      cancellationSource.dispose(),
+      sourceFolder === undefined || this._stopping)
     ) {
-      n.logger.info("Stopped tracking source folder")
+      trackedFolder.logger.info("Stopped tracking source folder")
       return
     }
-    n.sourceFolder = o
-    let a = n.folderName,
-      l = o.folderId,
-      c = await UIe(a, o.cacheDirPath)
-    if ((i.charge("read MtimeCache"), o.stopped)) {
-      n.logger.info("Stopped tracking source folder")
+    trackedFolder.sourceFolder = sourceFolder
+    let folderName = trackedFolder.folderName,
+      folderId = sourceFolder.folderId,
+      mtimeCache = await UIe(folderName, sourceFolder.cacheDirPath)
+    if ((startupMetrics.charge("read MtimeCache"), sourceFolder.stopped)) {
+      trackedFolder.logger.info("Stopped tracking source folder")
       return
     }
-    for (let [f, p] of c)
-      this._pathMap.insert(l, f, "File", e.defaultPathAccept),
-        this._pathMap.update(l, f, 0, p.name, p.mtime)
-    i.charge("pre-populate PathMap")
-    let u = new DisposableCollection()
+    for (let [filePath, fileInfo] of mtimeCache)
+      this._pathMap.insert(folderId, filePath, "File", WorkspaceManager.defaultPathAccept),
+        this._pathMap.update(folderId, filePath, 0, fileInfo.name, fileInfo.mtime)
+    startupMetrics.charge("pre-populate PathMap")
+    let disposables = new DisposableCollection()
     try {
-      ;(o._newlyTracked = c.size === 0),
-        u.add({ dispose: () => (o._newlyTracked = false) })
-      let f = await this._refreshSourceFolder(o, i)
-      if (f === undefined || o.stopped) return
-      i.charge("enumerate"),
-        o.setInitialEnumerationComplete(),
+      ;(sourceFolder._newlyTracked = mtimeCache.size === 0),
+        disposables.add({ dispose: () => (sourceFolder._newlyTracked = false) })
+      let enumerationResult = await this._refreshSourceFolder(sourceFolder, startupMetrics)
+      if (enumerationResult === undefined || sourceFolder.stopped) return
+      startupMetrics.charge("enumerate"),
+        sourceFolder.setInitialEnumerationComplete(),
         this._folderEnumeratedEmitter.fire()
-      let p = this._pathMap.onDidChangePathStatus(l)
-      if (p === undefined) return
-      o.addDisposable(
-        p((m) => {
-          this._sourceFolderContentsChangedEmitter.fire(r)
+      let pathStatusChangeEvent = this._pathMap.onDidChangePathStatus(folderId)
+      if (pathStatusChangeEvent === undefined) return
+      sourceFolder.addDisposable(
+        pathStatusChangeEvent((m) => {
+          this._sourceFolderContentsChangedEmitter.fire(folderPath)
         }),
         true,
       ),
-        o.addDisposable(
-          p((m) => {
-            this._reportSyncingProgress(o)
+        sourceFolder.addDisposable(
+          pathStatusChangeEvent((m) => {
+            this._reportSyncingProgress(sourceFolder)
           }),
         ),
-        o.addDisposable(
-          o.diskFileManager.onDidChangeInProgressItemCount(() =>
-            this._reportSyncingProgress(o),
+        sourceFolder.addDisposable(
+          sourceFolder.diskFileManager.onDidChangeInProgressItemCount(() =>
+            this._reportSyncingProgress(sourceFolder),
           ),
         ),
-        this._reportSyncingProgress(o),
+        this._reportSyncingProgress(sourceFolder),
         this._sourceFoldersChangedEmitter.fire(),
-        await o.diskFileManager.awaitQuiesced(),
-        o.setInitialSyncComplete(),
+        await sourceFolder.diskFileManager.awaitQuiesced(),
+        sourceFolder.setInitialSyncComplete(),
         this._folderSyncedEmitter.fire(),
-        i?.charge("await DiskFileManager quiesced")
-      let g = new D2(a, o.cacheDirPath)
-      this._pathMap.enablePersist(l, g, e.pathMapPersistFrequencyMs),
-        i.charge("enable persist"),
-        this._reportSourceFolderStartup(n.logger, o, i, f),
+        startupMetrics?.charge("await DiskFileManager quiesced")
+      let mtimeCachePersister = new D2(folderName, sourceFolder.cacheDirPath)
+      this._pathMap.enablePersist(folderId, mtimeCachePersister, WorkspaceManager.pathMapPersistFrequencyMs),
+        startupMetrics.charge("enable persist"),
+        this._reportSourceFolderStartup(trackedFolder.logger, sourceFolder, startupMetrics, enumerationResult),
         this._onboardingSessionEventReporter.reportEvent("finished-syncing")
     } finally {
-      u.dispose(), this._reportSyncingProgress(o)
+      disposables.dispose(), this._reportSyncingProgress(sourceFolder)
     }
   }
-  async _createSourceFolder(r, n, i) {
-    let s = n.folderName,
-      o = new DisposableCollection(),
-      a = new DisposableCollection(),
-      l = n.folderSpec.folderType === 1 ? undefined : n.folderSpec.workspaceFolder,
-      [c, u] = await this._findRepoRoot(r)
-    if (i.isCancellationRequested) return
-    let f = this._pathMap.openSourceFolder(r, c)
-    o.add(new St.Disposable(() => this._pathMap.closeSourceFolder(f))),
-      o.addAll(...this._openFileManager.startTrackingFolder(s, f))
-    let p = new R2(s, this._apiServer, this._pathHandler, this._pathMap)
-    o.add(p)
-    let g =
-        n.folderSpec.folderType === 0 && this._vcsWatcher !== undefined
-          ? await ox(r)
+  async _createSourceFolder(folderPath, trackedFolder, cancellationToken) {
+    let folderName = trackedFolder.folderName,
+      disposables = new DisposableCollection(),
+      childDisposables = new DisposableCollection(),
+      workspaceFolder = trackedFolder.folderSpec.folderType === 1 ? undefined : trackedFolder.folderSpec.workspaceFolder,
+      [repoRoot, isRepo] = await this._findRepoRoot(folderPath)
+    if (cancellationToken.isCancellationRequested) return
+    let folderId = this._pathMap.openSourceFolder(folderPath, repoRoot)
+    disposables.add(new St.Disposable(() => this._pathMap.closeSourceFolder(folderId))),
+      disposables.addAll(...this._openFileManager.startTrackingFolder(folderName, folderId))
+    let diskFileManager = new DiskFileManager(folderName, this._apiServer, this._pathHandler, this._pathMap)
+    disposables.add(diskFileManager)
+    let vcsRepo =
+        trackedFolder.folderSpec.folderType === 0 && this._vcsWatcher !== undefined
+          ? await ox(folderPath)
           : undefined,
-      m = await this._migrateMtimeCache(r, n)
-    return new k9(s, r, c, l, g, f, p, m, o, a, n.logger)
+      cacheDirPath = await this._migrateMtimeCache(folderPath, trackedFolder)
+    return new k9(folderName, folderPath, repoRoot, workspaceFolder, vcsRepo, folderId, diskFileManager, cacheDirPath, disposables, childDisposables, trackedFolder.logger)
   }
-  async _migrateMtimeCache(r, n) {
-    let i = this._computeCacheDirPath(r)
-    if (T2(i)) return i
-    let s = this._computeCacheDirPath(n.folderName)
-    if (!T2(s)) return i
+  async _migrateMtimeCache(folderPath, trackedFolder) {
+    let newCacheDirPath = this._computeCacheDirPath(folderPath)
+    if (T2(newCacheDirPath)) return newCacheDirPath
+    let oldCacheDirPath = this._computeCacheDirPath(trackedFolder.folderName)
+    if (!T2(oldCacheDirPath)) return newCacheDirPath
     try {
-      n.logger.info(
-        `Migrating mtime cache for ${n.folderName} from "${s}" to "${i}"`,
+      trackedFolder.logger.info(
+        `Migrating mtime cache for ${trackedFolder.folderName} from "${oldCacheDirPath}" to "${newCacheDirPath}"`,
       ),
-        await LIe(s, i)
-    } catch (o) {
-      n.logger.error(
-        `Failed to migrate mtime cache for ${n.folderName} from "${s}" to "${i}": ${getErrorMessage(o)}`,
+        await LIe(oldCacheDirPath, newCacheDirPath)
+    } catch (error) {
+      trackedFolder.logger.error(
+        `Failed to migrate mtime cache for ${trackedFolder.folderName} from "${oldCacheDirPath}" to "${newCacheDirPath}": ${getErrorMessage(error)}`,
       )
     }
-    return i
+    return newCacheDirPath
   }
-  _computeCacheDirPath(r) {
-    return e.computeCacheDirPath(r, this._storageUriProvider.storageUri)
+  _computeCacheDirPath(folderPath) {
+    return WorkspaceManager.computeCacheDirPath(folderPath, this._storageUriProvider.storageUri)
   }
-  static computeCacheDirPath(r, n) {
-    let i = getPathFromUri(n),
-      s = Jv(e._textEncoder.encode(r))
-    return joinPaths(i, s)
+  static computeCacheDirPath(folderPath, storageUri) {
+    let storagePath = getPathFromUri(storageUri),
+      folderHash = createSHA256Hash(WorkspaceManager._textEncoder.encode(folderPath))
+    return joinPaths(storagePath, folderHash)
   }
   async refreshSourceFolders() {
     this.requalifyLargeFolders()
-    let r = Array.from(this._trackedSourceFolders.values())
-      .map((n) => n.sourceFolder)
-      .filter((n) => n !== undefined)
-      .map((n) =>
-        n.enqueueSerializedOperation(async () => {
-          await this._refreshSourceFolder(n)
+    let refreshOperations = Array.from(this._trackedSourceFolders.values())
+      .map((trackedFolder) => trackedFolder.sourceFolder)
+      .filter((sourceFolder) => sourceFolder !== undefined)
+      .map((sourceFolder) =>
+        sourceFolder.enqueueSerializedOperation(async () => {
+          await this._refreshSourceFolder(sourceFolder)
         }),
       )
     try {
-      await Promise.allSettled(r)
-    } catch (n) {
+      await Promise.allSettled(refreshOperations)
+    } catch (error) {
       this._logger.info(
-        `One or more source folders failed to refresh: ${getErrorMessage(n)}`,
+        `One or more source folders failed to refresh: ${getErrorMessage(error)}`,
       )
     }
   }
-  async _refreshSourceFolder(r, n) {
-    r.logger.debug(`Refreshing source folder ${r.folderName}`)
-    let i = await this._createSourceFolderTracker(r, n)
+  async _refreshSourceFolder(sourceFolder, startupMetrics) {
+    sourceFolder.logger.debug(`Refreshing source folder ${sourceFolder.folderName}`)
+    let tracker = await this._createSourceFolderTracker(sourceFolder, startupMetrics)
     try {
-      r.setTracker(i)
-    } catch (l) {
-      r.logger.info(
-        `Failed to install SourceFolderTracker for ${r.folderName}: ${getErrorMessage(l)}`,
+      sourceFolder.setTracker(tracker)
+    } catch (error) {
+      sourceFolder.logger.info(
+        `Failed to install SourceFolderTracker for ${sourceFolder.folderName}: ${getErrorMessage(error)}`,
       ),
-        i.dispose()
+        tracker.dispose()
       return
     }
-    let s = this._trackVcsRepo(r, i.pathFilter)
-    s !== undefined && r.addDisposable(s)
-    let o = this._trackFileEdits(r)
+    let vcsRepoDisposable = this._trackVcsRepo(sourceFolder, tracker.pathFilter)
+    vcsRepoDisposable !== undefined && sourceFolder.addDisposable(vcsRepoDisposable)
+    let fileEditsDisposable = this._trackFileEdits(sourceFolder)
     return (
-      o !== undefined && r.addDisposable(o),
-      this._trackOpenDocuments(r),
-      await this._enumerateSourceFolder(r, n)
+      fileEditsDisposable !== undefined && sourceFolder.addDisposable(fileEditsDisposable),
+      this._trackOpenDocuments(sourceFolder),
+      await this._enumerateSourceFolder(sourceFolder, startupMetrics)
     )
   }
-  async _enumerateSourceFolder(r, n) {
-    let i = r.tracker
-    if (i === undefined) return
-    let s = this._pathMap.nextEntryTS,
-      o = await i.pathNotifier.enumeratePaths()
-    if (!r.stopped)
+  async _enumerateSourceFolder(sourceFolder, startupMetrics) {
+    let tracker = sourceFolder.tracker
+    if (tracker === undefined) return
+    let nextEntryTimestamp = this._pathMap.nextEntryTS,
+      enumerationResult = await tracker.pathNotifier.enumeratePaths()
+    if (!sourceFolder.stopped)
       return (
-        n?.charge("enumerate paths"),
-        this._pathMap.purge(r.folderId, s),
-        n?.charge("purge stale PathMap entries"),
-        o
+        startupMetrics?.charge("enumerate paths"),
+        this._pathMap.purge(sourceFolder.folderId, nextEntryTimestamp),
+        startupMetrics?.charge("purge stale PathMap entries"),
+        enumerationResult
       )
   }
-  async _createSourceFolderTracker(r, n) {
-    let i = new DisposableCollection(),
-      s = await d2(
-        St.Uri.file(r.folderRoot),
-        St.Uri.file(r.repoRoot),
-        new fC(e.ignoreSources(r.folderRoot)),
+  async _createSourceFolderTracker(sourceFolder, startupMetrics) {
+    let disposables = new DisposableCollection(),
+      pathFilter = await d2(
+        St.Uri.file(sourceFolder.folderRoot),
+        St.Uri.file(sourceFolder.repoRoot),
+        new fC(WorkspaceManager.ignoreSources(sourceFolder.folderRoot)),
         this._fileExtensions,
       )
-    n?.charge("create PathFilter")
-    let o = this._createPathNotifier(r, s)
+    startupMetrics?.charge("create PathFilter")
+    let pathNotifier = this._createPathNotifier(sourceFolder, pathFilter)
     if (
-      (i.add(o),
-      n?.charge("create PathNotifier"),
+      (disposables.add(pathNotifier),
+      startupMetrics?.charge("create PathNotifier"),
       this._configListener.config.enableDebugFeatures)
     ) {
-      let a = new AN(St.Uri.file(r.repoRoot), r.folderName, r.folderId)
+      let debugPathNotifier = new AN(St.Uri.file(sourceFolder.repoRoot), sourceFolder.folderName, sourceFolder.folderId)
       if (
-        (i.add(a),
-        a.listenForChanges(),
-        this._vcsWatcher === undefined && r.vcsDetails !== undefined)
+        (disposables.add(debugPathNotifier),
+        debugPathNotifier.listenForChanges(),
+        this._vcsWatcher === undefined && sourceFolder.vcsDetails !== undefined)
       ) {
-        let l = new gw(r.folderName, r.folderId, r.vcsDetails)
-        i.add(l), l.listenForChanges()
+        let debugVcsWatcher = new gw(sourceFolder.folderName, sourceFolder.folderId, sourceFolder.vcsDetails)
+        disposables.add(debugVcsWatcher), debugVcsWatcher.listenForChanges()
       }
     }
-    return new M9(s, o, i)
+    return new M9(pathFilter, pathNotifier, disposables)
   }
-  _createPathNotifier(r, n) {
-    let i = new P2(r.folderName, r.folderRoot, r.repoRoot, n, r.workspaceFolder)
+  _createPathNotifier(sourceFolder, pathFilter) {
+    let pathNotifier = new P2(sourceFolder.folderName, sourceFolder.folderRoot, sourceFolder.repoRoot, pathFilter, sourceFolder.workspaceFolder)
     return (
-      i.addDisposables(
-        i.onDidFindPath((s) => {
-          this._handlePathFound(r, s.relPath, s.fileType, s.acceptance)
+      pathNotifier.addDisposables(
+        pathNotifier.onDidFindPath((event) => {
+          this._handlePathFound(sourceFolder, event.relPath, event.fileType, event.acceptance)
         }),
-        i.onDidCreatePath((s) => {
-          this._handlePathCreated(r, s.relPath, s.fileType, s.acceptance)
+        pathNotifier.onDidCreatePath((event) => {
+          this._handlePathCreated(sourceFolder, event.relPath, event.fileType, event.acceptance)
         }),
-        i.onDidChangePath((s) => {
-          s.fileType === "File" &&
-            this._handleFileChanged(r, s.relPath, s.acceptance)
+        pathNotifier.onDidChangePath((event) => {
+          event.fileType === "File" &&
+            this._handleFileChanged(sourceFolder, event.relPath, event.acceptance)
         }),
-        i.onDidDeletePath((s) => {
-          this._handlePathDeleted(r, s)
+        pathNotifier.onDidDeletePath((event) => {
+          this._handlePathDeleted(sourceFolder, event)
         }),
       ),
-      i
+      pathNotifier
     )
   }
-  _trackFileEdits(r) {
+  _trackFileEdits(sourceFolder) {
     if (
-      (r.logger.debug(`_trackFileEdits was called on ${r.folderName}`),
+      (sourceFolder.logger.debug(`_trackFileEdits was called on ${sourceFolder.folderName}`),
       this._fileEditManager === undefined)
     ) {
-      r.logger.debug("_fileEditManager is undefined")
+      sourceFolder.logger.debug("_fileEditManager is undefined")
       return
     }
     return (
-      r.logger.debug("_fileEditManager tracking the folder"),
-      this._fileEditManager.startTracking(r.folderId, r.folderName, {
-        directory: this._computeCacheDirPath(r.folderRoot),
+      sourceFolder.logger.debug("_fileEditManager tracking the folder"),
+      this._fileEditManager.startTracking(sourceFolder.folderId, sourceFolder.folderName, {
+        directory: this._computeCacheDirPath(sourceFolder.folderRoot),
       })
     )
   }
-  _trackVcsRepo(r, n) {
+  _trackVcsRepo(sourceFolder, pathFilter) {
     if (
-      (r.logger.debug(`_trackVcsRepo was called on ${r.folderName}`),
+      (sourceFolder.logger.debug(`_trackVcsRepo was called on ${sourceFolder.folderName}`),
       this._vcsWatcher === undefined)
     ) {
-      r.logger.debug("_vcsWatcher is undefined")
+      sourceFolder.logger.debug("_vcsWatcher is undefined")
       return
     }
-    let i = r.vcsDetails
+    let i = sourceFolder.vcsDetails
     if (i === undefined) {
-      r.logger.debug("vcsDetails is undefined")
+      sourceFolder.logger.debug("vcsDetails is undefined")
       return
     }
-    if (!Xy(T9(i.root), r.repoRoot)) {
-      r.logger.info(
-        `Not creating VCSRepoWatcher: vcs root ${getPathFromUri(i.root)} !== repo root ${r.repoRoot}`,
+    if (!Xy(T9(i.root), sourceFolder.repoRoot)) {
+      sourceFolder.logger.info(
+        `Not creating VCSRepoWatcher: vcs root ${getPathFromUri(i.root)} !== repo root ${sourceFolder.repoRoot}`,
       )
       return
     }
     return (
-      r.logger.debug("_vcsWatcher tracking the folder"),
+      sourceFolder.logger.debug("_vcsWatcher tracking the folder"),
       this._vcsWatcher.startTracking(
-        r.folderName,
-        r.folderId,
+        sourceFolder.folderName,
+        sourceFolder.folderId,
         i,
         new Xm.FileChangeWatcherImpl(i.root, this.onDidChangeFile),
         new Xm.BlobNameRetrieverImpl(
-          r.repoRoot,
+          sourceFolder.repoRoot,
           this,
           this._blobNameCalculator,
         ),
-        new Xm.FileUtilsImpl(n),
+        new Xm.FileUtilsImpl(pathFilter),
       )
     )
   }
-  async _findRepoRoot(r) {
-    let n
+  async _findRepoRoot(folderPath) {
+    let repoRoot
     return (
-      (n = await hM(r, e.augmentRootName)),
-      n === undefined && (n = (await ox(r))?.root),
-      n !== undefined ? [T9(n), true] : [r, false]
+      (repoRoot = await hM(folderPath, WorkspaceManager.augmentRootName)),
+      repoRoot === undefined && (repoRoot = (await ox(folderPath))?.root),
+      repoRoot !== undefined ? [T9(repoRoot), true] : [folderPath, false]
     )
   }
-  _trackOpenDocuments(r) {
-    let n = this._openFileManager.getTrackedPaths(r.folderId)
-    for (let i of n)
-      r.acceptsPath(i) || this._openFileManager.stopTracking(r.folderId, i)
-    St.workspace.textDocuments.forEach((i) => {
-      this._trackDocument(r, i) !== undefined &&
+  _trackOpenDocuments(sourceFolder) {
+    let trackedPaths = this._openFileManager.getTrackedPaths(sourceFolder.folderId)
+    for (let path of trackedPaths)
+      sourceFolder.acceptsPath(path) || this._openFileManager.stopTracking(sourceFolder.folderId, path)
+    St.workspace.textDocuments.forEach((document) => {
+      this._trackDocument(sourceFolder, document) !== undefined &&
         this._fileEditManager?.addInitialDocument({
-          folderId: r.folderId,
-          relPath: r.relativePathName(i.uri.fsPath),
-          document: i,
+          folderId: sourceFolder.folderId,
+          relPath: sourceFolder.relativePathName(document.uri.fsPath),
+          document: document,
         })
     }),
-      St.workspace.notebookDocuments.forEach((i) => {
-        this._trackDocument(r, i)
+      St.workspace.notebookDocuments.forEach((document) => {
+        this._trackDocument(sourceFolder, document)
       })
   }
-  _trackDocument(r, n) {
-    let i = getPathIfSupported(n.uri)
-    if (i === undefined) return
-    let s = r.relativePathName(i)
-    if (s === undefined || !r.acceptsPath(s)) return
-    let o = this._pathMap.getBlobName(r.folderId, s)
+  _trackDocument(sourceFolder, document) {
+    let documentPath = getPathIfSupported(document.uri)
+    if (documentPath === undefined) return
+    let relativePath = sourceFolder.relativePathName(documentPath)
+    if (relativePath === undefined || !sourceFolder.acceptsPath(relativePath)) return
+    let blobName = this._pathMap.getBlobName(sourceFolder.folderId, relativePath)
     return (
       this._openFileManager.addOpenedDocument(
-        { folderId: r.folderId, relPath: s, document: n },
-        o,
+        { folderId: sourceFolder.folderId, relPath: relativePath, document: document },
+        blobName,
       ),
-      s
+      relativePath
     )
   }
-  _stopTracking(r) {
-    if (r.sourceFolder === undefined) {
-      let n = r.cancel
-      n.cancel(),
-        n.dispose(),
-        r.logger.info("Cancelled in-progress tracking of source folder")
+  _stopTracking(trackedFolder) {
+    if (trackedFolder.sourceFolder === undefined) {
+      let cancellationSource = trackedFolder.cancel
+      cancellationSource.cancel(),
+        cancellationSource.dispose(),
+        trackedFolder.logger.info("Cancelled in-progress tracking of source folder")
     } else {
-      let n = r.sourceFolder
-      ;(r.sourceFolder = undefined),
-        n.dispose(),
-        r.logger.info("Stopped tracking source folder")
+      let sourceFolder = trackedFolder.sourceFolder
+      ;(trackedFolder.sourceFolder = undefined),
+        sourceFolder.dispose(),
+        trackedFolder.logger.info("Stopped tracking source folder")
     }
     this._folderSyncedEmitter.fire(), this._folderEnumeratedEmitter.fire()
   }
-  translateRange(r, n, i) {
-    let s = this._resolveAbsPath(r.absPath)
-    if (s === undefined) return
-    let [o, a] = s
-    return this._openFileManager.translateRange(o.folderId, a, n, i)
+  translateRange(absPath, startPosition, endPosition) {
+    let resolvedPath = this._resolveAbsPath(absPath.absPath)
+    if (resolvedPath === undefined) return
+    let [sourceFolder, relativePath] = resolvedPath
+    return this._openFileManager.translateRange(sourceFolder.folderId, relativePath, startPosition, endPosition)
   }
   getContext() {
     if (this._openFileManager === undefined || this._pathMap === undefined)
       return yC.empty()
-    let r = this._openFileManager.getRecencySummary(
+    let recencySummary = this._openFileManager.getRecencySummary(
         this._completionServer.completionParams.chunkSize,
       ),
-      n = new Set(),
-      i = new Map(),
-      s = new Map()
-    for (let [y, v] of r.folderMap) {
-      let C = this._pathMap.getRepoRoot(y)
-      C !== undefined && s.set(C, v)
-      for (let [E, w] of v) {
-        n.add(w)
-        let B = this._pathMap.getBlobName(y, E)
-        B !== undefined && B !== w && i.set(B, (i.get(B) ?? 0) + 1)
+      blobNames = new Set(),
+      blobNameCounts = new Map(),
+      folderRootMap = new Map()
+    for (let [folderId, folderMap] of recencySummary.folderMap) {
+      let repoRoot = this._pathMap.getRepoRoot(folderId)
+      repoRoot !== undefined && folderRootMap.set(repoRoot, folderMap)
+      for (let [relativePath, blobName] of folderMap) {
+        blobNames.add(blobName)
+        let count = this._pathMap.getBlobName(folderId, relativePath)
+        count !== undefined && count !== blobName && blobNameCounts.set(count, (blobNameCounts.get(count) ?? 0) + 1)
       }
     }
-    let o = new Set()
-    for (let [y, v] of i)
-      n.has(y) || (v === this._pathMap.getUniquePathCount(y) && o.add(y))
-    let a = new Array()
-    for (let y of r.recentChunks) {
-      let v = this._pathMap.getRepoRoot(y.folderId)
-      v !== undefined &&
-        a.push({
-          seq: y.seq,
-          uploaded: y.uploaded,
-          repoRoot: v,
-          pathName: y.pathName,
-          blobName: y.blobName,
-          text: y.text,
-          origStart: y.origStart,
-          origLength: y.origLength,
-          expectedBlobName: y.expectedBlobName,
+    let implicitBlobNames = new Set()
+    for (let [blobName, count] of blobNameCounts)
+      blobNames.has(blobName) || (count === this._pathMap.getUniquePathCount(blobName) && implicitBlobNames.add(blobName))
+    let recentChunks = new Array()
+    for (let chunk of recencySummary.recentChunks) {
+      let repoRoot = this._pathMap.getRepoRoot(chunk.folderId)
+      repoRoot !== undefined &&
+        recentChunks.push({
+          seq: chunk.seq,
+          uploaded: chunk.uploaded,
+          repoRoot: repoRoot,
+          pathName: chunk.pathName,
+          blobName: chunk.blobName,
+          text: chunk.text,
+          origStart: chunk.origStart,
+          origLength: chunk.origLength,
+          expectedBlobName: chunk.expectedBlobName,
         })
     }
-    let l = [],
-      c = []
+    let editEvents = [],
+      indexedBlobs = []
     if (this._configListener.config.openFileManager.v2Enabled) {
-      let y = this._openFileManager.getAllEditEvents()
-      for (let C of y.values()) l.push(...C)
-      let v = this._openFileManager.getAllPathToIndexedBlob()
-      c = []
-      for (let C of v.values()) for (let E of C.values()) c.push(E)
+      let allEditEvents = this._openFileManager.getAllEditEvents()
+      for (let folderEvents of allEditEvents.values()) editEvents.push(...folderEvents)
+      let allIndexedBlobs = this._openFileManager.getAllPathToIndexedBlob()
+      indexedBlobs = []
+      for (let folderBlobs of allIndexedBlobs.values()) for (let blob of folderBlobs.values()) indexedBlobs.push(blob)
     }
-    let u = this._blobsCheckpointManager,
-      f = u !== undefined && this._useCheckpointManagerContext,
-      p = f && this._validateCheckpointManagerContext,
-      g
-    if (!f || p) {
-      let y = new Set(n)
-      for (let [E, w, B, T, N] of this._pathMap.pathsWithBlobNames())
-        r.folderMap.get(E)?.has(B) || y.add(N)
-      let v = Array.from(y),
-        C = this._blobNamesToBlobs(v)
-      if (((g = new yC(C, a, s, l, c, this._lastChatResponse, v)), !f)) return g
+    let blobsCheckpointManager = this._blobsCheckpointManager,
+      useCheckpointManager = blobsCheckpointManager !== undefined && this._useCheckpointManagerContext,
+      validateCheckpointManager = useCheckpointManager && this._validateCheckpointManagerContext,
+      context
+    if (!useCheckpointManager || validateCheckpointManager) {
+      let allBlobNames = new Set(blobNames)
+      for (let [folderId, relativePath, fileType, acceptance, blobName] of this._pathMap.pathsWithBlobNames())
+        recencySummary.folderMap.get(folderId)?.has(fileType) || allBlobNames.add(blobName)
+      let blobNameArray = Array.from(allBlobNames),
+        blobs = this._blobNamesToBlobs(blobNameArray)
+      if (((context = new yC(blobs, recentChunks, folderRootMap, editEvents, indexedBlobs, this._lastChatResponse, blobNameArray)), !useCheckpointManager)) return context
     }
-    let m = u.getContextAdjusted(n, o)
+    let checkpointContext = blobsCheckpointManager.getContextAdjusted(blobNames, implicitBlobNames)
     return (
-      g !== undefined &&
-        (u.validateMatching(g.blobs, m) ||
+      context !== undefined &&
+        (blobsCheckpointManager.validateMatching(context.blobs, checkpointContext) ||
           this._clientMetricsReporter.report({
             client_metric: "blob_context_mismatch",
             value: 1,
           })),
-      new yC(m, a, s, l, c, this._lastChatResponse)
+      new yC(checkpointContext, recentChunks, folderRootMap, editEvents, indexedBlobs, this._lastChatResponse)
     )
   }
   getContextWithBlobNames() {
-    let r = this.getContext()
-    return r.blobNames !== undefined
-      ? r
-      : { ...r, blobNames: this._blobsCheckpointManager.expandBlobs(r.blobs) }
+    let context = this.getContext()
+    return context.blobNames !== undefined
+      ? context
+      : { ...context, blobNames: this._blobsCheckpointManager.expandBlobs(context.blobs) }
   }
-  recordChatReponse(r) {
-    this._lastChatResponse = { seq: this._sequenceGenerator.next(), text: r }
+  recordChatReponse(response) {
+    this._lastChatResponse = { seq: this._sequenceGenerator.next(), text: response }
   }
-  _blobNamesToBlobs(r) {
+  _blobNamesToBlobs(blobNames) {
     return this._blobsCheckpointManager === undefined
-      ? { checkpointId: undefined, addedBlobs: r, deletedBlobs: [] }
-      : this._blobsCheckpointManager.blobsPayload(r)
+      ? { checkpointId: undefined, addedBlobs: blobNames, deletedBlobs: [] }
+      : this._blobsCheckpointManager.blobsPayload(blobNames)
   }
-  handleUnknownBlobs(r, n) {
-    if (n.length === 0) return
-    let i = new Set(n),
-      s = new Array()
-    for (let [o, a] of r.trackedPaths)
-      if (o !== undefined)
-        for (let [l, c] of a)
-          i.has(c) && (s.push([c, new QualifiedPathName(o, l)]), i.delete(c))
-    for (let o of i) {
-      let a = this._pathMap.getAnyPathName(o)
-      a !== undefined && s.push([o, a])
+  handleUnknownBlobs(recencySummary, unknownBlobs) {
+    if (unknownBlobs.length === 0) return
+    let unknownBlobSet = new Set(unknownBlobs),
+      blobPathPairs = new Array()
+    for (let [folderId, folderMap] of recencySummary.trackedPaths)
+      if (folderId !== undefined)
+        for (let [relativePath, blobName] of folderMap)
+          unknownBlobSet.has(blobName) && (blobPathPairs.push([blobName, new QualifiedPathName(folderId, relativePath)]), unknownBlobSet.delete(blobName))
+    for (let blobName of unknownBlobSet) {
+      let pathName = this._pathMap.getAnyPathName(blobName)
+      pathName !== undefined && blobPathPairs.push([blobName, pathName])
     }
-    this._unknownBlobHandler.enqueue(s), this._vcsWatcher?.handleUnknownBlobs(n)
+    this._unknownBlobHandler.enqueue(blobPathPairs), this._vcsWatcher?.handleUnknownBlobs(unknownBlobs)
   }
-  handleUnknownCheckpoint(r, n) {
-    this._logger.info(`received checkpoint not found for request id ${r}`),
+  handleUnknownCheckpoint(requestId, checkpointId) {
+    this._logger.info(`received checkpoint not found for request id ${requestId}`),
       this._blobsCheckpointManager.resetCheckpoint(),
       this._blobsCheckpointManager.updateBlob("")
   }
-  notifyBlobMissing(r, n) {
-    let i = this._pathMap.reportMissing(n)
-    if (i !== undefined) {
-      let o = this._getSourceFolder(i.rootPath)
-      if (o !== undefined) {
-        o.diskFileManager.ingestPath(o.folderId, r.relPath)
+  notifyBlobMissing(pathName, blobName) {
+    let pathInfo = this._pathMap.reportMissing(blobName)
+    if (pathInfo !== undefined) {
+      let sourceFolder = this._getSourceFolder(pathInfo.rootPath)
+      if (sourceFolder !== undefined) {
+        sourceFolder.diskFileManager.ingestPath(sourceFolder.folderId, pathName.relPath)
         return
       }
     }
-    let s = this._getSourceFolder(r.rootPath)
-    s !== undefined &&
-      this._openFileManager.handleMissingBlob(s.folderId, r.relPath, n)
+    let sourceFolder = this._getSourceFolder(pathName.rootPath)
+    sourceFolder !== undefined &&
+      this._openFileManager.handleMissingBlob(sourceFolder.folderId, pathName.relPath, blobName)
   }
-  _getSourceFolder(r) {
-    return this._trackedSourceFolders.get(r)?.sourceFolder
+  _getSourceFolder(rootPath) {
+    return this._trackedSourceFolders.get(rootPath)?.sourceFolder
   }
-  resolvePathName(r) {
-    let n = typeof r == "string" ? r : getPathIfSupported(r)
-    if (n === undefined) return
-    let i = this._resolveAbsPath(n)
-    if (i === undefined) return
-    let [s, o] = i
-    return new QualifiedPathName(s.repoRoot, o)
+  resolvePathName(pathOrUri) {
+    let absPath = typeof pathOrUri == "string" ? pathOrUri : getPathIfSupported(pathOrUri)
+    if (absPath === undefined) return
+    let resolvedPath = this._resolveAbsPath(absPath)
+    if (resolvedPath === undefined) return
+    let [sourceFolder, relativePath] = resolvedPath
+    return new QualifiedPathName(sourceFolder.repoRoot, relativePath)
   }
-  getFolderRoot(r) {
-    let n = typeof r == "string" ? r : getPathIfSupported(r)
-    if (n === undefined) return
-    let i = this._resolveAbsPath(n)
-    if (i === undefined) return
-    let [s, o] = i
-    return s.folderRoot
+  getFolderRoot(pathOrUri) {
+    let absPath = typeof pathOrUri == "string" ? pathOrUri : getPathIfSupported(pathOrUri)
+    if (absPath === undefined) return
+    let resolvedPath = this._resolveAbsPath(absPath)
+    if (resolvedPath === undefined) return
+    let [sourceFolder, relativePath] = resolvedPath
+    return sourceFolder.folderRoot
   }
-  safeResolvePathName(r) {
-    let n = typeof r == "string" ? r : getPathIfSupported(r)
-    if (n === undefined) return
-    let i = this._resolveAbsPath(n)
-    if (i === undefined) return new QualifiedPathName("", n)
-    let [s, o] = i
-    return new QualifiedPathName(s.repoRoot, o)
+  safeResolvePathName(pathOrUri) {
+    let absPath = typeof pathOrUri == "string" ? pathOrUri : getPathIfSupported(pathOrUri)
+    if (absPath === undefined) return
+    let resolvedPath = this._resolveAbsPath(absPath)
+    if (resolvedPath === undefined) return new QualifiedPathName("", absPath)
+    let [sourceFolder, relativePath] = resolvedPath
+    return new QualifiedPathName(sourceFolder.repoRoot, relativePath)
   }
-  _resolveAbsPath(r) {
-    for (let [n, i] of this._trackedSourceFolders) {
-      if (i.sourceFolder === undefined) continue
-      let s = i.sourceFolder.relativePathName(r)
-      if (s !== undefined) return [i.sourceFolder, s]
+  _resolveAbsPath(absPath) {
+    for (let [folderRoot, trackedFolder] of this._trackedSourceFolders) {
+      if (trackedFolder.sourceFolder === undefined) continue
+      let relativePath = trackedFolder.sourceFolder.relativePathName(absPath)
+      if (relativePath !== undefined) return [trackedFolder.sourceFolder, relativePath]
     }
   }
-  hasFile(r) {
-    let [n, i] = this._resolveAbsPath(r.absPath) ?? [undefined, undefined]
-    return n === undefined || i === undefined
+  hasFile(pathName) {
+    let [sourceFolder, relativePath] = this._resolveAbsPath(pathName.absPath) ?? [undefined, undefined]
+    return sourceFolder === undefined || relativePath === undefined
       ? false
-      : this._pathMap.hasFile(n.folderId, r.relPath)
+      : this._pathMap.hasFile(sourceFolder.folderId, pathName.relPath)
   }
-  getBlobName(r) {
-    let [n, i] = this._resolveAbsPath(r.absPath) ?? [undefined, undefined]
-    if (!(n === undefined || i === undefined))
+  getBlobName(pathName) {
+    let [sourceFolder, relativePath] = this._resolveAbsPath(pathName.absPath) ?? [undefined, undefined]
+    if (!(sourceFolder === undefined || relativePath === undefined))
       return (
-        this._openFileManager.getBlobName(n.folderId, r.relPath) ??
-        this._pathMap.getBlobName(n.folderId, r.relPath)
+        this._openFileManager.getBlobName(sourceFolder.folderId, pathName.relPath) ??
+        this._pathMap.getBlobName(sourceFolder.folderId, pathName.relPath)
       )
   }
-  getAllPathNames(r) {
-    return this._pathMap.getAllPathNames(r)
+  getAllPathNames(blobName) {
+    return this._pathMap.getAllPathNames(blobName)
   }
-  getAllQualifiedPathInfos(r) {
-    return this._pathMap.getAllQualifiedPathInfos(r)
+  getAllQualifiedPathInfos(blobName) {
+    return this._pathMap.getAllQualifiedPathInfos(blobName)
   }
-  getAllQualifiedPathNames(r) {
-    return this._pathMap.getAllQualifiedPathNames(r)
+  getAllQualifiedPathNames(blobName) {
+    return this._pathMap.getAllQualifiedPathNames(blobName)
   }
-  getAllPathInfo(r) {
-    return this._pathMap.getAllPathInfo(r)
+  getAllPathInfo(blobName) {
+    return this._pathMap.getAllPathInfo(blobName)
   }
-  _handlePathFound(r, n, i, s) {
-    let o = r.folderId
-    this._pathMap.insert(o, n, i, s),
-      i === "File" && s.accepted && r.diskFileManager.ingestPath(o, n)
+  _handlePathFound(sourceFolder, relativePath, fileType, acceptance) {
+    let folderId = sourceFolder.folderId
+    this._pathMap.insert(folderId, relativePath, fileType, acceptance),
+      fileType === "File" && acceptance.accepted && sourceFolder.diskFileManager.ingestPath(folderId, relativePath)
   }
-  _handlePathCreated(r, n, i, s) {
-    let o = r.folderId
-    if ((this._pathMap.insert(o, n, i, s), !!s.accepted)) {
-      if (i === "File")
-        r.diskFileManager.ingestPath(r.folderId, n),
-          this._emitFileNotification(o, n, "disk")
-      else if (i === "Directory") {
-        let a = r.tracker?.pathFilter
-        if (a === undefined) return
-        r.enqueueSerializedOperation(() =>
-          this._handleDirectoryCreated(r, n, a),
+  _handlePathCreated(sourceFolder, relativePath, fileType, acceptance) {
+    let folderId = sourceFolder.folderId
+    if ((this._pathMap.insert(folderId, relativePath, fileType, acceptance), !!acceptance.accepted)) {
+      if (fileType === "File")
+        sourceFolder.diskFileManager.ingestPath(sourceFolder.folderId, relativePath),
+          this._emitFileNotification(folderId, relativePath, "disk")
+      else if (fileType === "Directory") {
+        let pathFilter = sourceFolder.tracker?.pathFilter
+        if (pathFilter === undefined) return
+        sourceFolder.enqueueSerializedOperation(() =>
+          this._handleDirectoryCreated(sourceFolder, relativePath, pathFilter),
         )
       }
     }
   }
-  _handleFileChanged(r, n, i) {
-    let s = r.folderId
-    this._pathMap.insert(s, n, "File", i),
-      i.accepted &&
-        (r.diskFileManager.ingestPath(s, n),
-        this._emitFileNotification(s, n, "disk"))
+  _handleFileChanged(sourceFolder, relativePath, acceptance) {
+    let folderId = sourceFolder.folderId
+    this._pathMap.insert(folderId, relativePath, "File", acceptance),
+      acceptance.accepted &&
+        (sourceFolder.diskFileManager.ingestPath(folderId, relativePath),
+        this._emitFileNotification(folderId, relativePath, "disk"))
   }
-  _handlePathDeleted(r, n) {
-    let i = r.folderId,
-      s = this._pathMap.getPathInfo(i, n)
-    if (s === undefined) return
-    this._deletePath(r.folderId, n)
-    let [o, a] = s
-    if (!a.accepted) return
-    o === "Directory"
-      ? this._handleDirectoryRemoved(r, n)
-      : o === "File" && this._emitFileNotification(i, n, "disk")
-    let l = new QualifiedPathName(r.folderRoot, n)
+  _handlePathDeleted(sourceFolder, relativePath) {
+    let folderId = sourceFolder.folderId,
+      pathInfo = this._pathMap.getPathInfo(folderId, relativePath)
+    if (pathInfo === undefined) return
+    this._deletePath(sourceFolder.folderId, relativePath)
+    let [fileType, acceptance] = pathInfo
+    if (!acceptance.accepted) return
+    fileType === "Directory"
+      ? this._handleDirectoryRemoved(sourceFolder, relativePath)
+      : fileType === "File" && this._emitFileNotification(folderId, relativePath, "disk")
+    let qualifiedPathName = new QualifiedPathName(sourceFolder.folderRoot, relativePath)
     this._fileDeletedEmitter.fire({
-      folderId: i,
-      relPath: n,
-      qualifiedPathName: l,
+      folderId: folderId,
+      relPath: relativePath,
+      qualifiedPathName: qualifiedPathName,
     })
   }
-  _deletePath(r, n) {
-    this._pathMap.remove(r, n)
+  _deletePath(folderId, relativePath) {
+    this._pathMap.remove(folderId, relativePath)
   }
-  async _handleDirectoryCreated(r, n, i) {
-    r.logger.info(`Directory created: ${n}`)
-    let s = St.Uri.file(r.repoRoot),
-      o = new gC(r.folderName, St.Uri.joinPath(s, n), s, i)
-    for await (let [a, l, c, u] of o) this._handlePathFound(r, l, c, u)
+  async _handleDirectoryCreated(sourceFolder, relativePath, pathFilter) {
+    sourceFolder.logger.info(`Directory created: ${relativePath}`)
+    let baseUri = St.Uri.file(sourceFolder.repoRoot),
+      directoryEnumerator = new gC(sourceFolder.folderName, St.Uri.joinPath(baseUri, relativePath), baseUri, pathFilter)
+    for await (let [folderId, relPath, fileType, acceptance] of directoryEnumerator) this._handlePathFound(sourceFolder, relPath, fileType, acceptance)
   }
-  _handleDirectoryRemoved(r, n) {
-    r.logger.info(`Directory removed: ${n}`)
-    let i = r.folderId,
-      s = new Array()
-    for (let [o] of this._pathMap.pathsInFolder(i))
-      Zh(n, o) !== undefined && s.push(o)
-    for (let o of s) this._deletePath(i, o)
+  _handleDirectoryRemoved(sourceFolder, relativePath) {
+    sourceFolder.logger.info(`Directory removed: ${relativePath}`)
+    let folderId = sourceFolder.folderId,
+      pathsToRemove = new Array()
+    for (let [path] of this._pathMap.pathsInFolder(folderId))
+      Zh(relativePath, path) !== undefined && pathsToRemove.push(path)
+    for (let path of pathsToRemove) this._deletePath(folderId, path)
   }
-  _notifyActiveEditorChanged(r) {
-    let n = r?.document,
-      i = this._uriToPathInfo(n?.uri)
-    if (i === undefined) {
+  _notifyActiveEditorChanged(editor) {
+    let document = editor?.document,
+      pathInfo = this._uriToPathInfo(document?.uri)
+    if (pathInfo === undefined) {
       this._openFileManager.loseFocus()
       return
     }
-    let [s, o] = i,
-      a = this._pathMap.getBlobName(s, o)
+    let [folderId, relativePath] = pathInfo,
+      blobName = this._pathMap.getBlobName(folderId, relativePath)
     this._openFileManager.addOpenedDocument(
-      { folderId: s, relPath: o, document: n },
-      a,
+      { folderId: folderId, relPath: relativePath, document: document },
+      blobName,
     )
   }
-  _notifyTextDocumentChanged(r) {
-    let n = this._uriToPathInfo(r.document.uri)
-    if (n === undefined) return
-    let [i, s] = n
+  _notifyTextDocumentChanged(event) {
+    let pathInfo = this._uriToPathInfo(event.document.uri)
+    if (pathInfo === undefined) return
+    let [folderId, relativePath] = pathInfo
     this._openFileManager.handleChangedDocument({
-      folderId: i,
-      relPath: s,
-      event: r,
+      folderId: folderId,
+      relPath: relativePath,
+      event: event,
     }),
-      this._emitFileNotification(i, s, "buffer"),
+      this._emitFileNotification(folderId, relativePath, "buffer"),
       this._textDocumentChangedEmitter.fire({
-        folderId: i,
-        relPath: s,
-        event: r,
+        folderId: folderId,
+        relPath: relativePath,
+        event: event,
       })
   }
-  _notifyTextDocumentOpened(r) {
-    let n = this._uriToPathInfo(r.uri)
-    if (n === undefined) return
-    let [i, s] = n
+  _notifyTextDocumentOpened(document) {
+    let pathInfo = this._uriToPathInfo(document.uri)
+    if (pathInfo === undefined) return
+    let [folderId, relativePath] = pathInfo
     this._textDocumentOpenedEmitter.fire({
-      folderId: i,
-      relPath: s,
-      document: r,
+      folderId: folderId,
+      relPath: relativePath,
+      document: document,
     })
   }
-  _notifyTextDocumentClosed(r) {
-    let n = this._uriToPathInfo(r.uri)
-    if (n === undefined) return
-    let [i, s] = n
+  _notifyTextDocumentClosed(document) {
+    let pathInfo = this._uriToPathInfo(document.uri)
+    if (pathInfo === undefined) return
+    let [folderId, relativePath] = pathInfo
     this._textDocumentClosedEmitter.fire({
-      folderId: i,
-      relPath: s,
-      document: r,
+      folderId: folderId,
+      relPath: relativePath,
+      document: document,
     })
   }
-  _notifyNotebookDocumentChanged(r) {
-    let n = this._uriToPathInfo(r.notebook.uri)
-    if (n === undefined) return
-    let [i, s] = n
+  _notifyNotebookDocumentChanged(event) {
+    let pathInfo = this._uriToPathInfo(event.notebook.uri)
+    if (pathInfo === undefined) return
+    let [folderId, relativePath] = pathInfo
     this._openFileManager.handleChangedDocument({
-      folderId: i,
-      relPath: s,
-      event: r,
+      folderId: folderId,
+      relPath: relativePath,
+      event: event,
     }),
-      this._emitFileNotification(i, s, "buffer")
+      this._emitFileNotification(folderId, relativePath, "buffer")
   }
-  _uriToPathInfo(r) {
-    if (r === undefined) return
-    let n = getPathIfSupported(r)
-    if (n === undefined) return
-    let i = this._resolveAbsPath(n)
-    if (i === undefined) return
-    let [s, o] = i
-    if (s.acceptsPath(o)) return [s.folderId, o]
+  _uriToPathInfo(uri) {
+    if (uri === undefined) return
+    let absPath = getPathIfSupported(uri)
+    if (absPath === undefined) return
+    let resolvedPath = this._resolveAbsPath(absPath)
+    if (resolvedPath === undefined) return
+    let [sourceFolder, relativePath] = resolvedPath
+    if (sourceFolder.acceptsPath(relativePath)) return [sourceFolder.folderId, relativePath]
   }
-  _notifyWillRenameFile(r) {
-    r.files.forEach((n) => {
-      let i = this._resolveAbsPath(n.oldUri.fsPath),
-        s = this._resolveAbsPath(n.newUri.fsPath)
-      if (i === undefined || s === undefined) return
-      let [o, a] = i,
-        [l, c] = s
-      if (o.folderId !== l.folderId) {
+  _notifyWillRenameFile(event) {
+    event.files.forEach((fileRename) => {
+      let oldPathInfo = this._resolveAbsPath(fileRename.oldUri.fsPath),
+        newPathInfo = this._resolveAbsPath(fileRename.newUri.fsPath)
+      if (oldPathInfo === undefined || newPathInfo === undefined) return
+      let [oldSourceFolder, oldRelativePath] = oldPathInfo,
+        [newSourceFolder, newRelativePath] = newPathInfo
+      if (oldSourceFolder.folderId !== newSourceFolder.folderId) {
         this._logger.debug(
-          `[WARN] Rename should not cause a file to move between source folders.     old file: ${i[1]}     new file: ${s[1]}    old source folder: ${o.folderName}     new source folder: ${l.folderName}`,
+          `[WARN] Rename should not cause a file to move between source folders.     old file: ${oldPathInfo[1]}     new file: ${newPathInfo[1]}    old source folder: ${oldSourceFolder.folderName}     new source folder: ${newSourceFolder.folderName}`,
         )
         return
       }
       this._fileWillRenameEmitter.fire({
-        folderId: o.folderId,
-        oldRelPath: a,
-        newRelPath: c,
-        type: getFileStats(n.oldUri.fsPath).type,
+        folderId: oldSourceFolder.folderId,
+        oldRelPath: oldRelativePath,
+        newRelPath: newRelativePath,
+        type: getFileStats(fileRename.oldUri.fsPath).type,
       })
     })
   }
-  _notifyDidRenameFile(r) {
-    r.files.forEach((n) => {
-      let i = this._resolveAbsPath(n.oldUri.fsPath),
-        s = this._resolveAbsPath(n.newUri.fsPath)
-      if (i === undefined || s === undefined) return
-      let [o, a] = i,
-        [l, c] = s,
-        u = new QualifiedPathName(o.folderRoot, a),
-        f = new QualifiedPathName(l.folderRoot, c)
+  _notifyDidRenameFile(event) {
+    event.files.forEach((fileRename) => {
+      let oldPathInfo = this._resolveAbsPath(fileRename.oldUri.fsPath),
+        newPathInfo = this._resolveAbsPath(fileRename.newUri.fsPath)
+      if (oldPathInfo === undefined || newPathInfo === undefined) return
+      let [oldSourceFolder, oldRelativePath] = oldPathInfo,
+        [newSourceFolder, newRelativePath] = newPathInfo,
+        oldQualifiedPathName = new QualifiedPathName(oldSourceFolder.folderRoot, oldRelativePath),
+        newQualifiedPathName = new QualifiedPathName(newSourceFolder.folderRoot, newRelativePath)
       this._fileDidMoveEmitter.fire({
-        oldQualifiedPathName: u,
-        newQualifiedPathName: f,
+        oldQualifiedPathName: oldQualifiedPathName,
+        newQualifiedPathName: newQualifiedPathName,
       })
     })
   }
-  _notifyDocumentClosed(r) {
-    let n = r.uri,
-      i = getPathIfSupported(n)
-    if (i === undefined) return
-    let s = this._resolveAbsPath(i)
-    if (s === undefined) return
-    let [o, a] = s
+  _notifyDocumentClosed(document) {
+    let uri = document.uri,
+      absPath = getPathIfSupported(uri)
+    if (absPath === undefined) return
+    let resolvedPath = this._resolveAbsPath(absPath)
+    if (resolvedPath === undefined) return
+    let [sourceFolder, relativePath] = resolvedPath
     this._openFileManager.handleClosedDocument({
-      folderId: o.folderId,
-      relPath: a,
-      document: r,
+      folderId: sourceFolder.folderId,
+      relPath: relativePath,
+      document: document,
     })
   }
-  _emitFileNotification(r, n, i) {
-    this._fileChangedEmitter.fire({ folderId: r, relPath: n, origin: i })
+  _emitFileNotification(folderId, relativePath, origin) {
+    this._fileChangedEmitter.fire({ folderId: folderId, relPath: relativePath, origin: origin })
   }
   getTabSwitchEvents() {
     return this._tabWatcher?.getTabSwitchEvents()
   }
-  getFileEditEvents(r = undefined) {
+  getFileEditEvents(folderRoot = undefined) {
     if (this._fileEditManager === undefined) return []
-    let n
-    if (r !== undefined) {
-      let i = this._trackedSourceFolders.get(r)?.sourceFolder
-      if (i === undefined) return []
-      n = i.folderId
-    } else n = this._fileEditManager.findFolderIdWithMostRecentChanges()
-    return n === -1 ? [] : this._fileEditManager.findEventsForFolder(n)
+    let folderId
+    if (folderRoot !== undefined) {
+      let sourceFolder = this._trackedSourceFolders.get(folderRoot)?.sourceFolder
+      if (sourceFolder === undefined) return []
+      folderId = sourceFolder.folderId
+    } else folderId = this._fileEditManager.findFolderIdWithMostRecentChanges()
+    return folderId === -1 ? [] : this._fileEditManager.findEventsForFolder(folderId)
   }
   getMostRecentlyChangedFolderRoot() {
     if (this._fileEditManager === undefined) return
-    let r = this._fileEditManager.findFolderIdWithMostRecentChanges()
-    if (r !== -1) {
-      for (let [n, i] of this._trackedSourceFolders)
-        if (i.sourceFolder?.folderId === r) return n
+    let folderId = this._fileEditManager.findFolderIdWithMostRecentChanges()
+    if (folderId !== -1) {
+      for (let [folderRoot, trackedFolder] of this._trackedSourceFolders)
+        if (trackedFolder.sourceFolder?.folderId === folderId) return folderRoot
     }
   }
   getBestFolderRoot() {
@@ -121184,37 +121317,37 @@ var V2 = class e extends DisposableContainer {
       ? this.getFolderRoot(St.window.activeTextEditor?.document.uri)
       : this.getMostRecentlyChangedFolderRoot()
   }
-  findBestWorkspaceRootMatch(r) {
-    let n = wG(r).slice(0, -1),
-      i = "",
-      s
-    for (let c of n) {
-      i = joinPaths(i, c)
-      let u = this.getAllQualifiedPathInfos(i).filter((f) => f.isAccepted)
-      if (u.length === 0) break
-      s = u[0]
+  findBestWorkspaceRootMatch(relativePath) {
+    let pathParts = wG(relativePath).slice(0, -1),
+      currentPath = "",
+      bestMatch
+    for (let part of pathParts) {
+      currentPath = joinPaths(currentPath, part)
+      let matches = this.getAllQualifiedPathInfos(currentPath).filter((f) => f.isAccepted)
+      if (matches.length === 0) break
+      bestMatch = matches[0]
     }
-    if (s !== undefined) return s
-    let o = this.getMostRecentlyChangedFolderRoot(),
-      a = o ? this.getRepoRootForFolderRoot(o) : undefined
-    if (a !== undefined)
+    if (bestMatch !== undefined) return bestMatch
+    let recentFolderRoot = this.getMostRecentlyChangedFolderRoot(),
+      repoRoot = recentFolderRoot ? this.getRepoRootForFolderRoot(recentFolderRoot) : undefined
+    if (repoRoot !== undefined)
       return {
-        qualifiedPathName: new QualifiedPathName(a, ""),
+        qualifiedPathName: new QualifiedPathName(repoRoot, ""),
         fileType: "Directory",
         isAccepted: false,
       }
-    let l = this.listSourceFolders().filter(
-      (c) => c.type === 0 && c.syncingEnabled,
+    let sourceFolders = this.listSourceFolders().filter(
+      (folder) => folder.type === 0 && folder.syncingEnabled,
     )
-    if (l.length > 0)
+    if (sourceFolders.length > 0)
       return {
-        qualifiedPathName: new QualifiedPathName(l[0].folderRoot, ""),
+        qualifiedPathName: new QualifiedPathName(sourceFolders[0].folderRoot, ""),
         fileType: "Directory",
         isAccepted: false,
       }
   }
-  getRepoRootForFolderRoot(r) {
-    return this._trackedSourceFolders.get(r)?.sourceFolder?.repoRoot
+  getRepoRootForFolderRoot(folderRoot) {
+    return this._trackedSourceFolders.get(folderRoot)?.sourceFolder?.repoRoot
   }
   getVCSWatchedFolderIds() {
     return this?._vcsWatcher?.getWatchedFolderIds() ?? []
@@ -121227,225 +121360,225 @@ var V2 = class e extends DisposableContainer {
   getEnableCompletionFileEditEvents() {
     return this._featureFlagManager.currentFlags.enableCompletionFileEditEvents
   }
-  async updateStatusTrace(r) {
-    r.addSection("Syncing permission parameters"),
-      r.addValue(
+  async updateStatusTrace(trace) {
+    trace.addSection("Syncing permission parameters"),
+      trace.addValue(
         "enableFileLimitsForSyncingPermission",
         this.enableFileLimitsForSyncingPermission,
       ),
-      r.addValue("maxTrackableFiles", this.maxTrackableFiles),
-      r.addValue(
+      trace.addValue("maxTrackableFiles", this.maxTrackableFiles),
+      trace.addValue(
         "maxTrackableFilesWithoutPermission",
         this.maxTrackableFilesWithoutPermission,
       ),
-      r.addValue(
+      trace.addValue(
         "minUploadedFractionWithoutPermission",
         this.minUploadedFractionWithoutPermission,
       ),
-      r.addValue(
+      trace.addValue(
         "minUploadedFractionWithoutPermission as a percentage",
         this.minUploadedFractionWithoutPermission * 100,
       ),
-      r.addValue("verifyFolderIsSourceRepo", this.verifyFolderIsSourceRepo),
-      r.addValue(
+      trace.addValue("verifyFolderIsSourceRepo", this.verifyFolderIsSourceRepo),
+      trace.addValue(
         "refuseToSyncHomeDirectories",
         this.refuseToSyncHomeDirectories,
       )
-    let n = 0
-    for (let [s, o] of this._registeredSourceFolders) {
+    let folderCount = 0
+    for (let [folderRoot, folderInfo] of this._registeredSourceFolders) {
       if (
-        (n++,
-        r.addSection(`Source folder: ${s}`),
-        o.folderType === 0
-          ? r.addValue("Folder type", "vscode workspace folder")
-          : r.addValue("Folder type", "external folder"),
-        o.containingFolderRoot !== undefined)
+        (folderCount++,
+        trace.addSection(`Source folder: ${folderRoot}`),
+        folderInfo.folderType === 0
+          ? trace.addValue("Folder type", "vscode workspace folder")
+          : trace.addValue("Folder type", "external folder"),
+        folderInfo.containingFolderRoot !== undefined)
       ) {
-        r.addValue(
+        trace.addValue(
           "Not tracked: nested folder. Containing folder",
-          o.containingFolderRoot,
+          folderInfo.containingFolderRoot,
         )
         continue
       }
-      if (o.isHomeDir) {
-        r.addLine("Not tracked: home directory")
+      if (folderInfo.isHomeDir) {
+        trace.addLine("Not tracked: home directory")
         continue
       }
       if (
-        o.folderQualification !== undefined &&
-        !o.folderQualification.trackable
+        folderInfo.folderQualification !== undefined &&
+        !folderInfo.folderQualification.trackable
       ) {
-        r.addLine("Not tracked: folder is too large")
+        trace.addLine("Not tracked: folder is too large")
         continue
       }
-      let a = sl(o)
-      if (a === "permission denied") {
-        r.addLine("Not tracked: syncing permission denied")
+      let trackingStatus = sl(folderInfo)
+      if (trackingStatus === "permission denied") {
+        trace.addLine("Not tracked: syncing permission denied")
         continue
       }
-      if (a === "permission needed") {
-        r.addLine("Not tracked: syncing permission not yet granted")
+      if (trackingStatus === "permission needed") {
+        trace.addLine("Not tracked: syncing permission not yet granted")
         continue
       }
-      let l = this._trackedSourceFolders.get(s)?.sourceFolder
-      if (l === undefined) {
-        r.addLine("Tracking in progress")
+      let sourceFolder = this._trackedSourceFolders.get(folderRoot)?.sourceFolder
+      if (sourceFolder === undefined) {
+        trace.addLine("Tracking in progress")
         continue
       }
-      r.addValue("Folder root", s),
-        r.addValue("Repo root", l.repoRoot),
-        r.addValue("Mtime cache dir", l.cacheDirPath),
-        l.diskFileManager.itemsInFlight === 0 ||
-          r.addValue("Source folder startup", "in progress"),
-        r.addValue("Source folder startup", "complete"),
-        r.addValue("Tracked files", this._pathMap.trackedFileCount(l.folderId)),
-        r.addValue("Syncing backlog size", l.diskFileManager.itemsInFlight)
+      trace.addValue("Folder root", folderRoot),
+        trace.addValue("Repo root", sourceFolder.repoRoot),
+        trace.addValue("Mtime cache dir", sourceFolder.cacheDirPath),
+        sourceFolder.diskFileManager.itemsInFlight === 0 ||
+          trace.addValue("Source folder startup", "in progress"),
+        trace.addValue("Source folder startup", "complete"),
+        trace.addValue("Tracked files", this._pathMap.trackedFileCount(sourceFolder.folderId)),
+        trace.addValue("Syncing backlog size", sourceFolder.diskFileManager.itemsInFlight)
     }
     if (
-      (n === 0 && r.addSection("Source folders: no open source folders"),
-      r.addSection("Workspace status"),
+      (folderCount === 0 && trace.addSection("Source folders: no open source folders"),
+      trace.addSection("Workspace status"),
       !this.initialFoldersSynced)
     )
-      r.addValue("Workspace startup", "in progress")
+      trace.addValue("Workspace startup", "in progress")
     else {
-      r.addValue("Workspace startup", "complete")
-      let s = this.getContextWithBlobNames()
-      r.addValue("Blobs in context", s.blobNames.length)
-      let o = r.savePoint()
+      trace.addValue("Workspace startup", "complete")
+      let context = this.getContextWithBlobNames()
+      trace.addValue("Blobs in context", context.blobNames.length)
+      let savePoint = trace.savePoint()
       try {
-        let l = 0
-        for (let c = 0; c < s.blobNames.length; c += 1e3) {
-          r.rollback(o),
-            r.addLine(`Verifying blob names... ${c} / ${s.blobNames.length} `),
-            r.publish()
-          let u = await this._apiServer.findMissing(
-            s.blobNames.slice(c, c + 1e3),
+        let unknownBlobCount = 0
+        for (let index = 0; index < context.blobNames.length; index += 1e3) {
+          trace.rollback(savePoint),
+            trace.addLine(`Verifying blob names... ${index} / ${context.blobNames.length} `),
+            trace.publish()
+          let response = await this._apiServer.findMissing(
+            context.blobNames.slice(index, index + 1e3),
           )
-          l += u.unknownBlobNames.length
+          unknownBlobCount += response.unknownBlobNames.length
         }
-        r.rollback(o), r.addValue("Unknown blob names", l)
-      } catch (a) {
-        r.rollback(o), r.addError(`Unable to verify blob names: ${a}`)
+        trace.rollback(savePoint), trace.addValue("Unknown blob names", unknownBlobCount)
+      } catch (error) {
+        trace.rollback(savePoint), trace.addError(`Unable to verify blob names: ${error}`)
       }
     }
-    n === 0 && r.addLine("No source folders in workspace")
-    let i = this._blobsCheckpointManager
-    if (i !== undefined) {
-      let s = i.getContext(),
-        o = i.getCheckpointedBlobNames().length
-      r.addValue("Current checkpoint", s.checkpointId),
-        r.addValue("Blobs in current checkpoint", o),
-        r.addValue("Added blobs not in checkpoint", s.addedBlobs.length),
-        r.addValue("Deleted blobs not in checkpoint", s.deletedBlobs.length)
+    folderCount === 0 && trace.addLine("No source folders in workspace")
+    let checkpointManager = this._blobsCheckpointManager
+    if (checkpointManager !== undefined) {
+      let checkpointContext = checkpointManager.getContext(),
+        checkpointedBlobCount = checkpointManager.getCheckpointedBlobNames().length
+      trace.addValue("Current checkpoint", checkpointContext.checkpointId),
+        trace.addValue("Blobs in current checkpoint", checkpointedBlobCount),
+        trace.addValue("Added blobs not in checkpoint", checkpointContext.addedBlobs.length),
+        trace.addValue("Deleted blobs not in checkpoint", checkpointContext.deletedBlobs.length)
     }
   }
-  _reportSourceFolderStartup(r, n, i, s) {
-    let o = n.diskFileManager.metrics
-    r.info("Tracking enabled"),
-      r.info(s.format()),
-      r.info(o.format()),
-      r.info(i.format())
+  _reportSourceFolderStartup(logger, sourceFolder, pathMapMetrics, startupTime) {
+    let diskFileManagerMetrics = sourceFolder.diskFileManager.metrics
+    logger.info("Tracking enabled"),
+      logger.info(startupTime.format()),
+      logger.info(diskFileManagerMetrics.format()),
+      logger.info(pathMapMetrics.format())
   }
-  _reportWorkspaceStartup(r) {
-    this._logger.info(`Workspace startup complete in ${r} ms`)
+  _reportWorkspaceStartup(startupTime) {
+    this._logger.info(`Workspace startup complete in ${startupTime} ms`)
   }
   trackedSourceFolderNames() {
     return Array.from(this._registeredSourceFolders)
-      .filter(([r, n]) => sl(n) === "trackable")
-      .map(([r, n]) => ({ folderRoot: r }))
+      .filter(([folderRoot, folderInfo]) => sl(folderInfo) === "trackable")
+      .map(([folderRoot, folderInfo]) => ({ folderRoot: folderRoot }))
   }
   getSourceFoldersReportDetails() {
-    let r = this.listSourceFolders(),
-      n = (0, nc.mapValues)(
-        (0, nc.groupBy)(r, (f) => wv[f.type]),
-        (f) => f.length,
+    let sourceFolders = this.listSourceFolders(),
+      folderDetails = (0, nc.mapValues)(
+        (0, nc.groupBy)(sourceFolders, (folder) => wv[folder.type]),
+        (folders) => folders.length,
       ),
-      i = (0, nc.mapValues)(
-        (0, nc.groupBy)(r, (f) => wv[f.type]),
-        (f) =>
+      repoRootCountByType = (0, nc.mapValues)(
+        (0, nc.groupBy)(sourceFolders, (folder) => wv[folder.type]),
+        (folders) =>
           (0, nc.uniq)(
-            f.map((p) => this.getRepoRootForFolderRoot(p.folderRoot)),
+            folders.map((folder) => this.getRepoRootForFolderRoot(folder.folderRoot)),
           ).length,
       ),
-      s = (f) => f.type === 0 || f.type === 1,
-      o = (f) => f.type === 2 || f.type === 3,
-      a = (f) => f.type === 4,
-      l = r.filter((f) => s(f)).map((f) => f.trackedFileCount),
-      c = r.filter((f) => o(f)).length,
-      u = (0, nc.mapValues)(
+      isWorkspaceFolder = (folder) => folder.type === 0 || folder.type === 1,
+      isNestedFolder = (folder) => folder.type === 2 || folder.type === 3,
+      isUntrackedFolder = (folder) => folder.type === 4,
+      trackedFileCounts = sourceFolders.filter((folder) => isWorkspaceFolder(folder)).map((folder) => folder.trackedFileCount),
+      nestedFolderCount = sourceFolders.filter((folder) => isNestedFolder(folder)).length,
+      untrackedCountByReason = (0, nc.mapValues)(
         (0, nc.groupBy)(
-          r.filter((f) => a(f)),
-          (f) => f.reason,
+          sourceFolders.filter((folder) => isUntrackedFolder(folder)),
+          (folder) => folder.reason,
         ),
-        (f) => f.length,
+        (folders) => folders.length,
       )
     return {
       workspaceStorageUri: this._storageUriProvider.storageUri?.toString(),
-      folderCountByType: n,
-      repoRootCountByType: i,
-      trackedFileCount: l,
-      nestedFolderCount: c,
-      untrackedCountByReason: u,
+      folderCountByType: folderDetails,
+      repoRootCountByType: repoRootCountByType,
+      trackedFileCount: trackedFileCounts,
+      nestedFolderCount: nestedFolderCount,
+      untrackedCountByReason: untrackedCountByReason,
     }
   }
   listSourceFolders() {
     if (this._syncingPermissionTracker.syncingPermissionDenied) return []
-    let r = this.syncingEnabledState === "disabled",
-      n = new Array()
-    for (let [i, s] of this._registeredSourceFolders) {
-      if (s.containingFolderRoot !== undefined) {
-        let f = s.folderType === 0 ? 2 : 3
-        n.push({
-          type: f,
-          name: s.folderName,
+    let syncingDisabled = this.syncingEnabledState === "disabled",
+      sourceFolders = new Array()
+    for (let [folderRoot, folderInfo] of this._registeredSourceFolders) {
+      if (folderInfo.containingFolderRoot !== undefined) {
+        let folderType = folderInfo.folderType === 0 ? 2 : 3
+        sourceFolders.push({
+          type: folderType,
+          name: folderInfo.folderName,
           syncingEnabled: false,
-          folderRoot: i,
-          containingFolderRoot: s.containingFolderRoot,
+          folderRoot: folderRoot,
+          containingFolderRoot: folderInfo.containingFolderRoot,
         })
         continue
       }
-      if (s.isHomeDir) {
-        n.push({
+      if (folderInfo.isHomeDir) {
+        sourceFolders.push({
           type: 4,
-          name: s.folderName,
+          name: folderInfo.folderName,
           syncingEnabled: false,
-          folderRoot: i,
+          folderRoot: folderRoot,
           reason: "home directory",
         })
         continue
       }
       if (
-        s.folderQualification !== undefined &&
-        !s.folderQualification.trackable
+        folderInfo.folderQualification !== undefined &&
+        !folderInfo.folderQualification.trackable
       ) {
-        n.push({
+        sourceFolders.push({
           type: 4,
-          name: s.folderName,
+          name: folderInfo.folderName,
           syncingEnabled: false,
-          folderRoot: i,
+          folderRoot: folderRoot,
           reason: "too large",
         })
         continue
       }
-      if (s.syncingPermission === "denied") {
-        n.push({
+      if (folderInfo.syncingPermission === "denied") {
+        sourceFolders.push({
           type: 4,
-          name: s.folderName,
+          name: folderInfo.folderName,
           syncingEnabled: false,
-          folderRoot: i,
+          folderRoot: folderRoot,
           reason: "permission not granted",
         })
         continue
       }
-      let o = s.folderType === 0 ? 0 : 1,
-        a = this._trackedSourceFolders.get(i)?.sourceFolder
-      if (!a?.initialEnumerationComplete) {
-        let f = !r && s.syncingPermission === "granted"
-        n.push({
-          name: s.folderName,
-          type: o,
-          folderRoot: i,
-          syncingEnabled: f,
+      let folderType = folderInfo.folderType === 0 ? 0 : 1,
+        sourceFolder = this._trackedSourceFolders.get(folderRoot)?.sourceFolder
+      if (!sourceFolder?.initialEnumerationComplete) {
+        let syncingEnabled = !syncingDisabled && folderInfo.syncingPermission === "granted"
+        sourceFolders.push({
+          name: folderInfo.folderName,
+          type: folderType,
+          folderRoot: folderRoot,
+          syncingEnabled: syncingEnabled,
           trackedFileCount: 0,
           containsExcludedItems: false,
           containsUnindexedItems: false,
@@ -121453,96 +121586,96 @@ var V2 = class e extends DisposableContainer {
         })
         continue
       }
-      let l = !r && s.syncingPermission === "granted",
-        c = false,
-        u = false
-      for (let [f, p, g, m] of this._pathMap.pathsInFolder(a.folderId))
-        g || (c = true), p === "File" && g && !m && (u = true)
-      n.push({
-        name: s.folderName,
-        type: o,
-        folderRoot: i,
-        syncingEnabled: l,
-        trackedFileCount: this._pathMap.trackedFileCount(a.folderId),
-        containsExcludedItems: c,
-        containsUnindexedItems: u,
+      let syncingEnabled = !syncingDisabled && folderInfo.syncingPermission === "granted",
+        containsExcludedItems = false,
+        containsUnindexedItems = false
+      for (let [path, fileType, isIncluded, isIndexed] of this._pathMap.pathsInFolder(sourceFolder.folderId))
+        isIncluded || (containsExcludedItems = true), fileType === "File" && isIncluded && !isIndexed && (containsUnindexedItems = true)
+      sourceFolders.push({
+        name: folderInfo.folderName,
+        type: folderType,
+        folderRoot: folderRoot,
+        syncingEnabled: syncingEnabled,
+        trackedFileCount: this._pathMap.trackedFileCount(sourceFolder.folderId),
+        containsExcludedItems: containsExcludedItems,
+        containsUnindexedItems: containsUnindexedItems,
         enumerationState: 1,
       })
     }
-    return n
+    return sourceFolders
   }
-  listChildren(r, n) {
+  listChildren(folderRoot, relativePath) {
     if (this._syncingPermissionTracker.syncingPermissionDenied) return []
-    let s = this._trackedSourceFolders.get(r)?.sourceFolder
-    if (s === undefined) throw new $F()
-    if (!s.initialEnumerationComplete) throw new YF()
-    let o = joinPaths(r, n),
-      a = ql(s.repoRoot, o),
-      l = new Map(),
-      c = new Map(),
-      u = new Set(),
-      f = new Set(),
-      p = s.folderId
-    for (let [g, m, y, v, C] of this._pathMap.pathsInFolder(p)) {
-      let E = Zh(a, g)
-      if (E === undefined) continue
-      let w = wG(E)
-      if (!(w.length === 0 || w[0].length === 0))
-        if (w.length === 1)
-          l.set(w[0], { type: m, included: y, indexed: v, reason: C })
+    let sourceFolder = this._trackedSourceFolders.get(folderRoot)?.sourceFolder
+    if (sourceFolder === undefined) throw new $F()
+    if (!sourceFolder.initialEnumerationComplete) throw new YF()
+    let absolutePath = joinPaths(folderRoot, relativePath),
+      normalizedPath = ql(sourceFolder.repoRoot, absolutePath),
+      fileTypeMap = new Map(),
+      fileCountMap = new Map(),
+      excludedDirs = new Set(),
+      unindexedDirs = new Set(),
+      folderId = sourceFolder.folderId
+    for (let [path, fileType, isIncluded, isIndexed, exclusionReason] of this._pathMap.pathsInFolder(folderId)) {
+      let relativePart = Zh(normalizedPath, path)
+      if (relativePart === undefined) continue
+      let pathParts = wG(relativePart)
+      if (!(pathParts.length === 0 || pathParts[0].length === 0))
+        if (pathParts.length === 1)
+          fileTypeMap.set(pathParts[0], { type: fileType, included: isIncluded, indexed: isIndexed, reason: exclusionReason })
         else {
-          let B = w[0]
-          if (!y) u.add(B)
-          else if (m === "File") {
-            let T = c.get(B) ?? 0
-            c.set(B, T + 1), v || f.add(B)
+          let dirName = pathParts[0]
+          if (!isIncluded) excludedDirs.add(dirName)
+          else if (fileType === "File") {
+            let fileCount = fileCountMap.get(dirName) ?? 0
+            fileCountMap.set(dirName, fileCount + 1), isIndexed || unindexedDirs.add(dirName)
           }
         }
     }
-    return Array.from(l.entries()).map(([g, m]) => {
-      let y = {
-        name: g,
-        folderRoot: r,
-        relPath: joinPaths(n, g),
-        included: m.included,
-        reason: m.reason,
+    return Array.from(fileTypeMap.entries()).map(([name, info]) => {
+      let baseInfo = {
+        name: name,
+        folderRoot: folderRoot,
+        relPath: joinPaths(relativePath, name),
+        included: info.included,
+        reason: info.reason,
       }
-      return m.type === "File"
-        ? { ...y, type: "File", indexed: m.indexed }
-        : m.type === "Directory"
+      return info.type === "File"
+        ? { ...baseInfo, type: "File", indexed: info.indexed }
+        : info.type === "Directory"
           ? {
-              ...y,
+              ...baseInfo,
               type: "Directory",
-              trackedFileCount: c.get(g) ?? 0,
-              containsExcludedItems: u.has(g),
-              containsUnindexedItems: f.has(g),
+              trackedFileCount: fileCountMap.get(name) ?? 0,
+              containsExcludedItems: excludedDirs.has(name),
+              containsUnindexedItems: unindexedDirs.has(name),
             }
-          : { ...y, type: "Other" }
+          : { ...baseInfo, type: "Other" }
     })
   }
   clearFileEdits() {
     this._fileEditManager?.clearAll({ clearLastKnown: false })
   }
-  unitTestOnlyGetRepoRoot(r) {
-    let n = this._trackedSourceFolders.get(r)
-    if (n !== undefined) return n.sourceFolder?.repoRoot
+  unitTestOnlyGetRepoRoot(folderRoot) {
+    let trackedFolder = this._trackedSourceFolders.get(folderRoot)
+    if (trackedFolder !== undefined) return trackedFolder.sourceFolder?.repoRoot
   }
-  unitTestOnlySourceFolderBacklog(r) {
-    let n = this._trackedSourceFolders.get(r)
-    if (n === undefined) return
-    let i = n.sourceFolder
-    if (i !== undefined && i.initialEnumerationComplete)
-      return i.diskFileManager.itemsInFlight
+  unitTestOnlySourceFolderBacklog(folderRoot) {
+    let trackedFolder = this._trackedSourceFolders.get(folderRoot)
+    if (trackedFolder === undefined) return
+    let sourceFolder = trackedFolder.sourceFolder
+    if (sourceFolder !== undefined && sourceFolder.initialEnumerationComplete)
+      return sourceFolder.diskFileManager.itemsInFlight
   }
 }
 var KIe = q(require("vscode"))
-var H2 = class extends DisposableContainer {
-  constructor(r, n) {
+var WorkspaceStateManager = class extends DisposableContainer {
+  constructor(actionsModel, workspaceManager) {
     super()
-    this.actionsModel = r
-    this.workspaceManager = n
+    this.actionsModel = actionsModel
+    this.workspaceManager = workspaceManager
     this.setInitializing(),
-      this.addDisposable(n),
+      this.addDisposable(workspaceManager),
       this.checkWorkspaceSelected(),
       this.checkWorkspacePopulated()
   }
@@ -121567,8 +121700,8 @@ var H2 = class extends DisposableContainer {
     return !!this.workspaceManager
       .getSyncingProgress()
       .some(
-        (n) =>
-          n.progress?.trackedFiles !== undefined && n.progress.trackedFiles > 0,
+        (folderProgress) =>
+          folderProgress.progress?.trackedFiles !== undefined && folderProgress.progress.trackedFiles > 0,
       )
   }
   setInitializing() {
@@ -121638,9 +121771,9 @@ var AugmentExtension = class e extends DisposableContainer {
         this.featureFlagManager,
         this._globalState,
       )),
-      (this._clientMetricsReporter = new ZQ(apiServer)),
+      (this._clientMetricsReporter = new DiskFileManager(apiServer)),
       (this._completionTimelineReporter = new tN(apiServer)),
-      (this._extensionEventReporter = new nN(apiServer)),
+      (this._extensionEventReporter = new ExtensionSessionEventReporter(apiServer)),
       (this.guidelinesWatcher = new ig(
         this._augmentConfigListener,
         this.featureFlagManager,
@@ -121870,7 +122003,7 @@ var AugmentExtension = class e extends DisposableContainer {
     this.featureFlagManager.currentFlags.enableViewTextDocument &&
       (this._logger.debug("Enabling viewTextDocument background file scheme"),
       this.disposeOnDisable.push(uye()))
-    let recentCompletionsTracker = new t2(this._extensionContext.workspaceState)
+    let recentCompletionsTracker = new SyncingPermissionTracker(this._extensionContext.workspaceState)
     this.disposeOnDisable.push(recentCompletionsTracker),
       (this._completionServer = new DQ(
         this._apiServer,
@@ -121880,9 +122013,9 @@ var AugmentExtension = class e extends DisposableContainer {
       ))
     let maxUploadSizeBytes = this.featureFlagManager.currentFlags.maxUploadSizeBytes
     ;(this._blobNameCalculator = new lh(maxUploadSizeBytes)),
-      (this.workspaceManager = new V2(
+      (this.workspaceManager = new WorkspaceManager(
         this._actionsModel,
-        new KN(this._extensionContext.workspaceState),
+        new ExternalSourceFoldersManager(this._extensionContext.workspaceState),
         recentCompletionsTracker,
         this._extensionContext,
         this._apiServer,
@@ -122181,7 +122314,7 @@ var AugmentExtension = class e extends DisposableContainer {
     this._chatModel = chatModel
     let chatHistoryManager = new zN(this._globalState, this.syncingStatusReporter),
       chatEventEmitter = new LN(),
-      chatWebviewApp = new jx(
+      chatWebviewApp = new ChatApp(
         chatModel,
         modelsByName,
         this._apiServer,
@@ -122217,7 +122350,7 @@ var AugmentExtension = class e extends DisposableContainer {
         let newApp, newChatExtensionEventDisposable
         switch ((this._currentChatExtensionEventDisposable?.dispose(), appType)) {
           case "chat":
-            ;(newApp = new jx(
+            ;(newApp = new ChatApp(
               chatModel,
               modelsByName,
               this._apiServer,
@@ -122258,7 +122391,7 @@ var AugmentExtension = class e extends DisposableContainer {
             break
           case "awaiting-syncing-permission":
             this._mainPanelProvider.changeApp(
-              new KQ(
+              new AwaitingSyncingPermissionApp(
                 this._actionsModel,
                 this._apiServer,
                 this._augmentConfigListener,
@@ -122510,11 +122643,11 @@ var AugmentExtension = class e extends DisposableContainer {
       )),
       this.disposeOnDisable.push(this._remoteWorkspaceResolver),
       this.disposeOnDisable.push(
-        new ZN(this._statusBar, this._syncingEnabledTracker),
+        new SyncingStatusBarManager(this._statusBar, this._syncingEnabledTracker),
       )
     let updateChecker = new Im(this._augmentConfigListener, this._actionsModel)
     this.addDisposable(updateChecker), updateChecker.checkAndUpdateState()
-    let workspaceStateManager = new H2(this._actionsModel, this.workspaceManager)
+    let workspaceStateManager = new WorkspaceStateManager(this._actionsModel, this.workspaceManager)
     this.disposeOnDisable.push(workspaceStateManager), this._syncLastEnabledExtensionVersion()
     let packageJson = this._extensionContext.extension.packageJSON,
       isPreRelease = "preRelease" in packageJson && packageJson.preRelease === true
@@ -122903,8 +123036,8 @@ function activate(e) {
   f.migrateLegacyConfig()
   let p = new lM(e, f)
   e.subscriptions.push(p)
-  let g = new XN()
-  e.subscriptions.push(g), setClientConfig(new DF(f)), setClientAuth(new RF(p, f))
+  let syncingEnabledTracker = new SyncingEnabledTracker()
+  e.subscriptions.push(syncingEnabledTracker), setClientConfig(new DF(f)), setClientAuth(new RF(p, f))
   let m = new APIServer(f, p, u, l, global.fetch),
     y = new qQ(),
     v = new yg(10),
@@ -122915,24 +123048,24 @@ function activate(e) {
     T = new Ye.EventEmitter(),
     N = new Ye.EventEmitter(),
     W = new rF(e),
-    Z = new $N(e.extensionUri)
-  Z.onVisibilityChange((J) => {
+    mainPanelProvider = new MainPanelWebviewProvider(e.extensionUri)
+  mainPanelProvider.onVisibilityChange((J) => {
     J || Tv.currentPanel?.dispose()
   })
-  let te = new YQ(c)
-  e.subscriptions.push(te)
+  let actionsStateModel = new ActionsStateModel(c)
+  e.subscriptions.push(actionsStateModel)
   let Y = new oN(m),
     U = new uM(e, f, m, p, Y),
-    ce = new JQ(m, f, U, te)
+    ce = new JQ(m, f, U, actionsStateModel)
   function Ie(J) {
     e: for (let ie of J)
       switch (ie.name) {
         case "UserShouldSignIn": {
-          Z.changeApp(ce), Q()
+          mainPanelProvider.changeApp(ce), Q()
           break e
         }
         case "WorkspaceNotSelected": {
-          te.isSystemStateComplete("authenticated") &&
+          actionsStateModel.isSystemStateComplete("authenticated") &&
             T.fire("folder-selection")
           break e
         }
@@ -122944,9 +123077,9 @@ function activate(e) {
           Q()
           break e
       }
-    ;(te.isDerivedStateSatisfied("SyncingPermissionNeeded") ||
-      te.isDerivedStateSatisfied("uploadingHomeDir") ||
-      te.isDerivedStateSatisfied("workspaceTooLarge")) &&
+    ;(actionsStateModel.isDerivedStateSatisfied("SyncingPermissionNeeded") ||
+      actionsStateModel.isDerivedStateSatisfied("uploadingHomeDir") ||
+      actionsStateModel.isDerivedStateSatisfied("workspaceTooLarge")) &&
       T.fire("awaiting-syncing-permission")
   }
   e.subscriptions.push(
@@ -122954,18 +123087,18 @@ function activate(e) {
       o()
     }),
   ),
-    e.subscriptions.push(new oM(te, p, f)),
+    e.subscriptions.push(new oM(actionsStateModel, p, f)),
     e.subscriptions.push(
-      Ye.window.registerWebviewViewProvider("augment-chat", Z, {
+      Ye.window.registerWebviewViewProvider("augment-chat", mainPanelProvider, {
         webviewOptions: { retainContextWhenHidden: true },
       }),
     ),
-    (r = new AugmentExtension(e, c, f, m, p, y, v, E, C, w, N, Z, T, te, g, B, Y, W))
+    (r = new AugmentExtension(e, c, f, m, p, y, v, E, C, w, N, mainPanelProvider, T, actionsStateModel, syncingEnabledTracker, B, Y, W))
   function Q() {
-    Z.isVisible() || Ye.commands.executeCommand(Separator.commandID)
+    mainPanelProvider.isVisible() || Ye.commands.executeCommand(Separator.commandID)
   }
-  e.subscriptions.push(te.onDerivedStatesSatisfied(Ie)),
-    Ie(te.satisfiedStates),
+  e.subscriptions.push(actionsStateModel.onDerivedStatesSatisfied(Ie)),
+    Ie(actionsStateModel.satisfiedStates),
     f.onDidChange((J) => {
       J.newConfig.enableDebugFeatures, J.previousConfig.enableDebugFeatures
     }),
@@ -122986,7 +123119,7 @@ function activate(e) {
     ),
     nEe(e),
     tBe(r, f, e)
-  let se = registerCommands(e, r, f, p, U, m, y, v, E, T, B, g, c, e.workspaceState)
+  let se = registerCommands(e, r, f, p, U, m, y, v, E, T, B, syncingEnabledTracker, c, e.workspaceState)
   e.subscriptions.push(se), e.subscriptions.push(N), n(r)
 }
 function zIe(e) {
