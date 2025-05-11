@@ -81,9 +81,9 @@ var Pd = (s, e, n) =>
     : (s[e] = n)
 var Z = (s, e, n) => Pd(s, typeof e != "symbol" ? e + "" : e, n)
 import {
-  S as ne,
-  i as oe,
-  s as te,
+  S as SvelteComponent,
+  i as initComponent,
+  s as notEqual,
   V as Ze,
   A as F,
   c as A,
@@ -1543,10 +1543,10 @@ function _f(s, e, n) {
     [u, p, g, h, I, c, i, r, o, k, t, l, a]
   )
 }
-class Ou extends ne {
+class Ou extends SvelteComponent {
   constructor(e) {
     super(),
-      oe(this, e, _f, xf, te, {
+      initComponent(this, e, _f, xf, notEqual, {
         class: 0,
         highlighted: 1,
         style: 2,
@@ -1581,9 +1581,9 @@ function Cf(s) {
     },
   }
 }
-class Mf extends ne {
+class Mf extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, null, Cf, te, {})
+    super(), initComponent(this, e, null, Cf, notEqual, {})
   }
 }
 function Af(s) {
@@ -1611,9 +1611,9 @@ function Af(s) {
     },
   }
 }
-class kf extends ne {
+class kf extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, null, Af, te, {})
+    super(), initComponent(this, e, null, Af, notEqual, {})
   }
 }
 function Ef(s) {
@@ -1823,9 +1823,9 @@ function Rf(s, e, n) {
     ]
   )
 }
-class zu extends ne {
+class zu extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, Rf, Lf, te, { agentId: 4 })
+    super(), initComponent(this, e, Rf, Lf, notEqual, { agentId: 4 })
   }
 }
 function Pf(s) {
@@ -1856,9 +1856,9 @@ function Pf(s) {
     },
   }
 }
-class Bu extends ne {
+class Bu extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, null, Pf, te, {})
+    super(), initComponent(this, e, null, Pf, notEqual, {})
   }
 }
 function Nf(s) {
@@ -1917,9 +1917,9 @@ function Ff(s, e, n) {
     [(e = it(e))]
   )
 }
-class Df extends ne {
+class Df extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, Ff, Nf, te, {})
+    super(), initComponent(this, e, Ff, Nf, notEqual, {})
   }
 }
 function Of(s) {
@@ -1978,9 +1978,9 @@ function zf(s, e, n) {
     [(e = it(e))]
   )
 }
-class Ws extends ne {
+class Ws extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, zf, Of, te, {})
+    super(), initComponent(this, e, zf, Of, notEqual, {})
   }
 }
 function Bf(s) {
@@ -2353,9 +2353,9 @@ function Zf(s, e, n) {
     ]
   )
 }
-class ju extends ne {
+class ju extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, Zf, Kf, te, { agentId: 0, selectedBranch: 1 })
+    super(), initComponent(this, e, Zf, Kf, notEqual, { agentId: 0, selectedBranch: 1 })
   }
 }
 function sa(s) {
@@ -2485,9 +2485,9 @@ function Qf(s, e, n) {
     [r, c, o, t, i, () => n(1, (c = !0)), () => n(1, (c = !1))]
   )
 }
-class em extends ne {
+class em extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, Qf, Jf, te, { status: 0, isExpanded: 4 })
+    super(), initComponent(this, e, Qf, Jf, notEqual, { status: 0, isExpanded: 4 })
   }
 }
 class mo {
@@ -3794,7 +3794,7 @@ function ga(s, e) {
               (O = `${e[71].updated_at ? "Updated" : "Created"} ${Co(e[71].updated_at || e[71].started_at)}`))) &&
           A(S, "title", O),
         262146 & He[0] &&
-        te(Q, (Q = `${e[71].remote_agent_id}-${e[18]}-${e[1].length}`))
+        notEqual(Q, (Q = `${e[71].remote_agent_id}-${e[18]}-${e[1].length}`))
           ? (Y(),
             m(tt, 1, 1, N),
             X(),
@@ -4652,9 +4652,9 @@ function km(s, e, n) {
     ]
   )
 }
-class Em extends ne {
+class Em extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, km, Am, te, {}, null, [-1, -1, -1])
+    super(), initComponent(this, e, km, Am, notEqual, {}, null, [-1, -1, -1])
   }
 }
 const Im = (s) => ({}),
@@ -5024,10 +5024,10 @@ function Bm(s, e, n) {
     [r, i, c, a, t, () => a(), o]
   )
 }
-let Jr = class extends ne {
+let Jr = class extends SvelteComponent {
   constructor(s) {
     super(),
-      oe(this, s, Bm, zm, te, {
+      initComponent(this, s, Bm, zm, notEqual, {
         color: 0,
         description: 1,
         callout: 2,
@@ -5054,9 +5054,9 @@ function jm(s) {
     },
   }
 }
-class Hu extends ne {
+class Hu extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, null, jm, te, {})
+    super(), initComponent(this, e, null, jm, notEqual, {})
   }
 }
 function xa(s, e, n) {
@@ -5306,10 +5306,10 @@ function Vm(s, e, n) {
     [r, i, c, a, l, u, t, (p) => u(p), o]
   )
 }
-let er = class extends ne {
+let er = class extends SvelteComponent {
   constructor(s) {
     super(),
-      oe(this, s, Vm, Gm, te, {
+      initComponent(this, s, Vm, Gm, notEqual, {
         description: 0,
         color: 1,
         buttons: 2,
@@ -5349,9 +5349,9 @@ function Ym(s) {
     },
   }
 }
-class $o extends ne {
+class $o extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, null, Ym, te, {})
+    super(), initComponent(this, e, null, Ym, notEqual, {})
   }
 }
 function Xm(s) {
@@ -5869,9 +5869,9 @@ function dp(s, e, n) {
     [i, c, t]
   )
 }
-let fp = class extends ne {
+let fp = class extends SvelteComponent {
   constructor(s) {
-    super(), oe(this, s, dp, up, te, { card: 0, flagsModel: 1 })
+    super(), initComponent(this, s, dp, up, notEqual, { card: 0, flagsModel: 1 })
   }
 }
 var mp = K1,
@@ -6562,9 +6562,9 @@ function Dp(s, e, n) {
     ]
   )
 }
-class Op extends ne {
+class Op extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, Dp, Fp, te, {})
+    super(), initComponent(this, e, Dp, Fp, notEqual, {})
   }
 }
 function zp(s) {
@@ -6623,9 +6623,9 @@ function Bp(s, e, n) {
     [(e = it(e))]
   )
 }
-class Wu extends ne {
+class Wu extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, Bp, zp, te, {})
+    super(), initComponent(this, e, Bp, zp, notEqual, {})
   }
 }
 function jp(s) {
@@ -6684,9 +6684,9 @@ function Hp(s, e, n) {
     [(e = it(e))]
   )
 }
-class qu extends ne {
+class qu extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, Hp, jp, te, {})
+    super(), initComponent(this, e, Hp, jp, notEqual, {})
   }
 }
 function Up(s) {
@@ -6895,9 +6895,9 @@ function Yp(s, e, n) {
     ]
   )
 }
-class Xp extends ne {
+class Xp extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, Yp, Vp, te, {})
+    super(), initComponent(this, e, Yp, Vp, notEqual, {})
   }
 }
 function Kp(s) {
@@ -6931,9 +6931,9 @@ function Kp(s) {
     },
   }
 }
-class Zp extends ne {
+class Zp extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, null, Kp, te, {})
+    super(), initComponent(this, e, null, Kp, notEqual, {})
   }
 }
 function Jp(s) {
@@ -7762,10 +7762,10 @@ function h$(s, e, n) {
     [t, o, r, i, c, a, l, u]
   )
 }
-class g$ extends ne {
+class g$ extends SvelteComponent {
   constructor(e) {
     super(),
-      oe(this, e, h$, $$, te, {
+      initComponent(this, e, h$, $$, notEqual, {
         qualifiedPathName: 0,
         lineChanges: 1,
         isApplyPending: 2,
@@ -8112,10 +8112,10 @@ function C$(s, e, n) {
     [t, o, r, i, c, a]
   )
 }
-class M$ extends ne {
+class M$ extends SvelteComponent {
   constructor(e) {
     super(),
-      oe(this, e, C$, _$, te, {
+      initComponent(this, e, C$, _$, notEqual, {
         filesCount: 0,
         diffSummary: 1,
         collapsed: 2,
@@ -8596,9 +8596,9 @@ function R$(s, e, n) {
     ]
   )
 }
-class P$ extends ne {
+class P$ extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, R$, L$, te, {})
+    super(), initComponent(this, e, R$, L$, notEqual, {})
   }
 }
 const N$ = Ct(!1)
@@ -8813,9 +8813,9 @@ function B$(s, e, n) {
     ]
   )
 }
-class j$ extends ne {
+class j$ extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, B$, O$, te, { draggingStore: 6 })
+    super(), initComponent(this, e, B$, O$, notEqual, { draggingStore: 6 })
   }
 }
 const H$ = /(?:^|\s)(!\[(.+|:?)]\((\S+)(?:(?:\s+)["'](\S+)["'])?\))$/,
@@ -9615,10 +9615,10 @@ function dh(s, e, n) {
     ]
   )
 }
-class fh extends ne {
+class fh extends SvelteComponent {
   constructor(e) {
     super(),
-      oe(this, e, dh, uh, te, {
+      initComponent(this, e, dh, uh, notEqual, {
         title: 0,
         src: 1,
         loadImage: 2,
@@ -9994,10 +9994,10 @@ function mh(s, e, n) {
     [t, o, r, i, c, a]
   )
 }
-let ph = class extends ne {
+let ph = class extends SvelteComponent {
   constructor(s) {
     super(),
-      oe(this, s, mh, null, te, {
+      initComponent(this, s, mh, null, notEqual, {
         maxImages: 0,
         saveImage: 1,
         deleteImage: 2,
@@ -10505,10 +10505,10 @@ function wh(s, e, n) {
     [o, r, a, l, p, i, c, u, h, k]
   )
 }
-class Vu extends ne {
+class Vu extends SvelteComponent {
   constructor(e) {
     super(),
-      oe(this, e, wh, vh, te, {
+      initComponent(this, e, wh, vh, notEqual, {
         color: 0,
         speed: 1,
         repeat: 5,
@@ -10583,9 +10583,9 @@ function bh(s, e, n) {
     [(e = it(e))]
   )
 }
-class xh extends ne {
+class xh extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, bh, yh, te, {})
+    super(), initComponent(this, e, bh, yh, notEqual, {})
   }
 }
 function _h(s) {
@@ -10644,9 +10644,9 @@ function Ch(s, e, n) {
     [(e = it(e))]
   )
 }
-class Mh extends ne {
+class Mh extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, Ch, _h, te, {})
+    super(), initComponent(this, e, Ch, _h, notEqual, {})
   }
 }
 function Ah(s) {
@@ -10705,9 +10705,9 @@ function kh(s, e, n) {
     [(e = it(e))]
   )
 }
-class Eh extends ne {
+class Eh extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, kh, Ah, te, {})
+    super(), initComponent(this, e, kh, Ah, notEqual, {})
   }
 }
 function Ih(s) {
@@ -10766,9 +10766,9 @@ function Sh(s, e, n) {
     [(e = it(e))]
   )
 }
-class Th extends ne {
+class Th extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, Sh, Ih, te, {})
+    super(), initComponent(this, e, Sh, Ih, notEqual, {})
   }
 }
 function Lh(s) {
@@ -11029,10 +11029,10 @@ function Hh(s, e, n) {
     [t, o, r]
   )
 }
-class qs extends ne {
+class qs extends SvelteComponent {
   constructor(e) {
     super(),
-      oe(this, e, Hh, jh, te, {
+      initComponent(this, e, Hh, jh, notEqual, {
         isAgentEnabled: 0,
         agentExecutionMode: 1,
         isBackgroundAgent: 2,
@@ -11175,10 +11175,10 @@ function Gh(s, e, n) {
     [t, o, r, i, c, a, l]
   )
 }
-class Pr extends ne {
+class Pr extends SvelteComponent {
   constructor(e) {
     super(),
-      oe(this, e, Gh, qh, te, {
+      initComponent(this, e, Gh, qh, notEqual, {
         onSelect: 0,
         tooltipContent: 1,
         isAgentEnabled: 2,
@@ -11778,10 +11778,10 @@ function og(s, e, n) {
     ]
   )
 }
-class rg extends ne {
+class rg extends SvelteComponent {
   constructor(e) {
     super(),
-      oe(this, e, og, ng, te, { chatModel: 0, agentConversationModel: 17 })
+      initComponent(this, e, og, ng, notEqual, { chatModel: 0, agentConversationModel: 17 })
   }
 }
 function sg(s) {
@@ -11840,9 +11840,9 @@ function ig(s, e, n) {
     [(e = it(e))]
   )
 }
-let ag = class extends ne {
+let ag = class extends SvelteComponent {
   constructor(s) {
-    super(), oe(this, s, ig, sg, te, {})
+    super(), initComponent(this, s, ig, sg, notEqual, {})
   }
 }
 function cg(s) {
@@ -11901,9 +11901,9 @@ function lg(s, e, n) {
     [(e = it(e))]
   )
 }
-class ug extends ne {
+class ug extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, lg, cg, te, {})
+    super(), initComponent(this, e, lg, cg, notEqual, {})
   }
 }
 function dg(s) {
@@ -12080,9 +12080,9 @@ function hg(s, e, n) {
     ]
   )
 }
-class gg extends ne {
+class gg extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, hg, $g, te, { isPinned: 0, onPin: 1, title: 2 })
+    super(), initComponent(this, e, hg, $g, notEqual, { isPinned: 0, onPin: 1, title: 2 })
   }
 }
 function vg(s) {
@@ -12141,9 +12141,9 @@ function wg(s, e, n) {
     [(e = it(e))]
   )
 }
-class yg extends ne {
+class yg extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, wg, vg, te, {})
+    super(), initComponent(this, e, wg, vg, notEqual, {})
   }
 }
 function bg(s) {
@@ -12202,9 +12202,9 @@ function xg(s, e, n) {
     [(e = it(e))]
   )
 }
-let Yu = class extends ne {
+let Yu = class extends SvelteComponent {
   constructor(s) {
-    super(), oe(this, s, xg, bg, te, {})
+    super(), initComponent(this, s, xg, bg, notEqual, {})
   }
 }
 function _g(s) {
@@ -12263,9 +12263,9 @@ function Cg(s, e, n) {
     [(e = it(e))]
   )
 }
-class Mg extends ne {
+class Mg extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, Cg, _g, te, {})
+    super(), initComponent(this, e, Cg, _g, notEqual, {})
   }
 }
 function Ag(s) {
@@ -12324,9 +12324,9 @@ function kg(s, e, n) {
     [(e = it(e))]
   )
 }
-class Eg extends ne {
+class Eg extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, kg, Ag, te, {})
+    super(), initComponent(this, e, kg, Ag, notEqual, {})
   }
 }
 function Ig(s) {
@@ -12483,9 +12483,9 @@ function Pg(s, e, n) {
     [t]
   )
 }
-class Ng extends ne {
+class Ng extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, Pg, Rg, te, { icon: 0 })
+    super(), initComponent(this, e, Pg, Rg, notEqual, { icon: 0 })
   }
 }
 function Br(s) {
@@ -13040,9 +13040,9 @@ function Xg(s, e, n) {
     [t]
   )
 }
-class tr extends ne {
+class tr extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, Xg, Yg, te, { option: 0 })
+    super(), initComponent(this, e, Xg, Yg, notEqual, { option: 0 })
   }
 }
 function Kg(s) {
@@ -13101,9 +13101,9 @@ function Zg(s, e, n) {
     [(e = it(e))]
   )
 }
-class Xu extends ne {
+class Xu extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, Zg, Kg, te, {})
+    super(), initComponent(this, e, Zg, Kg, notEqual, {})
   }
 }
 const Jg = (s) => ({}),
@@ -13494,10 +13494,10 @@ function l0(s, e, n) {
     [r, i, c, a, t, o]
   )
 }
-class to extends ne {
+class to extends SvelteComponent {
   constructor(e) {
     super(),
-      oe(this, e, l0, c0, te, {
+      initComponent(this, e, l0, c0, notEqual, {
         color: 0,
         size: 1,
         removeBtn: 2,
@@ -13536,9 +13536,9 @@ function u0(s) {
     },
   }
 }
-class d0 extends ne {
+class d0 extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, null, u0, te, {})
+    super(), initComponent(this, e, null, u0, notEqual, {})
   }
 }
 function Za(s, e, n) {
@@ -14165,9 +14165,9 @@ function E0(s, e, n) {
     [g, p, o, r, t, { size: 1, variant: "ghost-block", color: "neutral" }, c]
   )
 }
-class I0 extends ne {
+class I0 extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, E0, k0, te, { item: 1, chatModel: 0 })
+    super(), initComponent(this, e, E0, k0, notEqual, { item: 1, chatModel: 0 })
   }
 }
 function S0(s) {
@@ -14420,9 +14420,9 @@ function P0(s, e, n) {
     ]
   )
 }
-class N0 extends ne {
+class N0 extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, P0, R0, te, { originalCode: 0 })
+    super(), initComponent(this, e, P0, R0, notEqual, { originalCode: 0 })
   }
 }
 function F0(s) {
@@ -14592,9 +14592,9 @@ function j0(s, e, n) {
     [r, i, t, o]
   )
 }
-class H0 extends ne {
+class H0 extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, j0, B0, te, { originalCode: 0, onRemove: 1 })
+    super(), initComponent(this, e, j0, B0, notEqual, { originalCode: 0, onRemove: 1 })
   }
 }
 function ec(s) {
@@ -14918,9 +14918,9 @@ function J0(s, e, n) {
     ]
   )
 }
-class Q0 extends ne {
+class Q0 extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, J0, Z0, te, { item: 0 })
+    super(), initComponent(this, e, J0, Z0, notEqual, { item: 0 })
   }
 }
 var Ku,
@@ -22275,9 +22275,9 @@ function c2(s, e, n) {
     ]
   )
 }
-class l2 extends ne {
+class l2 extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, c2, a2, te, {})
+    super(), initComponent(this, e, c2, a2, notEqual, {})
   }
 }
 function nc(s) {
@@ -23109,9 +23109,9 @@ function S2(s, e, n) {
     ]
   )
 }
-class T2 extends ne {
+class T2 extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, S2, I2, te, { chatModel: 0, item: 1 })
+    super(), initComponent(this, e, S2, I2, notEqual, { chatModel: 0, item: 1 })
   }
 }
 function oc(s, e, n) {
@@ -23239,9 +23239,9 @@ function R2(s, e, n) {
     [i, c, t, o]
   )
 }
-class P2 extends ne {
+class P2 extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, R2, L2, te, { chatModel: 0 })
+    super(), initComponent(this, e, R2, L2, notEqual, { chatModel: 0 })
   }
 }
 const N2 = (s) => ({}),
@@ -23391,9 +23391,9 @@ function j2(s, e, n) {
     [r, i, t, o]
   )
 }
-class Ju extends ne {
+class Ju extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, j2, B2, te, { disabled: 0, onSend: 1 })
+    super(), initComponent(this, e, j2, B2, notEqual, { disabled: 0, onSend: 1 })
   }
 }
 function ac(s, e, n) {
@@ -23815,10 +23815,10 @@ function Z2(s, e, n) {
     ]
   )
 }
-class J2 extends ne {
+class J2 extends SvelteComponent {
   constructor(e) {
     super(),
-      oe(this, e, Z2, K2, te, {
+      initComponent(this, e, Z2, K2, notEqual, {
         disabled: 0,
         onSelectModel: 1,
         modelIdToDisplayName: 2,
@@ -24873,9 +24873,9 @@ function Cv(s, e, n) {
     [o, r, i, t]
   )
 }
-class Qu extends ne {
+class Qu extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, Cv, _v, te, { item: 0, onSelect: 1, highlight: 2 })
+    super(), initComponent(this, e, Cv, _v, notEqual, { item: 0, onSelect: 1, highlight: 2 })
   }
 }
 const Mv = (s) => ({}),
@@ -24977,9 +24977,9 @@ function kv(s, e, n) {
     [r, i, o, t]
   )
 }
-class Gs extends ne {
+class Gs extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, kv, Av, te, { command: 0, symbol: 1 })
+    super(), initComponent(this, e, kv, Av, notEqual, { command: 0, symbol: 1 })
   }
 }
 function Ev(s) {
@@ -25038,9 +25038,9 @@ function Iv(s, e, n) {
     [(e = it(e))]
   )
 }
-class Sv extends ne {
+class Sv extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, Iv, Ev, te, {})
+    super(), initComponent(this, e, Iv, Ev, notEqual, {})
   }
 }
 function mc(s, e, n) {
@@ -26058,9 +26058,9 @@ function Yv(s, e, n) {
     [(e = it(e))]
   )
 }
-class Xv extends ne {
+class Xv extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, Yv, Vv, te, {})
+    super(), initComponent(this, e, Yv, Vv, notEqual, {})
   }
 }
 function Kv(s) {
@@ -26237,9 +26237,9 @@ function t3(s) {
     },
   }
 }
-class n3 extends ne {
+class n3 extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, null, t3, te, {})
+    super(), initComponent(this, e, null, t3, notEqual, {})
   }
 }
 function o3(s) {
@@ -26468,9 +26468,9 @@ function d3(s, e, n) {
     [(e = it(e))]
   )
 }
-class f3 extends ne {
+class f3 extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, d3, u3, te, {})
+    super(), initComponent(this, e, d3, u3, notEqual, {})
   }
 }
 function vc(s) {
@@ -26706,26 +26706,26 @@ function v3(s, e, n) {
   )
 }
 const Dn = {
-  Root: class extends ne {
+  Root: class extends SvelteComponent {
     constructor(s) {
-      super(), oe(this, s, O2, D2, te, {})
+      super(), initComponent(this, s, O2, D2, notEqual, {})
     }
   },
   SingleSendButton: Ju,
-  SendButton: class extends ne {
+  SendButton: class extends SvelteComponent {
     constructor(s) {
       super(),
-        oe(this, s, ov, nv, te, {
+        initComponent(this, s, ov, nv, notEqual, {
           primaryAction: 0,
           isDisabled: 1,
           disabledReason: 2,
         })
     }
   },
-  ContextMenu: class extends ne {
+  ContextMenu: class extends SvelteComponent {
     constructor(s) {
       super(),
-        oe(this, s, Dv, Fv, te, {
+        initComponent(this, s, Dv, Fv, notEqual, {
           onCloseDropdown: 0,
           onInsertMentionable: 13,
           closeDropdown: 1,
@@ -26743,30 +26743,30 @@ const Dn = {
       return this.$$.ctx[2]
     }
   },
-  ActionsMenu: class extends ne {
+  ActionsMenu: class extends SvelteComponent {
     constructor(s) {
-      super(), oe(this, s, Gv, qv, te, { onCloseDropdown: 8 })
+      super(), initComponent(this, s, Gv, qv, notEqual, { onCloseDropdown: 8 })
     }
   },
-  AddFileButton: class extends ne {
+  AddFileButton: class extends SvelteComponent {
     constructor(s) {
       super(),
-        oe(this, s, e3, Jv, te, { accept: 0, disabled: 1, onAddFiles: 2 })
+        initComponent(this, s, e3, Jv, notEqual, { accept: 0, disabled: 1, onAddFiles: 2 })
     }
   },
-  ResendButton: class extends ne {
+  ResendButton: class extends SvelteComponent {
     constructor(s) {
-      super(), oe(this, s, l3, c3, te, { resendAction: 0 })
+      super(), initComponent(this, s, l3, c3, notEqual, { resendAction: 0 })
     }
   },
-  CancelButton: class extends ne {
+  CancelButton: class extends SvelteComponent {
     constructor(s) {
-      super(), oe(this, s, s3, r3, te, { cancelAction: 0 })
+      super(), initComponent(this, s, s3, r3, notEqual, { cancelAction: 0 })
     }
   },
-  RewritePromptButton: class extends ne {
+  RewritePromptButton: class extends SvelteComponent {
     constructor(s) {
-      super(), oe(this, s, v3, g3, te, { onRewrite: 6, isDisabled: 0 })
+      super(), initComponent(this, s, v3, g3, notEqual, { onRewrite: 6, isDisabled: 0 })
     }
   },
   NotifyButton: zu,
@@ -26892,9 +26892,9 @@ function x3(s, e, n) {
     [i, c, r, a, o, t]
   )
 }
-class _3 extends ne {
+class _3 extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, x3, b3, te, { fileSelection: 3 })
+    super(), initComponent(this, e, x3, b3, notEqual, { fileSelection: 3 })
   }
 }
 function yc(s, e, n) {
@@ -27267,9 +27267,9 @@ function S3(s, e, n) {
     ]
   )
 }
-class T3 extends ne {
+class T3 extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, S3, E3, te, {})
+    super(), initComponent(this, e, S3, E3, notEqual, {})
   }
 }
 function xc(s, e, n) {
@@ -27528,10 +27528,10 @@ function F3(s, e, n) {
     ]
   )
 }
-class D3 extends ne {
+class D3 extends SvelteComponent {
   constructor(e) {
     super(),
-      oe(this, e, F3, N3, te, {
+      initComponent(this, e, F3, N3, notEqual, {
         requestEditorFocus: 6,
         onMentionItemsUpdated: 0,
         insertMentionNode: 7,
@@ -27806,9 +27806,9 @@ function W3(s, e, n) {
     ]
   )
 }
-class q3 extends ne {
+class q3 extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, W3, H3, te, {})
+    super(), initComponent(this, e, W3, H3, notEqual, {})
   }
 }
 const G3 =
@@ -28133,9 +28133,9 @@ function t4(s, e, n) {
     [i, c, r, t, o]
   )
 }
-class nd extends ne {
+class nd extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, t4, e4, te, { title: 0, subtitle: 1 })
+    super(), initComponent(this, e, t4, e4, notEqual, { title: 0, subtitle: 1 })
   }
 }
 const n4 = (s) => ({}),
@@ -28783,10 +28783,10 @@ function b4(s, e, n) {
     ]
   )
 }
-class od extends ne {
+class od extends SvelteComponent {
   constructor(e) {
     super(),
-      oe(this, e, b4, y4, te, {
+      initComponent(this, e, b4, y4, notEqual, {
         type: 2,
         title: 3,
         subtitle: 4,
@@ -29300,9 +29300,9 @@ function F4(s, e, n) {
     ]
   )
 }
-class D4 extends ne {
+class D4 extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, F4, N4, te, {})
+    super(), initComponent(this, e, F4, N4, notEqual, {})
   }
 }
 const { window: bs } = Q1,
@@ -30177,7 +30177,7 @@ function K4(s) {
     },
     p(c, a) {
       ;(s = c),
-        8192 & a[0] && te(r, (r = s[13]))
+        8192 & a[0] && notEqual(r, (r = s[13]))
           ? (Y(), m(i, 1, 1, N), X(), (i = Kc(s)), i.c(), d(i, 1), i.m(e, null))
           : i.p(s, a)
     },
@@ -30649,10 +30649,10 @@ ${At}`,
     ]
   )
 }
-class J4 extends ne {
+class J4 extends SvelteComponent {
   constructor(e) {
     super(),
-      oe(this, e, Z4, K4, te, { editable: 0, placeholder: 37 }, null, [-1, -1])
+      initComponent(this, e, Z4, K4, notEqual, { editable: 0, placeholder: 37 }, null, [-1, -1])
   }
 }
 const Q4 = (s) => ({}),
@@ -30755,9 +30755,9 @@ function rw(s, e, n) {
     [o, t]
   )
 }
-class sw extends ne {
+class sw extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, rw, ow, te, {})
+    super(), initComponent(this, e, rw, ow, notEqual, {})
   }
 }
 class iw {
@@ -31090,9 +31090,9 @@ function lw(s, e, n) {
     ]
   )
 }
-class uw extends ne {
+class uw extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, lw, cw, te, {})
+    super(), initComponent(this, e, lw, cw, notEqual, {})
   }
 }
 function dw(s) {
@@ -31308,9 +31308,9 @@ function gw(s) {
     }
   )
 }
-class vw extends ne {
+class vw extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, null, gw, te, {})
+    super(), initComponent(this, e, null, gw, notEqual, {})
   }
 }
 function ww(s) {
@@ -31404,9 +31404,9 @@ function xw(s, e, n) {
     [t]
   )
 }
-class rd extends ne {
+class rd extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, xw, bw, te, { errorMessage: 0 })
+    super(), initComponent(this, e, xw, bw, notEqual, { errorMessage: 0 })
   }
 }
 function _w(s) {
@@ -31567,7 +31567,7 @@ function Aw(s) {
       o.m(r, i), M(r, e, i), (n = !0)
     },
     p(r, i) {
-      16 & i && te(t, (t = r[4]))
+      16 & i && notEqual(t, (t = r[4]))
         ? (Y(),
           m(o, 1, 1, N),
           X(),
@@ -31733,7 +31733,7 @@ function Iw(s) {
       t.m(o, r), M(o, e, r)
     },
     p(o, r) {
-      16 & r && te(n, (n = o[4]))
+      16 & r && notEqual(n, (n = o[4]))
         ? (t.d(1), (t = nl(o)), t.c(), t.m(e.parentNode, e))
         : t.p(o, r)
     },
@@ -31837,7 +31837,7 @@ function Rw(s) {
       o.m(r, i), M(r, e, i), (n = !0)
     },
     p(r, i) {
-      16 & i && te(t, (t = r[4]))
+      16 & i && notEqual(t, (t = r[4]))
         ? (Y(),
           m(o, 1, 1, N),
           X(),
@@ -32003,7 +32003,7 @@ function Fw(s) {
       t.m(o, r), M(o, e, r)
     },
     p(o, r) {
-      16 & r && te(n, (n = o[4]))
+      16 & r && notEqual(n, (n = o[4]))
         ? (t.d(1), (t = rl(o)), t.c(), t.m(e.parentNode, e))
         : t.p(o, r)
     },
@@ -32158,10 +32158,10 @@ function Bw(s, e, n) {
     [z, $e, pe, u, c, i, o, t, h, r, l, p, g]
   )
 }
-class jw extends ne {
+class jw extends SvelteComponent {
   constructor(e) {
     super(),
-      oe(this, e, Bw, zw, te, {
+      initComponent(this, e, Bw, zw, notEqual, {
         chatModel: 0,
         onboardingWorkspaceModel: 1,
         remoteAgentsModel: 2,
@@ -32301,10 +32301,10 @@ function qw(s, e, n) {
     [a, l, u, t, o, r]
   )
 }
-class Gw extends ne {
+class Gw extends SvelteComponent {
   constructor(e) {
     super(),
-      oe(this, e, qw, Ww, te, {
+      initComponent(this, e, qw, Ww, notEqual, {
         chatModel: 0,
         onboardingWorkspaceModel: 1,
         remoteAgentsModel: 2,
@@ -32365,9 +32365,9 @@ function Yw(s, e, n) {
     ]
   )
 }
-class Xw extends ne {
+class Xw extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, Yw, Vw, te, { inputArea: 3 })
+    super(), initComponent(this, e, Yw, Vw, notEqual, { inputArea: 3 })
   }
 }
 const Kw = (s) => ({}),
@@ -32601,10 +32601,10 @@ function ty(s, e, n) {
     ]
   )
 }
-class ny extends ne {
+class ny extends SvelteComponent {
   constructor(e) {
     super(),
-      oe(this, e, ty, ey, te, { active: 1, element: 0, title: 2, class: 3 })
+      initComponent(this, e, ty, ey, notEqual, { active: 1, element: 0, title: 2, class: 3 })
   }
 }
 const oy = (s) => ({}),
@@ -32732,9 +32732,9 @@ function ay(s, e, n) {
     ]
   )
 }
-class sd extends ne {
+class sd extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, ay, iy, te, { selected: 0, isSelectable: 1 })
+    super(), initComponent(this, e, ay, iy, notEqual, { selected: 0, isSelectable: 1 })
   }
 }
 function cy(s) {
@@ -32921,10 +32921,10 @@ function fy(s, e, n) {
     ]
   )
 }
-class my extends ne {
+class my extends SvelteComponent {
   constructor(e) {
     super(),
-      oe(this, e, fy, uy, te, {
+      initComponent(this, e, fy, uy, notEqual, {
         isEditing: 0,
         value: 1,
         cancelOnClickOutside: 9,
@@ -32979,9 +32979,9 @@ function py(s) {
     },
   }
 }
-class $y extends ne {
+class $y extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, null, py, te, {})
+    super(), initComponent(this, e, null, py, notEqual, {})
   }
 }
 function hy(s) {
@@ -33015,9 +33015,9 @@ function hy(s) {
     },
   }
 }
-class gy extends ne {
+class gy extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, null, hy, te, {})
+    super(), initComponent(this, e, null, hy, notEqual, {})
   }
 }
 const vy = (s) => ({}),
@@ -34219,10 +34219,10 @@ function r6(s, e, n) {
     ]
   )
 }
-class s6 extends ne {
+class s6 extends SvelteComponent {
   constructor(e) {
     super(),
-      oe(this, e, r6, Jy, te, {
+      initComponent(this, e, r6, Jy, notEqual, {
         conversation: 2,
         chatModel: 3,
         onConversationClicked: 4,
@@ -34647,10 +34647,10 @@ function h6(s, e, n) {
     ]
   )
 }
-class g6 extends ne {
+class g6 extends SvelteComponent {
   constructor(e) {
     super(),
-      oe(this, e, h6, p6, te, {
+      initComponent(this, e, h6, p6, notEqual, {
         groupTitle: 0,
         conversations: 1,
         onConversationClicked: 2,
@@ -35719,15 +35719,15 @@ function H6(s, e, n) {
     ]
   )
 }
-class U6 extends ne {
+class U6 extends SvelteComponent {
   constructor(e) {
     super(),
-      oe(
+      initComponent(
         this,
         e,
         H6,
         B6,
-        te,
+        notEqual,
         { chatModel: 0, onActiveChanged: 21, active: 22 },
         null,
         [-1, -1],
@@ -36004,9 +36004,9 @@ function K6(s, e, n) {
     [p, t, o, l, u, r, i, c]
   )
 }
-class Z6 extends ne {
+class Z6 extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, K6, X6, te, {})
+    super(), initComponent(this, e, K6, X6, notEqual, {})
   }
 }
 function kl(s) {
@@ -36124,9 +36124,9 @@ function t5(s, e, n) {
     [i, t]
   )
 }
-class n5 extends ne {
+class n5 extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, t5, e5, te, { contextModel: 0 })
+    super(), initComponent(this, e, t5, e5, notEqual, { contextModel: 0 })
   }
 }
 function El(s) {
@@ -36373,9 +36373,9 @@ function c5(s, e, n) {
     [c, r, i, o, t]
   )
 }
-class l5 extends ne {
+class l5 extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, c5, a5, te, { progress: 0 })
+    super(), initComponent(this, e, c5, a5, notEqual, { progress: 0 })
   }
 }
 function u5(s) {
@@ -36431,9 +36431,9 @@ function d5(s, e, n) {
     [i, t]
   )
 }
-class f5 extends ne {
+class f5 extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, d5, u5, te, { contextModel: 0 })
+    super(), initComponent(this, e, d5, u5, notEqual, { contextModel: 0 })
   }
 }
 function m5(s) {
@@ -36551,9 +36551,9 @@ function $5(s, e, n) {
     ]
   )
 }
-class h5 extends ne {
+class h5 extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, $5, p5, te, {})
+    super(), initComponent(this, e, $5, p5, notEqual, {})
   }
 }
 function g5(s) {
@@ -36739,9 +36739,9 @@ function _5(s) {
   const e = Xe("agentConversationModel")
   return [e, () => e.acceptAutoMode(), () => e.rejectAutoMode()]
 }
-class C5 extends ne {
+class C5 extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, _5, x5, te, {})
+    super(), initComponent(this, e, _5, x5, notEqual, {})
   }
 }
 function M5(s) {
@@ -36800,9 +36800,9 @@ function A5(s, e, n) {
     [(e = it(e))]
   )
 }
-class k5 extends ne {
+class k5 extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, A5, M5, te, {})
+    super(), initComponent(this, e, A5, M5, notEqual, {})
   }
 }
 function E5(s) {
@@ -37024,9 +37024,9 @@ function P5(s, e, n) {
     [t, o]
   )
 }
-class N5 extends ne {
+class N5 extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, P5, R5, te, { onNewThreadClick: 0, onDismiss: 1 })
+    super(), initComponent(this, e, P5, R5, notEqual, { onNewThreadClick: 0, onDismiss: 1 })
   }
 }
 class F5 {
@@ -38008,9 +38008,9 @@ function X5(s, e, n) {
     ]
   )
 }
-class K5 extends ne {
+class K5 extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, X5, Y5, te, { isRemote: 0 })
+    super(), initComponent(this, e, X5, Y5, notEqual, { isRemote: 0 })
   }
 }
 function Z5(s) {
@@ -39056,15 +39056,15 @@ function fb(s, e, n) {
     ]
   )
 }
-class mb extends ne {
+class mb extends SvelteComponent {
   constructor(e) {
     super(),
-      oe(
+      initComponent(
         this,
         e,
         fb,
         db,
-        te,
+        notEqual,
         { initialConversation: 30, initialFlags: 31 },
         null,
         [-1, -1],
@@ -39315,9 +39315,9 @@ function wb(s, e, n) {
     [t]
   )
 }
-class cd extends ne {
+class cd extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, wb, vb, te, { client: 0 })
+    super(), initComponent(this, e, wb, vb, notEqual, { client: 0 })
   }
 }
 function yb(s) {
@@ -39348,9 +39348,9 @@ function yb(s) {
     },
   }
 }
-class bb extends ne {
+class bb extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, null, yb, te, {})
+    super(), initComponent(this, e, null, yb, notEqual, {})
   }
 }
 function jl(s) {
@@ -39491,10 +39491,10 @@ function _b(s, e, n) {
     [u, p, o, c, a, l, t, i, r]
   )
 }
-class ld extends ne {
+class ld extends SvelteComponent {
   constructor(e) {
     super(),
-      oe(this, e, _b, xb, te, {
+      initComponent(this, e, _b, xb, notEqual, {
         heightPx: 3,
         floatHeight: 4,
         animationDuration: 5,
@@ -39648,9 +39648,9 @@ function kb(s, e, n) {
     [r, o, t]
   )
 }
-class Vs extends ne {
+class Vs extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, kb, Ab, te, {})
+    super(), initComponent(this, e, kb, Ab, notEqual, {})
   }
 }
 function Eb(s) {
@@ -39742,9 +39742,9 @@ function Tb(s, e, n) {
     [t, o]
   )
 }
-class ud extends ne {
+class ud extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, Tb, Sb, te, { title: 0, subtitle: 1 })
+    super(), initComponent(this, e, Tb, Sb, notEqual, { title: 0, subtitle: 1 })
   }
 }
 function Lb(s) {
@@ -39785,9 +39785,9 @@ function Lb(s) {
     },
   }
 }
-class Rb extends ne {
+class Rb extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, null, Lb, te, {})
+    super(), initComponent(this, e, null, Lb, notEqual, {})
   }
 }
 function Pb(s) {
@@ -39955,9 +39955,9 @@ function zb(s, e, n) {
     ]
   )
 }
-class Bb extends ne {
+class Bb extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, zb, Ob, te, {})
+    super(), initComponent(this, e, zb, Ob, notEqual, {})
   }
 }
 function jb(s) {
@@ -39989,9 +39989,9 @@ function jb(s) {
     },
   }
 }
-class Hb extends ne {
+class Hb extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, null, jb, te, {})
+    super(), initComponent(this, e, null, jb, notEqual, {})
   }
 }
 const Ub = (s) => ({}),
@@ -40361,10 +40361,10 @@ function e8(s, e, n) {
     [r, i, c, a, t, () => a(), o]
   )
 }
-class Ys extends ne {
+class Ys extends SvelteComponent {
   constructor(e) {
     super(),
-      oe(this, e, e8, Qb, te, {
+      initComponent(this, e, e8, Qb, notEqual, {
         color: 0,
         description: 1,
         callout: 2,
@@ -40619,10 +40619,10 @@ function i8(s, e, n) {
     [r, i, c, a, l, u, t, (p) => u(p), o]
   )
 }
-class nr extends ne {
+class nr extends SvelteComponent {
   constructor(e) {
     super(),
-      oe(this, e, i8, s8, te, {
+      initComponent(this, e, i8, s8, notEqual, {
         description: 0,
         color: 1,
         buttons: 2,
@@ -41146,9 +41146,9 @@ function _8(s, e, n) {
     [i, c, t]
   )
 }
-class C8 extends ne {
+class C8 extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, _8, x8, te, { card: 0, flagsModel: 1 })
+    super(), initComponent(this, e, _8, x8, notEqual, { card: 0, flagsModel: 1 })
   }
 }
 class M8 {
@@ -41197,367 +41197,367 @@ class M8 {
     return e === Tt.allActionsComplete
   }
 }
-function A8(s) {
-  let e, n, t
+function BackButton(props) {
+  let backIcon, backText, isVisible
   return (
-    (e = new bu({})),
+    (backIcon = new bu({})),
     {
       c() {
-        w(e.$$.fragment),
-          (n = K(`
+        w(backIcon.$$.fragment),
+          (backText = K(`
         Back`))
       },
       m(o, r) {
-        y(e, o, r), M(o, n, r), (t = !0)
+        y(backIcon, o, r), M(o, backText, r), (isVisible = !0)
       },
       i(o) {
-        t || (d(e.$$.fragment, o), (t = !0))
+        isVisible || (d(backIcon.$$.fragment, o), (isVisible = !0))
       },
       o(o) {
-        m(e.$$.fragment, o), (t = !1)
+        m(backIcon.$$.fragment, o), (isVisible = !1)
       },
       d(o) {
-        o && x(n), b(e, o)
+        o && x(backText), b(backIcon, o)
       },
     }
   )
 }
-function k8(s) {
-  let e
+function IndexCodebaseTitle(s) {
+  let titleText
   return {
     c() {
-      e = K("Index Codebase")
+      titleText = K("Index Codebase")
     },
-    m(n, t) {
-      M(n, e, t)
+    m(target, detachingaanchor) {
+      M(target, titleText, detachingaanchor)
     },
-    d(n) {
-      n && x(e)
+    d(detaching) {
+      detaching && x(titleText)
     },
   }
 }
-function E8(s) {
-  let e
+function IndexingDescription(props) {
+  let descriptionText
   return {
     c() {
-      e =
+      descriptionText =
         K(`Indexing allows Augment to make tailored code suggestions and explain common practices or
         patterns.`)
     },
-    m(n, t) {
-      M(n, e, t)
+    m(target, anchor) {
+      M(target, descriptionText, anchor)
     },
-    d(n) {
-      n && x(e)
+    d(detaching) {
+      detaching && x(descriptionText)
     },
   }
 }
-function I8(s) {
-  let e
+function LearnMoreLink(props) {
+  let linkElement
   return {
     c() {
-      ;(e = F("a")),
-        (e.textContent = "Learn More"),
+      ;(linkElement = F("a")),
+        (linkElement.textContent = "Learn More"),
         A(
-          e,
+          linkElement,
           "href",
           "https://docs.augmentcode.com/setup-augment/workspace-indexing",
         ),
-        A(e, "class", "svelte-f8zg6u")
+        A(linkElement, "class", "svelte-f8zg6u")
     },
-    m(n, t) {
-      M(n, e, t)
+    m(target, anchor) {
+      M(target, linkElement, anchor)
     },
     p: N,
-    d(n) {
-      n && x(e)
+    d(detaching) {
+      detaching && x(linkElement)
     },
   }
 }
-function S8(s) {
-  let e, n, t
+function PrivacyText(props) {
+  let privacyText, learnMoreComponent, isVisible
   return (
-    (n = new Ve({
-      props: { size: 1, $$slots: { default: [I8] }, $$scope: { ctx: s } },
+    (learnMoreComponent = new Ve({
+      props: { size: 1, $$slots: { default: [LearnMoreLink] }, $$scope: { ctx: props } },
     })),
     {
       c() {
-        ;(e = K(`Your data always stays secure, private and anonymized.
+        ;(privacyText = K(`Your data always stays secure, private and anonymized.
         `)),
-          w(n.$$.fragment)
+          w(learnMoreComponent.$$.fragment)
       },
-      m(o, r) {
-        M(o, e, r), y(n, o, r), (t = !0)
+      m(target, anchor) {
+        M(target, privacyText, anchor), y(learnMoreComponent, target, anchor), (isVisible = !0)
       },
-      p(o, r) {
+      p(context, dirty) {
         const i = {}
-        4096 & r && (i.$$scope = { dirty: r, ctx: o }), n.$set(i)
+        4096 & dirty && (i.$$scope = { dirty: dirty, ctx: context }), learnMoreComponent.$set(i)
       },
-      i(o) {
-        t || (d(n.$$.fragment, o), (t = !0))
+      i(intro) {
+        isVisible || (d(learnMoreComponent.$$.fragment, intro), (isVisible = !0))
       },
-      o(o) {
-        m(n.$$.fragment, o), (t = !1)
+      o(outro) {
+        m(learnMoreComponent.$$.fragment, outro), (isVisible = !1)
       },
-      d(o) {
-        o && x(e), b(n, o)
+      d(detaching) {
+        detaching && x(privacyText), b(learnMoreComponent, detaching)
       },
     }
   )
 }
-function T8(s) {
-  let e,
-    n = (s[2] ?? Ql) + ""
+function ButtonText(props) {
+  let textNode,
+    text = (props[2] ?? Ql) + ""
   return {
     c() {
-      e = K(n)
+      textNode = K(text)
     },
-    m(t, o) {
-      M(t, e, o)
+    m(target, anchor) {
+      M(target, textNode, anchor)
     },
-    p(t, o) {
-      4 & o && n !== (n = (t[2] ?? Ql) + "") && ze(e, n)
+    p(context, dirty) {
+      4 & dirty && text !== (text = (context[2] ?? Ql) + "") && ze(textNode, text)
     },
-    d(t) {
-      t && x(e)
+    d(detaching) {
+      detaching && x(textNode)
     },
   }
 }
-function L8(s) {
-  let e, n
+function ButtonLeftIcon(props) {
+  let iconComponent, isVisible
   return (
-    (e = new Hb({ props: { slot: "iconLeft" } })),
+    (iconComponent = new Hb({ props: { slot: "iconLeft" } })),
     {
       c() {
-        w(e.$$.fragment)
+        w(iconComponent.$$.fragment)
       },
-      m(t, o) {
-        y(e, t, o), (n = !0)
+      m(target, anchor) {
+        y(iconComponent, target, anchor), (isVisible = !0)
       },
       p: N,
-      i(t) {
-        n || (d(e.$$.fragment, t), (n = !0))
+      i(intro) {
+        isVisible || (d(iconComponent.$$.fragment, intro), (isVisible = !0))
       },
-      o(t) {
-        m(e.$$.fragment, t), (n = !1)
+      o(outro) {
+        m(iconComponent.$$.fragment, outro), (isVisible = !1)
       },
-      d(t) {
-        b(e, t)
+      d(detaching) {
+        b(iconComponent, detaching)
       },
     }
   )
 }
-function R8(s) {
-  let e, n
+function OpenProjectButton(props) {
+  let buttonComponent, isVisible
   return (
-    (e = new _t({
+    (buttonComponent = new _t({
       props: {
         variant: "outline",
         color: "neutral",
         size: 2,
-        $$slots: { iconLeft: [L8], default: [T8] },
-        $$scope: { ctx: s },
+        $$slots: { iconLeft: [ButtonLeftIcon], default: [ButtonText] },
+        $$scope: { ctx: props },
       },
     })),
-    e.$on("click", s[7]),
+    buttonComponent.$on("click", props[7]),
     {
       c() {
-        w(e.$$.fragment)
+        w(buttonComponent.$$.fragment)
       },
-      m(t, o) {
-        y(e, t, o), (n = !0)
+      m(target, anchor) {
+        y(buttonComponent, target, anchor), (isVisible = !0)
       },
-      p(t, o) {
+      p(context, dirty) {
         const r = {}
-        4100 & o && (r.$$scope = { dirty: o, ctx: t }), e.$set(r)
+        4100 & dirty && (r.$$scope = { dirty: dirty, ctx: context }), buttonComponent.$set(r)
       },
-      i(t) {
-        n || (d(e.$$.fragment, t), (n = !0))
+      i(intro) {
+        isVisible || (d(buttonComponent.$$.fragment, intro), (isVisible = !0))
       },
-      o(t) {
-        m(e.$$.fragment, t), (n = !1)
+      o(outro) {
+        m(buttonComponent.$$.fragment, outro), (isVisible = !1)
       },
-      d(t) {
-        b(e, t)
+      d(detaching) {
+        b(buttonComponent, detaching)
       },
     }
   )
 }
-function P8(s) {
-  let e
+function IndexCodebaseButtonText(s) {
+  let buttonText
   return {
     c() {
-      e = K("Index Codebase")
+      buttonText = K("Index Codebase")
     },
-    m(n, t) {
-      M(n, e, t)
+    m(target, anchor) {
+      M(target, buttonText, anchor)
     },
-    d(n) {
-      n && x(e)
+    d(detaching) {
+      detaching && x(buttonText)
     },
   }
 }
-function N8(s) {
-  let e,
-    n,
-    t,
-    o,
-    r,
-    i,
-    c,
-    a,
-    l,
-    u,
-    p,
-    g,
-    h,
-    k = su(),
-    I =
-      k &&
-      (function (C) {
-        let S, H, O
+function IndexCodebaseView(props) {
+  let spacer,
+    container,
+    titleComponent,
+    spacer1,
+    textContainer,
+    descriptionComponent,
+    spacer2,
+    privacyComponent,
+    spacer3,
+    openProjectTooltip,
+    spacer4,
+    indexButton,
+    isVisible,
+    hasBackButton = su(),
+    backButtonComponent =
+      hasBackButton &&
+      (function (context) {
+        let buttonContainer, buttonComponent, isButtonVisible
         return (
-          (H = new _t({
+          (buttonComponent = new _t({
             props: {
               variant: "ghost",
               color: "neutral",
               size: 1,
-              $$slots: { default: [A8] },
-              $$scope: { ctx: C },
+              $$slots: { default: [BackButton] },
+              $$scope: { ctx: context },
             },
           })),
-          H.$on("click", C[8]),
+          buttonComponent.$on("click", context[8]),
           {
             c() {
-              ;(S = F("div")),
-                w(H.$$.fragment),
-                A(S, "class", "c-back-button-container svelte-f8zg6u")
+              ;(buttonContainer = F("div")),
+                w(buttonComponent.$$.fragment),
+                A(buttonContainer, "class", "c-back-button-container svelte-f8zg6u")
             },
-            m(z, $e) {
-              M(z, S, $e), y(H, S, null), (O = !0)
+            m(target, anchor) {
+              M(target, buttonContainer, anchor), y(buttonComponent, buttonContainer, null), (isButtonVisible = !0)
             },
-            p(z, $e) {
+            p(newContext, dirtyBits) {
               const pe = {}
-              4096 & $e && (pe.$$scope = { dirty: $e, ctx: z }), H.$set(pe)
+              4096 & dirtyBits && (pe.$$scope = { dirty: dirtyBits, ctx: newContext }), buttonComponent.$set(pe)
             },
-            i(z) {
-              O || (d(H.$$.fragment, z), (O = !0))
+            i(intro) {
+              isButtonVisible || (d(buttonComponent.$$.fragment, intro), (isButtonVisible = !0))
             },
-            o(z) {
-              m(H.$$.fragment, z), (O = !1)
+            o(outro) {
+              m(buttonComponent.$$.fragment, outro), (isButtonVisible = !1)
             },
-            d(z) {
-              z && x(S), b(H)
+            d(detaching) {
+              detaching && x(buttonContainer), b(buttonComponent)
             },
           }
         )
-      })(s)
+      })(props)
   return (
-    (t = new Ve({
+    (titleComponent = new Ve({
       props: {
         size: 2,
         weight: "bold",
         class: "c-awaiting-syncing-permission__title",
-        $$slots: { default: [k8] },
-        $$scope: { ctx: s },
+        $$slots: { default: [IndexCodebaseTitle] },
+        $$scope: { ctx: props },
       },
     })),
-    (i = new Ve({
-      props: { size: 1, $$slots: { default: [E8] }, $$scope: { ctx: s } },
+    (descriptionComponent = new Ve({
+      props: { size: 1, $$slots: { default: [IndexingDescription] }, $$scope: { ctx: props } },
     })),
-    (a = new Ve({
-      props: { size: 1, $$slots: { default: [S8] }, $$scope: { ctx: s } },
+    (privacyComponent = new Ve({
+      props: { size: 1, $$slots: { default: [PrivacyText] }, $$scope: { ctx: props } },
     })),
-    (u = new wt({
+    (openProjectTooltip = new wt({
       props: {
         content: "Open a new project",
-        $$slots: { default: [R8] },
-        $$scope: { ctx: s },
+        $$slots: { default: [OpenProjectButton] },
+        $$scope: { ctx: props },
       },
     })),
-    (g = new _t({
+    (indexButton = new _t({
       props: {
         variant: "solid",
         color: "accent",
         size: 2,
-        disabled: !s[2] || s[3],
-        loading: s[1],
-        $$slots: { default: [P8] },
-        $$scope: { ctx: s },
+        disabled: !props[2] || props[3],
+        loading: props[1],
+        $$slots: { default: [IndexCodebaseButtonText] },
+        $$scope: { ctx: props },
       },
     })),
-    g.$on("click", s[6]),
+    indexButton.$on("click", props[6]),
     {
       c() {
-        I && I.c(),
-          (e = j()),
-          (n = F("div")),
-          w(t.$$.fragment),
-          (o = j()),
-          (r = F("div")),
-          w(i.$$.fragment),
-          (c = j()),
-          w(a.$$.fragment),
-          (l = j()),
-          w(u.$$.fragment),
-          (p = j()),
-          w(g.$$.fragment),
-          A(r, "class", "c-awaiting-syncing-permission__text svelte-f8zg6u"),
-          A(n, "class", "c-awaiting-syncing-permission svelte-f8zg6u")
+        backButtonComponent && backButtonComponent.c(),
+          (spacer = j()),
+          (container = F("div")),
+          w(titleComponent.$$.fragment),
+          (spacer1 = j()),
+          (textContainer = F("div")),
+          w(descriptionComponent.$$.fragment),
+          (spacer2 = j()),
+          w(privacyComponent.$$.fragment),
+          (spacer3 = j()),
+          w(openProjectTooltip.$$.fragment),
+          (spacer4 = j()),
+          w(indexButton.$$.fragment), // w -> createFragment
+          A(textContainer, "class", "c-awaiting-syncing-permission__text svelte-f8zg6u"),
+          A(container, "class", "c-awaiting-syncing-permission svelte-f8zg6u")
       },
-      m(C, S) {
-        I && I.m(C, S),
-          M(C, e, S),
-          M(C, n, S),
-          y(t, n, null),
-          B(n, o),
-          B(n, r),
-          y(i, r, null),
-          B(r, c),
-          y(a, r, null),
-          B(n, l),
-          y(u, n, null),
-          B(n, p),
-          y(g, n, null),
-          (h = !0)
+      m(target, anchor) {
+        backButtonComponent && backButtonComponent.m(target, anchor),
+          M(target, spacer, anchor),
+          M(target, container, anchor),
+          y(titleComponent, container, null),
+          B(container, spacer1),
+          B(container, textContainer),
+          y(descriptionComponent, textContainer, null),
+          B(textContainer, spacer2),
+          y(privacyComponent, textContainer, null),
+          B(container, spacer3),
+          y(openProjectTooltip, container, null),
+          B(container, spacer4),
+          y(indexButton, container, null), // y -> mountComponent
+          (isVisible = !0)
       },
-      p(C, S) {
-        k && I.p(C, S)
-        const H = {}
-        4096 & S && (H.$$scope = { dirty: S, ctx: C }), t.$set(H)
-        const O = {}
-        4096 & S && (O.$$scope = { dirty: S, ctx: C }), i.$set(O)
-        const z = {}
-        4096 & S && (z.$$scope = { dirty: S, ctx: C }), a.$set(z)
-        const $e = {}
-        4100 & S && ($e.$$scope = { dirty: S, ctx: C }), u.$set($e)
-        const pe = {}
-        12 & S && (pe.disabled = !C[2] || C[3]),
-          2 & S && (pe.loading = C[1]),
-          4096 & S && (pe.$$scope = { dirty: S, ctx: C }),
-          g.$set(pe)
+      p(context, dirtyBits) {
+        hasBackButton && backButtonComponent.p(context, dirtyBits)
+        const titleProps = {}
+        4096 & dirtyBits && (titleProps.$$scope = { dirty: dirtyBits, ctx: context }), titleComponent.$set(titleProps)
+        const descriptionProps = {}
+        4096 & dirtyBits && (descriptionProps.$$scope = { dirty: dirtyBits, ctx: context }), descriptionComponent.$set(descriptionProps)
+        const privacyProps = {}
+        4096 & dirtyBits && (privacyProps.$$scope = { dirty: dirtyBits, ctx: context }), privacyComponent.$set(privacyProps)
+        const tooltipProps = {}
+        4100 & dirtyBits && (tooltipProps.$$scope = { dirty: dirtyBits, ctx: context }), openProjectTooltip.$set(tooltipProps)
+        const buttonProps = {}
+        12 & dirtyBits && (buttonProps.disabled = !context[2] || context[3]),
+          2 & dirtyBits && (buttonProps.loading = context[1]),
+          4096 & dirtyBits && (buttonProps.$$scope = { dirty: dirtyBits, ctx: context }),
+          indexButton.$set(buttonProps)
       },
-      i(C) {
-        h ||
-          (d(I),
-          d(t.$$.fragment, C),
-          d(i.$$.fragment, C),
-          d(a.$$.fragment, C),
-          d(u.$$.fragment, C),
-          d(g.$$.fragment, C),
-          (h = !0))
+      i(intro) {
+        isVisible ||
+          (d(backButtonComponent),
+          d(titleComponent.$$.fragment, intro),
+          d(descriptionComponent.$$.fragment, intro),
+          d(privacyComponent.$$.fragment, intro),
+          d(openProjectTooltip.$$.fragment, intro),
+          d(indexButton.$$.fragment, intro), // d -> introduceComponent
+          (isVisible = !0))
       },
-      o(C) {
-        m(I),
-          m(t.$$.fragment, C),
-          m(i.$$.fragment, C),
-          m(a.$$.fragment, C),
-          m(u.$$.fragment, C),
-          m(g.$$.fragment, C),
-          (h = !1)
+      o(outro) {
+        m(backButtonComponent),
+          m(titleComponent.$$.fragment, outro),
+          m(descriptionComponent.$$.fragment, outro),
+          m(privacyComponent.$$.fragment, outro),
+          m(openProjectTooltip.$$.fragment, outro),
+          m(indexButton.$$.fragment, outro), // m -> outroComponent
+          (isVisible = !1)
       },
-      d(C) {
-        C && (x(e), x(n)), I && I.d(C), b(t), b(i), b(a), b(u), b(g)
+      d(detaching) {
+        detaching && (x(spacer), x(container)), backButtonComponent && backButtonComponent.d(detaching), b(titleComponent), b(descriptionComponent), b(privacyComponent), b(openProjectTooltip), b(indexButton) // b -> destroyComponent
       },
     }
   )
@@ -41589,109 +41589,109 @@ function F8(s) {
     }
   )
 }
-function D8(s) {
-  let e, n, t, o
+function IndexCodebaseComponent(props) {
+  let errorBoundaryComponent, isComponentVisible, hasEventListener, messageEventListener
   return (
-    (e = new Vs({
-      props: { $$slots: { error: [F8], default: [N8] }, $$scope: { ctx: s } },
+    (errorBoundaryComponent = new Vs({
+      props: { $$slots: { error: [F8], default: [IndexCodebaseView] }, $$scope: { ctx: props } },
     })),
     {
       c() {
-        w(e.$$.fragment)
+        w(errorBoundaryComponent.$$.fragment)
       },
-      m(r, i) {
-        y(e, r, i), (n = !0), t || ((o = Oe(window, "message", s[9])), (t = !0))
+      m(target, anchor) {
+        y(errorBoundaryComponent, target, anchor), (isComponentVisible = !0), hasEventListener || ((messageEventListener = Oe(window, "message", props[9])), (hasEventListener = !0))
       },
-      p(r, [i]) {
+      p(newProps, [dirtyBits]) {
         const c = {}
-        4111 & i && (c.$$scope = { dirty: i, ctx: r }), e.$set(c)
+        4111 & dirtyBits && (c.$$scope = { dirty: dirtyBits, ctx: newProps }), errorBoundaryComponent.$set(c)
       },
-      i(r) {
-        n || (d(e.$$.fragment, r), (n = !0))
+      i(intro) {
+        isComponentVisible || (d(errorBoundaryComponent.$$.fragment, intro), (isComponentVisible = !0))
       },
-      o(r) {
-        m(e.$$.fragment, r), (n = !1)
+      o(outro) {
+        m(errorBoundaryComponent.$$.fragment, outro), (isComponentVisible = !1)
       },
-      d(r) {
-        b(e, r), (t = !1), o()
+      d(detaching) {
+        b(errorBoundaryComponent, detaching), (hasEventListener = !1), messageEventListener()
       },
     }
   )
 }
 const Ql = "Open a folder"
-function O8(s, e, n) {
-  let t
-  const o = new qr(dn)
-  let r = new M8()
-  Ge(s, r, (p) => n(0, (t = p))), o.registerConsumer(r)
-  const i = new Mu(),
-    c = new Au(dn, o, i)
-  let a,
-    l = !1,
-    u = !1
+function initIndexCodebase(component, props, setState) {
+  let state
+  const messageService = new qr(dn)
+  let stateStore = new M8()
+  Ge(component, stateStore, (newState) => setState(0, (state = newState))), messageService.registerConsumer(stateStore)
+  const flagsModel = new Mu(),
+    indexingService = new Au(dn, messageService, flagsModel)
+  let workspaceName,
+    isLoading = !1,
+    isDisabled = !1
   return (
     dn.postMessage({ type: st.awaitingSyncingPermissionLoaded }),
-    (s.$$.update = () => {
-      1 & s.$$.dirty &&
-        n(
+    (component.$$.update = () => {
+      1 & component.$$.dirty &&
+        setState(
           3,
-          (u =
-            t.currentCard === Tt.workspaceTooLarge ||
-            t.currentCard === Tt.uploadingHomeDir),
+          (isDisabled =
+            state.currentCard === Tt.workspaceTooLarge ||
+            state.currentCard === Tt.uploadingHomeDir),
         )
     }),
     [
-      t,
-      l,
-      a,
-      u,
-      r,
-      i,
+      state,
+      isLoading,
+      workspaceName,
+      isDisabled,
+      stateStore,
+      flagsModel,
       function () {
-        n(1, (l = !0)), c.grantSyncPermission()
+        setState(1, (isLoading = !0)), indexingService.grantSyncPermission()
       },
       function () {
-        c.openProjectFolder()
+        indexingService.openProjectFolder()
       },
       function () {
-        c.closeProjectFolder()
+        indexingService.closeProjectFolder()
       },
-      function (p) {
-        const g = p.data
-        switch (g.type) {
+      function (event) {
+        const message = event.data
+        switch (message.type) {
           case st.awaitingSyncingPermissionInitialize: {
             const {
-              enableDebugFeatures: h,
-              maxTrackableFileCount: k,
-              userTier: I,
-            } = g.data
-            n(2, (a = g.data.workspaceName)),
-              i.update({
-                enableDebugFeatures: h,
-                maxTrackableFileCount: k,
-                userTier: I,
+              enableDebugFeatures,
+              maxTrackableFileCount,
+              userTier,
+            } = message.data
+            setState(2, (workspaceName = message.data.workspaceName)),
+              flagsModel.update({
+                enableDebugFeatures,
+                maxTrackableFileCount,
+                userTier,
               })
             break
           }
           case st.mainPanelActions:
-            r.onActionsUpdates(
-              (function (h) {
-                const k = new Set([
+            stateStore.onActionsUpdates(
+              (function (actions) {
+                const relevantCardTypes = new Set([
                   Tt.workspaceNotSelected,
                   Tt.workspaceTooLarge,
                   Tt.uploadingHomeDir,
                 ])
-                return h.filter((I) => k.has(I))
-              })(g.data),
+                return actions.filter((action) => relevantCardTypes.has(action))
+              })(message.data),
             )
         }
       },
     ]
   )
 }
-class z8 extends ne {
-  constructor(e) {
-    super(), oe(this, e, O8, D8, te, {})
+class IndexCodebaseComponentWrapper extends SvelteComponent {
+  constructor(props) {
+    super(), initComponent(this, props, initIndexCodebase, IndexCodebaseComponent, notEqual, {})
   }
 }
 function B8(s) {
@@ -41725,9 +41725,9 @@ function B8(s) {
     },
   }
 }
-class j8 extends ne {
+class j8 extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, null, B8, te, {})
+    super(), initComponent(this, e, null, B8, notEqual, {})
   }
 }
 function H8(s) {
@@ -41761,9 +41761,9 @@ function H8(s) {
     },
   }
 }
-class U8 extends ne {
+class U8 extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, null, H8, te, {})
+    super(), initComponent(this, e, null, H8, notEqual, {})
   }
 }
 function W8(s) {
@@ -42294,9 +42294,9 @@ function ox(s, e, n) {
     ]
   )
 }
-class rx extends ne {
+class rx extends SvelteComponent {
   constructor(e) {
-    super(), oe(this, e, ox, nx, te, {})
+    super(), initComponent(this, e, ox, nx, notEqual, {})
   }
 }
 function sx(s) {
@@ -42322,25 +42322,25 @@ function sx(s) {
     }
   )
 }
-function ix(s) {
-  let e, n
+function createIndexCodebaseComponent(props) {
+  let component, isVisible
   return (
-    (e = new z8({})),
+    (component = new IndexCodebaseComponentWrapper({})),
     {
       c() {
-        w(e.$$.fragment)
+        w(component.$$.fragment)
       },
-      m(t, o) {
-        y(e, t, o), (n = !0)
+      m(target, anchor) {
+        y(component, target, anchor), (isVisible = !0)
       },
-      i(t) {
-        n || (d(e.$$.fragment, t), (n = !0))
+      i(intro) {
+        isVisible || (d(component.$$.fragment, intro), (isVisible = !0))
       },
-      o(t) {
-        m(e.$$.fragment, t), (n = !1)
+      o(outro) {
+        m(component.$$.fragment, outro), (isVisible = !1)
       },
-      d(t) {
-        b(e, t)
+      d(detaching) {
+        b(component, detaching)
       },
     }
   )
@@ -42391,104 +42391,104 @@ function cx(s) {
     }
   )
 }
-function lx(s) {
-  let e, n, t, o
-  const r = [cx, ax, ix, sx],
-    i = []
-  function c(a, l) {
-    return a[0] === kr.signIn
+function createMainContent(props) {
+  let mainElement, currentComponentIndex, currentComponent, isVisible
+  const componentCreators = [cx, ax, createIndexCodebaseComponent, sx],
+    componentInstances = []
+  function getComponentIndex(state, dirtyBits) {
+    return state[0] === kr.signIn
       ? 0
-      : a[0] === kr.chat
+      : state[0] === kr.chat
         ? 1
-        : a[0] === kr.awaitingSyncingPermission
+        : state[0] === kr.awaitingSyncingPermission
           ? 2
-          : a[0] === kr.folderSelection
+          : state[0] === kr.folderSelection
             ? 3
             : -1
   }
   return (
-    ~(n = c(s)) && (t = i[n] = r[n](s)),
+    ~(currentComponentIndex = getComponentIndex(props)) && (currentComponent = componentInstances[currentComponentIndex] = componentCreators[currentComponentIndex](props)),
     {
       c() {
-        ;(e = F("main")), t && t.c()
+        ;(mainElement = F("main")), currentComponent && currentComponent.c()
       },
-      m(a, l) {
-        M(a, e, l), ~n && i[n].m(e, null), (o = !0)
+      m(target, anchor) {
+        M(target, mainElement, anchor), ~currentComponentIndex && componentInstances[currentComponentIndex].m(mainElement, null), (isVisible = !0)
       },
-      p(a, l) {
-        let u = n
-        ;(n = c(a)),
-          n !== u &&
-            (t &&
+      p(newProps, dirtyBits) {
+        let previousIndex = currentComponentIndex
+        ;(currentComponentIndex = getComponentIndex(newProps)),
+          currentComponentIndex !== previousIndex &&
+            (currentComponent &&
               (Y(),
-              m(i[u], 1, 1, () => {
-                i[u] = null
+              m(componentInstances[previousIndex], 1, 1, () => {
+                componentInstances[previousIndex] = null
               }),
               X()),
-            ~n
-              ? ((t = i[n]),
-                t || ((t = i[n] = r[n](a)), t.c()),
-                d(t, 1),
-                t.m(e, null))
-              : (t = null))
+            ~currentComponentIndex
+              ? ((currentComponent = componentInstances[currentComponentIndex]),
+                currentComponent || ((currentComponent = componentInstances[currentComponentIndex] = componentCreators[currentComponentIndex](newProps)), currentComponent.c()),
+                d(currentComponent, 1),
+                currentComponent.m(mainElement, null))
+              : (currentComponent = null))
       },
-      i(a) {
-        o || (d(t), (o = !0))
+      i(intro) {
+        isVisible || (d(currentComponent), (isVisible = !0))
       },
-      o(a) {
-        m(t), (o = !1)
+      o(outro) {
+        m(currentComponent), (isVisible = !1)
       },
-      d(a) {
-        a && x(e), ~n && i[n].d()
+      d(detaching) {
+        detaching && x(mainElement), ~currentComponentIndex && componentInstances[currentComponentIndex].d()
       },
     }
   )
 }
-function ux(s) {
-  let e, n, t, o
+function createMainApp(props) {
+  let rootComponent, isVisible, hasEventListener, messageEventListener
   return (
-    (e = new nf.Root({
-      props: { $$slots: { default: [lx] }, $$scope: { ctx: s } },
+    (rootComponent = new nf.Root({
+      props: { $$slots: { default: [createMainContent] }, $$scope: { ctx: props } },
     })),
     {
       c() {
-        w(e.$$.fragment)
+        w(rootComponent.$$.fragment)
       },
-      m(r, i) {
-        y(e, r, i), (n = !0), t || ((o = Oe(window, "message", s[1])), (t = !0))
+      m(target, anchor) {
+        y(rootComponent, target, anchor), (isVisible = !0), hasEventListener || ((messageEventListener = Oe(window, "message", props[1])), (hasEventListener = !0))
       },
-      p(r, [i]) {
+      p(newProps, [dirtyBits]) {
         const c = {}
-        5 & i && (c.$$scope = { dirty: i, ctx: r }), e.$set(c)
+        5 & dirtyBits && (c.$$scope = { dirty: dirtyBits, ctx: newProps }), rootComponent.$set(c)
       },
-      i(r) {
-        n || (d(e.$$.fragment, r), (n = !0))
+      i(intro) {
+        isVisible || (d(rootComponent.$$.fragment, intro), (isVisible = !0))
       },
-      o(r) {
-        m(e.$$.fragment, r), (n = !1)
+      o(outro) {
+        m(rootComponent.$$.fragment, outro), (isVisible = !1)
       },
-      d(r) {
-        b(e, r), (t = !1), o()
+      d(detaching) {
+        b(rootComponent, detaching), (hasEventListener = !1), messageEventListener()
       },
     }
   )
 }
-function dx(s, e, n) {
-  let t
+function initMainApp(component, props, setState) {
+  let appState
   return (
     dn.postMessage({ type: st.mainPanelLoaded }),
     [
-      t,
-      (o) => {
-        const r = o.data
-        r.type === st.mainPanelDisplayApp && n(0, (t = r.data))
+      appState,
+      (event) => {
+        const r = event.data
+        r.type === st.mainPanelDisplayApp && setState(0, (appState = r.data))
       },
     ]
   )
 }
-new (class extends ne {
-  constructor(s) {
-    super(), oe(this, s, dx, ux, te, {})
+new (class extends SvelteComponent {
+  constructor(props) {
+    super(), initComponent(this, props, initMainApp, createMainApp, notEqual, {})
   }
 })({ target: document.getElementById("app") })
 export {

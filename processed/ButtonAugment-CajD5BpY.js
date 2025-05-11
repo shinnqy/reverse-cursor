@@ -30,280 +30,280 @@ import {
   a1 as P,
 } from "./SpinnerAugment-DI4IM-MA.js"
 import { B as Q } from "./BaseButton-C5Me6mfC.js"
-const T = (a) => ({}),
-  S = (a) => ({}),
-  U = (a) => ({}),
-  V = (a) => ({})
-function W(a) {
-  let t, l
-  const c = a[10].iconLeft,
-    o = x(c, a, a[20], V)
+const iconRightProps = (a) => ({}),
+  iconLeftProps = (a) => ({}),
+  iconLeftSlotProps = (a) => ({}),
+  iconRightSlotProps = (a) => ({})
+function IconLeftComponent(ctx) {
+  let container, isInitialized
+  const iconLeftSlot = ctx[10].iconLeft,
+    iconComponent = x(iconLeftSlot, ctx, ctx[20], iconRightSlotProps)
   return {
     c() {
-      ;(t = h("div")), o && o.c(), f(t, "class", "c-button--icon svelte-ddrvrw")
+      ;(container = h("div")), iconComponent && iconComponent.c(), f(container, "class", "c-button--icon svelte-ddrvrw")
     },
-    m(i, s) {
-      p(i, t, s), o && o.m(t, null), (l = !0)
+    m(target, anchor) {
+      p(target, container, anchor), iconComponent && iconComponent.m(container, null), (isInitialized = !0)
     },
-    p(i, s) {
-      o &&
-        o.p &&
-        (!l || 1048576 & s) &&
-        C(o, c, i, i[20], l ? k(c, i[20], s, U) : y(i[20]), V)
+    p(newCtx, dirty) {
+      iconComponent &&
+        iconComponent.p &&
+        (!isInitialized || 1048576 & dirty) &&
+        C(iconComponent, iconLeftSlot, newCtx, newCtx[20], isInitialized ? k(iconLeftSlot, newCtx[20], dirty, iconLeftSlotProps) : y(newCtx[20]), iconRightSlotProps)
     },
-    i(i) {
-      l || (d(o, i), (l = !0))
+    i(intro) {
+      isInitialized || (d(iconComponent, intro), (isInitialized = !0))
     },
-    o(i) {
-      m(o, i), (l = !1)
+    o(outro) {
+      m(iconComponent, outro), (isInitialized = !1)
     },
-    d(i) {
-      i && v(t), o && o.d(i)
+    d(detaching) {
+      detaching && v(container), iconComponent && iconComponent.d(detaching)
     },
   }
 }
-function X(a) {
-  let t, l, c
+function TextComponent(ctx) {
+  let container, textComponent, isInitialized
   return (
-    (l = new P({
+    (textComponent = new P({
       props: {
-        size: a[0],
-        weight: a[1] === "ghost" ? "regular" : "medium",
-        $$slots: { default: [tt] },
-        $$scope: { ctx: a },
+        size: ctx[0],
+        weight: ctx[1] === "ghost" ? "regular" : "medium",
+        $$slots: { default: [TextSlotComponent] },
+        $$scope: { ctx: ctx },
       },
     })),
     {
       c() {
-        ;(t = h("div")),
-          Z(l.$$.fragment),
-          f(t, "class", "c-button--text svelte-ddrvrw")
+        ;(container = h("div")),
+          Z(textComponent.$$.fragment),
+          f(container, "class", "c-button--text svelte-ddrvrw")
       },
-      m(o, i) {
-        p(o, t, i), _(l, t, null), (c = !0)
+      m(target, anchor) {
+        p(target, container, anchor), _(textComponent, container, null), (isInitialized = !0)
       },
-      p(o, i) {
-        const s = {}
-        1 & i && (s.size = o[0]),
-          2 & i && (s.weight = o[1] === "ghost" ? "regular" : "medium"),
-          1048576 & i && (s.$$scope = { dirty: i, ctx: o }),
-          l.$set(s)
+      p(newCtx, dirty) {
+        const props = {}
+        1 & dirty && (props.size = newCtx[0]),
+          2 & dirty && (props.weight = newCtx[1] === "ghost" ? "regular" : "medium"),
+          1048576 & dirty && (props.$$scope = { dirty: dirty, ctx: newCtx }),
+          textComponent.$set(props)
       },
-      i(o) {
-        c || (d(l.$$.fragment, o), (c = !0))
+      i(intro) {
+        isInitialized || (d(textComponent.$$.fragment, intro), (isInitialized = !0))
       },
-      o(o) {
-        m(l.$$.fragment, o), (c = !1)
+      o(outro) {
+        m(textComponent.$$.fragment, outro), (isInitialized = !1)
       },
-      d(o) {
-        o && v(t), F(l)
+      d(detaching) {
+        detaching && v(container), F(textComponent)
       },
     }
   )
 }
-function tt(a) {
-  let t
-  const l = a[10].default,
-    c = x(l, a, a[20], null)
+function TextSlotComponent(ctx) {
+  let isInitialized
+  const defaultSlot = ctx[10].default,
+    slotContent = x(defaultSlot, ctx, ctx[20], null)
   return {
     c() {
-      c && c.c()
+      slotContent && slotContent.c()
     },
-    m(o, i) {
-      c && c.m(o, i), (t = !0)
+    m(target, anchor) {
+      slotContent && slotContent.m(target, anchor), (isInitialized = !0)
     },
-    p(o, i) {
-      c &&
-        c.p &&
-        (!t || 1048576 & i) &&
-        C(c, l, o, o[20], t ? k(l, o[20], i, null) : y(o[20]), null)
+    p(newCtx, dirty) {
+      slotContent &&
+        slotContent.p &&
+        (!isInitialized || 1048576 & dirty) &&
+        C(slotContent, defaultSlot, newCtx, newCtx[20], isInitialized ? k(defaultSlot, newCtx[20], dirty, null) : y(newCtx[20]), null)
     },
-    i(o) {
-      t || (d(c, o), (t = !0))
+    i(intro) {
+      isInitialized || (d(slotContent, intro), (isInitialized = !0))
     },
-    o(o) {
-      m(c, o), (t = !1)
+    o(outro) {
+      m(slotContent, outro), (isInitialized = !1)
     },
-    d(o) {
-      c && c.d(o)
+    d(detaching) {
+      slotContent && slotContent.d(detaching)
     },
   }
 }
-function Y(a) {
-  let t, l
-  const c = a[10].iconRight,
-    o = x(c, a, a[20], S)
+function IconRightComponent(ctx) {
+  let container, isInitialized
+  const iconRightSlot = ctx[10].iconRight,
+    iconComponent = x(iconRightSlot, ctx, ctx[20], iconLeftProps)
   return {
     c() {
-      ;(t = h("div")), o && o.c(), f(t, "class", "c-button--icon svelte-ddrvrw")
+      ;(container = h("div")), iconComponent && iconComponent.c(), f(container, "class", "c-button--icon svelte-ddrvrw")
     },
-    m(i, s) {
-      p(i, t, s), o && o.m(t, null), (l = !0)
+    m(target, anchor) {
+      p(target, container, anchor), iconComponent && iconComponent.m(container, null), (isInitialized = !0)
     },
-    p(i, s) {
-      o &&
-        o.p &&
-        (!l || 1048576 & s) &&
-        C(o, c, i, i[20], l ? k(c, i[20], s, T) : y(i[20]), S)
+    p(newCtx, dirty) {
+      iconComponent &&
+        iconComponent.p &&
+        (!isInitialized || 1048576 & dirty) &&
+        C(iconComponent, iconRightSlot, newCtx, newCtx[20], isInitialized ? k(iconRightSlot, newCtx[20], dirty, iconRightProps) : y(newCtx[20]), iconLeftProps)
     },
-    i(i) {
-      l || (d(o, i), (l = !0))
+    i(intro) {
+      isInitialized || (d(iconComponent, intro), (isInitialized = !0))
     },
-    o(i) {
-      m(o, i), (l = !1)
+    o(outro) {
+      m(iconComponent, outro), (isInitialized = !1)
     },
-    d(i) {
-      i && v(t), o && o.d(i)
+    d(detaching) {
+      detaching && v(container), iconComponent && iconComponent.d(detaching)
     },
   }
 }
-function it(a) {
-  let t,
-    l,
-    c,
-    o,
-    i,
-    s = a[9].iconLeft && W(a),
-    r = a[9].default && X(a),
-    u = a[9].iconRight && Y(a)
+function ButtonContent(ctx) {
+  let container,
+    leftIconSpace,
+    textSpace,
+    rightIconSpace,
+    isInitialized,
+    hasLeftIcon = ctx[9].iconLeft && IconLeftComponent(ctx),
+    hasDefaultSlot = ctx[9].default && TextComponent(ctx),
+    hasRightIcon = ctx[9].iconRight && IconRightComponent(ctx)
   return {
     c() {
-      ;(t = h("div")),
-        s && s.c(),
-        (l = D()),
-        r && r.c(),
-        (c = D()),
-        u && u.c(),
+      ;(container = h("div")),
+        hasLeftIcon && hasLeftIcon.c(),
+        (leftIconSpace = D()),
+        hasDefaultSlot && hasDefaultSlot.c(),
+        (textSpace = D()),
+        hasRightIcon && hasRightIcon.c(),
         f(
-          t,
+          container,
           "class",
-          (o =
-            E(`c-button--content c-button--size-${a[0]}`) + " svelte-ddrvrw"),
+          (rightIconSpace =
+            E(`c-button--content c-button--size-${ctx[0]}`) + " svelte-ddrvrw"),
         )
     },
-    m(n, $) {
-      p(n, t, $),
-        s && s.m(t, null),
-        N(t, l),
-        r && r.m(t, null),
-        N(t, c),
-        u && u.m(t, null),
-        (i = !0)
+    m(target, anchor) {
+      p(target, container, anchor),
+        hasLeftIcon && hasLeftIcon.m(container, null),
+        N(container, leftIconSpace),
+        hasDefaultSlot && hasDefaultSlot.m(container, null),
+        N(container, textSpace),
+        hasRightIcon && hasRightIcon.m(container, null),
+        (isInitialized = !0)
     },
-    p(n, $) {
-      n[9].iconLeft
-        ? s
-          ? (s.p(n, $), 512 & $ && d(s, 1))
-          : ((s = W(n)), s.c(), d(s, 1), s.m(t, l))
-        : s &&
+    p(newCtx, dirty) {
+      newCtx[9].iconLeft
+        ? hasLeftIcon
+          ? (hasLeftIcon.p(newCtx, dirty), 512 & dirty && d(hasLeftIcon, 1))
+          : ((hasLeftIcon = IconLeftComponent(newCtx)), hasLeftIcon.c(), d(hasLeftIcon, 1), hasLeftIcon.m(container, leftIconSpace))
+        : hasLeftIcon &&
           (b(),
-          m(s, 1, 1, () => {
-            s = null
+          m(hasLeftIcon, 1, 1, () => {
+            hasLeftIcon = null
           }),
           w()),
-        n[9].default
-          ? r
-            ? (r.p(n, $), 512 & $ && d(r, 1))
-            : ((r = X(n)), r.c(), d(r, 1), r.m(t, c))
-          : r &&
+        newCtx[9].default
+          ? hasDefaultSlot
+            ? (hasDefaultSlot.p(newCtx, dirty), 512 & dirty && d(hasDefaultSlot, 1))
+            : ((hasDefaultSlot = TextComponent(newCtx)), hasDefaultSlot.c(), d(hasDefaultSlot, 1), hasDefaultSlot.m(container, textSpace))
+          : hasDefaultSlot &&
             (b(),
-            m(r, 1, 1, () => {
-              r = null
+            m(hasDefaultSlot, 1, 1, () => {
+              hasDefaultSlot = null
             }),
             w()),
-        n[9].iconRight
-          ? u
-            ? (u.p(n, $), 512 & $ && d(u, 1))
-            : ((u = Y(n)), u.c(), d(u, 1), u.m(t, null))
-          : u &&
+        newCtx[9].iconRight
+          ? hasRightIcon
+            ? (hasRightIcon.p(newCtx, dirty), 512 & dirty && d(hasRightIcon, 1))
+            : ((hasRightIcon = IconRightComponent(newCtx)), hasRightIcon.c(), d(hasRightIcon, 1), hasRightIcon.m(container, null))
+          : hasRightIcon &&
             (b(),
-            m(u, 1, 1, () => {
-              u = null
+            m(hasRightIcon, 1, 1, () => {
+              hasRightIcon = null
             }),
             w()),
-        (!i ||
-          (1 & $ &&
-            o !==
-              (o =
-                E(`c-button--content c-button--size-${n[0]}`) +
+        (!isInitialized ||
+          (1 & dirty &&
+            rightIconSpace !==
+              (rightIconSpace =
+                E(`c-button--content c-button--size-${newCtx[0]}`) +
                 " svelte-ddrvrw"))) &&
-          f(t, "class", o)
+          f(container, "class", rightIconSpace)
     },
-    i(n) {
-      i || (d(s), d(r), d(u), (i = !0))
+    i(intro) {
+      isInitialized || (d(hasLeftIcon), d(hasDefaultSlot), d(hasRightIcon), (isInitialized = !0))
     },
-    o(n) {
-      m(s), m(r), m(u), (i = !1)
+    o(outro) {
+      m(hasLeftIcon), m(hasDefaultSlot), m(hasRightIcon), (isInitialized = !1)
     },
-    d(n) {
-      n && v(t), s && s.d(), r && r.d(), u && u.d()
+    d(detaching) {
+      detaching && v(container), hasLeftIcon && hasLeftIcon.d(), hasDefaultSlot && hasDefaultSlot.d(), hasRightIcon && hasRightIcon.d()
     },
   }
 }
-function ot(a) {
-  let t, l
-  const c = [
-    { size: a[0] },
-    { variant: a[1] },
-    { color: a[2] },
-    { highContrast: a[3] },
-    { disabled: a[4] },
-    { loading: a[6] },
-    { alignment: a[7] },
-    { radius: a[5] },
-    a[8],
+function createButton(ctx) {
+  let buttonComponent, isInitialized
+  const buttonProps = [
+    { size: ctx[0] },
+    { variant: ctx[1] },
+    { color: ctx[2] },
+    { highContrast: ctx[3] },
+    { disabled: ctx[4] },
+    { loading: ctx[6] },
+    { alignment: ctx[7] },
+    { radius: ctx[5] },
+    ctx[8],
   ]
-  let o = { $$slots: { default: [it] }, $$scope: { ctx: a } }
-  for (let i = 0; i < c.length; i += 1) o = z(o, c[i])
+  let componentProps = { $$slots: { default: [ButtonContent] }, $$scope: { ctx: ctx } }
+  for (let i = 0; i < buttonProps.length; i += 1) componentProps = z(componentProps, buttonProps[i])
   return (
-    (t = new Q({ props: o })),
-    t.$on("click", a[11]),
-    t.$on("keyup", a[12]),
-    t.$on("keydown", a[13]),
-    t.$on("mousedown", a[14]),
-    t.$on("mouseover", a[15]),
-    t.$on("focus", a[16]),
-    t.$on("mouseleave", a[17]),
-    t.$on("blur", a[18]),
-    t.$on("contextmenu", a[19]),
+    (buttonComponent = new Q({ props: componentProps })),
+    buttonComponent.$on("click", ctx[11]),
+    buttonComponent.$on("keyup", ctx[12]),
+    buttonComponent.$on("keydown", ctx[13]),
+    buttonComponent.$on("mousedown", ctx[14]),
+    buttonComponent.$on("mouseover", ctx[15]),
+    buttonComponent.$on("focus", ctx[16]),
+    buttonComponent.$on("mouseleave", ctx[17]),
+    buttonComponent.$on("blur", ctx[18]),
+    buttonComponent.$on("contextmenu", ctx[19]),
     {
       c() {
-        Z(t.$$.fragment)
+        Z(buttonComponent.$$.fragment)
       },
-      m(i, s) {
-        _(t, i, s), (l = !0)
+      m(target, anchor) {
+        _(buttonComponent, target, anchor), (isInitialized = !0)
       },
-      p(i, [s]) {
-        const r =
-          511 & s
-            ? J(c, [
-                1 & s && { size: i[0] },
-                2 & s && { variant: i[1] },
-                4 & s && { color: i[2] },
-                8 & s && { highContrast: i[3] },
-                16 & s && { disabled: i[4] },
-                64 & s && { loading: i[6] },
-                128 & s && { alignment: i[7] },
-                32 & s && { radius: i[5] },
-                256 & s && K(i[8]),
+      p(newCtx, [dirty]) {
+        const updatedProps =
+          511 & dirty
+            ? J(buttonProps, [
+                1 & dirty && { size: newCtx[0] },
+                2 & dirty && { variant: newCtx[1] },
+                4 & dirty && { color: newCtx[2] },
+                8 & dirty && { highContrast: newCtx[3] },
+                16 & dirty && { disabled: newCtx[4] },
+                64 & dirty && { loading: newCtx[6] },
+                128 & dirty && { alignment: newCtx[7] },
+                32 & dirty && { radius: newCtx[5] },
+                256 & dirty && K(newCtx[8]),
               ])
             : {}
-        1049091 & s && (r.$$scope = { dirty: s, ctx: i }), t.$set(r)
+        1049091 & dirty && (updatedProps.$$scope = { dirty: dirty, ctx: newCtx }), buttonComponent.$set(updatedProps)
       },
-      i(i) {
-        l || (d(t.$$.fragment, i), (l = !0))
+      i(intro) {
+        isInitialized || (d(buttonComponent.$$.fragment, intro), (isInitialized = !0))
       },
-      o(i) {
-        m(t.$$.fragment, i), (l = !1)
+      o(outro) {
+        m(buttonComponent.$$.fragment, outro), (isInitialized = !1)
       },
-      d(i) {
-        F(t, i)
+      d(detaching) {
+        F(buttonComponent, detaching)
       },
     }
   )
 }
-function at(a, t, l) {
-  const c = [
+function initButton(ctx, props, setState) {
+  const excludedProps = [
     "size",
     "variant",
     "color",
@@ -313,78 +313,78 @@ function at(a, t, l) {
     "loading",
     "alignment",
   ]
-  let o = A(t, c),
-    { $$slots: i = {}, $$scope: s } = t
-  const r = M(i)
-  let { size: u = 2 } = t,
-    { variant: n = "solid" } = t,
-    { color: $ = "accent" } = t,
-    { highContrast: B = !1 } = t,
-    { disabled: L = !1 } = t,
-    { radius: R = "medium" } = t,
-    { loading: j = !1 } = t,
-    { alignment: q = "center" } = t
+  let restProps = A(props, excludedProps),
+    { $$slots: slots = {}, $$scope: scope } = props
+  const availableSlots = M(slots)
+  let { size: buttonSize = 2 } = props,
+    { variant: buttonVariant = "solid" } = props,
+    { color: buttonColor = "accent" } = props,
+    { highContrast: isHighContrast = !1 } = props,
+    { disabled: isDisabled = !1 } = props,
+    { radius: buttonRadius = "medium" } = props,
+    { loading: isLoading = !1 } = props,
+    { alignment: buttonAlignment = "center" } = props
   return (
-    (a.$$set = (e) => {
-      ;(t = z(z({}, t), O(e))),
-        l(8, (o = A(t, c))),
-        "size" in e && l(0, (u = e.size)),
-        "variant" in e && l(1, (n = e.variant)),
-        "color" in e && l(2, ($ = e.color)),
-        "highContrast" in e && l(3, (B = e.highContrast)),
-        "disabled" in e && l(4, (L = e.disabled)),
-        "radius" in e && l(5, (R = e.radius)),
-        "loading" in e && l(6, (j = e.loading)),
-        "alignment" in e && l(7, (q = e.alignment)),
-        "$$scope" in e && l(20, (s = e.$$scope))
+    (ctx.$$set = (newProps) => {
+      ;(props = z(z({}, props), O(newProps))),
+        setState(8, (restProps = A(props, excludedProps))),
+        "size" in newProps && setState(0, (buttonSize = newProps.size)),
+        "variant" in newProps && setState(1, (buttonVariant = newProps.variant)),
+        "color" in newProps && setState(2, (buttonColor = newProps.color)),
+        "highContrast" in newProps && setState(3, (isHighContrast = newProps.highContrast)),
+        "disabled" in newProps && setState(4, (isDisabled = newProps.disabled)),
+        "radius" in newProps && setState(5, (buttonRadius = newProps.radius)),
+        "loading" in newProps && setState(6, (isLoading = newProps.loading)),
+        "alignment" in newProps && setState(7, (buttonAlignment = newProps.alignment)),
+        "$$scope" in newProps && setState(20, (scope = newProps.$$scope))
     }),
     [
-      u,
-      n,
-      $,
-      B,
-      L,
-      R,
-      j,
-      q,
-      o,
-      r,
-      i,
-      function (e) {
-        g.call(this, a, e)
+      buttonSize,
+      buttonVariant,
+      buttonColor,
+      isHighContrast,
+      isDisabled,
+      buttonRadius,
+      isLoading,
+      buttonAlignment,
+      restProps,
+      availableSlots,
+      slots,
+      function (event) {
+        g.call(this, ctx, event)
       },
-      function (e) {
-        g.call(this, a, e)
+      function (event) {
+        g.call(this, ctx, event)
       },
-      function (e) {
-        g.call(this, a, e)
+      function (event) {
+        g.call(this, ctx, event)
       },
-      function (e) {
-        g.call(this, a, e)
+      function (event) {
+        g.call(this, ctx, event)
       },
-      function (e) {
-        g.call(this, a, e)
+      function (event) {
+        g.call(this, ctx, event)
       },
-      function (e) {
-        g.call(this, a, e)
+      function (event) {
+        g.call(this, ctx, event)
       },
-      function (e) {
-        g.call(this, a, e)
+      function (event) {
+        g.call(this, ctx, event)
       },
-      function (e) {
-        g.call(this, a, e)
+      function (event) {
+        g.call(this, ctx, event)
       },
-      function (e) {
-        g.call(this, a, e)
+      function (event) {
+        g.call(this, ctx, event)
       },
-      s,
+      scope,
     ]
   )
 }
-class et extends G {
-  constructor(t) {
+class Button extends G {
+  constructor(props) {
     super(),
-      H(this, t, at, ot, I, {
+      H(this, props, initButton, createButton, I, {
         size: 0,
         variant: 1,
         color: 2,
@@ -396,4 +396,4 @@ class et extends G {
       })
   }
 }
-export { et as B }
+export { Button as B }
