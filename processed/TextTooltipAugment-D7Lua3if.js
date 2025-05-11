@@ -1,0 +1,413 @@
+var B = Object.defineProperty
+var N = (o, e, n) =>
+  e in o
+    ? B(o, e, { enumerable: !0, configurable: !0, writable: !0, value: n })
+    : (o[e] = n)
+var q = (o, e, n) => N(o, typeof e != "symbol" ? e + "" : e, n)
+import { A as S } from "./IconButtonAugment-CSa0eDCh.js"
+import {
+  S as V,
+  i as X,
+  s as j,
+  B as f,
+  C as x,
+  u,
+  t as p,
+  D as C,
+  _ as I,
+  $ as Y,
+  R as k,
+  e as h,
+  q as T,
+  r as F,
+  h as g,
+  O as G,
+  V as A,
+  W as b,
+  X as v,
+  Y as z,
+  A as H,
+  a2 as m,
+  a1 as J,
+  a6 as K,
+  a7 as L,
+} from "./SpinnerAugment-DI4IM-MA.js"
+import "./BaseButton-C5Me6mfC.js"
+import { R as P, T as Q, C as U } from "./Content-CnpNe5p_.js"
+class de extends S {
+  constructor(n) {
+    super((s) => {
+      this._host.postMessage(s)
+    })
+    q(this, "_consumers", [])
+    ;(this._host = n),
+      (this.onMessageFromExtension = this.onMessageFromExtension.bind(this))
+  }
+  dispose() {
+    this._consumers = []
+  }
+  postMessage(n) {
+    this._host.postMessage(n)
+  }
+  registerConsumer(n) {
+    this._consumers.push(n)
+  }
+  onMessageFromExtension(n) {
+    this._consumers.forEach((s) => {
+      s.handleMessageFromExtension(n)
+    })
+  }
+}
+const O = { Root: P, Trigger: Q, Content: U },
+  Z = (o) => ({}),
+  D = (o) => ({})
+function ee(o) {
+  let e
+  const n = o[14].default,
+    s = A(n, o, o[16], null)
+  return {
+    c() {
+      s && s.c()
+    },
+    m(t, i) {
+      s && s.m(t, i), (e = !0)
+    },
+    p(t, i) {
+      s &&
+        s.p &&
+        (!e || 65536 & i) &&
+        b(s, n, t, t[16], e ? z(n, t[16], i, null) : v(t[16]), null)
+    },
+    i(t) {
+      e || (u(s, t), (e = !0))
+    },
+    o(t) {
+      p(s, t), (e = !1)
+    },
+    d(t) {
+      s && s.d(t)
+    },
+  }
+}
+function E(o) {
+  let e, n
+  return (
+    (e = new O.Content({
+      props: { side: o[6], $$slots: { default: [ie] }, $$scope: { ctx: o } },
+    })),
+    {
+      c() {
+        f(e.$$.fragment)
+      },
+      m(s, t) {
+        x(e, s, t), (n = !0)
+      },
+      p(s, t) {
+        const i = {}
+        64 & t && (i.side = s[6]),
+          67599 & t && (i.$$scope = { dirty: t, ctx: s }),
+          e.$set(i)
+      },
+      i(s) {
+        n || (u(e.$$.fragment, s), (n = !0))
+      },
+      o(s) {
+        p(e.$$.fragment, s), (n = !1)
+      },
+      d(s) {
+        C(e, s)
+      },
+    }
+  )
+}
+function se(o) {
+  let e, n
+  return (
+    (e = new J({
+      props: { size: 1, $$slots: { default: [te] }, $$scope: { ctx: o } },
+    })),
+    {
+      c() {
+        f(e.$$.fragment)
+      },
+      m(s, t) {
+        x(e, s, t), (n = !0)
+      },
+      p(s, t) {
+        const i = {}
+        65537 & t && (i.$$scope = { dirty: t, ctx: s }), e.$set(i)
+      },
+      i(s) {
+        n || (u(e.$$.fragment, s), (n = !0))
+      },
+      o(s) {
+        p(e.$$.fragment, s), (n = !1)
+      },
+      d(s) {
+        C(e, s)
+      },
+    }
+  )
+}
+function ne(o) {
+  let e
+  const n = o[14].content,
+    s = A(n, o, o[16], D)
+  return {
+    c() {
+      s && s.c()
+    },
+    m(t, i) {
+      s && s.m(t, i), (e = !0)
+    },
+    p(t, i) {
+      s &&
+        s.p &&
+        (!e || 65536 & i) &&
+        b(s, n, t, t[16], e ? z(n, t[16], i, Z) : v(t[16]), D)
+    },
+    i(t) {
+      e || (u(s, t), (e = !0))
+    },
+    o(t) {
+      p(s, t), (e = !1)
+    },
+    d(t) {
+      s && s.d(t)
+    },
+  }
+}
+function te(o) {
+  let e
+  return {
+    c() {
+      e = K(o[0])
+    },
+    m(n, s) {
+      h(n, e, s)
+    },
+    p(n, s) {
+      1 & s && L(e, n[0])
+    },
+    d(n) {
+      n && g(e)
+    },
+  }
+}
+function ie(o) {
+  let e, n, s, t
+  const i = [ne, se],
+    r = []
+  function $(c, l) {
+    return c[11].content ? 0 : 1
+  }
+  return (
+    (n = $(o)),
+    (s = r[n] = i[n](o)),
+    {
+      c() {
+        ;(e = H("div")),
+          s.c(),
+          m(e, "width", o[1]),
+          m(e, "min-width", o[2]),
+          m(e, "max-width", o[3])
+      },
+      m(c, l) {
+        h(c, e, l), r[n].m(e, null), (t = !0)
+      },
+      p(c, l) {
+        let d = n
+        ;(n = $(c)),
+          n === d
+            ? r[n].p(c, l)
+            : (T(),
+              p(r[d], 1, 1, () => {
+                r[d] = null
+              }),
+              F(),
+              (s = r[n]),
+              s ? s.p(c, l) : ((s = r[n] = i[n](c)), s.c()),
+              u(s, 1),
+              s.m(e, null)),
+          2 & l && m(e, "width", c[1]),
+          4 & l && m(e, "min-width", c[2]),
+          8 & l && m(e, "max-width", c[3])
+      },
+      i(c) {
+        t || (u(s), (t = !0))
+      },
+      o(c) {
+        p(s), (t = !1)
+      },
+      d(c) {
+        c && g(e), r[n].d()
+      },
+    }
+  )
+}
+function oe(o) {
+  let e, n, s, t
+  e = new O.Trigger({
+    props: {
+      referenceClientRect: o[9],
+      class: o[7],
+      $$slots: { default: [ee] },
+      $$scope: { ctx: o },
+    },
+  })
+  let i = (o[0] || o[11].content) && E(o)
+  return {
+    c() {
+      f(e.$$.fragment), (n = Y()), i && i.c(), (s = k())
+    },
+    m(r, $) {
+      x(e, r, $), h(r, n, $), i && i.m(r, $), h(r, s, $), (t = !0)
+    },
+    p(r, $) {
+      const c = {}
+      512 & $ && (c.referenceClientRect = r[9]),
+        128 & $ && (c.class = r[7]),
+        65536 & $ && (c.$$scope = { dirty: $, ctx: r }),
+        e.$set(c),
+        r[0] || r[11].content
+          ? i
+            ? (i.p(r, $), 2049 & $ && u(i, 1))
+            : ((i = E(r)), i.c(), u(i, 1), i.m(s.parentNode, s))
+          : i &&
+            (T(),
+            p(i, 1, 1, () => {
+              i = null
+            }),
+            F())
+    },
+    i(r) {
+      t || (u(e.$$.fragment, r), u(i), (t = !0))
+    },
+    o(r) {
+      p(e.$$.fragment, r), p(i), (t = !1)
+    },
+    d(r) {
+      r && (g(n), g(s)), C(e, r), i && i.d(r)
+    },
+  }
+}
+function re(o) {
+  let e,
+    n,
+    s = {
+      delayDurationMs: o[4],
+      onOpenChange: o[8],
+      triggerOn: o[5],
+      tippyTheme: "default text-tooltip-augment",
+      $$slots: { default: [oe] },
+      $$scope: { ctx: o },
+    }
+  return (
+    (e = new O.Root({ props: s })),
+    o[15](e),
+    {
+      c() {
+        f(e.$$.fragment)
+      },
+      m(t, i) {
+        x(e, t, i), (n = !0)
+      },
+      p(t, [i]) {
+        const r = {}
+        16 & i && (r.delayDurationMs = t[4]),
+          256 & i && (r.onOpenChange = t[8]),
+          32 & i && (r.triggerOn = t[5]),
+          68303 & i && (r.$$scope = { dirty: i, ctx: t }),
+          e.$set(r)
+      },
+      i(t) {
+        n || (u(e.$$.fragment, t), (n = !0))
+      },
+      o(t) {
+        p(e.$$.fragment, t), (n = !1)
+      },
+      d(t) {
+        o[15](null), C(e, t)
+      },
+    }
+  )
+}
+function ae(o, e, n) {
+  let { $$slots: s = {}, $$scope: t } = e
+  const i = I(s)
+  let r,
+    { content: $ } = e,
+    { width: c } = e,
+    { minWidth: l } = e,
+    { maxWidth: d = "360px" } = e,
+    { delayDurationMs: w } = e,
+    { triggerOn: M } = e,
+    { side: y = "top" } = e,
+    { class: R = "" } = e,
+    { onOpenChange: W } = e,
+    { referenceClientRect: _ } = e
+  return (
+    (o.$$set = (a) => {
+      "content" in a && n(0, ($ = a.content)),
+        "width" in a && n(1, (c = a.width)),
+        "minWidth" in a && n(2, (l = a.minWidth)),
+        "maxWidth" in a && n(3, (d = a.maxWidth)),
+        "delayDurationMs" in a && n(4, (w = a.delayDurationMs)),
+        "triggerOn" in a && n(5, (M = a.triggerOn)),
+        "side" in a && n(6, (y = a.side)),
+        "class" in a && n(7, (R = a.class)),
+        "onOpenChange" in a && n(8, (W = a.onOpenChange)),
+        "referenceClientRect" in a && n(9, (_ = a.referenceClientRect)),
+        "$$scope" in a && n(16, (t = a.$$scope))
+    }),
+    [
+      $,
+      c,
+      l,
+      d,
+      w,
+      M,
+      y,
+      R,
+      W,
+      _,
+      r,
+      i,
+      () => (r == null ? void 0 : r.requestOpen()),
+      () => (r == null ? void 0 : r.requestClose()),
+      s,
+      function (a) {
+        G[a ? "unshift" : "push"](() => {
+          ;(r = a), n(10, r)
+        })
+      },
+      t,
+    ]
+  )
+}
+class me extends V {
+  constructor(e) {
+    super(),
+      X(this, e, ae, re, j, {
+        content: 0,
+        width: 1,
+        minWidth: 2,
+        maxWidth: 3,
+        delayDurationMs: 4,
+        triggerOn: 5,
+        side: 6,
+        class: 7,
+        onOpenChange: 8,
+        referenceClientRect: 9,
+        requestOpen: 12,
+        requestClose: 13,
+      })
+  }
+  get requestOpen() {
+    return this.$$.ctx[12]
+  }
+  get requestClose() {
+    return this.$$.ctx[13]
+  }
+}
+export { de as M, me as T }
