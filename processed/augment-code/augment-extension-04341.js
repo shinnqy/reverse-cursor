@@ -107323,7 +107323,7 @@ var jQ = class extends DisposableContainer {
         this.addDisposable(this._workspaceUiModel))
   }
 }
-var DiskFileManager = class e extends MetricsReporter {
+var ClientMetricsReporter = class e extends MetricsReporter {
   constructor(r) {
     super(
       "ClientMetricsReporter",
@@ -121771,7 +121771,7 @@ var AugmentExtension = class e extends DisposableContainer {
         this.featureFlagManager,
         this._globalState,
       )),
-      (this._clientMetricsReporter = new DiskFileManager(apiServer)),
+      (this._clientMetricsReporter = new ClientMetricsReporter(apiServer)),
       (this._completionTimelineReporter = new tN(apiServer)),
       (this._extensionEventReporter = new ExtensionSessionEventReporter(apiServer)),
       (this.guidelinesWatcher = new ig(
