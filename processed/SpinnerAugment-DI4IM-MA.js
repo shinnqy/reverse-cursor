@@ -951,60 +951,60 @@ function destroyComponent(t, n) {
     (e.on_destroy = e.fragment = null),
     (e.ctx = []))
 }
-function initComponent(t, n, e, o, r, i, s = null, a = [-1]) {
-  const c = H
-  F(t)
-  const u = (t.$$ = {
+function initComponent(component, options, componentInitFn, createFragmentFn, notEqualFn, props, hydrationInfo = null, dirtyArray = [-1]) {
+  const parentComponent = H
+  F(component)
+  const componentState = (component.$$ = {
     fragment: null,
     ctx: [],
-    props: i,
+    props: props,
     update: $,
-    not_equal: r,
+    not_equal: notEqualFn,
     bound: mt(),
     on_mount: [],
     on_destroy: [],
     on_disconnect: [],
     before_update: [],
     after_update: [],
-    context: new Map(n.context || (c ? c.$$.context : [])),
+    context: new Map(options.context || (parentComponent ? parentComponent.$$.context : [])),
     callbacks: mt(),
-    dirty: a,
+    dirty: dirtyArray,
     skip_bound: !1,
-    root: n.target || c.$$.root,
+    root: options.target || parentComponent.$$.root,
   })
-  s && s(u.root)
-  let l = !1
+  hydrationInfo && hydrationInfo(componentState.root)
+  let isInitialized = !1
   if (
-    ((u.ctx = e
-      ? e(t, n.props || {}, (f, h, ...d) => {
-          const p = d.length ? d[0] : h
+    ((componentState.ctx = componentInitFn
+      ? componentInitFn(component, options.props || {}, (index, value, ...rest) => {
+          const newValue = rest.length ? rest[0] : value
           return (
-            u.ctx &&
-              r(u.ctx[f], (u.ctx[f] = p)) &&
-              (!u.skip_bound && u.bound[f] && u.bound[f](p),
-              l &&
-                (function (m, g) {
-                  m.$$.dirty[0] === -1 && (S.push(m), Mt(), m.$$.dirty.fill(0)),
-                    (m.$$.dirty[(g / 31) | 0] |= 1 << g % 31)
-                })(t, f)),
-            h
+            componentState.ctx &&
+              notEqualFn(componentState.ctx[index], (componentState.ctx[index] = newValue)) &&
+              (!componentState.skip_bound && componentState.bound[index] && componentState.bound[index](newValue),
+              isInitialized &&
+                (function (comp, idx) {
+                  comp.$$.dirty[0] === -1 && (S.push(comp), Mt(), comp.$$.dirty.fill(0)),
+                    (comp.$$.dirty[(idx / 31) | 0] |= 1 << idx % 31)
+                })(component, index)),
+            value
           )
         })
       : []),
-    u.update(),
-    (l = !0),
-    N(u.before_update),
-    (u.fragment = !!o && o(u.ctx)),
-    n.target)
+    componentState.update(),
+    (isInitialized = !0),
+    N(componentState.before_update),
+    (componentState.fragment = !!createFragmentFn && createFragmentFn(componentState.ctx)),
+    options.target)
   ) {
-    if (n.hydrate) {
+    if (options.hydrate) {
       U = !0
-      const f = sn(n.target)
-      u.fragment && u.fragment.l(f), f.forEach(k)
-    } else u.fragment && u.fragment.c()
-    n.intro && introduceComponent(t.$$.fragment), mountComponent(t, n.target, n.anchor), (U = !1), Pt()
+      const childNodes = sn(options.target)
+      componentState.fragment && componentState.fragment.l(childNodes), childNodes.forEach(k)
+    } else componentState.fragment && componentState.fragment.c()
+    options.intro && introduceComponent(component.$$.fragment), mountComponent(component, options.target, options.anchor), (U = !1), Pt()
   }
-  F(c)
+  F(parentComponent)
 }
 class SvelteComponent {
   constructor() {

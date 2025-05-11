@@ -4,7 +4,7 @@ var N = (o, e, n) =>
     ? B(o, e, { enumerable: !0, configurable: !0, writable: !0, value: n })
     : (o[e] = n)
 var q = (o, e, n) => N(o, typeof e != "symbol" ? e + "" : e, n)
-import { A as S } from "./IconButtonAugment-CSa0eDCh.js"
+import { A as AsyncMessageSender } from "./IconButtonAugment-CSa0eDCh.js"
 import {
   S as V,
   i as X,
@@ -34,27 +34,27 @@ import {
 } from "./SpinnerAugment-DI4IM-MA.js"
 import "./BaseButton-C5Me6mfC.js"
 import { R as P, T as Q, C as U } from "./Content-CnpNe5p_.js"
-class de extends S {
-  constructor(n) {
-    super((s) => {
-      this._host.postMessage(s)
+class MessageBroker extends AsyncMessageSender {
+  constructor(host) {
+    super((message) => {
+      this._host.postMessage(message)
     })
     q(this, "_consumers", [])
-    ;(this._host = n),
+    ;(this._host = host),
       (this.onMessageFromExtension = this.onMessageFromExtension.bind(this))
   }
   dispose() {
     this._consumers = []
   }
-  postMessage(n) {
-    this._host.postMessage(n)
+  postMessage(message) {
+    this._host.postMessage(message)
   }
-  registerConsumer(n) {
-    this._consumers.push(n)
+  registerConsumer(consumer) {
+    this._consumers.push(consumer)
   }
-  onMessageFromExtension(n) {
-    this._consumers.forEach((s) => {
-      s.handleMessageFromExtension(n)
+  onMessageFromExtension(message) {
+    this._consumers.forEach((consumer) => {
+      consumer.handleMessageFromExtension(message)
     })
   }
 }
@@ -410,4 +410,4 @@ class me extends V {
     return this.$$.ctx[13]
   }
 }
-export { de as M, me as T }
+export { MessageBroker as M, me as T }

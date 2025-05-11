@@ -1,9 +1,9 @@
 var za = Object.defineProperty
-var Ba = (i, t, e) =>
+var setProperty = (i, t, e) =>
   t in i
     ? za(i, t, { enumerable: !0, configurable: !0, writable: !0, value: e })
     : (i[t] = e)
-var w = (i, t, e) => Ba(i, typeof t != "symbol" ? t + "" : t, e)
+var defineInstanceProperty = (i, t, e) => setProperty(i, typeof t != "symbol" ? t + "" : t, e)
 import {
   P as On,
   W as Va,
@@ -118,7 +118,7 @@ function Eh(i) {
 }
 class ul {
   constructor(t, e, n, r = 5, s = 4e3, o) {
-    w(this, "_isCancelled", !1)
+    defineInstanceProperty(this, "_isCancelled", !1)
     ;(this.requestId = t),
       (this.chatMessage = e),
       (this.startStreamFn = n),
@@ -381,114 +381,114 @@ function wl(i) {
   }
   return t
 }
-class Fh {
-  constructor(t, e, n) {
-    w(
+class ExtensionClient {
+  constructor(host, asyncMsgSender, flags) {
+    defineInstanceProperty(
       this,
       "getChatInitData",
       async () =>
         (await this._asyncMsgSender.send({ type: I.chatLoaded }, 3e4)).data,
     )
-    w(this, "reportWebviewClientEvent", (t) => {
+    defineInstanceProperty(this, "reportWebviewClientEvent", (event) => {
       this._asyncMsgSender.send({
         type: I.reportWebviewClientMetric,
-        data: { webviewName: Va.chat, client_metric: t, value: 1 },
+        data: { webviewName: Va.chat, client_metric: event, value: 1 },
       })
     })
-    w(this, "reportAgentSessionEvent", (t) => {
+    defineInstanceProperty(this, "reportAgentSessionEvent", (event) => {
       this._asyncMsgSender.sendToSidecar({
         type: Dt.reportAgentSessionEvent,
-        data: t,
+        data: event,
       })
     })
-    w(this, "reportAgentRequestEvent", (t) => {
+    defineInstanceProperty(this, "reportAgentRequestEvent", (event) => {
       this._asyncMsgSender.sendToSidecar({
         type: Dt.reportAgentRequestEvent,
-        data: t,
+        data: event,
       })
     })
-    w(this, "getSuggestions", async (t, e = !1) => {
-      const n = { rootPath: "", relPath: t },
-        r = this.findFiles(n, 6),
-        s = this.findRecentlyOpenedFiles(n, 6),
-        o = this.findFolders(n, 3),
-        a = this.findExternalSources(t, e),
-        [l, c, d, h] = await Promise.all([
-          Nn(r, []),
-          Nn(s, []),
-          Nn(o, []),
-          Nn(a, []),
+    defineInstanceProperty(this, "getSuggestions", async (query, excludeExternalSources = !1) => {
+      const pathQuery = { rootPath: "", relPath: query },
+        filesPromise = this.findFiles(pathQuery, 6),
+        recentFilesPromise = this.findRecentlyOpenedFiles(pathQuery, 6),
+        foldersPromise = this.findFolders(pathQuery, 3),
+        externalSourcesPromise = this.findExternalSources(query, excludeExternalSources),
+        [files, recentFiles, folders, externalSources] = await Promise.all([
+          Nn(filesPromise, []),
+          Nn(recentFilesPromise, []),
+          Nn(foldersPromise, []),
+          Nn(externalSourcesPromise, []),
         ]),
-        u = (p, m) => ({ ...wl(p), [m]: p }),
-        f = [
-          ...l.map((p) => u(p, "file")),
-          ...d.map((p) => u(p, "folder")),
-          ...c.map((p) => u(p, "recentFile")),
-          ...h.map((p) => ({
-            label: p.name,
-            name: p.name,
-            id: p.id,
-            externalSource: p,
+        addType = (item, type) => ({ ...wl(item), [type]: item }),
+        suggestions = [
+          ...files.map((file) => addType(file, "file")),
+          ...folders.map((folder) => addType(folder, "folder")),
+          ...recentFiles.map((recentFile) => addType(recentFile, "recentFile")),
+          ...externalSources.map((source) => ({
+            label: source.name,
+            name: source.name,
+            id: source.id,
+            externalSource: source,
           })),
         ]
       if (this._flags.enablePersonalities) {
-        const p = this.getPersonalities(t)
-        p.length > 0 && f.push(...p)
+        const personalities = this.getPersonalities(query)
+        personalities.length > 0 && suggestions.push(...personalities)
       }
-      return f
+      return suggestions
     })
-    w(this, "getPersonalities", (t) => {
+    defineInstanceProperty(this, "getPersonalities", (query) => {
       if (!this._flags.enablePersonalities) return []
-      if (t === "") return xi
-      const e = t.toLowerCase()
-      return xi.filter((n) => {
-        const r = n.personality.description.toLowerCase(),
-          s = n.label.toLowerCase()
-        return r.includes(e) || s.includes(e)
+      if (query === "") return xi
+      const lowercaseQuery = query.toLowerCase()
+      return xi.filter((personality) => {
+        const description = personality.personality.description.toLowerCase(),
+          label = personality.label.toLowerCase()
+        return description.includes(lowercaseQuery) || label.includes(lowercaseQuery)
       })
     })
-    w(this, "sendAction", (t) => {
-      this._host.postMessage({ type: I.mainPanelPerformAction, data: t })
+    defineInstanceProperty(this, "sendAction", (action) => {
+      this._host.postMessage({ type: I.mainPanelPerformAction, data: action })
     })
-    w(this, "showAugmentPanel", () => {
+    defineInstanceProperty(this, "showAugmentPanel", () => {
       this._asyncMsgSender.send({ type: I.showAugmentPanel })
     })
-    w(
+    defineInstanceProperty(
       this,
       "openConfirmationModal",
-      async (t) =>
+      async (options) =>
         (
           await this._asyncMsgSender.send(
-            { type: I.openConfirmationModal, data: t },
+            { type: I.openConfirmationModal, data: options },
             1e9,
           )
         ).data.ok,
     )
-    w(this, "clearMetadataFor", (t) => {
-      this._host.postMessage({ type: I.chatClearMetadata, data: t })
+    defineInstanceProperty(this, "clearMetadataFor", (requestId) => {
+      this._host.postMessage({ type: I.chatClearMetadata, data: requestId })
     })
-    w(this, "resolvePath", async (t, e = void 0) => {
-      const n = await this._asyncMsgSender.send(
+    defineInstanceProperty(this, "resolvePath", async (query, searchScope = void 0) => {
+      const response = await this._asyncMsgSender.send(
         {
           type: I.resolveFileRequest,
-          data: { ...t, exactMatch: !0, maxResults: 1, searchScope: e },
+          data: { ...query, exactMatch: !0, maxResults: 1, searchScope: searchScope },
         },
         5e3,
       )
-      if (n.data) return n.data
+      if (response.data) return response.data
     })
-    w(
+    defineInstanceProperty(
       this,
       "resolveSymbols",
-      async (t, e) =>
+      async (query, searchScope) =>
         (
           await this._asyncMsgSender.send(
-            { type: I.findSymbolRequest, data: { query: t, searchScope: e } },
+            { type: I.findSymbolRequest, data: { query: query, searchScope: searchScope } },
             3e4,
           )
         ).data,
     )
-    w(
+    defineInstanceProperty(
       this,
       "getDiagnostics",
       async () =>
@@ -499,86 +499,86 @@ class Fh {
           )
         ).data,
     )
-    w(
+    defineInstanceProperty(
       this,
       "findFiles",
-      async (t, e = 12) =>
+      async (query, maxResults = 12) =>
         (
           await this._asyncMsgSender.send(
-            { type: I.findFileRequest, data: { ...t, maxResults: e } },
+            { type: I.findFileRequest, data: { ...query, maxResults: maxResults } },
             5e3,
           )
         ).data,
     )
-    w(
+    defineInstanceProperty(
       this,
       "findFolders",
-      async (t, e = 12) =>
+      async (query, maxResults = 12) =>
         (
           await this._asyncMsgSender.send(
-            { type: I.findFolderRequest, data: { ...t, maxResults: e } },
+            { type: I.findFolderRequest, data: { ...query, maxResults: maxResults } },
             5e3,
           )
         ).data,
     )
-    w(
+    defineInstanceProperty(
       this,
       "findRecentlyOpenedFiles",
-      async (t, e = 12) =>
+      async (query, maxResults = 12) =>
         (
           await this._asyncMsgSender.send(
             {
               type: I.findRecentlyOpenedFilesRequest,
-              data: { ...t, maxResults: e },
+              data: { ...query, maxResults: maxResults },
             },
             5e3,
           )
         ).data,
     )
-    w(this, "findExternalSources", async (t, e = !1) =>
+    defineInstanceProperty(this, "findExternalSources", async (query, excludeExternalSources = !1) =>
       this._flags.enableExternalSourcesInChat
-        ? e
+        ? excludeExternalSources
           ? []
           : ((
               await this._asyncMsgSender.send(
                 {
                   type: I.findExternalSourcesRequest,
-                  data: { query: t, source_types: [] },
+                  data: { query: query, source_types: [] },
                 },
                 5e3,
               )
             ).data.sources ?? [])
         : [],
     )
-    w(this, "openFile", (t) => {
-      this._host.postMessage({ type: I.openFile, data: t })
+    defineInstanceProperty(this, "openFile", (fileInfo) => {
+      this._host.postMessage({ type: I.openFile, data: fileInfo })
     })
-    w(this, "saveFile", (t) =>
-      this._host.postMessage({ type: I.saveFile, data: t }),
+    defineInstanceProperty(this, "saveFile", (fileInfo) =>
+      this._host.postMessage({ type: I.saveFile, data: fileInfo }),
     )
-    w(this, "loadFile", (t) =>
-      this._host.postMessage({ type: I.loadFile, data: t }),
+    defineInstanceProperty(this, "loadFile", (fileInfo) =>
+      this._host.postMessage({ type: I.loadFile, data: fileInfo }),
     )
-    w(this, "openMemoriesFile", () => {
+    defineInstanceProperty(this, "openMemoriesFile", () => {
       this._host.postMessage({ type: I.openMemoriesFile })
     })
-    w(this, "createFile", (t, e) => {
+    defineInstanceProperty(this, "createFile", (code, relPath) => {
       this._host.postMessage({
         type: I.chatCreateFile,
-        data: { code: t, relPath: e },
+        data: { code: code, relPath: relPath },
       })
     })
-    w(this, "openScratchFile", async (t, e = "shellscript") => {
+    defineInstanceProperty(this, "openScratchFile", async (content, language = "shellscript") => {
       await this._asyncMsgSender.send(
-        { type: I.openScratchFileRequest, data: { content: t, language: e } },
+        { type: I.openScratchFileRequest, data: { content: content, language: language } },
         1e4,
       )
     })
-    w(this, "resolveWorkspaceFileChunk", async (t) => {
+    defineInstanceProperty(this, "resolveWorkspaceFileChunk", async (chunk) => {
       try {
         return (
           await this._asyncMsgSender.send(
-            { type: I.resolveWorkspaceFileChunkRequest, data: t },
+            { type: I.resolveWorkspaceFileChunkRequest, data: chunk },
             5e3,
           )
         ).data
@@ -586,194 +586,194 @@ class Fh {
         return
       }
     })
-    w(this, "smartPaste", (t) => {
-      this._host.postMessage({ type: I.chatSmartPaste, data: t })
+    defineInstanceProperty(this, "smartPaste", (options) => {
+      this._host.postMessage({ type: I.chatSmartPaste, data: options })
     })
-    w(this, "saveChat", async (t, e, n) =>
+    defineInstanceProperty(this, "saveChat", async (conversationId, chatHistory, title) =>
       this._asyncMsgSender.send({
         type: I.saveChat,
-        data: { conversationId: t, chatHistory: e, title: n },
+        data: { conversationId: conversationId, chatHistory: chatHistory, title: title },
       }),
     )
-    w(this, "launchAutofixPanel", async (t, e, n) =>
+    defineInstanceProperty(this, "launchAutofixPanel", async (conversationId, iterationId, stage) =>
       this._asyncMsgSender.send({
         type: I.chatLaunchAutofixPanel,
-        data: { conversationId: t, iterationId: e, stage: n },
+        data: { conversationId: conversationId, iterationId: iterationId, stage: stage },
       }),
     )
-    w(this, "updateUserGuidelines", (t) => {
-      this._host.postMessage({ type: I.updateUserGuidelines, data: t })
+    defineInstanceProperty(this, "updateUserGuidelines", (guidelines) => {
+      this._host.postMessage({ type: I.updateUserGuidelines, data: guidelines })
     })
-    w(this, "openSettingsPage", (t) => {
-      this._host.postMessage({ type: I.openSettingsPage, data: t })
+    defineInstanceProperty(this, "openSettingsPage", (section) => {
+      this._host.postMessage({ type: I.openSettingsPage, data: section })
     })
-    w(this, "_activeRetryStreams", new Map())
-    w(this, "cancelChatStream", async (t) => {
-      var e
-      ;(e = this._activeRetryStreams.get(t)) == null || e.cancel(),
+    defineInstanceProperty(this, "_activeRetryStreams", new Map())
+    defineInstanceProperty(this, "cancelChatStream", async (requestId) => {
+      var stream
+      ;(stream = this._activeRetryStreams.get(requestId)) == null || stream.cancel(),
         await this._asyncMsgSender.send(
-          { type: I.chatUserCancel, data: { requestId: t } },
+          { type: I.chatUserCancel, data: { requestId: requestId } },
           1e4,
         )
     })
-    w(this, "sendUserRating", async (t, e, n, r = "") => {
-      const s = {
-          requestId: t,
-          rating: n,
-          note: r,
-          mode: e ? fi.agent : fi.chat,
+    defineInstanceProperty(this, "sendUserRating", async (requestId, isAgentMode, rating, note = "") => {
+      const ratingData = {
+          requestId: requestId,
+          rating: rating,
+          note: note,
+          mode: isAgentMode ? fi.agent : fi.chat,
         },
-        o = { type: I.chatRating, data: s }
-      return (await this._asyncMsgSender.send(o, 3e4)).data
+        message = { type: I.chatRating, data: ratingData }
+      return (await this._asyncMsgSender.send(message, 3e4)).data
     })
-    w(this, "triggerUsedChatMetric", () => {
+    defineInstanceProperty(this, "triggerUsedChatMetric", () => {
       this._host.postMessage({ type: I.usedChat })
     })
-    w(this, "createProject", (t) => {
+    defineInstanceProperty(this, "createProject", (name) => {
       this._host.postMessage({
         type: I.mainPanelCreateProject,
-        data: { name: t },
+        data: { name: name },
       })
     })
-    w(this, "openProjectFolder", () => {
+    defineInstanceProperty(this, "openProjectFolder", () => {
       this._host.postMessage({
         type: I.mainPanelPerformAction,
         data: "open-folder",
       })
     })
-    w(this, "closeProjectFolder", () => {
+    defineInstanceProperty(this, "closeProjectFolder", () => {
       this._host.postMessage({
         type: I.mainPanelPerformAction,
         data: "close-folder",
       })
     })
-    w(this, "cloneRepository", () => {
+    defineInstanceProperty(this, "cloneRepository", () => {
       this._host.postMessage({
         type: I.mainPanelPerformAction,
         data: "clone-repository",
       })
     })
-    w(this, "grantSyncPermission", () => {
+    defineInstanceProperty(this, "grantSyncPermission", () => {
       this._host.postMessage({
         type: I.mainPanelPerformAction,
         data: "grant-sync-permission",
       })
     })
-    w(this, "callTool", async (t, e, n, r, s, o) => {
-      const a = {
+    defineInstanceProperty(this, "callTool", async (chatRequestId, toolUseId, name, input, chatHistory, conversationId) => {
+      const message = {
         type: I.callTool,
         data: {
-          chatRequestId: t,
-          toolUseId: e,
-          name: n,
-          input: r,
-          chatHistory: s,
-          conversationId: o,
+          chatRequestId: chatRequestId,
+          toolUseId: toolUseId,
+          name: name,
+          input: input,
+          chatHistory: chatHistory,
+          conversationId: conversationId,
         },
       }
-      return (await this._asyncMsgSender.send(a, 0)).data
+      return (await this._asyncMsgSender.send(message, 0)).data
     })
-    w(this, "cancelToolRun", async (t, e) => {
-      const n = { type: I.cancelToolRun, data: { requestId: t, toolUseId: e } }
-      await this._asyncMsgSender.send(n, 0)
+    defineInstanceProperty(this, "cancelToolRun", async (requestId, toolUseId) => {
+      const message = { type: I.cancelToolRun, data: { requestId: requestId, toolUseId: toolUseId } }
+      await this._asyncMsgSender.send(message, 0)
     })
-    w(this, "checkSafe", async (t, e) => {
-      const n = { type: I.toolCheckSafe, data: { name: t, input: e } }
-      return (await this._asyncMsgSender.send(n, 0)).data.isSafe
+    defineInstanceProperty(this, "checkSafe", async (toolName, input) => {
+      const message = { type: I.toolCheckSafe, data: { name: toolName, input: input } }
+      return (await this._asyncMsgSender.send(message, 0)).data.isSafe
     })
-    w(this, "closeAllToolProcesses", async () => {
+    defineInstanceProperty(this, "closeAllToolProcesses", async () => {
       await this._asyncMsgSender.sendToSidecar(
         { type: mi.closeAllToolProcesses },
         0,
       )
     })
-    w(this, "getToolIdentifier", async (t) => {
-      const e = { type: mi.getToolIdentifierRequest, data: { toolName: t } }
-      return (await this._asyncMsgSender.sendToSidecar(e, 0)).data
+    defineInstanceProperty(this, "getToolIdentifier", async (toolName) => {
+      const message = { type: mi.getToolIdentifierRequest, data: { toolName: toolName } }
+      return (await this._asyncMsgSender.sendToSidecar(message, 0)).data
     })
-    w(this, "executeCommand", async (t, e, n) => {
+    defineInstanceProperty(this, "executeCommand", async (iterationId, command, args) => {
       try {
-        const r = await this._asyncMsgSender.send(
+        const response = await this._asyncMsgSender.send(
           {
             type: I.chatAutofixExecuteCommandRequest,
-            data: { iterationId: t, command: e, args: n },
+            data: { iterationId: iterationId, command: command, args: args },
           },
           6e5,
         )
-        return { output: r.data.output, returnCode: r.data.returnCode }
-      } catch (r) {
-        throw (console.error("[ExtensionClient] Execute command failed:", r), r)
+        return { output: response.data.output, returnCode: response.data.returnCode }
+      } catch (error) {
+        throw (console.error("[ExtensionClient] Execute command failed:", error), error)
       }
     })
-    w(this, "sendAutofixStateUpdate", async (t) => {
+    defineInstanceProperty(this, "sendAutofixStateUpdate", async (state) => {
       await this._asyncMsgSender.send({
         type: I.chatAutofixStateUpdate,
-        data: t,
+        data: state,
       })
     })
-    w(
+    defineInstanceProperty(
       this,
       "autofixPlan",
-      async (t, e) =>
+      async (command, steeringHistory) =>
         (
           await this._asyncMsgSender.send(
             {
               type: I.chatAutofixPlanRequest,
-              data: { command: t, steeringHistory: e },
+              data: { command: command, steeringHistory: steeringHistory },
             },
             6e4,
           )
         ).data.plan,
     )
-    w(this, "setChatMode", (t) => {
-      this._asyncMsgSender.send({ type: I.chatModeChanged, data: { mode: t } })
+    defineInstanceProperty(this, "setChatMode", (mode) => {
+      this._asyncMsgSender.send({ type: I.chatModeChanged, data: { mode: mode } })
     })
-    w(this, "getAgentEditList", async (t, e) => {
-      const n = {
+    defineInstanceProperty(this, "getAgentEditList", async (fromTimestamp, toTimestamp) => {
+      const message = {
         type: Dt.getEditListRequest,
-        data: { fromTimestamp: t, toTimestamp: e },
+        data: { fromTimestamp: fromTimestamp, toTimestamp: toTimestamp },
       }
-      return (await this._asyncMsgSender.sendToSidecar(n, 3e4)).data
+      return (await this._asyncMsgSender.sendToSidecar(message, 3e4)).data
     })
-    w(this, "hasChangesSince", async (t) => {
-      const e = {
+    defineInstanceProperty(this, "hasChangesSince", async (timestamp) => {
+      const message = {
         type: Dt.getEditListRequest,
-        data: { fromTimestamp: t, toTimestamp: Number.MAX_SAFE_INTEGER },
+        data: { fromTimestamp: timestamp, toTimestamp: Number.MAX_SAFE_INTEGER },
       }
       return (
-        (await this._asyncMsgSender.sendToSidecar(e, 3e4)).data.edits.filter(
-          (n) => {
-            var r, s
+        (await this._asyncMsgSender.sendToSidecar(message, 3e4)).data.edits.filter(
+          (edit) => {
+            var summary, summary2
             return (
-              ((r = n.changesSummary) == null ? void 0 : r.totalAddedLines) ||
-              ((s = n.changesSummary) == null ? void 0 : s.totalRemovedLines)
+              ((summary = edit.changesSummary) == null ? void 0 : summary.totalAddedLines) ||
+              ((summary2 = edit.changesSummary) == null ? void 0 : summary2.totalRemovedLines)
             )
           },
         ).length > 0
       )
     })
-    w(this, "getToolCallCheckpoint", async (t) => {
-      const e = { type: I.getToolCallCheckpoint, data: { requestId: t } }
-      return (await this._asyncMsgSender.send(e, 3e4)).data.checkpointNumber
+    defineInstanceProperty(this, "getToolCallCheckpoint", async (requestId) => {
+      const message = { type: I.getToolCallCheckpoint, data: { requestId: requestId } }
+      return (await this._asyncMsgSender.send(message, 3e4)).data.checkpointNumber
     })
-    w(this, "setCurrentConversation", (t) => {
+    defineInstanceProperty(this, "setCurrentConversation", (conversationId) => {
       this._asyncMsgSender.sendToSidecar({
         type: Dt.setCurrentConversation,
-        data: { conversationId: t },
+        data: { conversationId: conversationId },
       })
     })
-    w(this, "showAgentReview", (t, e, n, r = !0) => {
+    defineInstanceProperty(this, "showAgentReview", (filePath, fromTimestamp, toTimestamp, retainFocus = !0) => {
       this._asyncMsgSender.sendToSidecar({
         type: Dt.chatReviewAgentFile,
         data: {
-          qualifiedPathName: t,
-          fromTimestamp: e,
-          toTimestamp: n,
-          retainFocus: r,
+          qualifiedPathName: filePath,
+          fromTimestamp: fromTimestamp,
+          toTimestamp: toTimestamp,
+          retainFocus: retainFocus,
         },
       })
     })
-    w(
+    defineInstanceProperty(
       this,
       "acceptAllAgentEdits",
       async () => (
@@ -783,18 +783,18 @@ class Fh {
         !0
       ),
     )
-    w(
+    defineInstanceProperty(
       this,
       "revertToTimestamp",
-      async (t, e) => (
+      async (timestamp, qualifiedPathNames) => (
         await this._asyncMsgSender.sendToSidecar({
           type: Dt.revertToTimestamp,
-          data: { timestamp: t, qualifiedPathNames: e },
+          data: { timestamp: timestamp, qualifiedPathNames: qualifiedPathNames },
         }),
         !0
       ),
     )
-    w(
+    defineInstanceProperty(
       this,
       "getAgentOnboardingPrompt",
       async () =>
@@ -805,24 +805,24 @@ class Fh {
           )
         ).data.prompt,
     )
-    w(this, "getAgentEditChangesByRequestId", async (t) => {
-      const e = {
+    defineInstanceProperty(this, "getAgentEditChangesByRequestId", async (requestId) => {
+      const message = {
         type: Dt.getEditChangesByRequestIdRequest,
-        data: { requestId: t },
+        data: { requestId: requestId },
       }
-      return (await this._asyncMsgSender.sendToSidecar(e, 3e4)).data
+      return (await this._asyncMsgSender.sendToSidecar(message, 3e4)).data
     })
-    w(this, "getAgentEditContentsByRequestId", async (t) => {
-      const e = {
+    defineInstanceProperty(this, "getAgentEditContentsByRequestId", async (requestId) => {
+      const message = {
         type: Dt.getAgentEditContentsByRequestId,
-        data: { requestId: t },
+        data: { requestId: requestId },
       }
-      return (await this._asyncMsgSender.sendToSidecar(e, 3e4)).data
+      return (await this._asyncMsgSender.sendToSidecar(message, 3e4)).data
     })
-    w(this, "triggerInitialOrientation", () => {
+    defineInstanceProperty(this, "triggerInitialOrientation", () => {
       this._host.postMessage({ type: I.triggerInitialOrientation })
     })
-    w(this, "getWorkspaceInfo", async () => {
+    defineInstanceProperty(this, "getWorkspaceInfo", async () => {
       try {
         return (
           await this._asyncMsgSender.send(
@@ -830,23 +830,23 @@ class Fh {
             5e3,
           )
         ).data
-      } catch (t) {
-        return console.error("Error getting workspace info:", t), {}
+      } catch (error) {
+        return console.error("Error getting workspace info:", error), {}
       }
     })
-    w(this, "getRemoteAgentStatus", async () => {
+    defineInstanceProperty(this, "getRemoteAgentStatus", async () => {
       try {
         return (
           await this._asyncMsgSender.send({ type: I.getRemoteAgentStatus }, 5e3)
         ).data
-      } catch (t) {
+      } catch (error) {
         return (
-          console.error("Error getting remote agent status:", t),
+          console.error("Error getting remote agent status:", error),
           { isRemoteAgentWindow: !1 }
         )
       }
     })
-    w(
+    defineInstanceProperty(
       this,
       "checkAgentAutoModeApproval",
       async () =>
@@ -857,13 +857,13 @@ class Fh {
           )
         ).data,
     )
-    w(this, "setAgentAutoModeApproved", async (t) => {
+    defineInstanceProperty(this, "setAgentAutoModeApproved", async (approved) => {
       await this._asyncMsgSender.send(
-        { type: I.setAgentAutoModeApproved, data: t },
+        { type: I.setAgentAutoModeApproved, data: approved },
         5e3,
       )
     })
-    w(
+    defineInstanceProperty(
       this,
       "checkHasEverUsedAgent",
       async () =>
@@ -874,124 +874,124 @@ class Fh {
           )
         ).data,
     )
-    w(this, "setHasEverUsedAgent", async (t) => {
+    defineInstanceProperty(this, "setHasEverUsedAgent", async (hasUsed) => {
       await this._asyncMsgSender.sendToSidecar(
-        { type: Dt.setHasEverUsedAgent, data: t },
+        { type: Dt.setHasEverUsedAgent, data: hasUsed },
         5e3,
       )
     })
-    w(this, "getChatRequestIdeState", async () => {
-      const t = { type: I.getChatRequestIdeStateRequest }
-      return (await this._asyncMsgSender.send(t, 3e4)).data
+    defineInstanceProperty(this, "getChatRequestIdeState", async () => {
+      const message = { type: I.getChatRequestIdeStateRequest }
+      return (await this._asyncMsgSender.send(message, 3e4)).data
     })
-    w(this, "reportError", (t) => {
-      this._host.postMessage({ type: I.reportError, data: t })
+    defineInstanceProperty(this, "reportError", (error) => {
+      this._host.postMessage({ type: I.reportError, data: error })
     })
-    ;(this._host = t), (this._asyncMsgSender = e), (this._flags = n)
+    ;(this._host = host), (this._asyncMsgSender = asyncMsgSender), (this._flags = flags)
   }
   async *generateCommitMessage() {
-    const t = { type: I.generateCommitMessage },
-      e = this._asyncMsgSender.stream(t, 3e4, 6e4)
-    yield* lr(e)
+    const message = { type: I.generateCommitMessage },
+      stream = this._asyncMsgSender.stream(message, 3e4, 6e4)
+    yield* lr(stream)
   }
-  async *sendInstructionMessage(t, e) {
-    const n = {
-        instruction: t.request_message ?? "",
-        selectedCodeDetails: e,
-        requestId: t.request_id,
+  async *sendInstructionMessage(request, selectedCodeDetails) {
+    const data = {
+        instruction: request.request_message ?? "",
+        selectedCodeDetails: selectedCodeDetails,
+        requestId: request.request_id,
       },
-      r = { type: I.chatInstructionMessage, data: n },
-      s = this._asyncMsgSender.stream(r, 3e4, 6e4)
-    yield* (async function* (o) {
-      let a
+      message = { type: I.chatInstructionMessage, data: data },
+      stream = this._asyncMsgSender.stream(message, 3e4, 6e4)
+    yield* (async function* (responseStream) {
+      let requestId
       try {
-        for await (const l of o)
-          (a = l.data.requestId),
+        for await (const response of responseStream)
+          (requestId = response.data.requestId),
             yield {
-              request_id: a,
-              response_text: l.data.text,
+              request_id: requestId,
+              response_text: response.data.text,
               seen_state: Ft.unseen,
               status: Ct.sent,
             }
-        yield { request_id: a, seen_state: Ft.unseen, status: Ct.success }
+        yield { request_id: requestId, seen_state: Ft.unseen, status: Ct.success }
       } catch {
-        yield { request_id: a, seen_state: Ft.unseen, status: Ct.failed }
+        yield { request_id: requestId, seen_state: Ft.unseen, status: Ct.failed }
       }
-    })(s)
+    })(stream)
   }
-  async openGuidelines(t) {
-    this._host.postMessage({ type: I.openGuidelines, data: t })
+  async openGuidelines(section) {
+    this._host.postMessage({ type: I.openGuidelines, data: section })
   }
-  async *getExistingChatStream(t, e) {
-    if (!t.request_id) return
-    const n = e == null ? void 0 : e.flags.enablePreferenceCollection,
-      r = n ? 1e9 : 6e4,
-      s = n ? 1e9 : 3e5,
-      o = { type: I.chatGetStreamRequest, data: { requestId: t.request_id } },
-      a = this._asyncMsgSender.stream(o, r, s)
-    yield* lr(a, this.reportError)
+  async *getExistingChatStream(request, options) {
+    if (!request.request_id) return
+    const enablePreferenceCollection = options == null ? void 0 : options.flags.enablePreferenceCollection,
+      requestTimeout = enablePreferenceCollection ? 1e9 : 6e4,
+      streamTimeout = enablePreferenceCollection ? 1e9 : 3e5,
+      message = { type: I.chatGetStreamRequest, data: { requestId: request.request_id } },
+      stream = this._asyncMsgSender.stream(message, requestTimeout, streamTimeout)
+    yield* lr(stream, this.reportError)
   }
-  async *startChatStream(t, e) {
-    const n = e == null ? void 0 : e.flags.enablePreferenceCollection,
-      r = n ? 1e9 : 6e4,
-      s = n ? 1e9 : 3e5,
-      o = { type: I.chatUserMessage, data: t },
-      a = this._asyncMsgSender.stream(o, r, s)
-    yield* lr(a, this.reportError)
+  async *startChatStream(request, options) {
+    const enablePreferenceCollection = options == null ? void 0 : options.flags.enablePreferenceCollection,
+      requestTimeout = enablePreferenceCollection ? 1e9 : 6e4,
+      streamTimeout = enablePreferenceCollection ? 1e9 : 3e5,
+      message = { type: I.chatUserMessage, data: request },
+      stream = this._asyncMsgSender.stream(message, requestTimeout, streamTimeout)
+    yield* lr(stream, this.reportError)
   }
-  async checkToolExists(t) {
+  async checkToolExists(toolName) {
     return (
       await this._asyncMsgSender.send(
-        { type: I.checkToolExists, toolName: t },
+        { type: I.checkToolExists, toolName: toolName },
         0,
       )
     ).exists
   }
-  async saveImage(t, e) {
-    const n = qa(await gi(t)),
-      r = e ?? `${await Ha(await yi(n))}.${t.name.split(".").at(-1)}`
+  async saveImage(file, filename) {
+    const base64Data = qa(await gi(file)),
+      finalFilename = filename ?? `${await Ha(await yi(base64Data))}.${file.name.split(".").at(-1)}`
     return (
       await this._asyncMsgSender.send(
-        { type: I.chatSaveImageRequest, data: { filename: r, data: n } },
+        { type: I.chatSaveImageRequest, data: { filename: finalFilename, data: base64Data } },
         1e4,
       )
     ).data
   }
-  async loadImage(t) {
-    const e = await this._asyncMsgSender.send(
-        { type: I.chatLoadImageRequest, data: t },
+  async loadImage(filename) {
+    const response = await this._asyncMsgSender.send(
+        { type: I.chatLoadImageRequest, data: filename },
         1e4,
       ),
-      n = e.data ? await yi(e.data) : void 0
-    if (!n) return
-    let r = "application/octet-stream"
-    const s = t.split(".").at(-1)
-    s === "png"
-      ? (r = "image/png")
-      : (s !== "jpg" && s !== "jpeg") || (r = "image/jpeg")
-    const o = new File([n], t, { type: r })
-    return await gi(o)
+      buffer = response.data ? await yi(response.data) : void 0
+    if (!buffer) return
+    let mimeType = "application/octet-stream"
+    const extension = filename.split(".").at(-1)
+    extension === "png"
+      ? (mimeType = "image/png")
+      : (extension !== "jpg" && extension !== "jpeg") || (mimeType = "image/jpeg")
+    const file = new File([buffer], filename, { type: mimeType })
+    return await gi(file)
   }
-  async deleteImage(t) {
+  async deleteImage(filename) {
     await this._asyncMsgSender.send(
-      { type: I.chatDeleteImageRequest, data: t },
+      { type: I.chatDeleteImageRequest, data: filename },
       1e4,
     )
   }
-  async *startChatStreamWithRetry(t, e, n) {
-    const r = new ul(
-      t,
-      e,
+  async *startChatStreamWithRetry(requestId, request, options) {
+    const retryHandler = new ul(
+      requestId,
+      request,
       (s, o) => this.startChatStream(s, o),
-      (n == null ? void 0 : n.maxRetries) ?? 5,
+      (options == null ? void 0 : options.maxRetries) ?? 5,
       4e3,
-      n == null ? void 0 : n.flags,
+      options == null ? void 0 : options.flags,
     )
-    this._activeRetryStreams.set(t, r)
+    this._activeRetryStreams.set(requestId, retryHandler)
     try {
-      yield* r.getStream()
+      yield* retryHandler.getStream()
     } finally {
-      this._activeRetryStreams.delete(t)
+      this._activeRetryStreams.delete(requestId)
     }
   }
 }
@@ -1042,53 +1042,53 @@ function bl(i) {
 const zh = 15,
   Bh = 1e3,
   vl = 25e4
-class Vh {
+class FeatureConfiguration {
   constructor(t) {
-    w(this, "_enableEditableHistory", !1)
-    w(this, "_enablePreferenceCollection", !1)
-    w(this, "_enableRetrievalDataCollection", !1)
-    w(this, "_enableDebugFeatures", !1)
-    w(this, "_enableRichTextHistory", !1)
-    w(this, "_modelDisplayNameToId", {})
-    w(this, "_fullFeatured", !0)
-    w(this, "_enableExternalSourcesInChat", !1)
-    w(this, "_smallSyncThreshold", 15)
-    w(this, "_bigSyncThreshold", 1e3)
-    w(this, "_enableSmartPaste", !1)
-    w(this, "_enableDirectApply", !1)
-    w(this, "_summaryTitles", !1)
-    w(this, "_suggestedEditsAvailable", !1)
-    w(this, "_enableShareService", !1)
-    w(this, "_maxTrackableFileCount", vl)
-    w(this, "_enableDesignSystemRichTextEditor", !1)
-    w(this, "_enableSources", !1)
-    w(this, "_enableChatMermaidDiagrams", !1)
-    w(this, "_smartPastePrecomputeMode", Wa.visibleHover)
-    w(this, "_useNewThreadsMenu", !1)
-    w(this, "_enableChatMermaidDiagramsMinVersion", !1)
-    w(this, "_idleNewSessionNotificationTimeoutMs")
-    w(this, "_idleNewSessionMessageTimeoutMs")
-    w(this, "_enableChatMultimodal", !1)
-    w(this, "_enableAgentMode", !1)
-    w(this, "_enableRichCheckpointInfo", !1)
-    w(this, "_agentMemoriesFilePathName")
-    w(this, "_userTier", "unknown")
-    w(this, "_eloModelConfiguration", {
+    defineInstanceProperty(this, "_enableEditableHistory", !1)
+    defineInstanceProperty(this, "_enablePreferenceCollection", !1)
+    defineInstanceProperty(this, "_enableRetrievalDataCollection", !1)
+    defineInstanceProperty(this, "_enableDebugFeatures", !1)
+    defineInstanceProperty(this, "_enableRichTextHistory", !1)
+    defineInstanceProperty(this, "_modelDisplayNameToId", {})
+    defineInstanceProperty(this, "_fullFeatured", !0)
+    defineInstanceProperty(this, "_enableExternalSourcesInChat", !1)
+    defineInstanceProperty(this, "_smallSyncThreshold", 15)
+    defineInstanceProperty(this, "_bigSyncThreshold", 1e3)
+    defineInstanceProperty(this, "_enableSmartPaste", !1)
+    defineInstanceProperty(this, "_enableDirectApply", !1)
+    defineInstanceProperty(this, "_summaryTitles", !1)
+    defineInstanceProperty(this, "_suggestedEditsAvailable", !1)
+    defineInstanceProperty(this, "_enableShareService", !1)
+    defineInstanceProperty(this, "_maxTrackableFileCount", vl)
+    defineInstanceProperty(this, "_enableDesignSystemRichTextEditor", !1)
+    defineInstanceProperty(this, "_enableSources", !1)
+    defineInstanceProperty(this, "_enableChatMermaidDiagrams", !1)
+    defineInstanceProperty(this, "_smartPastePrecomputeMode", Wa.visibleHover)
+    defineInstanceProperty(this, "_useNewThreadsMenu", !1)
+    defineInstanceProperty(this, "_enableChatMermaidDiagramsMinVersion", !1)
+    defineInstanceProperty(this, "_idleNewSessionNotificationTimeoutMs")
+    defineInstanceProperty(this, "_idleNewSessionMessageTimeoutMs")
+    defineInstanceProperty(this, "_enableChatMultimodal", !1)
+    defineInstanceProperty(this, "_enableAgentMode", !1)
+    defineInstanceProperty(this, "_enableRichCheckpointInfo", !1)
+    defineInstanceProperty(this, "_agentMemoriesFilePathName")
+    defineInstanceProperty(this, "_userTier", "unknown")
+    defineInstanceProperty(this, "_eloModelConfiguration", {
       highPriorityModels: [],
       regularBattleModels: [],
       highPriorityThreshold: 0.5,
     })
-    w(this, "_truncateChatHistory", !1)
-    w(this, "_enableBackgroundAgents", !1)
-    w(this, "_enableVirtualizedMessageList", !1)
-    w(this, "_customPersonalityPrompts", {})
-    w(this, "_enablePersonalities", !1)
-    w(this, "_memoryClassificationOnFirstToken", !1)
-    w(this, "_isRemoteAgentWindow", !1)
-    w(this, "_remoteAgentId")
-    w(this, "_enableGenerateCommitMessage", !1)
-    w(this, "_subscribers", new Set())
-    w(
+    defineInstanceProperty(this, "_truncateChatHistory", !1)
+    defineInstanceProperty(this, "_enableBackgroundAgents", !1)
+    defineInstanceProperty(this, "_enableVirtualizedMessageList", !1)
+    defineInstanceProperty(this, "_customPersonalityPrompts", {})
+    defineInstanceProperty(this, "_enablePersonalities", !1)
+    defineInstanceProperty(this, "_memoryClassificationOnFirstToken", !1)
+    defineInstanceProperty(this, "_isRemoteAgentWindow", !1)
+    defineInstanceProperty(this, "_remoteAgentId")
+    defineInstanceProperty(this, "_enableGenerateCommitMessage", !1)
+    defineInstanceProperty(this, "_subscribers", new Set())
+    defineInstanceProperty(
       this,
       "subscribe",
       (t) => (
@@ -1099,7 +1099,7 @@ class Vh {
         }
       ),
     )
-    w(this, "update", (t) => {
+    defineInstanceProperty(this, "update", (t) => {
       ;(this._enableEditableHistory =
         t.enableEditableHistory ?? this._enableEditableHistory),
         (this._enablePreferenceCollection =
@@ -1178,13 +1178,13 @@ class Vh {
           t.enableGenerateCommitMessage ?? this._enableGenerateCommitMessage),
         this._subscribers.forEach((e) => e(this))
     })
-    w(
+    defineInstanceProperty(
       this,
       "isModelIdValid",
       (t) =>
         t !== void 0 && Object.values(this._modelDisplayNameToId).includes(t),
     )
-    w(this, "getModelDisplayName", (t) => {
+    defineInstanceProperty(this, "getModelDisplayName", (t) => {
       if (t !== void 0)
         return Object.keys(this._modelDisplayNameToId).find(
           (e) => this._modelDisplayNameToId[e] === t,
@@ -15252,10 +15252,10 @@ const La = Ia(!1, !0),
   })
 class ad {
   constructor(t) {
-    w(this, "_registeredPlugins", ue([]))
-    w(this, "_defaultPlugins")
-    w(this, "_allPlugins")
-    w(this, "_getDefaultPlugins", (t) =>
+    defineInstanceProperty(this, "_registeredPlugins", ue([]))
+    defineInstanceProperty(this, "_defaultPlugins")
+    defineInstanceProperty(this, "_allPlugins")
+    defineInstanceProperty(this, "_getDefaultPlugins", (t) =>
       [
         ed.extend({ addKeyboardShortcuts: () => ({ ...t.keyboardShortcuts }) }),
         Yc,
@@ -15264,7 +15264,7 @@ class ad {
         od.configure({ depth: 100, newGroupDelay: 750 }),
       ].map((e) => ({ tipTapExtension: e })),
     )
-    w(
+    defineInstanceProperty(
       this,
       "registerPlugin",
       (t) => (
@@ -15274,7 +15274,7 @@ class ad {
         }
       ),
     )
-    w(this, "onPluginsChanged", (t) => this._allPlugins.subscribe(t))
+    defineInstanceProperty(this, "onPluginsChanged", (t) => this._allPlugins.subscribe(t))
     ;(this._opts = t),
       (this._defaultPlugins = se(this._opts, this._getDefaultPlugins)),
       (this._allPlugins = se(
@@ -15306,56 +15306,56 @@ function Ys(i) {
 }
 class ld {
   constructor(t) {
-    w(this, "_setupFns", [])
-    w(this, "_editor")
-    w(this, "registerEditor", (t) => {
+    defineInstanceProperty(this, "_setupFns", [])
+    defineInstanceProperty(this, "_editor")
+    defineInstanceProperty(this, "registerEditor", (t) => {
       ;(this._editor = t), this._runSetupFns()
     })
-    w(this, "unregisterEditor", () => {
+    defineInstanceProperty(this, "unregisterEditor", () => {
       this._editor = void 0
     })
-    w(this, "can", () => {
+    defineInstanceProperty(this, "can", () => {
       var t
       return (t = this._editor) == null ? void 0 : t.can()
     })
-    w(this, "chain", () => {
+    defineInstanceProperty(this, "chain", () => {
       var t
       return (t = this._editor) == null ? void 0 : t.chain()
     })
-    w(this, "_queueOrRun", (t) => {
+    defineInstanceProperty(this, "_queueOrRun", (t) => {
       this._editor ? t() : this._setupFns.push(t)
     })
-    w(this, "_runSetupFns", () => {
+    defineInstanceProperty(this, "_runSetupFns", () => {
       this._setupFns.forEach((t) => {
         t()
       }),
         (this._setupFns = [])
     })
-    w(this, "hide", () => this._queueOrRun(this._hide))
-    w(this, "show", () => this._queueOrRun(this._show))
-    w(this, "focus", () => this._queueOrRun(this._focus))
-    w(this, "requestFocus", () => this._queueOrRun(this._requestFocus))
-    w(this, "blur", () => this._queueOrRun(this._blur))
-    w(this, "scrollToCursor", () => this._queueOrRun(this._scrollToCursor))
-    w(this, "setEditable", (t) => this._queueOrRun(() => this._setEditable(t)))
-    w(this, "clearContent", () => this._queueOrRun(this._clearContent))
-    w(this, "setContent", (t, e) =>
+    defineInstanceProperty(this, "hide", () => this._queueOrRun(this._hide))
+    defineInstanceProperty(this, "show", () => this._queueOrRun(this._show))
+    defineInstanceProperty(this, "focus", () => this._queueOrRun(this._focus))
+    defineInstanceProperty(this, "requestFocus", () => this._queueOrRun(this._requestFocus))
+    defineInstanceProperty(this, "blur", () => this._queueOrRun(this._blur))
+    defineInstanceProperty(this, "scrollToCursor", () => this._queueOrRun(this._scrollToCursor))
+    defineInstanceProperty(this, "setEditable", (t) => this._queueOrRun(() => this._setEditable(t)))
+    defineInstanceProperty(this, "clearContent", () => this._queueOrRun(this._clearContent))
+    defineInstanceProperty(this, "setContent", (t, e) =>
       this._queueOrRun(() => this._setContent(t, e)),
     )
-    w(this, "insertContent", (t) =>
+    defineInstanceProperty(this, "insertContent", (t) =>
       this._queueOrRun(() => this._insertContent(t)),
     )
-    w(this, "_hide", () => {
+    defineInstanceProperty(this, "_hide", () => {
       this._editor && (this._editor.view.dom.style.display = "none")
     })
-    w(this, "_show", () => {
+    defineInstanceProperty(this, "_show", () => {
       this._editor && this._editor.view.dom.style.removeProperty("display")
     })
-    w(this, "_focus", () => {
+    defineInstanceProperty(this, "_focus", () => {
       var t
       return (t = this._editor) == null ? void 0 : t.commands.focus()
     })
-    w(this, "_requestFocus", async () => {
+    defineInstanceProperty(this, "_requestFocus", async () => {
       await nl(),
         this._editor &&
           ((document.activeElement &&
@@ -15363,29 +15363,29 @@ class ld {
             !this._editor.view.dom.contains(document.activeElement)) ||
             this._editor.commands.focus())
     })
-    w(this, "_blur", () => {
+    defineInstanceProperty(this, "_blur", () => {
       var t
       return (t = this._editor) == null ? void 0 : t.commands.blur()
     })
-    w(this, "_scrollToCursor", () => {
+    defineInstanceProperty(this, "_scrollToCursor", () => {
       var t
       return (t = this._editor) == null ? void 0 : t.commands.scrollIntoView()
     })
-    w(this, "_setEditable", (t) => {
+    defineInstanceProperty(this, "_setEditable", (t) => {
       var e, n
       ;(e = this._editor) == null || e.setEditable(t),
         t &&
           ((n = this._editor) == null ||
             n.commands.setTextSelection(this._editor.state.doc.content.size))
     })
-    w(this, "_clearContent", () => {
+    defineInstanceProperty(this, "_clearContent", () => {
       var e
       const t = ut(this._opts.content)
       t &&
         t.rawText !== "" &&
         ((e = this._editor) == null || e.commands.clearContent(!0))
     })
-    w(this, "_setContent", (t, e) => {
+    defineInstanceProperty(this, "_setContent", (t, e) => {
       var r
       const n = ut(this._opts.content)
       t !== (n == null ? void 0 : n.rawText) &&
@@ -15401,7 +15401,7 @@ class ld {
               .run()
           : this._clearContent())
     })
-    w(this, "_insertContent", (t) => {
+    defineInstanceProperty(this, "_insertContent", (t) => {
       var n
       const e = Ys(t)
       e !== void 0 &&
@@ -15419,11 +15419,11 @@ class ld {
 }
 class cd {
   constructor() {
-    w(this, "_isFocused", ue(!1))
-    w(this, "_isEditable", ue(!1))
-    w(this, "_content", ue(void 0))
-    w(this, "_disposers", [])
-    w(this, "registerEditor", (t) => {
+    defineInstanceProperty(this, "_isFocused", ue(!1))
+    defineInstanceProperty(this, "_isEditable", ue(!1))
+    defineInstanceProperty(this, "_content", ue(void 0))
+    defineInstanceProperty(this, "_disposers", [])
+    defineInstanceProperty(this, "registerEditor", (t) => {
       this._isFocused.set(t.isFocused),
         this._isEditable.set(t.isEditable),
         this._content.set({
@@ -15450,25 +15450,25 @@ class cd {
           () => t.off("update", s),
         )
     })
-    w(this, "unregisterEditor", () => {
+    defineInstanceProperty(this, "unregisterEditor", () => {
       this._isFocused.set(!1),
         this._isEditable.set(!1),
         this._disposers.forEach((t) => t()),
         (this._disposers = [])
     })
-    w(this, "onFocus", (t) =>
+    defineInstanceProperty(this, "onFocus", (t) =>
       this.onFocusChanged((e) => {
         e && t()
       }),
     )
-    w(this, "onBlur", (t) =>
+    defineInstanceProperty(this, "onBlur", (t) =>
       this.onFocusChanged((e) => {
         !e && t()
       }),
     )
-    w(this, "onFocusChanged", (t) => this._isFocused.subscribe(t))
-    w(this, "onEditableChanged", (t) => this._isEditable.subscribe(t))
-    w(this, "onContentChanged", (t) =>
+    defineInstanceProperty(this, "onFocusChanged", (t) => this._isFocused.subscribe(t))
+    defineInstanceProperty(this, "onEditableChanged", (t) => this._isEditable.subscribe(t))
+    defineInstanceProperty(this, "onContentChanged", (t) =>
       this._content.subscribe((e) => e && t(e)),
     )
   }
@@ -15484,18 +15484,18 @@ class cd {
 }
 const Me = class Me {
   constructor() {
-    w(this, "_opts", ue({}))
-    w(this, "_editor")
-    w(this, "_rootNode")
-    w(this, "pluginManager", new ad(this._opts))
-    w(this, "eventManager", new cd())
-    w(this, "commandManager", new ld({ content: this.eventManager.content }))
-    w(
+    defineInstanceProperty(this, "_opts", ue({}))
+    defineInstanceProperty(this, "_editor")
+    defineInstanceProperty(this, "_rootNode")
+    defineInstanceProperty(this, "pluginManager", new ad(this._opts))
+    defineInstanceProperty(this, "eventManager", new cd())
+    defineInstanceProperty(this, "commandManager", new ld({ content: this.eventManager.content }))
+    defineInstanceProperty(
       this,
       "instanceId",
       `augment-rich-text-editor-${Me._getNextInstanceIdx()}`,
     )
-    w(
+    defineInstanceProperty(
       this,
       "registerRoot",
       (t, e) => (
@@ -15513,20 +15513,20 @@ const Me = class Me {
         }
       ),
     )
-    w(this, "_registerEditorWithManagers", (t) => {
+    defineInstanceProperty(this, "_registerEditorWithManagers", (t) => {
       this.eventManager.registerEditor(t), this.commandManager.registerEditor(t)
     })
-    w(this, "_unregisterEditorFromManagers", () => {
+    defineInstanceProperty(this, "_unregisterEditorFromManagers", () => {
       this.commandManager.unregisterEditor(),
         this.eventManager.unregisterEditor()
     })
-    w(this, "_reinitializeEditor", () => {
+    defineInstanceProperty(this, "_reinitializeEditor", () => {
       const t = ut(this.eventManager.content)
       this._destroyEditor(),
         this._initializeEditor(),
         t !== void 0 && this.commandManager.setContent(t.richTextJsonRepr)
     })
-    w(this, "_initializeEditor", () => {
+    defineInstanceProperty(this, "_initializeEditor", () => {
       if (this._rootNode === void 0 || this._editor !== void 0) return
       const t = ut(this._opts),
         e = {
@@ -15571,7 +15571,7 @@ const Me = class Me {
         this._editor
       )
     })
-    w(this, "_attachCopyHandler", () => {
+    defineInstanceProperty(this, "_attachCopyHandler", () => {
       var t, e
       return (
         (t = this._rootNode) == null ||
@@ -15587,12 +15587,12 @@ const Me = class Me {
         }
       )
     })
-    w(this, "_copyHandler", (t) => {
+    defineInstanceProperty(this, "_copyHandler", (t) => {
       var e
       ;(e = t.clipboardData) == null ||
         e.setData("application/x-augment/rich-text", "true")
     })
-    w(this, "_isEventFromRichTextEditor", (t) => {
+    defineInstanceProperty(this, "_isEventFromRichTextEditor", (t) => {
       var e
       return (
         ((e = t.clipboardData) == null
@@ -15600,7 +15600,7 @@ const Me = class Me {
           : e.getData("application/x-augment/rich-text")) === "true"
       )
     })
-    w(this, "_destroyEditor", () => {
+    defineInstanceProperty(this, "_destroyEditor", () => {
       var t, e
       this._unregisterEditorFromManagers(),
         (t = this._editor) == null || t.view.dom.remove(),
@@ -15614,9 +15614,9 @@ const Me = class Me {
     return (t = this._editor) == null ? void 0 : t.view.dom
   }
 }
-w(Me, "CONTEXT_KEY", "augment-rich-text-editor"),
-  w(Me, "INSTANCE_IDX", 0),
-  w(Me, "_getNextInstanceIdx", () => Me.INSTANCE_IDX++)
+defineInstanceProperty(Me, "CONTEXT_KEY", "augment-rich-text-editor"),
+  defineInstanceProperty(Me, "INSTANCE_IDX", 0),
+  defineInstanceProperty(Me, "_getNextInstanceIdx", () => Me.INSTANCE_IDX++)
 let qt = Me
 function Kh() {
   const i = Xt(qt.CONTEXT_KEY)
@@ -16287,18 +16287,18 @@ function so(i, t, e, n) {
 }
 class Qe {
   constructor(t) {
-    w(this, "_disposers", [])
-    w(this, "_editor")
-    w(this, "_tooltipData", ue(void 0))
-    w(this, "onCreate", (t) => {
+    defineInstanceProperty(this, "_disposers", [])
+    defineInstanceProperty(this, "_editor")
+    defineInstanceProperty(this, "_tooltipData", ue(void 0))
+    defineInstanceProperty(this, "onCreate", (t) => {
       this._editor = t
     })
-    w(this, "onDispose", () => {
+    defineInstanceProperty(this, "onDispose", () => {
       ;(this._editor = void 0),
         this._disposers.forEach((t) => t()),
         (this._disposers = [])
     })
-    w(this, "createMentionChip", ({ options: t, node: e }) => {
+    defineInstanceProperty(this, "createMentionChip", ({ options: t, node: e }) => {
       var s, o
       if (e.type.name !== this._mentionPluginId)
         throw new Error("Expected a mention node")
@@ -16317,7 +16317,7 @@ class Qe {
         n
       )
     })
-    w(this, "hideTooltip", () => {
+    defineInstanceProperty(this, "hideTooltip", () => {
       this._tooltipData.set(void 0)
     })
     this._mentionPluginId = t
@@ -16361,50 +16361,50 @@ class Qe {
     so(t, e, a)
   }
 }
-w(Qe, "CHIP_CLASS_NAME", "c-mention-chip"),
-  w(Qe, "CHIP_DATA_ATTR_KEY", "data-augment-mention-chip-tooltip")
+defineInstanceProperty(Qe, "CHIP_CLASS_NAME", "c-mention-chip"),
+  defineInstanceProperty(Qe, "CHIP_DATA_ATTR_KEY", "data-augment-mention-chip-tooltip")
 class xd {
   constructor(t = {}) {
-    w(this, "_menuData", ue(void 0))
-    w(this, "_mentionables", ue([]))
-    w(
+    defineInstanceProperty(this, "_menuData", ue(void 0))
+    defineInstanceProperty(this, "_mentionables", ue([]))
+    defineInstanceProperty(
       this,
       "query",
       se(this._menuData, (t) =>
         t == null ? void 0 : t.tiptapExtensionProps.query,
       ),
     )
-    w(this, "activeIdx", se([this._mentionables, this._menuData], Sd))
-    w(this, "activeItem", se([this._mentionables, this.activeIdx], Md))
-    w(
+    defineInstanceProperty(this, "activeIdx", se([this._mentionables, this._menuData], Sd))
+    defineInstanceProperty(this, "activeItem", se([this._mentionables, this.activeIdx], Md))
+    defineInstanceProperty(
       this,
       "referenceClientRect",
       se(this._menuData, (t) => (t == null ? void 0 : t.referenceClientRect)),
     )
-    w(
+    defineInstanceProperty(
       this,
       "tiptapExtensionProps",
       se(this._menuData, (t) => (t == null ? void 0 : t.tiptapExtensionProps)),
     )
-    w(
+    defineInstanceProperty(
       this,
       "isMenuActive",
       se(this._menuData, (t) => t !== void 0),
     )
-    w(this, "mentionables", this._mentionables)
-    w(this, "updateOptions", (t) => {
+    defineInstanceProperty(this, "mentionables", this._mentionables)
+    defineInstanceProperty(this, "updateOptions", (t) => {
       this._opts = { ...this._opts, ...t }
     })
-    w(this, "updateMentionables", (t) => {
+    defineInstanceProperty(this, "updateMentionables", (t) => {
       this._mentionables.set(t)
     })
-    w(this, "replaceQueryWithMentionNode", (t) => {
+    defineInstanceProperty(this, "replaceQueryWithMentionNode", (t) => {
       var r
       const e = ut(this.isMenuActive),
         n = (r = ut(this.tiptapExtensionProps)) == null ? void 0 : r.command
       return !(!e || !n) && (n(t), !0)
     })
-    w(this, "selectItem", (t) => {
+    defineInstanceProperty(this, "selectItem", (t) => {
       var n, r
       return (
         !(
@@ -16414,18 +16414,18 @@ class xd {
         ((r = (n = this._opts).onSelectMentionable) == null || r.call(n, t), !0)
       )
     })
-    w(this, "_incrementActiveIdx", () => {
+    defineInstanceProperty(this, "_incrementActiveIdx", () => {
       const t = ut(this.activeIdx) ?? 0
       this._setActiveIdx(t + 1)
     })
-    w(this, "_decrementActiveIdx", () => {
+    defineInstanceProperty(this, "_decrementActiveIdx", () => {
       const t = ut(this.activeIdx) ?? 0
       this._setActiveIdx(t - 1)
     })
-    w(this, "_setActiveIdx", (t) => {
+    defineInstanceProperty(this, "_setActiveIdx", (t) => {
       this._menuData.update((e) => e && { ...e, activeIdx: t })
     })
-    w(this, "onUpdateSuggestion", (t) => {
+    defineInstanceProperty(this, "onUpdateSuggestion", (t) => {
       var n
       const e = (n = t.clientRect) == null ? void 0 : n.call(t)
       e &&
@@ -16435,17 +16435,17 @@ class xd {
           activeIdx: (r == null ? void 0 : r.activeIdx) ?? 0,
         }))
     })
-    w(this, "exitMenu", () => {
+    defineInstanceProperty(this, "exitMenu", () => {
       this._menuData.set(void 0), this._mentionables.set([])
     })
-    w(
+    defineInstanceProperty(
       this,
       "_handleKeyIfActive",
       (t) => () => !!ut(this.isMenuActive) && (t(), !0),
     )
-    w(this, "onArrowUp", this._handleKeyIfActive(this._decrementActiveIdx))
-    w(this, "onArrowDown", this._handleKeyIfActive(this._incrementActiveIdx))
-    w(
+    defineInstanceProperty(this, "onArrowUp", this._handleKeyIfActive(this._decrementActiveIdx))
+    defineInstanceProperty(this, "onArrowDown", this._handleKeyIfActive(this._incrementActiveIdx))
+    defineInstanceProperty(
       this,
       "selectActiveItem",
       this._handleKeyIfActive(() => {
@@ -16465,12 +16465,12 @@ function Sd([i, t]) {
 }
 const ee = class ee {
   constructor(t) {
-    w(this, "_triggerCharacter")
-    w(this, "_editor")
-    w(this, "_mention")
-    w(this, "_chipController")
-    w(this, "_mentionableMenuContext", new xd())
-    w(
+    defineInstanceProperty(this, "_triggerCharacter")
+    defineInstanceProperty(this, "_editor")
+    defineInstanceProperty(this, "_mention")
+    defineInstanceProperty(this, "_chipController")
+    defineInstanceProperty(this, "_mentionableMenuContext", new xd())
+    defineInstanceProperty(
       this,
       "insertMentionNode",
       (t) =>
@@ -16482,7 +16482,7 @@ const ee = class ee {
           }),
         !0),
     )
-    w(this, "_onCreate", (t) => {
+    defineInstanceProperty(this, "_onCreate", (t) => {
       var n, r
       const e = ro(this._mentionPluginId, t).map((s) => s.attrs.data)
       ;(r = (n = this._options).onMentionItemsUpdated) == null ||
@@ -16490,7 +16490,7 @@ const ee = class ee {
         (this._editor = t),
         this._chipController.onCreate(t)
     })
-    w(this, "_onDestroy", () => {
+    defineInstanceProperty(this, "_onDestroy", () => {
       var t, e
       if (this._editor) {
         const n = ro(this._mentionPluginId, this._editor).map(
@@ -16504,7 +16504,7 @@ const ee = class ee {
       this._chipController.hideTooltip(),
         this._mentionableMenuContext.exitMenu()
     })
-    w(this, "_onProseMirrorUpdate", (t, e) => {
+    defineInstanceProperty(this, "_onProseMirrorUpdate", (t, e) => {
       var a, l
       if (t === e) return
       const n = (c) => c.attrs.data,
@@ -16645,10 +16645,10 @@ const ee = class ee {
     return this._mention
   }
 }
-w(ee, "CONTEXT_KEY", "augment-svelte-mention-plugin"),
-  w(ee, "MENTION_LISTENER_PLUGIN_ID_BASE", "{}-listener"),
-  w(ee, "MENTION_PLUGIN_ID_BASE", "augment-prosemirror-mention-{}"),
-  w(ee, "DEFAULT_MENTION_PLUGIN_ID", "mention")
+defineInstanceProperty(ee, "CONTEXT_KEY", "augment-svelte-mention-plugin"),
+  defineInstanceProperty(ee, "MENTION_LISTENER_PLUGIN_ID_BASE", "{}-listener"),
+  defineInstanceProperty(ee, "MENTION_PLUGIN_ID_BASE", "augment-prosemirror-mention-{}"),
+  defineInstanceProperty(ee, "DEFAULT_MENTION_PLUGIN_ID", "mention")
 let Pe = ee
 const kd = (i) => ({ mentionable: 2 & i }),
   oo = (i) => ({ mentionable: i[1].data }),
@@ -18612,18 +18612,18 @@ const dh = Lt.create({
 })
 class hh {
   constructor(t) {
-    w(this, "_placeholderExtension")
-    w(this, "_editor")
-    w(this, "setPlaceholder", (t) => {
+    defineInstanceProperty(this, "_placeholderExtension")
+    defineInstanceProperty(this, "_editor")
+    defineInstanceProperty(this, "setPlaceholder", (t) => {
       var e
       ;(this._placeholderExtension.options.placeholder = t),
         (e = this._editor) == null ||
           e.view.updateState(this._editor.view.state)
     })
-    w(this, "_onUpdate", (t) => {
+    defineInstanceProperty(this, "_onUpdate", (t) => {
       this._editor = t
     })
-    w(this, "_onDestroy", () => {
+    defineInstanceProperty(this, "_onDestroy", () => {
       this._editor = void 0
     })
     const e = this._onUpdate.bind(this),
@@ -18666,13 +18666,13 @@ class su extends Y {
 }
 const Wt = class Wt {
   constructor(t) {
-    w(this, "_tipTapExtension")
-    w(this, "_keydownHandler", () => !1)
-    w(this, "updateOptions", (t) => {
+    defineInstanceProperty(this, "_tipTapExtension")
+    defineInstanceProperty(this, "_keydownHandler", () => !1)
+    defineInstanceProperty(this, "updateOptions", (t) => {
       ;(this._options = { ...this._options, ...t }),
         (this._keydownHandler = Ma(this._options.shortcuts))
     })
-    w(this, "_handleKeyDown", (t, e) => this._keydownHandler(t, e))
+    defineInstanceProperty(this, "_handleKeyDown", (t, e) => this._keydownHandler(t, e))
     ;(this._options = t), this.updateOptions(this._options)
     const e = this._handleKeyDown,
       n = Wt._getNextPluginId(),
@@ -18688,10 +18688,10 @@ const Wt = class Wt {
     return this._tipTapExtension
   }
 }
-w(Wt, "_sequenceId", 0),
-  w(Wt, "KEYBINDINGS_PLUGIN_KEY_BASE", "augment-keybindings-plugin-{}"),
-  w(Wt, "_getSequenceId", () => Wt._sequenceId++),
-  w(Wt, "_getNextPluginId", () => {
+defineInstanceProperty(Wt, "_sequenceId", 0),
+  defineInstanceProperty(Wt, "KEYBINDINGS_PLUGIN_KEY_BASE", "augment-keybindings-plugin-{}"),
+  defineInstanceProperty(Wt, "_getSequenceId", () => Wt._sequenceId++),
+  defineInstanceProperty(Wt, "_getNextPluginId", () => {
     const t = Wt._getSequenceId().toString()
     return Wt.KEYBINDINGS_PLUGIN_KEY_BASE.replace("{}", t)
   })
@@ -18750,8 +18750,8 @@ export {
   Kh as a0,
   Eh as b,
   Cl as c,
-  Vh as d,
-  Fh as e,
+  FeatureConfiguration as d,
+  ExtensionClient as e,
   Bh as f,
   vl as g,
   pl as h,
