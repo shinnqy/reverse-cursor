@@ -249,8 +249,8 @@ import {
   af as vu,
   ag as p1,
   ah as $1,
-  m as h1,
-  C as g1,
+  m as ContextManager,
+  C as ChatManager,
   ai as Yi,
   aj as v1,
   s as w1,
@@ -5035,7 +5035,7 @@ let Jr = class extends SvelteComponent {
       })
   }
 }
-function jm(s) {
+function createProgressBar(s) {
   let e
   return {
     c() {
@@ -5054,9 +5054,9 @@ function jm(s) {
     },
   }
 }
-class Hu extends SvelteComponent {
+class ProgressBar extends SvelteComponent {
   constructor(e) {
-    super(), initComponent(this, e, null, jm, notEqual, {})
+    super(), initComponent(this, e, null, createProgressBar, notEqual, {})
   }
 }
 function xa(s, e, n) {
@@ -5131,7 +5131,7 @@ function Ca(s) {
 function Ma(s) {
   let e, n
   return (
-    (e = new Hu({})),
+    (e = new ProgressBar({})),
     {
       c() {
         w(e.$$.fragment)
@@ -35734,61 +35734,61 @@ class U6 extends SvelteComponent {
       )
   }
 }
-function Al(s) {
-  let e, n
+function createStatusIndicator(props) {
+  let statusComponent, isInitialized
   return (
-    (e = new Mn({
+    (statusComponent = new Mn({
       props: {
-        color: s[3],
+        color: props[3],
         size: 1,
-        $$slots: { icon: [Y6], default: [W6] },
-        $$scope: { ctx: s },
+        $$slots: { icon: [Y6], default: [createStatusTextElement] },
+        $$scope: { ctx: props },
       },
     })),
     {
       c() {
-        w(e.$$.fragment)
+        w(statusComponent.$$.fragment)
       },
       m(t, o) {
-        y(e, t, o), (n = !0)
+        y(statusComponent, t, o), (isInitialized = !0)
       },
       p(t, o) {
         const r = {}
         8 & o && (r.color = t[3]),
           2070 & o && (r.$$scope = { dirty: o, ctx: t }),
-          e.$set(r)
+          statusComponent.$set(r)
       },
       i(t) {
-        n || (d(e.$$.fragment, t), (n = !0))
+        isInitialized || (d(statusComponent.$$.fragment, t), (isInitialized = !0))
       },
       o(t) {
-        m(e.$$.fragment, t), (n = !1)
+        m(statusComponent.$$.fragment, t), (isInitialized = !1)
       },
       d(t) {
-        b(e, t)
+        b(statusComponent, t)
       },
     }
   )
 }
-function W6(s) {
-  let e,
-    n,
-    t = s[1] === cn.inProgress ? ` ${s[2].progress}%` : ""
+function createStatusTextElement(props) {
+  let statusText,
+    progressText,
+    progressPercentage = props[1] === cn.inProgress ? ` ${props[2].progress}%` : ""
   return {
     c() {
-      ;(e = K(s[4])), (n = K(t))
+      ;(statusText = K(props[4])), (progressText = K(progressPercentage))
     },
-    m(o, r) {
-      M(o, e, r), M(o, n, r)
+    m(target, anchor) {
+      M(target, statusText, anchor), M(target, progressText, anchor)
     },
-    p(o, r) {
-      16 & r && ze(e, o[4]),
-        6 & r &&
-          t !== (t = o[1] === cn.inProgress ? ` ${o[2].progress}%` : "") &&
-          ze(n, t)
+    p(newProps, dirtyBits) {
+      16 & dirtyBits && ze(statusText, newProps[4]),
+        6 & dirtyBits &&
+          progressPercentage !== (progressPercentage = newProps[1] === cn.inProgress ? ` ${newProps[2].progress}%` : "") &&
+          ze(progressText, progressPercentage)
     },
-    d(o) {
-      o && (x(e), x(n))
+    d(detaching) {
+      detaching && (x(statusText), x(progressText))
     },
   }
 }
@@ -35906,107 +35906,107 @@ function Y6(s) {
     }
   )
 }
-function X6(s) {
-  let e,
-    n,
-    t,
-    o,
-    r = s[0] && Al(s)
+function createOrientationStatusComponent(props) {
+  let placeholder,
+    isInitialized,
+    hasEventListener,
+    cleanupFunction,
+    statusIndicator = props[0] && createStatusIndicator(props)
   return {
     c() {
-      r && r.c(), (e = he())
+      statusIndicator && statusIndicator.c(), (placeholder = he())
     },
-    m(i, c) {
-      r && r.m(i, c),
-        M(i, e, c),
-        (n = !0),
-        t ||
-          ((o = Oe(window, "message", s[5].onMessageFromExtension)), (t = !0))
+    m(target, dirtyBits) {
+      statusIndicator && statusIndicator.m(target, dirtyBits),
+        M(target, placeholder, dirtyBits),
+        (isInitialized = !0),
+        hasEventListener ||
+          ((cleanupFunction = Oe(window, "message", props[5].onMessageFromExtension)), (hasEventListener = !0))
     },
-    p(i, [c]) {
-      i[0]
-        ? r
-          ? (r.p(i, c), 1 & c && d(r, 1))
-          : ((r = Al(i)), r.c(), d(r, 1), r.m(e.parentNode, e))
-        : r &&
+    p(newProps, [dirtyBits]) {
+      newProps[0]
+        ? statusIndicator
+          ? (statusIndicator.p(newProps, dirtyBits), 1 & dirtyBits && d(statusIndicator, 1))
+          : ((statusIndicator = createStatusIndicator(newProps)), statusIndicator.c(), d(statusIndicator, 1), statusIndicator.m(placeholder.parentNode, placeholder))
+        : statusIndicator &&
           (Y(),
-          m(r, 1, 1, () => {
-            r = null
+          m(statusIndicator, 1, 1, () => {
+            statusIndicator = null
           }),
           X())
     },
     i(i) {
-      n || (d(r), (n = !0))
+      isInitialized || (d(statusIndicator), (isInitialized = !0))
     },
     o(i) {
-      m(r), (n = !1)
+      m(statusIndicator), (isInitialized = !1)
     },
     d(i) {
-      i && x(e), r && r.d(i), (t = !1), o()
+      i && x(placeholder), statusIndicator && statusIndicator.d(i), (hasEventListener = !1), cleanupFunction()
     },
   }
 }
-function K6(s, e, n) {
-  let t, o
-  const r = new MessageBroker(augmentHost),
-    i = Ct({ state: cn.idle })
-  Ge(s, i, (g) => n(2, (o = g)))
-  const c = Jt(i, (g) => g.state)
-  Ge(s, c, (g) => n(1, (t = g)))
-  const a = {
-    handleMessageFromExtension: (g) =>
-      !(!g.data || g.data.type !== st.orientationStatusUpdate) &&
-      (i.set(g.data.data), !0),
+function initOrientationStatus(component, props, setState) {
+  let statusState, statusData
+  const messageBroker = new MessageBroker(augmentHost),
+    statusStore = Ct({ state: cn.idle })
+  Ge(component, statusStore, (data) => setState(2, (statusData = data)))
+  const stateStore = Jt(statusStore, (data) => data.state)
+  Ge(component, stateStore, (state) => setState(1, (statusState = state)))
+  const messageConsumer = {
+    handleMessageFromExtension: (event) =>
+      !(!event.data || event.data.type !== st.orientationStatusUpdate) &&
+      (statusStore.set(event.data.data), !0),
   }
-  let l, u
+  let statusColor, statusText
   Gn(() => {
-    r.registerConsumer(a), augmentHost.postMessage({ type: st.getOrientationStatus })
+    messageBroker.registerConsumer(messageConsumer), augmentHost.postMessage({ type: st.getOrientationStatus })
   })
-  let p = !1
+  let showStatus = !1
   return (
-    (s.$$.update = () => {
-      var g
-      2 & s.$$.dirty &&
-        n(
+    (component.$$.update = () => {
+      var state
+      2 & component.$$.dirty &&
+        setState(
           3,
-          (l =
-            (g = t) === cn.succeeded
+          (statusColor =
+            (state = statusState) === cn.succeeded
               ? "success"
-              : g === cn.failed || g === cn.aborted
+              : state === cn.failed || state === cn.aborted
                 ? "error"
                 : "warning"),
         ),
-        6 & s.$$.dirty &&
-          n(
+        6 & component.$$.dirty &&
+          setState(
             4,
-            (u = (function (h, k) {
-              return h === cn.succeeded
+            (statusText = (function (state, data) {
+              return state === cn.succeeded
                 ? "Orientation complete! Check out `.augment-guidelines` file."
-                : h === cn.failed
-                  ? k.errorMessage
-                    ? `Orientation failed: ${k.errorMessage}`
+                : state === cn.failed
+                  ? data.errorMessage
+                    ? `Orientation failed: ${data.errorMessage}`
                     : "Orientation failed"
-                  : h === cn.aborted
-                    ? k.errorMessage
-                      ? `Orientation aborted: ${k.errorMessage}`
+                  : state === cn.aborted
+                    ? data.errorMessage
+                      ? `Orientation aborted: ${data.errorMessage}`
                       : "Orientation aborted"
                     : "Orienting to codebase and creating .augment-guidelines file ... "
-            })(t, o)),
+            })(statusState, statusData)),
           ),
-        3 & s.$$.dirty &&
-          (p
-            ? (t !== cn.succeeded && t !== cn.failed) ||
+        3 & component.$$.dirty &&
+          (showStatus
+            ? (statusState !== cn.succeeded && statusState !== cn.failed) ||
               setTimeout(() => {
-                n(0, (p = !1))
+                setState(0, (showStatus = !1))
               }, 3e3)
-            : t === cn.inProgress && n(0, (p = !0)))
+            : statusState === cn.inProgress && setState(0, (showStatus = !0)))
     }),
-    [p, t, o, l, u, r, i, c]
+    [showStatus, statusState, statusData, statusColor, statusText, messageBroker, statusStore, stateStore]
   )
 }
-class Z6 extends SvelteComponent {
-  constructor(e) {
-    super(), initComponent(this, e, K6, X6, notEqual, {})
+class FeedbackComponent extends SvelteComponent {
+  constructor(props) {
+    super(), initComponent(this, props, initOrientationStatus, createOrientationStatusComponent, notEqual, {})
   }
 }
 function kl(s) {
@@ -36129,38 +36129,38 @@ class n5 extends SvelteComponent {
     super(), initComponent(this, e, t5, e5, notEqual, { contextModel: 0 })
   }
 }
-function El(s) {
-  let e, n
+function createStatusElement(props) {
+  let component, isInitialized
   return (
-    (e = new Mn({
+    (component = new Mn({
       props: {
-        color: s[2],
+        color: props[2],
         size: 1,
         $$slots: { icon: [i5], default: [o5] },
-        $$scope: { ctx: s },
+        $$scope: { ctx: props },
       },
     })),
     {
       c() {
-        w(e.$$.fragment)
+        w(component.$$.fragment)
       },
-      m(t, o) {
-        y(e, t, o), (n = !0)
+      m(target, anchor) {
+        y(component, target, anchor), (isInitialized = !0)
       },
-      p(t, o) {
-        const r = {}
-        4 & o && (r.color = t[2]),
-          89 & o && (r.$$scope = { dirty: o, ctx: t }),
-          e.$set(r)
+      p(newProps, dirtyBits) {
+        const updatedProps = {}
+        4 & dirtyBits && (updatedProps.color = newProps[2]),
+          89 & dirtyBits && (updatedProps.$$scope = { dirty: dirtyBits, ctx: newProps }),
+          component.$set(updatedProps)
       },
-      i(t) {
-        n || (d(e.$$.fragment, t), (n = !0))
+      i(introduceContext) {
+        isInitialized || (d(component.$$.fragment, introduceContext), (isInitialized = !0))
       },
-      o(t) {
-        m(e.$$.fragment, t), (n = !1)
+      o(outroContext) {
+        m(component.$$.fragment, outroContext), (isInitialized = !1)
       },
-      d(t) {
-        b(e, t)
+      d(detaching) {
+        b(component, detaching)
       },
     }
   )
@@ -36285,155 +36285,155 @@ function i5(s) {
     }
   )
 }
-function a5(s) {
-  let e,
-    n,
-    t = !isNaN(s[4]) && s[1],
-    o = t && El(s)
+function createSyncStatusComponent(props) {
+  let placeholder,
+    isInitialized,
+    shouldShowStatus = !isNaN(props[4]) && props[1],
+    statusElement = shouldShowStatus && createStatusElement(props)
   return {
     c() {
-      o && o.c(), (e = he())
+      statusElement && statusElement.c(), (placeholder = he())
     },
-    m(r, i) {
-      o && o.m(r, i), M(r, e, i), (n = !0)
+    m(target, anchor) {
+      statusElement && statusElement.m(target, anchor), M(target, placeholder, anchor), (isInitialized = !0)
     },
-    p(r, [i]) {
-      18 & i && (t = !isNaN(r[4]) && r[1]),
-        t
-          ? o
-            ? (o.p(r, i), 18 & i && d(o, 1))
-            : ((o = El(r)), o.c(), d(o, 1), o.m(e.parentNode, e))
-          : o &&
+    p(newProps, [dirtyBits]) {
+      18 & dirtyBits && (shouldShowStatus = !isNaN(newProps[4]) && newProps[1]),
+        shouldShowStatus
+          ? statusElement
+            ? (statusElement.p(newProps, dirtyBits), 18 & dirtyBits && d(statusElement, 1))
+            : ((statusElement = createStatusElement(newProps)), statusElement.c(), d(statusElement, 1), statusElement.m(placeholder.parentNode, placeholder))
+          : statusElement &&
             (Y(),
-            m(o, 1, 1, () => {
-              o = null
+            m(statusElement, 1, 1, () => {
+              statusElement = null
             }),
             X())
     },
-    i(r) {
-      n || (d(o), (n = !0))
+    i(introduceContext) {
+      isInitialized || (d(statusElement), (isInitialized = !0))
     },
-    o(r) {
-      m(o), (n = !1)
+    o(outroContext) {
+      m(statusElement), (isInitialized = !1)
     },
-    d(r) {
-      r && x(e), o && o.d(r)
+    d(detaching) {
+      detaching && x(placeholder), statusElement && statusElement.d(detaching)
     },
   }
 }
-function c5(s, e, n) {
-  let t,
-    o,
-    r,
-    i,
-    { progress: c } = e
+function initSyncStatus(state, props, setState) {
+  let progressPercentage,
+    statusMessage,
+    showStatus,
+    statusType,
+    { progress } = props
   return (
-    (s.$$set = (a) => {
-      "progress" in a && n(0, (c = a.progress))
+    (state.$$set = (newProps) => {
+      "progress" in newProps && setState(0, (progress = newProps.progress))
     }),
-    (s.$$.update = () => {
-      var a
-      1 & s.$$.dirty &&
-        n(
+    (state.$$.update = () => {
+      var progressObj
+      1 & state.$$.dirty &&
+        setState(
           4,
-          (t =
-            !(a = c) || a.totalFiles <= 0
+          (progressPercentage =
+            !(progressObj = progress) || progressObj.totalFiles <= 0
               ? NaN
-              : a.status === Un.done
+              : progressObj.status === Un.done
                 ? 100
-                : Math.floor((a.syncedCount / a.totalFiles) * 100)),
+                : Math.floor((progressObj.syncedCount / progressObj.totalFiles) * 100)),
         ),
-        1 & s.$$.dirty &&
-          n(
+        1 & state.$$.dirty &&
+          setState(
             2,
-            (i =
-              (c == null ? void 0 : c.status) === Un.done ? "success" : "info"),
+            (statusType =
+              (progress == null ? void 0 : progress.status) === Un.done ? "success" : "info"),
           ),
-        1 & s.$$.dirty &&
-          n(
+        1 & state.$$.dirty &&
+          setState(
             3,
-            (o =
-              (c == null ? void 0 : c.status) === Un.done
+            (statusMessage =
+              (progress == null ? void 0 : progress.status) === Un.done
                 ? "Indexing complete."
                 : "Indexing codebase..."),
           ),
-        3 & s.$$.dirty &&
-          (r
-            ? (c == null ? void 0 : c.status) === Un.done &&
+        3 & state.$$.dirty &&
+          (showStatus
+            ? (progress == null ? void 0 : progress.status) === Un.done &&
               setTimeout(() => {
-                n(1, (r = !1))
+                setState(1, (showStatus = !1))
               }, 3e3)
-            : c &&
-              c.status !== Un.done &&
-              (c.status === Un.longRunning ||
-                c.newlyTrackedFolders.length > 0) &&
-              n(1, (r = !0)))
+            : progress &&
+              progress.status !== Un.done &&
+              (progress.status === Un.longRunning ||
+                progress.newlyTrackedFolders.length > 0) &&
+              setState(1, (showStatus = !0)))
     }),
-    n(1, (r = !1)),
-    [c, r, i, o, t]
+    setState(1, (showStatus = !1)),
+    [progress, showStatus, statusType, statusMessage, progressPercentage]
   )
 }
-class l5 extends SvelteComponent {
-  constructor(e) {
-    super(), initComponent(this, e, c5, a5, notEqual, { progress: 0 })
+class SyncStatusComponent extends SvelteComponent {
+  constructor(props) {
+    super(), initComponent(this, props, initSyncStatus, createSyncStatusComponent, notEqual, { progress: 0 })
   }
 }
-function u5(s) {
-  let e, n, t, o, r, i
+function createMainPanelComponent(props) {
+  let contextComponent, spacer1, syncStatusComponent, spacer2, feedbackComponent, isInitialized
   return (
-    (e = new n5({ props: { contextModel: s[0] } })),
-    (t = new l5({ props: { progress: s[1].syncProgress } })),
-    (r = new Z6({})),
+    (contextComponent = new n5({ props: { contextModel: props[0] } })),
+    (syncStatusComponent = new SyncStatusComponent({ props: { progress: props[1].syncProgress } })),
+    (feedbackComponent = new FeedbackComponent({})),
     {
       c() {
-        w(e.$$.fragment),
-          (n = j()),
-          w(t.$$.fragment),
-          (o = j()),
-          w(r.$$.fragment)
+        w(contextComponent.$$.fragment),
+          (spacer1 = j()),
+          w(syncStatusComponent.$$.fragment),
+          (spacer2 = j()),
+          w(feedbackComponent.$$.fragment)
       },
-      m(c, a) {
-        y(e, c, a), M(c, n, a), y(t, c, a), M(c, o, a), y(r, c, a), (i = !0)
+      m(target, anchor) {
+        y(contextComponent, target, anchor), M(target, spacer1, anchor), y(syncStatusComponent, target, anchor), M(target, spacer2, anchor), y(feedbackComponent, target, anchor), (isInitialized = !0)
       },
-      p(c, [a]) {
-        const l = {}
-        1 & a && (l.contextModel = c[0]), e.$set(l)
-        const u = {}
-        2 & a && (u.progress = c[1].syncProgress), t.$set(u)
+      p(newProps, [dirtyBits]) {
+        const contextProps = {}
+        1 & dirtyBits && (contextProps.contextModel = newProps[0]), contextComponent.$set(contextProps)
+        const syncProps = {}
+        2 & dirtyBits && (syncProps.progress = newProps[1].syncProgress), syncStatusComponent.$set(syncProps)
       },
-      i(c) {
-        i ||
-          (d(e.$$.fragment, c),
-          d(t.$$.fragment, c),
-          d(r.$$.fragment, c),
-          (i = !0))
+      i(introduceContext) {
+        isInitialized ||
+          (d(contextComponent.$$.fragment, introduceContext),
+          d(syncStatusComponent.$$.fragment, introduceContext),
+          d(feedbackComponent.$$.fragment, introduceContext),
+          (isInitialized = !0))
       },
-      o(c) {
-        m(e.$$.fragment, c), m(t.$$.fragment, c), m(r.$$.fragment, c), (i = !1)
+      o(outroContext) {
+        m(contextComponent.$$.fragment, outroContext), m(syncStatusComponent.$$.fragment, outroContext), m(feedbackComponent.$$.fragment, outroContext), (isInitialized = !1)
       },
-      d(c) {
-        c && (x(n), x(o)), b(e, c), b(t, c), b(r, c)
+      d(detaching) {
+        detaching && (x(spacer1), x(spacer2)), b(contextComponent, detaching), b(syncStatusComponent, detaching), b(feedbackComponent, detaching)
       },
     }
   )
 }
-function d5(s, e, n) {
-  let t,
-    o = N,
-    r = () => (o(), (o = mt(i, (c) => n(1, (t = c)))), i)
-  s.$$.on_destroy.push(() => o())
-  let { contextModel: i } = e
+function initMainPanel(component, props, setState) {
+  let syncData,
+    unsubscribe = N,
+    subscribeToContext = () => (unsubscribe(), (unsubscribe = mt(contextModel, (data) => setState(1, (syncData = data)))), contextModel)
+  component.$$.on_destroy.push(() => unsubscribe())
+  let { contextModel: contextModel } = props
   return (
-    r(),
-    (s.$$set = (c) => {
-      "contextModel" in c && r(n(0, (i = c.contextModel)))
+    subscribeToContext(),
+    (component.$$set = (newProps) => {
+      "contextModel" in newProps && subscribeToContext(setState(0, (contextModel = newProps.contextModel)))
     }),
-    [i, t]
+    [contextModel, syncData]
   )
 }
-class f5 extends SvelteComponent {
-  constructor(e) {
-    super(), initComponent(this, e, d5, u5, notEqual, { contextModel: 0 })
+class MainPanelComponent extends SvelteComponent {
+  constructor(props) {
+    super(), initComponent(this, props, initMainPanel, createMainPanelComponent, notEqual, { contextModel: 0 })
   }
 }
 function m5(s) {
@@ -38201,9 +38201,9 @@ function eb(s) {
     }
   )
 }
-function Rl(s) {
+function createActionsArea(s) {
   let e, n, t, o, r
-  e = new f5({ props: { contextModel: s[20] } })
+  e = new MainPanelComponent({ props: { contextModel: s[20] } })
   let i = s[18].enableAgentMode && Pl(s),
     c = s[13] && Fl(s)
   return {
@@ -38408,40 +38408,40 @@ function Fl(s) {
     }
   )
 }
-function ob(s) {
-  let e,
-    n,
-    t = s[16] && Rl(s)
+function createActionsAreaSlot(props) {
+  let containerDiv,
+    isInitialized,
+    actionsAreaComponent = props[16] && createActionsArea(props)
   return {
     c() {
-      ;(e = F("div")),
-        t && t.c(),
-        A(e, "slot", "actions-area"),
-        A(e, "class", "l-chat-actions-area svelte-ei4b37")
+      ;(containerDiv = F("div")),
+        actionsAreaComponent && actionsAreaComponent.c(),
+        A(containerDiv, "slot", "actions-area"),
+        A(containerDiv, "class", "l-chat-actions-area svelte-ei4b37")
     },
-    m(o, r) {
-      M(o, e, r), t && t.m(e, null), (n = !0)
+    m(target, anchor) {
+      M(target, containerDiv, anchor), actionsAreaComponent && actionsAreaComponent.m(containerDiv, null), (isInitialized = !0)
     },
-    p(o, r) {
-      o[16]
-        ? t
-          ? (t.p(o, r), 65536 & r[0] && d(t, 1))
-          : ((t = Rl(o)), t.c(), d(t, 1), t.m(e, null))
-        : t &&
+    p(newProps, dirtyBits) {
+      newProps[16]
+        ? actionsAreaComponent
+          ? (actionsAreaComponent.p(newProps, dirtyBits), 65536 & dirtyBits[0] && d(actionsAreaComponent, 1))
+          : ((actionsAreaComponent = createActionsArea(newProps)), actionsAreaComponent.c(), d(actionsAreaComponent, 1), actionsAreaComponent.m(containerDiv, null))
+        : actionsAreaComponent &&
           (Y(),
-          m(t, 1, 1, () => {
-            t = null
+          m(actionsAreaComponent, 1, 1, () => {
+            actionsAreaComponent = null
           }),
           X())
     },
     i(o) {
-      n || (d(t), (n = !0))
+      isInitialized || (d(actionsAreaComponent), (isInitialized = !0))
     },
     o(o) {
-      m(t), (n = !1)
+      m(actionsAreaComponent), (isInitialized = !1)
     },
     d(o) {
-      o && x(e), t && t.d()
+      o && x(containerDiv), actionsAreaComponent && actionsAreaComponent.d()
     },
   }
 }
@@ -38725,14 +38725,14 @@ function ub(s) {
     }
   )
 }
-function db(s) {
+function createMainComponent(s) {
   let e, n, t, o
   return (
     (e = new sw({
       props: {
         $$slots: {
           "input-area": [ub],
-          "actions-area": [ob],
+          "actions-area": [createActionsAreaSlot],
           "message-area": [eb],
           "floating-area": [Q5],
         },
@@ -38772,285 +38772,285 @@ function db(s) {
     }
   )
 }
-function fb(s, e, n) {
-  let t,
-    o,
-    r,
-    i,
-    c,
-    a,
-    l,
-    u,
-    p,
-    g,
-    h,
-    k,
-    I,
-    C,
-    S,
-    H,
-    O,
-    z,
-    $e,
-    pe,
-    re = N,
-    le = N,
-    ue = () => (le(), (le = mt(U, (Ce) => n(35, (z = Ce)))), U)
-  s.$$.on_destroy.push(() => re()), s.$$.on_destroy.push(() => le())
-  let { initialConversation: Ee } = e,
-    { initialFlags: be } = e
-  const ee = new MessageBroker(augmentHost)
-  let Q = new h1()
-  ee.registerConsumer(Q)
-  let ye,
-    ge = new yf()
-  Ge(s, ge, (Ce) => n(5, (C = Ce))), ee.registerConsumer(ge)
-  let ae = new g1(ee, augmentHost, Q, {
-    initialConversation: Ee,
-    initialFlags: be,
+function initMainComponent(component, props, updateState) {
+  let uiState,
+    showStatusBars,
+    inputMode,
+    placeholderText,
+    hasActions,
+    allActionsComplete,
+    totalCharactersStore,
+    showCharacterLimitWarning,
+    isAgentActive,
+    hasCurrentAgent,
+    agentModel,
+    characterCount,
+    conversationModel,
+    actionsModel,
+    isAgenticConversation,
+    autofixModel,
+    webviewModel,
+    configState,
+    showAutoModeWarning,
+    featureFlags,
+    unsubscribeTotalChars = N,
+    unsubscribeConfig = N,
+    subscribeToConfig = () => (unsubscribeConfig(), (unsubscribeConfig = mt(configStore, (value) => updateState(35, (configState = value)))), configStore)
+  component.$$.on_destroy.push(() => unsubscribeTotalChars()), component.$$.on_destroy.push(() => unsubscribeConfig())
+  let { initialConversation } = props,
+    { initialFlags } = props
+  const messageBroker = new MessageBroker(augmentHost)
+  let contextManager = new ContextManager()
+  messageBroker.registerConsumer(contextManager)
+  let agentConversationModel,
+    actionsModelInstance = new yf()
+  Ge(component, actionsModelInstance, (value) => updateState(5, (actionsModel = value))), messageBroker.registerConsumer(actionsModelInstance)
+  let appModel = new ChatManager(messageBroker, augmentHost, contextManager, {
+    initialConversation,
+    initialFlags,
     onLoaded: () => {
-      if (ae.flags.enableAgentMode) {
-        const Ce = C.actions.some((Ae) => Ae === Tt.workspaceNotPopulated),
-          ie =
-            Object.keys(ae.conversations).length <= 1 &&
-            xn.isEmpty(ae.currentConversationModel)
-        Ce && ie && ye.setToAgentic()
-      } else ye.setToChat()
+      if (appModel.flags.enableAgentMode) {
+        const workspaceNotPopulated = actionsModel.actions.some((action) => action === Tt.workspaceNotPopulated),
+          isNewConversation =
+            Object.keys(appModel.conversations).length <= 1 &&
+            xn.isEmpty(appModel.currentConversationModel)
+        workspaceNotPopulated && isNewConversation && agentConversationModel.setToAgentic()
+      } else agentConversationModel.setToChat()
     },
   })
-  Ge(s, ae, (Ce) => n(4, (I = Ce)))
-  let se = new Is(ae.currentConversationModel, ae.extensionClient, ae)
-  const xe = new F5(ae.flags, ae.currentConversationModel, ae.extensionClient)
-  ee.registerConsumer(xe), ee.registerConsumer(ae)
-  const tt = new iw(ae.currentConversationModel, ae.extensionClient)
-  Ge(s, tt, (Ce) => n(33, (H = Ce))),
-    ee.registerConsumer(tt),
-    (ye = new Lp(ae, se, xe))
-  const { showAutoModeWarning: Ie } = ye
-  Ge(s, Ie, (Ce) => n(17, ($e = Ce)))
-  const Be = new _o(ee, !1, ae.flags)
-  Ge(s, Be, (Ce) => n(3, (h = Ce)))
-  const rt = new mo(ee),
-    He = new Yi(ee)
-  ee.registerConsumer(Be),
-    ee.registerConsumer(He),
-    bn(_o.key, Be),
-    bn(mo.key, rt),
-    bn(Yi.key, He)
-  const Rt = Ct(-1)
-  bn(v1, Rt)
-  const P = {
+  Ge(component, appModel, (value) => updateState(4, (conversationModel = value)))
+  let toolsWebviewModel = new Is(appModel.currentConversationModel, appModel.extensionClient, appModel)
+  const checkpointStore = new F5(appModel.flags, appModel.currentConversationModel, appModel.extensionClient)
+  messageBroker.registerConsumer(checkpointStore), messageBroker.registerConsumer(appModel)
+  const autofixConversationModel = new iw(appModel.currentConversationModel, appModel.extensionClient)
+  Ge(component, autofixConversationModel, (value) => updateState(33, (autofixModel = value))),
+    messageBroker.registerConsumer(autofixConversationModel),
+    (agentConversationModel = new Lp(appModel, toolsWebviewModel, checkpointStore))
+  const { showAutoModeWarning: autoModeWarning } = agentConversationModel
+  Ge(component, autoModeWarning, (value) => updateState(17, (showAutoModeWarning = value)))
+  const agentManager = new _o(messageBroker, !1, appModel.flags)
+  Ge(component, agentManager, (value) => updateState(3, (agentModel = value)))
+  const notificationManager = new mo(messageBroker),
+    slashCommandManager = new Yi(messageBroker)
+  messageBroker.registerConsumer(agentManager),
+    messageBroker.registerConsumer(slashCommandManager),
+    bn(_o.key, agentManager),
+    bn(mo.key, notificationManager),
+    bn(Yi.key, slashCommandManager)
+  const focusIndexStore = Ct(-1)
+  bn(v1, focusIndexStore)
+  const initialWebviewState = {
       agentOverviews: [],
       selectedAgentId: void 0,
       activeWebviews: ["chat"],
     },
-    _ = new tm(ee, P, C1, M1)
-  Ge(s, _, (Ce) => n(34, (O = Ce))), ee.registerConsumer(_), bn(yu, _)
-  const L = Xe(Vo)
-  let U
-  L ? ue((U = L)) : (ue((U = Ct(Gr))), bn(Vo, U))
-  const G = new Xo(ae, ye, Be)
-  ee.registerConsumer(G), bn(Xo.key, G)
-  const ce = new zv(ae, ye)
-  ee.registerConsumer(ce)
-  const me = new bf(ae, ae.flags)
-  ee.registerConsumer(me),
-    w1(ae),
-    bn("autofixConversationModel", tt),
-    bn("agentConversationModel", ye),
-    bn("toolsWebviewModel", se),
-    bn("checkpointStore", xe),
-    bn("slashCommandModel", ce)
-  const Re = I.flags
-  Ge(s, Re, (Ce) => n(18, (pe = Ce)))
-  const { isCurrConversationAgentic: We } = ye
-  Ge(s, We, (Ce) => n(6, (S = Ce)))
-  let qe,
-    De = !1
+    webviewStateManager = new tm(messageBroker, initialWebviewState, C1, M1)
+  Ge(component, webviewStateManager, (value) => updateState(34, (webviewModel = value))), messageBroker.registerConsumer(webviewStateManager), bn(yu, webviewStateManager)
+  const existingConfigStore = Xe(Vo)
+  let configStore
+  existingConfigStore ? subscribeToConfig((configStore = existingConfigStore)) : (subscribeToConfig((configStore = Ct(Gr))), bn(Vo, configStore))
+  const remoteAgentHandler = new Xo(appModel, agentConversationModel, agentManager)
+  messageBroker.registerConsumer(remoteAgentHandler), bn(Xo.key, remoteAgentHandler)
+  const slashCommandModel = new zv(appModel, agentConversationModel)
+  messageBroker.registerConsumer(slashCommandModel)
+  const codeBlockManager = new bf(appModel, appModel.flags)
+  messageBroker.registerConsumer(codeBlockManager),
+    w1(appModel),
+    bn("autofixConversationModel", autofixConversationModel),
+    bn("agentConversationModel", agentConversationModel),
+    bn("toolsWebviewModel", toolsWebviewModel),
+    bn("checkpointStore", checkpointStore),
+    bn("slashCommandModel", slashCommandModel)
+  const appFlags = conversationModel.flags
+  Ge(component, appFlags, (value) => updateState(18, (featureFlags = value)))
+  const { isCurrConversationAgentic } = agentConversationModel
+  Ge(component, isCurrConversationAgentic, (value) => updateState(6, (isAgenticConversation = value)))
+  let inputValue,
+    characterLimitAcknowledged = !1
   return (
-    ee.registerConsumer(
+    messageBroker.registerConsumer(
       new (class {
-        constructor(Ce) {
-          this._agentConversationModel = Ce
+        constructor(model) {
+          this._agentConversationModel = model
         }
-        handleMessageFromExtension(Ce) {
+        handleMessageFromExtension(message) {
           return (
-            Ce.data.type === st.resetAgentOnboarding &&
+            message.data.type === st.resetAgentOnboarding &&
             (this._agentConversationModel.resetOnboarding(), !0)
           )
         }
-      })(ye),
+      })(agentConversationModel),
     ),
     Gn(() => {
-      ae.flags.isRemoteAgentWindow &&
-        ae.flags.remoteAgentId &&
-        (G.setToRemoteAgent(ae.flags.remoteAgentId),
-        Be.setCurrentAgent(ae.flags.remoteAgentId),
-        Be.setIsActive(!0))
-      const Ce = [se.dispose, Be.dispose]
+      appModel.flags.isRemoteAgentWindow &&
+        appModel.flags.remoteAgentId &&
+        (remoteAgentHandler.setToRemoteAgent(appModel.flags.remoteAgentId),
+        agentManager.setCurrentAgent(appModel.flags.remoteAgentId),
+        agentManager.setIsActive(!0))
+      const cleanupFunctions = [toolsWebviewModel.dispose, agentManager.dispose]
       return () => {
-        Ce.forEach((ie) => ie())
+        cleanupFunctions.forEach((cleanup) => cleanup())
       }
     }),
-    (s.$$set = (Ce) => {
-      "initialConversation" in Ce && n(30, (Ee = Ce.initialConversation)),
-        "initialFlags" in Ce && n(31, (be = Ce.initialFlags))
+    (component.$$set = (newProps) => {
+      "initialConversation" in newProps && updateState(30, (initialConversation = newProps.initialConversation)),
+        "initialFlags" in newProps && updateState(31, (initialFlags = newProps.initialFlags))
     }),
-    (s.$$.update = () => {
+    (component.$$.update = () => {
       if (
-        (16 & s.$$.dirty[1] && n(2, (t = z)),
-        8 & s.$$.dirty[0] &&
-          h &&
-          _.update((Ce) => {
-            if (!Ce) return P
-            const ie = new Set(Ce.activeWebviews)
+        (16 & component.$$.dirty[1] && updateState(2, (uiState = configState)),
+        8 & component.$$.dirty[0] &&
+          agentModel &&
+          webviewStateManager.update((currentState) => {
+            if (!currentState) return initialWebviewState
+            const activeWebviews = new Set(currentState.activeWebviews)
             return (
-              h.isActive ? ie.add("chat") : ie.delete("chat"),
+              agentModel.isActive ? activeWebviews.add("chat") : activeWebviews.delete("chat"),
               {
-                ...Ce,
-                activeWebviews: Array.from(ie),
-                agentOverviews: h.agentOverviews,
-                selectedAgentId: h.currentAgentId,
+                ...currentState,
+                activeWebviews: Array.from(activeWebviews),
+                agentOverviews: agentModel.agentOverviews,
+                selectedAgentId: agentModel.currentAgentId,
               }
             )
           }),
-        (9 & s.$$.dirty[0]) | (8 & s.$$.dirty[1]) && O)
+        (9 & component.$$.dirty[0]) | (8 & component.$$.dirty[1]) && webviewModel)
       ) {
-        const { selectedAgentId: Ce } = O.state || {}
-        Ce !== h.currentAgentId &&
-          (ae.extensionClient.showAugmentPanel(),
-          Be.setIsActive(!0),
-          G.setToRemoteAgent(Ce),
-          Be.setCurrentAgent(Ce),
-          Wo(U, Be))
+        const { selectedAgentId } = webviewModel.state || {}
+        selectedAgentId !== agentModel.currentAgentId &&
+          (appModel.extensionClient.showAugmentPanel(),
+          agentManager.setIsActive(!0),
+          remoteAgentHandler.setToRemoteAgent(selectedAgentId),
+          agentManager.setCurrentAgent(selectedAgentId),
+          Wo(configStore, agentManager))
       }
-      ;(4 & s.$$.dirty[0]) | (4 & s.$$.dirty[1]) &&
-        n(16, (o = !H.isAutofixConversation() && !t.doHideStatusBars)),
-        4 & s.$$.dirty[1] &&
-          n(
+      ;(4 & component.$$.dirty[0]) | (4 & component.$$.dirty[1]) &&
+        updateState(16, (showStatusBars = !autofixModel.isAutofixConversation() && !uiState.doHideStatusBars)),
+        4 & component.$$.dirty[1] &&
+          updateState(
             15,
-            (r = H.isAutofixConversation()
-              ? H.shouldShowAutofixCommandInput()
+            (inputMode = autofixModel.isAutofixConversation()
+              ? autofixModel.shouldShowAutofixCommandInput()
                 ? qo.autofixCommand
                 : qo.autofixPrompt
               : qo.normal),
           ),
-        72 & s.$$.dirty[0] &&
-          n(
+        72 & component.$$.dirty[0] &&
+          updateState(
             14,
-            (i = h.isActive
-              ? h.currentAgentId
+            (placeholderText = agentModel.isActive
+              ? agentModel.currentAgentId
                 ? "Make these changes..."
                 : "Fix this bug, tackle this ticket, review comments in my PR..."
-              : S
+              : isAgenticConversation
                 ? "Ask or instruct Augment Agent"
                 : "Ask or instruct Augment"),
           ),
-        32 & s.$$.dirty[0] && n(13, (c = C.actions.length > 0)),
-        32 & s.$$.dirty[0] &&
-          n(12, (a = C.actions.includes(Tt.allActionsComplete))),
-        16 & s.$$.dirty[0] &&
-          (n(11, (l = I.currentConversationModel.totalCharactersStore)),
-          re(),
-          (re = mt(l, (Ce) => n(32, (k = Ce))))),
-        (2 & s.$$.dirty[0]) | (2 & s.$$.dirty[1]) &&
-          n(10, (u = !De && k > 6e5)),
-        8 & s.$$.dirty[0] && n(9, (p = h.isActive)),
-        8 & s.$$.dirty[0] && n(8, (g = h.isActive && h.currentAgentId))
+        32 & component.$$.dirty[0] && updateState(13, (hasActions = actionsModel.actions.length > 0)),
+        32 & component.$$.dirty[0] &&
+          updateState(12, (allActionsComplete = actionsModel.actions.includes(Tt.allActionsComplete))),
+        16 & component.$$.dirty[0] &&
+          (updateState(11, (totalCharactersStore = conversationModel.currentConversationModel.totalCharactersStore)),
+          unsubscribeTotalChars(),
+          (unsubscribeTotalChars = mt(totalCharactersStore, (count) => updateState(32, (characterCount = count))))),
+        (2 & component.$$.dirty[0]) | (2 & component.$$.dirty[1]) &&
+          updateState(10, (showCharacterLimitWarning = !characterLimitAcknowledged && characterCount > 6e5)),
+        8 & component.$$.dirty[0] && updateState(9, (isAgentActive = agentModel.isActive)),
+        8 & component.$$.dirty[0] && updateState(8, (hasCurrentAgent = agentModel.isActive && agentModel.currentAgentId))
     }),
     [
-      U,
-      De,
-      t,
-      h,
-      I,
-      C,
-      S,
-      qe,
-      g,
-      p,
-      u,
-      l,
-      a,
-      c,
-      i,
-      r,
-      o,
-      $e,
-      pe,
-      ee,
-      Q,
-      ge,
-      ae,
-      tt,
-      Ie,
-      Be,
-      _,
-      me,
-      Re,
-      We,
-      Ee,
-      be,
-      k,
-      H,
-      O,
-      z,
+      configStore,
+      characterLimitAcknowledged,
+      uiState,
+      agentModel,
+      conversationModel,
+      actionsModel,
+      isAgenticConversation,
+      inputValue,
+      hasCurrentAgent,
+      isAgentActive,
+      showCharacterLimitWarning,
+      totalCharactersStore,
+      allActionsComplete,
+      hasActions,
+      placeholderText,
+      inputMode,
+      showStatusBars,
+      showAutoModeWarning,
+      featureFlags,
+      messageBroker,
+      contextManager,
+      actionsModelInstance,
+      appModel,
+      autofixConversationModel,
+      autoModeWarning,
+      agentManager,
+      webviewStateManager,
+      codeBlockManager,
+      appFlags,
+      isCurrConversationAgentic,
+      initialConversation,
+      initialFlags,
+      characterCount,
+      autofixModel,
+      webviewModel,
+      configState,
       () => {
-        I.saveImmediate()
+        conversationModel.saveImmediate()
       },
-      (Ce) =>
-        (function (ie, Ae, we) {
-          var lt, yt
-          ;(!ie.ctrlKey && !ie.metaKey) ||
-            ie.key !== "l" ||
-            ie.shiftKey ||
-            (we.isActive
-              ? we.setCurrentAgent(void 0)
-              : (Ae.setCurrentConversation(),
-                Ae.extensionClient.reportWebviewClientEvent(
+      (event) =>
+        (function (keyEvent, appModelRef, agentManagerRef) {
+          var nextConversation, prevConversation
+          ;(!keyEvent.ctrlKey && !keyEvent.metaKey) ||
+            keyEvent.key !== "l" ||
+            keyEvent.shiftKey ||
+            (agentManagerRef.isActive
+              ? agentManagerRef.setCurrentAgent(void 0)
+              : (appModelRef.setCurrentConversation(),
+                appModelRef.extensionClient.reportWebviewClientEvent(
                   lo.chatNewConversation,
                 )),
-            ie.preventDefault()),
-            Ae.flags.enableDebugFeatures &&
-              !we.isActive &&
-              ((ie.ctrlKey || ie.metaKey) &&
-                ie.shiftKey &&
-                ie.key === "l" &&
-                (Ae.popCurrentConversation(), ie.preventDefault()),
-              ie.altKey &&
-                ie.code === "BracketRight" &&
-                (Ae.setCurrentConversation(
-                  (lt = Ae.nextConversation) == null ? void 0 : lt.id,
+            keyEvent.preventDefault()),
+            appModelRef.flags.enableDebugFeatures &&
+              !agentManagerRef.isActive &&
+              ((keyEvent.ctrlKey || keyEvent.metaKey) &&
+                keyEvent.shiftKey &&
+                keyEvent.key === "l" &&
+                (appModelRef.popCurrentConversation(), keyEvent.preventDefault()),
+              keyEvent.altKey &&
+                keyEvent.code === "BracketRight" &&
+                (appModelRef.setCurrentConversation(
+                  (nextConversation = appModelRef.nextConversation) == null ? void 0 : nextConversation.id,
                   !1,
                 ),
-                ie.preventDefault()),
-              ie.altKey &&
-                ie.code === "BracketLeft" &&
-                (Ae.setCurrentConversation(
-                  (yt = Ae.previousConversation) == null ? void 0 : yt.id,
+                keyEvent.preventDefault()),
+              keyEvent.altKey &&
+                keyEvent.code === "BracketLeft" &&
+                (appModelRef.setCurrentConversation(
+                  (prevConversation = appModelRef.previousConversation) == null ? void 0 : prevConversation.id,
                   !1,
                 ),
-                ie.preventDefault()),
-              (ie.ctrlKey || ie.metaKey) &&
-                ie.key === "]" &&
-                (Ae.currentConversationModel.focusModel.focusNext(),
-                ie.preventDefault()),
-              (ie.ctrlKey || ie.metaKey) &&
-                ie.key === "[" &&
-                (Ae.currentConversationModel.focusModel.focusPrev(),
-                ie.preventDefault()),
-              ie.key === "Escape" &&
-                (Ae.currentConversationModel.focusModel.setFocusIdx(void 0),
-                ie.preventDefault()))
-        })(Ce, ae, Be),
-      function (Ce) {
-        ;(qe = Ce), n(7, qe)
+                keyEvent.preventDefault()),
+              (keyEvent.ctrlKey || keyEvent.metaKey) &&
+                keyEvent.key === "]" &&
+                (appModelRef.currentConversationModel.focusModel.focusNext(),
+                keyEvent.preventDefault()),
+              (keyEvent.ctrlKey || keyEvent.metaKey) &&
+                keyEvent.key === "[" &&
+                (appModelRef.currentConversationModel.focusModel.focusPrev(),
+                keyEvent.preventDefault()),
+              keyEvent.key === "Escape" &&
+                (appModelRef.currentConversationModel.focusModel.setFocusIdx(void 0),
+                keyEvent.preventDefault()))
+        })(event, appModel, agentManager),
+      function (newValue) {
+        ;(inputValue = newValue), updateState(7, inputValue)
       },
-      () => ae.setCurrentConversation(),
-      () => n(1, (De = !0)),
-      function (Ce) {
-        bt[Ce ? "unshift" : "push"](() => {
-          ;(qe = Ce), n(7, qe)
+      () => appModel.setCurrentConversation(),
+      () => updateState(1, (characterLimitAcknowledged = !0)),
+      function (newValue) {
+        bt[newValue ? "unshift" : "push"](() => {
+          ;(inputValue = newValue), updateState(7, inputValue)
         })
       },
     ]
@@ -39062,8 +39062,8 @@ class mb extends SvelteComponent {
       initComponent(
         this,
         e,
-        fb,
-        db,
+        initMainComponent,
+        createMainComponent,
         notEqual,
         { initialConversation: 30, initialFlags: 31 },
         null,
@@ -40444,7 +40444,7 @@ function Zl(s) {
 function Jl(s) {
   let e, n
   return (
-    (e = new Hu({})),
+    (e = new ProgressBar({})),
     {
       c() {
         w(e.$$.fragment)
