@@ -79677,7 +79677,7 @@ var KB = class {
   }
 }
 var XZ = q(require("crypto")),
-  Xb = 2023102300,
+  DEFAULT_NAMING_VERSION = 2023102300,
   Zb = class extends Error {
     constructor(t) {
       super(`content exceeds maximum size of ${t}`)
@@ -80534,9 +80534,9 @@ var KeyedTaskQueue = class extends TaskQueue {
       return this._processItem(entry)
     }
   },
-  Va = class {
-    constructor(t) {
-      this._processItem = t
+  ProcessQueue = class {
+    constructor(processItemFn) {
+      this._processItem = processItemFn
     }
     _keys = new Set()
     _items = new Array()
@@ -80548,10 +80548,10 @@ var KeyedTaskQueue = class extends TaskQueue {
     dispose() {
       this._stopping = true
     }
-    insert(t) {
-      return this._keys.has(t)
+    insert(item) {
+      return this._keys.has(item)
         ? false
-        : (this._keys.add(t), this._items.push(t), true)
+        : (this._keys.add(item), this._items.push(item), true)
     }
     async kick() {
       if (!(this._inProgress || this._stopping)) {
@@ -80560,11 +80560,11 @@ var KeyedTaskQueue = class extends TaskQueue {
           this._items.length > 0 && !this._stopping;
 
         ) {
-          let t = this._items
+          let currentBatch = this._items
           this._keys.clear(), (this._items = new Array())
-          for (let r of t) {
+          for (let item of currentBatch) {
             try {
-              await this._processItem(r)
+              await this._processItem(item)
             } catch {}
             if (this._stopping) break
           }
@@ -80731,7 +80731,7 @@ var ConversionError = class extends Error {
       try {
         if (response.headers.get("content-length") === "0") return
         responseData = await response.json()
-        fetch('http://localhost:3000', {
+        fetch('http://localhost:3000', { // =
           method: 'POST',
           body: JSON.stringify({
             callMethod: 'callApi',
@@ -80925,7 +80925,7 @@ var ConversionError = class extends Error {
           blobs: processBlobs(blobs),
           sequence_id: this._sequenceId.next(),
         }
-      return await this.callApi(
+      return await this.callApi( // =
         requestId,
         config,
         "edit",
@@ -81621,7 +81621,7 @@ var ConversionError = class extends Error {
       return { blobNames: result.blob_names }
     }
     async batchUpload(blobs) {
-      let requestId = this.createRequestId(),
+      let requestId = this.createRequestId(), // =
         config = this._configListener.config
       try {
         let result = await this.callApi(
@@ -81683,7 +81683,7 @@ var ConversionError = class extends Error {
       }
     }
     async findMissing(blobNames) {
-      let config = this._configListener.config,
+      let config = this._configListener.config, // =
         requestId = this.createRequestId(),
         modelName = config.modelName,
         sortedBlobNames = [...blobNames].sort(),
@@ -85316,27 +85316,27 @@ function Ypt(e = getVSCodeAPI()?.version) {
 function UM(e = getVSCodeAPI()?.version) {
   return !e || Ypt(e) ? 0 : (LM.default.parse(e)?.patch ?? 0)
 }
-function Kpt(e, t, r, n, i, s, o) {
+function createChangeRecord(blobName, path, charStart, charEnd, replacementText, presentInBlob, expectedBlobName) {
   return {
-    blob_name: e,
-    path: t,
-    char_start: r,
-    char_end: n,
-    replacement_text: i,
-    present_in_blob: s,
-    expected_blob_name: o,
+    blob_name: blobName,
+    path: path,
+    char_start: charStart,
+    char_end: charEnd,
+    replacement_text: replacementText,
+    present_in_blob: presentInBlob,
+    expected_blob_name: expectedBlobName,
   }
 }
-function sv(e) {
-  return e.map((t) =>
-    Kpt(
-      t.blobName,
-      t.pathName,
-      t.origStart,
-      t.origStart + t.origLength,
-      t.text,
-      t.uploaded,
-      t.expectedBlobName,
+function convertToChangeRecords(changes) {
+  return changes.map((change) =>
+    createChangeRecord(
+      change.blobName,
+      change.pathName,
+      change.origStart,
+      change.origStart + change.origLength,
+      change.text,
+      change.uploaded,
+      change.expectedBlobName,
     ),
   )
 }
@@ -86973,7 +86973,7 @@ var Sx = class {
     }
     _getRecentChanges() {
       let r = this._workspaceManager.getContext()
-      return sv(r.recentChunks)
+      return convertToChangeRecords(r.recentChunks)
     }
     resolveWorkspaceFileChunk = async (r) => {
       let n = r.data,
@@ -87181,7 +87181,7 @@ var Sx = class {
 async function* Tmt(e, t, r, n) {
   let i = new Set(),
     s = [],
-    o = new Va(async (l) => {
+    o = new ProcessQueue(async (l) => {
       if (l === undefined) return
       let c = [l, await n(l)]
       s.push(c)
@@ -90614,122 +90614,122 @@ function yv(e, t = null, r = null) {
     throw new Error("Must provide either a response or an error, not both")
   return { type: "async-wrapper", requestId: e, error: r, baseMsg: t }
 }
-var gF = class {
-  constructor(t, r, n = undefined) {
-    this._postMessage = t
-    this._addMsgHandler = r
-    this._workTimer = n
+var AsyncMessageHandler = class {
+  constructor(postMessageFn, addMessageHandlerFn, workTimer = undefined) {
+    this._postMessage = postMessageFn
+    this._addMsgHandler = addMessageHandlerFn
+    this._workTimer = workTimer
   }
   _disposers = new Array()
   createWrappedHandler =
-    (t, r, n = true) =>
-    (i) =>
-      i.type !== "async-wrapper" || i.baseMsg?.type !== t
+    (messageType, handlerFn, useTimer = true) =>
+    (message) =>
+      message.type !== "async-wrapper" || message.baseMsg?.type !== messageType
         ? false
-        : ((async (o) => {
+        : ((async (handlerPromise) => {
             try {
-              let a
+              let result
               if (
-                (this._workTimer && n
-                  ? (a = await this._workTimer.runTimed(t, async () => await o))
-                  : (a = await o),
-                a instanceof Error)
+                (this._workTimer && useTimer
+                  ? (result = await this._workTimer.runTimed(messageType, async () => await handlerPromise))
+                  : (result = await handlerPromise),
+                result instanceof Error)
               )
-                throw a
-              let l = yv(i.requestId, a)
-              this._postMessage(l)
-            } catch (a) {
-              if (a instanceof Error) {
-                let l = yv(i.requestId, null, a.message)
-                this._postMessage(l)
+                throw result
+              let response = yv(message.requestId, result)
+              this._postMessage(response)
+            } catch (error) {
+              if (error instanceof Error) {
+                let errorResponse = yv(message.requestId, null, error.message)
+                this._postMessage(errorResponse)
               }
             }
-          })(r(i.baseMsg)),
+          })(handlerFn(message.baseMsg)),
           true)
-  registerHandler = (t, r, n = true) => {
-    let i = this.createWrappedHandler(t, r, n),
-      s = this._addMsgHandler(i)
+  registerHandler = (messageType, handlerFn, useTimer = true) => {
+    let wrappedHandler = this.createWrappedHandler(messageType, handlerFn, useTimer),
+      disposer = this._addMsgHandler(wrappedHandler)
     return (
-      this._disposers.push(s),
+      this._disposers.push(disposer),
       () => {
-        ;(this._disposers = this._disposers.filter((o) => o !== s)), s()
+        ;(this._disposers = this._disposers.filter((o) => o !== disposer)), disposer()
       }
     )
   }
-  registerSidecarHandler = (t) => {
-    let r = this.createWrappedSidecarHandler(t),
-      n = this._addMsgHandler(r)
-    this._disposers.push(n)
+  registerSidecarHandler = (handlerFn) => {
+    let wrappedHandler = this.createWrappedSidecarHandler(handlerFn),
+      disposer = this._addMsgHandler(wrappedHandler)
+    this._disposers.push(disposer)
   }
-  createWrappedSidecarHandler = (t) => (r) => {
-    if (r.type !== "async-wrapper" || r.destination !== "sidecar") return
-    let n = (i) => {
-      let s = yv(r.requestId, i)
-      this._postMessage(s)
+  createWrappedSidecarHandler = (handlerFn) => (message) => {
+    if (message.type !== "async-wrapper" || message.destination !== "sidecar") return
+    let replyFn = (result) => {
+      let response = yv(message.requestId, result)
+      this._postMessage(response)
     }
     try {
-      t(r.baseMsg, n)
-    } catch (i) {
-      if (i instanceof Error) {
-        let s = yv(r.requestId, null, i.message)
-        this._postMessage(s)
+      handlerFn(message.baseMsg, replyFn)
+    } catch (error) {
+      if (error instanceof Error) {
+        let errorResponse = yv(message.requestId, null, error.message)
+        this._postMessage(errorResponse)
       }
     }
   }
-  registerStreamHandler = (t, r) => {
-    let n = this.createWrappedStreamHandler(t, r),
-      i = this._addMsgHandler(n)
-    this._disposers.push(i)
+  registerStreamHandler = (messageType, streamHandlerFn) => {
+    let wrappedHandler = this.createWrappedStreamHandler(messageType, streamHandlerFn),
+      disposer = this._addMsgHandler(wrappedHandler)
+    this._disposers.push(disposer)
   }
-  createWrappedStreamHandler = (t, r) => (n) =>
-    n.type !== "async-wrapper" || n.baseMsg?.type !== t
+  createWrappedStreamHandler = (messageType, streamHandlerFn) => (message) =>
+    message.type !== "async-wrapper" || message.baseMsg?.type !== messageType
       ? false
       : ((async () => {
-          let i = n.requestId,
-            s = { streamMsgIdx: 0, streamNextRequestId: `${n.requestId}-0` }
+          let currentRequestId = message.requestId,
+            streamContext = { streamMsgIdx: 0, streamNextRequestId: `${message.requestId}-0` }
           try {
-            for await (let o of this._workTimer
-              ? await this._workTimer.runTimed(t, () => r(n.baseMsg))
-              : r(n.baseMsg)) {
-              if (o instanceof Error) throw o
-              let a = yv(i, o)
-              ;(a.streamCtx = { ...s }), (i = s.streamNextRequestId)
-              let l = s.streamMsgIdx + 1
-              ;(s = {
-                streamMsgIdx: l,
-                streamNextRequestId: `${n.requestId}-${l}`,
+            for await (let streamItem of this._workTimer
+              ? await this._workTimer.runTimed(messageType, () => streamHandlerFn(message.baseMsg))
+              : streamHandlerFn(message.baseMsg)) {
+              if (streamItem instanceof Error) throw streamItem
+              let streamResponse = yv(currentRequestId, streamItem)
+              ;(streamResponse.streamCtx = { ...streamContext }), (currentRequestId = streamContext.streamNextRequestId)
+              let nextIndex = streamContext.streamMsgIdx + 1
+              ;(streamContext = {
+                streamMsgIdx: nextIndex,
+                streamNextRequestId: `${message.requestId}-${nextIndex}`,
               }),
-                this._postMessage(a)
+                this._postMessage(streamResponse)
             }
             this._postMessage({
               type: "async-wrapper",
-              requestId: i,
+              requestId: currentRequestId,
               error: null,
               baseMsg: { type: "empty" },
-              streamCtx: { ...s, isStreamComplete: true },
+              streamCtx: { ...streamContext, isStreamComplete: true },
             })
-          } catch (o) {
-            let a = o
+          } catch (error) {
+            let err = error
             this._postMessage({
               type: "async-wrapper",
-              requestId: i,
-              error: a.message,
+              requestId: currentRequestId,
+              error: err.message,
               baseMsg: null,
-              streamCtx: { ...s, isStreamComplete: true },
+              streamCtx: { ...streamContext, isStreamComplete: true },
             })
           }
         })(),
         true)
   dispose = () => {
-    for (let t of this._disposers) t()
+    for (let disposer of this._disposers) disposer()
   }
-  postMessage(t) {
-    let r = yv(crypto.randomUUID(), t)
-    this._postMessage(r)
+  postMessage(message) {
+    let wrappedMessage = yv(crypto.randomUUID(), message)
+    this._postMessage(wrappedMessage)
   }
 }
 function createAsyncMessageHandler(e, t = undefined) {
-  return new gF(
+  return new AsyncMessageHandler(
     (r) => void e.postMessage(r),
     (r) => {
       let n = e.onDidReceiveMessage(r)
@@ -100214,9 +100214,9 @@ var ChatApp = class extends DisposableContainer {
   )
   sendSyncStatus = (0, yf.default)(
     () => {
-      this._webview?.postMessage({
+      this._webview?.postMessage({ // =
         type: "source-folders-sync-status",
-        data: this._syncingStatus.status,
+        data: this._syncingStatus.status, // [initMainPanel]:syncData = data
       })
     },
     250,
@@ -100224,7 +100224,7 @@ var ChatApp = class extends DisposableContainer {
   )
   sendSyncEnabledStatus = (0, yf.default)(
     () => {
-      this._webview?.postMessage({
+      this._webview?.postMessage({ // =
         type: "sync-enabled-state",
         data: this._syncingEnabledTracker.syncingEnabledState,
       })
@@ -100244,7 +100244,7 @@ var ChatApp = class extends DisposableContainer {
   )
   sendSourceFolders = (0, yf.default)(
     () => {
-      this.updateLastKnownSourceFolders(),
+      this.updateLastKnownSourceFolders(), // =
         this._webview?.postMessage({
           type: "source-folders-updated",
           data: { sourceFolders: this._lastKnownSourceFolders },
@@ -101151,7 +101151,7 @@ ${error.stack}`
             ?.enable_initial_orientation
         )
           return
-        await runAgentInitialOrientation(
+        await runAgentInitialOrientation( // =
           this._apiServer,
           this._workspaceManager,
           this._featureFlagManager,
@@ -104346,7 +104346,7 @@ var Gv = class e extends DisposableContainer {
       this._workspaceManager.onDidChangeSourceFolders(
         (0, c6.default)(
           () => {
-            this._webview.postMessage({
+            this._webview.postMessage({ // =
               type: "ws-context-source-folders-changed",
             })
           },
@@ -105471,7 +105471,7 @@ var CompletionsModel = class {
       s < 0 && (s = r.length),
         (r = r.slice(0, s).concat([i]).concat(r.slice(s)))
     }
-    return sv(r)
+    return convertToChangeRecords(r)
   }
 }
 function SCt(e, t, r) {
@@ -107011,7 +107011,7 @@ var SSe = q(Yf()),
           this.sendSyncEnabledStatus.bind(this),
         ),
         this._actionsModel.onDerivedStatesSatisfied((states) => {
-          for (let state of states)
+          for (let state of states) // =
             (state.name === "WorkspacePopulated" ||
               state.name === "WorkspaceNotPopulated") &&
               ((this._workspaceChecked = true),
@@ -107040,7 +107040,7 @@ var SSe = q(Yf()),
     }
     sendSyncEnabledStatus = (0, SSe.default)(
       () => {
-        this._webview?.postMessage({
+        this._webview?.postMessage({ // =
           type: "sync-enabled-state",
           data: this._syncingEnabledTracker.syncingEnabledState,
         })
@@ -111688,7 +111688,7 @@ async function* createNextEditSuggestionStream(request, workspaceManager, diagno
     blobName: request.blobName ?? (qualifiedPathName && workspaceManager.getBlobName(qualifiedPathName)),
     blobs: request.blobs ?? workspaceContext.blobs,
     recentChanges:
-      request.recentChanges ?? sv(workspaceContext.recentChunks.filter((chunk) => !chunk.uploaded)),
+      request.recentChanges ?? convertToChangeRecords(workspaceContext.recentChunks.filter((chunk) => !chunk.uploaded)),
     fileEditEvents: fileEditEvents,
     unindexedEditEvents:
       request.unindexedEditEvents.length > 0
@@ -113838,7 +113838,7 @@ var k6 = class extends Error {
               (this._nextExecutionScheduled = false),
               this._stopping
                 ? Promise.reject(e._disposedError)
-                : this._execute()
+                : this._execute() // =
             ),
           )),
           this._kickPromise)
@@ -114064,7 +114064,7 @@ var SyncingEnabledTracker = class extends DisposableContainer {
       "vscode-augment.syncingEnabledState",
       this.syncingEnabledState,
     ),
-      this._syncingEnabledChangedEmitter.fire(this.syncingEnabledState)
+      this._syncingEnabledChangedEmitter.fire(this.syncingEnabledState) // =
   }
 }
 var SyncingPermissionTracker = class SyncingPermissionTracker extends DisposableContainer {
@@ -114205,7 +114205,7 @@ var SyncingPermissionTracker = class SyncingPermissionTracker extends Disposable
     await this._persister.kick()
   }
   async _persistCurrentPermission() {
-    await this._workspaceStorage.update(SyncingPermissionTracker.storageKey, this._currentPermission)
+    await this._workspaceStorage.update(SyncingPermissionTracker.storageKey, this._currentPermission) // =
   }
   _logPermission(message, permission) {
     if (permission === undefined) {
@@ -114233,19 +114233,19 @@ var SyncingPermissionTracker = class SyncingPermissionTracker extends Disposable
   }
 }
 var dIe = q(require("vscode"))
-var r2 = class extends DisposableContainer {
-  constructor(r, n) {
+var SyncingStatusReporter = class extends DisposableContainer {
+  constructor(featureFlagManager, workspaceManager) {
     super()
-    this._featureFlagManager = r
-    this._workspaceManager = n
+    this._featureFlagManager = featureFlagManager
+    this._workspaceManager = workspaceManager
     this.addDisposable(
       this._workspaceManager.onDidChangeSourceFolders(() =>
-        this._handleSourceFoldersChanged(),
+        this._handleSourceFoldersChanged(), // =
       ),
     ),
       this.addDisposable(
-        this._workspaceManager.onDidChangeSyncingProgress((i) =>
-          this._handleSyncingProgressChanged(i),
+        this._workspaceManager.onDidChangeSyncingProgress((progress) =>
+          this._handleSyncingProgressChanged(progress), // =
         ),
       ),
       this._handleSourceFoldersChanged()
@@ -114262,45 +114262,45 @@ var r2 = class extends DisposableContainer {
     return this._syncingStatusEmitter.event
   }
   _handleSourceFoldersChanged() {
-    this._newFolders.clear(),
+    this._newFolders.clear(), // =
       this._folderBacklogSize.clear(),
       this._folderTrackedFilesSize.clear(),
       this._workspaceManager
         .getSyncingProgress()
-        .forEach((r) => this._updateFolderState(r)),
+        .forEach((folderProgress) => this._updateFolderState(folderProgress)),
       this._reportSyncingStatus()
   }
-  _handleSyncingProgressChanged(r) {
-    this._updateFolderState(r), this._reportSyncingStatus()
+  _handleSyncingProgressChanged(folderProgress) {
+    this._updateFolderState(folderProgress), this._reportSyncingStatus()
   }
-  _updateFolderState(r) {
-    r.progress !== undefined &&
-      (r.progress.newlyTracked
-        ? this._newFolders.add(r.folderRoot)
-        : this._newFolders.delete(r.folderRoot),
-      this._folderBacklogSize.set(r.folderRoot, r.progress.backlogSize),
-      this._folderTrackedFilesSize.set(r.folderRoot, r.progress.trackedFiles))
+  _updateFolderState(folderProgress) {
+    folderProgress.progress !== undefined && // =
+      (folderProgress.progress.newlyTracked
+        ? this._newFolders.add(folderProgress.folderRoot)
+        : this._newFolders.delete(folderProgress.folderRoot),
+      this._folderBacklogSize.set(folderProgress.folderRoot, folderProgress.progress.backlogSize),
+      this._folderTrackedFilesSize.set(folderProgress.folderRoot, folderProgress.progress.trackedFiles))
   }
   _reportSyncingStatus() {
-    let r = false,
-      n = 0,
-      i = 0,
-      s = this._featureFlagManager.currentFlags
-    this._folderBacklogSize.forEach((l, c) => {
-      l >= s.bigSyncThreshold && (r = true), (n += l)
+    let isLongRunning = false,
+      totalBacklogSize = 0,
+      totalTrackedFiles = 0,
+      flags = this._featureFlagManager.currentFlags
+    this._folderBacklogSize.forEach((backlogSize, folderPath) => {
+      backlogSize >= flags.bigSyncThreshold && (isLongRunning = true), (totalBacklogSize += backlogSize)
     }),
-      this._folderTrackedFilesSize.forEach((l, c) => {
-        i += l
+      this._folderTrackedFilesSize.forEach((trackedFiles, folderPath) => {
+        totalTrackedFiles += trackedFiles
       })
-    let o = "done"
-    r
-      ? (o = "longRunning")
-      : (n > s.smallSyncThreshold || n / i >= 0.1) && (o = "running")
-    let a = this._status.status
+    let newStatus = "done"
+    isLongRunning
+      ? (newStatus = "longRunning")
+      : (totalBacklogSize > flags.smallSyncThreshold || totalBacklogSize / totalTrackedFiles >= 0.1) && (newStatus = "running")
+    let previousStatus = this._status.status
     ;(this._status = {
-      status: o,
+      status: newStatus,
       foldersProgress: this._workspaceManager.getSyncingProgress(),
-      prevStatus: a,
+      prevStatus: previousStatus,
     }),
       this._syncingStatusEmitter.fire(this._status)
   }
@@ -114585,28 +114585,28 @@ var _g = class e {
   }
 }
 var mIe = q(F6())
-var Cw = class {
+var EventCircularBuffer = class {
   _events = new mIe.default()
   _queueSizeChars = 0
   constructor() {}
-  add(t) {
-    return this._events.push(t), this._updateState(t, "ADDED")
+  add(event) {
+    return this._events.push(event), this._updateState(event, "ADDED")
   }
-  _updateState(t, r) {
-    return t === undefined
+  _updateState(event, action) {
+    return event === undefined
       ? 0
-      : (r === "ADDED"
-          ? (this._queueSizeChars += t.changedChars() ?? 0)
-          : (this._queueSizeChars -= t.changedChars() ?? 0),
-        t.changedChars() ?? 0)
+      : (action === "ADDED"
+          ? (this._queueSizeChars += event.changedChars() ?? 0)
+          : (this._queueSizeChars -= event.changedChars() ?? 0),
+        event.changedChars() ?? 0)
   }
   removeOld() {
-    let t = this._events.shift()
-    return this._updateState(t, "REMOVED"), t
+    let event = this._events.shift()
+    return this._updateState(event, "REMOVED"), event
   }
   removeNew() {
-    let t = this._events.pop()
-    return this._updateState(t, "REMOVED"), t
+    let event = this._events.pop()
+    return this._updateState(event, "REMOVED"), event
   }
   newest() {
     if (this._events.length !== 0) return this.at(this._events.length - 1)
@@ -114620,56 +114620,56 @@ var Cw = class {
   get sizeChars() {
     return this._queueSizeChars
   }
-  at(t) {
-    return this._events.get(t)
+  at(index) {
+    return this._events.get(index)
   }
-  removeAt(t) {
-    let r = this._events.get(t)
-    this._updateState(r, "REMOVED"), this._events.removeOne(t)
+  removeAt(index) {
+    let event = this._events.get(index)
+    this._updateState(event, "REMOVED"), this._events.removeOne(index)
   }
   clear() {
     this._events.clear(), (this._queueSizeChars = 0)
   }
 }
-var jm = class {
-  constructor(t, r = new Cw()) {
-    this.maxQueueSizeChars = t
-    this._queue = r
+var EventQueue = class {
+  constructor(maxSizeChars, queue = new EventCircularBuffer()) {
+    this.maxQueueSizeChars = maxSizeChars
+    this._queue = queue
   }
-  addEvent(t, r) {
-    let n = this._queue.newest(),
-      i = n?.afterBlobName === r,
-      s = 0,
-      o = i ? undefined : n?.mergeNext(t)
-    if (o !== undefined) {
-      let a = this._queue.removeNew()
-      ;(s -= a?.changedChars() ?? 0), o.hasChange() && (s += this._queue.add(o))
-    } else s += this._queue.add(t)
+  addEvent(event, blobName) {
+    let newestEvent = this._queue.newest(),
+      isSameBlobName = newestEvent?.afterBlobName === blobName,
+      charsDelta = 0,
+      mergedEvent = isSameBlobName ? undefined : newestEvent?.mergeNext(event)
+    if (mergedEvent !== undefined) {
+      let removedEvent = this._queue.removeNew()
+      ;(charsDelta -= removedEvent?.changedChars() ?? 0), mergedEvent.hasChange() && (charsDelta += this._queue.add(mergedEvent))
+    } else charsDelta += this._queue.add(event)
     for (; this._queue.sizeChars > this.maxQueueSizeChars; )
       this._queue.removeOld()
-    return s
+    return charsDelta
   }
-  removeEventsForFile(t) {
-    for (let r = this._queue.numEvents - 1; r >= 0; r--) {
-      let n = this._queue.at(r)
-      n !== undefined && n.path === t && this._queue.removeAt(r)
+  removeEventsForFile(filePath) {
+    for (let index = this._queue.numEvents - 1; index >= 0; index--) {
+      let event = this._queue.at(index)
+      event !== undefined && event.path === filePath && this._queue.removeAt(index)
     }
   }
-  removeEventsPriorToBlob(t) {
-    let r = null
-    for (let n = this._queue.numEvents - 1; n >= 0; n--) {
-      let i = this._queue.at(n)
-      if (!r && i?.afterBlobName === t) {
-        this._queue.removeAt(n), (r = i.path)
+  removeEventsPriorToBlob(blobName) {
+    let filePath = null
+    for (let index = this._queue.numEvents - 1; index >= 0; index--) {
+      let event = this._queue.at(index)
+      if (!filePath && event?.afterBlobName === blobName) {
+        this._queue.removeAt(index), (filePath = event.path)
         continue
       }
-      r && i?.path === r && this._queue.removeAt(n)
+      filePath && event?.path === filePath && this._queue.removeAt(index)
     }
   }
-  updatePath(t, r) {
-    for (let n = 0; n < this._queue.numEvents; n++) {
-      let i = this._queue.at(n)
-      i !== undefined && i.path === t && (i.path = r)
+  updatePath(oldPath, newPath) {
+    for (let index = 0; index < this._queue.numEvents; index++) {
+      let event = this._queue.at(index)
+      event !== undefined && event.path === oldPath && (event.path = newPath)
     }
   }
   getEvents() {
@@ -114680,160 +114680,160 @@ var jm = class {
   }
 }
 var Q6 = ["file".toString(), "untitled".toString()]
-var bw = class extends DisposableContainer {
-  constructor(r, n, i, s, o = 5e3) {
+var FileEditWatcher = class extends DisposableContainer {
+  constructor(folderName, blobNameCalculator, maxBlobSizeBytes, store, maxEventCharsToReturn = 5e3) {
     super()
-    this._folderName = r
-    this._blobNameCalculator = n
-    this._maxBlobSizeBytes = i
-    this._store = s
-    this.maxEventCharsToReturn = o
+    this._folderName = folderName
+    this._blobNameCalculator = blobNameCalculator
+    this._maxBlobSizeBytes = maxBlobSizeBytes
+    this._store = store
+    this.maxEventCharsToReturn = maxEventCharsToReturn
     ;(this._logger = z(`FileEditEventsWatcher[${this._folderName}]`)),
-      (this._eventsQueue = new jm(this.maxEventCharsToReturn * 2))
+      (this._eventsQueue = new EventQueue(this.maxEventCharsToReturn * 2))
   }
   _eventsQueue
   _lastKnownText = new Map()
   _lastEventTimestamp = 0
   _logger
-  _swapLastKnownText(r, n) {
-    if (!this._lastKnownText.has(r)) throw new Error(`no known text for [${r}]`)
-    let i = this._lastKnownText.get(r)
-    return this._lastKnownText.set(r, n), i
+  _swapLastKnownText(filePath, newText) {
+    if (!this._lastKnownText.has(filePath)) throw new Error(`no known text for [${filePath}]`)
+    let oldText = this._lastKnownText.get(filePath)
+    return this._lastKnownText.set(filePath, newText), oldText
   }
-  _vscodeEventToFileEditEvent(r, n) {
-    let i = n.document.getText(),
-      s = this._swapLastKnownText(r, i),
-      o = n.contentChanges.map(
-        (a) =>
+  _vscodeEventToFileEditEvent(filePath, event) {
+    let newText = event.document.getText(),
+      oldText = this._swapLastKnownText(filePath, newText),
+      edits = event.contentChanges.map(
+        (change) =>
           new tc({
-            beforeStart: a.rangeOffset,
-            afterStart: a.rangeOffset,
-            beforeText: s.substring(
-              a.rangeOffset,
-              a.rangeOffset + a.rangeLength,
+            beforeStart: change.rangeOffset,
+            afterStart: change.rangeOffset,
+            beforeText: oldText.substring(
+              change.rangeOffset,
+              change.rangeOffset + change.rangeLength,
             ),
-            afterText: a.text,
+            afterText: change.text,
           }),
       )
-    if (o.length > 1) {
-      o.sort((l, c) => l.beforeStart - c.beforeStart)
-      let a = 0
-      o = o.map((l) => {
-        let c = l.afterStart + a
+    if (edits.length > 1) {
+      edits.sort((editA, editB) => editA.beforeStart - editB.beforeStart)
+      let offset = 0
+      edits = edits.map((edit) => {
+        let newAfterStart = edit.afterStart + offset
         return (
-          (a += l.afterText.length - l.beforeText.length),
+          (offset += edit.afterText.length - edit.beforeText.length),
           new tc({
-            beforeStart: l.beforeStart,
-            afterStart: c,
-            beforeText: l.beforeText,
-            afterText: l.afterText,
+            beforeStart: edit.beforeStart,
+            afterStart: newAfterStart,
+            beforeText: edit.beforeText,
+            afterText: edit.afterText,
           })
         )
       })
     }
     return new _g({
-      path: r,
-      edits: o,
-      beforeBlobName: this._blobNameCalculator.calculateNoThrow(r, s),
-      afterBlobName: this._blobNameCalculator.calculateNoThrow(r, i),
+      path: filePath,
+      edits: edits,
+      beforeBlobName: this._blobNameCalculator.calculateNoThrow(filePath, oldText),
+      afterBlobName: this._blobNameCalculator.calculateNoThrow(filePath, newText),
     }).normalize()
   }
-  handleChangedDocument(r) {
-    let n = r.relPath,
-      i = r.event
-    if (!Q6.includes(i.document.uri.scheme)) return
-    if (i.document.getText().length > this._maxBlobSizeBytes) {
-      this._logger.debug(`Ignoring event for ${n} because it is too large`)
+  handleChangedDocument(docEvent) {
+    let filePath = docEvent.relPath,
+      vscodeEvent = docEvent.event
+    if (!Q6.includes(vscodeEvent.document.uri.scheme)) return
+    if (vscodeEvent.document.getText().length > this._maxBlobSizeBytes) {
+      this._logger.debug(`Ignoring event for ${filePath} because it is too large`)
       return
     }
-    if (!this._lastKnownText.has(n)) {
+    if (!this._lastKnownText.has(filePath)) {
       this._logger.debug(
-        i.contentChanges.length > 0
-          ? `Last known text is not for the same file. Missing last known text for [${n}].  This is ok if we have recently cleared.`
-          : `Updating last known text for ${n} - based on empty event`,
+        vscodeEvent.contentChanges.length > 0
+          ? `Last known text is not for the same file. Missing last known text for [${filePath}].  This is ok if we have recently cleared.`
+          : `Updating last known text for ${filePath} - based on empty event`,
       ),
-        this._lastKnownText.set(n, i.document.getText())
+        this._lastKnownText.set(filePath, vscodeEvent.document.getText())
       return
     }
-    if (i.contentChanges.length === 0) {
-      this._logger.verbose(`Ignoring event for ${n} - no content changes`)
+    if (vscodeEvent.contentChanges.length === 0) {
+      this._logger.verbose(`Ignoring event for ${filePath} - no content changes`)
       return
     }
-    let s = this._vscodeEventToFileEditEvent(n, i)
-    s.hasChange() &&
-      (this._eventsQueue.addEvent(s), (this._lastEventTimestamp = Date.now()))
+    let fileEditEvent = this._vscodeEventToFileEditEvent(filePath, vscodeEvent)
+    fileEditEvent.hasChange() &&
+      (this._eventsQueue.addEvent(fileEditEvent), (this._lastEventTimestamp = Date.now()))
   }
   get lastEventTimestamp() {
     return this._lastEventTimestamp
   }
-  handleOpenedDocument(r) {
-    if (Q6.includes(r.document.uri.scheme)) {
-      if (r.document.getText().length > this._maxBlobSizeBytes) {
+  handleOpenedDocument(docEvent) {
+    if (Q6.includes(docEvent.document.uri.scheme)) {
+      if (docEvent.document.getText().length > this._maxBlobSizeBytes) {
         this._logger.debug(
-          `Ignoring event for ${r.relPath} because it is too large`,
+          `Ignoring event for ${docEvent.relPath} because it is too large`,
         )
         return
       }
       this._logger.debug(
-        `Adding last known text for ${r.relPath}. size before = ${this._lastKnownText.size}`,
+        `Adding last known text for ${docEvent.relPath}. size before = ${this._lastKnownText.size}`,
       ),
-        this._lastKnownText.set(r.relPath, r.document.getText())
+        this._lastKnownText.set(docEvent.relPath, docEvent.document.getText())
     }
   }
-  handleClosedDocument(r) {
+  handleClosedDocument(docEvent) {
     this._logger.debug(
-      `Removing last known text for ${r.relPath}. size before = ${this._lastKnownText.size}`,
+      `Removing last known text for ${docEvent.relPath}. size before = ${this._lastKnownText.size}`,
     ),
-      this._lastKnownText.delete(r.relPath)
+      this._lastKnownText.delete(docEvent.relPath)
   }
   getEvents() {
-    let r = [],
-      n = 0,
-      i = this._eventsQueue.getEvents()
-    for (let s = i.length - 1; s >= 0; s--) {
-      let o = i[s]
-      if (n + o.changedChars() > this.maxEventCharsToReturn) break
-      r.push(o), (n += o.changedChars())
+    let events = [],
+      totalChars = 0,
+      allEvents = this._eventsQueue.getEvents()
+    for (let index = allEvents.length - 1; index >= 0; index--) {
+      let event = allEvents[index]
+      if (totalChars + event.changedChars() > this.maxEventCharsToReturn) break
+      events.push(event), (totalChars += event.changedChars())
     }
-    return r.reverse(), r
+    return events.reverse(), events
   }
-  handleFileDeleted(r) {
-    this._logger.debug(`Deleting events for ${r.relPath}`),
-      this._lastKnownText.delete(r.relPath),
-      this._eventsQueue.removeEventsForFile(r.relPath)
+  handleFileDeleted(fileEvent) {
+    this._logger.debug(`Deleting events for ${fileEvent.relPath}`),
+      this._lastKnownText.delete(fileEvent.relPath),
+      this._eventsQueue.removeEventsForFile(fileEvent.relPath)
   }
-  _handleFileWillRename(r, n) {
-    this._logger.debug(`Renaming events for file [${r}] to [${n}]`),
-      this._lastKnownText.has(r) &&
-        (this._lastKnownText.set(n, this._lastKnownText.get(r)),
-        this._lastKnownText.delete(r)),
-      this._eventsQueue.updatePath(r, n)
+  _handleFileWillRename(oldPath, newPath) {
+    this._logger.debug(`Renaming events for file [${oldPath}] to [${newPath}]`),
+      this._lastKnownText.has(oldPath) &&
+        (this._lastKnownText.set(newPath, this._lastKnownText.get(oldPath)),
+        this._lastKnownText.delete(oldPath)),
+      this._eventsQueue.updatePath(oldPath, newPath)
   }
-  handleFileWillRename(r) {
+  handleFileWillRename(renameEvent) {
     if (
       (this._logger.debug(
-        `Renaming events for file/folder [${r.oldRelPath}] to [${r.newRelPath}]`,
+        `Renaming events for file/folder [${renameEvent.oldRelPath}] to [${renameEvent.newRelPath}]`,
       ),
-      r.type === "File")
+      renameEvent.type === "File")
     )
-      this._handleFileWillRename(r.oldRelPath, r.newRelPath)
-    else if (r.type === "Directory") {
-      for (let n of this._lastKnownText.keys())
-        if (Qs(r.oldRelPath, n)) {
-          let i = r.newRelPath + n.slice(r.oldRelPath.length)
-          this._handleFileWillRename(n, i)
+      this._handleFileWillRename(renameEvent.oldRelPath, renameEvent.newRelPath)
+    else if (renameEvent.type === "Directory") {
+      for (let path of this._lastKnownText.keys())
+        if (Qs(renameEvent.oldRelPath, path)) {
+          let newPath = renameEvent.newRelPath + path.slice(renameEvent.oldRelPath.length)
+          this._handleFileWillRename(path, newPath)
         }
     }
   }
-  clear(r) {
+  clear(options) {
     this._eventsQueue.clear(),
-      r.clearLastKnown && this._lastKnownText.clear(),
+      options.clearLastKnown && this._lastKnownText.clear(),
       (this._lastEventTimestamp = 0),
       this._store.clear()
   }
   async loadEvents() {
-    ;(await this._store.load()).forEach((n) =>
-      this._eventsQueue.addEvent(_g.from(n)),
+    ;(await this._store.load()).forEach((eventData) =>
+      this._eventsQueue.addEvent(_g.from(eventData)),
     )
   }
   dispose() {
@@ -114842,110 +114842,110 @@ var bw = class extends DisposableContainer {
       this._logger.debug("Disposing FileEditEventsWatcher")
   }
 }
-var Ew = class extends DisposableContainer {
-  constructor(r, n, i, s, o, a, l, c, u = 5e3) {
+var FileEditManager = class extends DisposableContainer {
+  constructor(blobNameCalculator, maxBlobSizeBytes, onFolderTextDocumentChanged, onFolderTextDocumentOpened, onFolderTextDocumentClosed, onFolderFileDeleted, onFolderFileWillRename, debugFeaturesEnabled, maxEventCharsToReturn = 5e3) {
     super()
-    this._blobNameCalculator = r
-    this._maxBlobSizeBytes = n
-    this._onFolderTextDocumentChanged = i
-    this._onFolderTextDocumentOpened = s
-    this._onFolderTextDocumentClosed = o
-    this._onFolderFileDeleted = a
-    this._onFolderFileWillRename = l
-    this._debugFeaturesEnabled = c
-    this._maxEventCharsToReturn = u
+    this._blobNameCalculator = blobNameCalculator
+    this._maxBlobSizeBytes = maxBlobSizeBytes
+    this._onFolderTextDocumentChanged = onFolderTextDocumentChanged
+    this._onFolderTextDocumentOpened = onFolderTextDocumentOpened
+    this._onFolderTextDocumentClosed = onFolderTextDocumentClosed
+    this._onFolderFileDeleted = onFolderFileDeleted
+    this._onFolderFileWillRename = onFolderFileWillRename
+    this._debugFeaturesEnabled = debugFeaturesEnabled
+    this._maxEventCharsToReturn = maxEventCharsToReturn
   }
   _watcher = new Map()
   _logger = z("FileEditManager")
   listenToEvents() {
     this._logger.debug("Listening to events"),
       this.addDisposable(
-        this._onFolderTextDocumentChanged((r) =>
-          this._handleTextDocumentChanged(r),
+        this._onFolderTextDocumentChanged((event) =>
+          this._handleTextDocumentChanged(event),
         ),
       ),
       this.addDisposable(
-        this._onFolderTextDocumentOpened((r) =>
-          this._handleTextDocumentOpened(r),
+        this._onFolderTextDocumentOpened((event) =>
+          this._handleTextDocumentOpened(event),
         ),
       ),
       this.addDisposable(
-        this._onFolderTextDocumentClosed((r) =>
-          this._handleTextDocumentClosed(r),
+        this._onFolderTextDocumentClosed((event) =>
+          this._handleTextDocumentClosed(event),
         ),
       ),
       this.addDisposable(
-        this._onFolderFileDeleted((r) => this._handleFileDeleted(r)),
+        this._onFolderFileDeleted((event) => this._handleFileDeleted(event)),
       ),
       this.addDisposable(
-        this._onFolderFileWillRename((r) => this._handleFileWillRename(r)),
+        this._onFolderFileWillRename((event) => this._handleFileWillRename(event)),
       ),
       this.addDisposable(
-        yN((r) => {
-          this._logger.debug(`Stash changed for repo ${r.repoId}`),
-            this._watcher.get(r.repoId)?.clear({ clearLastKnown: true })
+        yN((repoEvent) => {
+          this._logger.debug(`Stash changed for repo ${repoEvent.repoId}`),
+            this._watcher.get(repoEvent.repoId)?.clear({ clearLastKnown: true })
         }),
       ),
       this.addDisposable(
-        Km((r) => {
-          this._logger.debug(`Head changed for repo ${r.repoId}`),
-            this._watcher.get(r.repoId)?.clear({ clearLastKnown: true })
+        Km((repoEvent) => {
+          this._logger.debug(`Head changed for repo ${repoEvent.repoId}`),
+            this._watcher.get(repoEvent.repoId)?.clear({ clearLastKnown: true })
         }),
       )
   }
-  _handleTextDocumentChanged(r) {
-    let n = this._watcher.get(r.folderId)
-    n && n.handleChangedDocument(r)
+  _handleTextDocumentChanged(event) {
+    let watcher = this._watcher.get(event.folderId)
+    watcher && watcher.handleChangedDocument(event)
   }
-  _handleTextDocumentOpened(r) {
-    let n = this._watcher.get(r.folderId)
-    n && n.handleOpenedDocument(r)
+  _handleTextDocumentOpened(event) {
+    let watcher = this._watcher.get(event.folderId)
+    watcher && watcher.handleOpenedDocument(event)
   }
-  _handleTextDocumentClosed(r) {
-    let n = this._watcher.get(r.folderId)
-    n && n.handleClosedDocument(r)
+  _handleTextDocumentClosed(event) {
+    let watcher = this._watcher.get(event.folderId)
+    watcher && watcher.handleClosedDocument(event)
   }
-  _handleFileDeleted(r) {
-    let n = this._watcher.get(r.folderId)
-    n && n.handleFileDeleted(r)
+  _handleFileDeleted(event) {
+    let watcher = this._watcher.get(event.folderId)
+    watcher && watcher.handleFileDeleted(event)
   }
-  _handleFileWillRename(r) {
-    let n = this._watcher.get(r.folderId)
-    n && n.handleFileWillRename(r)
+  _handleFileWillRename(event) {
+    let watcher = this._watcher.get(event.folderId)
+    watcher && watcher.handleFileWillRename(event)
   }
   findFolderIdWithMostRecentChanges() {
-    let r,
-      n = -1,
-      i = -1
-    for (let [s, o] of this._watcher)
-      o.lastEventTimestamp > n && ((r = o), (n = o.lastEventTimestamp), (i = s))
-    return r === undefined ? -1 : i
+    let mostRecentWatcher,
+      mostRecentTimestamp = -1,
+      mostRecentFolderId = -1
+    for (let [folderId, watcher] of this._watcher)
+      watcher.lastEventTimestamp > mostRecentTimestamp && ((mostRecentWatcher = watcher), (mostRecentTimestamp = watcher.lastEventTimestamp), (mostRecentFolderId = folderId))
+    return mostRecentWatcher === undefined ? -1 : mostRecentFolderId
   }
-  findEventsForFolder(r) {
-    let n = this._watcher.get(r)
-    return n === undefined ? [] : n.getEvents()
+  findEventsForFolder(folderId) {
+    let watcher = this._watcher.get(folderId)
+    return watcher === undefined ? [] : watcher.getEvents()
   }
-  addInitialDocument(r) {
-    this._handleTextDocumentOpened(r)
+  addInitialDocument(document) {
+    this._handleTextDocumentOpened(document)
   }
-  startTracking(r, n, i) {
-    this._logger.debug(`Tracking folder ${r} with store at ${i.directory}`)
-    let s = new bw(
-      n,
+  startTracking(folderId, folderName, storeConfig) {
+    this._logger.debug(`Tracking folder ${folderId} with store at ${storeConfig.directory}`)
+    let fileEditWatcher = new FileEditWatcher(
+      folderName,
       this._blobNameCalculator,
       this._maxBlobSizeBytes,
-      this._debugFeaturesEnabled ? new i2(i) : new n2(),
+      this._debugFeaturesEnabled ? new i2(storeConfig) : new n2(),
       this._maxEventCharsToReturn,
     )
-    return this._watcher.set(r, s), s.loadEvents(), s
+    return this._watcher.set(folderId, fileEditWatcher), fileEditWatcher.loadEvents(), fileEditWatcher
   }
-  clearAll(r) {
-    this._watcher.forEach((n) => n.clear(r))
+  clearAll(options) {
+    this._watcher.forEach((watcher) => watcher.clear(options))
   }
   dispose() {
     super.dispose(),
       this._logger.debug("Disposing FileEditManager"),
-      this._watcher.forEach((r) => r.dispose())
+      this._watcher.forEach((watcher) => watcher.dispose())
   }
 }
 var xw = q(require("vscode")),
@@ -115239,36 +115239,36 @@ function BIe(e) {
 }
 var Sw = q(require("path")),
   j6 = q(require("vscode"))
-async function d2(e, t, r, n) {
-  let i = await r.build(e, t),
-    s = new Map()
-  s.set("", i), s.set(".", i)
-  let o = 200,
-    a = Date.now(),
-    l = []
-  l.push([e, i])
-  let c
-  for (; (c = l.pop()) !== undefined; ) {
-    Date.now() - a >= o &&
-      (await new Promise((v) => setTimeout(v, 0)), (a = Date.now()))
-    let [f, p] = c,
-      g = lf(t, f),
-      m = hm(f.fsPath),
-      y = await p.buildAtop(f, m)
-    y !== p && s.set(g, y)
-    for (let [v, C] of m) {
+async function buildIgnoreStack(rootUri, workspaceUri, ignoreBuilder, fileExtensions) {
+  let rootIgnoreStack = await ignoreBuilder.build(rootUri, workspaceUri),
+    ignoreStackMap = new Map()
+  ignoreStackMap.set("", rootIgnoreStack), ignoreStackMap.set(".", rootIgnoreStack)
+  let yieldInterval = 200,
+    lastYieldTime = Date.now(),
+    dirStack = []
+  dirStack.push([rootUri, rootIgnoreStack])
+  let currentDir
+  for (; (currentDir = dirStack.pop()) !== undefined; ) {
+    Date.now() - lastYieldTime >= yieldInterval &&
+      (await new Promise((resolve) => setTimeout(resolve, 0)), (lastYieldTime = Date.now()))
+    let [dirUri, parentIgnoreStack] = currentDir,
+      relativePath = lf(workspaceUri, dirUri),
+      dirEntries = hm(dirUri.fsPath),
+      dirIgnoreStack = await parentIgnoreStack.buildAtop(dirUri, dirEntries)
+    dirIgnoreStack !== parentIgnoreStack && ignoreStackMap.set(relativePath, dirIgnoreStack)
+    for (let [entryName, entryType] of dirEntries) {
       if (
-        (Date.now() - a >= o &&
-          (await new Promise((N) => setTimeout(N, 0)), (a = Date.now())),
-        v === "." || v === ".." || C !== "Directory")
+        (Date.now() - lastYieldTime >= yieldInterval &&
+          (await new Promise((resolve) => setTimeout(resolve, 0)), (lastYieldTime = Date.now())),
+        entryName === "." || entryName === ".." || entryType !== "Directory")
       )
         continue
-      let w = j6.Uri.joinPath(f, v),
-        B = joinPaths(g, v, true)
-      y.getPathInfo(B).accepted && l.push([w, y])
+      let entryUri = j6.Uri.joinPath(dirUri, entryName),
+        entryPath = joinPaths(relativePath, entryName, true)
+      dirIgnoreStack.getPathInfo(entryPath).accepted && dirStack.push([entryUri, dirIgnoreStack])
     }
   }
-  return new z6(s, n)
+  return new PathFilter(ignoreStackMap, fileExtensions)
 }
 var gC = class {
     constructor(t, r, n, i) {
@@ -115354,7 +115354,7 @@ var gC = class {
       return `Unsupported file extension (${this.extension})`
     }
   },
-  u2 = class {
+  BasePathFilter = class {
     _fileExtensions
     constructor(t) {
       if (t) {
@@ -115378,7 +115378,7 @@ var gC = class {
       return n === undefined ? new wg() : n.getPathInfo(t)
     }
   },
-  z6 = class extends u2 {
+  PathFilter = class extends BasePathFilter {
     constructor(r, n) {
       super(n)
       this._ignorePathMap = r
@@ -115399,7 +115399,7 @@ var gC = class {
       throw new Error(`Too-deep or malformed directory name ${r}`)
     }
   },
-  J6 = class extends u2 {
+  J6 = class extends BasePathFilter {
     constructor(r, n) {
       super(n)
       this._ignoreStack = r
@@ -115409,11 +115409,11 @@ var gC = class {
     }
   }
 var Ibt = q(require("vscode"))
-function Zm(e) {
-  let t
-  return new Promise((r) => {
-    t = e((n) => {
-      t.dispose(), r(n)
+function createDisposablePromise(registerCallback) {
+  let disposable
+  return new Promise((resolve) => {
+    disposable = registerCallback((result) => {
+      disposable.dispose(), resolve(result)
     })
   })
 }
@@ -115495,7 +115495,7 @@ var e9 = class extends DisposableContainer {
     super()
     this._blobNameCalculator = r
     this._apiServer = n
-    ;(this._uploadQueue = new Va(async (i) => {
+    ;(this._uploadQueue = new ProcessQueue(async (i) => {
       i !== undefined && (await this._processUpload(i))
     })),
       this.addDisposable(this._uploadQueue)
@@ -115981,7 +115981,7 @@ var OpenFileManagerProxy = class {
     return this._configListener.config.openFileManager.v2Enabled
   }
   startTrackingFolder(folder, folderId) {
-    return this.isV2Enabled
+    return this.isV2Enabled // =
       ? [
           this._openFileManagerV2.startTrackingFolder(folder, folderId),
           this._openFileManagerV1.openSourceFolder(folderId),
@@ -116744,7 +116744,7 @@ var h9 = class {
     constructor(t) {
       this._blobNameCalculator = t
       ;(this._openDocumentSnapshotCache = new h9(this._blobNameCalculator)),
-        (this._fileEditsStore = new jm(1e6))
+        (this._fileEditsStore = new EventQueue(1e6))
     }
     _openDocumentSnapshotCache
     _fileEditsStore
@@ -117409,7 +117409,7 @@ var BlobsCheckpointManager = class BlobsCheckpointManager extends DisposableCont
     )
   }
   updateBlob(filePath, prevBlobName, newBlobName) {
-    this._logger.verbose(`notifyBlobChange ${filePath}: ${prevBlobName} to ${newBlobName}`),
+    this._logger.verbose(`notifyBlobChange ${filePath}: ${prevBlobName} to ${newBlobName}`), // =
       newBlobName && newBlobName !== prevBlobName && this.refBlob(newBlobName),
       prevBlobName && newBlobName !== prevBlobName && this.derefBlob(prevBlobName),
       this._toAdd.size + this._toRemove.size >= this._checkpointThreshold &&
@@ -117662,7 +117662,7 @@ var _9 = class {
     }
     async awaitQuiesced() {
       if (!(this._stopping || this._itemsInFlight.size === 0))
-        return Zm(this._onQuiesced)
+        return createDisposablePromise(this._onQuiesced)
     }
     _nextSeq() {
       return this._seq++
@@ -118019,13 +118019,13 @@ var _9 = class {
           this._probeRetryBackoffWaiters.insert(seqId, probeItem))
     }
   }
-var Df = class {
+var MTimeCache = class {
     static cacheFileName = "mtime-cache.json"
     static tmpFileName = "mtime-cache.json.tmp"
   },
-  w9 = class {
-    constructor(t = Xb) {
-      this.namingVersion = t
+  MTimeCacheData = class {
+    constructor(version = DEFAULT_NAMING_VERSION) {
+      this.namingVersion = version
     }
     entries = new Array()
   }
@@ -118037,28 +118037,28 @@ function Wbt(e) {
     return { mtime: e.mtime, name: e.name }
 }
 function Gbt(e) {
-  return joinPaths(e, Df.cacheFileName)
+  return joinPaths(e, MTimeCache.cacheFileName)
 }
 function T2(e) {
   let t = Gbt(e)
   return fileExists(t)
 }
 async function LIe(e, t) {
-  let r = joinPaths(e, Df.cacheFileName),
-    n = joinPaths(t, Df.cacheFileName)
+  let r = joinPaths(e, MTimeCache.cacheFileName),
+    n = joinPaths(t, MTimeCache.cacheFileName)
   await Hl(t), await IG(r, n)
 }
 async function UIe(e, t) {
   let r = new Map(),
     n = z(`MtimeCache[${e}]`),
-    i = joinPaths(t, Df.cacheFileName)
+    i = joinPaths(t, MTimeCache.cacheFileName)
   n.info(`reading blob name cache from ${i}`)
   try {
     let s = 0,
       o = await readTextFile(i),
       a = JSON.parse(o)
-    if (a.namingVersion === undefined || a.namingVersion !== Xb)
-      n.info(`blob naming version ${a.namingVersion} !== ${Xb}`)
+    if (a.namingVersion === undefined || a.namingVersion !== DEFAULT_NAMING_VERSION)
+      n.info(`blob naming version ${a.namingVersion} !== ${DEFAULT_NAMING_VERSION}`)
     else if (Array.isArray(a.entries))
       for (let [l, c] of a.entries) {
         let u = Wbt(c)
@@ -118075,13 +118075,13 @@ async function UIe(e, t) {
   }
   return r
 }
-var D2 = class extends Df {
-  constructor(r, n) {
+var MTimeCacheWriter = class extends MTimeCache {
+  constructor(cacheName, cacheDirPath) {
     super()
-    this._name = r
-    this._cacheDirName = n
-    ;(this._cacheFileName = joinPaths(this._cacheDirName, Df.cacheFileName)),
-      (this._tmpFileName = joinPaths(this._cacheDirName, Df.tmpFileName))
+    this._name = cacheName
+    this._cacheDirName = cacheDirPath
+    ;(this._cacheFileName = joinPaths(this._cacheDirName, MTimeCache.cacheFileName)),
+      (this._tmpFileName = joinPaths(this._cacheDirName, MTimeCache.tmpFileName))
   }
   _cacheFileName
   _tmpFileName
@@ -118089,15 +118089,15 @@ var D2 = class extends Df {
   get cacheFileName() {
     return this._cacheFileName
   }
-  async write(r) {
+  async write(entries) {
     this._logger.debug(`persisting to ${this._cacheFileName}`)
-    let n = new w9()
-    for (let [i, s, o] of r) n.entries.push([i, { mtime: s, name: o }])
+    let cacheData = new MTimeCacheData()
+    for (let [path, modTime, blobName] of entries) cacheData.entries.push([path, { mtime: modTime, name: blobName }])
     await Hl(this._cacheDirName),
-      await oa(this._tmpFileName, JSON.stringify(n, undefined, 4)),
+      await oa(this._tmpFileName, JSON.stringify(cacheData, undefined, 4)),
       await IG(this._tmpFileName, this._cacheFileName),
       this._logger.debug(
-        `persisted ${n.entries.length} entries at naming version ${Xb} to ${this._cacheFileName}`,
+        `persisted ${cacheData.entries.length} entries at naming version ${DEFAULT_NAMING_VERSION} to ${this._cacheFileName}`,
       )
   }
 }
@@ -118312,14 +118312,14 @@ var VIe = 6,
   Jbt = 30 * 1e3,
   jbt = 30 * 1e3,
   Zbt = 60 * 1e3,
-  k2 = class {
-    constructor(t, r, n, i) {
-      this.folderId = t
-      this.pathName = r
-      this.key = n
-      this.appliedSeq = i
+  TrackedDocument = class {
+    constructor(folderId, pathName, documentKey, sequenceNumber) {
+      this.folderId = folderId
+      this.pathName = pathName
+      this.key = documentKey
+      this.appliedSeq = sequenceNumber
       ;(this.recentChangesets = new CircularBuffer(HIe)),
-        this.addChangeset(i),
+        this.addChangeset(sequenceNumber),
         (this.changesSinceUpload = new AC())
     }
     uploadedBlobName
@@ -118352,56 +118352,56 @@ var VIe = 6,
     getBlobName() {
       return this.recentChanges(false)?.blobName
     }
-    longestHistory(t) {
+    longestHistory(includeUnverified) {
       if (this.uploadedSeq === undefined) return
-      let r = this.recentChangesets.at(0)
-      if (r !== undefined) {
-        if (t)
+      let oldestChangeset = this.recentChangesets.at(0)
+      if (oldestChangeset !== undefined) {
+        if (includeUnverified)
           return {
-            changeTracker: r.changeTracker,
+            changeTracker: oldestChangeset.changeTracker,
             blobName: this.uploadedBlobName,
           }
         if (
           this.uploadedBlobName !== undefined &&
-          !(r.initialSeq > this.uploadedSeq)
+          !(oldestChangeset.initialSeq > this.uploadedSeq)
         )
           return {
-            changeTracker: r.changeTracker,
+            changeTracker: oldestChangeset.changeTracker,
             blobName: this.uploadedBlobName,
           }
       }
     }
-    recentChanges(t) {
+    recentChanges(includeUnverified) {
       return this.inProgressUpload !== undefined
         ? this.inProgressUpload.savedChangeset
-        : this.longestHistory(t)
+        : this.longestHistory(includeUnverified)
     }
-    applyAll(t, r, n, i) {
-      for (let s of this.recentChangesets) s.changeTracker.apply(t, r, n, i)
-      this.appliedSeq = t
+    applyAll(sequenceNumber, text, startOffset, endOffset) {
+      for (let changeset of this.recentChangesets) changeset.changeTracker.apply(sequenceNumber, text, startOffset, endOffset)
+      this.appliedSeq = sequenceNumber
     }
     advanceAll() {
-      for (let t of this.recentChangesets) t.changeTracker.advance()
+      for (let changeset of this.recentChangesets) changeset.changeTracker.advance()
     }
-    addChangeset(t) {
-      this.recentChangesets.addItem({ initialSeq: t, changeTracker: new AC() })
+    addChangeset(sequenceNumber) {
+      this.recentChangesets.addItem({ initialSeq: sequenceNumber, changeTracker: new AC() })
     }
-    purgeChangesets(t) {
-      let r = 0
+    purgeChangesets(sequenceNumber) {
+      let purgedCount = 0
       for (
         ;
         !this.recentChangesets.empty &&
-        !((this.recentChangesets.at(1)?.initialSeq ?? this.appliedSeq) >= t);
+        !((this.recentChangesets.at(1)?.initialSeq ?? this.appliedSeq) >= sequenceNumber);
 
       )
-        this.recentChangesets.shiftLeft(1), r++
-      return r
+        this.recentChangesets.shiftLeft(1), purgedCount++
+      return purgedCount
     }
   },
-  I9 = class extends k2 {
-    constructor(r, n, i, s, o) {
-      super(r, n, i, o)
-      this.document = s
+  TextDocumentTracker = class extends TrackedDocument {
+    constructor(folderId, pathName, documentKey, textDocument, sequenceNumber) {
+      super(folderId, pathName, documentKey, sequenceNumber)
+      this.document = textDocument
     }
     get documentType() {
       return 0
@@ -118410,10 +118410,10 @@ var VIe = 6,
       return this.document.getText()
     }
   },
-  B9 = class extends k2 {
-    constructor(r, n, i, s, o) {
-      super(r, n, i, o)
-      this.document = s
+  NotebookDocumentTracker = class extends TrackedDocument {
+    constructor(folderId, pathName, documentKey, notebookDocument, sequenceNumber) {
+      super(folderId, pathName, documentKey, sequenceNumber)
+      this.document = notebookDocument
     }
     get documentType() {
       return 1
@@ -118438,17 +118438,17 @@ var OpenFileManager = class OpenFileManager extends DisposableContainer {
     this._pathMap = pathMap
     this._sequenceGenerator = sequenceGenerator
     ;(this._logger = z("OpenFileManager")),
-      (this._uploadQueue = new Va(this._upload.bind(this))),
+      (this._uploadQueue = new ProcessQueue(this._upload.bind(this))),
       this.addDisposable(this._uploadQueue),
-      (this._verifyWaiters = new Va(this._enqueueForVerify.bind(this))),
+      (this._verifyWaiters = new ProcessQueue(this._enqueueForVerify.bind(this))),
       this.addDisposable(this._verifyWaiters),
       (this._verifyWaitersKicker = new Oc(this._verifyWaiters, Ybt)),
       this.addDisposable(this._verifyWaitersKicker),
-      (this._longWaiters = new Va(this._enqueueForVerify.bind(this))),
+      (this._longWaiters = new ProcessQueue(this._enqueueForVerify.bind(this))),
       this.addDisposable(this._longWaiters),
       (this._longWaitersKicker = new Oc(this._longWaiters, Kbt)),
       this.addDisposable(this._longWaitersKicker),
-      (this._verifyQueue = new Va(this._verify.bind(this))),
+      (this._verifyQueue = new ProcessQueue(this._verify.bind(this))),
       this.addDisposable(this._verifyQueue)
   }
   _trackedFolders = new Map()
@@ -118465,7 +118465,7 @@ var OpenFileManager = class OpenFileManager extends DisposableContainer {
     if (this._trackedFolders.has(folderId))
       throw new Error(`Source folder ${folderId} is already open`)
     return (
-      this._trackedFolders.set(folderId, new Map()),
+      this._trackedFolders.set(folderId, new Map()), // =
       this._logger.info(`Opened source folder ${folderId}`),
       new kw.Disposable(() => {
         this._closeSourceFolder(folderId)
@@ -118654,8 +118654,8 @@ var OpenFileManager = class OpenFileManager extends DisposableContainer {
       notebookCells = eEt(documentObj)
     if (notebookCells === undefined) {
       let textDocument = documentObj
-      document = new I9(folderId, pathName, initialSeq, textDocument, initialSeq)
-    } else document = new B9(folderId, pathName, initialSeq, notebookCells, initialSeq)
+      document = new TextDocumentTracker(folderId, pathName, initialSeq, textDocument, initialSeq)
+    } else document = new NotebookDocumentTracker(folderId, pathName, initialSeq, notebookCells, initialSeq)
     folderMap.set(pathName, document)
     let fileContent = document.getText(),
       blobName = this._blobNameCalculator.calculate(pathName, fileContent)
@@ -119555,7 +119555,7 @@ var L2 = class e {
     return { trackable: true, trackableFiles: s, uploadedFraction: (l - c) / l }
   }
   async _getAllPathNames(t, r, n) {
-    let i = await d2(
+    let i = await buildIgnoreStack(
       Mw.Uri.file(t),
       Mw.Uri.file(r),
       new fC(n),
@@ -119733,18 +119733,18 @@ var q2 = class e extends DisposableContainer {
         this._longWaiters.insert(r, n))
   }
 }
-var yC = class e {
-  constructor(t, r, n, i = [], s = [], o, a) {
-    this.blobs = t
-    this.recentChunks = r
-    this.trackedPaths = n
-    this.unindexedEditEvents = i
-    this.unindexedEditEventsBaseBlobNames = s
-    this.lastChatResponse = o
-    this.blobNames = a
+var IndexingContext = class IndexingContext {
+  constructor(blobsData, recentChunks, trackedPaths, unindexedEditEvents = [], unindexedEditEventsBaseBlobNames = [], lastChatResponse, blobNames) {
+    this.blobs = blobsData
+    this.recentChunks = recentChunks
+    this.trackedPaths = trackedPaths
+    this.unindexedEditEvents = unindexedEditEvents
+    this.unindexedEditEventsBaseBlobNames = unindexedEditEventsBaseBlobNames
+    this.lastChatResponse = lastChatResponse
+    this.blobNames = blobNames
   }
   static empty() {
-    return new e(
+    return new IndexingContext(
       { checkpointId: undefined, addedBlobs: [], deletedBlobs: [] },
       new Array(),
       new Map(),
@@ -119773,7 +119773,7 @@ var SourceFolder = class extends DisposableContainer {
       this.diskFileManager = diskFileManager
       this.cacheDirPath = cacheDirPath
       this.logger = logger
-      ;(this._operationQueue = new Va(
+      ;(this._operationQueue = new ProcessQueue(
         async (operation) => await this._runSerializedOperation(operation),
       )),
         this.addDisposables(this._operationQueue, {
@@ -120138,7 +120138,7 @@ var WorkspaceManager = class WorkspaceManager extends DisposableContainer {
   }
   async awaitInitialFoldersEnumerated() {
     for (; !this.initialFoldersEnumerated; )
-      await Zm(this._folderEnumeratedEmitter.event)
+      await createDisposablePromise(this._folderEnumeratedEmitter.event)
   }
   get onDidEnumerateFolder() {
     return this._folderEnumeratedEmitter.event
@@ -120155,7 +120155,7 @@ var WorkspaceManager = class WorkspaceManager extends DisposableContainer {
   }
   async awaitInitialFoldersSynced() {
     for (; !this.initialFoldersSynced; )
-      await Zm(this._folderSyncedEmitter.event)
+      await createDisposablePromise(this._folderSyncedEmitter.event)
   }
   get onDidChangeSyncingProgress() {
     return this._syncingProgressEmitter.event
@@ -120228,7 +120228,7 @@ var WorkspaceManager = class WorkspaceManager extends DisposableContainer {
         this._featureFlagManager.currentFlags.vscodeNextEditMinVersion,
       ) || this.getEnableCompletionFileEditEvents()
         ? this._fileEditManager === undefined &&
-          ((this._fileEditManager = new Ew(
+          ((this._fileEditManager = new FileEditManager(
             this._blobNameCalculator,
             this._maxUploadSizeBytes,
             this._textDocumentChangedEmitter.event,
@@ -120410,14 +120410,14 @@ var WorkspaceManager = class WorkspaceManager extends DisposableContainer {
   enableSyncing() {
     this._logger.info("Enabling syncing for all trackable source folders")
     let permittedFolders = new Array()
-    this._registeredSourceFolders.forEach((folderInfo, folderPath) => {
+    this._registeredSourceFolders.forEach((folderInfo, folderPath) => { //=
       let folderStatus = getFolderStatus(folderInfo)
       isNonTrackableFolderStatus(folderStatus) ||
         folderStatus === "qualifying" ||
         ((folderInfo.syncingPermission = "granted"), permittedFolders.push(folderPath))
     }),
-      this._syncingPermissionTracker.setPermittedFolders(permittedFolders),
-      this._kickSourceFolderReconciler()
+      this._syncingPermissionTracker.setPermittedFolders(permittedFolders), // =
+      this._kickSourceFolderReconciler() // =
   }
   disableSyncing() {
     this._logger.info("Disabling syncing for all trackable source folders"),
@@ -120435,8 +120435,8 @@ var WorkspaceManager = class WorkspaceManager extends DisposableContainer {
       this._kickSourceFolderReconciler()
   }
   async _kickSourceFolderReconciler() {
-    await this._updateStoredExternalSourceFolders()
-    let nestedFolders = new Set()
+    await this._updateStoredExternalSourceFolders() // =
+    let nestedFolders = new Set() // =
     for (let [folderPath, folderInfo] of this._registeredSourceFolders)
       if (getFolderStatus(folderInfo) === "trackable") {
         for (let [otherPath, otherInfo] of this._registeredSourceFolders)
@@ -120460,23 +120460,23 @@ var WorkspaceManager = class WorkspaceManager extends DisposableContainer {
           break
         }
     }
-    this._updateActionsModelState()
+    this._updateActionsModelState() // =
     for (let [folderPath, folderInfo] of this._registeredSourceFolders)
       getFolderStatus(folderInfo) === "qualifying" &&
         folderInfo.cancel === undefined &&
         this._qualifySourceFolder(folderPath, folderInfo)
     this._syncingStateEmitter.fire(this.syncingEnabledState),
       this._sourceFoldersChangedEmitter.fire(),
-      this._sourceFolderReconciler.kick()
+      this._sourceFolderReconciler.kick() // =
   }
   async _updateStoredExternalSourceFolders() {
     let externalFolders = new Map()
     for (let [folderPath, folderInfo] of this._registeredSourceFolders)
       folderInfo.folderType === 1 && externalFolders.set(folderPath, folderInfo.folderName)
-    await this._externalSourceFolderRecorder.setFolders(externalFolders)
+    await this._externalSourceFolderRecorder.setFolders(externalFolders) // =
   }
   _updateActionsModelState() {
-    if (this._syncingPermissionTracker.syncingPermissionDenied) {
+    if (this._syncingPermissionTracker.syncingPermissionDenied) { // =
       this._actionsModel.setSystemStateStatus("syncingPermitted", "incomplete")
       return
     }
@@ -120563,11 +120563,11 @@ var WorkspaceManager = class WorkspaceManager extends DisposableContainer {
       this._kickSourceFolderReconciler()
   }
   async _reconcileSourceFolders() {
-    await this._syncingPermissionTracker.persistCurrentPermission()
-    let syncingDisabled = this.syncingEnabledState === "disabled",
+    await this._syncingPermissionTracker.persistCurrentPermission() // =
+    let syncingDisabled = this.syncingEnabledState === "disabled", // =
       foldersToStop = new Map()
     for (let [folderPath, trackedFolder] of this._trackedSourceFolders) {
-      let folderInfo = this._registeredSourceFolders.get(folderPath),
+      let folderInfo = this._registeredSourceFolders.get(folderPath), // =
         stopReason
       if (folderInfo === undefined) stopReason = "source folder has been removed"
       else if (syncingDisabled) stopReason = "syncing is disabled"
@@ -120603,11 +120603,11 @@ var WorkspaceManager = class WorkspaceManager extends DisposableContainer {
     for (let [folderPath, [trackedFolder, stopReason]] of foldersToStop)
       trackedFolder.logger.info(`Stop tracking: ${stopReason}`),
         this._trackedSourceFolders.delete(folderPath),
-        this._stopTracking(trackedFolder)
+        this._stopTracking(trackedFolder) // =
     for (let [folderPath, trackedFolder] of foldersToStart)
       trackedFolder.logger.info("Start tracking"),
         this._trackedSourceFolders.set(folderPath, trackedFolder),
-        this._startTracking(folderPath, trackedFolder)
+        this._startTracking(folderPath, trackedFolder) // =
     return Promise.resolve()
   }
   async _startTracking(folderPath, trackedFolder) {
@@ -120672,7 +120672,7 @@ var WorkspaceManager = class WorkspaceManager extends DisposableContainer {
         sourceFolder.setInitialSyncComplete(),
         this._folderSyncedEmitter.fire(),
         startupMetrics?.charge("await DiskFileManager quiesced")
-      let mtimeCachePersister = new D2(folderName, sourceFolder.cacheDirPath)
+      let mtimeCachePersister = new MTimeCacheWriter(folderName, sourceFolder.cacheDirPath)
       this._pathMap.enablePersist(folderId, mtimeCachePersister, WorkspaceManager.pathMapPersistFrequencyMs),
         startupMetrics.charge("enable persist"),
         this._reportSourceFolderStartup(trackedFolder.logger, sourceFolder, startupMetrics, enumerationResult),
@@ -120682,7 +120682,7 @@ var WorkspaceManager = class WorkspaceManager extends DisposableContainer {
     }
   }
   async _createSourceFolder(folderPath, trackedFolder, cancellationToken) {
-    let folderName = trackedFolder.folderName,
+    let folderName = trackedFolder.folderName, // =
       disposables = new DisposableCollection(),
       childDisposables = new DisposableCollection(),
       workspaceFolder = trackedFolder.folderSpec.folderType === 1 ? undefined : trackedFolder.folderSpec.workspaceFolder,
@@ -120779,7 +120779,7 @@ var WorkspaceManager = class WorkspaceManager extends DisposableContainer {
   }
   async _createSourceFolderTracker(sourceFolder, startupMetrics) {
     let disposables = new DisposableCollection(),
-      pathFilter = await d2(
+      pathFilter = await buildIgnoreStack(
         St.Uri.file(sourceFolder.folderRoot),
         St.Uri.file(sourceFolder.repoRoot),
         new fC(WorkspaceManager.ignoreSources(sourceFolder.folderRoot)),
@@ -120935,7 +120935,7 @@ var WorkspaceManager = class WorkspaceManager extends DisposableContainer {
   }
   getContext() {
     if (this._openFileManager === undefined || this._pathMap === undefined)
-      return yC.empty()
+      return IndexingContext.empty()
     let recencySummary = this._openFileManager.getRecencySummary(
         this._completionServer.completionParams.chunkSize,
       ),
@@ -120989,7 +120989,7 @@ var WorkspaceManager = class WorkspaceManager extends DisposableContainer {
         recencySummary.folderMap.get(folderId)?.has(fileType) || allBlobNames.add(blobName)
       let blobNameArray = Array.from(allBlobNames),
         blobs = this._blobNamesToBlobs(blobNameArray)
-      if (((context = new yC(blobs, recentChunks, folderRootMap, editEvents, indexedBlobs, this._lastChatResponse, blobNameArray)), !useCheckpointManager)) return context
+      if (((context = new IndexingContext(blobs, recentChunks, folderRootMap, editEvents, indexedBlobs, this._lastChatResponse, blobNameArray)), !useCheckpointManager)) return context
     }
     let checkpointContext = blobsCheckpointManager.getContextAdjusted(blobNames, implicitBlobNames)
     return (
@@ -120999,7 +120999,7 @@ var WorkspaceManager = class WorkspaceManager extends DisposableContainer {
             client_metric: "blob_context_mismatch",
             value: 1,
           })),
-      new yC(checkpointContext, recentChunks, folderRootMap, editEvents, indexedBlobs, this._lastChatResponse)
+      new IndexingContext(checkpointContext, recentChunks, folderRootMap, editEvents, indexedBlobs, this._lastChatResponse)
     )
   }
   getContextWithBlobNames() {
@@ -121693,7 +121693,7 @@ var WorkspaceStateManager = class extends DisposableContainer {
       return
     }
     for (this._setWorkspaceEmpty(); !this._anyFilesExist(); )
-      await Zm(this.workspaceManager.onDidChangeSyncingProgress)
+      await createDisposablePromise(this.workspaceManager.onDidChangeSyncingProgress)
     this._setWorkspacePopulated()
   }
   _anyFilesExist() {
@@ -122040,7 +122040,7 @@ var AugmentExtension = class e extends DisposableContainer {
       this.disposeOnDisable.push(
         this.workspaceManager.onDidChangeSourceFolders(() => reportSourceFoldersDebounced()),
       ),
-      (this.syncingStatusReporter = new r2(
+      (this.syncingStatusReporter = new SyncingStatusReporter(
         this.featureFlagManager,
         this.workspaceManager,
       )),
@@ -122347,7 +122347,7 @@ var AugmentExtension = class e extends DisposableContainer {
       keybindingWatcherRef = this.keybindingWatcher
     this.disposeOnDisable.push(
       this._changeWebviewAppEvent.event((appType) => {
-        let newApp, newChatExtensionEventDisposable
+        let newApp, newChatExtensionEventDisposable // =
         switch ((this._currentChatExtensionEventDisposable?.dispose(), appType)) {
           case "chat":
             ;(newApp = new ChatApp(
