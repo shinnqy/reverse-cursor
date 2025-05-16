@@ -3019,8 +3019,8 @@ class eg {
 }
 const Wr = gn("idle")
 var ng = ((a) => ((a.manual = "manual"), (a.auto = "auto"), a))(ng || {})
-class yp {
-  constructor(e, s, i, o = {}) {
+class ChatManager {
+  constructor(asyncMsgSender, host, specialContextInputModel, options = {}) {
     d(this, "_state", {
       currentConversationId: void 0,
       conversations: {},
@@ -3036,59 +3036,59 @@ class yp {
     d(this, "agentExecutionMode")
     d(this, "sortConversationsBy")
     d(this, "onLoaded", async () => {
-      var s, i
-      const e = await this.extensionClient.getChatInitData()
+      var onLoadedCallback, callbackResult
+      const initData = await this.extensionClient.getChatInitData()
       this._chatFlagsModel.update({
-        enableEditableHistory: e.enableEditableHistory ?? !1,
-        enablePreferenceCollection: e.enablePreferenceCollection ?? !1,
-        enableRetrievalDataCollection: e.enableRetrievalDataCollection ?? !1,
-        enableDebugFeatures: e.enableDebugFeatures ?? !1,
-        enableRichTextHistory: e.useRichTextHistory ?? !0,
-        modelDisplayNameToId: e.modelDisplayNameToId ?? {},
-        fullFeatured: e.fullFeatured ?? !0,
+        enableEditableHistory: initData.enableEditableHistory ?? !1,
+        enablePreferenceCollection: initData.enablePreferenceCollection ?? !1,
+        enableRetrievalDataCollection: initData.enableRetrievalDataCollection ?? !1,
+        enableDebugFeatures: initData.enableDebugFeatures ?? !1,
+        enableRichTextHistory: initData.useRichTextHistory ?? !0,
+        modelDisplayNameToId: initData.modelDisplayNameToId ?? {},
+        fullFeatured: initData.fullFeatured ?? !0,
         isRemoteAgentWindow: !1,
         remoteAgentId: void 0,
-        smallSyncThreshold: e.smallSyncThreshold ?? 15,
-        bigSyncThreshold: e.bigSyncThreshold ?? 1e3,
-        enableExternalSourcesInChat: e.enableExternalSourcesInChat ?? !1,
-        enableSmartPaste: e.enableSmartPaste ?? !1,
-        enableDirectApply: e.enableDirectApply ?? !1,
-        summaryTitles: e.summaryTitles ?? !1,
-        suggestedEditsAvailable: e.suggestedEditsAvailable ?? !1,
-        enableShareService: e.enableShareService ?? !1,
-        maxTrackableFileCount: e.maxTrackableFileCount ?? el,
+        smallSyncThreshold: initData.smallSyncThreshold ?? 15,
+        bigSyncThreshold: initData.bigSyncThreshold ?? 1e3,
+        enableExternalSourcesInChat: initData.enableExternalSourcesInChat ?? !1,
+        enableSmartPaste: initData.enableSmartPaste ?? !1,
+        enableDirectApply: initData.enableDirectApply ?? !1,
+        summaryTitles: initData.summaryTitles ?? !1,
+        suggestedEditsAvailable: initData.suggestedEditsAvailable ?? !1,
+        enableShareService: initData.enableShareService ?? !1,
+        maxTrackableFileCount: initData.maxTrackableFileCount ?? el,
         enableDesignSystemRichTextEditor:
-          e.enableDesignSystemRichTextEditor ?? !1,
-        enableSources: e.enableSources ?? !1,
-        enableChatMermaidDiagrams: e.enableChatMermaidDiagrams ?? !1,
-        smartPastePrecomputeMode: e.smartPastePrecomputeMode ?? Jc.visibleHover,
-        useNewThreadsMenu: e.useNewThreadsMenu ?? !1,
+          initData.enableDesignSystemRichTextEditor ?? !1,
+        enableSources: initData.enableSources ?? !1,
+        enableChatMermaidDiagrams: initData.enableChatMermaidDiagrams ?? !1,
+        smartPastePrecomputeMode: initData.smartPastePrecomputeMode ?? Jc.visibleHover,
+        useNewThreadsMenu: initData.useNewThreadsMenu ?? !1,
         enableChatMermaidDiagramsMinVersion:
-          e.enableChatMermaidDiagramsMinVersion ?? !1,
-        idleNewSessionMessageTimeoutMs: e.idleNewSessionMessageTimeoutMs,
+          initData.enableChatMermaidDiagramsMinVersion ?? !1,
+        idleNewSessionMessageTimeoutMs: initData.idleNewSessionMessageTimeoutMs,
         idleNewSessionNotificationTimeoutMs:
-          e.idleNewSessionNotificationTimeoutMs,
-        enableChatMultimodal: e.enableChatMultimodal ?? !1,
-        enableAgentMode: e.enableAgentMode ?? !1,
-        agentMemoriesFilePathName: e.agentMemoriesFilePathName,
-        enableRichCheckpointInfo: e.enableRichCheckpointInfo ?? !1,
-        userTier: e.userTier ?? "unknown",
-        truncateChatHistory: e.truncateChatHistory ?? !1,
-        enableBackgroundAgents: e.enableBackgroundAgents ?? !1,
-        enableVirtualizedMessageList: e.enableVirtualizedMessageList ?? !1,
-        customPersonalityPrompts: e.customPersonalityPrompts ?? {},
-        enablePersonalities: e.enablePersonalities ?? !1,
+          initData.idleNewSessionNotificationTimeoutMs,
+        enableChatMultimodal: initData.enableChatMultimodal ?? !1,
+        enableAgentMode: initData.enableAgentMode ?? !1,
+        agentMemoriesFilePathName: initData.agentMemoriesFilePathName,
+        enableRichCheckpointInfo: initData.enableRichCheckpointInfo ?? !1,
+        userTier: initData.userTier ?? "unknown",
+        truncateChatHistory: initData.truncateChatHistory ?? !1,
+        enableBackgroundAgents: initData.enableBackgroundAgents ?? !1,
+        enableVirtualizedMessageList: initData.enableVirtualizedMessageList ?? !1,
+        customPersonalityPrompts: initData.customPersonalityPrompts ?? {},
+        enablePersonalities: initData.enablePersonalities ?? !1,
         memoryClassificationOnFirstToken:
-          e.memoryClassificationOnFirstToken ?? !1,
-        enableGenerateCommitMessage: e.enableGenerateCommitMessage ?? !1,
+          initData.memoryClassificationOnFirstToken ?? !1,
+        enableGenerateCommitMessage: initData.enableGenerateCommitMessage ?? !1,
       }),
-        (i = (s = this.options).onLoaded) == null || i.call(s),
+        (callbackResult = (onLoadedCallback = this.options).onLoaded) == null || callbackResult.call(onLoadedCallback),
         this.notifySubscribers(),
-        (e.enableBackgroundAgents ?? !1) &&
-          this.extensionClient.getRemoteAgentStatus().then((o) => {
+        (initData.enableBackgroundAgents ?? !1) &&
+          this.extensionClient.getRemoteAgentStatus().then((agentStatus) => {
             this._chatFlagsModel.update({
-              isRemoteAgentWindow: o.isRemoteAgentWindow,
-              remoteAgentId: o.remoteAgentId,
+              isRemoteAgentWindow: agentStatus.isRemoteAgentWindow,
+              remoteAgentId: agentStatus.remoteAgentId,
             }),
               this.notifySubscribers()
           })
@@ -3096,54 +3096,54 @@ class yp {
     d(
       this,
       "subscribe",
-      (e) => (
-        this.subscribers.add(e),
-        e(this),
+      (subscriber) => (
+        this.subscribers.add(subscriber),
+        subscriber(this),
         () => {
-          this.subscribers.delete(e)
+          this.subscribers.delete(subscriber)
         }
       ),
     )
-    d(this, "initialize", (e) => {
+    d(this, "initialize", (initialConversation) => {
       ;(this._state = { ...this._state, ...this._host.getState() }),
-        e && (this._state.conversations[e == null ? void 0 : e.id] = e),
+        initialConversation && (this._state.conversations[initialConversation == null ? void 0 : initialConversation.id] = initialConversation),
         this._chatFlagsModel.fullFeatured &&
-          (((e == null ? void 0 : e.id) !== xa &&
+          (((initialConversation == null ? void 0 : initialConversation.id) !== xa &&
             this.currentConversationId !== xa) ||
             (delete this._state.conversations[xa],
             this.setCurrentConversationToWelcome())),
-        this._chatFlagsModel.subscribe((s) => {
+        this._chatFlagsModel.subscribe((flagsModel) => {
           ;(this.idleMessageModel.idleNotifyTimeout =
-            s.idleNewSessionNotificationTimeoutMs),
+            flagsModel.idleNewSessionNotificationTimeoutMs),
             (this.idleMessageModel.idleMessageTimeout =
-              s.idleNewSessionMessageTimeoutMs)
+              flagsModel.idleNewSessionMessageTimeoutMs)
         }),
         (this._state.conversations = Object.fromEntries(
-          Object.entries(this._state.conversations).filter(([s, i]) =>
-            Et.isValid(i),
+          Object.entries(this._state.conversations).filter(([convId, conversation]) =>
+            Et.isValid(conversation),
           ),
         )),
         this.initializeIsShareableState(),
-        e
-          ? this.setCurrentConversation(e.id)
+        initialConversation
+          ? this.setCurrentConversation(initialConversation.id)
           : this.setCurrentConversation(this.currentConversationId),
         this.subscribe(() => this.idleMessageModel.activity()),
         this.setState(this._state)
     })
     d(this, "initializeIsShareableState", () => {
-      const e = { ...this._state.conversations }
-      for (const [s, i] of Object.entries(e)) {
-        if (i.isShareable) continue
-        const o = i.chatHistory.some((c) => gs(c))
-        e[s] = { ...i, isShareable: o }
+      const conversations = { ...this._state.conversations }
+      for (const [convId, conversation] of Object.entries(conversations)) {
+        if (conversation.isShareable) continue
+        const hasResponse = conversation.chatHistory.some((item) => gs(item))
+        conversations[convId] = { ...conversation, isShareable: hasResponse }
       }
-      this._state.conversations = e
+      this._state.conversations = conversations
     })
-    d(this, "updateChatState", (e) => {
-      this._state = { ...this._state, ...e }
-      const s = this._state.conversations,
-        i = new Set()
-      for (const [o, c] of Object.entries(s)) c.isPinned && i.add(o)
+    d(this, "updateChatState", (newState) => {
+      this._state = { ...this._state, ...newState }
+      const conversations = this._state.conversations,
+        pinnedIds = new Set()
+      for (const [convId, conversation] of Object.entries(conversations)) conversation.isPinned && pinnedIds.add(convId)
       this.setState(this._state), this.notifySubscribers()
     })
     d(this, "saveImmediate", () => {
@@ -3153,9 +3153,9 @@ class yp {
       this,
       "setState",
       ff(
-        (e) => {
+        (state) => {
           this._host.setState({
-            ...e,
+            ...state,
             isAgentEditsCollapsed: Us(this.isAgentEditsCollapsed),
             agentExecutionMode: Us(this.agentExecutionMode),
             sortConversationsBy: Us(this.sortConversationsBy),
@@ -3166,13 +3166,13 @@ class yp {
       ),
     )
     d(this, "notifySubscribers", () => {
-      this.subscribers.forEach((e) => e(this))
+      this.subscribers.forEach((subscriber) => subscriber(this))
     })
     d(
       this,
       "withWebviewClientEvent",
-      (e, s) =>
-        (...i) => (this.extensionClient.reportWebviewClientEvent(e), s(...i)),
+      (eventName, callback) =>
+        (...args) => (this.extensionClient.reportWebviewClientEvent(eventName), callback(...args)),
     )
     d(this, "setCurrentConversationToWelcome", () => {
       this.setCurrentConversation(),
@@ -3184,218 +3184,218 @@ class yp {
         })
     })
     d(this, "popCurrentConversation", async () => {
-      var s, i
-      const e = this.currentConversationId
-      e &&
+      var nextConv, prevConv
+      const currentId = this.currentConversationId
+      currentId &&
         (await this.deleteConversation(
-          e,
-          ((s = this.nextConversation) == null ? void 0 : s.id) ??
-            ((i = this.previousConversation) == null ? void 0 : i.id),
+          currentId,
+          ((nextConv = this.nextConversation) == null ? void 0 : nextConv.id) ??
+            ((prevConv = this.previousConversation) == null ? void 0 : prevConv.id),
         ))
     })
-    d(this, "setCurrentConversation", async (e, s = !0) => {
-      let i
-      e === void 0
+    d(this, "setCurrentConversation", async (conversationId, shouldLoadContext = !0) => {
+      let conversation
+      conversationId === void 0
         ? (this.deleteInvalidConversations(
             ps(this._currConversationModel) ? "agent" : "chat",
           ),
-          (i = Et.create({
+          (conversation = Et.create({
             personaType: await this._currConversationModel.decidePersonaType(),
           })))
-        : (i =
-            this._state.conversations[e] ??
+        : (conversation =
+            this._state.conversations[conversationId] ??
             Et.create({
               personaType:
                 await this._currConversationModel.decidePersonaType(),
             }))
-      const o = this.conversations[this._currConversationModel.id] === void 0
-      this._currConversationModel.setConversation(i, !o, s),
+      const isNewConversation = this.conversations[this._currConversationModel.id] === void 0
+      this._currConversationModel.setConversation(conversation, !isNewConversation, shouldLoadContext),
         this._currConversationModel.recoverAllExchanges(),
         this._currConversationModel.resetTotalCharactersCache()
     })
-    d(this, "saveConversation", (e) => {
+    d(this, "saveConversation", (conversation) => {
       this.updateChatState({
-        conversations: { ...this._state.conversations, [e.id]: e },
-        currentConversationId: e.id,
+        conversations: { ...this._state.conversations, [conversation.id]: conversation },
+        currentConversationId: conversation.id,
       })
     })
-    d(this, "isConversationShareable", (e) => {
-      var s
+    d(this, "isConversationShareable", (conversationId) => {
+      var conversation
       return (
-        ((s = this._state.conversations[e]) == null ? void 0 : s.isShareable) ??
+        ((conversation = this._state.conversations[conversationId]) == null ? void 0 : conversation.isShareable) ??
         !0
       )
     })
-    d(this, "setSortConversationsBy", (e) => {
-      this.sortConversationsBy.set(e), this.updateChatState({})
+    d(this, "setSortConversationsBy", (sortBy) => {
+      this.sortConversationsBy.set(sortBy), this.updateChatState({})
     })
-    d(this, "getConversationUrl", async (e) => {
-      const s = this._state.conversations[e]
-      if (s.lastUrl) return s.lastUrl
+    d(this, "getConversationUrl", async (conversationId) => {
+      const conversation = this._state.conversations[conversationId]
+      if (conversation.lastUrl) return conversation.lastUrl
       Wr.set("copying")
-      const i = s == null ? void 0 : s.chatHistory,
-        o = i.reduce(
-          (m, v) => (
-            gs(v) &&
-              m.push({
-                request_id: v.request_id || "",
-                request_message: v.request_message,
-                response_text: v.response_text || "",
+      const chatHistory = conversation == null ? void 0 : conversation.chatHistory,
+        exchanges = chatHistory.reduce(
+          (result, item) => (
+            gs(item) &&
+              result.push({
+                request_id: item.request_id || "",
+                request_message: item.request_message,
+                response_text: item.response_text || "",
               }),
-            m
+            result
           ),
           [],
         )
-      if (o.length === 0) throw new Error("No chat history to share")
-      const c = Et.getDisplayName(s),
-        f = await this.extensionClient.saveChat(e, o, c)
-      if (f.data) {
-        let m = f.data.url
+      if (exchanges.length === 0) throw new Error("No chat history to share")
+      const displayName = Et.getDisplayName(conversation),
+        response = await this.extensionClient.saveChat(conversationId, exchanges, displayName)
+      if (response.data) {
+        let url = response.data.url
         return (
           this.updateChatState({
             conversations: {
               ...this._state.conversations,
-              [e]: { ...s, lastUrl: m },
+              [conversationId]: { ...conversation, lastUrl: url },
             },
           }),
-          m
+          url
         )
       }
       throw new Error("Failed to create URL")
     })
-    d(this, "shareConversation", async (e) => {
-      if (e !== void 0)
+    d(this, "shareConversation", async (conversationId) => {
+      if (conversationId !== void 0)
         try {
-          const s = await this.getConversationUrl(e)
-          if (!s) return void Wr.set("idle")
-          navigator.clipboard.writeText(s), Wr.set("copied")
+          const url = await this.getConversationUrl(conversationId)
+          if (!url) return void Wr.set("idle")
+          navigator.clipboard.writeText(url), Wr.set("copied")
         } catch {
           Wr.set("failed")
         }
     })
-    d(this, "deleteConversations", async (e, s = void 0) => {
+    d(this, "deleteConversations", async (conversationIds, nextConversationId = void 0) => {
       if (
         await this.extensionClient.openConfirmationModal({
           title: "Delete Conversation",
-          message: `Are you sure you want to delete ${e.length > 1 ? "these conversations" : "this conversation"}?`,
+          message: `Are you sure you want to delete ${conversationIds.length > 1 ? "these conversations" : "this conversation"}?`,
           confirmButtonText: "Delete",
           cancelButtonText: "Cancel",
         })
       ) {
-        const i = new Set(e)
-        this.deleteConversationIds(i),
+        const idsToDelete = new Set(conversationIds)
+        this.deleteConversationIds(idsToDelete),
           this.currentConversationId &&
-            i.has(this.currentConversationId) &&
-            this.setCurrentConversation(s)
+            idsToDelete.has(this.currentConversationId) &&
+            this.setCurrentConversation(nextConversationId)
       }
     })
-    d(this, "deleteConversation", async (e, s = void 0) => {
-      await this.deleteConversations([e], s)
+    d(this, "deleteConversation", async (conversationId, nextConversationId = void 0) => {
+      await this.deleteConversations([conversationId], nextConversationId)
     })
-    d(this, "deleteConversationIds", async (e) => {
-      var i
-      const s = []
-      for (const o of e) {
-        const c =
-          ((i = this._state.conversations[o]) == null
+    d(this, "deleteConversationIds", async (conversationIds) => {
+      var conversation
+      const requestIds = []
+      for (const convId of conversationIds) {
+        const ids =
+          ((conversation = this._state.conversations[convId]) == null
             ? void 0
-            : i.requestIds) ?? []
-        s.push(...c)
+            : conversation.requestIds) ?? []
+        requestIds.push(...ids)
       }
-      for (const o of Object.values(this._state.conversations))
-        if (e.has(o.id)) {
-          for (const f of o.chatHistory) Ae(f) && this.deleteImagesInExchange(f)
-          const c = o.draftExchange
-          c && this.deleteImagesInExchange(c)
+      for (const conversation of Object.values(this._state.conversations))
+        if (conversationIds.has(conversation.id)) {
+          for (const exchange of conversation.chatHistory) Ae(exchange) && this.deleteImagesInExchange(exchange)
+          const draftExchange = conversation.draftExchange
+          draftExchange && this.deleteImagesInExchange(draftExchange)
         }
       this.updateChatState({
         conversations: Object.fromEntries(
-          Object.entries(this._state.conversations).filter(([o]) => !e.has(o)),
+          Object.entries(this._state.conversations).filter(([convId]) => !conversationIds.has(convId)),
         ),
       }),
         this.extensionClient.clearMetadataFor({
-          requestIds: s,
-          conversationIds: Array.from(e),
+          requestIds: requestIds,
+          conversationIds: Array.from(conversationIds),
         })
     })
-    d(this, "deleteImagesInExchange", (e) => {
-      const s = new Set([
-        ...(e.rich_text_json_repr
-          ? this.findImagesInJson(e.rich_text_json_repr)
+    d(this, "deleteImagesInExchange", (exchange) => {
+      const imageIds = new Set([
+        ...(exchange.rich_text_json_repr
+          ? this.findImagesInJson(exchange.rich_text_json_repr)
           : []),
-        ...(e.structured_request_nodes
-          ? this.findImagesInStructuredRequest(e.structured_request_nodes)
+        ...(exchange.structured_request_nodes
+          ? this.findImagesInStructuredRequest(exchange.structured_request_nodes)
           : []),
       ])
-      for (const i of s) this.deleteImage(i)
+      for (const imageId of imageIds) this.deleteImage(imageId)
     })
-    d(this, "findImagesInJson", (e) => {
-      const s = [],
-        i = (o) => {
-          var c
-          if (o.type === "image" && (c = o.attrs) != null && c.src)
-            s.push(o.attrs.src)
-          else if ((o.type === "doc" || o.type === "paragraph") && o.content)
-            for (const f of o.content) i(f)
+    d(this, "findImagesInJson", (jsonData) => {
+      const imageIds = [],
+        processNode = (node) => {
+          var attrs
+          if (node.type === "image" && (attrs = node.attrs) != null && attrs.src)
+            imageIds.push(node.attrs.src)
+          else if ((node.type === "doc" || node.type === "paragraph") && node.content)
+            for (const childNode of node.content) processNode(childNode)
         }
-      return i(e), s
+      return processNode(jsonData), imageIds
     })
-    d(this, "findImagesInStructuredRequest", (e) =>
-      e.reduce(
-        (s, i) => (
-          i.type === ee.IMAGE_ID &&
-            i.image_id_node &&
-            s.push(i.image_id_node.image_id),
-          s
+    d(this, "findImagesInStructuredRequest", (nodes) =>
+      nodes.reduce(
+        (imageIds, node) => (
+          node.type === ee.IMAGE_ID &&
+            node.image_id_node &&
+            imageIds.push(node.image_id_node.image_id),
+          imageIds
         ),
         [],
       ),
     )
-    d(this, "toggleConversationPinned", (e) => {
-      const s = this._state.conversations[e],
-        i = { ...s, isPinned: !s.isPinned }
+    d(this, "toggleConversationPinned", (conversationId) => {
+      const conversation = this._state.conversations[conversationId],
+        updatedConversation = { ...conversation, isPinned: !conversation.isPinned }
       this.updateChatState({
-        conversations: { ...this._state.conversations, [e]: i },
+        conversations: { ...this._state.conversations, [conversationId]: updatedConversation },
       }),
-        e === this.currentConversationId &&
+        conversationId === this.currentConversationId &&
           this._currConversationModel.toggleIsPinned()
     })
-    d(this, "renameConversation", (e, s) => {
-      const i = { ...this._state.conversations[e], name: s }
+    d(this, "renameConversation", (conversationId, newName) => {
+      const updatedConversation = { ...this._state.conversations[conversationId], name: newName }
       this.updateChatState({
-        conversations: { ...this._state.conversations, [e]: i },
+        conversations: { ...this._state.conversations, [conversationId]: updatedConversation },
       }),
-        e === this.currentConversationId &&
-          this._currConversationModel.setName(s)
+        conversationId === this.currentConversationId &&
+          this._currConversationModel.setName(newName)
     })
-    d(this, "smartPaste", (e, s, i, o) => {
-      const c = this._currConversationModel
-        .historyTo(e, !0)
-        .filter((f) => gs(f))
-        .map((f) => ({
-          request_message: f.request_message,
-          response_text: f.response_text || "",
-          request_id: f.request_id || "",
+    d(this, "smartPaste", (requestId, generatedCode, targetFile, options) => {
+      const chatHistory = this._currConversationModel
+        .historyTo(requestId, !0)
+        .filter((item) => gs(item))
+        .map((exchange) => ({
+          request_message: exchange.request_message,
+          response_text: exchange.response_text || "",
+          request_id: exchange.request_id || "",
         }))
       this.extensionClient.smartPaste({
-        generatedCode: s,
-        chatHistory: c,
-        targetFile: i ?? void 0,
-        options: o,
+        generatedCode: generatedCode,
+        chatHistory: chatHistory,
+        targetFile: targetFile ?? void 0,
+        options: options,
       })
     })
-    d(this, "saveImage", async (e) => await this.extensionClient.saveImage(e))
+    d(this, "saveImage", async (imageData) => await this.extensionClient.saveImage(imageData))
     d(
       this,
       "deleteImage",
-      async (e) => await this.extensionClient.deleteImage(e),
+      async (imageId) => await this.extensionClient.deleteImage(imageId),
     )
-    d(this, "renderImage", async (e) => await this.extensionClient.loadImage(e))
-    ;(this._asyncMsgSender = e),
-      (this._host = s),
-      (this._specialContextInputModel = i),
-      (this.options = o),
-      (this._chatFlagsModel = new Wf(o.initialFlags)),
+    d(this, "renderImage", async (imageId) => await this.extensionClient.loadImage(imageId))
+    ;(this._asyncMsgSender = asyncMsgSender),
+      (this._host = host),
+      (this._specialContextInputModel = specialContextInputModel),
+      (this.options = options),
+      (this._chatFlagsModel = new Wf(options.initialFlags)),
       (this.extensionClient = new Nf(
         this._host,
         this._asyncMsgSender,
@@ -3407,7 +3407,7 @@ class yp {
         this._specialContextInputModel,
         this.saveConversation,
       )),
-      this.initialize(o.initialConversation),
+      this.initialize(options.initialConversation),
       (this.isAgentEditsCollapsed = gn(this._state.isAgentEditsCollapsed)),
       (this.agentExecutionMode = gn(
         this._state.agentExecutionMode ?? "manual",
@@ -3432,47 +3432,47 @@ class yp {
   get conversations() {
     return this._state.conversations
   }
-  orderedConversations(e, s = "desc", i) {
-    const o = e || this._state.sortConversationsBy || "lastMessageTimestamp"
-    let c = Object.values(this._state.conversations)
+  orderedConversations(sortBy, sortDirection = "desc", filterFn) {
+    const sortField = sortBy || this._state.sortConversationsBy || "lastMessageTimestamp"
+    let conversationList = Object.values(this._state.conversations)
     return (
-      i && (c = c.filter(i)),
-      c.sort((f, m) => {
-        const v = Et.getTime(f, o).getTime(),
-          C = Et.getTime(m, o).getTime()
-        return s === "asc" ? v - C : C - v
+      filterFn && (conversationList = conversationList.filter(filterFn)),
+      conversationList.sort((convA, convB) => {
+        const timeA = Et.getTime(convA, sortField).getTime(),
+          timeB = Et.getTime(convB, sortField).getTime()
+        return sortDirection === "asc" ? timeA - timeB : timeB - timeA
       })
     )
   }
   get nextConversation() {
     if (!this.currentConversationId) return
-    const e = this.orderedConversations(),
-      s = e.findIndex((i) => i.id === this.currentConversationId)
-    return e.length > s + 1 ? e[s + 1] : void 0
+    const orderedConvs = this.orderedConversations(),
+      currentIndex = orderedConvs.findIndex((conv) => conv.id === this.currentConversationId)
+    return orderedConvs.length > currentIndex + 1 ? orderedConvs[currentIndex + 1] : void 0
   }
   get previousConversation() {
     if (!this.currentConversationId) return
-    const e = this.orderedConversations(),
-      s = e.findIndex((i) => i.id === this.currentConversationId)
-    return s > 0 ? e[s - 1] : void 0
+    const orderedConvs = this.orderedConversations(),
+      currentIndex = orderedConvs.findIndex((conv) => conv.id === this.currentConversationId)
+    return currentIndex > 0 ? orderedConvs[currentIndex - 1] : void 0
   }
   get host() {
     return this._host
   }
-  deleteInvalidConversations(e = "all") {
-    const s = Object.keys(this.conversations).filter((i) => {
-      const o = !Et.isValid(this.conversations[i]),
-        c = ps(this.conversations[i])
-      return o && ((e === "agent" && c) || (e === "chat" && !c) || e === "all")
+  deleteInvalidConversations(type = "all") {
+    const invalidIds = Object.keys(this.conversations).filter((convId) => {
+      const isInvalid = !Et.isValid(this.conversations[convId]),
+        c = ps(this.conversations[convId])
+      return isInvalid && ((type === "agent" && isAgentConv) || (type === "chat" && !isAgentConv) || type === "all")
     })
-    s.length && this.deleteConversationIds(new Set(s))
+    invalidIds.length && this.deleteConversationIds(new Set(invalidIds))
   }
   get lastMessageTimestamp() {
-    const e = this.currentConversationModel.lastExchange
-    return e == null ? void 0 : e.timestamp
+    const lastExchange = this.currentConversationModel.lastExchange
+    return lastExchange == null ? void 0 : lastExchange.timestamp
   }
-  handleMessageFromExtension(e) {
-    return e.data.type === T.newThread && (this.setCurrentConversation(), !0)
+  handleMessageFromExtension(message) {
+    return message.data.type === T.newThread && (this.setCurrentConversation(), !0)
   }
 }
 const hs =
@@ -4569,7 +4569,7 @@ const Ba = class Ba {
     }
   })
 let Oa = Ba
-class vp {
+class ContextManager {
   constructor() {
     d(this, "_syncStatus", { status: Ff.done, foldersProgress: [] })
     d(this, "_syncEnabledState", Fc.initializing)
@@ -4584,61 +4584,61 @@ class vp {
     d(
       this,
       "subscribe",
-      (e) => (
-        this.subscribers.add(e),
-        e(this),
+      (callback) => (
+        this.subscribers.add(callback),
+        callback(this),
         () => {
-          this.subscribers.delete(e)
+          this.subscribers.delete(callback)
         }
       ),
     )
-    d(this, "handleMessageFromExtension", (e) => {
-      const s = e.data
-      switch (s.type) {
+    d(this, "handleMessageFromExtension", (message) => {
+      const data = message.data
+      switch (data.type) {
         case T.sourceFoldersUpdated:
-          this.onSourceFoldersUpdated(s.data.sourceFolders)
+          this.onSourceFoldersUpdated(data.data.sourceFolders)
           break
         case T.sourceFoldersSyncStatus:
-          this.onSyncStatusUpdated(s.data)
+          this.onSyncStatusUpdated(data.data)
           break
         case T.fileRangesSelected:
-          this.updateSelections(s.data)
+          this.updateSelections(data.data)
           break
         case T.currentlyOpenFiles:
-          this.setCurrentlyOpenFiles(s.data)
+          this.setCurrentlyOpenFiles(data.data)
           break
         case T.syncEnabledState:
-          this.onSyncEnabledStateUpdate(s.data)
+          this.onSyncEnabledStateUpdate(data.data)
           break
         case T.updateGuidelinesState:
-          this.onGuidelinesStateUpdate(s.data)
+          this.onGuidelinesStateUpdate(data.data)
           break
         default:
           return !1
       }
       return !0
     })
-    d(this, "onSourceFoldersUpdated", (e) => {
-      const s = this.sourceFolders
-      ;(e = this.updateSourceFoldersWithGuidelines(e)),
+    d(this, "onSourceFoldersUpdated", (folders) => {
+      const prevFolders = this.sourceFolders
+      ;(folders = this.updateSourceFoldersWithGuidelines(folders)),
         this._contextStore.update(
-          e.map((i) => ({
-            sourceFolder: i,
+          folders.map((folder) => ({
+            sourceFolder: folder,
             status: jt.active,
-            label: i.folderRoot,
-            showWarning: i.guidelinesOverLimit,
+            label: folder.folderRoot,
+            showWarning: folder.guidelinesOverLimit,
             id:
-              i.folderRoot +
-              String(i.guidelinesEnabled) +
-              String(i.guidelinesOverLimit),
+              folder.folderRoot +
+              String(folder.guidelinesEnabled) +
+              String(folder.guidelinesOverLimit),
           })),
-          s,
-          (i) => i.id,
+          prevFolders,
+          (item) => item.id,
         ),
         this.notifySubscribers()
     })
-    d(this, "onSyncStatusUpdated", (e) => {
-      ;(this._syncStatus = e), this.notifySubscribers()
+    d(this, "onSyncStatusUpdated", (status) => {
+      ;(this._syncStatus = status), this.notifySubscribers()
     })
     d(this, "disableContext", () => {
       ;(this._disableContext = !0), this.notifySubscribers()
@@ -4646,29 +4646,29 @@ class vp {
     d(this, "enableContext", () => {
       ;(this._disableContext = !1), this.notifySubscribers()
     })
-    d(this, "addFile", (e) => {
-      this.addFiles([e])
+    d(this, "addFile", (file) => {
+      this.addFiles([file])
     })
-    d(this, "addFiles", (e) => {
-      this.updateFiles(e, [])
+    d(this, "addFiles", (files) => {
+      this.updateFiles(files, [])
     })
-    d(this, "removeFile", (e) => {
-      this.removeFiles([e])
+    d(this, "removeFile", (file) => {
+      this.removeFiles([file])
     })
-    d(this, "removeFiles", (e) => {
-      this.updateFiles([], e)
+    d(this, "removeFiles", (files) => {
+      this.updateFiles([], files)
     })
-    d(this, "updateItems", (e, s) => {
-      this.updateItemsInplace(e, s), this.notifySubscribers()
+    d(this, "updateItems", (newItems, oldItems) => {
+      this.updateItemsInplace(newItems, oldItems), this.notifySubscribers()
     })
-    d(this, "updateItemsInplace", (e, s) => {
-      this._contextStore.update(e, s, (i) => i.id)
+    d(this, "updateItemsInplace", (newItems, oldItems) => {
+      this._contextStore.update(newItems, oldItems, (item) => item.id)
     })
-    d(this, "updateFiles", (e, s) => {
-      const i = (f) => ({ file: f, ...Zr(f) }),
-        o = e.map(i),
-        c = s.map(i)
-      this._contextStore.update(o, c, (f) => f.id), this.notifySubscribers()
+    d(this, "updateFiles", (filesToAdd, filesToRemove) => {
+      const createFileItem = (file) => ({ file: file, ...Zr(file) }),
+        newFileItems = filesToAdd.map(createFileItem),
+        oldFileItems = filesToRemove.map(createFileItem)
+      this._contextStore.update(newFileItems, oldFileItems, (item) => item.id), this.notifySubscribers()
     })
     d(this, "enableAgentMemories", () => {
       ;(this._enableAgentMemories = !0), this.notifySubscribers()
@@ -4676,144 +4676,144 @@ class vp {
     d(this, "disableAgentMemories", () => {
       ;(this._enableAgentMemories = !1), this.notifySubscribers()
     })
-    d(this, "setCurrentlyOpenFiles", (e) => {
-      const s = e.map((o) => ({ recentFile: o, ...Zr(o) })),
-        i = this._prevOpenFiles
-      ;(this._prevOpenFiles = s),
-        this._contextStore.update(s, i, (o) => o.id),
-        i.forEach((o) => {
-          const c = this._contextStore.peekKey(o.id)
-          c != null &&
-            c.recentFile &&
-            ((c.file = c.recentFile), delete c.recentFile)
+    d(this, "setCurrentlyOpenFiles", (files) => {
+      const newOpenFiles = files.map((file) => ({ recentFile: file, ...Zr(file) })),
+        prevOpenFiles = this._prevOpenFiles
+      ;(this._prevOpenFiles = newOpenFiles),
+        this._contextStore.update(newOpenFiles, prevOpenFiles, (item) => item.id),
+        prevOpenFiles.forEach((prevFile) => {
+          const contextItem = this._contextStore.peekKey(prevFile.id)
+          contextItem != null &&
+            contextItem.recentFile &&
+            ((contextItem.file = contextItem.recentFile), delete contextItem.recentFile)
         }),
-        s.forEach((o) => {
-          const c = this._contextStore.peekKey(o.id)
-          c != null && c.file && ((c.recentFile = c.file), delete c.file)
+        newOpenFiles.forEach((newFile) => {
+          const contextItem = this._contextStore.peekKey(newFile.id)
+          contextItem != null && contextItem.file && ((contextItem.recentFile = contextItem.file), delete contextItem.file)
         }),
         this.notifySubscribers()
     })
-    d(this, "onSyncEnabledStateUpdate", (e) => {
-      ;(this._syncEnabledState = e), this.notifySubscribers()
+    d(this, "onSyncEnabledStateUpdate", (state) => {
+      ;(this._syncEnabledState = state), this.notifySubscribers()
     })
-    d(this, "updateUserGuidelines", (e) => {
-      const s = this.userGuidelines,
-        i = {
-          userGuidelines: e,
+    d(this, "updateUserGuidelines", (guidelines) => {
+      const prevGuidelines = this.userGuidelines,
+        newGuidelineItem = {
+          userGuidelines: guidelines,
           label: "User Guidelines",
           id: "userGuidelines",
           status: jt.active,
           referenceCount: 1,
-          showWarning: e.overLimit,
+          showWarning: guidelines.overLimit,
         }
-      this._contextStore.update([i], s, (o) => {
-        var c, f
+      this._contextStore.update([newGuidelineItem], prevGuidelines, (item) => {
+        var guidelinesEnabled, guidelinesOverLimit
         return (
-          o.id +
-          String((c = o.userGuidelines) == null ? void 0 : c.enabled) +
-          String((f = o.userGuidelines) == null ? void 0 : f.overLimit)
+          item.id +
+          String((guidelinesEnabled = item.userGuidelines) == null ? void 0 : guidelinesEnabled.enabled) +
+          String((guidelinesOverLimit = item.userGuidelines) == null ? void 0 : guidelinesOverLimit.overLimit)
         )
       }),
         this.notifySubscribers()
     })
-    d(this, "onGuidelinesStateUpdate", (e) => {
-      ;(this._userGuidelines = e.userGuidelines),
-        (this._workspaceGuidelines = e.workspaceGuidelines ?? [])
-      const s = e.userGuidelines
-      s && this.updateUserGuidelines(s),
+    d(this, "onGuidelinesStateUpdate", (state) => {
+      ;(this._userGuidelines = state.userGuidelines),
+        (this._workspaceGuidelines = state.workspaceGuidelines ?? [])
+      const userGuidelines = state.userGuidelines
+      userGuidelines && this.updateUserGuidelines(userGuidelines),
         this.onSourceFoldersUpdated(
-          this.sourceFolders.map((i) => i.sourceFolder),
+          this.sourceFolders.map((folder) => folder.sourceFolder),
         )
     })
-    d(this, "updateSourceFoldersWithGuidelines", (e) =>
-      e.map((s) => {
-        const i = this._workspaceGuidelines.find(
-          (o) => o.workspaceFolder === s.folderRoot,
+    d(this, "updateSourceFoldersWithGuidelines", (folders) =>
+      folders.map((folder) => {
+        const guideline = this._workspaceGuidelines.find(
+          (wsGuideline) => wsGuideline.workspaceFolder === folder.folderRoot,
         )
         return {
-          ...s,
-          guidelinesEnabled: (i == null ? void 0 : i.enabled) ?? !1,
-          guidelinesOverLimit: (i == null ? void 0 : i.overLimit) ?? !1,
-          guidelinesLengthLimit: (i == null ? void 0 : i.lengthLimit) ?? 2e3,
+          ...folder,
+          guidelinesEnabled: (guideline == null ? void 0 : guideline.enabled) ?? !1,
+          guidelinesOverLimit: (guideline == null ? void 0 : guideline.overLimit) ?? !1,
+          guidelinesLengthLimit: (guideline == null ? void 0 : guideline.lengthLimit) ?? 2e3,
         }
       }),
     )
-    d(this, "toggleStatus", (e) => {
-      this._contextStore.toggleStatus(e.id), this.notifySubscribers()
+    d(this, "toggleStatus", (item) => {
+      this._contextStore.toggleStatus(item.id), this.notifySubscribers()
     })
-    d(this, "updateExternalSources", (e, s) => {
-      this._contextStore.update(e, s, (i) => i.id), this.notifySubscribers()
+    d(this, "updateExternalSources", (newSources, oldSources) => {
+      this._contextStore.update(newSources, oldSources, (item) => item.id), this.notifySubscribers()
     })
     d(this, "clearFiles", () => {
-      this._contextStore.update([], this.files, (e) => e.id),
+      this._contextStore.update([], this.files, (file) => file.id),
         this.notifySubscribers()
     })
-    d(this, "updateSelections", (e) => {
-      const s = this._contextStore.values.filter(Dc)
+    d(this, "updateSelections", (selections) => {
+      const prevSelections = this._contextStore.values.filter(Dc)
       this._contextStore.update(
-        e.map((i) => ({ selection: i, ...Zr(i) })),
-        s,
-        (i) => i.id,
+        selections.map((selection) => ({ selection: selection, ...Zr(selection) })),
+        prevSelections,
+        (item) => item.id,
       ),
         this.notifySubscribers()
     })
-    d(this, "maybeHandleDelete", ({ editor: e }) => {
+    d(this, "maybeHandleDelete", ({ editor: editor }) => {
       if (
-        e.state.selection.empty &&
-        e.state.selection.$anchor.pos === 1 &&
+        editor.state.selection.empty &&
+        editor.state.selection.$anchor.pos === 1 &&
         this.recentActiveItems.length > 0
       ) {
-        const s = this.recentActiveItems[0]
-        return this.markInactive(s), !0
+        const firstActiveItem = this.recentActiveItems[0]
+        return this.markInactive(firstActiveItem), !0
       }
       return !1
     })
-    d(this, "markInactive", (e) => {
-      this.markItemsInactive([e])
+    d(this, "markInactive", (item) => {
+      this.markItemsInactive([item])
     })
-    d(this, "markItemsInactive", (e) => {
-      e.forEach((s) => {
-        this._contextStore.setStatus(s.id, jt.inactive)
+    d(this, "markItemsInactive", (items) => {
+      items.forEach((item) => {
+        this._contextStore.setStatus(item.id, jt.inactive)
       }),
         this.notifySubscribers()
     })
     d(this, "markAllInactive", () => {
       this.markItemsInactive(this.recentActiveItems)
     })
-    d(this, "markActive", (e) => {
-      this.markItemsActive([e])
+    d(this, "markActive", (item) => {
+      this.markItemsActive([item])
     })
-    d(this, "markItemsActive", (e) => {
-      e.forEach((s) => {
-        this._contextStore.setStatus(s.id, jt.active)
+    d(this, "markItemsActive", (items) => {
+      items.forEach((item) => {
+        this._contextStore.setStatus(item.id, jt.active)
       }),
         this.notifySubscribers()
     })
     d(this, "markAllActive", () => {
       this.markItemsActive(this.recentInactiveItems)
     })
-    d(this, "unpin", (e) => {
-      this._contextStore.unpin(e.id), this.notifySubscribers()
+    d(this, "unpin", (item) => {
+      this._contextStore.unpin(item.id), this.notifySubscribers()
     })
-    d(this, "togglePinned", (e) => {
-      this._contextStore.togglePinned(e.id), this.notifySubscribers()
+    d(this, "togglePinned", (item) => {
+      this._contextStore.togglePinned(item.id), this.notifySubscribers()
     })
     d(this, "notifySubscribers", () => {
-      this.subscribers.forEach((e) => e(this))
+      this.subscribers.forEach((subscriber) => subscriber(this))
     })
     this.clearFiles()
   }
   get files() {
     return this._disableContext
       ? []
-      : this._contextStore.values.filter((e) => Xc(e) && !Ra(e))
+      : this._contextStore.values.filter((item) => Xc(item) && !Ra(item))
   }
   get recentFiles() {
     return this._disableContext ? [] : this._contextStore.values.filter(Ra)
   }
   get userGuidelinesText() {
-    var e
-    return ((e = this._userGuidelines) == null ? void 0 : e.contents) ?? ""
+    var guidelines
+    return ((guidelines = this._userGuidelines) == null ? void 0 : guidelines.contents) ?? ""
   }
   get selections() {
     return this._disableContext ? [] : this._contextStore.values.filter(Dc)
@@ -4842,27 +4842,27 @@ class vp {
   get activeFiles() {
     return this._disableContext
       ? []
-      : this.files.filter((e) => e.status === jt.active)
+      : this.files.filter((item) => item.status === jt.active)
   }
   get activeRecentFiles() {
     return this._disableContext
       ? []
-      : this.recentFiles.filter((e) => e.status === jt.active)
+      : this.recentFiles.filter((item) => item.status === jt.active)
   }
   get activeExternalSources() {
     return this._disableContext
       ? []
-      : this.externalSources.filter((e) => e.status === jt.active)
+      : this.externalSources.filter((item) => item.status === jt.active)
   }
   get activeSelections() {
     return this._disableContext
       ? []
-      : this.selections.filter((e) => e.status === jt.active)
+      : this.selections.filter((item) => item.status === jt.active)
   }
   get activeSourceFolders() {
     return this._disableContext
       ? []
-      : this.sourceFolders.filter((e) => e.status === jt.active)
+      : this.sourceFolders.filter((item) => item.status === jt.active)
   }
   get syncStatus() {
     return this._syncStatus.status
@@ -4871,48 +4871,48 @@ class vp {
     return this._syncEnabledState
   }
   get syncProgress() {
-    var v
+    var progressData
     if (
       this.syncEnabledState === Fc.disabled ||
       !this._syncStatus.foldersProgress
     )
       return
-    const e = this._syncStatus.foldersProgress.filter(
-      (C) => C.progress !== void 0,
+    const foldersWithProgress = this._syncStatus.foldersProgress.filter(
+      (folder) => folder.progress !== void 0,
     )
-    if (e.length === 0) return
-    const s = e.reduce((C, E) => {
-        var P
+    if (foldersWithProgress.length === 0) return
+    const totalTrackedFiles = foldersWithProgress.reduce((sum, folder) => {
+        var progress
         return (
-          C +
-          (((P = E == null ? void 0 : E.progress) == null
+          sum +
+          (((progress = folder == null ? void 0 : folder.progress) == null
             ? void 0
-            : P.trackedFiles) ?? 0)
+            : progress.trackedFiles) ?? 0)
         )
       }, 0),
-      i = e.reduce((C, E) => {
-        var P
+      totalBacklogSize = foldersWithProgress.reduce((sum, folder) => {
+        var progress
         return (
-          C +
-          (((P = E == null ? void 0 : E.progress) == null
+          sum +
+          (((progress = folder == null ? void 0 : folder.progress) == null
             ? void 0
-            : P.backlogSize) ?? 0)
+            : progress.backlogSize) ?? 0)
         )
       }, 0),
-      o = Math.max(s, 0),
-      c = Math.min(Math.max(i, 0), o),
-      f = o - c,
-      m = []
-    for (const C of e)
-      (v = C == null ? void 0 : C.progress) != null &&
-        v.newlyTracked &&
-        m.push(C.folderRoot)
+      totalFiles = Math.max(totalTrackedFiles, 0),
+      backlogSize = Math.min(Math.max(totalBacklogSize, 0), totalFiles),
+      syncedCount = totalFiles - backlogSize,
+      newlyTrackedFolders = []
+    for (const folder of foldersWithProgress)
+      (progressData = folder == null ? void 0 : folder.progress) != null &&
+        progressData.newlyTracked &&
+        newlyTrackedFolders.push(folder.folderRoot)
     return {
       status: this._syncStatus.status,
-      totalFiles: o,
-      syncedCount: f,
-      backlogSize: c,
-      newlyTrackedFolders: m,
+      totalFiles: totalFiles,
+      syncedCount: syncedCount,
+      backlogSize: backlogSize,
+      newlyTrackedFolders: newlyTrackedFolders,
     }
   }
   get contextCounts() {
@@ -4920,18 +4920,18 @@ class vp {
   }
   get chatActiveContext() {
     return {
-      userSpecifiedFiles: this.activeFiles.map((e) => ({
-        rootPath: e.file.repoRoot,
-        relPath: e.file.pathName,
+      userSpecifiedFiles: this.activeFiles.map((item) => ({
+        rootPath: item.file.repoRoot,
+        relPath: item.file.pathName,
       })),
-      recentFiles: this.activeRecentFiles.map((e) => ({
-        rootPath: e.recentFile.repoRoot,
-        relPath: e.recentFile.pathName,
+      recentFiles: this.activeRecentFiles.map((item) => ({
+        rootPath: item.recentFile.repoRoot,
+        relPath: item.recentFile.pathName,
       })),
-      externalSources: this.activeExternalSources.map((e) => e.externalSource),
-      selections: this.activeSelections.map((e) => e.selection),
-      sourceFolders: this.activeSourceFolders.map((e) => ({
-        rootPath: e.sourceFolder.folderRoot,
+      externalSources: this.activeExternalSources.map((item) => item.externalSource),
+      selections: this.activeSelections.map((item) => item.selection),
+      sourceFolders: this.activeSourceFolders.map((item) => ({
+        rootPath: item.sourceFolder.folderRoot,
         relPath: "",
       })),
     }
@@ -4941,7 +4941,7 @@ class vp {
       ? this.userGuidelines
       : [
           ...this._contextStore.values.filter(
-            (e) => !Fa(e) && !qc(e) && !za(e),
+            (item) => !Fa(item) && !qc(item) && !za(item),
           ),
           ...this.sourceFolders,
           ...this.userGuidelines,
@@ -4949,10 +4949,10 @@ class vp {
         ]
   }
   get recentActiveItems() {
-    return this.recentItems.filter((e) => e.status === jt.active)
+    return this.recentItems.filter((item) => item.status === jt.active)
   }
   get recentInactiveItems() {
-    return this.recentItems.filter((e) => e.status === jt.inactive)
+    return this.recentItems.filter((item) => item.status === jt.inactive)
   }
   get isContextDisabled() {
     return this._disableContext
@@ -12558,7 +12558,7 @@ export {
   qc as $,
   zn as A,
   dp as B,
-  yp as C,
+  ChatManager as C,
   ig as D,
   lt as E,
   gp as F,
@@ -12619,7 +12619,7 @@ export {
   $s as j,
   tp as k,
   ep as l,
-  vp as m,
+  ContextManager as m,
   Qg as n,
   Xg as o,
   dg as p,
