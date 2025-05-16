@@ -80486,7 +80486,7 @@ function getTextLength(e) {
 function getByteOffsetFromCodePointIndex(text, codePointIndex) {
   return [...text].slice(0, codePointIndex).join("").length
 }
-var yG = class {
+var TaskQueue = class {
   _items = new Map()
   _inProgress = false
   _stopping = false
@@ -80496,21 +80496,21 @@ var yG = class {
   get size() {
     return this._items.size
   }
-  cancel(t) {
-    this._items.delete(t)
+  cancel(key) {
+    this._items.delete(key)
   }
-  _insert(t, r, n = false) {
-    let i = this._items.has(t)
-    return !n && i ? false : (this._items.set(t, r), !i)
+  _insert(key, value, force = false) {
+    let exists = this._items.has(key)
+    return !force && exists ? false : (this._items.set(key, value), !exists)
   }
   async kick() {
     if (!(this._inProgress || this._stopping || this._items.size === 0)) {
       for (this._inProgress = true; this._items.size > 0 && !this._stopping; ) {
-        let t = this._items
+        let currentItems = this._items
         this._items = new Map()
-        for (let r of t) {
+        for (let entry of currentItems) {
           try {
-            await this._processEntry(r)
+            await this._processEntry(entry)
           } catch {}
           if (this._stopping) break
         }
@@ -80519,19 +80519,19 @@ var yG = class {
     }
   }
 }
-var sa = class extends yG {
-    constructor(r) {
+var KeyedTaskQueue = class extends TaskQueue {
+    constructor(processor) {
       super()
-      this._processItem = r
+      this._processItem = processor
     }
-    insert(r, n, i = false) {
-      return this._insert(r, n, i)
+    insert(key, value, force = false) {
+      return this._insert(key, value, force)
     }
-    get(r) {
-      return this._items.get(r)
+    get(key) {
+      return this._items.get(key)
     }
-    async _processEntry(r) {
-      return this._processItem(r)
+    async _processEntry(entry) {
+      return this._processItem(entry)
     }
   },
   Va = class {
@@ -86352,14 +86352,14 @@ Do.parseIndex = fmt
 Do.config = Rt
 Do.parseQuery = QCe
 Cmt(p4)
-var $Ce = q(_s()),
+var lodash = q(_s()),
   wx = q(require("path")),
   $a = q(require("vscode"))
-function Ns(e) {
-  return e.rootPath + "/" + e.relPath
+function getFullPath(pathInfo) {
+  return pathInfo.rootPath + "/" + pathInfo.relPath
 }
 function GM(e) {
-  return Ns({ rootPath: e.repoRoot, relPath: e.pathName })
+  return getFullPath({ rootPath: e.repoRoot, relPath: e.pathName })
 }
 var NCe = q(require("vscode"))
 function PCe(e, t) {
@@ -86409,14 +86409,14 @@ function rg(e) {
 }
 var LCe = q(RA())
 var UCe = q(require("vscode"))
-var ng = class extends DisposableContainer {
-  constructor(r, n, i) {
+var PersistentCache = class extends DisposableContainer {
+  constructor(globalState, cacheStorageKey, options) {
     super()
-    this._globalState = r
-    this._cacheBackKey = n
-    this._options = i
-    let s = { max: 1e3, ...this._options?.lru }
-    ;(this._cache = new Gf(s)),
+    this._globalState = globalState
+    this._cacheBackKey = cacheStorageKey
+    this._options = options
+    let cacheOptions = { max: 1000, ...this._options?.lru }
+    ;(this._cache = new Gf(cacheOptions)),
       this.loadContext(),
       this.addDisposable(new UCe.Disposable(() => this.dumpContext.cancel()))
   }
@@ -86424,35 +86424,35 @@ var ng = class extends DisposableContainer {
   _onExpiry
   dumpContext = (0, LCe.default)(
     async () => {
-      let r = this._cache.dump()
-      await this._globalState.save(this._cacheBackKey, r, {
+      let cacheData = this._cache.dump()
+      await this._globalState.save(this._cacheBackKey, cacheData, {
         uniquePerWorkspace: true,
       }),
         this._globalState.update(this._cacheBackKey, undefined)
     },
-    60 * 1e3,
+    60 * 1000,
     { leading: true, trailing: true },
   )
   loadContext = async () => {
-    let r = await this._globalState.load(this._cacheBackKey, {
+    let savedCache = await this._globalState.load(this._cacheBackKey, {
       uniquePerWorkspace: true,
     })
-    if (r) {
-      this._cache.load(r)
+    if (savedCache) {
+      this._cache.load(savedCache)
       return
     }
-    let n = this._globalState.get(this._cacheBackKey)
-    n && this._cache.load(n)
+    let legacyCache = this._globalState.get(this._cacheBackKey)
+    legacyCache && this._cache.load(legacyCache)
   }
-  set = async (r, n) => {
-    this._cache.set(r, n), await this.dumpContext()
+  set = async (key, value) => {
+    this._cache.set(key, value), await this.dumpContext()
   }
-  get = (r) => (this.dumpContext(), this._cache.get(r))
+  get = (key) => (this.dumpContext(), this._cache.get(key))
   get cache() {
     return this._cache
   }
-  remove = (r) => {
-    this._cache.delete(r)
+  remove = (key) => {
+    this._cache.delete(key)
   }
   clear = () => {
     this._cache.clear()
@@ -86461,19 +86461,19 @@ var ng = class extends DisposableContainer {
 }
 var OCe = q(RA()),
   qCe = q(require("vscode"))
-var xx = class extends DisposableContainer {
-  constructor(r, n, i) {
+var PersistentSearchIndex = class extends DisposableContainer {
+  constructor(globalState, indexStorageKey, options) {
     super()
-    this._globalState = r
-    this._indexBackKey = n
-    this._opts = i
+    this._globalState = globalState
+    this._indexBackKey = indexStorageKey
+    this._opts = options
     ;(this._maxKeysBeforeRemoval =
-      i.maxKeysBeforeRemoval ?? this._maxKeysBeforeRemoval),
-      (this._flushDelay = i.maxDelayBeforeRemovalMs ?? this._flushDelay),
+      options.maxKeysBeforeRemoval ?? this._maxKeysBeforeRemoval),
+      (this._flushDelay = options.maxDelayBeforeRemovalMs ?? this._flushDelay),
       (this._index = new Do(Object.values(this._items), {
         ...this._opts.fuse,
       })),
-      (this._revalidationQueue = new sa(this._revalidateEntry.bind(this))),
+      (this._revalidationQueue = new KeyedTaskQueue(this._revalidateEntry.bind(this))),
       this.addDisposables(
         this._revalidationQueue,
         new qCe.Disposable(() => this.dumpContext.cancel()),
@@ -86498,40 +86498,40 @@ var xx = class extends DisposableContainer {
     { leading: true, trailing: true },
   )
   loadContext = async () => {
-    let r = await this._globalState.load(this._indexBackKey, {
+    let savedItems = await this._globalState.load(this._indexBackKey, {
       uniquePerWorkspace: true,
     })
-    if (r) {
-      ;(this._items = { ...this._items, ...r }),
+    if (savedItems) {
+      ;(this._items = { ...this._items, ...savedItems }),
         (this._index = new Do(Object.values(this._items), this._opts.fuse)),
         this.markForRevalidation(Object.values(this._items))
       return
     }
-    let n = this._globalState.get(this._indexBackKey)
-    n &&
-      ((this._items = { ...this._items, ...n }),
+    let legacyItems = this._globalState.get(this._indexBackKey)
+    legacyItems &&
+      ((this._items = { ...this._items, ...legacyItems }),
       (this._index = new Do(Object.values(this._items), this._opts.fuse)),
       this.markForRevalidation(Object.values(this._items)))
   }
-  set = (r) => {
-    let n = this._opts.keyFn(r)
+  set = (item) => {
+    let itemKey = this._opts.keyFn(item)
     return (
-      this._cancelQueuedWork(n),
-      this._items[n]
+      this._cancelQueuedWork(itemKey),
+      this._items[itemKey]
         ? false
-        : ((this._items[n] = r), this._index.add(r), this.dumpContext(), true)
+        : ((this._items[itemKey] = item), this._index.add(item), this.dumpContext(), true)
     )
   }
-  markForRevalidation = (r) => {
-    r.forEach((n) => {
-      let i = this._opts.keyFn(n)
-      this._revalidationQueue.insert(i, n)
+  markForRevalidation = (items) => {
+    items.forEach((item) => {
+      let itemKey = this._opts.keyFn(item)
+      this._revalidationQueue.insert(itemKey, item)
     }),
       this._revalidationQueue.kick()
   }
-  search = (r, n) => this._index.search(r, n)
-  remove = (r) => {
-    this._queueKeyRemoval(this._opts.keyFn(r))
+  search = (query, options) => this._index.search(query, options)
+  remove = (item) => {
+    this._queueKeyRemoval(this._opts.keyFn(item))
   }
   clear = () => {
     ;(this._items = {}), this._index.setCollection([])
@@ -86539,18 +86539,18 @@ var xx = class extends DisposableContainer {
   get items() {
     return { ...this._items }
   }
-  _cancelQueuedWork = (r) => {
-    this._revalidationQueue.cancel(r), this._keysToRemove.delete(r)
+  _cancelQueuedWork = (itemKey) => {
+    this._revalidationQueue.cancel(itemKey), this._keysToRemove.delete(itemKey)
   }
-  _checkValidity = async (r) =>
-    this._opts.validator ? await this._opts.validator(r) : true
-  async _revalidateEntry(r) {
-    if (r === undefined) return
-    let [n, i] = r
-    ;(await this._checkValidity(i)) || this._queueKeyRemoval(n)
+  _checkValidity = async (item) =>
+    this._opts.validator ? await this._opts.validator(item) : true
+  async _revalidateEntry(queueEntry) {
+    if (queueEntry === undefined) return
+    let [itemKey, item] = queueEntry
+    ;(await this._checkValidity(item)) || this._queueKeyRemoval(itemKey)
   }
-  _queueKeyRemoval = (r) => {
-    this._keysToRemove.add(r),
+  _queueKeyRemoval = (itemKey) => {
+    this._keysToRemove.add(itemKey),
       this._keysToRemove.size >= this._maxKeysBeforeRemoval
         ? this._flushToRemove()
         : this._flushTimer ||
@@ -86562,12 +86562,12 @@ var xx = class extends DisposableContainer {
   _flushToRemove = () => {
     this._flushTimer &&
       (clearTimeout(this._flushTimer), (this._flushTimer = null))
-    for (let r of this._keysToRemove) delete this._items[r]
-    this._index.remove((r) => this._keysToRemove.has(this._opts.keyFn(r))),
+    for (let itemKey of this._keysToRemove) delete this._items[itemKey]
+    this._index.remove((item) => this._keysToRemove.has(this._opts.keyFn(item))),
       this._keysToRemove.clear()
   }
 }
-var Ju = {
+var fuseSearchOptions = {
     keys: ["relPath"],
     minMatchCharLength: 1,
     minExactMatchCharLength: 3,
@@ -86579,23 +86579,23 @@ var Ju = {
     findAllMatches: true,
     sortFn: Rmt,
   },
-  $M = class extends DisposableContainer {
-    constructor(r, n, i) {
+  FuzzyFsSearcher = class extends DisposableContainer {
+    constructor(globalState, workspaceManager, onDidChangeSyncingStatus) {
       super()
-      this._globalState = r
-      this._workspaceManager = n
-      this._onDidChangeSyncingStatus = i
-      ;(this._filesIndex = new xx(this._globalState, "fuzzyFsFilesIndex", {
-        fuse: Ju,
+      this._globalState = globalState
+      this._workspaceManager = workspaceManager
+      this._onDidChangeSyncingStatus = onDidChangeSyncingStatus
+      ;(this._filesIndex = new PersistentSearchIndex(this._globalState, "fuzzyFsFilesIndex", {
+        fuse: fuseSearchOptions,
         validator: this.validatePath,
-        keyFn: HCe,
+        keyFn: getQualifiedPath,
       })),
-        (this._foldersIndex = new xx(this._globalState, "fuzzyFsFoldersIndex", {
-          fuse: Ju,
+        (this._foldersIndex = new PersistentSearchIndex(this._globalState, "fuzzyFsFoldersIndex", {
+          fuse: fuseSearchOptions,
           validator: this.validatePath,
-          keyFn: HCe,
+          keyFn: getQualifiedPath,
         })),
-        (this._recentFiles = new ng(this._globalState, "recentlyOpenedFiles", {
+        (this._recentFiles = new PersistentCache(this._globalState, "recentlyOpenedFiles", {
           lru: { max: 64 },
         })),
         this.addDisposables(
@@ -86605,9 +86605,9 @@ var Ju = {
           $a.window.onDidChangeVisibleTextEditors(
             this.onDidChangeVisibleTextEditors,
           ),
-          $a.window.tabGroups.onDidChangeTabs((s) => {
-            s.changed.forEach(this.trackRecentTab),
-              s.opened.forEach(this.trackRecentTab)
+          $a.window.tabGroups.onDidChangeTabs((tabChangeEvent) => {
+            tabChangeEvent.changed.forEach(this.trackRecentTab),
+              tabChangeEvent.opened.forEach(this.trackRecentTab)
           }),
         )
     }
@@ -86623,197 +86623,197 @@ var Ju = {
     get folders() {
       return Object.values(this._foldersIndex.items)
     }
-    setFiles = (r) => {
-      let n = this._filesIndex.items
-      r.forEach((a) => this._filesIndex.set(a))
-      let i = this._filesIndex.items,
-        o = Object.keys(n)
-          .filter((a) => !i[a])
-          .map((a) => n[a])
-      this._filesIndex.markForRevalidation(o)
+    setFiles = (files) => {
+      let oldItems = this._filesIndex.items
+      files.forEach((file) => this._filesIndex.set(file))
+      let newItems = this._filesIndex.items,
+        removedItems = Object.keys(oldItems)
+          .filter((key) => !newItems[key])
+          .map((key) => oldItems[key])
+      this._filesIndex.markForRevalidation(removedItems)
     }
-    setFolders = (r) => {
-      let n = this._foldersIndex.items
-      r.forEach((a) => this._foldersIndex.set(a))
-      let i = this._foldersIndex.items,
-        o = Object.keys(n)
-          .filter((a) => !i[a])
-          .map((a) => n[a])
-      this._foldersIndex.markForRevalidation(o)
+    setFolders = (folders) => {
+      let oldItems = this._foldersIndex.items
+      folders.forEach((folder) => this._foldersIndex.set(folder))
+      let newItems = this._foldersIndex.items,
+        removedItems = Object.keys(oldItems)
+          .filter((key) => !newItems[key])
+          .map((key) => oldItems[key])
+      this._foldersIndex.markForRevalidation(removedItems)
     }
-    trackRecentAbsPath = (r) => {
-      let n = this._workspaceManager.resolvePathName(r)
-      n === undefined ||
-        this._workspaceManager.getBlobName(n) === undefined ||
-        this._recentFiles.set(r, n)
+    trackRecentAbsPath = (absolutePath) => {
+      let pathInfo = this._workspaceManager.resolvePathName(absolutePath)
+      pathInfo === undefined ||
+        this._workspaceManager.getBlobName(pathInfo) === undefined ||
+        this._recentFiles.set(absolutePath, pathInfo)
     }
-    trackRecentTab = (r) => {
-      if (r.input instanceof $a.TabInputText) {
-        let n = r.input.uri.fsPath
-        this.trackRecentAbsPath(n)
+    trackRecentTab = (tab) => {
+      if (tab.input instanceof $a.TabInputText) {
+        let filePath = tab.input.uri.fsPath
+        this.trackRecentAbsPath(filePath)
       } else return
     }
-    trackRecentTextEditor = (r) => {
-      r !== undefined && this.trackRecentAbsPath(r.document.uri.fsPath)
+    trackRecentTextEditor = (editor) => {
+      editor !== undefined && this.trackRecentAbsPath(editor.document.uri.fsPath)
     }
     onDidChangeVisibleTextEditors = () => {
-      let r = $a.window.visibleTextEditors
-      for (let n of r) this.trackRecentTextEditor(n)
+      let visibleEditors = $a.window.visibleTextEditors
+      for (let editor of visibleEditors) this.trackRecentTextEditor(editor)
     }
     trackFilesAndFolders = () => {
-      let r = (0, $Ce.throttle)(
+      let throttledUpdateIndexes = (0, lodash.throttle)(
           () => {
-            let { files: i, folders: s } = Bmt(this._workspaceManager)
-            this.setFiles(i), this.setFolders(s)
+            let { files: files, folders: folders } = getFilesAndFolders(this._workspaceManager)
+            this.setFiles(files), this.setFolders(folders)
           },
           15e3,
           { leading: true, trailing: true },
         ),
-        n = (i) => {
-          if (!i?.relPath) return
+        handleFileChange = (fileChange) => {
+          if (!fileChange?.relPath) return
           this._workspaceManager
-            .getAllQualifiedPathNames(i.relPath)
-            .forEach((o) => {
-              this._filesIndex.set(o)
+            .getAllQualifiedPathNames(fileChange.relPath)
+            .forEach((pathInfo) => {
+              this._filesIndex.set(pathInfo)
             })
         }
       return [
-        new $a.Disposable(() => r.cancel()),
-        this._workspaceManager.onDidChangeFile(r),
-        this._workspaceManager.onDidChangeFile(n),
-        this._onDidChangeSyncingStatus(r),
+        new $a.Disposable(() => throttledUpdateIndexes.cancel()),
+        this._workspaceManager.onDidChangeFile(throttledUpdateIndexes),
+        this._workspaceManager.onDidChangeFile(handleFileChange),
+        this._onDidChangeSyncingStatus(throttledUpdateIndexes),
       ]
     }
-    findRecentFiles = (r) => {
-      let n = r.data.relPath,
-        i = r.data.maxResults || 12,
-        s = this._recentFiles
+    findRecentFiles = (request) => {
+      let searchQuery = request.data.relPath,
+        maxResults = request.data.maxResults || 12,
+        recentFilesList = this._recentFiles
           .getItems()
-          .map((a) => ({ repoRoot: a.rootPath, pathName: a.relPath }))
-      if (n.length < Ju.minMatchCharLength)
+          .map((item) => ({ repoRoot: item.rootPath, pathName: item.relPath }))
+      if (searchQuery.length < fuseSearchOptions.minMatchCharLength)
         return {
           type: "find-recently-opened-files-response",
-          data: s.slice(0, i),
+          data: recentFilesList.slice(0, maxResults),
         }
-      let o = VCe(s, n, { fuseSearch: { limit: i }, fuseInit: Ju })
-      return { type: "find-recently-opened-files-response", data: o }
+      let searchResults = searchWithFuse(recentFilesList, searchQuery, { fuseSearch: { limit: maxResults }, fuseInit: fuseSearchOptions })
+      return { type: "find-recently-opened-files-response", data: searchResults }
     }
-    findInScope = (r) => {
-      let n = r.data.relPath,
-        i = r.data.maxResults || 12
-      return r.data.searchScope?.files
-        ? VCe(r.data.searchScope.files, n, {
-            fuseSearch: { limit: i },
-            fuseInit: Ju,
+    findInScope = (request) => {
+      let searchQuery = request.data.relPath,
+        maxResults = request.data.maxResults || 12
+      return request.data.searchScope?.files
+        ? searchWithFuse(request.data.searchScope.files, searchQuery, {
+            fuseSearch: { limit: maxResults },
+            fuseInit: fuseSearchOptions,
           })
         : []
     }
-    findFiles = (r) => {
-      let n = r.data.exactMatch ?? false,
-        i = r.data.relPath,
-        s = n ? `${i}$` : i,
-        o = r.data.maxResults || 12
+    findFiles = (request) => {
+      let isExactMatch = request.data.exactMatch ?? false,
+        searchQuery = request.data.relPath,
+        searchPattern = isExactMatch ? `${searchQuery}$` : searchQuery,
+        maxResults = request.data.maxResults || 12
       if (
-        n &&
-        (i.length < Ju.minExactMatchCharLength ||
-          i.length < Ju.minMatchCharLength)
+        isExactMatch &&
+        (searchQuery.length < fuseSearchOptions.minExactMatchCharLength ||
+          searchQuery.length < fuseSearchOptions.minMatchCharLength)
       )
         return { type: "find-file-response", data: [] }
-      if (i.length < Ju.minMatchCharLength) {
-        let u = Object.values(this._filesIndex.items).slice(0, 100)
-        return { type: "find-file-response", data: u.map(rg) }
+      if (searchQuery.length < fuseSearchOptions.minMatchCharLength) {
+        let topFiles = Object.values(this._filesIndex.items).slice(0, 100)
+        return { type: "find-file-response", data: topFiles.map(rg) }
       }
-      let a = { type: "find-file-response", data: [] },
-        l = this.findInScope(r)
+      let response = { type: "find-file-response", data: [] },
+        scopeResults = this.findInScope(request)
       return (
-        (a.data = C4([...a.data, ...l])),
-        n && (a.data = WCe(a.data, i)),
-        a.data.length >= o ||
-          ((a.data = C4([
-            ...a.data,
+        (response.data = deduplicateResults([...response.data, ...scopeResults])),
+        isExactMatch && (response.data = WCe(response.data, searchQuery)),
+        response.data.length >= maxResults ||
+          ((response.data = deduplicateResults([
+            ...response.data,
             ...this._filesIndex
-              .search(s, { limit: o - a.data.length })
-              .map((c) => ({
-                repoRoot: c.item.rootPath,
-                pathName: c.item.relPath,
+              .search(searchPattern, { limit: maxResults - response.data.length })
+              .map((result) => ({
+                repoRoot: result.item.rootPath,
+                pathName: result.item.relPath,
               })),
           ])),
-          n && (a.data = WCe(a.data, i))),
-        a
+          isExactMatch && (response.data = WCe(response.data, searchQuery))),
+        response
       )
     }
-    findFolders = (r) => {
-      let n = r.data.exactMatch ?? false,
-        i = r.data.relPath,
-        s = n ? `${i}$` : i,
-        o = r.data.maxResults || 12
-      if (i.length < Ju.minMatchCharLength) {
-        let u = Object.values(this._foldersIndex.items).slice(0, 100)
-        return { type: "find-folder-response", data: u.map(rg) }
+    findFolders = (request) => {
+      let isExactMatch = request.data.exactMatch ?? false,
+        searchQuery = request.data.relPath,
+        searchPattern = isExactMatch ? `${searchQuery}$` : searchQuery,
+        maxResults = request.data.maxResults || 12
+      if (searchQuery.length < fuseSearchOptions.minMatchCharLength) {
+        let topFolders = Object.values(this._foldersIndex.items).slice(0, 100)
+        return { type: "find-folder-response", data: topFolders.map(rg) }
       }
-      let a = { type: "find-folder-response", data: [] },
-        l = this._foldersIndex.search(s, { limit: o }).map((c) => rg(c.item))
-      return (a.data = C4([...a.data, ...l])), a
+      let response = { type: "find-folder-response", data: [] },
+        searchResults = this._foldersIndex.search(searchPattern, { limit: maxResults }).map((result) => rg(result.item))
+      return (response.data = deduplicateResults([...response.data, ...searchResults])), response
     }
-    validatePath = async (r) => this.statPath(r).then((n) => n !== undefined)
-    statPath = async (r) => {
+    validatePath = async (path) => this.statPath(path).then((stat) => stat !== undefined)
+    statPath = async (path) => {
       if (
         (await this._workspaceManager.awaitInitialFoldersEnumerated(),
-        !!this._workspaceManager.getFolderRoot(Ns(r)))
+        !!this._workspaceManager.getFolderRoot(getFullPath(path)))
       )
         try {
-          return await ev(Ns(r))
+          return await ev(getFullPath(path))
         } catch {
           return
         }
     }
   }
-function Bmt(e) {
-  let t = (o) => e.getAllPathNames(o)[0],
-    n = e
+function getFilesAndFolders(workspaceManager) {
+  let getFirstPathName = (blobName) => workspaceManager.getAllPathNames(blobName)[0],
+    files = workspaceManager
       .getContextWithBlobNames()
-      .blobNames.map(t)
-      .filter((o) => o !== undefined),
-    i = new Map(
-      n.map((o) => {
-        let a = { rootPath: o.rootPath, relPath: Ha(o.relPath) }
-        return [Ns(a), a]
+      .blobNames.map(getFirstPathName)
+      .filter((pathInfo) => pathInfo !== undefined),
+    folderMap = new Map(
+      files.map((pathInfo) => {
+        let folderInfo = { rootPath: pathInfo.rootPath, relPath: Ha(pathInfo.relPath) }
+        return [getFullPath(folderInfo), folderInfo]
       }),
     ),
-    s = Array.from(i.values())
-  return { files: n, folders: s }
+    folders = Array.from(folderMap.values())
+  return { files: files, folders: folders }
 }
-async function YCe(e, t) {
-  let r = await Io($a.Uri.file(Ns(e))),
-    n = new $a.Range(r.positionAt(t.charStart), r.positionAt(t.charEnd))
+async function getFileRangeInfo(pathInfo, range) {
+  let document = await Io($a.Uri.file(getFullPath(pathInfo))),
+    vscodeRange = new $a.Range(document.positionAt(range.charStart), document.positionAt(range.charEnd))
   return {
-    repoRoot: e.rootPath,
-    pathName: e.relPath,
+    repoRoot: pathInfo.rootPath,
+    pathName: pathInfo.relPath,
     fullRange: {
-      startLineNumber: n.start.line,
-      startColumn: n.start.character,
-      endLineNumber: n.end.line,
-      endColumn: n.end.character,
+      startLineNumber: vscodeRange.start.line,
+      startColumn: vscodeRange.start.character,
+      endLineNumber: vscodeRange.end.line,
+      endColumn: vscodeRange.end.character,
     },
   }
 }
-function VCe(e, t, r) {
-  return new Do(e, { ...Ju, ...r.fuseInit, keys: ["relPath"] })
-    .search(t, r.fuseSearch)
-    .map((s) => s.item)
+function searchWithFuse(items, searchQuery, options) {
+  return new Do(items, { ...fuseSearchOptions, ...options.fuseInit, keys: ["relPath"] })
+    .search(searchQuery, options.fuseSearch)
+    .map((result) => result.item)
 }
-function C4(e) {
-  let t = new Map()
+function deduplicateResults(results) {
+  let uniqueMap = new Map()
   return (
-    e.forEach((r) => {
-      let n = Ns({ rootPath: r.repoRoot, relPath: r.pathName })
-      t.set(n, r)
+    results.forEach((item) => {
+      let fullPath = getFullPath({ rootPath: item.repoRoot, relPath: item.pathName })
+      uniqueMap.set(fullPath, item)
     }),
-    Array.from(t.values())
+    Array.from(uniqueMap.values())
   )
 }
-function HCe(e) {
-  return Ns(e)
+function getQualifiedPath(pathInfo) {
+  return getFullPath(pathInfo)
 }
 function Rmt(e, t) {
   if (e.score !== t.score) return e.score - t.score
@@ -86869,7 +86869,7 @@ var Sx = class {
       this._assetManager = a
       this._featureFlagManager = l
       this._checkpointManager = c
-      ;(this.selectionCache = new ng(
+      ;(this.selectionCache = new PersistentCache(
         this._globalState,
         "requestIdSelectionMetadata",
         { lru: { max: 1e3 } },
@@ -86982,7 +86982,7 @@ var Sx = class {
         throw new Error(`File chunk with blobName=${n.blobName} not found`)
       return {
         type: "resolve-workspace-file-chunk-response",
-        data: await YCe(i, n),
+        data: await getFileRangeInfo(i, n),
       }
     }
     async *startChatStream(r, n, i) {
@@ -87330,7 +87330,7 @@ var E4 = {
       this._fuzzyFsSearcher = i
       this._workspaceManager = s
       ;(this._logger = z("FuzzySymbolSearcher")),
-        (this._fileTokensCache = new ng(
+        (this._fileTokensCache = new PersistentCache(
           this._globalState,
           "fuzzyBlobNamesToSymbols",
           { lru: { max: 1e3, fetchMethod: this._loadFileDetailSymbols } },
@@ -99530,7 +99530,7 @@ var km = class e extends DisposableContainer {
   async _applyAllAutofixChanges(r) {
     let n = new Map()
     for (let i of r) {
-      let s = Ns(i.qualifiedPathName)
+      let s = getFullPath(i.qualifiedPathName)
       n.has(s) ? n.get(s).push(i) : n.set(s, [i])
     }
     for (let [i, s] of n.entries()) await this._applyAutofixChanges(i, s)
@@ -99666,54 +99666,54 @@ USER_SPECIFIED_EXTERNAL_SOURCES_END_LABEL
 var w1 = 2e5
 var ChatApp = class extends DisposableContainer {
   constructor(
-    r,
-    n,
-    i,
-    s,
-    o,
-    a,
-    l,
-    c,
-    u,
-    f,
-    p,
-    g,
-    m,
-    y,
-    v,
-    C,
-    E,
-    w,
-    B,
-    T,
-    N,
-    W,
-    Z,
+    chatModel,
+    chatModelConfigs,
+    apiServer,
+    workspaceManager,
+    keybindingWatcher,
+    config,
+    extensionUri,
+    featureFlagManager,
+    clientMetricsReporter,
+    actionsModel,
+    syncingEnabledTracker,
+    onboardingWorkspaceModel,
+    syncingStatus,
+    onboardingSessionEventReporter,
+    fuzzyFsSearcher,
+    fuzzySymbolSearcher,
+    toolsModel,
+    resolveFileService,
+    checkpointManager,
+    guidelinesWatcher,
+    assetManager,
+    globalState,
+    workTimer,
   ) {
     super()
-    this._chatModel = r
-    this._chatModelConfigs = n
-    this._apiServer = i
-    this._workspaceManager = s
-    this._keybindingWatcher = o
-    this._config = a
-    this._extensionUri = l
-    this._featureFlagManager = c
-    this._clientMetricsReporter = u
-    this._actionsModel = f
-    this._syncingEnabledTracker = p
-    this._onboardingWorkspaceModel = g
-    this._syncingStatus = m
-    this._onboardingSessionEventReporter = y
-    this._fuzzyFsSearcher = v
-    this._fuzzySymbolSearcher = C
-    this._toolsModel = E
-    this._resolveFileService = w
-    this._checkpointManager = B
-    this._guidelinesWatcher = T
-    this._assetManager = N
-    this._globalState = W
-    this._workTimer = Z
+    this._chatModel = chatModel
+    this._chatModelConfigs = chatModelConfigs
+    this._apiServer = apiServer
+    this._workspaceManager = workspaceManager
+    this._keybindingWatcher = keybindingWatcher
+    this._config = config
+    this._extensionUri = extensionUri
+    this._featureFlagManager = featureFlagManager
+    this._clientMetricsReporter = clientMetricsReporter
+    this._actionsModel = actionsModel
+    this._syncingEnabledTracker = syncingEnabledTracker
+    this._onboardingWorkspaceModel = onboardingWorkspaceModel
+    this._syncingStatus = syncingStatus
+    this._onboardingSessionEventReporter = onboardingSessionEventReporter
+    this._fuzzyFsSearcher = fuzzyFsSearcher
+    this._fuzzySymbolSearcher = fuzzySymbolSearcher
+    this._toolsModel = toolsModel
+    this._resolveFileService = resolveFileService
+    this._checkpointManager = checkpointManager
+    this._guidelinesWatcher = guidelinesWatcher
+    this._assetManager = assetManager
+    this._globalState = globalState
+    this._workTimer = workTimer
     ;(this._commitMessagePromptPreparer = new Dv()),
       (this._remoteAgentsMessenger = new xv(
         this._apiServer,
@@ -99724,11 +99724,11 @@ var ChatApp = class extends DisposableContainer {
       (this._gitReferenceMessenger = new QF(this._apiServer, this._config)),
       (this._remoteAgentDiffMessenger = new Cv(this._apiServer)),
       (this._sharedStore = _v.getStore(FF)),
-      (this._smartPasteCache = new zF(async (te) => {
-        let Y = this._apiServer.createRequestId()
+      (this._smartPasteCache = new zF(async (pasteData) => {
+        let requestId = this._apiServer.createRequestId()
         return Promise.resolve({
-          generator: this._smartPasteWithChatInstruction(te, Y),
-          requestId: Y,
+          generator: this._smartPasteWithChatInstruction(pasteData, requestId),
+          requestId: requestId,
         })
       })),
       this.addDisposables(
@@ -99768,16 +99768,16 @@ var ChatApp = class extends DisposableContainer {
   title() {
     return ""
   }
-  register(r) {
-    ;(this._webview = r),
+  register(webview) {
+    ;(this._webview = webview),
       (this._asyncMsgHandler = createAsyncMessageHandler(this._webview, this._workTimer)),
       this.addDisposable(this._asyncMsgHandler)
-    let n = "chat-webview-app"
+    let appName = "chat-webview-app"
     this._asyncMsgHandler &&
-      (this._sharedStore.subscribe(this._asyncMsgHandler, n),
+      (this._sharedStore.subscribe(this._asyncMsgHandler, appName),
       this.addDisposable(
         new kt.Disposable(() => {
-          this._asyncMsgHandler && this._sharedStore.unsubscribe(n)
+          this._asyncMsgHandler && this._sharedStore.unsubscribe(appName)
         }),
       )),
       this._asyncMsgHandler.registerHandler(
@@ -99815,8 +99815,8 @@ var ChatApp = class extends DisposableContainer {
         "chat-get-stream-request",
         this._chatModel.getChatStream.bind(this._chatModel),
       ),
-      this._asyncMsgHandler.registerHandler("chat-user-cancel", (i) =>
-        this.onUserCancel(i),
+      this._asyncMsgHandler.registerHandler("chat-user-cancel", (message) =>
+        this.onUserCancel(message),
       ),
       this._asyncMsgHandler.registerHandler(
         "chat-rating",
@@ -99826,14 +99826,14 @@ var ChatApp = class extends DisposableContainer {
         "save-chat",
         this._chatModel.saveConversation,
       ),
-      this._asyncMsgHandler.registerHandler("chat-launch-autofix-panel", (i) =>
-        this.onLaunchAutofixPanel(i),
+      this._asyncMsgHandler.registerHandler("chat-launch-autofix-panel", (message) =>
+        this.onLaunchAutofixPanel(message),
       ),
-      this._asyncMsgHandler.registerHandler("chat-autofix-state-update", (i) =>
-        this.handleAutofixStateUpdate(i),
+      this._asyncMsgHandler.registerHandler("chat-autofix-state-update", (message) =>
+        this.handleAutofixStateUpdate(message),
       ),
-      this._asyncMsgHandler.registerHandler("open-confirmation-modal", (i) =>
-        this.onOpenConfirmationModal(i),
+      this._asyncMsgHandler.registerHandler("open-confirmation-modal", (message) =>
+        this.onOpenConfirmationModal(message),
       ),
       this._asyncMsgHandler.registerHandler(
         "find-external-sources-request",
@@ -99865,8 +99865,8 @@ var ChatApp = class extends DisposableContainer {
       ),
       this._asyncMsgHandler.registerHandler(
         "report-webview-client-metric",
-        (i) => (
-          this._clientMetricsReporter.reportWebviewClientMetric(i.data),
+        (message) => (
+          this._clientMetricsReporter.reportWebviewClientMetric(message.data),
           Promise.resolve({ type: "empty" })
         ),
       ),
@@ -99875,22 +99875,22 @@ var ChatApp = class extends DisposableContainer {
         async () => {
           await Promise.resolve(null)
           try {
-            let s = this._workspaceManager
+            let trackedFileCount = this._workspaceManager
                 .listSourceFolders()
-                .filter((a) => a.syncingEnabled)
+                .filter((folder) => folder.syncingEnabled)
                 .reduce(
-                  (a, l) =>
-                    "trackedFileCount" in l ? a + l.trackedFileCount : a,
+                  (count, folder) =>
+                    "trackedFileCount" in folder ? count + folder.trackedFileCount : count,
                   0,
                 ),
-              o = s > 0 ? [s] : []
+              trackedFileCountArray = trackedFileCount > 0 ? [trackedFileCount] : []
             return {
               type: "get-workspace-info-response",
-              data: { trackedFileCount: o.length > 0 ? o : undefined },
+              data: { trackedFileCount: trackedFileCountArray.length > 0 ? trackedFileCountArray : undefined },
             }
-          } catch (i) {
+          } catch (error) {
             return (
-              this._logger.error("Error getting workspace info:", i),
+              this._logger.error("Error getting workspace info:", error),
               { type: "get-workspace-info-response", data: {} }
             )
           }
@@ -99928,24 +99928,24 @@ var ChatApp = class extends DisposableContainer {
       ),
       this._asyncMsgHandler.registerHandler(
         "chat-mode-changed",
-        (i) => (
-          this._toolsModel.setMode(i.data.mode),
+        (message) => (
+          this._toolsModel.setMode(message.data.mode),
           Promise.resolve({ type: "empty" })
         ),
       ),
       this._asyncMsgHandler.registerHandler(
         "chat-get-agent-onboarding-prompt-request",
         async () => {
-          let i = h0(process.platform),
-            s = new g0(Fr.agent, process.platform, i),
-            o = new xM(s, this._workspaceManager)
+          let platformInfo = h0(process.platform),
+            onboardingPromptGenerator = new g0(Fr.agent, process.platform, platformInfo),
+            onboardingInstructionsProvider = new xM(onboardingPromptGenerator, this._workspaceManager)
           return (
             this._onboardingSessionEventReporter.reportEvent(
               "saw-agent-onboarding",
             ),
             Promise.resolve({
               type: "chat-get-agent-onboarding-prompt-response",
-              data: { prompt: await o.getOnboardingInstructions() },
+              data: { prompt: await onboardingInstructionsProvider.getOnboardingInstructions() },
             })
           )
         },
@@ -99953,21 +99953,21 @@ var ChatApp = class extends DisposableContainer {
       this._asyncMsgHandler.registerHandler(
         "check-agent-auto-mode-approval",
         () => {
-          let i = this._globalState.get("agentAutoModeApproved")
+          let isApproved = this._globalState.get("agentAutoModeApproved")
           return Promise.resolve({
             type: "check-agent-auto-mode-approval-response",
-            data: i ?? false,
+            data: isApproved ?? false,
           })
         },
       ),
       this._asyncMsgHandler.registerHandler(
         "set-agent-auto-mode-approved",
-        async (i) => (
-          await this._globalState.update("agentAutoModeApproved", i.data),
+        async (message) => (
+          await this._globalState.update("agentAutoModeApproved", message.data),
           { type: "empty" }
         ),
       ),
-      this._asyncMsgHandler.registerHandler("chat-loaded", (i) => {
+      this._asyncMsgHandler.registerHandler("chat-loaded", (message) => {
         this.sendSourceFolders(),
           this.sendSyncStatus(),
           this.sendSyncEnabledStatus(),
@@ -99975,13 +99975,13 @@ var ChatApp = class extends DisposableContainer {
           this._onboardingWorkspaceModel.shouldShowSummary &&
             this.sendShowSummary(),
           this._actionsModel.broadcastDerivedStates()
-        let s = kt.window.activeTextEditor
-        s?.document.uri
-          ? (this.sendCurrentlyOpenFiles([s.document.uri]),
-            this.sendFileSelections(s))
+        let activeEditor = kt.window.activeTextEditor
+        activeEditor?.document.uri
+          ? (this.sendCurrentlyOpenFiles([activeEditor.document.uri]),
+            this.sendFileSelections(activeEditor))
           : this.sendCurrentlyOpenFiles([]),
           this._notifyAgentEditListHasUpdates()
-        let o = this._toolsModel.memoriesAbsPath
+        let memoriesFilePath = this._toolsModel.memoriesAbsPath
           ? { rootPath: "", relPath: this._toolsModel.memoriesAbsPath }
           : undefined
         return Promise.resolve({
@@ -100062,7 +100062,7 @@ var ChatApp = class extends DisposableContainer {
               this._featureFlagManager.currentFlags
                 .vscodeRichCheckpointInfoMinVersion ?? "",
             ),
-            agentMemoriesFilePathName: o,
+            agentMemoriesFilePathName: memoriesFilePath,
             workspaceUnpopulated: this._actionsModel.isDerivedStateSatisfied(
               "WorkspaceNotPopulated",
             ),
@@ -100101,33 +100101,33 @@ var ChatApp = class extends DisposableContainer {
           },
         })
       }),
-      this._asyncMsgHandler.registerSidecarHandler((i, s) => {
-        VK(i, s)
+      this._asyncMsgHandler.registerSidecarHandler((message, callback) => {
+        VK(message, callback)
       }),
       this._resolveFileService.register(this._asyncMsgHandler),
       this.addDisposables(
-        kt.window.onDidChangeTextEditorSelection((i) => {
-          !i ||
-            i.textEditor.document.uri.scheme === "output" ||
-            (this.sendSourceFolders(), this.sendFileSelections(i.textEditor))
+        kt.window.onDidChangeTextEditorSelection((event) => {
+          !event ||
+            event.textEditor.document.uri.scheme === "output" ||
+            (this.sendSourceFolders(), this.sendFileSelections(event.textEditor))
         }),
         this._onboardingWorkspaceModel.onShouldShowSummary(
           this.sendShowSummary,
         ),
         this._webview.onDidReceiveMessage(this.onDidReceiveMessage),
         this._workspaceManager.onDidChangeSourceFolders(this.sendSourceFolders),
-        kt.window.onDidChangeActiveTextEditor((i) => {
+        kt.window.onDidChangeActiveTextEditor((editor) => {
           this.sendSourceFolders(),
-            i
-              ? this.sendCurrentlyOpenFiles([i.document.uri])
+            editor
+              ? this.sendCurrentlyOpenFiles([editor.document.uri])
               : (this.sendCurrentlyOpenFiles([]),
                 this.sendFileSelections(undefined))
         }),
         this._syncingStatus.onDidChangeSyncingStatus(this.sendSyncStatus),
-        onOrientationStateChanged((i) => {
+        onOrientationStateChanged((state) => {
           this._webview?.postMessage({
             type: "orientation-status-update",
-            data: i,
+            data: state,
           })
         }),
       ),
@@ -100139,13 +100139,13 @@ var ChatApp = class extends DisposableContainer {
       this._remoteAgentDiffMessenger.register(this._asyncMsgHandler),
       this.updateLastKnownSourceFolders()
   }
-  async *generateCommitMessage(r) {
-    let n
+  async *generateCommitMessage(message) {
+    let promptData
     try {
-      let i = kt.workspace.workspaceFolders?.at(0)?.uri.fsPath ?? "",
-        o = this._resolvePathName(kt.Uri.file(i))?.repoRoot ?? i
-      n = await this._commitMessagePromptPreparer.getCommitMessagePromptData(
-        o,
+      let workspacePath = kt.workspace.workspaceFolders?.at(0)?.uri.fsPath ?? "",
+        repoRootPath = this._resolvePathName(kt.Uri.file(workspacePath))?.repoRoot ?? workspacePath
+      promptData = await this._commitMessagePromptPreparer.getCommitMessagePromptData(
+        repoRootPath,
         {
           diffBudget: 9216,
           messageBudget: 3072,
@@ -100155,53 +100155,53 @@ var ChatApp = class extends DisposableContainer {
           maxExampleCommitMessages: 3,
         },
       )
-    } catch (i) {
-      let s = `Cannot generate commit message prompt: Failed to generate diff details. Error: ${i instanceof Error ? i.message : String(i)}`
-      throw (kt.window.showInformationMessage(s), new Error(s))
+    } catch (error) {
+      let errorMessage = `Cannot generate commit message prompt: Failed to generate diff details. Error: ${error instanceof Error ? error.message : String(error)}`
+      throw (kt.window.showInformationMessage(errorMessage), new Error(errorMessage))
     }
-    yield* this.onGenerateCommitMessage(n)
+    yield* this.onGenerateCommitMessage(promptData)
   }
   getMergedAdditionalChatModels = () => {
-    let r = this._config.config.chat.modelDisplayNameToId || {},
-      n = this._featureFlagManager.currentFlags.additionalChatModels
-    n = n.replace(/'/g, '"')
+    let configModels = this._config.config.chat.modelDisplayNameToId || {},
+      flagModels = this._featureFlagManager.currentFlags.additionalChatModels
+    flagModels = flagModels.replace(/'/g, '"')
     try {
-      return { ...(n !== "" ? JSON.parse(n) : {}), ...r }
-    } catch (i) {
+      return { ...(flagModels !== "" ? JSON.parse(flagModels) : {}), ...configModels }
+    } catch (error) {
       return (
         this._logger.debug(
-          `Failed to parse additional chat models: ${i.message}`,
+          `Failed to parse additional chat models: ${error.message}`,
         ),
-        r
+        configModels
       )
     }
   }
-  onUserCancel = (r) => (
+  onUserCancel = (message) => (
     this._logger.debug("onUserCancel"),
-    this._chatModel.cancelChatStream(r.data.requestId),
+    this._chatModel.cancelChatStream(message.data.requestId),
     { type: "empty" }
   )
-  isMemoriesFile(r) {
-    let n = this._toolsModel.memoriesAbsPath
-    if (!n) return false
-    let i = QualifiedPathName.from({
-        rootPath: "rootPath" in r ? r.rootPath : r.repoRoot,
-        relPath: "relPath" in r ? r.relPath : r.pathName,
+  isMemoriesFile(pathInfo) {
+    let memoriesPath = this._toolsModel.memoriesAbsPath
+    if (!memoriesPath) return false
+    let filePath = QualifiedPathName.from({
+        rootPath: "rootPath" in pathInfo ? pathInfo.rootPath : pathInfo.repoRoot,
+        relPath: "relPath" in pathInfo ? pathInfo.relPath : pathInfo.pathName,
       }),
-      s = QualifiedPathName.from({ rootPath: "", relPath: n })
-    return QualifiedPathName.equals(i, s)
+      memoriesFilePath = QualifiedPathName.from({ rootPath: "", relPath: memoriesPath })
+    return QualifiedPathName.equals(filePath, memoriesFilePath)
   }
-  filterMemoriesFromSelectedCode(r) {
+  filterMemoriesFromSelectedCode(codeDetails) {
     return (
-      r && (this.isMemoriesFile({ rootPath: "", relPath: r.path }) ? null : r)
+      codeDetails && (this.isMemoriesFile({ rootPath: "", relPath: codeDetails.path }) ? null : codeDetails)
     )
   }
-  sendCurrentlyOpenFiles = (0, fwe.default)((r) => {
-    let n = r
-      .map((i) => this._resolvePathName(i))
-      .filter((i) => i !== undefined)
-      .filter((i) => !this.isMemoriesFile(i))
-    this._webview?.postMessage({ type: "currently-open-files", data: n })
+  sendCurrentlyOpenFiles = (0, fwe.default)((uris) => {
+    let pathInfos = uris
+      .map((uri) => this._resolvePathName(uri))
+      .filter((pathInfo) => pathInfo !== undefined)
+      .filter((pathInfo) => !this.isMemoriesFile(pathInfo))
+    this._webview?.postMessage({ type: "currently-open-files", data: pathInfos })
   }, 250)
   sendShowSummary = (0, yf.default)(
     () => {
@@ -100258,20 +100258,20 @@ var ChatApp = class extends DisposableContainer {
       this._workspaceManager.trackedSourceFolderNames()
   }
   sendFileSelections = (0, yf.default)(
-    (r) => {
-      if (r?.document.uri) {
-        let n = this._resolvePathName(r.document.uri)
-        n && !this.isMemoriesFile(n)
+    (editor) => {
+      if (editor?.document.uri) {
+        let pathInfo = this._resolvePathName(editor.document.uri)
+        pathInfo && !this.isMemoriesFile(pathInfo)
           ? this._webview?.postMessage({
               type: "currently-open-files",
-              data: [n],
+              data: [pathInfo],
             })
           : this._webview?.postMessage({
               type: "currently-open-files",
               data: [],
             }),
-          n && !this.isMemoriesFile(n)
-            ? this._webview?.postMessage(PCe(r, this._workspaceManager))
+          pathInfo && !this.isMemoriesFile(pathInfo)
+            ? this._webview?.postMessage(PCe(editor, this._workspaceManager))
             : this._webview?.postMessage({
                 type: "file-ranges-selected",
                 data: [],
@@ -100282,206 +100282,206 @@ var ChatApp = class extends DisposableContainer {
     250,
     { leading: true, trailing: true },
   )
-  onOpenConfirmationModal = async (r) => {
-    let n = await kt.window.showInformationMessage(
-      r.data.message,
+  onOpenConfirmationModal = async (message) => {
+    let response = await kt.window.showInformationMessage(
+      message.data.message,
       { modal: true },
-      { title: r.data.cancelButtonText, isCloseAffordance: true },
-      { title: r.data.confirmButtonText },
+      { title: message.data.cancelButtonText, isCloseAffordance: true },
+      { title: message.data.confirmButtonText },
     )
     return {
       type: "confirmation-modal-response",
-      data: { ok: n?.title === r.data.confirmButtonText },
+      data: { ok: response?.title === message.data.confirmButtonText },
     }
   }
-  _handleCompleteChatReply(r) {
-    this._workspaceManager.recordChatReponse(r)
+  _handleCompleteChatReply(response) {
+    this._workspaceManager.recordChatReponse(response)
   }
-  async postStreamChunksToPanel(r, n, i, s) {
-    await r.postStreamChunk(
+  async postStreamChunksToPanel(panel, text, requestId, isComplete) {
+    await panel.postStreamChunk(
       {
         type: "chat-model-reply",
-        data: { text: n, requestId: i, workspaceFileChunks: [] },
+        data: { text: text, requestId: requestId, workspaceFileChunks: [] },
       },
-      s,
+      isComplete,
     )
   }
-  getNextLine(r) {
-    let n = r.indexOf(`
+  getNextLine(text) {
+    let newlineIndex = text.indexOf(`
 `)
-    return n === -1 ? [r, ""] : [r.slice(0, n + 1), r.slice(n + 1)]
+    return newlineIndex === -1 ? [text, ""] : [text.slice(0, newlineIndex + 1), text.slice(newlineIndex + 1)]
   }
-  async *onGenerateCommitMessage(r) {
-    let n = this._apiServer.createRequestId(),
-      i = await this._apiServer.generateCommitMessageStream(n, r)
-    for await (let s of i)
+  async *onGenerateCommitMessage(promptData) {
+    let requestId = this._apiServer.createRequestId(),
+      stream = await this._apiServer.generateCommitMessageStream(requestId, promptData)
+    for await (let chunk of stream)
       yield {
         type: "chat-model-reply",
-        data: { text: s.text, requestId: n, workspaceFileChunks: [] },
+        data: { text: chunk.text, requestId: requestId, workspaceFileChunks: [] },
       }
   }
-  handleAutofixStateUpdate = async (r) => (
-    await km.currentPanel?.handleAutofixStateUpdate(r), { type: "empty" }
+  handleAutofixStateUpdate = async (message) => (
+    await km.currentPanel?.handleAutofixStateUpdate(message), { type: "empty" }
   )
-  onLaunchAutofixPanel = (r) => (
+  onLaunchAutofixPanel = (message) => (
     km.launchAutofixPanel(
       this._extensionUri,
-      r.data.conversationId,
-      r.data.iterationId,
-      r.data.stage,
+      message.data.conversationId,
+      message.data.iterationId,
+      message.data.stage,
       this,
       this._resolveFileService,
       this._workTimer,
     ),
     { type: "empty" }
   )
-  async *onUserSendMessage(r) {
-    let n = this._apiServer.createRequestId(),
-      i = this._workspaceManager.getContext(),
-      s = { checkpointId: undefined, addedBlobs: [], deletedBlobs: [] }
-    ;(r.data.context?.userSpecifiedFiles?.length ||
-      r.data.context?.sourceFolders?.length) &&
-      !r.data.disableRetrieval &&
-      (s = i.blobs)
-    let o = []
-    r.data.context?.userSpecifiedFiles &&
-      !r.data.disableRetrieval &&
-      (o = this._getBlobNames(r.data.context.userSpecifiedFiles))
-    let a = this._guidelinesWatcher.getUserGuidelinesContent(),
-      l = this._guidelinesWatcher.getCurrentWorkspaceGuidelinesContent(
+  async *onUserSendMessage(message) {
+    let requestId = this._apiServer.createRequestId(),
+      context = this._workspaceManager.getContext(),
+      blobs = { checkpointId: undefined, addedBlobs: [], deletedBlobs: [] }
+    ;(message.data.context?.userSpecifiedFiles?.length ||
+      message.data.context?.sourceFolders?.length) &&
+      !message.data.disableRetrieval &&
+      (blobs = context.blobs)
+    let userGuidedBlobs = []
+    message.data.context?.userSpecifiedFiles &&
+      !message.data.disableRetrieval &&
+      (userGuidedBlobs = this._getBlobNames(message.data.context.userSpecifiedFiles))
+    let userGuidelines = this._guidelinesWatcher.getUserGuidelinesContent(),
+      workspaceGuidelines = this._guidelinesWatcher.getCurrentWorkspaceGuidelinesContent(
         this._workspaceManager,
       ),
-      c = []
-    r.data.context?.externalSources &&
-      !r.data.disableRetrieval &&
-      (c = r.data.context.externalSources.map((p) => p.id))
-    let u
+      externalSourceIds = []
+    message.data.context?.externalSources &&
+      !message.data.disableRetrieval &&
+      (externalSourceIds = message.data.context.externalSources.map((source) => source.id))
+    let selectedCodeDetails
     if (
-      (r.data.context?.selections?.length ||
-        r.data.context?.recentFiles?.length) &&
-      !r.data.disableSelectedCodeDetails
+      (message.data.context?.selections?.length ||
+        message.data.context?.recentFiles?.length) &&
+      !message.data.disableSelectedCodeDetails
     ) {
       Bye(kt.window.activeTextEditor)
-      let p =
-          this._chatModelConfigs.get(r.data?.modelId ?? "")
+      let prefixCharCount =
+          this._chatModelConfigs.get(message.data?.modelId ?? "")
             ?.suggestedPrefixCharCount ?? w1,
-        g =
-          this._chatModelConfigs.get(r.data?.modelId ?? "")
+        suffixCharCount =
+          this._chatModelConfigs.get(message.data?.modelId ?? "")
             ?.suggestedSuffixCharCount ?? w1
-      ;(u = PG(kt.window.activeTextEditor, this._workspaceManager, p, g)),
-        (u = this.filterMemoriesFromSelectedCode(u))
+      ;(selectedCodeDetails = PG(kt.window.activeTextEditor, this._workspaceManager, prefixCharCount, suffixCharCount)),
+        (selectedCodeDetails = this.filterMemoriesFromSelectedCode(selectedCodeDetails))
     }
-    let f = (p) => {
-      let g = this._workspaceManager
-      p.unknownBlobNames &&
-        p.unknownBlobNames.length > 0 &&
-        g.handleUnknownBlobs(i, p.unknownBlobNames),
-        p.checkpointNotFound && g.handleUnknownCheckpoint(n, s.checkpointId)
+    let handleErrors = (response) => {
+      let workspaceManager = this._workspaceManager
+      response.unknownBlobNames &&
+        response.unknownBlobNames.length > 0 &&
+        workspaceManager.handleUnknownBlobs(context, response.unknownBlobNames),
+        response.checkpointNotFound && workspaceManager.handleUnknownCheckpoint(requestId, blobs.checkpointId)
     }
     try {
-      let p = true
+      let isFirstChunk = true
       if (
         this._config.config.chat.stream !== false &&
         !this._config.config.preferenceCollection.enable
       ) {
-        let m = ""
-        if (r.data.memoriesInfo?.isClassifyAndDistill) {
-          let v =
+        let accumulatedText = ""
+        if (message.data.memoriesInfo?.isClassifyAndDistill) {
+          let classifyAndDistillPrompt =
             this._featureFlagManager.currentFlags.memoriesParams
               .classify_and_distill_prompt
-          if (!v) {
+          if (!classifyAndDistillPrompt) {
             this._logger.error("Classify and distill prompt missing.")
             return
           }
-          ;(r.data.text = v.replace("{message}", r.data.text)),
-            r.data.nodes?.length &&
-              (r.data.nodes = r.data.nodes.map((C) =>
-                C.type === po.TEXT && C.text_node
+          ;(message.data.text = classifyAndDistillPrompt.replace("{message}", message.data.text)),
+            message.data.nodes?.length &&
+              (message.data.nodes = message.data.nodes.map((node) =>
+                node.type === po.TEXT && node.text_node
                   ? {
-                      ...C,
+                      ...node,
                       text_node: {
-                        content: v.replace("{message}", C.text_node.content),
+                        content: classifyAndDistillPrompt.replace("{message}", node.text_node.content),
                       },
                     }
-                  : C,
+                  : node,
               ))
-        } else if (r.data.memoriesInfo?.isDistill) {
-          let v =
+        } else if (message.data.memoriesInfo?.isDistill) {
+          let distillPrompt =
             this._featureFlagManager.currentFlags.memoriesParams.distill_prompt
-          if (!v) {
+          if (!distillPrompt) {
             this._logger.error("Distill prompt missing.")
             return
           }
-          r.data.text = v.replace("{message}", r.data.text)
+          message.data.text = distillPrompt.replace("{message}", message.data.text)
         }
-        let y
+        let agentMemories
         if (this._toolsModel.chatMode === Fr.agent)
           if (this._featureFlagManager.currentFlags.useMemorySnapshotManager) {
-            let v = r.data.conversationId ?? ""
-            y = await this._toolsModel.getAgentMemoriesWithSnapshot(v)
-          } else y = await SM(this._checkpointManager.getAgentMemoriesAbsPath)
-        for await (let v of this._chatModel.chatStream(
+            let conversationId = message.data.conversationId ?? ""
+            agentMemories = await this._toolsModel.getAgentMemoriesWithSnapshot(conversationId)
+          } else agentMemories = await SM(this._checkpointManager.getAgentMemoriesAbsPath)
+        for await (let chunk of this._chatModel.chatStream(
           {
-            requestId: n,
-            message: r.data.text,
-            chatHistory: r.data.chatHistory,
-            blobs: s,
-            userGuidedBlobs: o,
-            externalSourceIds: c,
-            modelId: r.data.modelId,
-            userGuidelines: a,
-            workspaceGuidelines: l,
+            requestId: requestId,
+            message: message.data.text,
+            chatHistory: message.data.chatHistory,
+            blobs: blobs,
+            userGuidedBlobs: userGuidedBlobs,
+            externalSourceIds: externalSourceIds,
+            modelId: message.data.modelId,
+            userGuidelines: userGuidelines,
+            workspaceGuidelines: workspaceGuidelines,
             toolDefinitions: (await this._toolsModel.getToolDefinitions()).map(
-              (C) => C.definition,
+              (tool) => tool.definition,
             ),
-            nodes: r.data.nodes,
+            nodes: message.data.nodes,
             mode: this._toolsModel.chatMode,
-            agentMemories: y,
-            personaType: r.data.personaType,
+            agentMemories: agentMemories,
+            personaType: message.data.personaType,
           },
-          u,
+          selectedCodeDetails,
         )) {
-          if ((f(v.data), p)) {
-            p = false
-            let C = this._syncingStatus.status.foldersProgress.some(
-              (E) => E.progress?.newlyTracked,
+          if ((handleErrors(chunk.data), isFirstChunk)) {
+            isFirstChunk = false
+            let hasNewlyTrackedFolders = this._syncingStatus.status.foldersProgress.some(
+              (folder) => folder.progress?.newlyTracked,
             )
             this._syncingStatus.status.status !== "done" &&
-              C &&
-              (v.data.text =
+              hasNewlyTrackedFolders &&
+              (chunk.data.text =
                 `*Note: Augment is not yet fully synced and may be unable to answer questions about your workspace.*
 
-` + v.data.text)
+` + chunk.data.text)
           }
-          ;(m += v.data.text), yield v
+          ;(accumulatedText += chunk.data.text), yield chunk
         }
-        this._handleCompleteChatReply(m)
+        this._handleCompleteChatReply(accumulatedText)
         return
       }
-      yield* await this.handlePreferenceCollection(r, n, s, o, c, u)
-    } catch (p) {
+      yield* await this.handlePreferenceCollection(message, requestId, blobs, userGuidedBlobs, externalSourceIds, selectedCodeDetails)
+    } catch (error) {
       if (
         (this._apiServer.reportError(
-          n,
+          requestId,
           "chat_stream_failed",
-          p instanceof Error && p.stack ? p.stack : "",
+          error instanceof Error && error.stack ? error.stack : "",
           [],
         ),
         this._logger.error(
-          `Chat stream failed: ${String(p)}${
-            p instanceof Error
+          `Chat stream failed: ${String(error)}${
+            error instanceof Error
               ? `
-${p.stack}`
+${error.stack}`
               : ""
           }`,
         ),
-        p instanceof ApiError && p.status === RequestStatus.augmentTooLarge)
+        error instanceof ApiError && error.status === RequestStatus.augmentTooLarge)
       )
         return yield {
           type: "chat-model-reply",
           data: {
             text: "",
-            requestId: n,
+            requestId: requestId,
             workspaceFileChunks: [],
             error: {
               displayErrorMessage:
@@ -100490,39 +100490,39 @@ ${p.stack}`
           },
         }
       if (
-        p instanceof ApiError &&
-        (p.status === RequestStatus.resourceExhausted || p.status === RequestStatus.unavailable)
+        error instanceof ApiError &&
+        (error.status === RequestStatus.resourceExhausted || error.status === RequestStatus.unavailable)
       )
         return yield {
           type: "chat-model-reply",
           data: {
             text: "",
-            requestId: n,
+            requestId: requestId,
             workspaceFileChunks: [],
-            error: { displayErrorMessage: p.message, isRetriable: true },
+            error: { displayErrorMessage: error.message, isRetriable: true },
           },
         }
-      if (p instanceof Error)
+      if (error instanceof Error)
         return yield {
           type: "chat-model-reply",
           data: {
             text: "",
-            requestId: n,
+            requestId: requestId,
             workspaceFileChunks: [],
-            error: { displayErrorMessage: p.message },
+            error: { displayErrorMessage: error.message },
           },
         }
-      if (String(p).startsWith("Error: Cancelled")) return
-      throw (kt.window.showErrorMessage(`Failed to send chat message: ${p}`), p)
+      if (String(error).startsWith("Error: Cancelled")) return
+      throw (kt.window.showErrorMessage(`Failed to send chat message: ${error}`), error)
     }
   }
-  async handlePreferenceCollection(r, n, i, s, o, a) {
-    let l = this._featureFlagManager.currentFlags.eloModelConfiguration
+  async handlePreferenceCollection(message, requestId, blobs, userGuidedBlobs, externalSourceIds, selectedCodeDetails) {
+    let eloModelConfiguration = this._featureFlagManager.currentFlags.eloModelConfiguration
     if (
-      ((!l.highPriorityModels || l.highPriorityModels.length < 2) &&
-        l.highPriorityThreshold !== 0) ||
-      ((!l.regularBattleModels || l.regularBattleModels.length < 2) &&
-        l.highPriorityThreshold < 1)
+      ((!eloModelConfiguration.highPriorityModels || eloModelConfiguration.highPriorityModels.length < 2) &&
+        eloModelConfiguration.highPriorityThreshold !== 0) ||
+      ((!eloModelConfiguration.regularBattleModels || eloModelConfiguration.regularBattleModels.length < 2) &&
+        eloModelConfiguration.highPriorityThreshold < 1)
     )
       return (async function* () {
         await Promise.resolve(),
@@ -100530,7 +100530,7 @@ ${p.stack}`
             type: "chat-model-reply",
             data: {
               text: "",
-              requestId: n,
+              requestId: requestId,
               workspaceFileChunks: [],
               error: {
                 displayErrorMessage:
@@ -100539,195 +100539,195 @@ ${p.stack}`
             },
           }
       })()
-    let c = l.highPriorityThreshold
-    ;(this._chatModel._preferenceState._selectedCode !== a?.selectedCode ||
-      this._chatModel._preferenceState._filePath !== a?.path) &&
+    let highPriorityThreshold = eloModelConfiguration.highPriorityThreshold
+    ;(this._chatModel._preferenceState._selectedCode !== selectedCodeDetails?.selectedCode ||
+      this._chatModel._preferenceState._filePath !== selectedCodeDetails?.path) &&
       (this._chatModel._preferenceState = new Sx())
-    let u = {
-      message: r,
-      requestId: n,
-      blobs: i,
-      userGuidedBlobs: s,
-      selectedCodeDetails: a,
+    let comparisonParams = {
+      message: message,
+      requestId: requestId,
+      blobs: blobs,
+      userGuidedBlobs: userGuidedBlobs,
+      selectedCodeDetails: selectedCodeDetails,
     }
-    return Math.random() < c
-      ? this.handleHighPriorityTest(u, o, l.highPriorityModels)
-      : this.handleRegularBattle(u, o, l.regularBattleModels)
+    return Math.random() < highPriorityThreshold
+      ? this.handleHighPriorityTest(comparisonParams, externalSourceIds, eloModelConfiguration.highPriorityModels)
+      : this.handleRegularBattle(comparisonParams, externalSourceIds, eloModelConfiguration.regularBattleModels)
   }
-  handleHighPriorityTest(r, n, i) {
-    let s, o
-    if (i.length > 0 && Array.isArray(i[0])) {
-      let a = Math.floor(Math.random() * i.length)
-      ;[s, o] = i[a]
-    } else [s, o] = i.sort(() => Math.random() - 0.5).slice(0, 2)
+  handleHighPriorityTest(params, externalSourceIds, highPriorityModels) {
+    let modelIdA, modelIdB
+    if (highPriorityModels.length > 0 && Array.isArray(highPriorityModels[0])) {
+      let randomIndex = Math.floor(Math.random() * highPriorityModels.length)
+      ;[modelIdA, modelIdB] = highPriorityModels[randomIndex]
+    } else [modelIdA, modelIdB] = highPriorityModels.sort(() => Math.random() - 0.5).slice(0, 2)
     return Promise.resolve(
-      this.runComparison(r, {
-        modelId: s,
-        modelIdB: o,
-        externalSourceIds: n,
-        externalSourceIdsB: n,
+      this.runComparison(params, {
+        modelId: modelIdA,
+        modelIdB: modelIdB,
+        externalSourceIds: externalSourceIds,
+        externalSourceIdsB: externalSourceIds,
       }),
     )
   }
-  handleRegularBattle(r, n, i) {
-    let s = i[Math.floor(Math.random() * i.length)],
-      o
-    do o = i[Math.floor(Math.random() * i.length)]
-    while (o === s && i.length > 1)
+  handleRegularBattle(params, externalSourceIds, regularBattleModels) {
+    let modelIdA = regularBattleModels[Math.floor(Math.random() * regularBattleModels.length)],
+      modelIdB
+    do modelIdB = regularBattleModels[Math.floor(Math.random() * regularBattleModels.length)]
+    while (modelIdB === modelIdA && regularBattleModels.length > 1)
     return Promise.resolve(
-      this.runComparison(r, {
-        modelId: s,
-        modelIdB: o,
-        externalSourceIds: n,
-        externalSourceIdsB: n,
+      this.runComparison(params, {
+        modelId: modelIdA,
+        modelIdB: modelIdB,
+        externalSourceIds: externalSourceIds,
+        externalSourceIdsB: externalSourceIds,
       }),
     )
   }
-  async *runComparison(r, n) {
-    let i = this._apiServer.createRequestId(),
-      s = (await this._toolsModel.getToolDefinitions()).map(
-        (m) => m.definition,
+  async *runComparison(params, comparisonConfig) {
+    let requestIdB = this._apiServer.createRequestId(),
+      toolDefinitions = (await this._toolsModel.getToolDefinitions()).map(
+        (tool) => tool.definition,
       ),
-      o = this._chatModel.chatStream(
+      streamA = this._chatModel.chatStream(
         {
-          requestId: r.requestId,
-          message: r.message.data.text,
-          chatHistory: r.message.data.chatHistory,
-          blobs: r.blobs,
-          userGuidedBlobs: r.userGuidedBlobs,
-          externalSourceIds: n.externalSourceIds,
-          modelId: n.modelId,
-          toolDefinitions: s,
-          personaType: r.message.data.personaType,
+          requestId: params.requestId,
+          message: params.message.data.text,
+          chatHistory: params.message.data.chatHistory,
+          blobs: params.blobs,
+          userGuidedBlobs: params.userGuidedBlobs,
+          externalSourceIds: comparisonConfig.externalSourceIds,
+          modelId: comparisonConfig.modelId,
+          toolDefinitions: toolDefinitions,
+          personaType: params.message.data.personaType,
         },
-        r.selectedCodeDetails,
+        params.selectedCodeDetails,
       ),
-      a = this._chatModel.chatStream(
+      streamB = this._chatModel.chatStream(
         {
-          requestId: i,
-          message: r.message.data.text,
-          chatHistory: r.message.data.chatHistory,
-          blobs: r.blobs,
-          userGuidedBlobs: r.userGuidedBlobs,
-          externalSourceIds: n.externalSourceIdsB,
-          modelId: n.modelIdB,
-          toolDefinitions: s,
-          personaType: r.message.data.personaType,
+          requestId: requestIdB,
+          message: params.message.data.text,
+          chatHistory: params.message.data.chatHistory,
+          blobs: params.blobs,
+          userGuidedBlobs: params.userGuidedBlobs,
+          externalSourceIds: comparisonConfig.externalSourceIdsB,
+          modelId: comparisonConfig.modelIdB,
+          toolDefinitions: toolDefinitions,
+          personaType: params.message.data.personaType,
         },
-        r.selectedCodeDetails,
+        params.selectedCodeDetails,
       ),
       {
-        responseA: l,
-        responseB: c,
-        workspaceFileChunksA: u,
-        workspaceFileChunksB: f,
-        preferencePanel: p,
+        responseA: responseA,
+        responseB: responseB,
+        workspaceFileChunksA: workspaceFileChunksA,
+        workspaceFileChunksB: workspaceFileChunksB,
+        preferencePanel: preferencePanel,
       } = await this.processStreams(
-        o,
-        a,
-        r.message,
-        r.requestId,
-        i,
-        n.implicitExternalSources ? n.implicitExternalSources : [],
-        [...(n.externalSourceIds ?? []), ...(n.externalSourceIdsB ?? [])],
+        streamA,
+        streamB,
+        params.message,
+        params.requestId,
+        requestIdB,
+        comparisonConfig.implicitExternalSources ? comparisonConfig.implicitExternalSources : [],
+        [...(comparisonConfig.externalSourceIds ?? []), ...(comparisonConfig.externalSourceIdsB ?? [])],
       )
-    p.postStreamDone()
-    let g = await p?.getResult({ a: r.requestId, b: i }, this._apiServer, {
-      a: n.modelId,
-      b: n.modelIdB,
+    preferencePanel.postStreamDone()
+    let userPreferredA = await preferencePanel?.getResult({ a: params.requestId, b: requestIdB }, this._apiServer, {
+      a: comparisonConfig.modelId,
+      b: comparisonConfig.modelIdB,
     })
-    g
+    userPreferredA
       ? (this._chatModel._preferenceState._selectedCodeReferenceRequestIdOptionB =
           this._chatModel._preferenceState._selectedCodeReferenceRequestId)
       : (this._chatModel._preferenceState._selectedCodeReferenceRequestId =
           this._chatModel._preferenceState._selectedCodeReferenceRequestIdOptionB),
-      this._handleCompleteChatReply(g ? l : c),
+      this._handleCompleteChatReply(userPreferredA ? responseA : responseB),
       yield {
         type: "chat-model-reply",
         data: {
-          text: g ? l : c,
-          requestId: g ? r.requestId : i,
-          workspaceFileChunks: g ? u : f,
+          text: userPreferredA ? responseA : responseB,
+          requestId: userPreferredA ? params.requestId : requestIdB,
+          workspaceFileChunks: userPreferredA ? workspaceFileChunksA : workspaceFileChunksB,
         },
       }
   }
-  async processStreams(r, n, i, s, o, a, l) {
-    let c = "",
-      u = "",
-      f = "",
-      p = "",
-      g = [],
-      m = [],
-      y = await Tv.launchStandalonePreferencePanel(
+  async processStreams(streamA, streamB, message, requestIdA, requestIdB, implicitExternalSources, externalSourceIds) {
+    let textA = "",
+      textB = "",
+      partialTextA = "",
+      partialTextB = "",
+      workspaceFileChunksA = [],
+      workspaceFileChunksB = [],
+      preferencePanel = await Tv.launchStandalonePreferencePanel(
         this._extensionUri,
-        { a: new Lx(i.data.text, ""), b: new Lx(i.data.text, "") },
+        { a: new Lx(message.data.text, ""), b: new Lx(message.data.text, "") },
         this._config.config.preferenceCollection.enableRetrievalDataCollection,
         this._fuzzyFsSearcher,
-        a,
-        l,
+        implicitExternalSources,
+        externalSourceIds,
         this._workTimer,
       ),
-      v = r[Symbol.asyncIterator](),
-      C = n[Symbol.asyncIterator](),
-      E = await v.next(),
-      w = await C.next()
-    for (; !E.done || !w.done; ) {
-      !E.done &&
-        (!c.includes(`
+      iteratorA = streamA[Symbol.asyncIterator](),
+      iteratorB = streamB[Symbol.asyncIterator](),
+      chunkA = await iteratorA.next(),
+      chunkB = await iteratorB.next()
+    for (; !chunkA.done || !chunkB.done; ) {
+      !chunkA.done &&
+        (!textA.includes(`
 `) ||
-          w.done) &&
-        ((c += E.value.data.text),
-        (g = g.concat(E.value.data.workspaceFileChunks)),
-        (E = await v.next())),
-        !w.done &&
-          (!u.includes(`
+          chunkB.done) &&
+        ((textA += chunkA.value.data.text),
+        (workspaceFileChunksA = workspaceFileChunksA.concat(chunkA.value.data.workspaceFileChunks)),
+        (chunkA = await iteratorA.next())),
+        !chunkB.done &&
+          (!textB.includes(`
 `) ||
-            E.done) &&
-          ((u += w.value.data.text),
-          (m = m.concat(w.value.data.workspaceFileChunks)),
-          (w = await C.next()))
-      let B, T
+            chunkA.done) &&
+          ((textB += chunkB.value.data.text),
+          (workspaceFileChunksB = workspaceFileChunksB.concat(chunkB.value.data.workspaceFileChunks)),
+          (chunkB = await iteratorB.next()))
+      let nextLineA, nextLineB
       for (
         ;
-        ((c.includes(`
+        ((textA.includes(`
 `) &&
-          u.includes(`
+          textB.includes(`
 `)) ||
-          E.done ||
-          w.done) &&
-        (([B, c] =
-          E.done &&
-          !c.includes(`
+          chunkA.done ||
+          chunkB.done) &&
+        (([nextLineA, textA] =
+          chunkA.done &&
+          !textA.includes(`
 `)
-            ? [c, ""]
-            : this.getNextLine(c)),
-        ([T, u] =
-          w.done &&
-          !u.includes(`
+            ? [textA, ""]
+            : this.getNextLine(textA)),
+        ([nextLineB, textB] =
+          chunkB.done &&
+          !textB.includes(`
 `)
-            ? [u, ""]
-            : this.getNextLine(u)),
-        (f += B),
-        (p += T),
-        this.postStreamChunksToPanel(y, f, s, "A"),
-        this.postStreamChunksToPanel(y, p, o, "B"),
-        !(c.length === 0 || u.length === 0));
+            ? [textB, ""]
+            : this.getNextLine(textB)),
+        (partialTextA += nextLineA),
+        (partialTextB += nextLineB),
+        this.postStreamChunksToPanel(preferencePanel, partialTextA, requestIdA, "A"),
+        this.postStreamChunksToPanel(preferencePanel, partialTextB, requestIdB, "B"),
+        !(textA.length === 0 || textB.length === 0));
 
       );
     }
     return (
-      c && ((f += c), this.postStreamChunksToPanel(y, f, s, "A")),
-      u && ((p += u), this.postStreamChunksToPanel(y, p, o, "B")),
+      textA && ((partialTextA += textA), this.postStreamChunksToPanel(preferencePanel, partialTextA, requestIdA, "A")),
+      textB && ((partialTextB += textB), this.postStreamChunksToPanel(preferencePanel, partialTextB, requestIdB, "B")),
       {
-        responseA: f,
-        responseB: p,
-        workspaceFileChunksA: g,
-        workspaceFileChunksB: m,
-        preferencePanel: y,
+        responseA: partialTextA,
+        responseB: partialTextB,
+        workspaceFileChunksA: workspaceFileChunksA,
+        workspaceFileChunksB: workspaceFileChunksB,
+        preferencePanel: preferencePanel,
       }
     )
   }
-  onExternalSourceSearch = async (r) => {
+  onExternalSourceSearch = async (message) => {
     if (
       !isMinVersionMet(
         this._featureFlagManager.currentFlags
@@ -100735,144 +100735,144 @@ ${p.stack}`
       )
     )
       return { type: "find-external-sources-response", data: { sources: [] } }
-    let n = await this._apiServer.searchExternalSources(r.data.query, [])
-    return { type: "find-external-sources-response", data: n }
+    let response = await this._apiServer.searchExternalSources(message.data.query, [])
+    return { type: "find-external-sources-response", data: response }
   }
   getActiveWorkspacePath = () => {
-    let r = kt.window.activeTextEditor
-    if (!r) return
-    let n = r.document.uri.fsPath
-    return this._workspaceManager.safeResolvePathName(n)?.rootPath
+    let editor = kt.window.activeTextEditor
+    if (!editor) return
+    let filePath = editor.document.uri.fsPath
+    return this._workspaceManager.safeResolvePathName(filePath)?.rootPath
   }
-  _resolvePathName(r) {
-    let n = this._workspaceManager.safeResolvePathName(r)
-    if (n !== undefined) return { repoRoot: n.rootPath, pathName: n.relPath }
+  _resolvePathName(filePath) {
+    let pathInfo = this._workspaceManager.safeResolvePathName(filePath)
+    if (pathInfo !== undefined) return { repoRoot: pathInfo.rootPath, pathName: pathInfo.relPath }
   }
   _getDefaultTargetPath = () => {
-    let r = kt.window.activeTextEditor
-    if (!r) return
-    let n = r.document.uri.fsPath,
-      i = this._workspaceManager.safeResolvePathName(n)
-    return i ? rg(i) : undefined
+    let editor = kt.window.activeTextEditor
+    if (!editor) return
+    let filePath = editor.document.uri.fsPath,
+      pathInfo = this._workspaceManager.safeResolvePathName(filePath)
+    return pathInfo ? rg(pathInfo) : undefined
   }
-  resolveTargetPath = async (r, n = undefined, i = true) => {
-    if (!r) return
-    let s
-    if (af(r)) s = this._workspaceManager.safeResolvePathName(r)
+  resolveTargetPath = async (targetPath, searchScope = undefined, exactMatch = true) => {
+    if (!targetPath) return
+    let pathInfo
+    if (af(targetPath)) pathInfo = this._workspaceManager.safeResolvePathName(targetPath)
     else {
-      let a = this._workspaceManager.findBestWorkspaceRootMatch(r)
-      a && (s = { rootPath: a.qualifiedPathName.rootPath, relPath: r })
+      let workspace = this._workspaceManager.findBestWorkspaceRootMatch(targetPath)
+      workspace && (pathInfo = { rootPath: workspace.qualifiedPathName.rootPath, relPath: targetPath })
     }
-    if (s) {
-      let a = await this._fuzzyFsSearcher.statPath(s)
-      if (a) {
-        let l = rg(s)
-        return (l.fileType = a.type), l
+    if (pathInfo) {
+      let fileStats = await this._fuzzyFsSearcher.statPath(pathInfo)
+      if (fileStats) {
+        let result = rg(pathInfo)
+        return (result.fileType = fileStats.type), result
       }
     }
-    let o = this._fuzzyFsSearcher.findFiles({
+    let searchResult = this._fuzzyFsSearcher.findFiles({
       type: "find-file-request",
       data: {
         rootPath: "",
-        relPath: r,
-        exactMatch: i,
+        relPath: targetPath,
+        exactMatch: exactMatch,
         maxResults: 10,
-        searchScope: n,
+        searchScope: searchScope,
       },
     })
-    if (o.data.length >= 0) return o.data[0]
+    if (searchResult.data.length >= 0) return searchResult.data[0]
   }
-  async *_smartPasteWithChatInstruction(r, n) {
-    let { message: i, targetFilePath: s, targetFileContent: o } = r,
-      a = r.selectedCodeDetails
-    n = n ?? this._apiServer.createRequestId()
-    let l = this._workspaceManager.getContext().blobs,
-      c = i.data.chatHistory.map((f) => ({
-        request_message: f.request_message,
-        response_text: f.response_text,
-        request_id: f.request_id,
+  async *_smartPasteWithChatInstruction(requestData, requestId) {
+    let { message, targetFilePath, targetFileContent } = requestData,
+      selectedCodeDetails = requestData.selectedCodeDetails
+    requestId = requestId ?? this._apiServer.createRequestId()
+    let blobs = this._workspaceManager.getContext().blobs,
+      chatHistory = message.data.chatHistory.map((entry) => ({
+        request_message: entry.request_message,
+        response_text: entry.response_text,
+        request_id: entry.request_id,
       })),
-      u = this._chatModel.getReferenceReqId()
-    for (let f = c.length - 1; f >= 0; f--) {
-      let p = c[f],
-        g = this._chatModel.selectionCache.get(p.request_id)
-      if (g) {
-        ;(a = g), (u = p.request_id)
+      referenceRequestId = this._chatModel.getReferenceReqId()
+    for (let index = chatHistory.length - 1; index >= 0; index--) {
+      let historyEntry = chatHistory[index],
+        cachedSelection = this._chatModel.selectionCache.get(historyEntry.request_id)
+      if (cachedSelection) {
+        ;(selectedCodeDetails = cachedSelection), (referenceRequestId = historyEntry.request_id)
         break
       }
     }
     try {
-      let f = await this._apiServer.smartPasteStream(
-        n,
+      let stream = await this._apiServer.smartPasteStream(
+        requestId,
         "",
-        l,
-        c,
-        a?.selectedCode,
-        a?.prefix,
-        a?.suffix,
-        a?.path,
+        blobs,
+        chatHistory,
+        selectedCodeDetails?.selectedCode,
+        selectedCodeDetails?.prefix,
+        selectedCodeDetails?.suffix,
+        selectedCodeDetails?.path,
         undefined,
-        a?.prefixBegin,
-        a?.suffixEnd,
-        a?.language,
-        i.data.generatedCode,
-        s,
-        o,
-        u,
+        selectedCodeDetails?.prefixBegin,
+        selectedCodeDetails?.suffixEnd,
+        selectedCodeDetails?.language,
+        message.data.generatedCode,
+        targetFilePath,
+        targetFileContent,
+        referenceRequestId,
       )
-      for await (let p of f) yield p
-    } catch (f) {
+      for await (let chunk of stream) yield chunk
+    } catch (error) {
       throw (
         (this._logger.error(
-          `Error in _smartPasteWithChatInstruction: ${getErrorMessage(f)}`,
+          `Error in _smartPasteWithChatInstruction: ${getErrorMessage(error)}`,
         ),
-        f)
+        error)
       )
     }
   }
-  onClearMetadataFor = (r) => {
-    let n = r.data,
-      i = this._chatModel
-    n.requestIds?.forEach((s) => {
-      i.deleteChatStream(s), i.selectionCache.remove(s)
+  onClearMetadataFor = (message) => {
+    let data = message.data,
+      chatModel = this._chatModel
+    data.requestIds?.forEach((requestId) => {
+      chatModel.deleteChatStream(requestId), chatModel.selectionCache.remove(requestId)
     }),
-      n.conversationIds?.forEach((s) => {
-        this._checkpointManager.clearConversationCheckpoints(s)
+      data.conversationIds?.forEach((conversationId) => {
+        this._checkpointManager.clearConversationCheckpoints(conversationId)
       })
   }
-  async onExecuteCommand(r) {
-    let { iterationId: n, command: i, args: s } = r.data,
-      o = (0, dwe.spawn)(i, s, {
+  async onExecuteCommand(message) {
+    let { iterationId, command, args } = message.data,
+      process = (0, dwe.spawn)(command, args, {
         stdio: ["ignore", "pipe", "pipe"],
         shell: true,
         cwd: this.getActiveWorkspacePath(),
       }),
-      a = "",
-      l = -1
+      output = "",
+      returnCode = -1
     return (
-      await new Promise((c, u) => {
-        o.stdout?.on("data", (f) => {
-          ;(a += f.toString()),
+      await new Promise((resolve, reject) => {
+        process.stdout?.on("data", (data) => {
+          ;(output += data.toString()),
             km.currentPanel?.handleCommandPartialOutput({
               type: "autofix-panel-execute-command-partial-output",
-              data: { iterationId: n, output: a },
+              data: { iterationId, output: output },
             })
         }),
-          o.stderr?.on("data", (f) => {
-            ;(a += f.toString()),
+          process.stderr?.on("data", (data) => {
+            ;(output += data.toString()),
               km.currentPanel?.handleCommandPartialOutput({
                 type: "autofix-panel-execute-command-partial-output",
-                data: { iterationId: n, output: a },
+                data: { iterationId, output },
               })
           }),
-          o.on("close", (f) => {
-            ;(l = f ?? -1), c()
+          process.on("close", (code) => {
+            ;(returnCode = code ?? -1), resolve()
           }),
-          o.on("error", u)
+          process.on("error", reject)
       }),
       {
         type: "chat-autofix-execute-command-result",
-        data: { output: a, returnCode: l },
+        data: { output, returnCode },
       }
     )
   }
@@ -100881,16 +100881,16 @@ ${p.stack}`
       ? await this._workspaceManager.getVCSChange()
       : { commits: [], workingDirectory: [] }
   }
-  async onAutofixPlan(r) {
-    let i = this._workspaceManager.getContext().blobs,
-      s = await this._getVCSChange(),
-      o = null
+  async onAutofixPlan(message) {
+    let blobs = this._workspaceManager.getContext().blobs,
+      vcsChanges = await this._getVCSChange(),
+      planResponse = null
     try {
-      o = await this._apiServer.autofixPlan(
-        r.data.command,
-        s,
-        i,
-        r.data.steeringHistory,
+      planResponse = await this._apiServer.autofixPlan(
+        message.data.command,
+        vcsChanges,
+        blobs,
+        message.data.steeringHistory,
       )
     } catch {
       return {
@@ -100904,82 +100904,82 @@ ${p.stack}`
         },
       }
     }
-    let a = o.replacements,
-      l = await Promise.all(
-        a.map(async (c) => await iEe(this._workspaceManager, c)),
+    let replacements = planResponse.replacements,
+      processedReplacements = await Promise.all(
+        replacements.map(async (replacement) => await iEe(this._workspaceManager, replacement)),
       )
     return {
       type: "chat-autofix-plan-response",
       data: {
-        plan: { summary: o.summary, replacements: l, originalReplacements: a },
+        plan: { summary: planResponse.summary, replacements: processedReplacements, originalReplacements: replacements },
       },
     }
   }
-  onDidReceiveMessage = async (r) => {
-    switch (r.type) {
+  onDidReceiveMessage = async (message) => {
+    switch (message.type) {
       case "chat-create-file": {
-        let n = r.data.relPath
-        if (n) {
-          let i = this._workspaceManager.findBestWorkspaceRootMatch(n)
-          if (!i || i.fileType !== "Directory") {
-            kt.window.showWarningMessage(`Directory ${Ha(n)} not found.`)
+        let relativePath = message.data.relPath
+        if (relativePath) {
+          let workspace = this._workspaceManager.findBestWorkspaceRootMatch(relativePath)
+          if (!workspace || workspace.fileType !== "Directory") {
+            kt.window.showWarningMessage(`Directory ${Ha(relativePath)} not found.`)
             break
           }
-          let s = Ns({ rootPath: i.qualifiedPathName.rootPath, relPath: n }),
-            o = kt.Uri.file(s)
+          let fullPath = getFullPath({ rootPath: workspace.qualifiedPathName.rootPath, relPath: relativePath }),
+            fileUri = kt.Uri.file(fullPath)
           try {
-            await kt.workspace.fs.stat(o),
+            await kt.workspace.fs.stat(fileUri),
               kt.window.showErrorMessage(
-                `Cannot create file at ${o.fsPath}. File already exists.`,
+                `Cannot create file at ${fileUri.fsPath}. File already exists.`,
               )
             break
           } catch {}
           try {
-            await kt.workspace.fs.writeFile(o, Buffer.from(r.data.code))
-            let a = await kt.workspace.openTextDocument(o)
-            if (!a) {
+            await kt.workspace.fs.writeFile(fileUri, Buffer.from(message.data.code))
+            let document = await kt.workspace.openTextDocument(fileUri)
+            if (!document) {
               this._logger.error(
-                `Could not open document at ${o.fsPath} during file creation.`,
+                `Could not open document at ${fileUri.fsPath} during file creation.`,
               )
               break
             }
-            await kt.window.showTextDocument(a)
-          } catch (a) {
-            this._logger.error(`Could not create file at ${o.fsPath}: ${a}`)
+            await kt.window.showTextDocument(document)
+          } catch (error) {
+            this._logger.error(`Could not create file at ${fileUri.fsPath}: ${error}`)
           }
         } else {
           try {
-            let i = await kt.workspace.openTextDocument({
-                content: r.data.code,
+            let document = await kt.workspace.openTextDocument({
+                content: message.data.code,
               }),
-              s = i.uri
-            await kt.workspace.fs.writeFile(s, Buffer.from(r.data.code)),
-              await kt.window.showTextDocument(i)
-          } catch (i) {
-            this._logger.error(`Could not create untitled file: ${i}`)
+              documentUri = document.uri
+            await kt.workspace.fs.writeFile(documentUri, Buffer.from(message.data.code)),
+              await kt.window.showTextDocument(document)
+          } catch (error) {
+            this._logger.error(`Could not create untitled file: ${error}`)
           }
           break
         }
         break
       }
       case "chat-smart-paste": {
-        let n = kt.window.activeTextEditor,
-          i = null
-        n && (i = PG(n, this._workspaceManager, w1, w1))
-        let s,
-          o =
-            (await this.resolveTargetPath(r.data.targetFile)) ??
+        let activeEditor = kt.window.activeTextEditor,
+          selectedCodeDetails = null
+        activeEditor && (selectedCodeDetails = PG(activeEditor, this._workspaceManager, w1, w1))
+        let targetPath,
+          resolvedTargetPath =
+            (await this.resolveTargetPath(message.data.targetFile)) ??
             this._getDefaultTargetPath()
-        if (!r.data.options?.dryRun)
-          if (o) {
+        if (!message.data.options?.dryRun)
+          if (resolvedTargetPath) {
             if (
-              r.data.options?.requireFileConfirmation &&
+              message.data.options?.requireFileConfirmation &&
               !(
                 await this.onOpenConfirmationModal({
                   type: "open-confirmation-modal",
                   data: {
                     title: "Apply Codeblock",
-                    message: `Are you sure you want to apply the codeblock to ${o.pathName}?`,
+                    message: `Are you sure you want to apply the codeblock to ${resolvedTargetPath.pathName}?`,
                     confirmButtonText: "Apply",
                     cancelButtonText: "Cancel",
                   },
@@ -100998,55 +100998,55 @@ ${p.stack}`
               })
             return
           }
-        if (!o) return
-        s = Ns({ rootPath: o.repoRoot, relPath: o.pathName })
-        let a = (await Io(s)).getText(),
-          l = QualifiedPathName.from({ rootPath: o.repoRoot, relPath: o.pathName }),
-          c
-        !r.data.options?.dryRun &&
-          !r.data.options?.instantApply &&
+        if (!resolvedTargetPath) return
+        targetPath = getFullPath({ rootPath: resolvedTargetPath.repoRoot, relPath: resolvedTargetPath.pathName })
+        let fileContent = (await Io(targetPath)).getText(),
+          qualifiedPath = QualifiedPathName.from({ rootPath: resolvedTargetPath.repoRoot, relPath: resolvedTargetPath.pathName }),
+          applyTime
+        !message.data.options?.dryRun &&
+          !message.data.options?.instantApply &&
           this._createOrShowDiffView({
-            smartPasteContext: { applyTime: c },
-            document: new VsCodeDiffDocument(l, a, r.data.generatedCode),
+            smartPasteContext: { applyTime: applyTime },
+            document: new VsCodeDiffDocument(qualifiedPath, fileContent, message.data.generatedCode),
           })
-        let u, f
+        let generator, requestId
         if (this._config.config.chat.smartPasteUsePrecomputation ?? true) {
-          let p = await this._smartPasteCache.get(r.data.generatedCode, s, a, {
-            message: r,
-            selectedCodeDetails: i,
-            targetFilePath: s,
-            targetFileContent: a,
+          let cacheResult = await this._smartPasteCache.get(message.data.generatedCode, targetPath, fileContent, {
+            message: message,
+            selectedCodeDetails: selectedCodeDetails,
+            targetFilePath: targetPath,
+            targetFileContent: fileContent,
           })
-          if (!p) {
+          if (!cacheResult) {
             this._logger.error(
               "Could not get valid edit stream for smart paste.",
             )
             return
           }
-          ;(u = p.generator),
-            (f = p.requestId),
+          ;(generator = cacheResult.generator),
+            (requestId = cacheResult.requestId),
             this._clientMetricsReporter.reportWebviewClientMetric({
               webviewName: "chat",
               client_metric: "chat-precompute-smart-paste",
               value: 1,
             })
         } else {
-          if (r.data.options?.dryRun) return
+          if (message.data.options?.dryRun) return
           {
-            let p = await this._smartPasteCache.getDirect({
-              message: r,
-              selectedCodeDetails: i,
-              targetFilePath: s,
-              targetFileContent: a,
+            let directResult = await this._smartPasteCache.getDirect({
+              message: message,
+              selectedCodeDetails: selectedCodeDetails,
+              targetFilePath: targetPath,
+              targetFileContent: fileContent,
             })
-            if (!p) {
+            if (!directResult) {
               this._logger.error(
                 "Could not get valid edit stream for smart paste.",
               )
               return
             }
-            ;(u = p.generator),
-              (f = p.requestId),
+            ;(generator = directResult.generator),
+              (requestId = directResult.requestId),
               this._clientMetricsReporter.reportWebviewClientMetric({
                 webviewName: "chat",
                 client_metric: "chat-smart-paste",
@@ -101054,12 +101054,12 @@ ${p.stack}`
               })
           }
         }
-        if (!u) {
+        if (!generator) {
           this._logger.error("Could not get valid edit stream for smart paste.")
           return
         }
-        r.data.options?.dryRun ||
-          (r.data.options?.instantApply
+        message.data.options?.dryRun ||
+          (message.data.options?.instantApply
             ? await DiffViewPanel.instantApply(
                 {
                   extensionUri: this._extensionUri,
@@ -101070,38 +101070,38 @@ ${p.stack}`
                   fuzzySymbolSearcher: this._fuzzySymbolSearcher,
                   workTimer: this._workTimer,
                 },
-                { document: new VsCodeDiffDocument(l, a, r.data.generatedCode) },
-                u,
+                { document: new VsCodeDiffDocument(qualifiedPath, fileContent, message.data.generatedCode) },
+                generator,
               )
-            : DiffViewPanel.startStream(hF(a, u), f, "smart-paste"))
+            : DiffViewPanel.startStream(hF(fileContent, generator), requestId, "smart-paste"))
         break
       }
       case "open-file": {
-        let n = await this.resolveTargetPath(r.data.pathName, undefined, false)
-        if (!n && r.data.allowOutOfWorkspace) {
-          cg(r.data)
+        let resolvedPath = await this.resolveTargetPath(message.data.pathName, undefined, false)
+        if (!resolvedPath && message.data.allowOutOfWorkspace) {
+          cg(message.data)
           return
-        } else if (!n) return
-        let i = n.repoRoot,
-          s = n.pathName
+        } else if (!resolvedPath) return
+        let repoRoot = resolvedPath.repoRoot,
+          pathName = resolvedPath.pathName
         cg({
-          repoRoot: i,
-          pathName: s,
-          range: r.data.range,
-          fullRange: r.data.fullRange,
-          differentTab: r.data.differentTab,
-          snippet: r.data.snippet,
+          repoRoot: repoRoot,
+          pathName: pathName,
+          range: message.data.range,
+          fullRange: message.data.fullRange,
+          differentTab: message.data.differentTab,
+          snippet: message.data.snippet,
         })
         break
       }
       case "open-memories-file": {
-        let n = this._toolsModel.memoriesAbsPath
-        if (!n) return
-        cg({ repoRoot: "", pathName: n })
+        let memoriesPath = this._toolsModel.memoriesAbsPath
+        if (!memoriesPath) return
+        cg({ repoRoot: "", pathName: memoriesPath })
         break
       }
       case "main-panel-perform-action": {
-        this.performAction(r.data)
+        this.performAction(message.data)
         break
       }
       case "used-slash-action": {
@@ -101113,35 +101113,35 @@ ${p.stack}`
         break
       }
       case "chat-clear-metadata": {
-        this.onClearMetadataFor(r)
+        this.onClearMetadataFor(message)
         break
       }
       case "open-guidelines": {
-        this._openGuidelines(r.data)
+        this._openGuidelines(message.data)
         break
       }
       case "update-user-guidelines": {
-        ig.updateUserGuidelines(r.data)
+        ig.updateUserGuidelines(message.data)
         break
       }
       case "open-settings-page": {
-        r.data
+        message.data
           ? kt.commands.executeCommand(
               "vscode-augment.showSettingsPanel",
-              r.data,
+              message.data,
             )
           : kt.commands.executeCommand("vscode-augment.showSettingsPanel")
         break
       }
       case "augment-link": {
         try {
-          let n = r.data
-          if (n) {
-            let i = kt.Uri.parse(n)
-            kt.env.openExternal(i)
+          let url = message.data
+          if (url) {
+            let uri = kt.Uri.parse(url)
+            kt.env.openExternal(uri)
           }
-        } catch (n) {
-          this._logger.error(`Failed to open URL: ${getErrorMessage(n)}`)
+        } catch (error) {
+          this._logger.error(`Failed to open URL: ${getErrorMessage(error)}`)
         }
         break
       }
@@ -101165,30 +101165,30 @@ ${p.stack}`
         break
       }
       case "execute-command": {
-        let n = r.data
+        let command = message.data
         try {
-          await kt.commands.executeCommand(n)
-        } catch (i) {
-          this._logger.error(`Failed to execute command ${n}: ${i}`)
+          await kt.commands.executeCommand(command)
+        } catch (error) {
+          this._logger.error(`Failed to execute command ${command}: ${error}`)
         }
         break
       }
       case "report-error": {
         this._apiServer.reportError(
-          r.data.originalRequestId,
-          r.data.sanitizedMessage,
-          r.data.stackTrace,
-          r.data.diagnostics,
+          message.data.originalRequestId,
+          message.data.sanitizedMessage,
+          message.data.stackTrace,
+          message.data.diagnostics,
         )
         break
       }
     }
   }
-  _openGuidelines = (r) => {
-    if (r) {
-      let n = hwe.default.join(r, ".augment-guidelines"),
-        i = kt.Uri.file(n)
-      kt.commands.executeCommand("vscode.open", i)
+  _openGuidelines = (folderPath) => {
+    if (folderPath) {
+      let guidelinesPath = hwe.default.join(folderPath, ".augment-guidelines"),
+        fileUri = kt.Uri.file(guidelinesPath)
+      kt.commands.executeCommand("vscode.open", fileUri)
       return
     } else {
       kt.commands.executeCommand(
@@ -101198,16 +101198,16 @@ ${p.stack}`
       return
     }
   }
-  _getBlobNames(r) {
-    let n = new Array()
-    for (let i of r) {
-      let s = this._workspaceManager.getBlobName(QualifiedPathName.from(i))
-      s !== undefined && n.push(s)
+  _getBlobNames(paths) {
+    let blobNames = new Array()
+    for (let path of paths) {
+      let blobName = this._workspaceManager.getBlobName(QualifiedPathName.from(path))
+      blobName !== undefined && blobNames.push(blobName)
     }
-    return n
+    return blobNames
   }
-  performAction(r) {
-    switch (r) {
+  performAction(action) {
+    switch (action) {
       case "disable-github-copilot": {
         Im.disableGitHubCopilot()
         break
@@ -101237,25 +101237,25 @@ ${p.stack}`
       }
     }
   }
-  handleDerivedStateChange(r) {
-    this.sendActionsToWebview(r.map((n) => n.name))
+  handleDerivedStateChange(actions) {
+    this.sendActionsToWebview(actions.map((action) => action.name))
   }
-  async sendActionsToWebview(r) {
-    await this._webview?.postMessage({ type: "main-panel-actions", data: r })
+  async sendActionsToWebview(actions) {
+    await this._webview?.postMessage({ type: "main-panel-actions", data: actions })
   }
   async sendAutofixUpdateRequestMessage() {
     await this._webview?.postMessage({
       type: "chat-autofix-state-update-request",
     })
   }
-  async sendAutofixSuggestionsAppliedMessage(r) {
+  async sendAutofixSuggestionsAppliedMessage(solutions) {
     await this._webview?.postMessage({
       type: "chat-autofix-suggestions-applied",
-      data: { selectedSolutions: r },
+      data: { selectedSolutions: solutions },
     })
   }
-  onChatExtensionMessage = async (r) => {
-    switch (r) {
+  onChatExtensionMessage = async (command) => {
+    switch (command) {
       case "runSlashFix": {
         await this._webview?.postMessage({
           type: "run-slash-command",
@@ -101297,68 +101297,68 @@ ${p.stack}`
   showAugmentPanel = async () => (
     await kt.commands.executeCommand(Separator.commandID), { type: "empty" }
   )
-  callTool = async (r) => {
-    let n = r.data,
-      i = await this._chatModel.hydrateChatHistory(n.chatHistory),
-      s = this._chatModel.limitChatHistory(i),
-      o = await this._toolsModel.callTool(
-        n.chatRequestId,
-        n.toolUseId,
-        n.name,
-        n.input,
-        s,
-        n.conversationId,
+  callTool = async (message) => {
+    let data = message.data,
+      chatHistory = await this._chatModel.hydrateChatHistory(data.chatHistory),
+      limitedChatHistory = this._chatModel.limitChatHistory(chatHistory),
+      result = await this._toolsModel.callTool(
+        data.chatRequestId,
+        data.toolUseId,
+        data.name,
+        data.input,
+        limitedChatHistory,
+        data.conversationId,
       )
-    return { type: "call-tool-response", data: o }
+    return { type: "call-tool-response", data: result }
   }
-  cancelToolRun = async (r) => (
-    await this._toolsModel.cancelToolRun(r.data.requestId, r.data.toolUseId),
+  cancelToolRun = async (message) => (
+    await this._toolsModel.cancelToolRun(message.data.requestId, message.data.toolUseId),
     { type: "cancel-tool-run-response" }
   )
-  toolCheckSafe = async (r) => {
-    let n = r.data,
-      i = await this._toolsModel.checkToolCallSafe(n.name, n.input)
-    return { type: "check-safe-response", data: { isSafe: i } }
+  toolCheckSafe = async (message) => {
+    let data = message.data,
+      isSafe = await this._toolsModel.checkToolCallSafe(data.name, data.input)
+    return { type: "check-safe-response", data: { isSafe: isSafe } }
   }
-  checkToolExists = async (r) => {
-    let n = await this._toolsModel.checkToolExists(r.toolName)
-    return { type: "checkToolExistsResponse", exists: n }
+  checkToolExists = async (message) => {
+    let exists = await this._toolsModel.checkToolExists(message.toolName)
+    return { type: "checkToolExistsResponse", exists: exists }
   }
-  _getChatRequestIdeState = async (r) => {
-    let n = kt.window.activeTextEditor
+  _getChatRequestIdeState = async (message) => {
+    let activeFolderRoot = kt.window.activeTextEditor
         ? this._workspaceManager.getFolderRoot(
             kt.window.activeTextEditor?.document.uri,
           )
         : undefined,
-      i = this._workspaceManager.getMostRecentlyChangedFolderRoot(),
-      s = this._workspaceManager
+      recentlyChangedRoot = this._workspaceManager.getMostRecentlyChangedFolderRoot(),
+      workspaceFolders = this._workspaceManager
         .listSourceFolders()
-        .filter((l) => l.type === 0)
-        .sort((l) => (l.folderRoot === n ? -1 : l.folderRoot === i ? 0 : 1))
-        .map((l) => ({
-          folder_root: l.folderRoot,
+        .filter((folder) => folder.type === 0)
+        .sort((folder) => (folder.folderRoot === activeFolderRoot ? -1 : folder.folderRoot === recentlyChangedRoot ? 0 : 1))
+        .map((folder) => ({
+          folder_root: folder.folderRoot,
           repository_root:
-            this._workspaceManager.getRepoRootForFolderRoot(l.folderRoot) ??
-            l.folderRoot,
+            this._workspaceManager.getRepoRootForFolderRoot(folder.folderRoot) ??
+            folder.folderRoot,
         })),
-      o = this._toolsModel.getTool(ToolType.launchProcess),
-      a
+      launchProcessTool = this._toolsModel.getTool(ToolType.launchProcess),
+      terminalInfo
     return (
-      o && o instanceof cv && (a = o.processTools.getLongRunningTerminalInfo()),
-      !a &&
-        s.length > 0 &&
-        (a = { terminal_id: 0, current_working_directory: s[0].folder_root }),
+      launchProcessTool && launchProcessTool instanceof cv && (terminalInfo = launchProcessTool.processTools.getLongRunningTerminalInfo()),
+      !terminalInfo &&
+        workspaceFolders.length > 0 &&
+        (terminalInfo = { terminal_id: 0, current_working_directory: workspaceFolders[0].folder_root }),
       Promise.resolve({
         type: "get-ide-state-node-response",
         data: {
-          workspace_folders: s,
+          workspace_folders: workspaceFolders,
           workspace_folders_unchanged: false,
-          current_terminal: a,
+          current_terminal: terminalInfo,
         },
       })
     )
   }
-  _createOrShowDiffView = (r) => {
+  _createOrShowDiffView = (options) => {
     DiffViewPanel.createOrShow(
       {
         extensionUri: this._extensionUri,
@@ -101369,7 +101369,7 @@ ${p.stack}`
         fuzzySymbolSearcher: this._fuzzySymbolSearcher,
         workTimer: this._workTimer,
       },
-      r,
+      options,
     )
   }
   _notifyAgentEditListHasUpdates = (0, yf.default)(
@@ -101395,36 +101395,36 @@ ${p.stack}`
       typeof this._toolsModel.getSidecarToolHost != "function"
     )
       return
-    let r = this._toolsModel.getSidecarToolHost()
-    if (!r) return
-    let n = r.getMemoryUpdateManager()
-    n &&
+    let sidecarToolHost = this._toolsModel.getSidecarToolHost()
+    if (!sidecarToolHost) return
+    let memoryUpdateManager = sidecarToolHost.getMemoryUpdateManager()
+    memoryUpdateManager &&
       (this._memoryUpdateManagerDisposable?.dispose(),
-      (this._memoryUpdateManagerDisposable = n.onMemoryHasUpdates(() => {
+      (this._memoryUpdateManagerDisposable = memoryUpdateManager.onMemoryHasUpdates(() => {
         this._notifyMemoryHasUpdates()
       })),
       this.addDisposable(this._memoryUpdateManagerDisposable))
   }
-  _saveImage = async (r) => {
-    let { filename: n, data: i } = r.data,
-      s = lEe(i)
+  _saveImage = async (message) => {
+    let { filename, data } = message.data,
+      buffer = lEe(data)
     return (
-      await this._assetManager.saveAsset(n, s),
-      { type: "chat-save-image-response", data: n }
+      await this._assetManager.saveAsset(filename, buffer),
+      { type: "chat-save-image-response", data: filename }
     )
   }
-  _deleteImage = async (r) => {
-    let n = r.data
+  _deleteImage = async (message) => {
+    let filename = message.data
     return (
-      await this._assetManager.deleteAsset(n),
+      await this._assetManager.deleteAsset(filename),
       { type: "chat-delete-image-response" }
     )
   }
-  _loadImage = async (r) => {
-    let n = r.data,
-      i = await this._assetManager.loadAsset(n),
-      s = i ? cEe(i) : undefined
-    return { type: "chat-load-image-response", data: s }
+  _loadImage = async (message) => {
+    let filename = message.data,
+      imageData = await this._assetManager.loadAsset(filename),
+      base64Data = imageData ? cEe(imageData) : undefined
+    return { type: "chat-load-image-response", data: base64Data }
   }
 }
 var H8 = q(require("vscode")),
@@ -104923,7 +104923,7 @@ var ToggleAutomaticCompletionCommand = class ToggleAutomaticCompletionCommand ex
     return super.canRun()
   }
 }
-function registerCommands(e, t, r, n, i, s, o, a, l, c, u, f, p, g) {
+function registerCommands(e, t, r, n, i, s, o, a, l, changeWebviewAppEventEmitter, u, f, p, g) {
   let commandRegistry = new CommandRegistry(r)
   return (
     commandRegistry.registerGroup("", [
@@ -105000,7 +105000,7 @@ function registerCommands(e, t, r, n, i, s, o, a, l, c, u, f, p, g) {
     commandRegistry.register([
       new ShowAugmentCommandsCommand(t, e, commandRegistry),
       new ToggleBackgroundSuggestionsCommand(t, r, f),
-      new ShowSidebarChatCommand(t.featureFlagManager, c),
+      new ShowSidebarChatCommand(t.featureFlagManager, changeWebviewAppEventEmitter),
       new GenerateCommitMessageCommand(t, s),
       new OpenDiffViewCommand(t, e.extensionUri, s),
       new AcceptAllChunksCommand(),
@@ -107323,7 +107323,7 @@ var jQ = class extends DisposableContainer {
         this.addDisposable(this._workspaceUiModel))
   }
 }
-var DiskFileManager = class e extends MetricsReporter {
+var ClientMetricsReporter = class e extends MetricsReporter {
   constructor(r) {
     super(
       "ClientMetricsReporter",
@@ -111097,7 +111097,7 @@ var EditorNextEdit = class EditorNextEdit extends DisposableContainer {
     this._suggestionManager.accept(suggestions)
   }
   acceptAllSuggestionsInFile(uri, eventSource) {
-    let filePath = Ns(uri),
+    let filePath = getFullPath(uri),
       suggestionsInFile = this._suggestionManager
         .getActiveSuggestions()
         .filter(isFreshNonNoopSuggestion)
@@ -111187,7 +111187,7 @@ var EditorNextEdit = class EditorNextEdit extends DisposableContainer {
       )
   }
   rejectAllSuggestionsInFile(uri, eventSource) {
-    let filePath = Ns(uri),
+    let filePath = getFullPath(uri),
       acceptedSuggestionsInFile = this._suggestionManager
         .getJustAcceptedSuggestions()
         .filter((a) => filePath === a.qualifiedPathName.absPath),
@@ -111321,7 +111321,7 @@ var EditorNextEdit = class EditorNextEdit extends DisposableContainer {
       )
   }
   undoAllSuggestionsInFile(uri, eventSource) {
-    let filePath = Ns(uri),
+    let filePath = getFullPath(uri),
       acceptedSuggestionsInFile = this._suggestionManager
         .getActiveSuggestions()
         .filter(isSuggestionAccepted)
@@ -113890,14 +113890,14 @@ function areMapsEqual(map1, map2) {
   return true
 }
 var uIe = q(require("vscode"))
-var zN = class extends DisposableContainer {
-  constructor(r, n) {
+var ChatHistoryManager = class extends DisposableContainer {
+  constructor(globalState, syncingStatus) {
     super()
-    this._globalState = r
-    this._syncingStatus = n
+    this._globalState = globalState
+    this._syncingStatus = syncingStatus
     this.loadWorkspaceMessageState(),
       this.addDisposable(
-        this._syncingStatus.onDidChangeSyncingStatus((i) =>
+        this._syncingStatus.onDidChangeSyncingStatus((event) =>
           this._handleSyncingProgress(),
         ),
       )
@@ -113911,33 +113911,33 @@ var zN = class extends DisposableContainer {
   get onShouldShowSummary() {
     return this.shouldShowSummaryEmitter.event
   }
-  setShouldShowSummary(r) {
-    this._shouldShowSummary = r
+  setShouldShowSummary(value) {
+    this._shouldShowSummary = value
   }
   async _handleSyncingProgress() {
-    let r = this._syncingStatus.status
-    r.foldersProgress.length !== 0 && (await this.handleShowingSummaryMsg(r))
+    let status = this._syncingStatus.status
+    status.foldersProgress.length !== 0 && (await this.handleShowingSummaryMsg(status))
   }
-  async handleShowingSummaryMsg(r) {
+  async handleShowingSummaryMsg(statusData) {
     if (
       !(
-        r.status !== "done" ||
-        r.foldersProgress.every(
-          (s) =>
-            s.progress?.trackedFiles === undefined ||
-            s.progress.trackedFiles === 0,
+        statusData.status !== "done" ||
+        statusData.foldersProgress.every(
+          (folderProgress) =>
+            folderProgress.progress?.trackedFiles === undefined ||
+            folderProgress.progress.trackedFiles === 0,
         ) ||
-        r.foldersProgress.find(
-          (s) =>
-            this._workspaceMessageState.get(s.folderRoot)?.workspaceSummary,
+        statusData.foldersProgress.find(
+          (folderProgress) =>
+            this._workspaceMessageState.get(folderProgress.folderRoot)?.workspaceSummary,
         ) ||
-        !r.foldersProgress.find((s) => s.progress?.newlyTracked)
+        !statusData.foldersProgress.find((folderProgress) => folderProgress.progress?.newlyTracked)
       )
     ) {
       this.showSummaryMessage()
-      for (let s of r.foldersProgress)
-        this._workspaceMessageState.set(s.folderRoot, {
-          folderRoot: s.folderRoot,
+      for (let folderProgress of statusData.foldersProgress)
+        this._workspaceMessageState.set(folderProgress.folderRoot, {
+          folderRoot: folderProgress.folderRoot,
           workspaceSummary: true,
         })
       await this.saveWorkspaceMessageState()
@@ -113953,21 +113953,21 @@ var zN = class extends DisposableContainer {
     )
   }
   loadWorkspaceMessageState() {
-    let r = this._globalState.get("workspaceMessageStates")
-    r &&
-      (this._workspaceMessageState = new Map(r.map((n) => [n.folderRoot, n])))
+    let storedStates = this._globalState.get("workspaceMessageStates")
+    storedStates &&
+      (this._workspaceMessageState = new Map(storedStates.map((state) => [state.folderRoot, state])))
   }
   dispose() {
     this.shouldShowSummaryEmitter.dispose()
   }
 }
 var jN = q(require("vscode"))
-var JN = class extends DisposableContainer {
-  constructor(r, n) {
+var SyncingStatusTracker = class extends DisposableContainer {
+  constructor(statusBar, syncingProgressEmitter) {
     super()
-    this._statusBar = r
+    this._statusBar = statusBar
     this.addDisposables(
-      n((i) => this._handleSyncingStatusChanged(i)),
+      syncingProgressEmitter((progressEvent) => this._handleSyncingStatusChanged(progressEvent)),
       new jN.Disposable(() => {
         this._syncingStatusBarDisposable?.dispose(),
           (this._syncingStatusBarDisposable = undefined)
@@ -113978,11 +113978,11 @@ var JN = class extends DisposableContainer {
     "Augment is synchronizing with your codebase to make better suggestions. The first time typically takes a few minutes."
   _syncingStatusBarDisposable
   _syncingNotificationShown = false
-  _handleSyncingStatusChanged(r) {
-    switch (r.status) {
+  _handleSyncingStatusChanged(progressEvent) {
+    switch (progressEvent.status) {
       case "longRunning":
         this._syncingNotificationShown ||
-          (r.foldersProgress.find((i) => i.progress?.newlyTracked) &&
+          (progressEvent.foldersProgress.find((folderProgress) => folderProgress.progress?.newlyTracked) &&
             ((this._syncingNotificationShown = true),
             jN.commands.executeCommand(Separator.commandID)))
       case "running":
@@ -117269,7 +117269,7 @@ function pC(e, t) {
   let r = new Set(t)
   return e.filter((n) => !r.has(n))
 }
-var B2 = class e extends DisposableContainer {
+var BlobsCheckpointManager = class BlobsCheckpointManager extends DisposableContainer {
   static defaultCheckpointThreshold = 1e3
   _checkpointId
   _checkpointBlobNames = new Map()
@@ -117279,65 +117279,65 @@ var B2 = class e extends DisposableContainer {
   _logger
   _checkpointQueue
   _checkpointThreshold
-  _maxCheckpointBatchSize = 1e4
+  _maxCheckpointBatchSize = 10000
   _featureFlagManager
   _onContextChange = new NIe.EventEmitter()
   onContextChange = this._onContextChange.event
   get _flags() {
     return this._featureFlagManager.currentFlags
   }
-  constructor(t, r, n, i) {
+  constructor(apiServer, featureFlagManager, onDidChangeBlobName, threshold) {
     super(),
       (this._logger = z("BlobsCheckpointManager")),
       (this._checkpointId = undefined),
-      (this._apiServer = t),
-      (this._featureFlagManager = r),
-      (this._checkpointThreshold = i ?? e.defaultCheckpointThreshold),
+      (this._apiServer = apiServer),
+      (this._featureFlagManager = featureFlagManager),
+      (this._checkpointThreshold = threshold ?? BlobsCheckpointManager.defaultCheckpointThreshold),
       this.addDisposable(
-        n((s) => {
-          this.updateBlob(s.absPath, s.prevBlobName, s.newBlobName)
+        onDidChangeBlobName((blobChangeEvent) => {
+          this.updateBlob(blobChangeEvent.absPath, blobChangeEvent.prevBlobName, blobChangeEvent.newBlobName)
         }),
       ),
       (this._checkpointQueue = new I2("checkpoint", {
-        processOne: async (s, o) => await this._checkpoint(s, o),
+        processOne: async (task, context) => await this._checkpoint(task, context),
       })),
       this._logger.info(
         `BlobsCheckpointManager created. checkpointThreshold: ${this._checkpointThreshold}`,
       )
   }
-  refBlob(t) {
-    let r = this._checkpointBlobNames.get(t)
-    r !== undefined
-      ? (this._checkpointBlobNames.set(t, r + 1),
-        r === 0 && this._toRemove.delete(t))
-      : this._toAdd.set(t, (this._toAdd.get(t) ?? 0) + 1)
+  refBlob(blobName) {
+    let refCount = this._checkpointBlobNames.get(blobName)
+    refCount !== undefined
+      ? (this._checkpointBlobNames.set(blobName, refCount + 1),
+        refCount === 0 && this._toRemove.delete(blobName))
+      : this._toAdd.set(blobName, (this._toAdd.get(blobName) ?? 0) + 1)
   }
-  derefBlob(t) {
-    !this.derefFromCheckpoint(t) &&
-      !this.derefFromAdded(t) &&
+  derefBlob(blobName) {
+    !this.derefFromCheckpoint(blobName) &&
+      !this.derefFromAdded(blobName) &&
       this._logger.error(
-        `derefBlob: blob ${t} not found in checkpoint or toAdd`,
+        `derefBlob: blob ${blobName} not found in checkpoint or toAdd`,
       )
   }
-  derefFromCheckpoint(t) {
-    let r = this._checkpointBlobNames.get(t)
-    return r === undefined || r <= 0
-      ? (r !== undefined &&
+  derefFromCheckpoint(blobName) {
+    let refCount = this._checkpointBlobNames.get(blobName)
+    return refCount === undefined || refCount <= 0
+      ? (refCount !== undefined &&
           this._logger.error(
-            `derefFromCheckpoint: blob ${t} has reference count ${r}. In toRemove? ${this._toRemove.has(t)}`,
+            `derefFromCheckpoint: blob ${blobName} has reference count ${refCount}. In toRemove? ${this._toRemove.has(blobName)}`,
           ),
         false)
-      : (this._checkpointBlobNames.set(t, r - 1),
-        r === 1 && this._toRemove.add(t),
+      : (this._checkpointBlobNames.set(blobName, refCount - 1),
+        refCount === 1 && this._toRemove.add(blobName),
         true)
   }
-  derefFromAdded(t) {
-    let r = this._toAdd.get(t)
-    return r === undefined
+  derefFromAdded(blobName) {
+    let refCount = this._toAdd.get(blobName)
+    return refCount === undefined
       ? false
-      : r <= 1
-        ? (this._toAdd.delete(t), r === 1)
-        : (this._toAdd.set(t, r - 1), true)
+      : refCount <= 1
+        ? (this._toAdd.delete(blobName), refCount === 1)
+        : (this._toAdd.set(blobName, refCount - 1), true)
   }
   getCheckpointedBlobNames() {
     return Array.from(this._checkpointBlobNames.keys())
@@ -117349,83 +117349,83 @@ var B2 = class e extends DisposableContainer {
       deletedBlobs: Array.from(this._toRemove),
     }
   }
-  getContextAdjusted(t, r) {
-    let n = new Set(this._toAdd.keys()),
-      i = new Set(this._toRemove)
-    for (let s of t) this._checkpointBlobNames.has(s) || n.add(s), i.delete(s)
-    for (let s of r) this._checkpointBlobNames.has(s) && i.add(s), n.delete(s)
+  getContextAdjusted(additionalBlobs, removedBlobs) {
+    let adjustedAddedBlobs = new Set(this._toAdd.keys()),
+      adjustedRemovedBlobs = new Set(this._toRemove)
+    for (let blobName of additionalBlobs) this._checkpointBlobNames.has(blobName) || adjustedAddedBlobs.add(blobName), adjustedRemovedBlobs.delete(blobName)
+    for (let blobName of removedBlobs) this._checkpointBlobNames.has(blobName) && adjustedRemovedBlobs.add(blobName), adjustedAddedBlobs.delete(blobName)
     return {
       checkpointId: this._checkpointId,
-      addedBlobs: Array.from(n),
-      deletedBlobs: Array.from(i),
+      addedBlobs: Array.from(adjustedAddedBlobs),
+      deletedBlobs: Array.from(adjustedRemovedBlobs),
     }
   }
-  blobsPayload(t) {
-    let r = this.getCheckpointedBlobNames(),
-      n = pC(t, r),
-      i = pC(r, t)
-    return { checkpointId: this._checkpointId, addedBlobs: n, deletedBlobs: i }
+  blobsPayload(requestedBlobs) {
+    let checkpointedBlobs = this.getCheckpointedBlobNames(),
+      addedBlobs = pC(requestedBlobs, checkpointedBlobs),
+      deletedBlobs = pC(checkpointedBlobs, requestedBlobs)
+    return { checkpointId: this._checkpointId, addedBlobs: addedBlobs, deletedBlobs: deletedBlobs }
   }
-  expandBlobs(t) {
-    if (t.checkpointId === undefined) return t.addedBlobs
-    if (t.checkpointId !== this._checkpointId)
+  expandBlobs(blobsContext) {
+    if (blobsContext.checkpointId === undefined) return blobsContext.addedBlobs
+    if (blobsContext.checkpointId !== this._checkpointId)
       throw new Error(
-        `expandBlobs: checkpointId mismatch: ${t.checkpointId} != ${this._checkpointId}`,
+        `expandBlobs: checkpointId mismatch: ${blobsContext.checkpointId} != ${this._checkpointId}`,
       )
-    let r = this.getCheckpointedBlobNames()
-    if ((r.push(...t.addedBlobs), t.deletedBlobs.length > 0)) {
-      let n = new Set(t.deletedBlobs)
-      return r.filter((i) => !n.has(i))
+    let allBlobs = this.getCheckpointedBlobNames()
+    if ((allBlobs.push(...blobsContext.addedBlobs), blobsContext.deletedBlobs.length > 0)) {
+      let deletedBlobsSet = new Set(blobsContext.deletedBlobs)
+      return allBlobs.filter((blob) => !deletedBlobsSet.has(blob))
     }
-    return r
+    return allBlobs
   }
-  validateMatching(t, r, n = false) {
-    if (t.checkpointId !== r.checkpointId)
+  validateMatching(leftContext, rightContext, verbose = false) {
+    if (leftContext.checkpointId !== rightContext.checkpointId)
       return (
         this._logger.error(
-          `checkpointId mismatch: ${t.checkpointId} vs ${r.checkpointId}`,
+          `checkpointId mismatch: ${leftContext.checkpointId} vs ${rightContext.checkpointId}`,
         ),
         false
       )
-    let i = true,
-      s = pC(t.addedBlobs, r.addedBlobs),
-      o = pC(r.addedBlobs, t.addedBlobs)
+    let isValid = true,
+      leftOnlyAdded = pC(leftContext.addedBlobs, rightContext.addedBlobs),
+      rightOnlyAdded = pC(rightContext.addedBlobs, leftContext.addedBlobs)
     return (
-      (s.length > 0 || o.length > 0) &&
-        ((i = false),
-        this._logger.error(`addedBlobs mismatch: -${s.length}/+${o.length}`),
-        n &&
-          (this._logger.error(`left-added: ${s.slice(0, 5).join(",")}`),
-          this._logger.error(`right-added: ${o.slice(0, 5).join(",")}`))),
-      (s = pC(t.deletedBlobs, r.deletedBlobs)),
-      (o = pC(r.deletedBlobs, t.deletedBlobs)),
-      (s.length > 0 || o.length > 0) &&
-        ((i = false),
-        this._logger.error(`deletedBlobs mismatch: -${s.length}/+${o.length}`),
-        n &&
-          (this._logger.error(`left-deleted: ${s.slice(0, 5).join(",")}`),
-          this._logger.error(`right-deleted: ${o.slice(0, 5).join(",")}`))),
-      i
+      (leftOnlyAdded.length > 0 || rightOnlyAdded.length > 0) &&
+        ((isValid = false),
+        this._logger.error(`addedBlobs mismatch: -${leftOnlyAdded.length}/+${rightOnlyAdded.length}`),
+        verbose &&
+          (this._logger.error(`left-added: ${leftOnlyAdded.slice(0, 5).join(",")}`),
+          this._logger.error(`right-added: ${rightOnlyAdded.slice(0, 5).join(",")}`))),
+      (leftOnlyAdded = pC(leftContext.deletedBlobs, rightContext.deletedBlobs)),
+      (rightOnlyAdded = pC(rightContext.deletedBlobs, leftContext.deletedBlobs)),
+      (leftOnlyAdded.length > 0 || rightOnlyAdded.length > 0) &&
+        ((isValid = false),
+        this._logger.error(`deletedBlobs mismatch: -${leftOnlyAdded.length}/+${rightOnlyAdded.length}`),
+        verbose &&
+          (this._logger.error(`left-deleted: ${leftOnlyAdded.slice(0, 5).join(",")}`),
+          this._logger.error(`right-deleted: ${rightOnlyAdded.slice(0, 5).join(",")}`))),
+      isValid
     )
   }
-  updateBlob(t, r, n) {
-    this._logger.verbose(`notifyBlobChange ${t}: ${r} to ${n}`),
-      n && n !== r && this.refBlob(n),
-      r && n !== r && this.derefBlob(r),
+  updateBlob(filePath, prevBlobName, newBlobName) {
+    this._logger.verbose(`notifyBlobChange ${filePath}: ${prevBlobName} to ${newBlobName}`),
+      newBlobName && newBlobName !== prevBlobName && this.refBlob(newBlobName),
+      prevBlobName && newBlobName !== prevBlobName && this.derefBlob(prevBlobName),
       this._toAdd.size + this._toRemove.size >= this._checkpointThreshold &&
         this._checkpointQueue.size() === 0 &&
         this._queueCheckpoint()
   }
   resetCheckpoint() {
-    for (let [t, r] of this._checkpointBlobNames)
-      r > 0
-        ? this._toAdd.set(t, r)
-        : this._toRemove.delete(t) ||
+    for (let [blobName, refCount] of this._checkpointBlobNames)
+      refCount > 0
+        ? this._toAdd.set(blobName, refCount)
+        : this._toRemove.delete(blobName) ||
           this._logger.warn(
-            `blob with 0 references was not found in toRemove: ${t}`,
+            `blob with 0 references was not found in toRemove: ${blobName}`,
           )
-    for (let t of this._toRemove)
-      this._logger.warn(`blob in toRemove was not found in checkpoint: ${t}`)
+    for (let blobName of this._toRemove)
+      this._logger.warn(`blob in toRemove was not found in checkpoint: ${blobName}`)
     this._toRemove.clear(),
       (this._checkpointId = undefined),
       this._checkpointBlobNames.clear(),
@@ -117434,51 +117434,51 @@ var B2 = class e extends DisposableContainer {
   async awaitEmptyQueue() {
     await this._checkpointQueue.awaitEmpty(undefined, false)
   }
-  async _checkpoint(t, r) {
-    let { checkpointId: n, addedBlobs: i, deletedBlobs: s } = t
-    this._logger.debug(`Begin checkpoint of working set into ${n}`),
+  async _checkpoint(checkpointTask, queueContext) {
+    let { checkpointId, addedBlobs, deletedBlobs } = checkpointTask
+    this._logger.debug(`Begin checkpoint of working set into ${checkpointId}`),
       this._logger.debug(
-        `add ${i.length} blobs, remove ${s.length} blobs into ${n}`,
+        `add ${addedBlobs.length} blobs, remove ${deletedBlobs.length} blobs into ${checkpointId}`,
       )
-    let o = { newCheckpointId: "" }
+    let response = { newCheckpointId: "" }
     try {
-      o = await this._apiServer.checkpointBlobs(t)
-    } catch (a) {
-      let l = a instanceof Error ? a.message : `${a}`,
-        c = this._checkpointId ? this._checkpointId : "{initial}"
-      ApiError.isAPIErrorWithStatus(a, RequestStatus.invalidArgument) ||
-      ApiError.isAPIErrorWithStatus(a, RequestStatus.unimplemented)
+      response = await this._apiServer.checkpointBlobs(checkpointTask)
+    } catch (error) {
+      let errorMessage = error instanceof Error ? error.message : `${error}`,
+        currentCheckpoint = this._checkpointId ? this._checkpointId : "{initial}"
+      ApiError.isAPIErrorWithStatus(error, RequestStatus.invalidArgument) ||
+      ApiError.isAPIErrorWithStatus(error, RequestStatus.unimplemented)
         ? (this._logger.warn(
-            `checkpoint-blobs from ${c} failed with invalid argument: ${l}. Recreating checkpoint.`,
+            `checkpoint-blobs from ${currentCheckpoint} failed with invalid argument: ${errorMessage}. Recreating checkpoint.`,
           ),
           this.resetCheckpoint(),
           this._queueCheckpoint(),
-          r.throwError(a, false))
-        : (this._logger.error(`checkpoint-blobs failed with error: ${l}.`),
-          r.throwError(a, false))
+          queueContext.throwError(error, false))
+        : (this._logger.error(`checkpoint-blobs failed with error: ${errorMessage}.`),
+          queueContext.throwError(error, false))
     }
-    if (n !== this._checkpointId)
+    if (checkpointId !== this._checkpointId)
       this._logger.warn(
-        `original checkpointId ${n} does not match current checkpointId ${this._checkpointId}. Abandoning new checkpoint.`,
+        `original checkpointId ${checkpointId} does not match current checkpointId ${this._checkpointId}. Abandoning new checkpoint.`,
       )
     else {
-      this._logger.debug(`checkpointId ${n} advanced to ${o.newCheckpointId}`),
-        (this._checkpointId = o.newCheckpointId)
-      for (let a of i) {
-        let l = this._toAdd.get(a)
-        l === undefined
-          ? (this._checkpointBlobNames.set(a, 0), this._toRemove.add(a))
-          : (this._checkpointBlobNames.set(a, l), this._toAdd.delete(a))
+      this._logger.debug(`checkpointId ${checkpointId} advanced to ${response.newCheckpointId}`),
+        (this._checkpointId = response.newCheckpointId)
+      for (let blobName of addedBlobs) {
+        let refCount = this._toAdd.get(blobName)
+        refCount === undefined
+          ? (this._checkpointBlobNames.set(blobName, 0), this._toRemove.add(blobName))
+          : (this._checkpointBlobNames.set(blobName, refCount), this._toAdd.delete(blobName))
       }
-      for (let a of s) {
-        let l = this._checkpointBlobNames.get(a)
-        l === undefined
+      for (let blobName of deletedBlobs) {
+        let refCount = this._checkpointBlobNames.get(blobName)
+        refCount === undefined
           ? this._logger.warn(
-              `In _checkpoint: deleted blob ${a} not found in checkpoint`,
+              `In _checkpoint: deleted blob ${blobName} not found in checkpoint`,
             )
-          : l > 0 && this._toAdd.set(a, l),
-          this._checkpointBlobNames.delete(a),
-          this._toRemove.delete(a)
+          : refCount > 0 && this._toAdd.set(blobName, refCount),
+          this._checkpointBlobNames.delete(blobName),
+          this._toRemove.delete(blobName)
       }
       this._onContextChange.fire(this.getContext())
     }
@@ -117490,16 +117490,16 @@ var B2 = class e extends DisposableContainer {
   }
   _queueCheckpoint() {
     this._logger.debug("queue checkpoint")
-    let t = Array.from(this._toAdd.keys()).slice(
+    let blobsToAdd = Array.from(this._toAdd.keys()).slice(
         0,
         this._maxCheckpointBatchSize,
       ),
-      r = Array.from(this._toRemove).slice(0, this._maxCheckpointBatchSize),
-      n = { checkpointId: this._checkpointId, addedBlobs: t, deletedBlobs: r }
+      blobsToRemove = Array.from(this._toRemove).slice(0, this._maxCheckpointBatchSize),
+      checkpointTask = { checkpointId: this._checkpointId, addedBlobs: blobsToAdd, deletedBlobs: blobsToRemove }
     this._logger.debug(
-      `queue checkpoint: version: ${n.checkpointId}, add: ${n.addedBlobs.length} blobs, rm: ${n.deletedBlobs.length} blob`,
+      `queue checkpoint: version: ${checkpointTask.checkpointId}, add: ${checkpointTask.addedBlobs.length} blobs, rm: ${checkpointTask.deletedBlobs.length} blob`,
     ),
-      this._checkpointQueue.add(n)
+      this._checkpointQueue.add(checkpointTask)
   }
 }
 var Dw = q(require("vscode"))
@@ -117544,49 +117544,49 @@ var _9 = class {
       this.items.set(t, r)
     }
   },
-  DiskFileManager = class e extends DisposableContainer {
-    constructor(r, n, i, s, o) {
+  DiskFileManager = class DiskFileManager extends DisposableContainer {
+    constructor(workspaceName, apiServer, pathHandler, pathMap, probeBatchSize) {
       super()
-      this.workspaceName = r
-      this._apiServer = n
-      this._pathHandler = i
-      this._pathMap = s
-      ;(this._logger = z(`DiskFileManager[${r}]`)),
-        o === undefined
-          ? (this._probeBatchSize = e.maxProbeBatchSize)
-          : (o < e.minProbeBatchSize
+      this.workspaceName = workspaceName
+      this._apiServer = apiServer
+      this._pathHandler = pathHandler
+      this._pathMap = pathMap
+      ;(this._logger = z(`DiskFileManager[${workspaceName}]`)),
+        probeBatchSize === undefined
+          ? (this._probeBatchSize = DiskFileManager.maxProbeBatchSize)
+          : (probeBatchSize < DiskFileManager.minProbeBatchSize
               ? this._logger.verbose(
-                  `Rejecting requested probe batch size of ${o} (min = ${e.minProbeBatchSize})`,
+                  `Rejecting requested probe batch size of ${probeBatchSize} (min = ${DiskFileManager.minProbeBatchSize})`,
                 )
-              : o > e.maxProbeBatchSize &&
+              : probeBatchSize > DiskFileManager.maxProbeBatchSize &&
                 this._logger.verbose(
-                  `Rejecting requested probe batch size of ${o} (max = ${e.maxProbeBatchSize})`,
+                  `Rejecting requested probe batch size of ${probeBatchSize} (max = ${DiskFileManager.maxProbeBatchSize})`,
                 ),
             (this._probeBatchSize = Math.max(
-              Math.min(o, e.maxProbeBatchSize),
-              e.minProbeBatchSize,
+              Math.min(probeBatchSize, DiskFileManager.maxProbeBatchSize),
+              DiskFileManager.minProbeBatchSize,
             ))),
-        (this._toCalculate = new sa(this._calculate.bind(this))),
+        (this._toCalculate = new KeyedTaskQueue(this._calculate.bind(this))),
         this.addDisposable(this._toCalculate),
-        (this._toProbe = new sa(this._probe.bind(this))),
+        (this._toProbe = new KeyedTaskQueue(this._probe.bind(this))),
         this.addDisposable(this._toProbe),
         (this._probeBatch = this._newProbeBatch()),
-        (this._toUpload = new sa(this._upload.bind(this))),
+        (this._toUpload = new KeyedTaskQueue(this._upload.bind(this))),
         this.addDisposable(this._toUpload),
         (this._uploadBatch = this._newUploadBatch()),
-        (this._probeRetryWaiters = new sa(this._enqueueForProbe.bind(this))),
+        (this._probeRetryWaiters = new KeyedTaskQueue(this._enqueueForProbe.bind(this))),
         this.addDisposable(this._probeRetryWaiters),
         (this._probeRetryKicker = new Oc(
           this._probeRetryWaiters,
-          e.probeRetryPeriodMs,
+          DiskFileManager.probeRetryPeriodMs,
         )),
         this.addDisposable(this._probeRetryKicker),
-        (this._probeRetryBackoffWaiters = new sa(
+        (this._probeRetryBackoffWaiters = new KeyedTaskQueue(
           this._enqueueForProbe.bind(this),
         )),
         (this._probeRetryBackoffKicker = new Oc(
           this._probeRetryBackoffWaiters,
-          e.probeRetryBackoffPeriodMs,
+          DiskFileManager.probeRetryBackoffPeriodMs,
         )),
         this.addDisposable(this._probeRetryBackoffKicker)
     }
@@ -117653,11 +117653,11 @@ var _9 = class {
     get itemsInFlight() {
       return this._itemsInFlight.size
     }
-    ingestPath(r, n) {
+    ingestPath(folderId, relativePath) {
       this._ingestPathMs.start(),
         !this._stopping &&
-          ((n = Y0e(n)),
-          this._enqueueForCalculate(r, n),
+          ((relativePath = Y0e(relativePath)),
+          this._enqueueForCalculate(folderId, relativePath),
           this._ingestPathMs.stop())
     }
     async awaitQuiesced() {
@@ -117667,284 +117667,284 @@ var _9 = class {
     _nextSeq() {
       return this._seq++
     }
-    _makeAbsPath(r, n) {
-      let i = this._pathMap.getRepoRoot(r)
-      if (i !== undefined) return joinPaths(i, n)
+    _makeAbsPath(folderId, relativePath) {
+      let repoRoot = this._pathMap.getRepoRoot(folderId)
+      if (repoRoot !== undefined) return joinPaths(repoRoot, relativePath)
     }
-    _fileTooLargeString(r) {
-      return `File too large (${r} > ${this._pathHandler.maxBlobSize})`
+    _fileTooLargeString(fileSize) {
+      return `File too large (${fileSize} > ${this._pathHandler.maxBlobSize})`
     }
-    _getMtime(r, n, i, s) {
+    _getMtime(absolutePath, folderId, relativePath, seqId) {
       this._statMs.start()
-      let o = this._pathHandler.classifyPath(r)
-      switch ((this._statMs.stop(), o.type)) {
+      let pathInfo = this._pathHandler.classifyPath(absolutePath)
+      switch ((this._statMs.stop(), pathInfo.type)) {
         case "inaccessible":
           this._pathsNotAccessible.increment(),
-            this._pathMapInvalidate(n, i, s, this._fileNotAccessible)
+            this._pathMapInvalidate(folderId, relativePath, seqId, this._fileNotAccessible)
           return
         case "not a file":
           this._nonFiles.increment(),
-            this._pathMapInvalidate(n, i, s, this._notAPlainFile)
+            this._pathMapInvalidate(folderId, relativePath, seqId, this._notAPlainFile)
           return
         case "large file":
           this._largeFiles.increment(),
-            this._pathMapInvalidate(n, i, s, this._fileTooLargeString(o.size))
+            this._pathMapInvalidate(folderId, relativePath, seqId, this._fileTooLargeString(pathInfo.size))
           return
         case "accepted":
-          return o.mtime
+          return pathInfo.mtime
       }
     }
-    async _readAndValidate(r, n, i, s) {
+    async _readAndValidate(absolutePath, folderId, relativePath, seqId) {
       this._readMs.start()
-      let o = await this._pathHandler.readText(r)
-      switch ((this._readMs.stop(), this._filesRead.increment(), o.type)) {
+      let fileResult = await this._pathHandler.readText(absolutePath)
+      switch ((this._readMs.stop(), this._filesRead.increment(), fileResult.type)) {
         case "inaccessible":
           this._pathsNotAccessible.increment(),
-            this._pathMapInvalidate(n, i, s, this._fileNotAccessible)
+            this._pathMapInvalidate(folderId, relativePath, seqId, this._fileNotAccessible)
           return
         case "large file":
           this._largeFiles.increment(),
-            this._pathMapInvalidate(n, i, s, this._fileTooLargeString(o.size))
+            this._pathMapInvalidate(folderId, relativePath, seqId, this._fileTooLargeString(fileResult.size))
           return
         case "binary":
-          this._pathMapInvalidate(n, i, s, this._fileNotText)
+          this._pathMapInvalidate(folderId, relativePath, seqId, this._fileNotText)
           return
         case "text":
-          return o.contents
+          return fileResult.contents
       }
     }
-    _calculateBlobName(r, n, i, s) {
+    _calculateBlobName(relativePath, fileContents, folderId, seqId) {
       try {
-        return this._pathHandler.calculateBlobName(r, n)
-      } catch (o) {
-        if (o instanceof Zb) {
+        return this._pathHandler.calculateBlobName(relativePath, fileContents)
+      } catch (error) {
+        if (error instanceof Zb) {
           this._largeFiles.increment()
-          let a = this._fileTooLargeString(n.length)
-          this._pathMapInvalidate(i, r, s, a)
+          let errorMessage = this._fileTooLargeString(fileContents.length)
+          this._pathMapInvalidate(folderId, relativePath, seqId, errorMessage)
         } else
           this._blobNameCalculationFails.increment(),
-            this._pathMapInvalidate(i, r, s, getErrorMessage(o))
+            this._pathMapInvalidate(folderId, relativePath, seqId, getErrorMessage(error))
         return
       }
     }
-    async _calculate(r) {
-      if (r === undefined) return
-      let [n, [i, s]] = r
-      if (!this._pathMapVerify(i, s, n)) return
-      let o = this._makeAbsPath(i, s)
-      if (o === undefined) {
-        this._inflightItemRemove(n)
+    async _calculate(item) {
+      if (item === undefined) return
+      let [seqId, [folderId, relativePath]] = item
+      if (!this._pathMapVerify(folderId, relativePath, seqId)) return
+      let absolutePath = this._makeAbsPath(folderId, relativePath)
+      if (absolutePath === undefined) {
+        this._inflightItemRemove(seqId)
         return
       }
-      let a = this._getMtime(o, i, s, n)
-      if (a === undefined) return
-      let l,
-        c = this._pathMap.getBlobInfo(i, s, a)
-      if (c !== undefined) {
+      let mtime = this._getMtime(absolutePath, folderId, relativePath, seqId)
+      if (mtime === undefined) return
+      let blobName,
+        cacheInfo = this._pathMap.getBlobInfo(folderId, relativePath, mtime)
+      if (cacheInfo !== undefined) {
         this._mtimeCacheHits.increment()
-        let [f, p] = c
-        if (p > 0) {
-          this._pathMapUpdate(i, s, n, f, a)
+        let [cachedBlobName, cacheStatus] = cacheInfo
+        if (cacheStatus > 0) {
+          this._pathMapUpdate(folderId, relativePath, seqId, cachedBlobName, mtime)
           return
         }
-        l = f
+        blobName = cachedBlobName
       } else {
-        let f = await this._readAndValidate(o, i, s, n)
+        let fileContents = await this._readAndValidate(absolutePath, folderId, relativePath, seqId)
         if (
-          f === undefined ||
+          fileContents === undefined ||
           (this._mtimeCacheMisses.increment(),
-          (l = this._calculateBlobName(s, f, i, n)),
-          l === undefined)
+          (blobName = this._calculateBlobName(relativePath, fileContents, folderId, seqId)),
+          blobName === undefined)
         )
           return
       }
       this._pathsAccepted.increment()
-      let u = {
-        folderId: i,
-        relPath: s,
-        blobName: l,
-        mtime: a,
+      let probeItem = {
+        folderId: folderId,
+        relPath: relativePath,
+        blobName: blobName,
+        mtime: mtime,
         startTime: Date.now(),
       }
-      this._enqueueForProbeRetry(n, u)
+      this._enqueueForProbeRetry(seqId, probeItem)
     }
     _newProbeBatch() {
       return new x9(this._probeBatchSize)
     }
     _grabProbeBatch() {
       if (this._probeBatch.items.size === 0) return
-      let r = this._probeBatch
-      return (this._probeBatch = this._newProbeBatch()), r
+      let currentBatch = this._probeBatch
+      return (this._probeBatch = this._newProbeBatch()), currentBatch
     }
-    async _probe(r) {
-      if (r !== undefined) {
-        let [o, a] = r
+    async _probe(item) {
+      if (item !== undefined) {
+        let [seqId, probeItem] = item
         if (
-          !this._pathMapVerify(a.folderId, a.relPath, o) ||
-          (this._probeBatch.addItem(o, a), !this._probeBatch.full)
+          !this._pathMapVerify(probeItem.folderId, probeItem.relPath, seqId) ||
+          (this._probeBatch.addItem(seqId, probeItem), !this._probeBatch.full)
         )
           return
       }
-      let n = this._grabProbeBatch()
-      if (n === undefined) return
-      let i = new Set()
-      for (let [o, a] of n.items) i.add(a.blobName)
+      let batch = this._grabProbeBatch()
+      if (batch === undefined) return
+      let blobSet = new Set()
+      for (let [seqId, probeItem] of batch.items) blobSet.add(probeItem.blobName)
       this._probeBatches.increment(),
-        this._blobNamesProbed.increment(n.items.size),
-        this._logger.verbose(`probe ${i.size} blobs`),
+        this._blobNamesProbed.increment(batch.items.size),
+        this._logger.verbose(`probe ${blobSet.size} blobs`),
         this._probeMs.start()
-      let s
+      let result
       try {
-        s = await retryOperation(
-          async () => this._apiServer.findMissing([...i]),
+        result = await retryOperation(
+          async () => this._apiServer.findMissing([...blobSet]),
           this._logger,
         )
       } catch {}
-      if ((this._probeMs.stop(), s !== undefined)) {
+      if ((this._probeMs.stop(), result !== undefined)) {
         this._logger.verbose(
-          `find-missing reported ${s.unknownBlobNames.length} unknown blob names and ${s.nonindexedBlobNames.length} nonindexed blob names.`,
+          `find-missing reported ${result.unknownBlobNames.length} unknown blob names and ${result.nonindexedBlobNames.length} nonindexed blob names.`,
         ),
-          s.unknownBlobNames.length > 0 &&
+          result.unknownBlobNames.length > 0 &&
             (this._logger.verbose("unknown blob names:"),
-            Sg(this._logger, "verbose", s.unknownBlobNames, 5)),
-          s.nonindexedBlobNames.length > 0 &&
+            Sg(this._logger, "verbose", result.unknownBlobNames, 5)),
+          result.nonindexedBlobNames.length > 0 &&
             (this._logger.verbose("nonindexed blob names:"),
-            Sg(this._logger, "verbose", s.nonindexedBlobNames, 5))
-        let o = new Set(s.unknownBlobNames),
-          a = new Set(s.nonindexedBlobNames),
-          l = this._beginUploadBatch()
-        for (let [c, u] of n.items)
-          this._pathMapVerify(u.folderId, u.relPath, c) &&
-            (o.has(u.blobName)
-              ? this._enqueueForUpload(c, u.folderId, u.relPath, false)
-              : a.has(u.blobName)
-                ? this._enqueueForProbeRetry(c, u)
+            Sg(this._logger, "verbose", result.nonindexedBlobNames, 5))
+        let unknownBlobs = new Set(result.unknownBlobNames),
+          nonindexedBlobs = new Set(result.nonindexedBlobNames),
+          uploadBatch = this._beginUploadBatch()
+        for (let [seqId, itemInfo] of batch.items)
+          this._pathMapVerify(itemInfo.folderId, itemInfo.relPath, seqId) &&
+            (unknownBlobs.has(itemInfo.blobName)
+              ? this._enqueueForUpload(seqId, itemInfo.folderId, itemInfo.relPath, false)
+              : nonindexedBlobs.has(itemInfo.blobName)
+                ? this._enqueueForProbeRetry(seqId, itemInfo)
                 : this._pathMapUpdate(
-                    u.folderId,
-                    u.relPath,
-                    c,
-                    u.blobName,
-                    u.mtime,
+                    itemInfo.folderId,
+                    itemInfo.relPath,
+                    seqId,
+                    itemInfo.blobName,
+                    itemInfo.mtime,
                   ))
-        l.dispose()
-      } else for (let [o, a] of n.items) this._enqueueForProbeRetry(o, a)
+        uploadBatch.dispose()
+      } else for (let [seqId, itemInfo] of batch.items) this._enqueueForProbeRetry(seqId, itemInfo)
     }
     _newUploadBatch() {
-      return new _9(e.maxUploadBatchBlobCount, e.maxUploadBatchByteSize)
+      return new _9(DiskFileManager.maxUploadBatchBlobCount, DiskFileManager.maxUploadBatchByteSize)
     }
     _grabUploadBatch() {
       if (this._uploadBatch.items.size === 0) return
-      let r = this._uploadBatch
-      return (this._uploadBatch = this._newUploadBatch()), r
+      let currentBatch = this._uploadBatch
+      return (this._uploadBatch = this._newUploadBatch()), currentBatch
     }
-    async _upload(r) {
-      let n
-      if (r !== undefined) {
-        let [a, { seq: l, folderId: c, relPath: u }] = r
-        if (!this._pathMapVerify(c, u, l)) return
-        let f = this._getMtime(a, c, u, l)
-        if (f === undefined) return
-        let p = await this._readAndValidate(a, c, u, l)
-        if (p === undefined) return
-        let g = this._calculateBlobName(u, p, c, l)
-        if (g === undefined) return
-        let m
+    async _upload(item) {
+      let newItem
+      if (item !== undefined) {
+        let [absolutePath, { seq, folderId, relPath }] = item
+        if (!this._pathMapVerify(folderId, relPath, seq)) return
+        let mtime = this._getMtime(absolutePath, folderId, relPath, seq)
+        if (mtime === undefined) return
+        let fileContents = await this._readAndValidate(absolutePath, folderId, relPath, seq)
+        if (fileContents === undefined) return
+        let blobName = this._calculateBlobName(relPath, fileContents, folderId, seq)
+        if (blobName === undefined) return
+        let textContent
         try {
-          m = this._textDecoder.decode(p)
-        } catch (v) {
-          this._pathMapInvalidate(c, u, l, getErrorMessage(v)),
+          textContent = this._textDecoder.decode(fileContents)
+        } catch (error) {
+          this._pathMapInvalidate(folderId, relPath, seq, getErrorMessage(error)),
             this._encodingErrors.increment()
           return
         }
-        let y = {
-          seq: l,
-          folderId: c,
-          pathName: u,
-          text: m,
-          blobName: g,
-          mtime: f,
-          byteSize: p.length,
+        let uploadItem = {
+          seq: seq,
+          folderId: folderId,
+          pathName: relPath,
+          text: textContent,
+          blobName: blobName,
+          mtime: mtime,
+          byteSize: fileContents.length,
           metadata: [],
         }
-        if (this._uploadBatch.addItem(g, y)) return
-        n = y
+        if (this._uploadBatch.addItem(blobName, uploadItem)) return
+        newItem = uploadItem
       }
-      let i = this._grabUploadBatch()
-      if (i === undefined) return
-      n !== undefined && this._uploadBatch.addItem(n.blobName, n),
-        this._logger.verbose(`upload ${i.items.size} blobs`)
-      let s = new Array()
-      for (let [a, l] of i.items) s.push(l[0])
+      let batch = this._grabUploadBatch()
+      if (batch === undefined) return
+      newItem !== undefined && this._uploadBatch.addItem(newItem.blobName, newItem),
+        this._logger.verbose(`upload ${batch.items.size} blobs`)
+      let uploadItems = new Array()
+      for (let [blobName, items] of batch.items) uploadItems.push(items[0])
       this._uploadMs.start()
-      let o = await this._uploadBlobBatch(s)
-      this._uploadMs.stop(), this._blobsUploaded.increment(o.size)
-      for (let [a, l] of i.items) {
-        let c = o.get(a)
-        if (c === undefined)
-          for (let u of l)
+      let uploadResults = await this._uploadBlobBatch(uploadItems)
+      this._uploadMs.stop(), this._blobsUploaded.increment(uploadResults.size)
+      for (let [blobName, items] of batch.items) {
+        let resultBlobName = uploadResults.get(blobName)
+        if (resultBlobName === undefined)
+          for (let item of items)
             this._pathMapInvalidate(
-              u.folderId,
-              u.pathName,
-              u.seq,
+              item.folderId,
+              item.pathName,
+              item.seq,
               this._fileUploadFailure,
             )
         else
-          for (let u of l) {
-            let f = {
-              folderId: u.folderId,
-              relPath: u.pathName,
-              blobName: c,
-              mtime: u.mtime,
+          for (let item of items) {
+            let probeItem = {
+              folderId: item.folderId,
+              relPath: item.pathName,
+              blobName: resultBlobName,
+              mtime: item.mtime,
               startTime: Date.now(),
             }
-            this._enqueueForProbeRetry(u.seq, f)
+            this._enqueueForProbeRetry(item.seq, probeItem)
           }
       }
     }
-    async _uploadBlobBatch(r) {
-      this._logger.verbose(`upload begin: ${r.length} blobs`)
-      for (let s of r)
+    async _uploadBlobBatch(items) {
+      this._logger.verbose(`upload begin: ${items.length} blobs`)
+      for (let item of items)
         this._logger.verbose(
-          `    - ${s.folderId}:${s.pathName}; expected blob name ${s.blobName}`,
+          `    - ${item.folderId}:${item.pathName}; expected blob name ${item.blobName}`,
         )
-      let n
+      let result
       try {
-        n = await retryOperation(
-          async () => await this._apiServer.batchUpload(r),
+        result = await retryOperation(
+          async () => await this._apiServer.batchUpload(items),
           this._logger,
         )
-      } catch (s) {
-        this._logger.error(`batch upload failed: ${getErrorMessage(s)}`)
+      } catch (error) {
+        this._logger.error(`batch upload failed: ${getErrorMessage(error)}`)
       }
-      let i = new Map()
-      if (n !== undefined)
-        for (let s = 0; s < n.blobNames.length; s++)
-          i.set(r[s].blobName, n.blobNames[s])
+      let blobNameMap = new Map()
+      if (result !== undefined)
+        for (let index = 0; index < result.blobNames.length; index++)
+          blobNameMap.set(items[index].blobName, result.blobNames[index])
       return (
-        await this._uploadBlobsSequentially(r, n?.blobNames.length ?? 0, i), i
+        await this._uploadBlobsSequentially(items, result?.blobNames.length ?? 0, blobNameMap), blobNameMap
       )
     }
-    async _uploadBlobsSequentially(r, n, i) {
-      for (let s = n; s < r.length; s++) {
-        let o = r[s]
+    async _uploadBlobsSequentially(items, processedCount, blobNameMap) {
+      for (let index = processedCount; index < items.length; index++) {
+        let item = items[index]
         try {
           this._logger.verbose(
-            `sequential upload of ${o.pathName} -> ${o.blobName}`,
+            `sequential upload of ${item.pathName} -> ${item.blobName}`,
           )
-          let a = await retryOperation(
+          let result = await retryOperation(
             async () =>
-              this._apiServer.memorize(o.pathName, o.text, o.blobName, []),
+              this._apiServer.memorize(item.pathName, item.text, item.blobName, []),
             this._logger,
           )
-          i.set(o.blobName, a.blobName)
+          blobNameMap.set(item.blobName, result.blobName)
         } catch {}
       }
     }
-    _inflightItemAdd(r, n, i) {
-      this._itemsInFlight.set(r, [n, i])
+    _inflightItemAdd(seqId, folderId, relativePath) {
+      this._itemsInFlight.set(seqId, [folderId, relativePath])
     }
-    _inflightItemRemove(r) {
-      this._itemsInFlight.delete(r),
+    _inflightItemRemove(seqId) {
+      this._itemsInFlight.delete(seqId),
         this._onDidChangeInProgressItemCountEmitter.fire(
           this._itemsInFlight.size,
         ),
@@ -117952,71 +117952,71 @@ var _9 = class {
           (this._logger.verbose("inflight items signaling empty"),
           this._onQuiescedEmitter.fire())
     }
-    _pathMapVerify(r, n, i) {
-      if (!this._pathMap.shouldTrack(r, n))
-        return this._inflightItemRemove(i), false
-      let s = this._pathMap.getContentSeq(r, n)
-      return s !== undefined && s >= i ? (this._inflightItemRemove(i), false) : true
+    _pathMapVerify(folderId, relativePath, seqId) {
+      if (!this._pathMap.shouldTrack(folderId, relativePath))
+        return this._inflightItemRemove(seqId), false
+      let contentSeq = this._pathMap.getContentSeq(folderId, relativePath)
+      return contentSeq !== undefined && contentSeq >= seqId ? (this._inflightItemRemove(seqId), false) : true
     }
-    _pathMapUpdate(r, n, i, s, o) {
-      this._inflightItemRemove(i), this._pathMap.update(r, n, i, s, o)
+    _pathMapUpdate(folderId, relativePath, seqId, blobName, mtime) {
+      this._inflightItemRemove(seqId), this._pathMap.update(folderId, relativePath, seqId, blobName, mtime)
     }
-    _pathMapInvalidate(r, n, i, s) {
-      this._logger.verbose(`path map invalidate: ${r}:${n} (${s})`),
-        this._pathMap.markUntrackable(r, n, i, s),
-        this._inflightItemRemove(i),
-        this._pathMap.markUntrackable(r, n, i, s)
+    _pathMapInvalidate(folderId, relativePath, seqId, reason) {
+      this._logger.verbose(`path map invalidate: ${folderId}:${relativePath} (${reason})`),
+        this._pathMap.markUntrackable(folderId, relativePath, seqId, reason),
+        this._inflightItemRemove(seqId),
+        this._pathMap.markUntrackable(folderId, relativePath, seqId, reason)
     }
-    _enqueueForCalculate(r, n) {
-      let i = this._nextSeq()
-      this._inflightItemAdd(i, r, n),
-        this._toCalculate.insert(i, [r, n])
+    _enqueueForCalculate(folderId, relativePath) {
+      let seqId = this._nextSeq()
+      this._inflightItemAdd(seqId, folderId, relativePath),
+        this._toCalculate.insert(seqId, [folderId, relativePath])
           ? this._toCalculate.kick()
-          : this._inflightItemRemove(i)
+          : this._inflightItemRemove(seqId)
     }
-    _enqueueForProbe(r) {
-      if (r === undefined) this._toProbe.kick()
+    _enqueueForProbe(item) {
+      if (item === undefined) this._toProbe.kick()
       else {
-        let [n, i] = r
+        let [seqId, probeItem] = item
         this._logger.verbose(
-          `probe enqueue ${i.blobName} -> ${n}, ${i.folderId}:${i.relPath}`,
+          `probe enqueue ${probeItem.blobName} -> ${seqId}, ${probeItem.folderId}:${probeItem.relPath}`,
         ),
-          this._toProbe.insert(n, i)
+          this._toProbe.insert(seqId, probeItem)
       }
       return Promise.resolve()
     }
     _beginUploadBatch() {
       return new Dw.Disposable(() => this._toUpload.kick())
     }
-    _enqueueForUpload(r, n, i, s = true) {
-      this._logger.verbose(`upload enqueue ${n}:${i} -> ${r}`)
-      let o = this._makeAbsPath(n, i)
-      if (o === undefined) {
-        this._inflightItemRemove(r)
+    _enqueueForUpload(seqId, folderId, relativePath, kickNow = true) {
+      this._logger.verbose(`upload enqueue ${folderId}:${relativePath} -> ${seqId}`)
+      let absolutePath = this._makeAbsPath(folderId, relativePath)
+      if (absolutePath === undefined) {
+        this._inflightItemRemove(seqId)
         return
       }
-      let a = this._toUpload.get(o)
-      if (a !== undefined) {
-        let l = a.seq
-        if (l > r) this._inflightItemRemove(l)
-        else if (l < r) {
-          this._inflightItemRemove(r)
+      let existingItem = this._toUpload.get(absolutePath)
+      if (existingItem !== undefined) {
+        let existingSeq = existingItem.seq
+        if (existingSeq > seqId) this._inflightItemRemove(existingSeq)
+        else if (existingSeq < seqId) {
+          this._inflightItemRemove(seqId)
           return
         }
       }
-      this._toUpload.insert(o, { seq: r, folderId: n, relPath: i }, true),
-        s && this._toUpload.kick()
+      this._toUpload.insert(absolutePath, { seq: seqId, folderId: folderId, relPath: relativePath }, true),
+        kickNow && this._toUpload.kick()
     }
-    _enqueueForProbeRetry(r, n) {
-      Date.now() - n.startTime < e.probeBackoffAfterMs
+    _enqueueForProbeRetry(seqId, probeItem) {
+      Date.now() - probeItem.startTime < DiskFileManager.probeBackoffAfterMs
         ? (this._logger.verbose(
-            `probe-retry enqueue ${n.blobName} -> ${r}, ${n.folderId}:${n.relPath}`,
+            `probe-retry enqueue ${probeItem.blobName} -> ${seqId}, ${probeItem.folderId}:${probeItem.relPath}`,
           ),
-          this._probeRetryWaiters.insert(r, n))
+          this._probeRetryWaiters.insert(seqId, probeItem))
         : (this._logger.verbose(
-            `probe-retry enqueue backoff ${n.blobName} -> ${r}, ${n.folderId}:${n.relPath}`,
+            `probe-retry enqueue backoff ${probeItem.blobName} -> ${seqId}, ${probeItem.folderId}:${probeItem.relPath}`,
           ),
-          this._probeRetryBackoffWaiters.insert(r, n))
+          this._probeRetryBackoffWaiters.insert(seqId, probeItem))
     }
   }
 var Df = class {
@@ -118997,7 +118997,7 @@ var F2 = class {
   }
 }
 var Q2 = q(require("vscode"))
-var N2 = class {
+var WorkspacePathMap = class {
     _nextFolderId = 100
     _sourceFolders = new Map()
     _blobNameChangedEmitter = new Q2.EventEmitter()
@@ -119005,7 +119005,7 @@ var N2 = class {
     _logger = z("PathMap")
     constructor() {}
     dispose() {
-      for (let [t, r] of this._sourceFolders) r.dispose()
+      for (let [folderId, folderManager] of this._sourceFolders) folderManager.dispose()
     }
     get nextEntryTS() {
       return this._nextEntryTS
@@ -119013,156 +119013,156 @@ var N2 = class {
     get onDidChangeBlobName() {
       return this._blobNameChangedEmitter.event
     }
-    onDidChangePathStatus(t) {
-      return this._sourceFolders.get(t)?.onDidChangePathStatus
+    onDidChangePathStatus(folderId) {
+      return this._sourceFolders.get(folderId)?.onDidChangePathStatus
     }
-    openSourceFolder(t, r) {
-      for (let [o, a] of this._sourceFolders) {
-        if (Xy(a.folderRoot, t))
-          throw new Error(`Source folder ${t} is already open`)
-        if (Qs(t, a.folderRoot))
-          throw new Error(`Source folder ${t} contains ${a.folderRoot}`)
-        if (Qs(a.folderRoot, t))
-          throw new Error(`Source folder ${a.folderRoot} contains ${t}`)
+    openSourceFolder(folderPath, repoRoot) {
+      for (let [existingId, existingFolder] of this._sourceFolders) {
+        if (Xy(existingFolder.folderRoot, folderPath))
+          throw new Error(`Source folder ${folderPath} is already open`)
+        if (Qs(folderPath, existingFolder.folderRoot))
+          throw new Error(`Source folder ${folderPath} contains ${existingFolder.folderRoot}`)
+        if (Qs(existingFolder.folderRoot, folderPath))
+          throw new Error(`Source folder ${existingFolder.folderRoot} contains ${folderPath}`)
       }
-      let n = this._nextFolderId++,
-        i = new R9(t, r)
-      this._sourceFolders.set(n, i)
-      let s = i.onDidChangeBlobName(this._handleBlobNameChangeEvent.bind(this))
+      let folderId = this._nextFolderId++,
+        folderManager = new SourceFolderManager(folderPath, repoRoot)
+      this._sourceFolders.set(folderId, folderManager)
+      let blobNameChangeSubscription = folderManager.onDidChangeBlobName(this._handleBlobNameChangeEvent.bind(this))
       return (
-        i.addDisposable(s),
-        this._logger.info(`Opened source folder ${t} with id ${n}`),
-        n
+        folderManager.addDisposable(blobNameChangeSubscription),
+        this._logger.info(`Opened source folder ${folderPath} with id ${folderId}`),
+        folderId
       )
     }
-    closeSourceFolder(t) {
-      let r = this._sourceFolders.get(t)
-      if (r === undefined) return
-      r.clear()
-      let n = r.folderRoot
-      this._sourceFolders.delete(t),
-        r.dispose(),
-        this._logger.info(`Closed source folder ${n} with id ${t}`)
+    closeSourceFolder(folderId) {
+      let folderManager = this._sourceFolders.get(folderId)
+      if (folderManager === undefined) return
+      folderManager.clear()
+      let folderPath = folderManager.folderRoot
+      this._sourceFolders.delete(folderId),
+        folderManager.dispose(),
+        this._logger.info(`Closed source folder ${folderPath} with id ${folderId}`)
     }
-    _handleBlobNameChangeEvent(t) {
-      this._blobNameChangedEmitter.fire(t)
+    _handleBlobNameChangeEvent(event) {
+      this._blobNameChangedEmitter.fire(event)
     }
-    getRepoRoot(t) {
-      return this._sourceFolders.get(t)?.repoRoot
+    getRepoRoot(folderId) {
+      return this._sourceFolders.get(folderId)?.repoRoot
     }
-    hasFile(t, r) {
-      return this._sourceFolders.get(t)?.hasFile(r) ?? false
+    hasFile(folderId, relativePath) {
+      return this._sourceFolders.get(folderId)?.hasFile(relativePath) ?? false
     }
-    getBlobName(t, r) {
-      return this._sourceFolders.get(t)?.getBlobName(r)
+    getBlobName(folderId, relativePath) {
+      return this._sourceFolders.get(folderId)?.getBlobName(relativePath)
     }
-    getBlobInfo(t, r, n) {
-      return this._sourceFolders.get(t)?.getBlobInfo(r, n)
+    getBlobInfo(folderId, relativePath, modificationTime) {
+      return this._sourceFolders.get(folderId)?.getBlobInfo(relativePath, modificationTime)
     }
-    getAnyPathName(t) {
-      for (let r of this._sourceFolders.values()) {
-        let n = r.getPathName(t)
-        if (n !== undefined) return this._makeQualifiedPathName(r, n)
+    getAnyPathName(blobName) {
+      for (let folderManager of this._sourceFolders.values()) {
+        let relativePath = folderManager.getPathName(blobName)
+        if (relativePath !== undefined) return this._makeQualifiedPathName(folderManager, relativePath)
       }
     }
-    getAllPathNames(t) {
-      let r = new Array()
-      for (let n of this._sourceFolders.values()) {
-        let i = n.getPathName(t)
-        i !== undefined && r.push(new QualifiedPathName(n.repoRoot, i))
+    getAllPathNames(blobName) {
+      let pathNames = new Array()
+      for (let folderManager of this._sourceFolders.values()) {
+        let relativePath = folderManager.getPathName(blobName)
+        relativePath !== undefined && pathNames.push(new QualifiedPathName(folderManager.repoRoot, relativePath))
       }
-      return r
+      return pathNames
     }
-    getUniquePathCount(t) {
-      let r = 0
-      for (let n of this._sourceFolders.values())
-        n.getPathName(t) !== undefined && r++
-      return r
+    getUniquePathCount(blobName) {
+      let count = 0
+      for (let folderManager of this._sourceFolders.values())
+        folderManager.getPathName(blobName) !== undefined && count++
+      return count
     }
-    getAllQualifiedPathNames(t) {
-      return this.getAllQualifiedPathInfos(t).map((r) => r.qualifiedPathName)
+    getAllQualifiedPathNames(blobName) {
+      return this.getAllQualifiedPathInfos(blobName).map((info) => info.qualifiedPathName)
     }
-    getAllQualifiedPathInfos(t) {
-      let r = new Array()
-      for (let n of this._sourceFolders.values()) {
-        let i = n.getPathInfo(t)
-        if (i !== undefined) {
-          let [s, o] = i
-          r.push({
-            qualifiedPathName: new QualifiedPathName(n.repoRoot, t),
-            fileType: s,
-            isAccepted: o.accepted,
+    getAllQualifiedPathInfos(blobName) {
+      let pathInfos = new Array()
+      for (let folderManager of this._sourceFolders.values()) {
+        let pathInfo = folderManager.getPathInfo(blobName)
+        if (pathInfo !== undefined) {
+          let [fileType, acceptanceInfo] = pathInfo
+          pathInfos.push({
+            qualifiedPathName: new QualifiedPathName(folderManager.repoRoot, blobName),
+            fileType: fileType,
+            isAccepted: acceptanceInfo.accepted,
           })
         }
       }
-      return r
+      return pathInfos
     }
-    getAllPathInfo(t) {
-      let r = new Array()
-      for (let n of this._sourceFolders.values()) {
-        let i = n.getPathName(t)
-        i !== undefined && r.push([n.folderRoot, n.repoRoot, i])
+    getAllPathInfo(blobName) {
+      let pathInfos = new Array()
+      for (let folderManager of this._sourceFolders.values()) {
+        let relativePath = folderManager.getPathName(blobName)
+        relativePath !== undefined && pathInfos.push([folderManager.folderRoot, folderManager.repoRoot, relativePath])
       }
-      return r
+      return pathInfos
     }
-    getPathInfo(t, r) {
-      return this._sourceFolders.get(t)?.getPathInfo(r)
+    getPathInfo(folderId, relativePath) {
+      return this._sourceFolders.get(folderId)?.getPathInfo(relativePath)
     }
-    reportMissing(t) {
-      for (let r of this._sourceFolders.values()) {
-        let n = r.reportMissing(t)
-        if (n !== undefined) return this._makeQualifiedPathName(r, n)
+    reportMissing(blobName) {
+      for (let folderManager of this._sourceFolders.values()) {
+        let relativePath = folderManager.reportMissing(blobName)
+        if (relativePath !== undefined) return this._makeQualifiedPathName(folderManager, relativePath)
       }
     }
-    insert(t, r, n, i) {
-      let s = this._nextEntryTS++
-      this._sourceFolders.get(t)?.insert(r, s, n, i)
+    insert(folderId, relativePath, fileType, acceptanceInfo) {
+      let timestamp = this._nextEntryTS++
+      this._sourceFolders.get(folderId)?.insert(relativePath, timestamp, fileType, acceptanceInfo)
     }
-    remove(t, r) {
-      this._sourceFolders.get(t)?.remove(r)
+    remove(folderId, relativePath) {
+      this._sourceFolders.get(folderId)?.remove(relativePath)
     }
-    shouldTrack(t, r) {
-      return this._sourceFolders.get(t)?.shouldTrack(r) ?? false
+    shouldTrack(folderId, relativePath) {
+      return this._sourceFolders.get(folderId)?.shouldTrack(relativePath) ?? false
     }
-    getContentSeq(t, r) {
-      return this._sourceFolders.get(t)?.getContentSeq(r)
+    getContentSeq(folderId, relativePath) {
+      return this._sourceFolders.get(folderId)?.getContentSeq(relativePath)
     }
-    update(t, r, n, i, s) {
-      this._sourceFolders.get(t)?.update(r, n, i, s)
+    update(folderId, relativePath, contentSequence, blobName, modificationTime) {
+      this._sourceFolders.get(folderId)?.update(relativePath, contentSequence, blobName, modificationTime)
     }
-    markUntrackable(t, r, n, i) {
-      this._sourceFolders.get(t)?.markUntrackable(r, n, i)
+    markUntrackable(folderId, relativePath, contentSequence, reason) {
+      this._sourceFolders.get(folderId)?.markUntrackable(relativePath, contentSequence, reason)
     }
-    purge(t, r) {
-      this._sourceFolders.get(t)?.purge(r)
+    purge(folderId, oldestTimestamp) {
+      this._sourceFolders.get(folderId)?.purge(oldestTimestamp)
     }
     *pathsWithBlobNames() {
-      for (let [t, r] of this._sourceFolders)
-        for (let [n, i, s] of r.pathsWithBlobNames())
-          yield [t, r.repoRoot, n, i, s]
+      for (let [folderId, folderManager] of this._sourceFolders)
+        for (let [relativePath, blobName, fileInfo] of folderManager.pathsWithBlobNames())
+          yield [folderId, folderManager.repoRoot, relativePath, blobName, fileInfo]
     }
-    *pathsInFolder(t) {
-      let r = this._sourceFolders.get(t)
-      r !== undefined && (yield* r.allPaths())
+    *pathsInFolder(folderId) {
+      let folderManager = this._sourceFolders.get(folderId)
+      folderManager !== undefined && (yield* folderManager.allPaths())
     }
-    enablePersist(t, r, n) {
-      this._sourceFolders.get(t)?.enablePersist(r, n)
+    enablePersist(folderId, enabled, threshold) {
+      this._sourceFolders.get(folderId)?.enablePersist(enabled, threshold)
     }
-    _makeQualifiedPathName(t, r) {
-      return new QualifiedPathName(t.repoRoot, r)
+    _makeQualifiedPathName(folderManager, relativePath) {
+      return new QualifiedPathName(folderManager.repoRoot, relativePath)
     }
-    trackedFileCount(t) {
-      return this._sourceFolders.get(t)?.trackedFileCount ?? 0
+    trackedFileCount(folderId) {
+      return this._sourceFolders.get(folderId)?.trackedFileCount ?? 0
     }
     getFolderIds() {
       return Array.from(this._sourceFolders.keys())
     }
   },
-  R9 = class extends DisposableContainer {
-    constructor(r, n) {
+  SourceFolderManager = class extends DisposableContainer {
+    constructor(folderPath, repoRootPath) {
       super()
-      this.folderRoot = r
-      this.repoRoot = n
+      this.folderRoot = folderPath
+      this.repoRoot = repoRootPath
     }
     static defaultPersistThreshold = 100
     _allPathNames = new Map()
@@ -119180,190 +119180,190 @@ var N2 = class {
     get trackedFileCount() {
       return this._trackableFilePaths.size
     }
-    shouldTrack(r) {
-      let n = this._allPathNames.get(r)
-      return n === undefined
+    shouldTrack(relativePath) {
+      let pathEntry = this._allPathNames.get(relativePath)
+      return pathEntry === undefined
         ? false
-        : n.fileType === "File" && n.pathAcceptance.accepted
+        : pathEntry.fileType === "File" && pathEntry.pathAcceptance.accepted
     }
-    getContentSeq(r) {
-      return this._allPathNames.get(r)?.fileInfo?.contentSeq
+    getContentSeq(relativePath) {
+      return this._allPathNames.get(relativePath)?.fileInfo?.contentSeq
     }
-    insert(r, n, i, s) {
-      let o = this._allPathNames.get(r),
-        a =
-          o === undefined ||
-          o.fileType !== i ||
-          o.pathAcceptance.format() !== s.format()
-      if (o === undefined)
-        (o = { entryTS: n, fileType: i, pathAcceptance: s }),
-          this._allPathNames.set(r, o)
+    insert(relativePath, timestamp, fileType, acceptanceInfo) {
+      let pathEntry = this._allPathNames.get(relativePath),
+        statusChanged =
+          pathEntry === undefined ||
+          pathEntry.fileType !== fileType ||
+          pathEntry.pathAcceptance.format() !== acceptanceInfo.format()
+      if (pathEntry === undefined)
+        (pathEntry = { entryTS: timestamp, fileType: fileType, pathAcceptance: acceptanceInfo }),
+          this._allPathNames.set(relativePath, pathEntry)
       else {
-        let l = o.fileInfo
-        ;(o.entryTS = n),
-          (o.fileType = i),
-          (o.pathAcceptance = s),
-          s.accepted ||
-            ((o.fileInfo = undefined),
-            l?.trackable &&
-              (this._blobNameToPathName.delete(l.blobName),
-              this._publishBlobNameChange(r, l.blobName, undefined),
+        let oldFileInfo = pathEntry.fileInfo
+        ;(pathEntry.entryTS = timestamp),
+          (pathEntry.fileType = fileType),
+          (pathEntry.pathAcceptance = acceptanceInfo),
+          acceptanceInfo.accepted ||
+            ((pathEntry.fileInfo = undefined),
+            oldFileInfo?.trackable &&
+              (this._blobNameToPathName.delete(oldFileInfo.blobName),
+              this._publishBlobNameChange(relativePath, oldFileInfo.blobName, undefined),
               this._markDirty()))
       }
-      o.fileType === "File" &&
-      o.pathAcceptance.accepted &&
-      o.fileInfo?.trackable !== false
-        ? this._trackableFilePaths.add(r)
-        : this._trackableFilePaths.delete(r),
-        a && this._pathStatusChangedEmitter.fire({ relPath: r })
+      pathEntry.fileType === "File" &&
+      pathEntry.pathAcceptance.accepted &&
+      pathEntry.fileInfo?.trackable !== false
+        ? this._trackableFilePaths.add(relativePath)
+        : this._trackableFilePaths.delete(relativePath),
+        statusChanged && this._pathStatusChangedEmitter.fire({ relPath: relativePath })
     }
-    remove(r) {
-      let n = this._allPathNames.get(r)
-      if (n !== undefined) {
+    remove(relativePath) {
+      let pathEntry = this._allPathNames.get(relativePath)
+      if (pathEntry !== undefined) {
         if (
-          (this._allPathNames.delete(r),
-          this._trackableFilePaths.delete(r),
-          n.fileInfo !== undefined && n.fileInfo.trackable)
+          (this._allPathNames.delete(relativePath),
+          this._trackableFilePaths.delete(relativePath),
+          pathEntry.fileInfo !== undefined && pathEntry.fileInfo.trackable)
         ) {
-          let i = n.fileInfo.blobName
-          this._blobNameToPathName.delete(i),
-            this._publishBlobNameChange(r, i, undefined),
+          let blobName = pathEntry.fileInfo.blobName
+          this._blobNameToPathName.delete(blobName),
+            this._publishBlobNameChange(relativePath, blobName, undefined),
             this._markDirty()
         }
-        this._pathStatusChangedEmitter.fire({ relPath: r })
+        this._pathStatusChangedEmitter.fire({ relPath: relativePath })
       }
     }
     clear() {
-      for (let [r, n] of this._allPathNames)
-        n.fileInfo !== undefined &&
-          n.fileInfo.trackable &&
-          this._publishBlobNameChange(r, n.fileInfo.blobName, undefined)
+      for (let [relativePath, pathEntry] of this._allPathNames)
+        pathEntry.fileInfo !== undefined &&
+          pathEntry.fileInfo.trackable &&
+          this._publishBlobNameChange(relativePath, pathEntry.fileInfo.blobName, undefined)
       this._allPathNames.clear(),
         this._trackableFilePaths.clear(),
         this._blobNameToPathName.clear(),
         this._markDirty()
     }
-    update(r, n, i, s) {
-      let o = this._allPathNames.get(r)
+    update(relativePath, contentSequence, blobName, modificationTime) {
+      let pathEntry = this._allPathNames.get(relativePath)
       if (
-        o === undefined ||
-        o.fileType !== "File" ||
-        !o.pathAcceptance.accepted ||
-        (o.fileInfo !== undefined && o.fileInfo.contentSeq > n)
+        pathEntry === undefined ||
+        pathEntry.fileType !== "File" ||
+        !pathEntry.pathAcceptance.accepted ||
+        (pathEntry.fileInfo !== undefined && pathEntry.fileInfo.contentSeq > contentSequence)
       )
         return
-      let a = o.fileInfo === undefined ? true : o.fileInfo.trackable,
-        l
-      o.fileInfo?.trackable && (l = o.fileInfo.blobName),
-        (o.fileInfo = { trackable: true, contentSeq: n, blobName: i, mtime: s }),
-        this._trackableFilePaths.add(r),
-        i !== l &&
-          (l !== undefined && this._blobNameToPathName.delete(l),
-          this._blobNameToPathName.set(i, r),
-          this._publishBlobNameChange(r, l, i),
+      let wasTrackable = pathEntry.fileInfo === undefined ? true : pathEntry.fileInfo.trackable,
+        oldBlobName
+      pathEntry.fileInfo?.trackable && (oldBlobName = pathEntry.fileInfo.blobName),
+        (pathEntry.fileInfo = { trackable: true, contentSeq: contentSequence, blobName: blobName, mtime: modificationTime }),
+        this._trackableFilePaths.add(relativePath),
+        blobName !== oldBlobName &&
+          (oldBlobName !== undefined && this._blobNameToPathName.delete(oldBlobName),
+          this._blobNameToPathName.set(blobName, relativePath),
+          this._publishBlobNameChange(relativePath, oldBlobName, blobName),
           this._markDirty()),
-        (!a || l === undefined) &&
-          this._pathStatusChangedEmitter.fire({ relPath: r })
+        (!wasTrackable || oldBlobName === undefined) &&
+          this._pathStatusChangedEmitter.fire({ relPath: relativePath })
     }
-    markUntrackable(r, n, i) {
-      let s = this._allPathNames.get(r)
+    markUntrackable(relativePath, contentSequence, reason) {
+      let pathEntry = this._allPathNames.get(relativePath)
       if (
-        s === undefined ||
-        s.fileType !== "File" ||
-        !s.pathAcceptance.accepted ||
-        (s.fileInfo !== undefined && s.fileInfo.contentSeq > n)
+        pathEntry === undefined ||
+        pathEntry.fileType !== "File" ||
+        !pathEntry.pathAcceptance.accepted ||
+        (pathEntry.fileInfo !== undefined && pathEntry.fileInfo.contentSeq > contentSequence)
       )
         return
-      let o = s.fileInfo
-      ;(s.fileInfo = { trackable: false, contentSeq: n, reason: i }),
-        this._trackableFilePaths.delete(r)
-      let a = false
-      if (o === undefined) a = true
-      else if (o.trackable === true) {
-        a = true
-        let l = o.blobName
-        this._blobNameToPathName.delete(l),
-          this._publishBlobNameChange(r, l, undefined),
+      let oldFileInfo = pathEntry.fileInfo
+      ;(pathEntry.fileInfo = { trackable: false, contentSeq: contentSequence, reason: reason }),
+        this._trackableFilePaths.delete(relativePath)
+      let statusChanged = false
+      if (oldFileInfo === undefined) statusChanged = true
+      else if (oldFileInfo.trackable === true) {
+        statusChanged = true
+        let oldBlobName = oldFileInfo.blobName
+        this._blobNameToPathName.delete(oldBlobName),
+          this._publishBlobNameChange(relativePath, oldBlobName, undefined),
           this._markDirty()
-      } else a = i !== o.reason
-      a && this._pathStatusChangedEmitter.fire({ relPath: r })
+      } else statusChanged = reason !== oldFileInfo.reason
+      statusChanged && this._pathStatusChangedEmitter.fire({ relPath: relativePath })
     }
-    _makeAbsPath(r) {
-      return joinPaths(this.repoRoot, r)
+    _makeAbsPath(relativePath) {
+      return joinPaths(this.repoRoot, relativePath)
     }
-    _publishBlobNameChange(r, n, i) {
-      n !== i &&
+    _publishBlobNameChange(relativePath, oldBlobName, newBlobName) {
+      oldBlobName !== newBlobName &&
         this._blobNameChangedEmitter.fire({
-          absPath: this._makeAbsPath(r),
-          prevBlobName: n,
-          newBlobName: i,
+          absPath: this._makeAbsPath(relativePath),
+          prevBlobName: oldBlobName,
+          newBlobName: newBlobName,
         })
     }
-    purge(r) {
-      let n = new Array()
-      for (let [i, s] of this._allPathNames) s.entryTS < r && n.push(i)
-      for (let i of n) this.remove(i)
+    purge(oldestTimestamp) {
+      let pathsToRemove = new Array()
+      for (let [relativePath, pathEntry] of this._allPathNames) pathEntry.entryTS < oldestTimestamp && pathsToRemove.push(relativePath)
+      for (let relativePath of pathsToRemove) this.remove(relativePath)
     }
-    hasFile(r) {
-      return this._trackableFilePaths.has(r)
+    hasFile(relativePath) {
+      return this._trackableFilePaths.has(relativePath)
     }
-    getBlobName(r) {
-      let n = this._allPathNames.get(r)
-      if (n?.fileInfo?.trackable) return n.fileInfo?.blobName
+    getBlobName(relativePath) {
+      let pathEntry = this._allPathNames.get(relativePath)
+      if (pathEntry?.fileInfo?.trackable) return pathEntry.fileInfo?.blobName
     }
-    getBlobInfo(r, n) {
-      let i = this._allPathNames.get(r)
-      if (i?.fileInfo?.trackable && i.fileInfo.mtime === n)
-        return [i.fileInfo.blobName, i.fileInfo.contentSeq]
+    getBlobInfo(relativePath, modificationTime) {
+      let pathEntry = this._allPathNames.get(relativePath)
+      if (pathEntry?.fileInfo?.trackable && pathEntry.fileInfo.mtime === modificationTime)
+        return [pathEntry.fileInfo.blobName, pathEntry.fileInfo.contentSeq]
     }
-    getPathName(r) {
-      return this._blobNameToPathName.get(r)
+    getPathName(blobName) {
+      return this._blobNameToPathName.get(blobName)
     }
-    getPathInfo(r) {
-      let n = this._allPathNames.get(r)
-      if (n !== undefined) return [n.fileType, n.pathAcceptance]
+    getPathInfo(relativePath) {
+      let pathEntry = this._allPathNames.get(relativePath)
+      if (pathEntry !== undefined) return [pathEntry.fileType, pathEntry.pathAcceptance]
     }
-    reportMissing(r) {
-      let n = this._blobNameToPathName.get(r)
-      if (n === undefined) return
-      let i = this._allPathNames.get(n)
-      if (i?.fileInfo?.trackable) return (i.fileInfo.contentSeq = 0), n
+    reportMissing(blobName) {
+      let relativePath = this._blobNameToPathName.get(blobName)
+      if (relativePath === undefined) return
+      let pathEntry = this._allPathNames.get(relativePath)
+      if (pathEntry?.fileInfo?.trackable) return (pathEntry.fileInfo.contentSeq = 0), relativePath
     }
     *pathsWithBlobNames() {
-      for (let [r, n] of this._allPathNames) {
-        let i = n.fileInfo
-        i?.trackable && (yield [r, i.mtime, i.blobName, i.contentSeq])
+      for (let [relativePath, pathEntry] of this._allPathNames) {
+        let fileInfo = pathEntry.fileInfo
+        fileInfo?.trackable && (yield [relativePath, fileInfo.mtime, fileInfo.blobName, fileInfo.contentSeq])
       }
     }
     *allPaths() {
-      for (let [r, n] of this._allPathNames) {
-        let i = n.pathAcceptance.accepted,
-          s = false,
-          o = n.pathAcceptance.format()
-        i &&
-          (n.fileType === "Other"
-            ? ((i = false), (o = "Not a file"))
-            : n.fileInfo !== undefined &&
-              (n.fileInfo?.trackable === true
-                ? (s = true)
-                : ((i = false), (o = n.fileInfo.reason)))),
-          yield [r, n.fileType, i, s, o]
+      for (let [relativePath, pathEntry] of this._allPathNames) {
+        let isAccepted = pathEntry.pathAcceptance.accepted,
+          isTrackable = false,
+          acceptanceReason = pathEntry.pathAcceptance.format()
+        isAccepted &&
+          (pathEntry.fileType === "Other"
+            ? ((isAccepted = false), (acceptanceReason = "Not a file"))
+            : pathEntry.fileInfo !== undefined &&
+              (pathEntry.fileInfo?.trackable === true
+                ? (isTrackable = true)
+                : ((isAccepted = false), (acceptanceReason = pathEntry.fileInfo.reason)))),
+          yield [relativePath, pathEntry.fileType, isAccepted, isTrackable, acceptanceReason]
       }
     }
     _markDirty() {
       this._persistState !== undefined && this._persistState.dirtyCount++
     }
-    enablePersist(r, n) {
+    enablePersist(cacheWriter, intervalMs) {
       if (this._persistState) return
       ;(this._persistState = {
         dirtyCount: this._trackableFilePaths.size,
         lastPersistDirtyCount: 0,
-        mtimeCacheWriter: r,
+        mtimeCacheWriter: cacheWriter,
         persisting: false,
       }),
         this._maybePersist()
-      let i = setInterval(() => void this._maybePersist(), n)
-      this.addDisposable({ dispose: () => clearInterval(i) })
+      let intervalId = setInterval(() => void this._maybePersist(), intervalMs)
+      this.addDisposable({ dispose: () => clearInterval(intervalId) })
     }
     async _maybePersist() {
       if (!(this._persistState === undefined || this._persistState.persisting)) {
@@ -119377,16 +119377,16 @@ var N2 = class {
         }
       }
     }
-    async _persist(r) {
-      let n = function* (o) {
-          for (let [a, l] of o) {
-            let c = l.fileInfo
-            c?.trackable && (yield [a, c.mtime, c.blobName])
+    async _persist(persistState) {
+      let trackablePathsGenerator = function* (entries) {
+          for (let [relativePath, pathEntry] of entries) {
+            let fileInfo = pathEntry.fileInfo
+            fileInfo?.trackable && (yield [relativePath, fileInfo.mtime, fileInfo.blobName])
           }
         },
-        i = r.dirtyCount
-      await r.mtimeCacheWriter.write(n(this._allPathNames.entries())),
-        (r.lastPersistDirtyCount = i)
+        currentDirtyCount = persistState.dirtyCount
+      await persistState.mtimeCacheWriter.write(trackablePathsGenerator(this._allPathNames.entries())),
+        (persistState.lastPersistDirtyCount = currentDirtyCount)
     }
   }
 var rc = q(require("vscode"))
@@ -119642,16 +119642,16 @@ var q2 = class e extends DisposableContainer {
     this._apiServer = r
     this._workspaceManager = n
     ;(this._logger = z("UnknownBlobHandler")),
-      (this._toProbe = new sa(this._probe.bind(this))),
+      (this._toProbe = new KeyedTaskQueue(this._probe.bind(this))),
       this.addDisposable(this._toProbe),
-      (this._probeWaiters = new sa(this._enqueueForProbe.bind(this))),
+      (this._probeWaiters = new KeyedTaskQueue(this._enqueueForProbe.bind(this))),
       this.addDisposable(this._probeWaiters),
       (this._probeWaitersKicker = new Oc(
         this._probeWaiters,
         e.probeRetryWaitMs,
       )),
       this.addDisposable(this._probeWaitersKicker),
-      (this._longWaiters = new sa(this._enqueueForProbe.bind(this))),
+      (this._longWaiters = new KeyedTaskQueue(this._enqueueForProbe.bind(this))),
       this.addDisposable(this._longWaiters),
       (this._longWaitersKicker = new Oc(this._longWaiters, e.longRetryWaitMs)),
       this.addDisposable(this._longWaitersKicker)
@@ -119761,20 +119761,20 @@ function T9(e) {
 function Fw(e) {
   if (e.scheme === "file") return T9(e)
 }
-var k9 = class extends DisposableContainer {
-    constructor(r, n, i, s, o, a, l, c, u, f, p) {
-      super(u, f)
-      this.folderName = r
-      this.folderRoot = n
-      this.repoRoot = i
-      this.workspaceFolder = s
-      this.vcsDetails = o
-      this.folderId = a
-      this.diskFileManager = l
-      this.cacheDirPath = c
-      this.logger = p
+var SourceFolder = class extends DisposableContainer {
+    constructor(folderName, folderRoot, repoRoot, workspaceFolder, vcsDetails, folderId, diskFileManager, cacheDirPath, disposables, eventEmitter, logger) {
+      super(disposables, eventEmitter)
+      this.folderName = folderName
+      this.folderRoot = folderRoot
+      this.repoRoot = repoRoot
+      this.workspaceFolder = workspaceFolder
+      this.vcsDetails = vcsDetails
+      this.folderId = folderId
+      this.diskFileManager = diskFileManager
+      this.cacheDirPath = cacheDirPath
+      this.logger = logger
       ;(this._operationQueue = new Va(
-        async (g) => await this._runSerializedOperation(g),
+        async (operation) => await this._runSerializedOperation(operation),
       )),
         this.addDisposables(this._operationQueue, {
           dispose: () => this._disposeTracker(),
@@ -119798,9 +119798,9 @@ var k9 = class extends DisposableContainer {
     _disposeTracker() {
       this._tracker?.dispose(), (this._tracker = undefined)
     }
-    setTracker(r) {
+    setTracker(tracker) {
       if (this.stopped) throw new Error("Source folder has been disposed")
-      this._disposeTracker(), (this._tracker = r)
+      this._disposeTracker(), (this._tracker = tracker)
     }
     get tracker() {
       return this._tracker
@@ -119817,20 +119817,20 @@ var k9 = class extends DisposableContainer {
     setInitialSyncComplete() {
       this._initialSyncComplete = true
     }
-    relativePathName(r) {
-      if (Qs(this.folderRoot, r)) return ql(this.repoRoot, r)
+    relativePathName(path) {
+      if (Qs(this.folderRoot, path)) return ql(this.repoRoot, path)
     }
-    acceptsPath(r) {
+    acceptsPath(path) {
       return this._tracker === undefined
         ? false
-        : this._tracker.pathFilter.acceptsPath(r)
+        : this._tracker.pathFilter.acceptsPath(path)
     }
-    async enqueueSerializedOperation(r) {
-      this._operationQueue.insert(r), await this._operationQueue.kick()
+    async enqueueSerializedOperation(operation) {
+      this._operationQueue.insert(operation), await this._operationQueue.kick()
     }
-    async _runSerializedOperation(r) {
-      r !== undefined &&
-        (!this._initialEnumerationComplete || this._stopped || (await r()))
+    async _runSerializedOperation(operation) {
+      operation !== undefined &&
+        (!this._initialEnumerationComplete || this._stopped || (await operation()))
     }
   },
   M9 = class extends DisposableContainer {
@@ -119840,26 +119840,26 @@ var k9 = class extends DisposableContainer {
       this.pathNotifier = n
     }
   }
-var tEt = new Set(["home directory", "too large"]),
-  rEt = new Set(["nested"])
-function Qw(e) {
-  return tEt.has(e)
+var nonTrackableFolderStatuses = new Set(["home directory", "too large"]),
+  nestedFolderStatuses = new Set(["nested"])
+function isNonTrackableFolderStatus(e) {
+  return nonTrackableFolderStatuses.has(e)
 }
-function YIe(e) {
-  return rEt.has(e)
+function isNestedFolderStatus(e) {
+  return nestedFolderStatuses.has(e)
 }
-function sl(e) {
-  return e.containingFolderRoot !== undefined
+function getFolderStatus(folderInfo) {
+  return folderInfo.containingFolderRoot !== undefined
     ? "nested"
-    : e.isHomeDir
+    : folderInfo.isHomeDir
       ? "home directory"
-      : e.folderQualification !== undefined && !e.folderQualification.trackable
+      : folderInfo.folderQualification !== undefined && !folderInfo.folderQualification.trackable
         ? "too large"
-        : e.syncingPermission === "denied"
+        : folderInfo.syncingPermission === "denied"
           ? "permission denied"
-          : e.syncingPermission === "granted"
+          : folderInfo.syncingPermission === "granted"
             ? "trackable"
-            : e.folderQualification === undefined
+            : folderInfo.folderQualification === undefined
               ? "qualifying"
               : "permission needed"
 }
@@ -119946,7 +119946,7 @@ var WorkspaceManager = class WorkspaceManager extends DisposableContainer {
       this._fileExtensions = extensionSet
     }
     ;(this._pathHandler = new F2(this._maxUploadSizeBytes, fIe())),
-      (this._pathMap = this.addDisposable(new N2()))
+      (this._pathMap = this.addDisposable(new WorkspacePathMap()))
     let openFileManagerV2
     if (this._configListener.config.openFileManager.v2Enabled) {
       let fileUploader = new _2(this._blobNameCalculator, this._apiServer)
@@ -119964,7 +119964,7 @@ var WorkspaceManager = class WorkspaceManager extends DisposableContainer {
       (this._openFileManager = new OpenFileManagerProxy(this._configListener, openFileManagerV1, openFileManagerV2))
     let checkpointThreshold = options?.blobsCheckpointThreshold
     ;(this._blobsCheckpointManager = this.addDisposable(
-      new B2(
+      new BlobsCheckpointManager(
         this._apiServer,
         this._featureFlagManager,
         this._pathMap.onDidChangeBlobName,
@@ -120129,8 +120129,8 @@ var WorkspaceManager = class WorkspaceManager extends DisposableContainer {
     return Array.from(this._initialSourceFolders).every((folderRoot) => {
       let folderInfo = this._registeredSourceFolders.get(folderRoot)
       if (folderInfo === undefined) return true
-      let folderStatus = sl(folderInfo)
-      return Qw(folderStatus) || YIe(folderStatus) || folderStatus === "permission denied"
+      let folderStatus = getFolderStatus(folderInfo)
+      return isNonTrackableFolderStatus(folderStatus) || isNestedFolderStatus(folderStatus) || folderStatus === "permission denied"
         ? true
         : this._trackedSourceFolders.get(folderRoot)?.sourceFolder
             ?.initialEnumerationComplete
@@ -120147,8 +120147,8 @@ var WorkspaceManager = class WorkspaceManager extends DisposableContainer {
     return Array.from(this._initialSourceFolders).every((folderRoot) => {
       let folderInfo = this._registeredSourceFolders.get(folderRoot)
       if (folderInfo === undefined) return true
-      let folderStatus = sl(folderInfo)
-      return Qw(folderStatus) || YIe(folderStatus) || folderStatus === "permission denied"
+      let folderStatus = getFolderStatus(folderInfo)
+      return isNonTrackableFolderStatus(folderStatus) || isNestedFolderStatus(folderStatus) || folderStatus === "permission denied"
         ? true
         : this._trackedSourceFolders.get(folderRoot)?.sourceFolder?.initialSyncComplete
     })
@@ -120166,8 +120166,8 @@ var WorkspaceManager = class WorkspaceManager extends DisposableContainer {
       return "disabled"
     let permissionNeededCount = 0
     for (let [folderRoot, folderInfo] of this._registeredSourceFolders) {
-      let folderStatus = sl(folderInfo)
-      if (Qw(folderStatus) || folderStatus === "permission denied") return "disabled"
+      let folderStatus = getFolderStatus(folderInfo)
+      if (isNonTrackableFolderStatus(folderStatus) || folderStatus === "permission denied") return "disabled"
       folderStatus === "permission needed" && permissionNeededCount++
     }
     return permissionNeededCount > 0 ? "partial" : "enabled"
@@ -120411,8 +120411,8 @@ var WorkspaceManager = class WorkspaceManager extends DisposableContainer {
     this._logger.info("Enabling syncing for all trackable source folders")
     let permittedFolders = new Array()
     this._registeredSourceFolders.forEach((folderInfo, folderPath) => {
-      let folderStatus = sl(folderInfo)
-      Qw(folderStatus) ||
+      let folderStatus = getFolderStatus(folderInfo)
+      isNonTrackableFolderStatus(folderStatus) ||
         folderStatus === "qualifying" ||
         ((folderInfo.syncingPermission = "granted"), permittedFolders.push(folderPath))
     }),
@@ -120422,8 +120422,8 @@ var WorkspaceManager = class WorkspaceManager extends DisposableContainer {
   disableSyncing() {
     this._logger.info("Disabling syncing for all trackable source folders"),
       this._registeredSourceFolders.forEach((folderInfo) => {
-        let folderStatus = sl(folderInfo)
-        Qw(folderStatus) || (folderInfo.syncingPermission = "denied")
+        let folderStatus = getFolderStatus(folderInfo)
+        isNonTrackableFolderStatus(folderStatus) || (folderInfo.syncingPermission = "denied")
       }),
       this._syncingPermissionTracker.denyPermission(),
       this._kickSourceFolderReconciler()
@@ -120438,9 +120438,9 @@ var WorkspaceManager = class WorkspaceManager extends DisposableContainer {
     await this._updateStoredExternalSourceFolders()
     let nestedFolders = new Set()
     for (let [folderPath, folderInfo] of this._registeredSourceFolders)
-      if (sl(folderInfo) === "trackable") {
+      if (getFolderStatus(folderInfo) === "trackable") {
         for (let [otherPath, otherInfo] of this._registeredSourceFolders)
-          if (sl(otherInfo) === "trackable" && folderPath !== otherPath && Qs(otherPath, folderPath)) {
+          if (getFolderStatus(otherInfo) === "trackable" && folderPath !== otherPath && Qs(otherPath, folderPath)) {
             nestedFolders.add(folderPath)
             break
           }
@@ -120462,7 +120462,7 @@ var WorkspaceManager = class WorkspaceManager extends DisposableContainer {
     }
     this._updateActionsModelState()
     for (let [folderPath, folderInfo] of this._registeredSourceFolders)
-      sl(folderInfo) === "qualifying" &&
+      getFolderStatus(folderInfo) === "qualifying" &&
         folderInfo.cancel === undefined &&
         this._qualifySourceFolder(folderPath, folderInfo)
     this._syncingStateEmitter.fire(this.syncingEnabledState),
@@ -120484,7 +120484,7 @@ var WorkspaceManager = class WorkspaceManager extends DisposableContainer {
       homeDirFound = false,
       tooLargeFound = false
     for (let [folderPath, folderInfo] of this._registeredSourceFolders) {
-      let folderStatus = sl(folderInfo)
+      let folderStatus = getFolderStatus(folderInfo)
       if (folderStatus === "permission needed") {
         permissionNeeded = true
         break
@@ -120577,7 +120577,7 @@ var WorkspaceManager = class WorkspaceManager extends DisposableContainer {
       else if (folderInfo.folderQualification?.trackable === false)
         stopReason = "source folder is too large"
       else {
-        let folderStatus = sl(folderInfo)
+        let folderStatus = getFolderStatus(folderInfo)
         folderStatus === "permission denied"
           ? (stopReason = "syncing permission denied for this source folder")
           : folderStatus === "permission needed"
@@ -120588,7 +120588,7 @@ var WorkspaceManager = class WorkspaceManager extends DisposableContainer {
     }
     let foldersToStart = new Map()
     for (let [folderPath, folderInfo] of this._registeredSourceFolders) {
-      if (sl(folderInfo) !== "trackable") continue
+      if (getFolderStatus(folderInfo) !== "trackable") continue
       let trackedFolder = this._trackedSourceFolders.get(folderPath)
       trackedFolder === undefined &&
         ((trackedFolder = {
@@ -120698,7 +120698,7 @@ var WorkspaceManager = class WorkspaceManager extends DisposableContainer {
           ? await ox(folderPath)
           : undefined,
       cacheDirPath = await this._migrateMtimeCache(folderPath, trackedFolder)
-    return new k9(folderName, folderPath, repoRoot, workspaceFolder, vcsRepo, folderId, diskFileManager, cacheDirPath, disposables, childDisposables, trackedFolder.logger)
+    return new SourceFolder(folderName, folderPath, repoRoot, workspaceFolder, vcsRepo, folderId, diskFileManager, cacheDirPath, disposables, childDisposables, trackedFolder.logger)
   }
   async _migrateMtimeCache(folderPath, trackedFolder) {
     let newCacheDirPath = this._computeCacheDirPath(folderPath)
@@ -121411,7 +121411,7 @@ var WorkspaceManager = class WorkspaceManager extends DisposableContainer {
         trace.addLine("Not tracked: folder is too large")
         continue
       }
-      let trackingStatus = sl(folderInfo)
+      let trackingStatus = getFolderStatus(folderInfo)
       if (trackingStatus === "permission denied") {
         trace.addLine("Not tracked: syncing permission denied")
         continue
@@ -121484,7 +121484,7 @@ var WorkspaceManager = class WorkspaceManager extends DisposableContainer {
   }
   trackedSourceFolderNames() {
     return Array.from(this._registeredSourceFolders)
-      .filter(([folderRoot, folderInfo]) => sl(folderInfo) === "trackable")
+      .filter(([folderRoot, folderInfo]) => getFolderStatus(folderInfo) === "trackable")
       .map(([folderRoot, folderInfo]) => ({ folderRoot: folderRoot }))
   }
   getSourceFoldersReportDetails() {
@@ -121771,7 +121771,7 @@ var AugmentExtension = class e extends DisposableContainer {
         this.featureFlagManager,
         this._globalState,
       )),
-      (this._clientMetricsReporter = new DiskFileManager(apiServer)),
+      (this._clientMetricsReporter = new ClientMetricsReporter(apiServer)),
       (this._completionTimelineReporter = new tN(apiServer)),
       (this._extensionEventReporter = new ExtensionSessionEventReporter(apiServer)),
       (this.guidelinesWatcher = new ig(
@@ -122046,7 +122046,7 @@ var AugmentExtension = class e extends DisposableContainer {
       )),
       this.disposeOnDisable.push(this.syncingStatusReporter),
       this.disposeOnDisable.push(
-        new JN(
+        new SyncingStatusTracker(
           this._statusBar,
           this.syncingStatusReporter.onDidChangeSyncingStatus,
         ),
@@ -122132,7 +122132,7 @@ var AugmentExtension = class e extends DisposableContainer {
       )),
       this._openChatHintManager.enable(),
       this.disposeOnDisable.push(this._openChatHintManager),
-      (this.fuzzyFsSearcher = new $M(
+      (this.fuzzyFsSearcher = new FuzzyFsSearcher(
         this._globalState,
         this.workspaceManager,
         this.syncingStatusReporter.onDidChangeSyncingStatus,
@@ -122312,7 +122312,7 @@ var AugmentExtension = class e extends DisposableContainer {
       this._agentCheckpointManager,
     )
     this._chatModel = chatModel
-    let chatHistoryManager = new zN(this._globalState, this.syncingStatusReporter),
+    let chatHistoryManager = new ChatHistoryManager(this._globalState, this.syncingStatusReporter),
       chatEventEmitter = new LN(),
       chatWebviewApp = new ChatApp(
         chatModel,
@@ -123045,7 +123045,7 @@ function activate(e) {
     E = new yg(10),
     w = new Ye.EventEmitter(),
     B = new Ye.EventEmitter(),
-    T = new Ye.EventEmitter(),
+    changeWebviewAppEventEmitter = new Ye.EventEmitter(),
     N = new Ye.EventEmitter(),
     W = new rF(e),
     mainPanelProvider = new MainPanelWebviewProvider(e.extensionUri)
@@ -123066,7 +123066,7 @@ function activate(e) {
         }
         case "WorkspaceNotSelected": {
           actionsStateModel.isSystemStateComplete("authenticated") &&
-            T.fire("folder-selection")
+            changeWebviewAppEventEmitter.fire("folder-selection")
           break e
         }
         case "ShouldDisableCopilot":
@@ -123080,7 +123080,7 @@ function activate(e) {
     ;(actionsStateModel.isDerivedStateSatisfied("SyncingPermissionNeeded") ||
       actionsStateModel.isDerivedStateSatisfied("uploadingHomeDir") ||
       actionsStateModel.isDerivedStateSatisfied("workspaceTooLarge")) &&
-      T.fire("awaiting-syncing-permission")
+      changeWebviewAppEventEmitter.fire("awaiting-syncing-permission")
   }
   e.subscriptions.push(
     p.onDidChangeSession(() => {
@@ -123093,7 +123093,7 @@ function activate(e) {
         webviewOptions: { retainContextWhenHidden: true },
       }),
     ),
-    (r = new AugmentExtension(e, c, f, m, p, y, v, E, C, w, N, mainPanelProvider, T, actionsStateModel, syncingEnabledTracker, B, Y, W))
+    (r = new AugmentExtension(e, c, f, m, p, y, v, E, C, w, N, mainPanelProvider, changeWebviewAppEventEmitter, actionsStateModel, syncingEnabledTracker, B, Y, W))
   function Q() {
     mainPanelProvider.isVisible() || Ye.commands.executeCommand(Separator.commandID)
   }
@@ -123119,7 +123119,7 @@ function activate(e) {
     ),
     nEe(e),
     tBe(r, f, e)
-  let se = registerCommands(e, r, f, p, U, m, y, v, E, T, B, syncingEnabledTracker, c, e.workspaceState)
+  let se = registerCommands(e, r, f, p, U, m, y, v, E, changeWebviewAppEventEmitter, B, syncingEnabledTracker, c, e.workspaceState)
   e.subscriptions.push(se), e.subscriptions.push(N), n(r)
 }
 function zIe(e) {
