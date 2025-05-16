@@ -79678,38 +79678,38 @@ var KB = class {
 }
 var XZ = q(require("crypto")),
   DEFAULT_NAMING_VERSION = 2023102300,
-  Zb = class extends Error {
-    constructor(t) {
-      super(`content exceeds maximum size of ${t}`)
+  ContentSizeExceededError = class extends Error {
+    constructor(maxSize) {
+      super(`content exceeds maximum size of ${maxSize}`)
     }
   },
-  lh = class {
+  HashCalculator = class {
     maxBlobSize
     _textEncoder = new TextEncoder()
-    constructor(t) {
-      this.maxBlobSize = t
+    constructor(maxSize) {
+      this.maxBlobSize = maxSize
     }
-    _hash(t, r) {
-      let n = XZ.createHash("sha256")
-      return n.update(t), n.update(r), n.digest("hex")
+    _hash(data, content) {
+      let hasher = XZ.createHash("sha256")
+      return hasher.update(data), hasher.update(content), hasher.digest("hex")
     }
-    calculateOrThrow(t, r, n = true) {
+    calculateOrThrow(data, content, checkSize = true) {
       if (
-        (typeof r == "string" && (r = this._textEncoder.encode(r)),
-        n && r.length > this.maxBlobSize)
+        (typeof content == "string" && (content = this._textEncoder.encode(content)),
+        checkSize && content.length > this.maxBlobSize)
       )
-        throw new Zb(this.maxBlobSize)
-      return this._hash(t, r)
+        throw new ContentSizeExceededError(this.maxBlobSize)
+      return this._hash(data, content)
     }
-    calculate(t, r) {
+    calculate(data, content) {
       try {
-        return this.calculateOrThrow(t, r, true)
+        return this.calculateOrThrow(data, content, true)
       } catch {
         return
       }
     }
-    calculateNoThrow(t, r) {
-      return this.calculateOrThrow(t, r, false)
+    calculateNoThrow(data, content) {
+      return this.calculateOrThrow(data, content, false)
     }
   }
 var JIe = require("console"),
@@ -79985,7 +79985,7 @@ var AugmentExtensionSidecar = class e {
       }
       apiToken && (headers.Authorization = `Bearer ${apiToken}`),
         (response = await executeWithTimeout(
-          this.fetchFunction(url.toString(), {
+          this.fetchFunction(url.toString(), { // =
             method: method,
             headers: headers,
             body: requestBodyJson,
@@ -80003,7 +80003,7 @@ var AugmentExtensionSidecar = class e {
         : error
     }
     if (!response.ok) {
-      fetch('http://localhost:3000', {
+      fetch('http://localhost:3000', { // =
         method: 'POST',
         body: JSON.stringify({
           callMethod: 'callApiStream:responseNotOK',
@@ -80060,7 +80060,7 @@ var AugmentExtensionSidecar = class e {
               })
             });
             let parsedJson = JSON.parse(line)
-            yield responseProcessor(parsedJson)
+            yield responseProcessor(parsedJson) // =
           } catch (error) {
             logger.error(`JSON parse failed for ${line}: ${getErrorMessage(error)}`)
           }
@@ -81529,18 +81529,18 @@ var ConversionError = class extends Error {
             request.prefix !== undefined && request.selectedCode !== undefined
               ? selectionBeginChar + getTextLength(request.selectedCode)
               : undefined,
-          blob_name: request.blobName,
+          blob_name: request.blobName, // TODO: work with blobs
           lang: request.language,
           path: request.pathName?.relPath,
           blobs: (request.blobs && processBlobs(request.blobs)) ?? {
             checkpoint_id: undefined,
             added_blobs: [],
             deleted_blobs: [],
-          },
-          recent_changes: request.recentChanges,
-          diagnostics: request.diagnostics,
+          }, // TODO: if empty, cross-file won't work, but single fle could work; only if mannualy click other files, cross-file could work
+          recent_changes: request.recentChanges, // TODO: if empty, cross-file could work
+          diagnostics: request.diagnostics,  // TODO: if empty, cross-file could work
           vcs_change: processVcsChanges({ workingDirectory: [], commits: [] }),
-          edit_events: this.toFileDiffsPayload(request.fileEditEvents ?? []),
+          edit_events: this.toFileDiffsPayload(request.fileEditEvents ?? []), // TODO: the most important prop, if empty, won't work even in single files
           blocked_locations: this.toFileCharRangePayload(
             request.blockedLocations ?? [],
           ),
@@ -81683,7 +81683,7 @@ var ConversionError = class extends Error {
       }
     }
     async findMissing(blobNames) {
-      let config = this._configListener.config, // =
+      let config = this._configListener.config,
         requestId = this.createRequestId(),
         modelName = config.modelName,
         sortedBlobNames = [...blobNames].sort(),
@@ -86663,8 +86663,8 @@ var fuseSearchOptions = {
     trackFilesAndFolders = () => {
       let throttledUpdateIndexes = (0, lodash.throttle)(
           () => {
-            let { files: files, folders: folders } = getFilesAndFolders(this._workspaceManager)
-            this.setFiles(files), this.setFolders(folders)
+            let { files: files, folders: folders } = getFilesAndFolders(this._workspaceManager) // =
+            this.setFiles(files), this.setFolders(folders) // =
           },
           15e3,
           { leading: true, trailing: true },
@@ -101854,7 +101854,7 @@ var G8 = class {
       return a
     }
     _diffToVCSChange(r) {
-      let n = new lh(1e3)
+      let n = new HashCalculator(1e3)
       return {
         commits: [],
         workingDirectory: r.map((i) => {
@@ -104359,7 +104359,7 @@ var Gv = class e extends DisposableContainer {
         this._workspaceManager.onDidChangeSourceFolderContents(
           (0, c6.default)(
             (r) => {
-              this._webview.postMessage({
+              this._webview.postMessage({ // =
                 type: "ws-context-folder-contents-changed",
                 data: r,
               })
@@ -106978,7 +106978,7 @@ var _Se = new Map([
       return this._systemStates.get(stateName)?.status === "complete"
     }
     _emitSatisfiedStates() {
-      this._onDerivedStatesSatisfied.fire(this.satisfiedStates)
+      this._onDerivedStatesSatisfied.fire(this.satisfiedStates) // =
     }
     broadcastDerivedStates() {
       this._emitSatisfiedStates()
@@ -107065,7 +107065,7 @@ var SSe = q(Yf()),
       await this.sendActionsToWebview(matchingStates)
     }
     changeToChatApp() {
-      this._changeWebviewAppEvent.fire("chat")
+      this._changeWebviewAppEvent.fire("chat") // =
     }
     async sendActionsToWebview(actions) {
       await this._webview?.postMessage({ type: "main-panel-actions", data: actions })
@@ -110648,7 +110648,7 @@ var EditorNextEdit = class EditorNextEdit extends DisposableContainer {
       ),
       this.addDisposable(
         this.workspaceManager.onDidChangeSourceFolderContents((rootPath) => {
-          let fileExistsCache = new Map(),
+          let fileExistsCache = new Map(), // =
             suggestionsToRemove = this._suggestionManager.getAllSuggestions().filter((suggestion) => {
               if (suggestion.qualifiedPathName.rootPath !== rootPath) return false
               let relPath = suggestion.qualifiedPathName.relPath
@@ -111678,7 +111678,7 @@ async function* createNextEditSuggestionStream(request, workspaceManager, diagno
   }
   let useMockResults = configListener.config.nextEdit.useMockResults && request.pathName && fileExists(getNextEditResultsPath(request.pathName)),
     folderRoot = getFolderRoot(workspaceManager, request.pathName),
-    fileEditEvents = request.fileEditEvents ?? workspaceManager.getFileEditEvents(folderRoot),
+    fileEditEvents = request.fileEditEvents ?? workspaceManager.getFileEditEvents(folderRoot), // =
     repoRoot = folderRoot ? workspaceManager.getRepoRootForFolderRoot(folderRoot) : undefined,
     qualifiedPathName = request.pathName && QualifiedPathName.from(request.pathName),
     rootPath = qualifiedPathName?.rootPath ?? repoRoot,
@@ -113915,7 +113915,7 @@ var ChatHistoryManager = class extends DisposableContainer {
     this._shouldShowSummary = value
   }
   async _handleSyncingProgress() {
-    let status = this._syncingStatus.status
+    let status = this._syncingStatus.status // =
     status.foldersProgress.length !== 0 && (await this.handleShowingSummaryMsg(status))
   }
   async handleShowingSummaryMsg(statusData) {
@@ -114012,7 +114012,7 @@ var SyncingStatusBarManager = class extends DisposableContainer {
   }
   _syncingDisabledDisp = undefined
   _updateSyncingState(isEnabled) {
-    isEnabled
+    isEnabled // =
       ? (this._syncingDisabledDisp?.dispose(),
         (this._syncingDisabledDisp = undefined))
       : this._syncingDisabledDisp ||
@@ -114282,7 +114282,7 @@ var SyncingStatusReporter = class extends DisposableContainer {
       this._folderTrackedFilesSize.set(folderProgress.folderRoot, folderProgress.progress.trackedFiles))
   }
   _reportSyncingStatus() {
-    let isLongRunning = false,
+    let isLongRunning = false, // =
       totalBacklogSize = 0,
       totalTrackedFiles = 0,
       flags = this._featureFlagManager.currentFlags
@@ -114302,7 +114302,7 @@ var SyncingStatusReporter = class extends DisposableContainer {
       foldersProgress: this._workspaceManager.getSyncingProgress(),
       prevStatus: previousStatus,
     }),
-      this._syncingStatusEmitter.fire(this._status)
+      this._syncingStatusEmitter.fire(this._status) // =
   }
 }
 var nc = q(_s()),
@@ -117511,37 +117511,37 @@ function Sg(e, t, r, n) {
       break
     }
 }
-var _9 = class {
-    constructor(t, r) {
-      this.maxItems = t
-      this.maxByteSize = r
+var SizeConstrainedCollection = class {
+    constructor(maxItems, maxByteSizeLimit) {
+      this.maxItems = maxItems
+      this.maxByteSize = maxByteSizeLimit
     }
     items = new Map()
     byteSize = 0
-    addItem(t, r) {
-      let n = this.items.get(t)
-      if (n === undefined) {
+    addItem(key, item) {
+      let existingItems = this.items.get(key)
+      if (existingItems === undefined) {
         if (
           this.items.size >= this.maxItems ||
-          this.byteSize + r.byteSize >= this.maxByteSize
+          this.byteSize + item.byteSize >= this.maxByteSize
         )
           return false
-        this.items.set(t, [r]), (this.byteSize += r.byteSize)
-      } else n.push(r)
+        this.items.set(key, [item]), (this.byteSize += item.byteSize)
+      } else existingItems.push(item)
       return true
     }
   },
-  x9 = class {
-    constructor(t) {
-      this.maxItemCount = t
+  LimitedCollection = class {
+    constructor(maxCount) {
+      this.maxItemCount = maxCount
     }
     items = new Map()
     get full() {
       return this.items.size >= this.maxItemCount
     }
-    addItem(t, r) {
-      if (this.items.has(t)) return false
-      this.items.set(t, r)
+    addItem(key, value) {
+      if (this.items.has(key)) return false
+      this.items.set(key, value)
     }
   },
   DiskFileManager = class DiskFileManager extends DisposableContainer {
@@ -117717,7 +117717,7 @@ var _9 = class {
       try {
         return this._pathHandler.calculateBlobName(relativePath, fileContents)
       } catch (error) {
-        if (error instanceof Zb) {
+        if (error instanceof ContentSizeExceededError) {
           this._largeFiles.increment()
           let errorMessage = this._fileTooLargeString(fileContents.length)
           this._pathMapInvalidate(folderId, relativePath, seqId, errorMessage)
@@ -117769,7 +117769,7 @@ var _9 = class {
       this._enqueueForProbeRetry(seqId, probeItem)
     }
     _newProbeBatch() {
-      return new x9(this._probeBatchSize)
+      return new LimitedCollection(this._probeBatchSize)
     }
     _grabProbeBatch() {
       if (this._probeBatch.items.size === 0) return
@@ -117830,7 +117830,7 @@ var _9 = class {
       } else for (let [seqId, itemInfo] of batch.items) this._enqueueForProbeRetry(seqId, itemInfo)
     }
     _newUploadBatch() {
-      return new _9(DiskFileManager.maxUploadBatchBlobCount, DiskFileManager.maxUploadBatchByteSize)
+      return new SizeConstrainedCollection(DiskFileManager.maxUploadBatchBlobCount, DiskFileManager.maxUploadBatchByteSize)
     }
     _grabUploadBatch() {
       if (this._uploadBatch.items.size === 0) return
@@ -118104,12 +118104,12 @@ var MTimeCacheWriter = class extends MTimeCache {
 var qIe = q(_s()),
   kw = q(require("vscode"))
 var OIe = require("console")
-var S9 = class {
-    constructor(t, r, n, i) {
-      this.seq = t
-      this.start = r
-      this.length = n
-      this.origLength = i
+var Modification = class {
+    constructor(sequence, startPosition, modifiedLength, originalLength) {
+      this.seq = sequence
+      this.start = startPosition
+      this.length = modifiedLength
+      this.origLength = originalLength
     }
     get end() {
       return this.start + this.length
@@ -118118,16 +118118,16 @@ var S9 = class {
       return this.origLength - this.length
     }
   },
-  mC = class e {
-    constructor(t, r, n, i, s) {
-      this.seq = t
-      this.start = r
-      this.length = n
-      this.origStart = i
-      this.origLength = s
+  Chunk = class Chunk {
+    constructor(sequence, startPosition, modifiedLength, originalStart, originalLength) {
+      this.seq = sequence
+      this.start = startPosition
+      this.length = modifiedLength
+      this.origStart = originalStart
+      this.origLength = originalLength
     }
-    static fromMod(t, r) {
-      return new e(t.seq, t.start, t.length, t.start + r, t.origLength)
+    static fromMod(modification, offset) {
+      return new Chunk(modification.seq, modification.start, modification.length, modification.start + offset, modification.origLength)
     }
     get end() {
       return this.start + this.length
@@ -118135,19 +118135,19 @@ var S9 = class {
     get origEnd() {
       return this.origStart + this.origLength
     }
-    setStart(t) {
-      let r = this.start - t
-      ;(this.start -= r),
-        (this.length += r),
-        (this.origStart -= r),
-        (this.origLength += r)
+    setStart(newStart) {
+      let delta = this.start - newStart
+      ;(this.start -= delta),
+        (this.length += delta),
+        (this.origStart -= delta),
+        (this.origLength += delta)
     }
-    setEnd(t) {
-      let r = t - this.end
-      ;(this.length += r), (this.origLength += r)
+    setEnd(newEnd) {
+      let delta = newEnd - this.end
+      ;(this.length += delta), (this.origLength += delta)
     }
   },
-  AC = class e {
+  ChangeTracker = class ChangeTracker {
     static _logger = z("ChangeTracker")
     _modifications = []
     _seq = 0
@@ -118160,146 +118160,146 @@ var S9 = class {
     get length() {
       return this._modifications.length
     }
-    translate(t, r) {
-      let n = t + Math.max(r, 0),
-        i = 0,
-        s = 0
-      for (; i < this._modifications.length && this._modifications[i].end < t; )
-        (s += this._modifications[i].localShift), i++
-      let a =
-        (i === this._modifications.length || t < this._modifications[i].start
-          ? t
-          : this._modifications[i].start) + s
-      for (; i < this._modifications.length && this._modifications[i].end < n; )
-        (s += this._modifications[i].localShift), i++
-      let c =
-        (i === this._modifications.length || n < this._modifications[i].start
-          ? n
-          : this._modifications[i].start + this._modifications[i].origLength) +
-        s
-      return [a, c - a]
+    translate(position, length) {
+      let endPosition = position + Math.max(length, 0),
+        index = 0,
+        offset = 0
+      for (; index < this._modifications.length && this._modifications[index].end < position; )
+        (offset += this._modifications[index].localShift), index++
+      let translatedStart =
+        (index === this._modifications.length || position < this._modifications[index].start
+          ? position
+          : this._modifications[index].start) + offset
+      for (; index < this._modifications.length && this._modifications[index].end < endPosition; )
+        (offset += this._modifications[index].localShift), index++
+      let translatedEnd =
+        (index === this._modifications.length || endPosition < this._modifications[index].start
+          ? endPosition
+          : this._modifications[index].start + this._modifications[index].origLength) +
+        offset
+      return [translatedStart, translatedEnd - translatedStart]
     }
-    apply(t, r, n, i) {
-      let s = 0,
-        o,
-        a,
-        l,
-        c = r,
-        u = 0,
-        f
-      for (; s < this._modifications.length && this._modifications[s].end < r; )
-        s++
+    apply(sequenceNumber, startPosition, originalLength, newLength) {
+      let index = 0,
+        modification,
+        modificationLength,
+        modificationOrigLength,
+        currentPosition = startPosition,
+        processedLength = 0,
+        startIndex
+      for (; index < this._modifications.length && this._modifications[index].end < startPosition; )
+        index++
       if (
-        ((f = s),
-        s < this._modifications.length && this._modifications[s].start <= r)
+        ((startIndex = index),
+        index < this._modifications.length && this._modifications[index].start <= startPosition)
       ) {
-        ;(o = this._modifications[s]), (a = o.length), (l = o.origLength)
-        let p = c - o.start
-        ;(0, OIe.assert)(p <= o.length)
-        let g = Math.min(o.length - p, n - u)
-        ;(a -= g), (u += g), (c = o.end), ++s
-      } else (o = new S9(t, r, 0, 0)), (a = 0), (l = 0)
-      for (; s < this._modifications.length && u < n; s++) {
-        let p = this._modifications[s],
-          g = p.start - c,
-          m = Math.min(g, n - u)
-        if (((l += m), (u += m), c + m < p.start)) break
-        let y = Math.min(p.length, n - u)
-        ;(a += p.length - y), (u += y), (l += p.origLength), (c = p.end)
+        ;(modification = this._modifications[index]), (modificationLength = modification.length), (modificationOrigLength = modification.origLength)
+        let positionOffset = currentPosition - modification.start
+        ;(0, OIe.assert)(positionOffset <= modification.length)
+        let overlapLength = Math.min(modification.length - positionOffset, originalLength - processedLength)
+        ;(modificationLength -= overlapLength), (processedLength += overlapLength), (currentPosition = modification.end), ++index
+      } else (modification = new Modification(sequenceNumber, startPosition, 0, 0)), (modificationLength = 0), (modificationOrigLength = 0)
+      for (; index < this._modifications.length && processedLength < originalLength; index++) {
+        let currentMod = this._modifications[index],
+          gapLength = currentMod.start - currentPosition,
+          gapToProcess = Math.min(gapLength, originalLength - processedLength)
+        if (((modificationOrigLength += gapToProcess), (processedLength += gapToProcess), currentPosition + gapToProcess < currentMod.start)) break
+        let modOverlap = Math.min(currentMod.length, originalLength - processedLength)
+        ;(modificationLength += currentMod.length - modOverlap), (processedLength += modOverlap), (modificationOrigLength += currentMod.origLength), (currentPosition = currentMod.end)
       }
       for (
-        o.length = a + i,
-          o.origLength = l + (n - u),
-          o.seq = t,
-          this._modifications.splice(f, s - f, o),
-          s = f + 1;
-        s < this._modifications.length;
-        s++
+        modification.length = modificationLength + newLength,
+          modification.origLength = modificationOrigLength + (originalLength - processedLength),
+          modification.seq = sequenceNumber,
+          this._modifications.splice(startIndex, index - startIndex, modification),
+          index = startIndex + 1;
+        index < this._modifications.length;
+        index++
       )
-        this._modifications[s].start += i - n
-      this._seq = t
+        this._modifications[index].start += newLength - originalLength
+      this._seq = sequenceNumber
     }
-    merge(t) {
-      for (let r of t._modifications)
-        this.apply(r.seq, r.start, r.origLength, r.length)
+    merge(otherTracker) {
+      for (let mod of otherTracker._modifications)
+        this.apply(mod.seq, mod.start, mod.origLength, mod.length)
     }
     advance() {
-      for (let t of this._modifications) t.origLength = t.length
+      for (let mod of this._modifications) mod.origLength = mod.length
     }
     getEdits() {
-      let t = [],
-        r = 0
-      for (let n of this._modifications)
-        t.push(new mC(n.seq, n.start, n.length, n.start + r, n.origLength)),
-          (r += n.localShift)
-      return t
+      let edits = [],
+        offset = 0
+      for (let mod of this._modifications)
+        edits.push(new Chunk(mod.seq, mod.start, mod.length, mod.start + offset, mod.origLength)),
+          (offset += mod.localShift)
+      return edits
     }
-    countChunks(t) {
+    countChunks(chunkSize) {
       if (this._modifications.length === 0) return 0
-      let r = this._modifications.at(-1).end
-      return this.getChunks(t, r).length
+      let documentLength = this._modifications.at(-1).end
+      return this.getChunks(chunkSize, documentLength).length
     }
-    getChunks(t, r) {
+    getChunks(chunkSize, documentLength) {
       if (this._modifications.length === 0) return []
-      let n = new Array(),
-        i,
-        s = 0
-      for (let a of this._modifications) {
-        let l = mC.fromMod(a, s)
+      let chunks = new Array(),
+        currentChunk,
+        offset = 0
+      for (let mod of this._modifications) {
+        let edit = Chunk.fromMod(mod, offset)
         if (
-          ((s += a.localShift),
-          i !== undefined &&
-            (l.start - i.start >= t ||
-              (l.end - i.start > t && l.length <= t)) &&
-            (n.push(i), (i = undefined)),
-          i === undefined)
+          ((offset += mod.localShift),
+          currentChunk !== undefined &&
+            (edit.start - currentChunk.start >= chunkSize ||
+              (edit.end - currentChunk.start > chunkSize && edit.length <= chunkSize)) &&
+            (chunks.push(currentChunk), (currentChunk = undefined)),
+          currentChunk === undefined)
         )
-          i = new mC(l.seq, l.start, 0, l.origStart, 0)
+          currentChunk = new Chunk(edit.seq, edit.start, 0, edit.origStart, 0)
         else {
-          let f = l.start - i.end
-          ;(i.length += f), (i.origLength += f)
+          let gap = edit.start - currentChunk.end
+          ;(currentChunk.length += gap), (currentChunk.origLength += gap)
         }
-        let c = l.length,
-          u = Math.min(c, t - i.length)
-        ;(i.length += u),
-          (i.origLength += l.origLength),
-          (i.seq = Math.max(i.seq, l.seq))
-        for (let f = u; f < c; f += u) {
-          n.push(i)
-          let p = l.start + f
-          ;(i = new mC(l.seq, p, 0, l.origEnd, 0)),
-            (u = Math.min(c - f, t)),
-            (i.length += u)
+        let editLength = edit.length,
+          lengthToAdd = Math.min(editLength, chunkSize - currentChunk.length)
+        ;(currentChunk.length += lengthToAdd),
+          (currentChunk.origLength += edit.origLength),
+          (currentChunk.seq = Math.max(currentChunk.seq, edit.seq))
+        for (let index = lengthToAdd; index < editLength; index += lengthToAdd) {
+          chunks.push(currentChunk)
+          let newChunkStart = edit.start + index
+          ;(currentChunk = new Chunk(edit.seq, newChunkStart, 0, edit.origEnd, 0)),
+            (lengthToAdd = Math.min(editLength - index, chunkSize)),
+            (currentChunk.length += lengthToAdd)
         }
       }
       return (
-        i !== undefined && n.push(i), this._widen(n, t, r), this._validateChunks(n)
+        currentChunk !== undefined && chunks.push(currentChunk), this._widen(chunks, chunkSize, documentLength), this._validateChunks(chunks)
       )
     }
-    _widen(t, r, n) {
-      let i = 0
-      for (let s = 0; s < t.length; s++) {
-        let o = t[s],
-          a = s + 1 === t.length ? n : t[s + 1].start,
-          l = r - o.length,
-          c,
-          u,
-          f = Math.floor(o.start - l / 2)
-        f <= i
-          ? ((c = i), (u = Math.min(c + r, a)))
-          : ((u = Math.min(f + r, a)), (c = Math.max(u - r, i))),
-          o.setStart(c),
-          o.setEnd(u),
-          (i = u)
+    _widen(chunks, chunkSize, documentLength) {
+      let lastEnd = 0
+      for (let index = 0; index < chunks.length; index++) {
+        let chunk = chunks[index],
+          nextStart = index + 1 === chunks.length ? documentLength : chunks[index + 1].start,
+          remainingSpace = chunkSize - chunk.length,
+          newStart,
+          newEnd,
+          idealStart = Math.floor(chunk.start - remainingSpace / 2)
+        idealStart <= lastEnd
+          ? ((newStart = lastEnd), (newEnd = Math.min(newStart + chunkSize, nextStart)))
+          : ((newEnd = Math.min(idealStart + chunkSize, nextStart)), (newStart = Math.max(newEnd - chunkSize, lastEnd))),
+          chunk.setStart(newStart),
+          chunk.setEnd(newEnd),
+          (lastEnd = newEnd)
       }
     }
-    _validateChunks(t) {
-      let r = new Array()
-      for (let n of t)
-        n.origStart > n.origEnd
-          ? e._logger.error("invalid chunk: ", JSON.stringify(n))
-          : r.push(n)
-      return r
+    _validateChunks(chunks) {
+      let validChunks = new Array()
+      for (let chunk of chunks)
+        chunk.origStart > chunk.origEnd
+          ? ChangeTracker._logger.error("invalid chunk: ", JSON.stringify(chunk))
+          : validChunks.push(chunk)
+      return validChunks
     }
   }
 var VIe = 6,
@@ -118320,7 +118320,7 @@ var VIe = 6,
       this.appliedSeq = sequenceNumber
       ;(this.recentChangesets = new CircularBuffer(HIe)),
         this.addChangeset(sequenceNumber),
-        (this.changesSinceUpload = new AC())
+        (this.changesSinceUpload = new ChangeTracker())
     }
     uploadedBlobName
     uploadedSeq
@@ -118384,7 +118384,7 @@ var VIe = 6,
       for (let changeset of this.recentChangesets) changeset.changeTracker.advance()
     }
     addChangeset(sequenceNumber) {
-      this.recentChangesets.addItem({ initialSeq: sequenceNumber, changeTracker: new AC() })
+      this.recentChangesets.addItem({ initialSeq: sequenceNumber, changeTracker: new ChangeTracker() })
     }
     purgeChangesets(sequenceNumber) {
       let purgedCount = 0
@@ -118535,7 +118535,7 @@ var OpenFileManager = class OpenFileManager extends DisposableContainer {
         true)
   }
   getRecencySummary(chunkSize) {
-    let folderBlobMap = new Map(),
+    let folderBlobMap = new Map(), // =
       recentChunks = new Array()
     for (let [folderId, folderMap] of this._trackedFolders) {
       let pathBlobMap = new Map()
@@ -118720,7 +118720,7 @@ var OpenFileManager = class OpenFileManager extends DisposableContainer {
       return [document, document.inProgressUpload]
   }
   _tryEnqueueUpload(folderId, pathName, reason, documentObj) {
-    let document = documentObj ?? this._getDocument(folderId, pathName)
+    let document = documentObj ?? this._getDocument(folderId, pathName) // =
     document !== undefined &&
       (document.uploadRequested ||
         (document.appliedSeq !== document.uploadedSeq &&
@@ -118753,10 +118753,10 @@ var OpenFileManager = class OpenFileManager extends DisposableContainer {
   _enqueueUpload(folderId, pathName, documentKey) {
     this._uploadQueue.insert([folderId, pathName, documentKey]) &&
       (this._logger.verbose(`enqueue upload: ${folderId}:${pathName}`),
-      this._uploadQueue.kick())
+      this._uploadQueue.kick()) // =
   }
   async _upload(uploadInfo) {
-    if (uploadInfo === undefined) return
+    if (uploadInfo === undefined) return // =
     let [folderId, pathName, documentKey] = uploadInfo,
       document = this._getDocument(folderId, pathName, documentKey)
     if (document === undefined) {
@@ -118784,7 +118784,7 @@ var OpenFileManager = class OpenFileManager extends DisposableContainer {
       uploadSeq: document.appliedSeq,
       blobName: blobName,
       savedChangeset: savedChangeset,
-      changesSinceUpload: new AC(),
+      changesSinceUpload: new ChangeTracker(),
     }),
       document.advanceAll(),
       (document.uploadedBlobName = undefined)
@@ -118793,7 +118793,7 @@ var OpenFileManager = class OpenFileManager extends DisposableContainer {
       this._logger.verbose(`upload: begin; ${folderId}:${pathName}, ${blobName}`)
       let startTime = Date.now()
       result = await retryOperation(async () => {
-        if (!(Date.now() - startTime > Jbt) && this._validateInProgressUpload(folderId, pathName, documentKey))
+        if (!(Date.now() - startTime > Jbt) && this._validateInProgressUpload(folderId, pathName, documentKey)) // =
           return this._apiServer.memorize(pathName, fileContent, blobName, [])
       }, this._logger)
     } catch (error) {
@@ -118959,7 +118959,7 @@ var WIe = require("buffer")
 var F2 = class {
   constructor(t, r) {
     this._fileReader = r
-    this._blobNameCalculator = new lh(t)
+    this._blobNameCalculator = new HashCalculator(t)
   }
   _blobNameCalculator
   get maxBlobSize() {
@@ -119799,11 +119799,11 @@ var SourceFolder = class extends DisposableContainer {
       this._tracker?.dispose(), (this._tracker = undefined)
     }
     setTracker(tracker) {
-      if (this.stopped) throw new Error("Source folder has been disposed")
+      if (this.stopped) throw new Error("Source folder has been disposed") // =
       this._disposeTracker(), (this._tracker = tracker)
     }
     get tracker() {
-      return this._tracker
+      return this._tracker // =
     }
     get initialEnumerationComplete() {
       return this._initialEnumerationComplete
@@ -120263,7 +120263,7 @@ var WorkspaceManager = class WorkspaceManager extends DisposableContainer {
     )
   }
   _reportSyncingProgress(sourceFolder) {
-    this._syncingProgressEmitter.fire(this._getSyncingProgress(sourceFolder.folderRoot, sourceFolder))
+    this._syncingProgressEmitter.fire(this._getSyncingProgress(sourceFolder.folderRoot, sourceFolder)) // =
   }
   _getSyncingProgress(folderRoot, sourceFolder) {
     let progress = sourceFolder?.initialEnumerationComplete
@@ -120611,7 +120611,7 @@ var WorkspaceManager = class WorkspaceManager extends DisposableContainer {
     return Promise.resolve()
   }
   async _startTracking(folderPath, trackedFolder) {
-    let startupMetrics = new l2("Startup metrics"),
+    let startupMetrics = new l2("Startup metrics"), // =
       cancellationSource = trackedFolder.cancel,
       sourceFolder = await this._createSourceFolder(folderPath, trackedFolder, cancellationSource.token)
     if (cancellationSource.token.isCancellationRequested) {
@@ -120747,7 +120747,7 @@ var WorkspaceManager = class WorkspaceManager extends DisposableContainer {
     sourceFolder.logger.debug(`Refreshing source folder ${sourceFolder.folderName}`)
     let tracker = await this._createSourceFolderTracker(sourceFolder, startupMetrics)
     try {
-      sourceFolder.setTracker(tracker)
+      sourceFolder.setTracker(tracker) // =
     } catch (error) {
       sourceFolder.logger.info(
         `Failed to install SourceFolderTracker for ${sourceFolder.folderName}: ${getErrorMessage(error)}`,
@@ -120769,7 +120769,7 @@ var WorkspaceManager = class WorkspaceManager extends DisposableContainer {
     if (tracker === undefined) return
     let nextEntryTimestamp = this._pathMap.nextEntryTS,
       enumerationResult = await tracker.pathNotifier.enumeratePaths()
-    if (!sourceFolder.stopped)
+    if (!sourceFolder.stopped) // =
       return (
         startupMetrics?.charge("enumerate paths"),
         this._pathMap.purge(sourceFolder.folderId, nextEntryTimestamp),
@@ -120826,7 +120826,7 @@ var WorkspaceManager = class WorkspaceManager extends DisposableContainer {
     )
   }
   _trackFileEdits(sourceFolder) {
-    if (
+    if ( // =
       (sourceFolder.logger.debug(`_trackFileEdits was called on ${sourceFolder.folderName}`),
       this._fileEditManager === undefined)
     ) {
@@ -120841,7 +120841,7 @@ var WorkspaceManager = class WorkspaceManager extends DisposableContainer {
     )
   }
   _trackVcsRepo(sourceFolder, pathFilter) {
-    if (
+    if ( // =
       (sourceFolder.logger.debug(`_trackVcsRepo was called on ${sourceFolder.folderName}`),
       this._vcsWatcher === undefined)
     ) {
@@ -120885,7 +120885,7 @@ var WorkspaceManager = class WorkspaceManager extends DisposableContainer {
   }
   _trackOpenDocuments(sourceFolder) {
     let trackedPaths = this._openFileManager.getTrackedPaths(sourceFolder.folderId)
-    for (let path of trackedPaths)
+    for (let path of trackedPaths) // =
       sourceFolder.acceptsPath(path) || this._openFileManager.stopTracking(sourceFolder.folderId, path)
     St.workspace.textDocuments.forEach((document) => {
       this._trackDocument(sourceFolder, document) !== undefined &&
@@ -120895,7 +120895,7 @@ var WorkspaceManager = class WorkspaceManager extends DisposableContainer {
           document: document,
         })
     }),
-      St.workspace.notebookDocuments.forEach((document) => {
+      St.workspace.notebookDocuments.forEach((document) => { // =
         this._trackDocument(sourceFolder, document)
       })
   }
@@ -121004,7 +121004,7 @@ var WorkspaceManager = class WorkspaceManager extends DisposableContainer {
   }
   getContextWithBlobNames() {
     let context = this.getContext()
-    return context.blobNames !== undefined
+    return context.blobNames !== undefined // =
       ? context
       : { ...context, blobNames: this._blobsCheckpointManager.expandBlobs(context.blobs) }
   }
@@ -122012,7 +122012,7 @@ var AugmentExtension = class e extends DisposableContainer {
         this._modelInfo.suggestedSuffixCharCount,
       ))
     let maxUploadSizeBytes = this.featureFlagManager.currentFlags.maxUploadSizeBytes
-    ;(this._blobNameCalculator = new lh(maxUploadSizeBytes)),
+    ;(this._blobNameCalculator = new HashCalculator(maxUploadSizeBytes)),
       (this.workspaceManager = new WorkspaceManager(
         this._actionsModel,
         new ExternalSourceFoldersManager(this._extensionContext.workspaceState),
@@ -122031,7 +122031,7 @@ var AugmentExtension = class e extends DisposableContainer {
       )),
       this.disposeOnDisable.push(this.workspaceManager)
     let reportSourceFoldersDebounced = (0, ZIe.debounce)(() => {
-      let sourceFoldersReport = this.workspaceManager?.getSourceFoldersReportDetails()
+      let sourceFoldersReport = this.workspaceManager?.getSourceFoldersReportDetails() // =
       sourceFoldersReport !== undefined && this._extensionEventReporter.reportSourceFolders(sourceFoldersReport)
     }, 5e3)
     this.disposeOnDisable.push(
@@ -122218,7 +122218,7 @@ var AugmentExtension = class e extends DisposableContainer {
                 throw Error("Workspace manager is undefined")
               if (this._agentCheckpointManager === undefined)
                 throw Error("Checkpoint manager is undefined")
-              runAutomaticOrientation(
+              runAutomaticOrientation( // =
                 this._apiServer,
                 this.workspaceManager,
                 this.featureFlagManager,
