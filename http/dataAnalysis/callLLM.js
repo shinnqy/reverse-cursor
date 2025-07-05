@@ -2,11 +2,12 @@
 
 const path = require('path');
 const fs = require('fs');
+const { encoding_for_model } = require('tiktoken');
 const { EndPoint, config } = require('./config');
 
 const envContent = fs.readFileSync(path.resolve(__dirname, './.env'), { encoding: 'utf-8' });
 const envObject = {};
-envContent.split('\n').forEach(line => {
+envContent.split('\n').forEach((line) => {
   const [key, value] = line.split(': ');
   if (!key.trim()) {
     return;
@@ -42,17 +43,18 @@ const modelMap = {
 
 const defaultEndpoint = config.endpointType;
 
-async function completion(code = "hi", endpoint = defaultEndpoint) {
+async function completion(code = 'hi', endpoint = defaultEndpoint) {
   const useOpenAICompatible = endpoint !== EndPoint.GPT35;
   const stream = false;
   const startTime = performance.now();
+  // console.log({endpoint, useOpenAICompatible, duration: 'Starting....'})
 
   let fetchRes;
   if (useOpenAICompatible) {
     fetchRes = await fetch(urlMap[endpoint], {
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': AuthorizationMap[endpoint],
+        Authorization: AuthorizationMap[endpoint],
       },
       method: 'POST',
       body: JSON.stringify({
@@ -60,22 +62,22 @@ async function completion(code = "hi", endpoint = defaultEndpoint) {
         stream,
         temperature: 0,
         messages: [
-          // {
-          //   role: 'system',
-          //   content: 'You are an expert of coding. Please help me to generate the next code.'
-          // },
+          {
+            role: 'system',
+            content: 'You are Codex, a code completion language model. Continue the code presented to you.',
+          },
           {
             role: 'user',
-            content: code
-          }
+            content: code,
+          },
         ],
-      })
+      }),
     });
   } else {
     fetchRes = await fetch(completionUrl, {
       headers: {
         'Content-Type': 'application/json',
-        'api-key': envObject['AZURE_OPENAI_KEY']
+        'api-key': envObject['AZURE_OPENAI_KEY'],
       },
       method: 'POST',
       body: JSON.stringify({
@@ -88,10 +90,10 @@ async function completion(code = "hi", endpoint = defaultEndpoint) {
           // },
           {
             role: 'user',
-            content: code
-          }
+            content: code,
+          },
         ],
-      })
+      }),
     });
   }
 
@@ -106,7 +108,7 @@ async function completion(code = "hi", endpoint = defaultEndpoint) {
     let lastDataOfPreviousChunk = null;
     for await (const chunk of fetchRes.body) {
       const rawData = decoder.decode(chunk, { stream: true });
-      const dataList = rawData.split('\n').filter(i => !!i);
+      const dataList = rawData.split('\n').filter((i) => !!i);
 
       for (let i = 0; i < dataList.length; i++) {
         const dataItem = dataList[i];
@@ -124,10 +126,10 @@ async function completion(code = "hi", endpoint = defaultEndpoint) {
             try {
               processDataStr(dataStr);
             } catch (e) {
-              console.log({error: e})
+              console.log({ error: e });
             }
           } else {
-            lastDataOfPreviousChunk = dataItem
+            lastDataOfPreviousChunk = dataItem;
           }
         }
       }
@@ -137,7 +139,7 @@ async function completion(code = "hi", endpoint = defaultEndpoint) {
      * @param {string} dataStr
      */
     function processDataStr(dataStr) {
-      const dataObj= JSON.parse(dataStr);
+      const dataObj = JSON.parse(dataStr);
       if (Array.isArray(dataObj.choices) && dataObj.choices.length > 0) {
         /**
          * @type {{ delta: { content: string; role: 'assistant' | 'user' | 'system' } }}
@@ -147,7 +149,7 @@ async function completion(code = "hi", endpoint = defaultEndpoint) {
         if (typeof text === 'string') {
           fullText += text;
         }
-        console.log({text})
+        console.log({ text });
       }
     }
 
@@ -157,15 +159,24 @@ async function completion(code = "hi", endpoint = defaultEndpoint) {
       const res = await fetchRes.json();
 
       const endTime = performance.now();
-      console.log('Duration LLM call: ', endTime - startTime);
+      const tokenLength = countTokens(code);
+      const duration = endTime - startTime;
+      console.log({ endpoint, useOpenAICompatible, contentLength: code.length, tokenLength: tokenLength, duration });
 
       const data = res.choices[0].message.content;
-      return data
-    } catch(e) {
+      return data;
+    } catch (e) {
       console.error(e);
       return null;
     }
   }
+}
+
+function countTokens(text) {
+  const enc = encoding_for_model('gpt-4');
+  const tokens = enc.encode(text);
+  enc.free();
+  return tokens.length;
 }
 
 module.exports = {

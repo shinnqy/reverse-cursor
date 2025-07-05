@@ -82,10 +82,15 @@ Rewrite the code ${TASK_DETAIL_BY_CONFIG.OUTPUT_RANGE} according to the followin
 3. Preserve original functionality
 4. Apply changes to entire code regardless of cursor position
 5. Focus on code after cursor position at <|current_cursor_position|>
+6. Keep the latest one user change.
 
 # Output Format
 Return ONLY the rewritten code ${TASK_DETAIL_BY_CONFIG.OUTPUT_RANGE} without any other words.
-Never use markdown formatting like \`\`\`. Return raw text only.`;
+Never use markdown formatting like \`\`\`. Return raw text only.
+
+# Response:
+<rewritten code>
+`;
 // As ${systemPromptPrefix}, your role is to analyze what the user has been doing and then to output the code ${TASK_DETAIL_BY_CONFIG.OUTPUT_RANGE} with the updated changes without any other words:`;
 // ================ prompt template ================
 
