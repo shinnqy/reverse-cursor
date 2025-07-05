@@ -8,38 +8,38 @@ function replaceStringFromPosition(originalStr, lineNumber, columnNumber, replac
   const lines = originalStr.split('\n');
 
   if (lineNumber < 0 || lineNumber > lines.length - 1) {
-      console.error('invalid line number')
-      return;
+    console.error('invalid line number');
+    return;
   }
 
   let targetLine = lines[lineNumber];
 
   if (columnNumber > targetLine.length) {
-      const needColumnCount = columnNumber - targetLine.length;
-      targetLine = targetLine.padEnd(needColumnCount, ' ');
+    const needColumnCount = columnNumber - targetLine.length;
+    targetLine = targetLine.padEnd(needColumnCount, ' ');
   }
 
   if (columnNumber < 0) {
-      throw new Error('Invalid column number');
+    throw new Error('Invalid column number');
   }
 
   lines[lineNumber] = targetLine;
 
   let position = 0;
   for (let i = 0; i < lineNumber - 2; i++) {
-      position += lines[i].length + 1; // +1 是为了包括换行符
+    position += lines[i].length + 1; // +1 是为了包括换行符
   }
   position += columnNumber;
 
   const originalArray = lines.join('\n').split('');
 
   for (let i = 0; i < replacementStr.length; i++) {
-      if (position + i < originalArray.length) {
-          originalArray[position + i] = replacementStr[i];
-      } else {
-          // 如果超出原始字符串长度，直接追加字符
-          originalArray.push(replacementStr[i]);
-      }
+    if (position + i < originalArray.length) {
+      originalArray[position + i] = replacementStr[i];
+    } else {
+      // 如果超出原始字符串长度，直接追加字符
+      originalArray.push(replacementStr[i]);
+    }
   }
 
   return originalArray.join('');
@@ -98,5 +98,25 @@ function replaceStringBasedOnSuggestion(originalStr, acceptedSuggestion, shouldS
   };
 }
 
+/**
+ *
+ * @param {string} originalContent
+ * @param {string} replacedText
+ * @param {number} cursorLineNumberZeroIndex
+ */
+function replaceEditableRangeContent(originalContent, replacedText, cursorLineNumberZeroIndex) {
+  const lines = originalContent.split('\n');
+  const startLineNumber = Math.max(cursorLineNumberZeroIndex - EDITABLE_RANGE_FROM_CURSOR_LINE, 0);
+  const endLineNumber = Math.min(cursorLineNumberZeroIndex + EDITABLE_RANGE_FROM_CURSOR_LINE, lines.length - 1);
+
+  const prefixLines = lines.slice(0, startLineNumber);
+  const suffixLines = lines.slice(endLineNumber);
+  const replacedLines = replacedText.split('\n');
+  const finalLines = [...prefixLines, ...replacedLines, ...suffixLines];
+  const res = finalLines.join('\n');
+  return res;
+}
+
 exports.replaceStringFromPosition = replaceStringFromPosition;
 exports.replaceStringBasedOnSuggestion = replaceStringBasedOnSuggestion;
+exports.replaceEditableRangeContent = replaceEditableRangeContent;

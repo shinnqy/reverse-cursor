@@ -7,7 +7,7 @@ const { replaceStringFromPosition, replaceStringBasedOnSuggestion } = require('.
 const { generatePredictionPrompt, generatePrompt } = require('./generatePrompt');
 
 /**
- * @typedef {{ generateUuid?: string; generationUUID?: string; timestamp: string; partialData?: any; firstChunkValue?: string; fullText?: string; fusedCursorPrediction?: any, isFusedCursorPredictionModel?: boolean, predictionId?: string, action?: string, suggestion?: any }} ICursorPayload
+ * @typedef {{ generateUuid?: string; generationUUID?: string; timestamp: string; partialData?: any; firstChunkValue?: string; fullText?: string; fusedCursorPrediction?: any, isFusedCursorPredictionModel?: boolean, predictionId?: string, action?: string, suggestion?: any, beforeCode?: string; afterCode?: string }} ICursorPayload
  */
 /**
  * @param {{ data: Array<ICursorPayload>; byUUIDFolder: string; key: string;deprecatedCompleteDatasetJSONLFilePath: string; predictionDatasetJSONLFilePath: string }} params
@@ -27,6 +27,12 @@ function generateDataset(params) {
   const displayedFusedCursorPrediction = data.find(
     (i) => i.action === 'displayFusedCursorPrediction'
   )?.fusedCursorPrediction;
+  const beforeCodeItemList = data.filter(
+    (i) => i.action === 'before apply'
+  );
+  const afterCodeItemList = data.filter(
+    (i) => i.action === 'after apply'
+  );
   const fusedCursorPredictionPredictionId = data.find((i) => !!i.predictionId)?.predictionId;
   const acceptedSuggestionList = data.filter((i) => i.action === 'press Tab to acceptFullSuggestion and succeed');
   const firstChunkAcceptSuggestion = acceptedSuggestionList[0]?.suggestion;
@@ -117,6 +123,8 @@ function generateDataset(params) {
     fusedCursorPrediction,
     displayedFusedCursorPrediction,
     firstChunkValue,
+    beforeCodeItemList,
+    afterCodeItemList,
     replacedContentsWithFirstChunk,
     // replacedContentsWithFirstChunkWithCursorPosition,
     replacedContentsWithFullText,
@@ -139,11 +147,24 @@ function outputPreview(params) {
     fusedCursorPrediction,
     displayedFusedCursorPrediction,
     firstChunkValue,
+    beforeCodeItemList,
+    afterCodeItemList,
     replacedContentsWithFirstChunk,
     // replacedContentsWithFirstChunkWithCursorPosition,
     replacedContentsWithFullText,
     fullText,
   } = params;
+
+const beforeAndAfterCodePairs = [];
+if (beforeCodeItemList.length) {
+  for (let i = 0; i < beforeCodeItemList.length; i++) {
+    beforeAndAfterCodePairs.push({
+      beforeCode: beforeCodeItemList[i],
+      afterCode: afterCodeItemList[i],
+    });
+  }
+}
+
 
 const data =
 (`${JSON.stringify(currentCursorPosition)}
@@ -152,26 +173,41 @@ const data =
 ${currentFileContentsWithToFill}
 -------------------------------[               firstChunkValue               ]--------------------------------
 ${firstChunkValue}`)
+
 + (replacedContentsWithFirstChunk ?
 `
 -------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------
 ${replacedContentsWithFirstChunk}`
 : '')
+
 + (fullText ?
 `
 -------------------------------[                   fullText                  ]--------------------------------
 ${fullText}`
 : '')
+
 + (replacedContentsWithFullText ?
 `
 -------------------------------[         replacedContentsWithFullText         ]--------------------------------
 ${replacedContentsWithFullText}`
 : '')
+
++ (beforeAndAfterCodePairs.length ? beforeAndAfterCodePairs.map(pair => {
+  const { beforeCode, afterCode } = pair;
+  return `
+-------------------------------[                  beforeCode                 ]--------------------------------
+${beforeCode.beforeCode}
+-------------------------------[                  afterCode                  ]--------------------------------
+${afterCode.afterCode}
+`;
+}) : '')
+
 + (fusedCursorPrediction ?
 `
 -------------------------------[             fusedCursorPrediction            ]--------------------------------
 ${JSON.stringify(fusedCursorPrediction, null, 2)}`
 : '')
+
 + (displayedFusedCursorPrediction ?
 `
 --------------------------------[        displayedFusedCursorPrediction       ]---------------------------------

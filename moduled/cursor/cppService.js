@@ -3512,7 +3512,37 @@ export function createCppService(params) {
         { changes: textChanges } = await this.diffingService.wordDiff(originalText, replaceText)
       if (isAborted) return { type: Sp.NotAccepted }
       const acceptAllChanges = async (range) => {
+          // 记录 apply 前的代码
+          const beforeCode = editorModel.getValue()
+          const beforeCursorPosition = editor.getPosition();
+          console.log("=== BEFORE APPLY ===")
+          console.log(beforeCode)
+          fetch('http://localhost:3000', {
+            method: 'POST',
+            body: JSON.stringify({
+              action: 'before apply',
+              beforeCode,
+              beforeCursorPosition,
+              generationUUID: suggestion.requestId,
+            }),
+          });
+
           this.updateVisibleSuggestionText(editor, textChanges, range, editorModel, suggestion.undoRedoGroup, eol)
+
+          const afterCode = editorModel.getValue();
+          const afterCursorPosition = editor.getPosition();
+          console.log("=== AFTER APPLY (Full File) ===")
+          console.log(afterCode)
+          fetch('http://localhost:3000', {
+            method: 'POST',
+            body: JSON.stringify({
+              action: 'after apply',
+              afterCode,
+              afterCursorPosition,
+              generationUUID: suggestion.requestId,
+            }),
+          });
+
           const { wordDiffs, charDiffs } = computeDiffs(
               suggestion.originalText ?? "",
               replaceText,

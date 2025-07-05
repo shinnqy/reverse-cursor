@@ -21,7 +21,7 @@ function main(logFileName) {
   formatLogIntoJSON(logPath, formattedJSONPath);
 
   const promptFilePathList = formatByGeneratedUUID(formattedJSONPath);
-  batchEvaluateByUUID(specificLogFolderPath);
+  // batchEvaluateByUUID(specificLogFolderPath);
 
   batchInvokeLLMAndEvaluate(promptFilePathList, specificLogFolderPath);
 }
@@ -125,6 +125,7 @@ function formatByGeneratedUUID(formattedJSONPath) {
   fs.writeFileSync(predictionDatasetJSONLFilePath, '', { encoding: 'utf-8' });
 
   const promptFilePathList = [];
+  const firstChunkDurationList = [];
 
   const mapList = Object.entries(map);
   mapList.forEach(item => {
@@ -138,7 +139,10 @@ function formatByGeneratedUUID(formattedJSONPath) {
     const subItemPath = path.join(byUUIDFolder, `${key}.json`);
     fs.writeFileSync(subItemPath, JSON.stringify(item[1], null, 2), { encoding: "utf-8" });
 
-    const { promptFilePath } = generateDataset({data, byUUIDFolder, key, deprecatedCompleteDatasetJSONLFilePath, predictionDatasetJSONLFilePath});
+    const { promptFilePath, firstChunkDuration } = generateDataset({data, byUUIDFolder, key, deprecatedCompleteDatasetJSONLFilePath, predictionDatasetJSONLFilePath});
+    if (typeof firstChunkDuration === 'number') {
+      firstChunkDurationList.push(firstChunkDuration);
+    }
     if (promptFilePath) {
       promptFilePathList.push(promptFilePath);
     }
@@ -151,6 +155,7 @@ function formatByGeneratedUUID(formattedJSONPath) {
   console.log('Accepted suggestions count: ' + countAcceptSuccessfully);
   console.log('All Displayed suggestions count: ' + countDisplayedSuggestion);
   console.log('Accept rate: ', countAcceptSuccessfully / countDisplayedSuggestion);
+  console.log('Average first chunk duration: ', firstChunkDurationList.reduce((a, b) => a + b, 0) / firstChunkDurationList.length);
 
   const dirPath = path.dirname(formattedJSONPath);
   const unProcessedDataPath = path.resolve(dirPath, `./${logFileName}_unprocessed.json`);
