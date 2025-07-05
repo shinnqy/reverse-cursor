@@ -2,9 +2,10 @@
 
 const fs = require('fs');
 const path = require('path');
+const { exec, spawn } = require('child_process');
 const { completion } = require('./callLLM');
 const { config, EndPoint } = require('./config');
-const { replaceStringBasedOnSuggestion } = require('./replaceCode');
+const { replaceStringBasedOnSuggestion, replaceEditableRangeContent } = require('./replaceCode');
 const { getCode } = require('./getCode');
 const { normalizeOutput } = require('./string.utils');
 const { getFileName } = require('./path.utils');
@@ -13,13 +14,14 @@ const endpoint = config.endpointType;
 const id = new Date().toISOString().replace(/:/g, '_');
 
 /**
+ * 先inference拿到结果，再和ground truth进行比较
  * @param {string[]} promptFilePathList
  */
-function batchInvokeLLMAndEvaluate(promptFilePathList, specificLogFolderPath) {
+async function batchInvokeLLMAndEvaluate(promptFilePathList, specificLogFolderPath) {
   const summaryFolderPath = path.join(specificLogFolderPath, `${endpoint}_${id}_output.log`);
   // fs.writeFileSync(summaryFolderPath, '', { encoding: 'utf-8' });
 
-  const promiseList = promptFilePathList.map(promptFilePath => {
+  const promiseList = promptFilePathList.map(async (promptFilePath) => {
     if (!fs.existsSync(promptFilePath)) {
       return;
     }
@@ -31,6 +33,27 @@ function batchInvokeLLMAndEvaluate(promptFilePathList, specificLogFolderPath) {
     const jsonStr = fs.readFileSync(relatedJSONFilePath, { encoding: 'utf-8' });
     const json = JSON.parse(jsonStr);
 
+    // =========== read preview file ===========
+    const previewFilePath = path.join(path.dirname(promptFilePath), `${fileName}.preview`);
+    const previewContent = fs.readFileSync(previewFilePath, { encoding: 'utf-8' });
+    const _tmp = previewContent.split(
+      '-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------\n'
+    )[1];
+    const replacedContentsWithFirstChunk = _tmp.split('\n---')[0];
+    const _tmp2 = _tmp.split(
+      '-------------------------------[         replacedContentsWithFullText         ]--------------------------------\n'
+    )[1];
+    const replacedContentsWithFullText = (_tmp2 || '').split('\n---')[0];
+    const _tmp3_split = _tmp2.split(
+      '-------------------------------[                  afterCode                  ]--------------------------------\n'
+    );
+    const _tmp3 = _tmp3_split[_tmp3_split.length - 1];
+    const lastAfterCode = (_tmp3 || '').split('\n---')[0];
+
+    if (!lastAfterCode) {
+      return;
+    }
+
     // =========== prepare data ===========
     const partialData = json.find((i) => !!i.partialData)?.partialData;
 
@@ -38,64 +61,107 @@ function batchInvokeLLMAndEvaluate(promptFilePathList, specificLogFolderPath) {
     const cursorPosition = partialData.currentFile.cursorPosition;
 
     const input = fs.readFileSync(promptFilePath, { encoding: 'utf-8' });
-    completion(input).then(rawOutput => {
-      if (!rawOutput) {
-        return;
-      }
-      const output = normalizeOutput(rawOutput);
+    const rawOutput = await completion(input);
+    if (!rawOutput) {
+      return;
+    }
+    const output = normalizeOutput(rawOutput);
 
-      const lineCountOfOutput = output.split('\n');
-      const startLineNumber = cursorPosition.line + 1; // zero indexed => one indexed
-      const endLineNumberInclusive = cursorPosition.line + lineCountOfOutput.length + 1;  // zero indexed => one indexed
-      const originalText = getCode(currentFileContents, startLineNumber, endLineNumberInclusive);
+    const replacedOutput = applyOutputIntoRawContent(output, cursorPosition, currentFileContents);
 
-      // =========== generate code by merging originalCode with output snippet ===========
-      const { replacedContents: replacedOutput } = replaceStringBasedOnSuggestion(
-        currentFileContents,
-        {
-          range: {
-            startLineNumber: startLineNumber,
-            startColumn: 0,
-            endLineNumberInclusive: endLineNumberInclusive,
-            endColumn: 0,
-          },
-          replaceText: output,
-          originalText,
-        },
-        config.useEditableRange,
-      );
+    const metricsRes = await calculateMetrics({ groundTruth: lastAfterCode, output: replacedOutput });
+    const { em, es } = metricsRes;
 
-      console.log({output});
-
-      const previewFilePath = path.join(path.dirname(promptFilePath), `${fileName}.preview`);
-      const previewContent = fs.readFileSync(previewFilePath, { encoding: 'utf-8' });
-      const tmp = previewContent.split('-------------------------------[       replacedContentsWithFirstChunk        ]--------------------------------\n')[1];
-      const replacedContentsWithFirstChunk = tmp.split('\n---')[0];
-      const tmp2 = tmp.split('-------------------------------[         replacedContentsWithFullText         ]--------------------------------\n')[1];
-      const replacedContentsWithFullText = (tmp2 || '').split('\n---')[0];
-
-      // ====================== DATA ======================
-      const data =
-`------------------------------------------[        output        ]-------------------------------------------
+    // ====================== DATA ======================
+    const data =
+      `------------------------------------------[        output        ]-------------------------------------------
 ${output}
 ------------------------------------------[    replacedOutput    ]-------------------------------------------
 ${replacedOutput}
+------------------------------------------[    lastAfterCode    ]-------------------------------------------
+${lastAfterCode}
+------------------------------------------[       em & es       ]-------------------------------------------
+em: ${em}
+es: ${es}
 -------------------------------[ groundTruth (replacedContentsWithFirstChunk) ]--------------------------------
 ${replacedContentsWithFirstChunk}
-` + (replacedContentsWithFullText ?
-`-------------------------------[  groundTruth (replacedContentsWithFullText)  ]--------------------------------
+` +
+      (replacedContentsWithFullText
+        ? `-------------------------------[  groundTruth (replacedContentsWithFullText)  ]--------------------------------
 ${replacedContentsWithFullText}`
-: '');
-      // ====================== DATA ======================
+        : '');
+    // ====================== DATA ======================
 
-      const dependentLogPath = path.join(path.dirname(promptFilePath), `${fileName}.result_${endpoint}.log`);
-      fs.writeFileSync(dependentLogPath, data, { encoding: 'utf-8' });
-      // fs.appendFileSync(summaryFolderPath, data, { encoding: 'utf-8' });
+    const dependentLogPath = path.join(path.dirname(promptFilePath), `${fileName}.result_${endpoint}.log`);
+    fs.writeFileSync(dependentLogPath, data, { encoding: 'utf-8' });
+    // fs.appendFileSync(summaryFolderPath, data, { encoding: 'utf-8' });
+  });
+}
+
+/**
+ *
+ * @param {string} output
+ * @param {{ line: number; }} cursorPosition
+ * @param {string} currentFileContents
+ */
+function applyOutputIntoRawContent(output, cursorPosition, currentFileContents) {
+  const res = replaceEditableRangeContent(currentFileContents, output, cursorPosition.line);
+  return res;
+}
+
+/**
+ *
+ * @param {string} output
+ * @param {{ line: number; }} cursorPosition
+ * @param {string} currentFileContents
+ */
+function _applyOutputIntoRawContent(output, cursorPosition, currentFileContents) {
+  const lineCountOfOutput = output.split('\n');
+  const startLineNumber = cursorPosition.line + 1; // zero indexed => one indexed
+  const endLineNumberInclusive = cursorPosition.line + lineCountOfOutput.length + 1; // zero indexed => one indexed
+  const originalText = getCode(currentFileContents, startLineNumber, endLineNumberInclusive);
+
+  // =========== generate code by merging originalCode with output snippet ===========
+  const { replacedContents: replacedOutput } = replaceStringBasedOnSuggestion(
+    currentFileContents,
+    {
+      range: {
+        startLineNumber: startLineNumber,
+        startColumn: 0,
+        endLineNumberInclusive: endLineNumberInclusive,
+        endColumn: 0,
+      },
+      replaceText: output,
+      originalText,
+    },
+    config.useEditableRange
+  );
+
+  return replacedOutput;
+}
+
+/**
+ *
+ * @param {{ groundTruth: string, output: string }} params
+ * @returns {Promise<{ em: string, es: string }>}
+ */
+function calculateMetrics(params) {
+  const { output, groundTruth } = params;
+  return new Promise((resolve) => {
+    exec(`python ./eval_metric.py --output='${output}' --ground_truth='${groundTruth}'`, (err, stdout, stderr) => {
+      if (err) {
+        console.error(err);
+        return;
+      }
+
+      const result = JSON.parse(stdout);
+      resolve(result);
     });
   });
 }
 
 /**
+ * @deprecated
  * @param {string} specificLogFolderPath
  */
 function batchEvaluateByUUID(specificLogFolderPath) {
@@ -103,24 +169,28 @@ function batchEvaluateByUUID(specificLogFolderPath) {
   fs.writeFileSync(summaryFolderPath, '', { encoding: 'utf-8' });
 
   const fileList = fs.readdirSync(path.join(specificLogFolderPath, 'byUUID'));
-  const previewFileList = fileList.filter(f => f.endsWith('.preview'));
+  const previewFileList = fileList.filter((f) => f.endsWith('.preview'));
 
   let totalCount = 0;
   let passCount = 0;
   const promiseList = [];
 
-  previewFileList.forEach(p => {
+  previewFileList.forEach((p) => {
     const previewFilePath = path.join(specificLogFolderPath, 'byUUID', p);
     const content = fs.readFileSync(previewFilePath, { encoding: 'utf-8' });
-    const tmp = content.split('-------------------------------[        currentFileContentsWithToFill        ]--------------------------------\n')[1];
+    const tmp = content.split(
+      '-------------------------------[        currentFileContentsWithToFill        ]--------------------------------\n'
+    )[1];
     const currentFileContentsWithToFill = tmp.split('\n---')[0];
-    const tmp2 = tmp.split('-------------------------------[               firstChunkValue               ]--------------------------------\n')[1];
+    const tmp2 = tmp.split(
+      '-------------------------------[               firstChunkValue               ]--------------------------------\n'
+    )[1];
     const firstChunkValue = (tmp2 || '').split('\n---')[0];
     const originalText = currentFileContentsWithToFill.replace('[ToFill]', '<|current_cursor_position|>');
 
     const fileName = getFileName(previewFilePath);
     const jsonPath = path.join(specificLogFolderPath, 'byUUID', `${fileName}.json`);
-    const jsonContent = fs.readFileSync(jsonPath, {  encoding: 'utf-8' });
+    const jsonContent = fs.readFileSync(jsonPath, { encoding: 'utf-8' });
 
     const hasDisplayCppSuggestionAction = jsonContent.includes(`"action": "displayCppSuggestion"`);
     if (!hasDisplayCppSuggestionAction) {
@@ -132,13 +202,12 @@ function batchEvaluateByUUID(specificLogFolderPath) {
     }
     totalCount++;
 
-    const promise = evaluatePartialOutput(firstChunkValue, originalText).then(rawOutput => {
+    const promise = evaluatePartialOutput(firstChunkValue, originalText).then((rawOutput) => {
       const output = normalizeOutput(rawOutput);
       try {
         const json = JSON.parse(output);
 
-        const data =
-`-------------------------------[                 previewPath                 ]--------------------------------
+        const data = `-------------------------------[                 previewPath                 ]--------------------------------
 ${previewFilePath}
 -------------------------------[        currentFileContentsWithToFill        ]--------------------------------
 ${originalText}
@@ -164,7 +233,7 @@ ${json.Score}
           passCount++;
         }
       } catch (e) {
-        console.error(e)
+        console.error(e);
       }
     });
 
@@ -172,9 +241,8 @@ ${json.Score}
   });
 
   Promise.all(promiseList).then(() => {
-    const summaryData =
-`Pass rate:
-${passCount}/${totalCount} = ${passCount/totalCount}`;
+    const summaryData = `Pass rate:
+${passCount}/${totalCount} = ${passCount / totalCount}`;
     fs.appendFileSync(summaryFolderPath, summaryData, { encoding: 'utf-8' });
   });
 }
@@ -184,8 +252,7 @@ ${passCount}/${totalCount} = ${passCount/totalCount}`;
  * @param {string} originalText
  */
 function evaluatePartialOutput(partialOutput, originalText) {
-  const prompt =
-`You are an expert in coding. Here is the original text with cursor position and the LLM generated code based on that.
+  const prompt = `You are an expert in coding. Here is the original text with cursor position and the LLM generated code based on that.
 '<|current_cursor_position|>' in original text is just to identify the current position of cursor.
 
 # Original text:
@@ -207,7 +274,7 @@ ${partialOutput}
   "Score": "<score>"
 }`;
 
-  return completion(prompt, EndPoint.DeepSeek).then(output => {
+  return completion(prompt, EndPoint.DeepSeek).then((output) => {
     return output;
   });
 }
@@ -216,4 +283,4 @@ module.exports = {
   batchInvokeLLMAndEvaluate,
   batchEvaluateByUUID,
   evaluatePartialOutput,
-}
+};
