@@ -21,6 +21,10 @@ async function batchInvokeLLMAndEvaluate(promptFilePathList, specificLogFolderPa
   const summaryFolderPath = path.join(specificLogFolderPath, `${endpoint}_${id}_output.log`);
   // fs.writeFileSync(summaryFolderPath, '', { encoding: 'utf-8' });
 
+  let totalEM = 0;
+  let totalES = 0;
+  let count = 0
+
   const promiseList = promptFilePathList.map(async (promptFilePath) => {
     if (!fs.existsSync(promptFilePath)) {
       return;
@@ -71,6 +75,10 @@ async function batchInvokeLLMAndEvaluate(promptFilePathList, specificLogFolderPa
 
     const metricsRes = await calculateMetrics({ groundTruth: lastAfterCode, output: replacedOutput });
     const { em, es } = metricsRes;
+    count += 1;
+    totalES += +es;
+    totalEM += +em
+
 
     // ====================== DATA ======================
     const data =
@@ -96,6 +104,12 @@ ${replacedContentsWithFullText}`
     fs.writeFileSync(dependentLogPath, data, { encoding: 'utf-8' });
     // fs.appendFileSync(summaryFolderPath, data, { encoding: 'utf-8' });
   });
+
+  await Promise.all(promiseList);
+  const esRatio = totalES / count;
+  const emRation = totalEM / count;
+  console.log('em ration: ', emRation);
+  console.log('es ration: ', esRatio);
 }
 
 /**
